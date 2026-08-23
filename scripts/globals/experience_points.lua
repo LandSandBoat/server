@@ -6,76 +6,6 @@ xi = xi or {}
 xi.experiencePoints = xi.experiencePoints or {}
 
 -----------------------------------
--- TODO: Audit this table. It's highly questionable in some spots.
--- Base experience by level difference, broken down into level brackets.
--- NOTE: If modified, this table *must* maintain the same number of entries for each level bracket.
--- Brackets    1-5 6-10 11-15 16-20 21-25 26-30 31-35 36-40 41-45 46-50 51-55 56-60 61-65 66-70 71-75 76-80 81-85 86-90 91-95 96-100
------------------------------------
-xi.experiencePoints.baseTable =
-{
-    [ 15] = {  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800, 1500 },
-    [ 14] = {  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  720,  720,  720,  720,  720,  720,  720, 1500 },
-    [ 13] = {  800,  800,  800,  800,  800,  800,  720,  720,  720,  720,  720,  720,  630,  630,  630,  630,  630,  630,  630, 1500 },
-    [ 12] = {  720,  720,  720,  720,  720,  720,  630,  630,  630,  630,  630,  630,  580,  580,  580,  580,  580,  580,  580, 1400 },
-    [ 11] = {  630,  630,  630,  630,  630,  630,  580,  580,  580,  580,  580,  580,  530,  530,  530,  530,  530,  530,  530, 1300 },
-    [ 10] = {  580,  580,  580,  580,  580,  580,  530,  530,  530,  530,  530,  530,  480,  480,  480,  480,  480,  480,  480, 1200 },
-    [  9] = {  720,  720,  720,  720,  720,  720,  600,  600,  600,  600,  530,  480,  440,  440,  440,  400,  400,  400,  400, 1100 },
-    [  8] = {  600,  600,  600,  600,  600,  600,  550,  550,  550,  530,  480,  430,  400,  400,  400,  380,  380,  380,  380, 1000 },
-    [  7] = {  550,  550,  550,  550,  550,  550,  500,  500,  500,  470,  430,  380,  360,  360,  360,  340,  340,  340,  340,  900 },
-    [  6] = {  450,  450,  450,  450,  450,  450,  450,  450,  450,  400,  370,  330,  320,  320,  320,  300,  300,  300,  300,  800 },
-    [  5] = {  350,  350,  350,  350,  350,  350,  400,  400,  400,  340,  310,  280,  280,  280,  280,  260,  260,  260,  260,  700 },
-    [  4] = {  310,  310,  310,  310,  310,  310,  300,  300,  300,  310,  280,  280,  280,  280,  260,  260,  240,  240,  240,  600 },
-    [  3] = {  260,  260,  260,  260,  260,  260,  300,  300,  300,  300,  300,  300,  300,  300,  300,  320,  320,  320,  320,  500 },
-    [  2] = {  240,  240,  240,  240,  240,  240,  250,  250,  250,  250,  250,  260,  260,  260,  260,  280,  280,  280,  280,  400 },
-    [  1] = {  220,  220,  220,  220,  220,  220,  225,  225,  225,  225,  225,  230,  230,  230,  230,  240,  240,  240,  240,  300 },
-    [  0] = {  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200,  200 },
-    [ -1] = {  180,  180,  180,  180,  180,  180,  186,  192,  192,  192,  192,  192,  192,  192,  195,  195,  195,  195,  195,  195 },
-    [ -2] = {  160,  160,  160,  160,  160,  160,  172,  172,  180,  180,  186,  186,  186,  186,  190,  190,  190,  190,  190,  190 },
-    [ -3] = {  140,  140,  150,  150,  150,  150,  160,  160,  170,  170,  180,  180,  180,  180,  184,  184,  184,  184,  184,  185 },
-    [ -4] = {  130,  130,  140,  140,  140,  140,  150,  152,  160,  160,  170,  170,  172,  172,  180,  180,  180,  180,  180,  180 },
-    [ -5] = {  120,  120,  130,  130,  130,  130,  140,  146,  152,  152,  160,  160,  166,  166,  172,  172,  172,  172,  172,  172 },
-    [ -6] = {  100,  100,  120,  120,  120,  120,  130,  140,  146,  146,  152,  152,  160,  160,  166,  166,  166,  166,  166,  166 },
-    [ -7] = {    0,   80,  110,  110,  110,  110,  120,  130,  140,  140,  146,  146,  152,  154,  160,  160,  160,  160,  160,  160 },
-    [ -8] = {    0,   60,   90,   90,  100,  100,  110,  120,  130,  132,  140,  140,  146,  150,  155,  155,  155,  155,  155,  155 },
-    [ -9] = {    0,    0,   80,   80,   80,   80,  100,  110,  120,  126,  132,  132,  140,  144,  150,  150,  150,  150,  150,  150 },
-    [-10] = {    0,    0,    0,    0,   80,   80,   80,  100,  110,  120,  126,  126,  132,  140,  145,  145,  145,  145,  145,  145 },
-    [-11] = {    0,    0,    0,    0,    0,    0,   60,   80,  100,  110,  120,  120,  126,  132,  140,  140,  140,  140,  140,  140 },
-    [-12] = {    0,    0,    0,    0,    0,    0,    0,   60,   80,  100,  110,  112,  120,  126,  132,  132,  132,  132,  132,  132 },
-    [-13] = {    0,    0,    0,    0,    0,    0,    0,    0,   60,   80,  100,  106,  112,  120,  126,  126,  126,  126,  126,  126 },
-    [-14] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,   60,   90,  100,  106,  112,  120,  120,  120,  120,  120,  120 },
-    [-15] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   80,   90,  100,  106,  112,  112,  112,  112,  112,  112 },
-    [-16] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   80,   80,  100,  106,  106,  106,  106,  106,  106 },
-    [-17] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   60,   80,  100,  100,  100,  100,  100,  100 },
-    [-18] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   60,   90,   90,   90,   90,   90,   90 },
-    [-19] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   80,   80,   80,   80,   80,   80 },
-    [-20] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   60,   70,   70,   70,   70,   70 },
-    [-21] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   60,   60,   60,   60,   60 },
-    [-22] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   55,   55,   55,   55,   55 },
-    [-23] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   50,   50,   50,   50,   50 },
-    [-24] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   48,   48,   48,   48,   48 },
-    [-25] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   45,   45,   45,   45,   45 },
-    [-26] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   42,   42,   42,   42,   42 },
-    [-27] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   40,   40,   40,   40,   40 },
-    [-28] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   38,   38,   38,   38,   38 },
-    [-29] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   36,   36,   36,   36,   36 },
-    [-30] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   34,   34,   34,   34,   34 },
-    [-31] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   32,   32,   32,   32,   32 },
-    [-32] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   30,   30,   30,   30,   30 },
-    [-33] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   28,   28,   28,   28,   28 },
-    [-34] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   26,   26,   26,   26,   26 },
-    [-35] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   24,   24,   24,   24,   24 },
-    [-36] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   22,   22,   22,   22,   22 },
-    [-37] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   20,   20,   20,   20,   20 },
-    [-38] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   19,   19,   19,   19,   19 },
-    [-39] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   18,   18,   18,   18,   18 },
-    [-40] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   17,   17,   17,   17,   17 },
-    [-41] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   16,   16,   16,   16,   16 },
-    [-42] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   15,   15,   15,   15,   15 },
-    [-43] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   14,   14,   14,   14,   14 },
-    [-44] = {    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0 },
-}
-
------------------------------------
 -- Per monster experience points caps based on the players level.
 -----------------------------------
 xi.experiencePoints.perMonsterCaps =
@@ -158,16 +88,15 @@ end
 -----------------------------------
 -- Sanction
 -----------------------------------
-local function isSanctionActive(member, regionId)
-    return member:hasStatusEffect(xi.effect.SANCTION) and
+-- TODO: Will eventually have calculations for experience points bonuses based off Imperial Defense rating.
+-- TODO: Sanction bonus magnitude is not documented on JP Wiki (https://wiki.ffo.jp/html/706.html); verify with captures. Set to 10% for now.
+xi.experiencePoints.getSanctionBonus = function(member, regionId)
+    if
+        member:hasStatusEffect(xi.effect.SANCTION) and
         regionId >= xi.region.WEST_AHT_URHGAN and
         regionId <= xi.region.ALZADAAL and
         xi.besieged.getAstralCandescence() == 1
-end
-
--- TODO: Sanction bonus magnitude is not documented on JP Wiki (https://wiki.ffo.jp/html/706.html); verify with captures. Set to 10% for now.
-local function handleSanctionBonus(member, regionId)
-    if isSanctionActive(member, regionId) then
+    then
         return 10
     end
 
@@ -225,18 +154,6 @@ local function handleRoVBonus(member)
     return rhapsodiesBonus
 end
 
------------------------------------
--- Handle all experience point bonuses, including Dedication effects, RoV Key Items, Sanction, and EXP bonus gear/traits (Corsair Roll via xi.mod.EXP_BONUS)
------------------------------------
-local function handleExperienceBonuses(member, exp, regionId)
-    local dedicationBonus = handleDedicationBonus(member, exp, regionId)
-    local rhapsodiesBonus = handleRoVBonus(member)
-    local sanctionBonus   = handleSanctionBonus(member, regionId)
-    local totalBonus      = dedicationBonus + math.floor(exp * (member:getMod(xi.mod.EXP_BONUS) + rhapsodiesBonus + sanctionBonus) / 100)
-
-    return math.max(exp + totalBonus, 0)
-end
-
 ---@param member CBaseEntity
 ---@param mob CBaseEntity
 ---@param data table
@@ -283,7 +200,13 @@ xi.experiencePoints.calculate = function(member, mob, data)
         end
     end
 
-    experiencePoints = handleExperienceBonuses(member, experiencePoints, data.regionId)
+    -- Handle all experience point bonuses, including Dedication effects, RoV Key Items, Sanction, and EXP bonus gear/traits (Corsair Roll via xi.mod.EXP_BONUS)
+    local dedicationBonus = handleDedicationBonus(member, experiencePoints, data.regionId)
+    local rhapsodiesBonus = handleRoVBonus(member)
+    local sanctionBonus   = xi.experiencePoints.getSanctionBonus(member, data.regionId)
+    local totalBonus      = dedicationBonus + math.floor(experiencePoints * (member:getMod(xi.mod.EXP_BONUS) + rhapsodiesBonus + sanctionBonus) / 100)
+
+    experiencePoints = math.max(experiencePoints + totalBonus, 0)
 
     return { exp = math.floor(experiencePoints), chainActive = chainActive, chainWindow = chainWindow }
 end
