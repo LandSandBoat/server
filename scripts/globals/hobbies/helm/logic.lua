@@ -212,14 +212,11 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             itemID = 0
         end
 
-        -- success! reward item and decrement number of remaining uses on the point
+        -- success! reward item and roll to relocate the point
         if itemID ~= 0 then
             player:addItem(itemID)
 
-            local uses = (npc:getLocalVar('uses') - 1) % 4
-            npc:setLocalVar('uses', uses)
-
-            if uses == 0 then
+            if math.randomInt(1, 100) <= info.relocateRate then
                 movePoint(player, npc, zoneId, info)
             end
         end

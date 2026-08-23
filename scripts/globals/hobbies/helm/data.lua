@@ -15,6 +15,7 @@ xi.helm.dataTable =
         id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
         settingRate  = xi.settings.main.HARVESTING_RATE,
+        relocateRate = 50,
         message      = 'HARVESTING_IS_POSSIBLE_HERE',
         tool         = xi.item.SICKLE,
 
@@ -362,6 +363,7 @@ xi.helm.dataTable =
         id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
         settingRate  = xi.settings.main.EXCAVATION_RATE,
+        relocateRate = 50,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,
 
@@ -540,6 +542,7 @@ xi.helm.dataTable =
         id = 'LOGGING',
         animation    = xi.emote.LOGGING,
         settingRate  = xi.settings.main.LOGGING_RATE,
+        relocateRate = 100,
         message      = 'LOGGING_IS_POSSIBLE_HERE',
         tool         = xi.item.HATCHET,
 
@@ -1051,6 +1054,7 @@ xi.helm.dataTable =
         id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
         settingRate  = xi.settings.main.MINING_RATE,
+        relocateRate = 50,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,
 
