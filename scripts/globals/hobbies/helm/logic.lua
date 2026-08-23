@@ -78,7 +78,7 @@ local function pickItem(player, info)
     end
 
     -- found nothing
-    if math.randomInt(1, 100) > info.settingRate then
+    if math.randomFloat(0, 100) >= info.zone[zoneId].obtainRate then
         return 0
     end
 

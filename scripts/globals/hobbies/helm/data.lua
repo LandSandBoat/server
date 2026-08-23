@@ -14,7 +14,6 @@ xi.helm.dataTable =
     {
         id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
-        settingRate  = xi.settings.main.HARVESTING_RATE,
         relocateRate = 50,
         message      = 'HARVESTING_IS_POSSIBLE_HERE',
         tool         = xi.item.SICKLE,
@@ -23,7 +22,8 @@ xi.helm.dataTable =
         {
             [xi.zone.WAJAOM_WOODLANDS] =
             {
-                breakRate = 6.61, -- n=10077, 95% CI +/-0.49pp
+                obtainRate = 91.81, -- n=10077, 95% CI +/-0.54pp
+                breakRate  =  6.61, -- n=10077, 95% CI +/-0.49pp
 
                 drops =
                 {
@@ -73,7 +73,8 @@ xi.helm.dataTable =
 
             [xi.zone.BHAFLAU_THICKETS] =
             {
-                breakRate = 7.34, -- n=10011, 95% CI +/-0.51pp
+                obtainRate = 91.09, -- n=10011, 95% CI +/-0.56pp
+                breakRate  =  7.34, -- n=10011, 95% CI +/-0.51pp
 
                 drops =
                 {
@@ -107,7 +108,8 @@ xi.helm.dataTable =
 
             [xi.zone.GRAUBERG_S] =
             {
-                breakRate = 6.46, -- n=11508, 95% CI +/-0.45pp
+                obtainRate = 68.17, -- n=11508, 95% CI +/-0.85pp
+                breakRate  =  6.46, -- n=11508, 95% CI +/-0.45pp
 
                 drops =
                 {
@@ -160,7 +162,8 @@ xi.helm.dataTable =
 
             [xi.zone.WEST_SARUTABARUTA_S] =
             {
-                breakRate = 6.18, -- n=16341, 95% CI +/-0.37pp
+                obtainRate = 77.30, -- n=16341, 95% CI +/-0.64pp
+                breakRate  =  6.18, -- n=16341, 95% CI +/-0.37pp
 
                 drops =
                 {
@@ -217,7 +220,8 @@ xi.helm.dataTable =
 
             [xi.zone.PASHHOW_MARSHLANDS] =
             {
-                breakRate = 25.65, -- n=8426, 95% CI +/-0.93pp - NOTE: Harvesting gear has no effect in this zone!
+                obtainRate = 29.81, -- n=102628, 95% CI +/-0.28pp
+                breakRate  = 25.65, -- n=8426, 95% CI +/-0.93pp - NOTE: Harvesting gear has no effect in this zone!
 
                 drops =
                 {
@@ -232,7 +236,8 @@ xi.helm.dataTable =
 
             [xi.zone.WEST_SARUTABARUTA] =
             {
-                breakRate = 6.05, -- n=10019, 95% CI +/-0.47pp
+                obtainRate = 92.95, -- n=10019, 95% CI +/-0.5pp
+                breakRate  =  6.05, -- n=10019, 95% CI +/-0.47pp
 
                 drops =
                 {
@@ -292,7 +297,8 @@ xi.helm.dataTable =
 
             [xi.zone.YUHTUNGA_JUNGLE] =
             {
-                breakRate = 11.87, -- n=3666, 95% CI +/-1.05pp
+                obtainRate = 79.77, -- n=3666, 95% CI +/-1.3pp
+                breakRate  = 11.87, -- n=3666, 95% CI +/-1.05pp
 
                 drops =
                 {
@@ -317,7 +323,8 @@ xi.helm.dataTable =
 
             [xi.zone.YHOATOR_JUNGLE] =
             {
-                breakRate = 12.69, -- n=607, 95% CI +/-2.65pp
+                obtainRate = 78.58, -- n=607, 95% CI +/-3.26pp
+                breakRate  = 12.69, -- n=607, 95% CI +/-2.65pp
 
                 drops =
                 {
@@ -341,7 +348,8 @@ xi.helm.dataTable =
 
             [xi.zone.GIDDEUS] =
             {
-                breakRate = 11.43, -- n=10281, 95% CI +/-0.62pp
+                obtainRate = 92.10, -- n=10281, 95% CI +/-0.52pp
+                breakRate  = 11.43, -- n=10281, 95% CI +/-0.62pp
 
                 drops =
                 {
@@ -401,7 +409,8 @@ xi.helm.dataTable =
 
             [xi.zone.ABYSSEA_GRAUBERG] =
             {
-                breakRate = 6.03, -- n=2637, 95% CI +/-0.91pp
+                obtainRate = 75.13, -- n=2637, 95% CI +/-1.65pp
+                breakRate  =  6.03, -- n=2637, 95% CI +/-0.91pp
 
                 drops =
                 {
@@ -454,7 +463,8 @@ xi.helm.dataTable =
 
             [xi.zone.YAHSE_HUNTING_GROUNDS] =
             {
-                breakRate = 50, -- Capture needed
+                obtainRate = 50, -- Capture needed
+                breakRate  = 50, -- Capture needed
 
                 drops =
                 {
@@ -474,7 +484,6 @@ xi.helm.dataTable =
     {
         id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
-        settingRate  = xi.settings.main.EXCAVATION_RATE,
         relocateRate = 50,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,
@@ -483,7 +492,8 @@ xi.helm.dataTable =
         {
             [xi.zone.ATTOHWA_CHASM] =
             {
-                breakRate = 53.31, -- n=11119, 95% CI +/-0.93pp
+                obtainRate = 69.55, -- n=11119, 95% CI +/-0.86pp
+                breakRate  = 53.31, -- n=11119, 95% CI +/-0.93pp
 
                 drops =
                 {
@@ -516,7 +526,8 @@ xi.helm.dataTable =
 
             [xi.zone.TAHRONGI_CANYON] =
             {
-                breakRate = 36.69, -- n=9390, 95% CI +/-0.97pp
+                obtainRate = 73.79, -- n=9390, 95% CI +/-0.89pp
+                breakRate  = 36.69, -- n=9390, 95% CI +/-0.97pp
 
                 drops =
                 {
@@ -581,7 +592,8 @@ xi.helm.dataTable =
 
             [xi.zone.KORROLOKA_TUNNEL] =
             {
-                breakRate = 48.63, -- n=12984, 95% CI +/-0.86pp
+                obtainRate = 79.75, -- n=12984, 95% CI +/-0.69pp
+                breakRate  = 48.63, -- n=12984, 95% CI +/-0.86pp
 
                 drops =
                 {
@@ -625,7 +637,8 @@ xi.helm.dataTable =
 
             [xi.zone.MAZE_OF_SHAKHRAMI] =
             {
-                breakRate = 51.35, -- n=10254, 95% CI +/-0.97pp
+                obtainRate = 65.01, -- n=10254, 95% CI +/-0.92pp
+                breakRate  = 51.35, -- n=10254, 95% CI +/-0.97pp
 
                 drops =
                 {
@@ -681,7 +694,8 @@ xi.helm.dataTable =
 
             [xi.zone.ABYSSEA_TAHRONGI] =
             {
-                breakRate = 36.66, -- n=622, 95% CI +/-3.79pp
+                obtainRate = 72.60, -- n=622, 95% CI +/-3.5pp
+                breakRate  = 36.66, -- n=622, 95% CI +/-3.79pp
 
                 drops =
                 {
@@ -705,7 +719,8 @@ xi.helm.dataTable =
 
             [xi.zone.ABYSSEA_ATTOHWA] =
             {
-                breakRate = 51.74, -- n=949, 95% CI +/-3.18pp
+                obtainRate = 68.42, -- n=949, 95% CI +/-2.96pp
+                breakRate  = 51.74, -- n=949, 95% CI +/-3.18pp
 
                 drops =
                 {
@@ -735,7 +750,6 @@ xi.helm.dataTable =
     {
         id = 'LOGGING',
         animation    = xi.emote.LOGGING,
-        settingRate  = xi.settings.main.LOGGING_RATE,
         relocateRate = 100,
         message      = 'LOGGING_IS_POSSIBLE_HERE',
         tool         = xi.item.HATCHET,
@@ -744,7 +758,8 @@ xi.helm.dataTable =
         {
             [xi.zone.CARPENTERS_LANDING] =
             {
-                breakRate = 12.18, -- n=11561, 95% CI +/-0.6pp
+                obtainRate = 70.25, -- n=11561, 95% CI +/-0.83pp
+                breakRate  = 12.18, -- n=11561, 95% CI +/-0.6pp
 
                 drops =
                 {
@@ -776,7 +791,8 @@ xi.helm.dataTable =
 
             [xi.zone.LUFAISE_MEADOWS] =
             {
-                breakRate = 17.78, -- n=12620, 95% CI +/-0.67pp
+                obtainRate = 70.38, -- n=12620, 95% CI +/-0.8pp
+                breakRate  = 17.78, -- n=12620, 95% CI +/-0.67pp
 
                 drops =
                 {
@@ -809,7 +825,8 @@ xi.helm.dataTable =
 
             [xi.zone.MISAREAUX_COAST] =
             {
-                breakRate = 18.47, -- n=10273, 95% CI +/-0.75pp
+                obtainRate = 66.67, -- n=10273, 95% CI +/-0.91pp
+                breakRate  = 18.47, -- n=10273, 95% CI +/-0.75pp
 
                 drops =
                 {
@@ -842,7 +859,8 @@ xi.helm.dataTable =
 
             [xi.zone.MAMOOK] =
             {
-                breakRate = 9.23, -- n=10903, 95% CI +/-0.54pp
+                obtainRate = 79.04, -- n=10903, 95% CI +/-0.76pp
+                breakRate  =  9.23, -- n=10903, 95% CI +/-0.54pp
                 minLevel  = 20,
 
                 drops =
@@ -877,7 +895,8 @@ xi.helm.dataTable =
 
             [xi.zone.CAEDARVA_MIRE] =
             {
-                breakRate = 7.57, -- n=9335, 95% CI +/-0.54pp
+                obtainRate = 75.60, -- n=9335, 95% CI +/-0.87pp
+                breakRate  =  7.57, -- n=9335, 95% CI +/-0.54pp
                 minLevel  = 20,
 
                 drops =
@@ -925,7 +944,8 @@ xi.helm.dataTable =
 
             [xi.zone.EAST_RONFAURE_S] =
             {
-                breakRate = 10.15, -- n=12962, 95% CI +/-0.52pp
+                obtainRate = 72.87, -- n=12962, 95% CI +/-0.77pp
+                breakRate  = 10.15, -- n=12962, 95% CI +/-0.52pp
 
                 drops =
                 {
@@ -978,7 +998,8 @@ xi.helm.dataTable =
 
             [xi.zone.JUGNER_FOREST_S] =
             {
-                breakRate = 13.99, -- n=10089, 95% CI +/-0.68pp
+                obtainRate = 68.20, -- n=10089, 95% CI +/-0.91pp
+                breakRate  = 13.99, -- n=10089, 95% CI +/-0.68pp
                 minLevel  = 20,
 
                 drops =
@@ -1031,7 +1052,8 @@ xi.helm.dataTable =
 
             [xi.zone.FORT_KARUGO_NARUGO_S] =
             {
-                breakRate = 7.44, -- n=18304, 95% CI +/-0.38pp
+                obtainRate = 52.51, -- n=18304, 95% CI +/-0.72pp
+                breakRate  =  7.44, -- n=18304, 95% CI +/-0.38pp
                 minLevel  = 20,
 
                 drops =
@@ -1082,7 +1104,8 @@ xi.helm.dataTable =
 
             [xi.zone.EAST_RONFAURE] =
             {
-                breakRate = 7.10, -- n=10069, 95% CI +/-0.5pp
+                obtainRate = 73.22, -- n=10069, 95% CI +/-0.86pp
+                breakRate  =  7.10, -- n=10069, 95% CI +/-0.5pp
 
                 drops =
                 {
@@ -1132,7 +1155,8 @@ xi.helm.dataTable =
 
             [xi.zone.JUGNER_FOREST] =
             {
-                breakRate = 12.08, -- n=10058, 95% CI +/-0.64pp
+                obtainRate = 70.34, -- n=10058, 95% CI +/-0.89pp
+                breakRate  = 12.08, -- n=10058, 95% CI +/-0.64pp
 
                 drops =
                 {
@@ -1183,7 +1207,8 @@ xi.helm.dataTable =
 
             [xi.zone.BUBURIMU_PENINSULA] =
             {
-                breakRate = 16.78, -- n=10048, 95% CI +/-0.73pp
+                obtainRate = 62.65, -- n=10048, 95% CI +/-0.95pp
+                breakRate  = 16.78, -- n=10048, 95% CI +/-0.73pp
 
                 drops =
                 {
@@ -1248,7 +1273,8 @@ xi.helm.dataTable =
 
             [xi.zone.YUHTUNGA_JUNGLE] =
             {
-                breakRate = 15.60, -- n=14613, 95% CI +/-0.59pp
+                obtainRate = 82.76, -- n=14613, 95% CI +/-0.61pp
+                breakRate  = 15.60, -- n=14613, 95% CI +/-0.59pp
 
                 drops =
                 {
@@ -1297,7 +1323,8 @@ xi.helm.dataTable =
 
             [xi.zone.YHOATOR_JUNGLE] =
             {
-                breakRate = 18.23, -- n=10001, 95% CI +/-0.76pp
+                obtainRate = 83.37, -- n=10001, 95% CI +/-0.73pp
+                breakRate  = 18.23, -- n=10001, 95% CI +/-0.76pp
 
                 drops =
                 {
@@ -1342,7 +1369,8 @@ xi.helm.dataTable =
 
             [xi.zone.GHELSBA_OUTPOST] =
             {
-                breakRate = 7.46, -- n=14616, 95% CI +/-0.43pp
+                obtainRate = 61.61, -- n=14616, 95% CI +/-0.79pp
+                breakRate  =  7.46, -- n=14616, 95% CI +/-0.43pp
 
                 drops =
                 {
@@ -1393,7 +1421,8 @@ xi.helm.dataTable =
 
             [xi.zone.ABYSSEA_LA_THEINE] =
             {
-                breakRate = 11.17, -- n=797, 95% CI +/-2.19pp
+                obtainRate = 74.19, -- n=797, 95% CI +/-3.04pp
+                breakRate  = 11.17, -- n=797, 95% CI +/-2.19pp
 
                 drops =
                 {
@@ -1439,7 +1468,8 @@ xi.helm.dataTable =
 
             [xi.zone.ABYSSEA_MISAREAUX] =
             {
-                breakRate = 16.57, -- n=851, 95% CI +/-2.5pp
+                obtainRate = 68.78, -- n=851, 95% CI +/-3.11pp
+                breakRate  = 16.57, -- n=851, 95% CI +/-2.5pp
 
                 drops =
                 {
@@ -1471,7 +1501,6 @@ xi.helm.dataTable =
     {
         id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
-        settingRate  = xi.settings.main.MINING_RATE,
         relocateRate = 50,
         message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = xi.item.PICKAXE,
@@ -1480,7 +1509,8 @@ xi.helm.dataTable =
         {
             [xi.zone.OLDTON_MOVALPOLOS] =
             {
-                breakRate = 41.61, -- n=11630, 95% CI +/-0.9pp
+                obtainRate = 68.19, -- n=11630, 95% CI +/-0.85pp
+                breakRate  = 41.61, -- n=11630, 95% CI +/-0.9pp
 
                 drops =
                 {
@@ -1516,7 +1546,8 @@ xi.helm.dataTable =
 
             [xi.zone.NEWTON_MOVALPOLOS] =
             {
-                breakRate = 56.62, -- n=11963, 95% CI +/-0.89pp
+                obtainRate = 67.53, -- n=11963, 95% CI +/-0.84pp
+                breakRate  = 56.62, -- n=11963, 95% CI +/-0.89pp
                 minLevel  = 20,
 
                 drops =
@@ -1552,7 +1583,8 @@ xi.helm.dataTable =
 
             [xi.zone.MOUNT_ZHAYOLM] =
             {
-                breakRate = 46.67, -- n=11577, 95% CI +/-0.91pp
+                obtainRate = 75.06, -- n=11577, 95% CI +/-0.79pp
+                breakRate  = 46.67, -- n=11577, 95% CI +/-0.91pp
                 minLevel  = 20,
 
                 drops =
@@ -1600,7 +1632,8 @@ xi.helm.dataTable =
 
             [xi.zone.HALVUNG] =
             {
-                breakRate = 47.98, -- n=17865, 95% CI +/-0.73pp
+                obtainRate = 76.70, -- n=17865, 95% CI +/-0.62pp
+                breakRate  = 47.98, -- n=17865, 95% CI +/-0.73pp
                 minLevel  = 20,
 
                 drops =
@@ -1643,7 +1676,8 @@ xi.helm.dataTable =
 
             [xi.zone.NORTH_GUSTABERG_S] =
             {
-                breakRate = 36.80, -- n=10255, 95% CI +/-0.93pp
+                obtainRate = 64.92, -- n=10255, 95% CI +/-0.92pp
+                breakRate  = 36.80, -- n=10255, 95% CI +/-0.93pp
 
                 drops =
                 {
@@ -1698,7 +1732,8 @@ xi.helm.dataTable =
 
             [xi.zone.YUGHOTT_GROTTO] =
             {
-                breakRate = 50.69, -- n=13195, 95% CI +/-0.85pp
+                obtainRate = 66.91, -- n=13195, 95% CI +/-0.8pp
+                breakRate  = 50.69, -- n=13195, 95% CI +/-0.85pp
 
                 drops =
                 {
@@ -1756,7 +1791,8 @@ xi.helm.dataTable =
 
             [xi.zone.PALBOROUGH_MINES] =
             {
-                breakRate = 46.83, -- n=11346, 95% CI +/-0.92pp
+                obtainRate = 65.21, -- n=11346, 95% CI +/-0.88pp
+                breakRate  = 46.83, -- n=11346, 95% CI +/-0.92pp
 
                 drops =
                 {
@@ -1793,7 +1829,8 @@ xi.helm.dataTable =
 
             [xi.zone.ZERUHN_MINES] =
             {
-                breakRate = 38.32, -- n=12960, 95% CI +/-0.84pp
+                obtainRate = 89.88, -- n=12960, 95% CI +/-0.52pp
+                breakRate  = 38.32, -- n=12960, 95% CI +/-0.84pp
 
                 drops =
                 {
@@ -1832,7 +1869,8 @@ xi.helm.dataTable =
 
             [xi.zone.GUSGEN_MINES] =
             {
-                breakRate = 52.36, -- n=12094, 95% CI +/-0.89pp
+                obtainRate = 57.78, -- n=12094, 95% CI +/-0.88pp
+                breakRate  = 52.36, -- n=12094, 95% CI +/-0.89pp
                 minLevel  = 20,
 
                 drops =
@@ -1870,7 +1908,8 @@ xi.helm.dataTable =
 
             [xi.zone.IFRITS_CAULDRON] =
             {
-                breakRate = 55.12, -- n=10602, 95% CI +/-0.95pp
+                obtainRate = 66.52, -- n=10602, 95% CI +/-0.90pp
+                breakRate  = 55.12, -- n=10602, 95% CI +/-0.95pp
                 minLevel  = 20,
 
                 drops =
