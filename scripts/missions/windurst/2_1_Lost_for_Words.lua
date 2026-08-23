@@ -181,7 +181,7 @@ mission.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Tosuka-Porika'] = mission:progressEvent(161),
+            ['Tosuka-Porika'] = mission:event(161),
         },
     },
 
@@ -193,9 +193,9 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Bopa_Greso']  = mission:progressEvent(167),
-            ['Cha_Lebagta'] = mission:progressEvent(168),
-            ['Nanaa_Mihgo'] = mission:progressEvent(166),
+            ['Bopa_Greso']  = mission:event(167),
+            ['Cha_Lebagta'] = mission:event(168),
+            ['Nanaa_Mihgo'] = mission:event(166, 0, xi.ki.LAPIS_CORAL, xi.ki.LAPIS_MONOCLE),
         },
     },
 
@@ -247,9 +247,9 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Bopa_Greso']  = mission:progressEvent(171),
-            ['Cha_Lebagta'] = mission:progressEvent(172),
-            ['Nanaa_Mihgo'] = mission:progressEvent(170),
+            ['Bopa_Greso']  = mission:event(171),
+            ['Cha_Lebagta'] = mission:event(172),
+            ['Nanaa_Mihgo'] = mission:event(170),
         },
 
         [xi.zone.INNER_HORUTOTO_RUINS] =
@@ -274,9 +274,9 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Bopa_Greso']  = mission:progressEvent(174),
-            ['Cha_Lebagta'] = mission:progressEvent(175),
-            ['Nanaa_Mihgo'] = mission:progressEvent(173),
+            ['Bopa_Greso']  = mission:event(174),
+            ['Cha_Lebagta'] = mission:event(175),
+            ['Nanaa_Mihgo'] = mission:event(173),
         },
 
         [xi.zone.WINDURST_WALLS] =
