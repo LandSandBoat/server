@@ -54,7 +54,13 @@ local function doesToolBreak(player, info)
 end
 
 local function pickItem(player, info)
-    local zoneId = player:getZoneID()
+    local zoneId   = player:getZoneID()
+    local minLevel = info.zone[zoneId].minLevel or 0
+
+    -- some zones award nothing below a level requirement, the tool still breaks
+    if player:getMainLvl() < minLevel then
+        return 0
+    end
 
     -- found nothing
     if math.randomInt(1, 100) > info.settingRate then

@@ -625,6 +625,7 @@ xi.helm.dataTable =
             [xi.zone.MAMOOK] =
             {
                 breakRate = 9.23, -- n=10903, 95% CI +/-0.54pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -653,6 +654,7 @@ xi.helm.dataTable =
             [xi.zone.CAEDARVA_MIRE] =
             {
                 breakRate = 7.57, -- n=9335, 95% CI +/-0.54pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -711,6 +713,7 @@ xi.helm.dataTable =
             [xi.zone.JUGNER_FOREST_S] =
             {
                 breakRate = 13.99, -- n=10089, 95% CI +/-0.68pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -739,6 +742,7 @@ xi.helm.dataTable =
             [xi.zone.FORT_KARUGO_NARUGO_S] =
             {
                 breakRate = 7.44, -- n=18304, 95% CI +/-0.38pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -1104,6 +1108,7 @@ xi.helm.dataTable =
             [xi.zone.NEWTON_MOVALPOLOS] =
             {
                 breakRate = 56.62, -- n=11963, 95% CI +/-0.89pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -1139,6 +1144,7 @@ xi.helm.dataTable =
             [xi.zone.MOUNT_ZHAYOLM] =
             {
                 breakRate = 46.67, -- n=11577, 95% CI +/-0.91pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -1188,6 +1194,7 @@ xi.helm.dataTable =
             [xi.zone.HALVUNG] =
             {
                 breakRate = 47.98, -- n=17865, 95% CI +/-0.73pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -1433,6 +1440,7 @@ xi.helm.dataTable =
             [xi.zone.GUSGEN_MINES] =
             {
                 breakRate = 52.36, -- n=12094, 95% CI +/-0.89pp
+                minLevel  = 20,
 
                 drops =
                 {
@@ -1473,6 +1481,7 @@ xi.helm.dataTable =
             [xi.zone.IFRITS_CAULDRON] =
             {
                 breakRate = 55.12, -- n=10602, 95% CI +/-0.95pp
+                minLevel  = 20,
 
                 drops =
                 {
