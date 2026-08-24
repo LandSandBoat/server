@@ -30,6 +30,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         LOGGING_IS_POSSIBLE_HERE      = 7364, -- Logging is possible here if you have <item>.
         LEG_STUCK                     = 7371, -- Your leg is stuck in the swampy ground!
         MYSTERIOUS_EFFECT             = 7372, -- You gain some mysterious effect from the swamp!
+        YOU_SEE_SOMETHING_SHINY       = 7395, -- You see something shiny on the ground...
         HAND_OVER_TO_IMMORTAL         = 7445, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7446, -- Your Imperial Standing has increased!
         CANNOT_ENTER                  = 7484, -- You cannot enter at this time. Please wait a while before trying again.
