@@ -1612,8 +1612,6 @@ templates:
         entity_flags: 131
         model_size:     1
         hitbox:        12
-      behaviors:
-        links: true
       spawn:
         respawn: 300
     loot:
