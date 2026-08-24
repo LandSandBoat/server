@@ -1708,7 +1708,6 @@ templates:
   Locus_Ghost_Crab:
     id:            7061
     species:       crab
-    type:          [fished]
     skill_list_id: 77
     attributes:
       combat:
@@ -1741,8 +1740,6 @@ templates:
         animation_sub:   8
         model_size:      1
         hitbox:         13
-      behaviors:
-        aggressive: true
       spawn:
         respawn: 60
       stats:
