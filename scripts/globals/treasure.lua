@@ -1240,8 +1240,8 @@ local lootTable =
     {
         [treasureType.CHEST] =
         {
-            { xi.item.NONE,         720 }, -- Gil
-            { xi.item.PHALANX_RING, 220 }, -- Item
+            { xi.item.NONE,         540 }, -- Gil
+            { xi.item.PHALANX_RING, 400 }, -- Item
             { xi.item.AMETRINE,      10 },
             { xi.item.GARNET,        10 },
             { xi.item.GOSHENITE,     10 },
@@ -1251,8 +1251,8 @@ local lootTable =
         },
         [treasureType.COFFER] =
         {
-            { xi.item.NONE,                      710 }, -- Gil
-            { xi.item.SCROLL_OF_MAGES_BALLAD_II, 210 }, -- Item
+            { xi.item.NONE,                      770 }, -- Gil
+            { xi.item.SCROLL_OF_MAGES_BALLAD_II, 150 }, -- Item
             { xi.item.AQUAMARINE,                 10 },
             { xi.item.CHRYSOBERYL,                10 },
             { xi.item.FLUORITE,                   10 },
@@ -1268,8 +1268,8 @@ local lootTable =
     {
         [treasureType.CHEST] =
         {
-            { xi.item.NONE,         720 }, -- Gil
-            { xi.item.PHALANX_RING, 220 }, -- Item
+            { xi.item.NONE,         540 }, -- Gil
+            { xi.item.PHALANX_RING, 400 }, -- Item
             { xi.item.GARNET,        10 },
             { xi.item.GOSHENITE,     10 },
             { xi.item.LIGHT_OPAL,    10 },
@@ -1451,8 +1451,9 @@ local lootTable =
     {
         [treasureType.CHEST] =
         {
-            { xi.item.NONE,         715 }, -- Gil
-            { xi.item.REPLICA_MAUL, 215 }, -- Item
+            { xi.item.NONE,         430 }, -- Gil
+            { xi.item.FROST_SHIELD, 400 }, -- Item
+            { xi.item.REPLICA_MAUL, 100 }, -- Item
             { xi.item.AMBER_STONE,   10 },
             { xi.item.AMETHYST,      10 },
             { xi.item.CLEAR_TOPAZ,   10 },
@@ -1467,8 +1468,8 @@ local lootTable =
     {
         [treasureType.CHEST] =
         {
-            { xi.item.NONE,       710 }, -- Gil
-            { xi.item.GIGANT_AXE, 210 }, -- Item
+            { xi.item.NONE,       520 }, -- Gil
+            { xi.item.GIGANT_AXE, 400 }, -- Item
             { xi.item.AMETRINE,    10 },
             { xi.item.GARNET,      10 },
             { xi.item.GOSHENITE,   10 },
@@ -1537,8 +1538,8 @@ local lootTable =
     {
         [treasureType.CHEST] =
         {
-            { xi.item.NONE,       710 }, -- Gil
-            { xi.item.LIFE_BELT,  210 }, -- Item
+            { xi.item.NONE,       420 }, -- Gil
+            { xi.item.LIFE_BELT,  500 }, -- Item
             { xi.item.AMETRINE,    10 },
             { xi.item.GARNET,      10 },
             { xi.item.GOSHENITE,   10 },
