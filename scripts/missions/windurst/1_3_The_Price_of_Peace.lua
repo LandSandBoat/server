@@ -278,10 +278,11 @@ mission.sections =
 
     -- All of the optional post-mission dialogue
     {
-        check = function(player)
-            return player:getNation() == mission.areaId and
+        check = function(player, currentMission)
+            return currentMission == xi.mission.id.nation.NONE and
+                player:getNation() == mission.areaId and
                 player:hasCompletedMission(mission.areaId, mission.missionId) and
-                not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WODS)
+                not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS)
         end,
 
         [xi.zone.PORT_WINDURST] =

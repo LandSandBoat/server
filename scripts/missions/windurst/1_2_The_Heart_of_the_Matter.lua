@@ -341,7 +341,14 @@ mission.sections =
 
         [xi.zone.OUTER_HORUTOTO_RUINS] =
         {
-            ['_5e9'] = mission:cutscene(44),
+            ['_5e9'] =
+            {
+                onTrigger = function(player, npc)
+                    player:messageSpecial(outerHorutotoRuinsID.text.STAR_CHARM_DISAPPEARS, xi.zone.OUTER_HORUTOTO_RUINS, xi.ki.SOUTHEASTERN_STAR_CHARM)
+
+                    return mission:cutscene(44)
+                end,
+            },
 
             onEventFinish =
             {
