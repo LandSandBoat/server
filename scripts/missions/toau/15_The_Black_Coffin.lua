@@ -40,8 +40,13 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 0
                     then
                         player:startEvent(8)
-                        player:startEvent(34, 1, 1, 1, 1, 1, 1, 1, 1)
-                        return mission:progressEvent(35)
+                        player:startEvent(34, { [7] = 1, isHidden = true })
+                        return mission:progressEvent(35, { isHidden = true })
+                    elseif
+                        not player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) and
+                        player:getMissionStatus(mission.areaId) == 1
+                    then
+                        return mission:event(12):oncePerZone()
                     end
                 end,
             },
@@ -51,7 +56,7 @@ mission.sections =
                     prevZone == xi.zone.THE_ASHU_TALIF and
                     player:getMissionStatus(mission.areaId) == 2
                 then
-                    player:setPos(-456, -3, -405, 64)
+                    player:setPos(-444.059, -4.124, -413.934, 126)
                     return 9
                 end
             end,
@@ -60,7 +65,7 @@ mission.sections =
             {
                 [9] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
-                    player:setPos(0, 0, 0, 0, 53)
+                    player:setPos(0, 0, 0, 0, xi.zone.NASHMAU)
                 end,
 
                 [35] = function(player, csid, option, npc)
@@ -79,7 +84,7 @@ mission.sections =
                     player:getYPos() == 0 and
                     player:getZPos() == 0
                 then
-                    player:setPos(-13, 2, -62, 194)
+                    player:setPos(0.016, 0, -23.753, 63)
                     return 281
                 end
             end,

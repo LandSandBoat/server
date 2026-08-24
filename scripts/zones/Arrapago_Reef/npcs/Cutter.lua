@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if not xi.instance.onTrigger(player, npc, xi.zone.THE_ASHU_TALIF) then
-        player:messageSpecial(ID.text.YOU_NO_REQS)
+        player:messageSpecial(ID.text.CUTTER_NOTHING_HAPPENS)
     end
 end
 
