@@ -73,4 +73,8 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 end
 
+zoneObject.onZoneOut = function(player)
+    xi.helm.onZoneOut(player)
+end
+
 return zoneObject

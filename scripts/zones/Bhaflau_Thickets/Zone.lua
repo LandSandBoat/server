@@ -49,4 +49,8 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     end
 end
 
+zoneObject.onZoneOut = function(player)
+    xi.helm.onZoneOut(player)
+end
+
 return zoneObject
