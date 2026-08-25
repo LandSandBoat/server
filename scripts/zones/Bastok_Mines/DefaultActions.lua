@@ -14,7 +14,6 @@ return {
     ['Echo_Hawk']            = { event = 13 },
     ['Elki']                 = { event = 31 },
     ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
-    ['Gonija']               = { event = 534 },
     ['Goraow']               = { event = 105 },
     ['Gorvik']               = { event = 185 },
     ['Gray_Wolf']            = { event = 19 },
