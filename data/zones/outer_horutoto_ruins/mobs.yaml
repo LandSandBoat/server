@@ -1599,7 +1599,7 @@ templates:
     species:       batons
     type:          [notorious]
     spell_list_id: 21
-    skill_list_id: 61
+    skill_list_id: 2109
     attributes:
       combat:
         skill: staff
@@ -1645,7 +1645,7 @@ templates:
     species:       coins
     type:          [notorious]
     spell_list_id: 3
-    skill_list_id: 61
+    skill_list_id: 2109
     attributes:
       combat:
         skill: club
@@ -1691,7 +1691,7 @@ templates:
     species:       cups
     type:          [notorious]
     spell_list_id: 20
-    skill_list_id: 61
+    skill_list_id: 2109
     attributes:
       combat:
         skill: staff
@@ -1737,7 +1737,7 @@ templates:
     species:       swords
     type:          [notorious]
     spell_list_id: 4
-    skill_list_id: 61
+    skill_list_id: 2109
     attributes:
       combat:
         skill: staff
