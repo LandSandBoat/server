@@ -1549,21 +1549,21 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 1150, xi.item.IGNEOUS_ROCK           },
-                    { 1130, xi.item.CHUNK_OF_ZINC_ORE      },
-                    { 1100, xi.item.CHUNK_OF_COPPER_ORE    },
-                    { 1080, xi.item.CHUNK_OF_TIN_ORE       },
-                    { 1050, xi.item.CHUNK_OF_SILVER_ORE    },
-                    {  970, xi.item.CHUNK_OF_IRON_ORE      },
-                    {  680, xi.item.SUIT_OF_MOBLIN_MAIL    },
-                    {  630, xi.item.MOBLIN_HELM            },
-                    {  600, xi.item.MOBLIN_MASK            },
-                    {  570, xi.item.GOBLIN_DIE             },
-                    {  570, xi.item.SUIT_OF_MOBLIN_ARMOR   },
-                    {   80, xi.item.CHUNK_OF_DARKSTEEL_ORE },
-                    {   80, xi.item.CHUNK_OF_MYTHRIL_ORE   },
-                    {   70, xi.item.CHUNK_OF_GOLD_ORE      },
-                    {   70, xi.item.CHUNK_OF_PLATINUM_ORE  },
+                    { 1230, xi.item.IGNEOUS_ROCK           }, -- n=997/7930, 95% CI +/-0.73pp
+                    { 1230, xi.item.CHUNK_OF_ZINC_ORE      }, -- n=978/7930, 95% CI +/-0.72pp
+                    { 1150, xi.item.CHUNK_OF_TIN_ORE       }, -- n=913/7930, 95% CI +/-0.70pp
+                    { 1130, xi.item.CHUNK_OF_COPPER_ORE    }, -- n=897/7930, 95% CI +/-0.70pp
+                    { 1060, xi.item.CHUNK_OF_IRON_ORE      }, -- n=839/7930, 95% CI +/-0.68pp
+                    { 1060, xi.item.CHUNK_OF_SILVER_ORE    }, -- n=838/7930, 95% CI +/-0.68pp
+                    {  590, xi.item.MOBLIN_MASK            }, -- n=465/7930, 95% CI +/-0.52pp
+                    {  580, xi.item.GOBLIN_DIE             }, -- n=456/7930, 95% CI +/-0.51pp
+                    {  570, xi.item.MOBLIN_HELM            }, -- n=449/7930, 95% CI +/-0.51pp
+                    {  560, xi.item.SUIT_OF_MOBLIN_MAIL    }, -- n=444/7930, 95% CI +/-0.51pp
+                    {  530, xi.item.SUIT_OF_MOBLIN_ARMOR   }, -- n=420/7930, 95% CI +/-0.49pp
+                    {   80, xi.item.CHUNK_OF_PLATINUM_ORE  }, -- n= 61/7930, 95% CI +/-0.19pp
+                    {   80, xi.item.CHUNK_OF_MYTHRIL_ORE   }, -- n= 61/7930, 95% CI +/-0.19pp
+                    {   80, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- n= 60/7930, 95% CI +/-0.19pp
+                    {   70, xi.item.CHUNK_OF_GOLD_ORE      }, -- n= 52/7930, 95% CI +/-0.18pp
                 },
 
                 points =
@@ -1587,18 +1587,18 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 1660, xi.item.CHUNK_OF_COPPER_ORE    },
-                    { 1100, xi.item.CHUNK_OF_TIN_ORE       },
-                    { 1450, xi.item.CHUNK_OF_ZINC_ORE      },
-                    { 1790, xi.item.IGNEOUS_ROCK           },
-                    { 1450, xi.item.CHUNK_OF_SILVER_ORE    },
-                    {  140, xi.item.CHUNK_OF_ALUMINUM_ORE  },
-                    { 1720, xi.item.CHUNK_OF_IRON_ORE      },
-                    {   70, xi.item.CHUNK_OF_DARKSTEEL_ORE },
-                    {  210, xi.item.CHUNK_OF_MYTHRIL_ORE   },
-                    {  140, xi.item.CHUNK_OF_GOLD_ORE      },
-                    {  340, xi.item.CHUNK_OF_PLATINUM_ORE  },
-                    {   70, xi.item.RED_ROCK               },
+                    { 1520, xi.item.CHUNK_OF_COPPER_ORE    }, -- n=1227/8080, 95% CI +/-0.78pp
+                    { 1400, xi.item.IGNEOUS_ROCK           }, -- n=1128/8080, 95% CI +/-0.76pp
+                    { 1360, xi.item.CHUNK_OF_IRON_ORE      }, -- n=1098/8080, 95% CI +/-0.75pp
+                    { 1340, xi.item.CHUNK_OF_SILVER_ORE    }, -- n=1084/8080, 95% CI +/-0.74pp
+                    { 1340, xi.item.CHUNK_OF_ZINC_ORE      }, -- n=1080/8080, 95% CI +/-0.74pp
+                    { 1330, xi.item.CHUNK_OF_TIN_ORE       }, -- n=1076/8080, 95% CI +/-0.74pp
+                    {  770, xi.item.RED_ROCK               }, -- n= 624/8080, 95% CI +/-0.58pp
+                    {  280, xi.item.CHUNK_OF_ALUMINUM_ORE  }, -- n= 230/8080, 95% CI +/-0.36pp
+                    {  220, xi.item.CHUNK_OF_PLATINUM_ORE  }, -- n= 174/8080, 95% CI +/-0.32pp
+                    {  180, xi.item.CHUNK_OF_GOLD_ORE      }, -- n= 149/8080, 95% CI +/-0.29pp
+                    {  130, xi.item.CHUNK_OF_MYTHRIL_ORE   }, -- n= 105/8080, 95% CI +/-0.25pp
+                    {  130, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- n= 105/8080, 95% CI +/-0.25pp
                 },
 
                 points =
@@ -1716,18 +1716,18 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 1870, xi.item.CHUNK_OF_COPPER_ORE   },
-                    { 1930, xi.item.CHUNK_OF_ZINC_ORE     },
-                    { 1500, xi.item.CHUNK_OF_TIN_ORE      },
-                    { 1340, xi.item.PEBBLE                },
-                    {  860, xi.item.CHUNK_OF_SILVER_ORE   },
-                    { 1180, xi.item.CHUNK_OF_IRON_ORE     },
-                    {  750, xi.item.CHUNK_OF_MYTHRIL_ORE  },
-                    {  210, xi.item.MOBLIN_MASK           },
-                    {  110, xi.item.MOBLIN_HELM           },
-                    {  110, xi.item.SUIT_OF_MOBLIN_MAIL   },
-                    {   50, xi.item.SUIT_OF_MOBLIN_ARMOR  },
-                    {  160, xi.item.CHUNK_OF_PLATINUM_ORE },
+                    { 1820, xi.item.CHUNK_OF_ZINC_ORE     }, -- n=1209/6658, 95% CI +/-0.93pp
+                    { 1580, xi.item.CHUNK_OF_TIN_ORE      }, -- n=1055/6658, 95% CI +/-0.88pp
+                    { 1540, xi.item.PEBBLE                }, -- n=1024/6658, 95% CI +/-0.87pp
+                    { 1490, xi.item.CHUNK_OF_COPPER_ORE   }, -- n= 995/6658, 95% CI +/-0.86pp
+                    { 1250, xi.item.CHUNK_OF_IRON_ORE     }, -- n= 831/6658, 95% CI +/-0.79pp
+                    {  890, xi.item.CHUNK_OF_SILVER_ORE   }, -- n= 592/6658, 95% CI +/-0.68pp
+                    {  680, xi.item.CHUNK_OF_MYTHRIL_ORE  }, -- n= 453/6658, 95% CI +/-0.61pp
+                    {  160, xi.item.SUIT_OF_MOBLIN_ARMOR  }, -- n= 106/6658, 95% CI +/-0.30pp
+                    {  150, xi.item.CHUNK_OF_PLATINUM_ORE }, -- n=  99/6658, 95% CI +/-0.29pp
+                    {  150, xi.item.SUIT_OF_MOBLIN_MAIL   }, -- n=  99/6658, 95% CI +/-0.29pp
+                    {  150, xi.item.MOBLIN_MASK           }, -- n=  98/6658, 95% CI +/-0.29pp
+                    {  140, xi.item.MOBLIN_HELM           }, -- n=  97/6658, 95% CI +/-0.29pp
                 },
 
                 points =
@@ -1772,16 +1772,16 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 1460, xi.item.CHUNK_OF_COPPER_ORE    },
-                    { 1650, xi.item.CHUNK_OF_IRON_ORE      },
-                    { 1300, xi.item.CHUNK_OF_TIN_ORE       },
-                    { 1140, xi.item.PEBBLE                 },
-                    { 1320, xi.item.CHUNK_OF_ZINC_ORE      },
-                    {  840, xi.item.FLINT_STONE            },
-                    {  360, xi.item.CHUNK_OF_SILVER_ORE    },
-                    {  170, xi.item.RED_ROCK               },
-                    {  150, xi.item.CHUNK_OF_DARKSTEEL_ORE },
-                    {  110, xi.item.CHUNK_OF_GOLD_ORE      },
+                    { 2110, xi.item.CHUNK_OF_IRON_ORE      }, -- n=1854/8831, 95% CI +/-0.85pp
+                    { 1580, xi.item.CHUNK_OF_TIN_ORE       }, -- n=1392/8831, 95% CI +/-0.76pp
+                    { 1510, xi.item.PEBBLE                 }, -- n=1336/8831, 95% CI +/-0.75pp
+                    { 1470, xi.item.CHUNK_OF_COPPER_ORE    }, -- n=1302/8831, 95% CI +/-0.74pp
+                    { 1470, xi.item.CHUNK_OF_ZINC_ORE      }, -- n=1301/8831, 95% CI +/-0.74pp
+                    { 1100, xi.item.FLINT_STONE            }, -- n= 974/8831, 95% CI +/-0.65pp
+                    {  320, xi.item.CHUNK_OF_SILVER_ORE    }, -- n= 283/8831, 95% CI +/-0.37pp
+                    {  160, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- n= 140/8831, 95% CI +/-0.26pp
+                    {  150, xi.item.RED_ROCK               }, -- n= 133/8831, 95% CI +/-0.25pp
+                    {  130, xi.item.CHUNK_OF_GOLD_ORE      }, -- n= 116/8831, 95% CI +/-0.24pp
                 },
 
                 points =
@@ -1831,14 +1831,14 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 1130, xi.item.CHUNK_OF_ZINC_ORE     },
-                    {  940, xi.item.CHUNK_OF_IRON_ORE     },
-                    { 1040, xi.item.PEBBLE                },
-                    {  970, xi.item.CHUNK_OF_TIN_ORE      },
-                    {  900, xi.item.CHUNK_OF_MYTHRIL_ORE  },
-                    {  900, xi.item.CHUNK_OF_SILVER_ORE   },
-                    {  800, xi.item.CHUNK_OF_COPPER_ORE   },
-                    {  100, xi.item.CHUNK_OF_PLATINUM_ORE },
+                    { 1540, xi.item.PEBBLE                }, -- n=1138/7407, 95% CI +/-0.82pp
+                    { 1520, xi.item.CHUNK_OF_TIN_ORE      }, -- n=1127/7407, 95% CI +/-0.82pp
+                    { 1510, xi.item.CHUNK_OF_COPPER_ORE   }, -- n=1122/7407, 95% CI +/-0.82pp
+                    { 1490, xi.item.CHUNK_OF_ZINC_ORE     }, -- n=1102/7407, 95% CI +/-0.81pp
+                    { 1450, xi.item.CHUNK_OF_IRON_ORE     }, -- n=1075/7407, 95% CI +/-0.80pp
+                    { 1260, xi.item.CHUNK_OF_SILVER_ORE   }, -- n= 935/7407, 95% CI +/-0.76pp
+                    { 1090, xi.item.CHUNK_OF_MYTHRIL_ORE  }, -- n= 806/7407, 95% CI +/-0.71pp
+                    {  140, xi.item.CHUNK_OF_PLATINUM_ORE }, -- n= 102/7407, 95% CI +/-0.27pp
                 },
 
                 points =
@@ -1869,14 +1869,14 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 2450, xi.item.CHUNK_OF_IRON_ORE      },
-                    { 1800, xi.item.PEBBLE                 },
-                    { 1850, xi.item.CHUNK_OF_COPPER_ORE    },
-                    { 1330, xi.item.CHUNK_OF_ZINC_ORE      },
-                    { 1120, xi.item.CHUNK_OF_TIN_ORE       },
-                    {  550, xi.item.SNAPPING_MOLE          },
-                    {  180, xi.item.CHUNK_OF_SILVER_ORE    },
-                    {   40, xi.item.CHUNK_OF_DARKSTEEL_ORE },
+                    { 2260, xi.item.CHUNK_OF_IRON_ORE      }, -- n=2650/11653, 95% CI +/-0.76pp
+                    { 1690, xi.item.SNAPPING_MOLE          }, -- n=1969/11653, 95% CI +/-0.68pp
+                    { 1690, xi.item.CHUNK_OF_COPPER_ORE    }, -- n=1966/11653, 95% CI +/-0.68pp
+                    { 1640, xi.item.PEBBLE                 }, -- n=1909/11653, 95% CI +/-0.67pp
+                    { 1380, xi.item.CHUNK_OF_ZINC_ORE      }, -- n=1606/11653, 95% CI +/-0.63pp
+                    { 1110, xi.item.CHUNK_OF_TIN_ORE       }, -- n=1291/11653, 95% CI +/-0.57pp
+                    {  180, xi.item.CHUNK_OF_SILVER_ORE    }, -- n= 206/11653, 95% CI +/-0.24pp
+                    {   50, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- n=  56/11653, 95% CI +/-0.13pp
                 },
 
                 points =
