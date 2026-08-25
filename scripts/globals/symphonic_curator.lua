@@ -1,6 +1,6 @@
 -----------------------------------
 -- Symphonic Curator (Moghouse)
--- See documentation/songdata.txt or documentation/MusicIDs.txt for song data.
+-- See docs/songdata.txt or docs/MusicIDs.txt for song data.
 -----------------------------------
 
 xi = xi or {}

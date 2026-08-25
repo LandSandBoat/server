@@ -1,0 +1,67 @@
+# Publishes docs/wiki to https://github.com/LandSandBoat/server/wiki
+#
+# The published wiki is a separate git repository (server.wiki) that GitHub renders but that we
+# never edit directly. This workflow makes it a copy of docs/wiki.
+#
+# A wiki belongs to its parent repository, so the built-in GITHUB_TOKEN can write to it and no
+# secret is needed. A fork that wants to publish its own wiki has to change the repository name
+# below and enable the wiki in its settings.
+
+name: Publish Wiki
+
+on:
+  push:
+    branches:
+      - base
+    paths:
+      - 'docs/wiki/**'
+      - '.github/workflows/publish_wiki.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  # Queue rather than cancel: each run pushes the whole directory, so a cancelled run can leave
+  # the wiki behind by one commit.
+  cancel-in-progress: false
+
+jobs:
+  Publish_Wiki:
+    name: Publish Wiki
+    if: github.repository == 'LandSandBoat/server'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout wiki sources
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          sparse-checkout: docs/wiki
+          path: server
+
+      - name: Clone published wiki
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki
+
+      - name: Copy wiki sources over the published wiki
+        run: |
+          rsync --archive --delete --exclude '.git/' --exclude '/README.md' \
+            server/docs/wiki/ wiki/
+
+      - name: Push changes
+        working-directory: wiki
+        run: |
+          git add --all
+          if git diff --cached --quiet; then
+            echo "Published wiki already matches docs/wiki, nothing to push."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit --message "Publish wiki from ${GITHUB_SHA::7}"
+          git push origin HEAD:master

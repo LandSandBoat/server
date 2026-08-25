@@ -1,0 +1,95 @@
+to:	licensing@fsf.org
+
+date sent:	Nov 5, 2020, 8:49 PM
+
+date reply: Nov 18, 2020, 9:16 AM
+
+subject:	GPL & AGPL questions
+
+===
+
+Paulius Galubickas (Attorney-at-law, http://galubickas.lt/en/) via RT
+9:16 AM (59 minutes ago)
+to me
+
+On Thu Nov 05 20:50:06 2020, zrtoogood@gmail.com wrote:
+> Hi there,
+
+Hello, please accept our apologies for the delay in getting back to you. We rely on volunteer effort and often have difficulties keeping up with the demand for our expertise.
+
+>
+> I hope you're doing well! I have a few questions about a codebase that I
+> work in, that I was hoping you could answer for me.
+>
+> I work on a well-established game server project that has historically been
+> GPL3 throughout, and that has always been well understood and easy to
+> follow. There has been a shift recently where a lot of people in our
+> community want to start shifting towards using AGPL3, to "activate" the
+> open-source-ness of the codebase from downstream users.
+>
+> Given the age of the project, isn't possible for us to just relicense all
+> of the existing work, so our only option is a progressive relicensing
+> through the project being rewritten.
+
+> - Do all modifications to a GPL work always have to be GPL? Or can
+> individual modifications be under a compatible license? Can any
+> modification to the GPL work be licensed under the AGPL?
+
+If someone modifies GPLv3 file (code) and adds copyrightable code to it, then that portion of the code can be under a compatible license (e.g. AGPLv3). Please see <https://www.gnu.org/licenses/license-list.html>. The original portions of code would still only have to follow the terms of the GPLv3. GPLv3‘s section 13 states "The terms of this License [GPLv3] will continue to apply to the part which is the covered work, but the special requirements of the GNU Affero General Public License, section 13, concerning interaction through a network will apply to the combination as such."
+
+>
+> - What modifications are allowed to be AGPL? Are non-trivial changes to
+> lines and sections in a GPL file allowed to be AGPL? Or does the whole file
+> have to be modified/rewritten?
+
+The modified code should remain under the initial license of the code.
+
+>
+> - What counts as a modification? Am I correct in my thinking that "It
+> wouldn't be considered a modification of a GPL work if what you're adding
+> could stand by itself in a separate GitHub repository"?
+
+In order a modification could be qualified as a derivative work entitled for copyright, it should meet a copyrightability criteria. Such modifications shouldn’t be trivial, they should be original.
+
+>
+> - If I have a base class and then inherit from it, is the new child class
+> allowed to be AGPL, if it is otherwise entirely written from scratch?
+
+The child class written from scratch and having additional functionality could be regarded as a copyrightable work and be licensed by its copyright holder under AGPLv3 and linked to GPLv3 code.
+
+>
+> - Am I allowed to make a brand new source and header files AGPL, even if
+> they are compiled and linked to otherwise GPL content?
+
+AGPLv3 files could be linked to GPLv3 code and the source code of the combined work should be made available to users interacting with the combined work over a network.
+
+>
+> - If I have a scripting language, which calls out to bindings written in
+> GPL code, can those scripts be AGPL?
+
+The copyright holder of any copyrightable work can license it under AGPLv3 and call from it (link to) GPLv3 code.
+
+>
+> And finally, is it alright for me to host the body of your reply in a wiki
+> or similar, or should I paraphrase?
+
+We always ask that if someone is going to publish our reply that they should give the whole reply, so that people can get the full context of what we said.
+>
+> Thanks for your time, I really appreciate the work you guys do!
+> Cheers,
+
+Thanks for checking in, and I hope this helps.
+
+> Zach
+
+
+--
+
+Disclaimer: please note that the above is not legal advice.
+
+The services of the GPL Compliance Lab are made possible by donations from
+people like you. Please consider supporting us today by becoming a member
+[https://my.fsf.org/join] or by making a donation [https://www.fsf.org/donate].
+
+Regards
+Paulius (i4paga)

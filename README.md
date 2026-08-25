@@ -32,7 +32,7 @@ Discussions are similar to forum posts. Please open a new discussion post in the
 
 ### AI Agents and their use
 
-If you're a human using AI agents or an AI agent you should go read `./documentation/ai_agents/README.md`.
+If you're a human using AI agents or an AI agent you should go read `./docs/ai_agents/README.md`.
 
 ## LICENSE
 
