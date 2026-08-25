@@ -498,16 +498,16 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 2220, xi.item.BONE_CHIP                   },
-                    { 2220, xi.item.CHICKEN_BONE                },
-                    { 1220, xi.item.BAT_FANG                    },
-                    { 1220, xi.item.LITTLE_WORM                 },
-                    {  720, xi.item.SCORPION_CLAW               },
-                    {  720, xi.item.SCORPION_SHELL              },
-                    {  420, xi.item.ANTLION_JAW                 },
-                    {  420, xi.item.BAG_OF_CACTUS_STEMS         },
-                    {  420, xi.item.HIGH_QUALITY_SCORPION_SHELL },
-                    {  420, xi.item.RED_ROCK                    },
+                    { 2750, xi.item.CHICKEN_BONE                }, -- n=2117/7734, 95% CI +/-0.99pp
+                    { 2440, xi.item.BONE_CHIP                   }, -- n=1888/7734, 95% CI +/-0.96pp
+                    { 1600, xi.item.BAT_FANG                    }, -- n=1234/7734, 95% CI +/-0.82pp
+                    { 1180, xi.item.LITTLE_WORM                 }, -- n= 916/7734, 95% CI +/-0.72pp
+                    {  610, xi.item.SCORPION_CLAW               }, -- n= 475/7734, 95% CI +/-0.54pp
+                    {  600, xi.item.SCORPION_SHELL              }, -- n= 461/7734, 95% CI +/-0.53pp
+                    {  430, xi.item.ANTLION_JAW                 }, -- n= 331/7734, 95% CI +/-0.45pp
+                    {  140, xi.item.BAG_OF_CACTUS_STEMS         }, -- n= 112/7734, 95% CI +/-0.27pp
+                    {  130, xi.item.RED_ROCK                    }, -- n= 104/7734, 95% CI +/-0.26pp
+                    {  120, xi.item.HIGH_QUALITY_SCORPION_SHELL }, -- n=  96/7734, 95% CI +/-0.25pp
                 },
 
                 points =
@@ -532,15 +532,15 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 2690, xi.item.BONE_CHIP      },
-                    { 1830, xi.item.CHICKEN_BONE   },
-                    { 1300, xi.item.BAT_FANG       },
-                    { 1440, xi.item.GIANT_FEMUR    },
-                    { 1250, xi.item.LITTLE_WORM    },
-                    {   50, xi.item.SCORPION_CLAW  },
-                    {  290, xi.item.SCORPION_SHELL },
-                    {  240, xi.item.TURTLE_SHELL   },
-                    {  190, xi.item.SACK_OF_SILICA },
+                    { 2720, xi.item.BONE_CHIP      }, -- n=1877/6929, 95% CI +/-1.05pp
+                    { 2090, xi.item.CHICKEN_BONE   }, -- n=1450/6929, 95% CI +/-0.96pp
+                    { 1780, xi.item.GIANT_FEMUR    }, -- n=1232/6929, 95% CI +/-0.90pp
+                    { 1410, xi.item.LITTLE_WORM    }, -- n= 978/6929, 95% CI +/-0.82pp
+                    { 1320, xi.item.BAT_FANG       }, -- n= 915/6929, 95% CI +/-0.80pp
+                    {  260, xi.item.TURTLE_SHELL   }, -- n= 181/6929, 95% CI +/-0.38pp
+                    {  160, xi.item.SCORPION_SHELL }, -- n= 112/6929, 95% CI +/-0.30pp
+                    {  140, xi.item.SCORPION_CLAW  }, -- n=  99/6929, 95% CI +/-0.28pp
+                    {  120, xi.item.SACK_OF_SILICA }, -- n=  85/6929, 95% CI +/-0.26pp
                 },
 
                 points =
@@ -598,17 +598,14 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 2130, xi.item.CHUNK_OF_ROCK_SALT     },
-                    { 1700, xi.item.SEASHELL               },
-                    {  430, xi.item.CRAB_SHELL             },
-                    { 1490, xi.item.HANDFUL_OF_FISH_SCALES },
-                    { 2130, xi.item.LUGWORM                },
-                    { 1060, xi.item.SHELL_BUG              },
-                    {  100, xi.item.CORAL_FRAGMENT         },
-                    {  100, xi.item.BAG_OF_VEGETABLE_SEEDS },
-                    {  430, xi.item.TURTLE_SHELL           },
-                    {  100, xi.item.BAG_OF_GRAIN_SEEDS     },
-                    {  640, xi.item.HELMET_MOLE            },
+                    { 1910, xi.item.HELMET_MOLE            }, -- n=1976/10355, 95% CI +/-0.76pp
+                    { 1620, xi.item.CHUNK_OF_ROCK_SALT     }, -- n=1673/10355, 95% CI +/-0.71pp
+                    { 1510, xi.item.SEASHELL               }, -- n=1567/10355, 95% CI +/-0.69pp
+                    { 1260, xi.item.LUGWORM                }, -- n=1306/10355, 95% CI +/-0.64pp
+                    { 1240, xi.item.SHELL_BUG              }, -- n=1283/10355, 95% CI +/-0.63pp
+                    { 1220, xi.item.HANDFUL_OF_FISH_SCALES }, -- n=1260/10355, 95% CI +/-0.63pp
+                    {  850, xi.item.CRAB_SHELL             }, -- n= 881/10355, 95% CI +/-0.54pp
+                    {  390, xi.item.TURTLE_SHELL           }, -- n= 409/10355, 95% CI +/-0.38pp
                 },
 
                 points =
@@ -643,15 +640,15 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    { 2560, xi.item.BONE_CHIP      },
-                    { 2560, xi.item.BAT_FANG       },
-                    { 2330, xi.item.LITTLE_WORM    },
-                    {  930, xi.item.GIANT_FEMUR    },
-                    {  700, xi.item.SCORPION_CLAW  },
-                    {  230, xi.item.SCORPION_SHELL },
-                    {  230, xi.item.PETRIFIED_LOG  },
-                    {  100, xi.item.RED_ROCK       },
-                    {  470, xi.item.SACK_OF_SILICA },
+                    { 2990, xi.item.BONE_CHIP      }, -- n=1995/6666, 95% CI +/-1.10pp
+                    { 2180, xi.item.BAT_FANG       }, -- n=1450/6666, 95% CI +/-0.99pp
+                    { 1520, xi.item.LITTLE_WORM    }, -- n=1015/6666, 95% CI +/-0.86pp
+                    { 1480, xi.item.GIANT_FEMUR    }, -- n= 989/6666, 95% CI +/-0.85pp
+                    {  580, xi.item.SCORPION_CLAW  }, -- n= 384/6666, 95% CI +/-0.56pp
+                    {  460, xi.item.SCORPION_SHELL }, -- n= 307/6666, 95% CI +/-0.50pp
+                    {  330, xi.item.SACK_OF_SILICA }, -- n= 223/6666, 95% CI +/-0.43pp
+                    {  300, xi.item.RED_ROCK       }, -- n= 199/6666, 95% CI +/-0.41pp
+                    {  160, xi.item.PETRIFIED_LOG  }, -- n= 104/6666, 95% CI +/-0.30pp
                 },
 
                 points =
