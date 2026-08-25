@@ -14,6 +14,8 @@
 *.sh text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
+# The wiki is published byte for byte from documentation/wiki.
+*.md text eol=lf
 
 # Retaining CRLF line ends in the documentation dir (for now..)
 *.txt text eol=crlf

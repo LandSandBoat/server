@@ -32,8 +32,9 @@ if [[ $# -gt 0 ]]; then
     targets=("$@")
     general_output=""
     for file in "${targets[@]}"; do
-        # Black formatter used for Python violates some of our general rules
-        [[ -f $file && $file != *.py ]] || continue
+        # Black formatter used for Python violates some of our general rules.
+        # documentation/wiki/resources holds correspondence quoted verbatim, which we do not reformat.
+        [[ -f $file && $file != *.py && $file != documentation/wiki/resources/* ]] || continue
         output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
         general_output+="$output"
     done

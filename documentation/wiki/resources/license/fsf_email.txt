@@ -1,0 +1,30 @@
+to:	licensing@fsf.org
+
+date:	Nov 5, 2020, 8:49 PM
+
+subject:	GPL & AGPL questions
+
+===
+
+Hi there, 
+
+I hope you're doing well! I have a few questions about a codebase that I work in, that I was hoping you could answer for me. 
+
+I work on a well-established game server project that has historically been GPL3 throughout, and that has always been well understood and easy to follow. There has been a shift recently where a lot of people in our community want to start shifting towards using AGPL3, to "activate" the open-source-ness of the codebase from downstream users.
+
+Given the age of the project, isn't possible for us to just relicense all of the existing work, so our only option is a progressive relicensing through the project being rewritten. 
+
+- Do all modifications to a GPL work always have to be GPL? Or can individual modifications be under a compatible license? Can any modification to the GPL work be licensed under the AGPL?
+- What modifications are allowed to be AGPL? Are non-trivial changes to lines and sections in a GPL file allowed to be AGPL? Or does the whole file have to be modified/rewritten?
+- What counts as a modification? Am I correct in my thinking that "It wouldn't be considered a modification of a GPL work if what you're adding could stand by itself in a separate GitHub repository"?
+- If I have a base class and then inherit from it, is the new child class allowed to be AGPL, if it is otherwise entirely written from scratch?
+- Am I allowed to make a brand new source and header files AGPL, even if they are compiled and linked to otherwise GPL content?
+- If I have a scripting language, which calls out to bindings written in GPL code, can those scripts be AGPL?
+
+And finally, is it alright for me to host the body of your reply in a wiki or similar, or should I paraphrase?
+
+Thanks for your time, I really appreciate the work you guys do!
+
+Cheers,
+
+Zach
