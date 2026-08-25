@@ -34,7 +34,7 @@ def load_documented_events(file_path):
         return {line.split(" - ")[0].strip() for line in file.readlines()}
 
 
-documented_events = load_documented_events("documentation/AI_Events.txt")
+documented_events = load_documented_events("docs/AI_Events.txt")
 
 
 def contains_undocumented_listener(line):

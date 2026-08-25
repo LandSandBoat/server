@@ -6,7 +6,7 @@ If you're looking to setup and install the project, start with the [Quick Start 
 
 After you have a server set up, if you want to find out more about development, head to the [Development page](Development).
 
-If you wish to make changes or additions to the wiki, the pages live in [documentation/wiki](https://github.com/LandSandBoat/server/tree/base/documentation/wiki) in the main repository. Submit a pull request there and it will be published once it is reviewed and merged.
+If you wish to make changes or additions to the wiki, the pages live in [docs/wiki](https://github.com/LandSandBoat/server/tree/base/docs/wiki) in the main repository. Submit a pull request there and it will be published once it is reviewed and merged.
 
 To raise problems or suggestions about the wiki, you can open issues on the main LandSandBoat repo and tag them with the `wiki` tag.
 
@@ -36,7 +36,7 @@ Articles in this category are geared towards what a server administrator might w
 Articles in this category are general development topics relating to overall development processes and tools. The Articles page contains guides covering specific subject matter.
 
 * [Contributing Guide](https://github.com/LandSandBoat/server/blob/base/CONTRIBUTING.md)
-* [Use of AI and Code Generation Tools](https://github.com/LandSandBoat/server/blob/base/documentation/ai_agents/README.md)
+* [Use of AI and Code Generation Tools](https://github.com/LandSandBoat/server/blob/base/docs/ai_agents/README.md)
 * [Development Guide](Development-Guide)
 * [Git Guide](Development-Guide-Git)
 * [Debugging](Debugging)

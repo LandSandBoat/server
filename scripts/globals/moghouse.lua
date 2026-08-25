@@ -175,7 +175,7 @@ xi.moghouse.set2ndFloorStyle = function(player, style)
 end
 
 xi.moghouse.getAvailableMusic = function(player)
-    -- See documentation/songdata.txt or documentation/MusicIDs.txt for song data.
+    -- See docs/songdata.txt or docs/MusicIDs.txt for song data.
     local possibleSongs = {}
 
     local orchestrion  = player:findItem(xi.item.ORCHESTRION)

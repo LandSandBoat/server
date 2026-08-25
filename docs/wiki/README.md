@@ -4,7 +4,7 @@ The pages in this directory are the source of the wiki published at
 <https://github.com/LandSandBoat/server/wiki>. The published wiki is read-only. Edit the pages
 here and open a pull request against `base`.
 
-When a push to `base` changes anything in `documentation/wiki`, the
+When a push to `base` changes anything in `docs/wiki`, the
 [Publish Wiki](../../.github/workflows/publish_wiki.yml) workflow copies this directory over the
 published wiki and pushes it. Nothing outside this directory is published, and this `README.md`
 is not published either.
@@ -19,6 +19,3 @@ is not published either.
 - Put images in `images/` and reference them as `images/name.png`.
 - Add every new page to `Home.md` and to `_Sidebar.md`. A page that neither one links to is
   reachable only by search.
-
-The repository sanity checks run over these files. Each file needs a newline at the end, no tab
-characters, and no two blank lines in a row.

@@ -165,7 +165,7 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
         -- packetName = 'New Horro',
         packetName = string.format('%sHorro', xi.icon.STAR_LARGE),
 
-        -- You can use regular model ids (See documentation/model_ids.txt, or play around with !costume)
+        -- You can use regular model ids (See docs/model_ids.txt, or play around with !costume)
         look = 2430,
 
         -- You can also use the raw packet look information (as a string), as seen in npc_list and mob_pools

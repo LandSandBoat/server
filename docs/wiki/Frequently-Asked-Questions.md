@@ -50,7 +50,7 @@ If you submit code written or heavily influenced by AI, you are still responsibl
 
 **We can't and won't accept low effort "slop".** A pull request that clearly came straight out of a model with little oversight wastes reviewer time and degrades the codebase. If we suspect a contribution is vibe-coded slop, we will close it without further comment.
 
-Read [`documentation/ai_agents/README.md`](https://github.com/LandSandBoat/server/blob/base/documentation/ai_agents/README.md) in the server repo before you submit anything. It covers where AI genuinely helps, where it does not, and what we expect from you. It also carries guides for the agents themselves.
+Read [`docs/ai_agents/README.md`](https://github.com/LandSandBoat/server/blob/base/docs/ai_agents/README.md) in the server repo before you submit anything. It covers where AI genuinely helps, where it does not, and what we expect from you. It also carries guides for the agents themselves.
 
 ## When can I play "Classic" Dynamis?
 

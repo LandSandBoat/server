@@ -1,7 +1,7 @@
-# Publishes documentation/wiki to https://github.com/LandSandBoat/server/wiki
+# Publishes docs/wiki to https://github.com/LandSandBoat/server/wiki
 #
 # The published wiki is a separate git repository (server.wiki) that GitHub renders but that we
-# never edit directly. This workflow makes it a copy of documentation/wiki.
+# never edit directly. This workflow makes it a copy of docs/wiki.
 #
 # A wiki belongs to its parent repository, so the built-in GITHUB_TOKEN can write to it and no
 # secret is needed. A fork that wants to publish its own wiki has to change the repository name
@@ -14,7 +14,7 @@ on:
     branches:
       - base
     paths:
-      - 'documentation/wiki/**'
+      - 'docs/wiki/**'
       - '.github/workflows/publish_wiki.yml'
   workflow_dispatch:
 
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
-          sparse-checkout: documentation/wiki
+          sparse-checkout: docs/wiki
           path: server
 
       - name: Clone published wiki
@@ -51,14 +51,14 @@ jobs:
       - name: Copy wiki sources over the published wiki
         run: |
           rsync --archive --delete --exclude '.git/' --exclude '/README.md' \
-            server/documentation/wiki/ wiki/
+            server/docs/wiki/ wiki/
 
       - name: Push changes
         working-directory: wiki
         run: |
           git add --all
           if git diff --cached --quiet; then
-            echo "Published wiki already matches documentation/wiki, nothing to push."
+            echo "Published wiki already matches docs/wiki, nothing to push."
             exit 0
           fi
           git config user.name 'github-actions[bot]'
