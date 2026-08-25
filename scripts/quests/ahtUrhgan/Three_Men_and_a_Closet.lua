@@ -144,6 +144,7 @@ quest.sections =
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
             ['Kubhe_Ijyuhla'] = quest:event(846),
+            ['Tehf_Kimasnahya'] = quest:event(844),
         }
     }
 }
