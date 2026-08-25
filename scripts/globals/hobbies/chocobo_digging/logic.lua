@@ -127,7 +127,7 @@ local function checkDiggingCooldowns(player)
     local isAllowedZone = diggingZoneList[player:getZoneID()] or false
 
     if not isAllowedZone then
-        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED)
 
         return false
     end
@@ -137,12 +137,10 @@ local function checkDiggingCooldowns(player)
     local skillRank    = player:getSkillRank(xi.skill.DIG)
     local zoneCooldown = player:getLocalVar('ZoneInTime') + utils.clamp(60 - skillRank * 5, 10, 60)
     local digCooldown  = player:getLocalVar('[DIG]LastDigTime') + utils.clamp(15 - skillRank * 5, 3, 16)
+    local cooldown     = math.max(zoneCooldown, digCooldown)
 
-    if
-        currentTime < zoneCooldown or
-        currentTime < digCooldown
-    then
-        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+    if currentTime < cooldown then
+        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED, math.max(cooldown - currentTime, 0), 0) -- Yes, SE sends the cooldown in this packet as of 2026.
 
         return false
     end
