@@ -1308,6 +1308,7 @@ ecosystems:
                 - sight
               mods:
                 defp: 20
+                hpp:  10
               mob_mods:
                 sublink:     5
                 roam_cool:  50
@@ -1400,6 +1401,7 @@ ecosystems:
               mods:
                 mdef:         13
                 udmgmagic: -1250
+                hpp:          10
               mob_mods:
                 sublink: 10
           medusa:
@@ -1410,6 +1412,8 @@ ecosystems:
           merrow:
             id: 131
             attributes:
+              mods:
+                hpp: 10
               mob_mods:
                 sublink: 10
       mamool_ja:
@@ -1430,7 +1434,8 @@ ecosystems:
             id: 132
             attributes:
               mods:
-                eva: 10
+                eva:  10
+                hpp: -10
               mob_mods:
                 sublink: 8
           sage:
@@ -1607,7 +1612,7 @@ ecosystems:
             id: 150
             attributes:
               mods:
-                hpp: -5
+                hpp: -10
       sahagin:
         id: 68
         attributes:
@@ -1793,6 +1798,8 @@ ecosystems:
           apkallu:
             id: 171
             attributes:
+              mods:
+                hpp: -20
               mob_mods:
                 sublink:     14
                 sight_range:  5
@@ -1964,6 +1971,8 @@ ecosystems:
               detects:
                 - sight
               speed: 60
+              mods:
+                hpp: -20
               mob_mods:
                 mp_base:    50
                 roam_cool:  55
@@ -2178,7 +2187,8 @@ ecosystems:
             id: 212
             attributes:
               mods:
-                mdef: 24
+                mdef:  24
+                hpp:  -30
               mob_mods:
                 sublink:      13
                 roam_cool:    50
@@ -2889,6 +2899,8 @@ ecosystems:
           wanderer:
             id: 290
             attributes:
+              mods:
+                hpp: -10
               mob_mods:
                 mp_base: 50
       weeper:
@@ -2909,6 +2921,9 @@ ecosystems:
             id: 291
           weeper:
             id: 292
+            attributes:
+              mods:
+                hpp: 10
 
   humanoid:
     id: 12
@@ -3267,6 +3282,8 @@ ecosystems:
               detects:
                 - sight
                 - hearing
+              mods:
+                hpp: -10
       euvhi:
         id: 132
         species:
@@ -3282,6 +3299,8 @@ ecosystems:
                 chr: a
               detects:
                 - hearing
+              mods:
+                hpp: -20
       hpemde:
         id: 133
         species:
@@ -3381,6 +3400,7 @@ ecosystems:
             attributes:
               mods:
                 udmgmagic: -1250
+                hpp:         -20
           spider_ghrah:
             id: 329
       zdei:
@@ -3400,6 +3420,8 @@ ecosystems:
           zdei:
             id: 331
             attributes:
+              mods:
+                hpp: -20
               mob_mods:
                 sight_range: 10
 
@@ -4440,6 +4462,9 @@ ecosystems:
         species:
           chigoe:
             id: 435
+            attributes:
+              mods:
+                hpp: -70
           djigga:
             id: 436
       crawler:
