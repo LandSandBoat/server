@@ -12,6 +12,7 @@
 --   Morbolger (Ordelle's Caves)            : 21 to 24 hours
 --   Juggler Hecatomb (Gusgen Mines)        : 21 to 24 hours
 --   Capricious Cassie (Fei'Yin)            : 21 to 24 hours
+--   Manipulator (Temple of Uggalepih)      : 15 minutes to 2
 --   Dosetsu Tree (Qufim Island)            : 21 to 24 hours, still thunder weather only
 --   Bloodsucker (Bostaunieux Oubliette)    : 72 hours exactly
 --   N/E/W/S Shadow (Fei'Yin)               : 16 hour lottery cooldown from Specter PHs
@@ -31,17 +32,20 @@ local bostauID    = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 local timedNMs =
 {
-    -- { zone folder name, mob file name }
-    { 'Sauromugue_Champaign', 'Roc'               },
-    { 'Ordelles_Caves',       'Morbolger'         },
-    { 'Gusgen_Mines',         'Juggler_Hecatomb'  },
-    { 'FeiYin',               'Capricious_Cassie' },
+    -- { zone folder name, mob file name, min respawn, max respawn }
+    { 'Sauromugue_Champaign', 'Roc',               75600, 86400 }, -- 21 to 24 hours
+    { 'Ordelles_Caves',       'Morbolger',         75600, 86400 }, -- 21 to 24 hours
+    { 'Gusgen_Mines',         'Juggler_Hecatomb',  75600, 86400 }, -- 21 to 24 hours
+    { 'FeiYin',               'Capricious_Cassie', 75600, 86400 }, -- 21 to 24 hours
+    { 'Temple_of_Uggalepih',  'Manipulator',        7200,  7200 }, -- 2 hours
 }
 
 for _, entry in pairs(timedNMs) do
-    local zoneName = entry[1]
-    local mobName  = entry[2]
-    local varName  = '[Respawn]' .. mobName
+    local zoneName   = entry[1]
+    local mobName    = entry[2]
+    local respawnMin = entry[3]
+    local respawnMax = entry[4]
+    local varName    = '[Respawn]' .. mobName
 
     m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobDespawn', zoneName, mobName), function(mob)
         if mob:getLocalVar('[Respawn]bootSync') == 1 then
@@ -52,7 +56,7 @@ for _, entry in pairs(timedNMs) do
 
         super(mob)
 
-        local respawn = math.randomInt(75600, 86400) -- 21 to 24 hours
+        local respawn = math.randomInt(respawnMin, respawnMax)
         mob:setRespawnTime(respawn)
         SetServerVariable(varName, GetSystemTime() + respawn)
     end)
@@ -68,7 +72,7 @@ for _, entry in pairs(timedNMs) do
         local respawn = GetServerVariable(varName)
         if respawn == 0 and not mob:isSpawned() then
             -- First boot with the module: seed a fresh window instead of popping immediately
-            respawn = GetSystemTime() + math.randomInt(75600, 86400) -- 21 to 24 hours
+            respawn = GetSystemTime() + math.randomInt(respawnMin, respawnMax)
             SetServerVariable(varName, respawn)
         end
 
