@@ -6,6 +6,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, 599.7, -20, 265, 690, -5, 640)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

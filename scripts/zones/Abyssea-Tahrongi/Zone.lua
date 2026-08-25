@@ -6,6 +6,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, -95, 20, -775, 59.5, 50, -560.1)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

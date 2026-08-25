@@ -414,14 +414,15 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    {  970, xi.item.BAG_OF_HERB_SEEDS        },
-                    { 1330, xi.item.CLUMP_OF_MOKO_GRASS      },
-                    {  880, xi.item.LESSER_CHIGOE            },
-                    {  880, xi.item.BAG_OF_GRAIN_SEEDS       },
-                    { 1180, xi.item.CLUMP_OF_RED_MOKO_GRASS  },
-                    { 1000, xi.item.BURDOCK_ROOT             },
-                    {  790, xi.item.BAG_OF_VEGETABLE_SEEDS   },
-                    {  940, xi.item.BUNCH_OF_GRAUBERG_GREENS },
+                    { 1480, xi.item.CLUMP_OF_MOKO_GRASS      }, -- n=292/1982, 95% CI +/-1.56pp
+                    { 1410, xi.item.BURDOCK_ROOT             }, -- n=280/1982, 95% CI +/-1.53pp
+                    { 1390, xi.item.BUNCH_OF_GRAUBERG_GREENS }, -- n=275/1982, 95% CI +/-1.52pp
+                    { 1380, xi.item.CLUMP_OF_RED_MOKO_GRASS  }, -- n=274/1982, 95% CI +/-1.52pp
+                    {  910, xi.item.BAG_OF_VEGETABLE_SEEDS   }, -- n=181/1982, 95% CI +/-1.27pp
+                    {  900, xi.item.BAG_OF_GRAIN_SEEDS       }, -- n=178/1982, 95% CI +/-1.26pp
+                    {  880, xi.item.LESSER_CHIGOE            }, -- n=175/1982, 95% CI +/-1.25pp
+                    {  840, xi.item.BAG_OF_HERB_SEEDS        }, -- n=166/1982, 95% CI +/-1.22pp
+                    {  810, xi.item.WINTERFLOWER             }, -- n=161/1982, 95% CI +/-1.20pp
                 },
 
                 points =
@@ -699,7 +700,14 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    -- Capture needed
+                    { 2370, xi.item.BAT_FANG       }, -- n=107/452, 95% CI +/-3.91pp
+                    { 1990, xi.item.BONE_CHIP      }, -- n= 90/452, 95% CI +/-3.67pp
+                    { 1620, xi.item.GIANT_FEMUR    }, -- n= 73/452, 95% CI +/-3.39pp
+                    { 1080, xi.item.HARDENED_BONE  }, -- n= 49/452, 95% CI +/-2.87pp
+                    { 1060, xi.item.SCORPION_CLAW  }, -- n= 48/452, 95% CI +/-2.85pp
+                    {  820, xi.item.FLOCON_DE_MER  }, -- n= 37/452, 95% CI +/-2.54pp
+                    {  820, xi.item.SCORPION_SHELL }, -- n= 37/452, 95% CI +/-2.54pp
+                    {  240, xi.item.TURTLE_SHELL   }, -- n= 11/452, 95% CI +/-1.47pp
                 },
 
                 points =
@@ -724,7 +732,16 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    -- Capture needed
+                    { 2590, xi.item.CHICKEN_BONE                }, -- n=168/650, 95% CI +/-3.36pp
+                    { 2460, xi.item.BONE_CHIP                   }, -- n=160/650, 95% CI +/-3.31pp
+                    { 1570, xi.item.BAT_FANG                    }, -- n=102/650, 95% CI +/-2.80pp
+                    { 1230, xi.item.LITTLE_WORM                 }, -- n= 80/650, 95% CI +/-2.53pp
+                    {  630, xi.item.SCORPION_SHELL              }, -- n= 41/650, 95% CI +/-1.88pp
+                    {  600, xi.item.SCORPION_CLAW               }, -- n= 39/650, 95% CI +/-1.84pp
+                    {  450, xi.item.ANTLION_JAW                 }, -- n= 29/650, 95% CI +/-1.60pp
+                    {  180, xi.item.BAG_OF_CACTUS_STEMS         }, -- n= 12/650, 95% CI +/-1.07pp
+                    {  150, xi.item.RED_ROCK                    }, -- n= 10/650, 95% CI +/-0.99pp
+                    {  140, xi.item.HIGH_QUALITY_SCORPION_SHELL }, -- n=  9/650, 95% CI +/-0.94pp
                 },
 
                 points =
@@ -1426,7 +1443,15 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    -- Capture needed
+                    { 2180, xi.item.PLATEAU_CHESTNUT   }, -- n=129/592, 95% CI +/-3.32pp
+                    { 1390, xi.item.WALNUT_LOG         }, -- n= 82/592, 95% CI +/-2.78pp
+                    { 1050, xi.item.ARROWWOOD_LOG      }, -- n= 62/592, 95% CI +/-2.47pp
+                    {  980, xi.item.BEECH_LOG          }, -- n= 58/592, 95% CI +/-2.40pp
+                    {  980, xi.item.DOGWOOD_LOG        }, -- n= 58/592, 95% CI +/-2.40pp
+                    {  930, xi.item.OAK_LOG            }, -- n= 55/592, 95% CI +/-2.35pp
+                    {  840, xi.item.ASH_LOG            }, -- n= 50/592, 95% CI +/-2.25pp
+                    {  840, xi.item.TEAK_LOG           }, -- n= 50/592, 95% CI +/-2.25pp
+                    {  810, xi.item.BAG_OF_FRUIT_SEEDS }, -- n= 48/592, 95% CI +/-2.21pp
                 },
 
                 points =
@@ -1473,7 +1498,15 @@ xi.helm.dataTable =
 
                 drops =
                 {
-                    -- Capture needed
+                    { 2410, xi.item.ASH_LOG       }, -- n=141/586, 95% CI +/-3.45pp
+                    { 1960, xi.item.ARROWWOOD_LOG }, -- n=115/586, 95% CI +/-3.21pp
+                    { 1590, xi.item.MAPLE_LOG     }, -- n= 93/586, 95% CI +/-2.96pp
+                    { 1380, xi.item.FAERIE_APPLE  }, -- n= 81/586, 95% CI +/-2.80pp
+                    { 1310, xi.item.WALNUT_LOG    }, -- n= 77/586, 95% CI +/-2.74pp
+                    {  680, xi.item.AQUILARIA_LOG }, -- n= 40/586, 95% CI +/-2.05pp
+                    {  380, xi.item.ACORN         }, -- n= 22/586, 95% CI +/-1.56pp
+                    {  200, xi.item.ELM_LOG       }, -- n= 12/586, 95% CI +/-1.18pp
+                    {   90, xi.item.OAK_LOG       }, -- n=  5/586, 95% CI +/-0.81pp
                 },
 
                 points =
