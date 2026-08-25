@@ -150,13 +150,14 @@ local function checkDiggingCooldowns(player)
     return true
 end
 
-local function calculateSkillUp(player)
+local function calculateSkillUp(player, text)
     local skillRank = player:getSkillRank(xi.skill.DIG)
     local maxSkill  = utils.clamp((skillRank + 1) * 100, 0, 1000)
     local realSkill = player:getCharSkillLevel(xi.skill.DIG)
     local increment = 1
 
     -- this probably needs correcting
+    -- it seems skilling up gets harder as your rank goes up
     local roll = math.randomInt(1, 100)
 
     -- make sure our skill isn't capped
@@ -170,10 +171,20 @@ local function calculateSkillUp(player)
             -- skill up!
             player:setSkillLevel(xi.skill.DIG, realSkill + increment)
 
+            local newSkill = realSkill + increment
             -- update the skill rank
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
-            if (realSkill + increment) >= (skillRank * 100) + 100 then
+            if newSkill >= (skillRank * 100) + 100 then
                 player:setSkillRank(xi.skill.DIG, skillRank + 1)
+            end
+
+            if newSkill % 10 == 0 then
+                if text and text.BEASTMEN_CACHE_OFFSET then
+                    -- Conquest Cache + 5 = "Your wing skill improved to X"
+                    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, math.floor(newSkill / 10), 1) -- TODO: what is the "1" in the params?
+                else
+                    print(string.format('warning: Zone %s (%d) is missing ID.text.BEASTMEN_CACHE_OFFSET', player:getZoneName(), player:getZoneID()))
+                end
             end
         end
     end
@@ -407,7 +418,7 @@ xi.chocoboDig.start = function(player)
     end
 
     -- Handle skill-up
-    calculateSkillUp(player)
+    calculateSkillUp(player, text)
 
     -- Handle no item OR record of eminence.
     if
