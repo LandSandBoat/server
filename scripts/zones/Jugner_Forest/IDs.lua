@@ -30,6 +30,7 @@ zones[xi.zone.JUGNER_FOREST] =
         FIND_NOTHING                  = 7743,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7809,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7818,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7823,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SIGNPOST_NEW                  = 7901,  -- The signpost looks as good as new!
         ALEXIUS_ORDERS                = 7912,  -- Take that <keyitem> back and hand it to the master at the weapons shop. Got it?
         LOGGING_IS_POSSIBLE_HERE      = 7922,  -- Logging is possible here if you have <item>.

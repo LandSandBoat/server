@@ -31,6 +31,7 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         FIND_NOTHING                  = 7589,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7655,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7664,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7669,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         ALREADY_OBTAINED_TELE         = 7684,  -- You already possess the gate crystal for this telepoint.
         REMNANTS_OF_A_PAST_AGE        = 7688,  -- These are remnants of a past age, made from a rare kind of stone.
         FEEL_A_HOSTILE_GAZE           = 7689,  -- You feel a hostile gaze upon you!

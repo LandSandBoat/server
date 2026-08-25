@@ -23,6 +23,7 @@ zones[xi.zone.WEST_SARUTABARUTA] =
         DIG_THROW_AWAY                = 7086,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7088,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7163,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7168,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         CONQUEST_BASE                 = 7174,  -- Tallying conquest results...
         SIGN_1                        = 7403,  -- Northeast: Central Tower, Horutoto Ruins Northwest: Giddeus South: Port Windurst
         SIGN_3                        = 7404,  -- East: East Sarutabaruta West: Giddeus

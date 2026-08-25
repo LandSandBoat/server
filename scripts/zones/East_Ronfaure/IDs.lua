@@ -23,6 +23,7 @@ zones[xi.zone.EAST_RONFAURE] =
         DIG_THROW_AWAY                = 7267,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7269,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7344,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7349,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         RAYOCHINDOT_DIALOG            = 7435,  -- If you are outmatched, run to the city as quickly as you can.
         CROTEILLARD_DIALOG            = 7436,  -- Sorry, no chatting while I'm on duty.
         ANDELAIN_DIALOG               = 7437,  -- My name is Andelain. As part of my devotions, I come here each day to pray.

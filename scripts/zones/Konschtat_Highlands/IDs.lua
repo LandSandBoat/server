@@ -24,6 +24,7 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         FIND_NOTHING                  = 7251,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7317,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7326,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7331,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SIGNPOST                      = 7408,  -- North: Valkurm Dunes South: North Gustaberg East: Gusgen Mines, Pashhow Marshlands
         SIGNPOST2                     = 7409,  -- North: Pashhow Marshlands West: Valkurm Dunes, North Gustaberg Southeast: Gusgen Mines
         SIGNPOST3_DIALOG_1            = 7410,  -- North: Valkurm Dunes South: To Gustaberg

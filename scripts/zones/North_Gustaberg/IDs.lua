@@ -27,6 +27,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         DIG_THROW_AWAY                = 7267,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7269,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7344,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7349,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SENSE_EVIL_PRESENCE           = 7358,  -- You sense an evil presence...
         SPARKLING_LIGHT               = 7399,  -- The ground is sparkling with a strange light.
         SHINING_OBJECT_SLIPS_AWAY     = 7463,  -- The shining object slips through your fingers and is washed further down the stream.

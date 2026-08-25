@@ -21,6 +21,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         DIG_THROW_AWAY                = 7245, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7247, -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7322, -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7327, -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SIGNPOST_OFFSET               = 7403, -- Southeast: South Tower, Horutoto Ruins Southwest: Windurst Woods
         TABY_CANATAHEY_DIALOG         = 7413, -- This is the entrrrance to Windurst. Please maintain orderrrly conduct while you'rrre in town.
         HEIH_PORHIAAP_DIALOG          = 7414, -- These grrrasslands make up East Sarutabaruta. Lately the number of monsters has drrramatically increased, causing us all sorts of trrrouble.

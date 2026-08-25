@@ -33,6 +33,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         FIND_NOTHING                  = 7589,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7655,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7664,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7669,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         AIR_HAS_SUDDENLY_CHANGED      = 7757,  -- The air around you has suddenly changed!
         SOMETHING_BETTER              = 7758,  -- Don't you have something better to do right now?
         CANNOT_REMOVE_FRAG            = 7761,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
