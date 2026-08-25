@@ -12,11 +12,12 @@ xi.helm.dataTable =
 {
     [xi.helmType.HARVESTING] =
     {
-        id           = 'HARVESTING',
-        animation    = xi.emote.HARVESTING,
-        relocateRate = 50,
-        message      = 'HARVESTING_IS_POSSIBLE_HERE',
-        tool         = xi.item.SICKLE,
+        id             = 'HARVESTING',
+        animation      = xi.emote.HARVESTING,
+        relocateRate   = 50,
+        campMultiplier = 2.2,
+        message        = 'HARVESTING_IS_POSSIBLE_HERE',
+        tool           = xi.item.SICKLE,
 
         zone =
         {
@@ -483,11 +484,12 @@ xi.helm.dataTable =
 
     [xi.helmType.EXCAVATION] =
     {
-        id           = 'EXCAVATION',
-        animation    = xi.emote.EXCAVATION,
-        relocateRate = 50,
-        message      = 'MINING_IS_POSSIBLE_HERE',
-        tool         = xi.item.PICKAXE,
+        id             = 'EXCAVATION',
+        animation      = xi.emote.EXCAVATION,
+        relocateRate   = 50,
+        campMultiplier = 1.6,
+        message        = 'MINING_IS_POSSIBLE_HERE',
+        tool           = xi.item.PICKAXE,
 
         zone =
         {
@@ -762,11 +764,12 @@ xi.helm.dataTable =
 
     [xi.helmType.LOGGING] =
     {
-        id = 'LOGGING',
-        animation    = xi.emote.LOGGING,
-        relocateRate = 100,
-        message      = 'LOGGING_IS_POSSIBLE_HERE',
-        tool         = xi.item.HATCHET,
+        id             = 'LOGGING',
+        animation      = xi.emote.LOGGING,
+        relocateRate   = 100,
+        campMultiplier = 2.1,
+        message        = 'LOGGING_IS_POSSIBLE_HERE',
+        tool           = xi.item.HATCHET,
 
         zone =
         {
@@ -1529,11 +1532,12 @@ xi.helm.dataTable =
 
     [xi.helmType.MINING] =
     {
-        id           = 'MINING',
-        animation    = xi.emote.EXCAVATION,
-        relocateRate = 50,
-        message      = 'MINING_IS_POSSIBLE_HERE',
-        tool         = xi.item.PICKAXE,
+        id             = 'MINING',
+        animation      = xi.emote.EXCAVATION,
+        relocateRate   = 50,
+        campMultiplier = 1.6,
+        message        = 'MINING_IS_POSSIBLE_HERE',
+        tool           = xi.item.PICKAXE,
 
         zone =
         {

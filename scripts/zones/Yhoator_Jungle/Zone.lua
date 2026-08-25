@@ -64,4 +64,8 @@ zoneObject.onZoneWeatherChange = function(weather)
     xi.helm.weatherChange(weather, { xi.weather.RAIN, xi.weather.SQUALL }, ID.npc.HARVESTING)
 end
 
+zoneObject.onZoneOut = function(player)
+    xi.helm.onZoneOut(player)
+end
+
 return zoneObject

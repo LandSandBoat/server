@@ -85,4 +85,8 @@ zoneObject.onGameHour = function(zone)
     end
 end
 
+zoneObject.onZoneOut = function(player)
+    xi.helm.onZoneOut(player)
+end
+
 return zoneObject
