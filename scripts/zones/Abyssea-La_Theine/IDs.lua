@@ -89,6 +89,7 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
     },
     npc =
     {
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 

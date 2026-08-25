@@ -87,6 +87,10 @@ zones[xi.zone.ABYSSEA_TAHRONGI] =
         GLAVOID_OFFSET  = GetFirstID('Glavoid'), -- 3 Copies: +0, +17, +20
         LACOVIE_OFFSET  = GetFirstID('Lacovie'), -- 3 Copies: +0, +17, +20
     },
+    npc =
+    {
+        EXCAVATION = GetTableOfIDs('Excavation_Point'),
+    },
 }
 
 return zones[xi.zone.ABYSSEA_TAHRONGI]
