@@ -284,6 +284,8 @@ end
 
 local function handleItemObtained(player, text, itemId)
     if itemId > 0 then
+        calculateSkillUp(player, text)
+
         -- Make sure we have enough room for the item.
         if player:addItem(itemId) then
             player:messageSpecial(text.ITEM_OBTAINED, itemId)
@@ -383,7 +385,6 @@ xi.chocoboDig.start = function(player)
     if trasureItemId > 0 then
         handleItemObtained(player, text, trasureItemId)
         handleFatigue(player, text, todayDigCount)
-        calculateSkillUp(player)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
         return true
@@ -423,7 +424,6 @@ xi.chocoboDig.start = function(player)
     then
         player:messageText(player, text.FIND_NOTHING)
     else
-        calculateSkillUp(player, text)
         handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
     end
