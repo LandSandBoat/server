@@ -377,7 +377,7 @@ xi.chocoboDig.start = function(player)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
-    -- Handle trasure layer. Incompatible with the other 3 layers. "Early" return.
+    -- Handle treasure layer. Incompatible with the other 3 layers. "Early" return.
     local trasureItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.TREASURE)
 
     if trasureItemId > 0 then
@@ -415,9 +415,6 @@ xi.chocoboDig.start = function(player)
         handleItemObtained(player, text, boreItemId)
     end
 
-    -- Handle skill-up
-    calculateSkillUp(player, text)
-
     -- Handle no item OR record of eminence.
     if
         regularItemId == 0 and
@@ -426,6 +423,7 @@ xi.chocoboDig.start = function(player)
     then
         player:messageText(player, text.FIND_NOTHING)
     else
+        calculateSkillUp(player, text)
         handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
     end
