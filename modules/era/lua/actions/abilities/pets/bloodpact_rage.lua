@@ -1,4 +1,5 @@
 -----------------------------------
+-- Module: Blood Pact: Rage era adjustments
 -- Date : 2016 November 10th Patch
 -- Notes: https://wiki.ffo.jp/html/35795.html
 --        Multihit skills' fTPs were lowered but the first hit fTP carried over into subsequent hits.
@@ -7,8 +8,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-
-local m = Module:new('rov_avatar_bloodpacts', xi.pre(xi.expansion.ROV))
+local m = Module:new('era_bloodpact_rage', xi.pre(xi.expansion.ROV))
 
 -----------------------------------
 -- Axe Kick
