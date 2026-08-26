@@ -5,27 +5,64 @@ require('modules/module_utils')
 -----------------------------------
 local m = Module:new('era_job_utils_paladin')
 
--- Rampart: Revert to a magical damage stoneskin effect for party members
--- TODO: find a patch note or source for this change
+-- Rampart: Revert to a defense bonus plus a magic damage barrier for party members
+-- Source: https://forum.square-enix.com/ffxi/threads/56444-February-12-2020-%28JST%29-Version-Update
 m:addOverrideByEra('xi.job_utils.paladin.useRampart', {
     [xi.expansion.ROV] = function(player, target, ability)
-        local duration    = 30 + player:getMod(xi.mod.RAMPART_DURATION)
-        local stoneskinHP = player:getStat(xi.mod.VIT) * 2
-        local defense     = player:getMainLvl() == 75 and 23 or 21
+        local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
+        local defense  = math.floor((player:getMainLvl() - 1) / 4 + 5)
 
-        -- Apply STONESKIN effect but display as RAMPART icon
-        target:addStatusEffect(xi.effect.STONESKIN, { power = defense, duration = duration, origin   = player, icon = xi.effect.RAMPART, subType  = 2, subPower = stoneskinHP })
+        -- Barrier is VIT * (1 + 0.5 * (members buffed - 1))
+        local members = 0
+        for _, member in pairs(player:getPartyWithTrusts()) do
+            if
+                member:isAlive() and
+                player:checkDistance(member) <= ability:getRadius()
+            then
+                members = members + 1
+            end
+        end
+
+        local barrier = math.floor(player:getStat(xi.mod.VIT) * (1 + 0.5 * (members - 1)))
+
+        target:addStatusEffect(xi.effect.RAMPART, { power = barrier, duration = duration, origin = player, subPower = defense })
 
         return xi.effect.RAMPART
     end,
 })
 
--- Stoneskin onEffectGain: Add defense buff when displayed as RAMPART
-m:addOverrideByEra('xi.effects.stoneskin.onEffectGain', {
+-- Rampart: DEF bonus in place of the damage taken reduction, power holds the magic barrier
+m:addOverrideByEra('xi.effects.rampart.onEffectGain', {
     [xi.expansion.ROV] = function(target, effect)
-        if effect:getIcon() == xi.effect.RAMPART then
-            effect:addMod(xi.mod.DEF, effect:getPower())
+        effect:addMod(xi.mod.DEF, effect:getSubPower())
+
+        if target:isPC() and target:hasTrait(xi.trait.IRON_WILL) then
+            effect:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
+
+            if target:getMod(xi.mod.ENHANCES_IRON_WILL) > 0 then
+                effect:addMod(xi.mod.FASTCAST, target:getMod(xi.mod.ENHANCES_IRON_WILL) * target:getMerit(xi.merit.IRON_WILL) / 19)
+            end
         end
+    end,
+})
+
+-- Remove rampart barrier prior to stoneskin
+m:addOverrideByEra('utils.handleStoneskin', {
+    [xi.expansion.ROV] = function(actor, damage, attackType)
+        if
+            damage > 0 and
+            attackType == xi.attackType.MAGICAL
+        then
+            local rampart = actor:getStatusEffect(xi.effect.RAMPART)
+            if rampart and rampart:getPower() > 0 then
+                local absorbed = math.min(rampart:getPower(), damage)
+
+                rampart:setPower(rampart:getPower() - absorbed)
+                damage = damage - absorbed
+            end
+        end
+
+        return super(actor, damage, attackType)
     end,
 })
 

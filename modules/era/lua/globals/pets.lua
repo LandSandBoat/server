@@ -7,8 +7,12 @@ require('modules/module_utils')
 -----------------------------------
 local m = Module:new('era_globals_pets', xi.pre(xi.expansion.ABYSSEA))
 
-m:addOverride('xi.pet.spawnPet', function(caster, petID, state, target)
-    super(caster, petID, state, target)
+m:addOverride('xi.pets.avatar.onMobSpawn', function(mob)
+    super(mob)
 
-    xi.job_utils.summoner.applySpiritPerpetuationCost(caster)
+    local master = mob:getMaster()
+
+    if master and master:isPC() then
+        xi.job_utils.summoner.applySpiritPerpetuationCost(master)
+    end
 end)

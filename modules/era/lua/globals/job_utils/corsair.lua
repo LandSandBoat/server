@@ -134,6 +134,102 @@ m:addOverrideByEra('xi.server.onServerStart', {
     end,
 })
 
+-- Light Shot / Dark Shot: Revert Dia and Bio effect boost to +5% defense/attack down instead of +2%.
+-- Source: https://forum.square-enix.com/ffxi/threads/55263-April.-3-2019-%28JST%29-Version-Update
+m:addOverrideByEra('xi.job_utils.corsair.handleQuickDrawEffectBoost', {
+    [xi.expansion.ABYSSEA] = function(player, target, abilityId, multiplier)
+        local effectData = xi.job_utils.corsair.quickDrawEffectBoostTable[abilityId]
+        if not effectData then
+            return
+        end
+
+        -- Gather eligible effects that have not yet been boosted.
+        local effects = {}
+        for _, entryTable in ipairs(effectData) do
+            local effectChecked = target:getStatusEffect(entryTable.effectId)
+
+            if effectChecked then
+                local eligible = false
+
+                -- Check for Dia/Bio.
+                if entryTable.basePowerByTier then
+                    local basePower = entryTable.basePowerByTier[effectChecked:getTier()]
+                    eligible        = basePower and effectChecked:getSubPower() <= basePower
+
+                -- Check for all other eligible effects
+                else
+                    eligible = effectChecked:getPower() < entryTable.capGlobal
+                end
+
+                if eligible then
+                    table.insert(effects, { effect = effectChecked, entry = entryTable })
+                end
+            end
+        end
+
+        -- Early return: No effect can be boosted, either because it's capped or isn't present.
+        if #effects <= 0 then
+            return
+        end
+
+        -- Select effect entry from table and fetch it's content.
+        local selected = effects[math.randomInt(1, #effects)]
+        local effect   = selected.effect
+        local entry    = selected.entry
+
+        -- Fetch effect data.
+        local effectId        = effect:getEffectType()
+        local effectPower     = effect:getPower()
+        local effectTick      = effect:getTick() / 1000
+        local effectDuration  = effect:getDuration() / 1000
+        local effectSubPower  = effect:getSubPower()
+        local effectSubType   = effect:getSubType()
+        local effectTier      = effect:getTier()
+        local effectStartTime = effect:getStartTime()
+        local effectOriginID  = effect:getOriginID()
+
+        -- Apply boost to Dia or Bio effects. They can only be boosted once. "Cannot be stacked."
+        if entry.basePowerByTier then
+            if effectId == xi.effect.DIA then
+                effectPower = effectPower + 1
+            end
+
+            effectSubPower = effectSubPower + 5
+
+        -- Apply boost to all other eligible effects.
+        else
+            if effectId >= xi.effect.BURN and effectId <= xi.effect.DROWN then
+                effectPower = math.min(effectPower + 2, entry.capGlobal)
+            else
+                effectPower = math.min(effectPower * multiplier, entry.capGlobal)
+            end
+        end
+
+        -- Remove the existing effect and reapply it with the new power/subPower values.
+        target:delStatusEffectSilent(effectId)
+
+        local params =
+        {
+            power    = effectPower,
+            tick     = effectTick,
+            duration = effectDuration,
+            subPower = effectSubPower,
+            subType  = effectSubType,
+            tier     = effectTier,
+            origin   = player,
+        }
+
+        target:addStatusEffect(effectId, params)
+
+        -- Update the start time and origin ID of the new effect to match the original effect.
+        local newEffect = target:getStatusEffect(effectId)
+        if newEffect then
+            newEffect:setStartTime(effectStartTime)
+            newEffect:setOriginID(effectOriginID)
+        end
+    end,
+})
+
 -- Healer's Roll: Revert from Cure potency bonus to MP heal bonus
 -- TODO: find a patch note or source for this change
 m:addOverrideByEra('xi.effects.healers_roll.onEffectGain', {
