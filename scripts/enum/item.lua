@@ -2575,6 +2575,7 @@ xi.item =
     REMEDY                              = 4155,
     BOTTLE_OF_MULSUM                    = 4156,
     FLASK_OF_POISON_POTION              = 4157,
+    FLASK_OF_VENOM_POTION               = 4158,
     FLASK_OF_SLEEPING_POTION            = 4161,
     FLASK_OF_SILENCING_POTION           = 4162,
     FLASK_OF_BLINDNESS_POTION           = 4163,

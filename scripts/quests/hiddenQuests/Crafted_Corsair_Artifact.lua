@@ -1,5 +1,5 @@
 -----------------------------------
--- Crafted Corsair Artifact
+-- Crafted Corsair Artifact (COR AF)
 -----------------------------------
 -- Leleroon                                 : !pos -14.687 0.000 25.114 53
 -- Raqtibahl  (San d'Oria - Corsair's Frac) : !pos -59.000 -4.000 -39.000 232
@@ -12,44 +12,6 @@ local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 
 local quest = HiddenQuest:new('CorArtifact')
 
-local function canStartCommission(player)
-    return player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= xi.questStatus.QUEST_ACCEPTED
-end
-
-local function getExcludedCommissionMask(player)
-    local completedCommissions = quest:getVar(player, 'Completed')
-    local excludedCommissions = 0
-
-    if utils.mask.getBit(completedCommissions, 0) then
-        excludedCommissions = excludedCommissions + 2
-    end
-
-    if utils.mask.getBit(completedCommissions, 1) then
-        excludedCommissions = excludedCommissions + 4
-    end
-
-    if utils.mask.getBit(completedCommissions, 2) then
-        excludedCommissions = excludedCommissions + 8
-    end
-
-    return excludedCommissions
-end
-
-local function hasCompletedCommission(player, option)
-    return utils.mask.getBit(quest:getVar(player, 'Completed'), option - 1)
-end
-
-local function hasCompletedRedCommission(player)
-    return hasCompletedCommission(player, 3)
-end
-
-local function hasCompletedAllCommissions(player)
-    return
-        hasCompletedCommission(player, 1) and
-        hasCompletedCommission(player, 2) and
-        hasCompletedCommission(player, 3)
-end
-
 local function finishCommission(player)
     quest:setVarBit(player, 'Completed', quest:getVar(player, 'Option') - 1)
     quest:setVar(player, 'Prog', 0)
@@ -61,151 +23,7 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return canStartCommission(player)
-        end,
-
-        [xi.zone.NASHMAU] =
-        {
-            ['Leleroon'] =
-            {
-                onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-                    local questOption = quest:getVar(player, 'Option')
-
-                    if questProgress >= 1 and questProgress <= 4 then
-                        if questOption == 1 then
-                            return quest:progressEvent(285)
-                        elseif questOption == 2 then
-                            return quest:progressEvent(286)
-                        elseif questOption == 3 then
-                            return quest:progressEvent(287)
-                        end
-                    elseif
-                        questProgress == 0 and
-                        not hasCompletedAllCommissions(player)
-                    then
-                        return quest:progressEvent(282, { [7] = getExcludedCommissionMask(player) })
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [282] = function(player, csid, option, npc)
-                    if
-                        option >= 1 and
-                        option <= 3 and
-                        not hasCompletedCommission(player, option)
-                    then
-                        if option == 1 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_GREEN)
-                        elseif option == 2 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_BLUE)
-                        elseif option == 3 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_RED)
-                        end
-
-                        quest:setVar(player, 'Option', option)
-                        quest:setVar(player, 'Prog', 1)
-                        quest:setVar(player, 'Timer', 0)
-                    end
-                end,
-            },
-        },
-    },
-
-    {
-        check = function(player, questVars, vars)
-            return canStartCommission(player)
-        end,
-
-        [xi.zone.WINDURST_WATERS] =
-        {
-            ['Door_House'] =
-            {
-                onTrade = function(player, npc, trade)
-                    if
-                        npc:getID() == windurstWatersID.npc.LELEROON_GREEN_DOOR and
-                        quest:getVar(player, 'Option') == 1
-                    then
-                        local questProgress = quest:getVar(player, 'Prog')
-
-                        if
-                            questProgress == 2 and
-                            npcUtil.tradeHasExactly(
-                                trade,
-                                {
-                                    xi.item.SPOOL_OF_GOLD_THREAD,
-                                    xi.item.SQUARE_OF_KARAKUL_LEATHER,
-                                    xi.item.SQUARE_OF_RED_GRASS_CLOTH,
-                                    xi.item.SPOOL_OF_WAMOURA_SILK,
-                                }
-                            )
-                        then
-                            return quest:progressEvent(943)
-                        elseif
-                            questProgress == 3 and
-                            npcUtil.tradeHasExactly(trade, { { xi.item.IMPERIAL_MYTHRIL_PIECE, 4 } })
-                        then
-                            return quest:progressEvent(946)
-                        end
-                    end
-                end,
-
-                onTrigger = function(player, npc)
-                    if
-                        npc:getID() == windurstWatersID.npc.LELEROON_GREEN_DOOR and
-                        quest:getVar(player, 'Option') == 1
-                    then
-                        local questProgress = quest:getVar(player, 'Prog')
-
-                        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_GREEN) then
-                            return quest:progressEvent(941)
-                        elseif questProgress == 2 then
-                            return quest:progressEvent(942)
-                        elseif questProgress == 3 then
-                            return quest:progressEvent(954)
-                        elseif questProgress == 4 then
-                            if quest:getVar(player, 'Timer') <= VanadielUniqueDay() then
-                                return quest:progressEvent(944)
-                            else
-                                return quest:progressEvent(945)
-                            end
-                        end
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [941] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
-                end,
-
-                [943] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:setVar(player, 'Prog', 3)
-                end,
-
-                [944] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.CORSAIRS_GANTS) then
-                        finishCommission(player)
-                    end
-                end,
-
-                [946] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:setVar(player, 'Prog', 4)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                end,
-            },
-        },
-    },
-
-    {
-        check = function(player, questVars, vars)
-            return canStartCommission(player)
+            return player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -221,20 +39,20 @@ quest.sections =
 
                         if
                             questProgress == 2 and
-                            npcUtil.tradeHasExactly(
+                            npcUtil.tradeMatches(
                                 trade,
                                 {
-                                    xi.item.MYTHRIL_SHEET,
-                                    xi.item.SQUARE_OF_KARAKUL_LEATHER,
-                                    xi.item.SQUARE_OF_LM_BUFFALO_LEATHER,
-                                    xi.item.SQUARE_OF_WOLF_FELT,
+                                    { xi.item.MYTHRIL_SHEET,                 1 },
+                                    { xi.item.SQUARE_OF_KARAKUL_LEATHER,     1 },
+                                    { xi.item.SQUARE_OF_LM_BUFFALO_LEATHER,  1 },
+                                    { xi.item.SQUARE_OF_WOLF_FELT,           1 },
                                 }
                             )
                         then
                             return quest:progressEvent(521)
                         elseif
                             questProgress == 3 and
-                            npcUtil.tradeHasExactly(trade, { { xi.item.IMPERIAL_MYTHRIL_PIECE, 4 } })
+                            npcUtil.tradeMatches(trade, { { xi.item.IMPERIAL_MYTHRIL_PIECE, 4 } })
                         then
                             return quest:progressEvent(524)
                         end
@@ -251,14 +69,18 @@ quest.sections =
                         if player:hasKeyItem(xi.ki.LELEROONS_LETTER_BLUE) then
                             return quest:progressEvent(519)
                         elseif questProgress == 2 then
-                            return quest:progressEvent(520)
+                            return quest:event(520)
                         elseif questProgress == 3 then
-                            return quest:progressEvent(535)
+                            return quest:event(535)
                         elseif questProgress == 4 then
-                            if quest:getVar(player, 'Timer') <= VanadielUniqueDay() then
+                            -- The piece is handed over a day later, after leaving the area.
+                            if
+                                quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
+                                not quest:getMustZone(player)
+                            then
                                 return quest:progressEvent(522)
                             else
-                                return quest:progressEvent(523)
+                                return quest:event(523)
                             end
                         end
                     end
@@ -273,7 +95,7 @@ quest.sections =
                 end,
 
                 [521] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     quest:setVar(player, 'Prog', 3)
                 end,
 
@@ -284,18 +106,68 @@ quest.sections =
                 end,
 
                 [524] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     quest:setVar(player, 'Prog', 4)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setMustZone(player)
                 end,
             },
         },
-    },
 
-    {
-        check = function(player, questVars, vars)
-            return canStartCommission(player)
-        end,
+        [xi.zone.NASHMAU] =
+        {
+            ['Leleroon'] =
+            {
+                onTrigger = function(player, npc)
+                    local questProgress = quest:getVar(player, 'Prog')
+                    local questOption = quest:getVar(player, 'Option')
+
+                    if questProgress >= 1 and questProgress <= 4 then
+                        if questOption == 1 then
+                            return quest:event(285)
+                        elseif questOption == 2 then
+                            return quest:event(286)
+                        elseif questOption == 3 then
+                            return quest:event(287)
+                        end
+                    elseif
+                        questProgress == 0 and
+                        quest:getVar(player, 'Completed') ~= 7
+                    then
+                        -- The introduction is only played for a first time customer.
+                        -- The menu hides a finished piece one bit above its Completed bit.
+                        return quest:progressEvent(282,
+                        {
+                            [1] = quest:getVar(player, 'Completed') ~= 0 and 1 or 0,
+                            [7] = quest:getVar(player, 'Completed') * 2,
+                        })
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [282] = function(player, csid, option, npc)
+                    if
+                        option >= 1 and
+                        option <= 3 and
+                        not utils.mask.getBit(quest:getVar(player, 'Completed'), option - 1)
+                    then
+                        if option == 1 then
+                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_GREEN)
+                        elseif option == 2 then
+                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_BLUE)
+                        elseif option == 3 then
+                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_RED)
+                        end
+
+                        quest:setVar(player, 'Option', option)
+                        quest:setVar(player, 'Prog', 1)
+                        quest:setVar(player, 'Timer', 0)
+                    end
+                end,
+            },
+        },
 
         [xi.zone.PORT_SAN_DORIA] =
         {
@@ -307,20 +179,20 @@ quest.sections =
 
                         if
                             questProgress == 2 and
-                            npcUtil.tradeHasExactly(
+                            npcUtil.tradeMatches(
                                 trade,
                                 {
-                                    xi.item.GOLD_CHAIN,
-                                    xi.item.SQUARE_OF_VELVET_CLOTH,
-                                    xi.item.SQUARE_OF_RED_GRASS_CLOTH,
-                                    xi.item.SQUARE_OF_SAILCLOTH,
+                                    { xi.item.GOLD_CHAIN,                 1 },
+                                    { xi.item.SQUARE_OF_VELVET_CLOTH,     1 },
+                                    { xi.item.SQUARE_OF_RED_GRASS_CLOTH,  1 },
+                                    { xi.item.SQUARE_OF_SAILCLOTH,        1 },
                                 }
                             )
                         then
                             return quest:progressEvent(755)
                         elseif
                             questProgress == 3 and
-                            npcUtil.tradeHasExactly(trade, xi.item.IMPERIAL_GOLD_PIECE)
+                            npcUtil.tradeMatches(trade, { { xi.item.IMPERIAL_GOLD_PIECE, 1 } })
                         then
                             return quest:progressEvent(760)
                         end
@@ -334,18 +206,22 @@ quest.sections =
                         if player:hasKeyItem(xi.ki.LELEROONS_LETTER_RED) then
                             return quest:progressEvent(753)
                         elseif questProgress == 2 then
-                            return quest:progressEvent(754)
+                            return quest:event(754)
                         elseif questProgress == 3 then
-                            return quest:progressEvent(761)
+                            return quest:event(761)
                         elseif questProgress == 4 then
-                            if quest:getVar(player, 'Timer') <= VanadielUniqueDay() then
+                            -- The piece is handed over a day later, after leaving the area.
+                            if
+                                quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
+                                not quest:getMustZone(player)
+                            then
                                 return quest:progressEvent(756)
                             else
-                                return quest:progressEvent(757)
+                                return quest:event(757)
                             end
                         end
-                    elseif hasCompletedRedCommission(player) then
-                        return quest:progressEvent(758)
+                    elseif utils.mask.getBit(quest:getVar(player, 'Completed'), 2) then
+                        return quest:event(758)
                     end
                 end,
             },
@@ -358,7 +234,7 @@ quest.sections =
                 end,
 
                 [755] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     quest:setVar(player, 'Prog', 3)
                 end,
 
@@ -369,9 +245,98 @@ quest.sections =
                 end,
 
                 [760] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     quest:setVar(player, 'Prog', 4)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setMustZone(player)
+                end,
+            },
+        },
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Door_House'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        npc:getID() == windurstWatersID.npc.LELEROON_GREEN_DOOR and
+                        quest:getVar(player, 'Option') == 1
+                    then
+                        local questProgress = quest:getVar(player, 'Prog')
+
+                        if
+                            questProgress == 2 and
+                            npcUtil.tradeMatches(
+                                trade,
+                                {
+                                    { xi.item.SPOOL_OF_GOLD_THREAD,       1 },
+                                    { xi.item.SQUARE_OF_KARAKUL_LEATHER,  1 },
+                                    { xi.item.SQUARE_OF_RED_GRASS_CLOTH,  1 },
+                                    { xi.item.SPOOL_OF_WAMOURA_SILK,      1 },
+                                }
+                            )
+                        then
+                            return quest:progressEvent(943)
+                        elseif
+                            questProgress == 3 and
+                            npcUtil.tradeMatches(trade, { { xi.item.IMPERIAL_MYTHRIL_PIECE, 4 } })
+                        then
+                            return quest:progressEvent(946)
+                        end
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if
+                        npc:getID() == windurstWatersID.npc.LELEROON_GREEN_DOOR and
+                        quest:getVar(player, 'Option') == 1
+                    then
+                        local questProgress = quest:getVar(player, 'Prog')
+
+                        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_GREEN) then
+                            return quest:progressEvent(941)
+                        elseif questProgress == 2 then
+                            return quest:event(942)
+                        elseif questProgress == 3 then
+                            return quest:event(954)
+                        elseif questProgress == 4 then
+                            -- The piece is handed over a day later, after leaving the area.
+                            if
+                                quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
+                                not quest:getMustZone(player)
+                            then
+                                return quest:progressEvent(944)
+                            else
+                                return quest:event(945)
+                            end
+                        end
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [941] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 2)
+                    player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
+                end,
+
+                [943] = function(player, csid, option, npc)
+                    player:tradeComplete()
+                    quest:setVar(player, 'Prog', 3)
+                end,
+
+                [944] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, xi.item.CORSAIRS_GANTS) then
+                        finishCommission(player)
+                    end
+                end,
+
+                [946] = function(player, csid, option, npc)
+                    player:tradeComplete()
+                    quest:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    quest:setMustZone(player)
                 end,
             },
         },
