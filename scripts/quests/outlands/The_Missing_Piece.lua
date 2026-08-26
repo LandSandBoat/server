@@ -115,12 +115,12 @@ quest.sections =
                         progress == 3 and
                         GetSystemTime() < quest:getVar(player, 'Wait')
                     then
-                        return quest:event(704) -- Player has not waited a game day
+                        return quest:event(704) -- Player has not finished the wait
                     elseif
                         progress == 3 and
                         GetSystemTime() >= quest:getVar(player, 'Wait')
                     then
-                        return quest:progressEvent(705) -- Player has waited a game day. Quest Finished
+                        return quest:progressEvent(705) -- Player has finished the wait. Quest finished
                     end
                 end,
             },
