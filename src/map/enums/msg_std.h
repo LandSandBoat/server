@@ -94,10 +94,11 @@ enum class MsgStd : uint16_t
     CannotPerformNoPetra         = 210, // You cannot perform that action without a Petra.
     LostYourPetras               = 211, // You lost your Petras.
     GateBreachDisengaged         = 212, // Gate Breach status has been disengaged.
+    RecoveryInSeconds            = 213, // Recovery in 0 seconds.
     ReturningToBattle            = 214, // Returning to battle.
     ReturningToCamp              = 215, // Returning to camp.
-    CannotPerformInConflict      = 216, // This action cannot be performed while participating in Conflict.
-    CannotPerformPreparingBattle = 216, // This action cannot be performed while preparing for battle.
+    CannotPerformInConflict      = 216, // That action cannot be performed while participating in Conflict.
+    CannotPerformPreparingBattle = 217, // That action cannot be performed while preparing for battle.
     ChevronsEarned               = 219, // Chevrons earned: Gold: 0 Mythril: 0 Silver: 0 Bronze: 0 Job: 0
     ItemEx                       = 220, // You cannot possess more than one of that item.
     BlockaidActivated            = 221, // Blockaid activated. Magical assistance, trades, party invites etc. from non-party/alliance characters will be blocked. This effect will continue until changing areas, or executing the "/blockaid off" command.
