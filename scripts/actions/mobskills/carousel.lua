@@ -7,11 +7,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobType.NOTORIOUS) then -- TODO: Set proper skill lists
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
