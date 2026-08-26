@@ -25,6 +25,7 @@
 ---@field onMobRoamAction? fun(mob: CBaseEntity)
 ---@field onMobRoam? fun(mob: CBaseEntity)
 ---@field onMobDespawn? fun(mob: CBaseEntity)
+---@field onTrigger? fun(player: CBaseEntity, mob: CBaseEntity): -1|nil -- Used for edge cases where mobs can be triggered like NPCs (Cursed Chests in Golden Salvage)
 ---@field onPlayerAbilityUse? fun(mob: CBaseEntity, player: CBaseEntity, ability: CAbility)
 ---@field onMobMobskillChoose? fun(mob: CBaseEntity, target: CBaseEntity, skillId: integer): integer?
 ---@field onMobWeaponSkill? fun(mob: CBaseEntity, target: CBaseEntity, mobSkill: CMobSkill, action: CAction): integer?

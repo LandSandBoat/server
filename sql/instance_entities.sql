@@ -62,10 +62,13 @@ INSERT INTO `instance_entities` VALUES (5500,17002655);
 INSERT INTO `instance_entities` VALUES (5500,17002720);
 INSERT INTO `instance_entities` VALUES (5500,17002724);
 INSERT INTO `instance_entities` VALUES (5500,17002725);
+INSERT INTO `instance_entities` VALUES (5500,17002726);
 INSERT INTO `instance_entities` VALUES (5500,17002731);
 INSERT INTO `instance_entities` VALUES (5500,17002732);
+INSERT INTO `instance_entities` VALUES (5500,17002733);
 INSERT INTO `instance_entities` VALUES (5500,17002752);
 INSERT INTO `instance_entities` VALUES (5500,17002753);
+INSERT INTO `instance_entities` VALUES (5500,17002754);
 
 -- Lamia No. 13
 -- mobs
