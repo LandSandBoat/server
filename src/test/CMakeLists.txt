@@ -73,6 +73,7 @@ add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/regions_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/settings_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/item_container_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp
     ${resource})
