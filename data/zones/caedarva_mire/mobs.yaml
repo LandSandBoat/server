@@ -365,7 +365,6 @@ templates:
   Chigoe:
     id:            714
     species:       chigoe
-    type:          [battlefield]
     roam:          [stealth]
     skill_list_id: 64
     attributes:
@@ -414,7 +413,6 @@ templates:
     id:            7299
     display_name:  Chigoe
     species:       chigoe
-    type:          [battlefield]
     roam:          [stealth]
     skill_list_id: 64
     attributes:
@@ -464,7 +462,6 @@ templates:
     id:            7188
     display_name:  Chigoe
     species:       chigoe
-    type:          [battlefield]
     roam:          [stealth]
     skill_list_id: 64
     attributes:

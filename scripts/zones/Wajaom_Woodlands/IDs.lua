@@ -43,7 +43,8 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     {
         CHIGOES =
         {
-            ['Marid'] = GetTableOfIDs('Chigoe', 5),
+            ['Marid']       = GetTableOfIDs('Chigoe'),
+            ['Grand_Marid'] = GetTableOfIDs('Chigoe'),
         },
         JADED_JODY             = GetFirstID('Jaded_Jody'),
         ZORAAL_JAS_PKUUCHA     = GetFirstID('Zoraal_Jas_Pkuucha'),

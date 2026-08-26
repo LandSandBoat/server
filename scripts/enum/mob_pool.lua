@@ -24,6 +24,7 @@ xi.mobPool =
     INGESTER               = 2080, -- Fission (Number of Adds)
     INGURGITATOR           = 2081, -- Fission (Number of Adds)
     KING_VINEGARROON       = 2262, -- KV poison on Wild Rage
+    MOSSHORN               = 2753, -- Sheds two chigoes per TP move
     NIDHOGG                = 2840, -- Nidhogg's stronger hurricane wing
     HPEMDE_DIVING          = 2976, -- Om'hpemde in south half of Al'Taieu: the only hpemde that dive
     OSSCHAART              = 3064, -- Osschaart's charm duration.
