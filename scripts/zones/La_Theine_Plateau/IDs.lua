@@ -24,6 +24,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         DIG_THROW_AWAY                = 7249,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7251,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7326,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7331,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         RESCUE_DRILL                  = 7409,  -- Rescue drills in progress. Try to stay out of the way.
         FAURBELLANT_1                 = 7449,  -- Greetings. traveler. Sorry, I've little time to chat. I must focus on my prayer.
         FAURBELLANT_2                 = 7450,  -- Ah, the <item>! Thank you for making such a long journey to bring this! May the Gates of Paradise open to all.

@@ -23,6 +23,7 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         DIG_THROW_AWAY                = 7267, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7269, -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7344, -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7349, -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         MONSTER_TRACKS                = 7425, -- You see monster tracks on the ground.
         MONSTER_TRACKS_FRESH          = 7426, -- You see fresh monster tracks on the ground.
         NOTHING_SEEMS_HAPPENING       = 7427, -- Nothing seems to be happening.

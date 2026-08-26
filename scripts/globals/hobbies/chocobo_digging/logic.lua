@@ -127,7 +127,7 @@ local function checkDiggingCooldowns(player)
     local isAllowedZone = diggingZoneList[player:getZoneID()] or false
 
     if not isAllowedZone then
-        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED)
 
         return false
     end
@@ -137,12 +137,10 @@ local function checkDiggingCooldowns(player)
     local skillRank    = player:getSkillRank(xi.skill.DIG)
     local zoneCooldown = player:getLocalVar('ZoneInTime') + utils.clamp(60 - skillRank * 5, 10, 60)
     local digCooldown  = player:getLocalVar('[DIG]LastDigTime') + utils.clamp(15 - skillRank * 5, 3, 16)
+    local cooldown     = math.max(zoneCooldown, digCooldown)
 
-    if
-        currentTime < zoneCooldown or
-        currentTime < digCooldown
-    then
-        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+    if currentTime < cooldown then
+        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED, math.max(cooldown - currentTime, 0), 0) -- Yes, SE sends the cooldown in this packet as of 2026.
 
         return false
     end
@@ -150,13 +148,14 @@ local function checkDiggingCooldowns(player)
     return true
 end
 
-local function calculateSkillUp(player)
+local function calculateSkillUp(player, text)
     local skillRank = player:getSkillRank(xi.skill.DIG)
     local maxSkill  = utils.clamp((skillRank + 1) * 100, 0, 1000)
     local realSkill = player:getCharSkillLevel(xi.skill.DIG)
     local increment = 1
 
     -- this probably needs correcting
+    -- it seems skilling up gets harder as your rank goes up
     local roll = math.randomInt(1, 100)
 
     -- make sure our skill isn't capped
@@ -170,10 +169,20 @@ local function calculateSkillUp(player)
             -- skill up!
             player:setSkillLevel(xi.skill.DIG, realSkill + increment)
 
+            local newSkill = realSkill + increment
             -- update the skill rank
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
-            if (realSkill + increment) >= (skillRank * 100) + 100 then
+            if newSkill >= (skillRank * 100) + 100 then
                 player:setSkillRank(xi.skill.DIG, skillRank + 1)
+            end
+
+            if newSkill % 10 == 0 then
+                if text and text.BEASTMEN_CACHE_OFFSET then
+                    -- Conquest Cache + 5 = "Your wing skill improved to X"
+                    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, math.floor(newSkill / 10), 1) -- TODO: what is the "1" in the params?
+                else
+                    print(string.format('warning: Zone %s (%d) is missing ID.text.BEASTMEN_CACHE_OFFSET', player:getZoneName(), player:getZoneID()))
+                end
             end
         end
     end
@@ -275,6 +284,8 @@ end
 
 local function handleItemObtained(player, text, itemId)
     if itemId > 0 then
+        calculateSkillUp(player, text)
+
         -- Make sure we have enough room for the item.
         if player:addItem(itemId) then
             player:messageSpecial(text.ITEM_OBTAINED, itemId)
@@ -368,13 +379,12 @@ xi.chocoboDig.start = function(player)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
-    -- Handle trasure layer. Incompatible with the other 3 layers. "Early" return.
+    -- Handle treasure layer. Incompatible with the other 3 layers. "Early" return.
     local trasureItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.TREASURE)
 
     if trasureItemId > 0 then
         handleItemObtained(player, text, trasureItemId)
         handleFatigue(player, text, todayDigCount)
-        calculateSkillUp(player)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
         return true
@@ -405,9 +415,6 @@ xi.chocoboDig.start = function(player)
 
         handleItemObtained(player, text, boreItemId)
     end
-
-    -- Handle skill-up
-    calculateSkillUp(player)
 
     -- Handle no item OR record of eminence.
     if

@@ -30,6 +30,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         FIND_NOTHING                   = 7288,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET             = 7354,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE           = 7363,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET          = 7368,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SONG_RUNES_DEFAULT             = 7394,  -- An old momument. A melancholy song of two separated lovers is written upon it.
         SONG_RUNES_REQUIRE             = 7408,  -- If only you had <item>, you could jot down the lyrics.
         SONG_RUNES_WRITING             = 7409,  -- You write down the lyrics on the <item>.

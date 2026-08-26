@@ -25,6 +25,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         FIND_NOTHING                  = 7247,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7313,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7322,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7327,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         THE_DOOR_IS_LOCKED            = 7353,  -- The door is locked.
         DOES_NOT_RESPOND              = 7354,  -- It does not respond.
         CANNOT_REMOVE_FRAG            = 7370,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...

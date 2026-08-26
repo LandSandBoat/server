@@ -33,6 +33,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         FIND_NOTHING                  = 7589,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7655,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7664,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7669,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         FLOWER_BLOOMING               = 7681,  -- A large flower is blooming.
         FOUND_NOTHING_IN_FLOWER       = 7684,  -- You find nothing inside the flower.
         FEEL_DIZZY                    = 7685,  -- You feel slightly dizzy. You must have breathed in too much of the pollen.

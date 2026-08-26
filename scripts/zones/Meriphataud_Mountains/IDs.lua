@@ -29,6 +29,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         FIND_NOTHING                  = 7269,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7335,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FOUND_ITEM_WITH_EASE          = 7344,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7349,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         NOTHING_FOUND                 = 7513,  -- You find nothing.
         CONQUEST                      = 7925,  -- You've earned conquest points!
         ITEMS_ITEMS_LA_LA             = 8299,  -- You can hear a strange voice... Items, items, la la la la la

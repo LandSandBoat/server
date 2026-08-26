@@ -27,6 +27,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         DIG_THROW_AWAY                = 7275,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7277,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7352,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7357,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         THF_AF_MOB                    = 7440,  -- Something has come down from the tower!
         THF_AF_WALL_OFFSET            = 7459,  -- It is impossible to climb this wall with your bare hands.
         PLAYER_OBTAINS_ITEM           = 7522,  -- <name> obtains <item>!

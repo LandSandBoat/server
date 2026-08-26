@@ -25,6 +25,7 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         DIG_THROW_AWAY                = 7267,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7269,  -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7344,  -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7349,  -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         SIGN                          = 7425,  -- North: Grand Duchy of Jeuno, Sauromugue Champaign South: Pashhow Marshlands
         TIME_ELAPSED                  = 7482,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
         PLAYER_OBTAINS_ITEM           = 7606,  -- <name> obtains <item>!

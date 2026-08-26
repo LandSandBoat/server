@@ -22,6 +22,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         DIG_THROW_AWAY                = 7082, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7084, -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7159, -- It appears your chocobo found this item with ease.
+        BEASTMEN_CACHE_OFFSET         = 7164, -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         STAGING_GATE_CLOSER           = 7330, -- You must move closer.
         STAGING_GATE_INTERACT         = 7331, -- This gate guards an area under Imperial control.
         STAGING_GATE_MAMOOL           = 7333, -- Mamool Ja Staging Point.
