@@ -11,6 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
 quest.reward =
 {
     item     = xi.item.TIME_HAMMER,
+    gil      = 1200,
     title    = xi.title.TIMEKEEPER,
 }
 
