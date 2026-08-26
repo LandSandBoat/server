@@ -888,7 +888,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
     }
 
     const auto detects         = static_cast<xi::Detects>(PMob->getMobMod(xi::MobMod::Detection));
-    const auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(xi::Mod::STEALTH);
+    const auto currentDistance = distance(PTarget->loc.p, PMob->loc.p);
     const bool detectSight     = ((detects & xi::Detects::Sight) != xi::Detects::None) || forceSight;
 
     // Illusion overrides true detection, but mobs that see through it still respect real sneak.
