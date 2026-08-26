@@ -250,6 +250,11 @@ void SetEminenceRecordCompletion(CCharEntity* PChar, const uint16 recordID, cons
 {
     TracyZoneScoped;
 
+    if (recordID >= 4096)
+    {
+        return;
+    }
+
     uint16 page = recordID / 8;
     uint8  bit  = recordID % 8;
     if (newStatus)
@@ -272,6 +277,11 @@ void SetEminenceRecordCompletion(CCharEntity* PChar, const uint16 recordID, cons
 auto GetEminenceRecordCompletion(const CCharEntity* PChar, const uint16 recordID) -> bool
 {
     TracyZoneScoped;
+
+    if (recordID >= 4096)
+    {
+        return false;
+    }
 
     const uint16 page = recordID / 8;
     const uint8  bit  = recordID % 8;
