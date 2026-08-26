@@ -34,12 +34,12 @@ m:addOverrideByEra('xi.server.onServerStart', {
 
         xi.job_utils.beastmaster.petFoodData =
         {
-            [xi.item.PET_FOOD_ALPHA_BISCUIT]   = { minHealing =  25, regen =  1, mndMult = 2, mndThreshold = 10 },
-            [xi.item.PET_FOOD_BETA_BISCUIT]    = { minHealing =  50, regen =  3, mndMult = 1, mndThreshold = 33 },
-            [xi.item.PET_FOOD_GAMMA_BISCUIT]   = { minHealing = 100, regen =  5, mndMult = 1, mndThreshold = 35 },
-            [xi.item.PET_FOOD_DELTA_BISCUIT]   = { minHealing = 150, regen =  8, mndMult = 2, mndThreshold = 40 },
-            [xi.item.PET_FOOD_EPSILON_BISCUIT] = { minHealing = 300, regen = 11, mndMult = 2, mndThreshold = 45 },
-            [xi.item.PET_FOOD_ZETA_BISCUIT]    = { minHealing = 350, regen = 14, mndMult = 3, mndThreshold = 45 },
+            [xi.item.PET_FOOD_ALPHA_BISCUIT]   = { minHealing =  25, regen = 1, mndMult = 2, mndThreshold = 10 },
+            [xi.item.PET_FOOD_BETA_BISCUIT]    = { minHealing =  50, regen = 2, mndMult = 1, mndThreshold = 33 },
+            [xi.item.PET_FOOD_GAMMA_BISCUIT]   = { minHealing = 100, regen = 3, mndMult = 1, mndThreshold = 35 },
+            [xi.item.PET_FOOD_DELTA_BISCUIT]   = { minHealing = 150, regen = 4, mndMult = 2, mndThreshold = 40 },
+            [xi.item.PET_FOOD_EPSILON_BISCUIT] = { minHealing = 300, regen = 5, mndMult = 2, mndThreshold = 45 },
+            [xi.item.PET_FOOD_ZETA_BISCUIT]    = { minHealing = 350, regen = 6, mndMult = 3, mndThreshold = 45 },
         }
     end,
 })
