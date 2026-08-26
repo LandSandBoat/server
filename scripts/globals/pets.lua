@@ -116,26 +116,39 @@ xi.pet.spawnPet = function(caster, petID, state, target)
                 end)
             end
         elseif petID == xi.petId.ODIN then
-            if target then
-                caster:petAttack(target)
-                --pet:timer(5000, function()
-                --    pet:usePetAbility(xi.jobAbility.ZANTETSUKEN, target)
-                --end)
+            local pet = caster:getPet()
+            if pet then
+                pet:timer(5000, function()
+                    if target and target:isAlive() then
+                        pet:usePetAbility(xi.jobAbility.ZANTETSUKEN, target)
+                    end
+                end)
+                -- Retail Odin despawns 15 seconds after appearing even if he fails to use Zantetsuken
+                pet:timer(15000, function()
+                    caster:despawnPet()
+                end)
             end
         elseif petID == xi.petId.ATOMOS then
-            if target then
-                -- Use Deconstruction on the target 3 seconds after spawning.
-                local pet = caster:getPet()
-                if pet then
-                    -- Timed sequence after spawning, wait -> Deconstruction -> wait -> Chronoshift (despawn pet after complete)
-                    pet:timer(3000, function()
+            local pet = caster:getPet()
+            if pet then
+                -- Timed sequence after spawning, wait -> Deconstruction -> wait -> Chronoshift -> despawn
+                -- Full cycle takes 5s -> 5s -> 5s from summon to despawn + charge times which ends up at about 17s
+                -- On retail the behavior appears to be that Atomos will always do Deconstruction if the target is in range
+                -- If the target moves out of range, Atomos still does Chronoshift as long as the summoner is within 30 yalms
+                -- If the target and the summoner are both out of range then Atomos just waits and despawns
+                pet:timer(5000, function()
+                    if target and target:isAlive() then
                         pet:usePetAbility(xi.jobAbility.DECONSTRUCTION, target)
-                    end)
-
-                    pet:timer(10000, function()
-                        pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
-                    end)
-                end
+                    end
+                end)
+                -- 11 seconds here gives time for the animation to consistently line up to retail
+                pet:timer(11000, function()
+                    pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
+                end)
+                -- Ensure Atomos always despawns
+                pet:timer(17000, function()
+                    caster:despawnPet()
+                end)
             end
         end
     end
