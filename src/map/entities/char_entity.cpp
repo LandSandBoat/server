@@ -695,6 +695,12 @@ void CCharEntity::setAutomatonHead(const AutomatonHead head)
 
 void CCharEntity::setAutomatonAttachment(const uint8 slotid, const uint8 id)
 {
+    if (slotid >= automatonInfo_.equip.attachments.size())
+    {
+        ShowWarningFmt("setAutomatonAttachment: slot {} out of range", slotid);
+        return;
+    }
+
     automatonInfo_.equip.attachments[slotid] = id;
 }
 
@@ -736,6 +742,12 @@ auto CCharEntity::getAutomatonHead() const -> AutomatonHead
 
 auto CCharEntity::getAutomatonAttachment(const uint8 slotid) const -> uint8
 {
+    if (slotid >= automatonInfo_.equip.attachments.size())
+    {
+        ShowWarningFmt("getAutomatonAttachment: slot {} out of range", slotid);
+        return 0;
+    }
+
     return automatonInfo_.equip.attachments[slotid];
 }
 

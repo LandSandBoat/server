@@ -210,7 +210,7 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
         if (pupData.ItemId == 0x00)
         {
             // remove all attachments specified
-            for (uint8 i = 0; i < sizeof(pupData.Slots); i++)
+            for (uint8 i = static_cast<uint8>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
             {
                 if (pupData.Slots[i] != 0)
                 {
@@ -231,7 +231,7 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
             }
             else
             {
-                for (uint8 i = 0; i < sizeof(pupData.Slots); i++)
+                for (uint8 i = static_cast<uint8>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
                 {
                     if (pupData.Slots[i] != 0)
                     {

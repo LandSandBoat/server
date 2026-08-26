@@ -73,12 +73,13 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
         // Create a holding vector for entries to be transmitted
         std::vector<FishingContestEntry> entries;
 
-        const int   maxFakes     = settings::get<int>("main.MAX_FAKE_ENTRIES");
-        const uint8 realEntries  = fishingcontest::FishingRankEntryCount();
-        const uint8 fakeEntries  = realEntries >= maxFakes ? 0 : maxFakes - realEntries;
-        uint8       totalEntries = realEntries + fakeEntries;
-        uint8       entryVal     = 0;
-        const uint8 blockSize    = sizeof(FishingContestEntry); // Should be 36
+        const int   maxFakes            = settings::get<int>("main.MAX_FAKE_ENTRIES");
+        const uint8 realEntries         = fishingcontest::FishingRankEntryCount();
+        const uint8 fakeEntries         = realEntries >= maxFakes ? 0 : maxFakes - realEntries;
+        uint8       totalEntries        = realEntries + fakeEntries;
+        uint8       entryVal            = 0;
+        const uint8 blockSize           = sizeof(FishingContestEntry); // Should be 36
+        const uint8 maxEntriesPerPacket = 6;                           // self block plus five leaderboard entries
 
         FishingContestEntry selfEntry = {};
 
@@ -128,7 +129,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
         // Add the next five blocks until we are out of entries
         if (msgChunk == 1 || msgChunk == 2)
         {
-            while (entries.size() <= (this->data_size / blockSize))
+            while (entries.size() < maxEntriesPerPacket && entries.size() <= (this->data_size / blockSize))
             {
                 // Create a copy of the ranking entry and hold it in the local entry vector
                 // This vector is cleared once the packets are sent
