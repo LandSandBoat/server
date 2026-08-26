@@ -1088,9 +1088,9 @@ INSERT INTO `mob_skills` VALUES (1053,432,'super_buff',0,0.0,1.0,2000,0,1,0,0,0,
 INSERT INTO `mob_skills` VALUES (1057,349,'aerial_wheel',0,0.0,7.0,1600,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1058,350,'shoulder_attack',0,0.0,7.0,1750,2000,4,0,0,1,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1059,351,'slam_dunk',0,0.0,7.0,2000,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
-INSERT INTO `mob_skills` VALUES (1060,352,'arm_block',0,0.0,7.0,1000,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1060,352,'arm_block_dynamis',0,0.0,7.0,1000,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1061,353,'battle_dance',1,0.0,15.0,2300,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
-INSERT INTO `mob_skills` VALUES (1062,354,'howl',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1062,354,'howl_dynamis',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
 -- INSERT INTO `mob_skills` VALUES (1063,807,'bow',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1064,351,'jump',0,0.0,9.5,4000,2000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1065,21,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
@@ -1098,16 +1098,16 @@ INSERT INTO `mob_skills` VALUES (1066,740,'fanatic_dance',1,0.0,10.0,3800,2000,4
 INSERT INTO `mob_skills` VALUES (1067,741,'doom',0,0.0,9.0,1700,200,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1068,361,'feather_storm',0,0.0,7.0,1700,2000,4,0,0,0,0,0,0); -- Dynamis Yagudo
 INSERT INTO `mob_skills` VALUES (1069,362,'double_kick',0,0.0,7.0,2400,2000,4,0,0,1,0,0,0); -- Dynamis Yagudo
-INSERT INTO `mob_skills` VALUES (1070,363,'parry',0,0.0,7.0,2100,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1070,363,'parry_dynamis',0,0.0,7.0,2100,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
 INSERT INTO `mob_skills` VALUES (1071,364,'sweep',1,0.0,10.0,3500,2000,4,0,0,0,0,0,0); -- Dynamis Yagudo
-INSERT INTO `mob_skills` VALUES (1072,354,'howl',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1072,354,'howl_dynamis',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
 INSERT INTO `mob_skills` VALUES (1073,741,'doom',0,0.0,9.0,1700,200,4,0,0,0,0,0,0); -- Dynamis Yagudo
 INSERT INTO `mob_skills` VALUES (1074,742,'the_wrath_of_gudha',1,0.0,15.0,1900,1000,4,0,0,7,0,0,0);
 INSERT INTO `mob_skills` VALUES (1075,355,'ore_toss',0,0.0,15.0,2200,3000,4,0,0,0,0,0,0); -- Dynamis Quadav
 INSERT INTO `mob_skills` VALUES (1076,356,'head_butt_quadav',0,0.0,7.0,3000,3000,4,0,0,1,0,0,0); -- Dynamis Quadav
 INSERT INTO `mob_skills` VALUES (1077,357,'shell_bash',0,0.0,7.0,1900,500,4,0,0,0,0,0,0); -- Dynamis Quadav
-INSERT INTO `mob_skills` VALUES (1078,358,'shell_guard',0,0.0,7.0,1700,3000,1,0,0,0,0,0,0); -- Dynamis Quadav
-INSERT INTO `mob_skills` VALUES (1079,354,'howl',1,0.0,20.0,1500,500,1,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1078,358,'shell_guard_dynamis',0,0.0,7.0,1700,3000,1,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1079,354,'howl_dynamis',1,0.0,20.0,1500,500,1,0,0,0,0,0,0); -- Dynamis Quadav
 INSERT INTO `mob_skills` VALUES (1080,742,'the_wrath_of_gudha',1,0.0,15.0,1900,1000,4,0,0,7,0,0,0); -- Dynamis Quadav
 INSERT INTO `mob_skills` VALUES (1081,743,'frypan',1,0.0,15.0,2500,2800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1082,744,'smokebomb',4,0.0,10.0,3900,2000,4,0,0,0,0,0,0);
