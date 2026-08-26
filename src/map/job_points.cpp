@@ -65,8 +65,8 @@ void CJobPoints::LoadJobPoints()
 bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
 {
     if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) ||
-        (JobPointsCategoryIndexByJpType(jpType) - 1 > JOBPOINTS_CATEGORY_COUNT) ||
-        (JobPointTypeIndex(jpType) > JOBPOINTS_JPTYPE_PER_CATEGORY))
+        (JobPointsCategoryIndexByJpType(jpType) - 1 >= JOBPOINTS_CATEGORY_COUNT) ||
+        (JobPointTypeIndex(jpType) >= JOBPOINTS_JPTYPE_PER_CATEGORY))
     {
         return false;
     }
