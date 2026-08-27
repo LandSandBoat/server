@@ -604,7 +604,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
         ----------------------------------
         -- Handle Utsusemi and Blink
         ----------------------------------
-        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(target, skill, params, params.shadowBehavior)
+        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, params.shadowBehavior)
 
         ----------------------------------
         -- Calculate Hit Rate
@@ -838,7 +838,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         ----------------------------------
         -- Handle Utsusemi and Blink
         ----------------------------------
-        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(target, skill, params, params.shadowBehavior)
+        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, params.shadowBehavior)
 
         ----------------------------------
         -- Calculate Hit Rate
@@ -1084,7 +1084,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
 
     -- TODO: SAM Yaegasumi ability.
 
-    hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(target, skill, skillParams, shadowsToRemove)
+    hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, skillParams, shadowsToRemove)
 
     if hitAbsorbed then
         skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
@@ -1292,7 +1292,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
 
     -- TODO: SAM Yaegasumi ability.
 
-    hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(target, skill, skillParams, shadowsToRemove)
+    hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, skillParams, shadowsToRemove)
 
     if hitAbsorbed then
         skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
@@ -1657,11 +1657,12 @@ xi.mobskills.unequipRandomSlots = function(target, numberToUnequip)
     end
 end
 
+---@param mob CBaseEntity
 ---@param target CBaseEntity
 ---@param skill CMobSkill|CPetSkill
 ---@param params table
 ---@param shadowsToRemove xi.mobskills.shadowBehavior | integer
-xi.mobskills.handleShadowConsumption = function(target, skill, params, shadowsToRemove)
+xi.mobskills.handleShadowConsumption = function(mob, target, skill, params, shadowsToRemove)
     local shadowsConsumed  = 0
     local shadowsMitigated = 0
     local hitAbsorbed      = false
@@ -1717,8 +1718,19 @@ xi.mobskills.handleShadowConsumption = function(target, skill, params, shadowsTo
         end
 
         local finalRemoval = attemptedShadowRemoval - shadowsMitigated
+        local hadUtsusemi  = target:getMod(xi.mod.UTSUSEMI) > 0
 
         hitAbsorbed, shadowsConsumed = utils.shadowAbsorb(target, finalRemoval)
+
+        -- Player loses 25 CE per shadow image created by Utsusemi that is absorbed by an attack.
+        -- https://www.playonline.com/pcd/update/ff11us/20050715Pm01B1/detail.html
+        if
+            hadUtsusemi and
+            shadowsConsumed > 0 and
+            target:isPC()
+        then
+            target:addEnmity(mob, -25 * shadowsConsumed, 0)
+        end
     end
 
     return hitAbsorbed, shadowsConsumed
