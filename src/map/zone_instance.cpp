@@ -268,10 +268,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
             zoneutils::GetZone(zoneid)->IncreaseZoneCounter(PChar);
         }
 
-        // They are properly sent to zone, but bypassed the onZoneIn position fixup, do that now
-        PChar->loc.prevzone    = GetID();
-        PChar->loc.destination = zoneid;
-        luautils::OnZoneIn(PChar);
+        PChar->loc.prevzone = GetID();
         charutils::SaveCharPosition(PChar);
     }
 }

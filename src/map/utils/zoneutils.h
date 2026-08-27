@@ -56,6 +56,8 @@ auto ProcessLoadQueue(Scheduler& scheduler, MapConfig config) -> Task<void>;
 
 auto IsLazyLoadingEnabled() -> bool;
 
+void EnsureZoneLoaded(Scheduler& scheduler, MapConfig config, xi::ZoneId zoneId);
+
 // TODO:
 // This shouldn't have side effects, it should be const and the caller should be responsible
 // for requesting the zone is loaded if it isn't ready.

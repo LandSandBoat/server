@@ -463,6 +463,7 @@ public:
 
     WarpRequest requestedWarp       = WarpRequest::None; // see WarpRequest. This will be processed after the player's tick to warp.
     bool        requestedZoneChange = false;             // used in CLueBaseEntity::setPos(). This will be processed after the player's tick to change zones.
+    bool        arrivedByZoning     = false;             // set from char_stats.zoning by LoadChar, read by the 0x00A handler once the char is in its zone.
 
     uint8 GetGender();
 

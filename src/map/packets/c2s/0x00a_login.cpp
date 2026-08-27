@@ -25,6 +25,7 @@
 #include "ai/ai_container.h"
 #include "ai/helpers/action_queue.h"
 #include "entities/char_entity.h"
+#include "lua/luautils.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x04f_equip_clear.h"
 #include "packets/s2c/0x050_equip_list.h"
@@ -96,6 +97,15 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         }
 
         destZone->IncreaseZoneCounter(PChar);
+
+        if (PChar->loc.zone == nullptr)
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_LOGIN: {} was not placed in zone {}", PChar->getName(), destination);
+            return;
+        }
+
+        luautils::OnZoneIn(PChar);
+        luautils::OnGameIn(PChar, PChar->arrivedByZoning);
 
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());

@@ -438,7 +438,7 @@ void CalculateStats(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> std::unique_ptr<CCharEntity>
+auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
 {
     TracyZoneScoped;
 
@@ -845,6 +845,8 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
 
     db::preparedStmt("UPDATE char_stats SET zoning = 0 WHERE charid = ? LIMIT 1", PChar->id);
 
+    PChar->arrivedByZoning = zoning == 1;
+
     if (zoning == 2)
     {
         ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
@@ -993,18 +995,6 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
     PChar->health.hp = canRestore ? PChar->GetMaxHP() : HP;
     PChar->health.mp = canRestore ? PChar->GetMaxMP() : MP;
     PChar->UpdateHealth();
-
-    // Lazy loading: ensure initial zone is loaded synchronously before OnZoneIn
-    // TODO: Hoist his block out of LoadChar() so we're guaranteeing that a char's zone exists
-    //     : before we try to put them in it.
-    if (zoneutils::IsLazyLoadingEnabled() && !zoneutils::GetZone(PChar->loc.destination))
-    {
-        // TODO: Remove this usage of blockOnMain, it's here to help with xi_test
-        scheduler.blockOnMainThread(zoneutils::LoadZones(scheduler, config, { PChar->loc.destination }));
-    }
-
-    luautils::OnZoneIn(PChar);
-    luautils::OnGameIn(PChar, zoning == 1);
 
     PChar->status = xi::Status::Disappear;
 

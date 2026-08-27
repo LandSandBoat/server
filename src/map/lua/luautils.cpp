@@ -2442,12 +2442,12 @@ void OnZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    CZone* destinationZone = zoneutils::GetZone(PChar->loc.destination);
+    CZone* destinationZone = zoneutils::GetZone(PChar->getZone());
     if (!destinationZone)
     {
         if (!PChar->inMogHouse())
         {
-            ShowWarning("Attempt to Zone In player to invalid/disabled zone %d.", PChar->loc.destination);
+            ShowWarning("Attempt to Zone In player to invalid/disabled zone %d.", PChar->getZone());
         }
         return;
     }

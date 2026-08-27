@@ -994,6 +994,17 @@ auto IsLazyLoadingEnabled() -> bool
     return lazyLoad.enabled;
 }
 
+void EnsureZoneLoaded(Scheduler& scheduler, MapConfig config, const xi::ZoneId zoneId)
+{
+    if (!IsLazyLoadingEnabled() || GetZone(zoneId))
+    {
+        return;
+    }
+
+    // TODO: Remove this usage of blockOnMain, it's here to help with xi_test
+    scheduler.blockOnMainThread(LoadZones(scheduler, config, { zoneId }));
+}
+
 // Returns all zones managed by this process (ID and name)
 // - Lazy mode: queries database for zone names
 // - Immediate mode: uses already-loaded zone objects
