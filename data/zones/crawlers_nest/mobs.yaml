@@ -52,21 +52,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -480,21 +465,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -528,21 +498,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -720,21 +675,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -908,21 +848,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -952,21 +877,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1066,21 +976,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1423,21 +1318,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1469,21 +1349,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1513,21 +1378,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1858,21 +1708,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
