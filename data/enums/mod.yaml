@@ -125,6 +125,7 @@ values:
   storetp:                   73 # Increases the rate at which TP is gained
   tactical_parry:           486 # Tactical Parry Tp Bonus
   inhibit_tp:               488 # Inhibits TP Gain (percent)
+  eva_percent:             1214 # % Evasion Multiplier
   # Working Skills (weapon combat skills)
   # These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
   hth:                80 # Hand To Hand Skill
@@ -1275,4 +1276,4 @@ values:
 
   # The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
   # 570 through 825 used by WS DMG mods these are not spares.
-  # SPARE IDs: 1214 and onward
+  # SPARE IDs: 1215 and onward
