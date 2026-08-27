@@ -950,19 +950,19 @@ xi.helm.dataTable =
                 obtainRate = 72.87, -- n=12962, 95% CI +/-0.77pp
                 breakRate  = 10.15, -- n=12962, 95% CI +/-0.52pp
 
+                -- TODO: Babban freelancer shifts weights and introduces Jacaranda log if working for your nation
                 drops =
                 {
-                    { 1890, xi.item.ARROWWOOD_LOG      },
-                    { 1400, xi.item.ASH_LOG            },
-                    { 1430, xi.item.MAPLE_LOG          },
-                    { 1270, xi.item.WALNUT             },
-                    {  850, xi.item.CHESTNUT_LOG       },
-                    { 1000, xi.item.RONFAURE_CHESTNUT  },
-                    {  760, xi.item.WALNUT_LOG         },
-                    {  490, xi.item.BAG_OF_FRUIT_SEEDS },
-                    {   40, xi.item.JACARANDA_LOG      },
-                    {  400, xi.item.OAK_LOG            },
-                    {  290, xi.item.TEAK_LOG           },
+                    { 1920, xi.item.ARROWWOOD_LOG      }, -- n=1811/9446, 95% CI +/-0.79pp
+                    { 1680, xi.item.ASH_LOG            }, -- n=1583/9446, 95% CI +/-0.75pp
+                    { 1660, xi.item.MAPLE_LOG          }, -- n=1569/9446, 95% CI +/-0.75pp
+                    { 1340, xi.item.WALNUT             }, -- n=1270/9446, 95% CI +/-0.69pp
+                    {  820, xi.item.CHESTNUT_LOG       }, -- n= 777/9446, 95% CI +/-0.55pp
+                    {  690, xi.item.RONFAURE_CHESTNUT  }, -- n= 650/9446, 95% CI +/-0.51pp
+                    {  660, xi.item.WALNUT_LOG         }, -- n= 623/9446, 95% CI +/-0.50pp
+                    {  530, xi.item.OAK_LOG            }, -- n= 505/9446, 95% CI +/-0.45pp
+                    {  390, xi.item.BAG_OF_FRUIT_SEEDS }, -- n= 366/9446, 95% CI +/-0.39pp
+                    {  310, xi.item.TEAK_LOG           }, -- n= 292/9446, 95% CI +/-0.35pp
                 },
 
                 points =
@@ -1003,19 +1003,20 @@ xi.helm.dataTable =
             {
                 obtainRate = 68.20, -- n=10089, 95% CI +/-0.91pp
                 breakRate  = 13.99, -- n=10089, 95% CI +/-0.68pp
-                minLevel  = 20,
+                minLevel   = 20,
 
+                -- TODO: Babban freelancer shifts weights if working for your nation
                 drops =
                 {
-                    { 2000, xi.item.WALNUT        },
-                    { 1540, xi.item.WALNUT_LOG    },
-                    { 1140, xi.item.ARROWWOOD_LOG },
-                    { 1090, xi.item.ASH_LOG       },
-                    {  860, xi.item.OAK_LOG       },
-                    {  860, xi.item.WILLOW_LOG    },
-                    {  510, xi.item.ACORN         },
-                    {  170, xi.item.JACARANDA_LOG },
-                    {  230, xi.item.TEAK_LOG      },
+                    { 1790, xi.item.ARROWWOOD_LOG }, -- n=1234/6881, 95% CI +/-0.91pp
+                    { 1590, xi.item.WALNUT        }, -- n=1093/6881, 95% CI +/-0.86pp
+                    { 1570, xi.item.ASH_LOG       }, -- n=1082/6881, 95% CI +/-0.86pp
+                    { 1470, xi.item.WALNUT_LOG    }, -- n=1011/6881, 95% CI +/-0.84pp
+                    { 1360, xi.item.WILLOW_LOG    }, -- n= 933/6881, 95% CI +/-0.81pp
+                    { 1020, xi.item.OAK_LOG       }, -- n= 700/6881, 95% CI +/-0.71pp
+                    {  760, xi.item.ACORN         }, -- n= 525/6881, 95% CI +/-0.63pp
+                    {  390, xi.item.TEAK_LOG      }, -- n= 267/6881, 95% CI +/-0.46pp
+                    {   50, xi.item.JACARANDA_LOG }, -- n=  36/6881, 95% CI +/-0.17pp
                 },
 
                 points =
@@ -1057,17 +1058,17 @@ xi.helm.dataTable =
             {
                 obtainRate = 52.51, -- n=18304, 95% CI +/-0.72pp
                 breakRate  =  7.44, -- n=18304, 95% CI +/-0.38pp
-                minLevel  = 20,
+                minLevel   = 20,
 
+                -- TODO: Babban freelancer shifts weights and introduces Optical Needle if working for your nation
                 drops =
                 {
-                    { 2910, xi.item.FLASK_OF_HOLY_WATER },
-                    { 2230, xi.item.PAIR_OF_NOPALES     },
-                    { 1650, xi.item.DRAGON_FRUIT        },
-                    { 1490, xi.item.BIRD_FEATHER        },
-                    { 1250, xi.item.BIRD_EGG            },
-                    {  170, xi.item.BAG_OF_CACTUS_STEMS },
-                    {   50, xi.item.OPTICAL_NEEDLE      },
+                    { 2700, xi.item.FLASK_OF_HOLY_WATER }, -- n=2600/9612, 95% CI +/-0.89pp
+                    { 2420, xi.item.PAIR_OF_NOPALES     }, -- n=2327/9612, 95% CI +/-0.86pp
+                    { 1860, xi.item.DRAGON_FRUIT        }, -- n=1788/9612, 95% CI +/-0.78pp
+                    { 1500, xi.item.BIRD_FEATHER        }, -- n=1440/9612, 95% CI +/-0.71pp
+                    { 1320, xi.item.BIRD_EGG            }, -- n=1266/9612, 95% CI +/-0.68pp
+                    {  200, xi.item.BAG_OF_CACTUS_STEMS }, -- n= 191/9612, 95% CI +/-0.28pp
                 },
 
                 points =
