@@ -31,6 +31,7 @@
 #include "packets/s2c/0x00b_logout.h"
 
 #include "utils/charutils.h"
+#include "utils/zoneutils.h"
 
 #include "ipc_client.h"
 #include "latent_effect_container.h"
@@ -302,13 +303,16 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSess
                 ShowError("recv_parse: Cannot load session_key for charid %u", packetCharID);
             }
 
-            PSession->PChar     = charutils::LoadChar(scheduler_, config_, packetCharID);
+            PSession->PChar     = charutils::LoadChar(packetCharID);
             PSession->charID    = packetCharID;
             PSession->accountID = accountID;
 
             auto* PChar = PSession->PChar.get();
 
             PChar->PSession = PSession;
+
+            // the 0x00A handler puts the char in this zone, so it has to be loaded before it gets there
+            zoneutils::EnsureZoneLoaded(scheduler_, config_, PChar->loc.destination);
 
             // If we're a new char on a new instance and prevzone != zone
             if (PSession->blowfish.status == BLOWFISH_WAITING && PChar->loc.destination != PChar->loc.prevzone)

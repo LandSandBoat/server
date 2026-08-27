@@ -176,5 +176,15 @@ describe('Item transaction invariants', function()
             assert(binned, 'the stack reached neither inventory nor the recycle bin')
             assert(binned:state() == xi.itemState.FREE, 'binned state: ' .. tostring(binned:state()))
         end)
+
+        -- character creation runs from the login sequence, and the gil it claims has to come back Free
+        it('leaves gil usable after character creation', function()
+            local newPlayer = xi.test.world:spawnPlayer({ zone = xi.zone.GM_HOME, new = true })
+            local gilBefore = newPlayer:getGil()
+
+            newPlayer:addGil(50)
+
+            assert(newPlayer:getGil() == gilBefore + 50, 'gil after creation: ' .. tostring(newPlayer:getGil()))
+        end)
     end)
 end)
