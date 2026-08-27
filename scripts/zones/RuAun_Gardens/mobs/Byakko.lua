@@ -24,12 +24,19 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setBaseSpeed(68)
     mob:setMod(xi.mod.ATT, 391) -- 440 total attack.
     mob:setMod(xi.mod.DEF, 345) -- 415 total defense.
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
 
-    mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 11) -- Spawn message
     GetNPCByID(ID.npc.PORTAL_OFFSET + 8):setAnimation(xi.animation.CLOSE_DOOR)
+
+    -- Add slight delay to allow Byakko to load in before the message is sent
+    mob:timer(300, function(mobArg)
+        if mobArg then
+            mobArg:messageText(mobArg, ID.text.SKY_GOD_OFFSET + 11)
+        end
+    end)
 
     -- Sky gods wait 10 seconds after spawning to start casting
     mob:setMagicCastingEnabled(false)

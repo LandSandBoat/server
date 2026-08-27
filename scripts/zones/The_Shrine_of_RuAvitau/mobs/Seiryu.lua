@@ -8,6 +8,15 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    -- Uses Hundred Fists despite WAR main job (observed in every capture set)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.mobSkill.HUNDRED_FISTS_1 },
+        },
+    })
+
+    mob:setBaseSpeed(75)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
     mob:setMod(xi.mod.REGAIN, 450)

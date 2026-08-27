@@ -229,8 +229,12 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
         xi.mob.updateNMSpawnPoint(nm, params.spawnPoints or nil)
     end
 
-    -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
-    nm:setRespawnTime(params.immediate and 1 or GetMobRespawnTime(phId))
+    -- Respawns are processed in 30s waves, so a 1s timer is not immediate. Spawn directly instead.
+    if params.immediate then
+        SpawnMob(nmId)
+    else
+        nm:setRespawnTime(GetMobRespawnTime(phId))
+    end
 
     nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
         -- on NM death, replace NM repop with PH repop

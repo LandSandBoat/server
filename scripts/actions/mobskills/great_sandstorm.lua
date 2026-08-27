@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl()
-    params.fTP            = { 3, 3, 3 }
+    params.fTP            = { 4, 4, 4 }
     params.element        = xi.element.EARTH
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.EARTH
