@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <glaze/glaze.hpp>
 #include <glaze/yaml.hpp>
 
 #include <stdexcept>
@@ -36,13 +37,15 @@ inline constexpr glz::opts kStrictYaml{
 
 // Decode one YAML document with strict field checks.
 template <class T>
-auto read(const std::string_view yaml) -> T
+auto read(const std::string_view text) -> T
 {
     T          value{};
-    const auto error = glz::read_yaml<kStrictYaml>(value, yaml);
+    const auto first = text.find_first_not_of(" \t\r\n");
+    const auto json  = first != std::string_view::npos && (text[first] == '{' || text[first] == '[');
+    const auto error = json ? glz::read<kStrictYaml>(value, text) : glz::read_yaml<kStrictYaml>(value, text);
     if (error)
     {
-        throw std::runtime_error(glz::format_error(error, yaml));
+        throw std::runtime_error(glz::format_error(error, text));
     }
 
     return value;

@@ -21,12 +21,9 @@
 
 #pragma once
 
-// Datasets that merge module YAML over a core file. Kept out of loader.h because moduleutils pulls in the map's Lua layer.
-
 #include "common/logging.h"
 #include "data/loader.h"
 #include "data/yaml/merge.h"
-#include "utils/moduleutils.h"
 
 #include <chrono>
 #include <exception>
@@ -42,7 +39,7 @@ auto loadDataset() -> typename Dataset::Records
     const auto dataPath = Dataset::kDataPath;
     const auto start    = std::chrono::steady_clock::now();
     const auto corePath = fmt::format("data/{}.yaml", dataPath);
-    const auto modules  = moduleutils::GetDataModules(dataPath, ".yaml");
+    const auto modules  = getDataModulePaths(dataPath, ".yaml");
 
     try
     {
