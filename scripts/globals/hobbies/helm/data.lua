@@ -1608,22 +1608,29 @@ xi.helm.dataTable =
                 breakRate  = 46.67, -- n=11577, 95% CI +/-0.91pp
                 minLevel  = 20,
 
+                dailyCap =
+                {
+                    [xi.item.CHUNK_OF_ADAMAN_ORE] = 10,
+                    [xi.item.CHUNK_OF_KHROMA_ORE] = 2,
+                },
+
                 drops =
                 {
-                    { 2250, xi.item.PINCH_OF_SULFUR      },
-                    { 2990, xi.item.CHUNK_OF_IRON_ORE    },
-                    { 1590, xi.item.HANDFUL_OF_IRON_SAND },
-                    { 1540, xi.item.FLINT_STONE          },
-                    { 1340, xi.item.PINCH_OF_BOMB_ASH    },
-                    {  960, xi.item.SUIT_OF_MOBLIN_MAIL  },
-                    { 1150, xi.item.MOBLIN_HELM          },
-                    {  450, xi.item.SUIT_OF_MOBLIN_ARMOR },
-                    {  380, xi.item.TROLL_PAULDRON       },
-                    {  450, xi.item.TROLL_VAMBRACE       },
-                    {  430, xi.item.MOBLIN_MASK          },
-                    {  210, xi.item.DEMON_HORN           },
-                    {  140, xi.item.CHUNK_OF_ADAMAN_ORE  },
-                    {   30, xi.item.CHUNK_OF_KHROMA_ORE  },
+                    { 1580, xi.item.CHUNK_OF_IRON_ORE    }, -- n=1373/8690, 95% CI +/-0.77pp
+                    { 1370, xi.item.SLAB_OF_PLUMBAGO     }, -- n=1190/8690, 95% CI +/-0.72pp
+                    { 1360, xi.item.PINCH_OF_BOMB_ASH    }, -- n=1181/8690, 95% CI +/-0.72pp
+                    { 1330, xi.item.HANDFUL_OF_IRON_SAND }, -- n=1153/8690, 95% CI +/-0.71pp
+                    { 1310, xi.item.PINCH_OF_SULFUR      }, -- n=1138/8690, 95% CI +/-0.71pp
+                    { 1160, xi.item.FLINT_STONE          }, -- n=1011/8690, 95% CI +/-0.67pp
+                    {  290, xi.item.TROLL_VAMBRACE       }, -- n= 254/8690, 95% CI +/-0.35pp
+                    {  280, xi.item.DEMON_HORN           }, -- n= 239/8690, 95% CI +/-0.34pp
+                    {  270, xi.item.SUIT_OF_MOBLIN_MAIL  }, -- n= 238/8690, 95% CI +/-0.34pp
+                    {  270, xi.item.MOBLIN_HELM          }, -- n= 236/8690, 95% CI +/-0.34pp
+                    {  270, xi.item.MOBLIN_MASK          }, -- n= 235/8690, 95% CI +/-0.34pp
+                    {  260, xi.item.SUIT_OF_MOBLIN_ARMOR }, -- n= 222/8690, 95% CI +/-0.33pp
+                    {  250, xi.item.TROLL_PAULDRON       }, -- n= 214/8690, 95% CI +/-0.33pp
+                    {  100, xi.item.CHUNK_OF_ADAMAN_ORE  }, -- Special: rate goes down with each obtain and is capped daily
+                    {   15, xi.item.CHUNK_OF_KHROMA_ORE  }, -- Special: rate goes down with each obtain and is capped daily
                 },
 
                 points =

@@ -16,6 +16,8 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
+    xi.helm.onZoneIn(player)
+
     if prevZone == xi.zone.LEBROS_CAVERN then
         player:setPos(681.950, -24.00, 369.936, 40)
     elseif

@@ -44,6 +44,40 @@ local breakMods =
     [xi.helmType.EXCAVATION] = nil,
 }
 
+local function getDropWeight(player, zoneId, zoneInfo, drop)
+    local dailyCap = zoneInfo.dailyCap
+    local limit    = dailyCap and dailyCap[drop[2]]
+    if not limit then
+        return drop[1]
+    end
+
+    local capVar   = string.format('[HELM]DailyCap[%u][%u]', zoneId, drop[2])
+    local obtained = player:getCharVar(capVar)
+    if obtained >= limit then
+        return 0
+    end
+
+    return math.floor(drop[1] / (obtained + 1))
+end
+
+local function incrementDailyCap(player, zoneId, zoneInfo, itemId)
+    local dailyCap = zoneInfo.dailyCap
+    local limit    = dailyCap and dailyCap[itemId]
+    if not limit then
+        return
+    end
+
+    local capVar   = string.format('[HELM]DailyCap[%u][%u]', zoneId, itemId)
+    local resetVar = string.format('[HELM]DailyCap[%u][ResetTime]', zoneId)
+    local obtained = math.min(player:getCharVar(capVar) + 1, limit)
+
+    if player:getCharVar(resetVar) == 0 then
+        player:setCharVar(resetVar, JstMidnight())
+    end
+
+    player:setCharVar(capVar, obtained)
+end
+
 local function hasCampPenalty(player, npc, helmType)
     local positionIndex = npc:getLocalVar('[HELM]PositionIndex')
     if positionIndex == 0 then
@@ -97,7 +131,8 @@ end
 
 local function pickItem(player, info)
     local zoneId   = player:getZoneID()
-    local minLevel = info.zone[zoneId].minLevel or 0
+    local zoneInfo = info.zone[zoneId]
+    local minLevel = zoneInfo.minLevel or 0
 
     -- some zones award nothing below a level requirement, the tool still breaks
     if player:getMainLvl() < minLevel then
@@ -105,17 +140,19 @@ local function pickItem(player, info)
     end
 
     -- found nothing
-    if math.randomFloat(0, 100) >= info.zone[zoneId].obtainRate then
+    if math.randomFloat(0, 100) >= zoneInfo.obtainRate then
         return 0
     end
 
     -- possible drops
-    local drops = info.zone[zoneId].drops
+    local drops   = zoneInfo.drops
+    local weights = {}
 
     -- sum weights
     local sum = 0
     for i = 1, #drops do
-        sum = sum + drops[i][1]
+        weights[i] = getDropWeight(player, zoneId, zoneInfo, drops[i])
+        sum = sum + weights[i]
     end
 
     -- pick weighted result
@@ -124,7 +161,7 @@ local function pickItem(player, info)
     sum = 0
 
     for i = 1, #drops do
-        sum = sum + drops[i][1]
+        sum = sum + weights[i]
         if sum >= pick then
             item = drops[i][2]
             break
@@ -174,6 +211,18 @@ xi.helm.initZone = function(zone, helmType)
             movePoint(nil, npc, zoneId, info, helmType)
         end
     end
+end
+
+xi.helm.onZoneIn = function(player)
+    local zoneId    = player:getZoneID()
+    local capPrefix = string.format('[HELM]DailyCap[%u]', zoneId)
+    local resetTime = player:getCharVar(capPrefix .. '[ResetTime]')
+    if resetTime == 0 or GetSystemTime() < resetTime then
+        return
+    end
+
+    -- The new daily pool is applied on zone-in, not while the player remains in the zone.
+    player:clearVarsWithPrefix(capPrefix)
 end
 
 xi.helm.onZoneOut = function(player)
@@ -260,7 +309,9 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
 
         -- success! reward item and roll to relocate the point
         if itemID ~= 0 then
-            player:addItem(itemID)
+            if player:addItem(itemID) then
+                incrementDailyCap(player, zoneId, info.zone[zoneId], itemID)
+            end
 
             if math.randomInt(1, 100) <= info.relocateRate then
                 movePoint(player, npc, zoneId, info, helmType)
