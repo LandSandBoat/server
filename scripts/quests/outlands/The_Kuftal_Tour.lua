@@ -2,8 +2,8 @@
 -- The Kuftal Tour
 -----------------------------------
 -- Log ID : 5, Quest ID: 195
--- Datta  : !pos -43.9 -10 -2.4 237
--- qm5    : !pos -29.195 -22.159 -183.716
+-- Datta  : !pos -24.768 8.324 70.722 247
+-- qm5    : !pos -29.195 -22.159 -183.716 174
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_KUFTAL_TOUR)
