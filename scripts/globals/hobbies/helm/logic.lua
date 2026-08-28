@@ -45,19 +45,32 @@ local breakMods =
 }
 
 local function getDropWeight(player, zoneId, zoneInfo, drop)
-    local dailyCap = zoneInfo.dailyCap
-    local limit    = dailyCap and dailyCap[drop[2]]
-    if not limit then
-        return drop[1]
+    local itemId = drop[2]
+    local weight = drop[1]
+
+    -- Daily caps reduce one item's weight per obtain and reset on zone-in after JST midnight.
+    local limit = zoneInfo.dailyCap and zoneInfo.dailyCap[itemId]
+    if limit then
+        local obtained = player:getCharVar(string.format('[HELM]DailyCap[%u][%u]', zoneId, itemId))
+        if obtained >= limit then
+            return 0
+        end
+
+        weight = math.floor(weight / (obtained + 1))
     end
 
-    local capVar   = string.format('[HELM]DailyCap[%u][%u]', zoneId, drop[2])
-    local obtained = player:getCharVar(capVar)
-    if obtained >= limit then
-        return 0
+    -- Depletion reduces every pool member's weight using a shared count that resets on zoning.
+    local depletion = zoneInfo.depletion
+    if depletion and utils.contains(itemId, depletion.pool) then
+        local obtained = player:getCharVar(string.format('[HELM][Depletion][%u]', zoneId))
+        if obtained >= depletion.max then
+            return 0
+        end
+
+        weight = math.floor(weight * (depletion.max - obtained) / depletion.max)
     end
 
-    return math.floor(drop[1] / (obtained + 1))
+    return weight
 end
 
 local function incrementDailyCap(player, zoneId, zoneInfo, itemId)
@@ -76,6 +89,18 @@ local function incrementDailyCap(player, zoneId, zoneInfo, itemId)
     end
 
     player:setCharVar(capVar, obtained)
+end
+
+local function incrementDepletion(player, zoneId, zoneInfo, itemId)
+    local depletion = zoneInfo.depletion
+    if not depletion or not utils.contains(itemId, depletion.pool) then
+        return
+    end
+
+    local depletionVar = string.format('[HELM][Depletion][%u]', zoneId)
+    local obtained     = math.min(player:getCharVar(depletionVar) + 1, depletion.max)
+
+    player:setCharVar(depletionVar, obtained)
 end
 
 local function hasCampPenalty(player, npc, helmType)
@@ -311,6 +336,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         if itemID ~= 0 then
             if player:addItem(itemID) then
                 incrementDailyCap(player, zoneId, info.zone[zoneId], itemID)
+                incrementDepletion(player, zoneId, info.zone[zoneId], itemID)
             end
 
             if math.randomInt(1, 100) <= info.relocateRate then

@@ -797,16 +797,26 @@ xi.helm.dataTable =
                 obtainRate = 70.38, -- n=12620, 95% CI +/-0.8pp
                 breakRate  = 17.78, -- n=12620, 95% CI +/-0.67pp
 
+                depletion =
+                {
+                    max  = 20,
+                    pool =
+                    {
+                        xi.item.ELM_LOG,
+                        xi.item.OAK_LOG,
+                    },
+                },
+
                 drops =
                 {
-                    { 3330, xi.item.ARROWWOOD_LOG },
-                    { 1750, xi.item.ASH_LOG       },
-                    { 2000, xi.item.MAPLE_LOG     },
-                    { 1420, xi.item.FAERIE_APPLE  },
-                    {  830, xi.item.WALNUT_LOG    },
-                    {  170, xi.item.ACORN         },
-                    {  330, xi.item.ELM_LOG       },
-                    {  170, xi.item.OAK_LOG       },
+                    { 2870, xi.item.ARROWWOOD_LOG }, -- n=2605/8883, 95% CI +/-0.95pp
+                    { 2110, xi.item.MAPLE_LOG     }, -- n=1922/8883, 95% CI +/-0.85pp
+                    { 2010, xi.item.ASH_LOG       }, -- n=1824/8883, 95% CI +/-0.83pp
+                    { 1400, xi.item.FAERIE_APPLE  }, -- n=1269/8883, 95% CI +/-0.72pp
+                    {  940, xi.item.WALNUT_LOG    }, -- n= 854/8883, 95% CI +/-0.60pp
+                    {  390, xi.item.ACORN         }, -- n= 356/8883, 95% CI +/-0.40pp
+                    {  170, xi.item.ELM_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {  110, xi.item.OAK_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -831,16 +841,26 @@ xi.helm.dataTable =
                 obtainRate = 66.67, -- n=10273, 95% CI +/-0.91pp
                 breakRate  = 18.47, -- n=10273, 95% CI +/-0.75pp
 
+                depletion =
+                {
+                    max  = 20,
+                    pool =
+                    {
+                        xi.item.ELM_LOG,
+                        xi.item.OAK_LOG,
+                    },
+                },
+
                 drops =
                 {
-                    { 2220, xi.item.ARROWWOOD_LOG },
-                    { 2220, xi.item.FAERIE_APPLE  },
-                    { 2220, xi.item.ASH_LOG       },
-                    { 2220, xi.item.MAPLE_LOG     },
-                    {  100, xi.item.WALNUT_LOG    },
-                    {  100, xi.item.ACORN         },
-                    { 1110, xi.item.ELM_LOG       },
-                    {  100, xi.item.OAK_LOG       },
+                    { 2280, xi.item.ASH_LOG       }, -- n=1590/6849, 95% CI +/-1.00pp
+                    { 2260, xi.item.ARROWWOOD_LOG }, -- n=1572/6849, 95% CI +/-1.00pp
+                    { 2130, xi.item.MAPLE_LOG     }, -- n=1482/6849, 95% CI +/-0.98pp
+                    { 1550, xi.item.FAERIE_APPLE  }, -- n=1083/6849, 95% CI +/-0.86pp
+                    { 1160, xi.item.WALNUT_LOG    }, -- n= 810/6849, 95% CI +/-0.76pp
+                    {  420, xi.item.ACORN         }, -- n= 294/6849, 95% CI +/-0.47pp
+                    {  110, xi.item.ELM_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {   90, xi.item.OAK_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -1377,14 +1397,23 @@ xi.helm.dataTable =
                 obtainRate = 61.61, -- n=14616, 95% CI +/-0.79pp
                 breakRate  =  7.46, -- n=14616, 95% CI +/-0.43pp
 
+                depletion =
+                {
+                    max  = 20,
+                    pool =
+                    {
+                        xi.item.ELM_LOG,
+                    },
+                },
+
                 drops =
                 {
-                    { 2950, xi.item.ARROWWOOD_LOG },
-                    { 2230, xi.item.ASH_LOG       },
-                    { 2120, xi.item.MAPLE_LOG     },
-                    { 1000, xi.item.WILLOW_LOG    },
-                    {  620, xi.item.ELM_LOG       },
-                    {  650, xi.item.HOLLY_LOG     },
+                    { 3020, xi.item.ARROWWOOD_LOG }, -- n=2527/8044, 95% CI +/-1.02pp
+                    { 2310, xi.item.ASH_LOG       }, -- n=1934/8044, 95% CI +/-0.93pp
+                    { 2250, xi.item.MAPLE_LOG     }, -- n=1888/8044, 95% CI +/-0.92pp
+                    { 1150, xi.item.WILLOW_LOG    }, -- n= 959/8044, 95% CI +/-0.69pp
+                    {  770, xi.item.HOLLY_LOG     }, -- n= 643/8044, 95% CI +/-0.57pp
+                    {  500, xi.item.ELM_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -1484,17 +1513,27 @@ xi.helm.dataTable =
                 obtainRate = 68.78, -- n=851, 95% CI +/-3.11pp
                 breakRate  = 16.57, -- n=851, 95% CI +/-2.5pp
 
+                depletion =
+                {
+                    max  = 20,
+                    pool =
+                    {
+                        xi.item.ELM_LOG,
+                        xi.item.OAK_LOG,
+                    },
+                },
+
                 drops =
                 {
-                    { 2410, xi.item.ASH_LOG       }, -- n=141/586, 95% CI +/-3.45pp
-                    { 1960, xi.item.ARROWWOOD_LOG }, -- n=115/586, 95% CI +/-3.21pp
-                    { 1590, xi.item.MAPLE_LOG     }, -- n= 93/586, 95% CI +/-2.96pp
-                    { 1380, xi.item.FAERIE_APPLE  }, -- n= 81/586, 95% CI +/-2.80pp
-                    { 1310, xi.item.WALNUT_LOG    }, -- n= 77/586, 95% CI +/-2.74pp
-                    {  680, xi.item.AQUILARIA_LOG }, -- n= 40/586, 95% CI +/-2.05pp
-                    {  380, xi.item.ACORN         }, -- n= 22/586, 95% CI +/-1.56pp
-                    {  200, xi.item.ELM_LOG       }, -- n= 12/586, 95% CI +/-1.18pp
-                    {   90, xi.item.OAK_LOG       }, -- n=  5/586, 95% CI +/-0.81pp
+                    { 2320, xi.item.ASH_LOG       }, -- n=141/586, 95% CI +/-3.40pp
+                    { 1890, xi.item.ARROWWOOD_LOG }, -- n=115/586, 95% CI +/-3.14pp
+                    { 1530, xi.item.MAPLE_LOG     }, -- n= 93/586, 95% CI +/-2.88pp
+                    { 1330, xi.item.FAERIE_APPLE  }, -- n= 81/586, 95% CI +/-2.72pp
+                    { 1270, xi.item.WALNUT_LOG    }, -- n= 77/586, 95% CI +/-2.66pp
+                    {  660, xi.item.AQUILARIA_LOG }, -- n= 40/586, 95% CI +/-1.98pp
+                    {  450, xi.item.ELM_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {  360, xi.item.ACORN         }, -- n= 22/586, 95% CI +/-1.49pp
+                    {  190, xi.item.OAK_LOG       }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -1665,22 +1704,33 @@ xi.helm.dataTable =
                 breakRate  = 47.98, -- n=17865, 95% CI +/-0.73pp
                 minLevel  = 20,
 
+                depletion =
+                {
+                    max  = 5,
+                    pool =
+                    {
+                        xi.item.CHUNK_OF_LUMINIUM_ORE,
+                        xi.item.CHUNK_OF_ORICHALCUM_ORE,
+                    },
+                },
+
                 drops =
                 {
-                    { 2010, xi.item.CHUNK_OF_AHT_URHGAN_BRASS },
-                    { 1000, xi.item.PINCH_OF_BOMB_ASH         },
-                    { 1720, xi.item.FLINT_STONE               },
-                    {  290, xi.item.CHUNK_OF_GOLD_ORE         },
-                    { 1440, xi.item.HANDFUL_OF_IRON_SAND      },
-                    {   50, xi.item.CHUNK_OF_LUMINIUM_ORE     },
-                    {  430, xi.item.SUIT_OF_MOBLIN_ARMOR      },
-                    {  430, xi.item.MOBLIN_HELM               },
-                    {  480, xi.item.SUIT_OF_MOBLIN_MAIL       },
-                    {  290, xi.item.MOBLIN_MASK               },
-                    {  100, xi.item.CHUNK_OF_ORICHALCUM_ORE   },
-                    { 1200, xi.item.PINCH_OF_SULFUR           },
-                    {  480, xi.item.TROLL_PAULDRON            },
-                    {  330, xi.item.TROLL_VAMBRACE            },
+                    { 1310, xi.item.SLAB_OF_PLUMBAGO           }, -- n=1800/13703, 95% CI +/-0.56pp
+                    { 1300, xi.item.FLINT_STONE                }, -- n=1787/13703, 95% CI +/-0.56pp
+                    { 1240, xi.item.CHUNK_OF_AHT_URHGAN_BRASS  }, -- n=1697/13703, 95% CI +/-0.55pp
+                    { 1200, xi.item.PINCH_OF_SULFUR            }, -- n=1645/13703, 95% CI +/-0.54pp
+                    { 1180, xi.item.PINCH_OF_BOMB_ASH          }, -- n=1621/13703, 95% CI +/-0.54pp
+                    { 1170, xi.item.HANDFUL_OF_IRON_SAND       }, -- n=1606/13703, 95% CI +/-0.54pp
+                    {  400, xi.item.MOBLIN_HELM                }, -- n= 543/13703, 95% CI +/-0.33pp
+                    {  390, xi.item.TROLL_VAMBRACE             }, -- n= 540/13703, 95% CI +/-0.33pp
+                    {  390, xi.item.MOBLIN_MASK                }, -- n= 534/13703, 95% CI +/-0.32pp
+                    {  380, xi.item.SUIT_OF_MOBLIN_ARMOR       }, -- n= 524/13703, 95% CI +/-0.32pp
+                    {  380, xi.item.TROLL_PAULDRON             }, -- n= 517/13703, 95% CI +/-0.32pp
+                    {  370, xi.item.SUIT_OF_MOBLIN_MAIL        }, -- n= 512/13703, 95% CI +/-0.32pp
+                    {  260, xi.item.CHUNK_OF_GOLD_ORE          }, -- n= 358/13703, 95% CI +/-0.27pp
+                    {   20, xi.item.CHUNK_OF_ORICHALCUM_ORE    }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {   10, xi.item.CHUNK_OF_LUMINIUM_ORE      }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -1902,17 +1952,27 @@ xi.helm.dataTable =
                 breakRate  = 52.36, -- n=12094, 95% CI +/-0.89pp
                 minLevel  = 20,
 
+                depletion =
+                {
+                    max  = 32,
+                    pool =
+                    {
+                        xi.item.CHUNK_OF_DARKSTEEL_ORE,
+                        xi.item.CHUNK_OF_GOLD_ORE,
+                    },
+                },
+
                 drops =
                 {
-                    { 1890, xi.item.PEBBLE                 },
-                    { 1670, xi.item.CHUNK_OF_ZINC_ORE      },
-                    { 1510, xi.item.CHUNK_OF_COPPER_ORE    },
-                    { 1470, xi.item.CHUNK_OF_TIN_ORE       },
-                    { 1450, xi.item.CHUNK_OF_IRON_ORE      },
-                    {  810, xi.item.CHUNK_OF_SILVER_ORE    },
-                    {  590, xi.item.CHUNK_OF_DARKSTEEL_ORE },
-                    {  400, xi.item.RED_ROCK               },
-                    {   80, xi.item.CHUNK_OF_GOLD_ORE      },
+                    { 1630, xi.item.CHUNK_OF_ZINC_ORE      }, -- n=1737/10098, 95% CI +/-0.72pp
+                    { 1620, xi.item.CHUNK_OF_COPPER_ORE    }, -- n=1728/10098, 95% CI +/-0.72pp
+                    { 1620, xi.item.CHUNK_OF_IRON_ORE      }, -- n=1728/10098, 95% CI +/-0.72pp
+                    { 1620, xi.item.CHUNK_OF_TIN_ORE       }, -- n=1726/10098, 95% CI +/-0.71pp
+                    { 1600, xi.item.PEBBLE                 }, -- n=1709/10098, 95% CI +/-0.71pp
+                    {  850, xi.item.CHUNK_OF_SILVER_ORE    }, -- n= 910/10098, 95% CI +/-0.54pp
+                    {  570, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {  360, xi.item.RED_ROCK               }, -- n= 390/10098, 95% CI +/-0.36pp
+                    {  130, xi.item.CHUNK_OF_GOLD_ORE      }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
@@ -1941,19 +2001,30 @@ xi.helm.dataTable =
                 breakRate  = 55.12, -- n=10602, 95% CI +/-0.95pp
                 minLevel  = 20,
 
+                depletion =
+                {
+                    max  = 20,
+                    pool =
+                    {
+                        xi.item.CHUNK_OF_ADAMAN_ORE,
+                        xi.item.CHUNK_OF_DARKSTEEL_ORE,
+                        xi.item.CHUNK_OF_ORICHALCUM_ORE,
+                    },
+                },
+
                 drops =
                 {
-                    { 3260, xi.item.FLINT_STONE             },
-                    { 1520, xi.item.CHUNK_OF_IRON_ORE       },
-                    {  430, xi.item.PINCH_OF_SULFUR         },
-                    {  650, xi.item.BOMB_ARM                },
-                    {  870, xi.item.PINCH_OF_BOMB_ASH       },
-                    { 1300, xi.item.HANDFUL_OF_IRON_SAND    },
-                    {  250, xi.item.CHUNK_OF_ADAMAN_ORE     },
-                    {  600, xi.item.CHUNK_OF_DARKSTEEL_ORE  },
-                    { 1520, xi.item.CHUNK_OF_ORPIMENT       },
-                    {  100, xi.item.CHUNK_OF_ORICHALCUM_ORE },
-                    {  220, xi.item.RED_ROCK                },
+                    { 2060, xi.item.FLINT_STONE             }, -- n=1480/7051, 95% CI +/-0.94pp
+                    { 1880, xi.item.PINCH_OF_SULFUR         }, -- n=1353/7051, 95% CI +/-0.91pp
+                    { 1600, xi.item.CHUNK_OF_IRON_ORE       }, -- n=1151/7051, 95% CI +/-0.85pp
+                    { 1200, xi.item.HANDFUL_OF_IRON_SAND    }, -- n= 864/7051, 95% CI +/-0.75pp
+                    { 1180, xi.item.PINCH_OF_BOMB_ASH       }, -- n= 850/7051, 95% CI +/-0.75pp
+                    {  770, xi.item.CHUNK_OF_ORPIMENT       }, -- n= 553/7051, 95% CI +/-0.62pp
+                    {  690, xi.item.BOMB_ARM                }, -- n= 497/7051, 95% CI +/-0.59pp
+                    {  290, xi.item.RED_ROCK                }, -- n= 205/7051, 95% CI +/-0.39pp
+                    {  180, xi.item.CHUNK_OF_DARKSTEEL_ORE  }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {  130, xi.item.CHUNK_OF_ADAMAN_ORE     }, -- Special: rate goes down with each pool obtain and resets on zoning
+                    {   20, xi.item.CHUNK_OF_ORICHALCUM_ORE }, -- Special: rate goes down with each pool obtain and resets on zoning
                 },
 
                 points =
