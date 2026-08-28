@@ -12,6 +12,7 @@ return {
     ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
     ['Esmeralda']            = { event = 268 },
     ['Finene']               = { event = 310 },
+    ['Five_of_Diamonds']     = { event = 266 },
     ['Florencia']            = { event = 333 },
     ['Four_of_Diamonds']     = { event = 267 },
     ['Gerun-Garun']          = { event = 312 },
