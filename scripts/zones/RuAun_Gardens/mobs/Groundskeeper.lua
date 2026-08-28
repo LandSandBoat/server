@@ -25,17 +25,12 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local params = {}
-
-    params.immediate = true
-    if xi.mob.phOnDespawn(mob, ID.mob.DESPOT, 5, 7200, params) then -- Lottery opens after 2 hours.
-        local zone = mob:getZone()
-        local phId = mob:getID()
-
-        if zone then
-            zone:setLocalVar('DespotPlaceholderID', phId)
-        end
+    local zone = mob:getZone()
+    if zone then
+        zone:setLocalVar('DespotPlaceholderID', mob:getID())
     end
+
+    xi.mob.phOnDespawn(mob, ID.mob.DESPOT, 5, 7200, { immediate = true }) -- Lottery opens after 2 hours.
 end
 
 return entity

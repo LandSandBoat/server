@@ -826,8 +826,8 @@ templates:
           model: 407
         entity_flags: 153
         name_prefix:   32
-        model_size:     2
-        hitbox:        36
+        model_size:     0
+        hitbox:        27
       behaviors:
         aggressive:     true
         true_detection: true
@@ -892,9 +892,8 @@ templates:
     skill_list_id: 281
     attributes:
       combat:
-        skill:    scythe
-        delay:    360
-        dmg_mult: 125
+        skill: scythe
+        delay: 500
       jobs: [smn, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
@@ -927,9 +926,6 @@ templates:
       behaviors:
         aggressive:     true
         true_detection: true
-      mods:
-        regain: 150
-        regen:   50
       spawn:
         type: [scripted]
       stats:
@@ -1321,8 +1317,8 @@ templates:
           model: 399
         entity_flags: 157
         name_prefix:   32
-        model_size:     3
-        hitbox:        44
+        model_size:     2
+        hitbox:        36
       behaviors:
         aggressive:     true
         true_detection: true
@@ -1400,8 +1396,8 @@ templates:
           model: 337
         entity_flags: 159
         name_prefix:   32
-        model_size:     3
-        hitbox:        44
+        model_size:     1
+        hitbox:        32
       behaviors:
         aggressive:     true
         true_detection: true

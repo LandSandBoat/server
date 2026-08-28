@@ -495,6 +495,12 @@ xi.mobSkill =
 
     FISSION                       =  755,
 
+    DEADLY_HOLD_1                 =  797,
+    TAIL_SWING_1                  =  798,
+    TAIL_SMASH_1                  =  799,
+    HEAT_BREATH_1                 =  800,
+    RIDDLE_1                      =  801,
+    GREAT_SANDSTORM_1             =  802,
     GREAT_WHIRLWIND_1             =  803,
     TORTOISE_SONG_1               =  804,
     HEAD_BUTT_TURTLE_1            =  805,

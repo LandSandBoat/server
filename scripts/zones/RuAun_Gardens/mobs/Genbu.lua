@@ -26,9 +26,16 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 5) -- Spawn message
+    mob:setBaseSpeed(27)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 5):setAnimation(xi.animation.CLOSE_DOOR)
     mob:setLocalVar('defaultATT', mob:getMod(xi.mod.ATT))
+
+    -- Add slight delay to allow Genbu to load in before the message is sent
+    mob:timer(300, function(mobArg)
+        if mobArg then
+            mobArg:messageText(mobArg, ID.text.SKY_GOD_OFFSET + 5)
+        end
+    end)
 end
 
 entity.onMobFight = function(mob, target)
