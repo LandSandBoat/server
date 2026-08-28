@@ -211,7 +211,6 @@ templates:
         model_size:       1
         hitbox:          12
       behaviors:
-        aggressive:     true
         true_detection: true
       spawn:
         respawn: 600

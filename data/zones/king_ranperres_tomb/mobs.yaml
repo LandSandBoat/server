@@ -2399,6 +2399,8 @@ templates:
           model: 424
         entity_flags: 129
         hitbox:        11
+      behaviors:
+        aggressive: true
       spawn:
         respawn: 300
     loot:

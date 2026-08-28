@@ -1753,6 +1753,8 @@ templates:
         animation_sub:   8
         model_size:      1
         hitbox:         10
+      behaviors:
+        links: true
       spawn:
         respawn: 300
     loot:
