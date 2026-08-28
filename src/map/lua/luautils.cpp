@@ -5702,21 +5702,17 @@ void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* PItem)
 {
     TracyZoneScoped;
 
-    auto name = PItem->getName();
+    auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
-    auto onFurniturePlaced = lua["xi"]["items"][name]["onFurniturePlaced"];
-    if (!onFurniturePlaced.valid())
-    {
-        return;
-    }
+    auto onFurniturePlacedFramework = lua["InteractionGlobal"]["onFurniturePlaced"];
+    auto onFurniturePlaced          = getCachedFileFunction(filename, "onFurniturePlaced");
 
-    auto result = onFurniturePlaced(PChar);
+    auto result = onFurniturePlacedFramework(PChar, PItem, onFurniturePlaced);
     if (!result.valid())
     {
         sol::error err = result;
-        ShowError("luautils::onFurniturePlaced: %s", err.what());
+        ShowError("luautils::OnFurniturePlaced: %s", err.what());
         ReportErrorToPlayer(PChar, err.what());
-        return;
     }
 }
 
@@ -5724,21 +5720,17 @@ void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* PItem)
 {
     TracyZoneScoped;
 
-    auto name = PItem->getName();
+    auto filename = fmt::format("./scripts/items/{}.lua", PItem->getName());
 
-    auto onFurnitureRemoved = lua["xi"]["items"][name]["onFurnitureRemoved"];
-    if (!onFurnitureRemoved.valid())
-    {
-        return;
-    }
+    auto onFurnitureRemovedFramework = lua["InteractionGlobal"]["onFurnitureRemoved"];
+    auto onFurnitureRemoved          = getCachedFileFunction(filename, "onFurnitureRemoved");
 
-    auto result = onFurnitureRemoved(PChar);
+    auto result = onFurnitureRemovedFramework(PChar, PItem, onFurnitureRemoved);
     if (!result.valid())
     {
         sol::error err = result;
-        ShowError("luautils::onFurnitureRemoved: %s", err.what());
+        ShowError("luautils::OnFurnitureRemoved: %s", err.what());
         ReportErrorToPlayer(PChar, err.what());
-        return;
     }
 }
 
