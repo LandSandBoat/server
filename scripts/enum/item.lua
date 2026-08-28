@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- Items
 -- Item table by ID (used by quests)
 -----------------------------------
@@ -20,19 +20,23 @@ xi.item =
     OAK_TABLE                           = 24,
     TARUTARU_DESK                       = 26,
     DRAWING_DESK                        = 28,
+    BUREAU                              = 30,
     DRESSER                             = 32,
+    WICKER_BOX                          = 43,
     ARMOR_BOX                           = 46,
     COFFER                              = 49,
     CHOCOBO_COMMODE                     = 54,
     CABINET                             = 55,
     CUPBOARD                            = 57,
     CHIFFONIER                          = 59,
+    ARMOIRE                             = 61,
     KADOMATSU                           = 87,
     WASTEBASKET                         = 89,
     RUSTY_BUCKET                        = 90,
     BLUE_PITCHER                        = 91,
     TARUTARU_STOOL                      = 92,
     WATER_CASK                          = 93,
+    BEVERAGE_BARREL                     = 96,
     BOOK_HOLDER                         = 97,
     OKADOMATSU                          = 100,
     FLOWER_STAND                        = 102,
@@ -2359,6 +2363,7 @@ xi.item =
     LENITIVE_ABJURATION_HANDS           = 3581,
     LENITIVE_ABJURATION_LEGS            = 3582,
     LENITIVE_ABJURATION_FEET            = 3583,
+    GALLEY_KITCHEN                      = 3585,
     GEMSCOPE                            = 3595,
     COURONNE_DES_ETOILES                = 3619,
     SILBERKRANZ                         = 3620,
@@ -2425,6 +2430,7 @@ xi.item =
     APHMAU_STATUE                       = 3726,
     MUMOR_STATUE                        = 3727,
     ULLEGORE_STATUE                     = 3728,
+    AURUM_COFFER                        = 3735,
     EASTERN_UMBRELLA                    = 3738,
     AUTUMN_TREE                         = 3739,
     MODEL_SYNERGY_FURNACE               = 3740,
@@ -2576,6 +2582,7 @@ xi.item =
     BOTTLE_OF_MULSUM                    = 4156,
     FLASK_OF_POISON_POTION              = 4157,
     FLASK_OF_VENOM_POTION               = 4158,
+    FLASK_OF_PARALYZE_POTION            = 4159,
     FLASK_OF_SLEEPING_POTION            = 4161,
     FLASK_OF_SILENCING_POTION           = 4162,
     FLASK_OF_BLINDNESS_POTION           = 4163,
