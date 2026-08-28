@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- InteractionLookup class
 -----------------------------------
 require('scripts/globals/interaction/action_util')
@@ -497,4 +497,12 @@ end
 
 function InteractionLookup:onEventUpdate(player, csid, option, npc, fallbackFn)
     return onHandler(self.data, 'onEventUpdate', csid, { player, csid, option, npc }, fallbackFn)
+end
+
+function InteractionLookup:onFurniturePlaced(player, item, fallbackFn)
+    return onHandler(self.data, item:getName(), 'onFurniturePlaced', { player, item }, fallbackFn)
+end
+
+function InteractionLookup:onFurnitureRemoved(player, item, fallbackFn)
+    return onHandler(self.data, item:getName(), 'onFurnitureRemoved', { player, item }, fallbackFn)
 end
