@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1639,28 +1639,34 @@ uint16 CBattleEntity::DEF()
 
 uint16 CBattleEntity::EVA()
 {
-    int16 evasion = 1;
-
     const bool isAutomaton = this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON;
+
+    int32 evasion = 1;
 
     if (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton))
     {
-        evasion = getMod(xi::Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
+        // Mobs and non automaton pets use EVA mod as their base evasion
+        evasion = getMod(xi::Mod::EVA);
     }
-    else // Players and automatons use xi::SkillType::Evasion
+    else
     {
+        // Players and automatons use Evasion skill
         evasion = GetSkill(xi::SkillType::Evasion);
 
-        // Skill based evasion calculation
         if (evasion > 200)
         {
             evasion = 200 + (evasion - 200) * 0.9;
         }
+
+        // EVA mod is additional evasion for players and automatons
+        evasion += getMod(xi::Mod::EVA);
     }
 
     evasion += AGI() / 2;
 
-    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(xi::Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
+    evasion += static_cast<int32>(std::floor(static_cast<float>(evasion) * static_cast<float>(getMod(xi::Mod::EVA_PERCENT)) / 100.0f));
+
+    return static_cast<uint16>(std::clamp<int32>(evasion, 1, UINT16_MAX));
 }
 
 auto CBattleEntity::GetMJob() const -> xi::Job
