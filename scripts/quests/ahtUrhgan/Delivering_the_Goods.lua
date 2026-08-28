@@ -31,13 +31,13 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(51)
+                    return quest:event(51)
                 end,
             },
             ['Ulamaal'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(51)
+                    return quest:event(51)
                 end,
             },
 
@@ -58,6 +58,12 @@ quest.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            ['Fochacha'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(46)
+                end,
+            },
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
@@ -97,13 +103,13 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(52)
+                    return quest:event(52)
                 end,
             },
             ['Ulamaal'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(53)
+                    return quest:event(53)
                 end,
             },
 
@@ -111,10 +117,11 @@ quest.sections =
             {
                 [41] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setVar('Quest[6][62]Stage', JstMidnight())
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT, 'Stage', GetSystemTime() + 60) -- 1 minute wait time
 
                         -- Player must zone before being able to flag the next quest
-                        player:setLocalVar('Quest[6][62]mustZone', 1)
+                        -- Capture: retail still refused two minutes after the turn in. The timer alone does not open it.
+                        player:needToZone(true)
                     end
                 end,
             },
