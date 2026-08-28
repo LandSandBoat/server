@@ -21,6 +21,7 @@ return {
     ['Door_House']       = { messageSpecial = ID.text.DOOR_FIRMLY_SHUT },
     ['Eight_of_Hearts']  = { event = 276 },
     ['Enrefort']         = { event = 601 },
+    ['Five_of_Hearts']   = { event = 273 },
     ['Foi-Mui']          = { event = 430 },
     ['Four_of_Hearts']   = { event = 272 },
     ['Fuepepe']          = { event = 423 },
