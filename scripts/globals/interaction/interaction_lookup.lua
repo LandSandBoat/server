@@ -503,3 +503,11 @@ end
 function InteractionLookup:onFishingCheck(player, areaId)
     return runHandlersInData(self.data, player, 'onFishingCheck', 1, { player, areaId })
 end
+
+function InteractionLookup:onFurniturePlaced(player, item, fallbackFn)
+    return onHandler(self.data, item:getName(), 'onFurniturePlaced', { player, item }, fallbackFn)
+end
+
+function InteractionLookup:onFurnitureRemoved(player, item, fallbackFn)
+    return onHandler(self.data, item:getName(), 'onFurnitureRemoved', { player, item }, fallbackFn)
+end
