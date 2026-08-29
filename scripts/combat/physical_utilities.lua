@@ -68,6 +68,7 @@ xi.combat.physical.pDifWeaponCapTable =
     [xi.skill.ARCHERY         ] = 3.25,
     [xi.skill.MARKSMANSHIP    ] = 3.5,
     [xi.skill.THROWING        ] = 3.25,
+    [xi.skill.BLUE_MAGIC      ] = 3.0,  -- Jimmayus' blue magic sheet https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=2079701009#gid=2079701009&range=B21
 }
 
 local shieldSizeToBlockRateTable =
