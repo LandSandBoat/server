@@ -166,6 +166,91 @@
                 "isDefault": true
             },
         },
+        {
+            "type": "shell",
+            "label": "Build xi_test",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--config",
+                "RelWithDebInfo",
+                "--target",
+                "xi_test",
+                "-j12"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "shell",
+            "label": "Test: base stats",
+            "dependsOn": [
+                "Build xi_test"
+            ],
+            "linux": {
+                "command": "${workspaceFolder}/build/src/test/xi_test",
+            },
+            "windows": {
+                "command": "${workspaceFolder}\\build\\src\\test\\RelWithDebInfo\\xi_test.exe",
+            },
+            "args": [
+                "--keep-going",
+                "--file",
+                "base_stats"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Test: file filter",
+            "dependsOn": [
+                "Build xi_test"
+            ],
+            "linux": {
+                "command": "${workspaceFolder}/build/src/test/xi_test",
+            },
+            "windows": {
+                "command": "${workspaceFolder}\\build\\src\\test\\RelWithDebInfo\\xi_test.exe",
+            },
+            "args": [
+                "--keep-going",
+                "--file",
+                "${input:testFile}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+    ],
+    "inputs": [
+        {
+            "id": "testFile",
+            "type": "promptString",
+            "description": "Regex over the test file path (e.g. base_stats, guild_shops, systems/combat)",
+            "default": "base_stats"
+        }
     ],
     "version": "2.0.0"
 }

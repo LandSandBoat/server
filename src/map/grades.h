@@ -35,6 +35,7 @@ uint8 GetRaceGrades(uint8 race, uint8 stat);
 float GetHPScale(uint8 rank, uint8 scale);
 float GetMPScale(uint8 rank, uint8 scale);
 float GetStatScale(uint8 rank, uint8 scale);
+auto  GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16;
 uint8 GetMobHPScale(uint8 rank, uint8 scale);
 
 }; // namespace grade
