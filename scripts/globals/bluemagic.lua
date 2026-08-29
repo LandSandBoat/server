@@ -381,6 +381,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     spell:setCritical(anyCrit)
+
+    caster:delStatusEffectSilent(xi.effect.EFFLUX)
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget), hitslanded
 end
 
