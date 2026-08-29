@@ -7518,10 +7518,15 @@ ecosystems:
         attributes:
           stats:
             str: d
+            dex: d
+            vit: d
             agi: d
-            int: b
-            mnd: e
-            chr: e
+            int: d
+            mnd: d
+            chr: d
+            def: c
+            att: a
+            acc: a
           detects:
             - sight
           speed: 70
@@ -7622,6 +7627,9 @@ ecosystems:
             int: d
             mnd: d
             chr: d
+            def: d
+            att: a
+            acc: a
         species:
           alexander:
             id: 239
@@ -8117,7 +8125,10 @@ ecosystems:
             int: d
             mnd: d
             chr: d
+            def: c
             eva: e
+            att: b
+            acc: a
           detects:
             - magic
         species:

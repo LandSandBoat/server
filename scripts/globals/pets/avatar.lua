@@ -217,7 +217,7 @@ xi.pets.avatar.onMobSpawn = function(pet)
     -- Set up avatar's base damage.
     xi.pets.avatar.calculateAvatarWeaponDamage(pet)
 
-    local petType       = pet:getPetID()
+    local petType = pet:getPetID()
 
     -- Only Spirits cast Magic.
     if
