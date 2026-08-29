@@ -682,7 +682,9 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     -- TODO: There is some weirdness with needing 2 levels to start level correction in retail
     -- It is not currently implemented.
     if applyLevelCorrection then
-        levelDifFactor = (actor:getMainLvl() - target:getMainLvl()) * 3 / 64 -- 3/64 from JP model which fits better
+        -- TODO: is this +/- 38 clamp applicable only to pets?
+        -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        levelDifFactor = utils.clamp(actor:getMainLvl() - target:getMainLvl(), -38, 38) * 3 / 64 -- 3/64 from JP model which fits better
     end
 
     -- Only players suffer from negative level difference.
@@ -704,7 +706,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
     ----------------------------------------
-    local wRatio             = baseRatio + (isCritical and 1 or 0)
+    local wRatio             = baseRatio + (isCritical and 1 or 0) + levelDifFactor
     local pDifUpperCap       = 0
     local pDifLowerCap       = 0
     local damageLimitPlus    = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
@@ -712,12 +714,12 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     local pDifFinalCap       = 0
 
     if actor:isPC() then
-        pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType] + damageLimitPlus) * damageLimitPercent + (isCritical and 1 or 0)
+        pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType] + damageLimitPlus) * damageLimitPercent + (isCritical and 1 or 0) + levelDifFactor
 
         local sRatio = getSpikeRatio(true, wRatio)
 
         if math.randomInt(1, 10000) / 10000 <= sRatio then
-            return 1.0
+            return 1.0 + levelDifFactor
         end
 
         pDifLowerCap, pDifUpperCap = xi.combat.physical.wRatioCapPC(wRatio, pDifFinalCap)
@@ -727,12 +729,12 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         -- non-corrected mobs have 4.0 pdif cap, but there is some indication that ilvl may go up to 8.0
         local basePDIF  = applyLevelCorrection and 2 or 4
         local critBonus = (applyLevelCorrection and isCritical) and 1 or 0
-        pDifFinalCap    = (basePDIF + damageLimitPlus) * damageLimitPercent + critBonus
+        pDifFinalCap    = (basePDIF + damageLimitPlus) * damageLimitPercent + critBonus + levelDifFactor
 
         local sRatio = getSpikeRatio(false, wRatio)
 
         if math.randomInt(1, 10000) / 10000 <= sRatio then
-            return 1.0
+            return 1.0 + levelDifFactor
         end
 
         pDifLowerCap, pDifUpperCap = xi.combat.physical.wRatioCapOthers(wRatio, pDifFinalCap)
@@ -744,8 +746,8 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     -- His model at the time and implemented spike, so the (0.0, 0.5) bounds also looks different
     -- https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5007487&viewfull=1#post5007487
     local upperMax   = math.randomInt(0, 1) == 0 and 0.5 or 0
-    local upperBound = math.max(pDifUpperCap + levelDifFactor, upperMax)
-    local lowerbound = math.max(pDifLowerCap + levelDifFactor, 0)
+    local upperBound = math.max(pDifUpperCap, upperMax)
+    local lowerbound = math.max(pDifLowerCap, 0)
 
     if upperBound == 0 then
         return 0
@@ -837,7 +839,10 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     -- TODO: There is some weirdness with needing 2 levels to start level correction in retail
     -- It is not currently implemented.
     if applyLevelCorrection then
-        levelDifFactor = (actor:getMainLvl() - target:getMainLvl()) * (3 / 128) -- half the melee correction
+        -- TODO: is this +/- 38 clamp applicable only to pets?
+        -- TODO: should this be halved/doubled compared to melee?
+        -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        levelDifFactor = utils.clamp(actor:getMainLvl() - target:getMainLvl(), -38, 38) * 3 / 128 -- half the melee correction
     end
 
     -- Only players suffer from negative level difference.
@@ -856,7 +861,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
         levelDifFactor = 0
     end
 
-    local cRatio = utils.clamp(baseRatio, 0, 10) -- Clamp for the lower limit, mainly.
+    local cRatio = utils.clamp(baseRatio + levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
     -- TODO: Presumably, pets get a Cap here if the target checks as 'Too Weak'. More info needed.
 
@@ -870,12 +875,12 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     local pDifFinalCap       = 0
 
     if actor:isPC() then
-        pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
+        pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType] + damageLimitPlus) * damageLimitPercent + levelDifFactor -- Added damage limit bonuses
     else
         -- 4.0 is guessed. there is some indication that mob pdif can go to 8.0 in ilvl content
         -- 3.0 with level correction matches player ranged pdif cap for 2013 and may need verification
         local basePDIF = applyLevelCorrection and 3 or 4
-        pDifFinalCap   = (basePDIF + damageLimitPlus) * damageLimitPercent
+        pDifFinalCap   = (basePDIF + damageLimitPlus) * damageLimitPercent + levelDifFactor
     end
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
@@ -891,10 +896,6 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
         pDifUpperCap = math.min(cRatio, pDifFinalCap)
         pDifLowerCap = math.min(cRatio * 20 / 19 - 3 / 19, pDifFinalCap)
     end
-
-    -- Add in level correction
-    pDifUpperCap = pDifUpperCap + levelDifFactor
-    pDifLowerCap = pDifLowerCap + levelDifFactor
 
     pDif = math.randomInt(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
 
