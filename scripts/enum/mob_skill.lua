@@ -1080,6 +1080,8 @@ xi.mobSkill =
     POLAR_BULWARK                 = 1831,
     BAROFIELD                     = 1832,
 
+    TREMBLING                     = 1834,
+    SERPENTINE_TAIL               = 1835,
     NERVE_GAS                     = 1836,
 
     SANDBLAST_2                   = 1841,
