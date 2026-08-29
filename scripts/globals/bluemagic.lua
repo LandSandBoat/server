@@ -212,12 +212,19 @@ end
 local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
     local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local multiplier = 2
+    local extraDmg   = 0
 
     if caster:hasStatusEffect(xi.effect.EFFLUX) then
         multiplier = 3
     end
 
-    return math.floor(skill * 0.11) * multiplier + 3
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
+    end
+
+    -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
+    -- There's no documentation on it doing that and ilvl gear plainly states +X and not +X/2 which then gets multiplied by 2 or 3.
+    return math.floor(skill * 0.11) * multiplier + 3 + extraDmg
 end
 
 -----------------------------------
