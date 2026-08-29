@@ -178,11 +178,6 @@ templates:
       combat:
         skill: axe
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -507,11 +502,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -1853,11 +1843,6 @@ templates:
         skill: axe
       jobs: [blm, blm]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -1913,11 +1898,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4299,11 +4279,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4346,11 +4321,6 @@ templates:
         skill: axe
       jobs: [blm, blm]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4403,11 +4373,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4894,11 +4859,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4928,7 +4888,7 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 75000
+        hp: 25000
     loot:
       drops:
         - chance: always

@@ -12922,6 +12922,11 @@ ecosystems:
             id: 414
             attributes:
               resists:
+                dmg_physical:
+                  slashing: 10000
+                  piercing: 10000
+                  blunt:    10000
+                  h2h:      10000
                 rank_element:
                   fire:    -2
                   ice:      4
@@ -12942,6 +12947,10 @@ ecosystems:
                   blind:        4
                   stun:        -1
                   gravity:     -1
+              mods:
+                hpp:          200
+                udmgbreath: 10000
+                udmgmagic:  10000
               mob_mods:
                 roam_cool:  50
                 roam_turns:  3
