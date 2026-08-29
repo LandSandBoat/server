@@ -32,7 +32,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- Double power and halve remaining time
     local durationMultiplier = 0.5 + 0.05 * player:getMerit(xi.merit.MODUS_VERITAS_DURATION)
     local helixPower         = 2 * helix:getPower() + 3 * player:getJobPointLevel(xi.jp.MODUS_VERITAS_EFFECT)
-    local duration           = helix:getDuration()
+    local duration           = math.floor(helix:getDuration() / 1000)      -- from milliseconds
     local remaining          = math.floor(helix:getTimeRemaining() / 1000) -- from milliseconds
 
     duration = duration - remaining + math.floor(remaining * durationMultiplier)

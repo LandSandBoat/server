@@ -55,7 +55,7 @@ xi.abyssea.surveyorOnEventFinish = function(player, csid, option, npc)
         -- At no point should we grant temporary visitant status, so we use
         -- CLuaStatusEffect::setIcon() to force an update.  Add the same 4
         -- seconds of buffer time for countdown, which is removed on saving
-        visitantEffect:setDuration(math.min(visitantTime * 1000 + 4, 7200 * 1000))
+        visitantEffect:setDuration(math.min((visitantTime + 4) * 1000, 7200 * 1000))
         visitantEffect:resetStartTime()
         visitantEffect:setIcon(xi.effect.VISITANT)
 

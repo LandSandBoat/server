@@ -2963,8 +2963,8 @@ end
 ---@class StatusEffectParams
 ---@field origin CBaseEntity
 ---@field power number?
----@field duration number?
----@field tick number?
+---@field duration number? Seconds
+---@field tick number? Seconds
 ---@field icon xi.effect? Defaults to effectId if not set
 ---@field subType integer?
 ---@field subPower number?

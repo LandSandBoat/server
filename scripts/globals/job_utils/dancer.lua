@@ -290,11 +290,8 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         -- Handle Target Debuffs
         if debuffEffect then
             origDebuffStacks = debuffEffect:getPower()
-            debuffStacks     = debuffStacks + origDebuffStacks
-            debuffDuration   = debuffEffect:getDuration()
-
-            debuffStacks   = math.min(debuffStacks, maxSteps)
-            debuffDuration = math.min(debuffEffect:getDuration() + 30 + stepDurationGift, 120 + stepDurationGift)
+            debuffStacks     = math.min(debuffStacks + origDebuffStacks, maxSteps)
+            debuffDuration   = math.min(math.floor(debuffEffect:getTimeRemaining() / 1000) + 30 + stepDurationGift, 120 + stepDurationGift)
 
             if maxSteps >= origDebuffStacks then
                 target:delStatusEffectSilent(stepEffect)

@@ -30,7 +30,7 @@ function CStatusEffect:getTier()
 end
 
 ---@nodiscard
----@return integer
+---@return integer milliseconds
 function CStatusEffect:getDuration()
 end
 
@@ -45,7 +45,7 @@ function CStatusEffect:getLastTick()
 end
 
 ---@nodiscard
----@return integer
+---@return integer milliseconds
 function CStatusEffect:getTimeRemaining()
 end
 
@@ -55,7 +55,7 @@ function CStatusEffect:getTickCount()
 end
 
 ---@nodiscard
----@return integer
+---@return integer milliseconds
 function CStatusEffect:getTick()
 end
 
@@ -84,12 +84,12 @@ end
 function CStatusEffect:setTier(tier)
 end
 
----@param duration integer
+---@param duration integer milliseconds
 ---@return nil
 function CStatusEffect:setDuration(duration)
 end
 
----@param tick integer
+---@param tick integer milliseconds
 ---@return nil
 function CStatusEffect:setTick(tick)
 end

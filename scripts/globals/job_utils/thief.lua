@@ -308,30 +308,21 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
     end
 
     -- Default is no SP Ability found
-    if effectStolen == nil then
+    if not effectStolen then
         effectID = player:stealStatusEffect(target)
 
-        local newStatus = player:getStatusEffect(effectID)
-
-        if newStatus then
-            newStatus:setDuration(newStatus:getDuration() + jpValue * 1000)
-        end
     -- Copy an SP Ability if found
     else
-        local newID       = effectStolen:getEffectType()
-        local newIcon     = effectStolen:getIcon()
-        local newPower    = effectStolen:getPower()
-        local newTick     = effectStolen:getTick()
-        local newDuration = effectStolen:getDuration() + jpValue
-        local newSubType  = effectStolen:getSubType()
-        local newSubPower = effectStolen:getSubPower()
-        local newTier     = effectStolen:getTier()
-        local newFlags    = effectStolen:getEffectFlags()
+        effectID = effectStolen:getEffectType()
 
-        player:addStatusEffect(newID, { power = newPower, duration = newDuration, origin = player, tick = newTick, icon = newIcon, subType = newSubType, subPower = newSubPower, tier = newTier, flag = newFlags })
-        target:delStatusEffect(newID)
+        player:copyStatusEffect(effectStolen)
+        target:delStatusEffect(effectID)
+    end
 
-        effectID = newID
+    local newStatus = player:getStatusEffect(effectID)
+
+    if newStatus then
+        newStatus:setDuration(newStatus:getDuration() + jpValue * 1000)
     end
 
     if effectID == 0 then
