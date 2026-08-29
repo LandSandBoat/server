@@ -2945,10 +2945,20 @@ INSERT INTO `item_latents` VALUES (18683,287,2,58,0);    -- DMG+2 in Assault
 INSERT INTO `item_latents` VALUES (18684,24,10,58,0);    -- Ranged Attack +10 in Assault
 INSERT INTO `item_latents` VALUES (18684,287,2,58,0);    -- DMG+2 in Assault
 
+-- Mamoolbane
+INSERT INTO `item_latents` VALUES (18692, 25, 6, 23, 54); -- Accuracy +6 in Arrapago Reef
+INSERT INTO `item_latents` VALUES (18692, 25, 6, 23, 62); -- Accuracy +6 in Halvung
+INSERT INTO `item_latents` VALUES (18692, 25, 6, 23, 65); -- Accuracy +6 in Mamook
+
 -- Lamiabane
 INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 54); -- +2 Magic Attack Bonus in Arrapago Reef
 INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 62); -- +2 Magic Attack Bonus in Halvung
 INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 65); -- +2 Magic Attack Bonus in Mamook
+
+-- Trollbane
+INSERT INTO `item_latents` VALUES (18694, 165, 5, 23, 54); -- Critical Hit Rate +5% in Arrapago Reef
+INSERT INTO `item_latents` VALUES (18694, 165, 5, 23, 62); -- Critical Hit Rate +5% in Halvung
+INSERT INTO `item_latents` VALUES (18694, 165, 5, 23, 65); -- Critical Hit Rate +5% in Mamook
 
 -- Snakeeye
 INSERT INTO `item_latents` VALUES (18708,8,5,13,3);    -- +5 STR while Poisoned
