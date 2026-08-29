@@ -27,6 +27,31 @@ describe('Job trait filtering', function()
         assert(quadav:hasTrait(xi.trait.RESIST_SLEEP), 'Steel Quadav should have Resist Sleep')
     end)
 
+    it('gives Dragon Killer to a pet Wyvern', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.BEADEAUX, job = xi.job.DRG, level = 99  })
+        player:spawnPet(xi.petId.WYVERN)
+
+        local wyvern = player:getPet()
+
+        if wyvern then
+            assert(wyvern:hasTrait(xi.trait.DRAGON_KILLER), 'Wyvern should have Dragon Killer from job')
+        end
+    end)
+
+    it('gives Resist Petrify to a pet Wyvern when master has Wyrm Mail equipped', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.DRG, level = 99  })
+        player:changesJob(xi.job.RDM)
+        player:setsLevel(49)
+        player:setMod(xi.mod.WYVERN_SUBJOB_TRAITS, 1)
+        player:spawnPet(xi.petId.WYVERN)
+
+        local wyvern = player:getPet()
+
+        if wyvern then
+            assert(wyvern:hasTrait(xi.trait.RESIST_PETRIFY), 'Wyvern should have Resist Petrify from RDM sub job')
+        end
+    end)
+
     it('gives Resist Sleep to a player', function()
         local player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.PLD, level = 99 })
 

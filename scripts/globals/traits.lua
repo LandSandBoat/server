@@ -22,8 +22,9 @@ local mobExcludedTraits =
     [xi.trait.FENCER         ] = true,
 }
 
--- Traits only beastmen monsters get
-local beastmenOnlyTraits =
+-- Resist Traits
+-- For mobs, usually only beastmen get these.
+local resistTraits =
 {
     [xi.trait.RESIST_SLEEP   ] = true,
     [xi.trait.RESIST_POISON  ] = true,
@@ -51,19 +52,35 @@ local beastmenOnlyTraits =
 ---@param zone CZone?
 ---@return boolean
 xi.traits.canApplyTrait = function(trait, entity, zone)
-    -- Only monsters are filtered, everything else gets its traits for now
-    if not entity:isMob() then
+    -- Mobs and pets get filtered.
+
+    -- Pets:
+    -- Avatars get do not gain Arcana Killer from their DRK main job.
+    -- Jug pets get innate killer modifiers. They don't need the job trait.
+    -- Wyverns get innate killer modifiers + Job Traits.
+    -- Automatons do not gain killer effects from their job.
+    if
+        not entity:isMob() and
+        not entity:isPet()
+    then
         return true
     end
 
-    local traitId = trait:getID()
+    local traitId     = trait:getID()
+    local isWyvernPet = entity:isPet() and entity:getPetID() == xi.petId.WYVERN
+    local isBeastmen  = entity:getEcosystem() == xi.ecosystem.BEASTMEN
 
-    if mobExcludedTraits[traitId] then
+    if
+        mobExcludedTraits[traitId] and
+        not isWyvernPet
+    then
         return false
     end
 
-    if beastmenOnlyTraits[traitId] then
-        return entity:getEcosystem() == xi.ecosystem.BEASTMEN
+    -- TODO: Research if pets besides Wyverns ever gain Resist traits.
+    -- Note: Wyverns can in fact gain Resist traits when their master utilizes Wyrm Mail.
+    if resistTraits[traitId] then
+        return isWyvernPet or isBeastmen
     end
 
     return true
