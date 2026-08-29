@@ -227,6 +227,26 @@ local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
     return math.floor(skill * 0.11) * multiplier + 3 + extraDmg
 end
 
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param params table
+---@return number
+local calculateCritChance = function(caster, target, params)
+    if
+        params.critchance ~= nil and
+        (caster:hasStatusEffect(xi.effect.AZURE_LORE) or
+        caster:hasStatusEffect(xi.effect.EFFLUX) or
+        caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY))
+    then
+        -- native blue magic crit rate is 0%. Remove 5% on input.
+        -- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S8:Y8
+        local nativecrit = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN) - 0.05
+
+        return utils.clamp(params.critchance / 100 + nativecrit, 0.00, 1.0)
+    end
+
+    return 0
+end
 -----------------------------------
 -- Global functions
 -----------------------------------
@@ -296,7 +316,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Final D
     local finalD = math.floor(initialD + fStr + wsc)
-    -- TODO: Implement ENHANCES_CHAIN_AFFINITY. Increase base damage of spell, but not limited to spell's damage cap
     -- ENHANCES_CHAIN_AFFINITY should also not modify skillchain damage
 
     ----------------------------------------------
@@ -310,20 +329,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
     params.tphitslanded = 0
-    params.critchance   = 0
-
-    if
-        params.critchance ~= nil and
-        (caster:hasStatusEffect(xi.effect.AZURE_LORE) or
-        caster:hasStatusEffect(xi.effect.EFFLUX) or
-        caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY))
-    then
-        -- native blue magic crit rate is 0%. Remove 5% on input.
-        -- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S8:Y8
-        local nativecrit = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN) - 0.05
-
-        params.critchance = utils.clamp(params.critchance / 100 + nativecrit, 0.00, 1.0)
-    end
+    params.critchance   = calculateCritChance(caster, target, params)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = calculateHitrate(caster, target, params.bonusacc)
