@@ -251,7 +251,10 @@ xi.mobSkill =
     WHISPERS_OF_IRE               =  398,
 
     HAMMER_BEAK                   =  406,
+    POISON_PICK                   =  407,
+    SOUND_VACUUM_COCKATRICE       =  408,
 
+    SOUND_BLAST                   =  410,
     BALEFUL_GAZE_COCKATRICE       =  411,
     RANGED_ATTACK_2               =  412,
     EAGLE_EYE_SHOT_HUMANOID       =  413,
