@@ -1,0 +1,168 @@
+# ---------------------------------------------------------------------------
+# Build de l'image sur un runner GitHub, publication sur GHCR, puis
+# deploiement par le runner auto-heberge installe sur le serveur de jeu.
+#
+#   push sur main  -> build seulement (verifie que ca compile)
+#   tag v*         -> build + deploiement
+#   manuellement   -> build, deploiement au choix
+#
+# Aucun acces entrant vers le serveur : le runner sort vers GitHub.
+#
+# Variable de depot (Settings > Secrets and variables > Actions > Variables) :
+#   DEPLOY_PATH   chemin du depot sur le serveur, defaut /srv/ffxi-server
+#
+# Aucun secret n'est necessaire : le runner s'authentifie a GHCR avec le
+# GITHUB_TOKEN de l'execution, le paquet peut donc rester prive.
+# ---------------------------------------------------------------------------
+
+name: Deploy prod
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deployer apres le build'
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+
+  build:
+    name: Build et publication de l'image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+      # Doit rester identique aux ids de cache derives dans le Dockerfile.
+      cache_id: gcc15-Release
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+    steps:
+
+      - name: Nom du depot en minuscules
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - uses: docker/setup-buildx-action@v4
+        id: buildx
+
+      # Sans ce cache, chaque execution recompile tout le C++ (40 min et plus
+      # sur un runner 2 coeurs). Avec, une modification Lua ou SQL se
+      # reconstruit en quelques minutes.
+      - name: Cache de compilation
+        uses: actions/cache@v5
+        env:
+          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake', 'docker/*.Dockerfile') }}
+          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*', 'data/**/*', 'tools/codegen/**/*') }}
+        with:
+          path: |
+            /tmp/ffxi-build
+            /tmp/ffxi-ccache
+          key: ffxi-buildcache-${{ env.cmake_hash }}-${{ env.source_hash }}
+          restore-keys: |
+            ffxi-buildcache-${{ env.cmake_hash }}-
+            ffxi-buildcache-
+
+      # Les caches du Dockerfile sont des mounts BuildKit : ils ne survivent
+      # pas d'une execution a l'autre sans ce transfert.
+      - name: Injection du cache dans BuildKit
+        uses: reproducible-containers/buildkit-cache-dance@v3.4.0
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-map: |
+            {
+              "/tmp/ffxi-build": {
+                "target": "/xiadmin/build",
+                "id": "build-ubuntu-${{ env.cache_id }}",
+                "uid": "1000",
+                "gid": "1000"
+              },
+              "/tmp/ffxi-ccache": {
+                "target": "/xiadmin/.ccache",
+                "id": "ccache-ubuntu-${{ env.cache_id }}",
+                "uid": "1000",
+                "gid": "1000"
+              }
+            }
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Toujours un tag par SHA (identifiable, re-deployable). Sur un tag de
+      # version, on ajoute le nom du tag et « latest ».
+      - name: Tags de l'image
+        id: image
+        run: |
+          set -euo pipefail
+          base="ghcr.io/${REPO}"
+          sha="${GITHUB_SHA::12}"
+          tags="${base}:${sha}"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+              version="${GITHUB_REF#refs/tags/}"
+              tags="${tags},${base}:${version},${base}:latest"
+          fi
+          echo "image=${base}:${sha}" >>${GITHUB_OUTPUT}
+          echo "tags=${tags}"        >>${GITHUB_OUTPUT}
+          echo "Tags : ${tags}"
+
+      - name: Build et push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./docker/ubuntu.Dockerfile
+          target: service
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.image.outputs.tags }}
+          build-args: |
+            BUILD_CACHE_ID=${{ env.cache_id }}
+            CMAKE_BUILD_TYPE=Release
+            REPO_URL=${{ github.server_url }}/${{ github.repository }}.git
+            COMMIT_SHA=${{ github.sha }}
+          labels: |
+            org.opencontainers.image.title=Serveur FFXI (fork LandSandBoat)
+            org.opencontainers.image.revision=${{ github.sha }}
+
+  deploy:
+    name: Deploiement
+    needs: build
+    if: ${{ startsWith(github.ref, 'refs/tags/v') || inputs.deploy }}
+    # Le runner installe sur le serveur de jeu, identifie par son label « lsb ».
+    runs-on: [self-hosted, lsb]
+    permissions:
+      contents: read
+      packages: read
+    steps:
+
+      # Le runner tourne sur la machine cible : il s'authentifie a GHCR avec
+      # le jeton de l'execution, aucun PAT a stocker.
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploiement
+        env:
+          IMAGE: ${{ needs.build.outputs.image }}
+          SHA: ${{ github.sha }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/srv/ffxi-server' }}
+        run: |
+          set -euo pipefail
+          cd "${DEPLOY_PATH}"
+          bash deploy/deploy.sh "${IMAGE}" "${SHA}"
