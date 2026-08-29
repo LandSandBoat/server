@@ -493,7 +493,8 @@ xi.pets.automaton.frameMods =
     {
         mods =
         {
-            { xi.mod.DMG, -625 },
+            { xi.mod.DMG,  -625 },
+            { xi.mod.DEFP,   20 },
         },
     },
 
@@ -511,6 +512,7 @@ xi.pets.automaton.frameMods =
         {
             { xi.mod.SHIELDBLOCKRATE,    45 },
             { xi.mod.DMG,             -1250 },
+            { xi.mod.DEFP,               50 },
         },
     },
 
@@ -524,6 +526,7 @@ xi.pets.automaton.frameMods =
             { xi.mod.PIERCE_SDT,  8750 },
             { xi.mod.DMGBREATH,  -1250 },
             { xi.mod.DMGMAGIC,   -1250 },
+            { xi.mod.DEFP,          10 },
         },
     },
 

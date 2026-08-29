@@ -618,23 +618,26 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         // Automatons are hard to interrupt
         PPet->addModifier(xi::Mod::SPELLINTERRUPT, 85);
 
+        // Base Automaton Defense Ranks // Cap at 1/2 the ranks skill cap // These get modified by a frame-specific DEFP Modifier.
+        // Harlequin : C / 2 + 20% DEFP / Valoredge : B- / 2 + 50% DEFP / Sharpshot : C- / 2 + 10% DEFP / Stormwaker : D / 2 + 0% DEFP
+        // https://docs.google.com/spreadsheets/d/1VukPnF1oJppXOVpqexcpDpEeR0bDqrkCYJrr0Vo5HpE
         switch (PAutomaton->frame())
         {
             default: // case AutomatonFrame::Harlequin:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(4, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(7, mlvl > 99 ? 99 : mlvl) / 2); // C
                 break;
             case AutomatonFrame::Valoredge:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(7, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(8, mlvl > 99 ? 99 : mlvl));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl) / 2); // B-
                 break;
             case AutomatonFrame::Sharpshot:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(8, mlvl > 99 ? 99 : mlvl) / 2); // C-
                 break;
             case AutomatonFrame::Stormwaker:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(9, mlvl > 99 ? 99 : mlvl) / 2); // D
                 break;
         }
 

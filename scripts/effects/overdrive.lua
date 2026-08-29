@@ -30,14 +30,6 @@ local statusAilmentResRanks =
     -- xi.mod.GRAVITY_RES_RANK,
 }
 
-local overdriveDefenseDivisors =
-{
-    [xi.automaton.frame.VALOREDGE ] = 24,
-    [xi.automaton.frame.STORMWAKER] = 16,
-    [xi.automaton.frame.SHARPSHOT ] = 18,
-    [xi.automaton.frame.HARLEQUIN ] = 20,
-}
-
 effectObject.onEffectGain = function(target, effect)
     if target:getObjType() == xi.objType.PC then
         effect:addMod(xi.mod.OVERLOAD_THRESH, 5000)
@@ -51,18 +43,12 @@ effectObject.onEffectGain = function(target, effect)
         effect:addMod(xi.mod.ACC, 25)
         effect:addMod(xi.mod.RACC, 25)
         effect:addMod(xi.mod.EVA, 25)
+        effect:addMod(xi.mod.DEFP, 25)
 
         local master = target:getMaster()
 
         if not master then
             return
-        end
-
-        local frameEquipped = target:getAutomatonFrame()
-        local frameDivisor  = overdriveDefenseDivisors[frameEquipped] or 24
-
-        if frameDivisor then
-            effect:addMod(xi.mod.DEFP, math.floor(400 / frameDivisor))
         end
 
         for _, mod in pairs(statusAilmentResRanks) do
