@@ -14,7 +14,7 @@ local m = Module:new('city_move_speed')
 
 -- Bonus additif applique avant les multiplicateurs.
 -- La vitesse de base d'un joueur est 40 : +12 ~= +30 %.
-local CITY_SPEED_BONUS = 12
+local citySpeedBonus = 12
 
 local function isCity(zone)
     return zone ~= nil and bit.band(zone:getTypeMask(), xi.zoneType.CITY) ~= 0
@@ -25,7 +25,7 @@ end
 -- sources de MOVE_SPEED_STACKABLE (penalites d'equipement, etc.).
 local function refreshCitySpeed(player)
     local applied = player:getLocalVar('JSL_CITY_SPEED')
-    local wanted  = isCity(player:getZone()) and CITY_SPEED_BONUS or 0
+    local wanted  = isCity(player:getZone()) and citySpeedBonus or 0
 
     if applied == wanted then
         return
