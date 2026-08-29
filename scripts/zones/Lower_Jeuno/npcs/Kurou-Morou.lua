@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- Starts and Finishes Quest: Your Crystal Ball & Never to return
+--  NPC: Kurou-Morou
+-- Starts and Finishes Quest: Never to Return
+-- Involved in Quests: Your Crystal Ball, Searching for the Right Words
 -- !pos -4 -6 -28 245
 -----------------------------------
 local ID = zones[xi.zone.LOWER_JEUNO]
@@ -19,12 +21,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local yourCrystalBall           = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-    local searchingForTheRightWords = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local rubbishDay                = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local neverToReturn             = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
-    local jeunoFame                 = player:getFameLevel(xi.fameArea.JEUNO)
-    local searchingForWordsPrereq   = player:getCharVar('QuestSearchRightWords_prereq')
+    local yourCrystalBall = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+    local jeunoFame       = player:getFameLevel(xi.fameArea.JEUNO)
 
     if
         jeunoFame >= 5 and
@@ -39,31 +37,6 @@ entity.onTrigger = function(player, npc)
         elseif prog == 3 then
             player:startEvent(202) -- Start 'Never to return' quest
         end
-
-    --if searching for right words *prereq* CS has been activated
-    elseif searchingForWordsPrereq == 1 then
-        player:startEvent(38)
-
-    elseif player:getCharVar('QuestSearchRightWords_denied') == 1 then
-        player:startEvent(36)
-
-    elseif searchingForTheRightWords == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(39)
-
-    elseif player:getCharVar('SearchingForRightWords_postcs') == -2 then
-        player:startEvent(154)
-
-    elseif searchingForTheRightWords == xi.questStatus.QUEST_COMPLETED then --final state, after all quests complete
-        player:startEvent(37)
-
-    --conditions for searching for the right words
-    elseif
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == xi.questStatus.QUEST_COMPLETED and
-        rubbishDay == xi.questStatus.QUEST_COMPLETED and
-        neverToReturn == xi.questStatus.QUEST_COMPLETED and
-        searchingForTheRightWords == xi.questStatus.QUEST_AVAILABLE
-    then
-        player:startEvent(17)
 
     else
         player:startEvent(193) -- Standard dialog
@@ -93,12 +66,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:tradeComplete()
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
         end
-
-    elseif csid == 17 then
-        player:setCharVar('QuestSearchRightWords_prereq', 1)
-
-    elseif csid == 154 then
-        player:setCharVar('SearchingForRightWords_postcs', -1)
     end
 end
 
