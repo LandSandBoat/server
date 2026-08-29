@@ -108,29 +108,30 @@ local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
     end
 end
 
--- Get fSTR
-local function calculatefSTR(dSTR)
-    local fSTR2 = 0
-
-    if dSTR >= 12 then
-        fSTR2 = dSTR + 4
-    elseif dSTR >= 6 then
-        fSTR2 = dSTR + 6
-    elseif dSTR >= 1 then
-        fSTR2 = dSTR + 7
-    elseif dSTR >= -2 then
-        fSTR2 = dSTR + 8
-    elseif dSTR >= -7 then
-        fSTR2 = dSTR + 9
-    elseif dSTR >= -15 then
-        fSTR2 = dSTR + 10
-    elseif dSTR >= -21 then
-        fSTR2 = dSTR + 12
+-- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=V30
+---@param dSTR number
+---@param level number
+local function calculatefSTR(dSTR, level)
+    if dSTR > 2 then
+        return math.floor(math.min((dSTR + 4) / 4, math.floor((level / 5) + 7)))
     else
-        fSTR2 = dSTR + 13
+        return math.floor(math.max((dSTR + 8) / 4, (math.floor((level / 5) - 1) * -1)))
     end
+end
 
-    return fSTR2 / 2
+-- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S30
+---@param dSTR number
+---@param level number
+local function calculatefSTR2(dSTR, level)
+    if dSTR > 24 then
+        return math.floor(math.min((dSTR + 4) / 2, (math.floor((level / 5) + 7) * 2)))
+    elseif dSTR > 2 then
+        return math.floor((dSTR + 6) / 4)
+    elseif dSTR > -21 then
+        return math.floor((dSTR + 8) / 4)
+    else
+        return math.floor(math.max((dSTR + 10) / 4, (math.floor((level / 5) - 1) * -2)))
+    end
 end
 
 -- Get hitrate
@@ -204,6 +205,85 @@ local function calculateNukeWallFactor(target, spellElement, finalDamage)
     return 1 - potency / 10000
 end
 
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@return number
+local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
+    local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
+    local multiplier = 2
+    local extraDmg   = 0
+
+    if caster:hasStatusEffect(xi.effect.EFFLUX) then
+        multiplier = 3
+    end
+
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
+    end
+
+    -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
+    -- There's no documentation on it doing that and ilvl gear plainly states +X and not +X/2 which then gets multiplied by 2 or 3.
+    return math.floor(skill * 0.11) * multiplier + 3 + extraDmg
+end
+
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param params table
+---@return number
+local calculateCritChance = function(caster, target, params)
+    if
+        params.critchance ~= nil and
+        (caster:hasStatusEffect(xi.effect.AZURE_LORE) or
+        caster:hasStatusEffect(xi.effect.EFFLUX) or
+        caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY))
+    then
+        -- native blue magic crit rate is 0%. Remove 5% on input.
+        -- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S8:Y8
+        local nativecrit = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN) - 0.05
+
+        return utils.clamp(params.critchance / 100 + nativecrit, 0.00, 1.0)
+    end
+
+    return 0
+end
+
+---@param caster CBaseEntity
+---@return number
+local getTPBonus = function(caster)
+    local tp = 0
+
+    -- Efflux acts like a 1k tp Chain Affinity
+    -- With Chain Affinity, this is effectively TP bonus +1000.
+    if caster:hasStatusEffect(xi.effect.EFFLUX) then
+        tp = 1000 -- TOOD: add Efflux bonus gear as mod
+    end
+
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        tp = tp + caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
+        tp = utils.clamp(tp, 0, 3000)
+    end
+
+    return tp
+end
+
+---@param caster CBaseEntity
+---@return number
+local getWSCBonuses = function(caster)
+    local bonusWSC = 0
+
+    -- BLU AF3 bonus (triples the base WSC when it procs)
+    if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
+        bonusWSC = 2
+    end
+
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
+    end
+
+    return bonusWSC
+end
+
 -----------------------------------
 -- Global functions
 -----------------------------------
@@ -217,30 +297,26 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     -----------------------
 
     -- Initial D value
-    local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
+    local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell)
     initialD       = utils.clamp(initialD, 0, params.duppercap)
 
     -- fSTR
-    local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
-    if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
-        fStr = math.min(fStr, 22)
+    local dSTR = caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
+    local fStr = 0
+
+    if params.attackType and params.attackType == xi.attackType.RANGED then
+        fStr = calculatefSTR2(dSTR, caster:getMainLvl())
+    else
+        fStr = calculatefSTR(dSTR, caster:getMainLvl())
     end
 
     -- Multiplier, bonus WSC
     local multiplier = params.multiplier or 1
-    local bonusWSC   = 0
+    local bonusWSC   = getWSCBonuses(caster)
+    local tp         = getTPBonus(caster)
 
-    -- BLU AF3 bonus (triples the base WSC when it procs)
-    if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
-        bonusWSC = 2
-    end
-
-    -- Chain Affinity -- TODO: add 'Damage/Accuracy/Critical Hit Chance varies with TP'
-    if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        local tp   = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
-        tp         = utils.clamp(tp, 0, 3000)
+    if tp > 0 then
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
-        bonusWSC   = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
     -- WSC
@@ -257,8 +333,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Final D
     local finalD = math.floor(initialD + fStr + wsc)
-    -- TODO: Implement ENHANCES_CHAIN_AFFINITY. Increase base damage of spell, but not limited to spell's damage cap
-    -- ENHANCES_CHAIN_AFFINITY should also not modify skillchain damage
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
@@ -271,10 +345,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
     params.tphitslanded = 0
-
-    -- params.critchance will only be non-nil if base critchance is passed from spell lua
-    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN)
-    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
+    params.critchance   = calculateCritChance(caster, target, params)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = calculateHitrate(caster, target, params.bonusacc)
