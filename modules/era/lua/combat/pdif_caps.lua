@@ -27,4 +27,5 @@ m:addOverride('xi.server.onServerStart', function()
     xi.combat.physical.pDifWeaponCapTable[xi.skill.ARCHERY         ] = 3
     xi.combat.physical.pDifWeaponCapTable[xi.skill.MARKSMANSHIP    ] = 3
     xi.combat.physical.pDifWeaponCapTable[xi.skill.THROWING        ] = 3
+    xi.combat.physical.pDifWeaponCapTable[xi.skill.BLUE_MAGIC      ] = 2
 end)
