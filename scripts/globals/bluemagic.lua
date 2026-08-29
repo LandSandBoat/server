@@ -247,6 +247,43 @@ local calculateCritChance = function(caster, target, params)
 
     return 0
 end
+
+---@param caster CBaseEntity
+---@return number
+local getTPBonus = function(caster)
+    local tp = 0
+
+    -- Efflux acts like a 1k tp Chain Affinity
+    -- With Chain Affinity, this is effectively TP bonus +1000.
+    if caster:hasStatusEffect(xi.effect.EFFLUX) then
+        tp = 1000 -- TOOD: add Efflux bonus gear as mod
+    end
+
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        tp = tp + caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
+        tp = utils.clamp(tp, 0, 3000)
+    end
+
+    return tp
+end
+
+---@param caster CBaseEntity
+---@return number
+local getWSCBonuses = function(caster)
+    local bonusWSC = 0
+
+    -- BLU AF3 bonus (triples the base WSC when it procs)
+    if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
+        bonusWSC = 2
+    end
+
+    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
+    end
+
+    return bonusWSC
+end
+
 -----------------------------------
 -- Global functions
 -----------------------------------
@@ -275,29 +312,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Multiplier, bonus WSC
     local multiplier = params.multiplier or 1
-    local bonusWSC   = 0
+    local bonusWSC   = getWSCBonuses(caster)
+    local tp         = getTPBonus(caster)
 
-    -- BLU AF3 bonus (triples the base WSC when it procs)
-    if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
-        bonusWSC = 2
-    end
-
-    local tp = 0
-
-    -- Efflux acts like a 1k tp Chain Affinity
-    -- With Chain Affinity, this is effectively TP bonus +1000.
-    if caster:hasStatusEffect(xi.effect.EFFLUX) then
-        tp = 1000 -- TOOD: add Efflux bonus gear as mod
-    end
-
-    -- TODO: add 'Damage/Accuracy varies with TP'
-    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        tp         = tp + caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
-        tp         = utils.clamp(tp, 0, 3000)
-        bonusWSC   = bonusWSC + 1 -- Chain Affinity doubles base WSC
-    end
-
-    -- Efflux or Chain Affinity
     if tp > 0 then
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
     end
@@ -316,7 +333,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Final D
     local finalD = math.floor(initialD + fStr + wsc)
-    -- ENHANCES_CHAIN_AFFINITY should also not modify skillchain damage
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
