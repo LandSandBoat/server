@@ -190,6 +190,7 @@ local packets =
             -- Not all paths use the lua function? Need the MOD for now.
             stub('xi.combat.physical.isGuarded', true)
             mnkMob:setMod(xi.mod.ADDITIVE_GUARD, 100)
+            mnkMob:updateEnmity(player)
 
             player.actions:engage(mnkMob)
             for i = 1, 20 do

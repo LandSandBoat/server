@@ -267,6 +267,8 @@ local packets =
             player:equipItem(xi.item.POWER_BOW)
             player:equipItem(xi.item.KABURA_ARROW)
             player.actions:engage(mob)
+            mob:updateEnmity(player)
+
             for i = 1, 10 do
                 player.actions:rangedAttack(mob)
                 xi.test.world:skipTime(10)

@@ -445,6 +445,7 @@ local packets =
             player:setLevel(99)
             player:addItem(xi.item.VERETHRAGNA_99)
             player:equipItem(xi.item.VERETHRAGNA_99, nil, xi.slot.MAIN)
+            mob:updateEnmity(player)
             player.actions:engage(mob)
             xi.test.world:skipTime(1)
 
