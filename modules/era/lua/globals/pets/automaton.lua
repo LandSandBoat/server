@@ -51,7 +51,8 @@ m:addOverrideByEra('xi.server.onServerStart', {
         {
             mods =
             {
-                { xi.mod.DMG, -625 },
+                { xi.mod.DMG,  -625 },
+                { xi.mod.DEFP,   20 },
             },
         }
 
@@ -60,6 +61,7 @@ m:addOverrideByEra('xi.server.onServerStart', {
             mods =
             {
                 { xi.mod.DMG, -1250 },
+                { xi.mod.DEFP,   50 },
             },
         }
 
@@ -70,6 +72,7 @@ m:addOverrideByEra('xi.server.onServerStart', {
                 { xi.mod.PIERCE_SDT,  8750 },
                 { xi.mod.DMGBREATH,  -1250 },
                 { xi.mod.DMGMAGIC,   -1250 },
+                { xi.mod.DEFP,          10 },
             },
         }
 
@@ -92,9 +95,30 @@ m:addOverrideByEra('xi.server.onServerStart', {
         super()
 
         -- Removes Frame Specific DT Taken Modifiers for Automaton Frames & Removes Valoredge Block : https://wiki.ffo.jp/html/19739.html / https://wiki.ffo.jp/html/31705.html
-        xi.pets.automaton.frameMods[xi.automaton.frame.HARLEQUIN ] = {}
-        xi.pets.automaton.frameMods[xi.automaton.frame.VALOREDGE ] = {}
-        xi.pets.automaton.frameMods[xi.automaton.frame.SHARPSHOT ] = {}
+        xi.pets.automaton.frameMods[xi.automaton.frame.HARLEQUIN] =
+        {
+            mods =
+            {
+                { xi.mod.DEFP, 20 },
+            },
+        }
+
+        xi.pets.automaton.frameMods[xi.automaton.frame.VALOREDGE] =
+        {
+            mods =
+            {
+                { xi.mod.DEFP, 50 },
+            },
+        }
+
+        xi.pets.automaton.frameMods[xi.automaton.frame.SHARPSHOT] =
+        {
+            mods =
+            {
+                { xi.mod.DEFP, 10 },
+            },
+        }
+
         xi.pets.automaton.frameMods[xi.automaton.frame.STORMWAKER] = {}
     end,
 })
