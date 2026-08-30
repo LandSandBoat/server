@@ -30,6 +30,7 @@
 #include "map/conquest_data.h"
 #include "map/conquest_system.h"
 #include "map/entities/base_entity.h"
+#include "map/entities/char_entity.h"
 #include "map/entities/mob_entity.h"
 #include "map/lua/lua_base_entity.h"
 #include "map/lua/luautils.h"
@@ -505,6 +506,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     TracyZoneScoped;
 
     auto                 zoneId = xi::ZoneId::GmHome;
+    auto                 race   = CharRace::HumeMale;
     sol::optional<uint8> job;
     sol::optional<uint8> level;
     bool                 isNewPlayer = false;
@@ -514,6 +516,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
         const sol::table& paramTable = params.value();
 
         zoneId      = static_cast<xi::ZoneId>(paramTable.get_or("zone", static_cast<uint16>(xi::ZoneId::GmHome)));
+        race        = static_cast<CharRace>(paramTable.get_or("race", static_cast<uint8>(CharRace::HumeMale)));
         job         = paramTable.get<sol::optional<uint8>>("job");
         level       = paramTable.get<sol::optional<uint8>>("level");
         isNewPlayer = paramTable.get_or("new", false);
@@ -521,7 +524,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
 
     ShowInfoFmt("Spawning player in zone: {}", zoneId);
 
-    auto testChar = TestChar::create(zoneId);
+    auto testChar = TestChar::create(zoneId, race);
 
     if (!testChar)
     {

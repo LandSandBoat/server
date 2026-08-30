@@ -13,9 +13,10 @@ describe('Blue Magic monster correlation', function()
     -- ecosystemMultiplier() hands back 1.0 for a neutral matchup, so it has to be
     -- turned into a bonus before it's added to anything. Added raw, every spell
     -- picks up a flat +1.0.
-    local neutralDamage      = 37
-    local favourableDamage   = 46 -- 1.00 -> 1.25
-    local unfavourableDamage = 27 -- 1.00 -> 0.75
+    -- Foot Kick from a naked Hume BLU99 (STR 72 with the captured base stat formula) against a level 28 Clipper
+    local neutralDamage      = 30
+    local favourableDamage   = 37 -- 1.00 -> 1.25
+    local unfavourableDamage = 22 -- 1.00 -> 0.75
 
     before_each(function()
         xi.test.world:setSeed(1)
