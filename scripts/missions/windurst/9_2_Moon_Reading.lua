@@ -190,7 +190,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 1 and
                         not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
                     then
-                        return mission:progressEvent(4)
+                        return mission:progressCutscene(4)
                     end
                 end,
             },
@@ -212,7 +212,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 1 and
                         not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
                     then
-                        return mission:progressEvent(68)
+                        return mission:progressCutscene(68)
                     end
                 end,
             },
