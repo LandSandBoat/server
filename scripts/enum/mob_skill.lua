@@ -429,6 +429,8 @@ xi.mobSkill =
     VENOM_1                       =  660,
     SNOW_CLOUD_1                  =  661,
 
+    ICE_ROAR_1                    =  663,
+    IMPACT_ROAR_1                 =  664,
     GRAND_SLAM_1                  =  665,
 
     POWER_ATTACK_ARMED_1          =  667,
