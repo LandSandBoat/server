@@ -213,7 +213,7 @@ local function movePoint(player, npc, zoneId, info, helmType)
     local positionIndex = math.randomInt(1, #points)
     local point         = points[positionIndex]
 
-    npc:hideNPC(120)
+    npc:hideNPC(info.respawnTime)
     npc:queue(3000, function(entity)
         entity:setPos(point[1], point[2], point[3], 0)
         entity:setLocalVar('[HELM]PositionIndex', positionIndex)
