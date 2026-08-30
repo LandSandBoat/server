@@ -29,12 +29,18 @@ GP_SERV_COMMAND_TROPHY_LIST::GP_SERV_COMMAND_TROPHY_LIST(const TreasurePoolItem*
 {
     auto& packet = this->data();
 
+    uint32_t startTime = 0;
+    if (PItem->TimeStamp.has_value())
+    {
+        startTime = static_cast<uint32_t>(timer::count_milliseconds(*PItem->TimeStamp - timer::start_time));
+    }
+
     packet.TrophyItemNum   = 1;                 // Item Quantity
     packet.Gold            = 0;                 // TODO: Gil Found
     packet.TrophyItemNo    = PItem->ID;         // Item ID
     packet.TrophyItemIndex = PItem->SlotID;     // Treasure Pool Slot
     packet.Entry           = isOldItem ? 1 : 0; // Old Item
-    packet.StartTime       = static_cast<uint32_t>(timer::count_milliseconds(PItem->TimeStamp - timer::start_time));
+    packet.StartTime       = startTime;
 
     if (PEntity != nullptr)
     {

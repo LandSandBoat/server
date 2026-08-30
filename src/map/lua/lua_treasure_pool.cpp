@@ -151,10 +151,16 @@ auto CLuaTreasurePool::getItems() const -> sol::table
 
     for (const auto& item : m_PLuaTreasurePool->getItems())
     {
+        uint32 timestamp = 0;
+        if (item.TimeStamp.has_value())
+        {
+            timestamp = earth_time::timestamp(timer::to_utc(*item.TimeStamp));
+        }
+
         sol::table itemRow   = lua.create_table();
         itemRow["id"]        = item.ID;
         itemRow["slotId"]    = item.SlotID;
-        itemRow["timestamp"] = earth_time::timestamp(timer::to_utc(item.TimeStamp));
+        itemRow["timestamp"] = timestamp;
 
         sol::table lotters     = lua.create_table();
         int        lotterIndex = 1;
