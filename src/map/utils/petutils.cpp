@@ -34,11 +34,11 @@
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
 #include "mob_spell_list.h"
+#include "mobutils.h"
 #include "notoriety_container.h"
 #include "petutils.h"
 
 #include "data/loader.h"
-#include "mobutils.h"
 
 #include "puppetutils.h"
 #include "status_effect_container.h"
@@ -203,12 +203,6 @@ void RetreatToMaster(CBattleEntity* PMaster)
     }
 }
 
-uint16 GetJugWeaponDamage(CPetEntity* PPet)
-{
-    float MainLevel = PPet->GetMLevel();
-    return (uint16)(MainLevel * (MainLevel < 40 ? 1.4 - MainLevel / 100 : 1));
-}
-
 uint16 GetJugBase(CPetEntity* PMob, uint8 rank)
 {
     uint8 lvl = PMob->GetMLevel();
@@ -277,47 +271,49 @@ uint16 GetBaseToRank(uint8 rank, uint16 lvl)
     return 0;
 }
 
-void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
+void LoadJugStats(CPetEntity* PPet, Pet_t* petStats)
 {
     // follows monster formulas but jugs have no subjob
 
     float growth = 1.0;
-    uint8 lvl    = PMob->GetMLevel();
+    uint8 mLvl   = PPet->GetMLevel();
+    uint8 sLvl   = PPet->GetSLevel();
 
+    // TODO: Research Pet HP/MP scaling
     // give hp boost every 10 levels after 25
     // special boosts at 25 and 50
-    if (lvl > 75)
+    if (mLvl > 75)
     {
         growth = 1.22f;
     }
-    else if (lvl > 65)
+    else if (mLvl > 65)
     {
         growth = 1.20f;
     }
-    else if (lvl > 55)
+    else if (mLvl > 55)
     {
         growth = 1.18f;
     }
-    else if (lvl > 50)
+    else if (mLvl > 50)
     {
         growth = 1.16f;
     }
-    else if (lvl > 45)
+    else if (mLvl > 45)
     {
         growth = 1.12f;
     }
-    else if (lvl > 35)
+    else if (mLvl > 35)
     {
         growth = 1.09f;
     }
-    else if (lvl > 25)
+    else if (mLvl > 25)
     {
         growth = 1.07f;
     }
 
-    PMob->health.maxhp = (int16)(17.0 * pow(lvl, growth) * petStats->HPscale);
+    PPet->health.maxhp = (int16)(17.0 * pow(mLvl, growth) * petStats->HPscale);
 
-    switch (PMob->GetMJob())
+    switch (PPet->GetMJob())
     {
         case xi::Job::PLD:
         case xi::Job::WHM:
@@ -326,57 +322,91 @@ void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
         case xi::Job::DRK:
         case xi::Job::BLU:
         case xi::Job::SCH:
-            PMob->health.maxmp = (int16)(15.2 * pow(lvl, 1.1075) * petStats->MPscale);
+            PPet->health.maxmp = (int16)(15.2 * pow(mLvl, 1.1075) * petStats->MPscale);
             break;
         default:
             break;
     }
 
-    PMob->baseSpeed      = petStats->speed;
-    PMob->animationSpeed = petStats->speed;
-    PMob->UpdateSpeed();
+    PPet->baseSpeed      = petStats->speed;
+    PPet->animationSpeed = petStats->speed;
+    PPet->UpdateSpeed();
 
-    PMob->UpdateHealth();
-    PMob->health.tp = 0;
-    PMob->health.hp = PMob->GetMaxHP();
-    PMob->health.mp = PMob->GetMaxMP();
+    PPet->UpdateHealth();
+    PPet->health.tp = 0;
+    PPet->health.hp = PPet->GetMaxHP();
+    PPet->health.mp = PPet->GetMaxMP();
 
-    PMob->setModifier(xi::Mod::DEF, GetJugBase(PMob, petStats->defRank));
-    PMob->setModifier(xi::Mod::EVA, GetJugBase(PMob, petStats->evaRank));
-    PMob->setModifier(xi::Mod::ATT, GetJugBase(PMob, petStats->attRank));
-    PMob->setModifier(xi::Mod::ACC, GetJugBase(PMob, petStats->accRank));
+    PPet->setModifier(xi::Mod::DEF, GetJugBase(PPet, petStats->defRank));
+    PPet->setModifier(xi::Mod::EVA, GetJugBase(PPet, petStats->evaRank));
+    PPet->setModifier(xi::Mod::ATT, GetJugBase(PPet, petStats->attRank));
+    PPet->setModifier(xi::Mod::ACC, GetJugBase(PPet, petStats->accRank));
 
-    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
+    // NOTE: In 2014, Jug pet base damage was increased by an unknown amount(Needs retail captures).
+    // https://wiki.ffo.jp/html/30566.html
+
+    uint16 weaponDamage = mLvl;
+    PPet->setMobMod(xi::MobMod::DamageOffset, 2);
+    PPet->setMobMod(xi::MobMod::RangedDamageOffset, 2);
+
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(weaponDamage);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(petStats->m_dmgType);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(petStats->m_dmgType);
+
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(petStats->cmbDelay);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(petStats->cmbDelay);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDelay(360); // TODO: Avatars/Mobs use 360 delay so using this for now but could use a capture to verify.
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setBaseDelay(360);
 
     // reduce weapon delay of MNK
-    if (PMob->GetMJob() == xi::Job::MNK)
+    if (PPet->GetMJob() == xi::Job::MNK)
     {
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->resetDelay();
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->resetDelay();
     }
 
-    uint16 fSTR = GetBaseToRank(petStats->strRank, PMob->GetMLevel());
-    uint16 fDEX = GetBaseToRank(petStats->dexRank, PMob->GetMLevel());
-    uint16 fVIT = GetBaseToRank(petStats->vitRank, PMob->GetMLevel());
-    uint16 fAGI = GetBaseToRank(petStats->agiRank, PMob->GetMLevel());
-    uint16 fINT = GetBaseToRank(petStats->intRank, PMob->GetMLevel());
-    uint16 fMND = GetBaseToRank(petStats->mndRank, PMob->GetMLevel());
-    uint16 fCHR = GetBaseToRank(petStats->chrRank, PMob->GetMLevel());
+    // Stat ranks from mob species
+    uint16 fSTR = GetBaseToRank(petStats->strRank, PPet->GetMLevel());
+    uint16 fDEX = GetBaseToRank(petStats->dexRank, PPet->GetMLevel());
+    uint16 fVIT = GetBaseToRank(petStats->vitRank, PPet->GetMLevel());
+    uint16 fAGI = GetBaseToRank(petStats->agiRank, PPet->GetMLevel());
+    uint16 fINT = GetBaseToRank(petStats->intRank, PPet->GetMLevel());
+    uint16 fMND = GetBaseToRank(petStats->mndRank, PPet->GetMLevel());
+    uint16 fCHR = GetBaseToRank(petStats->chrRank, PPet->GetMLevel());
 
-    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 2), PMob->GetMLevel());
-    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 3), PMob->GetMLevel());
-    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 4), PMob->GetMLevel());
-    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 5), PMob->GetMLevel());
-    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 6), PMob->GetMLevel());
-    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), PMob->GetMLevel());
-    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), PMob->GetMLevel());
+    // Stat ranks from mob main job
+    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
 
-    PMob->stats.STR = (uint16)((fSTR + mSTR) * 0.9f);
-    PMob->stats.DEX = (uint16)((fDEX + mDEX) * 0.9f);
-    PMob->stats.VIT = (uint16)((fVIT + mVIT) * 0.9f);
-    PMob->stats.AGI = (uint16)((fAGI + mAGI) * 0.9f);
-    PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
-    PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
-    PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
+    // Jugs don't seem to have sub jobs but will still handle it here incase that ever changes in future.
+    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+
+    sSTR /= 2;
+    sDEX /= 2;
+    sAGI /= 2;
+    sINT /= 2;
+    sMND /= 2;
+    sCHR /= 2;
+    sVIT /= 2;
+
+    PPet->stats.STR = (uint16)(fSTR + mSTR + sSTR);
+    PPet->stats.DEX = (uint16)(fDEX + mDEX + sDEX);
+    PPet->stats.VIT = (uint16)(fVIT + mVIT + sVIT);
+    PPet->stats.AGI = (uint16)(fAGI + mAGI + sAGI);
+    PPet->stats.INT = (uint16)(fINT + mINT + sINT);
+    PPet->stats.MND = (uint16)(fMND + mMND + sMND);
+    PPet->stats.CHR = (uint16)(fCHR + mCHR + sCHR);
 }
 
 void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats, uint8 mlvl)
@@ -656,9 +686,9 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
     }
 }
 
-void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
+auto CalculatePetHPMP(CBattleEntity* PMaster, CPetEntity* PPet) -> void
 {
-    // TODO: Audit Avatar HP Scale
+    // TODO: Audit Avatar/Wyvern HP Scale
     // Declaration of variables needed for calculation.
     float raceStat          = 0; // final HP for level based on race.
     float jobStat           = 0; // final number of HP for the level based on the primary profession.
@@ -670,7 +700,6 @@ void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     int32 scaleOver60Column = 3; // column number with modifier after level 60
     int32 scaleOver75Column = 4; // column number with modifier after level 75
     int32 scaleOver60       = 2; // column number with a modifier for calculating MP after level 60
-    int32 scaleOver75       = 3; // column number with a modifier for calculating Stats after level 75
 
     uint8 grade = 0;
 
@@ -739,53 +768,6 @@ void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     PPet->health.maxmp = (int16)(raceStat + jobStat + sJobStat);
     PPet->health.mp    = PPet->health.maxmp;
-
-    // add in evasion from skill
-    int16 evaskill = PPet->GetSkill(xi::SkillType::Evasion);
-    int16 eva      = evaskill;
-    if (evaskill > 200)
-    { // Evasion skill is 0.9 evasion post-200
-        eva = (int16)(200 + (evaskill - 200) * 0.9);
-    }
-    PPet->setModifier(xi::Mod::EVA, eva);
-
-    // Start of calculation of characteristics
-    uint8 counter = 0;
-    for (uint8 StatIndex = 2; StatIndex <= 8; ++StatIndex)
-    {
-        // calculation by race/family
-        grade    = grade::GetRaceGrades(race, StatIndex);
-        raceStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
-
-        if (mainLevelOver60 > 0)
-        {
-            raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-            if (mainLevelOver75 > 0)
-            {
-                raceStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-            }
-        }
-
-        // calculation by profession
-        grade   = grade::GetJobGrade(mjob, StatIndex);
-        jobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
-
-        if (mainLevelOver60 > 0)
-        {
-            jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-
-            if (mainLevelOver75 > 0)
-            {
-                jobStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-            }
-        }
-
-        jobStat = jobStat * 1.5f; // stats from subjob (assuming BLM/BLM for avatars)
-
-        // Value output
-        ref<uint16>(&PPet->stats, counter) = (uint16)(raceStat + jobStat);
-        counter += 2;
-    }
 }
 
 void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
@@ -808,6 +790,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     auto* PPetData = *maybePetData;
 
     uint8 mLvl = PMaster->GetMLevel();
+    uint8 sLvl = mLvl; // Avatars use a 1:1 job ratio
 
     if (PMaster->GetMJob() == xi::Job::SMN)
     {
@@ -822,65 +805,100 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
             mLvl += PMaster->getMod(xi::Mod::CAIT_SITH_LVL_BONUS);
         }
         PPet->SetMLevel(mLvl);
+        PPet->SetSLevel(mLvl);
     }
     else if (PMaster->GetSJob() == xi::Job::SMN)
     {
         mLvl = PMaster->GetSLevel();
 
         PPet->SetMLevel(mLvl);
+        PPet->SetSLevel(mLvl);
+    }
+    else if ((PMaster->GetMJob() != xi::Job::SMN && PMaster->GetSJob() != xi::Job::SMN) && (petID == PETID_WATERSPIRIT)) // Edge case for Poseidon's Ring on Non SMN jobs
+    {
+        // According to JP wiki, this takes on the players main job level but caps at 75~. TODO: Need to confirm.
+        // https://wiki.ffo.jp/html/9155.html
+        PPet->SetMLevel(mLvl = (mLvl > 75) ? 75 : mLvl);
+        PPet->SetSLevel(mLvl = (mLvl > 75) ? 75 : mLvl);
     }
     else
-    { // TODO: How does this interact since all jobs can use it?
-      // https://www.bg-wiki.com/ffxi/Poseidon%27s_Ring
-
+    {
         ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->getName());
         PPet->SetMLevel(1);
     }
 
-    LoadAvatarStats(PMaster, PPet); // follows PC calcs (w/o SJ)
+    // follows PC calcs (w/o SJ)
+    // TODO: Audit Avatar HP formula
+    CalculatePetHPMP(PMaster, PPet);
+
+    // Set the stat attributes of the avatar/spirit.
+    uint16 fSTR = GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
+    uint16 fDEX = GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
+    uint16 fVIT = GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
+    uint16 fAGI = GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
+    uint16 fINT = GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
+    uint16 fMND = GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
+    uint16 fCHR = GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
+
+    // Stat ranks from mob main job
+    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+
+    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+
+    sSTR /= 2;
+    sDEX /= 2;
+    sAGI /= 2;
+    sINT /= 2;
+    sMND /= 2;
+    sCHR /= 2;
+    sVIT /= 2;
+
+    PPet->stats.STR = (uint16)(fSTR + mSTR + sSTR);
+    PPet->stats.DEX = (uint16)(fDEX + mDEX + sDEX);
+    PPet->stats.VIT = (uint16)(fVIT + mVIT + sVIT);
+    PPet->stats.AGI = (uint16)(fAGI + mAGI + sAGI);
+    PPet->stats.INT = (uint16)(fINT + mINT + sINT);
+    PPet->stats.MND = (uint16)(fMND + mMND + sMND);
+    PPet->stats.CHR = (uint16)(fCHR + mCHR + sCHR);
 
     PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
 
-    PPet->setModifier(xi::Mod::DMGPHYS, -5000); //-50% PDT
-
-    PPet->setModifier(xi::Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
-
-    if (mLvl >= 70)
-    {
-        PPet->setModifier(xi::Mod::MATT, 32);
-    }
-    else if (mLvl >= 50)
-    {
-        PPet->setModifier(xi::Mod::MATT, 28);
-    }
-    else if (mLvl >= 30)
-    {
-        PPet->setModifier(xi::Mod::MATT, 24);
-    }
-    else if (mLvl >= 10)
-    {
-        PPet->setModifier(xi::Mod::MATT, 20);
-    }
+    PPet->setModifier(xi::Mod::DMGPHYS, -5000); // -50% PDT
 
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(PPetData->cmbDelay);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(PPetData->cmbDelay);
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setBaseDelay(360); // Used for titan's ranged skills TP returns.
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDelay(360); // Used for titan's ranged skills TP returns.
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setBaseDelay(360);
 
-    // In a 2014 update SE updated Avatar base damage
-    uint16 weaponDamage = mLvl + 2;
+    uint16 weaponDamage = mLvl;
+    PPet->setMobMod(xi::MobMod::DamageOffset, 2);
+    PPet->setMobMod(xi::MobMod::RangedDamageOffset, 2);
 
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(weaponDamage);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_SUB])->setDmgType(PPetData->m_dmgType);
 
-    // Set B+ weapon skill (assumed capped for level derp)
-    // attack is madly high for avatars (roughly x2)
-    PPet->setModifier(xi::Mod::ATT, 2 * battleutils::GetMaxSkill(xi::SkillType::Club, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::Club, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->addModifier(xi::Mod::DEF, mobutils::GetBaseDefEva(PPet, PPetData->defRank));
+    PPet->addModifier(xi::Mod::EVA, mobutils::GetBaseDefEva(PPet, mobutils::JobSkillRankToBaseEvaRank(PPet->GetMJob(), PPet->GetSJob())));
+    PPet->addModifier(xi::Mod::ATT, mobutils::GetBaseSkill(PPet, PPetData->attRank));
+    PPet->addModifier(xi::Mod::ACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
+    PPet->addModifier(xi::Mod::RATT, mobutils::GetBaseSkill(PPet, PPetData->attRank));
+    PPet->addModifier(xi::Mod::RACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
 
-    // Set E evasion and def
-    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::Throwing, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::Throwing, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
-
-    // cap all magic skills so they play nice with spell scripts
+    // Cap all magic skills so they play nice with spell scripts
     for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
     {
         uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
@@ -888,9 +906,9 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         {
             PPet->WorkingSkills.skill[i] = maxSkill;
         }
-        else // if the mob is WAR/BLM and can cast spell
+        else
         {
-            // set skill as high as main level, so their spells won't get resisted
+            // Set skill as high as main level, so their spells won't get resisted
             uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
 
             if (maxSubSkill != 0)
@@ -935,33 +953,104 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
 void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
-    // set the wyvern job based on master's SJ
-    if (PMaster->GetSJob() != xi::Job::NONE)
+    uint32 petID = PPet->petID();
+
+    // clang-format off
+    auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
     {
-        PPet->SetSJob(static_cast<uint8>(PMaster->GetSJob()));
+        return t->PetID == petID;
+    });
+    // clang-format on
+
+    if (maybePetData == g_PPetList.end())
+    {
+        ShowError(fmt::format("Could not look up pet data for id: {}", petID));
+        return;
     }
 
-    PPet->SetMJob(static_cast<uint8>(xi::Job::DRG));
+    auto* PPetData = *maybePetData;
+
+    // Wyvern Pets are DRG/DRG with a subjob level of 1
     // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
     uint8 mLvl = PMaster->GetMLevel();
+    uint8 sLvl = 1;
     uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
 
     PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(xi::Mod::WYVERN_LVL_BONUS));
+    PPet->SetSLevel(sLvl);
 
-    LoadAvatarStats(PMaster, PPet);                                       // follows PC calcs (w/o SJ)
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(320); // 320 delay
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(320);
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
-    // Set A+ weapon skill
-    PPet->setModifier(xi::Mod::ATT, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
-    // Set D evasion and def
-    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::HandToHand, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::HandToHand, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
+    // TODO: Audit Wyvern HP
+    CalculatePetHPMP(PMaster, PPet);
+
+    // Set the stat attributes of the wyvern.
+    // Stat ranks from mob species
+    uint16 fSTR = GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
+    uint16 fDEX = GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
+    uint16 fVIT = GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
+    uint16 fAGI = GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
+    uint16 fINT = GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
+    uint16 fMND = GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
+    uint16 fCHR = GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
+
+    // Stat ranks from mob main job
+    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+
+    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+
+    sSTR /= 2;
+    sDEX /= 2;
+    sAGI /= 2;
+    sINT /= 2;
+    sMND /= 2;
+    sCHR /= 2;
+    sVIT /= 2;
+
+    PPet->stats.STR = (uint16)(fSTR + mSTR + sSTR);
+    PPet->stats.DEX = (uint16)(fDEX + mDEX + sDEX);
+    PPet->stats.VIT = (uint16)(fVIT + mVIT + sVIT);
+    PPet->stats.AGI = (uint16)(fAGI + mAGI + sAGI);
+    PPet->stats.INT = (uint16)(fINT + mINT + sINT);
+    PPet->stats.MND = (uint16)(fMND + mMND + sMND);
+    PPet->stats.CHR = (uint16)(fCHR + mCHR + sCHR);
+
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(PPetData->cmbDelay);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(PPetData->cmbDelay);
+
+    // Weapon damage is Main Level / 2 + offset.
+    // Main Level/2 is handled by applying BASE_DAMAGE_MULTIPLIER mobmod to Wyvern onSpawn in lua.
+    // NOTE: In 2014, Wyvern base damage was increased by an unknown amount(Needs retail captures).
+    // https://wiki.ffo.jp/html/30566.html
+
+    uint16 weaponDamage = mLvl;
+    PPet->setMobMod(xi::MobMod::DamageOffset, 3);
+
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
+
+    PPet->addModifier(xi::Mod::DEF, mobutils::GetBaseDefEva(PPet, PPetData->defRank));
+    PPet->addModifier(xi::Mod::EVA, mobutils::GetBaseDefEva(PPet, mobutils::JobSkillRankToBaseEvaRank(PPet->GetMJob(), PPet->GetSJob())));
+    PPet->addModifier(xi::Mod::ATT, mobutils::GetBaseSkill(PPet, PPetData->attRank));
+    PPet->addModifier(xi::Mod::RATT, mobutils::GetBaseSkill(PPet, PPetData->attRank));
+    PPet->addModifier(xi::Mod::ACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
+    PPet->addModifier(xi::Mod::RACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
 
     // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
     // innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
     // TODO: need "UDMG" modifier or equivalent
+    // Note: This was added in the September 20, 2011 Patch
+    // https://wiki.ffo.jp/html/24823.html
     PPet->setModifier(xi::Mod::DMG, -4000);
 
     // innate + 40 subtle blow
@@ -1010,8 +1099,6 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     auto* PPetData = *maybePetData;
 
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(240);
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(240);
     // Get the Jug pet cap level
     uint8 highestLvl = PPetData->maxLevel;
 
@@ -1864,7 +1951,48 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     PPet->m_Species      = PPetData->m_Species;
     PPet->m_MobSkillList = PPetData->m_MobSkillList;
     PPet->SetMJob(PPetData->mJob);
+    PPet->SetSJob(PPetData->sJob);
     PPet->m_Element = PPetData->m_Element;
+
+    PPet->baseSpeed      = PPetData->speed;
+    PPet->animationSpeed = PPetData->speed;
+    PPet->UpdateSpeed();
+
+    PPet->setModifier(xi::Mod::SLASH_SDT, PPetData->slash_sdt);
+    PPet->setModifier(xi::Mod::PIERCE_SDT, PPetData->pierce_sdt);
+    PPet->setModifier(xi::Mod::HTH_SDT, PPetData->hth_sdt);
+    PPet->setModifier(xi::Mod::IMPACT_SDT, PPetData->impact_sdt);
+
+    PPet->setModifier(xi::Mod::UDMGMAGIC, PPetData->magical_sdt);
+
+    PPet->setModifier(xi::Mod::FIRE_SDT, PPetData->fire_sdt);
+    PPet->setModifier(xi::Mod::ICE_SDT, PPetData->ice_sdt);
+    PPet->setModifier(xi::Mod::WIND_SDT, PPetData->wind_sdt);
+    PPet->setModifier(xi::Mod::EARTH_SDT, PPetData->earth_sdt);
+    PPet->setModifier(xi::Mod::THUNDER_SDT, PPetData->thunder_sdt);
+    PPet->setModifier(xi::Mod::WATER_SDT, PPetData->water_sdt);
+    PPet->setModifier(xi::Mod::LIGHT_SDT, PPetData->light_sdt);
+    PPet->setModifier(xi::Mod::DARK_SDT, PPetData->dark_sdt);
+
+    PPet->setModifier(xi::Mod::FIRE_RES_RANK, PPetData->fire_res_rank);
+    PPet->setModifier(xi::Mod::ICE_RES_RANK, PPetData->ice_res_rank);
+    PPet->setModifier(xi::Mod::WIND_RES_RANK, PPetData->wind_res_rank);
+    PPet->setModifier(xi::Mod::EARTH_RES_RANK, PPetData->earth_res_rank);
+    PPet->setModifier(xi::Mod::THUNDER_RES_RANK, PPetData->thunder_res_rank);
+    PPet->setModifier(xi::Mod::WATER_RES_RANK, PPetData->water_res_rank);
+    PPet->setModifier(xi::Mod::LIGHT_RES_RANK, PPetData->light_res_rank);
+    PPet->setModifier(xi::Mod::DARK_RES_RANK, PPetData->dark_res_rank);
+
+    PPet->setModifier(xi::Mod::PARALYZE_RES_RANK, PPetData->paralyze_res_rank);
+    PPet->setModifier(xi::Mod::BIND_RES_RANK, PPetData->bind_res_rank);
+    PPet->setModifier(xi::Mod::SILENCE_RES_RANK, PPetData->silence_res_rank);
+    PPet->setModifier(xi::Mod::SLOW_RES_RANK, PPetData->slow_res_rank);
+    PPet->setModifier(xi::Mod::POISON_RES_RANK, PPetData->poison_res_rank);
+    PPet->setModifier(xi::Mod::LIGHT_SLEEP_RES_RANK, PPetData->light_sleep_res_rank);
+    PPet->setModifier(xi::Mod::DARK_SLEEP_RES_RANK, PPetData->dark_sleep_res_rank);
+    PPet->setModifier(xi::Mod::BLIND_RES_RANK, PPetData->blind_res_rank);
+    PPet->setModifier(xi::Mod::STUN_RES_RANK, PPetData->stun_res_rank);
+    PPet->setModifier(xi::Mod::GRAVITY_RES_RANK, PPetData->gravity_res_rank);
 
     if (PPet->getPetType() == PET_TYPE::AVATAR)
     {

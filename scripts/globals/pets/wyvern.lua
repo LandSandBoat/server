@@ -119,6 +119,11 @@ local function doStatusBreath(target, player)
 end
 
 xi.pets.wyvern.onMobSpawn = function(mob)
+    -- NOTE: In 2014, Wyvern base damage was increased by an unknown amount(Needs retail captures).
+    -- https://wiki.ffo.jp/html/30566.html
+    -- Before 2014, Wyvern base damage is Level / 2 + offset. Once researched, a module can be made for pre 2014 damage.
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 50)
+
     local master = mob:getMaster()
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then

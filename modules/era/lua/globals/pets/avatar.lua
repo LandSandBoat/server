@@ -11,10 +11,7 @@ local m = Module:new('era_avatar_adjustments')
 -- https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit?pli=1&gid=562618210#gid=562618210
 m:addOverrideByEra('xi.pets.avatar.calculateAvatarWeaponDamage', {
     [xi.expansion.SOA] = function(pet)
-        local weaponDamage = (pet:getMainLvl() + 2) / 2
-
-        pet:setDamage(weaponDamage, xi.slot.MAIN)
-        pet:setDamage(weaponDamage, xi.slot.RANGED)
+        pet:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 50)
     end,
 })
 
