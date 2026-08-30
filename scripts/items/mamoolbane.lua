@@ -1,10 +1,10 @@
 -----------------------------------
--- ID: 18693
--- Item: Lamiabane
--- Item Effect: Enchantment: Refresh +1
+-- ID: 18692
+-- Item: Mamoolbane
+-- Item Effect: Enchantment: Evasion +10
 -- Duration: 60 Minutes
 -- Only usable in Arrapago Reef, Halvung, or Mamook. Effect lost upon zoning or unequipping.
--- https://wiki.ffo.jp/html/4402.html
+-- https://wiki.ffo.jp/html/4401.html
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -24,17 +24,17 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target, user)
-    if target:hasEquipped(xi.item.LAMIABANE) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 3600, origin = user, flag = xi.effectFlag.ON_ZONE, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.LAMIABANE })
+    if target:hasEquipped(xi.item.MAMOOLBANE) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 3600, origin = user, flag = xi.effectFlag.ON_ZONE, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.MAMOOLBANE })
     end
 end
 
 itemObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.REFRESH, 1)
+    effect:addMod(xi.mod.EVA, 10)
 end
 
 itemObject.onItemUnequip = function(target, item)
-    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.LAMIABANE)
+    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.MAMOOLBANE)
 end
 
 itemObject.onEffectLose = function(target, effect)
