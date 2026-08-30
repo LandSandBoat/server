@@ -42,7 +42,7 @@ instanceObject.afterInstanceRegister = function(player)
 
     -- NOTE: Time Limit observed in capture prior to KI fading.  This could be asyncronyous,
     -- but moving here from that reference.
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
     if player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) then
         player:delKeyItem(xi.ki.NYZUL_ISLE_ROUTE)

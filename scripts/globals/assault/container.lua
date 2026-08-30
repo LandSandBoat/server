@@ -354,7 +354,7 @@ xi.assault.afterInstanceRegistration = function(player, content)
 
     player:setCharVar('assaultEntered', assaultID)
     player:messageSpecial(ID.text.ASSAULT_START_OFFSET + assaultID, assaultID)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
     local areaData = xi.assault.areaData[content.assaultArea]
     if areaData and areaData.firefly then

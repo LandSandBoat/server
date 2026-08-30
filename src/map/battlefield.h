@@ -144,7 +144,6 @@ public:
     uint16                        GetRuleMask() const;
     timer::time_point             GetStartTime() const;
     timer::duration               GetTimeInside() const;
-    timer::time_point             GetFightTime() const;
     timer::duration               GetTimeLimit() const;
     timer::time_point             GetWipeTime() const;
     size_t                        GetMaxParticipants() const;

@@ -36,17 +36,7 @@ end
 
 ---@nodiscard
 ---@return integer
-function CBattlefield:getFightTick()
-end
-
----@nodiscard
----@return integer
 function CBattlefield:getWipeTime()
-end
-
----@nodiscard
----@return integer
-function CBattlefield:getFightTime()
 end
 
 ---@nodiscard

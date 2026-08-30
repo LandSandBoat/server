@@ -134,11 +134,6 @@ timer::duration CBattlefield::GetTimeInside() const
     return m_Tick - m_StartTime;
 }
 
-timer::time_point CBattlefield::GetFightTime() const
-{
-    return m_FightTick;
-}
-
 timer::duration CBattlefield::GetTimeLimit() const
 {
     return m_TimeLimit;

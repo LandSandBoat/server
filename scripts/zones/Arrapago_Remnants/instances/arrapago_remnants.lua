@@ -7,7 +7,7 @@ local instanceObject = {}
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
     player:messageSpecial(ID.text.SALVAGE_START, 1)
     player:addStatusEffect(xi.effect.ENCUMBRANCE_I, { power = 0xFFFF, duration = 6000, origin = player })
     player:addStatusEffect(xi.effect.OBLIVISCENCE, { duration = 6000, origin = player })

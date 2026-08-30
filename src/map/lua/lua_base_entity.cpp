@@ -2703,7 +2703,7 @@ void CLuaBaseEntity::hideNPC(const sol::object& seconds)
 /************************************************************************
  *  Function: updateNPCHideTime()
  *  Purpose : Adds more time to an NPC being hidden
- *  Example : npc:updateNPCHideTime(50000) -- Hide-and-Seek World Champ
+ *  Example : npc:updateNPCHideTime(50) -- Hide for another 50 seconds
  *  Notes   : Default is 15 seconds
  ************************************************************************/
 

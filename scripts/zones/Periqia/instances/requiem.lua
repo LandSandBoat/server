@@ -10,7 +10,7 @@ instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     player:messageSpecial(ID.text.ASSAULT_32_START, 32)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 
 instanceObject.onInstanceCreated = function(instance)

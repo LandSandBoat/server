@@ -553,12 +553,12 @@ end
 
 xi.instance.updateInstanceTime = function(instance, elapsed, text)
     local players            = instance:getChars()
-    local remainingTimeLimit = instance:getTimeLimit() * 60 - (elapsed / 1000)
+    local remainingTimeLimit = instance:getTimeLimit() - elapsed
     local wipeTime           = instance:getWipeTime()
 
     if
         remainingTimeLimit < 0 or
-        (wipeTime ~= 0 and (elapsed - wipeTime) / 1000 > 180
+        (wipeTime ~= 0 and elapsed - wipeTime > 180
         )
     then
         instance:fail()
