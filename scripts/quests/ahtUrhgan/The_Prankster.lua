@@ -128,10 +128,13 @@ quest.sections =
             vars.Prog == 3
         end,
 
-        [xi.zone.BHAFLAU_THICKETS] =
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
             ['Ahaadah'] = quest:event(17),
+        },
 
+        [xi.zone.BHAFLAU_THICKETS] =
+        {
             ['qm3'] = quest:progressCutscene(2),
 
             onEventFinish =
@@ -140,6 +143,16 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
+        },
+    },
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Ahaadah'] = quest:event(18):replaceDefault(),
         },
     },
 }
