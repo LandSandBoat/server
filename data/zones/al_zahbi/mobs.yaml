@@ -4144,11 +4144,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4280,11 +4275,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4328,11 +4318,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4374,11 +4359,6 @@ templates:
         skill: axe
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -4420,11 +4400,6 @@ templates:
         skill: katana
       jobs: [blm, blm]
       resists:
-        dmg_physical:
-          slashing: 8750
-          piercing: 8750
-          blunt:    8750
-          h2h:      8750
         rank_element:
           fire:    -2
           ice:      4
@@ -4468,11 +4443,6 @@ templates:
         skill: katana
       jobs: [blm, blm]
       resists:
-        dmg_physical:
-          slashing: 8750
-          piercing: 8750
-          blunt:    8750
-          h2h:      8750
         rank_element:
           fire:    -2
           ice:      4

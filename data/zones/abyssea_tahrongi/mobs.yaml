@@ -321,11 +321,6 @@ templates:
         skill: sword
       jobs: [drk, drk]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -1750,11 +1745,6 @@ templates:
         skill: dagger
       jobs: [drk, thf]
       resists:
-        dmg_physical:
-          slashing: 10000
-          piercing: 10000
-          blunt:    10000
-          h2h:      10000
         rank_element:
           fire:    -2
           ice:      4
@@ -1784,7 +1774,7 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 85000
+        hp: 28333
     loot:
       drops:
         - chance: always
