@@ -34,6 +34,45 @@ mission.sections =
                 player:getNation() == mission.areaId
         end,
 
+        [xi.zone.HEAVENS_TOWER] =
+        {
+            ['Kiwawa'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(mission.areaId, mission.missionId) and
+                        not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.A_NEW_JOURNEY)
+                    then
+                        return mission:event(138):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Nebibi'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(mission.areaId, mission.missionId) and
+                        not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.A_NEW_JOURNEY)
+                    then
+                        return mission:event(147):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Zubaba'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(mission.areaId, mission.missionId) and
+                        not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.A_NEW_JOURNEY)
+                    then
+                        return mission:event(136):replaceDefault()
+                    end
+                end,
+            },
+        },
+
         [xi.zone.PORT_WINDURST] =
         {
             onEventFinish =
@@ -72,11 +111,32 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                 not player:hasCompletedMission(mission.areaId, mission.missionId) and
-                not player:hasCompletedMission(mission.areaId, mission.missionId + 1)
+                not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.A_NEW_JOURNEY)
         end,
 
         [xi.zone.HEAVENS_TOWER] =
         {
+            -- Event 121 gives these two their lines. Event 41 takes them away again.
+            ['Kiwawa'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(124)
+                    end
+                end,
+            },
+
+            ['Kupipi'] = mission:event(120),
+
+            ['Nebibi'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(134)
+                    end
+                end,
+            },
+
             ['Zubaba'] =
             {
                 onTrigger = function(player, npc)
@@ -85,7 +145,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(121)
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(122)
+                        return mission:event(122)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(135)
                     end
@@ -124,7 +184,14 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 2)
                     player:delKeyItem(xi.ki.CHARM_OF_LIGHT)
                 end,
-            }
+            },
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Rakoh_Buuma'] = mission:event(188),
+            ['Sola_Jaab']   = mission:event(190),
+            ['Tih_Pikeh']   = mission:event(189),
         },
     },
 
@@ -133,7 +200,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                 (player:hasCompletedMission(mission.areaId, mission.missionId) or
-                player:hasCompletedMission(mission.areaId, mission.missionId + 1))
+                player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.A_NEW_JOURNEY))
         end,
 
         [xi.zone.HEAVENS_TOWER] =
@@ -155,7 +222,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(257, 0, xi.item.RUSTY_DAGGER)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(150, 0, xi.item.RUSTY_DAGGER)
+                        return mission:event(150, 0, xi.item.RUSTY_DAGGER)
                     end
                 end,
             },

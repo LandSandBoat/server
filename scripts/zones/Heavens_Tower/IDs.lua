@@ -7,6 +7,7 @@ zones[xi.zone.HEAVENS_TOWER] =
 {
     text =
     {
+        VESTAL_CHAMBERS_LOCKED        = 310,  -- The door to the Vestal Chambers is locked shut.
         STAIRWAY_LOCKED               = 554,  -- The door to the Starway Stairway is locked tight.
         STAIRWAY_ONLY_CITIZENS        = 555,  -- The door to the Starway Stairway is locked tight, and only citizens of Windurst can open it.
         CONQUEST_BASE                 = 582,  -- Tallying conquest results...
