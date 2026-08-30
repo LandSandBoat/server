@@ -54,49 +54,6 @@ local function calculateWSC(attacker, params)
     return wsc
 end
 
--- Get cRatio
-local function calculatecRatio(ratio, atk_lvl, def_lvl)
-    -- Get ratio with level penalty
-    local levelcor = 0
-    if atk_lvl < def_lvl then
-        levelcor = 0.05 * (def_lvl - atk_lvl)
-    end
-
-    ratio = ratio - levelcor
-    ratio = utils.clamp(ratio, 0, 2)
-
-    -- Get cRatiomin
-    local cratiomin = 0
-    if ratio < 1.25 then
-        cratiomin = 1.2 * ratio - 0.5
-    elseif ratio >= 1.25 and ratio <= 1.5 then
-        cratiomin = 1
-    elseif ratio > 1.5 and ratio <= 2 then
-        cratiomin = 1.2 * ratio - 0.8
-    end
-
-    -- Get cRatiomax
-    local cratiomax = 0
-    if ratio < 0.5 then
-        cratiomax = 0.4 + 1.2 * ratio
-    elseif ratio <= 0.833 and ratio >= 0.5 then
-        cratiomax = 1
-    elseif ratio <= 2 and ratio > 0.833 then
-        cratiomax = 1.2 * ratio
-    end
-
-    -- Return data
-    local cratio = {}
-    if cratiomin < 0 then
-        cratiomin = 0
-    end
-
-    cratio[1] = cratiomin
-    cratio[2] = cratiomax
-
-    return cratio
-end
-
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
 local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
     tp = utils.clamp(tp, 0, 3000)
@@ -211,11 +168,11 @@ end
 ---@return number
 local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
     local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    local multiplier = 2
+    local multiplier = 1
     local extraDmg   = 0
 
     if caster:hasStatusEffect(xi.effect.EFFLUX) then
-        multiplier = 3
+        multiplier = 1.5
     end
 
     if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
@@ -223,8 +180,8 @@ local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
     end
 
     -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
-    -- There's no documentation on it doing that and ilvl gear plainly states +X and not +X/2 which then gets multiplied by 2 or 3.
-    return math.floor(skill * 0.11) * multiplier + 3 + extraDmg
+    -- There's no documentation on it doing that and ilvl gear plainly states +X
+    return (math.floor(skill * 0.11) * 2 + 3) * multiplier + extraDmg
 end
 
 ---@param caster CBaseEntity
@@ -289,12 +246,13 @@ end
 -----------------------------------
 
 -- Get the damage for a physical Blue Magic spell
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params table
+---@return number, number
 xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
-
-    -----------------------
-    -- Get final D value --
-    -----------------------
 
     -- Initial D value
     local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell)
@@ -338,17 +296,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
 
-    if params.offcratiomod == nil then -- For all spells except Cannonball, which uses a DEF mod
-        params.offcratiomod = caster:getStat(xi.mod.ATT)
-    end
-
-    params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
-    params.tphitslanded = 0
     params.critchance   = calculateCritChance(caster, target, params)
 
-    local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = calculateHitrate(caster, target, params.bonusacc)
+    local isCannonball         = spell:getID() == xi.magic.spell.CANNONBALL
+    local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
+    local spellAttackMod       = 1 -- TODO: implement
+    local attackMultiplier     = spellAttackMod * potencyAttackMod
+    local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster)
+    local hitrate              = calculateHitrate(caster, target, params.bonusacc)
 
     -------------------------
     -- Perform the attacks --
@@ -374,6 +330,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
     end
 
+    params.tphitslanded = 0
+
     while hitsdone < params.numhits do
         local chance = math.randomFloat(0, 1)
 
@@ -383,14 +341,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         then
             -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
-            -- Generate a random pDIF between min and max
-            local pdif = math.randomInt(cratio[1] * 1000, cratio[2] * 1000)
-            pdif       = pdif / 1000
-
             local isCritical = sneakIsApplicable or math.randomFloat(0, 1) < params.critchance
-            if isCritical then
-                pdif = pdif + 1
-            end
+            local pdif       = xi.combat.physical.calculateMeleePDIF(caster, target, xi.skill.BLUE_MAGIC, attackMultiplier, isCritical, applyLevelCorrection, false, 0, false, xi.slot.MAIN, isCannonball)
 
             anyCrit = anyCrit or isCritical
 
@@ -429,6 +381,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     spell:setCritical(anyCrit)
+
+    caster:delStatusEffectSilent(xi.effect.EFFLUX)
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget), hitslanded
 end
 

@@ -13,9 +13,9 @@ describe('Blue Magic monster correlation', function()
     -- ecosystemMultiplier() hands back 1.0 for a neutral matchup, so it has to be
     -- turned into a bonus before it's added to anything. Added raw, every spell
     -- picks up a flat +1.0.
-    local neutralDamage      = 9  -- This seems to roll a 9.6~ that truncates to 9 so the below results aren't exactly *1.25 and *.75
-    local favourableDamage   = 12 -- 1.00 -> 1.25
-    local unfavourableDamage = 7  -- 1.00 -> 0.75
+    local neutralDamage      = 37
+    local favourableDamage   = 46 -- 1.00 -> 1.25
+    local unfavourableDamage = 27 -- 1.00 -> 0.75
 
     before_each(function()
         xi.test.world:setSeed(1)
