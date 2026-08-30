@@ -81,9 +81,14 @@ templates:
       resists:
         immune_status: [bind, light_sleep, dark_sleep]
         rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
+          fire:    2
+          ice:     2
+          wind:    2
+          earth:   2
+          thunder: 2
+          water:   2
+          light:   2
+          dark:    2
         rank_status:
           silence: -3
           slow:    11
