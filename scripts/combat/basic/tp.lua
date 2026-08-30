@@ -54,7 +54,7 @@ xi.combat.tp.calculateTPReturn = function(gainee, delay)
         if delay > 530 then
             tpReturn = 145 + (delay - 530) * 35 / 470
         elseif delay > 480 then
-            tpReturn = 130 + (delay - 480) * 15 / 30
+            tpReturn = 130 + (delay - 480) * 15 / 50
         elseif delay > 450 then
             tpReturn = 115 + (delay - 450) * 15 / 30
         elseif delay > 180 then
