@@ -4,7 +4,6 @@ return {
     ['_6r2']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:Bastokan Emb.
     ['_6r5']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:San d'Orian Emb.
     ['_6r8']                 = { messageSpecial = ID.text.RESTRICTED }, -- Door:Windurstian Emb.
-    ['_6r9']                 = { event = 138 }, -- Door:Audience Chamber
     ['Adolie']               = { event = 158 },
     ['Ajahkeem']             = { event = 10106 },
     ['Akta']                 = { event = 116 },
@@ -23,7 +22,6 @@ return {
     ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
     ['Falreze']              = { event = 121 },
     ['Harith']               = { event = 111 },
-    ['High_Wind']            = { event = 164 },
     ['Jamal']                = { event = 10237 },
     ['Kayle']                = { event = 125 },
     ['Leis']                 = { event = 119 },
@@ -41,7 +39,6 @@ return {
     ['Pursuivant']           = { event = 69 },
     ['qm1']                  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Radeivepart']          = { event = 159 },
-    ['Rainhard']             = { event = 165 },
     ['relic']                = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY }, -- Blank QM at base of the fountain next to Radeivepart
     ['Sitting_Ram']          = { event = 115 },
     ['Splintery_Chest']      = { messageSpecial = ID.text.SIGNIFICANTLY_SHOPWORN },

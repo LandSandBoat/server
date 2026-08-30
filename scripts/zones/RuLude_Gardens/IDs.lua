@@ -33,6 +33,7 @@ zones[xi.zone.RULUDE_GARDENS] =
         HUNT_RECORDED                    = 6910,  -- You record your hunt.
         OBTAIN_SCYLDS                    = 6912,  -- You obtain <number> [scyld/scylds]! Current balance: <number> [scyld/scylds].
         HUNT_CANCELED                    = 6916,  -- Hunt canceled.
+        YOU_ACCEPT_THE_MISSION           = 9990,  -- You accept the mission.
         RESTRICTED                       = 10123, -- It reads, Restricted Area.
         THE_CONSULATE_IS_AWAY            = 10125, -- The consulate is away.
         SOVEREIGN_WITHOUT_AN_APPOINTMENT = 10196, -- Nobody sees the sovereign without an appointment!

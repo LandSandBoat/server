@@ -3,31 +3,22 @@
 -- Bastok M4-1
 -----------------------------------
 -- !addmission 1 13
--- Goggehn               : !pos -32 9 -49 243
--- _6r2 (Embassy)        : !pos -31.107 7.501 -65.061 243
+-- Goggehn               : !pos 3 9 -78 243
+-- _6r2 (Embassy)        : !pos 18 8 -74 243
 -- _6r9 (Audience Chmbr) : !pos 0 -5 66 243
 -- Aldo                  : !pos 20 3 -58 245
 -- Paya-Sabya            : !pos 9 1 70 244
--- Muckvix               : !pos -26.824 3.601 -137.082 245
+-- Geebeh                : !pos 11 1 68 244
+-- Muckvix               : !pos -26.824 4.601 -137.082 245
 -- Magicite (Orastone)   : !pos -344 25 43 152
--- Magicite (Opistone)   : !pos -160 -8 8 150
+-- Magicite (Optistone)  : !pos -160 -8 8 150
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
-local ruludeID = zones[xi.zone.RULUDE_GARDENS]
+local ruludeID     = zones[xi.zone.RULUDE_GARDENS]
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE)
-
-local function magiciteCounter(player)
-    local count = 0
-    for keyItem = xi.ki.MAGICITE_OPTISTONE, xi.ki.MAGICITE_ORASTONE do
-        if player:hasKeyItem(keyItem) then
-            count = count + 1
-        end
-    end
-
-    return count
-end
 
 mission.reward =
 {
@@ -71,19 +62,26 @@ mission.sections =
 
             onEventFinish =
             {
+                -- Both menu answers carry on into the rest of the scene.
+                -- Only a cancelled event leaves the mission unstarted.
                 [129] = function(player, csid, option, npc)
+                    if option == utils.EVENT_CANCELLED_OPTION then
+                        return
+                    end
+
                     mission:begin(player)
+                    player:messageText(npc, ruludeID.text.YOU_ACCEPT_THE_MISSION, false, 6)
                     npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
             },
         },
     },
 
-    -- Section 1: Mandatory pre-requisites. Necesary steps required even when having completed this mission for another nation.
+    -- Section 1: Mandatory pre-requisites. Necessary steps required even when having completed this mission for another nation.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:getMissionStatus(mission.areaId) <= 2
+                player:getMissionStatus(mission.areaId) <= 1
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -93,9 +91,9 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(128)
-                    else
-                        return mission:event(138, 1)
                     end
+
+                    return mission:event(138, 1)
                 end,
             },
 
@@ -124,13 +122,15 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        if player:hasKeyItem(xi.ki.SILVER_BELL) then
-                            return mission:progressEvent(152, 1) -- CS without Verena nor Fickblix
-                        else
-                            return mission:progressEvent(152) -- Regular CS with Verena and Fickblix
-                        end
+                    if player:getMissionStatus(mission.areaId) ~= 1 then
+                        return
                     end
+
+                    if player:hasKeyItem(xi.ki.SILVER_BELL) then
+                        return mission:progressEvent(152, 1) -- CS without Verena nor Fickblix
+                    end
+
+                    return mission:progressEvent(152, 0, 1) -- Regular CS with Verena and Fickblix
                 end,
             },
 
@@ -160,15 +160,20 @@ mission.sections =
             ['_6r9'] =
             {
                 onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 3 then
-                        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                            return mission:progressEvent(60, 1, 1)
-                        else
-                            return mission:progressEvent(60)
-                        end
-                    else
+                    if
+                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) or
+                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) or
+                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
                         return mission:event(138, 1)
                     end
+
+                    -- Param 0 swaps the airship pass for gil, param 1 skips the Eald'narche and Wolfgang scene when set.
+                    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+                        return mission:progressEvent(60, 1, 0)
+                    end
+
+                    return mission:progressEvent(60, 0, 0)
                 end,
             },
 
@@ -203,11 +208,15 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 0 then
+                    if
+                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
+                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
                         return mission:event(161)
-                    else
-                        return mission:event(183)
                     end
+
+                    return mission:event(183)
                 end,
             },
 
@@ -241,13 +250,31 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Paya-Sabya'] =
+            ['Geebeh'] =
             {
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.YAGUDO_TORCH) and
-                        mission:getVar(player, 'Option') == 0
+                        mission:getVar(player, 'Option') == 1
                     then
+                        return mission:messageText(upperJeunoID.text.WITHER_AND_DIE)
+                    end
+                end,
+            },
+
+            ['Paya-Sabya'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                        return
+                    end
+
+                    local option = mission:getVar(player, 'Option')
+
+                    -- Event 23 is the follow up once the garden scene has played.
+                    if option == 1 then
+                        return mission:event(23)
+                    elseif option == 0 then
                         return mission:progressEvent(80)
                     end
                 end,
@@ -266,14 +293,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(44, 152, 3, 1743, 3)
-                        else
-                            return mission:progressEvent(44)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(44, xi.zone.ALTAR_ROOM, 3)
+                    end
+
+                    return mission:progressEvent(44, xi.zone.ALTAR_ROOM)
                 end,
             },
 
@@ -289,7 +321,12 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.MAGICITE_ORASTONE)
                 end,
 
+                -- A cancelled event does not retire the Fickblix scene.
                 [10000] = function(player, csid, option, npc)
+                    if option == utils.EVENT_CANCELLED_OPTION then
+                        return
+                    end
+
                     mission:setVar(player, 'Option', 0)
                 end,
             },
@@ -300,14 +337,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(0, 1, 1, 1, 1, 1, 1, 1, 1)
-                        else
-                            return mission:progressEvent(0)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(0, 1, 1, 1, 1, 1, 1, 1, 1)
+                    end
+
+                    return mission:progressEvent(0, xi.zone.MONASTIC_CAVERN)
                 end,
             },
 
@@ -324,14 +366,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(0, 1)
-                        else
-                            return mission:progressEvent(0)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(0, 1, 46, 47)
+                    end
+
+                    return mission:progressEvent(0, 0, 46, 47)
                 end,
             },
 

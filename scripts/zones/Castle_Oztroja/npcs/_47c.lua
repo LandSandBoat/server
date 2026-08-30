@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
             end
         end
     else
-        player:messageSpecial(ID.text.CANNOT_REACH_TARGET)
+        player:messageText(npc, ID.text.CANNOT_REACH_TARGET, false, 6)
     end
 end
 
