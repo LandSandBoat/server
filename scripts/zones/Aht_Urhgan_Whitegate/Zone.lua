@@ -66,7 +66,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     -- Boat to Mhaura.
     if
         prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or

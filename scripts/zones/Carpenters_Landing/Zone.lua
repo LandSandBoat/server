@@ -62,8 +62,8 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar('[barge]aboard', 0)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    xi.barge.onTransportEvent(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    xi.barge.onTransportEvent(player, prevZoneId, transportName)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

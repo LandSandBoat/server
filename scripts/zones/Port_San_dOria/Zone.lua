@@ -36,7 +36,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     player:startEvent(700, { isHidden = true, flags = xi.cutsceneFlag.NO_IDLE_WAIT })
 end
 

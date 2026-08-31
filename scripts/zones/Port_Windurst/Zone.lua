@@ -29,7 +29,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     player:startEvent(10002, {
         isHidden = true,
         flags    = bit.bor(

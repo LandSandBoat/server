@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     -- don't take action on pirate ship transport departure
     if prevZoneId > 0 then
         player:startEvent(512)
