@@ -44,6 +44,8 @@ CLuaTestEntity::~CLuaTestEntity() = default;
 void CLuaTestEntity::setEntity(CBaseEntity* entity)
 {
     m_PBaseEntity = entity;
+    id_           = EntityId(entity);
+    lifetime_     = entity != nullptr ? entity->lifetime() : std::weak_ptr<void>();
 }
 
 /************************************************************************

@@ -23,6 +23,8 @@
 
 #include "sol/sol.hpp"
 
+#include <string_view>
+
 // sol changes this behavior to return 0 rather than truncating
 // we rely on that, so change it back
 // clang-format off
@@ -39,7 +41,7 @@
                                                                 sol::no_constructor, \
                                                                 sol::base_classes, sol::bases<__VA_ARGS__>())
 
-#define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
+#define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = xi::lua::guarded(#Func, &Func)
 
 #define SOL_READONLY(PropName, Func) typeBuilder[PropName] = sol::readonly_property(&Func)
 
@@ -92,6 +94,24 @@
         return obj ? sol::stack::push<LuaType>(L, obj) : sol::stack::push(L, sol::lua_nil); \
     }
 // clang-format on
+
+namespace xi::lua
+{
+
+// Binds the member pointer unchanged, for usertypes with no guarded overload of their own.
+template <typename Ret, typename Class, typename... Args>
+auto guarded(std::string_view, Ret (Class::*func)(Args...))
+{
+    return func;
+}
+
+template <typename Ret, typename Class, typename... Args>
+auto guarded(std::string_view, Ret (Class::*func)(Args...) const)
+{
+    return func;
+}
+
+} // namespace xi::lua
 
 //
 // Class bindings

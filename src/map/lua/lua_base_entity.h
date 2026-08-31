@@ -27,6 +27,7 @@
 #include "data/enums/fame_area.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/music_slot.h"
+#include "entities/entity_id.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
 #include "luautils.h"
@@ -51,7 +52,9 @@ class CLuaZone;
 class CLuaBaseEntity
 {
 protected:
-    CBaseEntity* m_PBaseEntity;
+    CBaseEntity*        m_PBaseEntity;
+    EntityId            id_;       // what it pointed at, for the error message
+    std::weak_ptr<void> lifetime_; // expires when that entity is destroyed
 
 public:
     CLuaBaseEntity(CBaseEntity*);
@@ -60,6 +63,8 @@ public:
     {
         return m_PBaseEntity;
     }
+
+    void ensureLive(std::string_view binding) const; // raises a Lua error if the entity behind this handle is gone
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaBaseEntity& entity);
 
@@ -998,5 +1003,59 @@ public:
 
     static void Register();
 };
+
+namespace xi::lua
+{
+
+inline void ensureLive(std::string_view binding, const CLuaBaseEntity* entity)
+{
+    if (entity != nullptr)
+    {
+        entity->ensureLive(binding);
+    }
+}
+
+// Keep both spellings. With only the const one, a CLuaBaseEntity* argument prefers the catch-all and is never checked.
+inline void ensureLive(std::string_view binding, CLuaBaseEntity* entity)
+{
+    if (entity != nullptr)
+    {
+        entity->ensureLive(binding);
+    }
+}
+
+// Anything that is not an entity handle has no lifetime to check.
+template <typename T>
+void ensureLive(std::string_view, const T&)
+{
+}
+
+// Wraps an entity binding in a lambda of the same signature, with the handle it is called on as
+// the first parameter, which is how sol passes the receiver of `entity:method(...)`.
+template <typename Ret, typename... Args>
+auto guarded(std::string_view binding, Ret (CLuaBaseEntity::*func)(Args...))
+{
+    return [binding, func](CLuaBaseEntity& self, Args... args) -> Ret
+    {
+        self.ensureLive(binding);         // the receiver
+        (ensureLive(binding, args), ...); // each argument, of which only the entities are checked
+
+        return (self.*func)(std::forward<Args>(args)...);
+    };
+}
+
+template <typename Ret, typename... Args>
+auto guarded(std::string_view binding, Ret (CLuaBaseEntity::*func)(Args...) const)
+{
+    return [binding, func](const CLuaBaseEntity& self, Args... args) -> Ret
+    {
+        self.ensureLive(binding);         // the receiver
+        (ensureLive(binding, args), ...); // each argument, of which only the entities are checked
+
+        return (self.*func)(std::forward<Args>(args)...);
+    };
+}
+
+} // namespace xi::lua
 
 #endif

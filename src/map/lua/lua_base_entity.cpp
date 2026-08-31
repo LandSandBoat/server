@@ -174,10 +174,27 @@
 
 CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
 : m_PBaseEntity(PEntity)
+, id_(PEntity)
+, lifetime_(PEntity != nullptr ? PEntity->lifetime() : std::weak_ptr<void>())
 {
     if (PEntity == nullptr)
     {
         ShowError("CLuaBaseEntity created with nullptr instead of valid CBaseEntity*!");
+    }
+}
+
+void CLuaBaseEntity::ensureLive(std::string_view binding) const
+{
+    if (lifetime_.expired())
+    {
+        const auto message = fmt::format("{}: {} {} (targid {}, zone {}) is gone",
+                                         binding,
+                                         magic_enum::enum_name(id_.objtype),
+                                         id_.UniqueNo,
+                                         id_.ActIndex,
+                                         static_cast<uint16>(id_.zoneId));
+
+        luaL_error(lua.lua_state(), "%s", message.c_str());
     }
 }
 

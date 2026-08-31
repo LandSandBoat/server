@@ -192,8 +192,14 @@ public:
 
     bool IsDynamicEntity() const;
 
-    auto           serial() const -> uint64;
-    auto           entityId() const -> EntityId;
+    auto serial() const -> uint64;
+    auto entityId() const -> EntityId;
+
+    auto lifetime() const -> std::weak_ptr<void>
+    {
+        return lifetime_;
+    }
+
     uint32         id;             // global identifier unique on the server
     uint16         targid;         // local identifier unique to the zone
     ENTITYTYPE     objtype;        // Type of entity
@@ -236,6 +242,8 @@ protected:
 
 private:
     uint64 serial_{ 0 };
+
+    std::shared_ptr<void> lifetime_{ std::make_shared<char>() };
 };
 
 #endif // _BASEENTITY_H
