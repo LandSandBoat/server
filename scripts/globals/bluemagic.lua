@@ -744,11 +744,6 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
 
-    -- Handle TP
-    local tpHits        = params.tphitslanded or 0
-    local extraTPGained = xi.combat.tp.calculateTPGainOnMagicalDamage(caster, target, dmg) * math.max(tpHits - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
-    target:addTP(extraTPGained)
-
     -- Handle Afflatus Misery.
     target:handleAfflatusMiseryDamage(dmg)
 
