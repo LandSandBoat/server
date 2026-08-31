@@ -582,7 +582,12 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     }
     // If the entity has been renamed, we have to re-send the name during every update.
     // Otherwise it will revert to it's default name (if applicable).
-    else if (PEntity->isRenamed)
+    //
+    // Excluded: entities the branch above spawns with the larger 0x56 layout. A
+    // MODEL_EQUIPPED look_t is memcpy'd to 0x30 and spans 0x30-0x43, so writing
+    // the name at 0x34 here would overwrite head/body/hands/legs/feet/main/sub/
+    // ranged. They already carry the renamed name from their spawn packet.
+    else if (PEntity->isRenamed && !(PEntity->look.size == MODEL_EQUIPPED && PEntity->targid >= 0x700))
     {
         updatemask |= UPDATE_NAME;
         ref<uint8>(0x0A) |= updatemask;
