@@ -21,6 +21,8 @@
 
 #include "lua_simulation.h"
 
+#include "common/settings.h"
+#include "common/utils.h"
 #include "common/vana_time.h"
 #include "enums/tick_type.h"
 #include "helpers/lua_client_entity_pair_packets.h"
@@ -51,6 +53,18 @@
 
 namespace
 {
+
+// settings::set only writes the C++ map, while Lua reads xi.settings directly, so both have to move together
+void applySetting(const std::string& key, const settings::SettingsVariant& value)
+{
+    value.visit([&](const auto& held)
+                {
+                    settings::set(key, held);
+
+                    const auto parts                                              = split(key, ".");
+                    lua["xi"]["settings"][to_lower(parts[0])][to_upper(parts[1])] = held;
+                });
+}
 
 auto durationToVanaTime = [](const uint8 vanaHour, const uint8 vanaMinute) -> earth_time::duration
 {
@@ -131,6 +145,78 @@ void CLuaSimulation::skipTime(uint32 seconds) const
     // Advance time by the requested amount
     timer::add_offset(std::chrono::seconds(seconds));
     tick();
+}
+
+/************************************************************************
+ *  Function: getSetting()
+ *  Purpose : Reads a server setting by its fully qualified key.
+ *  Example : local retain = sim:getSetting('map.EXP_RETAIN')
+ ************************************************************************/
+
+auto CLuaSimulation::getSetting(const std::string& key) const -> sol::object
+{
+    const auto entry = settings::settingsMap.find(key);
+    if (entry == settings::settingsMap.end())
+    {
+        TestError("Unknown setting: {}", key);
+        return sol::lua_nil;
+    }
+
+    sol::object out = sol::lua_nil;
+    entry->second.visit([&](const auto& held)
+                        {
+                            out = sol::make_object(lua, held);
+                        });
+
+    return out;
+}
+
+/************************************************************************
+ *  Function: setSetting()
+ *  Purpose : Overrides a server setting for the duration of the test.
+ *  Example : sim:setSetting('map.EXP_RETAIN', 0)
+ *  Notes   : The engine puts the original value back after each test, the
+ *            same way it restores stubs and spies.
+ ************************************************************************/
+
+void CLuaSimulation::setSetting(const std::string& key, const sol::object& value)
+{
+    const auto entry = settings::settingsMap.find(key);
+    if (entry == settings::settingsMap.end())
+    {
+        TestError("Unknown setting: {}", key);
+        return;
+    }
+
+    // Only the first override of a test records the value to go back to
+    settingOverrides_.try_emplace(key, entry->second);
+
+    if (value.is<bool>())
+    {
+        applySetting(key, value.as<bool>());
+    }
+    else if (value.is<double>())
+    {
+        applySetting(key, value.as<double>());
+    }
+    else if (value.is<std::string>())
+    {
+        applySetting(key, value.as<std::string>());
+    }
+    else
+    {
+        TestError("Unsupported value type for setting: {}", key);
+    }
+}
+
+void CLuaSimulation::restoreSettings()
+{
+    for (const auto& [key, value] : settingOverrides_)
+    {
+        applySetting(key, value);
+    }
+
+    settingOverrides_.clear();
 }
 
 /************************************************************************
@@ -645,6 +731,8 @@ void CLuaSimulation::Register()
     SOL_REGISTER("skipVanaDays", CLuaSimulation::skipVanaDays);
     SOL_REGISTER("setRegionOwner", CLuaSimulation::setRegionOwner);
     SOL_REGISTER("setSeed", CLuaSimulation::setSeed);
+    SOL_REGISTER("getSetting", CLuaSimulation::getSetting);
+    SOL_REGISTER("setSetting", CLuaSimulation::setSetting);
     SOL_REGISTER("seed", CLuaSimulation::seed);
     SOL_REGISTER("spawnPlayer", CLuaSimulation::spawnPlayer);
     SOL_REGISTER("getSpawnSlot", CLuaSimulation::getSpawnSlot);

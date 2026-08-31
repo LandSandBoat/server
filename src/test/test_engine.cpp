@@ -333,8 +333,9 @@ auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& co
             status       = TestStatus::Failed;
         }
 
-        // Restore all mocks and spies after test execution
+        // Restore all mocks, spies and setting overrides after test execution
         mockManager_->restoreAll();
+        simulation_->restoreSettings();
     }
 
     // Run all after hooks (even if test failed)
