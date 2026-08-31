@@ -6,6 +6,7 @@ add_subdirectory(enums)
 add_subdirectory(items)
 add_subdirectory(lua)
 add_subdirectory(packets)
+add_subdirectory(transports)
 add_subdirectory(utils)
 
 set(APP_SOURCES
@@ -157,8 +158,6 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trait.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trait.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/transport.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/transport.h
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_area.cpp
@@ -306,6 +305,7 @@ add_library(xi_map_battle STATIC
     ${AI_SOURCES}
     ${DATA_MAP_SOURCES}
     ${ENUMS_SOURCES}
+    ${TRANSPORTS_SOURCES}
 )
 configure_map_lib(xi_map_battle)
 target_link_libraries(xi_map_battle PUBLIC xi_data_core)

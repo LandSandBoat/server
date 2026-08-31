@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.elevatorState
+
+values:
+  bottom:  0
+  top:     1
+  ascend:  2
+  descend: 3

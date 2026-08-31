@@ -46,6 +46,7 @@
 #include "roam_region.h"
 #include "spawn_handler.h"
 #include "spawn_slot.h"
+#include "transports/elevator_handler.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -139,6 +140,8 @@ void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npc
         return;
     }
 
+    std::vector<std::pair<CNpcEntity*, const xi::data::ElevatorData*>> lifts;
+
     for (const auto& entry : npcs)
     {
         auto* PNpc   = new CNpcEntity;
@@ -183,6 +186,17 @@ void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npc
         }
 
         PZone->InsertNPC(PNpc);
+
+        if (entry.Elevator)
+        {
+            lifts.emplace_back(PNpc, &*entry.Elevator);
+        }
+    }
+
+    // Held back until the zone is whole, because a lift names doors that may not have been inserted yet.
+    for (const auto& [PPlatform, lift] : lifts)
+    {
+        ElevatorHandler::getInstance()->addElevator(zoneId, PPlatform, *lift);
     }
 }
 
@@ -448,6 +462,20 @@ auto GetInstanceByRunId(const xi::ZoneId zoneId, const uint32 runId) -> CInstanc
 {
     auto* PZoneInstance = dynamic_cast<CZoneInstance*>(GetZone(zoneId));
     return PZoneInstance ? PZoneInstance->getInstanceByRunId(runId) : nullptr;
+}
+
+auto GetNpcByName(CZone* PZone, const std::string& name) -> CNpcEntity*
+{
+    CNpcEntity* PFound = nullptr;
+    PZone->ForEachNpc([&](CNpcEntity* PNpc)
+                      {
+                          if (!PFound && PNpc->name == name)
+                          {
+                              PFound = PNpc;
+                          }
+                      });
+
+    return PFound;
 }
 
 auto GetEntity(const uint32 id, const uint8 filter) -> CBaseEntity*

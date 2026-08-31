@@ -285,6 +285,12 @@ npcs:
       animation:    elevator_down
       moving:       1
     status: normal
+    elevator:
+      lower_door: _453
+      upper_door: _454
+      lever:      davoi_lift
+      reversed:   true
+      travel:     4
 
   17387997:
     script: _453

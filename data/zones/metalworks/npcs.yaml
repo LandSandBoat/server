@@ -1270,6 +1270,11 @@ npcs:
       animation:    elevator_up
       moving:       1
     status: normal
+    elevator:
+      lower_door: _6lv
+      upper_door: _6lu
+      travel:     8
+      period:     18250
 
   17748036:
     script: _6ls
@@ -1306,6 +1311,11 @@ npcs:
       animation:    elevator_down
       moving:       1
     status: normal
+    elevator:
+      lower_door: _6lt
+      upper_door: _6ls
+      travel:     8
+      period:     18250
 
   17748039:
     script: _6lu

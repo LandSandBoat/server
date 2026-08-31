@@ -86,6 +86,12 @@ npcs:
       animation:    elevator_up
       moving:       1
     status: normal
+    elevator:
+      lower_door: _3x3
+      upper_door: _3x4
+      lever:      fort_ghelsba_lift
+      reversed:   true
+      travel:     7
 
   17354994:
     script: _3x3

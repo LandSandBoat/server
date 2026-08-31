@@ -173,7 +173,6 @@ public:
 
     void openDoor(const sol::object& seconds);
     void closeDoor(const sol::object& seconds);
-    void setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed);
 
     void addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffset); // Adds a periodic trigger to the NPC that allows time based scripting
     void showNPC(const sol::object& seconds);
