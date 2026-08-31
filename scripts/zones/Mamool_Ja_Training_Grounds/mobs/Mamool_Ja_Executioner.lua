@@ -5,7 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDespawn = function(mob)
+entity.onMobDeath = function(mob)
     local instance = mob:getInstance()
     if not instance then
         return

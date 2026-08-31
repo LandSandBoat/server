@@ -43,14 +43,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
             },
         },
 
-        [xi.assault.mission.PREEMPTIVE_STRIKE] =
-        {
-            MOBS_START =
-            {
-                17047570, 17047571, 17047572, 17047573, 17047574, 17047575, 17047576, 17047577, 17047578, 17047579,
-                17047580, 17047581, 17047582, 17047583, 17047584, 17047585, 17047586, 17047587, 17047588, 17047589,
-            },
-        },
+        PUK_EXECUTIONER = GetFirstID('Puk_Executioner'),
     },
 
     npc =
