@@ -15,3 +15,16 @@ zonelines:
     to:    sea_serpent_grotto
     at:    [-60.566, -2.127, 411.976, 1.570796]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17809465
+  runs:
+    norg_ship:
+      every:  137
+      offset: 101
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   60
+        - state:     cycling
+          animation: animation_19

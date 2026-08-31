@@ -706,9 +706,14 @@ void CZone::onEntityMoved(CBaseEntity* PEntity)
     m_zoneEntities->onEntityMoved(PEntity);
 }
 
-void CZone::TransportDepart(const uint16 boundary, const xi::ZoneId prevZoneId, const uint16 transportId)
+void CZone::TransportDepart(const uint16 boundary, const xi::ZoneId prevZoneId, const std::string_view transport)
 {
-    m_zoneEntities->TransportDepart(boundary, prevZoneId, transportId);
+    m_zoneEntities->TransportDepart(boundary, prevZoneId, transport);
+}
+
+void CZone::DisembarkAll()
+{
+    m_zoneEntities->DisembarkAll();
 }
 
 void CZone::updateCharLevelRestriction(CCharEntity* PChar)

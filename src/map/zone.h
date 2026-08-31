@@ -301,7 +301,8 @@ public:
     // (teleport, setPos, a movement step, etc.).
     virtual void onEntityMoved(CBaseEntity* PEntity);
 
-    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId); // Collect passengers if ship/boat is departing
+    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, std::string_view transport); // Collect passengers if ship/boat is departing
+    virtual void DisembarkAll();                                                                      // Put whoever is still riding through this zone ashore
 
     virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction, it is applied after it is removed.
 

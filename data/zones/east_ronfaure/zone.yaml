@@ -45,3 +45,17 @@ zonelines:
     to:    ranguemont_pass
     at:    [-139.986, 2.162, -321.508, 4.712389]
     scale: [1.000, 5.000]
+
+transport:
+  ship: 17191527
+  runs:
+    east_ronfaure_airship:
+      dock:   [0.000, 200.000, 0.000]
+      every:  864
+      offset: 389
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   261
+        - state:     cycling
+          animation: animation_19

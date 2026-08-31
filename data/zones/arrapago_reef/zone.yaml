@@ -51,3 +51,11 @@ zonelines:
     to:    talacca_cove
     at:    [64.007, -9.281, -99.988, 1.570796]
     scale: [1.500, 4.000]
+
+transport:
+  ship: 16998994
+  runs:
+    arrapago_cutter:
+      phases:
+        - state:     holding
+          animation: animation_18

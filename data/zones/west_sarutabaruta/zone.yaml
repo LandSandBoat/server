@@ -63,3 +63,11 @@ zonelines:
     to:    balgas_dais
     at:    [-259.648, 113.723, -358.869, 4.712389]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17248819
+  runs:
+    west_sarutabaruta_airship:
+      phases:
+        - state:     holding
+          animation: animation_18

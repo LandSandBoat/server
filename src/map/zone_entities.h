@@ -86,7 +86,8 @@ public:
 
     void FindPartyForMob(CBaseEntity* PEntity); // looking for a party for the monster
 
-    void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
+    void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, std::string_view transport); // a ship is leaving its dock, collect whoever is waiting in the boarding area
+    void DisembarkAll();                                                                      // the voyage zone is between runs, put whoever is still aboard ashore
 
     void WeatherChange(xi::Weather weather);
     void MusicChange(xi::MusicSlot slotId, uint16 trackId);
