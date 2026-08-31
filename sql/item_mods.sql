@@ -5026,6 +5026,7 @@ INSERT INTO `item_mods` VALUES (11108,1,22);   -- DEF: 22
 INSERT INTO `item_mods` VALUES (11108,13,6);   -- MND: 6
 INSERT INTO `item_mods` VALUES (11108,30,7);   -- MACC: 7
 INSERT INTO `item_mods` VALUES (11108,114,15); -- ENFEEBLE: 15
+INSERT INTO `item_mods` VALUES (11108,297,10); -- ENHANCES_SABOTEUR: 10
 
 -- Raiders Armlets +2
 INSERT INTO `item_mods` VALUES (11109,1,28);   -- DEF: 28
@@ -5734,6 +5735,7 @@ INSERT INTO `item_mods` VALUES (11208,1,20);   -- DEF: 20
 INSERT INTO `item_mods` VALUES (11208,13,4);   -- MND: 4
 INSERT INTO `item_mods` VALUES (11208,30,5);   -- MACC: 5
 INSERT INTO `item_mods` VALUES (11208,114,10); -- ENFEEBLE: 10
+INSERT INTO `item_mods` VALUES (11208,297,5);  -- ENHANCES_SABOTEUR: 5
 
 -- Raiders Armlets +1
 INSERT INTO `item_mods` VALUES (11209,1,26);   -- DEF: 26
@@ -50980,7 +50982,6 @@ INSERT INTO `item_mods` VALUES (23223,160,-1000); -- DMG: -10%
 INSERT INTO `item_mods` VALUES (23223,297,13);    -- ENHANCES_SABOTEUR: 13
 INSERT INTO `item_mods` VALUES (23223,311,22);    -- MAGIC_DAMAGE: 22
 INSERT INTO `item_mods` VALUES (23223,384,300);   -- HASTE_GEAR: 3%
--- TODO: Increases the granted by Saboteur by an additional 13%
 
 -- Skulker's armlets +2
 INSERT INTO `item_mods` VALUES (23224,1,111);     -- DEF: 111
@@ -68327,6 +68328,7 @@ INSERT INTO `item_mods` VALUES (27060,30,14);   -- MACC: 14
 INSERT INTO `item_mods` VALUES (27060,31,25);   -- MEVA: 25
 INSERT INTO `item_mods` VALUES (27060,68,11);   -- EVA: 11
 INSERT INTO `item_mods` VALUES (27060,114,17);  -- ENFEEBLE: 17
+INSERT INTO `item_mods` VALUES (27060,297,11);  -- ENHANCES_SABOTEUR: 11
 INSERT INTO `item_mods` VALUES (27060,384,200); -- HASTE_GEAR: 200
 
 -- Lethargy Gantherots +1
@@ -68345,6 +68347,7 @@ INSERT INTO `item_mods` VALUES (27061,30,24);   -- MACC: 24
 INSERT INTO `item_mods` VALUES (27061,31,37);   -- MEVA: 37
 INSERT INTO `item_mods` VALUES (27061,68,24);   -- EVA: 24
 INSERT INTO `item_mods` VALUES (27061,114,19);  -- ENFEEBLE: 19
+INSERT INTO `item_mods` VALUES (27061,297,12);  -- ENHANCES_SABOTEUR: 12
 INSERT INTO `item_mods` VALUES (27061,384,300); -- HASTE_GEAR: 300
 
 -- Skulkers Armlets

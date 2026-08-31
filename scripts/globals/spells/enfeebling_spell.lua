@@ -83,15 +83,9 @@ local pTable =
     [xi.magic.spell.ADDLE_II      ] = { xi.effect.ADDLE,              2, xi.mod.MND,   50,   0, 180, 0, true,   20 },
     [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              1, xi.mod.MND,    0,   0,  12, 0, true,  512 },
     [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         1, xi.mod.MND,    1,   0, 300, 0, false,   0 },
-    [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          1, xi.mod.MND,    0,   0, 120, 0, true,  -10 },
-    [xi.magic.spell.PARALYZE_II   ] = { xi.effect.PARALYSIS,          3, xi.mod.MND,    0,   0, 120, 0, true,    0 },
-    [xi.magic.spell.PARALYGA      ] = { xi.effect.PARALYSIS,          2, xi.mod.MND,    0,   0, 120, 0, true,    0 },
     [xi.magic.spell.REPOSE        ] = { xi.effect.SLEEP_I,            2, xi.mod.MND,    2,   0,  90, 1, false,   0 },
     [xi.magic.spell.SILENCE       ] = { xi.effect.SILENCE,            1, xi.mod.MND,    1,   0, 120, 0, false,   0 },
     [xi.magic.spell.SILENCEGA     ] = { xi.effect.SILENCE,            2, xi.mod.MND,    1,   0, 120, 0, false,   0 },
-    [xi.magic.spell.SLOW          ] = { xi.effect.SLOW,               3, xi.mod.MND,    0,   0, 180, 0, true,   10 },
-    [xi.magic.spell.SLOW_II       ] = { xi.effect.SLOW,               7, xi.mod.MND,    0,   0, 180, 0, true,   10 },
-    [xi.magic.spell.SLOWGA        ] = { xi.effect.SLOW,               8, xi.mod.MND,    0,   0, 180, 0, true,    0 },
 
     -- Ninjutsu
     [xi.magic.spell.AISHA_ICHI    ] = { xi.effect.ATTACK_DOWN,        1, xi.mod.INT,   15,   0, 120, 1, false,   0 },
@@ -229,14 +223,6 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
             end
         end,
 
-        [xi.effect.PARALYSIS] = function()
-            if spellId == xi.magic.spell.PARALYZE_II then
-                potency = utils.clamp(statDiff / 4 + 24, 14, 34) -- Values from JP wiki: https://wiki.ffo.jp/html/3453.html
-            else
-                potency = utils.clamp(statDiff / 4 + 15, 5, 25)
-            end
-        end,
-
         [xi.effect.POISON] = function()
             if
                 spellId == xi.magic.spell.POISON or
@@ -256,14 +242,6 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
                 end
             else
                 potency = skillLevel / 10 + 1
-            end
-        end,
-
-        [xi.effect.SLOW] = function()
-            if spellId == xi.magic.spell.SLOW_II then
-                potency = utils.clamp(statDiff * 226 / 15 + 2780, 1650, 3910) -- https://wiki.ffo.jp/html/3454.html
-            else
-                potency = utils.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
             end
         end,
 
