@@ -110,23 +110,6 @@ templates:
       combat:
         skill: sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          ice:      2
-          wind:     2
-          earth:    2
-          thunder:  2
-          water:    2
-          dark:    11
-        rank_status:
-          paralyze:    2
-          bind:        2
-          silence:     2
-          slow:        2
-          poison:      2
-          dark_sleep: 11
-          blind:      11
       render:
         look:
           type:  standard
@@ -205,22 +188,6 @@ templates:
           piercing: -1000
           blunt:    -1000
           h2h:      -1000
-        rank_element:
-          fire:     2
-          ice:      2
-          wind:     2
-          earth:    2
-          thunder:  2
-          water:    2
-          dark:    11
-        rank_status:
-          paralyze:    2
-          bind:        2
-          silence:     2
-          slow:        2
-          poison:      2
-          dark_sleep: 11
-          blind:      11
       render:
         look:
           type:  standard
@@ -253,22 +220,6 @@ templates:
           piercing: -1000
           blunt:    -1000
           h2h:      -1000
-        rank_element:
-          fire:     2
-          ice:      2
-          wind:     2
-          earth:    2
-          thunder:  2
-          water:    2
-          dark:    11
-        rank_status:
-          paralyze:    2
-          bind:        2
-          silence:     2
-          slow:        2
-          poison:      2
-          dark_sleep: 11
-          blind:      11
       render:
         look:
           type:  standard

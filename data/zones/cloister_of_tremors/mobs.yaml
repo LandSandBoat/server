@@ -16,18 +16,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [stun, silence, slow, elegy]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -56,28 +44,6 @@ templates:
         skill: staff
         delay: 280
       jobs: [war, blm]
-      resists:
-        dmg_physical:
-          blunt: -2500
-          h2h:   -2500
-        rank_element:
-          fire:    -2
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:     2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  standard
@@ -105,24 +71,6 @@ templates:
       jobs: [drk, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    -3
-          earth:   11
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     -3
-          slow:        11
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -152,24 +100,6 @@ templates:
       jobs: [blm, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    -3
-          earth:   11
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     -3
-          slow:        11
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -197,24 +127,6 @@ templates:
       jobs: [war, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    -3
-          earth:   11
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     -3
-          slow:        11
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -244,23 +156,11 @@ templates:
       jobs: [drk, blm]
       resists:
         rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   11
-          thunder: 11
-          water:   -3
-          light:   11
-          dark:    11
+          wind:  11
+          water: -3
         rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        11
-          poison:      -3
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
+          silence: 11
+          poison:  -3
       render:
         look:
           type:  standard
@@ -289,18 +189,15 @@ templates:
       jobs: [drk, blm]
       resists:
         rank_element:
-          fire:     4
-          ice:      4
-          wind:    -3
-          earth:   -3
-          thunder: 11
-          water:    4
-          light:    4
-          dark:     4
+          fire:   4
+          ice:    4
+          earth: -3
+          water:  4
+          light:  4
+          dark:   4
         rank_status:
           paralyze:     4
           bind:         4
-          silence:     -3
           slow:        -3
           poison:       4
           light_sleep:  4

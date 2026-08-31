@@ -73,23 +73,6 @@ templates:
         skill: staff
         delay: 360
       jobs: [blm, sch]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     4
-          wind:    2
-          earth:   4
-          thunder: 2
-          water:   4
-          dark:    8
-        rank_status:
-          paralyze:   4
-          bind:       4
-          silence:    2
-          slow:       4
-          poison:     4
-          dark_sleep: 8
-          blind:      8
       render:
         look:
           type:  standard
@@ -114,25 +97,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    3
-          ice:     3
-          wind:    3
-          earth:   3
-          thunder: 3
-          water:   3
-          light:   6
-          dark:    3
-        rank_status:
-          paralyze:    3
-          bind:        3
-          silence:     3
-          slow:        3
-          poison:      3
-          light_sleep: 6
-          dark_sleep:  3
-          blind:       3
       render:
         look:
           type:  standard
@@ -242,23 +206,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     4
-          wind:    2
-          earth:   4
-          thunder: 2
-          water:   4
-          dark:    8
-        rank_status:
-          paralyze:   4
-          bind:       4
-          silence:    2
-          slow:       4
-          poison:     4
-          dark_sleep: 8
-          blind:      8
       render:
         look:
           type:  standard
