@@ -48,7 +48,7 @@ public:
     void gotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos);
     void gotoMogHouse(xi::ZoneId zoneId);
     auto isPendingZone() const -> bool;
-    auto getItemInvSlot(uint16 itemId, uint8 quantity) const -> Maybe<uint16>;
+    auto getItemInvSlot(uint16 itemId, uint32 quantity) const -> Maybe<uint16>;
     void claimAndKillMob(const sol::object& mobQuery, sol::optional<sol::table> params);
     void claimAndKillMobs(sol::variadic_args mobQueries);
 

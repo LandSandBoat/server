@@ -6923,6 +6923,7 @@ xi.item =
     GOBLIN_COIF                         = 15203,
     MANDRAGORA_BERET                    = 15204,
     GADZRADDS_HELM                      = 15214,
+    DAVHUS_BARBUT                       = 15215,
     TSOO_HAJAS_HEADGEAR                 = 15216,
     CHOPLIXS_COIF                       = 15217,
     ENTRANCING_RIBBON                   = 15218,
