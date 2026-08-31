@@ -35,13 +35,19 @@ static constexpr timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
 
 }
 
-CDeathState::CDeathState(xi::Badge<CState>, CBattleEntity* PEntity, timer::duration death_time)
+CDeathState::CDeathState(xi::Badge<CState>, CBattleEntity* PEntity, timer::duration death_time, DeathParams params)
 : CState(PEntity, PEntity->entityId())
 , m_PEntity(PEntity)
+, params_(params)
 , m_deathTime(death_time)
 , m_raiseTime(GetEntryTime() + TIME_TO_SEND_RERAISE_MENU)
 {
     // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CDeathState::params() const -> const DeathParams&
+{
+    return params_;
 }
 
 auto CDeathState::init() -> StateErrorOr<void>

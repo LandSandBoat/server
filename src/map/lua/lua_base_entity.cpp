@@ -10490,6 +10490,36 @@ void CLuaBaseEntity::setHP(int32 value)
 }
 
 /************************************************************************
+ *  Function: die()
+ *  Purpose : Kills a player, describing the circumstances of the death
+ *  Example : player:die({ expLoss = false, mijin = true })
+ *  Notes   : Only the given keys are changed. Death will occur on the next tick.
+ ************************************************************************/
+
+void CLuaBaseEntity::die(const sol::object& params)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("Invalid Entity (%s) calling function.", m_PBaseEntity->getName());
+        return;
+    }
+
+    if (params.is<sol::table>())
+    {
+        const auto table  = params.as<sol::table>();
+        auto       staged = PChar->nextDeath().value_or(DeathParams{});
+
+        staged.losesExp = table.get_or("expLoss", staged.losesExp);
+        staged.mijin    = table.get_or("mijin", staged.mijin);
+
+        PChar->setNextDeath(staged);
+    }
+
+    setHP(0);
+}
+
+/************************************************************************
  *  Function: setMaxHP()
  *  Purpose : Sets the Maximum Hit Points of an Entity
  *  Example : player:setMaxHP(100)
@@ -20911,6 +20941,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addHPLeaveSleeping", CLuaBaseEntity::addHPLeaveSleeping);
 
     SOL_REGISTER("setHP", CLuaBaseEntity::setHP);
+    SOL_REGISTER("die", CLuaBaseEntity::die);
     SOL_REGISTER("setMaxHP", CLuaBaseEntity::setMaxHP);
     SOL_REGISTER("restoreHP", CLuaBaseEntity::restoreHP);
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);

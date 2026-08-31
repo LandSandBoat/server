@@ -47,6 +47,7 @@
 
 #include "persist_batch.h"
 
+#include "ai/states/death_state.h"
 #include "battle_entity.h"
 #include "linkshell.h"
 #include "maze.h"
@@ -710,8 +711,11 @@ public:
     bool IsMobOwner(CBattleEntity* PTarget);
 
     void Die() override;
-    void Die(timer::duration _duration);
+    void Die(timer::duration _duration, DeathParams params = {});
     void Raise();
+
+    auto nextDeath() const -> const Maybe<DeathParams>&;
+    void setNextDeath(Maybe<DeathParams> params);
 
     static constexpr timer::duration death_duration         = 60min;
     static constexpr timer::duration death_update_frequency = 16s;
@@ -783,6 +787,8 @@ protected:
 
 private:
     auto applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+
+    Maybe<DeathParams> nextDeath_;
 
     CCraftState                               craftState_{};
     std::vector<std::unique_ptr<Transaction>> transactions_;

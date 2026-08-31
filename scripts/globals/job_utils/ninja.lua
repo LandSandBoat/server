@@ -56,8 +56,7 @@ xi.job_utils.ninja.useMijinGakure = function(player, target, ability, action)
     dmg = utils.handleStoneskin(target, dmg, xi.attackType.SPECIAL)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    player:setLocalVar('MijinGakure', 1)
-    player:setHP(0)
+    player:die({ expLoss = false, mijin = true })
 
     return dmg
 end
