@@ -807,38 +807,6 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     return effect
 end
 
--- Perform a curative Blue Magic spell
-xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
-    local power    = getCurePowerOld(caster)
-    local divisor  = params.divisor0
-    local constant = params.constant0
-
-    if power > params.powerThreshold2 then
-        divisor  = params.divisor2
-        constant = params.constant2
-    elseif power > params.powerThreshold1 then
-        divisor  = params.divisor1
-        constant = params.constant1
-    end
-
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
-    final       = final + final * target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100
-    final       = final * xi.settings.main.CURE_POWER
-    final       = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
-
-    target:addHP(final)
-    target:wakeUp()
-    caster:updateEnmityFromCure(target, final)
-
-    if target:getID() == spell:getPrimaryTargetID() then
-        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
-    else
-        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    end
-
-    return final
-end
-
 xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effectTable)
     -- Sanitize parameters.
     local element = params.damageType and params.damageType - 5 or 0

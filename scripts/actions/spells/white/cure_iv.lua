@@ -5,126 +5,45 @@
 ---@type TSpell
 local spellObject = {}
 
+local cureTiers =
+{
+    modern =
+    {
+        { powerCap =    200, divisor =      1, constant = 270, basePower =  70 },
+        { powerCap =    300, divisor =      2, constant = 400, basePower = 200 },
+        { powerCap =    400, divisor = 10 / 7, constant = 450, basePower = 300 },
+        { powerCap =    700, divisor =    2.5, constant = 520, basePower = 400 },
+        { powerCap = 999999, divisor = 999999, constant = 640, basePower =   0 },
+    },
+    old =
+    {
+        { powerFloor = 460, divisor =    6.5, constant = 354.6666 },
+        { powerFloor = 220, divisor =      2, constant =      275 },
+        { powerFloor =   0, divisor = 0.6666, constant =      165 },
+    },
+}
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local divisor = 0
-    local constant = 0
-    local basepower = 0
-    local power = 0
-    local basecure = 0
-    local final = 0
+    -- Undead enemies take damage instead of being healed.
+    if target:isUndead() and target:getAllegiance() ~= caster:getAllegiance() then
+        spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
-    local minCure = 270
-    if xi.settings.main.USE_OLD_CURE_FORMULA then
-        power = getCurePowerOld(caster)
-        divisor = 0.6666
-        constant = 165
-        if power > 460 then
-            divisor = 6.5
-            constant = 354.6666
-        elseif power > 220 then
-            divisor = 2
-            constant = 275
-        end
-    else
-        power = getCurePower(caster)
-        if power < 200 then
-            divisor = 1
-            constant = 270
-            basepower = 70
-        elseif power < 300 then
-            divisor =  2
-            constant = 400
-            basepower = 200
-        elseif power < 400 then
-            divisor = 10 / 7
-            constant = 450
-            basepower = 300
-        elseif power < 700 then
-            divisor = 2.5
-            constant = 520
-            basepower = 400
-        else
-            divisor = 999999
-            constant = 640
-            basepower = 0
-        end
+        return xi.spells.damage.useDamageSpell(caster, target, spell)
     end
 
-    if isValidHealTarget(caster, target) then
-        if xi.settings.main.USE_OLD_CURE_FORMULA then
-            basecure = getBaseCureOld(power, divisor, constant)
-        else
-            basecure = getBaseCure(power, divisor, constant, basepower)
-        end
+    local params =
+    {
+        baseCure        = xi.combat.action.calculateSpellCureBase(caster, cureTiers),
+        minCure         = 270,
+        skillType       = xi.skill.HEALING_MAGIC,
+        solaceStoneskin = true,
+    }
 
-        final = getCureFinal(caster, spell, basecure, minCure, false)
-        if
-            caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
-            not target:hasStatusEffect(xi.effect.STONESKIN)
-        then
-            local solaceStoneskin = 0
-            local equippedBody = caster:getEquipID(xi.slot.BODY)
-            if equippedBody == 11186 then
-                solaceStoneskin = math.floor(final * 0.30)
-            elseif equippedBody == 11086 then
-                solaceStoneskin = math.floor(final * 0.35)
-            else
-                solaceStoneskin = math.floor(final * 0.25)
-            end
-
-            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE) / 100)
-
-            target:addStatusEffect(xi.effect.STONESKIN, { power = solaceStoneskin, duration = 25, origin = caster, tier = 1 })
-        end
-
-        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-
-        --Applying server mods
-        final = final * xi.settings.main.CURE_POWER
-
-        local diff = (target:getMaxHP() - target:getHP())
-        if final > diff then
-            final = diff
-        end
-
-        target:addHP(final)
-        target:wakeUp()
-        caster:updateEnmityFromCure(target, final)
-    else
-        if target:isUndead() then
-            spell:setMsg(xi.msg.basic.MAGIC_DMG)
-
-            final = xi.spells.damage.useDamageSpell(caster, target, spell)
-        elseif caster:getObjType() == xi.objType.PC then
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        else
-            -- e.g. monsters healing themselves.
-            if xi.settings.main.USE_OLD_CURE_FORMULA then
-                basecure = getBaseCureOld(power, divisor, constant)
-            else
-                basecure = getBaseCure(power, divisor, constant, basepower)
-            end
-
-            final = getCureFinal(caster, spell, basecure, minCure, false)
-            local diff = (target:getMaxHP() - target:getHP())
-            if final > diff then
-                final = diff
-            end
-
-            target:addHP(final)
-        end
-    end
-
-    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if mpBonusPercent > 0 then
-        caster:addMP(mpBonusPercent)
-    end
-
-    return final
+    return xi.combat.action.executeSpellCure(caster, target, spell, params)
 end
 
 return spellObject
