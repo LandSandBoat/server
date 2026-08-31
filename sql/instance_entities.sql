@@ -498,6 +498,7 @@ INSERT INTO `instance_entities` VALUES (6901,17060023);
 INSERT INTO `instance_entities` VALUES (6901,17060024);
 INSERT INTO `instance_entities` VALUES (6901,17060025);
 INSERT INTO `instance_entities` VALUES (6901,17060026);
+INSERT INTO `instance_entities` VALUES (6901,17060144);
 INSERT INTO `instance_entities` VALUES (6901,17060130);
 INSERT INTO `instance_entities` VALUES (6901,17060140);
 
