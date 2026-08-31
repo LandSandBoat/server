@@ -198,7 +198,7 @@ INSERT INTO `mob_spawn_points` VALUES (17006593,0,'Excaliace','Excaliace',1,75,7
 INSERT INTO `mob_spawn_points` VALUES (17006594,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-377.359,-15.778,297.049,162,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17006595,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-372.792,-15.869,299.414,169,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17006596,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-382.212,-15.736,300.797,1,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006597,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-296.028,-15.806,26.763,255,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006597,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-296.028,-15.806,266.763,255,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17006598,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-302.256,-15.765,259.201,186,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17006599,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-302.615,-15.774,256.504,12,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17006600,0,'Arrapago_Crab','Arrapago Crab',2,72,74,-380.292,-15.769,221.872,100,NULL,NULL);
