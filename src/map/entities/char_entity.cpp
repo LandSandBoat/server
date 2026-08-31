@@ -2427,7 +2427,11 @@ void CCharEntity::Die()
     const auto staged = nextDeath_.value_or(DeathParams{});
     nextDeath_.reset();
 
-    const DeathParams params = staged;
+    // Retail stopped charging EXP for a KO while charmed in June 2007
+    const DeathParams params{
+        .losesExp = staged.losesExp && !isCharmed,
+        .mijin    = staged.mijin,
+    };
 
     Die(death_duration, params);
     SetDeathTime(timer::now());
