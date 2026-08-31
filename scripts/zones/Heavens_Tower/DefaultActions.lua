@@ -20,7 +20,7 @@ return {
     ['Kiwawa']          = { event = 58 },
     ['Lin_Megomifu']    = { event = 81 },
     ['Mashua']          = { event = 334 },
-    ['Mhabi Molkot']    = { event = 410 },
+    ['Mhabi_Molkot']    = { event = 410 },
     ['Nayutata']        = { event = 64 },
     ['Nebibi']          = { event = 68 },
     ['Nului-Nlui']      = { event = 55 },

@@ -5,7 +5,7 @@ return {
     ['Aeka']             = { event = 75 },
     ['Ailee']            = { event = 91 },
     ['Andrause']         = { event = 239 },
-    ['Atmacite Refiner'] = { event = 264 },
+    ['Atmacite_Refiner'] = { event = 264 },
     ['Colleraie']        = { event = 175 },
     ['Comitiolus']       = { event = 72 },
     ['Corlotte']         = { event = 73 },
@@ -44,6 +44,6 @@ return {
     ['Verctissa']        = { event = 114 },
     ['Vishwas']          = { event = 218 },
     ['Washu']            = { event = 80 },
-    ['Wistful+Bison']    = { event = 268 },
+    ['Wistful_Bison']    = { event = 268 },
     ['Zurim']            = { event = 9510 },
 }
