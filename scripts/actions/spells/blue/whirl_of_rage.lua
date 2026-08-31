@@ -20,26 +20,23 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.ARCANA
-    params.tpmod      = xi.spells.blue.tpMod.DURATION
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr     = xi.skillchainType.SCISSION
-    params.scattr2    = xi.skillchainType.DETONATION
-    params.numhits    = 1
-    params.multiplier = 3.0
-    params.tp150      = 3.5
-    params.tp300      = 4.0
-    params.azuretp    = 4.25
-    params.duppercap  = 83
-    params.str_wsc    = 0.3
-    params.dex_wsc    = 0.0
-    params.vit_wsc    = 0.0
-    params.agi_wsc    = 0.0
-    params.int_wsc    = 0.0
-    params.mnd_wsc    = 0.3
-    params.chr_wsc    = 0.0
+    local params           = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem       = xi.ecosystem.ARCANA
+    params.tpModifier      = xi.spells.blue.tpMod.DURATION
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.SLASHING
+    params.skillchainType  = xi.skillchainType.SCISSION
+    params.skillchainType2 = xi.skillchainType.DETONATION
+
+    params.numHits       = 1
+    params.ftp0          = 3.0
+    params.ftp1500       = 3.5
+    params.ftp3000       = 4.0
+    params.ftpAzure      = 4.25
+    params.baseDamageCap = 83
+
+    params.str_wsc = 0.3
+    params.mnd_wsc = 0.3
 
     -- Handle damage.
     local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)

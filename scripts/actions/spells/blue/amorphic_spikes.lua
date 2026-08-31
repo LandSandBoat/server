@@ -20,33 +20,30 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.AMORPH
-    params.tpmod     = xi.spells.blue.tpMod.ATTACK
-    params.bonusacc  = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.AMORPH
+    params.tpModifier = xi.spells.blue.tpMod.ATTACK
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.bonusacc = 70
+        params.bonusAcc = 70
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.bonusacc = math.floor(caster:getTP() / 50)
+        params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.PIERCING
-    params.scattr = xi.skillchainType.GRAVITATION
-    params.scattr2 = xi.skillchainType.TRANSFIXION
-    params.numhits = 5
-    params.multiplier = 1.0
-    params.tp150 = 1.375
-    params.tp300 = 1.750 -- as per https://wiki.ffo.jp/html/24665.html
-    params.azuretp = 2.125 -- guessing as no wiki has this info.
-    params.duppercap = 75
-    params.str_wsc = 0.0
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.PIERCING
+    params.skillchainType  = xi.skillchainType.GRAVITATION
+    params.skillchainType2 = xi.skillchainType.TRANSFIXION
+
+    params.numHits       = 5
+    params.ftp0          = 1.0
+    params.ftp1500       = 1.375
+    params.ftp3000       = 1.750 -- as per https://wiki.ffo.jp/html/24665.html
+    params.ftpAzure      = 2.125 -- guessing as no wiki has this info.
+    params.baseDamageCap = 75
+
     params.dex_wsc = 0.20
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
     params.int_wsc = 0.20
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

@@ -20,12 +20,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params      = {}
     params.ecosystem  = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.EARTH
-    params.diff       = 0 -- no stat increases magic accuracy
-    params.skillType  = xi.skill.BLUE_MAGIC
     params.hpMod      = 6
     params.lvlMod     = 1.875
     params.isConal    = true

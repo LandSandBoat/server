@@ -20,27 +20,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.VERMIN
-    params.tpmod      = xi.spells.blue.tpMod.DAMAGE
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr     = xi.skillchainType.DETONATION
-    params.attribute  = xi.mod.INT
-    params.skillType  = xi.skill.BLUE_MAGIC
-    params.numhits    = 1
-    params.multiplier = 1.5
-    params.tp150      = 2.5
-    params.tp300      = 3
-    params.azuretp    = 3.5
-    params.duppercap  = 100
-    params.str_wsc    = 0.0
-    params.dex_wsc    = 0.0
-    params.vit_wsc    = 0.0
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.VERMIN
+    params.tpModifier     = xi.spells.blue.tpMod.DAMAGE
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.skillchainType = xi.skillchainType.DETONATION
+    params.dStat          = xi.mod.INT
+
+    params.numHits       = 1
+    params.ftp0          = 1.5
+    params.ftp1500       = 2.5
+    params.ftp3000       = 3
+    params.ftpAzure      = 3.5
+    params.baseDamageCap = 100
+
     params.agi_wsc    = 0.4
-    params.int_wsc    = 0.0
-    params.mnd_wsc    = 0.0
-    params.chr_wsc    = 0.0
 
     -- Handle damage.
     local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)

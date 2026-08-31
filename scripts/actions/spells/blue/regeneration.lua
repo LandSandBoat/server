@@ -21,7 +21,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local power = 25
+    local power    = 25
     local duration = 90
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then

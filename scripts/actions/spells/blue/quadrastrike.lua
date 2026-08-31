@@ -21,34 +21,31 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     -- Missing proper info and logic for crit.
-    local params = {}
-    params.ecosystem = xi.ecosystem.DEMON
-    params.tpmod = xi.spells.blue.tpMod.CRITHITRATE
-    params.bonusacc = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.DEMON
+    params.tpModifier = xi.spells.blue.tpMod.CRITICAL
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.bonusacc = 70
+        params.bonusAcc = 70
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.bonusacc = math.floor(caster:getTP() / 50)
+        params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr = xi.skillchainType.LIQUEFACTION
-    params.scattr2 = xi.skillchainType.SCISSION
-    params.numhits = 4
-    params.multiplier = 1.1875
-    params.tp150 = 1.1875
-    params.tp300 = 1.1875
-    params.azuretp = 1.1875
-    params.duppercap = 100
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.SLASHING
+    params.skillchainType  = xi.skillchainType.LIQUEFACTION
+    params.skillchainType2 = xi.skillchainType.SCISSION
+
+    params.numHits       = 4
+    params.ftp0          = 1.1875
+    params.ftp1500       = 1.1875
+    params.ftp3000       = 1.1875
+    params.ftpAzure      = 1.1875
+    params.baseDamageCap = 100
+
     params.str_wsc = 0.3
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
-    params.critchance = 30 -- Guessed, this probably scales with TP, BG wiki says 33% which likely includes base crit rate so we're reducing it a bit lower
+
+    params.critChance = 30 -- Guessed, this probably scales with TP, BG wiki says 33% which likely includes base crit rate so we're reducing it a bit lower
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

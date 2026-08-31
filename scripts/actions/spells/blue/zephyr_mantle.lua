@@ -21,8 +21,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local power = 4
-    local tick = 0
+    local power    = 4
+    local tick     = 0
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)
 
     if not target:addStatusEffect(xi.effect.BLINK, { power = power, duration = duration, origin = caster, tick = tick }) then

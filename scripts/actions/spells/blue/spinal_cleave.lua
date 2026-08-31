@@ -20,33 +20,29 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.UNDEAD
-    params.tpmod = xi.spells.blue.tpMod.ACC
-    params.bonusacc = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.UNDEAD
+    params.tpModifier = xi.spells.blue.tpMod.ACC
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.bonusacc = 70
+        params.bonusAcc = 70
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.bonusacc = math.floor(caster:getTP() / 50)
+        params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr = xi.skillchainType.SCISSION
-    params.scattr2 = xi.skillchainType.DETONATION
-    params.numhits = 1
-    params.multiplier = 3.0
-    params.tp150 = 3.0
-    params.tp300 = 3.0
-    params.azuretp = 3.0
-    params.duppercap = 75
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.SLASHING
+    params.skillchainType  = xi.skillchainType.SCISSION
+    params.skillchainType2 = xi.skillchainType.DETONATION
+
+    params.numHits       = 1
+    params.ftp0          = 3.0
+    params.ftp1500       = 3.0
+    params.ftp3000       = 3.0
+    params.ftpAzure      = 3.0
+    params.baseDamageCap = 75
+
     params.str_wsc = 0.3
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

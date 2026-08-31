@@ -20,25 +20,21 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.PLANTOID
-    params.tpmod      = xi.spells.blue.tpMod.DURATION
-    params.attackType = xi.attackType.RANGED
-    params.damageType = xi.damageType.PIERCING
-    params.scattr     = xi.skillchainType.COMPRESSION
-    params.numhits    = 1
-    params.multiplier = 1.75
-    params.tp150      = 1.75
-    params.tp300      = 1.75
-    params.azuretp    = 1.75
-    params.duppercap  = 15
-    params.str_wsc    = 0.0
-    params.dex_wsc    = 0.0
-    params.vit_wsc    = 0.0
-    params.agi_wsc    = 0.0
-    params.int_wsc    = 0.2
-    params.mnd_wsc    = 0.0
-    params.chr_wsc    = 0.0
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.PLANTOID
+    params.tpModifier     = xi.spells.blue.tpMod.DURATION
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.PIERCING
+    params.skillchainType = xi.skillchainType.COMPRESSION
+
+    params.numHits       = 1
+    params.ftp0          = 1.75
+    params.ftp1500       = 1.75
+    params.ftp3000       = 1.75
+    params.ftpAzure      = 1.75
+    params.baseDamageCap = 15
+
+    params.int_wsc = 0.2
 
     -- Handle damage.
     local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)

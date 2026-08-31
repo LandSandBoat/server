@@ -20,35 +20,32 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.BEAST
-    params.tpmod = xi.spells.blue.tpMod.ACC
-    params.bonusacc = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.BEAST
+    params.tpModifier = xi.spells.blue.tpMod.ACC
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.bonusacc = 70
+        params.bonusAcc = 70
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.bonusacc = math.floor(caster:getTP() / 50)
+        params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HAND_TO_HAND
-    params.scattr = xi.skillchainType.LIQUEFACTION
-    params.scattr2 = xi.skillchainType.IMPACTION
-    params.numhits = 6
-    params.multiplier = 0.625
-    params.tp150 = 0.625
-    params.tp300 = 0.625
-    params.azuretp = 0.625
-    params.duppercap = 21
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.HAND_TO_HAND
+    params.skillchainType  = xi.skillchainType.LIQUEFACTION
+    params.skillchainType2 = xi.skillchainType.IMPACTION
+
+    params.numHits       = 6
+    params.ftp0          = 0.625
+    params.ftp1500       = 0.625
+    params.ftp3000       = 0.625
+    params.ftpAzure      = 0.625
+    params.baseDamageCap = 21
+
     -- D seems low for its level, but the spell never did good damage, so a low D is a good way of keeping overall damage down.
     -- More discussion on https://ffxiclopedia.fandom.com/wiki/Talk:Asuran_Claws
     params.str_wsc = 0.1
     params.dex_wsc = 0.1
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
