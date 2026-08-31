@@ -385,6 +385,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
 {
     if (PEntity == nullptr || PEntity->PParty != this)
     {
+        std::erase(members, PEntity);
         ShowWarning("CParty::DelMember() - PEntity was null, or PParty mismatch.");
         return;
     }
@@ -462,17 +463,12 @@ void CParty::DelMember(CBattleEntity* PEntity)
 
 void CParty::PopMember(CBattleEntity* PEntity)
 {
+    std::erase(members, PEntity);
+
     if (PEntity == nullptr || PEntity->PParty != this)
     {
         ShowWarning("CParty::PopMember() - PEntity was null, or PParty mismatch.");
         return;
-    }
-
-    auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
-
-    if (memberToDelete != members.end())
-    {
-        members.erase(memberToDelete);
     }
 
     // free memory, party will re reinsatiated when they zone back in
