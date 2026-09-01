@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/content.h"
+#include "data/enums/elevator.h"
 #include "data/enums/status.h"
 #include "data/shared_types/look.h"
 #include "data/shared_types/render.h"
@@ -39,6 +40,17 @@
 namespace xi::data::datasets::zones::npcs::wire
 {
 
+// The platform NPC owns the lift: it names its own doors and how it moves.
+struct Lift
+{
+    std::string                                  lower_door;
+    std::string                                  upper_door;
+    std::optional<yaml::EnumToken<xi::Elevator>> lever;
+    std::optional<bool>                          reversed;
+    uint8                                        travel{};
+    std::optional<uint32>                        period;
+};
+
 struct Npc
 {
     std::optional<std::string>                  script;
@@ -51,6 +63,7 @@ struct Npc
     std::optional<uint8>                        animation_speed;
     std::optional<bool>                         widescan;
     std::optional<yaml::EnumToken<xi::Content>> content;
+    std::optional<Lift>                         elevator;
 };
 
 struct Document
@@ -75,6 +88,18 @@ struct glz::json_schema<xi::data::datasets::zones::npcs::wire::Npc>
     glz::schema animation_speed{ .description = "Animation speed sent to the client. Defaults to 50.", .minimum = 0L, .maximum = 255L };
     glz::schema widescan{ .description = "Whether the NPC appears on widescan. Defaults to false." };
     glz::schema content{ .description = "Content tag gating this NPC. Omitted means always enabled." };
+    glz::schema elevator{ .description = "Present when this NPC is an elevator platform." };
+};
+
+template <>
+struct glz::json_schema<xi::data::datasets::zones::npcs::wire::Lift>
+{
+    glz::schema lower_door{ .description = "Client name of the door at the bottom of the shaft." };
+    glz::schema upper_door{ .description = "Client name of the door at the top." };
+    glz::schema lever{ .description = "Which lever drives this lift. Omitted means it runs on its own schedule." };
+    glz::schema reversed{ .description = "True when the up animation sends the platform down. Defaults to false." };
+    glz::schema travel{ .description = "Seconds the platform spends between floors. The client animates against the same figure." };
+    glz::schema period{ .description = "Milliseconds for one leg, travel plus the wait at the floor. Retail periods are not whole seconds. Lever-driven lifts ignore it." };
 };
 
 template <>

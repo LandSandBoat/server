@@ -329,6 +329,12 @@ inline uint32 vanadiel_timestamp(const time_point& tp = now())
     return static_cast<uint32>(std::chrono::floor<std::chrono::seconds>(tp - vanadiel_epoch).count());
 }
 
+// Returns the number of Earth milliseconds since the Vana'diel epoch.
+inline uint64 vanadiel_timestamp_ms(const time_point& tp = now())
+{
+    return static_cast<uint64>(std::chrono::floor<std::chrono::milliseconds>(tp - vanadiel_epoch).count());
+}
+
 // Returns an integer 0-6 representing Monday-Sunday JST.
 inline uint8 get_game_weekday(const time_point& tp = now())
 {

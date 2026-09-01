@@ -61,7 +61,6 @@
 #include "status_effect_container.h"
 #include "timetriggers.h"
 #include "trade_container.h"
-#include "transport.h"
 #include "weapon_skill.h"
 #include "zone.h"
 
@@ -2532,58 +2531,6 @@ void CLuaBaseEntity::closeDoor(const sol::object& seconds)
         }));
         // clang-format on
     }
-}
-
-/************************************************************************
- *  Function: setElevator()
- *  Purpose : Initializes an elevator or something that moves regularly
- *  Example : See Comments Below
- *  Notes   : See: scripts/zones/Metalworks/npcs/_6lt.lua
- ************************************************************************/
-
-void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed)
-{
-    // Usage: setElevator(id, lower door id, upper door id, elevator platform id, animations reversed bool)
-    // If giving the elevator xi::Animation::ElevatorUp makes it go down, set this bool to true
-    if (m_PBaseEntity->objtype != TYPE_NPC)
-    {
-        ShowWarning("Attempting to set elevator with invalid entity type (%s).", m_PBaseEntity->getName());
-        return;
-    }
-
-    Elevator_t elevator = {};
-
-    elevator.id                 = id;
-    elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
-    elevator.UpperDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(upperDoor, TYPE_NPC));
-    elevator.Elevator           = static_cast<CNpcEntity*>(zoneutils::GetEntity(elevatorId, TYPE_NPC));
-    elevator.animationsReversed = reversed;
-    elevator.state              = STATE_ELEVATOR_BOTTOM;
-    elevator.lastTrigger        = vanadiel_time::time_point::min();
-
-    if (!elevator.Elevator || !elevator.LowerDoor || !elevator.UpperDoor)
-    {
-        ShowWarning("Elevator id %d initialization failed - an ID resolved to no entity.", elevatorId);
-        return;
-    }
-
-    // ID of 0 means it is a timed, automatic elevator
-    elevator.activated   = elevator.id == 0;
-    elevator.isPermanent = elevator.id == 0;
-
-    elevator.movetime = xi::vanadiel_clock::minutes(3);
-    elevator.interval = xi::vanadiel_clock::minutes(8);
-
-    if (m_PBaseEntity->loc.zone)
-    {
-        elevator.zoneID = m_PBaseEntity->loc.zone->GetID();
-    }
-    else
-    {
-        ShowError("setElevator failed! Entity does not have loc.zone assigned!");
-    }
-
-    CTransportHandler::getInstance()->insertElevator(elevator);
 }
 
 /************************************************************************
@@ -20582,7 +20529,6 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);
     SOL_REGISTER("closeDoor", CLuaBaseEntity::closeDoor);
-    SOL_REGISTER("setElevator", CLuaBaseEntity::setElevator);
 
     SOL_REGISTER("addPeriodicTrigger", CLuaBaseEntity::addPeriodicTrigger);
     SOL_REGISTER("showNPC", CLuaBaseEntity::showNPC);

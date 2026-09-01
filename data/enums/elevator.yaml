@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.elevator
+
+values:
+  timed_automatic:       0 # Runs on its own schedule. Anything else waits for a lever.
+  davoi_lift:            1
+  palborough_mines_lift: 2
+  fort_ghelsba_lift:     3

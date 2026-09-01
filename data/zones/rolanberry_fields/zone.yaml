@@ -45,3 +45,17 @@ zonelines:
     to:    crawlers_nest
     at:    [84.741, -2.471, 379.574, 3.141593]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17228357
+  runs:
+    rolanberry_airship:
+      dock:   [0.000, 200.000, 0.000]
+      every:  864
+      offset: 374
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   276
+        - state:     cycling
+          animation: animation_19

@@ -81,3 +81,17 @@ zonelines:
     to:    the_eldieme_necropolis
     at:    [-558.931, -18.096, 99.999, 3.141593]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17207829
+  runs:
+    batallia_airship:
+      dock:   [0.000, 200.000, 0.000]
+      every:  864
+      offset: 816
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   266
+        - state:     cycling
+          animation: animation_19

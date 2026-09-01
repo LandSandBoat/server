@@ -44,6 +44,12 @@ Articles in this category are general development topics relating to overall dev
 * [Troubleshooting with Sanitizers](Sanitizers)
 * [Articles](Development)
 
+## Data
+
+Articles in this category cover how the zone data files describe game content, and how to measure the values that go in them from retail packet captures.
+
+* [Ships and Elevators](Transports)
+
 ## Client Setup
 
 Instructions for installing FFXI, connecting to a private server, and keeping the game updated.

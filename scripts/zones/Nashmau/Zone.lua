@@ -36,7 +36,7 @@ end
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     if prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
         if player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) then
             player:startEvent(200, {

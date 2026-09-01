@@ -33,3 +33,27 @@ zonelines:
     to:    port_windurst
     at:    [197.711, -20.775, 261.857, 1.570796]
     scale: [1.000, 5.000]
+
+transport:
+  ship: 17760420
+  runs:
+    windurst_jeuno_airship:
+      door:     _6os
+      dock:     [242.281, -3.522, 61.994, 96]
+      boundary: 416
+      voyage:
+        - windurst_jeuno_airship
+      every:     864
+      disembark: 442
+      offset:    650
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   40
+        - state:     docked
+          seconds:   139
+        - state:     closing
+          seconds:   4
+        - state:     departing
+          animation: animation_19
+          hide:      29

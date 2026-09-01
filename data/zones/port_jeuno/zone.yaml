@@ -33,3 +33,115 @@ zonelines:
     to:    port_jeuno
     at:    [-195.028, -6.095, 0.008]
     scale: [1.000, 3.000]
+
+transport:
+  ship: 17784936
+  runs:
+    jeuno_kazham_airship:
+      door: _6uv
+      dock: [-4.000, 10.450, 117.000, 64]
+      places:
+        staging: [-43.000, 10.450, 190.000]
+      boundary: 477
+      voyage:
+        - kazham_jeuno_airship
+      every:     864
+      disembark: 456
+      offset:    650
+      phases:
+        - state:     arriving
+          animation: animation_24
+          seconds:   45
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   118
+        - state:     closing
+          seconds:   3
+        - state:     departing
+          hide:      46
+          animation: animation_25
+          moves:
+            - to:    staging
+              after: 1
+    jeuno_sandoria_airship:
+      door: _6us
+      dock: [-68.000, 10.450, 117.000, 64]
+      places:
+        staging: [-29.000, 10.450, 190.000]
+      boundary: 474
+      voyage:
+        - san_doria_jeuno_airship
+      every:     864
+      disembark: 440
+      offset:      2
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   26
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   151
+        - state:     closing
+          seconds:   3
+        - state:     departing
+          hide:      33
+          animation: animation_19
+          moves:
+            - to:    staging
+              after: 1
+    jeuno_windurst_airship:
+      door: _6uu
+      dock: [-6.000, 10.450, -117.000, 192]
+      places:
+        staging: [-45.000, 10.450, -190.000]
+      boundary: 476
+      voyage:
+        - windurst_jeuno_airship
+      every:     864
+      disembark: 457
+      offset:    218
+      phases:
+        - state:     arriving
+          animation: animation_22
+          seconds:   26
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   152
+        - state:     closing
+          seconds:   2
+        - state:     departing
+          hide:      33
+          animation: animation_23
+          moves:
+            - to:    staging
+              after: 1
+    jeuno_bastok_airship:
+      door: _6ut
+      dock: [-70.000, 10.450, -117.000, 192]
+      places:
+        staging: [-31.000, 10.450, -190.000]
+      boundary: 475
+      voyage:
+        - bastok_jeuno_airship
+      every:     864
+      disembark: 446
+      offset:    434
+      phases:
+        - state:     arriving
+          animation: animation_20
+          seconds:   26
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   152
+        - state:     closing
+          seconds:   2
+        - state:     departing
+          hide:      33
+          animation: animation_21
+          moves:
+            - to:    staging
+              after: 1

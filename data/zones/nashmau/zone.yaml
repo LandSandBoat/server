@@ -27,3 +27,27 @@ zonelines:
     to:    caedarva_mire
     at:    [-260.961, -4.370, -699.985, 3.141593]
     scale: [1.500, 6.000]
+
+transport:
+  ship: 16994327
+  runs:
+    nashmau_whitegate_boat:
+      door:     _1hs
+      dock:     [3.273, 3.389, -114.213, 0]
+      boundary: 571
+      voyage:
+        - silver_sea_route_to_al_zahbi
+      every:     1152
+      disembark:   26
+      offset:     680
+      phases:
+        - state:     arriving
+          animation: animation_22
+          seconds:   40
+        - state:     docked
+          seconds:   432
+        - state:     closing
+          seconds:   2
+        - state:     departing
+          animation: animation_23
+          hide:      37

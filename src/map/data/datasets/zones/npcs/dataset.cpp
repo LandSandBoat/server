@@ -43,6 +43,31 @@ constexpr uint8  kDefaultAnimationSpeed = 50;
 constexpr auto   kDefaultStatus         = xi::Status::Disappear;
 constexpr uint32 kDefaultEntityFlags    = 0x003;
 
+auto convertElevator(const std::optional<wire::Lift>& source, const uint32 id) -> Maybe<ElevatorData>
+{
+    if (!source)
+    {
+        return {};
+    }
+
+    const auto lever = yaml::resolveEnum(source->lever);
+
+    // A timed lift cycles off its period, so one without it has nothing to run on.
+    if (lever == xi::Elevator::TimedAutomatic && !source->period)
+    {
+        throw std::runtime_error(fmt::format("elevator {} runs on a timer but states no period", id));
+    }
+
+    return ElevatorData{
+        .LowerDoor = source->lower_door,
+        .UpperDoor = source->upper_door,
+        .Lever     = lever,
+        .Reversed  = source->reversed.value_or(false),
+        .Travel    = source->travel,
+        .Period    = source->period.value_or(0),
+    };
+}
+
 } // namespace
 
 auto Dataset::decode(const std::string_view text) -> Records
@@ -85,6 +110,7 @@ auto Dataset::decode(const std::string_view text) -> Records
             .AnimationSpeed  = source.animation_speed.value_or(kDefaultAnimationSpeed),
             .Widescan        = source.widescan.value_or(false),
             .Content         = yaml::resolveEnum(source.content),
+            .Elevator        = convertElevator(source.elevator, id),
         });
     }
 

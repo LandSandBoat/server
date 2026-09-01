@@ -25,3 +25,196 @@ zonelines:
     to:    northern_san_doria
     at:    [-127.472, 10.500, 195.478, 3.926991]
     scale: [1.000, 3.000]
+
+transport:
+  ship: 16785748
+  runs:
+    barge_south_central:
+      door: _02s
+      dock: [246.377, 0.000, -529.793, 192]
+      places:
+        hidden: [0.000, 100.000, 0.000]
+      voyage:
+        - phanauet_channel
+      every:     3456
+      disembark:  654
+      offset:       7
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   31
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   84
+        - state:     closing
+          seconds:   7
+        - state:     departing
+          animation: animation_19
+          moves:
+            - to:    hidden
+              after: 29
+    barge_central_south_day:
+      door: _02t
+      dock: [-125.042, 0.000, 72.786, 160]
+      places:
+        hidden: [0.000, 100.000, 0.000]
+      voyage:
+        - phanauet_channel
+      every:     3456
+      disembark:  638
+      offset:     647
+      phases:
+        - state:     arriving
+          animation: animation_20
+          seconds:   31
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   69
+        - state:     closing
+          seconds:   5
+        - state:     departing
+          animation: animation_21
+          moves:
+            - to:    hidden
+              after: 29
+    barge_south_oos_day:
+      dock: [246.377, 0.000, -529.793, 64]
+      places:
+        hidden:   [0.000, 100.000, 0.000]
+        outbound: [275.000, 0.000, -560.000]
+      voyage:
+        - phanauet_channel
+      every:  3456 # out of service, carries nobody
+      offset: 1265
+      phases:
+        - state:     arriving
+          animation: animation_23
+          moves:
+            - to:    dock
+              after: 1
+            - to:    outbound
+              after: 54
+            - to:    hidden
+              after: 77
+
+    barge_south_north:
+      door: _02s
+      dock: [246.377, 0.000, -529.793, 192]
+      places:
+        hidden: [0.000, 100.000, 0.000]
+      voyage:
+        - phanauet_channel
+      every:     3456
+      disembark:  955
+      offset:    1351
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   31
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   84
+        - state:     closing
+          seconds:   6
+        - state:     departing
+          animation: animation_19
+          moves:
+            - to:    hidden
+              after: 29
+    barge_north_oos:
+      dock: [-291.355, 0.000, 516.868, 160]
+      places:
+        hidden:   [0.000, 100.000, 0.000]
+        outbound: [-260.000, 0.000, 550.000]
+      voyage:
+        - phanauet_channel
+      every:  3456 # out of service, carries nobody
+      offset: 2285
+      phases:
+        - state:     arriving
+          animation: animation_22
+          moves:
+            - to:    dock
+              after: 1
+            - to:    outbound
+              after: 51
+            - to:    hidden
+              after: 81
+
+    barge_north_central:
+      door: _02u
+      dock: [-291.355, 0.000, 516.868, 32]
+      places:
+        hidden: [0.000, 100.000, 0.000]
+      voyage:
+        - phanauet_channel
+      every:     3456
+      disembark:  399
+      offset:    2375
+      phases:
+        - state:     arriving
+          animation: animation_24
+          seconds:   40
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   93
+        - state:     closing
+          seconds:   6
+        - state:     departing
+          animation: animation_25
+          moves:
+            - to:    hidden
+              after: 26
+    barge_central_south_night:
+      door: _02t
+      dock: [-125.042, 0.000, 72.786, 160]
+      places:
+        hidden: [0.000, 100.000, 0.000]
+      voyage:
+        - phanauet_channel
+      every:     3456
+      disembark:  638
+      offset:    2759
+      phases:
+        - state:     arriving
+          animation: animation_20
+          seconds:   31
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   69
+        - state:     closing
+          seconds:   5
+        - state:     departing
+          animation: animation_21
+          moves:
+            - to:    hidden
+              after: 29
+    barge_south_oos_night:
+      dock: [246.377, 0.000, -529.793, 64]
+      places:
+        hidden:   [0.000, 100.000, 0.000]
+        outbound: [275.000, 0.000, -560.000]
+      voyage:
+        - phanauet_channel
+      every:  3456 # out of service, carries nobody
+      offset: 3377
+      phases:
+        - state:     arriving
+          animation: animation_23
+          moves:
+            - to:    dock
+              after: 1
+            - to:    outbound
+              after: 54
+            - to:    hidden
+              after: 77

@@ -44,7 +44,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "time_server.h"
-#include "transport.h"
+#include "transports/ship_handler.h"
 #include "zone.h"
 #include "zone_entities.h"
 
@@ -209,7 +209,7 @@ auto MapEngine::init() -> Task<void>
 
     if (!config_.lazyZones)
     {
-        CTransportHandler::getInstance()->InitializeTransport(mapIPP);
+        ShipHandler::getInstance()->InitializeShips();
     }
 
     fishingutils::InitializeFishingSystem();

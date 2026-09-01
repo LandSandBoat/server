@@ -95,6 +95,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9b
+      upper_door: _i9a
+      reversed:   true
+      travel:     8
+      period:     19129
 
   16814444:
     script: _i9a
@@ -357,6 +363,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9d
+      upper_door: _i9c
+      reversed:   true
+      travel:     8
+      period:     19129
 
   16814463:
     script: _i9c
@@ -395,6 +407,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9f
+      upper_door: _i9e
+      reversed:   true
+      travel:     8
+      period:     19129
 
   16814466:
     script: _i9e
@@ -433,6 +451,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9p
+      upper_door: _i9o
+      reversed:   true
+      travel:     8
+      period:     20669
 
   16814469:
     script:       _i9o
@@ -489,6 +513,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _09q
+      upper_door: _09p
+      reversed:   true
+      travel:     8
+      period:     20669
 
   16814473:
     script:       _09p
@@ -531,6 +561,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _09k
+      upper_door: _09j
+      reversed:   true
+      travel:     8
+      period:     20669
 
   16814476:
     script:       _09j
@@ -573,6 +609,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _09l
+      upper_door: _09m
+      reversed:   true
+      travel:     8
+      period:     20669
 
   16814479:
     script:       _09m
@@ -699,6 +741,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9h
+      upper_door: _i9g
+      reversed:   true
+      travel:     12
+      period:     23197
 
   16814488:
     script: _i9g
@@ -957,6 +1005,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9j
+      upper_door: _i9i
+      reversed:   true
+      travel:     8
+      period:     19129
 
   16814507:
     script: _i9i
@@ -995,6 +1049,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9n
+      upper_door: _i9m
+      reversed:   true
+      travel:     12
+      period:     23197
 
   16814510:
     script: _i9m
@@ -1033,6 +1093,12 @@ npcs:
       moving:       1
     status:  normal
     content: cop
+    elevator:
+      lower_door: _i9l
+      upper_door: _i9k
+      reversed:   true
+      travel:     12
+      period:     23197
 
   16814513:
     script: _i9k

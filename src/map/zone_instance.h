@@ -62,7 +62,8 @@ public:
 
     virtual void FindPartyForMob(CBaseEntity* PEntity) override; // looking for a party for the monster
 
-    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId) override; // ship/boat is leaving, passengers need to be collected
+    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, std::string_view transport) override; // ship/boat is leaving, passengers need to be collected
+    virtual void DisembarkAll() override;                                                                      // the voyage zone is between runs, put whoever is still aboard ashore
 
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone
 

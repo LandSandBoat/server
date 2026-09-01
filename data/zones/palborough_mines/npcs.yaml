@@ -277,6 +277,12 @@ npcs:
       animation:    elevator_down
       moving:       1
     status: normal
+    elevator:
+      lower_door: _3z4
+      upper_door: _3z5
+      lever:      palborough_mines_lift
+      reversed:   true
+      travel:     8
 
   17363348:
     script:       Mythril_Seam

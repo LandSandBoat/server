@@ -248,7 +248,8 @@ std::string getTransportNPCName(CBaseEntity* PEntity)
 
     if (isElevator)
     {
-        std::memset(str.data() + 8, 8, 1);
+        // How long the client spends animating the platform between floors.
+        std::memset(str.data() + 8, static_cast<uint8>(PEntity->GetLocalVar("TransportTravel")), 1);
     }
 
     return str;
@@ -366,13 +367,20 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             }
 
             // TODO: Unify name logic
-            if (updatemask & UPDATE_NAME)
+            // A ship or lift puts its door id and phase stamp where a plain NPC puts its name, but retail sends them with no name bit set.
+            // Skip them and the client knows which animation to play but not when it started.
+            const auto isTransport = PNpc->look.size == MODEL_ELEVATOR || PNpc->look.size == MODEL_SHIP;
+            if (updatemask & UPDATE_NAME || isTransport)
             {
-                auto name = PNpc->getName();
-                if (PNpc->look.size == MODEL_ELEVATOR || PNpc->look.size == MODEL_SHIP)
+                const auto name = [&]() -> std::string
                 {
-                    name = getTransportNPCName(PNpc);
-                }
+                    if (isTransport)
+                    {
+                        return getTransportNPCName(PNpc);
+                    }
+
+                    return PNpc->getName();
+                }();
 
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);

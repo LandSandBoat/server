@@ -21,3 +21,34 @@ zonelines:
     to:    port_san_doria
     at:    [79.362, -18.173, -135.450, 3.926991]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17727598
+  runs:
+    sandoria_jeuno_airship:
+      door: _6gs
+      dock: [20.000, -2.000, 44.000, 64]
+      places:
+        staging: [-60.000, -3.100, 210.000]
+      boundary: 369
+      voyage:
+        - san_doria_jeuno_airship
+      every:     864
+      disembark: 442
+      offset:    434
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   23
+          moves:
+            - to:    dock
+              after: 1
+        - state:     docked
+          seconds:   151
+        - state:     closing
+          seconds:   4
+        - state:     departing
+          hide:      35
+          animation: animation_19
+          moves:
+            - to: staging

@@ -15,3 +15,64 @@ zonelines:
     to:    buburimu_peninsula
     at:    [186.723, -3.483, -223.510, 4.712389]
     scale: [1.000, 3.000]
+
+transport:
+  ship: 17797182
+  runs:
+    mhaura_selbina_boat:
+      door: _6xw
+      dock: [-0.516, 0.026, -8.409, 0]
+      places:
+        staging: [-391.048, 0.026, -205.201]
+      boundary: 493
+      voyage:
+        - ship_bound_for_mhaura
+        - ship_bound_for_mhaura_pirates
+      every:     1152
+      disembark:   26
+      offset:     920
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   41
+          moves:
+            - to:    dock
+              after: 18
+        - state:     docked
+          seconds:   192
+        - state:     closing
+          seconds:   1
+        - state:     departing
+          hide:      38
+          animation: animation_19
+          moves:
+            - to:    staging
+              after: 18
+    mhaura_whitegate_boat:
+      door: _6xw
+      dock: [-0.516, 0.026, -8.409, 0]
+      places:
+        staging: [-391.048, 0.026, -205.201]
+      boundary: 493
+      voyage:
+        - open_sea_route_to_al_zahbi
+      every:     1152
+      disembark:   26
+      offset:     344
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   41
+          moves:
+            - to:    dock
+              after: 18
+        - state:     docked
+          seconds:   192
+        - state:     closing
+          seconds:   1
+        - state:     departing
+          hide:      38
+          animation: animation_19
+          moves:
+            - to:    staging
+              after: 18

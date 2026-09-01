@@ -24,7 +24,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     player:startEvent(1028)
     player:messageSpecial(ID.text.DOCKING_IN_MHAURA)
 end

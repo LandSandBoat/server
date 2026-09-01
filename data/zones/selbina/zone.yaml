@@ -15,3 +15,36 @@ zonelines:
     to:    valkurm_dunes
     at:    [60.989, -4.898, -151.001, 4.712389]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17793088
+  runs:
+    selbina_mhaura_boat:
+      door: _6ww
+      dock: [9.294, 0.000, -69.775, 0]
+      places:
+        staging: [-401.468, 0.000, -123.873]
+      boundary: 485
+      voyage:
+        - ship_bound_for_selbina
+        - ship_bound_for_selbina_pirates
+      every:     1152
+      disembark:   25
+      offset:     920
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   41
+          moves:
+            - to:    dock
+              after: 18
+        - state:     docked
+          seconds:   192
+        - state:     closing
+          seconds:   1
+        - state:     departing
+          hide:      38
+          animation: animation_19
+          moves:
+            - to:    staging
+              after: 18

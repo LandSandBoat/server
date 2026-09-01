@@ -13,3 +13,70 @@ zonelines:
     to:    buburimu_peninsula
     at:    [-276.529, 16.403, -324.519, 0.261799]
     scale: [1.000, 3.000]
+
+transport:
+  ship: 16793984
+  runs:
+    manaclip_bibiki_tours:
+      door: _04s
+      dock: [491.728, 0.000, 687.394, 128]
+      voyage:
+        - manaclipper
+      every:     1728
+      disembark:  701
+      offset:       2
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   41
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   72
+        - state:     closing
+          seconds:   5
+        - state:     departing
+          animation: animation_19
+          hide:      41
+    manaclip_bibiki_purgonorgo:
+      door: _04s
+      dock: [491.728, 0.000, 687.394, 128]
+      voyage:
+        - manaclipper
+      every:     1728
+      disembark:  556
+      offset:     675
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   40
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   78
+        - state:     closing
+          seconds:   5
+        - state:     departing
+          animation: animation_19
+          hide:      41
+    manaclip_purgonorgo_bibiki:
+      door: _04t
+      dock: [-391.373, 0.000, -364.200, 128]
+      voyage:
+        - manaclipper
+      every:     1728
+      disembark:  556
+      offset:    1203
+      phases:
+        - state:     arriving
+          animation: animation_20
+          seconds:   51
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   79
+        - state:     closing
+          seconds:   5
+        - state:     departing
+          animation: animation_21
+          hide:      49

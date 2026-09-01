@@ -50,7 +50,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     local boardingFlags = bit.bor(xi.cutsceneFlag.NO_PCS, xi.cutsceneFlag.SEND_POSITION, xi.cutsceneFlag.NO_IDLE_WAIT)
 
     if prevZoneId == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then

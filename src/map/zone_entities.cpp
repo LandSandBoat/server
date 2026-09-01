@@ -420,7 +420,34 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneEntities::TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transport)
+namespace
+{
+
+void sendTransportEvent(CCharEntity* PChar, const xi::ZoneId prevZoneId, const std::string_view transport)
+{
+    if (PChar->eventPreparation->targetEntity != nullptr)
+    {
+        // The player talked to one of the guys on the boat, and the event target is wrong.
+        // This leads to the wrong script being loaded and you get stuck on a black screen
+        // instead of loading into the port.
+
+        // Attempt to load the proper script
+        PChar->eventPreparation->targetEntity = nullptr;
+        size_t deleteStart                    = PChar->eventPreparation->scriptFile.find("npcs/");
+        size_t deleteEnd                      = PChar->eventPreparation->scriptFile.find(".lua");
+
+        if (deleteStart != std::string::npos && deleteEnd != std::string::npos)
+        {
+            PChar->eventPreparation->scriptFile.replace(deleteStart, deleteEnd - deleteStart, "Zone");
+        }
+    }
+
+    luautils::OnTransportEvent(PChar, prevZoneId, transport);
+}
+
+} // namespace
+
+void CZoneEntities::TransportDepart(const uint16 boundary, const xi::ZoneId prevZoneId, const std::string_view transport)
 {
     TracyZoneScoped;
 
@@ -428,24 +455,29 @@ void CZoneEntities::TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint
     {
         if (PCurrentChar->loc.boundary == boundary)
         {
-            if (PCurrentChar->eventPreparation->targetEntity != nullptr)
-            {
-                // The player talked to one of the guys on the boat, and the event target is wrong.
-                // This leads to the wrong script being loaded and you get stuck on a black screen
-                // instead of loading into the port.
+            sendTransportEvent(PCurrentChar, prevZoneId, transport);
+        }
+    }
+}
 
-                // Attempt to load the proper script
-                PCurrentChar->eventPreparation->targetEntity = nullptr;
-                size_t deleteStart                           = PCurrentChar->eventPreparation->scriptFile.find("npcs/");
-                size_t deleteEnd                             = PCurrentChar->eventPreparation->scriptFile.find(".lua");
+void CZoneEntities::DisembarkAll()
+{
+    TracyZoneScoped;
 
-                if (deleteStart != std::string::npos && deleteEnd != std::string::npos)
-                {
-                    PCurrentChar->eventPreparation->scriptFile.replace(deleteStart, deleteEnd - deleteStart, "Zone");
-                }
-            }
+    FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
+    {
+        // This runs every tick until the zone is empty.
+        // Anyone already watching the event is on their way out, and restarting it would mean they never land.
+        if (PCurrentChar->isNpcLocked())
+        {
+            continue;
+        }
 
-            luautils::OnTransportEvent(PCurrentChar, prevZoneId, transport);
+        // Riders arrive without a boundary, so anything else got here another way.
+        if (PCurrentChar->loc.boundary == 0)
+        {
+            // Several runs share the crossing, so there is no one run to name.
+            sendTransportEvent(PCurrentChar, m_zone->GetID(), "");
         }
     }
 }
@@ -973,7 +1005,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
 
     // NPCs and transports are both objtype TYPE_NPC and share SpawnNPCList. One combined predicate
     // covers their differing rules: a transport (ship model) spawns by proximity unless it's
-    // alwaysRelevant (those are driven by SpawnTransport/TransportTimer, not this proximity sync);
+    // alwaysRelevant (those are driven by SpawnTransport/ShipTimer, not this proximity sync);
     // a regular NPC spawns when in range OR alwaysRelevant. The alwaysRelevant NPCs - which a 3x3
     // range query can't reach - are passed in via alwaysRelevantNpcs_ (collected each rebuild).
     syncSpawnListWithGrid(

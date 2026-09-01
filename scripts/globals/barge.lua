@@ -270,8 +270,7 @@ local dockEventData =
 {
     [destinations.NORTH_LANDING] =
     {
-        -- transport ids from DB
-        transports    = { 25 },
+        transports    = { 'barge_north_central' },
         arrivalCsId   = 11,
         arrivalPos    = { x = -303.166, y = -1.971, z = 504.964, rotation = 96 },
         departEvent   = 16,
@@ -280,8 +279,7 @@ local dockEventData =
     },
     [destinations.CENTRAL_LANDING] =
     {
-        -- transport ids from DB
-        transports    = { 21, 26 },
+        transports    = { 'barge_central_south_day', 'barge_central_south_night' },
         arrivalCsId   = 10,
         arrivalPos    = { x = -137.275, y = -1.964, z = 60.265, rotation = 96 },
         departEvent   = 40,
@@ -290,8 +288,7 @@ local dockEventData =
     },
     [destinations.SOUTH_LANDING] =
     {
-        -- transport ids from DB
-        transports    = { 20, 23 },
+        transports    = { 'barge_south_central', 'barge_south_north' },
         arrivalCsId   = 38,
         arrivalPos    = { x = 230.621, y = -1.987, z = -530.240, rotation = 129 },
         departEvent   = 14,
@@ -392,7 +389,7 @@ xi.barge.onZoneIn = function(player, prevZone)
     return -1
 end
 
-xi.barge.onTransportEvent = function(player, zoneId, transportId)
+xi.barge.onTransportEvent = function(player, zoneId, transportName)
     local aboard   = player:getLocalVar('[barge]aboard')
     local destData = nil
 
@@ -408,7 +405,7 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
         return -1
     end
 
-    if not utils.contains(transportId, destData.transports) then
+    if not utils.contains(transportName, destData.transports) then
         -- Normal game client won't let you enter the boat trigger area unless the boat is there, but check this transport event aligns with the schedule to avoid shenanigans
 
         -- was in trigger area but no in-service boat was departing from this dock

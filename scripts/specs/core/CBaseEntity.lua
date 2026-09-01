@@ -582,15 +582,6 @@ function CBaseEntity:closeDoor(seconds)
 end
 
 ---@param id integer
----@param lowerDoor integer
----@param upperDoor integer
----@param elevatorId integer
----@param reversed boolean
----@return nil
-function CBaseEntity:setElevator(id, lowerDoor, upperDoor, elevatorId, reversed)
-end
-
----@param id integer
 ---@param period integer
 ---@param minOffset integer
 ---@return nil

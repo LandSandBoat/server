@@ -39,3 +39,17 @@ zonelines:
     to:    garlaige_citadel
     at:    [19.991, -19.566, 438.008, 1.570796]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 17269226
+  runs:
+    sauromugue_airship:
+      dock:   [0.000, 200.000, 0.000]
+      every:  432
+      offset: 173
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   261
+        - state:     cycling
+          animation: animation_19

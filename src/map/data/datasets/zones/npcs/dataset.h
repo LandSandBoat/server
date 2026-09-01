@@ -26,6 +26,7 @@
 #include "common/types/position.h"
 #include "data/enums/animation.h"
 #include "data/enums/content.h"
+#include "data/enums/elevator.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/name_vis.h"
 #include "data/enums/status.h"
@@ -38,6 +39,16 @@
 
 namespace xi::data
 {
+
+struct ElevatorData
+{
+    std::string  LowerDoor; // client name, resolved once the zone's NPCs exist
+    std::string  UpperDoor;
+    xi::Elevator Lever{};
+    bool         Reversed{};
+    uint8        Travel{}; // seconds between floors, and what the client animates against
+    uint32       Period{}; // milliseconds for one leg, travel and the wait at the floor together
+};
 
 struct NpcData
 {
@@ -61,6 +72,7 @@ struct NpcData
     uint8                  AnimationSpeed{};
     bool                   Widescan{};
     xi::Content            Content{};
+    Maybe<ElevatorData>    Elevator;
 };
 
 // Ordered by targid, matching the order the SQL loader saw.
