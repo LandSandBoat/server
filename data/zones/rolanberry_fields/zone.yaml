@@ -57,5 +57,7 @@ transport:
         - state:     cycling
           animation: animation_18
           seconds:   276
+          hide:      60
         - state:     cycling
           animation: animation_19
+          hide:      60
