@@ -53,15 +53,15 @@ std::array<std::array<uint8, 9>, 23> JobGrades = { {
     { 5, 0, 5, 4, 4, 1, 5, 4, 5 }, // RNG
     { 2, 0, 3, 3, 3, 4, 5, 5, 4 }, // SAM
     { 4, 0, 3, 2, 3, 2, 4, 7, 6 }, // NIN
-    { 3, 0, 2, 4, 3, 4, 6, 5, 3 }, // DRG
+    { 2, 0, 2, 4, 3, 4, 6, 5, 3 }, // DRG
     { 7, 1, 6, 5, 6, 4, 2, 2, 2 }, // SMN
     { 4, 4, 5, 5, 5, 5, 5, 5, 5 }, // BLU
     { 4, 0, 5, 3, 5, 2, 3, 5, 5 }, // COR
     { 4, 0, 5, 2, 4, 3, 5, 6, 3 }, // PUP
     { 4, 0, 4, 3, 5, 2, 6, 6, 2 }, // DNC
     { 5, 4, 6, 4, 5, 4, 2, 4, 3 }, // SCH
-    { 3, 2, 6, 4, 4, 5, 2, 2, 5 }, // GEO
-    { 3, 6, 3, 4, 5, 2, 4, 4, 6 }  // RUN
+    { 4, 3, 6, 4, 4, 5, 2, 2, 5 }, // GEO
+    { 2, 6, 3, 4, 5, 2, 4, 4, 6 }  // RUN
 } };
 
 /************************************************************************
@@ -133,6 +133,91 @@ std::array<std::array<float, 4>, 8> StatScale = { {
     { 2, 0.20f, 0.40f, 0.35f }, // G
 } };
 
+// Player HP and MP growth, race and job parts summed. Subjob adds half of its own job part
+// https://docs.google.com/spreadsheets/d/1P1hKWKbeuUCNKoyzDGKzNE9p7K_bjX5VlqC4CSda8v0
+
+// Race HP: value at level 1 and HP gained per level in the bands 2-10, 11-30, 31-50, 51-60 and 61-75, same past 75
+constexpr std::array<std::array<uint8, 6>, 5> HpRace = { {
+    // L1, 2-10, 11-30, 31-50, 51-60, 61-75
+    { 17, 7, 9, 9, 10, 4 },   // Hume
+    { 18, 8, 9, 10, 11, 4 },  // Elvaan
+    { 16, 6, 8, 9, 10, 4 },   // Tarutaru
+    { 17, 7, 9, 9, 10, 4 },   // Mithra
+    { 19, 9, 10, 11, 12, 4 }, // Galka
+} };
+
+// Job HP per rank to 75
+constexpr std::array<std::array<uint8, 6>, 8> HpJob = { {
+    // L1, 2-10, 11-30, 31-50, 51-60, 61-75
+    { 0, 0, 0, 0, 0, 0 },     // 0
+    { 19, 9, 10, 11, 12, 4 }, // A
+    { 17, 8, 9, 10, 11, 4 },  // B
+    { 16, 7, 8, 9, 10, 4 },   // C
+    { 14, 6, 7, 7, 8, 4 },    // D
+    { 13, 5, 6, 6, 7, 3 },    // E
+    { 11, 4, 5, 5, 6, 3 },    // F
+    { 10, 3, 4, 4, 5, 3 },    // G
+} };
+
+// Job HP gained at each level from 76 to 99
+constexpr std::array<std::array<uint8, 24>, 8> HpJobGainOver75 = { {
+    // one entry per level, 76 through 99
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },              // 0
+    { 10, 8, 10, 8, 10, 8, 10, 8, 10, 10, 8, 10, 8, 10, 8, 10, 10, 8, 10, 8, 10, 8, 10, 8 }, // A
+    { 9, 9, 9, 9, 9, 8, 10, 8, 10, 9, 8, 10, 8, 10, 8, 9, 10, 8, 10, 8, 9, 9, 9, 9 },        // B
+    { 9, 8, 10, 8, 9, 8, 9, 9, 9, 9, 8, 9, 9, 9, 8, 9, 9, 9, 9, 8, 9, 8, 10, 8 },            // C
+    { 9, 8, 9, 8, 9, 8, 9, 8, 9, 9, 8, 9, 8, 9, 8, 9, 9, 8, 9, 8, 9, 8, 9, 8 },              // D
+    { 9, 7, 9, 8, 8, 8, 9, 7, 9, 9, 7, 9, 8, 9, 7, 9, 9, 7, 9, 8, 8, 8, 9, 7 },              // E
+    { 8, 8, 8, 7, 9, 7, 8, 8, 8, 8, 8, 8, 7, 8, 8, 8, 8, 8, 8, 7, 9, 7, 8, 8 },              // F
+    { 8, 7, 8, 7, 8, 7, 8, 7, 8, 8, 7, 8, 7, 8, 7, 8, 8, 7, 8, 7, 8, 7, 8, 7 },              // G
+} };
+
+// Race MP: value at level 1, MP gained per level 2-60 and 61-75, same past 75
+constexpr std::array<std::array<uint8, 3>, 5> MpRace = { {
+    // L1, 2-60, 61-75
+    { 14, 5, 4 }, // Hume
+    { 12, 4, 4 }, // Elvaan
+    { 16, 6, 4 }, // Tarutaru
+    { 14, 5, 4 }, // Mithra
+    { 8, 3, 4 },  // Galka
+} };
+
+// Race MP before the April 2014 update: value at level 1, gain per level 2-30, 31-60 and 61-75
+constexpr std::array<std::array<uint8, 4>, 5> MpRacePre2014 = { {
+    // L1, 2-30, 31-60, 61-75
+    { 10, 3, 3, 4 }, // Hume
+    { 8, 2, 3, 1 },  // Elvaan
+    { 16, 6, 6, 4 }, // Tarutaru
+    { 10, 3, 3, 4 }, // Mithra
+    { 4, 1, 0, 1 },  // Galka
+} };
+
+// Job MP per rank: value at level 1, MP gained per level 2-60 and 61-75
+constexpr std::array<std::array<uint8, 3>, 8> MpJob = { {
+    // L1, 2-60, 61-75
+    { 0, 0, 0 },  // 0
+    { 16, 6, 4 }, // A
+    { 14, 5, 4 }, // B
+    { 12, 4, 4 }, // C
+    { 10, 3, 4 }, // D
+    { 0, 0, 0 },  // E (no MP job has this rank)
+    { 6, 1, 2 },  // F
+    { 0, 0, 0 },  // G (no MP job has this rank)
+} };
+
+// Job MP gained at each level from 76 to 99
+constexpr std::array<std::array<uint8, 24>, 8> MpJobGainOver75 = { {
+    // one entry per level, 76 through 99
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },                // 0
+    { 8, 10, 8, 10, 10, 8, 10, 10, 8, 10, 10, 8, 10, 8, 10, 10, 8, 10, 10, 8, 10, 10, 8, 10 }, // A
+    { 8, 9, 9, 9, 10, 8, 10, 9, 9, 9, 10, 8, 10, 8, 10, 9, 9, 9, 10, 8, 10, 9, 9, 9 },         // B
+    { 8, 9, 8, 9, 10, 8, 9, 9, 9, 9, 9, 8, 10, 8, 9, 9, 9, 9, 9, 8, 10, 9, 8, 9 },             // C
+    { 8, 9, 8, 9, 9, 8, 9, 9, 8, 9, 9, 8, 10, 8, 9, 9, 8, 9, 9, 8, 9, 9, 8, 9 },               // D
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },                // E
+    { 6, 7, 7, 7, 8, 6, 7, 8, 6, 8, 7, 6, 8, 6, 8, 7, 6, 8, 7, 7, 7, 7, 7, 7 },                // F
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },                // G
+} };
+
 /************************************************************************
  *                                                                        *
  *  Array with the levels of mob HP Scale per rank                        *
@@ -153,11 +238,18 @@ std::array<std::array<float, 3>, 8> MobHPScale = { {
 
 // Player base stat growth per rank (A to G)
 // https://docs.google.com/spreadsheets/d/1P1hKWKbeuUCNKoyzDGKzNE9p7K_bjX5VlqC4CSda8v0
-// Stat value at level 1, in whole points
-constexpr std::array<uint8, 8> StatAtLevel1 = { 0, 5, 4, 4, 3, 3, 2, 2 };
-
-// Stat gained per level from 2 to 60, in twentieths of a point (0.50, 0.45, 0.40, 0.35, 0.30, 0.25, 0.20)
-constexpr std::array<uint8, 8> StatGainPerLevelTo60 = { 0, 10, 9, 8, 7, 6, 5, 4 };
+// Value at level 1 in whole points, and gain per level from 2 to 60 in twentieths of a point (10 = 0.50)
+constexpr std::array<std::array<uint8, 2>, 8> StatGrowth = { {
+    // L1, 2-60
+    { 0, 0 },  // 0
+    { 5, 10 }, // A
+    { 4, 9 },  // B
+    { 4, 8 },  // C
+    { 3, 7 },  // D
+    { 3, 6 },  // E
+    { 2, 5 },  // F
+    { 2, 4 },  // G
+} };
 
 // Cumulative half points gained from level 61 to 75
 // Ranks D/E and F/G share a schedule
@@ -174,6 +266,81 @@ constexpr std::array<std::array<uint8, 15>, 8> StatHalfPointsGained61To75 = { {
 
 // Levels past 75 where no stat is gained, in ascending order
 constexpr std::array<uint8, 6> StatPlateauLevelsOver75 = { 76, 80, 85, 89, 94, 98 };
+
+namespace
+{
+
+// Number of levels a character at atLevel has gained inside the bracket [from, to]
+auto levelsIn(const uint8 atLevel, const int32 from, const int32 to) -> int32
+{
+    return std::clamp<int32>(atLevel - from + 1, 0, to - from + 1);
+}
+
+// One banded HP table evaluated at a level, capped at 75 where the bands end
+auto bandedHp(const std::array<uint8, 6>& growthTable, const uint8 atLevel) -> int32
+{
+    const auto& [atLevel1, gain2To10, gain11To30, gain31To50, gain51To60, gain61To75] = growthTable;
+
+    const auto cappedLevel = std::min<uint8>(atLevel, 75);
+    return atLevel1 +
+           gain2To10 * levelsIn(cappedLevel, 2, 10) +
+           gain11To30 * levelsIn(cappedLevel, 11, 30) +
+           gain31To50 * levelsIn(cappedLevel, 31, 50) +
+           gain51To60 * levelsIn(cappedLevel, 51, 60) +
+           gain61To75 * levelsIn(cappedLevel, 61, 75);
+}
+
+// Job HP at a level: the banded growth through 75 plus the captured per-level gains past it
+auto jobHp(const uint8 rank, const uint8 atLevel) -> int32
+{
+    auto hp = bandedHp(HpJob[rank], atLevel);
+    for (int32 i = 0; i < levelsIn(atLevel, 76, 99); ++i)
+    {
+        hp += HpJobGainOver75[rank][i];
+    }
+    return hp;
+}
+
+// Race HP stops growing at 75
+// Before the April 2014 update races used the job HP values at their racial HP grade
+auto raceHp(const uint8 race, const uint8 atLevel) -> int32
+{
+    if (settings::get<bool>("main.USE_OLD_STAT_FORMULAS"))
+    {
+        return bandedHp(HpJob[grade::GetRaceGrades(race, 0)], atLevel);
+    }
+    return bandedHp(HpRace[race], atLevel);
+}
+
+// Job MP at a level: linear growth through 75 plus the captured per-level gains past it
+auto jobMp(const uint8 rank, const uint8 atLevel) -> int32
+{
+    const auto& [atLevel1, gain2To60, gain61To75] = MpJob[rank];
+
+    const auto cappedLevel = std::min<uint8>(atLevel, 75);
+
+    auto mp = atLevel1 + gain2To60 * levelsIn(cappedLevel, 2, 60) + gain61To75 * levelsIn(cappedLevel, 61, 75);
+    for (int32 i = 0; i < levelsIn(atLevel, 76, 99); ++i)
+    {
+        mp += MpJobGainOver75[rank][i];
+    }
+    return mp;
+}
+
+// Race MP stops growing at 75
+auto raceMp(const uint8 race, const uint8 atLevel) -> int32
+{
+    const auto cappedLevel = std::min<uint8>(atLevel, 75);
+    if (settings::get<bool>("main.USE_OLD_STAT_FORMULAS"))
+    {
+        const auto& [atLevel1, gain2To30, gain31To60, gain61To75] = MpRacePre2014[race];
+        return atLevel1 + gain2To30 * levelsIn(cappedLevel, 2, 30) + gain31To60 * levelsIn(cappedLevel, 31, 60) + gain61To75 * levelsIn(cappedLevel, 61, 75);
+    }
+    const auto& [atLevel1, gain2To60, gain61To75] = MpRace[race];
+    return atLevel1 + gain2To60 * levelsIn(cappedLevel, 2, 60) + gain61To75 * levelsIn(cappedLevel, 61, 75);
+}
+
+} // namespace
 
 namespace grade
 {
@@ -204,7 +371,7 @@ float GetStatScale(uint8 rank, uint8 scale)
 }
 
 // Race, job and subjob parts are each rounded down to half points, then summed and rounded down once
-// See USE_OLD_STAT_ROUNDING for the older per-part rounding which floors to the nearest whole point
+// See USE_OLD_STAT_FORMULAS for the older behaviour, which rounds each part down to a whole point on its own
 auto GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16
 {
     // Value of one component (race or job) at a level, in half points
@@ -213,9 +380,10 @@ auto GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, u
         // Level used for the growth tables
         const auto cappedLevel = std::clamp<uint8>(atLevel, 1, 75);
         // Level ups that grant the per-level gain: none at level 1, no more after 60
-        const auto levelsGained = std::min<uint8>(cappedLevel, 60) - 1;
+        const auto levelsGained                = std::min<uint8>(cappedLevel, 60) - 1;
+        const auto& [atLevel1, gainPerLevel20] = StatGrowth[rank];
         // Level 1 value plus the gains so far, computed in twentieths and rounded down to half points
-        const auto halfPoints = (20 * StatAtLevel1[rank] + StatGainPerLevelTo60[rank] * levelsGained) / 10;
+        const auto halfPoints = (20 * atLevel1 + gainPerLevel20 * levelsGained) / 10;
         if (cappedLevel <= 60)
         {
             return halfPoints;
@@ -242,13 +410,56 @@ auto GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, u
     const auto pointsOver75 = std::max<int32>(0, level - 75 - static_cast<int32>(plateauCount));
 
     // Older retail rounded each component down to whole points, not 0.5
-    if (settings::get<bool>("main.USE_OLD_STAT_ROUNDING"))
+    if (settings::get<bool>("main.USE_OLD_STAT_FORMULAS"))
     {
         return static_cast<uint16>(raceHalfPoints / 2 + jobHalfPoints / 2 + subJobHalfPoints / 4 + pointsOver75);
     }
 
     // Current retail pools the half points and rounds down once, plus the post-75 gains
     return static_cast<uint16>((raceHalfPoints + jobHalfPoints + subJobHalfPoints / 2) / 2 + pointsOver75);
+}
+
+// Job and race HP are whole points added together
+// Subjob adds half of its own job HP
+// USE_OLD_STAT_FORMULAS selects the racial values from before the April 2014 update
+auto GetBaseHP(uint8 race, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16
+{
+    if (subLevel == 0)
+    {
+        return static_cast<uint16>(raceHp(race, level) + jobHp(jobRank, level));
+    }
+
+    return static_cast<uint16>(raceHp(race, level) + jobHp(jobRank, level) + jobHp(subJobRank, subLevel) / 2);
+}
+
+// MP is the same shape as HP. In order to get the racial MP, the job must have MP.
+// If main job does not have MP then the racial part enters at the subjobs level, divided like the subjob itself
+// The subjob fraction is 1/SJ_MP_DIVISOR, which is 2 on retail
+// USE_OLD_STAT_FORMULAS selects the racial values from before the April 2014 update
+auto GetBaseMP(uint8 race, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16
+{
+    // MP grade 0 means the job brings no MP at all
+    const auto mainHasMp = jobRank > 0;
+    const auto subHasMp  = subLevel > 0 && subJobRank > 0;
+
+    const auto subJobMpDivisor = settings::get<float>("map.SJ_MP_DIVISOR");
+
+    if (mainHasMp && subHasMp)
+    {
+        return static_cast<uint16>(raceMp(race, level) + jobMp(jobRank, level) + static_cast<int32>(jobMp(subJobRank, subLevel) / subJobMpDivisor));
+    }
+
+    if (mainHasMp)
+    {
+        return static_cast<uint16>(raceMp(race, level) + jobMp(jobRank, level));
+    }
+
+    if (subHasMp)
+    {
+        return static_cast<uint16>(static_cast<int32>(raceMp(race, subLevel) / subJobMpDivisor) + static_cast<int32>(jobMp(subJobRank, subLevel) / subJobMpDivisor));
+    }
+
+    return 0;
 }
 
 uint8 GetMobHPScale(uint8 rank, uint8 scale)
