@@ -339,6 +339,8 @@ end
 xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
 
+    local isCannonball = spell:getID() == xi.magic.spell.CANNONBALL
+
     -- Initial D value
     local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
     initialD       = utils.clamp(initialD, 0, params.baseDamageCap)
@@ -351,6 +353,11 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         fStr = calculatefSTR2(dSTR, caster:getMainLvl())
     else
         fStr = calculatefSTR(dSTR, caster:getMainLvl())
+    end
+
+    -- Cannonball specifically is capped to 22 fSTR
+    if isCannonball then
+        fStr = math.min(fStr, 22)
     end
 
     -- ftp, bonus WSC
@@ -384,7 +391,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.bonusAcc     = params.bonusAcc or 0
     params.critChance   = calculateCritChance(caster, target, params)
 
-    local isCannonball         = spell:getID() == xi.magic.spell.CANNONBALL
     local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
     local spellAttackMod       = params.attackMult
     local attackMultiplier     = spellAttackMod * potencyAttackMod
