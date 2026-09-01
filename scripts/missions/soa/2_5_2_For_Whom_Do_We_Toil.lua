@@ -98,7 +98,7 @@ mission.sections =
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
-            ['Yafafa']  = mission:event(1),
+            ['Yefafa']  = mission:event(1),
             ['History'] = mission:event(1003, 1),
 
             onEventUpdate =
