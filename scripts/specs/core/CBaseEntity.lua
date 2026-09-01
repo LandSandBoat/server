@@ -2190,6 +2190,15 @@ end
 function CBaseEntity:setHP(value)
 end
 
+---@class DeathParams
+---@field expLoss boolean? Whether the death costs experience points. Defaults to true
+---@field mijin boolean? Mijin Gakure: no weakness and half HP back on raise. Defaults to false
+
+---@param params DeathParams?
+---@return nil
+function CBaseEntity:die(params)
+end
+
 ---@param value integer
 ---@return nil
 function CBaseEntity:setMaxHP(value)

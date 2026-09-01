@@ -341,12 +341,12 @@ auto CAIContainer::Internal_RangedAttack(const EntityId& target) -> bool
     return false;
 }
 
-auto CAIContainer::Internal_Die(timer::duration deathTime) -> bool
+auto CAIContainer::Internal_Die(timer::duration deathTime, DeathParams params) -> bool
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        return ChangeState<CDeathState>(entity, deathTime);
+        return ChangeState<CDeathState>(entity, deathTime, params);
     }
     return false;
 }

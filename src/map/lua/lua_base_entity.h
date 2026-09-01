@@ -518,6 +518,7 @@ public:
     int32 addHP(int32 hpAdd);                                                                                                                      // Increase hp of Entity
     int32 addHPLeaveSleeping(int32 hpAdd);                                                                                                         // Increase hp of Entity but do not awaken the Entity
     void  setHP(int32 value);                                                                                                                      // Set hp of Entity to value
+    void  die(const sol::object& params);                                                                                                          // Kill a player, describing the circumstances of the death
     void  setMaxHP(int32 value);                                                                                                                   // Set max hp of Entity to value
     int32 restoreHP(int32 restoreAmt);                                                                                                             // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);                                                                                                                     // Decrease hp of Entity
