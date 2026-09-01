@@ -58,6 +58,15 @@ mission.sections =
                 end,
             },
 
+            -- Event 702 is the door line for players on a mission. Both the door and Iron Eater serve it.
+            ['_6ld']          = mission:event(702),
+            ['Iron_Eater']    = mission:event(702),
+
+            -- The staff comment on the errand while the leg runs.
+            ['Mih_Ketto']     = mission:event(267),
+            ['Moyoyo']        = mission:event(264),
+            ['Topuru-Kuperu'] = mission:event(261),
+
             onEventFinish =
             {
                 [257] = function(player, csid, option, npc)

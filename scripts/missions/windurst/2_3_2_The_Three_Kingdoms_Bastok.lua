@@ -63,6 +63,11 @@ mission.sections =
                 end,
             },
 
+            -- The staff comment on the errand while the leg runs.
+            ['Mih_Ketto']     = mission:event(267),
+            ['Moyoyo']        = mission:event(264),
+            ['Topuru-Kuperu'] = mission:event(261),
+
             onEventFinish =
             {
                 [255] = function(player, csid, option, npc)

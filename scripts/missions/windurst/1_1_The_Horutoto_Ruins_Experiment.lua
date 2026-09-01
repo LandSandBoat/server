@@ -327,8 +327,9 @@ mission.sections =
     -- a Windurst citizen after completing this mission. For now, grouping with other
     -- gate guard-adjacent NPCs whose dialogue changes on accepting next mission.
     {
-        check = function(player)
-            return player:getNation() == mission.areaId and
+        check = function(player, currentMission)
+            return currentMission == xi.mission.id.nation.NONE and
+                player:getNation() == mission.areaId and
                 player:hasCompletedMission(mission.areaId, mission.missionId) and
                 not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER)
         end,

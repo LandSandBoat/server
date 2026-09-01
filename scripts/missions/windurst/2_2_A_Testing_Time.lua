@@ -23,6 +23,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     if option == 4 then
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 1)
+        player:setCharVar('AurasteryMissionTaken', 1)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
@@ -53,28 +54,48 @@ local assessment = function(player, npc)
         end
     end
 
-    -- handle the events for first-time doing the mission
-    if not completed then
-        local event = completed and 208 or 198
+    local event = completed and 208 or 198
 
-        if killCount >= 35 then
-            event = completed and 206 or 201
-        elseif killCount >= 30 then
-            event = completed and 209 or 200
-        elseif not completed and killCount >= 19 then
-            event = 199
-        end
-
-        return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
+    if killCount >= 35 then
+        event = completed and 206 or 201
+    elseif killCount >= 30 then
+        event = completed and 209 or 200
+    elseif not completed and killCount >= 19 then
+        event = 199
     end
+
+    return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
 end
 
 local failMission = function(player, csid, option, npc)
+    local completed = player:hasCompletedMission(mission.areaId, mission.missionId)
+
     mission:setVar(player, 'EndTime', 0)
     mission:setVar(player, 'KillCount', 0)
+    mission:setVar(player, 'Failed', 1)
+    mission:setMustZone(player)
     player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
     player:setMissionStatus(mission.areaId, 0)
-    player:delMission(mission.areaId, mission.missionId)
+
+    -- delMission also wipes the completion bit. A repeat run is dropped with completeMission.
+    if completed then
+        player:completeMission(mission.areaId, mission.missionId)
+    else
+        player:delMission(mission.areaId, mission.missionId)
+    end
+end
+
+local acceptAssessment = function(player, csid, option, npc)
+    if option ~= 2 then
+        return
+    end
+
+    player:setMissionStatus(mission.areaId, 2)
+    npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+    mission:setVar(player, 'EndTime', VanadielTime() + xi.vanaTime.DAY)
+
+    -- The retry briefing has played.
+    mission:setVar(player, 'Failed', 0)
 end
 
 local clearMission = function(player, csid, option, npc)
@@ -92,8 +113,7 @@ mission.sections =
     {
         check = function(player, currentMission)
             return currentMission == xi.mission.id.nation.NONE and
-                player:getNation() == mission.areaId and
-                not player:hasCompletedMission(mission.areaId, mission.missionId)
+                player:getNation() == mission.areaId
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -191,25 +211,22 @@ mission.sections =
             ['Moreno-Toeno'] =
             {
                 onTrigger = function(player, npc)
-                    local completed = player:hasCompletedMission(mission.areaId, mission.missionId)
-
-                    if not completed then
-                        return mission:progressEvent(182) -- first time
-                    elseif completed then
-                        return mission:progressEvent(687) -- repeating
+                    -- Repeat run.
+                    if player:hasCompletedMission(mission.areaId, mission.missionId) then
+                        return mission:progressEvent(687)
+                    -- Retry after a failed attempt.
+                    elseif mission:getVar(player, 'Failed') == 1 then
+                        return mission:progressEvent(181)
                     end
+
+                    return mission:progressEvent(182)
                 end,
             },
 
             onEventFinish =
             {
-                [182] = function(player, csid, option, npc)
-                    if option == 2 then
-                        player:setMissionStatus(mission.areaId, 2)
-                        npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-                        mission:setVar(player, 'EndTime', VanadielTime() + xi.vanaTime.DAY)
-                    end
-                end,
+                [181] = acceptAssessment,
+                [182] = acceptAssessment,
 
                 [687] = function(player, csid, option, npc)
                     if option == 2 then
@@ -330,6 +347,34 @@ mission.sections =
                 [206] = clearMission,
                 [209] = clearMission,
             },
+        },
+    },
+
+    -- Parting words after a failed assessment. They stop once the player zones.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == xi.mission.id.nation.NONE and
+                mission:getVar(player, 'Failed') == 1 and
+                mission:getMustZone(player)
+        end,
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Moreno-Toeno'] = mission:event(203),
+        },
+    },
+
+    -- His usual line returns once the player has zoned.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == xi.mission.id.nation.NONE and
+                mission:getVar(player, 'Failed') == 1 and
+                not mission:getMustZone(player)
+        end,
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Moreno-Toeno'] = mission:event(438),
         },
     },
 }

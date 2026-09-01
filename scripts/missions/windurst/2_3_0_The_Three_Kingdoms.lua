@@ -90,7 +90,9 @@ mission.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Mokyokyo'] = mission:progressEvent(215),
+            ['Dagoza-Beruza'] = mission:event(213),
+            ['Mokyokyo']      = mission:progressEvent(215),
+            ['Panna-Donna']   = mission:event(212),
         },
 
         [xi.zone.WINDURST_WOODS] =
@@ -115,8 +117,11 @@ mission.sections =
                         end
                     elseif missionStatus == 11 then
                         return mission:progressEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
+                    -- Kupipi alternates two lines. The toggle advances in onEventFinish.
+                    elseif player:getLocalVar('KupipiRepeatLine') == 0 then
+                        return mission:progressEvent(97)
                     else
-                        return mission:event(97)
+                        return mission:progressEvent(98)
                     end
                 end,
             },
@@ -136,6 +141,15 @@ mission.sections =
                     end
                 end,
 
+                -- onTrigger also runs on clicks where the action is discarded for the NPC's own file.
+                [97] = function(player, csid, option, npc)
+                    player:setLocalVar('KupipiRepeatLine', 1)
+                end,
+
+                [98] = function(player, csid, option, npc)
+                    player:setLocalVar('KupipiRepeatLine', 0)
+                end,
+
                 [101] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.KINDRED_REPORT)
@@ -144,20 +158,38 @@ mission.sections =
             },
         },
 
-        [xi.zone.CHATEAU_DORAGUILLE] =
+        [xi.zone.METALWORKS] =
         {
-            ['Halver'] =
+            ['Mih_Ketto'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) < 3 then
-                        return mission:event(532)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    -- Both consuls have been visited.
+                    if missionStatus == 11 then
+                        return mission:event(268)
+                    -- Carrying the letter of introduction.
+                    elseif missionStatus > 0 then
+                        return mission:event(266)
                     end
                 end,
             },
-        },
 
-        [xi.zone.METALWORKS] =
-        {
+            ['Moyoyo'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    -- Both consuls have been visited.
+                    if missionStatus == 11 then
+                        return mission:event(265)
+                    -- Carrying the letter of introduction.
+                    elseif missionStatus > 0 then
+                        return mission:event(263)
+                    end
+                end,
+            },
+
             ['Patt-Pott'] =
             {
                 onTrigger = function(player, npc)
@@ -175,18 +207,34 @@ mission.sections =
                 end,
             },
 
+            ['Topuru-Kuperu'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    -- Both consuls have been visited.
+                    if missionStatus == 11 then
+                        return mission:event(262)
+                    -- Carrying the letter of introduction.
+                    elseif missionStatus > 0 then
+                        return mission:event(260)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [254] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
 
+                -- The second consul visited takes the letter.
                 [256] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
+                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
             },
@@ -228,13 +276,14 @@ mission.sections =
                 [546] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
 
+                -- The second consul visited takes the letter.
                 [547] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
+                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
 
@@ -247,9 +296,15 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+            return currentMission == xi.mission.id.nation.NONE and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
                 player:getNation() == xi.nation.WINDURST
         end,
+
+        [xi.zone.HEAVENS_TOWER] =
+        {
+            ['Kupipi'] = mission:event(102),
+        },
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
