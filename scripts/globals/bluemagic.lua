@@ -56,7 +56,7 @@ local function calculateWSC(attacker, params)
 end
 
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
-local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
+xi.spells.blue.calculatefTP = function(tp, ftp0, ftp1500, ftp3000)
     tp = utils.clamp(tp, 0, 3000)
 
     if tp >= 1500 then
@@ -356,7 +356,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local tp         = getTPBonus(caster)
 
     if tp > 0 then
-        ftp = calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
+        ftp = xi.spells.blue.calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
     end
 
     -- WSC
