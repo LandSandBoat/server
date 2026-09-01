@@ -30,6 +30,17 @@ xi.combat.counter.checkSeiganCounter = function(attacker, defender)
         return false
     end
 
+    if
+        attacker:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        attacker:hasStatusEffect(xi.effect.ALL_MISS)
+    then
+        return false
+    end
+
+    if defender:hasPreventActionEffect() then
+        return false
+    end
+
     -- Calculate counter chance.
     local baseCounterRate = 25 + defender:getMod(xi.mod.THIRD_EYE_COUNTER_RATE)
     local hitRateFactor   = xi.combat.physicalHitRate.getPhysicalHitRate(defender, attacker, 0, xi.attackAnimation.RIGHT_ATTACK, false)
