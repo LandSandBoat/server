@@ -70,7 +70,6 @@ xi.combat.physicalHitRate.getFlashPenalty = function(entity)
     local effect = entity:getStatusEffect(xi.effect.FLASH)
 
     if effect then
-        -- https://github.com/LandSandBoat/server/discussions/6926
         -- milliseconds. 12s flash has a potency of 360, 360 = 0.03*(12*1000)
         local timeRemaining           = effect:getTimeRemaining()
         local reductionPerMillisecond = 0.03
