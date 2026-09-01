@@ -483,19 +483,6 @@ templates:
         skill: axe
         delay: 150
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:      2
-          earth:    1
-          thunder: -1
-          water:    8
-          light:    6
-        rank_status:
-          paralyze:    2
-          bind:        2
-          slow:        1
-          poison:      8
-          light_sleep: 6
       render:
         look:
           type:  standard
@@ -955,19 +942,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

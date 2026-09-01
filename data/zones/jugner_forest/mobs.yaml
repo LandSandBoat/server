@@ -18,13 +18,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -434,18 +427,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -2094,13 +2075,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard

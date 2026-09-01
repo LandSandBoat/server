@@ -99,19 +99,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, rdm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -913,9 +900,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          thunder: -2
       render:
         look:
           type:  standard
@@ -2571,21 +2555,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, rdm]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     1
-          thunder: 2
-          water:   2
-          light:   2
-          dark:    4
-        rank_status:
-          paralyze:    1
-          bind:        1
-          poison:      2
-          light_sleep: 2
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard

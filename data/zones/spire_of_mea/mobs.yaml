@@ -14,15 +14,6 @@ templates:
       jobs: [war, rdm]
       resists:
         immune_status: [bind, light_sleep, dark_sleep]
-        rank_element:
-          fire:    2
-          ice:     2
-          wind:    2
-          earth:   2
-          thunder: 2
-          water:   2
-          light:   2
-          dark:    2
       render:
         look:
           type:  standard
@@ -72,15 +63,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire:  11
-          ice:   11
-          water: -3
-        rank_status:
-          paralyze: 11
-          bind:     11
-          poison:   -3
       render:
         look:
           type:  standard

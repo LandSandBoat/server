@@ -182,12 +182,6 @@ templates:
     attributes:
       combat:
         skill: staff
-      resists:
-        rank_element:
-          fire:  2
-          water: 2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -446,17 +440,6 @@ templates:
       combat:
         skill: scythe
         delay: 265
-      resists:
-        rank_element:
-          fire:  11
-          wind:   2
-          earth: -1
-          dark:  -1
-        rank_status:
-          silence:     2
-          slow:       -1
-          dark_sleep: -1
-          blind:      -1
       render:
         look:
           type:  standard
@@ -543,17 +526,6 @@ templates:
       combat:
         skill: scythe
         delay: 265
-      resists:
-        rank_element:
-          fire:  11
-          wind:   2
-          earth: -1
-          dark:  -1
-        rank_status:
-          silence:     2
-          slow:       -1
-          dark_sleep: -1
-          blind:      -1
       render:
         look:
           type:  standard

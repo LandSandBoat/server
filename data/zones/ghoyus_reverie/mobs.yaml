@@ -297,13 +297,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -973,13 +966,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2072,13 +2058,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2195,13 +2174,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2401,23 +2373,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:    4
-          ice:     4
-          wind:    2
-          earth:   2
-          thunder: 2
-          light:   2
-          dark:    2
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     2
-          slow:        2
-          light_sleep: 2
-          dark_sleep:  2
-          blind:       2
       render:
         look:
           type:  standard
@@ -2742,13 +2697,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2954,13 +2902,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3960,13 +3901,6 @@ templates:
         skill: axe
         delay: 265
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard

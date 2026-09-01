@@ -319,23 +319,6 @@ templates:
     attributes:
       combat:
         delay: 0
-      resists:
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

@@ -1071,14 +1071,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          ice:  4
-          dark: 4
-        rank_status:
-          paralyze:   4
-          bind:       4
-          dark_sleep: 4
-          blind:      4
       render:
         look:
           type:  standard

@@ -704,24 +704,6 @@ templates:
         delay: 200
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    -2
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -799,25 +781,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        rank_element:
-          fire:     3
-          ice:      9
-          wind:     3
-          earth:    9
-          thunder:  3
-          water:    9
-          light:    2
-          dark:    11
-        rank_status:
-          paralyze:     9
-          bind:         9
-          silence:      3
-          slow:         9
-          poison:       9
-          light_sleep:  2
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -2533,24 +2496,6 @@ templates:
         delay: 200
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    -2
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard

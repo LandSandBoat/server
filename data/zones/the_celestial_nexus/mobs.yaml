@@ -40,23 +40,6 @@ templates:
         skill:    great_katana
         dmg_mult: 125
       jobs: [sam, drg]
-      resists:
-        rank_element:
-          fire:    1
-          ice:     1
-          wind:    1
-          earth:   2
-          thunder: 1
-          water:   1
-          dark:    2
-        rank_status:
-          paralyze:   1
-          bind:       1
-          silence:    1
-          slow:       2
-          poison:     1
-          dark_sleep: 2
-          blind:      2
       render:
         look:
           type:  standard
@@ -84,23 +67,6 @@ templates:
         skill:    sword
         dmg_mult: 125
       jobs: [war, nin]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     1
-          wind:    1
-          earth:   1
-          thunder: 1
-          water:   1
-          dark:    2
-        rank_status:
-          paralyze:   1
-          bind:       1
-          silence:    1
-          slow:       1
-          poison:     1
-          dark_sleep: 2
-          blind:      2
       render:
         look:
           type:  standard
@@ -127,23 +93,6 @@ templates:
         skill:    dagger
         dmg_mult: 125
       jobs: [bst, thf]
-      resists:
-        rank_element:
-          fire:    1
-          ice:     1
-          wind:    2
-          earth:   1
-          thunder: 1
-          water:   1
-          dark:    2
-        rank_status:
-          paralyze:   1
-          bind:       1
-          silence:    2
-          slow:       1
-          poison:     1
-          dark_sleep: 2
-          blind:      2
       render:
         look:
           type:  standard
@@ -319,25 +268,6 @@ templates:
         delay:    170
         dmg_mult: 125
       jobs: [blm, war]
-      resists:
-        rank_element:
-          fire:    1
-          ice:     1
-          wind:    1
-          earth:   1
-          thunder: 1
-          water:   1
-          light:   1
-          dark:    1
-        rank_status:
-          paralyze:    1
-          bind:        1
-          silence:     1
-          slow:        1
-          poison:      1
-          light_sleep: 1
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -362,25 +292,6 @@ templates:
         delay:    170
         dmg_mult: 125
       jobs: [blm, war]
-      resists:
-        rank_element:
-          fire:    1
-          ice:     1
-          wind:    1
-          earth:   1
-          thunder: 1
-          water:   1
-          light:   1
-          dark:    1
-        rank_status:
-          paralyze:    1
-          bind:        1
-          silence:     1
-          slow:        1
-          poison:      1
-          light_sleep: 1
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -408,25 +319,6 @@ templates:
         delay:    170
         dmg_mult: 125
       jobs: [blm, war]
-      resists:
-        rank_element:
-          fire:    1
-          ice:     1
-          wind:    1
-          earth:   1
-          thunder: 1
-          water:   1
-          light:   1
-          dark:    1
-        rank_status:
-          paralyze:    1
-          bind:        1
-          silence:     1
-          slow:        1
-          poison:      1
-          light_sleep: 1
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -502,24 +394,6 @@ templates:
       jobs: [rdm, rdm]
       resists:
         immune_status: [silence, light_sleep, dark_sleep]
-        rank_element:
-          fire:    3
-          ice:     3
-          wind:    3
-          earth:   3
-          thunder: 3
-          water:   3
-          light:   3
-          dark:    3
-        rank_status:
-          paralyze:    3
-          bind:        3
-          silence:     3
-          slow:        3
-          poison:      3
-          light_sleep: 3
-          dark_sleep:  3
-          blind:       3
       render:
         look:
           type:  standard

@@ -305,12 +305,6 @@ templates:
     attributes:
       combat:
         skill: staff
-      resists:
-        rank_element:
-          fire:  2
-          water: 2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -445,8 +439,6 @@ templates:
           slashing: -1250
           blunt:    -2500
           h2h:      -2500
-        rank_status:
-          silence: 7
       render:
         look:
           type:  standard
@@ -1102,23 +1094,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:     -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -1627,23 +1602,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:     -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -1744,17 +1702,6 @@ templates:
       combat:
         skill: scythe
         delay: 265
-      resists:
-        rank_element:
-          fire:  11
-          wind:   2
-          earth: -1
-          dark:  -1
-        rank_status:
-          silence:     2
-          slow:       -1
-          dark_sleep: -1
-          blind:      -1
       render:
         look:
           type:  standard
@@ -1815,23 +1762,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:     -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard

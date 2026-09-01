@@ -1172,12 +1172,6 @@ templates:
       combat:
         skill: scythe
         delay: 220
-      resists:
-        rank_element:
-          fire:  -3
-          water: -2
-        rank_status:
-          poison: -2
       render:
         look:
           type:  standard
