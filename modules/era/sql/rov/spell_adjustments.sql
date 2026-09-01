@@ -45,3 +45,24 @@ UPDATE spell_list SET castTime = 6000 WHERE name = 'shellra_v';
 -- Remove PLD from Banishga
 -- Source: https://forum.square-enix.com/ffxi/threads/56243
 UPDATE spell_list SET jobs = 0x00000F00000000000000000000000000000000000000 WHERE name = 'banishga';
+
+------------------------------------
+-- Elemental Magic
+------------------------------------
+
+-- Set casting time to 12 seconds for all Ancient Magic spells
+-- Source: https://forum.square-enix.com/ffxi/threads/55525-June.-10-2019-%28JST%29-Version-Update
+UPDATE spell_list SET castTime = 12000 WHERE name = 'flare';
+UPDATE spell_list SET castTime = 12000 WHERE name = 'freeze';
+UPDATE spell_list SET castTime = 12000 WHERE name = 'tornado';
+UPDATE spell_list SET castTime = 12000 WHERE name = 'quake';
+UPDATE spell_list SET castTime = 12000 WHERE name = 'burst';
+UPDATE spell_list SET castTime = 12000 WHERE name = 'flood';
+
+-- Set casting time to 10 seconds for all Ancient Magic II spells
+UPDATE spell_list SET castTime = 10000 WHERE name = 'flare_ii';
+UPDATE spell_list SET castTime = 10000 WHERE name = 'freeze_ii';
+UPDATE spell_list SET castTime = 10000 WHERE name = 'tornado_ii';
+UPDATE spell_list SET castTime = 10000 WHERE name = 'quake_ii';
+UPDATE spell_list SET castTime = 10000 WHERE name = 'burst_ii';
+UPDATE spell_list SET castTime = 10000 WHERE name = 'flood_ii';
