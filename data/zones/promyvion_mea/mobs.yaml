@@ -13,12 +13,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard
@@ -307,12 +304,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard
@@ -345,12 +339,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard

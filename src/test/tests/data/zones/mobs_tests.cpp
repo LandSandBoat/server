@@ -44,6 +44,13 @@ auto westRonfaure() -> const xi::data::Mobs&
     return *loaded;
 }
 
+auto valkurmDunes() -> const xi::data::Mobs&
+{
+    static const auto loaded = xi::data::loadZoneFile<MobsDataset>(xi::ZoneId::ValkurmDunes);
+    REQUIRE(loaded.has_value());
+    return *loaded;
+}
+
 auto spawnAt(const uint32 id) -> const xi::data::MobSpawnData&
 {
     const auto& spawns = westRonfaure().Spawns;
@@ -178,12 +185,17 @@ TEST_CASE("mobs: slot members resolve to declared spawns", "[data][mob]")
 
 TEST_CASE("mobs: a template keeps its resist ranks", "[data][mob]")
 {
-    const auto& bomb = templateNamed("Bomb");
+    const auto& valkurm = valkurmDunes();
 
-    REQUIRE(bomb.Id == 490);
-    REQUIRE(bomb.Attributes.Aggressive.value_or(false));
-    REQUIRE(bomb.Attributes.Resists.at(xi::Mod::FIRE_RES_RANK) == -3);
-    REQUIRE(bomb.Attributes.Resists.at(xi::Mod::ICE_RES_RANK) == 4);
+    const auto& fly = valkurm.Templates.at("Valkurm_Emperor");
+
+    REQUIRE(fly.Id == 4124);
+    REQUIRE(fly.Attributes.Resists.empty());
+
+    const auto& doman = valkurm.Templates.at("Doman");
+
+    REQUIRE(doman.Attributes.Resists.at(xi::Mod::ICE_RES_RANK) == 4);
+    REQUIRE(doman.Attributes.Resists.at(xi::Mod::PARALYZE_RES_RANK) == 4);
 }
 
 TEST_CASE("mobs: a template keeps its mods and mob mods", "[data][mob]")

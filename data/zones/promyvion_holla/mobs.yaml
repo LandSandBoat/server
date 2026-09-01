@@ -13,12 +13,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard
@@ -121,14 +118,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -254,14 +243,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -295,14 +276,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -339,12 +312,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard
@@ -377,12 +347,9 @@ templates:
       resists:
         rank_element:
           fire: -3
-          ice:  11
           wind: 11
         rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
+          silence: 11
       render:
         look:
           type:  standard

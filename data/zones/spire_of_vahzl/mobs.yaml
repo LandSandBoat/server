@@ -14,13 +14,6 @@ templates:
       jobs: [war, rdm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -43,14 +36,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -97,16 +82,6 @@ templates:
       combat:
         skill: sword
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -182,16 +157,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -212,15 +177,6 @@ templates:
         skill: sword
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -249,15 +205,6 @@ templates:
       jobs: [war, rdm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard

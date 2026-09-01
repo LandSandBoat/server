@@ -10,25 +10,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, blm]
-      resists:
-        rank_element:
-          fire:     3
-          ice:      9
-          wind:     3
-          earth:    9
-          thunder:  3
-          water:    9
-          light:    2
-          dark:    11
-        rank_status:
-          paralyze:     9
-          bind:         9
-          silence:      3
-          slow:         9
-          poison:       9
-          light_sleep:  2
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

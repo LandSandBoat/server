@@ -11,14 +11,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -89,9 +81,6 @@ templates:
           water:   2
           light:   2
           dark:    2
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard

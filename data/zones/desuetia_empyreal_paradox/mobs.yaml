@@ -11,25 +11,6 @@ templates:
       combat:
         skill: staff
       jobs: [war, blm]
-      resists:
-        rank_element:
-          fire:    3
-          ice:     3
-          wind:    3
-          earth:   3
-          thunder: 3
-          water:   3
-          light:   6
-          dark:    6
-        rank_status:
-          paralyze:    3
-          bind:        3
-          silence:     3
-          slow:        3
-          poison:      3
-          light_sleep: 6
-          dark_sleep:  6
-          blind:       6
       render:
         look:
           type:  standard

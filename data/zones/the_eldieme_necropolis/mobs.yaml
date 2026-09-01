@@ -10,25 +10,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        rank_element:
-          fire:    -3
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:    4
-          light:   -2
-          dark:     4
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:       4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -60,25 +41,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:     4
-          earth:    4
-          thunder:  4
-          water:    4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     4
-          slow:        4
-          poison:      4
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -108,28 +70,6 @@ templates:
       combat:
         skill: staff
       jobs: [war, blm]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          piercing: -2500
-          blunt:    -5000
-          h2h:      -5000
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     5
-          bind:         5
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        5
       render:
         look:
           type:  standard
@@ -166,25 +106,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, war]
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -392,27 +313,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -439,18 +339,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [stun, slow, elegy]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -482,27 +370,6 @@ templates:
       combat:
         skill: polearm
       jobs: [drk, drk]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -537,27 +404,6 @@ templates:
     attributes:
       combat:
         skill: great_katana
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -583,28 +429,6 @@ templates:
         skill: staff
         delay: 280
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          blunt: -2500
-          h2h:   -2500
-        rank_element:
-          fire:    -2
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:     2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  standard
@@ -636,28 +460,6 @@ templates:
       combat:
         skill: staff
       jobs: [war, blm]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          piercing: -2500
-          blunt:    -5000
-          h2h:      -5000
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     5
-          bind:         5
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        5
       render:
         look:
           type:  standard
@@ -690,25 +492,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -739,27 +522,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -787,27 +549,6 @@ templates:
     attributes:
       combat:
         skill: polearm
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -832,19 +573,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [gravity, bind, silence, paralyze]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard
@@ -880,19 +608,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [gravity, bind, silence, paralyze]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard
@@ -1106,27 +821,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1159,27 +853,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1208,27 +881,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1255,27 +907,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1302,25 +933,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1380,27 +992,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1441,27 +1032,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1481,25 +1051,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1530,27 +1081,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1573,25 +1103,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:     4
-          earth:    4
-          thunder:  4
-          water:    4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     4
-          slow:        4
-          poison:      4
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -1621,28 +1132,6 @@ templates:
       combat:
         skill: staff
       jobs: [war, blm]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          piercing: -2500
-          blunt:    -5000
-          h2h:      -5000
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     5
-          bind:         5
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        5
       render:
         look:
           type:  standard
@@ -1856,27 +1345,6 @@ templates:
       combat:
         skill: axe
         delay: 210
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1906,27 +1374,6 @@ templates:
       combat:
         skill: great_sword
         delay: 210
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -1955,27 +1402,6 @@ templates:
       combat:
         skill: great_sword
         delay: 210
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2005,27 +1431,6 @@ templates:
       combat:
         skill: axe
         delay: 210
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2057,27 +1462,6 @@ templates:
         skill: axe
         delay: 210
       jobs: [blm, war]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2109,27 +1493,6 @@ templates:
         skill: axe
         delay: 210
       jobs: [blm, war]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2159,27 +1522,6 @@ templates:
       combat:
         skill: dagger
         delay: 210
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2370,25 +1712,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -2411,13 +1734,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          fire:    -3
-          thunder: -3
-          water:   -2
-        rank_status:
-          poison: -2
       render:
         look:
           type:  standard
@@ -2441,27 +1757,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2492,27 +1787,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard
@@ -2541,25 +1815,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: 1250
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -2590,13 +1845,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          fire:    -3
-          thunder: -3
-          water:   -2
-        rank_status:
-          poison: -2
       render:
         look:
           type:  standard
@@ -2620,28 +1868,6 @@ templates:
       combat:
         skill: staff
       jobs: [war, blm]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          piercing: -2500
-          blunt:    -5000
-          h2h:      -5000
-        rank_element:
-          fire:    -3
-          ice:      4
-          wind:    -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:     5
-          bind:         5
-          silence:     -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:   4
-          blind:        5
       render:
         look:
           type:  standard
@@ -2677,27 +1903,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -5000
-          blunt:     2500
-          h2h:       1250
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-          dark:     4
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
-          dark_sleep:  11
-          blind:        4
       render:
         look:
           type:  standard

@@ -12,18 +12,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [cor, cor]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -50,18 +38,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -87,18 +63,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -123,18 +87,6 @@ templates:
         skill: dagger
         delay: 360
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -156,18 +108,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -188,18 +128,6 @@ templates:
       combat:
         skill: sword
       jobs: [cor, cor]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -218,20 +146,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        rank_element:
-          fire:  -2
-          ice:   -3
-          wind:  -1
-          water: -2
-          dark:  -2
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -1
-          poison:     -2
-          dark_sleep: -2
-          blind:      -2
       render:
         look:
           type:  standard
@@ -252,18 +166,6 @@ templates:
       combat:
         skill: sword
       jobs: [cor, cor]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  misc
@@ -305,24 +207,6 @@ templates:
           slashing: -1250
           blunt:    -2500
           h2h:      -2500
-        rank_element:
-          fire:    -1
-          ice:      1
-          wind:     1
-          earth:    1
-          thunder: -1
-          water:    3
-          light:   -1
-          dark:     2
-        rank_status:
-          paralyze:     1
-          bind:         1
-          silence:      1
-          slow:         1
-          poison:       3
-          light_sleep: -1
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  standard
@@ -344,21 +228,6 @@ templates:
       combat:
         skill: dagger
       jobs: [nin, nin]
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -424,24 +293,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:     2
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     6
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:      2
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   6
-          blind:        6
       render:
         look:
           type:  standard
@@ -465,24 +316,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:     2
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     6
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:      2
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   6
-          blind:        6
       render:
         look:
           type:  standard
@@ -506,24 +339,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:     2
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     6
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:      2
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   6
-          blind:        6
       render:
         look:
           type:  standard

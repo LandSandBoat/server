@@ -1457,25 +1457,6 @@ templates:
       combat:
         skill: club
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     5
-          ice:      5
-          wind:     5
-          earth:    5
-          thunder:  5
-          water:    5
-          light:   11
-          dark:     5
-        rank_status:
-          paralyze:     5
-          bind:         5
-          silence:      5
-          slow:         5
-          poison:       5
-          light_sleep: 11
-          dark_sleep:   5
-          blind:        5
       render:
         look:
           type:  standard
@@ -4628,11 +4609,8 @@ templates:
       resists:
         rank_element:
           light: -3
-          dark:  11
         rank_status:
           light_sleep: -3
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

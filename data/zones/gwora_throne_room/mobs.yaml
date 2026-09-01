@@ -12,13 +12,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, rdm]
-      resists:
-        rank_element:
-          fire: 4
-          dark: 6
-        rank_status:
-          dark_sleep: 6
-          blind:      6
       render:
         look:
           type:  standard
