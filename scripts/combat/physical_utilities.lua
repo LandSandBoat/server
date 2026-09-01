@@ -95,14 +95,15 @@ local shieldSizeToBlockRateTable =
 xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physicalAttackType, isH2H, isFirstSwing, isSneakAttack, isTrickAttack, damageRatio)
     local bonusBasePhysicalDamage = 0
     local damage                  = 0
+    local isTHF                   = actor:getMainJob() == xi.job.THF
 
     -- Sneak Attack
-    if isSneakAttack then
+    if isSneakAttack and isTHF then
         bonusBasePhysicalDamage = math.floor(bonusBasePhysicalDamage + actor:getStat(xi.mod.DEX) * (1 + actor:getMod(xi.mod.SNEAK_ATK_DEX) / 100))
     end
 
     -- Trick Attack
-    if isTrickAttack then
+    if isTrickAttack and isTHF then
         bonusBasePhysicalDamage = math.floor(bonusBasePhysicalDamage + actor:getStat(xi.mod.AGI) * (1 + actor:getMod(xi.mod.TRICK_ATK_AGI) / 100))
     end
 

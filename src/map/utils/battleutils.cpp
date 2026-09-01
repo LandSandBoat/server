@@ -2559,7 +2559,11 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
     }
     else if (PAttacker->objtype == TYPE_PC && (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
     {
-        if (behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide))
+        if (PAttacker->GetMJob() == xi::Job::THF and PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Doubt))
+        {
+            critHitRate = 100;
+        }
+        else if (behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide))
         {
             critHitRate = 100;
         }
