@@ -266,6 +266,14 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
+    -- TODO: does PD modify the message?
+    if
+        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)
+    then
+        hitRate = -1
+    end
+
     if math.randomFloat(0, 1) <= hitRate then
         local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
         local debuffEffect     = target:getStatusEffect(stepEffect)
@@ -379,9 +387,12 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
 
     setFinishingMoves(player, numMoves - 1)
 
+    -- TODO: does PD modify the message?
     if
-        math.randomFloat(0, 1) <= xi.weaponskills.getHitRate(player, target, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT), xi.attackAnimation.LEFT_ATTACK) or
-        (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
+        (not target:hasStatusEffect(xi.effect.PERFECT_DODGE) and
+        not target:hasStatusEffect(xi.effect.ALL_MISS)) and
+        (math.randomFloat(0, 1) <= xi.weaponskills.getHitRate(player, target, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT), xi.attackAnimation.LEFT_ATTACK) or
+        (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target)))
     then
         infoValue = actionInfo[ability:getID()][2]
 
