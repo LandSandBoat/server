@@ -32,6 +32,18 @@
 namespace
 {
 
+void closeStandingDoor(Elevator* elevator)
+{
+    if (elevator->state == xi::ElevatorState::Top)
+    {
+        elevator->closeDoor(elevator->upperDoor);
+    }
+    else if (elevator->state == xi::ElevatorState::Bottom)
+    {
+        elevator->closeDoor(elevator->lowerDoor);
+    }
+}
+
 void start(Elevator* elevator)
 {
     const auto now = earth_time::vanadiel_timestamp_ms();
@@ -50,7 +62,6 @@ void start(Elevator* elevator)
 
                 return xi::Animation::ElevatorDown;
             }();
-            elevator->closeDoor(elevator->upperDoor);
         }
         break;
         case xi::ElevatorState::Bottom: // Elevator is now ascending
@@ -65,7 +76,6 @@ void start(Elevator* elevator)
 
                 return xi::Animation::ElevatorUp;
             }();
-            elevator->closeDoor(elevator->lowerDoor);
         }
         break;
         default:
@@ -150,6 +160,7 @@ void ElevatorHandler::addElevator(const xi::ZoneId zoneId, CNpcEntity* PPlatform
         .zoneID             = zoneId,
         .period             = lift.Period,
         .movetime           = lift.Travel,
+        .doorDelay          = lift.DoorDelay,
         .platform           = PPlatform,
         .lowerDoor          = PLowerDoor,
         .upperDoor          = PUpperDoor,
@@ -252,6 +263,11 @@ void ElevatorHandler::tick()
                                  case xi::ElevatorState::Bottom:
                                  {
                                      // The leg is timed end to end, so the wait at the floor is whatever travel leaves over.
+                                     if (elevator.isPermanent && now + elevator.doorDelay >= elevator.legStarted + elevator.period)
+                                     {
+                                         closeStandingDoor(&elevator);
+                                     }
+
                                      if (now >= elevator.legStarted + elevator.period)
                                      {
                                          start(&elevator);
@@ -301,7 +317,15 @@ void ElevatorHandler::startElevator(const xi::Elevator elevatorID)
                          {
                              if (elevator.id == elevatorID)
                              {
-                                 start(&elevator);
+                                 if (elevator.activated)
+                                 {
+                                     return;
+                                 }
+
+                                 closeStandingDoor(&elevator);
+
+                                 elevator.legStarted = earth_time::vanadiel_timestamp_ms() + elevator.doorDelay;
+                                 elevator.activated  = true;
                                  return;
                              }
                          }

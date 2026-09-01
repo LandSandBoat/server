@@ -65,6 +65,7 @@ auto convertElevator(const std::optional<wire::Lift>& source, const uint32 id) -
         .Reversed  = source->reversed.value_or(false),
         .Travel    = source->travel,
         .Period    = source->period.value_or(0),
+        .DoorDelay = source->door_delay.value_or(0),
     };
 }
 

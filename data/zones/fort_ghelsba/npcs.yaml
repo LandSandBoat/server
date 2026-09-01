@@ -92,6 +92,7 @@ npcs:
       lever:      fort_ghelsba_lift
       reversed:   true
       travel:     7
+      door_delay: 3400
 
   17354994:
     script: _3x3

@@ -49,6 +49,7 @@ struct Lift
     std::optional<bool>                          reversed;
     uint8                                        travel{};
     std::optional<uint32>                        period;
+    std::optional<uint32>                        door_delay;
 };
 
 struct Npc
@@ -100,6 +101,7 @@ struct glz::json_schema<xi::data::datasets::zones::npcs::wire::Lift>
     glz::schema reversed{ .description = "True when the up animation sends the platform down. Defaults to false." };
     glz::schema travel{ .description = "Seconds the platform spends between floors. The client animates against the same figure." };
     glz::schema period{ .description = "Milliseconds for one leg, travel plus the wait at the floor. Retail periods are not whole seconds. Lever-driven lifts ignore it." };
+    glz::schema door_delay{ .description = "Milliseconds the shut door waits before the platform leaves. Defaults to none." };
 };
 
 template <>

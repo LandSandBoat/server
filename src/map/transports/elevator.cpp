@@ -32,6 +32,11 @@ void Elevator::openDoor(CNpcEntity* PDoor) const
 
 void Elevator::closeDoor(CNpcEntity* PDoor) const
 {
+    if (PDoor->animation == xi::Animation::CloseDoor)
+    {
+        return;
+    }
+
     PDoor->animation = xi::Animation::CloseDoor;
     zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(PDoor, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
