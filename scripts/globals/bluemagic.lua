@@ -332,7 +332,7 @@ end
 ---@param target CBaseEntity
 ---@param spell CSpell
 ---@param params blueSkillParams
----@return number, number
+---@return number
 xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
 
@@ -466,7 +466,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     caster:delStatusEffectSilent(xi.effect.EFFLUX)
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget), params.hitsLanded
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell. Called from spell scripts.
