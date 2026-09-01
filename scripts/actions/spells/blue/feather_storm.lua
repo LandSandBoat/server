@@ -20,16 +20,9 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params      = xi.spells.blue.getDefaultParams(caster)
-    params.ecosystem  = xi.ecosystem.BEASTMEN
-    params.tpModifier = xi.spells.blue.tpMod.CRITICAL
-
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.critChance = 55
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.critChance = math.floor(caster:getTP() / 75)
-    end
-
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.BEASTMEN
+    params.tpModifier     = xi.spells.blue.tpMod.DURATION
     params.attackType     = xi.attackType.RANGED
     params.damageType     = xi.damageType.PIERCING
     params.skillchainType = xi.skillchainType.TRANSFIXION
@@ -44,16 +37,25 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.agi_wsc    = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
+    end
+
+    local duration = 180
+
+    -- TODO: duration needs verification.
+    if params.hasAzureLore then
+        duration = 450
+    elseif params.hasChainAffinity then
+        duration = xi.spells.blue.calculatefTP(caster:getTP(), 180, 360, 400)
     end
 
     -- Handle status effects.
     local effectTable =
     {
-        [1] = { xi.effect.POISON, 1, 3, 180 },
+        [1] = { xi.effect.POISON, 1, 3, duration },
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

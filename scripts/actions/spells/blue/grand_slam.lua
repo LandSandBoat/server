@@ -32,6 +32,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp3000       = 1.0
     params.ftpAzure      = 1.0
     params.baseDamageCap = 33
+    params.attackMult    = 1.6
+
+    if params.hasAzureLore then
+        params.attackMult = 2.4
+    elseif params.hasChainAffinity then
+        params.attackMult = xi.spells.blue.calculatefTP(caster:getTP(), 1.6, 2, 2.3)
+    end
 
     params.vit_wsc = 0.3
 

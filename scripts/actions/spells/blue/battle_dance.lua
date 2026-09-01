@@ -36,16 +36,25 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.str_wsc       = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
+    end
+
+    local duration = 90
+
+    -- TODO: 0tp duration needs verification
+    if params.hasAzureLore then
+        duration = 800
+    elseif params.hasChainAffinity then
+        duration = xi.spells.blue.calculatefTP(caster:getTP(), 90, 480, 680)
     end
 
     -- Handle status effects.
     local effectTable =
     {
-        [1] = { xi.effect.DEX_DOWN, 9, 6, 60 },
+        [1] = { xi.effect.DEX_DOWN, 9, 6, duration },
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

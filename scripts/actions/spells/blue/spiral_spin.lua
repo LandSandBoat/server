@@ -27,19 +27,19 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.damageType     = xi.damageType.SLASHING
     params.skillchainType = xi.skillchainType.TRANSFIXION
 
-    params.numHits      = 1
-    params.ftp0         = 2.0
-    params.ftp1500      = 2.0
-    params.ftp3000      = 2.0
-    params.ftpAzure     = 2.0
-    params.baseDamageCap = 69
+    params.numHits       = 1
+    params.ftp0          = 2.0
+    params.ftp1500       = 2.0
+    params.ftp3000       = 2.0
+    params.ftpAzure      = 2.0
+    params.baseDamageCap = 999 -- uncapped
 
     params.agi_wsc = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
     end
 

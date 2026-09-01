@@ -24,9 +24,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem  = xi.ecosystem.BIRD
     params.tpModifier = xi.spells.blue.tpMod.ACC
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+    -- TODO: this is made up
+    if params.hasAzureLore then
         params.bonusAcc = 70
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    elseif params.hasChainAffinity then
         params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
@@ -40,6 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp3000       = 1.125
     params.ftpAzure      = 1.125
     params.baseDamageCap = 39
+    params.attackMult    = 1.3
 
     params.agi_wsc = 0.3
 

@@ -24,10 +24,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem  = xi.ecosystem.VERMIN
     params.tpModifier = xi.spells.blue.tpMod.CRITICAL
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.critChance = 55
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.critChance = math.floor(caster:getTP() / 75)
+    if params.hasAzureLore then
+        params.critChance = 35
+    elseif params.hasChainAffinity then
+        params.critChance = xi.spells.blue.calculatefTP(caster:getTP(), 0, 15, 30)
     end
 
     params.attackType     = xi.attackType.PHYSICAL
@@ -40,8 +40,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp3000       = 1.125
     params.ftpAzure      = 1.125
     params.baseDamageCap = 11
+    params.attackMult    = 1.8
 
-    params.vit_wsc = 0.3
+    params.str_wsc = 0.1
+    params.vit_wsc = 0.1
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

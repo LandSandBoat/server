@@ -33,14 +33,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp1500       = 0.875
     params.ftp3000       = 0.875
     params.ftpAzure      = 0.875
-    params.baseDamageCap = 69
+    params.baseDamageCap = 999 -- uncapped
 
     params.dex_wsc    = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
     end
 

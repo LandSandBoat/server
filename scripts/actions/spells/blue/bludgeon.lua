@@ -24,9 +24,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem  = xi.ecosystem.ARCANA
     params.tpModifier = xi.spells.blue.tpMod.ACC
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+    -- This is entirely made up, apparently.
+    if params.hasAzureLore then
         params.bonusAcc = 70
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    elseif params.hasChainAffinity then
         params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
@@ -40,7 +41,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp3000       = 1.0
     params.ftpAzure      = 1.0
     params.baseDamageCap = 21
-    params.chr_wsc       = 0.3
+    params.attackMult    = 1.55
+
+    params.chr_wsc = 0.3
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

@@ -24,9 +24,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem  = xi.ecosystem.BEAST
     params.tpModifier = xi.spells.blue.tpMod.ACC
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+    -- TODO: made up
+    if params.hasAzureLore then
         params.bonusAcc = 70
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    elseif params.hasChainAffinity then
         params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
@@ -40,7 +41,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp1500       = 0.625
     params.ftp3000       = 0.625
     params.ftpAzure      = 0.625
-    params.baseDamageCap = 21
+    params.baseDamageCap = 999 -- uncapped in retail. was 21 here before?
+    params.attackMult    = 1.05
 
     -- D seems low for its level, but the spell never did good damage, so a low D is a good way of keeping overall damage down.
     -- More discussion on https://ffxiclopedia.fandom.com/wiki/Talk:Asuran_Claws
