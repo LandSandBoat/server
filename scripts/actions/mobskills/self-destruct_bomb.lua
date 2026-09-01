@@ -7,6 +7,10 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if math.randomInt(1, 100) > 50 then -- A bomb will have a 25% chance to use Self-Destruct
+        return 1
+    end
+
     return 0
 end
 
