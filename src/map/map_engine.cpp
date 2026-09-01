@@ -44,6 +44,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "time_server.h"
+#include "transports/elevator_handler.h"
 #include "transports/ship_handler.h"
 #include "zone.h"
 #include "zone_entities.h"
@@ -235,6 +236,14 @@ auto MapEngine::init() -> Task<void>
             [this]() -> Task<void>
             {
                 co_await time_server(scheduler_, config_);
+            });
+
+        transportToken_ = scheduler_.intervalOnMainThread(
+            kTransportTickInterval,
+            []()
+            {
+                ShipHandler::getInstance()->tick();
+                ElevatorHandler::getInstance()->tick();
             });
 
         persistVolatileServerVarsToken_ = scheduler_.intervalOnMainThread(kPersistVolatileServerVarsInterval, serverutils::PersistVolatileServerVars);
