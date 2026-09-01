@@ -4,13 +4,10 @@
 -- Log ID: 3, Quest ID: 31
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
-
-quest.reward =
-{
-    keyItem = xi.ki.CORUSCANT_ROSARY,
-}
 
 quest.sections =
 {
@@ -25,7 +22,7 @@ quest.sections =
             ['Sattal-Mansal'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(89)
+                    return quest:progressEvent(89, 0)
                 end,
             },
 
@@ -49,26 +46,34 @@ quest.sections =
         {
             ['Sattal-Mansal'] =
             {
+                -- Retail hands over the reward as the event starts. The message prints when it ends.
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_CHARM) then
-                        return quest:progressEvent(91)
+                    if not npcUtil.tradeMatches(trade, { { xi.item.QUADAV_CHARM, 1 } }) then
+                        return
                     end
+
+                    player:addKeyItem(xi.ki.CORUSCANT_ROSARY)
+                    player:addFame(xi.fameArea.SANDORIA, 7)
+                    player:addFame(xi.fameArea.BASTOK, 7)
+                    player:addFame(xi.fameArea.WINDURST, 7)
+                    player:tradeComplete()
+
+                    return quest:progressEvent(91)
                 end,
+
+                -- Param 0 flags the offer as already taken.
+                onTrigger = quest:event(89, 1),
             },
 
             onEventFinish =
             {
                 [91] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:addFame(xi.fameArea.SANDORIA, 7)
-                        player:addFame(xi.fameArea.BASTOK, 7)
-                        player:addFame(xi.fameArea.WINDURST, 7)
-                        player:confirmTrade()
-                    end
+                    player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
+                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.ki.CORUSCANT_ROSARY)
                 end,
             },
         },
-    }
+    },
 }
 
 return quest

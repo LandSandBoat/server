@@ -4,13 +4,10 @@
 -- Log ID: 3, Quest ID: 32
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
-
-quest.reward =
-{
-    keyItem = xi.ki.BLACK_MATINEE_NECKLACE,
-}
 
 quest.sections =
 {
@@ -24,26 +21,31 @@ quest.sections =
         {
             ['Sattal-Mansal'] =
             {
+                -- Retail hands over the reward as the event starts. The message prints when it ends.
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_AUGURY_SHELL) then
-                        return quest:progressEvent(92)
+                    if not npcUtil.tradeMatches(trade, { { xi.item.QUADAV_AUGURY_SHELL, 1 } }) then
+                        return
                     end
+
+                    player:addKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
+                    player:addFame(xi.fameArea.SANDORIA, 7)
+                    player:addFame(xi.fameArea.BASTOK, 7)
+                    player:addFame(xi.fameArea.WINDURST, 7)
+                    player:tradeComplete()
+
+                    return quest:progressEvent(92)
                 end,
             },
 
             onEventFinish =
             {
                 [92] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:addFame(xi.fameArea.SANDORIA, 7)
-                        player:addFame(xi.fameArea.BASTOK, 7)
-                        player:addFame(xi.fameArea.WINDURST, 7)
-                        player:confirmTrade()
-                    end
+                    player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.ki.BLACK_MATINEE_NECKLACE)
                 end,
             },
         },
-    }
+    },
 }
 
 return quest

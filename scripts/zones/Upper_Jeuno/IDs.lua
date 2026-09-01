@@ -35,6 +35,7 @@ zones[xi.zone.UPPER_JEUNO] =
         YOU_CAN_NOW_BECOME_A_BEASTMASTER = 7211,  -- You can now become a beastmaster.
         NO_ONES_HOME                     = 7214,  -- Looks like no one's home.
         WASTING_YOUR_TIME                = 7453,  -- Hah! You're wasting your time!
+        WITHER_AND_DIE                   = 7461,  -- Just you watch them wither and die.
         YOU_ARE_GIVEN_THREE_SPRIGS       = 7738,  -- You are given three sprigs of <item>.
         CONQUEST                         = 7767,  -- You've earned conquest points!
         ITEM_DELIVERY_DIALOG             = 8100,  -- Delivering goods to residences everywhere!
