@@ -976,6 +976,10 @@ xi.expeditionaryForce.onMobDeath = function(mob, player)
     -- Award Influence
     player:gainConquestInfluence(regionPointsEarned[GetNationRank(creditNation)])
 
+    -- Award mob kills for Conquest
+    -- TODO: Get a more accurate number and check per region values.
+    player:addConquestMobKills(25)
+
     -- SEND ZONE MESSAGE
     for _, person in pairs(mob:getZone():getPlayers()) do
         person:messageText(person, ID.text.EXP_FORCE_KILL_SANDORIA + creditNation, 5) -- 5 = Grey: messageText event
