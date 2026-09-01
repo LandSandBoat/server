@@ -257,7 +257,7 @@ end
 ---@field critChance       number
 ---@field bonusAcc         number
 ---@field bonusMacc        number
----@field attackMod        number
+---@field attackMult       number
 ---@field ecosystem        xi.ecosystem
 ---@field attackType       xi.attackType
 ---@field damageType       xi.damageType
@@ -296,7 +296,7 @@ xi.spells.blue.getDefaultParams = function(caster)
     params.critChance    = 0
     params.bonusAcc      = 0
     params.bonusMacc     = 0
-    params.attackMod     = 1.0
+    params.attackMult    = 1.0
 
     params.ecosystem       = xi.ecosystem.UNCLASSIFIED
     params.attackType      = xi.attackType.NONE
@@ -383,7 +383,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     local isCannonball         = spell:getID() == xi.magic.spell.CANNONBALL
     local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
-    local spellAttackMod       = params.attackMod -- TODO: implement
+    local spellAttackMod       = params.attackMult -- TODO: implement
     local attackMultiplier     = spellAttackMod * potencyAttackMod
     local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster)
     local hitrate              = calculateHitrate(caster, target, params.bonusAcc)
