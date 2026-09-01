@@ -363,9 +363,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -508,8 +505,6 @@ templates:
       jobs: [mnk, mnk]
       resists:
         immune_status: [gravity, bind, light_sleep, dark_sleep]
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -2109,9 +2104,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

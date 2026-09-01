@@ -743,9 +743,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

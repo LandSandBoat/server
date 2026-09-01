@@ -211,7 +211,7 @@ ecosystems:
                   piercing: -2500
                   blunt:    -3750
                 dmg_magic:
-                  all: 2500
+                  all: 1250
                 rank_element:
                   fire:    0
                   ice:     2
@@ -234,6 +234,7 @@ ecosystems:
                   gravity:     2
               mods:
                 udmgbreath: 2500
+                mdef:         40
           flan:
             id: 5
             attributes:
@@ -551,6 +552,8 @@ ecosystems:
                   blind:        4
                   stun:         4
                   gravity:      1
+              mods:
+                mdef: 50
           sandworm:
             id: 14
             attributes:
@@ -601,6 +604,8 @@ ecosystems:
                   slashing: -5000
                   piercing: -5000
                   blunt:    -7500
+                dmg_magic:
+                  all: -2500
                 rank_element:
                   fire:    -3
                   ice:     -2
@@ -621,6 +626,8 @@ ecosystems:
                   blind:       -2
                   stun:        -2
                   gravity:     -2
+              mods:
+                mdef: 20
           clot:
             id: 16
             attributes:
@@ -1196,6 +1203,7 @@ ecosystems:
                   gravity:      0
               mods:
                 udmgbreath: -1250
+                mdef:          50
           orobon:
             id: 34
             attributes:
@@ -1293,6 +1301,8 @@ ecosystems:
                   blind:       6
                   stun:        2
                   gravity:     2
+              mods:
+                mdef: 10
       pugil:
         id: 16
         attributes:
@@ -1375,6 +1385,8 @@ ecosystems:
               detects:
                 - hearing
               resists:
+                dmg_magic:
+                  all: 3500
                 rank_element:
                   fire:    9
                   ice:     4
@@ -2333,7 +2345,7 @@ ecosystems:
             attributes:
               resists:
                 dmg_magic:
-                  all: -2500
+                  all: -625
                 rank_element:
                   fire:     5
                   ice:      3
@@ -2356,6 +2368,7 @@ ecosystems:
                   gravity:      5
               mods:
                 udmgbreath: -5000
+                mdef:          60
       magic_pot:
         id: 31
         attributes:
@@ -2491,6 +2504,8 @@ ecosystems:
                   blind:       -2
                   stun:        -2
                   gravity:      4
+              mods:
+                mdef: 30
       mimic:
         id: 33
         species:
@@ -2673,7 +2688,7 @@ ecosystems:
                   piercing: -1250
                   blunt:    -1250
                 dmg_magic:
-                  all: -1250
+                  all: -3450
                 rank_element:
                   fire:    2
                   ice:     3
@@ -2704,8 +2719,6 @@ ecosystems:
                   slashing: -1250
                   piercing: -1250
                   blunt:    -1250
-                dmg_magic:
-                  all: -1250
                 rank_element:
                   fire:    2
                   ice:     2
@@ -2747,6 +2760,8 @@ ecosystems:
             id: 78
             attributes:
               resists:
+                dmg_physical:
+                  piercing: 2500
                 rank_element:
                   fire:     0
                   ice:      1
@@ -2799,6 +2814,8 @@ ecosystems:
             id: 80
             attributes:
               resists:
+                dmg_physical:
+                  piercing: 2500
                 rank_element:
                   fire:     0
                   ice:      1
@@ -2884,7 +2901,7 @@ ecosystems:
                   stun:        0
                   gravity:     4
               mods:
-                udmgbreath: -1250
+                mdef: 60
           metal_head:
             id: 83
             attributes:
@@ -2912,7 +2929,7 @@ ecosystems:
                   stun:        0
                   gravity:     4
               mods:
-                udmgbreath: -1250
+                mdef: 60
       rampart:
         id: 38
         species:
@@ -3017,6 +3034,8 @@ ecosystems:
                   blind:       2
                   stun:        2
                   gravity:     2
+              mods:
+                mdef: 90
           skormoth:
             id: 87
             attributes:
@@ -3853,6 +3872,8 @@ ecosystems:
                   blind:       -2
                   stun:        -1
                   gravity:     -2
+              mods:
+                mdef: 22
           sheep:
             id: 111
             attributes:
@@ -4236,6 +4257,8 @@ ecosystems:
             id: 122
             attributes:
               resists:
+                dmg_magic:
+                  all: -5000
                 rank_element:
                   fire:    0
                   ice:     0
@@ -5463,6 +5486,8 @@ ecosystems:
                   blind:        0
                   stun:        -2
                   gravity:     -1
+              mods:
+                mdef: 30
       troll:
         id: 72
         attributes:
@@ -6062,6 +6087,8 @@ ecosystems:
                   blind:       -1
                   stun:         2
                   gravity:     -2
+              mods:
+                mdef: -10
       colibri:
         id: 80
         attributes:
@@ -6119,6 +6146,8 @@ ecosystems:
               resists:
                 dmg_physical:
                   piercing: 2500
+                dmg_magic:
+                  all: -9000
                 rank_element:
                   fire:     2
                   ice:      0
@@ -6285,6 +6314,8 @@ ecosystems:
                 dmg_physical:
                   slashing: -1250
                   blunt:     -625
+                dmg_magic:
+                  all: -1250
                 rank_element:
                   fire:    1
                   ice:     0
@@ -6307,7 +6338,7 @@ ecosystems:
                   gravity:     9
               mods:
                 udmgbreath: -2500
-                mdef:          80
+                mdef:          40
           white_harpeia:
             id: 186
             attributes:
@@ -6315,6 +6346,8 @@ ecosystems:
                 dmg_physical:
                   slashing: -1250
                   blunt:     -625
+                dmg_magic:
+                  all: -1250
                 rank_element:
                   fire:    1
                   ice:     0
@@ -6337,7 +6370,7 @@ ecosystems:
                   gravity:     9
               mods:
                 udmgbreath: -2500
-                mdef:          80
+                mdef:          40
       hippogryph:
         id: 83
         species:
@@ -6522,6 +6555,8 @@ ecosystems:
                   blind:        1
                   stun:         6
                   gravity:      6
+              mods:
+                mdef: 24
           tulfaire:
             id: 192
             attributes:
@@ -6677,8 +6712,6 @@ ecosystems:
             id: 196
             attributes:
               resists:
-                dmg_magic:
-                  all: -2500
                 rank_element:
                   fire:     0
                   ice:      0
@@ -6699,6 +6732,8 @@ ecosystems:
                   blind:        6
                   stun:         0
                   gravity:      0
+              mods:
+                mdef: 20
           shadow_eyes:
             id: 197
             attributes:
@@ -6886,6 +6921,8 @@ ecosystems:
                   blind:        1
                   stun:         1
                   gravity:      1
+              mods:
+                mdef: 10
       dvergr:
         id: 89
         attributes:
@@ -7043,8 +7080,6 @@ ecosystems:
             id: 207
             attributes:
               resists:
-                dmg_magic:
-                  all: -3750
                 rank_element:
                   fire:     3
                   ice:      4
@@ -7067,7 +7102,7 @@ ecosystems:
                   gravity:      3
               mods:
                 udmgbreath: -6250
-                mdef:          30
+                mdef:          14
       gargouille:
         id: 91
         attributes:
@@ -7285,14 +7320,13 @@ ecosystems:
             - magic
             - ability
             - scent
-          mods:
-            mdef:         20
-            udmgmagic: -2500
         species:
           black_robe_flayer:
             id: 214
             attributes:
               resists:
+                dmg_magic:
+                  all: -2500
                 rank_element:
                   fire:     0
                   ice:      2
@@ -7313,10 +7347,14 @@ ecosystems:
                   blind:       11
                   stun:         0
                   gravity:      0
+              mods:
+                mdef: 20
           soulflayer:
             id: 215
             attributes:
               resists:
+                dmg_magic:
+                  all: -2500
                 rank_element:
                   fire:     0
                   ice:      2
@@ -7337,6 +7375,8 @@ ecosystems:
                   blind:       11
                   stun:         0
                   gravity:      0
+              mods:
+                mdef: 20
               mob_mods:
                 sublink:    11
                 roam_cool:  50
@@ -7481,6 +7521,8 @@ ecosystems:
             id: 220
             attributes:
               resists:
+                dmg_magic:
+                  all: 8000
                 rank_element:
                   fire:     6
                   ice:      3
@@ -7501,6 +7543,8 @@ ecosystems:
                   blind:        3
                   stun:         3
                   gravity:      6
+              mods:
+                mdef: 50
       hydra:
         id: 96
         attributes:
@@ -7520,8 +7564,6 @@ ecosystems:
                 dmg_physical:
                   piercing: -5000
                   blunt:    -5000
-                dmg_magic:
-                  all: -2500
                 rank_element:
                   fire:    6
                   ice:     6
@@ -7544,7 +7586,7 @@ ecosystems:
                   gravity:     6
               mods:
                 udmgbreath: -10000
-                mdef:           30
+                mdef:           50
           hydra:
             id: 222
             attributes:
@@ -7754,6 +7796,8 @@ ecosystems:
                 - sight
                 - hearing
               resists:
+                dmg_magic:
+                  all: -4000
                 rank_element:
                   fire:     0
                   ice:      0
@@ -7947,6 +7991,8 @@ ecosystems:
                   blind:       -3
                   stun:        -2
                   gravity:      4
+              mods:
+                mdef: 20
           wyvern:
             id: 235
             attributes:
@@ -8555,6 +8601,10 @@ ecosystems:
                 - sight
                 - magic
               resists:
+                dmg_physical:
+                  slashing: -7500
+                  piercing: -5000
+                  blunt:    -6250
                 rank_element:
                   fire:    11 # absorbs on retail
                   ice:     11
@@ -8575,6 +8625,8 @@ ecosystems:
                   blind:       11
                   stun:        11
                   gravity:     11
+              mods:
+                udmgbreath: -2500
           titan:
             id: 255
             attributes:
@@ -9154,7 +9206,7 @@ ecosystems:
                   stun:         3
                   gravity:      3
               mods:
-                mdef: 40
+                mdef: 90
           monoceros:
             id: 272
             attributes:
@@ -9224,6 +9276,8 @@ ecosystems:
                   blind:        3
                   stun:         3
                   gravity:     11
+              mods:
+                mdef: 20
           pixie:
             id: 274
             attributes:
@@ -9250,6 +9304,8 @@ ecosystems:
                   blind:        1
                   stun:         1
                   gravity:     11
+              mods:
+                mdef: 16
           undeen:
             id: 275
             attributes:
@@ -9302,6 +9358,8 @@ ecosystems:
                   blind:        3
                   stun:         3
                   gravity:     11
+              mods:
+                mdef: 30
       porxie:
         id: 108
         species:
@@ -9370,7 +9428,7 @@ ecosystems:
                   piercing: -5000
                   blunt:    -2500
                 dmg_magic:
-                  all: -3750
+                  all: -1250
                 rank_element:
                   fire:    -2
                   ice:      4
@@ -9400,7 +9458,7 @@ ecosystems:
                   piercing: -5000
                   blunt:    -2500
                 dmg_magic:
-                  all: -3750
+                  all: -1250
                 rank_element:
                   fire:    -2
                   ice:      4
@@ -9613,8 +9671,6 @@ ecosystems:
             id: 285
             attributes:
               resists:
-                dmg_magic:
-                  all: -5000
                 rank_element:
                   fire:    11
                   ice:     11
@@ -9635,12 +9691,12 @@ ecosystems:
                   blind:        2
                   stun:         4
                   gravity:      4
+              mods:
+                mdef: 14
           seether:
             id: 286
             attributes:
               resists:
-                dmg_magic:
-                  all: -5000
                 rank_element:
                   fire:    11
                   ice:     11
@@ -9661,6 +9717,8 @@ ecosystems:
                   blind:        0
                   stun:         0
                   gravity:      0
+              mods:
+                mdef: 12
       thinker:
         id: 114
         attributes:
@@ -9766,7 +9824,7 @@ ecosystems:
                   stun:         4
                   gravity:      4
               mods:
-                mdef: 12
+                mdef: 14
           wanderer:
             id: 290
             attributes:
@@ -9793,7 +9851,7 @@ ecosystems:
                   gravity:      0
               mods:
                 hpp:  -10
-                mdef:  14
+                mdef:  12
               mob_mods:
                 mp_base: 50
       weeper:
@@ -9835,7 +9893,7 @@ ecosystems:
                   stun:         4
                   gravity:      4
               mods:
-                mdef: 12
+                mdef: 14
           weeper:
             id: 292
             attributes:
@@ -9862,7 +9920,7 @@ ecosystems:
                   gravity:      0
               mods:
                 hpp:  10
-                mdef: 14
+                mdef: 12
   humanoid:
     id: 12
     families:
@@ -10126,6 +10184,8 @@ ecosystems:
                   blind:        4
                   stun:        11
                   gravity:      4
+              mods:
+                mdef: 30
           legendary_adamantoise:
             id: 300
             attributes:
@@ -10598,6 +10658,8 @@ ecosystems:
                   blind:       2
                   stun:        2
                   gravity:     2
+              mods:
+                mdef: 22
       raptor:
         id: 129
         attributes:
@@ -11318,7 +11380,7 @@ ecosystems:
                   stun:        6
                   gravity:     2
               mods:
-                mdef: 60
+                mdef: 10
       cactaur:
         id: 141
         attributes:
@@ -11385,6 +11447,8 @@ ecosystems:
                   blind:        0
                   stun:         0
                   gravity:      2
+              mods:
+                mdef: 30
               mob_mods:
                 sublink: 7
       flytrap:
@@ -11829,6 +11893,8 @@ ecosystems:
             id: 350
             attributes:
               resists:
+                dmg_physical:
+                  piercing: 2500
                 rank_element:
                   fire:    -3
                   ice:     -3
@@ -11965,6 +12031,8 @@ ecosystems:
                   blind:        4
                   stun:        -1
                   gravity:     -1
+              mods:
+                mdef: 10
           purbol:
             id: 355
             attributes:
@@ -11989,6 +12057,8 @@ ecosystems:
                   blind:        9
                   stun:         0
                   gravity:      4
+              mods:
+                mdef: 20
           scarce_morbol:
             id: 356
             attributes:
@@ -12091,6 +12161,8 @@ ecosystems:
                   blind:       2
                   stun:        3
                   gravity:     1
+              mods:
+                mdef: 24
           rafflesia:
             id: 359
             attributes:
@@ -13073,7 +13145,6 @@ ecosystems:
                   slashing: -1250
                   piercing: -5000
                   blunt:     1250
-                  h2h:       1250
                 dmg_magic:
                   all: -2500
                 rank_element:
@@ -13098,6 +13169,7 @@ ecosystems:
                   gravity:     0
               mods:
                 udmgbreath: -5000
+                mdef:          52
       defiant:
         id: 169
         species:
@@ -13481,7 +13553,6 @@ ecosystems:
                   slashing: -2500
                   piercing: -2500
                   blunt:    -5000
-                  h2h:      -5000
                 dmg_magic:
                   all: -2500
                 rank_element:
@@ -13506,6 +13577,7 @@ ecosystems:
                   gravity:     -1
               mods:
                 paralyzeres: 20
+                mdef:        20
           ghost:
             id: 408
             attributes:
@@ -13656,6 +13728,8 @@ ecosystems:
                   slashing: -1250
                   piercing: -5000
                   blunt:     2500
+                dmg_magic:
+                  all: 1000
                 rank_element:
                   fire:    0
                   ice:     5
@@ -13676,6 +13750,8 @@ ecosystems:
                   blind:       9
                   stun:        2
                   gravity:     2
+              mods:
+                mdef: 30
       qutrub:
         id: 176
         attributes:
@@ -13897,8 +13973,6 @@ ecosystems:
                   slashing: -1250
                   piercing: -5000
                   blunt:     2500
-                dmg_magic:
-                  all: -1250
                 rank_element:
                   fire:    -3
                   ice:      0
@@ -13981,7 +14055,7 @@ ecosystems:
             attributes:
               resists:
                 dmg_magic:
-                  all: -2500
+                  all: -3750
                 rank_element:
                   fire:     3
                   ice:      6
@@ -14004,6 +14078,7 @@ ecosystems:
                   gravity:      5
               mods:
                 udmgbreath: -1250
+                mdef:          30
           vampyr:
             id: 421
             attributes:
@@ -14111,6 +14186,8 @@ ecosystems:
                   blind:        3
                   stun:         0
                   gravity:     -2
+              mods:
+                mdef: 20
           pitlion:
             id: 424
             attributes:
@@ -14366,6 +14443,8 @@ ecosystems:
               detects:
                 - hearing
               resists:
+                dmg_magic:
+                  all: -400
                 rank_element:
                   fire:    2
                   ice:     2
@@ -14682,6 +14761,8 @@ ecosystems:
                   blind:        4
                   stun:         0
                   gravity:      0
+              mods:
+                mdef: 40
           diremite:
             id: 442
             attributes:
@@ -15230,6 +15311,8 @@ ecosystems:
             id: 459
             attributes:
               resists:
+                dmg_physical:
+                  blunt: 1250
                 rank_element:
                   fire:     1
                   ice:     -2
@@ -15443,7 +15526,7 @@ ecosystems:
             attributes:
               resists:
                 dmg_physical:
-                  piercing: 2500
+                  piercing: -2500
                 dmg_magic:
                   all: -1250
                 rank_element:
@@ -15573,6 +15656,8 @@ ecosystems:
                   blind:       2
                   stun:        2
                   gravity:     4
+              mods:
+                mdef: 40
           wamoura:
             id: 470
             attributes:
@@ -15695,7 +15780,7 @@ ecosystems:
                 - lowhp
               resists:
                 dmg_magic:
-                  all: 2500
+                  all: -2500
                 rank_element:
                   fire:    0
                   ice:     4
@@ -15998,7 +16083,7 @@ ecosystems:
                   stun:        0
                   gravity:     0
               mods:
-                mdef: 60
+                mdef: 300
           rocks:
             id: 377
             attributes:
