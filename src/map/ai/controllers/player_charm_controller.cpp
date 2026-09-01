@@ -34,6 +34,11 @@ CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
 
 CPlayerCharmController::~CPlayerCharmController()
 {
+    if (!POwner->PAI)
+    {
+        return;
+    }
+
     if (POwner->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
