@@ -3875,91 +3875,91 @@ spawns:
     level:    [71, 73]
   16986123:
     template: Lesser_Colibri
-    at:       [663.000, -18.000, 198.000, 127]
+    region:   ne_11
     level:    [63, 65]
   16986124:
     template: Lesser_Colibri
-    at:       [676.000, -18.000, 181.000, 127]
+    region:   ne_11
     level:    [63, 65]
   16986125:
     template: Lesser_Colibri
-    at:       [605.000, -18.000, 180.000, 127]
+    region:   ne_13
     level:    [63, 65]
   16986126:
     template: Lesser_Colibri
-    at:       [580.000, -18.000, 199.000, 127]
+    region:   ne_13
     level:    [63, 65]
   16986127:
     template: Lesser_Colibri
-    at:       [561.000, -18.000, 220.000, 127]
+    region:   ne_15
     level:    [63, 65]
   16986128:
     template: Lesser_Colibri
-    at:       [479.000, -24.000, 244.000, 127]
+    region:   ne_15
     level:    [63, 65]
   16986129:
     template: Lesser_Colibri
-    at:       [440.000, -23.000, 232.000, 127]
+    region:   ne_17
     level:    [63, 65]
   16986130:
     template: Lesser_Colibri
-    at:       [459.000, -26.000, 217.000, 127]
+    region:   ne_17
     level:    [63, 65]
   16986131:
     template: Lesser_Colibri
-    at:       [474.000, -27.000, 258.000, 127]
+    region:   ne_17
     level:    [63, 65]
   16986132:
     template: Fomor_Thief
-    at:       [402.000, -23.000, 250.000, 127]
+    region:   ne_17
     level:    [63, 65]
   16986133:
     template: Fomor_Beastmaster_WW_BT
     script:   Fomor_Beastmaster
-    at:       [389.000, -23.000, 270.000, 127]
+    region:   ne_17
     level:    [63, 65]
   16986134:
     template: Fomors_Bats_Wajaom_Woodlands
     script:   Fomors_Bats
-    at:       [1.000, 1.000, 1.000]
+    region:   ne_17
     level:    [58, 60]
   16986135:
     template: Lesser_Colibri
-    at:       [358.000, -26.000, 297.000, 127]
+    region:   ne_23
     level:    [63, 65]
   16986136:
     template: Fomor_Paladin_WW_BT
     script:   Fomor_Paladin
-    at:       [377.000, -25.000, 294.000, 127]
+    region:   ne_23
     level:    [63, 65]
   16986137:
     template: Fomor_Bard_WW_BT
     script:   Fomor_Bard
-    at:       [360.000, -26.000, 263.000, 127]
+    region:   ne_23
     level:    [63, 65]
   16986138:
     template: Lesser_Colibri
-    at:       [399.000, -23.000, 230.000, 127]
+    region:   ne_26
     level:    [63, 65]
   16986139:
     template: Lesser_Colibri
-    at:       [119.000, -28.000, 297.000, 127]
+    region:   ne_26
     level:    [63, 65]
   16986140:
     template: Soldier_Pephredo
-    at:       [169.000, -23.000, 294.000, 127]
+    region:   n_28
     level:    [64, 65]
   16986141:
     template: Worker_Pephredo
-    at:       [163.000, -23.000, 304.000, 127]
+    region:   n_29
     level:    [62, 63]
   16986142:
     template: Worker_Pephredo
-    at:       [154.000, -23.000, 303.000, 127]
+    region:   n_29
     level:    [62, 63]
   16986143:
     template: Worker_Pephredo
-    at:       [152.000, -24.000, 294.000, 127]
+    region:   n_29
     level:    [62, 63]
   16986144:
     template: Marid
@@ -3971,15 +3971,15 @@ spawns:
     level:    [77, 78]
   16986146:
     template: Red_Kisser
-    at:       [185.000, -23.000, 277.000, 127]
+    region:   n_34
     level:    [68, 69]
   16986147:
     template: Red_Kisser
-    at:       [169.000, -23.000, 277.000, 127]
+    region:   n_34
     level:    [68, 69]
   16986148:
     template: Red_Kisser
-    at:       [175.000, -23.000, 280.000, 127]
+    region:   n_34
     level:    [68, 69]
   16986149:
     template: Grand_Marid
@@ -3995,89 +3995,89 @@ spawns:
     level:    [77, 78]
   16986152:
     template: Lesser_Colibri
-    at:       [164.000, -18.000, 341.000, 127]
+    region:   n_40
     level:    [63, 65]
   16986153:
     template: Lesser_Colibri
-    at:       [159.000, -16.000, 354.000, 127]
+    region:   n_40
     level:    [63, 65]
   16986154:
     template: Lesser_Colibri
-    at:       [152.000, -16.000, 364.000, 127]
+    region:   n_42
     level:    [63, 65]
   16986155:
     template: Lesser_Colibri
-    at:       [144.000, -18.000, 357.000, 127]
+    region:   n_42
     level:    [63, 65]
   16986156:
     template: Lesser_Colibri
-    at:       [115.000, -23.000, 358.000, 127]
+    region:   n_44
     level:    [63, 65]
   16986157:
     template: Lesser_Colibri
-    at:       [121.000, -23.000, 325.000, 127]
+    region:   n_44
     level:    [63, 65]
   16986158:
     template: Fomor_Thief
-    at:       [-122.000, -26.000, 379.000, 127]
+    region:   n_46
     level:    [63, 65]
   16986159:
     template: Fomor_Paladin_WW_BT
     script:   Fomor_Paladin
-    at:       [-85.000, -26.000, 420.000, 127]
+    region:   n_46
     level:    [63, 65]
   16986160:
     template: Fomor_Thief
-    at:       [9.000, -26.000, 379.000, 127]
+    region:   n_48
     level:    [63, 65]
   16986161:
     template: Fomor_Paladin_WW_BT
     script:   Fomor_Paladin
-    at:       [258.000, -26.000, 274.000, 127]
+    region:   n_48
     level:    [63, 65]
   16986162:
     template: Fomor_Bard_WW_BT
     script:   Fomor_Bard
-    at:       [-323.000, -26.000, 419.000, 127]
+    region:   n_48
     level:    [63, 65]
   16986163:
     template: Fomor_Bard_WW_BT
     script:   Fomor_Bard
-    at:       [-340.000, -25.000, 393.000, 127]
+    region:   n_51
     level:    [63, 65]
   16986164:
     template: Fomor_Beastmaster_WW_BT
     script:   Fomor_Beastmaster
-    at:       [-353.000, -26.000, 419.000, 127]
+    region:   n_51
     level:    [63, 65]
   16986165:
     template: Fomors_Bats_Wajaom_Woodlands
     script:   Fomors_Bats
-    at:       [1.000, 1.000, 1.000]
+    region:   n_51
     level:    [58, 60]
   16986166:
     template: Soldier_Pephredo
-    at:       [232.000, -19.000, 96.000, 127]
+    region:   e_54
     level:    [64, 65]
   16986167:
     template: Worker_Pephredo
-    at:       [240.000, -19.000, 100.000, 127]
+    region:   e_55
     level:    [62, 63]
   16986168:
     template: Worker_Pephredo
-    at:       [248.000, -19.000, 94.000, 127]
+    region:   e_55
     level:    [62, 63]
   16986169:
     template: Soldier_Pephredo
-    at:       [250.000, -17.000, 82.000, 127]
+    region:   e_57
     level:    [64, 65]
   16986170:
     template: Worker_Pephredo
-    at:       [245.000, -17.000, 70.000, 127]
+    region:   e_58
     level:    [62, 63]
   16986171:
     template: Worker_Pephredo
-    at:       [235.000, -16.000, 76.000, 127]
+    region:   e_58
     level:    [62, 63]
   16986172:
     template: Marid
@@ -4093,11 +4093,11 @@ spawns:
     level:    [79, 80]
   16986175:
     template: Lesser_Colibri
-    at:       [146.000, -23.000, 317.000, 127]
+    region:   e_63
     level:    [63, 65]
   16986176:
     template: Lesser_Colibri
-    at:       [400.000, -23.000, 287.000, 127]
+    region:   e_63
     level:    [63, 65]
   16986177:
     template: Marid
@@ -4109,79 +4109,79 @@ spawns:
     level:    [77, 78]
   16986179:
     template: Lesser_Colibri
-    at:       [427.000, -26.000, 265.000, 127]
+    region:   c_67
     level:    [63, 65]
   16986180:
     template: Lesser_Colibri
-    at:       [456.000, -23.000, 241.000, 127]
+    region:   c_67
     level:    [63, 65]
   16986181:
     template: Red_Kisser
-    at:       [250.000, -23.000, 124.000, 127]
+    region:   e_69
     level:    [68, 69]
   16986182:
     template: Red_Kisser
-    at:       [258.000, -23.000, 121.000, 127]
+    region:   e_69
     level:    [68, 69]
   16986183:
     template: Ameretat
-    at:       [395.000, -16.000, -33.000, 127]
+    region:   e_71
     level:    [66, 68]
   16986184:
     template: Ameretat
-    at:       [401.000, -24.000, 3.000, 127]
+    region:   e_71
     level:    [66, 68]
   16986185:
     template: Ameretat
-    at:       [357.000, -16.000, -34.000, 127]
+    region:   e_71
     level:    [66, 68]
   16986186:
     template: Wajaom_Tiger
-    at:       [-416.000, -26.000, 280.000, 127]
+    region:   e_71
     level:    [67, 68]
   16986187:
     template: Wajaom_Tiger
-    at:       [-394.000, -23.000, 263.000, 127]
+    region:   e_71
     level:    [67, 68]
   16986188:
     template: Chelicerata
-    at:       [394.791, -24.098, -4.712, 107]
+    region:   e_71
     level:    [78, 78]
   16986189:
     template: Wajaom_Tiger
-    at:       [-435.000, -10.000, 59.000, 127]
+    region:   e_77
     level:    [67, 68]
   16986190:
     template: Wajaom_Tiger
-    at:       [-456.000, -9.000, 60.000, 127]
+    region:   e_77
     level:    [67, 68]
   16986191:
     template: Lesser_Colibri
-    at:       [181.000, -18.000, -63.000, 127]
+    region:   e_79
     level:    [63, 65]
   16986192:
     template: Lesser_Colibri
-    at:       [181.000, -19.000, -77.000, 127]
+    region:   e_80
     level:    [63, 65]
   16986193:
     template: Lesser_Colibri
-    at:       [195.000, -18.000, -95.000, 127]
+    region:   e_80
     level:    [63, 65]
   16986194:
     template: Lesser_Colibri
-    at:       [220.000, -19.000, -80.000, 127]
+    region:   e_80
     level:    [63, 65]
   16986195:
     template: Lesser_Colibri
-    at:       [219.000, -18.000, -59.000, 127]
+    region:   e_80
     level:    [63, 65]
   16986196:
     template: Lesser_Colibri
-    at:       [203.000, -16.000, -74.000, 127]
+    region:   e_80
     level:    [63, 65]
   16986197:
     template: Zoraal_Jas_Pkuucha
-    at:       [208.000, -17.000, -93.000, 127]
+    region:   e_80
     level:    [75, 75]
   16986198:
     template: Percipient_Zoraal_Ja
@@ -4189,653 +4189,653 @@ spawns:
     level:    [75, 75]
   16986199:
     template: Aht_Urhgan_Attercop
-    at:       [143.000, -19.000, -232.000, 127]
+    region:   c_87
     level:    [65, 67]
   16986200:
     template: Aht_Urhgan_Attercop
-    at:       [123.000, -17.000, -250.000, 127]
+    region:   c_87
     level:    [65, 67]
   16986201:
     template: Aht_Urhgan_Attercop
-    at:       [105.000, -18.000, -239.000, 127]
+    region:   c_87
     level:    [65, 67]
   16986202:
     template: Aht_Urhgan_Attercop
-    at:       [96.000, -18.000, -257.000, 127]
+    region:   c_87
     level:    [65, 67]
   16986203:
     template: Ameretat
-    at:       [91.000, -17.000, 26.000, 127]
+    region:   c_91
     level:    [66, 68]
   16986204:
     template: Ameretat
-    at:       [23.000, -18.000, 18.000, 127]
+    region:   c_91
     level:    [66, 68]
   16986205:
     template: Aht_Urhgan_Attercop
-    at:       [101.000, -19.000, 41.000, 127]
+    region:   c_91
     level:    [65, 67]
   16986206:
     template: Aht_Urhgan_Attercop
-    at:       [67.000, -16.000, 31.000, 127]
+    region:   c_91
     level:    [65, 67]
   16986207:
     template: Ameretat
-    at:       [0.600, -16.000, 39.000, 127]
+    region:   c_95
     level:    [66, 68]
   16986208:
     template: Aht_Urhgan_Attercop
-    at:       [2.000, -15.000, 21.000, 127]
+    region:   c_95
     level:    [65, 67]
   16986209:
     template: Aht_Urhgan_Attercop
-    at:       [-523.000, -16.000, 162.000, 127]
+    region:   c_95
     level:    [65, 67]
   16986210:
     template: Lesser_Colibri
-    at:       [-45.183, -18.000, -133.629, 183]
+    region:   c_98
     level:    [63, 65]
   16986211:
     template: Lesser_Colibri
-    at:       [-39.980, -16.000, -121.662, 184]
+    region:   c_98
     level:    [63, 65]
   16986212:
     template: Lesser_Colibri
-    at:       [-44.725, -15.890, -113.602, 193]
+    region:   c_98
     level:    [63, 65]
   16986213:
     template: Lesser_Colibri
-    at:       [-51.460, -17.854, -120.026, 52]
+    region:   c_98
     level:    [63, 65]
   16986214:
     template: Haunt
-    at:       [-36.733, -16.279, -106.488, 197]
+    region:   c_98
     level:    [65, 66]
   16986215:
     template: Ameretat
-    at:       [-37.000, -16.000, -81.000, 127]
+    region:   c_103
     level:    [66, 68]
   16986216:
     template: Soldier_Pephredo
-    at:       [6.000, -16.000, -290.000, 127]
+    region:   c_104
     level:    [65, 65]
   16986217:
     template: Worker_Pephredo
-    at:       [0.500, -15.000, -294.000, 127]
+    region:   c_105
     level:    [62, 63]
   16986218:
     template: Worker_Pephredo
-    at:       [2.000, -15.000, -302.000, 127]
+    region:   c_105
     level:    [62, 63]
   16986219:
     template: Worker_Pephredo
-    at:       [10.000, -16.000, -300.000, 127]
+    region:   c_105
     level:    [62, 63]
   16986220:
     template: Ameretat
-    at:       [12.000, -18.000, -263.000, 127]
+    region:   c_108
     level:    [66, 68]
   16986221:
     template: Aht_Urhgan_Attercop
-    at:       [2.000, -16.000, -282.000, 127]
+    region:   c_108
     level:    [66, 67]
   16986222:
     template: Aht_Urhgan_Attercop
-    at:       [-45.000, -18.000, -303.000, 127]
+    region:   c_110
     level:    [66, 67]
   16986223:
     template: Puk_WW
     script:   Puk
-    at:       [-540.000, -11.000, -82.000, 127]
+    region:   s_111
     level:    [68, 70]
   16986224:
     template: Puk_WW
     script:   Puk
-    at:       [-609.000, -17.000, -362.000, 127]
+    region:   s_111
     level:    [68, 70]
   16986225:
     template: Puk_WW
     script:   Puk
-    at:       [-239.000, -16.000, -401.000, 127]
+    region:   s_113
     level:    [68, 70]
   16986226:
     template: Puk_WW
     script:   Puk
-    at:       [-54.000, -19.000, -353.000, 127]
+    region:   s_113
     level:    [68, 70]
   16986227:
     template: Puk_WW
     script:   Puk
-    at:       [-43.000, -18.000, -337.000, 127]
+    region:   s_113
     level:    [68, 70]
   16986228:
     template: Ameretat
-    at:       [-70.000, -15.000, -318.000, 127]
+    region:   s_116
     level:    [66, 68]
   16986229:
     template: Aht_Urhgan_Attercop
-    at:       [-81.000, -19.000, -378.000, 127]
+    region:   s_116
     level:    [66, 67]
   16986230:
     template: Aht_Urhgan_Attercop
-    at:       [-77.000, -15.000, -352.000, 127]
+    region:   s_116
     level:    [66, 67]
   16986231:
     template: Aht_Urhgan_Attercop
-    at:       [-80.000, -8.000, -593.000, 127]
+    region:   s_119
     level:    [66, 67]
   16986232:
     template: Aht_Urhgan_Attercop
-    at:       [-71.000, -12.000, -576.000, 127]
+    region:   s_119
     level:    [66, 67]
   16986233:
     template: Mamool_Ja_Mimicker
-    at:       [-59.824, -20.449, -270.349, 143]
+    region:   c_121
     level:    [72, 73]
   16986234:
     template: Woodland_Runner
-    at:       [-484.000, -11.000, -500.000, 127]
+    region:   c_121
     level:    [71, 72]
   16986235:
     template: Aht_Urhgan_Attercop
-    at:       [-100.000, -18.000, -486.000, 127]
+    region:   s_123
     level:    [66, 67]
   16986236:
     template: Aht_Urhgan_Attercop
-    at:       [-89.000, -17.000, -459.000, 127]
+    region:   s_123
     level:    [66, 67]
   16986237:
     template: Aht_Urhgan_Attercop
-    at:       [-60.000, -17.000, -457.000, 127]
+    region:   s_125
     level:    [66, 67]
   16986238:
     template: Aht_Urhgan_Attercop
-    at:       [-59.000, -17.000, -425.000, 127]
+    region:   s_125
     level:    [66, 67]
   16986239:
     template: Puk_WW
     script:   Puk
-    at:       [-12.000, -17.000, -332.000, 127]
+    region:   s_127
     level:    [68, 70]
   16986240:
     template: Aht_Urhgan_Attercop
-    at:       [-41.000, -15.000, -106.000, 127]
+    region:   s_127
     level:    [66, 67]
   16986241:
     template: Aht_Urhgan_Attercop
-    at:       [-84.000, -16.000, -323.000, 127]
+    region:   s_129
     level:    [66, 67]
   16986242:
     template: Aht_Urhgan_Attercop
-    at:       [-581.000, -19.000, 162.000, 127]
+    region:   s_129
     level:    [66, 67]
   16986243:
     template: Aht_Urhgan_Attercop
-    at:       [-7.000, -15.000, -77.000, 127]
+    region:   s_129
     level:    [66, 67]
   16986244:
     template: Aht_Urhgan_Attercop
-    at:       [-556.000, -16.000, 156.000, 127]
+    region:   s_129
     level:    [66, 67]
   16986245:
     template: Puk_WW
     script:   Puk
-    at:       [-179.000, -17.000, -460.000, 127]
+    region:   s_129
     level:    [68, 70]
   16986246:
     template: Puk_WW
     script:   Puk
-    at:       [-178.000, -19.000, -487.000, 127]
+    region:   s_134
     level:    [68, 70]
   16986247:
     template: Haunt
-    at:       [-56.000, -12.000, -639.000, 127]
+    region:   s_134
     level:    [65, 66]
   16986248:
     template: Puk_WW
     script:   Puk
-    at:       [-176.000, -18.000, -504.000, 127]
+    region:   s_136
     level:    [68, 70]
   16986249:
     template: Haunt
-    at:       [-64.000, -15.000, -564.000, 127]
+    region:   s_136
     level:    [65, 66]
   16986250:
     template: Puk_WW
     script:   Puk
-    at:       [-173.000, -19.000, -528.000, 127]
+    region:   s_138
     level:    [68, 70]
   16986251:
     template: Puk_WW
     script:   Puk
-    at:       [-171.000, -20.000, -545.000, 127]
+    region:   s_138
     level:    [68, 70]
   16986252:
     template: Puk_WW
     script:   Puk
-    at:       [-180.000, -18.000, -415.000, 127]
+    region:   s_138
     level:    [68, 70]
   16986253:
     template: Puk_WW
     script:   Puk
-    at:       [-182.000, -18.000, -399.000, 127]
+    region:   s_141
     level:    [68, 70]
   16986254:
     template: Soldier_Pephredo
-    at:       [-190.000, -17.000, -413.000, 127]
+    region:   s_142
     level:    [64, 65]
   16986255:
     template: Worker_Pephredo
-    at:       [-199.000, -17.000, -410.000, 127]
+    region:   s_143
     level:    [63, 64]
   16986256:
     template: Worker_Pephredo
-    at:       [-203.000, -18.000, -413.000, 127]
+    region:   s_143
     level:    [63, 64]
   16986257:
     template: Worker_Pephredo
-    at:       [-199.000, -19.000, -419.000, 127]
+    region:   s_143
     level:    [63, 64]
   16986258:
     template: Puk_WW
     script:   Puk
-    at:       [-13.000, -15.000, -314.000, 127]
+    region:   s_146
     level:    [68, 70]
   16986259:
     template: Puk_WW
     script:   Puk
-    at:       [-27.000, -18.000, -335.000, 127]
+    region:   s_146
     level:    [68, 70]
   16986260:
     template: Red_Kisser
-    at:       [-228.000, -15.000, -394.000, 127]
+    region:   s_148
     level:    [70, 71]
   16986261:
     template: Red_Kisser
-    at:       [-222.000, -15.000, -396.000, 127]
+    region:   s_148
     level:    [70, 71]
   16986262:
     template: Red_Kisser
-    at:       [-213.000, -15.000, -395.000, 127]
+    region:   s_148
     level:    [70, 71]
   16986263:
     template: Red_Kisser
-    at:       [-85.000, -15.000, -336.000, 127]
+    region:   s_148
     level:    [70, 71]
   16986264:
     template: Red_Kisser
-    at:       [-84.000, -15.000, -344.000, 127]
+    region:   s_152
     level:    [70, 71]
   16986265:
     template: Red_Kisser
-    at:       [-85.000, -15.000, -348.000, 127]
+    region:   s_152
     level:    [70, 71]
   16986266:
     template: Soldier_Pephredo
-    at:       [-203.000, -16.000, -395.000, 127]
+    region:   n_154
     level:    [64, 65]
   16986267:
     template: Worker_Pephredo
-    at:       [-322.000, -8.000, -512.000, 127]
+    region:   n_155
     level:    [62, 63]
   16986268:
     template: Worker_Pephredo
-    at:       [-205.000, -15.000, -403.000, 127]
+    region:   n_155
     level:    [62, 63]
   16986269:
     template: Soldier_Pephredo
-    at:       [-325.000, -8.000, -521.000, 127]
+    region:   n_157
     level:    [64, 65]
   16986270:
     template: Worker_Pephredo
-    at:       [-320.000, -8.000, -524.000, 127]
+    region:   n_158
     level:    [62, 63]
   16986271:
     template: Worker_Pephredo
-    at:       [-315.000, -8.000, -520.000, 127]
+    region:   n_158
     level:    [62, 63]
   16986272:
     template: Soldier_Pephredo
-    at:       [-263.000, -23.000, 396.000, 127]
+    region:   n_160
     level:    [64, 65]
   16986273:
     template: Worker_Pephredo
-    at:       [-286.000, -25.000, 408.000, 127]
+    region:   n_161
     level:    [62, 63]
   16986274:
     template: Worker_Pephredo
-    at:       [-290.000, -25.000, 402.000, 127]
+    region:   n_161
     level:    [62, 63]
   16986275:
     template: Defoliate_Treant
-    at:       [-237.000, -23.000, 366.000, 127]
+    region:   n_163
     level:    [71, 73]
   16986276:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-528.000, -8.000, 20.000, 127]
+    region:   n_163
     level:    [66, 68]
   16986277:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-519.000, -7.000, 9.000, 127]
+    region:   n_163
     level:    [66, 68]
   16986278:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-510.000, -8.000, 24.000, 127]
+    region:   n_166
     level:    [66, 68]
   16986279:
     template: Defoliate_Treant
-    at:       [-240.000, -24.000, 398.000, 127]
+    region:   n_166
     level:    [71, 73]
   16986280:
     template: Defoliate_Treant
-    at:       [-297.000, -25.000, 500.000, 127]
+    region:   n_168
     level:    [71, 73]
   16986281:
     template: Defoliate_Treant
-    at:       [-306.000, -26.000, 580.000, 127]
+    region:   n_169
     level:    [71, 73]
   16986282:
     template: Aht_Urhgan_Attercop
-    at:       [-323.000, -26.000, 585.000, 127]
+    region:   n_169
     level:    [66, 67]
   16986283:
     template: Aht_Urhgan_Attercop
-    at:       [-299.000, -27.000, 607.000, 127]
+    region:   n_171
     level:    [66, 67]
   16986284:
     template: Aht_Urhgan_Attercop
-    at:       [-334.000, -27.000, 612.000, 127]
+    region:   n_171
     level:    [66, 67]
   16986285:
     template: Aht_Urhgan_Attercop
-    at:       [-421.000, -26.000, 417.000, 127]
+    region:   nw_173
     level:    [66, 67]
   16986286:
     template: Aht_Urhgan_Attercop
-    at:       [-433.000, -25.000, 411.000, 127]
+    region:   nw_173
     level:    [66, 67]
   16986287:
     template: Aht_Urhgan_Attercop
-    at:       [-426.000, -26.000, 396.000, 127]
+    region:   nw_173
     level:    [66, 67]
   16986288:
     template: Aht_Urhgan_Attercop
-    at:       [-432.000, -26.000, 383.000, 127]
+    region:   nw_173
     level:    [66, 67]
   16986289:
     template: Colorful_Treant
-    at:       [-403.315, -24.995, 284.354, 224]
+    region:   nw_181
     level:    [74, 75]
   16986290:
     template: Defoliate_Treant
-    at:       [-395.000, -24.000, 284.000, 127]
+    region:   nw_178
     level:    [71, 73]
   16986291:
     template: Wajaom_Tiger
-    at:       [-495.000, -10.000, 58.000, 127]
+    region:   nw_178
     level:    [67, 68]
   16986292:
     template: Wajaom_Tiger
-    at:       [-511.000, -8.000, 43.000, 127]
+    region:   nw_178
     level:    [67, 68]
   16986293:
     template: Defoliate_Treant
-    at:       [-382.000, -26.000, 293.000, 127]
+    region:   nw_181
     level:    [71, 73]
   16986294:
     template: Wajaom_Tiger
-    at:       [-533.000, -10.000, 43.000, 127]
+    region:   nw_181
     level:    [67, 68]
   16986295:
     template: Defoliate_Treant
-    at:       [-402.000, -24.000, 241.000, 127]
+    region:   nw_183
     level:    [71, 73]
   16986296:
     template: Wajaom_Tiger
-    at:       [-421.000, -26.000, 231.000, 127]
+    region:   nw_183
     level:    [67, 68]
   16986297:
     template: Wajaom_Tiger
-    at:       [-419.000, -26.000, 258.000, 127]
+    region:   nw_183
     level:    [67, 68]
   16986298:
     template: Wajaom_Tiger
-    at:       [-498.000, -18.000, 175.000, 127]
+    region:   w_186
     level:    [67, 68]
   16986299:
     template: Wajaom_Tiger
-    at:       [-517.000, -18.000, 148.000, 127]
+    region:   w_186
     level:    [67, 68]
   16986300:
     template: Wajaom_Tiger
-    at:       [-539.000, -15.000, 157.000, 127]
+    region:   w_186
     level:    [67, 68]
   16986301:
     template: Aht_Urhgan_Attercop
-    at:       [-506.000, -18.000, 159.000, 127]
+    region:   w_186
     level:    [66, 67]
   16986302:
     template: Aht_Urhgan_Attercop
-    at:       [-18.000, -18.000, -260.000, 127]
+    region:   w_186
     level:    [66, 67]
   16986303:
     template: Wajaom_Tiger
-    at:       [-417.000, -26.000, 231.000, 127]
+    region:   nw_191
     level:    [67, 68]
   16986304:
     template: Aht_Urhgan_Attercop
-    at:       [-1.000, -15.000, -63.000, 127]
+    region:   nw_191
     level:    [66, 67]
   16986305:
     template: Carmine_Eruca
-    at:       [-776.000, -23.000, 115.000, 127]
+    region:   nw_193
     level:    [70, 70]
   16986306:
     template: Carmine_Eruca
-    at:       [-803.000, -23.000, 130.000, 127]
+    region:   nw_193
     level:    [70, 70]
   16986307:
     template: Carmine_Eruca
-    at:       [-814.000, -26.000, 160.000, 127]
+    region:   nw_195
     level:    [70, 70]
   16986308:
     template: Woodtroll_Warrior
-    at:       [-824.000, -22.000, 101.000, 127]
+    region:   nw_195
     level:    [72, 73]
   16986309:
     template: Woodtroll_Monk
-    at:       [-816.000, -25.000, 113.000, 127]
+    region:   w_197
     level:    [72, 73]
   16986310:
     template: Woodtroll_Dark_Knight
-    at:       [-805.000, -26.000, 100.000, 127]
+    region:   w_198
     level:    [72, 73]
   16986311:
     template: Woodtroll_Ranger
-    at:       [-819.000, -27.000, 121.000, 127]
+    region:   w_198
     level:    [72, 73]
   16986312:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-509.000, -10.000, 60.000, 127]
+    region:   w_200
     level:    [66, 68]
   16986313:
     template: Defoliate_Treant
-    at:       [-739.000, -18.000, 220.000, 127]
+    region:   w_200
     level:    [72, 74]
   16986314:
     template: Wajaom_Tiger
-    at:       [-389.000, -26.000, 300.000, 127]
+    region:   w_200
     level:    [67, 68]
   16986315:
     template: Wajaom_Tiger
-    at:       [386.000, -23.000, -2.000, 127]
+    region:   w_200
     level:    [67, 68]
   16986316:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-499.000, -11.000, 43.000, 127]
+    region:   w_204
     level:    [66, 68]
   16986317:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-294.000, -27.000, 592.000, 127]
+    region:   w_204
     level:    [66, 68]
   16986318:
     template: Wajaom_Tiger
-    at:       [343.000, -18.000, -22.000, 127]
+    region:   w_204
     level:    [67, 68]
   16986319:
     template: Wajaom_Tiger
-    at:       [394.000, -28.000, 24.000, 127]
+    region:   w_204
     level:    [67, 68]
   16986320:
     template: Gharial
-    at:       [-536.144, -10.614, 44.758, 142]
+    region:   w_204
     level:    [82, 83]
   16986321:
     template: Colorful_Treant
-    at:       [-499.682, -20.055, 151.664, 218]
+    region:   w_212
     level:    [74, 75]
   16986322:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-311.000, -24.000, 595.000, 127]
+    region:   w_210
     level:    [66, 68]
   16986323:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-250.000, -24.000, 414.000, 127]
+    region:   w_210
     level:    [66, 68]
   16986324:
     template: Defoliate_Treant
-    at:       [-761.000, -16.000, 197.000, 127]
+    region:   w_212
     level:    [72, 74]
   16986325:
     template: Defoliate_Treant
-    at:       [-725.000, -15.000, 199.000, 127]
+    region:   w_212
     level:    [72, 74]
   16986326:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-216.000, -28.000, 363.000, 127]
+    region:   w_212
     level:    [66, 68]
   16986327:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-537.000, -10.000, 59.000, 127]
+    region:   w_212
     level:    [66, 68]
   16986328:
     template: Treant_Sapling_WW_BT
     script:   Treant_Sapling
-    at:       [-253.000, -24.000, 349.000, 127]
+    region:   w_212
     level:    [66, 68]
   16986329:
     template: Wajaom_Tiger
-    at:       [-678.000, -11.000, -116.000, 127]
+    region:   w_212
     level:    [67, 68]
   16986330:
     template: Wajaom_Tiger
-    at:       [-675.000, -18.000, 180.000, 127]
+    region:   w_212
     level:    [67, 68]
   16986331:
     template: Wajaom_Tiger
-    at:       [413.000, -26.000, 20.000, 127]
+    region:   w_219
     level:    [67, 68]
   16986332:
     template: Wajaom_Tiger
-    at:       [376.000, -18.000, -22.000, 127]
+    region:   w_219
     level:    [67, 68]
   16986333:
     template: Lesser_Colibri
-    at:       [-419.763, -10.076, 69.191, 184]
+    region:   w_221
     level:    [64, 65]
   16986334:
     template: Lesser_Colibri
-    at:       [-419.656, -10.145, 89.705, 193]
+    region:   w_222
     level:    [64, 65]
   16986335:
     template: Lesser_Colibri
-    at:       [-389.297, -10.020, 99.656, 252]
+    region:   w_222
     level:    [64, 65]
   16986336:
     template: Lesser_Colibri
-    at:       [-323.955, -18.000, 92.699, 9]
+    region:   w_224
     level:    [64, 65]
   16986337:
     template: Defoliate_Treant
-    at:       [-296.000, -15.000, 80.000, 127]
+    region:   w_224
     level:    [72, 74]
   16986338:
     template: Defoliate_Treant
-    at:       [-322.000, -16.000, 83.000, 127]
+    region:   c_226
     level:    [72, 74]
   16986339:
     template: Lesser_Colibri
-    at:       [-242.159, -15.827, 86.796, 241]
+    region:   c_227
     level:    [64, 65]
   16986340:
     template: Lesser_Colibri
-    at:       [-237.294, -16.000, 76.385, 243]
+    region:   c_227
     level:    [64, 65]
   16986341:
     template: Lesser_Colibri
-    at:       [-234.297, -16.842, 69.675, 238]
+    region:   c_227
     level:    [64, 65]
   16986342:
     template: Lesser_Colibri
-    at:       [-193.487, -11.584, 60.652, 248]
+    region:   c_230
     level:    [64, 65]
   16986343:
     template: Lesser_Colibri
-    at:       [-200.069, -12.250, 55.401, 218]
+    region:   c_230
     level:    [64, 65]
   16986344:
     template: Lesser_Colibri
-    at:       [-177.792, -12.250, 89.631, 237]
+    region:   c_232
     level:    [64, 65]
   16986345:
     template: Lesser_Colibri
-    at:       [-187.074, -11.500, 94.182, 118]
+    region:   c_232
     level:    [64, 65]
   16986346:
     template: Lesser_Colibri
-    at:       [-225.548, -19.000, 49.982, 46]
+    region:   c_234
     level:    [64, 65]
   16986347:
     template: Lesser_Colibri
-    at:       [-213.493, -19.500, 24.903, 13]
+    region:   c_234
     level:    [64, 65]
   16986348:
     template: Lesser_Colibri
-    at:       [-203.294, -20.191, 16.394, 52]
+    region:   c_236
     level:    [64, 65]
   16986349:
     template: Lesser_Colibri
-    at:       [-167.188, -20.052, 13.580, 255]
+    region:   c_236
     level:    [64, 65]
   16986350:
     template: Lesser_Colibri
-    at:       [-154.320, -19.295, 18.497, 241]
+    region:   c_236
     level:    [64, 65]
   16986351:
     template: Lesser_Colibri
-    at:       [-100.244, -18.457, 46.096, 56]
+    region:   c_239
     level:    [64, 65]
   16986352:
     template: Lesser_Colibri
-    at:       [-89.920, -17.815, 60.917, 244]
+    region:   c_239
     level:    [64, 65]
   16986353:
     template: Air_Elemental
-    at:       [-240.000, -23.000, 32.000, 127]
+    region:   c_241
     level:    [75, 75]
   16986354:
     template: Air_Elemental
-    at:       [-253.000, -24.000, -22.000, 127]
+    region:   c_241
     level:    [75, 75]
   16986355:
     template: Hydra
@@ -4843,15 +4843,15 @@ spawns:
     level:    [80, 80]
   16986356:
     template: Soldier_Pephredo
-    at:       [-671.000, -8.000, -162.000, 127]
+    region:   w_244
     level:    [64, 66]
   16986357:
     template: Worker_Pephredo
-    at:       [-682.000, -8.000, -160.000, 127]
+    region:   w_245
     level:    [63, 64]
   16986358:
     template: Worker_Pephredo
-    at:       [-678.000, -7.000, -155.000, 127]
+    region:   w_245
     level:    [63, 64]
   16986359:
     template: Soldier_Pephredo
@@ -4859,81 +4859,81 @@ spawns:
     level:    [64, 66]
   16986360:
     template: Worker_Pephredo
-    at:       [-683.000, -7.000, -147.000, 127]
+    region:   w_248
     level:    [63, 64]
   16986361:
     template: Worker_Pephredo
-    at:       [-694.000, -7.000, -148.000, 127]
+    region:   w_248
     level:    [63, 64]
   16986362:
     template: Mamool_Ja_Sophist
-    at:       [-677.000, -12.000, -493.000, 127]
+    region:   w_250
     level:    [72, 73]
   16986363:
     template: Mamool_Ja_Bounder
-    at:       [-714.000, -12.000, -494.000, 127]
+    region:   w_250
     level:    [72, 73]
   16986364:
     template: Mamool_Ja_Mimicker
-    at:       [-743.000, -11.000, -511.000, 127]
+    region:   w_252
     level:    [72, 73]
   16986365:
     template: Mamool_Ja_Savant
-    at:       [-742.000, -7.000, -538.000, 127]
+    region:   w_252
     level:    [72, 73]
   16986366:
     template: Great_Ameretat
-    at:       [-520.000, -8.000, -77.000, 127]
+    region:   w_254
     level:    [73, 74]
   16986367:
     template: Puk_WW
     script:   Puk
-    at:       [-596.000, -16.000, -199.000, 127]
+    region:   w_254
     level:    [68, 70]
   16986368:
     template: Puk_WW
     script:   Puk
-    at:       [-622.000, -18.000, -181.000, 127]
+    region:   w_256
     level:    [68, 70]
   16986369:
     template: Air_Elemental
-    at:       [-630.308, -10.572, -131.123, 226]
+    region:   w_256
     level:    [75, 75]
   16986370:
     template: Great_Ameretat
-    at:       [-637.000, -8.000, -122.000, 127]
+    region:   w_258
     level:    [73, 74]
   16986371:
     template: Puk_WW
     script:   Puk
-    at:       [-618.000, -14.000, -139.000, 127]
+    region:   w_259
     level:    [68, 70]
   16986372:
     template: Puk_WW
     script:   Puk
-    at:       [-653.000, -10.000, -132.000, 127]
+    region:   sw_260
     level:    [68, 70]
   16986373:
     template: Puk_WW
     script:   Puk
-    at:       [-685.000, -7.000, -115.000, 127]
+    region:   sw_260
     level:    [68, 70]
   16986374:
     template: Puk_WW
     script:   Puk
-    at:       [-86.000, -16.000, -561.000, 127]
+    region:   sw_262
     level:    [68, 70]
   16986375:
     template: Great_Ameretat
-    at:       [-603.000, -15.000, -170.000, 127]
+    region:   sw_262
     level:    [73, 74]
   16986376:
     template: Great_Ameretat
-    at:       [-560.000, -8.000, -360.000, 127]
+    region:   sw_264
     level:    [73, 74]
   16986377:
     template: Great_Ameretat
-    at:       [-468.000, -9.000, -449.000, 127]
+    region:   sw_264
     level:    [73, 74]
   16986378:
     template: Jaded_Jody
@@ -4942,157 +4942,157 @@ spawns:
   16986379:
     template: Puk_WW
     script:   Puk
-    at:       [-644.000, -16.000, -313.000, 127]
+    region:   sw_267
     level:    [68, 70]
   16986380:
     template: Great_Ameretat
-    at:       [-505.000, -7.000, -439.000, 127]
+    region:   sw_267
     level:    [73, 74]
   16986381:
     template: Great_Ameretat
-    at:       [-519.000, -8.000, -362.000, 127]
+    region:   sw_269
     level:    [73, 74]
   16986382:
     template: Woodland_Runner
-    at:       [-455.000, -11.000, -464.000, 127]
+    region:   sw_269
     level:    [71, 72]
   16986383:
     template: Woodland_Runner
-    at:       [-658.000, -11.000, -472.000, 127]
+    region:   sw_269
     level:    [71, 72]
   16986384:
     template: Mamool_Ja_Zenist
-    at:       [-478.000, -8.000, -478.000, 127]
+    region:   sw_272
     level:    [72, 73]
   16986385:
     template: Mamool_Ja_Savant
-    at:       [-463.000, -10.000, -480.000, 127]
+    region:   sw_272
     level:    [72, 73]
   16986386:
     template: Woodland_Runner
-    at:       [-499.000, -11.000, -476.000, 127]
+    region:   sw_274
     level:    [71, 72]
   16986387:
     template: Mamool_Ja_Sophist
-    at:       [-460.000, -6.000, -501.000, 127]
+    region:   sw_275
     level:    [72, 73]
   16986388:
     template: Mamool_Ja_Bounder
-    at:       [-461.000, -9.000, -492.000, 127]
+    region:   sw_275
     level:    [72, 73]
   16986389:
     template: Puk_WW
     script:   Puk
-    at:       [-641.000, -16.000, -166.000, 127]
+    region:   sw_277
     level:    [68, 70]
   16986390:
     template: Great_Ameretat
-    at:       [-565.000, -7.000, -324.000, 127]
+    region:   sw_278
     level:    [73, 74]
   16986391:
     template: Wajaom_Tiger
-    at:       [-539.000, -10.000, 81.000, 127]
+    region:   sw_278
     level:    [68, 69]
   16986392:
     template: Wajaom_Tiger
-    at:       [-642.000, -18.000, 138.000, 127]
+    region:   sw_278
     level:    [68, 69]
   16986393:
     template: Wajaom_Tiger
-    at:       [-537.000, -16.000, 103.000, 127]
+    region:   sw_278
     level:    [68, 69]
   16986394:
     template: Puk_WW
     script:   Puk
-    at:       [-41.000, -16.000, -321.000, 127]
+    region:   sw_278
     level:    [68, 70]
   16986395:
     template: Puk_WW
     script:   Puk
-    at:       [-174.000, -19.000, -514.000, 127]
+    region:   sw_283
     level:    [68, 70]
   16986396:
     template: Puk_WW
     script:   Puk
-    at:       [-179.000, -18.000, -442.000, 127]
+    region:   sw_283
     level:    [68, 70]
   16986397:
     template: Air_Elemental
-    at:       [-378.705, -11.043, -480.016, 72]
+    region:   sw_285
     level:    [75, 75]
   16986398:
     template: Soldier_Pephredo
-    at:       [-286.000, -25.000, 389.000, 127]
+    region:   s_286
     level:    [64, 66]
   16986399:
     template: Worker_Pephredo
-    at:       [-278.000, -24.000, 395.000, 127]
+    region:   s_287
     level:    [63, 64]
   16986400:
     template: Worker_Pephredo
-    at:       [-276.000, -24.000, 403.000, 127]
+    region:   s_287
     level:    [63, 64]
   16986401:
     template: Worker_Pephredo
-    at:       [-270.000, -24.000, 407.000, 127]
+    region:   s_287
     level:    [63, 64]
   16986402:
     template: Puk_WW
     script:   Puk
-    at:       [-66.000, -11.000, -585.000, 127]
+    region:   s_290
     level:    [68, 70]
   16986403:
     template: Puk_WW
     script:   Puk
-    at:       [-83.000, -12.000, -574.000, 127]
+    region:   s_290
     level:    [68, 70]
   16986404:
     template: Puk_WW
     script:   Puk
-    at:       [-528.000, -8.000, -54.000, 127]
+    region:   s_290
     level:    [68, 70]
   16986405:
     template: Puk_WW
     script:   Puk
-    at:       [-517.000, -11.000, -82.000, 127]
+    region:   sw_293
     level:    [68, 70]
   16986406:
     template: Puk_WW
     script:   Puk
-    at:       [-615.000, -18.000, -206.000, 127]
+    region:   sw_294
     level:    [68, 70]
   16986407:
     template: Puk_WW
     script:   Puk
-    at:       [-228.000, -18.000, -417.000, 127]
+    region:   sw_294
     level:    [68, 70]
   16986408:
     template: Mamool_Ja_Sophist
-    at:       [-645.000, -10.000, -102.000, 127]
+    region:   sw_296
     level:    [72, 73]
   16986409:
     template: Woodland_Runner
-    at:       [-646.000, -7.000, -512.000, 127]
+    region:   sw_296
     level:    [71, 72]
   16986410:
     template: Woodland_Runner
-    at:       [-641.000, -8.000, -482.000, 127]
+    region:   sw_296
     level:    [71, 72]
   16986411:
     template: Mamool_Ja_Bounder
-    at:       [-509.861, -28.517, -777.520, 88]
+    region:   sw_299
     level:    [72, 73]
   16986412:
     template: Mamool_Ja_Mimicker
-    at:       [-515.215, -28.680, -781.639, 100]
+    region:   sw_299
     level:    [72, 73]
   16986413:
     template: Air_Elemental
-    at:       [-489.063, -27.435, -738.531, 67]
+    region:   sw_301
     level:    [75, 75]
   16986414:
     template: Air_Elemental
-    at:       [-481.221, -28.396, -696.158, 202]
+    region:   sw_302
     level:    [75, 75]
   16986415:
     template: Mamool_Ja_Mimicker
