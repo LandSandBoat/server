@@ -592,6 +592,17 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         m_EnteredPlayers.erase(PEntity->id);
 
+        // A player who leaves under their own power is back outside at the burning circle, so the
+        // battlefield recovery marker is no longer needed. Every legitimate exit (running out,
+        // and exiting after a win or loss) routes through EXIT, so clearing it here prevents a
+        // later relog from wrongly ejecting a player who already left. The disconnect teardown
+        // path uses WARPDC and deliberately keeps the marker, so a player who drops during the
+        // post-win loot window can still be recovered on relog.
+        if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT)
+        {
+            PChar->setCharVar("battlefieldRecoveryId", 0);
+        }
+
         if (leavecode != 255)
         {
             // todo: probably shouldnt hardcode this
@@ -1028,6 +1039,16 @@ void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
     }
 
     effect->SetTier(entered ? 1 : 0);
+
+    // Persist the battlefield id when the player enters the arena. The Battlefield status
+    // effect is removed during the win/cleanup sequence, so if a player disconnects during
+    // the post-win loot window the effect no longer exists on relog and the normal eject
+    // logic in CZone::CharZoneIn cannot detect them. This charvar survives the relog and is
+    // used there to send them to the exit. It is cleared on any normal (non-disconnect) leave.
+    if (entered)
+    {
+        PChar->setCharVar("battlefieldRecoveryId", effect->GetPower());
+    }
 }
 
 bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
