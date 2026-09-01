@@ -83,7 +83,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 2 then
-                        return quest:progressEvent(211)
+                        return quest:progressCutscene(211)
                     end
                 end,
             },

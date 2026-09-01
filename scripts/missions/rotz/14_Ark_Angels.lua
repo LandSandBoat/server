@@ -51,7 +51,7 @@ mission.sections =
 
         [xi.zone.THE_SHRINE_OF_RUAVITAU] =
         {
-            ['blank_divine_might'] = mission:progressEvent(53, 917, 1408, 1550),
+            ['blank_divine_might'] = mission:progressCutscene(53, 917, 1408, 1550),
 
             onEventFinish =
             {

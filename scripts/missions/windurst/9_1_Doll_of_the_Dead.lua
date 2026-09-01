@@ -132,7 +132,7 @@ mission.sections =
                         (missionStatus == 4 or missionStatus == 5) and
                         npcUtil.tradeMatches(trade, { { xi.item.CLUMP_OF_GOOBBUE_HUMUS, 1 } })
                     then
-                        return mission:progressEvent(13)
+                        return mission:progressCutscene(13)
                     end
                 end,
 
