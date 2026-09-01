@@ -12,6 +12,7 @@ xi.assault.contentsByZone = xi.assault.contentsByZone or {}
 ---@field assaultID                integer
 ---@field instanceID               integer
 ---@field zoneID                   integer
+---@field suggestedLevel           integer
 ---@field loot                     table
 ---@field releasePos               table
 ---@field requiredProgress         integer?
@@ -40,7 +41,7 @@ end
 --  - requiredOrders:   (required) Key item orders needed to enter the assault
 --  - zoneID:           (required) ID of the zone
 --  - assaultArea:      (required) Area used for assault point currency
---  - suggestedLevel:   (required) Minimum level to enter; affects points rewarded
+--  - suggestedLevel:   (required) Recommended level; determines unappraised item eligibility
 --  - entranceParams:   (required) Table of zone-in event parameters
 --      - instanceID:   instanceID of the assault
 --      - entryEvent:   { csid, ... } args unpacked into player:startEvent() at the Runic Portal
@@ -214,7 +215,7 @@ xi.assault.checkRequirements = function(player, content)
         player:getCurrentAssault() == content.assaultID and
         player:getCharVar('assaultEntered') == 0 and
         player:getCharVar('AssaultFailed') == 0 and
-        player:getMainLvl() >= content.suggestedLevel
+        player:getMainLvl() >= 50
 end
 
 xi.assault.hasOrders = function(player)
