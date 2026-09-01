@@ -30,6 +30,16 @@ zones[xi.zone.LEBROS_CAVERN] =
         TIME_REMAINING_MINUTES        = 7432, -- Time remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS        = 7433, -- Time remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN                  = 7435, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        THANK_ZAHAK_YOURE_HERE        = 7444, -- Thank Zahak you're here. I was about to start eating my boots!
+        CAN_NEVER_HAVE_TOO_MUCH       = 7445, -- You brought more supplies? Well, you can never have too much...
+        HAVE_YOU_BROUGHT_PROVISIONS   = 7446, -- The provisions... Have you brought the provisions?
+        FULL_BELLY                    = 7447, -- There's nothing like a full belly to put the power back in your sword swing.
+        ADVANCE_UNIT_IS_DEPENDING     = 7449, -- The advance unit is depending on these provisions.
+        KEEP_A_WHOLE_UNIT_FILLED_UP   = 7450, -- This should keep a whole unit filled up for a while.
+        STILL_BRAVE_SOLDIERS_STARVING = 7451, -- There are still brave soldiers starving out there.
+        ABOUT_HALF_OF_UNIT_RECEIVED   = 7452, -- It looks like about half of the advance unit has recieved their rations.
+        NOT_MANY_HUNGRY_SOLDIERS_LEFT = 7453, -- Not many hungry soldiers left, I'd wager!
+        MUST_BE_SOMEBODY_OUT_THERE    = 7454, -- There must be somebody out there still waiting for you.
     },
 
     mob =
@@ -44,6 +54,18 @@ zones[xi.zone.LEBROS_CAVERN] =
                 17035302, 17035303, 17035304, 17035305, 17035306, 17035307, 17035308, 17035309,
             }
         },
+        [xi.assault.mission.EXCAVATION_DUTY] =
+        {
+            MOBS_START =
+            {
+                17035265, 17035266, 17035267, 17035268, 17035269, 17035270, 17035271, 17035272, 17035273,
+                17035274, 17035275, 17035276, 17035277, 17035278, 17035279, 17035280, 17035281,
+                BRITTLE_ROCK1 = 17035283, BRITTLE_ROCK2 = 17035285, BRITTLE_ROCK3 = 17035287, BRITTLE_ROCK4 = 17035289, BRITTLE_ROCK5 = 17035291,
+            },
+        },
+
+        CRIMSON_ERUCA = GetFirstID('Crimson_Eruca'),
+
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             MOBS_START =
@@ -64,13 +86,16 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
-        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
-        _1rx            = GetFirstID('_1rx'),
-        _1ry            = GetFirstID('_1ry'),
-        _1rz            = GetFirstID('_1rz'),
-        _jr0            = GetFirstID('_jr0'),
-        _jr1            = GetFirstID('_jr1'),
+        ANCIENT_LOCKBOX  = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE  = GetFirstID('Rune_of_Release'),
+        YAZUHMA          = GetFirstID('Yazuhma'),
+        IMPERIAL_STORMER = GetFirstID('Imperial_Stormer'),
+        _1rp             = GetFirstID('_1rp'),
+        _1rx             = GetFirstID('_1rx'),
+        _1ry             = GetFirstID('_1ry'),
+        _1rz             = GetFirstID('_1rz'),
+        _jr0             = GetFirstID('_jr0'),
+        _jr1             = GetFirstID('_jr1'),
     }
 }
 
