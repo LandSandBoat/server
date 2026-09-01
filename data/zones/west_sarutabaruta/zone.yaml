@@ -68,6 +68,14 @@ transport:
   ship: 17248819
   runs:
     west_sarutabaruta_airship:
+      # Assumed. Ship broken on retail.
+      every:  864
+      offset: 821
       phases:
-        - state:     holding
+        - state:     cycling
           animation: animation_18
+          seconds:   261
+          hide:      45
+        - state:     cycling
+          animation: animation_19
+          hide:      45
