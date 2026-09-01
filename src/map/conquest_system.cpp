@@ -511,11 +511,12 @@ uint8 GetBalance()
     return GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
 }
 
+// TODO: Retail returns 0, 0b011, 0b101, or 0b110. Bits are nations allied: Sandoria, Bastok, Windurst
 uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst)
 {
-    if (((sandoria > (bastok + windurst) && sandoria > bastok && sandoria > windurst) && sandoria > 9) ||
-        ((bastok > (sandoria + windurst) && bastok > sandoria && bastok > windurst) && bastok > 9) ||
-        ((windurst > (sandoria + bastok) && windurst > bastok && windurst > sandoria) && windurst > 9))
+    if (sandoria > bastok + windurst ||
+        bastok > sandoria + windurst ||
+        windurst > sandoria + bastok)
     {
         return 1;
     }
@@ -605,16 +606,31 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
     // NOTE: No need to send CConquestPacket,
     // The client itself requests this packet after a fixed period of time
 
-    REGION_TYPE region = PChar->loc.zone->GetRegionID();
+    const REGION_TYPE region = PChar->loc.zone->GetRegionID();
 
     if (region != REGION_TYPE::UNKNOWN)
     {
-        // 10% if region control is player's nation
-        // 15% otherwise
+        // Follows the CP multiplier in https://www.playonline.com/comnews/200302052327.html
+        const uint8 owner      = GetRegionOwner(region);
+        const uint8 nationRank = luautils::GetNationRank(PChar->profile.nation);
 
-        double percentage = PChar->profile.nation == GetRegionOwner(region) ? 0.1 : 0.15;
+        double percentage = 0.15;
+
+        // Only different multiplier if region is not owned by beastmen and nation is not rank 1
+        if (owner <= NATION_WINDURST && nationRank > 1)
+        {
+            if (IsAlliance()) // In alliance and owner of the region is rank 1 or not.
+            {
+                percentage = luautils::GetNationRank(owner) == 1 ? 0.2 : 0.1;
+            }
+            else if (owner == PChar->profile.nation) // Player's nation owns the region
+            {
+                percentage = 0.1;
+            }
+        }
+
         percentage += PChar->getMod(xi::Mod::CONQUEST_BONUS) / 100.0;
-        uint32 points = (uint32)(exp * percentage);
+        const uint32 points = static_cast<uint32>(static_cast<double>(exp) * percentage);
 
         charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), points);
         GainInfluencePoints(PChar, points / 2);
@@ -636,5 +652,7 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
 // 1: bastok
 // 2: windurst
 // 3: beastmen
+// 4: other
+// 5: neutral
 
 }; // namespace conquest
