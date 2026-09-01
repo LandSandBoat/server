@@ -20,21 +20,18 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params       = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem   = xi.ecosystem.AQUAN
     params.attackType  = xi.attackType.MAGICAL
     params.damageType  = xi.damageType.WATER
-    params.attribute   = xi.mod.INT
-    params.multiplier  = 2.375
-    params.tMultiplier = 1.5
-    params.duppercap   = 69
-    params.str_wsc     = 0.0
-    params.dex_wsc     = 0.0
-    params.vit_wsc     = 0.0
-    params.agi_wsc     = 0.0
+    params.dStat       = xi.mod.INT
+
+    params.ftp0            = 2.375
+    params.dStatMultiplier = 1.5
+    params.baseDamageCap   = 69
+
     params.int_wsc     = 0.3
     params.mnd_wsc     = 0.1
-    params.chr_wsc     = 0.0
 
     -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)

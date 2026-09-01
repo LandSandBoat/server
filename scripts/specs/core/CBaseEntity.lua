@@ -3233,7 +3233,7 @@ function CBaseEntity:setStatDebilitation(statDebil)
 end
 
 ---@nodiscard
----@param statId integer
+---@param statId integer|xi.mod
 ---@param optSlot integer?
 ---@return integer
 function CBaseEntity:getStat(statId, optSlot)
@@ -3395,8 +3395,8 @@ end
 ---@param caster CBaseEntity
 ---@param spell CSpell
 ---@param damage integer
----@param atkType integer
----@param dmgType integer
+---@param atkType integer|xi.attackType
+---@param dmgType integer|xi.damageType
 ---@return nil
 function CBaseEntity:takeSpellDamage(caster, spell, damage, atkType, dmgType)
 end

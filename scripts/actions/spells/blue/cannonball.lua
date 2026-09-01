@@ -20,26 +20,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.VERMIN
-    params.tpmod = xi.spells.blue.tpMod.DAMAGE
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.BLUNT
-    params.scattr = xi.skillchainType.FUSION
-    params.numhits = 1
-    params.multiplier = 1.75
-    params.tp150 = 2.125
-    params.tp300 = 2.75
-    params.azuretp = 2.875
-    params.duppercap = 75
+    local params         = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem     = xi.ecosystem.VERMIN
+    params.tpModifier    = xi.spells.blue.tpMod.DAMAGE
+    params.attackType    = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.skillchainType = xi.skillchainType.FUSION
+
+    params.numHits       = 1
+    params.ftp0          = 1.75
+    params.ftp1500       = 2.125
+    params.ftp3000       = 2.75
+    params.ftpAzure      = 2.875
+    params.baseDamageCap = 75
+
     params.str_wsc = 0.5
-    params.dex_wsc = 0.0
     params.vit_wsc = 0.5
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
-    params.offcratiomod = caster:getStat(xi.mod.DEF) -- Cannonball uses Defense as its main modifier
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

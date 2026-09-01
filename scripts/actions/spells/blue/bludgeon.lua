@@ -20,32 +20,27 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.ARCANA
-    params.tpmod = xi.spells.blue.tpMod.ACC
-    params.bonusacc = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.ARCANA
+    params.tpModifier = xi.spells.blue.tpMod.ACC
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.bonusacc = 70
+        params.bonusAcc = 70
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.bonusacc = math.floor(caster:getTP() / 50)
+        params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HAND_TO_HAND
-    params.scattr = xi.skillchainType.LIQUEFACTION
-    params.numhits = 3
-    params.multiplier = 1.0
-    params.tp150 = 1.0
-    params.tp300 = 1.0
-    params.azuretp = 1.0
-    params.duppercap = 21
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.3
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HAND_TO_HAND
+    params.skillchainType = xi.skillchainType.LIQUEFACTION
+
+    params.numHits       = 3
+    params.ftp0          = 1.0
+    params.ftp1500       = 1.0
+    params.ftp3000       = 1.0
+    params.ftpAzure      = 1.0
+    params.baseDamageCap = 21
+    params.chr_wsc       = 0.3
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

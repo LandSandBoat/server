@@ -20,27 +20,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.AQUAN
-    params.tpmod      = xi.spells.blue.tpMod.DAMAGE
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.BLUNT
-    params.scattr     = xi.skillchainType.FRAGMENTATION
-    params.attribute  = xi.mod.INT
-    params.skillType  = xi.skill.BLUE_MAGIC
-    params.numhits    = 1
-    params.multiplier = 2.0
-    params.tp150      = 2.0
-    params.tp300      = 2.0
-    params.azuretp    = 2.0
-    params.duppercap  = 72
-    params.str_wsc    = 0.0
-    params.dex_wsc    = 0.0
+    local params           = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.AQUAN
+    params.tpModifier     = xi.spells.blue.tpMod.DAMAGE
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.BLUNT
+    params.skillchainType = xi.skillchainType.FRAGMENTATION
+    params.dStat          = xi.mod.INT
+
+    params.numHits       = 1
+    params.ftp0          = 2.0
+    params.ftp1500       = 2.0
+    params.ftp3000       = 2.0
+    params.ftpAzure      = 2.0
+    params.baseDamageCap = 72
+
     params.vit_wsc    = 0.6
-    params.agi_wsc    = 0.0
-    params.int_wsc    = 0.0
-    params.mnd_wsc    = 0.0
-    params.chr_wsc    = 0.0
 
     -- Handle damage.
     local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)

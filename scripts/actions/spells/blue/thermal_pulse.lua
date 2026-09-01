@@ -20,21 +20,17 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params       = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem   = xi.ecosystem.VERMIN
     params.attackType  = xi.attackType.MAGICAL
     params.damageType  = xi.damageType.FIRE
-    params.attribute   = xi.mod.INT
-    params.multiplier  = 2.0
-    params.tMultiplier = 4.0 -- https://www.ffxiah.com/forum/topic/30626/the-beast-within-a-guide-to-blue-mage/#spells concurs with https://wiki.ffo.jp/html/22468.html on tp
-    params.duppercap   = 100
-    params.str_wsc     = 0.0
-    params.dex_wsc     = 0.0
-    params.vit_wsc     = 0.4
-    params.agi_wsc     = 0.0
-    params.int_wsc     = 0.0
-    params.mnd_wsc     = 0.0
-    params.chr_wsc     = 0.0
+    params.dStat       = xi.mod.INT
+
+    params.ftp0            = 2.0
+    params.dStatMultiplier = 4.0 -- https://www.ffxiah.com/forum/topic/30626/the-beast-within-a-guide-to-blue-mage/#spells concurs with https://wiki.ffo.jp/html/22468.html on tp
+    params.baseDamageCap   = 100
+
+    params.vit_wsc = 0.4
 
     -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)

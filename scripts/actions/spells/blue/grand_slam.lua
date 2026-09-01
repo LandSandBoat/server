@@ -20,25 +20,20 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.tpmod = xi.spells.blue.tpMod.ATTACK
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HAND_TO_HAND
-    params.scattr = xi.skillchainType.INDURATION
-    params.numhits = 1
-    params.multiplier = 1.0
-    params.tp150 = 1.0
-    params.tp300 = 1.0
-    params.azuretp = 1.0
-    params.duppercap = 33
-    params.str_wsc = 0.0
-    params.dex_wsc = 0.0
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.tpModifier     = xi.spells.blue.tpMod.ATTACK
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HAND_TO_HAND
+    params.skillchainType = xi.skillchainType.INDURATION
+
+    params.numHits       = 1
+    params.ftp0          = 1.0
+    params.ftp1500       = 1.0
+    params.ftp3000       = 1.0
+    params.ftpAzure      = 1.0
+    params.baseDamageCap = 33
+
     params.vit_wsc = 0.3
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
-    params.ignorefstrcap = true -- Grand Slam doesn't have an fSTR cap
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

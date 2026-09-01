@@ -20,32 +20,28 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.VERMIN
-    params.tpmod = xi.spells.blue.tpMod.CRITICAL
-    params.critchance = 0
+    local params      = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem  = xi.ecosystem.VERMIN
+    params.tpModifier = xi.spells.blue.tpMod.CRITICAL
+
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        params.critchance = 55
+        params.critChance = 55
     elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        params.critchance = math.floor(caster:getTP() / 75)
+        params.critChance = math.floor(caster:getTP() / 75)
     end
 
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HAND_TO_HAND
-    params.scattr = xi.skillchainType.COMPRESSION
-    params.numhits = 1
-    params.multiplier = 1.5
-    params.tp150 = 1.5
-    params.tp300 = 1.5
-    params.azuretp = 1.5
-    params.duppercap = 49
-    params.str_wsc = 0.0
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HAND_TO_HAND
+    params.skillchainType = xi.skillchainType.COMPRESSION
+
+    params.numHits       = 1
+    params.ftp0          = 1.5
+    params.ftp1500       = 1.5
+    params.ftp3000       = 1.5
+    params.ftpAzure      = 1.5
+    params.baseDamageCap = 49
+
     params.dex_wsc = 0.5
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end

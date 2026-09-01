@@ -21,7 +21,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params           = {}
     params.ecosystem       = xi.ecosystem.LUMINION
     params.effect          = xi.effect.FLASH
     params.power           = 0 -- Power is handled in hit rate calculations

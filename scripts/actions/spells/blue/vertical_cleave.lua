@@ -20,25 +20,21 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.LUMINIAN
-    params.tpmod = xi.spells.blue.tpMod.ATTACK
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr = xi.skillchainType.GRAVITATION
-    params.numhits = 1
-    params.multiplier = 3.0
-    params.tp150 = 3.0
-    params.tp300 = 3.0
-    params.azuretp = 3.0
-    params.duppercap = 75
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.LUMINIAN
+    params.tpModifier     = xi.spells.blue.tpMod.ATTACK
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.skillchainType = xi.skillchainType.GRAVITATION
+
+    params.numHits       = 1
+    params.ftp0          = 3.0
+    params.ftp1500       = 3.0
+    params.ftp3000       = 3.0
+    params.ftpAzure      = 3.0
+    params.baseDamageCap = 75
+
     params.str_wsc = 0.5
-    params.dex_wsc = 0.0
-    params.vit_wsc = 0.0
-    params.agi_wsc = 0.0
-    params.int_wsc = 0.0
-    params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
 
     return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
