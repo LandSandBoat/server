@@ -371,9 +371,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -419,9 +416,6 @@ templates:
         skill: scythe
         delay: 220
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -455,9 +449,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -535,9 +526,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -732,9 +720,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -758,9 +743,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

@@ -565,9 +565,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -606,9 +603,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        dmg_physical:
-          blunt: -1250
       render:
         look:
           type:  standard
@@ -669,9 +663,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -732,9 +723,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -756,9 +744,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

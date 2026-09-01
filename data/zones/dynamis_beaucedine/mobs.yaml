@@ -11,11 +11,6 @@ templates:
         skill: staff
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -224,11 +219,6 @@ templates:
       jobs: [blm, blm]
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -1372,11 +1362,6 @@ templates:
       jobs: [whm, whm]
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -4245,11 +4230,6 @@ templates:
       jobs: [blm, blm]
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -5265,9 +5245,6 @@ templates:
         skill: axe
         delay: 265
       jobs: [bst, bst]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -5394,9 +5371,6 @@ templates:
         skill: club
         delay: 265
       jobs: [whm, whm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -5437,9 +5411,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -5559,9 +5530,6 @@ templates:
       combat:
         skill: sword
       jobs: [drg, drg]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -5842,9 +5810,6 @@ templates:
         skill: scythe
         delay: 265
       jobs: [sam, sam]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6052,9 +6017,6 @@ templates:
         skill: great_axe
         delay: 265
       jobs: [nin, nin]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6175,9 +6137,6 @@ templates:
         skill: club
         delay: 220
       jobs: [rng, rng]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6257,9 +6216,6 @@ templates:
       combat:
         skill: club
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6300,9 +6256,6 @@ templates:
         skill: club
         delay: 265
       jobs: [brd, brd]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6819,9 +6772,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [rdm, rdm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -6862,9 +6812,6 @@ templates:
       combat:
         skill: club
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -7134,9 +7081,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -7258,9 +7202,6 @@ templates:
       combat:
         skill: club
       jobs: [smn, smn]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -7344,9 +7285,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [drk, drk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -7387,9 +7325,6 @@ templates:
       combat:
         skill: scythe
         delay: 260
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

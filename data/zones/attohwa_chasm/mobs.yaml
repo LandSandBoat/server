@@ -108,9 +108,6 @@ templates:
         skill: club
         delay: 290
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          blunt: 2500
       render:
         look:
           type:  standard
@@ -394,9 +391,6 @@ templates:
         skill: club
         delay: 290
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          blunt: 2500
       render:
         look:
           type:  standard

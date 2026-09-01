@@ -1005,9 +1005,6 @@ templates:
     attributes:
       combat:
         skill: great_axe
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

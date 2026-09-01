@@ -8388,10 +8388,6 @@ ecosystems:
                 - sight
                 - magic
               resists:
-                dmg_physical:
-                  slashing: -7500
-                  piercing: -5000
-                  blunt:    -6250
                 rank_element:
                   fire:    11
                   ice:     -3
@@ -8412,8 +8408,6 @@ ecosystems:
                   blind:       11
                   stun:        11
                   gravity:     11 # absorbs on retail
-              mods:
-                udmgbreath: -2500
               mob_mods:
                 hp_standback: -1
           ifrit:

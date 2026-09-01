@@ -202,11 +202,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          slashing: -1250
-          blunt:    -2500
-          h2h:      -2500
       render:
         look:
           type:  standard
@@ -290,9 +285,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -313,9 +305,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -336,9 +325,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

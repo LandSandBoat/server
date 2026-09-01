@@ -377,12 +377,6 @@ templates:
     attributes:
       combat:
         skill: axe
-      resists:
-        dmg_physical:
-          slashing: -1250
-          piercing: -1250
-          blunt:    -1250
-          h2h:      -1250
       render:
         look:
           type:  standard

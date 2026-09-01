@@ -9,10 +9,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        dmg_physical:
-          blunt: 5000
-          h2h:   2500
       render:
         look:
           type:  standard
@@ -253,9 +249,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -285,9 +278,6 @@ templates:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1219,9 +1209,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1808,12 +1795,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -1833,12 +1814,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard

@@ -170,9 +170,6 @@ templates:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -416,9 +413,6 @@ templates:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

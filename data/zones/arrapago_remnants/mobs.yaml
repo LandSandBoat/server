@@ -1013,9 +1013,6 @@ templates:
       combat:
         skill: polearm
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -1051,9 +1048,6 @@ templates:
       combat:
         skill: polearm
       jobs: [drg, drg]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -1090,9 +1084,6 @@ templates:
       combat:
         skill: polearm
       jobs: [drk, drk]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -1128,9 +1119,6 @@ templates:
       combat:
         skill: polearm
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard

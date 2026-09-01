@@ -1080,12 +1080,6 @@ templates:
     species:       pixie
     skill_list_id: 195
     attributes:
-      resists:
-        dmg_physical:
-          slashing: -6250
-          piercing: -6250
-          blunt:    -6250
-          h2h:      -6250
       render:
         look:
           type:  standard
@@ -1180,9 +1174,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [sch, rdm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1295,10 +1286,6 @@ templates:
       combat:
         skill: scythe
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          blunt: 5000
-          h2h:   2500
       render:
         look:
           type:  standard
@@ -2495,12 +2482,6 @@ templates:
       combat:
         skill: scythe
       jobs: [whm, whm]
-      resists:
-        dmg_physical:
-          slashing: -6250
-          piercing: -6250
-          blunt:    -6250
-          h2h:      -6250
       render:
         look:
           type:  standard
@@ -2749,9 +2730,6 @@ templates:
         skill: club
         delay: 290
       jobs: [blm, rdm]
-      resists:
-        dmg_physical:
-          blunt: 2500
       render:
         look:
           type:  standard
@@ -3254,10 +3232,6 @@ templates:
         skill: scythe
         delay: 360
       jobs: [mnk, blm]
-      resists:
-        dmg_physical:
-          blunt: 5000
-          h2h:   2500
       render:
         look:
           type:  standard
@@ -3380,12 +3354,6 @@ templates:
     species:       pixie
     skill_list_id: 195
     attributes:
-      resists:
-        dmg_physical:
-          slashing: -6250
-          piercing: -6250
-          blunt:    -6250
-          h2h:      -6250
       render:
         look:
           type:  standard
