@@ -73,7 +73,7 @@ public:
     auto Internal_ChangeTarget(const EntityId& target) const -> bool;
     auto Internal_Disengage() const -> bool;
     auto Internal_WeaponSkill(const EntityId& target, uint16 wsid) -> bool;
-    auto Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
+    auto Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride, Maybe<uint16> tpCostOverride = std::nullopt) -> bool;
     auto Internal_PetSkill(const EntityId& target, uint16 abilityid) -> bool;
     auto Internal_Ability(const EntityId& target, uint16 abilityid) -> bool;
     auto Internal_RangedAttack(const EntityId& target) -> bool;

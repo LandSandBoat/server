@@ -6,11 +6,12 @@ CREATE TABLE IF NOT EXISTS `monstrosity_exp_table` (
 ) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- https://www.bg-wiki.com/ffxi/Category:Monstrosity
+-- Levels 1-40 verified against retail captures; the wiki has levels 4 and 5 one step too high.
 INSERT INTO `monstrosity_exp_table` VALUES (1,300);
 INSERT INTO `monstrosity_exp_table` VALUES (2,400);
 INSERT INTO `monstrosity_exp_table` VALUES (3,500);
-INSERT INTO `monstrosity_exp_table` VALUES (4,700);
-INSERT INTO `monstrosity_exp_table` VALUES (5,800);
+INSERT INTO `monstrosity_exp_table` VALUES (4,600);
+INSERT INTO `monstrosity_exp_table` VALUES (5,700);
 INSERT INTO `monstrosity_exp_table` VALUES (6,800);
 INSERT INTO `monstrosity_exp_table` VALUES (7,900);
 INSERT INTO `monstrosity_exp_table` VALUES (8,1000);

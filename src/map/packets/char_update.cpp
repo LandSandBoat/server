@@ -341,7 +341,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         packet->Flags3.CliPriorityFlag  = PChar->priorityRender;
         packet->Flags3.PetFlag          = 0;
         packet->Flags3.BallistaTeam     = static_cast<uint8_t>(PChar->allegiance); // Also used during Ballista with slightly different values.
-        packet->Flags3.MonStat          = 0;                                       // Some monstrosity flag. // TODO: verify if we already use this.
+        packet->Flags3.MonStat          = 0;                                       // Retail sends 0 here even for Monstrosity players.
         packet->Flags3.SilenceFlag      = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak);
         packet->Flags3.NewCharacterFlag = !PChar->playerConfig.NewAdventurerOffFlg;
         packet->Flags3.MentorFlag       = PChar->playerConfig.MentorFlg;

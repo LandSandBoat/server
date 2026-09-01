@@ -200,6 +200,31 @@ void CLuaClientEntityPairActions::useAbility(CLuaBaseEntity* target, const ABILI
 }
 
 /************************************************************************
+ *  Function: useMonsterSkill()
+ *  Purpose : Emits packet to use a Monstrosity TP move on a target.
+ *  Example : player.actions:useMonsterSkill(mob, 343) -- Fireball
+ *  Notes   : Takes the client-facing DAT skill id, not a mob skill id.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::useMonsterSkill(CLuaBaseEntity* target, const uint16 datSkillId) const
+{
+    if (!target)
+    {
+        TestError("useMonsterSkill: Invalid target");
+        return;
+    }
+
+    const auto packet                  = parent_->packets().createPacket<GP_CLI_COMMAND_ACTION>();
+    auto*      actionPacket            = packet->as<GP_CLI_COMMAND_ACTION>();
+    actionPacket->UniqueNo             = target->getID();
+    actionPacket->ActIndex             = target->getTargID();
+    actionPacket->ActionID             = GP_CLI_COMMAND_ACTION_ACTIONID::MonsterSkill;
+    actionPacket->MonsterSkill.SkillId = datSkillId;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
  *  Function: changeTarget()
  *  Purpose : Emits packet to change target.
  *  Example : player.actions:changeTarget(newMob)
@@ -1090,6 +1115,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("setBlueSpells", CLuaClientEntityPairActions::setBlueSpells);
     SOL_REGISTER("useWeaponskill", CLuaClientEntityPairActions::useWeaponskill);
     SOL_REGISTER("useAbility", CLuaClientEntityPairActions::useAbility);
+    SOL_REGISTER("useMonsterSkill", CLuaClientEntityPairActions::useMonsterSkill);
     SOL_REGISTER("changeTarget", CLuaClientEntityPairActions::changeTarget);
     SOL_REGISTER("rangedAttack", CLuaClientEntityPairActions::rangedAttack);
     SOL_REGISTER("useItem", CLuaClientEntityPairActions::useItem);

@@ -281,7 +281,7 @@ auto CAIContainer::Internal_WeaponSkill(const EntityId& target, uint16 wsid) -> 
     return false;
 }
 
-auto CAIContainer::Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool
+auto CAIContainer::Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride, Maybe<uint16> tpCostOverride) -> bool
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
@@ -291,7 +291,7 @@ auto CAIContainer::Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<
             return false;
         }
 
-        return ChangeState<CMobSkillState>(entity, target, wsid, castTimeOverride);
+        return ChangeState<CMobSkillState>(entity, target, wsid, castTimeOverride, tpCostOverride);
     }
     return false;
 }

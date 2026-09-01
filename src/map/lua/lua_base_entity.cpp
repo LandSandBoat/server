@@ -51,6 +51,7 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "recast_container.h"
 #include "roe.h"
@@ -7323,7 +7324,18 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->SetMLevel(level);
         PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] = level;
         PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
-        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1;
+
+        const auto expNextLevel = [&]() -> uint32
+        {
+            if (PChar->m_PMonstrosity)
+            {
+                return monstrosity::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+            }
+
+            return charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+        }();
+
+        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = expNextLevel - 1;
         charutils::ApplyAllEquipMods(PChar);
 
         charutils::SetStyleLock(PChar, false);
@@ -7383,7 +7395,18 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
 
     PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())] = slevel;
     PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
-    PChar->jobs.exp[static_cast<uint8>(PChar->GetSJob())] = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]) - 1;
+
+    const auto expNextLevel = [&]() -> uint32
+    {
+        if (PChar->m_PMonstrosity)
+        {
+            return monstrosity::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
+        }
+
+        return charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
+    }();
+
+    PChar->jobs.exp[static_cast<uint8>(PChar->GetSJob())] = expNextLevel - 1;
 
     charutils::SetStyleLock(PChar, false);
     jobpointutils::RefreshGiftMods(PChar);
