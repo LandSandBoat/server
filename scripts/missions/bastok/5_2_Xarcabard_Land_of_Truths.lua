@@ -130,6 +130,25 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM] =
         {
+            onZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 3 and
+                    mission:getVar(player, 'PostBattle') == 1
+                then
+                    return { 7, -1, xi.cutsceneFlag.UNKNOWN_0008 }
+                end
+            end,
+
+            afterZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 3 and
+                    mission:getVar(player, 'PostBattle') == 1 and
+                    not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                then
+                    player:addKeyItem(xi.ki.SHADOW_FRAGMENT)
+                end
+            end,
+
             ['_4l1'] =
             {
                 onTrigger = function(player, npc)
@@ -154,8 +173,8 @@ mission.sections =
                             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
                         end
 
-                        -- TODO: This is most likely a pos change followed by onZoneIn event
-                        player:startEvent(7)
+                        mission:setVar(player, 'PostBattle', 1)
+                        player:setPos(90.425, -5.749, 0.089, 3, xi.zone.THRONE_ROOM)
                     end
                 end,
 
@@ -164,9 +183,9 @@ mission.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
                     player:setMissionStatus(mission.areaId, 4)
-                    player:setPos(378, -12, -20, 125, 161)
+                    mission:setVar(player, 'PostBattle', 0)
+                    player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.SHADOW_FRAGMENT)
                 end,
             },
         },

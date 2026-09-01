@@ -69,6 +69,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setMobMod(xi.mobMod.NO_SPELL_COST, 1)
     mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 14)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobFight = function(mob, target)

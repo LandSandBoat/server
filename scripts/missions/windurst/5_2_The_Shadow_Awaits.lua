@@ -78,6 +78,24 @@ mission.sections =
 
         [xi.zone.HEAVENS_TOWER] =
         {
+            onZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 4 and
+                    mission:getVar(player, 'ReturnCS') == 0 and
+                    player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                then
+                    return {
+                        215,
+                        -1,
+                        bit.bor(
+                            xi.cutsceneFlag.RESET_CAMERA,
+                            xi.cutsceneFlag.NO_PCS,
+                            xi.cutsceneFlag.NO_NPCS
+                        ),
+                    }
+                end
+            end,
+
             ['_6q2'] =
             {
                 onTrigger = function(player, npc)
@@ -93,9 +111,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
-                        return mission:progressEvent(157)
+                        return mission:event(157)
                     elseif player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
-                        return mission:progressEvent(194)
+                        return mission:event(194)
                     end
                 end,
             },
@@ -108,6 +126,10 @@ mission.sections =
                     player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
                 end,
 
+                [215] = function(player, csid, option, npc)
+                    mission:setVar(player, 'ReturnCS', 1)
+                end,
+
                 [216] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.SHADOW_FRAGMENT)
@@ -118,6 +140,25 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM] =
         {
+            onZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 3 and
+                    mission:getVar(player, 'PostBattle') == 1
+                then
+                    return { 7, -1, xi.cutsceneFlag.UNKNOWN_0008 }
+                end
+            end,
+
+            afterZoneIn = function(player)
+                if
+                    player:getMissionStatus(mission.areaId) == 3 and
+                    mission:getVar(player, 'PostBattle') == 1 and
+                    not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                then
+                    player:addKeyItem(xi.ki.SHADOW_FRAGMENT)
+                end
+            end,
+
             ['_4l1'] =
             {
                 onTrigger = function(player, npc)
@@ -142,8 +183,8 @@ mission.sections =
                             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
                         end
 
-                        -- TODO: Check captures, the player is most likely zoned and this even triggered via onZoneIn
-                        player:startEvent(7)
+                        mission:setVar(player, 'PostBattle', 1)
+                        player:setPos(90.425, -5.749, 0.089, 3, xi.zone.THRONE_ROOM)
                     end
                 end,
 
@@ -153,21 +194,10 @@ mission.sections =
 
                 [7] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
-                    player:setPos(378, -12, -20, 125, 161)
+                    mission:setVar(player, 'PostBattle', 0)
+                    player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.SHADOW_FRAGMENT)
                 end,
             },
-        },
-
-        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
-        {
-            afterZoneIn = function(player)
-                if
-                    player:getMissionStatus(mission.areaId) == 4 and
-                    not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
-                then
-                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
-                end
-            end,
         },
     },
 }
