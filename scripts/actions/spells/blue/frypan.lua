@@ -24,9 +24,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem  = xi.ecosystem.BEASTMEN
     params.tpModifier = xi.spells.blue.tpMod.ACC
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+    if params.hasAzureLore then
         params.bonusAcc = 70
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    elseif params.hasChainAffinity then
         params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 
@@ -35,19 +35,19 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillchainType = xi.skillchainType.IMPACTION
 
     params.numHits       = 1
-    params.ftp0          = 1.78
-    params.ftp1500       = 1.78
-    params.ftp3000       = 1.78
-    params.ftpAzure      = 1.78
-    params.baseDamageCap = 75
+    params.ftp0          = 1.7734375
+    params.ftp1500       = 1.7734375
+    params.ftp3000       = 1.7734375
+    params.ftpAzure      = 1.7734375
+    params.baseDamageCap = 999 -- uncapped
 
     params.str_wsc    = 0.2
     params.mnd_wsc    = 0.2
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
     end
 

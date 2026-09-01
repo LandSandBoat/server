@@ -28,25 +28,34 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillchainType = xi.skillchainType.TRANSFIXION
 
     params.numHits       = 1
-    params.ftp0          = 1.84
-    params.ftp1500       = 1.84
-    params.ftp3000       = 1.84
-    params.ftpAzure      = 1.84
+    params.ftp0          = 1.8359375
+    params.ftp1500       = 1.8359375
+    params.ftp3000       = 1.8359375
+    params.ftpAzure      = 1.8359375
     params.baseDamageCap = 11
 
     params.agi_wsc = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
+    end
+
+    local duration = 180
+
+    -- TODO: duration needs verification
+    if params.hasAzureLore then
+        duration = 450
+    elseif params.hasChainAffinity then
+        duration = xi.spells.blue.calculatefTP(caster:getTP(), 180, 360, 400)
     end
 
     -- Handle status effects.
     local effectTable =
     {
-        [1] = { xi.effect.VIT_DOWN, 9, 6, 60 },
+        [1] = { xi.effect.VIT_DOWN, 9, 6, duration },
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

@@ -28,11 +28,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillchainType = xi.skillchainType.INDURATION
 
     params.numHits       = 3
-    params.ftp0          = 1.36
-    params.ftp1500       = 2.08
-    params.ftp3000       = 2.36
-    params.ftpAzure      = 2.61
-    params.baseDamageCap = 75
+    params.ftp0          = 1.359375
+    params.ftp1500       = 2.0703125
+    params.ftp3000       = 2.359375
+    params.ftpAzure      = 2.609375
+    params.baseDamageCap = 73
 
     params.str_wsc = 0.2
     params.dex_wsc = 0.2

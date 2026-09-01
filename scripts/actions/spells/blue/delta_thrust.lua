@@ -45,9 +45,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.vit_wsc = 0.50
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
     end
 

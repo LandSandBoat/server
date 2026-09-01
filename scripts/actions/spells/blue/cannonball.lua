@@ -31,8 +31,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp0          = 1.75
     params.ftp1500       = 2.125
     params.ftp3000       = 2.75
-    params.ftpAzure      = 2.875
-    params.baseDamageCap = 75
+    params.ftpAzure      = 3
+    params.baseDamageCap = 999 -- uncapped
 
     params.str_wsc = 0.5
     params.vit_wsc = 0.5
