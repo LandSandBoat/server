@@ -157,13 +157,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire: -2
-          ice:   4
-        rank_status:
-          paralyze: 4
-          bind:     4
       render:
         look:
           type:  standard

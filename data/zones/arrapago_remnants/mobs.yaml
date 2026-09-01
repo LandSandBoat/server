@@ -292,9 +292,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          thunder: -2
       render:
         look:
           type:  standard
@@ -429,9 +426,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -596,19 +590,6 @@ templates:
       combat:
         skill: axe
       jobs: [brd, brd]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton
@@ -637,19 +618,6 @@ templates:
       combat:
         skill: sword
       jobs: [cor, cor]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton
@@ -678,19 +646,6 @@ templates:
       combat:
         skill: axe
       jobs: [sam, sam]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton
@@ -720,19 +675,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton
@@ -791,9 +733,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -905,19 +844,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -1312,19 +1238,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

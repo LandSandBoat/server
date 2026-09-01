@@ -31,9 +31,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          thunder: -2
       render:
         look:
           type:  standard
@@ -170,12 +167,6 @@ templates:
     attributes:
       combat:
         skill: staff
-      resists:
-        rank_element:
-          dark: 10
-        rank_status:
-          dark_sleep: 10
-          blind:      10
       render:
         look:
           type:  standard
@@ -226,12 +217,6 @@ templates:
           slashing: -5000
           piercing: -5000
           h2h:      -7500
-        rank_element:
-          earth: 3
-          water: 5
-        rank_status:
-          slow:   3
-          poison: 5
       render:
         look:
           type:  standard
@@ -251,12 +236,6 @@ templates:
     attributes:
       combat:
         skill: staff
-      resists:
-        rank_element:
-          dark: 10
-        rank_status:
-          dark_sleep: 10
-          blind:      10
       render:
         look:
           type:  standard
@@ -288,13 +267,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -857,22 +829,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    4
-          ice:     6
-          wind:    4
-          earth:   6
-          thunder: 4
-          water:   6
-          light:   2
-        rank_status:
-          paralyze:    6
-          bind:        6
-          silence:     4
-          slow:        6
-          poison:      6
-          light_sleep: 2
       render:
         look:
           type:  standard
@@ -1191,9 +1147,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          thunder: -2
       render:
         look:
           type:  standard
@@ -1237,12 +1190,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          dark: 10
-        rank_status:
-          dark_sleep: 10
-          blind:      10
       render:
         look:
           type:  standard

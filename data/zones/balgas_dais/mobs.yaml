@@ -316,9 +316,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -345,9 +342,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -394,9 +388,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -425,9 +416,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1533,16 +1521,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard

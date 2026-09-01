@@ -609,24 +609,6 @@ templates:
       resists:
         dmg_physical:
           blunt: -1250
-        rank_element:
-          fire:    6
-          ice:     6
-          wind:    6
-          earth:   3
-          thunder: 3
-          water:   3
-          light:   3
-          dark:    3
-        rank_status:
-          paralyze:    6
-          bind:        6
-          silence:     6
-          slow:        3
-          poison:      3
-          light_sleep: 3
-          dark_sleep:  3
-          blind:       3
       render:
         look:
           type:  standard

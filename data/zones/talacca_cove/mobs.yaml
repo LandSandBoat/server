@@ -298,24 +298,6 @@ templates:
       jobs: [rng, rng]
       resists:
         immune_status: [gravity, poison, light_sleep, dark_sleep]
-        rank_element:
-          fire:    -1
-          ice:     -2
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    3
-          light:   -2
-          dark:     2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -1
-          slow:        -1
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  standard
@@ -362,23 +344,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -3
-          ice:     -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard

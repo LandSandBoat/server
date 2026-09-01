@@ -344,9 +344,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, rdm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -744,9 +741,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1151,14 +1145,6 @@ templates:
       combat:
         skill: sword
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          light: -3
-          dark:  11
-        rank_status:
-          light_sleep: -3
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -1343,9 +1329,6 @@ templates:
     attributes:
       combat:
         skill: great_axe
-      resists:
-        rank_element:
-          light: -2
       render:
         look:
           type:  standard
@@ -1425,9 +1408,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1509,9 +1489,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

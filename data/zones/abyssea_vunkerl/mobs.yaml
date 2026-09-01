@@ -288,14 +288,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          ice:  4
-          dark: 4
-        rank_status:
-          paralyze:   4
-          bind:       4
-          dark_sleep: 4
-          blind:      4
       render:
         look:
           type:  standard
@@ -909,24 +901,6 @@ templates:
     species:       chariot
     skill_list_id: 63
     attributes:
-      resists:
-        rank_element:
-          ice:      1
-          wind:     1
-          earth:    1
-          thunder:  5
-          water:   -1
-          light:    6
-          dark:     1
-        rank_status:
-          paralyze:     1
-          bind:         1
-          silence:      1
-          slow:         1
-          poison:      -1
-          light_sleep:  6
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1012,19 +986,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -1203,24 +1164,6 @@ templates:
     attributes:
       combat:
         delay: 0
-      resists:
-        rank_element:
-          ice:      1
-          wind:     1
-          earth:    1
-          thunder:  5
-          water:   -1
-          light:    6
-          dark:     1
-        rank_status:
-          paralyze:     1
-          bind:         1
-          silence:      1
-          slow:         1
-          poison:      -1
-          light_sleep:  6
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1313,19 +1256,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:    2
-          water:  9
-          light: -1
-          dark:  11
-        rank_status:
-          paralyze:     2
-          bind:         2
-          poison:       9
-          light_sleep: -1
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

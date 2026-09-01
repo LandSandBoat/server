@@ -947,13 +947,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard

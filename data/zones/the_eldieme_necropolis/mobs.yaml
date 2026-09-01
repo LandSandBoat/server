@@ -134,18 +134,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -182,18 +170,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -228,18 +204,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -268,18 +232,6 @@ templates:
       combat:
         skill: sword
         delay: 360
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -636,18 +588,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -684,18 +624,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -730,18 +658,6 @@ templates:
         skill: sword
         delay: 360
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -775,18 +691,6 @@ templates:
       combat:
         skill: sword
         delay: 360
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1164,18 +1068,6 @@ templates:
         skill: dagger
         delay: 360
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1209,18 +1101,6 @@ templates:
         skill: dagger
         delay: 360
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1254,18 +1134,6 @@ templates:
         skill: dagger
         delay: 360
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1300,18 +1168,6 @@ templates:
       combat:
         skill: dagger
         delay: 360
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1552,18 +1408,6 @@ templates:
         skill: axe
         delay: 360
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1594,18 +1438,6 @@ templates:
         skill: axe
         delay: 360
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1634,18 +1466,6 @@ templates:
         skill: axe
         delay: 360
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1673,18 +1493,6 @@ templates:
       combat:
         skill: axe
         delay: 360
-      resists:
-        rank_element:
-          fire:  -2
-          ice:    4
-          light: -2
-          dark:   4
-        rank_status:
-          paralyze:     4
-          bind:         4
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard

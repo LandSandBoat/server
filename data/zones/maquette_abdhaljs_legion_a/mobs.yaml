@@ -85,15 +85,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [gravity, silence, slow, elegy]
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -966,21 +957,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, rdm]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     1
-          thunder: 2
-          water:   2
-          light:   2
-          dark:    4
-        rank_status:
-          paralyze:    1
-          bind:        1
-          poison:      2
-          light_sleep: 2
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -1084,21 +1060,6 @@ templates:
       combat:
         skill: club
       jobs: [sch, rdm]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     1
-          thunder: 2
-          water:   2
-          light:   2
-          dark:    4
-        rank_status:
-          paralyze:    1
-          bind:        1
-          poison:      2
-          light_sleep: 2
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard

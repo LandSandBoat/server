@@ -331,14 +331,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          ice:  4
-          dark: 4
-        rank_status:
-          paralyze:   4
-          bind:       4
-          dark_sleep: 4
-          blind:      4
       render:
         look:
           type:  standard
@@ -424,9 +416,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -516,14 +505,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, war]
-      resists:
-        rank_element:
-          light: 10
-          dark:  10
-        rank_status:
-          light_sleep: 10
-          dark_sleep:  10
-          blind:       10
       render:
         look:
           type:  standard
@@ -651,12 +632,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          dark: 10
-        rank_status:
-          dark_sleep: 10
-          blind:      10
       render:
         look:
           type:  standard

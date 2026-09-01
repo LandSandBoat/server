@@ -411,14 +411,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:   -3
-          light: -3
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -469,21 +461,6 @@ templates:
     attributes:
       combat:
         skill: polearm
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -539,14 +516,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:   -3
-          light: -3
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -572,21 +541,6 @@ templates:
     attributes:
       combat:
         skill: polearm
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -2
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -2
-          blind:       -2
       render:
         look:
           type:  standard
@@ -612,21 +566,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -651,21 +590,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -717,24 +641,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, whm]
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -2
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:    4
-          light:   -3
-          dark:     4
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     -2
-          slow:        -2
-          poison:       4
-          light_sleep: -3
-          dark_sleep:   4
       render:
         look:
           type:  standard
@@ -761,14 +667,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:   -3
-          light: -3
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -794,21 +692,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -833,21 +716,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -900,21 +768,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -1029,9 +882,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1076,13 +926,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1168,13 +1011,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1221,13 +1057,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1279,13 +1108,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1573,13 +1395,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1775,13 +1590,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1841,13 +1649,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -2052,13 +1853,6 @@ templates:
         skill: great_sword
         delay: 265
       jobs: [rdm, war]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2080,13 +1874,6 @@ templates:
       combat:
         skill: sword
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2112,13 +1899,6 @@ templates:
         skill: club
         delay: 265
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2205,13 +1985,6 @@ templates:
         skill: axe
         delay: 265
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2360,13 +2133,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2523,14 +2289,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:   -3
-          light: -3
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -2606,21 +2364,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -2646,14 +2389,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:   -3
-          light: -3
-        rank_status:
-          paralyze:    -3
-          bind:        -3
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -2679,21 +2414,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -2718,21 +2438,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        rank_element:
-          fire:    -2
-          ice:     -3
-          wind:    -2
-          thunder: -3
-          water:   -2
-          dark:    -3
-        rank_status:
-          paralyze:   -3
-          bind:       -3
-          silence:    -2
-          poison:     -2
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -2986,9 +2691,6 @@ templates:
     species:       black_wyrm
     skill_list_id: 260
     attributes:
-      resists:
-        rank_element:
-          light: -2
       render:
         look:
           type:  standard
@@ -3035,13 +2737,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3193,13 +2888,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3221,13 +2909,6 @@ templates:
       combat:
         skill: axe
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3272,13 +2953,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3421,13 +3095,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3673,13 +3340,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3714,13 +3374,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -3780,21 +3433,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          fire:     4
-          ice:      1
-          thunder: -2
-          water:   -2
-          light:   -2
-          dark:    -3
-        rank_status:
-          paralyze:     1
-          bind:         1
-          poison:      -2
-          light_sleep: -2
-          dark_sleep:  -3
-          blind:       -3
       render:
         look:
           type:  standard
@@ -3849,13 +3487,6 @@ templates:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard

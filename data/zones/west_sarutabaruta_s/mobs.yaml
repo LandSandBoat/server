@@ -352,9 +352,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -701,9 +698,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -723,9 +717,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1095,13 +1086,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -1739,9 +1723,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -2250,9 +2231,6 @@ templates:
     species:       black_wyrm
     skill_list_id: 260
     attributes:
-      resists:
-        rank_element:
-          light: -2
       render:
         look:
           type:  standard
@@ -2448,9 +2426,6 @@ templates:
         skill: hand_to_hand
         delay: 480
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -2526,13 +2501,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -3363,13 +3331,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -3395,9 +3356,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -3428,13 +3386,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -3543,16 +3494,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, rdm]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -4045,25 +3986,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:    2
-          ice:     1
-          wind:    4
-          earth:   4
-          thunder: 2
-          water:   2
-          light:   2
-          dark:    2
-        rank_status:
-          paralyze:    1
-          bind:        1
-          silence:     4
-          slow:        4
-          poison:      2
-          light_sleep: 2
-          dark_sleep:  2
-          blind:       2
       render:
         look:
           type:  standard
@@ -4086,16 +4008,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard

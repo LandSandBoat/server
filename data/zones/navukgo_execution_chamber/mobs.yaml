@@ -13,25 +13,6 @@ templates:
         delay:    480
         dmg_mult: 125
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    7
-          ice:     7
-          wind:    2
-          earth:   7
-          thunder: 7
-          water:   2
-          light:   4
-          dark:    4
-        rank_status:
-          paralyze:    7
-          bind:        7
-          silence:     2
-          slow:        7
-          poison:      2
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -267,17 +248,6 @@ templates:
         skill: scythe
         delay: 170
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:  11
-          wind:   2
-          earth: -1
-          dark:  -1
-        rank_status:
-          silence:     2
-          slow:       -1
-          dark_sleep: -1
-          blind:      -1
       render:
         look:
           type:  standard

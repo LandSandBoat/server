@@ -1262,16 +1262,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        rank_element:
-          fire:  4
-          ice:   1
-          dark: -3
-        rank_status:
-          paralyze:    1
-          bind:        1
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard

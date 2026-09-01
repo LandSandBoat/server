@@ -924,9 +924,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1380,18 +1377,6 @@ templates:
         skill: scythe
         delay: 200
       jobs: [brd, brd]
-      resists:
-        rank_element:
-          fire:    6
-          thunder: 6
-          water:   6
-          light:   6
-          dark:    6
-        rank_status:
-          poison:      6
-          light_sleep: 6
-          dark_sleep:  6
-          blind:       6
       render:
         look:
           type:  standard
@@ -1646,9 +1631,6 @@ templates:
         skill: hand_to_hand
         delay: 360
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

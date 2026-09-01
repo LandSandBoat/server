@@ -31,22 +31,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          ice:     11
-          wind:     2
-          earth:   11
-          thunder:  2
-          water:   11
-          light:    2
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:      2
-          slow:        11
-          poison:      11
-          light_sleep:  2
       render:
         look:
           type:  standard
@@ -241,12 +225,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        rank_element:
-          dark: -3
-        rank_status:
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -290,21 +268,6 @@ templates:
     attributes:
       combat:
         skill: polearm
-      resists:
-        rank_element:
-          ice:   9
-          earth: 4
-          water: 2
-          light: 6
-          dark:  4
-        rank_status:
-          paralyze:    9
-          bind:        9
-          slow:        4
-          poison:      2
-          light_sleep: 6
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard

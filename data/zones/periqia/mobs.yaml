@@ -55,9 +55,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          thunder: -2
       render:
         look:
           type:  standard
@@ -733,19 +730,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton
@@ -767,19 +751,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          ice:   -2
-          water:  3
-          light: -2
-          dark:   2
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          poison:       3
-          light_sleep: -2
-          dark_sleep:   2
-          blind:        2
       render:
         look:
           type:  automaton

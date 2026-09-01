@@ -56,13 +56,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -234,13 +227,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard
@@ -1111,13 +1097,6 @@ templates:
           piercing: -6250
           blunt:    -6250
           h2h:      -6250
-        rank_element:
-          light: 8
-          dark:  1
-        rank_status:
-          light_sleep: 8
-          dark_sleep:  1
-          blind:       1
       render:
         look:
           type:  standard

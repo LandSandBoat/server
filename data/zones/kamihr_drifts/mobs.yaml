@@ -505,14 +505,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, war]
-      resists:
-        rank_element:
-          light: 10
-          dark:  10
-        rank_status:
-          light_sleep: 10
-          dark_sleep:  10
-          blind:       10
       render:
         look:
           type:  standard
@@ -653,12 +645,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          dark: 10
-        rank_status:
-          dark_sleep: 10
-          blind:      10
       render:
         look:
           type:  standard

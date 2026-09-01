@@ -167,18 +167,6 @@ templates:
         skill: great_katana
         delay: 280
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          ice:     -2
-          wind:     2
-          thunder: -1
-          dark:    -1
-        rank_status:
-          paralyze:   -2
-          bind:       -2
-          silence:     2
-          dark_sleep: -1
-          blind:      -1
       render:
         look:
           type:  standard
