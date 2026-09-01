@@ -28,3 +28,4 @@ transport:
           seconds:   60
         - state:     cycling
           animation: animation_19
+          hide:      57
