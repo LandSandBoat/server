@@ -23,9 +23,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params     = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem = xi.ecosystem.LIZARD
 
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+    if params.hasAzureLore then
         params.bonusAcc = 70
-    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    elseif params.hasChainAffinity then
         params.bonusAcc = math.floor(caster:getTP() / 50)
     end
 

@@ -166,17 +166,18 @@ end
 ---@param caster CBaseEntity
 ---@param target CBaseEntity
 ---@param spell CSpell
+---@param params blueSkillParams
 ---@return number
-local function getPhysicalBlueMagicBaseDamage(caster, target, spell)
+local function getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
     local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local multiplier = 1
     local extraDmg   = 0
 
-    if caster:hasStatusEffect(xi.effect.EFFLUX) then
+    if params.hasEfflux then
         multiplier = 1.5
     end
 
-    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    if params.hasChainAffinity then
         extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
     end
 
@@ -192,9 +193,9 @@ end
 local calculateCritChance = function(caster, target, params)
     if
         params.critChance ~= nil and
-        (caster:hasStatusEffect(xi.effect.AZURE_LORE) or
-        caster:hasStatusEffect(xi.effect.EFFLUX) or
-        caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY))
+        (params.hasAzureLore or
+        params.hasEfflux or
+        params.hasChainAffinity)
     then
         -- native blue magic crit rate is 0%. Remove 5% on input.
         -- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S8:Y8
@@ -207,17 +208,18 @@ local calculateCritChance = function(caster, target, params)
 end
 
 ---@param caster CBaseEntity
+---@param params blueSkillParams
 ---@return number
-local getTPBonus = function(caster)
+local getTPBonus = function(caster, params)
     local tp = 0
 
     -- Efflux acts like a 1k tp Chain Affinity
     -- With Chain Affinity, this is effectively TP bonus +1000.
-    if caster:hasStatusEffect(xi.effect.EFFLUX) then
+    if params.hasEfflux then
         tp = 1000 -- TOOD: add Efflux bonus gear as mod
     end
 
-    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    if params.hasChainAffinity then
         tp = tp + caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
         tp = utils.clamp(tp, 0, 3000)
     end
@@ -226,8 +228,9 @@ local getTPBonus = function(caster)
 end
 
 ---@param caster CBaseEntity
+---@param params blueSkillParams
 ---@return number
-local getWSCBonuses = function(caster)
+local getWSCBonuses = function(caster, params)
     local bonusWSC = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
@@ -235,7 +238,7 @@ local getWSCBonuses = function(caster)
         bonusWSC = 2
     end
 
-    if caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+    if params.hasChainAffinity then
         bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
@@ -337,7 +340,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
 
     -- Initial D value
-    local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell)
+    local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
     initialD       = utils.clamp(initialD, 0, params.baseDamageCap)
 
     -- fSTR
@@ -352,8 +355,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- ftp, bonus WSC
     local ftp        = params.ftp0 or 1
-    local bonusWSC   = getWSCBonuses(caster)
-    local tp         = getTPBonus(caster)
+    local bonusWSC   = getWSCBonuses(caster, params)
+    local tp         = getTPBonus(caster, params)
 
     if tp > 0 then
         ftp = xi.spells.blue.calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
@@ -383,7 +386,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     local isCannonball         = spell:getID() == xi.magic.spell.CANNONBALL
     local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
-    local spellAttackMod       = params.attackMult -- TODO: implement
+    local spellAttackMod       = params.attackMult
     local attackMultiplier     = spellAttackMod * potencyAttackMod
     local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster)
     local hitrate              = calculateHitrate(caster, target, params.bonusAcc)
@@ -493,7 +496,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         wscMultiplier = wscMultiplier + 1
     end
 
-    if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+    if params.hasBurstAffinity then
         wscMultiplier = wscMultiplier + 1 + caster:getMod(xi.mod.ENHANCES_BURST_AFFINITY) / 100
     end
 
@@ -505,7 +508,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
 
     -- Azure Lore
     local azureBonus = 0
-    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+    if params.hasAzureLore then
         azureBonus = params.azureBonus or 0
     end
 
@@ -539,8 +542,8 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
-        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+        params.hasBurstAffinity or
+        params.hasAzureLore
     then
         if skillchainCount > 0 then
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
@@ -605,8 +608,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
-        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+        params.hasBurstAffinity or
+        params.hasAzureLore
     then
         if skillchainCount > 0 then
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))

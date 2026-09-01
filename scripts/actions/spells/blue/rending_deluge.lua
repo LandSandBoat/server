@@ -19,16 +19,17 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local multi = 1.0
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 1.50
-    end
-
     local params       = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem   = xi.ecosystem.AQUAN
     params.attackType  = xi.attackType.MAGICAL
     params.damageType  = xi.damageType.WATER
     params.dStat       = xi.mod.INT
+
+    local multi = 1.0
+
+    if params.hasAzureLore then
+        multi = multi + 1.50
+    end
 
     params.ftp0            = multi
     params.dStatMultiplier = 3.5
