@@ -46,8 +46,9 @@ struct ElevatorData
     std::string  UpperDoor;
     xi::Elevator Lever{};
     bool         Reversed{};
-    uint8        Travel{}; // seconds between floors, and what the client animates against
-    uint32       Period{}; // milliseconds for one leg, travel and the wait at the floor together
+    uint8        Travel{};    // seconds between floors, and what the client animates against
+    uint32       Period{};    // milliseconds for one leg, travel and the wait at the floor together
+    uint32       DoorDelay{}; // milliseconds the shut door waits before the platform leaves
 };
 
 struct NpcData
@@ -71,6 +72,7 @@ struct NpcData
     uint8                  Speed{};
     uint8                  AnimationSpeed{};
     bool                   Widescan{};
+    bool                   King{};
     xi::Content            Content{};
     Maybe<ElevatorData>    Elevator;
 };

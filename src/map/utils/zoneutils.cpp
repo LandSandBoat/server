@@ -173,6 +173,7 @@ void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npc
         PNpc->modelSize       = entry.ModelSize;
         PNpc->modelHitboxSize = std::max<float>(0.0f, entry.ModelHitboxSize / 10.f);
         PNpc->setWidescan(entry.Widescan);
+        PNpc->setAlwaysRelevant(entry.King);
 
         if (!luautils::IsContentEnabled(entry.Content))
         {

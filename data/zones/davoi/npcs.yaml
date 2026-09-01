@@ -291,6 +291,7 @@ npcs:
       lever:      davoi_lift
       reversed:   true
       travel:     4
+      door_delay: 3400
 
   17387997:
     script: _453

@@ -45,7 +45,7 @@ transport:
           seconds:   31
           moves:
             - to:    dock
-              after: 1
+              after: 2
         - state:     docked
           seconds:   84
         - state:     closing
@@ -54,7 +54,7 @@ transport:
           animation: animation_19
           moves:
             - to:    hidden
-              after: 29
+              after: 31
     barge_central_south_day:
       door: _02t
       dock: [-125.042, 0.000, 72.786, 160]
@@ -71,7 +71,7 @@ transport:
           seconds:   31
           moves:
             - to:    dock
-              after: 1
+              after: 2
         - state:     docked
           seconds:   69
         - state:     closing
@@ -80,7 +80,7 @@ transport:
           animation: animation_21
           moves:
             - to:    hidden
-              after: 29
+              after: 31
     barge_south_oos_day:
       dock: [246.377, 0.000, -529.793, 64]
       places:
@@ -95,11 +95,11 @@ transport:
           animation: animation_23
           moves:
             - to:    dock
-              after: 1
+              after: 2
             - to:    outbound
-              after: 54
+              after: 56
             - to:    hidden
-              after: 77
+              after: 79
 
     barge_south_north:
       door: _02s
@@ -117,7 +117,7 @@ transport:
           seconds:   31
           moves:
             - to:    dock
-              after: 1
+              after: 2
         - state:     docked
           seconds:   84
         - state:     closing
@@ -126,7 +126,7 @@ transport:
           animation: animation_19
           moves:
             - to:    hidden
-              after: 29
+              after: 31
     barge_north_oos:
       dock: [-291.355, 0.000, 516.868, 160]
       places:
@@ -141,11 +141,11 @@ transport:
           animation: animation_22
           moves:
             - to:    dock
-              after: 1
+              after: 2
             - to:    outbound
-              after: 51
+              after: 53
             - to:    hidden
-              after: 81
+              after: 82
 
     barge_north_central:
       door: _02u
@@ -163,7 +163,7 @@ transport:
           seconds:   40
           moves:
             - to:    dock
-              after: 1
+              after: 2
         - state:     docked
           seconds:   93
         - state:     closing
@@ -172,7 +172,7 @@ transport:
           animation: animation_25
           moves:
             - to:    hidden
-              after: 26
+              after: 27
     barge_central_south_night:
       door: _02t
       dock: [-125.042, 0.000, 72.786, 160]
@@ -189,7 +189,7 @@ transport:
           seconds:   31
           moves:
             - to:    dock
-              after: 1
+              after: 2
         - state:     docked
           seconds:   69
         - state:     closing
@@ -198,7 +198,7 @@ transport:
           animation: animation_21
           moves:
             - to:    hidden
-              after: 29
+              after: 31
     barge_south_oos_night:
       dock: [246.377, 0.000, -529.793, 64]
       places:
@@ -213,8 +213,8 @@ transport:
           animation: animation_23
           moves:
             - to:    dock
-              after: 1
+              after: 2
             - to:    outbound
-              after: 54
+              after: 56
             - to:    hidden
-              after: 77
+              after: 79

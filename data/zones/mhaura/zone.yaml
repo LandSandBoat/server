@@ -37,7 +37,7 @@ transport:
           seconds:   41
           moves:
             - to:    dock
-              after: 18
+              after: 20
         - state:     docked
           seconds:   192
         - state:     closing
@@ -47,7 +47,7 @@ transport:
           animation: animation_19
           moves:
             - to:    staging
-              after: 18
+              after: 20
     mhaura_whitegate_boat:
       door: _6xw
       dock: [-0.516, 0.026, -8.409, 0]
@@ -65,7 +65,7 @@ transport:
           seconds:   41
           moves:
             - to:    dock
-              after: 18
+              after: 20
         - state:     docked
           seconds:   192
         - state:     closing
@@ -75,4 +75,4 @@ transport:
           animation: animation_19
           moves:
             - to:    staging
-              after: 18
+              after: 20

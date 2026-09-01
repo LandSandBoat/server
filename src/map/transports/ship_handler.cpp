@@ -97,15 +97,6 @@ void ShipHandler::registerShip(const xi::data::TransportData& entry, CZone* PDoc
         }
     }
 
-    if (std::ranges::any_of(entry.Phases,
-                            [](const auto& phase)
-                            {
-                                return phase.State == xi::TransportState::Docked;
-                            }))
-    {
-        PShip->setAlwaysRelevant(true);
-    }
-
     // A ship only moves if some phase tells it to.
     const auto relocates = std::ranges::any_of(entry.Phases,
                                                [](const auto& phase)

@@ -37,7 +37,7 @@ transport:
           seconds:   41
           moves:
             - to:    dock
-              after: 18
+              after: 20
         - state:     docked
           seconds:   192
         - state:     closing
@@ -47,4 +47,4 @@ transport:
           animation: animation_19
           moves:
             - to:    staging
-              after: 18
+              after: 20

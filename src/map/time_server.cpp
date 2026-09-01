@@ -30,8 +30,6 @@
 #include "roe.h"
 #include "spawn_handler.h"
 #include "timetriggers.h"
-#include "transports/elevator_handler.h"
-#include "transports/ship_handler.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/moduleutils.h"
@@ -182,8 +180,6 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
     }
 
     CTriggerHandler::getInstance()->triggerTimer();
-    ShipHandler::getInstance()->tick();
-    ElevatorHandler::getInstance()->tick();
     co_await instanceutils::CheckInstance(scheduler, config);
     co_await zoneutils::ProcessLoadQueue(scheduler, config);
     luautils::OnTimeServerTick();

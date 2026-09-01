@@ -282,6 +282,8 @@ void CZoneEntities::InsertNPC(CBaseEntity* PNpc)
 
         if (PNpc->look.size == MODEL_SHIP)
         {
+            static_cast<CNpcEntity*>(PNpc)->setAlwaysRelevant(true);
+
             if (m_TransportList.contains(PNpc->targid))
             {
                 ShowError("Error: Inserting Transport NPC with duplicate ID!");

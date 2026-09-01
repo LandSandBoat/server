@@ -283,6 +283,7 @@ npcs:
       lever:      palborough_mines_lift
       reversed:   true
       travel:     8
+      door_delay: 2200
 
   17363348:
     script:       Mythril_Seam

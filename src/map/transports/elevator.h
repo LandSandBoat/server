@@ -36,6 +36,7 @@ struct Elevator
     uint64            legStarted{};         // milliseconds since the Vana'diel epoch, when the current leg began
     uint32            period{};             // how long a leg takes, in milliseconds because retail runs them on fractions of a second
     uint32            movetime{};           // seconds between floors, which is also what the client animates against
+    uint32            doorDelay{};          // milliseconds the shut door waits before the platform leaves
     CNpcEntity*       platform{};           // the floor that carries players
     CNpcEntity*       lowerDoor{};          // door at the bottom of the shaft
     CNpcEntity*       upperDoor{};          // door at the top
