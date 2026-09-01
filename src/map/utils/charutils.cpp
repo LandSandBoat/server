@@ -6293,8 +6293,9 @@ void SavePlayTime(CCharEntity* PChar)
 
     db::preparedStmt("UPDATE chars SET playtime = ? WHERE charid = ? LIMIT 1", playtime, PChar->id);
 
-    // Removes new player icon if played for more than 240 hours
-    if (PChar->isNewPlayer() && playDuration >= 240h)
+    // Removes new player icon if played for more than the configured number of hours
+    const uint32 playtimeLimit = settings::get<uint32>("main.NEW_ADVENTURER_PLAYTIME_LIMIT");
+    if (PChar->isNewPlayer() && playDuration >= std::chrono::hours(playtimeLimit))
     {
         PChar->playerConfig.NewAdventurerOffFlg = true;
         PChar->updatemask |= UPDATE_HP;
