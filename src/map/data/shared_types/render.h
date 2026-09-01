@@ -47,6 +47,7 @@ struct Render
     std::optional<uint8>                          name_prefix;
     std::optional<uint8>                          model_size;
     std::optional<uint8>                          hitbox;
+    std::optional<bool>                           king;
 };
 
 } // namespace xi::data::shared
@@ -64,4 +65,5 @@ struct glz::json_schema<xi::data::shared::Render>
     glz::schema name_prefix{ .description = "Byte 0x27 of the entity update: gender, plus the article the client shows before the name. Defaults to 0.", .minimum = 0L, .maximum = 255L };
     glz::schema model_size{ .description = "Graphic size the client draws the entity at, 0 to 3. Defaults to 0.", .minimum = 0L, .maximum = 3L };
     glz::schema hitbox{ .description = "Hitbox radius in tenths of a yalm. Defaults to 0.", .minimum = 0L, .maximum = 255L };
+    glz::schema king{ .description = "Whether the entity stays spawned beyond render range. Defaults to false." };
 };

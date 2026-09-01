@@ -71,6 +71,7 @@ struct NpcData
     uint8                  Speed{};
     uint8                  AnimationSpeed{};
     bool                   Widescan{};
+    bool                   King{};
     xi::Content            Content{};
     Maybe<ElevatorData>    Elevator;
 };
