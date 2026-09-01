@@ -420,6 +420,14 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
     end
 
+    if
+        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)
+    then
+        hitrate           = -1
+        sneakIsApplicable = false
+    end
+
     params.tpHitsLanded = 0
     params.hitsLanded   = 0
 
