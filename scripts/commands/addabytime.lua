@@ -43,8 +43,8 @@ commandObj.onTrigger = function(player, minutes, target)
     end
 
     -- add time
-    local oldDuration = tonumber(effect:getDuration())
-    local newDuration = (oldDuration + (tonumber(minutes) * 60)) * 1000
+    local oldDuration = effect:getTimeRemaining()
+    local newDuration = oldDuration + tonumber(minutes) * 60 * 1000
 
     effect:setDuration(newDuration)
     effect:resetStartTime()

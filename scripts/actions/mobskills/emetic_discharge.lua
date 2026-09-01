@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
             local statusEffect = mob:getStatusEffect(effect)
 
             if statusEffect then
-                target:addStatusEffect(effect, { power = statusEffect:getPower(), duration = statusEffect:getDuration(), origin = mob, tick = statusEffect:getTick() })
+                target:copyStatusEffect(statusEffect)
                 mob:delStatusEffect(effect)
             end
         end

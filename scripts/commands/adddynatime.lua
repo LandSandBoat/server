@@ -46,7 +46,7 @@ commandObj.onTrigger = function(player, minutes, target)
     local zoneId = targ:getZoneID()
     local ID = zones[zoneId]
     local oldDuration = effect:getDuration()
-    effect:setDuration((oldDuration + (minutes * 60)) * 1000)
+    effect:setDuration(oldDuration + minutes * 60 * 1000)
     targ:setLocalVar('dynamis_lasttimeupdate', effect:getTimeRemaining() / 1000)
     targ:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, minutes)
 end

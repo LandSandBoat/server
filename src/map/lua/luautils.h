@@ -482,12 +482,12 @@ bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUse
 auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
 void OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);
-void AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
-auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId;                      // triggers when an instance load is failed (ie. instance no longer exists)
-void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
-void OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
-void OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
+void AfterInstanceRegister(CBaseEntity* PChar);                                // triggers after a character is registered and zoned into an instance (the first time)
+auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId;                         // triggers when an instance load is failed (ie. instance no longer exists)
+void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 seconds); // triggers every second for an instance, with the elapsed seconds
+void OnInstanceFailure(CInstance* PInstance);                                  // triggers when an instance is failed
+void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);      // triggers when an instance is created (per character - waiting outside for entry)
+void OnInstanceCreated(CInstance* PInstance);                                  // triggers when an instance is created (instance setup)
 void OnInstanceProgressUpdate(CInstance* PInstance);
 void OnInstanceStageChange(CInstance* PInstance);
 void OnInstanceComplete(CInstance* PInstance);

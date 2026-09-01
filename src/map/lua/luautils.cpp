@@ -5053,7 +5053,7 @@ auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId
     return result.get_type(0) == sol::type::number ? result.get<xi::ZoneId>(0) : xi::ZoneId::Unknown;
 }
 
-void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time)
+void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 seconds)
 {
     TracyZoneScoped;
 
@@ -5065,7 +5065,7 @@ void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time)
         return;
     }
 
-    auto result = onInstanceTimeUpdate(PInstance, time);
+    auto result = onInstanceTimeUpdate(PInstance, seconds);
     if (!result.valid())
     {
         sol::error err = result;

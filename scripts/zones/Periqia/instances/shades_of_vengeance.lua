@@ -25,7 +25,7 @@ instanceObject.afterInstanceRegister = function(player)
     end
 
     player:addTempItem(xi.item.CAGE_OF_DVUCCA_FIREFLIES)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 
 instanceObject.onInstanceCreated = function(instance)

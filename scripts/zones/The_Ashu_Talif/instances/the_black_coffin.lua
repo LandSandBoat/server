@@ -55,7 +55,7 @@ instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.EPHRAMADIAN_GOLD_COIN)
     player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
