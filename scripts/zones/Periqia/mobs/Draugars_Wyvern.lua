@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Periqia
---  Mob: Putrid Immortal Guard
+--  Mob: Draugar's Wyvern
 -- Involved in Assault: Requiem
 -----------------------------------
 ---@type TMobEntity
@@ -9,22 +9,13 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.HPP, -10)
     mob:setMod(xi.mod.ATTP, 15)
-    mob:setMod(xi.mod.STORETP, 5)
+    mob:setMod(xi.mod.DMGBREATH, -5000)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller or optParams.noKiller then
-        local instance = mob:getInstance()
-        if not instance then
-            return
-        end
-
-        instance:setProgress(instance:getProgress() + 1)
-    end
 end
 
 return entity

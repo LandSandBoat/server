@@ -46,10 +46,17 @@ zones[xi.zone.PERIQIA] =
         ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
         RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
         _1K6            = GetFirstID('_1k6'),
+        _1KH            = GetFirstID('_1kh'),
+        _1KT            = GetFirstID('_1kt'),
         _1KX            = GetFirstID('_1kx'),
         _1KZ            = GetFirstID('_1kz'),
         _JK1            = GetFirstID('_jk1'),
         _JK3            = GetFirstID('_jk3'),
+        _JK5            = GetFirstID('_jk5'),
+        _JK6            = GetFirstID('_jk6'),
+        _JK7            = GetFirstID('_jk7'),
+        _JKH            = GetFirstID('_jkh'),
+        _JKI            = GetFirstID('_jki'),
     }
 }
 

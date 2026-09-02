@@ -35,6 +35,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         CANNOT_ENTER                  = 7484, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 7485, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 7489, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
+        MISSING_KEY_ITEM              = 7490, -- You are not in possession of <keyitem>. Unable to enter area.
         MEMBER_TOO_FAR                = 7493, -- One or more party members are too far away from the entrance. Unable to enter area.
         JAZARAATS_HEADSTONE           = 7553, -- The name Sir Jazaraat is engraved on the headstone...
         SOMEONE_SLIPPED               = 7600, -- It looks like someone slipped here...
