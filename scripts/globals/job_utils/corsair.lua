@@ -1031,6 +1031,14 @@ xi.job_utils.corsair.useElementalShot = function(actor, target, ability, action)
         actor:trySkillUp(xi.skill.MARKSMANSHIP, target:getMainLvl())
     end
 
+    -- Return early to not boost effects on absorb (probably doesn't happen)
+    -- if message is not set explicitly, a 100% HPP absorb reports the wrong message
+    if damage < 0 then
+        ability:setMsg(xi.msg.basic.JA_RECOVERS_HP)
+
+        return damage
+    end
+
     -- Handle effect boost.
     xi.job_utils.corsair.handleQuickDrawEffectBoost(actor, target, abilityId, data.multiplier)
 
