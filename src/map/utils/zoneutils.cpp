@@ -794,6 +794,48 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
             PZone->ForEachMob(
                 [&PZone](CMobEntity* PMob)
                 {
+                    // Check if mob is spawnable via lottery
+                    if (PMob->m_SpawnType == SPAWNTYPE_LOTTERY)
+                    {
+                        auto zone = PMob->loc.zone->getName();
+                        auto name = PMob->getName();
+
+                        auto phList = lua["xi"]["zones"][zone]["mobs"][name]["phList"];
+                        if (phList.valid())
+                        {
+                            auto table      = phList.get<sol::table>();
+                            bool hasEntries = false;
+                            bool mobInList  = false;
+
+                            for (auto& [phObj, nmObj] : table)
+                            {
+                                [[maybe_unused]] uint32 phID = phObj.as<uint32>(); // TODO: check if the PH is spawnable?
+                                uint32                  nmID = nmObj.as<uint32>();
+
+                                if (nmID == PMob->id)
+                                {
+                                    mobInList = true;
+                                }
+
+                                hasEntries = true;
+                            }
+
+                            if (!hasEntries)
+                            {
+                                ShowErrorFmt("Lottery spawn NM '{}' in zone '{}' has a blank phList", name, zone);
+                            }
+
+                            if (!mobInList)
+                            {
+                                ShowErrorFmt("Lottery spawn NM '{}' ID ({}) in zone '{}' has a phList that doesn't contain itself as a spawnable NM", name, PMob->id, zone);
+                            }
+                        }
+                        else
+                        {
+                            ShowErrorFmt("Lottery spawn NM '{}' in zone '{}' is missing a phList and may not be spawnable", name, zone);
+                        }
+                    }
+
                     // Skip mobs already registered via setRespawnTime in onMobInitialize - let SpawnHandler handle them
                     if (PZone->spawnHandler().isRegistered(PMob))
                     {
