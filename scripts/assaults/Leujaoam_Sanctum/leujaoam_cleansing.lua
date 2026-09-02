@@ -20,7 +20,7 @@ local content = InstanceAssault:new(
 
     suggestedLevel   = 50,
     basePoints       = 1000,
-    requiredProgress = 14,
+    requiredProgress = 15,
 
     entranceParams   =
     {
@@ -41,25 +41,25 @@ content.loot =
     appraisalReward =
     {
         {
-            { itemId = xi.item.UNAPPRAISED_RING, weight = 7000 },
-            { itemId = xi.item.UNAPPRAISED_BOX,  weight = 3000 },
+            { itemId = xi.item.UNAPPRAISED_RING, weight =  7000 },
+            { itemId = xi.item.UNAPPRAISED_BOX,  weight =  3000 },
         },
     },
 
     bonusLoot =
     {
         {
-            { itemId = xi.item.REMEDY,       weight = 10000 },
+            { itemId = xi.item.REMEDY,           weight = 10000 },
         },
 
         {
-            { itemId = xi.item.HI_POTION_P3, weight = 5000 },
-            { itemId = xi.item.REMEDY,       weight = 5000 },
+            { itemId = xi.item.HI_POTION_P3,     weight =  5000 },
+            { itemId = xi.item.REMEDY,           weight =  5000 },
         },
 
         {
-            { itemId = xi.item.HI_POTION_P3, weight = 1000 },
-            { itemId = xi.item.NONE,         weight = 9000 },
+            { itemId = xi.item.HI_POTION_P3,     weight =  1000 },
+            { itemId = xi.item.NONE,             weight =  9000 },
         },
     },
 }

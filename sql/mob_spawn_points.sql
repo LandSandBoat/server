@@ -920,8 +920,8 @@ INSERT INTO `mob_spawn_points` VALUES (17059850,0,'Leujaoam_Worm','Leujaoam Worm
 INSERT INTO `mob_spawn_points` VALUES (17059851,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,479.888,7.716,-39.545,57,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17059852,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,477.563,7.846,-73.208,170,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17059853,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,478.236,7.749,-80.324,76,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059854,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,498.838,7.653,-87.358,111,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059855,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,471.118,7.849,-54.299,239,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059854,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,496.618,8.201,-70.702,144,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059855,0,'Leujaoam_Worm','Leujaoam Worm',1,76,78,483.888,8.027,-54.894,92,NULL,NULL);
 
 -- Orichalcum survey assaut entrance @ -432 -27.627 169
 -- all worms spawn @ mining points in npc_list
