@@ -19,9 +19,6 @@
 --I did alot of copy/pasting, so you may notice a reduncency on comments XD
 --But it can make it easier to follow aswell.
 
---"Mamaulabion will inform you of the items delivered thus far, as of the May 2011 update."
---i have no clue where this event is, so i have no idea how to add this (if this gets scripted, please remove this comment)
-
 --"Upon completion of this quest, the above items no longer appear in the rewards list for defeating the Prime Avatars."
 --will require changing other avatar quests and making a variable for it all. (if this gets scripted, please remove this comment)
 
@@ -49,15 +46,15 @@ entity.onTrade = function(player, npc, trade)
             local wasSet = utils.mask.getBit(mask, bitToSet)
 
             if wasSet then
-                player:startEvent(194) -- Traded an item you already gave
+                player:startEvent(194, tradedItem) -- Traded an item you already gave
             else
                 mask = utils.mask.setBit(mask, bitToSet, true)
                 player:setCharVar('tradesMamaMia', mask)
 
                 if utils.mask.isFull(mask, 7) then
-                    player:startEvent(195) -- Traded all seven items
+                    player:startEvent(195, tradedItem) -- Traded all seven items
                 else
-                    player:startEvent(193) -- Traded an item
+                    player:startEvent(193, tradedItem) -- Traded an item
                 end
             end
         end
