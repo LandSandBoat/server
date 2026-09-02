@@ -24,6 +24,9 @@
 #include "common/logging.h"
 #include "common/utils.h"
 
+#include <cmath>
+#include <numeric>
+
 // Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.
 ITriggerArea::ITriggerArea(uint32 triggerAreaID)
@@ -62,7 +65,7 @@ int16 ITriggerArea::delCount(int16 count)
 // CCuboidTriggerArea
 //
 
-CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax, float rotation)
 : ITriggerArea(triggerAreaID)
 , m_xMin(xMin)
 , m_yMin(yMin)
@@ -70,11 +73,25 @@ CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float y
 , m_xMax(xMax)
 , m_yMax(yMax)
 , m_zMax(zMax)
+, m_rotation(rotation)
+, m_sin(std::sin(rotation))
+, m_cos(std::cos(rotation))
 {
 }
 
 bool CCuboidTriggerArea::isPointInside(float x, float y, float z) const
 {
+    if (m_rotation != 0.0f)
+    {
+        const float xCentre = std::midpoint(m_xMin, m_xMax);
+        const float zCentre = std::midpoint(m_zMin, m_zMax);
+        const float dX      = x - xCentre;
+        const float dZ      = z - zCentre;
+
+        x = xCentre + dX * m_cos + dZ * m_sin;
+        z = zCentre + dZ * m_cos - dX * m_sin;
+    }
+
     return m_xMin <= x && m_yMin <= y && m_zMin <= z && m_xMax >= x && m_yMax >= y && m_zMax >= z;
 }
 

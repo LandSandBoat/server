@@ -95,9 +95,9 @@ void CLuaZone::resetLocalVars()
  *                                                                       *
  ************************************************************************/
 
-void CLuaZone::registerCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+void CLuaZone::registerCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax, sol::optional<float> rotation)
 {
-    auto tArea = std::make_unique<CCuboidTriggerArea>(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax);
+    auto tArea = std::make_unique<CCuboidTriggerArea>(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax, rotation.value_or(0.0f));
     m_pLuaZone->InsertTriggerArea(std::move(tArea));
 }
 

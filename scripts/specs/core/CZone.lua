@@ -25,7 +25,7 @@ function CZone:resetLocalVars()
 end
 
 ---@return nil
-function CZone:registerCuboidTriggerArea(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax)
+function CZone:registerCuboidTriggerArea(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax, rotation)
 end
 
 ---@return nil
