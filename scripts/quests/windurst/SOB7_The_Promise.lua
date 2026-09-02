@@ -171,18 +171,21 @@ quest.sections =
             {
                 [522] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
 
                 [534] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
 
                 [542] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
