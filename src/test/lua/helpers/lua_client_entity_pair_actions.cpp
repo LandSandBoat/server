@@ -50,6 +50,7 @@
 #include "map/packets/c2s/0x053_lockstyle.h"
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
+#include "map/packets/c2s/0x077_group_change2.h"
 #include "map/packets/c2s/0x083_shop_buy.h"
 #include "map/packets/c2s/0x096_combine_ask.h"
 #include "map/packets/c2s/0x0aa_guild_buy.h"
@@ -445,6 +446,32 @@ void CLuaClientEntityPairActions::acceptPartyInvite() const
     const auto packet         = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_SOLICIT_RES>();
     auto*      responsePacket = packet->as<GP_CLI_COMMAND_GROUP_SOLICIT_RES>();
     responsePacket->Res       = static_cast<uint8>(GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: setLevelSync()
+ *  Purpose : Emits packet to level sync the party to a member.
+ *  Example : player.actions:setLevelSync(player2)
+ *  Notes   : Caller must be the party leader.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::setLevelSync(CLuaBaseEntity* player) const
+{
+    if (!player)
+    {
+        TestError("setLevelSync: Invalid player");
+        return;
+    }
+
+    const auto packet      = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_CHANGE2>();
+    auto*      syncPacket  = packet->as<GP_CLI_COMMAND_GROUP_CHANGE2>();
+    syncPacket->Kind       = static_cast<uint8_t>(GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party);
+    syncPacket->ChangeKind = static_cast<uint8_t>(GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND::SetLevelSync);
+
+    const auto name = player->getName();
+    std::memcpy(syncPacket->sName, name.c_str(), std::min(name.size(), sizeof(syncPacket->sName) - 1));
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -1102,6 +1129,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("inviteToParty", CLuaClientEntityPairActions::inviteToParty);
     SOL_REGISTER("formAlliance", CLuaClientEntityPairActions::formAlliance);
     SOL_REGISTER("acceptPartyInvite", CLuaClientEntityPairActions::acceptPartyInvite);
+    SOL_REGISTER("setLevelSync", CLuaClientEntityPairActions::setLevelSync);
     SOL_REGISTER("tradeNpc", CLuaClientEntityPairActions::tradeNpc);
     SOL_REGISTER("tradeRequest", CLuaClientEntityPairActions::tradeRequest);
     SOL_REGISTER("tradeAccept", CLuaClientEntityPairActions::tradeAccept);
