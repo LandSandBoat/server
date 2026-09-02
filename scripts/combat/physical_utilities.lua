@@ -422,6 +422,24 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     return fSTR
 end
 
+-- Calculates alpha, used for working out WSC on legacy servers. Retail has no alpha anymore as of 2014 Weaponskill functions.
+xi.combat.physical.calculateAlpha = function(actor)
+    local alpha = 1
+
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        local level = actor:getMainLvl()
+        if level > 75 then
+            alpha = 0.85
+        elseif level > 59 then
+            alpha = 0.9 - math.floor((level - 60) / 2) / 100
+        elseif level > 5 then
+            alpha = 1 - math.floor(level / 6) / 100
+        end
+    end
+
+    return alpha
+end
+
 -- Weapon Skill Secondary Attribute Modifier: Function used to get stat addition to base damage.
 xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, wsAGImod, wsINTmod, wsMNDmod, wsCHRmod)
     local finalWSC = 0
@@ -445,6 +463,10 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
     local wscCHR = math.floor(actor:getStat(xi.mod.CHR) * (chrMultiplier + actor:getMod(xi.mod.WS_CHR_BONUS) / 100))
 
     finalWSC = wscSTR + wscDEX + wscVIT + wscAGI + wscINT + wscMND + wscCHR
+
+    if finalWSC > 0 then
+        finalWSC = finalWSC * xi.combat.physical.calculateAlpha(actor)
+    end
 
     return finalWSC
 end
