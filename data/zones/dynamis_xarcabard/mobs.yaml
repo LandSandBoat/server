@@ -315,7 +315,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       resists:
         rank_element:
@@ -825,6 +825,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 5
+    skill_list_id: 2111
     attributes:
       combat:
         skill: katana
@@ -886,6 +887,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 30
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -925,7 +927,7 @@ templates:
     id:            817
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: katana
@@ -963,7 +965,7 @@ templates:
     id:            818
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1001,7 +1003,7 @@ templates:
     id:            819
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1039,7 +1041,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 3
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: katana
@@ -1077,11 +1079,11 @@ templates:
     id:            1133
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -1117,6 +1119,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 3
+    skill_list_id: 2111
     attributes:
       combat:
         skill: katana
@@ -1157,7 +1160,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 5
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
@@ -1385,7 +1388,7 @@ templates:
     id:            2232
     species:       kindred
     spell_list_id: 6
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -1418,7 +1421,7 @@ templates:
     id:            6615
     species:       kindred
     spell_list_id: 6
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -1452,7 +1455,7 @@ templates:
   Kindred_Beastmaster:
     id:            2233
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1484,7 +1487,7 @@ templates:
   Kindred_Beastmaster_HI:
     id:            6616
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1519,7 +1522,7 @@ templates:
     id:            2234
     species:       kindred
     spell_list_id: 21
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: staff
@@ -1553,7 +1556,7 @@ templates:
     id:            6618
     species:       kindred
     spell_list_id: 21
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: staff
@@ -1589,7 +1592,7 @@ templates:
     id:            2235
     species:       kindred
     spell_list_id: 5
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1622,7 +1625,7 @@ templates:
     id:            6620
     species:       kindred
     spell_list_id: 5
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1656,7 +1659,7 @@ templates:
   Kindred_Dragoon:
     id:            2236
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1688,7 +1691,7 @@ templates:
   Kindred_Dragoon_HI:
     id:            6621
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1722,7 +1725,7 @@ templates:
   Kindred_Monk:
     id:            2237
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1754,7 +1757,7 @@ templates:
   Kindred_Monk_HI:
     id:            6622
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1789,7 +1792,7 @@ templates:
     id:            2238
     species:       kindred
     spell_list_id: 7
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
@@ -1823,7 +1826,7 @@ templates:
     id:            6623
     species:       kindred
     spell_list_id: 7
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
@@ -1859,7 +1862,7 @@ templates:
     id:            2239
     species:       kindred
     spell_list_id: 4
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1892,7 +1895,7 @@ templates:
     id:            6624
     species:       kindred
     spell_list_id: 4
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -1926,7 +1929,7 @@ templates:
   Kindred_Ranger:
     id:            2240
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1958,7 +1961,7 @@ templates:
   Kindred_Ranger_HI:
     id:            6625
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -1993,7 +1996,7 @@ templates:
     id:            2241
     species:       kindred
     spell_list_id: 3
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -2026,7 +2029,7 @@ templates:
     id:            6626
     species:       kindred
     spell_list_id: 3
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -2060,7 +2063,7 @@ templates:
   Kindred_Samurai:
     id:            2242
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2092,7 +2095,7 @@ templates:
   Kindred_Samurai_HI:
     id:            6627
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2127,7 +2130,7 @@ templates:
     id:            2243
     species:       kindred
     spell_list_id: 31
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
@@ -2161,7 +2164,7 @@ templates:
     id:            6629
     species:       kindred
     spell_list_id: 31
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
@@ -2196,7 +2199,7 @@ templates:
   Kindred_Thief:
     id:            2248
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2228,7 +2231,7 @@ templates:
   Kindred_Thief_HI:
     id:            6630
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2262,7 +2265,7 @@ templates:
   Kindred_Warrior:
     id:            2249
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -2293,7 +2296,7 @@ templates:
   Kindred_Warrior_HI:
     id:            6632
     species:       kindred
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -2327,7 +2330,7 @@ templates:
     id:            2250
     species:       kindred
     spell_list_id: 20
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -2360,7 +2363,7 @@ templates:
     id:            6633
     species:       kindred
     spell_list_id: 20
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: club
@@ -2466,7 +2469,7 @@ templates:
     id:            2263
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: polearm
@@ -2503,7 +2506,7 @@ templates:
     id:            2570
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: great_axe
@@ -2543,6 +2546,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 7
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2580,7 +2584,7 @@ templates:
     id:            2572
     species:       kindred
     type:          [notorious]
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: great_axe
@@ -2620,7 +2624,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 6
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: katana
@@ -2660,7 +2664,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 7
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2700,7 +2704,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 141
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: great_sword
@@ -2740,7 +2744,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 21
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: axe
@@ -2780,7 +2784,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 4
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: great_sword
@@ -2843,7 +2847,7 @@ templates:
     species:       kindred
     type:          [notorious]
     spell_list_id: 20
-    skill_list_id: 358
+    skill_list_id: 2111
     attributes:
       combat:
         skill: sword
@@ -2882,7 +2886,7 @@ templates:
     species:       ahriman
     type:          [notorious]
     spell_list_id: 11
-    skill_list_id: 4
+    skill_list_id: 2110
     attributes:
       combat:
         skill: staff
@@ -3144,7 +3148,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       resists:
         rank_element:
@@ -3666,7 +3670,7 @@ templates:
     species:       ahriman
     type:          [notorious]
     spell_list_id: 11
-    skill_list_id: 4
+    skill_list_id: 2110
     attributes:
       combat:
         skill: staff

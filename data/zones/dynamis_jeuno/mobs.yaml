@@ -250,7 +250,7 @@ templates:
     attributes:
       combat:
         skill: dagger
-        delay: 360
+        delay: 240
       jobs: [mnk, mnk]
       resists:
         rank_element:
