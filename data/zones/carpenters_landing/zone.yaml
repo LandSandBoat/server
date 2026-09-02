@@ -34,6 +34,7 @@ transport:
       dock: [246.377, 0.000, -529.793, 192]
       places:
         hidden: [0.000, 100.000, 0.000]
+      boundary: 2
       voyage:
         - phanauet_channel
       every:     3456
@@ -60,6 +61,7 @@ transport:
       dock: [-125.042, 0.000, 72.786, 160]
       places:
         hidden: [0.000, 100.000, 0.000]
+      boundary: 3
       voyage:
         - phanauet_channel
       every:     3456
@@ -86,6 +88,7 @@ transport:
       places:
         hidden:   [0.000, 100.000, 0.000]
         outbound: [275.000, 0.000, -560.000]
+      boundary: 2
       voyage:
         - phanauet_channel
       every:  3456 # out of service, carries nobody
@@ -106,6 +109,7 @@ transport:
       dock: [246.377, 0.000, -529.793, 192]
       places:
         hidden: [0.000, 100.000, 0.000]
+      boundary: 2
       voyage:
         - phanauet_channel
       every:     3456
@@ -132,6 +136,7 @@ transport:
       places:
         hidden:   [0.000, 100.000, 0.000]
         outbound: [-260.000, 0.000, 550.000]
+      boundary: 1
       voyage:
         - phanauet_channel
       every:  3456 # out of service, carries nobody
@@ -152,6 +157,7 @@ transport:
       dock: [-291.355, 0.000, 516.868, 32]
       places:
         hidden: [0.000, 100.000, 0.000]
+      boundary: 1
       voyage:
         - phanauet_channel
       every:     3456
@@ -178,6 +184,7 @@ transport:
       dock: [-125.042, 0.000, 72.786, 160]
       places:
         hidden: [0.000, 100.000, 0.000]
+      boundary: 3
       voyage:
         - phanauet_channel
       every:     3456
@@ -204,6 +211,7 @@ transport:
       places:
         hidden:   [0.000, 100.000, 0.000]
         outbound: [275.000, 0.000, -560.000]
+      boundary: 2
       voyage:
         - phanauet_channel
       every:  3456 # out of service, carries nobody

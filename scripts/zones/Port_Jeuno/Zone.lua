@@ -4,8 +4,20 @@
 ---@type TZone
 local zoneObject = {}
 
+local berths =
+{
+    [xi.zone.SAN_DORIA_JEUNO_AIRSHIP] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10010, ashore = 10014 },
+    [xi.zone.WINDURST_JEUNO_AIRSHIP ] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10011, ashore = 10015 },
+    [xi.zone.BASTOK_JEUNO_AIRSHIP   ] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10012, ashore = 10016 },
+    [xi.zone.KAZHAM_JEUNO_AIRSHIP   ] = { keyItem = xi.ki.AIRSHIP_PASS_FOR_KAZHAM, board = 10013, ashore = 10017 },
+}
+
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+    zone:registerCuboidTriggerArea(474, -84.1, 7.1,  113.1, -51.9, 12.9,  141.2) -- San d'Oria airship berth
+    zone:registerCuboidTriggerArea(475, -86.1, 7.1, -141.2, -53.9, 12.9, -113.1) -- Bastok airship berth
+    zone:registerCuboidTriggerArea(476, -22.1, 7.1, -141.2,  10.1, 12.9, -113.1) -- Windurst airship berth
+    zone:registerCuboidTriggerArea(477, -20.1, 7.1,  113.1,  12.1, 12.9,  141.2) -- Kazham airship berth
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -51,17 +63,21 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
-    local boardingFlags = bit.bor(xi.cutsceneFlag.NO_PCS, xi.cutsceneFlag.SEND_POSITION, xi.cutsceneFlag.NO_IDLE_WAIT)
+    local berth = berths[prevZoneId]
 
-    if prevZoneId == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
-        player:startEvent(10010, { isHidden = true, flags = boardingFlags })
-    elseif prevZoneId == xi.zone.BASTOK_JEUNO_AIRSHIP then
-        player:startEvent(10012, { isHidden = true, flags = boardingFlags })
-    elseif prevZoneId == xi.zone.WINDURST_JEUNO_AIRSHIP then
-        player:startEvent(10011, { isHidden = true, flags = boardingFlags })
-    elseif prevZoneId == xi.zone.KAZHAM_JEUNO_AIRSHIP then
-        player:startEvent(10013, { isHidden = true, flags = boardingFlags })
+    if not berth then
+        return
     end
+
+    if not player:hasKeyItem(berth.keyItem) then
+        player:startEvent(berth.ashore)
+        return
+    end
+
+    player:startEvent(berth.board, {
+        isHidden = true,
+        flags    = bit.bor(xi.cutsceneFlag.NO_PCS, xi.cutsceneFlag.SEND_POSITION, xi.cutsceneFlag.NO_IDLE_WAIT),
+    })
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

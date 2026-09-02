@@ -1,9 +1,6 @@
 -----------------------------------
 -- Manaclipper
 -- https://www.bg-wiki.com/ffxi/Manaclipper
--- TODO timed npc messages:
---      - When a barge arrives (not onTransportEvent, earlier than that)
---      - various chats while the barge goes up/down the river
 -----------------------------------
 xi = xi or {}
 xi.manaclipper = xi.manaclipper or {}

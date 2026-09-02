@@ -18,8 +18,9 @@ transport:
   ship: 16793984
   runs:
     manaclip_bibiki_tours:
-      door: _04s
-      dock: [491.728, 0.000, 687.394, 128]
+      door:     _04s
+      dock:     [491.728, 0.000, 687.394, 128]
+      boundary: 1
       voyage:
         - manaclipper
       every:     1728
@@ -39,8 +40,9 @@ transport:
           animation: animation_19
           hide:      41
     manaclip_bibiki_purgonorgo:
-      door: _04s
-      dock: [491.728, 0.000, 687.394, 128]
+      door:     _04s
+      dock:     [491.728, 0.000, 687.394, 128]
+      boundary: 1
       voyage:
         - manaclipper
       every:     1728
@@ -60,8 +62,9 @@ transport:
           animation: animation_19
           hide:      41
     manaclip_purgonorgo_bibiki:
-      door: _04t
-      dock: [-391.373, 0.000, -364.200, 128]
+      door:     _04t
+      dock:     [-391.373, 0.000, -364.200, 128]
+      boundary: 2
       voyage:
         - manaclipper
       every:     1728

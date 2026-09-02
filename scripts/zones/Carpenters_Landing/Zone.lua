@@ -7,12 +7,9 @@ local func = require('scripts/zones/Carpenters_Landing/globals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- TODO create a registerRotatedCuboidTriggerArea binding
-    -- barge is a large rectangle with barely any plank, but 2 of the docks don't face a cardinal direction.
-    -- cylinder technically can encompass the whole boat but it's not optimal and requires precision center/radius selection
-    zone:registerCylindricalTriggerArea(1, -274.5, 532.4, 38)        -- Barge at north landing
-    zone:registerCuboidTriggerArea(2, 232, -15, -555, 270, 15, -500) -- Barge at south landing
-    zone:registerCylindricalTriggerArea(3, -108, 88.5, 38)           -- Barge at central landing
+    zone:registerCuboidTriggerArea(1, -313.76, -15.0,  503.71, -270.63, 2.2,  531.71, -0.7854) -- Barge at north landing
+    zone:registerCuboidTriggerArea(2,  232.38, -15.0, -552.54,  260.38, 2.2, -509.42)          -- Barge at south landing
+    zone:registerCuboidTriggerArea(3, -145.76, -15.0,   57.95, -102.64, 2.2,   85.95, -0.7854) -- Barge at central landing
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)
     func.herculesTreeOnGameHour()

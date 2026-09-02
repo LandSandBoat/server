@@ -6,6 +6,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, 0, 0.0, -50, 20, 0.0, -35) -- In front of boat customs
+    zone:registerCuboidTriggerArea(571, -8.9, -3.2, -122.2, 13.6, 3.5, -104.0) -- Whitegate boat boarding area
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

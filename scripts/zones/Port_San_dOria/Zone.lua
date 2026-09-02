@@ -8,6 +8,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     quests.ffr.initZone(zone) -- register trigger areas 1 through 5
+    zone:registerCuboidTriggerArea(369, 3.9, -5.3, 40.1, 36.1, 0.5, 68.2) -- Jeuno airship boarding area
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -37,6 +38,11 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+        player:startEvent(701)
+        return
+    end
+
     player:startEvent(700, { isHidden = true, flags = xi.cutsceneFlag.NO_IDLE_WAIT })
 end
 

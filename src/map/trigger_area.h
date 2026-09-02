@@ -49,7 +49,7 @@ private:
 class CCuboidTriggerArea final : public ITriggerArea
 {
 public:
-    CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax);
+    CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax, float rotation = 0.0f);
 
     bool isPointInside(float x, float y, float z) const override;
     bool isPointInside(position_t pos) const override;
@@ -61,6 +61,10 @@ private:
     float m_xMax;
     float m_yMax;
     float m_zMax;
+
+    float m_rotation;
+    float m_sin;
+    float m_cos;
 };
 
 class CCylindricalTriggerArea final : public ITriggerArea

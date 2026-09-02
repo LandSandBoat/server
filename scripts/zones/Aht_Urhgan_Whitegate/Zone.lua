@@ -18,6 +18,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(11,  22,  1.0, -100, 24.5,  3.0,  -98) -- The Prankster
     zone:registerCuboidTriggerArea(12,  25, -7.0, -127,   30, -5.0, -123) -- The Prankster
     zone:registerCuboidTriggerArea(13,  30, -7.0,  -51,   39, -5.0,  -40) -- Waking the Colossus/Divine Interference
+    zone:registerCuboidTriggerArea(569, -32.9, -3.2, -162.2, -10.4, 3.5, -144.0) -- Mhaura boat boarding area
+    zone:registerCuboidTriggerArea(570,  10.4, -3.2,  144.0,  32.9, 3.5,  162.2) -- Nashmau boat boarding area
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
