@@ -1911,7 +1911,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Dahu',419,802); -- Great Sandstorm
 INSERT INTO `mob_skill_lists` VALUES ('Huwasi',420,678); -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',421,520); -- Double Ray
 INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',422,1035); -- Heavy Strike
--- 423 free
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman_Add',423,1709); -- Abrasive Tantara
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman_Add',423,1710); -- Deafening Tantara
+INSERT INTO `mob_skill_lists` VALUES ('Imp_Bandsman_Add',423,1711); -- Frenetic Rip
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,495); -- Snort
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,496); -- Rabid Dance
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,497); -- Lowing

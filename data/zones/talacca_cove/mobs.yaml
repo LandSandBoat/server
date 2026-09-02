@@ -136,6 +136,7 @@ templates:
     attributes:
       combat:
         skill: scythe
+        delay: 220
       jobs: [blm, blm]
       render:
         look:
@@ -158,10 +159,11 @@ templates:
     species:       imp
     type:          [battlefield]
     spell_list_id: 21
-    skill_list_id: 414
+    skill_list_id: 423
     attributes:
       combat:
         skill: scythe
+        delay: 220
       jobs: [blm, blm]
       render:
         look:

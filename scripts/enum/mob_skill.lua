@@ -1049,6 +1049,8 @@ xi.mobSkill =
 
     PROBOSCIS_SHOWER              = 1708,
 
+    BUGLE_CALL                    = 1712,
+
     KIBOSH                        = 1725,
     CUTPURSE                      = 1726,
     SANDSPRAY                     = 1727,
