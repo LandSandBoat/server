@@ -729,9 +729,6 @@ templates:
         skill: staff
         delay: 290
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          blunt: 2500
       render:
         look:
           type:  standard

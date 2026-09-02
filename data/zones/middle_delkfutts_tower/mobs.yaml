@@ -646,9 +646,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -678,9 +675,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard

@@ -1447,10 +1447,6 @@ templates:
       combat:
         skill:    scythe
         dmg_mult: 125
-      resists:
-        rank_status:
-          paralyze: 11
-          bind:     11
       render:
         look:
           type:  standard

@@ -308,12 +308,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -8750
-          h2h:      -8750
       render:
         look:
           type:  standard
@@ -354,12 +348,6 @@ templates:
       combat:
         skill: staff
       jobs: [pld, pld]
-      resists:
-        dmg_physical:
-          slashing: -1000
-          piercing: -1000
-          blunt:    -1000
-          h2h:      -1000
       render:
         look:
           type:  standard

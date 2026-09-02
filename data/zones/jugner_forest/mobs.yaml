@@ -2069,12 +2069,6 @@ templates:
       combat:
         skill: scythe
       jobs: [whm, whm]
-      resists:
-        dmg_physical:
-          slashing: -6250
-          piercing: -6250
-          blunt:    -6250
-          h2h:      -6250
       render:
         look:
           type:  standard

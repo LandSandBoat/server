@@ -231,12 +231,6 @@ templates:
     attributes:
       combat:
         skill: great_katana
-      resists:
-        dmg_physical:
-          slashing: -2500
-          piercing: -2500
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -311,12 +305,6 @@ templates:
     attributes:
       combat:
         skill: club
-      resists:
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -8750
-          h2h:      -8750
       render:
         look:
           type:  standard
@@ -699,11 +687,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          h2h:      -7500
       render:
         look:
           type:  standard

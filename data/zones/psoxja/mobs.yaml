@@ -10,12 +10,6 @@ templates:
       combat:
         skill: scythe
         delay: 170
-      resists:
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard
@@ -318,9 +312,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -1556,9 +1547,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -1589,9 +1577,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -1908,12 +1893,6 @@ templates:
       combat:
         skill: scythe
         delay: 170
-      resists:
-        dmg_physical:
-          slashing: -5000
-          piercing: -5000
-          blunt:    -5000
-          h2h:      -5000
       render:
         look:
           type:  standard

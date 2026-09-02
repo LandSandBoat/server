@@ -1152,10 +1152,6 @@ templates:
         skill: hand_to_hand
         delay: 380
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          blunt: 5000
-          h2h:   2500
       render:
         look:
           type:  standard
@@ -1187,10 +1183,6 @@ templates:
         skill: hand_to_hand
         delay: 380
       jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          blunt: 5000
-          h2h:   2500
       render:
         look:
           type:  standard

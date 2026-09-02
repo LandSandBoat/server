@@ -386,9 +386,6 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

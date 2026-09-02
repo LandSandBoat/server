@@ -34,9 +34,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -535,9 +532,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -589,9 +583,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -850,9 +841,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -1483,9 +1471,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [rdm, rdm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1586,9 +1571,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard
@@ -1786,9 +1768,6 @@ templates:
       combat:
         skill: scythe
       jobs: [rdm, blm]
-      resists:
-        dmg_physical:
-          h2h: 2500
       render:
         look:
           type:  standard

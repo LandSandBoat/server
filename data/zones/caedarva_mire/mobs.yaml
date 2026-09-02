@@ -196,11 +196,6 @@ templates:
     attributes:
       combat:
         skill: dagger
-      resists:
-        dmg_physical:
-          slashing:  1250
-          blunt:    -1250
-          h2h:      -1250
       render:
         look:
           type:  standard
@@ -332,9 +327,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -477,9 +469,6 @@ templates:
       combat:
         skill: polearm
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -510,9 +499,6 @@ templates:
       combat:
         skill: polearm
       jobs: [drg, drg]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -544,9 +530,6 @@ templates:
       combat:
         skill: polearm
       jobs: [drk, drk]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -577,9 +560,6 @@ templates:
       combat:
         skill: polearm
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -910,9 +890,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -968,11 +945,6 @@ templates:
       combat:
         skill: sword
         delay: 270
-      resists:
-        dmg_physical:
-          slashing:  1250
-          blunt:    -1250
-          h2h:      -1250
       render:
         look:
           type:  standard
@@ -1285,11 +1257,6 @@ templates:
       combat:
         skill: sword
         delay: 270
-      resists:
-        dmg_physical:
-          slashing:  1250
-          blunt:    -1250
-          h2h:      -1250
       render:
         look:
           type:  standard
@@ -1321,9 +1288,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1654,9 +1618,6 @@ templates:
       combat:
         skill: scythe
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -1850,9 +1811,6 @@ templates:
       combat:
         skill: polearm
       jobs: [blm, blm]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard
@@ -1886,9 +1844,6 @@ templates:
       combat:
         skill: polearm
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          h2h: 1250
       render:
         look:
           type:  standard

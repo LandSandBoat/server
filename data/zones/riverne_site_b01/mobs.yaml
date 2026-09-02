@@ -493,9 +493,6 @@ templates:
         skill: dagger
         delay: 210
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard
@@ -664,9 +661,6 @@ templates:
         skill: dagger
         delay: 210
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

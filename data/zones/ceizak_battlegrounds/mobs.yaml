@@ -181,6 +181,7 @@ templates:
   Colkhab:
     id:            4927
     species:       bztavian
+    type:          [notorious]
     skill_list_id: 456
     attributes:
       combat:
@@ -692,9 +693,6 @@ templates:
         skill: scythe
         delay: 220
       jobs: [thf, thf]
-      resists:
-        dmg_physical:
-          piercing: 2500
       render:
         look:
           type:  standard

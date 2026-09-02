@@ -90,6 +90,7 @@ templates:
   Colkhab:
     id:            4927
     species:       bztavian
+    type:          [notorious]
     skill_list_id: 456
     attributes:
       combat:
