@@ -84,6 +84,12 @@ end
 function CClientEntityPairActions:acceptPartyInvite()
 end
 
+---Level sync the party to a member (caller must be party leader)
+---@param player CBaseEntity Party member to sync to
+---@return nil
+function CClientEntityPairActions:setLevelSync(player)
+end
+
 ---@class TradeItem
 ---@field itemId xi.item Item ID
 ---@field quantity? integer Quantity (default: 1)

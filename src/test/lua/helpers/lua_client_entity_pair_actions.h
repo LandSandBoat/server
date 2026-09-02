@@ -48,6 +48,7 @@ public:
     void inviteToParty(CLuaBaseEntity* player) const;
     void formAlliance(CLuaBaseEntity* player) const;
     void acceptPartyInvite() const;
+    void setLevelSync(CLuaBaseEntity* player) const;
     void tradeNpc(const sol::object& npcQuery, const sol::table& items, sol::optional<sol::table> expectedEvent) const;
     void tradeRequest(CLuaBaseEntity* target) const;
     void tradeAccept() const;
