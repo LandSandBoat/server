@@ -1,0 +1,12 @@
+# SAM quest mob before the May 10, 2011 version update.
+# Source: https://forum.square-enix.com/ffxi/threads/7257
+
+templates:
+  Forger:
+    attributes:
+      stats:
+        hp: 2000
+
+spawns:
+  17219999:
+    level: [32, 32]

@@ -29,6 +29,16 @@ Command modules register with `xi.module.registerCommand('name', commandTable)` 
 
 Mutating game data at require time is forbidden. Data changes are declared as an override of `xi.server.onServerStart` that calls `super()` first and then applies the changes.
 
+## Zone data
+
+A module can patch a zone data file by mirroring its path under the module's `data` directory. For example,
+`modules/example/data/zones/west_ronfaure/mobs.yaml` patches `data/zones/west_ronfaure/mobs.yaml`.
+
+Nested data components may be selected directly. For example, an `init.txt` entry for
+`era/data/abyssea/advanced_job_quest` loads patches relative to that directory.
+
+Patches use RFC 7396 semantics and are applied in `init.txt` order. Objects merge by key, lists are replaced whole, and `null` removes a key.
+
 ## Era Accuracy Modules
 
 Lua era-accuracy modules live under `era/lua/` and mirror the main `scripts/` tree where practical.

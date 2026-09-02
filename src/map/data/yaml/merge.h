@@ -24,6 +24,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace xi::data
 {
@@ -31,6 +32,11 @@ namespace xi::data
 // Apply module YAML as RFC 7386 merge patches over the core document.
 auto mergeYaml(std::string_view core, std::span<const std::string> modules) -> std::string;
 
+auto getDataModulePaths(std::string_view name, std::string_view extension) -> std::vector<std::string>;
 auto loadMergedYaml(std::string_view corePath, std::span<const std::string> modulePaths) -> std::string;
+
+// Zone patches use JSON as private transport because Glaze's generic YAML tree cannot round-trip numeric mapping keys back into typed YAML maps.
+auto patchZoneYaml(std::string_view core, std::span<const std::string> modules) -> std::string;
+auto loadPatchedZoneYaml(std::string_view corePath, std::span<const std::string> modulePaths) -> std::string;
 
 } // namespace xi::data
