@@ -82,7 +82,7 @@ templates:
     id:            127
     species:       skeleton
     type:          [notorious, battlefield]
-    spell_list_id: 28
+    spell_list_id: 1
     skill_list_id: 227
     attributes:
       combat:
@@ -92,15 +92,19 @@ templates:
         look:
           type:  standard
           model: 564
-        model_size:  2
-        hitbox:     13
+        entity_flags: 1157
+        model_size:      2
+        hitbox:         13
       behaviors:
-        aggressive: true
-        links:      true
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        always_aggro: 1
       spawn:
         type: [scripted]
       stats:
-        hp: 2000
+        hp: 1400
 
   Ancient_Warrior:
     id:            129
@@ -123,7 +127,7 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 100
+        hp: 50
 
   Annihilated_Anthony:
     id:            160
@@ -158,7 +162,7 @@ templates:
     id:            223
     species:       skeleton
     type:          [notorious, battlefield]
-    spell_list_id: 28
+    spell_list_id: 1
     skill_list_id: 227
     attributes:
       combat:
@@ -168,16 +172,19 @@ templates:
         look:
           type:  standard
           model: 576
-        entity_flags: 1157
+        entity_flags: 1183
         model_size:      3
         hitbox:         16
       behaviors:
-        aggressive: true
-        links:      true
+        aggressive:     true
+        links:          true
+        true_detection: true
+      mob_mods:
+        always_aggro: 1
       spawn:
         type: [scripted]
       stats:
-        hp: 8300
+        hp: 10700
 
   Atori-Tutori_qm:
     id:            6642
@@ -1859,87 +1866,87 @@ templates:
 spawns:
   17620993:
     template: Archlich_Taberquoan
-    at:       [-399.908, -201.625, 386.934, 196]
+    at:       [-399.829, -202.125, 389.365, 192]
     level:    [45, 45]
   17620994:
     template: Ancient_Sorcerer
-    at:       [-416.616, -201.625, 409.581]
+    at:       [-410.826, -202.125, 407.049, 192]
     level:    [40, 40]
   17620995:
     template: Ancient_Sorcerer
-    at:       [-382.831, -201.625, 409.757, 128]
+    at:       [-389.476, -202.125, 407.588, 192]
     level:    [40, 40]
   17620996:
     template: Ancient_Warrior
-    at:       [-426.327, -199.125, 463.157]
+    at:       [-426.256, -199.625, 469.963, 128]
     level:    [40, 40]
   17620997:
     template: Ancient_Warrior
-    at:       [-426.188, -199.125, 476.989]
+    at:       [-373.739, -199.625, 469.963, 0]
     level:    [40, 40]
   17620998:
     template: Ancient_Warrior
-    at:       [-373.796, -199.125, 476.857]
+    at:       [-426.256, -199.625, 469.963, 128]
     level:    [40, 40]
   17620999:
     template: Ancient_Warrior
-    at:       [-373.951, -199.125, 463.279]
+    at:       [-373.739, -199.625, 469.963, 0]
     level:    [40, 40]
   17621000:
     template: Archlich_Taberquoan
-    at:       [0.165, -1.625, -12.967, 196]
+    at:       [0.048, -2.125, -10.925, 192]
     level:    [45, 45]
   17621001:
     template: Ancient_Sorcerer
-    at:       [-16.543, -1.625, 9.680]
+    at:       [-10.949, -2.125, 6.757, 192]
     level:    [40, 40]
   17621002:
     template: Ancient_Sorcerer
-    at:       [17.242, -1.625, 9.856, 128]
+    at:       [10.399, -2.125, 7.296, 192]
     level:    [40, 40]
   17621003:
     template: Ancient_Warrior
-    at:       [-26.254, 0.875, 63.256]
+    at:       [-26.194, 0.375, 70.031, 128]
     level:    [40, 40]
   17621004:
     template: Ancient_Warrior
-    at:       [-26.115, 0.875, 77.088]
+    at:       [26.320, 0.375, 70.032, 0]
     level:    [40, 40]
   17621005:
     template: Ancient_Warrior
-    at:       [26.277, 0.875, 76.956]
+    at:       [-26.194, 0.375, 70.031, 128]
     level:    [40, 40]
   17621006:
     template: Ancient_Warrior
-    at:       [26.122, 0.875, 63.378]
+    at:       [26.320, 0.375, 70.032, 0]
     level:    [40, 40]
   17621007:
     template: Archlich_Taberquoan
-    at:       [400.120, 198.375, -412.743, 196]
+    at:       [400.096, 197.875, -411.016, 192]
     level:    [45, 45]
   17621008:
     template: Ancient_Sorcerer
-    at:       [383.412, 198.375, -390.096]
+    at:       [389.096, 197.875, -393.334, 192]
     level:    [40, 40]
   17621009:
     template: Ancient_Sorcerer
-    at:       [417.197, 198.375, -389.920, 128]
+    at:       [410.446, 197.875, -392.794, 192]
     level:    [40, 40]
   17621010:
     template: Ancient_Warrior
-    at:       [373.701, 200.875, -336.520]
+    at:       [373.806, 200.375, -329.969, 0]
     level:    [40, 40]
   17621011:
     template: Ancient_Warrior
-    at:       [373.840, 200.875, -322.688]
+    at:       [426.320, 200.375, -329.968, 128]
     level:    [40, 40]
   17621012:
     template: Ancient_Warrior
-    at:       [426.232, 200.875, -322.820]
+    at:       [373.806, 200.375, -329.969, 0]
     level:    [40, 40]
   17621013:
     template: Ancient_Warrior
-    at:       [426.077, 200.875, -336.398]
+    at:       [426.320, 200.375, -329.968, 128]
     level:    [40, 40]
   17621014:
     template: Warlord_Rojgnoj
