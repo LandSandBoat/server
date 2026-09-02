@@ -1536,6 +1536,8 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
+      mods:
+        mdef: 50
       render:
         look:
           type:  standard
