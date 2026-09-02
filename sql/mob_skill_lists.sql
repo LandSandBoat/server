@@ -4406,7 +4406,22 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisGoblin',2108,1097);
 INSERT INTO `mob_skill_lists` VALUES ('Jack_Cardian',2109,683); -- bludgeon
 INSERT INTO `mob_skill_lists` VALUES ('Jack_Cardian',2109,684); -- deal_out
 
--- Next ID : 2110
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1136); -- Blindeye
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1137); -- Eyes on Me
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1138); -- Hypnosis
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1139); -- Mind Break
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1140); -- Binding Wave
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1141); -- Airy Shield
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1143); -- Magic Shield
+INSERT INTO `mob_skill_lists` VALUES ('DynamisEye',2110,1144); -- Level 5 Petrify
+
+INSERT INTO `mob_skill_lists` VALUES ('DynamisDemon',2111,1145); -- Soul Drain
+INSERT INTO `mob_skill_lists` VALUES ('DynamisDemon',2111,1146); -- Hecatomb Wave
+INSERT INTO `mob_skill_lists` VALUES ('DynamisDemon',2111,1147); -- Demonic Howl
+INSERT INTO `mob_skill_lists` VALUES ('DynamisDemon',2111,1148); -- Condemation
+INSERT INTO `mob_skill_lists` VALUES ('DynamisDemon',2111,1150); -- Quadrastrike
+
+-- Next ID : 2112
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

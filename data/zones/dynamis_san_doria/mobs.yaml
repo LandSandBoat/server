@@ -916,7 +916,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -958,7 +958,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:

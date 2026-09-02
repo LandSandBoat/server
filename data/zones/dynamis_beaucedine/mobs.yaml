@@ -80,7 +80,7 @@ templates:
     species:       ahriman
     type:          [notorious]
     spell_list_id: 2
-    skill_list_id: 4
+    skill_list_id: 2110
     attributes:
       combat:
         skill: dagger
@@ -117,7 +117,7 @@ templates:
     id:            6093
     species:       ahriman
     type:          [notorious]
-    skill_list_id: 4
+    skill_list_id: 2110
     attributes:
       combat:
         skill: dagger
@@ -620,7 +620,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -955,7 +955,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       resists:
         rank_element:
@@ -2179,7 +2179,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -2214,7 +2214,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -4520,7 +4520,7 @@ templates:
     attributes:
       combat:
         skill: great_axe
-        delay: 360
+        delay: 240
       jobs: [mnk, mnk]
       resists:
         dmg_physical:
@@ -5679,7 +5679,7 @@ templates:
     species:       ahriman
     type:          [notorious]
     spell_list_id: 11
-    skill_list_id: 4
+    skill_list_id: 2110
     attributes:
       combat:
         skill: staff
@@ -5757,7 +5757,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -6980,7 +6980,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 480
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
@@ -7871,7 +7871,7 @@ templates:
     attributes:
       combat:
         skill: club
-        delay: 360
+        delay: 240
       jobs: [mnk, mnk]
       render:
         look:
