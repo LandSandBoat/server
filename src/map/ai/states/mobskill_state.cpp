@@ -36,12 +36,13 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
+CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride, const Maybe<uint16> tpCostOverride)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_wsid(wsid)
 , m_castTimeOverride(castTimeOverride)
 , m_spentTP(0)
+, m_tpCostOverride(tpCostOverride)
 {
     // Capture constructor arguments into members and nothing else. All other logic goes into init().
 }
@@ -162,6 +163,11 @@ void CMobSkillState::SpendCost()
             {
                 m_PEntity->health.tp = 0;
             }
+        }
+        else if (m_tpCostOverride.has_value())
+        {
+            // Monstrosity skills each cost a fixed amount rather than the whole TP bar.
+            m_spentTP = m_PEntity->addTP(-m_tpCostOverride.value());
         }
         else
         {
@@ -295,14 +301,24 @@ void CMobSkillState::reduceTpOnInterrupt() const
         // Thus while incomplete, is better than nothing.
         if (m_PEntity->StatusEffectContainer && m_PEntity->StatusEffectContainer->HasPreventActionEffect() && !m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui))
         {
-            int16 tp = m_spentTP;
-            if (tp >= 2900)
+            const auto refundedTp = [&]() -> int16
             {
-                m_PEntity->health.tp = std::floor(std::round(0.333333f * tp));
+                if (m_spentTP >= 2900)
+                {
+                    return static_cast<int16>(std::floor(std::round(0.333333f * m_spentTP)));
+                }
+
+                return static_cast<int16>(std::floor(0.25f * m_spentTP));
+            }();
+
+            // A fixed-cost skill only ever deducted its cost, so the rest of the bar has to survive the interrupt.
+            if (m_tpCostOverride.has_value())
+            {
+                m_PEntity->health.tp = std::clamp<int16>(m_PEntity->health.tp + refundedTp, 0, 3000);
             }
             else
             {
-                m_PEntity->health.tp = std::floor(0.25f * tp);
+                m_PEntity->health.tp = refundedTp;
             }
         }
     }

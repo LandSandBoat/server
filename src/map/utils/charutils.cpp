@@ -583,7 +583,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
     }
 
     // LoadFromCharJobsSQL
-    fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
+    fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, mon "
                "FROM char_jobs "
                "WHERE charid = ?";
 
@@ -615,10 +615,11 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         PChar->jobs.job[static_cast<uint8>(xi::Job::SCH)] = rset->get<uint8>("sch");
         PChar->jobs.job[static_cast<uint8>(xi::Job::GEO)] = rset->get<uint8>("geo");
         PChar->jobs.job[static_cast<uint8>(xi::Job::RUN)] = rset->get<uint8>("run");
+        PChar->jobs.job[static_cast<uint8>(xi::Job::MON)] = rset->get<uint8>("mon");
     }
 
     // LoadFromCharExpSQL
-    fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
+    fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, mon, merits, limits "
                "FROM char_exp "
                "WHERE charid = ?";
 
@@ -649,6 +650,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         PChar->jobs.exp[static_cast<uint8>(xi::Job::SCH)] = rset->get<uint16>("sch");
         PChar->jobs.exp[static_cast<uint8>(xi::Job::GEO)] = rset->get<uint16>("geo");
         PChar->jobs.exp[static_cast<uint8>(xi::Job::RUN)] = rset->get<uint16>("run");
+        PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = rset->get<uint16>("mon");
 
         meritPoints = rset->get<uint8>("merits");
         limitPoints = rset->get<uint16>("limits");
@@ -4932,6 +4934,17 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
     uint16 currentExp  = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())];
     bool   onLimitMode = false;
 
+    // Monstrosity levels off its own table rather than the standard job curve.
+    const auto expNextLevel = [PChar](uint8 charlvl) -> uint32
+    {
+        if (PChar->m_PMonstrosity)
+        {
+            return monstrosity::GetExpNEXTLevel(charlvl);
+        }
+
+        return GetExpNEXTLevel(charlvl);
+    };
+
     // Incase player de-levels to 74 on the field
     if (PChar->MeritMode && PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] > 74 && !expFromRaise)
     {
@@ -4940,7 +4953,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
     // we check if the player is level capped and max exp..
     if (PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] > 74 && PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= PChar->jobs.genkai &&
-        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1)
+        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1)
     {
         onLimitMode = true;
     }
@@ -5046,11 +5059,11 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
     PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, PMob, exp);
 
     // Player levels up
-    if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) && !onLimitMode)
+    if ((currentExp + exp) >= expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) && !onLimitMode)
     {
         if (PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= PChar->jobs.genkai)
         {
-            PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1;
+            PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1;
             if (PChar->PParty && PChar->PParty->GetSyncTarget() == PChar)
             {
                 PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveIneligibleExp);
@@ -5058,10 +5071,10 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         }
         else
         {
-            PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] -= GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
-            if (PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] >= GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] + 1))
+            PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] -= expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+            if (PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] >= expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] + 1))
             {
-                PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] + 1) - 1;
+                PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = expNextLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] + 1) - 1;
             }
             PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] += 1;
 
@@ -5072,6 +5085,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
                 jobpointutils::RefreshGiftMods(PChar);
                 BuildingCharSkillsTable(PChar);
+                monstrosity::HandleLevelUp(PChar);
                 CalculateStats(PChar);
                 BuildingCharAbilityTable(PChar);
                 BuildingCharTraitsTable(PChar);
@@ -5794,12 +5808,6 @@ void SaveCharJob(const CCharEntity* PChar, const xi::Job job)
         return;
     }
 
-    // Monstrosity job and level data is handled elsewhere, bail out now
-    if (job == xi::Job::MON)
-    {
-        return;
-    }
-
     std::string fmtQuery = "";
 
     switch (job)
@@ -5870,6 +5878,9 @@ void SaveCharJob(const CCharEntity* PChar, const xi::Job job)
         case xi::Job::RUN:
             fmtQuery = "UPDATE char_jobs SET unlocked = ?, run = ? WHERE charid = ? LIMIT 1";
             break;
+        case xi::Job::MON:
+            fmtQuery = "UPDATE char_jobs SET unlocked = ?, mon = ? WHERE charid = ? LIMIT 1";
+            break;
         default:
             fmtQuery = "";
             break;
@@ -5885,12 +5896,6 @@ void SaveCharExp(const CCharEntity* PChar, const xi::Job job)
     if (job == xi::Job::NONE || static_cast<uint8>(job) >= MAX_JOBTYPE)
     {
         ShowWarningFmt("Attempt to save Char XP with invalid JOBTYPE {}.", static_cast<uint8>(job));
-        return;
-    }
-
-    // Monstrosity exp data is handled elsewhere, bail out now
-    if (job == xi::Job::MON)
-    {
         return;
     }
 
@@ -5963,6 +5968,9 @@ void SaveCharExp(const CCharEntity* PChar, const xi::Job job)
             break;
         case xi::Job::RUN:
             query = "UPDATE char_exp SET run = ?, merits = ?, limits = ? WHERE charid = ?";
+            break;
+        case xi::Job::MON:
+            query = "UPDATE char_exp SET mon = ?, merits = ?, limits = ? WHERE charid = ?";
             break;
         default:
             query = "";

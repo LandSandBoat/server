@@ -80,10 +80,13 @@ void   HandleZoneIn(CCharEntity* PChar);
 uint32 GetPackedMonstrosityName(CCharEntity* PChar);
 void   SendFullMonstrosityUpdate(CCharEntity* PChar);
 
-void HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
+void HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
 void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
 
 void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
+void SetCurrentExp(CCharEntity* PChar, uint32 exp);
+void HandleLevelUp(CCharEntity* PChar);
+auto GetExpNEXTLevel(uint8 level) -> uint32;
 
 void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
 
