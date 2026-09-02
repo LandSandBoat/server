@@ -22,9 +22,12 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 #include "data/enums/skill_type.h"
 #include "data/enums/zone_misc.h"
 #include "entities/battle_entity.h"
+
+#include <string_view>
 
 #define CANNOT_USE_SPELL 0
 
@@ -1302,5 +1305,7 @@ CSpell* GetSpell(SpellID SpellID);
 bool    CanUseSpell(CBattleEntity* PCaster, SpellID SpellID);
 bool    CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell);
 bool    CanUseSpellWith(SpellID spellId, xi::Job job, uint8 level);
+
+auto lookupIdByName(std::string_view name) -> Maybe<SpellID>;
 
 }; // namespace spell
