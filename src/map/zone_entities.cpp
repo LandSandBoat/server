@@ -455,7 +455,7 @@ void CZoneEntities::TransportDepart(const uint16 boundary, const xi::ZoneId prev
 
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
     {
-        if (PCurrentChar->loc.boundary == boundary)
+        if (PCurrentChar->isInTriggerArea(boundary))
         {
             sendTransportEvent(PCurrentChar, prevZoneId, transport);
         }
@@ -475,12 +475,7 @@ void CZoneEntities::DisembarkAll()
             continue;
         }
 
-        // Riders arrive without a boundary, so anything else got here another way.
-        if (PCurrentChar->loc.boundary == 0)
-        {
-            // Several runs share the crossing, so there is no one run to name.
-            sendTransportEvent(PCurrentChar, m_zone->GetID(), "");
-        }
+        sendTransportEvent(PCurrentChar, m_zone->GetID(), "");
     }
 }
 

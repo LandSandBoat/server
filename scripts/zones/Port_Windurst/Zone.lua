@@ -8,6 +8,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    zone:registerCuboidTriggerArea(416, 235.43, -6.8, 53.05, 263.51, -1.0, 85.3, -2.3562) -- Jeuno airship boarding area, off-axis
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -30,6 +31,11 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+        player:startEvent(10003)
+        return
+    end
+
     player:startEvent(10002, {
         isHidden = true,
         flags    = bit.bor(
