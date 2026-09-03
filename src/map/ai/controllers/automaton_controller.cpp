@@ -87,57 +87,38 @@ void CAutomatonController::setCooldowns()
     }
 }
 
-// New retail Automaton magic AI (Needs more information to accurately recreate)
+// Automaton magic cooldowns, looked up once on automaton creation and stored as variables.
 void CAutomatonController::setMagicCooldowns()
 {
-    switch (PAutomaton->head())
+    const auto maybeCooldowns = lua["xi"]["pets"]["automaton"]["magicCooldowns"].get<sol::optional<sol::table>>();
+    if (!maybeCooldowns)
     {
-        case AutomatonHead::Harlequin:
-        {
-            m_magicCooldown    = 10s;
-            m_enfeebleCooldown = 12s;
-            m_healCooldown     = 12s;
-        }
-        break;
-        case AutomatonHead::Valoredge:
-        {
-            m_magicCooldown = 10s;
-            m_healCooldown  = 20s;
-        }
-        break;
-        case AutomatonHead::Sharpshot:
-        {
-            m_magicCooldown    = 10s;
-            m_enfeebleCooldown = 12s;
-            m_healCooldown     = 20s;
-        }
-        break;
-        case AutomatonHead::Stormwaker:
-        {
-            m_magicCooldown     = 8s;
-            m_enfeebleCooldown  = 10s;
-            m_healCooldown      = 20s;
-            m_elementalCooldown = 25s;
-            m_enhanceCooldown   = 25s;
-        }
-        break;
-        case AutomatonHead::Soulsoother:
-        {
-            m_magicCooldown    = 8s;
-            m_enfeebleCooldown = 10s;
-            m_healCooldown     = 10s;
-            m_statusCooldown   = 10s;
-            m_enhanceCooldown  = 25s;
-        }
-        break;
-        case AutomatonHead::Spiritreaver:
-        {
-            m_magicCooldown     = 8s;
-            m_enfeebleCooldown  = 10s;
-            m_elementalCooldown = 30s;
-            m_enhanceCooldown   = 35s;
-        }
+        ShowError("CAutomatonController::setMagicCooldowns() - Missing xi.pets.automaton.magicCooldowns");
+        return;
     }
+
+    const auto head = static_cast<uint8>(PAutomaton->head());
+
+    const auto maybeHeadCooldowns = (*maybeCooldowns)[head].get<sol::optional<sol::table>>();
+    if (!maybeHeadCooldowns)
+    {
+        ShowErrorFmt("CAutomatonController::setMagicCooldowns() - Missing magic cooldowns for head {}", static_cast<uint16>(head));
+        return;
+    }
+
+    const auto& headCooldowns = *maybeHeadCooldowns;
+
+    const auto categoryCooldown = [&headCooldowns](const char* key) -> timer::duration
+    {
+        return std::chrono::seconds(headCooldowns[key].get<sol::optional<int32>>().value_or(0));
+    };
+
+    m_magicCooldown     = categoryCooldown("global");
+    m_healCooldown      = categoryCooldown("healing");
+    m_enfeebleCooldown  = categoryCooldown("enfeebling");
+    m_elementalCooldown = categoryCooldown("elemental");
+    m_enhanceCooldown   = categoryCooldown("enhancing");
+    m_statusCooldown    = categoryCooldown("statusRemoval");
 }
 
 // Determines standback behavior for the Automaton.

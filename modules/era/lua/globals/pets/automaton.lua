@@ -36,6 +36,58 @@ local function applyEraFrameHPReductions()
     end
 end
 
+local eraMagicCooldowns =
+{
+    [xi.automaton.head.HARLEQUIN] =
+    {
+        global        = 30,
+        healing       = 20,
+        enfeebling    = 20,
+    },
+
+    [xi.automaton.head.VALOREDGE] =
+    {
+        global        = 45,
+        healing       = 30,
+    },
+
+    [xi.automaton.head.SHARPSHOT] =
+    {
+        global        = 45,
+        healing       = 30,
+        enfeebling    = 30,
+    },
+
+    [xi.automaton.head.STORMWAKER] =
+    {
+        global        = 25,
+        healing       = 15,
+        enfeebling    = 30,
+        elemental     = 30,
+    },
+
+    [xi.automaton.head.SOULSOOTHER] =
+    {
+        global        = 25,
+        healing       = 15,
+        enfeebling    = 30,
+        statusRemoval = 15,
+    },
+
+    [xi.automaton.head.SPIRITREAVER] =
+    {
+        global        = 25,
+        enfeebling    = 45,
+        elemental     = 15,
+    },
+}
+
+local function applyEraMagicCooldowns()
+    for head, cooldowns in pairs(eraMagicCooldowns) do
+        xi.pets.automaton.magicCooldowns[head] = cooldowns
+    end
+end
+
 m:addOverrideByEra('xi.server.onServerStart', {
     [xi.expansion.SOA] = function()
         super()
@@ -45,6 +97,8 @@ m:addOverrideByEra('xi.server.onServerStart', {
 
     [xi.expansion.ABYSSEA] = function()
         super()
+
+        applyEraMagicCooldowns()
 
         -- Adds Frame Specific DT Taken Modifiers. / Removes Valoredge Block : https://wiki.ffo.jp/html/19739.html / https://wiki.ffo.jp/html/31705.html
         xi.pets.automaton.frameMods[xi.automaton.frame.HARLEQUIN] =
