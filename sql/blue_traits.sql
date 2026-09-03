@@ -45,7 +45,7 @@ INSERT INTO `blue_traits` VALUES (6,4,5,28,24,2,0);      -- Magic Attack Bonus (
 INSERT INTO `blue_traits` VALUES (6,6,5,28,28,3,0);      -- Magic Attack Bonus (3)
 INSERT INTO `blue_traits` VALUES (6,8,5,28,32,4,0);      -- Magic Attack Bonus (4)
 INSERT INTO `blue_traits` VALUES (6,10,5,28,36,5,1);     -- Magic Attack Bonus (5) (JP only)
-INSERT INTO `blue_traits` VALUES (6,12,5,28,50,6,1);     -- Magic Attack Bonus (6) (JP only)
+INSERT INTO `blue_traits` VALUES (6,12,5,28,40,6,1);     -- Magic Attack Bonus (6) (JP only)
 INSERT INTO `blue_traits` VALUES (7,2,39,231,8,1,0);     -- Undead Killer (1)
 INSERT INTO `blue_traits` VALUES (7,4,39,231,10,2,1);    -- Undead Killer (2) (JP only)
 INSERT INTO `blue_traits` VALUES (7,6,39,231,12,3,1);    -- Undead Killer (3) (JP only)
