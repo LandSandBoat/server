@@ -64,7 +64,7 @@ struct action_result_t
     uint16           spikesParam{ 0 };                      // result.react_value (14 bits)
     MsgBasic         spikesMessage{ MsgBasic::None };       // result.react_message (10 bits)
 
-    void recordSkillchain(ActionProcSkillChain effect, int16_t dmg);
+    void recordSkillchain(ActionProcSkillChain effect, int32_t dmg);
     auto recordDamage(const attack_outcome_t& outcome) -> action_result_t&;
 
     inline auto hasAdditionalEffect() const -> bool
