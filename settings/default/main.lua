@@ -139,6 +139,10 @@ xi.settings.main =
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
     DELAY_REDUCTION_CAP = 0.80,  -- Set the cap for melee swing haste effect. (0.80 = 80% retail delay reduction max, 0.93 = 93% ToAU delay reduction max)
 
+    -- When true, use 8 + Blue magic skill + STR*ONE_HAND_MAIN_HAND_STR_ATTACK_MULTIPLIER for base attack (before blue magic merits) instead of current retail's "fetch main hand weapon attack" style
+    -- see xi.spells.blue.getBlueMagicBaseAttack
+    BLUE_SKILL_IS_BLUE_ATTACK = false,
+
     -- STR:ATT/RATT ratios. For players only. Mobs are hardcoded to 0.5
     TWO_HANDED_STR_ATTACK_MULTIPLIER         = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.75 in previous eras
     HAND_TO_HAND_STR_ATTACK_MULTIPLIER       = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.625 in previous eras.
