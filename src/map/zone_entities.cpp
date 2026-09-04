@@ -1749,11 +1749,6 @@ auto CZoneEntities::mobTick(CMobEntity* PMob, timer::time_point tick) -> Task<vo
                 PChar->PClaimedMob = nullptr;
             }
 
-            if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
-            {
-                PChar->currentEvent->targetEntity = nullptr;
-            }
-
             if (PChar->SpawnMOBList.find(PMob->id) != PChar->SpawnMOBList.end())
             {
                 PChar->SpawnMOBList.erase(PMob->id);
@@ -2052,10 +2047,27 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
     // Cleanup logic
     //
 
+    auto forgetEventTarget = [&](const CBaseEntity* PEntity)
+    {
+        FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
+        {
+            if (PChar->currentEvent->targetEntity == PEntity)
+            {
+                PChar->currentEvent->targetEntity = nullptr;
+            }
+
+            if (PChar->eventPreparation->targetEntity == PEntity)
+            {
+                PChar->eventPreparation->targetEntity = nullptr;
+            }
+        }
+    };
+
     for (const auto* PMob : m_mobsToDelete)
     {
         if (auto itr = m_mobList.find(PMob->targid); itr != m_mobList.end())
         {
+            forgetEventTarget(PMob);
             onEntityDespawned(itr->second);
             m_mobList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PMob->targid, timer::now());
@@ -2067,6 +2079,7 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
     {
         if (auto itr = m_npcList.find(PNpc->targid); itr != m_npcList.end())
         {
+            forgetEventTarget(PNpc);
             onEntityDespawned(itr->second);
             m_npcList.erase(itr);
             m_dynamicTargIdsToDelete.emplace_back(PNpc->targid, timer::now());
