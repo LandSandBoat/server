@@ -21,6 +21,8 @@
 
 #include "0x015_pos.h"
 
+#include <cmath>
+
 #include "entities/char_entity.h"
 #include "packets/s2c/0x0f5_tracking_pos.h"
 
@@ -34,6 +36,11 @@ auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar
 void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
 {
     if (PChar->pendingPositionUpdate)
+    {
+        return;
+    }
+
+    if (!std::isfinite(this->x) || !std::isfinite(this->y) || !std::isfinite(this->z))
     {
         return;
     }
