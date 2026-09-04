@@ -29,7 +29,7 @@
 auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Engaged })
+        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Engaged })
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
         .mustNotEqual(
             PChar->animation == xi::Animation::Healing &&
