@@ -49,9 +49,19 @@ void GP_CLI_COMMAND_CONFIG_LANGUAGE::process(MapSession* PSession, CCharEntity* 
         case GP_CLI_COMMAND_CONFIG_LANGUAGE_KIND::SearchLanguage:
         {
             // Player is updating chat filters
-            if (oldPlayerConfig != this->ConfigSys[0])
+            SAVE_CONF incoming = {};
+            std::memcpy(&incoming, &this->ConfigSys[0], sizeof(uint32_t));
+
+            incoming.MentorUnlockedFlg   = PChar->playerConfig.MentorUnlockedFlg;
+            incoming.MentorFlg           = PChar->playerConfig.MentorFlg;
+            incoming.NewAdventurerOffFlg = PChar->playerConfig.NewAdventurerOffFlg;
+
+            uint32_t mergedConfig = {};
+            std::memcpy(&mergedConfig, &incoming, sizeof(uint32_t));
+
+            if (oldPlayerConfig != mergedConfig)
             {
-                std::memcpy(&PChar->playerConfig, &this->ConfigSys[0], sizeof(uint32_t));
+                std::memcpy(&PChar->playerConfig, &incoming, sizeof(uint32_t));
                 charutils::SavePlayerSettings(PChar);
             }
 
