@@ -44,6 +44,12 @@ namespace blueutils
 
 void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool addingSpell)
 {
+    if (addingSpell && slotIndex >= GetTotalSlots(PChar))
+    {
+        ShowWarningFmt("SetBlueSpell: Player {} trying to set a spell in slot {} beyond their slot count", PChar->getName(), slotIndex);
+        return;
+    }
+
     // sanity check
     if (slotIndex < 20)
     {
