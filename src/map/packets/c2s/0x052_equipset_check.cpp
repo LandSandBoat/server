@@ -26,9 +26,10 @@
 
 auto GP_CLI_COMMAND_EQUIPSET_CHECK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Not implemented.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent });
+        .blockedBy({ BlockedState::InEvent })
+        .range("EquipKind", this->EquipKind, 0, 15)
+        .isValidContainer("ItemChange.Category", this->ItemChange.Category);
 }
 
 void GP_CLI_COMMAND_EQUIPSET_CHECK::process(MapSession* PSession, CCharEntity* PChar) const
