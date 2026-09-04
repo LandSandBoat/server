@@ -683,6 +683,8 @@ void CParty::AddMember(CBattleEntity* PEntity)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), MsgStd::LevelSyncActivated);
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable | xi::StatusEffectFlag::OnZone);
+                PChar->health.tp = 0;
+                PChar->updatemask |= UPDATE_HP;
                 PChar->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), m_PSyncTarget->GetMLevel(), 0s, 0s);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
             }
