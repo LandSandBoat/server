@@ -567,7 +567,7 @@ INSERT INTO `mob_skills` VALUES (535,279,'blitzstrahl',0,0.0,16.0,2633,1000,4,0,
 INSERT INTO `mob_skills` VALUES (536,280,'panzerfaust',0,0.0,16.0,2600,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (537,281,'berserk_doll',0,0.0,7.0,2916,1000,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (538,282,'panzerschreck',0,0.0,16.0,2416,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (539,283,'typhoon',1,0.0,16.0,1500,1000,4,0,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (539,283,'typhoon',1,0.0,10.0,1500,1000,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (540,898,'tremorous_tread',1,0.0,5.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (541,285,'gravity_field',2,0.0,10.0,2750,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (542,899,'empty_seed',1,0.0,20.0,2000,2000,4,0,0,7,0,0,0);
