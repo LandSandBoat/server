@@ -271,6 +271,11 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSess
             return -1;
         }
 
+        if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PSession->hasDecryptedPacket)
+        {
+            return -1;
+        }
+
         // We can only get here if an 0x00A (not encrypted) packet was here.
         // If we were pending zones, delete our old char
         if (PSession->blowfish.status == BLOWFISH_PENDING_ZONE)
