@@ -22,4 +22,19 @@ m:addOverride('xi.server.onServerStart', function()
         [8] = 2200,
         [9] = 2450,
     }
+
+    -- Namonutice event 31 and Mendi event 82 are special cases
+    -- For whatever reason the fame values are baked into the client, don't ask
+    xi.data.fame.fameConversionPoints =
+    {
+        [1] = 0,
+        [2] = 50,
+        [3] = 125,
+        [4] = 225,
+        [5] = 325,
+        [6] = 425,
+        [7] = 488,
+        [8] = 550,
+        [9] = 613,
+    }
 end)
