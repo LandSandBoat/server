@@ -2742,10 +2742,22 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
     uint32 vanaTime      = earth_time::vanadiel_timestamp();
 
+    if (PChar->fishingToken == 0)
+    {
+        PChar->animation = xi::Animation::NewFishingStop;
+        return;
+    }
+
     switch (mode)
     {
         case GP_CLI_COMMAND_FISHING_2_MODE::RequestCheckHook:
         {
+            if (PChar->animation != xi::Animation::NewFishingStart)
+            {
+                CatchNothing(PChar, FISHINGFAILTYPE_NONE);
+                return;
+            }
+
             if (vanaTime < PChar->lastCastTime + PChar->hookDelay - 2)
             {
                 CatchNothing(PChar, FISHINGFAILTYPE_NONE);
@@ -2936,6 +2948,8 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                     PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
                 }
             }
+
+            PChar->fishingToken = 0;
         }
         break;
 
