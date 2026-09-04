@@ -87,6 +87,12 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         const uint8_t  invSlotId = this->PropertyItemIndexTbl[slotId];
         const uint32_t quantity  = this->ItemNumTbl[slotId];
 
+        if (quantity == 0)
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} tried to trade NPC {} with zero quantity in slot {}!", PChar->getName(), PNpc->getName(), invSlotId);
+            return;
+        }
+
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotId);
 
         if (!PItem)
