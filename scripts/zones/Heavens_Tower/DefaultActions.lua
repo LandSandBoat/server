@@ -1,7 +1,7 @@
--- local ID = zones[xi.zone.HEAVENS_TOWER]
+local ID = zones[xi.zone.HEAVENS_TOWER]
 
 return {
-    ['_6q2']            = { event = 154 },
+    ['_6q2']            = { messageSpecial = ID.text.VESTAL_CHAMBERS_LOCKED },
     ['Abobo']           = { event = 44 },
     ['Aeshushu']        = { event = 60 },
     ['Bebibi']          = { event = 45 },

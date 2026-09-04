@@ -32,7 +32,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == xi.mission.id.nation.NONE and
-                player:getNation() == mission.areaId
+                player:getNation() == mission.areaId and
+                not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -73,8 +74,31 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.CASTLE_OZTROJA] =
+        {
+            onEventFinish =
+            {
+                -- NOTE: This event is fired from NPCs _47b and _47c.  This is to allow for trap door opening and
+                -- immediately triggering the CS.
+                -- TODO: Find an alternative method for handling the event.
+                [43] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+            },
+        },
+
         [xi.zone.HEAVENS_TOWER] =
         {
+            -- The Sibyl Guards only have these lines once event 107 has played.
+            ['Foo_Beibo'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:event(112)
+                    end
+                end,
+            },
+
             ['Kupipi'] =
             {
                 onTrigger = function(player, npc)
@@ -83,7 +107,9 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(103, 0, 0, xi.ki.STARWAY_STAIRWAY_BAUBLE)
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(104)
+                        return mission:event(104)
+                    elseif missionStatus == 4 then
+                        return mission:event(113)
                     end
                 end,
             },
@@ -96,9 +122,36 @@ mission.sections =
                     if missionStatus == 1 then
                         return mission:progressEvent(107)
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(108)
+                        return mission:event(108)
                     elseif missionStatus == 4 then
                         return mission:progressEvent(114)
+                    end
+                end,
+            },
+
+            ['Shaz_Norem'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:event(110)
+                    end
+                end,
+            },
+
+            ['Ufu_Koromoa'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:event(111)
+                    end
+                end,
+            },
+
+            ['Vahn_Paineesha'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:event(109)
                     end
                 end,
             },
@@ -125,8 +178,12 @@ mission.sections =
             ['Hakkuru-Rinkuru'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 2 then
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 2 then
                         return mission:progressEvent(147)
+                    elseif missionStatus == 3 then
+                        return mission:event(148)
                     end
                 end,
             },
@@ -139,17 +196,29 @@ mission.sections =
             },
         },
 
-        [xi.zone.CASTLE_OZTROJA] =
+        [xi.zone.WINDURST_WOODS] =
         {
-            onEventFinish =
-            {
-                -- NOTE: This event is fired from NPCs _47b and _47c.  This is to allow for trap door opening and
-                -- immediately triggering the CS.
-                -- TODO: Find an alternative method for handling the event.
-                [43] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 4)
-                end,
-            },
+            ['Rakoh_Buuma'] = mission:event(182),
+            ['Sola_Jaab']   = mission:event(184),
+            ['Tih_Pikeh']   = mission:event(183),
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == xi.mission.id.nation.NONE and
+                player:getNation() == mission.areaId and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
+        end,
+
+        [xi.zone.HEAVENS_TOWER] =
+        {
+            ['Foo_Beibo']      = mission:event(162):replaceDefault(),
+            ['Rhy_Epocan']     = mission:event(115):replaceDefault(),
+            ['Shaz_Norem']     = mission:event(117):replaceDefault(),
+            ['Ufu_Koromoa']    = mission:event(118):replaceDefault(),
+            ['Vahn_Paineesha'] = mission:event(116):replaceDefault(),
         },
     },
 }
