@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 
 #include "spell.h"
 
@@ -39,9 +40,9 @@ typedef struct
 class CMobSpellList
 {
 public:
-    CMobSpellList(uint16 listId);
+    CMobSpellList(Maybe<uint16> listId);
 
-    auto getId() const -> uint16;
+    auto getId() const -> Maybe<uint16>;
 
     void AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl);
     auto GetSpellMinLevel(SpellID spellId) const -> uint16;
@@ -50,7 +51,7 @@ public:
     std::vector<MobSpell_t> m_spellList;
 
 private:
-    uint16 m_listId{};
+    Maybe<uint16> m_listId{};
 };
 
 namespace mobSpellList

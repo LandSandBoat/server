@@ -207,6 +207,56 @@ TEST_CASE("mobs: a template keeps its mods and mob mods", "[data][mob]")
     REQUIRE(digger.Attributes.Links.value_or(false));
 }
 
+TEST_CASE("mobs: a template names its own spells", "[data][mob]")
+{
+    constexpr auto named = R"(
+templates:
+  Forest_Hare:
+    id:      1
+    species: rabbit
+    spells:  [stone, stone_ii, dia]
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    const auto  records = MobsDataset::decode(named);
+    const auto& hare    = records.Templates.at("Forest_Hare");
+
+    REQUIRE(hare.Spells == std::vector<std::string>{ "stone", "stone_ii", "dia" });
+    REQUIRE(hare.SpellList == 0);
+}
+
+TEST_CASE("mobs: a template names spells or a spell list, never both", "[data][mob]")
+{
+    constexpr auto both = R"(
+templates:
+  Forest_Hare:
+    id:            1
+    species:       rabbit
+    spells:        [stone]
+    spell_list_id: 21
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    REQUIRE_THROWS_AS(MobsDataset::decode(both), std::runtime_error);
+}
+
+TEST_CASE("mobs: a spells list naming nothing is rejected", "[data][mob]")
+{
+    constexpr auto empty = R"(
+templates:
+  Forest_Hare:
+    id:      1
+    species: rabbit
+    spells:  []
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    REQUIRE_THROWS_AS(MobsDataset::decode(empty), std::runtime_error);
+}
+
 TEST_CASE("mobs: a spawn naming an unknown template is rejected", "[data][mob]")
 {
     constexpr auto unknownTemplate = R"(

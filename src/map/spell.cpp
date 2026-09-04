@@ -22,6 +22,8 @@
 #include <array>
 #include <cstring>
 
+#include "common/types/hash_map.h"
+
 #include "lua/luautils.h"
 
 #include "blue_spell.h"
@@ -641,6 +643,31 @@ CSpell* GetSpell(SpellID SpellID)
     // False positive: this is CSpell*, so it's OK
     // cppcheck-suppress CastIntegerToAddressAtReturn
     return PSpellList[id];
+}
+
+auto lookupIdByName(const std::string_view name) -> Maybe<SpellID>
+{
+    static const auto byName = []
+    {
+        HashMap<std::string, SpellID> names;
+        for (auto* PSpell : PSpellList)
+        {
+            if (PSpell)
+            {
+                names.try_emplace(PSpell->getName(), PSpell->getID());
+            }
+        }
+
+        return names;
+    }();
+
+    const auto entry = byName.find(std::string{ name });
+    if (entry == byName.end())
+    {
+        return std::nullopt;
+    }
+
+    return entry->second;
 }
 
 bool CanUseSpell(CBattleEntity* PCaster, SpellID SpellID)

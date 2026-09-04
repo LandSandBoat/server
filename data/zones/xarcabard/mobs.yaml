@@ -178,10 +178,13 @@ templates:
         square_of_wool_cloth: 0
 
   Boreal_Coeurl:
-    id:            509
-    species:       coeurl
-    type:          [notorious]
-    spell_list_id: 102
+    id:      509
+    species: coeurl
+    type:    [notorious]
+    spells:
+      - thundaga_ii
+      - burst
+      - shock_spikes
     skill_list_id: 71
     attributes:
       combat:

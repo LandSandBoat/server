@@ -18552,7 +18552,14 @@ auto CLuaBaseEntity::getSpellListId() const -> uint16
     {
         if (PMob->m_SpellListContainer)
         {
-            return PMob->m_SpellListContainer->getId();
+            const auto listId = PMob->m_SpellListContainer->getId();
+            if (!listId)
+            {
+                ShowErrorFmt("CLuaBaseEntity::getSpellListId: {} names its own spells and has no list id", PMob->getName());
+                return 0;
+            }
+
+            return *listId;
         }
     }
 

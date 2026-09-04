@@ -180,6 +180,16 @@ auto convertTemplate(const std::string& key, const wire::Template& source) -> Mo
         throw std::runtime_error(fmt::format("template '{}' declares reserved pool id 0", key));
     }
 
+    if (source.spells && source.spell_list_id)
+    {
+        throw std::runtime_error(fmt::format("template '{}' names its own spells and a spell_list_id", key));
+    }
+
+    if (source.spells && source.spells->empty())
+    {
+        throw std::runtime_error(fmt::format("template '{}' has a spells list that names nothing", key));
+    }
+
     return {
         .Id          = source.id,
         .Name        = key,
@@ -189,6 +199,7 @@ auto convertTemplate(const std::string& key, const wire::Template& source) -> Mo
         .RoamFlags   = yaml::resolveFlags(source.roam),
         .SpellList   = source.spell_list_id.value_or(0),
         .SkillList   = source.skill_list_id.value_or(0),
+        .Spells      = source.spells.value_or(std::vector<std::string>{}),
         .Attributes  = convertAttributes(source.attributes, key),
         .Loot        = convertLoot(source.loot, key),
         .Allegiance  = yaml::resolveEnum(source.allegiance),

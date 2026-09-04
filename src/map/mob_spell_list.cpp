@@ -27,12 +27,12 @@
 
 #include "mob_spell_list.h"
 
-CMobSpellList::CMobSpellList(const uint16 listId)
+CMobSpellList::CMobSpellList(Maybe<uint16> listId)
 : m_listId(listId)
 {
 }
 
-auto CMobSpellList::getId() const -> uint16
+auto CMobSpellList::getId() const -> Maybe<uint16>
 {
     return m_listId;
 }
