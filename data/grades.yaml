@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=schemas/grades.schema.json
+#
+# The grade each job and race holds in every attribute. What a grade is worth per level lives in stats.yaml.
+#
+# https://docs.google.com/spreadsheets/d/1P1hKWKbeuUCNKoyzDGKzNE9p7K_bjX5VlqC4CSda8v0
+
+grades:
+  jobs:
+    war: {hp: b, mp: none, str: a, dex: c, vit: d, agi: c, int: f, mnd: f, chr: e}
+    mnk: {hp: a, mp: none, str: c, dex: b, vit: a, agi: f, int: g, mnd: d, chr: e}
+    whm: {hp: e, mp:    c, str: d, dex: f, vit: d, agi: e, int: e, mnd: a, chr: c}
+    blm: {hp: f, mp:    b, str: f, dex: c, vit: f, agi: c, int: a, mnd: e, chr: d}
+    rdm: {hp: d, mp:    d, str: d, dex: d, vit: e, agi: e, int: c, mnd: c, chr: d}
+    thf: {hp: d, mp: none, str: d, dex: a, vit: d, agi: b, int: c, mnd: g, chr: g}
+    pld: {hp: c, mp:    f, str: b, dex: e, vit: a, agi: g, int: g, mnd: c, chr: c}
+    drk: {hp: c, mp:    f, str: a, dex: c, vit: c, agi: d, int: c, mnd: g, chr: g}
+    bst: {hp: c, mp: none, str: d, dex: c, vit: d, agi: f, int: e, mnd: e, chr: a}
+    brd: {hp: d, mp: none, str: d, dex: d, vit: d, agi: f, int: d, mnd: d, chr: b}
+    rng: {hp: e, mp: none, str: e, dex: d, vit: d, agi: a, int: e, mnd: d, chr: e}
+    sam: {hp: b, mp: none, str: c, dex: c, vit: c, agi: d, int: e, mnd: e, chr: d}
+    nin: {hp: d, mp: none, str: c, dex: b, vit: c, agi: b, int: d, mnd: g, chr: f}
+    drg: {hp: b, mp: none, str: b, dex: d, vit: c, agi: d, int: f, mnd: e, chr: c}
+    smn: {hp: g, mp:    a, str: f, dex: e, vit: f, agi: d, int: b, mnd: b, chr: b}
+    blu: {hp: d, mp:    d, str: e, dex: e, vit: e, agi: e, int: e, mnd: e, chr: e}
+    cor: {hp: d, mp: none, str: e, dex: c, vit: e, agi: b, int: c, mnd: e, chr: e}
+    pup: {hp: d, mp: none, str: e, dex: b, vit: d, agi: c, int: e, mnd: f, chr: c}
+    dnc: {hp: d, mp: none, str: d, dex: c, vit: e, agi: b, int: f, mnd: f, chr: b}
+    sch: {hp: e, mp:    d, str: f, dex: d, vit: e, agi: d, int: b, mnd: d, chr: c}
+    geo: {hp: d, mp:    c, str: f, dex: d, vit: d, agi: e, int: b, mnd: b, chr: e}
+    run: {hp: b, mp:    f, str: c, dex: d, vit: e, agi: b, int: d, mnd: d, chr: f}
+
+  races:
+    hume:     {hp: d, mp: d, str: d, dex: d, vit: d, agi: d, int: d, mnd: d, chr: d}
+    elvaan:   {hp: c, mp: e, str: b, dex: e, vit: c, agi: f, int: f, mnd: b, chr: d}
+    tarutaru: {hp: g, mp: a, str: f, dex: d, vit: e, agi: c, int: a, mnd: e, chr: d}
+    mithra:   {hp: d, mp: d, str: e, dex: a, vit: e, agi: b, int: d, mnd: e, chr: f}
+    galka:    {hp: a, mp: g, str: c, dex: d, vit: a, agi: e, int: e, mnd: d, chr: f}

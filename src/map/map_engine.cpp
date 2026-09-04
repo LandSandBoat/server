@@ -33,6 +33,7 @@
 
 #include "ability.h"
 #include "daily_system.h"
+#include "grades.h"
 #include "ipc_client.h"
 #include "job_points.h"
 #include "map_networking.h"
@@ -188,6 +189,7 @@ auto MapEngine::init() -> Task<void>
     charutils::LoadExpTable();
     traits::LoadTraitsList();
     effects::LoadEffectsParameters();
+    grade::LoadGrades();
     mobutils::LoadSpeciesData();
     battleutils::LoadSkillTable();
     meritNameSpace::LoadMeritsList();

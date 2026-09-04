@@ -1,0 +1,22 @@
+# Player growth as it was before the April 2014 update.
+
+stats:
+  round_once: false # Each part was rounded on its own
+
+  hp:
+    racial:
+      1:  {hume: 14, elvaan: 16, tarutaru: 10, mithra: 14, galka: 19}
+      2:  {hume:  6, elvaan:  7, tarutaru:  3, mithra:  6, galka:  9}
+      11: {hume:  7, elvaan:  8, tarutaru:  4, mithra:  7, galka: 10}
+      31: {hume:  7, elvaan:  9, tarutaru:  4, mithra:  7, galka: 11}
+      51: {hume:  8, elvaan: 10, tarutaru:  5, mithra:  8, galka: 12}
+      61: {hume:  4, elvaan:  4, tarutaru:  3, mithra:  4, galka:  4}
+      76: {hume:  0, elvaan:  0, tarutaru:  0, mithra:  0, galka:  0}
+
+  mp:
+    racial:
+      1:  {hume: 10, elvaan: 8, tarutaru: 16, mithra: 10, galka: 4}
+      2:  {hume:  3, elvaan: 2, tarutaru:  6, mithra:  3, galka: 1}
+      31: {hume:  3, elvaan: 3, tarutaru:  6, mithra:  3, galka: 0}
+      61: {hume:  4, elvaan: 1, tarutaru:  4, mithra:  4, galka: 1}
+      76: {hume:  0, elvaan: 0, tarutaru:  0, mithra:  0, galka: 0}

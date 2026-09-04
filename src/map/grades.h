@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _GRADES_H
-#define _GRADES_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -29,17 +28,15 @@
 namespace grade
 {
 
-auto  GetJobGrade(xi::Job job, uint8 stat) -> uint8;
-uint8 GetRaceGrades(uint8 race, uint8 stat);
+void LoadGrades();
 
-float GetHPScale(uint8 rank, uint8 scale);
-float GetMPScale(uint8 rank, uint8 scale);
-float GetStatScale(uint8 rank, uint8 scale);
-auto  GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16;
-auto  GetBaseHP(uint8 race, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16;
-auto  GetBaseMP(uint8 race, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16;
-uint8 GetMobHPScale(uint8 rank, uint8 scale);
+auto GetJobGrade(xi::Job job, uint8 stat) -> uint8;
+auto GetRaceGrades(uint8 race, uint8 stat) -> uint8;
+auto GetHPScale(uint8 rank, uint8 scale) -> float;
+auto GetMPScale(uint8 rank, uint8 scale) -> float;
+auto GetBaseStat(uint8 raceRank, uint8 jobRank, uint8 level, uint8 subJobRank, uint8 subLevel) -> uint16;
+auto GetBaseHP(uint8 race, uint8 jobGrade, uint8 level, uint8 subJobGrade, uint8 subLevel) -> uint16;
+auto GetBaseMP(uint8 race, uint8 jobGrade, uint8 level, uint8 subJobGrade, uint8 subLevel) -> uint16;
+auto GetMobHPScale(uint8 rank, uint8 scale) -> uint8;
 
 }; // namespace grade
-
-#endif
