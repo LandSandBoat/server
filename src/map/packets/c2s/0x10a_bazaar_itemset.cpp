@@ -32,6 +32,7 @@ auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(MapSession* PSession, const CCharEn
     // TODO: Need PV to support short-circuiting so we can nest null checks and move the PStorage/PItem checks here
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
+        .mustEqual(PChar->isSettingBazaarPrices, true, "isSettingBazaarPrices not true")
         .range("Price", this->Price, 0, 99999999); // Bazaar max sell price is 99,999,999 gil
 }
 
