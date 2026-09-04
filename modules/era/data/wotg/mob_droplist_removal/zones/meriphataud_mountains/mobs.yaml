@@ -1,0 +1,103 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Yagudo_Mendicant:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_bead_necklace
+        - chance: uncommon
+          item:   silver_beastcoin
+
+  Yagudo_Persecutor:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_bead_necklace
+        - chance: uncommon
+          item:   silver_beastcoin
+
+  Yagudo_Piper:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_bead_necklace
+        - chance: uncommon
+          item:   silver_beastcoin
+        - chance: rare
+          item:   scroll_of_foe_lullaby
+
+  Yagudo_Priest:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: uncommon
+          item:   silver_beastcoin
+        - chance: very_rare
+          item:   scroll_of_barpoisonra
+        - chance: very_rare
+          item:   scroll_of_invisible
+        - chance: very_rare
+          item:   scroll_of_deodorize
+        - chance: rare
+          item:   scroll_of_silence
+
+  Yagudo_Theologist:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+
+  Yagudo_Votary:
+    loot: # seedspall_astrum removed
+      drops:
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather
+        - chance: common
+          item:   yagudo_feather

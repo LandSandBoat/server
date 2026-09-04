@@ -1,0 +1,16 @@
+# NIN quest mobs before the May 10, 2011 version update.
+# Source: https://forum.square-enix.com/ffxi/threads/7257
+
+templates:
+  Korroloka_Leech:
+    attributes:
+      stats:
+        hp: 900
+
+spawns:
+  17486187:
+    level: [32, 32]
+  17486188:
+    level: [32, 32]
+  17486189:
+    level: [32, 32]

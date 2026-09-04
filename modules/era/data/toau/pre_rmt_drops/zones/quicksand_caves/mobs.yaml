@@ -1,0 +1,17 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Antican_Magister:
+    loot: # piece_of_angel_skin added (rare)
+      drops:
+        - chance: uncommon
+          item:   arcanabane
+        - chance: always
+          item:   chunk_of_mythril_ore
+        - chance: always
+          item:   antican_pauldron
+        - chance: rare
+          item:   piece_of_angel_skin

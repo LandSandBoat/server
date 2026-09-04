@@ -1,0 +1,17 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Stroper_Chyme:
+    loot: # shikaree_ring replaced by archers_ring
+      drops:
+        - chance: uncommon
+          item:   vial_of_slime_oil
+        - chance: uncommon
+          item:   vial_of_slime_oil
+        - chance: rare
+          item:   ordelle_chest_key
+        - chance: very_rare
+          item:   archers_ring

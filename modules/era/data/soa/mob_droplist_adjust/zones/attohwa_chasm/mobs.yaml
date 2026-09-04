@@ -1,0 +1,23 @@
+# Tiamat drops Herald's Gaiters instead of Crier's Gaiters, as before the March 26, 2015 version update.
+# Source: https://forum.square-enix.com/ffxi/threads/46531-Mar-26-2015-%28JST%29-Version-Update
+
+templates:
+
+  Tiamat:
+    loot: # criers_gaiters replaced by heralds_gaiters
+      drops:
+        - chance: common
+          item:   noritsune_kote
+        - chance: common
+          item:   heralds_gaiters
+        - chance: very_common
+          one_of:
+            wyrm_horn:    75
+            dragon_heart: 25
+        - chance: very_common
+          one_of:
+            dragon_talon:         45
+            vial_of_dragon_blood: 45
+            slice_of_dragon_meat: 10
+        - chance: very_common
+          one_of: [adaman_ingot, damascus_ingot, divine_log, square_of_damascene_cloth, spool_of_malboro_fiber, behemoth_hide, vial_of_black_beetle_blood, piece_of_oxblood, lock_of_sirens_hair]
