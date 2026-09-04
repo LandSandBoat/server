@@ -44,6 +44,24 @@ CASES = {
           b: {m: 1, n: 2}
         """,
     ),
+    "aligns cells across flow mappings sharing a key set": (
+        """
+        hp:
+          1: {a: 19, b: 9}
+          11: {a: 9, b: 10}
+        jobs:
+          war: {hp: b, mp: none}
+          whm: {hp: e, mp: c}
+        """,
+        """
+        hp:
+          1:  {a: 19, b:  9}
+          11: {a:  9, b: 10}
+        jobs:
+          war: {hp: b, mp: none}
+          whm: {hp: e, mp:    c}
+        """,
+    ),
     "collapses blank lines, trims trailing ws": (
         "a: 1   \n\n\n\nb: 2\n",
         "a: 1\n\nb: 2\n",

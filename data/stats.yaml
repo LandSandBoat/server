@@ -1,0 +1,125 @@
+# yaml-language-server: $schema=schemas/stats.schema.json
+#
+# What a grade is worth per level. Which grade a job or race holds lives in grades.yaml.
+#
+# Race and job parts are summed, the subjob adds half of its own job part.
+#
+# A row is what that level grants, and holds until the next row.
+# Level 1 is the starting value, and a row of zeroes means it stopped.
+#
+# https://docs.google.com/spreadsheets/d/1P1hKWKbeuUCNKoyzDGKzNE9p7K_bjX5VlqC4CSda8v0
+
+stats:
+  round_once: true
+
+  hp:
+    graded:
+      1:  {a: 19, b: 17, c: 16, d: 14, e: 13, f: 11, g: 10}
+      2:  {a:  9, b:  8, c:  7, d:  6, e:  5, f:  4, g:  3}
+      11: {a: 10, b:  9, c:  8, d:  7, e:  6, f:  5, g:  4}
+      31: {a: 11, b: 10, c:  9, d:  7, e:  6, f:  5, g:  4}
+      51: {a: 12, b: 11, c: 10, d:  8, e:  7, f:  6, g:  5}
+      61: {a:  4, b:  4, c:  4, d:  4, e:  3, f:  3, g:  3}
+      76: {a: 10, b:  9, c:  9, d:  9, e:  9, f:  8, g:  8}
+      77: {a:  8, b:  9, c:  8, d:  8, e:  7, f:  8, g:  7}
+      78: {a: 10, b:  9, c: 10, d:  9, e:  9, f:  8, g:  8}
+      79: {a:  8, b:  9, c:  8, d:  8, e:  8, f:  7, g:  7}
+      80: {a: 10, b:  9, c:  9, d:  9, e:  8, f:  9, g:  8}
+      81: {a:  8, b:  8, c:  8, d:  8, e:  8, f:  7, g:  7}
+      82: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      83: {a:  8, b:  8, c:  9, d:  8, e:  7, f:  8, g:  7}
+      84: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      85: {a: 10, b:  9, c:  9, d:  9, e:  9, f:  8, g:  8}
+      86: {a:  8, b:  8, c:  8, d:  8, e:  7, f:  8, g:  7}
+      87: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      88: {a:  8, b:  8, c:  9, d:  8, e:  8, f:  7, g:  7}
+      89: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      90: {a:  8, b:  8, c:  8, d:  8, e:  7, f:  8, g:  7}
+      91: {a: 10, b:  9, c:  9, d:  9, e:  9, f:  8, g:  8}
+      92: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      93: {a:  8, b:  8, c:  9, d:  8, e:  7, f:  8, g:  7}
+      94: {a: 10, b: 10, c:  9, d:  9, e:  9, f:  8, g:  8}
+      95: {a:  8, b:  8, c:  8, d:  8, e:  8, f:  7, g:  7}
+      96: {a: 10, b:  9, c:  9, d:  9, e:  8, f:  9, g:  8}
+      97: {a:  8, b:  9, c:  8, d:  8, e:  8, f:  7, g:  7}
+      98: {a: 10, b:  9, c: 10, d:  9, e:  9, f:  8, g:  8}
+      99: {a:  8, b:  9, c:  8, d:  8, e:  7, f:  8, g:  7}
+    racial:
+      1:  {hume: 17, elvaan: 18, tarutaru: 16, mithra: 17, galka: 19}
+      2:  {hume:  7, elvaan:  8, tarutaru:  6, mithra:  7, galka:  9}
+      11: {hume:  9, elvaan:  9, tarutaru:  8, mithra:  9, galka: 10}
+      31: {hume:  9, elvaan: 10, tarutaru:  9, mithra:  9, galka: 11}
+      51: {hume: 10, elvaan: 11, tarutaru: 10, mithra: 10, galka: 12}
+      61: {hume:  4, elvaan:  4, tarutaru:  4, mithra:  4, galka:  4}
+      76: {hume:  0, elvaan:  0, tarutaru:  0, mithra:  0, galka:  0}
+
+  # No job holds an E or G mp grade.
+  mp:
+    graded:
+      1:  {a: 16, b: 14, c: 12, d: 10, f: 6}
+      2:  {a:  6, b:  5, c:  4, d:  3, f: 1}
+      61: {a:  4, b:  4, c:  4, d:  4, f: 2}
+      76: {a:  8, b:  8, c:  8, d:  8, f: 6}
+      77: {a: 10, b:  9, c:  9, d:  9, f: 7}
+      78: {a:  8, b:  9, c:  8, d:  8, f: 7}
+      79: {a: 10, b:  9, c:  9, d:  9, f: 7}
+      80: {a: 10, b: 10, c: 10, d:  9, f: 8}
+      81: {a:  8, b:  8, c:  8, d:  8, f: 6}
+      82: {a: 10, b: 10, c:  9, d:  9, f: 7}
+      83: {a: 10, b:  9, c:  9, d:  9, f: 8}
+      84: {a:  8, b:  9, c:  9, d:  8, f: 6}
+      85: {a: 10, b:  9, c:  9, d:  9, f: 8}
+      86: {a: 10, b: 10, c:  9, d:  9, f: 7}
+      87: {a:  8, b:  8, c:  8, d:  8, f: 6}
+      88: {a: 10, b: 10, c: 10, d: 10, f: 8}
+      89: {a:  8, b:  8, c:  8, d:  8, f: 6}
+      90: {a: 10, b: 10, c:  9, d:  9, f: 8}
+      91: {a: 10, b:  9, c:  9, d:  9, f: 7}
+      92: {a:  8, b:  9, c:  9, d:  8, f: 6}
+      93: {a: 10, b:  9, c:  9, d:  9, f: 8}
+      94: {a: 10, b: 10, c:  9, d:  9, f: 7}
+      95: {a:  8, b:  8, c:  8, d:  8, f: 7}
+      96: {a: 10, b: 10, c: 10, d:  9, f: 7}
+      97: {a: 10, b:  9, c:  9, d:  9, f: 7}
+      98: {a:  8, b:  9, c:  8, d:  8, f: 7}
+      99: {a: 10, b:  9, c:  9, d:  9, f: 7}
+    racial:
+      1:  {hume: 14, elvaan: 12, tarutaru: 16, mithra: 14, galka: 8}
+      2:  {hume:  5, elvaan:  4, tarutaru:  6, mithra:  5, galka: 3}
+      61: {hume:  4, elvaan:  4, tarutaru:  4, mithra:  4, galka: 4}
+      76: {hume:  0, elvaan:  0, tarutaru:  0, mithra:  0, galka: 0}
+
+  # Twentieths of a point.
+  attributes:
+    1:  {a: 100, b: 80, c: 80, d: 60, e: 60, f: 40, g: 40}
+    2:  {a:  10, b:  9, c:  8, d:  7, e:  6, f:  5, g:  4}
+    61: {a:   0, b:  0, c:  0, d:  0, e:  0, f:  0, g:  0}
+    62: {a:   0, b:  0, c: 10, d: 10, e: 10, f: 10, g: 10}
+    63: {a:   0, b: 10, c:  0, d: 10, e: 10, f: 10, g: 10}
+    64: {a:   0, b:  0, c: 10, d:  0, e:  0, f: 10, g: 10}
+    65: {a:  10, b: 10, c:  0, d: 10, e: 10, f: 10, g: 10}
+    66: {a:   0, b:  0, c: 10, d: 10, e: 10, f:  0, g:  0}
+    67: {a:   0, b:  0, c:  0, d:  0, e:  0, f: 10, g: 10}
+    68: {a:   0, b: 10, c: 10, d: 10, e: 10, f: 10, g: 10}
+    69: {a:   0, b:  0, c:  0, d: 10, e: 10, f: 10, g: 10}
+    70: {a:  10, b: 10, c: 10, d: 10, e: 10, f: 10, g: 10}
+    71: {a:   0, b:  0, c:  0, d:  0, e:  0, f:  0, g:  0}
+    72: {a:   0, b:  0, c: 10, d: 10, e: 10, f: 10, g: 10}
+    73: {a:   0, b: 10, c: 10, d: 10, e: 10, f: 10, g: 10}
+    74: {a:   0, b:  0, c:  0, d:  0, e:  0, f: 10, g: 10}
+    75: {a:  10, b: 10, c: 10, d: 10, e: 10, f: 10, g: 10}
+
+  # Past 75 every attribute gains the same.
+  ungraded:
+    76: 0
+    77: 1
+    80: 0
+    81: 1
+    85: 0
+    86: 1
+    89: 0
+    90: 1
+    94: 0
+    95: 1
+    98: 0
+    99: 1

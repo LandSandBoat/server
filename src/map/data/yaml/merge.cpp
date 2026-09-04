@@ -24,6 +24,8 @@
 #include <glaze/json/patch.hpp>
 #include <glaze/yaml.hpp>
 
+#include <algorithm>
+#include <cctype>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
@@ -45,6 +47,43 @@ auto readDocument(const std::string_view text) -> glz::generic_u64
     }
 
     return document;
+}
+
+// Glaze holds every generic object key as a string, so a merged document comes back with integer map
+// keys quoted, which its own reader then cannot parse into anything but a string key. Dropping the
+// quotes around an all-digit key reads the same for a string-keyed map and lets an integer-keyed one load.
+auto unquoteNumericKeys(std::string yaml) -> std::string
+{
+    std::size_t line = 0;
+    while (line < yaml.size())
+    {
+        const auto end   = yaml.find('\n', line);
+        const auto start = yaml.find_first_not_of(" -", line);
+
+        if (start != std::string::npos && start < end && yaml[start] == '\'')
+        {
+            const auto close = yaml.find('\'', start + 1);
+            if (close != std::string::npos && close + 1 < end && yaml[close + 1] == ':' &&
+                close > start + 1 &&
+                std::all_of(yaml.begin() + start + 1, yaml.begin() + close, [](const char digit)
+                            {
+                                return std::isdigit(static_cast<unsigned char>(digit)) != 0;
+                            }))
+            {
+                yaml.erase(close, 1);
+                yaml.erase(start, 1);
+            }
+        }
+
+        if (end == std::string::npos)
+        {
+            break;
+        }
+
+        line = end + 1;
+    }
+
+    return yaml;
 }
 
 auto slurp(const std::string_view path) -> std::string
@@ -85,7 +124,7 @@ auto mergeYaml(const std::string_view core, const std::span<const std::string> m
         throw std::runtime_error("Glaze could not serialize patched YAML");
     }
 
-    return *output;
+    return unquoteNumericKeys(std::move(*output));
 }
 
 auto loadMergedYaml(const std::string_view corePath, const std::span<const std::string> modulePaths) -> std::string
