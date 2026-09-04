@@ -144,6 +144,7 @@ auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEnt
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
+        .isInMogHouse()
         .range("MyroomFloorFlg", this->MyroomFloorFlg, 0, 1) // Flag indicating if 2nd floor
         .range("v", this->v, 0, 3)                           // Rotation of the item (0-3)
         .range("y", this->y, 0, 25);                         // Stacking elevation (parent height / 10)
@@ -311,6 +312,13 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         }
 
         bool wasInstalled = PItem->isInstalled();
+
+        if (wasInstalled && PItem->getOn2ndFloor() != is2F)
+        {
+            ShowErrorFmt("Floor change on installed furnishing: {}", PChar->getName());
+            return;
+        }
+
         PItem->setInstalled(true);
         PItem->setOn2ndFloor(this->MyroomFloorFlg);
         PItem->setCol(this->x);
