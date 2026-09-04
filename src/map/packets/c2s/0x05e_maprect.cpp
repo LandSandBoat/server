@@ -164,7 +164,7 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             }
 
             bool moghouseExitRegular          = exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom && PChar->inMogHouse();
-            bool requestedMoghouseFloorChange = startingZone == destinationZone && (exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F || exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F);
+            bool requestedMoghouseFloorChange = PChar->inMogHouse() && startingZone == destinationZone && (exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F || exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F);
             bool moghouse2FUnlocked           = (PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F");
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
