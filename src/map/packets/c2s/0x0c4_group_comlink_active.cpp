@@ -99,6 +99,13 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
         oldLinkshell = PChar->PLinkshell2;
     }
 
+    if (PItemLinkshell->GetLSType() == LSTYPE_BROKEN)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
+
+        return;
+    }
+
     // If the linkshell has been broken, break the item
     const auto rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PItemLinkshell->GetLSID());
     if (rset && rset->rowsCount() && rset->next() && rset->get<uint8>("broken") == 1)
