@@ -367,6 +367,12 @@ auto Transaction::claim(const CCharEntity* owner, CItem* item) -> ItemId
         return {};
     }
 
+    // gil is never claimed, a debit is checked against the balance when it applies
+    if (item->isType(ITEM_CURRENCY))
+    {
+        return ItemId(owner, item);
+    }
+
     // one entry per stack, so a single release is enough
     if (this->holds(item))
     {
@@ -551,19 +557,6 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     return true;
 }
 
-// Gil is claimed like any other stack, and stays held for the rest of the transaction
-auto Transaction::claimGil(const CCharEntity* PChar) -> bool
-{
-    if (!PChar)
-    {
-        return false;
-    }
-
-    CItem* PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
-
-    return PGil && PGil->isType(ITEM_CURRENCY) && this->claim(PChar, PGil).isSet();
-}
-
 auto Transaction::mergeInto(CCharEntity* PChar, const uint8 location, const uint8 slot, const uint32 quantity) -> bool
 {
     const auto merged = this->updateItem(PChar, location, slot, static_cast<int32>(quantity));
@@ -586,12 +579,12 @@ auto Transaction::mergeInto(CCharEntity* PChar, const uint8 location, const uint
 
 auto Transaction::pay(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    return this->claimGil(PChar) && this->take(PChar, LOC_INVENTORY, 0, gil);
+    return PChar && this->take(PChar, LOC_INVENTORY, 0, gil);
 }
 
 auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    if (!this->claimGil(PChar))
+    if (!PChar)
     {
         return false;
     }

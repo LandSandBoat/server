@@ -351,10 +351,12 @@ describe('PlayerTradeTransaction', function()
         assert(p1:getGil() == 3000, 'p1 gil: ' .. tostring(p1:getGil()))
     end)
 
-    it('staged gil cannot be spent at a vendor', function()
+    -- gil is not claimed, so the balance is checked at Make
+    it('gil spent at a vendor during a trade cancels the trade at Make', function()
         local gear = xi.item.BRONZE_DAGGER
 
         p1:setGil(5000)
+        p2:setGil(0)
         p1:createShop(1)
         p1:addShopItem(gear, 1000)
 
@@ -362,8 +364,31 @@ describe('PlayerTradeTransaction', function()
         p1.actions:tradeOffer(0, 0, xi.item.GIL, 5000)
         p1.actions:shopBuy(0, 1)
 
-        assert(p1:getGil() == 5000, 'p1 gil: ' .. tostring(p1:getGil()))
-        p1.assert.no:hasItem(gear)
+        assert(p1:getGil() == 4000, 'p1 gil after the buy: ' .. tostring(p1:getGil()))
+        p1.assert:hasItem(gear)
+
+        p1.actions:tradeMake()
+        p2.actions:tradeMake()
+
+        assert(p1:getGil() == 4000, 'p1 gil after Make: ' .. tostring(p1:getGil()))
+        assert(p2:getGil() == 0, 'p2 gil after Make: ' .. tostring(p2:getGil()))
+    end)
+
+    it('gil earned while staged lands and the trade still completes', function()
+        p1:setGil(1000)
+        p2:setGil(0)
+
+        openTrade()
+        p1.actions:tradeOffer(0, 0, xi.item.GIL, 1000)
+        p1:addGil(500)
+
+        assert(p1:getGil() == 1500, 'p1 gil after the credit: ' .. tostring(p1:getGil()))
+
+        p1.actions:tradeMake()
+        p2.actions:tradeMake()
+
+        assert(p1:getGil() == 500, 'p1 gil after Make: ' .. tostring(p1:getGil()))
+        assert(p2:getGil() == 1000, 'p2 gil after Make: ' .. tostring(p2:getGil()))
     end)
 
     it('the server refuses a Make from out of range', function()

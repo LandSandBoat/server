@@ -213,6 +213,11 @@ void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEnt
         {
             if (PItemLinkshell->getID() == ITEMID::NEW_LINKSHELL)
             {
+                if (PItemLinkshell->isBusy())
+                {
+                    return;
+                }
+
                 // Case 1. New Linkshell, create it.
                 createLinkshell(PChar, PItemLinkshell, *this);
             }

@@ -1006,9 +1006,18 @@ void LoadInventory(CCharEntity* PChar)
 
                 if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == LOC_MOGSAFE || PItem->getLocationID() == LOC_MOGSAFE2))
                 {
-                    if (static_cast<CItemFurnishing*>(PItem.get())->isInstalled()) // Check if furniture (furnishing) item is actually installed
+                    auto* PFurnishing = static_cast<CItemFurnishing*>(PItem.get());
+                    if (PFurnishing->isInstalled())
                     {
-                        PChar->getStorage(LOC_STORAGE)->AddBuff(static_cast<CItemFurnishing*>(PItem.get())->getStorage());
+                        if (xi::items::mark(PFurnishing, ItemState::PlacedFurniture))
+                        {
+                            PChar->getStorage(LOC_STORAGE)->AddBuff(PFurnishing->getStorage());
+                        }
+                        else
+                        {
+                            ShowWarningFmt("LoadInventory: could not mark installed furnishing {} for {}, uninstalling it", PFurnishing->getID(), PChar->getName());
+                            PFurnishing->setInstalled(false);
+                        }
                     }
                 }
                 const uint8 locID  = PItem->getLocationID();
