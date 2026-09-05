@@ -447,7 +447,7 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
         // make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
         if (PInvitee->isDead() ||
             jailutils::InPrison(PInvitee) ||
-            PInvitee->InvitePending.UniqueNo != 0 ||
+            PInvitee->InvitePending.entity.UniqueNo != 0 ||
             (PInvitee->PParty && message.inviteType == PartyKind::Party) ||
             (message.inviteType == PartyKind::Alliance && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || (PInvitee->PParty && PInvitee->PParty->m_PAlliance))))
         {
@@ -489,8 +489,9 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
             return;
         }
 
-        PInvitee->InvitePending.UniqueNo = message.inviterId;
-        PInvitee->InvitePending.ActIndex = message.inviterTargId;
+        PInvitee->InvitePending.entity.UniqueNo = message.inviterId;
+        PInvitee->InvitePending.entity.ActIndex = message.inviterTargId;
+        PInvitee->InvitePending.kind            = message.inviteType;
 
         PInvitee->pushPacket(std::make_unique<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(message.inviterId, message.inviterTargId, message.inviterName, message.inviteType));
     }

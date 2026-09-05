@@ -238,6 +238,19 @@ enum CHAR_SUBSTATE
     SUBSTATE_LAST,
 };
 
+enum class PartyKind : uint8_t;
+
+struct PendingInvite
+{
+    EntityId  entity{};
+    PartyKind kind{};
+
+    void clean()
+    {
+        *this = {};
+    }
+};
+
 enum class WarpRequest : uint8
 {
     None      = 0,
@@ -597,7 +610,7 @@ public:
 
     timer::time_point lastTradeInvite{};
     EntityId          TradePending{};    // Character ID offering trade
-    EntityId          InvitePending{};   // Character ID sending party invite
+    PendingInvite     InvitePending{};   // Set on the invitee by a party invite
     EntityId          BazaarID{};        // Pointer to the bazaar we are browsing.
     BazaarList_t      BazaarCustomers{}; // Array holding the IDs of the current customers
 

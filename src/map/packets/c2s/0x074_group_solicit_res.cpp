@@ -24,6 +24,7 @@
 #include "alliance.h"
 #include "common/ipc_structs.h"
 #include "entities/char_entity.h"
+#include "enums/party_kind.h"
 #include "ipc_client.h"
 #include "packets/s2c/0x009_message.h"
 #include "party.h"
@@ -39,7 +40,14 @@ auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCha
 
 void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.UniqueNo, PChar->InvitePending.ActIndex); PInviter != nullptr)
+    if (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res) == GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept && PChar->InvitePending.kind == PartyKind::Party && PChar->PParty != nullptr)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
+        PChar->InvitePending.clean();
+        return;
+    }
+
+    if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.entity.UniqueNo, PChar->InvitePending.entity.ActIndex); PInviter != nullptr)
     {
         // This switch statement only occurs when both the invitee and inviter are on the same process
         switch (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res))
@@ -135,8 +143,8 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
         message::send(ipc::PartyInviteResponse{
             .inviteeId     = PChar->id,
             .inviteeTargId = PChar->targid,
-            .inviterId     = PChar->InvitePending.UniqueNo,
-            .inviterTargId = PChar->InvitePending.ActIndex,
+            .inviterId     = PChar->InvitePending.entity.UniqueNo,
+            .inviterTargId = PChar->InvitePending.entity.ActIndex,
             .inviteAnswer  = this->Res,
         });
     }

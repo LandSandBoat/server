@@ -49,4 +49,14 @@ describe('Alliance formation', function()
 
         assert(a:getAllianceSize() == 4, 'a party with trusts joined the alliance')
     end)
+
+    it('does not turn a party invite into an alliance', function()
+        a.actions:inviteToParty(c)
+        formParty(c, d)
+
+        c.actions:acceptPartyInvite()
+
+        assert(a:getAllianceSize() == 2 and c:getAllianceSize() == 2, 'a party invite formed an alliance')
+        assert(c:getPartyLeader():getID() == c:getID(), 'the invitee lost their own party')
+    end)
 end)
