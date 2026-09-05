@@ -361,15 +361,18 @@ npcs:
     widescan: true
 
   16986647:
-    script: qm7
-    at:     [-450.597, -26.218, 414.071, 164]
+    script:       qm7
+    display_name: ???
+    at:           [-450.597, -26.218, 414.071, 164]
     render:
       look:
         type:  standard
         model: 52
       moving: 1
+    status:          normal
     speed:           40
     animation_speed: 40
+    content:         toau
 
   16986648:
     script: qm8
