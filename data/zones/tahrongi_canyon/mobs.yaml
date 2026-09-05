@@ -51,6 +51,7 @@ templates:
         hitbox:         20
       behaviors:
         links: true
+      detects: [hearing]
       spawn:
         respawn: 300
     loot:

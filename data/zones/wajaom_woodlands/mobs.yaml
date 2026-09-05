@@ -849,6 +849,7 @@ templates:
         hitbox:        17
       behaviors:
         aggressive: true
+      detects: [hearing, lowhp, ability]
       spawn:
         respawn: 300
         type:    [at_night]
@@ -870,6 +871,7 @@ templates:
         hitbox:        17
       behaviors:
         aggressive: true
+      detects: [hearing, lowhp, ability]
       spawn:
         respawn: 300
         type:    [at_night]
@@ -892,6 +894,7 @@ templates:
         hitbox:        17
       behaviors:
         aggressive: true
+      detects: [hearing, lowhp, ability]
       spawn:
         respawn: 300
         type:    [at_night]
@@ -913,6 +916,7 @@ templates:
         hitbox:        17
       behaviors:
         aggressive: true
+      detects: [hearing, lowhp, ability]
       spawn:
         respawn: 300
         type:    [at_night]
