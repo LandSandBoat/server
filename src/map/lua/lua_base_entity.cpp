@@ -14204,11 +14204,11 @@ auto CLuaBaseEntity::addStatusEffect(const xi::StatusEffect effectId, sol::table
 
     // Optional parameters
     const auto duration        = params["duration"].get_or(0.0);
-    const auto power           = static_cast<uint16>(params["power"].get_or(0.0));
-    const auto tick            = static_cast<uint32>(params["tick"].get_or(0.0));
+    const auto power           = static_cast<uint16>(static_cast<int64>(params["power"].get_or(0.0)));
+    const auto tick            = static_cast<uint32>(static_cast<int64>(params["tick"].get_or(0.0)));
     const auto icon            = params["icon"].get_or(static_cast<uint16>(effectId));
     const auto subType         = params["subType"].get_or(0u);
-    const auto subPower        = static_cast<uint16>(params["subPower"].get_or(0.0));
+    const auto subPower        = static_cast<uint16>(static_cast<int64>(params["subPower"].get_or(0.0)));
     const auto subIcon         = params["subIcon"].get_or(0u);
     const auto tier            = params["tier"].get_or<uint16>(0);
     const auto flag            = params["flag"].get_or(0u);

@@ -53,8 +53,15 @@ auto stepTowards(position_t& pos, const position_t& target, float stepDistance, 
             return;
         }
 
+        const float flatDistance = distance(pos, target, true);
+        if (flatDistance <= 0.0f)
+        {
+            pos.y = target.y;
+            return;
+        }
+
         const float startY = pos.y;
-        const float newY   = startY + stepDistance * (target.y - startY) / distance(pos, target, true);
+        const float newY   = startY + stepDistance * (target.y - startY) / flatDistance;
         const float minY   = std::min(startY, target.y);
         const float maxY   = std::max(startY, target.y);
         pos.y              = std::clamp(newY, minY, maxY);
