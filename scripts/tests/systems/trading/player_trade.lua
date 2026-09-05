@@ -395,4 +395,15 @@ describe('PlayerTradeTransaction', function()
 
         p1.assert:hasItem(itemA)
     end)
+
+    it('ignores a Start from the side that requested the trade', function()
+        p1:addItem(itemA)
+        p1.actions:tradeRequest(p2)
+        p1.actions:tradeAccept()
+
+        local item = findItem(p1, itemA)
+        p1.actions:tradeOffer(1, item:getSlotID(), itemA, 1)
+
+        assert(findItem(p1, itemA):state() == xi.itemState.FREE, 'the requester opened the trade by themselves')
+    end)
 end)

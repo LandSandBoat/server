@@ -57,6 +57,7 @@
 #include "map/packets/c2s/0x0ab_guild_buylist.h"
 #include "map/packets/c2s/0x0ac_guild_sell.h"
 #include "map/packets/c2s/0x0ad_guild_selllist.h"
+#include "map/packets/c2s/0x0e0_set_usermsg.h"
 #include "map/packets/c2s/0x0fa_myroom_layout.h"
 #include "map/packets/c2s/0x0fc_myroom_plant_add.h"
 #include "map/packets/c2s/0x0fd_myroom_plant_check.h"
@@ -556,6 +557,23 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
     {
         parent_->events().expect(expectedEvent.value());
     }
+}
+
+/************************************************************************
+ *  Function: setSearchMessage()
+ *  Purpose : Emits packet 0x0E0 to set the player's search comment.
+ *  Example : player.actions:setSearchMessage('LFP')
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::setSearchMessage(const std::string& message, sol::optional<uint32> msgType) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_SET_USERMSG>();
+    auto*      data   = packet->as<GP_CLI_COMMAND_SET_USERMSG>();
+
+    std::memcpy(data->sMessage, message.data(), std::min(message.size(), sizeof(data->sMessage)));
+    data->msgType = msgType.value_or(0);
+
+    parent_->packets().sendBasicPacket(*packet);
 }
 
 /************************************************************************
@@ -1149,6 +1167,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("tradeCancel", CLuaClientEntityPairActions::tradeCancel);
     SOL_REGISTER("bazaarPrice", CLuaClientEntityPairActions::bazaarPrice);
     SOL_REGISTER("bazaarOpen", CLuaClientEntityPairActions::bazaarOpen);
+    SOL_REGISTER("setSearchMessage", CLuaClientEntityPairActions::setSearchMessage);
     SOL_REGISTER("bazaarBuy", CLuaClientEntityPairActions::bazaarBuy);
     SOL_REGISTER("acceptRaise", CLuaClientEntityPairActions::acceptRaise);
     SOL_REGISTER("engage", CLuaClientEntityPairActions::engage);

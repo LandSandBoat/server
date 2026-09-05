@@ -113,4 +113,17 @@ describe('Inventory', function()
         assert(player:addLinkpearl('NonexistentLinkshellName', false) == false)
         assert(player:getFreeSlotsCount() == before)
     end)
+
+    it('reports nothing for an unknown container', function()
+        -- past the last real container id, so getStorage has nothing to return
+        local unknown = 99
+
+        assert(player:getContainerSize(unknown) == 0, 'size reported for an unknown container')
+        assert(player:getFreeSlotsCount(unknown) == 0, 'free slots reported for an unknown container')
+        assert(player:getStorageItem(unknown, 0, 255) == nil, 'item returned from an unknown container')
+
+        player:addItem(xi.item.WIND_CRYSTAL)
+        assert(player:delItem(xi.item.WIND_CRYSTAL, 1, unknown) == false, 'delete succeeded on an unknown container')
+        player.assert:hasItem(xi.item.WIND_CRYSTAL)
+    end)
 end)

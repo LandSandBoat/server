@@ -238,6 +238,31 @@ enum CHAR_SUBSTATE
     SUBSTATE_LAST,
 };
 
+enum class PartyKind : uint8_t;
+
+struct PendingInvite
+{
+    EntityId  entity{};
+    PartyKind kind{};
+
+    void clean()
+    {
+        *this = {};
+    }
+};
+
+struct PendingTrade
+{
+    EntityId          entity{};
+    timer::time_point invitedAt{};
+    bool              initiator{};
+
+    void clean()
+    {
+        *this = {};
+    }
+};
+
 enum class WarpRequest : uint8
 {
     None      = 0,
@@ -595,11 +620,10 @@ public:
 
     void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
-    timer::time_point lastTradeInvite{};
-    EntityId          TradePending{};    // Character ID offering trade
-    EntityId          InvitePending{};   // Character ID sending party invite
-    EntityId          BazaarID{};        // Pointer to the bazaar we are browsing.
-    BazaarList_t      BazaarCustomers{}; // Array holding the IDs of the current customers
+    PendingTrade  TradePending{};    // Set on both sides by a trade request
+    PendingInvite InvitePending{};   // Set on the invitee by a party invite
+    EntityId      BazaarID{};        // Pointer to the bazaar we are browsing.
+    BazaarList_t  BazaarCustomers{}; // Array holding the IDs of the current customers
 
     std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
 

@@ -162,6 +162,13 @@ void view_session::read_func()
         case 0x21: // 33: Registering character name onto the lobby server
         {
             lpkt_chr_info_sub2 charInfo = {};
+
+            if (loginHelpers::characterCreationError(session.accountID, session.requestedNewCharacterName))
+            {
+                socket_.lowest_layer().close();
+                return;
+            }
+
             // creating new char
             if (loginHelpers::createCharacter(session, buffer_.data(), charInfo) == -1)
             {
@@ -176,6 +183,7 @@ void view_session::read_func()
 
             session.justCreatedNewChar = true;
             ShowInfo(fmt::format("char <{}> was successfully created on account {}", session.requestedNewCharacterName, session.accountID));
+            session.requestedNewCharacterName.clear();
 
             std::memset(buffer_.data(), 0, 0x20);
 
@@ -198,31 +206,14 @@ void view_session::read_func()
         break;
         case 0x22: // 34: Checking name and Gold World Pass
         {
-            // block creation of character if in maintenance mode or generally disabled
-            const auto maintMode               = settings::get<uint8>("login.MAINT_MODE");
-            const auto enableCharacterCreation = settings::get<bool>("login.CHARACTER_CREATION");
-            if (maintMode > 0 || !enableCharacterCreation)
-            {
-                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
-                do_write(0x24);
-                return;
-            }
-            else
             {
                 // creating new char
                 char CharName[PacketNameLength] = {};
                 std::memcpy(CharName, buffer_.data() + 32, PacketNameLength - 1);
 
-                const std::string nameStr           = CharName;
-                const auto        invalidNameReason = loginHelpers::validateCharacterName(nameStr);
-
-                if (invalidNameReason.has_value())
+                if (const auto error = loginHelpers::characterCreationError(session.accountID, CharName))
                 {
-                    ShowWarning(fmt::format("new character name error <{}>: {}", nameStr, *invalidNameReason));
-
-                    // Send error code:
-                    // The character name you entered is unavailable. Please choose another name.
-                    loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
+                    loginHelpers::generateErrorMessage(buffer_.data(), *error);
                     do_write(0x24);
                     return;
                 }

@@ -90,7 +90,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     ShowDebug("%s sent party invite to %s", PInviter->getName(), PInvitee->getName());
 
                     // make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
-                    if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.UniqueNo != 0 || PInvitee->PParty != nullptr)
+                    if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.entity.UniqueNo != 0 || PInvitee->PParty != nullptr)
                     {
                         ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party", PInvitee->getName());
                         PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::CannotInvite);
@@ -117,8 +117,9 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                         break;
                     }
 
-                    PInvitee->InvitePending.UniqueNo = PInviter->id;
-                    PInvitee->InvitePending.ActIndex = PInviter->targid;
+                    PInvitee->InvitePending.entity.UniqueNo = PInviter->id;
+                    PInvitee->InvitePending.entity.ActIndex = PInviter->targid;
+                    PInvitee->InvitePending.kind            = this->Kind;
 
                     PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Party);
 
@@ -188,7 +189,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     }
 
                     // make sure intvitee isn't dead or in jail, they are an unallied party leader and don't already have an invite pending
-                    if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.UniqueNo != 0 || PInvitee->PParty == nullptr ||
+                    if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.entity.UniqueNo != 0 || PInvitee->PParty == nullptr ||
                         PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)
                     {
                         ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party/alliance", PInvitee->getName());
@@ -203,8 +204,9 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                         break;
                     }
 
-                    PInvitee->InvitePending.UniqueNo = PInviter->id;
-                    PInvitee->InvitePending.ActIndex = PInviter->targid;
+                    PInvitee->InvitePending.entity.UniqueNo = PInviter->id;
+                    PInvitee->InvitePending.entity.ActIndex = PInviter->targid;
+                    PInvitee->InvitePending.kind            = this->Kind;
 
                     PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Alliance);
 

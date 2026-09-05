@@ -163,6 +163,7 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
+            player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             player:changeJob(xi.job.DNC)
             player:setLevel(99)

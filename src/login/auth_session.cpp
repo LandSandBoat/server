@@ -192,10 +192,17 @@ void auth_session::read_func()
         {
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
+            if (loginHelpers::isLoginLockedOut(ipAddress))
+            {
+                sendLoginResult(login_result::LOGIN_ERROR);
+                return;
+            }
+
             // Look up and validate account password
             auto accountInfo = validatePassword(username, password);
             if (!accountInfo)
             {
+                loginHelpers::recordLoginFailure(ipAddress);
                 sendLoginResult(login_result::LOGIN_ERROR);
                 return;
             }
@@ -320,6 +327,8 @@ void auth_session::read_func()
             }
 
             sendJsonAsBuffer(loginSuccessReply);
+
+            loginHelpers::clearLoginFailures(ipAddress);
 
             auto& session          = loginHelpers::get_authenticated_session(ipAddress, asStringFromUntrustedSource(hash, sizeof(hash)));
             session.accountID      = accountID;
