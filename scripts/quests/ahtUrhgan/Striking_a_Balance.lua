@@ -40,7 +40,7 @@ quest.sections =
                     if quest:getLocalVar(player, 'Option') == 0 then
                         return quest:progressEvent(684)
                     else
-                        return quest:progressEvent(685)
+                        return quest:event(685)
                     end
                 end,
             },
@@ -171,7 +171,7 @@ quest.sections =
 
         [xi.zone.AL_ZAHBI] =
         {
-            ['550'] =
+            ['blank_striking_a_balance'] =
             {
                 onTrigger = function(player, npc)
                     quest:setVar(player, 'Prog', 4)
@@ -197,6 +197,7 @@ quest.sections =
             onEventFinish =
             {
                 [695] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.MUNAHDAS_PACKAGE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
@@ -217,9 +218,7 @@ quest.sections =
             onEventFinish =
             {
                 [696] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:delKeyItem(xi.ki.MUNAHDAS_PACKAGE)
-                    end
+                    quest:complete(player)
                 end,
             },
         },
