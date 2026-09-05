@@ -525,7 +525,8 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
                                                             "allianceid = (SELECT allianceid FROM accounts_parties where "
                                                             "charid = ?) GROUP BY partyid",
                                                             message.inviterId);
-                        if (rset2 && rset2->rowsCount() > 0 && rset2->rowsCount() < 3)
+
+                        if (rset2 && rset2->rowsCount() > 0 && rset2->rowsCount() < 3 && PInviter->PParty->m_PAlliance->getMainParty() == PInviter->PParty && !PInviter->PParty->HasTrusts())
                         {
                             PInviter->PParty->m_PAlliance->addParty(message.inviteeId);
                         }
@@ -537,7 +538,14 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
                             });
                         }
                     }
-                    else if (PInviter->PParty)
+                    else if (PInviter->PParty->HasTrusts())
+                    {
+                        message::send(ipc::MessageStandard{
+                            .recipientId = message.inviteeId,
+                            .message     = MsgStd::TrustCannotJoinAlliance,
+                        });
+                    }
+                    else
                     {
                         // make new alliance
                         CAlliance* PAlliance = new CAlliance(PInviter);
