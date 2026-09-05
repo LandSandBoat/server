@@ -1641,6 +1641,16 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 
         if (!PMob->PAI->PathFind->IsFollowingPath())
         {
+            // Idle followers still shed neutral and still get the roam tick.
+            PMob->m_neutral = m_Tick <= m_NeutralTime + kNeutralDuration;
+
+            if (m_Tick >= m_LastRoamScript + 3s)
+            {
+                PMob->PAI->EventHandler.triggerListener("ROAM_TICK", PMob);
+                luautils::OnMobRoam(PMob);
+                m_LastRoamScript = m_Tick;
+            }
+
             co_return;
         }
     }
