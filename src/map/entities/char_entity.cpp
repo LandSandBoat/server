@@ -80,6 +80,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
+#include "items/transactions/npc_trade.h"
 #include "items/transactions/player_trade.h"
 #include "items/transactions/synth.h"
 #include "job_points.h"
@@ -2963,6 +2964,13 @@ bool CCharEntity::isNpcLocked()
 
 void CCharEntity::endCurrentEvent()
 {
+    // release an offer the event never consumed
+    if (auto* offer = this->activeTransaction<NpcTradeTransaction>())
+    {
+        this->removeTransaction(offer);
+        TradeContainer->Clean();
+    }
+
     currentEvent->reset();
     eventPreparation->reset();
     setLocked(false);
