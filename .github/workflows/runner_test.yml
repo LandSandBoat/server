@@ -32,6 +32,11 @@ on:
         required: false
         type: boolean
         default: true
+      same_run_artifact:
+        description: 'Download the build artifact from this workflow run instead of the last Builds run.'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   Runner_Test:
@@ -52,6 +57,12 @@ jobs:
       XI_NETWORK_SQL_DATABASE: xidb
       XI_NETWORK_SQL_LOGIN: xiadmin
       XI_NETWORK_SQL_PASSWORD: 'password'
+      ASAN_OPTIONS: halt_on_error=0:handle_abort=1:strict_string_checks=1:check_initialization_order=1:strict_init_order=1:quarantine_size_mb=2048:strip_path_prefix=${{ github.workspace }}/:log_path=${{ github.workspace }}/sanitizer.log
+      UBSAN_OPTIONS: print_stacktrace=1:report_error_type=1:handle_abort=1:strip_path_prefix=${{ github.workspace }}/:suppressions=${{ github.workspace }}/sanitizers/ubsan.supp:log_path=${{ github.workspace }}/sanitizer.log
+      TSAN_OPTIONS: halt_on_error=0:second_deadlock_stack=1:strip_path_prefix=${{ github.workspace }}/:log_path=${{ github.workspace }}/sanitizer.log
+      ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
+      UBSAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
+      TSAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
       HOMEBREW_NO_AUTO_UPDATE: 1
       HOMEBREW_NO_INSTALL_CLEANUP: 1
     steps:
@@ -93,6 +104,10 @@ jobs:
             tzdata \
             zlib1g
 
+      - name: Install symbolizer (Linux)
+        if: ${{ runner.os == 'Linux' && contains(fromJSON('["ASAN", "UBSAN", "TSAN"]'), inputs.build_type) }}
+        run: sudo apt-get install --assume-yes --no-install-recommends --quiet llvm-22
+
       - name: Setup MariaDB (Windows)
         if: ${{ runner.os == 'Windows' }}
         uses: ankane/setup-mariadb@v1
@@ -133,14 +148,14 @@ jobs:
         run: python -m tools.codegen "$RUNNER_TEMP/codegen-out"
 
       - name: Download artifact
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' || inputs.same_run_artifact }}
         uses: actions/download-artifact@v8
         with:
           name: ${{ format('LSB_{0}_{1}_{2}', runner.os, inputs.build_type, github.sha) }}
           path: .
 
       - name: Download previous artifact
-        if: ${{ github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch' }}
+        if: ${{ !inputs.same_run_artifact && (github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch') }}
         uses: dawidd6/action-download-artifact@v21
         with:
           run_id: ${{ github.event.workflow_run.id }}
@@ -182,10 +197,41 @@ jobs:
           summary: true
           pull-request: false
           status-check: ${{ github.event_name != 'pull_request' }}
-          status-check-name: 'xi_test (${{ inputs.runner }})'
+          status-check-name: 'xi_test (${{ inputs.runner }}, ${{ inputs.build_type }})'
           annotate: true
           upload-artifact: true
-          artifact-name: 'xi_test-ctrf-${{ runner.os }}'
+          artifact-name: 'xi_test-ctrf-${{ runner.os }}-${{ inputs.build_type }}'
+
+      - name: Upload sanitizer reports
+        if: ${{ always() && contains(fromJSON('["ASAN", "UBSAN", "TSAN"]'), inputs.build_type) }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: sanitizer-reports-${{ inputs.build_type }}
+          path: sanitizer.log.*
+          if-no-files-found: ignore
+
+      - name: Check sanitizer reports
+        if: ${{ always() && contains(fromJSON('["ASAN", "UBSAN", "TSAN"]'), inputs.build_type) }}
+        run: |
+          shopt -s nullglob
+          reports=(sanitizer.log.*)
+          if (( ${#reports[@]} == 0 )); then
+            exit 0
+          fi
+          cat "${reports[@]}"
+          {
+            echo "## Sanitizer Reports"
+            echo '```'
+            grep -h '^SUMMARY:' "${reports[@]}" | sort | uniq -c | sort -rn
+            echo '```'
+            echo '<details><summary>Full reports</summary>'
+            echo
+            echo '```'
+            head -c 60000 "${reports[@]}"
+            echo '```'
+            echo '</details>'
+          } >> $GITHUB_STEP_SUMMARY
+          exit 1
 
       - name: Startup checks
         if: ${{ inputs.startup_checks }}

@@ -1,0 +1,69 @@
+name: Sanitizers
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  Build:
+    name: ${{ matrix.sanitizer && 'Build' || '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [ASAN, TSAN]
+    uses: ./.github/workflows/runner_build.yml
+    with:
+      runner: ubuntu-26.04
+      compiler: clang
+      compiler_version: 22
+      build_type: ${{ matrix.sanitizer }}
+      upload_artifact: true
+
+  Test:
+    needs: Build
+    name: ${{ matrix.sanitizer && 'Test' || '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [ASAN, TSAN]
+    uses: ./.github/workflows/runner_test.yml
+    with:
+      runner: ubuntu-26.04
+      build_type: ${{ matrix.sanitizer }}
+      same_run_artifact: true
+      startup_checks: false
+
+  Report:
+    needs: [Build, Test]
+    if: ${{ !cancelled() && github.event_name != 'pull_request' && contains(needs.*.result, 'failure') }}
+    name: Report
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      actions: read
+    steps:
+      - uses: actions/download-artifact@v8
+        continue-on-error: true
+        with:
+          pattern: sanitizer-reports-*
+          path: reports
+
+      - name: Open or update issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          title="Sanitizer run failed"
+          summary=$(find reports -type f -name 'sanitizer.log.*' -exec cat {} + 2>/dev/null | grep '^SUMMARY:' | sort | uniq -c | sort -rn | head -40)
+          body="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"$'\n\n```\n'"${summary:-no sanitizer reports, see the build or test logs}"$'\n```'
+          number=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          if [[ -n "$number" ]]; then
+            gh issue comment "$number" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi

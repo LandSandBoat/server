@@ -179,6 +179,16 @@ jobs:
           echo "CC=/usr/bin/clang${{ env.clang_version }}" >> $GITHUB_ENV
           echo "CXX=/usr/bin/clang++${{ env.clang_version }}" >> $GITHUB_ENV
 
+      # Static, ASAN-instrumented LuaJIT on the system allocator so ASAN tracks every Lua object.
+      # The interpreter and JIT traces stay uninstrumented.
+      - name: Build instrumented LuaJIT (Linux)
+        if: ${{ runner.os == 'Linux' && inputs.build_type == 'ASAN' && env.SKIP_BUILD != 'true' }}
+        run: |
+          git clone --depth 1 --branch v2.1 https://github.com/LuaJIT/LuaJIT.git $RUNNER_TEMP/luajit
+          make -C $RUNNER_TEMP/luajit -j$(nproc) BUILDMODE=static XCFLAGS="-DLUAJIT_USE_SYSMALLOC" HOST_CC="$CC" \
+            CC="$CC -fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer"
+          sudo make -C $RUNNER_TEMP/luajit install BUILDMODE=static PREFIX=/usr/local
+
       - name: Setup MSVC
         if: ${{ runner.os == 'Windows' && env.SKIP_BUILD != 'true' }}
         uses: TheMrMilchmann/setup-msvc-dev@v4

@@ -8,22 +8,23 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
 # ThreadSanitizer
 # ThreadSanitizer is a tool that detects data races. It consists of a compiler instrumentation module and a run-time library.
 set(CMAKE_C_FLAGS_TSAN
-        "-fsanitize=thread -g -O1"
+        "-fsanitize=thread -fno-omit-frame-pointer -g1 -O1"
         CACHE STRING "Flags used by the C compiler during ThreadSanitizer builds."
         FORCE)
 set(CMAKE_CXX_FLAGS_TSAN
-        "-fsanitize=thread -g -O1"
+        "-fsanitize=thread -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS -g1 -O1"
         CACHE STRING "Flags used by the C++ compiler during ThreadSanitizer builds."
         FORCE)
 
 # AddressSanitizer
 # AddressSanitizer is a fast memory error detector. It consists of a compiler instrumentation module and a run-time library.
+# ASAN also enables UndefinedBehaviorSanitizer so one instrumented build covers both in CI.
 set(CMAKE_C_FLAGS_ASAN
-        "-fsanitize=address -fno-optimize-sibling-calls -fsanitize-address-use-after-scope -fno-omit-frame-pointer -g -O1"
+        "-fsanitize=address,undefined,float-divide-by-zero -fsanitize-recover=all -fsanitize-address-use-after-scope -fno-optimize-sibling-calls -fno-omit-frame-pointer -g1 -O1"
         CACHE STRING "Flags used by the C compiler during AddressSanitizer builds."
         FORCE)
 set(CMAKE_CXX_FLAGS_ASAN
-        "-fsanitize=address -fno-optimize-sibling-calls -fsanitize-address-use-after-scope -fno-omit-frame-pointer -g -O1"
+        "-fsanitize=address,undefined,float-divide-by-zero -fsanitize-recover=all -fsanitize-address-use-after-scope -fno-optimize-sibling-calls -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_SANITIZE_VECTOR -g1 -O1"
         CACHE STRING "Flags used by the C++ compiler during AddressSanitizer builds."
         FORCE)
 
@@ -52,10 +53,10 @@ set(CMAKE_CXX_FLAGS_MSAN
 # UndefinedBehaviorSanitizer
 # UndefinedBehaviorSanitizer is a run-time undefined behavior detector.
 set(CMAKE_C_FLAGS_UBSAN
-        "-fsanitize=undefined -fno-omit-frame-pointer -g -O2 -DNDEBUG"
+        "-fsanitize=undefined,float-divide-by-zero -fno-omit-frame-pointer -g1 -O2"
         CACHE STRING "Flags used by the C compiler during UndefinedBehaviorSanitizer builds."
         FORCE)
 set(CMAKE_CXX_FLAGS_UBSAN
-        "-fsanitize=undefined -fno-omit-frame-pointer -g -O2 -DNDEBUG"
+        "-fsanitize=undefined,float-divide-by-zero -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS -g1 -O2"
         CACHE STRING "Flags used by the C++ compiler during UndefinedBehaviorSanitizer builds."
         FORCE)
