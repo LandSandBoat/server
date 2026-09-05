@@ -399,6 +399,7 @@ xi.msg.basic =
     AUTO_OVERLOAD_CHANCE            = 798, -- The <pet>'s overload chance is <number>%.
     AUTO_OVERLOADED                 = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
     SPIRIT_BOND                     = 800, -- Spirit Bond Activates. <Player> takes <number> points of damage. -- Wyvern Spirit bond
+    RECEIVES_JOB_POINTS             = 807, -- <player> receives <number> job points.
 }
 
 -- Used to modify certain basic messages.
