@@ -30,58 +30,15 @@ zones[xi.zone.PERIQIA] =
         TIME_REMAINING_SECONDS        = 7534, -- Time remaining: <number> [second/seconds] (Earth time).
         FADES_INTO_NOTHINGNESS        = 7535, -- The <keyitem> fades into nothingness...
         PARTY_FALLEN                  = 7536, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
-        EXCALIACE_START               = 7545, -- Such a lot of trouble for one little corsair... Shall we be on our way?
-        EXCALIACE_END1                = 7546, -- Yeah, I got it. Stay here and keep quiet.
-        EXCALIACE_END2                = 7547, -- Hey... It was a short trip, but nothing is ever dull around you, huh?
-        EXCALIACE_ESCAPE              = 7548, -- Heh. The Immortals really must be having troubles finding troops if they sent this bunch of slowpokes to watch over me...
-        EXCALIACE_PAIN1               = 7549, -- Oomph!
-        EXCALIACE_PAIN2               = 7550, -- Ouch!
-        EXCALIACE_PAIN3               = 7551, -- Youch!
-        EXCALIACE_PAIN4               = 7552, -- Damn, that's gonna leave a mark!
-        EXCALIACE_PAIN5               = 7553, -- Urggh!
-        EXCALIACE_CRAB1               = 7554, -- Over to you.
-        EXCALIACE_CRAB2               = 7555, -- What's this guy up to?
-        EXCALIACE_CRAB3               = 7556, -- Uh-oh.
-        EXCALIACE_DEBAUCHER1          = 7557, -- Wh-what the...!?
-        EXCALIACE_DEBAUCHER2          = 7558, -- H-help!!!
-        EXCALIACE_RUN                 = 7559, -- Now's my chance!
-        EXCALIACE_TOO_CLOSE           = 7560, -- Okay, okay, you got me! I promise I won't run again if you step back a bit...please. Someone's been eating too much garlic...
-        EXCALIACE_TIRED               = 7561, -- <Pant>...<wheeze>...
-        EXCALIACE_CAUGHT              = 7562, -- Damn...
+        EXCALIACE_MESSAGE_OFFSET      = 7545, -- Such a lot of trouble for one little corsair... Shall we be on our way?
     },
 
     mob =
     {
-        [xi.assault.mission.SEAGULL_GROUNDED] =
-        {
-            MOBS_START =
-            {
-                EXCALIAC = 17006593, 17006594, 17006595, 17006596, 17006597, 17006598, 17006599, 17006600, 17006601,
-                17006602, 17006603, 17006604, 17006605, 17006606, 17006607, 17006608, 17006610, 17006611,
-            },
-        },
-        [xi.assault.mission.REQUIEM] =
-        {
-            MOBS_START =
-            {
-                17006612, 17006613, 17006614, 17006615, 17006616, 17006617, 17006619, 17006620, 17006621,
-                17006623, 17006625, 17006626, 17006627, 17006628, 17006630, 17006631, 17006633, 17006634,
-            },
-        },
-        -- Shades of Vengeance
-        [79] =
-        {
-            K23H1LAMIA1  = 17006754,
-            K23H1LAMIA2  = 17006755,
-            K23H1LAMIA3  = 17006756,
-            K23H1LAMIA4  = 17006757,
-            K23H1LAMIA5  = 17006758,
-            K23H1LAMIA6  = 17006759,
-            K23H1LAMIA7  = 17006760,
-            K23H1LAMIA8  = 17006761,
-            K23H1LAMIA9  = 17006762,
-            K23H1LAMIA10 = 17006763,
-        }
+        DEBAUCHER             = GetFirstID('Debaucher') + 7,
+        EXCALIACE             = GetFirstID('Excaliace'),
+        K23H1_LAMIA           = GetFirstID('K23H1-LAMIA'),
+        PUTRID_IMMORTAL_GUARD = GetFirstID('Putrid_Immortal_Guard'),
     },
 
     npc =

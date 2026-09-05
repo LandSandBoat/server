@@ -10,16 +10,6 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [xi.assault.mission.SEAGULL_GROUNDED] =
-        {
-            {
-                { itemId = xi.item.UNAPPRAISED_BOX,     weight = 400 },
-                { itemId = xi.item.UNAPPRAISED_SWORD,   weight = 200 },
-                { itemId = xi.item.UNAPPRAISED_POLEARM, weight = 200 },
-                { itemId = xi.item.UNAPPRAISED_GLOVES,  weight = 200 },
-            },
-        },
-
         [xi.assault.mission.REQUIEM] =
         {
             {
@@ -41,25 +31,6 @@ entity.onTrigger = function(player, npc)
 
     local regItem =
     {
-        [xi.assault.mission.SEAGULL_GROUNDED] =
-        {
-            {
-                { itemId = xi.item.HI_RERAISER,       weight = 700 },
-                { itemId = 0,                         weight = 300 },
-            },
-
-            {
-                { itemId = xi.item.HI_POTION_TANK,    weight = 100 },
-                { itemId = xi.item.HI_ETHER_TANK,     weight = 100 },
-                { itemId = 0,                         weight = 800 },
-            },
-
-            {
-                { itemId = xi.item.HI_POTION_P3,      weight = 530 },
-                { itemId = 0,                         weight = 470 },
-            },
-        },
-
         [xi.assault.mission.REQUIEM] =
         {
             {

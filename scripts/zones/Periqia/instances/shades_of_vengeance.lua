@@ -29,8 +29,8 @@ instanceObject.afterInstanceRegister = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[79]) do
-        SpawnMob(v, instance)
+    for i = 0, 9 do
+        SpawnMob(ID.mob.K23H1_LAMIA + i, instance)
     end
 end
 

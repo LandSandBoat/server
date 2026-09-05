@@ -326,6 +326,7 @@ templates:
     attributes:
       combat:
         skill: axe
+      jobs: [cor, cor]
       render:
         look:
           type:  equipped
