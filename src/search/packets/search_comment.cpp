@@ -23,6 +23,8 @@
 
 #include "common/utils.h"
 
+#include <algorithm>
+
 SearchCommentPacket::SearchCommentPacket(const uint32 playerId, const std::string& comment)
 {
     ref<uint8>(data, 0x08) = 154;  // Search comment packet size
@@ -35,11 +37,13 @@ SearchCommentPacket::SearchCommentPacket(const uint32 playerId, const std::strin
 
     ref<uint16>(data, 0x1C) = 124; // Comment length
 
+    const auto length = std::min<std::size_t>(comment.length(), 123);
+
     // Add comment bytes
-    std::memcpy(&data[0x1E], comment.c_str(), comment.length());
+    std::memcpy(&data[0x1E], comment.c_str(), length);
 
     // Fill rest with whitespace
-    std::memset(&data[0x1E + comment.length()], ' ', 123 - comment.length());
+    std::memset(&data[0x1E + length], ' ', 123 - length);
 
     // End comment with 0 byte
     data[0x9A] = 0;
