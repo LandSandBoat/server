@@ -57,6 +57,7 @@ enum class TransactionState : uint8
 //
 // Claimed stacks are stamped InTransaction and may only be mutated by the transaction holding them.
 // The claim list lives here rather than in each subclass so that commit and rollback both release.
+// Gil is never claimed. A debit is checked against the live balance when it applies.
 //
 // give/take/pay/earn each record an undo, so a rollback reverses the work as well as dropping the claims.
 // Claims are held as ItemId rather than CItem*, since a step can free the stack it touched.
@@ -104,7 +105,7 @@ protected:
     // Claim given item object and tentatively substract given quantity
     [[nodiscard]] auto take(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
 
-    // Claim gil object and tentatively grant/substract given sum
+    // Tentatively grant/subtract the given sum of gil
     [[nodiscard]] auto pay(CCharEntity* PChar, uint32 gil) -> bool;
     [[nodiscard]] auto earn(CCharEntity* PChar, uint32 gil) -> bool;
 
@@ -118,7 +119,6 @@ private:
     // quantity change. Refused for a busy item this transaction does not hold
     [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> ItemMutation;
 
-    [[nodiscard]] auto claimGil(const CCharEntity* PChar) -> bool;
     [[nodiscard]] auto recordGive(CCharEntity* PChar, uint8 location, uint8 slot, int32 applied) -> std::optional<uint8>;
 
     void runUndos();
