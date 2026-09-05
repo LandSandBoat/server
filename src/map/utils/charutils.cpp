@@ -47,6 +47,7 @@
 #include "ai/states/attack_state.h"
 #include "ai/states/item_state.h"
 #include "ai/states/range_state.h"
+#include "ai/states/weaponskill_state.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -2924,6 +2925,14 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
     {
         if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+        {
+            return;
+        }
+    }
+
+    if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_SUB || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_AMMO)
+    {
+        if (PChar->PAI && PChar->PAI->IsCurrentState<CWeaponSkillState>())
         {
             return;
         }
