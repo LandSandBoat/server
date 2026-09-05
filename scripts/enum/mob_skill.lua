@@ -1084,6 +1084,8 @@ xi.mobSkill =
 
     NERVE_GAS                     = 1836,
 
+    MINE_BLAST                    = 1838,
+
     SANDBLAST_2                   = 1841,
     SANDPIT_2                     = 1842,
     VENOM_SPRAY_2                 = 1843,

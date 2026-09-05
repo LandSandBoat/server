@@ -27,10 +27,43 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     -- TODO: Goblin mines in [S] zones
 
-    -- TODO: Excavation Duty Assault
-
     -- TODO: Blifnix Oilycheek's Goblin Mines
 
+    -- Assault: Excavation Duty
+    if mob:getZoneID() == xi.zone.LEBROS_CAVERN then
+        mob:entityAnimationPacket('bom0') -- Assault: Excavation Duty
+
+        local targetId    = target:getID()
+        local firstRockId = zones[xi.zone.LEBROS_CAVERN].mob.BRITTLE_ROCK
+        local info        =
+        {
+            damage     = 170,
+            hitsLanded = 1,
+            attackType = xi.attackType.MAGICAL,
+            damageType = xi.damageType.FIRE,
+        }
+
+        if
+            targetId >= firstRockId and
+            targetId <= firstRockId + 9
+        then
+            target:timer(2000, function(rockArg)
+                rockArg:setHP(0)
+            end)
+
+            info.damage = 8
+        end
+
+        -- Mobs take 170 in uncapped
+        -- TODO: Capture mine damage to mobs in 70/60/50 cap
+        if xi.mobskills.processDamage(mob, target, skill, action, info) then
+            target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+        end
+
+        return info.damage
+    end
+
+    -- Default
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
@@ -41,9 +74,17 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 end
 
 mobskillObject.onMobSkillFinalize = function(mob, skill)
-    mob:entityAnimationPacket('mai1') -- Animation: Mine jumps up and explodes.
+    if mob:getZoneID() == xi.zone.LEBROS_CAVERN then
+        mob:timer(4000, function(bombArg)
+            if bombArg and bombArg:isAlive() then
+                DespawnMob(bombArg:getTargID(), bombArg:getInstance())
+            end
+        end)
 
-    mob:setHP(0)
+    else
+        mob:entityAnimationPacket('mai1') -- Animation: Mine jumps up and explodes.
+        mob:setHP(0) -- TODO: Mine appears to despawn after 4-5 seconds, not have HP set to 0.
+    end
 end
 
 return mobskillObject
