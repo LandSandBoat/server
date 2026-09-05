@@ -100,10 +100,70 @@ describe('SkillUpRates', function()
             { [2] = 40, [3] = 30, [4] = 20, [5] = 10 })
     end)
 
-    it('skill 60.0 and above only ever gives +0.1', function()
-        -- Lu Shangs Fishing Rod cap 70, skill 60.0: distance 10 would give 40/40/20 below level 60
-        -- That means anything above +0.1 here means the gate broke.
-        runSkillUps(player, 600, xi.item.LIGHT_CRYSTAL, xi.item.BROKEN_LU_SHANGS_FISHING_ROD,
-            { [1] = 100 })
+    describe('desynth', function()
+        local desynthTries = 2000
+
+        -- Desynth skill up chance is the flat retail 5% in synthutils.cpp, same on break and success, in both craft systems.
+        -- Leather Highboots desynth is leathercraft 6. successRateMod +100 never breaks, -100 always breaks.
+        local function runDesynthSkillUps(p, skillTenths, successRateMod, modernSystem)
+            xi.test.world:setSeed(1)
+            xi.test.world:setSetting('map.CRAFT_MODERN_SYSTEM', modernSystem)
+            xi.test.world:setSetting('map.CRAFT_CHANCE_MULTIPLIER', 1.0)
+
+            p:setSkillRank(xi.skill.LEATHERCRAFT, 9)
+            p:setMod(xi.mod.SYNTH_SUCCESS_RATE_DESYNTHESIS, successRateMod)
+            p:setMod(xi.mod.SYNTH_SPEED_LEATHERCRAFT, 17000)
+
+            local total = 0
+
+            for i = 1, desynthTries do
+                if i % 400 == 0 then
+                    print(string.format('iter %d: %d skill ups', i, total))
+                end
+
+                p:setSkillLevel(xi.skill.LEATHERCRAFT, skillTenths)
+                p:addItem(xi.item.LIGHTNING_CRYSTAL)
+                p:addItem(xi.item.LEATHER_HIGHBOOTS)
+
+                p.actions:craft(xi.item.LIGHTNING_CRYSTAL, { xi.item.LEATHER_HIGHBOOTS })
+                xi.test.world:skipTime(15)
+
+                local gain = p:getCharSkillLevel(xi.skill.LEATHERCRAFT) - skillTenths
+                assert(gain >= 0 and gain <= 2, string.format('desynth skill up of %d tenths, retail only ever gave +0.1 or +0.2', gain))
+
+                if gain > 0 then
+                    total = total + 1
+                end
+
+                p:delContainerItems(xi.inv.INVENTORY)
+            end
+
+            local prob  = 0.05
+            local mean  = desynthTries * prob
+            local sigma = math.sqrt(desynthTries * prob * (1.0 - prob))
+            local lo    = mean - 4 * sigma
+            local hi    = mean + 4 * sigma
+            print(string.format('%d skill ups in %d desynths (%.2f%%, expected 5%%)',
+                total, desynthTries, total * 100.0 / desynthTries))
+
+            assert(total >= lo and total <= hi, string.format(
+                'skill up count %d outside 4 sigma range [%.0f, %.0f] (expected %.1f)', total, lo, hi, mean))
+        end
+
+        it('gap 5 on success gives a flat 5%', function()
+            runDesynthSkillUps(player, 10, 100, true)
+        end)
+
+        it('gap 5 on break gives the same 5% with no break penalty', function()
+            runDesynthSkillUps(player, 10, -100, true)
+        end)
+
+        it('gap 1 gives the same flat 5%', function()
+            runDesynthSkillUps(player, 50, 100, true)
+        end)
+
+        it('gap 5 on break gives the same 5% under the era system', function()
+            runDesynthSkillUps(player, 10, -100, false)
+        end)
     end)
 end)
