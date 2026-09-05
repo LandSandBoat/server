@@ -38,7 +38,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Capture stun duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 12)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.randomInt(10, 15))
     end
 
     return info.damage

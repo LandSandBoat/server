@@ -20,37 +20,41 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.BEASTMEN
-    params.tpmod      = xi.spells.blue.tpMod.DURATION
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.SLASHING
-    params.scattr     = xi.skillchainType.IMPACTION
-    params.numhits    = 1
-    params.multiplier = 2.0
-    params.tp150      = 2.0
-    params.tp300      = 2.0
-    params.azuretp    = 2.0
-    params.duppercap  = 17
-    params.str_wsc    = 0.3
-    params.dex_wsc    = 0.0
-    params.vit_wsc    = 0.0
-    params.agi_wsc    = 0.0
-    params.int_wsc    = 0.0
-    params.mnd_wsc    = 0.0
-    params.chr_wsc    = 0.0
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.BEASTMEN
+    params.tpModifier     = xi.spells.blue.tpMod.DURATION
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.SLASHING
+    params.skillchainType = xi.skillchainType.IMPACTION
+
+    params.numHits       = 1
+    params.ftp0          = 2.0
+    params.ftp1500       = 2.0
+    params.ftp3000       = 2.0
+    params.ftpAzure      = 2.0
+    params.baseDamageCap = 17
+    params.str_wsc       = 0.3
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
+    end
+
+    local duration = 90
+
+    -- TODO: 0tp duration needs verification
+    if params.hasAzureLore then
+        duration = 800
+    elseif params.hasChainAffinity then
+        duration = xi.spells.blue.calculatefTP(caster:getTP(), 90, 480, 680)
     end
 
     -- Handle status effects.
     local effectTable =
     {
-        [1] = { xi.effect.DEX_DOWN, 9, 6, 60 },
+        [1] = { xi.effect.DEX_DOWN, 9, 6, duration },
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

@@ -159,9 +159,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          thunder: -1
       render:
         look:
           type:  automaton
@@ -196,8 +193,6 @@ templates:
       jobs: [war, mnk]
       resists:
         immune_status: [light_sleep, dark_sleep, terror]
-        rank_element:
-          thunder: -1
       render:
         look:
           type:  standard
@@ -228,8 +223,6 @@ templates:
       jobs: [war, mnk]
       resists:
         immune_status: [light_sleep, dark_sleep, terror]
-        rank_element:
-          thunder: -1
       render:
         look:
           type:  standard
@@ -307,8 +300,6 @@ templates:
         delay: 200
       resists:
         immune_status: [light_sleep, dark_sleep, terror]
-        rank_element:
-          thunder: -1
       render:
         look:
           type:  standard
@@ -338,8 +329,6 @@ templates:
         delay: 200
       resists:
         immune_status: [light_sleep, dark_sleep, terror]
-        rank_element:
-          thunder: -1
       render:
         look:
           type:  standard

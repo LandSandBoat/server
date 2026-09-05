@@ -1376,6 +1376,7 @@ npcs:
       entity_flags: 6147
       animation:    open_door
       moving:       1
+      king:         true
     status:  normal
     content: toau
 
@@ -1390,6 +1391,7 @@ npcs:
       entity_flags: 6147
       animation:    close_door
       moving:       1
+      king:         true
     status:  normal
     content: toau
 

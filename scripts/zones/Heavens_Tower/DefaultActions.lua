@@ -1,7 +1,7 @@
--- local ID = zones[xi.zone.HEAVENS_TOWER]
+local ID = zones[xi.zone.HEAVENS_TOWER]
 
 return {
-    ['_6q2']            = { event = 154 },
+    ['_6q2']            = { messageSpecial = ID.text.VESTAL_CHAMBERS_LOCKED },
     ['Abobo']           = { event = 44 },
     ['Aeshushu']        = { event = 60 },
     ['Bebibi']          = { event = 45 },
@@ -20,7 +20,7 @@ return {
     ['Kiwawa']          = { event = 58 },
     ['Lin_Megomifu']    = { event = 81 },
     ['Mashua']          = { event = 334 },
-    ['Mhabi Molkot']    = { event = 410 },
+    ['Mhabi_Molkot']    = { event = 410 },
     ['Nayutata']        = { event = 64 },
     ['Nebibi']          = { event = 68 },
     ['Nului-Nlui']      = { event = 55 },

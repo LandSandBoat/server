@@ -54,7 +54,7 @@ xi.combat.tp.calculateTPReturn = function(gainee, delay)
         if delay > 530 then
             tpReturn = 145 + (delay - 530) * 35 / 470
         elseif delay > 480 then
-            tpReturn = 130 + (delay - 480) * 15 / 30
+            tpReturn = 130 + (delay - 480) * 15 / 50
         elseif delay > 450 then
             tpReturn = 115 + (delay - 450) * 15 / 30
         elseif delay > 180 then
@@ -200,7 +200,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
     local baseTPGain         = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
     local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
     local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
-    local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 0.5, 1)                      -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
+    local dAGIModifier       = utils.clamp((200 - (dAGI + 30)) / 200, 0.5, 1)                    -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
     local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
     local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
     local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
@@ -243,7 +243,7 @@ xi.combat.tp.calculateTPGainOnMagicalDamage = function(actor, target, totalDamag
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
     local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
-    local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 0.5, 1)                      -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
+    local dAGIModifier       = utils.clamp((200 - (dAGI + 30)) / 200, 0.5, 1)                    -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
     local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
     local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
     local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)

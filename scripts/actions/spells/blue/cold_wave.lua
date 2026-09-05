@@ -20,13 +20,13 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params     = {}
     params.ecosystem = xi.ecosystem.ARCANA
     params.effect    = xi.effect.FROST
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    local tick = 3
-    local duration = 60
+    params.dStat     = xi.mod.INT
+
+    local tick            = 3
+    local duration        = 60
     local resistThreshold = 0.5
 
     local maccParams =

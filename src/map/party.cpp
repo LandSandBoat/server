@@ -475,6 +475,21 @@ void CParty::PopMember(CBattleEntity* PEntity)
         members.erase(memberToDelete);
     }
 
+    if (m_PLeader == PEntity)
+    {
+        m_PLeader = nullptr;
+    }
+
+    if (m_PQuarterMaster == PEntity)
+    {
+        m_PQuarterMaster = nullptr;
+    }
+
+    if (m_PSyncTarget == PEntity)
+    {
+        m_PSyncTarget = nullptr;
+    }
+
     // free memory, party will re reinsatiated when they zone back in
     if (members.empty())
     {
@@ -683,6 +698,8 @@ void CParty::AddMember(CBattleEntity* PEntity)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), MsgStd::LevelSyncActivated);
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable | xi::StatusEffectFlag::OnZone);
+                PChar->health.tp = 0;
+                PChar->updatemask |= UPDATE_HP;
                 PChar->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), m_PSyncTarget->GetMLevel(), 0s, 0s);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
             }
@@ -1120,7 +1137,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
 
     if (settings::get<bool>("map.LEVEL_SYNC_ENABLE"))
     {
-        if (PEntity && PEntity->objtype == TYPE_PC)
+        if (PEntity && PEntity->objtype == TYPE_PC && GetLeader() != nullptr)
         {
             CCharEntity* PChar = (CCharEntity*)PEntity;
             // enable level sync
@@ -1158,6 +1175,8 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
                     {
                         member->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar->GetMLevel(), 0, 0, 0, message);
                         member->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable | xi::StatusEffectFlag::OnZone);
+                        member->health.tp = 0;
+                        member->updatemask |= UPDATE_HP;
                         member->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), PChar->GetMLevel(), 0s, 0s);
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(member));
                     }

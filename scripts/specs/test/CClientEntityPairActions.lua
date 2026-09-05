@@ -84,6 +84,12 @@ end
 function CClientEntityPairActions:acceptPartyInvite()
 end
 
+---Level sync the party to a member (caller must be party leader)
+---@param player CBaseEntity Party member to sync to
+---@return nil
+function CClientEntityPairActions:setLevelSync(player)
+end
+
 ---@class TradeItem
 ---@field itemId xi.item Item ID
 ---@field quantity? integer Quantity (default: 1)
@@ -143,6 +149,13 @@ end
 ---@param seller CClientEntityPair
 ---@return nil
 function CClientEntityPairActions:bazaarOpen(seller)
+end
+
+---Set the player's search comment
+---@param message string
+---@param msgType? integer
+---@return nil
+function CClientEntityPairActions:setSearchMessage(message, msgType)
 end
 
 ---@param sellerInvSlot integer

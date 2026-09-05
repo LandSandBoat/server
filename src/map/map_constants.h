@@ -38,6 +38,9 @@ using namespace std::chrono_literals;
 
 static constexpr auto kTimeServerTickInterval = 2400ms;
 
+// Ship and lift periods are not multiples of the time server tick, so 2400ms samples them too coarsely.
+static constexpr auto kTransportTickInterval = 400ms;
+
 // 2.5 logic updates per second
 static constexpr auto kLogicUpdateRate = 2.5f;
 

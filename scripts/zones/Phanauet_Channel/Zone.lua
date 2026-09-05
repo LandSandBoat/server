@@ -100,7 +100,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     -- TODO: Only seen event 0 in captures but used to be 100 here. Both events have the exact same code.
     -- This might be used by SE to differentiate where to send the player?
     player:startEvent(0)

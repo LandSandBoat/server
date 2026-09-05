@@ -1,6 +1,8 @@
 -----------------------------------
--- A_Taste_of_Honey
--- Qutiba !pos 92 -7.5 -130 50
+-- A Taste of Honey
+-- Fochacha, Whitegate, !pos 3 -1 -10.781 50
+-- Qutiba, Whitegate, !pos 92 -7.5 -130 50
+-- Ulamaal, Whitegate, !pos 93 -7.5 -128 50
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.A_TASTE_OF_HONEY)
@@ -36,10 +38,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     -- Variable set in ToAU quest 'Vanishing Act'.
                     if player:needToZone() or quest:getVar(player, 'Stage') > GetSystemTime() then
-                        return quest:progressEvent(55)
-                    else
-                        return quest:progressEvent(579)
+                        return quest:event(55)
                     end
+
+                    return quest:progressEvent(579)
                 end,
             },
 
@@ -47,6 +49,17 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     return quest:event(50)
+                end,
+            },
+
+            ['Ulamaal'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:needToZone() or quest:getVar(player, 'Stage') > GetSystemTime() then
+                        return quest:event(56)
+                    end
+
+                    return quest:progressEvent(579)
                 end,
             },
 
@@ -70,14 +83,14 @@ quest.sections =
         {
             ['Qutiba'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(585)
-                end,
-
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.POT_OF_WHITE_HONEY, 3 } }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.POT_OF_WHITE_HONEY, 3 } }) then
                         return quest:progressEvent(580)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    return quest:event(585)
                 end,
             },
 
@@ -85,7 +98,7 @@ quest.sections =
             {
                 [580] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },
@@ -108,7 +121,7 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.POT_OF_WHITE_HONEY }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.POT_OF_WHITE_HONEY, 1 } }) then
                         return quest:progressEvent(581)
                     end
                 end,
@@ -116,6 +129,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     player:setLocalVar('recipe', 57)
                     return quest:event(57)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [581] = function(player, csid, option, npc)
+                    player:tradeComplete()
                 end,
             },
 

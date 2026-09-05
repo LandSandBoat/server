@@ -266,6 +266,16 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSess
             }
         }
 
+        if (PSession->charID != 0 && PSession->charID != packetCharID)
+        {
+            return -1;
+        }
+
+        if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PSession->hasDecryptedPacket)
+        {
+            return -1;
+        }
+
         // We can only get here if an 0x00A (not encrypted) packet was here.
         // If we were pending zones, delete our old char
         if (PSession->blowfish.status == BLOWFISH_PENDING_ZONE)
@@ -301,6 +311,7 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSess
             else
             {
                 ShowError("recv_parse: Cannot load session_key for charid %u", packetCharID);
+                return -1;
             }
 
             PSession->PChar     = charutils::LoadChar(packetCharID);

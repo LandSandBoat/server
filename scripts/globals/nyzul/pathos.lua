@@ -66,9 +66,7 @@ local function addGearPenalty(mob)
 
     -- Time penalty.
     if penalty == xi.nyzul.penalty.TIME then
-        local timeLimit = instance:getTimeLimit() * 60
-
-        instance:setTimeLimit(timeLimit - 60)
+        instance:setTimeLimit(instance:getTimeLimit() - 60)
 
         for _, players in pairs(chars) do
             players:messageSpecial(ID.text.MALFUNCTION)

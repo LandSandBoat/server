@@ -9,13 +9,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if
-        mob:isMobType(xi.mobType.NOTORIOUS) or -- TODO: Set skill list
-        mob:getHPP() >= 90
-    then
-        return 1
-    end
-
     return 0
 end
 

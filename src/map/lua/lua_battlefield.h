@@ -46,9 +46,7 @@ public:
     uint32   getTimeLimit();
     uint32   getTimeInside();
     uint32   getRemainingTime();
-    uint32   getFightTick();
     uint32   getWipeTime();
-    uint32   getFightTime();
     uint32   getMaxParticipants();
     uint32   getPlayerCount();
     auto     getPlayers() -> sol::table;

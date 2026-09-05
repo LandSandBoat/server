@@ -34,7 +34,7 @@ end
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
     player:delKeyItem(xi.ki.MYTHRIL_MIRROR)
 end

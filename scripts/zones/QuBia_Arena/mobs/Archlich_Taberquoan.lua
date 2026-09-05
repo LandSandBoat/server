@@ -3,55 +3,40 @@
 --   NM: Archlich Taber'quoan
 -- Mission 5-1 BCNM Fight
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.SOUND_RANGE, 32)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
-entity.onMobEngage = function(mob, player)
-end
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [ 1] = { xi.magic.spell.BLIZZARD_II, target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 2] = { xi.magic.spell.WATER_II,    target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 3] = { xi.magic.spell.BLIZZAGA,    target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 4] = { xi.magic.spell.STONEGA_II,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 5] = { xi.magic.spell.THUNDAGA,    target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 6] = { xi.magic.spell.WATERGA_II,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [ 7] = { xi.magic.spell.POISON_II,   target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.POISON,     0, 100 },
+        [ 8] = { xi.magic.spell.BIO_II,      target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BIO,        4, 100 },
+        [ 9] = { xi.magic.spell.FROST,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.FROST,      0, 100 },
+        [10] = { xi.magic.spell.CHOKE,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.CHOKE,      0, 100 },
+        [11] = { xi.magic.spell.RASP,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.RASP,       0, 100 },
+        [12] = { xi.magic.spell.DROWN,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DROWN,      0, 100 },
+        [13] = { xi.magic.spell.DRAIN,       target, false, xi.action.type.DRAIN_HP,             nil,                  0, 100 },
+        [14] = { xi.magic.spell.ASPIR,       target, false, xi.action.type.DRAIN_MP,             nil,                  0, 100 },
+        [15] = { xi.magic.spell.ICE_SPIKES,  mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ICE_SPIKES, 0, 100 },
+        [16] = { xi.magic.spell.STUN,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.STUN,       0, 100 },
+        [17] = { xi.magic.spell.SLEEP,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLEEP_I,    1, 100 },
+        [18] = { xi.magic.spell.BLIND,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BLINDNESS,  0, 100 },
+        [19] = { xi.magic.spell.BIND,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BIND,       0, 100 },
+        [20] = { xi.magic.spell.SLEEP_II,    target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLEEP_I,    2, 100 },
+        [21] = { xi.magic.spell.SLEEPGA,     target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.SLEEP_I,    1, 100 },
+    }
 
-entity.onMobFight = function(mob, target)
-    local battleTime = mob:getBattleTime()
-
-    if battleTime - mob:getLocalVar('RepopWarriors') > 30 then
-        local warriorsSpawned = 0
-
-        -- Count Warriors.  This is necessary since if you are at the end
-        -- of the mob list, count may not be accurate if trying to do both
-        -- at the same time.
-        for warrior = mob:getID() + 3, mob:getID() + 6 do
-            if GetMobByID(warrior):isSpawned() then
-                warriorsSpawned = warriorsSpawned + 1
-            end
-        end
-
-        -- Iterate over possible warriors to find the next valid one and
-        -- spawn it.  Stagger them by 5s if two are being spawned in the same loop.
-        if warriorsSpawned < 2 then
-            local neededSpawns = 2 - warriorsSpawned
-            for warrior = mob:getID() + 3, mob:getID() + 6 do
-                if not GetMobByID(warrior):isSpawned() and neededSpawns > 0 then
-                    local warriorMob = SpawnMob(warrior)
-
-                    if warriorMob then
-                        warriorMob:updateEnmity(target)
-                        if neededSpawns == 2 then
-                            warriorMob:stun(5000)
-                        end
-                    end
-
-                    neededSpawns = neededSpawns - 1
-                end
-            end
-        end
-
-        mob:setLocalVar('RepopWarriors', battleTime)
-    end
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity

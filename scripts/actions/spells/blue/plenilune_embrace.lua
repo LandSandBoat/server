@@ -13,7 +13,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local duration = 90
+    local duration  = 90
     local moonCycle = getVanadielMoonCycle()
 
     local cycleBuffs =

@@ -108,6 +108,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         }
 
         local row = kilushaItems[option]
+        if not row then
+            return
+        end
 
         if player:getCurrency('therion_ichor') >= row.cost then
             if npcUtil.giveItem(player, row.item) then

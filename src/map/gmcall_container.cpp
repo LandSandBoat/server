@@ -72,7 +72,20 @@ auto GMCallContainer::addPacket(const GP_CLI_COMMAND_FAQ_GMCALL& packet) -> bool
 
     packets_.push_back(packet);
 
-    return packet.eos == 1; // Notify this was the last packet of the current GM call.
+    if (packet.eos != 1)
+    {
+        return false;
+    }
+
+    const auto now = timer::now();
+    if (now < lastCall_ + 10s)
+    {
+        clear();
+        return false;
+    }
+
+    lastCall_ = now;
+    return true; // Notify this was the last packet of the current GM call.
 }
 
 void GMCallContainer::clear()

@@ -16,19 +16,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [bind, silence, paralyze]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          fire:  11
-          ice:   11
-          water: -3
-        rank_status:
-          paralyze: 11
-          bind:     11
-          poison:   -3
       render:
         look:
           type:  standard
@@ -57,24 +44,6 @@ templates:
       jobs: [drk, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   11
-          thunder: 11
-          water:   -3
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        11
-          poison:      -3
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -101,25 +70,6 @@ templates:
       combat:
         skill: axe
       jobs: [war, blm]
-      resists:
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   11
-          thunder: 11
-          water:   -3
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        11
-          poison:      -3
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -146,25 +96,6 @@ templates:
       combat:
         skill: axe
       jobs: [war, blm]
-      resists:
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   11
-          thunder: 11
-          water:   -3
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        11
-          poison:      -3
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -189,25 +120,6 @@ templates:
       combat:
         skill: axe
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   11
-          thunder: 11
-          water:   -3
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        11
-          poison:      -3
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -236,22 +148,17 @@ templates:
       resists:
         rank_element:
           fire:    -3
-          ice:     11
           wind:     4
           earth:    4
           thunder:  4
-          water:   -3
           light:    4
           dark:     4
         rank_status:
-          paralyze:    11
-          bind:        11
-          silence:      4
-          slow:         4
-          poison:      -3
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
+          silence:     4
+          slow:        4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
       render:
         look:
           type:  standard

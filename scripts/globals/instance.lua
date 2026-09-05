@@ -68,7 +68,7 @@ xi.instance.lookup =
     [xi.zone.PERIQIA] =
     {
         { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
-        { 5601, { 143, 31, -4, 0, 70, 0, 1 }, { 143, 4 }, { 147, 0 } }, -- Assault: Seagull Grounded
+        -- Assault: Seagull Grounded (scripts/assaults/Periqia/seagull_grounded.lua)
         -- Assault: Requiem
         -- Assault: Saving Private Ryaaf
         -- Assault: Shooting Down the Baron
@@ -553,12 +553,12 @@ end
 
 xi.instance.updateInstanceTime = function(instance, elapsed, text)
     local players            = instance:getChars()
-    local remainingTimeLimit = instance:getTimeLimit() * 60 - (elapsed / 1000)
+    local remainingTimeLimit = instance:getTimeLimit() - elapsed
     local wipeTime           = instance:getWipeTime()
 
     if
         remainingTimeLimit < 0 or
-        (wipeTime ~= 0 and (elapsed - wipeTime) / 1000 > 180
+        (wipeTime ~= 0 and elapsed - wipeTime > 180
         )
     then
         instance:fail()

@@ -36,11 +36,6 @@ templates:
       combat:
         skill: great_katana
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          light: -2
-        rank_status:
-          light_sleep: -2
       render:
         look:
           type:  standard

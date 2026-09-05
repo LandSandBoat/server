@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params           = {}
     params.ecosystem       = xi.ecosystem.BEAST
     params.effect          = xi.effect.PLAGUE
     params.power           = 5

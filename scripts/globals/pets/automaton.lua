@@ -484,6 +484,56 @@ xi.pets.automaton.skillCaps =
     },
 }
 
+-- Automaton Magic Cooldowns, "Global" is the overall cooldown for magic, while others are specific to that category.
+xi.pets.automaton.magicCooldowns =
+{
+    [xi.automaton.head.HARLEQUIN] =
+    {
+        global        = 10,
+        healing       = 12,
+        enfeebling    = 12,
+    },
+
+    [xi.automaton.head.VALOREDGE] =
+    {
+        global        = 10,
+        healing       = 20,
+    },
+
+    [xi.automaton.head.SHARPSHOT] =
+    {
+        global        = 10,
+        healing       = 20,
+        enfeebling    = 12,
+    },
+
+    [xi.automaton.head.STORMWAKER] =
+    {
+        global        =  8,
+        healing       = 20,
+        enfeebling    = 10,
+        elemental     = 25,
+        enhancing     = 25,
+    },
+
+    [xi.automaton.head.SOULSOOTHER] =
+    {
+        global        =  8,
+        healing       = 10,
+        enfeebling    = 10,
+        enhancing     = 25,
+        statusRemoval = 10,
+    },
+
+    [xi.automaton.head.SPIRITREAVER] =
+    {
+        global        =  8,
+        enfeebling    = 10,
+        elemental     = 30,
+        enhancing     = 35,
+    },
+}
+
 xi.pets.automaton.frameMods =
 {
     -----------------------------------
@@ -493,7 +543,8 @@ xi.pets.automaton.frameMods =
     {
         mods =
         {
-            { xi.mod.DMG, -625 },
+            { xi.mod.DMG,  -625 },
+            { xi.mod.DEFP,   20 },
         },
     },
 
@@ -511,6 +562,7 @@ xi.pets.automaton.frameMods =
         {
             { xi.mod.SHIELDBLOCKRATE,    45 },
             { xi.mod.DMG,             -1250 },
+            { xi.mod.DEFP,               50 },
         },
     },
 
@@ -524,6 +576,7 @@ xi.pets.automaton.frameMods =
             { xi.mod.PIERCE_SDT,  8750 },
             { xi.mod.DMGBREATH,  -1250 },
             { xi.mod.DMGMAGIC,   -1250 },
+            { xi.mod.DEFP,          10 },
         },
     },
 

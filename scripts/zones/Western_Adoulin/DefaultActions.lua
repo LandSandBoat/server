@@ -27,7 +27,7 @@ return {
     ['Katya']            = { event = 559 },
     ['Kongramm']         = { event = 558 },
     ['Lollano']          = { event = 516 },
-    ['Majoirelle']       = { event = 538 },
+    ['Marjoirelle']      = { event = 538 },
     ['Mastan']           = { event = 525 },
     ['Merleg']           = { event = 543 },
     ['Minnifi_Delqabba'] = { text = ID.text.MINNIFI_DIALOGUE },

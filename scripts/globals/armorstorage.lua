@@ -113,9 +113,8 @@ xi.armorStorage.onTrade = function(player, trade, deposit)
                     local t5 = trade:hasItemQty(armorSets[i + 8], 1) or armorSets[i + 8] == 0
 
                     if t2 and t3 and t4 and t5 then
+                        player:setLocalVar('armorStorageSet', i)
                         player:startEvent(deposit, 0, 0, 0, 0, 0, armorSets[i + 9])
-                        player:addKeyItem(armorSets[i + 10])
-                        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, armorSets[i + 10])
                         returnValue = true
                         break
                     end
@@ -171,7 +170,12 @@ end
 
 xi.armorStorage.onEventFinish = function(player, csid, option, deposit, withdrawal)
     if csid == deposit then
-        player:tradeComplete()
+        local setIndex = player:getLocalVar('armorStorageSet')
+        player:setLocalVar('armorStorageSet', 0)
+
+        if setIndex > 0 and player:tradeComplete() then
+            npcUtil.giveKeyItem(player, armorSets[setIndex + 10])
+        end
 
     elseif csid == withdrawal then
         if option > 0 and option <= armorSets[#armorSets] - 10 then

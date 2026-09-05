@@ -43,6 +43,7 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CChar
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
+        .isInMogHouse()
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
         .mustNotEqual(this->MyroomAddItemNo, 0, "MyroomAddItemNo must not be 0")
         .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories)

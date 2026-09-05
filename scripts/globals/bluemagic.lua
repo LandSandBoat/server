@@ -12,6 +12,7 @@ xi.spells.blue = xi.spells.blue or {}
 -----------------------------------
 
 -- The TP modifier (currently unused)
+---@enum xi.spells.blue.tpMod
 xi.spells.blue.tpMod =
 {
     NONE          = 0,
@@ -54,51 +55,8 @@ local function calculateWSC(attacker, params)
     return wsc
 end
 
--- Get cRatio
-local function calculatecRatio(ratio, atk_lvl, def_lvl)
-    -- Get ratio with level penalty
-    local levelcor = 0
-    if atk_lvl < def_lvl then
-        levelcor = 0.05 * (def_lvl - atk_lvl)
-    end
-
-    ratio = ratio - levelcor
-    ratio = utils.clamp(ratio, 0, 2)
-
-    -- Get cRatiomin
-    local cratiomin = 0
-    if ratio < 1.25 then
-        cratiomin = 1.2 * ratio - 0.5
-    elseif ratio >= 1.25 and ratio <= 1.5 then
-        cratiomin = 1
-    elseif ratio > 1.5 and ratio <= 2 then
-        cratiomin = 1.2 * ratio - 0.8
-    end
-
-    -- Get cRatiomax
-    local cratiomax = 0
-    if ratio < 0.5 then
-        cratiomax = 0.4 + 1.2 * ratio
-    elseif ratio <= 0.833 and ratio >= 0.5 then
-        cratiomax = 1
-    elseif ratio <= 2 and ratio > 0.833 then
-        cratiomax = 1.2 * ratio
-    end
-
-    -- Return data
-    local cratio = {}
-    if cratiomin < 0 then
-        cratiomin = 0
-    end
-
-    cratio[1] = cratiomin
-    cratio[2] = cratiomax
-
-    return cratio
-end
-
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
-local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
+xi.spells.blue.calculatefTP = function(tp, ftp0, ftp1500, ftp3000)
     tp = utils.clamp(tp, 0, 3000)
 
     if tp >= 1500 then
@@ -108,29 +66,30 @@ local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
     end
 end
 
--- Get fSTR
-local function calculatefSTR(dSTR)
-    local fSTR2 = 0
-
-    if dSTR >= 12 then
-        fSTR2 = dSTR + 4
-    elseif dSTR >= 6 then
-        fSTR2 = dSTR + 6
-    elseif dSTR >= 1 then
-        fSTR2 = dSTR + 7
-    elseif dSTR >= -2 then
-        fSTR2 = dSTR + 8
-    elseif dSTR >= -7 then
-        fSTR2 = dSTR + 9
-    elseif dSTR >= -15 then
-        fSTR2 = dSTR + 10
-    elseif dSTR >= -21 then
-        fSTR2 = dSTR + 12
+-- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=V30
+---@param dSTR number
+---@param level number
+local function calculatefSTR(dSTR, level)
+    if dSTR > 2 then
+        return math.floor(math.min((dSTR + 4) / 4, math.floor((level / 5) + 7)))
     else
-        fSTR2 = dSTR + 13
+        return math.floor(math.max((dSTR + 8) / 4, (math.floor((level / 5) - 1) * -1)))
     end
+end
 
-    return fSTR2 / 2
+-- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S30
+---@param dSTR number
+---@param level number
+local function calculatefSTR2(dSTR, level)
+    if dSTR > 24 then
+        return math.floor(math.min((dSTR + 4) / 2, (math.floor((level / 5) + 7) * 2)))
+    elseif dSTR > 2 then
+        return math.floor((dSTR + 6) / 4)
+    elseif dSTR > -21 then
+        return math.floor((dSTR + 8) / 4)
+    else
+        return math.floor(math.max((dSTR + 10) / 4, (math.floor((level / 5) - 1) * -2)))
+    end
 end
 
 -- Get hitrate
@@ -204,43 +163,210 @@ local function calculateNukeWallFactor(target, spellElement, finalDamage)
     return 1 - potency / 10000
 end
 
------------------------------------
--- Global functions
------------------------------------
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params blueSkillParams
+---@return number
+local function getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
+    local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
+    local multiplier = 1
+    local extraDmg   = 0
 
--- Get the damage for a physical Blue Magic spell
-xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
-    spell:setCritical(false)
-
-    -----------------------
-    -- Get final D value --
-    -----------------------
-
-    -- Initial D value
-    local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
-    initialD       = utils.clamp(initialD, 0, params.duppercap)
-
-    -- fSTR
-    local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
-    if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
-        fStr = math.min(fStr, 22)
+    if params.hasEfflux then
+        multiplier = 1.5
     end
 
-    -- Multiplier, bonus WSC
-    local multiplier = params.multiplier or 1
-    local bonusWSC   = 0
+    if params.hasChainAffinity then
+        extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
+    end
+
+    -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
+    -- There's no documentation on it doing that and ilvl gear plainly states +X
+    return (math.floor(skill * 0.11) * 2 + 3) * multiplier + extraDmg
+end
+
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param params blueSkillParams
+---@return number
+local calculateCritChance = function(caster, target, params)
+    if
+        params.critChance ~= nil and
+        (params.hasAzureLore or
+        params.hasEfflux or
+        params.hasChainAffinity)
+    then
+        -- native blue magic crit rate is 0%. Remove 5% on input.
+        -- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=1069646548#gid=1069646548&range=S8:Y8
+        local nativecrit = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN) - 0.05
+
+        return utils.clamp(params.critChance / 100 + nativecrit, 0.00, 1.0)
+    end
+
+    return 0
+end
+
+---@param caster CBaseEntity
+---@param params blueSkillParams
+---@return number
+local getTPBonus = function(caster, params)
+    local tp = 0
+
+    -- Efflux acts like a 1k tp Chain Affinity
+    -- With Chain Affinity, this is effectively TP bonus +1000.
+    if params.hasEfflux then
+        tp = 1000 -- TOOD: add Efflux bonus gear as mod
+    end
+
+    if params.hasChainAffinity then
+        tp = tp + caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
+        tp = utils.clamp(tp, 0, 3000)
+    end
+
+    return tp
+end
+
+---@param caster CBaseEntity
+---@param params blueSkillParams
+---@return number
+local getWSCBonuses = function(caster, params)
+    local bonusWSC = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
     if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
         bonusWSC = 2
     end
 
-    -- Chain Affinity -- TODO: add 'Damage/Accuracy/Critical Hit Chance varies with TP'
-    if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        local tp   = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
-        tp         = utils.clamp(tp, 0, 3000)
-        multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
-        bonusWSC   = bonusWSC + 1 -- Chain Affinity doubles base WSC
+    if params.hasChainAffinity then
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
+    end
+
+    return bonusWSC
+end
+
+-----------------------------------
+-- Global functions
+-----------------------------------
+
+---@class blueSkillParams
+---@field numHits          number
+---@field ftp0             number
+---@field ftp1500          number
+---@field ftp3000          number
+---@field ftpAzure         number
+---@field azureBonus       number
+---@field baseDamageCap    number
+---@field critChance       number
+---@field bonusAcc         number
+---@field bonusMacc        number
+---@field attackMult       number
+---@field ecosystem        xi.ecosystem
+---@field attackType       xi.attackType
+---@field damageType       xi.damageType
+---@field dStat            xi.mod
+---@field dStatMultiplier  number
+---@field tpModifier       xi.spells.blue.tpMod
+---@field skillchainType   xi.skillchainType
+---@field skillchainType2  xi.skillchainType
+---@field str_wsc          number
+---@field dex_wsc          number
+---@field vit_wsc          number
+---@field agi_wsc          number
+---@field int_wsc          number
+---@field mnd_wsc          number
+---@field chr_wsc          number
+---@field hasEfflux        boolean
+---@field hasAzureLore     boolean
+---@field hasBurstAffinity boolean
+---@field hasChainAffinity boolean
+---@field hasSneakAttack   boolean
+---@field tpHitsLanded     number
+---@field hitsLanded       number
+
+---@param caster CBaseEntity
+---@return blueSkillParams
+xi.spells.blue.getDefaultParams = function(caster)
+    local params = {}
+
+    params.numHits       = 1
+    params.ftp0          = 0
+    params.ftp1500       = 0
+    params.ftp3000       = 0
+    params.ftpAzure      = 0
+    params.azureBonus    = 0
+    params.baseDamageCap = 0
+    params.critChance    = 0
+    params.bonusAcc      = 0
+    params.bonusMacc     = 0
+    params.attackMult    = 1.0
+
+    params.ecosystem       = xi.ecosystem.UNCLASSIFIED
+    params.attackType      = xi.attackType.NONE
+    params.damageType      = xi.damageType.NONE
+    params.dStat           = xi.mod.INT
+    params.dStatMultiplier = 1
+    params.tpModifier      = xi.spells.blue.tpMod.NONE
+    params.skillchainType  = xi.skillchainType.NONE
+    params.skillchainType2 = xi.skillchainType.NONE
+
+    params.str_wsc = 0.0
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.0
+    params.chr_wsc = 0.0
+
+    params.hasEfflux        = caster:hasStatusEffect(xi.effect.EFFLUX)
+    params.hasAzureLore     = caster:hasStatusEffect(xi.effect.AZURE_LORE)
+    params.hasBurstAffinity = caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    params.hasChainAffinity = caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY)
+    params.hasSneakAttack   = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK)
+
+    params.tpHitsLanded = 0
+    params.hitsLanded   = 0
+
+    return params
+end
+
+-- Get the damage for a physical Blue Magic spell
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params blueSkillParams
+---@return number
+xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
+    spell:setCritical(false)
+
+    local isCannonball = spell:getID() == xi.magic.spell.CANNONBALL
+
+    -- Initial D value
+    local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
+    initialD       = utils.clamp(initialD, 0, params.baseDamageCap)
+
+    -- fSTR
+    local dSTR = caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
+    local fStr = 0
+
+    if params.attackType and params.attackType == xi.attackType.RANGED then
+        fStr = calculatefSTR2(dSTR, caster:getMainLvl())
+    else
+        fStr = calculatefSTR(dSTR, caster:getMainLvl())
+    end
+
+    -- Cannonball specifically is capped to 22 fSTR
+    if isCannonball then
+        fStr = math.min(fStr, 22)
+    end
+
+    -- ftp, bonus WSC
+    local ftp        = params.ftp0 or 1
+    local bonusWSC   = getWSCBonuses(caster, params)
+    local tp         = getTPBonus(caster, params)
+
+    if tp > 0 then
+        ftp = xi.spells.blue.calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
     end
 
     -- WSC
@@ -251,40 +377,31 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local correlationBonus = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0) - 1
 
     -- Azure Lore
-    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
-        multiplier = params.azuretp
+    if params.hasAzureLore then
+        ftp = params.ftpAzure
     end
 
     -- Final D
     local finalD = math.floor(initialD + fStr + wsc)
-    -- TODO: Implement ENHANCES_CHAIN_AFFINITY. Increase base damage of spell, but not limited to spell's damage cap
-    -- ENHANCES_CHAIN_AFFINITY should also not modify skillchain damage
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
 
-    if params.offcratiomod == nil then -- For all spells except Cannonball, which uses a DEF mod
-        params.offcratiomod = caster:getStat(xi.mod.ATT)
-    end
+    params.bonusAcc     = params.bonusAcc or 0
+    params.critChance   = calculateCritChance(caster, target, params)
 
-    params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
-    params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
-    params.tphitslanded = 0
-
-    -- params.critchance will only be non-nil if base critchance is passed from spell lua
-    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, xi.slot.MAIN)
-    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
-
-    local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = calculateHitrate(caster, target, params.bonusacc)
+    local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
+    local spellAttackMod       = params.attackMult
+    local attackMultiplier     = spellAttackMod * potencyAttackMod
+    local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster)
+    local hitrate              = calculateHitrate(caster, target, params.bonusAcc)
 
     -------------------------
     -- Perform the attacks --
     -------------------------
 
     local hitsdone          = 0
-    local hitslanded        = 0
     local finaldmg          = 0
     local anyCrit           = false
     local sneakIsApplicable = false
@@ -303,7 +420,18 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
     end
 
-    while hitsdone < params.numhits do
+    if
+        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)
+    then
+        hitrate           = -1
+        sneakIsApplicable = false
+    end
+
+    params.tpHitsLanded = 0
+    params.hitsLanded   = 0
+
+    while hitsdone < params.numHits do
         local chance = math.randomFloat(0, 1)
 
         if
@@ -312,30 +440,24 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         then
             -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
-            -- Generate a random pDIF between min and max
-            local pdif = math.randomInt(cratio[1] * 1000, cratio[2] * 1000)
-            pdif       = pdif / 1000
-
-            local isCritical = sneakIsApplicable or math.randomFloat(0, 1) < params.critchance
-            if isCritical then
-                pdif = pdif + 1
-            end
+            local isCritical = sneakIsApplicable or math.randomFloat(0, 1) < params.critChance
+            local pdif       = xi.combat.physical.calculateMeleePDIF(caster, target, xi.skill.BLUE_MAGIC, attackMultiplier, isCritical, applyLevelCorrection, false, 0, false, xi.slot.MAIN, isCannonball)
 
             anyCrit = anyCrit or isCritical
 
             -- Add it to our final damage
             if hitsdone == 0 then
-                finaldmg = finaldmg + finalD * (multiplier + correlationBonus) * pdif -- first hit gets full multiplier
+                finaldmg = finaldmg + finalD * (ftp + correlationBonus) * pdif -- first hit gets full ftp bonus
             else
                 finaldmg = finaldmg + finalD * (1 + correlationBonus) * pdif
             end
 
-            hitslanded        = hitslanded + 1
+            params.hitsLanded = params.hitsLanded + 1
             sneakIsApplicable = false
 
             -- Store number of hits that did > 0 damage
             if finaldmg > 0 then
-                params.tphitslanded = params.tphitslanded + 1
+                params.tpHitsLanded = params.tpHitsLanded + 1
             end
         end
 
@@ -349,19 +471,27 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     finaldmg = math.floor(finaldmg * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
 
-    if hitslanded == 0 then
+    if params.hitsLanded == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_FAIL)
     end
 
-    if anyCrit and hitslanded > 0 then
+    if anyCrit and params.hitsLanded > 0 then
         target:triggerListener('CRITICAL_TAKE', target, caster)
     end
 
     spell:setCritical(anyCrit)
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget), hitslanded
+
+    caster:delStatusEffectSilent(xi.effect.EFFLUX)
+
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell. Called from spell scripts.
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params blueSkillParams
+---@return number
 xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- In individual magical spells, don't use params.effect for the added effect
     -- This would affect the resistance check for damage here
@@ -369,8 +499,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- Use params.addedEffect instead
 
     -- Initial values
-    local initialD   = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
-    params.skillType = xi.skill.BLUE_MAGIC
+    local initialD   = utils.clamp(caster:getMainLvl() + 2, 0, params.baseDamageCap)
 
     -- WSC
     local wsc           = calculateWSC(caster, params)
@@ -381,19 +510,19 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         wscMultiplier = wscMultiplier + 1
     end
 
-    if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+    if params.hasBurstAffinity then
         wscMultiplier = wscMultiplier + 1 + caster:getMod(xi.mod.ENHANCES_BURST_AFFINITY) / 100
     end
 
     wsc = wsc * wscMultiplier -- Bonus WSC from AF3/BA
 
     -- INT/MND/CHR dmg bonuses
-    params.diff     = caster:getStat(params.attribute) - target:getStat(params.attribute)
-    local statBonus = params.diff * params.tMultiplier
+    local statDiff  = caster:getStat(params.dStat) - target:getStat(params.dStat)
+    local statBonus = statDiff * params.dStatMultiplier
 
     -- Azure Lore
     local azureBonus = 0
-    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+    if params.hasAzureLore then
         azureBonus = params.azureBonus or 0
     end
 
@@ -408,13 +537,13 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     -- Final D value
-    local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationBonus) + statBonus
+    local finalDamage    = (initialD + wsc) * (params.ftp0 + azureBonus + correlationBonus) + statBonus
 
     local maccParams =
     {
         magicalElement = spellElement,
         magicBurstTier = skillchainCount,
-        actorStat      = params.attribute,
+        actorStat      = params.dStat,
         skillType      = skillType,
         spellGroup     = spellGroup,
     }
@@ -427,8 +556,8 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
-        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+        params.hasBurstAffinity or
+        params.hasAzureLore
     then
         if skillchainCount > 0 then
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
@@ -481,7 +610,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     {
         magicalElement = spellElement,
         magicBurstTier = skillchainCount,
-        actorStat      = params.attribute,
+        actorStat      = params.dStat,
         skillType      = skillType,
         spellGroup     = spellGroup,
     }
@@ -493,8 +622,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
     if
-        caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or
-        caster:hasStatusEffect(xi.effect.AZURE_LORE)
+        params.hasBurstAffinity or
+        params.hasAzureLore
     then
         if skillchainCount > 0 then
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
@@ -632,11 +761,6 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
 
-    -- Handle TP
-    local tpHits        = params.tphitslanded or 0
-    local extraTPGained = xi.combat.tp.calculateTPGainOnMagicalDamage(caster, target, dmg) * math.max(tpHits - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
-    target:addTP(extraTPGained)
-
     -- Handle Afflatus Misery.
     target:handleAfflatusMiseryDamage(dmg)
 
@@ -647,11 +771,17 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 end
 
 -- Apply spell damage
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param dmg number
+---@param params blueSkillParams
+---@param trickAttackTarget CBaseEntity?
 xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     dmg                 = math.floor(dmg * xi.settings.main.BLUE_POWER)
     local attackType    = params.attackType or xi.attackType.NONE
     local damageType    = params.damageType or xi.damageType.NONE
-    local tpHits        = params.tphitslanded or 0
+    local tpHits        = params.tpHitsLanded or 0
     local extraTPGained = xi.combat.tp.calculateTPGainOnMagicalDamage(caster, target, dmg) * math.max(tpHits - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
 
     -- handle MDT, One For All, Liement
@@ -816,7 +946,7 @@ end
 xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effectTable)
     -- Sanitize parameters.
     local element = params.damageType and params.damageType - 5 or 0
-    local stat    = params.attribute and params.attribute or xi.mod.INT
+    local stat    = params.dStat or xi.mod.INT
     if params.attackType == xi.attackType.BREATH then
         stat = 0
     end

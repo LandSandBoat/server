@@ -2725,7 +2725,7 @@ npcs:
     content:  toau
 
   16974404:
-    script: blank
+    script: blank_striking_a_balance
     at:     [-42.600, 0.000, 8.942, 34]
     render:
       look:

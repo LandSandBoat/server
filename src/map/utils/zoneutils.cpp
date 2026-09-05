@@ -46,6 +46,8 @@
 #include "roam_region.h"
 #include "spawn_handler.h"
 #include "spawn_slot.h"
+#include "spell.h"
+#include "transports/elevator_handler.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -67,6 +69,8 @@ using ZoneSettingsDataset = xi::data::datasets::zones::settings::Dataset;
 using NpcsDataset         = xi::data::datasets::zones::npcs::Dataset;
 using MobsDataset         = xi::data::datasets::zones::mobs::Dataset;
 using RegionsDataset      = xi::data::datasets::zones::regions::Dataset;
+
+Synchronized<std::deque<CMobSpellList>> ownedSpellLists;
 
 // Each zone's entity files, parsed once: the id lookups and the entity inserts both read these.
 struct ZoneEntityFiles
@@ -132,12 +136,36 @@ auto buildDropList(const xi::ZoneId zoneId, const std::string& templateName, con
                                 });
 }
 
+auto buildSpellList(const xi::ZoneId zoneId, const std::string& templateName, const std::vector<std::string>& spells) -> CMobSpellList*
+{
+    CMobSpellList spellList(std::nullopt);
+
+    for (const auto& name : spells)
+    {
+        const auto spellId = spell::lookupIdByName(name);
+        if (!spellId)
+        {
+            ShowCriticalFmt("buildSpellList: template '{}' in zone {} names unknown spell '{}'", templateName, static_cast<uint32>(zoneId), name);
+            std::exit(-1);
+        }
+
+        spellList.AddSpell(*spellId, 0, 255);
+    }
+
+    return ownedSpellLists.write([&](auto& lists) -> CMobSpellList*
+                                 {
+                                     return &lists.emplace_back(std::move(spellList));
+                                 });
+}
+
 void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npcs)
 {
     if ((PZone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
     {
         return;
     }
+
+    std::vector<std::pair<CNpcEntity*, const xi::data::ElevatorData*>> lifts;
 
     for (const auto& entry : npcs)
     {
@@ -170,6 +198,7 @@ void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npc
         PNpc->modelSize       = entry.ModelSize;
         PNpc->modelHitboxSize = std::max<float>(0.0f, entry.ModelHitboxSize / 10.f);
         PNpc->setWidescan(entry.Widescan);
+        PNpc->setAlwaysRelevant(entry.King);
 
         if (!luautils::IsContentEnabled(entry.Content))
         {
@@ -183,6 +212,17 @@ void InsertNPCs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Npcs& npc
         }
 
         PZone->InsertNPC(PNpc);
+
+        if (entry.Elevator)
+        {
+            lifts.emplace_back(PNpc, &*entry.Elevator);
+        }
+    }
+
+    // Held back until the zone is whole, because a lift names doors that may not have been inserted yet.
+    for (const auto& [PPlatform, lift] : lifts)
+    {
+        ElevatorHandler::getInstance()->addElevator(zoneId, PPlatform, *lift);
     }
 }
 
@@ -195,11 +235,17 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
     }
 
     HashMap<std::string, const DropList_t*> dropListByTemplate;
+    HashMap<std::string, CMobSpellList*>    spellListByTemplate;
     for (const auto& [name, mobTemplate] : mobs.Templates)
     {
         if (!mobTemplate.Loot.empty())
         {
             dropListByTemplate[name] = buildDropList(zoneId, name, mobTemplate.Loot);
+        }
+
+        if (!mobTemplate.Spells.empty())
+        {
+            spellListByTemplate[name] = buildSpellList(zoneId, name, mobTemplate.Spells);
         }
     }
 
@@ -313,7 +359,14 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
                 PMob->setMobMod(xi::MobMod::SpawnAnimationsub, PMob->animationsub);
             }
 
-            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(mobTemplate.SpellList);
+            if (const auto spellList = spellListByTemplate.find(spawn.TemplateName); spellList != spellListByTemplate.end())
+            {
+                PMob->m_SpellListContainer = spellList->second;
+            }
+            else
+            {
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(mobTemplate.SpellList);
+            }
 
             PMob->m_Pool = mobTemplate.Id;
 
@@ -448,6 +501,20 @@ auto GetInstanceByRunId(const xi::ZoneId zoneId, const uint32 runId) -> CInstanc
 {
     auto* PZoneInstance = dynamic_cast<CZoneInstance*>(GetZone(zoneId));
     return PZoneInstance ? PZoneInstance->getInstanceByRunId(runId) : nullptr;
+}
+
+auto GetNpcByName(CZone* PZone, const std::string& name) -> CNpcEntity*
+{
+    CNpcEntity* PFound = nullptr;
+    PZone->ForEachNpc([&](CNpcEntity* PNpc)
+                      {
+                          if (!PFound && PNpc->name == name)
+                          {
+                              PFound = PNpc;
+                          }
+                      });
+
+    return PFound;
 }
 
 auto GetEntity(const uint32 id, const uint8 filter) -> CBaseEntity*

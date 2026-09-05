@@ -252,6 +252,9 @@ auto CAbilityState::CanUseAbility() const -> bool
     if (m_PEntity->objtype == TYPE_PC)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PEntity);
+
+        const bool isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
+
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
@@ -260,7 +263,7 @@ auto CAbilityState::CanUseAbility() const -> bool
 
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Amnesia) ||
             (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Impairment) && (PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Impairment)->GetPower() == 0x01 || PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Impairment)->GetPower() == 0x03)) ||
-            (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
+            ((!PAbility->isPetAbility() || isLuopanAbility) && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
@@ -270,8 +273,7 @@ auto CAbilityState::CanUseAbility() const -> bool
         if (PTarget && PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             // TODO: Rework the way abilities and pet abilities are laid out so it can all go through the same block and have the pet special checks done in lua
-            const CPetSkill* PPetSkill       = PAbility->isPetAbility() ? battleutils::GetPetSkill(PAbility->getID()) : nullptr;
-            const bool       isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
+            const CPetSkill* PPetSkill = PAbility->isPetAbility() ? battleutils::GetPetSkill(PAbility->getID()) : nullptr;
             if (PPetSkill && !isLuopanAbility && (PPetSkill->isBloodPactRage() || PPetSkill->isBloodPactWard() || PPetSkill->getMobSkillID() > 0))
             {
                 if (!PetSkillDistanceCheck(PChar, PTarget, PAbility))

@@ -1782,22 +1782,32 @@ local function givePrize(player, ki)
     end
 end
 
+local scenarioKeys = { xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY }
+
 local function scenarioArmor(player, option, giveToPlayer)
-    local aug1 = 0
-    local aug2 = 0
-    local gear = 0
-    local addon = 0
+    local aug2 = bit.band(bit.rshift(option, 16), 31) -- 5 bits for 2nd selected augment
+    local aug1 = bit.band(bit.rshift(option, 11), 31) -- 5 bits for 1st selected augment
+    local gear = bit.band(bit.rshift(option, 6), 31)  -- 5 bits for selected gear piece
 
-    aug2 = bit.band(bit.rshift(option, 16), 31) -- 5 bits for 2nd selected augment
-    aug1 = bit.band(bit.rshift(option, 11), 31) -- 5 bits for 1st selected augment
-    gear = bit.band(bit.rshift(option, 6), 31)  -- 5 bits for selected gear piece
-    addon = optionToGear[gear].addon            -- index of addon scenario the gear belongs to
+    local gearEntry = optionToGear[gear]
+    if not gearEntry then
+        return
+    end
 
+    local addon    = gearEntry.addon -- index of addon scenario the gear belongs to
     local augment1 = optionToAugment[addon][aug1]
     local augment2 = optionToAugment[addon][aug2]
 
+    if not augment1 or not augment2 then
+        return
+    end
+
     local addAug = {}
     if giveToPlayer then
+        if not player:hasKeyItem(scenarioKeys[addon]) then
+            return
+        end
+
         -- Add each augment's ID and power
         for i = 1, #augment1 do
             table.insert(addAug, augment1[i].augment)
@@ -1810,11 +1820,11 @@ local function scenarioArmor(player, option, giveToPlayer)
         end
 
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, optionToGear[gear].itemId)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, gearEntry.itemId)
         else
-            player:addItem(optionToGear[gear].itemId, 1, unpack(addAug))
-            player:messageSpecial(ID.text.ITEM_OBTAINED, optionToGear[gear].itemId)
-            player:delKeyItem(({ xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY })[addon])
+            player:addItem(gearEntry.itemId, 1, unpack(addAug))
+            player:messageSpecial(ID.text.ITEM_OBTAINED, gearEntry.itemId)
+            player:delKeyItem(scenarioKeys[addon])
         end
     else
         -- Convert each augment's power and ID to binary (5 bits for power followed by 11 bits for ID)

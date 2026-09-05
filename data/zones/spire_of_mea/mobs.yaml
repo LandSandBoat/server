@@ -63,15 +63,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire:  11
-          ice:   11
-          water: -3
-        rank_status:
-          paralyze: 11
-          bind:     11
-          poison:   -3
       render:
         look:
           type:  standard

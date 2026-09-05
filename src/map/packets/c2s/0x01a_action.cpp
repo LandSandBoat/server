@@ -98,7 +98,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Attack:
                     {
                         // Note: It is possible to attack while fishing on retail and is disabled here on purpose.
-                        pv.blockedBy({ BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::CastMagic:
@@ -107,18 +107,18 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Weaponskill:
                     case GP_CLI_COMMAND_ACTION_ACTIONID::MonsterSkill: // MonsterSkill is entirely assumed
                     {
-                        pv.blockedBy({ BlockedState::Healing, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted })
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted })
                             .mustEqual(PChar->animation == xi::Animation::None || PChar->animation == xi::Animation::Attack, true, "Character in invalid animation state.");
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Fish:
                     {
-                        pv.blockedBy({ BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
                     {
-                        pv.blockedBy({ BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Dismount:
@@ -207,8 +207,13 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             }
 
             // Releasing a trust
-            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PNpc); PTrust && !PTrust->released())
+            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PNpc))
             {
+                if (PTrust->PMaster != PChar || PTrust->released())
+                {
+                    return;
+                }
+
                 uint32_t trustTargId = PTrust->targid;
 
                 PTrust->setReleased(true);
@@ -545,6 +550,11 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
         {
+            if (this->Mount.MountId > 3108 - static_cast<uint16_t>(KeyItem::CHOCOBO_COMPANION))
+            {
+                return;
+            }
+
             const auto mountKeyItem = static_cast<KeyItem>(static_cast<uint16_t>(KeyItem::CHOCOBO_COMPANION) + this->Mount.MountId);
 
             if (PChar->animation != xi::Animation::None || PChar->StatusEffectContainer->HasPreventActionEffect())

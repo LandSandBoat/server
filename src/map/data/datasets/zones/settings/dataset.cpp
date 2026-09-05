@@ -28,6 +28,7 @@
 #include <fmt/format.h>
 
 #include <algorithm>
+#include <limits>
 #include <map>
 #include <optional>
 #include <stdexcept>
@@ -103,6 +104,148 @@ auto convertZoneLines(const std::optional<std::map<std::string, wire::ZoneLine>>
     return lines;
 }
 
+// Phases run back to back from the offset. One may leave its length out and take whatever the cycle has left.
+auto convertPhases(const std::vector<wire::TransportPhase>& source, const uint32 every, const std::string_view name, const std::map<std::string, position_t>& places) -> std::vector<TransportPhaseData>
+{
+    if (source.empty())
+    {
+        throw std::runtime_error(fmt::format("transport '{}' declares no phases", name));
+    }
+
+    // A run with no cycle length holds its single phase forever.
+    if (every == 0)
+    {
+        if (source.size() != 1 || source.front().seconds)
+        {
+            throw std::runtime_error(fmt::format("transport '{}' has no cycle length, so it needs exactly one phase with no length of its own", name));
+        }
+
+        return { TransportPhaseData{
+            .State     = yaml::resolveEnum(source.front().state),
+            .Animation = yaml::resolveEnum(source.front().animation),
+            .Start     = 0,
+            .End       = std::numeric_limits<uint32>::max(),
+        } };
+    }
+
+    const auto open = std::ranges::count_if(source,
+                                            [](const auto& phase)
+                                            {
+                                                return !phase.seconds.has_value();
+                                            });
+    if (open > 1)
+    {
+        throw std::runtime_error(fmt::format("transport '{}' leaves {} phases without a length; at most one may", name, open));
+    }
+
+    uint32 stated{};
+    for (const auto& phase : source)
+    {
+        stated += phase.seconds.value_or(0);
+    }
+
+    if (stated > every)
+    {
+        throw std::runtime_error(fmt::format("transport '{}' phases run {}s, longer than its {}s cycle", name, stated, every));
+    }
+
+    if (open == 0 && stated != every)
+    {
+        throw std::runtime_error(fmt::format("transport '{}' phases run {}s, short of its {}s cycle, and no phase is open-ended", name, stated, every));
+    }
+
+    std::vector<TransportPhaseData> phases;
+    phases.reserve(source.size());
+
+    uint32 cursor{};
+    for (const auto& phase : source)
+    {
+        const auto length = phase.seconds.value_or(every - stated);
+
+        std::vector<TransportMoveData> moves;
+        for (const auto& move : phase.moves.value_or(std::vector<wire::TransportMove>{}))
+        {
+            const auto place = places.find(move.to);
+            if (place == places.end())
+            {
+                throw std::runtime_error(fmt::format("transport '{}' moves to '{}', which is not one of its places", name, move.to));
+            }
+
+            moves.emplace_back(TransportMoveData{ .Where = place->second, .After = move.after.value_or(0) });
+        }
+
+        phases.emplace_back(TransportPhaseData{
+            .State     = yaml::resolveEnum(phase.state),
+            .Animation = yaml::resolveEnum(phase.animation),
+            .Start     = cursor,
+            .End       = cursor + length,
+            .Moves     = std::move(moves),
+            .Hide      = phase.hide,
+        });
+
+        cursor += length;
+    }
+
+    return phases;
+}
+
+auto convertTransports(const std::optional<wire::TransportSchedule>& schedule) -> std::vector<TransportData>
+{
+    if (!schedule)
+    {
+        return {};
+    }
+
+    std::vector<TransportData> transports;
+    transports.reserve(schedule->runs.size());
+    for (const auto& [name, source] : schedule->runs)
+    {
+        std::vector<xi::ZoneId> crossings;
+        for (const auto& zone : source.voyage.value_or(std::vector<yaml::EnumToken<xi::ZoneId>>{}))
+        {
+            crossings.emplace_back(yaml::resolveEnum(zone));
+        }
+
+        // A decorative ship declares no berth and keeps whatever spot the zone file gave it.
+        const auto dock = [&]() -> std::optional<position_t>
+        {
+            if (!source.dock)
+            {
+                return std::nullopt;
+            }
+
+            return shared::toPosition(source.dock, fmt::format("transport '{}'", name));
+        }();
+
+        // The berth is always addressable by name, so a run that never leaves it needs no places at all.
+        std::map<std::string, position_t> places;
+        if (dock)
+        {
+            places.emplace("dock", *dock);
+        }
+
+        for (const auto& [place, at] : source.places.value_or(std::map<std::string, std::array<float, 3>>{}))
+        {
+            places.emplace(place, position_t{ at[0], at[1], at[2], 0, 0 });
+        }
+
+        transports.emplace_back(TransportData{
+            .Name      = name,
+            .Ship      = schedule->ship,
+            .Door      = source.door.value_or(std::string{}),
+            .Dock      = dock,
+            .Boundary  = source.boundary.value_or(0),
+            .Crossings = crossings,
+            .Every     = source.every.value_or(0),
+            .Offset    = source.offset.value_or(0),
+            .Disembark = source.disembark.value_or(0),
+            .Phases    = convertPhases(source.phases, source.every.value_or(0), name, places),
+        });
+    }
+
+    return transports;
+}
+
 } // namespace
 
 auto Dataset::decode(const std::string_view text) -> Records
@@ -116,6 +259,7 @@ auto Dataset::decode(const std::string_view text) -> Records
         .Tax              = document.tax.value_or(0.0f),
         .LevelRestriction = document.level_restriction.value_or(0),
         .ZoneLines        = convertZoneLines(document.zonelines),
+        .Transports       = convertTransports(document.transport),
     };
 }
 

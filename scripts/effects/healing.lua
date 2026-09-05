@@ -56,6 +56,7 @@ effectObject.onEffectTick = function(target, effect)
             not target:hasStatusEffect(xi.effect.PLAGUE) and
             not target:hasStatusEffect(xi.effect.CURSE_II)
         then
+            local region = target:getCurrentRegion()
             local healHP = 0
             local healMP = 12 + ((healtime - 2) * (1 + target:getMod(xi.mod.CLEAR_MIND))) + target:getMod(xi.mod.MPHEAL)
 
@@ -71,8 +72,8 @@ effectObject.onEffectTick = function(target, effect)
                 healHP = hpBase + (healtime - 2) * hpRate
                 healMP = mpBase + (healtime - 2) * mpRate
             elseif
-                target:getContinentID() == 1 and
-                target:hasStatusEffect(xi.effect.SIGNET)
+                (region <= xi.region.LIMBUS and target:hasStatusEffect(xi.effect.SIGNET)) or
+                (region >= xi.region.RONFAURE_FRONT and region <= xi.region.VALDEAUNIA_FRONT and target:hasStatusEffect(xi.effect.SIGIL))
             then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) +
                     (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)

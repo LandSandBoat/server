@@ -53,7 +53,8 @@ content.groups =
             },
         },
 
-        allDeath = function(battlefield, mob)
+        superlink = true,
+        allDeath  = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
     },

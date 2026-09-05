@@ -41,7 +41,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", this->PostWorkNo, -1, 8)
+                .range("PostWorkNo", this->PostWorkNo, -1, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -50,7 +50,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .range("ItemStacks", this->ItemStacks, 0, 999999999);
         }
         break;
@@ -58,7 +58,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -67,7 +67,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Outgoing, "BoxNo not Outgoing")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -85,7 +85,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, 1, "ItemWorkNo not 1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -103,7 +103,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -112,7 +112,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .mustEqual(this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, "BoxNo not Incoming")
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -121,7 +121,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }
@@ -130,7 +130,7 @@ auto GP_CLI_COMMAND_PBX::validate(MapSession* PSession, const CCharEntity* PChar
         {
             pv
                 .range("BoxNo", this->BoxNo, GP_CLI_COMMAND_PBX_BOXNO::Incoming, GP_CLI_COMMAND_PBX_BOXNO::Outgoing)
-                .range("PostWorkNo", this->PostWorkNo, 0, 8)
+                .range("PostWorkNo", this->PostWorkNo, 0, 7)
                 .mustEqual(this->ItemWorkNo, -1, "ItemWorkNo not -1")
                 .mustEqual(this->ItemStacks, -1, "ItemStacks not -1");
         }

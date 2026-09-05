@@ -8,6 +8,7 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setBaseSpeed(27)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.COUNTER, 20)

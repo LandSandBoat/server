@@ -329,7 +329,11 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 620 or csid == 621 then
+    if
+        (csid == 620 or csid == 621) and
+        option >= 0 and
+        option <= 3
+    then
         player:setCharVar('PUP_AttachmentStatus', option + 1)
     elseif csid == 627 then
         local attachmentStatus = player:getCharVar('PUP_AttachmentStatus')

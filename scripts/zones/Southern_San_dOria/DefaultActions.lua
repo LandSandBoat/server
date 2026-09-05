@@ -18,7 +18,7 @@ return {
     ['Clainomille']          = { event = 613 },
     ['Coderiant']            = { event = 583 },
     ['Collione']             = { event = 859 },
-    ['Enigmatic Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
+    ['Enigmatic_Footprints'] = { messageSpecial = ID.text.TEAR_IN_FABRIC_OF_SPACE },
     ['Ephauge']              = { event = 581 },
     ['Esmallegue']           = { event = 885 },
     ['Estiliphire']          = { event = 897 },

@@ -1526,8 +1526,11 @@ void GetAvailableSpells(CMobEntity* PMob)
 
 void SetSpellList(CMobEntity* PMob, uint16 spellList)
 {
-    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(spellList);
-    RecalculateSpellContainer(PMob);
+    if (auto* PSpellList = mobSpellList::GetMobSpellList(spellList))
+    {
+        PMob->m_SpellListContainer = PSpellList;
+        RecalculateSpellContainer(PMob);
+    }
 }
 
 void InitializeMob(CMobEntity* PMob)

@@ -36,17 +36,14 @@ m:addOverrideByEra('xi.effects.sange.onEffectGain', {
     end,
 })
 
--- TODO: Detection Spell Durations (SoA era)
--- Source: https://forum.square-enix.com/ffxi/threads/39564-Jan-21-2014-%28JST%29-Version-Update
---   Tonko Ichi:  420 seconds -> 180 seconds
---   Tonko Ni:    600 seconds -> 300 seconds
---   Monomi Ichi: 420 seconds -> 180 seconds
-
 -- Mijin Gakure: Now applies weakness and normal HP gain on raise
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/20/2009)
-m:addOverrideByEra('xi.player.onPlayerDeath', {
-    [xi.expansion.WOTG] = function(player)
-        super(player)
-        player:setLocalVar('MijinGakure', 0)
+m:addOverrideByEra('xi.job_utils.ninja.useMijinGakure', {
+    [xi.expansion.WOTG] = function(player, target, ability, action)
+        local dmg = super(player, target, ability, action)
+
+        player:die({ mijin = false })
+
+        return dmg
     end,
 })

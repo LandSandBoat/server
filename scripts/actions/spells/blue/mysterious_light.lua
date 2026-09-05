@@ -20,21 +20,17 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params       = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem   = xi.ecosystem.ARCANA
     params.attackType  = xi.attackType.MAGICAL
     params.damageType  = xi.damageType.WIND
-    params.attribute   = xi.mod.CHR
-    params.multiplier  = 2.0
-    params.tMultiplier = 1.0
-    params.duppercap   = 56
-    params.str_wsc     = 0.0
-    params.dex_wsc     = 0.0
-    params.vit_wsc     = 0.0
-    params.agi_wsc     = 0.0
-    params.int_wsc     = 0.0
-    params.mnd_wsc     = 0.0
-    params.chr_wsc     = 0.3
+    params.dStat       = xi.mod.CHR
+
+    params.ftp0            = 2.0
+    params.dStatMultiplier = 1.0
+    params.baseDamageCap   = 56
+
+    params.chr_wsc = 0.3
 
     -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)

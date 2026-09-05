@@ -7,23 +7,24 @@ g_mixins = g_mixins or {}
 local column =
 {
     SLEEP_ANIMATION  = 1,
-    SLEEP_HOUR_START = 2,
-    SLEEP_HOUR_END   = 3,
-    CAN_CAST         = 4,
-    AGGRESSIVE       = 5,
-    LINK             = 6,
+    WAKEUP_ANIMATION = 2,
+    SLEEP_HOUR_START = 3,
+    SLEEP_HOUR_END   = 4,
+    CAN_CAST         = 5,
+    AGGRESSIVE       = 6,
+    LINK             = 7,
 }
 
 -- AnimationSub used to sleep.
 local dataTable =
 {
-    ['Carmine_Eruca'    ] = { 1, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
-    ['Date_Eruca'       ] = { 1, 21,  6, true,  true,  1 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep. -- TODO: Audit Link Behavior
-    ['Jnun'             ] = { 1,  6, 18, false, true,  1 }, -- Fat horrible things -> Awake from 18:00 to 5:59, Only 0 or 1. 1 is asleep.
-    ['Magmatic_Eruca'   ] = { 1, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
-    ['Scoriaceous_Eruca'] = { 1, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
-    ['Wild_Karakul'     ] = { 1, 20,  6, false, false, 1 }, -- Sheep               -> Awake from 6:00 to 19:59, Only 0 or 1. 1 is asleep. -- TODO: Audit Link Behavior
-    ['Ziz'              ] = { 3, 20,  4, false, true,  1 }, -- Cockatrices         -> Awake from 4:00 to 19:59, 1 and 2 control puch. 3 sets them to sleep, leaving pouch as is. 0 does nothing different than 1.
+    ['Carmine_Eruca'    ] = { 1, 0, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
+    ['Date_Eruca'       ] = { 1, 0, 21,  6, true,  true,  1 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep. -- TODO: Audit Link Behavior
+    ['Jnun'             ] = { 1, 0,  6, 18, false, true,  1 }, -- Fat horrible things -> Awake from 18:00 to 5:59, Only 0 or 1. 1 is asleep.
+    ['Magmatic_Eruca'   ] = { 1, 0, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
+    ['Scoriaceous_Eruca'] = { 1, 0, 21,  6, true,  true,  0 }, -- Red Crawlers        -> Awake from 6:00 to 20:59, Only 0 or 1. 1 is asleep.
+    ['Wild_Karakul'     ] = { 1, 0, 20,  6, false, false, 1 }, -- Sheep               -> Awake from 6:00 to 19:59, Only 0 or 1. 1 is asleep. -- TODO: Audit Link Behavior
+    ['Ziz'              ] = { 3, 1, 20,  4, false, true,  1 }, -- Cockatrices         -> Awake from 4:00 to 19:59, 1 and 2 control puch.
 }
 
 local function fallAsleep(mob, mobName)
@@ -37,7 +38,7 @@ local function fallAsleep(mob, mobName)
 end
 
 local function wakeUp(mob, mobName)
-    mob:setAnimationSub(dataTable[mobName][column.SLEEP_ANIMATION] - 1)
+    mob:setAnimationSub(dataTable[mobName][column.WAKEUP_ANIMATION])
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setAggressive(dataTable[mobName][column.AGGRESSIVE])
     mob:setMobMod(xi.mobMod.NO_LINK, dataTable[mobName][column.LINK])

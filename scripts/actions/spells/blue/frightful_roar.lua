@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params           = {}
     params.ecosystem       = xi.ecosystem.DEMON
     params.effect          = xi.effect.DEFENSE_DOWN
     params.power           = 10

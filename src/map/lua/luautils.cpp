@@ -100,7 +100,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
-#include "transport.h"
+#include "transports/elevator_handler.h"
 #include "weapon_skill.h"
 #include "zone.h"
 #include "zone_entities.h"
@@ -5053,7 +5053,7 @@ auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId
     return result.get_type(0) == sol::type::number ? result.get<xi::ZoneId>(0) : xi::ZoneId::Unknown;
 }
 
-void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time)
+void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 seconds)
 {
     TracyZoneScoped;
 
@@ -5065,7 +5065,7 @@ void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time)
         return;
     }
 
-    auto result = onInstanceTimeUpdate(PInstance, time);
+    auto result = onInstanceTimeUpdate(PInstance, seconds);
     if (!result.valid())
     {
         sol::error err = result;
@@ -5197,23 +5197,21 @@ void OnInstanceComplete(CInstance* PInstance)
     }
 }
 
-void StartElevator(uint32 ElevatorID)
+void StartElevator(const xi::Elevator elevatorID)
 {
     TracyZoneScoped;
 
-    CTransportHandler::getInstance()->startElevator(ElevatorID);
+    ElevatorHandler::getInstance()->startElevator(elevatorID);
 }
 
-// Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
-int16 GetElevatorState(uint8 id) // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+// Reaches Lua as xi.elevatorState, or -1 when there is no such elevator.
+auto GetElevatorState(const xi::Elevator elevatorID) -> int16
 {
     TracyZoneScoped;
 
-    Elevator_t* elevator = CTransportHandler::getInstance()->getElevator(id);
-
-    if (elevator)
+    if (const auto state = ElevatorHandler::getInstance()->elevatorState(elevatorID))
     {
-        return elevator->state;
+        return static_cast<int16>(*state);
     }
 
     return -1;
@@ -5279,7 +5277,7 @@ void ClearCharVarFromAll(const std::string& varName)
     charutils::ClearCharVarFromAll(varName);
 }
 
-void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, uint16 transportId)
+void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, std::string_view transport)
 {
     TracyZoneScoped;
 
@@ -5291,7 +5289,7 @@ void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, uint16 transpor
         return;
     }
 
-    auto result = onTransportEvent(PChar, prevZoneId, transportId);
+    auto result = onTransportEvent(PChar, prevZoneId, transport);
     if (!result.valid())
     {
         sol::error err = result;

@@ -40,13 +40,14 @@ g_mixins.bodyguard = function(bodyguardedNM)
                 local guard = GetMobByID(guardID)
 
                 if guard then
-                    -- despawn bodyguard if they are still spawned for some reason
+                    -- A guard still up from the last pop is moved beside the NM. DespawnMob takes three seconds and spawn does nothing until it finishes.
                     if guard:isSpawned() then
-                        DespawnMob(guard:getID())
+                        guard:setPos(nmSpawnPos.x - spawnPosOffset[index], nmSpawnPos.y, nmSpawnPos.z)
+                    else
+                        guard:setSpawn(nmSpawnPos.x - spawnPosOffset[index], nmSpawnPos.y, nmSpawnPos.z)
+                        guard:spawn()
                     end
 
-                    guard:setSpawn(nmSpawnPos.x - spawnPosOffset[index], nmSpawnPos.y, nmSpawnPos.z)
-                    guard:spawn()
                     guard:follow(mob, xi.followType.ROAM)
                     guard:addListener('ROAM_TICK', 'ROTZ_BODYGUARD_ROAM', bodyGuardRoam)
                     guard:addListener('DESPAWN', 'ROTZ_BODYGUARD_DESPAWN', bodyGuardDespawn)

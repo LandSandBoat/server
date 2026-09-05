@@ -73,19 +73,9 @@ uint32 CLuaBattlefield::getRemainingTime()
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetRemainingTime()));
 }
 
-uint32 CLuaBattlefield::getFightTick()
-{
-    return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetFightTime() - m_PLuaBattlefield->GetStartTime()));
-}
-
 uint32 CLuaBattlefield::getWipeTime()
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetWipeTime() - timer::start_time));
-}
-
-uint32 CLuaBattlefield::getFightTime()
-{
-    return static_cast<uint32>(timer::count_seconds(timer::start_time - m_PLuaBattlefield->GetFightTime()));
 }
 
 uint32 CLuaBattlefield::getMaxParticipants()
@@ -737,9 +727,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("getTimeLimit", CLuaBattlefield::getTimeLimit);
     SOL_REGISTER("getRemainingTime", CLuaBattlefield::getRemainingTime);
     SOL_REGISTER("getTimeInside", CLuaBattlefield::getTimeInside);
-    SOL_REGISTER("getFightTick", CLuaBattlefield::getFightTick);
     SOL_REGISTER("getWipeTime", CLuaBattlefield::getWipeTime);
-    SOL_REGISTER("getFightTime", CLuaBattlefield::getFightTime);
     SOL_REGISTER("getMaxParticipants", CLuaBattlefield::getMaxParticipants);
     SOL_REGISTER("getPlayerCount", CLuaBattlefield::getPlayerCount);
     SOL_REGISTER("getPlayers", CLuaBattlefield::getPlayers);

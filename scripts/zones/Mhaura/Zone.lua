@@ -29,6 +29,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    zone:registerCuboidTriggerArea(493, -12.7, -6.6, -16.4, 9.8, 0.1, 1.8) -- Boat boarding area
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -59,7 +60,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     if player:isInEvent() then
         return
     end

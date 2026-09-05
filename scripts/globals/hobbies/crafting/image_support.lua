@@ -98,7 +98,7 @@ xi.crafting.oldImageSupportOnTrigger = function(player, npc)
 
     -- Calculate effect Duration.
     if player:hasStatusEffect(effectId) then
-        imageDuration = player:getStatusEffect(effectId):getDuration()
+        imageDuration = math.floor(player:getStatusEffect(effectId):getDuration() / 1000)
     end
 
     -- Event handles everything with correct params.
@@ -201,7 +201,7 @@ xi.crafting.ahtUhrganImageSupportOnTrigger = function(player, npc)
 
     -- Calculate image support duration.
     if player:hasStatusEffect(effectId) then
-        imageDuration = player:getStatusEffect(effectId):getDuration()
+        imageDuration = math.floor(player:getStatusEffect(effectId):getDuration() / 1000)
     end
 
     -- Event handles everything with correct params.

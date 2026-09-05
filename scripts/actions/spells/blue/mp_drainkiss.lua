@@ -20,11 +20,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.AMORPH
+    local params      = {}
+    params.ecosystem  = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
+    params.dStat      = xi.mod.INT
+
     params.dmgMultiplier = 3.5
 
     return xi.spells.blue.useDrainSpell(caster, target, spell, params, 165, true)

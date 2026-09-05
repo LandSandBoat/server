@@ -27,3 +27,27 @@ zonelines:
     to:    port_bastok
     at:    [59.999, 3.395, -239.997, 4.712389]
     scale: [1.000, 18.000]
+
+transport:
+  ship: 17743971
+  runs:
+    bastok_jeuno_airship:
+      door:     _6ku
+      dock:     [-36.458, 6.365, -77.322, 128]
+      boundary: 315
+      voyage:
+        - bastok_jeuno_airship
+      every:     864
+      disembark: 441
+      offset:      2
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   29
+        - state:     docked
+          seconds:   143
+        - state:     closing
+          seconds:   4
+        - state:     departing
+          animation: animation_19
+          hide:      37

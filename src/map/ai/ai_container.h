@@ -31,6 +31,7 @@
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
+#include "states/death_state.h"
 #include "states/state.h"
 
 class CBaseEntity;
@@ -76,7 +77,7 @@ public:
     auto Internal_PetSkill(const EntityId& target, uint16 abilityid) -> bool;
     auto Internal_Ability(const EntityId& target, uint16 abilityid) -> bool;
     auto Internal_RangedAttack(const EntityId& target) -> bool;
-    auto Internal_Die(timer::duration) -> bool;
+    auto Internal_Die(timer::duration, DeathParams params = {}) -> bool;
     auto Internal_UseItem(const EntityId& target, uint8 loc, uint8 slotid) -> bool;
     auto Internal_Despawn(bool instantDespawn = false) -> bool;
     auto Internal_Synth(xi::SkillType synthSkill) -> bool;

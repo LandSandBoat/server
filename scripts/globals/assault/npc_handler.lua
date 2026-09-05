@@ -59,19 +59,28 @@ xi.assault.onMissionGiverEventFinish = function(player, csid, option, npc, event
         local shop          = xi.assault.shops[assaultArea]
 
         -- Player selected assault mission
-        if
-            selectiontype == 1 and
-            npcUtil.giveKeyItem(player, xi.assault.areaData[assaultArea].orders)
-        then
-            player:addAssault(bit.rshift(option, 4))
-            player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
-            player:addKeyItem(xi.assault.areaData[assaultArea].map)
+        if selectiontype == 1 then
+            local missionId = bit.rshift(option, 4)
+
+            if
+                xi.assault.missionToArea[missionId] == assaultArea and
+                player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and
+                npcUtil.giveKeyItem(player, xi.assault.areaData[assaultArea].orders)
+            then
+                player:addAssault(missionId)
+                player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+                player:addKeyItem(xi.assault.areaData[assaultArea].map)
+            end
 
         -- Player selected to purchase an item
         elseif selectiontype == 2 then
-            local item = bit.rshift(option, 14)
+            local item   = bit.rshift(option, 14)
             local choice = shop[item]
-            if choice and npcUtil.giveItem(player, choice.itemid) then
+            if
+                choice and
+                player:getAssaultPoint(assaultArea) >= choice.price and
+                npcUtil.giveItem(player, choice.itemid)
+            then
                 player:delAssaultPoint(assaultArea, choice.price)
             end
         end

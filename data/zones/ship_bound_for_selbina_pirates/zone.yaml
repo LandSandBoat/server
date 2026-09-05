@@ -7,3 +7,25 @@ music:
   night:        106
   battle_solo:  101
   battle_party: 103
+
+transport:
+  ship: 17707045
+  runs:
+    pirates_to_selbina:
+      dock: [-30.000, 0.000, 0.000, 192]
+      places:
+        offshore: [-150.000, 0.000, -1000.000]
+      every:  1152
+      offset:  172
+      phases:
+        - state:     cycling
+          animation: animation_18
+          seconds:   470
+          moves:
+            - to:    dock
+              after: 23
+        - state:     cycling
+          animation: animation_19
+          moves:
+            - to:    offshore
+              after: 23

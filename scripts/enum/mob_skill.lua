@@ -251,7 +251,10 @@ xi.mobSkill =
     WHISPERS_OF_IRE               =  398,
 
     HAMMER_BEAK                   =  406,
+    POISON_PICK                   =  407,
+    SOUND_VACUUM_COCKATRICE       =  408,
 
+    SOUND_BLAST                   =  410,
     BALEFUL_GAZE_COCKATRICE       =  411,
     RANGED_ATTACK_2               =  412,
     EAGLE_EYE_SHOT_HUMANOID       =  413,
@@ -351,9 +354,16 @@ xi.mobSkill =
     SOMNOLENCE_1                  =  545,
     NOCTOSHIELD_1                 =  546,
     ULTIMATE_TERROR_1             =  547,
+    BLINDEYE_1                    =  548,
+    EYES_ON_ME_1                  =  549,
+    HYPNOSIS_1                    =  550,
+    MIND_BREAK_1                  =  551,
+    BINDING_WAVE_1                =  552,
+    AIRY_SHIELD_1                 =  553,
 
+    MAGIC_BARRIER_1               =  555,
     DREAM_SHROUD_1                =  556,
-
+    LEVEL_5_PETRIFY_1             =  557,
     NIGHTMARE_1                   =  558,
 
     SLING_BOMB_1                  =  567,
@@ -429,6 +439,8 @@ xi.mobSkill =
     VENOM_1                       =  660,
     SNOW_CLOUD_1                  =  661,
 
+    ICE_ROAR_1                    =  663,
+    IMPACT_ROAR_1                 =  664,
     GRAND_SLAM_1                  =  665,
 
     POWER_ATTACK_ARMED_1          =  667,
@@ -495,6 +507,12 @@ xi.mobSkill =
 
     FISSION                       =  755,
 
+    DEADLY_HOLD_1                 =  797,
+    TAIL_SWING_1                  =  798,
+    TAIL_SMASH_1                  =  799,
+    HEAT_BREATH_1                 =  800,
+    RIDDLE_1                      =  801,
+    GREAT_SANDSTORM_1             =  802,
     GREAT_WHIRLWIND_1             =  803,
     TORTOISE_SONG_1               =  804,
     HEAD_BUTT_TURTLE_1            =  805,
@@ -1037,6 +1055,8 @@ xi.mobSkill =
     HYPNIC_LAMP                   = 1695, -- Unique entry.
 
     PROBOSCIS_SHOWER              = 1708,
+
+    BUGLE_CALL                    = 1712,
 
     KIBOSH                        = 1725,
     CUTPURSE                      = 1726,

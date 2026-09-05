@@ -64,7 +64,10 @@ local memoryFluxOnTrigger = function(player, npc)
     then
         SpawnMob(fluxInfo[2]):updateClaim(player)
         return mission:messageSpecial(promyvionVahzlID.text.ON_NM_SPAWN)
-    elseif not mission:isVarBitsSet(player, 'Option', fluxInfo[1] + 3) then
+    elseif
+        mission:isVarBitsSet(player, 'Option', fluxInfo[1]) and
+        not mission:isVarBitsSet(player, 'Option', fluxInfo[1] + 3)
+    then
         return mission:progressCutscene(fluxInfo[3])
     end
 end
@@ -121,27 +124,21 @@ mission.sections =
             ['Propagator'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not mission:isVarBitsSet(player, 'Option', 0) then
-                        mission:setVarBit(player, 'Option', 0)
-                    end
+                    mission:setVarBit(player, 'Option', 0)
                 end,
             },
 
             ['Solicitor'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not mission:isVarBitsSet(player, 'Option', 1) then
-                        mission:setVarBit(player, 'Option', 1)
-                    end
+                    mission:setVarBit(player, 'Option', 1)
                 end,
             },
 
             ['Ponderer'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not mission:isVarBitsSet(player, 'Option', 2) then
-                        mission:setVarBit(player, 'Option', 2)
-                    end
+                    mission:setVarBit(player, 'Option', 2)
                 end,
             },
 
@@ -180,12 +177,11 @@ mission.sections =
         [xi.zone.SPIRE_OF_VAHZL] =
         {
             onZoneIn = function(player, prevZone)
-                if mission:getVar(player, 'Status') == 1 then
-                    if bit.rshift(mission:getVar(player, 'Option'), 3) == 7 then
-                        return 20
-                    else
-                        return 21
-                    end
+                local missionStatus = mission:getVar(player, 'Status')
+                if missionStatus == 0 then
+                    return 21
+                elseif missionStatus == 1 then
+                    return 20
                 end
             end,
 

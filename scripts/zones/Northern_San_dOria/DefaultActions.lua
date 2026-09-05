@@ -30,7 +30,6 @@ return {
     ['Guilerme']          = { text = ID.text.GUILERME_DIALOG },
     ['Halaviabeau']       = { event = 611 },
     ['Helaku']            = { event = 541 },
-    ['Hinaree']           = { event = 580 },
     ['Icoua']             = { event = 674 },
     ['Ishwar']            = { text = ID.text.ISHWAR_DIALOG },
     ['Jufaue']            = { event = 715 },

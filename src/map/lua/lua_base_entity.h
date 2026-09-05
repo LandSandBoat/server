@@ -173,7 +173,6 @@ public:
 
     void openDoor(const sol::object& seconds);
     void closeDoor(const sol::object& seconds);
-    void setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed);
 
     void addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffset); // Adds a periodic trigger to the NPC that allows time based scripting
     void showNPC(const sol::object& seconds);
@@ -500,6 +499,7 @@ public:
     void  addCP(int32 cp);
     void  delCP(int32 cp);
     void  gainConquestInfluence(int32 points);
+    void  addConquestMobKills(int32 count);
 
     int32 getSeals(uint8 sealType);
     void  addSeals(int32 points, uint8 sealType);
@@ -519,6 +519,7 @@ public:
     int32 addHP(int32 hpAdd);                                                                                                                      // Increase hp of Entity
     int32 addHPLeaveSleeping(int32 hpAdd);                                                                                                         // Increase hp of Entity but do not awaken the Entity
     void  setHP(int32 value);                                                                                                                      // Set hp of Entity to value
+    void  die(const sol::object& params);                                                                                                          // Kill a player, describing the circumstances of the death
     void  setMaxHP(int32 value);                                                                                                                   // Set max hp of Entity to value
     int32 restoreHP(int32 restoreAmt);                                                                                                             // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);                                                                                                                     // Decrease hp of Entity

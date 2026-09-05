@@ -10,15 +10,6 @@ templates:
       combat:
         skill: club
       jobs: [war, drk]
-      resists:
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard
@@ -44,15 +35,6 @@ templates:
       combat:
         skill: scythe
         delay: 0
-      resists:
-        rank_element:
-          fire:  11
-          ice:   11
-          water: -3
-        rank_status:
-          paralyze: 11
-          bind:     11
-          poison:   -3
       render:
         look:
           type:  standard
@@ -82,14 +64,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          light: -3
-          dark:  11
-        rank_status:
-          light_sleep: -3
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -121,14 +95,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -192,15 +158,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire:  11
-          ice:   11
-          water: -3
-        rank_status:
-          paralyze: 11
-          bind:     11
-          poison:   -3
       render:
         look:
           type:  standard
@@ -254,14 +211,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -295,14 +244,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          wind:    -3
-          earth:   11
-          thunder: 11
-        rank_status:
-          silence: -3
-          slow:    11
       render:
         look:
           type:  standard
@@ -336,15 +277,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard
@@ -374,15 +306,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard
@@ -412,14 +335,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          light: -3
-          dark:  11
-        rank_status:
-          light_sleep: -3
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -449,14 +364,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          light: -3
-          dark:  11
-        rank_status:
-          light_sleep: -3
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

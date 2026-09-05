@@ -21,3 +21,51 @@ zonelines:
     to:    aht_urhgan_whitegate
     at:    [-102.500, -1.500, -80.000]
     scale: [1.000, 4.000]
+
+transport:
+  ship: 16982046
+  runs:
+    whitegate_mhaura_boat:
+      door:     _1es
+      dock:     [-20.726, 3.389, -154.231, 0]
+      boundary: 569
+      voyage:
+        - open_sea_route_to_mhaura
+      every:     1152
+      disembark:   26
+      offset:     344
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   42
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   191
+        - state:     closing
+          seconds:   1
+        - state:     departing
+          animation: animation_19
+          hide:      37
+    whitegate_nashmau_boat:
+      door:     _1et
+      dock:     [20.726, 3.389, 154.231, 128]
+      boundary: 570
+      voyage:
+        - silver_sea_route_to_nashmau
+      every:     1152
+      disembark:   25
+      offset:     680
+      phases:
+        - state:     arriving
+          animation: animation_20
+          seconds:   42
+          moves:
+            - to: dock
+        - state:     docked
+          seconds:   431
+        - state:     closing
+          seconds:   1
+        - state:     departing
+          animation: animation_21
+          hide:      37

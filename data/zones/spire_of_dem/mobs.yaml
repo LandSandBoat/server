@@ -11,16 +11,6 @@ templates:
       combat:
         skill: sword
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -45,16 +35,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -77,16 +57,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -109,16 +79,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -158,15 +118,6 @@ templates:
         skill: sword
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -195,15 +146,6 @@ templates:
       jobs: [war, rdm]
       resists:
         immune_status: [bind, light_sleep, dark_sleep]
-        rank_element:
-          ice:   -3
-          wind:  11
-          earth: 11
-        rank_status:
-          paralyze: -3
-          bind:     -3
-          silence:  11
-          slow:     11
       render:
         look:
           type:  standard
@@ -229,15 +171,6 @@ templates:
       combat:
         skill: scythe
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire: -3
-          ice:  11
-          wind: 11
-        rank_status:
-          paralyze: 11
-          bind:     11
-          silence:  11
       render:
         look:
           type:  standard

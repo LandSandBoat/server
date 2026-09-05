@@ -7,6 +7,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
     xi.chocoboGame.clearRecord(zone)
+    zone:registerCuboidTriggerArea(512, -7.9, -6.8, 16.0, 20.2, -1.0, 48.3) -- Jeuno airship boarding area
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -31,7 +32,12 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
+        player:startEvent(10001)
+        return
+    end
+
     player:startEvent(10000, {
         isHidden = true,
         flags    = bit.bor(

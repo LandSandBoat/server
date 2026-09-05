@@ -47,7 +47,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 1 then
+                    if questProgress == 0 then
+                        return quest:progressEvent(172)
+                    elseif questProgress == 1 then
                         return quest:progressEvent(105)
                     elseif questProgress == 3 then
                         return quest:event(27)
@@ -102,7 +104,7 @@ quest.sections =
                     if questProgress == 2 then
                         return quest:progressEvent(98)
                     elseif questProgress >= 3 then
-                        return quest:progressEvent(99)
+                        return quest:event(99)
                     end
                 end,
             },

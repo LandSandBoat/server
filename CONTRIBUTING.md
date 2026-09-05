@@ -23,7 +23,7 @@
 
 ## General Guidelines
 
-- By contributing to LandSandBoat, either through issues, pull requests, or discussions, you are expected to abide by the rules laid out here in this Contributing Guide.
+- By contributing to LandSandBoat, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
 - We do not support out-of-date clients or client modification.
 - We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game.
 

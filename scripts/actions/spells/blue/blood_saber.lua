@@ -20,12 +20,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem = xi.ecosystem.UNDEAD
+    local params      = {}
+    params.ecosystem  = xi.ecosystem.UNDEAD
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
-    params.diff = 0 -- no stat increases magic accuracy
-    params.skillType = xi.skill.BLUE_MAGIC
+
     params.dmgMultiplier = 3.5
 
     return xi.spells.blue.useDrainSpell(caster, target, spell, params, 0, false)

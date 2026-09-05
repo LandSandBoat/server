@@ -31,6 +31,7 @@ zones[xi.zone.WINDURST_WALLS] =
         FISHING_MESSAGE_OFFSET         = 7099,  -- You can't fish here.
         RECEIVE_BAYLD                  = 7197,  -- You receive <number> bayld!
         DOORS_SEALED_SHUT              = 7775,  -- The doors are firmly sealed shut.
+        DOOR_UNLOCKED                  = 7998,  -- The door is unlocked.
         MOGHOUSE_EXIT                  = 8232,  -- You have learned your way through the back alleys of Windurst! Now you can exit to any area from your residence.
         RECEIVED_CONQUEST_POINTS       = 8460,  -- You received <number> conquest points!
         SCAVNIX_SHOP_DIALOG            = 8716,  -- <Pshoooooowaaaaa> I'm goood Goblin from underwooorld. I find lotshhh of gooodieshhh. You want try shhhome chipshhh? Cheap for yooou.

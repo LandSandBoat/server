@@ -50,7 +50,7 @@ function CInstance:getPets()
 end
 
 ---@nodiscard
----@return integer
+---@return integer seconds
 function CInstance:getTimeLimit()
 end
 
@@ -65,7 +65,7 @@ function CInstance:getLevelCap()
 end
 
 ---@nodiscard
----@return integer
+---@return integer seconds
 function CInstance:getLastTimeUpdate()
 end
 
@@ -75,7 +75,7 @@ function CInstance:getProgress()
 end
 
 ---@nodiscard
----@return integer
+---@return integer seconds
 function CInstance:getWipeTime()
 end
 
@@ -102,9 +102,9 @@ end
 function CInstance:setLevelCap(cap)
 end
 
----@param ms integer
+---@param seconds integer
 ---@return nil
-function CInstance:setLastTimeUpdate(ms)
+function CInstance:setLastTimeUpdate(seconds)
 end
 
 ---@param seconds integer
@@ -117,9 +117,9 @@ end
 function CInstance:setProgress(progress)
 end
 
----@param ms integer
+---@param seconds integer
 ---@return nil
-function CInstance:setWipeTime(ms)
+function CInstance:setWipeTime(seconds)
 end
 
 ---@param stage integer

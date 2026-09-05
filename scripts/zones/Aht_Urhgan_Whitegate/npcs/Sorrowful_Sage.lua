@@ -41,9 +41,15 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
-        if selectiontype == 1 then
+        local missionId     = bit.rshift(option, 4)
+
+        if
+            selectiontype == 1 and
+            player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and
+            xi.assault.missionToArea[missionId] == xi.assault.assaultArea.NYZUL_ISLE
+        then
             -- taken assault mission
-            player:addAssault(bit.rshift(option, 4))
+            player:addAssault(missionId)
             player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
             npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
         end

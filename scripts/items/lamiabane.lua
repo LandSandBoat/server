@@ -1,7 +1,10 @@
 -----------------------------------
 -- ID: 18693
 -- Item: Lamiabane
--- Description : Adds 1/tick auto-refresh effect. Duration : 60 Minutes. Only able to be used in Mamook, Arrapago Reef, or Halvung. Effect lost upon zoning.
+-- Item Effect: Enchantment: Refresh +1
+-- Duration: 60 Minutes
+-- Only usable in Arrapago Reef, Halvung, or Mamook. Effect lost upon zoning or unequipping.
+-- https://wiki.ffo.jp/html/4402.html
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -28,6 +31,10 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.REFRESH, 1)
+end
+
+itemObject.onItemUnequip = function(target, item)
+    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.LAMIABANE)
 end
 
 itemObject.onEffectLose = function(target, effect)

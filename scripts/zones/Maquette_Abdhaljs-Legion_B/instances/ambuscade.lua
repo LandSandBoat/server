@@ -24,7 +24,7 @@ end
 -- When the player zones into the instance
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:countdown(instance:getTimeLimit() * 60)
+    player:countdown(instance:getTimeLimit())
 end
 
 -- Instance 'tick'

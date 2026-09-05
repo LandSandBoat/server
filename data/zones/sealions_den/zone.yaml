@@ -15,3 +15,11 @@ zonelines:
     to:    tavnazian_safehold
     at:    [-0.173, -9.572, -39.706, 4.712389]
     scale: [1.000, 5.000]
+
+transport:
+  ship: 16908447
+  runs:
+    sealions_den_ship:
+      phases:
+        - state:     holding
+          animation: animation_18

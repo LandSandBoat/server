@@ -8,24 +8,17 @@
 -- _6r9 (Audience Chmbr) : !pos 0 -5 66 243
 -- Aldo                  : !pos 20 3 -58 245
 -- Paya-Sabya            : !pos 9 1 70 244
--- Muckvix               : !pos -26.824 3.601 -137.082 245
+-- Geebeh                : !pos 11 1 68 244
+-- Muckvix               : !pos -26.824 4.601 -137.082 245
 -- Magicite (Orastone)   : !pos -344 25 43 152
--- Magicite (Opistone)   : !pos -160 -8 8 150
+-- Magicite (Optistone)  : !pos -160 -8 8 150
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
+-----------------------------------
+local ruludeID     = zones[xi.zone.RULUDE_GARDENS]
+local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
-
-local function magiciteCounter(player)
-    local count = 0
-    for keyItem = xi.ki.MAGICITE_OPTISTONE, xi.ki.MAGICITE_ORASTONE do
-        if player:hasKeyItem(keyItem) then
-            count = count + 1
-        end
-    end
-
-    return count
-end
 
 mission.reward =
 {
@@ -51,18 +44,40 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if xi.mission.getMissionRankPoints(player, xi.mission.id.sandoria.MAGICITE) then
                         return mission:progressEvent(45)
-                    else
-                        return mission:progressEvent(49)
                     end
+
+                    return mission:event(49)
+                end,
+            },
+
+            ['_6r5'] =
+            {
+                onTrigger = function(player, npc)
+                    if not xi.mission.getMissionRankPoints(player, xi.mission.id.sandoria.MAGICITE) then
+                        return
+                    end
+
+                    if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
+                        return mission:progressEvent(130, 1)
+                    end
+
+                    return mission:progressEvent(130, 0)
                 end,
             },
 
             onEventFinish =
             {
-                [45] = function(player, csid, option, npc)
-                    -- TODO: Verify that the mission is displayed in the logs here.  It may not officially be logged
-                    -- until talking to the Ambassador.
+                -- Both menu answers carry on into the rest of the scene.
+                -- Only a cancelled event leaves the mission unstarted.
+                [130] = function(player, csid, option, npc)
+                    if option == utils.EVENT_CANCELLED_OPTION then
+                        return
+                    end
+
                     mission:begin(player)
+                    player:setMissionStatus(mission.areaId, 1)
+                    player:messageText(npc, ruludeID.text.YOU_ACCEPT_THE_MISSION, false, 6)
+                    npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
             },
         },
@@ -77,16 +92,6 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['_6r5'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        local hasKIParam = player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and 1 or 0
-                        return mission:progressEvent(130, hasKIParam)
-                    end
-                end,
-            },
-
             ['_6r9'] =
             {
                 onTrigger = function(player, npc)
@@ -96,39 +101,14 @@ mission.sections =
                 end,
             },
 
-            ['High_Wind'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        -- Note: The event parameter below corresponds to having keyItem for Audience Permit.
-                        -- Currently have not captured a case where the negative answer is displayed.
-                        return mission:progressEvent(164, 1)
-                    end
-                end,
-            },
-
-            ['Rainhard'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(165, 1)
-                    end
-                end,
-            },
-
             ['Nelcabrit'] =
             {
                 onTrigger = function(player, npc)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
-
-                    if missionStatus == 0 then
-                        -- Nelcabrit will display this message until talking to Jima (Door)
-                        return mission:progressEvent(45)
-                    elseif missionStatus == 1 then
-                        return mission:progressEvent(133)
-                    else
-                        return mission:progressEvent(136)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(133)
                     end
+
+                    return mission:event(136)
                 end,
             },
 
@@ -138,12 +118,6 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 2)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
-
-                [130] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-                    -- You Accept the Mission message here
-                    npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
-                end,
             },
         },
 
@@ -152,13 +126,15 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        if player:hasKeyItem(xi.ki.SILVER_BELL) then
-                            return mission:progressEvent(152, 1)
-                        else
-                            return mission:progressEvent(152)
-                        end
+                    if player:getMissionStatus(mission.areaId) ~= 2 then
+                        return
                     end
+
+                    if player:hasKeyItem(xi.ki.SILVER_BELL) then
+                        return mission:progressEvent(152, 1)
+                    end
+
+                    return mission:progressEvent(152, 0, 1)
                 end,
             },
 
@@ -188,38 +164,26 @@ mission.sections =
             ['_6r9'] =
             {
                 onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 3 then
-                        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                            return mission:progressEvent(60, 1, 1)
-                        else
-                            return mission:progressEvent(60)
-                        end
+                    if
+                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) or
+                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) or
+                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        return
                     end
-                end,
-            },
 
-            ['High_Wind'] =
-            {
-                onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 3 then
-                        return mission:progressEvent(164, 1)
+                    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+                        return mission:progressEvent(60, 1, 0)
                     end
-                end,
-            },
 
-            ['Rainhard'] =
-            {
-                onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 3 then
-                        return mission:progressEvent(165, 1)
-                    end
+                    return mission:progressEvent(60, 0, 0)
                 end,
             },
 
             ['Nelcabrit'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(136)
+                    return mission:event(136)
                 end,
             },
 
@@ -247,11 +211,15 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if magiciteCounter(player) == 0 then
-                        return mission:progressEvent(161)
-                    else
-                        return mission:progressEvent(183)
+                    if
+                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
+                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        return mission:event(161)
                     end
+
+                    return mission:event(183)
                 end,
             },
 
@@ -262,13 +230,13 @@ mission.sections =
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else
-                            return mission:progressEvent(80)
+                            return mission:event(80)
                         end
                     else
                         if mission:getVar(player, 'Option') == 2 then
-                            return mission:progressEvent(81)
+                            return mission:event(81)
                         else
-                            return mission:progressEvent(79)
+                            return mission:event(79)
                         end
                     end
                 end,
@@ -285,13 +253,31 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Paya-Sabya'] =
+            ['Geebeh'] =
             {
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.YAGUDO_TORCH) and
-                        mission:getVar(player, 'Option') == 0
+                        mission:getVar(player, 'Option') == 1
                     then
+                        return mission:messageText(upperJeunoID.text.WITHER_AND_DIE)
+                    end
+                end,
+            },
+
+            ['Paya-Sabya'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                        return
+                    end
+
+                    local option = mission:getVar(player, 'Option')
+
+                    -- Event 23 is the follow up once the garden scene has played.
+                    if option == 1 then
+                        return mission:event(23)
+                    elseif option == 0 then
                         return mission:progressEvent(80)
                     end
                 end,
@@ -310,14 +296,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(44, 152, 3, 1743, 3)
-                        else
-                            return mission:progressEvent(44)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(44, xi.zone.ALTAR_ROOM, 3)
+                    end
+
+                    return mission:progressEvent(44, xi.zone.ALTAR_ROOM)
                 end,
             },
 
@@ -333,7 +324,12 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.MAGICITE_ORASTONE)
                 end,
 
+                -- A cancelled event does not retire the Fickblix scene.
                 [10000] = function(player, csid, option, npc)
+                    if option == utils.EVENT_CANCELLED_OPTION then
+                        return
+                    end
+
                     mission:setVar(player, 'Option', 0)
                 end,
             },
@@ -344,14 +340,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(0, 1, 1, 1, 1, 1, 1, 1, 1)
-                        else
-                            return mission:progressEvent(0)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(0, 1, 1, 1, 1, 1, 1, 1, 1)
+                    end
+
+                    return mission:progressEvent(0, xi.zone.MONASTIC_CAVERN)
                 end,
             },
 
@@ -368,14 +369,19 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
-                        if magiciteCounter(player) == 2 then
-                            -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(0, 1, 46, 47)
-                        else
-                            return mission:progressEvent(0, 0, 46, 47)
-                        end
+                    if player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
+                        return
                     end
+
+                    if
+                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    then
+                        -- Play Lion part of the CS (Last Magicite Received)
+                        return mission:progressEvent(0, 1, 46, 47)
+                    end
+
+                    return mission:progressEvent(0, 0, 46, 47)
                 end,
             },
 
@@ -397,14 +403,7 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['Nelcabrit'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 4 then
-                        return mission:progressEvent(36)
-                    end
-                end,
-            },
+            ['Nelcabrit'] = mission:progressEvent(36),
 
             onEventFinish =
             {
@@ -419,7 +418,7 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(183)
+                    return mission:event(183)
                 end,
             },
         },

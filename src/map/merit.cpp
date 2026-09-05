@@ -312,6 +312,7 @@ void CMeritPoints::RaiseMerit(const xi::Merit merit)
         }
 
         PMerit->count++;
+        PMerit->next = nextUpgradeCost(*PMerit);
 
         // Reset traits
         charutils::BuildingCharTraitsTable(m_PChar);

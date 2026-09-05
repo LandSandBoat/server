@@ -4,16 +4,15 @@
 -- Involved in Mission: Magicite
 -- !pos 0 -5 66 243
 -----------------------------------
-local ID = zones[xi.zone.RULUDE_GARDENS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
+    -- Param 0 picks between the guards turning the player away and the no permit line.
     if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
-        player:messageSpecial(ID.text.SOVEREIGN_WITHOUT_AN_APPOINTMENT)
+        player:startEvent(138, 1)
     else
-        player:startEvent(138) -- you don't have a permit
+        player:startEvent(138, 0)
     end
 end
 

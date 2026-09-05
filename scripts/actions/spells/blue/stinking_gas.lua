@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
+    local params           = {}
     params.ecosystem       = xi.ecosystem.UNDEAD
     params.effect          = xi.effect.VIT_DOWN
     params.power           = 10

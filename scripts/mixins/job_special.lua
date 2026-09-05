@@ -318,7 +318,7 @@ g_mixins.job_special = function(jobSpecialMob)
                 if specialEffect then
                     local effect = mob:getStatusEffect(specialEffect)
                     if effect then
-                        effect:setDuration(customDuration)
+                        effect:setDuration(customDuration * 1000)
                     end
                 end
             end

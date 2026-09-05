@@ -15,3 +15,27 @@ zonelines:
     to:    yuhtunga_jungle
     at:    [-239.661, -1.575, 528.069, 1.570796]
     scale: [1.000, 5.000]
+
+transport:
+  ship: 17801320
+  runs:
+    kazham_jeuno_airship:
+      door:     _6ys
+      dock:     [-4.000, -3.497, 32.125, 128]
+      boundary: 512
+      voyage:
+        - kazham_jeuno_airship
+      every:     864
+      disembark: 460
+      offset:    218
+      phases:
+        - state:     arriving
+          animation: animation_18
+          seconds:   40
+        - state:     docked
+          seconds:   131
+        - state:     closing
+          seconds:   4
+        - state:     departing
+          animation: animation_19
+          hide:      38

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -661,28 +661,37 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         {
             return std::floor((GetSkill(xi::SkillType::AutomatonMelee) / 8.7f) * 2.0f + 3.0f) + getMod(xi::Mod::MAIN_DMG_RATING);
         }
-        else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        else
         {
-            // Accurate for lvl 75 circa 2006~2008ish
-            // Unknown if this ever changed
-            return std::floor(GetMLevel() / 2) + 3 + getMod(xi::Mod::MAIN_DMG_RATING);
-        }
-        else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
-        {
+            // Avatars, Jug Pets, Wyverns
+            // Base damage and damage offset defined in petutils.
             auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
 
-            int32 weaponDamage   = weapon->getDamage();
-            int32 damageModifier = getMod(xi::Mod::MAIN_DMG_RATING);
+            int32 weaponDamage       = weapon->getDamage();
+            int32 baseDamageModifier = 0;
+            int32 damageModifier     = getMod(xi::Mod::MAIN_DMG_RATING);
+            float damageMultiplier   = 1.0f;
+            int32 weaponDamageOffset = 0;
 
-            weaponDamage += damageModifier;
-            weaponDamage = std::clamp<int32>(weaponDamage, 1, 65535);
+            weaponDamageOffset = PPetEntity->getMobMod(xi::MobMod::DamageOffset);
+            damageMultiplier   = PPetEntity->m_dmgMult / 100.0f;
 
-            return static_cast<uint16>(weaponDamage);
-        }
-        else // jugs
-        {
-            // Formula looks fake...
-            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(xi::Mod::MAIN_DMG_RATING);
+            // Add this mod to increase a mobs damage by a base amount
+            if (PPetEntity->getMobMod(xi::MobMod::BaseDamageModifier) != 0)
+            {
+                baseDamageModifier = PPetEntity->getMobMod(xi::MobMod::BaseDamageModifier);
+            }
+            if (PPetEntity->getMobMod(xi::MobMod::BaseDamageMultiplier) != 0)
+            {
+                damageMultiplier = PPetEntity->getMobMod(xi::MobMod::BaseDamageMultiplier) / 100.0f;
+            }
+
+            int32 damage = static_cast<int32>(std::floor((weaponDamage + baseDamageModifier) * damageMultiplier));
+
+            damage += damageModifier + weaponDamageOffset;
+            damage = std::clamp(damage, 1, 65535);
+
+            return static_cast<uint16>(damage);
         }
     }
 
@@ -813,28 +822,37 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
         {
             return std::floor((GetSkill(xi::SkillType::AutomatonRanged) / 8.7f) * 2.0f + 3.0f) + getMod(xi::Mod::RANGED_DMG_RATING);
         }
-        else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        else
         {
-            // Accurate for lvl 75 circa 2006~2008ish
-            // Unknown if this ever changed
-            return std::floor(GetMLevel() / 2) + 3 + getMod(xi::Mod::RANGED_DMG_RATING);
-        }
-        else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
-        {
+            // Avatars, Jug Pets, Wyverns
+            // Base damage and damage offset defined in petutils.
             auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
 
-            int32 weaponDamage   = weapon->getDamage();
-            int32 damageModifier = getMod(xi::Mod::RANGED_DMG_RATING);
+            int32 weaponDamage       = weapon->getDamage();
+            int32 baseDamageModifier = 0;
+            int32 damageModifier     = getMod(xi::Mod::RANGED_DMG_RATING);
+            float damageMultiplier   = 1.0f;
+            int32 weaponDamageOffset = 0;
 
-            weaponDamage += damageModifier;
-            weaponDamage = std::clamp<int32>(weaponDamage, 1, 65535);
+            weaponDamageOffset = PPetEntity->getMobMod(xi::MobMod::RangedDamageOffset);
+            damageMultiplier   = PPetEntity->m_dmgMult / 100.0f;
 
-            return static_cast<uint16>(weaponDamage);
-        }
-        else // jugs
-        {
-            // Formula looks fake...
-            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(xi::Mod::RANGED_DMG_RATING);
+            // Add this mod to increase a mobs damage by a base amount
+            if (PPetEntity->getMobMod(xi::MobMod::BaseDamageModifier) != 0)
+            {
+                baseDamageModifier = PPetEntity->getMobMod(xi::MobMod::BaseDamageModifier);
+            }
+            if (PPetEntity->getMobMod(xi::MobMod::BaseDamageMultiplier) != 0)
+            {
+                damageMultiplier = PPetEntity->getMobMod(xi::MobMod::BaseDamageMultiplier) / 100.0f;
+            }
+
+            int32 damage = static_cast<int32>(std::floor((weaponDamage + baseDamageModifier) * damageMultiplier));
+
+            damage += damageModifier + weaponDamageOffset;
+            damage = std::clamp(damage, 1, 65535);
+
+            return static_cast<uint16>(damage);
         }
     }
 
@@ -1639,28 +1657,34 @@ uint16 CBattleEntity::DEF()
 
 uint16 CBattleEntity::EVA()
 {
-    int16 evasion = 1;
-
     const bool isAutomaton = this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON;
+
+    int32 evasion = 1;
 
     if (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton))
     {
-        evasion = getMod(xi::Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
+        // Mobs and non automaton pets use EVA mod as their base evasion
+        evasion = getMod(xi::Mod::EVA);
     }
-    else // Players and automatons use xi::SkillType::Evasion
+    else
     {
+        // Players and automatons use Evasion skill
         evasion = GetSkill(xi::SkillType::Evasion);
 
-        // Skill based evasion calculation
         if (evasion > 200)
         {
             evasion = 200 + (evasion - 200) * 0.9;
         }
+
+        // EVA mod is additional evasion for players and automatons
+        evasion += getMod(xi::Mod::EVA);
     }
 
     evasion += AGI() / 2;
 
-    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(xi::Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
+    evasion += static_cast<int32>(std::floor(static_cast<float>(evasion) * static_cast<float>(getMod(xi::Mod::EVA_PERCENT)) / 100.0f));
+
+    return static_cast<uint16>(std::clamp<int32>(evasion, 1, UINT16_MAX));
 }
 
 auto CBattleEntity::GetMJob() const -> xi::Job
@@ -1734,6 +1758,12 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
         m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
+    }
+    else if (this->objtype == TYPE_PET)
+    {
+        // Player pets have varying sub job ratios depending on pet type
+        // Sub level will be what is defined in petutils.cpp for the corresponding pet
+        m_slvl = std::min(slvl, m_mlvl);
     }
     else
     {

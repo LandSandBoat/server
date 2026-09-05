@@ -826,6 +826,7 @@ local function getArg1(player, guardNation, guardType)
     local signet  = 0
     local cipher  = xi.extravaganza.campaignActive() * 20 * 65536
     local voucher = player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) and 0x20000 or 0
+    local zilart  = xi.settings.main.ENABLE_ROTZ == 1 and 0x10000 or 0
 
     if guardNation == xi.nation.WINDURST then
         output = 33
@@ -845,13 +846,13 @@ local function getArg1(player, guardNation, guardType)
     end
 
     if guardNation == xi.nation.OTHER then
-        output = (pNation * 16) + (3 * 256) + 65537
+        output = (pNation * 16) + (3 * 256) + 1
     else
         output = output + 256 * signet
     end
 
     if guardType == xi.conquest.guard.CITY then
-        output = output + voucher
+        output = output + voucher + zilart
     end
 
     if guardType >= xi.conquest.guard.OUTPOST then

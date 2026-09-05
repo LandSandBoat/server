@@ -44,6 +44,13 @@ auto westRonfaure() -> const xi::data::Mobs&
     return *loaded;
 }
 
+auto valkurmDunes() -> const xi::data::Mobs&
+{
+    static const auto loaded = xi::data::loadZoneFile<MobsDataset>(xi::ZoneId::ValkurmDunes);
+    REQUIRE(loaded.has_value());
+    return *loaded;
+}
+
 auto spawnAt(const uint32 id) -> const xi::data::MobSpawnData&
 {
     const auto& spawns = westRonfaure().Spawns;
@@ -178,12 +185,17 @@ TEST_CASE("mobs: slot members resolve to declared spawns", "[data][mob]")
 
 TEST_CASE("mobs: a template keeps its resist ranks", "[data][mob]")
 {
-    const auto& bomb = templateNamed("Bomb");
+    const auto& valkurm = valkurmDunes();
 
-    REQUIRE(bomb.Id == 490);
-    REQUIRE(bomb.Attributes.Aggressive.value_or(false));
-    REQUIRE(bomb.Attributes.Resists.at(xi::Mod::FIRE_RES_RANK) == -3);
-    REQUIRE(bomb.Attributes.Resists.at(xi::Mod::ICE_RES_RANK) == 4);
+    const auto& fly = valkurm.Templates.at("Valkurm_Emperor");
+
+    REQUIRE(fly.Id == 4124);
+    REQUIRE(fly.Attributes.Resists.empty());
+
+    const auto& doman = valkurm.Templates.at("Doman");
+
+    REQUIRE(doman.Attributes.Resists.at(xi::Mod::ICE_RES_RANK) == 4);
+    REQUIRE(doman.Attributes.Resists.at(xi::Mod::PARALYZE_RES_RANK) == 4);
 }
 
 TEST_CASE("mobs: a template keeps its mods and mob mods", "[data][mob]")
@@ -193,6 +205,56 @@ TEST_CASE("mobs: a template keeps its mods and mob mods", "[data][mob]")
     REQUIRE(digger.Attributes.Mods.at(xi::Mod::VERMIN_KILLER) == 5);
     REQUIRE(digger.Attributes.MobMods.at(xi::MobMod::NoDespawn) == 1);
     REQUIRE(digger.Attributes.Links.value_or(false));
+}
+
+TEST_CASE("mobs: a template names its own spells", "[data][mob]")
+{
+    constexpr auto named = R"(
+templates:
+  Forest_Hare:
+    id:      1
+    species: rabbit
+    spells:  [stone, stone_ii, dia]
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    const auto  records = MobsDataset::decode(named);
+    const auto& hare    = records.Templates.at("Forest_Hare");
+
+    REQUIRE(hare.Spells == std::vector<std::string>{ "stone", "stone_ii", "dia" });
+    REQUIRE(hare.SpellList == 0);
+}
+
+TEST_CASE("mobs: a template names spells or a spell list, never both", "[data][mob]")
+{
+    constexpr auto both = R"(
+templates:
+  Forest_Hare:
+    id:            1
+    species:       rabbit
+    spells:        [stone]
+    spell_list_id: 21
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    REQUIRE_THROWS_AS(MobsDataset::decode(both), std::runtime_error);
+}
+
+TEST_CASE("mobs: a spells list naming nothing is rejected", "[data][mob]")
+{
+    constexpr auto empty = R"(
+templates:
+  Forest_Hare:
+    id:      1
+    species: rabbit
+    spells:  []
+spawns:
+  17186822: { template: Forest_Hare }
+)";
+
+    REQUIRE_THROWS_AS(MobsDataset::decode(empty), std::runtime_error);
 }
 
 TEST_CASE("mobs: a spawn naming an unknown template is rejected", "[data][mob]")

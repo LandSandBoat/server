@@ -18,6 +18,7 @@ return {
     ['Eki_Kamalabi']        = { event = 10005 },
     ['Enjojo']              = { event = 327 },
     ['Eugie']               = { event = 351 },
+    ['Five_of_Clubs']       = { event = 221 },
     ['Four_of_Clubs']       = { event = 218 },
     ['Gold_Skull']          = { event = 43 },
     ['Gomada-Vulmada']      = { event = 363 },

@@ -47,6 +47,7 @@
 
 #include "persist_batch.h"
 
+#include "ai/states/death_state.h"
 #include "battle_entity.h"
 #include "linkshell.h"
 #include "maze.h"
@@ -235,6 +236,31 @@ enum CHAR_SUBSTATE
     SUBSTATE_NONE = 0,
     SUBSTATE_IN_CS,
     SUBSTATE_LAST,
+};
+
+enum class PartyKind : uint8_t;
+
+struct PendingInvite
+{
+    EntityId  entity{};
+    PartyKind kind{};
+
+    void clean()
+    {
+        *this = {};
+    }
+};
+
+struct PendingTrade
+{
+    EntityId          entity{};
+    timer::time_point invitedAt{};
+    bool              initiator{};
+
+    void clean()
+    {
+        *this = {};
+    }
 };
 
 enum class WarpRequest : uint8
@@ -594,11 +620,10 @@ public:
 
     void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
-    timer::time_point lastTradeInvite{};
-    EntityId          TradePending{};    // Character ID offering trade
-    EntityId          InvitePending{};   // Character ID sending party invite
-    EntityId          BazaarID{};        // Pointer to the bazaar we are browsing.
-    BazaarList_t      BazaarCustomers{}; // Array holding the IDs of the current customers
+    PendingTrade  TradePending{};    // Set on both sides by a trade request
+    PendingInvite InvitePending{};   // Set on the invitee by a party invite
+    EntityId      BazaarID{};        // Pointer to the bazaar we are browsing.
+    BazaarList_t  BazaarCustomers{}; // Array holding the IDs of the current customers
 
     std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
 
@@ -710,8 +735,11 @@ public:
     bool IsMobOwner(CBattleEntity* PTarget);
 
     void Die() override;
-    void Die(timer::duration _duration);
+    void Die(timer::duration _duration, DeathParams params = {});
     void Raise();
+
+    auto nextDeath() const -> const Maybe<DeathParams>&;
+    void setNextDeath(Maybe<DeathParams> params);
 
     static constexpr timer::duration death_duration         = 60min;
     static constexpr timer::duration death_update_frequency = 16s;
@@ -783,6 +811,8 @@ protected:
 
 private:
     auto applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+
+    Maybe<DeathParams> nextDeath_;
 
     CCraftState                               craftState_{};
     std::vector<std::unique_ptr<Transaction>> transactions_;

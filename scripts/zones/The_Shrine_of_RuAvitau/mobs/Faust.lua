@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Faust
--- TODO: Faust should WS ~3 times in a row each time.
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -71,10 +70,23 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
     -- Nearly always uses Typhoon below 50% HP
     if mob:getHPP() <= 50 and mob:getLocalVar('RegainBoosted') == 0 then
         mob:setMod(xi.mod.REGAIN, 1000)
         mob:setLocalVar('RegainBoosted', 1)
+    end
+
+    -- Follow-up Typhoons wait until the target is back in range
+    if
+        mob:getLocalVar('TyphoonFollowUp') == 1 and
+        mob:checkDistance(target) < 5
+    then
+        mob:setLocalVar('TyphoonFollowUp', 0)
+        mob:useMobAbility(xi.mobSkill.TYPHOON)
     end
 end
 
@@ -84,7 +96,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     local maxTyphoons = mob:getHPP() < 50 and 2 or 1
 
     if typhoonCount < maxTyphoons then
-        mob:useMobAbility(xi.mobSkill.TYPHOON)
+        mob:setLocalVar('TyphoonFollowUp', 1)
         mob:setLocalVar('TyphoonCount', typhoonCount + 1)
     else
         mob:setLocalVar('TyphoonCount', 0)

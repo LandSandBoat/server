@@ -104,6 +104,35 @@ xi.crafting.guildMasterOnTrade = function(player, npc, trade)
     end
 end
 
+-- Crafts at or above the common cap rank, except the highest one, which cannot be renounced
+local function getRenounceableCrafts(player)
+    local rankFromSetting   = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100)
+    local highestSkillId    = 0
+    local highestSkillLevel = 0
+
+    for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
+        local currentSkillLevel = player:getCharSkillLevel(skillChecked)
+
+        if currentSkillLevel > highestSkillLevel then
+            highestSkillLevel = currentSkillLevel
+            highestSkillId    = skillChecked
+        end
+    end
+
+    local renounceable = {}
+
+    for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
+        if
+            player:getSkillRank(skillChecked) >= rankFromSetting and
+            skillChecked ~= highestSkillId
+        then
+            renounceable[skillChecked] = true
+        end
+    end
+
+    return renounceable
+end
+
 xi.crafting.guildMasterOnTrigger = function(player, npc)
     local npcName  = npc:getName()
     local eventId  = npcTable[npcName][1]
@@ -152,37 +181,18 @@ xi.crafting.guildMasterOnTrigger = function(player, npc)
         guildId ~= xi.guild.FISHING
     then
         if player:getLocalVar('skipRenounceDialog') == 0 then
-            local rankChecked       = 0
-            local highestSkillId    = 0
-            local highestSkillLevel = 0
-            local currentSkillLevel = 0
-
-            -- Track highest skill. This one wont appear in renounce list.
-            for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
-                currentSkillLevel = player:getCharSkillLevel(skillChecked)
-
-                if currentSkillLevel > highestSkillLevel then
-                    highestSkillLevel = currentSkillLevel
-                    highestSkillId    = skillChecked
-                end
-            end
-
             local rankFromSetting = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100) -- If 700, it will return rank 7 (Artisan)
+            local renounceable    = getRenounceableCrafts(player)
 
             -- Params 7 and 8.
             for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
-                rankChecked = player:getSkillRank(skillChecked)
-
                 -- Param 7: Count crafts over craftsman rank.
-                if rankChecked >= rankFromSetting then
+                if player:getSkillRank(skillChecked) >= rankFromSetting then
                     artisanCount = artisanCount + 1
                 end
 
                 -- Param 8: Full mask except craft ids that CAN be renounced.
-                if
-                    rankChecked < rankFromSetting or
-                    skillChecked == highestSkillId
-                then
+                if not renounceable[skillChecked] then
                     artisanBitmask = bit.bor(artisanBitmask, bit.lshift(1, skillChecked - 48))
                 end
             end
@@ -232,9 +242,12 @@ xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
         -- Rank renouncement.
         elseif
             option >= xi.skill.WOODWORKING and
-            option <= xi.skill.COOKING
+            option <= xi.skill.COOKING and
+            xi.crafting.hasJoinedGuild(player, guildId) and
+            guildId ~= xi.guild.FISHING and
+            getRenounceableCrafts(player)[option]
         then
-            local rankFromSetting = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100) - 1  -- If 700, it will return rank 6 (Craftsman)
+            local rankFromSetting = math.floor(xi.settings.map.CRAFT_COMMON_CAP / 100) - 1 -- If 700, it will return rank 6 (Craftsman)
 
             player:setSkillRank(option, rankFromSetting)
             player:setSkillLevel(option, xi.settings.map.CRAFT_COMMON_CAP)

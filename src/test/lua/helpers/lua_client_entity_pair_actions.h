@@ -48,6 +48,7 @@ public:
     void inviteToParty(CLuaBaseEntity* player) const;
     void formAlliance(CLuaBaseEntity* player) const;
     void acceptPartyInvite() const;
+    void setLevelSync(CLuaBaseEntity* player) const;
     void tradeNpc(const sol::object& npcQuery, const sol::table& items, sol::optional<sol::table> expectedEvent) const;
     void tradeRequest(CLuaBaseEntity* target) const;
     void tradeAccept() const;
@@ -57,6 +58,7 @@ public:
     void tradeCancel() const;
     void bazaarPrice(uint8 invSlot, uint32 price) const;
     void bazaarOpen(CLuaBaseEntity* seller) const;
+    void setSearchMessage(const std::string& message, sol::optional<uint32> msgType) const;
     void bazaarBuy(uint8 sellerInvSlot, uint32 quantity) const;
     void acceptRaise() const;
     void engage(CLuaBaseEntity* mob) const;

@@ -11,16 +11,19 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if
-        player:hasKeyItem(xi.ki.SILVER_BELL) and
-        player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) and
-        player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
+        not player:hasKeyItem(xi.ki.SILVER_BELL) or
+        not player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) or
+        not player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
     then
-        if player:getZPos() < -7.2 then
-            player:startEvent(51)
-        else
-            -- This event automatically handles the distance check
-            player:startEvent(50)
-        end
+        player:messageSpecial(ID.text.IT_SEEMS_TO_BE_LOCKED_BY_POWERFUL_MAGIC)
+        return
+    end
+
+    if player:getZPos() < -7.2 then
+        player:startEvent(51)
+    else
+        -- This event automatically handles the distance check
+        player:startEvent(50)
     end
 end
 

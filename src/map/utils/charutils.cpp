@@ -47,6 +47,7 @@
 #include "ai/states/attack_state.h"
 #include "ai/states/item_state.h"
 #include "ai/states/range_state.h"
+#include "ai/states/weaponskill_state.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -219,21 +220,6 @@ namespace charutils
 
 void CalculateStats(CCharEntity* PChar)
 {
-    float raceStat  = 0; // The final HP number for a race-based level.
-    float jobStat   = 0; // Estimate HP level for the level based on the primary profession.
-    float sJobStat  = 0; // HP final number for a level based on a secondary profession.
-    int32 bonusStat = 0; // HP bonus number that is added subject to some conditions.
-
-    int32 baseValueColumn   = 0; // Column number with base number HP
-    int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
-    int32 scaleOver30Column = 2; // Column number with modifier after level 30
-    int32 scaleOver60Column = 3; // Column number with modifier after level 60
-    int32 scaleOver75Column = 4; // Column number with modifier after level 75
-    int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
-    int32 scaleOver75       = 3; // The speaker number with the modifier to calculate the stats after the 75th level
-
-    uint8 grade = 0;
-
     uint8     mlvl        = PChar->GetMLevel();
     uint8     slvl        = PChar->GetSLevel();
     xi::Job   mjob        = PChar->GetMJob();
@@ -284,98 +270,12 @@ void CalculateStats(CCharEntity* PChar)
             break;
     }
 
-    // HP Calculation from Main Job
+    // Max HP and MP from the captured growth tables in grades.cpp
+    const auto hpMerits = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxHp, PChar);
+    const auto mpMerits = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxMp, PChar);
 
-    int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
-    int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
-    int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // The second calculation mode after level 60
-    int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third Calculation Mode after level 75
-
-    // Calculation of the bonus amount of HP
-
-    int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // + 2hp at each level after 10
-    int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // + 2hp at each level between 50 to 60 level
-    int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
-
-    // HP calculation of an additional profession
-
-    int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
-    int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
-
-    // Calculate Racestat Jobstat Bonusstat Sjobstat
-    // Calculation of race
-
-    grade = grade::GetRaceGrades(race, 0);
-
-    raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-               (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-               (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
-
-    // Calculation on Main Job
-    grade = grade::GetJobGrade(mjob, 0);
-
-    jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-              (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-              (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
-
-    // Calculation of bonus HP.
-    bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
-
-    // Calculation on Support Job
-    if (slvl > 0)
-    {
-        grade = grade::GetJobGrade(sjob, 0);
-
-        sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-        sJobStat = sJobStat / 2;
-    }
-
-    uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxHp, PChar);
-    PChar->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat + MeritBonus);
-
-    // The beginning of the MP
-
-    raceStat = 0;
-    jobStat  = 0;
-    sJobStat = 0;
-
-    // Calculation of the MP race.
-    grade = grade::GetRaceGrades(race, 1);
-
-    // If Main Job has no MP rating, we calculate a racial bonus based on the level of the subjob level (provided that he has a MP rating)
-    if (grade::GetJobGrade(mjob, 1) == 0)
-    {
-        if (grade::GetJobGrade(sjob, 1) != 0 && slvl > 0) // TODO: In this expression, an error
-        {
-            raceStat =
-                (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR"); // TODO: Here is a mistake
-        }
-    }
-    else
-    {
-        // Calculation of a normal racial bonus
-        raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                   grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
-    }
-
-    // Main Job
-    grade = grade::GetJobGrade(mjob, 1);
-    if (grade > 0)
-    {
-        jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
-                  grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
-    }
-
-    // Subjob
-    if (slvl > 0)
-    {
-        grade    = grade::GetJobGrade(sjob, 1);
-        sJobStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR");
-    }
-
-    MeritBonus          = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxMp, PChar);
-    PChar->health.maxmp = (int16)(raceStat + jobStat + sJobStat + MeritBonus); // MP calculation result
+    PChar->health.maxhp = static_cast<int16>(grade::GetBaseHP(race, grade::GetJobGrade(mjob, 0), mlvl, grade::GetJobGrade(sjob, 0), slvl) + hpMerits);
+    PChar->health.maxmp = static_cast<int16>(grade::GetBaseMP(race, grade::GetJobGrade(mjob, 1), mlvl, grade::GetJobGrade(sjob, 1), slvl) + mpMerits);
 
     // Start calculating Stats
 
@@ -383,50 +283,13 @@ void CalculateStats(CCharEntity* PChar)
 
     for (uint8 StatIndex = 2; StatIndex <= 8; ++StatIndex)
     {
-        // Calculation of race
-        grade    = grade::GetRaceGrades(race, StatIndex);
-        raceStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
-
-        if (mainLevelOver60 > 0)
-        {
-            raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-
-            if (mainLevelOver75 > 0)
-            {
-                raceStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-            }
-        }
-
-        // Calculation by profession
-        grade   = grade::GetJobGrade(mjob, StatIndex);
-        jobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
-
-        if (mainLevelOver60 > 0)
-        {
-            jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-
-            if (mainLevelOver75 > 0)
-            {
-                jobStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-            }
-        }
-
-        // Calculation for an additional profession
-        if (slvl > 0)
-        {
-            grade    = grade::GetJobGrade(sjob, StatIndex);
-            sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
-        }
-        else
-        {
-            sJobStat = 0;
-        }
+        const auto baseStat = grade::GetBaseStat(grade::GetRaceGrades(race, StatIndex), grade::GetJobGrade(mjob, StatIndex), mlvl, grade::GetJobGrade(sjob, StatIndex), slvl);
 
         // get each merit bonus stat, str,dex,vit and so on...
-        MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
+        const auto meritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
         // Value output
-        ref<uint16>(&PChar->stats, counter) = (uint16)(raceStat + jobStat + sJobStat + MeritBonus);
+        ref<uint16>(&PChar->stats, counter) = static_cast<uint16>(baseStat + meritBonus);
         counter += 2;
     }
 }
@@ -1260,7 +1123,7 @@ void LoadEquip(CCharEntity* PChar)
         if (PLinkshell1)
         {
             rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PLinkshell1->GetLSID());
-            if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1)
+            if (PLinkshell1->GetLSType() == LSTYPE_BROKEN || (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1))
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell1->getSlotID();
                 uint8 LocationID = PLinkshell1->getLocationID();
@@ -1279,7 +1142,7 @@ void LoadEquip(CCharEntity* PChar)
         if (PLinkshell2)
         {
             rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PLinkshell2->GetLSID());
-            if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1)
+            if (PLinkshell2->GetLSType() == LSTYPE_BROKEN || (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1))
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell2->getSlotID();
                 uint8 LocationID = PLinkshell2->getLocationID();
@@ -3062,6 +2925,14 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
     {
         if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+        {
+            return;
+        }
+    }
+
+    if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_SUB || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_AMMO)
+    {
+        if (PChar->PAI && PChar->PAI->IsCurrentState<CWeaponSkillState>())
         {
             return;
         }
@@ -6268,9 +6139,9 @@ auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
 {
     TracyZoneScoped;
 
-    const auto tstamp     = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
+    const auto tstamp     = PChar->getCharVar("mog-locker-expiry-timestamp");
     const auto accessType = static_cast<uint32>(PChar->getCharVar("mog-locker-access-type"));
-    if (earth_time::vanadiel_timestamp() < tstamp)
+    if (tstamp > 0 && earth_time::vanadiel_timestamp() < static_cast<uint32>(tstamp))
     {
         const auto curZone = PChar->loc.zone;
         switch (accessType)
@@ -6331,8 +6202,9 @@ void SavePlayTime(CCharEntity* PChar)
 
     db::preparedStmt("UPDATE chars SET playtime = ? WHERE charid = ? LIMIT 1", playtime, PChar->id);
 
-    // Removes new player icon if played for more than 240 hours
-    if (PChar->isNewPlayer() && playDuration >= 240h)
+    // Removes new player icon if played for more than the configured number of hours
+    const uint32 playtimeLimit = settings::get<uint32>("main.NEW_ADVENTURER_PLAYTIME_LIMIT");
+    if (PChar->isNewPlayer() && playDuration >= std::chrono::hours(playtimeLimit))
     {
         PChar->playerConfig.NewAdventurerOffFlg = true;
         PChar->updatemask |= UPDATE_HP;
@@ -6601,6 +6473,8 @@ void ReloadParty(CCharEntity* PChar)
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, PSyncTarget->GetMLevel(), MsgBasic::LevelSyncActivated);
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable);
+            PChar->health.tp = 0;
+            PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), PSyncTarget->GetMLevel(), 0s, 0s);
         }
 

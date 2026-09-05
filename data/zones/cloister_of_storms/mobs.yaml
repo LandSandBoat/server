@@ -10,19 +10,6 @@ templates:
     attributes:
       combat:
         skill: sword
-      resists:
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
       render:
         look:
           type:  standard
@@ -49,24 +36,6 @@ templates:
       jobs: [drk, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   -3
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        -3
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -95,24 +64,6 @@ templates:
       jobs: [war, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   -3
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        -3
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -141,24 +92,6 @@ templates:
       jobs: [war, blm]
       resists:
         immune_status: [light_sleep, dark_sleep]
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   -3
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        -3
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -183,25 +116,6 @@ templates:
       combat:
         skill: staff
       jobs: [drk, blm]
-      resists:
-        rank_element:
-          fire:    11
-          ice:     11
-          wind:    11
-          earth:   -3
-          thunder: 11
-          water:   11
-          light:   11
-          dark:    11
-        rank_status:
-          paralyze:    11
-          bind:        11
-          silence:     11
-          slow:        -3
-          poison:      11
-          light_sleep: 11
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard
@@ -233,20 +147,16 @@ templates:
           fire:     4
           ice:      4
           wind:     4
-          earth:   -3
           thunder: -3
-          water:   11
           light:    4
           dark:     4
         rank_status:
-          paralyze:     4
-          bind:         4
-          silence:      4
-          slow:        -3
-          poison:      11
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
+          paralyze:    4
+          bind:        4
+          silence:     4
+          light_sleep: 4
+          dark_sleep:  4
+          blind:       4
       render:
         look:
           type:  standard
@@ -277,18 +187,6 @@ templates:
       jobs: [blm, rdm]
       resists:
         immune_status: [stun, silence, poison]
-        dmg_physical:
-          slashing: -7500
-          piercing: -7500
-          blunt:    -7500
-          h2h:      -7500
-        rank_element:
-          earth:   -3
-          thunder: 11
-          water:   11
-        rank_status:
-          slow:   -3
-          poison: 11
       render:
         look:
           type:  standard
@@ -316,19 +214,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -3
-          wind:    -2
-          earth:   -2
-          thunder: -2
-          water:   -2
-          light:   -3
-        rank_status:
-          silence:     -2
-          slow:        -2
-          poison:      -2
-          light_sleep: -3
       render:
         look:
           type:  standard

@@ -45,7 +45,7 @@ end
 entity.onTrigger = function(player, npc)
     local allNewC2000 = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
     local aGreetingCardian = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local aGreetingCardianCS = player:getCharVar('AGreetingCardian_Event')
+    local aGreetingCardianProg = xi.quest.getVar(player, xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN, 'Prog')
     local legendaryPlanB = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     local allNewC3000 = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
 
@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
     -- A GREETING CARDIAN
     elseif
         aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and
-        aGreetingCardianCS == 5
+        aGreetingCardianProg == 1
     then
         player:startEvent(301) -- Supplemental text when aGreetingCardian in progress, right before completion
 

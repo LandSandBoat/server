@@ -48,8 +48,8 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar('[manaclipper]aboard', 0)
 end
 
-zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    xi.manaclipper.onTransportEvent(player, prevZoneId, transportId)
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    xi.manaclipper.onTransportEvent(player, prevZoneId, transportName)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

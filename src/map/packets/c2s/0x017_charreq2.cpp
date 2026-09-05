@@ -29,26 +29,25 @@
 #include "entities/char_entity.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
-#include "utils/zoneutils.h"
 
 namespace
 {
 
 constexpr float CHARREQ2_SYNC_RANGE = 50.0f;
 
-auto resolveByUniqueNo(const uint32 uniqueNo) -> CBaseEntity*
+auto resolveByUniqueNo(const CCharEntity* PChar, const uint32 uniqueNo) -> CBaseEntity*
 {
-    if (uniqueNo == 0)
+    if (uniqueNo == 0 || PChar->loc.zone == nullptr)
     {
         return nullptr;
     }
 
-    if (auto* PEntity = zoneutils::GetEntity(uniqueNo))
+    if (auto* PEntity = PChar->loc.zone->GetEntity(uniqueNo & 0xFFF); PEntity && PEntity->id == uniqueNo)
     {
         return PEntity;
     }
 
-    return zoneutils::GetChar(uniqueNo);
+    return PChar->loc.zone->GetCharByID(uniqueNo);
 }
 
 } // namespace
@@ -62,8 +61,8 @@ void GP_CLI_COMMAND_CHARREQ2::process(MapSession* PSession, CCharEntity* PChar) 
 {
     const std::array targets{
         this->ActIndex ? PChar->GetEntity(this->ActIndex) : nullptr,
-        resolveByUniqueNo(this->UniqueNo2),
-        resolveByUniqueNo(this->UniqueNo3),
+        resolveByUniqueNo(PChar, this->UniqueNo2),
+        resolveByUniqueNo(PChar, this->UniqueNo3),
     };
 
     ShowWarningFmt("GP_CLI_COMMAND_CHARREQ2 from {}: ActIndex={} UniqueNo2={} UniqueNo3={} Flg={} Flg2={}",

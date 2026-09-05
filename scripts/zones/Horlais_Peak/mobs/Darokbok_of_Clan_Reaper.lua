@@ -10,6 +10,13 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+
+    -- Return to normal facing after turning to buff his party.
+    mob:addListener('MAGIC_STATE_EXIT', 'RESTORE_FACING', function(mobArg, spell)
+        if not mobArg:isEngaged() then
+            mobArg:setRotation(mobArg:getSpawnPos().rot)
+        end
+    end)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

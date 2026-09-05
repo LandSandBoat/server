@@ -3,6 +3,8 @@
 --  Mob: Greater Cockatrice
 -- Note: Place Holder for Pelican
 -----------------------------------
+mixins = { require('scripts/mixins/families/cockatrice') }
+-----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 ---@type TMobEntity
@@ -60,6 +62,14 @@ local pelicanSpawnPoints =
     { x = 176.504, y = 21.250, z = -38.776 },
     { x = 187.565, y = 19.662, z = -31.867 },
 }
+
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    return xi.mix.cockatrice.onMobMobskillChoose(mob, target)
+end
+
+entity.onMobWeaponSkill = function(mob, target, skill)
+    return xi.mix.cockatrice.onMobWeaponSkill(mob, target, skill)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 741, 2, xi.regime.type.GROUNDS)

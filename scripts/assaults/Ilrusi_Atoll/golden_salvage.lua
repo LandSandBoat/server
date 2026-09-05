@@ -36,35 +36,38 @@ local content = InstanceAssault:new(
     },
 })
 
------------------------------------
--- Instance Mobs
------------------------------------
-local cursedChests =
+content.mobs =
 {
-    ID.mob.CURSED_CHEST,
-    ID.mob.CURSED_CHEST + 1,
-    ID.mob.CURSED_CHEST + 2,
-    ID.mob.CURSED_CHEST + 3,
-    ID.mob.CURSED_CHEST + 4,
-    ID.mob.CURSED_CHEST + 5,
-    ID.mob.CURSED_CHEST + 6,
-    ID.mob.CURSED_CHEST + 7,
-    ID.mob.CURSED_CHEST + 8,
-    ID.mob.CURSED_CHEST + 9,
-    ID.mob.CURSED_CHEST + 10,
-    ID.mob.CURSED_CHEST + 11,
+    { baseID = ID.mob.PERCIPIENT_FISH, offset =  7 },
+    { baseID = ID.mob.CURSED_CHEST,    offset = 11 },
 }
 
-local percipientFish =
+content.loot =
 {
-    ID.mob.PERCIPIENT_FISH,
-    ID.mob.PERCIPIENT_FISH + 1,
-    ID.mob.PERCIPIENT_FISH + 2,
-    ID.mob.PERCIPIENT_FISH + 3,
-    ID.mob.PERCIPIENT_FISH + 4,
-    ID.mob.PERCIPIENT_FISH + 5,
-    ID.mob.PERCIPIENT_FISH + 6,
-    ID.mob.PERCIPIENT_FISH + 7,
+    appraisalReward =
+    {
+        {
+            { itemId = xi.item.UNAPPRAISED_EARRING, weight =  7000 },
+            { itemId = xi.item.UNAPPRAISED_BOX,     weight =  3000 },
+        },
+    },
+
+    bonusLoot =
+    {
+        {
+            { itemId = xi.item.REMEDY,              weight = 10000 },
+        },
+
+        {
+            { itemId = xi.item.HI_POTION_P3,        weight =  5000 },
+            { itemId = xi.item.REMEDY,              weight =  5000 },
+        },
+
+        {
+            { itemId = xi.item.HI_POTION_P3,        weight =  1000 },
+            { itemId = xi.item.NONE,                weight =  9000 },
+        },
+    },
 }
 
 -- Retail captured positions, 18 regions, with some regions having multiple spawn points. TODO: Spawn regions?
@@ -183,61 +186,28 @@ local chestSpawnPoints =
 }
 
 function content:onInstanceCreated(instance)
+    -- Assign a random Cursed Chest to be the one that holds the Golden Figurehead.
+    local goldenChestId = ID.mob.CURSED_CHEST + math.randomInt(0, 11)
+    instance:setLocalVar('[Chest]NonMimicId', goldenChestId)
+
+    -- Assign 12 Cursed Chests randomly within 18 defined regions, one chest per region.
+    local shuffledRegions = utils.shuffle(chestSpawnPoints)
+    for i = 1, 12 do
+        local chestId     = ID.mob.CURSED_CHEST + i - 1
+        local region      = shuffledRegions[i]
+        local position    = region[math.randomInt(1, #region)]
+        local cursedChest = GetMobByID(chestId, instance)
+        if cursedChest then
+            cursedChest:setSpawn(position.x, position.y, position.z, 0)
+        end
+    end
+
     InstanceAssault.onInstanceCreated(self, instance)
 
     -- Keep bridges at _1ji, _1jj and _1jq removed/blocked for Golden Salvage.
     GetNPCByID(ID.npc._1ji, instance):setAnimation(xi.animation.CLOSE_DOOR)
     GetNPCByID(ID.npc._1jj, instance):setAnimation(xi.animation.CLOSE_DOOR)
     GetNPCByID(ID.npc._1jq, instance):setAnimation(xi.animation.CLOSE_DOOR)
-
-    -- Spawns all Percipient Fish - spawn points are defined in the SQL for these, but they should be part of a spawn region eventually.
-    for _, fishId in ipairs(percipientFish) do
-        SpawnMob(fishId, instance)
-    end
-
-    -- Assign a random Cursed Chest to be the one that holds the Golden Figurehead.
-    local goldenChestId = cursedChests[math.randomInt(1, #cursedChests)]
-    instance:setLocalVar('[Chest]NonMimicId', goldenChestId)
-
-    -- Spawn 12 Cursed Chests randomly within 18 defined regions, one chest per region.
-    local shuffledRegions = utils.shuffle(chestSpawnPoints)
-    for i, chestId in ipairs(cursedChests) do
-        local region      = shuffledRegions[i]
-        local position    = region[math.randomInt(1, #region)]
-        local cursedChest = GetMobByID(chestId, instance)
-        if cursedChest then
-            cursedChest:setSpawn(position.x, position.y, position.z, 0)
-            SpawnMob(chestId, instance)
-        end
-    end
 end
-
-content.loot =
-{
-    appraisalReward =
-    {
-        {
-            { itemId = xi.item.UNAPPRAISED_EARRING, weight =  7000 },
-            { itemId = xi.item.UNAPPRAISED_BOX,     weight =  3000 },
-        },
-    },
-
-    bonusLoot =
-    {
-        {
-            { itemId = xi.item.REMEDY,              weight = 10000 },
-        },
-
-        {
-            { itemId = xi.item.HI_POTION_P3,        weight =  5000 },
-            { itemId = xi.item.REMEDY,              weight =  5000 },
-        },
-
-        {
-            { itemId = xi.item.HI_POTION_P3,        weight =  1000 },
-            { itemId = xi.item.NONE,                weight =  9000 },
-        },
-    },
-}
 
 return content:register()

@@ -25,7 +25,7 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            ['qm3'] =
+            ['qm_chains_and_bonds'] =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'RingStashed') == 1 then
@@ -35,7 +35,10 @@ mission.sections =
             },
 
             onZoneIn = function(player, prevZone)
-                if mission:getVar(player, 'Status') == 0 then
+                if
+                    mission:getVar(player, 'Status') == 0 and
+                    mission:getVar(player, 'RingStashed') == 0
+                then
                     return 111
                 end
             end,

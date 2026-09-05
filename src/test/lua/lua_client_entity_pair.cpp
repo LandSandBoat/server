@@ -163,6 +163,17 @@ auto CLuaClientEntityPair::isPendingZone() const -> bool
 }
 
 /************************************************************************
+ *  Function: getSearchMessage()
+ *  Purpose : Returns the search comment the server currently holds for the player
+ *  Example : assert(player:getSearchMessage() == 'LFP')
+ ************************************************************************/
+
+auto CLuaClientEntityPair::getSearchMessage() const -> std::string
+{
+    return testChar_->entity()->search.message;
+}
+
+/************************************************************************
  *  Function: getItemInvSlot()
  *  Purpose : Searches slot matching item ID and quantity
  *  Example : player:getItemInvSlot(xi.item.RIDILL, 1)
@@ -363,6 +374,7 @@ void CLuaClientEntityPair::Register()
     SOL_REGISTER("gotoZone", CLuaClientEntityPair::gotoZone);
     SOL_REGISTER("gotoMogHouse", CLuaClientEntityPair::gotoMogHouse);
     SOL_REGISTER("isPendingZone", CLuaClientEntityPair::isPendingZone);
+    SOL_REGISTER("getSearchMessage", CLuaClientEntityPair::getSearchMessage);
     SOL_REGISTER("getItemInvSlot", CLuaClientEntityPair::getItemInvSlot);
     SOL_REGISTER("claimAndKillMob", CLuaClientEntityPair::claimAndKillMob);
     SOL_REGISTER("claimAndKillMobs", CLuaClientEntityPair::claimAndKillMobs);

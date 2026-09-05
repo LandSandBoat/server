@@ -1,12 +1,19 @@
 -----------------------------------
--- CoP Mission Battlefield Level Caps Module
--- Implements era-appropriate level caps for all CoP mission battlefields
+-- Mission Battlefield Level Caps Module
+-- Implements era-appropriate level caps for the Rank 5 and CoP mission battlefields
 -----------------------------------
--- Source: https://www.bg-wiki.com/ffxi/Version_Update_(06/21/2010)
+-- CoP caps removed June 21, 2010:
+-- Source: https://www.playonline.com/pcd/verup/ff11us/detail/5571/detail.html
+-- Nation mission caps removed February 15, 2011:
+-- Sources:
+--  https://www.playonline.com/pcd/verup/ff11us/detail/6240/detail.html
+--  https://www.playonline.com/pcd/verup/ff11/detail/6233/detail.html
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local m = Module:new('cop_level_caps', xi.pre(xi.expansion.ABYSSEA))
+-- Expansion gates cannot represent the February 2011 removal exactly. Pre-Abyssea is the
+-- nearest supported boundary and preserves the original caps for 75-cap configurations.
+local m = Module:new('mission_level_caps', xi.pre(xi.expansion.ABYSSEA))
 
 -- Apply level caps after server initialization when all battlefields are loaded
 m:addOverride('xi.server.onServerStart', function()
@@ -14,6 +21,9 @@ m:addOverride('xi.server.onServerStart', function()
 
     local battlefields =
     {
+        -- Nation Rank 5-1 Battlefield
+        { xi.battlefield.id.RANK_5_MISSION,                         50 },
+
         -- Level 30 Battlefields
         { xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA, 30 },
         { xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM,   30 },

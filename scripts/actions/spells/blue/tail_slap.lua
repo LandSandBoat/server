@@ -20,32 +20,35 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem  = xi.ecosystem.BEASTMEN
-    params.tpmod      = xi.spells.blue.tpMod.ATTACK
-    params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.HAND_TO_HAND
-    params.scattr     = xi.skillchainType.REVERBERATION
-    params.attribute  = xi.mod.INT
-    params.skillType  = xi.skill.BLUE_MAGIC
-    params.numhits    = 1
-    params.multiplier = 1.625
-    params.tp150      = 1.625
-    params.tp300      = 1.625
-    params.azuretp    = 1.625
-    params.duppercap  = 75
-    params.str_wsc    = 0.2
-    params.dex_wsc    = 0.0
-    params.vit_wsc    = 0.5
-    params.agi_wsc    = 0.0
-    params.int_wsc    = 0.0
-    params.mnd_wsc    = 0.0
-    params.chr_wsc    = 0.0
+    local params          = xi.spells.blue.getDefaultParams(caster)
+    params.ecosystem      = xi.ecosystem.BEASTMEN
+    params.tpModifier     = xi.spells.blue.tpMod.ATTACK
+    params.attackType     = xi.attackType.PHYSICAL
+    params.damageType     = xi.damageType.HAND_TO_HAND
+    params.skillchainType = xi.skillchainType.REVERBERATION
+    params.dStat          = xi.mod.INT
+
+    params.numHits       = 1
+    params.ftp0          = 1.625
+    params.ftp1500       = 1.625
+    params.ftp3000       = 1.625
+    params.ftpAzure      = 1.625
+    params.baseDamageCap = 999 -- uncapped
+    params.attackMult    = 1.05
+
+    if params.hasAzureLore then
+        params.attackMult = 2.65
+    elseif params.hasChainAffinity then
+        params.attackMult = xi.spells.blue.calculatefTP(caster:getTP(), 1.05, 2.5, 2.60)
+    end
+
+    params.str_wsc = 0.2
+    params.vit_wsc = 0.5
 
     -- Handle damage.
-    local damage, hitsLanded = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 
-    if hitsLanded <= 0 then
+    if params.hitsLanded <= 0 then
         return damage
     end
 

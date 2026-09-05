@@ -279,8 +279,6 @@ python3 ./tools/build.py
 
 From here, the instructions are the same as the Linux builds. Good luck!
 
-NOTE: You may have problems with missing symbols from LuaJIT. This happens if the build system picks up LuaJIT's headers instead of our internal (and expected) ones. We discovered this in [this discussion](https://github.com/LandSandBoat/server/discussions/1015).
-
 In your CMake configuration, you should see this:
 ```
 -- LuaJIT_FOUND: TRUE

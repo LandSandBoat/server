@@ -25,12 +25,12 @@ instanceObject.afterInstanceRegister = function(player)
     end
 
     player:addTempItem(xi.item.CAGE_OF_DVUCCA_FIREFLIES)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[79]) do
-        SpawnMob(v, instance)
+    for i = 0, 9 do
+        SpawnMob(ID.mob.K23H1_LAMIA + i, instance)
     end
 end
 

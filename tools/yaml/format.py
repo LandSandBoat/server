@@ -139,6 +139,39 @@ def parse_kv(line):
     return KV(keycol, has_dash, key, value, comment)
 
 
+def flow_cells(value):
+    """Ordered (key, value) pairs of a flat flow mapping, or None if it is anything else."""
+    if not (value.startswith("{") and value.endswith("}")):
+        return None
+    body = value[1:-1].strip()
+    if not body or any(ch in body for ch in "{}[]'\"#"):
+        return None
+    cells = []
+    for part in body.split(", "):
+        key, sep, cell = part.partition(": ")
+        if not sep or not key or not cell or ":" in key:
+            return None
+        cells.append((key, cell))
+    return cells
+
+
+def align_flow(values):
+    """Pad a run of flow mappings that share a key set so their cells line up."""
+    rows = [flow_cells(value) for value in values]
+    if len(rows) < 2 or not all(rows):
+        return None
+    if len({tuple(key for key, _ in row) for row in rows}) != 1:
+        return None
+
+    widths = [max(len(row[column][1]) for row in rows) for column in range(len(rows[0]))]
+
+    padded = []
+    for row in rows:
+        cells = [f"{key}: " + cell.rjust(width) for (key, cell), width in zip(row, widths)]
+        padded.append("{" + ", ".join(cells) + "}")
+    return padded
+
+
 def align(text):
     out = []
     run = []  # a run of KVs sharing a keycol, aligned together
@@ -147,6 +180,9 @@ def align(text):
         if not run:
             return
         key_width = max(len(entry.key) for entry in run)
+        flow = align_flow([entry.value for entry in run])
+        if flow:
+            run[:] = [entry._replace(value=value) for entry, value in zip(run, flow)]
         has_comment = any(entry.comment for entry in run)
         # Align numbers against the right
         numeric = all(NUMBER.match(entry.value) for entry in run)

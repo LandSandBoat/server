@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+
+values:
+  arriving:  0
+  docked:    1
+  departing: 2
+  cycling:   3 # Plays an animation on a loop. Carries nobody, so no door and no boarding area.
+  holding:   4 # Sits at its berth for good, stamped once when the server starts.
+  closing:   5 # Door shut, still at the berth, not yet under way.

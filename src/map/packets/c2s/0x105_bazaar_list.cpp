@@ -37,7 +37,7 @@ void GP_CLI_COMMAND_BAZAAR_LIST::process(MapSession* PSession, CCharEntity* PCha
 {
     CCharEntity* PTarget = this->UniqueNo != 0 ? PChar->loc.zone->GetCharByID(this->UniqueNo) : static_cast<CCharEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_PC));
 
-    if (PTarget != nullptr && PTarget->id == this->UniqueNo && PTarget->hasBazaar())
+    if (PTarget != nullptr && PTarget->id == this->UniqueNo && PTarget->hasBazaar() && PTarget->m_moghouseID == PChar->m_moghouseID)
     {
         PChar->BazaarID = EntityId(PTarget);
 

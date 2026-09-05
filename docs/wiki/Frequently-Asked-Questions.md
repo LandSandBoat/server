@@ -13,7 +13,11 @@ Your best bet is always to check the code and fire up the emulator to check in-g
 
 ## Do you have a Discord I can join?
 
-We prefer to work through GitHub [Issues](https://github.com/LandSandBoat/server/issues), [Pull Requests](https://github.com/LandSandBoat/server/pulls), and [Discussions](https://github.com/LandSandBoat/server/discussions).
+We prefer to work through GitHub [Issues](https://github.com/LandSandBoat/server/issues) and [Pull Requests](https://github.com/LandSandBoat/server/pulls).
+
+## Where did the `Discussions` tab go?
+
+Rather than serving as a forum, or a place for freeform discussion, `Discussions` ended up being a place for people to raise issues and list their configuration problems. As such, they've been removed in favor of encouraging everyone to use `Issues`.
 
 ## Where can I find servers to play on?
 
@@ -39,7 +43,7 @@ We will never accept financial or material incentives for our work. This is a ho
 
 Features in LandSandBoat are those that have been submitted to us, meet our standards for quality and accuracy, and that we have had the time to review and integrate with the rest of the codebase. It is very rare that we will accept code on someone else's behalf. While there is technically nothing stopping us, it would undermine our position in the community.
 
-Similarly, sending us code snippets creates more work and strain on staff and developers. If you have code you want to contribute, please speak to us with GitHub Issues, Discussions, and open a Pull Request.
+Similarly, sending us code snippets creates more work and strain on staff and developers. If you have code you want to contribute, please speak to us with GitHub Issues, and open a Pull Request.
 
 ## Can I use AI to help me write code for LandSandBoat?
 

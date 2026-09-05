@@ -346,8 +346,8 @@ uint8  VanadielMoonDirection();
 uint8  VanadielRSERace();
 uint8  VanadielRSELocation();
 void   SetTimeOffset(int32 offset); // Manipulate earth time forward or backward by offset seconds. Affects Vana'Diel time.
-void   StartElevator(uint32 ElevatorID);
-int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+void   StartElevator(xi::Elevator elevatorID);
+auto   GetElevatorState(xi::Elevator elevatorID) -> int16; // Reaches Lua as xi.elevatorState, or -1 when there is no such elevator.
 
 int32 GetServerVariable(const std::string& name);
 void  SetServerVariable(const std::string& name, int32 value, const sol::object& expiry);
@@ -377,7 +377,7 @@ void OnZoneTick(CZone* PZone);
 void OnTriggerAreaEnter(CCharEntity* PChar, const std::unique_ptr<ITriggerArea>& PTriggerArea); // when player enters a trigger area in a zone
 void OnTriggerAreaLeave(CCharEntity* PChar, const std::unique_ptr<ITriggerArea>& PTriggerArea); // when player leaves a trigger area in a zone
 
-void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, uint16 transportId);
+void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, std::string_view transport);
 void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
 void OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // conquest update (hourly or tally)
 
@@ -482,12 +482,12 @@ bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUse
 auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
 void OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);
-void AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
-auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId;                      // triggers when an instance load is failed (ie. instance no longer exists)
-void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
-void OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
-void OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
+void AfterInstanceRegister(CBaseEntity* PChar);                                // triggers after a character is registered and zoned into an instance (the first time)
+auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId;                         // triggers when an instance load is failed (ie. instance no longer exists)
+void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 seconds); // triggers every second for an instance, with the elapsed seconds
+void OnInstanceFailure(CInstance* PInstance);                                  // triggers when an instance is failed
+void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);      // triggers when an instance is created (per character - waiting outside for entry)
+void OnInstanceCreated(CInstance* PInstance);                                  // triggers when an instance is created (instance setup)
 void OnInstanceProgressUpdate(CInstance* PInstance);
 void OnInstanceStageChange(CInstance* PInstance);
 void OnInstanceComplete(CInstance* PInstance);

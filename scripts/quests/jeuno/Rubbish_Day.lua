@@ -60,6 +60,31 @@ local function checkCompatibilityString(player, name)
     return 0, compatibilityReplies.DEFAULT
 end
 
+-- Compatibility reading (event 199). Players may continue to get readings even after the quest is offered / completed.
+local function onCompatibilityUpdate(player, option, countReading)
+    if type(option) == 'string' then
+        player:updateEvent(player:getID(), checkCompatibilityString(player, option))
+
+    elseif option ~= 0 then
+        local partner = GetPlayerByID(option)
+
+        if
+            partner and
+            partner:getZoneID() == player:getZoneID()
+        then
+            if
+                countReading and
+                quest:getVar(player, 'Day') ~= VanadielUniqueDay()
+            then
+                quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
+                quest:setVar(player, 'Day', VanadielUniqueDay())
+            end
+
+            player:updateEvent(unpack(eventBits[math.randomInt(1, #eventBits)]))
+        end
+    end
+end
+
 quest.sections =
 {
     {
@@ -87,24 +112,7 @@ quest.sections =
             onEventUpdate =
             {
                 [199] = function(player, csid, option, npc)
-                    if type(option) == 'string' then
-                        player:updateEvent(player:getID(), checkCompatibilityString(player, option))
-
-                    elseif option ~= 0 then
-                        local partner = GetPlayerByID(option)
-
-                        if
-                            partner and
-                            partner:getZoneID() == player:getZoneID()
-                        then
-                            if quest:getVar(player, 'Day') ~= VanadielUniqueDay() then
-                                quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
-                                quest:setVar(player, 'Day', VanadielUniqueDay())
-                            end
-
-                            player:updateEvent(unpack(eventBits[math.randomInt(1, #eventBits)]))
-                        end
-                    end
+                    onCompatibilityUpdate(player, option, true)
                 end,
             },
 
@@ -169,6 +177,24 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAGIC_TRASH)
                         quest:setVar(player, 'Prog', 1)
                     end
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Chululu'] = quest:event(199), -- Compatibility can be tested even after completing the quest. (Cycles with her other dialog)
+
+            onEventUpdate =
+            {
+                [199] = function(player, csid, option, npc)
+                    onCompatibilityUpdate(player, option, false)
                 end,
             },
         },

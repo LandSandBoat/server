@@ -72,6 +72,8 @@ struct MobTemplateData
     uint16       SpellList{};
     uint16       SkillList{};
 
+    std::vector<std::string> Spells; // TODO: Replace with Spell enums
+
     MobAttributesOverrides Attributes{}; // applied over the species chain
 
     LootData       Loot{};

@@ -119,7 +119,7 @@ instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     player:messageName(ID.text.COMMENCE, player, 51)
-    player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
+    player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit() / 60)
 
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
     player:setCharVar('assaultEntered', 1)

@@ -163,6 +163,7 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
+            player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             player:changeJob(xi.job.DNC)
             player:setLevel(99)
@@ -445,6 +446,7 @@ local packets =
             player:setLevel(99)
             player:addItem(xi.item.VERETHRAGNA_99)
             player:equipItem(xi.item.VERETHRAGNA_99, nil, xi.slot.MAIN)
+            mob:updateEnmity(player)
             player.actions:engage(mob)
             xi.test.world:skipTime(1)
 

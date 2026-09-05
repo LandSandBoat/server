@@ -36,7 +36,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == xi.mission.id.nation.NONE and
-                player:getNation() == mission.areaId
+                player:getNation() == mission.areaId and
+                not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -76,6 +77,65 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
         end,
+
+        -- Event 153 gives Foo Beibo, Rhy Epocan and Ufu Koromoa new lines. Shaz Norem and Vahn Paineesha keep their defaults.
+        [xi.zone.HEAVENS_TOWER] =
+        {
+            ['_6q2'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:progressEvent(153)
+                    end
+                end,
+            },
+
+            ['Foo_Beibo'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(162)
+                    end
+                end,
+            },
+
+            -- Kupipi points the way until event 153 plays.
+            ['Kupipi'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(155)
+                    end
+                end,
+            },
+
+            ['Rhy_Epocan'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(160)
+                    end
+                end,
+            },
+
+            ['Ufu_Koromoa'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:event(161)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [153] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 1)
+                    player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_AMBASSADOR)
+                end,
+            },
+        },
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
         {
@@ -133,7 +193,7 @@ mission.sections =
                     if missionStatus == 1 then
                         return mission:progressEvent(43)
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(68)
+                        return mission:event(68)
                     elseif missionStatus == 3 then
                         return mission:progressEvent(141)
                     end
@@ -157,25 +217,26 @@ mission.sections =
             },
         },
 
-        [xi.zone.HEAVENS_TOWER] =
+        [xi.zone.WINDURST_WOODS] =
         {
-            ['_6q2'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(153)
-                    end
-                end,
-            },
+            ['Miiri-Wohri'] = mission:event(196),
+            ['Rakoh_Buuma'] = mission:event(193),
+            ['Sola_Jaab']   = mission:event(195),
+            ['Tih_Pikeh']   = mission:event(194),
+        },
+    },
 
-            onEventFinish =
-            {
-                [153] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-                    player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_AMBASSADOR)
-                end,
-            },
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == xi.mission.id.nation.NONE and
+                player:getNation() == mission.areaId and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(mission.areaId, xi.mission.id.windurst.MAGICITE)
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Pakh_Jatalfih'] = mission:event(54):replaceDefault(),
         },
     },
 }
