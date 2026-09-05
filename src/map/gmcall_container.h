@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/timer.h"
 #include "packets/c2s/0x0d3_faq_gmcall.h"
 
 class CCharEntity;
@@ -37,4 +38,5 @@ public:
 private:
     uint8_t                                pktId_{};
     std::vector<GP_CLI_COMMAND_FAQ_GMCALL> packets_;
+    timer::time_point                      lastCall_{};
 };

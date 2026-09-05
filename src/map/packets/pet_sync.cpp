@@ -49,9 +49,9 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
         ref<uint8>(0x0E)  = PChar->PPet->GetHPP();
         ref<uint8>(0x0F)  = PChar->PPet->GetMPP();
         ref<uint16>(0x10) = PChar->PPet->health.tp;
-        if (PChar->PPet->animation == xi::Animation::Attack)
+        if (auto* PTarget = PChar->PPet->GetBattleTarget(); PTarget && PChar->PPet->animation == xi::Animation::Attack)
         {
-            ref<uint32>(0x14) = PChar->PPet->GetBattleTarget()->id;
+            ref<uint32>(0x14) = PTarget->id;
         }
 
         std::memcpy(buffer_.data() + 0x18, PChar->PPet->getName().c_str(), PChar->PPet->getName().size());

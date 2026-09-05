@@ -1122,7 +1122,7 @@ void LoadEquip(CCharEntity* PChar)
         if (PLinkshell1)
         {
             rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PLinkshell1->GetLSID());
-            if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1)
+            if (PLinkshell1->GetLSType() == LSTYPE_BROKEN || (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1))
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell1->getSlotID();
                 uint8 LocationID = PLinkshell1->getLocationID();
@@ -1141,7 +1141,7 @@ void LoadEquip(CCharEntity* PChar)
         if (PLinkshell2)
         {
             rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = ? LIMIT 1", PLinkshell2->GetLSID());
-            if (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1)
+            if (PLinkshell2->GetLSType() == LSTYPE_BROKEN || (rset && rset->rowsCount() && rset->next() && rset->get<uint32>("broken") == 1))
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell2->getSlotID();
                 uint8 LocationID = PLinkshell2->getLocationID();

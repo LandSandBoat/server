@@ -21,6 +21,7 @@
 
 #include "0x05e_maprect.h"
 
+#include <optional>
 #include <string_view>
 
 #include "common/settings.h"
@@ -71,9 +72,81 @@ auto GP_CLI_COMMAND_MAPRECT::validate(MapSession* PSession, const CCharEntity* P
 namespace
 {
 
-auto offsetZone(const xi::ZoneId base, const int32 offset) -> xi::ZoneId
+auto moghouseCityExit(const GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT exitBit, const uint8 mode) -> std::optional<xi::ZoneId>
 {
-    return static_cast<xi::ZoneId>(static_cast<uint16>(base) + offset);
+    switch (exitBit)
+    {
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::SandOria:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::SouthernSanDoria;
+                case 2:
+                    return xi::ZoneId::NorthernSanDoria;
+                case 3:
+                    return xi::ZoneId::PortSanDoria;
+            }
+            break;
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Bastok:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::BastokMines;
+                case 2:
+                    return xi::ZoneId::BastokMarkets;
+                case 3:
+                    return xi::ZoneId::PortBastok;
+            }
+            break;
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Windurst:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::WindurstWaters;
+                case 2:
+                    return xi::ZoneId::WindurstWalls;
+                case 3:
+                    return xi::ZoneId::PortWindurst;
+                case 4:
+                    return xi::ZoneId::WindurstWoods;
+            }
+            break;
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Jeuno:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::RuludeGardens;
+                case 2:
+                    return xi::ZoneId::UpperJeuno;
+                case 3:
+                    return xi::ZoneId::LowerJeuno;
+                case 4:
+                    return xi::ZoneId::PortJeuno;
+            }
+            break;
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Whitegate:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::AlZahbi;
+                case 2:
+                    return xi::ZoneId::AhtUrhganWhitegate;
+            }
+            break;
+        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Adoulin:
+            switch (mode)
+            {
+                case 1:
+                    return xi::ZoneId::WesternAdoulin;
+                case 2:
+                    return xi::ZoneId::EasternAdoulin;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return std::nullopt;
 }
 
 } // namespace
@@ -123,37 +196,17 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Option2:
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Option3:
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Option4:
-                    switch (static_cast<GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT>(this->MyRoomExitBit))
+                {
+                    const auto cityExit = moghouseCityExit(static_cast<GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT>(this->MyRoomExitBit), this->MyRoomExitMode);
+                    if (!cityExit)
                     {
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::SandOria:
-                            destinationZone = offsetZone(xi::ZoneId::SouthernSanDoria, this->MyRoomExitMode - 1);
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Bastok:
-                            destinationZone = offsetZone(xi::ZoneId::BastokMines, this->MyRoomExitMode - 1);
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Windurst:
-                            destinationZone = offsetZone(xi::ZoneId::WindurstWaters, this->MyRoomExitMode - 1);
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Jeuno:
-                            destinationZone = offsetZone(xi::ZoneId::RuludeGardens, this->MyRoomExitMode - 1);
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Whitegate:
-                            destinationZone = this->MyRoomExitMode == 1
-                                                  ? offsetZone(xi::ZoneId::AlZahbi, this->MyRoomExitMode - 1)
-                                                  : offsetZone(xi::ZoneId::AhtUrhganWhitegate, this->MyRoomExitMode - 2);
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Adoulin:
-                            destinationZone = this->MyRoomExitMode == 2 ? xi::ZoneId::EasternAdoulin : xi::ZoneId::WesternAdoulin;
-                            break;
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::RonfaureFront:
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::GustabergFront:
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::SarutaFront:
-                        case GP_CLI_COMMAND_MAPRECT_MYROOMEXITBIT::Default:
-                            // Impossible to get here without a crafted packet
-                            // TODO: Verify retail handling of the case
-                            return;
+                        PChar->status = xi::Status::Normal;
+                        return;
                     }
-                    break;
+
+                    destinationZone = *cityExit;
+                }
+                break;
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F:
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F:
                     destinationZone = PChar->getZone();
@@ -164,7 +217,7 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             }
 
             bool moghouseExitRegular          = exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom && PChar->inMogHouse();
-            bool requestedMoghouseFloorChange = startingZone == destinationZone && (exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F || exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F);
+            bool requestedMoghouseFloorChange = PChar->inMogHouse() && startingZone == destinationZone && (exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F || exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F);
             bool moghouse2FUnlocked           = (PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F");
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);

@@ -65,7 +65,9 @@
 #include "map/packets/c2s/0x102_extended_job.h"
 #include "map/packets/c2s/0x105_bazaar_list.h"
 #include "map/packets/c2s/0x106_bazaar_buy.h"
+#include "map/packets/c2s/0x109_bazaar_open.h"
 #include "map/packets/c2s/0x10a_bazaar_itemset.h"
+#include "map/packets/c2s/0x10b_bazaar_close.h"
 #include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
 #include "test_char.h"
@@ -558,13 +560,18 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
 
 /************************************************************************
  *  Function: bazaarPrice()
- *  Purpose : Emits packet 0x10A to price an inventory slot for the player's bazaar.
+ *  Purpose : Prices an inventory slot for the player's bazaar the way the client does:
+ *          : 0x10B to enter the price menu, 0x10A for the slot, 0x109 to leave the menu.
  *  Example : seller.actions:bazaarPrice(item:getSlotID(), 500)
  *  Notes   : A price of 0 takes the item back off display.
  ************************************************************************/
 
 void CLuaClientEntityPairActions::bazaarPrice(const uint8 invSlot, const uint32 price) const
 {
+    const auto closePacket                                          = parent_->packets().createPacket<GP_CLI_COMMAND_BAZAAR_CLOSE>();
+    closePacket->as<GP_CLI_COMMAND_BAZAAR_CLOSE>()->AllListClearFlg = 0;
+    parent_->packets().sendBasicPacket(*closePacket);
+
     const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_BAZAAR_ITEMSET>();
     auto*      data   = packet->as<GP_CLI_COMMAND_BAZAAR_ITEMSET>();
 
@@ -572,6 +579,9 @@ void CLuaClientEntityPairActions::bazaarPrice(const uint8 invSlot, const uint32 
     data->Price     = price;
 
     parent_->packets().sendBasicPacket(*packet);
+
+    const auto openPacket = parent_->packets().createPacket<GP_CLI_COMMAND_BAZAAR_OPEN>();
+    parent_->packets().sendBasicPacket(*openPacket);
 }
 
 /************************************************************************

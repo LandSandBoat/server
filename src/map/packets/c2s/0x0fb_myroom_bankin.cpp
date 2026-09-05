@@ -47,6 +47,7 @@ auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEnt
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
+        .isInMogHouse()
         .mustNotEqual(this->MyroomItemNo, 0, "MyroomItemNo must not equal 0")
         .oneOf("MyroomCategory", this->MyroomCategory, validContainers);
 }
