@@ -164,7 +164,14 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     end
 
     -- Target already has an status effect that nullifies current.
-    if xi.data.statusEffect.isEffectNullified(target, spellEffect, spellTier) then
+    -- Threnody uses one effect ID for all eight elements, so the generic same-tier
+    -- nullifier wrongly rejects a different element at the same tier. Its tier rule
+    -- (equal or higher tier overwrites, lower tier is blocked, regardless of element)
+    -- is instead enforced by the effect's default overwrite when it is applied below.
+    if
+        spellEffect ~= xi.effect.THRENODY and
+        xi.data.statusEffect.isEffectNullified(target, spellEffect, spellTier)
+    then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end
