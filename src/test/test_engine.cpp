@@ -35,6 +35,14 @@
 #include <sol/sol.hpp>
 #include <utility>
 
+#if defined(__SANITIZE_ADDRESS__)
+#define XI_TEST_ASAN 1
+#elif defined(__has_feature)
+#if __has_feature(address_sanitizer)
+#define XI_TEST_ASAN 1
+#endif
+#endif
+
 TestEngine::TestEngine(Application& application, TestConfig testConfig, std::unique_ptr<MapEngine> mapEngine, std::unique_ptr<WorldEngine> worldEngine)
 : application_(application)
 , scheduler_(application_.scheduler())
@@ -340,6 +348,12 @@ auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& co
 
     // Run all after hooks (even if test failed)
     runAfterHooks(context, testCase.name());
+
+#if defined(XI_TEST_ASAN)
+    // free lua-owned memory now so a stale pointer into it faults in this test, not a later one
+    lua.collect_garbage();
+    lua.collect_garbage();
+#endif
 
     // Always collect logs AFTER all execution (for verbose mode or failure)
     logs = testConfig_.loggerSink->logs();

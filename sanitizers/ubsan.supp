@@ -1,0 +1,4 @@
+# ref<T> forms a T& over packed wire buffers, the fix is memcpy based load/store helpers at every call site
+alignment:*/src/common/utils.h
+# alpaca reads packed wire fields through misaligned pointers, third-party
+alignment:*/alpaca/*
