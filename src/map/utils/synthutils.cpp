@@ -933,11 +933,14 @@ void doSynthSkillUp(CCharEntity* PChar)
             continue; // Break current loop iteration.
         }
 
+        const bool modernSystem = settings::get<bool>("map.CRAFT_MODERN_SYSTEM");
+        const bool isDesynth    = PChar->craftState().craftMode() == CRAFT_DESYNTHESIS;
+
         // We don't Skill Up if the recipe isn't difficult enough.
         // Era -> Char lvl must be bellow recipe level. Retail -> Char level myst be bellow recipe level + 10.
         // Char level does NOT count the effects of image support/gear.
         const int16 baseDiff = static_cast<int16>(PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) - charSkill / 10);
-        const int8  minDiff  = settings::get<bool>("map.CRAFT_MODERN_SYSTEM") ? -11 : 0;
+        const int8  minDiff  = modernSystem ? -11 : 0;
         if (baseDiff <= minDiff)
         {
             continue; // Break current loop iteration.
@@ -954,7 +957,12 @@ void doSynthSkillUp(CCharEntity* PChar)
         //------------------------------
         double skillUpChance = 0.0;
 
-        if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
+        if (isDesynth)
+        {
+            // Retail desynth logs (2833 synths, recipe 1-5 levels over skill 0-10): flat ~5%, identical on break and success.
+            skillUpChance = 0.05;
+        }
+        else if (modernSystem)
         {
             if (baseDiff > 1)
             {
@@ -989,15 +997,10 @@ void doSynthSkillUp(CCharEntity* PChar)
         const double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
         skillUpChance                      = skillUpChance * craftChanceMultiplier;
 
-        // Chance penalties.
+        // Chance penalties. The retail desynth rate was measured with breaks included, so it takes none.
         uint8 penalty = 1;
 
-        if (PChar->craftState().craftMode() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
-        {
-            penalty += 1;
-        }
-
-        if (PChar->craftState().result() == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
+        if (!isDesynth && PChar->craftState().result() == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
         {
             penalty += 1;
         }
