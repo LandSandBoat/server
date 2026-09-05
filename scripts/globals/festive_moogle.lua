@@ -468,10 +468,15 @@ xi.festiveMoogle.onEventFinish = function(player, csid, option, npc)
         local ID = zones[zoneId]
 
         if option ~= utils.EVENT_CANCELLED_OPTION then
-            local pellType     = bit.band(bit.rshift(option, 8), 0xFF)
-            local itemCategory = bit.band(option, 0xFF)
-            local selectedItem = bit.rshift(option, 16)
-            local rewardEntry  = rewardItems[pellType][itemCategory][selectedItem]
+            local pellType        = tradeItems[player:getLocalVar('tradedPell')]
+            local itemCategory    = bit.band(option, 0xFF)
+            local selectedItem    = bit.rshift(option, 16)
+            local categoryRewards = pellType and rewardItems[pellType][itemCategory] or {}
+            local rewardEntry     = categoryRewards[selectedItem]
+
+            if not rewardEntry then
+                return
+            end
 
             if itemCategory == 3 then
                 if rewardEntry[1] == 'conquest_points' then

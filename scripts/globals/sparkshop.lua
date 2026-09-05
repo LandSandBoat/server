@@ -599,6 +599,13 @@ local optionToItem =
     },
 }
 
+local nationConquestPoints =
+{
+    [xi.nation.SANDORIA] = 'sandoria_cp',
+    [xi.nation.BASTOK]   = 'bastok_cp',
+    [xi.nation.WINDURST] = 'windurst_cp',
+}
+
 -- Get cap for currencies if necessary, for use by charutils::AddPoints()
 local function getCurrencyCap(currencyName)
     local cap = nil
@@ -659,6 +666,13 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     -- 2. Grant Currency based on Vouchers spent (Category == 20)
     -- 3. Grant Provision Items based on Vouchers spent (Category == 30)
     if category <= 10 or category == 12 then
+        if
+            category == 12 and
+            xi.extravaganza.campaignActive() == xi.extravaganza.campaign.NONE
+        then
+            return
+        end
+
         local itemCategory = optionToItem[category]
         local item         = itemCategory and itemCategory[selection]
 
@@ -711,20 +725,13 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         if copperVouchersStored >= qty then
             player:delCurrency('aman_vouchers', qty)
 
-            if currency.name == 'conquest_points' then
-                local nation = player:getNation()
-
-                if nation == 0 then
-                    currency.name = 'sandoria_cp'
-                elseif nation == 1 then
-                    currency.name = 'bastok_cp'
-                elseif nation == 2 then
-                    currency.name = 'windurst_cp'
-                end
+            local currencyName = currency.name
+            if currencyName == 'conquest_points' then
+                currencyName = nationConquestPoints[player:getNation()]
             end
 
-            player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
-            player:messageSpecial(zones[player:getZoneID()].text.YOU_NOW_HAVE_AMT_CURRENCY, selection, player:getCurrency(currency.name))
+            player:addCurrency(currencyName, currency.amount * qty, getCurrencyCap(currencyName))
+            player:messageSpecial(zones[player:getZoneID()].text.YOU_NOW_HAVE_AMT_CURRENCY, selection, player:getCurrency(currencyName))
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, xi.item.COPPER_AMAN_VOUCHER)
         end

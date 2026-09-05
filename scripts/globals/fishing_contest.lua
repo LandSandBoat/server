@@ -283,6 +283,8 @@ xi.fishingContest.onTrade = function(player, npc, trade)
             fishData.weight == 0
         then
             -- Fish has already been ranked previously
+            player:setLocalVar('[FishContest]Length', 0)
+            player:setLocalVar('[FishContest]Weight', 0)
             player:startEvent(10007, { [4] = 1 })
         else
             -- Fish is a valid entry, not previously ranked
@@ -392,10 +394,15 @@ xi.fishingContest.onEventFinish = function(player, csid, option, npc)
     end
 
     if csid == 10007 then
+        local length = player:getLocalVar('[FishContest]Length')
+        local weight = player:getLocalVar('[FishContest]Weight')
+
         -- Give the player back a fish with the same stats, but tagged for Ranking
-        if option == 145 then
-            local length = player:getLocalVar('[FishContest]Length')
-            local weight = player:getLocalVar('[FishContest]Weight')
+        if
+            option == 145 and
+            length > 0 and
+            player:getGil() >= 500
+        then
             local obtained = giveFish(player, { id = contest['fishid'],
                                                 quantity = 1,
                                                 exdata = { size = length, weight = weight, isRanked = true } })

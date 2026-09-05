@@ -296,8 +296,33 @@ local function verifyReqKeyItems(player, ki)
     end
 end
 
+local function hasCompletedExpansion(player, expansion)
+    if expansion == 1 then
+        return player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
+    elseif expansion == 2 then
+        return player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
+    elseif expansion == 3 then
+        return player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
+    end
+
+    return false
+end
+
 local function takeReqKeyItems(player, ki)
-    local entry = menuMetadata[1][ki]
+    local entry     = menuMetadata[1][ki]
+    local satisfied = verifyReqKeyItems(player, ki)
+
+    if
+        not satisfied or
+        satisfied == 0 or
+        not hasCompletedExpansion(player, entry.expansion) or
+        player:hasKeyItem(ki) or
+        GetSystemTime() < player:getCharVar(entry.charVar)
+    then
+        player:messageSpecial(ID.text.DRYEYES_3, ki)
+        return
+    end
+
     for _, reqKeyItem in pairs(entry.reqKeyItems) do
         if player:hasKeyItem(reqKeyItem) then
             player:messageSpecial(ID.text.KEYITEM_LOST, reqKeyItem)
@@ -365,27 +390,16 @@ entity.onTrigger = function(player, npc)
     then
         player:showText(npc, ID.text.GET_LOST)
     else
-        local now          = GetSystemTime()
-        local finishedACP  = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
-        local finishedAMK  = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
-        local finishedASA  = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
+        local now = GetSystemTime()
 
         -- Show only the key items available to retrive based on time gate and if you don't already have it
         local arg1 = 0
         for bitPos, ki in pairs(menuMetadata[1]['initialList']) do
             local entry = menuMetadata[1][ki]
-            local hasCompletedExpansion = false
-            if entry.expansion == 1 then
-                hasCompletedExpansion = finishedACP
-            elseif entry.expansion == 2 then
-                hasCompletedExpansion = finishedAMK
-            elseif entry.expansion == 3 then
-                hasCompletedExpansion = finishedASA
-            end
 
             -- Reminder that "True" here means the option should be excluded from the player's menu
             if
-                not hasCompletedExpansion or
+                not hasCompletedExpansion(player, entry.expansion) or
                 player:hasKeyItem(ki) or
                 now < player:getCharVar(entry.charVar)
             then
@@ -447,21 +461,8 @@ entity.onEventUpdate = function(player, csid, option, npc)
                 player:updateEvent(0, 0, 0, 0, 0, 0, 3)
             end
         elseif option == 203 then -- 2nd page menu to choose helper key items to allow player to go off and repeat the mission for the key item
-            local finishedACP = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
-            local finishedAMK = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
-            local finishedASA = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
-
             local arg1 = 0
             for bitPos, entry in pairs(menuMetadata[2]) do
-                local hasCompletedExpansion = false
-                if entry.expansion == 1 then
-                    hasCompletedExpansion = finishedACP
-                elseif entry.expansion == 2 then
-                    hasCompletedExpansion = finishedAMK
-                elseif entry.expansion == 3 then
-                    hasCompletedExpansion = finishedASA
-                end
-
                 local hasAllRelevantKeyItem = true
                 for _, keyItem in pairs(entry.relevantKeyItems) do
                     if not player:hasKeyItem(keyItem) then
@@ -470,7 +471,10 @@ entity.onEventUpdate = function(player, csid, option, npc)
                 end
 
                 -- Reminder that "True" here means the option should be excluded from the player's menu
-                if not hasCompletedExpansion or hasAllRelevantKeyItem then
+                if
+                    not hasCompletedExpansion(player, entry.expansion) or
+                    hasAllRelevantKeyItem
+                then
                     arg1 = utils.mask.setBit(arg1, bitPos, true)
                 end
             end

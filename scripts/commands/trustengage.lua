@@ -33,6 +33,7 @@ commandObj.onTrigger = function(player, type)
 
     if type == nil or type < 0 or type > 1 then
         error(player)
+        return
     end
 
     player:setCharVar('TrustEngageType', type)

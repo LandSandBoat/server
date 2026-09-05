@@ -203,41 +203,43 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
     xi.gear_sets.checkForGearSet(player)
 
-    -- god mode
-    if player:getCharVar('GodMode') == 1 then
-        player:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = 1000, origin = player })
-        player:addStatusEffect(xi.effect.MAX_MP_BOOST, { power = 1000, origin = player })
-        player:addStatusEffect(xi.effect.MIGHTY_STRIKES, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.PERFECT_DODGE, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.INVINCIBLE, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.MANAFONT, { power = 1, origin = player })
-        player:addStatusEffect(xi.effect.REGAIN, { power = 300, origin = player })
-        player:addStatusEffect(xi.effect.REFRESH, { power = 99, origin = player })
-        player:addStatusEffect(xi.effect.REGEN, { power = 99, origin = player })
-        player:addMod(xi.mod.RACC, 2500)
-        player:addMod(xi.mod.RATT, 2500)
-        player:addMod(xi.mod.ACC, 2500)
-        player:addMod(xi.mod.ATT, 2500)
-        player:addMod(xi.mod.MATT, 2500)
-        player:addMod(xi.mod.MACC, 2500)
-        player:addMod(xi.mod.RDEF, 2500)
-        player:addMod(xi.mod.DEF, 2500)
-        player:addMod(xi.mod.MDEF, 2500)
-        player:addHP(50000)
-        player:setMP(50000)
-    end
+    if player:getGMLevel() > 0 then
+        -- god mode
+        if player:getCharVar('GodMode') == 1 then
+            player:addStatusEffect(xi.effect.MAX_HP_BOOST, { power = 1000, origin = player })
+            player:addStatusEffect(xi.effect.MAX_MP_BOOST, { power = 1000, origin = player })
+            player:addStatusEffect(xi.effect.MIGHTY_STRIKES, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.HUNDRED_FISTS, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.PERFECT_DODGE, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.INVINCIBLE, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.MANAFONT, { power = 1, origin = player })
+            player:addStatusEffect(xi.effect.REGAIN, { power = 300, origin = player })
+            player:addStatusEffect(xi.effect.REFRESH, { power = 99, origin = player })
+            player:addStatusEffect(xi.effect.REGEN, { power = 99, origin = player })
+            player:addMod(xi.mod.RACC, 2500)
+            player:addMod(xi.mod.RATT, 2500)
+            player:addMod(xi.mod.ACC, 2500)
+            player:addMod(xi.mod.ATT, 2500)
+            player:addMod(xi.mod.MATT, 2500)
+            player:addMod(xi.mod.MACC, 2500)
+            player:addMod(xi.mod.RDEF, 2500)
+            player:addMod(xi.mod.DEF, 2500)
+            player:addMod(xi.mod.MDEF, 2500)
+            player:addHP(50000)
+            player:setMP(50000)
+        end
 
-    -- !immortal
-    if player:getCharVar('Immortal') == 1 then
-        player:setUnkillable(true)
-    end
+        -- !immortal
+        if player:getCharVar('Immortal') == 1 then
+            player:setUnkillable(true)
+        end
 
-    -- !hide
-    if player:getCharVar('GMHidden') == 1 then
-        player:setGMHidden(true)
+        -- !hide
+        if player:getCharVar('GMHidden') == 1 then
+            player:setGMHidden(true)
+        end
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
