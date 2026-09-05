@@ -42,6 +42,12 @@ end
 function CClientEntityPair:isPendingZone()
 end
 
+---Search comment the server currently holds for the player
+---@nodiscard
+---@return string
+function CClientEntityPair:getSearchMessage()
+end
+
 ---Get the inventory slot of an item with the specified quantity.
 ---@nodiscard
 ---@param itemId integer Item ID to search for

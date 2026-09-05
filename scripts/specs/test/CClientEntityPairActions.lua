@@ -151,6 +151,13 @@ end
 function CClientEntityPairActions:bazaarOpen(seller)
 end
 
+---Set the player's search comment
+---@param message string
+---@param msgType? integer
+---@return nil
+function CClientEntityPairActions:setSearchMessage(message, msgType)
+end
+
 ---@param sellerInvSlot integer
 ---@param quantity integer
 ---@return nil
