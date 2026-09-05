@@ -201,13 +201,17 @@ xi.guildShops.onPlayerBuy = function(player, npc, itemId, quantity)
         return rejected(-1)
     end
 
-    -- Inventory is full
-    if not player:addItem(itemId, quantity) then
+    -- Take the gil first
+    if not player:delGil(cost) then
         return rejected(-1)
     end
 
-    -- Delete player gil and adjust remaining stock
-    player:delGil(cost)
+    -- Inventory is full
+    if not player:addItem(itemId, quantity) then
+        player:addGil(cost)
+        return rejected(-1)
+    end
+
     item.stock = item.stock - quantity
 
     -- Hand off result to core for packet purposes
