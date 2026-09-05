@@ -127,6 +127,7 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.combat.physical.isParried', true)
+            player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             player:changeJob(xi.job.BRD)
             player:setLevel(99)
@@ -180,6 +181,7 @@ local packets =
     ['Guarded hits'] =
     {
         test = function(player, mob)
+            player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             player:changeJob(xi.job.BRD)
             player:setLevel(99)
