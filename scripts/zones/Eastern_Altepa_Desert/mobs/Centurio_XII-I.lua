@@ -61,6 +61,11 @@ entity.spawnPoints =
     { x =   28.891, y =   0.369, z =  -246.506 },
 }
 
+entity.onMobInitialize = function(mob)
+    xi.mob.updateNMSpawnPoint(mob)
+    mob:setRespawnTime(72000 + math.randomInt(0, 1800)) -- 20 to 20.5 hours after a restart
+end
+
 -- all body guard functionality in the rotz_bodyguarded_nm mixin
 
 entity.onMobSpawn = function(mob)
@@ -72,9 +77,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Set Centurio XII-I's spawnpoint and respawn time (21-24 hours)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.randomInt(75600, 86400))
+    mob:setRespawnTime(75600 + math.randomInt(600, 900)) -- 21 hours, plus 10 to 15 min
 end
 
 return entity
