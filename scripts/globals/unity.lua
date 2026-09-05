@@ -156,14 +156,22 @@ xi.unity.onEventUpdate = function(player, csid, option, npc)
             player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
 
         -- Item Selected, enter amount/confirm
-        elseif category == 3 then
-            player:updateEvent(unityOptions[4][selection][2], unityOptions[4][selection][3], 0, 0, 0, 0, 0, player:getUnityLeader())
+        elseif category == 3 or category == 4 then
+            local entry = unityOptions[4][selection]
+            if not entry then
+                player:updateEvent(utils.MAX_UINT32)
+                return
+            end
 
-        -- Attempt to grant the Item selected
-        elseif category == 4 then
+            if category == 3 then
+                player:updateEvent(entry[2], entry[3], 0, 0, 0, 0, 0, player:getUnityLeader())
+                return
+            end
+
+            -- Attempt to grant the Item selected
             local qty    = bit.rshift(option, 13)
-            local itemId = unityOptions[category][selection][1]
-            local cost   = unityOptions[category][selection][4] * qty
+            local itemId = entry[1]
+            local cost   = entry[4] * qty
 
             -- Fail-safe.
             if
@@ -220,19 +228,35 @@ xi.unity.onEventFinish = function(player, csid, option, npc)
 
     -- Player is a member of a Unity
     elseif csid == zoneEventIds[zoneId][4] then
+        local accolades       = player:getCurrency('unity_accolades')
+        local warpDestination = unityOptions[1][selection]
 
         -- Unity Warp
-        if category == 1 and unityOptions[category][selection] ~= nil then
+        if
+            category == 1 and
+            warpDestination and
+            accolades >= 100
+        then
             player:delCurrency('unity_accolades', 100)
-            player:setPos(unpack(unityOptions[category][selection]))
+            player:setPos(unpack(warpDestination))
 
         -- Change Unity
         elseif category == 6 then
             local newUnityLeader = bit.band(selection, 0xF)
 
-            player:delCurrency('unity_accolades', getChangeUnityCost(player, newUnityLeader))
-            changeUnityLeader(player, newUnityLeader)
-            player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, newUnityLeader - 1)
+            if
+                newUnityLeader >= 1 and
+                newUnityLeader <= 11 and
+                player:getCharVar('unity_changed') == 0
+            then
+                local changeUnityCost = getChangeUnityCost(player, newUnityLeader)
+
+                if accolades >= changeUnityCost then
+                    player:delCurrency('unity_accolades', changeUnityCost)
+                    changeUnityLeader(player, newUnityLeader)
+                    player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, newUnityLeader - 1)
+                end
+            end
         end
     end
 end

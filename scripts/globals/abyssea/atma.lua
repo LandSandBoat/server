@@ -368,6 +368,9 @@ local function addAtma(player, selectedAtma)
     local atmaValue = keys[selectedAtma]
     local availableAtmaSlot = getFreeAtmaSlot(player)
     if
+        atmaValue and
+        player:hasKeyItem(atmaValue) and
+        player:getCurrency('cruor') >= atmaPrice and
         availableAtmaSlot > 0 and
         not hasDuplicateAtmaEffect(player, atmaValue)
     then

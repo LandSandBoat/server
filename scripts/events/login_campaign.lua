@@ -205,19 +205,25 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option, npc)
             price,
             loginPoints)
     else
-        local loginPointCost = currentLoginCampaign[showItems - 2]['price'] * itemQuantity
+        local campaignEntry = currentLoginCampaign[showItems - 2]
+        local prizeItem     = campaignEntry and campaignEntry['items'][itemSelected + 1]
+        if not prizeItem then
+            return
+        end
+
+        local loginPointCost = campaignEntry['price'] * itemQuantity
 
         if loginPointCost > loginPoints then
             return
         end
 
-        if npcUtil.giveItem(player, { { currentLoginCampaign[showItems - 2]['items'][itemSelected + 1], itemQuantity } }) then
+        if npcUtil.giveItem(player, { { prizeItem, itemQuantity } }) then
             player:delCurrency('login_points', loginPointCost)
             player:updateEvent(
-                currentLoginCampaign[showItems - 2]['items'][itemSelected + 1],
+                prizeItem,
                 player:getCurrency('login_points'), -- Login Points after purchase
                 0, -- Unknown (most likely totalItemMask)
-                currentLoginCampaign[showItems - 2]['price'],
+                campaignEntry['price'],
                 loginPoints) -- Login points before purchase
         end
     end

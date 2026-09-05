@@ -269,8 +269,11 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
     -- GP Key Item Option.
     if category == 3 then
         local keyItem = keyItems[bit.band(bit.rshift(option, 5), 15) - 1]
+        if not keyItem then
+            return
+        end
 
-        if keyItem and rank >= keyItem.rank then
+        if rank >= keyItem.rank then
             if player:getCurrency(currency) >= keyItem.cost then
                 player:delCurrency(currency, keyItem.cost)
                 npcUtil.giveKeyItem(player, keyItem.id)
@@ -285,13 +288,17 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
 
     -- GP Item Option.
     elseif category == 2 or category == 1 then
-        local index    = bit.band(option, 3)
-        local items    = xi.crafting.guildItemTable[guildId]
-        local item     = items[(category - 1) * 4 + index]
+        local index = bit.band(option, 3)
+        local items = xi.crafting.guildItemTable[guildId]
+        local item  = items[(category - 1) * 4 + index]
+        if not item then
+            return
+        end
+
         local quantity = math.min(bit.rshift(option, 9), 12)
         local cost     = quantity * item.cost
 
-        if item and rank >= item.rank then
+        if rank >= item.rank then
             if player:getCurrency(currency) >= cost then
                 local delivered = 0
 
@@ -320,11 +327,15 @@ xi.crafting.guildPointOnEventUpdate = function(player, option, target, guildId)
         category == 0 and
         option ~= utils.EVENT_CANCELLED_OPTION
     then
-        local crystal  = xi.crafting.hqCrystals[bit.band(bit.rshift(option, 5), 15)]
+        local crystal = xi.crafting.hqCrystals[bit.band(bit.rshift(option, 5), 15)]
+        if not crystal then
+            return
+        end
+
         local quantity = bit.rshift(option, 9)
         local cost     = quantity * crystal.cost
 
-        if crystal and rank >= 3 then
+        if rank >= 3 then
             if
                 player:getCurrency(currency) >= cost and
                 npcUtil.giveItem(player, { { crystal.id, quantity } })

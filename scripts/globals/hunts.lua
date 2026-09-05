@@ -1235,6 +1235,17 @@ local zone =
     }
 }
 
+-- Hunt ids each registry offers, keyed by zone
+local offeredHunts = {}
+for zoneId, registry in pairs(zone) do
+    offeredHunts[zoneId] = {}
+    for _, region in pairs(registry) do
+        if region.huntId then
+            offeredHunts[zoneId][region.huntId] = true
+        end
+    end
+end
+
 --[[    0  |   0000000000   | 0000000000 |  0000
       1bit |    10 bits     |  10 bits   |  4bit
       lock |   Scyld Qty    | NM pageId #  | status
@@ -1297,18 +1308,28 @@ xi.hunts.clearHuntVars = function(player)
 end
 
 function xi.hunts.onEventFinish(player, csid, option, npc)
-    local zoneid = player:getZoneID()
-    -- local registryZone = zone[zoneid]
-    local huntEntry = hunts[bit.rshift(option, 3)]
-    local msg = zones[zoneid].text
+    local zoneid    = player:getZoneID()
+    local huntId    = bit.rshift(option, 3)
+    local huntEntry = hunts[huntId]
+    local msg       = zones[zoneid].text
 
     -- accepting hunt
     if huntEntry then
-        player:setCharVar('[hunt]status', 1)
-        player:setCharVar('[hunt]id', bit.rshift(option, 3))
-        player:delCurrency('scyld', huntEntry.fee)
-        player:messageSpecial(msg.HUNT_ACCEPTED)
-        player:messageSpecial(msg.USE_SCYLDS, huntEntry.fee, player:getCurrency('scyld'))
+        local huntLocked = GetSystemTime() < player:getCharVar('[hunt]nextHunt')
+        local huntBusy   = player:getCharVar('[hunt]status') ~= 0 or player:getCharVar('[regime]id') ~= 0
+
+        if
+            offeredHunts[zoneid][huntId] and
+            not huntLocked and
+            not huntBusy and
+            player:getCurrency('scyld') >= huntEntry.fee
+        then
+            player:setCharVar('[hunt]status', 1)
+            player:setCharVar('[hunt]id', huntId)
+            player:delCurrency('scyld', huntEntry.fee)
+            player:messageSpecial(msg.HUNT_ACCEPTED)
+            player:messageSpecial(msg.USE_SCYLDS, huntEntry.fee, player:getCurrency('scyld'))
+        end
 
     -- cancels hunt
     elseif option == 3 then
@@ -1321,9 +1342,11 @@ function xi.hunts.onEventFinish(player, csid, option, npc)
         xi.regime.clearRegimeVars(player)
 
     -- completes hunt
-    elseif option == 5 then
-        local huntId = player:getCharVar('[hunt]id')
-        local scyldBounty = hunts[huntId].bounty
+    elseif
+        option == 5 and
+        player:getCharVar('[hunt]status') == 2
+    then
+        local scyldBounty = hunts[player:getCharVar('[hunt]id')].bounty
         -- give player evoliths here
         player:setCharVar('[hunt]nextHunt', getVanaMidnight())
         xi.hunts.clearHuntVars(player)

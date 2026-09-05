@@ -46,14 +46,17 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 150 and option < 0x40000000 and option > 255 then
-        local coinType  = bit.band(option, 0xFF)
+        local piece = ImperialPieces[bit.band(option, 0xFF)]
+        if not piece then
+            return
+        end
+
         local quantity  = bit.rshift(option, 0x8)
         local stacks    = math.floor(quantity / 99)
         local remainder = quantity % 99
-        local item      = ImperialPieces[coinType].item
-        local price     = ImperialPieces[coinType].price
+        local item      = piece.item
 
-        if player:getCurrency('imperial_standing') < quantity * price then
+        if player:getCurrency('imperial_standing') < quantity * piece.price then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
             return
         end
@@ -76,7 +79,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(item, remainder)
         end
 
-        player:delCurrency('imperial_standing', quantity * price)
+        player:delCurrency('imperial_standing', quantity * piece.price)
         npc:showText(npc, ID.text.UGRIHD_PURCHASE_DIALOGUE)
         player:messageSpecial(ID.text.ITEM_OBTAINED + 9, item, quantity)
     end
