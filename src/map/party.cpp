@@ -510,6 +510,11 @@ void CParty::PopMember(CBattleEntity* PEntity)
                 }
                 it++;
             }
+
+            if (m_PAlliance->partyList.empty())
+            {
+                delete m_PAlliance; // cpp.sh allow
+            }
         }
         delete this; // cpp.sh allow
     }
