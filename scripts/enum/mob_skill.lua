@@ -446,6 +446,7 @@ xi.mobSkill =
     POWER_ATTACK_ARMED_1          =  667,
     KICK_BACK                     =  668,
     IMPLOSION                     =  669,
+    SHADOW_LORD_DEATH             =  670,
 
     UMBRA_SMASH                   =  671,
     GIGA_SLASH                    =  672,
