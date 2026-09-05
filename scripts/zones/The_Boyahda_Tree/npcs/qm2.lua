@@ -10,46 +10,16 @@ local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- Notes: does ??? depop when Agas is spawned?
-    -- current implementation: when Agas is active, triggering ??? will result in detarget
+    -- ??? is active between 19:00 and 4:00, except during the New Moon.
+    local currentHour = VanadielHour()
 
-    local zoneHour = VanadielHour()
-    local zoneMinute = VanadielMinute()
-    local correctTime = zoneHour >= 19 or zoneHour < 4 or (zoneHour == 4 and zoneMinute == 0)
-
-    local agas = GetMobByID(ID.mob.AGAS)
-    if agas then
-        if not agas:isSpawned() then
-            if player:hasKeyItem(xi.ki.MOONDROP) then
-                player:messageSpecial(ID.text.CAN_SEE_SKY)
-
-            elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_ACCEPTED then
-
-                if
-                    (getVanadielMoonCycle() == xi.moonCycle.NEW_MOON) or
-                    not correctTime
-                then
-                    player:messageSpecial(ID.text.CANNOT_SEE_MOON)
-
-                elseif player:getCharVar('Searching_AgasKilled') == 1 then
-                    player:startEvent(14)
-
-                else
-                    player:messageSpecial(ID.text.SOMETHING_NOT_RIGHT)
-                    SpawnMob(ID.mob.AGAS):updateClaim(player) -- missing repop timer for Agas due to errors with SpawnMob
-                end
-
-            else
-                player:messageSpecial(ID.text.CAN_SEE_SKY)
-            end
-        end
-    end
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 14 then
-        npcUtil.giveKeyItem(player, xi.ki.MOONDROP)
-        player:setCharVar('Searching_AgasKilled', 0)
+    if
+        (currentHour >= 19 or currentHour < 4) and
+        getVanadielMoonCycle() ~= xi.moonCycle.NEW_MOON
+    then
+        player:messageSpecial(ID.text.CAN_SEE_SKY)
+    else
+        player:messageSpecial(ID.text.CANNOT_SEE_MOON)
     end
 end
 

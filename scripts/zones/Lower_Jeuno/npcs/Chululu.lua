@@ -2,7 +2,6 @@
 -- Area: Lower Jeuno
 --  NPC: Chululu
 -- Starts and Finishes Quests: All in the Cards
--- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
 ---@type TNpcEntity
@@ -18,7 +17,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local collectTarutCards = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
-    local rubbishDay        = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
     local allInTheCards     = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
     local cdate             = player:getCharVar('AllInTheCards_date')
 
@@ -40,19 +38,6 @@ entity.onTrigger = function(player, npc)
         elseif cdate < GetSystemTime() then
             player:startEvent(10112) -- During quest 'All in the Cards'  THIS ONE GIVES ANOTHER BATCH
         end
-
-    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_COMPLETED then
-        if player:getCharVar('SearchingForRightWords_postcs') < -1 then
-            player:startEvent(56)
-        else
-            player:startEvent(57) -- final state, after all quests complete
-        end
-
-    elseif rubbishDay == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(57) -- New standard dialog
-
-    else
-        player:startEvent(26) -- Standard dialog
     end
 end
 

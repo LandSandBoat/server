@@ -354,9 +354,16 @@ xi.mobSkill =
     SOMNOLENCE_1                  =  545,
     NOCTOSHIELD_1                 =  546,
     ULTIMATE_TERROR_1             =  547,
+    BLINDEYE_1                    =  548,
+    EYES_ON_ME_1                  =  549,
+    HYPNOSIS_1                    =  550,
+    MIND_BREAK_1                  =  551,
+    BINDING_WAVE_1                =  552,
+    AIRY_SHIELD_1                 =  553,
 
+    MAGIC_BARRIER_1               =  555,
     DREAM_SHROUD_1                =  556,
-
+    LEVEL_5_PETRIFY_1             =  557,
     NIGHTMARE_1                   =  558,
 
     SLING_BOMB_1                  =  567,

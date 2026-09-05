@@ -9,6 +9,7 @@ return {
     ['Bluffnix']        = { event = 43, options = 81 },
     ['Bogharg']         = { event = 45 },
     ['Chimh_Dlesbah']   = { event = 10096 },
+    ['Chululu']         = { event = 26 },
     ['Crazy_Wolf']      = { event = 165 },
     ['Danzhor']         = { event = 185 },
     ['Duplidoc']        = { event = 20008 },

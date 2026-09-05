@@ -82,7 +82,7 @@ quest.sections =
                         player:addFame(xi.fameArea.BASTOK, 13)
                         player:addFame(xi.fameArea.WINDURST, 13)
                         player:delKeyItem(xi.ki.HOLY_CANDLE)
-                        player:setLocalVar('Quest[3][66]mustZone', 1)
+                        xi.quest.setMustZone(player, xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
                     end
                 end,
             },
