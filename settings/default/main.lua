@@ -163,7 +163,6 @@ xi.settings.main =
 
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
-    ENABLE_SMN_MAGIC_CAST_TIME_MERIT = true,  -- true/false. If false, the Summoning Magic Casting Time merit has no effect on cast time (pre-2012 behavior).
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
@@ -244,7 +243,11 @@ xi.settings.main =
     SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
     USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
-    USE_OLD_COUNTERSTANCE           = false, -- true/false. if true, Counterstance DEF = 1 + VIT/2 (+ Minne); gear/Protect ignored
+
+    -- JOB SPECIFIC SETTINGS
+    USE_OLD_COUNTERSTANCE            = false, -- true/false. (MNK) if true, Counterstance DEF = 1 + VIT/2 (+ Minne); gear/Protect ignored
+    ENABLE_SMN_MAGIC_CAST_TIME_MERIT = true,  -- true/false. (SMN) If false, the Summoning Magic Casting Time merit has no effect on cast time (pre-2012 behavior).
+    ENABLE_BRD_MODERN_EFFECTS        = true,  -- true/false. (BRD) If false, reverts modern additions: Nightingale instant song casts, Troubadour per-merit song accuracy, and Pianissimo's halved song cast time.
 
     -- CELEBRATIONS
     EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
