@@ -335,6 +335,50 @@ HashMap<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions
     return authenticatedSessions_;
 }
 
+namespace
+{
+
+constexpr auto LOGIN_FAILURE_WINDOW = std::chrono::seconds(60);
+constexpr auto LOGIN_FAILURE_LIMIT  = 5;
+
+HashMap<std::string, std::pair<uint8, timer::time_point>> loginFailures_;
+
+} // namespace
+
+auto isLoginLockedOut(const std::string& ipAddr) -> bool
+{
+    const auto it = loginFailures_.find(ipAddr);
+    if (it == loginFailures_.end())
+    {
+        return false;
+    }
+
+    if (timer::now() > it->second.second + LOGIN_FAILURE_WINDOW)
+    {
+        loginFailures_.erase(it);
+        return false;
+    }
+
+    return it->second.first >= LOGIN_FAILURE_LIMIT;
+}
+
+void recordLoginFailure(const std::string& ipAddr)
+{
+    auto& [count, last] = loginFailures_[ipAddr];
+    if (timer::now() > last + LOGIN_FAILURE_WINDOW)
+    {
+        count = 0;
+    }
+
+    ++count;
+    last = timer::now();
+}
+
+void clearLoginFailures(const std::string& ipAddr)
+{
+    loginFailures_.erase(ipAddr);
+}
+
 bool isStringMalformed(const std::string& str, std::size_t max_length)
 {
     const auto unprintableChar = [](const char& c) -> bool
