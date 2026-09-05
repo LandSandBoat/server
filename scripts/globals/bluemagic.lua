@@ -249,6 +249,15 @@ end
 -- Global functions
 -----------------------------------
 
+-- get old style blue magic attack. Not used normally. see combat utils
+---@param caster CBaseEntity
+---@return number
+xi.spells.blue.getBlueMagicBaseAttack = function(caster)
+    local baseAttack = 8 + caster:getSkillLevel(xi.skill.BLUE_MAGIC) + math.floor(caster:getStat(xi.mod.STR) * xi.settings.main.ONE_HAND_MAIN_HAND_STR_ATTACK_MULTIPLIER)
+
+    return baseAttack
+end
+
 ---@class blueSkillParams
 ---@field numHits          number
 ---@field ftp0             number

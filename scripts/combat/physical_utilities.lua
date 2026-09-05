@@ -81,6 +81,24 @@ local shieldSizeToBlockRateTable =
     [6] = 100, -- Ochain  https://www.bg-wiki.com/ffxi/Category:Shields
 }
 
+---@param actor CBaseEntity
+---@param weaponType xi.skill
+---@param weaponSlot xi.slot
+local function getMeleeAttack(actor, weaponType, weaponSlot)
+    local actorAttack = 0
+
+    if
+        weaponType == xi.skill.BLUE_MAGIC and
+        xi.settings.main.BLUE_SKILL_IS_BLUE_ATTACK
+    then
+        actorAttack = xi.spells.blue.getBlueMagicBaseAttack(actor)
+    else
+        actorAttack = actor:getStat(xi.mod.ATT, weaponSlot)
+    end
+
+    return math.max(1, actorAttack)
+end
+
 -- WARNING: This function is used in src/map/attack.cpp "ProcessDamage" function.
 -- If you update these parameters, update them there as well.
 ---@param actor CBaseEntity
@@ -628,7 +646,6 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = 0
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
     local flourishBonus = 1
 
@@ -645,7 +662,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
     -- TODO: do flourish and attack mods come before or after food?
-    actorAttack = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod * flourishBonus))
+    local actorAttack = math.floor(getMeleeAttack(actor, weaponType, weaponSlot) * wsAttackMod * flourishBonus)
 
     -- handle attuner
     -- note: isAutomaton is checked inside xi.automaton.handleAttuner and could be removed
@@ -812,7 +829,17 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     end
 
     -- TODO: it is unknown if ws attack mod and flourish bonus are additive or multiplicative
-    actorAttack = math.max(1, math.floor((actor:getStat(xi.mod.RATT) + bonusRangedAttack - distancePenalty) * wsAttackMod * flourishBonus))
+    -- TODO: do flourish and attack mods come before or after food?
+    if
+        weaponType == xi.skill.BLUE_MAGIC and
+        xi.settings.main.BLUE_SKILL_IS_BLUE_ATTACK
+    then
+        local baseBlueMagicAttack = xi.spells.blue.getBlueMagicBaseAttack(actor)
+
+        actorAttack = math.max(1, math.floor(baseBlueMagicAttack + bonusRangedAttack - distancePenalty) * wsAttackMod * flourishBonus)
+    else
+        actorAttack = math.max(1, math.floor((actor:getStat(xi.mod.RATT) + bonusRangedAttack - distancePenalty) * wsAttackMod * flourishBonus))
+    end
 
     -- Target Defense Modifiers.
     local ignoreDefenseFactor = 1
