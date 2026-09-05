@@ -6139,9 +6139,9 @@ auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
 {
     TracyZoneScoped;
 
-    const auto tstamp     = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
+    const auto tstamp     = PChar->getCharVar("mog-locker-expiry-timestamp");
     const auto accessType = static_cast<uint32>(PChar->getCharVar("mog-locker-access-type"));
-    if (earth_time::vanadiel_timestamp() < tstamp)
+    if (tstamp > 0 && earth_time::vanadiel_timestamp() < static_cast<uint32>(tstamp))
     {
         const auto curZone = PChar->loc.zone;
         switch (accessType)
