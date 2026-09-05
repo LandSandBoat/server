@@ -21,7 +21,8 @@ local content = Battlefield:new({
 function content:entryRequirement(player, npc, isRegistrant, trade)
     local isCurrentMission    = player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
         player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-    local currentRequirements = isCurrentMission
+    local missionStatus       = player:getMissionStatus(player:getNation())
+    local currentRequirements = isCurrentMission and missionStatus >= 10
     local nonRegistrantReqs   = player:hasCompletedMission(player:getNation(), 5) or currentRequirements
 
     return (not isRegistrant and nonRegistrantReqs) or currentRequirements
