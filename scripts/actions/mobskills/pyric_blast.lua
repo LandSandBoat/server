@@ -7,13 +7,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- Only used when all 3 heads are alive.
-    if mob:getAnimationSub() == 0 then
-        -- TODO: Does this need an inFront() check?
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
