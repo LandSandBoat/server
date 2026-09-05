@@ -215,7 +215,6 @@ CCharEntity::CCharEntity()
 
     WideScanTarget = std::nullopt;
 
-    lastTradeInvite = {};
     TradePending.clean();
     InvitePending.clean();
 
@@ -569,8 +568,8 @@ auto CCharEntity::isCrafting() const -> bool
 
 auto CCharEntity::tradePartner() const -> CCharEntity*
 {
-    auto* other = TradePending.resolve<CCharEntity>();
-    if (!other || other->TradePending.UniqueNo != id)
+    auto* other = TradePending.entity.resolve<CCharEntity>();
+    if (!other || other->TradePending.entity.UniqueNo != id)
     {
         return nullptr;
     }

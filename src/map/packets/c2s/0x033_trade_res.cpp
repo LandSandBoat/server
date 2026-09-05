@@ -30,7 +30,7 @@ auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity*
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
         .oneOf<GP_CLI_COMMAND_TRADE_RES_KIND>(this->Kind)
-        .mustNotEqual(PChar->TradePending.ActIndex, 0, "No pending trade target");
+        .mustNotEqual(PChar->TradePending.entity.ActIndex, 0, "No pending trade target");
 }
 
 void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar) const
@@ -49,6 +49,11 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
             if (PChar->activePlayerTradeTransaction())
             {
                 // Trade is already active
+                return;
+            }
+
+            if (PChar->TradePending.initiator)
+            {
                 return;
             }
 
