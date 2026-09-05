@@ -62,8 +62,13 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                     {
                         ShowDebug("%s invited %s to an alliance", PInviter->getName(), PChar->getName());
 
+                        if (PChar->PParty->HasTrusts() || PInviter->PParty->HasTrusts())
+                        {
+                            // Cannot form alliance if you have Trusts
+                            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::TrustCannotJoinAlliance);
+                        }
                         // the inviter already has an alliance and wants to add another party - only add if they have room for another party
-                        if (PInviter->PParty->m_PAlliance)
+                        else if (PInviter->PParty->m_PAlliance)
                         {
                             // break if alliance is full or the inviter is not the leader
                             if (PInviter->PParty->m_PAlliance->isFull() || PInviter->PParty->m_PAlliance->getMainParty() != PInviter->PParty)
@@ -76,11 +81,6 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
                             // alliance is not full, add the new party
                             PInviter->PParty->m_PAlliance->addParty(PChar->PParty);
                             ShowDebug("%s party added to %s alliance", PChar->getName(), PInviter->getName());
-                        }
-                        else if (PChar->PParty->HasTrusts() || PInviter->PParty->HasTrusts())
-                        {
-                            // Cannot form alliance if you have Trusts
-                            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::TrustCannotJoinAlliance);
                         }
                         else
                         {
