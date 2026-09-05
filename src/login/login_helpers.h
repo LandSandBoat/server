@@ -90,6 +90,9 @@ void loadZoneLookups();
 
 auto validateCharacterName(const std::string& name) -> Maybe<std::string>;
 
+// Lobby error code when the account may not create a character with this name right now
+auto characterCreationError(uint32 accountID, const std::string& name) -> Maybe<uint16>;
+
 auto isZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;
 
 session_t& get_authenticated_session(const std::string& ipAddr, const std::string& sessionHash);

@@ -21,6 +21,9 @@
 
 #include "login_helpers.h"
 
+#include "common/settings.h"
+#include "login_errors.h"
+
 #include "common/md52.h"
 #include <common/lua.h>
 
@@ -297,6 +300,28 @@ Maybe<std::string> validateCharacterName(const std::string& name)
     if (isVulgarName(name))
     {
         return "Name matched the character name filter.";
+    }
+
+    return std::nullopt;
+}
+
+auto characterCreationError(const uint32 accountID, const std::string& name) -> Maybe<uint16>
+{
+    if (settings::get<uint8>("login.MAINT_MODE") > 0 || !settings::get<bool>("login.CHARACTER_CREATION"))
+    {
+        return loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER;
+    }
+
+    if (const auto invalidNameReason = validateCharacterName(name))
+    {
+        ShowWarning(fmt::format("new character name error <{}>: {}", name, *invalidNameReason));
+        return loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE;
+    }
+
+    const auto rset = db::preparedStmt("SELECT content_ids, (SELECT COUNT(*) FROM chars WHERE accid = accounts.id) AS chars FROM accounts WHERE id = ?", accountID);
+    if (!rset || !rset->rowsCount() || !rset->next() || rset->get<uint32>("chars") >= rset->get<uint32>("content_ids"))
+    {
+        return loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER;
     }
 
     return std::nullopt;
