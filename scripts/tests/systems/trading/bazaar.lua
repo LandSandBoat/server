@@ -109,4 +109,16 @@ describe('BazaarPurchaseTransaction', function()
         assert(totalOf(goods) == 1, 'copies in play: ' .. tostring(totalOf(goods)))
         assert(seller:getItemCount(goods) == 1, 'the listing left the seller')
     end)
+
+    it('refuses a sale the seller cannot be paid for', function()
+        local slot = list(1)
+        seller:setGil(999999999)
+        buyer:addGil(price * 2)
+        local buyerGil = buyer:getGil()
+
+        buyer.actions:bazaarBuy(slot, 1)
+
+        assert(buyer:getGil() == buyerGil, 'buyer was charged for a refused sale')
+        assert(seller:getItemCount(goods) == 1, 'the listing left the seller')
+    end)
 end)

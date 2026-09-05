@@ -610,7 +610,7 @@ auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
                        }
                    });
 
-    return true;
+    return earned.delta == static_cast<int32>(gil);
 }
 
 void Transaction::rollbackIfOpen()
