@@ -25,6 +25,7 @@ return {
     ['Joseph']          = { event = 133 },
     ['Kikilolo']        = { event = 222 },
     ['Kuah_Dakonsa']    = { event = 190 },
+    ['Kurou-Morou']     = { event = 193 },
     ['Liki_Steligho']   = { event = 10097 },
     ['Mataligeat']      = { event = 141 },
     ['Mertaire']        = { text = ID.text.LOVE_ROMANCE },

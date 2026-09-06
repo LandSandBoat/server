@@ -1,5 +1,5 @@
 -----------------------------------
--- Candle Making
+-- A Candlelight Vigil
 -----------------------------------
 -- !addquest 3 6
 -- Ilumida : !pos -75 -1 58 244

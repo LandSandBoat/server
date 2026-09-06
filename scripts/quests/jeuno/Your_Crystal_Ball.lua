@@ -5,7 +5,8 @@
 -- Kurou-Morou : !pos -4 -6 -28 245
 -- Rockwell    : !pos -18 -13 181 198
 -----------------------------------
-local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
+local mazeID       = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
@@ -54,7 +55,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.item.DIVINATION_SPHERE)
+                        npcUtil.tradeMatches(trade, { { xi.item.DIVINATION_SPHERE, 1 } })
                     then
                         return quest:progressEvent(196)
                     end
@@ -68,7 +69,8 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 16)
                         player:addFame(xi.fameArea.BASTOK, 16)
                         player:addFame(xi.fameArea.WINDURST, 16)
-                        player:confirmTrade()
+                        player:tradeComplete()
+                        player:messageText(npc, lowerJeunoID.text.FORTUNE_TOLD_BY_KUROU_MOROU, false, 6)
                     end
                 end,
             },
@@ -89,10 +91,10 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.AHRIMAN_LENS) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.AHRIMAN_LENS, 1 } }) then
                         local progress = quest:getVar(player, 'Prog')
                         if progress == 0 then
-                            player:confirmTrade()
+                            player:tradeComplete()
                             quest:setVar(player, 'Prog', 1)
                             quest:setVar(player, 'Wait', GetSystemTime() + 60) -- 1 minute wait time
                             return quest:messageSpecial(mazeID.text.SUBMERGED_ITEM, xi.item.AHRIMAN_LENS)

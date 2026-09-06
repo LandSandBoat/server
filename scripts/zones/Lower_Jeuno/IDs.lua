@@ -43,6 +43,7 @@ zones[xi.zone.LOWER_JEUNO] =
         MERTAIRE_MALLIEBELL_LEFT      = 7427,  -- Ugh... Malliebell... This time she's left me forever...
         MERTAIRE_DEFAULT              = 7452,  -- Who are you? Leave me alone!
         COULD_HE_BE                   = 7462,  -- Wait, could he be...? Naw, he couldn't be.
+        FORTUNE_TOLD_BY_KUROU_MOROU   = 7612,  -- You are now ready to have your fortune told by Kurou-Morou.
         ITS_LOCKED                    = 7614,  -- It's locked.
         PAWKRIX_SHOP_DIALOG           = 7662,  -- Hey, we're fixin' up some stew. Gobbie food's good food!
         PACKAGE_DELIVERED             = 7700,  -- You have completed your delivery of the <keyitem>.
