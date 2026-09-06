@@ -31,7 +31,10 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onNonRegionConquestUpdate(zone, updatetype, ranking, isConquestAlliance)
+    if updatetype == xi.conquest.constants.TALLY_END then
+        xi.conquest.toggleRegionalNPCs(zone)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
