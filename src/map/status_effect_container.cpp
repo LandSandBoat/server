@@ -1536,7 +1536,7 @@ auto CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect) -> voi
 
     // Is an effect from a usable item not caught above.
     // Known use cases: Enchantments without an effect source.
-    else
+    else if (name.empty())
     {
         const CItem* Ptem = xi::items::lookup(subType);
         if (Ptem != nullptr && subType > 0)
