@@ -297,11 +297,10 @@ xi.mobSkill =
 
     PETRIFACTIVE_BREATH           =  480,
 
+    POUNCE                        =  482,
     CHARGED_WHISKER               =  483,
-
     BLACK_CLOUD                   =  484,
     BLOOD_SABER                   =  485,
-
     WHIP_TONGUE                   =  486,
     TRANSMOGRIFICATION            =  487, -- Mammet-800
 
