@@ -10,6 +10,10 @@ local entity = {}
 local vendorRegion  = xi.region.FAUREGANDI
 local vendorEvent   = 32756
 
+entity.onTrade = function(player, npc, trade)
+    xi.conquest.vendorOnTrade(player, npc, trade)
+end
+
 entity.onTrigger = function(player, npc)
     xi.conquest.vendorOnTrigger(player, vendorRegion, vendorEvent)
 end

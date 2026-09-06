@@ -18,6 +18,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7073, -- Tallying conquest results...
+        CONQUEST                      = 7241, -- You've earned conquest points!
         FISHING_MESSAGE_OFFSET        = 7592, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7724, -- Mining is possible here if you have <item>.
         NO_FIRES_NO_BOMBS             = 7731, -- This place being for garbage. No fires. No bombs.
