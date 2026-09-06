@@ -1286,6 +1286,8 @@ templates:
         hitbox:          16
       spawn:
         respawn: 300
+      behaviors:
+        aggressive: true
     loot:
       drops:
         - chance: common
@@ -1380,7 +1382,6 @@ templates:
         hitbox:         12
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 300
     loot:
