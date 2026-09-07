@@ -293,7 +293,7 @@ void UpdateConquestGM(ConquestUpdate type)
     else if (type == Conquest_Update)
     {
         message::send(ipc::ConquestEvent{
-            .type = ConquestMessage::M2W_GM_WeeklyUpdate,
+            .type = ConquestMessage::M2W_GM_ConquestUpdate,
         });
     }
     else if (type == Conquest_Tally_End)
