@@ -75,7 +75,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:showText(mob, ID.text.SKY_GOD_OFFSET + 8)
+    if player then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 8)
+    end
 end
 
 entity.onMobDespawn = function(mob)
