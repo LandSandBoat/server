@@ -36,6 +36,7 @@
 #include "lua/luautils.h"
 
 #include "packets/s2c/0x01b_job_info.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x0ac_command_data.h"
@@ -66,11 +67,22 @@ struct MonstrosityInstinctRow
     std::vector<CModifier> mods{};
 };
 
+struct MonstrositySkillRow
+{
+    uint16 monstrositySpeciesCode{};
+    uint16 monstrositySkillId{};
+    uint16 monsterSkillId{};
+    uint8  levelUnlocked{};
+    uint16 tpCost{};
+};
+
 namespace
 {
 
 HashMap<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
 HashMap<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+HashMap<uint16, MonstrositySkillRow>    gMonstrositySkillMap{};
+HashMap<uint8, uint32>                  gMonstrosityExpMap{};
 
 } // namespace
 
@@ -150,6 +162,49 @@ void monstrosity::LoadStaticData()
             }
         }
     }
+
+    {
+        const auto rset = db::preparedStmt("SELECT monstrosity_species_id, dat_skill_id, mob_skill_id, unlock_level, tp_cost FROM monstrosity_tp_skills");
+        if (rset && rset->rowsCount())
+        {
+            while (rset->next())
+            {
+                const auto monstrositySkillId = rset->get<uint16>("dat_skill_id");
+                const auto monsterSkillId     = rset->get<uint16>("mob_skill_id");
+
+                const auto [entry, inserted] = gMonstrositySkillMap.try_emplace(monstrositySkillId, MonstrositySkillRow{
+                                                                                                        .monstrositySpeciesCode = rset->get<uint16>("monstrosity_species_id"),
+                                                                                                        .monstrositySkillId     = monstrositySkillId,
+                                                                                                        .monsterSkillId         = monsterSkillId,
+                                                                                                        .levelUnlocked          = rset->get<uint8>("unlock_level"),
+                                                                                                        .tpCost                 = rset->get<uint16>("tp_cost"),
+                                                                                                    });
+
+                // Species share dat skill ids, so several rows can claim the same key. That is
+                // fine while they agree; if they disagree, row order alone decides what every
+                // species fires, so say so rather than picking one silently.
+                if (!inserted && entry->second.monsterSkillId != monsterSkillId)
+                {
+                    ShowWarningFmt("Monstrosity dat skill {} maps to both mob skill {} and {}; using {}.",
+                                   monstrositySkillId,
+                                   entry->second.monsterSkillId,
+                                   monsterSkillId,
+                                   entry->second.monsterSkillId);
+                }
+            }
+        }
+    }
+
+    {
+        const auto rset = db::preparedStmt("SELECT level, amount FROM monstrosity_exp_table");
+        if (rset && rset->rowsCount())
+        {
+            while (rset->next())
+            {
+                gMonstrosityExpMap[rset->get<uint8>("level")] = rset->get<uint32>("amount");
+            }
+        }
+    }
 }
 
 void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
@@ -207,10 +262,6 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
         data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
         data->SubJob  = gMonstrositySpeciesMap[data->Species].sjob;
         data->Size    = gMonstrositySpeciesMap[data->Species].size;
-
-        // TODO:
-        auto level  = data->levels[data->MonstrosityId];
-        std::ignore = level;
     }
 
     PChar->m_PMonstrosity = std::move(data);
@@ -403,10 +454,10 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 
-    PChar->updatemask |= UPDATE_LOOK;
+    PChar->updatemask |= UPDATE_ALL_CHAR;
 }
 
-void monstrosity::HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data)
+void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data)
 {
     if (PChar->GetMJob() != xi::Job::MON)
     {
@@ -418,10 +469,26 @@ void monstrosity::HandleMonsterSkillActionPacket(const CCharEntity* PChar, const
         return;
     }
 
-    // TODO: Validate that this move is available at this level, for this species, and that
-    // we're capable of using it (state, TP, etc.).
+    const auto skillEntry = gMonstrositySkillMap.find(data.MonsterSkill.SkillId);
+    if (skillEntry == gMonstrositySkillMap.end())
+    {
+        ShowWarningFmt("Monstrosity skill {} not implemented.", data.MonsterSkill.SkillId);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        return;
+    }
 
-    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), data.MonsterSkill.SkillId, std::nullopt);
+    const auto& skill = skillEntry->second;
+
+    // TODO: Validate that this move is available at this level, for this species, and that
+    // we're capable of using it (state, etc.).
+
+    if (PChar->health.tp < skill.tpCost)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        return;
+    }
+
+    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill.monsterSkillId, std::nullopt, skill.tpCost);
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
@@ -498,6 +565,18 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         // If changing "family" of species
         if (PChar->m_PMonstrosity->MonstrosityId != previousId)
         {
+            const auto newMonLvl = PChar->m_PMonstrosity->levels[speciesData.monstrosityId];
+
+            // jobs.job is what the exp curve and the next level up read, so it has to
+            // follow the species along with the cached main/sub level.
+            PChar->jobs.job[static_cast<uint8>(xi::Job::MON)] = newMonLvl;
+            PChar->SetMLevel(newMonLvl);
+            PChar->SetSLevel(newMonLvl);
+
+            // Each species tracks its own exp, so the remainder does not carry over.
+            PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
+            PChar->m_PMonstrosity->CurrentExp                 = 0;
+
             // Unequip all instincts
             for (std::size_t idx = 0; idx < 12; ++idx)
             {
@@ -587,6 +666,34 @@ void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
     // TODO: Validate id and level
     // TODO: If not unlocked, unlock whatever id is
     PChar->m_PMonstrosity->levels[id] = level;
+}
+
+void monstrosity::SetCurrentExp(CCharEntity* PChar, uint32 exp)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    PChar->m_PMonstrosity->CurrentExp = exp;
+}
+
+void monstrosity::HandleLevelUp(CCharEntity* PChar)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    // The MON job level has already been raised and the remainder exp of the level set by this point.
+    const auto monId        = PChar->m_PMonstrosity->MonstrosityId;
+    const auto mLvl         = PChar->GetMLevel();
+    const auto expRemainder = PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)];
+
+    SetLevel(PChar, monId, mLvl);
+    SetCurrentExp(PChar, expRemainder);
+
+    WriteMonstrosityData(PChar);
 }
 
 void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type)
@@ -684,6 +791,16 @@ void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
     PChar->m_PMonstrosity->Belligerency = flag;
 
     WriteMonstrosityData(PChar);
+}
+
+auto monstrosity::GetExpNEXTLevel(uint8 level) -> uint32
+{
+    if (const auto it = gMonstrosityExpMap.find(level); it != gMonstrosityExpMap.end())
+    {
+        return it->second;
+    }
+
+    return 0;
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)

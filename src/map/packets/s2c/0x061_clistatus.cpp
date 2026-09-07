@@ -26,6 +26,7 @@
 #include "entities/char_entity.h"
 #include "items/item_weapon.h"
 #include "modifier.h"
+#include "monstrosity.h"
 #include "roe.h"
 #include "utils/charutils.h"
 
@@ -40,7 +41,15 @@ GP_SERV_COMMAND_CLISTATUS::GP_SERV_COMMAND_CLISTATUS(CCharEntity* PChar)
     packet.statusdata.sjob_no  = PChar->GetSJob();
     packet.statusdata.sjob_lv  = PChar->GetSLevel();
     packet.statusdata.exp_now  = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())];
-    packet.statusdata.exp_next = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+    packet.statusdata.exp_next = [PChar]() -> uint32
+    {
+        if (PChar->m_PMonstrosity)
+        {
+            return monstrosity::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+        }
+
+        return charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+    }();
 
     std::memcpy(packet.statusdata.bp_base, &PChar->stats, sizeof(packet.statusdata.bp_base));
 
