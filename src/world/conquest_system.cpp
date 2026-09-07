@@ -145,6 +145,19 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         rset->get<int>("windurst_influence"),
     };
 
+    // Nation gets a multiplier based on their current ranking in the region. 1st place gets 1x.
+    // For 2nd and 3rd place, if their influence is less than half the 1st place's influence, they get 3x.
+    // Else, 2nd and 3rd place get a 2x multiplier.
+    const int firstPlaceInfluence = std::max({ influences[0], influences[1], influences[2] });
+    if (influences[nation] < firstPlaceInfluence / 2)
+    {
+        points *= 3;
+    }
+    else if (influences[nation] < firstPlaceInfluence)
+    {
+        points *= 2;
+    }
+
     const int total = influences[0] + influences[1] + influences[2];
 
     // Read from main settings. Protect against 0 or too high of number.
