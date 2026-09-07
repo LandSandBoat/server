@@ -1171,27 +1171,22 @@ void SetupJob(CMobEntity* PMob)
             break;
         case xi::Job::PLD:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
         case xi::Job::DRK:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
         case xi::Job::WHM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
         case xi::Job::BRD:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::GaChance, 25);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 60);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
         case xi::Job::RDM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::GaChance, 15);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 40);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
         case xi::Job::SMN:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 70);
@@ -1201,7 +1196,6 @@ void SetupJob(CMobEntity* PMob)
             PMob->defaultMobMod(xi::MobMod::SpecialCool, 9);
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 20);
-            PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
         case xi::Job::BLU:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
