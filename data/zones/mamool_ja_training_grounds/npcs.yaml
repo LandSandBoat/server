@@ -398,8 +398,7 @@ npcs:
       name_vis:     64
       name_prefix:  32
       moving:       7
-    widescan: true
-    content:  toau
+    content: toau
 
   17047811:
     script: NPC[103]

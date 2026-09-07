@@ -10,14 +10,6 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
-        {
-            {
-                { itemId = xi.item.UNAPPRAISED_BOX,  weight = 300 },
-                { itemId = xi.item.UNAPPRAISED_RING, weight = 700 },
-            },
-        },
-
         [xi.assault.mission.PREEMPTIVE_STRIKE] =
         {
             {
@@ -29,24 +21,6 @@ entity.onTrigger = function(player, npc)
 
     local regItem =
     {
-        [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
-        {
-            {
-                { itemId = xi.item.HI_POTION_P2, weight = 900 },
-                { itemId =    0,                 weight = 100 },
-            },
-
-            {
-                { itemId = xi.item.HI_POTION_TANK, weight = 100 },
-                { itemId =     0,                  weight = 900 },
-            },
-
-            {
-                { itemId = xi.item.RERAISER, weight = 530 },
-                { itemId =    0,             weight = 470 },
-            },
-        },
-
         [xi.assault.mission.PREEMPTIVE_STRIKE] =
         {
             {
