@@ -19,8 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.JEUNO) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -28,16 +27,18 @@ quest.sections =
             ['Ghebi_Damomohe'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.TENSHODO_INVITE }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.TENSHODO_INVITE, 1 } }) then
                         return quest:progressEvent(108)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
-                        return quest:progressEvent(107)
-                    else
-                        return quest:event(106)
+                    if player:getFameLevel(xi.fameArea.JEUNO) >= 3 then
+                        if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
+                            return quest:progressEvent(107)
+                        else
+                            return quest:event(106)
+                        end
                     end
                 end,
             },
