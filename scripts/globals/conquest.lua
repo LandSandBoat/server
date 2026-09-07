@@ -11,10 +11,10 @@ xi = xi or {}
 xi.conquest = xi.conquest or {}
 
 -----------------------------------
--- (LOCAL) constants
+-- (GLOBAL) constants
 -----------------------------------
 
-local conquestConstants =
+xi.conquest.constants =
 {
     TALLY_START = 0,
     TALLY_END   = 1,
@@ -1939,14 +1939,6 @@ xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner
 end
 
 xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    -- onConquestUpdate is called for zones in city regions as well
-    -- in such cases, owner and influence is undetermined, so we call a city specific method.
-    local regionId = zone:getRegionID()
-    if regionId > xi.region.TAVNAZIANARCH and regionId < xi.region.DYNAMIS then
-        xi.conquest.onCityConquestUpdate(zone, updatetype, ranking, isConquestAlliance)
-        return
-    end
-
     local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
     local players            = zone:getPlayers()
 
@@ -1954,41 +1946,42 @@ xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, rank
     -- WARNING: This is iterating every player in a zone, be careful not
     --        : to put expensive operations like db reads in here!
     -----------------------------------
-    for _, player in pairs(players) do
-        if updatetype == conquestConstants.TALLY_START then
+    if updatetype == xi.conquest.constants.TALLY_START then
+        for _, player in pairs(players) do
             xi.conquest.sendConquestTallyStartMessage(player, messageBase)
-
-        elseif updatetype == conquestConstants.TALLY_END then
+        end
+    elseif updatetype == xi.conquest.constants.TALLY_END then
+        for _, player in pairs(players) do
             xi.conquest.sendConquestTallyEndMessage(player, messageBase, owner, ranking, isConquestAlliance)
-
-        elseif updatetype == conquestConstants.UPDATE then
+        end
+    elseif updatetype == xi.conquest.constants.UPDATE then
+        for _, player in pairs(players) do
             xi.conquest.sendConquestTallyUpdateMessage(player, messageBase, owner, ranking, influence, isConquestAlliance)
         end
     end
 end
 
-xi.conquest.onCityConquestUpdate = function(zone, updatetype, ranking, isconquestAlliance)
-    local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
-    local players            = zone:getPlayers()
-
-    -----------------------------------
-    -- Once per zone logic
-    -----------------------------------
-
-    -- Triggers regional npc updates for city zones only
-    if updatetype == conquestConstants.TALLY_END then
-        xi.conquest.toggleRegionalNPCs(zone)
+xi.conquest.onNonRegionConquestUpdate = function(zone, updatetype, ranking, isconquestAlliance)
+    if
+        updatetype ~= xi.conquest.constants.TALLY_START and
+        updatetype ~= xi.conquest.constants.TALLY_END
+    then
+        return
     end
+
+    local messageBase = zones[zone:getID()].text.CONQUEST_BASE
+    local players     = zone:getPlayers()
 
     -----------------------------------
     -- WARNING: This is iterating every player in a zone, be careful not
     --        : to put expensive operations like db reads in here!
     -----------------------------------
-    for _, player in pairs(players) do
-        if updatetype == conquestConstants.TALLY_START then
+    if updatetype == xi.conquest.constants.TALLY_START then
+        for _, player in pairs(players) do
             xi.conquest.sendConquestTallyStartMessage(player, messageBase)
-
-        elseif updatetype == conquestConstants.TALLY_END then
+        end
+    elseif updatetype == xi.conquest.constants.TALLY_END then
+        for _, player in pairs(players) do
             xi.conquest.sendCityConquestTallyEndMessage(player, messageBase, ranking, isconquestAlliance)
         end
     end

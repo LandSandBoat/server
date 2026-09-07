@@ -19,7 +19,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onNonRegionConquestUpdate(zone, updatetype, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
