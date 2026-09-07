@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- A Vessel Without a Captain
 -- Promathia 3-2
 -----------------------------------
@@ -35,13 +35,17 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(86)
+                    elseif
+                        missionStatus == 1 and
+                        not player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD)
+                    then
+                        -- Players who do not have Tenshodo Membership get event 9 from the Neptune's Spire Door
+                        -- instead of event 12 from Harnek, since they cannot reach Harnek inside the Tenshodo
+                        return mission:event(9):importantEvent()
                     end
                 end,
             },
 
-            -- TODO: Some of Harnek's events duplicate dialogue but with the Neptune's Spire door
-            -- first opening.  Since Tenshodo membership is not required, there may be alternative
-            -- ways to see these messages. (Event 12 is the NPC version, Event 9 is the Door)
             ['Harnek'] =
             {
                 onTrigger = function(player, npc)

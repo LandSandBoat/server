@@ -39,15 +39,26 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-                        mission:getVar(player, 'Status') == 2 and
-                        (
+                        mission:getVar(player, 'Status') == 2
+                    then
+                        if
                             npcUtil.tradeMatches(trade, { { xi.item.CARMINE_CHIP, 1 } }) or
                             npcUtil.tradeMatches(trade, { { xi.item.CYAN_CHIP, 1 } }) or
                             npcUtil.tradeMatches(trade, { { xi.item.GRAY_CHIP, 1 } })
-                        )
-                    then
-                        -- ToDo Uncaptured CS 51 seems to imply you traded the wrong item
-                        return mission:progressEvent(52, xi.settings.main.GIL_RATE * 500)
+                        then
+                            return mission:progressEvent(52, xi.settings.main.GIL_RATE * 500)
+                        elseif
+                            npcUtil.tradeMatches(trade, { { xi.item.RED_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.BLUE_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.YELLOW_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.GREEN_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.CLEAR_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.PURPLE_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.WHITE_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.BLACK_CHIP, 1 } })
+                        then
+                            return mission:event(51)
+                        end
                     end
                 end,
 
@@ -62,9 +73,20 @@ mission.sections =
                 end,
             },
 
-            -- TODO: Some of Harnek's events duplicate dialogue but with the Neptune's Spire door
-            -- first opening.  Since Tenshodo membership is not required, there may be alternative
-            -- ways to see these messages. (Event 13 is the NPC version, Event 10 is the Door)
+            ['_6tc'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        mission:getVar(player, 'Status') == 0 and
+                        not player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD)
+                    then
+                        -- Players who do not have Tenshodo Membership get event 10 from the Neptune's Spire Door
+                        -- instead of event 13 from Harnek, since they cannot reach Harnek inside the Tenshodo
+                        return mission:event(10):importantEvent()
+                    end
+                end,
+            },
+
             ['Harnek'] =
             {
                 onTrigger = function(player, npc)
