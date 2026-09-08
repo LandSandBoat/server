@@ -956,7 +956,7 @@ spawns:
     level:    [40, 42]
   16900153:
     template: Hippogryph
-    at:       [635.938, -0.406, 522.643, 157]
+    region:   region_48
     level:    [40, 42]
   16900154:
     template: Hippogryph
