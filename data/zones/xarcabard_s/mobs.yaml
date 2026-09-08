@@ -3801,7 +3801,7 @@ spawns:
   17338382:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   se_11
+    at:       [350.930, 0.897, -238.388, 103]
     level:    [75, 76]
   17338383:
     template: Cointeach
@@ -3830,7 +3830,7 @@ spawns:
   17338389:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   se_19
+    at:       [271.605, -1.099, -243.784, 222]
     level:    [75, 76]
   17338390:
     template: Gigas_Flogger
@@ -3839,7 +3839,7 @@ spawns:
   17338391:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   se_19
+    at:       [260.458, -8.592, -204.407, 252]
     level:    [75, 76]
   17338392:
     template: Gigas_Lopper
@@ -3864,7 +3864,7 @@ spawns:
   17338397:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   se_27
+    at:       [252.885, -14.394, -188.036, 196]
     level:    [75, 76]
   17338398:
     template: Cointeach
@@ -3889,7 +3889,7 @@ spawns:
   17338403:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   e_32
+    at:       [343.004, 3.804, -120.953, 139]
     level:    [75, 76]
   17338404:
     template: Cointeach
@@ -3991,7 +3991,7 @@ spawns:
   17338428:
     template: Gigass_Tiger_XS
     script:   Gigass_Tiger
-    region:   s_58
+    at:       [193.059, -17.752, -231.466, 217]
     level:    [75, 76]
   17338429:
     template: Ruly_Imp
@@ -4035,7 +4035,7 @@ spawns:
     level:    [80, 82]
   17338439:
     template: Demons_Elemental
-    region:   c_68
+    at:       [141.721, -19.456, -66.552, 141]
     level:    [75, 78]
   17338440:
     template: Eclipse_Demon
@@ -4071,7 +4071,7 @@ spawns:
     level:    [82, 83]
   17338448:
     template: Demons_Elemental
-    region:   c_79
+    at:       [79.665, -24.285, -168.134, 252]
     level:    [75, 78]
   17338449:
     template: Demon_Magus
@@ -4103,7 +4103,7 @@ spawns:
     level:    [80, 82]
   17338456:
     template: Demons_Elemental
-    region:   c_86
+    at:       [67.456, -19.260, -36.744, 34]
     level:    [75, 78]
   17338457:
     template: Gidim
@@ -4123,7 +4123,7 @@ spawns:
     level:    [80, 82]
   17338461:
     template: Demons_Elemental
-    region:   c_89
+    at:       [9.880, -24.173, -135.875, 175]
     level:    [75, 78]
   17338462:
     template: Prince_Orobas
@@ -4219,7 +4219,7 @@ spawns:
     level:    [82, 83]
   17338485:
     template: Demons_Elemental
-    region:   w_116
+    at:       [-281.061, -20.171, 34.292]
     level:    [75, 78]
   17338486:
     template: Gorgotaur
@@ -4267,7 +4267,7 @@ spawns:
     level:    [80, 82]
   17338497:
     template: Demons_Elemental
-    region:   w_126
+    at:       [-269.111, -19.031, -67.119, 236]
     level:    [75, 78]
   17338498:
     template: Inferno_Demon
@@ -4283,7 +4283,7 @@ spawns:
     level:    [80, 82]
   17338501:
     template: Demons_Elemental
-    region:   w_130
+    at:       [-308.001, -27.172, 75.567, 170]
     level:    [75, 78]
   17338502:
     template: Eclipse_Demon
@@ -4299,7 +4299,7 @@ spawns:
     level:    [80, 82]
   17338505:
     template: Demons_Elemental
-    region:   w_134
+    at:       [-305.047, -26.950, -33.154, 93]
     level:    [75, 78]
   17338506:
     template: Tarbotaur
@@ -4331,7 +4331,7 @@ spawns:
     level:    [80, 82]
   17338513:
     template: Demons_Elemental
-    region:   w_143
+    at:       [-407.620, -44.523, -14.529, 171]
     level:    [75, 78]
   17338514:
     template: Savage_Ruszor

@@ -3242,7 +3242,7 @@ spawns:
     level:    [71, 74]
   17449004:
     template: Yagudos_Elemental
-    region:   c_40
+    at:       [30.378, 0.000, -124.870, 255]
     level:    [68, 68]
   17449005:
     template: Yagudo_Zealot_past
@@ -3328,7 +3328,7 @@ spawns:
     level:    [71, 74]
   17449024:
     template: Yagudos_Elemental
-    region:   e_63
+    at:       [220.359, -6.500, -130.026, 200]
     level:    [68, 68]
   17449025:
     template: Yagudo_Abbot_outdoor_S

@@ -2067,7 +2067,7 @@ spawns:
     level:    [35, 38]
   17231883:
     template: Goblins_Tiger
-    region:   sw_8
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17231884:
     template: Goblin_Furrier
@@ -2103,7 +2103,7 @@ spawns:
     level:    [35, 38]
   17231892:
     template: Goblins_Tiger
-    region:   sw_17
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17231893:
     template: Goblin_Furrier
@@ -2183,7 +2183,7 @@ spawns:
     level:    [40, 43]
   17231912:
     template: Gigass_Tiger
-    region:   s_35
+    at:       [1.000, 1.000, 1.000]
     level:    [33, 35]
   17231913:
     template: Sleet_Gigas
@@ -2215,7 +2215,7 @@ spawns:
     level:    [35, 38]
   17231920:
     template: Goblins_Tiger
-    region:   c_42
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17231921:
     template: Goblin_Furrier
@@ -2243,7 +2243,7 @@ spawns:
     level:    [40, 43]
   17231927:
     template: Gigass_Tiger
-    region:   c_42
+    at:       [1.000, 1.000, 1.000]
     level:    [33, 35]
   17231928:
     template: Sleet_Gigas
@@ -2440,7 +2440,7 @@ spawns:
     level:    [40, 43]
   17231974:
     template: Goblins_Tiger
-    region:   w_98
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17231975:
     template: Goblin_Robber
@@ -2543,7 +2543,7 @@ spawns:
     level:    [35, 38]
   17232000:
     template: Goblins_Tiger
-    region:   c_126
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232001:
     template: Goblin_Furrier
@@ -2615,7 +2615,7 @@ spawns:
     level:    [40, 43]
   17232018:
     template: Goblins_Tiger
-    region:   s_142
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232019:
     template: Goblin_Robber
@@ -2643,7 +2643,7 @@ spawns:
     level:    [40, 43]
   17232025:
     template: Goblins_Tiger
-    region:   s_149
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232026:
     template: Goblin_Robber
@@ -2671,7 +2671,7 @@ spawns:
     level:    [40, 43]
   17232032:
     template: Goblins_Tiger
-    region:   s_156
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232033:
     template: Goblin_Robber
@@ -2699,7 +2699,7 @@ spawns:
     level:    [40, 43]
   17232039:
     template: Gigass_Tiger
-    region:   se_163
+    at:       [1.000, 1.000, 1.000]
     level:    [33, 35]
   17232040:
     template: Sleet_Gigas
@@ -2731,7 +2731,7 @@ spawns:
     level:    [40, 43]
   17232047:
     template: Goblins_Tiger
-    region:   s_170
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232048:
     template: Goblin_Robber
@@ -2791,7 +2791,7 @@ spawns:
     level:    [40, 43]
   17232062:
     template: Gigass_Tiger
-    region:   s_182
+    at:       [1.000, 1.000, 1.000]
     level:    [3, 35]
   17232063:
     template: Sleet_Gigas
@@ -2831,7 +2831,7 @@ spawns:
     level:    [40, 43]
   17232072:
     template: Goblins_Tiger
-    region:   se_194
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232073:
     template: Goblin_Robber
@@ -2871,7 +2871,7 @@ spawns:
     level:    [40, 43]
   17232082:
     template: Goblins_Tiger
-    region:   e_204
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232083:
     template: Goblin_Robber
@@ -2978,7 +2978,7 @@ spawns:
     level:    [40, 43]
   17232109:
     template: Goblins_Tiger
-    region:   ne_235
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232110:
     template: Goblin_Robber
@@ -3022,7 +3022,7 @@ spawns:
     level:    [40, 43]
   17232120:
     template: Goblins_Tiger
-    region:   ne_240
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 35]
   17232121:
     template: Goblin_Robber

@@ -2572,7 +2572,7 @@ spawns:
     level:    [31, 32]
   17227884:
     template: Goblins_Bee
-    region:   sw_106
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17227885:
     template: Goblin_Leecher
@@ -3070,7 +3070,7 @@ spawns:
     level:    [31, 32]
   17227975:
     template: Goblins_Bee
-    region:   c_197
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17227976:
     template: Goblin_Leecher
@@ -3275,7 +3275,7 @@ spawns:
     level:    [31, 32]
   17228012:
     template: Goblins_Bee
-    region:   e_234
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17228013:
     template: Goblin_Leecher
@@ -3727,7 +3727,7 @@ spawns:
     level:    [31, 32]
   17228099:
     template: Goblins_Bee
-    region:   w_321
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17228100:
     template: Goblin_Leecher
@@ -3905,7 +3905,7 @@ spawns:
     level:    [31, 32]
   17228138:
     template: Goblins_Bee
-    region:   w_359
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17228139:
     template: Goblin_Leecher
@@ -4387,7 +4387,7 @@ spawns:
     level:    [31, 32]
   17228225:
     template: Goblins_Bee
-    region:   ne_447
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17228226:
     template: Goblin_Leecher

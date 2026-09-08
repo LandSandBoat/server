@@ -2,7 +2,11 @@
 -- Area: Arrapago Reef
 --  Mob: Lamie Bellydancer
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
+mixins =
+{
+    require('scripts/mixins/weapon_break'),
+    require('scripts/mixins/pet_resummon'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

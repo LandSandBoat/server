@@ -1461,7 +1461,7 @@ spawns:
     level:    [88, 90]
   17457258:
     template: Goblins_Bats
-    region:   n_102
+    at:       [1.000, 1.000, 1.000]
     level:    [83, 84]
   17457259:
     template: Bilesucker
@@ -1493,7 +1493,7 @@ spawns:
     level:    [88, 90]
   17457266:
     template: Goblins_Bats
-    region:   nw_110
+    at:       [1.000, 1.000, 1.000]
     level:    [83, 84]
   17457267:
     template: Bilesucker

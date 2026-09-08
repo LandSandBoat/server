@@ -2143,7 +2143,7 @@ spawns:
     level:    [45, 48]
   17236066:
     template: Gigass_Tiger
-    region:   e_95
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17236067:
     template: Hail_Gigas
@@ -2163,7 +2163,7 @@ spawns:
     level:    [45, 48]
   17236071:
     template: Gigass_Tiger
-    region:   e_95
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17236072:
     template: Hail_Gigas
@@ -2195,7 +2195,7 @@ spawns:
     level:    [45, 48]
   17236079:
     template: Gigass_Tiger
-    region:   e_108
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17236080:
     template: Hail_Gigas
@@ -2215,7 +2215,7 @@ spawns:
     level:    [45, 48]
   17236084:
     template: Gigass_Tiger
-    region:   e_108
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17236085:
     template: Hail_Gigas
@@ -2315,7 +2315,7 @@ spawns:
     level:    [45, 48]
   17236109:
     template: Gigass_Tiger
-    region:   ne_138
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17236110:
     template: Hail_Gigas
@@ -2521,7 +2521,7 @@ spawns:
     level:    [50, 52]
   17236160:
     template: Demons_Elemental
-    region:   nw_189
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 45]
   17236161:
     template: Lost_Soul_war

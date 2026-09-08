@@ -3903,7 +3903,7 @@ spawns:
   16986134:
     template: Fomors_Bats_Wajaom_Woodlands
     script:   Fomors_Bats
-    region:   ne_17
+    at:       [1.000, 1.000, 1.000]
     level:    [58, 60]
   16986135:
     template: Lesser_Colibri
@@ -4035,7 +4035,7 @@ spawns:
   16986165:
     template: Fomors_Bats_Wajaom_Woodlands
     script:   Fomors_Bats
-    region:   n_51
+    at:       [1.000, 1.000, 1.000]
     level:    [58, 60]
   16986166:
     template: Soldier_Pephredo

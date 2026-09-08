@@ -3428,6 +3428,11 @@ end
 function CBaseEntity:spawnPet(arg0)
 end
 
+---@param petId integer
+---@return nil
+function CBaseEntity:setPetStats(petId)
+end
+
 ---@return nil
 function CBaseEntity:despawnPet()
 end

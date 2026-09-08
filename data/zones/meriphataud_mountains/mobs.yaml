@@ -2844,7 +2844,7 @@ spawns:
     level:    [17, 18]
   17264759:
     template: Yagudos_Elemental
-    region:   s_117
+    at:       [1.000, 1.000, 1.000]
     level:    [9, 13]
   17264760:
     template: Yagudo_Theologist
@@ -3020,7 +3020,7 @@ spawns:
     level:    [17, 18]
   17264791:
     template: Yagudos_Elemental
-    region:   s_129
+    at:       [1.000, 1.000, 1.000]
     level:    [9, 13]
   17264792:
     template: Yagudo_Theologist
@@ -3422,7 +3422,7 @@ spawns:
     level:    [17, 18]
   17264876:
     template: Yagudos_Elemental
-    region:   c_234
+    at:       [1.000, 1.000, 1.000]
     level:    [9, 13]
   17264877:
     template: Yagudo_Theologist
@@ -3564,7 +3564,7 @@ spawns:
     level:    [17, 18]
   17264911:
     template: Yagudos_Elemental
-    region:   c_269
+    at:       [1.000, 1.000, 1.000]
     level:    [9, 13]
   17264912:
     template: Yagudo_Theologist
@@ -3686,7 +3686,7 @@ spawns:
     level:    [17, 18]
   17264941:
     template: Yagudos_Elemental
-    region:   e_291
+    at:       [1.000, 1.000, 1.000]
     level:    [9, 13]
   17264942:
     template: Yagudo_Theologist

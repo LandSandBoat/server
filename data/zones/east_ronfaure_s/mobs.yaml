@@ -4360,7 +4360,7 @@ spawns:
     level:    [56, 59]
   17109096:
     template: Goblins_Ladybug
-    region:   ne_103
+    at:       [477.000, -60.000, 403.000, 159]
     level:    [52, 54]
   17109097:
     template: Goblin_Franctireur
@@ -4397,7 +4397,7 @@ spawns:
     level:    [56, 59]
   17109105:
     template: Goblins_Ladybug
-    region:   ne_112
+    at:       [1.000, 1.000, 1.000, 55]
     level:    [52, 54]
   17109106:
     template: Forest_Hare
@@ -4533,7 +4533,7 @@ spawns:
     level:    [56, 59]
   17109138:
     template: Goblins_Ladybug
-    region:   ne_145
+    at:       [1.000, 1.000, 1.000, 88]
     level:    [52, 54]
   17109139:
     template: Wild_Sheep

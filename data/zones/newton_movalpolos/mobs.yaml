@@ -1430,7 +1430,7 @@ spawns:
   16826382:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   nw_13
+    at:       [-182.255, 15.360, 118.395, 193]
     level:    [61, 64]
   16826383:
     template: Bugbear_Trashman
@@ -1493,7 +1493,7 @@ spawns:
   16826397:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   nw_28
+    at:       [-92.519, 15.397, 213.135, 226]
     level:    [61, 64]
   16826398:
     template: Goblin_Lengthman
@@ -1572,7 +1572,7 @@ spawns:
   16826416:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   n_46
+    at:       [119.460, 19.399, 139.744, 128]
     level:    [61, 64]
   16826417:
     template: Bugbear_Trashman
@@ -1668,7 +1668,7 @@ spawns:
   16826439:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   c_69
+    at:       [-27.074, 15.399, 33.131, 142]
     level:    [61, 64]
   16826440:
     template: Bugbear_Watchman
@@ -1693,7 +1693,7 @@ spawns:
   16826445:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   sw_76
+    at:       [-131.022, 11.378, -135.543, 9]
     level:    [61, 64]
   16826446:
     template: Moblin_Workman
@@ -1755,7 +1755,7 @@ spawns:
   16826460:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   s_90
+    at:       [-14.590, 15.492, -97.146, 139]
     level:    [61, 64]
   16826461:
     template: Succubus_Bats_Newton_Movalpolos
@@ -1821,7 +1821,7 @@ spawns:
   16826476:
     template: Goblins_Bat_Tier1_Newton Movalpo
     script:   Goblins_Bat
-    region:   s_107
+    at:       [62.670, 15.397, -169.120, 166]
     level:    [61, 64]
   16826477:
     template: Goblin_Lengthman
@@ -1842,7 +1842,7 @@ spawns:
   16826481:
     template: Goblins_Bat_Tier2_Newton Movalpo
     script:   Goblins_Bat
-    region:   s_112
+    at:       [98.452, 15.552, -150.206, 193]
     level:    [71, 73]
   16826482:
     template: Nightmare_Bats_Newton_Movalpolos
@@ -1893,7 +1893,7 @@ spawns:
   16826493:
     template: Goblins_Bat_Tier2_Newton Movalpo
     script:   Goblins_Bat
-    region:   c_123
+    at:       [-54.167, 13.416, -19.293, 64]
     level:    [71, 73]
   16826494:
     template: Bugbear_Deathsman
@@ -2030,7 +2030,7 @@ spawns:
   16826524:
     template: Goblins_Bat_Tier2_Newton Movalpo
     script:   Goblins_Bat
-    region:   c_154
+    at:       [89.272, 15.394, 19.657, 112]
     level:    [71, 73]
   16826525:
     template: Bugbear_Deathsman
@@ -2051,7 +2051,7 @@ spawns:
   16826529:
     template: Goblins_Bat_Tier2_Newton Movalpo
     script:   Goblins_Bat
-    region:   c_160
+    at:       [172.273, 15.399, 16.448, 195]
     level:    [71, 73]
   16826530:
     template: Moblin_Aidman
@@ -2100,7 +2100,7 @@ spawns:
   16826541:
     template: Goblins_Bat_Tier2_Newton Movalpo
     script:   Goblins_Bat
-    region:   c_172
+    at:       [176.722, 15.486, 31.589, 83]
     level:    [71, 73]
   16826542:
     template: Goblin_Hangman

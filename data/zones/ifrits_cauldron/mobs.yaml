@@ -1360,7 +1360,7 @@ spawns:
     level:    [66, 69]
   17616976:
     template: Goblins_Bats
-    region:   s_78
+    at:       [1.000, 1.000, 1.000, 127]
     level:    [53, 55]
   17616977:
     template: Dodomeki
@@ -1672,7 +1672,7 @@ spawns:
     level:    [66, 69]
   17617054:
     template: Goblins_Bats
-    region:   n_157
+    at:       [-109.376, 3.932, 133.455, 70]
     level:    [53, 55]
   17617055:
     template: Goblin_Alchemist

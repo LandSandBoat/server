@@ -3127,7 +3127,7 @@ spawns:
     level:    [45, 49]
   17244451:
     template: Goblins_Spider
-    region:   w_289
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244452:
     template: Desert_Dhalmel
@@ -3147,7 +3147,7 @@ spawns:
     level:    [45, 49]
   17244456:
     template: Goblins_Spider
-    region:   w_295
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244457:
     template: Goblin_Trader
@@ -3155,7 +3155,7 @@ spawns:
     level:    [45, 49]
   17244458:
     template: Goblins_Spider
-    region:   w_295
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244459:
     template: Desert_Dhalmel
@@ -3188,7 +3188,7 @@ spawns:
     level:    [45, 49]
   17244466:
     template: Goblins_Spider
-    region:   w_304
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244467:
     template: Desert_Dhalmel
@@ -3260,7 +3260,7 @@ spawns:
     level:    [45, 49]
   17244483:
     template: Goblins_Spider
-    region:   w_320
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244484:
     template: Goblin_Poacher
@@ -3326,7 +3326,7 @@ spawns:
     level:    [45, 49]
   17244499:
     template: Goblins_Spider
-    region:   w_338
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17244500:
     template: Goblin_Robber

@@ -2,6 +2,8 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Goblin_Guerrilla
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

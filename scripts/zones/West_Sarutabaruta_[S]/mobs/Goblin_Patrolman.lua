@@ -2,6 +2,8 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Goblin Patrolman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

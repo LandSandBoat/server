@@ -1861,7 +1861,7 @@ spawns:
     level:    [44, 46]
   16887947:
     template: Fomors_Bat
-    region:   sw_136
+    at:       [1.000, 1.000, 1.000, 254]
     level:    [36, 43]
   16887948:
     template: Fomor_Thief
@@ -1920,7 +1920,7 @@ spawns:
     level:    [44, 46]
   16887960:
     template: Fomors_Elemental
-    region:   w_147
+    at:       [1.000, 1.000, 1.000, 126]
     level:    [36, 43]
   16887961:
     template: Fomor_Dark_Knight

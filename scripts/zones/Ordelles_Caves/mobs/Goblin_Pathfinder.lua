@@ -2,6 +2,8 @@
 -- Area: Ordelle's Caves
 --  Mob: Goblin Pathfinder
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

@@ -2121,6 +2121,7 @@ spawns:
     level:    [13, 14]
   17256567:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [8, 9]
   17256568:
     template: Yagudo_Acolyte
@@ -2636,6 +2637,7 @@ spawns:
     level:    [13, 14]
   17256696:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [8, 9]
   17256697:
     template: Yagudo_Acolyte
@@ -3106,6 +3108,7 @@ spawns:
     level:    [13, 14]
   17256811:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [8, 9]
   17256812:
     template: Yagudo_Acolyte
@@ -3349,6 +3352,7 @@ spawns:
     level:    [14, 15]
   17256872:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [8, 9]
   17256873:
     template: Yagudo_Mendicant
@@ -3356,6 +3360,7 @@ spawns:
     level:    [14, 15]
   17256874:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [8, 9]
   17256875:
     template: Yagudo_Piper

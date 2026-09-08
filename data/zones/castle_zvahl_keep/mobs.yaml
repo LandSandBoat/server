@@ -1682,7 +1682,7 @@ spawns:
     level:    [52, 55]
   17440778:
     template: Demons_Elemental
-    region:   e_9
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440779:
     template: Evil_Eye
@@ -2414,7 +2414,7 @@ spawns:
     level:    [52, 55]
   17440961:
     template: Demons_Elemental
-    region:   n_192
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440962:
     template: Demon_Wizard
@@ -2438,7 +2438,7 @@ spawns:
     level:    [52, 55]
   17440967:
     template: Demons_Elemental
-    region:   se_198
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440968:
     template: Demon_Knight
@@ -2466,7 +2466,7 @@ spawns:
     level:    [52, 55]
   17440974:
     template: Demons_Elemental
-    region:   s_205
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440975:
     template: Viscount_Morax
@@ -2542,7 +2542,7 @@ spawns:
     level:    [55, 56]
   17440993:
     template: Demons_Elemental
-    region:   nw_221
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440994:
     template: Demon_Pawn
@@ -2562,7 +2562,7 @@ spawns:
     level:    [55, 56]
   17440998:
     template: Demons_Elemental
-    region:   w_226
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17440999:
     template: Deadly_Iris
@@ -2594,7 +2594,7 @@ spawns:
     level:    [55, 56]
   17441006:
     template: Demons_Elemental
-    region:   nw_237
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17441007:
     template: Demon_Knight
@@ -2606,7 +2606,7 @@ spawns:
     level:    [55, 56]
   17441009:
     template: Demons_Elemental
-    region:   nw_239
+    at:       [1.000, 1.000, 1.000]
     level:    [45, 53]
   17441010:
     template: Demon_Knight

@@ -2,6 +2,8 @@
 -- Area: The Sanctuary of ZiTah
 --  Mob: Goblin Trader
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

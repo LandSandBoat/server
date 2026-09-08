@@ -2,6 +2,8 @@
 -- Area: Xarcabard
 --  Mob: Frost Gigas
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

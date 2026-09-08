@@ -2,6 +2,8 @@
 -- Area: Sauromogue Champaign [S]
 --  Mob: Yagudo Pythoness
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

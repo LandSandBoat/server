@@ -1699,7 +1699,7 @@ spawns:
     level:    [34, 38]
   17395760:
     template: Yagudos_Elemental
-    region:   nw_47
+    at:       [1.000, 1.000, 1.000, 127]
     level:    [25, 29]
   17395761:
     template: Yagudo_Interrogator
@@ -1731,7 +1731,7 @@ spawns:
     level:    [34, 38]
   17395768:
     template: Yagudos_Elemental
-    region:   nw_55
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395769:
     template: Yagudo_Interrogator
@@ -1767,7 +1767,7 @@ spawns:
     level:    [34, 38]
   17395777:
     template: Yagudos_Elemental
-    region:   nw_63
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395778:
     template: Meat_Maggot
@@ -1847,7 +1847,7 @@ spawns:
     level:    [34, 38]
   17395797:
     template: Yagudos_Elemental
-    region:   nw_83
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395798:
     template: Yagudo_Drummer
@@ -1987,7 +1987,7 @@ spawns:
     level:    [34, 38]
   17395832:
     template: Yagudos_Elemental
-    region:   se_118
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395833:
     template: Meat_Maggot
@@ -2075,7 +2075,7 @@ spawns:
     level:    [34, 38]
   17395854:
     template: Yagudos_Elemental
-    region:   se_140
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395855:
     template: Yagudo_Interrogator
@@ -2151,7 +2151,7 @@ spawns:
     level:    [34, 38]
   17395873:
     template: Yagudos_Elemental
-    region:   se_159
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395874:
     template: Yagudo_Interrogator
@@ -2195,7 +2195,7 @@ spawns:
     level:    [34, 38]
   17395884:
     template: Yagudos_Elemental
-    region:   e_170
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395885:
     template: Bulwark_Bat
@@ -2211,7 +2211,7 @@ spawns:
     level:    [34, 38]
   17395888:
     template: Yagudos_Elemental
-    region:   e_174
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395889:
     template: Yagudo_Drummer
@@ -2251,7 +2251,7 @@ spawns:
     level:    [34, 38]
   17395898:
     template: Yagudos_Elemental
-    region:   s_185
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395899:
     template: Yagudo_Interrogator
@@ -2295,7 +2295,7 @@ spawns:
     level:    [34, 38]
   17395909:
     template: Yagudos_Elemental
-    region:   se_195
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395910:
     template: Yagudo_Interrogator
@@ -2323,7 +2323,7 @@ spawns:
     level:    [34, 38]
   17395916:
     template: Yagudos_Elemental
-    region:   s_202
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395917:
     template: Yagudo_Interrogator
@@ -2367,7 +2367,7 @@ spawns:
     level:    [34, 38]
   17395927:
     template: Yagudos_Elemental
-    region:   c_212
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395928:
     template: Yagudo_Herald
@@ -2383,7 +2383,7 @@ spawns:
     level:    [34, 38]
   17395931:
     template: Yagudos_Elemental
-    region:   c_218
+    at:       [-175.735, -15.751, -18.539, 25]
     level:    [25, 29]
   17395932:
     template: Yagudo_Interrogator
@@ -2399,7 +2399,7 @@ spawns:
     level:    [34, 38]
   17395935:
     template: Yagudos_Elemental
-    region:   c_221
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395936:
     template: Yagudo_Interrogator
@@ -2495,7 +2495,7 @@ spawns:
     level:    [34, 38]
   17395959:
     template: Yagudos_Elemental
-    region:   e_245
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395960:
     template: Yagudo_Interrogator
@@ -2511,7 +2511,7 @@ spawns:
     level:    [34, 38]
   17395963:
     template: Yagudos_Elemental
-    region:   c_249
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395964:
     template: Yagudo_Interrogator
@@ -2535,7 +2535,7 @@ spawns:
     level:    [34, 38]
   17395969:
     template: Yagudos_Elemental
-    region:   n_254
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395970:
     template: Yagudo_Herald
@@ -2567,7 +2567,7 @@ spawns:
     level:    [34, 38]
   17395977:
     template: Yagudos_Elemental
-    region:   c_263
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395978:
     template: Yagudo_Interrogator
@@ -2595,7 +2595,7 @@ spawns:
     level:    [34, 38]
   17395984:
     template: Yagudos_Elemental
-    region:   w_272
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395985:
     template: Yagudo_Interrogator
@@ -2615,7 +2615,7 @@ spawns:
     level:    [34, 38]
   17395989:
     template: Yagudos_Elemental
-    region:   n_274
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395990:
     template: Yagudo_Zealot
@@ -2651,7 +2651,7 @@ spawns:
     level:    [34, 38]
   17395998:
     template: Yagudos_Elemental
-    region:   nw_284
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17395999:
     template: Yagudo_Interrogator
@@ -2687,7 +2687,7 @@ spawns:
     level:    [34, 38]
   17396007:
     template: Yagudos_Elemental
-    region:   n_294
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17396008:
     template: Yagudo_Drummer
@@ -2699,7 +2699,7 @@ spawns:
     level:    [34, 38]
   17396010:
     template: Yagudos_Elemental
-    region:   n_296
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17396011:
     template: Yagudo_Interrogator
@@ -2731,7 +2731,7 @@ spawns:
     level:    [34, 38]
   17396018:
     template: Yagudos_Elemental
-    region:   n_303
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17396019:
     template: Bulwark_Bat
@@ -2751,7 +2751,7 @@ spawns:
     level:    [34, 38]
   17396023:
     template: Yagudos_Elemental
-    region:   c_308
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 29]
   17396024:
     template: Yagudo_Interrogator

@@ -4851,7 +4851,7 @@ spawns:
     level:    [80, 81]
   17412225:
     template: Demons_Elemental
-    region:   w_128
+    at:       [-218.514, -52.500, 67.486, 40]
     level:    [75, 78]
   17412226:
     template: Demon_Magus
@@ -4891,7 +4891,7 @@ spawns:
     level:    [80, 81]
   17412235:
     template: Demons_Elemental
-    region:   s_138
+    at:       [-186.733, -52.500, -80.858, 220]
     level:    [75, 78]
   17412236:
     template: Demon_Befouler
@@ -4939,7 +4939,7 @@ spawns:
     level:    [80, 81]
   17412247:
     template: Demons_Elemental
-    region:   sw_150
+    at:       [-366.570, -52.500, -139.556, 49]
     level:    [75, 78]
   17412248:
     template: Desmodus
@@ -4979,7 +4979,7 @@ spawns:
     level:    [80, 81]
   17412257:
     template: Demons_Elemental
-    region:   sw_160
+    at:       [-310.589, -52.500, -45.819, 193]
     level:    [75, 78]
   17412258:
     template: Demon_Justiciar
@@ -4987,7 +4987,7 @@ spawns:
     level:    [80, 81]
   17412259:
     template: Demons_Elemental
-    region:   sw_162
+    at:       [-334.860, -52.500, -40.472, 60]
     level:    [75, 78]
   17412260:
     template: Demon_Befouler
@@ -5029,7 +5029,7 @@ spawns:
     level:    [82, 83]
   17412268:
     template: Demons_Elemental
-    region:   w_168
+    at:       [-437.179, -68.500, 111.389, 35]
     level:    [75, 78]
   17412269:
     template: Berserker_Demon
@@ -5073,7 +5073,7 @@ spawns:
     level:    [82, 83]
   17412278:
     template: Demons_Elemental
-    region:   sw_175
+    at:       [-460.475, -68.500, -13.200, 175]
     level:    [75, 78]
   17412279:
     template: Titanotaur
@@ -5111,7 +5111,7 @@ spawns:
     level:    [82, 83]
   17412287:
     template: Demons_Elemental
-    region:   w_189
+    at:       [-537.667, -72.500, 81.073, 91]
     level:    [75, 78]
   17412288:
     template: Berserker_Demon

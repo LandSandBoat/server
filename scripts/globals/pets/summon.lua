@@ -159,8 +159,26 @@ xi.pets.summon.astralFlowId =
     [xi.pets.summon.type.SIREN         ] = 0,
 }
 
-xi.pets.summon.setupSummon = function(mob, summonTable)
+xi.pets.summon.petId =
+{
+    [xi.pets.summon.type.FIRE_SPIRIT   ] = xi.petId.FIRE_SPIRIT,
+    [xi.pets.summon.type.ICE_SPIRIT    ] = xi.petId.ICE_SPIRIT,
+    [xi.pets.summon.type.AIR_SPIRIT    ] = xi.petId.AIR_SPIRIT,
+    [xi.pets.summon.type.EARTH_SPIRIT  ] = xi.petId.EARTH_SPIRIT,
+    [xi.pets.summon.type.THUNDER_SPIRIT] = xi.petId.THUNDER_SPIRIT,
+    [xi.pets.summon.type.WATER_SPIRIT  ] = xi.petId.WATER_SPIRIT,
+    [xi.pets.summon.type.LIGHT_SPIRIT  ] = xi.petId.LIGHT_SPIRIT,
+    [xi.pets.summon.type.DARK_SPIRIT   ] = xi.petId.DARK_SPIRIT,
+}
+
+xi.pets.summon.setupSummon = function(mob, summonTable, usePetStats)
     local chosenSummon = summonTable[math.randomInt(1, #summonTable)]
+
+    -- Give the pet the same jobs, spells and stats it would get from a spirit spell.
+    if usePetStats then
+        mob:setPetStats(xi.pets.summon.petId[chosenSummon])
+        return
+    end
 
     -- Sets the spell list, model and astral flow skill ID if needed.
     mob:setSpellList(xi.pets.summon.spellListId[chosenSummon])

@@ -1746,7 +1746,7 @@ spawns:
     level:    [51, 54]
   17428506:
     template: Tonberrys_Elemental
-    region:   s_23
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428507:
     template: Tonberry_Stalker
@@ -1787,7 +1787,7 @@ spawns:
     level:    [51, 54]
   17428516:
     template: Tonberrys_Elemental
-    region:   s_33
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428517:
     template: Tonberry_Stalker
@@ -1839,7 +1839,7 @@ spawns:
     level:    [52, 55]
   17428529:
     template: Tonberrys_Elemental
-    region:   s_45
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428530:
     template: Temple_Opo-opo
@@ -1901,7 +1901,7 @@ spawns:
     level:    [52, 55]
   17428544:
     template: Tonberrys_Elemental
-    region:   s_61
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428545:
     template: Tonberry_Stalker
@@ -1937,7 +1937,7 @@ spawns:
     level:    [52, 55]
   17428553:
     template: Tonberrys_Elemental
-    region:   s_68
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428554:
     template: Sozu_Sarberry
@@ -2011,7 +2011,7 @@ spawns:
     level:    [53, 57]
   17428571:
     template: Tonberrys_Elemental
-    region:   s_84
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428572:
     template: Branding_Iron
@@ -2120,7 +2120,7 @@ spawns:
     level:    [54, 58]
   17428597:
     template: Tonberrys_Elemental
-    region:   sw_116
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428598:
     template: Wespe_TU
@@ -2142,7 +2142,7 @@ spawns:
     level:    [54, 58]
   17428602:
     template: Tonberrys_Elemental
-    region:   sw_121
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428603:
     template: Rumble_Crawler
@@ -2170,7 +2170,7 @@ spawns:
     level:    [54, 58]
   17428609:
     template: Tonberrys_Elemental
-    region:   sw_126
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428610:
     template: Wespe_TU
@@ -2308,7 +2308,7 @@ spawns:
     level:    [56, 59]
   17428642:
     template: Tonberrys_Elemental
-    region:   sw_161
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428643:
     template: Tonberry_Harrier
@@ -2316,7 +2316,7 @@ spawns:
     level:    [56, 59]
   17428644:
     template: Tonberrys_Elemental
-    region:   sw_161
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428645:
     template: Tonberry_Cutter
@@ -2368,7 +2368,7 @@ spawns:
     level:    [56, 59]
   17428657:
     template: Tonberrys_Elemental
-    region:   sw_176
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428658:
     template: Tonberry_Cutter
@@ -2380,7 +2380,7 @@ spawns:
     level:    [56, 59]
   17428660:
     template: Tonberrys_Elemental
-    region:   w_179
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428661:
     template: Tonberry_Stalker
@@ -2392,7 +2392,7 @@ spawns:
     level:    [56, 59]
   17428663:
     template: Tonberrys_Elemental
-    region:   sw_182
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428664:
     template: Tonberry_Harrier
@@ -2400,7 +2400,7 @@ spawns:
     level:    [56, 59]
   17428665:
     template: Tonberrys_Elemental
-    region:   sw_182
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428666:
     template: Tonberry_Stalker
@@ -2436,7 +2436,7 @@ spawns:
     level:    [64, 67]
   17428674:
     template: Tonberrys_Elemental
-    region:   w_190
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428675:
     template: Tonberry_Dismayer
@@ -2444,7 +2444,7 @@ spawns:
     level:    [64, 67]
   17428676:
     template: Tonberrys_Elemental
-    region:   w_195
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428677:
     template: Tonberry_Kinq
@@ -2464,7 +2464,7 @@ spawns:
     level:    [56, 59]
   17428681:
     template: Tonberrys_Elemental
-    region:   sw_200
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428682:
     template: Tonberry_Cutter
@@ -2476,7 +2476,7 @@ spawns:
     level:    [56, 59]
   17428684:
     template: Tonberrys_Elemental
-    region:   c_203
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428685:
     template: Tonberry_Stalker
@@ -2508,7 +2508,7 @@ spawns:
     level:    [64, 67]
   17428692:
     template: Tonberrys_Elemental
-    region:   s_206
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428693:
     template: Fire_Elemental
@@ -2536,7 +2536,7 @@ spawns:
     level:    [64, 67]
   17428699:
     template: Tonberrys_Elemental
-    region:   sw_215
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428700:
     template: Fire_Elemental
@@ -2572,7 +2572,7 @@ spawns:
     level:    [67, 69]
   17428708:
     template: Tonberrys_Elemental
-    region:   sw_222
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428709:
     template: Fire_Elemental
@@ -2628,7 +2628,7 @@ spawns:
     level:    [67, 69]
   17428722:
     template: Tonberrys_Elemental
-    region:   w_238
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428723:
     template: Iron_Maiden
@@ -2668,7 +2668,7 @@ spawns:
     level:    [56, 59]
   17428732:
     template: Tonberrys_Elemental
-    region:   e_249
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428733:
     template: Tonberry_Stalker
@@ -2684,7 +2684,7 @@ spawns:
     level:    [56, 59]
   17428736:
     template: Tonberrys_Elemental
-    region:   e_249
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428737:
     template: Flauros
@@ -2712,7 +2712,7 @@ spawns:
     level:    [56, 59]
   17428743:
     template: Tonberrys_Elemental
-    region:   e_262
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428744:
     template: Torama
@@ -2856,7 +2856,7 @@ spawns:
     level:    [61, 64]
   17428779:
     template: Tonberrys_Elemental
-    region:   ne_295
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428780:
     template: Hover_Tank
@@ -2912,7 +2912,7 @@ spawns:
     level:    [61, 64]
   17428793:
     template: Tonberrys_Elemental
-    region:   ne_310
+    at:       [1.000, 1.000, 1.000]
     level:    [43, 55]
   17428794:
     template: Tonberry_Pursuer

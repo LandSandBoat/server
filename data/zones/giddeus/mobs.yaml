@@ -1568,6 +1568,7 @@ spawns:
     level:    [11, 13]
   17371285:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371286:
     template: Yagudo_Piper
@@ -1695,6 +1696,7 @@ spawns:
     level:    [12, 15]
   17371316:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371317:
     template: Yagudo_Piper
@@ -1838,6 +1840,7 @@ spawns:
     level:    [11, 13]
   17371351:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371352:
     template: Yagudo_Piper
@@ -1919,6 +1922,7 @@ spawns:
     level:    [12, 15]
   17371371:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371372:
     template: Yagudo_Piper
@@ -1960,6 +1964,7 @@ spawns:
     level:    [14, 18]
   17371381:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371382:
     template: Yagudo_Piper
@@ -2109,6 +2114,7 @@ spawns:
     level:    [11, 13]
   17371417:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371418:
     template: Yagudo_Piper
@@ -2124,6 +2130,7 @@ spawns:
     level:    [11, 13]
   17371421:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371422:
     template: Yagudo_Piper
@@ -2139,6 +2146,7 @@ spawns:
     level:    [11, 13]
   17371425:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371426:
     template: Yagudo_Piper
@@ -2162,6 +2170,7 @@ spawns:
     level:    [11, 13]
   17371431:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371432:
     template: Yagudo_Piper
@@ -2201,6 +2210,7 @@ spawns:
     level:    [12, 15]
   17371441:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371442:
     template: Yagudo_Piper
@@ -2268,6 +2278,7 @@ spawns:
     level:    [11, 13]
   17371458:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371459:
     template: Yagudo_Piper
@@ -2383,6 +2394,7 @@ spawns:
     level:    [12, 15]
   17371487:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371488:
     template: Yagudo_Piper
@@ -2473,6 +2485,7 @@ spawns:
     level:    [14, 18]
   17371509:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371510:
     template: Yagudo_Piper
@@ -2494,6 +2507,7 @@ spawns:
     level:    [12, 15]
   17371514:
     template: Yagudos_Elemental
+    at:       [1.000, 1.000, 1.000]
     level:    [4, 6]
   17371515:
     template: Hoo_Mjuu_the_Torrent

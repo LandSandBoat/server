@@ -3,6 +3,8 @@
 --  Mob: Demon Warlock
 -- Note: PH for Viscount Morax
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 ---@type TMobEntity

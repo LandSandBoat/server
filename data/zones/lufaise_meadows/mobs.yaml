@@ -3147,7 +3147,7 @@ spawns:
     level:    [41, 44]
   16875716:
     template: Gigass_Sheep
-    region:   w_189
+    at:       [-242.399, -16.261, 122.438, 203]
     level:    [34, 34]
   16875717:
     template: Gigantobugard
@@ -3210,7 +3210,7 @@ spawns:
     level:    [41, 44]
   16875731:
     template: Gigass_Sheep
-    region:   c_205
+    at:       [-115.498, -16.485, 44.576, 196]
     level:    [34, 36]
   16875732:
     template: Fomor_Warrior

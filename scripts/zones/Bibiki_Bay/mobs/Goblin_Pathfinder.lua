@@ -2,6 +2,8 @@
 -- Area: Bibiki Bay
 --   NM: Goblin Pathfinder
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

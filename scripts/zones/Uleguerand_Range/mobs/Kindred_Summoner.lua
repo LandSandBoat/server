@@ -2,6 +2,8 @@
 -- Area: Uleguerand Range
 --   NM: Kindred Summoner
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

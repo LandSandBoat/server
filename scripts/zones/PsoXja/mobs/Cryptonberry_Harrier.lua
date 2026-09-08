@@ -2,6 +2,8 @@
 -- Area: Pso'Xja
 --  Mob: Cryptonberry Harrier
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

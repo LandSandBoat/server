@@ -2,6 +2,8 @@
 -- Area: Pashhow Marshlands [S]
 --  Mob: Goblin Guerrilla
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

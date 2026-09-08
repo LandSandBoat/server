@@ -2,6 +2,8 @@
 -- Area: Beaucedine Glacier [S]
 --   NM: Gigas Flesher
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

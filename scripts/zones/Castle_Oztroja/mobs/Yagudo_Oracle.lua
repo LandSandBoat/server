@@ -3,6 +3,8 @@
 --  Mob: Yagudo Oracle
 -- Note: PH for Quu Domi the Gallant
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 ---@type TMobEntity

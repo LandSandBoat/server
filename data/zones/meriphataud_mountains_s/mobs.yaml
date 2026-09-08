@@ -4077,7 +4077,7 @@ spawns:
     level:    [76, 79]
   17174531:
     template: Yagudos_Elemental
-    region:   e_1
+    at:       [714.613, -32.003, -42.543, 152]
     level:    [71, 73]
   17174532:
     template: Yagudo_Knight_Templar

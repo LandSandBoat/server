@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Keep [S]
 --  Mob: Demon Justiciar
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

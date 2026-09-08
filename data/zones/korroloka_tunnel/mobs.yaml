@@ -2586,7 +2586,7 @@ spawns:
     level:    [35, 37]
   17486170:
     template: Gigass_Spider
-    region:   e_344
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 30]
   17486171:
     template: Thoon
@@ -2650,7 +2650,7 @@ spawns:
     level:    [35, 37]
   17486186:
     template: Gigass_Spider
-    region:   sw_361
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 30]
   17486187:
     template: Korroloka_Leech

@@ -2,6 +2,8 @@
 -- Area: Oldton Movalpolos
 --  Mob: Goblin Tollman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

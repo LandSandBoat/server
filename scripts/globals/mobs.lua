@@ -661,6 +661,45 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
     return 0, 0, 0
 end
 
+local function getPetSpawnPosition(mob, params)
+    if params.requireIdle then
+        if not mob:isAlive() or mob:isEngaged() or mob:isFollowingPath() then
+            return nil
+        end
+
+        -- The owner may have gained hate before it is marked as engaged.
+        for _, entry in ipairs(mob:getEnmityList()) do
+            if entry.active then
+                return nil
+            end
+        end
+    end
+
+    local pos = mob:getPos()
+    if params.requireValidPosition then
+        local zone = mob:getZone()
+        if not zone:isNavigablePoint(pos) then
+            return nil
+        end
+
+        pos = GetFurthestValidPosition(mob, 2, math.pi)
+
+        -- A valid ground point can still be too far from the owner or on another floor.
+        if
+            not pos or
+            mob:checkDistance(pos) > 3 or
+            math.abs(pos.y - mob:getYPos()) > 1 or
+            not zone:isNavigablePoint(pos)
+        then
+            return nil
+        end
+
+        pos.rot = mob:getRotPos()
+    end
+
+    return pos
+end
+
 -----------------------------------
 -- Centralized function for calling one or more mob "pets"
 -- It may be helpful to think of mobs with multiple as having "helpers" rather than explicitly pets
@@ -678,6 +717,9 @@ xi.mob.callPets = function(mob, petIds, params)
     --      params.persistOnDeath: pets persist when owner dies/disengages (default: false)
     --      params.superLink:      mob will assist pet (pet will always assist mob)
     --      params.maxSpawns:      stop if this many pets get spawned
+    --      params.keepSpawnPoint: use the summon position as the pet's home position (default: false)
+    --      params.requireValidPosition: only summon near the owner on ground the pet can stand on (default: false)
+    --      params.requireIdle:    cancel if the owner is dead, has hate, or is moving (default: false)
     --      params.ignoreBusy:     allow pets to get summoned even if owner is busy, interupting any action it was performing
     --      params.noAnimation:    no animation packet from owner when calling pet
     --      params.inactiveTime:   how long for the call pet to take (owner will be inactive during period)
@@ -712,6 +754,14 @@ xi.mob.callPets = function(mob, petIds, params)
     end
 
     if not canSummonPets then
+        return false
+    end
+
+    -- Skip the animation if the requested idle or ground checks fail.
+    if
+        (params.requireIdle or params.requireValidPosition) and
+        not getPetSpawnPosition(mob, params)
+    then
         return false
     end
 
@@ -795,8 +845,13 @@ xi.mob.callPets = function(mob, petIds, params)
             end
         end
 
+        -- Recheck when the animation ends. The owner may have moved or gained hate.
+        local pos = getPetSpawnPosition(mobArg, params)
+        if not pos then
+            return
+        end
+
         local spawnPos     = mobArg:getSpawnPos()
-        local pos          = mobArg:getPos()
         params.maxSpawns   = params.maxSpawns or #petIds
         local spawnedCount = 0
 
@@ -809,13 +864,20 @@ xi.mob.callPets = function(mob, petIds, params)
             then
                 spawnedCount = spawnedCount + 1
                 -- spawn pet around owner
-                local randomX = math.randomInt(1, 100) <= 50 and 2 or -2
-                local randomZ = math.randomInt(1, 100) <= 50 and 2 or -2
+                local randomX = 0
+                local randomZ = 0
+                if not params.requireValidPosition then
+                    randomX = math.randomInt(1, 100) <= 50 and 2 or -2
+                    randomZ = math.randomInt(1, 100) <= 50 and 2 or -2
+                end
 
                 petToSummon:setSpawn(pos.x + randomX, pos.y, pos.z + randomZ, pos.rot)
                 petToSummon:spawn()
-                -- set home to be the owner's home position
-                petToSummon:setSpawn(spawnPos.x + randomX, spawnPos.y, spawnPos.z + randomZ, spawnPos.rot)
+
+                -- By default, the pet's home stays near the owner's original spawn point.
+                if not params.keepSpawnPoint then
+                    petToSummon:setSpawn(spawnPos.x + randomX, spawnPos.y, spawnPos.z + randomZ, spawnPos.rot)
+                end
 
                 local ownerRoamListenerName = fmt('OWNER_ASSIST_{}', petId)
                 if params.superLink then

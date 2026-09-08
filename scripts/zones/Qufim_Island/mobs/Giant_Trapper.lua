@@ -3,6 +3,8 @@
 --  Mob: Giant Trapper
 -- Note: PH for Slippery Sucker
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 ---@type TMobEntity

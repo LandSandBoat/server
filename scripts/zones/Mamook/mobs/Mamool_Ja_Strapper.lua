@@ -2,7 +2,11 @@
 -- Area: Mamook
 --  Mob: Mamool Ja Strapper
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
+mixins =
+{
+    require('scripts/mixins/weapon_break'),
+    require('scripts/mixins/pet_resummon'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
