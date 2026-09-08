@@ -1,6 +1,7 @@
 -----------------------------------
--- Sonic Boom
--- Reduces attack of targets in area of effect.
+-- Subsonics
+-- Family: Big Bat (Single Bat)
+-- Description: Lower defense
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,14 +11,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    if target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
+    if target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else
-        local duration = xi.mobskills.calculateDuration(skill:getTP(), 180, 540)
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 25, 0, 90))
 
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 25, 0, duration))
-
-        return xi.effect.ATTACK_DOWN
+        return xi.effect.DEFENSE_DOWN
     end
 end
 

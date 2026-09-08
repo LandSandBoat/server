@@ -246,8 +246,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 360
-      jobs: [mnk, mnk]
+        delay: 200
+      jobs: [war, war]
       render:
         look:
           type:  standard
@@ -286,6 +286,7 @@ templates:
     attributes:
       combat:
         skill: axe
+        delay: 200
       render:
         look:
           type:  standard
@@ -614,7 +615,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 220
+        delay: 210
       render:
         look:
           type:  standard
@@ -1041,8 +1042,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 360
-      jobs: [mnk, mnk]
+        delay: 200
+      jobs: [war, war]
       render:
         look:
           type:  standard
@@ -1117,6 +1118,7 @@ templates:
     attributes:
       combat:
         skill: axe
+        delay: 200
       render:
         look:
           type:  standard

@@ -1,8 +1,7 @@
 -----------------------------------
--- Flurry of Rage
--- Family: Evil Weapon
--- Description: Deals multiple hits to a single target.
--- Notes: Used by Eldritch Edge, Malefic Fencer, Gladiatorial Weapon and Nightmare Weapon.
+-- Razor Fang
+-- Family: Tiger
+-- Description: Deals 300% base damage to a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,12 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.numHits        = 1
+    params.fTP            = { 4.0, 4.0, 4.0 } -- TODO: See if FTP is variable with TP
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
-    -- TODO: Possible accuracy modifier
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

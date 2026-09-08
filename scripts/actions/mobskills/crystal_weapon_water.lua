@@ -24,8 +24,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
-
-        -- TODO: Dynamis NM: Suttung applies Poison debuff.
     end
 
     return info.damage

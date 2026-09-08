@@ -1,8 +1,7 @@
 -----------------------------------
--- Flurry of Rage
+-- Smite of Rage
 -- Family: Evil Weapon
--- Description: Deals multiple hits to a single target.
--- Notes: Used by Eldritch Edge, Malefic Fencer, Gladiatorial Weapon and Nightmare Weapon.
+-- Description: Deals physical damage to a target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,12 +14,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.numHits        = 1
+    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
-    -- TODO: Possible accuracy modifier
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.canCrit        = true
+    params.criticalChance = { 1.00, 1.00, 1.00 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

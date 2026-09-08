@@ -1,7 +1,7 @@
 -----------------------------------
--- Crystal Weapon (Earth)
--- Family: Golems
--- Description: Invokes the power of a crystal to deal Earth damage to a single target.
+-- Turbulence
+-- Used by Nightmare Gylas in Dynamis.
+-- Description: Deals Wind damage to targets in range.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,11 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 2, 2, 2 }
-    params.element        = xi.element.EARTH
+    params.fTP            = { 3.00, 3.00, 3.00 } -- TODO: Capture fTP scalings.
+    params.element        = xi.element.WIND
     params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.EARTH
-    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.damageType     = xi.damageType.WIND
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

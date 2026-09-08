@@ -1,7 +1,7 @@
 -----------------------------------
--- Crystal Weapon (Earth)
+-- Crystal Rain
 -- Family: Golems
--- Description: Invokes the power of a crystal to deal Earth damage to a single target.
+-- Description: Invokes the power of a crystal to deal unaspected magic damage to targets in an area of effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,11 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 2, 2, 2 }
-    params.element        = xi.element.EARTH
+    params.fTP            = { 8, 8, 8 }
+    params.element        = xi.element.NONE
     params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.EARTH
-    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.damageType     = xi.damageType.ELEMENTAL
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

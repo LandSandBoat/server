@@ -1,8 +1,7 @@
 -----------------------------------
--- Flurry of Rage
--- Family: Evil Weapon
--- Description: Deals multiple hits to a single target.
--- Notes: Used by Eldritch Edge, Malefic Fencer, Gladiatorial Weapon and Nightmare Weapon.
+-- Jet Stream
+-- Used by Nightmare Gylas in Dynamis.
+-- Description: Delivers a threefold attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,8 +17,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.numHits        = 3
     params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+    params.damageType     = xi.damageType.BLUNT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    params.canCrit        = true
+    params.criticalChance = { 1.00, 1.00, 1.00 }
     -- TODO: Possible accuracy modifier
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
