@@ -2227,6 +2227,7 @@ spawns:
     level:    [62, 65]
   16814146:
     template: Goblin_Bandit
+    region:   region_140
     level:    [62, 65]
   16814147:
     template: Maledict_Millstone
@@ -2300,6 +2301,7 @@ spawns:
     level:    [64, 66]
   16814163:
     template: Goblin_Mercenary
+    region:   region_141
     level:    [63, 66]
   16814164:
     template: Goblin_Alchemist
@@ -2521,7 +2523,7 @@ spawns:
     level:    [57, 59]
   16814215:
     template: Cryptonberry_Stalker
-    region:   ne_135
+    region:   region_160
     level:    [59, 60]
   16814216:
     template: Snow_Lizard
@@ -2653,7 +2655,7 @@ spawns:
     level:    [53, 55]
   16814246:
     template: Cryptonberry_Stalker
-    at:       [-316.026, 9.996, -211.527, 64]
+    region:   region_159
     level:    [53, 56]
   16814247:
     template: Treasure_Chest

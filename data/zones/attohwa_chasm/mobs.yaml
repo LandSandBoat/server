@@ -2460,17 +2460,17 @@ spawns:
   16806051:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-66.936, 33.382, -122.975, 186]
+    region:   region_136
     level:    [34, 35]
   16806052:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    region:   s_164
+    region:   region_136
     level:    [34, 35]
   16806053:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    region:   s_164
+    region:   region_136
     level:    [34, 35]
   16806054:
     template: Air_Elemental
@@ -2569,7 +2569,7 @@ spawns:
   16806074:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-66.724, 13.646, -74.311, 198]
+    region:   region_137
     level:    [35, 36]
   16806075:
     template: Hecteyes_AC
@@ -2607,7 +2607,7 @@ spawns:
   16806082:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-88.384, -6.495, 94.739, 2]
+    region:   region_138
     level:    [35, 36]
   16806083:
     template: Flesh_Eater_AC
@@ -2675,7 +2675,7 @@ spawns:
   16806096:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-265.935, 13.564, 248.438, 210]
+    region:   region_139
     level:    [34, 36]
   16806097:
     template: Air_Elemental
@@ -2709,17 +2709,17 @@ spawns:
   16806103:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-265.155, -5.964, 330.605, 68]
+    region:   region_140
     level:    [36, 37]
   16806104:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-246.954, -6.250, 315.241, 52]
+    region:   region_141
     level:    [36, 37]
   16806105:
     template: Flesh_Eater_AC
     script:   Flesh_Eater
-    at:       [-244.945, -6.528, 310.564, 47]
+    region:   region_141
     level:    [36, 37]
   16806106:
     template: Air_Elemental
@@ -2953,7 +2953,7 @@ spawns:
     level:    [66, 67]
   16806162:
     template: Citipati
-    at:       [-327.763, -12.408, 40.206, 101]
+    region:   w_273
     level:    [67, 70]
     attributes:
       spawn:
@@ -3227,7 +3227,7 @@ spawns:
     level:    [70, 72]
   16806227:
     template: Tiamat
-    at:       [-529.519, -5.811, -43.413, 233]
+    region:   w_340
     level:    [95, 95]
   16806228:
     template: Arch_Corse
@@ -3265,7 +3265,7 @@ spawns:
     level:    [75, 76]
   16806236:
     template: Earth_Elemental
-    at:       [-540.483, -13.020, -72.292, 17]
+    region:   w_340
     level:    [75, 76]
   16806237:
     template: Cave_Antlion
