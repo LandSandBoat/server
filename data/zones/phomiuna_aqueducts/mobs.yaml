@@ -1464,6 +1464,7 @@ spawns:
     level:    [41, 44]
   16887856:
     template: Fomors_Wyvern
+    region:   c_47
     level:    [36, 43]
   16887857:
     template: Fomor_Ninja
