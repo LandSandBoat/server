@@ -2529,7 +2529,7 @@ spawns:
     level:    [12, 12]
   17555618:
     template: Stone_Eater
-    region:   e_162
+    region:   e_157
     level:    [5, 7]
   17555619:
     template: Goblin_Ambusher
