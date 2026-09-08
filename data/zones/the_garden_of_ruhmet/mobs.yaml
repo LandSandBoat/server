@@ -1211,7 +1211,7 @@ spawns:
   16920606:
     template: Indoor_aern_bst
     script:   Awaern
-    region:   nw_30
+    region:   region_146
     level:    [81, 83]
   16920607:
     template: Aerns_Euvhi
@@ -1220,7 +1220,7 @@ spawns:
   16920608:
     template: Indoor_aern_war
     script:   Awaern
-    region:   nw_30
+    region:   region_146
     level:    [81, 83]
   16920609:
     template: Indoor_aern_smn
@@ -1403,7 +1403,7 @@ spawns:
     level:    [65, 68]
   16920650:
     template: Awghrah
-    region:   region_129
+    region:   region_148
     level:    [79, 80]
   16920651:
     template: Indoor_aern_rng
@@ -1422,7 +1422,7 @@ spawns:
     level:    [81, 83]
   16920654:
     template: Awghrah
-    at:       [-658.093, -0.549, 460.373, 255]
+    region:   region_144
     level:    [79, 80]
   16920655:
     template: Indoor_aern_sam
@@ -1468,7 +1468,7 @@ spawns:
     level:    [65, 68]
   16920664:
     template: Awghrah
-    region:   n_88
+    region:   region_147
     level:    [79, 80]
   16920665:
     template: Indoor_aern_war
@@ -2124,7 +2124,7 @@ spawns:
     level:    [80, 80]
   16920812:
     template: Awghrah
-    at:       [-352.736, -0.599, -420.682, 187]
+    region:   region_145
     level:    [80, 81]
   16920813:
     template: Awghrah
