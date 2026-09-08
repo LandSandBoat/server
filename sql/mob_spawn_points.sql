@@ -472,12 +472,12 @@ INSERT INTO `mob_spawn_points` VALUES (17035291,0,'Brittle_Rock','Brittle Rock',
 
 -- Lebros Supplies
 -- ids 17035292 to 17035303 (Imperial_Stormer) are NPCs
-INSERT INTO `mob_spawn_points` VALUES (17035304,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-400.341,-9.500,-383.901,79,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17035305,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-311.642,-8.924,-219.153,137,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17035306,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-319.234,-8.581,-177.190,131,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17035307,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-512.092,-10.054,-162.526,235,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17035308,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-555.575,-10.872,-149.561,201,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17035309,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-154.116,-10.063,-279.954,230,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035304,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-400.731,-10,-361.958,79,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035305,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-327.869,-8,-216.926,137,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035306,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-299.877,-10,-137.284,131,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035307,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-516.643,-10,-159.875,235,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035308,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-557.298,-10,-148.560,201,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17035309,0,'Crimson_Eruca','Crimson Eruca',5,77,78,-165.440,-10,-284.793,230,NULL,NULL);
 
 -- Troll Fugitives entrance @ -460 -9.981 340
 INSERT INTO `mob_spawn_points` VALUES (17035310,0,'Broken_Troll_Soldier','Broken Troll Soldier',6,77,80,-367.600,-10.530,230.561,18,NULL,NULL);
