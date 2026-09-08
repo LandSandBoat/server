@@ -2407,7 +2407,7 @@ spawns:
     level:    [3, 4]
   17211486:
     template: Stone_Eater
-    region:   c_94
+    region:   c_89
     level:    [3, 4]
   17211487:
     template: Stone_Eater
@@ -2449,7 +2449,7 @@ spawns:
           end:    4
   17211494:
     template: Ding_Bats
-    region:   c_94
+    region:   c_89
     level:    [2, 3]
     attributes:
       spawn:
@@ -3403,7 +3403,7 @@ spawns:
     level:    [4, 5]
   17211702:
     template: Maighdean_Uaine
-    region:   n_323
+    region:   c_305
     level:    [11, 11]
   17211703:
     template: Vulture
@@ -3451,6 +3451,7 @@ spawns:
     level:    [5, 6]
   17211714:
     template: Maighdean_Uaine
+    region:   n_323
     level:    [11, 11]
   17211715:
     template: Vulture
@@ -3667,11 +3668,11 @@ spawns:
     level:    [8, 10]
   17211768:
     template: Stone_Eater
-    region:   sw_376
+    region:   sw_379
     level:    [5, 6]
   17211769:
     template: Stone_Eater
-    region:   sw_376
+    region:   sw_379
     level:    [5, 6]
   17211770:
     template: Stone_Eater
