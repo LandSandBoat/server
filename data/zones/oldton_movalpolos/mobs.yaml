@@ -1629,12 +1629,12 @@ spawns:
     level:    [31, 33]
   16822301:
     template: Moblin_Chapman
-    region:   n_29
+    region:   region_75
     level:    [33, 35]
   16822302:
     template: Dark_Bats_Oldton_Movalpolos
     script:   Dark_Bats
-    region:   n_29
+    region:   region_75
     level:    [31, 33]
   16822303:
     template: Goblin_Craftsman
@@ -1737,17 +1737,17 @@ spawns:
   16822326:
     template: Stirge_Oldton_Movalpolos
     script:   Stirge
-    region:   sw_54
+    region:   region_76
     level:    [33, 35]
   16822327:
     template: Stirge_Oldton_Movalpolos
     script:   Stirge
-    region:   sw_54
+    region:   region_76
     level:    [33, 35]
   16822328:
     template: Dark_Bats_Oldton_Movalpolos
     script:   Dark_Bats
-    region:   sw_54
+    region:   region_76
     level:    [31, 33]
   16822329:
     template: Stirge_Oldton_Movalpolos
@@ -2119,11 +2119,11 @@ spawns:
   16822417:
     template: Dark_Bats_Oldton_Movalpolos
     script:   Dark_Bats
-    region:   e_145
+    region:   region_77
     level:    [34, 35]
   16822418:
     template: Ancient_Bomb
-    region:   e_145
+    region:   region_77
     level:    [45, 45]
   16822419:
     template: Goblin_Doorman
