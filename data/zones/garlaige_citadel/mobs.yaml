@@ -1697,7 +1697,7 @@ spawns:
   17596463:
     template: Revenant_NGS_EN_GC
     script:   Revenant
-    region:   region_101
+    region:   region_100
     level:    [44, 46]
   17596464:
     template: Borer_Beetle
@@ -2263,7 +2263,7 @@ spawns:
   17596589:
     template: Droma_GC
     script:   Droma
-    at:       [-193.536, -0.012, 139.115, 64]
+    region:   region_117
     level:    [52, 54]
   17596590:
     template: Chamber_Beetle
@@ -2329,19 +2329,19 @@ spawns:
     level:    [52, 54]
   17596605:
     template: Over_Weapon
-    region:   w_219
+    region:   region_119
     level:    [59, 61]
   17596606:
     template: Vault_Weapon
-    region:   w_219
+    region:   region_119
     level:    [60, 62]
   17596607:
     template: Over_Weapon
-    region:   w_219
+    region:   region_120
     level:    [59, 61]
   17596608:
     template: Vault_Weapon
-    region:   w_219
+    region:   region_120
     level:    [60, 62]
   17596609:
     template: Chamber_Beetle
@@ -2703,7 +2703,7 @@ spawns:
     level:    [95, 96]
   17596698:
     template: Kaboom
-    region:   w_282
+    region:   w_280
     level:    [94, 96]
   17596699:
     template: Fortalice_Bats
@@ -2811,7 +2811,7 @@ spawns:
     level:    [62, 64]
   17596725:
     template: Magic_Jug
-    region:   region_116
+    region:   region_118
     level:    [62, 63]
   17596726:
     template: Hellmine
