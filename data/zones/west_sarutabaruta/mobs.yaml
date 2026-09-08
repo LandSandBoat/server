@@ -2105,7 +2105,7 @@ spawns:
     level:    [4, 5]
   17248330:
     template: Crawler
-    region:   e_74
+    region:   e_71
     level:    [4, 5]
   17248331:
     template: Savanna_Rarab
