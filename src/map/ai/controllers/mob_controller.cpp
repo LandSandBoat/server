@@ -176,7 +176,8 @@ auto CMobController::Engage(const EntityId& target) -> bool
     // Optional opening delays so we don't immediately cast / use a special ability on engage.
     if (PMob->getMobMod(xi::MobMod::MagicDelay) != 0)
     {
-        m_nextMagicTime = m_Tick + std::chrono::seconds(PMob->getMobMod(xi::MobMod::MagicCool) + xirand::GetRandomNumber(PMob->getMobMod(xi::MobMod::MagicDelay)));
+        // Fetch remaining magic cooldown and apply magic delay on top of it.
+        m_nextMagicTime = std::max(m_nextMagicTime, m_Tick) + std::chrono::seconds(xirand::GetRandomNumber(PMob->getMobMod(xi::MobMod::MagicDelay)));
     }
 
     if (PMob->getMobMod(xi::MobMod::SpecialDelay) != 0)
@@ -212,9 +213,10 @@ void CMobController::Reset()
     // Wait a little while before roaming again.
     m_LastActionTime = m_Tick - std::chrono::seconds(xirand::GetRandomNumber(PMob->getMobMod(xi::MobMod::RoamCool)));
 
-    // Don't attack player right off of spawn
+    // Don't attack player right off of spawn // Don't cast magic immediately either
     PMob->m_neutral = true;
     m_NeutralTime   = m_Tick;
+    m_nextMagicTime = m_Tick + 1500ms;
 
     setTarget(nullptr);
     ClearFollowTarget();

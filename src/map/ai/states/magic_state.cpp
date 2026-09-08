@@ -264,6 +264,13 @@ auto CMagicState::Update(timer::time_point tick) -> bool
         if (battleutils::IsParalyzed(m_PEntity))
         {
             ActionInterrupts::MagicParalyzed(m_PEntity, m_PSpell.get(), PTarget);
+
+            // If Paralyzed entity is a mob, reset their magic cooldown.
+            if (auto* mobController = dynamic_cast<CMobController*>(m_PEntity->PAI->GetController()))
+            {
+                mobController->OnCastStopped(*this, action);
+            }
+
             Complete();
             return false;
         }
@@ -271,6 +278,13 @@ auto CMagicState::Update(timer::time_point tick) -> bool
         if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
             ActionInterrupts::MagicIntimidated(m_PEntity, m_PSpell.get(), PTarget);
+
+            // If Intimidated entity is a mob, reset their magic cooldown.
+            if (auto* mobController = dynamic_cast<CMobController*>(m_PEntity->PAI->GetController()))
+            {
+                mobController->OnCastStopped(*this, action);
+            }
+
             Complete();
             return false;
         }
