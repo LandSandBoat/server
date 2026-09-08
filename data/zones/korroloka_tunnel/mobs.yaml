@@ -1635,12 +1635,12 @@ spawns:
   17485959:
     template: Seeker_Bats_KT_RP_Qufim
     script:   Seeker_Bats
-    region:   s_135
+    region:   region_139
     level:    [22, 26]
   17485960:
     template: Seeker_Bats_KT_RP_Qufim
     script:   Seeker_Bats
-    region:   s_135
+    region:   region_139
     level:    [22, 26]
   17485961:
     template: Seeker_Bats_KT_RP_Qufim
