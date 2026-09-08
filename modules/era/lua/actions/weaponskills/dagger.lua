@@ -143,25 +143,23 @@ end)
 -- Energy Steal
 -----------------------------------
 m:addOverride('xi.actions.weaponskills.energy_steal.onUseWeaponSkill', function(player, target, wsID, tp, primary, action, taChar)
-    local fTPAnchors     = { 1.00, 1.50, 2.00 }
-    local startingAnchor = math.floor(tp / 1000)
-    local multiplier     = 0
+    local skill      = player:getSkillLevel(xi.skill.DAGGER)
+    local ftp        = xi.weaponskills.fTP(math.min(tp, 3000), { 1.00, 1.50, 2.00 })
+    local mpRestored = math.floor(math.floor(skill * 0.11) * ftp)
 
-    if tp >= 3000 then
-        multiplier = fTPAnchors[3]
-    else
-        local basefTP   = fTPAnchors[startingAnchor]
-        local nextfTP   = fTPAnchors[startingAnchor + 1]
-        local multPerTP = (nextfTP - basefTP) / 1000 * (tp - 1000 * startingAnchor)
-        multiplier = basefTP + multPerTP
-    end
-
-    local skill = player:getSkillLevel(xi.skill.DAGGER)
-    local wsc   = player:getStat(xi.mod.MND) * 1.0
-    local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * multiplier)
     if target:isUndead() then
         mpRestored = 0
     else
+        local maccParams =
+        {
+            magicalElement = xi.element.DARK,
+            skillType      = xi.skill.DAGGER,
+        }
+
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+        mpRestored = math.floor(mpRestored * resistanceRate)
+
         mpRestored = target:delMP(mpRestored)
         mpRestored = player:addMP(mpRestored)
     end
@@ -175,24 +173,24 @@ end)
 -- Energy Drain
 -----------------------------------
 m:addOverride('xi.actions.weaponskills.energy_drain.onUseWeaponSkill', function(player, target, wsID, tp, primary, action, taChar)
-    local fTPAnchors = { 1.25, 1.75, 2.25 }
-    local startingAnchor = math.floor(tp / 1000)
-    local multiplier = 0
-    if tp >= 3000 then
-        multiplier = fTPAnchors[3]
-    else
-        local basefTP   = fTPAnchors[startingAnchor]
-        local nextfTP   = fTPAnchors[startingAnchor + 1]
-        local multPerTP = (nextfTP - basefTP) / 1000 * (tp - 1000 * startingAnchor)
-        multiplier = basefTP + multPerTP
-    end
+    local skill      = player:getSkillLevel(xi.skill.DAGGER)
+    local wsc        = math.floor(player:getStat(xi.mod.MND) * 0.25)
+    local ftp        = xi.weaponskills.fTP(math.min(tp, 3000), { 1.25, 1.75, 2.25 })
+    local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * ftp)
 
-    local skill = player:getSkillLevel(xi.skill.DAGGER)
-    local wsc   = player:getStat(xi.mod.MND) * 1.0
-    local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * multiplier)
     if target:isUndead() then
         mpRestored = 0
     else
+        local maccParams =
+        {
+            magicalElement = xi.element.DARK,
+            skillType      = xi.skill.DAGGER,
+        }
+
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+        mpRestored = math.floor(mpRestored * resistanceRate)
+
         mpRestored = target:delMP(mpRestored)
         mpRestored = player:addMP(mpRestored)
     end
