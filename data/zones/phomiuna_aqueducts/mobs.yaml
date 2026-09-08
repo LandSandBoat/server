@@ -1401,11 +1401,11 @@ spawns:
   16887842:
     template: Hell_Bat_Phomiuna_Aqueducts
     script:   Hell_Bat
-    region:   region_56
+    region:   region_83
     level:    [44, 46]
   16887843:
     template: Diremite
-    region:   region_56
+    region:   region_83
     level:    [42, 44]
   16887844:
     template: Stegotaur_PA
@@ -1438,6 +1438,7 @@ spawns:
     level:    [42, 44]
   16887850:
     template: Fomor_Beastmaster
+    region:   c_47
     level:    [41, 44]
   16887851:
     template: Fomors_Bat
@@ -1463,7 +1464,6 @@ spawns:
     level:    [41, 44]
   16887856:
     template: Fomors_Wyvern
-    region:   c_47
     level:    [36, 43]
   16887857:
     template: Fomor_Ninja
@@ -1486,16 +1486,16 @@ spawns:
   16887861:
     template: Makara_PA
     script:   Makara
-    region:   e_53
+    region:   region_84
     level:    [45, 47]
   16887862:
     template: Makara_PA
     script:   Makara
-    region:   e_53
+    region:   region_84
     level:    [45, 47]
   16887863:
     template: Oil_Spill
-    region:   e_53
+    region:   region_84
     level:    [44, 47]
   16887864:
     template: Fomor_Warrior
@@ -1614,17 +1614,17 @@ spawns:
   16887890:
     template: Stegotaur_PA
     script:   Stegotaur
-    region:   w_82
+    region:   region_82
     level:    [44, 46]
   16887891:
     template: Canal_Bats_PA
     script:   Canal_Bats
-    region:   w_82
+    region:   region_82
     level:    [44, 46]
   16887892:
     template: Makara_PA
     script:   Makara
-    region:   w_82
+    region:   region_82
     level:    [45, 47]
   16887893:
     template: Stegotaur_PA
@@ -1810,11 +1810,11 @@ spawns:
   16887935:
     template: Stegotaur_PA
     script:   Stegotaur
-    region:   w_127
+    region:   region_81
     level:    [44, 46]
   16887936:
     template: Diremite
-    region:   w_127
+    region:   region_81
     level:    [44, 46]
   16887937:
     template: Stegotaur_PA
@@ -1832,7 +1832,7 @@ spawns:
   16887940:
     template: Stegotaur_PA
     script:   Stegotaur
-    at:       [-99.214, -0.589, 7.282, 64]
+    region:   region_80
     level:    [44, 46]
   16887941:
     template: Dark_Elemental
