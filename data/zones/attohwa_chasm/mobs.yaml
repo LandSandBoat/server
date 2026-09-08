@@ -3227,7 +3227,7 @@ spawns:
     level:    [70, 72]
   16806227:
     template: Tiamat
-    region:   w_340
+    region:   region_142
     level:    [95, 95]
   16806228:
     template: Arch_Corse
