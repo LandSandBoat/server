@@ -818,7 +818,6 @@ values:
   sub_dmg_rating:      367 # adds damage rating to off hand weapon
   ranged_dmg_rating:   376 # adds damage rating to ranged weapon
   main_dmg_rank:       377 # adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-  sub_dmg_rank:        378 # adds weapon rank to sub weapon
   ranged_dmg_rank:     379 # adds weapon rank to ranged weapon
   regain:              368 # auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
   regain_down:         406 # plague, reduce tp
@@ -1276,4 +1275,4 @@ values:
 
   # The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
   # 570 through 825 used by WS DMG mods these are not spares.
-  # SPARE IDs: 1215 and onward
+  # SPARE IDs: 1215 and onward, 378

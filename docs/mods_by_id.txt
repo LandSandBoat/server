@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -340,7 +340,6 @@
     CURE_POTENCY_RCVD            = 375, // % potency of received cure | healer's roll, some items have this
     RANGED_DMG_RATING            = 376, // adds damage rating to ranged weapon
     MAIN_DMG_RANK                = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK                 = 378, // adds weapon rank to sub weapon
     RANGED_DMG_RANK              = 379, // adds weapon rank to ranged weapon
     DELAYP                       = 380, // delay addition percent (does not affect tp gain)
     RANGED_DELAYP                = 381, // ranged delay addition percent (does not affect tp gain)

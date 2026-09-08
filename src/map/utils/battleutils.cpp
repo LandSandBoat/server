@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -6030,7 +6030,7 @@ int32 GetMeritValue(CBattleEntity* PEntity, xi::Merit merit)
     return 0;
 }
 
-int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, xi::Mod mod)
+int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, xi::Mod mod, bool isDelevel /* = false */)
 {
     if (!PEntity || !PItem)
     {
@@ -6038,7 +6038,11 @@ int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, xi::M
         return 0;
     }
 
-    if (PEntity->GetMLevel() < PItem->getReqLvl())
+    // When a player delevels - their level has already been decremented by the time we perform this check
+    // To avoid not removing all of the stats given upon equip, we run this check with the previous level.
+    int playerLevel = isDelevel ? PEntity->GetMLevel() + 1 : PEntity->GetMLevel();
+
+    if (playerLevel < PItem->getReqLvl())
     {
         auto modAmount = PItem->getModifier(mod);
         switch (mod)

@@ -260,7 +260,7 @@ int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
 bool            RemoveAmmo(CCharEntity*, int quantity = 1);
 int32           GetMeritValue(CBattleEntity*, xi::Merit);
 
-int32 GetScaledItemModifier(CBattleEntity*, CItemEquipment*, xi::Mod);
+int32 GetScaledItemModifier(CBattleEntity*, CItemEquipment*, xi::Mod, bool isDelevel = false);
 auto  GetSpikesDamageType(ActionReactKind spikesType) -> xi::DamageType;
 auto  GetEnspellDamageType(ENSPELL enspellType) -> xi::DamageType;
 auto  GetRuneEnhancementDamageType(xi::StatusEffect runeEffect) -> xi::DamageType;

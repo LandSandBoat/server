@@ -252,10 +252,10 @@ public:
     void setModifier(xi::Mod type, int16 amount);
     void delModifier(xi::Mod type, int16 amount);
     void addModifiers(std::vector<CModifier>* modList);
-    void addEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid);
+    void addEquipModifiers(CItemEquipment* PItem);
     void setModifiers(std::vector<CModifier>* modList);
     void delModifiers(std::vector<CModifier>* modList);
-    void delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid);
+    void delEquipModifiers(CItemEquipment* PItem, bool isDelevel = false);
     void saveModifiers();    // save current state of modifiers
     void restoreModifiers(); // restore to saved state
     void savePetModifiers(); // saves dynamic pet modifiers

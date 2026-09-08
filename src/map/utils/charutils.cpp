@@ -1747,7 +1747,7 @@ void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity,
  *                                                                       *
  ************************************************************************/
 
-void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
+void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate, bool isDelevel /* = false */)
 {
     if (PChar == nullptr)
     {
@@ -1837,7 +1837,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
             }
             PChar->m_dualWield = false;
         }
-        PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
+        PChar->delEquipModifiers((CItemEquipment*)PItem, isDelevel);
         PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
         PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
@@ -3029,7 +3029,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
                     }
                 }
 
-                PChar->addEquipModifiers(&PItem->modList, PItem->getReqLvl(), equipSlotID);
+                PChar->addEquipModifiers(PItem);
                 PChar->PLatentEffectContainer->AddLatentEffects(PItem->latentList, PItem->getReqLvl(), equipSlotID);
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
                 PChar->addPetModifiers(&PItem->petModList);
@@ -3086,7 +3086,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
  *                                                                       *
  ************************************************************************/
 
-void CheckValidEquipment(CCharEntity* PChar)
+void CheckValidEquipment(CCharEntity* PChar, bool isDelevel /* = false */)
 {
     CItemEquipment* PItem = nullptr;
 
@@ -3100,7 +3100,7 @@ void CheckValidEquipment(CCharEntity* PChar)
 
         if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]))
         {
-            UnequipItem(PChar, slotID);
+            UnequipItem(PChar, slotID, Recalculate::Yes, isDelevel);
             continue;
         }
 
@@ -3109,7 +3109,7 @@ void CheckValidEquipment(CCharEntity* PChar)
             // Unequip if no main weapon or a non-grip subslot without DW
             if (!PChar->getEquip(SLOT_MAIN) || (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) && !(((CItemWeapon*)PItem)->getSkillType() == xi::SkillType::None)))
             {
-                UnequipItem(PChar, SLOT_SUB);
+                UnequipItem(PChar, SLOT_SUB, Recalculate::Yes, isDelevel);
                 continue;
             }
         }
@@ -3119,7 +3119,7 @@ void CheckValidEquipment(CCharEntity* PChar)
             continue;
         }
 
-        UnequipItem(PChar, slotID);
+        UnequipItem(PChar, slotID, Recalculate::Yes, isDelevel);
     }
     // Unarmed H2H weapon check
     if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) || PChar->m_Weapons[SLOT_MAIN] == xi::items::unarmedH2H())
@@ -4878,7 +4878,7 @@ void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedX
             jobpointutils::RefreshGiftMods(PChar);
             BuildingCharSkillsTable(PChar);
             CalculateStats(PChar);
-            CheckValidEquipment(PChar);
+            CheckValidEquipment(PChar, true);
 
             BuildingCharAbilityTable(PChar);
             BuildingCharTraitsTable(PChar);
@@ -6387,7 +6387,7 @@ void RemoveAllEquipMods(CCharEntity* PChar)
         CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
         if (PItem)
         {
-            PChar->delEquipModifiers(&PItem->modList, PItem->getReqLvl(), slotID);
+            PChar->delEquipModifiers(PItem);
             if (PItem->getReqLvl() <= PChar->GetMLevel())
             {
                 PChar->PLatentEffectContainer->DelLatentEffects(PItem->getReqLvl(), slotID);
@@ -6404,7 +6404,7 @@ void ApplyAllEquipMods(CCharEntity* PChar)
         CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
         if (PItem)
         {
-            PChar->addEquipModifiers(&PItem->modList, PItem->getReqLvl(), slotID);
+            PChar->addEquipModifiers(PItem);
             if (PItem->getReqLvl() <= PChar->GetMLevel())
             {
                 PChar->PLatentEffectContainer->AddLatentEffects(PItem->latentList, PItem->getReqLvl(), slotID);
