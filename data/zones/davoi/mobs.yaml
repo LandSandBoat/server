@@ -2166,7 +2166,7 @@ spawns:
           end:    6
   17387633:
     template: Wolf_Bat
-    region:   c_113
+    region:   n_108
     level:    [25, 28]
     attributes:
       spawn:
@@ -3470,15 +3470,15 @@ spawns:
     level:    [64, 68]
   17387935:
     template: Orcish_Farkiller
-    region:   c_415
+    region:   region_79
     level:    [62, 66]
   17387936:
     template: Orcish_Farkiller
-    region:   c_415
+    region:   region_79
     level:    [62, 66]
   17387937:
     template: Orcish_Dreadnought
-    region:   c_415
+    region:   region_79
     level:    [63, 67]
   17387938:
     template: Orcish_Dreadnought
