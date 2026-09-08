@@ -1762,7 +1762,7 @@ spawns:
     level:    [9, 10]
   17219606:
     template: Goblin_Butcher
-    at:       [-101.000, -57.000, -660.000, 127]
+    region:   region_42
     level:    [12, 13]
   17219607:
     template: Goblin_Thug
@@ -1774,7 +1774,7 @@ spawns:
     level:    [9, 10]
   17219609:
     template: Goblin_Butcher
-    at:       [-97.796, -57.493, -660.834, 127]
+    region:   region_42
     level:    [12, 13]
   17219610:
     template: Mist_Lizard
@@ -2076,7 +2076,7 @@ spawns:
     level:    [18, 20]
   17219681:
     template: Mist_Lizard
-    at:       [287.124, 23.877, 310.817, 127]
+    region:   e_98
     level:    [11, 12]
   17219682:
     template: Mist_Lizard
@@ -2257,7 +2257,7 @@ spawns:
     level:    [8, 9]
   17219723:
     template: Veteran_Quadav
-    at:       [435.249, 31.537, 322.498, 101]
+    region:   e_98
     level:    [13, 14]
   17219724:
     template: Greater_Quadav
@@ -2273,11 +2273,11 @@ spawns:
     level:    [9, 10]
   17219727:
     template: Amber_Quadav
-    at:       [446.000, 32.000, 563.000, 59]
+    region:   ne_140
     level:    [9, 10]
   17219728:
     template: Skeleton_Warrior
-    at:       [449.625, 32.242, 287.894, 127]
+    region:   e_98
     level:    [10, 12]
   17219729:
     template: Skeleton_Warrior
@@ -2289,11 +2289,11 @@ spawns:
     level:    [11, 13]
   17219731:
     template: Grenade
-    at:       [391.101, 32.505, 538.061, 127]
+    region:   ne_140
     level:    [15, 16]
   17219732:
     template: Veteran_Quadav
-    at:       [379.400, 32.014, 537.655, 42]
+    region:   region_43
     level:    [14, 15]
   17219733:
     template: Amethyst_Quadav
@@ -2301,7 +2301,7 @@ spawns:
     level:    [14, 15]
   17219734:
     template: Amber_Quadav
-    at:       [385.000, 31.000, 541.000, 127]
+    region:   region_43
     level:    [9, 10]
   17219735:
     template: Rock_Eater
@@ -2465,7 +2465,7 @@ spawns:
     level:    [11, 13]
   17219774:
     template: Earth_Elemental
-    at:       [-227.102, -19.883, -177.863, 31]
+    region:   sw_182
     level:    [18, 20]
   17219775:
     template: Mist_Lizard
@@ -2551,7 +2551,7 @@ spawns:
     level:    [12, 13]
   17219795:
     template: Stray_Mary
-    region:   w_235
+    region:   w_204
     level:    [19, 20]
   17219796:
     template: Strolling_Sapling_LTP_KH
@@ -2661,7 +2661,7 @@ spawns:
     level:    [8, 10]
   17219821:
     template: Goblin_Ambusher
-    at:       [-491.389, 5.425, -41.113, 127]
+    region:   w_235
     level:    [12, 16]
   17219822:
     template: Goblin_Ambusher
@@ -2669,7 +2669,7 @@ spawns:
     level:    [12, 16]
   17219823:
     template: Goblin_Weaver
-    at:       [-362.332, -6.352, -105.161, 127]
+    region:   w_235
     level:    [9, 10]
   17219824:
     template: Goblin_Weaver
@@ -2681,7 +2681,7 @@ spawns:
     level:    [12, 13]
   17219826:
     template: Goblin_Tinkerer
-    at:       [-267.360, -7.594, -86.026, 127]
+    region:   w_235
     level:    [9, 10]
   17219827:
     template: Goblin_Tinkerer
@@ -2705,31 +2705,31 @@ spawns:
     level:    [11, 13]
   17219832:
     template: Grenade
-    at:       [-408.726, -7.683, -111.981, 127]
+    region:   w_235
     level:    [15, 17]
   17219833:
     template: Goblin_Weaver
-    at:       [-416.207, -2.123, -138.556, 43]
+    region:   region_44
     level:    [12, 13]
   17219834:
     template: Goblin_Tinkerer
-    at:       [-401.835, -0.770, -162.697, 35]
+    region:   region_44
     level:    [12, 13]
   17219835:
     template: Goblin_Butcher
-    at:       [-419.927, -1.628, -137.729, 127]
+    region:   region_44
     level:    [8, 9]
   17219836:
     template: Goblin_Thug
-    at:       [-516.770, 0.199, 48.224, 127]
+    region:   region_45
     level:    [8, 9]
   17219837:
     template: Goblin_Ambusher
-    at:       [-457.036, 14.437, 22.029, 27]
+    region:   region_45
     level:    [12, 16]
   17219838:
     template: Goblin_Weaver
-    at:       [-457.000, 14.000, 15.000, 94]
+    region:   region_45
     level:    [11, 11]
   17219839:
     template: Huge_Wasp
@@ -2771,11 +2771,11 @@ spawns:
     level:    [9, 10]
   17219848:
     template: Mist_Lizard
-    at:       [37.776, 25.694, 100.565, 127]
+    region:   c_267
     level:    [11, 12]
   17219849:
     template: Mist_Lizard
-    at:       [-124.106, 3.105, 96.303, 127]
+    region:   c_267
     level:    [11, 12]
   17219850:
     template: Mist_Lizard
@@ -2795,11 +2795,11 @@ spawns:
     level:    [11, 12]
   17219854:
     template: Mad_Sheep
-    at:       [-117.470, 17.649, 179.461, 127]
+    region:   c_267
     level:    [12, 13]
   17219855:
     template: Mad_Sheep
-    at:       [-23.760, 24.094, 143.500, 115]
+    region:   c_267
     level:    [12, 13]
   17219856:
     template: Strolling_Sapling_LTP_KH
@@ -2946,47 +2946,47 @@ spawns:
     level:    [55, 56]
   17219888:
     template: Young_Quadav
-    at:       [-58.290, 19.993, 170.944, 127]
+    region:   region_40
     level:    [9, 10]
   17219889:
     template: Veteran_Quadav
-    at:       [31.138, 31.181, 279.142, 106]
+    region:   region_40
     level:    [13, 14]
   17219890:
     template: Greater_Quadav
-    at:       [-48.357, 22.944, 157.082, 127]
+    region:   region_40
     level:    [13, 14]
   17219891:
     template: Onyx_Quadav
-    at:       [-43.285, 23.709, 129.506, 127]
+    region:   region_40
     level:    [13, 14]
   17219892:
     template: Amethyst_Quadav
-    at:       [120.910, 25.134, 333.690, 127]
+    region:   region_40
     level:    [9, 10]
   17219893:
     template: Amber_Quadav
-    at:       [16.430, 33.668, 317.535, 6]
+    region:   region_40
     level:    [9, 10]
   17219894:
     template: Skeleton_Warrior
-    at:       [-37.801, 31.560, 365.201, 127]
+    region:   region_40
     level:    [10, 12]
   17219895:
     template: Skeleton_Sorcerer
-    at:       [-43.670, 15.382, 228.732, 127]
+    region:   region_40
     level:    [11, 13]
   17219896:
     template: Ghost
-    at:       [145.403, 23.314, 328.634, 127]
+    region:   region_40
     level:    [15, 16]
   17219897:
     template: Grenade
-    at:       [91.756, 31.798, 375.136, 68]
+    region:   region_40
     level:    [15, 16]
   17219898:
     template: Earth_Elemental
-    at:       [153.706, 25.947, 380.316, 92]
+    region:   region_40
     level:    [18, 20]
   17219899:
     template: Huge_Wasp
@@ -3094,57 +3094,57 @@ spawns:
     level:    [10, 11]
   17219924:
     template: Ghost
-    at:       [-710.913, 2.309, 101.913, 119]
+    region:   region_46
     level:    [15, 16]
   17219925:
     template: Earth_Elemental
-    at:       [-700.529, 2.963, 104.203, 104]
+    region:   region_46
     level:    [18, 20]
   17219926:
     template: Huge_Wasp
-    region:   nw_342
+    region:   region_48
     level:    [10, 11]
   17219927:
     template: Huge_Wasp
-    region:   nw_342
+    region:   region_48
     level:    [10, 11]
   17219928:
     template: Mad_Sheep
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219929:
     template: Mad_Sheep
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219930:
     template: Mad_Sheep
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219931:
     template: Mad_Sheep
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219932:
     template: Mad_Sheep
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219933:
     template: Stray_Mary
-    region:   w_364
+    region:   w_315
     level:    [19, 20]
   17219934:
     template: Strolling_Sapling_LTP_KH
     script:   Strolling_Sapling
-    region:   nw_342
+    region:   region_48
     level:    [10, 11]
   17219935:
     template: Strolling_Sapling_LTP_KH
     script:   Strolling_Sapling
-    region:   nw_342
+    region:   region_48
     level:    [10, 11]
   17219936:
     template: Wolf_Zombie
-    region:   nw_342
+    region:   region_48
     level:    [12, 13]
   17219937:
     template: Huge_Wasp
@@ -3186,11 +3186,11 @@ spawns:
     level:    [12, 13]
   17219946:
     template: Goblin_Tinkerer
-    at:       [-111.048, 11.646, 270.473, 49]
+    region:   region_47
     level:    [12, 13]
   17219947:
     template: Goblin_Thug
-    region:   nw_342
+    region:   w_364
     level:    [9, 10]
   17219948:
     template: Goblin_Ambusher
@@ -3222,7 +3222,7 @@ spawns:
     level:    [13, 14]
   17219955:
     template: Skeleton_Warrior
-    region:   nw_342
+    region:   w_364
     level:    [10, 12]
   17219956:
     template: Skeleton_Sorcerer
@@ -3230,7 +3230,7 @@ spawns:
     level:    [11, 13]
   17219957:
     template: Thunder_Elemental
-    region:   nw_342
+    region:   w_364
     level:    [18, 20]
   17219958:
     template: Mist_Lizard
@@ -3372,7 +3372,7 @@ spawns:
     level:    [13, 14]
   17219991:
     template: Veteran_Quadav
-    at:       [-167.325, 63.785, 589.155, 127]
+    region:   n_404
     level:    [14, 15]
   17219992:
     template: Greater_Quadav
@@ -3380,7 +3380,7 @@ spawns:
     level:    [14, 15]
   17219993:
     template: Onyx_Quadav
-    at:       [-103.799, 50.135, 458.197, 127]
+    region:   n_404
     level:    [14, 15]
   17219994:
     template: Skeleton_Warrior
@@ -3388,7 +3388,7 @@ spawns:
     level:    [10, 12]
   17219995:
     template: Skeleton_Sorcerer
-    at:       [-176.029, 53.167, 463.645, 101]
+    region:   n_404
     level:    [11, 13]
   17219996:
     template: Thunder_Elemental
