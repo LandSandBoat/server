@@ -1,8 +1,7 @@
 -----------------------------------
--- Flurry of Rage
--- Family: Evil Weapon
--- Description: Deals multiple hits to a single target.
--- Notes: Used by Eldritch Edge, Malefic Fencer, Gladiatorial Weapon and Nightmare Weapon.
+-- Grand Slam
+-- Family: Gigas
+-- Description: Deals physical damage in an area around the mob.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,12 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.numHits        = 1
+    params.fTP            = { 1.5, 1.5, 1.5 }
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
+    params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
-    -- TODO: Possible accuracy modifier
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

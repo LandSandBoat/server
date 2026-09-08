@@ -12,4 +12,17 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('dynamis_currency', 1452)
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local skillList =
+    {
+        xi.mobSkill.SMITE_OF_FURY_2,
+        xi.mobSkill.SMITE_OF_RAGE_2,
+        xi.mobSkill.WHIRL_OF_RAGE_2,
+        xi.mobSkill.FLURRY_OF_RAGE_2,
+        xi.mobSkill.WHISPERS_OF_IRE_2,
+    }
+
+    return skillList[math.randomInt(1, #skillList)]
+end
+
 return entity

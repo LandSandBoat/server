@@ -1,7 +1,7 @@
 -----------------------------------
--- Crystal Weapon (Earth)
--- Family: Golems
--- Description: Invokes the power of a crystal to deal Earth damage to a single target.
+-- Freeze Rush
+-- Family: Bomb (Snoll)
+-- Description: Deals Ice damage to a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,10 +14,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 2, 2, 2 }
-    params.element        = xi.element.EARTH
+    params.fTP            = { 4.0, 4.0, 4.0 } -- TODO: Capture fTP scaling @ 2k/3k
+    params.element        = xi.element.ICE
     params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.EARTH
+    params.damageType     = xi.damageType.ICE
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)

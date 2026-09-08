@@ -1,8 +1,7 @@
 -----------------------------------
--- Flurry of Rage
--- Family: Evil Weapon
--- Description: Deals multiple hits to a single target.
--- Notes: Used by Eldritch Edge, Malefic Fencer, Gladiatorial Weapon and Nightmare Weapon.
+-- Ripper Fang
+-- Family: Raptor
+-- Description: Deals physical damage to a target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,13 +13,13 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 1.0, 1.0, 1.0 }
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
-    -- TODO: Possible accuracy modifier
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 1
+    params.fTP              = { 1.5, 1.5, 1.5 }
+    params.attackType       = xi.attackType.PHYSICAL
+    params.damageType       = xi.damageType.BLUNT
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.attackMultiplier = { 0.5, 1.5, 2.5 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
