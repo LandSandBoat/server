@@ -1302,7 +1302,7 @@ spawns:
   16891911:
     template: Stegotaur_S
     script:   Stegotaur
-    at:       [-139.772, -8.647, 86.092, 63]
+    region:   region_40
     level:    [47, 49]
   16891912:
     template: Greater_Gaylas_Sacrarium
@@ -1467,7 +1467,7 @@ spawns:
   16891950:
     template: Stegotaur_S
     script:   Stegotaur
-    region:   region_41
+    region:   region_48
     level:    [47, 49]
   16891951:
     template: Fomor_Ranger_Large

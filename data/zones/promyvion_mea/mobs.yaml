@@ -1661,7 +1661,7 @@ spawns:
   16859436:
     template: Weeper_PV_2
     script:   Weeper
-    at:       [126.418, -0.500, 232.523, 114]
+    region:   region_148
     level:    [33, 35]
   16859437:
     template: Weeper_PV_2
@@ -1696,7 +1696,7 @@ spawns:
   16859443:
     template: Weeper_PV_2
     script:   Weeper
-    at:       [158.185, -0.500, 203.574, 50]
+    region:   region_149
     level:    [33, 35]
   16859444:
     template: Weeper_PV_2
@@ -1706,7 +1706,7 @@ spawns:
   16859445:
     template: Weeper_PV_2
     script:   Weeper
-    at:       [187.262, -0.500, 197.957, 195]
+    region:   region_150
     level:    [33, 35]
   16859446:
     template: Seether_Prom
@@ -1736,7 +1736,7 @@ spawns:
   16859451:
     template: Weeper_PV_2
     script:   Weeper
-    at:       [206.024, -0.500, 160.355, 183]
+    region:   region_151
     level:    [33, 35]
   16859452:
     template: Seether_Prom

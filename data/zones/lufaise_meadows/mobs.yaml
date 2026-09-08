@@ -2669,7 +2669,7 @@ spawns:
     level:    [34, 37]
   16875604:
     template: Cluster
-    at:       [425.321, -0.068, -165.535, 43]
+    region:   se_95
     level:    [38, 40]
   16875605:
     template: Bugard

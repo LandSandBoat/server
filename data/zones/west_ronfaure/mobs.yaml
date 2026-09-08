@@ -2476,7 +2476,7 @@ spawns:
     level:    [4, 5]
   17187044:
     template: Carrion_Worm
-    region:   e_228
+    region:   e_225
     level:    [4, 5]
   17187045:
     template: Carrion_Worm
@@ -2774,7 +2774,7 @@ spawns:
     level:    [9, 10]
   17187112:
     template: Carrion_Worm
-    region:   s_296
+    region:   s_292
     level:    [4, 5]
   17187113:
     template: Forest_Funguar
@@ -2818,7 +2818,7 @@ spawns:
     level:    [6, 7]
   17187123:
     template: Orcish_Mesmerizer
-    region:   s_296
+    region:   s_292
     level:    [6, 7]
   17187124:
     template: Orcish_Grappler

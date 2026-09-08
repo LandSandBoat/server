@@ -2026,8 +2026,8 @@ spawns:
     level:    [70, 73]
   16912392:
     template: Ulaern_sam
-    at:       [-27.956, -0.499, -570.354, 60]
     script:   Ulaern
+    region:   s_1
     level:    [70, 73]
   16912393:
     template: Ulaern_sam

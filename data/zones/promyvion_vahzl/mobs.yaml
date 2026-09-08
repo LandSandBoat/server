@@ -899,7 +899,7 @@ spawns:
   16867398:
     template: Weeper_Large
     script:   Weeper
-    at:       [111.492, -0.500, 196.457, 146]
+    region:   region_130
     level:    [48, 50]
   16867399:
     template: Weeper_Large
@@ -1306,7 +1306,7 @@ spawns:
   16867484:
     template: Wanderer_Large
     script:   Wanderer
-    at:       [243.042, -0.498, -138.134, 248]
+    region:   region_131
     level:    [50, 52]
   16867485:
     template: Seether_PV
@@ -2049,7 +2049,7 @@ spawns:
   16867644:
     template: Seether_PV
     script:   Seether
-    at:       [-172.894, -0.500, 36.522, 238]
+    region:   region_132
     level:    [54, 56]
   16867645:
     template: Weeper_Large
@@ -2128,6 +2128,7 @@ spawns:
   16867660:
     template: Seether_PV
     script:   Seether
+    region:   region_133
     level:    [54, 56]
   16867661:
     template: Weeper_Large

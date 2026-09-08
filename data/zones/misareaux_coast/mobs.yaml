@@ -2573,7 +2573,7 @@ spawns:
     level:    [54, 55]
   16879809:
     template: Dark_Elemental
-    at:       [-296.644, -31.666, 192.381, 59]
+    region:   region_60
     level:    [54, 56]
   16879810:
     template: Upyri
