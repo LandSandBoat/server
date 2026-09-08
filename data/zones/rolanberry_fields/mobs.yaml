@@ -4460,23 +4460,18 @@ spawns:
     level:    [58, 58]
   17228243:
     template: Sprite
-    region:   c_467
     level:    [61, 63]
   17228244:
     template: Sprite
-    region:   c_467
     level:    [61, 63]
   17228245:
     template: Sprite
-    region:   c_467
     level:    [61, 63]
   17228246:
     template: Sprite
-    region:   c_467
     level:    [61, 63]
   17228247:
     template: Sprite
-    region:   c_467
     level:    [61, 63]
   17228248:
     template: Urayuli
