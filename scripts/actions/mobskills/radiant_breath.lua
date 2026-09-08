@@ -31,8 +31,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
          -- TODO: Function name is duration. We might want to rename to something more universal.
         local power = xi.mobskills.calculateDuration(skill:getTP(), 1250, 1250) -- TODO: Capture power values
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, power, 0, 120)
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 120)
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.SLOW,    power = power, duration = 120, tier = 1 },
+            [2] = { effectId = xi.effect.SILENCE, power =     1, duration = 120           },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

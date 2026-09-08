@@ -10,9 +10,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 4500, 0, math.randomInt(240, 420)))
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.SLOW, power = 4500, duration = math.randomInt(240, 420), tier = 1 },
+    }
 
-    return xi.effect.SLOW
+    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
 end
 
 return mobskillObject

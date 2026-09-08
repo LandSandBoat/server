@@ -5,7 +5,6 @@
 --  Type: Enfeebling
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
---  Notes: Slow is equivalent to Slow II.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,9 +14,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 10000, 0, 120))
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.SLOW, power = 10000, duration = 120, tier = 8 },
+    }
 
-    return xi.effect.SLOW
+    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
 end
 
 return mobskillObject
