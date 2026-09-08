@@ -2308,7 +2308,6 @@ spawns:
     level:    [32, 33]
   17268768:
     template: Yagudos_Elemental
-    region:   se_26
     level:    [23, 28]
   17268769:
     template: Yagudo_Priest
@@ -2330,6 +2329,7 @@ spawns:
     level:    [29, 34]
   17268773:
     template: Ignis_Fatuus
+    region:   e_38
     level:    [34, 36]
   17268774:
     template: Hill_Lizard
@@ -2451,10 +2451,12 @@ spawns:
     level:    [26, 27]
   17268796:
     template: Goblin_Shaman
+    region:   e_353
     level:    [26, 27]
   17268797:
     template: Wight_war
     script:   Wight
+    region:   e_353
     level:    [26, 28]
   17268798:
     template: Wight_blm
@@ -2663,7 +2665,6 @@ spawns:
     level:    [32, 33]
   17268837:
     template: Yagudos_Elemental
-    region:   e_95
     level:    [23, 28]
   17268838:
     template: Yagudo_Priest
@@ -2685,6 +2686,7 @@ spawns:
     level:    [29, 34]
   17268842:
     template: Ignis_Fatuus
+    region:   e_95
     level:    [34, 36]
   17268843:
     template: Yagudo_Herald
@@ -2768,7 +2770,6 @@ spawns:
     level:    [31, 32]
   17268858:
     template: Goblins_Beetle
-    region:   ne_112
     level:    [23, 27]
   17268859:
     template: Goblin_Leecher
@@ -3003,7 +3004,6 @@ spawns:
     level:    [31, 32]
   17268900:
     template: Goblins_Beetle
-    region:   c_161
     level:    [23, 27]
   17268901:
     template: Goblin_Leecher
@@ -3061,15 +3061,15 @@ spawns:
     level:    [31, 32]
   17268914:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268915:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268916:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268917:
     template: Sauromugue_Skink
@@ -3175,7 +3175,6 @@ spawns:
     level:    [32, 33]
   17268935:
     template: Yagudos_Elemental
-    region:   n_193
     level:    [23, 28]
   17268936:
     template: Yagudo_Priest
@@ -3354,7 +3353,6 @@ spawns:
     level:    [32, 33]
   17268968:
     template: Yagudos_Elemental
-    region:   c_227
     level:    [23, 28]
   17268969:
     template: Yagudo_Priest
@@ -3376,6 +3374,7 @@ spawns:
     level:    [28, 34]
   17268973:
     template: Ignis_Fatuus
+    region:   c_227
     level:    [34, 36]
   17268974:
     template: Yagudo_Theologist
@@ -3556,7 +3555,6 @@ spawns:
     level:    [31, 32]
   17269002:
     template: Goblins_Beetle
-    region:   nw_264
     level:    [26, 27]
   17269003:
     template: Goblin_Leecher
@@ -3773,7 +3771,6 @@ spawns:
     level:    [31, 32]
   17269045:
     template: Goblins_Beetle
-    region:   s_307
     level:    [23, 27]
   17269046:
     template: Goblin_Leecher
@@ -3933,7 +3930,6 @@ spawns:
     level:    [31, 32]
   17269077:
     template: Goblins_Beetle
-    region:   s_339
     level:    [26, 27]
   17269078:
     template: Goblin_Leecher
@@ -4060,23 +4056,18 @@ spawns:
     level:    [55, 55]
   17269108:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269109:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269110:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269111:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269112:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269113:
     template: Balam-Agab
