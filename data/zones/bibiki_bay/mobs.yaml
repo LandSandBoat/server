@@ -2180,7 +2180,6 @@ spawns:
     level:    [34, 36]
   16793747:
     template: Goblins_Rarab
-    region:   ne_146
     level:    [29, 31]
   16793748:
     template: Marine_Dhalmel
@@ -2200,11 +2199,10 @@ spawns:
     level:    [72, 74]
   16793752:
     template: Goblins_Rarab
-    region:   ne_151
     level:    [66, 69]
   16793753:
     template: Teine_Sith
-    region:   ne_153
+    region:   region_119
     level:    [75, 78]
   16793754:
     template: Tropical_Rarab
@@ -2304,7 +2302,6 @@ spawns:
     level:    [72, 74]
   16793778:
     template: Goblins_Rarab
-    region:   n_177
     level:    [66, 69]
   16793779:
     template: Tartarus_Eft
@@ -2384,7 +2381,6 @@ spawns:
     level:    [72, 74]
   16793798:
     template: Goblins_Rarab
-    region:   n_197
     level:    [66, 69]
   16793799:
     template: Hobgoblin_Venerer
