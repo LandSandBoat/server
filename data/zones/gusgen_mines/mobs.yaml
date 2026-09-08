@@ -1010,13 +1010,15 @@ templates:
         look:
           type:  standard
           model: 292
-        entity_flags:  3
-        model_size:    1
-        hitbox:       24
+        entity_flags: 131
+        model_size:     1
+        hitbox:        24
       behaviors:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 700
 
   Pulverized_Pfeffer:
     id:            3226
@@ -2801,11 +2803,11 @@ spawns:
   17580338:
     template: Pudding
     at:       [21.181, -60.100, -20.081, 63]
-    level:    [34, 34]
+    level:    [22, 23]
   17580339:
     template: Pudding
     at:       [21.013, -61.157, -19.505, 63]
-    level:    [34, 34]
+    level:    [22, 23]
   17580340:
     template: Earth_Elemental_SA
     script:   Earth_Elemental

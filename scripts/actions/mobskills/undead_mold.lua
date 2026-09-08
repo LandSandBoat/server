@@ -19,8 +19,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.DARK
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-    -- TODO: Confirm whether this is physical or magical move. Jimmayus sheet says Unaspected Physical. JP Wiki says Dark.
-    -- TODO: Confirm AoE type. Jimmayus sheet says single target. JP Wiki says forward cone.
+    -- Confirmed from a capture: magical, and the forward cone is right. Damage lands in a
+    -- 1/4 resist ladder, and every target hit was within 45 degrees of the primary target.
+    -- The dark element is still only on the JP wiki's word.
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

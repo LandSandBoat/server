@@ -1109,7 +1109,6 @@ templates:
     attributes:
       combat:
         skill: sword
-        delay: 270
       resists:
         dmg_physical:
           slashing:  1250
@@ -1127,6 +1126,8 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 1600
 
   Poison_Leech_OC:
     id:            5134
@@ -3412,7 +3413,7 @@ spawns:
   17568138:
     template: Necroplasm
     at:       [-91.090, 31.725, 161.143, 244]
-    level:    [37, 37]
+    level:    [23, 24]
   17568139:
     template: Air_Elemental_SA
     script:   Air_Elemental
