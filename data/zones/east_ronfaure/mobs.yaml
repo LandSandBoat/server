@@ -1749,7 +1749,7 @@ spawns:
           end:    6
   17190954:
     template: Ding_Bats
-    region:   w_42
+    region:   w_26
     level:    [1, 1]
     attributes:
       spawn:
@@ -1785,7 +1785,7 @@ spawns:
           end:    5
   17190958:
     template: Pugil
-    region:   w_46
+    region:   w_47
     level:    [1, 1]
   17190959:
     template: Pugil
@@ -2064,19 +2064,19 @@ spawns:
           end:    5
   17191013:
     template: Goblin_Fisher
-    region:   c_101
+    region:   region_47
     level:    [3, 4]
   17191014:
     template: Goblin_Fisher
-    region:   c_101
+    region:   region_47
     level:    [3, 4]
   17191015:
     template: Goblin_Fisher
-    region:   c_101
+    region:   region_47
     level:    [3, 4]
   17191016:
     template: Goblin_Fisher
-    region:   c_101
+    region:   region_47
     level:    [3, 4]
   17191017:
     template: Pugil
@@ -2218,15 +2218,15 @@ spawns:
     level:    [2, 3]
   17191046:
     template: Pugil
-    region:   nw_134
+    region:   region_48
     level:    [2, 3]
   17191047:
     template: Pugil
-    region:   nw_134
+    region:   region_48
     level:    [2, 3]
   17191048:
     template: Pugil
-    region:   nw_134
+    region:   region_48
     level:    [2, 3]
   17191049:
     template: Forest_Hare
@@ -2504,11 +2504,11 @@ spawns:
     level:    [8, 10]
   17191102:
     template: Goblin_Thug
-    at:       [619.959, -49.581, 255.254, 125]
+    region:   region_45
     level:    [4, 5]
   17191103:
     template: Goblin_Weaver
-    at:       [624.772, -49.110, 252.558, 248]
+    region:   region_45
     level:    [5, 6]
   17191104:
     template: Forest_Hare
@@ -2735,7 +2735,7 @@ spawns:
     level:    [4, 5]
   17191154:
     template: Orcish_Mesmerizer
-    region:   c_242
+    region:   c_226
     level:    [4, 5]
   17191155:
     template: Orcish_Grappler
@@ -2757,7 +2757,7 @@ spawns:
   17191159:
     template: Enchanted_Bones_blm
     script:   Enchanted_Bones
-    region:   c_242
+    region:   c_226
     level:    [5, 6]
   17191160:
     template: Forest_Hare
@@ -2897,7 +2897,7 @@ spawns:
     level:    [4, 5]
   17191188:
     template: Pugil
-    region:   c_276
+    region:   region_44
     level:    [4, 5]
   17191189:
     template: Swamfisk
@@ -3368,15 +3368,15 @@ spawns:
     level:    [6, 7]
   17191284:
     template: Goblin_Fisher
-    region:   s_372
+    region:   region_49
     level:    [5, 6]
   17191285:
     template: Goblin_Fisher
-    region:   s_372
+    region:   region_49
     level:    [5, 6]
   17191286:
     template: Goblin_Fisher
-    region:   s_372
+    region:   region_49
     level:    [5, 6]
   17191287:
     template: Pugil
@@ -3458,7 +3458,7 @@ spawns:
   17191305:
     template: Mouse_Bat_Ronf
     script:   Mouse_Bat
-    region:   se_393
+    region:   s_380
     level:    [6, 7]
     attributes:
       spawn:
@@ -3887,10 +3887,8 @@ spawns:
     script: She-Slime
   17191460:
     script: She-Slime
-    region: nw_548
   17191461:
     script: She-Slime
-    region: nw_548
   17191462:
     script: She-Slime
     region: nw_52
@@ -3902,7 +3900,6 @@ spawns:
     region: nw_52
   17191465:
     script: She-Slime
-    region: nw_553
   17191466:
     script: Metal_Slime
   17191467:
