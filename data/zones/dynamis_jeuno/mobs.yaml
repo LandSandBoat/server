@@ -1797,7 +1797,7 @@ templates:
     attributes:
       combat:
         skill: sword
-        delay: 200
+        delay: 240
       jobs: [drg, drg]
       render:
         look:
@@ -2758,7 +2758,7 @@ templates:
   Vanguard_Dragontamer:
     id:            4649
     species:       goblin
-    skill_list_id: 360
+    skill_list_id: 2108
     attributes:
       combat:
         skill: sword
@@ -2797,7 +2797,7 @@ templates:
     id:            4649
     display_name:  Vanguard_Dragontamer
     species:       goblin
-    skill_list_id: 360
+    skill_list_id: 2108
     attributes:
       combat:
         skill: sword
@@ -4301,7 +4301,7 @@ templates:
     attributes:
       combat:
         skill: sword
-        delay: 200
+        delay: 240
       jobs: [drg, drg]
       render:
         look:

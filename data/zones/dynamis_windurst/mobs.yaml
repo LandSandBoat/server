@@ -2476,7 +2476,7 @@ templates:
     attributes:
       combat:
         skill: sword
-        delay: 200
+        delay: 240
       jobs: [drg, drg]
       render:
         look:

@@ -1526,7 +1526,7 @@ templates:
     attributes:
       combat:
         skill: staff
-        delay: 290
+        delay: 240
       jobs: [blm, blm]
       render:
         look:
@@ -1560,7 +1560,7 @@ templates:
     attributes:
       combat:
         skill: staff
-        delay: 290
+        delay: 240
       jobs: [blm, blm]
       render:
         look:
@@ -1796,7 +1796,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 290
+        delay: 240
       jobs: [nin, nin]
       render:
         look:
@@ -1830,7 +1830,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 290
+        delay: 240
       jobs: [nin, nin]
       render:
         look:
@@ -2134,7 +2134,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 290
+        delay: 240
       jobs: [smn, smn]
       render:
         look:
@@ -2168,7 +2168,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 290
+        delay: 240
       jobs: [smn, smn]
       render:
         look:
@@ -2447,7 +2447,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 200
+        delay: 240
       jobs: [drg, drg]
       render:
         look:
@@ -3760,7 +3760,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 200
+        delay: 240
       render:
         look:
           type:  standard
