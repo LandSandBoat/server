@@ -1260,11 +1260,11 @@ spawns:
     level:    [4, 5]
   17350716:
     template: Orcish_Mesmerizer
-    region:   c_60
+    region:   region_66
     level:    [4, 5]
   17350717:
     template: Orcish_Grappler
-    region:   c_60
+    region:   region_66
     level:    [4, 5]
   17350718:
     template: Orcish_Grappler
@@ -1384,15 +1384,15 @@ spawns:
     level:    [5, 7]
   17350744:
     template: Orcish_Fodder
-    region:   n_89
+    region:   region_67
     level:    [5, 7]
   17350745:
     template: Orcish_Mesmerizer
-    region:   n_89
+    region:   region_67
     level:    [5, 7]
   17350746:
     template: Orcish_Grappler
-    region:   n_89
+    region:   region_67
     level:    [5, 7]
   17350747:
     template: Orcish_Grappler

@@ -1013,7 +1013,7 @@ spawns:
     level:    [15, 18]
   17359013:
     template: Orcish_Fighter
-    region:   e_165
+    region:   e_166
     level:    [21, 23]
   17359014:
     template: Orcish_Cursemaker
