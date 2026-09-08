@@ -2121,7 +2121,6 @@ spawns:
     level:    [13, 14]
   17256567:
     template: Yagudos_Elemental
-    region:   c_117
     level:    [8, 9]
   17256568:
     template: Yagudo_Acolyte
@@ -2637,7 +2636,6 @@ spawns:
     level:    [13, 14]
   17256696:
     template: Yagudos_Elemental
-    region:   c_247
     level:    [8, 9]
   17256697:
     template: Yagudo_Acolyte
@@ -3108,7 +3106,6 @@ spawns:
     level:    [13, 14]
   17256811:
     template: Yagudos_Elemental
-    region:   n_362
     level:    [8, 9]
   17256812:
     template: Yagudo_Acolyte
@@ -3120,7 +3117,7 @@ spawns:
     level:    [8, 9]
   17256814:
     template: Yagudo_Piper
-    region:   n_366
+    region:   n_362
     level:    [13, 14]
   17256815:
     template: Yagudo_Persecutor
@@ -3352,7 +3349,6 @@ spawns:
     level:    [14, 15]
   17256872:
     template: Yagudos_Elemental
-    region:   nw_423
     level:    [8, 9]
   17256873:
     template: Yagudo_Mendicant
@@ -3360,7 +3356,6 @@ spawns:
     level:    [14, 15]
   17256874:
     template: Yagudos_Elemental
-    region:   nw_423
     level:    [8, 9]
   17256875:
     template: Yagudo_Piper
@@ -3422,6 +3417,7 @@ spawns:
     level:    [12, 13]
   17256888:
     template: Skeleton_Warrior
+    region:   nw_443
     level:    [10, 12]
   17256889:
     template: Skeleton_Warrior
@@ -3429,6 +3425,7 @@ spawns:
     level:    [10, 12]
   17256890:
     template: Skeleton_Sorcerer
+    region:   nw_443
     level:    [11, 13]
   17256891:
     template: Skeleton_Sorcerer

@@ -1238,7 +1238,6 @@ spawns:
     level:    [46, 49]
   17649678:
     template: Goblins_Leech
-    region:   s_13
     level:    [33, 35]
   17649679:
     template: Goblin_Robber

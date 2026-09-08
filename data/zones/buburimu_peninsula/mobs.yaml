@@ -2138,7 +2138,7 @@ spawns:
     level:    [20, 21]
   17260660:
     template: Will-o-the-Wisp
-    region:   c_116
+    region:   c_94
     level:    [25, 27]
   17260661:
     template: Sylvestre
@@ -2299,11 +2299,11 @@ spawns:
     level:    [18, 19]
   17260699:
     template: Zu
-    region:   s_155
+    region:   s_152
     level:    [20, 21]
   17260700:
     template: Zu
-    region:   s_155
+    region:   s_152
     level:    [20, 21]
   17260701:
     template: Zu
@@ -2469,7 +2469,7 @@ spawns:
     level:    [23, 24]
   17260740:
     template: Water_Elemental
-    region:   s_196
+    region:   s_194
     level:    [28, 30]
   17260741:
     template: Snipper
@@ -3252,23 +3252,23 @@ spawns:
     level:    [28, 30]
   17260930:
     template: Carnivorous_Crawler
-    region:   e_386
+    region:   e_391
     level:    [22, 23]
   17260931:
     template: Carnivorous_Crawler
-    region:   e_386
+    region:   e_391
     level:    [22, 23]
   17260932:
     template: Carnivorous_Crawler
-    region:   e_386
+    region:   e_391
     level:    [22, 23]
   17260933:
     template: Carnivorous_Crawler
-    region:   e_386
+    region:   e_391
     level:    [22, 23]
   17260934:
     template: Carnivorous_Crawler
-    region:   e_386
+    region:   e_391
     level:    [22, 23]
   17260935:
     template: Zu
@@ -3383,7 +3383,7 @@ spawns:
     level:    [21, 22]
   17260962:
     template: Carnivorous_Crawler
-    region:   ne_418
+    region:   ne_417
     level:    [21, 22]
   17260963:
     template: Carnivorous_Crawler

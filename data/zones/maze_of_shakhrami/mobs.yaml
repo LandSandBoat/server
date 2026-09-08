@@ -2536,12 +2536,12 @@ spawns:
   17588472:
     template: Ghoul_war_GM_MoS
     script:   Ghoul
-    region:   region_88
+    region:   region_105
     level:    [22, 26]
   17588473:
     template: Wendigo_blm_MoS
     script:   Wendigo
-    region:   region_88
+    region:   region_105
     level:    [24, 28]
   17588474:
     template: Goblin_Ambusher
@@ -2710,22 +2710,22 @@ spawns:
     level:    [22, 26]
   17588513:
     template: Abyss_Worm
-    region:   c_289
+    region:   region_104
     level:    [27, 30]
   17588514:
     template: Seeker_Bats_MoS_Ord
     script:   Seeker_Bats
-    region:   c_289
+    region:   region_104
     level:    [23, 26]
   17588515:
     template: Seeker_Bats_MoS_Ord
     script:   Seeker_Bats
-    region:   c_289
+    region:   region_104
     level:    [23, 26]
   17588516:
     template: Ancient_Bat_LDT_MoS
     script:   Ancient_Bat
-    region:   c_289
+    region:   region_104
     level:    [26, 29]
   17588517:
     template: Abyss_Worm
