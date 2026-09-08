@@ -1,8 +1,7 @@
 -----------------------------------
 -- Vitriolic Barrage
 -- Family: Yovra
--- Description: Deals unaspected? magic damage to targets in range. Additional Effect: Poison
--- Notes: Affected by MDEF stat.
+-- Description: Deals 1000 physical damage divided between all targets in range. Additional Effect: Poison
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,17 +13,20 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage           = 1000 / skill:getTotalTargets()
-    params.fTP                  = { 1.00, 1.00, 1.00 }
-    params.element              = xi.element.NONE -- TODO: Verify whether unaspected or elemental
-    params.attackType           = xi.attackType.MAGICAL
-    params.damageType           = xi.damageType.NONE
-    params.shadowBehavior       = xi.mobskills.shadowBehavior.WIPE_SHADOWS
-    -- https://youtu.be/DgQrZQJEqDY?t=409
-    -- Looks like it bypasses MDT(Shell) but is reduced by MDEF
-    params.skipDamageAdjustment = true
+    params.baseDamage         = 1000 / skill:getTotalTargets()
+    params.numHits            = 1
+    params.fTP                = { 1.0, 1.0, 1.0 }
+    params.attackType         = xi.attackType.PHYSICAL
+    params.damageType         = xi.damageType.PIERCING
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.guaranteedFirstHit = true
+    params.skipPDIF           = true
+    params.skipFSTR           = true
+    params.skipParry          = true
+    params.skipGuard          = true
+    params.skipBlock          = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)

@@ -26,7 +26,12 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 3437, 0, math.randomInt(30, 60)) -- TODO: Duration random, resisted or scale with TP?
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.SLOW, power = 3437, duration = math.randomInt(30, 60), tier = 1 }, -- TODO: Duration random, resisted or scale with TP?
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

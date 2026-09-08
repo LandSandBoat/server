@@ -13,7 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BOOST, 400, 0, 5))
+    local subPower = 1
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BOOST, 400, 0, 180, nil, subPower))
 
     return xi.effect.BOOST
 end
