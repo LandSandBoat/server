@@ -1065,7 +1065,7 @@ spawns:
     level:    [52, 54]
   17461295:
     template: Haunt
-    region:   c_47
+    region:   region_95
     level:    [60, 63]
   17461296:
     template: Funnel_Bats_BO
@@ -1128,17 +1128,17 @@ spawns:
   17461308:
     template: Garm_BO
     script:   Garm
-    region:   c_60
+    region:   region_96
     level:    [64, 66]
   17461309:
     template: Garm_BO
     script:   Garm
-    region:   c_60
+    region:   region_96
     level:    [64, 66]
   17461310:
     template: Garm_BO
     script:   Garm
-    region:   c_60
+    region:   region_96
     level:    [64, 66]
   17461311:
     template: Garm_BO
@@ -1158,11 +1158,11 @@ spawns:
   17461314:
     template: Garm_BO
     script:   Garm
-    region:   c_60
+    region:   region_96
     level:    [64, 66]
   17461315:
     template: Shii
-    region:   c_60
+    region:   region_96
     level:    [70, 71]
     attributes:
       spawn:
@@ -1366,15 +1366,15 @@ spawns:
     level:    [95, 96]
   17461363:
     template: Nachtmahr
-    region:   c_115
+    region:   region_93
     level:    [96, 97]
   17461364:
     template: Blind_Bat
-    region:   e_116
+    region:   region_94
     level:    [95, 97]
   17461365:
     template: Blind_Bat
-    region:   e_116
+    region:   region_94
     level:    [95, 97]
   17461366:
     template: Blind_Bat
@@ -1434,11 +1434,11 @@ spawns:
     level:    [96, 97]
   17461380:
     template: Nachtmahr
-    region:   e_132
+    region:   region_97
     level:    [96, 97]
   17461381:
     template: Nachtmahr
-    region:   e_132
+    region:   region_97
     level:    [96, 97]
   17461382:
     template: Panna_Cotta
