@@ -2497,7 +2497,7 @@ spawns:
     level:    [6, 8]
   17252661:
     template: Balloon
-    at:       [401.367, -4.198, 288.178, 127]
+    region:   region_46
     level:    [8, 10]
   17252662:
     template: Mandragora
@@ -3030,7 +3030,7 @@ spawns:
     level:    [6, 8]
   17252793:
     template: Balloon
-    region:   n_441
+    region:   n_427
     level:    [8, 10]
   17252794:
     template: Mandragora
@@ -3445,7 +3445,6 @@ spawns:
     region: s_40
   17252980:
     script: She-Slime
-    region: sw_628
   17252981:
     script: She-Slime
     region: s_40
