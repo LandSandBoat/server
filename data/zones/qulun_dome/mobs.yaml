@@ -579,6 +579,7 @@ spawns:
     level:    [85, 85]
   17383444:
     template: Diamond_Quadav
+    region:   n_16
     level:    [75, 75]
   17383445:
     template: MuZha_Infernoblade
