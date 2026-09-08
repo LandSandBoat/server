@@ -377,7 +377,7 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
     hitDamage = math.floor(target:checkDamageCap(hitDamage))
 
     if hitDamage > 0 then
-        target:trySkillUp(xi.skill.EVASION, target:getMainLvl())
+        target:trySkillUp(xi.skill.EVASION, mob:getMainLvl())
 
         if not blockedWithShieldMastery then
             target:tryHitInterrupt(mob)
@@ -477,7 +477,7 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     end
 
     if hitDamage > 0 then
-        target:trySkillUp(xi.skill.EVASION, target:getMainLvl())
+        target:trySkillUp(xi.skill.EVASION, mob:getMainLvl())
     end
 
     ----------------------------------
