@@ -2777,17 +2777,17 @@ spawns:
   17580333:
     template: Wight_war_GM
     script:   Wight
-    region:   nw_301
+    region:   region_93
     level:    [31, 34]
   17580334:
     template: Wight_war_GM
     script:   Wight
-    region:   nw_301
+    region:   region_93
     level:    [31, 34]
   17580335:
     template: Ghast_blm_GM
     script:   Ghast
-    region:   nw_301
+    region:   region_93
     level:    [33, 36]
   17580336:
     template: Banshee_GM
