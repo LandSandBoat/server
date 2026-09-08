@@ -3091,6 +3091,7 @@ spawns:
           end:    5
   17223784:
     template: Black_Bat
+    region:   s_93
     level:    [17, 18]
     attributes:
       spawn:
@@ -3921,6 +3922,7 @@ spawns:
           end:    6
   17223934:
     template: Bog_Dog
+    region:   n_243
     level:    [17, 22]
   17223935:
     template: Carnivorous_Crawler
@@ -4060,28 +4062,28 @@ spawns:
     level:    [27, 28]
   17223960:
     template: Gadfly
-    region:   w_280
+    region:   region_55
     level:    [20, 21]
   17223961:
     template: Gadfly
-    region:   w_280
+    region:   region_55
     level:    [20, 21]
   17223962:
     template: Gadfly
-    region:   w_280
+    region:   region_55
     level:    [20, 21]
   17223963:
     template: Marsh_Funguar
-    region:   w_280
+    region:   region_55
     level:    [24, 25]
   17223964:
     template: Marsh_Funguar
-    region:   w_280
+    region:   region_55
     level:    [24, 25]
   17223965:
     template: Night_Bats_MM_PM
     script:   Night_Bats
-    region:   w_280
+    region:   region_55
     level:    [15, 16]
     attributes:
       spawn:
@@ -4091,7 +4093,7 @@ spawns:
   17223966:
     template: Night_Bats_MM_PM
     script:   Night_Bats
-    region:   w_280
+    region:   region_55
     level:    [15, 16]
     attributes:
       spawn:
@@ -4100,19 +4102,19 @@ spawns:
           end:    4
   17223967:
     template: Marsh_Funguar
-    region:   w_280
+    region:   w_291
     level:    [24, 25]
   17223968:
     template: Marsh_Funguar
-    region:   w_280
+    region:   w_291
     level:    [24, 25]
   17223969:
     template: Marsh_Funguar
-    region:   w_280
+    region:   w_291
     level:    [24, 25]
   17223970:
     template: Marsh_Funguar
-    region:   w_280
+    region:   w_291
     level:    [24, 25]
   17223971:
     template: Marsh_Funguar
@@ -4124,6 +4126,7 @@ spawns:
     level:    [21, 22]
   17223973:
     template: Goblin_Ambusher
+    region:   w_306
     level:    [16, 17]
   17223974:
     template: Goblin_Leecher
@@ -4735,7 +4738,7 @@ spawns:
     level:    [17, 18]
   17224095:
     template: Marsh_Funguar
-    region:   se_415
+    region:   se_412
     level:    [24, 25]
   17224096:
     template: Marsh_Funguar

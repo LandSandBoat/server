@@ -1299,7 +1299,7 @@ spawns:
     level:    [1, 1]
   17215503:
     template: Tunnel_Worm
-    region:   e_15
+    region:   e_7
     level:    [1, 1]
   17215504:
     template: Tunnel_Worm
@@ -2393,7 +2393,7 @@ spawns:
     level:    [3, 4]
   17215729:
     template: Stone_Eater
-    region:   se_241
+    region:   se_240
     level:    [3, 4]
   17215730:
     template: Stone_Eater
@@ -2641,11 +2641,11 @@ spawns:
     level:    [5, 6]
   17215790:
     template: Stone_Eater
-    region:   w_302
+    region:   c_304
     level:    [4, 5]
   17215791:
     template: Stone_Eater
-    region:   w_302
+    region:   c_304
     level:    [4, 5]
   17215792:
     template: Rock_Lizard
@@ -2706,7 +2706,7 @@ spawns:
     level:    [6, 7]
   17215806:
     template: Shrapnel
-    region:   w_302
+    region:   c_304
     level:    [8, 9]
   17215807:
     template: Stone_Eater
@@ -2872,7 +2872,7 @@ spawns:
     level:    [4, 5]
   17215847:
     template: Stone_Eater
-    region:   s_359
+    region:   s_362
     level:    [4, 5]
   17215848:
     template: Stone_Eater
@@ -3083,7 +3083,7 @@ spawns:
     level:    [7, 8]
   17215899:
     template: Rock_Lizard
-    region:   w_411
+    region:   w_412
     level:    [7, 8]
   17215900:
     template: Rock_Lizard
@@ -3240,7 +3240,7 @@ spawns:
     level:    [6, 7]
   17215938:
     template: Land_Crab
-    region:   w_450
+    region:   w_443
     level:    [6, 7]
   17215939:
     template: Land_Crab
@@ -3444,7 +3444,6 @@ spawns:
     level:    [1, 1]
   17216040:
     template: Wraith_Bat
-    region:   c_552
     level:    [1, 1]
   17216041:
     template: Wraith_Bat
@@ -3457,18 +3456,15 @@ spawns:
     level:    [1, 1]
   17216044:
     template: Wraith_Bat
-    region:   c_556
     level:    [1, 1]
   17216045:
     template: Wraith_Bat
-    region:   e_557
     level:    [1, 1]
   17216046:
     template: Wraith_Bat
     level:    [1, 1]
   17216047:
     template: Wraith_Bat
-    region:   n_559
     level:    [1, 1]
   17216048:
     template: Wraith_Bat
@@ -3676,13 +3672,11 @@ spawns:
     region: n_48
   17216116:
     script: She-Slime
-    region: n_628
   17216117:
     script: She-Slime
     region: n_48
   17216118:
     script: She-Slime
-    region: e_630
   17216119:
     script: She-Slime
     region: e_163

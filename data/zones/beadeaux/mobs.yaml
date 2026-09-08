@@ -3040,21 +3040,21 @@ spawns:
     level:    [37, 39]
   17379700:
     template: Mythril_Quadav
-    region:   e_372
+    region:   region_108
     level:    [53, 57]
   17379701:
     template: Topaz_Quadav
-    region:   e_372
+    region:   region_108
     level:    [55, 59]
   17379702:
     template: Big_Jaw_Large
     script:   Big_Jaw
-    region:   e_372
+    region:   region_108
     level:    [37, 39]
   17379703:
     template: Big_Jaw_Large
     script:   Big_Jaw
-    region:   e_372
+    region:   region_108
     level:    [37, 39]
   17379704:
     template: Steel_Quadav
@@ -3230,19 +3230,19 @@ spawns:
     level:    [64, 68]
   17379745:
     template: Steel_Quadav
-    region:   ne_417
+    region:   region_109
     level:    [52, 56]
   17379746:
     template: Mythril_Quadav
-    region:   ne_417
+    region:   region_109
     level:    [53, 57]
   17379747:
     template: Gold_Quadav
-    region:   ne_417
+    region:   region_109
     level:    [54, 58]
   17379748:
     template: Topaz_Quadav
-    region:   ne_417
+    region:   region_109
     level:    [55, 59]
   17379749:
     template: Larva
