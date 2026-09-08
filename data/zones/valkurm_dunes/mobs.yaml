@@ -3121,39 +3121,39 @@ spawns:
     level:    [28, 29]
   17199343:
     template: Snipper
-    region:   s_239
+    region:   region_39
     level:    [19, 20]
   17199344:
     template: Snipper
-    region:   s_239
+    region:   region_39
     level:    [19, 20]
   17199345:
     template: Snipper
-    region:   s_239
+    region:   region_39
     level:    [19, 20]
   17199346:
     template: Beach_Pugil
-    region:   s_239
+    region:   region_39
     level:    [23, 24]
   17199347:
     template: Beach_Pugil
-    region:   s_239
+    region:   region_39
     level:    [23, 24]
   17199348:
     template: Beach_Pugil
-    region:   s_239
+    region:   region_39
     level:    [23, 24]
   17199349:
     template: Beach_Pugil
-    region:   s_239
+    region:   region_39
     level:    [23, 24]
   17199350:
     template: Bogy
-    region:   s_239
+    region:   region_39
     level:    [28, 30]
   17199351:
     template: Hippomaritimus
-    region:   s_239
+    region:   region_39
     level:    [37, 38]
   17199352:
     template: Sand_Bats
@@ -3944,7 +3944,7 @@ spawns:
     level:    [24, 25]
   17199545:
     template: Thread_Leech
-    region:   nw_441
+    region:   region_38
     level:    [24, 25]
   17199546:
     template: Goblin_Mugger
@@ -4023,7 +4023,7 @@ spawns:
     level:    [21, 22]
   17199564:
     template: Golden_Bat
-    at:       [-810.440, -8.270, 33.978, 127]
+    region:   [region_37, nw_421]
     level:    [26, 27]
   17199565:
     template: Goblin_Digger_far

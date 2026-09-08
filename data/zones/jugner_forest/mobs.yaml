@@ -3188,7 +3188,7 @@ spawns:
     level:    [19, 20]
   17203347:
     template: Bogy
-    region:   n_147
+    region:   n_143
     level:    [25, 26]
   17203348:
     template: Water_Elemental
@@ -3426,7 +3426,7 @@ spawns:
     level:    [21, 22]
   17203406:
     template: Will-o-the-Wisp
-    region:   c_183
+    region:   region_69
     level:    [24, 25]
   17203407:
     template: Orcish_Grunt
@@ -3920,7 +3920,7 @@ spawns:
     level:    [20, 21]
   17203528:
     template: Stag_Beetle
-    region:   e_328
+    region:   e_329
     level:    [22, 23]
   17203529:
     template: Stag_Beetle

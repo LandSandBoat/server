@@ -1305,7 +1305,7 @@ spawns:
     level:    [65, 69]
   17391718:
     template: Orcish_Farkiller
-    region:   c_102
+    region:   c_103
     level:    [62, 66]
   17391719:
     template: Orcish_Dreadnought
@@ -1369,7 +1369,7 @@ spawns:
     level:    [63, 66]
   17391734:
     template: Orcish_Champion
-    region:   c_118
+    region:   c_114
     level:    [64, 68]
   17391735:
     template: Orcish_Dragoon

@@ -3285,7 +3285,7 @@ spawns:
     level:    [26, 32]
   17207559:
     template: Ignis_Fatuus
-    at:       [-75.515, 0.144, 246.614, 49]
+    region:   n_254
     level:    [34, 36]
   17207560:
     template: Ba
@@ -3413,7 +3413,7 @@ spawns:
     level:    [24, 25]
   17207589:
     template: Ice_Elemental
-    at:       [380.161, 7.038, 116.525, 102]
+    region:   ne_284
     level:    [38, 40]
   17207590:
     template: Orcish_Fighter
@@ -3588,7 +3588,7 @@ spawns:
     level:    [30, 31]
   17207631:
     template: Ignis_Fatuus
-    at:       [382.330, 8.601, -238.537, 127]
+    region:   e_327
     level:    [34, 36]
   17207632:
     template: Goblin_Furrier
