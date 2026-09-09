@@ -416,7 +416,10 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local sneakIsApplicable = false
     local trickAttackTarget = nil
 
-    if spell:isAoE() == 0 and params.attackType ~= xi.attackType.RANGED then
+    if
+        spell:getAoE() == xi.aoeType.NONE and
+        params.attackType ~= xi.attackType.RANGED
+    then
         if
             caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
             (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))

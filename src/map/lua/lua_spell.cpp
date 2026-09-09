@@ -137,7 +137,17 @@ uint16 CLuaSpell::getElement()
     return m_PLuaSpell->getElement();
 }
 
-uint8 CLuaSpell::isAoE()
+bool CLuaSpell::isAoE() const
+{
+    return m_PLuaSpell->getAOE() == SPELLAOE_RADIAL;
+}
+
+bool CLuaSpell::isConal() const
+{
+    return m_PLuaSpell->getAOE() == SPELLAOE_CONAL;
+}
+
+uint8 CLuaSpell::getAoE() const
 {
     return m_PLuaSpell->getAOE();
 }
@@ -202,6 +212,8 @@ void CLuaSpell::Register()
     SOL_REGISTER("setCastTime", CLuaSpell::setCastTime);
     SOL_REGISTER("setMPCost", CLuaSpell::setMPCost);
     SOL_REGISTER("isAoE", CLuaSpell::isAoE);
+    SOL_REGISTER("getAoE", CLuaSpell::getAoE);
+    SOL_REGISTER("isConal", CLuaSpell::isConal);
     SOL_REGISTER("getRadius", CLuaSpell::getRadius);
     SOL_REGISTER("tookEffect", CLuaSpell::tookEffect);
     SOL_REGISTER("getMagicBurstMessage", CLuaSpell::getMagicBurstMessage);
