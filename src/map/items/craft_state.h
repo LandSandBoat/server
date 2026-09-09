@@ -29,9 +29,8 @@ inline constexpr size_t SynthMaxIngredients = 8;
 
 enum CRAFT_TYPE
 {
-    CRAFT_SYNTHESIS         = 0,
-    CRAFT_DESYNTHESIS       = 1,
-    CRAFT_SYNTHESIS_NO_LOSS = 2,
+    CRAFT_SYNTHESIS   = 0,
+    CRAFT_DESYNTHESIS = 1,
 };
 
 // Runtime state for synthutils to track synthesis over multiple steps

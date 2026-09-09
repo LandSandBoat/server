@@ -32,6 +32,7 @@
 #include "items.h"
 #include "items/transactions/synth.h"
 #include "itemutils.h"
+#include "lua/luautils.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x030_effect.h"
@@ -781,31 +782,62 @@ auto handleSynthResult(CCharEntity* PChar) -> uint8
     return synthResult;
 }
 
+// Base chance (percent) an ingredient is lost when a synth breaks, keyed by item id. Unlisted materials use 50% break rate
+// 0 means the material always survives
+static const FlatHashMap<uint16, uint8> materialLossRates = {
+    { 489, 0 },    // Broken Lu Shang's Fishing Rod
+    { 722, 100 },  // Divine Log
+    { 860, 100 },  // Behemoth Hide
+    { 1288, 100 }, // Wooden Hakutaku Eye
+    { 1289, 100 }, // Burning Hakutaku Eye
+    { 1290, 100 }, // Earthen Hakutaku Eye
+    { 1291, 100 }, // Golden Hakutaku Eye
+    { 1292, 100 }, // Damp Hakutaku Eye
+    { 1409, 100 }, // Spool of Siren's Macrame
+    { 9091, 0 },   // Broken Lu Shang's Fishing Rod +1
+};
+
+auto materialLossRate(const uint16 itemId) -> uint8
+{
+    const auto entry = materialLossRates.find(itemId);
+    if (entry == materialLossRates.end())
+    {
+        return 50;
+    }
+
+    return entry->second;
+}
+
 // Used in: LOCAL handleSynthFail
 void handleMaterialLoss(CCharEntity* PChar)
 {
     auto& craftState       = PChar->craftState();
     auto& synthTransaction = *PChar->activeTransaction<SynthTransaction>();
 
-    uint8 currentCraft = craftState.failingSkill();
+    const uint8 currentCraft = craftState.failingSkill();
 
     const int16 breakGlobalReduction    = PChar->getMod(xi::Mod::SYNTH_MATERIAL_LOSS);
     const int16 breakElementalReduction = PChar->getMod(static_cast<xi::Mod>(static_cast<int32>(xi::Mod::SYNTH_MATERIAL_LOSS_FIRE) + craftState.element()));
     const int16 breakTypeReduction      = PChar->getMod(static_cast<xi::Mod>(static_cast<int32>(xi::Mod::SYNTH_MATERIAL_LOSS_WOODWORKING) + currentCraft - static_cast<uint8>(xi::SkillType::Woodworking)));
-    int16       synthDifficulty         = getSynthDifficulty(PChar, currentCraft);
-
-    synthDifficulty = std::max<int16>(synthDifficulty, 0);
-
-    // Break Chance.
-    // Clamp note: https://wiki-ffo-jp.translate.goog/html/36626.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc
-    const int16 breakChance = static_cast<int16>(std::clamp(50 - breakGlobalReduction - breakElementalReduction - breakTypeReduction + 5 * synthDifficulty, 20, 100));
+    const int16 breakReduction          = breakGlobalReduction + breakElementalReduction + breakTypeReduction;
 
     for (uint8 idx = 0; idx < SynthMaxIngredients; ++idx)
     {
-        if (craftState.ingredientItemId(idx) == 0)
+        const uint16 itemId = craftState.ingredientItemId(idx);
+        if (itemId == 0)
         {
             continue;
         }
+
+        const uint8 baseLossRate = materialLossRate(itemId);
+        if (baseLossRate == 0)
+        {
+            synthTransaction.markSaved(idx);
+            continue;
+        }
+
+        // Clamp note: https://wiki-ffo-jp.translate.goog/html/36626.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc
+        const int16 breakChance = static_cast<int16>(std::clamp(baseLossRate - breakReduction, 20, 100));
 
         const uint8 random = static_cast<uint8>(1 + xirand::GetRandomNumber(100));
         if (random <= breakChance)
@@ -857,24 +889,7 @@ void handleSynthSuccess(CCharEntity* PChar)
 // Used in: sendSynthDone
 void handleSynthFail(CCharEntity* PChar)
 {
-    auto& craftState       = PChar->craftState();
-    auto& synthTransaction = *PChar->activeTransaction<SynthTransaction>();
-
-    if (craftState.craftMode() != CRAFT_SYNTHESIS_NO_LOSS)
-    {
-        handleMaterialLoss(PChar);
-    }
-    else
-    {
-        // No-loss recipe: every claimed ingredient survives intact.
-        for (uint8 idx = 0; idx < SynthMaxIngredients; ++idx)
-        {
-            if (craftState.ingredientItemId(idx) != 0)
-            {
-                synthTransaction.markSaved(idx);
-            }
-        }
-    }
+    handleMaterialLoss(PChar);
 
     // Push "Synthesis failed" messages.
     const auto currentZone = PChar->loc.zone->GetID();
