@@ -1175,6 +1175,25 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (m_BattlefieldHandler)
     {
+        // A player who disconnects inside a battlefield arena (for example during the post-win
+        // loot window) loses their Battlefield status effect during the cleanup sequence, so on
+        // relog the orphan handling below cannot detect them and they are left stuck in the arena.
+        // The recovery charvar set on entry survives the relog; restore a minimal Battlefield
+        // effect from it so the existing orphan-eject path can send them to the exit, then consume
+        // the marker.
+        if (!PChar->StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::Confrontation) &&
+            PChar->getCharVar("battlefieldRecoveryId") != 0)
+        {
+            const auto battlefieldId = static_cast<uint16>(PChar->getCharVar("battlefieldRecoveryId"));
+            PChar->StatusEffectContainer->AddStatusEffectSilent(
+                xi::StatusEffect::Battlefield, static_cast<uint16>(xi::StatusEffect::Battlefield), battlefieldId, 0s, 0s, 0, 0);
+            if (auto* effect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Battlefield))
+            {
+                effect->SetTier(1);
+            }
+            PChar->setCharVar("battlefieldRecoveryId", 0);
+        }
+
         auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
         if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::Confrontation))
         {
@@ -1258,6 +1277,17 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 void CZone::CharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
+    // Clear the battlefield relog-recovery marker when the player genuinely zones out
+    // (shuttingDown == 2 is a normal zone transition). On a disconnect/logout (shuttingDown
+    // == 1) we keep it, so a player stranded inside a battlefield arena can be ejected on
+    // their next zone-in (see CZone::CharZoneIn). This is the only signal that reliably
+    // separates a proper exit from a disconnect - the battlefield leavecode does not, since
+    // the WIN cleanup runs for both.
+    if (PChar->PSession != nullptr && PChar->PSession->shuttingDown == 2 && PChar->getCharVar("battlefieldRecoveryId") != 0)
+    {
+        PChar->setCharVar("battlefieldRecoveryId", 0);
+    }
 
     for (const auto& triggerArea : m_triggerAreaList)
     {
