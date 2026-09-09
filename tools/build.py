@@ -52,21 +52,25 @@ def developer_environment() -> tuple[str, dict] | None:
     if not vswhere.exists():
         return None
 
-    result = subprocess.run(
-        [
-            str(vswhere),
-            "-latest",
-            "-products",
-            "*",
-            "-requires",
-            "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
-            "-property",
-            "installationPath",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    install_dir = result.stdout.strip()
+    def newest_install(*extra_args: str) -> str:
+        result = subprocess.run(
+            [
+                str(vswhere),
+                "-latest",
+                *extra_args,
+                "-products",
+                "*",
+                "-requires",
+                "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+                "-property",
+                "installationPath",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        return result.stdout.strip()
+
+    install_dir = newest_install() or newest_install("-prerelease")
     if not install_dir:
         return None
 
@@ -89,7 +93,10 @@ def run(cmd, cwd) -> int:
 
     prefix, env = DEVELOPER_ENVIRONMENT
     command_line = f"{prefix} && {subprocess.list2cmdline(cmd)}"
-    return subprocess.run(["cmd", "/c", command_line], cwd=cwd, env=env).returncode
+
+    # Pass one string, not a list: a list goes through list2cmdline, which escapes the quotes
+    # around the VsDevCmd path and leaves cmd.exe with a command it cannot find.
+    return subprocess.run(command_line, cwd=cwd, env=env, shell=True).returncode
 
 
 def configure_preset_for(preset, repo_root) -> str:

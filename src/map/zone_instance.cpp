@@ -405,7 +405,7 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
 
 auto CZoneInstance::ZoneServer(timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CZoneInstance::ZoneServer");
 
     std::vector<CInstance*> instancesToRemove;
     for (const auto& PInstance : m_InstanceList)

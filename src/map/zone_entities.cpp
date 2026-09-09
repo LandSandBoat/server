@@ -1329,8 +1329,6 @@ void CZoneEntities::SpawnTransport(CCharEntity* PChar)
 
 CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
 {
-    TracyZoneScoped;
-
     const auto findEntity = [&](const EntityList_t& entityList) -> CBaseEntity*
     {
         const auto it = entityList.find(targid);
@@ -1440,8 +1438,6 @@ CCharEntity* CZoneEntities::GetCharByName(const std::string& name)
 
 CCharEntity* CZoneEntities::GetCharByID(uint32 id)
 {
-    TracyZoneScoped;
-
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
     {
         if (PCurrentChar->id == id)
@@ -1454,7 +1450,7 @@ CCharEntity* CZoneEntities::GetCharByID(uint32 id)
 
 void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CZoneEntities::UpdateEntityPacket");
 
     // Do not send packets that are updates of a hidden GM
     if (PEntity->objtype == TYPE_PC)
@@ -1515,7 +1511,7 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
 
 void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, const std::unique_ptr<CBasicPacket>& packet)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CZoneEntities::PushPacket");
     TracyZoneHex16(packet->getType());
 
     if (!packet)
@@ -1951,7 +1947,7 @@ auto CZoneEntities::charTick(CCharEntity* PChar, timer::time_point tick) -> Task
 
 auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CZoneEntities::ZoneServer");
     TracyZoneString(m_zone->getName());
     LogWith({ "zone", { { "name", m_zone->getName() }, { "id", m_zone->GetID() } } });
 

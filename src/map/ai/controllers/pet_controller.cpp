@@ -49,7 +49,7 @@ CPetController::CPetController(CMobEntity* _PPet)
 
 auto CPetController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CPetController::DoRoamTick");
 
     if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
     {
@@ -172,7 +172,7 @@ auto CPetController::PetIsHealing() const -> bool
 
 auto CPetController::Tick(const timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CPetController::Tick");
     TracyZoneString(PPet->getName());
 
     bool isPlayerPet = PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC);

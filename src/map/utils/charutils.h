@@ -79,7 +79,7 @@ namespace charutils
 void LoadExpTable();
 void SetExpDifficultyCurve(std::vector<std::pair<uint16, EMobDifficulty>>& curve, std::pair<uint16, uint8>& incrediblyEasyPreyData);
 auto LoadChar(uint32 charId) -> std::unique_ptr<CCharEntity>;
-void LoadSpells(CCharEntity* PChar);
+void LoadFromCharSpellsSQL(CCharEntity* PChar);
 void LoadInventory(CCharEntity* PChar);
 void LoadEquip(CCharEntity* PChar);
 
@@ -200,7 +200,6 @@ void SaveCharAppearances(const std::vector<CharAppearance>& rows);
 void PersistCharVars(const std::vector<CharVarChange>& rows);
 auto BuildCharEquipSlots(const CCharEntity* PChar) -> std::vector<CharEquipSlot>;
 auto BuildCharAppearance(const CCharEntity* PChar) -> CharAppearance;
-// void SaveCharLinkshells(CCharEntity* PChar);     // TODO: save the character's linkshells
 void SaveMissionsList(CCharEntity* PChar);          // save the missions list
 void SaveEminenceData(CCharEntity* PChar);          // save Eminence Record (RoE) data
 void SaveQuestsList(CCharEntity* PChar);            // save the list of quests

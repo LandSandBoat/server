@@ -79,7 +79,7 @@ auto CMobController::followTarget() const -> CBaseEntity*
 
 auto CMobController::Tick(const timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobController::Tick");
     TracyZoneString(PMob->getName());
 
     m_Tick = tick;
@@ -620,8 +620,6 @@ void CMobController::ClearFollowTarget()
 
 auto CMobController::CheckHide(const CBattleEntity* PTarget) const -> bool
 {
-    TracyZoneScoped;
-
     if (!PTarget || PTarget->GetMJob() != xi::Job::THF || !PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide))
     {
         return false;
@@ -1579,7 +1577,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     auto* PTarget       = target().resolve<CBattleEntity>();
     auto* PFollowTarget = followTarget();
 
-    TracyZoneScopedC(0x00FF00);
+    TracyZoneScopedNC("CMobController::DoRoamTick", 0x4C8C4A);
 
     const bool ignoreAggro = ((PMob->m_roamFlags & xi::RoamFlag::Ignore) != xi::RoamFlag::None);
 
@@ -1658,6 +1656,8 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     // Recover 10% HP and lose TP every 10s while idle.
     if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(xi::MobMod::NoRest) == 0 && PMob->CanRest())
     {
+        TracyZoneNamed(restZone, "DoRoamTick: rest");
+
         if (PMob->Rest(0.1f))
         {
             PMob->updatemask |= UPDATE_HP;
@@ -1703,6 +1703,8 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     }
     else if (m_Tick >= m_LastActionTime + std::chrono::seconds(PMob->getMobMod(xi::MobMod::RoamCool)))
     {
+        TracyZoneNamed(chooseZone, "DoRoamTick: choose idle action");
+
         if (PMob->GetCallForHelpFlag())
         {
             PMob->SetCallForHelpFlag(false);
@@ -1937,8 +1939,6 @@ void CMobController::FollowRoamPath()
 
 auto CMobController::IsSpecialSkillReady(const float currentDistance) const -> bool
 {
-    TracyZoneScoped;
-
     if (PMob->getMobMod(xi::MobMod::SpecialSkill) == 0)
     {
         return false;
@@ -1957,8 +1957,6 @@ auto CMobController::IsSpecialSkillReady(const float currentDistance) const -> b
 
 auto CMobController::IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool
 {
-    TracyZoneScoped;
-
     if (PMob->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Chainspell, xi::StatusEffect::Manafont }))
     {
         return true;

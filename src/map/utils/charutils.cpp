@@ -301,63 +301,66 @@ void CalculateStats(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
+namespace
 {
-    TracyZoneScoped;
 
-    std::unique_ptr<CCharEntity> charEntity = std::make_unique<CCharEntity>();
-    auto*                        PChar      = charEntity.get();
-    PChar->id                               = charId;
-
+struct CharExpRow
+{
     uint8  meritPoints = 0;
     uint16 limitPoints = 0;
-    int32  HP          = 0;
-    int32  MP          = 0;
+};
 
-    // TODO: extract into LoadFromCharsSQL
-    const char* fmtQuery = "SELECT "
-                           "charname, "
-                           "nation, "
-                           "pos_zone, "
-                           "pos_prevzone, "
-                           "pos_prevzonelineid, "
-                           "pos_rot, "
-                           "pos_x, "
-                           "pos_y, "
-                           "pos_z, "
-                           "moghouse, "
-                           "boundary, "
-                           "accid, "
-                           "home_zone, "
-                           "home_rot, "
-                           "home_x, "
-                           "home_y, "
-                           "home_z, "
-                           "missions, "
-                           "assault, "
-                           "campaign, "
-                           "eminence, "
-                           "quests, "
-                           "keyitems, "
-                           "abilities, "
-                           "weaponskills, "
-                           "titles, "
-                           "zones, "
-                           "playtime, "
-                           "gmlevel, "
-                           "languages, "
-                           "job_master, "
-                           "campaign_allegiance, "
-                           "isstylelocked, "
-                           "settings, "
-                           "chatfilters_1, "
-                           "chatfilters_2, "
-                           "moghancement, "
-                           "UNIX_TIMESTAMP(`lastupdate`) AS lastonline "
-                           "FROM chars "
-                           "WHERE charid = ?";
+struct CharStatsRow
+{
+    int32 hp     = 0;
+    int32 mp     = 0;
+    uint8 zoning = 0;
+};
 
-    auto rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharsSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT "
+                                       "charname, "
+                                       "nation, "
+                                       "pos_zone, "
+                                       "pos_prevzone, "
+                                       "pos_prevzonelineid, "
+                                       "pos_rot, "
+                                       "pos_x, "
+                                       "pos_y, "
+                                       "pos_z, "
+                                       "moghouse, "
+                                       "boundary, "
+                                       "accid, "
+                                       "home_zone, "
+                                       "home_rot, "
+                                       "home_x, "
+                                       "home_y, "
+                                       "home_z, "
+                                       "missions, "
+                                       "assault, "
+                                       "campaign, "
+                                       "eminence, "
+                                       "quests, "
+                                       "keyitems, "
+                                       "abilities, "
+                                       "weaponskills, "
+                                       "titles, "
+                                       "zones, "
+                                       "playtime, "
+                                       "gmlevel, "
+                                       "languages, "
+                                       "job_master, "
+                                       "campaign_allegiance, "
+                                       "isstylelocked, "
+                                       "settings, "
+                                       "chatfilters_1, "
+                                       "chatfilters_2, "
+                                       "moghancement, "
+                                       "UNIX_TIMESTAMP(`lastupdate`) AS lastonline "
+                                       "FROM chars "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->targid = 0x400;
@@ -412,35 +415,33 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         std::memcpy(&PChar->playerConfig.MessageFilter, &MessageFilter, sizeof(uint32_t));
         std::memcpy(&PChar->playerConfig.MessageFilter2, &MessageFilter2, sizeof(uint32_t));
     }
+}
 
-    // TODO: Rename LoadFromCharSpellsSQL
-    LoadSpells(PChar);
-
-    // TODO: LoadFromCharProfileSQL
-    fmtQuery = "SELECT "
-               "rank_points,"
-               "rank_sandoria,"
-               "rank_bastok,"
-               "rank_windurst,"
-               "fame_sandoria,"
-               "fame_bastok,"
-               "fame_windurst,"
-               "fame_norg, "
-               "fame_aby_konschtat, "
-               "fame_aby_tahrongi, "
-               "fame_aby_latheine, "
-               "fame_aby_misareaux, "
-               "fame_aby_vunkerl, "
-               "fame_aby_attohwa, "
-               "fame_aby_altepa, "
-               "fame_aby_grauberg, "
-               "fame_aby_uleguerand, "
-               "fame_adoulin,"
-               "unity_leader "
-               "FROM char_profile "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharProfileSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT "
+                                       "rank_points,"
+                                       "rank_sandoria,"
+                                       "rank_bastok,"
+                                       "rank_windurst,"
+                                       "fame_sandoria,"
+                                       "fame_bastok,"
+                                       "fame_windurst,"
+                                       "fame_norg, "
+                                       "fame_aby_konschtat, "
+                                       "fame_aby_tahrongi, "
+                                       "fame_aby_latheine, "
+                                       "fame_aby_misareaux, "
+                                       "fame_aby_vunkerl, "
+                                       "fame_aby_attohwa, "
+                                       "fame_aby_altepa, "
+                                       "fame_aby_grauberg, "
+                                       "fame_aby_uleguerand, "
+                                       "fame_adoulin,"
+                                       "unity_leader "
+                                       "FROM char_profile "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->profile.rankpoints = rset->get<uint16>("rank_points");
@@ -468,29 +469,28 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
 
         PChar->profile.unity_leader = rset->get<uint8>("unity_leader");
     }
+}
 
-    roeutils::onCharLoad(PChar);
-
-    // TODO: LoadFromCharStorageSQL
-    fmtQuery = "SELECT "
-               "inventory,"
-               "safe,"
-               "locker,"
-               "satchel,"
-               "sack,"
-               "`case`,"
-               "wardrobe,"
-               "wardrobe2,"
-               "wardrobe3,"
-               "wardrobe4,"
-               "wardrobe5,"
-               "wardrobe6,"
-               "wardrobe7,"
-               "wardrobe8 "
-               "FROM char_storage "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharStorageSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT "
+                                       "inventory,"
+                                       "safe,"
+                                       "locker,"
+                                       "satchel,"
+                                       "sack,"
+                                       "`case`,"
+                                       "wardrobe,"
+                                       "wardrobe2,"
+                                       "wardrobe3,"
+                                       "wardrobe4,"
+                                       "wardrobe5,"
+                                       "wardrobe6,"
+                                       "wardrobe7,"
+                                       "wardrobe8 "
+                                       "FROM char_storage "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->getStorage(LOC_INVENTORY)->AddBuff(rset->get<uint8>("inventory"));
@@ -515,13 +515,14 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         // NOTE: Not from the db, hard-coded to 10!
         PChar->getStorage(LOC_RECYCLEBIN)->AddBuff(10);
     }
+}
 
-    // TODO: LoadFromCharLookSQL
-    fmtQuery = "SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
-               "FROM char_look "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharLookSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
+                                       "FROM char_look "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->look.face = rset->get<uint8>("face");
@@ -567,10 +568,11 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
             PChar->modelHitboxSize = 4.0f / 10.0f;
             break;
     }
+}
 
-    // LoadFromCharStyleSQL
-    fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = ?";
-    rset     = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharStyleSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = ?", PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->styleItems[SLOT_HEAD]   = rset->get<uint16>("head");
@@ -582,13 +584,14 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         PChar->styleItems[SLOT_SUB]    = rset->get<uint16>("sub");
         PChar->styleItems[SLOT_RANGED] = rset->get<uint16>("ranged");
     }
+}
 
-    // LoadFromCharJobsSQL
-    fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
-               "FROM char_jobs "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharJobsSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
+                                       "FROM char_jobs "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->jobs.unlocked = rset->get<uint32>("unlocked");
@@ -617,13 +620,17 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         PChar->jobs.job[static_cast<uint8>(xi::Job::GEO)] = rset->get<uint8>("geo");
         PChar->jobs.job[static_cast<uint8>(xi::Job::RUN)] = rset->get<uint8>("run");
     }
+}
 
-    // LoadFromCharExpSQL
-    fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
-               "FROM char_exp "
-               "WHERE charid = ?";
+auto LoadFromCharExpSQL(CCharEntity* PChar) -> CharExpRow
+{
+    uint8  meritPoints = 0;
+    uint16 limitPoints = 0;
 
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+    const auto rset = db::preparedStmt("SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
+                                       "FROM char_exp "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->MeritMode = rset->get<uint8>("mode");
@@ -655,13 +662,19 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         limitPoints = rset->get<uint16>("limits");
     }
 
-    // TODO: LoadFromCharStatsSQL
-    fmtQuery = "SELECT mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
-               "pet_id, pet_type, pet_hp, pet_mp, pet_level "
-               "FROM char_stats WHERE charid = ?";
+    return { .meritPoints = meritPoints, .limitPoints = limitPoints };
+}
 
-    uint8 zoning = 0;
-    rset         = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharStatsSQL(CCharEntity* PChar) -> CharStatsRow
+{
+    int32 HP = 0;
+    int32 MP = 0;
+
+    uint8      zoning = 0;
+    const auto rset   = db::preparedStmt("SELECT mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
+                                         "pet_id, pet_type, pet_hp, pet_mp, pet_level "
+                                         "FROM char_stats WHERE charid = ?",
+                                         PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->SetMJob(rset->get<uint8>("mjob"));
@@ -706,26 +719,12 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         }
     }
 
-    db::preparedStmt("UPDATE char_stats SET zoning = 0 WHERE charid = ? LIMIT 1", PChar->id);
+    return { .hp = HP, .mp = MP, .zoning = zoning };
+}
 
-    PChar->arrivedByZoning = zoning == 1;
-
-    if (zoning == 2)
-    {
-        ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
-
-        // Set this value so we can not process some effects until the player is fully in-game.
-        // This is cleared in the player global, onGameIn function.
-        PChar->SetLocalVar("gameLogin", 1);
-    }
-
-    PChar->SetMLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
-    PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
-
-    // TODO: LoadFromCharRecastSQL
-    fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharRecastSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT id, time, recast FROM char_recast WHERE charid = ?", PChar->id);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -747,13 +746,14 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
             }
         }
     }
+}
 
-    // TODO: LoadFromCharSkillsSQL
-    fmtQuery = "SELECT skillid, value, rank "
-               "FROM char_skills "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharSkillsSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT skillid, value, rank "
+                                       "FROM char_skills "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -769,16 +769,17 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
             }
         }
     }
+}
 
-    // LoadFromCharUnlocksSQL
-    fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-               "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
-               "abyssea_conflux, waypoints, eschan_portals, claimed_deeds, unique_event, "
-               "maze_vouchers, maze_runes "
-               "FROM char_unlocks "
-               "WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharUnlocksSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
+                                       "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
+                                       "abyssea_conflux, waypoints, eschan_portals, claimed_deeds, unique_event, "
+                                       "maze_vouchers, maze_runes "
+                                       "FROM char_unlocks "
+                                       "WHERE charid = ?",
+                                       PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->teleport.outpostSandy   = rset->get<uint32>("outpost_sandy");
@@ -800,23 +801,20 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
         db::extractFromBlob(rset, "maze_vouchers", PChar->maze().vouchers);
         db::extractFromBlob(rset, "maze_runes", PChar->maze().runes);
     }
+}
 
-    // TODO: Remove raw new's
-    PChar->PMeritPoints = std::make_unique<CMeritPoints>(PChar);
-    PChar->PMeritPoints->SetMeritPoints(meritPoints);
-    PChar->PMeritPoints->SetLimitPoints(limitPoints);
-    PChar->PJobPoints = std::make_unique<CJobPoints>(PChar);
-
-    rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = ?", PChar->id);
+auto LoadFromCharPetSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = ?", PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         PChar->m_FieldChocobo = rset->get<uint32>("field_chocobo");
     }
+}
 
-    // TODO: LoadCharFlagsFromSQL
-    fmtQuery = "SELECT gmModeEnabled, gmHiddenEnabled FROM char_flags WHERE charid = ?";
-
-    rset = db::preparedStmt(fmtQuery, PChar->id);
+auto LoadFromCharFlagsSQL(CCharEntity* PChar) -> void
+{
+    const auto rset = db::preparedStmt("SELECT gmModeEnabled, gmHiddenEnabled FROM char_flags WHERE charid = ?", PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         bool gmEnabled = rset->get<uint32>("gmModeEnabled");
@@ -830,6 +828,59 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
 
         PChar->m_isGMHidden = gmHidden;
     }
+}
+
+} // namespace
+
+auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
+{
+    TracyZoneScoped;
+
+    std::unique_ptr<CCharEntity> charEntity = std::make_unique<CCharEntity>();
+    auto*                        PChar      = charEntity.get();
+    PChar->id                               = charId;
+
+    LoadFromCharsSQL(PChar);
+    LoadFromCharSpellsSQL(PChar);
+    LoadFromCharProfileSQL(PChar);
+
+    roeutils::onCharLoad(PChar);
+
+    LoadFromCharStorageSQL(PChar);
+    LoadFromCharLookSQL(PChar);
+    LoadFromCharStyleSQL(PChar);
+    LoadFromCharJobsSQL(PChar);
+
+    const auto charExp   = LoadFromCharExpSQL(PChar);
+    const auto charStats = LoadFromCharStatsSQL(PChar);
+
+    db::preparedStmt("UPDATE char_stats SET zoning = 0 WHERE charid = ? LIMIT 1", PChar->id);
+
+    PChar->arrivedByZoning = charStats.zoning == 1;
+
+    if (charStats.zoning == 2)
+    {
+        ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
+
+        // Set this value so we can not process some effects until the player is fully in-game.
+        // This is cleared in the player global, onGameIn function.
+        PChar->SetLocalVar("gameLogin", 1);
+    }
+
+    PChar->SetMLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
+    PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
+
+    LoadFromCharRecastSQL(PChar);
+    LoadFromCharSkillsSQL(PChar);
+    LoadFromCharUnlocksSQL(PChar);
+
+    PChar->PMeritPoints = std::make_unique<CMeritPoints>(PChar);
+    PChar->PMeritPoints->SetMeritPoints(charExp.meritPoints);
+    PChar->PMeritPoints->SetLimitPoints(charExp.limitPoints);
+    PChar->PJobPoints = std::make_unique<CJobPoints>(PChar);
+
+    LoadFromCharPetSQL(PChar);
+    LoadFromCharFlagsSQL(PChar);
 
     monstrosity::TryPopulateMonstrosityData(PChar);
 
@@ -848,15 +899,43 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
     // Order matters as this uses merits and JP gifts.
     puppetutils::LoadAutomaton(PChar);
 
-    PChar->animation = (HP == 0 ? xi::Animation::Death : xi::Animation::None);
+    PChar->animation = [&]
+    {
+        if (charStats.hp == 0)
+        {
+            return xi::Animation::Death;
+        }
+
+        return xi::Animation::None;
+    }();
 
     PChar->StatusEffectContainer->LoadStatusEffects();
 
     charutils::LoadEquip(PChar);
     charutils::EmptyRecycleBin(PChar);
-    bool canRestore  = zoneutils::IsResidentialArea(PChar) && HP > 0;
-    PChar->health.hp = canRestore ? PChar->GetMaxHP() : HP;
-    PChar->health.mp = canRestore ? PChar->GetMaxMP() : MP;
+
+    const bool canRestore = zoneutils::IsResidentialArea(PChar) && charStats.hp > 0;
+
+    PChar->health.hp = [&]() -> int32
+    {
+        if (canRestore)
+        {
+            return PChar->GetMaxHP();
+        }
+
+        return charStats.hp;
+    }();
+
+    PChar->health.mp = [&]() -> int32
+    {
+        if (canRestore)
+        {
+            return PChar->GetMaxMP();
+        }
+
+        return charStats.mp;
+    }();
+
     PChar->UpdateHealth();
 
     PChar->status = xi::Status::Disappear;
@@ -864,7 +943,7 @@ auto LoadChar(const uint32 charId) -> std::unique_ptr<CCharEntity>
     return charEntity;
 }
 
-void LoadSpells(CCharEntity* PChar)
+void LoadFromCharSpellsSQL(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
@@ -945,19 +1024,18 @@ void LoadInventory(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    const char* query = "SELECT "
-                        "itemid, "
-                        "location, "
-                        "slot, "
-                        "quantity, "
-                        "bazaar, "
-                        "signature, "
-                        "extra "
-                        "FROM char_inventory "
-                        "WHERE charid = ? "
-                        "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12)";
-
-    auto rset = db::preparedStmt(query, PChar->id);
+    auto rset = db::preparedStmt("SELECT "
+                                 "itemid, "
+                                 "location, "
+                                 "slot, "
+                                 "quantity, "
+                                 "bazaar, "
+                                 "signature, "
+                                 "extra "
+                                 "FROM char_inventory "
+                                 "WHERE charid = ? "
+                                 "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12)",
+                                 PChar->id);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -1062,14 +1140,13 @@ void LoadEquip(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    const char* Query = "SELECT "
-                        "slotid,"
-                        "equipslotid,"
-                        "containerid "
-                        "FROM char_equip "
-                        "WHERE charid = ?";
-
-    auto rset = db::preparedStmt(Query, PChar->id);
+    auto rset = db::preparedStmt("SELECT "
+                                 "slotid,"
+                                 "equipslotid,"
+                                 "containerid "
+                                 "FROM char_equip "
+                                 "WHERE charid = ?",
+                                 PChar->id);
     if (rset)
     {
         // equipSlotData[equipSlotId] = { slotId, containerId }
@@ -5235,25 +5312,6 @@ void SaveCharPositions(const std::vector<CharPosition>& rows)
                 });
         });
 }
-
-/* TODO: Move linkshell persistence here
-void SaveCharLinkshells(CCharEntity* PChar)
-{
-    for (uint8 lsSlot = 16; lsSlot < 18; ++lsSlot)
-    {
-        auto eloc = PChar->equipLocation(lsSlot);
-        if (!eloc)
-        {
-            sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1", PChar->id, lsSlot);
-        }
-        else
-        {
-            const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u";
-            sql->Query(fmtQuery, PChar->id, lsSlot, static_cast<uint8>(eloc->Container), eloc->Slot, static_cast<uint8>(eloc->Container), eloc->Slot);
-        }
-    }
-}
-*/
 
 void SaveQuestsList(CCharEntity* PChar)
 {

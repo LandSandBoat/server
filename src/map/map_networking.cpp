@@ -466,6 +466,8 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
 
     if (PChar->retriggerLatents)
     {
+        TracyZoneNamed(latentZone, "parse: retrigger latents");
+
         for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
         {
             if (PChar->getEquip(static_cast<SLOTTYPE>(equipSlotID)))
@@ -476,8 +478,12 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
         PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 
-    // Flush any batched equip changes after processing all incoming packets
-    PChar->flushEquipChanges();
+    {
+        TracyZoneNamed(equipFlushZone, "parse: flush equip changes");
+
+        // Flush any batched equip changes after processing all incoming packets
+        PChar->flushEquipChanges();
+    }
 
     PSession->client_packet_id = SmallPD_Code;
 
@@ -531,13 +537,25 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsToSendPerTick, static_cast<uint32>(PChar->getPacketCount()));
 
+    uint32 attempts = 0;
+
     do
     {
         do
         {
-            *buffsize       = FFXI_HEADER_SIZE;
-            auto packetList = PChar->getPacketListCopy();
-            packets         = 0;
+            ++attempts;
+
+            TracyZoneNamed(attemptZone, "send_parse: attempt");
+
+            *buffsize = FFXI_HEADER_SIZE;
+            packets   = 0;
+
+            auto packetList = [&]
+            {
+                TracyZoneNamed(copyZone, "send_parse: copy packet list");
+
+                return PChar->getPacketListCopy();
+            }();
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < kMaxBufferSize && static_cast<size_t>(packets) < PacketCount)
             {
@@ -583,7 +601,13 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
             // Compress the data without regard to the header
             // The returned size is 8 times the real data
-            auto maybePacketSize = compressPacket(buff, static_cast<size_t>(*buffsize));
+            const auto maybePacketSize = [&]
+            {
+                TracyZoneNamed(compressZone, "send_parse: compress");
+
+                return compressPacket(buff, static_cast<size_t>(*buffsize));
+            }();
+
             if (!maybePacketSize)
             {
                 ShowError("zlib compression error");
@@ -612,7 +636,15 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsSentPerTick, static_cast<uint32>(packets));
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
-    finalizePacket(buff, buffsize, PacketSize, PSession, usePreviousKey);
+    // Every extra attempt re-copies the whole outgoing list and re-runs zlib, so this is the
+    // number to watch when send_parse spikes.
+    TracyReportGraphNumber("send_parse Attempts", static_cast<int64>(attempts));
+
+    {
+        TracyZoneNamed(finalizeZone, "send_parse: finalize");
+
+        finalizePacket(buff, buffsize, PacketSize, PSession, usePreviousKey);
+    }
 
     auto remainingPackets = PChar->getPacketCount();
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsDelayedPerTick, static_cast<uint32>(remainingPackets));
@@ -664,8 +696,6 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
 void MapNetworking::preparePacket(uint8* buff, MapSession* PSession)
 {
-    TracyZoneScoped;
-
     // Modify the header of the outgoing packet
     // The essence of the transformations:
     // - send the client the number of the last packet received from him

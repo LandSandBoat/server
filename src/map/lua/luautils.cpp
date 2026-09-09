@@ -1926,8 +1926,6 @@ uint8 VanadielDayElement()
  ************************************************************************/
 uint32 GetSystemTime()
 {
-    TracyZoneScoped;
-
     return earth_time::timestamp();
 }
 
