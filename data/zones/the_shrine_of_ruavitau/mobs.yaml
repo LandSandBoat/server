@@ -1719,7 +1719,7 @@ spawns:
     level:    [79, 81]
   17506438:
     template: Decorative_Weapon
-    region:   w_131
+    region:   region_193
     level:    [79, 81]
   17506439:
     template: Decorative_Weapon
@@ -1759,7 +1759,7 @@ spawns:
     level:    [79, 81]
   17506448:
     template: Decorative_Weapon
-    region:   c_143
+    region:   region_185
     level:    [79, 81]
   17506449:
     template: Decorative_Weapon
@@ -2071,7 +2071,7 @@ spawns:
     level:    [79, 81]
   17506526:
     template: Decorative_Weapon
-    region:   c_247
+    region:   region_188
     level:    [79, 81]
   17506527:
     template: Decorative_Weapon
@@ -2183,7 +2183,7 @@ spawns:
     level:    [79, 81]
   17506554:
     template: Decorative_Weapon
-    region:   c_247
+    region:   region_189
     level:    [79, 81]
   17506555:
     template: Decorative_Weapon
@@ -2295,7 +2295,7 @@ spawns:
     level:    [79, 81]
   17506582:
     template: Aura_Weapon
-    region:   w_275
+    region:   region_190
     level:    [80, 82]
   17506583:
     template: Aura_Weapon
@@ -2395,15 +2395,15 @@ spawns:
     level:    [80, 82]
   17506607:
     template: Aura_Weapon
-    region:   w_300
+    region:   region_192
     level:    [80, 82]
   17506608:
     template: Aura_Weapon
-    region:   w_302
+    region:   region_191
     level:    [80, 82]
   17506609:
     template: Aura_Weapon
-    region:   region_128
+    region:   region_187
     level:    [80, 82]
   17506610:
     template: Aura_Weapon
@@ -2471,7 +2471,7 @@ spawns:
     level:    [81, 84]
   17506626:
     template: Aura_Statue
-    region:   w_318
+    region:   region_135
     level:    [81, 84]
   17506627:
     template: Aura_Statue
@@ -2483,11 +2483,11 @@ spawns:
     level:    [81, 84]
   17506629:
     template: Aura_Statue
-    region:   region_135
+    region:   region_138
     level:    [81, 84]
   17506630:
     template: Aura_Statue
-    region:   region_136
+    region:   region_134
     level:    [81, 84]
   17506631:
     template: Aura_Statue
@@ -2495,7 +2495,7 @@ spawns:
     level:    [81, 84]
   17506632:
     template: Aura_Statue
-    region:   region_138
+    region:   region_136
     level:    [81, 84]
   17506633:
     template: Aura_Statue
@@ -2515,7 +2515,7 @@ spawns:
     level:    [81, 84]
   17506637:
     template: Aura_Statue
-    region:   region_131
+    region:   region_140
     level:    [81, 84]
   17506638:
     template: Dark_Elemental
@@ -2527,7 +2527,7 @@ spawns:
     level:    [73, 74]
   17506640:
     template: Aura_Statue
-    region:   region_140
+    region:   region_131
     level:    [81, 84]
   17506641:
     template: Aura_Statue
@@ -2547,7 +2547,7 @@ spawns:
     level:    [81, 84]
   17506645:
     template: Aura_Statue
-    region:   region_141
+    region:   region_186
     level:    [81, 84]
   17506646:
     template: Baelfyr
