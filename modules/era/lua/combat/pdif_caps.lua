@@ -29,3 +29,34 @@ m:addOverride('xi.server.onServerStart', function()
     xi.combat.physical.pDifWeaponCapTable[xi.skill.THROWING        ] = 3
     xi.combat.physical.pDifWeaponCapTable[xi.skill.BLUE_MAGIC      ] = 2
 end)
+
+m:addOverride('xi.combat.physical.wRatioCapPC', function(wRatio, pDifFinalCap)
+    local pDifUpperCap = 0
+    local pDifLowerCap = 0
+
+    if wRatio < 0.5 then
+        pDifUpperCap = wRatio + 0.5
+    elseif wRatio < 0.7 then
+        pDifUpperCap = 1
+    elseif wRatio < 1.2 then
+        pDifUpperCap = wRatio + 0.3
+    elseif wRatio < 1.5 then
+        pDifUpperCap = wRatio + wRatio * 0.25
+    else
+        pDifUpperCap = math.min(wRatio, pDifFinalCap) + 0.375
+    end
+
+    if wRatio < 0.38 then
+        pDifLowerCap = 0
+    elseif wRatio < 1.25 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 448 / 1024
+    elseif wRatio < 1.51 then
+        pDifLowerCap = 1
+    elseif wRatio < 2.44 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 775 / 1024
+    else
+        pDifLowerCap = math.min(wRatio, pDifFinalCap) - 0.375
+    end
+
+    return pDifLowerCap, pDifUpperCap
+end)
