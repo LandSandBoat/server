@@ -1777,7 +1777,7 @@ spawns:
     level:    [68, 70]
   17055775:
     template: Qiqirn_Enterpriser
-    region:   c_31
+    region:   region_240
     level:    [68, 70]
   17055776:
     template: Treant_Sapling_AS_CM
