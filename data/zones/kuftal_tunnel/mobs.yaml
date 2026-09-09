@@ -2503,7 +2503,7 @@ spawns:
     level:    [65, 68]
   17490186:
     template: Deinonychus
-    at:       [31.637, 20.027, 136.962, 46]
+    region:   region_99
     level:    [65, 68]
   17490187:
     template: Goblin_Bandit
@@ -2515,7 +2515,7 @@ spawns:
     level:    [66, 69]
   17490189:
     template: Kuftal_Digger
-    at:       [99.000, 27.000, 101.000, 127]
+    region:   region_100
     level:    [66, 69]
   17490190:
     template: Diplopod
