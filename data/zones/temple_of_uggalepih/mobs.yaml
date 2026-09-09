@@ -2344,7 +2344,7 @@ spawns:
     level:    [56, 59]
   17428651:
     template: Manipulator
-    region:   sw_171
+    at:       [0.000, 0.000, 0.100]
     level:    [59, 61]
   17428652:
     template: Torama
