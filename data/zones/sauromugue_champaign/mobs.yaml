@@ -2308,6 +2308,7 @@ spawns:
     level:    [32, 33]
   17268768:
     template: Yagudos_Elemental
+    region:   se_26
     level:    [23, 28]
   17268769:
     template: Yagudo_Priest
@@ -2665,6 +2666,7 @@ spawns:
     level:    [32, 33]
   17268837:
     template: Yagudos_Elemental
+    region:   e_95
     level:    [23, 28]
   17268838:
     template: Yagudo_Priest
@@ -2770,6 +2772,7 @@ spawns:
     level:    [31, 32]
   17268858:
     template: Goblins_Beetle
+    region:   ne_112
     level:    [23, 27]
   17268859:
     template: Goblin_Leecher
@@ -3004,6 +3007,7 @@ spawns:
     level:    [31, 32]
   17268900:
     template: Goblins_Beetle
+    region:   c_161
     level:    [23, 27]
   17268901:
     template: Goblin_Leecher
@@ -3175,6 +3179,7 @@ spawns:
     level:    [32, 33]
   17268935:
     template: Yagudos_Elemental
+    region:   n_193
     level:    [23, 28]
   17268936:
     template: Yagudo_Priest
@@ -3353,6 +3358,7 @@ spawns:
     level:    [32, 33]
   17268968:
     template: Yagudos_Elemental
+    region:   c_227
     level:    [23, 28]
   17268969:
     template: Yagudo_Priest
@@ -3555,6 +3561,7 @@ spawns:
     level:    [31, 32]
   17269002:
     template: Goblins_Beetle
+    region:   nw_264
     level:    [26, 27]
   17269003:
     template: Goblin_Leecher
@@ -3771,6 +3778,7 @@ spawns:
     level:    [31, 32]
   17269045:
     template: Goblins_Beetle
+    region:   s_307
     level:    [23, 27]
   17269046:
     template: Goblin_Leecher
@@ -3930,6 +3938,7 @@ spawns:
     level:    [31, 32]
   17269077:
     template: Goblins_Beetle
+    region:   s_339
     level:    [26, 27]
   17269078:
     template: Goblin_Leecher
