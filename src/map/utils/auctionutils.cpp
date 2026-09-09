@@ -273,6 +273,8 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
 
             const auto boughtQuantity = static_cast<uint32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
 
+            bool listingFound = false;
+
             // pay() refuses a balance that is short, and the auction_house_buy trigger pays the seller when the row is marked sold, so the two unwind together
             const auto success = db::transaction(
                 [&]()
@@ -286,17 +288,31 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                                                        param.ItemNo,
                                                        param.ItemStacks == 0,
                                                        param.BidPrice);
-                    if (rset && rset->rowsAffected() &&
-                        transaction->pay(param.BidPrice) &&
-                        transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity))
+                    if (!rset)
                     {
+                        throw std::runtime_error(fmt::format("AH: could not mark item {} sold to {} ({})", param.ItemNo, PChar->getName(), PChar->id));
+                    }
+
+                    if (!rset->rowsAffected())
+                    {
+                        DebugAuctionsFmt("AH: no listing of item {} at or below {} gil for {}", param.ItemNo, param.BidPrice, PChar->getName());
                         return;
                     }
 
-                    throw std::runtime_error(fmt::format("AH: Failed to sell item {} to char {} ({})", param.ItemNo, PChar->getName(), PChar->id));
+                    listingFound = true;
+
+                    if (!transaction->pay(param.BidPrice))
+                    {
+                        throw std::runtime_error(fmt::format("AH: {} ({}) bought item {} for {} gil but cannot pay for it", PChar->getName(), PChar->id, param.ItemNo, param.BidPrice));
+                    }
+
+                    if (!transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity))
+                    {
+                        throw std::runtime_error(fmt::format("AH: {} ({}) bought item {} x{} but it could not be added to their inventory", PChar->getName(), PChar->id, param.ItemNo, boughtQuantity));
+                    }
                 });
 
-            if (success && transaction->commit())
+            if (success && listingFound && transaction->commit())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
@@ -336,6 +352,8 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
             return;
         }
 
+        bool listingFound = false;
+
         const auto success = db::transaction(
             [&]()
             {
@@ -344,29 +362,40 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                                                    canceledItem.itemid,
                                                    canceledItem.stack,
                                                    canceledItem.price);
-                if (rset && rset->rowsAffected())
+                if (!rset)
                 {
-                    if (const CItem* PDelItem = xi::items::lookup(canceledItem.itemid))
-                    {
-                        if (transaction->give(LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), Silence::Yes))
-                        {
-                            return;
-                        }
-                    }
+                    throw std::runtime_error(fmt::format("AH: could not remove listing of item {} for {} ({})", canceledItem.itemid, PChar->getName(), PChar->id));
                 }
 
-                // If we got here, something went wrong.
-                throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
-            });
-        if (success && !transaction->commit())
-        {
-            return;
-        }
+                if (!rset->rowsAffected())
+                {
+                    DebugAuctionsFmt("AH: no open listing of item {} at {} gil to cancel for {}", canceledItem.itemid, canceledItem.price, PChar->getName());
+                    return;
+                }
 
-        if (success)
+                listingFound = true;
+
+                const CItem* PDelItem = xi::items::lookup(canceledItem.itemid);
+                if (!PDelItem)
+                {
+                    throw std::runtime_error(fmt::format("AH: {} ({}) cancelled a listing of unknown item id {}", PChar->getName(), PChar->id, canceledItem.itemid));
+                }
+
+                const auto returnedQuantity = canceledItem.stack != 0 ? PDelItem->getStackSize() : 1;
+                if (!transaction->give(LOC_INVENTORY, canceledItem.itemid, returnedQuantity, Silence::Yes))
+                {
+                    throw std::runtime_error(fmt::format("AH: {} ({}) cancelled item {} x{} but it could not be returned to their inventory", PChar->getName(), PChar->id, canceledItem.itemid, returnedQuantity));
+                }
+            });
+
+        if (success && listingFound)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            if (transaction->commit())
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            }
+
             return;
         }
     }

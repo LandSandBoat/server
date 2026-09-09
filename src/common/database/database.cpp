@@ -380,8 +380,7 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
     }
     catch (const std::exception& e)
     {
-        ShowCritical("Transaction failed: Rolling back!");
-        ShowCritical("Transaction failed: %s", e.what());
+        ShowCriticalFmt("Transaction failed, rolling back: {}", e.what());
 
         db::transactionRollback();
         return false;
