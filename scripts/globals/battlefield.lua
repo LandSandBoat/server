@@ -44,21 +44,6 @@ local maxAreas =
     },
 }
 
-function onBattlefieldHandlerInitialize(zone)
-    local id      = zone:getID()
-    local default = 3
-
-    for _, battlefield in pairs(maxAreas) do
-        for _, zoneid in pairs(battlefield.Zones) do
-            if id == zoneid then
-                return battlefield.Max
-            end
-        end
-    end
-
-    return default
-end
-
 xi.loot = xi.loot or {}
 
 xi.loot.weight =
@@ -76,6 +61,23 @@ xi.battlefield = xi.battlefield or {}
 xi.battlefield.contents = xi.battlefield.contents or {}
 xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
 
+-- Battlefields the zone can hold at once, which is also how many arenas its entry event asks for
+function xi.battlefield.getMaxAreas(zoneId)
+    for _, battlefield in pairs(maxAreas) do
+        for _, zoneid in pairs(battlefield.Zones) do
+            if zoneId == zoneid then
+                return battlefield.Max
+            end
+        end
+    end
+
+    return 3
+end
+
+function onBattlefieldHandlerInitialize(zone)
+    return xi.battlefield.getMaxAreas(zone:getID())
+end
+
 xi.battlefield.status =
 {
     OPEN     = 0,
@@ -92,7 +94,6 @@ xi.battlefield.returnCode =
     LOCKED            = 4,
     REQS_NOT_MET      = 5,
     BATTLEFIELD_FULL  = 6,
-    PARTY_ENGAGED     = 9, -- Used as 2nd parameter to LOCKED
 }
 
 xi.battlefield.leaveCode =
@@ -712,8 +713,15 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     if not onUpdate then
         -- Open menu of valid battlefields
-        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        return Battlefield.openEntryMenu(player, options, false)
     end
+end
+
+-- Helper function to open the battlefield entry menu for the player
+function Battlefield.openEntryMenu(player, options, enterExisting)
+    player:setLocalVar('[BCNM]EnterExisting', enterExisting and 1 or 0)
+
+    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
 
 function Battlefield.onEntryTrigger(player, npc)
@@ -737,17 +745,25 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
-        player:setLocalVar('[BCNM]EnterExisting', 1)
-        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        return Battlefield.openEntryMenu(player, options, true)
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
     -- Check if another party member has battlefield status effect. If so, that means the player is trying to enter a closed battlefield.
+    local ID       = zones[player:getZoneID()]
     local alliance = player:getAlliance()
 
     for _, member in pairs(alliance) do
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
-            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_ARE_ENGAGED)
+            -- A member registered for the fight lost clearance when it started, anyone else never had it
+            local registered = player:getRegisteredBattlefield()
+
+            if registered and registered:getStatus() ~= xi.battlefield.status.OPEN then
+                player:messageText(npc, ID.text.CLEARED_BUT_MEMBERS_ENGAGED, false)
+            else
+                player:messageSpecial(ID.text.PARTY_MEMBERS_ARE_ENGAGED)
+            end
+
             return
         end
     end
@@ -771,7 +787,7 @@ function Battlefield.onEntryTrigger(player, npc)
         return
     end
 
-    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    return Battlefield.openEntryMenu(player, options, false)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
@@ -781,7 +797,7 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     end
 
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
-    local value    = bit.rshift(option, 4)
+    local value    = bit.band(bit.rshift(option, 4), 0x1F)
 
     for _, content in pairs(contents) do
         if value == content.index then
@@ -792,17 +808,18 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     end
 end
 
--- NOTE: Return values from this function impact if the server will honor update position
--- requests or not.  The client will request each area, and so long as we return 0, it
--- will still send the appropriate position packet, but not change the values for the player.
-
+-- The entry event asks for the zone's arenas in order.
+-- Bits 0 to 3 of the option hold the arena the client wants to move into and bits 4 to 8 the menu index.
+-- The client tries the next arena on WAIT (or no reply) then restarts from the first arena on INCREMENT_REQUEST.
+-- It then prints the matching message and stops on LOCKED, REQS_NOT_MET and BATTLEFIELD_FULL.
+-- Registering the arena that was asked for keeps the battlefield and the position the client moves to in sync so we dont have to save it locally anymore
 function Battlefield:onEntryEventUpdate(player, csid, option, npc)
-    -- Can't enter if party locked the battlefield
-    local isEnteringExisting = player:getLocalVar('[BCNM]EnterExisting') == 1
-    if isEnteringExisting and not player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        player:setLocalVar('[BCNM]EnterExisting', 0)
-        player:setLocalVar('[battlefield]area', 0)
-        player:updateEvent(xi.battlefield.returnCode.LOCKED, xi.battlefield.returnCode.PARTY_ENGAGED)
+    local requestedArea = bit.band(option, 0xF)
+    if
+        not self.area and
+        (requestedArea < 1 or requestedArea > xi.battlefield.getMaxAreas(player:getZoneID()))
+    then
+        player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
         player:setLocalVar('noPosUpdate', 1)
         return 0
     end
@@ -810,32 +827,16 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
     local name      = 'Meme'
     local partySize = 1
-    local area      = self.area or (player:getLocalVar('[battlefield]area') + 1)
+    local area      = self.area or requestedArea
 
-    -- NOTE: 'area' is used when there are not multiple arenas present, and cannot be used
-    -- if there are indeed multiple areas, but the implementation is partial.  allowedAreas
-    -- is used for this purpose, and additional logic on increment request below.  Setting area
-    -- for this purpose will cause issues with mob spawning if the implementation has placeholder
-    -- areas!  This should be used sparingly and removed upon proper captures for BCNM areas, as
-    -- this bypasses all registration logic if the battlefield area is flagged as disabled.
-
+    -- allowedAreas disables arenas whose mobs are not placed yet, the client moves on as if they were taken
     if
         self.allowedAreas and
         not self.allowedAreas[area]
     then
-        if area < 3 then
-            player:setLocalVar('[battlefield]area', area)
-        else
-            player:updateEvent(xi.battlefield.returnCode.WAIT)
-        end
-
-        -- TODO: Remove the localVar when issue with function return is resolved
+        player:updateEvent(xi.battlefield.returnCode.WAIT)
         player:setLocalVar('noPosUpdate', 1)
         return 0
-    end
-
-    if self.area then
-        area = self.area
     end
 
     local result = player:registerBattlefield(self.battlefieldId, area, player:getID(), self)
@@ -843,17 +844,13 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 
     if result ~= xi.battlefield.returnCode.CUTSCENE then
         if result == xi.battlefield.returnCode.INCREMENT_REQUEST then
-            if area < 3 then
-                player:setLocalVar('[battlefield]area', area)
-            else
-                player:updateEvent(xi.battlefield.returnCode.WAIT)
-            end
+            result = xi.battlefield.returnCode.WAIT
         elseif result == xi.battlefield.returnCode.REQS_NOT_MET then
-            -- Ensure Battlefield Effect is removed
             -- If you cant enter now, you cant enter by trying again right now...
             player:delStatusEffect(xi.effect.BATTLEFIELD)
-            player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
         end
+
+        player:updateEvent(result)
 
         -- TODO: Remove the localVar when issue with function return is resolved
         player:setLocalVar('noPosUpdate', 1)
@@ -908,7 +905,8 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         end
     end
 
-    local autoSkipCS = self:getLocalVar(player, 'CS') == 1 and 100 or 0
+    -- The client only skips the cutscene when this equals 100 plus the menu index it is given
+    local autoSkipCS = self:getLocalVar(player, 'CS') == 1 and 100 + self.index or 0
     player:updateEvent(result, self.index, autoSkipCS, clearTime, partySize, self:checkSkipCutscene(player), self.csParam7, self.csParam8)
     player:updateEventString(name)
 
@@ -934,8 +932,12 @@ function Battlefield.redirectEventCall(eventName, player, csid, option)
 end
 
 function Battlefield:onEventFinishEnter(player, csid, option, npc)
+    -- The menu also closes for players that were granted no arena
+    if not player:getBattlefield() then
+        return
+    end
+
     player:setEnteredBattlefield(true)
-    player:setLocalVar('[battlefield]area', 0)
     self:setLocalVar(player, 'CS', 1)
 end
 
@@ -963,12 +965,8 @@ function Battlefield.onExitTrigger(player, npc)
     end
 end
 
+-- The exit event only wants its updates acknowledged, the player leaves on finish
 function Battlefield:onExitEventUpdate(player, csid, option, npc)
-    if option == 2 then
-        player:updateEvent(3)
-    elseif option == 3 then
-        player:updateEvent(0)
-    end
 end
 
 function Battlefield:onEventFinishLeave(player, csid, option, npc)

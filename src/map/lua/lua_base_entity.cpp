@@ -12462,6 +12462,23 @@ auto CLuaBaseEntity::getBattlefield() const -> CBattlefield*
 }
 
 /************************************************************************
+ *  Function: getRegisteredBattlefield()
+ *  Purpose : Returns the battlefield the player is registered for, whether or not they still hold clearance
+ *  Example : local battlefield = player:getRegisteredBattlefield()
+ *  Notes   : Tells a member whose fight locked apart from someone who never had clearance
+ ************************************************************************/
+
+auto CLuaBaseEntity::getRegisteredBattlefield() const -> CBattlefield*
+{
+    if (m_PBaseEntity->objtype != TYPE_PC || m_PBaseEntity->loc.zone == nullptr || m_PBaseEntity->loc.zone->battlefieldHandler() == nullptr)
+    {
+        return nullptr;
+    }
+
+    return m_PBaseEntity->loc.zone->battlefieldHandler()->GetRegisteredBattlefield(static_cast<CCharEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: getBattlefieldID()
  *  Purpose : Returns the integer ID for the battlefield, -1 if not found
  *  Example : local battlefieldId = player:getBattlefieldID()
@@ -21048,6 +21065,7 @@ void CLuaBaseEntity::Register()
 
     // Battlefields
     SOL_REGISTER("getBattlefield", CLuaBaseEntity::getBattlefield);
+    SOL_REGISTER("getRegisteredBattlefield", CLuaBaseEntity::getRegisteredBattlefield);
     SOL_REGISTER("getBattlefieldID", CLuaBaseEntity::getBattlefieldID);
     SOL_REGISTER("registerBattlefield", CLuaBaseEntity::registerBattlefield);
     SOL_REGISTER("battlefieldAtCapacity", CLuaBaseEntity::battlefieldAtCapacity);

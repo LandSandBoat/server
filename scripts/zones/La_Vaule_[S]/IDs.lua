@@ -19,6 +19,7 @@ zones[xi.zone.LA_VAULE_S] =
         GATE_IS_LOCKED                = 7220, -- The gate is locked.
         CAMPAIGN_RESULTS_TALLIED      = 7611, -- Campaign results tallied.
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7701, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED   = 7703, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED     = 7716, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         DOOR_IS_LOCKED                = 7741, -- The door is locked.
         MEMBERS_OF_YOUR_PARTY         = 8007, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.

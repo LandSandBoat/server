@@ -18,6 +18,7 @@ zones[xi.zone.ABYSSEA_EMPYREAL_PARADOX] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         CRUOR_OBTAINED                = 7419, -- <name> obtained <number> cruor.
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7724, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED   = 7726, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED     = 7739, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         MEMBERS_OF_YOUR_PARTY         = 8030, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
         MEMBERS_OF_YOUR_ALLIANCE      = 8031, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
