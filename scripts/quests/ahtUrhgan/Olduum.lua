@@ -19,14 +19,14 @@ local keyItems =
     xi.ki.ELECTROLOCOMOTIVE,
 }
 
-local hasQuestKeyItem = function(player)
-    for _, v in pairs(keyItems) do
-        if player:hasKeyItem(v) then
-            return true
+local function getQuestKeyItem(player)
+    for _, keyItem in ipairs(keyItems) do
+        if player:hasKeyItem(keyItem) then
+            return keyItem
         end
     end
 
-    return false
+    return xi.ki.NONE
 end
 
 quest.sections =
@@ -67,20 +67,32 @@ quest.sections =
             ['Dkhaaya'] =
             {
                 onTrigger = function(player, npc)
-                    if hasQuestKeyItem(player) then
-                        return quest:progressEvent(6)
+                    local questKeyItem = getQuestKeyItem(player)
+
+                    if questKeyItem > 0 then
+                        return quest:progressEvent(6, { [0] = questKeyItem })
                     else
                         return quest:event(5)
                     end
                 end
             },
 
+            onEventUpdate =
+            {
+                [6] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(keyItems[quest:getVar(player, 'Prog')])
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
+                    local cellKeyItem = keyItems[quest:getVar(player, 'Prog')]
+
                     if quest:complete(player) then
-                        player:delKeyItem(keyItems[quest:getVar(player, 'Prog')])
-                        player:delKeyItem(xi.ki.DKHAAYAS_RESEARCH_JOURNAL)
+                        player:delKeyItem(cellKeyItem)
                     end
                 end,
             },
@@ -93,7 +105,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.OLDUUM_RING) and
-                        not hasQuestKeyItem(player) and
+                        getQuestKeyItem(player) == xi.ki.NONE and
                         npcUtil.tradeMatches(trade, { { xi.item.PICKAXE, 1 } })
                     then
                         if math.randomInt(1, 100) <= 50 then
@@ -134,32 +146,73 @@ quest.sections =
             ['Dkhaaya'] =
             {
                 onTrigger = function(player, npc)
-                    if hasQuestKeyItem(player) then
-                        return quest:progressEvent(8)
-                    elseif
+                    if
                         player:hasItem(xi.item.OLDUUM_RING) or
-                        player:hasItem(xi.item.LIGHTNING_BAND)
+                        player:hasItem(xi.item.LIGHTNING_BAND) or
+                        quest:getVar(player, 'Wait') > GetSystemTime()
                     then
-                        return quest:event(7)
-                    else
-                        local newRingCS = player:getLocalVar('RingCS')
-                        player:setLocalVar('RingCS', newRingCS + 1)
-                        if newRingCS > 1 then
-                            newRingCS = 1
+                        return quest:progressEvent(7)
+                    end
+
+                    if quest:getVar(player, 'Reissue') == 1 then
+                        local questKeyItem = getQuestKeyItem(player)
+
+                        if questKeyItem > 0 then
+                            return quest:progressEvent(8, { [0] = questKeyItem })
                         end
 
-                        return quest:event(7, { [7] = newRingCS + 1 })
+                        return quest:progressEvent(7, { [7] = 2 })
+                    end
+
+                    return quest:progressEvent(7, { [7] = 1 })
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [8] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(keyItems[quest:getVar(player, 'Prog')])
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [8] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.LIGHTNING_BAND) then
-                        player:delKeyItem(keyItems[quest:getVar(player, 'Prog')])
-                        quest:setVar(player, 'Prog', 0)
+                [7] = function(player, csid, option, npc)
+                    if
+                        option ~= 99 or
+                        player:hasItem(xi.item.OLDUUM_RING) or
+                        player:hasItem(xi.item.LIGHTNING_BAND) or
+                        getQuestKeyItem(player) > 0 or
+                        quest:getVar(player, 'Wait') > GetSystemTime()
+                    then
+                        return
                     end
+
+                    quest:setVar(player, 'Reissue', 1)
+                end,
+
+                [8] = function(player, csid, option, npc)
+                    local questKeyItem = getQuestKeyItem(player)
+
+                    if
+                        questKeyItem == xi.ki.NONE or
+                        player:hasItem(xi.item.OLDUUM_RING) or
+                        player:hasItem(xi.item.LIGHTNING_BAND) or
+                        quest:getVar(player, 'Reissue') ~= 1 or
+                        quest:getVar(player, 'Wait') > GetSystemTime()
+                    then
+                        return
+                    end
+
+                    if not npcUtil.giveItem(player, xi.item.LIGHTNING_BAND) then
+                        return
+                    end
+
+                    player:delKeyItem(questKeyItem)
+                    quest:setVar(player, 'Prog', 0)
+                    quest:setVar(player, 'Reissue', 0)
                 end,
             },
         },
@@ -170,8 +223,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
+                        quest:getVar(player, 'Reissue') == 1 and
+                        quest:getVar(player, 'Wait') <= GetSystemTime() and
                         not player:hasItem(xi.item.OLDUUM_RING) and
-                        not hasQuestKeyItem(player) and
+                        not player:hasItem(xi.item.LIGHTNING_BAND) and
+                        getQuestKeyItem(player) == xi.ki.NONE and
                         npcUtil.tradeMatches(trade, { { xi.item.PICKAXE, 1 } })
                     then
                         if math.randomInt(1, 100) <= 50 then
@@ -205,9 +261,14 @@ quest.sections =
             ['Leypoint'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeMatches(trade, { { xi.item.LIGHTNING_BAND, 1 } }) then
+                    if
+                        not player:hasItem(xi.item.OLDUUM_RING) and
+                        npcUtil.tradeMatches(trade, { { xi.item.LIGHTNING_BAND, 1 } })
+                    then
                         if player:getFreeSlotsCount() == 0 then
-                            return quest:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED)
+                            return quest:messageSpecial(
+                                zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED,
+                                xi.item.OLDUUM_RING)
                         else
                             return quest:progressEvent(2)
                         end
@@ -224,8 +285,12 @@ quest.sections =
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.OLDUUM_RING) then
+                    if
+                        not player:hasItem(xi.item.OLDUUM_RING) and
+                        npcUtil.giveItem(player, xi.item.OLDUUM_RING)
+                    then
                         player:tradeComplete()
+                        quest:setVar(player, 'Wait', GetSystemTime() + 60) -- 1 minute
                     end
                 end,
             },
