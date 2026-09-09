@@ -1,7 +1,6 @@
 -----------------------------------
 -- Contains all common weaponskill calculations including but not limited to:
 -- fSTR
--- Alpha
 -- Ratio -> cRatio
 -- min/max cRatio
 -- applications of fTP
@@ -300,21 +299,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         targetHp = targetHp + stoneskin:getPower()
     end
 
-    -- Obtains alpha, used for working out WSC on legacy servers. Retail has no alpha anymore as of 2014 Weaponskill functions
-    local alpha = 1
-    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        local level = attacker:getMainLvl()
-        if level > 75 then
-            alpha = 0.85
-        elseif level > 59 then
-            alpha = 0.9 - math.floor((level - 60) / 2) / 100
-        elseif level > 5 then
-            alpha = 1 - math.floor(level / 6) / 100
-        end
-    end
-
     local wsc      = xi.combat.physical.calculateWSC(attacker, wsParams.str_wsc, wsParams.dex_wsc, wsParams.vit_wsc, wsParams.agi_wsc, wsParams.int_wsc, wsParams.mnd_wsc, wsParams.chr_wsc)
-    local mainBase = math.floor(calcParams.weaponDamage[1] + calcParams.fSTR + calcParams.bonusWSmods + wsc * alpha)
+    local mainBase = math.floor(calcParams.weaponDamage[1] + calcParams.fSTR + calcParams.bonusWSmods + wsc)
 
     -- Calculate fTP multiplier
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
@@ -564,7 +550,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and hitsDone < 8 and finaldmg < targetHp then
-        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
+        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
         if calcParams.melee then
@@ -598,7 +584,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local offhandMultiHitsDone = 0
 
     while hitsDone < 8 and offhandMultiHitsDone < numOffhandMultis and finaldmg < targetHp do
-        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc * alpha
+        local offhandDmg      = calcParams.weaponDamage[2] + calcParams.fSTR + wsc
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, ftp, wsParams, calcParams)
 
         if calcParams.melee then
