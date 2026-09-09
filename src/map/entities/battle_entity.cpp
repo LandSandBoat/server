@@ -1831,85 +1831,13 @@ void CBattleEntity::addModifiers(std::vector<CModifier>* modList)
     }
 }
 
-void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid)
+void CBattleEntity::addEquipModifiers(CItemEquipment* PItem)
 {
     TracyZoneScoped;
 
-    if (GetMLevel() >= itemLevel)
+    for (auto& i : PItem->modList)
     {
-        for (auto& i : *modList)
-        {
-            if (slotid == SLOT_SUB)
-            {
-                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
-                {
-                    m_modStat[xi::Mod::SUB_DMG_RANK] += i.getModAmount();
-                }
-                else
-                {
-                    m_modStat[i.getModID()] += i.getModAmount();
-                }
-            }
-            else
-            {
-                m_modStat[i.getModID()] += i.getModAmount();
-            }
-        }
-    }
-    else
-    {
-        for (auto& i : *modList)
-        {
-            int16 modAmount = GetMLevel() * i.getModAmount();
-            switch (i.getModID())
-            {
-                case xi::Mod::DEF:
-                case xi::Mod::MAIN_DMG_RATING:
-                case xi::Mod::SUB_DMG_RATING:
-                case xi::Mod::RANGED_DMG_RATING:
-                    modAmount *= 3;
-                    modAmount /= 4;
-                    break;
-                case xi::Mod::HP:
-                case xi::Mod::MP:
-                    modAmount /= 2;
-                    break;
-                case xi::Mod::STR:
-                case xi::Mod::DEX:
-                case xi::Mod::VIT:
-                case xi::Mod::AGI:
-                case xi::Mod::INT:
-                case xi::Mod::MND:
-                case xi::Mod::CHR:
-                case xi::Mod::ATT:
-                case xi::Mod::RATT:
-                case xi::Mod::ACC:
-                case xi::Mod::RACC:
-                case xi::Mod::MATT:
-                case xi::Mod::MACC:
-                    modAmount /= 3;
-                    break;
-                default:
-                    modAmount = 0;
-                    break;
-            }
-            modAmount /= itemLevel;
-            if (slotid == SLOT_SUB)
-            {
-                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
-                {
-                    m_modStat[xi::Mod::SUB_DMG_RANK] += modAmount;
-                }
-                else
-                {
-                    m_modStat[i.getModID()] += modAmount;
-                }
-            }
-            else
-            {
-                m_modStat[i.getModID()] += modAmount;
-            }
-        }
+        m_modStat[i.getModID()] += battleutils::GetScaledItemModifier(this, PItem, i.getModID());
     }
 }
 
@@ -2029,85 +1957,13 @@ void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
     }
 }
 
-void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid)
+void CBattleEntity::delEquipModifiers(CItemEquipment* PItem, bool isDelevel /* = false */)
 {
     TracyZoneScoped;
 
-    if (GetMLevel() >= itemLevel)
+    for (auto& i : PItem->modList)
     {
-        for (auto& i : *modList)
-        {
-            if (slotid == SLOT_SUB)
-            {
-                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
-                {
-                    m_modStat[xi::Mod::SUB_DMG_RANK] -= i.getModAmount();
-                }
-                else
-                {
-                    m_modStat[i.getModID()] -= i.getModAmount();
-                }
-            }
-            else
-            {
-                m_modStat[i.getModID()] -= i.getModAmount();
-            }
-        }
-    }
-    else
-    {
-        for (auto& i : *modList)
-        {
-            int16 modAmount = GetMLevel() * i.getModAmount();
-            switch (i.getModID())
-            {
-                case xi::Mod::DEF:
-                case xi::Mod::MAIN_DMG_RATING:
-                case xi::Mod::SUB_DMG_RATING:
-                case xi::Mod::RANGED_DMG_RATING:
-                    modAmount *= 3;
-                    modAmount /= 4;
-                    break;
-                case xi::Mod::HP:
-                case xi::Mod::MP:
-                    modAmount /= 2;
-                    break;
-                case xi::Mod::STR:
-                case xi::Mod::DEX:
-                case xi::Mod::VIT:
-                case xi::Mod::AGI:
-                case xi::Mod::INT:
-                case xi::Mod::MND:
-                case xi::Mod::CHR:
-                case xi::Mod::ATT:
-                case xi::Mod::RATT:
-                case xi::Mod::ACC:
-                case xi::Mod::RACC:
-                case xi::Mod::MATT:
-                case xi::Mod::MACC:
-                    modAmount /= 3;
-                    break;
-                default:
-                    modAmount = 0;
-                    break;
-            }
-            modAmount /= itemLevel;
-            if (slotid == SLOT_SUB)
-            {
-                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
-                {
-                    m_modStat[xi::Mod::SUB_DMG_RANK] -= modAmount;
-                }
-                else
-                {
-                    m_modStat[i.getModID()] -= modAmount;
-                }
-            }
-            else
-            {
-                m_modStat[i.getModID()] -= modAmount;
-            }
-        }
+        m_modStat[i.getModID()] -= battleutils::GetScaledItemModifier(this, PItem, i.getModID(), isDelevel);
     }
 }
 
