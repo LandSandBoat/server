@@ -97,6 +97,8 @@ void ShipHandler::registerShip(const xi::data::TransportData& entry, CZone* PDoc
         }
     }
 
+    PShip->setAlwaysRelevant(true);
+
     // A ship only moves if some phase tells it to.
     const auto relocates = std::ranges::any_of(entry.Phases,
                                                [](const auto& phase)
