@@ -2464,11 +2464,11 @@ spawns:
     level:    [35, 38]
   17244296:
     template: Antican_Funditor
-    region:   c_153
+    region:   region_65
     level:    [35, 38]
   17244297:
     template: Antican_Decurio
-    region:   c_153
+    region:   region_65
     level:    [44, 49]
   17244298:
     template: Giant_Spider
@@ -3318,7 +3318,7 @@ spawns:
     level:    [45, 49]
   17244497:
     template: Goblin_Poacher
-    at:       [-195.000, 8.000, -166.000, 127]
+    region:   sw_331
     level:    [45, 49]
   17244498:
     template: Goblin_Trader
