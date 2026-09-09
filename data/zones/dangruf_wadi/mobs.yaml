@@ -781,8 +781,6 @@ templates:
         entity_flags: 133
         model_size:     2
         hitbox:        21
-      behaviors:
-        links: true
       spawn:
         respawn: 300
     loot:
@@ -813,8 +811,6 @@ templates:
         entity_flags: 133
         model_size:     2
         hitbox:        14
-      behaviors:
-        links: true
       spawn:
         respawn: 300
     loot:
@@ -1149,8 +1145,7 @@ templates:
         model_size:     2
         hitbox:        14
       behaviors:
-        aggressive: true
-        links:      true
+        links: true
       spawn:
         respawn: 300
     loot:
