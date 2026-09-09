@@ -2668,7 +2668,7 @@ spawns:
     level:    [29, 30]
   17293553:
     template: Gigass_Leech
-    region:   n_240
+    at:       [0.000, 0.000, 0.100]
     level:    [24, 25]
   17293554:
     template: Giant_Hunter
@@ -3070,7 +3070,7 @@ spawns:
     level:    [35, 35]
   17293640:
     template: Dosetsu_Tree
-    at:       [-240.000, -20.795, 37.000, 31]
+    region:   [e_78, region_47]
     level:    [35, 35]
   17293641:
     template: Ingaevon
