@@ -477,7 +477,7 @@ void CAIContainer::Reset()
 
 auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CAIContainer::Tick");
 
     m_PrevTick = m_Tick;
     m_Tick     = tick;

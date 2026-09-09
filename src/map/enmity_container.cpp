@@ -463,8 +463,6 @@ void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Dama
 
 CBattleEntity* CEnmityContainer::GetHighestEnmity()
 {
-    TracyZoneScoped;
-
     if (m_EnmityList.empty())
     {
         return nullptr;

@@ -582,9 +582,6 @@ bool CStatusEffectContainer::AddStatusEffect(std::unique_ptr<CStatusEffect> PSta
 
 void CStatusEffectContainer::DeleteStatusEffects()
 {
-    TracyZoneScoped;
-    TracyZoneString(m_POwner->getName());
-
     bool update_icons    = false;
     bool effects_removed = false;
     for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)

@@ -653,7 +653,7 @@ bool CMobEntity::GetUntargetable() const
 
 void CMobEntity::PostTick()
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::PostTick");
 
     CBattleEntity::PostTick();
 
@@ -696,7 +696,7 @@ float CMobEntity::GetRangedAttackRange()
 
 bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::ValidTarget");
 
     if (StatusEffectContainer->GetConfrontationEffect() != PInitiator->StatusEffectContainer->GetConfrontationEffect())
     {
@@ -731,7 +731,7 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
 void CMobEntity::Spawn()
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::Spawn");
 
     // Reset stolen item always for battlefields or only if HP was 0 (mob died)
     if ((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || health.hp == 0)
@@ -841,7 +841,7 @@ void CMobEntity::Spawn()
 
 void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnWeaponSkillFinished");
 
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
@@ -1299,7 +1299,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::CanAttack");
 
     // Refuse the attack while the navmesh route is far longer than the straight line, until we have walked the detour.
     if (PAI->PathFind && PAI->PathFind->IsFollowingPath() && !PAI->PathFind->IsPathDirect())
@@ -1347,7 +1347,7 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 
 void CMobEntity::OnEngage(CAttackState& state)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnEngage");
 
     CBattleEntity::OnEngage(state);
     luautils::OnMobEngage(this, state.target().resolve());
@@ -1414,7 +1414,7 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 
 void CMobEntity::Die()
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::Die");
 
     if (PBattlefield != nullptr)
     {
@@ -1461,7 +1461,7 @@ void CMobEntity::Die()
 
 void CMobEntity::OnDisengage(CAttackState& state)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnDisengage");
 
     PAI->PathFind->Clear();
     PEnmityContainer->Clear();
@@ -1482,7 +1482,7 @@ void CMobEntity::OnDisengage(CAttackState& state)
 
 void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnCastFinished");
 
     CBattleEntity::OnCastFinished(state, action);
 
@@ -1497,7 +1497,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 
 void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnCastInterrupted");
 
     CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);
 
@@ -1510,7 +1510,7 @@ void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasi
 
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CMobEntity::OnAttack");
 
     TapDeaggroTime();
 

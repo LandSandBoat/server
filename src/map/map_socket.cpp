@@ -288,9 +288,11 @@ void MapSocket::Impl::scheduleMainDrain()
 
 void MapSocket::Impl::drainIngress()
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("MapSocket::drainIngress");
 
     ingressDrainScheduled_.store(false, std::memory_order_release);
+
+    int64 drained = 0;
 
     while (Datagram* d = ingress_.front())
     {
@@ -298,7 +300,11 @@ void MapSocket::Impl::drainIngress()
         // the duration of the call is safe; pop() only frees it afterwards.
         onReceiveFn_(ByteSpan(d->data.data(), d->length), d->ipp);
         ingress_.pop();
+        ++drained;
     }
+
+    // The drain is unbounded and runs on the main thread, so a deep backlog here is a stalled tick.
+    TracyReportGraphNumber("Ingress Drained Per Pass", drained);
 }
 
 //
@@ -340,22 +346,32 @@ void MapSocket::Impl::send(const IPP& ipp, ByteSpan buffer)
 
 void MapSocket::Impl::drainEgress()
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("MapSocket::drainEgress");
 
     egressDrainScheduled_.store(false, std::memory_order_release);
 
+    int64 drained = 0;
+
     while (Datagram* d = egress_.front())
     {
-        if (const auto result = sendOne(*d); result)
         {
-            egressBytesSent_.fetch_add(static_cast<int64>(*result), std::memory_order_relaxed);
+            TracyZoneNamed(sendZone, "drainEgress: sendOne");
+
+            if (const auto result = sendOne(*d); result)
+            {
+                egressBytesSent_.fetch_add(static_cast<int64>(*result), std::memory_order_relaxed);
+            }
+            else
+            {
+                recordSendError(result.error());
+            }
         }
-        else
-        {
-            recordSendError(result.error());
-        }
+
         egress_.pop();
+        ++drained;
     }
+
+    TracyReportGraphNumber("Egress Drained Per Pass", drained);
 }
 
 auto MapSocket::Impl::sendOne(const Datagram& d) -> ErrorOr<std::size_t, std::error_code>

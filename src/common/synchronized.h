@@ -23,9 +23,27 @@
 
 #include <mutex>
 #include <shared_mutex>
+#include <type_traits>
 
 #include "cbasetypes.h"
 #include "tracy.h"
+
+namespace detail
+{
+
+template <class M>
+struct SynchronizedMutex
+{
+    mutable TracyLockable(M, mutex);
+};
+
+template <>
+struct SynchronizedMutex<std::shared_mutex>
+{
+    mutable TracySharedLockable(std::shared_mutex, mutex);
+};
+
+} // namespace detail
 
 // https://www.reddit.com/r/cpp/comments/p132c7/comment/h8b8nml/?share_id=-NRyj9iRw5TqSi4Mm381j
 template <
@@ -48,32 +66,34 @@ struct Synchronized
     auto read(auto f) const
     {
         auto l = lock();
-        LockMark(mutex);
+        LockMark(holder_.mutex);
         return f(target);
     }
 
     auto write(auto f)
     {
         auto l = lock();
-        LockMark(mutex);
+        LockMark(holder_.mutex);
         return f(target);
     }
 
 private:
+    using MutexType = std::remove_cvref_t<decltype(std::declval<const detail::SynchronizedMutex<M>&>().mutex)>;
+
     T target;
 
-    mutable TracyLockable(M, mutex);
+    detail::SynchronizedMutex<M> holder_;
 
     auto lock() const
     {
-        return RL<LockableBase(M)>(mutex);
+        return RL<MutexType>(holder_.mutex);
     }
 
     auto lock()
     {
-        return WL<LockableBase(M)>(mutex);
+        return WL<MutexType>(holder_.mutex);
     }
 };
 
 template <class T>
-using SynchronizedShared = Synchronized<T, std::shared_mutex, std::shared_lock>;
+using SynchronizedShared = Synchronized<T, std::shared_mutex, std::unique_lock, std::shared_lock>;

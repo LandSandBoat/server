@@ -275,8 +275,6 @@ void OnCharZoneOut(CCharEntity* PChar)
 
 void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet)
 {
-    TracyZoneScoped;
-
     for (auto* module : cppModules())
     {
         module->OnPushPacket(PChar, packet);
