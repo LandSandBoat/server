@@ -2413,6 +2413,7 @@ spawns:
     level:    [21, 22]
   17264670:
     template: Will-o-the-Wisp
+    region:   w_23
     level:    [24, 25]
   17264671:
     template: Wandering_Sapling
@@ -2716,7 +2717,7 @@ spawns:
           end:    5
   17264730:
     template: Earth_Elemental
-    region:   s_90
+    region:   s_83
     level:    [27, 29]
   17264731:
     template: Jubjub
@@ -2873,6 +2874,7 @@ spawns:
     level:    [16, 23]
   17264766:
     template: Will-o-the-Wisp
+    region:   s_117
     level:    [24, 25]
   17264767:
     template: Fire_Elemental
@@ -3313,7 +3315,7 @@ spawns:
     level:    [22, 23]
   17264859:
     template: Stag_Beetle
-    region:   c_219
+    region:   c_212
     level:    [22, 23]
   17264860:
     template: Night_Bats_MM_PM
@@ -3478,7 +3480,7 @@ spawns:
     level:    [20, 21]
   17264890:
     template: Stag_Beetle
-    region:   c_250
+    region:   c_244
     level:    [22, 23]
   17264891:
     template: Stag_Beetle
@@ -3804,6 +3806,7 @@ spawns:
     level:    [25, 26]
   17264971:
     template: Will-o-the-Wisp
+    region:   ne_321
     level:    [24, 25]
   17264972:
     template: Patripatan
@@ -3871,6 +3874,7 @@ spawns:
     level:    [21, 22]
   17264988:
     template: Will-o-the-Wisp
+    region:   n_349
     level:    [24, 25]
   17264989:
     template: Wandering_Sapling

@@ -2330,6 +2330,7 @@ spawns:
     level:    [29, 34]
   17268773:
     template: Ignis_Fatuus
+    region:   e_38
     level:    [34, 36]
   17268774:
     template: Hill_Lizard
@@ -2451,10 +2452,12 @@ spawns:
     level:    [26, 27]
   17268796:
     template: Goblin_Shaman
+    region:   e_353
     level:    [26, 27]
   17268797:
     template: Wight_war
     script:   Wight
+    region:   e_353
     level:    [26, 28]
   17268798:
     template: Wight_blm
@@ -2685,6 +2688,7 @@ spawns:
     level:    [29, 34]
   17268842:
     template: Ignis_Fatuus
+    region:   e_95
     level:    [34, 36]
   17268843:
     template: Yagudo_Herald
@@ -3061,15 +3065,15 @@ spawns:
     level:    [31, 32]
   17268914:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268915:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268916:
     template: Evil_Weapon
-    region:   s_178
+    region:   region_66
     level:    [37, 38]
   17268917:
     template: Sauromugue_Skink
@@ -3376,6 +3380,7 @@ spawns:
     level:    [28, 34]
   17268973:
     template: Ignis_Fatuus
+    region:   c_227
     level:    [34, 36]
   17268974:
     template: Yagudo_Theologist
@@ -4060,23 +4065,18 @@ spawns:
     level:    [55, 55]
   17269108:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269109:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269110:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269111:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269112:
     template: Sprite
-    region:   c_372
     level:    [61, 63]
   17269113:
     template: Balam-Agab

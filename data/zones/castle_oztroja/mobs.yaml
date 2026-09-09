@@ -2999,39 +2999,39 @@ spawns:
     level:    [53, 57]
   17396085:
     template: Yagudo_Inquisitor
-    at:       [-61.000, -44.000, -180.000, 121]
+    region:   region_118
     level:    [54, 58]
   17396086:
     template: Yagudo_Abbot
-    at:       [-60.717, -49.750, -206.282, 127]
+    region:   region_118
     level:    [55, 59]
   17396087:
     template: Yagudo_Sentinel
-    at:       [-85.934, -57.500, -220.656, 127]
+    region:   region_118
     level:    [52, 56]
   17396088:
     template: Yagudo_Chanter
-    at:       [-96.978, -60.250, -219.307, 127]
+    region:   region_118
     level:    [53, 57]
   17396089:
     template: Yagudo_Inquisitor
-    at:       [-99.903, -70.250, -173.989, 61]
+    region:   s_382
     level:    [54, 58]
   17396090:
     template: Yagudo_Abbot
-    at:       [-100.616, -68.750, -179.974, 127]
+    region:   s_382
     level:    [55, 59]
   17396091:
     template: Yagudo_Sentinel
-    at:       [69.000, -16.200, -94.000, 127]
+    region:   s_382
     level:    [52, 56]
   17396092:
     template: Yagudo_Chanter
-    at:       [-70.220, -54.019, -222.177, 7]
+    region:   s_382
     level:    [53, 57]
   17396093:
     template: Yagudo_Inquisitor
-    at:       [-92.426, -58.869, -221.328, 127]
+    region:   s_382
     level:    [54, 58]
   17396094:
     template: Yagudo_Abbot
