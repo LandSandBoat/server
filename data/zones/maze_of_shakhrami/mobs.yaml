@@ -1459,14 +1459,17 @@ templates:
         look:
           type:  standard
           model: 448
-        entity_flags:  3
-        model_size:    1
-        hitbox:       15
+        entity_flags:  643
+        animation_sub:   8
+        model_size:      1
+        hitbox:         15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        hp: 600
 
 spawns:
   17588225:
@@ -3540,15 +3543,15 @@ spawns:
   17588701:
     template: Wyrmfly
     at:       [143.000, 9.000, -219.000, 198]
-    level:    [30, 30]
+    level:    [22, 22]
   17588702:
     template: Wyrmfly
     at:       [143.000, 10.000, -216.000, 198]
-    level:    [30, 30]
+    level:    [22, 22]
   17588703:
     template: Wyrmfly
     at:       [138.000, 9.000, -219.000, 198]
-    level:    [30, 30]
+    level:    [22, 22]
   17588704:
     template: Dark_Elemental_SA
     script:   Dark_Elemental
