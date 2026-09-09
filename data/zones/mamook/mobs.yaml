@@ -2679,11 +2679,11 @@ spawns:
     level:    [70, 72]
   17043619:
     template: Mamool_Ja_Zenist
-    region:   w_163
+    region:   w_165
     level:    [73, 75]
   17043620:
     template: Carriage_Lizard
-    region:   w_163
+    region:   w_165
     level:    [70, 72]
   17043621:
     template: Carriage_Lizard
@@ -3764,7 +3764,7 @@ spawns:
     level:    [81, 83]
   17043868:
     template: Mamool_Ja_Treasurer
-    region:   w_166
+    region:   w_165
     level:    [81, 83]
   17043869:
     template: Mamool_Ja_Conservator
