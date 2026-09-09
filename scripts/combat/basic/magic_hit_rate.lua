@@ -438,14 +438,16 @@ local resistRankMultiplier =
 local function calculateTargetMagicEvasion(actor, target, params)
     local magicEva = target:getMod(xi.mod.MEVA) -- Base MACC.
 
-    -- Elemental magic evasion. All actions and effects have an associated element.
-    if params.magicalElement ~= xi.element.NONE then
-        magicEva = magicEva + target:getMod(xi.data.element.getElementalMEVAModifier(params.magicalElement))
-    end
-
-    -- Magic evasion against specific status effects.
-    if params.effectId > 0 then
+    -- Effects with associated resistance trait: Use specific effect MEVA modifier.
+    if
+        params.effectId > 0 and
+        xi.data.statusEffect.getAssociatedResistTraitModifier(params.effectId) > 0
+    then
         magicEva = magicEva + target:getMod(xi.data.statusEffect.getAssociatedMagicEvasionModifier(params.effectId)) + target:getMod(xi.mod.STATUS_MEVA)
+
+    -- Everything else: Use element.
+    else
+        magicEva = magicEva + target:getMod(xi.data.element.getElementalMEVAModifier(params.magicalElement))
     end
 
     -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
