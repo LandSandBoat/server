@@ -2952,7 +2952,7 @@ spawns:
     level:    [74, 76]
   17027352:
     template: Fire_Elemental
-    region:   region_200
+    region:   region_228
     level:    [74, 76]
   17027353:
     template: Hilltroll_Warrior
@@ -2960,23 +2960,23 @@ spawns:
     level:    [81, 83]
   17027354:
     template: Hilltroll_Ranger
-    region:   region_201
+    region:   region_229
     level:    [81, 83]
   17027355:
     template: Hilltroll_Ranger
-    region:   region_202
+    region:   region_230
     level:    [81, 83]
   17027356:
     template: Hilltroll_Red_Mage
-    region:   region_203
+    region:   region_231
     level:    [81, 83]
   17027357:
     template: Hilltroll_Ranger
-    region:   region_204
+    region:   region_232
     level:    [81, 83]
   17027358:
     template: Hilltroll_Dark_Knight
-    region:   region_205
+    region:   region_233
     level:    [81, 83]
   17027359:
     template: Hilltroll_Paladin
@@ -2984,7 +2984,7 @@ spawns:
     level:    [81, 83]
   17027360:
     template: Hilltroll_Red_Mage
-    region:   region_207
+    region:   region_234
     level:    [81, 83]
   17027361:
     template: Hilltroll_Warrior
@@ -3009,23 +3009,23 @@ spawns:
     level:    [79, 81]
   17027366:
     template: King_Apkallu
-    at:       [-530.500, -13.200, -194.110, 196]
+    region:   region_211
     level:    [78, 80]
   17027367:
     template: King_Apkallu
-    at:       [-532.100, -13.020, -208.380, 244]
+    region:   region_211
     level:    [78, 80]
   17027368:
     template: King_Apkallu
-    at:       [-574.600, -11.950, -161.470, 206]
+    region:   region_211
     level:    [78, 80]
   17027369:
     template: King_Apkallu
-    at:       [-555.700, -13.060, -170.880, 158]
+    region:   region_211
     level:    [78, 80]
   17027370:
     template: King_Apkallu
-    at:       [-561.200, -12.750, -171.210, 223]
+    region:   region_211
     level:    [78, 80]
   17027371:
     template: Phasma
@@ -3141,19 +3141,19 @@ spawns:
     level:    [88, 89]
   17027399:
     template: Orichalcumshell
-    region:   region_213
+    region:   region_236
     level:    [88, 89]
   17027400:
     template: Orichalcumshell
-    region:   region_213
+    region:   region_236
     level:    [88, 89]
   17027401:
     template: Orichalcumshell
-    region:   region_213
+    region:   region_235
     level:    [88, 89]
   17027402:
     template: Orichalcumshell
-    region:   region_213
+    region:   region_235
     level:    [88, 89]
   17027403:
     template: Wamoura_Prince
@@ -3377,7 +3377,7 @@ spawns:
     level:    [81, 83]
   17027458:
     template: Cerberus
-    at:       [316.000, -23.000, -84.000, 127]
+    region:   region_228
     level:    [85, 85]
   17027459:
     template: Dark_Rider
