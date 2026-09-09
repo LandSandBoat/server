@@ -1,7 +1,8 @@
 -----------------------------------
--- ID: 4198
+-- ID: 4248
 -- Item: Copy of "Ginuva's Battle Theory"
--- Grants 50 - 200 EXP
+-- Grants 75 - 200 EXP
+-- Source: https://wiki.ffo.jp/html/8068.html
 -- Does not grant Limit Points.
 -----------------------------------
 ---@type TItem
@@ -16,8 +17,14 @@ itemObject.onItemCheck = function(target, item, caster)
     return check
 end
 
-itemObject.onItemUse = function(target)
-    target:addExp(xi.settings.main.EXP_RATE * math.randomInt(50, 200))
+itemObject.onItemUse = function(target, user, item, action)
+    local exp = xi.settings.main.EXP_RATE * math.randomInt(75, 200)
+
+    target:addExp(exp, false)
+    action:messageID(target:getID(), xi.msg.basic.ITEM_EXP_GAINED)
+
+    -- Show the full EXP amount even when EXP is capped.
+    return exp
 end
 
 return itemObject

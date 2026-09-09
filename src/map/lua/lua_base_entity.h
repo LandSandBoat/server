@@ -469,7 +469,7 @@ public:
     void unseenKeyItem(KeyItem keyItemID) const; // Attempt to remove the keyitem from the seen key item collection, only works on logout
 
     // Player Points
-    void  addExp(uint32 exp);
+    void  addExp(uint32 exp, const sol::object& allowLimitPointsObj);
     void  addCapacityPoints(uint32 capacity);
     void  delExp(uint32 exp);
     int32 getMerit(uint16 merit);

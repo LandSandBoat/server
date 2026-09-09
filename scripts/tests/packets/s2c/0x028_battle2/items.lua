@@ -360,6 +360,83 @@ local packets =
             },
         },
     },
+    -- The player starts at level 99 with capped EXP.
+    -- The scroll must not grant limit points.
+    ['Experience scroll'] =
+    {
+        test = function(player, mob)
+            player:addItem(xi.item.DRAGON_CHRONICLES)
+            local scroll = player:findItem(xi.item.DRAGON_CHRONICLES)
+            assert(scroll, 'Could not find scroll')
+            player.actions:useItem(player, scroll:getSlotID())
+            xi.test.world:tickEntity(player)
+            xi.test.world:skipTime(10)
+        end,
+
+        expected =
+        {
+            {
+                m_uID   = ph.TEST_CHAR,
+                trg_sum = 1,
+                res_sum = 0,
+                cmd_no  = xi.action.category.ITEM_START,
+                cmd_arg = xi.action.fourCC.ITEM_USE,
+                info    = 0,
+                target  =
+                {
+                    {
+                        m_uID      = ph.TEST_CHAR,
+                        result_sum = 1,
+                        result     =
+                        {
+                            {
+                                miss      = 0,
+                                kind      = 0,
+                                sub_kind  = 0,
+                                info      = 0,
+                                scale     = 0,
+                                value     = xi.item.DRAGON_CHRONICLES,
+                                message   = xi.msg.basic.ITEM_USES,
+                                bit       = 0,
+                                has_proc  = false,
+                                has_react = false,
+                            },
+                        },
+                    },
+                },
+            },
+            {
+                m_uID   = ph.TEST_CHAR,
+                trg_sum = 1,
+                res_sum = 0,
+                cmd_no  = xi.action.category.ITEM_FINISH,
+                cmd_arg = xi.item.DRAGON_CHRONICLES,
+                info    = 0,
+                target  =
+                {
+                    {
+                        m_uID      = ph.TEST_CHAR,
+                        result_sum = 1,
+                        result     =
+                        {
+                            {
+                                miss      = 0,
+                                kind      = 1,
+                                sub_kind  = 34,
+                                info      = 0,
+                                scale     = 0,
+                                value     = ph.IGNORE,
+                                message   = xi.msg.basic.ITEM_EXP_GAINED,
+                                bit       = 0,
+                                has_proc  = false,
+                                has_react = false,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
 }
 
 return packets
