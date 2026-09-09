@@ -593,7 +593,7 @@ spawns:
     level:    [74, 76]
   17502211:
     template: Detector
-    region:   s_3
+    region:   region_167
     level:    [72, 74]
   17502212:
     template: Caretaker

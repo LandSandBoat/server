@@ -1334,7 +1334,7 @@ spawns:
     level:    [79, 81]
   17277068:
     template: Apocalyptic_Weapon
-    region:   se_140
+    region:   region_124
     level:    [78, 80]
   17277069:
     template: Infernal_Weapon
@@ -1350,7 +1350,7 @@ spawns:
     level:    [64, 69]
   17277072:
     template: Magic_Flagon
-    at:       [279.955, -4.196, -6.232, 127]
+    region:   region_115
     level:    [64, 69]
   17277073:
     template: Magic_Flagon
@@ -1430,11 +1430,11 @@ spawns:
     level:    [79, 81]
   17277092:
     template: Magic_Flagon
-    at:       [-133.356, -4.675, 136.486, 48]
+    region:   region_116
     level:    [64, 69]
   17277093:
     template: Magic_Flagon
-    at:       [-184.515, -4.026, 116.434, 127]
+    region:   region_120
     level:    [64, 69]
   17277094:
     template: Magic_Flagon
@@ -1442,7 +1442,7 @@ spawns:
     level:    [64, 69]
   17277095:
     template: Magic_Flagon
-    at:       [-132.145, -4.022, 63.617, 22]
+    region:   region_121
     level:    [64, 69]
   17277096:
     template: Magic_Flagon
@@ -1458,7 +1458,7 @@ spawns:
     level:    [64, 69]
   17277099:
     template: Magic_Flagon
-    at:       [-138.021, 3.695, 70.711, 226]
+    region:   region_117
     level:    [64, 69]
   17277100:
     template: Apocalyptic_Weapon
@@ -1514,7 +1514,7 @@ spawns:
     level:    [79, 81]
   17277113:
     template: Magic_Flagon
-    at:       [133.596, -4.664, 135.501, 80]
+    region:   region_122
     level:    [64, 69]
   17277114:
     template: Magic_Flagon
@@ -1526,11 +1526,11 @@ spawns:
     level:    [64, 69]
   17277116:
     template: Magic_Flagon
-    at:       [137.876, -4.430, 64.682, 53]
+    region:   region_118
     level:    [64, 69]
   17277117:
     template: Magic_Flagon
-    at:       [104.432, -3.700, 78.851, 110]
+    region:   region_119
     level:    [64, 69]
   17277118:
     template: Magic_Flagon
@@ -1542,7 +1542,7 @@ spawns:
     level:    [64, 69]
   17277120:
     template: Magic_Flagon
-    at:       [143.608, 3.300, 72.359, 184]
+    region:   region_123
     level:    [64, 69]
   17277121:
     template: Apocalyptic_Weapon
