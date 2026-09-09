@@ -376,7 +376,7 @@ spawns:
     level:    [66, 68]
   17301526:
     template: Air_Elemental
-    region:   n_13
+    region:   region_11
     level:    [66, 68]
   17301527:
     template: Velociraptor
