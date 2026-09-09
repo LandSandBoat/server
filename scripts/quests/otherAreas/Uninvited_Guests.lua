@@ -6,7 +6,6 @@
 -- Monarch Linn : !zone 31
 -----------------------------------
 
--- TODO: Implement full rewards
 -- TODO: Add ROE rewards
 
 local phase =
@@ -18,25 +17,68 @@ local phase =
     WAITING_IN_DEFEAT    = 4,
 }
 
-local defeatedWaitingMessages =
-{
-    135,    -- Idle chatter.
-    575,    -- Defeated and waiting.
-}
-
 local var =
 {
-    QUEST_REWARD   = 'UninvitedGuestsReward',
-    PROGRESS       = 'Prog',
-    CONQUEST_WAIT  = 'Wait',
-    DEFEAT_MESSAGE = 'UninvitedGuestsDefeatMessage'
+    QUEST_REWARD  = 'UninvitedGuestsReward',
+    PROGRESS      = 'Prog',
+    CONQUEST_WAIT = 'Wait'
 }
 
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
 
+-- The reward is one item, rolled when the player reports in. Weights total 1000.
+-- The item list comes from the JP wiki. Retail rates are not published.
+-- The memoirs is the common result. The breastplate is the rarest.
+--
+-- Source: https://wiki.ffo.jp/html/3837.html
 local rewards =
 {
-    { dropWeight = 100, rewardID = xi.item.MIRATETES_MEMOIRS },
+    { dropWeight = 541, rewardID = xi.item.MIRATETES_MEMOIRS           },
+
+    -- Common.
+    { dropWeight =  25, rewardID = xi.item.PLATE_OF_BREAM_RISOTTO      },
+    { dropWeight =  25, rewardID = xi.item.SQUARE_OF_RAXA              },
+    { dropWeight =  25, rewardID = xi.item.CHUNK_OF_ALUMINUM_ORE       },
+    { dropWeight =  25, rewardID = xi.item.SERVING_OF_CRIMSON_JELLY    },
+    { dropWeight =  25, rewardID = xi.item.TAVNAZIAN_SALAD             },
+    { dropWeight =  25, rewardID = xi.item.SERVING_OF_BISON_STEAK      },
+    { dropWeight =  25, rewardID = xi.item.BOWL_OF_MUSHROOM_STEW       },
+    { dropWeight =  25, rewardID = xi.item.TIGER_EYE                   },
+    { dropWeight =  25, rewardID = xi.item.UNICORN_HORN                },
+    { dropWeight =  25, rewardID = xi.item.ARMOIRE                     },
+    { dropWeight =  25, rewardID = xi.item.MANNEQUIN_BODY              },
+    { dropWeight =  25, rewardID = xi.item.PLATE_OF_MUSHROOM_RISOTTO   },
+
+    -- Less common.
+    { dropWeight =  14, rewardID = xi.item.MANNEQUIN_HANDS             },
+    { dropWeight =  14, rewardID = xi.item.OVERSIZED_FANG              },
+    { dropWeight =  14, rewardID = xi.item.DRAGON_BONE                 },
+    { dropWeight =  14, rewardID = xi.item.ELM_LOG                     },
+    { dropWeight =  14, rewardID = xi.item.MANNEQUIN_LEGS              },
+    { dropWeight =  14, rewardID = xi.item.MANNEQUIN_FEET              },
+    { dropWeight =  14, rewardID = xi.item.CHUNK_OF_ADAMAN_ORE         },
+
+    -- Uncommon.
+    { dropWeight =   7, rewardID = xi.item.BEHEMOTH_HIDE               },
+    { dropWeight =   7, rewardID = xi.item.PIECE_OF_HABU_SKIN          },
+    { dropWeight =   7, rewardID = xi.item.CLOUD_EVOKER                },
+    { dropWeight =   7, rewardID = xi.item.MANNEQUIN_HEAD              },
+    { dropWeight =   7, rewardID = xi.item.CHUNK_OF_ORICHALCUM_ORE     },
+    { dropWeight =   7, rewardID = xi.item.SERVING_OF_VERMILLION_JELLY },
+
+    -- Rare.
+    { dropWeight =   2, rewardID = xi.item.LEREMIEU_SALAD              },
+    { dropWeight =   2, rewardID = xi.item.ADAMANTOISE_SHELL           },
+    { dropWeight =   2, rewardID = xi.item.PIECE_OF_ANGEL_SKIN         },
+    { dropWeight =   2, rewardID = xi.item.DRAGON_HEART                },
+    { dropWeight =   2, rewardID = xi.item.SERVING_OF_MARBLED_STEAK    },
+    { dropWeight =   2, rewardID = xi.item.PLATE_OF_SEA_SPRAY_RISOTTO  },
+    { dropWeight =   2, rewardID = xi.item.LOCK_OF_SIRENS_HAIR         },
+    { dropWeight =   2, rewardID = xi.item.PLATE_OF_WITCH_RISOTTO      },
+    { dropWeight =   2, rewardID = xi.item.BOWL_OF_WITCH_STEW          },
+
+    -- Rarest.
+    { dropWeight =   1, rewardID = xi.item.ASSAULT_BREASTPLATE         },
 }
 
 -----------------------------------
@@ -45,7 +87,6 @@ local rewards =
 local startQuest = function(player)
     npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
     quest:setVar(player, var.PROGRESS, phase.GO_TO_MONARCH_LINN)
-    player:setCharVar(var.DEFEAT_MESSAGE, 0)
     player:setCharVar(var.QUEST_REWARD, 0)
     quest:begin(player)
 end
@@ -87,16 +128,20 @@ local giveReward = function(player)
         rewardID = generateReward(player)
     end
 
-    if rewardID == xi.item.GIL and quest:complete(player) then
-        if npcUtil.giveCurrency(player, 'gil', 10000) then
-            quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
-            player:setCharVar(var.QUEST_REWARD, 0)
-        end
-    elseif quest:complete(player) then
-        if npcUtil.giveItem(player, rewardID) then
-            quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
-            player:setCharVar(var.QUEST_REWARD, 0)
-        end
+    -- Retail does not complete the quest when the reward cannot be handed over.
+    -- The player keeps the rolled reward and reports again after making room.
+    if not npcUtil.giveItem(player, rewardID) then
+        return
+    end
+
+    -- The first clear pays 10,000 gil on top of the item per JP wiki.
+    if not player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS) then
+        npcUtil.giveCurrency(player, 'gil', 10000)
+    end
+
+    if quest:complete(player) then
+        quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
+        player:setCharVar(var.QUEST_REWARD, 0)
     end
 end
 
@@ -163,7 +208,7 @@ quest.sections =
 
                     -- Go to Monarch Linn.
                     if questProgress == phase.GO_TO_MONARCH_LINN then
-                        return quest:progressEvent(571)
+                        return quest:event(571)
 
                     -- Victory. Give reward.
                     elseif
@@ -187,19 +232,11 @@ quest.sections =
                         return quest:progressEvent(574)
 
                     -- Failure. Player must wait until next conquest tally.
-                    elseif questProgress == phase.RETURNING_IN_DEFEAT then
-                        return quest:progressEvent(575)
-
-                    -- Alternate messages while waiting in defeat.
                     elseif
-                        questProgress == phase.WAITING_IN_DEFEAT and
-                        not conquestWaitFinished
+                        questProgress == phase.RETURNING_IN_DEFEAT or
+                        questProgress == phase.WAITING_IN_DEFEAT
                     then
-                        local nextDefeatMessage = (player:getCharVar(var.DEFEAT_MESSAGE) % #defeatedWaitingMessages) + 1
-
-                        player:setCharVar(var.DEFEAT_MESSAGE, nextDefeatMessage)
-
-                        return quest:progressEvent(defeatedWaitingMessages[nextDefeatMessage])
+                        return quest:progressEvent(575)
                     end
                 end,
             },
@@ -209,9 +246,6 @@ quest.sections =
                 -- Victory; Wait gets set with Reward.
                 [572] = function(player, csid, option, npc)
                     giveReward(player)
-                    if quest:complete(player) then
-                        quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
-                    end
                 end,
 
                 -- Repeat quest
