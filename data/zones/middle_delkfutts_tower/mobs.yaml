@@ -1266,7 +1266,7 @@ spawns:
     level:    [30, 32]
   17420340:
     template: Magic_Pot
-    region:   ne_52
+    region:   region_56
     level:    [28, 29]
   17420341:
     template: Panzer_Doll

@@ -1094,7 +1094,7 @@ spawns:
     level:    [65, 69]
   17424453:
     template: Jotunn_Gatekeeper
-    region:   n_69
+    region:   c_68
     level:    [65, 69]
   17424454:
     template: Jotunn_Hallkeeper
@@ -1110,7 +1110,7 @@ spawns:
     level:    [53, 55]
   17424457:
     template: Jotunn_Wallkeeper
-    region:   w_78
+    region:   s_74
     level:    [65, 69]
   17424458:
     template: Jotunn_Gatekeeper
@@ -1150,7 +1150,7 @@ spawns:
     level:    [53, 55]
   17424467:
     template: Jotunn_Wallkeeper
-    region:   e_83
+    region:   c_84
     level:    [65, 69]
   17424468:
     template: Jotunn_Gatekeeper
@@ -1190,12 +1190,12 @@ spawns:
   17424476:
     template: Incubus_Bats_UDT
     script:   Incubus_Bats
-    region:   sw_92
+    region:   region_30
     level:    [62, 64]
   17424477:
     template: Incubus_Bats_UDT
     script:   Incubus_Bats
-    region:   sw_92
+    region:   region_30
     level:    [62, 64]
   17424478:
     template: Incubus_Bats_UDT
