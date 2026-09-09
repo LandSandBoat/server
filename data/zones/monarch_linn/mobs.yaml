@@ -285,7 +285,7 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp:  4150
+        hp:  5000
         mp: 10000
     loot:
       drops:
