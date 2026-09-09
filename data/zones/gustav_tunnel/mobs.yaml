@@ -1667,7 +1667,7 @@ spawns:
     level:    [65, 68]
   17645637:
     template: Goblins_Leech
-    region:   c_63
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 55]
   17645638:
     template: Goblin_Shepherd
@@ -1675,7 +1675,7 @@ spawns:
     level:    [65, 68]
   17645639:
     template: Goblins_Leech
-    region:   c_63
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 55]
   17645640:
     template: Wyvernpoacher_Drachlox
@@ -1707,7 +1707,7 @@ spawns:
     level:    [65, 68]
   17645647:
     template: Goblins_Leech
-    region:   w_73
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 55]
   17645648:
     template: Goblin_Shepherd
@@ -1715,7 +1715,7 @@ spawns:
     level:    [65, 68]
   17645649:
     template: Goblins_Leech
-    region:   w_73
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 55]
   17645650:
     template: Robber_Crab
@@ -1727,7 +1727,7 @@ spawns:
     level:    [65, 68]
   17645652:
     template: Goblins_Leech
-    region:   c_82
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 55]
   17645653:
     template: Goblin_Alchemist

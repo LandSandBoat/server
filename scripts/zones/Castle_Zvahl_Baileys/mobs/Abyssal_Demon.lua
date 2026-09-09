@@ -3,6 +3,8 @@
 --  Mob: Abyssal Demon
 -- Note: PH for Marquis Sabnock
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 ---@type TMobEntity

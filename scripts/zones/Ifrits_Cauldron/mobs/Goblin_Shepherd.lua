@@ -2,6 +2,8 @@
 -- Area: Ifrit's Cauldron
 --  Mob: Goblin Shepherd
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

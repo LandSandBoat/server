@@ -1126,7 +1126,7 @@ spawns:
     level:    [30, 32]
   17420305:
     template: Goblins_Bat
-    region:   se_16
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420306:
     template: Goblin_Furrier
@@ -1146,7 +1146,7 @@ spawns:
     level:    [30, 32]
   17420310:
     template: Goblins_Bat
-    region:   se_21
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420311:
     template: Goblin_Furrier
@@ -1194,7 +1194,7 @@ spawns:
     level:    [30, 32]
   17420322:
     template: Gigass_Bat
-    region:   e_31
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420323:
     template: Giant_Lobber
@@ -1218,7 +1218,7 @@ spawns:
     level:    [30, 32]
   17420328:
     template: Gigass_Bat
-    region:   ne_39
+    at:       [13.601, -47.705, 100.803, 82]
     level:    [23, 25]
   17420329:
     template: Giant_Lobber
@@ -1330,7 +1330,7 @@ spawns:
     level:    [30, 32]
   17420356:
     template: Goblins_Bat
-    region:   ne_67
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420357:
     template: Goblin_Furrier
@@ -1379,7 +1379,7 @@ spawns:
     level:    [30, 32]
   17420368:
     template: Goblins_Bat
-    region:   ne_79
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420369:
     template: Goblin_Furrier
@@ -1399,7 +1399,7 @@ spawns:
     level:    [30, 32]
   17420373:
     template: Goblins_Bat
-    region:   ne_79
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420374:
     template: Goblin_Furrier
@@ -1551,7 +1551,7 @@ spawns:
     level:    [30, 32]
   17420411:
     template: Gigass_Bat
-    region:   e_122
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420412:
     template: Giant_Lobber
@@ -1799,7 +1799,7 @@ spawns:
     level:    [32, 34]
   17420473:
     template: Goblins_Bat
-    region:   w_184
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420474:
     template: Goblin_Furrier
@@ -1859,7 +1859,7 @@ spawns:
     level:    [32, 34]
   17420488:
     template: Goblins_Bat
-    region:   sw_199
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420489:
     template: Goblin_Furrier
@@ -1879,7 +1879,7 @@ spawns:
     level:    [32, 34]
   17420493:
     template: Goblins_Bat
-    region:   sw_199
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420494:
     template: Goblin_Furrier
@@ -1907,7 +1907,7 @@ spawns:
     level:    [32, 34]
   17420500:
     template: Goblins_Bat
-    region:   w_211
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420501:
     template: Goblin_Furrier
@@ -1963,7 +1963,7 @@ spawns:
     level:    [32, 34]
   17420514:
     template: Gigass_Bats
-    region:   w_223
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 27]
   17420515:
     template: Gigas_Quarrier
@@ -1983,7 +1983,7 @@ spawns:
     level:    [32, 34]
   17420519:
     template: Gigass_Bats
-    region:   w_223
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 27]
   17420520:
     template: Gigas_Quarrier
@@ -2019,7 +2019,7 @@ spawns:
     level:    [32, 34]
   17420528:
     template: Gigass_Bats
-    region:   w_239
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 27]
   17420529:
     template: Ophion
@@ -2053,7 +2053,7 @@ spawns:
     level:    [32, 34]
   17420536:
     template: Goblins_Bat
-    region:   nw_247
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17420537:
     template: Goblin_Furrier
@@ -2322,7 +2322,7 @@ spawns:
     level:    [32, 34]
   17420603:
     template: Gigass_Bats
-    region:   sw_314
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 27]
   17420604:
     template: Gigas_Quarrier
@@ -2362,7 +2362,7 @@ spawns:
     level:    [32, 34]
   17420613:
     template: Gigass_Bats
-    region:   nw_323
+    at:       [1.000, 1.000, 1.000]
     level:    [25, 27]
   17420614:
     template: Gigas_Quarrier
@@ -2374,7 +2374,7 @@ spawns:
     level:    [32, 34]
   17420616:
     template: Goblins_Bat
-    region:   nw_327
+    at:       [-420.783, -127.705, 101.430, 134]
     level:    [23, 25]
   17420617:
     template: Goblin_Furrier

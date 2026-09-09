@@ -7,6 +7,7 @@ mixins =
     require('scripts/mixins/follow'),
     require('scripts/mixins/fomor_hate'),
     require('scripts/mixins/fomor_party'),
+    require('scripts/mixins/pet_resummon'),
 }
 -----------------------------------
 ---@type TMobEntity

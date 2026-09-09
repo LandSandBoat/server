@@ -3188,7 +3188,7 @@ spawns:
     level:    [73, 75]
   16998428:
     template: Lamias_Elemental
-    region:   ne_26
+    at:       [1.000, 1.000, 1.000, 213]
     level:    [68, 70]
   16998429:
     template: Reserve_Draugar_AR_blm
@@ -3598,7 +3598,7 @@ spawns:
     level:    [73, 75]
   16998519:
     template: Lamias_Elemental
-    region:   c_115
+    at:       [1.000, 1.000, 1.000, 135]
     level:    [68, 70]
   16998520:
     template: Lamie_No7
@@ -4094,7 +4094,7 @@ spawns:
     level:    [81, 83]
   16998637:
     template: Lamias_Elemental
-    region:   n_236
+    at:       [-10.923, -1.673, 421.162, 6]
     level:    [76, 78]
   16998638:
     template: Draugar_Servant_blm
@@ -4761,7 +4761,7 @@ spawns:
     level:    [81, 83]
   16998790:
     template: Lamias_Elemental
-    region:   s_389
+    at:       [1.000, 1.000, 1.000, 54]
     level:    [68, 77]
   16998791:
     template: Lamia_Idolater_drk
@@ -4888,7 +4888,7 @@ spawns:
     level:    [81, 83]
   16998817:
     template: Lamias_Elemental
-    region:   s_416
+    at:       [1.000, 1.000, 1.000, 11]
     level:    [77, 77]
   16998818:
     template: Lamia_Idolater_drk

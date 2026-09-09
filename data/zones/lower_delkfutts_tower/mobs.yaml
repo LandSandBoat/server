@@ -877,7 +877,7 @@ spawns:
     level:    [28, 30]
   17530885:
     template: Gigass_Bat
-    region:   c_2
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17530886:
     template: Giant_Lobber
@@ -1116,7 +1116,7 @@ spawns:
     level:    [28, 30]
   17530941:
     template: Gigass_Bat
-    region:   n_53
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17530942:
     template: Giant_Lobber
@@ -1191,7 +1191,7 @@ spawns:
     level:    [28, 30]
   17530958:
     template: Gigass_Bat
-    region:   nw_71
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17530959:
     template: Giant_Lobber
@@ -1226,7 +1226,7 @@ spawns:
     level:    [34, 35]
   17530966:
     template: Gigass_Bats
-    region:   e_83
+    at:       [1.000, 1.000, 1.000, 65]
     level:    [27, 29]
   17530967:
     template: Gigas_Sculptor
@@ -1246,7 +1246,7 @@ spawns:
     level:    [34, 35]
   17530971:
     template: Gigass_Bats
-    region:   e_83
+    at:       [1.000, 1.000, 1.000]
     level:    [27, 29]
   17530972:
     template: Gigas_Sculptor
@@ -1327,7 +1327,7 @@ spawns:
     level:    [28, 30]
   17530990:
     template: Gigass_Bat
-    region:   sw_107
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17530991:
     template: Giant_Lobber
@@ -1347,7 +1347,7 @@ spawns:
     level:    [28, 30]
   17530995:
     template: Gigass_Bat
-    region:   sw_107
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17530996:
     template: Giant_Lobber
@@ -1381,7 +1381,7 @@ spawns:
     level:    [28, 30]
   17531003:
     template: Gigass_Bat
-    region:   w_119
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17531004:
     template: Giant_Lobber
@@ -1401,7 +1401,7 @@ spawns:
     level:    [28, 30]
   17531008:
     template: Gigass_Bat
-    region:   nw_127
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17531009:
     template: Giant_Lobber
@@ -1570,7 +1570,7 @@ spawns:
     level:    [28, 30]
   17531047:
     template: Gigass_Bat
-    region:   e_165
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17531048:
     template: Giant_Lobber
@@ -1661,7 +1661,7 @@ spawns:
     level:    [28, 30]
   17531068:
     template: Gigass_Bat
-    region:   n_184
+    at:       [1.000, 1.000, 1.000]
     level:    [21, 23]
   17531069:
     template: Giant_Lobber

@@ -2748,7 +2748,7 @@ spawns:
   16990224:
     template: Fomors_Bats_Bhaflau_Thickets
     script:   Fomors_Bats
-    region:   e_13
+    at:       [1.000, 1.000, 1.000]
     level:    [58, 60]
   16990225:
     template: Fomor_Bard_WW_BT
@@ -2788,7 +2788,7 @@ spawns:
   16990233:
     template: Fomors_Bats_Bhaflau_Thickets
     script:   Fomors_Bats
-    region:   e_21
+    at:       [1.000, 1.000, 1.000]
     level:    [58, 60]
   16990234:
     template: Ameretat
@@ -2850,7 +2850,7 @@ spawns:
   16990248:
     template: Fomors_Bats_Bhaflau_Thickets
     script:   Fomors_Bats
-    region:   e_36
+    at:       [1.000, 1.000, 1.000]
     level:    [58, 60]
   16990249:
     template: Aht_Urhgan_Attercop
@@ -3440,7 +3440,7 @@ spawns:
     level:    [81, 83]
   16990387:
     template: Mamool_Jas_Raptor
-    region:   s_177
+    at:       [1.000, 1.000, 1.000]
     level:    [76, 78]
   16990388:
     template: Mamool_Ja_Infiltrator
@@ -3521,7 +3521,7 @@ spawns:
     level:    [81, 83]
   16990406:
     template: Mamool_Jas_Raptor
-    region:   s_196
+    at:       [1.000, 1.000, 1.000]
     level:    [76, 78]
   16990407:
     template: Mamool_Ja_Lurker
@@ -3643,7 +3643,7 @@ spawns:
     level:    [81, 83]
   16990436:
     template: Mamool_Jas_Raptor
-    region:   w_225
+    at:       [1.000, 1.000, 1.000]
     level:    [76, 78]
   16990437:
     template: Mamool_Ja_Stabler
@@ -3651,7 +3651,7 @@ spawns:
     level:    [81, 83]
   16990438:
     template: Mamool_Jas_Raptor
-    region:   w_225
+    at:       [1.000, 1.000, 1.000]
     level:    [76, 78]
   16990439:
     template: Mamool_Ja_Infiltrator

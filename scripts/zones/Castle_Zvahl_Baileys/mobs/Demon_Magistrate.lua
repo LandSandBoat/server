@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Baileys (161)
 --  Mob: Demon Magistrate
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

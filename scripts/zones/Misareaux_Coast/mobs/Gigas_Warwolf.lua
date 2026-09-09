@@ -2,7 +2,11 @@
 -- Area: Misareaux_Coast
 --  Mob: Gigas Warwolf
 -----------------------------------
-mixins = { require('scripts/mixins/fomor_hate') }
+mixins =
+{
+    require('scripts/mixins/fomor_hate'),
+    require('scripts/mixins/pet_resummon'),
+}
 local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 ---@type TMobEntity

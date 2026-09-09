@@ -2,6 +2,8 @@
 -- Area: Maze of Shakhrami
 --  Mob: Goblin Pathfinder
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

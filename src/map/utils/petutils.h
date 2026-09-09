@@ -315,7 +315,7 @@ void LoadPetList();
 void FreePetList();
 
 void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID, bool preserveName = false);
 void  DetachPet(CBattleEntity* PMaster);
 void  DespawnPet(CBattleEntity* PMaster);
 void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);

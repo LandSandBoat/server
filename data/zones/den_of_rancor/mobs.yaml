@@ -1572,7 +1572,7 @@ spawns:
     level:    [66, 69]
   17432633:
     template: Tonberrys_Elemental
-    region:   w_56
+    at:       [1.000, 1.000, 1.000, 20]
     level:    [53, 59]
   17432634:
     template: Dire_Bat
@@ -2219,7 +2219,7 @@ spawns:
     level:    [66, 69]
   17432790:
     template: Tonberrys_Elemental
-    region:   s_212
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432791:
     template: Mousse_DoR_PMS
@@ -2352,7 +2352,7 @@ spawns:
     level:    [66, 69]
   17432821:
     template: Tonberrys_Elemental
-    region:   sw_243
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432822:
     template: Tonberry_Beleaguerer
@@ -2360,7 +2360,7 @@ spawns:
     level:    [66, 69]
   17432823:
     template: Tonberrys_Elemental
-    region:   sw_243
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432824:
     template: Mousse_DoR_PMS
@@ -2512,7 +2512,7 @@ spawns:
     level:    [66, 69]
   17432858:
     template: Tonberrys_Elemental
-    region:   s_280
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432859:
     template: Mousse_DoR_PMS
@@ -2765,7 +2765,7 @@ spawns:
     level:    [66, 69]
   17432916:
     template: Tonberrys_Elemental
-    region:   sw_338
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432917:
     template: Succubus_Bats
@@ -2801,7 +2801,7 @@ spawns:
     level:    [66, 69]
   17432925:
     template: Tonberrys_Elemental
-    region:   s_347
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432926:
     template: Succubus_Bats
@@ -2853,7 +2853,7 @@ spawns:
     level:    [66, 69]
   17432937:
     template: Tonberrys_Elemental
-    region:   s_360
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432938:
     template: Succubus_Bats
@@ -2951,7 +2951,7 @@ spawns:
     level:    [66, 69]
   17432958:
     template: Tonberrys_Elemental
-    region:   sw_379
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432959:
     template: Tonberry_Slasher
@@ -2968,7 +2968,7 @@ spawns:
     level:    [66, 69]
   17432962:
     template: Tonberrys_Elemental
-    region:   sw_385
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432963:
     template: Million_Eyes_DR
@@ -2985,7 +2985,7 @@ spawns:
     level:    [66, 69]
   17432966:
     template: Tonberrys_Elemental
-    region:   sw_388
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432967:
     template: Million_Eyes_DR
@@ -3057,7 +3057,7 @@ spawns:
     level:    [69, 72]
   17432982:
     template: Tonberrys_Elemental
-    region:   sw_404
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432983:
     template: Tonberry_Slasher
@@ -3073,7 +3073,7 @@ spawns:
     level:    [69, 72]
   17432986:
     template: Tonberrys_Elemental
-    region:   sw_409
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432987:
     template: Tonberry_Beleaguerer
@@ -3081,7 +3081,7 @@ spawns:
     level:    [69, 72]
   17432988:
     template: Tonberrys_Elemental
-    region:   sw_409
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17432989:
     template: Tonberry_Decapitator
@@ -3132,7 +3132,7 @@ spawns:
     level:    [69, 72]
   17433000:
     template: Tonberrys_Elemental
-    region:   w_421
+    at:       [1.000, 1.000, 1.000]
     level:    [53, 59]
   17433001:
     template: Tonberry_Tracker

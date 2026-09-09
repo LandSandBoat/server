@@ -1509,7 +1509,7 @@ spawns:
   16891960:
     template: Fomors_Bats_Sacrarium
     script:   Fomors_Bats
-    region:   n_53
+    at:       [1.000, 1.000, 1.000, 117]
     level:    [49, 51]
   16891961:
     template: Fomor_Monk
@@ -1641,7 +1641,7 @@ spawns:
     level:    [55, 56]
   16891992:
     template: Fomors_Elemental
-    region:   n_85
+    at:       [1.000, 1.000, 1.000, 125]
     level:    [49, 51]
   16891993:
     template: Fomor_Monk
@@ -1657,7 +1657,7 @@ spawns:
     level:    [55, 56]
   16891996:
     template: Fomors_Elemental
-    region:   n_85
+    at:       [1.000, 1.000, 1.000, 203]
     level:    [49, 51]
   16891997:
     template: Greater_Gaylas_Sacrarium
@@ -1704,7 +1704,7 @@ spawns:
   16892007:
     template: Fomors_Bats_Sacrarium
     script:   Fomors_Bats
-    region:   s_101
+    at:       [1.000, 1.000, 1.000, 196]
     level:    [49, 51]
   16892008:
     template: Fomor_Bard
@@ -1721,7 +1721,7 @@ spawns:
   16892011:
     template: Fomors_Bats_Sacrarium
     script:   Fomors_Bats
-    region:   s_101
+    at:       [1.000, 1.000, 1.000, 32]
     level:    [49, 51]
   16892012:
     template: Fomor_Bard
@@ -1784,7 +1784,7 @@ spawns:
     level:    [54, 55]
   16892026:
     template: Fomors_Elemental
-    region:   c_118
+    at:       [1.000, 1.000, 1.000, 193]
     level:    [49, 51]
   16892027:
     template: Fomor_Monk

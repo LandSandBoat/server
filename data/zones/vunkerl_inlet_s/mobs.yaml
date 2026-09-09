@@ -3982,7 +3982,7 @@ spawns:
     level:    [78, 82]
   17117242:
     template: Gigass_Tiger
-    region:   ne_57
+    at:       [403.113, -31.915, 426.662, 42]
     level:    [73, 75]
   17117243:
     template: Gigas_Marine
@@ -4002,7 +4002,7 @@ spawns:
     level:    [78, 82]
   17117247:
     template: Gigass_Tiger
-    region:   ne_62
+    at:       [300.016, -46.413, 318.661, 54]
     level:    [73, 75]
   17117248:
     template: Gigas_Deckhand
@@ -4043,7 +4043,7 @@ spawns:
   17117257:
     template: Goblins_Bat_Vunkerl_Inlet_S
     script:   Goblins_Bat
-    region:   c_72
+    at:       [-201.561, -40.558, -43.860, 12]
     level:    [61, 64]
   17117258:
     template: Goblin_Flagman
@@ -4076,7 +4076,7 @@ spawns:
   17117265:
     template: Goblins_Bat_Vunkerl_Inlet_S
     script:   Goblins_Bat
-    region:   c_79
+    at:       [-197.611, -32.205, 67.423, 165]
     level:    [61, 64]
   17117266:
     template: Goblin_Flagman
@@ -4101,7 +4101,7 @@ spawns:
   17117271:
     template: Goblins_Bat_Vunkerl_Inlet_S
     script:   Goblins_Bat
-    region:   c_86
+    at:       [-255.321, -43.429, -65.311, 76]
     level:    [61, 64]
   17117272:
     template: Doom_Soldier
@@ -4173,7 +4173,7 @@ spawns:
     level:    [78, 82]
   17117289:
     template: Gigass_Tiger
-    region:   c_100
+    at:       [26.075, -39.942, -105.549, 109]
     level:    [73, 75]
   17117290:
     template: Gigas_Marine
@@ -4667,7 +4667,7 @@ spawns:
     level:    [78, 82]
   17117396:
     template: Gigass_Tiger
-    region:   sw_209
+    at:       [-590.414, -41.417, -537.865, 168]
     level:    [73, 75]
   17117397:
     template: Gigas_Marine
@@ -4687,7 +4687,7 @@ spawns:
     level:    [78, 82]
   17117401:
     template: Gigass_Tiger
-    region:   sw_216
+    at:       [-517.192, -48.588, -598.908, 43]
     level:    [73, 75]
   17117402:
     template: Gigas_Deckhand

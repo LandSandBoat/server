@@ -2122,7 +2122,7 @@ spawns:
     level:    [54, 56]
   16814120:
     template: Tonberrys_Elemental
-    region:   e_39
+    at:       [291.087, -0.352, -4.973, 254]
     level:    [49, 53]
   16814121:
     template: Cryptonberry_Stalker
@@ -2178,7 +2178,7 @@ spawns:
     level:    [56, 58]
   16814134:
     template: Tonberrys_Elemental
-    region:   e_51
+    at:       [336.624, 31.416, -59.555, 105]
     level:    [49, 53]
   16814135:
     template: Cryptonberry_Stalker
@@ -2354,7 +2354,7 @@ spawns:
   16814175:
     template: Goblins_Bat_PsoXja
     script:   Goblins_Bat
-    region:   se_94
+    at:       [171.377, 15.647, -354.418, 126]
     level:    [57, 61]
   16814176:
     template: Diremite_Assaulter
@@ -2379,7 +2379,7 @@ spawns:
   16814181:
     template: Goblins_Bat_PsoXja
     script:   Goblins_Bat
-    region:   se_97
+    at:       [1.000, 1.000, 1.000, 255]
     level:    [57, 61]
   16814182:
     template: Goblin_Mercenary
@@ -2404,7 +2404,7 @@ spawns:
   16814187:
     template: Goblins_Bat_PsoXja
     script:   Goblins_Bat
-    region:   se_102
+    at:       [1.000, 1.000, 1.000, 2]
     level:    [57, 61]
   16814188:
     template: Thousand_Eyes_PX
@@ -2491,7 +2491,7 @@ spawns:
     level:    [57, 59]
   16814207:
     template: Tonberrys_Elemental
-    region:   ne_126
+    at:       [235.660, 15.647, 291.072, 187]
     level:    [49, 53]
   16814208:
     template: Snow_Lizard
@@ -2559,7 +2559,7 @@ spawns:
     level:    [59, 60]
   16814224:
     template: Tonberrys_Elemental
-    region:   ne_140
+    at:       [1.000, 1.000, 1.000, 58]
     level:    [49, 53]
   16814225:
     template: Diremite_Assaulter
@@ -2609,7 +2609,7 @@ spawns:
     level:    [53, 56]
   16814236:
     template: Tonberrys_Elemental
-    region:   sw_155
+    at:       [-302.628, 15.399, -260.958, 253]
     level:    [49, 53]
   16814237:
     template: Cryptonberry_Stalker
@@ -2689,7 +2689,7 @@ spawns:
     level:    [53, 56]
   16814254:
     template: Tonberrys_Elemental
-    region:   sw_172
+    at:       [-363.802, 0.393, -169.525, 126]
     level:    [49, 53]
   16814255:
     template: Cryptonberry_Stalker
@@ -2775,7 +2775,7 @@ spawns:
     level:    [54, 56]
   16814274:
     template: Tonberrys_Elemental
-    region:   sw_193
+    at:       [-345.403, 15.647, -266.755, 49]
     level:    [49, 53]
   16814275:
     template: Ice_Elemental

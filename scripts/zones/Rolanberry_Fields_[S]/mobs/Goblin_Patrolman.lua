@@ -2,6 +2,8 @@
 -- Area: Rolanberry Fields [S]
 --  Mob: Goblin Patrolman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

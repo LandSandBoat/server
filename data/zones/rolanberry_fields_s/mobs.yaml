@@ -4751,7 +4751,7 @@ spawns:
     level:    [56, 59]
   17150030:
     template: Goblins_Crawler
-    region:   e_74
+    at:       [279.990, -32.670, -171.940, 235]
     level:    [51, 53]
   17150031:
     template: Scabrous_Slug
@@ -4850,7 +4850,7 @@ spawns:
     level:    [43, 43]
   17150053:
     template: Goblins_Crawler
-    region:   e_98
+    at:       [255.340, -21.170, -344.730, 134]
     level:    [51, 53]
   17150054:
     template: Coppercap
@@ -5495,7 +5495,7 @@ spawns:
     level:    [56, 59]
   17150192:
     template: Goblins_Crawler
-    region:   sw_236
+    at:       [-685.523, -32.080, -472.819, 76]
     level:    [51, 53]
   17150193:
     template: Evil_Spirit_RFS

@@ -2,6 +2,8 @@
 -- Area: Tahrongi Canyon
 --   NM: Yagudo Mendicant
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

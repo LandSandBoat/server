@@ -3328,7 +3328,7 @@ spawns:
     level:    [31, 34]
   17568117:
     template: Goblins_Bats
-    region:   s_369
+    at:       [-94.440, -27.800, -244.660, 52]
     level:    [24, 26]
   17568118:
     template: Goblin_Furrier

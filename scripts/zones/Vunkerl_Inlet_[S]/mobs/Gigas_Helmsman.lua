@@ -2,6 +2,8 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Gigas Helmsman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 ---@type TMobEntity

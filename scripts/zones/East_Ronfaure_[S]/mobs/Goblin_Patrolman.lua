@@ -2,6 +2,8 @@
 -- Area: East Ronfaure [S]
 --  Mob: Goblin Patrolman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

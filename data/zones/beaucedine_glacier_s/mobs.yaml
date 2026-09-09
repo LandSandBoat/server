@@ -3877,7 +3877,7 @@ spawns:
   17334339:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   s_66
+    at:       [65.868, -19.997, -213.597, 178]
     level:    [75, 76]
   17334340:
     template: Gigas_Flesher
@@ -3886,7 +3886,7 @@ spawns:
   17334341:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   s_66
+    at:       [61.051, -19.729, -236.175, 88]
     level:    [75, 76]
   17334342:
     template: Gigas_Pelter
@@ -3911,7 +3911,7 @@ spawns:
   17334347:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   s_74
+    at:       [-6.789, -20.008, -313.964, 65]
     level:    [75, 76]
   17334348:
     template: Gigas_Pelter
@@ -3955,7 +3955,7 @@ spawns:
   17334358:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   c_85
+    at:       [106.456, -20.249, -130.251, 97]
     level:    [75, 76]
   17334359:
     template: Gigas_Pelter
@@ -3976,7 +3976,7 @@ spawns:
   17334363:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   e_90
+    at:       [291.536, -20.333, -130.703, 61]
     level:    [75, 76]
   17334364:
     template: Gigas_Pelter
@@ -4001,7 +4001,7 @@ spawns:
   17334369:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   e_96
+    at:       [174.957, -19.987, 40.205, 2]
     level:    [75, 76]
   17334370:
     template: Gigas_Pelter
@@ -4038,7 +4038,7 @@ spawns:
   17334378:
     template: Gigass_Tiger_BGS
     script:   Gigass_Tiger
-    region:   n_105
+    at:       [134.663, -20.311, 166.702, 139]
     level:    [75, 76]
   17334379:
     template: Icefang_Tiger

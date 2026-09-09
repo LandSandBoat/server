@@ -2,7 +2,11 @@
 -- Area: Lufaise_Meadows
 --  Mob: Gigas Warwolf
 -----------------------------------
-mixins = { require('scripts/mixins/fomor_hate') }
+mixins =
+{
+    require('scripts/mixins/fomor_hate'),
+    require('scripts/mixins/pet_resummon'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

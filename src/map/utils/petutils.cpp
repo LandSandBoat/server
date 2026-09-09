@@ -1330,7 +1330,7 @@ void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     }
 }
 
-void SpawnMobPet(CBattleEntity* PMaster, uint32 PetID)
+void SpawnMobPet(CBattleEntity* PMaster, uint32 PetID, bool preserveName)
 {
     // this is ONLY used for mob smn elementals / avatars
     /*
@@ -1345,7 +1345,11 @@ void SpawnMobPet(CBattleEntity* PMaster, uint32 PetID)
     if (PPet)
     {
         PPet->look = petData->look;
-        PPet->name = petData->name;
+        if (!preserveName)
+        {
+            PPet->name = petData->name;
+        }
+
         PPet->SetMJob(petData->mJob);
         PPet->m_EcoSystem = petData->EcoSystem;
         PPet->m_Species   = petData->m_Species;

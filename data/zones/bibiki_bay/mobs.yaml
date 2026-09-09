@@ -2180,6 +2180,7 @@ spawns:
     level:    [34, 36]
   16793747:
     template: Goblins_Rarab
+    at:       [411.956, -26.477, 839.843, 28]
     level:    [29, 31]
   16793748:
     template: Marine_Dhalmel
@@ -2199,6 +2200,7 @@ spawns:
     level:    [72, 74]
   16793752:
     template: Goblins_Rarab
+    at:       [342.198, -28.318, 869.335, 235]
     level:    [66, 69]
   16793753:
     template: Teine_Sith
@@ -2302,6 +2304,7 @@ spawns:
     level:    [72, 74]
   16793778:
     template: Goblins_Rarab
+    at:       [192.140, -37.149, 799.647, 157]
     level:    [66, 69]
   16793779:
     template: Tartarus_Eft
@@ -2381,6 +2384,7 @@ spawns:
     level:    [72, 74]
   16793798:
     template: Goblins_Rarab
+    at:       [117.994, -36.772, 678.057, 135]
     level:    [66, 69]
   16793799:
     template: Hobgoblin_Venerer

@@ -4083,7 +4083,7 @@ spawns:
     level:    [80, 81]
   17342474:
     template: Demons_Elemental
-    region:   se_10
+    at:       [-79.000, -24.000, 3.000, 100]
     level:    [75, 78]
   17342475:
     template: Icefall
@@ -4131,7 +4131,7 @@ spawns:
     level:    [80, 81]
   17342486:
     template: Demons_Elemental
-    region:   s_21
+    at:       [-77.000, -24.000, 36.000, 100]
     level:    [75, 78]
   17342487:
     template: Demon_Befouler
@@ -4175,7 +4175,7 @@ spawns:
     level:    [80, 81]
   17342497:
     template: Demons_Elemental
-    region:   s_32
+    at:       [72.000, -24.000, 16.000, 100]
     level:    [75, 78]
   17342498:
     template: Dark_Elemental
@@ -4295,7 +4295,7 @@ spawns:
     level:    [80, 81]
   17342525:
     template: Demons_Elemental
-    region:   w_59
+    at:       [87.000, -24.000, 13.000, 100]
     level:    [75, 78]
   17342526:
     template: Demon_Magus
@@ -4311,7 +4311,7 @@ spawns:
     level:    [80, 81]
   17342529:
     template: Demons_Elemental
-    region:   sw_63
+    at:       [105.000, -24.000, -58.000, 110]
     level:    [75, 78]
   17342530:
     template: Dire_Gargouille
@@ -4649,7 +4649,7 @@ spawns:
     level:    [80, 81]
   17342601:
     template: Demons_Elemental
-    region:   sw_135
+    at:       [-120.000, 3.000, -85.000, 100]
     level:    [75, 78]
   17342602:
     template: Demon_Magus
@@ -4689,7 +4689,7 @@ spawns:
     level:    [80, 81]
   17342611:
     template: Demons_Elemental
-    region:   sw_145
+    at:       [263.000, -21.000, 55.000, 211]
     level:    [75, 78]
   17342612:
     template: Shadowguard_Demon
@@ -4729,7 +4729,7 @@ spawns:
     level:    [80, 81]
   17342621:
     template: Demons_Elemental
-    region:   sw_156
+    at:       [215.000, -24.000, 58.000, 100]
     level:    [75, 78]
   17342622:
     template: Deathwreaker_Demon
@@ -4749,7 +4749,7 @@ spawns:
     level:    [82, 83]
   17342626:
     template: Demons_Elemental
-    region:   w_158
+    at:       [4.000, 4.000, 128.000, 10]
     level:    [75, 78]
   17342627:
     template: Soulsearer_Demon
@@ -4769,7 +4769,7 @@ spawns:
     level:    [82, 83]
   17342631:
     template: Demons_Elemental
-    region:   sw_163
+    at:       [-117.000, 3.000, 126.000, 10]
     level:    [75, 78]
   17342632:
     template: Woebringer_Demon
@@ -4789,7 +4789,7 @@ spawns:
     level:    [82, 83]
   17342636:
     template: Demons_Elemental
-    region:   w_168
+    at:       [-118.000, 3.000, -68.000, 55]
     level:    [75, 78]
   17342637:
     template: Foredoomer_Demon
@@ -4797,7 +4797,7 @@ spawns:
     level:    [85, 88]
   17342638:
     template: Demons_Elemental
-    region:   sw_173
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342639:
     template: Demon_Suppressor
@@ -4836,7 +4836,7 @@ spawns:
     level:    [85, 88]
   17342648:
     template: Demons_Elemental
-    region:   c_181
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342649:
     template: Soulsearer_Demon
@@ -4852,7 +4852,7 @@ spawns:
     level:    [85, 88]
   17342652:
     template: Demons_Elemental
-    region:   s_185
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342653:
     template: Soulsearer_Demon
@@ -4879,7 +4879,7 @@ spawns:
     level:    [85, 88]
   17342659:
     template: Demons_Elemental
-    region:   w_192
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342660:
     template: Woebringer_Demon
@@ -4895,7 +4895,7 @@ spawns:
     level:    [85, 88]
   17342663:
     template: Demons_Elemental
-    region:   w_196
+    at:       [1.000, 1.000, 1.000]
     level:    [75, 78]
   17342664:
     template: Foredoomer_Demon
@@ -4903,7 +4903,7 @@ spawns:
     level:    [85, 88]
   17342665:
     template: Demons_Elemental
-    region:   sw_200
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342666:
     template: Deathwreaker_Demon
@@ -4918,7 +4918,7 @@ spawns:
     level:    [85, 88]
   17342669:
     template: Demons_Elemental
-    region:   sw_204
+    at:       [1.000, 1.000, 1.000]
     level:    [75, 78]
   17342670:
     template: Deathwreaker_Demon
@@ -4981,7 +4981,7 @@ spawns:
     level:    [82, 83]
   17342683:
     template: Demons_Elemental
-    region:   sw_216
+    at:       [0.001, 3.000, -68.000, 40]
     level:    [75, 78]
   17342684:
     template: Soulsearer_Demon
@@ -5013,7 +5013,7 @@ spawns:
     level:    [82, 83]
   17342690:
     template: Demons_Elemental
-    region:   sw_223
+    at:       [-20.000, 3.000, -120.000, 10]
     level:    [75, 78]
   17342691:
     template: Foredoomer_Demon
@@ -5117,7 +5117,7 @@ spawns:
     level:    [85, 88]
   17342712:
     template: Demons_Elemental
-    region:   sw_247
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342713:
     template: Deathwreaker_Demon
@@ -5181,7 +5181,7 @@ spawns:
     level:    [85, 88]
   17342728:
     template: Demons_Elemental
-    region:   sw_263
+    at:       [1.000, 1.000, 1.000]
     level:    [80, 83]
   17342729:
     template: Zvahl_Fortalice

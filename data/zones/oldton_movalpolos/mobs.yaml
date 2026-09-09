@@ -1554,7 +1554,7 @@ spawns:
   16822283:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   nw_10
+    at:       [-337.643, -4.267, 307.932, 39]
     level:    [28, 30]
   16822284:
     template: Dark_Bats_Oldton_Movalpolos
@@ -1651,7 +1651,7 @@ spawns:
   16822306:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   w_31
+    at:       [-258.736, 0.858, 104.000, 66]
     level:    [28, 30]
   16822307:
     template: Moblin_Ragman
@@ -1672,7 +1672,7 @@ spawns:
   16822311:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   w_38
+    at:       [-215.861, 7.489, 21.573, 12]
     level:    [28, 30]
   16822312:
     template: Goblin_Hammerman
@@ -1732,7 +1732,7 @@ spawns:
   16822325:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   w_51
+    at:       [-262.642, 7.341, -19.385, 165]
     level:    [28, 30]
   16822326:
     template: Stirge_Oldton_Movalpolos
@@ -1797,7 +1797,7 @@ spawns:
   16822340:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   c_66
+    at:       [-85.516, 7.571, 100.033, 114]
     level:    [28, 30]
   16822341:
     template: Goblin_Hammerman
@@ -1912,7 +1912,7 @@ spawns:
   16822367:
     template: Goblins_Bat_Tier1_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   s_94
+    at:       [-49.802, 7.525, -261.022, 129]
     level:    [28, 30]
   16822368:
     template: Stirge_Oldton_Movalpolos
@@ -2180,7 +2180,7 @@ spawns:
   16822432:
     template: Goblins_Bat_Tier2_Oldton_Movalpo
     script:   Goblins_Bat
-    region:   se_158
+    at:       [66.791, 11.393, -75.846, 249]
     level:    [37, 38]
   16822433:
     template: Goblin_Freelance

@@ -1948,7 +1948,7 @@ spawns:
   17285143:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   nw_20
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 30]
   17285144:
     template: Yhoator_Mandragora
@@ -2005,7 +2005,7 @@ spawns:
   17285157:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   nw_33
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 29]
   17285158:
     template: Yhoator_Mandragora
@@ -2218,7 +2218,7 @@ spawns:
   17285210:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   ne_88
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 39]
   17285211:
     template: Goblin_Trader
@@ -2244,7 +2244,7 @@ spawns:
   17285216:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   ne_94
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17285217:
     template: Goblin_Trader
@@ -2253,7 +2253,7 @@ spawns:
   17285218:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   ne_94
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17285219:
     template: Master_Coeurl
@@ -2354,7 +2354,7 @@ spawns:
   17285243:
     template: Goblins_Bee_jungle
     script:   Goblins_Bee
-    region:   c_121
+    at:       [1.000, 1.000, 1.000]
     level:    [28, 30]
   17285244:
     template: Yhoator_Wasp
@@ -3049,7 +3049,7 @@ spawns:
     level:    [45, 49]
   17285417:
     template: Tonberrys_Elemental
-    region:   se_295
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 39]
   17285418:
     template: Young_Opo-opo
@@ -3093,7 +3093,7 @@ spawns:
     level:    [45, 49]
   17285428:
     template: Tonberrys_Elemental
-    region:   se_304
+    at:       [361.693, 0.071, -501.147, 19]
     level:    [38, 39]
   17285429:
     template: Young_Opo-opo
@@ -3362,7 +3362,7 @@ spawns:
     level:    [45, 49]
   17285496:
     template: Tonberrys_Elemental
-    region:   e_372
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17285497:
     template: Worker_Crawler
@@ -3378,7 +3378,7 @@ spawns:
     level:    [45, 49]
   17285500:
     template: Tonberrys_Elemental
-    region:   c_377
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17285501:
     template: Goblin_Reaper
@@ -3422,7 +3422,7 @@ spawns:
     level:    [45, 49]
   17285511:
     template: Tonberrys_Elemental
-    region:   c_387
+    at:       [1.000, 1.000, 1.000]
     level:    [38, 40]
   17285512:
     template: Worker_Crawler

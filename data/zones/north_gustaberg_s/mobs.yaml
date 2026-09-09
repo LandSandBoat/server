@@ -5297,7 +5297,7 @@ spawns:
   17137898:
     template: Goblins_Bee_past
     script:   Goblins_Bee
-    region:   c_231
+    at:       [92.921, -20.470, 484.810, 15]
     level:    [52, 53]
   17137899:
     template: Huge_Hornet
@@ -5390,7 +5390,7 @@ spawns:
   17137921:
     template: Goblins_Bee_past
     script:   Goblins_Bee
-    region:   c_256
+    at:       [174.913, -40.819, 506.804, 34]
     level:    [52, 53]
   17137922:
     template: Huge_Hornet

@@ -2,6 +2,8 @@
 -- Area: Kuftal Tunnel
 --  Mob: Goblin Tamer
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

@@ -2,6 +2,8 @@
 -- Area: Xarcabard
 --  Mob: Demon Warlock
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

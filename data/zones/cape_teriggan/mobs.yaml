@@ -1372,7 +1372,7 @@ spawns:
     level:    [65, 68]
   17240084:
     template: Goblins_Rabbit
-    region:   sw_19
+    at:       [1.000, 1.000, 1.000]
     level:    [49, 50]
   17240085:
     template: Sand_Lizard_CT
@@ -1407,7 +1407,7 @@ spawns:
     level:    [65, 68]
   17240092:
     template: Goblins_Rabbit
-    region:   sw_27
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240093:
     template: Goblin_Bandit
@@ -1504,7 +1504,7 @@ spawns:
     level:    [65, 68]
   17240115:
     template: Goblins_Rabbit
-    region:   s_49
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240116:
     template: Sand_Lizard_CT
@@ -1636,7 +1636,7 @@ spawns:
     level:    [65, 68]
   17240146:
     template: Goblins_Rabbit
-    region:   c_81
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240147:
     template: Sand_Lizard_CT
@@ -1685,7 +1685,7 @@ spawns:
     level:    [65, 68]
   17240157:
     template: Goblins_Rabbit
-    region:   c_92
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240158:
     template: Velociraptor
@@ -2232,7 +2232,7 @@ spawns:
     level:    [65, 68]
   17240291:
     template: Goblins_Rabbit
-    region:   c_224
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240292:
     template: Velociraptor
@@ -2256,7 +2256,7 @@ spawns:
     level:    [65, 68]
   17240297:
     template: Goblins_Rabbit
-    region:   c_232
+    at:       [1.000, 1.000, 1.000]
     level:    [49, 50]
   17240298:
     template: Goblin_Alchemist
@@ -2288,7 +2288,7 @@ spawns:
     level:    [65, 68]
   17240305:
     template: Goblins_Rabbit
-    region:   w_240
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240306:
     template: Goblin_Mercenary
@@ -2412,7 +2412,7 @@ spawns:
     level:    [65, 68]
   17240336:
     template: Goblins_Rabbit
-    region:   w_271
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240337:
     template: Goblin_Alchemist
@@ -2464,7 +2464,7 @@ spawns:
     level:    [65, 68]
   17240349:
     template: Goblins_Rabbit
-    region:   w_284
+    at:       [1.000, 1.000, 1.000]
     level:    [48, 50]
   17240350:
     template: Goblin_Alchemist

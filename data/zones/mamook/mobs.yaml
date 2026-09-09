@@ -2110,7 +2110,7 @@ spawns:
     level:    [73, 75]
   17043478:
     template: Mamool_Jas_Lizard
-    region:   region_183
+    at:       [1.000, 1.000, 1.000, 174]
     level:    [66, 68]
   17043479:
     template: Carriage_Lizard
@@ -2368,7 +2368,7 @@ spawns:
     level:    [73, 75]
   17043542:
     template: Mamool_Jas_Lizard
-    region:   c_85
+    at:       [1.000, 1.000, 1.000, 189]
     level:    [66, 68]
   17043543:
     template: Mamool_Ja_Savant
@@ -2619,7 +2619,7 @@ spawns:
     level:    [73, 75]
   17043604:
     template: Mamool_Jas_Lizard
-    region:   c_147
+    at:       [1.000, 1.000, 1.000, 104]
     level:    [66, 68]
   17043605:
     template: Mamool_Ja_Spearman
@@ -2728,7 +2728,7 @@ spawns:
     level:    [73, 75]
   17043631:
     template: Mamool_Jas_Lizard
-    region:   w_174
+    at:       [1.000, 1.000, 1.000, 146]
     level:    [66, 68]
   17043632:
     template: Mamool_Ja_Zenist
@@ -2950,7 +2950,7 @@ spawns:
     level:    [73, 75]
   17043684:
     template: Mamool_Jas_Lizard
-    region:   sw_227
+    at:       [1.000, 1.000, 1.000, 84]
     level:    [66, 68]
   17043685:
     template: Mamool_Ja_Strapper
@@ -2958,7 +2958,7 @@ spawns:
     level:    [73, 75]
   17043686:
     template: Mamool_Jas_Lizard
-    region:   sw_227
+    at:       [1.000, 1.000, 1.000, 76]
     level:    [66, 68]
   17043687:
     template: Mamool_Ja_Zenist
@@ -3257,7 +3257,7 @@ spawns:
     level:    [81, 83]
   17043754:
     template: Mamool_Jas_Raptor
-    region:   s_297
+    at:       [1.000, 1.000, 1.000, 170]
     level:    [76, 78]
   17043755:
     template: Mamool_Ja_Pikeman_Mamook
@@ -3358,7 +3358,7 @@ spawns:
     level:    [81, 83]
   17043776:
     template: Mamool_Jas_Raptor
-    region:   sw_319
+    at:       [1.000, 1.000, 1.000, 135]
     level:    [76, 78]
   17043777:
     template: Mamool_Ja_Stabler_Mamook
@@ -3367,7 +3367,7 @@ spawns:
     level:    [81, 83]
   17043778:
     template: Mamool_Jas_Raptor
-    region:   sw_319
+    at:       [1.000, 1.000, 1.000, 171]
     level:    [76, 78]
   17043779:
     template: Firedance_Magmaal_Ja
@@ -3676,7 +3676,7 @@ spawns:
     level:    [81, 83]
   17043846:
     template: Mamool_Jas_Raptor
-    region:   e_389
+    at:       [1.000, 1.000, 1.000, 241]
     level:    [76, 78]
   17043847:
     template: Archaic_Mirror

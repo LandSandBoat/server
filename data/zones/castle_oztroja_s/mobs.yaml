@@ -3920,7 +3920,7 @@ spawns:
     level:    [76, 79]
   17182734:
     template: Yagudos_Elemental
-    region:   s_12
+    at:       [-158.512, -0.249, -102.610, 244]
     level:    [70, 79]
   17182735:
     template: Yagudo_High_Priest_past
@@ -3986,7 +3986,7 @@ spawns:
     level:    [76, 79]
   17182748:
     template: Yagudos_Elemental
-    region:   s_15
+    at:       [-134.547, -0.228, -49.918, 85]
     level:    [70, 79]
   17182749:
     template: Bastion_Bats_Castle_Oztroja_S
@@ -4200,7 +4200,7 @@ spawns:
     level:    [76, 79]
   17182796:
     template: Yagudos_Elemental
-    region:   s_73
+    at:       [8.870, -0.249, -15.047, 127]
     level:    [70, 79]
   17182797:
     template: Bastion_Bats_Castle_Oztroja_S
@@ -4218,7 +4218,7 @@ spawns:
     level:    [76, 79]
   17182800:
     template: Yagudos_Elemental
-    region:   s_78
+    at:       [-22.322, -0.250, -42.731, 189]
     level:    [70, 79]
   17182801:
     template: Bastion_Bats_Castle_Oztroja_S
@@ -4316,7 +4316,7 @@ spawns:
     level:    [76, 79]
   17182820:
     template: Yagudos_Elemental
-    region:   se_99
+    at:       [84.760, 0.209, -160.451, 166]
     level:    [70, 79]
   17182821:
     template: War_Lynx_COS
@@ -4409,7 +4409,7 @@ spawns:
     level:    [76, 79]
   17182840:
     template: Yagudos_Elemental
-    region:   se_99
+    at:       [52.570, -0.659, -186.493, 5]
     level:    [70, 79]
   17182841:
     template: Earth_Elemental
@@ -4516,7 +4516,7 @@ spawns:
     level:    [76, 79]
   17182863:
     template: Yagudos_Elemental
-    region:   se_142
+    at:       [39.374, -16.250, -18.051, 238]
     level:    [70, 79]
   17182864:
     template: Yagudo_Knight_Templar
@@ -4553,7 +4553,7 @@ spawns:
     level:    [76, 79]
   17182871:
     template: Yagudos_Elemental
-    region:   s_148
+    at:       [-49.955, -16.250, -102.111, 250]
     level:    [70, 79]
   17182872:
     template: Yagudo_Yojimbo
@@ -4720,7 +4720,7 @@ spawns:
     level:    [76, 79]
   17182908:
     template: Yagudos_Elemental
-    region:   c_187
+    at:       [-19.930, -16.841, 86.453, 51]
     level:    [70, 79]
   17182909:
     template: Yagudo_Prioress
@@ -4728,7 +4728,7 @@ spawns:
     level:    [76, 79]
   17182910:
     template: Yagudos_Elemental
-    region:   c_187
+    at:       [-18.877, -16.092, 81.849, 190]
     level:    [70, 79]
   17182911:
     template: Earth_Elemental
@@ -4744,7 +4744,7 @@ spawns:
     level:    [76, 79]
   17182914:
     template: Yagudos_Elemental
-    region:   c_193
+    at:       [-25.225, -36.703, 180.305, 13]
     level:    [70, 79]
   17182915:
     template: Yagudo_Prioress
@@ -4752,7 +4752,7 @@ spawns:
     level:    [76, 79]
   17182916:
     template: Yagudos_Elemental
-    region:   c_193
+    at:       [-40.061, -39.910, 182.195, 250]
     level:    [70, 79]
   17182917:
     template: Yagudo_Abbot_indoor_S
@@ -4833,7 +4833,7 @@ spawns:
     level:    [81, 83]
   17182933:
     template: Yagudos_Elemental
-    region:   w_211
+    at:       [-171.618, -16.499, 139.072, 41]
     level:    [70, 79]
   17182934:
     template: Yagudo_Hierogrammat
@@ -4845,7 +4845,7 @@ spawns:
     level:    [81, 83]
   17182936:
     template: Yagudos_Elemental
-    region:   w_214
+    at:       [-215.014, -16.500, 184.699, 110]
     level:    [70, 79]
   17182937:
     template: Yagudo_Conductor_past
@@ -4858,7 +4858,7 @@ spawns:
     level:    [81, 83]
   17182939:
     template: Yagudos_Elemental
-    region:   w_217
+    at:       [-267.962, -16.498, 142.267, 101]
     level:    [70, 79]
   17182940:
     template: Yagudo_Abbot_indoor_S
@@ -4964,7 +4964,7 @@ spawns:
     level:    [81, 83]
   17182963:
     template: Yagudos_Elemental
-    region:   c_241
+    at:       [-53.320, -16.035, 15.929, 182]
     level:    [70, 79]
   17182964:
     template: Yagudo_Flagellant_past
@@ -5009,7 +5009,7 @@ spawns:
     level:    [81, 83]
   17182973:
     template: Yagudos_Elemental
-    region:   sw_251
+    at:       [-256.640, -16.250, -22.583, 1]
     level:    [70, 79]
   17182974:
     template: Yagudo_Nokizaru
@@ -5084,7 +5084,7 @@ spawns:
     level:    [81, 83]
   17182990:
     template: Yagudos_Elemental
-    region:   s_269
+    at:       [-102.036, -40.259, -85.131, 252]
     level:    [70, 79]
   17182991:
     template: Yagudo_Parasite
@@ -5166,7 +5166,7 @@ spawns:
     level:    [81, 83]
   17183009:
     template: Yagudos_Elemental
-    region:   s_285
+    at:       [-67.581, -53.895, -218.807, 11]
     level:    [70, 79]
   17183010:
     template: Gnat
@@ -5214,7 +5214,7 @@ spawns:
     level:    [81, 83]
   17183020:
     template: Yagudos_Elemental
-    region:   s_299
+    at:       [-61.343, -72.249, -116.873, 32]
     level:    [70, 79]
   17183021:
     template: Yagudo_Superior
@@ -5222,7 +5222,7 @@ spawns:
     level:    [81, 83]
   17183022:
     template: Yagudos_Elemental
-    region:   s_301
+    at:       [-141.781, -72.243, -93.402, 196]
     level:    [70, 79]
   17183023:
     template: Yagudo_Flagellant_past

@@ -2,6 +2,8 @@
 -- Area: Newton Movalpolos
 --  Mob: Goblin Headman
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

@@ -2368,7 +2368,7 @@ spawns:
     level:    [30, 31]
   17207345:
     template: Goblins_Dragonfly
-    region:   c_47
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207346:
     template: Goblin_Leecher
@@ -2528,7 +2528,7 @@ spawns:
     level:    [30, 31]
   17207382:
     template: Goblins_Dragonfly
-    region:   w_84
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207383:
     template: Goblin_Leecher
@@ -2727,7 +2727,7 @@ spawns:
     level:    [30, 31]
   17207429:
     template: Goblins_Dragonfly
-    region:   nw_124
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207430:
     template: Goblin_Leecher
@@ -3082,7 +3082,7 @@ spawns:
     level:    [30, 31]
   17207512:
     template: Goblins_Dragonfly
-    region:   c_214
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207513:
     template: Goblin_Leecher
@@ -3564,7 +3564,7 @@ spawns:
     level:    [30, 31]
   17207625:
     template: Goblins_Dragonfly
-    region:   e_327
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207626:
     template: Goblin_Leecher
@@ -3664,7 +3664,7 @@ spawns:
     level:    [30, 31]
   17207650:
     template: Goblins_Dragonfly
-    region:   se_345
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207651:
     template: Goblin_Furrier
@@ -3799,7 +3799,7 @@ spawns:
     level:    [30, 31]
   17207682:
     template: Goblins_Dragonfly
-    region:   nw_385
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207683:
     template: Goblin_Furrier
@@ -3819,7 +3819,7 @@ spawns:
     level:    [30, 31]
   17207687:
     template: Goblins_Dragonfly
-    region:   nw_385
+    at:       [1.000, 1.000, 1.000]
     level:    [23, 25]
   17207688:
     template: Goblin_Furrier

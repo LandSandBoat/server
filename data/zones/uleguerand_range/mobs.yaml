@@ -2205,7 +2205,7 @@ spawns:
     level:    [75, 77]
   16797841:
     template: Demons_Elemental
-    region:   e_144
+    at:       [449.335, -64.384, 223.008, 237]
     level:    [72, 74]
   16797842:
     template: Tyrannotaur
@@ -2361,7 +2361,7 @@ spawns:
     level:    [81, 84]
   16797877:
     template: Demons_Elemental
-    region:   ne_175
+    at:       [215.397, -110.515, 440.499, 96]
     level:    [72, 74]
   16797878:
     template: Molech
@@ -2393,7 +2393,7 @@ spawns:
     level:    [81, 84]
   16797884:
     template: Demons_Elemental
-    region:   n_183
+    at:       [176.541, -108.849, 511.637, 240]
     level:    [72, 74]
   16797885:
     template: Molech
@@ -2429,7 +2429,7 @@ spawns:
     level:    [81, 84]
   16797892:
     template: Demons_Elemental
-    region:   n_194
+    at:       [23.723, -140.130, 471.580, 216]
     level:    [72, 74]
   16797893:
     template: Molech
@@ -2541,7 +2541,7 @@ spawns:
     level:    [81, 84]
   16797918:
     template: Demons_Elemental
-    region:   nw_216
+    at:       [-321.586, -156.116, 331.701, 214]
     level:    [72, 74]
   16797919:
     template: Molech
@@ -2717,7 +2717,7 @@ spawns:
     level:    [81, 84]
   16797960:
     template: Demons_Elemental
-    region:   nw_261
+    at:       [-321.843, -175.891, 458.892, 223]
     level:    [72, 74]
   16797961:
     template: Kindred_Warrior_UR
@@ -2741,7 +2741,7 @@ spawns:
     level:    [81, 84]
   16797965:
     template: Demons_Elemental
-    region:   nw_261
+    at:       [-294.439, -176.677, 482.843, 59]
     level:    [72, 74]
   16797966:
     template: Molech

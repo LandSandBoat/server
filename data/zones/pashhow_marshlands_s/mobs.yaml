@@ -4204,7 +4204,7 @@ spawns:
   17145879:
     template: Goblins_Dragonfly_past
     script:   Goblins_Dragonfly
-    region:   sw_19
+    at:       [-251.276, 24.448, -378.320, 35]
     level:    [61, 64]
   17145880:
     template: Snipper
@@ -4369,7 +4369,7 @@ spawns:
   17145920:
     template: Goblins_Dragonfly_past
     script:   Goblins_Dragonfly
-    region:   s_57
+    at:       [38.435, 24.495, -266.252, 38]
     level:    [61, 64]
   17145921:
     template: Snipper

@@ -2483,7 +2483,7 @@ spawns:
     level:    [66, 69]
   17490181:
     template: Goblins_Spider
-    region:   c_256
+    at:       [1.000, 1.000, 1.000, 3]
     level:    [54, 55]
   17490182:
     template: Goblin_Mercenary

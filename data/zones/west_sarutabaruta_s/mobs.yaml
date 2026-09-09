@@ -4577,7 +4577,7 @@ spawns:
     level:    [56, 59]
   17166432:
     template: Goblins_Rarab
-    region:   c_95
+    at:       [-34.041, -5.717, 50.067, 246]
     level:    [51, 54]
   17166433:
     template: Goblin_Draftee
@@ -4789,7 +4789,7 @@ spawns:
     level:    [56, 59]
   17166485:
     template: Goblins_Rarab
-    region:   e_147
+    at:       [321.832, -19.243, 265.450, 44]
     level:    [51, 54]
   17166486:
     template: Goblin_Franctireur
@@ -4805,7 +4805,7 @@ spawns:
     level:    [56, 59]
   17166489:
     template: Goblins_Rarab
-    region:   ne_150
+    at:       [318.630, -17.221, 372.200, 127]
     level:    [51, 54]
   17166490:
     template: Savanna_Rarab
@@ -5169,7 +5169,7 @@ spawns:
     level:    [56, 59]
   17166580:
     template: Goblins_Rarab
-    region:   s_242
+    at:       [-115.860, -4.324, -208.121, 49]
     level:    [51, 54]
   17166581:
     template: Goblin_Draftee
@@ -5362,7 +5362,7 @@ spawns:
     level:    [61, 64]
   17166628:
     template: Yagudos_Elemental
-    region:   w_291
+    at:       [-328.101, -20.756, 196.334, 65]
     level:    [56, 58]
   17166629:
     template: Yagudo_Piper_past
@@ -5391,7 +5391,7 @@ spawns:
     level:    [61, 64]
   17166634:
     template: Yagudos_Elemental
-    region:   w_298
+    at:       [-299.069, -20.033, 259.091, 8]
     level:    [56, 58]
   17166635:
     template: Yagudo_Initiate_past
@@ -5415,7 +5415,7 @@ spawns:
     level:    [61, 64]
   17166639:
     template: Yagudos_Elemental
-    region:   nw_301
+    at:       [-271.859, -19.873, 331.357, 207]
     level:    [56, 58]
   17166640:
     template: Yagudo_Acolyte_past
@@ -5449,7 +5449,7 @@ spawns:
     level:    [61, 64]
   17166646:
     template: Yagudos_Elemental
-    region:   nw_308
+    at:       [-304.285, -17.360, 395.428, 44]
     level:    [56, 58]
   17166647:
     template: Savanna_Rarab

@@ -1842,7 +1842,7 @@ spawns:
     level:    [36, 38]
   16805905:
     template: Goblins_Gallinipper
-    region:   c_16
+    at:       [175.249, 16.708, 64.557, 216]
     level:    [31, 34]
   16805906:
     template: Goblin_Furrier
@@ -1936,7 +1936,7 @@ spawns:
     level:    [38, 39]
   16805927:
     template: Goblins_Gallinipper
-    region:   e_36
+    at:       [532.217, 17.517, 81.001, 196]
     level:    [31, 34]
   16805928:
     template: Tracer_Antlion
@@ -2066,7 +2066,7 @@ spawns:
     level:    [38, 39]
   16805958:
     template: Goblins_Gallinipper
-    region:   se_68
+    at:       [269.870, 19.745, -237.517, 252]
     level:    [31, 34]
   16805959:
     template: Gallinipper_AC
@@ -2163,7 +2163,7 @@ spawns:
     level:    [42, 44]
   16805981:
     template: Goblins_Ogrefly
-    region:   se_91
+    at:       [234.808, 19.580, -191.177, 123]
     level:    [38, 39]
   16805982:
     template: Goblin_Reaper
@@ -2231,7 +2231,7 @@ spawns:
     level:    [42, 44]
   16805998:
     template: Goblins_Ogrefly
-    region:   se_109
+    at:       [363.780, 19.597, -168.571, 208]
     level:    [38, 39]
   16805999:
     template: Hunter_Antlion

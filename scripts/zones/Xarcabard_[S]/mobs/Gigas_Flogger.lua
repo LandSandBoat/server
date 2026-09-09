@@ -2,6 +2,8 @@
 -- Area: Xarcabard [S]
 --  Mob: Gigas Flogger
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

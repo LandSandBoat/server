@@ -2,6 +2,8 @@
 -- Area: Bhaflau Thickets
 --  Mob: Fomor Beastmaster
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

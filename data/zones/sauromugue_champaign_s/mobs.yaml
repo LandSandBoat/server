@@ -4488,7 +4488,7 @@ spawns:
     level:    [66, 69]
   17178741:
     template: Goblins_Beetle
-    region:   e_114
+    at:       [282.765, 23.538, 138.799, 165]
     level:    [61, 64]
   17178742:
     template: Diving_Beetle_past
@@ -4639,7 +4639,7 @@ spawns:
     level:    [66, 69]
   17178774:
     template: Goblins_Beetle
-    region:   e_149
+    at:       [300.503, 23.901, 115.122, 228]
     level:    [61, 64]
   17178775:
     template: Sauromugue_Skink_past
@@ -4945,7 +4945,7 @@ spawns:
     level:    [71, 74]
   17178836:
     template: Yagudos_Elemental
-    region:   e_209
+    at:       [541.287, 7.564, -61.978, 209]
     level:    [66, 68]
   17178837:
     template: Yagudo_Zealot_past
@@ -4972,7 +4972,7 @@ spawns:
     level:    [71, 74]
   17178842:
     template: Yagudos_Elemental
-    region:   e_217
+    at:       [400.504, 31.913, 124.031, 227]
     level:    [66, 68]
   17178843:
     template: Yagudo_Missionary
@@ -5014,7 +5014,7 @@ spawns:
     level:    [71, 74]
   17178851:
     template: Yagudos_Elemental
-    region:   n_225
+    at:       [143.411, 24.041, 186.871, 138]
     level:    [66, 68]
   17178852:
     template: Yagudo_Zealot_past
@@ -5102,7 +5102,7 @@ spawns:
     level:    [66, 69]
   17178869:
     template: Goblins_Beetle
-    region:   se_241
+    at:       [216.120, 2.987, -204.774, 34]
     level:    [61, 64]
   17178870:
     template: Hill_Lizard_past
@@ -5145,7 +5145,7 @@ spawns:
     level:    [66, 69]
   17178878:
     template: Goblins_Beetle
-    region:   c_250
+    at:       [186.803, 8.002, -162.622, 121]
     level:    [61, 64]
   17178879:
     template: Lycopodium

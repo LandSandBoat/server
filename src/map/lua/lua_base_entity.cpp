@@ -16194,6 +16194,28 @@ void CLuaBaseEntity::spawnPet(const sol::object& arg0)
 }
 
 /************************************************************************
+ *  Function: setPetStats()
+ *  Purpose : Applies the chosen spirit's model, jobs, spells and stats without changing the pet's name
+ *  Example : mob:setPetStats(xi.petId.ICE_SPIRIT)
+ *  Notes   : Called from the pet's onMobSpawn
+ ************************************************************************/
+
+void CLuaBaseEntity::setPetStats(uint8 petId)
+{
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    if (!PMob || !PMob->PMaster || PMob->PMaster->PPet != PMob || petId > PETID_DARKSPIRIT)
+    {
+        ShowError("setPetStats: expected a linked mob pet and a spirit ID.");
+        return;
+    }
+
+    petutils::SpawnMobPet(PMob->PMaster, petId, true);
+    PMob->TraitList.clear();
+    mobutils::CalculateMobStats(PMob);
+    mobutils::GetAvailableSpells(PMob);
+}
+
+/************************************************************************
  *  Function: spawnTrust()
  *  Purpose : Spawns a Trust if a few correct conditions are met
  *  Example : caster:spawnTrust(spell:getID())
@@ -21212,6 +21234,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isJugPet", CLuaBaseEntity::isJugPet);
     SOL_REGISTER("getPetElement", CLuaBaseEntity::getPetElement);
     SOL_REGISTER("setPet", CLuaBaseEntity::setPet);
+    SOL_REGISTER("setPetStats", CLuaBaseEntity::setPetStats);
     SOL_REGISTER("getMinimumPetLevel", CLuaBaseEntity::getMinimumPetLevel);
     SOL_REGISTER("getMaster", CLuaBaseEntity::getMaster);
 

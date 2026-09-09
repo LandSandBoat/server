@@ -2,7 +2,11 @@
 -- Area: Yhoator Jungle
 --  Mob: Tonberry Harasser
 -----------------------------------
-mixins = { require('scripts/mixins/families/tonberry') }
+mixins =
+{
+    require('scripts/mixins/families/tonberry'),
+    require('scripts/mixins/pet_resummon'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

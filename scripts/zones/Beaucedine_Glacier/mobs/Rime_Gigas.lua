@@ -2,6 +2,8 @@
 -- Area: Beaucedine Glacier
 --  Mob: Rime Gigas
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

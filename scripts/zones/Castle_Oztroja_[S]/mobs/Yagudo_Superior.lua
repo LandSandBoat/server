@@ -2,6 +2,8 @@
 -- Area: Castle Oztroja [S]
 --  Mob: Yagudo Superior
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

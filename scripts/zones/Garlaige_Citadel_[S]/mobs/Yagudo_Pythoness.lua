@@ -2,6 +2,8 @@
 -- Area: Garlaige Citadel [S]
 --   NM: Yagudo Pythoness
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

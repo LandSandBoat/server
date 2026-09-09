@@ -813,6 +813,7 @@ public:
     auto   getMaster() -> CBaseEntity*;
     uint8  getPetElement();
     void   setPet(const sol::object& petObj);
+    void   setPetStats(uint8 petId);
     uint8  getMinimumPetLevel(); // Returns the minimum level of the pet, such as level 23 for Courier Carrie or 0 if non applicable.
 
     auto getPetName() -> const std::string;

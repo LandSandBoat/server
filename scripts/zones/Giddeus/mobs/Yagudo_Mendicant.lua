@@ -2,6 +2,8 @@
 -- Area: Giddeus (145)
 --  Mob: Yagudo Mendicant
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 local ID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 ---@type TMobEntity

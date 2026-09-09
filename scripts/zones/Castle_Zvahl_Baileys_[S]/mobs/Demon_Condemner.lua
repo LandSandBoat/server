@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Baileys [S]
 --  Mob: Demon Condemner
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

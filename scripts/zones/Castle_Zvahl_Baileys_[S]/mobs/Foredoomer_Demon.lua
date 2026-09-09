@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Baileys [S]
 --  Mob: Foredoomer Demon
 -----------------------------------
+mixins = { require('scripts/mixins/pet_resummon') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

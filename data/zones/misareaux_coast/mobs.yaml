@@ -2244,7 +2244,7 @@ spawns:
     level:    [41, 44]
   16879733:
     template: Gigass_Sheep
-    region:   c_107
+    at:       [241.574, -16.337, 161.877, 97]
     level:    [34, 36]
   16879734:
     template: Gigas_Martialist
@@ -2296,7 +2296,7 @@ spawns:
     level:    [41, 44]
   16879745:
     template: Gigass_Sheep
-    region:   n_122
+    at:       [251.492, -23.994, 314.731, 142]
     level:    [34, 36]
   16879746:
     template: Gigantobugard
@@ -2432,7 +2432,7 @@ spawns:
     level:    [41, 44]
   16879776:
     template: Gigass_Sheep
-    region:   w_149
+    at:       [-6.149, -16.175, 4.298, 63]
     level:    [34, 36]
   16879777:
     template: Atomic_Cluster

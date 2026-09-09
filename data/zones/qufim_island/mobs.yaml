@@ -1669,7 +1669,7 @@ spawns:
     level:    [29, 30]
   17293344:
     template: Gigass_Leech
-    region:   e_19
+    at:       [1.000, 1.000, 1.000]
     level:    [24, 25]
   17293345:
     template: Giant_Hunter
@@ -1689,7 +1689,7 @@ spawns:
     level:    [29, 30]
   17293349:
     template: Gigass_Leech
-    region:   e_19
+    at:       [1.000, 1.000, 1.000]
     level:    [24, 25]
   17293350:
     template: Giant_Hunter
@@ -2405,7 +2405,7 @@ spawns:
     level:    [29, 30]
   17293499:
     template: Gigass_Leech
-    region:   c_186
+    at:       [1.000, 1.000, 1.000]
     level:    [24, 25]
   17293500:
     template: Giant_Hunter
@@ -2668,7 +2668,7 @@ spawns:
     level:    [29, 30]
   17293553:
     template: Gigass_Leech
-    at:       [0.000, 0.000, 0.100]
+    at:       [1.000, 1.000, 1.000]
     level:    [24, 25]
   17293554:
     template: Giant_Hunter
@@ -2787,7 +2787,7 @@ spawns:
     level:    [29, 30]
   17293577:
     template: Gigass_Leech
-    region:   n_252
+    at:       [1.000, 1.000, 1.000]
     level:    [24, 25]
   17293578:
     template: Giant_Hunter

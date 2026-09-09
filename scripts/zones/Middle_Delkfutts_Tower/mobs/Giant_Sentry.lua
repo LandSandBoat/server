@@ -3,7 +3,7 @@
 --  Mob: Giant Sentry
 -- Note: PH for Rhoitos
 -----------------------------------
-mixins = { require('scripts/mixins/families/gigas_bst') }
+mixins = { require('scripts/mixins/pet_resummon') }
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
