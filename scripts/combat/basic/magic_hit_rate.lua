@@ -466,8 +466,11 @@ end
 -- Magic Hit Rate. The function gets fed the result of both functions above.
 -----------------------------------
 local function calculateMagicHitRate(params)
-    local magicHitRate = params.actorMagicAccuracy - params.targetMagicEvasion
+    -- macc == meva = 75% hit rate
+    -- below 50% hit rate it takes 2 macc to move hitrate by 1%
+    local magicHitRate = params.actorMagicAccuracy - params.targetMagicEvasion + 25
 
+    -- macc - meva < -25
     if magicHitRate < 0 then
         magicHitRate = math.floor(magicHitRate / 2)
     end
