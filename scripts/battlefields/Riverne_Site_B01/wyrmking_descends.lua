@@ -6,7 +6,7 @@ local content = Battlefield:new({
     zoneId        = xi.zone.RIVERNE_SITE_B01,
     battlefieldId = xi.battlefield.id.WYRMKING_DESCENDS,
     maxPlayers    = 18,
-    levelCap      = 99,
+    levelCap      = xi.settings.main.MAX_LEVEL,
     timeLimit     = utils.minutes(60),
     index         = 1,
     area          = 1,
@@ -14,6 +14,10 @@ local content = Battlefield:new({
     exitNpc       = 'SD_BCNM_Exit',
     requiredItems = { xi.item.MONARCHS_ORB }
 })
+
+function content:entryRequirement(player, npc, isRegistrant, trade)
+    return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
+end
 
 local function healCharacter(player)
     -- Handle player.
