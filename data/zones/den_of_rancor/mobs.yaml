@@ -2737,7 +2737,7 @@ spawns:
     level:    [75, 78]
   17432909:
     template: Water_Elemental
-    region:   region_126
+    region:   c_324
     level:    [68, 73]
   17432910:
     template: Demonic_Pugil
