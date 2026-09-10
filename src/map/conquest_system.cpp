@@ -134,7 +134,8 @@ void AddPlayerHomepoints(int32 count, REGION_TYPE region)
 
 void GainInfluencePoints(CCharEntity* PChar, uint32 points)
 {
-    points += (uint32)(PChar->getMod(xi::Mod::CONQUEST_REGION_BONUS) / 100.0);
+    const double percentage = 1.0 + static_cast<double>(PChar->getMod(xi::Mod::CONQUEST_REGION_BONUS)) / 100.0;
+    points                  = static_cast<uint32>(static_cast<double>(points) * percentage);
     conquest::AddInfluencePoints(points, PChar->profile.nation, PChar->loc.zone->GetRegionID());
 }
 
