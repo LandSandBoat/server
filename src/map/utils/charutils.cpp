@@ -5026,8 +5026,12 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         // Should this user be awarded conquest points..
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) && (region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO))
         {
-            // Add influence for the players region..
+            // Add CP to the player.
             conquest::AddConquestPoints(PChar, exp);
+
+            // Add influence for the player's region.
+            // TODO: Chain exp should not affect influence.
+            conquest::GainInfluencePoints(PChar, exp / 20);
         }
 
         // Should this user be awarded imperial standing..
