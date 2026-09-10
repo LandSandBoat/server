@@ -2499,7 +2499,7 @@ spawns:
     level:    [73, 75]
   17031346:
     template: Troll_Cameist
-    region:   n_178
+    region:   region_249
     level:    [73, 75]
   17031347:
     template: Troll_Gemologist
@@ -2888,15 +2888,15 @@ spawns:
     level:    [69, 78]
   17031440:
     template: Mythril_Mouth_Monamaq
-    region:   region_223
+    region:   region_247
     level:    [81, 81]
   17031441:
     template: Troll_Mythril_Guard
-    region:   region_223
+    region:   region_247
     level:    [82, 83]
   17031442:
     template: Troll_Mythril_Guard
-    region:   region_223
+    region:   region_247
     level:    [82, 83]
   17031443:
     template: Troll_Grenadier_H
@@ -3456,11 +3456,11 @@ spawns:
     level:    [75, 75]
   17031572:
     template: Archaic_Mirror
-    region:   nw_264
+    region:   region_248
     level:    [75, 75]
   17031573:
     template: Archaic_Mirror
-    region:   n_178
+    region:   region_249
     level:    [75, 75]
   17031574:
     template: Archaic_Mirror
@@ -3504,19 +3504,19 @@ spawns:
     level:    [81, 82]
   17031584:
     template: Hilltroll_Mirror_Guard
-    region:   nw_264
+    region:   region_248
     level:    [81, 82]
   17031585:
     template: Woodtroll_Mirror_Guard
-    region:   nw_264
+    region:   region_248
     level:    [81, 82]
   17031586:
     template: Hilltroll_Mirror_Guard
-    region:   n_178
+    region:   region_249
     level:    [81, 82]
   17031587:
     template: Woodtroll_Mirror_Guard
-    region:   n_178
+    region:   region_249
     level:    [81, 82]
   17031588:
     template: Hilltroll_Mirror_Guard
