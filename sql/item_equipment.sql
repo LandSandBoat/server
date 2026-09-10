@@ -8281,6 +8281,7 @@ INSERT INTO `item_equipment` VALUES (18563,'ark_scythe',1,0,4194303,586,0,0,1,0,
 INSERT INTO `item_equipment` VALUES (18564,'devilish_scythe',99,0,128,201,0,0,1,0,0,0);
 INSERT INTO `item_equipment` VALUES (18565,'adflictio',99,0,128,596,0,0,1,0,0,0);
 INSERT INTO `item_equipment` VALUES (18566,'crepuscular_scythe',99,119,128,526,0,0,1,0,0,0);
+INSERT INTO `item_equipment` VALUES (18567,'colibri_scythe',1,0,4194303,0,0,0,1,0,0,0);  -- TODO: MId
 INSERT INTO `item_equipment` VALUES (18571,'daurdabla',99,0,512,100,0,0,4,0,0,0);
 INSERT INTO `item_equipment` VALUES (18572,'gjallarhorn',99,0,512,84,0,0,4,0,0,0);
 INSERT INTO `item_equipment` VALUES (18573,'pyf_harp',85,0,512,78,0,0,4,0,0,0);
@@ -11295,6 +11296,7 @@ INSERT INTO `item_equipment` VALUES (22234,'telognophos_claymore',99,0,0,0,0,0,1
 INSERT INTO `item_equipment` VALUES (22235,'auge_claymore',99,119,2097345,0,0,0,1,0,0,4);       -- TODO: MId
 INSERT INTO `item_equipment` VALUES (22236,'daduchos_claymore',99,119,2097345,0,0,0,1,0,0,4);   -- TODO: MId
 INSERT INTO `item_equipment` VALUES (22237,'telopanos_claymore',99,119,2097345,0,0,0,1,0,0,5);  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (22238,'travesty',99,119,2097345,0,0,0,1,0,0,0);            -- TODO: MId
 INSERT INTO `item_equipment` VALUES (22249,'miracle_cheer',99,0,512,68,0,0,4,0,0,0); -- TODO: capture model from retail (using Mary's Horn model)
 INSERT INTO `item_equipment` VALUES (22250,'seraphic_ampulla',99,0,1720332,0,0,0,8,0,0,0);
 INSERT INTO `item_equipment` VALUES (22251,'grenade_core',99,0,2101409,0,0,0,8,0,0,0);

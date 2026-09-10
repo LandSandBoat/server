@@ -35,7 +35,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
         TIME_REMAINING_MINUTES        = 7533, -- Time remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS        = 7534, -- Time remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN                  = 7536, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
-        MUST_BE_CLOSER_TO_OPEN_CHEST  = 7545, -- You must be the party's [leader/leader or a member of the alliance] to open this chest.
+        MUST_BE_CLOSER_TO_OPEN_CHEST  = 7545, -- You must be closer to the chest to open it.
         CHEST                         = 7546, -- The chest contains...
         GOLDEN                        = 7547, -- ...a golden figurehead!
     },

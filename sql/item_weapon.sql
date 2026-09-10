@@ -2191,6 +2191,7 @@ INSERT INTO `item_weapon` VALUES (18563,'ark_scythe',7,0,0,0,0,2,1,999,1,0);
 INSERT INTO `item_weapon` VALUES (18564,'devilish_scythe',7,0,0,0,0,2,1,528,130,0);
 INSERT INTO `item_weapon` VALUES (18565,'adflictio',7,0,0,0,0,2,1,513,134,0);
 INSERT INTO `item_weapon` VALUES (18566,'crepuscular_scythe',7,0,0,0,0,2,1,513,360,0); -- TODO: Not implemented
+INSERT INTO `item_weapon` VALUES (18567,'colibri_scythe',7,0,0,0,0,2,1,528,1,0);       -- TODO: ilvl_skill/parry/macc, dmgType
 INSERT INTO `item_weapon` VALUES (18571,'daurdabla',41,0,0,0,0,0,1,240,0,0);
 INSERT INTO `item_weapon` VALUES (18572,'gjallarhorn',42,0,0,0,0,0,1,240,0,0);
 INSERT INTO `item_weapon` VALUES (18573,'pyf_harp',41,0,0,0,0,0,1,240,0,0);
@@ -5205,6 +5206,7 @@ INSERT INTO `item_weapon` VALUES (22234,'telognophos_claymore',4,0,0,0,0,2,1,999
 INSERT INTO `item_weapon` VALUES (22235,'auge_claymore',4,0,0,0,0,2,1,480,312,0);       -- TODO: ilvl_skill/parry/macc, dmgType
 INSERT INTO `item_weapon` VALUES (22236,'daduchos_claymore',4,0,0,0,0,2,1,466,313,0);   -- TODO: ilvl_skill/parry/macc, dmgType
 INSERT INTO `item_weapon` VALUES (22237,'telopanos_claymore',4,0,0,0,0,2,1,466,314,0);  -- TODO: ilvl_skill/parry/macc, dmgType
+INSERT INTO `item_weapon` VALUES (22238,'travesty',4,0,0,0,0,2,1,430,258,0);            -- TODO: ilvl_skill/parry/macc, dmgType
 INSERT INTO `item_weapon` VALUES (22249,'miracle_cheer',42,0,0,0,0,0,1,240,0,0);
 INSERT INTO `item_weapon` VALUES (22250,'seraphic_ampulla',0,0,0,0,0,0,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22251,'grenade_core',0,0,0,0,0,0,1,999,0,0);
