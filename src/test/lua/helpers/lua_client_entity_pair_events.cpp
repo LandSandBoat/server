@@ -27,7 +27,9 @@
 #include "lua/lua_simulation.h"
 #include "lua/sol_bindings.h"
 #include "map/entities/char_entity.h"
+#include "map/enums/packet_s2c.h"
 #include "map/packets/c2s/0x05b_eventend.h"
+#include "map/packets/c2s/0x05c_eventendxzy.h"
 #include "packets/basic.h"
 #include "test_char.h"
 #include "test_common.h"
@@ -37,7 +39,7 @@ CLuaClientEntityPairEvents::CLuaClientEntityPairEvents(CLuaClientEntityPair* par
 {
 }
 
-void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, const sol::optional<uint32> option, const bool isUpdate) const
+auto CLuaClientEntityPairEvents::resolveEventId(const sol::optional<uint16> eventId) const -> std::optional<uint16>
 {
     const uint16 actualEventId = eventId.value_or(currentId());
 
@@ -52,7 +54,7 @@ void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, 
             TestError("Not currently in an event");
         }
 
-        return;
+        return std::nullopt;
     }
 
     if (eventId.has_value() && eventId.value() != currentId())
@@ -60,6 +62,17 @@ void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, 
         TestError("Expected event {}, but current event is {}",
                   eventId.value(),
                   currentId());
+        return std::nullopt;
+    }
+
+    return actualEventId;
+}
+
+void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, const sol::optional<uint32> option, const bool isUpdate) const
+{
+    const auto actualEventId = resolveEventId(eventId);
+    if (!actualEventId)
+    {
         return;
     }
 
@@ -69,7 +82,7 @@ void CLuaClientEntityPairEvents::sendEventPacket(sol::optional<uint16> eventId, 
     eventPacket->EndPara   = option.value_or(0);
     eventPacket->Mode      = isUpdate ? static_cast<uint16_t>(GP_CLI_COMMAND_EVENTEND_MODE::UpdatePending)
                                       : static_cast<uint16_t>(GP_CLI_COMMAND_EVENTEND_MODE::End);
-    eventPacket->EventPara = actualEventId;
+    eventPacket->EventPara = actualEventId.value();
 
     parent_->packets().sendBasicPacket(*packet);
     parent_->packets().parseIncoming();
@@ -99,6 +112,66 @@ void CLuaClientEntityPairEvents::update(const sol::optional<uint16> eventId, con
 {
     ShowInfoFmt("Sending event update packet for event ID: {}", eventId.value_or(currentId()));
     sendEventPacket(eventId, option, true);
+}
+
+/************************************************************************
+ *  Function: updateWithPosition()
+ *  Purpose : Send an event update that carries the position the client wants to move to.
+ *  Example : local reply, moved = player.events:updateWithPosition(32000, option, { x = -600, y = 0, z = 0 })
+ *  Notes   : Returns the first event work parameter the server answered with (nil if none)
+ *            and whether the server moved the client to the requested position.
+ ************************************************************************/
+
+auto CLuaClientEntityPairEvents::updateWithPosition(const sol::optional<uint16> eventId, const sol::optional<uint32> option, const sol::optional<sol::table>& position) const -> std::tuple<sol::object, bool>
+{
+    const auto actualEventId = resolveEventId(eventId);
+    if (!actualEventId)
+    {
+        return { sol::lua_nil, false };
+    }
+
+    auto* PChar = parent_->testChar()->entity();
+    parent_->packets().clear();
+
+    const auto packet      = parent_->packets().createPacket<GP_CLI_COMMAND_EVENTENDXZY>();
+    auto*      eventPacket = packet->as<GP_CLI_COMMAND_EVENTENDXZY>();
+
+    eventPacket->x         = position ? position->get_or("x", PChar->loc.p.x) : PChar->loc.p.x;
+    eventPacket->y         = position ? position->get_or("y", PChar->loc.p.y) : PChar->loc.p.y;
+    eventPacket->z         = position ? position->get_or("z", PChar->loc.p.z) : PChar->loc.p.z;
+    eventPacket->UniqueNo  = PChar->id;
+    eventPacket->EndPara   = option.value_or(0);
+    eventPacket->EventNum  = 0;
+    eventPacket->EventPara = actualEventId.value();
+    eventPacket->ActIndex  = PChar->targid;
+    eventPacket->Mode      = 1;
+    eventPacket->dir       = static_cast<int8_t>(PChar->loc.p.rotation);
+
+    parent_->packets().sendBasicPacket(*packet);
+    parent_->packets().parseIncoming();
+
+    sol::object reply = sol::lua_nil;
+    bool        moved = false;
+
+    for (auto&& incoming : PChar->getPacketList())
+    {
+        switch (static_cast<PacketS2C>(incoming->getType()))
+        {
+            case PacketS2C::GP_SERV_COMMAND_PENDINGNUM:
+                if (reply == sol::lua_nil)
+                {
+                    reply = sol::make_object(lua, incoming->ref<int32>(4));
+                }
+                break;
+            case PacketS2C::GP_SERV_COMMAND_WPOS:
+                moved = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    return { reply, moved };
 }
 
 /************************************************************************
@@ -167,6 +240,7 @@ void CLuaClientEntityPairEvents::Register()
     SOL_USERTYPE("CClientEntityPairEvents", CLuaClientEntityPairEvents);
     SOL_REGISTER("finish", CLuaClientEntityPairEvents::finish);
     SOL_REGISTER("update", CLuaClientEntityPairEvents::update);
+    SOL_REGISTER("updateWithPosition", CLuaClientEntityPairEvents::updateWithPosition);
     SOL_REGISTER("expectNotInEvent", CLuaClientEntityPairEvents::expectNotInEvent);
     SOL_REGISTER("expect", CLuaClientEntityPairEvents::expect);
 }

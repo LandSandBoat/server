@@ -803,7 +803,7 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     -- Only the battlefields the menu was opened with can be registered from it
     if not utils.mask.getBit(player:getLocalVar('[BCNM]MenuOptions'), value) then
         player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
-        player:setLocalVar('noPosUpdate', 1)
+        player:setLocalVar('noPosUpdate', 1) -- checked in GP_CLI_COMMAND_EVENTENDXZY
 
         return false
     end

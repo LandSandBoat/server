@@ -625,6 +625,7 @@ player.entities:gotoAndTrigger('Ambrotien', { eventId = 2000, finishOption = 0 }
 
 -- Or drive the current event manually
 player.events:update(nil, 1)   -- send an update to the in-progress event
+player.events:updateWithPosition(nil, 1, { x = 0, y = 0, z = 0 }) -- update with a requested position, returns the reply parameter and whether the client was moved
 player.events:finish()         -- finish the current event
 player.events:expectNotInEvent() -- assert we are no longer in an event
 ```

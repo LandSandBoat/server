@@ -1,104 +1,41 @@
 -----------------------------------
--- Battlefield entry isolation
---
--- Players from different parties ended up inside the same Monarch Linn arena when the
--- entry NPC was spammed. Two paths led there:
---  1. The server picked the arena from its own count of declined requests instead of the
---     arena in the request, and that count survived a menu that granted no arena, so the
---     next attempt registered area N+1 while the client was still asking for arena 1.
---  2. A registration left behind by an earlier party outlived the clearance (Battlefield
---     effect) and was matched again when the player returned with a new party.
---
--- Clearance itself is meant to survive zoning out and back while the fight is still open.
+-- Battlefield entry and clearance
+-- Entry event options are (menu index << 4) + arena, asked one arena at a time.
+-- Clearance is the Battlefield effect, which names the battlefield and arena it was granted for.
 -----------------------------------
----@diagnostic disable: inject-field
-local ffi = require('ffi')
-
-ffi.cdef [[
-    typedef struct {
-        uint16_t id : 9;
-        uint16_t size : 7;
-        uint16_t sync;
-    } BF_TEST_CLI_HEADER;
-
-    // 0x05C - event update carrying the position the client wants to move to
-    typedef struct {
-        BF_TEST_CLI_HEADER header;
-        float    x;
-        float    y;
-        float    z;
-        uint32_t UniqueNo;
-        uint32_t EndPara;
-        uint16_t EventNum;
-        uint16_t EventPara;
-        uint16_t ActIndex;
-        uint8_t  Mode;
-        int8_t   dir;
-    } BF_TEST_EVENTENDXZY;
-
-    // 0x06F - leave party
-    typedef struct {
-        BF_TEST_CLI_HEADER header;
-        uint8_t Kind;
-        uint8_t padding[3];
-    } BF_TEST_GROUP_LEAVE;
-]]
-
 local entryEventId = 32000
+local exitEventId  = 32003
 local entryNpc     = 'SD_Entrance'
+local exitNpc      = 'SD_BCNM_Exit_1'
 
--- The client asks for each arena in turn with (menu index << 4) + arena
+-- Distinct per arena so position requests can be told apart
+local arenaX = { -600, 0, 600, 0 }
+
 local function arenaOption(arena, battlefieldId)
     local content = xi.battlefield.contents[battlefieldId or xi.battlefield.id.ANCIENT_VOWS]
 
     return bit.lshift(content.index, 4) + arena
 end
 
--- Only used to tell the emulated client's arena requests apart
-local arenaX = { -600, 0, 600, 0 }
+local function spawnCandidate(params)
+    params      = params or {}
+    params.zone = xi.zone.MONARCH_LINN
 
-local function spawnCandidate()
-    local player = xi.test.world:spawnPlayer({ zone = xi.zone.MONARCH_LINN })
+    local player = xi.test.world:spawnPlayer(params)
     player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
     player:setCharVar('Mission[6][248]Status', 2)
 
     return player
 end
 
--- Emulates the client asking for one arena. Returns the reply code the server put in the
--- event work parameters (0 when it sent none) and whether it moved the player there.
+-- Returns the reply code (0 when the server sent none) and whether the player was moved
 local function requestArena(player, arena, battlefieldId)
-    player.packets:clear()
+    local reply, moved = player.events:updateWithPosition(entryEventId, arenaOption(arena, battlefieldId), { x = arenaX[arena], y = 0, z = 0 })
 
-    local p     = ffi.new('BF_TEST_EVENTENDXZY')
-    p.x         = arenaX[arena]
-    p.y         = 0
-    p.z         = 0
-    p.UniqueNo  = player:getID()
-    p.EndPara   = arenaOption(arena, battlefieldId)
-    p.EventNum  = 0
-    p.EventPara = entryEventId
-    p.ActIndex  = player:getTargID()
-    p.Mode      = 1
-    p.dir       = 0
-    player.packets:send(0x05C, p, ffi.sizeof(p))
-
-    local reply = 0
-    local moved = false
-
-    for _, packet in pairs(player.packets:getIncoming()) do
-        if packet.type == 0x05C then
-            reply = packet.data[4] + packet.data[5] * 256
-        elseif packet.type == 0x05B then
-            moved = true
-        end
-    end
-
-    return reply, moved
+    return reply or 0, moved
 end
 
--- Walks the arenas the way the client's entry event does: on to the next arena on WAIT or
--- silence, stop on a message code, and never the restart code. Returns the granted arena.
+-- Next arena on WAIT or silence, stop on a message code. Returns the granted arena.
 local function requestArenas(player)
     local arena = 1
 
@@ -133,12 +70,6 @@ local function lockBattlefield(player)
     assert(battlefield:getStatus() == xi.battlefield.status.LOCKED, 'battlefield did not lock')
 end
 
-local function leaveParty(player)
-    local p = ffi.new('BF_TEST_GROUP_LEAVE')
-    p.Kind  = 0
-    player.packets:send(0x06F, p, ffi.sizeof(p))
-end
-
 -- An empty battlefield is destroyed on the handler pass after a 10 second grace
 local function settleBattlefields()
     for _ = 1, 3 do
@@ -157,6 +88,11 @@ local function leaveBattlefields(players)
     settleBattlefields()
 end
 
+local function formParty(leader, member)
+    leader.actions:inviteToParty(member)
+    member.actions:acceptPartyInvite()
+end
+
 describe('Battlefield entry', function()
     local players
 
@@ -168,6 +104,21 @@ describe('Battlefield entry', function()
         leaveBattlefields(players)
     end)
 
+    it('registers the initiator into the first free arena', function()
+        local player = spawnCandidate()
+        table.insert(players, player)
+
+        player.entities:gotoAndTrigger(entryNpc, { eventId = entryEventId, updates = { arenaOption(1) } })
+
+        local battlefield = player:getBattlefield()
+        assert(battlefield, 'player did not enter a battlefield')
+        assert(battlefield:getID() == xi.battlefield.id.ANCIENT_VOWS, 'wrong battlefield registered')
+        assert(battlefield:getArea() == 1, 'the first free arena should be granted')
+        assert(battlefield:getInitiator() == player:getID(), 'the registrant should be the initiator')
+        assert(player:hasStatusEffect(xi.effect.BATTLEFIELD), 'the initiator should hold clearance')
+        assert(player:hasEnteredBattlefield(), 'closing the menu should mark the player as entered')
+    end)
+
     it('sends the player to the arena the server registered after a menu that granted no arena', function()
         local occupant = spawnCandidate()
         table.insert(players, occupant)
@@ -176,14 +127,14 @@ describe('Battlefield entry', function()
         local player = spawnCandidate()
         table.insert(players, player)
 
-        -- Arena 1 is taken, the client is told to try the next one, and the menu closes without an entry
+        -- Arena 1 is taken, the menu closes without an entry
         player.entities:gotoAndTrigger(entryNpc)
         local reply, moved = requestArena(player, 1)
         assert(reply == xi.battlefield.returnCode.WAIT and not moved, 'an occupied arena should answer WAIT')
         player.events:finish(entryEventId, 0)
         assert(not player:hasStatusEffect(xi.effect.BATTLEFIELD), 'a declined request must not leave clearance behind')
 
-        -- Whichever arena the client is granted now must be the one the battlefield lives in
+        -- The granted arena must be the one the battlefield lives in
         player.entities:gotoAndTrigger(entryNpc)
         local granted = requestArenas(player)
         player.events:finish(entryEventId, 0)
@@ -210,7 +161,7 @@ describe('Battlefield entry', function()
         local player = spawnCandidate()
         table.insert(players, player)
 
-        -- The menu opened for Ancient Vows alone, the player holds no Monarch Beard for Fire in the Sky
+        -- Menu offered Ancient Vows only, no Monarch Beard for Fire in the Sky
         player.entities:gotoAndTrigger(entryNpc)
         local reply, moved = requestArena(player, 1, xi.battlefield.id.FIRE_IN_THE_SKY)
         player.events:finish(entryEventId, 0)
@@ -219,14 +170,114 @@ describe('Battlefield entry', function()
         assert(not player:getBattlefield() and not player:hasStatusEffect(xi.effect.BATTLEFIELD), 'no battlefield may be created for it')
     end)
 
-    it('hands clearance back to a member who zones out and back while the fight is open', function()
+    it('does not open the menu for a player who qualifies for nothing', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.MONARCH_LINN })
+        table.insert(players, player)
+
+        player.entities:gotoAndTrigger(entryNpc)
+        player.events:expectNotInEvent()
+        assert(not player:getBattlefield(), 'no battlefield may be created')
+    end)
+
+    it('does not open the menu for a level synced party', function()
+        local leader = spawnCandidate()
+        local member = spawnCandidate({ level = 30 })
+        table.insert(players, leader)
+        table.insert(players, member)
+
+        formParty(leader, member)
+        leader.actions:setLevelSync(member)
+        assert(leader:hasStatusEffect(xi.effect.LEVEL_SYNC), 'leader should be level synced')
+
+        leader.entities:gotoAndTrigger(entryNpc)
+        leader.events:expectNotInEvent()
+        assert(not leader:getBattlefield(), 'no battlefield may be created')
+    end)
+
+    it('leaving through the exit circle frees the arena', function()
+        local player = spawnCandidate()
+        table.insert(players, player)
+        player.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
+
+        player.entities:gotoAndTrigger(exitNpc, { eventId = exitEventId, finishOption = 4 })
+        assert(not player:getBattlefield(), 'player should have left the battlefield')
+        assert(player:hasStatusEffect(xi.effect.BATTLEFIELD), 'leaving an open fight keeps clearance so the player can walk back in')
+
+        -- Empty battlefield is destroyed and takes the clearance with it
+        settleBattlefields()
+        assert(not player:hasStatusEffect(xi.effect.BATTLEFIELD), 'cleanup should drop the clearance')
+
+        local next = spawnCandidate()
+        table.insert(players, next)
+        next.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
+        assert(next:getBattlefield():getArea() == 1, 'the arena should be free again')
+    end)
+
+    it('opens the entry for the battlefield an orb is traded for', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.HORLAIS_PEAK })
+        table.insert(players, player)
+        player:addItem(xi.item.CLOUDY_ORB)
+
+        player.bcnm:enter('BC_Entrance', xi.battlefield.id.SHOOTING_FISH, { xi.item.CLOUDY_ORB })
+
+        local battlefield = player:getBattlefield()
+        assert(battlefield and battlefield:getID() == xi.battlefield.id.SHOOTING_FISH, 'player did not enter the orb battlefield')
+        assert(player:hasItem(xi.item.CLOUDY_ORB), 'the orb is only worn on a win, not taken at the door')
+    end)
+end)
+
+describe('Battlefield clearance', function()
+    local players
+
+    before_each(function()
+        players = {}
+    end)
+
+    after_each(function()
+        leaveBattlefields(players)
+    end)
+
+    it('is copied onto party members in the zone, who then enter the same arena', function()
         local leader = spawnCandidate()
         local member = spawnCandidate()
         table.insert(players, leader)
         table.insert(players, member)
 
-        leader.actions:inviteToParty(member)
-        member.actions:acceptPartyInvite()
+        formParty(leader, member)
+        leader.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
+        assert(member:hasStatusEffect(xi.effect.BATTLEFIELD), 'party member should have been given clearance')
+        assert(not member:getBattlefield(), 'clearance alone does not put the member inside')
+
+        member.entities:gotoAndTrigger(entryNpc, { eventId = entryEventId, updates = { arenaOption(1) } })
+
+        local battlefield = member:getBattlefield()
+        assert(battlefield, 'member did not enter a battlefield')
+        assert(battlefield:getInitiator() == leader:getID(), 'member should have joined the leader')
+        assert(battlefield:getArea() == leader:getBattlefield():getArea(), 'member should share the leader arena')
+    end)
+
+    it('is not handed to a member who joined the party after registration', function()
+        local leader   = spawnCandidate()
+        local latecomer = spawnCandidate()
+        table.insert(players, leader)
+        table.insert(players, latecomer)
+
+        leader.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
+        formParty(leader, latecomer)
+        assert(not latecomer:hasStatusEffect(xi.effect.BATTLEFIELD), 'joining later should not grant clearance')
+
+        latecomer.entities:gotoAndTrigger(entryNpc)
+        latecomer.events:expectNotInEvent()
+        assert(not latecomer:getBattlefield(), 'latecomer must stay outside')
+    end)
+
+    it('is handed back to a member who zones out and back while the fight is open', function()
+        local leader = spawnCandidate()
+        local member = spawnCandidate()
+        table.insert(players, leader)
+        table.insert(players, member)
+
+        formParty(leader, member)
         leader.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
 
         member:gotoZone(xi.zone.RIVERNE_SITE_A01)
@@ -240,14 +291,13 @@ describe('Battlefield entry', function()
         assert(battlefield:getInitiator() == leader:getID(), 'member should have joined the leader')
     end)
 
-    it('does not hand clearance back once the fight is locked', function()
+    it('is not handed back once the fight is locked', function()
         local leader = spawnCandidate()
         local member = spawnCandidate()
         table.insert(players, leader)
         table.insert(players, member)
 
-        leader.actions:inviteToParty(member)
-        member.actions:acceptPartyInvite()
+        formParty(leader, member)
         leader.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
         lockBattlefield(leader)
 
@@ -269,8 +319,7 @@ describe('Battlefield entry', function()
         table.insert(players, member)
 
         occupant.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
-        leader.actions:inviteToParty(member)
-        member.actions:acceptPartyInvite()
+        formParty(leader, member)
         leader.entities:gotoAndTrigger(entryNpc, { eventId = entryEventId, updates = { arenaOption(1), arenaOption(2) } })
         assert(leader:getBattlefield() and leader:getBattlefield():getArea() == 2, 'leader should hold area 2')
 
@@ -294,23 +343,20 @@ describe('Battlefield entry', function()
         table.insert(players, firstLeader)
         table.insert(players, drifter)
 
-        firstLeader.actions:inviteToParty(drifter)
-        drifter.actions:acceptPartyInvite()
-
+        formParty(firstLeader, drifter)
         firstLeader.bcnm:enter(entryNpc, xi.battlefield.id.ANCIENT_VOWS)
         assert(drifter:hasStatusEffect(xi.effect.BATTLEFIELD), 'party member should have been given clearance')
 
-        -- The fight locks before the drifter goes in, which takes their clearance, then they move to a new party
+        -- Locking takes the clearance of members outside, then the drifter moves to a new party
         lockBattlefield(firstLeader)
         assert(not drifter:hasStatusEffect(xi.effect.BATTLEFIELD), 'locking should drop the clearance of members outside')
 
-        leaveParty(drifter)
+        drifter.actions:leaveParty()
         assert(drifter:getPartySize() == 1, 'drifter should have left the first party')
 
         local secondLeader = spawnCandidate()
         table.insert(players, secondLeader)
-        secondLeader.actions:inviteToParty(drifter)
-        drifter.actions:acceptPartyInvite()
+        formParty(secondLeader, drifter)
 
         -- Arena 1 is occupied, so the second leader is granted arena 2 on the second request
         secondLeader.entities:gotoAndTrigger(entryNpc, { eventId = entryEventId, updates = { arenaOption(1), arenaOption(2) } })
@@ -326,7 +372,7 @@ describe('Battlefield entry', function()
         assert(initiatorId == secondLeader:getID(),
             string.format('drifter entered the battlefield of %s instead of %s', initiatorName, secondLeader:getName()))
 
-        -- Finishing the first party's fight must not strip the drifter's clearance in the second one
+        -- Cleaning up the first party's fight must not strip clearance held for the second one
         firstLeader.bcnm:killMobs()
         firstLeader.bcnm:expectWin({ finishOption = 2 })
         settleBattlefields()
