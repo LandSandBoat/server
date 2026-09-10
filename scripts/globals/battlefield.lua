@@ -720,6 +720,7 @@ end
 -- Helper function to open the battlefield entry menu for the player
 function Battlefield.openEntryMenu(player, options, enterExisting)
     player:setLocalVar('[BCNM]EnterExisting', enterExisting and 1 or 0)
+    player:setLocalVar('[BCNM]MenuOptions', options)
 
     return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
@@ -798,6 +799,14 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
 
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
     local value    = bit.band(bit.rshift(option, 4), 0x1F)
+
+    -- Only the battlefields the menu was opened with can be registered from it
+    if not utils.mask.getBit(player:getLocalVar('[BCNM]MenuOptions'), value) then
+        player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
+        player:setLocalVar('noPosUpdate', 1)
+
+        return false
+    end
 
     for _, content in pairs(contents) do
         if value == content.index then

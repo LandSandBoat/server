@@ -48,8 +48,8 @@ local entryEventId = 32000
 local entryNpc     = 'SD_Entrance'
 
 -- The client asks for each arena in turn with (menu index << 4) + arena
-local function arenaOption(arena)
-    local content = xi.battlefield.contents[xi.battlefield.id.ANCIENT_VOWS]
+local function arenaOption(arena, battlefieldId)
+    local content = xi.battlefield.contents[battlefieldId or xi.battlefield.id.ANCIENT_VOWS]
 
     return bit.lshift(content.index, 4) + arena
 end
@@ -67,7 +67,7 @@ end
 
 -- Emulates the client asking for one arena. Returns the reply code the server put in the
 -- event work parameters (0 when it sent none) and whether it moved the player there.
-local function requestArena(player, arena)
+local function requestArena(player, arena, battlefieldId)
     player.packets:clear()
 
     local p     = ffi.new('BF_TEST_EVENTENDXZY')
@@ -75,7 +75,7 @@ local function requestArena(player, arena)
     p.y         = 0
     p.z         = 0
     p.UniqueNo  = player:getID()
-    p.EndPara   = arenaOption(arena)
+    p.EndPara   = arenaOption(arena, battlefieldId)
     p.EventNum  = 0
     p.EventPara = entryEventId
     p.ActIndex  = player:getTargID()
@@ -203,6 +203,19 @@ describe('Battlefield entry', function()
         player.events:finish(entryEventId, 0)
 
         assert(reply == xi.battlefield.returnCode.REQS_NOT_MET and not moved, 'a fourth arena must be refused')
+        assert(not player:getBattlefield() and not player:hasStatusEffect(xi.effect.BATTLEFIELD), 'no battlefield may be created for it')
+    end)
+
+    it('refuses a battlefield the menu did not offer', function()
+        local player = spawnCandidate()
+        table.insert(players, player)
+
+        -- The menu opened for Ancient Vows alone, the player holds no Monarch Beard for Fire in the Sky
+        player.entities:gotoAndTrigger(entryNpc)
+        local reply, moved = requestArena(player, 1, xi.battlefield.id.FIRE_IN_THE_SKY)
+        player.events:finish(entryEventId, 0)
+
+        assert(reply == xi.battlefield.returnCode.REQS_NOT_MET and not moved, 'a battlefield outside the menu must be refused')
         assert(not player:getBattlefield() and not player:hasStatusEffect(xi.effect.BATTLEFIELD), 'no battlefield may be created for it')
     end)
 
