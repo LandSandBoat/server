@@ -23,7 +23,7 @@ zones[xi.zone.STELLAR_FULCRUM] =
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7546, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7582, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7589, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        ENTERING_THE_BATTLEFIELD_FOR  = 7610, -- Entering the battlefield for [Return to Delkfutt's Tower/The Indomitable Triumvirate/The Dauntless Duo/The Solitary Demolisher/Heroine's Combat/Mercenary Camp/Ode of Life Bestowing/★Return to Delkfutt's Tower/True Love/A Fond Farewell]!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7610, -- Entering the battlefield for [Return to Delkfutt's Tower/The Indomitable Triumvirate/The Dauntless Duo/The Solitary Demolisher/Heroine's Combat/Mercenary Camp/Ode of Life Bestowing/★Return to Delkfutt's Tower/True Love/A Fond Farewell/★Ode of Life Bestowing]!
         NO_BATTLEFIELD_ENTRY          = 7612, -- The door will not budge.
     },
     mob =
