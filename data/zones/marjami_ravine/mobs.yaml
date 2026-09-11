@@ -23,7 +23,7 @@ templates:
 
   Canyon_Apkallu:
     id:            4987
-    species:       apkallu
+    species:       inguza
     skill_list_id: 27
     attributes:
       combat:
@@ -137,7 +137,7 @@ templates:
 
   Foraging_Apkallu:
     id:            4912
-    species:       apkallu
+    species:       inguza
     skill_list_id: 27
     attributes:
       combat:
@@ -162,7 +162,7 @@ templates:
 
   Gerent_Apkallu:
     id:            4797
-    species:       apkallu
+    species:       inguza
     skill_list_id: 27
     attributes:
       combat:

@@ -830,7 +830,6 @@ templates:
   Wurdalak:
     id:            6582
     species:       vampyr
-    type:          [notorious]
     spell_list_id: 293
     skill_list_id: 309
     attributes:
