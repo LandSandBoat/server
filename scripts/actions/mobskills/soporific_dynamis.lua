@@ -1,7 +1,6 @@
 -----------------------------------
--- Venom
--- Family: Fly
--- Description: Deals Water damage in a fan shaped area. Additional Effect: Poison
+-- Soporific
+-- 20' AoE nightmare
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,20 +13,19 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 1.50, 1.50, 1.50 }
-    params.element        = xi.element.WATER
+    params.fTP            = { 1.25, 1.25, 1.25 }
+    params.element        = xi.element.DARK
     params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.WATER
-    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.damageType     = xi.damageType.DARK
+    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Jugpet differences
-
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 1, 3, 60) -- TODO: Capture duration
+        -- The player doest not wake up from autoattacks from the dynamis version of Soporific
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.randomInt(15, 45), 0, 0, 11)
     end
 
     return info.damage
