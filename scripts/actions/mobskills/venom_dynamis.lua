@@ -25,9 +25,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Jugpet differences
-
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 1, 3, 60) -- TODO: Capture duration
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 50, 3, math.randomInt(60, 120))
     end
 
     return info.damage
