@@ -681,11 +681,6 @@ float CMobEntity::GetRoamDistance()
     return (float)getMobMod(xi::MobMod::RoamDistance);
 }
 
-float CMobEntity::GetRoamRate()
-{
-    return (float)getMobMod(xi::MobMod::RoamRate) / 10.0f;
-}
-
 float CMobEntity::GetRangedAttackRange()
 {
     // Defaulted range is 14 as observed on all retail fomor.
@@ -833,7 +828,9 @@ void CMobEntity::Spawn()
     }
 
     // Roam immediately on spawn
-    if (CanRoam() && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns)), m_roamFlags, roamRegion_))
+    const auto minTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurnsMin));
+    const auto maxTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns));
+    if (CanRoam() && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), minTurns, maxTurns, m_roamFlags, roamRegion_))
     {
         PAI->PathFind->FollowPath(timer::now());
     }

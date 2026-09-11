@@ -196,7 +196,7 @@ TEST_CASE("pathfind: a roam leg never crosses out of its region", "[pathfind][re
             auto*     ownerPtr = owner.get();
             CPathFind pathFind(std::move(owner));
 
-            if (!pathFind.RoamAround(start, 30.0f, 1, xi::RoamFlag::None, &region))
+            if (!pathFind.RoamAround(start, 30.0f, 1, 1, xi::RoamFlag::None, &region))
             {
                 continue;
             }
