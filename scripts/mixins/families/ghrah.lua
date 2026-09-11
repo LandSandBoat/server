@@ -143,6 +143,23 @@ local skinConfig = {
     }
 }
 
+-- two rest bands, {20..26} 44% of the time and {27..40} otherwise
+local roamBands =
+{
+    short = { cool = 26, rate = 40, chance = 44 },
+    long  = { cool = 40, rate = 30 },
+}
+
+local function rollRoamBand(mob)
+    if not mob:isFollowingPath() then
+        return
+    end
+
+    local band = math.randomInt(1, 100) <= roamBands.short.chance and roamBands.short or roamBands.long
+    mob:setMobMod(xi.mobMod.ROAM_COOL, band.cool)
+    mob:setMobMod(xi.mobMod.ROAM_RATE, band.rate)
+end
+
 -- Ghrah form determination using lookup table
 -- Ball form (0) is default, Human (1), Spider (2), Bird (3)
 local function getTargetForm(mob)
@@ -236,6 +253,7 @@ g_mixins.families.ghrah = function(ghrahMob)
 
     ghrahMob:addListener('ROAM_TICK', 'GHRAH_TICK', function(mob)
         handleFormChange(mob)
+        rollRoamBand(mob)
     end)
 
     ghrahMob:addListener('ENGAGE', 'GHRAH_ENGAGE', function(mob)
