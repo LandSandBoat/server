@@ -765,7 +765,8 @@ templates:
     attributes:
       combat:
         skill: dagger
-      jobs: [thf, thf]
+        delay: 210
+      jobs: [war, war]
       render:
         look:
           type:  standard
@@ -800,7 +801,8 @@ templates:
     attributes:
       combat:
         skill: dagger
-      jobs: [thf, thf]
+        delay: 210
+      jobs: [war, war]
       render:
         look:
           type:  standard

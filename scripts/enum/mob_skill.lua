@@ -190,6 +190,7 @@ xi.mobSkill =
 
     BAD_BREATH_1                  =  319,
 
+    NEEDLESHOT_1                  =  321,
     THOUSAND_NEEDLES_1            =  322,
     WILD_CARROT_1                 =  323,
 
@@ -1043,7 +1044,23 @@ xi.mobSkill =
     PUTRID_BREATH_1               = 1608, -- Cirrate Christelle - Mobskill Version
     PUTRID_BREATH_2               = 1609, -- Cirrate Christelle - Skill Attack version
 
+    GLOEOSUCCUS_2                 = 1613,
+
+    SOPORIFIC_2                   = 1615,
+    PALSY_POLLEN_2                = 1616,
+
     FROGKICK_2                    = 1621,
+    CURSED_SPHERE_2               = 1622,
+    VENOM_2                       = 1623,
+    DEBILITATING_DRONE_2          = 1624,
+    TWO_THOUSAND_NEEDLES_1        = 1625,
+    FOUR_THOUSAND_NEEDLES_1       = 1626,
+
+    HEAT_BREATH_2                 = 1628,
+    RIDDLE_2                      = 1629,
+    GREAT_SANDSTORM_2             = 1630,
+    GREAT_WHIRLWIND_2             = 1631,
+    CHOKE_BREATH_2                = 1632,
 
     SHEEP_BLEAT_2                 = 1633,
     SHEEP_SONG_2                  = 1634,

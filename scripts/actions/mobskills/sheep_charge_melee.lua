@@ -1,6 +1,6 @@
 -----------------------------------
 -- Sheep Charge Melee
--- Family: Shhep
+-- Family: Sheep
 -- Description: Deals damage to a single target. Additional Effect: Knockback
 -- Used in BCNM: Hostile Herbivores in place of regular auto attacks.
 -----------------------------------
