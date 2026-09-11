@@ -1309,23 +1309,11 @@ void SetupJob(CMobEntity* PMob)
 
 void SetupRoaming(CMobEntity* PMob)
 {
-    uint16 distance = 10;
-    uint16 turns    = 1;
-    uint16 cool     = 20;
-    uint16 rate     = 15;
-
-    if (PMob->m_EcoSystem == xi::Ecosystem::Beastmen)
-    {
-        distance = 20;
-        turns    = 5;
-        cool     = 45;
-    }
-
-    // default mob roaming mods
-    PMob->defaultMobMod(xi::MobMod::RoamDistance, distance);
-    PMob->defaultMobMod(xi::MobMod::RoamTurns, turns);
-    PMob->defaultMobMod(xi::MobMod::RoamCool, cool);
-    PMob->defaultMobMod(xi::MobMod::RoamRate, rate);
+    // default mob roaming mods; 6 is the median retail leg
+    PMob->defaultMobMod(xi::MobMod::RoamDistance, 6);
+    PMob->defaultMobMod(xi::MobMod::RoamTurns, 1);
+    PMob->defaultMobMod(xi::MobMod::RoamCool, 20);
+    PMob->defaultMobMod(xi::MobMod::RoamRate, 15);
 
     if ((PMob->m_roamFlags & xi::RoamFlag::Ambush) != xi::RoamFlag::None)
     {

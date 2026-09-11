@@ -73,7 +73,16 @@ private:
     auto samplePoint() const -> position_t;
     auto acceptPoint(const position_t& point, const NavMesh* navMesh) const -> Maybe<position_t>;
 
+    struct Edge
+    {
+        Vector3 a;
+        Vector3 b;
+    };
+
     std::vector<Triangle> triangles_;
+
+    // ring edges, outer and holes
+    std::vector<Edge> edges_;
 
     // rejects a position before it walks the triangles
     std::ranges::minmax_result<float> boundsX_{};

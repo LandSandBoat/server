@@ -172,7 +172,7 @@ TEST_CASE("RoamRegion samples land inside the region", "[roam_region]")
 
 TEST_CASE("RoamRegion roam steps vary in length", "[roam_region]")
 {
-    // the requested distance is a mean, not a radius
+    // the requested distance is the median of a log-normal draw, not a radius
     const auto       region = squareWithHole();
     const position_t from{ 50.0f, -10.0f, 10.0f, 0, 0 };
 
@@ -240,4 +240,25 @@ TEST_CASE("RoamRegion with no geometry hands out nothing", "[roam_region]")
 
     CHECK_FALSE(region.randomPoint().has_value());
     CHECK_FALSE(region.randomPointAt({}, 10.0f).has_value());
+}
+
+TEST_CASE("RoamRegion clamps a leg at the first boundary it would cross", "[roam_region]")
+{
+    const auto    region = squareWithHole();
+    const Vector3 east{ .x = 1.0f, .y = 0.0f, .z = 0.0f };
+
+    // clear row: stops just short of the outer edge at x = 100
+    const position_t clearRow{ 10.0f, -10.0f, 20.0f, 0, 0 };
+    CHECK(std::abs(region.clampToRegion(clearRow, east, 200.0f) - 89.95f) < 0.01f);
+
+    // row through the hole: stops at the hole's near edge at x = 40
+    const position_t holeRow{ 10.0f, -10.0f, 50.0f, 0, 0 };
+    CHECK(std::abs(region.clampToRegion(holeRow, east, 200.0f) - 29.95f) < 0.01f);
+
+    // short leg comes back whole
+    CHECK(region.clampToRegion(holeRow, east, 20.0f) == 20.0f);
+
+    // outside start gets nothing
+    const position_t outside{ -5.0f, -10.0f, 50.0f, 0, 0 };
+    CHECK(region.clampToRegion(outside, east, 20.0f) == 0.0f);
 }

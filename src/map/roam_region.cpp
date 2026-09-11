@@ -76,19 +76,17 @@ constexpr float kSnapTolerance = 2.5f;
 // retail's 10th percentile leg
 constexpr float kMinStep = 2.0f;
 
-// 8 halvings land within 0.4% of the drawn step
-constexpr int kBoundaryBisections = 8;
+// rest a little inside the edge so the next leg still sees it; from the edge itself an outward leg crosses at t = 0 and is missed
+constexpr float kEdgeMargin = 0.05f;
 
-// how often a leg is checked on the way; a notch narrower than this can be stepped over
-constexpr float kEdgeSampleStep = 1.0f;
+// retail legs are log-normal about RoamDistance and end near twice it; the same spread and cap fit every captured family
+constexpr double kStepSigma = 0.40;
+constexpr float  kStepCap   = 2.0f;
 
-// retail legs run from 2 to 44 yalms around a mean of 10, which an exponential with RoamDistance as its mean fits
-auto sampleStepDistance(const float mean) -> float
+auto sampleStepDistance(const float median) -> float
 {
-    // truncated at the floor; an exponential is memoryless, so that is the floor plus a fresh draw
-    const auto floor = std::min(kMinStep, mean);
-
-    return floor - mean * std::log(xirand::GetRandomNumber(std::numeric_limits<float>::epsilon(), 1.0f));
+    const auto drawn = static_cast<float>(median * std::exp(xirand::GetNormalNumber(0.0, kStepSigma)));
+    return std::min(drawn, median * kStepCap);
 }
 
 // the only place the triangulator is named. it returns a flat triangle list indexing the rings concatenated in order
@@ -133,6 +131,14 @@ RoamRegion::RoamRegion(const Ring& outer, const std::vector<Ring>& holes)
 
         areaSum += std::abs(signedArea(a, b, c)) * 0.5f;
         triangles_.push_back({ .a = a, .b = b, .c = c, .areaSum = areaSum });
+    }
+
+    for (const auto& ring : rings)
+    {
+        for (size_t i = 0; i < ring.size(); ++i)
+        {
+            edges_.push_back({ .a = ring[i], .b = ring[(i + 1) % ring.size()] });
+        }
     }
 
     // the box every query checks before touching the triangles
@@ -216,47 +222,40 @@ auto RoamRegion::clampToRegion(const position_t& from, const Vector3& direction,
 {
     TracyZoneScoped;
 
-    const auto at = [&](const float along)
+    // a start outside the region gets no leg
+    if (!contains(from.x, from.z))
     {
-        return contains(from.x + direction.x * along, from.z + direction.z * along);
-    };
-
-    const auto edgeBetween = [&](float inside, float outside)
-    {
-        for (int i = 0; i < kBoundaryBisections; ++i)
-        {
-            const auto midpoint = (inside + outside) * 0.5f;
-            if (at(midpoint))
-            {
-                inside = midpoint;
-            }
-            else
-            {
-                outside = midpoint;
-            }
-        }
-
-        return inside;
-    };
-
-    // stop at the first exit, not the end; the ray may leave and come back
-    float inside = 0.0f;
-    for (float along = kEdgeSampleStep; along < distance; along += kEdgeSampleStep)
-    {
-        if (!at(along))
-        {
-            return edgeBetween(inside, along);
-        }
-
-        inside = along;
+        return 0.0f;
     }
 
-    if (at(distance))
+    // first crossing of a ring edge; the ray may leave and come back
+    float nearest = distance;
+    for (const auto& edge : edges_)
+    {
+        const float ex    = edge.b.x - edge.a.x;
+        const float ez    = edge.b.z - edge.a.z;
+        const float denom = direction.x * ez - direction.z * ex;
+        if (std::abs(denom) < 1e-6f)
+        {
+            continue;
+        }
+
+        const float dx = edge.a.x - from.x;
+        const float dz = edge.a.z - from.z;
+        const float t  = (dx * ez - dz * ex) / denom;
+        const float u  = (dx * direction.z - dz * direction.x) / denom;
+        if (t > 1e-4f && t < nearest && u >= 0.0f && u <= 1.0f)
+        {
+            nearest = t;
+        }
+    }
+
+    if (nearest >= distance)
     {
         return distance;
     }
 
-    return edgeBetween(inside, distance);
+    return std::max(nearest - kEdgeMargin, 0.0f);
 }
 
 auto RoamRegion::samplePoint() const -> position_t
