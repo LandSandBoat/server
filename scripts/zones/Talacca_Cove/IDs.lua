@@ -51,6 +51,7 @@ zones[xi.zone.TALACCA_COVE] =
         QULTADA_CHIPS_ARE_DOWN        = 7877, -- Sometimes the chips are down...
         QULTADA_HEAT_UP               = 7878, -- Looks like things are beginning to heat up!
         YOUR_LEVEL_LIMIT_IS_NOW_75    = 7879, -- Your level limit is now 75.
+        VALKENG_STATUS                = 7880, -- Confirming status... Damage from [melee attacks/ranged attacks/magic]...<number>%. [Changing frame/Executing maneuver]...
     },
     mob =
     {
