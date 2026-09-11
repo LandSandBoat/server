@@ -170,6 +170,9 @@ private:
     // region to clip random-roam legs to, null for all other pathing; owned by the zone
     const RoamRegion* roamRegion_{ nullptr };
 
+    // this path may cross the region outline to get back inside
+    bool recoveringToRegion_{ false };
+
     timer::time_point timeAtPoint_;
 
     // Path is held while tick < unpauseTime_; time_point::min() means not paused.

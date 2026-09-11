@@ -43,6 +43,9 @@ namespace
 // Cap for AddPoints; patrol paths may exceed it, other callers are truncated with a warning.
 constexpr size_t kMaxPathPoints = 50;
 
+// region points tried for a recovery walk before settling for a far one
+constexpr int kRecoveryPointAttempts = 8;
+
 } // namespace
 
 CPathFind::CPathFind(CBaseEntity* PTarget)
@@ -396,8 +399,8 @@ auto CPathFind::FindPathInternal(const position_t& start, const position_t& end)
         return false;
     }
 
-    // cut the path where it first leaves the region
-    if (roamRegion_)
+    // cut the path where it first leaves the region, unless this walk brings the mob back onto it
+    if (roamRegion_ && !recoveringToRegion_)
     {
         auto from = start;
         for (std::size_t i = 0; i < built->points.size(); ++i)
@@ -451,6 +454,32 @@ auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         return false;
     }
     turnPoints_ = std::move(*turnPoints);
+
+    // nothing to walk to from here: path to a nearby point of the region with the full navmesh
+    if (turnPoints_.empty() && region)
+    {
+        Maybe<position_t> target;
+        for (int attempt = 0; attempt < kRecoveryPointAttempts; ++attempt)
+        {
+            const auto candidate = region->randomPoint(&navMesh());
+            if (!candidate)
+            {
+                break;
+            }
+
+            target = candidate;
+            if (isWithinDistance(owner_->position(), *candidate, maxRadius * 2.0f, true))
+            {
+                break;
+            }
+        }
+
+        if (target)
+        {
+            turnPoints_.push_back(*target);
+            recoveringToRegion_ = true;
+        }
+    }
 
     // Path to the first turn only; later turns chain in FinishedPath().
     // Turns are sampled around the anchor, but the walk starts from wherever the owner is.
@@ -551,6 +580,7 @@ auto CPathFind::Clear() -> void
 
     currentTurn_ = 0;
     turnPoints_.clear();
+    recoveringToRegion_ = false;
 
     // Drop any in-flight chunked sequence; the next PathTo / PathInRange starts fresh.
     chunked_.clear();
@@ -627,6 +657,8 @@ auto CPathFind::FinishedPath() -> void
         }
         return;
     }
+
+    recoveringToRegion_ = false;
 
     // Patrol paths loop forever while still roaming.
     if (IsPatrolling() && owner_->isRoaming())
