@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.damageType     = xi.damageType.HAND_TO_HAND
     params.skillchainType = xi.skillchainType.REVERBERATION
     params.dStat          = xi.mod.INT
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- guessed
 
     params.numHits       = 1
     params.ftp0          = 1.625

@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.damageType      = xi.damageType.SLASHING
     params.skillchainType  = xi.skillchainType.SCISSION
     params.skillchainType2 = xi.skillchainType.DETONATION
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- guessed
 
     params.numHits       = 1
     params.ftp0          = 3.0
