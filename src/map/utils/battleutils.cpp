@@ -5133,7 +5133,6 @@ void DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, const uint8 
  ************************************************************************/
 bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
 {
-    std::vector<uint16> resetCandidateList;
     std::vector<uint16> activeCooldownList;
 
     if (PChar == nullptr || PTarget == nullptr)
@@ -5152,7 +5151,6 @@ bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
         // Do not reset 1hrs or Random Deal
         if (recast->ID != Recast::Special && recast->ID != Recast::Special2 && recast->ID != Recast::RandomDeal)
         {
-            resetCandidateList.push_back(i);
             if (recast->RecastTime > 0s)
             {
                 activeCooldownList.push_back(i);
@@ -5160,7 +5158,7 @@ bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
         }
     }
 
-    if (resetCandidateList.size() == 0 || activeCooldownList.size() == 0)
+    if (activeCooldownList.size() == 0)
     {
         // Evade because we have no abilities that can be reset
         return false;
@@ -5204,19 +5202,19 @@ bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
     }
     else // Standard Version
     {
-        if (resetCandidateList.size() > 1)
+        if (activeCooldownList.size() > 1)
         {
             // Shuffle if more than 1 ability
-            xirand::ShuffleInPlace(resetCandidateList);
+            xirand::ShuffleInPlace(activeCooldownList);
         }
 
         // Reset first ability (shuffled or only)
-        PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
+        PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(0));
 
-        // Reset 2 abilities by chance (could be 2 abilities that don't need resets)
-        if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+        // Reset 2 abilities by chance
+        if (activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
         {
-            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
+            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(1));
         }
 
         if (PChar != PTarget)
