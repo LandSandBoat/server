@@ -139,6 +139,7 @@ templates:
   Bugbear_Watchman:
     id:            568
     species:       bugbear
+    roam:          [scripted]
     skill_list_id: 59
     attributes:
       combat:
@@ -1417,11 +1418,11 @@ spawns:
     level:    [66, 68]
   16826379:
     template: Bugbear_Watchman
-    at:       [-178.542, 11.500, -161.705, 63]
+    at:       [-178.542, 12.000, -161.705, 63]
     level:    [71, 71]
   16826380:
     template: Bugbear_Watchman
-    at:       [-181.544, 11.500, -161.569, 64]
+    at:       [-181.544, 12.000, -161.569, 64]
     level:    [71, 71]
   16826381:
     template: Goblin_Foreman
@@ -1672,11 +1673,11 @@ spawns:
     level:    [61, 64]
   16826440:
     template: Bugbear_Watchman
-    at:       [-221.513, 15.500, 163.820, 180]
+    at:       [-221.513, 16.000, 163.820, 180]
     level:    [71, 71]
   16826441:
     template: Bugbear_Watchman
-    at:       [-218.485, 15.500, 163.395, 191]
+    at:       [-218.485, 16.000, 163.395, 191]
     level:    [71, 71]
   16826442:
     template: Goblin_Fireman
@@ -1833,7 +1834,7 @@ spawns:
     level:    [66, 67]
   16826479:
     template: Bugbear_Watchman
-    at:       [94.011, 15.494, -176.779, 116]
+    at:       [94.011, 15.995, -176.779, 116]
     level:    [76, 76]
   16826480:
     template: Goblin_Headman
@@ -1876,11 +1877,11 @@ spawns:
     level:    [74, 75]
   16826489:
     template: Bugbear_Watchman
-    at:       [-87.807, 15.500, -21.246, 125]
+    at:       [-87.807, 16.000, -21.246, 125]
     level:    [76, 76]
   16826490:
     template: Bugbear_Watchman
-    at:       [-87.459, 15.500, -18.783, 125]
+    at:       [-87.459, 16.000, -18.783, 125]
     level:    [76, 76]
   16826491:
     template: Goblin_Marksman

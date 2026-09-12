@@ -155,6 +155,42 @@ templates:
       despoil:
         bugbear_mask: 0
 
+  Bugbear_Bondman_noroam:
+    id:            560
+    species:       bugbear
+    roam:          [scripted]
+    skill_list_id: 59
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 1355
+        entity_flags: 131
+        model_size:     1
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        respawn: 840
+    loot:
+      drops:
+        - chance: common
+          item:   chunk_of_kopparnickel_ore
+        - chance: rare
+          item:   oldton_chest_key
+        - chance: rare
+          item:   bugbear_mask
+        - chance: very_rare
+          item:   igneous_rock
+      steal: igneous_rock
+      despoil:
+        bugbear_mask: 0
+
   Bugbear_Muscleman:
     id:            563
     species:       bugbear
@@ -278,6 +314,7 @@ templates:
     id:            566
     species:       bugbear
     type:          [notorious]
+    roam:          [scripted]
     skill_list_id: 59
     attributes:
       combat:
@@ -2044,12 +2081,12 @@ spawns:
     region:   s_123
     level:    [40, 40]
   16822399:
-    template: Bugbear_Bondman
-    at:       [-38.215, 7.500, 101.636, 126]
+    template: Bugbear_Bondman_noroam
+    at:       [-38.215, 8.000, 101.636, 126]
     level:    [43, 45]
   16822400:
-    template: Bugbear_Bondman
-    at:       [-38.805, 7.494, 98.486, 121]
+    template: Bugbear_Bondman_noroam
+    at:       [-38.805, 7.994, 98.486, 121]
     level:    [43, 45]
   16822401:
     template: Goblin_Tollman
@@ -2134,12 +2171,12 @@ spawns:
     region:   e_147
     level:    [42, 43]
   16822421:
-    template: Bugbear_Bondman
+    template: Bugbear_Bondman_noroam
     at:       [-0.920, 11.500, -98.408, 132]
     level:    [43, 45]
   16822422:
-    template: Bugbear_Bondman
-    at:       [-0.750, 11.500, -101.360, 126]
+    template: Bugbear_Bondman_noroam
+    at:       [-0.750, 12.000, -101.360, 126]
     level:    [43, 45]
   16822423:
     template: Bugbear_Strongman
@@ -2150,11 +2187,11 @@ spawns:
     region:   se_152
     level:    [42, 43]
   16822425:
-    template: Bugbear_Bondman
-    at:       [58.367, 15.500, -123.264, 67]
+    template: Bugbear_Bondman_noroam
+    at:       [58.013, 16.000, -121.928, 62]
     level:    [43, 45]
   16822426:
-    template: Bugbear_Bondman
+    template: Bugbear_Bondman_noroam
     at:       [61.612, 15.500, -122.418, 80]
     level:    [43, 45]
   16822427:
