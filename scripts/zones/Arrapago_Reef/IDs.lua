@@ -37,6 +37,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         SPINE_CHILL                   = 8404, -- You feel a chill run down your spine!
         PILE_OF_DISCARDED_MATERIALS   = 8435, -- There is a pile of discarded materials here.
         HAND_OVER_TO_IMMORTAL         = 8462, -- You hand over the % to the Immortal.
+        CUTTER_NOTHING_HAPPENS        = 8467, -- Nothing happens...
         CANNOT_ENTER                  = 8481, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 8482, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 8486, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
