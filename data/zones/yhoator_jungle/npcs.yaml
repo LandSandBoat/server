@@ -1329,9 +1329,9 @@ npcs:
       look:
         type:  standard
         model: 503
-      entity_flags: 2075
-      name_prefix:    32
-      moving:          7
+      entity_flags: 27
+      name_prefix:  32
+      moving:        7
     widescan: true
 
   17285687:
@@ -1363,6 +1363,7 @@ npcs:
   17285689:
     script:       qm4
     display_name: ???
+    status:       normal
     at:           [-149.929, -1.148, 56.761]
     render:
       look:
@@ -1376,6 +1377,7 @@ npcs:
   17285690:
     script:       qm5
     display_name: ???
+    status:       normal
     at:           [80.520, -1.312, 200.147]
     render:
       look:
@@ -1389,6 +1391,7 @@ npcs:
   17285691:
     script:       qm6
     display_name: ???
+    status:       normal
     at:           [198.650, -0.783, 58.046]
     render:
       look:
@@ -1402,6 +1405,7 @@ npcs:
   17285692:
     script:       qm7
     display_name: ???
+    status:       normal
     at:           [205.932, -1.097, -174.886]
     render:
       look:
@@ -1415,6 +1419,7 @@ npcs:
   17285693:
     script:       qm8
     display_name: ???
+    status:       normal
     at:           [525.239, -1.224, -394.046]
     render:
       look:
@@ -1428,6 +1433,7 @@ npcs:
   17285694:
     script:       qm9
     display_name: ???
+    status:       normal
     at:           [240.341, -0.826, -402.532]
     render:
       look:
@@ -1441,6 +1447,7 @@ npcs:
   17285695:
     script:       qm10
     display_name: ???
+    status:       normal
     at:           [16.069, -0.860, -393.843]
     render:
       look:
@@ -1454,6 +1461,7 @@ npcs:
   17285696:
     script:       qm11
     display_name: ???
+    status:       normal
     at:           [-255.358, -0.558, -405.178]
     render:
       look:
