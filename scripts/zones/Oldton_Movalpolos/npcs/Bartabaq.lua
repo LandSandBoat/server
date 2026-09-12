@@ -7,12 +7,15 @@
 ---@type TNpcEntity
 local entity = {}
 
+entity.onTrade = function(player, npc, trade)
+    xi.conquest.vendorOnTrade(player, npc, trade)
+end
+
 entity.onTrigger = function(player, npc)
     xi.conquest.vendorOnTrigger(player, xi.region.MOVALPOLOS, 32756)
 end
 
 -- TODO: Implement evoliths trading.
--- TODO: Check if you can trade equipment.
 
 entity.onEventFinish = function(player, csid, option, npc)
     if option == 1 then
