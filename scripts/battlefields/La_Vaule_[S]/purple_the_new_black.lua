@@ -13,6 +13,7 @@ local content = BattlefieldMission:new({
     isMission             = true,
     allowTrusts           = true,
     maxPlayers            = 6,
+    levelCap              = xi.settings.main.MAX_LEVEL,
     timeLimit             = utils.minutes(30),
     index                 = 1,
     entryNpc              = '_2d1',
