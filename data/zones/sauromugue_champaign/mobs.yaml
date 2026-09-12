@@ -491,6 +491,7 @@ templates:
   Goblin_Bounty_Hunter:
     id:            1642
     species:       armored_goblin
+    roam:          [scripted]
     skill_list_id: 133
     attributes:
       combat:
@@ -505,6 +506,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        dont_roam_home: 1
       spawn:
         respawn: 300
     loot:
@@ -4184,23 +4187,23 @@ spawns:
   17269174:
     template: Goblin_Bounty_Hunter
     at:       [374.238, 39.410, 446.799, 36]
-    level:    [30, 34]
+    level:    [30, 36]
   17269175:
     template: Goblin_Bounty_Hunter
     at:       [322.368, 39.240, 406.795, 226]
-    level:    [30, 34]
+    level:    [30, 36]
   17269176:
     template: Goblin_Bounty_Hunter
     at:       [306.908, 42.103, 412.325, 30]
-    level:    [30, 34]
+    level:    [30, 36]
   17269177:
     template: Goblin_Bounty_Hunter
     at:       [254.067, 38.460, 428.696, 230]
-    level:    [30, 34]
+    level:    [30, 36]
   17269178:
     template: Goblin_Bounty_Hunter
     at:       [241.937, 39.829, 451.606, 255]
-    level:    [30, 34]
+    level:    [30, 36]
   17269179:
     template: Macro_Test
     at:       [-462.000, 0.400, 319.119, 156]

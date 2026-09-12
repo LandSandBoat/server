@@ -70,6 +70,7 @@ zones[xi.zone.VALKURM_DUNES] =
     {
         BEACH_MONK             = GetFirstID('Beach_Monk'),
         DOMAN                  = GetFirstID('Doman'),
+        GOBLIN_BOUNTY_HUNTER   = GetFirstID('Goblin_Bounty_Hunter'),
         GOLDEN_BAT             = GetFirstID('Golden_Bat'),
         HALFORC_BLACK_MAGE     = GetFirstID('Halforc_Black_Mage'),
         HALFORC_DARK_KNIGHT    = GetFirstID('Halforc_Dark_Knight'),
