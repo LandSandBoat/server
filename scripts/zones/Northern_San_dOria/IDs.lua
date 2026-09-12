@@ -35,6 +35,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         RENOUNCE_CRAFTSMAN            = 7047,  -- You have successfully renounced your status as a [craftsman/artisan/adept] of the [Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         CONQUEST_BASE                 = 7301,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7460,  -- You can't fish here.
+        KEYITEM_HAND_OVER             = 7751,  -- You hand over the key item: <keyitem>.
         REGIME_CANCELED               = 8012,  -- Current training regime canceled.
         HUNT_ACCEPTED                 = 8030,  -- Hunt accepted!
         USE_SCYLDS                    = 8031,  -- You use <number> [scyld/scylds]. Scyld balance: <number>.

@@ -26,6 +26,7 @@ zones[xi.zone.HEAVENS_TOWER] =
         YOU_ACCEPT_THE_MISSION        = 7337, -- You have accepted the mission.
         FISHING_MESSAGE_OFFSET        = 7390, -- You can't fish here.
         INVALID_ENSIGNIAS             = 7622, -- Your invalid ensignias have been disposed of.
+        KEYITEM_HAND_OVER             = 8805, -- You hand over the key item: <keyitem>.
         CELEBRATORY_GOODS             = 9124, -- An assortment of celebratory goods is available for purchase.
         OBTAINED_NUM_KEYITEMS         = 9202, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                = 9204, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.

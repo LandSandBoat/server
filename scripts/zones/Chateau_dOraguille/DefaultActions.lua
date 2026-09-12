@@ -3,7 +3,6 @@ local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 return {
     ['_6h0']        = { messageSpecial = ID.text.ITS_LOCKED },
     ['_6h1']        = { messageSpecial = ID.text.ITS_LOCKED },
-    ['_6h4']        = { messageSpecial = ID.text.ITS_LOCKED_TIGHT },
     ['Aladoverre']  = { event          = 515 },
     ['Aramaviont']  = { event          = 518 },
     ['Arsha']       = { event          = 513 },

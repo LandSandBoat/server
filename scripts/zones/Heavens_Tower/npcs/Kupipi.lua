@@ -10,6 +10,8 @@ local ID = zones[xi.zone.HEAVENS_TOWER]
 ---@type TNpcEntity
 local entity = {}
 
+local ballistaLicenseVar = 'BallistaLicense'
+
 local trustMemory = function(player)
     local memories = 0
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS) then
@@ -27,6 +29,15 @@ local trustMemory = function(player)
 end
 
 entity.onTrigger = function(player, npc)
+    local ballistaProgress   = player:getCharVar(ballistaLicenseVar)
+    local nation             = player:getNation()
+    local started            = utils.mask.getBit(ballistaProgress, 0)
+    local sandoriaApproval   = utils.mask.getBit(ballistaProgress, 1)
+    local bastokApproval     = utils.mask.getBit(ballistaProgress, 2)
+    local windurstApproval   = utils.mask.getBit(ballistaProgress, 3)
+    local debriefComplete    = utils.mask.getBit(ballistaProgress, 4)
+    local applicationOffered = utils.mask.getBit(ballistaProgress, 5)
+
     local trustSandoria = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
     local trustBastok   = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
     local trustWindurst = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
@@ -35,6 +46,26 @@ entity.onTrigger = function(player, npc)
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if
+        nation == xi.nation.WINDURST and
+        debriefComplete and
+        not windurstApproval
+    then
+        player:startEvent(426)
+    elseif
+        nation == xi.nation.SANDORIA and
+        started and
+        not windurstApproval and
+        player:hasKeyItem(xi.ki.LETTER_TO_THE_WIN_CONFLICT_CMD1)
+    then
+        player:startEvent(427)
+    elseif
+        nation == xi.nation.BASTOK and
+        started and
+        not windurstApproval and
+        player:hasKeyItem(xi.ki.LETTER_TO_THE_WIN_CONFLICT_CMD2)
+    then
+        player:startEvent(428)
+    elseif
         trustWindurst == xi.questStatus.QUEST_ACCEPTED and
         (trustSandoria == xi.questStatus.QUEST_COMPLETED or trustBastok == xi.questStatus.QUEST_COMPLETED)
     then
@@ -63,7 +94,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(438)
         player:setLocalVar('KupipiTrustChatFlag', 1)
-    elseif player:getNation() == xi.nation.WINDURST then
+    elseif nation == xi.nation.WINDURST then
         if player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
         else
@@ -75,8 +106,13 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    --TRUST
-    if csid == 435 then
+    if csid == 426 then
+        player:setCharVar(ballistaLicenseVar, utils.mask.setBit(player:getCharVar(ballistaLicenseVar), 3, true))
+    elseif csid == 427 then
+        player:setCharVar(ballistaLicenseVar, utils.mask.setBit(player:getCharVar(ballistaLicenseVar), 3, true))
+    elseif csid == 428 then
+        player:setCharVar(ballistaLicenseVar, utils.mask.setBit(player:getCharVar(ballistaLicenseVar), 3, true))
+    elseif csid == 435 then
         player:addSpell(xi.magic.spell.KUPIPI, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:setCharVar('WindurstFirstTrust', 1)

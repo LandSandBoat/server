@@ -1,7 +1,6 @@
 local ID = zones[xi.zone.METALWORKS]
 
 return {
-    ['_6ld']              = { event = 604 },
     ['_6le']              = { messageSpecial = ID.text.ITS_LOCKED },
     ['_6lg']              = { messageSpecial = ID.text.ITS_LOCKED },
     ['Abbudin']           = { event = 558 },
@@ -27,7 +26,6 @@ return {
     ['High_Bear']         = { event = 730 },
     ['Hungry_Wolf']       = { event = 421 },
     ['Indiran']           = { event = 740 },
-    ['Invincible_Shield'] = { event = 810 },
     ['Iron_Eater']        = { event = 604 },
     ['Izabele']           = { event = 745 },
     ['Kachina']           = { event = 351 },
