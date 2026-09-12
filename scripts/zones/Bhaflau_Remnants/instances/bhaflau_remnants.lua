@@ -92,12 +92,12 @@ local instanceObject = {}
 
 -- Requirements for the first player registering the instance
 instanceObject.registryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.keyItem.REMNANTS_PERMIT)
 end
 
 -- Requirements for further players entering an already-registered instance
 instanceObject.entryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.keyItem.REMNANTS_PERMIT)
 end
 
 -- Called on the instance once it is created and ready
@@ -124,7 +124,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:addStatusEffect(xi.effect.IMPAIRMENT, { power = 3, duration = 6000, origin = player })
     player:addStatusEffect(xi.effect.DEBILITATION, { power = 0x1FF, duration = 6000, origin = player })
     player:addTempItem(xi.item.CAGE_OF_B_REMNANTS_FIREFLIES)
-    player:delKeyItem(xi.ki.REMNANTS_PERMIT)
+    player:delKeyItem(xi.keyItem.REMNANTS_PERMIT)
 end
 
 -- Instance 'tick'

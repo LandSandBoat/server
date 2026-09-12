@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.AN_EYE_FOR_REVENGE)
 
 quest.reward = {
-    keyItem     = xi.ki.SCARLET_ABYSSITE_OF_FURTHERANCE,
+    keyItem     = xi.keyItem.SCARLET_ABYSSITE_OF_FURTHERANCE,
 }
 
 quest.sections =
@@ -43,7 +43,7 @@ quest.sections =
             ['Curilla'] =
             {
                 onTrigger = function(player, npc)
-                    player:delKeyItem(xi.ki.VIAL_OF_LAMBENT_POTION)
+                    player:delKeyItem(xi.keyItem.VIAL_OF_LAMBENT_POTION)
                     return quest:event(190)
                 end,
             },
@@ -67,7 +67,7 @@ quest.sections =
             ['Curilla'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.LUGARHOOS_EYEBALL) then
+                    if not player:hasKeyItem(xi.keyItem.LUGARHOOS_EYEBALL) then
                         return quest:event(191)
                     else
                         return quest:event(192)
@@ -78,9 +78,9 @@ quest.sections =
             ['Lugarhoo'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not player:hasKeyItem(xi.ki.LUGARHOOS_EYEBALL) then
-                        player:addKeyItem(xi.ki.LUGARHOOS_EYEBALL)
-                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LUGARHOOS_EYEBALL)
+                    if not player:hasKeyItem(xi.keyItem.LUGARHOOS_EYEBALL) then
+                        player:addKeyItem(xi.keyItem.LUGARHOOS_EYEBALL)
+                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.LUGARHOOS_EYEBALL)
                     end
                 end,
             },
@@ -88,7 +88,7 @@ quest.sections =
             onEventFinish =
             {
                 [192] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LUGARHOOS_EYEBALL)
+                    player:delKeyItem(xi.keyItem.LUGARHOOS_EYEBALL)
                     player:addCurrency('cruor', 800)
                     player:messageSpecial(ID.text.CRUOR_TOTAL, 800, player:getCurrency('cruor'))
                     quest:complete(player)

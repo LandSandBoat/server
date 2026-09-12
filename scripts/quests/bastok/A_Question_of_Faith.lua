@@ -51,12 +51,12 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.DAWN_TALISMAN) and
+                        not player:hasKeyItem(xi.keyItem.DAWN_TALISMAN) and
                         quest:getVar(player, 'Prog') == 0
                     then
-                        return quest:progressEvent(239, 0, xi.ki.DAWN_TALISMAN)
-                    elseif player:hasKeyItem(xi.ki.DAWN_TALISMAN) then
-                        return quest:event(242, 0, xi.ki.DAWN_TALISMAN)
+                        return quest:progressEvent(239, 0, xi.keyItem.DAWN_TALISMAN)
+                    elseif player:hasKeyItem(xi.keyItem.DAWN_TALISMAN) then
+                        return quest:event(242, 0, xi.keyItem.DAWN_TALISMAN)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(241)
                     end
@@ -67,7 +67,7 @@ quest.sections =
             {
                 [239] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.DAWN_TALISMAN)
+                        npcUtil.giveKeyItem(player, xi.keyItem.DAWN_TALISMAN)
                     end
                 end,
 
@@ -83,7 +83,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DAWN_TALISMAN) and
+                        player:hasKeyItem(xi.keyItem.DAWN_TALISMAN) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         if npcUtil.popFromQM(player, npc, ID.mob.BUGALLUG, { claim = true, hide = 0 }) then
@@ -92,9 +92,9 @@ quest.sections =
                         end
                     elseif
                         quest:getVar(player, 'Prog') == 1 and
-                        player:hasKeyItem(xi.ki.DAWN_TALISMAN)
+                        player:hasKeyItem(xi.keyItem.DAWN_TALISMAN)
                     then
-                        return quest:progressEvent(6, 11, xi.ki.DAWN_TALISMAN)
+                        return quest:progressEvent(6, 11, xi.keyItem.DAWN_TALISMAN)
                     end
                 end,
             },
@@ -111,8 +111,8 @@ quest.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.DAWN_TALISMAN)
-                    player:messageSpecial(ID.text.WAS_TAKEN_FROM_YOU, 0, xi.ki.DAWN_TALISMAN)
+                    player:delKeyItem(xi.keyItem.DAWN_TALISMAN)
+                    player:messageSpecial(ID.text.WAS_TAKEN_FROM_YOU, 0, xi.keyItem.DAWN_TALISMAN)
                 end,
             },
         },

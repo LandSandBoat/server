@@ -46,7 +46,7 @@ quest.sections =
             ['Cid'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.UNFINISHED_LETTER) then
+                    if player:hasKeyItem(xi.keyItem.UNFINISHED_LETTER) then
                         return quest:progressEvent(509)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:event(508):importantEvent()
@@ -60,7 +60,7 @@ quest.sections =
             {
                 [509] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.UNFINISHED_LETTER)
+                        player:delKeyItem(xi.keyItem.UNFINISHED_LETTER)
                     end
                 end,
             },
@@ -93,7 +93,7 @@ quest.sections =
                 [133] = function(player, csid, option, npc)
                     player:tradeComplete()
 
-                    npcUtil.giveKeyItem(player, xi.ki.UNFINISHED_LETTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.UNFINISHED_LETTER)
                 end,
             },
         },

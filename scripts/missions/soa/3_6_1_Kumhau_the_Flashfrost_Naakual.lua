@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.KUMHAU_THE_
 
 mission.reward =
 {
-    keyItem     = xi.ki.AUREATE_BALL_OF_FUR,
+    keyItem     = xi.keyItem.AUREATE_BALL_OF_FUR,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.SOUL_SIPHON },
 }
 

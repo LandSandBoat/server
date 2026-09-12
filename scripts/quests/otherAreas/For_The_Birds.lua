@@ -61,7 +61,7 @@ quest.sections =
                     if progress == 0 then
                         return quest:event(15) -- Reminder
                     elseif progress == 1 then
-                        return quest:progressEvent(16, 0, xi.ki.GLITTERING_FRAGMENT)
+                        return quest:progressEvent(16, 0, xi.keyItem.GLITTERING_FRAGMENT)
                     elseif progress == 2 then
                         return quest:event(17) -- Reminder
                     elseif progress == 4 then
@@ -74,7 +74,7 @@ quest.sections =
             {
                 [16] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    npcUtil.giveKeyItem(player, xi.ki.GLITTERING_FRAGMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.GLITTERING_FRAGMENT)
                 end,
 
                 [18] = function(player, csid, option, npc)
@@ -138,8 +138,8 @@ quest.sections =
                             i = 0, 3 do SpawnMob(beadeauxID.mob.MAGNES_QUADAV_NM + i):updateClaim(player)
                         end
 
-                        player:delKeyItem(xi.ki.GLITTERING_FRAGMENT)
-                        player:messageSpecial(beadeauxID.text.TAKEN_FROM_YOU, 0, xi.ki.GLITTERING_FRAGMENT)
+                        player:delKeyItem(xi.keyItem.GLITTERING_FRAGMENT)
+                        player:messageSpecial(beadeauxID.text.TAKEN_FROM_YOU, 0, xi.keyItem.GLITTERING_FRAGMENT)
                         return quest:messageSpecial(beadeauxID.text.QUADAV_ARE_ATTACKING)
                     elseif
                         progress == 3 and

@@ -46,7 +46,7 @@ local towerIncorrectTrade = function(player, npc, trade)
 end
 
 local towerOnTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
+    if not player:hasKeyItem(xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE) then
         if
             quest:getLocalVar(npc, 'Option') == 1 and
             not player:findItem(xi.item.GRAPNEL) and
@@ -122,14 +122,14 @@ quest.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Nanaa_Mihgo'] = quest:progressEvent(504, 0, xi.ki.SIGNED_ENVELOPE, xi.ki.TENSHODO_ENVELOPE),
+            ['Nanaa_Mihgo'] = quest:progressEvent(504, 0, xi.keyItem.SIGNED_ENVELOPE, xi.keyItem.TENSHODO_ENVELOPE),
 
             onEventFinish =
             {
                 [504] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, { xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE })
+                        npcUtil.giveKeyItem(player, { xi.keyItem.GANG_WHEREABOUTS_NOTE, xi.keyItem.FIRST_FORGED_ENVELOPE, xi.keyItem.SECOND_FORGED_ENVELOPE })
                     end
                 end,
             },
@@ -249,8 +249,8 @@ quest.sections =
 
                 [10026] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.SECOND_FORGED_ENVELOPE)
-                    npcUtil.giveKeyItem(player, xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
+                    player:delKeyItem(xi.keyItem.SECOND_FORGED_ENVELOPE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SECOND_SIGNED_FORGED_ENVELOPE)
                     quest:setVar(player, 'Prog', 7)
                 end,
             },
@@ -297,7 +297,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and
+                        not player:hasKeyItem(xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE) and
                         npcUtil.tradeHasExactly(trade, xi.item.GRAPNEL)
                     then
                         if isNaked(player) then
@@ -345,8 +345,8 @@ quest.sections =
             {
                 [2] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.FIRST_FORGED_ENVELOPE)
-                    npcUtil.giveKeyItem(player, xi.ki.FIRST_SIGNED_FORGED_ENVELOPE)
+                    player:delKeyItem(xi.keyItem.FIRST_FORGED_ENVELOPE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE)
                 end,
             },
         },
@@ -360,12 +360,12 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and
-                        player:hasKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
+                        player:hasKeyItem(xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE) and
+                        player:hasKeyItem(xi.keyItem.SECOND_SIGNED_FORGED_ENVELOPE)
                     then
                         return quest:progressEvent(508)
                     else
-                        return quest:progressEvent(505, 0, xi.ki.GANG_WHEREABOUTS_NOTE)
+                        return quest:progressEvent(505, 0, xi.keyItem.GANG_WHEREABOUTS_NOTE)
                     end
                 end,
             },
@@ -374,9 +374,9 @@ quest.sections =
             {
                 [508] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.GANG_WHEREABOUTS_NOTE)
-                        player:delKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE)
-                        player:delKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
+                        player:delKeyItem(xi.keyItem.GANG_WHEREABOUTS_NOTE)
+                        player:delKeyItem(xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE)
+                        player:delKeyItem(xi.keyItem.SECOND_SIGNED_FORGED_ENVELOPE)
                         player:setLocalVar('Quest[2][71]mustZone', 1)
                     end
                 end,

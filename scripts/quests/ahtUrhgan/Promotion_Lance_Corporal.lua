@@ -36,11 +36,11 @@ local tube =
 
 local tubeKeyItems =
 {
-    [tube.ONE]   = { filledTube = xi.ki.TEST_TUBE_1, emptyTube = xi.ki.EMPTY_TEST_TUBE_1 },
-    [tube.TWO]   = { filledTube = xi.ki.TEST_TUBE_2, emptyTube = xi.ki.EMPTY_TEST_TUBE_2 },
-    [tube.THREE] = { filledTube = xi.ki.TEST_TUBE_3, emptyTube = xi.ki.EMPTY_TEST_TUBE_3 },
-    [tube.FOUR]  = { filledTube = xi.ki.TEST_TUBE_4, emptyTube = xi.ki.EMPTY_TEST_TUBE_4 },
-    [tube.FIVE]  = { filledTube = xi.ki.TEST_TUBE_5, emptyTube = xi.ki.EMPTY_TEST_TUBE_5 },
+    [tube.ONE]   = { filledTube = xi.keyItem.TEST_TUBE_1, emptyTube = xi.keyItem.EMPTY_TEST_TUBE_1 },
+    [tube.TWO]   = { filledTube = xi.keyItem.TEST_TUBE_2, emptyTube = xi.keyItem.EMPTY_TEST_TUBE_2 },
+    [tube.THREE] = { filledTube = xi.keyItem.TEST_TUBE_3, emptyTube = xi.keyItem.EMPTY_TEST_TUBE_3 },
+    [tube.FOUR]  = { filledTube = xi.keyItem.TEST_TUBE_4, emptyTube = xi.keyItem.EMPTY_TEST_TUBE_4 },
+    [tube.FIVE]  = { filledTube = xi.keyItem.TEST_TUBE_5, emptyTube = xi.keyItem.EMPTY_TEST_TUBE_5 },
 }
 
 local fillLevel =
@@ -144,7 +144,7 @@ end
 
 quest.reward =
 {
-    keyItem = xi.ki.LC_WILDCAT_BADGE,
+    keyItem = xi.keyItem.LC_WILDCAT_BADGE,
     title   = xi.title.LANCE_CORPORAL,
 }
 
@@ -185,8 +185,8 @@ quest.sections =
             {
                 [5035] = function(player, csid, option, npc)
                     quest:setVar(player, 'Stage', stage.FIRST_MIX)
-                    npcUtil.giveKeyItem(player, { xi.ki.EMPTY_TEST_TUBE_1, xi.ki.EMPTY_TEST_TUBE_2,
-                        xi.ki.EMPTY_TEST_TUBE_3, xi.ki.EMPTY_TEST_TUBE_4, xi.ki.EMPTY_TEST_TUBE_5 })
+                    npcUtil.giveKeyItem(player, { xi.keyItem.EMPTY_TEST_TUBE_1, xi.keyItem.EMPTY_TEST_TUBE_2,
+                        xi.keyItem.EMPTY_TEST_TUBE_3, xi.keyItem.EMPTY_TEST_TUBE_4, xi.keyItem.EMPTY_TEST_TUBE_5 })
                 end,
             },
         },
@@ -253,7 +253,7 @@ quest.sections =
                         quest:setVar(player, 'Wait', VanadielUniqueDay() + 1)
                         quest:setVar(player, 'Option', remainingTubeContents - startingContents)
 
-                        for keyItem = xi.ki.EMPTY_TEST_TUBE_1, xi.ki.TEST_TUBE_5 do
+                        for keyItem = xi.keyItem.EMPTY_TEST_TUBE_1, xi.keyItem.TEST_TUBE_5 do
                             if player:hasKeyItem(keyItem) then
                                 player:delKeyItem(keyItem)
                             end
@@ -366,7 +366,7 @@ quest.sections =
                     quest:complete(player)
                     quest:messageSpecial(ahturhganID.text.LANCE_CORPORAL)
                     player:setCharVar('AssaultPromotion', 0)
-                    player:delKeyItem(xi.ki.SP_WILDCAT_BADGE)
+                    player:delKeyItem(xi.keyItem.SP_WILDCAT_BADGE)
                 end,
             },
         },

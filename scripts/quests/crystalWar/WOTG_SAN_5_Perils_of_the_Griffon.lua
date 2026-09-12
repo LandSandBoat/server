@@ -92,7 +92,7 @@ quest.sections =
             ['Rholont'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ORCISH_WARMACHINE_BODY) then
+                    if not player:hasKeyItem(xi.keyItem.ORCISH_WARMACHINE_BODY) then
                         return quest:event(636)
                     else
                         return quest:progressEvent(633)
@@ -113,7 +113,7 @@ quest.sections =
             ['qm6'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ORCISH_WARMACHINE_BODY) then
+                    if not player:hasKeyItem(xi.keyItem.ORCISH_WARMACHINE_BODY) then
                         return quest:progressEvent(210)
                     end
                 end,
@@ -122,7 +122,7 @@ quest.sections =
             onEventFinish =
             {
                 [210] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ORCISH_WARMACHINE_BODY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ORCISH_WARMACHINE_BODY)
                 end,
             },
         },

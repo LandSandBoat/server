@@ -27,7 +27,7 @@ local content = BattlefieldMission:new({
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
     return player:hasCompletedMission(player:getNation(), self.mission) or
-        player:hasKeyItem(xi.ki.NEW_FEIYIN_SEAL)
+        player:hasKeyItem(xi.keyItem.NEW_FEIYIN_SEAL)
 end
 
 content.groups =

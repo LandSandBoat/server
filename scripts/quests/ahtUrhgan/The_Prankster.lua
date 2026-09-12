@@ -12,7 +12,7 @@ local ID = zones[xi.zone.BHAFLAU_THICKETS]
 
 quest.reward =
 {
-    keyItem = xi.ki.MAP_OF_CAEDARVA_MIRE,
+    keyItem = xi.keyItem.MAP_OF_CAEDARVA_MIRE,
 }
 
 quest.sections =

@@ -59,9 +59,9 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(183) -- complete
-                    elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    elseif player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(182) -- cont 2
                     else
                         return quest:event(179, player:hasItem(xi.item.TACHI_OF_TRIALS) and 1 or 0) -- cont 1
@@ -86,8 +86,8 @@ quest.sections =
                 [179] = function(player, csid, option, npc)
                     if option == 2 then
                         player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                     elseif not player:hasItem(xi.item.TACHI_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.TACHI_OF_TRIALS)
                     end
@@ -95,14 +95,14 @@ quest.sections =
 
                 [181] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
 
                 [183] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
                         player:addLearnedWeaponskill(xi.wsUnlock.TACHI_KASHA)
                         player:messageSpecial(norgID.text.TACHI_KASHA_LEARNED)
                     end
@@ -117,9 +117,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
-                        return quest:keyItem(xi.ki.ANNALS_OF_TRUTH)
+                        return quest:keyItem(xi.keyItem.ANNALS_OF_TRUTH)
                     elseif
-                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
                         npcUtil.popFromQM(player, npc, kuftalTunnelID.mob.KETTENKAEFER, { hide = 0 })
                     then
@@ -131,7 +131,7 @@ quest.sections =
             ['Kettenkaefer'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         player:setLocalVar('killed_wsnm', 1)
                     end
                 end,

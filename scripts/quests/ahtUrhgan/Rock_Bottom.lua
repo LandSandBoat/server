@@ -75,10 +75,10 @@ quest.sections =
                 [9] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        if player:hasKeyItem(xi.ki.MAP_OF_MOUNT_ZHAYOLM) then
+                        if player:hasKeyItem(xi.keyItem.MAP_OF_MOUNT_ZHAYOLM) then
                             npcUtil.giveCurrency(player, 'gil', 2000)
                         else
-                            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_MOUNT_ZHAYOLM)
+                            npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_MOUNT_ZHAYOLM)
                         end
                     end
                 end,

@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION, { item = 14099, fame = 20, fameArea = xi.fameArea.WINDURST, var = 'unbridledPassion' })
     then
         -- complete quest RNG AF3
-        player:delKeyItem(xi.ki.KOHS_LETTER)
+        player:delKeyItem(xi.keyItem.KOHS_LETTER)
     end
 end
 

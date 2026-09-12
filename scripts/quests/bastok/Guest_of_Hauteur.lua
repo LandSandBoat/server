@@ -50,7 +50,7 @@ quest.sections =
             ['Powhatan'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.LETTER_FROM_DOMIEN) then
+                    if not player:hasKeyItem(xi.keyItem.LETTER_FROM_DOMIEN) then
                         return quest:event(56)
                     else
                         return quest:progressEvent(58)
@@ -64,7 +64,7 @@ quest.sections =
                     local mainSlot = player:getEquipID(xi.slot.MAIN)
 
                     if
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_DOMIEN) and
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_DOMIEN) and
                         (mainSlot == xi.item.MAUL or
                         mainSlot == xi.item.REPLICA_MAUL)
                     then
@@ -76,12 +76,12 @@ quest.sections =
             onEventFinish =
             {
                 [57] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_DOMIEN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_DOMIEN)
                 end,
 
                 [58] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LETTER_FROM_DOMIEN)
+                        player:delKeyItem(xi.keyItem.LETTER_FROM_DOMIEN)
                     end
                 end,
             },

@@ -68,7 +68,7 @@ quest.sections =
             ['blank_divine_might'] =
             {
                 onTrigger = function(player, npc)
-                    local hasMoonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+                    local hasMoonOre = player:hasKeyItem(xi.keyItem.MOONLIGHT_ORE)
 
                     if quest:getVar(player, 'Prog') == 0 then
                         if not hasMoonOre then
@@ -123,7 +123,7 @@ quest.sections =
                         if npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT }) then
                             return quest:progressEvent(7, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK)
                         elseif
-                            not player:hasKeyItem(xi.ki.MOONLIGHT_ORE) and
+                            not player:hasKeyItem(xi.keyItem.MOONLIGHT_ORE) and
                             npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_LIGHT_ORE)
                         then
                             return quest:progressEvent(8)
@@ -141,7 +141,7 @@ quest.sections =
                 end,
 
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MOONLIGHT_ORE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MOONLIGHT_ORE)
                     player:confirmTrade()
                 end,
             },
@@ -154,7 +154,7 @@ quest.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.DIVINE_MIGHT and
-                        player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+                        player:hasKeyItem(xi.keyItem.MOONLIGHT_ORE)
                     then
                         quest:setVar(player, 'Prog', 1)
                     end

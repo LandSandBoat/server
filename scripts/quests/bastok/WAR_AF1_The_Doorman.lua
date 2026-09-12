@@ -72,13 +72,13 @@ quest.sections =
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL) then
+                    if player:hasKeyItem(xi.keyItem.SWORD_GRIP_MATERIAL) then
                         player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
                         return
                     end
 
                     if quest:getLocalVar(player, 'nmKilled') == 3 then
-                        npcUtil.giveKeyItem(player, xi.ki.SWORD_GRIP_MATERIAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SWORD_GRIP_MATERIAL)
                         return
                     end
 
@@ -123,7 +123,7 @@ quest.sections =
             ['Phara'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL) then
+                    if player:hasKeyItem(xi.keyItem.SWORD_GRIP_MATERIAL) then
                         return quest:progressEvent(152)
                     elseif
                         quest:getVar(player, 'Prog') == 1 and
@@ -137,14 +137,14 @@ quest.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SWORD_GRIP_MATERIAL)
+                    player:delKeyItem(xi.keyItem.SWORD_GRIP_MATERIAL)
 
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
                 [153] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.YASINS_SWORD)
+                    npcUtil.giveKeyItem(player, xi.keyItem.YASINS_SWORD)
 
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -156,7 +156,7 @@ quest.sections =
             ['Naji'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.YASINS_SWORD) then
+                    if player:hasKeyItem(xi.keyItem.YASINS_SWORD) then
                         return quest:progressEvent(750)
                     end
                 end,
@@ -166,7 +166,7 @@ quest.sections =
             {
                 [750] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.YASINS_SWORD)
+                        player:delKeyItem(xi.keyItem.YASINS_SWORD)
                     end
                 end,
             },

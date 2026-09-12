@@ -34,7 +34,7 @@ quest.sections =
             {
                 [496] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_TENSHODO)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_THE_TENSHODO)
                 end,
             },
         },
@@ -50,9 +50,9 @@ quest.sections =
             ['Harnek'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LETTER_FROM_THE_TENSHODO) then
-                        return quest:progressEvent(10021, 0, xi.ki.LETTER_FROM_THE_TENSHODO, xi.ki.TENSHODO_ENVELOPE)
-                    elseif player:hasKeyItem(xi.ki.SIGNED_ENVELOPE) then
+                    if player:hasKeyItem(xi.keyItem.LETTER_FROM_THE_TENSHODO) then
+                        return quest:progressEvent(10021, 0, xi.keyItem.LETTER_FROM_THE_TENSHODO, xi.keyItem.TENSHODO_ENVELOPE)
+                    elseif player:hasKeyItem(xi.keyItem.SIGNED_ENVELOPE) then
                         return quest:progressEvent(10022)
                     end
                 end,
@@ -61,14 +61,14 @@ quest.sections =
             onEventFinish =
             {
                 [10021] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LETTER_FROM_THE_TENSHODO)
-                    npcUtil.giveKeyItem(player, xi.ki.TENSHODO_ENVELOPE)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_THE_TENSHODO)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TENSHODO_ENVELOPE)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
                 [10022] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.SIGNED_ENVELOPE)
+                        player:delKeyItem(xi.keyItem.SIGNED_ENVELOPE)
                     end
                 end,
             },
@@ -83,7 +83,7 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.item.BOWL_OF_QUADAV_STEW) and
                         quest:getVar(player, 'Prog') == 2
                     then
-                        return quest:progressEvent(10004, 0, xi.ki.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
+                        return quest:progressEvent(10004, 0, xi.keyItem.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
                     end
                 end,
 
@@ -91,7 +91,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        return quest:progressEvent(10002, 0, xi.ki.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
+                        return quest:progressEvent(10002, 0, xi.keyItem.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
                     elseif questProgress == 2 then
                         return quest:progressEvent(10003, 0, 0, xi.item.BOWL_OF_QUADAV_STEW)
                     end
@@ -106,8 +106,8 @@ quest.sections =
 
                 [10004] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.TENSHODO_ENVELOPE)
-                    npcUtil.giveKeyItem(player, xi.ki.SIGNED_ENVELOPE)
+                    player:delKeyItem(xi.keyItem.TENSHODO_ENVELOPE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SIGNED_ENVELOPE)
                     quest:setVar(player, 'Prog', 3)
                 end,
             },

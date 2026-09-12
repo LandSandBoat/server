@@ -67,7 +67,7 @@ quest.sections =
             ['Hae_Jakhya'] =
             {
                 onTrigger = function(player, npc)
-                    local hasBookKeyItem = player:hasKeyItem(xi.ki.A_SONG_OF_LOVE)
+                    local hasBookKeyItem = player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE)
 
                     if
                         not hasBookKeyItem and
@@ -75,7 +75,7 @@ quest.sections =
                     then
                         return quest:progressEvent(611)
                     elseif hasBookKeyItem then
-                        return quest:progressEvent(612, 0, xi.ki.A_SONG_OF_LOVE)
+                        return quest:progressEvent(612, 0, xi.keyItem.A_SONG_OF_LOVE)
                     end
                 end,
             },
@@ -83,7 +83,7 @@ quest.sections =
             onEventFinish =
             {
                 [611] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.A_SONG_OF_LOVE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.A_SONG_OF_LOVE)
                 end,
             },
         },
@@ -104,15 +104,15 @@ quest.sections =
             ['Furakku-Norakku'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
-                        return quest:progressEvent(404, 0, xi.ki.A_SONG_OF_LOVE)
-                    elseif not player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+                    if not player:hasKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
+                        return quest:progressEvent(404, 0, xi.keyItem.A_SONG_OF_LOVE)
+                    elseif not player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE) then
                         if quest:getVar(player, 'Prog') == 1 then
                             return quest:progressEvent(409)
-                        elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
+                        elseif player:hasKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
                             return quest:progressEvent(405, 0, 126)
                         end
-                    elseif player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+                    elseif player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE) then
                         return quest:progressEvent(410)
                     end
                 end,
@@ -121,13 +121,13 @@ quest.sections =
             onEventFinish =
             {
                 [404] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
                 end,
 
                 [410] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
-                        player:delKeyItem(xi.ki.A_SONG_OF_LOVE)
+                        player:delKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
+                        player:delKeyItem(xi.keyItem.A_SONG_OF_LOVE)
                         player:setLocalVar('Quest[2][12]mustZone', 1)
                     end
                 end,
@@ -139,7 +139,7 @@ quest.sections =
             ['An_Polaali'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+                    if player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE) then
                         return quest:progressEvent(407)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(404)
@@ -150,8 +150,8 @@ quest.sections =
             ['An_Shanaa'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
-                        return quest:progressEvent(408, 0, xi.ki.A_SONG_OF_LOVE)
+                    if player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE) then
+                        return quest:progressEvent(408, 0, xi.keyItem.A_SONG_OF_LOVE)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(405)
                     end
@@ -161,12 +161,12 @@ quest.sections =
             ['Hae_Jakkya'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+                    if player:hasKeyItem(xi.keyItem.A_SONG_OF_LOVE) then
                         return quest:progressEvent(406)
                     elseif quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(403, 0, xi.ki.A_SONG_OF_LOVE)
-                    elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
-                        return quest:progressEvent(402, 0, xi.ki.A_SONG_OF_LOVE)
+                        return quest:progressEvent(403, 0, xi.keyItem.A_SONG_OF_LOVE)
+                    elseif player:hasKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
+                        return quest:progressEvent(402, 0, xi.keyItem.A_SONG_OF_LOVE)
                     end
                 end,
             },

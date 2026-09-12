@@ -10,44 +10,44 @@ xi.assault = xi.assault or {}
 -- Ordered list of all assault orders key items, used for hasOrders checks
 xi.assault.assaultOrders =
 {
-    xi.ki.LEUJAOAM_ASSAULT_ORDERS,
-    xi.ki.MAMOOL_JA_ASSAULT_ORDERS,
-    xi.ki.LEBROS_ASSAULT_ORDERS,
-    xi.ki.PERIQIA_ASSAULT_ORDERS,
-    xi.ki.ILRUSI_ASSAULT_ORDERS,
-    xi.ki.NYZUL_ISLE_ASSAULT_ORDERS,
+    xi.keyItem.LEUJAOAM_ASSAULT_ORDERS,
+    xi.keyItem.MAMOOL_JA_ASSAULT_ORDERS,
+    xi.keyItem.LEBROS_ASSAULT_ORDERS,
+    xi.keyItem.PERIQIA_ASSAULT_ORDERS,
+    xi.keyItem.ILRUSI_ASSAULT_ORDERS,
+    xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS,
 }
 
 xi.assault.areaData =
 {
     [xi.assault.assaultArea.LEUJAOAM_SANCTUM] =
     {
-        orders  = xi.ki.LEUJAOAM_ASSAULT_ORDERS,
-        map     = xi.ki.MAP_OF_LEUJAOAM_SANCTUM,
+        orders  = xi.keyItem.LEUJAOAM_ASSAULT_ORDERS,
+        map     = xi.keyItem.MAP_OF_LEUJAOAM_SANCTUM,
         firefly = xi.item.CAGE_OF_AZOUPH_FIREFLIES,
     },
     [xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS] =
     {
-        orders  = xi.ki.MAMOOL_JA_ASSAULT_ORDERS,
-        map     = xi.ki.MAP_OF_THE_TRAINING_GROUNDS,
+        orders  = xi.keyItem.MAMOOL_JA_ASSAULT_ORDERS,
+        map     = xi.keyItem.MAP_OF_THE_TRAINING_GROUNDS,
         firefly = xi.item.CAGE_OF_BHAFLAU_FIREFLIES,
     },
     [xi.assault.assaultArea.LEBROS_CAVERN] =
     {
-        orders  = xi.ki.LEBROS_ASSAULT_ORDERS,
-        map     = xi.ki.MAP_OF_LEBROS_CAVERN,
+        orders  = xi.keyItem.LEBROS_ASSAULT_ORDERS,
+        map     = xi.keyItem.MAP_OF_LEBROS_CAVERN,
         firefly = xi.item.CAGE_OF_ZHAYOLM_FIREFLIES,
     },
     [xi.assault.assaultArea.PERIQIA] =
     {
-        orders  = xi.ki.PERIQIA_ASSAULT_ORDERS,
-        map     = xi.ki.MAP_OF_PERIQIA,
+        orders  = xi.keyItem.PERIQIA_ASSAULT_ORDERS,
+        map     = xi.keyItem.MAP_OF_PERIQIA,
         firefly = xi.item.CAGE_OF_DVUCCA_FIREFLIES,
     },
     [xi.assault.assaultArea.ILRUSI_ATOLL] =
     {
-        orders  = xi.ki.ILRUSI_ASSAULT_ORDERS,
-        map     = xi.ki.MAP_OF_ILRUSI_ATOLL,
+        orders  = xi.keyItem.ILRUSI_ASSAULT_ORDERS,
+        map     = xi.keyItem.MAP_OF_ILRUSI_ATOLL,
         firefly = xi.item.CAGE_OF_REEF_FIREFLIES,
     },
 }

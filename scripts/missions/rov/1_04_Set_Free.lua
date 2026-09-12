@@ -16,7 +16,7 @@ mission.reward =
 
 local handleTradeEventFinish = function(player, csid, option, npc)
     if not player:hasJob(0) then
-        npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
+        npcUtil.giveKeyItem(player, xi.keyItem.GILGAMESHS_INTRODUCTORY_LETTER)
     else
         if not npcUtil.giveItem(player, xi.item.COPPER_AMAN_VOUCHER) then
             -- Do not complete mission or confirm trade if the player is not

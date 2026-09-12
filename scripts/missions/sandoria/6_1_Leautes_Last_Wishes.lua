@@ -19,7 +19,7 @@ local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.L
 mission.reward =
 {
     rankPoints = 600,
-    keyItem    = xi.ki.PIECE_OF_PAPER,
+    keyItem    = xi.keyItem.PIECE_OF_PAPER,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -112,7 +112,7 @@ mission.sections =
                 [2] = function(player, triggerArea)
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
-                        player:hasKeyItem(xi.ki.DREAMROSE)
+                        player:hasKeyItem(xi.keyItem.DREAMROSE)
                     then
                         return mission:progressEvent(111)
                     end
@@ -135,7 +135,7 @@ mission.sections =
 
                 [111] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.DREAMROSE)
+                        player:delKeyItem(xi.keyItem.DREAMROSE)
                     end
                 end,
             },
@@ -154,7 +154,7 @@ mission.sections =
                         if mission:getVar(player, 'Progress') == 1 then
                             mission:setVar(player, 'Progress', 0)
                             player:setMissionStatus(mission.areaId, 3)
-                            return mission:keyItem(xi.ki.DREAMROSE)
+                            return mission:keyItem(xi.keyItem.DREAMROSE)
                         else
                             SpawnMob(westernAltepaID.mob.SABOTENDER_ENAMORADO):updateClaim(player)
                             return mission:messageSpecial(westernAltepaID.text.FEEL_SOMETHING_PRICKLY)

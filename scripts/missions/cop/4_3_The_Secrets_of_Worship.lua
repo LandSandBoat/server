@@ -17,7 +17,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS
 local profQmOnTrigger = function(player, npc)
     if
         mission:getVar(player, 'Status') == 3 and
-        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)
+        not player:hasKeyItem(xi.keyItem.RELIQUIARIUM_KEY)
     then
         local mariselle = GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE)
 
@@ -27,7 +27,7 @@ local profQmOnTrigger = function(player, npc)
 
         -- Has already fought Mariselle.
         if mission:getLocalVar(player, 'hasKilledMariselle') == 1 then
-            npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
+            npcUtil.giveKeyItem(player, xi.keyItem.RELIQUIARIUM_KEY)
             return mission:noAction()
 
         elseif npc:getLocalVar('hasProfessorMariselle') == 1 then
@@ -139,8 +139,8 @@ mission.sections =
 
                     if player:getXPos() > 45 then
                         if missionStatus == 2 then
-                            return mission:progressCutscene(6, 0, xi.ki.RELIQUIARIUM_KEY)
-                        elseif missionStatus == 3 and player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) then
+                            return mission:progressCutscene(6, 0, xi.keyItem.RELIQUIARIUM_KEY)
+                        elseif missionStatus == 3 and player:hasKeyItem(xi.keyItem.RELIQUIARIUM_KEY) then
                             return mission:progressCutscene(5)
                         end
                     else
@@ -189,7 +189,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getXPos() > 45 then
-                        if player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) then
+                        if player:hasKeyItem(xi.keyItem.RELIQUIARIUM_KEY) then
                             player:startCutscene(110)
                         end
                     else

@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     -- DO NOT GO INTO THE LIGHT
     if
         dngitl == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.INVENTORS_COALITION_PICKAXE)
+        player:hasKeyItem(xi.keyItem.INVENTORS_COALITION_PICKAXE)
     then
         player:startEvent(5077)
 
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- DO NOT GO INTO THE LIGHT
     if csid == 5076 then
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.INVENTORS_COALITION_PICKAXE)
+        npcUtil.giveKeyItem(player, xi.keyItem.INVENTORS_COALITION_PICKAXE)
         player:setCharVar('DNGITL_Status', 0)
 
     -- VEGETABLE VEGETABLE CRISIS

@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     local feathersByTier = xi.einherjar.getFeathers(player)
 
     -- Give PC the Mark of the Einherjar if they meet any condition
-    if not player:hasKeyItem(xi.ki.MARK_OF_THE_EINHERJAR) then
+    if not player:hasKeyItem(xi.keyItem.MARK_OF_THE_EINHERJAR) then
         -- 1. Player has the ELITE_EINHERJAR title
         if player:hasTitle(xi.title.ELITE_EINHERJAR) then
             xi.einherjar.giveMark(player)

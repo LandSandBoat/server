@@ -48,12 +48,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('MissionaryManVar', 1)
     elseif csid == 139 then
         player:setCharVar('MissionaryManVar', 2)
-        npcUtil.giveKeyItem(player, xi.ki.RAUTEINOTS_PARCEL)
+        npcUtil.giveKeyItem(player, xi.keyItem.RAUTEINOTS_PARCEL)
         player:tradeComplete()
     elseif csid == 141 then
         if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_YHOAT) then
             player:setCharVar('MissionaryManVar', 0)
-            player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
+            player:delKeyItem(xi.keyItem.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end

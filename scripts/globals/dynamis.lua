@@ -34,7 +34,7 @@ local entryInfo =
         csBeat   = 698,
         csMenu   = 961,
         beatVar  = 'DynaSandoria_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
+        beatKI   = xi.keyItem.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = { 161.838, -2.000, 161.673, 93, 185 },
     },
 
@@ -46,7 +46,7 @@ local entryInfo =
         csBeat   = 215,
         csMenu   = 597,
         beatVar  = 'DynaBastok_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_EYEGLASS,
+        beatKI   = xi.keyItem.HYDRA_CORPS_EYEGLASS,
         enterPos = { 116.482, 0.994, -72.121, 128, 186 },
     },
 
@@ -58,7 +58,7 @@ local entryInfo =
         csBeat   = 465,
         csMenu   = 513,
         beatVar  = 'DynaWindurst_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_LANTERN,
+        beatKI   = xi.keyItem.HYDRA_CORPS_LANTERN,
         enterPos = { -221.988, 1.000, -120.184, 0, 187 },
     },
 
@@ -70,7 +70,7 @@ local entryInfo =
         csBeat   = 10026,
         csMenu   = 10176,
         beatVar  = 'DynaJeuno_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
+        beatKI   = xi.keyItem.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = { 48.930, 10.002, -71.032, 195, 188 },
     },
 
@@ -81,13 +81,13 @@ local entryInfo =
         csBeat   = 134,
         csMenu   = 229,
         beatVar  = 'DynaBeaucedine_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_INSIGNIA,
+        beatKI   = xi.keyItem.HYDRA_CORPS_INSIGNIA,
         enterPos = { -284.751, -39.923, -422.948, 235, 134 },
         reqs     = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
-                player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
-                player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and
-                player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP)
+            return player:hasKeyItem(xi.keyItem.HYDRA_CORPS_COMMAND_SCEPTER) and
+                player:hasKeyItem(xi.keyItem.HYDRA_CORPS_EYEGLASS) and
+                player:hasKeyItem(xi.keyItem.HYDRA_CORPS_LANTERN) and
+                player:hasKeyItem(xi.keyItem.HYDRA_CORPS_TACTICAL_MAP)
         end,
     },
 
@@ -98,10 +98,10 @@ local entryInfo =
         csBeat   = 32,
         csMenu   = 205,
         beatVar  = 'DynaXarcabard_Win',
-        beatKI   = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
+        beatKI   = xi.keyItem.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = { 569.312, -0.098, -270.158, 90, 135 },
         reqs     = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA)
+            return player:hasKeyItem(xi.keyItem.HYDRA_CORPS_INSIGNIA)
         end,
     },
 
@@ -113,7 +113,7 @@ local entryInfo =
         csBeat   = 39,
         csMenu   = 58,
         beatVar  = 'DynaValkurm_Win',
-        beatKI   = xi.ki.DYNAMIS_VALKURM_SLIVER,
+        beatKI   = xi.keyItem.DYNAMIS_VALKURM_SLIVER,
         enterPos = { 100, -8, 131, 47, 39 },
         reqs = function(player)
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -128,7 +128,7 @@ local entryInfo =
         csBeat   = 46,
         csMenu   = 64,
         beatVar  = 'DynaBuburimu_Win',
-        beatKI   = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
+        beatKI   = xi.keyItem.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = { 155, -1, -169, 170, 40 },
         reqs = function(player)
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -143,7 +143,7 @@ local entryInfo =
         csBeat   = 28,
         csMenu   = 48,
         beatVar  = 'DynaQufim_Win',
-        beatKI   = xi.ki.DYNAMIS_QUFIM_SLIVER,
+        beatKI   = xi.keyItem.DYNAMIS_QUFIM_SLIVER,
         enterPos = { -19, -17, 104, 253, 41 },
         reqs = function(player)
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -160,12 +160,12 @@ local entryInfo =
         csBeat   = 615,
         csMenu   = 624,
         beatVar  = 'DynaTavnazia_Win',
-        beatKI   = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
+        beatKI   = xi.keyItem.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = { 0.1, -7, -21, 190, 42 },
         reqs     = function(player)
-            return player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
-                player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
-                player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER)
+            return player:hasKeyItem(xi.keyItem.DYNAMIS_BUBURIMU_SLIVER) and
+                player:hasKeyItem(xi.keyItem.DYNAMIS_QUFIM_SLIVER) and
+                player:hasKeyItem(xi.keyItem.DYNAMIS_VALKURM_SLIVER)
         end,
     },
 }
@@ -183,7 +183,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_SAN_DORIA] =
     {
         beatVar   = 'DynaSandoria_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
+        beatKI    = xi.keyItem.HYDRA_CORPS_COMMAND_SCEPTER,
         beatTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
         entryPos  = { 161.838, -2.000, 161.673, 93 },
         ejectPos  = { 161.000, -2.000, 161.000, 94, 230 },
@@ -192,7 +192,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_BASTOK] =
     {
         beatVar   = 'DynaBastok_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_EYEGLASS,
+        beatKI    = xi.keyItem.HYDRA_CORPS_EYEGLASS,
         beatTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
         entryPos  = { 116.482, 0.994, -72.121, 128 },
         ejectPos  = { 112.000, 0.994, -72.000, 127, 234 },
@@ -201,7 +201,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_WINDURST] =
     {
         beatVar   = 'DynaWindurst_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_LANTERN,
+        beatKI    = xi.keyItem.HYDRA_CORPS_LANTERN,
         beatTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
         entryPos  = { -221.988, 1.000, -120.184, 0 },
         ejectPos  = { -217.000, 1.000, -119.000, 94, 239 },
@@ -210,7 +210,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_JEUNO] =
     {
         beatVar   = 'DynaJeuno_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
+        beatKI    = xi.keyItem.HYDRA_CORPS_TACTICAL_MAP,
         beatTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
         entryPos  = { 48.930, 10.002, -71.032, 195 },
         ejectPos  = { 48.930, 10.002, -71.032, 195, 243 },
@@ -219,7 +219,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         beatVar   = 'DynaBeaucedine_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_INSIGNIA,
+        beatKI    = xi.keyItem.HYDRA_CORPS_INSIGNIA,
         beatTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
         entryPos  = { -284.751, -39.923, -422.948, 235 },
         ejectPos  = { -284.751, -39.923, -422.948, 235, 111 },
@@ -228,7 +228,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_XARCABARD] =
     {
         beatVar   = 'DynaXarcabard_Win',
-        beatKI    = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
+        beatKI    = xi.keyItem.HYDRA_CORPS_BATTLE_STANDARD,
         beatTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
         entryPos  = { 569.312, -0.098, -270.158, 90 },
         ejectPos  = { 569.312, -0.098, -270.158, 90, 112 },
@@ -237,7 +237,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_VALKURM] =
     {
         beatVar   = 'DynaValkurm_Win',
-        beatKI    = xi.ki.DYNAMIS_VALKURM_SLIVER,
+        beatKI    = xi.keyItem.DYNAMIS_VALKURM_SLIVER,
         beatTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
         entryPos  = { 100, -8, 131, 47 },
         ejectPos  = { 119, -9, 131, 52, 103 },
@@ -246,7 +246,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_BUBURIMU] =
     {
         beatVar   = 'DynaBuburimu_Win',
-        beatKI    = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
+        beatKI    = xi.keyItem.DYNAMIS_BUBURIMU_SLIVER,
         beatTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
         entryPos  = { 155, -1, -169, 170 },
         ejectPos  = { 154, -1, -170, 190, 118 },
@@ -255,7 +255,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_QUFIM] =
     {
         beatVar   = 'DynaQufim_Win',
-        beatKI    = xi.ki.DYNAMIS_QUFIM_SLIVER,
+        beatKI    = xi.keyItem.DYNAMIS_QUFIM_SLIVER,
         beatTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
         entryPos  = { -19, -17, 104, 253 },
         ejectPos  = { 18, -19, 162, 240, 126 },
@@ -264,7 +264,7 @@ local dynaInfo =
     [xi.zone.DYNAMIS_TAVNAZIA] =
     {
         beatVar   = 'DynaTavnazia_Win',
-        beatKI    = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
+        beatKI    = xi.keyItem.DYNAMIS_TAVNAZIA_SLIVER,
         beatTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
         entryPos  = { 0.1, -7, -21, 190 },
         ejectPos  = { 0, -7, -23, 195, 26 },
@@ -277,7 +277,7 @@ local dynaInfo =
 
 local function arg3(player, bit)
     local csVar  = player:getCharVar('Dynamis_Status')
-    local timeKI = player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) and 65536 or 0
+    local timeKI = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) and 65536 or 0
 
     if csVar == 0 then
         return 1 + timeKI -- first time visiting any dynamis zone
@@ -299,7 +299,7 @@ local function handleEntryTime(player)
 
     if
         (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
-        not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
+        not player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE)
     then
         player:setCharVar('dynaWaitxDay', realDay)
     end
@@ -328,7 +328,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
     elseif
-        player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and
+        player:hasKeyItem(xi.keyItem.PRISMATIC_HOURGLASS) and
         player:getMainLvl() < xi.settings.main.DYNA_LEVEL_MIN
     then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
@@ -341,14 +341,14 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     if
         not tavnaziaFirst and
         player:getMainLvl() >= xi.settings.main.DYNA_LEVEL_MIN and
-        (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna)
+        (player:hasKeyItem(xi.keyItem.PRISMATIC_HOURGLASS) or unlockingDyna)
     then
 
         -- shrouded sand cutscene
         if
             unlockingDyna and
             info.csVial and
-            not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)
+            not player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND)
         then
             player:startEvent(info.csVial)
 
@@ -356,7 +356,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         elseif player:getCharVar(info.beatVar) == 1 then
             -- NOTE: The hourglass and shrouded sand parameter is only required for Beaucedine, but has no
             -- effect on the others.
-            player:startEvent(info.csBeat, info.beatKI, 0, xi.ki.PRISMATIC_HOURGLASS , xi.ki.VIAL_OF_SHROUDED_SAND)
+            player:startEvent(info.csBeat, info.beatKI, 0, xi.keyItem.PRISMATIC_HOURGLASS , xi.keyItem.VIAL_OF_SHROUDED_SAND)
 
         -- dynamis entry
         elseif not info.reqs or info.reqs(player) then
@@ -366,7 +366,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
 
             if (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
                 -- params: bit, cutscene option, Prismatic Hourglass KI, sJob option, junk, Shrouded Sand KI, Timeless Hourglass item ID, Perpetual Hourglass item ID
-                player:startEvent(info.csMenu, info.csBit, arg3(player, info.csBit), xi.ki.PRISMATIC_HOURGLASS, sjobOption, 0, xi.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
+                player:startEvent(info.csMenu, info.csBit, arg3(player, info.csBit), xi.keyItem.PRISMATIC_HOURGLASS, sjobOption, 0, xi.keyItem.VIAL_OF_SHROUDED_SAND, 4236, 4237)
             else
                 local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
                 player:messageSpecial(ID.text.YOU_CANNOT_ENTER_DYNAMIS, dayRemaining, info.csBit)
@@ -381,7 +381,7 @@ xi.dynamis.entryNpcOnEventFinish = function(player, csid, option, npc)
 
     -- shrouded sand cutscene
     if info.csVial and csid == info.csVial then
-        npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
+        npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_SHROUDED_SAND)
         player:setCharVar('Dynamis_Status', utils.mask.setBit(dynaMask, 0, false))
 
     -- victory cutscene
@@ -462,7 +462,7 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
 
         player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
         player:timer(5500, function(playerArg)
-            playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS)
+            playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.keyItem.PRISMATIC_HOURGLASS)
         end)
 
         player:setCharVar('Dynamis_Entry', 0)
@@ -768,16 +768,16 @@ end
 
 local dynamisMapKI =
 {
-    xi.ki.MAP_OF_DYNAMIS_SAN_DORIA,
-    xi.ki.MAP_OF_DYNAMIS_BASTOK,
-    xi.ki.MAP_OF_DYNAMIS_WINDURST,
-    xi.ki.MAP_OF_DYNAMIS_JEUNO,
-    xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE,
-    xi.ki.MAP_OF_DYNAMIS_XARCABARD,
-    xi.ki.MAP_OF_DYNAMIS_VALKURM,
-    xi.ki.MAP_OF_DYNAMIS_BUBURIMU,
-    xi.ki.MAP_OF_DYNAMIS_QUFIM,
-    xi.ki.MAP_OF_DYNAMIS_TAVNAZIA,
+    xi.keyItem.MAP_OF_DYNAMIS_SAN_DORIA,
+    xi.keyItem.MAP_OF_DYNAMIS_BASTOK,
+    xi.keyItem.MAP_OF_DYNAMIS_WINDURST,
+    xi.keyItem.MAP_OF_DYNAMIS_JEUNO,
+    xi.keyItem.MAP_OF_DYNAMIS_BEAUCEDINE,
+    xi.keyItem.MAP_OF_DYNAMIS_XARCABARD,
+    xi.keyItem.MAP_OF_DYNAMIS_VALKURM,
+    xi.keyItem.MAP_OF_DYNAMIS_BUBURIMU,
+    xi.keyItem.MAP_OF_DYNAMIS_QUFIM,
+    xi.keyItem.MAP_OF_DYNAMIS_TAVNAZIA,
 }
 
 xi.dynamis.getDynamisMapList = function(player)
@@ -796,7 +796,7 @@ end
 local function getExtensions(player)
     local count = 0
 
-    for i = xi.ki.CRIMSON_GRANULES_OF_TIME, xi.ki.OBSIDIAN_GRANULES_OF_TIME do
+    for i = xi.keyItem.CRIMSON_GRANULES_OF_TIME, xi.keyItem.OBSIDIAN_GRANULES_OF_TIME do
         if player:hasKeyItem(i) then
             count = count + 1
         end
@@ -907,16 +907,16 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCLookup =
 
 xi.dynamis.mapShopCosts =
 {
-    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]  = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
-    [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
-    [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
-    [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+    [xi.keyItem.MAP_OF_DYNAMIS_SAN_DORIA]  = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+    [xi.keyItem.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+    [xi.keyItem.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+    [xi.keyItem.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
 
 xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
@@ -932,12 +932,12 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
     -- Zero this out, just in case
     player:setLocalVar('currencyExchange', 0)
 
-    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+    if player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
         if
             gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and
             count == 1 and
-            not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)
+            not player:hasKeyItem(xi.keyItem.PRISMATIC_HOURGLASS)
         then
             player:startEvent(baseCs + 4)
 
@@ -994,7 +994,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrigger = function(player, npc)
     local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
     local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
 
-    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+    if player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND) then
         player:startEvent(baseCs + 3, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.main.PRISMATIC_HOURGLASS_COST, xi.item.TIMELESS_HOURGLASS, xi.settings.main.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(baseCs + 0)
@@ -1054,7 +1054,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
     -- bought prismatic hourglass
     if csid == baseCs + 4 then
         player:tradeComplete()
-        npcUtil.giveKeyItem(player, xi.ki.PRISMATIC_HOURGLASS)
+        npcUtil.giveKeyItem(player, xi.keyItem.PRISMATIC_HOURGLASS)
 
     -- refund timeless hourglass
     elseif csid == baseCs + 13 then

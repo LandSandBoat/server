@@ -9,7 +9,7 @@ local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.MERIPHATAUD_GATE_CRYSTAL) then
+    if not player:hasKeyItem(xi.keyItem.MERIPHATAUD_GATE_CRYSTAL) then
         player:startEvent(1)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE)
@@ -18,7 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.MERIPHATAUD_GATE_CRYSTAL)
+        npcUtil.giveKeyItem(player, xi.keyItem.MERIPHATAUD_GATE_CRYSTAL)
     end
 end
 

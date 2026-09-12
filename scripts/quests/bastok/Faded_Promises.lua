@@ -85,7 +85,7 @@ quest.sections =
 
                 [805] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.DIARY_OF_MUKUNDA)
+                        player:delKeyItem(xi.keyItem.DIARY_OF_MUKUNDA)
                     end
                 end,
             },
@@ -113,7 +113,7 @@ quest.sections =
             ['Kagetora'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA) then
+                    if player:hasKeyItem(xi.keyItem.DIARY_OF_MUKUNDA) then
                         return quest:progressEvent(296)
                     end
                 end,

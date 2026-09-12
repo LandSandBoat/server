@@ -118,7 +118,7 @@ mission.sections =
             {
                 [176] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_PIECE_OF_WOOD)
+                        player:delKeyItem(xi.keyItem.OLD_PIECE_OF_WOOD)
                     end
                 end,
             },
@@ -245,7 +245,7 @@ mission.sections =
 
                 [13] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
-                    npcUtil.giveKeyItem(player, xi.ki.OLD_PIECE_OF_WOOD)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OLD_PIECE_OF_WOOD)
                 end,
             },
         },

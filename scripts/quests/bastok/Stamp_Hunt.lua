@@ -43,7 +43,7 @@ quest.sections =
             onEventFinish =
             {
                 [225] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.STAMP_SHEET) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.STAMP_SHEET) then
                         quest:begin(player)
                     end
                 end,
@@ -79,7 +79,7 @@ quest.sections =
             {
                 [226] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.STAMP_SHEET)
+                        player:delKeyItem(xi.keyItem.STAMP_SHEET)
                     end
                 end,
 

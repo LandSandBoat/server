@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE
 
 quest.reward =
 {
-    keyItem = { xi.ki.GRIMOIRE, xi.ki.JOB_GESTURE_SCHOLAR },
+    keyItem = { xi.keyItem.GRIMOIRE, xi.keyItem.JOB_GESTURE_SCHOLAR },
     title   = xi.title.SCHULTZ_SCHOLAR,
 }
 

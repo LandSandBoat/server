@@ -150,7 +150,7 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.SAVE_THE_CHILDREN then
-                        npcUtil.giveKeyItem(player, xi.ki.ORCISH_HUT_KEY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ORCISH_HUT_KEY)
                         player:setTitle(xi.title.FODDERCHIEF_FLAYER)
                         player:setMissionStatus(mission.areaId, 3)
                     end
@@ -162,7 +162,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 3 and
-                player:hasKeyItem(xi.ki.ORCISH_HUT_KEY)
+                player:hasKeyItem(xi.keyItem.ORCISH_HUT_KEY)
         end,
 
         [xi.zone.GHELSBA_OUTPOST] =
@@ -181,12 +181,12 @@ mission.sections =
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
+                    player:delKeyItem(xi.keyItem.ORCISH_HUT_KEY)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
 
                 [55] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
+                    player:delKeyItem(xi.keyItem.ORCISH_HUT_KEY)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
             },

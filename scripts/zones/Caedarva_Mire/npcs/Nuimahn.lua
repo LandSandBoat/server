@@ -23,11 +23,11 @@ entity.onTrigger = function(player, npc)
     if player:getZPos() < -281 then
         player:startEvent(204) -- leaving
     else
-        if player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then -- entering
-            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.CAPTAIN_WILDCAT_BADGE)
+        if player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE) then -- entering
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.keyItem.CAPTAIN_WILDCAT_BADGE)
             player:startEvent(203)
-        elseif player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
-            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.REMNANTS_PERMIT)
+        elseif player:hasKeyItem(xi.keyItem.REMNANTS_PERMIT) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.keyItem.REMNANTS_PERMIT)
             player:startEvent(203)
         else
             player:startEvent(202)

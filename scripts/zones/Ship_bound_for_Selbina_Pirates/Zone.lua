@@ -29,7 +29,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         enagakure and
         not enagakure:isSpawned() and
         (hour >= 20 or hour < 4) and
-        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
+        player:hasKeyItem(xi.keyItem.SEANCE_STAFF) and
         xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
     then
         SpawnMob(ID.mob.ENAGAKURE)
@@ -67,7 +67,7 @@ zoneObject.onGameHour = function(zone)
     then
         for _, player in pairs(zone:getPlayers()) do
             if
-                player:hasKeyItem(xi.ki.SEANCE_STAFF) and
+                player:hasKeyItem(xi.keyItem.SEANCE_STAFF) and
                 xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
             then
                 SpawnMob(ID.mob.ENAGAKURE)

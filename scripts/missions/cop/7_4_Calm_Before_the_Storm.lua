@@ -169,7 +169,7 @@ mission.sections =
             {
                 [13] = function(player, csid, option, npc)
                     setMissionStatusBit(player, 0)
-                    npcUtil.giveKeyItem(player, xi.ki.VESSEL_OF_LIGHT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VESSEL_OF_LIGHT)
                 end,
             },
         },
@@ -180,7 +180,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId, xi.mission.status.COP.CID) == 7 then
-                        if not player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
+                        if not player:hasKeyItem(xi.keyItem.LETTERS_FROM_ULMIA_AND_PRISHE) then
                             return mission:progressEvent(892)
                         else
                             return mission:progressEvent(895):oncePerZone()
@@ -192,7 +192,7 @@ mission.sections =
             onEventFinish =
             {
                 [892] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTERS_FROM_ULMIA_AND_PRISHE)
                 end,
             },
         },
@@ -202,7 +202,7 @@ mission.sections =
             ['Sueleen'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
+                    if player:hasKeyItem(xi.keyItem.LETTERS_FROM_ULMIA_AND_PRISHE) then
                         return mission:progressEvent(17)
                     end
                 end,

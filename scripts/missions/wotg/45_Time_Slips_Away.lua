@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.TIME_SLIP
 
 mission.reward =
 {
-    keyItem     = xi.ki.BOTTLED_PUNCH_BUG,
+    keyItem     = xi.keyItem.BOTTLED_PUNCH_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.WHEN_WILLS_COLLIDE },
 }
 

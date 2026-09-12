@@ -19,7 +19,7 @@ local content = Limbus:new({
     index            = 3,
     area             = 4,
     entryNpc         = 'Matter_Diffusion_Module',
-    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
+    requiredKeyItems = { xi.keyItem.COSMO_CLEANSE, xi.keyItem.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.SILVER_CHIP, xi.item.CERULEAN_CHIP, xi.item.ORCHID_CHIP },
     name             = 'CENTRAL_TEMENOS_4TH_FLOOR',
     lootCrateId      = ID.npc.C4_LOOT_CRATE,

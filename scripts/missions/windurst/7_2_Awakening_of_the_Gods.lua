@@ -130,7 +130,7 @@ mission.sections =
                         return mission:event(735)
                     elseif missionStatus >= 2 and missionStatus <= 4 then
                         return mission:event(739)
-                    elseif missionStatus == 5 and player:hasKeyItem(xi.ki.BOOK_OF_THE_GODS) then
+                    elseif missionStatus == 5 and player:hasKeyItem(xi.keyItem.BOOK_OF_THE_GODS) then
                         return mission:progressEvent(742)
                     end
                 end,
@@ -245,9 +245,9 @@ mission.sections =
             {
                 [23] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:delKeyItem(xi.ki.BLANK_BOOK_OF_THE_GODS)
+                    player:delKeyItem(xi.keyItem.BLANK_BOOK_OF_THE_GODS)
                     player:setMissionStatus(mission.areaId, 5)
-                    npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_THE_GODS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOOK_OF_THE_GODS)
                 end,
             }
         },

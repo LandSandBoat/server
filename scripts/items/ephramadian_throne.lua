@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.EPHRAMADIAN_THRONE
+local keyItemId = xi.keyItem.EPHRAMADIAN_THRONE
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

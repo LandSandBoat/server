@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.IMPERIAL_CHAIR
+local keyItemId = xi.keyItem.IMPERIAL_CHAIR
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

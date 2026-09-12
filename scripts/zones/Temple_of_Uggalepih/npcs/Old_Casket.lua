@@ -10,9 +10,9 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) then
-        player:startEvent(64, xi.ki.OLD_RUSTY_KEY)
-    elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
+    if player:hasKeyItem(xi.keyItem.OLD_RUSTY_KEY) then
+        player:startEvent(64, xi.keyItem.OLD_RUSTY_KEY)
+    elseif player:hasKeyItem(xi.keyItem.PAINTBRUSH_OF_SOULS) then
         player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
         player:messageSpecial(ID.text.THE_BOX_IS_LOCKED)
@@ -21,8 +21,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 and option == 1 then
-        player:delKeyItem(xi.ki.OLD_RUSTY_KEY)
-        npcUtil.giveKeyItem(player, xi.ki.PAINTBRUSH_OF_SOULS)
+        player:delKeyItem(xi.keyItem.OLD_RUSTY_KEY)
+        npcUtil.giveKeyItem(player, xi.keyItem.PAINTBRUSH_OF_SOULS)
     end
 end
 

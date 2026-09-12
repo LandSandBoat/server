@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_
 
 quest.reward =
 {
-    keyItem = xi.ki.SP_WILDCAT_BADGE,
+    keyItem = xi.keyItem.SP_WILDCAT_BADGE,
     title   = xi.title.SUPERIOR_PRIVATE,
 }
 
@@ -38,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            return status == xi.questStatus.QUEST_ACCEPTED and not player:hasKeyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -57,25 +57,25 @@ quest.sections =
 
         [xi.zone.BHAFLAU_THICKETS] =
         {
-            ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            ['Warhorse_Hoofprint'] = quest:keyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         },
         [xi.zone.CAEDARVA_MIRE] =
         {
-            ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            ['Warhorse_Hoofprint'] = quest:keyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         },
         [xi.zone.MOUNT_ZHAYOLM] =
         {
-            ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            ['Warhorse_Hoofprint'] = quest:keyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         },
         [xi.zone.WAJAOM_WOODLANDS] =
         {
-            ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            ['Warhorse_Hoofprint'] = quest:keyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         },
     },
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+            return status == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -87,8 +87,8 @@ quest.sections =
                 [5022] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setCharVar('AssaultPromotion', 0)
-                        player:delKeyItem(xi.ki.PFC_WILDCAT_BADGE)
-                        player:delKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
+                        player:delKeyItem(xi.keyItem.PFC_WILDCAT_BADGE)
+                        player:delKeyItem(xi.keyItem.DARK_RIDER_HOOFPRINT)
                         player:messageSpecial(ahturhganID.text.SUPERIOR_PRIVATE)
                     end
                 end,

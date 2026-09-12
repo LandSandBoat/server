@@ -45,7 +45,7 @@ void GP_CLI_COMMAND_SCENARIOITEM::process(MapSession* PSession, CCharEntity* PCh
 
             if ((flags >> bit) & 1)
             {
-                charutils::markSeenKeyItem(PChar, static_cast<KeyItem>(keyItemId));
+                charutils::markSeenKeyItem(PChar, static_cast<xi::KeyItem>(keyItemId));
             }
         }
     }

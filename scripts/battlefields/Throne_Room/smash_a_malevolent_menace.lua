@@ -19,7 +19,7 @@ local content = BattlefieldMission:new({
     allowedAreas     = set{ 1 },
     entryNpc         = '_4l1',
     exitNpcs         = { '_4l2', '_4l3', '_4l4' },
-    requiredKeyItems = { xi.ki.MEGA_BONANZA_KUPON, onlyInitiator = true },
+    requiredKeyItems = { xi.keyItem.MEGA_BONANZA_KUPON, onlyInitiator = true },
 
     -- TODO: Currently AMK does not depend on this fight in mission scripts.  Verify
     -- that this mission status is updated/correct once doing so.

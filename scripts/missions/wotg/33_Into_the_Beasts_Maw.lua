@@ -35,13 +35,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.DISTRESS_SIGNAL_FLARE) and
+                        not player:hasKeyItem(xi.keyItem.DISTRESS_SIGNAL_FLARE) and
                         mission:getVar(player, 'Status') == 4
                     then
                         if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
                             return mission:progressEvent(11, 138)
                         else
-                            player:messageName(pastBaileysID.text.CANNOT_FIND_FLARE, nil, xi.ki.DISTRESS_SIGNAL_FLARE)
+                            player:messageName(pastBaileysID.text.CANNOT_FIND_FLARE, nil, xi.keyItem.DISTRESS_SIGNAL_FLARE)
 
                             return mission:noAction()
                         end
@@ -104,7 +104,7 @@ mission.sections =
 
                 [11] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.DISTRESS_SIGNAL_FLARE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.DISTRESS_SIGNAL_FLARE)
                     end
                 end,
 
@@ -114,7 +114,7 @@ mission.sections =
                 end,
 
                 [15] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DISTRESS_SIGNAL_FLARE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DISTRESS_SIGNAL_FLARE)
                     mission:setVar(player, 'Status', 4)
                 end,
             },

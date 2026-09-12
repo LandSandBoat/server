@@ -135,12 +135,12 @@ end
 -----------------------------------
 local experienceBonusKeyItems =
 {
-    xi.ki.RHAPSODY_IN_WHITE,
-    xi.ki.RHAPSODY_IN_UMBER,
-    xi.ki.RHAPSODY_IN_AZURE,
-    xi.ki.RHAPSODY_IN_CRIMSON,
-    xi.ki.RHAPSODY_IN_EMERALD,
-    xi.ki.RHAPSODY_IN_MAUVE,
+    xi.keyItem.RHAPSODY_IN_WHITE,
+    xi.keyItem.RHAPSODY_IN_UMBER,
+    xi.keyItem.RHAPSODY_IN_AZURE,
+    xi.keyItem.RHAPSODY_IN_CRIMSON,
+    xi.keyItem.RHAPSODY_IN_EMERALD,
+    xi.keyItem.RHAPSODY_IN_MAUVE,
 }
 
 local function handleRoVBonus(member)

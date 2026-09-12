@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
         toCureaCough == xi.questStatus.QUEST_ACCEPTED
     then
         if
-            not player:hasKeyItem(xi.ki.THYME_MOSS) and
-            not player:hasKeyItem(xi.ki.COUGH_MEDICINE)
+            not player:hasKeyItem(xi.keyItem.THYME_MOSS) and
+            not player:hasKeyItem(xi.keyItem.COUGH_MEDICINE)
         then
             player:startEvent(645) -- need thyme moss for cough med
-        elseif player:hasKeyItem(xi.ki.THYME_MOSS) then
+        elseif player:hasKeyItem(xi.keyItem.THYME_MOSS) then
             player:startEvent(646) -- receive cough med for Nenne
         end
     end
@@ -29,8 +29,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 645 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif csid == 646 then
-        player:delKeyItem(xi.ki.THYME_MOSS)
-        npcUtil.giveKeyItem(player, xi.ki.COUGH_MEDICINE)
+        player:delKeyItem(xi.keyItem.THYME_MOSS)
+        npcUtil.giveKeyItem(player, xi.keyItem.COUGH_MEDICINE)
     end
 end
 

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
 quest.reward =
 {
-    keyItem  = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
+    keyItem  = xi.keyItem.MAP_OF_THE_HORUTOTO_RUINS,
     fameArea = xi.fameArea.WINDURST,
     fame     = 20,
     exp      = 2000,
@@ -32,7 +32,7 @@ quest.sections =
                 [381] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.NOTE_FROM_HARIGA_ORIGA)
+                        npcUtil.giveKeyItem(player, xi.keyItem.NOTE_FROM_HARIGA_ORIGA)
                     end
                 end,
             },
@@ -49,7 +49,7 @@ quest.sections =
             ['Hariga-Origa'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.NOTE_FROM_IPUPU) then
+                    if player:hasKeyItem(xi.keyItem.NOTE_FROM_IPUPU) then
                         return quest:progressEvent(385)
                     else
                         return quest:event(382)
@@ -60,7 +60,7 @@ quest.sections =
             ['Serukoko'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.NOTE_FROM_IPUPU) then
+                    if not player:hasKeyItem(xi.keyItem.NOTE_FROM_IPUPU) then
                         return quest:progressEvent(383)
                     end
                 end,
@@ -69,7 +69,7 @@ quest.sections =
             ['Sohdede'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.NOTE_FROM_IPUPU) then
+                    if not player:hasKeyItem(xi.keyItem.NOTE_FROM_IPUPU) then
                         return quest:progressEvent(384)
                     end
                 end,
@@ -79,7 +79,7 @@ quest.sections =
             {
                 [385] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.NOTE_FROM_IPUPU)
+                        player:delKeyItem(xi.keyItem.NOTE_FROM_IPUPU)
 
                         -- Player must zone before being able to flag the next quest
                         player:setLocalVar('Quest[2][20]mustZone', 1)
@@ -93,8 +93,8 @@ quest.sections =
             ['Ipupu'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.NOTE_FROM_HARIGA_ORIGA) then
-                        return quest:progressEvent(47, 0, xi.ki.NOTE_FROM_HARIGA_ORIGA)
+                    if player:hasKeyItem(xi.keyItem.NOTE_FROM_HARIGA_ORIGA) then
+                        return quest:progressEvent(47, 0, xi.keyItem.NOTE_FROM_HARIGA_ORIGA)
                     end
                 end,
             },
@@ -102,8 +102,8 @@ quest.sections =
             onEventFinish =
             {
                 [47] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.NOTE_FROM_HARIGA_ORIGA)
-                    npcUtil.giveKeyItem(player, xi.ki.NOTE_FROM_IPUPU)
+                    player:delKeyItem(xi.keyItem.NOTE_FROM_HARIGA_ORIGA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NOTE_FROM_IPUPU)
                 end,
             },
         },

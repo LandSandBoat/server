@@ -45,19 +45,19 @@ end
 -- Keep in this order as it is necessary to mimic retail during the removal of the key items.
 local exForceMenuData =
 {
-    [xi.region.ZULKHEIM        ] = { option = 0x20006, zone = xi.zone.VALKURM_DUNES,          menuBit = 0x000040, lvl = 20, ki = xi.ki.ZULKHEIM_EF_INSIGNIA         },
-    [xi.region.NORVALLEN       ] = { option = 0x20007, zone = xi.zone.JUGNER_FOREST,          menuBit = 0x000080, lvl = 25, ki = xi.ki.NORVALLEN_EF_INSIGNIA        },
-    [xi.region.DERFLAND        ] = { option = 0x20009, zone = xi.zone.PASHHOW_MARSHLANDS,     menuBit = 0x000200, lvl = 25, ki = xi.ki.DERFLAND_EF_INSIGNIA         },
-    [xi.region.KOLSHUSHU       ] = { option = 0x2000B, zone = xi.zone.BUBURIMU_PENINSULA,     menuBit = 0x000800, lvl = 20, ki = xi.ki.KOLSHUSHU_EF_INSIGNIA        },
-    [xi.region.ARAGONEU        ] = { option = 0x2000C, zone = xi.zone.MERIPHATAUD_MOUNTAINS,  menuBit = 0x001000, lvl = 25, ki = xi.ki.ARAGONEU_EF_INSIGNIA         },
-    [xi.region.FAUREGANDI      ] = { option = 0x2000D, zone = xi.zone.BEAUCEDINE_GLACIER,     menuBit = 0x002000, lvl = 35, ki = xi.ki.FAUREGANDI_EF_INSIGNIA       },
-    [xi.region.VALDEAUNIA      ] = { option = 0x2000E, zone = xi.zone.XARCABARD,              menuBit = 0x004000, lvl = 40, ki = xi.ki.VALDEAUNIA_EF_INSIGNIA       },
-    [xi.region.QUFIMISLAND     ] = { option = 0x2000F, zone = xi.zone.QUFIM_ISLAND,           menuBit = 0x008000, lvl = 25, ki = xi.ki.QUFIM_EF_INSIGNIA            },
-    [xi.region.LITELOR         ] = { option = 0x20010, zone = xi.zone.THE_SANCTUARY_OF_ZITAH, menuBit = 0x010000, lvl = 35, ki = xi.ki.LITELOR_EF_INSIGNIA          },
-    [xi.region.KUZOTZ          ] = { option = 0x20011, zone = xi.zone.EASTERN_ALTEPA_DESERT,  menuBit = 0x020000, lvl = 40, ki = xi.ki.KUZOTZ_EF_INSIGNIA           },
-    [xi.region.VOLLBOW         ] = { option = 0x20012, zone = xi.zone.CAPE_TERIGGAN,          menuBit = 0x040000, lvl = 65, ki = xi.ki.VOLLBOW_EF_INSIGNIA          },
-    [xi.region.ELSHIMO_LOWLANDS] = { option = 0x20013, zone = xi.zone.YUHTUNGA_JUNGLE,        menuBit = 0x080000, lvl = 35, ki = xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA },
-    [xi.region.ELSHIMO_UPLANDS ] = { option = 0x20014, zone = xi.zone.YHOATOR_JUNGLE,         menuBit = 0x100000, lvl = 45, ki = xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA  },
+    [xi.region.ZULKHEIM        ] = { option = 0x20006, zone = xi.zone.VALKURM_DUNES,          menuBit = 0x000040, lvl = 20, ki = xi.keyItem.ZULKHEIM_EF_INSIGNIA         },
+    [xi.region.NORVALLEN       ] = { option = 0x20007, zone = xi.zone.JUGNER_FOREST,          menuBit = 0x000080, lvl = 25, ki = xi.keyItem.NORVALLEN_EF_INSIGNIA        },
+    [xi.region.DERFLAND        ] = { option = 0x20009, zone = xi.zone.PASHHOW_MARSHLANDS,     menuBit = 0x000200, lvl = 25, ki = xi.keyItem.DERFLAND_EF_INSIGNIA         },
+    [xi.region.KOLSHUSHU       ] = { option = 0x2000B, zone = xi.zone.BUBURIMU_PENINSULA,     menuBit = 0x000800, lvl = 20, ki = xi.keyItem.KOLSHUSHU_EF_INSIGNIA        },
+    [xi.region.ARAGONEU        ] = { option = 0x2000C, zone = xi.zone.MERIPHATAUD_MOUNTAINS,  menuBit = 0x001000, lvl = 25, ki = xi.keyItem.ARAGONEU_EF_INSIGNIA         },
+    [xi.region.FAUREGANDI      ] = { option = 0x2000D, zone = xi.zone.BEAUCEDINE_GLACIER,     menuBit = 0x002000, lvl = 35, ki = xi.keyItem.FAUREGANDI_EF_INSIGNIA       },
+    [xi.region.VALDEAUNIA      ] = { option = 0x2000E, zone = xi.zone.XARCABARD,              menuBit = 0x004000, lvl = 40, ki = xi.keyItem.VALDEAUNIA_EF_INSIGNIA       },
+    [xi.region.QUFIMISLAND     ] = { option = 0x2000F, zone = xi.zone.QUFIM_ISLAND,           menuBit = 0x008000, lvl = 25, ki = xi.keyItem.QUFIM_EF_INSIGNIA            },
+    [xi.region.LITELOR         ] = { option = 0x20010, zone = xi.zone.THE_SANCTUARY_OF_ZITAH, menuBit = 0x010000, lvl = 35, ki = xi.keyItem.LITELOR_EF_INSIGNIA          },
+    [xi.region.KUZOTZ          ] = { option = 0x20011, zone = xi.zone.EASTERN_ALTEPA_DESERT,  menuBit = 0x020000, lvl = 40, ki = xi.keyItem.KUZOTZ_EF_INSIGNIA           },
+    [xi.region.VOLLBOW         ] = { option = 0x20012, zone = xi.zone.CAPE_TERIGGAN,          menuBit = 0x040000, lvl = 65, ki = xi.keyItem.VOLLBOW_EF_INSIGNIA          },
+    [xi.region.ELSHIMO_LOWLANDS] = { option = 0x20013, zone = xi.zone.YUHTUNGA_JUNGLE,        menuBit = 0x080000, lvl = 35, ki = xi.keyItem.ELSHIMO_LOWLANDS_EF_INSIGNIA },
+    [xi.region.ELSHIMO_UPLANDS ] = { option = 0x20014, zone = xi.zone.YHOATOR_JUNGLE,         menuBit = 0x100000, lvl = 45, ki = xi.keyItem.ELSHIMO_UPLANDS_EF_INSIGNIA  },
 }
 
 local exForceGateGlyphTable =
@@ -233,25 +233,25 @@ end
 
 local outposts =
 {
-    [xi.region.RONFAURE]         = { zone = xi.zone.WEST_RONFAURE,          ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
-    [xi.region.ZULKHEIM]         = { zone = xi.zone.VALKURM_DUNES,          ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
-    [xi.region.NORVALLEN]        = { zone = xi.zone.JUGNER_FOREST,          ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
-    [xi.region.GUSTABERG]        = { zone = xi.zone.NORTH_GUSTABERG,        ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
-    [xi.region.DERFLAND]         = { zone = xi.zone.PASHHOW_MARSHLANDS,     ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.SARUTABARUTA]     = { zone = xi.zone.WEST_SARUTABARUTA,      ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
-    [xi.region.KOLSHUSHU]        = { zone = xi.zone.BUBURIMU_PENINSULA,     ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
-    [xi.region.ARAGONEU]         = { zone = xi.zone.MERIPHATAUD_MOUNTAINS,  ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.FAUREGANDI]       = { zone = xi.zone.BEAUCEDINE_GLACIER,     ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
-    [xi.region.VALDEAUNIA]       = { zone = xi.zone.XARCABARD,              ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
-    [xi.region.QUFIMISLAND]      = { zone = xi.zone.QUFIM_ISLAND,           ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
-    [xi.region.LITELOR]          = { zone = xi.zone.THE_SANCTUARY_OF_ZITAH, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
-    [xi.region.KUZOTZ]           = { zone = xi.zone.EASTERN_ALTEPA_DESERT,  ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
-    [xi.region.VOLLBOW]          = { zone = xi.zone.CAPE_TERIGGAN,          ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
-    [xi.region.ELSHIMO_LOWLANDS] = { zone = xi.zone.YUHTUNGA_JUNGLE,        ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
-    [xi.region.ELSHIMO_UPLANDS]  = { zone = xi.zone.YHOATOR_JUNGLE,         ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
-    [xi.region.TULIA]            = { zone = xi.zone.RUAUN_GARDENS,                                                     cp = 0,  lvl = 70, fee = 500 },
-    [xi.region.MOVALPOLOS]       = { zone = xi.zone.OLDTON_MOVALPOLOS,                                                 cp = 40, lvl = 25, fee = 250 },
-    [xi.region.TAVNAZIANARCH]    = { zone = xi.zone.LUFAISE_MEADOWS,        ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
+    [xi.region.RONFAURE]         = { zone = xi.zone.WEST_RONFAURE,          ki = xi.keyItem.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
+    [xi.region.ZULKHEIM]         = { zone = xi.zone.VALKURM_DUNES,          ki = xi.keyItem.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
+    [xi.region.NORVALLEN]        = { zone = xi.zone.JUGNER_FOREST,          ki = xi.keyItem.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
+    [xi.region.GUSTABERG]        = { zone = xi.zone.NORTH_GUSTABERG,        ki = xi.keyItem.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
+    [xi.region.DERFLAND]         = { zone = xi.zone.PASHHOW_MARSHLANDS,     ki = xi.keyItem.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.SARUTABARUTA]     = { zone = xi.zone.WEST_SARUTABARUTA,      ki = xi.keyItem.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
+    [xi.region.KOLSHUSHU]        = { zone = xi.zone.BUBURIMU_PENINSULA,     ki = xi.keyItem.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
+    [xi.region.ARAGONEU]         = { zone = xi.zone.MERIPHATAUD_MOUNTAINS,  ki = xi.keyItem.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.FAUREGANDI]       = { zone = xi.zone.BEAUCEDINE_GLACIER,     ki = xi.keyItem.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
+    [xi.region.VALDEAUNIA]       = { zone = xi.zone.XARCABARD,              ki = xi.keyItem.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
+    [xi.region.QUFIMISLAND]      = { zone = xi.zone.QUFIM_ISLAND,           ki = xi.keyItem.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
+    [xi.region.LITELOR]          = { zone = xi.zone.THE_SANCTUARY_OF_ZITAH, ki = xi.keyItem.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
+    [xi.region.KUZOTZ]           = { zone = xi.zone.EASTERN_ALTEPA_DESERT,  ki = xi.keyItem.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
+    [xi.region.VOLLBOW]          = { zone = xi.zone.CAPE_TERIGGAN,          ki = xi.keyItem.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
+    [xi.region.ELSHIMO_LOWLANDS] = { zone = xi.zone.YUHTUNGA_JUNGLE,        ki = xi.keyItem.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
+    [xi.region.ELSHIMO_UPLANDS]  = { zone = xi.zone.YHOATOR_JUNGLE,         ki = xi.keyItem.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
+    [xi.region.TULIA]            = { zone = xi.zone.RUAUN_GARDENS,                                                          cp = 0,  lvl = 70, fee = 500 },
+    [xi.region.MOVALPOLOS]       = { zone = xi.zone.OLDTON_MOVALPOLOS,                                                      cp = 40, lvl = 25, fee = 250 },
+    [xi.region.TAVNAZIANARCH]    = { zone = xi.zone.LUFAISE_MEADOWS,        ki = xi.keyItem.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
 }
 
 local function hasOutpost(player, region)
@@ -825,7 +825,7 @@ local function getArg1(player, guardNation, guardType)
     local output  = 0
     local signet  = 0
     local cipher  = xi.extravaganza.campaignActive() * 20 * 65536
-    local voucher = player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) and 0x20000 or 0
+    local voucher = player:hasKeyItem(xi.keyItem.CONQUEST_PROMOTION_VOUCHER) and 0x20000 or 0
     local zilart  = xi.settings.main.ENABLE_ROTZ == 1 and 0x10000 or 0
 
     if guardNation == xi.nation.WINDURST then
@@ -1488,7 +1488,7 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         if
             option >= 32933 and
             option <= 32935 and
-            player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+            player:hasKeyItem(xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
         then
             u2 = 0
         end
@@ -1561,9 +1561,9 @@ local function handlePurchuase(player, option, pNation, pRank, guardNation, mOff
         if npcUtil.giveItem(player, stock.item) then
             player:delCP(price)
         end
-    elseif isEXPRing and player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+    elseif isEXPRing and player:hasKeyItem(xi.keyItem.CONQUEST_PROMOTION_VOUCHER) then
         if npcUtil.giveItem(player, stock.item) then
-            player:delKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+            player:delKeyItem(xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
             player:setCharVar('CONQUEST_RING_RECHARGE', 1, NextConquestTally())
         end
     else

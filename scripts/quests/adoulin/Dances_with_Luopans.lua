@@ -45,7 +45,7 @@ end
 
 local function onLocusAreaEnter(player, triggerArea)
     if
-        player:hasKeyItem(xi.ki.LUOPAN) and
+        player:hasKeyItem(xi.keyItem.LUOPAN) and
         quest:getVar(player, 'Prog') == 0
     then
         local ID = zones[player:getZoneID()]
@@ -69,10 +69,10 @@ local homelandSoilNation =
 local function onHomelandSoilTrigger(player, npc)
     if
         player:getNation() == homelandSoilNation[player:getZoneID()] and
-        not player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and
-        not player:hasKeyItem(xi.ki.LUOPAN)
+        not player:hasKeyItem(xi.keyItem.FISTFUL_OF_HOMELAND_SOIL) and
+        not player:hasKeyItem(xi.keyItem.LUOPAN)
     then
-        npcUtil.giveKeyItem(player, xi.ki.FISTFUL_OF_HOMELAND_SOIL)
+        npcUtil.giveKeyItem(player, xi.keyItem.FISTFUL_OF_HOMELAND_SOIL)
     end
 end
 
@@ -181,7 +181,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(36)
-                    elseif player:hasKeyItem(xi.ki.LUOPAN) then
+                    elseif player:hasKeyItem(xi.keyItem.LUOPAN) then
                         return quest:progressEvent(35)
                     end
 
@@ -190,7 +190,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and
+                        player:hasKeyItem(xi.keyItem.FISTFUL_OF_HOMELAND_SOIL) and
                         npcUtil.tradeHas(trade, xi.item.PETRIFIED_LOG)
                     then
                         return quest:progressEvent(34)
@@ -202,15 +202,15 @@ quest.sections =
             {
                 [34] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL)
-                    npcUtil.giveKeyItem(player, xi.ki.LUOPAN)
+                    player:delKeyItem(xi.keyItem.FISTFUL_OF_HOMELAND_SOIL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LUOPAN)
                 end,
 
                 [36] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, { xi.item.PLATE_OF_INDI_POISON, xi.item.MATRE_BELL }) then
                         player:unlockJob(xi.job.GEO)
                         player:messageSpecial(zones[xi.zone.WESTERN_ADOULIN].text.YOU_CAN_NOW_BECOME, 0)
-                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.JOB_GESTURE_GEOMANCER)
                         quest:complete(player)
                     end
                 end,

@@ -41,12 +41,12 @@ quest.reward =
 }
 
 local handleFlask = function(player)
-    player:messageSpecial(korrolokaID.text.FILL_FLASK, xi.ki.WASHUS_FLASK)
+    player:messageSpecial(korrolokaID.text.FILL_FLASK, xi.keyItem.WASHUS_FLASK)
 
     if  quest:getVar(player, 'Option') == 30 then
-        player:delKeyItem(xi.ki.WASHUS_FLASK)
-        player:messageSpecial(korrolokaID.text.FLASK_FULL, xi.ki.WASHUS_FLASK)
-        npcUtil.giveKeyItem(player, xi.ki.FLASK_OF_CLAM_WATER)
+        player:delKeyItem(xi.keyItem.WASHUS_FLASK)
+        player:messageSpecial(korrolokaID.text.FLASK_FULL, xi.keyItem.WASHUS_FLASK)
+        npcUtil.giveKeyItem(player, xi.keyItem.FLASK_OF_CLAM_WATER)
         quest:setVar(player, 'Prog', 4)
 
     else
@@ -132,7 +132,7 @@ quest.sections =
                 end,
 
                 [221] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.WASHUS_FLASK) -- WASHU'S FLASK Key Item = 623
+                    npcUtil.giveKeyItem(player, xi.keyItem.WASHUS_FLASK) -- WASHU'S FLASK Key Item = 623
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -145,13 +145,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not quest:isVarBitsSet(player, 'Option', 1) and
-                        player:hasKeyItem(xi.ki.WASHUS_FLASK)
+                        player:hasKeyItem(xi.keyItem.WASHUS_FLASK)
                     then
                         quest:setVarBit(player, 'Option', 1)
                         handleFlask(player)
                         return quest:noAction()
                     else
-                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.ki.WASHUS_FLASK)
+                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.keyItem.WASHUS_FLASK)
                     end
                 end,
             },
@@ -160,13 +160,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not quest:isVarBitsSet(player, 'Option', 2) and
-                        player:hasKeyItem(xi.ki.WASHUS_FLASK)
+                        player:hasKeyItem(xi.keyItem.WASHUS_FLASK)
                     then
                         quest:setVarBit(player, 'Option', 2)
                         handleFlask(player)
                         return quest:noAction()
                     else
-                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.ki.WASHUS_FLASK)
+                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.keyItem.WASHUS_FLASK)
                     end
                 end,
             },
@@ -175,13 +175,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not quest:isVarBitsSet(player, 'Option', 3) and
-                        player:hasKeyItem(xi.ki.WASHUS_FLASK)
+                        player:hasKeyItem(xi.keyItem.WASHUS_FLASK)
                     then
                         quest:setVarBit(player, 'Option', 3)
                         handleFlask(player)
                         return quest:noAction()
                     else
-                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.ki.WASHUS_FLASK)
+                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.keyItem.WASHUS_FLASK)
                     end
                 end,
             },
@@ -190,13 +190,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not quest:isVarBitsSet(player, 'Option', 4) and
-                        player:hasKeyItem(xi.ki.WASHUS_FLASK)
+                        player:hasKeyItem(xi.keyItem.WASHUS_FLASK)
                     then
                         quest:setVarBit(player, 'Option', 4)
                         handleFlask(player)
                         return quest:noAction()
                     else
-                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.ki.WASHUS_FLASK)
+                        return quest:messageSpecial(korrolokaID.text.CLAM_EMPTY, xi.keyItem.WASHUS_FLASK)
                     end
                 end,
             },
@@ -215,8 +215,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.FLASK_OF_CLAM_WATER) and
-                        not player:hasKeyItem(xi.ki.STOREROOM_KEY)
+                        player:hasKeyItem(xi.keyItem.FLASK_OF_CLAM_WATER) and
+                        not player:hasKeyItem(xi.keyItem.STOREROOM_KEY)
                     then
                         return quest:progressEvent(210)
                     end
@@ -226,7 +226,7 @@ quest.sections =
             ['Gimb'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STOREROOM_KEY) then
+                    if player:hasKeyItem(xi.keyItem.STOREROOM_KEY) then
                         return quest:progressEvent(211, 0, xi.item.PINCH_OF_PRISM_POWDER)
                     end
                 end,
@@ -235,12 +235,12 @@ quest.sections =
             onEventFinish =
             {
                 [210] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.FLASK_OF_CLAM_WATER)
-                    npcUtil.giveKeyItem(player, xi.ki.STOREROOM_KEY)
+                    player:delKeyItem(xi.keyItem.FLASK_OF_CLAM_WATER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STOREROOM_KEY)
                 end,
 
                 [211] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.STOREROOM_KEY)
+                    player:delKeyItem(xi.keyItem.STOREROOM_KEY)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },

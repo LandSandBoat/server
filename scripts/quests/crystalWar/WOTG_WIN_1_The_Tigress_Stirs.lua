@@ -50,8 +50,8 @@ quest.sections =
             ['qm4'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SMALL_STARFRUIT) then
-                        return quest:keyItem(xi.ki.SMALL_STARFRUIT)
+                    if not player:hasKeyItem(xi.keyItem.SMALL_STARFRUIT) then
+                        return quest:keyItem(xi.keyItem.SMALL_STARFRUIT)
                     end
                 end,
             },
@@ -70,7 +70,7 @@ quest.sections =
             ['Door_Acolyte_Hostel_down'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SMALL_STARFRUIT) then
+                    if player:hasKeyItem(xi.keyItem.SMALL_STARFRUIT) then
                         return quest:progressEvent(129)
                     end
                 end,
@@ -80,7 +80,7 @@ quest.sections =
             {
                 [129] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.SMALL_STARFRUIT)
+                        player:delKeyItem(xi.keyItem.SMALL_STARFRUIT)
                     end
                 end,
             },

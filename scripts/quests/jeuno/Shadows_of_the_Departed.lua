@@ -36,7 +36,7 @@ quest.sections =
             onEventFinish =
             {
                 [161] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.NOTE_WRITTEN_BY_ESHANTARL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NOTE_WRITTEN_BY_ESHANTARL)
                     quest:begin(player)
                 end,
             },
@@ -53,8 +53,8 @@ quest.sections =
             ['_0id'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER) then
-                        return quest:keyItem(xi.ki.PROMYVION_DEM_SLIVER)
+                    if not player:hasKeyItem(xi.keyItem.PROMYVION_DEM_SLIVER) then
+                        return quest:keyItem(xi.keyItem.PROMYVION_DEM_SLIVER)
                     end
                 end,
             },
@@ -65,8 +65,8 @@ quest.sections =
             ['_0gc'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER) then
-                        return quest:keyItem(xi.ki.PROMYVION_HOLLA_SLIVER)
+                    if not player:hasKeyItem(xi.keyItem.PROMYVION_HOLLA_SLIVER) then
+                        return quest:keyItem(xi.keyItem.PROMYVION_HOLLA_SLIVER)
                     end
                 end,
             },
@@ -77,8 +77,8 @@ quest.sections =
             ['_0k0'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER) then
-                        return quest:keyItem(xi.ki.PROMYVION_MEA_SLIVER)
+                    if not player:hasKeyItem(xi.keyItem.PROMYVION_MEA_SLIVER) then
+                        return quest:keyItem(xi.keyItem.PROMYVION_MEA_SLIVER)
                     end
                 end,
             },
@@ -89,7 +89,7 @@ quest.sections =
             onTriggerAreaEnter =
             {
                 [1] = function(player, triggerArea)
-                    for keyItemId = xi.ki.PROMYVION_HOLLA_SLIVER, xi.ki.PROMYVION_HOLLA_SLIVER + 2 do
+                    for keyItemId = xi.keyItem.PROMYVION_HOLLA_SLIVER, xi.keyItem.PROMYVION_HOLLA_SLIVER + 2 do
                         if not player:hasKeyItem(keyItemId) then
                             return
                         end
@@ -103,7 +103,7 @@ quest.sections =
             {
                 [162] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        for keyItemId = xi.ki.PROMYVION_HOLLA_SLIVER, xi.ki.PROMYVION_HOLLA_SLIVER + 2 do
+                        for keyItemId = xi.keyItem.PROMYVION_HOLLA_SLIVER, xi.keyItem.PROMYVION_HOLLA_SLIVER + 2 do
                             player:delKeyItem(keyItemId)
                         end
 

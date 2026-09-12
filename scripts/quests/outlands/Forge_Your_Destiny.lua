@@ -20,7 +20,7 @@ quest.reward =
     fame     = 20,
     fameArea = xi.fameArea.NORG,
     item     = xi.item.MUMEITO,
-    keyItem  = xi.ki.JOB_GESTURE_SAMURAI,
+    keyItem  = xi.keyItem.JOB_GESTURE_SAMURAI,
     title    = xi.title.BUSHIDO_BLADE,
 }
 

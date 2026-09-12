@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF
 
 quest.reward =
 {
-    keyItem = xi.ki.MILITARY_SCRIP,
+    keyItem = xi.keyItem.MILITARY_SCRIP,
 }
 
 quest.sections =
@@ -115,7 +115,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:hasKeyItem(xi.ki.MILITARY_SCRIP)
+                player:hasKeyItem(xi.keyItem.MILITARY_SCRIP)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -125,7 +125,7 @@ quest.sections =
             onEventFinish =
             {
                 [66] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MILITARY_SCRIP)
+                    player:delKeyItem(xi.keyItem.MILITARY_SCRIP)
                     npcUtil.giveCurrency(player, 'gil', 20147)
                 end,
             },

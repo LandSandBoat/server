@@ -9,7 +9,7 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
-    player:addKeyItem(xi.ki.MAP_OF_ABDH_ISLE_PURGONORGO)
+    player:addKeyItem(xi.keyItem.MAP_OF_ABDH_ISLE_PURGONORGO)
 
     if
         player:getXPos() == 0 and

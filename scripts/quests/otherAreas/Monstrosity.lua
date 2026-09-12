@@ -33,7 +33,7 @@ local tradeItems =
 local suspiciousCityNpc =
 {
     onTrade = function(player, npc, trade)
-        if player:hasKeyItem(xi.ki.RING_OF_SUPERNAL_DISJUNCTION) then
+        if player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
             return
         end
 
@@ -49,7 +49,7 @@ local suspiciousCityNpc =
     onTrigger = function(player, npc)
         local baseEvent = baseNpcEvents[player:getZoneID()]
 
-        if not player:hasKeyItem(xi.ki.RING_OF_SUPERNAL_DISJUNCTION) then
+        if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
             return quest:event(baseEvent)
         else
             return quest:event(baseEvent + 2)
@@ -58,7 +58,7 @@ local suspiciousCityNpc =
 }
 
 local tradeEventFinish = function(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.ki.RING_OF_SUPERNAL_DISJUNCTION)
+    npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
     if species > 0 then
         xi.monstrosity.unlockStartingMONs(player, species)
@@ -68,7 +68,7 @@ end
 local odysseanPassageNpc =
 {
     onTrigger = function(player, npc)
-        if player:hasKeyItem(xi.ki.RING_OF_SUPERNAL_DISJUNCTION) then
+        if player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
             return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 3)
         end
     end,
@@ -125,7 +125,7 @@ quest.sections =
             ['Suspicious_Hume']  =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.RING_OF_SUPERNAL_DISJUNCTION) then
+                    if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
                         return quest:event(41)
                     else
                         return quest:event(42)

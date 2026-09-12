@@ -26,7 +26,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.UMBRA_BUG) and
+                        not player:hasKeyItem(xi.keyItem.UMBRA_BUG) and
                         mission:getVar(player, 'Timer') <= VanadielUniqueDay()
                     then
                         -- TODO: For future Instance implementation, on instance fail,
@@ -50,7 +50,7 @@ mission.sections =
                 end,
 
                 [26] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.UMBRA_BUG)
+                    npcUtil.giveKeyItem(player, xi.keyItem.UMBRA_BUG)
                 end,
             },
         },

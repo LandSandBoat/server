@@ -91,7 +91,7 @@ quest.sections =
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.STORMS_OF_FATE and
                         quest:getVar(player, 'Prog') == 2
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_THE_WYRMKING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_THE_WYRMKING)
                         quest:setVar(player, 'Prog', 3)
                     end
                 end,

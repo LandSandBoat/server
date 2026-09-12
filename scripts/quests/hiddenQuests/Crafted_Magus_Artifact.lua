@@ -99,7 +99,7 @@ local function onFeeTraded(player, csid, option, npc)
     player:setCharVar('[BLUAF]CraftingStage', 2)
     player:setCharVar('[BLUAF]PaymentDay', VanadielUniqueDay())
     quest:setMustZone(player)
-    npcUtil.giveKeyItem(player, xi.ki.MAGUS_ORDER_SLIP)
+    npcUtil.giveKeyItem(player, xi.keyItem.MAGUS_ORDER_SLIP)
 end
 
 local function onPieceReceived(player, csid, option, npc)
@@ -126,7 +126,7 @@ local function onPieceReceived(player, csid, option, npc)
         quest:setMustZone(player)
     end
 
-    player:delKeyItem(xi.ki.MAGUS_ORDER_SLIP)
+    player:delKeyItem(xi.keyItem.MAGUS_ORDER_SLIP)
 end
 
 quest.sections =

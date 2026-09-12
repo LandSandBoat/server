@@ -155,7 +155,7 @@ end
 
 local function goToHP(player, choice, index)
     local origin = player:getLocalVar('originIndex')
-    local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
+    local hasKI  = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE)
 
     if homepointData[origin] == nil then
         return
@@ -199,7 +199,7 @@ xi.homepoint.onTrigger = function(player, csid, index)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
     end
 
-    if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
         -- 'Rhapsody in White' key item reduces teleport fee by 80%
         params = bit.bor(params, 0x20000)
     end

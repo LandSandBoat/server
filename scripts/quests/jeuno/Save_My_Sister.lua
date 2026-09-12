@@ -113,7 +113,7 @@ quest.sections =
             {
                 [98] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.DUCAL_GUARDS_LANTERN)
+                        npcUtil.giveKeyItem(player, xi.keyItem.DUCAL_GUARDS_LANTERN)
                         quest:setVar(player, 'Prog', 3)
                     end
                 end,
@@ -139,7 +139,7 @@ quest.sections =
                         local lanternOffset = npc:getID() - eldiemeID.npc.BRAZIER
 
                         if lanternStage == lanternOffset then
-                            player:messageSpecial(brazierMessages[lanternStage][1], 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                            player:messageSpecial(brazierMessages[lanternStage][1], 0, 0, 0, xi.keyItem.DUCAL_GUARDS_LANTERN_LIT)
 
                             if lanternStage < 3 then
                                 quest:incrementVar(player, 'Stage', 1)
@@ -147,7 +147,7 @@ quest.sections =
                                 quest:setVar(player, 'Prog', 4)
                             end
                         else
-                            player:messageSpecial(brazierMessages[lanternStage][2], 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                            player:messageSpecial(brazierMessages[lanternStage][2], 0, 0, 0, xi.keyItem.DUCAL_GUARDS_LANTERN_LIT)
                             quest:setVar(player, 'Stage', 0)
                         end
                     end
@@ -171,7 +171,7 @@ quest.sections =
             ['Neraf-Najiruf'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DUCAL_GUARDS_LANTERN) then
+                    if player:hasKeyItem(xi.keyItem.DUCAL_GUARDS_LANTERN) then
                         return quest:progressEvent(97)
                     end
                 end,
@@ -180,7 +180,7 @@ quest.sections =
             onEventFinish =
             {
                 [97] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.DUCAL_GUARDS_LANTERN)
+                    player:delKeyItem(xi.keyItem.DUCAL_GUARDS_LANTERN)
                 end,
             },
         },

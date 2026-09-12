@@ -31,8 +31,8 @@ quest.sections =
             player:hasSpell(xi.magic.spell.TITAN)) or
             -- condition for the starting the quest (after completing previously)
             (status == xi.questStatus.QUEST_COMPLETED and
-            not player:hasKeyItem(xi.ki.FADED_RUBY) and
-            not player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.keyItem.FADED_RUBY) and
+            not player:hasKeyItem(xi.keyItem.RAINBOW_RESONATOR) and
             quest:getVar(player, 'completedThisWeek') == 0)
         end,
 
@@ -43,7 +43,7 @@ quest.sections =
             onEventFinish =
             {
                 [207] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.RAINBOW_RESONATOR)
+                    npcUtil.giveKeyItem(player, xi.keyItem.RAINBOW_RESONATOR)
                     -- if starting for the first time then begin the quest
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                         quest:begin(player)
@@ -58,7 +58,7 @@ quest.sections =
         check = function(player, status, vars)
             return (status == xi.questStatus.QUEST_ACCEPTED or
             status == xi.questStatus.QUEST_COMPLETED) and
-            player:hasKeyItem(xi.ki.FADED_RUBY) and
+            player:hasKeyItem(xi.keyItem.FADED_RUBY) and
             quest:getVar(player, 'completedThisWeek') == 0
         end,
 
@@ -71,7 +71,7 @@ quest.sections =
                 [208] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         quest:setVar(player, 'completedThisWeek', 1, NextConquestTally())
-                        player:delKeyItem(xi.ki.FADED_RUBY)
+                        player:delKeyItem(xi.keyItem.FADED_RUBY)
 
                         if quest:getVar(player, 'Option') == 0 then
                             player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
@@ -88,13 +88,13 @@ quest.sections =
         check = function(player, status, vars)
             return (status == xi.questStatus.QUEST_ACCEPTED or
             status == xi.questStatus.QUEST_COMPLETED) and
-            player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
-            player:hasKeyItem(xi.ki.EYE_OF_FROST) and
-            player:hasKeyItem(xi.ki.EYE_OF_GALES) and
-            player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
-            player:hasKeyItem(xi.ki.EYE_OF_TIDES) and
-            player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
-            player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+            player:hasKeyItem(xi.keyItem.EYE_OF_FLAMES) and
+            player:hasKeyItem(xi.keyItem.EYE_OF_FROST) and
+            player:hasKeyItem(xi.keyItem.EYE_OF_GALES) and
+            player:hasKeyItem(xi.keyItem.EYE_OF_STORMS) and
+            player:hasKeyItem(xi.keyItem.EYE_OF_TIDES) and
+            player:hasKeyItem(xi.keyItem.EYE_OF_TREMORS) and
+            player:hasKeyItem(xi.keyItem.RAINBOW_RESONATOR)
         end,
 
         [xi.zone.FULL_MOON_FOUNTAIN] =
@@ -103,15 +103,15 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_FULLMOON then
-                        player:delKeyItem(xi.ki.EYE_OF_FLAMES)
-                        player:delKeyItem(xi.ki.EYE_OF_FROST)
-                        player:delKeyItem(xi.ki.EYE_OF_GALES)
-                        player:delKeyItem(xi.ki.EYE_OF_STORMS)
-                        player:delKeyItem(xi.ki.EYE_OF_TIDES)
-                        player:delKeyItem(xi.ki.EYE_OF_TREMORS)
-                        player:delKeyItem(xi.ki.RAINBOW_RESONATOR)
+                        player:delKeyItem(xi.keyItem.EYE_OF_FLAMES)
+                        player:delKeyItem(xi.keyItem.EYE_OF_FROST)
+                        player:delKeyItem(xi.keyItem.EYE_OF_GALES)
+                        player:delKeyItem(xi.keyItem.EYE_OF_STORMS)
+                        player:delKeyItem(xi.keyItem.EYE_OF_TIDES)
+                        player:delKeyItem(xi.keyItem.EYE_OF_TREMORS)
+                        player:delKeyItem(xi.keyItem.RAINBOW_RESONATOR)
 
-                        npcUtil.giveKeyItem(player, xi.ki.FADED_RUBY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.FADED_RUBY)
 
                         if option == 0 then
                             quest:setVar(player, 'Option', 1)
@@ -128,7 +128,7 @@ quest.sections =
         check = function(player, status, vars)
             return (status == xi.questStatus.QUEST_ACCEPTED or
             status == xi.questStatus.QUEST_COMPLETED) and
-            player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+            player:hasKeyItem(xi.keyItem.RAINBOW_RESONATOR)
         end,
 
         [xi.zone.CLOISTER_OF_FLAMES] =
@@ -137,7 +137,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_FLAMES then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_FLAMES)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_FLAMES)
                     end
                 end,
             }
@@ -149,7 +149,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_FROST then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_FROST)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_FROST)
                     end
                 end,
             }
@@ -161,7 +161,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_GALES then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_GALES)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_GALES)
                     end
                 end,
             }
@@ -173,7 +173,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_STORMS then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_STORMS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_STORMS)
                     end
                 end,
             }
@@ -185,7 +185,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_TIDES then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_TIDES)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_TIDES)
                     end
                 end,
             }
@@ -197,7 +197,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.WAKING_THE_BEAST_CLOISTER_OF_TREMORS then
-                        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_TREMORS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EYE_OF_TREMORS)
                     end
                 end,
             }

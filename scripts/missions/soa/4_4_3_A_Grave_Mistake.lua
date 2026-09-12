@@ -49,8 +49,8 @@ mission.sections =
             {
                 [1534] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.BROKEN_FUSE)
-                        player:messageSpecial(easternAdoulinID.text.LOST_KEYITEM, xi.ki.BROKEN_FUSE)
+                        player:delKeyItem(xi.keyItem.BROKEN_FUSE)
+                        player:messageSpecial(easternAdoulinID.text.LOST_KEYITEM, xi.keyItem.BROKEN_FUSE)
                         xi.mission.setMustZone(player, xi.mission.log_id.SOA, xi.mission.id.soa.AN_EMERGENCY_CONVOCATION)
                     end
                 end,
@@ -73,7 +73,7 @@ mission.sections =
             ['Stout_Weir'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BROKEN_FUSE) then
+                    if not player:hasKeyItem(xi.keyItem.BROKEN_FUSE) then
                         return mission:progressEvent(371)
                     else
                         return mission:event(373)
@@ -96,7 +96,7 @@ mission.sections =
             {
                 [371] = function(player, csid, option, npc)
                     mission:setVarBit(player, 'Status', 2)
-                    npcUtil.giveKeyItem(player, xi.ki.BROKEN_FUSE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BROKEN_FUSE)
                 end,
 
                 [372] = function(player, csid, option, npc)

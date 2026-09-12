@@ -14,7 +14,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.SUGARCOATED
 
 mission.reward =
 {
-    keyItem     = xi.ki.SEPULCHER_ENSIGN,
+    keyItem     = xi.keyItem.SEPULCHER_ENSIGN,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_RESOLVE },
 }
 
@@ -42,8 +42,8 @@ mission.sections =
             onEventFinish =
             {
                 [1537] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SUFFERING_SACCHARIFEROUS)
-                    player:messageSpecial(easternAdoulinID.text.LOST_KEYITEM, xi.ki.SUFFERING_SACCHARIFEROUS)
+                    player:delKeyItem(xi.keyItem.SUFFERING_SACCHARIFEROUS)
+                    player:messageSpecial(easternAdoulinID.text.LOST_KEYITEM, xi.keyItem.SUFFERING_SACCHARIFEROUS)
                     mission:complete(player)
                 end,
             },

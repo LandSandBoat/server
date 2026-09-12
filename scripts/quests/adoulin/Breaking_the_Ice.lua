@@ -66,12 +66,12 @@ quest.sections =
             onEventFinish =
             {
                 [26] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.PAIR_OF_FUZZY_EARMUFFS)
-                    player:messageSpecial(kamihrID.text.YOU_HAVE_LEARNED, xi.ki.FRAGMENTING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PAIR_OF_FUZZY_EARMUFFS)
+                    player:messageSpecial(kamihrID.text.YOU_HAVE_LEARNED, xi.keyItem.FRAGMENTING)
 
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:addKeyItem(xi.ki.FRAGMENTING)
+                        player:addKeyItem(xi.keyItem.FRAGMENTING)
                     end
                 end,
             },

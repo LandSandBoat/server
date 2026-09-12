@@ -114,7 +114,7 @@ quest.sections =
                 end,
 
                 [460] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.TATTERED_TEST_SHEET)
+                    player:delKeyItem(xi.keyItem.TATTERED_TEST_SHEET)
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -153,7 +153,7 @@ quest.sections =
                 [285] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    npcUtil.giveKeyItem(player, xi.ki.TATTERED_TEST_SHEET)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TATTERED_TEST_SHEET)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },

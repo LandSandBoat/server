@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('ANewDawn_Event', 3)
         end
     elseif csid == 148 then
-        npcUtil.giveKeyItem(player, xi.ki.TAMERS_WHISTLE)
+        npcUtil.giveKeyItem(player, xi.keyItem.TAMERS_WHISTLE)
         player:setCharVar('ANewDawn_Event', 4)
     end
 end

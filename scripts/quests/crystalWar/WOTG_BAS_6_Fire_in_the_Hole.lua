@@ -39,7 +39,7 @@ quest.sections =
 
                 [77] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.SILVERMINE_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SILVERMINE_KEY)
                 end,
             },
         },
@@ -57,7 +57,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        player:hasKeyItem(xi.ki.SILVERMINE_KEY)
+                        player:hasKeyItem(xi.keyItem.SILVERMINE_KEY)
                     then
                         return quest:progressEvent(5)
                     end
@@ -72,12 +72,12 @@ quest.sections =
                     if
                         questProgress >= 0 and
                         questProgress <= 1 and
-                        player:hasKeyItem(xi.ki.SILVERMINE_KEY)
+                        player:hasKeyItem(xi.keyItem.SILVERMINE_KEY)
                     then
                         return quest:progressEvent(7)
                     elseif
                         questProgress >= 2 and
-                        not player:hasKeyItem(xi.ki.SILVERMINE_KEY)
+                        not player:hasKeyItem(xi.keyItem.SILVERMINE_KEY)
                     then
                         return quest:progressEvent(8)
                     end
@@ -105,7 +105,7 @@ quest.sections =
 
                 [8] = function(player, csid, option, npc)
                     if npc and npc:getName() == 'Solitary_Ant' then
-                        npcUtil.giveKeyItem(player, xi.ki.SILVERMINE_KEY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SILVERMINE_KEY)
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,

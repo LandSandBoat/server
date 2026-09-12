@@ -64,12 +64,12 @@ mission.sections =
         {
             afterZoneIn = function(player)
                 if
-                    not player:hasKeyItem(xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE) and
+                    not player:hasKeyItem(xi.keyItem.AWAKENED_CRYSTALLIZED_PSYCHE) and
                     mission:getVar(player, 'Status') == 0
                 then
                     -- TODO: This message needs verification, and need to determine if there
                     -- is a unique event or message.
-                    npcUtil.giveKeyItem(player, xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.AWAKENED_CRYSTALLIZED_PSYCHE)
                 end
             end,
         },

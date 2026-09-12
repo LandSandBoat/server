@@ -52,7 +52,7 @@ mission.sections =
 
                 [41] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:delKeyItem(xi.ki.DULL_SWORD)
+                    player:delKeyItem(xi.keyItem.DULL_SWORD)
                     player:setMissionStatus(mission.areaId, 6)
                 end,
             },
@@ -70,9 +70,9 @@ mission.sections =
                             local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:hasItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
                             local hasTrustQuest =
                             (
-                                player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) or
-                                player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
-                                player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
+                                player:hasKeyItem(xi.keyItem.SAN_DORIA_TRUST_PERMIT) or
+                                player:hasKeyItem(xi.keyItem.BASTOK_TRUST_PERMIT) or
+                                player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT)
                             ) and 0 or 1
 
                             return mission:progressEvent(239, 0, 0, 0, xi.nation.BASTOK, 0, hasTrustQuest, needsSemihTrust)
@@ -110,7 +110,7 @@ mission.sections =
 
                 [239] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
-                    npcUtil.giveKeyItem(player, xi.ki.SWORD_OFFERING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SWORD_OFFERING)
 
                     if
                         xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
@@ -138,8 +138,8 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if
-                        player:hasKeyItem(xi.ki.SWORD_OFFERING) and
-                        not player:hasKeyItem(xi.ki.DULL_SWORD)
+                        player:hasKeyItem(xi.keyItem.SWORD_OFFERING) and
+                        not player:hasKeyItem(xi.keyItem.DULL_SWORD)
                     then
                         return mission:progressEvent(53) -- Trade Sword with fake.
                     elseif missionStatus <= 3 then -- After getting instructions and before getting Magic Sword.
@@ -168,8 +168,8 @@ mission.sections =
             onEventFinish =
             {
                 [53] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DULL_SWORD)
-                    player:delKeyItem(xi.ki.SWORD_OFFERING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DULL_SWORD)
+                    player:delKeyItem(xi.keyItem.SWORD_OFFERING)
                 end,
 
                 [55] = function(player, csid, option, npc)

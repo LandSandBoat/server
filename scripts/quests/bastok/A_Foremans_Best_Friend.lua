@@ -56,10 +56,10 @@ quest.sections =
                 [112] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        if player:hasKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES) then
+                        if player:hasKeyItem(xi.keyItem.MAP_OF_THE_GUSGEN_MINES) then
                             player:addExp(2000)
                         else
-                            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_GUSGEN_MINES)
+                            npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_THE_GUSGEN_MINES)
                         end
                     end
                 end,

@@ -47,7 +47,7 @@ quest.sections =
                         player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                         not quest:getMustZone(player)
                     then
-                        if player:hasKeyItem(xi.ki.OLD_RING) then
+                        if player:hasKeyItem(xi.keyItem.OLD_RING) then
                             local currentTime = VanadielTime()
                             local endTime     = quest:getVar(player, 'EndTime')
 
@@ -55,9 +55,9 @@ quest.sections =
                                 currentTime < endTime and
                                 quest:getVar(player, 'Prog') == 1
                             then
-                                return quest:progressEvent(430, 0, xi.ki.OLD_RING) -- Quest starting event.
+                                return quest:progressEvent(430, 0, xi.keyItem.OLD_RING) -- Quest starting event.
                             else
-                                return quest:progressEvent(432, 0, xi.ki.OLD_RING) -- Instant Quest Complete.
+                                return quest:progressEvent(432, 0, xi.keyItem.OLD_RING) -- Instant Quest Complete.
                             end
                         else
                             return quest:progressEvent(429) -- Timer start and reminder text.
@@ -83,7 +83,7 @@ quest.sections =
 
                 [432] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_RING)
+                        player:delKeyItem(xi.keyItem.OLD_RING)
                         player:setLocalVar('[2][76]mustZone', 1)
                     end
                 end,
@@ -152,7 +152,7 @@ quest.sections =
             {
                 [433] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_RING)
+                        player:delKeyItem(xi.keyItem.OLD_RING)
                         player:setLocalVar('[2][76]mustZone', 1)
                     end
                 end,
@@ -177,7 +177,7 @@ quest.sections =
             {
                 [289] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_RING)
+                        player:delKeyItem(xi.keyItem.OLD_RING)
                         player:setLocalVar('[2][76]mustZone', 1)
                     end
                 end,

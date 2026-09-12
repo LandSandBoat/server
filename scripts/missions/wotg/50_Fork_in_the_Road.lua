@@ -16,20 +16,20 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.FORK_IN_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.PRIMAL_GLOW,
+    keyItem     = xi.keyItem.PRIMAL_GLOW,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK },
 }
 
 local zoneEventInfo =
 {
 --  Zone                               Rewarded KI                      Event #, Parameters
-    [xi.zone.JUGNER_FOREST_S]      = { xi.ki.JUGNER_DAWNDROP,         {   7,  82,     0,    0,    0,        0, 7340037,    0, 0 } },
-    [xi.zone.LA_VAULE_S]           = { xi.ki.LA_VAULE_DAWNDROP,       {   5,  85,    23, 1756,    0,       85,       1,    0, 0 } },
-    [xi.zone.SOUTHERN_SAN_DORIA_S] = { xi.ki.SAN_DORIA_DAWNDROP,      { 176,  80,    23, 1756, 2000,        0,       0,    0, 0 } },
-    [xi.zone.BEAUCEDINE_GLACIER_S] = { xi.ki.BEAUCEDINE_DAWNDROP,     {  29, 136,    23, 1756,    0,        0, 6357002,    0, 0 } },
-    [xi.zone.XARCABARD_S]          = { xi.ki.XARCABARD_DAWNDROP,      {  42, 137,    23, 2964, 2000, 66584575, 5941395, 4095, 0 } },
-    [xi.zone.THRONE_ROOM_S]        = { xi.ki.THRONE_ROOM_DAWNDROP,    {  15, 156,    23, 1756,    0,      156,       2,    0, 0 } },
-    [xi.zone.WALK_OF_ECHOES]       = { xi.ki.WALK_OF_ECHOES_DAWNDROP, {  10, 182,    23, 1756,    0,        0,       0, 1984, 1 } },
+    [xi.zone.JUGNER_FOREST_S]      = { xi.keyItem.JUGNER_DAWNDROP,         {   7,  82,     0,    0,    0,        0, 7340037,    0, 0 } },
+    [xi.zone.LA_VAULE_S]           = { xi.keyItem.LA_VAULE_DAWNDROP,       {   5,  85,    23, 1756,    0,       85,       1,    0, 0 } },
+    [xi.zone.SOUTHERN_SAN_DORIA_S] = { xi.keyItem.SAN_DORIA_DAWNDROP,      { 176,  80,    23, 1756, 2000,        0,       0,    0, 0 } },
+    [xi.zone.BEAUCEDINE_GLACIER_S] = { xi.keyItem.BEAUCEDINE_DAWNDROP,     {  29, 136,    23, 1756,    0,        0, 6357002,    0, 0 } },
+    [xi.zone.XARCABARD_S]          = { xi.keyItem.XARCABARD_DAWNDROP,      {  42, 137,    23, 2964, 2000, 66584575, 5941395, 4095, 0 } },
+    [xi.zone.THRONE_ROOM_S]        = { xi.keyItem.THRONE_ROOM_DAWNDROP,    {  15, 156,    23, 1756,    0,      156,       2,    0, 0 } },
+    [xi.zone.WALK_OF_ECHOES]       = { xi.keyItem.WALK_OF_ECHOES_DAWNDROP, {  10, 182,    23, 1756,    0,        0,       0, 1984, 1 } },
 }
 
 local dawndropOnTrigger = function(player, npc)
@@ -54,7 +54,7 @@ local dawndropOnEventFinish = function(player, csid, option, npc)
     if numDawndrops == 6 then
         local ID = zones[player:getZoneID()]
 
-        player:messageSpecial(ID.text.GATHERED_DAWNDROPS_LIGHT, xi.ki.PRIMAL_GLOW)
+        player:messageSpecial(ID.text.GATHERED_DAWNDROPS_LIGHT, xi.keyItem.PRIMAL_GLOW)
         player:messageName(ID.text.RETRACED_ALL_JUNCTIONS, nil)
 
         for _, zoneInfoTable in pairs(zoneEventInfo) do
@@ -63,7 +63,7 @@ local dawndropOnEventFinish = function(player, csid, option, npc)
             end
         end
 
-        player:delKeyItem(xi.ki.RONFAURE_DAWNDROP)
+        player:delKeyItem(xi.keyItem.RONFAURE_DAWNDROP)
 
         mission:complete(player)
     end

@@ -100,7 +100,7 @@ describe('Experience scrolls', function()
         xi.test.world:setSetting('map.MAX_MERIT_POINTS', 30)
         player = xi.test.world:spawnPlayer({ level = 99, zone = xi.zone.GM_HOME })
         player:setLevelCap(99)
-        player:addKeyItem(xi.ki.LIMIT_BREAKER)
+        player:addKeyItem(xi.keyItem.LIMIT_BREAKER)
 
         -- Start with 9,999 LP and 2 merits. Any LP gain will add a merit.
         player:addExp(29999)
@@ -232,7 +232,7 @@ describe('Experience scrolls', function()
             end)
 
             it('does not grant LP without Limit Breaker', function()
-                player:delKeyItem(xi.ki.LIMIT_BREAKER)
+                player:delKeyItem(xi.keyItem.LIMIT_BREAKER)
                 local before = readPoints()
                 useScroll(scroll, scroll.max)
                 checkGainMessage(scroll, scroll.max)

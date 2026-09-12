@@ -19,16 +19,16 @@ end
 
 entity.onTrigger = function(player, npc)
     local missionACP        = player:getCurrentMission(xi.mission.log_id.ACP)
-    local seedspallRosem    = player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)
-    local seedspallCaerulum = player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)
-    local seedspallViridis  = player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
-    -- local amberKey = player:hasKeyItem(xi.ki.AMBER_KEY)
+    local seedspallRosem    = player:hasKeyItem(xi.keyItem.SEEDSPALL_ROSEUM)
+    local seedspallCaerulum = player:hasKeyItem(xi.keyItem.SEEDSPALL_CAERULUM)
+    local seedspallViridis  = player:hasKeyItem(xi.keyItem.SEEDSPALL_VIRIDIS)
+    -- local amberKey = player:hasKeyItem(xi.keyItem.AMBER_KEY)
     -- local lastAmber = player:getCharVar('LastAmberKey') -- When last Amber key was obtained
     local lastViridian = player:getCharVar('LastViridianKey') -- When last Viridian key was obtained
 
     if
         xi.settings.main.ENABLE_ACP == 1 and
-        not player:hasKeyItem(xi.ki.AMBER_KEY)
+        not player:hasKeyItem(xi.keyItem.AMBER_KEY)
     then
         if
             missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_I and
@@ -57,12 +57,12 @@ entity.onTrigger = function(player, npc)
             -- This is for repeats to get amber keys.
             -- Spawn Seed mandragora's with xi.effect.CONFRONTATION for 30 min
         -- elseif SR and SC and SV and missionACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I and player:getCharVar('SEED_MANDY') == 1 then
-            -- npcUtil.giveKeyItem(player, xi.ki.AMBER_KEY)
+            -- npcUtil.giveKeyItem(player, xi.keyItem.AMBER_KEY)
             -- player:setCharVar('LastAmberKey', JstMidnight())
             -- player:setCharVar('SEED_MANDY', 0)
-            -- player:delKeyItem(xi.ki.SEEDSPALL_ROSEUM)
-            -- player:delKeyItem(xi.ki.SEEDSPALL_CAERULUM)
-            -- player:delKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
+            -- player:delKeyItem(xi.keyItem.SEEDSPALL_ROSEUM)
+            -- player:delKeyItem(xi.keyItem.SEEDSPALL_CAERULUM)
+            -- player:delKeyItem(xi.keyItem.SEEDSPALL_VIRIDIS)
         else
             -- Todo: find retail message (if any) and text its ID
         end
@@ -79,9 +79,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 32 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.GATHERER_OF_LIGHT_I)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.GATHERER_OF_LIGHT_II)
-        player:delKeyItem(xi.ki.SEEDSPALL_ROSEUM)
-        player:delKeyItem(xi.ki.SEEDSPALL_CAERULUM)
-        player:delKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
+        player:delKeyItem(xi.keyItem.SEEDSPALL_ROSEUM)
+        player:delKeyItem(xi.keyItem.SEEDSPALL_CAERULUM)
+        player:delKeyItem(xi.keyItem.SEEDSPALL_VIRIDIS)
     elseif csid == 34 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.GATHERER_OF_LIGHT_II)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)

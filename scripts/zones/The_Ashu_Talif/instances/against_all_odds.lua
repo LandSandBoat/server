@@ -12,7 +12,7 @@ local mobTable =
 }
 
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
+    return player:hasKeyItem(xi.keyItem.LIFE_FLOAT) and
         player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_ACCEPTED and
         xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, 'Prog') == 1
 end
@@ -33,8 +33,8 @@ end
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.LIFE_FLOAT)
-    player:delKeyItem(xi.ki.LIFE_FLOAT)
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.keyItem.LIFE_FLOAT)
+    player:delKeyItem(xi.keyItem.LIFE_FLOAT)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 

@@ -51,7 +51,7 @@ describe('Chains of Promathia', function()
             player.events:expect({ eventId = 206 })
             player.events:expect({ eventId = 207 })
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
-            player.assert:hasKI(xi.ki.MYSTERIOUS_AMULET)
+            player.assert:hasKI(xi.keyItem.MYSTERIOUS_AMULET)
         end)
     end)
 
@@ -87,7 +87,7 @@ describe('Chains of Promathia', function()
             player.bcnm:enter('_0h0', xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA)
             player.bcnm:killMobs()
             player.bcnm:expectWin({ finishOption = 2 })
-            player.assert:hasKI(xi.ki.LIGHT_OF_HOLLA)
+            player.assert:hasKI(xi.keyItem.LIGHT_OF_HOLLA)
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
         end)
     end)
@@ -95,7 +95,7 @@ describe('Chains of Promathia', function()
     describe('1-3 The Mothercrystals', function()
         it('should complete all three Promyvion battles and unlock teleports', function()
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
-            player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
+            player:addKeyItem(xi.keyItem.LIGHT_OF_HOLLA)
 
             -- entering next promy
             player:gotoZone(xi.zone.KONSCHTAT_HIGHLANDS)
@@ -110,7 +110,7 @@ describe('Chains of Promathia', function()
             player.bcnm:enter('_0j0', xi.battlefield.id.ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM)
             player.bcnm:killMobs()
             player.bcnm:expectWin({ finishOption = 2 })
-            player.assert:hasKI(xi.ki.LIGHT_OF_DEM)
+            player.assert:hasKI(xi.keyItem.LIGHT_OF_DEM)
 
             -- going to next promy, cs inside hall of transference
             player:gotoZone(xi.zone.TAHRONGI_CANYON)
@@ -132,7 +132,7 @@ describe('Chains of Promathia', function()
 
             -- Should have Light of Mea and be teleported to Lufaise Meadows
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
-                :hasKI(xi.ki.LIGHT_OF_MEA)
+                :hasKI(xi.keyItem.LIGHT_OF_MEA)
                 :inZone(xi.zone.LUFAISE_MEADOWS)
 
             -- zone in cs
@@ -154,12 +154,12 @@ describe('Chains of Promathia', function()
         it('should lose amulet in Lufaise and advance to The Lost City', function()
             -- setup mission
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
-            player:addKeyItem(xi.ki.MYSTERIOUS_AMULET)
+            player:addKeyItem(xi.keyItem.MYSTERIOUS_AMULET)
 
             -- zone in and lose amulet
             player:gotoZone(xi.zone.LUFAISE_MEADOWS)
             player.events:expect({ eventId = 110 })
-            player.assert.no:hasKI(xi.ki.MYSTERIOUS_AMULET)
+            player.assert.no:hasKI(xi.keyItem.MYSTERIOUS_AMULET)
 
             -- zone in to gain next mission
             player:gotoZone(xi.zone.TAVNAZIAN_SAFEHOLD)
@@ -242,7 +242,7 @@ describe('Chains of Promathia', function()
 
             player.entities:gotoAndTrigger('Justinius', { eventId = 125 })
             player.entities:gotoAndTrigger('_0qa', { eventId = 104 })
-            player.assert:hasKI(xi.ki.MYSTERIOUS_AMULET)
+            player.assert:hasKI(xi.keyItem.MYSTERIOUS_AMULET)
 
             player:gotoZone(xi.zone.MISAREAUX_COAST)
             player.entities:gotoAndTrigger('_0p0', { eventId = 5 })
@@ -359,11 +359,11 @@ describe('Chains of Promathia', function()
             player:gotoZone(xi.zone.WINDURST_WATERS)
             player.entities:gotoAndTrigger('Kyume-Romeh', { event = 873 })
             player.entities:gotoAndTrigger('Honoi-Gomoi', { event = 874 })
-            player.assert:hasKI(xi.ki.CRACKED_MIMEO_MIRROR)
+            player.assert:hasKI(xi.keyItem.CRACKED_MIMEO_MIRROR)
 
             player:gotoZone(xi.zone.WINDURST_WALLS)
             player.entities:gotoAndTrigger('Yoran-Oran', { eventId = 470 })
-            player.assert.no:hasKI(xi.ki.CRACKED_MIMEO_MIRROR)
+            player.assert.no:hasKI(xi.keyItem.CRACKED_MIMEO_MIRROR)
 
             player:gotoZone(xi.zone.ATTOHWA_CHASM)
             player.entities:gotoAndTrigger('Loose_Sand')
@@ -375,19 +375,19 @@ describe('Chains of Promathia', function()
             xi.test.world:tick()
 
             player.entities:gotoAndTrigger('Loose_Sand')
-            player.assert:hasKI(xi.ki.MIMEO_JEWEL)
+            player.assert:hasKI(xi.keyItem.MIMEO_JEWEL)
 
             player.entities:gotoAndTrigger('Cradle_of_Rebirth', { event = 2 })
-            player.assert.no:hasKI(xi.ki.MIMEO_JEWEL)
-            player.assert:hasKI(xi.ki.MIMEO_FEATHER)
-            player.assert:hasKI(xi.ki.SECOND_MIMEO_FEATHER)
-            player.assert:hasKI(xi.ki.THIRD_MIMEO_FEATHER)
+            player.assert.no:hasKI(xi.keyItem.MIMEO_JEWEL)
+            player.assert:hasKI(xi.keyItem.MIMEO_FEATHER)
+            player.assert:hasKI(xi.keyItem.SECOND_MIMEO_FEATHER)
+            player.assert:hasKI(xi.keyItem.THIRD_MIMEO_FEATHER)
 
             player:gotoZone(xi.zone.WINDURST_WALLS)
             player.entities:gotoAndTrigger('Yoran-Oran', { event = 471 })
-            player.assert.no:hasKI(xi.ki.MIMEO_FEATHER)
-            player.assert.no:hasKI(xi.ki.SECOND_MIMEO_FEATHER)
-            player.assert.no:hasKI(xi.ki.THIRD_MIMEO_FEATHER)
+            player.assert.no:hasKI(xi.keyItem.MIMEO_FEATHER)
+            player.assert.no:hasKI(xi.keyItem.SECOND_MIMEO_FEATHER)
+            player.assert.no:hasKI(xi.keyItem.THIRD_MIMEO_FEATHER)
 
             player:gotoZone(xi.zone.PORT_WINDURST)
             player.entities:gotoAndTrigger('Yujuju', { event = 592 })
@@ -433,7 +433,7 @@ describe('Chains of Promathia', function()
 
             player:addItem(xi.item.GRAY_CHIP)
             player.actions:tradeNpc('Ghebi_Damomohe', { xi.item.GRAY_CHIP }, { eventId = 52 })
-            player.assert:hasKI(xi.ki.PSOXJA_PASS)
+            player.assert:hasKI(xi.keyItem.PSOXJA_PASS)
 
             player:gotoZone(xi.zone.THE_SHROUDED_MAW)
             player.events:expect({ event = 2 })
@@ -528,7 +528,7 @@ describe('Chains of Promathia', function()
             qm3:setLocalVar('hasProfessorMariselle', 0)
 
             player.entities:gotoAndTrigger('qm_prof_3')
-            player.assert:hasKI(xi.ki.RELIQUIARIUM_KEY)
+            player.assert:hasKI(xi.keyItem.RELIQUIARIUM_KEY)
 
             player.entities:gotoAndTrigger('_0s8', { eventId = 5 })
 
@@ -583,7 +583,7 @@ describe('Chains of Promathia', function()
             player.assert:inZone(xi.zone.PROMYVION_VAHZL)
             player.events:expect({ eventId = 50 })
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
-                :hasKI(xi.ki.LIGHT_OF_VAHZL)
+                :hasKI(xi.keyItem.LIGHT_OF_VAHZL)
         end)
     end)
 
@@ -693,7 +693,7 @@ describe('Chains of Promathia', function()
             player:gotoZone(xi.zone.BATALLIA_DOWNS)
             player.entities:gotoAndTrigger('qm4', { eventId = 0 })
             player.entities:gotoAndTrigger('qm4', { eventId = 1 })
-            player.assert:hasKI(xi.ki.DELKFUTT_RECOGNITION_DEVICE)
+            player.assert:hasKI(xi.keyItem.DELKFUTT_RECOGNITION_DEVICE)
 
             player:gotoZone(xi.zone.LOWER_DELKFUTTS_TOWER)
             player.entities:gotoAndTrigger('_545')
@@ -703,7 +703,7 @@ describe('Chains of Promathia', function()
             xi.test.world:tick()
             player.entities:gotoAndTrigger('_545', { eventId = 25 })
             -- TODO: Are we supposed to lose the KI?
-            -- player.assert.no:hasKI(xi.ki.DELKFUTT_RECOGNITION_DEVICE)
+            -- player.assert.no:hasKI(xi.keyItem.DELKFUTT_RECOGNITION_DEVICE)
 
             player:gotoZone(xi.zone.PSOXJA)
             -- PsoXja CS conditions suck, force the event
@@ -946,7 +946,7 @@ describe('Chains of Promathia', function()
             boggelmann.assert:isSpawned()
             player:claimAndKillMob(boggelmann)
             player.entities:gotoAndTrigger('_0p4', { eventId = 13 })
-            player.assert:hasKI(xi.ki.VESSEL_OF_LIGHT)
+            player.assert:hasKI(xi.keyItem.VESSEL_OF_LIGHT)
 
             player:gotoZone(xi.zone.CARPENTERS_LANDING)
             player.entities:gotoAndTrigger('qm_cryptonberries')
@@ -968,7 +968,7 @@ describe('Chains of Promathia', function()
             player:gotoZone(xi.zone.METALWORKS)
             --             player.entities:gotoAndTrigger('Cid', { eventId = 891 })
             player.entities:gotoAndTrigger('Cid', { eventId = 892 })
-            player.assert:hasKI(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE)
+            player.assert:hasKI(xi.keyItem.LETTERS_FROM_ULMIA_AND_PRISHE)
 
             player:gotoZone(xi.zone.SEALIONS_DEN)
             player.entities:gotoAndTrigger('Sueleen', { eventId = 17 })
@@ -1072,20 +1072,20 @@ describe('Chains of Promathia', function()
         it('should complete the mission successfully', function()
             -- setup mission
             player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
-            player:addKeyItem(xi.ki.BRAND_OF_DAWN)
-            player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
+            player:addKeyItem(xi.keyItem.BRAND_OF_DAWN)
+            player:addKeyItem(xi.keyItem.BRAND_OF_TWILIGHT)
 
             player:gotoZone(xi.zone.THE_GARDEN_OF_RUHMET)
             xi.test.world:tick()
             player.events:expect({ eventId = 201 })
-            player.assert:hasKI(xi.ki.MYSTERIOUS_AMULET_PRISHE)
+            player.assert:hasKI(xi.keyItem.MYSTERIOUS_AMULET_PRISHE)
 
             -- Hume Ebon Panel
             player.entities:gotoAndTrigger('_iz2', { eventId = 202 })
 
             -- Eden was missing this event
             player.entities:gotoAndTrigger('_iz2', { eventId = 120, finishOption = 1 })
-            player.assert:hasKI(xi.ki.LIGHT_OF_VAHZL)
+            player.assert:hasKI(xi.keyItem.LIGHT_OF_VAHZL)
 
             player.entities:gotoAndTrigger('_0z0', { eventId = 203 })
 
@@ -1098,7 +1098,7 @@ describe('Chains of Promathia', function()
             -- Begin: Eden was missing this section
             player:gotoZone(xi.zone.ALTAIEU)
             player.events:expect({ eventId = 165 })
-            player.assert.no:hasKI(xi.ki.MYSTERIOUS_AMULET_PRISHE)
+            player.assert.no:hasKI(xi.keyItem.MYSTERIOUS_AMULET_PRISHE)
             -- End: Eden was missing this section
 
             player.assert:hasMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)

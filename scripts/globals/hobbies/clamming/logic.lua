@@ -46,13 +46,13 @@ end
 
 -- Leaving Bibiki Bay for another zone drops the clamming kit and its bucket contents.
 xi.clamming.removeKit = function(player)
-    if not player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+    if not player:hasKeyItem(xi.keyItem.CLAMMING_KIT) then
         return
     end
 
-    player:delKeyItem(xi.ki.CLAMMING_KIT)
+    player:delKeyItem(xi.keyItem.CLAMMING_KIT)
     resetVariables(player)
-    player:messageSpecial(ID.text.YOU_DROPPED_THE, xi.ki.CLAMMING_KIT)
+    player:messageSpecial(ID.text.YOU_DROPPED_THE, xi.keyItem.CLAMMING_KIT)
 end
 
 -- High tide while the moon waxes, low tide while it wanes.
@@ -78,7 +78,7 @@ end
 -- Clamming Point public functions.
 -----------------------------------
 xi.clamming.nodeOnTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+    if not player:hasKeyItem(xi.keyItem.CLAMMING_KIT) then
         player:messageSpecial(ID.text.AREA_IS_LITTERED)
         return
     end
@@ -98,7 +98,7 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     end
 
     -- Early return: No Clamming Kit.
-    if not player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+    if not player:hasKeyItem(xi.keyItem.CLAMMING_KIT) then
         return
     end
 
@@ -177,7 +177,7 @@ end
 -----------------------------------
 xi.clamming.zonikkiOnTrigger = function(player, npc)
     -- Clamming started.
-    if player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+    if player:hasKeyItem(xi.keyItem.CLAMMING_KIT) then
         -- Bucket is broken.
         if player:getCharVar('[Clam]KitBroken') ~= 0 then
             player:startEvent(30, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -205,7 +205,7 @@ xi.clamming.zonikkiOnEventUpdate = function(player, csid, option, npc)
     -- Start Clamming.
     if csid == 28 then
         local enoughMoney = player:getGil() >= 500 and 1 or 2
-        player:updateEvent(xi.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)
+        player:updateEvent(xi.keyItem.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)
 
     -- Give items or upgrade kit.
     elseif csid == 29 then
@@ -226,14 +226,14 @@ xi.clamming.zonikkiOnEventFinish = function(player, csid, option, npc)
         resetVariables(player) -- Ensure default state.
         player:setCharVar('[Clam]KitSize', 50)
         player:delGil(500)
-        npcUtil.giveKeyItem(player, xi.ki.CLAMMING_KIT)
+        npcUtil.giveKeyItem(player, xi.keyItem.CLAMMING_KIT)
 
     -- Give player clammed items.
     elseif csid == 29 and option == 2 then
         player:setCharVar('[Clam]KitSize', 0)
         player:setCharVar('[Clam]KitWeight', 0)
-        player:delKeyItem(xi.ki.CLAMMING_KIT)
-        player:messageSpecial(ID.text.YOU_RETURN_THE, xi.ki.CLAMMING_KIT)
+        player:delKeyItem(xi.keyItem.CLAMMING_KIT)
+        player:messageSpecial(ID.text.YOU_RETURN_THE, xi.keyItem.CLAMMING_KIT)
         giveClammedItems(player)
 
     -- Get bigger kit.
@@ -260,7 +260,7 @@ xi.clamming.zonikkiOnEventFinish = function(player, csid, option, npc)
     -- Broken bucket.
     elseif csid == 30 then
         resetVariables(player)
-        player:delKeyItem(xi.ki.CLAMMING_KIT)
-        player:messageSpecial(ID.text.YOU_RETURN_THE, xi.ki.CLAMMING_KIT)
+        player:delKeyItem(xi.keyItem.CLAMMING_KIT)
+        player:messageSpecial(ID.text.YOU_RETURN_THE, xi.keyItem.CLAMMING_KIT)
     end
 end

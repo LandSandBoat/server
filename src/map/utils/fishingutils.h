@@ -24,7 +24,7 @@
 #include "data/enums/zone.h"
 
 #include "common/cbasetypes.h"
-#include "enums/key_items.h"
+#include "data/enums/key_item.h"
 #include "items/item_fish.h"
 
 #include <map>
@@ -156,7 +156,7 @@ struct fish_t
     uint8                maxhook;         // maximum that can be hooked (with sabiki rig)
     uint16               rarity;          // [0-1000] : 0 = not rare, 1 = rarest, 1000 = most common
     uint16               baitPower;       // how strong players current lure attracts fish
-    KeyItem              reqKeyItem;      // required key item
+    xi::KeyItem          reqKeyItem;      // required key item
     std::vector<uint16>* reqFish;         // list of required catches
     bool                 quest_only;      // is fish/item quest override only
     bool                 contest;         // is a fish ranking contest fish
@@ -185,7 +185,7 @@ struct fish_t
     , maxhook(0)
     , rarity(0)
     , baitPower(0)
-    , reqKeyItem(KeyItem::NONE)
+    , reqKeyItem(xi::KeyItem::None)
     , reqFish(nullptr)
     , quest_only(false)
     , contest(false)

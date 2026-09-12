@@ -14,7 +14,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, xi.item.INDIGO_MEMOSPHERE) and
-        not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_MEA)
+        not player:hasKeyItem(xi.keyItem.MAP_OF_PROMYVION_MEA)
     then
         player:startEvent(49)
     else
@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_MEA) then
+    if not player:hasKeyItem(xi.keyItem.MAP_OF_PROMYVION_MEA) then
         player:messageSpecial(ID.text.EERIE_GREEN_GLOW)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -33,7 +33,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 49 then
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_PROMYVION_MEA)
+        npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_PROMYVION_MEA)
     end
 end
 

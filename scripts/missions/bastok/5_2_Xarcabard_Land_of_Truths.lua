@@ -92,7 +92,7 @@ mission.sections =
             ['_6ld'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
+                    if player:hasKeyItem(xi.keyItem.SHADOW_FRAGMENT) then
                         return mission:progressEvent(603)
                     end
                 end,
@@ -117,7 +117,7 @@ mission.sections =
 
                 [603] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.SHADOW_FRAGMENT)
+                        player:delKeyItem(xi.keyItem.SHADOW_FRAGMENT)
                     end
                 end,
             },
@@ -164,7 +164,7 @@ mission.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SHADOW_FRAGMENT)
                     player:setMissionStatus(mission.areaId, 4)
                     player:setPos(378, -12, -20, 125, 161)
                 end,

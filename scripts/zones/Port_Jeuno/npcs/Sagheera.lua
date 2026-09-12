@@ -274,7 +274,7 @@ local tier2ChipValue = 10
 local cosmoReady = 2147483649 -- BITMASK for the purchase
 
 local function getCosmoCleanseTime(player)
-    local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
+    local cosmoWaitTime = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_MAUVE) and 3600 or 72000
     local lastCosmoTime = player:getCharVar('Cosmo_Cleanse_TIME')
 
     if lastCosmoTime ~= 0 then
@@ -399,7 +399,7 @@ entity.onTrigger = function(player, npc)
         end
 
         -- bit 13 - player has RHAPSODY_IN_MAUVE (lowers Cosmo Cleanse cost)
-        if player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) then
+        if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_MAUVE) then
             menu = utils.mask.setBit(menu, 13, true)
         end
 
@@ -420,7 +420,7 @@ entity.onTrigger = function(player, npc)
         -- calculate COSMO_CLEANSE parameters
         local cosmoTime = 0
 
-        if player:hasKeyItem(xi.ki.COSMO_CLEANSE) then
+        if player:hasKeyItem(xi.keyItem.COSMO_CLEANSE) then
             hasCosmoCleanse = 1
         else
             cosmoTime = getCosmoCleanseTime(player)
@@ -455,11 +455,11 @@ local handleMainEvent = function(player, option, coinAmount)
     -- purchase COSMO_CLEANSE
     elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
-        local cost      = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
+        local cost      = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
 
         if cosmoTime == cosmoReady and player:delGil(cost) then
             player:setCharVar('SagheeraInteractions', utils.mask.setBit(player:getCharVar('SagheeraInteractions'), 0, false))
-            npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
+            npcUtil.giveKeyItem(player, xi.keyItem.COSMO_CLEANSE)
         end
 
     -- retrieve stored ABCs

@@ -43,7 +43,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(19, player:getCampaignAllegiance(), 23, 1756, 400, 67108863, 659255957, 4905, 0)
                     elseif missionStatus == 1 then
-                        if not player:hasKeyItem(xi.ki.ALCHEMICAL_SIGNAL_FLARE) then
+                        if not player:hasKeyItem(xi.keyItem.ALCHEMICAL_SIGNAL_FLARE) then
                             if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
                                 return mission:progressEvent(26, 137, 23, 2964)
                             else
@@ -82,7 +82,7 @@ mission.sections =
             onEventFinish =
             {
                 [19] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ALCHEMICAL_SIGNAL_FLARE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ALCHEMICAL_SIGNAL_FLARE)
                     mission:setVar(player, 'Status', 1)
                 end,
 
@@ -96,7 +96,7 @@ mission.sections =
                 end,
 
                 [26] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ALCHEMICAL_SIGNAL_FLARE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ALCHEMICAL_SIGNAL_FLARE)
                 end,
 
                 [39] = function(player, csid, option, npc)

@@ -12,7 +12,7 @@ local content = InstanceAssault:new(
     assaultID        = xi.assault.mission.SEAGULL_GROUNDED,
     instanceID       = xi.assault.instance.SEAGULL_GROUNDED,
     assaultArea      = xi.assault.assaultArea.PERIQIA,
-    requiredOrders   = xi.ki.PERIQIA_ASSAULT_ORDERS,
+    requiredOrders   = xi.keyItem.PERIQIA_ASSAULT_ORDERS,
 
     runeOfReleasePos = { x = -495.000, y = -9.695, z = -75.000, rot = 0 },
     ancientBoxPos    = { x = -495.000, y = -9.900, z = -72.000, rot = 0 },

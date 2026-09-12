@@ -117,9 +117,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.LANCE_FISH) and
-                        player:hasKeyItem(xi.ki.PALADIN_LOBSTER) and
-                        player:hasKeyItem(xi.ki.SCUTUM_CRAB)
+                        player:hasKeyItem(xi.keyItem.LANCE_FISH) and
+                        player:hasKeyItem(xi.keyItem.PALADIN_LOBSTER) and
+                        player:hasKeyItem(xi.keyItem.SCUTUM_CRAB)
                     then
                         return quest:progressEvent(3, 136)
                     elseif quest:getVar(player, 'Prog') == 2 then

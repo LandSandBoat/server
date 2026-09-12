@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
 
     -- TRUST
     if
-        player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
+        player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT) and
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar('TrustDialogue') == 0
     then

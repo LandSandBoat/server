@@ -54,10 +54,10 @@ quest.sections =
             ['Signpost3'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PAINTING_OF_A_WINDMILL) then
+                    if not player:hasKeyItem(xi.keyItem.PAINTING_OF_A_WINDMILL) then
                         player:messageSpecial(konschtatID.text.SIGNPOST3_DIALOG_2)
 
-                        return quest:keyItem(xi.ki.PAINTING_OF_A_WINDMILL)
+                        return quest:keyItem(xi.keyItem.PAINTING_OF_A_WINDMILL)
                     end
                 end,
             },
@@ -68,7 +68,7 @@ quest.sections =
             ['Roh_Latteh'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.PAINTING_OF_A_WINDMILL) then
+                    if player:hasKeyItem(xi.keyItem.PAINTING_OF_A_WINDMILL) then
                         return quest:progressEvent(96)
                     end
                 end,
@@ -78,7 +78,7 @@ quest.sections =
             {
                 [96] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
+                        player:delKeyItem(xi.keyItem.PAINTING_OF_A_WINDMILL)
                     end
                 end,
             },

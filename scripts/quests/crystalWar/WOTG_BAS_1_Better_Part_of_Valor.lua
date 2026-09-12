@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_P
 quest.reward =
 {
     gil     = 10000,
-    keyItem = xi.ki.WARNING_LETTER,
+    keyItem = xi.keyItem.WARNING_LETTER,
 }
 
 quest.sections =
@@ -36,7 +36,7 @@ quest.sections =
             {
                 [1] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.CLUMP_OF_ANIMAL_HAIR)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CLUMP_OF_ANIMAL_HAIR)
                 end,
             },
         },
@@ -68,12 +68,12 @@ quest.sections =
             {
                 [116] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:delKeyItem(xi.ki.CLUMP_OF_ANIMAL_HAIR)
+                    player:delKeyItem(xi.keyItem.CLUMP_OF_ANIMAL_HAIR)
                 end,
 
                 [118] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.XHIFHUT)
+                        player:delKeyItem(xi.keyItem.XHIFHUT)
                         player:needToZone(true)
                     end
                 end,
@@ -133,7 +133,7 @@ quest.sections =
 
                 [103] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.XHIFHUT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.XHIFHUT)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },

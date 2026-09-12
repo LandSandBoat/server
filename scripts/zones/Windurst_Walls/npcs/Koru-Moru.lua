@@ -117,7 +117,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 412 then
-        player:delKeyItem(xi.ki.CARBUNCLES_TEAR)
+        player:delKeyItem(xi.keyItem.CARBUNCLES_TEAR)
         player:setCharVar('ClassReunionProgress', 2)
     elseif csid == 407 then
         player:tradeComplete()
@@ -139,7 +139,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('CarbuncleDebacleProgress', 2)
     elseif csid == 417 then
         player:setCharVar('CarbuncleDebacleProgress', 5)
-        npcUtil.giveKeyItem(player, xi.ki.DAZE_BREAKER_CHARM)
+        npcUtil.giveKeyItem(player, xi.keyItem.DAZE_BREAKER_CHARM)
     elseif csid == 419 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.EVOKERS_HORN) -- Evoker's Horn

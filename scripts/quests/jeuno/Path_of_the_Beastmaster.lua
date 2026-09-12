@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMA
 
 quest.reward =
 {
-    keyItem  = xi.ki.JOB_GESTURE_BEASTMASTER,
+    keyItem  = xi.keyItem.JOB_GESTURE_BEASTMASTER,
     title    = xi.title.ANIMAL_TRAINER,
 }
 

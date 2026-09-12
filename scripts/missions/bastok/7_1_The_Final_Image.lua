@@ -112,7 +112,7 @@ mission.sections =
 
                 [764] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.REINFORCED_CERMET)
+                        player:delKeyItem(xi.keyItem.REINFORCED_CERMET)
                     end
                 end,
             },
@@ -131,7 +131,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) == 1 then
                         if mission:getLocalVar(player, 'nmDefeated') == 1 then
                             player:setMissionStatus(mission.areaId, 2)
-                            return mission:keyItem(xi.ki.REINFORCED_CERMET)
+                            return mission:keyItem(xi.keyItem.REINFORCED_CERMET)
                         else
                             npcUtil.popFromQM(player, npc, { romaeveID.mob.MOKKURKALFI, romaeveID.mob.MOKKURKALFI + 1 }, { claim = false, look = true, radius = 2 })
                             npc:hideNPC(0)

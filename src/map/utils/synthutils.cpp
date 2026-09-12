@@ -25,8 +25,8 @@
 #include "common/logging.h"
 #include "common/timer.h"
 #include "common/types/flat_hash_map.h"
+#include "data/enums/key_item.h"
 #include "entities/battle_entity.h"
-#include "enums/key_items.h"
 #include "enums/synthesis_effect.h"
 #include "enums/synthesis_result.h"
 #include "items.h"
@@ -58,35 +58,35 @@ namespace synthutils
 
 struct SynthRecipe
 {
-    uint32  ID{};
-    uint8   Desynth{};
-    KeyItem RequiredKeyItem{};
-    uint8   Wood{};
-    uint8   Smith{};
-    uint8   Gold{};
-    uint8   Cloth{};
-    uint8   Leather{};
-    uint8   Bone{};
-    uint8   Alchemy{};
-    uint8   Cook{};
-    uint16  Crystal{};
-    uint16  HQCrystal{};
-    uint16  Ingredient1{};
-    uint16  Ingredient2{};
-    uint16  Ingredient3{};
-    uint16  Ingredient4{};
-    uint16  Ingredient5{};
-    uint16  Ingredient6{};
-    uint16  Ingredient7{};
-    uint16  Ingredient8{};
-    uint16  Result{};
-    uint16  ResultHQ1{};
-    uint16  ResultHQ2{};
-    uint16  ResultHQ3{};
-    uint8   ResultQty{};
-    uint8   ResultHQ1Qty{};
-    uint8   ResultHQ2Qty{};
-    uint8   ResultHQ3Qty{};
+    uint32      ID{};
+    uint8       Desynth{};
+    xi::KeyItem RequiredKeyItem{};
+    uint8       Wood{};
+    uint8       Smith{};
+    uint8       Gold{};
+    uint8       Cloth{};
+    uint8       Leather{};
+    uint8       Bone{};
+    uint8       Alchemy{};
+    uint8       Cook{};
+    uint16      Crystal{};
+    uint16      HQCrystal{};
+    uint16      Ingredient1{};
+    uint16      Ingredient2{};
+    uint16      Ingredient3{};
+    uint16      Ingredient4{};
+    uint16      Ingredient5{};
+    uint16      Ingredient6{};
+    uint16      Ingredient7{};
+    uint16      Ingredient8{};
+    uint16      Result{};
+    uint16      ResultHQ1{};
+    uint16      ResultHQ2{};
+    uint16      ResultHQ3{};
+    uint8       ResultQty{};
+    uint8       ResultHQ1Qty{};
+    uint8       ResultHQ2Qty{};
+    uint8       ResultHQ3Qty{};
 
     std::string ResultName;
     std::string ContentTag;
@@ -298,7 +298,7 @@ void LoadSynthRecipes()
         const auto recipe = SynthRecipe{
             .ID              = rset->get<uint32>("ID"),
             .Desynth         = rset->get<uint8>("Desynth"),
-            .RequiredKeyItem = rset->get<KeyItem>("KeyItem"),
+            .RequiredKeyItem = rset->get<xi::KeyItem>("KeyItem"),
             .Wood            = rset->get<uint8>("Wood"),
             .Smith           = rset->get<uint8>("Smith"),
             .Gold            = rset->get<uint8>("Gold"),
@@ -377,7 +377,7 @@ auto resolveRecipe(CCharEntity* PChar, const SynthOffer& offer) -> bool
         return false;
     }
 
-    if (recipe.RequiredKeyItem != KeyItem::NONE && !charutils::hasKeyItem(PChar, recipe.RequiredKeyItem))
+    if (recipe.RequiredKeyItem != xi::KeyItem::None && !charutils::hasKeyItem(PChar, recipe.RequiredKeyItem))
     {
         PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
         return false;

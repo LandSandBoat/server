@@ -20,14 +20,14 @@ local zhayolmID   = zones[xi.zone.MOUNT_ZHAYOLM]
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
 local function handlePackage(player)
-    player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+    player:delKeyItem(xi.keyItem.SUPPLIES_PACKAGE)
     player:addCurrency('imperial_standing', 150)
 end
 
 -- TODO: npcUtil.completeMission should support granting IS
 mission.reward =
 {
-    keyItem     = xi.ki.PSC_WILDCAT_BADGE,
+    keyItem     = xi.keyItem.PSC_WILDCAT_BADGE,
     title       = xi.title.PRIVATE_SECOND_CLASS,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.PRESIDENT_SALAHEEM },
 }
@@ -44,7 +44,7 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if not player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         -- Naja Salaheem interactions require the 9th argument in events set to 0.
                         -- This is because Aht Uhrgan Whitegate uses 2 different dats.
                         return mission:progressEvent(3002, { text_table = 0 })
@@ -69,7 +69,7 @@ mission.sections =
             ['Meyaada'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         return mission:progressEvent(5)
                     else
                         return mission:progressEvent(6)
@@ -82,7 +82,7 @@ mission.sections =
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
                         handlePackage(player)
-                        player:messageSpecial(arrapagoID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(arrapagoID.text.HAND_OVER_TO_IMMORTAL, xi.keyItem.SUPPLIES_PACKAGE)
                         player:messageSpecial(arrapagoID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
@@ -94,7 +94,7 @@ mission.sections =
             ['Daswil'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         return mission:progressEvent(5)
                     else
                         return mission:progressEvent(6)
@@ -107,7 +107,7 @@ mission.sections =
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
                         handlePackage(player)
-                        player:messageSpecial(bhaflauID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(bhaflauID.text.HAND_OVER_TO_IMMORTAL, xi.keyItem.SUPPLIES_PACKAGE)
                         player:messageSpecial(bhaflauID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
@@ -119,7 +119,7 @@ mission.sections =
             ['Nahshib'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         return mission:progressEvent(5)
                     else
                         return mission:progressEvent(6)
@@ -130,7 +130,7 @@ mission.sections =
             ['Nareema'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         return mission:progressEvent(5, 1)
                     else
                         return mission:progressEvent(6, 1)
@@ -143,7 +143,7 @@ mission.sections =
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
                         handlePackage(player)
-                        player:messageSpecial(caedarvaID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(caedarvaID.text.HAND_OVER_TO_IMMORTAL, xi.keyItem.SUPPLIES_PACKAGE)
                         player:messageSpecial(caedarvaID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
@@ -155,7 +155,7 @@ mission.sections =
             ['Waudeen'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.SUPPLIES_PACKAGE) then
                         return mission:progressEvent(4)
                     else
                         return mission:progressEvent(5)
@@ -168,7 +168,7 @@ mission.sections =
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
                         handlePackage(player)
-                        player:messageSpecial(zhayolmID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(zhayolmID.text.HAND_OVER_TO_IMMORTAL, xi.keyItem.SUPPLIES_PACKAGE)
                         player:messageSpecial(zhayolmID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,

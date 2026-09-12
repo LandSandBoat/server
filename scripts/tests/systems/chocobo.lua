@@ -11,7 +11,7 @@ describe('Chocobo Rental', function()
 
     before_each(function()
         player = xi.test.world:spawnPlayer({ level = 20, zone = xi.zone.LA_THEINE_PLATEAU })
-        player:addKeyItem(xi.ki.CHOCOBO_LICENSE)
+        player:addKeyItem(xi.keyItem.CHOCOBO_LICENSE)
     end)
 
     after_each(function()
@@ -25,7 +25,7 @@ describe('Chocobo Rental', function()
     end)
 
     it('players without a license cant ride', function()
-        player:delKeyItem(xi.ki.CHOCOBO_LICENSE)
+        player:delKeyItem(xi.keyItem.CHOCOBO_LICENSE)
         player.entities:gotoAndTrigger('Coumaine', { eventId = 121 })
     end)
 

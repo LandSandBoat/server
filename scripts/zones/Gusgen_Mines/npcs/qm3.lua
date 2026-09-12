@@ -14,15 +14,15 @@ entity.onTrigger = function(player, npc)
 
     if
         healingTheLand == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+        player:hasKeyItem(xi.keyItem.SEAL_OF_BANISHING)
     then
-        player:delKeyItem(xi.ki.SEAL_OF_BANISHING)
-        player:messageSpecial(ID.text.FOUND_LOCATION_SEAL, xi.ki.SEAL_OF_BANISHING)
+        player:delKeyItem(xi.keyItem.SEAL_OF_BANISHING)
+        player:messageSpecial(ID.text.FOUND_LOCATION_SEAL, xi.keyItem.SEAL_OF_BANISHING)
     elseif
         healingTheLand == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+        not player:hasKeyItem(xi.keyItem.SEAL_OF_BANISHING)
     then
-        player:messageSpecial(ID.text.IS_ON_THIS_SEAL, xi.ki.SEAL_OF_BANISHING)
+        player:messageSpecial(ID.text.IS_ON_THIS_SEAL, xi.keyItem.SEAL_OF_BANISHING)
     else
         player:messageSpecial(ID.text.LETTERS_IS_WRITTEN_HERE)
     end

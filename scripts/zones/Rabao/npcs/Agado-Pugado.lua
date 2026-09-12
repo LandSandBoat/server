@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     if
         carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
         carbuncleDebacleProgress == 5 and
-        player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM)
+        player:hasKeyItem(xi.keyItem.DAZE_BREAKER_CHARM)
     then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
     elseif
@@ -40,18 +40,18 @@ entity.onTrigger = function(player, npc)
         player:startEvent(66, 0, 331) -- Start and restart quest 'Trial by Wind'
     elseif
         trialByWind == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) and
-        not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        not player:hasKeyItem(xi.keyItem.TUNING_FORK_OF_WIND) and
+        not player:hasKeyItem(xi.keyItem.WHISPER_OF_GALES)
     then
         player:startEvent(107, 0, 331) -- Defeat against Avatar : Need new Fork
     elseif
         trialByWind == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        not player:hasKeyItem(xi.keyItem.WHISPER_OF_GALES)
     then
         player:startEvent(67, 0, 331, 3)
     elseif
         trialByWind == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        player:hasKeyItem(xi.keyItem.WHISPER_OF_GALES)
     then
         local numitem = 0
 
@@ -89,9 +89,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar('TrialByWind_date', 0)
-        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_WIND)
     elseif csid == 107 then
-        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_WIND)
+        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_WIND)
     elseif csid == 69 then
         local item = 0
         if option == 1 then
@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
-            player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
+            player:delKeyItem(xi.keyItem.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar('TrialByWind_date', JstMidnight())
             player:addFame(xi.fameArea.SANDORIA, 30)
             player:addFame(xi.fameArea.BASTOK, 30)

@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar('BeatAroundTheBushin') == 1 then
         player:startEvent(155) -- Start Quest "Beat around the Bushin"
 
-    elseif player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
+    elseif player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) then
         player:startEvent(105) -- Open the door
 
     else

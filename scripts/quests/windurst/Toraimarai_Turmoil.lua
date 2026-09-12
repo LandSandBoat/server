@@ -38,7 +38,7 @@ quest.sections =
                 [785] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.RHINOSTERY_CERTIFICATE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RHINOSTERY_CERTIFICATE)
                     end
                 end,
             },
@@ -66,7 +66,7 @@ quest.sections =
                 end,
             },
 
-            ['Leepe-Hoppe'] = quest:event(790, 0, xi.ki.RHINOSTERY_CERTIFICATE),
+            ['Leepe-Hoppe'] = quest:event(790, 0, xi.keyItem.RHINOSTERY_CERTIFICATE),
 
             onEventFinish =
             {

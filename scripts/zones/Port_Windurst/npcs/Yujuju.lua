@@ -26,7 +26,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 314 then
-        npcUtil.giveKeyItem(player, xi.ki.PORT_WINDURST_SCOOP)
+        npcUtil.giveKeyItem(player, xi.keyItem.PORT_WINDURST_SCOOP)
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(player:getCharVar('QuestMakingHeadlines_var'), 1, true))
     end
 end

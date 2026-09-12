@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 0,
     fameArea = xi.fameArea.WINDURST,
-    keyItem  = xi.ki.GREEN_INVITATION_CARD,
+    keyItem  = xi.keyItem.GREEN_INVITATION_CARD,
 }
 
 local wildcatNpcData =
@@ -67,7 +67,7 @@ quest.sections =
             onEventFinish =
             {
                 [736] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.GREEN_SENTINEL_BADGE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.GREEN_SENTINEL_BADGE)
                     quest:begin(player)
                 end,
             },
@@ -165,8 +165,8 @@ quest.sections =
                 [735] = wildcatOnEventFinish,
 
                 [739] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.GREEN_SENTINEL_BADGE)
-                    player:messageSpecial(windurstWoodsID.text.KEYITEM_LOST, xi.ki.GREEN_SENTINEL_BADGE)
+                    player:delKeyItem(xi.keyItem.GREEN_SENTINEL_BADGE)
+                    player:messageSpecial(windurstWoodsID.text.KEYITEM_LOST, xi.keyItem.GREEN_SENTINEL_BADGE)
 
                     quest:complete(player)
                 end,

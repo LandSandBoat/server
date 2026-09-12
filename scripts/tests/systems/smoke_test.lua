@@ -19,13 +19,13 @@ describe('Smoke Tests', function()
 
         -- Verify starting key items
         player.assert
-            :hasKI(xi.ki.MAP_OF_THE_SAN_DORIA_AREA)
-            :hasKI(xi.ki.JOB_GESTURE_WARRIOR)
-            :hasKI(xi.ki.JOB_GESTURE_MONK)
-            :hasKI(xi.ki.JOB_GESTURE_WHITE_MAGE)
-            :hasKI(xi.ki.JOB_GESTURE_BLACK_MAGE)
-            :hasKI(xi.ki.JOB_GESTURE_RED_MAGE)
-            :hasKI(xi.ki.JOB_GESTURE_THIEF)
+            :hasKI(xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA)
+            :hasKI(xi.keyItem.JOB_GESTURE_WARRIOR)
+            :hasKI(xi.keyItem.JOB_GESTURE_MONK)
+            :hasKI(xi.keyItem.JOB_GESTURE_WHITE_MAGE)
+            :hasKI(xi.keyItem.JOB_GESTURE_BLACK_MAGE)
+            :hasKI(xi.keyItem.JOB_GESTURE_RED_MAGE)
+            :hasKI(xi.keyItem.JOB_GESTURE_THIEF)
 
         -- Verify starting gil
         local expectedGil = xi.settings.main.START_GIL or 10

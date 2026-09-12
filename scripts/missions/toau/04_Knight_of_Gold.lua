@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.KNIGHT_OF
 
 mission.reward =
 {
-    keyItem     = xi.ki.RAILLEFALS_LETTER,
+    keyItem     = xi.keyItem.RAILLEFALS_LETTER,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY },
 }
 

@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, caster)
         return xi.msg.basic.CANT_BE_USED_IN_AREA
     elseif
         target:getMainLvl() < 20 or -- TODO: setting?
-        not target:hasKeyItem(xi.ki.CHOCOBO_LICENSE) or -- TODO: Is this true?
+        not target:hasKeyItem(xi.keyItem.CHOCOBO_LICENSE) or -- TODO: Is this true?
         target:hasEnmity()
     then
         return xi.msg.basic.ITEM_UNABLE_TO_USE -- TODO: Verify/correct message, order of message priority.

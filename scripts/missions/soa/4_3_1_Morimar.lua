@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.MORIMAR)
 
 mission.reward =
 {
-    keyItem     = xi.ki.SAJJAKAS_PROTECTIVE_WARD,
+    keyItem     = xi.keyItem.SAJJAKAS_PROTECTIVE_WARD,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.A_NEW_FORCE_ARISES },
 }
 

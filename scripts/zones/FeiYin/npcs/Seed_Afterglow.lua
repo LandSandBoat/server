@@ -25,9 +25,9 @@ entity.onTrigger = function(player, npc)
     local intensity            = player:getCharVar('SEED_AFTERGLOW_INTENSITY')
 
     if
-        player:hasKeyItem(xi.ki.MARK_OF_SEED) or
-        player:hasKeyItem(xi.ki.AZURE_KEY) or
-        player:hasKeyItem(xi.ki.IVORY_KEY) or
+        player:hasKeyItem(xi.keyItem.MARK_OF_SEED) or
+        player:hasKeyItem(xi.keyItem.AZURE_KEY) or
+        player:hasKeyItem(xi.keyItem.IVORY_KEY) or
         GetSystemTime() < player:getCharVar('LastAzureKey') or
         GetSystemTime() < player:getCharVar('LastIvoryKey') or
         aCrystallineProphecy < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
@@ -66,9 +66,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if option == 100 then
             player:messageSpecial(ID.text.SCINTILLATING_BURST_OF_LIGHT)
-            npcUtil.giveKeyItem(player, xi.ki.MARK_OF_SEED)
+            npcUtil.giveKeyItem(player, xi.keyItem.MARK_OF_SEED)
         elseif option == 200 then
-            npcUtil.giveKeyItem(player, xi.ki.AZURE_KEY)
+            npcUtil.giveKeyItem(player, xi.keyItem.AZURE_KEY)
         end
     end
 end

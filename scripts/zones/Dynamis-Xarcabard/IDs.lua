@@ -45,11 +45,11 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
     {
         TIME_EXTENSION =
         {
-            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17330531 },
-            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17330532 },
-            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17330533 },
-            { minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17330534 },
-            { minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535 },
+            { minutes = 10, ki = xi.keyItem.CRIMSON_GRANULES_OF_TIME,   mob = 17330531 },
+            { minutes = 10, ki = xi.keyItem.AZURE_GRANULES_OF_TIME,     mob = 17330532 },
+            { minutes = 10, ki = xi.keyItem.AMBER_GRANULES_OF_TIME,     mob = 17330533 },
+            { minutes = 10, ki = xi.keyItem.ALABASTER_GRANULES_OF_TIME, mob = 17330534 },
+            { minutes = 20, ki = xi.keyItem.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535 },
         },
 
         REFILL_STATUE =

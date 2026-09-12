@@ -6,7 +6,7 @@ xi.einherjar = xi.einherjar or {}
 
 xi.einherjar.recordLockout = function(player)
     local lockoutInHours = xi.einherjar.settings.EINHERJAR_REENTRY_TIME
-    if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then
         lockoutInHours = 1
     end
 

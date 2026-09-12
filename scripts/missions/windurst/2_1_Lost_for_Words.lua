@@ -40,7 +40,7 @@ local examineRock = function(player, npc)
     if rockOffset == correctRock then
         if missionStatus == 3 then
             player:setMissionStatus(mission.areaId, 4)
-            return mission:keyItem(xi.ki.LAPIS_CORAL)
+            return mission:keyItem(xi.keyItem.LAPIS_CORAL)
         elseif missionStatus == 4 then
             return mission:messageSpecial(mazeID.text.NO_NEED_INVESTIGATE)
         end
@@ -193,7 +193,7 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Nanaa_Mihgo'] = mission:progressEvent(165, 0, xi.ki.LAPIS_CORAL, xi.ki.LAPIS_MONOCLE),
+            ['Nanaa_Mihgo'] = mission:progressEvent(165, 0, xi.keyItem.LAPIS_CORAL, xi.keyItem.LAPIS_MONOCLE),
 
             onEventFinish =
             {
@@ -203,7 +203,7 @@ mission.sections =
                         return
                     end
 
-                    npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LAPIS_MONOCLE)
                     mission:setVar(player, 'Rock', math.randomInt(0, 7))
                     player:setMissionStatus(mission.areaId, 3)
                 end,
@@ -226,7 +226,7 @@ mission.sections =
         {
             ['Bopa_Greso']  = mission:event(167),
             ['Cha_Lebagta'] = mission:event(168),
-            ['Nanaa_Mihgo'] = mission:event(166, 0, xi.ki.LAPIS_CORAL, xi.ki.LAPIS_MONOCLE),
+            ['Nanaa_Mihgo'] = mission:event(166, 0, xi.keyItem.LAPIS_CORAL, xi.keyItem.LAPIS_MONOCLE),
         },
     },
 
@@ -260,10 +260,10 @@ mission.sections =
             onEventFinish =
             {
                 [169] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LAPIS_CORAL)
-                    player:delKeyItem(xi.ki.LAPIS_MONOCLE)
+                    player:delKeyItem(xi.keyItem.LAPIS_CORAL)
+                    player:delKeyItem(xi.keyItem.LAPIS_MONOCLE)
                     mission:setVar(player, 'Rock', 0)
-                    npcUtil.giveKeyItem(player, xi.ki.HIDEOUT_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.HIDEOUT_KEY)
                     player:setMissionStatus(mission.areaId, 5)
                 end,
             },
@@ -290,7 +290,7 @@ mission.sections =
             onEventFinish =
             {
                 [46] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.HIDEOUT_KEY)
+                    player:delKeyItem(xi.keyItem.HIDEOUT_KEY)
                     player:setMissionStatus(mission.areaId, 6)
                 end,
             },

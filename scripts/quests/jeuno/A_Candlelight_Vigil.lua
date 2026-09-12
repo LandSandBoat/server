@@ -66,7 +66,7 @@ quest.sections =
             ['Ilumida'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.HOLY_CANDLE) then
+                    if player:hasKeyItem(xi.keyItem.HOLY_CANDLE) then
                         return quest:progressEvent(194)
                     else
                         return quest:progressEvent(191)
@@ -81,7 +81,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 13)
                         player:addFame(xi.fameArea.BASTOK, 13)
                         player:addFame(xi.fameArea.WINDURST, 13)
-                        player:delKeyItem(xi.ki.HOLY_CANDLE)
+                        player:delKeyItem(xi.keyItem.HOLY_CANDLE)
                         xi.quest.setMustZone(player, xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
                     end
                 end,

@@ -44,7 +44,7 @@ quest.sections =
             {
                 [10143] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.WYATTS_PROPOSAL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.WYATTS_PROPOSAL)
                 end,
             },
         },
@@ -199,7 +199,7 @@ quest.sections =
             onEventFinish =
             {
                 [490] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.WYATTS_PROPOSAL)
+                    player:delKeyItem(xi.keyItem.WYATTS_PROPOSAL)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },

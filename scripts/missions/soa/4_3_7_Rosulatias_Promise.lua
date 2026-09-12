@@ -45,8 +45,8 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.WORLD_TREE_SAPLING)
-                        player:messageSpecial(leafalliaID.text.LOST_KEYITEM, xi.ki.WORLD_TREE_SAPLING)
+                        player:delKeyItem(xi.keyItem.WORLD_TREE_SAPLING)
+                        player:messageSpecial(leafalliaID.text.LOST_KEYITEM, xi.keyItem.WORLD_TREE_SAPLING)
                     end
                 end,
             },

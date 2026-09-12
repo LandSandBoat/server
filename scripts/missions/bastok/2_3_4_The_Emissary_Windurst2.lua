@@ -29,8 +29,8 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 8 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_2_MISSION
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-                        player:delKeyItem(xi.ki.DARK_KEY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_CREST)
+                        player:delKeyItem(xi.keyItem.DARK_KEY)
                         player:setMissionStatus(mission.areaId, 9)
                     end
                 end,
@@ -59,7 +59,7 @@ mission.sections =
             onEventFinish =
             {
                 [242] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DARK_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DARK_KEY)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
 
@@ -113,7 +113,7 @@ mission.sections =
                         return mission:progressEvent(64)
                     elseif missionStatus == 8 then
                         return mission:messageText(portWindurstID.text.MELEK_DIALOG_A)
-                    elseif player:hasKeyItem(xi.ki.KINDRED_CREST) then
+                    elseif player:hasKeyItem(xi.keyItem.KINDRED_CREST) then
                         return mission:progressEvent(66)
                     end
                 end,
@@ -124,9 +124,9 @@ mission.sections =
                 [66] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY)
-                        player:delKeyItem(xi.ki.KINDRED_CREST)
+                        player:delKeyItem(xi.keyItem.KINDRED_CREST)
                         player:setMissionStatus(mission.areaId, 10)
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },

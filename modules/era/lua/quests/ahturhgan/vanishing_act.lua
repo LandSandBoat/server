@@ -19,7 +19,7 @@ m:addOverride('xi.server.onServerStart', function()
         whitegate.onEventFinish[45] = function(player, csid, option, npc)
             if quest:complete(player) then
                 player:needToZone(true)
-                player:delKeyItem(xi.ki.RAINBOW_BERRY)
+                player:delKeyItem(xi.keyItem.RAINBOW_BERRY)
                 xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.A_TASTE_OF_HONEY, 'Stage', JstMidnight()) -- Module change
             end
         end

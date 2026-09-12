@@ -216,10 +216,10 @@ mission.sections =
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
-                    player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
-                    player:addKeyItem(xi.ki.LIGHT_OF_VAHZL)
-                    player:messageSpecial(promyvionVahzlID.text.AMULET_RETURNED, xi.ki.MYSTERIOUS_AMULET)
-                    player:messageSpecial(promyvionVahzlID.text.LIGHT_OF_VAHZL, xi.ki.LIGHT_OF_VAHZL)
+                    player:addKeyItem(xi.keyItem.MYSTERIOUS_AMULET_DRAINED)
+                    player:addKeyItem(xi.keyItem.LIGHT_OF_VAHZL)
+                    player:messageSpecial(promyvionVahzlID.text.AMULET_RETURNED, xi.keyItem.MYSTERIOUS_AMULET)
+                    player:messageSpecial(promyvionVahzlID.text.LIGHT_OF_VAHZL, xi.keyItem.LIGHT_OF_VAHZL)
 
                     mission:complete(player)
                 end,

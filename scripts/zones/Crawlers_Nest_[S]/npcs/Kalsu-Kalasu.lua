@@ -15,16 +15,16 @@ entity.onTrigger = function(player, npc)
             -- message for other nations missing
             player:startEvent(3)
         end
-    elseif player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) then
+    elseif player:hasKeyItem(xi.keyItem.GREEN_RECOMMENDATION_LETTER) then
         player:startEvent(2)
-    elseif not player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) then
+    elseif not player:hasKeyItem(xi.keyItem.GREEN_RECOMMENDATION_LETTER) then
         player:startEvent(1)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1 and option == 0 then
-        npcUtil.giveKeyItem(player, xi.ki.GREEN_RECOMMENDATION_LETTER)
+        npcUtil.giveKeyItem(player, xi.keyItem.GREEN_RECOMMENDATION_LETTER)
     end
 end
 

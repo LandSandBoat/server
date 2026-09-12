@@ -33,13 +33,13 @@ mission.reward =
 
 local requiredFragments =
 {
-    xi.ki.FIRE_FRAGMENT,
-    xi.ki.ICE_FRAGMENT,
-    xi.ki.WIND_FRAGMENT,
-    xi.ki.EARTH_FRAGMENT,
-    xi.ki.LIGHTNING_FRAGMENT,
-    xi.ki.WATER_FRAGMENT,
-    xi.ki.LIGHT_FRAGMENT,
+    xi.keyItem.FIRE_FRAGMENT,
+    xi.keyItem.ICE_FRAGMENT,
+    xi.keyItem.WIND_FRAGMENT,
+    xi.keyItem.EARTH_FRAGMENT,
+    xi.keyItem.LIGHTNING_FRAGMENT,
+    xi.keyItem.WATER_FRAGMENT,
+    xi.keyItem.LIGHT_FRAGMENT,
 }
 
 -- Note: Dark Fragment is granted on complete for ZM4 and not checked here.
@@ -98,8 +98,8 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LIGHTNING_FRAGMENT) then
-                        player:messageSpecial(behemothsDominionID.text.ALREADY_OBTAINED_FRAG, xi.ki.LIGHTNING_FRAGMENT)
+                    if player:hasKeyItem(xi.keyItem.LIGHTNING_FRAGMENT) then
+                        player:messageSpecial(behemothsDominionID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.LIGHTNING_FRAGMENT)
 
                         return mission:noAction()
                     elseif GetSystemTime() >= npc:getLocalVar('cooldown') then
@@ -107,12 +107,12 @@ mission.sections =
                             not GetMobByID(behemothsDominionID.mob.ANCIENT_WEAPON):isSpawned() and
                             not GetMobByID(behemothsDominionID.mob.LEGENDARY_WEAPON):isSpawned()
                         then
-                            return mission:progressEvent(200, xi.ki.LIGHTNING_FRAGMENT)
+                            return mission:progressEvent(200, xi.keyItem.LIGHTNING_FRAGMENT)
                         else
                             return mission:messageSpecial(behemothsDominionID.text.SOMETHING_BETTER)
                         end
                     else
-                        return mission:progressEvent(201, xi.ki.LIGHTNING_FRAGMENT)
+                        return mission:progressEvent(201, xi.keyItem.LIGHTNING_FRAGMENT)
                     end
                 end,
             },
@@ -120,7 +120,7 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.LIGHTNING_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.LIGHTNING_FRAGMENT) then
                         return
                     end
 
@@ -131,11 +131,11 @@ mission.sections =
                 end,
 
                 [201] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.LIGHTNING_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.LIGHTNING_FRAGMENT) then
                         return
                     end
 
-                    giveFragment(player, xi.ki.LIGHTNING_FRAGMENT)
+                    giveFragment(player, xi.keyItem.LIGHTNING_FRAGMENT)
                 end,
             },
         },
@@ -145,21 +145,21 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.WIND_FRAGMENT) then
+                    if player:hasKeyItem(xi.keyItem.WIND_FRAGMENT) then
                         -- If the quest isn't completed, it's accepted by force, and we use quest trigger.
                         if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS) then
-                            player:messageSpecial(capeTerigganID.text.ALREADY_OBTAINED_FRAG, xi.ki.WIND_FRAGMENT)
+                            player:messageSpecial(capeTerigganID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.WIND_FRAGMENT)
                             return mission:noAction()
                         end
                     else
                         if GetSystemTime() >= npc:getLocalVar('cooldown') then
                             if not GetMobByID(capeTerigganID.mob.AXESARION_THE_WANDERER):isSpawned() then
-                                return mission:progressEvent(200, xi.ki.WIND_FRAGMENT)
+                                return mission:progressEvent(200, xi.keyItem.WIND_FRAGMENT)
                             else
                                 return mission:messageSpecial(capeTerigganID.text.SOMETHING_BETTER)
                             end
                         else
-                            return mission:progressEvent(201, xi.ki.WIND_FRAGMENT) -- Gives KI. Starts quest.
+                            return mission:progressEvent(201, xi.keyItem.WIND_FRAGMENT) -- Gives KI. Starts quest.
                         end
                     end
                 end,
@@ -168,7 +168,7 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.WIND_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.WIND_FRAGMENT) then
                         return
                     end
 
@@ -178,13 +178,13 @@ mission.sections =
                 end,
 
                 [201] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.WIND_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.WIND_FRAGMENT) then
                         return
                     end
 
                     player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
 
-                    giveFragment(player, xi.ki.WIND_FRAGMENT)
+                    giveFragment(player, xi.keyItem.WIND_FRAGMENT)
                 end,
             },
         },
@@ -194,12 +194,12 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ICE_FRAGMENT) then
-                        return mission:progressEvent(200, xi.ki.ICE_FRAGMENT)
+                    if not player:hasKeyItem(xi.keyItem.ICE_FRAGMENT) then
+                        return mission:progressEvent(200, xi.keyItem.ICE_FRAGMENT)
                     elseif hasAllFragments(player) then
                         return mission:messageSpecial(cloisterOfFrostID.text.ALREADY_HAVE_ALL_FRAGS)
-                    elseif player:hasKeyItem(xi.ki.ICE_FRAGMENT) then
-                        player:messageSpecial(cloisterOfFrostID.text.ALREADY_OBTAINED_FRAG, xi.ki.ICE_FRAGMENT)
+                    elseif player:hasKeyItem(xi.keyItem.ICE_FRAGMENT) then
+                        player:messageSpecial(cloisterOfFrostID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.ICE_FRAGMENT)
 
                         return mission:noAction()
                     end
@@ -209,11 +209,11 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.ICE_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.ICE_FRAGMENT) then
                         return
                     end
 
-                    giveFragment(player, xi.ki.ICE_FRAGMENT)
+                    giveFragment(player, xi.keyItem.ICE_FRAGMENT)
                 end,
             },
         },
@@ -223,12 +223,12 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.WATER_FRAGMENT) then
-                        return mission:progressEvent(200, xi.ki.WATER_FRAGMENT)
+                    if not player:hasKeyItem(xi.keyItem.WATER_FRAGMENT) then
+                        return mission:progressEvent(200, xi.keyItem.WATER_FRAGMENT)
                     elseif hasAllFragments(player) then
                         return mission:messageSpecial(laTheinePlateauID.text.ALREADY_HAVE_ALL_FRAGS)
-                    elseif player:hasKeyItem(xi.ki.WATER_FRAGMENT) then
-                        player:messageSpecial(laTheinePlateauID.text.ALREADY_OBTAINED_FRAG, xi.ki.WATER_FRAGMENT)
+                    elseif player:hasKeyItem(xi.keyItem.WATER_FRAGMENT) then
+                        player:messageSpecial(laTheinePlateauID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.WATER_FRAGMENT)
 
                         return mission:noAction()
                     end
@@ -238,11 +238,11 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.WATER_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.WATER_FRAGMENT) then
                         return
                     end
 
-                    giveFragment(player, xi.ki.WATER_FRAGMENT)
+                    giveFragment(player, xi.keyItem.WATER_FRAGMENT)
                 end,
             },
         },
@@ -257,21 +257,21 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LIGHT_FRAGMENT) then
+                    if player:hasKeyItem(xi.keyItem.LIGHT_FRAGMENT) then
                          -- If the quest isn't completed, it's accepted and we use quest trigger.
                         if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING) then
-                            player:messageSpecial(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, xi.ki.LIGHT_FRAGMENT)
+                            player:messageSpecial(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.LIGHT_FRAGMENT)
                             return mission:noAction()
                         end
                     else
                         if GetSystemTime() >= npc:getLocalVar('cooldown') then
                             if not GetMobByID(sanctuaryOfZitahID.mob.DOOMED_PILGRIMS):isSpawned() then
-                                return mission:progressEvent(200, xi.ki.LIGHT_FRAGMENT)
+                                return mission:progressEvent(200, xi.keyItem.LIGHT_FRAGMENT)
                             else
                                 return mission:messageSpecial(sanctuaryOfZitahID.text.SOMETHING_BETTER)
                             end
                         else
-                            return mission:progressEvent(201, xi.ki.LIGHT_FRAGMENT) -- Gives KI. Starts quest.
+                            return mission:progressEvent(201, xi.keyItem.LIGHT_FRAGMENT) -- Gives KI. Starts quest.
                         end
                     end
                 end,
@@ -280,7 +280,7 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.LIGHT_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.LIGHT_FRAGMENT) then
                         return
                     end
 
@@ -290,13 +290,13 @@ mission.sections =
                 end,
 
                 [201] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.LIGHT_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.LIGHT_FRAGMENT) then
                         return
                     end
 
                     player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SOUL_SEARCHING)
 
-                    giveFragment(player, xi.ki.LIGHT_FRAGMENT)
+                    giveFragment(player, xi.keyItem.LIGHT_FRAGMENT)
                 end,
             },
         },
@@ -306,12 +306,12 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.EARTH_FRAGMENT) then
-                        return mission:progressEvent(200, xi.ki.EARTH_FRAGMENT)
+                    if not player:hasKeyItem(xi.keyItem.EARTH_FRAGMENT) then
+                        return mission:progressEvent(200, xi.keyItem.EARTH_FRAGMENT)
                     elseif hasAllFragments(player) then
                         return mission:messageSpecial(westernAltepaID.text.ALREADY_HAVE_ALL_FRAGS)
-                    elseif player:hasKeyItem(xi.ki.EARTH_FRAGMENT) then
-                        player:messageSpecial(westernAltepaID.text.ALREADY_OBTAINED_FRAG, xi.ki.EARTH_FRAGMENT)
+                    elseif player:hasKeyItem(xi.keyItem.EARTH_FRAGMENT) then
+                        player:messageSpecial(westernAltepaID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.EARTH_FRAGMENT)
 
                         return mission:noAction()
                     end
@@ -321,11 +321,11 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.EARTH_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.EARTH_FRAGMENT) then
                         return
                     end
 
-                    giveFragment(player, xi.ki.EARTH_FRAGMENT)
+                    giveFragment(player, xi.keyItem.EARTH_FRAGMENT)
                 end,
             },
         },
@@ -335,10 +335,10 @@ mission.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FIRE_FRAGMENT) then
+                    if player:hasKeyItem(xi.keyItem.FIRE_FRAGMENT) then
                         -- If the quest isn't completed, it's accepted and we use quest trigger.
                         if player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) then
-                            player:messageSpecial(yuhtungaJungleID.text.ALREADY_OBTAINED_FRAG, xi.ki.FIRE_FRAGMENT)
+                            player:messageSpecial(yuhtungaJungleID.text.ALREADY_OBTAINED_FRAG, xi.keyItem.FIRE_FRAGMENT)
                             return mission:noAction()
                         end
                     else
@@ -347,12 +347,12 @@ mission.sections =
                                 not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
                                 not GetMobByID(yuhtungaJungleID.mob.CARTHI):isSpawned()
                             then
-                                return mission:progressEvent(200, xi.ki.FIRE_FRAGMENT)
+                                return mission:progressEvent(200, xi.keyItem.FIRE_FRAGMENT)
                             else
                                 return mission:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
                             end
                         else
-                            return mission:progressEvent(201, xi.ki.FIRE_FRAGMENT) -- Gives KI. Starts quest.
+                            return mission:progressEvent(201, xi.keyItem.FIRE_FRAGMENT) -- Gives KI. Starts quest.
                         end
                     end
                 end,
@@ -361,7 +361,7 @@ mission.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.FIRE_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.FIRE_FRAGMENT) then
                         return
                     end
 
@@ -372,13 +372,13 @@ mission.sections =
                 end,
 
                 [201] = function(player, csid, option, npc)
-                    if not canUseHeadstone(player, npc, option, xi.ki.FIRE_FRAGMENT) then
+                    if not canUseHeadstone(player, npc, option, xi.keyItem.FIRE_FRAGMENT) then
                         return
                     end
 
                     player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
 
-                    giveFragment(player, xi.ki.FIRE_FRAGMENT)
+                    giveFragment(player, xi.keyItem.FIRE_FRAGMENT)
                 end,
             },
         },

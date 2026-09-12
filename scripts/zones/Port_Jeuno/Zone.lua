@@ -6,10 +6,10 @@ local zoneObject = {}
 
 local berths =
 {
-    [xi.zone.SAN_DORIA_JEUNO_AIRSHIP] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10010, ashore = 10014 },
-    [xi.zone.WINDURST_JEUNO_AIRSHIP ] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10011, ashore = 10015 },
-    [xi.zone.BASTOK_JEUNO_AIRSHIP   ] = { keyItem = xi.ki.AIRSHIP_PASS,            board = 10012, ashore = 10016 },
-    [xi.zone.KAZHAM_JEUNO_AIRSHIP   ] = { keyItem = xi.ki.AIRSHIP_PASS_FOR_KAZHAM, board = 10013, ashore = 10017 },
+    [xi.zone.SAN_DORIA_JEUNO_AIRSHIP] = { keyItem = xi.keyItem.AIRSHIP_PASS,            board = 10010, ashore = 10014 },
+    [xi.zone.WINDURST_JEUNO_AIRSHIP ] = { keyItem = xi.keyItem.AIRSHIP_PASS,            board = 10011, ashore = 10015 },
+    [xi.zone.BASTOK_JEUNO_AIRSHIP   ] = { keyItem = xi.keyItem.AIRSHIP_PASS,            board = 10012, ashore = 10016 },
+    [xi.zone.KAZHAM_JEUNO_AIRSHIP   ] = { keyItem = xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM, board = 10013, ashore = 10017 },
 }
 
 zoneObject.onInitialize = function(zone)

@@ -123,7 +123,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        player:hasKeyItem(xi.ki.LIGHTNING_CELL)
+                        player:hasKeyItem(xi.keyItem.LIGHTNING_CELL)
                     then
                         return quest:progressEvent(308)
                     end
@@ -133,7 +133,7 @@ quest.sections =
             onZoneIn = function(player, prevZone)
                 if
                     quest:getVar(player, 'Prog') == 4 and
-                    not player:hasKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+                    not player:hasKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
                 then
                     return 309
                 end
@@ -146,7 +146,7 @@ quest.sections =
                 end,
 
                 [309] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_RADIANCE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_RADIANCE)
                 end,
             },
         },
@@ -165,7 +165,7 @@ quest.sections =
                     if
                         quest:getVar(player, 'Prog') >= 2 and
                         npcUtil.tradeHasExactly(trade, { { xi.item.SLAB_OF_PLUMBAGO, 3 } }) and
-                        not player:hasKeyItem(xi.ki.LIGHTNING_CELL)
+                        not player:hasKeyItem(xi.keyItem.LIGHTNING_CELL)
                     then
                         return quest:progressEvent(158)
                     end
@@ -179,7 +179,7 @@ quest.sections =
                 end,
 
                 [158] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.LIGHTNING_CELL) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.LIGHTNING_CELL) then
                         player:confirmTrade()
                     end
                 end,
@@ -190,7 +190,7 @@ quest.sections =
     -- Section: Complete quest
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+            return status == xi.questStatus.QUEST_ACCEPTED and player:hasKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -207,7 +207,7 @@ quest.sections =
                 [932] = function(player, csid, option, npc)
                     if giveQuestReward(player, option) then
                         quest:complete(player)
-                        player:delKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+                        player:delKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
                         quest:setTimedVar(player, 'Timer', NextJstDay())
                     end
                 end,

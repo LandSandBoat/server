@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if npc:getAnimation() == xi.animation.CLOSE_DOOR then
-        if player:hasKeyItem(xi.ki.CRIMSON_ORB) then
+        if player:hasKeyItem(xi.keyItem.CRIMSON_ORB) then
             player:startEvent(42, { canSkip = true })
         end
     end

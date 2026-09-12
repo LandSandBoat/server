@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS
 
 mission.reward =
 {
-    keyItem     = xi.ki.ALLIED_COUNCIL_SUMMONS,
+    keyItem     = xi.keyItem.ALLIED_COUNCIL_SUMMONS,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS },
 }
 

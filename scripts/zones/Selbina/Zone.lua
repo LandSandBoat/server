@@ -32,7 +32,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if
-            player:hasKeyItem(xi.ki.FERRY_TICKET) and
+            player:hasKeyItem(xi.keyItem.FERRY_TICKET) and
             (prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or
             prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
         then
@@ -55,7 +55,7 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
         return
     end
 
-    if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+    if player:hasKeyItem(xi.keyItem.FERRY_TICKET) then
         player:startEvent(200, {
             isHidden = true,
             flags    = bit.bor(

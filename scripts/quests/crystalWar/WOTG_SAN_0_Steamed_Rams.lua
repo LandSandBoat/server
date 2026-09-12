@@ -32,7 +32,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getCampaignAllegiance() > 0 then
                         return quest:event(12)
-                    elseif not player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) then
+                    elseif not player:hasKeyItem(xi.keyItem.RED_RECOMMENDATION_LETTER) then
                         local hasDeclined = quest:getVar(player, 'Option')
 
                         return quest:progressEvent(1, { [7] = hasDeclined })
@@ -46,7 +46,7 @@ quest.sections =
             {
                 [1] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.RED_RECOMMENDATION_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_RECOMMENDATION_LETTER)
                         quest:setVar(player, 'Option', 0)
                     end
                 end,
@@ -64,7 +64,7 @@ quest.sections =
                     then
                         return quest:event(9)
                     elseif
-                        player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) or
+                        player:hasKeyItem(xi.keyItem.RED_RECOMMENDATION_LETTER) or
                         player:getCampaignAllegiance() > 0
                     then
                         local hasDeclined = quest:getVar(player, 'Option')
@@ -82,7 +82,7 @@ quest.sections =
                 [7] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        player:delKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
+                        player:delKeyItem(xi.keyItem.RED_RECOMMENDATION_LETTER)
                     else
                         quest:setVar(player, 'Option', 1)
                     end
@@ -91,7 +91,7 @@ quest.sections =
                 [8] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        player:delKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
+                        player:delKeyItem(xi.keyItem.RED_RECOMMENDATION_LETTER)
                     end
                 end,
 
@@ -123,9 +123,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.CHARRED_PROPELLER) and
-                        player:hasKeyItem(xi.ki.OXIDIZED_PLATE) and
-                        player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+                        player:hasKeyItem(xi.keyItem.CHARRED_PROPELLER) and
+                        player:hasKeyItem(xi.keyItem.OXIDIZED_PLATE) and
+                        player:hasKeyItem(xi.keyItem.PIECE_OF_SHATTERED_LUMBER)
                     then
                         if player:getCampaignAllegiance() == 0 then
                             return quest:progressEvent(12)
@@ -154,14 +154,14 @@ quest.sections =
 
                     if quest:complete(player) then
                         if hasNoAllegiance then
-                            npcUtil.giveKeyItem(player, xi.ki.BRONZE_RIBBON_OF_SERVICE)
+                            npcUtil.giveKeyItem(player, xi.keyItem.BRONZE_RIBBON_OF_SERVICE)
                         end
 
                         player:setCampaignAllegiance(1)
 
-                        player:delKeyItem(xi.ki.CHARRED_PROPELLER)
-                        player:delKeyItem(xi.ki.OXIDIZED_PLATE)
-                        player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+                        player:delKeyItem(xi.keyItem.CHARRED_PROPELLER)
+                        player:delKeyItem(xi.keyItem.OXIDIZED_PLATE)
+                        player:delKeyItem(xi.keyItem.PIECE_OF_SHATTERED_LUMBER)
 
                         player:messageSpecial(southernSandoriaSID.text.NOW_ALLIED_WITH, 1)
                     end
@@ -169,7 +169,7 @@ quest.sections =
 
                 [13] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.RED_RECOMMENDATION_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_RECOMMENDATION_LETTER)
                         player:delQuest(quest.areaId, quest.questId)
                     end
                 end,
@@ -186,9 +186,9 @@ quest.sections =
 
                         player:setCampaignAllegiance(1)
 
-                        player:delKeyItem(xi.ki.CHARRED_PROPELLER)
-                        player:delKeyItem(xi.ki.OXIDIZED_PLATE)
-                        player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+                        player:delKeyItem(xi.keyItem.CHARRED_PROPELLER)
+                        player:delKeyItem(xi.keyItem.OXIDIZED_PLATE)
+                        player:delKeyItem(xi.keyItem.PIECE_OF_SHATTERED_LUMBER)
 
                         player:messageSpecial(southernSandoriaSID.text.NOW_ALLIED_WITH, 1)
                     end
@@ -201,7 +201,7 @@ quest.sections =
             ['qm3'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.CHARRED_PROPELLER) then
+                    if not player:hasKeyItem(xi.keyItem.CHARRED_PROPELLER) then
                         return quest:progressEvent(1)
                     end
                 end,
@@ -210,7 +210,7 @@ quest.sections =
             ['qm4'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER) then
+                    if not player:hasKeyItem(xi.keyItem.PIECE_OF_SHATTERED_LUMBER) then
                         return quest:progressEvent(2)
                     end
                 end,
@@ -219,7 +219,7 @@ quest.sections =
             ['qm5'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.OXIDIZED_PLATE) then
+                    if not player:hasKeyItem(xi.keyItem.OXIDIZED_PLATE) then
                         return quest:progressEvent(3)
                     end
                 end,
@@ -228,15 +228,15 @@ quest.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CHARRED_PROPELLER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CHARRED_PROPELLER)
                 end,
 
                 [2] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_SHATTERED_LUMBER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PIECE_OF_SHATTERED_LUMBER)
                 end,
 
                 [3] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OXIDIZED_PLATE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OXIDIZED_PLATE)
                 end,
             },
 

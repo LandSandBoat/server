@@ -64,9 +64,9 @@ mission.sections =
             {
                 [30] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 2)
-                    player:delKeyItem(xi.ki.PRISTINE_HAIR_RIBBON)
-                    player:messageSpecial(ceizakID.text.KEYITEM_LOST, xi.ki.PRISTINE_HAIR_RIBBON)
-                    npcUtil.giveKeyItem(player, xi.ki.ARCIELAS_SKIRT)
+                    player:delKeyItem(xi.keyItem.PRISTINE_HAIR_RIBBON)
+                    player:messageSpecial(ceizakID.text.KEYITEM_LOST, xi.keyItem.PRISTINE_HAIR_RIBBON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ARCIELAS_SKIRT)
 
                     player:setPos(5.54, 0.42, -6.55, 162, xi.zone.LEAFALLIA)
                 end,

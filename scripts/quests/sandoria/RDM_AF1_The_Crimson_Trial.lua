@@ -95,17 +95,17 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, xi.item.DAVOI_STORAGE_KEY) and
-                        not player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+                        not player:hasKeyItem(xi.keyItem.ORCISH_DRIED_FOOD)
                     then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.ORCISH_DRIED_FOOD)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ORCISH_DRIED_FOOD)
                     end
                 end,
             },
 
             onZoneIn = function(player, prevZone)
                 if
-                    not player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD) and
+                    not player:hasKeyItem(xi.keyItem.ORCISH_DRIED_FOOD) and
                     not GetMobByID(davoiID.mob.PURPLEFLASH_BRUKDOK):isSpawned()
                 then
                     SpawnMob(davoiID.mob.PURPLEFLASH_BRUKDOK) -- Spawned by Quest: The Crimson Trial upon entering the zone
@@ -118,7 +118,7 @@ quest.sections =
             ['Sharzalion'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD) then
+                    if player:hasKeyItem(xi.keyItem.ORCISH_DRIED_FOOD) then
                         return quest:progressEvent(75) -- Finish quest.
                     else
                         return quest:event(74) -- Reminder.
@@ -146,7 +146,7 @@ quest.sections =
             {
                 [75] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+                        player:delKeyItem(xi.keyItem.ORCISH_DRIED_FOOD)
                     end
                 end,
             },

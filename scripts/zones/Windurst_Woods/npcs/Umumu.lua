@@ -38,7 +38,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 381 then
-        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WOODS_SCOOP)
+        npcUtil.giveKeyItem(player, xi.keyItem.WINDURST_WOODS_SCOOP)
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(player:getCharVar('QuestMakingHeadlines_var'), 3, true))
     end
 end

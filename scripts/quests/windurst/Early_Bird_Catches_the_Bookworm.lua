@@ -70,13 +70,13 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD) then
-                            return quest:progressEvent(389, 0, xi.ki.ART_FOR_EVERYONE)
+                        if not player:hasKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD) then
+                            return quest:progressEvent(389, 0, xi.keyItem.ART_FOR_EVERYONE)
                         else
-                            return quest:progressEvent(390, 0, xi.ki.ART_FOR_EVERYONE)
+                            return quest:progressEvent(390, 0, xi.keyItem.ART_FOR_EVERYONE)
                         end
                     elseif questProgress == 1 then
-                        return quest:progressEvent(397, 0, xi.ki.ART_FOR_EVERYONE)
+                        return quest:progressEvent(397, 0, xi.keyItem.ART_FOR_EVERYONE)
                     elseif questProgress >= 2 then
                         return quest:progressEvent(400)
                     end
@@ -90,9 +90,9 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
+                        player:hasKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
                     then
-                        return quest:progressEvent(395, 0, xi.ki.ART_FOR_EVERYONE)
+                        return quest:progressEvent(395, 0, xi.keyItem.ART_FOR_EVERYONE)
                     elseif questProgress == 1 then
                         return quest:progressEvent(396)
                     elseif questProgress == 2 then
@@ -108,12 +108,12 @@ quest.sections =
             onEventFinish =
             {
                 [389] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
                 end,
 
                 [395] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
+                    player:delKeyItem(xi.keyItem.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
                 end,
 
                 [398] = function(player, csid, option, npc)
@@ -123,7 +123,7 @@ quest.sections =
                 [400] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLocalVar('Quest[2][13]mustZone', 1)
-                        player:delKeyItem(xi.ki.ART_FOR_EVERYONE)
+                        player:delKeyItem(xi.keyItem.ART_FOR_EVERYONE)
                     end
                 end,
             },
@@ -157,7 +157,7 @@ quest.sections =
             {
                 [58] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.ART_FOR_EVERYONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ART_FOR_EVERYONE)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },

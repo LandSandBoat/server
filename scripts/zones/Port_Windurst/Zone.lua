@@ -31,7 +31,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
         player:startEvent(10003)
         return
     end

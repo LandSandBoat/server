@@ -113,7 +113,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        player:hasKeyItem(xi.ki.CHARRED_HELM) and
+                        player:hasKeyItem(xi.keyItem.CHARRED_HELM) and
                         npcUtil.tradeMatches(trade, { { xi.item.SPOOL_OF_GOLD_THREAD, 1 } })
                     then
                         return quest:progressEvent(162)
@@ -158,7 +158,7 @@ quest.sections =
 
                 [162] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:delKeyItem(xi.ki.CHARRED_HELM)
+                    player:delKeyItem(xi.keyItem.CHARRED_HELM)
                     quest:setVar(player, 'Prog', 9)
                     quest:setMustZone(player)
                     quest:setVar(player, 'Wait', GetSystemTime() + 60) -- 1 minute wait time
@@ -221,8 +221,8 @@ quest.sections =
 
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.THIEF_IN_NORG then
-                        player:messageSpecial(waughroonID.text.CHARM_DAMAGED, xi.ki.CHARRED_HELM, xi.item.BANISHING_CHARM)
-                        player:addKeyItem(xi.ki.CHARRED_HELM)
+                        player:messageSpecial(waughroonID.text.CHARM_DAMAGED, xi.keyItem.CHARRED_HELM, xi.item.BANISHING_CHARM)
+                        player:addKeyItem(xi.keyItem.CHARRED_HELM)
                         quest:setVar(player, 'Prog', 7)
                     end
                 end,

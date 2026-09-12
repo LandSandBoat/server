@@ -91,9 +91,9 @@ quest.sections =
                     --- ??? by end of river
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        not player:hasKeyItem(xi.ki.MIRE_INCENSE)
+                        not player:hasKeyItem(xi.keyItem.MIRE_INCENSE)
                     then
-                        return quest:keyItem(xi.ki.MIRE_INCENSE)
+                        return quest:keyItem(xi.keyItem.MIRE_INCENSE)
                     end
                 end,
             },
@@ -104,17 +104,17 @@ quest.sections =
                     local progressVar = quest:getVar(player, 'Prog')
                     -- First time clicking on ???
                     if
-                        player:hasKeyItem(xi.ki.MIRE_INCENSE) and
+                        player:hasKeyItem(xi.keyItem.MIRE_INCENSE) and
                         progressVar == 2
                     then
-                        return quest:progressEvent(556, { [1] = xi.ki.MIRE_INCENSE })
+                        return quest:progressEvent(556, { [1] = xi.keyItem.MIRE_INCENSE })
 
                     -- Second time clicking on ???
                     elseif
                         progressVar == 3 and
                         not GetMobByID(misareauxID.mob.ALSHA):isSpawned()
                     then
-                        return quest:progressEvent(557, { [1] = xi.ki.MIRE_INCENSE })
+                        return quest:progressEvent(557, { [1] = xi.keyItem.MIRE_INCENSE })
 
                     -- Clicking on the ??? after killing NM
                     elseif progressVar == 4 then
@@ -156,8 +156,8 @@ quest.sections =
 
                 [558] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    player:delKeyItem(xi.ki.MIRE_INCENSE)
-                    npcUtil.giveKeyItem(player, xi.ki.BETTER_HUMES_AND_MANNEQUINS)
+                    player:delKeyItem(xi.keyItem.MIRE_INCENSE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BETTER_HUMES_AND_MANNEQUINS)
                 end,
             },
         },
@@ -174,7 +174,7 @@ quest.sections =
                             [3] = xi.mannequin.cost.TRADE,
                             [4] = xi.mannequin.cost.POSE,
                             [5] = player:getGil(),
-                            [6] = xi.ki.BETTER_HUMES_AND_MANNEQUINS })
+                            [6] = xi.keyItem.BETTER_HUMES_AND_MANNEQUINS })
                     end
                 end,
             },
@@ -192,7 +192,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:hasKeyItem(xi.ki.BETTER_HUMES_AND_MANNEQUINS)
+                player:hasKeyItem(xi.keyItem.BETTER_HUMES_AND_MANNEQUINS)
         end,
 
         [xi.zone.MHAURA] =

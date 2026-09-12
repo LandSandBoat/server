@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(133) -- Start Quest "20 in Pirate Years"
     elseif
         twentyInPirateYears == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.TRICK_BOX)
+        player:hasKeyItem(xi.keyItem.TRICK_BOX)
     then
         player:startEvent(134) -- Finish Quest "20 in Pirate Years"
     elseif
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(136) -- Start Quest "True Will"
     elseif
-        player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and
+        player:hasKeyItem(xi.keyItem.OLD_TRICK_BOX) and
         player:getCharVar('trueWillCS') == 0
     then
         player:startEvent(137)
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() <= 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.ANJU)
         else
-            player:delKeyItem(xi.ki.TRICK_BOX)
+            player:delKeyItem(xi.keyItem.TRICK_BOX)
             player:addItem(xi.item.ANJU)
             player:addItem(xi.item.ZUSHIO)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ANJU) -- Anju

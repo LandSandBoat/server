@@ -10,7 +10,7 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
         player:startEvent(230, utils.MAX_UINT32 - 2, 10)
     else
         player:startEvent(230, 14)
@@ -20,7 +20,7 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 230 and option == 10 then
         if player:delGil(500000) then
-            player:addKeyItem(xi.ki.AIRSHIP_PASS)
+            player:addKeyItem(xi.keyItem.AIRSHIP_PASS)
             player:addTitle(xi.title.HAVE_WINGS_WILL_FLY)
             player:updateEvent(0, 1)
         else
@@ -31,8 +31,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 230 and option == 10 then
-        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS)
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.AIRSHIP_PASS)
         end
     end
 end

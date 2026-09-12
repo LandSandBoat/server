@@ -8,7 +8,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, caster)
     local result = 0
-    if not target:hasKeyItem(xi.ki.PASHHOW_GATE_CRYSTAL) then
+    if not target:hasKeyItem(xi.keyItem.PASHHOW_GATE_CRYSTAL) then
         result = 445
     end
 

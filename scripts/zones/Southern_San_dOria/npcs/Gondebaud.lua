@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
         then
             player:startEvent(3504)
         end
-    elseif player:hasKeyItem(xi.ki.RED_INSTITUTE_CARD) then
+    elseif player:hasKeyItem(xi.keyItem.RED_INSTITUTE_CARD) then
         player:startEvent(3501)
     elseif trustSandoria == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(3502)
@@ -46,7 +46,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 3500 or csid == 3504) and option == 2 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-        npcUtil.giveKeyItem(player, xi.ki.RED_INSTITUTE_CARD)
+        npcUtil.giveKeyItem(player, xi.keyItem.RED_INSTITUTE_CARD)
     elseif csid == 3503 or csid == 3553 then
         local spellID = player:getLocalVar('TradingTrustCipher')
         player:setLocalVar('TradingTrustCipher', 0)

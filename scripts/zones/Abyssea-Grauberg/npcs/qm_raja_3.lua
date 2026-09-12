@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_OFFSET + 8, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_OFFSET + 8, { xi.keyItem.WARPED_CHARIOT_PLATE, xi.keyItem.SHATTERED_IRON_GIANT_CHAIN })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

@@ -37,7 +37,7 @@ mission.sections =
             {
                 [67] = function(player, csid, option, npc)
                     if player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.CAUTERIZE then
-                        npcUtil.giveKeyItem(player, xi.ki.LIGHTSWORM)
+                        npcUtil.giveKeyItem(player, xi.keyItem.LIGHTSWORM)
                     end
 
                     mission:complete(player)

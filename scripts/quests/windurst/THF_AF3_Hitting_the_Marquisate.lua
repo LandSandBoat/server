@@ -43,11 +43,11 @@ local garlaigeQmOnTrigger = function(player, npc)
     local qmData = garlaigeQmInfo[npc:getName()]
 
     if
-        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
+        player:hasKeyItem(xi.keyItem.BOMB_INCENSE) and
         quest:getVar(player, 'hagainProg') == qmData[1]
     then
         player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-        return quest:progressCutscene(qmData[2], xi.ki.BOMB_INCENSE)
+        return quest:progressCutscene(qmData[2], xi.keyItem.BOMB_INCENSE)
     end
 end
 
@@ -79,7 +79,7 @@ quest.sections =
             {
                 [512] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.CAT_BURGLARS_NOTE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CAT_BURGLARS_NOTE)
                 end,
             },
         },
@@ -134,10 +134,10 @@ quest.sections =
                             return quest:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 7)
                         elseif
                             not GetMobByID(garlaigeID.mob.CHANDELIER):isSpawned() and
-                            player:hasKeyItem(xi.ki.BOMB_INCENSE)
+                            player:hasKeyItem(xi.keyItem.BOMB_INCENSE)
                         then
                             player:messageSpecial(garlaigeID.text.HEAT_FROM_CEILING)
-                            return quest:progressCutscene(56, xi.ki.BOMB_INCENSE)
+                            return quest:progressCutscene(56, xi.keyItem.BOMB_INCENSE)
                         end
                     end
                 end,
@@ -184,7 +184,7 @@ quest.sections =
                 [119] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:delKeyItem(xi.ki.CAT_BURGLARS_NOTE)
+                        player:delKeyItem(xi.keyItem.CAT_BURGLARS_NOTE)
                     end
                 end,
             },
@@ -242,11 +242,11 @@ quest.sections =
                     local hagainProgress = quest:getVar(player, 'hagainProg')
 
                     if hagainProgress == 0 then
-                        return quest:progressEvent(10003, 0, xi.ki.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
+                        return quest:progressEvent(10003, 0, xi.keyItem.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
                     elseif hagainProgress == 8 then
                         return quest:progressEvent(10006)
                     else
-                        return quest:progressEvent(10004, 0, xi.ki.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
+                        return quest:progressEvent(10004, 0, xi.keyItem.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
                     end
                 end,
             },
@@ -255,12 +255,12 @@ quest.sections =
             {
                 [10003] = function(player, csid, option, npc)
                     quest:setVar(player, 'hagainProg', 1)
-                    npcUtil.giveKeyItem(player, xi.ki.BOMB_INCENSE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOMB_INCENSE)
                 end,
 
                 [10005] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.BOMB_INCENSE)
+                    player:delKeyItem(xi.keyItem.BOMB_INCENSE)
                     quest:setVar(player, 'hagainProg', 8)
                 end,
             },

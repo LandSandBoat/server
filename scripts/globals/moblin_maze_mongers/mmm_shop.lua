@@ -23,7 +23,7 @@ local optionTable =
 }
 
 xi.mmm.shopOnTrigger = function(player)
-    if player:hasKeyItem(xi.ki.TATTERED_MAZE_MONGER_POUCH) then
+    if player:hasKeyItem(xi.keyItem.TATTERED_MAZE_MONGER_POUCH) then
         local marbles  = player:getCurrency('moblin_marble')
         local ccPoints = xi.mmm.calculateCCPoints(player)
 

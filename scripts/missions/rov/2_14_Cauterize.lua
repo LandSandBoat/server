@@ -16,7 +16,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CAUTERIZE)
 
 mission.reward =
 {
-    keyItem = xi.ki.LIGHTSWORM,
+    keyItem = xi.keyItem.LIGHTSWORM,
 }
 
 -- NOTE: No capture exists which causes the player to land on Uncertain Destinations. It

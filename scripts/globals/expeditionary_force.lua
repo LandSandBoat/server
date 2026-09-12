@@ -693,19 +693,19 @@ local bannerNMs =
 
 local regionKITable =
 {
-    [xi.region.ARAGONEU        ] = xi.ki.ARAGONEU_EF_INSIGNIA,
-    [xi.region.DERFLAND        ] = xi.ki.DERFLAND_EF_INSIGNIA,
-    [xi.region.ELSHIMO_LOWLANDS] = xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
-    [xi.region.ELSHIMO_UPLANDS ] = xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA,
-    [xi.region.FAUREGANDI      ] = xi.ki.FAUREGANDI_EF_INSIGNIA,
-    [xi.region.KOLSHUSHU       ] = xi.ki.KOLSHUSHU_EF_INSIGNIA,
-    [xi.region.KUZOTZ          ] = xi.ki.KUZOTZ_EF_INSIGNIA,
-    [xi.region.LITELOR         ] = xi.ki.LITELOR_EF_INSIGNIA,
-    [xi.region.NORVALLEN       ] = xi.ki.NORVALLEN_EF_INSIGNIA,
-    [xi.region.QUFIMISLAND     ] = xi.ki.QUFIM_EF_INSIGNIA,
-    [xi.region.VALDEAUNIA      ] = xi.ki.VALDEAUNIA_EF_INSIGNIA,
-    [xi.region.VOLLBOW         ] = xi.ki.VOLLBOW_EF_INSIGNIA,
-    [xi.region.ZULKHEIM        ] = xi.ki.ZULKHEIM_EF_INSIGNIA,
+    [xi.region.ARAGONEU        ] = xi.keyItem.ARAGONEU_EF_INSIGNIA,
+    [xi.region.DERFLAND        ] = xi.keyItem.DERFLAND_EF_INSIGNIA,
+    [xi.region.ELSHIMO_LOWLANDS] = xi.keyItem.ELSHIMO_LOWLANDS_EF_INSIGNIA,
+    [xi.region.ELSHIMO_UPLANDS ] = xi.keyItem.ELSHIMO_UPLANDS_EF_INSIGNIA,
+    [xi.region.FAUREGANDI      ] = xi.keyItem.FAUREGANDI_EF_INSIGNIA,
+    [xi.region.KOLSHUSHU       ] = xi.keyItem.KOLSHUSHU_EF_INSIGNIA,
+    [xi.region.KUZOTZ          ] = xi.keyItem.KUZOTZ_EF_INSIGNIA,
+    [xi.region.LITELOR         ] = xi.keyItem.LITELOR_EF_INSIGNIA,
+    [xi.region.NORVALLEN       ] = xi.keyItem.NORVALLEN_EF_INSIGNIA,
+    [xi.region.QUFIMISLAND     ] = xi.keyItem.QUFIM_EF_INSIGNIA,
+    [xi.region.VALDEAUNIA      ] = xi.keyItem.VALDEAUNIA_EF_INSIGNIA,
+    [xi.region.VOLLBOW         ] = xi.keyItem.VOLLBOW_EF_INSIGNIA,
+    [xi.region.ZULKHEIM        ] = xi.keyItem.ZULKHEIM_EF_INSIGNIA,
 }
 
 -----------------------------------

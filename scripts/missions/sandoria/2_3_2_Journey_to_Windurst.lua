@@ -26,7 +26,7 @@ mission.sections =
             ['Uu_Zhoumo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SHIELD_OFFERING) then
+                    if player:hasKeyItem(xi.keyItem.SHIELD_OFFERING) then
                         return mission:progressEvent(42)
                     end
                 end,
@@ -36,8 +36,8 @@ mission.sections =
             {
                 [42] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 6)
-                    player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.SHIELD_OFFERING)
-                    player:delKeyItem(xi.ki.SHIELD_OFFERING)
+                    player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.keyItem.SHIELD_OFFERING)
+                    player:delKeyItem(xi.keyItem.SHIELD_OFFERING)
                 end,
             },
         },
@@ -88,7 +88,7 @@ mission.sections =
 
                 [238] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 5)
-                    npcUtil.giveKeyItem(player, xi.ki.SHIELD_OFFERING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SHIELD_OFFERING)
 
                     if
                         xi.settings.main.ENABLE_TRUST_QUESTS == 1 and

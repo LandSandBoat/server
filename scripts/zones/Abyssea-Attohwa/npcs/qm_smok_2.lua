@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.SMOK_OFFSET + 4, { xi.ki.HOLLOW_DRAGON_EYE })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.SMOK_OFFSET + 4, { xi.keyItem.HOLLOW_DRAGON_EYE })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

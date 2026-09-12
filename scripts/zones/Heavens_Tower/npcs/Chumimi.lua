@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(270, 0, xi.item.BAG_OF_SEEDS) -- Start Quest "Recollections"
     elseif
         recollections == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.FOE_FINDER_MK_I)
+        player:hasKeyItem(xi.keyItem.FOE_FINDER_MK_I)
     then
         player:startEvent(275) -- Finish Quest "Recollections"
     elseif
@@ -119,7 +119,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 275 then
         if npcUtil.giveItem(player, xi.item.WIZARDS_SABOTS) then
             player:setCharVar('recollectionsQuest', 0)
-            player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
+            player:delKeyItem(xi.keyItem.FOE_FINDER_MK_I)
             player:addFame(xi.fameArea.WINDURST, 20)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
         end
@@ -127,13 +127,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
         player:setCharVar('rootProblem', 1)
     elseif csid == 279 then
-        npcUtil.giveKeyItem(player, xi.ki.SLUICE_SURVEYOR_MK_I)
+        npcUtil.giveKeyItem(player, xi.keyItem.SLUICE_SURVEYOR_MK_I)
     elseif csid == 281 then
         if npcUtil.giveItem(player, xi.item.WIZARDS_PETASOS) then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
             player:addFame(xi.fameArea.WINDURST, 20)
             player:addTitle(xi.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE)
-            player:delKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
+            player:delKeyItem(xi.keyItem.SLUICE_SURVEYOR_MK_I)
         end
     end
 end

@@ -7,15 +7,15 @@ local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.MAMOOL_JA_ASSAULT_ORDERS) and
+    return player:hasKeyItem(xi.keyItem.MAMOOL_JA_ASSAULT_ORDERS) and
         player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
         player:getCharVar('assaultEntered') == 0 and
-        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:hasKeyItem(xi.keyItem.ASSAULT_ARMBAND) and
         player:getMainLvl() > 50
 end
 
 instanceObject.entryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.MAMOOL_JA_ASSAULT_ORDERS) and
+    return player:hasKeyItem(xi.keyItem.MAMOOL_JA_ASSAULT_ORDERS) and
         player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
         player:getCharVar('assaultEntered') == 0 and
         player:getMainLvl() > 50

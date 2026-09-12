@@ -8,20 +8,20 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.SHADES_OF_VENGEANCE and
-        player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
+        player:hasKeyItem(xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
 end
 
 instanceObject.entryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.SHADES_OF_VENGEANCE or
-        player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
+        player:hasKeyItem(xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
 end
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
-    if player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
-        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
-        player:delKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
+    if player:hasKeyItem(xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
+        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
+        player:delKeyItem(xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
     end
 
     player:addTempItem(xi.item.CAGE_OF_DVUCCA_FIREFLIES)

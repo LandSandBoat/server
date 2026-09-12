@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.SICKLEMOON_SALT) then
+    if player:hasKeyItem(xi.keyItem.SICKLEMOON_SALT) then
         player:startEvent(514)
     else
         player:startEvent(516)
@@ -16,7 +16,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 514 and option == 1 then
-        player:delKeyItem(xi.ki.SICKLEMOON_SALT)
+        player:delKeyItem(xi.keyItem.SICKLEMOON_SALT)
     end
 end
 

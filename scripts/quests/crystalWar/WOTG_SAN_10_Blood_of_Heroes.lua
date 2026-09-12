@@ -57,7 +57,7 @@ quest.sections =
                         return quest:progressEvent(3)
                     elseif
                         questProgress == 3 and
-                        not player:hasKeyItem(xi.ki.VIAL_OF_MILITARY_PRISM_POWDER)
+                        not player:hasKeyItem(xi.keyItem.VIAL_OF_MILITARY_PRISM_POWDER)
                     then
                         -- NOTE: Upon implementation of the instance for this quest, on instance failure will
                         -- need to set the 'Timer' charVar to VanadielUniqueDay() + 1
@@ -109,7 +109,7 @@ quest.sections =
                 end,
 
                 [3] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_MILITARY_PRISM_POWDER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_MILITARY_PRISM_POWDER)
                     quest:setVar(player, 'Prog', 2)
                 end,
 
@@ -128,7 +128,7 @@ quest.sections =
                 end,
 
                 [13] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_MILITARY_PRISM_POWDER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_MILITARY_PRISM_POWDER)
                 end,
             },
         },

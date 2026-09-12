@@ -16,7 +16,7 @@ local content = Limbus:new({
     index            = 2,
     area             = 3,
     entryNpc         = 'Matter_Diffusion_Module',
-    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
+    requiredKeyItems = { xi.keyItem.COSMO_CLEANSE, xi.keyItem.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = 'TEMENOS_WESTERN_TOWER',
     lootCrateId      = ID.npc.W_LOOT_CRATE,
     timeExtension    = 15,

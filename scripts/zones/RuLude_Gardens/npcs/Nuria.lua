@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.MAP_OF_THE_JEUNO_AREA) then
+    if player:hasKeyItem(xi.keyItem.MAP_OF_THE_JEUNO_AREA) then
         player:startEvent(10095)
     else
         player:startEvent(10096)

@@ -16,7 +16,7 @@ quest.reward =
     fameArea = xi.fameArea.WINDURST,
     exp      = 2000,
     gil      = 3200,
-    keyItem  = xi.ki.MAP_OF_THE_ATTOHWA_CHASM,
+    keyItem  = xi.keyItem.MAP_OF_THE_ATTOHWA_CHASM,
     title    = xi.title.DEED_VERIFIER,
 }
 
@@ -58,7 +58,7 @@ quest.sections =
                     if progress == 0 then
                         return quest:event(596)
                     elseif progress == 1 then
-                        return quest:progressEvent(595, 0, xi.ki.DEED_TO_PURGONORGO_ISLE)
+                        return quest:progressEvent(595, 0, xi.keyItem.DEED_TO_PURGONORGO_ISLE)
                     elseif progress == 3 then
                         return quest:progressEvent(597)
                     else
@@ -118,7 +118,7 @@ quest.sections =
 
                 [34] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    npcUtil.giveKeyItem(player, xi.ki.DEED_TO_PURGONORGO_ISLE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DEED_TO_PURGONORGO_ISLE)
                 end,
             },
 
@@ -138,7 +138,7 @@ quest.sections =
         {
             afterZoneIn = function(player)
                 if quest:getVar(player, 'Prog') == 2 then
-                    return quest:progressEvent(8, 4, xi.ki.DEED_TO_PURGONORGO_ISLE, 0, 274, 8)
+                    return quest:progressEvent(8, 4, xi.keyItem.DEED_TO_PURGONORGO_ISLE, 0, 274, 8)
                 end
             end,
 
@@ -146,7 +146,7 @@ quest.sections =
             {
                 [8] = function(player, csid, option, npc)
                     if option == 101 then
-                        player:updateEvent(3, xi.ki.MAP_OF_THE_ATTOHWA_CHASM, 0, 274, 8)
+                        player:updateEvent(3, xi.keyItem.MAP_OF_THE_ATTOHWA_CHASM, 0, 274, 8)
                     end
                 end,
             },
@@ -155,7 +155,7 @@ quest.sections =
             {
                 [8] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_ATTOHWA_CHASM)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_THE_ATTOHWA_CHASM)
                 end,
             },
         },

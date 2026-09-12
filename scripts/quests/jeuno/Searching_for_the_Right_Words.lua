@@ -123,7 +123,7 @@ quest.sections =
             ['Ilumida'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MOONDROP) then
+                    if player:hasKeyItem(xi.keyItem.MOONDROP) then
                         return quest:progressEvent(198) -- Quest complete
                     else
                         return quest:event(199) -- Reminder
@@ -135,7 +135,7 @@ quest.sections =
             {
                 [198] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.MOONDROP)
+                        player:delKeyItem(xi.keyItem.MOONDROP)
                         player:addFame(xi.fameArea.SANDORIA, 23)
                         player:addFame(xi.fameArea.BASTOK, 23)
                         player:addFame(xi.fameArea.WINDURST, 23)
@@ -163,7 +163,7 @@ quest.sections =
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.MOONDROP) then
+                    if player:hasKeyItem(xi.keyItem.MOONDROP) then
                         return
                     end
 
@@ -201,7 +201,7 @@ quest.sections =
                 [14] = function(player, csid, option, npc)
                     if
                         option == 0 and
-                        npcUtil.giveKeyItem(player, xi.ki.MOONDROP)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MOONDROP)
                     then
                         quest:setVar(player, 'Prog', 5)
                     end

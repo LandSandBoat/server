@@ -41,7 +41,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if
-            player:hasKeyItem(xi.ki.FERRY_TICKET) and
+            player:hasKeyItem(xi.keyItem.FERRY_TICKET) and
             (prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
             prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
             prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
@@ -71,8 +71,8 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     then
         if
             xi.settings.main.ENABLE_TOAU == 1 and
-            player:hasKeyItem(xi.ki.BOARDING_PERMIT) and
-            player:hasKeyItem(xi.ki.FERRY_TICKET)
+            player:hasKeyItem(xi.keyItem.BOARDING_PERMIT) and
+            player:hasKeyItem(xi.keyItem.FERRY_TICKET)
         then
             player:startEvent(200, {
                 isHidden = true,
@@ -84,10 +84,10 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
             })
         else
             player:startEvent(204)
-            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.keyItem.BOARDING_PERMIT)
         end
     else
-        if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+        if player:hasKeyItem(xi.keyItem.FERRY_TICKET) then
             player:startEvent(200, {
                 isHidden = true,
                 flags    = bit.bor(

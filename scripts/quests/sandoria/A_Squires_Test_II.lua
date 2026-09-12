@@ -15,7 +15,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.fameArea.SANDORIA,
-    keyItem  = xi.ki.SQUIRE_CERTIFICATE,
+    keyItem  = xi.keyItem.SQUIRE_CERTIFICATE,
     title    = xi.title.SPELUNKER,
 }
 
@@ -59,7 +59,7 @@ quest.sections =
             ['Balasiel'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STALACTITE_DEW) then
+                    if player:hasKeyItem(xi.keyItem.STALACTITE_DEW) then
                         return quest:progressEvent(626)
                     else
                         return quest:event(630)
@@ -73,7 +73,7 @@ quest.sections =
             {
                 [626] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.STALACTITE_DEW)
+                        player:delKeyItem(xi.keyItem.STALACTITE_DEW)
                     end
                 end,
 
@@ -100,7 +100,7 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
+                    if not player:hasKeyItem(xi.keyItem.STALACTITE_DEW) then
                         quest:setVar(player, 'Timer', GetSystemTime() + 30)
                     end
 
@@ -111,9 +111,9 @@ quest.sections =
             ['qm3'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
+                    if not player:hasKeyItem(xi.keyItem.STALACTITE_DEW) then
                         if GetSystemTime() <= quest:getVar(player, 'Timer') then
-                            return quest:keyItem(xi.ki.STALACTITE_DEW)
+                            return quest:keyItem(xi.keyItem.STALACTITE_DEW)
                         else
                             return quest:messageSpecial(ordellesCavesID.text.DEW_SLIPS_THROUGH_FINGERS)
                         end

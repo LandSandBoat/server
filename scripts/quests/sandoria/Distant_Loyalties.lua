@@ -40,7 +40,7 @@ quest.sections =
                 [663] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.GOLDSMITHING_ORDER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.GOLDSMITHING_ORDER)
                     end
                 end,
             },
@@ -60,7 +60,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
                     if
                         questProgress == 3 and
-                        player:hasKeyItem(xi.ki.MYTHRIL_HEARTS)
+                        player:hasKeyItem(xi.keyItem.MYTHRIL_HEARTS)
                     then
                         return quest:progressEvent(665)
                     end
@@ -75,7 +75,7 @@ quest.sections =
                 [665] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         quest:setVar(player, 'finalCS', 1)
-                        player:delKeyItem(xi.ki.MYTHRIL_HEARTS)
+                        player:delKeyItem(xi.keyItem.MYTHRIL_HEARTS)
                     end
                 end,
             },
@@ -99,7 +99,7 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        player:hasKeyItem(xi.ki.GOLDSMITHING_ORDER)
+                        player:hasKeyItem(xi.keyItem.GOLDSMITHING_ORDER)
                     then
                         return quest:progressEvent(315)
                     elseif questProgress == 1 then
@@ -121,7 +121,7 @@ quest.sections =
             onEventFinish =
             {
                 [315] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.GOLDSMITHING_ORDER)
+                    player:delKeyItem(xi.keyItem.GOLDSMITHING_ORDER)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
@@ -133,7 +133,7 @@ quest.sections =
 
                 [318] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    npcUtil.giveKeyItem(player, xi.ki.MYTHRIL_HEARTS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MYTHRIL_HEARTS)
                 end,
             },
         },
@@ -158,7 +158,7 @@ quest.sections =
             onEventFinish =
             {
                 [319] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.GOLDSMITHING_ORDER)
+                    player:delKeyItem(xi.keyItem.GOLDSMITHING_ORDER)
                     quest:setVar(player, 'finalCS', 0)
                 end,
             },

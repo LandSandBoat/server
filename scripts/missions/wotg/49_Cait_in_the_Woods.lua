@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_IN_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.RONFAURE_DAWNDROP,
+    keyItem     = xi.keyItem.RONFAURE_DAWNDROP,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.FORK_IN_THE_ROAD },
 }
 

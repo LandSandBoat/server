@@ -177,7 +177,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 4)
                     local newPosition = npcUtil.pickNewPosition(npc:getID(), positionTable)
                     npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-                    return quest:keyItem(xi.ki.MUNAHDAS_PACKAGE)
+                    return quest:keyItem(xi.keyItem.MUNAHDAS_PACKAGE)
                 end,
             },
         },
@@ -197,7 +197,7 @@ quest.sections =
             onEventFinish =
             {
                 [695] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MUNAHDAS_PACKAGE)
+                    player:delKeyItem(xi.keyItem.MUNAHDAS_PACKAGE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },

@@ -83,7 +83,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STAR_RING1) then
+                    if player:hasKeyItem(xi.keyItem.STAR_RING1) then
                         return quest:progressEvent(150)
                     elseif quest:getVar(player, 'Prog') == 0 then
                         return quest:event(146)
@@ -100,7 +100,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') >= 1 and
-                        not player:hasKeyItem(xi.ki.STAR_RING1)
+                        not player:hasKeyItem(xi.keyItem.STAR_RING1)
                     then
                         return quest:event(142)
                     end
@@ -173,7 +173,7 @@ quest.sections =
             {
                 [46] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.STAR_RING1) -- Kept after completion. The Circle of Time consumes it.
+                        npcUtil.giveKeyItem(player, xi.keyItem.STAR_RING1) -- Kept after completion. The Circle of Time consumes it.
                     end
                 end,
             },

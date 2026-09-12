@@ -12,8 +12,8 @@ local ID = zones[xi.zone.ULEGUERAND_RANGE]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.MYSTIC_ICE) then
-        npcUtil.giveKeyItem(player, xi.ki.MYSTIC_ICE)
+    if not player:hasKeyItem(xi.keyItem.MYSTIC_ICE) then
+        npcUtil.giveKeyItem(player, xi.keyItem.MYSTIC_ICE)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

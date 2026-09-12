@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BEAUTY_AND_
 
 mission.reward =
 {
-    keyItem     = xi.ki.PRISTINE_HAIR_RIBBON,
+    keyItem     = xi.keyItem.PRISTINE_HAIR_RIBBON,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.WILDCAT_WITH_A_GOLD_PELT },
 }
 

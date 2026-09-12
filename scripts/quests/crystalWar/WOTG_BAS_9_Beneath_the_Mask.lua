@@ -134,7 +134,7 @@ quest.sections =
                 [2] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    if npcUtil.giveKeyItem(player, xi.ki.WAX_SEAL) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.WAX_SEAL) then
                         quest:setVar(player, 'Prog', 4)
                     end
                 end,
@@ -146,7 +146,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 4 and
-                player:hasKeyItem(xi.ki.WAX_SEAL)
+                player:hasKeyItem(xi.keyItem.WAX_SEAL)
         end,
 
         [xi.zone.BASTOK_MARKETS_S] =
@@ -162,7 +162,7 @@ quest.sections =
             {
                 [43] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    player:delKeyItem(xi.ki.WAX_SEAL)
+                    player:delKeyItem(xi.keyItem.WAX_SEAL)
                 end,
             },
         },

@@ -53,7 +53,7 @@ mission.sections =
                         -- Paid to skip ahead, handle this manually
                         mission:complete(player)
                         player:delGil(1000000)
-                        npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ADOULINIAN_CHARTER_PERMIT)
                     end
                 end,
             }
@@ -79,9 +79,9 @@ mission.sections =
             {
                 [10118] = function(player, csid, option, npc)
                     mission:complete(player)
-                    player:delKeyItem(xi.ki.GEOMAGNETRON)
-                    npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
-                    npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
+                    player:delKeyItem(xi.keyItem.GEOMAGNETRON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.GEOMAGNETRON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ADOULINIAN_CHARTER_PERMIT)
                     player:setCharVar('SOA', 0)
                 end,
             },

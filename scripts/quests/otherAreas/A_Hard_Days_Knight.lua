@@ -102,7 +102,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     -- TODO: Needs verification for single-trade events
-                    if not player:hasKeyItem(xi.ki.TEMPLE_KNIGHT_KEY) then
+                    if not player:hasKeyItem(xi.keyItem.TEMPLE_KNIGHT_KEY) then
                         if
                             npcUtil.tradeHasExactly(trade, xi.item.SEALION_CREST_KEY) or
                             npcUtil.tradeHasExactly(trade, xi.item.CORAL_CREST_KEY)
@@ -143,7 +143,7 @@ quest.sections =
                 [632] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 0)
-                    npcUtil.giveKeyItem(player, xi.ki.TEMPLE_KNIGHT_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TEMPLE_KNIGHT_KEY)
                 end
             },
         },

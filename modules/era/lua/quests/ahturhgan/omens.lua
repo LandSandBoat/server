@@ -18,7 +18,7 @@ m:addOverride('xi.server.onServerStart', function()
         -- Copy of the base handler. Transformations is offered at JST midnight.
         whitegate.onEventFinish[716] = function(player, csid, option, npc)
             if quest:complete(player) then
-                player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
+                player:delKeyItem(xi.keyItem.SEALED_IMMORTAL_ENVELOPE)
 
                 xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
                 xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer', JstMidnight()) -- Module change

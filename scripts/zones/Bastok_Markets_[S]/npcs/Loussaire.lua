@@ -37,18 +37,18 @@ entity.onTrigger = function(player, npc)
             )
         then
             local itemid   = xi.item.SCHOLARS_GOWN
-            local firstKI  = xi.ki.PEISTE_DUNG
-            local secondKI = xi.ki.SAMPLE_OF_GRAUBERG_CHERT
+            local firstKI  = xi.keyItem.PEISTE_DUNG
+            local secondKI = xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT
 
             if loafersQuestProgress == 1 or loafersQuestProgress == 2 then
                 itemid   = xi.item.SCHOLARS_LOAFERS
-                firstKI  = xi.ki.RAFFLESIA_DREAMSPIT
-                secondKI = xi.ki.DROGAROGAN_BONEMEAL
+                firstKI  = xi.keyItem.RAFFLESIA_DREAMSPIT
+                secondKI = xi.keyItem.DROGAROGAN_BONEMEAL
 
             elseif pantsQuestProgress == 1 or pantsQuestProgress == 2 then
                 itemid   = xi.item.SCHOLARS_PANTS
-                firstKI  = xi.ki.SLUG_MUCUS
-                secondKI = xi.ki.DJINN_EMBER
+                firstKI  = xi.keyItem.SLUG_MUCUS
+                secondKI = xi.keyItem.DJINN_EMBER
             end
 
             player:startEvent(50, itemid, firstKI, secondKI)
@@ -83,37 +83,37 @@ entity.onTrigger = function(player, npc)
 
             -- Check Key Items and give them their dynamic event.
             if
-                player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT) and
-                player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) and
+                player:hasKeyItem(xi.keyItem.RAFFLESIA_DREAMSPIT) and
+                player:hasKeyItem(xi.keyItem.DROGAROGAN_BONEMEAL) and
                 loafersQuestProgress == 3
             then
                 -- Scholar's Loafers
                 player:startEvent(cutsceneID, 15748)
                 player:setLocalVar('item', 15748)
-                player:setLocalVar('firstKI', xi.ki.RAFFLESIA_DREAMSPIT)
-                player:setLocalVar('secondKI', xi.ki.DROGAROGAN_BONEMEAL)
+                player:setLocalVar('firstKI', xi.keyItem.RAFFLESIA_DREAMSPIT)
+                player:setLocalVar('secondKI', xi.keyItem.DROGAROGAN_BONEMEAL)
 
             elseif
-                player:hasKeyItem(xi.ki.SLUG_MUCUS) and
-                player:hasKeyItem(xi.ki.DJINN_EMBER) and
+                player:hasKeyItem(xi.keyItem.SLUG_MUCUS) and
+                player:hasKeyItem(xi.keyItem.DJINN_EMBER) and
                 pantsQuestProgress == 3
             then
                 -- Scholar's Pants
                 player:startEvent(cutsceneID, 16311)
                 player:setLocalVar('item', 16311)
-                player:setLocalVar('firstKI', xi.ki.SLUG_MUCUS)
-                player:setLocalVar('secondKI', xi.ki.DJINN_EMBER)
+                player:setLocalVar('firstKI', xi.keyItem.SLUG_MUCUS)
+                player:setLocalVar('secondKI', xi.keyItem.DJINN_EMBER)
 
             elseif
-                player:hasKeyItem(xi.ki.PEISTE_DUNG) and
-                player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT) and
+                player:hasKeyItem(xi.keyItem.PEISTE_DUNG) and
+                player:hasKeyItem(xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT) and
                 gownQuestProgress == 3
             then
                 -- Scholar's Gown
                 player:startEvent(cutsceneID, 14580)
                 player:setLocalVar('item', 14580)
-                player:setLocalVar('firstKI', xi.ki.PEISTE_DUNG)
-                player:setLocalVar('secondKI', xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
+                player:setLocalVar('firstKI', xi.keyItem.PEISTE_DUNG)
+                player:setLocalVar('secondKI', xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT)
 
             -- Show them the normal Menu to select from.
             else
@@ -153,15 +153,15 @@ entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 49 or csid == 53 then
         -- Display Loafers
         if option == 2 then
-            player:updateEvent(option, xi.ki.RAFFLESIA_DREAMSPIT, xi.ki.DROGAROGAN_BONEMEAL, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.keyItem.RAFFLESIA_DREAMSPIT, xi.keyItem.DROGAROGAN_BONEMEAL, 0, 0, 0, 0, 0)
 
         -- Display Pants
         elseif option == 4 then
-            player:updateEvent(option, xi.ki.SLUG_MUCUS, xi.ki.DJINN_EMBER, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.keyItem.SLUG_MUCUS, xi.keyItem.DJINN_EMBER, 0, 0, 0, 0, 0)
 
         -- Display Gown
         elseif option == 6 then
-            player:updateEvent(option, xi.ki.PEISTE_DUNG, xi.ki.SAMPLE_OF_GRAUBERG_CHERT, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.keyItem.PEISTE_DUNG, xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT, 0, 0, 0, 0, 0)
 
         -- Confirm Loafers
         elseif option == 1 then

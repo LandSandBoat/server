@@ -48,8 +48,8 @@ mission.sections =
             {
                 [33] = function(player, csid, option, npc)
                     if option == 3 then
-                        player:delKeyItem(xi.ki.SOUL_SIPHON)
-                        player:messageSpecial(kamihrID.text.LOST_KEYITEM, xi.ki.SOUL_SIPHON)
+                        player:delKeyItem(xi.keyItem.SOUL_SIPHON)
+                        player:messageSpecial(kamihrID.text.LOST_KEYITEM, xi.keyItem.SOUL_SIPHON)
                         xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT, 'Timer', VanadielUniqueDay() + 1)
                         mission:complete(player)
                     end

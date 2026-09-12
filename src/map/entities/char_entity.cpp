@@ -2663,13 +2663,13 @@ void CCharEntity::UpdateMoghancement()
         // Remove the previous moghancement
         if (m_moghancementID != 0)
         {
-            charutils::delKeyItem(this, static_cast<KeyItem>(m_moghancementID));
+            charutils::delKeyItem(this, static_cast<xi::KeyItem>(m_moghancementID));
         }
 
         // Add the new moghancement
         if (newMoghancementID != 0)
         {
-            charutils::addKeyItem(this, static_cast<KeyItem>(newMoghancementID));
+            charutils::addKeyItem(this, static_cast<xi::KeyItem>(newMoghancementID));
         }
 
         // Send only one key item packet if they are in the same key item table

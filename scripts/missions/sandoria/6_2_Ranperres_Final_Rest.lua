@@ -91,7 +91,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if
-                        player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) and
+                        player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) and
                         missionStatus > 2 and
                         missionStatus < 6
                     then
@@ -185,10 +185,10 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        not player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                        not player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
                     then
                         return mission:progressEvent(8)
-                    elseif player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
+                    elseif player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:messageSpecial(krtID.text.FINAL_RESTING_PLACE)
                     end
                 end,
@@ -212,8 +212,8 @@ mission.sections =
                 end,
 
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_SAN_DORIAN_BOOK)
-                    player:delKeyItem(xi.ki.PIECE_OF_PAPER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
+                    player:delKeyItem(xi.keyItem.PIECE_OF_PAPER)
                 end,
             },
         },
@@ -225,7 +225,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
+                    if player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1036)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
@@ -244,7 +244,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
+                    if player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
@@ -269,13 +269,13 @@ mission.sections =
                 end,
 
                 [1035] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:delKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
                     player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
 
                 [1036] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:delKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
                     player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
@@ -297,7 +297,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
+                    if player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
@@ -318,7 +318,7 @@ mission.sections =
                 end,
 
                 [1035] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:delKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
                     player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,

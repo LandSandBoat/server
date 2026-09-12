@@ -12,7 +12,7 @@ local content = InstanceAssault:new(
     assaultID        = xi.assault.mission.LEUJAOAM_CLEANSING,
     instanceID       = xi.assault.instance.LEUJAOAM_CLEANSING,
     assaultArea      = xi.assault.assaultArea.LEUJAOAM_SANCTUM,
-    requiredOrders   = xi.ki.LEUJAOAM_ASSAULT_ORDERS,
+    requiredOrders   = xi.keyItem.LEUJAOAM_ASSAULT_ORDERS,
 
     runeOfReleasePos = { x = 476.000, y = 8.479, z = 40.000, rot = 49 },
     ancientBoxPos    = { x = 476.000, y = 8.479, z = 39.000, rot = 49 },

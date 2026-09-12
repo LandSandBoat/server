@@ -28,7 +28,7 @@ describe('Seekers of Adoulin', function()
             player.entities:gotoAndTrigger('Darcia', { eventId = 10117, finishOption = 1 })
 
             player.assert:hasMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
-            player.assert:hasKI(xi.ki.GEOMAGNETRON)
+            player.assert:hasKI(xi.keyItem.GEOMAGNETRON)
         end)
 
         it('Paid route (skip Geomagnetron)', function()
@@ -43,7 +43,7 @@ describe('Seekers of Adoulin', function()
 
             player.assert:hasCompletedMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
             player.assert:hasMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
-            player.assert:hasKI(xi.ki.ADOULINIAN_CHARTER_PERMIT)
+            player.assert:hasKI(xi.keyItem.ADOULINIAN_CHARTER_PERMIT)
         end)
     end)
 end)

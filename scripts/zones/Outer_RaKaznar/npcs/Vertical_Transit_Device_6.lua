@@ -9,7 +9,7 @@ local ID = zones[xi.zone.OUTER_RAKAZNAR]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.SILVERY_PLATE) then
+    if player:hasKeyItem(xi.keyItem.SILVERY_PLATE) then
         player:startEvent(48, 1, 300, 1, 100, 0, 6, 0, 0)
     else
         player:messageSpecial(ID.text.THIS_BAFFLING_GADGET, 0)
