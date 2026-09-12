@@ -634,7 +634,6 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
         const uint32 points = static_cast<uint32>(static_cast<double>(exp) * percentage);
 
         charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), points);
-        GainInfluencePoints(PChar, points / 2);
     }
     return 0; // added conquest points
 }
