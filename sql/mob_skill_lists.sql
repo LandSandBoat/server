@@ -1918,6 +1918,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,495); -- Snort
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,496); -- Rabid Dance
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Urvan',424,497); -- Lowing
 INSERT INTO `mob_skill_lists` VALUES ('OuryuCometh',425,1405); -- Ouryu Flying Attack
+INSERT INTO `mob_skill_lists` VALUES ('Valkeng_AF',426,1940);
+INSERT INTO `mob_skill_lists` VALUES ('Valkeng_AF',426,1941);
+INSERT INTO `mob_skill_lists` VALUES ('Valkeng_AF',426,1942);
+INSERT INTO `mob_skill_lists` VALUES ('Valkeng_AF',426,1943);
+INSERT INTO `mob_skill_lists` VALUES ('Valkeng_AF',426,1944);
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);

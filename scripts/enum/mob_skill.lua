@@ -1211,6 +1211,7 @@ xi.mobSkill =
     WATER_SHOT                    = 2014,
     LIGHT_SHOT                    = 2015,
     DARK_SHOT                     = 2016,
+    FRAME_CHANGE_AUTOMATON        = 2018,
 
     -- HUNDRED_FISTS                 = 2020,
     ERASER_AUTOMATON              = 2021,
