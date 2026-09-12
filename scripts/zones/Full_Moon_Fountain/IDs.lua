@@ -17,6 +17,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7073, -- Tallying conquest results...
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7333, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED   = 7335, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED     = 7348, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         NO_BATTLEFIELD_ENTRY          = 7355, -- A strong magical force is whirling up from the platform.
         UNABLE_TO_PROTECT             = 7390, -- You were unable to protect Ajido-Marujido. Now leaving the battlefield.

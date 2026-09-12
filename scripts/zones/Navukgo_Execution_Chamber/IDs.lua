@@ -16,6 +16,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7237, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED   = 7239, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED     = 7252, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         NO_BATTLEFIELD_ENTRY          = 7277, -- The door is locked.
         TESTIMONY_IS_TORN             = 7295, -- Your <item> is torn...

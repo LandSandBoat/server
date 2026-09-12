@@ -22,7 +22,9 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include <optional>
 #include <sol/sol.hpp>
+#include <tuple>
 
 class CLuaClientEntityPair;
 
@@ -34,6 +36,7 @@ public:
 
     void finish(sol::optional<uint16> eventId, sol::optional<uint32> option) const;
     void update(sol::optional<uint16> eventId, sol::optional<uint32> option) const;
+    auto updateWithPosition(sol::optional<uint16> eventId, sol::optional<uint32> option, const sol::optional<sol::table>& position) const -> std::tuple<sol::object, bool>;
     void expectNotInEvent() const;
     void expect(sol::table expectedEvent) const;
 
@@ -41,6 +44,7 @@ public:
 
 private:
     auto currentId() const -> uint16;
+    auto resolveEventId(sol::optional<uint16> eventId) const -> std::optional<uint16>;
     void sendEventPacket(sol::optional<uint16> eventId, sol::optional<uint32> option, bool isUpdate) const;
 
     CLuaClientEntityPair* parent_;

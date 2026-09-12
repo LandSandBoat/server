@@ -16,6 +16,7 @@ zones[xi.zone.MONARCH_LINN] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         TIME_IN_THE_BATTLEFIELD_IS_UP = 7119, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED   = 7121, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED     = 7134, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         GLOWING_MIST                  = 7150, -- A glowing mist of ever-changing proportions floats before you...
         MEMBERS_OF_YOUR_PARTY         = 7425, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.

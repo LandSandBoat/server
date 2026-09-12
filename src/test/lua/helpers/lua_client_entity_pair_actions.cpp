@@ -49,6 +49,7 @@
 #include "map/packets/c2s/0x051_equipset_set.h"
 #include "map/packets/c2s/0x053_lockstyle.h"
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
+#include "map/packets/c2s/0x06f_group_leave.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
 #include "map/packets/c2s/0x077_group_change2.h"
 #include "map/packets/c2s/0x083_shop_buy.h"
@@ -449,6 +450,22 @@ void CLuaClientEntityPairActions::acceptPartyInvite() const
     const auto packet         = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_SOLICIT_RES>();
     auto*      responsePacket = packet->as<GP_CLI_COMMAND_GROUP_SOLICIT_RES>();
     responsePacket->Res       = static_cast<uint8>(GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: leaveParty()
+ *  Purpose : Emits packet to leave the current party.
+ *  Example : player.actions:leaveParty()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::leaveParty() const
+{
+    const auto packet      = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_LEAVE>();
+    auto*      leavePacket = packet->as<GP_CLI_COMMAND_GROUP_LEAVE>();
+    leavePacket->Kind      = PartyKind::Party;
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -1157,6 +1174,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("inviteToParty", CLuaClientEntityPairActions::inviteToParty);
     SOL_REGISTER("formAlliance", CLuaClientEntityPairActions::formAlliance);
     SOL_REGISTER("acceptPartyInvite", CLuaClientEntityPairActions::acceptPartyInvite);
+    SOL_REGISTER("leaveParty", CLuaClientEntityPairActions::leaveParty);
     SOL_REGISTER("setLevelSync", CLuaClientEntityPairActions::setLevelSync);
     SOL_REGISTER("tradeNpc", CLuaClientEntityPairActions::tradeNpc);
     SOL_REGISTER("tradeRequest", CLuaClientEntityPairActions::tradeRequest);

@@ -84,6 +84,11 @@ end
 function CClientEntityPairActions:acceptPartyInvite()
 end
 
+---Leave the current party
+---@return nil
+function CClientEntityPairActions:leaveParty()
+end
+
 ---Level sync the party to a member (caller must be party leader)
 ---@param player CBaseEntity Party member to sync to
 ---@return nil

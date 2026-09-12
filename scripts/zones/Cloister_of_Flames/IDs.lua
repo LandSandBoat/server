@@ -18,6 +18,7 @@ zones[xi.zone.CLOISTER_OF_FLAMES] =
         CONQUEST_BASE                    = 7073, -- Tallying conquest results...
         YOU_CANNOT_ENTER_THE_BATTLEFIELD = 7234, -- You cannot enter the battlefield at present. Please wait a little longer.
         TIME_IN_THE_BATTLEFIELD_IS_UP    = 7237, -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED      = 7239, -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED        = 7252, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         PROTOCRYSTAL                     = 7258, -- It is a giant crystal.
         MEMBERS_OF_YOUR_PARTY            = 7543, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.

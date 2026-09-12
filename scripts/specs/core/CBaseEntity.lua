@@ -2609,6 +2609,11 @@ function CBaseEntity:getBattlefield()
 end
 
 ---@nodiscard
+---@return CBattlefield?
+function CBaseEntity:getRegisteredBattlefield()
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getBattlefieldID()
 end
