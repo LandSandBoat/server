@@ -18,34 +18,40 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
 
     for _, players in pairs(chars) do
-        players:messageSpecial(ID.text.MINE_COUNTDOWN, 10)
-        players:timer(5000, function(playersArg)
-            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 5)
+        players:timer(1000, function(playersArg)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 10)
         end)
 
         players:timer(6000, function(playersArg)
-            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 4)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 5)
         end)
 
         players:timer(7000, function(playersArg)
-            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 3)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 4)
         end)
 
         players:timer(8000, function(playersArg)
-            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 2)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 3)
         end)
 
         players:timer(9000, function(playersArg)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 2)
+        end)
+
+        players:timer(10000, function(playersArg)
             playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 1)
+        end)
+
+        players:timer(11000, function(playersArg)
+            playersArg:messageSpecial(ID.text.MINE_COUNTDOWN, 0)
         end)
     end
 
-    mob:timer(9000, function(mobArg)
-        mobArg:useMobAbility(1838)
-    end)
-
+    -- The countdown always runs, but the mine only goes off if someone is engaged to the rock when it detonates
+    -- TODO: Only have ability used if player who used it is engaged.
+    -- TODO: The bomb animation should happen immediately. It appears to be delayed.
     mob:timer(11000, function(mobArg)
-        mobArg:setHP(0)
+        mobArg:useMobAbility(xi.mobSkill.MINE_BLAST)
     end)
 end
 
