@@ -51,7 +51,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(277)
                     elseif missionStatus == 1 then
-                        return mission:event(278)
+                        return mission:event(278):oncePerZone()
                     end
                 end,
             },

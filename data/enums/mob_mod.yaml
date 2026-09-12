@@ -59,7 +59,7 @@ values:
   check_as_nm:            49 # If set , mob will check as a NM
   roam_reset_facing:      50 # Resume facing the default spawn rotation after roaming home.
   roam_turns:             51 # Maximum amount of turns during a roam
-  roam_rate:              52 # Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
+  roam_rate:              52 # Rest is roam_cool minus rand(0..min(roam_cool * 10 / roam_rate, roam_cool)) whole seconds; -1 rests exactly roam_cool
   behavior:               53 # Add behaviors to mob
   gil_bonus:              54 # Allow mob to drop gil. Multiplier to gil dropped by mob (bonus / 100) * total
   idle_despawn:           55 # Time (in seconds) to despawn after being idle
@@ -106,3 +106,4 @@ values:
   trust_shield_size:      96 # TRUSTS ONLY: Set the size of the mob's shield. 3 = Default size, only used for trusts that use shields.
   bodyguard:              97 # Charmed mob defends its master similar to an avatar. (Maiden's Virelai)
   no_stuck_teleport:      98 # Disable the stuck-repath teleport fallback for this mob (terrain avoidance is intentional for this encounter).
+  roam_turns_min:         99 # Minimum amount of turns during a roam; 0 or unset means 1

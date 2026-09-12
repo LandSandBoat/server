@@ -1751,6 +1751,60 @@ xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
     end
 end
 
+-- TODO: Handle Evoliths
+-- Patch notes on February 26, 2004 mentions a cap per region per nation. 813,126 gil of equipment was traded and no cap was found.
+xi.conquest.vendorOnTrade = function(player, npc, trade)
+    local text          = zones[player:getZoneID()].text
+    local gilTotal      = 0
+    local rejectedCount = 0
+    local slotCount     = trade:getSlotCount()
+
+    -- Check Trade. Only weapons, armor, and ammunition that have sell value.
+    for slot = 0, slotCount - 1 do
+        local item      = trade:getItem(slot)
+        local itemWorth = item:getBasePrice()
+
+        if
+            item:isType(xi.itemType.ARMOR) and -- Covers weapons, armor, and ammunition
+            itemWorth > 0 and
+            bit.band(item:getFlag(), xi.itemFlag.NO_SALE) == 0
+        then
+            gilTotal = gilTotal + itemWorth * trade:getSlotQty(slot)
+        else
+            rejectedCount = rejectedCount + 1
+        end
+    end
+
+    -- Deal with items that can not be traded.
+    if rejectedCount == slotCount then
+        player:messageText(npc, text.CONQUEST + 88, 2) -- "Sorry. I can only take certain types of weapons, shields, or armor."
+        return
+    elseif rejectedCount > 0 then
+        player:messageText(npc, text.CONQUEST + 87, 2) -- "I could not accept one or more items you tried to trade me. Please remove those items and try again."
+        return
+    end
+
+    -- Exchange rate is 1 gil = 1 exp worth of influence at standard rates. LSB divides exp by 20. Cannot receive 0 influence from trade.
+    local influenceGain = math.max(1, math.floor(gilTotal / 20))
+
+    if not player:tradeComplete() then
+        return
+    end
+
+    player:gainConquestInfluence(influenceGain)
+
+    -- Send success message to user
+    -- TODO: Retail updates the current influence values with a packet push, applies the multiplier (1x/2x/3x), then checks against the threshold.
+    --       We would need to force update the influence values on map, then calculate the expected multiplier before displaying the message.
+    if gilTotal < 600 then
+        player:messageText(npc, text.CONQUEST + 84, 2) -- "Thank you. This will increase your nation's region points by a small amount. If you have anything else, by all means, trade them to me."
+    elseif gilTotal < 6000 then
+        player:messageText(npc, text.CONQUEST + 85, 2) -- "Thank you. This will increase your nation's region points moderately. If you have anything else, by all means, trade them to me."
+    else
+        player:messageText(npc, text.CONQUEST + 86, 2) -- "Thank you. This will increase your nation's region points greatly. If you have anything else, by all means, trade them to me."
+    end
+end
+
 -----------------------------------
 -- (PUBLIC) outpost teleport NPC
 -----------------------------------

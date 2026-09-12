@@ -39,7 +39,7 @@ templates:
           type:  standard
           model: 1361
         entity_flags:  641
-        animation_sub:  12
+        animation_sub:   4
         hitbox:         10
       behaviors:
         aggressive: true

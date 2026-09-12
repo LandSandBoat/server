@@ -79,6 +79,7 @@ protected:
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
     void         Wait(timer::duration duration);
+    auto         NextIdleEventTime() const -> timer::time_point;
     void         FollowRoamPath();
     auto         ShouldCloseToTarget(float currentDistance) -> bool;
 
@@ -109,6 +110,7 @@ private:
     EntityId followTarget_{};
 
     timer::time_point m_LastActionTime;
+    position_t        m_IdleCheckedPosition{};
     timer::time_point m_nextMagicTime;
     timer::time_point m_LastMobSkillTime;
     timer::time_point m_LastSpecialTime;

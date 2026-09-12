@@ -1,8 +1,8 @@
 -----------------------------------
 -- Mission Battlefield Level Caps Module
--- Implements era-appropriate level caps for the Rank 5 and CoP mission battlefields
+-- Implements era-appropriate level caps for Rank 2, Rank 5, and CoP mission battlefields
 -----------------------------------
--- CoP caps removed June 21, 2010:
+-- CoP caps removed June 22, 2010:
 -- Source: https://www.playonline.com/pcd/verup/ff11us/detail/5571/detail.html
 -- Nation mission caps removed February 15, 2011:
 -- Sources:
@@ -21,6 +21,11 @@ m:addOverride('xi.server.onServerStart', function()
 
     local battlefields =
     {
+        -- Nation Rank 2-3 Battlefields
+        { xi.battlefield.id.RANK_2_MISSION,                        25 },
+        { xi.battlefield.id.RANK_2_MISSION_1,                      25 },
+        { xi.battlefield.id.RANK_2_MISSION_2,                      25 },
+
         -- Nation Rank 5-1 Battlefield
         { xi.battlefield.id.RANK_5_MISSION,                         50 },
 

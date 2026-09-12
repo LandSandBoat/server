@@ -513,6 +513,26 @@ bool CBattlefield::IsRegistered(CCharEntity* PChar)
     return PChar && m_RegisteredPlayers.find(PChar->id) != m_RegisteredPlayers.end();
 }
 
+// The Battlefield effect is the players clearance and names the battlefield it was granted for
+bool CBattlefield::HasClearance(CCharEntity* PChar) const
+{
+    const auto* PEffect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Battlefield);
+    return PEffect != nullptr && PEffect->GetPower() == GetID() && PEffect->GetSubPower() == GetArea();
+}
+
+// Forgets a registration that no clearance backs any more, so an old party's battlefield cannot claim the player again
+void CBattlefield::RemoveRegistration(CCharEntity* PChar)
+{
+    m_RegisteredPlayers.erase(PChar->id);
+}
+
+// Hands a registered player the clearance effect back after zoning dropped it, as if the initiator had just copied it on
+void CBattlefield::GrantClearance(CCharEntity* PChar)
+{
+    PChar->StatusEffectContainer->AddStatusEffectSilent(
+        xi::StatusEffect::Battlefield, static_cast<uint16>(xi::StatusEffect::Battlefield), GetID(), 0s, 0s, m_Initiator.id, GetArea());
+}
+
 bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 {
     // player's already zoned, we don't need to do anything
@@ -592,16 +612,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         m_EnteredPlayers.erase(PEntity->id);
 
-        if (leavecode != 255)
-        {
-            // todo: probably shouldnt hardcode this
-            if (leavecode == BATTLEFIELD_LEAVE_CODE_WARPDC)
-            {
-                PEntity->loc.p.x = 0;
-                PEntity->loc.p.y = 0;
-                PEntity->loc.p.z = 0;
-            }
-        }
         charutils::SendClearTimerPacket(PChar);
 
         // Remove enmity from character and their pet with all mobs
@@ -823,11 +833,11 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
         }
     }
 
-    // Remove all registered players as long as they're in the zone
+    // Remove all registered players as long as they're in the zone and still hold clearance for this battlefield
     for (auto id : m_RegisteredPlayers)
     {
         auto* PChar = GetZone()->GetCharByID(id);
-        if (PChar)
+        if (PChar && HasClearance(PChar))
         {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Confrontation, EffectNotice::Silent);
             m_Zone->updateCharLevelRestriction(PChar);

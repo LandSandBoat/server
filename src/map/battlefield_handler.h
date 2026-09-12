@@ -56,14 +56,18 @@ public:
     CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);               // return pointer to battlefield if exists
     CBattlefield* GetBattlefieldByArea(uint8 area) const;
     CBattlefield* GetBattlefieldByInitiator(uint32 charID);
+    CBattlefield* GetRegisteredBattlefield(CCharEntity* PChar);                                         // registration only, the player may have lost clearance since
     uint8         RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
     bool          RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield = nullptr, uint8 leavecode = 3);
     bool          IsRegistered(CCharEntity* PChar);
     bool          ReachedMaxCapacity(int battlefieldId = -1) const;
     uint8         MaxBattlefieldAreas() const;
     void          addOrphanedPlayer(CCharEntity* PChar);
+    void          RestoreClearance(CCharEntity* PChar);
 
 private:
+    void RemoveOtherRegistrations(CCharEntity* PChar, const CBattlefield* PKeep);
+
     CZone*                                       m_PZone;
     uint8                                        m_MaxBattlefields; // usually 3 except dynamis, einherjar, besieged, ...
     std::map<int, std::unique_ptr<CBattlefield>> m_Battlefields;    // area

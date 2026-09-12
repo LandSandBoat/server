@@ -69,7 +69,7 @@ xi.instance.lookup =
     {
         { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
         -- Assault: Seagull Grounded (scripts/assaults/Periqia/seagull_grounded.lua)
-        -- Assault: Requiem
+        -- Assault: Requiem (scripts/assaults/Periqia/requiem.lua)
         -- Assault: Saving Private Ryaaf
         -- Assault: Shooting Down the Baron
         -- Assault: Stop the Bloodshed
@@ -511,8 +511,11 @@ xi.instance.onEventFinish = function(player, csid, option, npc, instanceInfo)
         local csidEntry, optionEntry = unpack(instanceInfo)
 
         if csid == csidEntry and option == optionEntry then
+            local playerZone = player:getZoneID()
             for _, v in ipairs(player:getParty()) do
-                v:setPos(0, 0, 0, 0, instance:getZone():getID())
+                if v:getZoneID() == playerZone then
+                    v:setPos(0, 0, 0, 0, instance:getZone():getID())
+                end
             end
 
             return true

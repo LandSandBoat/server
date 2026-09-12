@@ -232,7 +232,7 @@ templates:
 
   Biune_Porxie:
     id:      8118
-    species: unclassified
+    species: porxie
     type:    [battlefield]
     attributes:
       combat:
@@ -859,7 +859,7 @@ templates:
 
   Fetid_Veela:
     id:      8145
-    species: unclassified
+    species: veela
     type:    [battlefield]
     attributes:
       combat:

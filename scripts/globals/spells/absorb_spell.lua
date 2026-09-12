@@ -170,7 +170,6 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
         finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
         finalDamage = utils.handleStoneskin(target, finalDamage, xi.attackType.MAGICAL)
-        finalDamage = utils.clamp(finalDamage, 0, targetPoints)
         finalDamage = target:checkDamageCap(finalDamage)
 
         -- Handle Bind break and TP?

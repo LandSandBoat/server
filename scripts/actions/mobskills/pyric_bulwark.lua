@@ -8,18 +8,14 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() <= 1 then
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
-    mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, { power = 1, duration = 45, origin = mob, icon = 0 })
+    mob:addStatusEffect(xi.effect.MAGIC_SHIELD, { power = 1, duration = 45, origin = mob, icon = 0 })
 
-    return xi.effect.PHYSICAL_SHIELD
+    return xi.effect.MAGIC_SHIELD
 end
 
 return mobskillObject

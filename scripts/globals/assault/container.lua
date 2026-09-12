@@ -236,13 +236,18 @@ end
 xi.assault.onRunicTrigger = function(player, npc, zone)
     local chosenAssault
     for _, eligibleAssault in ipairs(xi.assault.contentsByZone[zone] or {}) do
-        if
-            xi.assault.checkRequirements(player, eligibleAssault) and
-            player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)
-        then
+        if xi.assault.checkRequirements(player, eligibleAssault) then
             chosenAssault = eligibleAssault
             break
         end
+    end
+
+    if
+        chosenAssault ~= nil and
+        not player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)
+    then
+        player:messageSpecial(zones[player:getZoneID()].text.MISSING_KEY_ITEM, xi.ki.ASSAULT_ARMBAND)
+        return
     end
 
     if chosenAssault == nil then

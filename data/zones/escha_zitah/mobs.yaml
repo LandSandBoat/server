@@ -402,7 +402,7 @@ templates:
 
   Eschan_Mosquito:
     id:            5543
-    species:       yellow_bee
+    species:       mosquito
     skill_list_id: 48
     attributes:
       combat:

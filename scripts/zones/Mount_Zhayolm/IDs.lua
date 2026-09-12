@@ -35,6 +35,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         CANNOT_ENTER                  = 7498, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 7499, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 7503, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
+        MISSING_KEY_ITEM              = 7504, -- You are not in possession of <keyitem>. Unable to enter area.
         MEMBER_TOO_FAR                = 7507, -- One or more party members are too far away from the entrance. Unable to enter area.
         DETACHED_PART                 = 7562, -- There is a detached part here...
         SHED_LEAVES                   = 7577, -- The ground is strewn with shed leaves...

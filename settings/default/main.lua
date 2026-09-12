@@ -208,7 +208,7 @@ xi.settings.main =
     NM_LOTTERY_COOLDOWN = 1.0,
 
     -- CONQUEST SETTINGS
-    CONQUEST_INFLUENCE_CAP = 250000, -- Combined influence pool per region shared across the 4 nations. Ceiling is 20 million.
+    CONQUEST_INFLUENCE_CAP = 10000000, -- Combined influence pool per region shared across the 4 nations. Ceiling is 20 million.
 
     -- GARRISON SETTINGS
     ENABLE_GARRISON        = true,  -- If true, enables garrison functionality

@@ -184,6 +184,9 @@ public:
     bool         InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false);
     CBaseEntity* GetEntity(CBaseEntity* PEntity);
     bool         IsRegistered(CCharEntity* PChar);
+    bool         HasClearance(CCharEntity* PChar) const;
+    void         RemoveRegistration(CCharEntity* PChar);
+    void         GrantClearance(CCharEntity* PChar);
     bool         RemoveEntity(CBaseEntity* PEntity, uint8 leavecode = 0);
     void         onTick(timer::time_point time);
     bool         CanCleanup(bool cleanup = false);

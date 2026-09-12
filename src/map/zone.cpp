@@ -1175,6 +1175,9 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (m_BattlefieldHandler)
     {
+        // Zoning out drops the clearance effect, a player still registered in an open battlefield here gets it back
+        m_BattlefieldHandler->RestoreClearance(PChar);
+
         auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
         if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::Confrontation))
         {

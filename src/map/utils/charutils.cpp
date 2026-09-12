@@ -5010,7 +5010,7 @@ void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedX
  *                                                                       *
  ************************************************************************/
 
-void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScripts, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
+void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScripts, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain, bool allowLimitPoints)
 {
     TracyZoneScoped;
 
@@ -5040,8 +5040,15 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         onLimitMode = true;
     }
 
+    // EXP scrolls cannot grant limit points.
+    if (!allowLimitPoints)
+    {
+        onLimitMode = false;
+    }
+
     // exp added from raise shouldn't display a message. Don't need a message for zero exp either
-    if (!expFromRaise && exp > 0)
+    // EXP scrolls send the gain message in the item action.
+    if (!expFromRaise && exp > 0 && allowLimitPoints)
     {
         if (mobCheck >= EMobDifficulty::EvenMatch && isexpchain)
         {
@@ -5103,8 +5110,12 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         // Should this user be awarded conquest points..
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) && (region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO))
         {
-            // Add influence for the players region..
+            // Add CP to the player.
             conquest::AddConquestPoints(PChar, exp);
+
+            // Add influence for the player's region.
+            // TODO: Chain exp should not affect influence.
+            conquest::GainInfluencePoints(PChar, exp / 20);
         }
 
         // Should this user be awarded imperial standing..

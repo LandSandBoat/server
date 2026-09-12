@@ -1892,19 +1892,19 @@ spawns:
     level:    [46, 48]
   17436717:
     template: Demon_Pawn
-    region:   c_45
+    region:   region_103
     level:    [50, 52]
   17436718:
     template: Demon_Pawn
-    region:   c_45
+    region:   region_103
     level:    [50, 52]
   17436719:
     template: Demon_Wizard
-    region:   c_45
+    region:   region_103
     level:    [50, 52]
   17436720:
     template: Demon_Knight
-    region:   c_45
+    region:   region_103
     level:    [50, 52]
   17436721:
     template: Demon_Pawn
@@ -2652,7 +2652,7 @@ spawns:
     level:    [63, 65]
   17436907:
     template: Ahriman
-    region:   w_235
+    region:   region_105
     level:    [63, 65]
   17436908:
     template: Ahriman
@@ -2788,11 +2788,11 @@ spawns:
     level:    [63, 65]
   17436938:
     template: Ahriman
-    region:   nw_266
+    region:   region_102
     level:    [63, 65]
   17436939:
     template: Ahriman
-    region:   sw_267
+    region:   region_104
     level:    [63, 65]
   17436940:
     template: Ahriman
@@ -2900,7 +2900,7 @@ spawns:
   17436962:
     template: Stygian_Demon_CZB
     script:   Stygian_Demon
-    region:   w_290
+    region:   region_106
     level:    [71, 73]
   17436963:
     template: Demons_Elemental

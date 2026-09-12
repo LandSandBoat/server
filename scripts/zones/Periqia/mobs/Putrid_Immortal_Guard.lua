@@ -1,17 +1,30 @@
 -----------------------------------
--- Area: Periqia (Requiem)
+-- Area: Periqia
 --  Mob: Putrid Immortal Guard
+-- Involved in Assault: Requiem
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    if not instance then
-        return
-    end
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.HPP, -10)
+    mob:setMod(xi.mod.ATTP, 15)
+    mob:setMod(xi.mod.STORETP, 5)
+end
 
-    instance:setProgress(instance:getProgress() + 1)
+entity.onMobSpawn = function(mob)
+    xi.assault.adjustMobLevel(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        local instance = mob:getInstance()
+        if not instance then
+            return
+        end
+
+        instance:setProgress(instance:getProgress() + 1)
+    end
 end
 
 return entity

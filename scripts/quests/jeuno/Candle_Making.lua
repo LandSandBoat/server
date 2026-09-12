@@ -44,7 +44,7 @@ quest.sections =
             ['Rouliette'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.LANOLIN_CUBE) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.LANOLIN_CUBE, 1 } }) then
                         return quest:progressEvent(37)
                     end
                 end,
@@ -61,7 +61,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 13)
                         player:addFame(xi.fameArea.BASTOK, 13)
                         player:addFame(xi.fameArea.WINDURST, 13)
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

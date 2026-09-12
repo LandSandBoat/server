@@ -45,7 +45,7 @@ mission.sections =
                         missionStatus == 0 and
                         player:hasKeyItem(xi.ki.VIAL_OF_SPECTRAL_SCENT)
                     then
-                        return mission:progressEvent(8)
+                        return mission:progressCutscene(8)
                     elseif
                         missionStatus == 1 and
                         not GetMobByID(caedarvaID.mob.JAZARAAT):isSpawned()
@@ -54,7 +54,7 @@ mission.sections =
                         -- There is no message returned here in captures
                         return mission:noAction()
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(9)
+                        return mission:progressCutscene(9)
                     end
                 end,
             },
@@ -72,10 +72,10 @@ mission.sections =
             {
                 [8] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    player:delKeyItem(xi.ki.VIAL_OF_SPECTRAL_SCENT)
                 end,
 
                 [9] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.VIAL_OF_SPECTRAL_SCENT)
                     mission:complete(player)
                 end,
             },

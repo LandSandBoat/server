@@ -13,7 +13,7 @@ xi.combat.magicAoE = xi.combat.magicAoE or {}
 xi.combat.magicAoE.calculateSongRadius = function(caster, spell)
     local baseRadius = spell:getRadius()
     local rangeType  = caster:getWeaponSkillType(xi.slot.RANGED)
-    local aoeType    = spell:isAoE()
+    local aoeType    = spell:getAoE()
 
     -- Spell is not AoE or caster is under Pianissimo
     if
@@ -68,7 +68,7 @@ end
 ---@param spell CSpell
 ---@return [xi.magic.aoe, number]
 xi.combat.magicAoE.calculateTypeAndRadius = function(caster, spell)
-    local baseType    = spell:isAoE()
+    local baseType    = spell:getAoE()
     local baseRadius  = spell:getRadius()
     local spellFamily = spell:getSpellFamily()
     local spellGroup  = spell:getSpellGroup()

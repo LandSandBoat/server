@@ -325,7 +325,7 @@ void CRecastContainer::ResetAbilities()
     {
         if (recast.ID != Recast::Special && recast.ID != Recast::Special2)
         {
-            Load(RECAST_ABILITY, recast.ID, 0s);
+            recast.RecastTime = 0s;
         }
     }
 }

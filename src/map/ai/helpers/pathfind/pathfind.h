@@ -58,7 +58,7 @@ public:
     ~CPathFind();
 
     // Walk to a random point around the given point, or inside the region when the owner has one.
-    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None, const RoamRegion* region = nullptr) -> bool;
+    auto RoamAround(const position_t& point, float maxRadius, uint8 minTurns, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None, const RoamRegion* region = nullptr) -> bool;
 
     // Find and walk to the given point.
     auto PathTo(const position_t& point, uint8 pathFlags = 0) -> bool;
@@ -134,7 +134,7 @@ private:
     auto BuildDirectPath(const position_t& end) -> bool;
 
     // Find a random path around the given point.
-    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags, const RoamRegion* region) -> bool;
+    auto FindRandomPath(const position_t& start, float maxRadius, uint8 minTurns, uint8 maxTurns, xi::RoamFlag roamFlags, const RoamRegion* region) -> bool;
 
     // Core of StepTo, settling `stopShort` yalms short of `pos`.
     auto StepToInternal(const position_t& pos, bool run, float stopShort) -> void;
@@ -169,6 +169,9 @@ private:
 
     // region to clip random-roam legs to, null for all other pathing; owned by the zone
     const RoamRegion* roamRegion_{ nullptr };
+
+    // this path may cross the region outline to get back inside
+    bool recoveringToRegion_{ false };
 
     timer::time_point timeAtPoint_;
 

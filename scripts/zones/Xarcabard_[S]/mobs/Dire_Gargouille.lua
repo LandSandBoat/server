@@ -3,6 +3,8 @@
 --  Mob: Dire Gargouille
 -- Note: PH for Graoully
 -----------------------------------
+mixins = { require('scripts/mixins/families/gargouille') }
+-----------------------------------
 local ID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 ---@type TMobEntity

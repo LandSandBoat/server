@@ -776,7 +776,7 @@ templates:
 
   Eschan_Porxie:
     id:      5632
-    species: unclassified
+    species: porxie
     attributes:
       combat:
         skill: scythe

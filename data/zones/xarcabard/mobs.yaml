@@ -2087,7 +2087,7 @@ spawns:
     level:    [43, 46]
   17236053:
     template: Dark_Elemental
-    region:   s_85
+    region:   region_54
     level:    [48, 50]
   17236054:
     template: Lost_Soul_war
@@ -2255,7 +2255,7 @@ spawns:
     level:    [45, 48]
   17236094:
     template: Dark_Elemental
-    region:   e_126
+    region:   region_50
     level:    [48, 50]
   17236095:
     template: Blizzard_Gigas
@@ -2699,15 +2699,15 @@ spawns:
     level:    [42, 42]
   17236202:
     template: Boreal_Hound
-    region:   s_234
+    region:   region_53
     level:    [53, 53]
   17236203:
     template: Boreal_Coeurl
-    region:   ne_235
+    region:   region_51
     level:    [53, 53]
   17236204:
     template: Boreal_Tiger
-    region:   ne_236
+    region:   region_52
     level:    [53, 53]
   17236205:
     template: Koenigstiger

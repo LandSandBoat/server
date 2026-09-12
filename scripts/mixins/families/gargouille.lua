@@ -41,7 +41,10 @@ g_mixins.families.gargouille = function(gargouilleMob)
 
     -- Handle regular changes on roam.
     gargouilleMob:addListener('ROAM_TICK', 'GARGOUILLE_ROAM', function(mob)
-        if GetSystemTime() - mob:getLocalVar('formTimer') >= 0 then
+        if
+            GetSystemTime() - mob:getLocalVar('formTimer') >= 0 and
+            not mob:isFollowingPath()
+        then
             changeStance(mob)
         end
     end)

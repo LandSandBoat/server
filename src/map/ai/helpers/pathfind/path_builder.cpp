@@ -89,9 +89,11 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
     return result;
 }
 
-auto NavPathBuilder::findRoamTurnPoints(const position_t& start, float maxRadius, uint8 maxTurns, const RoamRegion* region) const -> Maybe<std::vector<position_t>>
+auto NavPathBuilder::findRoamTurnPoints(const position_t& start, float maxRadius, uint8 minTurns, uint8 maxTurns, const RoamRegion* region) const -> Maybe<std::vector<position_t>>
 {
-    const auto desiredTurnCount = static_cast<uint8_t>(xirand::GetRandomNumber<uint32>(maxTurns) + 1);
+    const auto lowTurns         = std::max<uint8>(minTurns, 1);
+    const auto highTurns        = std::max<uint8>(maxTurns, lowTurns);
+    const auto desiredTurnCount = xirand::GetRandomNumber<uint8>(lowTurns, static_cast<uint8>(highTurns + 1));
 
     std::vector<position_t> turnPoints;
 

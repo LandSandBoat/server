@@ -10,6 +10,7 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         CONQUEST_BASE                    = 0,    -- Tallying conquest results...
         YOU_CANNOT_ENTER_THE_BATTLEFIELD = 161,  -- You cannot enter the battlefield at present. Please wait a little longer.
         TIME_IN_THE_BATTLEFIELD_IS_UP    = 164,  -- Your time in the battlefield is up! Now exiting...
+        CLEARED_BUT_MEMBERS_ENGAGED      = 166,  -- You are cleared to enter the battlefield, but you cannot while party members are engaged in combat.
         PARTY_MEMBERS_ARE_ENGAGED        = 179,  -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         UNABLE_TO_PROTECT                = 218,  -- You were unable to protect the special character. Now leaving the battlefield.
         MEMBERS_OF_YOUR_PARTY            = 470,  -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.

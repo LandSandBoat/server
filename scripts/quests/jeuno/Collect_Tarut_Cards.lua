@@ -93,6 +93,7 @@ quest.sections =
                         player:addFame(xi.fameArea.BASTOK, 7)
                         player:addFame(xi.fameArea.WINDURST, 7)
                         player:tradeComplete()
+                        player:setVar('Quest[3][166]Date', JstMidnight()) -- All in the Cards is first offered after JST midnight
                     end
                 end,
             },

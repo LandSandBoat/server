@@ -275,7 +275,7 @@ templates:
           type:  standard
           model: 1361
         entity_flags:  1667
-        animation_sub:   12
+        animation_sub:    4
         model_size:       1
         hitbox:          12
       spawn:
@@ -306,7 +306,7 @@ templates:
           type:  standard
           model: 1361
         entity_flags:  647
-        animation_sub:  12
+        animation_sub:   4
         model_size:      3
         hitbox:         16
       behaviors:
