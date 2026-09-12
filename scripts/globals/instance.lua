@@ -69,7 +69,7 @@ xi.instance.lookup =
     {
         { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
         -- Assault: Seagull Grounded (scripts/assaults/Periqia/seagull_grounded.lua)
-        -- Assault: Requiem
+        -- Assault: Requiem (scripts/assaults/Periqia/requiem.lua)
         -- Assault: Saving Private Ryaaf
         -- Assault: Shooting Down the Baron
         -- Assault: Stop the Bloodshed

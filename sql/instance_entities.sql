@@ -211,6 +211,7 @@ INSERT INTO `instance_entities` VALUES (5602,17006881);
 INSERT INTO `instance_entities` VALUES (5602,17006882);
 INSERT INTO `instance_entities` VALUES (5602,17006883);
 INSERT INTO `instance_entities` VALUES (5602,17006893);
+INSERT INTO `instance_entities` VALUES (5602,17006894);
 
 -- ------------------------------------------------------------
 -- The Ashu Talif (Zone 60)
