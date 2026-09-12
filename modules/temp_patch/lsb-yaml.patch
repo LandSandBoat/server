@@ -529,16 +529,3 @@ index 558f34de7c2..ad29ee34284 100644
  TEST_CASE("data binding: runtime decoding is strict", "[data][binding]")
  {
      CHECK_THROWS(StatusEffectDataset::decode(R"(
-diff --git a/tools/ci/startup_checks.py b/tools/ci/startup_checks.py
-index d1d5388546d..1a0811dbd3f 100644
---- a/tools/ci/startup_checks.py
-+++ b/tools/ci/startup_checks.py
-@@ -157,6 +157,8 @@ def close(code):
- 
- 
- def main():
-+    global processes
-+
-     print("Running exe startup checks...({})".format(platform.system()))
- 
-     # --ci flag only on non-Linux systems. Option exits server as soon as it starts, Linux wants to keep it open to test HXIClient.
