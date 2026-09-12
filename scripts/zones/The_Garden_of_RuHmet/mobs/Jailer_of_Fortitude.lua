@@ -11,6 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.BLIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -18,71 +19,98 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.SILENCE)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.UDMGPHYS, -9500)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.ATT, 721)
+    mob:setMod(xi.mod.DEF, 833)
+    mob:setMod(xi.mod.STORETP, 100)
+    mob:setMod(xi.mod.QUICK_MAGIC, 100) -- Spells are returned instantly.
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, 68)
+
+    mob:setLocalVar('ghrahChangeTime', 0)
+
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.INVINCIBLE_1, cooldown = 180, hpp = 50 }, -- "Has access to Invincible, which it may use several times."
+            { id = xi.mobSkill.INVINCIBLE_1, cooldown = 150, hpp = 50 }, -- Uses Invincible every 150 seconds when HP is below 50%.
         },
     })
+end
 
-    -- Change animation to humanoid w/ prismatic core
-    mob:setAnimationSub(1)
-    mob:setModelId(1169)
-    mob:setMod(xi.mod.UDMGPHYS, -9500)
-    mob:setMod(xi.mod.UDMGRANGE, -9500)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, 73)
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('ghrahChangeTime', GetSystemTime() + 45)
 end
 
 entity.onMobFight = function(mob, target)
-    local delay    = mob:getLocalVar('delay')
-    local lastCast = mob:getLocalVar('LAST_CAST')
-    local spell    = mob:getLocalVar('COPY_SPELL')
-
-    if mob:getBattleTime() - lastCast > 30 then
-        mob:setLocalVar('COPY_SPELL', 0)
-        mob:setLocalVar('delay', 0)
-    end
-
-    -- Block usage of invincible if either kf'ghrah is alive
-    local bothKfghrahDead = GetMobByID(ID.mob.KFGHRAH_WHM):isDead() and GetMobByID(ID.mob.KFGHRAH_BLM):isDead()
-    if bothKfghrahDead then
-        mob:setLocalVar('[jobSpecial]hpp_1', 50)
-    else
-        -- Set impossible HPP threshold while either kf'ghrah is alive
-        mob:setLocalVar('[jobSpecial]hpp_1', 0)
-    end
+    local ghrahWHM = GetMobByID(ID.mob.KFGHRAH_WHM)
+    local ghrahBLM = GetMobByID(ID.mob.KFGHRAH_BLM)
 
     if
-        not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or
-        not GetMobByID(ID.mob.KFGHRAH_BLM):isDead()
+        not ghrahWHM or
+        not ghrahBLM
     then
-        -- check for kf'ghrah
-        if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
-            if delay >= 3 then
-                mob:castSpell(spell)
-                mob:setLocalVar('COPY_SPELL', 0)
-                mob:setLocalVar('delay', 0)
-            else
-                mob:setLocalVar('delay', delay + 1)
-            end
-        end
+        return
+    end
+
+    -- If both Ghrah are dead, nothing to do here.
+    if
+        ghrahWHM:isDead() and
+        ghrahBLM:isDead()
+    then
+        return
+    end
+
+    -- Both Ghrah always change into the same form, at the same form. The same form can be chosen more than once in a row.
+    local currentTime     = GetSystemTime()
+    local ghrahChangeTime = mob:getLocalVar('ghrahChangeTime')
+
+    if currentTime < ghrahChangeTime then
+        return
+    end
+
+    mob:setLocalVar('ghrahChangeTime', currentTime + 45)
+
+    -- Forms - 0 = Ball, 2 = Spider, 3 = Bird. 1 is skipped because it's human form which these do not turn into.
+    local chosenForm = utils.randomEntry({ 0, 2, 3 })
+
+    if ghrahWHM:isAlive() then
+        ghrahWHM:setLocalVar('desiredForm', chosenForm)
+    end
+
+    if ghrahBLM:isAlive() then
+        ghrahBLM:setLocalVar('desiredForm', chosenForm)
     end
 end
 
+-- When both pets are alive, magic is returned immediately back at the caster.
 entity.onMagicHit = function(caster, target, spell)
+    local ghrahWHM = GetMobByID(ID.mob.KFGHRAH_WHM)
+    local ghrahBLM = GetMobByID(ID.mob.KFGHRAH_BLM)
+
+    if
+        not ghrahWHM or
+        not ghrahBLM
+    then
+        return
+    end
+
+    if
+        ghrahWHM:isDead() and
+        ghrahBLM:isDead()
+    then
+        return
+    end
+
     if
         spell:tookEffect() and
-        (caster:isPC() or caster:isPet()) and
         spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE
     then
-        -- Handle mimicked spells
-        target:setLocalVar('COPY_SPELL', spell:getID())
-        target:setLocalVar('LAST_CAST', target:getBattleTime())
-        target:setLocalVar('reflectTime', target:getBattleTime())
-        target:setAnimationSub(1)
+        target:castSpell(spell:getID(), caster)
     end
 end
 

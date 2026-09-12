@@ -921,7 +921,7 @@ templates:
     attributes:
       combat:
         skill:    staff
-        delay:    200
+        delay:    180
         dmg_mult: 125
       jobs: [blm, war]
       render:
@@ -952,13 +952,11 @@ templates:
     id:            2131
     species:       bird_ghrah
     type:          [notorious]
-    spell_list_id: 4
     skill_list_id: 124
     attributes:
       combat:
-        skill:    sword
-        delay:    220
-        dmg_mult: 125
+        skill: sword
+        delay: 200
       jobs: [pld, pld]
       resists:
         dmg_physical:
@@ -970,9 +968,10 @@ templates:
         look:
           type:  automaton
           model: 1169
-        entity_flags:  6
-        model_size:    3
-        hitbox:       16
+        entity_flags:   6
+        animation_sub:  1
+        model_size:     3
+        hitbox:        16
       behaviors:
         aggressive:     true
         true_detection: true
@@ -980,6 +979,7 @@ templates:
         type: [scripted]
       stats:
         hp: 25000
+        mp: 25000
     loot:
       drops:
         - chance: always
@@ -990,15 +990,27 @@ templates:
           item:   fortitude_torque
 
   Kfghrah_blm:
-    id:            4659
-    species:       bird_ghrah
-    type:          [notorious]
+    id:      4659
+    species: bird_ghrah
+    type:    [notorious]
+    spells:
+      - bio_iii
+      - blind
+      - sleepga_ii
     skill_list_id: 122
     attributes:
       combat:
         skill: scythe
         delay: 220
       jobs: [war, blm]
+      resists:
+        rank_element:
+          light: -3
+          dark:  11
+        rank_status:
+          light_sleep: -3
+          dark_sleep:  11
+          blind:       11
       render:
         look:
           type:  automaton
@@ -1010,18 +1022,31 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 9000
+        hp:  9000
+        mp: 10000
 
   Kfghrah_whm:
-    id:            2215
-    species:       bird_ghrah
-    type:          [notorious]
+    id:      2215
+    species: bird_ghrah
+    type:    [notorious]
+    spells:
+      - banish_iv
+      - banishga_iii
+      - flash
     skill_list_id: 122
     attributes:
       combat:
         skill: scythe
         delay: 220
       jobs: [war, whm]
+      resists:
+        rank_element:
+          light: 11
+          dark:  -3
+        rank_status:
+          light_sleep: 11
+          dark_sleep:  -3
+          blind:       -3
       render:
         look:
           type:  automaton
@@ -1034,7 +1059,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 9000
+        hp:  9000
+        mp: 10000
 
   Qnaern_rng:
     id:            5549
@@ -3027,17 +3053,17 @@ spawns:
   16921015:
     template: Jailer_of_Fortitude
     at:       [-434.100, -0.500, 697.849, 190]
-    level:    [79, 80]
+    level:    [85, 85]
   16921016:
     template: Kfghrah_whm
     script:   Kfghrah_WHM
     at:       [-433.362, -0.500, 700.028, 186]
-    level:    [77, 77]
+    level:    [80, 80]
   16921017:
     template: Kfghrah_blm
     script:   Kfghrah_BLM
     at:       [-406.510, -0.500, 699.651, 237]
-    level:    [77, 77]
+    level:    [80, 80]
   16921018:
     template: Ixaern_drk
     script:   Ixaern_DRK
