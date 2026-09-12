@@ -52,7 +52,9 @@ public:
     void   setCastTime(uint32 casttime);
     void   setMPCost(uint16 mpcost);
     bool   canTargetEnemy();
-    uint8  isAoE();
+    auto   getAoE() const -> uint8;
+    auto   isAoE() const -> bool;
+    auto   isConal() const -> bool;
     float  getRadius();
     bool   tookEffect();
     uint16 getTotalTargets();

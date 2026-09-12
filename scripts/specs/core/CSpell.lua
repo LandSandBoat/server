@@ -56,7 +56,17 @@ end
 
 ---@nodiscard
 ---@return xi.magic.aoe
+function CSpell:getAoE()
+end
+
+---@nodiscard
+---@return boolean
 function CSpell:isAoE()
+end
+
+---@nodiscard
+---@return boolean
+function CSpell:isConal()
 end
 
 ---@nodiscard
