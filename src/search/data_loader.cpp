@@ -21,6 +21,7 @@
 
 #include "common/database.h"
 #include "common/earth_time.h"
+#include "common/ipp.h"
 #include "common/logging.h"
 #include "common/mmo.h"
 #include "common/settings.h"
@@ -85,8 +86,6 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
 
 auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>
 {
-    ShowDebugFmt("Try find category: {}", ahCategoryID);
-
     std::vector<AuctionHouseItem> ItemList;
 
     const auto rset = [&]()
@@ -725,6 +724,34 @@ auto CDataLoader::GetSearchComment(uint32 playerId) const -> std::string
         return rset->get<std::string>("seacom_message");
     }
     return std::string();
+}
+
+auto CDataLoader::GetCharName(uint32 playerId) const -> std::string
+{
+    auto rset = db::preparedStmt("SELECT charname FROM chars WHERE charid = ?", playerId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        return rset->get<std::string>("charname");
+    }
+    return std::string();
+}
+
+auto CDataLoader::GetPlayerNamesByIP(const std::string& ipAddress) const -> std::vector<std::string>
+{
+    std::vector<std::string> names;
+    const uint32             clientAddr = str2ip(ipAddress);
+
+    auto rset = db::preparedStmt(
+        "SELECT charname, charid FROM accounts_sessions JOIN chars USING (charid) WHERE client_addr = ?",
+        clientAddr);
+
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        names.push_back(fmt::format("{}({})",
+                                    rset->get<std::string>("charname"),
+                                    rset->get<uint32>("charid")));
+    }
+    return names;
 }
 
 struct ListingToExpire

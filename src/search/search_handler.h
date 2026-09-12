@@ -76,6 +76,7 @@ private:
     std::deque<SearchPacket> searchPackets_;
 
     std::string             ipAddress_;
+    std::string             requestingPlayers_;
     asio::ip::tcp::socket   socket_;
     std::array<uint8, 4096> buffer_;
 
