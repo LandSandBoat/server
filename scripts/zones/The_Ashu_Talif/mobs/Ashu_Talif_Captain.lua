@@ -14,6 +14,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.ASPIR)
+
+    mob:setMobMod(xi.mobMod.DUAL_WIELD, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -21,6 +23,8 @@ entity.onMobSpawn = function(mob)
     mob:hideName(true)
     mob:setMod(xi.mod.REGAIN, 35)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+
+    mob:setRangedAttackEnabled(true)
 
     mob:setLocalVar('[2hour]HPP', math.randomInt(25, 35))
     mob:setLocalVar('[2hour]Used', 0)
@@ -71,7 +75,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobMobskillChoose = function(mob, target)
-    local tpList =
+    local meleeList =
     {
         xi.mobSkill.VORPAL_BLADE_1,
         xi.mobSkill.FLAT_BLADE_1,
@@ -83,16 +87,15 @@ entity.onMobMobskillChoose = function(mob, target)
         xi.mobSkill.CIRCLE_BLADE_1,
     }
 
-    -- Switch to ranged WS if target is out of melee range.
-    -- TODO: Implement ranged WS after physical mobskill rework
-    -- if mob:checkDistance(target) > 5.6 then
-    --     return utils.randomEntry({
-    --         xi.mobSkill.HOT_SHOT_1,
-    --         xi.mobSkill.SPLIT_SHOT_1,
-    --         xi.mobSkill.SNIPER_SHOT_1,
-    --         xi.mobSkill.SLUG_SHOT_1,
-    --     })
-    -- end
+    local rangedList =
+    {
+        xi.mobSkill.HOT_SHOT_1,
+        xi.mobSkill.SPLIT_SHOT_1,
+        xi.mobSkill.SNIPER_SHOT_1,
+        xi.mobSkill.SLUG_SHOT_1,
+    }
+
+    local tpList = mob:checkDistance(target) > mob:getMeleeRange(target) and rangedList or meleeList
 
     return utils.randomEntry(tpList)
 end
