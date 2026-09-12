@@ -2374,7 +2374,7 @@ spawns:
     level:    [46, 48]
   17440951:
     template: Demon_Pawn
-    region:   e_183
+    region:   region_88
     level:    [52, 55]
   17440952:
     template: Demon_Pawn

@@ -2532,6 +2532,7 @@ spawns:
     level:    [40, 42]
   17231997:
     template: Tundra_Tiger
+    region:   c_126
     level:    [34, 37]
   17231998:
     template: Tundra_Tiger
@@ -2943,6 +2944,7 @@ spawns:
     level:    [40, 43]
   17232100:
     template: Cold_Gigas
+    region:   ne_223
     level:    [40, 43]
   17232101:
     template: Snow_Gigas
