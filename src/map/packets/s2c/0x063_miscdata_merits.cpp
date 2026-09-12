@@ -21,8 +21,8 @@
 
 #include "0x063_miscdata_merits.h"
 
+#include "data/enums/key_item.h"
 #include "entities/char_entity.h"
-#include "enums/key_items.h"
 #include "job_points.h"
 #include "merit.h"
 #include "utils/charutils.h"
@@ -59,7 +59,7 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
     const bool atMaxLevelLimit = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= PChar->jobs.genkai;
     const bool hasCappedXp     = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == (charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1);
 
-    packet.canUseMeritMode     = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
+    packet.canUseMeritMode     = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, xi::KeyItem::LimitBreaker);
     packet.xpCappedOrMeritMode = (atMaxLevelLimit && hasCappedXp) || PChar->MeritMode;
     packet.meritModeEnabled    = packet.canUseMeritMode && PChar->MeritMode;
     packet.maxMeritPoints      = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxMerit, PChar);

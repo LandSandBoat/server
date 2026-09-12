@@ -253,11 +253,11 @@ auto CLuaTestEntityAssertions::hasNationRank(uint8 expectedRank) -> CLuaTestEnti
 /************************************************************************
  *  Function: hasKI()
  *  Purpose : Assert player has specified key item
- *  Example : player.assert:hasKI(xi.ki.AIRSHIP_PASS)
+ *  Example : player.assert:hasKI(xi.keyItem.AIRSHIP_PASS)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasKI(xi::KeyItem keyItemId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -266,8 +266,8 @@ auto CLuaTestEntityAssertions::hasKI(KeyItem keyItemId) -> CLuaTestEntityAsserti
     }
 
     assertCondition(entity_->hasKeyItem(keyItemId),
-                    std::format("Expected player to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))),
-                    std::format("Expected player NOT to have key item {}", getEnumKey("xi.ki", static_cast<uint16>(keyItemId))));
+                    std::format("Expected player to have key item {}", getEnumKey("xi.keyItem", static_cast<uint16>(keyItemId))),
+                    std::format("Expected player NOT to have key item {}", getEnumKey("xi.keyItem", static_cast<uint16>(keyItemId))));
     return *this;
 }
 

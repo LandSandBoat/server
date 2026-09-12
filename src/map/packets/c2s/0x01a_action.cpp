@@ -25,6 +25,7 @@
 
 #include "ability.h"
 #include "ai/ai_container.h"
+#include "data/enums/key_item.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
@@ -550,12 +551,12 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
         {
-            if (this->Mount.MountId > 3108 - static_cast<uint16_t>(KeyItem::CHOCOBO_COMPANION))
+            if (this->Mount.MountId > 3108 - static_cast<uint16_t>(xi::KeyItem::ChocoboCompanion))
             {
                 return;
             }
 
-            const auto mountKeyItem = static_cast<KeyItem>(static_cast<uint16_t>(KeyItem::CHOCOBO_COMPANION) + this->Mount.MountId);
+            const auto mountKeyItem = static_cast<xi::KeyItem>(static_cast<uint16_t>(xi::KeyItem::ChocoboCompanion) + this->Mount.MountId);
 
             if (PChar->animation != xi::Animation::None || PChar->StatusEffectContainer->HasPreventActionEffect())
             {
