@@ -9999,25 +9999,25 @@ ecosystems:
                 - sight
               resists:
                 rank_element:
-                  fire:     4
-                  ice:      5
-                  wind:     4
-                  earth:    5
-                  thunder:  4
-                  water:    5
-                  light:    8
-                  dark:    11 # absorbs on retail
+                  fire:    0
+                  ice:     0
+                  wind:    0
+                  earth:   0
+                  thunder: 0
+                  water:   0
+                  light:   0
+                  dark:    0
                 rank_status:
-                  paralyze:     5
-                  bind:         5
-                  silence:      4
-                  slow:         5
-                  poison:       5
-                  light_sleep:  8
-                  dark_sleep:  11 # absorbs on retail
-                  blind:       11 # absorbs on retail
-                  stun:         4
-                  gravity:      4
+                  paralyze:    0
+                  bind:        0
+                  silence:     0
+                  slow:        0
+                  poison:      0
+                  light_sleep: 0
+                  dark_sleep:  0
+                  blind:       0
+                  stun:        0
+                  gravity:     0
               mob_mods:
                 sight_range: 30
       mithra:
@@ -10074,25 +10074,25 @@ ecosystems:
                 - sight
               resists:
                 rank_element:
-                  fire:    1
-                  ice:     2
-                  wind:    1
-                  earth:   1
-                  thunder: 1
-                  water:   2
+                  fire:    0
+                  ice:     0
+                  wind:    0
+                  earth:   0
+                  thunder: 0
+                  water:   0
                   light:   0
-                  dark:    2
+                  dark:    0
                 rank_status:
-                  paralyze:    2
-                  bind:        2
-                  silence:     1
-                  slow:        1
-                  poison:      2
+                  paralyze:    0
+                  bind:        0
+                  silence:     0
+                  slow:        0
+                  poison:      0
                   light_sleep: 0
-                  dark_sleep:  2
-                  blind:       2
-                  stun:        1
-                  gravity:     1
+                  dark_sleep:  0
+                  blind:       0
+                  stun:        0
+                  gravity:     0
 
   lizard:
     id: 13
