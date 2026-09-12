@@ -1981,8 +1981,9 @@ function CBaseEntity:unseenKeyItem(keyItemID)
 end
 
 ---@param exp integer
+---@param allowLimitPoints boolean? Defaults to true. False grants EXP only without a gain message.
 ---@return nil
-function CBaseEntity:addExp(exp)
+function CBaseEntity:addExp(exp, allowLimitPoints)
 end
 
 ---@param capacity integer
