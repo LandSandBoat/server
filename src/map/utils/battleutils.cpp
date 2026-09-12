@@ -5575,14 +5575,15 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     {
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Pianissimo))
         {
-            if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
+            if (settings::get<bool>("main.ENABLE_BRD_MODERN_EFFECTS") && PSpell->getAOE() == SPELLAOE_PIANISSIMO)
             {
                 cast = base / 2;
             }
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Nightingale))
         {
-            if (PEntity->objtype == TYPE_PC &&
+            if (settings::get<bool>("main.ENABLE_BRD_MODERN_EFFECTS") &&
+                PEntity->objtype == TYPE_PC &&
                 xirand::GetRandomNumber(100) < ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::Nightingale, (CCharEntity*)PEntity) - 25)
             {
                 return 0s;

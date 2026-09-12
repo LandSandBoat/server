@@ -201,6 +201,7 @@ local function magicAccuracyFromMerits(actor, params)
 
         [xi.job.BRD] = function()
             if
+                xi.settings.main.ENABLE_BRD_MODERN_EFFECTS and
                 params.skillType == xi.skill.SINGING and
                 actor:hasStatusEffect(xi.effect.TROUBADOUR)
             then
