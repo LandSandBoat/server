@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(77) --Offer the quest if the player has the broken rod
     elseif
-        player:hasKeyItem(xi.ki.SERPENT_RUMORS) and
+        player:hasKeyItem(xi.keyItem.SERPENT_RUMORS) and
         Indomitable == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(131) --Begins Indomitable Spirit

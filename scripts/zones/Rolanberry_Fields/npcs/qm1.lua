@@ -12,9 +12,9 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.CHUGLIX_BERRYPAWS):isSpawned() and
-        player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE) and
-        not player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM) and
-        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
+        player:hasKeyItem(xi.keyItem.JUG_OF_GREASY_GOBLIN_JUICE) and
+        not player:hasKeyItem(xi.keyItem.SEEDSPALL_CAERULUM) and
+        not player:hasKeyItem(xi.keyItem.VIRIDIAN_KEY)
     then
         SpawnMob(ID.mob.CHUGLIX_BERRYPAWS):updateClaim(player)
     else

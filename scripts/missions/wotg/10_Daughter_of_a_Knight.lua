@@ -16,7 +16,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DAUGHTER_
 
 mission.reward =
 {
-    keyItem     = xi.ki.BOTTLE_OF_TREANT_TONIC,
+    keyItem     = xi.keyItem.BOTTLE_OF_TREANT_TONIC,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SPOONFUL_OF_SUGAR },
 }
 
@@ -190,7 +190,7 @@ mission.sections =
             onEventFinish =
             {
                 [34] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CERNUNNOS_RESIN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CERNUNNOS_RESIN)
 
                     player:setLocalVar('cernunnosDefeated', 0)
                     player:setMissionStatus(mission.areaId, 5)
@@ -227,7 +227,7 @@ mission.sections =
             onEventFinish =
             {
                 [939] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CERNUNNOS_RESIN)
+                    player:delKeyItem(xi.keyItem.CERNUNNOS_RESIN)
                     player:setMissionStatus(mission.areaId, 6)
 
                     mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)

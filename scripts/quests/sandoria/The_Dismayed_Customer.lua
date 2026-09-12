@@ -21,7 +21,7 @@ quest.reward =
 local function handleQm(player, qmNumber)
     if quest:getVar(player, 'Stage') == qmNumber then
         quest:setVar(player, 'Stage', 0)
-        return quest:keyItem(xi.ki.GULEMONTS_DOCUMENT)
+        return quest:keyItem(xi.keyItem.GULEMONTS_DOCUMENT)
     end
 end
 
@@ -64,7 +64,7 @@ quest.sections =
             ['Gulemont'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.GULEMONTS_DOCUMENT) then
+                    if player:hasKeyItem(xi.keyItem.GULEMONTS_DOCUMENT) then
                         return quest:progressEvent(607)
                     else
                         return quest:progressEvent(606)
@@ -76,7 +76,7 @@ quest.sections =
             {
                 [607] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.GULEMONTS_DOCUMENT)
+                        player:delKeyItem(xi.keyItem.GULEMONTS_DOCUMENT)
                     end
                 end,
             },

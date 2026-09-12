@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     if y == -2.25 then
         player:startEvent(395)
     else
-        if player:hasKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) then
+        if player:hasKeyItem(xi.keyItem.RHINOSTERY_CERTIFICATE) then
                 player:startEvent(401)
         else
             player:messageSpecial(ID.text.DOORS_SEALED_SHUT)

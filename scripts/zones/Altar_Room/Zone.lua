@@ -58,7 +58,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     elseif csid == 46 and option == 1 then
         player:setCharVar('moraldecline', 1, NextConquestTally())
     elseif csid == 47 then
-        npcUtil.giveKeyItem(player, xi.ki.VAULT_QUIPUS)
+        npcUtil.giveKeyItem(player, xi.keyItem.VAULT_QUIPUS)
         player:setCharVar('moral', 5)
     elseif csid == 51 then
         player:setCharVar('moralrebuy', 1)

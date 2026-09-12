@@ -20,7 +20,7 @@ mission.reward =
 {
     rank    = 3,
     gil     = 3000,
-    keyItem = xi.ki.ADVENTURERS_CERTIFICATE,
+    keyItem = xi.keyItem.ADVENTURERS_CERTIFICATE,
     title   = xi.title.CERTIFIED_ADVENTURER,
 }
 
@@ -128,7 +128,7 @@ mission.sections =
             {
                 [505] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_THE_CONSULS_SANDORIA)
 
                     if
                         xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
@@ -141,7 +141,7 @@ mission.sections =
 
                 [507] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.KINDRED_REPORT)
+                        player:delKeyItem(xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },
@@ -211,7 +211,7 @@ mission.sections =
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
                     player:setMissionStatus(mission.areaId, 3)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [206] = function(player, csid, option, npc)
@@ -288,7 +288,7 @@ mission.sections =
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
                     player:setMissionStatus(mission.areaId, 3)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [462] = function(player, csid, option, npc)

@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 10009 then
         player:setCharVar('unbridledPassion', 2)
     elseif csid == 10011 then
-        npcUtil.giveKeyItem(player, xi.ki.KOHS_LETTER)
+        npcUtil.giveKeyItem(player, xi.keyItem.KOHS_LETTER)
         player:tradeComplete()
         player:setCharVar('unbridledPassion', 3)
     end

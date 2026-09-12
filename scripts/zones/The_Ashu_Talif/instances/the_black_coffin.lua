@@ -30,12 +30,12 @@ local crewTable =
 
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
-        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+        player:hasKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN)
 end
 
 instanceObject.entryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.THE_BLACK_COFFIN and
-        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+        player:hasKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN)
 end
 
 instanceObject.onInstanceCreated = function(instance)
@@ -53,8 +53,8 @@ end
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.EPHRAMADIAN_GOLD_COIN)
-    player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.keyItem.EPHRAMADIAN_GOLD_COIN)
+    player:delKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 

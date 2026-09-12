@@ -63,7 +63,7 @@ xi.salvage.instanceRegister = function(player, fireFlies)
     player:addStatusEffect(xi.effect.IMPAIRMENT, { power = 3, duration = 6000, origin = player })
     player:addStatusEffect(xi.effect.DEBILITATION, { power = 511, duration = 6000, origin = player })
     player:addTempItem(fireFlies)
-    player:delKeyItem(xi.ki.REMNANTS_PERMIT)
+    player:delKeyItem(xi.keyItem.REMNANTS_PERMIT)
 end
 
 xi.salvage.onFailure = function(instance)

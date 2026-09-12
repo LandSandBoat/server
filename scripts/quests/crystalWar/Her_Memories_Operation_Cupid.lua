@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMO
 
 quest.reward =
 {
-    keyItem = xi.ki.LARGE_MEMORY_FRAGMENT3,
+    keyItem = xi.keyItem.LARGE_MEMORY_FRAGMENT3,
 }
 
 quest.sections =
@@ -52,7 +52,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if player:hasKeyItem(xi.ki.POT_OF_MARTIAL_RELISH) then
+                    if player:hasKeyItem(xi.keyItem.POT_OF_MARTIAL_RELISH) then
                         return quest:progressEvent(13)
                     elseif questProgress == 0 then
                         return quest:progressEvent(11)
@@ -72,7 +72,7 @@ quest.sections =
 
                 [13] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.POT_OF_MARTIAL_RELISH)
+                    player:delKeyItem(xi.keyItem.POT_OF_MARTIAL_RELISH)
                 end,
             },
         },
@@ -83,7 +83,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.POT_OF_MARTIAL_RELISH) and
+                        not player:hasKeyItem(xi.keyItem.POT_OF_MARTIAL_RELISH) and
                         npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_RICE_VINEGAR, xi.item.JAR_OF_GROUND_WASABI, xi.item.SPRIG_OF_HOLY_BASIL }) and
                         quest:getVar(player, 'Prog') == 1
                     then
@@ -92,7 +92,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.POT_OF_MARTIAL_RELISH) then
+                    if player:hasKeyItem(xi.keyItem.POT_OF_MARTIAL_RELISH) then
                         return quest:event(5):oncePerZone()
                     end
                 end,
@@ -102,7 +102,7 @@ quest.sections =
             {
                 [4] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.POT_OF_MARTIAL_RELISH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.POT_OF_MARTIAL_RELISH)
                 end,
             },
         },

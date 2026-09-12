@@ -34,7 +34,7 @@ local onTriggerIncomplete = function(player, npc)
         -- NOTE: In order for a player to have the appropriate KI for an event to be displayed, they will be at least
         -- at missionStatus 1, so no need to verify greater than.
 
-        for keyItemId = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
+        for keyItemId = xi.keyItem.SHARD_OF_APATHY, xi.keyItem.SHARD_OF_RAGE do
             if player:hasKeyItem(keyItemId) then
                 return quest:event(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
             end

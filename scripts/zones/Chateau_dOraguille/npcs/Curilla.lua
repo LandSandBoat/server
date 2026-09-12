@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
 
     -- Trust: San d'Oria (Curilla)
     if
-        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
+        player:hasKeyItem(xi.keyItem.SAN_DORIA_TRUST_PERMIT) and
         not player:hasSpell(xi.magic.spell.CURILLA) and
         player:getLocalVar('TrustDialogue') == 0
     then

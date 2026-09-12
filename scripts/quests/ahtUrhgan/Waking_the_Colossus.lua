@@ -80,7 +80,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.IMPERIAL_MISSIVE)
+                        not player:hasKeyItem(xi.keyItem.IMPERIAL_MISSIVE)
                     then
                         return quest:progressEvent(926, { text_table = 0, [0] = 50, [1] = 1, [2] = 4, [5] = 1 })
                     end
@@ -104,7 +104,7 @@ quest.sections =
 
                 [926] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_MISSIVE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.IMPERIAL_MISSIVE)
                         quest:begin(player)
                     end
                 end,
@@ -114,7 +114,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.IMPERIAL_MISSIVE)
+                player:hasKeyItem(xi.keyItem.IMPERIAL_MISSIVE)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -127,10 +127,10 @@ quest.sections =
                     end
 
                     if
-                        not player:hasKeyItem(xi.ki.JEUNOAN_APPROVAL_LETTER) and
-                        player:hasKeyItem(xi.ki.SAN_DORIAN_APPROVAL_LETTER) and
-                        player:hasKeyItem(xi.ki.BASTOKAN_APPROVAL_LETTER) and
-                        player:hasKeyItem(xi.ki.WINDURSTIAN_APPROVAL_LETTER)
+                        not player:hasKeyItem(xi.keyItem.JEUNOAN_APPROVAL_LETTER) and
+                        player:hasKeyItem(xi.keyItem.SAN_DORIAN_APPROVAL_LETTER) and
+                        player:hasKeyItem(xi.keyItem.BASTOKAN_APPROVAL_LETTER) and
+                        player:hasKeyItem(xi.keyItem.WINDURSTIAN_APPROVAL_LETTER)
                     then
                         return quest:progressEvent(10116)
                     end
@@ -145,7 +145,7 @@ quest.sections =
 
                 [10116] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.JEUNOAN_APPROVAL_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.JEUNOAN_APPROVAL_LETTER)
                     end
                 end,
             }
@@ -158,7 +158,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        not player:hasKeyItem(xi.ki.SAN_DORIAN_APPROVAL_LETTER)
+                        not player:hasKeyItem(xi.keyItem.SAN_DORIAN_APPROVAL_LETTER)
                     then
                         return quest:progressEvent(567, { [0] = 4, [1] = 4, [2] = 2964, [6] = 1 })
                     end
@@ -169,7 +169,7 @@ quest.sections =
             {
                 [567] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_APPROVAL_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SAN_DORIAN_APPROVAL_LETTER)
                     end
                 end,
             }
@@ -182,7 +182,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        not player:hasKeyItem(xi.ki.BASTOKAN_APPROVAL_LETTER)
+                        not player:hasKeyItem(xi.keyItem.BASTOKAN_APPROVAL_LETTER)
                     then
                         return quest:progressEvent(968, { [1] = 4, [2] = 2964, [4] = 58195967, [5] = 212046073, [7] = 4095 })
                     end
@@ -193,7 +193,7 @@ quest.sections =
             {
                 [968] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.BASTOKAN_APPROVAL_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BASTOKAN_APPROVAL_LETTER)
                     end
                 end,
             }
@@ -206,7 +206,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        not player:hasKeyItem(xi.ki.WINDURSTIAN_APPROVAL_LETTER)
+                        not player:hasKeyItem(xi.keyItem.WINDURSTIAN_APPROVAL_LETTER)
                     then
                         return quest:progressEvent(429, { [0] = 74, [1] = 4, [2] = 2964, [4] = 582, [7] = 1 })
                     end
@@ -217,7 +217,7 @@ quest.sections =
             {
                 [429] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.WINDURSTIAN_APPROVAL_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WINDURSTIAN_APPROVAL_LETTER)
                     end
                 end,
             }
@@ -226,7 +226,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.JEUNOAN_APPROVAL_LETTER)
+                player:hasKeyItem(xi.keyItem.JEUNOAN_APPROVAL_LETTER)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -234,7 +234,7 @@ quest.sections =
             ['Imperial_Whitegate'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PRESENT_FOR_MEGOMAK) then
+                    if not player:hasKeyItem(xi.keyItem.PRESENT_FOR_MEGOMAK) then
                         return quest:progressEvent(927, { text_table = 0, [2] = 3, [4] = 66420735, [5] = 66497777 })
                     end
                 end
@@ -244,12 +244,12 @@ quest.sections =
             {
                 [927] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:delKeyItem(xi.ki.IMPERIAL_MISSIVE)
-                        player:delKeyItem(xi.ki.SAN_DORIAN_APPROVAL_LETTER)
-                        player:delKeyItem(xi.ki.BASTOKAN_APPROVAL_LETTER)
-                        player:delKeyItem(xi.ki.WINDURSTIAN_APPROVAL_LETTER)
-                        player:delKeyItem(xi.ki.JEUNOAN_APPROVAL_LETTER)
-                        npcUtil.giveKeyItem(player, xi.ki.PRESENT_FOR_MEGOMAK)
+                        player:delKeyItem(xi.keyItem.IMPERIAL_MISSIVE)
+                        player:delKeyItem(xi.keyItem.SAN_DORIAN_APPROVAL_LETTER)
+                        player:delKeyItem(xi.keyItem.BASTOKAN_APPROVAL_LETTER)
+                        player:delKeyItem(xi.keyItem.WINDURSTIAN_APPROVAL_LETTER)
+                        player:delKeyItem(xi.keyItem.JEUNOAN_APPROVAL_LETTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.PRESENT_FOR_MEGOMAK)
                     end
                 end,
             }
@@ -258,7 +258,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                (player:hasKeyItem(xi.ki.PRESENT_FOR_MEGOMAK) or player:hasKeyItem(xi.ki.MEGOMAKS_SHOPPING_LIST))
+                (player:hasKeyItem(xi.keyItem.PRESENT_FOR_MEGOMAK) or player:hasKeyItem(xi.keyItem.MEGOMAKS_SHOPPING_LIST))
         end,
 
         [xi.zone.MOUNT_ZHAYOLM] =
@@ -267,8 +267,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.PRESENT_FOR_MEGOMAK) and
-                        not player:hasKeyItem(xi.ki.MEGOMAKS_SHOPPING_LIST)
+                        player:hasKeyItem(xi.keyItem.PRESENT_FOR_MEGOMAK) and
+                        not player:hasKeyItem(xi.keyItem.MEGOMAKS_SHOPPING_LIST)
                     then
                         return quest:progressEvent(154)
                     end
@@ -276,9 +276,9 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        player:hasKeyItem(xi.ki.MEGOMAKS_SHOPPING_LIST) and
+                        player:hasKeyItem(xi.keyItem.MEGOMAKS_SHOPPING_LIST) and
                         npcUtil.tradeHasExactly(trade, { { xi.item.SLAB_OF_PLUMBAGO, 3 } }) and
-                        not player:hasKeyItem(xi.ki.LIGHTNING_CELL)
+                        not player:hasKeyItem(xi.keyItem.LIGHTNING_CELL)
                     then
                         return quest:progressEvent(155)
                     end
@@ -289,13 +289,13 @@ quest.sections =
             {
                 [154] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.PRESENT_FOR_MEGOMAK)
-                        npcUtil.giveKeyItem(player, xi.ki.MEGOMAKS_SHOPPING_LIST)
+                        player:delKeyItem(xi.keyItem.PRESENT_FOR_MEGOMAK)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MEGOMAKS_SHOPPING_LIST)
                     end
                 end,
 
                 [155] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.LIGHTNING_CELL) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.LIGHTNING_CELL) then
                         player:confirmTrade()
                     end
                 end,
@@ -305,7 +305,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                (player:hasKeyItem(xi.ki.LIGHTNING_CELL) or vars.Prog == 4)
+                (player:hasKeyItem(xi.keyItem.LIGHTNING_CELL) or vars.Prog == 4)
         end,
 
         [xi.zone.ALZADAAL_UNDERSEA_RUINS] =
@@ -314,7 +314,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.LIGHTNING_CELL) and
+                        player:hasKeyItem(xi.keyItem.LIGHTNING_CELL) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(306)
@@ -325,7 +325,7 @@ quest.sections =
             onZoneIn = function(player, prevZone)
                 if
                     quest:getVar(player, 'Prog') == 4 and
-                    not player:hasKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+                    not player:hasKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
                 then
                     return 307
                 end
@@ -338,7 +338,7 @@ quest.sections =
                 end,
 
                 [307] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_RADIANCE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_RADIANCE)
                 end,
             },
         },
@@ -346,7 +346,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+                player:hasKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -379,7 +379,7 @@ quest.sections =
                 [929] = function(player, csid, option, npc)
                     if giveQuestReward(player, option) then
                         quest:complete(player)
-                        player:delKeyItem(xi.ki.WHISPER_OF_RADIANCE)
+                        player:delKeyItem(xi.keyItem.WHISPER_OF_RADIANCE)
                         -- Divine Interference cannot start until next JP midnight
                         xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DIVINE_INTERFERENCE, 'Timer', 1, NextJstDay())
                     end

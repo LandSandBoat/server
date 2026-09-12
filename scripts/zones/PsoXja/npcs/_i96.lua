@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
     local zPos = player:getZPos()
 
     if zPos >= -238 then
-        if player:hasKeyItem(xi.ki.GREEN_BRACELET) then -- Green Bracelet
+        if player:hasKeyItem(xi.keyItem.GREEN_BRACELET) then -- Green Bracelet
             player:startEvent(62)
         else
             player:messageSpecial(ID.text.ARCH_GLOW_GREEN)

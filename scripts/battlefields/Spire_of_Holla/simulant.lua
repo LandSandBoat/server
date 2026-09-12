@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_0h0',
     exitNpcs         = { '_0h1', '_0h2', '_0h3' },
-    requiredKeyItems = { xi.ki.CENSER_OF_ABANDONMENT, message = spireOfHollaID.text.FADES_INTO_NOTHINGNESS },
+    requiredKeyItems = { xi.keyItem.CENSER_OF_ABANDONMENT, message = spireOfHollaID.text.FADES_INTO_NOTHINGNESS },
     grantXP          = 3000,
     armouryCrates    =
     {

@@ -40,7 +40,7 @@ mission.sections =
             onEventFinish =
             {
                 [1500] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.DINNER_INVITATION)
+                    player:delKeyItem(xi.keyItem.DINNER_INVITATION)
                     mission:complete(player)
                 end,
             },

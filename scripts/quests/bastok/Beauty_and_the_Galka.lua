@@ -83,7 +83,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) and
+                        not player:hasKeyItem(xi.keyItem.PALBOROUGH_MINES_LOGS) and
                         npcUtil.tradeMatches(trade, { { xi.item.CHUNK_OF_ZINC_ORE, 1 } })
                     then
                         return quest:progressEvent(3)
@@ -95,7 +95,7 @@ quest.sections =
             {
                 [3] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.PALBOROUGH_MINES_LOGS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PALBOROUGH_MINES_LOGS)
                 end,
             },
         },
@@ -105,7 +105,7 @@ quest.sections =
             ['Parraggoh'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) then
+                    if player:hasKeyItem(xi.keyItem.PALBOROUGH_MINES_LOGS) then
                         return quest:progressEvent(10, quest:getVar(player, 'Prog'))
                     elseif math.randomInt(1, 100) <= 50 then
                         return quest:event(8)
@@ -119,7 +119,7 @@ quest.sections =
             {
                 [10] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.PALBOROUGH_MINES_LOGS)
+                        player:delKeyItem(xi.keyItem.PALBOROUGH_MINES_LOGS)
                     end
                 end,
             },

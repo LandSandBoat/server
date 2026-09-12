@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     then
         player:messageSpecial(ID.text.FEEL_A_HOSTILE_GAZE)
     elseif decurioKilled == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.ALTEPA_POLISHING_STONE)
+        npcUtil.giveKeyItem(player, xi.keyItem.ALTEPA_POLISHING_STONE)
         player:setCharVar('aCraftsmanWork', 2)
         player:setCharVar('Decurio_I_IIIKilled', 0)
     else

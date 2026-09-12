@@ -98,8 +98,8 @@ mission.sections =
             ['Naji'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
-                        return mission:progressEvent(710, not player:seenKeyItem(xi.ki.ZERUHN_REPORT) and 1 or 0)
+                    if player:hasKeyItem(xi.keyItem.ZERUHN_REPORT) then
+                        return mission:progressEvent(710, not player:seenKeyItem(xi.keyItem.ZERUHN_REPORT) and 1 or 0)
                     end
                 end,
             },
@@ -108,7 +108,7 @@ mission.sections =
             {
                 [710] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.ZERUHN_REPORT)
+                        player:delKeyItem(xi.keyItem.ZERUHN_REPORT)
                     end
                 end,
             },
@@ -124,7 +124,7 @@ mission.sections =
             ['Makarim'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
+                    if player:hasKeyItem(xi.keyItem.ZERUHN_REPORT) then
                         return mission:messageSpecial(zeruhnID.text.MAKARIM_DIALOG_I)
                     else
                         return mission:progressEvent(121, { canSkip = true })
@@ -135,7 +135,7 @@ mission.sections =
             ['Rasmus'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
+                    if not player:hasKeyItem(xi.keyItem.ZERUHN_REPORT) then
                         return mission:progressEvent(120, { canSkip = true })
                     end
                 end,
@@ -144,7 +144,7 @@ mission.sections =
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ZERUHN_REPORT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ZERUHN_REPORT)
                 end,
             },
         },

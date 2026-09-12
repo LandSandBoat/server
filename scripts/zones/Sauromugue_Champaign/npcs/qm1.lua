@@ -12,9 +12,9 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.DRIBBLIX_GREASEMAW):isSpawned() and
-        player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB) and
-        not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) and
-        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
+        player:hasKeyItem(xi.keyItem.CHUNK_OF_SMOKED_GOBLIN_GRUB) and
+        not player:hasKeyItem(xi.keyItem.SEEDSPALL_VIRIDIS) and
+        not player:hasKeyItem(xi.keyItem.VIRIDIAN_KEY)
     then
         SpawnMob(ID.mob.DRIBBLIX_GREASEMAW):updateClaim(player)
     else

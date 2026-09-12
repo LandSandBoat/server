@@ -16,14 +16,14 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMO
 
 quest.reward =
 {
-    keyItem = xi.ki.LARGE_MEMORY_FRAGMENT1,
+    keyItem = xi.keyItem.LARGE_MEMORY_FRAGMENT1,
 }
 
 local subQuestData =
 {
-    [793] = { xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN,          xi.ki.TINY_MEMORY_FRAGMENT1 },
-    [870] = { xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS,      xi.ki.TINY_MEMORY_FRAGMENT2 },
-    [6  ] = { xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE, xi.ki.TINY_MEMORY_FRAGMENT3 },
+    [793] = { xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN,          xi.keyItem.TINY_MEMORY_FRAGMENT1 },
+    [870] = { xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS,      xi.keyItem.TINY_MEMORY_FRAGMENT2 },
+    [6  ] = { xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE, xi.keyItem.TINY_MEMORY_FRAGMENT3 },
 }
 
 local function handleQuestCompletion(player, csid, option, npc)
@@ -42,7 +42,7 @@ local function handleQuestCompletion(player, csid, option, npc)
         player:messageName(ID.text.FRAGMENT_FAR_TOO_SMALL, nil, subQuestData[csid][2])
         npcUtil.giveKeyItem(player, subQuestData[csid][2])
     else
-        player:messageSpecial(ID.text.FRAGMENTS_MELD, xi.ki.LARGE_MEMORY_FRAGMENT1)
+        player:messageSpecial(ID.text.FRAGMENTS_MELD, xi.keyItem.LARGE_MEMORY_FRAGMENT1)
 
         for _, questData in pairs(subQuestData) do
             player:delKeyItem(questData[2])
@@ -94,7 +94,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog1')
 
                     if questProgress == 0 then
-                        if not player:hasKeyItem(xi.ki.THIERRIDES_BEAN_CREATION) then
+                        if not player:hasKeyItem(xi.keyItem.THIERRIDES_BEAN_CREATION) then
                             return quest:progressEvent(792)
                         else
                             return quest:event(794):oncePerZone()
@@ -110,7 +110,7 @@ quest.sections =
                 [792] = function(player, csid, option, npc)
                     player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN)
 
-                    npcUtil.giveKeyItem(player, xi.ki.THIERRIDES_BEAN_CREATION)
+                    npcUtil.giveKeyItem(player, xi.keyItem.THIERRIDES_BEAN_CREATION)
                 end,
 
                 [793] = handleQuestCompletion,
@@ -122,7 +122,7 @@ quest.sections =
             ['Amaura'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.THIERRIDES_BEAN_CREATION) then
+                    if player:hasKeyItem(xi.keyItem.THIERRIDES_BEAN_CREATION) then
                         return quest:progressEvent(958, 650067949, 0, 5, 0, 156286100, 100000, 4095, 131073)
                     elseif quest:getVar(player, 'Prog1') == 1 then
                         return quest:event(959):oncePerZone()
@@ -133,7 +133,7 @@ quest.sections =
             onEventFinish =
             {
                 [958] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.THIERRIDES_BEAN_CREATION)
+                    player:delKeyItem(xi.keyItem.THIERRIDES_BEAN_CREATION)
 
                     quest:setVar(player, 'Prog1', 1)
                 end,

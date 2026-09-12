@@ -331,7 +331,7 @@ quest.sections =
             ['Gulldago'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MEMORANDOLL) then
+                    if player:hasKeyItem(xi.keyItem.MEMORANDOLL) then
                         return quest:progressEvent(705)
                     else
                         return quest:event(704)
@@ -354,7 +354,7 @@ quest.sections =
             ['Alaune'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MEMORANDOLL) then
+                    if player:hasKeyItem(xi.keyItem.MEMORANDOLL) then
                         return quest:progressEvent(3648)
                     else
                         return quest:event(3647)
@@ -377,7 +377,7 @@ quest.sections =
             ['Selele'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MEMORANDOLL) then
+                    if player:hasKeyItem(xi.keyItem.MEMORANDOLL) then
                         return quest:progressEvent(996)
                     else
                         return quest:event(995)
@@ -439,7 +439,7 @@ quest.sections =
             onEventFinish =
             {
                 [707] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CONQUEST_PROMOTION_VOUCHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
                     quest:setVar(player, 'Prog', 7)
                     quest:setVar(player, 'Option', 0)
                 end,
@@ -531,7 +531,7 @@ quest.sections =
             onEventFinish =
             {
                 [3650] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CONQUEST_PROMOTION_VOUCHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
                     quest:setVar(player, 'Prog', 7)
                     quest:setVar(player, 'Option', 0)
                 end,
@@ -587,7 +587,7 @@ quest.sections =
             onEventFinish =
             {
                 [998] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CONQUEST_PROMOTION_VOUCHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
                     quest:setVar(player, 'Prog', 7)
                     quest:setVar(player, 'Option', 0)
                 end,
@@ -682,7 +682,7 @@ quest.sections =
             ['Gulldago'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) then
+                    if player:hasKeyItem(xi.keyItem.BASTOK_TRUST_PERMIT) then
                         return quest:progressEvent(711)
                     else
                         return quest:event(710)
@@ -705,7 +705,7 @@ quest.sections =
             ['Alaune'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) then
+                    if player:hasKeyItem(xi.keyItem.SAN_DORIA_TRUST_PERMIT) then
                         return quest:progressEvent(3654)
                     else
                         return quest:event(3653)
@@ -728,7 +728,7 @@ quest.sections =
             ['Selele'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) then
+                    if player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT) then
                         return quest:progressEvent(1002)
                     else
                         return quest:event(1001)

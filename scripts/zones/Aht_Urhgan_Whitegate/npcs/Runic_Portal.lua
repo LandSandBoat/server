@@ -12,12 +12,12 @@ entity.onTrigger = function(player, npc)
     local runicPortals  = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
     local assaultOrders =
     {
-        [0] = { KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120 },
-        [1] = { KI = xi.ki.MAMOOL_JA_ASSAULT_ORDERS,  tele = 0x08, valid = 8,  event = 121 },
-        [2] = { KI = xi.ki.LEBROS_ASSAULT_ORDERS,     tele = 0x10, valid = 16, event = 122 },
-        [3] = { KI = xi.ki.PERIQIA_ASSAULT_ORDERS,    tele = 0x04, valid = 4,  event = 123 },
-        [4] = { KI = xi.ki.ILRUSI_ASSAULT_ORDERS,     tele = 0x20, valid = 32, event = 124 },
-        [5] = { KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125 },
+        [0] = { KI = xi.keyItem.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120 },
+        [1] = { KI = xi.keyItem.MAMOOL_JA_ASSAULT_ORDERS,  tele = 0x08, valid = 8,  event = 121 },
+        [2] = { KI = xi.keyItem.LEBROS_ASSAULT_ORDERS,     tele = 0x10, valid = 16, event = 122 },
+        [3] = { KI = xi.keyItem.PERIQIA_ASSAULT_ORDERS,    tele = 0x04, valid = 4,  event = 123 },
+        [4] = { KI = xi.keyItem.ILRUSI_ASSAULT_ORDERS,     tele = 0x20, valid = 32, event = 124 },
+        [5] = { KI = xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125 },
     }
 
     if xi.assault.hasOrders(player) then
@@ -36,18 +36,18 @@ entity.onTrigger = function(player, npc)
             end
         end
     else
-        local hasPermit = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
+        local hasPermit = player:hasKeyItem(xi.keyItem.RUNIC_PORTAL_USE_PERMIT)
         local mercRank  = xi.besieged.getMercenaryRank(player)
         local points    = player:getCurrency('imperial_standing')
         local hasAstral = xi.besieged.getAstralCandescence()
-        local isCaptain = player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE)
+        local isCaptain = player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE)
 
         if isCaptain then
             player:messageSpecial(ID.text.IMPERIAL_AUTHORIZATION) -- TODO: This may show in other cases
             hasPermit = false -- #1 and  #7 are always set to 0 for Captains
         end
 
-        player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, isCaptain and 1 or 0, hasAstral, hasPermit and 1 or 0, 0)
+        player:startEvent(101, hasPermit and xi.keyItem.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, isCaptain and 1 or 0, hasAstral, hasPermit and 1 or 0, 0)
     end
 end
 
@@ -108,11 +108,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         if option >= 101 and option <= 106 then
-            if not player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT) then
+            if not player:hasKeyItem(xi.keyItem.RUNIC_PORTAL_USE_PERMIT) then
                 return
             end
 
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
+            player:delKeyItem(xi.keyItem.RUNIC_PORTAL_USE_PERMIT)
             xi.teleport.to(player, portalPick[option])
         elseif option >= 1001 and option <= 1006 then
             if player:getCurrency('imperial_standing') >= 200 then
@@ -123,7 +123,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
         end
     elseif csid == 101 and option >= 1 and option <= 6 then
-        if not player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then
+        if not player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE) then
             return
         end
 

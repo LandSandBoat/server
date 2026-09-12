@@ -31,7 +31,7 @@ quest.sections =
             {
                 [348] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.SACK_OF_VICTUALS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SACK_OF_VICTUALS)
                 end,
             },
         },
@@ -41,7 +41,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 0 and
-                player:hasKeyItem(xi.ki.SACK_OF_VICTUALS)
+                player:hasKeyItem(xi.keyItem.SACK_OF_VICTUALS)
         end,
 
         [xi.zone.BASTOK_MARKETS_S] =
@@ -57,7 +57,7 @@ quest.sections =
             {
                 [10] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:delKeyItem(xi.ki.SACK_OF_VICTUALS)
+                    player:delKeyItem(xi.keyItem.SACK_OF_VICTUALS)
                 end,
             },
         },
@@ -106,7 +106,7 @@ quest.sections =
             {
                 [8] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    npcUtil.giveKeyItem(player, xi.ki.COMMANDERS_ENDORSEMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.COMMANDERS_ENDORSEMENT)
                 end,
             },
         },
@@ -116,7 +116,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 3 and
-                player:hasKeyItem(xi.ki.COMMANDERS_ENDORSEMENT)
+                player:hasKeyItem(xi.keyItem.COMMANDERS_ENDORSEMENT)
         end,
 
         [xi.zone.BASTOK_MARKETS_S] =
@@ -147,7 +147,7 @@ quest.sections =
             ['Gentle_Tiger'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.COMMANDERS_ENDORSEMENT) then
+                    if player:hasKeyItem(xi.keyItem.COMMANDERS_ENDORSEMENT) then
                         return quest:event(355)
                     else
                         return quest:progressEvent(357)
@@ -158,7 +158,7 @@ quest.sections =
             onEventFinish =
             {
                 [357] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.COMMANDERS_ENDORSEMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.COMMANDERS_ENDORSEMENT)
                 end,
             },
         },

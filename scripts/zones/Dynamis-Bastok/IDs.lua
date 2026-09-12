@@ -28,11 +28,11 @@ zones[xi.zone.DYNAMIS_BASTOK] =
     {
         TIME_EXTENSION =
         {
-            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17539142 },
-            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17539148 },
-            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17539149 },
-            { minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17539253 },
-            { minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17539306 },
+            { minutes = 10, ki = xi.keyItem.CRIMSON_GRANULES_OF_TIME,   mob = 17539142 },
+            { minutes = 10, ki = xi.keyItem.AZURE_GRANULES_OF_TIME,     mob = 17539148 },
+            { minutes = 10, ki = xi.keyItem.AMBER_GRANULES_OF_TIME,     mob = 17539149 },
+            { minutes = 15, ki = xi.keyItem.ALABASTER_GRANULES_OF_TIME, mob = 17539253 },
+            { minutes = 15, ki = xi.keyItem.OBSIDIAN_GRANULES_OF_TIME,  mob = 17539306 },
         },
 
         REFILL_STATUE =

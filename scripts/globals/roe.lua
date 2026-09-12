@@ -196,8 +196,8 @@ end
     completeRecord(player, record#)
     reward =
     {
-        item = { { 640, 2 }, 641 },      -- see npcUtil.giveItem for formats (Only given on first completion)
-        keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
+        item = { { 640, 2 }, 641 },           -- see npcUtil.giveItem for formats (Only given on first completion)
+        keyItem = xi.keyItem.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
         xp = 1000,
         accolades = 300,

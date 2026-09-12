@@ -34,7 +34,7 @@ quest.sections =
             onEventFinish =
             {
                 [31] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.NUMBER_EIGHT_SHELTER_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NUMBER_EIGHT_SHELTER_KEY)
                     quest:begin(player)
                 end,
             },
@@ -51,7 +51,7 @@ quest.sections =
             ['Diordinne'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.NUMBER_EIGHT_SHELTER_KEY) then
+                    if player:hasKeyItem(xi.keyItem.NUMBER_EIGHT_SHELTER_KEY) then
                         if quest:getVar(player, 'Option') == 0 then
                             return quest:event(37)
                         end
@@ -100,7 +100,7 @@ quest.sections =
 
                 [36] = function(player, csid, option, npc)
                     quest:setVar(player, 'Timer', 0)
-                    npcUtil.giveKeyItem(player, xi.ki.NUMBER_EIGHT_SHELTER_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NUMBER_EIGHT_SHELTER_KEY)
                 end,
 
                 [37] = function(player, csid, option, npc)

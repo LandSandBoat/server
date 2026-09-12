@@ -62,7 +62,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Stage == 0 and
-                player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) and
+                player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) and
                 player:getFameLevel(xi.fameArea.SANDORIA) >= 5 and
                 player:getFameLevel(xi.fameArea.NORG) >= 1
         end,
@@ -85,7 +85,7 @@ quest.sections =
             onEventFinish =
             {
                 [651] = function(player, csid, option, npc)
-                    if option == 1 and npcUtil.giveKeyItem(player, xi.ki.BRUGAIRE_GOODS) then
+                    if option == 1 and npcUtil.giveKeyItem(player, xi.keyItem.BRUGAIRE_GOODS) then
                         quest:begin(player)
                         -- Set as damaged, going through customs reverses it.
                         quest:setVar(player, 'Prog', packageCondition.DAMAGED)
@@ -99,7 +99,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Stage == 1 and
-            player:hasKeyItem(xi.ki.BRUGAIRE_GOODS)
+            player:hasKeyItem(xi.keyItem.BRUGAIRE_GOODS)
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -144,9 +144,9 @@ quest.sections =
                 [54] = function(player, csid, option, npc)
                     if option == 1 then
                         if quest:getVar(player, 'Prog') == packageCondition.CONFISCATED then
-                            player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
+                            player:delKeyItem(xi.keyItem.BRUGAIRE_GOODS)
                             player:setVar('[AIRSHIP]suspended', JstMidnight())
-                            player:messageSpecial(juenoPortID.text.CONFISCATED, xi.ki.BRUGAIRE_GOODS)
+                            player:messageSpecial(juenoPortID.text.CONFISCATED, xi.keyItem.BRUGAIRE_GOODS)
                         else
                             player:messageSpecial(juenoPortID.text.CLEARED_CUSTOMS)
                             quest:setVar(player, 'Prog', packageCondition.NORMAL)
@@ -174,13 +174,13 @@ quest.sections =
             onEventFinish =
             {
                 [218] = function(player, csid, option, npc)
-                    player:messageSpecial(lowerID.text.DAMANGED_PACKAGE_DELIVERED, xi.ki.BRUGAIRE_GOODS)
-                    player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
+                    player:messageSpecial(lowerID.text.DAMANGED_PACKAGE_DELIVERED, xi.keyItem.BRUGAIRE_GOODS)
+                    player:delKeyItem(xi.keyItem.BRUGAIRE_GOODS)
                 end,
 
                 [219] = function(player, csid, option, npc)
-                    player:messageSpecial(lowerID.text.PACKAGE_DELIVERED, xi.ki.BRUGAIRE_GOODS)
-                    player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
+                    player:messageSpecial(lowerID.text.PACKAGE_DELIVERED, xi.keyItem.BRUGAIRE_GOODS)
+                    player:delKeyItem(xi.keyItem.BRUGAIRE_GOODS)
                 end,
             },
         },
@@ -189,7 +189,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Stage == 1 and
-            not player:hasKeyItem(xi.ki.BRUGAIRE_GOODS)
+            not player:hasKeyItem(xi.keyItem.BRUGAIRE_GOODS)
         end,
 
         [xi.zone.PORT_SAN_DORIA] =

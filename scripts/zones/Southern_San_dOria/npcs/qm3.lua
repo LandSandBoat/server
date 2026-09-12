@@ -18,7 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 41 and option == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.STRANGE_SHEET_OF_PAPER)
+        npcUtil.giveKeyItem(player, xi.keyItem.STRANGE_SHEET_OF_PAPER)
     end
 end
 

@@ -73,7 +73,7 @@ quest.sections =
                     local param6 = smnAF and xi.item.EARTH_PENDULUM or 0
                     local param7 = smnAF and 1 or 0
 
-                    return quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
+                    return quest:progressEvent(249, 0, xi.keyItem.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
                 end,
             },
 
@@ -81,7 +81,7 @@ quest.sections =
             {
                 [249] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_EARTH)
                         quest:begin(player)
                     end
                 end,
@@ -99,16 +99,16 @@ quest.sections =
             ['Juroro'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) then
-                        if not player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) then
+                    if not player:hasKeyItem(xi.keyItem.WHISPER_OF_TREMORS) then
+                        if not player:hasKeyItem(xi.keyItem.TUNING_FORK_OF_EARTH) then
                             -- Player has failed the BCNM and requires a new Tuning Fork
 
-                            return quest:progressEvent(284, 0, xi.ki.TUNING_FORK_OF_EARTH)
+                            return quest:progressEvent(284, 0, xi.keyItem.TUNING_FORK_OF_EARTH)
                         else
-                            return quest:event(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
+                            return quest:event(250, 0, xi.keyItem.TUNING_FORK_OF_EARTH, 1)
                         end
                     else
-                        return quest:progressEvent(252, 0, xi.ki.TUNING_FORK_OF_EARTH, 1, 0, getRewardMask(player))
+                        return quest:progressEvent(252, 0, xi.keyItem.TUNING_FORK_OF_EARTH, 1, 0, getRewardMask(player))
                     end
                 end,
             },
@@ -118,13 +118,13 @@ quest.sections =
                 [252] = function(player, csid, option, npc)
                     if giveQuestReward(player, option) then
                         quest:complete(player)
-                        player:delKeyItem(xi.ki.WHISPER_OF_TREMORS)
+                        player:delKeyItem(xi.keyItem.WHISPER_OF_TREMORS)
                         quest:setTimedVar(player, 'Timer', NextJstDay())
                     end
                 end,
 
                 [284] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_EARTH)
                 end,
             },
         },
@@ -135,7 +135,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.TRIAL_BY_EARTH then
-                        npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_TREMORS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_TREMORS)
                         player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
                     end
                 end,
@@ -160,7 +160,7 @@ quest.sections =
                     local param6 = smnAF and xi.item.EARTH_PENDULUM or 0
                     local param7 = smnAF and 1 or 0
 
-                    return quest:progressEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
+                    return quest:progressEvent(249, 0, xi.keyItem.TUNING_FORK_OF_EARTH, 0, param4, 0, param6, param7)
                 end,
             },
 
@@ -170,7 +170,7 @@ quest.sections =
                     if option == 1 then
                         player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
-                        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_EARTH)
 
                         quest:begin(player)
                     end

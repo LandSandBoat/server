@@ -81,7 +81,7 @@ quest.sections =
         check = function(player, questVars, vars)
             return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
                 not player:hasSpell(xi.magic.spell.SHANTOTTO) and
-                player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
+                player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =

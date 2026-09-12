@@ -66,7 +66,7 @@ quest.sections =
                     then
                         local questProgress = quest:getVar(player, 'Prog')
 
-                        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_BLUE) then
+                        if player:hasKeyItem(xi.keyItem.LELEROONS_LETTER_BLUE) then
                             return quest:progressEvent(519)
                         elseif questProgress == 2 then
                             return quest:event(520)
@@ -91,7 +91,7 @@ quest.sections =
             {
                 [519] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
+                    player:delKeyItem(xi.keyItem.LELEROONS_LETTER_BLUE)
                 end,
 
                 [521] = function(player, csid, option, npc)
@@ -154,11 +154,11 @@ quest.sections =
                         not utils.mask.getBit(quest:getVar(player, 'Completed'), option - 1)
                     then
                         if option == 1 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_GREEN)
+                            npcUtil.giveKeyItem(player, xi.keyItem.LELEROONS_LETTER_GREEN)
                         elseif option == 2 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_BLUE)
+                            npcUtil.giveKeyItem(player, xi.keyItem.LELEROONS_LETTER_BLUE)
                         elseif option == 3 then
-                            npcUtil.giveKeyItem(player, xi.ki.LELEROONS_LETTER_RED)
+                            npcUtil.giveKeyItem(player, xi.keyItem.LELEROONS_LETTER_RED)
                         end
 
                         quest:setVar(player, 'Option', option)
@@ -203,7 +203,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if quest:getVar(player, 'Option') == 3 then
-                        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_RED) then
+                        if player:hasKeyItem(xi.keyItem.LELEROONS_LETTER_RED) then
                             return quest:progressEvent(753)
                         elseif questProgress == 2 then
                             return quest:event(754)
@@ -230,7 +230,7 @@ quest.sections =
             {
                 [753] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.LELEROONS_LETTER_RED)
+                    player:delKeyItem(xi.keyItem.LELEROONS_LETTER_RED)
                 end,
 
                 [755] = function(player, csid, option, npc)
@@ -293,7 +293,7 @@ quest.sections =
                     then
                         local questProgress = quest:getVar(player, 'Prog')
 
-                        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_GREEN) then
+                        if player:hasKeyItem(xi.keyItem.LELEROONS_LETTER_GREEN) then
                             return quest:progressEvent(941)
                         elseif questProgress == 2 then
                             return quest:event(942)
@@ -318,7 +318,7 @@ quest.sections =
             {
                 [941] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
+                    player:delKeyItem(xi.keyItem.LELEROONS_LETTER_GREEN)
                 end,
 
                 [943] = function(player, csid, option, npc)

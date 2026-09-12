@@ -37,9 +37,9 @@ quest.sections =
                             return quest:progressEvent(638)
                         elseif questProgress == 1 then
                             if
-                                player:hasKeyItem(xi.ki.LONG_LIFE_BISCUITS) and
-                                player:hasKeyItem(xi.ki.FLASK_OF_KINGDOM_WATER) and
-                                player:hasKeyItem(xi.ki.RONFAURE_MAPLE_SYRUP)
+                                player:hasKeyItem(xi.keyItem.LONG_LIFE_BISCUITS) and
+                                player:hasKeyItem(xi.keyItem.FLASK_OF_KINGDOM_WATER) and
+                                player:hasKeyItem(xi.keyItem.RONFAURE_MAPLE_SYRUP)
                             then
                                 return quest:progressEvent(642)
                             else
@@ -58,7 +58,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.LONG_LIFE_BISCUITS) and
+                        not player:hasKeyItem(xi.keyItem.LONG_LIFE_BISCUITS) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(640)
@@ -70,7 +70,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.FLASK_OF_KINGDOM_WATER) and
+                        not player:hasKeyItem(xi.keyItem.FLASK_OF_KINGDOM_WATER) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(641)
@@ -85,19 +85,19 @@ quest.sections =
                 end,
 
                 [640] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LONG_LIFE_BISCUITS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LONG_LIFE_BISCUITS)
                 end,
 
                 [641] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FLASK_OF_KINGDOM_WATER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FLASK_OF_KINGDOM_WATER)
                 end,
 
                 [642] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BISCUIT_A_LA_RHOLONT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BISCUIT_A_LA_RHOLONT)
 
-                    player:delKeyItem(xi.ki.LONG_LIFE_BISCUITS)
-                    player:delKeyItem(xi.ki.FLASK_OF_KINGDOM_WATER)
-                    player:delKeyItem(xi.ki.RONFAURE_MAPLE_SYRUP)
+                    player:delKeyItem(xi.keyItem.LONG_LIFE_BISCUITS)
+                    player:delKeyItem(xi.keyItem.FLASK_OF_KINGDOM_WATER)
+                    player:delKeyItem(xi.keyItem.RONFAURE_MAPLE_SYRUP)
 
                     quest:setVar(player, 'Prog', 2)
                 end,

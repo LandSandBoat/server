@@ -77,7 +77,7 @@ quest.sections =
             ['Jonette'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TAVNAZIAN_COOKBOOK) then
+                    if player:hasKeyItem(xi.keyItem.TAVNAZIAN_COOKBOOK) then
                         return quest:progressEvent(508)
                     end
                 end,
@@ -87,7 +87,7 @@ quest.sections =
             {
                 [508] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.TAVNAZIAN_COOKBOOK)
+                        player:delKeyItem(xi.keyItem.TAVNAZIAN_COOKBOOK)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end
                 end,
@@ -99,8 +99,8 @@ quest.sections =
             ['qm_tavnazian_cookbook'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TAVNAZIAN_COOKBOOK) then
-                        return quest:keyItem(xi.ki.TAVNAZIAN_COOKBOOK)
+                    if not player:hasKeyItem(xi.keyItem.TAVNAZIAN_COOKBOOK) then
+                        return quest:keyItem(xi.keyItem.TAVNAZIAN_COOKBOOK)
                     end
                 end,
             },
@@ -111,8 +111,8 @@ quest.sections =
             ['qm_tavnazian_cookbook'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TAVNAZIAN_COOKBOOK) then
-                        return quest:keyItem(xi.ki.TAVNAZIAN_COOKBOOK)
+                    if not player:hasKeyItem(xi.keyItem.TAVNAZIAN_COOKBOOK) then
+                        return quest:keyItem(xi.keyItem.TAVNAZIAN_COOKBOOK)
                     end
                 end,
             },

@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         utils.mask.isFull(prog, 4) and
         not utils.mask.getBit(prog, 4)
     then
-        player:messageSpecial(ID.text.CAT_BURGLARS_HIDEOUT, 1, xi.ki.WINDURST_WOODS_SCOOP) -- Confirm Story
+        player:messageSpecial(ID.text.CAT_BURGLARS_HIDEOUT, 1, xi.keyItem.WINDURST_WOODS_SCOOP) -- Confirm Story
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(prog, 4, true))
     end
 end

@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ECCENTRIC_EVE_OFFSET, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ECCENTRIC_EVE_OFFSET, { xi.keyItem.FRAGRANT_TREANT_PETAL, xi.keyItem.FETID_RAFFLESIA_STALK, xi.keyItem.DECAYING_MORBOL_TOOTH, xi.keyItem.TURBID_SLIME_OIL, xi.keyItem.VENOMOUS_PEISTE_CLAW })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

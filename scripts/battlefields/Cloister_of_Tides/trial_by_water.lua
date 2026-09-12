@@ -12,7 +12,7 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'WP_Entrance',
     exitNpc          = 'Water_Protocrystal',
-    requiredKeyItems = { xi.ki.TUNING_FORK_OF_WATER },
+    requiredKeyItems = { xi.keyItem.TUNING_FORK_OF_WATER },
 
     questArea = xi.questLog.OUTLANDS,
     quest     = xi.quest.id.outlands.TRIAL_BY_WATER,
@@ -20,7 +20,7 @@ local content = BattlefieldQuest:new({
 
 function content:onEventFinishWin(player, csid, option, npc)
     player:addTitle(xi.title.HEIR_OF_THE_GREAT_WATER)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_TIDES)
+    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_TIDES)
 end
 
 content.groups =

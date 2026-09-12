@@ -13,7 +13,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:isPC() and
         (
             (target:getRace() == xi.race.TARU_M or target:getRace() == xi.race.TARU_F) and
-            not target:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)
+            not target:hasKeyItem(xi.keyItem.LIGHT_OF_HOLLA)
         )
     then
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 30))

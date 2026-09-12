@@ -29,11 +29,11 @@ zones[xi.zone.DYNAMIS_TAVNAZIA] =
     {
         TIME_EXTENSION =
         {
-            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 16949272 },
-            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 16949292 },
-            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 16949306 },
-            { minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 16949325 },
-            { minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 16949380 },
+            { minutes = 10, ki = xi.keyItem.CRIMSON_GRANULES_OF_TIME,   mob = 16949272 },
+            { minutes = 10, ki = xi.keyItem.AZURE_GRANULES_OF_TIME,     mob = 16949292 },
+            { minutes = 10, ki = xi.keyItem.AMBER_GRANULES_OF_TIME,     mob = 16949306 },
+            { minutes = 10, ki = xi.keyItem.ALABASTER_GRANULES_OF_TIME, mob = 16949325 },
+            { minutes = 20, ki = xi.keyItem.OBSIDIAN_GRANULES_OF_TIME,  mob = 16949380 },
         },
 
         REFILL_STATUE =

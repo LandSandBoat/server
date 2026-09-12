@@ -15,7 +15,7 @@ local quest = HiddenQuest:new('CrimsonOrb')
 
 quest.reward =
 {
-    keyItem = xi.ki.CRIMSON_ORB,
+    keyItem = xi.keyItem.CRIMSON_ORB,
 }
 
 local pondNpcs =
@@ -60,9 +60,9 @@ local pondEventFinish = function(player, csid, option, npc)
     local numPonds = utils.mask.countBits(questOption, 4)
 
     quest:setVarBit(player, 'Option', npcOffset)
-    player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET + numPonds + 1, 0, 0, 0, xi.ki.WHITE_ORB + numPonds + 1)
-    player:delKeyItem(xi.ki.WHITE_ORB + numPonds)
-    player:addKeyItem(xi.ki.WHITE_ORB + numPonds + 1)
+    player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET + numPonds + 1, 0, 0, 0, xi.keyItem.WHITE_ORB + numPonds + 1)
+    player:delKeyItem(xi.keyItem.WHITE_ORB + numPonds)
+    player:addKeyItem(xi.keyItem.WHITE_ORB + numPonds + 1)
 
     if numPonds == 3 then
         player:addStatusEffect(xi.effect.CURSE_I, { power = 50, duration = 900, origin = player })
@@ -75,7 +75,7 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasKeyItem(xi.ki.CRIMSON_ORB)
+            return not player:hasKeyItem(xi.keyItem.CRIMSON_ORB)
         end,
 
         [xi.zone.DAVOI] =
@@ -136,12 +136,12 @@ quest.sections =
                 [22] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:setVar(player, 'Prog', 2)
-                        npcUtil.giveKeyItem(player, xi.ki.WHITE_ORB)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WHITE_ORB)
                     end
                 end,
 
                 [25] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CURSED_ORB)
+                    player:delKeyItem(xi.keyItem.CURSED_ORB)
                     quest:complete(player)
                 end,
 

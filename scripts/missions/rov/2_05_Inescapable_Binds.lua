@@ -18,7 +18,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                 xi.rhapsodies.charactersAvailable(player) and
-                player:hasKeyItem(xi.ki.BOARDING_PERMIT)
+                player:hasKeyItem(xi.keyItem.BOARDING_PERMIT)
         end,
 
         -- There's two ways to complete this mission: Either by obtaining a Boarding Permit which

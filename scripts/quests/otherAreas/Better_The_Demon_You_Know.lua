@@ -87,7 +87,7 @@ quest.sections =
 
                 [26] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ZEELOZOKS_EARPLUG)
+                        player:delKeyItem(xi.keyItem.ZEELOZOKS_EARPLUG)
                     end
                 end,
             },
@@ -104,9 +104,9 @@ quest.sections =
                         player:getLocalVar('NMKilled') == 1 and
                         progress == 2
                     then
-                        player:addKeyItem(xi.ki.ZEELOZOKS_EARPLUG)
+                        player:addKeyItem(xi.keyItem.ZEELOZOKS_EARPLUG)
                         quest:setVar(player, 'Prog', 3)
-                        return quest:messageSpecial(zvahlID.text.KEYITEM_OBTAINED, xi.ki.ZEELOZOKS_EARPLUG)
+                        return quest:messageSpecial(zvahlID.text.KEYITEM_OBTAINED, xi.keyItem.ZEELOZOKS_EARPLUG)
                     elseif
                         progress == 2 and
                         not GetMobByID(zvahlID.mob.MARQUIS_ANDREALPUS):isSpawned() and

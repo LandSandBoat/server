@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANC
 
 quest.reward =
 {
-    keyItem = xi.ki.SOUL_GEM_CLASP,
+    keyItem = xi.keyItem.SOUL_GEM_CLASP,
 }
 
 quest.sections =
@@ -33,7 +33,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local eventId         = 10045
                     local playerLevel     = player:getMainLvl()
-                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker    = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
                     local lastQuestNumber = 0
                     local lastQuestStage  = 0
                     if
@@ -87,7 +87,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     local playerLevel     = player:getMainLvl()
-                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker    = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
                     local lastQuestNumber = 6
                     local lastQuestStage  = 2
                     if quest:getVar(player, 'tradeCompleted') > 0 then

@@ -62,7 +62,7 @@ quest.sections =
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FAKE_MOUSTACHE) then
+                    if player:hasKeyItem(xi.keyItem.FAKE_MOUSTACHE) then
                         return quest:progressEvent(421)
                     else
                         return quest:event(414)
@@ -73,7 +73,7 @@ quest.sections =
             -- Reminder text.
             ['Gomada-Vulmada'] = quest:event(417),
             ['Papo-Hopo']      = quest:event(416),
-            ['Pichichi']       = quest:event(415, 0, xi.ki.FAKE_MOUSTACHE),
+            ['Pichichi']       = quest:event(415, 0, xi.keyItem.FAKE_MOUSTACHE),
             ['Pyo_Nzon']       = quest:event(418),
             ['Shanruru']       = quest:event(420),
             ['Yafa_Yaa']       = quest:event(419),
@@ -99,11 +99,11 @@ quest.sections =
             ['Chamama'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FAKE_MOUSTACHE) then
+                    if player:hasKeyItem(xi.keyItem.FAKE_MOUSTACHE) then
                         return quest:event(553)
                     else
                         if quest:getVar(player, 'Prog') > 0 then
-                            return quest:progressEvent(551, 0, xi.ki.FAKE_MOUSTACHE)
+                            return quest:progressEvent(551, 0, xi.keyItem.FAKE_MOUSTACHE)
                         end
                     end
                 end,
@@ -112,7 +112,7 @@ quest.sections =
                     if
                         quest:getVar(player, 'Prog') == 2 and
                         npcUtil.tradeHasExactly(trade, { { xi.item.BALL_OF_SARUTA_COTTON, 4 } }) and
-                        not player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
+                        not player:hasKeyItem(xi.keyItem.FAKE_MOUSTACHE)
                     then
                         return quest:progressEvent(552)
                     end
@@ -129,7 +129,7 @@ quest.sections =
 
                 [552] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.FAKE_MOUSTACHE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FAKE_MOUSTACHE)
                 end,
             },
         },

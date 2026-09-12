@@ -349,10 +349,10 @@ local content = BattlefieldQuest:new({
 
 -- can help if you are doing the quest or already completed the quest
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    local hasQuestItems = player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and player:hasKeyItem(xi.ki.EYE_OF_FROST) and
-    player:hasKeyItem(xi.ki.EYE_OF_GALES) and player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
-    player:hasKeyItem(xi.ki.EYE_OF_TIDES) and player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
-    player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+    local hasQuestItems = player:hasKeyItem(xi.keyItem.EYE_OF_FLAMES) and player:hasKeyItem(xi.keyItem.EYE_OF_FROST) and
+    player:hasKeyItem(xi.keyItem.EYE_OF_GALES) and player:hasKeyItem(xi.keyItem.EYE_OF_STORMS) and
+    player:hasKeyItem(xi.keyItem.EYE_OF_TIDES) and player:hasKeyItem(xi.keyItem.EYE_OF_TREMORS) and
+    player:hasKeyItem(xi.keyItem.RAINBOW_RESONATOR)
 
     local prevCompletedQuest = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_COMPLETED
 

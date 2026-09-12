@@ -23,7 +23,7 @@ local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_E
 mission.reward =
 {
     gil     = 3000,
-    keyItem = xi.ki.ADVENTURERS_CERTIFICATE,
+    keyItem = xi.keyItem.ADVENTURERS_CERTIFICATE,
     rank    = 3,
     title   = xi.title.CERTIFIED_ADVENTURER,
 }
@@ -98,10 +98,10 @@ mission.sections =
             ['Naji'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
+                    if player:hasKeyItem(xi.keyItem.KINDRED_REPORT) then
                         return mission:progressEvent(714)
                     elseif
-                        not player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) and
+                        not player:hasKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_BASTOK) and
                         player:getMissionStatus(mission.areaId) == 0
                     then
                         local isFirst23 =
@@ -120,13 +120,13 @@ mission.sections =
             onEventFinish =
             {
                 [713] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_THE_CONSULS_BASTOK)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
 
                 [714] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.KINDRED_REPORT)
+                        player:delKeyItem(xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },
@@ -186,7 +186,7 @@ mission.sections =
                     if option == 0 then
                         player:delMission(mission.areaId, mission.missionId)
                         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2)
-                        player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
+                        player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
                         player:setMissionStatus(mission.areaId, 8)
                     end
                 end,
@@ -209,7 +209,7 @@ mission.sections =
                     if missionStatus == 7 then -- Windurst path completed. Sandoria path not started.
                         return mission:event(58)
                     elseif
-                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasKeyItem(xi.keyItem.KINDRED_REPORT) and
                         player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
                     then -- Both paths completed, with Windurst last.
                         return mission:event(69)
@@ -223,7 +223,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) == 7 then -- Windurst path completed. Sandoria path not started.
                         return mission:event(57)
                     elseif
-                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasKeyItem(xi.keyItem.KINDRED_REPORT) and
                         player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
                     then -- Both paths completed, with Windurst last.
                         return mission:event(68)
@@ -237,7 +237,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) == 7 then -- Windurst path completed. Sandoria path not started.
                         return mission:event(59)
                     elseif
-                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasKeyItem(xi.keyItem.KINDRED_REPORT) and
                         player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
                     then -- Both paths completed, with Windurst last.
                         return mission:event(70)
@@ -257,7 +257,7 @@ mission.sections =
                     elseif missionStatus == 7 then -- Windurst path completed. Sandoria path not started.
                         return mission:event(56)
                     elseif
-                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasKeyItem(xi.keyItem.KINDRED_REPORT) and
                         player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
                     then -- Both paths completed, with Windurst last.
                         return mission:progressEvent(67)
@@ -276,7 +276,7 @@ mission.sections =
                 [61] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
                     player:setMissionStatus(mission.areaId, 7)
                 end,
             },

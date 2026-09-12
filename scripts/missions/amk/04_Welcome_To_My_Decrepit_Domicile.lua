@@ -33,7 +33,7 @@ mission.sections =
             ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) then
+                    if player:hasKeyItem(xi.keyItem.STURDY_METAL_STRIP) then
                         return mission:progressEvent(10179)
                     else
                         return mission:progressEvent(10186) -- Reminder
@@ -44,7 +44,7 @@ mission.sections =
             onEventFinish =
             {
                 [10179] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.STURDY_METAL_STRIP)
+                    player:delKeyItem(xi.keyItem.STURDY_METAL_STRIP)
                     player:setMissionStatus(xi.mission.log_id.AMK, 1)
                 end,
             },
@@ -62,7 +62,7 @@ mission.sections =
             ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) then
+                    if player:hasKeyItem(xi.keyItem.PIECE_OF_RUGGED_TREE_BARK) then
                         return mission:progressEvent(10180)
                     else
                         return mission:progressEvent(10187) -- Reminder
@@ -73,7 +73,7 @@ mission.sections =
             onEventFinish =
             {
                 [10180] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK)
+                    player:delKeyItem(xi.keyItem.PIECE_OF_RUGGED_TREE_BARK)
                     player:setMissionStatus(xi.mission.log_id.AMK, 2)
                 end,
             },
@@ -91,7 +91,7 @@ mission.sections =
             ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) then
+                    if player:hasKeyItem(xi.keyItem.SAVORY_LAMB_ROAST) then
                         return mission:progressEvent(10181)
                     else
                         return mission:progressEvent(10188) -- Reminder
@@ -103,7 +103,7 @@ mission.sections =
             {
                 [10181] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.SAVORY_LAMB_ROAST)
+                        player:delKeyItem(xi.keyItem.SAVORY_LAMB_ROAST)
                     end
                 end,
             },

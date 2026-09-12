@@ -47,7 +47,7 @@ quest.sections =
                 [94] = function(player, csid, option, npc)
                     if option == 1 then -- Accept quest.
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.OLD_POCKET_WATCH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.OLD_POCKET_WATCH)
                     else
                         quest:setVar(player, 'Prog', 1) -- You rejected the quest when first offered.
                     end
@@ -56,7 +56,7 @@ quest.sections =
                 [95] = function(player, csid, option, npc)
                     if option == 1 then -- Accept quest.
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.OLD_POCKET_WATCH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.OLD_POCKET_WATCH)
                     end
                 end,
             },
@@ -112,8 +112,8 @@ quest.sections =
                             end
                         else
                             if
-                                player:hasKeyItem(xi.ki.CRAWLER_BLOOD) and
-                                player:hasKeyItem(xi.ki.OLD_BOOTS)
+                                player:hasKeyItem(xi.keyItem.CRAWLER_BLOOD) and
+                                player:hasKeyItem(xi.keyItem.OLD_BOOTS)
                             then
                                 return quest:progressEvent(4) -- Loose key items. Start boot purification.
                             else
@@ -132,11 +132,11 @@ quest.sections =
                         quest:setVar(player, 'Time', GetSystemTime() + 30)
 
                         -- Delete Key items.
-                        player:delKeyItem(xi.ki.CRAWLER_BLOOD)
-                        player:delKeyItem(xi.ki.OLD_BOOTS)
+                        player:delKeyItem(xi.keyItem.CRAWLER_BLOOD)
+                        player:delKeyItem(xi.keyItem.OLD_BOOTS)
 
                         -- Message when acepting to bury boots and blood.
-                        player:messageSpecial(crawlersID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
+                        player:messageSpecial(crawlersID.text.YOU_BURY_THE, xi.keyItem.OLD_BOOTS, xi.keyItem.CRAWLER_BLOOD)
                     end
                 end,
 
@@ -170,8 +170,8 @@ quest.sections =
                 [37] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2) -- Saw ghost.
                     player:tradeComplete()
-                    player:delKeyItem(xi.ki.OLD_POCKET_WATCH)
-                    npcUtil.giveKeyItem(player, xi.ki.OLD_BOOTS)
+                    player:delKeyItem(xi.keyItem.OLD_POCKET_WATCH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OLD_BOOTS)
                 end,
             },
         },

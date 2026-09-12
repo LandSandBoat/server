@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
+    if not player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) then
         return -- Anti-Cheat.
     end
 

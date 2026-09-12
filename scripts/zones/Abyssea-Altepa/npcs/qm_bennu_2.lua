@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_OFFSET + 4, { xi.ki.RESPLENDENT_ROC_QUILL })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_OFFSET + 4, { xi.keyItem.RESPLENDENT_ROC_QUILL })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

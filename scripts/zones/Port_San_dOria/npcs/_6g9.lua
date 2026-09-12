@@ -10,7 +10,7 @@ entity.onTrigger = function(player, npc)
     local xPos = player:getXPos()
 
     if xPos <= -14 and xPos >= -20 then
-        if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+        if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
             player:startEvent(517)
         elseif player:getGil() < 200 then
             player:startEvent(716)

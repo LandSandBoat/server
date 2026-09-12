@@ -23,11 +23,11 @@ m:addOverride('xi.server.onServerStart', function()
                 quest:setVar(player, 'Time', JstMidnight()) -- Module change: the boots are purified at JST midnight.
 
                 -- Delete Key items.
-                player:delKeyItem(xi.ki.CRAWLER_BLOOD)
-                player:delKeyItem(xi.ki.OLD_BOOTS)
+                player:delKeyItem(xi.keyItem.CRAWLER_BLOOD)
+                player:delKeyItem(xi.keyItem.OLD_BOOTS)
 
                 -- Message when acepting to bury boots and blood.
-                player:messageSpecial(zones[xi.zone.CRAWLERS_NEST].text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
+                player:messageSpecial(zones[xi.zone.CRAWLERS_NEST].text.YOU_BURY_THE, xi.keyItem.OLD_BOOTS, xi.keyItem.CRAWLER_BLOOD)
             end
         end
     end)

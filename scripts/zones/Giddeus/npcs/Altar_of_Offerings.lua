@@ -18,7 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 53 and option == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.OFF_OFFERING)
+        npcUtil.giveKeyItem(player, xi.keyItem.OFF_OFFERING)
         player:setCharVar('QuestCrisisMaking_var', 2)
     end
 end

@@ -19,12 +19,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(681) -- Start quest "Healing the Land"
     elseif
         healingTheLand == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+        player:hasKeyItem(xi.keyItem.SEAL_OF_BANISHING)
     then
         player:startEvent(682) -- During quest "Healing the Land"
     elseif
         healingTheLand == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+        not player:hasKeyItem(xi.keyItem.SEAL_OF_BANISHING)
     then
         player:startEvent(683) -- Finish quest "Healing the Land"
     elseif
@@ -41,12 +41,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(685) -- Start quest "Sorcery of the North"
     elseif
         sorceryOfTheNorth == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+        not player:hasKeyItem(xi.keyItem.FEIYIN_MAGIC_TOME)
     then
         player:startEvent(686) -- During quest "Sorcery of the North"
     elseif
         sorceryOfTheNorth == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+        player:hasKeyItem(xi.keyItem.FEIYIN_MAGIC_TOME)
     then
         player:startEvent(687) -- Finish quest "Sorcery of the North"
     end
@@ -55,7 +55,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 681 and option == 0 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
-        npcUtil.giveKeyItem(player, xi.ki.SEAL_OF_BANISHING)
+        npcUtil.giveKeyItem(player, xi.keyItem.SEAL_OF_BANISHING)
     elseif csid == 683 then
         if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_HOLLA) then
             player:addTitle(xi.title.PILGRIM_TO_HOLLA)
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
     elseif csid == 687 then
         if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_VAHZL) then
-            player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+            player:delKeyItem(xi.keyItem.FEIYIN_MAGIC_TOME)
             player:addFame(xi.fameArea.SANDORIA, 40)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end

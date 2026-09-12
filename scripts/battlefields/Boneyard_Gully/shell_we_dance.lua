@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index            = 3,
     entryNpc         = '_081',
     exitNpcs         = { '_082', '_084', '_086' },
-    requiredKeyItems = { xi.ki.MIASMA_FILTER },
+    requiredKeyItems = { xi.keyItem.MIASMA_FILTER },
     armouryCrates    =
     {
         boneyardGullyID.mob.PARATA + 8,

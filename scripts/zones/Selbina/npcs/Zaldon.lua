@@ -21,7 +21,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- A BOY'S DREAM
     if csid == 85 then
-        npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
+        npcUtil.giveKeyItem(player, xi.keyItem.KNIGHTS_BOOTS)
         player:setCharVar('aBoysDreamCS', 6)
         player:confirmTrade()
     end

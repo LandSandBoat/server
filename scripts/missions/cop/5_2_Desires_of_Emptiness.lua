@@ -251,7 +251,7 @@ mission.sections =
             onEventUpdate =
             {
                 [206] = function(player, csid, option, npc)
-                    player:updateEvent(0, xi.ki.MYSTERIOUS_AMULET)
+                    player:updateEvent(0, xi.keyItem.MYSTERIOUS_AMULET)
                 end,
             },
 

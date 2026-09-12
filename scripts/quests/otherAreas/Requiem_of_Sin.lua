@@ -37,7 +37,7 @@ quest.sections =
             onEventFinish =
             {
                 [578] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_Y)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_SHIKAREE_Y)
                     player:setCharVar('ShikareeBattleWait', NextConquestTally())
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -75,7 +75,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('ShikareeBattleWait') < NextConquestTally() and
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_SHIKAREE_Y)
                     then
                         return quest:progressEvent(579)
                     end
@@ -85,7 +85,7 @@ quest.sections =
             onEventFinish =
             {
                 [579] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_Y)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_SHIKAREE_Y)
                     player:setCharVar('ShikareeBattleWait', NextConquestTally())
                 end,
             },
@@ -109,7 +109,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
                 player:getCharVar('ShikareeBattleWait') < NextConquestTally() and
-                not player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+                not player:hasKeyItem(xi.keyItem.LETTER_FROM_THE_MITHRAN_TRACKERS)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -119,7 +119,7 @@ quest.sections =
             onEventFinish =
             {
                 [579] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_THE_MITHRAN_TRACKERS)
                     player:setCharVar('ShikareeBattleWait', NextConquestTally())
                 end,
             },

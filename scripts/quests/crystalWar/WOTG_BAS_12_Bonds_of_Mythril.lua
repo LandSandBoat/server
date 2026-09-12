@@ -116,7 +116,7 @@ quest.sections =
             {
                 [18] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    npcUtil.giveKeyItem(player, xi.ki.ZVAHL_PASSKEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ZVAHL_PASSKEY)
                 end,
             },
         },
@@ -125,7 +125,7 @@ quest.sections =
     {
         check = function(player, status)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.ZVAHL_PASSKEY)
+                player:hasKeyItem(xi.keyItem.ZVAHL_PASSKEY)
         end,
 
         [xi.zone.THRONE_ROOM_S] =
@@ -218,7 +218,7 @@ quest.sections =
             {
                 [13] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ZVAHL_PASSKEY)
+                        player:delKeyItem(xi.keyItem.ZVAHL_PASSKEY)
                     end
                 end,
             },

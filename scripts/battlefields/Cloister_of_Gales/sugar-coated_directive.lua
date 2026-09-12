@@ -18,7 +18,7 @@ local content = BattlefieldMission:new({
     entryNpc      = 'WP_Entrance',
     exitNpc       = 'Wind_Protocrystal',
 
-    requiredKeyItems = { xi.ki.DOMINAS_EMERALD_SEAL, keep = true },
+    requiredKeyItems = { xi.keyItem.DOMINAS_EMERALD_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
     requiredVar      = 'Mission[11][3]Garuda',

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_
 
 quest.reward =
 {
-    keyItem = xi.ki.FL_WILDCAT_BADGE,
+    keyItem = xi.keyItem.FL_WILDCAT_BADGE,
     title   = xi.title.FIRST_LIEUTENANT,
 }
 
@@ -242,7 +242,7 @@ quest.sections =
             {
                 [5085] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:delKeyItem(xi.ki.SL_WILDCAT_BADGE)
+                    player:delKeyItem(xi.keyItem.SL_WILDCAT_BADGE)
                     quest:messageSpecial(ID.text.FIRST_LIEUTENANT)
                     player:setCharVar('AssaultPromotion', 0)
                 end,

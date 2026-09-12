@@ -90,12 +90,12 @@ end
 
 -- Requirements for the first player registering the instance
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    return player:hasKeyItem(xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Requirements for further players entering an already-registered instance
 instanceObject.entryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    return player:hasKeyItem(xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Called on the instance once it is created and ready
@@ -123,8 +123,8 @@ instanceObject.afterInstanceRegister = function(player)
 
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
     player:setCharVar('assaultEntered', 1)
-    player:delKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
-    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    player:delKeyItem(xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS)
+    player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Instance 'tick'

@@ -184,8 +184,8 @@ quest.sections =
                         if quest:complete(player) then
                             -- Note: Messages for receiving the below items are handled by the event.
                             player:unlockJob(xi.job.BLU)
-                            player:addKeyItem(xi.ki.MARK_OF_ZAHAK)
-                            player:addKeyItem(xi.ki.JOB_GESTURE_BLUE_MAGE)
+                            player:addKeyItem(xi.keyItem.MARK_OF_ZAHAK)
+                            player:addKeyItem(xi.keyItem.JOB_GESTURE_BLUE_MAGE)
 
                             -- quest:complete() wipes quest vars.
                             quest:setVar(player, 'completeEvent', 1)

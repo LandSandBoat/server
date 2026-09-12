@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
+    if player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) then
         if xi.guildShops.onTrigger(player, npc) then
             player:showText(npc, zones[xi.zone.PORT_BASTOK].text.TENSHODO_SHOP_OPEN_DIALOG)
         end

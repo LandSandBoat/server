@@ -8,7 +8,7 @@ local quest = HiddenQuest:new('portalCharm')
 
 quest.reward =
 {
-    keyItem = xi.ki.PORTAL_CHARM,
+    keyItem = xi.keyItem.PORTAL_CHARM,
 }
 
 quest.sections =
@@ -26,7 +26,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, xi.item.ROLANBERRY) and
-                        not player:hasKeyItem(xi.ki.PORTAL_CHARM)
+                        not player:hasKeyItem(xi.keyItem.PORTAL_CHARM)
                     then
                         if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS) then
                             return quest:progressEvent(291)

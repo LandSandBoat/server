@@ -84,7 +84,7 @@ xi.maws.onTrigger = function(player, npc)
     if hasMaw then
         event = maw.cs.warp
     else
-        local hasFeather = player:hasKeyItem(xi.ki.PURE_WHITE_FEATHER)
+        local hasFeather = player:hasKeyItem(xi.keyItem.PURE_WHITE_FEATHER)
         if maw.cs.new and not hasFeather then
             event = maw.cs.new
             eventParams = { maw.bit }

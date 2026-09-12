@@ -58,12 +58,12 @@ quest.sections =
             onEventFinish =
             {
                 [24] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LERENES_PATEN)
-                    player:messageSpecial(outerRaKaznarID.text.YOU_HAVE_LEARNED, xi.ki.PULVERIZING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LERENES_PATEN)
+                    player:messageSpecial(outerRaKaznarID.text.YOU_HAVE_LEARNED, xi.keyItem.PULVERIZING)
 
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:addKeyItem(xi.ki.PULVERIZING)
+                        player:addKeyItem(xi.keyItem.PULVERIZING)
                     end
                 end,
             },

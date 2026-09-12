@@ -13,10 +13,10 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if
-        not player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM) and
-        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
+        not player:hasKeyItem(xi.keyItem.SEEDSPALL_CAERULUM) and
+        not player:hasKeyItem(xi.keyItem.VIRIDIAN_KEY)
     then
-        npcUtil.giveKeyItem(player, xi.ki.SEEDSPALL_CAERULUM)
+        npcUtil.giveKeyItem(player, xi.keyItem.SEEDSPALL_CAERULUM)
     end
 end
 

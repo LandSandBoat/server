@@ -39,7 +39,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-                not player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+                not player:hasKeyItem(xi.keyItem.GAUNTLET_CHALLENGE_KUPON)
         end,
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
@@ -68,8 +68,8 @@ mission.sections =
             return currentMission >= mission.missionId and
                 (mission:getVar(player, 'progress') == 1 or
                 currentMission > mission.missionId) and
-                not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
-                not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
+                not player:hasKeyItem(xi.keyItem.POCKET_MOGBOMB) and
+                not player:hasKeyItem(xi.keyItem.TRIVIA_CHALLENGE_KUPON) and
                 player:needToZone() == false
         end,
 
@@ -102,8 +102,8 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 mission:getVar(player, 'progress') == 1 and
-                not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
-                not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
+                not player:hasKeyItem(xi.keyItem.POCKET_MOGBOMB) and
+                not player:hasKeyItem(xi.keyItem.TRIVIA_CHALLENGE_KUPON) and
                 player:needToZone() == true
         end,
 
@@ -119,14 +119,14 @@ mission.sections =
             ['Goblin_Grenadier'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA) then
+                    if not player:hasKeyItem(xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA) then
                         return mission:event(509)
                     end
 
                     local answer = mission:getLocalVar(player, '[p1]pipSet') - 1
 
                     if answer < 0 then
-                        return mission:progressEvent(508, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
+                        return mission:progressEvent(508, xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA)
                     else
                         local today = VanadielDayOfTheWeek()
                         local tomorrow = (today + 1) % 8
@@ -138,9 +138,9 @@ mission.sections =
                             507,
                             hintsUsed + 2,
                             answer,
-                            xi.ki.MAP_OF_THE_NORTHLANDS_AREA,
-                            xi.ki.POCKET_MOGBOMB,
-                            xi.ki.MAP_OF_THE_NORTHLANDS_AREA
+                            xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA,
+                            xi.keyItem.POCKET_MOGBOMB,
+                            xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA
                         )
                     end
                 end,
@@ -222,7 +222,7 @@ mission.sections =
                         option == 7    -- Correct answer, two hints used
                     then
                         player:needToZone(false)
-                        npcUtil.giveKeyItem(player, xi.ki.POCKET_MOGBOMB)
+                        npcUtil.giveKeyItem(player, xi.keyItem.POCKET_MOGBOMB)
 
                         -- Add flee affect, base 5 minutes for no hints used, 3 for 1 hint, no flee for 2 hints
                         local fleeDuration =
@@ -250,7 +250,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 mission:getVar(player, 'progress') == 1 and
-                player:hasKeyItem(xi.ki.POCKET_MOGBOMB)
+                player:hasKeyItem(xi.keyItem.POCKET_MOGBOMB)
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -258,7 +258,7 @@ mission.sections =
             ['Lonely_Evergreen'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(502, xi.ki.POCKET_MOGBOMB, xi.ki.TRIVIA_CHALLENGE_KUPON)
+                    return mission:progressEvent(502, xi.keyItem.POCKET_MOGBOMB, xi.keyItem.TRIVIA_CHALLENGE_KUPON)
                 end,
             },
 
@@ -266,15 +266,15 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     -- Reminder to take mogbomb to lonely evergreen moogle
-                    player:messageSpecial(zones[player:getZoneID()].text.GRENADIER_TAKE_PRIZE, xi.ki.POCKET_MOGBOMB)
+                    player:messageSpecial(zones[player:getZoneID()].text.GRENADIER_TAKE_PRIZE, xi.keyItem.POCKET_MOGBOMB)
                 end,
             },
 
             onEventFinish =
             {
                 [502] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.POCKET_MOGBOMB)
-                    npcUtil.giveKeyItem(player, xi.ki.TRIVIA_CHALLENGE_KUPON)
+                    player:delKeyItem(xi.keyItem.POCKET_MOGBOMB)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TRIVIA_CHALLENGE_KUPON)
                     mission:setVar(player, 'progress', 2)
                 end,
             },
@@ -286,7 +286,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 mission:getVar(player, 'progress') == 2 and
-                player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
+                player:hasKeyItem(xi.keyItem.TRIVIA_CHALLENGE_KUPON)
         end,
 
         [xi.zone.BEAUCEDINE_GLACIER] =
@@ -295,7 +295,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     -- Reminder text
-                    return mission:progressEvent(501, xi.ki.TRIVIA_CHALLENGE_KUPON)
+                    return mission:progressEvent(501, xi.keyItem.TRIVIA_CHALLENGE_KUPON)
                 end,
             },
         },
@@ -344,7 +344,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 mission:getVar(player, 'progress') == 3 and
-                player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+                player:hasKeyItem(xi.keyItem.GAUNTLET_CHALLENGE_KUPON)
         end,
 
         [xi.zone.XARCABARD] =
@@ -425,8 +425,8 @@ mission.sections =
                 [101] = function(player, csid, option, npc)
                     if option == 1 then
                         -- Won the game!
-                        npcUtil.giveKeyItem(player, xi.ki.FESTIVAL_SOUVENIR_KUPON)
-                        player:delKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+                        npcUtil.giveKeyItem(player, xi.keyItem.FESTIVAL_SOUVENIR_KUPON)
+                        player:delKeyItem(xi.keyItem.GAUNTLET_CHALLENGE_KUPON)
 
                         -- Advance to puzzle 4
                         mission:setVar(player, 'progress', 4)
@@ -447,7 +447,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 mission:getVar(player, 'progress') == 4 and
-                player:hasKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
+                player:hasKeyItem(xi.keyItem.FESTIVAL_SOUVENIR_KUPON)
         end,
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
@@ -539,7 +539,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
             mission:getVar(player, 'progress') == 5 and
-            player:hasKeyItem(xi.ki.MEGA_BONANZA_KUPON)
+            player:hasKeyItem(xi.keyItem.MEGA_BONANZA_KUPON)
         end,
 
         [xi.zone.THRONE_ROOM] =

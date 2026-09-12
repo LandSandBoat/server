@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.LOST_MEMORIES)
 
 quest.reward = {
-    keyItem     = xi.ki.VIAL_OF_LAMBENT_POTION,
+    keyItem     = xi.keyItem.VIAL_OF_LAMBENT_POTION,
 }
 
 quest.sections =

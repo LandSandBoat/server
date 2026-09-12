@@ -55,7 +55,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local playerLevel     = player:getMainLvl()
-                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker    = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
                     local lastQuestNumber = 0
                     local lastQuestStage  = 0
                     local rejectedOffer   = 0
@@ -106,7 +106,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 0 and
-                player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
+                player:hasKeyItem(xi.keyItem.SOUL_GEM_CLASP)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -115,7 +115,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local playerLevel     = player:getMainLvl()
-                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker    = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
                     local lastQuestNumber = 5
                     local lastQuestStage  = 1
 
@@ -165,7 +165,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 0 and
-                not player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
+                not player:hasKeyItem(xi.keyItem.SOUL_GEM_CLASP)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -180,7 +180,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     local playerLevel     = player:getMainLvl()
-                    local limitBreaker    = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker    = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
                     local lastQuestNumber = 5
                     local lastQuestStage  = 3 -- I guess failing is considered a new stage.
                     local meritCost       = player:getMeritCount() >= 1 and 1 or 0
@@ -206,7 +206,7 @@ quest.sections =
             {
                 [10045] = function(player, csid, option, npc)
                     if option ~= 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SOUL_GEM_CLASP)
                     end
 
                     if option == 17 then
@@ -222,7 +222,7 @@ quest.sections =
 
                 [10195] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SOUL_GEM_CLASP)
 
                     if option == 16 then
                         player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
@@ -279,11 +279,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local playerLevel  = player:getMainLvl()
-                    local limitBreaker = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
+                    local limitBreaker = player:hasKeyItem(xi.keyItem.LIMIT_BREAKER) and 1 or 2
 
                     if
                         player:getMainLvl() >= 99 and
-                        not player:hasKeyItem(xi.ki.JOB_BREAKER)
+                        not player:hasKeyItem(xi.keyItem.JOB_BREAKER)
                     then
                         return quest:progressEvent(10240, playerLevel, limitBreaker)
                     else
@@ -296,7 +296,7 @@ quest.sections =
             {
                 [10240] = function(player, csid, option, npc)
                     if option == 28 then
-                        npcUtil.giveKeyItem(player, xi.ki.JOB_BREAKER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.JOB_BREAKER)
                     end
                 end,
             },

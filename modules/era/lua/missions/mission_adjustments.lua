@@ -174,7 +174,7 @@ m:addOverrideByEra('xi.server.onServerStart', {
 
             chateau.onEventFinish[564] = function(player, csid, option, npc)
                 if option == 1 then
-                    player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
+                    player:delKeyItem(xi.keyItem.RAILLEFALS_LETTER)
                     if mission:complete(player) then
                         player:setVar('Mission[4][5]Timer', 1, JstMidnight()) -- Module change: Start JST midnight timer
                     end
@@ -202,7 +202,7 @@ m:addOverrideByEra('xi.server.onServerStart', {
 
             whitegate.onEventFinish[3028] = function(player, csid, option, npc)
                 if mission:complete(player) then
-                    player:delKeyItem(xi.ki.RAILLEFALS_NOTE)
+                    player:delKeyItem(xi.keyItem.RAILLEFALS_NOTE)
                     player:setLocalVar('Mission[4][7]mustZone', 1)
                     player:setCharVar('Mission[4][7]Timer', 1, JstMidnight()) -- Module change: Start JST midnight timer
                 end
@@ -282,7 +282,7 @@ m:addOverrideByEra('xi.server.onServerStart', {
             chateau.onEventFinish[102] = function(player, csid, option, npc)
                 if mission:complete(player) then
                     mission:setVar(player, 'Progress', JstMidnight())
-                    player:delKeyItem(xi.ki.DROPS_OF_AMNIO)
+                    player:delKeyItem(xi.keyItem.DROPS_OF_AMNIO)
                 end
             end
         end)

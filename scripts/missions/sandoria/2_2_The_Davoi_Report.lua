@@ -66,7 +66,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(100)
-                    elseif player:hasKeyItem(xi.ki.LOST_DOCUMENT) then
+                    elseif player:hasKeyItem(xi.keyItem.LOST_DOCUMENT) then
                         return mission:progressEvent(104)
                     end
                 end,
@@ -79,11 +79,11 @@ mission.sections =
                     local xPos = npc:getXPos()
 
                     if
-                        not player:hasKeyItem(xi.ki.LOST_DOCUMENT) and
+                        not player:hasKeyItem(xi.keyItem.LOST_DOCUMENT) and
                         xPos > 210 and xPos < 212
                     then
                         player:setMissionStatus(player:getNation(), 2)
-                        return mission:keyItem(xi.ki.LOST_DOCUMENT)
+                        return mission:keyItem(xi.keyItem.LOST_DOCUMENT)
                     end
                 end,
             },
@@ -96,8 +96,8 @@ mission.sections =
 
                 [104] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
-                    player:delKeyItem(xi.ki.LOST_DOCUMENT)
-                    npcUtil.giveKeyItem(player, xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                    player:delKeyItem(xi.keyItem.LOST_DOCUMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                 end,
             },
         },
@@ -138,13 +138,13 @@ mission.sections =
             {
                 [1006] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                        player:delKeyItem(xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                     end
                 end,
 
                 [2006] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                        player:delKeyItem(xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                     end
                 end,
             }
@@ -157,7 +157,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasCompletedMission(mission.areaId, mission.missionId) and
-                        player:hasKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                        player:hasKeyItem(xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                     then
                         return mission:progressEvent(695)
                     end
@@ -183,13 +183,13 @@ mission.sections =
             {
                 [695] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                        player:delKeyItem(xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                     end
                 end,
 
                 [1006] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+                        player:delKeyItem(xi.keyItem.TEMPLE_KNIGHTS_DAVOI_REPORT)
                     end
                 end,
             }

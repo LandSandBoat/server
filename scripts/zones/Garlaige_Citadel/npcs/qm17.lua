@@ -10,7 +10,7 @@ local ID = zones[xi.zone.GARLAIGE_CITADEL]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
+    if not player:hasKeyItem(xi.keyItem.POUCH_OF_WEIGHTED_STONES) then
         player:startEvent(23) -- Key Item name hardcoded in the event.
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 and option == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.POUCH_OF_WEIGHTED_STONES)
+        npcUtil.giveKeyItem(player, xi.keyItem.POUCH_OF_WEIGHTED_STONES)
     end
 end
 

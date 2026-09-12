@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIV
 quest.reward =
 {
     exp     = 2000,
-    keyItem = xi.ki.MAP_OF_TAVNAZIA,
+    keyItem = xi.keyItem.MAP_OF_TAVNAZIA,
 }
 
 quest.sections =
@@ -46,7 +46,7 @@ quest.sections =
             ['Elysia'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ALABASTER_HAIRPIN) then
+                    if player:hasKeyItem(xi.keyItem.ALABASTER_HAIRPIN) then
                         return quest:progressEvent(202)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:event(203) -- Reminder to talk to Pradiulot
@@ -59,8 +59,8 @@ quest.sections =
             ['qm_unforgiven'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ALABASTER_HAIRPIN) then
-                        return quest:keyItem(xi.ki.ALABASTER_HAIRPIN)
+                    if not player:hasKeyItem(xi.keyItem.ALABASTER_HAIRPIN) then
+                        return quest:keyItem(xi.keyItem.ALABASTER_HAIRPIN)
                     end
                 end,
             },
@@ -77,7 +77,7 @@ quest.sections =
             onEventFinish =
             {
                 [202] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ALABASTER_HAIRPIN)
+                    player:delKeyItem(xi.keyItem.ALABASTER_HAIRPIN)
                     quest:setVar(player, 'Prog', 1)
                 end,
 

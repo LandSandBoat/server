@@ -74,7 +74,7 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
         prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI or
         prevZoneId == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA
     then
-        if player:hasKeyItem(xi.ki.FERRY_TICKET) then
+        if player:hasKeyItem(xi.keyItem.FERRY_TICKET) then
             player:startEvent(200, {
                 isHidden = true,
                 flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_IDLE_WAIT),
@@ -88,7 +88,7 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
         prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU or
         prevZoneId == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI
     then
-        if player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) then
+        if player:hasKeyItem(xi.keyItem.SILVER_SEA_FERRY_TICKET) then
             player:startEvent(203, {
                 isHidden = true,
                 flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_IDLE_WAIT),

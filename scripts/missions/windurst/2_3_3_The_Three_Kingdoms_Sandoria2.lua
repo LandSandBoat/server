@@ -63,8 +63,8 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 9 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_2_MISSION_1
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-                        player:delKeyItem(xi.ki.DARK_KEY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_CREST)
+                        player:delKeyItem(xi.keyItem.DARK_KEY)
                         player:setMissionStatus(mission.areaId, 10)
                     end
                 end,
@@ -91,8 +91,8 @@ mission.sections =
                 [551] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
-                        player:delKeyItem(xi.ki.KINDRED_CREST)
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        player:delKeyItem(xi.keyItem.KINDRED_CREST)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_REPORT)
                         player:setMissionStatus(mission.areaId, 11)
                     end
                 end,

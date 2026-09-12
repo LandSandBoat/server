@@ -159,7 +159,7 @@ function InstanceAssault:register()
     -- Registry and entry requirements
     instanceObject.registryRequirements = function(player)
         return xi.assault.checkRequirements(player, content) and
-            player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)
+            player:hasKeyItem(xi.keyItem.ASSAULT_ARMBAND)
     end
 
     instanceObject.entryRequirements = function(player)
@@ -244,9 +244,9 @@ xi.assault.onRunicTrigger = function(player, npc, zone)
 
     if
         chosenAssault ~= nil and
-        not player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)
+        not player:hasKeyItem(xi.keyItem.ASSAULT_ARMBAND)
     then
-        player:messageSpecial(zones[player:getZoneID()].text.MISSING_KEY_ITEM, xi.ki.ASSAULT_ARMBAND)
+        player:messageSpecial(zones[player:getZoneID()].text.MISSING_KEY_ITEM, xi.keyItem.ASSAULT_ARMBAND)
         return
     end
 
@@ -308,7 +308,7 @@ xi.assault.onInstanceCreatedCallback = function(player, instance, content)
     instance:setLevelCap(player:getLocalVar('AssaultCap'))
     player:setLocalVar('AssaultCap', 0)
     player:setCharVar('Assault_Armband', 1)
-    player:delKeyItem(xi.ki.ASSAULT_ARMBAND)
+    player:delKeyItem(xi.keyItem.ASSAULT_ARMBAND)
 
     if content then
         xi.instance.onInstanceCreatedCallback(player, instance, content.entranceParams)

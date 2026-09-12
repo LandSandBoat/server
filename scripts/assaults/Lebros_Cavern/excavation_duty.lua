@@ -12,7 +12,7 @@ local content = InstanceAssault:new(
     assaultID        = xi.assault.mission.EXCAVATION_DUTY,
     instanceID       = xi.assault.instance.EXCAVATION_DUTY,
     assaultArea      = xi.assault.assaultArea.LEBROS_CAVERN,
-    requiredOrders   = xi.ki.LEBROS_ASSAULT_ORDERS,
+    requiredOrders   = xi.keyItem.LEBROS_ASSAULT_ORDERS,
 
     runeOfReleasePos = { x = 49.999, y = -40.837, z = 96.999, rot = 0 },
     ancientBoxPos    = { x = 50.000, y = -40.070, z = 99.999, rot = 0 },

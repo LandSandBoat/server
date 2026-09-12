@@ -45,10 +45,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             gil = 560,
             var = 'QuestMakingHeadlines_var',
         })
-        player:delKeyItem(xi.ki.WINDURST_WOODS_SCOOP)
-        player:delKeyItem(xi.ki.WINDURST_WALLS_SCOOP)
-        player:delKeyItem(xi.ki.WINDURST_WATERS_SCOOP)
-        player:delKeyItem(xi.ki.PORT_WINDURST_SCOOP)
+        player:delKeyItem(xi.keyItem.WINDURST_WOODS_SCOOP)
+        player:delKeyItem(xi.keyItem.WINDURST_WALLS_SCOOP)
+        player:delKeyItem(xi.keyItem.WINDURST_WATERS_SCOOP)
+        player:delKeyItem(xi.keyItem.PORT_WINDURST_SCOOP)
     end
 end
 

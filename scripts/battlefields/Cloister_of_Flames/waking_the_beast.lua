@@ -19,7 +19,7 @@ local content = BattlefieldQuest:new({
 
 -- can help if you are doing the quest or already completed the quest
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    local hasQuestItem = player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+    local hasQuestItem = player:hasKeyItem(xi.keyItem.RAINBOW_RESONATOR)
     local prevCompletedQuest = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_COMPLETED
 
     -- registrant must actually be doing the quest

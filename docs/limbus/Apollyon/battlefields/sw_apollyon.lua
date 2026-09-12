@@ -16,7 +16,7 @@ local content = Limbus:new({
     index            = 0,
     area             = 1,
     entryNpc         = '_127',
-    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
+    requiredKeyItems = { xi.keyItem.COSMO_CLEANSE, xi.keyItem.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = 'SW_APOLLYON',
     lootCrateId      = ID.npc.SW_LOOT_CRATE,
     timeExtension    = 10,

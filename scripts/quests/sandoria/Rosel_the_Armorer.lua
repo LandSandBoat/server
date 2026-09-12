@@ -53,7 +53,7 @@ quest.sections =
                 [523] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.RECEIPT_FOR_THE_PRINCE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RECEIPT_FOR_THE_PRINCE)
                     else
                         quest:setVar(player, 'Prog', 1)
                     end
@@ -62,7 +62,7 @@ quest.sections =
                 [524] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.RECEIPT_FOR_THE_PRINCE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RECEIPT_FOR_THE_PRINCE)
                     end
                 end,
             },
@@ -80,7 +80,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local questStage = quest:getVar(player, 'Stage')
-                    if player:hasKeyItem(xi.ki.RECEIPT_FOR_THE_PRINCE) then
+                    if player:hasKeyItem(xi.keyItem.RECEIPT_FOR_THE_PRINCE) then
                         return quest:progressEvent(524, 0, 0, 0, 0, questStage - 1)
                     else
                         local questOption = quest:getVar(player, 'Option')
@@ -112,7 +112,7 @@ quest.sections =
             ['Guilerme'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RECEIPT_FOR_THE_PRINCE) then
+                    if player:hasKeyItem(xi.keyItem.RECEIPT_FOR_THE_PRINCE) then
                         local questStage = quest:getVar(player, 'Stage')
                         return quest:progressEvent(507, 0, 0, 0, 0, 0, 0, questStage - 1)
                     end
@@ -126,7 +126,7 @@ quest.sections =
                     -- has chosen correctly or not.  Option 0 is correct answer, while
                     -- option 1 was an incorrect answer.
                     quest:setVar(player, 'Option', option)
-                    player:delKeyItem(xi.ki.RECEIPT_FOR_THE_PRINCE)
+                    player:delKeyItem(xi.keyItem.RECEIPT_FOR_THE_PRINCE)
                 end,
             },
         },

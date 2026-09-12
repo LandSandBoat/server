@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GAZE_OF_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.LUMINIAN_DAGGER,
+    keyItem     = xi.keyItem.LUMINIAN_DAGGER,
     title       = xi.title.EMISSARY_OF_THE_EMPRESS,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_BLOOD },
 }
@@ -56,7 +56,7 @@ mission.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.PERCIPIENT_EYE)
+                    player:delKeyItem(xi.keyItem.PERCIPIENT_EYE)
                     mission:complete(player)
                 end,
             },

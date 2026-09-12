@@ -94,7 +94,7 @@ quest.sections =
                         return quest:event(10020)
                     end
 
-                    if player:hasKeyItem(xi.ki.MAGICAL_PATTERN) then
+                    if player:hasKeyItem(xi.keyItem.MAGICAL_PATTERN) then
                         return quest:progressEvent(10018, rseTracker)
                     else
                         return quest:event(10017, VanadielRSELocation(), VanadielRSERace())

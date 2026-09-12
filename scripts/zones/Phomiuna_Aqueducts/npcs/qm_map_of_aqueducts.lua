@@ -11,8 +11,8 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.MAP_OF_THE_AQUEDUCTS) then
-        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_AQUEDUCTS)
+    if not player:hasKeyItem(xi.keyItem.MAP_OF_THE_AQUEDUCTS) then
+        npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_THE_AQUEDUCTS)
         -- TODO: find other three locations, hide QM, respawn 30 minutes later at random location
     end
 end

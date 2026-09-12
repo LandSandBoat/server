@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BORNE_BY_
 
 mission.reward =
 {
-    keyItem     = xi.ki.UNDERPASS_HATCH_KEY,
+    keyItem     = xi.keyItem.UNDERPASS_HATCH_KEY,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_NATION_ON_THE_BRINK },
 }
 

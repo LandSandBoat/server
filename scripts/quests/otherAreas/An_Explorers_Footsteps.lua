@@ -66,7 +66,7 @@ local function abelardCorrectTrade(player, csid, option)
     if csid == 47 then
         player:setCharVar('[EF]MonumentBitmask', 0)
         player:setCharVar('[EF]MonumentCount', 0)
-        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_CRAWLERS_NEST)
+        npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_THE_CRAWLERS_NEST)
         quest:complete(player)
 
     -- Continue quest.

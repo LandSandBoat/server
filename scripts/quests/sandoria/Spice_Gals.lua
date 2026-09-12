@@ -65,12 +65,12 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SPICE_GALS) == xi.questStatus.QUEST_ACCEPTED and
-                        player:hasKeyItem(xi.ki.RIVERNEWORT)
+                        player:hasKeyItem(xi.keyItem.RIVERNEWORT)
                     then
                         return quest:progressEvent(725) -- First time completion
                     elseif
                         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SPICE_GALS) == xi.questStatus.QUEST_COMPLETED and
-                        player:hasKeyItem(xi.ki.RIVERNEWORT)
+                        player:hasKeyItem(xi.keyItem.RIVERNEWORT)
                     then
                         return quest:progressEvent(727) -- Repeat completion
                     else
@@ -83,14 +83,14 @@ quest.sections =
             {
                 [725] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.RIVERNEWORT)
+                        player:delKeyItem(xi.keyItem.RIVERNEWORT)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end
                 end,
 
                 [727] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.RIVERNEWORT)
+                        player:delKeyItem(xi.keyItem.RIVERNEWORT)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end
                 end,
@@ -102,8 +102,8 @@ quest.sections =
             ['qm_rivernewort'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return quest:keyItem(xi.ki.RIVERNEWORT)
+                    if not player:hasKeyItem(xi.keyItem.RIVERNEWORT) then
+                        return quest:keyItem(xi.keyItem.RIVERNEWORT)
                     end
                 end,
             },
@@ -114,8 +114,8 @@ quest.sections =
             ['qm_rivernewort'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return quest:keyItem(xi.ki.RIVERNEWORT)
+                    if not player:hasKeyItem(xi.keyItem.RIVERNEWORT) then
+                        return quest:keyItem(xi.keyItem.RIVERNEWORT)
                     end
                 end,
             },

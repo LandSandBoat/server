@@ -22,10 +22,10 @@ quest.reward =
 
 local kiCheck = function(player)
     if
-        player:hasKeyItem(xi.ki.DUSTY_TOME) or
-        player:hasKeyItem(xi.ki.POINTED_JUG) or
-        player:hasKeyItem(xi.ki.CRACKED_CLUB) or
-        player:hasKeyItem(xi.ki.PEELING_HAIRPIN)
+        player:hasKeyItem(xi.keyItem.DUSTY_TOME) or
+        player:hasKeyItem(xi.keyItem.POINTED_JUG) or
+        player:hasKeyItem(xi.keyItem.CRACKED_CLUB) or
+        player:hasKeyItem(xi.keyItem.PEELING_HAIRPIN)
     then
         return true
     else
@@ -79,21 +79,21 @@ quest.sections =
                         progress <= 3 and
                         kiCheck(player)
                     then -- Always checks the KIs in this order
-                        if player:hasKeyItem(xi.ki.DUSTY_TOME) then
-                            return quest:progressEvent(309, 0, 1, 0, xi.ki.DUSTY_TOME)
-                        elseif player:hasKeyItem(xi.ki.POINTED_JUG) then
-                            return quest:progressEvent(309, 0, 2, 0, xi.ki.POINTED_JUG)
-                        elseif player:hasKeyItem(xi.ki.CRACKED_CLUB) then
-                            return quest:progressEvent(309, 0, 3, 0, xi.ki.CRACKED_CLUB)
-                        elseif player:hasKeyItem(xi.ki.PEELING_HAIRPIN) then
-                            return quest:progressEvent(309, 0, 4, 0, xi.ki.PEELING_HAIRPIN)
+                        if player:hasKeyItem(xi.keyItem.DUSTY_TOME) then
+                            return quest:progressEvent(309, 0, 1, 0, xi.keyItem.DUSTY_TOME)
+                        elseif player:hasKeyItem(xi.keyItem.POINTED_JUG) then
+                            return quest:progressEvent(309, 0, 2, 0, xi.keyItem.POINTED_JUG)
+                        elseif player:hasKeyItem(xi.keyItem.CRACKED_CLUB) then
+                            return quest:progressEvent(309, 0, 3, 0, xi.keyItem.CRACKED_CLUB)
+                        elseif player:hasKeyItem(xi.keyItem.PEELING_HAIRPIN) then
+                            return quest:progressEvent(309, 0, 4, 0, xi.keyItem.PEELING_HAIRPIN)
                         end
                     elseif
                         progress == 3 and
                         not kiCheck(player) and
-                        player:hasKeyItem(xi.ki.OLD_NAMETAG)
+                        player:hasKeyItem(xi.keyItem.OLD_NAMETAG)
                     then
-                        return quest:progressEvent(309, 0, 5, 0, xi.ki.OLD_NAMETAG)
+                        return quest:progressEvent(309, 0, 5, 0, xi.keyItem.OLD_NAMETAG)
                     elseif progress == 4 then
                         return quest:event(311)
                     else
@@ -110,23 +110,23 @@ quest.sections =
 
                 [309] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.DUSTY_TOME)
+                        player:delKeyItem(xi.keyItem.DUSTY_TOME)
                         quest:setVarBit(player, 'Option', 0)
                         npcUtil.giveCurrency(player, 'gil', 100)
                     elseif option == 2 then
-                        player:delKeyItem(xi.ki.POINTED_JUG)
+                        player:delKeyItem(xi.keyItem.POINTED_JUG)
                         quest:setVarBit(player, 'Option', 1)
                         npcUtil.giveCurrency(player, 'gil', 200)
                     elseif option == 3 then
-                        player:delKeyItem(xi.ki.CRACKED_CLUB)
+                        player:delKeyItem(xi.keyItem.CRACKED_CLUB)
                         quest:setVarBit(player, 'Option', 2)
                         npcUtil.giveCurrency(player, 'gil', 300)
                     elseif option == 4 then
-                        player:delKeyItem(xi.ki.PEELING_HAIRPIN)
+                        player:delKeyItem(xi.keyItem.PEELING_HAIRPIN)
                         quest:setVarBit(player, 'Option', 3)
                         npcUtil.giveCurrency(player, 'gil', 400)
                     elseif option == 5 then
-                        player:delKeyItem(xi.ki.OLD_NAMETAG)
+                        player:delKeyItem(xi.keyItem.OLD_NAMETAG)
                         quest:setVar(player, 'Prog', 4)
                     end
                 end,
@@ -169,7 +169,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     local bombAshCount = utils.clamp(trade:getItemQty(xi.item.PINCH_OF_HOARY_BOMB_ASH), 0, 4)
                     local option       = quest:getVar(player, 'Option')
-                    local dustyTome    = player:hasKeyItem(xi.ki.DUSTY_TOME) and 1 or 0
+                    local dustyTome    = player:hasKeyItem(xi.keyItem.DUSTY_TOME) and 1 or 0
 
                     if
                         quest:getVar(player, 'Prog') == 2 and
@@ -178,10 +178,10 @@ quest.sections =
                         if npcUtil.tradeMatches(trade, { { xi.item.PINCH_OF_HOARY_BOMB_ASH, bombAshCount } }) then
                             -- Player has traded 1, 2, 3 or 4 ash and does not have associated KI.
                             if
-                                (bombAshCount == 4 and not player:hasKeyItem(xi.ki.PEELING_HAIRPIN)) or
-                                (bombAshCount == 3 and not player:hasKeyItem(xi.ki.CRACKED_CLUB)) or
-                                (bombAshCount == 2 and not player:hasKeyItem(xi.ki.POINTED_JUG)) or
-                                (bombAshCount == 1 and not player:hasKeyItem(xi.ki.DUSTY_TOME) and option < 15)
+                                (bombAshCount == 4 and not player:hasKeyItem(xi.keyItem.PEELING_HAIRPIN)) or
+                                (bombAshCount == 3 and not player:hasKeyItem(xi.keyItem.CRACKED_CLUB)) or
+                                (bombAshCount == 2 and not player:hasKeyItem(xi.keyItem.POINTED_JUG)) or
+                                (bombAshCount == 1 and not player:hasKeyItem(xi.keyItem.DUSTY_TOME) and option < 15)
                             then
                                 return quest:progressCutscene(4, 0, 0, bombAshCount) -- Both selections return option = #bombAsh
 
@@ -209,19 +209,19 @@ quest.sections =
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.DUSTY_TOME)
+                        npcUtil.giveKeyItem(player, xi.keyItem.DUSTY_TOME)
                     elseif option == 2 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.POINTED_JUG)
+                        npcUtil.giveKeyItem(player, xi.keyItem.POINTED_JUG)
                     elseif option == 3 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.CRACKED_CLUB)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CRACKED_CLUB)
                     elseif option == 4 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.PEELING_HAIRPIN)
+                        npcUtil.giveKeyItem(player, xi.keyItem.PEELING_HAIRPIN)
                     elseif option == 5 and quest:getVar(player, 'Option') == 15 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.OLD_NAMETAG)
+                        npcUtil.giveKeyItem(player, xi.keyItem.OLD_NAMETAG)
                         quest:setVar(player, 'Prog', 3)
                     elseif option == 6 then
                         player:tradeComplete()

@@ -86,7 +86,7 @@ quest.sections =
                 [239] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         quest:setMustZone(player)
-                        player:delKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
+                        player:delKeyItem(xi.keyItem.RANPI_MONPIS_SPECIAL_STEW)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end
                 end,
@@ -129,7 +129,7 @@ quest.sections =
 
                 [556] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
+                    npcUtil.giveKeyItem(player, xi.keyItem.RANPI_MONPIS_SPECIAL_STEW)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },

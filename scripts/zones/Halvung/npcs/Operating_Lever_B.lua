@@ -9,7 +9,7 @@ local ID = zones[xi.zone.HALVUNG]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.BRACELET_OF_VERVE) then
+    if player:hasKeyItem(xi.keyItem.BRACELET_OF_VERVE) then
         GetNPCByID(ID.npc.LEVER_AB_DOOR):openDoor(30)
         player:messageSpecial(ID.text.LIFT_LEVER)
     else

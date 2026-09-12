@@ -35,9 +35,9 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
     local regionId = player:getCurrentRegion()
     local helmMapping =
     {
-        [xi.helmType.MINING] = xi.ki.STURDY_METAL_STRIP,
-        [xi.helmType.LOGGING] = xi.ki.PIECE_OF_RUGGED_TREE_BARK,
-        [xi.helmType.HARVESTING] = xi.ki.SAVORY_LAMB_ROAST,
+        [xi.helmType.MINING] = xi.keyItem.STURDY_METAL_STRIP,
+        [xi.helmType.LOGGING] = xi.keyItem.PIECE_OF_RUGGED_TREE_BARK,
+        [xi.helmType.HARVESTING] = xi.keyItem.SAVORY_LAMB_ROAST,
     }
 
     if
@@ -359,7 +359,7 @@ xi.amk.helpers.chocoboDig = function(player, zoneId, text)
     local diggingSiteTable = xi.amk.helpers.digSites[diggingZoneId].spots
 
     if
-        player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST) or
+        player:hasKeyItem(xi.keyItem.MOLDY_WORM_EATEN_CHEST) or
         zoneId ~= diggingZoneId
     then
         return false
@@ -376,7 +376,7 @@ xi.amk.helpers.chocoboDig = function(player, zoneId, text)
 
     -- Success!
     if distance < 5 then
-        npcUtil.giveKeyItem(player, xi.ki.MOLDY_WORM_EATEN_CHEST)
+        npcUtil.giveKeyItem(player, xi.keyItem.MOLDY_WORM_EATEN_CHEST)
         return true
     end
 
@@ -510,7 +510,7 @@ xi.amk.helpers.puzzleOneOnTrigger = function(player, npc, mission, offset)
         pos.z * 1000,
         pos.y * 1000,
         element,
-        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
+        xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA
     )
 end
 
@@ -734,7 +734,7 @@ xi.amk.helpers.puzzleTwoOnTrigger = function(player, npc, mission)
 
     -- Puzzle already beaten, show flavor text
     if
-        player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON) or
+        player:hasKeyItem(xi.keyItem.GAUNTLET_CHALLENGE_KUPON) or
         player:getCharVar('Mission[10][12]progress') == 3
     then
         p2Progress = 10
@@ -821,8 +821,8 @@ xi.amk.helpers.puzzleTwoOnEventFinish = function(player, csid, option, npc, miss
         elseif option == 2 and p2Progress == 4 then
             -- Won game, reset all vars
             resetPuzzleVars(player, mission)
-            npcUtil.giveKeyItem(player, xi.ki.GAUNTLET_CHALLENGE_KUPON)
-            player:delKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
+            npcUtil.giveKeyItem(player, xi.keyItem.GAUNTLET_CHALLENGE_KUPON)
+            player:delKeyItem(xi.keyItem.TRIVIA_CHALLENGE_KUPON)
 
             -- Advance to puzzle 3
             mission:setVar(player, 'progress', 3)
@@ -833,8 +833,8 @@ end
 xi.amk.helpers.puzzleFourOnEventFinish = function(player, csid, option, npc, mission)
     if option == 1 then
         mission:setVar(player, 'cohortIdx', 0)
-        npcUtil.giveKeyItem(player, xi.ki.MEGA_BONANZA_KUPON)
-        player:delKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
+        npcUtil.giveKeyItem(player, xi.keyItem.MEGA_BONANZA_KUPON)
+        player:delKeyItem(xi.keyItem.FESTIVAL_SOUVENIR_KUPON)
 
         -- Advance to final fight
         mission:setVar(player, 'progress', 5)

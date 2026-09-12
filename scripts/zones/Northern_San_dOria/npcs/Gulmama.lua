@@ -30,21 +30,21 @@ entity.onTrigger = function(player, npc)
         (trialByIce == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 6) or
         (trialByIce == xi.questStatus.QUEST_COMPLETED and GetSystemTime() > player:getCharVar('TrialByIce_date'))
     then
-        player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
+        player:startEvent(706, 0, xi.keyItem.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
     elseif
         trialByIce == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) and
-        not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+        not player:hasKeyItem(xi.keyItem.TUNING_FORK_OF_ICE) and
+        not player:hasKeyItem(xi.keyItem.WHISPER_OF_FROST)
     then
-        player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
+        player:startEvent(718, 0, xi.keyItem.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
     elseif
         trialByIce == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+        not player:hasKeyItem(xi.keyItem.WHISPER_OF_FROST)
     then
-        player:startEvent(707, 0, xi.ki.TUNING_FORK_OF_ICE, 4)
+        player:startEvent(707, 0, xi.keyItem.TUNING_FORK_OF_ICE, 4)
     elseif
         trialByIce == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+        player:hasKeyItem(xi.keyItem.WHISPER_OF_FROST)
     then
         local numitem = 0
 
@@ -68,7 +68,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 32
         end  -- Ability to summon Shiva
 
-        player:startEvent(709, 0, xi.ki.TUNING_FORK_OF_ICE, 4, 0, numitem)
+        player:startEvent(709, 0, xi.keyItem.TUNING_FORK_OF_ICE, 4, 0, numitem)
     else
         player:startEvent(710) -- Standard dialog
     end
@@ -82,9 +82,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar('TrialByIce_date', 0)
-        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_ICE)
     elseif csid == 718 then
-        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_ICE)
+        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_ICE)
     elseif csid == 709 then
         local item = 0
 
@@ -112,7 +112,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
-            player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
+            player:delKeyItem(xi.keyItem.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar('TrialByIce_date', JstMidnight())
             player:addFame(xi.fameArea.SANDORIA, 60)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)

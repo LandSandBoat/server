@@ -64,7 +64,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 9 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_2_MISSION_1
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_CREST)
                         player:setMissionStatus(mission.areaId, 10)
                     end
                 end,
@@ -76,7 +76,7 @@ mission.sections =
             ['Helaku'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KINDRED_CREST) then
+                    if player:hasKeyItem(xi.keyItem.KINDRED_CREST) then
                         return mission:progressEvent(545)
                     else
                         return mission:messageText(northSandoriaID.text.HELAKU_DIALOG + 16)
@@ -92,8 +92,8 @@ mission.sections =
                     if mission:complete(player) then
                         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY)
                         player:setMissionStatus(mission.areaId, 11)
-                        player:delKeyItem(xi.ki.KINDRED_CREST)
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        player:delKeyItem(xi.keyItem.KINDRED_CREST)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },

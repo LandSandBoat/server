@@ -9,9 +9,9 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT) == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.SEALED_IRON_BOX)
+        not player:hasKeyItem(xi.keyItem.SEALED_IRON_BOX)
     then
-        npcUtil.giveKeyItem(player, xi.ki.SEALED_IRON_BOX)
+        npcUtil.giveKeyItem(player, xi.keyItem.SEALED_IRON_BOX)
     end
 end
 

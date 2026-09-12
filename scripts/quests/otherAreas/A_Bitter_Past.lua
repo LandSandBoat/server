@@ -48,7 +48,7 @@ quest.sections =
             ['Frescheque'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TINY_WRISTLET) then
+                    if player:hasKeyItem(xi.keyItem.TINY_WRISTLET) then
                         return quest:progressEvent(154)
                     end
                 end,
@@ -82,7 +82,7 @@ quest.sections =
 
                 [154] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.TINY_WRISTLET)
+                        player:delKeyItem(xi.keyItem.TINY_WRISTLET)
                     end
                 end,
             },
@@ -101,9 +101,9 @@ quest.sections =
                         return quest:messageText(lufaiseID.text.SENSE_OF_FOREBODING)
                     elseif
                         quest:getVar(player, 'nmKilled') == 1 and
-                        not player:hasKeyItem(xi.ki.TINY_WRISTLET)
+                        not player:hasKeyItem(xi.keyItem.TINY_WRISTLET)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.TINY_WRISTLET)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TINY_WRISTLET)
                         return quest:noAction()
                     end
                 end,

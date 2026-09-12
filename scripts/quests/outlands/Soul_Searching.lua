@@ -27,8 +27,8 @@ quest.sections =
             ['Cermet_Headstone'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.PRISMATIC_FRAGMENT) then
-                        return quest:progressEvent(202, xi.ki.PRISMATIC_FRAGMENT)
+                    if player:hasKeyItem(xi.keyItem.PRISMATIC_FRAGMENT) then
+                        return quest:progressEvent(202, xi.keyItem.PRISMATIC_FRAGMENT)
                     else
                         return quest:messageSpecial(zitahID.text.AIR_REMAINS_STAGNANT)
                     end

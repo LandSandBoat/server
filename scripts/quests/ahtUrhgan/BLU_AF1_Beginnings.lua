@@ -27,11 +27,11 @@ quest.reward =
 
 local brandKeyItems =
 {
-    xi.ki.BRAND_OF_THE_SPRINGSERPENT,
-    xi.ki.BRAND_OF_THE_GALESERPENT,
-    xi.ki.BRAND_OF_THE_FLAMESERPENT,
-    xi.ki.BRAND_OF_THE_SKYSERPENT,
-    xi.ki.BRAND_OF_THE_STONESERPENT,
+    xi.keyItem.BRAND_OF_THE_SPRINGSERPENT,
+    xi.keyItem.BRAND_OF_THE_GALESERPENT,
+    xi.keyItem.BRAND_OF_THE_FLAMESERPENT,
+    xi.keyItem.BRAND_OF_THE_SKYSERPENT,
+    xi.keyItem.BRAND_OF_THE_STONESERPENT,
 }
 
 local function hasRequiredBrands(player)
@@ -116,7 +116,7 @@ quest.sections =
             ['Meyaada'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_THE_SPRINGSERPENT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_THE_SPRINGSERPENT) then
                         return quest:progressEvent(10)
                     else
                         return quest:event(11):importantEvent()
@@ -127,7 +127,7 @@ quest.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_THE_SPRINGSERPENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_THE_SPRINGSERPENT)
                 end,
             },
         },
@@ -137,7 +137,7 @@ quest.sections =
             ['Daswil'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_THE_SKYSERPENT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_THE_SKYSERPENT) then
                         return quest:progressEvent(8)
                     else
                         return quest:event(9):importantEvent()
@@ -148,7 +148,7 @@ quest.sections =
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_THE_SKYSERPENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_THE_SKYSERPENT)
                 end,
             },
         },
@@ -158,7 +158,7 @@ quest.sections =
             ['Nahshib'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_THE_GALESERPENT) then
                         return quest:progressEvent(10)
                     else
                         return quest:event(11):importantEvent()
@@ -169,7 +169,7 @@ quest.sections =
             ['Nareema'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_THE_STONESERPENT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_THE_STONESERPENT) then
                         return quest:progressEvent(12)
                     else
                         return quest:event(13):importantEvent()
@@ -180,11 +180,11 @@ quest.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_THE_GALESERPENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_THE_GALESERPENT)
                 end,
 
                 [12] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_THE_STONESERPENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_THE_STONESERPENT)
                 end,
             },
         },
@@ -194,7 +194,7 @@ quest.sections =
             ['Waudeen'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_THE_FLAMESERPENT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_THE_FLAMESERPENT) then
                         return quest:progressEvent(10)
                     else
                         return quest:event(11):importantEvent()
@@ -205,7 +205,7 @@ quest.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_THE_FLAMESERPENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_THE_FLAMESERPENT)
                 end,
             },
         },

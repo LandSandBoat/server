@@ -62,10 +62,10 @@ quest.sections =
             onEventFinish =
             {
                 [2573] = function(player, csid, option, npc)
-                    player:messageSpecial(morimarID.text.YOU_HAVE_LEARNED, xi.ki.DEMOLISHING)
+                    player:messageSpecial(morimarID.text.YOU_HAVE_LEARNED, xi.keyItem.DEMOLISHING)
 
                     if quest:complete(player) then
-                        player:addKeyItem(xi.ki.DEMOLISHING)
+                        player:addKeyItem(xi.keyItem.DEMOLISHING)
                         player:confirmTrade()
                     end
                 end,

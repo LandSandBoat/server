@@ -11,7 +11,7 @@ quest.reward =
 {
     exp      = 2000,
     gil      = 2000,
-    keyItem  = xi.ki.MAP_OF_CASTLE_ZVAHL,
+    keyItem  = xi.keyItem.MAP_OF_CASTLE_ZVAHL,
     title    = xi.title.ENVOY_TO_THE_NORTH,
 }
 

@@ -30,11 +30,11 @@ end
 
 entity.onTrigger = function(player, npc)
     if isOutsideAlzadaal(player) then
-        if player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then
-            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.CAPTAIN_WILDCAT_BADGE)
+        if player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.keyItem.CAPTAIN_WILDCAT_BADGE)
             player:startEvent(135)
-        elseif player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
-            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.REMNANTS_PERMIT)
+        elseif player:hasKeyItem(xi.keyItem.REMNANTS_PERMIT) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.keyItem.REMNANTS_PERMIT)
             player:startEvent(135)
         else
             player:startEvent(134)

@@ -9,12 +9,12 @@ local entity = {}
 
 local avatarKeyItems =
 {
-    xi.ki.WHISPER_OF_FLAMES,
-    xi.ki.WHISPER_OF_TREMORS,
-    xi.ki.WHISPER_OF_TIDES,
-    xi.ki.WHISPER_OF_GALES,
-    xi.ki.WHISPER_OF_FROST,
-    xi.ki.WHISPER_OF_STORMS,
+    xi.keyItem.WHISPER_OF_FLAMES,
+    xi.keyItem.WHISPER_OF_TREMORS,
+    xi.keyItem.WHISPER_OF_TIDES,
+    xi.keyItem.WHISPER_OF_GALES,
+    xi.keyItem.WHISPER_OF_FROST,
+    xi.keyItem.WHISPER_OF_STORMS,
 }
 
 local function hasAvatarWhispers(player)
@@ -55,8 +55,8 @@ local function getFenrirRewardMask(player)
     end  -- Pact
 
     if
-        not player:hasKeyItem(xi.ki.TRAINERS_WHISTLE) or
-        player:hasKeyItem(xi.ki.FENRIR_WHISTLE)
+        not player:hasKeyItem(xi.keyItem.TRAINERS_WHISTLE) or
+        player:hasKeyItem(xi.keyItem.FENRIR_WHISTLE)
     then
         rewardMask = rewardMask + 128
     end -- Mount Pact
@@ -110,13 +110,13 @@ entity.onTrigger = function(player, npc)
 
         player:startEvent(842, 0, 1125)
     elseif moonlitPath == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
+        if player:hasKeyItem(xi.keyItem.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
             player:startEvent(845, 0, 1125, 334)
-        elseif player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON) then -- First turn-in
+        elseif player:hasKeyItem(xi.keyItem.WHISPER_OF_THE_MOON) then -- First turn-in
             local availRewards = 0
             if
-                not player:hasKeyItem(xi.ki.TRAINERS_WHISTLE) or
-                player:hasKeyItem(xi.ki.FENRIR_WHISTLE)
+                not player:hasKeyItem(xi.keyItem.TRAINERS_WHISTLE) or
+                player:hasKeyItem(xi.keyItem.FENRIR_WHISTLE)
             then
                 availRewards = availRewards + 128
             end -- Mount Pact
@@ -129,9 +129,9 @@ entity.onTrigger = function(player, npc)
             player:startEvent(843, 0, 1125)
         end
     elseif moonlitPath == xi.questStatus.QUEST_COMPLETED then
-        if player:hasKeyItem(xi.ki.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
+        if player:hasKeyItem(xi.keyItem.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
             player:startEvent(845, 0, 1125, 334)
-        elseif player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON) then -- Repeat turn-in
+        elseif player:hasKeyItem(xi.keyItem.WHISPER_OF_THE_MOON) then -- Repeat turn-in
             local availRewards = getFenrirRewardMask(player)
 
             player:startEvent(850, 0, 13399, 1208, 1125, availRewards, 18165, 13572)
@@ -152,13 +152,13 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 842 and option == 2 then
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     elseif csid == 844 then
-        npcUtil.giveKeyItem(player, xi.ki.MOON_BAUBLE)
-        player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
-        player:delKeyItem(xi.ki.WHISPER_OF_TREMORS)
-        player:delKeyItem(xi.ki.WHISPER_OF_TIDES)
-        player:delKeyItem(xi.ki.WHISPER_OF_GALES)
-        player:delKeyItem(xi.ki.WHISPER_OF_FROST)
-        player:delKeyItem(xi.ki.WHISPER_OF_STORMS)
+        npcUtil.giveKeyItem(player, xi.keyItem.MOON_BAUBLE)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_FLAMES)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_TREMORS)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_TIDES)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_GALES)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_FROST)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_STORMS)
         player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
@@ -182,7 +182,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         elseif option == 7 then
             player:addSpell(xi.magic.spell.FENRIR) -- Pact
         elseif option == 8 then
-            npcUtil.giveKeyItem(player, xi.ki.FENRIR_WHISTLE)
+            npcUtil.giveKeyItem(player, xi.keyItem.FENRIR_WHISTLE)
             -- Pact as Mount
         end
 
@@ -194,7 +194,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
-        player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
+        player:delKeyItem(xi.keyItem.WHISPER_OF_THE_MOON)
         player:setCharVar('MoonlitPath_date', JstMidnight())
         player:addFame(xi.fameArea.WINDURST, 60)
 
@@ -207,10 +207,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getRank(player:getNation()) == 10 and
             player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PROMISE) == xi.questStatus.QUEST_COMPLETED
         then
-            npcUtil.giveKeyItem(player, xi.ki.DARK_MANA_ORB)
+            npcUtil.giveKeyItem(player, xi.keyItem.DARK_MANA_ORB)
         end
     elseif csid == 848 then
-        npcUtil.giveKeyItem(player, xi.ki.MOON_BAUBLE)
+        npcUtil.giveKeyItem(player, xi.keyItem.MOON_BAUBLE)
 
     -- Tuning In
     elseif csid == 884 then

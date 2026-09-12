@@ -19,19 +19,19 @@ local column =
 local pTable =
 {
 -- Structure:       [spellId] = { Teleport, Key_Item, duration, campaign },
-    [xi.magic.spell.ESCAPE        ] = { xi.teleport.id.ESCAPE,  0,                              4, false },
-    [xi.magic.spell.RECALL_JUGNER ] = { xi.teleport.id.JUGNER,  xi.ki.JUGNER_GATE_CRYSTAL,      4, false },
-    [xi.magic.spell.RECALL_MERIPH ] = { xi.teleport.id.MERIPH,  xi.ki.MERIPHATAUD_GATE_CRYSTAL, 4, false },
-    [xi.magic.spell.RECALL_PASHH  ] = { xi.teleport.id.PASHH,   xi.ki.PASHHOW_GATE_CRYSTAL,     4, false },
-    [xi.magic.spell.RETRACE       ] = { xi.teleport.id.RETRACE, 0,                              3, true  },
-    [xi.magic.spell.TELEPORT_ALTEP] = { xi.teleport.id.ALTEP,   xi.ki.ALTEPA_GATE_CRYSTAL,      4, false },
-    [xi.magic.spell.TELEPORT_DEM  ] = { xi.teleport.id.DEM,     xi.ki.DEM_GATE_CRYSTAL,         4, false },
-    [xi.magic.spell.TELEPORT_HOLLA] = { xi.teleport.id.HOLLA,   xi.ki.HOLLA_GATE_CRYSTAL,       4, false },
-    [xi.magic.spell.TELEPORT_MEA  ] = { xi.teleport.id.MEA,     xi.ki.MEA_GATE_CRYSTAL,         4, false },
-    [xi.magic.spell.TELEPORT_VAHZL] = { xi.teleport.id.VAHZL,   xi.ki.VAHZL_GATE_CRYSTAL,       4, false },
-    [xi.magic.spell.TELEPORT_YHOAT] = { xi.teleport.id.YHOAT,   xi.ki.YHOATOR_GATE_CRYSTAL,     4, false },
-    [xi.magic.spell.WARP          ] = { xi.teleport.id.WARP,    0,                              3, false },
-    [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3, false },
+    [xi.magic.spell.ESCAPE        ] = { xi.teleport.id.ESCAPE,  0,                                   4, false },
+    [xi.magic.spell.RECALL_JUGNER ] = { xi.teleport.id.JUGNER,  xi.keyItem.JUGNER_GATE_CRYSTAL,      4, false },
+    [xi.magic.spell.RECALL_MERIPH ] = { xi.teleport.id.MERIPH,  xi.keyItem.MERIPHATAUD_GATE_CRYSTAL, 4, false },
+    [xi.magic.spell.RECALL_PASHH  ] = { xi.teleport.id.PASHH,   xi.keyItem.PASHHOW_GATE_CRYSTAL,     4, false },
+    [xi.magic.spell.RETRACE       ] = { xi.teleport.id.RETRACE, 0,                                   3, true  },
+    [xi.magic.spell.TELEPORT_ALTEP] = { xi.teleport.id.ALTEP,   xi.keyItem.ALTEPA_GATE_CRYSTAL,      4, false },
+    [xi.magic.spell.TELEPORT_DEM  ] = { xi.teleport.id.DEM,     xi.keyItem.DEM_GATE_CRYSTAL,         4, false },
+    [xi.magic.spell.TELEPORT_HOLLA] = { xi.teleport.id.HOLLA,   xi.keyItem.HOLLA_GATE_CRYSTAL,       4, false },
+    [xi.magic.spell.TELEPORT_MEA  ] = { xi.teleport.id.MEA,     xi.keyItem.MEA_GATE_CRYSTAL,         4, false },
+    [xi.magic.spell.TELEPORT_VAHZL] = { xi.teleport.id.VAHZL,   xi.keyItem.VAHZL_GATE_CRYSTAL,       4, false },
+    [xi.magic.spell.TELEPORT_YHOAT] = { xi.teleport.id.YHOAT,   xi.keyItem.YHOATOR_GATE_CRYSTAL,     4, false },
+    [xi.magic.spell.WARP          ] = { xi.teleport.id.WARP,    0,                                   3, false },
+    [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                                   3, false },
 }
 
 -- Main function for Teleport / Warp / etc. Spells.

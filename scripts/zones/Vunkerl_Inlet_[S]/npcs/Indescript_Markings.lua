@@ -18,9 +18,9 @@ entity.onTrigger = function(player, npc)
     if
         pantsQuestProgress > 0 and
         pantsQuestProgress < 3 and
-        not player:hasKeyItem(xi.ki.DJINN_EMBER)
+        not player:hasKeyItem(xi.keyItem.DJINN_EMBER)
     then
-        npcUtil.giveKeyItem(player, xi.ki.DJINN_EMBER)
+        npcUtil.giveKeyItem(player, xi.keyItem.DJINN_EMBER)
         player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
         npc:hideNPC(60)
 

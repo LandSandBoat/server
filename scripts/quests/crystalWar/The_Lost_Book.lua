@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and player:getMainLvl() >= 30 and
-                player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
+                player:hasKeyItem(xi.keyItem.BRONZE_RIBBON_OF_SERVICE)
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
@@ -72,7 +72,7 @@ quest.sections =
             {
                 [65] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.LEATHER_BOUND_BOOK)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LEATHER_BOUND_BOOK)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -112,7 +112,7 @@ quest.sections =
             onEventFinish =
             {
                 [145] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LEATHER_BOUND_BOOK)
+                    player:delKeyItem(xi.keyItem.LEATHER_BOUND_BOOK)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },
@@ -123,7 +123,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 4 and
-                not player:hasKeyItem(xi.ki.LYNX_PELT)
+                not player:hasKeyItem(xi.keyItem.LYNX_PELT)
         end,
 
         [xi.zone.CASTLE_OZTROJA_S] =
@@ -131,7 +131,7 @@ quest.sections =
             ['_qm0'] =
             {
                 onTrigger = function(player, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LYNX_PELT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LYNX_PELT)
                 end,
             },
         },
@@ -141,7 +141,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 4 and
-                player:hasKeyItem(xi.ki.LYNX_PELT)
+                player:hasKeyItem(xi.keyItem.LYNX_PELT)
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
@@ -159,7 +159,7 @@ quest.sections =
             {
                 [146] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.LYNX_PELT)
+                    player:delKeyItem(xi.keyItem.LYNX_PELT)
                     quest:setVar(player, 'Prog', 5)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                 end,

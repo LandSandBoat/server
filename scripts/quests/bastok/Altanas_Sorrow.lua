@@ -51,9 +51,9 @@ quest.sections =
             ['Virnage'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT) then
+                    if player:hasKeyItem(xi.keyItem.BUCKET_OF_DIVINE_PAINT) then
                         player:startEvent(143)
-                    elseif player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE) then
+                    elseif player:hasKeyItem(xi.keyItem.LETTER_FROM_VIRNAGE) then
                         player:startEvent(144)
                     else
                         player:startEvent(142)
@@ -64,8 +64,8 @@ quest.sections =
             onEventFinish =
             {
                 [143] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_VIRNAGE)
+                    player:delKeyItem(xi.keyItem.BUCKET_OF_DIVINE_PAINT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_VIRNAGE)
                 end,
             },
         },
@@ -76,10 +76,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT) and
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
+                        not player:hasKeyItem(xi.keyItem.BUCKET_OF_DIVINE_PAINT) and
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_VIRNAGE)
                     then
-                        return quest:keyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
+                        return quest:keyItem(xi.keyItem.BUCKET_OF_DIVINE_PAINT)
                     end
                 end,
             },
@@ -90,7 +90,7 @@ quest.sections =
             ['Eperdur'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE) then
+                    if player:hasKeyItem(xi.keyItem.LETTER_FROM_VIRNAGE) then
                         return quest:progressEvent(679)
                     end
                 end,
@@ -100,7 +100,7 @@ quest.sections =
             {
                 [679] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
+                        player:delKeyItem(xi.keyItem.LETTER_FROM_VIRNAGE)
                     end
                 end,
             },

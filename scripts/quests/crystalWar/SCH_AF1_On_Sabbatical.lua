@@ -37,7 +37,7 @@ quest.sections =
             onEventFinish =
             {
                 [18] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ULBRECHTS_SEALED_LETTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ULBRECHTS_SEALED_LETTER)
                     quest:begin(player)
                 end,
             }
@@ -84,7 +84,7 @@ quest.sections =
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SCHULTZS_SEALED_LETTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SCHULTZS_SEALED_LETTER)
                     quest:setVar(player, 'Prog', 2)
                 end,
             }
@@ -106,8 +106,8 @@ quest.sections =
             {
                 [20] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
-                        player:delKeyItem(xi.ki.SCHULTZS_SEALED_LETTER)
+                        player:delKeyItem(xi.keyItem.ULBRECHTS_SEALED_LETTER)
+                        player:delKeyItem(xi.keyItem.SCHULTZS_SEALED_LETTER)
                         xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer', VanadielUniqueDay() + 1)
                         xi.quest.setMustZone(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
                     end

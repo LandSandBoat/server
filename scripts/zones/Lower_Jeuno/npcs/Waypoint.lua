@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.ADOULINIAN_CHARTER_PERMIT) then
+    if player:hasKeyItem(xi.keyItem.ADOULINIAN_CHARTER_PERMIT) then
         xi.waypoint.onTrigger(player, npc)
     else
         player:messageSpecial(ID.text.WAYPOINT_EXAMINE)

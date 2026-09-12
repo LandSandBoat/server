@@ -44,7 +44,7 @@ quest.sections =
                 [137] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.MERTAIRES_BRACELET)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MERTAIRES_BRACELET)
                     end
                 end,
 
@@ -53,7 +53,7 @@ quest.sections =
                         quest:setVar(player, 'Option', 1) -- Player declined
                     else
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.MERTAIRES_BRACELET)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MERTAIRES_BRACELET)
                     end
                 end,
             },
@@ -85,7 +85,7 @@ quest.sections =
                     local progress = quest:getVar(player, 'Prog')
 
                     if
-                        player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
+                        player:hasKeyItem(xi.keyItem.MERTAIRES_BRACELET) and
                         progress == 0
                     then
                         npcUtil.popFromQM(player, npc, ID.mob.TROS, { claim = true, hide = 0 }) -- TODO: Should not spawn claimed but navmesh+line of sight make it to where the player can't engage with the mob on spawn.
@@ -103,7 +103,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 7)
                         player:addFame(xi.fameArea.BASTOK, 7)
                         player:addFame(xi.fameArea.WINDURST, 7)
-                        player:delKeyItem(xi.ki.MERTAIRES_BRACELET)
+                        player:delKeyItem(xi.keyItem.MERTAIRES_BRACELET)
                     end
                 end,
             },

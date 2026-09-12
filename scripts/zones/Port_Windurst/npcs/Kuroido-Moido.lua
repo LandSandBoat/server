@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
     local makingAmens = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local wonderWands = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local pfame = player:getFameLevel(xi.fameArea.WINDURST)
-    local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
+    local brokenWand = player:hasKeyItem(xi.keyItem.BROKEN_WAND)
 
     if
         makingAmends == xi.questStatus.QUEST_COMPLETED and
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     elseif csid == 284 then
         player:needToZone(true)
-        player:delKeyItem(xi.ki.BROKEN_WAND)
+        player:delKeyItem(xi.keyItem.BROKEN_WAND)
         player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
         npcUtil.giveCurrency(player, 'gil', 6000)
         player:addFame(xi.fameArea.WINDURST, 40)

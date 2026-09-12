@@ -12,10 +12,10 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.OLD_TRICK_BOX)
+        not player:hasKeyItem(xi.keyItem.OLD_TRICK_BOX)
     then
         if player:getCharVar('trueWillKilledNM') > 0 then
-            npcUtil.giveKeyItem(player, xi.ki.OLD_TRICK_BOX)
+            npcUtil.giveKeyItem(player, xi.keyItem.OLD_TRICK_BOX)
             player:setCharVar('trueWillKilledNM', 0)
         else
             player:messageSpecial(ID.text.CHILL_RUNS_DOWN)

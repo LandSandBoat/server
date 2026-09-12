@@ -102,18 +102,18 @@ quest.sections =
             {
                 [18] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.POT_OF_TSETSEROONS_STEW)
+                    npcUtil.giveKeyItem(player, xi.keyItem.POT_OF_TSETSEROONS_STEW)
                     quest:setVar(player, 'Prog', 3)
                 end,
 
                 [20] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.ki.MAP_OF_AYDEEWA_SUBTERRANE) then
+                    if player:hasKeyItem(xi.keyItem.MAP_OF_AYDEEWA_SUBTERRANE) then
                         if npcUtil.giveItem(player, xi.item.IMPERIAL_BRONZE_PIECE) then
                             quest:complete(player)
                         end
                     else
                         if quest:complete(player) then
-                            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_AYDEEWA_SUBTERRANE)
+                            npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_AYDEEWA_SUBTERRANE)
                         end
                     end
                 end,
@@ -127,7 +127,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
-                        player:hasKeyItem(xi.ki.POT_OF_TSETSEROONS_STEW)
+                        player:hasKeyItem(xi.keyItem.POT_OF_TSETSEROONS_STEW)
                     then
                         return quest:progressEvent(8)
                     end
@@ -138,9 +138,9 @@ quest.sections =
             {
                 [8] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
-                    player:delKeyItem(xi.ki.POT_OF_TSETSEROONS_STEW)
+                    player:delKeyItem(xi.keyItem.POT_OF_TSETSEROONS_STEW)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_AYDEEWA_SUBTERRANE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_AYDEEWA_SUBTERRANE)
                     end
                 end,
             },

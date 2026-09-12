@@ -66,7 +66,7 @@ quest.sections =
             {
                 [2510] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.EASTERN_ADOULIN_PATROL_ROUTE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.EASTERN_ADOULIN_PATROL_ROUTE)
                 end,
             },
         },
@@ -129,8 +129,8 @@ quest.sections =
             {
                 [2512] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.EASTERN_ADOULIN_PATROL_ROUTE)
-                        player:messageSpecial(easternAdoulinID.text.KEYITEM_LOST, xi.ki.EASTERN_ADOULIN_PATROL_ROUTE)
+                        player:delKeyItem(xi.keyItem.EASTERN_ADOULIN_PATROL_ROUTE)
+                        player:messageSpecial(easternAdoulinID.text.KEYITEM_LOST, xi.keyItem.EASTERN_ADOULIN_PATROL_ROUTE)
                     end
                 end,
 

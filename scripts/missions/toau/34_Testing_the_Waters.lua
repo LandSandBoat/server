@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.TESTING_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.PERCIPIENT_EYE,
+    keyItem     = xi.keyItem.PERCIPIENT_EYE,
     title       = xi.title.TREASURE_TROVE_TENDER,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.LEGACY_OF_THE_LOST },
 }
@@ -38,7 +38,7 @@ mission.sections =
                 [1] = function(player, triggerArea)
                     if
                         not mission:getMustZone(player) and
-                        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+                        player:hasKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN)
                     then
                         return mission:progressEvent(15, 0, 0, 0, 0, 0, 0, 0, 0)
                     end
@@ -70,7 +70,7 @@ mission.sections =
             {
                 [106] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+                        player:delKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN)
                     end
                 end,
             },

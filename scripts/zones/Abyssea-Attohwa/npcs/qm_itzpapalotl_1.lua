@@ -10,7 +10,7 @@ local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ITZPAPALOTL_OFFSET, { xi.ki.VENOMOUS_WAMOURA_FEELER, xi.ki.BULBOUS_CRAWLER_COCOON, xi.ki.DISTENDED_CHIGOE_ABDOMEN })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ITZPAPALOTL_OFFSET, { xi.keyItem.VENOMOUS_WAMOURA_FEELER, xi.keyItem.BULBOUS_CRAWLER_COCOON, xi.keyItem.DISTENDED_CHIGOE_ABDOMEN })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

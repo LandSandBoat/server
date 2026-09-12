@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.PIONEERS_BADGE) then
+    if player:hasKeyItem(xi.keyItem.PIONEERS_BADGE) then
         player:startEvent(504) -- Set sail to Eastern Adoulin.
     else
         player:startEvent(511) -- Refused. Register with the Pioneers' Coalition first.

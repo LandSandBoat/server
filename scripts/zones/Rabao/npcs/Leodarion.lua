@@ -13,9 +13,9 @@ entity.onTrigger = function(player, npc)
 
         if trueWillCS == 1 then
             player:startEvent(97)
-        elseif trueWillCS == 2 and not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX) then
+        elseif trueWillCS == 2 and not player:hasKeyItem(xi.keyItem.LARGE_TRICK_BOX) then
             player:startEvent(98)
-        elseif player:hasKeyItem(xi.ki.LARGE_TRICK_BOX) then
+        elseif player:hasKeyItem(xi.keyItem.LARGE_TRICK_BOX) then
             player:startEvent(99)
         end
     end
@@ -23,7 +23,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 97 then
-        player:delKeyItem(xi.ki.OLD_TRICK_BOX)
+        player:delKeyItem(xi.keyItem.OLD_TRICK_BOX)
         player:setCharVar('trueWillCS', 2)
     elseif csid == 99 then
         if
@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 var = 'trueWillCS'
             })
         then
-            player:delKeyItem(xi.ki.LARGE_TRICK_BOX)
+            player:delKeyItem(xi.keyItem.LARGE_TRICK_BOX)
         end
     end
 end

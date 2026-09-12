@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 
 quest.reward =
 {
-    keyItem = xi.ki.LOADSTONE,
+    keyItem = xi.keyItem.LOADSTONE,
 }
 
 local tradeOptions =

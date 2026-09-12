@@ -105,7 +105,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(103, 0, 0, xi.ki.STARWAY_STAIRWAY_BAUBLE)
+                        return mission:progressEvent(103, 0, 0, xi.keyItem.STARWAY_STAIRWAY_BAUBLE)
                     elseif missionStatus == 1 then
                         return mission:event(104)
                     elseif missionStatus == 4 then
@@ -160,7 +160,7 @@ mission.sections =
             {
                 [103] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    npcUtil.giveKeyItem(player, xi.ki.STARWAY_STAIRWAY_BAUBLE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STARWAY_STAIRWAY_BAUBLE)
                 end,
 
                 [107] = function(player, csid, option, npc)

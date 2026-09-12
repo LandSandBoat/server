@@ -24,7 +24,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     if option == 15 then
         mission:begin(player)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
-        npcUtil.giveKeyItem(player, xi.ki.STAR_CRESTED_SUMMONS_1)
+        npcUtil.giveKeyItem(player, xi.keyItem.STAR_CRESTED_SUMMONS_1)
     end
 end
 
@@ -81,9 +81,9 @@ mission.sections =
             ['_6q2'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
+                    if player:hasKeyItem(xi.keyItem.STAR_CRESTED_SUMMONS_1) then
                         return mission:progressEvent(214)
-                    elseif player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
+                    elseif player:hasKeyItem(xi.keyItem.SHADOW_FRAGMENT) then
                         return mission:progressEvent(216)
                     end
                 end,
@@ -92,9 +92,9 @@ mission.sections =
             ['Zubaba'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
+                    if player:hasKeyItem(xi.keyItem.STAR_CRESTED_SUMMONS_1) then
                         return mission:progressEvent(157)
-                    elseif player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
+                    elseif player:hasKeyItem(xi.keyItem.SHADOW_FRAGMENT) then
                         return mission:progressEvent(194)
                     end
                 end,
@@ -105,12 +105,12 @@ mission.sections =
                 [214] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
                     player:addTitle(xi.title.STAR_ORDAINED_WARRIOR)
-                    player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+                    player:delKeyItem(xi.keyItem.STAR_CRESTED_SUMMONS_1)
                 end,
 
                 [216] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.SHADOW_FRAGMENT)
+                        player:delKeyItem(xi.keyItem.SHADOW_FRAGMENT)
                     end
                 end,
             },
@@ -163,9 +163,9 @@ mission.sections =
             afterZoneIn = function(player)
                 if
                     player:getMissionStatus(mission.areaId) == 4 and
-                    not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                    not player:hasKeyItem(xi.keyItem.SHADOW_FRAGMENT)
                 then
-                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SHADOW_FRAGMENT)
                 end
             end,
         },

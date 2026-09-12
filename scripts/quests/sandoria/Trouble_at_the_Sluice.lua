@@ -42,7 +42,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                not player:hasKeyItem(xi.ki.NEUTRALIZER) and
+                not player:hasKeyItem(xi.keyItem.NEUTRALIZER) and
                 vars.Prog == 0
         end,
 
@@ -66,7 +66,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                not player:hasKeyItem(xi.ki.NEUTRALIZER) and
+                not player:hasKeyItem(xi.keyItem.NEUTRALIZER) and
                 vars.Prog == 1
         end,
 
@@ -91,7 +91,7 @@ quest.sections =
             onEventFinish =
             {
                 [17] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.NEUTRALIZER) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.NEUTRALIZER) then
                         player:confirmTrade()
                     end
                 end,
@@ -101,7 +101,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.NEUTRALIZER)
+                player:hasKeyItem(xi.keyItem.NEUTRALIZER)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -112,7 +112,7 @@ quest.sections =
             {
                 [56] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.NEUTRALIZER)
+                        player:delKeyItem(xi.keyItem.NEUTRALIZER)
                     end
                 end,
             },

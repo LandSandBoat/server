@@ -29,7 +29,7 @@ local keyItemOnMobDeath =
                     partyMember:getZoneID() == zoneID and
                     partyMember:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.BALAMORS_RUSE
                 then
-                    npcUtil.giveKeyItem(partyMember, xi.ki.CONSUMMATE_SIMULACRUM)
+                    npcUtil.giveKeyItem(partyMember, xi.keyItem.CONSUMMATE_SIMULACRUM)
                 end
             end
         end

@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+    if not player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
         player:startEvent(9600)
     else
         player:startEvent(9601)

@@ -12,7 +12,7 @@ local content = InstanceAssault:new(
     assaultID        = xi.assault.mission.REQUIEM,
     instanceID       = xi.assault.instance.REQUIEM,
     assaultArea      = xi.assault.assaultArea.PERIQIA,
-    requiredOrders   = xi.ki.PERIQIA_ASSAULT_ORDERS,
+    requiredOrders   = xi.keyItem.PERIQIA_ASSAULT_ORDERS,
 
     runeOfReleasePos = { x = -490.000, y = -9.695, z = -329.000, rot = 0 },
     ancientBoxPos    = { x = -490.000, y = -9.985, z = -326.000, rot = 0 },

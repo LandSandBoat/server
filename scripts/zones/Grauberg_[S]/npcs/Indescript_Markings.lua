@@ -18,9 +18,9 @@ entity.onTrigger = function(player, npc)
         npc:getID() == ID.npc.INDESCRIPT_MARKINGS and -- Second markings are bcnm entrance
         gownQuestProgress > 0 and
         gownQuestProgress < 3 and
-        not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
+        not player:hasKeyItem(xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT)
     then
-        npcUtil.giveKeyItem(player, xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
+        npcUtil.giveKeyItem(player, xi.keyItem.SAMPLE_OF_GRAUBERG_CHERT)
         player:setCharVar('AF_SCH_BODY', gownQuestProgress + 1)
 
         -- Move the markings around

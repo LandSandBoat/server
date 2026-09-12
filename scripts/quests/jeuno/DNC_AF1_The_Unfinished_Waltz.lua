@@ -48,7 +48,7 @@ quest.sections =
             ['Laila'] =
             {
                 onTrigger = function(player, npc)
-                    if player:seenKeyItem(xi.ki.THE_ESSENCE_OF_DANCE) then
+                    if player:seenKeyItem(xi.keyItem.THE_ESSENCE_OF_DANCE) then
                         return quest:progressEvent(10133)
                     else
                         return quest:progressEvent(10130)
@@ -90,7 +90,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.THE_ESSENCE_OF_DANCE) and
+                        not player:hasKeyItem(xi.keyItem.THE_ESSENCE_OF_DANCE) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         local hippoEvent = quest:getLocalVar(player, 'hippoEvent')
@@ -133,7 +133,7 @@ quest.sections =
                 end,
 
                 [13] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.THE_ESSENCE_OF_DANCE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.THE_ESSENCE_OF_DANCE)
                 end,
             },
         },

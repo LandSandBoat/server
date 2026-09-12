@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZHA
 
 mission.reward =
 {
-    keyItem     = xi.ki.SACRIFICIAL_CHAMBER_KEY,
+    keyItem     = xi.keyItem.SACRIFICIAL_CHAMBER_KEY,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH },
 }
 

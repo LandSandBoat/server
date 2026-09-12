@@ -41,7 +41,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
         player:addFame(xi.fameArea.NORG, 20)
-        npcUtil.giveKeyItem(player, xi.ki.TONBERRY_PRIEST_KEY)
+        npcUtil.giveKeyItem(player, xi.keyItem.TONBERRY_PRIEST_KEY)
         player:setCharVar('EveryonesGrudgeStarted', 0)
         player:addTitle(xi.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)
     end

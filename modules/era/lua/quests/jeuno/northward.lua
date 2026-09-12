@@ -13,7 +13,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/jeuno/Northward', function(quest)
         quest.reward = {
-            keyItem  = xi.ki.MAP_OF_CASTLE_ZVAHL,
+            keyItem  = xi.keyItem.MAP_OF_CASTLE_ZVAHL,
             title    = xi.title.ENVOY_TO_THE_NORTH,
         }
     end)

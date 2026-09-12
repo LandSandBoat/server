@@ -13,12 +13,12 @@ entity.onTrigger = function(player, npc)
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if
         rftd == xi.questStatus.QUEST_AVAILABLE and
-        player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and
+        player:hasKeyItem(xi.keyItem.BRONZE_RIBBON_OF_SERVICE) and
         player:getMainLvl() >= 30
     then
         player:startEvent(105) -- Start quest "Requiem for the Departed"
     elseif rftd == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SHEAF_OF_HANDMADE_INCENSE) then
+        if player:hasKeyItem(xi.keyItem.SHEAF_OF_HANDMADE_INCENSE) then
             player:startEvent(107) -- During quest "Requiem for the Departed" (with Handmade Incense KI)
         else
             player:startEvent(106) -- During quest "Requiem for the Departed" (before retrieving KI Handmade Incense)
@@ -37,7 +37,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         csid == 107 and
         npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED, { item = xi.item.SCROLL_OF_RECALL_MERIPH })
     then
-        player:delKeyItem(xi.ki.SHEAF_OF_HANDMADE_INCENSE)
+        player:delKeyItem(xi.keyItem.SHEAF_OF_HANDMADE_INCENSE)
     end
 end
 

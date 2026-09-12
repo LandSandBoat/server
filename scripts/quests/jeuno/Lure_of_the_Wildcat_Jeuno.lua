@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT
 
 quest.reward =
 {
-    keyItem  = xi.ki.WHITE_INVITATION_CARD,
+    keyItem  = xi.keyItem.WHITE_INVITATION_CARD,
 }
 
 local wildcatNpcData =
@@ -65,7 +65,7 @@ quest.sections =
             onEventFinish =
             {
                 [10088] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.WHITE_SENTINEL_BADGE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.WHITE_SENTINEL_BADGE)
                     quest:begin(player)
                 end,
             },
@@ -163,8 +163,8 @@ quest.sections =
                 [10087] = wildcatOnEventFinish,
 
                 [10091] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
-                    player:messageSpecial(upperJeunoID.text.KEYITEM_LOST, xi.ki.WHITE_SENTINEL_BADGE)
+                    player:delKeyItem(xi.keyItem.WHITE_SENTINEL_BADGE)
+                    player:messageSpecial(upperJeunoID.text.KEYITEM_LOST, xi.keyItem.WHITE_SENTINEL_BADGE)
 
                     quest:complete(player)
                 end,

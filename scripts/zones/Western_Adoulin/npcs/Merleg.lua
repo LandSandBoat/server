@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
         player:addExp(500 * xi.settings.main.EXP_RATE)
         npcUtil.giveCurrency(player, 'bayld', 200)
-        npcUtil.giveKeyItem(player, xi.ki.FAIL_BADGE)
+        npcUtil.giveKeyItem(player, xi.keyItem.FAIL_BADGE)
 
         -- TODO: Verify fame value added
         player:addFame(xi.fameArea.ADOULIN, 30)

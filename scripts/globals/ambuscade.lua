@@ -96,8 +96,8 @@ end
 
 xi.ambuscade.onTriggerTome = function(player, npc)
     -- local hideNoAmbuscadeForNow = 1
-    -- local hideIntenseAmbuscade = not player:hasKeyItem(xi.ki.AMBUSCADE_PRIMER_VOLUME_ONE) and 2 or 0
-    -- local hideRegularAmbuscade = not player:hasKeyItem(xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO) and 4 or 0
+    -- local hideIntenseAmbuscade = not player:hasKeyItem(xi.keyItem.AMBUSCADE_PRIMER_VOLUME_ONE) and 2 or 0
+    -- local hideRegularAmbuscade = not player:hasKeyItem(xi.keyItem.AMBUSCADE_PRIMER_VOLUME_TWO) and 4 or 0
     -- local hideLightAmbuscade = 8
     -- local hideToggleAutoTransport = 16
 
@@ -168,9 +168,9 @@ xi.ambuscade.onInstanceComplete = function(instance)
         -- Remove KI
         -- TODO: Message
         if difficulty == 1 then
-            player:delKeyItem(xi.ki.AMBUSCADE_PRIMER_VOLUME_ONE)
+            player:delKeyItem(xi.keyItem.AMBUSCADE_PRIMER_VOLUME_ONE)
         elseif difficulty == 2 then
-            player:delKeyItem(xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO)
+            player:delKeyItem(xi.keyItem.AMBUSCADE_PRIMER_VOLUME_TWO)
         end
 
         -- TODO: Remove Abdhaljs Seal

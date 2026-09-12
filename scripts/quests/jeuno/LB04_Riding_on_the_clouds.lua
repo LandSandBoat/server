@@ -13,7 +13,7 @@ local function handleSandoriaTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcSandoria', 8)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
+        npcUtil.giveKeyItem(player, xi.keyItem.SCOWLING_STONE)
     end
 end
 
@@ -21,7 +21,7 @@ local function handleBastokTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcBastok', 8)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SMILING_STONE)
+        npcUtil.giveKeyItem(player, xi.keyItem.SMILING_STONE)
     end
 end
 
@@ -29,7 +29,7 @@ local function handleWindurstTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcWindurst', 8)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
+        npcUtil.giveKeyItem(player, xi.keyItem.SPIRITED_STONE)
     end
 end
 
@@ -37,7 +37,7 @@ local function handleOtherlandsTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcOtherlands', 8)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
+        npcUtil.giveKeyItem(player, xi.keyItem.SOMBER_STONE)
     end
 end
 
@@ -103,10 +103,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.SMILING_STONE) and
-                        player:hasKeyItem(xi.ki.SCOWLING_STONE) and
-                        player:hasKeyItem(xi.ki.SOMBER_STONE) and
-                        player:hasKeyItem(xi.ki.SPIRITED_STONE)
+                        player:hasKeyItem(xi.keyItem.SMILING_STONE) and
+                        player:hasKeyItem(xi.keyItem.SCOWLING_STONE) and
+                        player:hasKeyItem(xi.keyItem.SOMBER_STONE) and
+                        player:hasKeyItem(xi.keyItem.SPIRITED_STONE)
                     then
                         return quest:progressEvent(90) -- Finish Quest "Riding on the Clouds"
                     else
@@ -124,10 +124,10 @@ quest.sections =
             {
                 [90] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.SCOWLING_STONE)
-                        player:delKeyItem(xi.ki.SMILING_STONE)
-                        player:delKeyItem(xi.ki.SOMBER_STONE)
-                        player:delKeyItem(xi.ki.SPIRITED_STONE)
+                        player:delKeyItem(xi.keyItem.SCOWLING_STONE)
+                        player:delKeyItem(xi.keyItem.SMILING_STONE)
+                        player:delKeyItem(xi.keyItem.SOMBER_STONE)
+                        player:delKeyItem(xi.keyItem.SPIRITED_STONE)
                         player:setLevelCap(70)
                         player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_70)
                     end

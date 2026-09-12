@@ -18,7 +18,7 @@ quest.reward =
     fame     = 20,
     fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.KITE_SHIELD,
-    keyItem  = xi.ki.JOB_GESTURE_PALADIN,
+    keyItem  = xi.keyItem.JOB_GESTURE_PALADIN,
     title    = xi.title.TRIED_AND_TESTED_KNIGHT,
 }
 
@@ -51,7 +51,7 @@ quest.sections =
             {
                 [627] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_TASKS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BOOK_OF_TASKS)
                         quest:begin(player)
                     else
                         quest:setVar(player, 'Option', 1)
@@ -60,7 +60,7 @@ quest.sections =
 
                 [635] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_TASKS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BOOK_OF_TASKS)
                         quest:begin(player)
                     end
                 end,
@@ -78,7 +78,7 @@ quest.sections =
             ['Balasiel'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KNIGHTS_SOUL) then
+                    if player:hasKeyItem(xi.keyItem.KNIGHTS_SOUL) then
                         return quest:progressEvent(628)
                     else
                         return quest:event(669)
@@ -89,7 +89,7 @@ quest.sections =
             ['Baunise'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST) then
+                    if not player:hasKeyItem(xi.keyItem.BOOK_OF_THE_WEST) then
                         return quest:progressEvent(634)
                     else
                         return quest:messageName(southernSandoriaID.text.DO_NOT_FRET)
@@ -100,7 +100,7 @@ quest.sections =
             ['Cahaurme'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST) then
+                    if not player:hasKeyItem(xi.keyItem.BOOK_OF_THE_EAST) then
                         return quest:progressEvent(633)
                     else
                         return quest:messageName(southernSandoriaID.text.TRIAL_IS_DIFFICULT)
@@ -115,19 +115,19 @@ quest.sections =
                         player:unlockJob(xi.job.PLD)
                         player:messageSpecial(southernSandoriaID.text.UNLOCK_PALADIN)
 
-                        player:delKeyItem(xi.ki.KNIGHTS_SOUL)
-                        player:delKeyItem(xi.ki.BOOK_OF_TASKS)
-                        player:delKeyItem(xi.ki.BOOK_OF_THE_WEST)
-                        player:delKeyItem(xi.ki.BOOK_OF_THE_EAST)
+                        player:delKeyItem(xi.keyItem.KNIGHTS_SOUL)
+                        player:delKeyItem(xi.keyItem.BOOK_OF_TASKS)
+                        player:delKeyItem(xi.keyItem.BOOK_OF_THE_WEST)
+                        player:delKeyItem(xi.keyItem.BOOK_OF_THE_EAST)
                     end
                 end,
 
                 [633] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_THE_EAST)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOOK_OF_THE_EAST)
                 end,
 
                 [634] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BOOK_OF_THE_WEST)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOOK_OF_THE_WEST)
                 end,
             },
         },
@@ -138,11 +138,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST) and
-                        player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST)
+                        player:hasKeyItem(xi.keyItem.BOOK_OF_THE_EAST) and
+                        player:hasKeyItem(xi.keyItem.BOOK_OF_THE_WEST)
                     then
-                        if not player:hasKeyItem(xi.ki.KNIGHTS_SOUL) then
-                            return quest:keyItem(xi.ki.KNIGHTS_SOUL)
+                        if not player:hasKeyItem(xi.keyItem.KNIGHTS_SOUL) then
+                            return quest:keyItem(xi.keyItem.KNIGHTS_SOUL)
                         else
                             return quest:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
                         end

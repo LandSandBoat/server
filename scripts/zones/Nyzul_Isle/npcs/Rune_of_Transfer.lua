@@ -84,15 +84,15 @@ entity.onEventFinish = function(player, csid, option, npc)
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
                             players:setCharVar('NyzulFloorProgress', currentFloor)
-                            players:messageSpecial(ID.text.FLOOR_RECORD, xi.ki.RUNIC_DISC, currentFloor)
+                            players:messageSpecial(ID.text.FLOOR_RECORD, xi.keyItem.RUNIC_DISC, currentFloor)
                         end
                     end
                 else
                     -- Everyone gets to save disk info
-                    if players:hasKeyItem(xi.ki.RUNIC_DISC) then
+                    if players:hasKeyItem(xi.keyItem.RUNIC_DISC) then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
                             players:setCharVar('NyzulFloorProgress', currentFloor)
-                            players:messageSpecial(ID.text.FLOOR_RECORD, xi.ki.RUNIC_DISC, currentFloor)
+                            players:messageSpecial(ID.text.FLOOR_RECORD, xi.keyItem.RUNIC_DISC, currentFloor)
                         end
                     end
                 end

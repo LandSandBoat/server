@@ -27,7 +27,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     if option == 14 then
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 9)
-        player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK)
+        player:delKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_BASTOK)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
@@ -104,8 +104,8 @@ mission.sections =
                 [720] = function(player, csid, option, npc)
                     if option == 0 then
                         mission:begin(player)
-                        player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK)
-                        npcUtil.giveKeyItem(player, xi.ki.NEW_FEIYIN_SEAL)
+                        player:delKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_BASTOK)
+                        npcUtil.giveKeyItem(player, xi.keyItem.NEW_FEIYIN_SEAL)
                         player:setMissionStatus(mission.areaId, 10)
                     else
                         player:setMissionStatus(mission.areaId, 8)
@@ -151,7 +151,7 @@ mission.sections =
                         return mission:progressEvent(721)
                     elseif
                         player:getMissionStatus(mission.areaId) == 12 and
-                        player:hasKeyItem(xi.ki.BURNT_SEAL)
+                        player:hasKeyItem(xi.keyItem.BURNT_SEAL)
                     then
                         return mission:progressEvent(722)
                     end
@@ -161,13 +161,13 @@ mission.sections =
             onEventFinish =
             {
                 [721]  = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.NEW_FEIYIN_SEAL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NEW_FEIYIN_SEAL)
                     player:setMissionStatus(mission.areaId, 10)
                 end,
 
                 [722] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.BURNT_SEAL)
+                        player:delKeyItem(xi.keyItem.BURNT_SEAL)
                     end
                 end,
             },
@@ -198,9 +198,9 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 11 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_5_MISSION
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.BURNT_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BURNT_SEAL)
                         player:setMissionStatus(mission.areaId, 12)
-                        player:delKeyItem(xi.ki.NEW_FEIYIN_SEAL)
+                        player:delKeyItem(xi.keyItem.NEW_FEIYIN_SEAL)
                     end
                 end,
             },

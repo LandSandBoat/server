@@ -11,7 +11,7 @@ quest.reward =
 {
     exp     = 2000,
     gil     = 2000,
-    keyItem = xi.ki.MAP_OF_THE_SACRARIUM,
+    keyItem = xi.keyItem.MAP_OF_THE_SACRARIUM,
 }
 
 quest.sections =

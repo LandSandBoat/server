@@ -498,7 +498,7 @@ local vmHandlers =
     end,
 
     [vmOpCodes.UNKNOWN_600] = function(player, chocoState, option)
-        local ki    = xi.ki.DIRTY_HANDKERCHIEF
+        local ki    = xi.keyItem.DIRTY_HANDKERCHIEF
         local getKi = 1
 
         player:updateEvent(ki, 0, 0, 0, 0, getKi, 0, 0)

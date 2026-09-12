@@ -85,7 +85,7 @@ local function handleSelectionEventFinish(player, csid, option, npc)
         player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.INESCAPABLE_BINDS
     then
         if quest:complete(player) then
-            npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+            npcUtil.giveKeyItem(player, xi.keyItem.BOARDING_PERMIT)
             npcUtil.completeMission(player, xi.mission.log_id.ROV, xi.mission.id.rov.INESCAPABLE_BINDS, { nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.DESERT_WINDS } })
         end
     -- Let me think about it.
@@ -240,7 +240,7 @@ quest.sections =
 
                 [10070] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BOARDING_PERMIT)
                     end
                 end,
             },
@@ -252,8 +252,8 @@ quest.sections =
                 -- Player won't see these messages due to teleporting at the end of the cutscene if awarded then. Display after they zone in.
                 -- NOTE: Prog value of 4 is set immediately before teleporting the player.
                 if quest:getVar(player, 'Prog') == 4 then
-                    npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOARDING_PERMIT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_WAJAOM_WOODLANDS)
                     quest:setVar(player, 'Prog', 5)
                 end
             end,

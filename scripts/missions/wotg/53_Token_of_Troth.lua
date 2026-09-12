@@ -46,7 +46,7 @@ mission.sections =
 
                 [116] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.WEDDING_INVITATION)
+                        player:delKeyItem(xi.keyItem.WEDDING_INVITATION)
 
                         -- NOTE: To prevent forever charvars, this status is reset to 0 upon claiming a moonshade
                         -- earring reward.

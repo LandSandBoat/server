@@ -18,9 +18,9 @@ entity.onTrigger = function(player, npc)
         offset == 1 and
         pantsQuestProgress > 0 and
         pantsQuestProgress < 3 and
-        not player:hasKeyItem(xi.ki.SLUG_MUCUS)
+        not player:hasKeyItem(xi.keyItem.SLUG_MUCUS)
     then
-        npcUtil.giveKeyItem(player, xi.ki.SLUG_MUCUS)
+        npcUtil.giveKeyItem(player, xi.keyItem.SLUG_MUCUS)
         player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
 
         local positions =
@@ -44,9 +44,9 @@ entity.onTrigger = function(player, npc)
         offset == 2 and
         gownQuestProgress > 0 and
         gownQuestProgress < 3 and
-        not player:hasKeyItem(xi.ki.PEISTE_DUNG)
+        not player:hasKeyItem(xi.keyItem.PEISTE_DUNG)
     then
-        npcUtil.giveKeyItem(player, xi.ki.PEISTE_DUNG)
+        npcUtil.giveKeyItem(player, xi.keyItem.PEISTE_DUNG)
         player:setCharVar('AF_SCH_BODY', gownQuestProgress + 1)
 
         local positions =

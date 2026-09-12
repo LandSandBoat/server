@@ -13,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_O
 
 mission.reward =
 {
-    keyItem     = xi.ki.MYSTERIOUS_AMULET,
+    keyItem     = xi.keyItem.MYSTERIOUS_AMULET,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS },
 }
 

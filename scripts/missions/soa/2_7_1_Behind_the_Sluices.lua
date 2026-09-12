@@ -24,18 +24,18 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                not player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+                not player:hasKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK) and
                 missionStatus == 0
         end,
 
         [xi.zone.RALA_WATERWAYS] =
         {
-            ['Sluice_Gate_6'] = mission:messageSpecial(ralaID.text.PERHAPS_THE_WISEST, xi.ki.WATERWAY_FACILITY_CRANK),
+            ['Sluice_Gate_6'] = mission:messageSpecial(ralaID.text.PERHAPS_THE_WISEST, xi.keyItem.WATERWAY_FACILITY_CRANK),
 
             ['Storage_Container'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:keyItem(xi.ki.WATERWAY_FACILITY_CRANK)
+                    return mission:keyItem(xi.keyItem.WATERWAY_FACILITY_CRANK)
                 end,
             },
         },
@@ -45,7 +45,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+                player:hasKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK) and
                 missionStatus == 0
         end,
 
@@ -71,7 +71,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
+                player:hasKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK)
         end,
 
         [xi.zone.RALA_WATERWAYS] =

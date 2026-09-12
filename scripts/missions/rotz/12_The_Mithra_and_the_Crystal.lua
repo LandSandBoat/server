@@ -54,7 +54,7 @@ mission.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CERULEAN_CRYSTAL) then
+                    if player:hasKeyItem(xi.keyItem.CERULEAN_CRYSTAL) then
                         return mission:event(171)
                     else
                         return mission:event(170)
@@ -102,7 +102,7 @@ mission.sections =
     -- Section: Mission Active, missionStatus == 1, does not have Scrap of Papyrus
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1 and not player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+            return currentMission == mission.missionId and missionStatus == 1 and not player:hasKeyItem(xi.keyItem.SCRAP_OF_PAPYRUS)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =
@@ -162,7 +162,7 @@ mission.sections =
                             return
                         end
 
-                        npcUtil.giveKeyItem(player, xi.ki.SCRAP_OF_PAPYRUS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SCRAP_OF_PAPYRUS)
                     end
                 end,
             },
@@ -173,7 +173,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+                player:hasKeyItem(xi.keyItem.SCRAP_OF_PAPYRUS)
         end,
 
         [xi.zone.RABAO] =
@@ -183,8 +183,8 @@ mission.sections =
             onEventFinish =
             {
                 [83] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
-                    npcUtil.giveKeyItem(player, xi.ki.CERULEAN_CRYSTAL)
+                    player:delKeyItem(xi.keyItem.SCRAP_OF_PAPYRUS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CERULEAN_CRYSTAL)
                     player:setMissionStatus(xi.mission.log_id.ZILART, 2)
                 end,
             },
@@ -206,7 +206,7 @@ mission.sections =
     -- Section: Mission Active, has Cerulean Crystal
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:hasKeyItem(xi.ki.CERULEAN_CRYSTAL)
+            return currentMission == mission.missionId and player:hasKeyItem(xi.keyItem.CERULEAN_CRYSTAL)
         end,
 
         [xi.zone.HALL_OF_THE_GODS] =
@@ -227,7 +227,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return player:hasCompletedMission(mission.areaId, mission.missionId) or
-                player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+                player:hasKeyItem(xi.keyItem.SCRAP_OF_PAPYRUS)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =

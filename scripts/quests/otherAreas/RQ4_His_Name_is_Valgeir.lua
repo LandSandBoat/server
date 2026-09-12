@@ -14,7 +14,7 @@ quest.reward =
     fame     = 40,
     fameArea = xi.fameArea.WINDURST,
     gil      = 2000,
-    keyItem  = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
+    keyItem  = xi.keyItem.MAP_OF_THE_TORAIMARAI_CANAL,
 }
 
 quest.sections =
@@ -49,7 +49,7 @@ quest.sections =
                 [86] = function(player, csid, option, npc)
                     if option == 80 or option == 81 then -- Accept quest option.
                         player:setCharVar('Quest[4][2]DayCompleted', 0)   -- Delete previous quest (Unending Chase) variables
-                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA) -- Give pizza to player
+                        npcUtil.giveKeyItem(player, xi.keyItem.ARAGONEU_PIZZA) -- Give pizza to player
                         quest:begin(player)
                     end
                 end,
@@ -69,7 +69,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) and -- No free ride after delivering Pizza.
+                        player:hasKeyItem(xi.keyItem.ARAGONEU_PIZZA) and -- No free ride after delivering Pizza.
                         player:getZPos() > 38.5 and -- Pos check.
                         quest:getVar(player, 'Prog') == 0 -- Hasn't taken the free ride.
                     then
@@ -81,7 +81,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) then
+                    if not player:hasKeyItem(xi.keyItem.ARAGONEU_PIZZA) then
                         return quest:progressEvent(88) -- Finish quest.
                     else
                         return quest:event(87) -- Not delivered the pizza yet.
@@ -111,7 +111,7 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) then
+                    if player:hasKeyItem(xi.keyItem.ARAGONEU_PIZZA) then
                         return quest:progressEvent(100) -- Deliver Pizza.
                     else
                         return quest:event(101) -- Pizza delivered.
@@ -122,7 +122,7 @@ quest.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ARAGONEU_PIZZA)
+                    player:delKeyItem(xi.keyItem.ARAGONEU_PIZZA)
                 end,
             },
         },

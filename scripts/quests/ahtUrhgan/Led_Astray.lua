@@ -152,7 +152,7 @@ quest.sections =
             onEventFinish =
             {
                 [813] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_BERNAHN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_BERNAHN)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },
@@ -177,7 +177,7 @@ quest.sections =
             {
                 [305] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LETTER_FROM_BERNAHN)
+                        player:delKeyItem(xi.keyItem.LETTER_FROM_BERNAHN)
                     end
                 end,
             },

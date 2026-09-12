@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.PIONEER_REG
 mission.reward =
 {
     bayld       = 1000,
-    keyItem     = xi.ki.MAP_OF_ADOULIN,
+    keyItem     = xi.keyItem.MAP_OF_ADOULIN,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.LIFE_ON_THE_FRONTIER },
 }
 
@@ -35,7 +35,7 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:addKeyItem(xi.ki.PIONEERS_BADGE)
+                        player:addKeyItem(xi.keyItem.PIONEERS_BADGE)
                     end
                 end,
             },

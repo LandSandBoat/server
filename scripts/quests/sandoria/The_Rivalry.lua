@@ -13,7 +13,7 @@ quest.reward =
     fame     = 10,
     fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.LU_SHANGS_FISHING_ROD,
-    keyItem  = xi.ki.TESTIMONIAL,
+    keyItem  = xi.keyItem.TESTIMONIAL,
     title    = xi.title.CARP_DIEM,
 }
 

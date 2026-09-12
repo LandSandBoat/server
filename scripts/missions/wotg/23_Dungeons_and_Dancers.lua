@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DUNGEONS_
 
 mission.reward =
 {
-    keyItem     = xi.ki.UMBRA_BUG,
+    keyItem     = xi.keyItem.UMBRA_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.DISTORTER_OF_TIME },
 }
 
@@ -36,7 +36,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.AROMA_BUG) and
+                        not player:hasKeyItem(xi.keyItem.AROMA_BUG) and
                         mission:getVar(player, 'Timer') <= VanadielUniqueDay()
                     then
                         -- TODO: For future Instance implementation, on instance fail,
@@ -64,7 +64,7 @@ mission.sections =
                 end,
 
                 [25] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.AROMA_BUG)
+                    npcUtil.giveKeyItem(player, xi.keyItem.AROMA_BUG)
                 end,
             },
         },

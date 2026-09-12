@@ -7,13 +7,13 @@ local ID = zones[xi.zone.NYZUL_ISLE]
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.LIGHTNING_CELL) and
+    return player:hasKeyItem(xi.keyItem.LIGHTNING_CELL) and
             (xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WAKING_THE_COLOSSUS, 'Prog') >= 3 or
             xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DIVINE_INTERFERENCE, 'Prog') >= 3)
 end
 
 instanceObject.entryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.LIGHTNING_CELL) and
+    return player:hasKeyItem(xi.keyItem.LIGHTNING_CELL) and
             (xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WAKING_THE_COLOSSUS, 'Prog') >= 3 or
             xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DIVINE_INTERFERENCE, 'Prog') >= 3)
 end
@@ -37,8 +37,8 @@ instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
-    player:delKeyItem(xi.ki.LIGHTNING_CELL)
-    player:messageSpecial(ID.text.LIGHTNING_CELL_SPARKS, xi.ki.LIGHTNING_CELL)
+    player:delKeyItem(xi.keyItem.LIGHTNING_CELL)
+    player:messageSpecial(ID.text.LIGHTNING_CELL_SPARKS, xi.keyItem.LIGHTNING_CELL)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)

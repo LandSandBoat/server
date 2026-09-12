@@ -17,15 +17,15 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_NEW_FORCE
 
 mission.reward =
 {
-    keyItem     = xi.ki.WORLD_TREE_SAPLING,
+    keyItem     = xi.keyItem.WORLD_TREE_SAPLING,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_SACRED_SAPLING },
 }
 
 local scaleKeyItems =
 {
-    xi.ki.SUNKISSED_SCALE,
-    xi.ki.MOONTOUCHED_SCALE,
-    xi.ki.STARBLESSED_SCALE,
+    xi.keyItem.SUNKISSED_SCALE,
+    xi.keyItem.MOONTOUCHED_SCALE,
+    xi.keyItem.STARBLESSED_SCALE,
 }
 
 local function getNumScales(player)
@@ -170,7 +170,7 @@ mission.sections =
             ['_7mw'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUNKISSED_SCALE) then
+                    if not player:hasKeyItem(xi.keyItem.SUNKISSED_SCALE) then
                         return mission:progressEvent(51, 274, 300, 200, 100, utils.MAX_UINT32 - 307959, 234, 582330, 8)
                     end
                 end,
@@ -179,7 +179,7 @@ mission.sections =
             ['Effigy_of_Sealing_1'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MOONTOUCHED_SCALE) then
+                    if not player:hasKeyItem(xi.keyItem.MOONTOUCHED_SCALE) then
                         return mission:progressEvent(52, 274, 300, 200, 100, 239663, 663, 250000, 0)
                     end
                 end,
@@ -188,7 +188,7 @@ mission.sections =
             ['Effigy_of_Sealing_2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.STARBLESSED_SCALE) then
+                    if not player:hasKeyItem(xi.keyItem.STARBLESSED_SCALE) then
                         return mission:progressEvent(53, 274, 300, 200, 100, 289440, 1681, 568030, 0)
                     end
                 end,
@@ -197,17 +197,17 @@ mission.sections =
             onEventFinish =
             {
                 [51] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SUNKISSED_SCALE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SUNKISSED_SCALE)
                     scaleMessage(player)
                 end,
 
                 [52] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MOONTOUCHED_SCALE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MOONTOUCHED_SCALE)
                     scaleMessage(player)
                 end,
 
                 [53] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.STARBLESSED_SCALE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STARBLESSED_SCALE)
                     scaleMessage(player)
                 end,
             },

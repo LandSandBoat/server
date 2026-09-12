@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP
 quest.reward =
 {
     item    = xi.item.TENSHODO_INVITE,
-    keyItem = xi.ki.TENSHODO_MEMBERS_CARD,
+    keyItem = xi.keyItem.TENSHODO_MEMBERS_CARD,
 }
 
 quest.sections =
@@ -71,7 +71,7 @@ quest.sections =
             ['Jabbar'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
+                    if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                         return quest:progressEvent(152)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(151)
@@ -82,7 +82,7 @@ quest.sections =
             ['Silver_Owl'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
+                    if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                         return quest:progressEvent(152, 1)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(151, 1)

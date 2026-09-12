@@ -85,7 +85,7 @@ local rewards =
 -- Set quest in starting state.
 -----------------------------------
 local startQuest = function(player)
-    npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
+    npcUtil.giveKeyItem(player, xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
     quest:setVar(player, var.PROGRESS, phase.GO_TO_MONARCH_LINN)
     player:setCharVar(var.QUEST_REWARD, 0)
     quest:begin(player)
@@ -200,7 +200,7 @@ quest.sections =
                     -- Player tried the battle and either lost or warped out.
                     if
                         questProgress == 1 and
-                        not player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
+                        not player:hasKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
                     then
                         questProgress = phase.RETURNING_IN_DEFEAT
                         quest:setVar(player, var.PROGRESS, questProgress)

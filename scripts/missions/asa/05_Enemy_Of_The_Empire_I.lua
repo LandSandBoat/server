@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_TH
 
 mission.reward =
 {
-    keyItem = xi.ki.BLACK_BOOK,
+    keyItem = xi.keyItem.BLACK_BOOK,
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_II },
 }
 
@@ -103,7 +103,7 @@ mission.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.BLACK_BOOK) then
+                    if player:hasKeyItem(xi.keyItem.BLACK_BOOK) then
                         return mission:event(240)
                     end
 

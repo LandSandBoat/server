@@ -73,9 +73,9 @@ mission.sections =
                         return mission:progressEvent(32)
                     elseif
                         missionStatus == 4 and
-                        player:hasKeyItem(xi.ki.FIGURE_OF_LEVIATHAN) and
-                        player:hasKeyItem(xi.ki.FIGURE_OF_GARUDA) and
-                        player:hasKeyItem(xi.ki.FIGURE_OF_TITAN)
+                        player:hasKeyItem(xi.keyItem.FIGURE_OF_LEVIATHAN) and
+                        player:hasKeyItem(xi.keyItem.FIGURE_OF_GARUDA) and
+                        player:hasKeyItem(xi.keyItem.FIGURE_OF_TITAN)
                     then
                         return mission:progressEvent(76)
                     end
@@ -103,9 +103,9 @@ mission.sections =
 
                 [76] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.FIGURE_OF_LEVIATHAN)
-                        player:delKeyItem(xi.ki.FIGURE_OF_GARUDA)
-                        player:delKeyItem(xi.ki.FIGURE_OF_TITAN)
+                        player:delKeyItem(xi.keyItem.FIGURE_OF_LEVIATHAN)
+                        player:delKeyItem(xi.keyItem.FIGURE_OF_GARUDA)
+                        player:delKeyItem(xi.keyItem.FIGURE_OF_TITAN)
                     end
                 end,
             },
@@ -127,7 +127,7 @@ mission.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FIGURE_OF_TITAN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FIGURE_OF_TITAN)
                     player:setMissionStatus(mission.areaId, 2)
                 end,
             },
@@ -149,7 +149,7 @@ mission.sections =
             onEventFinish =
             {
                 [12] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FIGURE_OF_GARUDA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FIGURE_OF_GARUDA)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
             },
@@ -216,7 +216,7 @@ mission.sections =
             onEventFinish =
             {
                 [904] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FIGURE_OF_LEVIATHAN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FIGURE_OF_LEVIATHAN)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
             },

@@ -22,12 +22,12 @@ mission.reward =
 
 local counterseals =
 {
-    xi.ki.AMBER_COUNTERSEAL,
-    xi.ki.AZURE_COUNTERSEAL,
-    xi.ki.CERULEAN_COUNTERSEAL,
-    xi.ki.EMERALD_COUNTERSEAL,
-    xi.ki.SCARLET_COUNTERSEAL,
-    xi.ki.VIOLET_COUNTERSEAL,
+    xi.keyItem.AMBER_COUNTERSEAL,
+    xi.keyItem.AZURE_COUNTERSEAL,
+    xi.keyItem.CERULEAN_COUNTERSEAL,
+    xi.keyItem.EMERALD_COUNTERSEAL,
+    xi.keyItem.SCARLET_COUNTERSEAL,
+    xi.keyItem.VIOLET_COUNTERSEAL,
 }
 
 mission.sections =
@@ -43,13 +43,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL) and
                         mission:getVar(player, 'Ifrit') == 0
                     then
                         mission:setVar(player, 'Ifrit', 1)
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES
                     then
                         return mission:progressEvent(2)
@@ -59,9 +59,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.SCARLET_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL)
+                        player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_SCARLET_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SCARLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -73,13 +73,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL) and
                         mission:getVar(player, 'Shiva') == 0
                     then
                         mission:setVar(player, 'Shiva', 1)
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST
                     then
                         return mission:progressEvent(2)
@@ -89,9 +89,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-                        player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.AZURE_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL)
+                        player:messageSpecial(frostID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_AZURE_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AZURE_COUNTERSEAL)
                     end,
                 }
             },
@@ -103,13 +103,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL) and
                         mission:getVar(player, 'Garuda') == 0
                     then
                         mission:setVar(player, 'Garuda', 1)
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES
                     then
                         return mission:progressEvent(2)
@@ -119,9 +119,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.EMERALD_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL)
+                        player:messageSpecial(galesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_EMERALD_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EMERALD_COUNTERSEAL)
                     end,
                 }
             },
@@ -133,13 +133,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL) and
                         mission:getVar(player, 'Ramuh') == 0
                     then
                         mission:setVar(player, 'Ramuh', 1)
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS
                     then
                         return mission:progressEvent(2)
@@ -149,9 +149,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.VIOLET_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL)
+                        player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_VIOLET_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.VIOLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -163,13 +163,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL) and
                         mission:getVar(player, 'Leviathan') == 0
                     then
                         mission:setVar(player, 'Leviathan', 1)
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES
                     then
                         return mission:progressEvent(2)
@@ -179,9 +179,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.CERULEAN_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL)
+                        player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_CERULEAN_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CERULEAN_COUNTERSEAL)
                     end,
                 }
             },
@@ -193,13 +193,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL) and
                         mission:getVar(player, 'Titan') == 0
                     then
                         mission:setVar(player, 'Titan', 1)
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS
                     then
                         return mission:progressEvent(2)
@@ -209,9 +209,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                        player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.AMBER_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL)
+                        player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_AMBER_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AMBER_COUNTERSEAL)
                     end,
                 }
             },
@@ -264,18 +264,18 @@ mission.sections =
                     -- Clean Up Remaining Key Items
                     local keyItems =
                     {
-                        xi.ki.DOMINAS_SCARLET_SEAL,
-                        xi.ki.DOMINAS_CERULEAN_SEAL,
-                        xi.ki.DOMINAS_EMERALD_SEAL,
-                        xi.ki.DOMINAS_AMBER_SEAL,
-                        xi.ki.DOMINAS_VIOLET_SEAL,
-                        xi.ki.DOMINAS_AZURE_SEAL,
-                        xi.ki.SCARLET_COUNTERSEAL,
-                        xi.ki.CERULEAN_COUNTERSEAL,
-                        xi.ki.EMERALD_COUNTERSEAL,
-                        xi.ki.AMBER_COUNTERSEAL,
-                        xi.ki.VIOLET_COUNTERSEAL,
-                        xi.ki.AZURE_COUNTERSEAL
+                        xi.keyItem.DOMINAS_SCARLET_SEAL,
+                        xi.keyItem.DOMINAS_CERULEAN_SEAL,
+                        xi.keyItem.DOMINAS_EMERALD_SEAL,
+                        xi.keyItem.DOMINAS_AMBER_SEAL,
+                        xi.keyItem.DOMINAS_VIOLET_SEAL,
+                        xi.keyItem.DOMINAS_AZURE_SEAL,
+                        xi.keyItem.SCARLET_COUNTERSEAL,
+                        xi.keyItem.CERULEAN_COUNTERSEAL,
+                        xi.keyItem.EMERALD_COUNTERSEAL,
+                        xi.keyItem.AMBER_COUNTERSEAL,
+                        xi.keyItem.VIOLET_COUNTERSEAL,
+                        xi.keyItem.AZURE_COUNTERSEAL
                     }
 
                     for _, v in pairs(keyItems) do
@@ -299,13 +299,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL) and
                         mission:getVar(player, 'Ifrit') == 0
                     then
                         mission:setVar(player, 'Ifrit', 1)
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES
                     then
                         return mission:progressEvent(2)
@@ -315,9 +315,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                        player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.SCARLET_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_SCARLET_SEAL)
+                        player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_SCARLET_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SCARLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -329,13 +329,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL) and
                         mission:getVar(player, 'Shiva') == 0
                     then
                         mission:setVar(player, 'Shiva', 1)
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST
                     then
                         return mission:progressEvent(2)
@@ -345,9 +345,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-                        player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.AZURE_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_AZURE_SEAL)
+                        player:messageSpecial(frostID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_AZURE_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AZURE_COUNTERSEAL)
                     end,
                 }
             },
@@ -359,13 +359,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL) and
                         mission:getVar(player, 'Garuda') == 0
                     then
                         mission:setVar(player, 'Garuda', 1)
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES
                     then
                         return mission:progressEvent(2)
@@ -375,9 +375,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                        player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.EMERALD_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_EMERALD_SEAL)
+                        player:messageSpecial(galesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_EMERALD_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EMERALD_COUNTERSEAL)
                     end,
                 }
             },
@@ -389,13 +389,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL) and
                         mission:getVar(player, 'Ramuh') == 0
                     then
                         mission:setVar(player, 'Ramuh', 1)
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS
                     then
                         return mission:progressEvent(2)
@@ -405,9 +405,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                        player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.VIOLET_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_VIOLET_SEAL)
+                        player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_VIOLET_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.VIOLET_COUNTERSEAL)
                     end,
                 }
             },
@@ -419,13 +419,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL) and
                         mission:getVar(player, 'Leviathan') == 0
                     then
                         mission:setVar(player, 'Leviathan', 1)
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES
                     then
                         return mission:progressEvent(2)
@@ -435,9 +435,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                        player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.CERULEAN_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_CERULEAN_SEAL)
+                        player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_CERULEAN_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CERULEAN_COUNTERSEAL)
                     end,
                 }
             },
@@ -449,13 +449,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL) and
                         mission:getVar(player, 'Titan') == 0
                     then
                         mission:setVar(player, 'Titan', 1)
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
                     elseif
-                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:hasKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL) and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS
                     then
                         return mission:progressEvent(2)
@@ -465,9 +465,9 @@ mission.sections =
                 onEventFinish =
                 {
                     [2] = function(player, csid, option, npc)
-                        player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                        player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
-                        npcUtil.giveKeyItem(player, xi.ki.AMBER_COUNTERSEAL)
+                        player:delKeyItem(xi.keyItem.DOMINAS_AMBER_SEAL)
+                        player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.keyItem.DOMINAS_AMBER_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AMBER_COUNTERSEAL)
                     end,
                 }
             },

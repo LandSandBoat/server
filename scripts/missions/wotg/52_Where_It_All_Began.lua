@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHERE_IT_
 
 mission.reward =
 {
-    keyItem     = xi.ki.WEDDING_INVITATION,
+    keyItem     = xi.keyItem.WEDDING_INVITATION,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TOKEN_OF_TROTH },
 }
 

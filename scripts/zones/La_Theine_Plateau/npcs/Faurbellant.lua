@@ -14,12 +14,12 @@ entity.onTrigger = function(player, npc)
     if gates == xi.questStatus.QUEST_COMPLETED then
         player:showText(npc, ID.text.FAURBELLANT_4)
     elseif gates == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) then
-            player:showText(npc, ID.text.FAURBELLANT_2, 0, xi.ki.SCRIPTURE_OF_WIND)
-            player:delKeyItem(xi.ki.SCRIPTURE_OF_WIND)
-            npcUtil.giveKeyItem(player, xi.ki.SCRIPTURE_OF_WATER)
+        if player:hasKeyItem(xi.keyItem.SCRIPTURE_OF_WIND) then
+            player:showText(npc, ID.text.FAURBELLANT_2, 0, xi.keyItem.SCRIPTURE_OF_WIND)
+            player:delKeyItem(xi.keyItem.SCRIPTURE_OF_WIND)
+            npcUtil.giveKeyItem(player, xi.keyItem.SCRIPTURE_OF_WATER)
         else
-            player:showText(npc, ID.text.FAURBELLANT_3, xi.ki.SCRIPTURE_OF_WATER)
+            player:showText(npc, ID.text.FAURBELLANT_3, xi.keyItem.SCRIPTURE_OF_WATER)
         end
     else
         player:showText(npc, ID.text.FAURBELLANT_1)

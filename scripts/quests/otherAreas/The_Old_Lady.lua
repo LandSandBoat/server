@@ -79,7 +79,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     -- Obtained from Rhapsodies of Vanadiel 1-4, allows player to skip the item collection.
-                    if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
+                    if player:hasKeyItem(xi.keyItem.GILGAMESHS_INTRODUCTORY_LETTER) then
                         return quest:progressEvent(137)
                     end
 

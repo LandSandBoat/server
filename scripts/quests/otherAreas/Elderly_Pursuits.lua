@@ -35,7 +35,7 @@ quest.sections =
             {
                 [517] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.ANTIQUE_AMULET)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANTIQUE_AMULET)
                 end,
             },
         },
@@ -51,7 +51,7 @@ quest.sections =
             ['Rouva'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ANTIQUE_AMULET) then
+                    if player:hasKeyItem(xi.keyItem.ANTIQUE_AMULET) then
                         return quest:progressEvent(747)
                     end
                 end,
@@ -77,13 +77,13 @@ quest.sections =
                         return quest:messageSpecial(ID.text.STENCH_OF_DECAY)
                     elseif
                         quest:getVar(player, 'Prog') == 2 and
-                        player:hasKeyItem(xi.ki.ANTIQUE_AMULET)
+                        player:hasKeyItem(xi.keyItem.ANTIQUE_AMULET)
                     then
                         quest:setVar(player, 'Prog', 3)
-                        player:delKeyItem(xi.ki.ANTIQUE_AMULET)
-                        player:addKeyItem(xi.ki.CATHEDRAL_MEDALLION)
-                        player:messageSpecial(ID.text.POLISH_MUSHROOM_SPORE, xi.ki.ANTIQUE_AMULET)
-                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CATHEDRAL_MEDALLION)
+                        player:delKeyItem(xi.keyItem.ANTIQUE_AMULET)
+                        player:addKeyItem(xi.keyItem.CATHEDRAL_MEDALLION)
+                        player:messageSpecial(ID.text.POLISH_MUSHROOM_SPORE, xi.keyItem.ANTIQUE_AMULET)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.CATHEDRAL_MEDALLION)
                     end
                 end,
             },
@@ -121,7 +121,7 @@ quest.sections =
             ['Rouva'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CATHEDRAL_MEDALLION) then
+                    if player:hasKeyItem(xi.keyItem.CATHEDRAL_MEDALLION) then
                         return quest:progressEvent(748)
                     end
                 end,
@@ -150,7 +150,7 @@ quest.sections =
             {
                 [518] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:delKeyItem(xi.ki.CATHEDRAL_MEDALLION)
+                    player:delKeyItem(xi.keyItem.CATHEDRAL_MEDALLION)
                 end,
             },
         },

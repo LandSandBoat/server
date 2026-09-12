@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
 
     for eventID, signPost in pairs(signPostPositions) do
         if isNpcInBounds(xPos, zPos, signPost) then
-            if eventID == 5 and player:hasKeyItem(xi.ki.SCROLL_OF_TREASURE) then
+            if eventID == 5 and player:hasKeyItem(xi.keyItem.SCROLL_OF_TREASURE) then
                 -- Event for 'To Cure a Cough' reward
                 player:startEvent(20)
             else
@@ -55,7 +55,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 then
-        player:delKeyItem(xi.ki.SCROLL_OF_TREASURE)
+        player:delKeyItem(xi.keyItem.SCROLL_OF_TREASURE)
         npcUtil.giveCurrency(player, 'gil', 3000)
     end
 end

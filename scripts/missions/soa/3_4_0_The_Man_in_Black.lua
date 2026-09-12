@@ -29,7 +29,7 @@ mission.sections =
             ['Masad'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CARD_JAILER_TEODOR) then
+                    if player:hasKeyItem(xi.keyItem.CARD_JAILER_TEODOR) then
                         return mission:progressEvent(153)
                     else
                         xi.soa.helpers.initGameRound(player)

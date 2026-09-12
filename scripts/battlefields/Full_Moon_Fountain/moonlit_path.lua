@@ -14,15 +14,15 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'MS_Entrance',
     exitNpc          = 'Moon_Spiral',
-    requiredKeyItems = { xi.ki.MOON_BAUBLE, keep = true },
+    requiredKeyItems = { xi.keyItem.MOON_BAUBLE, keep = true },
 
     questArea = xi.questLog.WINDURST,
     quest     = xi.quest.id.windurst.THE_MOONLIT_PATH,
 })
 
 function content:onEventFinishWin(player, csid, option, npc)
-    player:delKeyItem(xi.ki.MOON_BAUBLE)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_THE_MOON)
+    player:delKeyItem(xi.keyItem.MOON_BAUBLE)
+    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_THE_MOON)
 end
 
 content.groups =

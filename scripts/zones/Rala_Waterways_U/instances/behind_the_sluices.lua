@@ -7,12 +7,12 @@ local ID = zones[xi.zone.RALA_WATERWAYS_U]
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+    return player:hasKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK) and
         player:getMissionStatus(xi.mission.log_id.SOA) == 2
 end
 
 instanceObject.entryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) -- TODO: Past this mission
+    return player:hasKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK) -- TODO: Past this mission
 end
 
 instanceObject.onInstanceCreated = function(instance)
@@ -56,8 +56,8 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
 end
 
 instanceObject.afterInstanceRegister = function(player)
-    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.WATERWAY_FACILITY_CRANK)
-    player:delKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
+    player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.WATERWAY_FACILITY_CRANK)
+    player:delKeyItem(xi.keyItem.WATERWAY_FACILITY_CRANK)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)

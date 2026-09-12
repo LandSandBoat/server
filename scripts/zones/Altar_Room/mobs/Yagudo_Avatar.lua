@@ -17,7 +17,7 @@ entity.onMobDeath = function(mob, player, optParams)
         player:getCharVar('moral') == 5
     then
         player:setCharVar('moral', 6)
-        player:delKeyItem(xi.ki.VAULT_QUIPUS)
+        player:delKeyItem(xi.keyItem.VAULT_QUIPUS)
     end
 
     for i = ID.mob.YAGUDO_AVATAR + 1, ID.mob.YAGUDO_AVATAR + 8 do

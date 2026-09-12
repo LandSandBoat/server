@@ -17,12 +17,12 @@ local localProspectorItems =
 
     [itemType.KEYITEM] =
     {
-    --  Sel     Item                                Cost
-        [1] = { xi.ki.MAP_OF_ABYSSEA_KONSCHTAT,     3500 },
-        [2] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
-        [3] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
-        [4] = { xi.ki.IVORY_ABYSSITE_OF_EXPERTISE,  4800 },
-        [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,       300 },
+    --  Sel     Item                                     Cost
+        [1] = { xi.keyItem.MAP_OF_ABYSSEA_KONSCHTAT,     3500 },
+        [2] = { xi.keyItem.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
+        [3] = { xi.keyItem.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
+        [4] = { xi.keyItem.IVORY_ABYSSITE_OF_EXPERTISE,  4800 },
+        [5] = { xi.keyItem.CLEAR_DEMILUNE_ABYSSITE,       300 },
     },
 
     [itemType.ENHANCEMENT] = xi.abyssea.visionsCruorProspectorBuffs,

@@ -13,7 +13,7 @@ local zoneData =
     {
         statusvar = 'BMT_Lowlands_Status',
         dsvar = 'BMT_Lowlands_Digsite',
-        mapid = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        mapid = xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,
         day = xi.day.WINDSDAY,
         fetchitems =
         {
@@ -32,7 +32,7 @@ local zoneData =
     {
         statusvar = 'BMT_Uplands_Status',
         dsvar = 'BMT_Uplands_Digsite',
-        mapid = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        mapid = xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,
         day = xi.day.LIGHTNINGDAY,
         fetchitems =
         {
@@ -51,7 +51,7 @@ local zoneData =
     {
         statusvar = 'BMT_Kuzotz_Status',
         dsvar = 'BMT_Kuzotz_Digsite',
-        mapid = xi.ki.MAP_OF_THE_KUZOTZ_REGION,
+        mapid = xi.keyItem.MAP_OF_THE_KUZOTZ_REGION,
         day = xi.day.EARTHSDAY,
         fetchitems =
         {

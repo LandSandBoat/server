@@ -60,13 +60,13 @@ mission.sections =
                 [10117] = function(player, csid, option, npc)
                     if option == 1 then
                         if mission:complete(player) then
-                            npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
+                            npcUtil.giveKeyItem(player, xi.keyItem.GEOMAGNETRON)
                         end
                     elseif option == 2 then
                         -- Paid to skip ahead, handle this manually
                         mission:complete(player)
                         player:delGil(1000000)
-                        npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ADOULINIAN_CHARTER_PERMIT)
                         player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
                         player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
                     end

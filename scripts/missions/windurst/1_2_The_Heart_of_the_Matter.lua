@@ -26,22 +26,22 @@ mission.reward =
 
 local darkOrbKI =
 {
-    xi.ki.FIRST_DARK_MANA_ORB,
-    xi.ki.SECOND_DARK_MANA_ORB,
-    xi.ki.THIRD_DARK_MANA_ORB,
-    xi.ki.FOURTH_DARK_MANA_ORB,
-    xi.ki.FIFTH_DARK_MANA_ORB,
-    xi.ki.SIXTH_DARK_MANA_ORB,
+    xi.keyItem.FIRST_DARK_MANA_ORB,
+    xi.keyItem.SECOND_DARK_MANA_ORB,
+    xi.keyItem.THIRD_DARK_MANA_ORB,
+    xi.keyItem.FOURTH_DARK_MANA_ORB,
+    xi.keyItem.FIFTH_DARK_MANA_ORB,
+    xi.keyItem.SIXTH_DARK_MANA_ORB,
 }
 
 local glowingOrbKI =
 {
-    xi.ki.FIRST_GLOWING_MANA_ORB,
-    xi.ki.SECOND_GLOWING_MANA_ORB,
-    xi.ki.THIRD_GLOWING_MANA_ORB,
-    xi.ki.FOURTH_GLOWING_MANA_ORB,
-    xi.ki.FIFTH_GLOWING_MANA_ORB,
-    xi.ki.SIXTH_GLOWING_MANA_ORB,
+    xi.keyItem.FIRST_GLOWING_MANA_ORB,
+    xi.keyItem.SECOND_GLOWING_MANA_ORB,
+    xi.keyItem.THIRD_GLOWING_MANA_ORB,
+    xi.keyItem.FOURTH_GLOWING_MANA_ORB,
+    xi.keyItem.FIFTH_GLOWING_MANA_ORB,
+    xi.keyItem.SIXTH_GLOWING_MANA_ORB,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -209,12 +209,12 @@ mission.sections =
             {
                 [137] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, {
-                        xi.ki.FIRST_DARK_MANA_ORB,
-                        xi.ki.SECOND_DARK_MANA_ORB,
-                        xi.ki.THIRD_DARK_MANA_ORB,
-                        xi.ki.FOURTH_DARK_MANA_ORB,
-                        xi.ki.FIFTH_DARK_MANA_ORB,
-                        xi.ki.SIXTH_DARK_MANA_ORB
+                        xi.keyItem.FIRST_DARK_MANA_ORB,
+                        xi.keyItem.SECOND_DARK_MANA_ORB,
+                        xi.keyItem.THIRD_DARK_MANA_ORB,
+                        xi.keyItem.FOURTH_DARK_MANA_ORB,
+                        xi.keyItem.FIFTH_DARK_MANA_ORB,
+                        xi.keyItem.SIXTH_DARK_MANA_ORB
                     })
                     player:setMissionStatus(mission.areaId, 2)
                 end,
@@ -241,7 +241,7 @@ mission.sections =
             onEventFinish =
             {
                 [46] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SOUTHEASTERN_STAR_CHARM)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SOUTHEASTERN_STAR_CHARM)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
             },
@@ -344,7 +344,7 @@ mission.sections =
             ['_5e9'] =
             {
                 onTrigger = function(player, npc)
-                    player:messageSpecial(outerHorutotoRuinsID.text.STAR_CHARM_DISAPPEARS, xi.zone.OUTER_HORUTOTO_RUINS, xi.ki.SOUTHEASTERN_STAR_CHARM)
+                    player:messageSpecial(outerHorutotoRuinsID.text.STAR_CHARM_DISAPPEARS, xi.zone.OUTER_HORUTOTO_RUINS, xi.keyItem.SOUTHEASTERN_STAR_CHARM)
 
                     return mission:cutscene(44)
                 end,
@@ -353,7 +353,7 @@ mission.sections =
             onEventFinish =
             {
                 [44] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SOUTHEASTERN_STAR_CHARM)
+                    player:delKeyItem(xi.keyItem.SOUTHEASTERN_STAR_CHARM)
                     player:setMissionStatus(mission.areaId, 4)
                     player:messageSpecial(outerHorutotoRuinsID.text.ALL_G_ORBS_ENERGIZED)
                     mission:setVar(player, 'GizmoUsed', 0)

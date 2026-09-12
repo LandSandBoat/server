@@ -132,14 +132,14 @@ quest.sections =
 
                 [98] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.MOON_RING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MOON_RING)
                         quest:setVar(player, 'Prog', 7)
                     end
                 end,
 
                 [99] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.MOON_RING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MOON_RING)
                         quest:setVar(player, 'Prog', 7)
                     elseif option == 0 then
                         quest:setVar(player, 'Prog', 6)
@@ -179,8 +179,8 @@ quest.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:delKeyItem(xi.ki.STAR_RING1)
-                        player:delKeyItem(xi.ki.MOON_RING)
+                        player:delKeyItem(xi.keyItem.STAR_RING1)
+                        player:delKeyItem(xi.keyItem.MOON_RING)
                         quest:setVar(player, 'Prog', 9)
                     end
                 end,
@@ -230,7 +230,7 @@ quest.sections =
                     elseif GetSystemTime() >= purifiedTime then
                         return quest:progressEvent(2)
                     else
-                        return quest:messageSpecial(xarcabardID.text.PERENNIAL_SNOW_WAIT, xi.ki.STAR_RING1)
+                        return quest:messageSpecial(xarcabardID.text.PERENNIAL_SNOW_WAIT, xi.keyItem.STAR_RING1)
                     end
                 end,
             },

@@ -14,9 +14,9 @@ quest.reward =
 
 local keyItems =
 {
-    xi.ki.ELECTROCELL,
-    xi.ki.ELECTROPOT,
-    xi.ki.ELECTROLOCOMOTIVE,
+    xi.keyItem.ELECTROCELL,
+    xi.keyItem.ELECTROPOT,
+    xi.keyItem.ELECTROLOCOMOTIVE,
 }
 
 local function getQuestKeyItem(player)
@@ -26,7 +26,7 @@ local function getQuestKeyItem(player)
         end
     end
 
-    return xi.ki.NONE
+    return xi.keyItem.NONE
 end
 
 quest.sections =
@@ -49,7 +49,7 @@ quest.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DKHAAYAS_RESEARCH_JOURNAL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DKHAAYAS_RESEARCH_JOURNAL)
                     quest:begin(player)
                 end,
             },
@@ -105,7 +105,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.OLDUUM_RING) and
-                        getQuestKeyItem(player) == xi.ki.NONE and
+                        getQuestKeyItem(player) == xi.keyItem.NONE and
                         npcUtil.tradeMatches(trade, { { xi.item.PICKAXE, 1 } })
                     then
                         if math.randomInt(1, 100) <= 50 then
@@ -197,7 +197,7 @@ quest.sections =
                     local questKeyItem = getQuestKeyItem(player)
 
                     if
-                        questKeyItem == xi.ki.NONE or
+                        questKeyItem == xi.keyItem.NONE or
                         player:hasItem(xi.item.OLDUUM_RING) or
                         player:hasItem(xi.item.LIGHTNING_BAND) or
                         quest:getVar(player, 'Reissue') ~= 1 or
@@ -227,7 +227,7 @@ quest.sections =
                         quest:getVar(player, 'Wait') <= GetSystemTime() and
                         not player:hasItem(xi.item.OLDUUM_RING) and
                         not player:hasItem(xi.item.LIGHTNING_BAND) and
-                        getQuestKeyItem(player) == xi.ki.NONE and
+                        getQuestKeyItem(player) == xi.keyItem.NONE and
                         npcUtil.tradeMatches(trade, { { xi.item.PICKAXE, 1 } })
                     then
                         if math.randomInt(1, 100) <= 50 then

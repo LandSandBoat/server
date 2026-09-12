@@ -91,7 +91,7 @@ quest.sections =
             ['Brutus'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.GUIDING_BELL) then
+                    if not player:hasKeyItem(xi.keyItem.GUIDING_BELL) then
                         return quest:event(136)
                     else
                         return quest:progressEvent(138)
@@ -106,7 +106,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 7)
                         player:addFame(xi.fameArea.BASTOK, 7)
                         player:addFame(xi.fameArea.WINDURST, 7)
-                        player:delKeyItem(xi.ki.GUIDING_BELL)
+                        player:delKeyItem(xi.keyItem.GUIDING_BELL)
                     end
                 end,
             },

@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.PORTABLE_CONTAINER
+local keyItemId = xi.keyItem.PORTABLE_CONTAINER
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

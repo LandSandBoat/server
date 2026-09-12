@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD)
 quest.reward =
 {
     gil      = 3000,
-    keyItem  = xi.ki.JOB_GESTURE_BARD,
+    keyItem  = xi.keyItem.JOB_GESTURE_BARD,
     title    = xi.title.WANDERING_MINSTREL,
 }
 

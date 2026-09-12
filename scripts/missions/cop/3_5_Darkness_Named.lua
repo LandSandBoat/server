@@ -38,7 +38,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
+                        not player:hasKeyItem(xi.keyItem.PSOXJA_PASS) and
                         mission:getVar(player, 'Status') == 2 and
                         (
                             npcUtil.tradeMatches(trade, { { xi.item.CARMINE_CHIP, 1 } }) or
@@ -89,7 +89,7 @@ mission.sections =
                     player:tradeComplete()
 
                     player:addGil(xi.settings.main.GIL_RATE * 500) -- Silent since the gil reward is baked into the CS.
-                    npcUtil.giveKeyItem(player, xi.ki.PSOXJA_PASS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PSOXJA_PASS)
                     mission:setVar(player, 'Status', 3)
                 end,
 
@@ -123,8 +123,8 @@ mission.sections =
                 end,
 
                 [82] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MYSTERIOUS_AMULET)
-                    player:messageSpecial(upperJeunoID.text.LEND_PRISHE_AMULET, xi.ki.MYSTERIOUS_AMULET)
+                    player:delKeyItem(xi.keyItem.MYSTERIOUS_AMULET)
+                    player:messageSpecial(upperJeunoID.text.LEND_PRISHE_AMULET, xi.keyItem.MYSTERIOUS_AMULET)
                     mission:setVar(player, 'Status', 1)
                 end,
             },

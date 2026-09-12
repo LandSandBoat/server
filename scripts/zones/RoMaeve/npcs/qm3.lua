@@ -9,7 +9,7 @@ local ID = zones[xi.zone.ROMAEVE]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.MOONGATE_PASS) then
+    if player:hasKeyItem(xi.keyItem.MOONGATE_PASS) then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     else
         local moongateQMLocations =
@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
             {  151.779,  4.719,  68.553 },
             { -134.518,  4.000, 106.042 },
         }
-        npcUtil.giveKeyItem(player, xi.ki.MOONGATE_PASS)
+        npcUtil.giveKeyItem(player, xi.keyItem.MOONGATE_PASS)
         npc:hideNPC(1800)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), moongateQMLocations, true)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)

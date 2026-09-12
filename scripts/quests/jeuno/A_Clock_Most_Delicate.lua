@@ -82,7 +82,7 @@ quest.sections =
             ['_6s2'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CLOCK_TOWER_OIL) then
+                    if player:hasKeyItem(xi.keyItem.CLOCK_TOWER_OIL) then
                         return quest:progressEvent(202)
                     else
                         return quest:event(117)
@@ -97,7 +97,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 17)
                         player:addFame(xi.fameArea.BASTOK, 17)
                         player:addFame(xi.fameArea.WINDURST, 17)
-                        player:delKeyItem(xi.ki.CLOCK_TOWER_OIL)
+                        player:delKeyItem(xi.keyItem.CLOCK_TOWER_OIL)
                     end
                 end,
             },
