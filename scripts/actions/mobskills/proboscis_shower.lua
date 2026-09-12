@@ -1,7 +1,7 @@
 -----------------------------------
 -- Proboscis Shower
--- Description: Restores HP.
--- Copied from Healing Breeze: needs retail calculations
+-- Family: Marid
+-- Description: Restores 15%~ HP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,17 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local potency = skill:getParam()
+    local params = {}
 
-    if potency == 0 then
-        potency = 13
-    end
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP = -- TODO: Does TP scale?
+    {
+        { tp = 1000, modifier = 153 / 1024 },
+        { tp = 2000, modifier = 153 / 1024 },
+        { tp = 3000, modifier = 153 / 1024 },
+    }
 
-    potency = potency - math.randomInt(0, potency / 4)
-
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
-
-    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

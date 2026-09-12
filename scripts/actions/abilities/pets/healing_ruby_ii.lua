@@ -1,5 +1,6 @@
 -----------------------------------
 -- Healing Ruby II
+-- Family: Avatar (Carbuncle)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,17 +10,28 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local base = 28 + pet:getMainLvl() * 4
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    if target:getHP() + base > target:getMaxHP() then
-        base = target:getMaxHP() - target:getHP() --cap it
-    end
+    -- https://wiki.ffo.jp/html/4080.html
+    -- TODO: Capture retail TP scaling
+    -- Level 82 - 302 Summoning Skill - IceDay - 0 TP: 733 Healed
+    -- TP: 1042 - 843 Healed
+    -- TP 2000~ - 964
+    -- TP 2900~ - 1072
 
-    petskill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    target:addHP(base)
-    return base
+    local params = {}
+
+    params.primaryMessage = xi.msg.basic.JA_RECOVERS_HP_2
+    params.baseHeal       = pet:getMainLvl() * 4
+    params.additiveHeal   = 30
+    params.fTP =
+    {
+        { tp = 0,    modifier = 256 / 256 },
+        { tp = 1500, modifier = 299 / 256 }, -- TODO: Unconfirmed for 75 era.
+        { tp = 3000, modifier = 342 / 256 },
+    }
+
+    return xi.mobskills.mobHealMove(pet, target, petskill, action, params)
 end
 
 return abilityObject

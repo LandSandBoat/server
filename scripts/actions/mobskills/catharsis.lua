@@ -10,8 +10,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
-    return xi.mobskills.mobHealMove(mob, math.floor(mob:getMaxHP() * 0.125))
+    local params = {}
+
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        -- TODO: Does it scale with TP?
+        { tp = 1000, modifier = 0.125 },
+        { tp = 2000, modifier = 0.125 },
+        { tp = 3000, modifier = 0.125 },
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

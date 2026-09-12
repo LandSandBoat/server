@@ -1,5 +1,6 @@
 -----------------------------------
 -- Restoral
+-- Family: Gears
 -- Description: Restores HP.
 -----------------------------------
 ---@type TMobSkill
@@ -10,19 +11,33 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = math.randomInt(900, 1400) -- TODO: Capture power/fTP
+    params.fTP =
+    {
+        { tp = 1000, modifier = 1.00 },
+        { tp = 2000, modifier = 1.00 },
+        { tp = 3000, modifier = 1.00 },
+    }
+
+    if mob:getPool() == xi.mobPool.ARMED_GEARS then
+        params.fTP =
+        {
+            { tp = 1000, modifier = 2.50 },
+            { tp = 2000, modifier = 2.50 },
+            { tp = 3000, modifier = 2.50 },
+        }
+    end
+
     --[[
     The only calculations available on the net are for the players blue magic version,
     which does not seem to fit with retail in game observations on the mobskill version..
     So math.randomFloat(0, 1) for now!
     ]]
-    local heal = math.randomInt(900, 1400)
-    if mob:getPool() == xi.mobPool.ARMED_GEARS then
-        heal = heal * 2.5
-    end
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
-
-    return xi.mobskills.mobHealMove(mob, heal)
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject
