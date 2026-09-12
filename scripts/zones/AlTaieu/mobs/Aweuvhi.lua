@@ -10,6 +10,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
+
+    -- Permanently bloomed but non-aggressive, unlike the rest of the family https://wiki.ffo.jp/html/14496.html
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
