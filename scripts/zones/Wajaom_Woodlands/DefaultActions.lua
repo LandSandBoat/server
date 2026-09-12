@@ -6,5 +6,6 @@ return {
     ['Leypoint']               = { messageSpecial = ID.text.LEYPOINT },
     ['Mythralline_Wellspring'] = { messageSpecial = ID.text.WELLSPRING },
     ['Pephredo_Hive']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['qm7']                    = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Warhorse_Hoofprint']     = { messageSpecial = ID.text.WARHORSE_HOOFPRINT },
 }
