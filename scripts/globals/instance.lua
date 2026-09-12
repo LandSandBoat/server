@@ -511,8 +511,11 @@ xi.instance.onEventFinish = function(player, csid, option, npc, instanceInfo)
         local csidEntry, optionEntry = unpack(instanceInfo)
 
         if csid == csidEntry and option == optionEntry then
+            local playerZone = player:getZoneID()
             for _, v in ipairs(player:getParty()) do
-                v:setPos(0, 0, 0, 0, instance:getZone():getID())
+                if v:getZoneID() == playerZone then
+                    v:setPos(0, 0, 0, 0, instance:getZone():getID())
+                end
             end
 
             return true
