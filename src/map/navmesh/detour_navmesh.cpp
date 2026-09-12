@@ -62,7 +62,8 @@ constexpr size_t kMaxNavPolys = 2048;
 constexpr size_t kPathPolyLimit = 512;
 
 // From docs: The maximum number of polygons the visited array can hold.
-constexpr size_t kMaxQueryPolys = 16;
+// moveAlongSurface stops when this fills and still reports success
+constexpr size_t kMaxQueryPolys = 256;
 
 // Detour search extents, used to snap a query point onto the nearest poly.
 constexpr float smallPolyPickExt[3] = { 0.5f, 1.0f, 0.5f };
@@ -523,6 +524,12 @@ auto DetourNavMesh::moveAlongSurface(const position_t& start, const position_t& 
     if (dtStatusFailed(status))
     {
         return false;
+    }
+
+    // detour hands back the start height; take the height of the poly the walk ended on
+    if (visitedCount > 0)
+    {
+        navMeshQuery_.getPolyHeight(visited[visitedCount - 1], out, &out[1]);
     }
 
     result = fromDetour(out);

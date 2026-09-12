@@ -308,7 +308,7 @@ templates:
 
   Ascended_Lucani:
     id:            5566
-    species:       ladybug
+    species:       lucani
     type:          [notorious]
     skill_list_id: 170
     attributes:
@@ -397,7 +397,7 @@ templates:
 
   Ascended_Mosquito:
     id:            5562
-    species:       yellow_bee
+    species:       mosquito
     type:          [notorious]
     skill_list_id: 48
     attributes:
@@ -490,7 +490,7 @@ templates:
 
   Ascended_Porxie:
     id:            5567
-    species:       pixie
+    species:       porxie
     type:          [notorious]
     skill_list_id: 195
     attributes:
@@ -766,7 +766,7 @@ templates:
 
   Devouring_Mosquito:
     id:            5369
-    species:       yellow_bee
+    species:       mosquito
     skill_list_id: 48
     attributes:
       combat:
@@ -882,7 +882,7 @@ templates:
 
   Heavenly_Veela:
     id:            5578
-    species:       pixie
+    species:       veela
     type:          [notorious]
     skill_list_id: 195
     attributes:
@@ -1052,7 +1052,7 @@ templates:
 
   Lucani:
     id:            5386
-    species:       ladybug
+    species:       lucani
     skill_list_id: 170
     attributes:
       combat:
@@ -1337,7 +1337,7 @@ templates:
 
   Porxie:
     id:            5379
-    species:       pixie
+    species:       porxie
     skill_list_id: 195
     attributes:
       combat:
@@ -1911,7 +1911,7 @@ templates:
 
   Wanton_Danaid:
     id:            5388
-    species:       pixie
+    species:       danaid
     spell_list_id: 20
     skill_list_id: 195
     attributes:

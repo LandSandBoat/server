@@ -43,9 +43,9 @@ public:
     // Path from `start` to `end`, falling back to the nearest on-mesh point at either end, or nullopt when no path exists.
     auto findPath(const position_t& start, const position_t& end) const -> Maybe<PathResult>;
 
-    // Pick 1..maxTurns roam destinations within `maxRadius`, or nullopt on hard navmesh failure.
+    // Pick minTurns..maxTurns roam destinations within `maxRadius`, or nullopt on hard navmesh failure.
     // With a region, destinations are sampled from it instead of the disc around `start`.
-    auto findRoamTurnPoints(const position_t& start, float maxRadius, uint8 maxTurns, const RoamRegion* region) const -> Maybe<std::vector<position_t>>;
+    auto findRoamTurnPoints(const position_t& start, float maxRadius, uint8 minTurns, uint8 maxTurns, const RoamRegion* region) const -> Maybe<std::vector<position_t>>;
 
 private:
     NavMesh& navMesh_;

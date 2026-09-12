@@ -47,7 +47,7 @@ templates:
 
   Aerns_Wynav:
     id:            56
-    species:       blue_wyvern
+    species:       wynav
     type:          [called]
     skill_list_id: 714
     attributes:
