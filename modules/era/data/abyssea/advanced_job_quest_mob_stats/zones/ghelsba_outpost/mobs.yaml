@@ -1,0 +1,12 @@
+# DRG quest mob before the May 10, 2011 version update.
+# Source: https://forum.square-enix.com/ffxi/threads/7257
+
+templates:
+  Cyranuce_M_Cutauleon:
+    attributes:
+      stats:
+        hp: 2700
+
+spawns:
+  17350928:
+    level: [32, 32]

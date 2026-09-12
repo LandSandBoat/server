@@ -1,0 +1,39 @@
+# Drops removed from mob loot after the Abyssea era: the Sky NM stone drops (December 7, 2010) and later targeted removals.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(12/06/2010)
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/23/2012)
+
+templates:
+
+  Faust:
+    loot: # summerstone removed
+      drops:
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   tonbo-giri
+
+  Mother_Globe:
+    loot: # springstone removed
+      drops:
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   shiranui
+
+  Olla_Grande:
+    loot: # winterstone removed
+      drops:
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   skofnung
+        - chance: rare
+          item:   freyas_tear
+
+  Ullikummi:
+    loot: # autumnstone removed
+      drops:
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   ulfhedinn_axe
