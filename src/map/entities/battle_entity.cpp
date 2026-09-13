@@ -2231,9 +2231,9 @@ void CBattleEntity::delTrait(CTrait* PTrait)
     std::erase(TraitList, PTrait);
 }
 
-auto CBattleEntity::hasTrait(uint16 traitID) -> bool
+auto CBattleEntity::hasTrait(const xi::Trait trait) -> bool
 {
-    return std::ranges::contains(TraitList, traitID, &CTrait::getID);
+    return std::ranges::contains(TraitList, trait, &CTrait::getID);
 }
 
 auto CBattleEntity::ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool
@@ -3302,7 +3302,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if (isChar)
         {
             uint16 recycleChance = getMod(xi::Mod::RECYCLE);
-            if (charutils::hasTrait(PChar, TRAIT_RECYCLE))
+            if (charutils::hasTrait(PChar, xi::Trait::Recycle))
             {
                 recycleChance += PChar->PMeritPoints->GetMeritValue(xi::Merit::Recycle, PChar);
             }

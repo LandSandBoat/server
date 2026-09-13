@@ -151,7 +151,7 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     if (changingSubJob && !subJobMatchesMain)
     {
         const auto* PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
-        if (PSubWeapon && PSubWeapon->getSkillType() != xi::SkillType::None && !PChar->hasTrait(TRAIT_DUAL_WIELD))
+        if (PSubWeapon && PSubWeapon->getSkillType() != xi::SkillType::None && !PChar->hasTrait(xi::Trait::DualWield))
         {
             charutils::UnequipItem(PChar, SLOT_SUB);
             luautils::CheckForGearSet(PChar);

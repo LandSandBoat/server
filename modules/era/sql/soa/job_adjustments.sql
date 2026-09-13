@@ -12,14 +12,6 @@
 UPDATE abilities SET recastTime = 900 WHERE name = 'mug';
 
 ------------------------------------
--- Dark Knight
--- Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
-------------------------------------
-
--- Desperate Blows: Revert job trait to be merit unlocked
-UPDATE traits SET meritid = 2502, level = 75, value = 0 WHERE name = 'desperate blows';
-
-------------------------------------
 -- Beastmaster
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
 ------------------------------------
@@ -38,9 +30,6 @@ UPDATE abilities SET recastTime = 60 WHERE name = 'ready';
 -- Scavenge: Revert recast from 3 to 5 minutes
 UPDATE abilities SET recastTime = 300 WHERE name = 'scavenge';
 
--- Recycle: Revert job trait to be merit unlocked
-UPDATE traits SET meritid = 2694, level = 75 WHERE name = 'recycle';
-
 -----------------------------------
 -- Ninja
 -- Source: https://forum.square-enix.com/ffxi/threads/44592-Oct-7-2014-%28JST%29-Version-Update
@@ -53,9 +42,6 @@ UPDATE abilities SET recastTime = 900 WHERE name = 'sange';
 -- Dragoon
 -- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
 ------------------------------------
-
--- Strafe: Revert from level based trait to merit unlocked at 75
-UPDATE traits SET meritid = 2886, level = 75, value = 0 WHERE name = 'strafe';
 
 -- Wyvern Breath: Revert activation time from 1 second to 3 seconds
 -- TODO: Revert skill prepare animation to display skill ready spikes

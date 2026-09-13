@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/trait.h"
 #include "modifier.h"
 
 #include <sol/forward.hpp>
@@ -42,7 +43,7 @@ public:
 
     friend auto operator<<(std::ostream& out, const CLuaTrait& trait) -> std::ostream&;
 
-    auto getID() const -> uint16;
+    auto getID() const -> xi::Trait;
     auto getJob() const -> uint8;
     auto getLevel() const -> uint8;
     auto getMod() const -> xi::Mod;

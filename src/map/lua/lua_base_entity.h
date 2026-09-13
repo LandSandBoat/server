@@ -34,6 +34,7 @@
 #include "data/enums/roam_flag.h"
 #include "data/enums/terrain_type.h"
 #include "data/enums/title.h"
+#include "data/enums/trait.h"
 #include "data/enums/zone_misc.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
@@ -906,7 +907,7 @@ public:
 
     void instantiateMob(uint32 groupID);
 
-    auto hasTrait(uint16 traitID) -> bool;
+    auto hasTrait(xi::Trait trait) -> bool;
     auto hasImmunity(xi::Immunity immunityID) -> bool; // Check if the mob has immunity for a type of spell (immunity list in mobentity.h)
     void addImmunity(xi::Immunity immunityID);
     void delImmunity(xi::Immunity immunityID);

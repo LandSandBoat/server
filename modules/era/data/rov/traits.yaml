@@ -1,0 +1,11 @@
+# Job traits as they were before the RoV updates.
+
+traits:
+  # Max HP Boost ranks 2 to 4 came at 35, 55 and 70.
+  # https://forum.square-enix.com/ffxi/threads/55997
+  max_hp_boost:
+    jobs:
+      mnk:
+        2: {level: 35}
+        3: {level: 55}
+        4: {level: 70}

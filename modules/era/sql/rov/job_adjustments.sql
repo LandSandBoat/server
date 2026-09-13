@@ -20,11 +20,6 @@ UPDATE abilities SET recastTime = 300 WHERE name = 'dodge';
 -- Chakra: Revert recast from 3 to 5 minutes
 UPDATE abilities SET recastTime = 300 WHERE name = 'chakra';
 
--- Max HP Boost: Revert trait levels to 35/55/70
-UPDATE traits SET level = 35 WHERE name = 'max hp boost' AND job = 2 AND rank = 2;
-UPDATE traits SET level = 55 WHERE name = 'max hp boost' AND job = 2 AND rank = 3;
-UPDATE traits SET level = 70 WHERE name = 'max hp boost' AND job = 2 AND rank = 4;
-
 ------------------------------------
 -- Paladin
 ------------------------------------

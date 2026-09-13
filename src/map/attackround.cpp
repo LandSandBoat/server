@@ -280,19 +280,19 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     if (isPC)
     {
         // Merit chance only applies if player has the job trait
-        if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
+        if (charutils::hasTrait(PChar, xi::Trait::TripleAttack))
         {
             tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, PChar);
         }
 
         // Ambush Augment adds +1% Triple Attack per merit (need to satisfy conditions for Ambush)
-        if (charutils::hasTrait(PChar, TRAIT_AMBUSH) && PChar->getMod(xi::Mod::AUGMENTS_AMBUSH) > 0 &&
+        if (charutils::hasTrait(PChar, xi::Trait::Ambush) && PChar->getMod(xi::Mod::AUGMENTS_AMBUSH) > 0 &&
             abs(m_defender->loc.p.rotation - m_attacker->loc.p.rotation) < 23)
         {
             tripleAttack += PChar->PMeritPoints->GetMerit(xi::Merit::Ambush)->count;
         }
 
-        if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
+        if (charutils::hasTrait(PChar, xi::Trait::DoubleAttack))
         {
             doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, PChar);
         }

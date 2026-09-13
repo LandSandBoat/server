@@ -2238,7 +2238,7 @@ auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Contain
                             CItemWeapon* PNewItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
                             bool         isWeapon       = PItem->isType(ITEM_WEAPON);
 
-                            if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || (PNewItemWeapon && PNewItemWeapon->getSkillType() == xi::SkillType::None)))
+                            if (isWeapon && (!charutils::hasTrait(PChar, xi::Trait::DualWield) || (PNewItemWeapon && PNewItemWeapon->getSkillType() == xi::SkillType::None)))
                             {
                                 return false;
                             }
@@ -3060,7 +3060,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Containe
         if (PItemWeapon && PItemWeapon->getSkillType() != xi::SkillType::None)
         {
             // Don't attempt to equip item in equip menu if you don't have dual wield trait (client sees BLU, THF, DNC, NIN, /DNC or /NIN etc as able to equip sub weapons even if sub is too low or no trait on BLU)
-            if (!PChar->hasTrait(TRAIT_DUAL_WIELD))
+            if (!PChar->hasTrait(xi::Trait::DualWield))
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PItemWeapon->getID(), 0, xi::MsgBasic::NeedDualWield);
                 return;
@@ -3218,7 +3218,7 @@ void CheckValidEquipment(CCharEntity* PChar, bool isDelevel /* = false */)
         if (slotID == SLOT_SUB && !PItem->IsShield())
         {
             // Unequip if no main weapon or a non-grip subslot without DW
-            if (!PChar->getEquip(SLOT_MAIN) || (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) && !(static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::None)))
+            if (!PChar->getEquip(SLOT_MAIN) || (!charutils::hasTrait(PChar, xi::Trait::DualWield) && !(static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::None)))
             {
                 UnequipItem(PChar, SLOT_SUB, Recalculate::Yes, isDelevel);
                 continue;
@@ -4301,19 +4301,19 @@ auto canUseWeaponSkill(CCharEntity* PChar, uint16 wsid) -> bool
  *                                                                       *
  ************************************************************************/
 
-auto hasTrait(CCharEntity* PChar, uint16 TraitID) -> int32
+auto hasTrait(CCharEntity* PChar, const xi::Trait trait) -> int32
 {
-    return hasBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
+    return hasBit(std::to_underlying(trait), PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
-auto addTrait(CCharEntity* PChar, uint16 TraitID) -> int32
+auto addTrait(CCharEntity* PChar, const xi::Trait trait) -> int32
 {
-    return addBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
+    return addBit(std::to_underlying(trait), PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
-auto delTrait(CCharEntity* PChar, uint16 TraitID) -> int32
+auto delTrait(CCharEntity* PChar, const xi::Trait trait) -> int32
 {
-    return delBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
+    return delBit(std::to_underlying(trait), PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
 /************************************************************************

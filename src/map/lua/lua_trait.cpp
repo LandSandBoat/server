@@ -33,7 +33,7 @@ CLuaTrait::CLuaTrait(CTrait* PTrait)
     }
 }
 
-auto CLuaTrait::getID() const -> uint16
+auto CLuaTrait::getID() const -> xi::Trait
 {
     return trait_->getID();
 }
@@ -84,7 +84,7 @@ void CLuaTrait::Register()
 
 auto operator<<(std::ostream& os, const CLuaTrait& trait) -> std::ostream&
 {
-    const std::string id = trait.trait_ ? std::to_string(trait.trait_->getID()) : "nullptr";
+    const std::string id = trait.trait_ ? std::to_string(std::to_underlying(trait.trait_->getID())) : "nullptr";
     return os << "CLuaTrait(" << id << ")";
 }
 

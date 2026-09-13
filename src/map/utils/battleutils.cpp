@@ -1208,7 +1208,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 isFirstSwing &&
                 PDefender->objtype == TYPE_MOB &&
                 PChar->GetMJob() == xi::Job::THF &&
-                PChar->hasTrait(TRAITTYPE::TRAIT_TREASURE_HUNTER)) // TH trait as a requirement is assumed, but likely. Could this just be a level 15 check instead?
+                PChar->hasTrait(xi::Trait::TreasureHunter)) // TH trait as a requirement is assumed, but likely. Could this just be a level 15 check instead?
             {
                 auto PMob = dynamic_cast<CMobEntity*>(PDefender);
                 if (PMob && PMob->m_THLvl < (12 + PChar->getMod(xi::Mod::TREASURE_HUNTER_CAP))) // TH proc cap is 12 + job gifts
@@ -2236,7 +2236,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
         }
 
         // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-        if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender); (!isRanged) && !((isBlocked) && (PChar) && (charutils::hasTrait(PChar, TRAIT_SHIELD_MASTERY))))
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender); (!isRanged) && !((isBlocked) && (PChar) && (charutils::hasTrait(PChar, xi::Trait::ShieldMastery))))
         {
             PDefender->TryHitInterrupt(PAttacker);
         }
@@ -2487,7 +2487,7 @@ auto GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 atta
     bool hasSneakAttack      = PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack);
     bool hasTrickAttack      = PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack);
     bool isBehind            = behind(PAttacker->loc.p, PDefender->loc.p, 64);
-    bool hasAssassin         = PAttacker->hasTrait(TRAIT_ASSASSIN);
+    bool hasAssassin         = PAttacker->hasTrait(xi::Trait::Assassin);
     bool hasValidSneakAttack = hasSneakAttack && isBehind;
     bool hasValidTrickAttack = hasTrickAttack && hasAssassin;
 
@@ -2542,7 +2542,7 @@ auto GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ign
             critHitRate = 100;
         }
     }
-    else if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker); PChar && PAttacker->GetMJob() == xi::Job::THF && charutils::hasTrait(PChar, TRAIT_ASSASSIN) &&
+    else if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker); PChar && PAttacker->GetMJob() == xi::Job::THF && charutils::hasTrait(PChar, xi::Trait::Assassin) &&
                                                                   (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
     {
         CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
@@ -3034,11 +3034,11 @@ auto CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon) -> uint8
     if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
         // merit chance only applies if player has the job trait
-        if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
+        if (charutils::hasTrait(PChar, xi::Trait::TripleAttack))
         {
             tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, PChar);
         }
-        if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
+        if (charutils::hasTrait(PChar, xi::Trait::DoubleAttack))
         {
             doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, PChar);
         }
@@ -3727,7 +3727,7 @@ auto HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool) -> b
         {
             uint16 meritBonus = 0;
 
-            if (charutils::hasTrait(PChar, TRAIT_NINJA_TOOL_EXPERT))
+            if (charutils::hasTrait(PChar, xi::Trait::NinjaToolExpertise))
             {
                 meritBonus = PChar->PMeritPoints->GetMeritValue(xi::Merit::NinjaToolExpertise, PChar);
             }
@@ -4643,7 +4643,7 @@ void HandleTacticalParry(CBattleEntity* PEntity)
 {
     if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        if (charutils::hasTrait(PChar, TRAIT_TACTICAL_PARRY))
+        if (charutils::hasTrait(PChar, xi::Trait::TacticalParry))
         {
             int16 tpBonus = PChar->getMod(xi::Mod::TACTICAL_PARRY);
             PChar->addTP(tpBonus);
@@ -4655,7 +4655,7 @@ void HandleTacticalGuard(CBattleEntity* PEntity)
 {
     if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        if (charutils::hasTrait(PChar, TRAIT_TACTICAL_GUARD))
+        if (charutils::hasTrait(PChar, xi::Trait::TacticalGuard))
         {
             int16 tpBonus = PChar->getMod(xi::Mod::TACTICAL_GUARD);
             PChar->addTP(tpBonus);
@@ -4667,7 +4667,7 @@ auto HandleTranquilHeart(CBattleEntity* PEntity) -> float
 {
     float reductionPercent = 0.0f;
 
-    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar && charutils::hasTrait(PChar, TRAIT_TRANQUIL_HEART))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar && charutils::hasTrait(PChar, xi::Trait::TranquilHeart))
     {
         int16 healingSkill = PEntity->GetSkill(xi::SkillType::HealingMagic);
         reductionPercent   = ((healingSkill / 10.0f) * 0.5f);
@@ -5301,7 +5301,7 @@ auto GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay) -> int16
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(battleEntity))
     {
-        if (charutils::hasTrait(PChar, TRAIT_SNAPSHOT))
+        if (charutils::hasTrait(PChar, xi::Trait::Snapshot))
         {
             SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(xi::Merit::Snapshot, PChar);
         }

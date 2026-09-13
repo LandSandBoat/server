@@ -192,9 +192,9 @@ auto hasPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // same as Ab
 auto addPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32;
 auto delPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32;
 
-auto hasTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // check if pchar has trait by traitid and jobid
-auto addTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // add trait by traitid and jobid
-auto delTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // delete trait by traitid and jobid
+auto hasTrait(CCharEntity* PChar, xi::Trait trait) -> int32;
+auto addTrait(CCharEntity* PChar, xi::Trait trait) -> int32;
+auto delTrait(CCharEntity* PChar, xi::Trait trait) -> int32;
 
 auto addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32; // declaration of function to add weapon skill
 auto hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32; // declaration of function to check for weapon skill
