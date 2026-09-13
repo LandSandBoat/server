@@ -78,7 +78,11 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
             if (const auto closestEnd = navMesh_.findClosestValidPoint(end))
             {
                 const float closestGap = distance(*closestEnd, end);
-                if (closestGap < lastWaypointGap - 0.1f)
+
+                // the closest point can be on a separate piece of mesh, only append it if we can walk there
+                position_t reached;
+                const bool connected = navMesh_.moveAlongSurface(result->points.back().position, *closestEnd, reached) && distance(reached, *closestEnd) < 0.5f;
+                if (closestGap < lastWaypointGap - 0.1f && connected)
                 {
                     result->points.emplace_back(pathpoint_t{ *closestEnd, 0s, false });
                 }
