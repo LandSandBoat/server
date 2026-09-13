@@ -1206,6 +1206,7 @@ spawns:
   17547267:
     template: Vanguard_Pitfighter
     at:       [39.016, 9.000, -50.076, 0]
+    region:   null
     level:    [75, 77]
 
   17547268:
@@ -1281,6 +1282,7 @@ spawns:
   17547282:
     template: Goblin_Replica
     at:       [0.019, 9.000, -38.635, 192]
+    region:   null
     level:    [65, 65]
 
   17547283:
@@ -1301,6 +1303,7 @@ spawns:
   17547286:
     template: Vanguard_Dragontamer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547287:
@@ -1311,6 +1314,7 @@ spawns:
   17547288:
     template: Goblin_Replica
     at:       [4.031, 9.000, -65.028, 192]
+    region:   null
     level:    [65, 65]
 
   17547289:
@@ -1351,6 +1355,7 @@ spawns:
   17547296:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547297:
@@ -1361,6 +1366,7 @@ spawns:
   17547298:
     template: Gabblox_Magpietongue
     at:       [18.940, 9.000, -35.992, 128]
+    region:   null
     level:    [80, 80]
 
   17547299:
@@ -1371,6 +1377,7 @@ spawns:
   17547300:
     template: Vanguard_Necromancer
     at:       [18.971, 9.000, -37.967, 128]
+    region:   null
     level:    [75, 77]
 
   17547301:
@@ -1416,11 +1423,13 @@ spawns:
   17547309:
     template: Goblin_Replica
     at:       [46.906, 7.500, -44.561, 64]
+    region:   null
     level:    [65, 65]
 
   17547310:
     template: Goblin_Replica
     at:       [52.503, 7.500, -44.614, 64]
+    region:   null
     level:    [65, 65]
 
   17547311:
@@ -1441,6 +1450,7 @@ spawns:
   17547314:
     template: Goblin_Replica
     at:       [21.137, 9.000, -53.949, 0]
+    region:   null
     level:    [65, 65]
 
   17547315:
@@ -1451,16 +1461,19 @@ spawns:
   17547316:
     template: Vanguard_Ambusher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547317:
     template: Goblin_Replica
     at:       [5.975, 9.000, -43.983, 0]
+    region:   null
     level:    [65, 65]
 
   17547318:
     template: Smeltix_Thickhide
     at:       [8.048, 9.000, -43.939, 0]
+    region:   null
     level:    [80, 80]
 
   17547319:
@@ -1471,21 +1484,25 @@ spawns:
   17547320:
     template: Vanguard_Pathfinder
     at:       [8.029, 9.000, -41.053, 0]
+    region:   null
     level:    [75, 77]
 
   17547321:
     template: Vanguards_Slime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547322:
     template: Goblin_Replica
     at:       [-0.021, 9.000, -49.958, 64]
+    region:   null
     level:    [65, 65]
 
   17547323:
     template: Wasabix_Callusdigit
     at:       [-0.008, 9.000, -51.901, 64]
+    region:   null
     level:    [80, 80]
 
   17547324:
@@ -1496,6 +1513,7 @@ spawns:
   17547325:
     template: Vanguard_Necromancer
     at:       [3.025, 9.000, -51.908, 64]
+    region:   null
     level:    [75, 77]
 
   17547326:
@@ -1506,6 +1524,7 @@ spawns:
   17547327:
     template: Goblin_Replica
     at:       [-5.897, 9.000, -43.917, 128]
+    region:   null
     level:    [65, 65]
 
   17547328:
@@ -1516,11 +1535,13 @@ spawns:
   17547329:
     template: Vanguard_Shaman
     at:       [-7.946, 9.000, -40.965, 128]
+    region:   null
     level:    [75, 77]
 
   17547330:
     template: Vanguard_Dragontamer
     at:       [-7.986, 9.000, -47.008, 128]
+    region:   null
     level:    [75, 77]
 
   17547331:
@@ -1531,6 +1552,7 @@ spawns:
   17547332:
     template: Goblin_Replica
     at:       [1.988, 9.000, -38.689, 192]
+    region:   null
     level:    [65, 65]
 
   17547333:
@@ -1541,6 +1563,7 @@ spawns:
   17547334:
     template: Vanguard_Maestro
     at:       [0.966, 9.000, -35.952, 192]
+    region:   null
     level:    [75, 77]
 
   17547335:
@@ -1566,6 +1589,7 @@ spawns:
   17547339:
     template: Goblin_Replica
     at:       [-2.062, 9.000, -34.057, 192]
+    region:   null
     level:    [65, 65]
 
   17547340:
@@ -1576,11 +1600,13 @@ spawns:
   17547341:
     template: Vanguard_Tinkerer
     at:       [4.000, 9.000, -57.976, 192]
+    region:   null
     level:    [75, 77]
 
   17547342:
     template: Goblin_Replica
     at:       [-19.931, 9.001, -50.028, 0]
+    region:   null
     level:    [65, 65]
 
   17547343:
@@ -1601,16 +1627,19 @@ spawns:
   17547346:
     template: Goblin_Replica
     at:       [49.051, 0.000, -17.590, 64]
+    region:   null
     level:    [65, 65]
 
   17547347:
     template: Vanguard_Armorer
     at:       [49.024, 0.000, -22.959, 64]
+    region:   null
     level:    [75, 77]
 
   17547348:
     template: Vanguard_Tinkerer
     at:       [47.037, 0.000, -22.968, 64]
+    region:   null
     level:    [75, 77]
 
   17547349:
@@ -1621,21 +1650,25 @@ spawns:
   17547350:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547351:
     template: Goblin_Replica
     at:       [42.000, 0.000, -20.973, 128]
+    region:   null
     level:    [65, 65]
 
   17547352:
     template: Goblin_Replica
     at:       [41.104, 0.004, -27.091, 194]
+    region:   null
     level:    [65, 65]
 
   17547353:
     template: Vanguard_Welldigger
     at:       [40.997, 0.001, -25.028, 194]
+    region:   null
     level:    [75, 77]
 
   17547354:
@@ -1656,6 +1689,7 @@ spawns:
   17547357:
     template: Vanguard_Pathfinder
     at:       [36.981, 0.001, -10.950, 64]
+    region:   null
     level:    [75, 77]
 
   17547358:
@@ -1666,91 +1700,109 @@ spawns:
   17547359:
     template: Goblin_Replica
     at:       [27.000, 0.005, -7.000, 64]
+    region:   null
     level:    [65, 65]
 
   17547360:
     template: Goblin_Replica
     at:       [30.000, 0.005, -7.000, 64]
+    region:   null
     level:    [65, 65]
 
   17547361:
     template: Vanguard_Maestro
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547362:
     template: Goblin_Replica
     at:       [33.000, 0.005, -7.000, 64]
+    region:   null
     level:    [65, 65]
 
   17547363:
     template: Goblin_Replica
     at:       [22.962, 0.000, -36.035, 0]
+    region:   null
     level:    [65, 65]
 
   17547364:
     template: Vanguard_Smithy
     at:       [24.970, 0.001, -34.976, 0]
+    region:   null
     level:    [75, 77]
 
   17547365:
     template: Vanguard_Alchemist
     at:       [25.005, 0.001, -37.031, 0]
+    region:   null
     level:    [75, 77]
 
   17547366:
     template: Hermitrix_Toothrot
     at:       [25.062, 0.004, -33.063, 0]
+    region:   null
     level:    [80, 80]
 
   17547367:
     template: Vanguard_Necromancer
     at:       [24.987, 0.004, -38.954, 0]
+    region:   null
     level:    [75, 77]
 
   17547368:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547369:
     template: Goblin_Replica
     at:       [32.908, 0.000, -44.922, 64]
+    region:   null
     level:    [65, 65]
 
   17547370:
     template: Vanguard_Enchanter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547371:
     template: Vanguard_Ronin
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547372:
     template: Goblin_Replica
     at:       [25.945, -1.500, -57.049, 0]
+    region:   null
     level:    [65, 65]
 
   17547373:
     template: Goblin_Replica
     at:       [35.048, 0.004, -77.036, 128]
+    region:   null
     level:    [65, 65]
 
   17547374:
     template: Vanguard_Pitfighter
     at:       [30.925, 0.000, -77.031, 128]
+    region:   null
     level:    [75, 77]
 
   17547375:
     template: Vanguard_Pitfighter
     at:       [26.937, 0.005, -77.030, 128]
+    region:   null
     level:    [75, 77]
 
   17547376:
     template: Goblin_Replica
     at:       [22.014, 0.005, -74.013, 0]
+    region:   null
     level:    [65, 65]
 
   17547377:
@@ -1766,11 +1818,13 @@ spawns:
   17547379:
     template: Vanguard_Enchanter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547380:
     template: Vanguard_Pathfinder
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547381:
@@ -1786,31 +1840,37 @@ spawns:
   17547383:
     template: Vanguard_Armorer
     at:       [5.031, 0.004, -68.962, 64]
+    region:   null
     level:    [75, 77]
 
   17547384:
     template: Vanguard_Tinkerer
     at:       [2.983, 0.005, -68.982, 64]
+    region:   null
     level:    [75, 77]
 
   17547385:
     template: Goblin_Replica
     at:       [0.050, 0.000, -89.174, 192]
+    region:   null
     level:    [65, 65]
 
   17547386:
     template: Vanguard_Shaman
     at:       [0.004, 0.000, -101.983, 190]
+    region:   null
     level:    [75, 77]
 
   17547387:
     template: Vanguard_Ambusher
     at:       [0.024, 0.000, -91.994, 190]
+    region:   null
     level:    [75, 77]
 
   17547388:
     template: Vanguard_Ambusher
     at:       [0.016, 0.000, -94.050, 190]
+    region:   null
     level:    [75, 77]
 
   17547389:
@@ -1821,6 +1881,7 @@ spawns:
   17547390:
     template: Vanguard_Ambusher
     at:       [0.006, 0.000, -98.014, 190]
+    region:   null
     level:    [75, 77]
 
   17547391:
@@ -1836,11 +1897,13 @@ spawns:
   17547393:
     template: Goblin_Replica
     at:       [0.923, 0.005, -77.067, 0]
+    region:   null
     level:    [65, 65]
 
   17547394:
     template: Vanguard_Alchemist
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547395:
@@ -1861,59 +1924,69 @@ spawns:
   17547398:
     template: Goblin_Replica
     at:       [-8.850, 0.005, -76.914, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17547399:
     template: Vanguard_Welldigger
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547400:
     template: Vanguard_Dragontamer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547401:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547402:
     template: Goblin_Replica
     at:       [-8.252, 3.000, -6.256, 38]
+    region:   null
     level:    [65, 65]
 
   17547403:
     template: Vanguard_Necromancer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547404:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547405:
     template: Goblin_Replica
     at:       [9.999, 3.000, -0.968, 65]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17547406:
     template: Vanguard_Ronin
     at:       [10.001, 3.000, -3.179, 65]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547407:
     template: Vanguard_Dragontamer
     at:       [10.007, 3.000, -5.103, 65]
+    region:   null
     level:    [75, 77]
 
   17547408:
@@ -1931,6 +2004,7 @@ spawns:
   17547410:
     template: Vanguard_Hitman
     at:       [0.019, 3.000, -8.907, 194]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1943,6 +2017,7 @@ spawns:
   17547412:
     template: Vanguard_Pathfinder
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1955,6 +2030,7 @@ spawns:
   17547414:
     template: Goblin_Replica
     at:       [-29.956, 3.000, -5.101, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1973,6 +2049,7 @@ spawns:
   17547417:
     template: Vanguard_Alchemist
     at:       [-32.059, 3.000, -7.978, 64]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1985,6 +2062,7 @@ spawns:
   17547419:
     template: Vanguard_Enchanter
     at:       [-30.022, 3.000, -10.002, 64]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2016,6 +2094,7 @@ spawns:
   17547425:
     template: Goblin_Replica
     at:       [-34.476, 1.000, -30.773, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2033,12 +2112,14 @@ spawns:
   17547428:
     template: Vanguard_Dragontamer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547429:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547430:
@@ -2112,12 +2193,14 @@ spawns:
   17547442:
     template: Humnox_Drumbelly
     at:       [-38.111, 0.005, -60.059, 0]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17547443:
     template: Vanguard_Necromancer
     at:       [-37.947, 0.005, -56.051, 0]
+    region:   null
     level:    [75, 77]
 
   17547444:
@@ -2151,18 +2234,21 @@ spawns:
   17547449:
     template: Goblin_Replica
     at:       [-56.000, 6.000, -5.967, 0]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17547450:
     template: Vanguard_Smithy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547451:
     template: Vanguard_Welldigger
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547452:
@@ -2179,6 +2265,7 @@ spawns:
   17547454:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547455:
@@ -2199,6 +2286,7 @@ spawns:
   17547458:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547459:
@@ -2216,24 +2304,28 @@ spawns:
   17547461:
     template: Vanguard_Tinkerer
     at:       [-57.077, 6.000, 5.088, 99]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17547462:
     template: Goblin_Replica
     at:       [-73.272, 5.591, -23.047, 190]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17547463:
     template: Elixmix_Hooknose
     at:       [-73.332, 5.591, -20.042, 192]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17547464:
     template: Goblin_Replica
     at:       [-40.552, 8.000, -19.009, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2252,16 +2344,19 @@ spawns:
   17547467:
     template: Vanguard_Pitfighter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547468:
     template: Vanguard_Enchanter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17547469:
     template: Goblin_Replica
     at:       [-54.429, 12.000, -34.462, 160]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2274,6 +2369,7 @@ spawns:
   17547471:
     template: Vanguards_Slime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2295,6 +2391,7 @@ spawns:
   17547475:
     template: Goblin_Replica
     at:       [-40.552, 8.000, -19.009, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 

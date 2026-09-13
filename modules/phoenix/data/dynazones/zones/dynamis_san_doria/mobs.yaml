@@ -588,6 +588,7 @@ spawns:
   17534981:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17534982:
@@ -598,16 +599,19 @@ spawns:
   17534983:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17534984:
     template: Serjeant_Tombstone
     at:       [123.581, 0.000, 84.273, 225]
+    region:   null
     level:    [65, 65]
 
   17534985:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17534986:
@@ -618,16 +622,19 @@ spawns:
   17534987:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17534988:
     template: Serjeant_Tombstone
     at:       [118.874, 0.000, 79.627, 225]
+    region:   null
     level:    [65, 65]
 
   17534989:
     template: Vanguard_Vexer
     at:       [114.734, 0.000, 75.638, 225]
+    region:   null
     level:    [75, 77]
 
   17534990:
@@ -638,6 +645,7 @@ spawns:
   17534991:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17534992:
@@ -648,6 +656,7 @@ spawns:
   17534993:
     template: Vanguard_Vexer
     at:       [108.206, 0.000, 82.997, 225]
+    region:   null
     level:    [75, 77]
 
   17534994:
@@ -663,11 +672,13 @@ spawns:
   17534996:
     template: Warchief_Tombstone
     at:       [100.088, 1.000, 103.686, 32]
+    region:   null
     level:    [65, 65]
 
   17534997:
     template: Vanguard_Grappler
     at:       [99.677, 0.750, 96.918, 33]
+    region:   null
     level:    [75, 77]
 
   17534998:
@@ -678,21 +689,25 @@ spawns:
   17534999:
     template: Vanguard_Grappler
     at:       [106.225, 0.750, 103.557, 33]
+    region:   null
     level:    [75, 77]
 
   17535000:
     template: Serjeant_Tombstone
     at:       [99.965, 4.000, 67.815, 227]
+    region:   null
     level:    [65, 65]
 
   17535001:
     template: Serjeant_Tombstone
     at:       [97.673, 4.000, 67.124, 225]
+    region:   null
     level:    [65, 65]
 
   17535002:
     template: Vanguard_Trooper
     at:       [101.752, 4.000, 63.606, 255]
+    region:   null
     level:    [75, 77]
 
   17535003:
@@ -708,16 +723,19 @@ spawns:
   17535005:
     template: Vanguard_Footsoldier
     at:       [94.043, 4.000, 60.509, 255]
+    region:   null
     level:    [75, 77]
 
   17535006:
     template: Vanguard_Footsoldier
     at:       [94.645, 4.000, 53.358, 255]
+    region:   null
     level:    [75, 77]
 
   17535007:
     template: Warchief_Tombstone
     at:       [101.250, 4.000, 50.091, 160]
+    region:   null
     level:    [65, 65]
 
   17535008:
@@ -728,31 +746,37 @@ spawns:
   17535009:
     template: Vanguard_Vexer
     at:       [101.404, 4.000, 45.324, 131]
+    region:   null
     level:    [75, 77]
 
   17535010:
     template: Serjeant_Tombstone
     at:       [94.843, 4.000, 38.093, 1]
+    region:   null
     level:    [65, 65]
 
   17535011:
     template: Vanguard_Impaler
     at:       [94.734, 4.000, 42.250, 1]
+    region:   null
     level:    [75, 77]
 
   17535012:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535013:
     template: Vanguard_Impaler
     at:       [95.201, 4.000, 33.505, 1]
+    region:   null
     level:    [75, 77]
 
   17535014:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535015:
@@ -763,6 +787,7 @@ spawns:
   17535016:
     template: Vanguard_Amputator
     at:       [101.691, 4.000, 35.436, 130]
+    region:   null
     level:    [75, 77]
 
   17535017:
@@ -773,31 +798,37 @@ spawns:
   17535018:
     template: Serjeant_Tombstone
     at:       [97.806, 4.000, 45.270, 194]
+    region:   null
     level:    [65, 65]
 
   17535019:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535020:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535021:
     template: Serjeant_Tombstone
     at:       [142.436, 0.000, 69.366, 70]
+    region:   null
     level:    [65, 65]
 
   17535022:
     template: Vanguard_Hawker
     at:       [146.022, 0.000, 62.224, 96]
+    region:   null
     level:    [75, 77]
 
   17535023:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535024:
@@ -818,16 +849,19 @@ spawns:
   17535027:
     template: Vanguard_Trooper
     at:       [151.030, 0.000, 42.025, 129]
+    region:   null
     level:    [75, 77]
 
   17535028:
     template: Vanguard_Predator
     at:       [154.375, -6.000, 44.559, 129]
+    region:   null
     level:    [75, 77]
 
   17535029:
     template: Vanguard_Predator
     at:       [154.375, -6.000, 39.325, 129]
+    region:   null
     level:    [75, 77]
 
   17535030:
@@ -838,6 +872,7 @@ spawns:
   17535031:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535032:
@@ -853,6 +888,7 @@ spawns:
   17535034:
     template: Serjeant_Tombstone
     at:       [140.898, 0.000, 55.751, 165]
+    region:   null
     level:    [65, 65]
 
   17535035:
@@ -863,16 +899,19 @@ spawns:
   17535036:
     template: Serjeant_Tombstone
     at:       [143.507, 0.000, 27.361, 94]
+    region:   null
     level:    [65, 65]
 
   17535037:
     template: Warchief_Tombstone
     at:       [130.542, 0.000, 14.217, 127]
+    region:   null
     level:    [65, 65]
 
   17535038:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535039:
@@ -883,16 +922,19 @@ spawns:
   17535040:
     template: Warchief_Tombstone
     at:       [112.954, 2.000, 14.070, 127]
+    region:   null
     level:    [65, 65]
 
   17535041:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535042:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535043:
@@ -903,26 +945,31 @@ spawns:
   17535044:
     template: Vanguard_Pillager
     at:       [89.553, 2.000, 3.428, 225]
+    region:   null
     level:    [75, 77]
 
   17535045:
     template: Serjeant_Tombstone
     at:       [79.793, 2.000, 12.783, 33]
+    region:   null
     level:    [65, 65]
 
   17535046:
     template: Vanguard_Pillager
     at:       [83.954, 2.000, 8.993, 225]
+    region:   null
     level:    [75, 77]
 
   17535047:
     template: Serjeant_Tombstone
     at:       [86.037, 2.000, 6.810, 224]
+    region:   null
     level:    [65, 65]
 
   17535048:
     template: Vanguard_Amputator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535049:
@@ -938,31 +985,37 @@ spawns:
   17535051:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535052:
     template: Vanguard_Bugler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535053:
     template: Serjeant_Tombstone
     at:       [68.000, 2.000, -12.000, 160]
+    region:   null
     level:    [65, 65]
 
   17535054:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535055:
     template: Vanguard_Bugler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535056:
     template: Serjeant_Tombstone
     at:       [60.000, 2.000, -20.000, 160]
+    region:   null
     level:    [65, 65]
 
   17535057:
@@ -979,18 +1032,21 @@ spawns:
   17535059:
     template: Serjeant_Tombstone
     at:       [67.585, 2.000, -3.527, 32]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535060:
     template: Vanguard_Pillager
     at:       [74.176, 2.000, -10.136, 31]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535061:
     template: Vanguard_Pillager
     at:       [72.114, 2.000, -8.061, 31]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1009,6 +1065,7 @@ spawns:
   17535064:
     template: Wyrmgnasher_Bjakdek
     at:       [99.959, 1.000, -43.974, 160]
+    region:   null
     level:    [80, 80]
     script:   null
 
@@ -1021,12 +1078,14 @@ spawns:
   17535066:
     template: Vanguard_Neckchopper
     at:       [98.510, 1.000, -39.933, 160]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535067:
     template: Vanguard_Neckchopper
     at:       [95.856, 1.000, -42.849, 160]
+    region:   null
     level:    [75, 77]
 
   17535068:
@@ -1038,17 +1097,20 @@ spawns:
   17535069:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535070:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535071:
     template: Serjeant_Tombstone
     at:       [76.024, 2.000, -36.144, 160]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1066,58 +1128,68 @@ spawns:
   17535074:
     template: Serjeant_Tombstone
     at:       [100.092, 1.000, -36.074, 154]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535075:
     template: Serjeant_Tombstone
     at:       [92.348, 2.000, -20.508, 160]
+    region:   null
     level:    [65, 65]
 
   17535076:
     template: Serjeant_Tombstone
     at:       [92.192, 1.000, -44.067, 166]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535077:
     template: Warchief_Tombstone
     at:       [96.910, 0.000, -60.700, 160]
+    region:   null
     level:    [65, 65]
 
   17535078:
     template: Serjeant_Tombstone
     at:       [-7.787, 2.000, -80.453, 240]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535079:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535080:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535081:
     template: Serjeant_Tombstone
     at:       [-12.359, -73.771, 2.000, 249]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535082:
     template: Vanguard_Amputator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535083:
     template: Serjeant_Tombstone
     at:       [5.482, -74.629, 2.000, 241]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1130,12 +1202,14 @@ spawns:
   17535085:
     template: Serjeant_Tombstone
     at:       [4.221, 2.000, -84.063, 161]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535086:
     template: Vanguard_Trooper
     at:       [5.847, 2.000, -82.399, 161]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1148,30 +1222,35 @@ spawns:
   17535088:
     template: Warchief_Tombstone
     at:       [19.391, 2.200, -93.816, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535089:
     template: Warchief_Tombstone
     at:       [23.036, 2.200, -93.958, 4]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535090:
     template: Serjeant_Tombstone
     at:       [-0.049, 1.700, -25.102, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535091:
     template: Vanguard_Trooper
     at:       [-0.032, 2.000, -21.818, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535092:
     template: Vanguard_Footsoldier
     at:       [3.922, 2.000, -21.818, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1184,17 +1263,20 @@ spawns:
   17535094:
     template: Serjeant_Tombstone
     at:       [14.058, 1.700, -28.468, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535095:
     template: Vanguard_Grappler
     at:       [13.974, 2.000, -17.824, 192]
+    region:   null
     level:    [75, 77]
 
   17535096:
     template: Vanguard_Footsoldier
     at:       [13.974, 2.000, -22.215, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1206,6 +1288,7 @@ spawns:
   17535098:
     template: Vanguard_Grappler
     at:       [-13.919, 2.000, -22.037, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1218,17 +1301,20 @@ spawns:
   17535100:
     template: Warchief_Tombstone
     at:       [-0.065, -3.000, -29.798, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535101:
     template: Vanguard_Predator
     at:       [3.110, -3.000, -29.121, 192]
+    region:   null
     level:    [75, 77]
 
   17535102:
     template: Vanguard_Predator
     at:       [-3.053, -3.000, -28.951, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1241,6 +1327,7 @@ spawns:
   17535104:
     template: Vanguard_Amputator
     at:       [8.001, -3.000, -34.748, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1253,41 +1340,48 @@ spawns:
   17535106:
     template: Vanguard_Amputator
     at:       [-7.997, -3.000, -34.013, 192]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535107:
     template: Serjeant_Tombstone
     at:       [40.012, 2.000, -29.899, 232]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535108:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535109:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535110:
     template: Warchief_Tombstone
     at:       [28.024, 2.000, -18.309, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535111:
     template: Vanguard_Hawker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535112:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1304,41 +1398,48 @@ spawns:
   17535115:
     template: Warchief_Tombstone
     at:       [-0.083, 2.000, -8.938, 64]
+    region:   null
     level:    [65, 65]
 
   17535116:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535117:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535118:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535119:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535120:
     template: Warchief_Tombstone
     at:       [-28.038, 2.000, -17.135, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535121:
     template: Vanguard_Hawker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1351,6 +1452,7 @@ spawns:
   17535123:
     template: Vanguard_Hawker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1363,18 +1465,21 @@ spawns:
   17535125:
     template: Serjeant_Tombstone
     at:       [-39.851, 2.000, -29.884, 150]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535126:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535127:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1409,45 +1514,53 @@ spawns:
   17535133:
     template: Warchief_Tombstone
     at:       [6.050, -1.335, 35.945, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535134:
     template: Vanguard_Impaler
     at:       [6.892, 0.000, 26.976, 132]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535135:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535136:
     template: Vanguard_Impaler
     at:       [6.984, 0.000, 25.043, 132]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535137:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535138:
     template: Vanguard_Impaler
     at:       [6.986, 0.000, 23.014, 132]
+    region:   null
     level:    [75, 77]
 
   17535139:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535140:
     template: Warchief_Tombstone
     at:       [-5.920, -1.335, 35.993, 253]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1460,18 +1573,21 @@ spawns:
   17535142:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535143:
     template: Vanguard_Dollmaster
     at:       [-7.013, 0.000, 24.959, 255]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535144:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1484,18 +1600,21 @@ spawns:
   17535146:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535147:
     template: Serjeant_Tombstone
     at:       [18.015, 0.000, 35.865, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535148:
     template: Serjeant_Tombstone
     at:       [-17.993, 0.000, 35.865, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1513,12 +1632,14 @@ spawns:
   17535151:
     template: Serjeant_Tombstone
     at:       [0.000, 0.000, 25.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535152:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1535,52 +1656,61 @@ spawns:
   17535155:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535156:
     template: Serjeant_Tombstone
     at:       [5.000, 0.000, 10.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535157:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535158:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535159:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535160:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535161:
     template: Serjeant_Tombstone
     at:       [-5.000, 0.000, 10.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535162:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535163:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1598,6 +1728,7 @@ spawns:
   17535166:
     template: Serjeant_Tombstone
     at:       [20.000, 2.000, 5.000, 64]
+    region:   null
     level:    [65, 65]
 
   17535167:
@@ -1608,71 +1739,83 @@ spawns:
   17535168:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535169:
     template: Serjeant_Tombstone
     at:       [20.000, 0.000, 24.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535170:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535171:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535172:
     template: Serjeant_Tombstone
     at:       [-20.000, 2.000, 5.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535173:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535174:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535175:
     template: Serjeant_Tombstone
     at:       [-20.000, 0.000, 24.000, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535176:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535177:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535178:
     template: Serjeant_Tombstone
     at:       [23.852, 2.000, -12.458, 128]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535179:
     template: Vanguard_Dollmaster
     at:       [18.909, 2.000, -12.461, 128]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1684,22 +1827,26 @@ spawns:
   17535181:
     template: Vanguard_Dollmaster
     at:       [15.066, 2.000, -12.425, 128]
+    region:   null
     level:    [75, 77]
 
   17535182:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535183:
     template: Serjeant_Tombstone
     at:       [-23.954, 2.000, -12.138, 0]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535184:
     template: Vanguard_Dollmaster
     at:       [-20.099, 2.000, -12.028, 0]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1712,12 +1859,14 @@ spawns:
   17535186:
     template: Vanguard_Dollmaster
     at:       [-16.121, 2.000, -11.978, 0]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535187:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1730,24 +1879,28 @@ spawns:
   17535189:
     template: Serjeant_Tombstone
     at:       [5.083, 2.000, -11.842, 75]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535190:
     template: Serjeant_Tombstone
     at:       [-72.000, 2.000, -32.000, 224]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535191:
     template: Vanguard_Neckchopper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535192:
     template: Vanguard_Neckchopper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17535193:
@@ -1763,24 +1916,28 @@ spawns:
   17535195:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535196:
     template: Vanguard_Impaler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535197:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17535198:
     template: Serjeant_Tombstone
     at:       [-88.000, 2.000, -16.000, 224]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1793,6 +1950,7 @@ spawns:
   17535200:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1811,12 +1969,14 @@ spawns:
   17535203:
     template: Serjeant_Tombstone
     at:       [-66.917, 2.000, -3.372, 96]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17535204:
     template: Vanguard_Grappler
     at:       [-72.997, 2.000, -9.010, 100]
+    region:   null
     level:    [75, 77]
 
   17535205:

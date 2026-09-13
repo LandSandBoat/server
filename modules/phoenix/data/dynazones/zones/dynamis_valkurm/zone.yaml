@@ -1,4 +1,4 @@
-# Zonewide loot pool for old-school Dynamis.
-# misc is a list and is replaced whole: the core flags plus treasure.
+# Zonewide loot pool and no Chocobo Mazurka for old-school Dynamis.
+# misc is a list and is replaced whole: the core flags plus treasure, minus mazurka.
 
-misc: [mazurka, tractor, pet, treasure, trust]
+misc: [tractor, pet, treasure, trust]

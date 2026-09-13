@@ -1996,41 +1996,49 @@ spawns:
   16941058:
     template: Shamblix_Rottenheart
     at:       [-18.825, -13.903, -0.858, 64]
+    region:   null
     level:    [82, 82]
 
   16941059:
     template: Vanguard_Pitfighter
     at:       [-18.632, -13.711, 6.803, 64]
+    region:   null
     level:    [75, 75]
 
   16941060:
     template: Vanguard_Smithy
     at:       [-15.552, -14.640, 3.725, 64]
+    region:   null
     level:    [75, 75]
 
   16941061:
     template: Vanguard_Ronin
     at:       [-21.871, -13.990, 3.859, 64]
+    region:   null
     level:    [75, 75]
 
   16941062:
     template: Goblin_Replica
     at:       [-8.882, -15.896, -1.819, 192]
+    region:   null
     level:    [65, 65]
 
   16941063:
     template: Vanguard_Hitman
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941064:
     template: Goblin_Replica
     at:       [-28.864, -15.572, 0.703, 192]
+    region:   null
     level:    [65, 65]
 
   16941065:
     template: Vanguard_Necromancer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941066:
@@ -2051,6 +2059,7 @@ spawns:
   16941069:
     template: Goblin_Replica
     at:       [-18.749, -13.123, 13.844, 192]
+    region:   null
     level:    [65, 65]
 
   16941070:
@@ -2061,51 +2070,61 @@ spawns:
   16941071:
     template: Goblin_Replica
     at:       [-73.497, -13.640, 59.392, 64]
+    region:   null
     level:    [65, 65]
 
   16941072:
     template: Gosspix_Blabberlips
     at:       [-69.559, -13.383, 59.132, 64]
+    region:   null
     level:    [82, 82]
 
   16941073:
     template: Vanguard_Welldigger
     at:       [-65.323, -13.067, 58.465, 64]
+    region:   null
     level:    [75, 75]
 
   16941074:
     template: Vanguard_Armorer
     at:       [-77.433, -13.866, 59.128, 64]
+    region:   null
     level:    [75, 75]
 
   16941075:
     template: Vanguard_Dragontamer
     at:       [-81.681, -13.868, 59.106, 64]
+    region:   null
     level:    [75, 75]
 
   16941076:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941077:
     template: Goblin_Replica
     at:       [-33.127, -13.832, 60.963, 64]
+    region:   null
     level:    [65, 65]
 
   16941078:
     template: Vanguard_Maestro
     at:       [-29.309, -13.629, 60.748, 64]
+    region:   null
     level:    [75, 75]
 
   16941079:
     template: Goblin_Replica
     at:       [28.006, -13.419, 62.004, 64]
+    region:   null
     level:    [65, 65]
 
   16941080:
     template: Woodnix_Shrillwhistle
     at:       [24.059, -12.983, 61.967, 64]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -2127,6 +2146,7 @@ spawns:
   16941084:
     template: Vanguard_Alchemist
     at:       [36.345, -13.802, 60.363, 64]
+    region:   null
     level:    [75, 75]
 
   16941085:
@@ -2142,11 +2162,13 @@ spawns:
   16941087:
     template: Goblin_Replica
     at:       [-53.595, -13.572, 61.406, 64]
+    region:   null
     level:    [65, 65]
 
   16941088:
     template: Vanguard_Hitman
     at:       [-49.895, -13.890, 60.845, 64]
+    region:   null
     level:    [75, 75]
 
   16941089:
@@ -2157,41 +2179,49 @@ spawns:
   16941090:
     template: Vanguards_Slime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941091:
     template: Goblin_Replica
     at:       [7.460, -14.001, 59.766, 64]
+    region:   null
     level:    [65, 65]
 
   16941092:
     template: Vanguard_Necromancer
     at:       [3.501, -13.805, 59.614, 64]
+    region:   null
     level:    [75, 75]
 
   16941093:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941094:
     template: Vanguard_Ronin
     at:       [11.470, -13.833, 59.194, 64]
+    region:   null
     level:    [75, 75]
 
   16941095:
     template: Warchief_Tombstone
     at:       [-243.372, -23.340, 107.059, 0]
+    region:   null
     level:    [65, 65]
 
   16941096:
     template: Vanguard_Pillager
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941097:
     template: Warchief_Tombstone
     at:       [-222.842, -21.954, 94.613, 128]
+    region:   null
     level:    [65, 65]
 
   16941098:
@@ -2207,6 +2237,7 @@ spawns:
   16941100:
     template: Vanguard_Bugler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941101:
@@ -2222,51 +2253,61 @@ spawns:
   16941103:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941104:
     template: Vanguard_Grappler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941105:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941106:
     template: Warchief_Tombstone
     at:       [-244.493, -23.425, 107.059, 128]
+    region:   null
     level:    [65, 65]
 
   16941107:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941108:
     template: Vanguard_Amputator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941109:
     template: Warchief_Tombstone
     at:       [-243.691, -22.865, 94.558, 128]
+    region:   null
     level:    [65, 65]
 
   16941110:
     template: Vanguard_Trooper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941111:
     template: Warchief_Tombstone
     at:       [-357.893, -21.872, 19.080, 0]
+    region:   null
     level:    [65, 65]
 
   16941112:
     template: Hamfist_Gukhbuk
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941113:
@@ -2282,11 +2323,13 @@ spawns:
   16941115:
     template: Vanguard_Hawker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941116:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941117:
@@ -2302,6 +2345,7 @@ spawns:
   16941119:
     template: Vanguard_Mesmerizer
     at:       [-337.014, -21.700, 18.224, 0]
+    region:   null
     level:    [75, 75]
 
   16941120:
@@ -2317,56 +2361,67 @@ spawns:
   16941122:
     template: Warchief_Tombstone
     at:       [-359.122, -23.040, 13.944, 128]
+    region:   null
     level:    [65, 65]
 
   16941123:
     template: Vanguard_Neckchopper
     at:       [-358.982, -22.179, 17.396, 128]
+    region:   null
     level:    [75, 75]
 
   16941124:
     template: Warchief_Tombstone
     at:       [-358.970, -22.898, 25.223, 128]
+    region:   null
     level:    [65, 65]
 
   16941125:
     template: Vanguard_Gutslasher
     at:       [-359.008, -22.202, 22.696, 128]
+    region:   null
     level:    [75, 75]
 
   16941126:
     template: Warchief_Tombstone
     at:       [-457.541, -32.569, 62.825, 0]
+    region:   null
     level:    [65, 65]
 
   16941127:
     template: Flamecaller_Zoeqdoq
     at:       [-454.660, -32.675, 62.746, 0]
+    region:   null
     level:    [82, 82]
 
   16941128:
     template: Vanguard_Footsoldier
     at:       [-451.355, -32.426, 62.656, 0]
+    region:   null
     level:    [75, 75]
 
   16941129:
     template: Vanguard_Amputator
     at:       [-460.582, -32.277, 62.908, 0]
+    region:   null
     level:    [75, 75]
 
   16941130:
     template: Vanguard_Backstabber
     at:       [-463.459, -31.747, 62.987, 0]
+    region:   null
     level:    [75, 75]
 
   16941131:
     template: Warchief_Tombstone
     at:       [-458.092, -32.539, 62.840, 124]
+    region:   null
     level:    [65, 65]
 
   16941132:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941133:
@@ -2392,11 +2447,13 @@ spawns:
   16941137:
     template: Elvaansticker_Bxafraff
     at:       [-508.749, -30.100, 57.747, 128]
+    region:   null
     level:    [82, 82]
 
   16941138:
     template: Bxafraffs_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941139:
@@ -2407,51 +2464,61 @@ spawns:
   16941140:
     template: Vanguard_Pillager
     at:       [-502.678, -29.725, 57.630, 128]
+    region:   null
     level:    [75, 75]
 
   16941141:
     template: Vanguard_Bugler
     at:       [-499.796, -29.821, 57.575, 128]
+    region:   null
     level:    [75, 75]
 
   16941142:
     template: Adamantking_Effigy
     at:       [236.094, -5.814, 19.614, 128]
+    region:   null
     level:    [65, 65]
 
   16941143:
     template: QuPho_Bloodspiller
     at:       [232.251, -5.545, 19.541, 128]
+    region:   null
     level:    [82, 82]
 
   16941144:
     template: Vanguard_Vindicator
     at:       [240.095, -5.795, 19.691, 128]
+    region:   null
     level:    [75, 75]
 
   16941145:
     template: Vanguard_Beasttender
     at:       [236.206, -6.562, 15.884, 128]
+    region:   null
     level:    [75, 75]
 
   16941146:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941147:
     template: Vanguard_Beasttender
     at:       [235.962, -6.629, 24.140, 128]
+    region:   null
     level:    [75, 75]
 
   16941148:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941149:
     template: Adamantking_Effigy
     at:       [244.325, -5.735, 19.771, 128]
+    region:   null
     level:    [65, 65]
 
   16941150:
@@ -2462,6 +2529,7 @@ spawns:
   16941151:
     template: Vanguard_Thaumaturge
     at:       [240.200, -5.795, 19.693, 128]
+    region:   null
     level:    [75, 75]
 
   16941152:
@@ -2482,71 +2550,85 @@ spawns:
   16941155:
     template: Adamantking_Effigy
     at:       [288.788, 2.399, 18.254, 128]
+    region:   null
     level:    [65, 65]
 
   16941156:
     template: Vanguard_Protector
     at:       [283.704, 2.020, 18.213, 128]
+    region:   null
     level:    [75, 75]
 
   16941157:
     template: Vanguard_Protector
     at:       [293.771, 2.505, 18.294, 128]
+    region:   null
     level:    [75, 75]
 
   16941158:
     template: Adamantking_Effigy
     at:       [298.826, 2.897, 18.335, 128]
+    region:   null
     level:    [65, 65]
 
   16941159:
     template: GiBhe_Fleshfeaster
     at:       [293.597, 2.499, 18.292, 128]
+    region:   null
     level:    [82, 82]
 
   16941160:
     template: Vanguard_Constable
     at:       [303.359, 1.226, 18.371, 128]
+    region:   null
     level:    [75, 75]
 
   16941161:
     template: Vanguard_Militant
     at:       [298.852, 2.682, 23.574, 128]
+    region:   null
     level:    [75, 75]
 
   16941162:
     template: Vanguard_Militant
     at:       [298.847, 2.528, 13.270, 128]
+    region:   null
     level:    [75, 75]
 
   16941163:
     template: Adamantking_Effigy
     at:       [298.854, 2.438, 28.230, 128]
+    region:   null
     level:    [65, 65]
 
   16941164:
     template: Vanguard_Hatamoto
     at:       [298.852, 2.634, 24.266, 128]
+    region:   null
     level:    [75, 75]
 
   16941165:
     template: Vanguard_Hatamoto
     at:       [298.856, 2.261, 32.506, 128]
+    region:   null
     level:    [75, 75]
 
   16941166:
     template: Adamantking_Effigy
     at:       [298.845, 2.066, 8.470, 128]
+    region:   null
     level:    [65, 65]
 
   16941167:
     template: Vanguard_Defender
     at:       [298.847, 2.548, 13.422, 128]
+    region:   null
     level:    [75, 75]
 
   16941168:
     template: Vanguard_Defender
     at:       [298.842, 2.099, 3.674, 128]
+    region:   null
     level:    [75, 75]
 
   16941169:
@@ -2567,6 +2649,7 @@ spawns:
   16941172:
     template: Vanguard_Kusa
     at:       [301.035, 2.162, 95.469, 136]
+    region:   null
     level:    [75, 75]
 
   16941173:
@@ -2582,61 +2665,73 @@ spawns:
   16941175:
     template: Vanguard_Minstrel
     at:       [301.140, 2.143, 86.728, 136]
+    region:   null
     level:    [75, 75]
 
   16941176:
     template: Vanguard_Minstrel
     at:       [301.263, 2.086, 76.567, 136]
+    region:   null
     level:    [75, 75]
 
   16941177:
     template: Adamantking_Effigy
     at:       [299.814, 1.964, 71.739, 136]
+    region:   null
     level:    [65, 65]
 
   16941178:
     template: Vanguard_Drakekeeper
     at:       [301.269, 2.085, 76.135, 136]
+    region:   null
     level:    [75, 75]
 
   16941179:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941180:
     template: Vanguard_Drakekeeper
     at:       [301.383, 1.833, 66.667, 136]
+    region:   null
     level:    [75, 75]
 
   16941181:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941182:
     template: Adamantking_Effigy
     at:       [299.896, 2.228, -40.198, 133]
+    region:   null
     level:    [65, 65]
 
   16941183:
     template: VaRhu_Bodysnatcher
     at:       [295.932, 1.452, -39.690, 133]
+    region:   null
     level:    [82, 82]
 
   16941184:
     template: Vanguard_Purloiner
     at:       [304.789, 1.276, -40.826, 133]
+    region:   null
     level:    [75, 75]
 
   16941185:
     template: Vanguard_Mason
     at:       [300.458, 2.206, -44.413, 133]
+    region:   null
     level:    [75, 75]
 
   16941186:
     template: Vanguard_Mason
     at:       [300.262, 2.189, -35.551, 133]
+    region:   null
     level:    [75, 75]
 
   16941187:
@@ -2657,6 +2752,7 @@ spawns:
   16941190:
     template: Vanguard_Undertaker
     at:       [300.563, 2.442, -25.525, 133]
+    region:   null
     level:    [75, 75]
 
   16941191:
@@ -2677,56 +2773,67 @@ spawns:
   16941194:
     template: Vanguard_Thaumaturge
     at:       [301.241, 2.520, -25.579, 133]
+    region:   null
     level:    [75, 75]
 
   16941195:
     template: Manifest_Icon
     at:       [380.151, 2.202, -78.173, 192]
+    region:   null
     level:    [82, 82]
 
   16941196:
     template: Koo_Rahi_the_Levinblade
     at:       [380.094, 1.990, -74.062, 192]
+    region:   null
     level:    [82, 82]
 
   16941197:
     template: Vanguard_Skirmisher
     at:       [380.217, 2.216, -82.046, 192]
+    region:   null
     level:    [75, 75]
 
   16941198:
     template: Vanguard_Salvager
     at:       [384.208, 1.422, -78.213, 192]
+    region:   null
     level:    [75, 75]
 
   16941199:
     template: Vanguard_Inciter
     at:       [376.115, 1.503, -77.931, 192]
+    region:   null
     level:    [75, 75]
 
   16941200:
     template: Manifest_Icon
     at:       [378.786, 2.415, -88.176, 192]
+    region:   null
     level:    [82, 82]
 
   16941201:
     template: Vanguard_Sentinel
     at:       [378.788, 2.114, -84.316, 192]
+    region:   null
     level:    [75, 75]
 
   16941202:
     template: Vanguard_Persecutor
     at:       [378.786, 2.695, -92.164, 192]
+    region:   null
     level:    [75, 75]
 
   16941203:
     template: Manifest_Icon
     at:       [378.784, 3.035, -98.223, 192]
+    region:   null
     level:    [82, 82]
 
   16941204:
     template: Vanguard_Sentinel
     at:       [378.785, 2.924, -94.231, 192]
+    region:   null
     level:    [75, 75]
 
   16941205:
@@ -2747,6 +2854,7 @@ spawns:
   16941208:
     template: Baas_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941209:
@@ -2762,689 +2870,823 @@ spawns:
   16941211:
     template: Vanguard_Visionary
     at:       [381.091, 0.711, -216.514, 168]
+    region:   null
     level:    [75, 75]
 
   16941212:
     template: Manifest_Icon
     at:       [381.250, 2.589, -189.278, 194]
+    region:   null
     level:    [82, 82]
 
   16941213:
     template: Vanguard_Ogresoother
     at:       [381.441, 2.961, -185.171, 194]
+    region:   null
     level:    [75, 75]
 
   16941214:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941215:
     template: Vanguard_Partisan
     at:       [381.066, 2.322, -193.258, 194]
+    region:   null
     level:    [75, 75]
 
   16941216:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941217:
     template: Manifest_Icon
     at:       [380.532, 2.177, -197.776, 194]
+    region:   null
     level:    [82, 82]
 
   16941218:
     template: Vanguard_Oracle
     at:       [380.751, 2.341, -193.518, 194]
+    region:   null
     level:    [75, 75]
 
   16941219:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941220:
     template: Vanguard_Chanter
     at:       [380.354, 2.214, -201.199, 194]
+    region:   null
     level:    [75, 75]
 
   16941221:
     template: Manifest_Icon
     at:       [404.629, 2.212, -220.622, 130]
+    region:   null
     level:    [82, 82]
 
   16941222:
     template: Vanguard_Oracle
     at:       [400.384, 2.191, -220.422, 130]
+    region:   null
     level:    [75, 75]
 
   16941223:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941224:
     template: Vanguard_Chanter
     at:       [408.331, 2.478, -220.797, 130]
+    region:   null
     level:    [75, 75]
 
   16941225:
     template: Manifest_Icon
     at:       [414.662, 2.986, -221.096, 130]
+    region:   null
     level:    [82, 82]
 
   16941226:
     template: Vanguard_Ogresoother
     at:       [409.873, 2.577, -220.870, 130]
+    region:   null
     level:    [75, 75]
 
   16941227:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941228:
     template: Vanguard_Partisan
     at:       [418.507, 3.016, -221.277, 130]
+    region:   null
     level:    [75, 75]
 
   16941229:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 75]
 
   16941230:
     template: Manifest_Icon
     at:       [499.376, 2.254, -235.585, 185]
+    region:   null
     level:    [82, 82]
 
   16941231:
     template: Vanguard_Inciter
     at:       [498.666, 2.401, -231.255, 185]
+    region:   null
     level:    [75, 75]
 
   16941232:
     template: Vanguard_Inciter
     at:       [500.019, 2.235, -239.538, 185]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941233:
     template: Manifest_Icon
     at:       [501.057, 2.122, -245.895, 185]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941234:
     template: Vanguard_Liberator
     at:       [500.389, 2.218, -241.818, 185]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941235:
     template: Vanguard_Skirmisher
     at:       [501.671, 2.092, -249.662, 185]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941236:
     template: Manifest_Icon
     at:       [513.622, 2.377, -258.918, 138]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941237:
     template: Doo_Peku_the_Fleetfoot
     at:       [509.487, 2.418, -257.874, 138]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941238:
     template: Vanguard_Assassin
     at:       [517.741, 2.220, -259.959, 138]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941239:
     template: Vanguard_Assassin
     at:       [512.500, 1.799, -263.121, 138]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941240:
     template: Vanguard_Assassin
     at:       [514.347, 1.107, -254.736, 138]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941241:
     template: Manifest_Icon
     at:       [526.891, 2.195, -259.976, 130]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941242:
     template: Vanguard_Liberator
     at:       [522.487, 2.212, -259.750, 130]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941243:
     template: Vanguard_Salvager
     at:       [530.182, 2.148, -260.146, 130]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941244:
     template: Manifest_Icon
     at:       [548.425, 1.940, -261.246, 130]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941245:
     template: Ree_Nata_the_Melomanic
     at:       [544.573, 2.256, -261.166, 130]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941246:
     template: Vanguard_Chanter
     at:       [552.656, 1.466, -261.332, 130]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941247:
     template: Vanguard_Exemplar
     at:       [549.170, 1.677, -265.312, 130]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941248:
     template: Vanguard_Exemplar
     at:       [547.972, 1.570, -257.807, 130]
+    region:   null
     level:    [75, 75]
     script:   null
 
   16941249:
     template: Stihi
     at:       [60.797, -23.041, 199.043, 12]
+    region:   null
     level:    [82, 82]
     script:   null
 
   16941250:
     template: Vishap
     at:       [482.461, 0.917, -18.365, 127]
+    region:   null
     level:    [82, 82]
 
   16941251:
     template: Jurik
     at:       [346.096, -9.297, 271.613, 66]
+    region:   null
     level:    [82, 82]
 
   16941252:
     template: Barong
     at:       [-428.836, -7.400, -221.657, 211]
+    region:   null
     level:    [82, 82]
 
   16941253:
     template: Tarasca
     at:       [-41.146, -16.020, -3.899, 63]
+    region:   null
     level:    [82, 82]
 
   16941254:
     template: Alklha
     at:       [-339.980, -39.002, 243.131, 70]
+    region:   null
     level:    [82, 82]
 
   16941255:
     template: Basilic
     at:       [232.123, -9.440, 211.545, 20]
+    region:   null
     level:    [82, 82]
 
   16941256:
     template: Aitvaras
     at:       [206.514, -7.750, 4.554, 119]
+    region:   null
     level:    [82, 82]
 
   16941257:
     template: Koshchei
     at:       [36.027, 0.135, -233.281, 193]
+    region:   null
     level:    [82, 82]
 
   16941258:
     template: Stollenwurm
     at:       [-33.752, 16.111, -236.220, 186]
+    region:   null
     level:    [82, 82]
 
   16941259:
     template: Apocalyptic_Beast
     at:       [-201.788, -29.914, 147.255, 57]
+    region:   null
     level:    [82, 82]
 
   16941260:
     template: Dragons_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941261:
     template: Dragons_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941262:
     template: Dragons_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941263:
     template: Dragons_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941264:
     template: Dragons_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941265:
     template: Dragons_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16941266:
     template: Nightmare_Crab
     at:       [-30.796, 19.418, -308.548, 130]
+    region:   null
     level:    [78, 80]
 
   16941267:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941268:
     template: Nightmare_Crab
     at:       [-31.175, 15.890, -278.664, 168]
+    region:   null
     level:    [78, 80]
 
   16941269:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941270:
     template: Nightmare_Crab
     at:       [-13.161, 15.805, -251.788, 164]
+    region:   null
     level:    [78, 80]
 
   16941271:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941272:
     template: Nightmare_Crab
     at:       [-0.684, 16.851, -217.991, 228]
+    region:   null
     level:    [78, 80]
 
   16941273:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941274:
     template: Nightmare_Crab
     at:       [-43.913, 16.596, -214.005, 243]
+    region:   null
     level:    [78, 80]
 
   16941275:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941276:
     template: Nightmare_Crab
     at:       [-68.295, 15.980, -253.384, 79]
+    region:   null
     level:    [78, 80]
 
   16941277:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941278:
     template: Nightmare_Crab
     at:       [-89.977, 16.142, -234.819, 48]
+    region:   null
     level:    [78, 80]
 
   16941279:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941280:
     template: Nightmare_Crab
     at:       [-120.536, 16.000, -238.333, 103]
+    region:   null
     level:    [78, 80]
 
   16941281:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941282:
     template: Nightmare_Crab
     at:       [-132.170, 15.475, -280.017, 75]
+    region:   null
     level:    [78, 80]
 
   16941283:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941284:
     template: Nightmare_Crab
     at:       [-111.232, 20.000, -321.659, 99]
+    region:   null
     level:    [78, 80]
 
   16941285:
     template: Nightmare_Crab
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941286:
     template: Nightmare_Dhalmel
     at:       [147.099, -13.895, 83.226, 91]
+    region:   null
     level:    [78, 80]
 
   16941287:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941288:
     template: Nightmare_Dhalmel
     at:       [184.749, -14.791, 70.959, 80]
+    region:   null
     level:    [78, 80]
 
   16941289:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941290:
     template: Nightmare_Dhalmel
     at:       [173.195, -15.726, 105.490, 231]
+    region:   null
     level:    [78, 80]
 
   16941291:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941292:
     template: Nightmare_Dhalmel
     at:       [168.650, -17.323, 97.762, 245]
+    region:   null
     level:    [78, 80]
 
   16941293:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941294:
     template: Nightmare_Dhalmel
     at:       [164.722, -20.303, 142.572, 240]
+    region:   null
     level:    [78, 80]
 
   16941295:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941296:
     template: Nightmare_Dhalmel
     at:       [200.361, -12.131, 138.557, 25]
+    region:   null
     level:    [78, 80]
 
   16941297:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941298:
     template: Nightmare_Dhalmel
     at:       [202.575, -13.527, 144.152, 46]
+    region:   null
     level:    [78, 80]
 
   16941299:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941300:
     template: Nightmare_Dhalmel
     at:       [229.591, -7.865, 131.204, 69]
+    region:   null
     level:    [78, 80]
 
   16941301:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941302:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941303:
     template: Nightmare_Dhalmel
     at:       [218.460, -11.509, 170.940, 98]
+    region:   null
     level:    [78, 80]
 
   16941304:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941305:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941306:
     template: Nightmare_Dhalmel
     at:       [226.708, -10.498, 199.332, 214]
+    region:   null
     level:    [78, 80]
 
   16941307:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941308:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941309:
     template: Nightmare_Dhalmel
     at:       [257.550, -5.715, 202.180, 183]
+    region:   null
     level:    [78, 80]
 
   16941310:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941311:
     template: Nightmare_Dhalmel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941312:
     template: Nightmare_Uragnite
     at:       [387.034, 15.353, 76.035, 147]
+    region:   null
     level:    [78, 80]
 
   16941313:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941314:
     template: Nightmare_Uragnite
     at:       [377.849, 15.075, 102.869, 169]
+    region:   null
     level:    [78, 80]
 
   16941315:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941316:
     template: Nightmare_Uragnite
     at:       [359.625, 16.228, 128.573, 170]
+    region:   null
     level:    [78, 80]
 
   16941317:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941318:
     template: Nightmare_Uragnite
     at:       [349.641, 15.698, 156.576, 179]
+    region:   null
     level:    [78, 80]
 
   16941319:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941320:
     template: Nightmare_Uragnite
     at:       [367.182, 15.101, 173.383, 196]
+    region:   null
     level:    [78, 80]
 
   16941321:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941322:
     template: Nightmare_Uragnite
     at:       [435.893, 19.997, 170.376, 115]
+    region:   null
     level:    [78, 80]
 
   16941323:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941324:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941325:
     template: Nightmare_Uragnite
     at:       [435.610, 20.000, 138.313, 119]
+    region:   null
     level:    [78, 80]
 
   16941326:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941327:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941328:
     template: Nightmare_Uragnite
     at:       [445.479, 20.000, 105.979, 78]
+    region:   null
     level:    [78, 80]
 
   16941329:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941330:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941331:
     template: Nightmare_Uragnite
     at:       [445.814, 20.067, 68.997, 176]
+    region:   null
     level:    [78, 80]
 
   16941332:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941333:
     template: Nightmare_Uragnite
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941334:
     template: Nightmare_Scorpion
     at:       [471.236, 0.216, 6.844, 62]
+    region:   null
     level:    [78, 80]
 
   16941335:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941336:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941337:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941338:
     template: Nightmare_Scorpion
     at:       [516.129, 0.217, -8.353, 115]
+    region:   null
     level:    [78, 80]
 
   16941339:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941340:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941341:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941342:
     template: Nightmare_Scorpion
     at:       [519.856, 1.099, -51.020, 102]
+    region:   null
     level:    [78, 80]
 
   16941343:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941344:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941345:
@@ -3465,101 +3707,121 @@ spawns:
   16941348:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941349:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941350:
     template: Nightmare_Scorpion
     at:       [471.063, 0.366, -15.705, 56]
+    region:   null
     level:    [78, 80]
 
   16941351:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941352:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941353:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941354:
     template: Nightmare_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941355:
     template: Nightmare_Bunny
     at:       [-500.459, -31.118, 40.690, 236]
+    region:   null
     level:    [78, 80]
 
   16941356:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941357:
     template: Nightmare_Bunny
     at:       [-490.445, -31.826, 19.610, 51]
+    region:   null
     level:    [78, 80]
 
   16941358:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941359:
     template: Nightmare_Bunny
     at:       [-465.393, -32.613, 15.144, 246]
+    region:   null
     level:    [78, 80]
 
   16941360:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941361:
     template: Nightmare_Bunny
     at:       [-459.768, -29.872, 35.083, 240]
+    region:   null
     level:    [78, 80]
 
   16941362:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941363:
     template: Nightmare_Bunny
     at:       [-458.881, -32.572, 66.998, 179]
+    region:   null
     level:    [78, 80]
 
   16941364:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941365:
     template: Nightmare_Bunny
     at:       [-478.288, -32.000, 78.977, 147]
+    region:   null
     level:    [78, 80]
 
   16941366:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941367:
     template: Nightmare_Bunny
     at:       [-503.559, -31.216, 79.433, 113]
+    region:   null
     level:    [78, 80]
 
   16941368:
@@ -3570,77 +3832,90 @@ spawns:
   16941369:
     template: Nightmare_Bunny
     at:       [-524.458, -32.088, 44.539, 40]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941370:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941371:
     template: Nightmare_Bunny
     at:       [-471.664, -31.784, -0.383, 184]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941372:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941373:
     template: Nightmare_Bunny
     at:       [-432.835, -31.900, 0.724, 207]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941374:
     template: Nightmare_Bunny
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941375:
     template: Nightmare_Mandragora
     at:       [18.810, -25.635, 215.018, 84]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941376:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941377:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941378:
     template: Nightmare_Mandragora
     at:       [-0.910, -24.277, 235.082, 0]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941379:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941380:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941381:
     template: Nightmare_Mandragora
     at:       [-42.129, -24.075, 236.046, 104]
+    region:   null
     level:    [78, 80]
 
   16941382:
@@ -3661,18 +3936,21 @@ spawns:
   16941385:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941386:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941387:
     template: Nightmare_Mandragora
     at:       [-62.480, -29.305, 273.585, 222]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -3735,70 +4013,82 @@ spawns:
   16941398:
     template: Nightmare_Mandragora
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941399:
     template: Nightmare_Cockatrice
     at:       [-313.162, -39.809, 257.145, 19]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941400:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941401:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941402:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941403:
     template: Nightmare_Cockatrice
     at:       [-352.123, -39.807, 236.791, 139]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941404:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941405:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941406:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941407:
     template: Nightmare_Cockatrice
     at:       [-334.882, -31.349, 204.271, 51]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941408:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941409:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -3820,6 +4110,7 @@ spawns:
   16941413:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941414:
@@ -3830,66 +4121,77 @@ spawns:
   16941415:
     template: Nightmare_Cockatrice
     at:       [-318.555, -23.039, 139.238, 11]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941416:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941417:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941418:
     template: Nightmare_Cockatrice
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941419:
     template: Nightmare_Raven
     at:       [251.392, -7.599, -27.245, 247]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941420:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941421:
     template: Nightmare_Raven
     at:       [247.820, -7.752, -51.874, 76]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941422:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941423:
     template: Nightmare_Raven
     at:       [226.772, -8.429, -67.003, 101]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941424:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941425:
     template: Nightmare_Raven
     at:       [212.141, -13.921, -45.460, 175]
+    region:   null
     level:    [78, 80]
 
   16941426:
@@ -3910,59 +4212,69 @@ spawns:
   16941429:
     template: Nightmare_Raven
     at:       [192.698, -12.699, -60.391, 50]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941430:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941431:
     template: Nightmare_Raven
     at:       [164.483, -7.938, -4.593, 98]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941432:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941433:
     template: Nightmare_Raven
     at:       [194.278, -7.951, 10.477, 243]
+    region:   null
     level:    [78, 80]
 
   16941434:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941435:
     template: Nightmare_Raven
     at:       [153.407, -7.277, -17.097, 133]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941436:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941437:
     template: Nightmare_Raven
     at:       [133.593, -7.905, -41.395, 50]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941438:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -3984,6 +4296,7 @@ spawns:
   16941442:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941443:
@@ -3994,66 +4307,77 @@ spawns:
   16941444:
     template: Nightmare_Raven
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941445:
     template: Nightmare_Crawler
     at:       [319.601, 0.000, 361.111, 80]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941446:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941447:
     template: Nightmare_Crawler
     at:       [323.281, 0.000, 357.627, 91]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941448:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941449:
     template: Nightmare_Crawler
     at:       [338.260, 0.985, 325.345, 252]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941450:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941451:
     template: Nightmare_Crawler
     at:       [317.774, 0.000, 319.587, 247]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941452:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941453:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941454:
     template: Nightmare_Crawler
     at:       [278.188, -8.000, 319.773, 107]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -4065,6 +4389,7 @@ spawns:
   16941456:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16941457:
@@ -4133,12 +4458,14 @@ spawns:
   16941468:
     template: Nightmare_Crawler
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941469:
     template: Nightmare_Eft
     at:       [-361.821, -9.408, -189.750, 254]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -4170,60 +4497,70 @@ spawns:
   16941475:
     template: Nightmare_Eft
     at:       [-444.034, -8.086, -193.268, 164]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941476:
     template: Nightmare_Eft
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941477:
     template: Nightmare_Eft
     at:       [-481.261, -16.000, -241.459, 71]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941478:
     template: Nightmare_Eft
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941479:
     template: Nightmare_Eft
     at:       [-450.678, -9.843, -262.694, 35]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941480:
     template: Nightmare_Eft
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941481:
     template: Nightmare_Eft
     at:       [-426.000, -5.871, -279.003, 24]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941482:
     template: Nightmare_Eft
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941483:
     template: Nightmare_Eft
     at:       [-403.165, 0.000, -278.890, 233]
+    region:   null
     level:    [78, 80]
     script:   null
 
   16941484:
     template: Nightmare_Eft
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
     script:   null
 
@@ -4240,6 +4577,7 @@ spawns:
   16941487:
     template: Nightmare_Eft
     at:       [-355.306, -8.189, -200.937, 245]
+    region:   null
     level:    [78, 80]
 
   16941488:

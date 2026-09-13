@@ -868,71 +868,85 @@ spawns:
   16949255:
     template: Nightmare_Antlion
     at:       [-0.945, -36.710, 25.281, 122]
+    region:   null
     level:    [78, 80]
 
   16949256:
     template: Nightmare_Antlion
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [78, 80]
 
   16949257:
     template: Nightmare_Antlion
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [78, 80]
 
   16949258:
     template: Nightmare_Antlion
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [78, 80]
 
   16949259:
     template: Umbral_Diabolos
     at:       [0.170, -24.770, 67.000, 70]
+    region:   null
     level:    [82, 82]
 
   16949260:
     template: Umbral_Diabolos
     at:       [-12.290, -27.710, 89.710, 54]
+    region:   null
     level:    [82, 82]
 
   16949261:
     template: Umbral_Diabolos
     at:       [-2.580, -27.950, 105.450, 127]
+    region:   null
     level:    [82, 82]
 
   16949262:
     template: Umbral_Diabolos
     at:       [-15.710, -27.920, 110.710, 57]
+    region:   null
     level:    [82, 82]
 
   16949263:
     template: Diabolos_Spade
     at:       [3.670, -29.690, 152.060, 103]
+    region:   null
     level:    [82, 82]
 
   16949264:
     template: Diabolos_Heart
     at:       [-43.830, -29.670, 155.470, 33]
+    region:   null
     level:    [82, 82]
 
   16949265:
     template: Diabolos_Diamond
     at:       [8.280, -26.280, 123.050, 143]
+    region:   null
     level:    [82, 82]
 
   16949266:
     template: Diabolos_Club
     at:       [-35.940, -27.230, 119.300, 230]
+    region:   null
     level:    [82, 82]
 
   16949267:
     template: Diaboloss_Shard
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949268:
     template: Diaboloss_Shard
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949269:
@@ -943,6 +957,7 @@ spawns:
   16949270:
     template: Nightmare_Hornet
     at:       [-38.946, -22.242, 39.275, 34]
+    region:   null
     level:    [78, 80]
 
   16949271:
@@ -953,86 +968,103 @@ spawns:
   16949272:
     template: Nightmare_Hornet
     at:       [-43.482, -22.004, 43.500, 129]
+    region:   null
     level:    [78, 80]
 
   16949273:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 2]
+    region:   null
     level:    [78, 80]
 
   16949274:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949275:
     template: Nightmare_Hornet
     at:       [-28.569, -22.034, -28.790, 97]
+    region:   null
     level:    [78, 80]
 
   16949276:
     template: Nightmare_Hornet
     at:       [-40.042, -22.273, -39.838, 223]
+    region:   null
     level:    [78, 80]
 
   16949277:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949278:
     template: Nightmare_Hornet
     at:       [-45.799, -22.004, -43.748, 128]
+    region:   null
     level:    [78, 80]
 
   16949279:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 0]
+    region:   null
     level:    [78, 80]
 
   16949280:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949281:
     template: Nightmare_Hornet
     at:       [-38.946, -22.242, 39.275, 34]
+    region:   null
     level:    [78, 80]
 
   16949282:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 161]
+    region:   null
     level:    [78, 80]
 
   16949283:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949284:
     template: Nightmare_Hornet
     at:       [-61.064, -22.037, 43.747, 2]
+    region:   null
     level:    [78, 80]
 
   16949285:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 129]
+    region:   null
     level:    [78, 80]
 
   16949286:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949287:
     template: Nightmare_Hornet
     at:       [-40.042, -22.273, -39.838, 223]
+    region:   null
     level:    [78, 80]
 
   16949288:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 97]
+    region:   null
     level:    [78, 80]
 
   16949289:
@@ -1048,31 +1080,37 @@ spawns:
   16949291:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 128]
+    region:   null
     level:    [78, 80]
 
   16949292:
     template: Nightmare_Hornet
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949293:
     template: Vanguard_Eye
     at:       [-77.672, -20.125, 63.109, 64]
+    region:   null
     level:    [70, 70]
 
   16949294:
     template: Hydra_Warrior
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949295:
     template: Hydra_Red_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949296:
     template: Hydra_Ranger
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949297:
@@ -1083,26 +1121,31 @@ spawns:
   16949298:
     template: Hydra_Monk
     at:       [-98.076, -27.111, 9.217, 192]
+    region:   null
     level:    [82, 82]
 
   16949299:
     template: Hydra_Bard
     at:       [-97.984, -27.130, 12.228, 192]
+    region:   null
     level:    [82, 82]
 
   16949300:
     template: Hydra_Samurai
     at:       [-97.896, -26.836, 15.107, 192]
+    region:   null
     level:    [82, 82]
 
   16949301:
     template: Hydra_Ninja
     at:       [-97.800, -26.861, 18.269, 192]
+    region:   null
     level:    [82, 82]
 
   16949302:
     template: Vanguard_Eye
     at:       [-96.590, -26.745, 24.928, 192]
+    region:   null
     level:    [70, 70]
 
   16949303:
@@ -1118,91 +1161,109 @@ spawns:
   16949305:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949306:
     template: Hydra_Summoner
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949307:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949308:
     template: Vanguard_Eye
     at:       [-112.802, -27.000, 41.735, 255]
+    region:   null
     level:    [70, 70]
 
   16949309:
     template: Hydra_White_Mage
     at:       [-109.642, -27.007, 41.807, 0]
+    region:   null
     level:    [82, 82]
 
   16949310:
     template: Hydra_Black_Mage
     at:       [-109.646, -27.084, 44.835, 0]
+    region:   null
     level:    [82, 82]
 
   16949311:
     template: Hydra_Thief
     at:       [-109.650, -27.009, 47.851, 0]
+    region:   null
     level:    [82, 82]
 
   16949312:
     template: Hydra_Paladin
     at:       [-109.638, -26.946, 38.779, 0]
+    region:   null
     level:    [82, 82]
 
   16949313:
     template: Hydra_Dragoon
     at:       [-109.634, -26.911, 35.883, 0]
+    region:   null
     level:    [82, 82]
 
   16949314:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949315:
     template: Vanguard_Eye
     at:       [-78.361, -20.000, -65.165, 192]
+    region:   null
     level:    [70, 70]
 
   16949316:
     template: Hydra_White_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949317:
     template: Hydra_Black_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949318:
     template: Hydra_Red_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949319:
     template: Vanguard_Eye
     at:       [-98.250, -27.020, -6.920, 63]
+    region:   null
     level:    [70, 70]
 
   16949320:
     template: Hydra_Beastmaster
     at:       [-98.199, -27.114, -10.132, 64]
+    region:   null
     level:    [82, 82]
 
   16949321:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949322:
     template: Hydra_Dragoon
     at:       [-98.223, -27.026, -13.016, 64]
+    region:   null
     level:    [82, 82]
 
   16949323:
@@ -1218,6 +1279,7 @@ spawns:
   16949325:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949326:
@@ -1253,101 +1315,121 @@ spawns:
   16949332:
     template: Hydra_Paladin
     at:       [-109.539, -27.030, -42.359, 0]
+    region:   null
     level:    [82, 82]
 
   16949333:
     template: Hydra_Dark_Knight
     at:       [-106.523, -27.089, -42.360, 0]
+    region:   null
     level:    [82, 82]
 
   16949334:
     template: Hydra_Bard
     at:       [-103.507, -27.000, -42.360, 0]
+    region:   null
     level:    [82, 82]
 
   16949335:
     template: Hydra_Ranger
     at:       [-100.468, -27.000, -42.360, 0]
+    region:   null
     level:    [82, 82]
 
   16949336:
     template: Hydra_Ninja
     at:       [-97.572, -27.000, -42.361, 0]
+    region:   null
     level:    [82, 82]
 
   16949337:
     template: Vanguard_Eye
     at:       [-77.779, -23.764, 29.454, 192]
+    region:   null
     level:    [70, 70]
 
   16949338:
     template: Hydra_Monk
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949339:
     template: Hydra_Paladin
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949340:
     template: Hydra_Ranger
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949341:
     template: Hydra_Summoner
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949342:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949343:
     template: Vanguard_Eye
     at:       [-98.026, -26.901, 5.717, 192]
+    region:   null
     level:    [70, 70]
 
   16949344:
     template: Hydra_Warrior
     at:       [-98.076, -27.111, 9.217, 192]
+    region:   null
     level:    [82, 82]
 
   16949345:
     template: Hydra_White_Mage
     at:       [-97.984, -27.130, 12.228, 192]
+    region:   null
     level:    [82, 82]
 
   16949346:
     template: Hydra_Red_Mage
     at:       [-97.896, -26.836, 15.107, 192]
+    region:   null
     level:    [82, 82]
 
   16949347:
     template: Hydra_Thief
     at:       [-97.800, -26.861, 18.269, 192]
+    region:   null
     level:    [82, 82]
 
   16949348:
     template: Vanguard_Eye
     at:       [-96.472, -27.000, 53.235, 64]
+    region:   null
     level:    [70, 70]
 
   16949349:
     template: Hydra_Black_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949350:
     template: Hydra_Dark_Knight
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949351:
     template: Hydra_Ninja
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949352:
@@ -1358,16 +1440,19 @@ spawns:
   16949353:
     template: Hydra_Beastmaster
     at:       [-109.642, -27.007, 41.807, 0]
+    region:   null
     level:    [82, 82]
 
   16949354:
     template: Hydras_Hound
     at:       [-109.646, -27.084, 44.835, 0]
+    region:   null
     level:    [82, 82]
 
   16949355:
     template: Hydra_Bard
     at:       [-109.650, -27.009, 47.851, 0]
+    region:   null
     level:    [82, 82]
 
   16949356:
@@ -1383,26 +1468,31 @@ spawns:
   16949358:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949359:
     template: Vanguard_Eye
     at:       [-78.414, -23.135, -32.503, 64]
+    region:   null
     level:    [70, 70]
 
   16949360:
     template: Hydra_Monk
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949361:
     template: Hydra_White_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949362:
     template: Hydra_Bard
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949363:
@@ -1418,21 +1508,25 @@ spawns:
   16949365:
     template: Hydra_Black_Mage
     at:       [-98.199, -27.114, -10.132, 64]
+    region:   null
     level:    [82, 82]
 
   16949366:
     template: Hydra_Ranger
     at:       [-98.223, -27.026, -13.016, 64]
+    region:   null
     level:    [82, 82]
 
   16949367:
     template: Hydra_Summoner
     at:       [-98.249, -26.787, -16.160, 64]
+    region:   null
     level:    [82, 82]
 
   16949368:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949369:
@@ -1448,21 +1542,25 @@ spawns:
   16949371:
     template: Hydra_Paladin
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949372:
     template: Hydra_Dark_Knight
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949373:
     template: Hydra_Samurai
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949374:
     template: Vanguard_Eye
     at:       [-115.173, -27.250, -42.064, 0]
+    region:   null
     level:    [70, 70]
 
   16949375:
@@ -1483,46 +1581,55 @@ spawns:
   16949378:
     template: Hydras_Hound
     at:       [-100.468, -27.000, -42.360, 0]
+    region:   null
     level:    [82, 82]
 
   16949379:
     template: Hydra_Dragoon
     at:       [-97.572, -27.000, -42.361, 0]
+    region:   null
     level:    [82, 82]
 
   16949380:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   16949381:
     template: Nightmare_Leech
     at:       [-75.487, -20.000, 66.306, 128]
+    region:   null
     level:    [78, 80]
 
   16949382:
     template: Nightmare_Leech
     at:       [1.000, 1.000, 1.000, 0]
+    region:   null
     level:    [78, 80]
 
   16949383:
     template: Nightmare_Leech
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [78, 80]
 
   16949384:
     template: Nightmare_Leech
     at:       [-89.054, -20.095, 71.007, 64]
+    region:   null
     level:    [78, 80]
 
   16949385:
     template: Nightmare_Leech
     at:       [-89.168, -20.218, 74.161, 64]
+    region:   null
     level:    [78, 80]
 
   16949386:
     template: Nightmare_Leech
     at:       [-85.198, -20.115, 74.295, 64]
+    region:   null
     level:    [78, 80]
 
   16949387:
