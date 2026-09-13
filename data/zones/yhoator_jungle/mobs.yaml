@@ -289,7 +289,8 @@ templates:
   Goblin_Digger_jungle:
     id:            6659
     display_name:  Goblin_Digger
-    species:       goblin
+    species:       goblin_digger
+    roam:          [wander]
     skill_list_id: 133
     attributes:
       combat:

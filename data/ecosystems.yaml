@@ -4488,6 +4488,37 @@ ecosystems:
                   gravity:     -2
               mob_mods:
                 sublink: 5
+          goblin_digger:
+            id: 485
+            attributes:
+              element: fire
+              resists:
+                rank_element:
+                  fire:    -2
+                  ice:     -2
+                  wind:    -2
+                  earth:   -2
+                  thunder: -2
+                  water:   -2
+                  light:   -3
+                  dark:     0
+                rank_status:
+                  paralyze:    -2
+                  bind:        -2
+                  silence:     -2
+                  slow:        -2
+                  poison:      -2
+                  light_sleep: -3
+                  dark_sleep:   0
+                  blind:        0
+                  stun:        -2
+                  gravity:     -2
+              mob_mods:
+                sublink:        5
+                roam_cool:     39
+                roam_rate:     13
+                roam_turns:     1
+                roam_distance: 80
           moblin:
             id: 127
             attributes:

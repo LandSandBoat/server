@@ -468,7 +468,8 @@ templates:
   Goblin_Digger_near:
     id:            1648
     display_name:  Goblin_Digger
-    species:       goblin
+    species:       goblin_digger
+    roam:          [wander]
     skill_list_id: 133
     attributes:
       combat:
