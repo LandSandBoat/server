@@ -93,8 +93,8 @@ UPDATE item_basic SET baseSell = 499 WHERE itemid = 1209;
 -- Lucky Egg
 UPDATE item_basic SET baseSell = 400 WHERE itemid = 4600;
 
--- Black Ink
-UPDATE item_basic SET baseSell = 298 WHERE itemid = 929;
+-- Black Ink (this item was changed three separate times, we use the price before this patch: https://www.bg-wiki.com/ffxi/Version_Update_(12/08/2008))
+UPDATE item_basic SET baseSell = 299 WHERE itemid = 929;
 
 -- Bugard Skin
 UPDATE item_basic SET baseSell = 448 WHERE itemid = 1640;
@@ -359,6 +359,45 @@ UPDATE item_basic SET baseSell = 811 WHERE itemid = 5722;
 
 -- Remedy
 UPDATE item_basic SET baseSell = 3200 WHERE itemid = 4155;
+
+-- Chocobo Blinker
+UPDATE item_basic SET baseSell = 450 WHERE itemid = 2399;
+
+-- Wootz Ore
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1469;
+
+-- Sparkling Stone
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1470;
+
+-- Relic Iron
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1466;
+
+-- Griffon Hide
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1516;
+
+-- Giant Frozen Head
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1517;
+
+-- Fresh Orc Liver
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1519;
+
+-- Colossal Skull
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1518;
+
+-- Lancewood Log
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1464;
+
+-- Slime Juice
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1521;
+
+-- Goblin Grease
+UPDATE item_basic SET baseSell = 2650 WHERE itemid = 1520;
+
+-- Demon's Axe
+UPDATE item_basic SET baseSell = 22000 WHERE itemid = 16711;
+
+-- Goshisho's Scythe
+UPDATE item_basic SET baseSell = 17000 WHERE itemid = 16792;
 ----------------------------------------------------------------------------------------------------------------------------
 -- PENDING -- I could not find prices for these items, but they were mentioned in patch notes as having price values changed
 ----------------------------------------------------------------------------------------------------------------------------
