@@ -1,6 +1,464 @@
-# Legacy Limbus SE Apollyon for apollyon.
+# Legacy level 75 Limbus Apollyon NPCs: the Armoury Crates and floor NPCs from the last modules/phoenix/sql/limbus
+# state (phoenixffxi/Phoenix PR 190 and PR 194), plus deletions of retail-layout NPCs the Era DAT (ROM3/3/20.DAT)
+# has no name for.
+# Doors are kept: they show no name and the zone Lua lists them by id.
 
 npcs:
+
+  # -- Retail NPCs the legacy Limbus does not have --
+
+  16933512: null
+  16933513: null
+  16933514: null
+  16933515: null
+  16933516: null
+  16933517: null
+  16933519: null
+  16933520: null
+  16933521: null
+  16933522: null
+  16933523: null
+  16933524: null
+  16933525: null
+  16933526: null
+  16933527: null
+  16933528: null
+  16933529: null
+  16933530: null
+  16933531: null
+  16933532: null
+  16933533: null
+  16933534: null
+  16933535: null
+  16933536: null
+  16933537: null
+  16933538: null
+  16933539: null
+  16933540: null
+  16933541: null
+  16933542: null
+  16933543: null
+  16933544: null
+  16933545: null
+  16933546: null
+  16933547: null
+  16933548: null
+  16933549: null
+  16933550: null
+  16933551: null
+  16933552: null
+  16933553: null
+  16933554: null
+  16933555: null
+  16933556: null
+  16933557: null
+  16933558: null
+  16933559: null
+  16933560: null
+  16933561: null
+  16933562: null
+  16933563: null
+  16933564: null
+  16933565: null
+
+  # Apollyon_Coffer_#4
+  16933566: null
+
+  # Apollyon_Operator
+  16933567: null
+  16933568: null
+
+  # Apollyon_Furnace
+  16933569: null
+  16933570: null
+
+  # -- SW Apollyon --
+
+  16932865:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-400.000, -0.550, -527.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932866:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-403.000, -0.550, -527.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags:  1
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932878:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-120.000, -0.500, -542.000]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932879:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-117.000, -0.500, -542.000]
+    render:
+      look:
+        type:  standard
+        model: 962
+      entity_flags:  1
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932896:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [655.000, -2.000, -610.000, 222]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  3203
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932897:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [655.000, -2.000, -610.000, 222]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  3203
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932909:
+    script:       SW_Loot_Crate
+    display_name: Armoury Crate
+    at:           [-520.000, -1.000, -320.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      entity_flags:  1
+      animation_sub: 4
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  # -- NW Apollyon --
+
+  16932934:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-400.000, -0.550, 73.000, 68]
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving:        7
+      entity_flags:  1155
+      animation_sub: 8
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932935:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-460.000, -0.500, 24.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932945:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-444.000, -0.500, -19.000]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932946:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-474.000, -0.500, 26.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932947:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-286.000, -0.600, 360.000, 232]
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving:        7
+      entity_flags:  1155
+      animation_sub: 8
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932948:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-338.000, -1.220, 267.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932958:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-372.000, -1.230, 302.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932959:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-378.000, -0.500, 271.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932960:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-247.000, -0.550, 520.000, 198]
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving:        7
+      entity_flags:  1155
+      animation_sub: 8
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932961:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-298.000, -2.230, 539.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932971:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-212.000, -0.500, 548.000, 96]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932972:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-323.000, -0.500, 614.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       7
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932973:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-527.000, -0.550, 640.000, 99]
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving:        7
+      entity_flags:  1155
+      animation_sub: 8
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932974:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-600.000, -0.500, 605.000, 192]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932975:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-538.000, -0.380, 543.000, 125]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932982:
+    script:       Armoury_Crate
+    display_name: Armoury Crate
+    at:           [-609.000, -0.500, 589.000, 128]
+    render:
+      look:
+        type:  standard
+        model: 962
+      moving:       6
+      entity_flags: 131
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  16932984:
+    script:       NW_Loot_Crate
+    display_name: Armoury Crate
+    at:           [-560.000, -1.000, 360.000, 64]
+    render:
+      look:
+        type:  standard
+        model: 961
+      moving:        7
+      entity_flags:  1155
+      animation_sub: 8
+    status:          normal
+    speed:           40
+    animation_speed: 40
+    widescan:        true
+    content:         cop
+
+  # -- SE Apollyon --
 
   16932989:
     script:       Armoury_Crate

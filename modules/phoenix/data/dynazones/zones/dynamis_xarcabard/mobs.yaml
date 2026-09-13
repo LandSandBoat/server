@@ -852,41 +852,49 @@ spawns:
   17330215:
     template: Vanguard_Eye
     at:       [433.000, 0.192, -187.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330216:
     template: Kindred_Ninja
     at:       [433.000, 0.644, -182.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330217:
     template: Kindred_Ninja
     at:       [433.000, 0.699, -177.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330218:
     template: Vanguard_Eye
     at:       [418.000, -0.434, -187.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330219:
     template: Kindred_Dragoon
     at:       [423.000, 0.271, -187.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330220:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330221:
     template: Kindred_Dragoon
     at:       [428.000, 0.092, -187.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330222:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330223:
@@ -897,36 +905,43 @@ spawns:
   17330224:
     template: Kindred_Summoner
     at:       [418.000, 0.145, -177.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330225:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330226:
     template: Kindred_Summoner
     at:       [418.000, 0.122, -182.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330227:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330228:
     template: Statue_Prototype
     at:       [425.500, 0.466, -179.500, 0]
+    region:   null
     level:    [82, 82]
 
   17330229:
     template: Vanguard_Eye
     at:       [269.000, -8.358, 52.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330230:
     template: Kindred_Warrior
     at:       [269.000, -8.229, 56.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330231:
@@ -937,6 +952,7 @@ spawns:
   17330232:
     template: Kindred_White_Mage
     at:       [273.000, -8.161, 60.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330233:
@@ -947,6 +963,7 @@ spawns:
   17330234:
     template: Kindred_Warrior
     at:       [294.000, -7.902, 56.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330235:
@@ -957,21 +974,25 @@ spawns:
   17330236:
     template: Kindred_White_Mage
     at:       [290.000, -7.526, 60.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330237:
     template: Vanguard_Eye
     at:       [278.000, -7.402, 66.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330238:
     template: Kindred_Thief
     at:       [278.000, -7.203, 56.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330239:
     template: Kindred_Thief
     at:       [278.000, -7.051, 61.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330240:
@@ -982,36 +1003,43 @@ spawns:
   17330241:
     template: Vanguard_Eye
     at:       [288.000, -8.381, 66.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330242:
     template: Kindred_Thief
     at:       [288.000, -7.610, 56.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330243:
     template: Kindred_Thief
     at:       [288.000, -7.518, 61.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330244:
     template: Kindred_Black_Mage
     at:       [288.000, -8.059, 71.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330245:
     template: Vanguard_Eye
     at:       [283.000, -7.751, 71.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330246:
     template: Kindred_Red_Mage
     at:       [283.000, -7.203, 56.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330247:
     template: Kindred_Red_Mage
     at:       [283.000, -7.051, 61.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330248:
@@ -1022,41 +1050,49 @@ spawns:
   17330249:
     template: Vanguard_Eye
     at:       [360.500, 8.445, -187.500, 192]
+    region:   null
     level:    [70, 70]
 
   17330250:
     template: Kindred_Dark_Knight
     at:       [356.500, 8.249, -187.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330251:
     template: Kindred_Dark_Knight
     at:       [352.500, 8.097, -187.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330252:
     template: Kindred_Paladin
     at:       [348.500, 7.878, -187.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330253:
     template: Vanguard_Eye
     at:       [345.500, 7.688, -187.500, 0]
+    region:   null
     level:    [70, 70]
 
   17330254:
     template: Kindred_Dark_Knight
     at:       [345.500, 6.717, -183.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330255:
     template: Kindred_Dark_Knight
     at:       [345.500, 6.529, -179.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330256:
     template: Kindred_Paladin
     at:       [345.500, 7.007, -175.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330257:
@@ -1067,31 +1103,37 @@ spawns:
   17330258:
     template: Kindred_Paladin
     at:       [349.500, 8.011, -172.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330259:
     template: Kindred_Dragoon
     at:       [353.500, 8.221, -172.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330260:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330261:
     template: Kindred_Dragoon
     at:       [357.500, 8.445, -172.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330262:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330263:
     template: Vanguard_Eye
     at:       [360.500, 8.445, -172.500, 128]
+    region:   null
     level:    [70, 70]
 
   17330264:
@@ -1102,41 +1144,49 @@ spawns:
   17330265:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330266:
     template: Kindred_Beastmaster
     at:       [360.500, 8.974, -180.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330267:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330268:
     template: Kindred_Beastmaster
     at:       [360.500, 8.746, -184.500, 0]
+    region:   null
     level:    [77, 80]
 
   17330269:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330270:
     template: Tombstone_Prototype
     at:       [353.000, 7.319, -180.000, 0]
+    region:   null
     level:    [65, 65]
 
   17330271:
     template: Vanguard_Eye
     at:       [300.054, 1.966, -23.434, 15]
+    region:   null
     level:    [70, 70]
 
   17330272:
     template: Kindred_Samurai
     at:       [304.004, 3.870, -231.952, 15]
+    region:   null
     level:    [77, 80]
 
   17330273:
@@ -1147,56 +1197,67 @@ spawns:
   17330274:
     template: Kindred_Samurai
     at:       [312.210, 7.704, -235.110, 15]
+    region:   null
     level:    [77, 80]
 
   17330275:
     template: Kindred_Bard
     at:       [316.067, 8.000, -236.594, 15]
+    region:   null
     level:    [77, 80]
 
   17330276:
     template: Vanguard_Eye
     at:       [292.816, -0.636, -257.937, 15]
+    region:   null
     level:    [70, 70]
 
   17330277:
     template: Kindred_Ninja
     at:       [296.792, 0.486, -259.418, 15]
+    region:   null
     level:    [77, 80]
 
   17330278:
     template: Kindred_Ninja
     at:       [300.781, 2.549, -260.903, 15]
+    region:   null
     level:    [77, 80]
 
   17330279:
     template: Kindred_Ninja
     at:       [304.522, 3.002, -262.295, 15]
+    region:   null
     level:    [77, 80]
 
   17330280:
     template: Kindred_Bard
     at:       [308.518, 2.518, -263.783, 15]
+    region:   null
     level:    [77, 80]
 
   17330281:
     template: Vanguard_Eye
     at:       [296.025, 2.549, -245.940, 15]
+    region:   null
     level:    [70, 70]
 
   17330282:
     template: Kindred_Warrior
     at:       [300.246, 4.864, -247.581, 15]
+    region:   null
     level:    [77, 80]
 
   17330283:
     template: Kindred_Warrior
     at:       [304.225, 6.115, -249.127, 15]
+    region:   null
     level:    [77, 80]
 
   17330284:
     template: Kindred_Warrior
     at:       [308.055, 6.168, -250.616, 15]
+    region:   null
     level:    [77, 80]
 
   17330285:
@@ -1207,81 +1268,97 @@ spawns:
   17330286:
     template: Vanguard_Eye
     at:       [377.000, -6.411, -66.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330287:
     template: Kindred_Monk
     at:       [383.000, -3.716, -66.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330288:
     template: Kindred_Monk
     at:       [383.000, -3.010, -62.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330289:
     template: Kindred_Monk
     at:       [383.000, -3.008, -58.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330290:
     template: Vanguard_Eye
     at:       [389.000, -0.697, -62.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330291:
     template: Kindred_Black_Mage
     at:       [393.000, -0.384, -66.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330292:
     template: Kindred_White_Mage
     at:       [393.000, -0.299, -70.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330293:
     template: Vanguard_Eye
     at:       [353.000, -7.809, -62.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330294:
     template: Kindred_Black_Mage
     at:       [369.000, -6.640, -66.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330295:
     template: Kindred_White_Mage
     at:       [369.000, -8.574, -58.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330296:
     template: Vanguard_Eye
     at:       [365.000, -7.841, -62.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330297:
     template: Kindred_Paladin
     at:       [381.000, -4.438, -66.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330298:
     template: Kindred_Paladin
     at:       [381.000, -3.133, -58.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330299:
     template: Vanguard_Eye
     at:       [377.000, -4.190, -58.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330300:
     template: Kindred_Paladin
     at:       [393.000, -0.751, -58.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330301:
     template: Kindred_Paladin
     at:       [393.000, -0.697, -62.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330302:
@@ -1292,6 +1369,7 @@ spawns:
   17330303:
     template: Vanguard_Eye
     at:       [377.000, -5.481, -94.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330304:
@@ -1302,36 +1380,43 @@ spawns:
   17330305:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330306:
     template: Kindred_Beastmaster
     at:       [377.000, -6.362, -91.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330307:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330308:
     template: Vanguard_Eye
     at:       [377.000, -1.323, -104.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330309:
     template: Kindred_Dragoon
     at:       [377.000, -3.231, -101.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330310:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330311:
     template: Kindred_Dragoon
     at:       [377.000, -4.430, -98.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330312:
@@ -1342,11 +1427,13 @@ spawns:
   17330313:
     template: Vanguard_Eye
     at:       [377.000, -5.500, -84.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330314:
     template: Kindred_Summoner
     at:       [377.000, -6.030, -87.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330315:
@@ -1357,71 +1444,85 @@ spawns:
   17330316:
     template: Kindred_Summoner
     at:       [377.000, -6.275, -90.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330317:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330318:
     template: Vanguard_Eye
     at:       [90.000, -24.308, -70.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330319:
     template: Kindred_Dark_Knight
     at:       [86.000, -23.532, -94.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330320:
     template: Kindred_Dark_Knight
     at:       [86.000, -23.692, -90.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330321:
     template: Kindred_Bard
     at:       [86.000, -23.929, -86.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330322:
     template: Vanguard_Eye
     at:       [82.000, -23.100, -98.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330323:
     template: Kindred_Dark_Knight
     at:       [86.000, -23.697, -74.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330324:
     template: Kindred_Dark_Knight
     at:       [86.000, -23.901, -78.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330325:
     template: Kindred_Bard
     at:       [86.000, -23.901, -82.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330326:
     template: Vanguard_Eye
     at:       [90.000, -24.308, -70.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330327:
     template: Kindred_Red_Mage
     at:       [86.000, -17.832, -54.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330328:
     template: Kindred_White_Mage
     at:       [86.000, -16.690, -50.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330329:
     template: Kindred_Bard
     at:       [86.000, -19.194, -58.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330330:
@@ -1432,61 +1533,73 @@ spawns:
   17330331:
     template: Kindred_Red_Mage
     at:       [86.000, -22.607, -66.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330332:
     template: Kindred_White_Mage
     at:       [86.000, -20.823, -62.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330333:
     template: Kindred_Bard
     at:       [86.000, -23.520, -70.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330334:
     template: Vanguard_Eye
     at:       [390.000, -7.884, -7.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330335:
     template: Kindred_Beastmaster
     at:       [394.000, -6.325, -14.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330336:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330337:
     template: Kindred_Beastmaster
     at:       [394.000, -3.472, -21.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330338:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330339:
     template: Vanguard_Eye
     at:       [410.000, -7.452, -22.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330340:
     template: Kindred_Dragoon
     at:       [410.000, -4.462, -14.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330341:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330342:
     template: Kindred_Dragoon
     at:       [410.000, -2.840, -21.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330343:
@@ -1497,46 +1610,55 @@ spawns:
   17330344:
     template: Vanguard_Eye
     at:       [390.000, -2.675, -22.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330345:
     template: Kindred_Summoner
     at:       [396.000, -5.032, -18.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330346:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330347:
     template: Kindred_Summoner
     at:       [401.000, -5.030, -18.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330348:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330349:
     template: Kindred_Summoner
     at:       [406.000, -4.551, -18.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330350:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330351:
     template: Tombstone_Prototype
     at:       [405.000, -5.979, -12.000, 85]
+    region:   null
     level:    [65, 65]
 
   17330352:
     template: Vanguard_Eye
     at:       [210.000, -18.473, -224.000, 128]
+    region:   null
     level:    [70, 70]
 
   17330353:
@@ -1547,21 +1669,25 @@ spawns:
   17330354:
     template: Kindred_Ranger
     at:       [200.000, -19.537, -224.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330355:
     template: Vanguard_Eye
     at:       [195.000, -18.772, -224.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330356:
     template: Kindred_Black_Mage
     at:       [195.000, -17.469, -229.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330357:
     template: Kindred_Ranger
     at:       [195.000, -16.390, -234.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330358:
@@ -1572,6 +1698,7 @@ spawns:
   17330359:
     template: Kindred_Black_Mage
     at:       [200.000, -16.000, -239.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330360:
@@ -1582,71 +1709,85 @@ spawns:
   17330361:
     template: Vanguard_Eye
     at:       [210.000, -14.793, -239.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330362:
     template: Kindred_Black_Mage
     at:       [210.000, -15.546, -234.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330363:
     template: Kindred_Ranger
     at:       [210.000, -16.302, -229.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330364:
     template: Vanguard_Eye
     at:       [276.829, -5.616, -177.122, 15]
+    region:   null
     level:    [70, 70]
 
   17330365:
     template: Kindred_Ninja
     at:       [284.862, -1.202, -189.781, 15]
+    region:   null
     level:    [77, 80]
 
   17330366:
     template: Kindred_Thief
     at:       [279.725, -2.401, -187.197, 15]
+    region:   null
     level:    [77, 80]
 
   17330367:
     template: Kindred_Thief
     at:       [274.519, -4.667, -183.189, 15]
+    region:   null
     level:    [77, 80]
 
   17330368:
     template: Vanguard_Eye
     at:       [263.054, -6.849, -198.388, 15]
+    region:   null
     level:    [70, 70]
 
   17330369:
     template: Kindred_Ninja
     at:       [276.281, -0.912, -212.446, 15]
+    region:   null
     level:    [77, 80]
 
   17330370:
     template: Kindred_Thief
     at:       [269.584, -4.660, -209.768, 15]
+    region:   null
     level:    [77, 80]
 
   17330371:
     template: Kindred_Thief
     at:       [263.622, -6.919, -206.988, 15]
+    region:   null
     level:    [77, 80]
 
   17330372:
     template: Vanguard_Eye
     at:       [270.276, -5.636, -187.217, 15]
+    region:   null
     level:    [70, 70]
 
   17330373:
     template: Kindred_Ninja
     at:       [277.006, -0.381, -199.592, 15]
+    region:   null
     level:    [77, 80]
 
   17330374:
     template: Kindred_Thief
     at:       [268.263, -5.520, -193.977, 15]
+    region:   null
     level:    [77, 80]
 
   17330375:
@@ -1657,71 +1798,85 @@ spawns:
   17330376:
     template: Kindred_Ninja
     at:       [232.312, -12.091, -230.402, 15]
+    region:   null
     level:    [77, 80]
 
   17330377:
     template: Kindred_Thief
     at:       [237.312, -9.800, -230.402, 15]
+    region:   null
     level:    [77, 80]
 
   17330378:
     template: Vanguard_Eye
     at:       [231.780, -14.134, -214.230, 15]
+    region:   null
     level:    [70, 70]
 
   17330379:
     template: Kindred_Samurai
     at:       [236.780, -12.717, -219.230, 15]
+    region:   null
     level:    [77, 80]
 
   17330380:
     template: Kindred_Samurai
     at:       [241.780, -12.717, -219.230, 15]
+    region:   null
     level:    [77, 80]
 
   17330381:
     template: Kindred_Ranger
     at:       [246.780, -12.380, -219.230, 15]
+    region:   null
     level:    [77, 80]
 
   17330382:
     template: Vanguard_Eye
     at:       [222.844, -12.301, -236.531, 15]
+    region:   null
     level:    [70, 70]
 
   17330383:
     template: Kindred_Samurai
     at:       [227.844, -10.121, -241.531, 15]
+    region:   null
     level:    [77, 80]
 
   17330384:
     template: Kindred_Samurai
     at:       [232.844, -8.402, -241.531, 15]
+    region:   null
     level:    [77, 80]
 
   17330385:
     template: Kindred_Ranger
     at:       [237.844, -8.000, -241.531, 15]
+    region:   null
     level:    [77, 80]
 
   17330386:
     template: Vanguard_Eye
     at:       [-28.000, -15.604, 42.000, 128]
+    region:   null
     level:    [70, 70]
 
   17330387:
     template: Kindred_Warrior
     at:       [-24.000, -15.205, 42.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330388:
     template: Kindred_Red_Mage
     at:       [-20.000, -15.000, 42.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330389:
     template: Kindred_Bard
     at:       [-16.000, -15.205, 42.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330390:
@@ -1737,116 +1892,139 @@ spawns:
   17330392:
     template: Kindred_Beastmaster
     at:       [-20.000, -15.420, 34.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330393:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330394:
     template: Kindred_White_Mage
     at:       [-16.000, -15.616, 34.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330395:
     template: Vanguard_Eye
     at:       [194.000, -7.753, 12.559, 79]
+    region:   null
     level:    [70, 70]
 
   17330396:
     template: Kindred_Paladin
     at:       [192.411, -7.788, 8.469, 79]
+    region:   null
     level:    [77, 80]
 
   17330397:
     template: Kindred_Thief
     at:       [190.864, -8.355, 4.487, 79]
+    region:   null
     level:    [77, 80]
 
   17330398:
     template: Kindred_Summoner
     at:       [190.037, -8.529, 14.601, 79]
+    region:   null
     level:    [77, 80]
 
   17330399:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330400:
     template: Vanguard_Eye
     at:       [204.000, -7.852, 7.000, 79]
+    region:   null
     level:    [70, 70]
 
   17330401:
     template: Kindred_Dark_Knight
     at:       [200.728, -8.000, -1.169, 79]
+    region:   null
     level:    [77, 80]
 
   17330402:
     template: Kindred_Ninja
     at:       [202.462, -8.000, 3.161, 79]
+    region:   null
     level:    [77, 80]
 
   17330403:
     template: Kindred_Black_Mage
     at:       [199.955, -7.753, 8.987, 79]
+    region:   null
     level:    [77, 80]
 
   17330404:
     template: Vanguard_Eye
     at:       [184.009, -11.385, 18.436, 79]
+    region:   null
     level:    [70, 70]
 
   17330405:
     template: Kindred_Samurai
     at:       [180.835, -12.065, 10.022, 79]
+    region:   null
     level:    [77, 80]
 
   17330406:
     template: Kindred_Dragoon
     at:       [182.409, -11.212, 14.097, 79]
+    region:   null
     level:    [77, 80]
 
   17330407:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330408:
     template: Kindred_Ranger
     at:       [180.110, -12.062, 20.292, 79]
+    region:   null
     level:    [77, 80]
 
   17330409:
     template: Tombstone_Prototype
     at:       [197.999, -7.009, 19.832, 79]
+    region:   null
     level:    [65, 65]
 
   17330410:
     template: Vanguard_Eye
     at:       [43.649, -15.628, 11.467, 48]
+    region:   null
     level:    [70, 70]
 
   17330411:
     template: Kindred_Warrior
     at:       [46.297, -15.654, 13.839, 44]
+    region:   null
     level:    [77, 80]
 
   17330412:
     template: Kindred_Bard
     at:       [39.877, -15.691, 10.211, 52]
+    region:   null
     level:    [77, 80]
 
   17330413:
     template: Vanguard_Eye
     at:       [49.739, -15.778, 15.416, 36]
+    region:   null
     level:    [70, 70]
 
   17330414:
     template: Kindred_Monk
     at:       [44.331, -15.144, 17.895, 44]
+    region:   null
     level:    [77, 80]
 
   17330415:
@@ -1857,6 +2035,7 @@ spawns:
   17330416:
     template: Vanguard_Eye
     at:       [36.400, -15.780, 8.416, 43]
+    region:   null
     level:    [70, 70]
 
   17330417:
@@ -1867,6 +2046,7 @@ spawns:
   17330418:
     template: Kindred_White_Mage
     at:       [38.611, -15.377, 14.274, 52]
+    region:   null
     level:    [77, 80]
 
   17330419:
@@ -1877,46 +2057,55 @@ spawns:
   17330420:
     template: Kindred_Monk
     at:       [338.341, 0.832, -284.795, 200]
+    region:   null
     level:    [77, 80]
 
   17330421:
     template: Kindred_White_Mage
     at:       [336.725, 0.340, -292.443, 200]
+    region:   null
     level:    [77, 80]
 
   17330422:
     template: Vanguard_Eye
     at:       [347.229, -0.383, -289.497, 200]
+    region:   null
     level:    [70, 70]
 
   17330423:
     template: Kindred_Paladin
     at:       [342.834, 0.360, -289.415, 200]
+    region:   null
     level:    [77, 80]
 
   17330424:
     template: Kindred_Red_Mage
     at:       [343.548, 0.668, -285.492, 200]
+    region:   null
     level:    [77, 80]
 
   17330425:
     template: Vanguard_Eye
     at:       [327.585, -0.209, -288.126, 200]
+    region:   null
     level:    [70, 70]
 
   17330426:
     template: Kindred_Paladin
     at:       [332.844, 0.187, -289.060, 200]
+    region:   null
     level:    [77, 80]
 
   17330427:
     template: Kindred_Red_Mage
     at:       [333.896, 0.573, -284.079, 200]
+    region:   null
     level:    [77, 80]
 
   17330428:
     template: Vanguard_Eye
     at:       [156.000, -35.170, 63.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330429:
@@ -1937,31 +2126,37 @@ spawns:
   17330432:
     template: Vanguard_Eye
     at:       [160.000, -35.151, 63.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330433:
     template: Kindred_Dragoon
     at:       [160.000, -35.506, 67.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330434:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330435:
     template: Kindred_Ranger
     at:       [160.000, -35.752, 71.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330436:
     template: Vanguard_Eye
     at:       [185.000, -18.844, -163.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330437:
     template: Kindred_Beastmaster
     at:       [182.000, -19.793, -163.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330438:
@@ -1972,6 +2167,7 @@ spawns:
   17330439:
     template: Kindred_Beastmaster
     at:       [179.000, -20.765, -163.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330440:
@@ -1982,96 +2178,115 @@ spawns:
   17330441:
     template: Kindred_White_Mage
     at:       [176.000, -21.519, -163.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330442:
     template: Kindred_Bard
     at:       [173.000, -21.883, -163.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330443:
     template: Vanguard_Eye
     at:       [170.000, -22.795, -163.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330444:
     template: Kindred_Beastmaster
     at:       [170.000, -22.795, -160.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330445:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330446:
     template: Kindred_Beastmaster
     at:       [170.000, -22.727, -157.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330447:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330448:
     template: Kindred_White_Mage
     at:       [170.000, -22.194, -154.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330449:
     template: Kindred_Bard
     at:       [170.000, -21.304, -151.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330450:
     template: Vanguard_Eye
     at:       [170.000, -20.553, -148.000, 64]
+    region:   null
     level:    [70, 70]
 
   17330451:
     template: Kindred_Monk
     at:       [173.000, -20.140, -148.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330452:
     template: Kindred_Ninja
     at:       [176.000, -20.515, -148.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330453:
     template: Kindred_Summoner
     at:       [179.000, -20.140, -148.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330454:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330455:
     template: Vanguard_Eye
     at:       [185.000, -17.197, -148.000, 128]
+    region:   null
     level:    [70, 70]
 
   17330456:
     template: Kindred_Monk
     at:       [185.000, -18.533, -151.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330457:
     template: Kindred_Ninja
     at:       [185.000, -19.189, -154.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330458:
     template: Kindred_Summoner
     at:       [185.000, -19.189, -157.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330459:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330460:
@@ -2082,56 +2297,67 @@ spawns:
   17330461:
     template: Vanguard_Eye
     at:       [488.650, -0.392, 37.662, 175]
+    region:   null
     level:    [70, 70]
 
   17330462:
     template: Kindred_Warrior
     at:       [486.501, -0.128, 36.023, 161]
+    region:   null
     level:    [77, 80]
 
   17330463:
     template: Kindred_Warrior
     at:       [488.764, -0.206, 33.619, 161]
+    region:   null
     level:    [77, 80]
 
   17330464:
     template: Kindred_Red_Mage
     at:       [492.062, -0.226, 30.114, 161]
+    region:   null
     level:    [77, 80]
 
   17330465:
     template: Vanguard_Eye
     at:       [482.351, -0.165, 32.701, 161]
+    region:   null
     level:    [70, 70]
 
   17330466:
     template: Kindred_Warrior
     at:       [483.645, -0.112, 33.787, 161]
+    region:   null
     level:    [77, 80]
 
   17330467:
     template: Kindred_Warrior
     at:       [486.587, -0.495, 30.685, 161]
+    region:   null
     level:    [77, 80]
 
   17330468:
     template: Kindred_Red_Mage
     at:       [489.424, -0.451, 27.693, 161]
+    region:   null
     level:    [77, 80]
 
   17330469:
     template: Vanguard_Eye
     at:       [493.365, -0.038, 25.911, 161]
+    region:   null
     level:    [70, 70]
 
   17330470:
     template: Kindred_Black_Mage
     at:       [495.798, -0.392, 23.472, 161]
+    region:   null
     level:    [77, 80]
 
   17330471:
     template: Kindred_Black_Mage
     at:       [498.029, -0.715, 21.234, 161]
+    region:   null
     level:    [77, 80]
 
   17330472:
@@ -2142,26 +2368,31 @@ spawns:
   17330473:
     template: Kindred_Paladin
     at:       [218.589, -23.515, 134.574, 64]
+    region:   null
     level:    [77, 80]
 
   17330474:
     template: Kindred_Summoner
     at:       [218.616, -24.765, 138.410, 64]
+    region:   null
     level:    [77, 80]
 
   17330475:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330476:
     template: Vanguard_Eye
     at:       [230.603, -27.731, 142.534, 64]
+    region:   null
     level:    [70, 70]
 
   17330477:
     template: Kindred_Paladin
     at:       [226.614, -27.695, 142.534, 64]
+    region:   null
     level:    [77, 80]
 
   17330478:
@@ -2172,11 +2403,13 @@ spawns:
   17330479:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330480:
     template: Vanguard_Eye
     at:       [206.679, -26.995, 142.533, 64]
+    region:   null
     level:    [70, 70]
 
   17330481:
@@ -2217,201 +2450,241 @@ spawns:
   17330488:
     template: Vanguard_Eye
     at:       [351.000, -7.751, 122.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330489:
     template: Kindred_Dark_Knight
     at:       [367.000, -7.851, 122.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330490:
     template: Kindred_Dark_Knight
     at:       [363.000, -8.000, 122.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330491:
     template: Kindred_Dark_Knight
     at:       [359.000, -8.000, 122.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330492:
     template: Kindred_Black_Mage
     at:       [355.000, -7.951, 122.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330493:
     template: Vanguard_Eye
     at:       [351.000, -7.953, 114.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330494:
     template: Kindred_Samurai
     at:       [367.000, -8.056, 114.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330495:
     template: Kindred_Samurai
     at:       [359.000, -8.100, 114.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330496:
     template: Kindred_Samurai
     at:       [363.000, -8.100, 114.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330497:
     template: Kindred_Black_Mage
     at:       [355.000, -8.100, 114.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330498:
     template: Vanguard_Eye
     at:       [374.867, -0.457, -229.252, 192]
+    region:   null
     level:    [70, 70]
 
   17330499:
     template: Kindred_Warrior
     at:       [374.867, 1.166, -224.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330500:
     template: Kindred_Monk
     at:       [374.867, -0.329, -234.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330501:
     template: Kindred_Thief
     at:       [370.867, 2.384, -224.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330502:
     template: Kindred_Red_Mage
     at:       [378.867, 0.044, -224.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330503:
     template: Kindred_Black_Mage
     at:       [370.867, 0.120, -234.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330504:
     template: Kindred_White_Mage
     at:       [378.867, -0.834, -234.252, 192]
+    region:   null
     level:    [77, 80]
 
   17330505:
     template: Vanguard_Eye
     at:       [356.334, 0.523, -231.760, 192]
+    region:   null
     level:    [70, 70]
 
   17330506:
     template: Kindred_Warrior
     at:       [356.334, 0.000, -235.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330507:
     template: Kindred_Monk
     at:       [356.334, 2.149, -226.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330508:
     template: Kindred_Thief
     at:       [360.334, 2.149, -226.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330509:
     template: Kindred_Red_Mage
     at:       [352.334, 2.472, -226.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330510:
     template: Kindred_Black_Mage
     at:       [360.334, 0.000, -235.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330511:
     template: Kindred_White_Mage
     at:       [352.334, 0.451, -235.760, 192]
+    region:   null
     level:    [77, 80]
 
   17330512:
     template: Effigy_Prototype
     at:       [367.459, 0.380, -233.572, 192]
+    region:   null
     level:    [65, 65]
 
   17330513:
     template: Vanguard_Eye
     at:       [210.000, -20.530, -110.000, 128]
+    region:   null
     level:    [70, 70]
 
   17330514:
     template: Kindred_Paladin
     at:       [202.000, -22.163, -110.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330515:
     template: Kindred_Dark_Knight
     at:       [194.000, -22.661, -110.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330516:
     template: Kindred_Beastmaster
     at:       [186.000, -22.500, -110.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330517:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330518:
     template: Kindred_Ranger
     at:       [178.000, -21.049, -110.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330519:
     template: Kindred_Bard
     at:       [159.000, -15.701, -110.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330520:
     template: Vanguard_Eye
     at:       [156.000, -16.419, -70.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330521:
     template: Kindred_Paladin
     at:       [202.000, -7.701, -70.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330522:
     template: Kindred_Dark_Knight
     at:       [194.000, -8.074, -70.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330523:
     template: Kindred_Beastmaster
     at:       [186.000, -11.035, -70.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330524:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330525:
     template: Kindred_Ranger
     at:       [178.000, -14.286, -70.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330526:
     template: Kindred_Bard
     at:       [159.000, -15.856, -70.000, 128]
+    region:   null
     level:    [77, 80]
 
   17330527:
     template: Vanguard_Eye
     at:       [156.000, -15.710, -110.000, 0]
+    region:   null
     level:    [70, 70]
 
   17330528:
@@ -2469,24 +2742,28 @@ spawns:
   17330538:
     template: Kindred_Ninja
     at:       [210.000, -10.078, -86.000, 128]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330539:
     template: Kindred_Summoner
     at:       [210.000, -7.804, -75.000, 128]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330540:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330541:
     template: Vanguard_Eye
     at:       [500.917, -7.771, 196.968, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
@@ -2498,140 +2775,164 @@ spawns:
   17330543:
     template: Kindred_Thief
     at:       [501.132, -7.787, 204.924, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330544:
     template: Vanguard_Eye
     at:       [504.699, -8.000, 209.262, 97]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330545:
     template: Kindred_Monk
     at:       [508.488, -8.067, 212.849, 97]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330546:
     template: Kindred_Thief
     at:       [511.775, -8.059, 215.960, 97]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330547:
     template: Vanguard_Eye
     at:       [515.323, -7.838, 218.191, 124]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330548:
     template: Kindred_White_Mage
     at:       [519.259, -7.806, 218.614, 124]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330549:
     template: Kindred_White_Mage
     at:       [523.218, -7.774, 219.038, 124]
+    region:   null
     level:    [77, 80]
 
   17330550:
     template: Vanguard_Eye
     at:       [234.587, -19.180, -161.847, 147]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330551:
     template: Vanguard_Eye
     at:       [236.861, -20.705, -162.928, 155]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330552:
     template: Vanguard_Eye
     at:       [238.297, -20.739, -159.594, 141]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330553:
     template: Vanguard_Eye
     at:       [235.507, -20.739, -157.904, 150]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330554:
     template: Vanguard_Eye
     at:       [232.004, -19.078, -165.196, 150]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330555:
     template: Vanguard_Eye
     at:       [234.284, -20.672, -166.805, 155]
+    region:   null
     level:    [70, 70]
 
   17330556:
     template: Vanguard_Eye
     at:       [232.748, -20.739, -170.585, 159]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330557:
     template: Vanguard_Eye
     at:       [229.425, -20.739, -168.680, 149]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330558:
     template: Icon_Prototype
     at:       [235.389, -20.662, -164.888, 149]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330559:
     template: Vanguard_Eye
     at:       [302.000, -27.800, 220.000, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330560:
     template: Kindred_Samurai
     at:       [302.000, -27.902, 216.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330561:
     template: Kindred_Samurai
     at:       [302.000, -27.604, 212.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330562:
     template: Kindred_Red_Mage
     at:       [302.000, -27.504, 208.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330563:
     template: Vanguard_Eye
     at:       [246.943, -27.399, 95.973, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330564:
     template: Kindred_Dragoon
     at:       [246.647, -27.304, 98.556, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330565:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330566:
     template: Kindred_Dragoon
     at:       [246.647, -27.406, 102.556, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
@@ -2643,30 +2944,35 @@ spawns:
   17330568:
     template: Kindred_Red_Mage
     at:       [246.647, -27.622, 106.556, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330569:
     template: Vanguard_Eye
     at:       [39.000, -35.751, 89.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330570:
     template: Kindred_Dark_Knight
     at:       [39.000, -35.505, 93.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330571:
     template: Kindred_Dark_Knight
     at:       [39.000, -35.150, 97.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330572:
     template: Vanguard_Eye
     at:       [301.008, -28.340, 228.875, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
@@ -2678,6 +2984,7 @@ spawns:
   17330574:
     template: Vanguard_Eye
     at:       [44.000, -35.751, 89.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
@@ -2759,122 +3066,143 @@ spawns:
   17330588:
     template: Vanguard_Eye
     at:       [61.500, -24.002, -272.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330589:
     template: Kindred_Monk
     at:       [61.500, -23.818, -276.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330590:
     template: Kindred_Monk
     at:       [61.500, -23.815, -280.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330591:
     template: Kindred_Bard
     at:       [58.000, -23.852, -280.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330592:
     template: Vanguard_Eye
     at:       [99.385, -24.120, -269.360, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330593:
     template: Kindred_Monk
     at:       [99.392, -23.756, -273.335, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330594:
     template: Kindred_Monk
     at:       [99.400, -23.747, -277.323, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330595:
     template: Kindred_Bard
     at:       [99.408, -23.747, -281.290, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330596:
     template: Vanguard_Eye
     at:       [23.000, -23.150, -360.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330597:
     template: Kindred_Thief
     at:       [19.500, -23.025, -357.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330598:
     template: Kindred_Thief
     at:       [19.500, -23.331, -353.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330599:
     template: Kindred_Thief
     at:       [19.500, -23.576, -349.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330600:
     template: Vanguard_Eye
     at:       [30.000, -23.700, -360.000, 192]
+    region:   null
     level:    [70, 70]
 
   17330601:
     template: Kindred_Ranger
     at:       [26.000, -23.404, -357.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330602:
     template: Kindred_Ranger
     at:       [26.000, -23.404, -363.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330603:
     template: Vanguard_Eye
     at:       [15.000, -23.305, -360.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330604:
     template: Kindred_Samurai
     at:       [19.500, -23.025, -360.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330605:
     template: Kindred_Samurai
     at:       [19.500, -23.027, -364.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330606:
     template: Kindred_Samurai
     at:       [19.500, -23.429, -368.000, 192]
+    region:   null
     level:    [77, 80]
 
   17330607:
     template: Vanguard_Eye
     at:       [7.000, -23.851, -360.000, 192]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330608:
     template: Kindred_Ranger
     at:       [11.500, -23.625, -357.000, 192]
+    region:   null
     level:    [77, 80]
     script:   null
 
@@ -2891,94 +3219,110 @@ spawns:
   17330611:
     template: Kindred_Dragoon
     at:       [-126.000, -16.266, -18.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330612:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330613:
     template: Kindred_Dragoon
     at:       [-122.000, -16.258, -18.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330614:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330615:
     template: Vanguard_Eye
     at:       [-119.000, -24.000, -42.000, 0]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330616:
     template: Kindred_Black_Mage
     at:       [-123.000, -24.000, -38.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330617:
     template: Kindred_White_Mage
     at:       [-119.000, -24.000, -38.000, 0]
+    region:   null
     level:    [77, 80]
 
   17330618:
     template: Vanguard_Eye
     at:       [-123.000, -16.191, -6.000, 0]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330619:
     template: Kindred_Dark_Knight
     at:       [-127.000, -16.969, -10.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330620:
     template: Kindred_Dark_Knight
     at:       [-123.000, -17.126, -10.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330621:
     template: Vanguard_Eye
     at:       [-120.000, -23.757, -34.000, 0]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330622:
     template: Kindred_Black_Mage
     at:       [-124.000, -22.887, -30.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330623:
     template: Kindred_White_Mage
     at:       [-120.000, -22.812, -30.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330624:
     template: Vanguard_Eye
     at:       [-124.000, -16.000, 3.000, 0]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330625:
     template: Kindred_Paladin
     at:       [-128.000, -15.801, -1.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330626:
     template: Kindred_Paladin
     at:       [-124.000, -16.000, -1.000, 0]
+    region:   null
     level:    [77, 80]
     script:   null
 
@@ -3041,18 +3385,21 @@ spawns:
   17330637:
     template: Kindred_Ninja
     at:       [22.000, -34.702, 148.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330638:
     template: Kindred_Red_Mage
     at:       [22.000, -34.924, 151.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330639:
     template: Vanguard_Eye
     at:       [22.000, -27.353, 121.000, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
@@ -3064,18 +3411,21 @@ spawns:
   17330641:
     template: Kindred_Paladin
     at:       [22.000, -28.622, 127.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330642:
     template: Vanguard_Eye
     at:       [22.000, -35.043, 154.000, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330643:
     template: Kindred_Dragoon
     at:       [22.000, -35.100, 157.000, 64]
+    region:   null
     level:    [77, 80]
 
   17330644:
@@ -3086,53 +3436,62 @@ spawns:
   17330645:
     template: Kindred_Dragoon
     at:       [22.000, -35.100, 160.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330646:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330647:
     template: Kindred_Dragoon
     at:       [22.000, -35.101, 163.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330648:
     template: Kindreds_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330649:
     template: Vanguard_Eye
     at:       [-113.000, -36.151, 81.000, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330650:
     template: Kindred_Beastmaster
     at:       [-113.000, -36.151, 77.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330651:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330652:
     template: Kindred_Beastmaster
     at:       [-113.000, -36.156, 73.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330653:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
@@ -3144,42 +3503,49 @@ spawns:
   17330655:
     template: Kindred_Beastmaster
     at:       [-134.000, -27.744, 88.500, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330656:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330657:
     template: Kindred_Beastmaster
     at:       [-134.000, -25.969, 92.500, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330658:
     template: Kindreds_Vouivre
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330659:
     template: Vanguard_Eye
     at:       [-117.000, -36.000, 81.000, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330660:
     template: Kindred_Summoner
     at:       [-117.000, -36.000, 77.000, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330661:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
@@ -3191,94 +3557,110 @@ spawns:
   17330663:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330664:
     template: Vanguard_Eye
     at:       [-134.000, -25.976, 96.500, 64]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330665:
     template: Kindred_Summoner
     at:       [-134.000, -24.287, 100.500, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330666:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330667:
     template: Kindred_Summoner
     at:       [-134.000, -22.444, 104.500, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330668:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
 
   17330669:
     template: Kindred_Summoner
     at:       [-134.000, -22.573, 108.500, 64]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330670:
     template: Kindreds_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [77, 80]
     script:   null
 
   17330671:
     template: Effigy_Prototype
     at:       [-107.792, -39.803, 35.896, 159]
+    region:   null
     level:    [65, 65]
 
   17330672:
     template: Vanguard_Eye
     at:       [155.286, -21.024, -40.449, 92]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330673:
     template: Count_Zaebos
     at:       [153.322, -19.954, -42.492, 95]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330674:
     template: Vanguard_Eye
     at:       [159.534, -21.048, -44.655, 94]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330675:
     template: Duke_Berith
     at:       [157.062, -21.053, -47.781, 95]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330676:
     template: Vanguard_Eye
     at:       [150.566, -21.048, -36.725, 94]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330677:
     template: Marquis_Decarabia
     at:       [147.428, -21.057, -40.210, 93]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330678:
     template: Vanguard_Eye
     at:       [119.637, -28.726, -118.107, 129]
+    region:   null
     level:    [70, 70]
 
   17330679:
@@ -3331,41 +3713,48 @@ spawns:
   17330687:
     template: Vanguard_Eye
     at:       [39.281, -28.714, -139.968, 125]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330688:
     template: Count_Raum
     at:       [35.417, -28.716, -139.974, 128]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330689:
     template: Vanguard_Eye
     at:       [39.528, -28.714, -128.019, 126]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330690:
     template: Marquis_Nebiros
     at:       [35.587, -28.726, -128.074, 128]
+    region:   null
     level:    [82, 82]
 
   17330691:
     template: Nebiross_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330692:
     template: Vanguard_Eye
     at:       [61.748, -28.477, -196.265, 95]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330693:
     template: Duke_Scox
     at:       [59.467, -26.907, -198.488, 96]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3377,29 +3766,34 @@ spawns:
   17330695:
     template: Marquis_Gamygyn
     at:       [62.648, -28.511, -203.578, 96]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330696:
     template: Vanguard_Eye
     at:       [57.069, -28.511, -192.535, 95]
+    region:   null
     level:    [70, 70]
 
   17330697:
     template: Marquis_Orias
     at:       [54.024, -28.520, -195.314, 96]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330698:
     template: Vanguard_Eye
     at:       [-4.982, -28.499, -101.111, 139]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330699:
     template: Count_Vine
     at:       [-7.562, -26.981, -100.164, 139]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3411,41 +3805,48 @@ spawns:
   17330701:
     template: King_Zagan
     at:       [-10.921, -28.555, -105.092, 139]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330702:
     template: Zagans_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330703:
     template: Vanguard_Eye
     at:       [-2.870, -28.555, -95.516, 146]
+    region:   null
     level:    [70, 70]
     script:   null
 
   17330704:
     template: Marquis_Cimeries
     at:       [-6.706, -28.555, -94.139, 139]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330705:
     template: Statue_Prototype
     at:       [-86.100, -24.229, -85.193, 232]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330706:
     template: Animated_Knuckles
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330707:
     template: Animated_Knuckles
     at:       [342.159, -27.820, 378.176, 68]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3504,82 +3905,96 @@ spawns:
   17330717:
     template: Satellite_Daggers
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330718:
     template: Satellite_Daggers
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330719:
     template: Satellite_Daggers
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330720:
     template: Animated_Longsword
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330721:
     template: Animated_Longsword
     at:       [582.532, -8.058, 296.737, 73]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330722:
     template: Satellite_Longswords
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330723:
     template: Satellite_Longswords
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330724:
     template: Satellite_Longswords
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330725:
     template: Satellite_Longswords
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330726:
     template: Satellite_Longswords
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330727:
     template: Animated_Claymore
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330728:
     template: Animated_Claymore
     at:       [-22.198, -24.596, -493.429, 199]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330729:
     template: Satellite_Claymores
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330730:
     template: Satellite_Claymores
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3591,76 +4006,89 @@ spawns:
   17330732:
     template: Satellite_Claymores
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330733:
     template: Satellite_Claymores
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330734:
     template: Animated_Tabar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330735:
     template: Animated_Tabar
     at:       [-140.134, -42.131, 134.984, 18]
+    region:   null
     level:    [82, 82]
 
   17330736:
     template: Satellite_Tabars
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330737:
     template: Satellite_Tabars
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330738:
     template: Satellite_Tabars
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330739:
     template: Satellite_Tabars
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330740:
     template: Satellite_Tabars
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330741:
     template: Animated_Great_Axe
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330742:
     template: Animated_Great_Axe
     at:       [320.547, -8.321, 168.365, 72]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330743:
     template: Satellite_Great_Axes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330744:
     template: Satellite_Great_Axes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3672,17 +4100,20 @@ spawns:
   17330746:
     template: Satellite_Great_Axes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330747:
     template: Satellite_Great_Axes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330748:
     template: Animated_Spear
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3694,70 +4125,82 @@ spawns:
   17330750:
     template: Satellite_Spears
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330751:
     template: Satellite_Spears
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330752:
     template: Satellite_Spears
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330753:
     template: Satellite_Spears
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330754:
     template: Satellite_Spears
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330755:
     template: Animated_Scythe
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330756:
     template: Animated_Scythe
     at:       [577.984, 0.195, -18.271, 195]
+    region:   null
     level:    [82, 82]
 
   17330757:
     template: Satellite_Scythes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330758:
     template: Satellite_Scythes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330759:
     template: Satellite_Scythes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330760:
     template: Satellite_Scythes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330761:
     template: Satellite_Scythes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3769,24 +4212,28 @@ spawns:
   17330763:
     template: Animated_Kunai
     at:       [239.344, -28.402, 63.162, 187]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330764:
     template: Satellite_Kunai
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330765:
     template: Satellite_Kunai
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330766:
     template: Satellite_Kunai
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
@@ -3798,12 +4245,14 @@ spawns:
   17330768:
     template: Satellite_Kunai
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17330769:
     template: Animated_Tachi
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17330770:

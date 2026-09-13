@@ -48,28 +48,22 @@ era/sql/wotg
 # CPP
 custom/cpp/ah_pagination.cpp
 
-# YAML
+# YAML - ORDER MATTERS
 era/data
+era/data/abyssea/advanced_job_quest_mob_stats
+era/data/abyssea/cop_level_restrictions
+era/data/abyssea/job_adjustments
+era/data/abyssea/mob_droplist_removal
+era/data/abyssea/npc_list
+era/data/rov/npc_list
+era/data/soa/mob_droplist_adjust
+era/data/toau/pre_rmt_drops
+era/data/wotg/mob_droplist_removal
 phoenix/data
 phoenix/data/bazaar_tax
 phoenix/data/npc_lists
 phoenix/data/dynazones
-phoenix/data/limbus/common
-phoenix/data/limbus/retail_wipe
-phoenix/data/limbus/temenos_north_tower
-phoenix/data/limbus/temenos_east_tower
-phoenix/data/limbus/temenos_west_tower
-phoenix/data/limbus/temenos_central_1f
-phoenix/data/limbus/temenos_central_2f
-phoenix/data/limbus/temenos_central_3f
-phoenix/data/limbus/temenos_central_4f
-phoenix/data/limbus/temenos_central_basement
-phoenix/data/limbus/apollyon_sw
-phoenix/data/limbus/apollyon_nw
-phoenix/data/limbus/apollyon_ne
-phoenix/data/limbus/apollyon_se
-phoenix/data/limbus/apollyon_central
-phoenix/data/limbus/apollyon_cs
+phoenix/data/limbus
 phoenix/data/launch_starter_zones
 phoenix/data/drops
 

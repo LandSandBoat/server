@@ -1456,16 +1456,19 @@ spawns:
   17539074:
     template: ZeVho_Fallsplitter
     at:       [-184.040, -8.625, -20.389, 1]
+    region:   null
     level:    [80, 80]
 
   17539075:
     template: Vanguard_Constable
     at:       [-184.698, -8.617, -23.788, 1]
+    region:   null
     level:    [75, 77]
 
   17539076:
     template: Adamantking_Effigy
     at:       [-187.798, -8.631, -15.631, 1]
+    region:   null
     level:    [65, 65]
 
   17539077:
@@ -1476,56 +1479,67 @@ spawns:
   17539078:
     template: Vanguard_Defender
     at:       [-177.192, -8.438, -24.675, 195]
+    region:   null
     level:    [75, 77]
 
   17539079:
     template: Vanguard_Constable
     at:       [-177.028, -8.061, -21.262, 195]
+    region:   null
     level:    [75, 77]
 
   17539080:
     template: Adamantking_Effigy
     at:       [-178.077, -8.371, -13.271, 3]
+    region:   null
     level:    [65, 65]
 
   17539081:
     template: Vanguard_Drakekeeper
     at:       [-174.670, -8.059, -13.627, 3]
+    region:   null
     level:    [75, 77]
 
   17539082:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539083:
     template: Vanguard_Purloiner
     at:       [-174.353, -7.524, -17.002, 3]
+    region:   null
     level:    [75, 77]
 
   17539084:
     template: Vanguard_Constable
     at:       [-174.472, -7.939, -10.751, 3]
+    region:   null
     level:    [75, 77]
 
   17539085:
     template: Adamantking_Effigy
     at:       [-153.780, 0.000, -40.965, 191]
+    region:   null
     level:    [65, 65]
 
   17539086:
     template: Vanguard_Militant
     at:       [-150.962, 0.000, -41.043, 194]
+    region:   null
     level:    [75, 77]
 
   17539087:
     template: Vanguard_Militant
     at:       [-156.717, 0.000, -41.072, 194]
+    region:   null
     level:    [75, 77]
 
   17539088:
     template: Vanguard_Vigilante
     at:       [-153.751, 0.000, -36.682, 194]
+    region:   null
     level:    [75, 77]
 
   17539089:
@@ -1536,11 +1550,13 @@ spawns:
   17539090:
     template: Vanguard_Constable
     at:       [-158.358, 0.000, -25.405, 251]
+    region:   null
     level:    [75, 77]
 
   17539091:
     template: Vanguard_Vindicator
     at:       [-159.955, 0.000, -36.950, 251]
+    region:   null
     level:    [75, 77]
 
   17539092:
@@ -1551,36 +1567,43 @@ spawns:
   17539093:
     template: Vanguard_Militant
     at:       [-165.564, -3.298, -26.653, 251]
+    region:   null
     level:    [75, 77]
 
   17539094:
     template: Vanguard_Thaumaturge
     at:       [-167.790, -4.712, -23.550, 251]
+    region:   null
     level:    [75, 77]
 
   17539095:
     template: Vanguard_Mason
     at:       [-169.680, -6.275, -20.367, 251]
+    region:   null
     level:    [75, 77]
 
   17539096:
     template: Adamantking_Effigy
     at:       [-164.769, -3.493, -2.082, 2]
+    region:   null
     level:    [65, 65]
 
   17539097:
     template: Adamantking_Effigy
     at:       [-157.507, 0.000, 1.682, 255]
+    region:   null
     level:    [65, 65]
 
   17539098:
     template: Adamantking_Effigy
     at:       [-152.094, 0.000, -20.001, 245]
+    region:   null
     level:    [65, 65]
 
   17539099:
     template: Vanguard_Vigilante
     at:       [-155.220, -0.058, -20.966, 245]
+    region:   null
     level:    [75, 77]
 
   17539100:
@@ -1596,21 +1619,25 @@ spawns:
   17539102:
     template: Adamantking_Effigy
     at:       [-161.149, 0.000, -11.384, 249]
+    region:   null
     level:    [65, 65]
 
   17539103:
     template: Vanguard_Vindicator
     at:       [-156.464, 0.000, -13.256, 0]
+    region:   null
     level:    [75, 77]
 
   17539104:
     template: Vanguard_Kusa
     at:       [-156.007, 0.002, -9.177, 0]
+    region:   null
     level:    [75, 77]
 
   17539105:
     template: Adamantking_Effigy
     at:       [-147.154, 0.000, 4.279, 60]
+    region:   null
     level:    [65, 65]
 
   17539106:
@@ -1621,21 +1648,25 @@ spawns:
   17539107:
     template: Vanguard_Kusa
     at:       [-144.735, 0.000, 0.897, 57]
+    region:   null
     level:    [75, 77]
 
   17539108:
     template: Adamantking_Effigy
     at:       [-120.042, -3.493, -73.725, 191]
+    region:   null
     level:    [65, 65]
 
   17539109:
     template: Adamantking_Effigy
     at:       [-123.688, 0.000, -65.159, 191]
+    region:   null
     level:    [65, 65]
 
   17539110:
     template: Adamantking_Effigy
     at:       [-122.641, 0.000, -43.491, 192]
+    region:   null
     level:    [65, 65]
 
   17539111:
@@ -1646,6 +1677,7 @@ spawns:
   17539112:
     template: Vanguard_Militant
     at:       [-122.120, 0.000, -52.109, 191]
+    region:   null
     level:    [75, 77]
 
   17539113:
@@ -1656,21 +1688,25 @@ spawns:
   17539114:
     template: Adamantking_Effigy
     at:       [-117.175, 0.000, -43.491, 192]
+    region:   null
     level:    [65, 65]
 
   17539115:
     template: Vanguard_Vigilante
     at:       [-117.086, 0.000, -48.476, 191]
+    region:   null
     level:    [75, 77]
 
   17539116:
     template: Vanguard_Militant
     at:       [-116.879, 0.000, -52.298, 191]
+    region:   null
     level:    [75, 77]
 
   17539117:
     template: Vanguard_Thaumaturge
     at:       [-116.791, 0.000, -56.546, 191]
+    region:   null
     level:    [75, 77]
 
   17539118:
@@ -1696,81 +1732,97 @@ spawns:
   17539122:
     template: Adamantking_Effigy
     at:       [-133.178, -0.539, 4.024, 64]
+    region:   null
     level:    [65, 65]
 
   17539123:
     template: Vanguard_Vindicator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539124:
     template: Vanguard_Minstrel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539125:
     template: Adamantking_Effigy
     at:       [-128.090, -0.572, -0.971, 64]
+    region:   null
     level:    [65, 65]
 
   17539126:
     template: Vanguard_Defender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539127:
     template: Vanguard_Kusa
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539128:
     template: Adamantking_Effigy
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [65, 65]
 
   17539129:
     template: Vanguard_Vigilante
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539130:
     template: Vanguard_Purloiner
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539131:
     template: Adamantking_Effigy
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [65, 65]
 
   17539132:
     template: Adamantking_Effigy
     at:       [-138.123, -11.924, 29.282, 28]
+    region:   null
     level:    [65, 65]
 
   17539133:
     template: Vanguard_Kusa
     at:       [-132.730, -11.759, 28.903, 1]
+    region:   null
     level:    [75, 77]
 
   17539134:
     template: Adamantking_Effigy
     at:       [-113.616, 0.000, -24.538, 193]
+    region:   null
     level:    [65, 65]
 
   17539135:
     template: Vanguard_Defender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539136:
     template: Vanguard_Vigilante
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539137:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539138:
@@ -1786,11 +1838,13 @@ spawns:
   17539140:
     template: Vanguard_Mason
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539141:
     template: Vanguard_Mason
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539142:
@@ -1811,16 +1865,19 @@ spawns:
   17539145:
     template: Vanguard_Drakekeeper
     at:       [-57.413, -8.000, -55.191, 64]
+    region:   null
     level:    [75, 77]
 
   17539146:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539147:
     template: Vanguard_Purloiner
     at:       [-60.964, -8.000, -54.974, 64]
+    region:   null
     level:    [75, 77]
 
   17539148:
@@ -1906,6 +1963,7 @@ spawns:
   17539164:
     template: Vanguard_Defender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539165:
@@ -1916,21 +1974,25 @@ spawns:
   17539166:
     template: Vanguard_Thaumaturge
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539167:
     template: Adamantking_Effigy
     at:       [-101.663, 8.000, 51.388, 64]
+    region:   null
     level:    [65, 65]
 
   17539168:
     template: Vanguard_Vigilante
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539169:
     template: Vanguard_Militant
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539170:
@@ -1981,21 +2043,25 @@ spawns:
   17539179:
     template: Adamantking_Effigy
     at:       [-78.000, 0.000, -4.000, 0]
+    region:   null
     level:    [65, 65]
 
   17539180:
     template: Vanguard_Vigilante
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539181:
     template: Vanguard_Militant
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539182:
     template: Vanguard_Constable
     at:       [-82.600, 0.000, -8.341, 2]
+    region:   null
     level:    [75, 77]
 
   17539183:
@@ -2026,11 +2092,13 @@ spawns:
   17539188:
     template: Adamantking_Effigy
     at:       [-74.000, 0.000, 0.000, 0]
+    region:   null
     level:    [65, 65]
 
   17539189:
     template: Vanguard_Vindicator
     at:       [-39.733, 0.000, 38.011, 128]
+    region:   null
     level:    [75, 77]
 
   17539190:
@@ -2041,52 +2109,61 @@ spawns:
   17539191:
     template: Adamantking_Effigy
     at:       [-91.200, 0.000, -1.000, 0]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539192:
     template: AaNyu_Dismantler
     at:       [-122.662, 0.000, -16.410, 0]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17539193:
     template: Vanguard_Constable
     at:       [-91.200, 0.000, -1.000, 0]
+    region:   null
     level:    [75, 77]
 
   17539194:
     template: Adamantking_Effigy
     at:       [-44.835, -3.493, 14.606, 127]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539195:
     template: Vanguard_Undertaker
     at:       [-44.964, -3.493, 16.717, 127]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539196:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539197:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539198:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
 
   17539199:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2098,6 +2175,7 @@ spawns:
   17539201:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2110,24 +2188,28 @@ spawns:
   17539203:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539204:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539205:
     template: BeEbo_Tortoisedriver
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17539206:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2140,6 +2222,7 @@ spawns:
   17539208:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2157,92 +2240,108 @@ spawns:
   17539211:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539212:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539213:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539214:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539215:
     template: BeEbo_Tortoisedriver
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17539216:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539217:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539218:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539219:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539220:
     template: Adamantking_Effigy
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539221:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539222:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539223:
     template: Vanguard_Beasttender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539224:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539225:
     template: BeEbo_Tortoisedriver
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17539226:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2259,6 +2358,7 @@ spawns:
   17539229:
     template: Adamantking_Effigy
     at:       [-41.069, 0.000, -2.124, 0]
+    region:   null
     level:    [65, 65]
 
   17539230:
@@ -2303,17 +2403,20 @@ spawns:
   17539237:
     template: Adamantking_Effigy
     at:       [-5.266, 0.000, 37.841, 127]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539238:
     template: Vanguard_Kusa
     at:       [-9.390, 0.000, 37.834, 127]
+    region:   null
     level:    [75, 77]
 
   17539239:
     template: Vanguard_Protector
     at:       [-1.002, 0.000, 37.856, 127]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2325,53 +2428,62 @@ spawns:
   17539241:
     template: Vanguard_Defender
     at:       [-14.240, 0.000, 28.009, 194]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539242:
     template: Vanguard_Purloiner
     at:       [-13.879, 0.000, 23.996, 194]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539243:
     template: Adamantking_Effigy
     at:       [8.482, 0.000, 28.505, 162]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539244:
     template: Vanguard_Purloiner
     at:       [4.294, 0.000, 30.193, 162]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539245:
     template: Vanguard_Thaumaturge
     at:       [6.981, 0.000, 33.613, 162]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539246:
     template: Adamantking_Effigy
     at:       [1.808, 0.000, 9.954, 254]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539247:
     template: Vanguard_Kusa
     at:       [-2.720, 0.000, 10.022, 254]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539248:
     template: Vanguard_Minstrel
     at:       [5.866, 0.000, 10.071, 254]
+    region:   null
     level:    [75, 77]
 
   17539249:
     template: Adamantking_Effigy
     at:       [17.721, 0.000, 7.974, 133]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2383,59 +2495,69 @@ spawns:
   17539251:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539252:
     template: Vanguard_Hatamoto
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539253:
     template: Adamantking_Effigy
     at:       [8.969, 0.000, -5.424, 192]
+    region:   null
     level:    [65, 65]
 
   17539254:
     template: Vanguard_Vigilante
     at:       [8.988, 0.000, -0.540, 193]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539255:
     template: Vanguard_Minstrel
     at:       [8.914, 0.000, -9.814, 193]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539256:
     template: Adamantking_Effigy
     at:       [8.884, 0.000, -16.332, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539257:
     template: Vanguard_Defender
     at:       [10.778, 0.000, -12.608, 191]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539258:
     template: Vanguard_Protector
     at:       [6.946, 0.000, -12.507, 191]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539259:
     template: Adamantking_Effigy
     at:       [31.028, 0.000, 23.812, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539260:
     template: Vanguard_Vindicator
     at:       [31.163, 0.000, 24.640, 61]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2448,18 +2570,21 @@ spawns:
   17539262:
     template: Adamantking_Effigy
     at:       [60.045, 0.000, -1.295, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539263:
     template: Vanguard_Hatamoto
     at:       [59.937, 0.000, -5.061, 194]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539264:
     template: Vanguard_Protector
     at:       [60.027, 0.000, 3.987, 194]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2472,6 +2597,7 @@ spawns:
   17539266:
     template: Vanguard_Drakekeeper
     at:       [61.747, 0.000, -17.122, 190]
+    region:   null
     level:    [75, 77]
 
   17539267:
@@ -2488,23 +2614,27 @@ spawns:
   17539269:
     template: Adamantking_Effigy
     at:       [50.880, -0.002, -13.248, 232]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539270:
     template: Vanguard_Kusa
     at:       [53.606, 0.000, -13.228, 255]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539271:
     template: Vanguard_Thaumaturge
     at:       [56.898, 0.000, -13.266, 255]
+    region:   null
     level:    [75, 77]
 
   17539272:
     template: Adamantking_Effigy
     at:       [69.926, 0.000, 10.587, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2516,6 +2646,7 @@ spawns:
   17539274:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17539275:
@@ -2526,18 +2657,21 @@ spawns:
   17539276:
     template: Adamantking_Effigy
     at:       [86.067, 0.000, 10.554, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539277:
     template: Vanguard_Defender
     at:       [86.040, 0.000, 8.283, 64]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539278:
     template: Vanguard_Thaumaturge
     at:       [86.040, 0.000, 5.255, 64]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2550,18 +2684,21 @@ spawns:
   17539280:
     template: Adamantking_Effigy
     at:       [-6.680, 0.000, -9.996, 3]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539281:
     template: Vanguard_Defender
     at:       [-3.968, 0.000, -13.606, 3]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539282:
     template: Vanguard_Militant
     at:       [-4.216, 0.000, -10.039, 3]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2574,12 +2711,14 @@ spawns:
   17539284:
     template: Adamantking_Effigy
     at:       [83.579, 7.000, -32.435, 145]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539285:
     template: Vanguard_Undertaker
     at:       [81.924, 7.000, -34.404, 195]
+    region:   null
     level:    [75, 77]
 
   17539286:
@@ -2590,11 +2729,13 @@ spawns:
   17539287:
     template: Adamantking_Effigy
     at:       [65.777, 7.000, -31.811, 228]
+    region:   null
     level:    [65, 65]
 
   17539288:
     template: Vanguard_Undertaker
     at:       [67.089, 7.000, -34.549, 193]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2607,6 +2748,7 @@ spawns:
   17539290:
     template: Adamantking_Effigy
     at:       [74.019, 7.000, -36.418, 200]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2629,23 +2771,27 @@ spawns:
   17539294:
     template: Adamantking_Effigy
     at:       [90.208, 7.003, -2.404, 128]
+    region:   null
     level:    [65, 65]
 
   17539295:
     template: GiPha_Manameister
     at:       [85.503, 7.000, -2.468, 127]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17539296:
     template: Vanguard_Constable
     at:       [89.020, 7.000, 1.720, 127]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539297:
     template: Adamantking_Effigy
     at:       [82.693, 7.000, -6.673, 130]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2663,36 +2809,42 @@ spawns:
   17539300:
     template: Vanguard_Hatamoto
     at:       [77.090, 7.000, 1.340, 68]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539301:
     template: Vanguard_Minstrel
     at:       [86.382, 7.000, 2.634, 68]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539302:
     template: Adamantking_Effigy
     at:       [69.942, 7.000, 2.595, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17539303:
     template: Vanguard_Drakekeeper
     at:       [70.470, 7.000, -0.018, 128]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539304:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17539305:
     template: Vanguard_Kusa
     at:       [70.330, 7.000, -7.292, 64]
+    region:   null
     level:    [75, 77]
     script:   null
 

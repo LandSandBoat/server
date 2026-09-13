@@ -55,7 +55,7 @@ diff --git a/modules/README.md b/modules/README.md
 index 875e93d68a5..4c61b6d7656 100644
 --- a/modules/README.md
 +++ b/modules/README.md
-@@ -29,6 +29,16 @@ Command modules register with `xi.module.registerCommand('name', commandTable)`
+@@ -29,6 +29,17 @@ Command modules register with `xi.module.registerCommand('name', commandTable)`
  
  Mutating game data at require time is forbidden. Data changes are declared as an override of `xi.server.onServerStart` that calls `super()` first and then applies the changes.
  
@@ -66,6 +66,7 @@ index 875e93d68a5..4c61b6d7656 100644
 +
 +Nested data components may be selected directly. For example, an `init.txt` entry for
 +`era/data/abyssea/advanced_job_quest_mob_stats` loads patches relative to that directory.
++Only entries that name a `data` directory, or a bare module name such as `renamer`, contribute patches; `sql`, `lua` and `cpp` entries do not.
 +
 +Patches use RFC 7396 semantics and are applied in `init.txt` order. Objects merge by key, lists are replaced whole, and `null` removes a key.
 +
@@ -191,7 +192,7 @@ index 30ffb2da0e6..16047fa8008 100644
  auto slurp(const std::string_view path) -> std::string
  {
      const std::ifstream input(std::string{ path }, std::ios::binary);
-@@ -101,24 +131,60 @@ auto slurp(const std::string_view path) -> std::string
+@@ -101,24 +131,67 @@ auto slurp(const std::string_view path) -> std::string
  
  } // namespace
  
@@ -222,20 +223,27 @@ index 30ffb2da0e6..16047fa8008 100644
 +            continue;
 +        }
 +
-+        const auto entry            = std::filesystem::path{ std::string{ trimmed } };
++        // Only a bare module name or an explicit data path names a data root; sql, lua and cpp entries do not.
++        auto entryText = std::string{ trimmed };
++        while (!entryText.empty() && entryText.back() == '/')
++        {
++            entryText.pop_back();
++        }
++
++        const auto entry            = std::filesystem::path{ entryText };
 +        const auto explicitDataRoot = std::ranges::any_of(entry, [](const auto& component)
 +                                                          {
 +                                                              return component == "data";
 +                                                          });
-+
-+        auto dataRoot = std::filesystem::path{ "./modules" };
-+        if (explicitDataRoot)
++        const auto bareModuleName   = !entry.has_parent_path();
++        if (!explicitDataRoot && !bareModuleName)
 +        {
-+            dataRoot /= entry;
++            continue;
 +        }
-+        else
++
++        auto dataRoot = std::filesystem::path{ "./modules" } / entry;
++        if (!explicitDataRoot)
 +        {
-+            dataRoot /= *entry.begin();
 +            dataRoot /= "data";
 +        }
 +
@@ -261,7 +269,7 @@ index 30ffb2da0e6..16047fa8008 100644
      if (!output)
      {
          throw std::runtime_error("Glaze could not serialize patched YAML");
-@@ -144,4 +210,28 @@ auto loadMergedYaml(const std::string_view corePath, const std::span<const std::
+@@ -144,4 +217,28 @@ auto loadMergedYaml(const std::string_view corePath, const std::span<const std::
      return mergeYaml(core, modules);
  }
  

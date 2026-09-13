@@ -3574,36 +3574,43 @@ spawns:
   17326099:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326100:
     template: Vanguard_Defender
     at:       [-286.902, -39.875, -275.634, 90]
+    region:   null
     level:    [75, 77]
 
   17326101:
     template: Avatar_Icon
     at:       [-281.362, -39.382, -294.221, 122]
+    region:   null
     level:    [82, 82]
 
   17326102:
     template: Vanguard_Assassin
     at:       [-292.713, -40.112, -292.925, 224]
+    region:   null
     level:    [75, 77]
 
   17326103:
     template: Vanguard_Visionary
     at:       [-285.044, -39.949, -279.380, 65]
+    region:   null
     level:    [75, 77]
 
   17326104:
     template: Goblin_Replica
     at:       [-304.400, -40.777, -268.540, 37]
+    region:   null
     level:    [65, 65]
 
   17326105:
     template: Vanguard_Necromancer
     at:       [-301.346, -39.746, -272.681, 37]
+    region:   null
     level:    [75, 77]
 
   17326106:
@@ -3614,26 +3621,31 @@ spawns:
   17326107:
     template: Vanguard_Welldigger
     at:       [-298.310, -39.086, -276.798, 37]
+    region:   null
     level:    [75, 77]
 
   17326108:
     template: Avatar_Icon
     at:       [-202.107, -39.011, -220.207, 129]
+    region:   null
     level:    [82, 82]
 
   17326109:
     template: Vanguard_Priest
     at:       [-202.619, -39.303, -215.016, 129]
+    region:   null
     level:    [75, 77]
 
   17326110:
     template: Vanguard_Chanter
     at:       [-202.722, -39.529, -227.250, 129]
+    region:   null
     level:    [75, 77]
 
   17326111:
     template: Xaa_Chau_the_Roctalon
     at:       [-209.415, -39.591, -220.424, 129]
+    region:   null
     level:    [82, 82]
 
   17326112:
@@ -3644,6 +3656,7 @@ spawns:
   17326113:
     template: Vanguard_Exemplar
     at:       [-194.707, -39.936, -201.349, 172]
+    region:   null
     level:    [75, 77]
 
   17326114:
@@ -3654,56 +3667,67 @@ spawns:
   17326115:
     template: Vanguard_Inciter
     at:       [-194.630, -39.933, -238.212, 81]
+    region:   null
     level:    [75, 77]
 
   17326116:
     template: Avatar_Icon
     at:       [-189.650, -39.684, -199.202, 0]
+    region:   null
     level:    [82, 82]
 
   17326117:
     template: Vanguard_Skirmisher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326118:
     template: Vanguard_Ogresoother
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326119:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326120:
     template: Avatar_Icon
     at:       [-189.125, -39.657, -242.405, 0]
+    region:   null
     level:    [82, 82]
 
   17326121:
     template: Vanguard_Persecutor
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326122:
     template: Vanguard_Oracle
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326123:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326124:
     template: Avatar_Icon
     at:       [-46.367, -39.800, -208.203, 43]
+    region:   null
     level:    [82, 82]
 
   17326125:
     template: Vanguard_Sentinel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326126:
@@ -3714,41 +3738,49 @@ spawns:
   17326127:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326128:
     template: Avatar_Icon
     at:       [-33.759, -40.175, -192.528, 30]
+    region:   null
     level:    [82, 82]
 
   17326129:
     template: Vanguard_Visionary
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326130:
     template: Avatar_Icon
     at:       [-21.508, -39.158, -195.678, 18]
+    region:   null
     level:    [82, 82]
 
   17326131:
     template: Vanguard_Inciter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326132:
     template: Hee_Mida_the_Meticulous
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326133:
     template: Avatar_Icon
     at:       [-59.362, -40.839, -220.580, 28]
+    region:   null
     level:    [82, 82]
 
   17326134:
     template: Vanguard_Prelate
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326135:
@@ -3759,46 +3791,55 @@ spawns:
   17326136:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326137:
     template: Avatar_Icon
     at:       [-24.285, -39.233, -203.010, 82]
+    region:   null
     level:    [82, 82]
 
   17326138:
     template: Vanguard_Exemplar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326139:
     template: Avatar_Icon
     at:       [-16.308, -40.634, -209.900, 85]
+    region:   null
     level:    [82, 82]
 
   17326140:
     template: Vanguard_Skirmisher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326141:
     template: Xhoo_Fuza_the_Sublime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326142:
     template: Avatar_Icon
     at:       [-80.499, -40.000, -260.017, 0]
+    region:   null
     level:    [82, 82]
 
   17326143:
     template: Vanguard_Assassin
     at:       [-76.722, -39.688, -264.398, 0]
+    region:   null
     level:    [75, 77]
 
   17326144:
     template: Puu_Timu_the_Phantasmal
     at:       [-76.809, -40.038, -256.038, 0]
+    region:   null
     level:    [82, 82]
 
   17326145:
@@ -3809,26 +3850,31 @@ spawns:
   17326146:
     template: Avatar_Icon
     at:       [117.067, -40.000, -0.030, 0]
+    region:   null
     level:    [82, 82]
 
   17326147:
     template: Foo_Peku_the_Bloodcloak
     at:       [110.910, -39.747, -0.608, 0]
+    region:   null
     level:    [82, 82]
 
   17326148:
     template: Vanguard_Persecutor
     at:       [118.577, -39.839, 5.339, 0]
+    region:   null
     level:    [75, 77]
 
   17326149:
     template: Vanguard_Liberator
     at:       [117.723, -40.151, -6.997, 0]
+    region:   null
     level:    [75, 77]
 
   17326150:
     template: Avatar_Icon
     at:       [71.548, -39.778, -1.274, 3]
+    region:   null
     level:    [82, 82]
 
   17326151:
@@ -3839,11 +3885,13 @@ spawns:
   17326152:
     template: Vanguard_Visionary
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326153:
     template: Avatar_Icon
     at:       [108.571, -39.630, 2.688, 128]
+    region:   null
     level:    [82, 82]
 
   17326154:
@@ -3854,11 +3902,13 @@ spawns:
   17326155:
     template: Vanguard_Assassin
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326156:
     template: Avatar_Icon
     at:       [75.410, -39.594, 67.268, 191]
+    region:   null
     level:    [82, 82]
 
   17326157:
@@ -3874,21 +3924,25 @@ spawns:
   17326159:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326160:
     template: Avatar_Icon
     at:       [62.529, -39.567, 67.238, 191]
+    region:   null
     level:    [82, 82]
 
   17326161:
     template: Vanguard_Oracle
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326162:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326163:
@@ -3899,16 +3953,19 @@ spawns:
   17326164:
     template: Avatar_Icon
     at:       [80.976, -39.647, 51.082, 191]
+    region:   null
     level:    [82, 82]
 
   17326165:
     template: Bhuu_Wjato_the_Firepool
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326166:
     template: Vanguard_Exemplar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326167:
@@ -3919,21 +3976,25 @@ spawns:
   17326168:
     template: Vanguard_Skirmisher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326169:
     template: Caa_Xaza_the_Madpiercer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326170:
     template: Avatar_Icon
     at:       [74.805, -40.012, 45.399, 191]
+    region:   null
     level:    [82, 82]
 
   17326171:
     template: Vanguard_Partisan
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326172:
@@ -3944,21 +4005,25 @@ spawns:
   17326173:
     template: Vanguard_Sentinel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326174:
     template: Avatar_Icon
     at:       [62.302, -39.265, 46.365, 191]
+    region:   null
     level:    [82, 82]
 
   17326175:
     template: Vanguard_Liberator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326176:
     template: Vanguard_Persecutor
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326177:
@@ -3974,26 +4039,31 @@ spawns:
   17326179:
     template: Kuu_Xuka_the_Nimble
     at:       [61.610, -39.767, 64.373, 64]
+    region:   null
     level:    [82, 82]
 
   17326180:
     template: Guu_Waji_the_Preacher
     at:       [73.560, -39.471, 64.185, 64]
+    region:   null
     level:    [82, 82]
 
   17326181:
     template: Nee_Huxa_the_Judgmental
     at:       [69.714, -40.000, 70.931, 64]
+    region:   null
     level:    [82, 82]
 
   17326182:
     template: Goblin_Replica
     at:       [-121.694, -59.653, -189.047, 232]
+    region:   null
     level:    [65, 65]
 
   17326183:
     template: Vanguard_Pathfinder
     at:       [-125.368, -59.849, -191.578, 232]
+    region:   null
     level:    [75, 77]
 
   17326184:
@@ -4004,21 +4074,25 @@ spawns:
   17326185:
     template: Droprix_Granitepalms
     at:       [-121.068, -59.431, -186.262, 232]
+    region:   null
     level:    [82, 82]
 
   17326186:
     template: Goblin_Replica
     at:       [-128.077, -60.016, -188.957, 232]
+    region:   null
     level:    [65, 65]
 
   17326187:
     template: Vanguard_Alchemist
     at:       [-123.710, -59.621, -188.390, 232]
+    region:   null
     level:    [75, 77]
 
   17326188:
     template: Vanguard_Ambusher
     at:       [-128.777, -59.601, -184.216, 232]
+    region:   null
     level:    [75, 77]
 
   17326189:
@@ -4029,21 +4103,25 @@ spawns:
   17326190:
     template: Vanguard_Enchanter
     at:       [-120.624, -59.752, -191.015, 232]
+    region:   null
     level:    [75, 77]
 
   17326191:
     template: Vanguard_Ronin
     at:       [-117.271, -60.003, -196.042, 232]
+    region:   null
     level:    [75, 77]
 
   17326192:
     template: Goblin_Replica
     at:       [-32.063, -59.991, -114.172, 139]
+    region:   null
     level:    [65, 65]
 
   17326193:
     template: Ascetox_Ratgums
     at:       [-39.486, -60.000, -122.321, 139]
+    region:   null
     level:    [82, 82]
 
   17326194:
@@ -4054,21 +4132,25 @@ spawns:
   17326195:
     template: Goblin_Replica
     at:       [-39.074, -59.249, -135.555, 185]
+    region:   null
     level:    [65, 65]
 
   17326196:
     template: Vanguard_Smithy
     at:       [-27.504, -59.441, -131.566, 185]
+    region:   null
     level:    [75, 77]
 
   17326197:
     template: Bordox_Kittyback
     at:       [-44.841, -59.093, -142.663, 185]
+    region:   null
     level:    [82, 82]
 
   17326198:
     template: Goblin_Replica
     at:       [-22.987, -59.818, -135.992, 177]
+    region:   null
     level:    [65, 65]
 
   17326199:
@@ -4084,16 +4166,19 @@ spawns:
   17326201:
     template: Vanguard_Armorer
     at:       [-10.868, -59.658, -119.227, 153]
+    region:   null
     level:    [75, 77]
 
   17326202:
     template: Vanguard_Ronin
     at:       [7.279, -59.702, -106.458, 153]
+    region:   null
     level:    [75, 77]
 
   17326203:
     template: Goblin_Replica
     at:       [-8.435, -59.909, -126.562, 156]
+    region:   null
     level:    [65, 65]
 
   17326204:
@@ -4109,6 +4194,7 @@ spawns:
   17326206:
     template: Vanguard_Alchemist
     at:       [-0.930, -60.000, -123.429, 156]
+    region:   null
     level:    [75, 77]
 
   17326207:
@@ -4119,21 +4205,25 @@ spawns:
   17326208:
     template: Vanguard_Shaman
     at:       [92.101, -59.814, -55.896, 112]
+    region:   null
     level:    [75, 77]
 
   17326209:
     template: Goblin_Replica
     at:       [79.610, -59.860, -46.815, 112]
+    region:   null
     level:    [65, 65]
 
   17326210:
     template: Vanguard_Welldigger
     at:       [84.114, -59.950, -45.012, 112]
+    region:   null
     level:    [75, 77]
 
   17326211:
     template: Goblin_Replica
     at:       [76.253, -60.014, -35.301, 105]
+    region:   null
     level:    [65, 65]
 
   17326212:
@@ -4144,16 +4234,19 @@ spawns:
   17326213:
     template: Vanguard_Enchanter
     at:       [81.179, -60.000, -43.300, 105]
+    region:   null
     level:    [75, 77]
 
   17326214:
     template: Goblin_Replica
     at:       [81.515, -59.087, -58.275, 112]
+    region:   null
     level:    [65, 65]
 
   17326215:
     template: Vanguard_Hitman
     at:       [85.459, -59.318, -56.654, 112]
+    region:   null
     level:    [75, 77]
 
   17326216:
@@ -4164,6 +4257,7 @@ spawns:
   17326217:
     template: Goblin_Replica
     at:       [109.713, -60.001, -31.344, 111]
+    region:   null
     level:    [65, 65]
 
   17326218:
@@ -4174,21 +4268,25 @@ spawns:
   17326219:
     template: Routsix_Rubbertendon
     at:       [100.953, -59.128, -34.945, 111]
+    region:   null
     level:    [82, 82]
 
   17326220:
     template: Vanguards_Slime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326221:
     template: Goblin_Replica
     at:       [117.423, -60.500, -55.392, 114]
+    region:   null
     level:    [65, 65]
 
   17326222:
     template: Vanguard_Dragontamer
     at:       [111.733, -60.031, -57.510, 114]
+    region:   null
     level:    [75, 77]
 
   17326223:
@@ -4199,11 +4297,13 @@ spawns:
   17326224:
     template: Whistrix_Toadthroat
     at:       [105.236, -60.384, -59.698, 114]
+    region:   null
     level:    [82, 82]
 
   17326225:
     template: Dynamis_Statue
     at:       [111.259, -59.764, -39.423, 118]
+    region:   null
     level:    [82, 82]
 
   17326226:
@@ -4214,11 +4314,13 @@ spawns:
   17326227:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326228:
     template: Moltenox_Stubthumbs
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326229:
@@ -4229,16 +4331,19 @@ spawns:
   17326230:
     template: Ruffbix_Jumbolobes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326231:
     template: Goblin_Replica
     at:       [6.464, -59.814, 50.384, 64]
+    region:   null
     level:    [65, 65]
 
   17326232:
     template: Vanguard_Smithy
     at:       [0.312, -59.568, 52.362, 64]
+    region:   null
     level:    [75, 77]
 
   17326233:
@@ -4254,11 +4359,13 @@ spawns:
   17326235:
     template: Vanguard_Armorer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326236:
     template: Swypestix_Tigershins
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326237:
@@ -4269,26 +4376,31 @@ spawns:
   17326238:
     template: Vanguard_Shaman
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326239:
     template: Draklix_Scalecrust
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326240:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326241:
     template: Goblin_Replica
     at:       [36.860, -59.593, 172.164, 196]
+    region:   null
     level:    [65, 65]
 
   17326242:
     template: Vanguard_Maestro
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326243:
@@ -4299,21 +4411,25 @@ spawns:
   17326244:
     template: Goblin_Replica
     at:       [54.590, -60.535, 172.663, 229]
+    region:   null
     level:    [65, 65]
 
   17326245:
     template: Vanguard_Ambusher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326246:
     template: Shisox_Widebrow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326247:
     template: Goblin_Replica
     at:       [53.245, -59.480, 201.430, 245]
+    region:   null
     level:    [65, 65]
 
   17326248:
@@ -4324,31 +4440,37 @@ spawns:
   17326249:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326250:
     template: Vanguard_Dragontamer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326251:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326252:
     template: Goblin_Replica
     at:       [89.569, -61.445, 213.120, 70]
+    region:   null
     level:    [65, 65]
 
   17326253:
     template: Vanguard_Pathfinder
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326254:
     template: Vanguards_Slime
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326255:
@@ -4359,11 +4481,13 @@ spawns:
   17326256:
     template: Goblin_Replica
     at:       [106.806, -59.773, 206.836, 121]
+    region:   null
     level:    [65, 65]
 
   17326257:
     template: Vanguard_Welldigger
     at:       [107.012, -59.505, 200.808, 121]
+    region:   null
     level:    [75, 77]
 
   17326258:
@@ -4374,16 +4498,19 @@ spawns:
   17326259:
     template: Adamantking_Effigy
     at:       [162.012, -19.868, 33.337, 3]
+    region:   null
     level:    [65, 65]
 
   17326260:
     template: Vanguard_Vindicator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326261:
     template: Vanguard_Protector
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326262:
@@ -4394,11 +4521,13 @@ spawns:
   17326263:
     template: Vanguard_Kusa
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326264:
     template: JiFhu_Infiltrator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326265:
@@ -4414,16 +4543,19 @@ spawns:
   17326267:
     template: TaHyu_Gallanthunter
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326268:
     template: Adamantking_Effigy
     at:       [175.727, -19.488, 6.526, 124]
+    region:   null
     level:    [65, 65]
 
   17326269:
     template: Vanguard_Minstrel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326270:
@@ -4444,6 +4576,7 @@ spawns:
   17326273:
     template: SoZho_Metalbender
     at:       [249.576, -20.204, -141.787, 130]
+    region:   null
     level:    [82, 82]
 
   17326274:
@@ -4459,11 +4592,13 @@ spawns:
   17326276:
     template: SoGho_Adderhandler
     at:       [257.907, -20.091, -151.697, 134]
+    region:   null
     level:    [82, 82]
 
   17326277:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326278:
@@ -4474,21 +4609,25 @@ spawns:
   17326279:
     template: Vanguard_Undertaker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326280:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326281:
     template: JiKhu_Towercleaver
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326282:
     template: Adamantking_Effigy
     at:       [264.428, -20.400, -137.671, 223]
+    region:   null
     level:    [65, 65]
 
   17326283:
@@ -4504,21 +4643,25 @@ spawns:
   17326285:
     template: Vanguard_Protector
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326286:
     template: Vanguard_Minstrel
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326287:
     template: Adamantking_Effigy
     at:       [262.632, -20.332, -147.132, 32]
+    region:   null
     level:    [65, 65]
 
   17326288:
     template: Vanguard_Mason
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326289:
@@ -4529,26 +4672,31 @@ spawns:
   17326290:
     template: Vanguard_Kusa
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326291:
     template: GoTyo_Magenapper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326292:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326293:
     template: Adamantking_Effigy
     at:       [251.977, -20.346, -147.744, 95]
+    region:   null
     level:    [65, 65]
 
   17326294:
     template: Vanguard_Defender
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326295:
@@ -4559,21 +4707,25 @@ spawns:
   17326296:
     template: Vanguard_Purloiner
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326297:
     template: Vanguard_Vigilante
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326298:
     template: Adamantking_Effigy
     at:       [251.715, -19.987, -134.730, 165]
+    region:   null
     level:    [65, 65]
 
   17326299:
     template: Vanguard_Militant
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326300:
@@ -4584,16 +4736,19 @@ spawns:
   17326301:
     template: MuGha_Legionkiller
     at:       [67.226, -19.527, -197.936, 128]
+    region:   null
     level:    [82, 82]
 
   17326302:
     template: Vanguard_Thaumaturge
     at:       [87.115, -19.845, -197.962, 128]
+    region:   null
     level:    [75, 77]
 
   17326303:
     template: Adamantking_Effigy
     at:       [75.001, -19.951, -201.926, 64]
+    region:   null
     level:    [65, 65]
 
   17326304:
@@ -4604,6 +4759,7 @@ spawns:
   17326305:
     template: Adamantking_Effigy
     at:       [74.717, -19.467, -225.304, 153]
+    region:   null
     level:    [65, 65]
 
   17326306:
@@ -4624,21 +4780,25 @@ spawns:
   17326309:
     template: Adamantking_Effigy
     at:       [72.507, -19.985, -228.609, 86]
+    region:   null
     level:    [65, 65]
 
   17326310:
     template: Vanguard_Vindicator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326311:
     template: Adamantking_Effigy
     at:       [61.271, -19.456, -247.656, 150]
+    region:   null
     level:    [65, 65]
 
   17326312:
     template: NuBhi_Spiraleye
     at:       [73.199, -20.292, -254.727, 150]
+    region:   null
     level:    [82, 82]
 
   17326313:
@@ -4649,26 +4809,31 @@ spawns:
   17326314:
     template: Adamantking_Effigy
     at:       [165.418, -19.733, -234.606, 128]
+    region:   null
     level:    [65, 65]
 
   17326315:
     template: Vanguard_Purloiner
     at:       [165.224, -19.854, -242.144, 128]
+    region:   null
     level:    [75, 77]
 
   17326316:
     template: Vanguard_Mason
     at:       [165.060, -20.179, -223.766, 128]
+    region:   null
     level:    [75, 77]
 
   17326317:
     template: BeZhe_Keeprazer
     at:       [153.191, -19.950, -234.227, 128]
+    region:   null
     level:    [82, 82]
 
   17326318:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326319:
@@ -4679,16 +4844,19 @@ spawns:
   17326320:
     template: Vanguard_Undertaker
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326321:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326322:
     template: Vanguard_Militant
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326323:
@@ -4699,6 +4867,7 @@ spawns:
   17326324:
     template: Vanguard_Constable
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326325:
@@ -4709,11 +4878,13 @@ spawns:
   17326326:
     template: Adamantking_Effigy
     at:       [-83.282, -20.000, -315.874, 212]
+    region:   null
     level:    [65, 65]
 
   17326327:
     template: Vanguard_Drakekeeper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326328:
@@ -4729,11 +4900,13 @@ spawns:
   17326330:
     template: Vanguards_Scorpion
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326331:
     template: Adamantking_Effigy
     at:       [-78.295, -20.000, -282.005, 45]
+    region:   null
     level:    [65, 65]
 
   17326332:
@@ -4744,11 +4917,13 @@ spawns:
   17326333:
     template: NaHya_Floodmaker
     at:       [-85.645, -20.000, -277.835, 45]
+    region:   null
     level:    [82, 82]
 
   17326334:
     template: Dynamis_Tombstone
     at:       [333.597, 0.556, -158.405, 0]
+    region:   null
     level:    [65, 65]
 
   17326335:
@@ -4759,21 +4934,25 @@ spawns:
   17326336:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326337:
     template: Spinalsucker_Galflmall
     at:       [372.504, 0.446, -161.333, 129]
+    region:   null
     level:    [82, 82]
 
   17326338:
     template: Elvaanlopper_Grokdok
     at:       [400.391, 0.609, -145.870, 129]
+    region:   null
     level:    [82, 82]
 
   17326339:
     template: Humegutter_Adzjbadj
     at:       [351.835, 0.520, -147.968, 132]
+    region:   null
     level:    [82, 82]
 
   17326340:
@@ -4784,16 +4963,19 @@ spawns:
   17326341:
     template: Mithraslaver_Debhabob
     at:       [353.613, 0.186, -172.332, 194]
+    region:   null
     level:    [82, 82]
 
   17326342:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326343:
     template: Vanguard_Pillager
     at:       [353.244, 0.719, -178.626, 194]
+    region:   null
     level:    [75, 77]
 
   17326344:
@@ -4804,11 +4986,13 @@ spawns:
   17326345:
     template: Vanguard_Predator
     at:       [365.592, 0.533, -175.011, 189]
+    region:   null
     level:    [75, 77]
 
   17326346:
     template: Serjeant_Tombstone
     at:       [378.341, 0.676, -167.054, 193]
+    region:   null
     level:    [65, 65]
 
   17326347:
@@ -4829,11 +5013,13 @@ spawns:
   17326350:
     template: Vanguard_Bugler
     at:       [398.818, 0.733, -184.624, 192]
+    region:   null
     level:    [75, 77]
 
   17326351:
     template: Serjeant_Tombstone
     at:       [352.834, 0.512, -148.793, 63]
+    region:   null
     level:    [65, 65]
 
   17326352:
@@ -4844,106 +5030,127 @@ spawns:
   17326353:
     template: Vanguard_Grappler
     at:       [352.547, 0.645, -136.393, 63]
+    region:   null
     level:    [75, 77]
 
   17326354:
     template: Serjeant_Tombstone
     at:       [363.870, 0.322, -149.395, 65]
+    region:   null
     level:    [65, 65]
 
   17326355:
     template: Vanguard_Neckchopper
     at:       [363.711, 0.985, -139.712, 65]
+    region:   null
     level:    [75, 77]
 
   17326356:
     template: Serjeant_Tombstone
     at:       [378.574, 0.691, -150.193, 65]
+    region:   null
     level:    [65, 65]
 
   17326357:
     template: Vanguard_Backstabber
     at:       [378.694, 0.350, -141.530, 65]
+    region:   null
     level:    [75, 77]
 
   17326358:
     template: Serjeant_Tombstone
     at:       [398.607, 0.256, -150.868, 64]
+    region:   null
     level:    [65, 65]
 
   17326359:
     template: Vanguard_Dollmaster
     at:       [398.403, 0.867, -142.639, 64]
+    region:   null
     level:    [75, 77]
 
   17326360:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326361:
     template: Vanguard_Pillager
     at:       [398.226, 0.746, -135.498, 64]
+    region:   null
     level:    [75, 77]
 
   17326362:
     template: Serjeant_Tombstone
     at:       [-17.037, 0.000, -329.172, 175]
+    region:   null
     level:    [65, 65]
 
   17326363:
     template: Vanguard_Amputator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326364:
     template: Vanguard_Predator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326365:
     template: Serjeant_Tombstone
     at:       [-26.591, 0.000, -307.135, 139]
+    region:   null
     level:    [65, 65]
 
   17326366:
     template: Vanguard_Backstabber
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326367:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326368:
     template: Serjeant_Tombstone
     at:       [-48.095, -0.010, -302.736, 244]
+    region:   null
     level:    [65, 65]
 
   17326369:
     template: Vanguard_Hawker
     at:       [-52.093, 0.000, -304.376, 239]
+    region:   null
     level:    [75, 77]
 
   17326370:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326371:
     template: Deathcaller_Bidfbid
     at:       [-55.659, -0.132, -306.708, 237]
+    region:   null
     level:    [82, 82]
 
   17326372:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326373:
     template: Serjeant_Tombstone
     at:       [-53.079, 0.000, -306.444, 79]
+    region:   null
     level:    [65, 65]
 
   17326374:
@@ -4954,21 +5161,25 @@ spawns:
   17326375:
     template: Vanguard_Trooper
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326376:
     template: Serjeant_Tombstone
     at:       [-59.854, 0.278, -327.988, 75]
+    region:   null
     level:    [65, 65]
 
   17326377:
     template: Vanguard_Footsoldier
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326378:
     template: Vanguard_Vexer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326379:
@@ -4979,21 +5190,25 @@ spawns:
   17326380:
     template: Skinmask_Ugghfogg
     at:       [-119.058, 0.000, -362.451, 37]
+    region:   null
     level:    [82, 82]
 
   17326381:
     template: Vanguard_Predator
     at:       [-112.269, 0.185, -358.064, 37]
+    region:   null
     level:    [75, 77]
 
   17326382:
     template: Serjeant_Tombstone
     at:       [-119.330, 0.917, -381.641, 250]
+    region:   null
     level:    [65, 65]
 
   17326383:
     template: Heavymail_Djidzbad
     at:       [-119.629, 0.855, -377.121, 250]
+    region:   null
     level:    [82, 82]
 
   17326384:
@@ -5004,11 +5219,13 @@ spawns:
   17326385:
     template: Serjeant_Tombstone
     at:       [-115.249, 0.036, -396.499, 237]
+    region:   null
     level:    [65, 65]
 
   17326386:
     template: Taruroaster_Biggsjig
     at:       [-113.420, 0.128, -400.327, 237]
+    region:   null
     level:    [82, 82]
 
   17326387:
@@ -5019,46 +5236,55 @@ spawns:
   17326388:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326389:
     template: Serjeant_Tombstone
     at:       [366.665, 0.132, -0.107, 8]
+    region:   null
     level:    [65, 65]
 
   17326390:
     template: Vanguard_Amputator
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326391:
     template: Vanguard_Vexer
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326392:
     template: Serjeant_Tombstone
     at:       [388.371, 0.174, 6.023, 136]
+    region:   null
     level:    [65, 65]
 
   17326393:
     template: Lockbuster_Zapdjipp
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326394:
     template: Vanguard_Dollmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326395:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326396:
     template: Serjeant_Tombstone
     at:       [381.682, 0.194, 18.240, 138]
+    region:   null
     level:    [65, 65]
 
   17326397:
@@ -5069,16 +5295,19 @@ spawns:
   17326398:
     template: Vanguard_Hawker
     at:       [382.266, 0.133, 22.676, 138]
+    region:   null
     level:    [75, 77]
 
   17326399:
     template: Vanguards_Hecteyes
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326400:
     template: Serjeant_Tombstone
     at:       [375.839, 0.600, 30.158, 1]
+    region:   null
     level:    [65, 65]
 
   17326401:
@@ -5089,16 +5318,19 @@ spawns:
   17326402:
     template: Galkarider_Retzpratz
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326403:
     template: Serjeant_Tombstone
     at:       [374.503, 0.646, 40.071, 255]
+    region:   null
     level:    [65, 65]
 
   17326404:
     template: Vanguard_Gutslasher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17326405:
@@ -5109,21 +5341,25 @@ spawns:
   17326406:
     template: Serjeant_Tombstone
     at:       [274.182, 0.372, 54.224, 32]
+    region:   null
     level:    [65, 65]
 
   17326407:
     template: Vanguard_Mesmerizer
     at:       [279.057, 0.269, 49.391, 32]
+    region:   null
     level:    [75, 77]
 
   17326408:
     template: Adamantking_Effigy
     at:       [281.321, 0.994, 60.092, 21]
+    region:   null
     level:    [65, 65]
 
   17326409:
     template: Vanguard_Undertaker
     at:       [285.841, 0.775, 57.377, 21]
+    region:   null
     level:    [75, 77]
 
   17326410:
@@ -5134,21 +5370,25 @@ spawns:
   17326411:
     template: Avatar_Icon
     at:       [286.426, 0.471, 68.972, 26]
+    region:   null
     level:    [82, 82]
 
   17326412:
     template: Vanguard_Visionary
     at:       [292.075, 0.441, 64.840, 26]
+    region:   null
     level:    [75, 77]
 
   17326413:
     template: Goblin_Replica
     at:       [293.721, 0.568, 78.218, 34]
+    region:   null
     level:    [65, 65]
 
   17326414:
     template: Vanguard_Pitfighter
     at:       [298.572, 0.766, 72.790, 34]
+    region:   null
     level:    [75, 77]
 
   17326415:
@@ -5159,21 +5399,25 @@ spawns:
   17326416:
     template: GuNha_Wallstormer
     at:       [277.038, 0.000, 202.305, 117]
+    region:   null
     level:    [82, 82]
 
   17326417:
     template: GuKhu_Dukesniper
     at:       [289.202, -0.487, 205.721, 117]
+    region:   null
     level:    [82, 82]
 
   17326418:
     template: Goblin_Replica
     at:       [268.383, 0.380, 242.644, 54]
+    region:   null
     level:    [65, 65]
 
   17326419:
     template: Brewnix_Bittypupils
     at:       [269.656, 0.316, 237.309, 54]
+    region:   null
     level:    [82, 82]
 
   17326420:
@@ -5194,21 +5438,25 @@ spawns:
   17326423:
     template: Jeunoraider_Gepkzip
     at:       [278.011, 0.000, 243.217, 61]
+    region:   null
     level:    [82, 82]
 
   17326424:
     template: Avatar_Icon
     at:       [282.533, 0.869, 217.405, 65]
+    region:   null
     level:    [82, 82]
 
   17326425:
     template: Ryy_Qihi_the_Idolrobber
     at:       [282.433, 0.382, 211.658, 65]
+    region:   null
     level:    [82, 82]
 
   17326426:
     template: Knii_Hoqo_the_Bisector
     at:       [282.621, 0.875, 222.485, 65]
+    region:   null
     level:    [82, 82]
 
   17326427:
@@ -5219,11 +5467,13 @@ spawns:
   17326428:
     template: Hydra_Monk
     at:       [-58.947, -67.165, 99.936, 2]
+    region:   null
     level:    [82, 82]
 
   17326429:
     template: Hydra_Bard
     at:       [-65.120, -69.099, 105.864, 2]
+    region:   null
     level:    [82, 82]
 
   17326430:
@@ -5234,26 +5484,31 @@ spawns:
   17326431:
     template: Vanguard_Eye
     at:       [-37.112, -80.000, 119.059, 132]
+    region:   null
     level:    [70, 70]
 
   17326432:
     template: Hydra_White_Mage
     at:       [-43.528, -80.000, 119.656, 132]
+    region:   null
     level:    [82, 82]
 
   17326433:
     template: Vanguard_Eye
     at:       [-25.261, -80.271, 131.079, 142]
+    region:   null
     level:    [70, 70]
 
   17326434:
     template: Hydra_Black_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326435:
     template: Hydra_Ninja
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326436:
@@ -5264,11 +5519,13 @@ spawns:
   17326437:
     template: Hydra_Dragoon
     at:       [-38.679, -79.414, 146.094, 126]
+    region:   null
     level:    [82, 82]
 
   17326438:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326439:
@@ -5284,16 +5541,19 @@ spawns:
   17326441:
     template: Hydra_Warrior
     at:       [-60.836, -80.689, 170.915, 132]
+    region:   null
     level:    [82, 82]
 
   17326442:
     template: Hydra_Ranger
     at:       [-60.786, -79.040, 159.861, 132]
+    region:   null
     level:    [82, 82]
 
   17326443:
     template: Vanguard_Eye
     at:       [-56.541, -79.550, 149.158, 71]
+    region:   null
     level:    [70, 70]
 
   17326444:
@@ -5309,26 +5569,31 @@ spawns:
   17326446:
     template: Vanguard_Eye
     at:       [-88.081, -79.797, 120.552, 132]
+    region:   null
     level:    [70, 70]
 
   17326447:
     template: Hydra_Thief
     at:       [-95.753, -79.230, 116.161, 132]
+    region:   null
     level:    [82, 82]
 
   17326448:
     template: Hydra_Summoner
     at:       [-94.236, -79.471, 125.781, 132]
+    region:   null
     level:    [82, 82]
 
   17326449:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326450:
     template: Vanguard_Eye
     at:       [-140.909, -79.060, 164.094, 9]
+    region:   null
     level:    [70, 70]
 
   17326451:
@@ -5339,16 +5604,19 @@ spawns:
   17326452:
     template: Vanguard_Eye
     at:       [-110.021, -80.008, 146.218, 0]
+    region:   null
     level:    [70, 70]
 
   17326453:
     template: Hydra_Beastmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326454:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326455:
@@ -5359,11 +5627,13 @@ spawns:
   17326456:
     template: Vanguard_Eye
     at:       [-156.657, -79.647, 131.074, 0]
+    region:   null
     level:    [70, 70]
 
   17326457:
     template: Hydra_Monk
     at:       [-150.205, -79.891, 131.241, 0]
+    region:   null
     level:    [82, 82]
 
   17326458:
@@ -5374,21 +5644,25 @@ spawns:
   17326459:
     template: Hydra_Beastmaster
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326460:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326461:
     template: Vanguard_Eye
     at:       [-138.950, -79.054, 203.067, 47]
+    region:   null
     level:    [70, 70]
 
   17326462:
     template: Hydra_Summoner
     at:       [-132.175, -79.592, 199.790, 47]
+    region:   null
     level:    [82, 82]
 
   17326463:
@@ -5404,6 +5678,7 @@ spawns:
   17326465:
     template: Vanguard_Eye
     at:       [-164.384, -79.686, 189.297, 5]
+    region:   null
     level:    [70, 70]
 
   17326466:
@@ -5414,46 +5689,55 @@ spawns:
   17326467:
     template: Vanguard_Eye
     at:       [-166.762, -79.907, 171.501, 9]
+    region:   null
     level:    [70, 70]
 
   17326468:
     template: Hydra_Thief
     at:       [-159.268, -79.712, 169.791, 9]
+    region:   null
     level:    [82, 82]
 
   17326469:
     template: Vanguard_Eye
     at:       [-43.419, -80.078, 74.469, 128]
+    region:   null
     level:    [70, 70]
 
   17326470:
     template: Hydra_Dragoon
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326471:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326472:
     template: Vanguard_Eye
     at:       [-80.143, -79.859, 86.834, 2]
+    region:   null
     level:    [70, 70]
 
   17326473:
     template: Hydra_Black_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326474:
     template: Vanguard_Eye
     at:       [-22.695, -80.000, -1.377, 185]
+    region:   null
     level:    [70, 70]
 
   17326475:
     template: Hydra_Dark_Knight
     at:       [-21.108, -79.875, -10.853, 185]
+    region:   null
     level:    [82, 82]
 
   17326476:
@@ -5489,36 +5773,43 @@ spawns:
   17326482:
     template: Hydra_White_Mage
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326483:
     template: Vanguard_Eye
     at:       [-91.010, -80.793, -62.912, 245]
+    region:   null
     level:    [70, 70]
 
   17326484:
     template: Hydra_Beastmaster
     at:       [-95.137, -80.840, -62.334, 245]
+    region:   null
     level:    [82, 82]
 
   17326485:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326486:
     template: Vanguard_Eye
     at:       [-96.929, -80.319, -69.882, 71]
+    region:   null
     level:    [70, 70]
 
   17326487:
     template: Hydra_Summoner
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326488:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326489:
@@ -5529,16 +5820,19 @@ spawns:
   17326490:
     template: Vanguard_Eye
     at:       [-145.322, -80.500, -155.649, 236]
+    region:   null
     level:    [70, 70]
 
   17326491:
     template: Hydra_Bard
     at:       [-150.241, -80.226, -161.934, 240]
+    region:   null
     level:    [82, 82]
 
   17326492:
     template: Vanguard_Eye
     at:       [-161.005, -80.000, -163.029, 240]
+    region:   null
     level:    [70, 70]
 
   17326493:
@@ -5554,6 +5848,7 @@ spawns:
   17326495:
     template: Hydra_Ninja
     at:       [-154.547, -80.074, -125.736, 22]
+    region:   null
     level:    [82, 82]
 
   17326496:
@@ -5564,21 +5859,25 @@ spawns:
   17326497:
     template: Vanguard_Eye
     at:       [-156.433, -80.000, -119.615, 99]
+    region:   null
     level:    [70, 70]
 
   17326498:
     template: Hydra_Monk
     at:       [-161.433, -80.000, -116.602, 99]
+    region:   null
     level:    [82, 82]
 
   17326499:
     template: Vanguard_Eye
     at:       [-171.990, -80.005, -131.146, 171]
+    region:   null
     level:    [70, 70]
 
   17326500:
     template: Hydra_Red_Mage
     at:       [-180.174, -79.010, -121.878, 171]
+    region:   null
     level:    [82, 82]
 
   17326501:
@@ -5589,11 +5888,13 @@ spawns:
   17326502:
     template: Hydra_Dragoon
     at:       [-238.770, -80.304, -128.024, 11]
+    region:   null
     level:    [82, 82]
 
   17326503:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326504:
@@ -5604,71 +5905,85 @@ spawns:
   17326505:
     template: Vanguard_Eye
     at:       [-192.480, -80.098, -127.602, 228]
+    region:   null
     level:    [70, 70]
 
   17326506:
     template: Hydra_Samurai
     at:       [-183.838, -79.193, -122.504, 62]
+    region:   null
     level:    [82, 82]
 
   17326507:
     template: Vanguard_Eye
     at:       [-179.906, -79.306, -113.038, 60]
+    region:   null
     level:    [70, 70]
 
   17326508:
     template: Hydra_Dark_Knight
     at:       [-189.172, -79.811, -125.154, 6]
+    region:   null
     level:    [82, 82]
 
   17326509:
     template: Vanguard_Eye
     at:       [-241.060, -80.073, -114.565, 15]
+    region:   null
     level:    [70, 70]
 
   17326510:
     template: Hydra_White_Mage
     at:       [-237.412, -80.018, -115.655, 8]
+    region:   null
     level:    [82, 82]
 
   17326511:
     template: Hydra_Monk
     at:       [-246.580, -80.294, -112.659, 8]
+    region:   null
     level:    [82, 82]
 
   17326512:
     template: Vanguard_Eye
     at:       [-288.956, -80.126, -114.679, 230]
+    region:   null
     level:    [70, 70]
 
   17326513:
     template: Hydra_Beastmaster
     at:       [-285.175, -79.860, -111.938, 230]
+    region:   null
     level:    [82, 82]
 
   17326514:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326515:
     template: Vanguard_Eye
     at:       [-295.680, -80.472, -95.093, 15]
+    region:   null
     level:    [70, 70]
 
   17326516:
     template: Hydra_Ninja
     at:       [-291.166, -79.883, -96.792, 15]
+    region:   null
     level:    [82, 82]
 
   17326517:
     template: Vanguard_Eye
     at:       [-282.812, -79.939, -85.231, 49]
+    region:   null
     level:    [70, 70]
 
   17326518:
     template: Hydra_Black_Mage
     at:       [-280.691, -79.671, -90.600, 49]
+    region:   null
     level:    [82, 82]
 
   17326519:
@@ -5679,51 +5994,61 @@ spawns:
   17326520:
     template: Hydra_Summoner
     at:       [-130.132, -99.711, 4.311, 127]
+    region:   null
     level:    [82, 82]
 
   17326521:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326522:
     template: Vanguard_Eye
     at:       [-118.959, -99.614, -11.737, 113]
+    region:   null
     level:    [70, 70]
 
   17326523:
     template: Hydra_Dragoon
     at:       [-125.175, -99.542, -13.414, 113]
+    region:   null
     level:    [82, 82]
 
   17326524:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326525:
     template: Vanguard_Eye
     at:       [-129.991, -99.440, -22.356, 125]
+    region:   null
     level:    [70, 70]
 
   17326526:
     template: Hydra_Samurai
     at:       [-136.432, -99.823, -22.905, 125]
+    region:   null
     level:    [82, 82]
 
   17326527:
     template: Vanguard_Eye
     at:       [-121.283, -100.000, -36.358, 119]
+    region:   null
     level:    [70, 70]
 
   17326528:
     template: Hydra_Ranger
     at:       [-127.417, -99.830, -37.764, 119]
+    region:   null
     level:    [82, 82]
 
   17326529:
     template: Vanguard_Eye
     at:       [-116.375, -99.675, -50.517, 122]
+    region:   null
     level:    [70, 70]
 
   17326530:
@@ -5734,6 +6059,7 @@ spawns:
   17326531:
     template: Vanguard_Eye
     at:       [-108.250, -99.989, -28.946, 100]
+    region:   null
     level:    [70, 70]
 
   17326532:
@@ -5744,46 +6070,55 @@ spawns:
   17326533:
     template: Vanguard_Eye
     at:       [-65.458, -99.715, 60.550, 74]
+    region:   null
     level:    [70, 70]
 
   17326534:
     template: Hydra_Paladin
     at:       [-73.019, -100.194, 56.736, 86]
+    region:   null
     level:    [82, 82]
 
   17326535:
     template: Hydra_Bard
     at:       [-59.474, -99.184, 51.680, 86]
+    region:   null
     level:    [82, 82]
 
   17326536:
     template: Vanguard_Eye
     at:       [-61.885, -101.187, 23.100, 91]
+    region:   null
     level:    [70, 70]
 
   17326537:
     template: Hydra_Red_Mage
     at:       [-66.599, -100.373, 28.051, 100]
+    region:   null
     level:    [82, 82]
 
   17326538:
     template: Hydra_Thief
     at:       [-55.134, -100.356, 18.115, 100]
+    region:   null
     level:    [82, 82]
 
   17326539:
     template: Vanguard_Eye
     at:       [-245.539, -99.841, 11.312, 10]
+    region:   null
     level:    [70, 70]
 
   17326540:
     template: Hydra_Dragoon
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326541:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326542:
@@ -5834,36 +6169,43 @@ spawns:
   17326551:
     template: Hydra_Beastmaster
     at:       [-332.360, -100.168, 60.943, 9]
+    region:   null
     level:    [82, 82]
 
   17326552:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326553:
     template: Vanguard_Eye
     at:       [-362.824, -99.872, 86.575, 68]
+    region:   null
     level:    [70, 70]
 
   17326554:
     template: Hydra_Summoner
     at:       [-362.463, -99.117, 97.680, 68]
+    region:   null
     level:    [82, 82]
 
   17326555:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326556:
     template: Vanguard_Eye
     at:       [-336.798, -100.982, 103.780, 108]
+    region:   null
     level:    [70, 70]
 
   17326557:
     template: Hydra_Monk
     at:       [-343.489, -100.484, 100.359, 108]
+    region:   null
     level:    [82, 82]
 
   17326558:
@@ -5874,16 +6216,19 @@ spawns:
   17326559:
     template: Vanguard_Eye
     at:       [-339.871, -100.250, 136.203, 63]
+    region:   null
     level:    [70, 70]
 
   17326560:
     template: Hydra_Red_Mage
     at:       [-335.549, -100.250, 133.643, 62]
+    region:   null
     level:    [82, 82]
 
   17326561:
     template: Hydra_Samurai
     at:       [-336.003, -100.250, 141.486, 62]
+    region:   null
     level:    [82, 82]
 
   17326562:
@@ -5894,11 +6239,13 @@ spawns:
   17326563:
     template: Hydra_Thief
     at:       [-344.742, -100.250, 133.710, 62]
+    region:   null
     level:    [82, 82]
 
   17326564:
     template: Hydra_Ninja
     at:       [-345.251, -100.250, 140.964, 62]
+    region:   null
     level:    [82, 82]
 
   17326565:
@@ -5909,16 +6256,19 @@ spawns:
   17326566:
     template: Hydra_Red_Mage
     at:       [99.992, -20.250, 131.455, 64]
+    region:   null
     level:    [82, 82]
 
   17326567:
     template: Hydra_Red_Mage
     at:       [99.851, -20.250, 140.554, 64]
+    region:   null
     level:    [82, 82]
 
   17326568:
     template: Hydra_Paladin
     at:       [105.322, -20.250, 140.520, 64]
+    region:   null
     level:    [82, 82]
 
   17326569:
@@ -5929,6 +6279,7 @@ spawns:
   17326570:
     template: Hydra_Warrior
     at:       [95.406, -20.250, 140.766, 64]
+    region:   null
     level:    [82, 82]
 
   17326571:
@@ -5984,11 +6335,13 @@ spawns:
   17326581:
     template: Hydra_Monk
     at:       [59.871, -0.250, -340.849, 192]
+    region:   null
     level:    [82, 82]
 
   17326582:
     template: Hydra_Ninja
     at:       [54.852, -0.250, -340.274, 192]
+    region:   null
     level:    [82, 82]
 
   17326583:
@@ -5999,11 +6352,13 @@ spawns:
   17326584:
     template: Hydra_Thief
     at:       [65.357, -0.250, -340.594, 192]
+    region:   null
     level:    [82, 82]
 
   17326585:
     template: Hydra_Thief
     at:       [65.169, -0.250, -332.131, 192]
+    region:   null
     level:    [82, 82]
 
   17326586:
@@ -6014,11 +6369,13 @@ spawns:
   17326587:
     template: Dagourmarches_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326588:
     template: Dagourmarches_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326589:
@@ -6029,26 +6386,31 @@ spawns:
   17326590:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326591:
     template: Hydra_Dragoon
     at:       [-180.258, -40.250, -219.883, 0]
+    region:   null
     level:    [82, 82]
 
   17326592:
     template: Hydras_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326593:
     template: Hydra_Summoner
     at:       [-179.928, -40.250, -214.884, 0]
+    region:   null
     level:    [82, 82]
 
   17326594:
     template: Hydras_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326595:
@@ -6064,83 +6426,98 @@ spawns:
   17326597:
     template: Hydra_Beastmaster
     at:       [-180.731, -40.250, -224.575, 0]
+    region:   null
     level:    [82, 82]
 
   17326598:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326599:
     template: Hydra_Beastmaster
     at:       [-172.229, -40.250, -224.710, 0]
+    region:   null
     level:    [82, 82]
 
   17326600:
     template: Hydras_Hound
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
 
   17326601:
     template: Quiebitiel
     at:       [-19.957, -60.250, -64.375, 64]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326602:
     template: Hydra_Black_Mage
     at:       [-19.975, -60.250, -67.395, 64]
+    region:   null
     level:    [82, 82]
 
   17326603:
     template: Hydra_Black_Mage
     at:       [-19.930, -60.250, -59.567, 64]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326604:
     template: Hydra_White_Mage
     at:       [-14.395, -60.250, -59.552, 64]
+    region:   null
     level:    [82, 82]
 
   17326605:
     template: Hydra_White_Mage
     at:       [-14.342, -60.250, -67.520, 64]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326606:
     template: Hydra_Bard
     at:       [-24.802, -60.250, -59.789, 64]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326607:
     template: Hydra_Bard
     at:       [-24.568, -60.250, -67.765, 64]
+    region:   null
     level:    [82, 82]
 
   17326608:
     template: Angra_Mainyu
     at:       [280.082, 20.000, 536.515, 65]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326609:
     template: Fire_Pukis
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326610:
     template: Poison_Pukis
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 
   17326611:
     template: Wind_Pukis
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [82, 82]
     script:   null
 

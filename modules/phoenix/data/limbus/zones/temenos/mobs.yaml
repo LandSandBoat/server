@@ -1,0 +1,6708 @@
+# Legacy level 75 Limbus Temenos layout.
+# Matches modules/phoenix/sql/limbus at phoenixffxi/Phoenix PR 194 (groups, pools and spawn points).
+# The retail layout is replaced whole: core spawns the legacy Limbus does not use are deleted, and
+# every redefined spawn nulls its core region because a patch cannot delete and recreate one key.
+# Same-name mobs on several floors carry a suffix and pin the entity name with script (_E, _Fourth).
+
+templates:
+
+  # -- Temenos Northern Tower --
+
+  Armoury_Crate_Recover:
+    id:           10677
+    display_name: Armoury_Crate
+    species:      mimic
+    type:         [battlefield]
+    attributes:
+      jobs: [war, war]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 960
+        entity_flags:  131
+        animation_sub: 8
+        model_size:    1
+        hitbox:        12
+      behaviors:
+        flags: [no_turn]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1
+
+  Beli:
+    id:            10003
+    species:       gigas
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [rng, war]
+      render:
+        look:
+          type:  standard
+          model: 711
+        entity_flags: 157
+        name_prefix:  32
+        model_size:   2
+        hitbox:       34
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Cryptonberry_Abductor:
+    id:            10021
+    species:       tonberry
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 500
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  standard
+          model: 1185
+        entity_flags: 129
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Cryptonberry_Charmer:
+    id:            10022
+    species:       tonberry
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 21
+    skill_list_id: 500
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 1186
+        entity_flags: 133
+        model_size:   2
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+        mp: 8500
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Cryptonberry_Designator:
+    id:            10023
+    species:       tonberry
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 32
+    skill_list_id: 500
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 200
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 1187
+        entity_flags: 129
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Cryptonberry_Skulker:
+    id:            10026
+    species:       tonberry
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 7
+    skill_list_id: 500
+    attributes:
+      combat:
+        skill: dagger
+        delay: 200
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  standard
+          model: 1189
+        entity_flags: 133
+        model_size:   2
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Goblin_Fencer:
+    id:            10527
+    species:       goblin
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 3
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 504
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Goblin_Slaughterman:
+    id:            10501
+    species:       goblin
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 700
+        entity_flags: 133
+        model_size:   2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Goblin_Theurgist:
+    id:            10528
+    species:       goblin
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 21
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: club
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 494
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Goblin_Warlord:
+    id:            10529
+    species:       armored_goblin
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 5
+    skill_list_id: 133
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 501
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kari:
+    id:            10502
+    species:       gigas
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 430
+      jobs: [mnk, war]
+      render:
+        look:
+          type:  standard
+          model: 642
+        entity_flags: 153
+        name_prefix:  32
+        hitbox:       25
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kindred_Black_Mage:
+    id:            10511
+    display_name:  Kindred_Black_Mage_T
+    species:       kindred
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 21
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 741
+        entity_flags: 129
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kindred_Dark_Knight:
+    id:            10512
+    display_name:  Kindred_Dark_Knight_T
+    species:       kindred
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 5
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: sword
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 743
+        entity_flags: 133
+        model_size:   2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kindred_Summoner:
+    id:            10513
+    display_name:  Kindred_Summoner_T
+    species:       kindred
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 31
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 744
+        entity_flags: 133
+        model_size:   2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kindred_Warrior:
+    id:            10516
+    display_name:  Kindred_Warrior_T
+    species:       kindred
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 358
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 742
+        entity_flags: 133
+        model_size:   2
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Kindreds_Avatar:
+    id:            10515
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        hitbox:       24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 5000
+
+  Kindreds_Elemental:
+    id:            10514
+    species:       dark_elemental
+    type:          [called, battlefield]
+    roam:          [scripted]
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  129
+        animation_sub: 16
+        hitbox:        8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  Moblin_Dustman:
+    id:            10500
+    species:       moblin
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 3
+    skill_list_id: 184
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 696
+        entity_flags: 129
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+        mp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Praetorian_Guard_CCCXI:
+    id:            10517
+    species:       antica
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 4
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 1297
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9500
+        mp: 9500
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Praetorian_Guard_CCXX:
+    id:            10518
+    species:       antica
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: axe
+        delay: 265
+      jobs: [war, war]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1263
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Praetorian_Guard_CXLVIII:
+    id:            10519
+    species:       antica
+    type:          [notorious, battlefield]
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: dagger
+        delay: 265
+      jobs: [rng, rng]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1276
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Praetorian_Guard_LXXIII:
+    id:            10520
+    species:       antica
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 21
+    skill_list_id: 25
+    attributes:
+      combat:
+        skill: staff
+        delay: 265
+      jobs: [blm, blm]
+      resists:
+        immune_status: [gravity, bind, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1281
+        entity_flags: 133
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8500
+        mp: 8500
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Skadi:
+    id:            10505
+    species:       gigas
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: axe
+        delay: 280
+      jobs: [bst, war]
+      render:
+        look:
+          type:  standard
+          model: 709
+        entity_flags:  669
+        animation_sub: 8
+        name_prefix:   32
+        model_size:    2
+        hitbox:        34
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Telchines_Bard:
+    id:            10506
+    species:       yellow_sahagin
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 6
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      render:
+        look:
+          type:  standard
+          model: 1338
+        entity_flags: 133
+        model_size:   2
+        hitbox:       14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Telchines_Dragoon:
+    id:            10507
+    species:       blue_sahagin
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      render:
+        look:
+          type:  standard
+          model: 1312
+        entity_flags: 129
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Telchines_Monk:
+    id:            10508
+    species:       blue_sahagin
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 380
+      jobs: [mnk, war]
+      render:
+        look:
+          type:  standard
+          model: 1299
+        entity_flags: 129
+        hitbox:       11
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Telchines_White_Mage:
+    id:            10510
+    species:       yellow_sahagin
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 20
+    skill_list_id: 213
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 1327
+        entity_flags: 133
+        model_size:   2
+        hitbox:       14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 9000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Telchiness_Wyvern:
+    id:            10509
+    species:       blue_wyvern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 129
+        hitbox:       8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1500
+
+  Thrym:
+    id:            10504
+    species:       gigas
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 126
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 280
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 640
+        entity_flags: 157
+        name_prefix:  32
+        model_size:   2
+        hitbox:       34
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Tonberrys_Avatar:
+    id:            10525
+    species:       carbuncle
+    type:          [called, battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 129
+        hitbox:       24
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 4000
+        mp: 4000
+
+  Tonberrys_Elemental:
+    id:            10524
+    species:       fire_elemental
+    type:          [called, battlefield]
+    roam:          [scripted]
+    spell_list_id: 21
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  1153
+        animation_sub: 16
+        hitbox:        8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 2000
+
+  # -- Temenos Eastern Tower --
+
+  Air_Elemental_E:
+    id:            10534
+    display_name:  Air_Elemental
+    species:       air_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Armoury_Crate_E:
+    id:           10677
+    display_name: Armoury_Crate
+    species:      mimic
+    type:         [battlefield]
+    attributes:
+      jobs: [war, war]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 960
+        entity_flags:  131
+        animation_sub: 8
+        model_size:    1
+        hitbox:        12
+      behaviors:
+        flags: [no_turn]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1
+
+  Dark_Elemental_E:
+    id:            10542
+    display_name:  Dark_Elemental
+    species:       dark_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: club
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [silence, blind, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Earth_Elemental_E:
+    id:            10536
+    display_name:  Earth_Elemental
+    species:       earth_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [stun, silence, slow, elegy]
+      render:
+        look:
+          type:  standard
+          model: 11
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Fire_Elemental_E:
+    id:            10530
+    display_name:  Fire_Elemental
+    species:       fire_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [bind, silence, paralyze]
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Ice_Elemental_E:
+    id:            10532
+    display_name:  Ice_Elemental
+    species:       ice_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+      render:
+        look:
+          type:  standard
+          model: 9
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Fenrir_E:
+    id:            10543
+    display_name:  Mystic_Avatar
+    species:       fenrir
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 325
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 792
+        entity_flags: 131
+        model_size:   1
+        hitbox:       12
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Garuda_E:
+    id:            10535
+    display_name:  Mystic_Avatar
+    species:       garuda
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 37
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ifrit_E:
+    id:            10531
+    display_name:  Mystic_Avatar
+    species:       ifrit
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 38
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_LeviathanE:
+    id:            10541
+    display_name:  Mystic_Avatar
+    species:       leviathan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 40
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ramuh_E:
+    id:            10539
+    display_name:  Mystic_Avatar
+    species:       ramuh
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 43
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags: 131
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Shiva_E:
+    id:            10533
+    display_name:  Mystic_Avatar
+    species:       shiva
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 44
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Titan_E:
+    id:            10537
+    display_name:  Mystic_Avatar
+    species:       titan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 45
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Thunder_Elemental_E:
+    id:            10538
+    display_name:  Thunder_Elemental
+    species:       thunder_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [stun, silence, poison]
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Water_Elemental_E:
+    id:            10540
+    display_name:  Water_Elemental
+    species:       water_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [silence, poison]
+      render:
+        look:
+          type:  standard
+          model: 12
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 8000
+        mp: 8000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  # -- Temenos Western Tower --
+
+  Armoury_Crate_Western:
+    id:           10677
+    display_name: Armoury_Crate
+    species:      mimic
+    type:         [battlefield]
+    attributes:
+      jobs: [war, war]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 960
+        entity_flags:  131
+        animation_sub: 8
+        model_size:    1
+        hitbox:        12
+      behaviors:
+        flags: [no_turn]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1
+
+  Enhanced_Beetle:
+    id:            10546
+    species:       beetle
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Lizard:
+    id:            10547
+    species:       hill_lizard
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Mandragora:
+    id:            10545
+    species:       mandragora
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  1669
+        animation_sub: 8
+        model_size:    2
+        hitbox:        9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Pugil:
+    id:            10549
+    species:       pugil
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Slime:
+    id:            10548
+    species:       slime
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Tiger:
+    id:            10544
+    species:       tiger
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       29
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Vulture:
+    id:            10550
+    species:       bird
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 2089
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: very_common
+          item: ancient_beastcoin
+
+  # -- Temenos Central 1st Floor --
+
+  Airi:
+    id:            10551
+    species:       ghost
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 28
+    skill_list_id: 121
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      resists:
+        immune_status: [paralyze]
+      render:
+        look:
+          type:  standard
+          model: 368
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Ahriman:
+    id:            10553
+    species:       ahriman
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 11
+    skill_list_id: 4
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 264
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Enhanced_Dragon:
+    id:            10554
+    species:       dragon
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 87
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 420
+        entity_flags: 1153
+        hitbox:       28
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Iruci:
+    id:            10552
+    species:       skeleton
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 28
+    skill_list_id: 227
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [blm, blm]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 564
+        entity_flags: 1669
+        model_size:   2
+        hitbox:       13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Temenos_Cleaner:
+    id:            10556
+    species:       magic_pot
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 36
+    skill_list_id: 175
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [rdm, war]
+      resists:
+        dmg_physical:
+          h2h: 2500
+      render:
+        look:
+          type:  standard
+          model: 412
+        entity_flags: 133
+        model_size:   2
+        hitbox:       43
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Temenos_Weapon:
+    id:            10555
+    species:       evil_weapon
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 42
+    skill_list_id: 110
+    attributes:
+      combat:
+        skill: sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 451
+        entity_flags:  645
+        animation_sub: 8
+        model_size:    2
+        hitbox:        22
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  # -- Temenos Central 2nd Floor --
+
+  Air_Elemental:
+    id:            10534
+    species:       air_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [gravity, silence, slow, elegy]
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Earth_Elemental:
+    id:            10536
+    species:       earth_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 101
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [stun, silence, slow, elegy]
+      render:
+        look:
+          type:  standard
+          model: 11
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Fire_Elemental:
+    id:            10530
+    species:       fire_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 102
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [bind, silence, paralyze]
+      render:
+        look:
+          type:  standard
+          model: 8
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Ice_Elemental:
+    id:            10532
+    species:       ice_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 103
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [gravity, bind, silence, paralyze]
+      render:
+        look:
+          type:  standard
+          model: 9
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Light_Elemental:
+    id:            10557
+    species:       light_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 19
+    skill_list_id: 104
+    attributes:
+      combat:
+        skill: club
+        delay: 180
+      jobs: [rdm, blm]
+      render:
+        look:
+          type:  standard
+          model: 14
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Carbuncle:
+    id:            10593
+    display_name:  Mystic_Avatar
+    species:       carbuncle
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      resists:
+        immune_status: [stun, silence, paralyze, blind, slow, poison, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:   1
+        hitbox:       7
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Garuda:
+    id:            10535
+    display_name:  Mystic_Avatar
+    species:       garuda
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 37
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ifrit:
+    id:            10531
+    display_name:  Mystic_Avatar
+    species:       ifrit
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 38
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Leviathan:
+    id:            10541
+    display_name:  Mystic_Avatar
+    species:       leviathan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 40
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ramuh:
+    id:            10539
+    display_name:  Mystic_Avatar
+    species:       ramuh
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 43
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags: 131
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Shiva:
+    id:            10533
+    display_name:  Mystic_Avatar
+    species:       shiva
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 44
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Titan:
+    id:            10537
+    display_name:  Mystic_Avatar
+    species:       titan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 45
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 7000
+        mp: 4000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Thunder_Elemental:
+    id:            10538
+    species:       thunder_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 105
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [stun, silence, poison]
+      render:
+        look:
+          type:  standard
+          model: 13
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Water_Elemental:
+    id:            10540
+    species:       water_elemental
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 106
+    attributes:
+      combat:
+        skill: staff
+        delay: 180
+      jobs: [rdm, blm]
+      resists:
+        immune_status: [silence, poison]
+      render:
+        look:
+          type:  standard
+          model: 12
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6500
+        mp: 3000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  # -- Temenos Central 3rd Floor --
+
+  Abyssdweller_Jhabdebb:
+    id:            10578
+    species:       orc
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 634
+        entity_flags: 1183
+        name_prefix:  32
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+        mp: 17000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Fossil_Quadav:
+    id:            10575
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 649
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+
+  Grognard_Footsoldier:
+    id:            10559
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 627
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Grognard_Grappler:
+    id:            10568
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 631
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Grognard_Impaler:
+    id:            10569
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [drg, drg]
+      render:
+        look:
+          type:  standard
+          model: 636
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Grognard_Mesmerizer:
+    id:            10560
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 637
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Grognard_Neckchopper:
+    id:            10571
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: axe
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 630
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Grognard_Predator:
+    id:            10561
+    species:       orc
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: axe
+      jobs: [rng, rng]
+      render:
+        look:
+          type:  standard
+          model: 626
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Lightsteel_Quadav:
+    id:            10572
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 654
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Orcs_Wyvern:
+    id:            10570
+    species:       blue_wyvern
+    type:          [battlefield]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 24
+        entity_flags: 131
+        model_size:   1
+        hitbox:       8
+      spawn:
+        type: [scripted]
+
+  Orichalcum_Quadav:
+    id:            10579
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 668
+        entity_flags: 1159
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+        mp: 22000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Pee_Qoho_the_Python:
+    id:            10580
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 596
+        entity_flags: 159
+        name_prefix:  32
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+        mp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Star_Ruby_Quadav:
+    id:            10576
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 667
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Star_Sapphire_Quadav:
+    id:            10573
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 666
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Whitegold_Quadav:
+    id:            10577
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  standard
+          model: 659
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Wootz_Quadav:
+    id:            10574
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 657
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Archpriest:
+    id:            10562
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: sword
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 597
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Disciplinant:
+    id:            10563
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: hand_to_hand
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 590
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Eradicator:
+    id:            10564
+    display_name:  Yagudo_Eradicator_T
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  standard
+          model: 601
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Kapellmeister:
+    id:            10565
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [brd, brd]
+      render:
+        look:
+          type:  standard
+          model: 594
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Knight_Templar:
+    id:            10566
+    display_name:  Yagudo_Knight_Templar_L
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: great_katana
+      jobs: [sam, sam]
+      render:
+        look:
+          type:  standard
+          model: 599
+        entity_flags: 131
+        model_size:   1
+        hitbox:       15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudo_Prelatess:
+    id:            10567
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 270
+    attributes:
+      combat:
+        skill: axe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 604
+        entity_flags:  643
+        animation_sub: 8
+        model_size:    1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Yagudos_Avatar:
+    id:            10582
+    species:       carbuncle
+    type:          [battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 131
+        model_size:   1
+        hitbox:       24
+      spawn:
+        type: [scripted]
+
+  Yagudos_Elemental_Legacy:
+    id:            10581
+    display_name:  Yagudos_Elemental
+    species:       air_elemental
+    type:          [called, battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 99
+    attributes:
+      combat:
+        skill: staff
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 10
+        entity_flags:  1155
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2000
+        mp: 500
+
+  # -- Temenos Central 4th Floor --
+
+  Armoury_Crate_Fourth:
+    id:           10677
+    display_name: Armoury_Crate
+    species:      mimic
+    type:         [battlefield]
+    attributes:
+      jobs: [war, war]
+      resists:
+        dmg_physical:
+          slashing: -5000
+          piercing: -5000
+          blunt:    -5000
+          h2h:      -5000
+      render:
+        look:
+          type:  standard
+          model: 960
+        entity_flags:  131
+        animation_sub: 8
+        model_size:    1
+        hitbox:        12
+      behaviors:
+        flags: [no_turn]
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 1
+
+  Enhanced_Akbaba:
+    id:            10583
+    species:       bird
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 2089
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 444
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       22
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Jelly:
+    id:            10584
+    species:       slime
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 229
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 292
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       27
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Kettenkaefer:
+    id:            10585
+    species:       beetle
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 49
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 408
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       14
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Koenigstiger:
+    id:            10586
+    species:       tiger
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 242
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 308
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       29
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Makara:
+    id:            10587
+    species:       pugil
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 197
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 348
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       32
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Pygmaioi:
+    id:            10588
+    species:       mandragora
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 178
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 300
+        entity_flags:  1669
+        animation_sub: 8
+        model_size:    2
+        hitbox:        9
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Enhanced_Salamander:
+    id:            10589
+    species:       hill_lizard
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 174
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  standard
+          model: 328
+        entity_flags: 1157
+        model_size:   2
+        hitbox:       18
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 10000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  JiGho_Ageless:
+    id:            10591
+    species:       quadav
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 202
+    attributes:
+      combat:
+        skill: sword
+        delay: 265
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 668
+        entity_flags: 1159
+        name_prefix:  32
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 22000
+        mp: 22000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Kingslayer_Doggvdegg:
+    id:            10590
+    species:       orc
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 334
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 2075
+        entity_flags: 1183
+        name_prefix:  32
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 17000
+        mp: 17000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Koo_Buzu_the_Theomanic:
+    id:            10592
+    species:       yagudo
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 360
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 596
+        entity_flags: 159
+        name_prefix:  32
+        model_size:   3
+        hitbox:       20
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16000
+        mp: 16000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: uncommon
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Garuda_Fourth:
+    id:            10535
+    display_name:  Mystic_Avatar
+    species:       garuda
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 37
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ifrit_Fourth:
+    id:            10531
+    display_name:  Mystic_Avatar
+    species:       ifrit
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 38
+    attributes:
+      combat:
+        skill: axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Leviathan_Fourth:
+    id:            10541
+    display_name:  Mystic_Avatar
+    species:       leviathan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 40
+    attributes:
+      combat:
+        skill: polearm
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Ramuh_Fourth:
+    id:            10539
+    display_name:  Mystic_Avatar
+    species:       ramuh
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 43
+    attributes:
+      combat:
+        skill: staff
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags: 131
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Shiva_Fourth:
+    id:            10533
+    display_name:  Mystic_Avatar
+    species:       shiva
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 44
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Mystic_Avatar_Titan_Fourth:
+    id:            10537
+    display_name:  Mystic_Avatar
+    species:       titan
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    skill_list_id: 45
+    attributes:
+      combat:
+        skill: great_axe
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 131
+        model_size:   1
+        hitbox:       35
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 15000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: always
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+        - chance: very_common
+          item: ancient_beastcoin
+
+  Proto-Ultima:
+    id:            10594
+    species:       ultima
+    type:          [notorious, battlefield]
+    roam:          [scripted]
+    spell_list_id: 103
+    skill_list_id: 729
+    attributes:
+      combat:
+        skill: great_axe
+        delay: 150
+      jobs: [war, whm]
+      resists:
+        immune_status: [silence, light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 1076
+        entity_flags:  155
+        animation_sub: 8
+        name_prefix:   32
+        model_size:    1
+        hitbox:        15
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 55000
+        mp: 55000
+
+  # -- Temenos Central Basement --
+
+  Aerns_Avatar:
+    id:            10612
+    species:       carbuncle
+    type:          [battlefield]
+    skill_list_id: 34
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 3
+        model_size:   1
+        hitbox:       24
+      behaviors:
+        links: true
+      spawn:
+        type: [scripted]
+
+  Aerns_Elemental:
+    id:            10611
+    species:       dark_elemental
+    type:          [called, battlefield]
+    roam:          [scripted]
+    spell_list_id: 5
+    skill_list_id: 100
+    attributes:
+      combat:
+        skill: scythe
+      jobs: [drk, rdm]
+      render:
+        look:
+          type:  standard
+          model: 15
+        entity_flags:  131
+        animation_sub: 16
+        model_size:    1
+        hitbox:        8
+      spawn:
+        type: [scripted]
+
+  Aerns_Euvhi:
+    id:            10607
+    species:       euvhi
+    type:          [called, battlefield]
+    roam:          [scripted]
+    skill_list_id: 109
+    attributes:
+      combat:
+        skill: club
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 526
+        entity_flags:  1155
+        animation_sub: 5
+        model_size:    1
+        hitbox:        12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 3500
+
+  Aerns_Wynav:
+    id:            10598
+    species:       blue_wyvern
+    type:          [called, battlefield]
+    roam:          [scripted]
+    skill_list_id: 714
+    attributes:
+      combat:
+        skill: scythe
+        delay: 200
+      jobs: [war, war]
+      resists:
+        immune_status: [light_sleep, dark_sleep]
+      render:
+        look:
+          type:  standard
+          model: 530
+        entity_flags: 1155
+        model_size:   1
+        hitbox:       12
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 2700
+
+  Temenos_Aern_BLM:
+    id:            10600
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_BRD:
+    id:            10601
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+        delay: 360
+      jobs: [brd, brd]
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_BST:
+    id:            10606
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [bst, bst]
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_DRG:
+    id:            10597
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [drg, drg]
+      render:
+        look:
+          type:  standard
+          model: 1371
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_DRK:
+    id:            10613
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 2
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [drk, drk]
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_MNK:
+    id:            10602
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 480
+      jobs: [mnk, mnk]
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_NIN:
+    id:            10596
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: hand_to_hand
+        delay: 360
+      jobs: [nin, nin]
+      render:
+        look:
+          type:  standard
+          model: 1367
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_PLD:
+    id:            10595
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [none0, scripted]
+    spell_list_id: 1
+    skill_list_id: 3
+    attributes:
+      combat:
+        skill: great_sword
+      jobs: [pld, pld]
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_RDM:
+    id:            10609
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 441
+    attributes:
+      combat:
+        skill: sword
+        delay: 360
+      jobs: [rdm, rdm]
+      render:
+        look:
+          type:  standard
+          model: 1370
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_RNG:
+    id:            10605
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [rng, rng]
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_SAM:
+    id:            10603
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 440
+    attributes:
+      combat:
+        skill: polearm
+        delay: 360
+      jobs: [sam, sam]
+      render:
+        look:
+          type:  standard
+          model: 1371
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_SMN:
+    id:            10610
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 1372
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_THF:
+    id:            10604
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 442
+    attributes:
+      combat:
+        skill: dagger
+      jobs: [thf, thf]
+      render:
+        look:
+          type:  standard
+          model: 1368
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_WAR:
+    id:            10599
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    skill_list_id: 443
+    attributes:
+      combat:
+        skill: axe
+        delay: 360
+      jobs: [war, war]
+      render:
+        look:
+          type:  standard
+          model: 1369
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Aern_WHM:
+    id:            10608
+    display_name:  Temenos_Aern
+    species:       aern
+    type:          [battlefield]
+    roam:          [scripted]
+    spell_list_id: 1
+    skill_list_id: 439
+    attributes:
+      combat:
+        skill: staff
+        delay: 360
+      jobs: [whm, whm]
+      render:
+        look:
+          type:  standard
+          model: 1372
+        entity_flags:  133
+        animation_sub: 5
+        model_size:    2
+        hitbox:        13
+      behaviors:
+        aggressive:     true
+        links:          true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6000
+        mp: 6000
+    loot:
+      drops:
+        - chance: always
+          item: ancient_beastcoin
+
+  Temenos_Ghrah_Legacy:
+    id:            10614
+    display_name:  Temenos_Ghrah
+    species:       bird_ghrah
+    type:          [battlefield]
+    skill_list_id: 123
+    attributes:
+      combat:
+        skill: scythe
+        delay: 220
+      jobs: [war, war]
+      resists:
+        immune_status: [gravity, bind, silence, light_sleep, dark_sleep]
+        dmg_physical:
+          slashing: -2500
+          piercing: -2500
+          blunt:    -2500
+          h2h:      -2500
+      render:
+        look:
+          type:  automaton
+          model: 1168
+        entity_flags:  671
+        animation_sub: 1
+        name_prefix:   2
+        model_size:    1
+        hitbox:        12
+      behaviors:
+        aggressive:     true
+        true_detection: true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 12000
+
+spawns:
+
+  # -- Retail spawns with no legacy counterpart --
+
+  16928770: null
+  16928771: null
+  16928779: null
+  16928780: null
+  16928786: null
+  16928787: null
+  16928795: null
+  16928796: null
+  16928807: null
+  16928808: null
+  16928814: null
+  16928815: null
+  16928830: null
+  16928958: null
+  16928965: null
+  16929004: null
+  16929029: null
+  16929045: null
+  16929052: null
+  16929089: null
+  16929090: null
+  16929091: null
+  16929092: null
+  16929093: null
+  16929094: null
+  16929095: null
+  16929096: null
+  16929097: null
+  16929098: null
+  16929099: null
+  16929100: null
+  16929101: null
+  16929102: null
+  16929103: null
+  16929104: null
+  16929105: null
+  16929106: null
+  16929107: null
+  16929108: null
+  16929109: null
+  16929110: null
+  16929111: null
+  16929112: null
+  16929113: null
+  16929114: null
+  16929115: null
+  16929116: null
+  16929117: null
+  16929118: null
+  16929119: null
+  16929120: null
+  16929121: null
+  16929122: null
+  16929123: null
+  16929124: null
+  16929125: null
+  16929126: null
+  16929127: null
+  16929128: null
+  16929129: null
+  16929130: null
+  16929131: null
+  16929132: null
+  16929133: null
+  16929134: null
+  16929135: null
+  16929136: null
+  16929137: null
+  16929138: null
+  16929139: null
+  16929140: null
+  16929141: null
+  16929142: null
+  16929143: null
+  16929144: null
+  16929145: null
+  16929146: null
+  16929147: null
+  16929148: null
+  16929149: null
+  16929150: null
+  16929151: null
+  16929152: null
+  16929153: null
+  16929154: null
+  16929155: null
+  16929156: null
+  16929157: null
+  16929158: null
+  16929159: null
+  16929160: null
+  16929161: null
+  16929162: null
+  16929163: null
+  16929164: null
+  16929165: null
+  16929166: null
+  16929167: null
+  16929168: null
+  16929169: null
+  16929170: null
+  16929171: null
+  16929172: null
+  16929173: null
+  16929174: null
+  16929175: null
+  16929176: null
+  16929177: null
+  16929178: null
+  16929179: null
+  16929180: null
+  16929181: null
+  16929182: null
+  16929183: null
+  16929184: null
+  16929185: null
+  16929186: null
+  16929187: null
+  16929188: null
+  16929189: null
+  16929190: null
+  16929191: null
+  16929192: null
+  16929193: null
+  16929194: null
+  16929195: null
+  16929196: null
+  16929197: null
+  16929198: null
+  16929199: null
+  16929200: null
+  16929201: null
+  16929202: null
+  16929203: null
+  16929204: null
+  16929205: null
+  16929206: null
+  16929207: null
+  16929208: null
+  16929209: null
+  16929210: null
+  16929211: null
+  16929212: null
+  16929213: null
+  16929214: null
+  16929215: null
+  16929216: null
+  16929217: null
+  16929218: null
+  16929219: null
+  16929220: null
+  16929221: null
+  16929222: null
+  16929223: null
+  16929224: null
+  16929225: null
+  16929226: null
+  16929227: null
+  16929228: null
+  16929229: null
+  16929230: null
+  16929231: null
+  16929232: null
+  16929233: null
+  16929234: null
+  16929235: null
+  16929236: null
+  16929237: null
+  16929238: null
+  16929239: null
+  16929240: null
+  16929241: null
+  16929242: null
+  16929243: null
+  16929244: null
+  16929245: null
+  16929246: null
+  16929247: null
+  16929248: null
+  16929249: null
+  16929250: null
+  16929251: null
+  16929252: null
+  16929253: null
+  16929254: null
+  16929255: null
+  16929256: null
+  16929257: null
+  16929258: null
+  16929259: null
+  16929260: null
+  16929261: null
+  16929262: null
+  16929263: null
+  16929264: null
+  16929265: null
+  16929266: null
+  16929267: null
+
+  # -- Temenos Northern Tower --
+
+  16928769:
+    template: Armoury_Crate_Recover
+    at:       [332.000, 69.500, 468.000, 32]
+    level:    [1, 1]
+    region:   null
+
+  16928772:
+    template: Goblin_Slaughterman
+    at:       [330.000, 69.500, 470.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928773:
+    template: Goblin_Slaughterman
+    at:       [390.000, 73.500, 420.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928774:
+    template: Moblin_Dustman
+    at:       [340.000, 67.500, 436.000, 64]
+    level:    [77, 78]
+    region:   null
+
+  16928775:
+    template: Moblin_Dustman
+    at:       [344.000, 68.000, 460.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16928776:
+    template: Moblin_Dustman
+    at:       [370.000, 74.000, 408.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16928777:
+    template: Moblin_Dustman
+    at:       [374.000, 74.000, 432.000, 64]
+    level:    [77, 78]
+    region:   null
+
+  16928778:
+    template: Armoury_Crate_Recover
+    at:       [200.000, -81.000, 480.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928781:
+    template: Skadi
+    at:       [194.000, -81.000, 480.000, 64]
+    level:    [77, 80]
+    region:   null
+
+  16928782:
+    template: Thrym
+    at:       [200.000, -81.000, 480.000, 64]
+    level:    [77, 80]
+    region:   null
+
+  16928783:
+    template: Beli
+    at:       [206.000, -81.000, 480.000, 64]
+    level:    [77, 80]
+    region:   null
+
+  16928784:
+    template: Kari
+    at:       [186.000, -82.000, 464.000, 64]
+    level:    [77, 78]
+    region:   null
+
+  16928785:
+    template: Armoury_Crate_Recover
+    at:       [20.000, 79.500, 428.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928788:
+    template: Telchines_Bard
+    at:       [20.000, 79.500, 430.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928789:
+    template: Telchines_White_Mage
+    at:       [60.000, 79.500, 430.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928790:
+    template: Telchines_Dragoon
+    at:       [30.000, 80.000, 419.500, 128]
+    level:    [77, 78]
+    region:   null
+
+  16928791:
+    template: Telchiness_Wyvern
+    at:       [45.470, 79.913, 420.334, 36]
+    level:    [74, 74]
+    region:   null
+
+  16928792:
+    template: Telchines_Monk
+    at:       [30.000, 80.000, 420.500, 0]
+    level:    [77, 78]
+    region:   null
+
+  16928793:
+    template: Telchines_Monk
+    at:       [70.000, 80.000, 420.500, 0]
+    level:    [77, 78]
+    region:   null
+
+  16928794:
+    template: Armoury_Crate_Recover
+    at:       [-120.000, -80.500, 420.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928797:
+    template: Kindred_Warrior
+    at:       [-120.000, -80.500, 420.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928798:
+    template: Kindred_Dark_Knight
+    at:       [-124.000, -80.500, 420.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928799:
+    template: Kindred_Summoner
+    at:       [-116.000, -80.500, 420.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928800:
+    template: Kindreds_Elemental
+    at:       [-116.000, -80.500, 420.000, 128]
+    level:    [75, 75]
+    region:   null
+
+  16928801:
+    template: Kindreds_Avatar
+    at:       [-128.000, -80.500, 420.000, 1]
+    level:    [78, 78]
+    region:   null
+
+  16928802:
+    template: Kindred_Black_Mage
+    at:       [-92.000, -80.000, 427.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16928803:
+    template: Kindred_Black_Mage
+    at:       [-92.000, -80.000, 430.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16928804:
+    template: Kindred_Black_Mage
+    at:       [-148.000, -80.000, 410.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16928805:
+    template: Kindred_Black_Mage
+    at:       [-148.000, -80.000, 413.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16928806:
+    template: Armoury_Crate_Recover
+    at:       [-284.000, 73.500, 420.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928809:
+    template: Praetorian_Guard_CCXX
+    at:       [-248.000, 79.500, 408.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928810:
+    template: Praetorian_Guard_LXXIII
+    at:       [-248.000, 79.500, 432.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928811:
+    template: Praetorian_Guard_CXLVIII
+    at:       [-312.000, 79.500, 432.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928812:
+    template: Praetorian_Guard_CCCXI
+    at:       [-312.000, 79.500, 408.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928813:
+    template: Armoury_Crate_Recover
+    at:       [-470.000, -78.500, 426.000, 32]
+    level:    [1, 1]
+    region:   null
+
+  16928816:
+    template: Cryptonberry_Charmer
+    at:       [-470.000, -78.500, 430.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928817:
+    template: Cryptonberry_Skulker
+    at:       [-410.000, -78.500, 430.000, 96]
+    level:    [78, 80]
+    region:   null
+
+  16928818:
+    template: Cryptonberry_Abductor
+    at:       [-456.000, -80.000, 420.500, 128]
+    level:    [77, 78]
+    region:   null
+
+  16928819:
+    template: Cryptonberry_Designator
+    at:       [-424.000, -80.000, 419.500, 128]
+    level:    [77, 78]
+    region:   null
+
+  16928820:
+    template: Tonberrys_Elemental
+    at:       [-456.000, -80.500, 420.500, 0]
+    level:    [72, 72]
+    region:   null
+
+  16928821:
+    template: Tonberrys_Avatar
+    at:       [-456.000, -80.500, 420.500, 245]
+    level:    [75, 75]
+    region:   null
+
+  16928822:
+    template: Cryptonberry_Abductor
+    at:       [-460.500, -80.000, 416.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16928823:
+    template: Cryptonberry_Designator
+    at:       [-459.500, -80.000, 416.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16928824:
+    template: Tonberrys_Elemental
+    at:       [-459.500, -80.000, 416.000, 0]
+    level:    [72, 72]
+    region:   null
+
+  16928825:
+    template: Tonberrys_Avatar
+    at:       [-459.500, -80.000, 416.000, 0]
+    level:    [75, 75]
+    region:   null
+
+  16928826:
+    template: Cryptonberry_Abductor
+    at:       [-419.500, -80.000, 416.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16928827:
+    template: Cryptonberry_Designator
+    at:       [-420.500, -80.000, 416.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16928828:
+    template: Tonberrys_Elemental
+    at:       [-420.500, -80.000, 416.000, 0]
+    level:    [72, 72]
+    region:   null
+
+  16928829:
+    template: Tonberrys_Avatar
+    at:       [-420.500, -80.000, 416.000, 0]
+    level:    [75, 75]
+    region:   null
+
+  16928831:
+    template: Goblin_Warlord
+    at:       [-600.000, 85.000, 440.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928832:
+    template: Goblin_Fencer
+    at:       [-596.000, 85.000, 440.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928833:
+    template: Goblin_Theurgist
+    at:       [-600.000, 85.000, 436.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928834:
+    template: Goblin_Fencer
+    at:       [-604.000, 85.000, 440.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928835:
+    template: Goblin_Theurgist
+    at:       [-600.000, 85.000, 444.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  # -- Temenos Eastern Tower --
+
+  16928836:
+    template: Armoury_Crate_E
+    at:       [372.000, -0.500, 140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928837:
+    template: Armoury_Crate_E
+    at:       [340.000, -0.500, 140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928838:
+    template: Armoury_Crate_E
+    at:       [340.000, -6.500, 180.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928839:
+    template: Armoury_Crate_E
+    at:       [380.000, -0.500, 180.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928840:
+    template: Fire_Elemental_E
+    at:       [372.000, -0.500, 140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928841:
+    template: Fire_Elemental_E
+    at:       [340.000, -0.500, 140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928842:
+    template: Fire_Elemental_E
+    at:       [340.000, -6.500, 180.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928843:
+    template: Fire_Elemental_E
+    at:       [380.000, -0.500, 180.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928844:
+    template: Mystic_Avatar_Ifrit_E
+    at:       [340.766, -0.500, 141.783, 244]
+    level:    [81, 82]
+    region:   null
+
+  16928845:
+    template: Armoury_Crate_E
+    at:       [200.000, -161.500, 198.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928846:
+    template: Armoury_Crate_E
+    at:       [198.000, -161.500, 200.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928847:
+    template: Armoury_Crate_E
+    at:       [200.000, -161.500, 202.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928848:
+    template: Armoury_Crate_E
+    at:       [202.000, -161.500, 200.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928849:
+    template: Ice_Elemental_E
+    at:       [200.000, -161.000, 190.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928850:
+    template: Ice_Elemental_E
+    at:       [190.000, -161.000, 200.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928851:
+    template: Ice_Elemental_E
+    at:       [200.000, -161.000, 210.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928852:
+    template: Ice_Elemental_E
+    at:       [210.000, -161.000, 200.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928853:
+    template: Mystic_Avatar_Shiva_E
+    at:       [199.438, -161.500, 202.988, 65]
+    level:    [81, 82]
+    region:   null
+
+  16928854:
+    template: Armoury_Crate_E
+    at:       [20.000, 5.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928855:
+    template: Armoury_Crate_E
+    at:       [20.000, 5.500, 140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928856:
+    template: Armoury_Crate_E
+    at:       [60.000, 5.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928857:
+    template: Armoury_Crate_E
+    at:       [60.000, 5.500, 148.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928858:
+    template: Air_Elemental_E
+    at:       [20.000, 5.500, 152.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928859:
+    template: Air_Elemental_E
+    at:       [20.000, 6.000, 140.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928860:
+    template: Air_Elemental_E
+    at:       [60.000, 5.500, 152.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928861:
+    template: Air_Elemental_E
+    at:       [60.000, 6.000, 140.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928862:
+    template: Mystic_Avatar_Garuda_E
+    at:       [22.520, 6.000, 141.250, 126]
+    level:    [81, 82]
+    region:   null
+
+  16928863:
+    template: Armoury_Crate_E
+    at:       [-122.000, -160.500, 136.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928864:
+    template: Armoury_Crate_E
+    at:       [-118.000, -160.500, 136.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928865:
+    template: Armoury_Crate_E
+    at:       [-122.000, -160.500, 144.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928866:
+    template: Armoury_Crate_E
+    at:       [-118.000, -160.500, 144.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928867:
+    template: Earth_Elemental_E
+    at:       [-122.000, -160.500, 136.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928868:
+    template: Earth_Elemental_E
+    at:       [-118.000, -160.500, 136.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928869:
+    template: Earth_Elemental_E
+    at:       [-122.000, -160.500, 144.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928870:
+    template: Earth_Elemental_E
+    at:       [-118.000, -160.500, 144.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928871:
+    template: Mystic_Avatar_Titan_E
+    at:       [-120.119, -160.500, 143.929, 222]
+    level:    [81, 82]
+    region:   null
+
+  16928872:
+    template: Armoury_Crate_E
+    at:       [-312.000, -0.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928873:
+    template: Armoury_Crate_E
+    at:       [-300.000, -0.500, 128.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928874:
+    template: Armoury_Crate_E
+    at:       [-248.000, -0.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928875:
+    template: Armoury_Crate_E
+    at:       [-260.000, -0.500, 128.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928876:
+    template: Thunder_Elemental_E
+    at:       [-312.000, 0.000, 141.720, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928877:
+    template: Thunder_Elemental_E
+    at:       [-300.000, 0.000, 128.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928878:
+    template: Thunder_Elemental_E
+    at:       [-248.000, 0.000, 128.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928879:
+    template: Thunder_Elemental_E
+    at:       [-260.000, 0.000, 128.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928880:
+    template: Mystic_Avatar_Ramuh_E
+    at:       [-312.135, -0.500, 149.307, 238]
+    level:    [81, 82]
+    region:   null
+
+  16928881:
+    template: Armoury_Crate_E
+    at:       [-468.000, -158.500, 148.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928882:
+    template: Armoury_Crate_E
+    at:       [-472.000, -158.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928883:
+    template: Armoury_Crate_E
+    at:       [-412.000, -158.500, 148.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928884:
+    template: Armoury_Crate_E
+    at:       [-408.000, -158.500, 152.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928885:
+    template: Water_Elemental_E
+    at:       [-467.500, -158.500, 148.500, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928886:
+    template: Water_Elemental_E
+    at:       [-468.500, -158.500, 147.500, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928887:
+    template: Water_Elemental_E
+    at:       [-412.500, -158.500, 148.500, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928888:
+    template: Water_Elemental_E
+    at:       [-411.500, -158.500, 147.500, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928889:
+    template: Mystic_Avatar_LeviathanE
+    at:       [-415.152, -158.500, 147.996, 120]
+    level:    [81, 82]
+    region:   null
+
+  16928890:
+    template: Armoury_Crate_E
+    at:       [-602.000, 4.500, 160.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928891:
+    template: Armoury_Crate_E
+    at:       [-598.000, 4.500, 160.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928892:
+    template: Dark_Elemental_E
+    at:       [-602.000, 4.500, 160.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928893:
+    template: Dark_Elemental_E
+    at:       [-598.000, 4.500, 160.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928894:
+    template: Mystic_Avatar_Fenrir_E
+    at:       [-598.000, 4.500, 159.998, 180]
+    level:    [81, 82]
+    region:   null
+
+  # -- Temenos Western Tower --
+
+  16928895:
+    template: Armoury_Crate_Western
+    at:       [332.000, 69.500, -92.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928896:
+    template: Armoury_Crate_Western
+    at:       [330.000, 69.500, -92.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928897:
+    template: Armoury_Crate_Western
+    at:       [332.000, 69.500, -94.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928898:
+    template: Enhanced_Tiger
+    at:       [334.000, 73.500, -135.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928899:
+    template: Enhanced_Tiger
+    at:       [346.000, 73.500, -135.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928900:
+    template: Enhanced_Tiger
+    at:       [375.000, 73.500, -106.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928901:
+    template: Enhanced_Tiger
+    at:       [375.000, 73.500, -94.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928902:
+    template: Enhanced_Tiger
+    at:       [328.000, 69.500, -92.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928903:
+    template: Enhanced_Tiger
+    at:       [332.000, 69.500, -88.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928904:
+    template: Enhanced_Tiger
+    at:       [332.000, 69.500, -92.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928905:
+    template: Enhanced_Tiger
+    at:       [340.000, 74.000, -104.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928906:
+    template: Enhanced_Tiger
+    at:       [344.000, 68.000, -100.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928907:
+    template: Armoury_Crate_Western
+    at:       [200.000, -81.500, -80.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928908:
+    template: Armoury_Crate_Western
+    at:       [198.000, -81.500, -80.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928909:
+    template: Armoury_Crate_Western
+    at:       [200.000, -81.500, -82.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928910:
+    template: Enhanced_Mandragora
+    at:       [198.000, -81.000, -86.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928911:
+    template: Enhanced_Mandragora
+    at:       [202.000, -81.000, -74.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928912:
+    template: Enhanced_Mandragora
+    at:       [193.000, -81.000, -88.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928913:
+    template: Enhanced_Mandragora
+    at:       [208.000, -81.000, -87.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928914:
+    template: Enhanced_Mandragora
+    at:       [207.000, -81.000, -72.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928915:
+    template: Enhanced_Mandragora
+    at:       [192.000, -81.000, -73.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928916:
+    template: Enhanced_Mandragora
+    at:       [232.000, -80.000, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928917:
+    template: Enhanced_Mandragora
+    at:       [234.000, -80.000, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928918:
+    template: Enhanced_Mandragora
+    at:       [236.000, -80.000, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928919:
+    template: Armoury_Crate_Western
+    at:       [60.000, 79.500, -134.800, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928920:
+    template: Armoury_Crate_Western
+    at:       [58.000, 79.500, -134.800, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928921:
+    template: Armoury_Crate_Western
+    at:       [60.000, 79.500, -136.800, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928922:
+    template: Enhanced_Beetle
+    at:       [18.000, 80.000, -140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928923:
+    template: Enhanced_Beetle
+    at:       [20.000, 80.000, -138.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928924:
+    template: Enhanced_Beetle
+    at:       [22.000, 80.000, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928925:
+    template: Enhanced_Beetle
+    at:       [58.000, 80.000, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928926:
+    template: Enhanced_Beetle
+    at:       [60.000, 80.000, -138.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928927:
+    template: Enhanced_Beetle
+    at:       [62.000, 80.000, -140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928928:
+    template: Armoury_Crate_Western
+    at:       [-120.000, -80.500, -140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928929:
+    template: Armoury_Crate_Western
+    at:       [-122.000, -80.500, -140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928930:
+    template: Armoury_Crate_Western
+    at:       [-120.000, -80.500, -142.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928931:
+    template: Enhanced_Lizard
+    at:       [-152.000, -80.000, -150.500, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928932:
+    template: Enhanced_Lizard
+    at:       [-150.000, -80.000, -147.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928933:
+    template: Enhanced_Lizard
+    at:       [-110.000, -80.000, -147.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928934:
+    template: Enhanced_Lizard
+    at:       [-88.000, -80.000, -142.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928935:
+    template: Enhanced_Lizard
+    at:       [-152.000, -80.000, -138.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928936:
+    template: Enhanced_Lizard
+    at:       [-128.000, -80.000, -140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928937:
+    template: Enhanced_Lizard
+    at:       [-150.000, -80.000, -133.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928938:
+    template: Enhanced_Lizard
+    at:       [-110.000, -80.000, -133.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928939:
+    template: Enhanced_Lizard
+    at:       [-88.000, -80.000, -129.500, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928940:
+    template: Armoury_Crate_Western
+    at:       [-306.000, 79.500, -140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928941:
+    template: Armoury_Crate_Western
+    at:       [-308.000, 79.500, -140.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928942:
+    template: Armoury_Crate_Western
+    at:       [-306.000, 79.380, -142.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928943:
+    template: Enhanced_Slime
+    at:       [-300.000, 79.500, -152.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928944:
+    template: Enhanced_Slime
+    at:       [-300.000, 79.500, -128.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928945:
+    template: Enhanced_Slime
+    at:       [-300.000, 80.000, -148.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928946:
+    template: Enhanced_Slime
+    at:       [-260.000, 79.500, -152.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928947:
+    template: Enhanced_Slime
+    at:       [-260.000, 79.500, -128.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928948:
+    template: Enhanced_Slime
+    at:       [-260.000, 80.000, -132.000, 192]
+    level:    [78, 80]
+    region:   null
+
+  16928949:
+    template: Armoury_Crate_Western
+    at:       [-412.000, -78.500, -136.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928950:
+    template: Armoury_Crate_Western
+    at:       [-414.000, -78.500, -134.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928951:
+    template: Armoury_Crate_Western
+    at:       [-412.000, -78.500, -134.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928952:
+    template: Enhanced_Pugil
+    at:       [-460.000, -80.500, -143.500, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928953:
+    template: Enhanced_Pugil
+    at:       [-456.500, -80.500, -140.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16928954:
+    template: Enhanced_Pugil
+    at:       [-470.000, -78.500, -130.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16928955:
+    template: Enhanced_Pugil
+    at:       [-420.000, -80.500, -143.500, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928956:
+    template: Enhanced_Pugil
+    at:       [-423.500, -80.500, -140.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16928957:
+    template: Enhanced_Pugil
+    at:       [-410.000, -78.500, -130.000, 96]
+    level:    [78, 80]
+    region:   null
+
+  16928959:
+    template: Enhanced_Vulture
+    at:       [-600.000, 84.500, -124.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928960:
+    template: Enhanced_Vulture
+    at:       [-602.000, 84.500, -120.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928961:
+    template: Enhanced_Vulture
+    at:       [-598.000, 84.500, -120.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928962:
+    template: Enhanced_Vulture
+    at:       [-604.000, 84.500, -116.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928963:
+    template: Enhanced_Vulture
+    at:       [-600.000, 84.500, -116.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  16928964:
+    template: Enhanced_Vulture
+    at:       [-596.000, 84.500, -116.000, 64]
+    level:    [78, 80]
+    region:   null
+
+  # -- Temenos Central 1st Floor --
+
+  16929046:
+    template: Airi
+    at:       [270.000, -160.500, -460.000, 128]
+    level:    [80, 80]
+    region:   null
+
+  16929047:
+    template: Temenos_Cleaner
+    at:       [290.000, -160.500, -460.000, 0]
+    level:    [80, 80]
+    region:   null
+
+  16929048:
+    template: Iruci
+    at:       [220.000, -160.500, -490.000, 192]
+    level:    [80, 80]
+    region:   null
+
+  16929049:
+    template: Temenos_Weapon
+    at:       [340.000, -160.500, -490.000, 192]
+    level:    [80, 80]
+    region:   null
+
+  16929050:
+    template: Enhanced_Dragon
+    at:       [348.000, -164.500, -412.000, 96]
+    level:    [80, 80]
+    region:   null
+
+  16929051:
+    template: Enhanced_Ahriman
+    at:       [212.000, -164.500, -412.000, 32]
+    level:    [80, 80]
+    region:   null
+
+  # -- Temenos Central 2nd Floor --
+
+  16929030:
+    template: Mystic_Avatar_Carbuncle
+    at:       [0.000, -6.500, -460.000, 64]
+    level:    [81, 82]
+    region:   null
+
+  16929031:
+    template: Light_Elemental
+    at:       [-2.000, -6.500, -460.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16929032:
+    template: Light_Elemental
+    at:       [2.000, -6.500, -460.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16929033:
+    template: Fire_Elemental
+    at:       [70.000, 1.500, -510.000, 160]
+    level:    [78, 80]
+    region:   null
+
+  16929034:
+    template: Ice_Elemental
+    at:       [-70.000, 1.500, -510.000, 224]
+    level:    [78, 80]
+    region:   null
+
+  16929035:
+    template: Air_Elemental
+    at:       [-62.000, -6.500, -460.000, 128]
+    level:    [78, 80]
+    region:   null
+
+  16929036:
+    template: Earth_Elemental
+    at:       [-70.000, 1.500, -410.000, 32]
+    level:    [78, 80]
+    region:   null
+
+  16929037:
+    template: Thunder_Elemental
+    at:       [70.000, 1.500, -410.000, 96]
+    level:    [78, 80]
+    region:   null
+
+  16929038:
+    template: Water_Elemental
+    at:       [62.000, -6.500, -460.000, 0]
+    level:    [78, 80]
+    region:   null
+
+  16929039:
+    template: Mystic_Avatar_Ifrit
+    at:       [70.000, 1.500, -510.000, 160]
+    level:    [81, 82]
+    region:   null
+
+  16929040:
+    template: Mystic_Avatar_Shiva
+    at:       [-70.000, 1.500, -510.000, 224]
+    level:    [81, 82]
+    region:   null
+
+  16929041:
+    template: Mystic_Avatar_Garuda
+    at:       [-62.000, -6.500, -460.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929042:
+    template: Mystic_Avatar_Titan
+    at:       [-70.000, 1.500, -410.000, 32]
+    level:    [81, 82]
+    region:   null
+
+  16929043:
+    template: Mystic_Avatar_Ramuh
+    at:       [70.000, 1.500, -410.000, 96]
+    level:    [81, 82]
+    region:   null
+
+  16929044:
+    template: Mystic_Avatar_Leviathan
+    at:       [62.000, -6.500, -460.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  # -- Temenos Central 3rd Floor --
+
+  16929005:
+    template: Abyssdweller_Jhabdebb
+    at:       [-280.000, -161.500, -438.000, 192]
+    level:    [80, 81]
+    region:   null
+
+  16929006:
+    template: Orichalcum_Quadav
+    at:       [-278.000, -161.500, -442.000, 32]
+    level:    [80, 81]
+    region:   null
+
+  16929007:
+    template: Pee_Qoho_the_Python
+    at:       [-282.000, -161.500, -442.000, 96]
+    level:    [80, 81]
+    region:   null
+
+  16929008:
+    template: Yagudos_Elemental_Legacy
+    at:       [-281.998, -161.500, -441.998, 96]
+    level:    [76, 76]
+    script:   Yagudos_Elemental
+    region:   null
+
+  16929009:
+    template: Yagudos_Avatar
+    at:       [-285.580, -161.500, -442.786, 69]
+    level:    [78, 78]
+    region:   null
+
+  16929010:
+    template: Grognard_Mesmerizer
+    at:       [-352.000, -158.500, -512.000, 224]
+    level:    [77, 78]
+    region:   null
+
+  16929011:
+    template: Grognard_Footsoldier
+    at:       [-352.000, -158.500, -508.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16929012:
+    template: Grognard_Predator
+    at:       [-348.000, -158.500, -512.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16929013:
+    template: Grognard_Neckchopper
+    at:       [-208.000, -158.500, -512.000, 160]
+    level:    [77, 78]
+    region:   null
+
+  16929014:
+    template: Grognard_Grappler
+    at:       [-208.000, -158.500, -508.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16929015:
+    template: Grognard_Impaler
+    at:       [-212.000, -158.500, -512.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16929016:
+    template: Orcs_Wyvern
+    at:       [-213.338, -158.233, -509.844, 102]
+    level:    [77, 78]
+    region:   null
+
+  16929017:
+    template: Star_Ruby_Quadav
+    at:       [-328.000, -166.500, -460.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16929018:
+    template: Fossil_Quadav
+    at:       [-328.000, -166.500, -453.000, 64]
+    level:    [77, 78]
+    region:   null
+
+  16929019:
+    template: Whitegold_Quadav
+    at:       [-328.000, -166.500, -467.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16929020:
+    template: Wootz_Quadav
+    at:       [-232.000, -166.500, -460.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16929021:
+    template: Star_Sapphire_Quadav
+    at:       [-232.000, -166.500, -453.000, 64]
+    level:    [77, 78]
+    region:   null
+
+  16929022:
+    template: Lightsteel_Quadav
+    at:       [-232.000, -166.500, -467.000, 192]
+    level:    [77, 78]
+    region:   null
+
+  16929023:
+    template: Yagudo_Archpriest
+    at:       [-352.000, -160.500, -420.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16929024:
+    template: Yagudo_Disciplinant
+    at:       [-330.000, -160.500, -410.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16929025:
+    template: Yagudo_Kapellmeister
+    at:       [-330.000, -160.500, -430.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16929026:
+    template: Yagudo_Knight_Templar
+    at:       [-208.000, -160.500, -420.000, 128]
+    level:    [77, 78]
+    region:   null
+
+  16929027:
+    template: Yagudo_Prelatess
+    at:       [-230.000, -160.500, -410.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  16929028:
+    template: Yagudo_Eradicator
+    at:       [-230.000, -160.500, -430.000, 0]
+    level:    [77, 78]
+    region:   null
+
+  # -- Temenos Central 4th Floor --
+
+  16928966:
+    template: Proto-Ultima
+    at:       [-560.000, 4.900, -360.000, 64]
+    level:    [85, 85]
+    region:   null
+
+  16928967:
+    template: Armoury_Crate_Fourth
+    at:       [-492.000, 1.500, -412.000, 96]
+    level:    [1, 1]
+    region:   null
+
+  16928968:
+    template: Armoury_Crate_Fourth
+    at:       [-492.000, 1.500, -508.000, 160]
+    level:    [1, 1]
+    region:   null
+
+  16928969:
+    template: Armoury_Crate_Fourth
+    at:       [-628.000, 1.500, -508.000, 224]
+    level:    [1, 1]
+    region:   null
+
+  16928970:
+    template: Armoury_Crate_Fourth
+    at:       [-628.000, 1.500, -412.000, 32]
+    level:    [1, 1]
+    region:   null
+
+  16928971:
+    template: Armoury_Crate_Fourth
+    at:       [-560.000, -6.500, -460.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928972:
+    template: Armoury_Crate_Fourth
+    at:       [-512.000, -6.500, -448.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928973:
+    template: Armoury_Crate_Fourth
+    at:       [-512.000, -6.500, -460.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928974:
+    template: Armoury_Crate_Fourth
+    at:       [-512.000, -6.500, -472.000, 192]
+    level:    [1, 1]
+    region:   null
+
+  16928975:
+    template: Armoury_Crate_Fourth
+    at:       [-608.000, -6.500, -448.000, 64]
+    level:    [1, 1]
+    region:   null
+
+  16928976:
+    template: Armoury_Crate_Fourth
+    at:       [-608.000, -6.500, -460.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928977:
+    template: Armoury_Crate_Fourth
+    at:       [-608.000, -6.500, -472.000, 192]
+    level:    [1, 1]
+    region:   null
+
+  16928978:
+    template: Armoury_Crate_Fourth
+    at:       [-592.000, -6.500, -512.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928979:
+    template: Armoury_Crate_Fourth
+    at:       [-568.000, -6.500, -512.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928980:
+    template: Armoury_Crate_Fourth
+    at:       [-592.000, -6.500, -488.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928981:
+    template: Armoury_Crate_Fourth
+    at:       [-568.000, -6.500, -488.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928982:
+    template: Armoury_Crate_Fourth
+    at:       [-552.000, -6.500, -512.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928983:
+    template: Armoury_Crate_Fourth
+    at:       [-528.000, -6.500, -512.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928984:
+    template: Armoury_Crate_Fourth
+    at:       [-552.000, -6.500, -488.000, 0]
+    level:    [1, 1]
+    region:   null
+
+  16928985:
+    template: Armoury_Crate_Fourth
+    at:       [-528.000, -6.500, -488.000, 128]
+    level:    [1, 1]
+    region:   null
+
+  16928986:
+    template: Kingslayer_Doggvdegg
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [80, 81]
+    region:   null
+
+  16928987:
+    template: JiGho_Ageless
+    at:       [-492.000, 1.500, -412.000, 125]
+    level:    [80, 81]
+    region:   null
+
+  16928988:
+    template: Koo_Buzu_the_Theomanic
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [80, 81]
+    region:   null
+
+  16928989:
+    template: Yagudos_Elemental_Legacy
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [76, 76]
+    script:   Yagudos_Elemental
+    region:   null
+
+  16928990:
+    template: Yagudos_Avatar
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [78, 78]
+    region:   null
+
+  16928991:
+    template: Mystic_Avatar_Ifrit_Fourth
+    script:   Mystic_Avatar_Ifrit
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928992:
+    template: Mystic_Avatar_Shiva_Fourth
+    script:   Mystic_Avatar_Shiva
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928993:
+    template: Mystic_Avatar_Garuda_Fourth
+    script:   Mystic_Avatar_Garuda
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928994:
+    template: Mystic_Avatar_Titan_Fourth
+    script:   Mystic_Avatar_Titan
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928995:
+    template: Mystic_Avatar_Ramuh_Fourth
+    script:   Mystic_Avatar_Ramuh
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928996:
+    template: Mystic_Avatar_Leviathan_Fourth
+    script:   Mystic_Avatar_Leviathan
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [81, 82]
+    region:   null
+
+  16928997:
+    template: Enhanced_Koenigstiger
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  16928998:
+    template: Enhanced_Pygmaioi
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  16928999:
+    template: Enhanced_Kettenkaefer
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  16929000:
+    template: Enhanced_Salamander
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  16929001:
+    template: Enhanced_Jelly
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  16929002:
+    template: Enhanced_Makara
+    at:       [-552.000, -6.500, -488.000, 42]
+    level:    [79, 80]
+    region:   null
+
+  16929003:
+    template: Enhanced_Akbaba
+    at:       [1.000, 1.000, 1.000, 1]
+    level:    [79, 80]
+    region:   null
+
+  # -- Temenos Central Basement --
+
+  16929053:
+    template: Temenos_Aern_SAM
+    at:       [622.000, -6.500, -530.000, 192]
+    level:    [81, 82]
+    region:   null
+
+  16929054:
+    template: Temenos_Aern_MNK
+    at:       [618.000, -6.500, -530.000, 192]
+    level:    [81, 82]
+    region:   null
+
+  16929055:
+    template: Temenos_Aern_DRG
+    at:       [498.000, -6.500, -530.000, 192]
+    level:    [81, 82]
+    region:   null
+
+  16929056:
+    template: Aerns_Wynav
+    at:       [498.870, -6.138, -527.066, 189]
+    level:    [80, 80]
+    region:   null
+
+  16929057:
+    template: Temenos_Aern_WHM
+    at:       [502.000, -6.500, -530.000, 192]
+    level:    [81, 82]
+    region:   null
+
+  16929058:
+    template: Temenos_Aern_RDM
+    at:       [572.000, -0.500, -500.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  16929059:
+    template: Aerns_Euvhi
+    at:       [573.818, -0.500, -499.907, 143]
+    level:    [80, 80]
+    region:   null
+
+  16929060:
+    template: Temenos_Aern_BST
+    at:       [568.000, -0.500, -500.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  16929061:
+    template: Temenos_Aern_NIN
+    at:       [548.000, -0.500, -500.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929062:
+    template: Temenos_Aern_DRK
+    at:       [552.000, -0.500, -500.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929063:
+    template: Temenos_Aern_WAR
+    at:       [630.000, -0.500, -462.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929064:
+    template: Temenos_Aern_BLM
+    at:       [630.000, -0.500, -458.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929065:
+    template: Temenos_Aern_WAR
+    at:       [490.000, -0.500, -462.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  16929066:
+    template: Temenos_Aern_SMN
+    at:       [490.000, -0.500, -458.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  16929067:
+    template: Aerns_Elemental
+    at:       [492.263, -0.500, -459.598, 42]
+    level:    [80, 80]
+    region:   null
+
+  16929068:
+    template: Aerns_Avatar
+    at:       [491.847, -0.150, -459.568, 25]
+    level:    [77, 77]
+    region:   null
+
+  16929069:
+    template: Temenos_Aern_DRG
+    at:       [630.000, 1.500, -410.000, 96]
+    level:    [81, 82]
+    region:   null
+
+  16929070:
+    template: Aerns_Wynav
+    at:       [629.957, 1.790, -414.486, 58]
+    level:    [80, 80]
+    region:   null
+
+  16929071:
+    template: Temenos_Aern_WHM
+    at:       [626.000, 1.500, -410.000, 96]
+    level:    [81, 82]
+    region:   null
+
+  16929072:
+    template: Temenos_Aern_BLM
+    at:       [630.000, 1.500, -414.000, 96]
+    level:    [81, 82]
+    region:   null
+
+  16929073:
+    template: Temenos_Aern_BST
+    at:       [490.000, 1.500, -410.000, 32]
+    level:    [81, 82]
+    region:   null
+
+  16929074:
+    template: Aerns_Euvhi
+    at:       [493.894, 1.500, -412.941, 65]
+    level:    [80, 80]
+    region:   null
+
+  16929075:
+    template: Temenos_Aern_RNG
+    at:       [494.000, 1.500, -410.000, 32]
+    level:    [81, 82]
+    region:   null
+
+  16929076:
+    template: Temenos_Aern_SAM
+    at:       [490.000, 1.500, -414.000, 32]
+    level:    [81, 82]
+    region:   null
+
+  16929077:
+    template: Temenos_Aern_RDM
+    at:       [562.000, -0.500, -458.000, 224]
+    level:    [81, 82]
+    region:   null
+
+  16929078:
+    template: Temenos_Aern_PLD
+    at:       [562.000, -0.500, -462.000, 32]
+    level:    [81, 82]
+    region:   null
+
+  16929079:
+    template: Temenos_Aern_SMN
+    at:       [558.000, -0.500, -462.000, 96]
+    level:    [81, 82]
+    region:   null
+
+  16929080:
+    template: Aerns_Elemental
+    at:       [551.434, -0.389, -460.882, 197]
+    level:    [80, 80]
+    region:   null
+
+  16929081:
+    template: Aerns_Avatar
+    at:       [550.762, -0.366, -458.530, 39]
+    level:    [77, 77]
+    region:   null
+
+  16929082:
+    template: Temenos_Aern_THF
+    at:       [558.000, -0.500, -458.000, 160]
+    level:    [81, 82]
+    region:   null
+
+  16929083:
+    template: Temenos_Aern_MNK
+    at:       [560.000, 4.500, -400.000, 64]
+    level:    [81, 82]
+    region:   null
+
+  16929084:
+    template: Temenos_Aern_DRK
+    at:       [560.000, 4.500, -396.000, 192]
+    level:    [81, 82]
+    region:   null
+
+  16929085:
+    template: Temenos_Aern_BRD
+    at:       [564.000, 4.500, -400.000, 0]
+    level:    [81, 82]
+    region:   null
+
+  16929086:
+    template: Temenos_Aern_NIN
+    at:       [560.000, 4.500, -404.000, 64]
+    level:    [81, 82]
+    region:   null
+
+  16929087:
+    template: Temenos_Aern_WAR
+    at:       [556.000, 4.500, -400.000, 128]
+    level:    [81, 82]
+    region:   null
+
+  16929088:
+    template: Temenos_Ghrah_Legacy
+    at:       [630.000, -0.500, -458.000, 35]
+    level:    [82, 82]
+    script:   Temenos_Ghrah
+    region:   null

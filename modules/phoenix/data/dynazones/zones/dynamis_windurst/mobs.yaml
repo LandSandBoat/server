@@ -649,11 +649,13 @@ spawns:
   17543172:
     template: Avatar_Icon
     at:       [-157.133, -1.039, -132.586, 162]
+    region:   null
     level:    [65, 65]
 
   17543173:
     template: Vanguard_Priest
     at:       [-155.614, -0.983, -133.995, 156]
+    region:   null
     level:    [75, 77]
 
   17543174:
@@ -669,11 +671,13 @@ spawns:
   17543176:
     template: Vanguard_Visionary
     at:       [-152.567, -1.130, -131.975, 156]
+    region:   null
     level:    [75, 77]
 
   17543177:
     template: Vanguard_Chanter
     at:       [-151.713, -1.385, -130.749, 156]
+    region:   null
     level:    [75, 77]
 
   17543178:
@@ -684,16 +688,19 @@ spawns:
   17543179:
     template: Vanguard_Persecutor
     at:       [-133.596, -3.009, -142.317, 145]
+    region:   null
     level:    [75, 77]
 
   17543180:
     template: Vanguard_Assassin
     at:       [-134.190, -3.083, -138.373, 120]
+    region:   null
     level:    [75, 77]
 
   17543181:
     template: Avatar_Icon
     at:       [-127.563, -2.447, -140.117, 128]
+    region:   null
     level:    [65, 65]
 
   17543182:
@@ -734,16 +741,19 @@ spawns:
   17543189:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543190:
     template: Vanguard_Partisan
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543191:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543192:
@@ -779,11 +789,13 @@ spawns:
   17543198:
     template: Avatar_Icon
     at:       [-37.198, -2.500, -84.025, 86]
+    region:   null
     level:    [65, 65]
 
   17543199:
     template: Avatar_Icon
     at:       [-23.370, -2.500, -59.924, 87]
+    region:   null
     level:    [65, 65]
 
   17543200:
@@ -804,6 +816,7 @@ spawns:
   17543203:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543204:
@@ -814,6 +827,7 @@ spawns:
   17543205:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543206:
@@ -869,11 +883,13 @@ spawns:
   17543216:
     template: Vanguard_Priest
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543217:
     template: Vanguard_Priest
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543218:
@@ -884,6 +900,7 @@ spawns:
   17543219:
     template: Vanguard_Prelate
     at:       [17.050, -3.880, -48.909, 128]
+    region:   null
     level:    [75, 77]
 
   17543220:
@@ -907,12 +924,14 @@ spawns:
   17543223:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543224:
     template: Manifest_Icon
     at:       [35.853, -1.740, -67.600, 192]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -935,11 +954,13 @@ spawns:
   17543228:
     template: Vanguard_Skirmisher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543229:
     template: Vanguard_Persecutor
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543230:
@@ -1058,11 +1079,13 @@ spawns:
   17543251:
     template: Vanguard_Skirmisher
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543252:
     template: Avatar_Icon
     at:       [32.744, -6.555, -39.240, 133]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1075,12 +1098,14 @@ spawns:
   17543254:
     template: Vanguard_Chanter
     at:       [27.638, -6.500, -41.720, 133]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543255:
     template: Vanguard_Salvager
     at:       [33.030, -6.554, -41.945, 133]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1113,11 +1138,13 @@ spawns:
   17543261:
     template: Avatar_Icon
     at:       [69.234, -2.500, -83.564, 159]
+    region:   null
     level:    [65, 65]
 
   17543262:
     template: Vanguard_Prelate
     at:       [66.296, -2.500, -80.526, 159]
+    region:   null
     level:    [75, 77]
 
   17543263:
@@ -1128,16 +1155,19 @@ spawns:
   17543264:
     template: Vanguard_Liberator
     at:       [91.807, -2.579, -146.951, 145]
+    region:   null
     level:    [75, 77]
 
   17543265:
     template: Vanguard_Liberator
     at:       [94.360, -2.531, -143.909, 145]
+    region:   null
     level:    [75, 77]
 
   17543266:
     template: Vanguard_Salvager
     at:       [99.511, -2.785, -147.631, 145]
+    region:   null
     level:    [75, 77]
 
   17543267:
@@ -1158,21 +1188,25 @@ spawns:
   17543270:
     template: Vanguard_Liberator
     at:       [-16.869, -9.693, -22.003, 189]
+    region:   null
     level:    [75, 77]
 
   17543271:
     template: Vanguard_Persecutor
     at:       [-13.298, -9.750, -22.003, 189]
+    region:   null
     level:    [75, 77]
 
   17543272:
     template: Manifest_Icon
     at:       [10.220, -9.310, -12.860, 188]
+    region:   null
     level:    [65, 65]
 
   17543273:
     template: Vanguard_Visionary
     at:       [13.855, -9.662, -12.899, 192]
+    region:   null
     level:    [75, 77]
 
   17543274:
@@ -1193,21 +1227,25 @@ spawns:
   17543277:
     template: Avatar_Icon
     at:       [29.457, -10.000, 9.842, 115]
+    region:   null
     level:    [65, 65]
 
   17543278:
     template: Vanguard_Liberator
     at:       [31.365, -10.000, 11.017, 107]
+    region:   null
     level:    [75, 77]
 
   17543279:
     template: Vanguard_Liberator
     at:       [35.156, -10.000, 13.247, 107]
+    region:   null
     level:    [75, 77]
 
   17543280:
     template: Vanguard_Oracle
     at:       [39.206, -10.000, 15.584, 107]
+    region:   null
     level:    [75, 77]
 
   17543281:
@@ -1218,11 +1256,13 @@ spawns:
   17543282:
     template: Manifest_Icon
     at:       [36.472, -10.000, 14.181, 107]
+    region:   null
     level:    [65, 65]
 
   17543283:
     template: Vanguard_Visionary
     at:       [34.759, -10.000, 12.826, 107]
+    region:   null
     level:    [75, 77]
 
   17543284:
@@ -1233,41 +1273,49 @@ spawns:
   17543285:
     template: Vanguard_Ogresoother
     at:       [21.516, -10.000, 5.385, 107]
+    region:   null
     level:    [75, 77]
 
   17543286:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543287:
     template: Avatar_Icon
     at:       [47.158, -9.784, 26.454, 203]
+    region:   null
     level:    [65, 65]
 
   17543288:
     template: Vanguard_Partisan
     at:       [43.541, -10.000, 29.936, 223]
+    region:   null
     level:    [75, 77]
 
   17543289:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543290:
     template: Vanguard_Partisan
     at:       [43.138, -10.000, 32.059, 223]
+    region:   null
     level:    [75, 77]
 
   17543291:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543292:
     template: Vanguard_Partisan
     at:       [43.610, -10.000, 35.317, 223]
+    region:   null
     level:    [75, 77]
 
   17543293:
@@ -1278,31 +1326,37 @@ spawns:
   17543294:
     template: Avatar_Icon
     at:       [51.258, -9.693, 42.993, 225]
+    region:   null
     level:    [65, 65]
 
   17543295:
     template: Vanguard_Ogresoother
     at:       [50.746, -10.001, 39.991, 91]
+    region:   null
     level:    [75, 77]
 
   17543296:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543297:
     template: Vanguard_Ogresoother
     at:       [48.316, -9.928, 41.803, 91]
+    region:   null
     level:    [75, 77]
 
   17543298:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543299:
     template: Manifest_Icon
     at:       [66.235, -9.939, 27.063, 105]
+    region:   null
     level:    [65, 65]
 
   17543300:
@@ -1313,6 +1367,7 @@ spawns:
   17543301:
     template: Vanguard_Priest
     at:       [51.014, -10.000, 20.180, 109]
+    region:   null
     level:    [75, 77]
 
   17543302:
@@ -1323,16 +1378,19 @@ spawns:
   17543303:
     template: Vanguard_Prelate
     at:       [48.480, -9.790, 23.072, 109]
+    region:   null
     level:    [75, 77]
 
   17543304:
     template: Avatar_Icon
     at:       [71.162, -8.288, 41.900, 96]
+    region:   null
     level:    [65, 65]
 
   17543305:
     template: Vanguard_Chanter
     at:       [66.765, -9.431, 40.653, 92]
+    region:   null
     level:    [75, 77]
 
   17543306:
@@ -1343,11 +1401,13 @@ spawns:
   17543307:
     template: Vanguard_Liberator
     at:       [64.993, -9.431, 42.158, 92]
+    region:   null
     level:    [75, 77]
 
   17543308:
     template: Manifest_Icon
     at:       [84.294, -5.175, 52.773, 139]
+    region:   null
     level:    [65, 65]
 
   17543309:
@@ -1358,16 +1418,19 @@ spawns:
   17543310:
     template: Vanguard_Priest
     at:       [105.301, -3.000, 114.755, 133]
+    region:   null
     level:    [75, 77]
 
   17543311:
     template: Vanguard_Oracle
     at:       [101.722, -2.703, 115.386, 133]
+    region:   null
     level:    [75, 77]
 
   17543312:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543313:
@@ -1378,6 +1441,7 @@ spawns:
   17543314:
     template: Vanguard_Prelate
     at:       [107.426, -8.000, 114.450, 135]
+    region:   null
     level:    [75, 77]
 
   17543315:
@@ -1388,6 +1452,7 @@ spawns:
   17543316:
     template: Vanguard_Exemplar
     at:       [113.384, -7.500, 106.786, 135]
+    region:   null
     level:    [75, 77]
 
   17543317:
@@ -1408,21 +1473,25 @@ spawns:
   17543320:
     template: Avatar_Icon
     at:       [90.306, -4.357, 89.147, 120]
+    region:   null
     level:    [65, 65]
 
   17543321:
     template: Vanguard_Skirmisher
     at:       [88.679, -2.544, 92.336, 133]
+    region:   null
     level:    [75, 77]
 
   17543322:
     template: Vanguard_Priest
     at:       [88.679, -2.470, 95.274, 133]
+    region:   null
     level:    [75, 77]
 
   17543323:
     template: Vanguard_Persecutor
     at:       [88.679, -2.491, 97.649, 133]
+    region:   null
     level:    [75, 77]
 
   17543324:
@@ -1433,11 +1502,13 @@ spawns:
   17543325:
     template: Vanguard_Assassin
     at:       [82.159, -2.670, 100.479, 11]
+    region:   null
     level:    [75, 77]
 
   17543326:
     template: Vanguard_Assassin
     at:       [82.159, -2.500, 96.724, 11]
+    region:   null
     level:    [75, 77]
 
   17543327:
@@ -1448,11 +1519,13 @@ spawns:
   17543328:
     template: Vanguard_Skirmisher
     at:       [112.222, -11.000, 165.871, 138]
+    region:   null
     level:    [75, 77]
 
   17543329:
     template: Vanguard_Partisan
     at:       [114.082, -10.967, 161.400, 138]
+    region:   null
     level:    [75, 77]
 
   17543330:
@@ -1463,6 +1536,7 @@ spawns:
   17543331:
     template: Avatar_Icon
     at:       [111.934, -11.006, 151.898, 130]
+    region:   null
     level:    [65, 65]
 
   17543332:
@@ -1478,31 +1552,37 @@ spawns:
   17543334:
     template: Manifest_Icon
     at:       [115.244, -11.000, 146.646, 128]
+    region:   null
     level:    [65, 65]
 
   17543335:
     template: Vanguard_Persecutor
     at:       [112.625, -11.000, 152.038, 128]
+    region:   null
     level:    [75, 77]
 
   17543336:
     template: Vanguard_Skirmisher
     at:       [112.625, -11.000, 145.927, 128]
+    region:   null
     level:    [75, 77]
 
   17543337:
     template: Avatar_Idol
     at:       [118.626, -11.500, 152.008, 128]
+    region:   null
     level:    [80, 80]
 
   17543338:
     template: Wuu_Qoho_the_Razorclaw
     at:       [115.058, -11.360, 151.984, 128]
+    region:   null
     level:    [80, 80]
 
   17543339:
     template: Manifest_Icon
     at:       [101.538, -10.296, 137.270, 228]
+    region:   null
     level:    [65, 65]
 
   17543340:
@@ -1523,56 +1603,67 @@ spawns:
   17543343:
     template: Vanguard_Visionary
     at:       [101.514, -8.000, 188.833, 64]
+    region:   null
     level:    [75, 77]
 
   17543344:
     template: Avatar_Icon
     at:       [94.031, -8.000, 201.625, 84]
+    region:   null
     level:    [65, 65]
 
   17543345:
     template: Vanguard_Inciter
     at:       [91.484, -7.500, 204.301, 93]
+    region:   null
     level:    [75, 77]
 
   17543346:
     template: Vanguard_Inciter
     at:       [94.943, -7.552, 208.350, 93]
+    region:   null
     level:    [75, 77]
 
   17543347:
     template: Avatar_Icon
     at:       [105.854, -8.000, 189.976, 101]
+    region:   null
     level:    [65, 65]
 
   17543348:
     template: Vanguard_Priest
     at:       [103.027, -7.750, 187.947, 101]
+    region:   null
     level:    [75, 77]
 
   17543349:
     template: Vanguard_Chanter
     at:       [99.454, -7.500, 185.775, 101]
+    region:   null
     level:    [75, 77]
 
   17543350:
     template: Manifest_Icon
     at:       [99.948, -13.000, 195.726, 97]
+    region:   null
     level:    [65, 65]
 
   17543351:
     template: Vanguard_Prelate
     at:       [99.948, -13.000, 195.726, 97]
+    region:   null
     level:    [75, 77]
 
   17543352:
     template: Vanguard_Prelate
     at:       [101.449, -113.000, 192.745, 97]
+    region:   null
     level:    [75, 77]
 
   17543353:
     template: Vanguard_Exemplar
     at:       [104.298, -12.500, 195.332, 97]
+    region:   null
     level:    [75, 77]
 
   17543354:
@@ -1583,21 +1674,25 @@ spawns:
   17543355:
     template: Manifest_Icon
     at:       [118.802, -12.500, 202.347, 103]
+    region:   null
     level:    [65, 65]
 
   17543356:
     template: Vanguard_Oracle
     at:       [116.792, -12.500, 200.398, 103]
+    region:   null
     level:    [75, 77]
 
   17543357:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543358:
     template: Avatar_Icon
     at:       [54.008, -7.500, 220.002, 128]
+    region:   null
     level:    [65, 65]
 
   17543359:
@@ -1608,6 +1703,7 @@ spawns:
   17543360:
     template: Avatar_Icon
     at:       [42.004, -7.500, 219.007, 255]
+    region:   null
     level:    [65, 65]
 
   17543361:
@@ -1633,21 +1729,25 @@ spawns:
   17543365:
     template: Vanguard_Prelate
     at:       [58.330, -7.500, 208.539, 153]
+    region:   null
     level:    [75, 77]
 
   17543366:
     template: Avatar_Idol
     at:       [-25.944, -13.000, 259.902, 63]
+    region:   null
     level:    [80, 80]
 
   17543367:
     template: Haa_Pevi_the_Stentorian
     at:       [-26.040, -18.000, 263.228, 65]
+    region:   null
     level:    [80, 80]
 
   17543368:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543369:
@@ -1663,6 +1763,7 @@ spawns:
   17543371:
     template: Vanguard_Oracle
     at:       [-20.983, -12.394, 246.542, 193]
+    region:   null
     level:    [75, 77]
 
   17543372:
@@ -1673,16 +1774,19 @@ spawns:
   17543373:
     template: Manifest_Icon
     at:       [-28.297, -18.000, 265.824, 90]
+    region:   null
     level:    [65, 65]
 
   17543374:
     template: Vanguard_Oracle
     at:       [-30.028, -12.360, 254.196, 194]
+    region:   null
     level:    [75, 77]
 
   17543375:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
 
   17543376:
@@ -1694,77 +1798,90 @@ spawns:
   17543377:
     template: Vanguard_Oracle
     at:       [-28.102, -18.000, 266.717, 67]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543378:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543379:
     template: Manifest_Icon
     at:       [-23.618, -18.000, 265.644, 42]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543380:
     template: Vanguard_Oracle
     at:       [-21.792, -12.259, 253.934, 193]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543381:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543382:
     template: Vanguard_Oracle
     at:       [-25.032, -18.000, 266.846, 65]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543383:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543384:
     template: Manifest_Icon
     at:       [-18.279, -15.813, 283.684, 64]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543385:
     template: Avatar_Icon
     at:       [14.952, -7.614, 258.525, 73]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543386:
     template: Vanguard_Visionary
     at:       [9.389, -7.356, 265.222, 13]
+    region:   null
     level:    [75, 77]
 
   17543387:
     template: Avatar_Icon
     at:       [6.449, -7.372, 265.716, 2]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543388:
     template: Vanguard_Inciter
     at:       [-1.742, -9.570, 271.188, 23]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543389:
     template: Avatar_Icon
     at:       [-3.577, -9.812, 272.461, 22]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1793,12 +1910,14 @@ spawns:
   17543394:
     template: Vanguard_Chanter
     at:       [-1.500, -10.000, 286.610, 62]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543395:
     template: Avatar_Icon
     at:       [28.154, 0.861, 237.140, 97]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1811,6 +1930,7 @@ spawns:
   17543397:
     template: Vanguards_Wyvern
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1829,12 +1949,14 @@ spawns:
   17543400:
     template: Vanguard_Skirmisher
     at:       [25.954, 0.083, 246.764, 97]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543401:
     template: Vanguard_Assassin
     at:       [18.088, 0.129, 238.758, 97]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1847,12 +1969,14 @@ spawns:
   17543403:
     template: Vanguard_Salvager
     at:       [0.992, -10.000, 286.290, 34]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543404:
     template: Vanguard_Salvager
     at:       [7.719, -10.000, 288.757, 65]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1865,17 +1989,20 @@ spawns:
   17543406:
     template: Avatar_Icon
     at:       [-51.993, -12.500, 234.590, 232]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543407:
     template: Avatar_Icon
     at:       [-61.254, -12.500, 209.154, 202]
+    region:   null
     level:    [65, 65]
 
   17543408:
     template: Vanguard_Visionary
     at:       [-60.527, -12.500, 212.149, 20]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1887,23 +2014,27 @@ spawns:
   17543410:
     template: Avatar_Icon
     at:       [-39.857, -12.500, 242.448, 108]
+    region:   null
     level:    [65, 65]
 
   17543411:
     template: Vanguard_Visionary
     at:       [-37.826, -12.500, 243.753, 108]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543412:
     template: Avatar_Idol
     at:       [-102.370, -17.500, 199.809, 34]
+    region:   null
     level:    [80, 80]
     script:   null
 
   17543413:
     template: Xoo_Kaza_the_Solemn
     at:       [-96.597, -18.000, 193.445, 37]
+    region:   null
     level:    [80, 80]
     script:   null
 
@@ -1916,6 +2047,7 @@ spawns:
   17543415:
     template: Vanguard_Visionary
     at:       [-99.864, -18.000, 192.433, 68]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1927,6 +2059,7 @@ spawns:
   17543417:
     template: Vanguard_Prelate
     at:       [-91.967, -13.000, 192.530, 165]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -1954,12 +2087,14 @@ spawns:
   17543422:
     template: Manifest_Icon
     at:       [-116.901, -17.500, 202.751, 26]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543423:
     template: Manifest_Icon
     at:       [-107.253, -13.012, 218.079, 229]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -1983,24 +2118,28 @@ spawns:
   17543427:
     template: Vanguard_Skirmisher
     at:       [-96.318, -5.000, 135.299, 247]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543428:
     template: Avatar_Icon
     at:       [-97.264, -5.250, 125.379, 9]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543429:
     template: Avatar_Icon
     at:       [-101.497, -5.250, 136.499, 220]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543430:
     template: Manifest_Icon
     at:       [-99.182, -5.250, 122.539, 26]
+    region:   null
     level:    [65, 65]
     script:   null
 
@@ -2018,24 +2157,28 @@ spawns:
   17543433:
     template: Vanguard_Ogresoother
     at:       [-95.609, -5.354, 121.651, 253]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543434:
     template: Vanguards_Crow
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543435:
     template: Avatar_Icon
     at:       [-85.319, -7.281, 116.836, 191]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543436:
     template: Vanguard_Assassin
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2048,12 +2191,14 @@ spawns:
   17543438:
     template: Vanguard_Liberator
     at:       [-103.785, -5.073, 141.329, 248]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543439:
     template: Vanguard_Persecutor
     at:       [-107.439, -5.000, 140.457, 248]
+    region:   null
     level:    [75, 77]
     script:   null
 
@@ -2072,23 +2217,27 @@ spawns:
   17543442:
     template: Avatar_Icon
     at:       [-99.034, -5.465, 151.601, 77]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543443:
     template: Vanguard_Salvager
     at:       [-96.000, -5.380, 149.305, 77]
+    region:   null
     level:    [75, 77]
 
   17543444:
     template: Avatar_Icon
     at:       [-94.257, -5.629, 148.055, 77]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543445:
     template: Manifest_Icon
     at:       [-68.230, -5.060, 123.100, 132]
+    region:   null
     level:    [65, 65]
 
   17543446:
@@ -2099,84 +2248,98 @@ spawns:
   17543447:
     template: Vanguard_Inciter
     at:       [-77.820, -5.261, 126.793, 132]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543448:
     template: Vanguard_Oracle
     at:       [-77.867, -5.005, 131.925, 132]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543449:
     template: Vanguards_Avatar
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543450:
     template: Avatar_Icon
     at:       [-74.208, -5.681, 120.864, 137]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543451:
     template: Vanguard_Priest
     at:       [-73.850, -5.258, 123.824, 137]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543452:
     template: Avatar_Icon
     at:       [-72.888, -4.973, 129.934, 137]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543453:
     template: Vanguard_Priest
     at:       [-73.411, -5.175, 126.815, 137]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543454:
     template: Avatar_Icon
     at:       [-129.353, -5.508, 128.607, 175]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543455:
     template: Vanguard_Exemplar
     at:       [-130.533, -5.028, 131.639, 175]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543456:
     template: Vanguard_Prelate
     at:       [-125.693, -5.000, 133.919, 175]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543457:
     template: Avatar_Icon
     at:       [-113.147, -10.000, 117.673, 244]
+    region:   null
     level:    [65, 65]
     script:   null
 
   17543458:
     template: Vanguard_Inciter
     at:       [-110.894, -10.000, 118.202, 244]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543459:
     template: Vanguard_Priest
     at:       [-107.565, -10.000, 119.568, 244]
+    region:   null
     level:    [75, 77]
     script:   null
 
   17543460:
     template: Manifest_Icon
     at:       [-110.846, -10.000, 126.606, 244]
+    region:   null
     level:    [65, 65]
 
   17543461:
@@ -2192,6 +2355,7 @@ spawns:
   17543463:
     template: Vanguard_Chanter
     at:       [-109.783, -10.000, 131.782, 244]
+    region:   null
     level:    [75, 77]
 
   17543464:
