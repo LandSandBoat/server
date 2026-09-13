@@ -3572,7 +3572,7 @@ spawns:
   17261007:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [220.690, -9.785, 103.254, 91]
+    region:   digger
     level:    [20, 21]
   17261008:
     template: Hobgoblin_Warrior

@@ -3521,7 +3521,7 @@ spawns:
   17191316:
     template: Goblin_Digger_near
     script:   Goblin_Digger
-    at:       [357.813, -10.344, -411.927, 11]
+    region:   digger
     level:    [7, 8]
   17191317:
     template: Pixie

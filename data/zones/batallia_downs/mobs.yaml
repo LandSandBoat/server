@@ -3855,7 +3855,7 @@ spawns:
   17207695:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-28.133, -0.181, 354.895, 117]
+    region:   digger
     level:    [28, 29]
   17207696:
     template: Sturmtiger

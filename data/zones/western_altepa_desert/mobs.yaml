@@ -3049,7 +3049,7 @@ spawns:
   17289652:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-406.759, 0.180, -540.065, 5]
+    region:   digger
     level:    [51, 54]
   17289653:
     template: Sabotender_Enamorado

@@ -4029,7 +4029,7 @@ spawns:
   17199565:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-250.989, 0.629, -91.871, 80]
+    region:   digger
     level:    [19, 20]
   17199566:
     template: Marchelute

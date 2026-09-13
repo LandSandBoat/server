@@ -3990,7 +3990,7 @@ spawns:
   17211847:
     template: Goblin_Digger_near
     script:   Goblin_Digger
-    at:       [197.132, -40.437, 501.941, 81]
+    region:   digger
     level:    [6, 7]
   17211848:
     template: Gambilox_Wanderling

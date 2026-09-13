@@ -3507,7 +3507,7 @@ spawns:
   17187272:
     template: Goblin_Digger_near
     script:   Goblin_Digger
-    at:       [-442.939, -22.108, -92.488, 12]
+    region:   digger
     level:    [7, 8]
   17187273:
     template: Marauder_Dvogzog

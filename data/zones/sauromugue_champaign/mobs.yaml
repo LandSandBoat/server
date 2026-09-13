@@ -4054,7 +4054,7 @@ spawns:
   17269105:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [481.391, 23.461, 122.486, 127]
+    region:   digger
     level:    [29, 30]
   17269106:
     template: Roc

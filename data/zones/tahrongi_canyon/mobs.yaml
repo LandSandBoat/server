@@ -3464,7 +3464,7 @@ spawns:
   17256898:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-45.370, 24.024, 241.743, 76]
+    region:   digger
     level:    [12, 13]
   17256899:
     template: Goblin_Archaeologist

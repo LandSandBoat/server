@@ -3557,7 +3557,7 @@ spawns:
   17285543:
     template: Goblin_Digger_jungle
     script:   Goblin_Digger
-    at:       [-69.276, 6.961, -179.442, 127]
+    region:   digger
     level:    [41, 44]
   17285544:
     template: Kappa_Akuso

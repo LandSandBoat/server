@@ -3484,7 +3484,7 @@ spawns:
   17281467:
     template: Goblin_Digger_jungle
     script:   Goblin_Digger
-    at:       [-459.990, 2.040, -69.201, 127]
+    region:   digger
     level:    [36, 38]
   17281468:
     template: Hobgoblin_Warrior

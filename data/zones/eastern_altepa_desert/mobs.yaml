@@ -3427,7 +3427,7 @@ spawns:
   17244522:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-211.184, 7.776, -136.339, 127]
+    region:   digger
     level:    [45, 49]
   17244523:
     template: Decurio_I-III

@@ -4453,7 +4453,7 @@ spawns:
   17228241:
     template: Goblin_Digger_far
     script:   Goblin_Digger
-    at:       [-124.602, 1.062, -218.029, 18]
+    region:   digger
     level:    [28, 29]
   17228242:
     template: Simurgh
