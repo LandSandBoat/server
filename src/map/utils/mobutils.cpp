@@ -1328,6 +1328,12 @@ void SetupRoaming(CMobEntity* PMob)
     {
         PMob->setMobMod(xi::MobMod::RoamResetFacing, 1);
     }
+
+    // a wanderer outside its region walks back in on its next roam instead of despawning
+    if ((PMob->m_roamFlags & xi::RoamFlag::Wander) != xi::RoamFlag::None)
+    {
+        PMob->setMobMod(xi::MobMod::DontRoamHome, 1);
+    }
 }
 
 void SetupPetSkills(CMobEntity* PMob)

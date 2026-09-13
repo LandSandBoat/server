@@ -13,5 +13,7 @@ set(PATHFIND_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_types.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/wander_path_builder.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/wander_path_builder.h
     PARENT_SCOPE
 )

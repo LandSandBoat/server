@@ -223,3 +223,41 @@ TEST_CASE("pathfind: a region mob that cannot sample a leg walks back onto its r
     CHECK(region.contains(destination.x, destination.z));
     CHECK_FALSE(region.contains(ownerPtr->position().x, ownerPtr->position().z));
 }
+
+TEST_CASE("pathfind: a wanderer keeps near its heading and stays inside its reach", "[pathfind][wander]")
+{
+    FlatNavMesh      navMesh;
+    const position_t start{ 0.0f, 0.0f, 0.0f, 0, 32 };
+    const float      radius = 80.0f;
+
+    // wide enough that the region never clips a leg
+    const RoamRegion::Ring outer{ { -500.0f, 0.0f, -500.0f }, { 500.0f, 0.0f, -500.0f }, { 500.0f, 0.0f, 500.0f }, { -500.0f, 0.0f, 500.0f } };
+    const RoamRegion       region(outer, {});
+
+    int                ahead = 0;
+    std::vector<float> lengths;
+    for (int i = 0; i < 300; ++i)
+    {
+        CPathFind pathFind(std::make_unique<StubOwner>(start, navMesh));
+        REQUIRE(pathFind.RoamAround(start, radius, 1, 1, xi::RoamFlag::Wander, &region));
+
+        const auto  destination = pathFind.GetDestination();
+        const float length      = distance(start, destination, true);
+        REQUIRE(length <= radius + 0.01f);
+        lengths.push_back(length);
+
+        // a chord no longer than the leg is a turn of 60 degrees or less
+        if (distance(nearPosition(start, length, 0.0f), destination, true) <= length)
+        {
+            ahead++;
+        }
+    }
+
+    // a 34 degree normal turn stays within 60 degrees 92 times in 100
+    CHECK(ahead >= 255);
+
+    // area-uniform in a disc puts the median leg at the radius over root two
+    std::ranges::sort(lengths);
+    CHECK(lengths[150] > radius * 0.6f);
+    CHECK(lengths[150] < radius * 0.8f);
+}

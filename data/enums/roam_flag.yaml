@@ -10,7 +10,7 @@ meta:
 values:
   none:     0x000
   none0:    0x001
-  none1:    0x002
+  wander:   0x002
   none2:    0x004
   none3:    0x008
   none4:    0x010

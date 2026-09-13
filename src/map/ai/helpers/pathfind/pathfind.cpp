@@ -27,6 +27,7 @@
 #include <map/ai/helpers/pathfind/path_builder.h>
 #include <map/ai/helpers/pathfind/path_owner.h>
 #include <map/ai/helpers/pathfind/pathfind_step.h>
+#include <map/ai/helpers/pathfind/wander_path_builder.h>
 
 #include <common/logging.h>
 #include <common/utils.h>
@@ -446,6 +447,21 @@ auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     TracyZoneString(owner_->name());
 
     const pathfind::NavPathBuilder builder{ navMesh() };
+
+    // a wanderer starts each leg where it stands; without a region it roams like any other mob
+    const bool wanders = (roamFlags & xi::RoamFlag::Wander) != xi::RoamFlag::None;
+    if (wanders && region)
+    {
+        const pathfind::WanderPathBuilder wanderer{ navMesh() };
+        if (const auto point = wanderer.findLeg(owner_->position(), maxRadius, *region))
+        {
+            turnPoints_.push_back(*point);
+            FindPathInternal(owner_->position(), turnPoints_[0]);
+            return !path_.empty();
+        }
+
+        // nothing ahead: fall through to the plain region walk, which also recovers a stranded mob
+    }
 
     auto turnPoints = builder.findRoamTurnPoints(start, maxRadius, minTurns, maxTurns, region);
     if (!turnPoints)
