@@ -1784,14 +1784,12 @@ xi.conquest.vendorOnTrade = function(player, npc, trade)
         return
     end
 
-    -- Exchange rate is 1 gil = 1 exp worth of influence at standard rates. LSB divides exp by 20. Cannot receive 0 influence from trade.
-    local influenceGain = math.max(1, math.floor(gilTotal / 20))
-
     if not player:tradeComplete() then
         return
     end
 
-    player:gainConquestInfluence(influenceGain)
+    -- Exchange rate is 1 gil = 1 exp worth of influence at standard rates.
+    player:gainConquestInfluence(gilTotal)
 
     -- Send success message to user
     -- TODO: Retail updates the current influence values with a packet push, applies the multiplier (1x/2x/3x), then checks against the threshold.

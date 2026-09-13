@@ -21,10 +21,10 @@ local bannerState =
 
 local regionPointsEarned =
 {
-    [0] =  500, -- No standing
-    [1] =  500,
-    [2] =  750,
-    [3] = 1000,
+    [0] = 10000, -- No standing
+    [1] = 10000,
+    [2] = 15000,
+    [3] = 20000,
 }
 
 local zoneInfoTable =

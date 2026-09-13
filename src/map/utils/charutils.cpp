@@ -5115,7 +5115,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
             // Add influence for the player's region.
             // TODO: Chain exp should not affect influence.
-            conquest::GainInfluencePoints(PChar, exp / 20);
+            conquest::GainInfluencePoints(PChar, exp);
         }
 
         // Should this user be awarded imperial standing..

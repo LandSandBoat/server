@@ -25,8 +25,6 @@
 
 #include "common/ipp.h"
 
-#include "common/settings.h"
-
 ConquestSystem::ConquestSystem(WorldEngine& worldServer)
 : worldServer_(worldServer)
 {
@@ -158,14 +156,16 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         points *= 2;
     }
 
+    // Scale the influence points and make sure if points are not 0, the nation gets at least 1.
+    if (points > 0)
+    {
+        points = std::max<int>(points / 10, 1);
+    }
+
     const int total = influences[0] + influences[1] + influences[2];
 
-    // Read from main settings. Protect against 0 or too high of number.
     // Restricted by a factor of 100 because of packet lines in 0x05e_conquest.cpp
-    const int32 influenceCapSetting = std::clamp<int32>(settings::get<int32>("main.CONQUEST_INFLUENCE_CAP"), 1, 20000000);
-
-    // Account for situation where influenceCapSetting was reduced midweek.
-    const int32 influenceCap = std::max<int32>(influenceCapSetting, total);
+    constexpr int32 influenceCap = INT32_MAX / 100;
 
     const int room = influenceCap - total;
 

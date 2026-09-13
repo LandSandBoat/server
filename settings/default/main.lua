@@ -207,9 +207,6 @@ xi.settings.main =
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
     NM_LOTTERY_COOLDOWN = 1.0,
 
-    -- CONQUEST SETTINGS
-    CONQUEST_INFLUENCE_CAP = 10000000, -- Combined influence pool per region shared across the 4 nations. Ceiling is 20 million.
-
     -- GARRISON SETTINGS
     ENABLE_GARRISON        = true,  -- If true, enables garrison functionality
     GARRISON_LOCKOUT       = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
