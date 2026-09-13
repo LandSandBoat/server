@@ -460,23 +460,37 @@ spawns:
 
   17584260:
     template: Soldier_Crawler
-    region:   c_206
+    region:   s_170
     level:    [47, 49]
 
   17584261:
     template: Soldier_Crawler
-    region:   region_62
+    region:   s_170
     level:    [47, 49]
 
   17584262:
     template: Soldier_Crawler
-    region:   c_206
+    region:   s_170
     level:    [47, 49]
 
   17584263:
     template: Soldier_Crawler
-    region:   c_206
+    region:   s_170
     level:    [47, 49]
+
+  17584264:
+    template: Worker_Crawler_CN
+    region:   c_71
+    level:    [41, 43]
+  17584265:
+    template: Worker_Crawler_CN
+    region:   c_71
+    level:    [41, 43]
+
+  17584266:
+    template: Worker_Crawler_CN
+    region:   c_71
+    level:    [41, 43]
 
   17584298:
     template: Blazer_Beetle

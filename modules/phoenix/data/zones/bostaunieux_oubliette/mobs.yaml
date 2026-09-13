@@ -347,7 +347,7 @@ spawns:
 
   17461371:
     template: Garm_BO
-    region:   region_97
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
