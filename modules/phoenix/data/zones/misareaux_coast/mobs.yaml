@@ -5,54 +5,54 @@ spawns:
 
   16879691:
     template: Death_Jacket_LM_MC
-    at:       [512.014, -15.758, 205.845, 6]
+    region:   e_92
     level:    [37, 40]
     script:   Death_Jacket
 
   16879692:
     template: Death_Jacket_LM_MC
-    at:       [521.501, -15.908, 274.143, 204]
+    region:   e_92
     level:    [37, 40]
     script:   Death_Jacket
 
   16879693:
     template: Death_Jacket_LM_MC
-    at:       [463.947, -15.238, 186.776, 78]
+    region:   e_85
     level:    [37, 40]
     script:   Death_Jacket
 
   16879694:
     template: Gigantobugard
-    at:       [454.290, -15.397, 135.463, 59]
+    region:   e_85
     level:    [40, 43]
 
   16879695:
     template: Gigantobugard
-    at:       [465.855, -23.231, 266.174, 172]
+    region:   e_93
     level:    [40, 43]
 
   16879696:
     template: Gigantobugard
-    at:       [462.098, -24.041, 295.969, 229]
+    region:   e_93
     level:    [40, 43]
 
   16879697:
     template: Gigantobugard
-    at:       [478.003, -23.405, 295.514, 253]
+    region:   e_93
     level:    [40, 43]
 
   16879698:
     template: Gigantobugard
-    at:       [433.536, -23.872, 249.063, 42]
+    region:   e_93
     level:    [40, 43]
 
   16879699:
     template: Gigas_Martialist
-    at:       [513.152, -23.873, 319.722, 239]
+    region:   ne_99
     level:    [41, 44]
 
   16879700:
     template: Orcish_Footsoldier_MC
-    at:       [449.897, -23.574, 277.680, 147]
+    region:   e_93
     level:    [41, 44]
     script:   Orcish_Footsoldier

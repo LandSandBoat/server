@@ -112,140 +112,140 @@ spawns:
 
   17404236:
     template: Processionaire
-    at:       [-190.606, 8.511, -231.488, 90]
+    region:   sw_332
     level:    [72, 75]
 
   17404237:
     template: Processionaire
-    at:       [-208.670, 8.735, -236.429, 90]
+    region:   sw_332
     level:    [72, 75]
 
   17404238:
     template: Processionaire
-    at:       [-204.549, 8.781, -248.136, 16]
+    region:   sw_332
     level:    [72, 75]
 
   17404239:
     template: Darter
-    at:       [-202.267, 8.862, -230.952, 114]
+    region:   sw_332
     level:    [75, 78]
 
   17404240:
     template: Darter
-    at:       [-210.934, 8.658, -243.355, 74]
+    region:   sw_332
     level:    [75, 78]
 
   17404241:
     template: Darter
-    at:       [-191.512, 8.688, -246.419, 247]
+    region:   sw_332
     level:    [75, 78]
 
   17404242:
     template: Blood_Ball
-    at:       [-191.903, 10.025, -258.522, 54]
+    region:   sw_350
     level:    [75, 78]
 
   17404243:
     template: Blood_Ball
-    at:       [-195.571, 9.857, -262.940, 80]
+    region:   sw_350
     level:    [75, 78]
 
   17404244:
     template: Darter
-    at:       [-201.614, 9.863, -258.672, 129]
+    region:   sw_350
     level:    [75, 78]
 
   17404245:
     template: Darter
-    at:       [-208.755, 9.914, -260.084, 121]
+    region:   sw_350
     level:    [75, 78]
 
   17404246:
     template: Processionaire
-    at:       [-205.104, 8.851, -274.212, 51]
+    region:   sw_337
     level:    [72, 75]
 
   17404247:
     template: Processionaire
-    at:       [-213.593, 8.899, -276.574, 105]
+    region:   sw_337
     level:    [72, 75]
 
   17404248:
     template: Darter
-    at:       [-205.786, 8.867, -283.210, 19]
+    region:   sw_337
     level:    [75, 78]
 
   17404249:
     template: Darter
-    at:       [-194.759, 8.672, -278.479, 225]
+    region:   sw_337
     level:    [75, 78]
 
   17404250:
     template: Blood_Ball
-    at:       [-232.786, 9.866, -270.142, 166]
+    region:   sw_358
     level:    [75, 78]
 
   17404251:
     template: Blood_Ball
-    at:       [-238.883, 9.738, -275.917, 111]
+    region:   sw_358
     level:    [75, 78]
 
   17404252:
     template: Darter
-    at:       [-240.445, 9.776, -285.439, 82]
+    region:   sw_358
     level:    [75, 78]
 
   17404253:
     template: Darter
-    at:       [-247.964, 9.871, -279.881, 132]
+    region:   sw_358
     level:    [75, 78]
 
   17404254:
     template: Blood_Ball
-    at:       [-212.900, 9.677, -300.489, 20]
+    region:   sw_354
     level:    [75, 78]
 
   17404255:
     template: Blood_Ball
-    at:       [-204.188, 9.810, -302.687, 54]
+    region:   sw_354
     level:    [75, 78]
 
   17404256:
     template: Darter
-    at:       [-193.545, 9.950, -304.353, 240]
+    region:   sw_354
     level:    [75, 78]
 
   17404257:
     template: Darter
-    at:       [-188.613, 9.985, -296.920, 225]
+    region:   sw_354
     level:    [75, 78]
 
   17404258:
     template: Processionaire
-    at:       [-196.774, 8.900, -312.294, 81]
+    region:   sw_341
     level:    [72, 75]
 
   17404259:
     template: Processionaire
-    at:       [-206.274, 8.502, -327.613, 57]
+    region:   sw_341
     level:    [72, 75]
 
   17404260:
     template: Processionaire
-    at:       [-189.121, 8.573, -324.537, 188]
+    region:   sw_341
     level:    [72, 75]
 
   17404261:
     template: Darter
-    at:       [-204.794, 8.663, -316.089, 101]
+    region:   sw_341
     level:    [75, 78]
 
   17404262:
     template: Darter
-    at:       [-196.576, 8.595, -330.893, 2]
+    region:   sw_341
     level:    [75, 78]
 
   17404290:
     template: Ancient_Goobbue
-    at:       [-230.059, 9.838, -271.313, 232]
+    region:   sw_358
     level:    [80, 80]

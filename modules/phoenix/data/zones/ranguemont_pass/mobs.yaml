@@ -18,8 +18,8 @@ templates:
           type:  standard
           model: 490
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -28,19 +28,19 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: goblin_mask
+          item:   goblin_mask
         - chance: very_rare
-          item: goblin_armor
+          item:   goblin_armor
         - chance: very_rare
-          item: mythril_beastcoin
+          item:   mythril_beastcoin
         - chance: very_rare
-          item: square_of_sheep_leather
+          item:   square_of_sheep_leather
         - chance: very_rare
-          item: square_of_dhalmel_leather
+          item:   square_of_dhalmel_leather
         - chance: super_rare
-          item: square_of_black_tiger_leather
+          item:   square_of_black_tiger_leather
         - chance: ultra_rare
-          item: square_of_coeurl_leather
+          item:   square_of_coeurl_leather
       steal: crossbow_bolt
       despoil:
         loaf_of_goblin_bread:      0
@@ -62,8 +62,8 @@ templates:
           type:  standard
           model: 507
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -72,11 +72,11 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: goblin_mask
+          item:   goblin_mask
         - chance: very_rare
-          item: goblin_armor
+          item:   goblin_armor
         - chance: very_rare
-          item: mythril_beastcoin
+          item:   mythril_beastcoin
       steal: silver_beastcoin
       despoil:
         loaf_of_goblin_bread:      0
@@ -97,8 +97,8 @@ templates:
           type:  standard
           model: 497
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -107,9 +107,9 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: goblin_helm
+          item:   goblin_helm
         - chance: very_rare
-          item: goblin_mail
+          item:   goblin_mail
       steal: silver_beastcoin
       despoil:
         loaf_of_goblin_bread:      0
@@ -206,256 +206,260 @@ spawns:
 
   17457213:
     template: Taisai
-    at:       [-89.510, -55.345, 218.766, 125]
+    region:   n_127
     level:    [35, 38]
 
   17457214:
     template: Taisai
-    at:       [-101.072, -55.846, 224.546, 119]
+    region:   n_127
     level:    [35, 38]
 
   17457215:
     template: Taisai
-    at:       [-109.713, -56.857, 219.000, 113]
+    region:   n_127
     level:    [35, 38]
 
   17457216:
     template: Taisaijin
-    at:       [-125.899, -56.000, 219.032, 112]
+    at:       null
+    region:   n_127
     level:    [60, 60]
 
   17457223:
     template: Stirge
-    at:       [-243.871, -36.803, 140.445, 146]
+    region:   nw_118
     level:    [30, 33]
 
   17457224:
     template: Stirge
-    at:       [-253.701, -43.206, 151.243, 180]
+    region:   nw_118
     level:    [30, 33]
 
   17457225:
     template: Giant_Scorpion
-    at:       [-0.679, -36.000, 161.529, 165]
+    region:   n_135
     level:    [38, 40]
 
   17457226:
     template: Bat_Eye
-    at:       [4.285, -35.924, 153.007, 183]
+    region:   n_135
     level:    [42, 44]
 
   17457248:
     template: Seeker_Bats_KT_RP_Qufim
-    at:       [-26.222, -0.195, -105.919, 31]
+    region:   s_60
     level:    [25, 28]
     script:   Seeker_Bats
 
   17457249:
     template: Seeker_Bats_KT_RP_Qufim
-    at:       [-19.151, 2.397, -114.892, 36]
+    region:   s_60
     level:    [25, 28]
     script:   Seeker_Bats
 
   17457250:
     template: Seeker_Bats_KT_RP_Qufim
-    at:       [-20.595, 7.295, -129.418, 65]
+    region:   s_60
     level:    [25, 28]
     script:   Seeker_Bats
 
   17457251:
     template: Goblin_Furrier
-    at:       [-88.885, -14.864, 21.999, 4]
+    region:   c_96
     level:    [32, 36]
 
   17457252:
     template: Goblin_Shaman
-    at:       [-76.053, -15.566, 22.933, 229]
+    region:   c_96
     level:    [32, 36]
 
   17457253:
     template: Stirge
-    at:       [-155.978, -35.188, 63.029, 247]
+    region:   w_107
     level:    [30, 33]
 
   17457254:
     template: Stirge
-    at:       [-148.952, -31.695, 53.939, 40]
+    region:   w_107
     level:    [30, 33]
 
   17457255:
     template: Stirge
-    at:       [-137.605, -26.499, 42.179, 90]
+    region:   w_107
     level:    [30, 33]
 
   17457256:
     template: Stirge
-    at:       [-200.230, -35.147, 107.568, 200]
+    region:   nw_110
     level:    [30, 33]
 
   17457257:
     template: Stirge
-    at:       [-191.912, -35.740, 77.915, 251]
+    region:   nw_110
     level:    [30, 33]
 
   17457258:
     template: Goblin_Smithy
-    at:       [-204.129, -36.000, 79.922, 61]
+    at:       null
+    region:   nw_110
     level:    [32, 36]
 
   17457260:
     template: Goblin_Smithy
-    at:       [-202.524, -36.070, 122.936, 138]
+    region:   nw_110
     level:    [32, 36]
 
   17457262:
     template: Goblin_Smithy
-    at:       [192.479, -35.658, 118.512, 206]
+    region:   nw_110
     level:    [32, 36]
 
   17457263:
     template: Goblin_Smithy
-    at:       [-196.598, -36.257, 68.545, 115]
+    region:   nw_110
     level:    [32, 36]
 
   17457264:
     template: Stirge
-    at:       [-139.384, -53.927, 191.120, 44]
+    region:   nw_124
     level:    [30, 33]
 
   17457265:
     template: Stirge
-    at:       [-140.092, -52.519, 179.310, 54]
+    region:   nw_124
     level:    [30, 33]
 
   17457266:
     template: Stirge
-    at:       [-139.620, -47.315, 166.314, 89]
+    at:       null
+    region:   nw_124
     level:    [30, 33]
 
   17457267:
     template: Stirge
-    at:       [-45.550, -37.724, 180.097, 22]
+    region:   n_132
     level:    [30, 33]
 
   17457268:
     template: Stirge
-    at:       [-51.371, -41.525, 187.708, 205]
+    region:   n_132
     level:    [30, 33]
 
   17457269:
     template: Stirge
-    at:       [-61.822, -44.069, 193.159, 146]
+    region:   n_132
     level:    [30, 33]
 
   17457270:
     template: Stirge
-    at:       [61.187, -26.000, 119.927, 189]
+    region:   n_140
     level:    [30, 33]
 
   17457271:
     template: Stirge
-    at:       [49.694, -32.334, 139.216, 119]
+    region:   n_140
     level:    [30, 33]
 
   17457272:
     template: Stirge
-    at:       [-44.653, -16.000, 19.887, 155]
+    region:   c_99
     level:    [30, 33]
 
   17457276:
     template: Stirge
-    at:       [-34.406, -17.656, 20.663, 84]
+    region:   c_99
     level:    [30, 33]
 
   17457277:
     template: Stirge
-    at:       [-23.571, -22.676, 30.944, 94]
+    region:   c_99
     level:    [30, 33]
 
   17457278:
     template: Stirge
-    at:       [-19.129, -27.000, 90.395, 113]
+    region:   c_99
     level:    [30, 33]
 
   17457279:
     template: Stirge
-    at:       [10.757, -28.288, 90.455, 40]
+    region:   n_102
     level:    [30, 33]
 
   17457280:
     template: Stirge
-    at:       [31.783, -25.318, 103.509, 179]
+    region:   n_102
     level:    [30, 33]
 
   17457281:
     template: Bat_Eye
-    at:       [4.702, -25.610, 100.004, 3]
+    region:   n_102
     level:    [34, 36]
     script:   Floating_Eye
 
   17457282:
     template: Bat_Eye
-    at:       [26.031, -26.500, 100.077, 11]
+    region:   n_102
     level:    [34, 36]
     script:   Floating_Eye
 
   17457283:
     template: Bat_Eye
-    at:       [49.043, -25.288, 99.304, 1]
+    region:   n_102
     level:    [34, 36]
     script:   Floating_Eye
 
   17457284:
     template: Stirge
-    at:       [136.361, -36.155, 145.658, 55]
+    region:   ne_147
     level:    [30, 33]
 
   17457285:
     template: Stirge
-    at:       [135.582, -36.951, 160.808, 100]
+    region:   ne_147
     level:    [30, 33]
 
   17457286:
     template: Stirge
-    at:       [147.529, -41.821, 170.247, 94]
+    region:   ne_147
     level:    [30, 33]
 
   17457287:
     template: Stirge
-    at:       [152.274, -43.547, 180.329, 109]
+    region:   ne_147
     level:    [30, 33]
 
   17457288:
     template: Stirge
-    at:       [169.920, -48.243, 175.616, 116]
+    region:   ne_147
     level:    [30, 33]
 
   17457289:
     template: Stirge
-    at:       [181.638, -51.977, 178.529, 121]
+    region:   ne_147
     level:    [30, 33]
 
   17457290:
     template: Stirge
-    at:       [261.228, -66.000, 241.079, 198]
+    region:   ne_155
     level:    [30, 33]
 
   17457291:
     template: Stirge
-    at:       [247.387, -66.000, 222.145, 105]
+    at:       null
+    region:   ne_150
     level:    [30, 33]
 
   17457292:
     template: Stirge
-    at:       [226.687, -60.455, 214.926, 89]
+    region:   ne_150
     level:    [30, 33]
 
   17457293:
     template: Stirge
-    at:       [222.580, -56.163, 199.317, 70]
+    region:   ne_150
     level:    [30, 33]
 
   17457294:
     template: Stirge
-    at:       [205.388, -56.000, 181.491, 125]
+    region:   ne_150
     level:    [30, 33]

@@ -122,115 +122,115 @@ spawns:
 
   17645673:
     template: Doom_Guard
-    at:       [-0.700, -8.750, 140.474, 244]
+    region:   n_105
     level:    [75, 77]
 
   17645674:
     template: Demonic_Pugil
-    at:       [52.442, 1.051, 152.135, 250]
+    region:   n_108
     level:    [73, 76]
 
   17645675:
     template: Demonic_Pugil
-    at:       [48.477, 1.100, 146.704, 127]
+    region:   n_108
     level:    [73, 76]
 
   17645676:
     template: Doom_Guard
-    at:       [38.115, 0.000, 161.538, 204]
+    region:   n_108
     level:    [75, 77]
 
   17645677:
     template: Doom_Guard
-    at:       [47.595, 0.093, 180.610, 250]
+    region:   n_111
     level:    [75, 77]
 
   17645678:
     template: Doom_Guard
-    at:       [69.106, 0.727, 197.664, 203]
+    region:   n_111
     level:    [75, 77]
 
   17645679:
     template: Doom_Guard
-    at:       [41.041, 0.000, 203.577, 129]
+    region:   n_111
     level:    [75, 77]
 
   17645680:
     template: Doom_Warlock
-    at:       [34.904, 0.450, 178.994, 184]
+    region:   n_108
     level:    [76, 78]
 
   17645681:
     template: Doom_Warlock
-    at:       [60.715, -0.648, 186.488, 229]
+    region:   n_111
     level:    [76, 78]
 
   17645682:
     template: Doom_Warlock
-    at:       [60.612, -0.025, 205.583, 143]
+    region:   n_111
     level:    [76, 78]
 
   17645683:
     template: Doom_Warlock
-    at:       [36.030, 0.483, 187.137, 79]
+    region:   n_111
     level:    [76, 78]
 
   17645684:
     template: Demonic_Pugil
-    at:       [128.580, 1.100, 210.272, 86]
+    region:   n_120
     level:    [73, 76]
 
   17645685:
     template: Demonic_Pugil
-    at:       [132.027, 1.051, 207.441, 109]
+    region:   n_120
     level:    [73, 76]
 
   17645686:
     template: Doom_Guard
-    at:       [86.789, 0.000, 199.888, 142]
+    region:   n_120
     level:    [75, 77]
 
   17645688:
     template: Doom_Guard
-    at:       [93.990, 0.000, 190.424, 37]
+    region:   n_120
     level:    [75, 77]
 
   17645689:
     template: Doom_Guard
-    at:       [121.279, 0.057, 191.653, 23]
+    region:   n_120
     level:    [75, 77]
 
   17645690:
     template: Doom_Guard
-    at:       [113.695, 0.347, 164.575, 51]
+    region:   ne_125
     level:    [75, 77]
 
   17645691:
     template: Erlik
-    at:       [111.058, -0.160, 204.293, 237]
+    region:   n_120
     level:    [75, 78]
 
   17645692:
     template: Doom_Warlock
-    at:       [109.642, 0.387, 174.241, 102]
+    region:   n_123
     level:    [76, 78]
 
   17645693:
     template: Doom_Warlock
-    at:       [125.138, 0.720, 183.940, 195]
+    region:   n_120
     level:    [76, 78]
 
   17645694:
     template: Typhoon_Wyvern
-    at:       [101.966, 0.446, 194.442, 228]
+    region:   n_120
     level:    [78, 80]
 
   17645695:
     template: Typhoon_Wyvern
-    at:       [118.896, 0.982, 180.883, 59]
+    region:   n_120
     level:    [78, 80]
 
   17645719:
     template: Baobhan_Sith
-    at:       [121.941, 1.000, 173.250, 170]
+    region:   ne_125
     level:    [79, 81]

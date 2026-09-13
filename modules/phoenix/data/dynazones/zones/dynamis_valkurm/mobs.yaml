@@ -20,9 +20,9 @@ templates:
           type:  standard
           model: 1345
         entity_flags:  131
-        animation_sub: 8
-        model_size:    1
-        hitbox:        12
+        animation_sub:   8
+        model_size:      1
+        hitbox:         12
       spawn:
         type: [scripted]
       stats:

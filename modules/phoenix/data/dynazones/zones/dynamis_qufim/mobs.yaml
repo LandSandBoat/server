@@ -21,9 +21,9 @@ templates:
           type:  standard
           model: 438
         entity_flags:  1155
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
       behaviors:
         aggressive: true
       spawn:
@@ -31,11 +31,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: wind_cluster
+          item:   wind_cluster
         - chance: common
-          item: wind_cluster
+          item:   wind_cluster
         - chance: common
-          item: wind_cluster
+          item:   wind_cluster
 
   Antaeus:
     loot:
@@ -62,9 +62,9 @@ templates:
           type:  standard
           model: 443
         entity_flags:  131
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
       behaviors:
         aggressive: true
       spawn:
@@ -72,11 +72,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: dark_cluster
+          item:   dark_cluster
         - chance: common
-          item: dark_cluster
+          item:   dark_cluster
         - chance: common
-          item: dark_cluster
+          item:   dark_cluster
 
   Earth_Elemental:
     id:            1160
@@ -95,9 +95,9 @@ templates:
           type:  standard
           model: 439
         entity_flags:  1155
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
       behaviors:
         aggressive: true
       spawn:
@@ -105,11 +105,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: earth_cluster
+          item:   earth_cluster
         - chance: common
-          item: earth_cluster
+          item:   earth_cluster
         - chance: common
-          item: earth_cluster
+          item:   earth_cluster
 
   Fire_Elemental:
     id:            1341
@@ -128,9 +128,9 @@ templates:
           type:  standard
           model: 436
         entity_flags:  131
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
       behaviors:
         aggressive: true
       spawn:
@@ -138,11 +138,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: fire_cluster
+          item:   fire_cluster
         - chance: common
-          item: fire_cluster
+          item:   fire_cluster
         - chance: common
-          item: fire_cluster
+          item:   fire_cluster
 
   Ice_Elemental:
     id:            2043
@@ -161,9 +161,9 @@ templates:
           type:  standard
           model: 437
         entity_flags:  1155
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:   16
+        model_size:       1
+        hitbox:           3
       behaviors:
         aggressive: true
       spawn:
@@ -171,11 +171,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: ice_cluster
+          item:   ice_cluster
         - chance: common
-          item: ice_cluster
+          item:   ice_cluster
         - chance: common
-          item: ice_cluster
+          item:   ice_cluster
 
   Light_Elemental:
     id:            2413
@@ -192,9 +192,9 @@ templates:
           type:  standard
           model: 442
         entity_flags:  131
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
       behaviors:
         aggressive: true
       spawn:
@@ -202,11 +202,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: light_cluster
+          item:   light_cluster
         - chance: common
-          item: light_cluster
+          item:   light_cluster
         - chance: common
-          item: light_cluster
+          item:   light_cluster
 
   Thunder_Elemental:
     id:            3912
@@ -225,9 +225,9 @@ templates:
           type:  standard
           model: 441
         entity_flags:  131
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
       behaviors:
         aggressive: true
       spawn:
@@ -235,11 +235,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: lightning_cluster
+          item:   lightning_cluster
         - chance: common
-          item: lightning_cluster
+          item:   lightning_cluster
         - chance: common
-          item: lightning_cluster
+          item:   lightning_cluster
 
   Water_Elemental:
     id:            4309
@@ -258,9 +258,9 @@ templates:
           type:  standard
           model: 440
         entity_flags:  131
-        animation_sub: 16
-        model_size:    1
-        hitbox:        3
+        animation_sub:  16
+        model_size:      1
+        hitbox:          3
       behaviors:
         aggressive: true
       spawn:
@@ -268,11 +268,11 @@ templates:
     loot:
       drops:
         - chance: always
-          item: water_cluster
+          item:   water_cluster
         - chance: common
-          item: water_cluster
+          item:   water_cluster
         - chance: common
-          item: water_cluster
+          item:   water_cluster
 
   Adamantking_Effigy:
     type: [notorious]

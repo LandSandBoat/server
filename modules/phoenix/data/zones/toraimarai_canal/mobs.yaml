@@ -20,8 +20,8 @@ templates:
           type:  standard
           model: 284
         entity_flags: 131
-        model_size:   1
-        hitbox:       27
+        model_size:     1
+        hitbox:        27
       behaviors:
         aggressive: true
       spawn:
@@ -29,11 +29,11 @@ templates:
     loot:
       drops:
         - chance: very_common
-          item: scorpion_claw
+          item:   scorpion_claw
         - chance: uncommon
-          item: scorpion_shell
+          item:   scorpion_shell
         - chance: rare
-          item: high-quality_scorpion_shell
+          item:   high-quality_scorpion_shell
       steal: antlion_jaw
       despoil:
         scorpion_shell: 0
@@ -163,642 +163,642 @@ spawns:
 
   17469547:
     template: Fleshcraver
-    at:       [264.794, 16.000, -5.499, 162]
+    region:   e_244
     level:    [60, 62]
 
   17469548:
     template: Fleshcraver
-    at:       [254.034, 16.000, -7.636, 91]
+    region:   e_244
     level:    [60, 62]
 
   17469549:
     template: Fleshcraver
-    at:       [134.188, 15.999, 63.898, 3]
+    region:   e_230
     level:    [60, 62]
 
   17469550:
     template: Fleshcraver
-    at:       [116.807, 16.000, 65.159, 132]
+    region:   e_230
     level:    [60, 62]
 
   17469551:
     template: Mindcraver
-    at:       [257.741, 16.000, -3.392, 101]
+    region:   e_244
     level:    [60, 62]
 
   17469552:
     template: Mindcraver
-    at:       [247.988, 16.000, -10.216, 76]
+    region:   e_244
     level:    [60, 62]
 
   17469579:
     template: Makara
-    at:       [-315.300, 16.000, 19.311, 163]
+    region:   w_139
     level:    [49, 52]
 
   17469580:
     template: Makara
-    at:       [-327.700, 16.000, 7.621, 164]
+    region:   w_140
     level:    [49, 52]
 
   17469581:
     template: Makara
-    at:       [-315.900, 16.000, -45.784, 123]
+    region:   w_141
     level:    [49, 52]
 
   17469582:
     template: Makara
-    at:       [-331.900, 15.998, -47.748, 5]
+    region:   w_142
     level:    [49, 52]
 
   17469583:
     template: Makara
-    at:       [-303.000, 21.002, -21.481, 108]
+    region:   region_95
     level:    [49, 52]
 
   17469584:
     template: Makara
-    at:       [-304.600, 21.000, -18.027, 254]
+    region:   region_95
     level:    [49, 52]
 
   17469585:
     template: Makara
-    at:       [-328.900, 17.500, -7.620, 151]
+    region:   region_96
     level:    [49, 52]
 
   17469586:
     template: Makara
-    at:       [-338.100, 20.650, -17.672, 41]
+    region:   region_96
     level:    [49, 52]
 
   17469596:
     template: Impish_Bats
-    at:       [189.564, 16.055, 59.819, 249]
+    region:   e_241
     level:    [58, 60]
 
   17469597:
     template: Impish_Bats
-    at:       [220.455, 16.037, 44.469, 71]
+    region:   e_241
     level:    [58, 60]
 
   17469598:
     template: Impish_Bats
-    at:       [215.524, 15.958, 17.177, 68]
+    region:   e_244
     level:    [58, 60]
 
   17469599:
     template: Impish_Bats
-    at:       [214.931, 15.992, -9.982, 66]
+    region:   e_244
     level:    [58, 60]
 
   17469600:
     template: Hell_Bat_TC
-    at:       [227.737, 16.000, -24.821, 218]
+    region:   e_244
     level:    [47, 49]
     script:   Hell_Bat
 
   17469601:
     template: Hell_Bat_TC
-    at:       [277.245, 16.000, -21.234, 192]
+    region:   e_257
     level:    [47, 49]
     script:   Hell_Bat
 
   17469602:
     template: Scavenger_Crab
-    at:       [309.609, 15.999, -79.748, 131]
+    region:   e_250
     level:    [60, 62]
 
   17469603:
     template: Scavenger_Crab
-    at:       [299.326, 16.000, -108.567, 212]
+    region:   e_250
     level:    [60, 62]
 
   17469604:
     template: Scavenger_Crab
-    at:       [279.509, 14.000, -81.444, 187]
+    region:   e_250
     level:    [60, 62]
 
   17469605:
     template: Scavenger_Crab
-    at:       [315.154, 14.250, -80.109, 255]
+    region:   e_250
     level:    [60, 62]
 
   17469606:
     template: Scavenger_Crab
-    at:       [319.547, 14.000, -88.214, 88]
+    region:   e_250
     level:    [60, 62]
 
   17469607:
     template: Scavenger_Crab
-    at:       [273.139, 12.000, -57.344, 98]
+    region:   e_263
     level:    [60, 62]
 
   17469608:
     template: Stygian_Pugil
-    at:       [269.931, 16.500, -70.091, 72]
+    region:   e_263
     level:    [63, 65]
 
   17469609:
     template: Stygian_Pugil
-    at:       [270.307, 16.500, -90.888, 64]
+    region:   e_267
     level:    [63, 65]
 
   17469610:
     template: Stygian_Pugil
-    at:       [293.928, 19.000, -90.380, 83]
+    region:   region_100
     level:    [63, 65]
 
   17469611:
     template: Stygian_Pugil
-    at:       [300.106, 21.502, -67.668, 181]
+    region:   region_99
     level:    [63, 65]
 
   17469612:
     template: Stygian_Pugil
-    at:       [285.869, 18.000, -67.831, 235]
+    region:   region_99
     level:    [63, 65]
 
   17469613:
     template: Stygian_Pugil
-    at:       [327.907, 16.500, -90.383, 120]
+    region:   e_268
     level:    [63, 65]
 
   17469614:
     template: Stygian_Pugil
-    at:       [314.432, 18.000, -69.237, 135]
+    region:   region_99
     level:    [63, 65]
 
   17469615:
     template: Stygian_Pugil
-    at:       [299.083, 21.502, -66.329, 204]
+    region:   region_99
     level:    [63, 65]
 
   17469616:
     template: Cutlass_Scorpion
-    at:       [279.466, 14.000, -79.810, 126]
+    region:   e_250
     level:    [64, 66]
 
   17469617:
     template: Cutlass_Scorpion
-    at:       [222.364, 17.000, -60.719, 131]
+    region:   se_297
     level:    [64, 66]
 
   17469618:
     template: Cutlass_Scorpion
-    at:       [216.662, 17.000, -62.632, 28]
+    region:   se_297
     level:    [64, 66]
 
   17469619:
     template: Impish_Bats
-    at:       [83.671, 16.000, 61.749, 247]
+    region:   e_230
     level:    [58, 60]
 
   17469620:
     template: Impish_Bats
-    at:       [129.577, 16.000, 55.837, 160]
+    region:   e_230
     level:    [58, 60]
 
   17469621:
     template: Mindcraver
-    at:       [92.727, 16.000, 65.403, 145]
+    region:   e_230
     level:    [60, 62]
 
   17469622:
     template: Mindcraver
-    at:       [126.952, 16.000, 55.898, 255]
+    region:   e_230
     level:    [60, 62]
 
   17469623:
     template: Fleshcraver
-    at:       [135.918, 17.000, 16.812, 219]
+    region:   e_236
     level:    [60, 62]
 
   17469624:
     template: Fleshcraver
-    at:       [145.184, 17.000, 19.234, 222]
+    region:   e_236
     level:    [60, 62]
 
   17469625:
     template: Mindcraver
-    at:       [145.093, 16.500, 25.283, 157]
+    region:   e_236
     level:    [60, 62]
 
   17469626:
     template: Mindcraver
-    at:       [135.242, 16.500, 26.793, 123]
+    region:   e_236
     level:    [60, 62]
 
   17469627:
     template: Cutlass_Scorpion
-    at:       [140.024, 17.000, 21.194, 175]
+    region:   e_236
     level:    [64, 66]
 
   17469628:
     template: Impish_Bats
-    at:       [15.281, 16.000, -59.030, 62]
+    region:   c_197
     level:    [58, 60]
 
   17469633:
     template: Impish_Bats
-    at:       [24.305, 16.000, -102.799, 159]
+    region:   c_197
     level:    [58, 60]
 
   17469634:
     template: Fleshcraver
-    at:       [35.954, 16.000, -59.015, 133]
+    region:   c_197
     level:    [60, 62]
 
   17469635:
     template: Fleshcraver
-    at:       [34.882, 16.000, -54.766, 117]
+    region:   c_197
     level:    [60, 62]
 
   17469636:
     template: Mindcraver
-    at:       [36.922, 16.000, -65.747, 146]
+    region:   c_197
     level:    [60, 62]
 
   17469637:
     template: Mindcraver
-    at:       [31.145, 16.000, -69.720, 88]
+    region:   c_197
     level:    [60, 62]
 
   17469638:
     template: Impish_Bats
-    at:       [122.427, 15.741, -20.352, 125]
+    region:   c_223
     level:    [58, 60]
 
   17469639:
     template: Impish_Bats
-    at:       [143.284, 16.000, -215.790, 252]
+    region:   se_210
     level:    [58, 60]
 
   17469640:
     template: Impish_Bats
-    at:       [148.983, 16.000, -225.215, 119]
+    region:   se_210
     level:    [58, 60]
 
   17469641:
     template: Fleshcraver
-    at:       [125.343, 16.000, -225.017, 166]
+    region:   se_210
     level:    [60, 62]
 
   17469642:
     template: Fleshcraver
-    at:       [107.353, 16.000, -224.505, 124]
+    region:   se_210
     level:    [60, 62]
 
   17469643:
     template: Mindcraver
-    at:       [90.510, 16.000, -220.679, 200]
+    region:   se_210
     level:    [60, 62]
 
   17469644:
     template: Mindcraver
-    at:       [108.306, 16.018, -216.030, 195]
+    region:   se_210
     level:    [60, 62]
 
   17469645:
     template: Fleshcraver
-    at:       [96.445, 17.000, -262.601, 91]
+    region:   se_216
     level:    [60, 62]
 
   17469646:
     template: Fleshcraver
-    at:       [104.400, 17.000, -262.029, 220]
+    region:   se_216
     level:    [60, 62]
 
   17469647:
     template: Mindcraver
-    at:       [102.716, 17.000, -255.198, 181]
+    region:   se_216
     level:    [60, 62]
 
   17469648:
     template: Mindcraver
-    at:       [95.701, 16.500, -253.228, 131]
+    region:   se_216
     level:    [60, 62]
 
   17469649:
     template: Cutlass_Scorpion
-    at:       [97.717, 17.000, -260.700, 97]
+    region:   se_216
     level:    [64, 66]
 
   17469650:
     template: Stygian_Pugil
-    at:       [29.692, 16.500, -150.789, 127]
+    region:   s_173
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469651:
     template: Stygian_Pugil
-    at:       [51.296, 18.000, -164.942, 140]
+    region:   region_98
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469652:
     template: Stygian_Pugil
-    at:       [28.919, 16.500, -210.357, 62]
+    region:   s_175
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469653:
     template: Stygian_Pugil
-    at:       [50.785, 18.000, -195.576, 192]
+    region:   region_98
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469654:
     template: Stygian_Pugil
-    at:       [54.094, 19.000, -186.121, 7]
+    region:   region_98
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469655:
     template: Stygian_Pugil
-    at:       [24.538, 19.000, -173.013, 125]
+    region:   region_97
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469656:
     template: Stygian_Pugil
-    at:       [25.697, 21.502, -182.096, 121]
+    region:   region_97
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469657:
     template: Stygian_Pugil
-    at:       [57.066, 21.502, -180.189, 3]
+    region:   region_98
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469658:
     template: Scavenger_Crab
-    at:       [42.414, 14.000, -200.862, 11]
+    region:   s_203
     level:    [60, 62]
 
   17469659:
     template: Scavenger_Crab
-    at:       [32.419, 14.000, -159.760, 135]
+    region:   s_203
     level:    [60, 62]
 
   17469660:
     template: Scavenger_Crab
-    at:       [39.662, 14.000, -151.092, 199]
+    region:   s_203
     level:    [60, 62]
 
   17469670:
     template: Scavenger_Crab
-    at:       [63.162, 15.250, -170.985, 71]
+    region:   s_203
     level:    [60, 62]
 
   17469671:
     template: Scavenger_Crab
-    at:       [54.083, 14.000, -199.487, 121]
+    region:   s_203
     level:    [60, 62]
 
   17469672:
     template: Scavenger_Crab
-    at:       [16.601, 16.000, -186.764, 186]
+    region:   s_203
     level:    [60, 62]
 
   17469673:
     template: Cutlass_Scorpion
-    at:       [40.292, 18.001, -179.702, 60]
+    region:   s_203
     level:    [64, 66]
 
   17469674:
     template: Stygian_Pugil
-    at:       [299.612, 21.502, -35.439, 189]
+    region:   e_257
     level:    [63, 65]
 
   17469675:
     template: Stygian_Pugil
-    at:       [298.445, 21.502, -25.644, 183]
+    region:   e_257
     level:    [63, 65]
 
   17469676:
     template: Stygian_Pugil
-    at:       [286.773, 21.502, -19.526, 252]
+    region:   e_257
     level:    [63, 65]
 
   17469677:
     template: Stygian_Pugil
-    at:       [279.340, 21.502, -20.709, 121]
+    region:   e_257
     level:    [63, 65]
 
   17469678:
     template: Stygian_Pugil
-    at:       [259.280, 21.502, -159.932, 193]
+    region:   se_269
     level:    [63, 65]
 
   17469679:
     template: Stygian_Pugil
-    at:       [273.139, 21.502, -140.083, 247]
+    region:   se_270
     level:    [63, 65]
 
   17469680:
     template: Stygian_Pugil
-    at:       [294.216, 21.502, -138.254, 236]
+    region:   se_270
     level:    [63, 65]
 
   17469681:
     template: Stygian_Pugil
-    at:       [300.269, 21.502, -117.792, 193]
+    region:   e_250
     level:    [63, 65]
 
   17469682:
     template: Bouncing_Ball
-    at:       [296.157, 22.500, -185.239, 27]
+    region:   se_278
     level:    [64, 67]
 
   17469683:
     template: Bouncing_Ball
-    at:       [304.350, 22.500, -181.431, 142]
+    region:   se_278
     level:    [64, 67]
 
   17469684:
     template: Bouncing_Ball
-    at:       [297.771, 22.500, -173.415, 136]
+    region:   se_278
     level:    [64, 67]
 
   17469685:
     template: Stygian_Pugil
-    at:       [267.420, 21.502, -180.220, 127]
+    region:   se_275
     level:    [63, 65]
 
   17469686:
     template: Stygian_Pugil
-    at:       [241.607, 21.502, -179.242, 139]
+    region:   se_275
     level:    [63, 65]
 
   17469687:
     template: Stygian_Pugil
-    at:       [217.566, 21.502, -179.672, 121]
+    region:   se_283
     level:    [63, 65]
 
   17469688:
     template: Stygian_Pugil
-    at:       [190.413, 21.502, -180.766, 126]
+    region:   se_283
     level:    [63, 65]
 
   17469689:
     template: Bouncing_Ball
-    at:       [94.062, 22.500, -179.840, 143]
+    region:   se_181
     level:    [64, 67]
 
   17469690:
     template: Bouncing_Ball
-    at:       [103.014, 22.000, -173.157, 237]
+    region:   se_181
     level:    [64, 67]
 
   17469691:
     template: Bouncing_Ball
-    at:       [101.929, 22.500, -184.942, 144]
+    region:   se_181
     level:    [64, 67]
 
   17469692:
     template: Mousse_SSG
-    at:       [-64.096, 22.000, -174.784, 96]
+    region:   s_170
     level:    [63, 65]
     script:   Mousse
 
   17469693:
     template: Mousse_SSG
-    at:       [-60.228, 22.500, -185.311, 10]
+    region:   s_170
     level:    [63, 65]
     script:   Mousse
 
   17469694:
     template: Mousse_SSG
-    at:       [-53.616, 22.500, -178.528, 187]
+    region:   s_170
     level:    [63, 65]
     script:   Mousse
 
   17469695:
     template: Stygian_Pugil
-    at:       [-60.017, 21.502, -138.496, 190]
+    region:   s_163
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469696:
     template: Stygian_Pugil
-    at:       [-99.072, 21.502, -99.396, 134]
+    region:   s_158
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469697:
     template: Stygian_Pugil
-    at:       [-144.211, 21.502, -138.898, 98]
+    region:   s_156
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469698:
     template: Scavenger_Crab
-    at:       [-175.006, 22.500, -102.578, 112]
+    region:   sw_164
     level:    [60, 62]
 
   17469699:
     template: Scavenger_Crab
-    at:       [-180.341, 22.500, -93.099, 2]
+    region:   sw_164
     level:    [60, 62]
 
   17469700:
     template: Scavenger_Crab
-    at:       [-185.302, 22.500, -101.991, 233]
+    region:   sw_164
     level:    [60, 62]
 
   17469701:
     template: Bloodsucker_TC
-    at:       [-174.560, 22.500, -138.098, 111]
+    region:   sw_167
     level:    [64, 67]
     script:   Bloodsucker
 
   17469702:
     template: Bloodsucker_TC
-    at:       [-179.974, 22.500, -146.026, 209]
+    region:   sw_167
     level:    [64, 67]
     script:   Bloodsucker
 
   17469703:
     template: Bloodsucker_TC
-    at:       [-187.649, 22.000, -135.997, 35]
+    region:   sw_167
     level:    [64, 67]
     script:   Bloodsucker
 
   17469704:
     template: Stygian_Pugil
-    at:       [97.063, 20.500, 60.827, 126]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469705:
     template: Stygian_Pugil
-    at:       [70.088, 21.502, 59.408, 125]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469706:
     template: Stygian_Pugil
-    at:       [61.468, 21.502, 50.050, 59]
+    region:   w_127
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469707:
     template: Stygian_Pugil
-    at:       [58.755, 21.502, 26.671, 73]
+    region:   c_195
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469708:
     template: Stygian_Pugil
-    at:       [60.889, 21.502, 73.178, 189]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469709:
     template: Stygian_Pugil
-    at:       [60.617, 21.502, 86.550, 195]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469710:
     template: Stygian_Pugil
-    at:       [59.078, 21.314, 103.155, 161]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469711:
     template: Stygian_Pugil
-    at:       [60.688, 21.502, 116.967, 63]
+    region:   c_185
     level:    [57, 59]
     script:   Canal_Pugil
 
   17469712:
     template: Fallen_Knight
-    at:       [-338.057, 20.250, 59.884, 193]
+    region:   w_107
     level:    [52, 55]
 
   17469713:
     template: Lich
-    at:       [-338.928, 20.000, 60.075, 249]
+    region:   w_107
     level:    [54, 57]
 
   17469714:
     template: Fallen_Knight
-    at:       [-305.730, 25.000, 60.250, 9]
+    region:   w_109
     level:    [52, 55]
 
   17469715:
     template: Fallen_Knight
-    at:       [-297.184, 25.000, 58.233, 9]
+    region:   w_109
     level:    [52, 55]
 
   17469716:
     template: Lich
-    at:       [-297.701, 25.000, 64.738, 101]
+    region:   w_109
     level:    [54, 57]
 
   17469717:
     template: Lich
-    at:       [-305.391, 25.000, 59.116, 123]
+    region:   w_109
     level:    [54, 57]

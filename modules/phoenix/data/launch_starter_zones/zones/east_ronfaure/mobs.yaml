@@ -22,7 +22,7 @@ templates:
           type:  standard
           model: 424
         entity_flags: 129
-        hitbox:       11
+        hitbox:        11
 
   Wild_Rabbit_Launch:
     id:            4343
@@ -38,7 +38,7 @@ templates:
           type:  standard
           model: 268
         entity_flags: 129
-        hitbox:       11
+        hitbox:        11
 
   Forest_Funguar:
     attributes:
@@ -47,7 +47,7 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: sleepshroom
+          item:   sleepshroom
       steal: sleepshroom
       despoil:
         woozyshroom:       0
@@ -62,9 +62,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: slice_of_hare_meat
+          item:   slice_of_hare_meat
         - chance: rare
-          item: rabbit_hide
+          item:   rabbit_hide
       steal: san_dorian_carrot
       despoil:
         rabbit_hide:        0
@@ -77,9 +77,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: insect_wing
+          item:   insect_wing
         - chance: super_rare
-          item: beetle_jaw
+          item:   beetle_jaw
       despoil:
         insect_wing:  0
         beetle_shell: 0
@@ -92,7 +92,7 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: flint_stone
+          item:   flint_stone
       steal: pebble
       despoil:
         chunk_of_copper_ore: 0
@@ -107,9 +107,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: rabbit_hide
+          item:   rabbit_hide
         - chance: rare
-          item: rabbit_hide
+          item:   rabbit_hide
       steal: san_dorian_carrot
       despoil:
         rabbit_hide:        0
@@ -122,11 +122,11 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: slice_of_giant_sheep_meat
+          item:   slice_of_giant_sheep_meat
         - chance: very_rare
-          item: sheep_tooth
+          item:   sheep_tooth
         - chance: rare
-          item: sheepskin
+          item:   sheepskin
       steal: clump_of_sheep_wool
       despoil:
         sheep_tooth: 50
@@ -135,900 +135,900 @@ spawns:
 
   17191786:
     template: Wild_Rabbit_Launch
-    at:       [2.055, -51.779, 171.888, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191787:
     template: Wild_Rabbit_Launch
-    at:       [768.719, -60.478, 618.105, 71]
+    region:   ne_192
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191788:
     template: Wild_Rabbit_Launch
-    at:       [83.162, -2.472, -514.456, 127]
+    region:   sw_326
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191789:
     template: Wild_Rabbit_Launch
-    at:       [332.154, -22.508, -223.977, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191790:
     template: Wild_Rabbit_Launch
-    at:       [289.251, -51.716, 208.100, 127]
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191791:
     template: Wild_Rabbit_Launch
-    at:       [165.010, -34.879, -22.506, 49]
+    region:   w_63
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191792:
     template: Wild_Rabbit_Launch
-    at:       [373.619, -37.093, 8.811, 127]
+    region:   c_106
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191793:
     template: Wild_Rabbit_Launch
-    at:       [154.725, -60.567, 325.400, 28]
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191794:
     template: Wild_Rabbit_Launch
-    at:       [453.625, -18.436, -127.048, 45]
+    region:   s_278
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191795:
     template: Wild_Rabbit_Launch
-    at:       [150.374, -56.465, 137.090, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191796:
     template: Wild_Rabbit_Launch
-    at:       [433.591, -60.911, 390.574, 76]
+    region:   n_137
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191797:
     template: Wild_Rabbit_Launch
-    at:       [295.823, -31.816, -97.569, 127]
+    region:   c_110
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191798:
     template: Wild_Rabbit_Launch
-    at:       [463.428, -7.598, -485.614, 41]
+    region:   s_368
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191799:
     template: Wild_Rabbit_Launch
-    at:       [495.985, -39.148, -6.646, 127]
+    region:   c_226
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191800:
     template: Wild_Rabbit_Launch
-    at:       [259.554, -39.345, 94.038, 127]
+    region:   region_42
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191801:
     template: Wild_Rabbit_Launch
-    at:       [191.008, -60.463, 431.765, 113]
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191802:
     template: Wild_Rabbit_Launch
-    at:       [511.026, -50.521, 191.270, 127]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191803:
     template: Wild_Rabbit_Launch
-    at:       [537.760, -50.679, 313.630, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191804:
     template: Wild_Rabbit_Launch
-    at:       [177.423, -8.300, -417.341, 74]
+    region:   sw_302
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191805:
     template: Wild_Rabbit_Launch
-    at:       [319.043, -20.431, -341.646, 81]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191806:
     template: Wild_Rabbit_Launch
-    at:       [256.103, -50.171, 285.001, 127]
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191807:
     template: Wild_Rabbit_Launch
-    at:       [183.534, -26.278, -101.308, 127]
+    region:   c_110
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191808:
     template: Wild_Rabbit_Launch
-    at:       [404.712, -20.673, -199.010, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191809:
     template: Wild_Rabbit_Launch
-    at:       [508.261, -10.604, -413.391, 127]
+    region:   s_380
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191810:
     template: Wild_Rabbit_Launch
-    at:       [579.946, -51.404, 167.472, 104]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191811:
     template: Wild_Rabbit_Launch
-    at:       [345.958, -47.239, 164.075, 127]
+    region:   c_83
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191812:
     template: Wild_Rabbit_Launch
-    at:       [394.093, -50.511, 76.783, 123]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191813:
     template: Wild_Rabbit_Launch
-    at:       [663.587, -60.071, 418.189, 127]
+    region:   ne_171
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191814:
     template: Wild_Rabbit_Launch
-    at:       [472.329, -50.778, 335.361, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191815:
     template: Wild_Rabbit_Launch
-    at:       [486.619, -39.700, 59.445, 127]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191816:
     template: Wild_Rabbit_Launch
-    at:       [84.318, -53.967, 134.274, 83]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191817:
     template: Wild_Rabbit_Launch
-    at:       [632.629, -11.020, -474.346, 112]
+    region:   se_395
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191818:
     template: Wild_Rabbit_Launch
-    at:       [328.869, -6.610, -418.020, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191819:
     template: Wild_Rabbit_Launch
-    at:       [516.878, -56.486, 383.029, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191820:
     template: Wild_Rabbit_Launch
-    at:       [448.447, -10.732, -417.660, 23]
+    region:   s_350
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191821:
     template: Wild_Rabbit_Launch
-    at:       [315.130, -21.439, -150.701, 125]
+    region:   c_110
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191822:
     template: Wild_Rabbit_Launch
-    at:       [270.308, -50.123, 156.411, 36]
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191823:
     template: Wild_Rabbit_Launch
-    at:       [452.656, -16.988, -223.546, 127]
+    region:   s_278
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191824:
     template: Wild_Rabbit_Launch
-    at:       [408.825, -19.633, -260.623, 12]
+    region:   region_49
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191825:
     template: Wild_Rabbit_Launch
-    at:       [238.284, -60.631, 330.343, 127]
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191826:
     template: Wild_Rabbit_Launch
-    at:       [222.000, -47.000, 156.000, 127]
+    region:   w_49
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191827:
     template: Wild_Rabbit_Launch
-    at:       [459.345, -6.686, -363.842, 127]
+    region:   region_49
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191828:
     template: Wild_Rabbit_Launch
-    at:       [524.659, -60.630, 448.115, 112]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191829:
     template: Wild_Rabbit_Launch
-    at:       [326.899, -20.475, -275.411, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191830:
     template: Wild_Rabbit_Launch
-    at:       [422.202, -19.916, -327.748, 77]
+    region:   s_350
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191831:
     template: Wild_Rabbit_Launch
-    at:       [305.663, -0.927, -493.446, 73]
+    region:   s_334
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191832:
     template: Wild_Rabbit_Launch
-    at:       [103.367, -49.532, 96.027, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191833:
     template: Wild_Rabbit_Launch
-    at:       [50.684, -53.575, 157.139, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191834:
     template: Wild_Rabbit_Launch
-    at:       [231.286, -60.028, 429.929, 113]
+    region:   n_137
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191835:
     template: Wild_Rabbit_Launch
-    at:       [238.000, -57.000, 380.000, 127]
+    region:   region_48
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191836:
     template: Wild_Rabbit_Launch
-    at:       [359.878, -18.440, -252.685, 9]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191837:
     template: Wild_Rabbit_Launch
-    at:       [413.229, -38.467, 7.047, 10]
+    region:   region_47
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191838:
     template: Wild_Rabbit_Launch
-    at:       [175.964, -56.624, 166.883, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191839:
     template: Wild_Rabbit_Launch
-    at:       [479.606, -60.498, 409.991, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191840:
     template: Wild_Rabbit_Launch
-    at:       [326.773, -40.334, 10.158, 127]
+    region:   c_110
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191841:
     template: Wild_Rabbit_Launch
-    at:       [195.140, -32.896, -65.083, 105]
+    region:   c_110
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191842:
     template: Wild_Rabbit_Launch
-    at:       [754.718, -61.490, 495.185, 127]
+    region:   ne_192
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191843:
     template: Wild_Rabbit_Launch
-    at:       [62.038, -61.123, 197.420, 0]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191844:
     template: Wild_Rabbit_Launch
-    at:       [561.488, -61.536, 443.483, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191845:
     template: Wild_Rabbit_Launch
-    at:       [275.610, -60.458, 405.042, 127]
+    region:   n_137
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191846:
     template: Wild_Rabbit_Launch
-    at:       [628.103, -62.474, 412.170, 58]
+    region:   ne_171
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191847:
     template: Wild_Rabbit_Launch
-    at:       [549.797, -50.726, 149.763, 90]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191848:
     template: Wild_Rabbit_Launch
-    at:       [567.665, -51.925, 330.350, 24]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191849:
     template: Wild_Rabbit_Launch
-    at:       [211.157, -60.437, 296.724, 127]
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191850:
     template: Wild_Rabbit_Launch
-    at:       [235.012, -3.217, -424.266, 11]
+    region:   sw_302
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191851:
     template: Wild_Rabbit_Launch
-    at:       [495.363, -48.254, 162.008, 127]
+    region:   c_209
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191852:
     template: Wild_Rabbit_Launch
-    at:       [517.978, -31.852, -31.063, 67]
+    region:   c_226
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191853:
     template: Wild_Rabbit_Launch
-    at:       [526.943, -60.655, 415.417, 5]
+    region:   n_150
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191854:
     template: Wild_Rabbit_Launch
-    at:       [427.567, -10.161, -388.767, 107]
+    region:   s_350
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191855:
     template: Wild_Rabbit_Launch
-    at:       [208.541, -60.706, 405.060, 127]
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191856:
     template: Wild_Rabbit_Launch
-    at:       [400.181, -20.804, -299.633, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191857:
     template: Wild_Rabbit_Launch
-    at:       [152.522, -50.249, 106.600, 95]
+    region:   w_63
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191858:
     template: Wild_Rabbit_Launch
-    at:       [171.518, -60.203, 300.702, 100]
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191859:
     template: Wild_Rabbit_Launch
-    at:       [227.176, -40.221, 16.856, 70]
+    region:   w_63
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191860:
     template: Wild_Rabbit_Launch
-    at:       [125.395, -60.091, 155.165, 127]
+    region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
 
   17191861:
     template: Tunnel_Worm_Launch
-    at:       [632.242, -12.033, -540.019, 127]
+    region:   se_395
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191862:
     template: Tunnel_Worm_Launch
-    at:       [554.904, -50.138, 98.665, 127]
+    region:   c_209
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191863:
     template: Tunnel_Worm_Launch
-    at:       [295.247, -61.761, 490.655, 127]
+    region:   n_137
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191864:
     template: Tunnel_Worm_Launch
-    at:       [575.338, -62.021, 403.795, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191865:
     template: Tunnel_Worm_Launch
-    at:       [345.141, -1.002, -527.738, 124]
+    region:   s_334
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191866:
     template: Tunnel_Worm_Launch
-    at:       [564.787, -20.629, -311.000, 127]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191867:
     template: Tunnel_Worm_Launch
-    at:       [168.333, -19.169, -329.956, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191868:
     template: Tunnel_Worm_Launch
-    at:       [402.037, -10.510, -368.526, 86]
+    region:   s_350
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191869:
     template: Tunnel_Worm_Launch
-    at:       [716.520, -61.957, 463.509, 109]
+    region:   ne_192
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191870:
     template: Tunnel_Worm_Launch
-    at:       [421.083, -48.095, 147.612, 127]
+    region:   c_206
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191871:
     template: Tunnel_Worm_Launch
-    at:       [625.691, -50.897, 270.652, 80]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191872:
     template: Tunnel_Worm_Launch
-    at:       [266.354, -9.111, -412.385, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191873:
     template: Tunnel_Worm_Launch
-    at:       [276.453, -60.349, 368.563, 115]
+    region:   n_137
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191874:
     template: Tunnel_Worm_Launch
-    at:       [580.757, -12.062, -429.875, 127]
+    region:   s_380
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191875:
     template: Tunnel_Worm_Launch
-    at:       [238.788, -0.937, -519.567, 127]
+    region:   s_334
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191876:
     template: Tunnel_Worm_Launch
-    at:       [465.871, -20.894, -279.978, 127]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191877:
     template: Tunnel_Worm_Launch
-    at:       [239.850, -20.790, -260.269, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191878:
     template: Tunnel_Worm_Launch
-    at:       [280.927, -40.759, 3.231, 127]
+    region:   c_110
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191879:
     template: Tunnel_Worm_Launch
-    at:       [781.329, -61.026, 522.012, 62]
+    region:   ne_192
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191880:
     template: Tunnel_Worm_Launch
-    at:       [98.660, -58.176, 205.185, 127]
+    region:   w_47
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191881:
     template: Tunnel_Worm_Launch
-    at:       [208.316, -50.447, 201.510, 67]
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191882:
     template: Tunnel_Worm_Launch
-    at:       [519.894, -20.768, -224.701, 50]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191883:
     template: Tunnel_Worm_Launch
-    at:       [151.832, -48.889, 51.622, 127]
+    region:   w_63
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191884:
     template: Tunnel_Worm_Launch
-    at:       [477.678, -60.594, 449.008, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191885:
     template: Tunnel_Worm_Launch
-    at:       [151.578, -0.557, -484.878, 127]
+    region:   sw_326
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191886:
     template: Tunnel_Worm_Launch
-    at:       [616.668, -57.355, 341.628, 127]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191887:
     template: Tunnel_Worm_Launch
-    at:       [570.908, -9.424, -506.854, 127]
+    region:   se_395
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191888:
     template: Tunnel_Worm_Launch
-    at:       [369.485, -20.499, -294.462, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191889:
     template: Tunnel_Worm_Launch
-    at:       [234.143, -20.202, -342.069, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191890:
     template: Tunnel_Worm_Launch
-    at:       [190.622, -59.376, 269.825, 63]
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191891:
     template: Tunnel_Worm_Launch
-    at:       [503.825, -9.165, -347.860, 120]
+    region:   region_49
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191892:
     template: Tunnel_Worm_Launch
-    at:       [304.751, -58.448, 426.377, 16]
+    region:   n_137
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191893:
     template: Tunnel_Worm_Launch
-    at:       [213.303, -40.458, 42.826, 127]
+    region:   w_63
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191894:
     template: Tunnel_Worm_Launch
-    at:       [333.134, -38.425, -35.591, 127]
+    region:   region_47
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191895:
     template: Tunnel_Worm_Launch
-    at:       [320.270, -40.657, 47.843, 127]
+    region:   c_83
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191896:
     template: Tunnel_Worm_Launch
-    at:       [318.184, -46.813, 103.691, 127]
+    region:   c_83
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191897:
     template: Tunnel_Worm_Launch
-    at:       [267.012, 0.922, -473.695, 3]
+    region:   s_334
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191898:
     template: Tunnel_Worm_Launch
-    at:       [456.147, -27.775, -73.537, 101]
+    region:   c_226
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191899:
     template: Tunnel_Worm_Launch
-    at:       [210.416, -48.311, 108.840, 100]
+    region:   w_63
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191900:
     template: Tunnel_Worm_Launch
-    at:       [283.929, -20.815, -240.951, 127]
+    region:   s_248
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191901:
     template: Tunnel_Worm_Launch
-    at:       [193.056, -10.595, -372.595, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191902:
     template: Tunnel_Worm_Launch
-    at:       [379.120, -27.898, -46.436, 17]
+    region:   c_275
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191903:
     template: Tunnel_Worm_Launch
-    at:       [534.881, -10.381, -477.078, 102]
+    region:   s_380
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191904:
     template: Tunnel_Worm_Launch
-    at:       [464.491, -18.989, -172.013, 127]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191905:
     template: Tunnel_Worm_Launch
-    at:       [137.709, -57.751, 180.734, 127]
+    region:   w_47
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191906:
     template: Tunnel_Worm_Launch
-    at:       [165.081, -60.593, 397.431, 127]
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191907:
     template: Tunnel_Worm_Launch
-    at:       [596.422, -48.898, 306.204, 204]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191908:
     template: Tunnel_Worm_Launch
-    at:       [363.119, -42.008, 50.788, 127]
+    region:   c_106
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191909:
     template: Tunnel_Worm_Launch
-    at:       [253.552, -39.734, 41.629, 59]
+    region:   region_47
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191910:
     template: Tunnel_Worm_Launch
-    at:       [263.845, -50.883, 238.956, 43]
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191911:
     template: Tunnel_Worm_Launch
-    at:       [179.476, -41.791, 14.600, 127]
+    region:   w_63
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191912:
     template: Tunnel_Worm_Launch
-    at:       [281.711, -20.583, -354.080, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191913:
     template: Tunnel_Worm_Launch
-    at:       [257.748, -25.870, -107.156, 75]
+    region:   c_110
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191914:
     template: Tunnel_Worm_Launch
-    at:       [369.467, -19.634, -333.443, 96]
+    region:   s_350
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191915:
     template: Tunnel_Worm_Launch
-    at:       [462.854, -33.269, -25.742, 127]
+    region:   c_226
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191916:
     template: Tunnel_Worm_Launch
-    at:       [561.981, -51.030, 200.824, 127]
+    region:   c_209
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191917:
     template: Tunnel_Worm_Launch
-    at:       [652.826, -47.057, 296.720, 127]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191918:
     template: Tunnel_Worm_Launch
-    at:       [515.515, -50.322, 345.815, 127]
+    region:   n_150
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191919:
     template: Tunnel_Worm_Launch
-    at:       [156.460, -10.674, -375.569, 127]
+    region:   sw_302
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191920:
     template: Tunnel_Worm_Launch
-    at:       [697.107, -61.896, 405.046, 127]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191921:
     template: Tunnel_Worm_Launch
-    at:       [298.620, -40.299, -41.269, 127]
+    region:   c_110
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191922:
     template: Tunnel_Worm_Launch
-    at:       [145.214, -43.997, 14.161, 97]
+    region:   w_63
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191923:
     template: Tunnel_Worm_Launch
-    at:       [540.405, -7.531, -424.258, 94]
+    region:   s_380
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191924:
     template: Tunnel_Worm_Launch
-    at:       [241.761, -49.757, 206.520, 20]
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191925:
     template: Tunnel_Worm_Launch
-    at:       [570.556, -6.544, -461.640, 58]
+    region:   s_380
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191926:
     template: Tunnel_Worm_Launch
-    at:       [654.552, -14.247, -499.155, 19]
+    region:   se_395
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191927:
     template: Tunnel_Worm_Launch
-    at:       [303.073, -50.816, 157.592, 127]
+    region:   c_83
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191928:
     template: Tunnel_Worm_Launch
-    at:       [479.302, -20.744, -204.474, 127]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191929:
     template: Tunnel_Worm_Launch
-    at:       [443.334, -17.000, -303.275, 127]
+    region:   s_375
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191930:
     template: Tunnel_Worm_Launch
-    at:       [431.256, -19.966, -181.523, 108]
+    region:   s_278
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191931:
     template: Tunnel_Worm_Launch
-    at:       [286.383, -60.144, 451.346, 6]
+    region:   n_137
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191932:
     template: Tunnel_Worm_Launch
-    at:       [682.366, -60.803, 442.144, 117]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191933:
     template: Tunnel_Worm_Launch
-    at:       [352.242, -37.952, -13.127, 115]
+    region:   region_47
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191934:
     template: Tunnel_Worm_Launch
-    at:       [442.913, -49.673, 128.250, 41]
+    region:   c_209
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17191935:
     template: Tunnel_Worm_Launch
-    at:       [709.552, -64.853, 430.455, 127]
+    region:   ne_171
     level:    [1, 1]
     script:   Tunnel_Worm

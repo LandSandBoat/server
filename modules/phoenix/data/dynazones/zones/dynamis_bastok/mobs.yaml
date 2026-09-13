@@ -41,11 +41,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -72,8 +72,8 @@ templates:
           type:  standard
           model: 1052
         entity_flags: 131
-        model_size:   2
-        hitbox:       17
+        model_size:     2
+        hitbox:        17
       behaviors:
         aggressive: true
         links:      true
@@ -92,11 +92,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -123,8 +123,8 @@ templates:
           type:  standard
           model: 1051
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -143,11 +143,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -175,15 +175,15 @@ templates:
           type:  standard
           model: 1054
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -196,11 +196,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -228,8 +228,8 @@ templates:
           type:  standard
           model: 1054
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -248,11 +248,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -280,15 +280,15 @@ templates:
           type:  standard
           model: 1055
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -301,11 +301,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -332,8 +332,8 @@ templates:
           type:  standard
           model: 1054
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -352,11 +352,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -384,15 +384,15 @@ templates:
           type:  standard
           model: 1053
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -405,11 +405,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -437,15 +437,15 @@ templates:
           type:  standard
           model: 1053
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -458,11 +458,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -490,15 +490,15 @@ templates:
           type:  standard
           model: 1055
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -511,11 +511,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -543,15 +543,15 @@ templates:
           type:  standard
           model: 1052
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -564,11 +564,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -595,8 +595,8 @@ templates:
           type:  standard
           model: 1051
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -615,11 +615,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -646,8 +646,8 @@ templates:
           type:  standard
           model: 1054
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -666,11 +666,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -698,15 +698,15 @@ templates:
           type:  standard
           model: 1055
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -719,11 +719,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -751,15 +751,15 @@ templates:
           type:  standard
           model: 1053
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 8000
+        hp:  8000
         mp: 20000
     loot:
       drops:
@@ -772,11 +772,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -803,8 +803,8 @@ templates:
           type:  standard
           model: 1053
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -823,11 +823,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare
@@ -854,8 +854,8 @@ templates:
           type:  standard
           model: 1052
         entity_flags: 131
-        model_size:   1
-        hitbox:       15
+        model_size:     1
+        hitbox:        15
       behaviors:
         aggressive: true
         links:      true
@@ -874,11 +874,11 @@ templates:
         - chance: uncommon
           item:   one_byne_bill
         - chance: very_rare
-          item: chunk_of_wootz_ore
+          item:   chunk_of_wootz_ore
         - chance: very_rare
-          item: sparkling_stone
+          item:   sparkling_stone
         - chance: very_rare
-          item: vial_of_slime_juice
+          item:   vial_of_slime_juice
         - chance: very_rare
           one_of: [relic_blade, relic_axe, relic_scythe, ito]
         - chance: rare

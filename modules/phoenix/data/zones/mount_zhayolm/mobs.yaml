@@ -5,160 +5,160 @@ spawns:
 
   17027085:
     template: Sicklemoon_Jagil
-    at:       [474.898, -14.500, -55.200, 223]
+    region:   e_142
     level:    [73, 76]
 
   17027086:
     template: Sicklemoon_Jagil
-    at:       [486.271, -14.341, -50.750, 227]
+    region:   e_142
     level:    [73, 76]
 
   17027087:
     template: Magmatic_Eruca
-    at:       [528.966, -13.970, -25.978, 231]
+    region:   e_145
     level:    [71, 75]
 
   17027088:
     template: Wootzshell
-    at:       [370.989, -13.874, -289.440, 173]
+    region:   se_13
     level:    [70, 71]
 
   17027089:
     template: Sicklemoon_Jagil
-    at:       [375.476, -14.500, -282.533, 217]
+    region:   se_13
     level:    [73, 76]
 
   17027090:
     template: Wootzshell
-    at:       [351.745, -14.082, -273.889, 186]
+    region:   s_47
     level:    [70, 71]
 
   17027091:
     template: Magmatic_Eruca
-    at:       [352.593, -14.145, -256.061, 222]
+    region:   se_41
     level:    [71, 75]
 
   17027092:
     template: Magmatic_Eruca
-    at:       [355.943, -13.931, -245.165, 69]
+    region:   s_44
     level:    [71, 75]
 
   17027093:
     template: Phasma
-    at:       [366.807, -14.144, -234.593, 240]
+    region:   s_44
     level:    [73, 76]
 
   17027113:
     template: Assassin_Fly
-    at:       [373.896, -13.494, -237.200, 17]
+    region:   se_41
     level:    [70, 76]
 
   17027114:
     template: Assassin_Fly
-    at:       [374.296, -13.375, -243.162, 60]
+    region:   se_41
     level:    [70, 76]
 
   17027115:
     template: Assassin_Fly
-    at:       [382.551, -13.534, -245.793, 11]
+    region:   se_19
     level:    [70, 76]
 
   17027116:
     template: Phasma
-    at:       [420.896, -13.857, -234.028, 254]
+    region:   se_16
     level:    [73, 76]
 
   17027117:
     template: Sicklemoon_Jagil
-    at:       [413.526, -14.500, -238.747, 101]
+    region:   se_16
     level:    [73, 76]
 
   17027118:
     template: Sicklemoon_Jagil
-    at:       [403.436, -14.000, -236.523, 111]
+    region:   se_19
     level:    [73, 76]
 
   17027119:
     template: Wootzshell
-    at:       [399.136, -14.500, -251.760, 56]
+    region:   se_19
     level:    [70, 71]
 
   17027120:
     template: Wamoura_Prince
-    at:       [-267.937, -14.477, 234.057, 190]
+    region:   nw_383
     level:    [79, 81]
 
   17027121:
     template: Sweeping_Cluster
-    at:       [-290.391, -14.171, 234.371, 212]
+    region:   nw_367
     level:    [73, 78]
 
   17027385:
     template: King_Apkallu
-    at:       [-649.829, -12.446, -72.541, 135]
+    region:   region_212
     level:    [78, 80]
 
   17027386:
     template: King_Apkallu
-    at:       [-664.644, -12.075, -92.205, 95]
+    region:   region_212
     level:    [78, 80]
 
   17027387:
     template: King_Apkallu
-    at:       [-673.591, -11.895, -98.567, 45]
+    region:   sw_313
     level:    [78, 80]
 
   17027388:
     template: Wamoura_Prince
-    at:       [-652.688, -12.557, -96.474, 245]
+    region:   region_212
     level:    [79, 81]
 
   17027389:
     template: Wamoura_Prince
-    at:       [-649.704, -12.220, -84.157, 205]
+    region:   region_212
     level:    [79, 81]
 
   17027390:
     template: Wamoura_Prince
-    at:       [-635.097, -12.105, -84.303, 248]
+    region:   w_321
     level:    [79, 81]
 
   17027391:
     template: Wamoura_Prince
-    at:       [-621.398, -14.972, -89.542, 230]
+    region:   w_321
     level:    [79, 81]
 
   17027392:
     template: Wamoura_Prince
-    at:       [-592.165, -21.072, -110.121, 244]
+    region:   region_235
     level:    [79, 81]
 
   17027393:
     template: Wamoura_Prince
-    at:       [-589.272, -20.795, -109.754, 200]
+    region:   region_235
     level:    [79, 81]
 
   17027394:
     template: Wamoura_Prince
-    at:       [-588.280, -20.315, -93.579, 192]
+    region:   w_323
     level:    [79, 81]
 
   17027395:
     template: King_Apkallu
-    at:       [-651.654, -12.891, -140.871, 207]
+    region:   sw_310
     level:    [78, 80]
 
   17027396:
     template: Wamoura_Prince
-    at:       [-643.466, -11.614, -131.909, 35]
+    region:   sw_316
     level:    [79, 81]
 
   17027397:
     template: King_Apkallu
-    at:       [-575.100, -11.715, -176.339, 69]
+    region:   region_211
     level:    [78, 80]
 
   17027398:
     template: Wamoura_Prince
-    at:       [-580.625, -20.368, -117.725, 211]
+    region:   region_235
     level:    [79, 81]

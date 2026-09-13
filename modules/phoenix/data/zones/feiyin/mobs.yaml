@@ -142,281 +142,281 @@ spawns:
 
   17612870:
     template: Shadow_war
-    at:       [165.669, -23.890, -88.639, 56]
+    region:   se_82
     level:    [44, 46]
     script:   Shadow
 
   17612871:
     template: Shadow_blm
-    at:       [170.037, -23.874, -81.130, 209]
+    region:   se_82
     level:    [44, 46]
     script:   Shadow
 
   17612872:
     template: Shadow_thf
-    at:       [163.247, -23.626, -73.700, 161]
+    region:   se_84
     level:    [44, 46]
     script:   Shadow
 
   17612873:
     template: Shadow_rng
-    at:       [153.212, -23.661, -76.486, 118]
+    region:   se_84
     level:    [44, 46]
     script:   Shadow
 
   17612874:
     template: Shadow_war
-    at:       [156.200, -23.460, -82.414, 130]
+    region:   se_82
     level:    [44, 46]
     script:   Shadow
 
   17612875:
     template: Shadow_war
-    at:       [114.046, -23.660, -44.831, 133]
+    region:   se_88
     level:    [44, 46]
     script:   Shadow
 
   17612876:
     template: Shadow_rng
-    at:       [117.346, -23.557, -34.612, 204]
+    region:   se_88
     level:    [44, 46]
     script:   Shadow
 
   17612877:
     template: Shadow_blm
-    at:       [127.444, -23.749, -35.467, 215]
+    region:   se_86
     level:    [44, 46]
     script:   Shadow
 
   17612878:
     template: Shadow_thf
-    at:       [128.322, -23.784, -43.667, 64]
+    region:   se_86
     level:    [44, 46]
     script:   Shadow
 
   17612879:
     template: Shadow_blm
-    at:       [120.772, -23.424, -39.992, 246]
+    region:   se_86
     level:    [44, 46]
     script:   Shadow
 
   17612880:
     template: Shadow_war
-    at:       [165.550, -23.920, -9.071, 180]
+    region:   e_104
     level:    [44, 46]
     script:   Shadow
 
   17612881:
     template: Shadow_rng
-    at:       [157.954, -23.424, -1.229, 160]
+    region:   e_102
     level:    [44, 46]
     script:   Shadow
 
   17612882:
     template: Undead_Bats_FY
-    at:       [139.490, -24.000, -60.255, 154]
+    region:   se_86
     level:    [38, 40]
     script:   Undead_Bats
 
   17612883:
     template: Undead_Bats_FY
-    at:       [139.457, -24.187, -18.305, 244]
+    region:   e_102
     level:    [38, 40]
     script:   Undead_Bats
 
   17612884:
     template: Undead_Bats_FY
-    at:       [189.562, -24.225, 99.924, 119]
+    region:   e_121
     level:    [38, 40]
     script:   Undead_Bats
 
   17612885:
     template: Revenant_SoZ_ENS_FY
-    at:       [116.150, -23.583, 85.233, 142]
+    region:   e_112
     level:    [40, 42]
     script:   Revenant
 
   17612886:
     template: Revenant_SoZ_ENS_FY
-    at:       [119.744, -23.424, 62.721, 58]
+    region:   e_108
     level:    [40, 42]
     script:   Revenant
 
   17612887:
     template: Vampire_Bat_FY
-    at:       [130.522, -23.901, 41.847, 245]
+    region:   e_106
     level:    [40, 42]
     script:   Vampire_Bat
 
   17612888:
     template: Vampire_Bat_FY
-    at:       [130.974, -23.967, 81.885, 12]
+    region:   e_112
     level:    [40, 42]
     script:   Vampire_Bat
 
   17612889:
     template: Vampire_Bat_FY
-    at:       [115.772, -23.466, 38.209, 40]
+    region:   e_106
     level:    [40, 42]
     script:   Vampire_Bat
 
   17612890:
     template: Shadow_blm
-    at:       [167.099, -23.765, 5.437, 22]
+    region:   e_104
     level:    [44, 46]
     script:   Shadow
 
   17612891:
     template: Shadow_war
-    at:       [214.322, -23.600, 12.443, 36]
+    region:   e_114
     level:    [44, 46]
     script:   Shadow
 
   17612892:
     template: Shadow_rng
-    at:       [221.749, -23.600, 19.172, 165]
+    region:   e_116
     level:    [44, 46]
     script:   Shadow
 
   17612893:
     template: Shadow_blm
-    at:       [226.855, -23.600, 26.692, 172]
+    region:   e_116
     level:    [44, 46]
     script:   Shadow
 
   17612894:
     template: Shadow_thf
-    at:       [217.873, -23.600, 25.871, 117]
+    region:   e_114
     level:    [44, 46]
     script:   Shadow
 
   17612895:
     template: Shadow_blm
-    at:       [211.900, -23.600, 24.944, 114]
+    region:   e_114
     level:    [44, 46]
     script:   Shadow
 
   17612896:
     template: Shadow_war
-    at:       [220.307, -23.600, 90.406, 180]
+    region:   e_118
     level:    [44, 46]
     script:   Shadow
 
   17612897:
     template: Shadow_rng
-    at:       [220.255, -23.600, 98.537, 47]
+    region:   e_118
     level:    [44, 46]
     script:   Shadow
 
   17612898:
     template: Shadow_blm
-    at:       [228.837, -23.600, 103.019, 236]
+    region:   e_121
     level:    [44, 46]
     script:   Shadow
 
   17612899:
     template: Shadow_thf
-    at:       [220.080, -23.600, 107.798, 134]
+    region:   e_121
     level:    [44, 46]
     script:   Shadow
 
   17612900:
     template: Shadow_war
-    at:       [165.256, -23.949, 110.408, 176]
+    region:   e_124
     level:    [44, 46]
     script:   Shadow
 
   17612901:
     template: Shadow_blm
-    at:       [211.884, -23.600, 101.248, 97]
+    region:   e_121
     level:    [44, 46]
     script:   Shadow
 
   17612902:
     template: Vampire_Bat_FY
-    at:       [134.098, -24.013, 68.769, 52]
+    region:   e_110
     level:    [40, 42]
     script:   Vampire_Bat
 
   17612903:
     template: Ore_Golem
-    at:       [105.644, -24.011, 52.069, 133]
+    region:   e_108
     level:    [43, 45]
 
   17612904:
     template: Undead_Bats_FY
-    at:       [138.405, -24.000, 180.104, 113]
+    region:   n_215
     level:    [38, 40]
     script:   Undead_Bats
 
   17612942:
     template: Shadow_rng
-    at:       [154.767, -23.643, 114.832, 163]
+    region:   e_124
     level:    [44, 46]
     script:   Shadow
 
   17612943:
     template: Shadow_blm
-    at:       [153.480, -23.703, 125.034, 186]
+    region:   e_127
     level:    [44, 46]
     script:   Shadow
 
   17612944:
     template: Shadow_thf
-    at:       [163.523, -23.537, 124.534, 0]
+    region:   e_127
     level:    [44, 46]
     script:   Shadow
 
   17612945:
     template: Shadow_war
-    at:       [122.421, -23.424, 161.653, 23]
+    region:   e_133
     level:    [44, 46]
     script:   Shadow
 
   17612946:
     template: Shadow_rng
-    at:       [112.352, -23.729, 156.368, 105]
+    region:   e_130
     level:    [44, 46]
     script:   Shadow
 
   17612947:
     template: Shadow_blm
-    at:       [120.374, -23.929, 170.788, 225]
+    region:   e_133
     level:    [44, 46]
     script:   Shadow
 
   17612948:
     template: Shadow_thf
-    at:       [128.340, -23.723, 160.989, 35]
+    region:   e_130
     level:    [44, 46]
     script:   Shadow
 
   17612949:
     template: Shadow_war
-    at:       [158.765, -23.424, 197.790, 217]
+    region:   ne_136
     level:    [44, 46]
     script:   Shadow
 
   17612950:
     template: Shadow_rng
-    at:       [124.768, -23.976, 149.813, 53]
+    region:   e_130
     level:    [44, 46]
     script:   Shadow
 
   17612951:
     template: Shadow_rng
-    at:       [155.750, -23.779, 207.956, 175]
+    region:   ne_139
     level:    [44, 46]
     script:   Shadow
 
   17612952:
     template: Shadow_blm
-    at:       [168.029, -23.789, 195.635, 159]
+    region:   ne_136
     level:    [44, 46]
     script:   Shadow
 
   17612953:
     template: Shadow_thf
-    at:       [151.080, -23.973, 193.081, 70]
+    region:   ne_136
     level:    [44, 46]
     script:   Shadow

@@ -571,9 +571,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -587,7 +587,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -603,7 +603,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -619,7 +619,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -635,9 +635,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -651,7 +651,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -667,7 +667,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -683,7 +683,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -699,9 +699,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     status:          normal
     speed:           40
     animation_speed: 40
@@ -716,7 +716,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -732,7 +732,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -748,7 +748,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -764,9 +764,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        6
+      moving:           6
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     status:          normal
     speed:           40
     animation_speed: 40
@@ -781,7 +781,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -797,7 +797,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -813,7 +813,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     status:          normal
     speed:           40
@@ -829,9 +829,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        6
+      moving:           6
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -845,9 +845,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -861,9 +861,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        6
+      moving:           6
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -877,7 +877,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     speed:           40
     animation_speed: 40
@@ -892,7 +892,7 @@ npcs:
       look:
         type:  standard
         model: 962
-      moving:       7
+      moving:         7
       entity_flags: 131
     speed:           40
     animation_speed: 40
@@ -907,9 +907,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     status:          cutscene_only
     speed:           40
     animation_speed: 40
@@ -924,9 +924,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     status:          cutscene_only
     speed:           40
     animation_speed: 40
@@ -941,9 +941,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     status:          cutscene_only
     speed:           40
     animation_speed: 40
@@ -958,9 +958,9 @@ npcs:
       look:
         type:  standard
         model: 961
-      moving:        7
+      moving:           7
       entity_flags:  1155
-      animation_sub: 8
+      animation_sub:    8
     speed:           40
     animation_speed: 40
     widescan:        true
@@ -1011,7 +1011,7 @@ npcs:
         type:  standard
         model: 52
       entity_flags: 2051
-      name_vis:     96
+      name_vis:       96
     content: soa
 
   16933219:
@@ -1352,7 +1352,7 @@ npcs:
       look:
         type:  standard
         model: 52
-      moving:       1
+      moving:          1
       entity_flags: 2051
     status:   normal
     widescan: true
@@ -1366,7 +1366,7 @@ npcs:
       look:
         type:  standard
         model: 52
-      moving:       1
+      moving:          1
       entity_flags: 2051
     status:   normal
     widescan: true

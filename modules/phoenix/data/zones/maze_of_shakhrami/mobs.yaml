@@ -167,279 +167,279 @@ spawns:
 
   17588350:
     template: Ghoul_war_GM_MoS
-    at:       [72.654, -0.948, 32.456, 219]
+    region:   c_133
     level:    [22, 26]
     script:   Ghoul
 
   17588351:
     template: Seeker_Bats_MoS_Ord
-    at:       [130.786, 0.000, 74.095, 29]
+    region:   n_149
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588352:
     template: Seeker_Bats_MoS_Ord
-    at:       [126.549, 0.168, 60.377, 78]
+    region:   c_157
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588353:
     template: Seeker_Bats_MoS_Ord
-    at:       [115.435, -0.209, 43.071, 31]
+    region:   c_157
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588354:
     template: Poison_Leech
-    at:       [124.167, 0.477, 68.850, 66]
+    region:   n_149
     level:    [24, 28]
 
   17588357:
     template: Poison_Leech
-    at:       [112.899, 0.125, 83.827, 146]
+    region:   n_149
     level:    [24, 28]
 
   17588358:
     template: Poison_Leech
-    at:       [110.756, 0.381, 81.564, 62]
+    region:   n_149
     level:    [24, 28]
 
   17588359:
     template: Poison_Leech
-    at:       [101.169, 0.319, 74.727, 27]
+    region:   n_141
     level:    [24, 28]
 
   17588360:
     template: Poison_Leech
-    at:       [93.450, 0.315, 46.420, 187]
+    region:   n_141
     level:    [24, 28]
 
   17588361:
     template: Poison_Leech
-    at:       [93.727, 0.000, 32.467, 106]
+    region:   c_133
     level:    [24, 28]
 
   17588362:
     template: Poison_Leech
-    at:       [83.142, 0.000, 38.397, 228]
+    region:   c_133
     level:    [24, 28]
 
   17588365:
     template: Poison_Leech
-    at:       [77.309, -0.041, 49.881, 149]
+    region:   c_133
     level:    [24, 28]
 
   17588366:
     template: Maze_Scorpion
-    at:       [99.040, 0.253, 57.695, 5]
+    region:   n_141
     level:    [25, 28]
 
   17588367:
     template: Maze_Scorpion
-    at:       [128.218, 0.495, 41.122, 82]
+    region:   c_157
     level:    [25, 28]
 
   17588368:
     template: Jelly_MS_OC
-    at:       [165.664, -5.000, 80.264, 218]
+    region:   n_149
     level:    [26, 28]
     script:   Jelly
 
   17588369:
     template: Labyrinth_Scorpion
-    at:       [150.787, -1.962, 89.176, 134]
+    region:   n_149
     level:    [30, 33]
 
   17588370:
     template: Seeker_Bats_MoS_Ord
-    at:       [120.796, 0.000, 5.664, 251]
+    region:   c_161
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588373:
     template: Seeker_Bats_MoS_Ord
-    at:       [137.775, 0.070, -7.339, 9]
+    region:   c_161
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588374:
     template: Seeker_Bats_MoS_Ord
-    at:       [156.526, 0.000, 0.965, 218]
+    region:   c_166
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588375:
     template: Seeker_Bats_MoS_Ord
-    at:       [148.270, 0.000, 13.571, 146]
+    region:   c_166
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588376:
     template: Poison_Leech
-    at:       [149.035, 0.068, 7.757, 108]
+    region:   c_166
     level:    [24, 28]
 
   17588377:
     template: Poison_Leech
-    at:       [132.907, -0.352, 14.558, 121]
+    region:   c_166
     level:    [24, 28]
 
   17588380:
     template: Poison_Leech
-    at:       [130.790, 0.424, 6.584, 79]
+    region:   c_161
     level:    [24, 28]
 
   17588381:
     template: Poison_Leech
-    at:       [140.805, 0.869, 1.322, 2]
+    region:   c_161
     level:    [24, 28]
 
   17588382:
     template: Wendigo_blm_MoS
-    at:       [172.449, -1.106, -30.350, 136]
+    region:   c_179
     level:    [24, 28]
     script:   Wendigo
 
   17588383:
     template: Maze_Scorpion
-    at:       [167.341, 0.503, -20.693, 147]
+    region:   c_179
     level:    [25, 28]
 
   17588384:
     template: Jelly_MS_OC
-    at:       [105.362, -0.554, -56.380, 189]
+    region:   c_173
     level:    [26, 28]
     script:   Jelly
 
   17588385:
     template: Jelly_MS_OC
-    at:       [99.136, 0.000, -64.103, 182]
+    region:   c_173
     level:    [26, 28]
     script:   Jelly
 
   17588386:
     template: Jelly_MS_OC
-    at:       [99.124, 0.000, -77.786, 208]
+    region:   c_173
     level:    [26, 28]
     script:   Jelly
 
   17588387:
     template: Seeker_Bats_MoS_Ord
-    at:       [160.483, 1.000, -56.322, 61]
+    region:   c_184
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588388:
     template: Seeker_Bats_MoS_Ord
-    at:       [178.657, 0.000, -58.849, 33]
+    region:   c_184
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588389:
     template: Seeker_Bats_MoS_Ord
-    at:       [184.203, 0.301, -87.295, 37]
+    region:   c_190
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588390:
     template: Seeker_Bats_MoS_Ord
-    at:       [200.592, 0.000, -116.028, 29]
+    region:   se_200
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588391:
     template: Seeker_Bats_MoS_Ord
-    at:       [234.047, 0.107, -117.203, 0]
+    region:   se_205
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588392:
     template: Poison_Leech
-    at:       [176.245, 0.109, -86.993, 254]
+    region:   c_190
     level:    [24, 28]
 
   17588393:
     template: Poison_Leech
-    at:       [183.648, -0.022, -88.345, 0]
+    region:   c_190
     level:    [24, 28]
 
   17588394:
     template: Poison_Leech
-    at:       [246.881, 0.183, -141.593, 243]
+    region:   se_215
     level:    [24, 28]
 
   17588395:
     template: Poison_Leech
-    at:       [253.957, -1.337, -139.320, 122]
+    region:   se_215
     level:    [24, 28]
 
   17588396:
     template: Wendigo_blm_MoS
-    at:       [221.587, -1.340, -98.967, 96]
+    region:   se_200
     level:    [24, 28]
     script:   Wendigo
 
   17588397:
     template: Wendigo_blm_MoS
-    at:       [249.220, -0.988, -119.539, 98]
+    region:   se_205
     level:    [24, 28]
     script:   Wendigo
 
   17588398:
     template: Maze_Scorpion
-    at:       [244.007, -0.125, -165.297, 171]
+    region:   se_210
     level:    [25, 28]
 
   17588399:
     template: Jelly_MS_OC
-    at:       [267.609, 1.000, -161.071, 111]
+    region:   se_215
     level:    [26, 28]
     script:   Jelly
 
   17588446:
     template: Seeker_Bats_MoS_Ord
-    at:       [79.385, 0.000, 82.566, 6]
+    region:   n_126
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588447:
     template: Seeker_Bats_MoS_Ord
-    at:       [75.081, 0.320, 60.170, 67]
+    region:   c_133
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588455:
     template: Seeker_Bats_MoS_Ord
-    at:       [85.264, -0.173, 48.391, 4]
+    region:   n_141
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588456:
     template: Seeker_Bats_MoS_Ord
-    at:       [102.025, -0.947, 63.892, 213]
+    region:   n_141
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588467:
     template: Seeker_Bats_MoS_Ord
-    at:       [106.620, -0.324, 74.110, 177]
+    region:   n_141
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588468:
     template: Seeker_Bats_MoS_Ord
-    at:       [119.640, 0.000, 84.427, 9]
+    region:   n_149
     level:    [23, 26]
     script:   Seeker_Bats
 
   17588516:
     template: Ancient_Bat_LDT_MoS
-    at:       [125.470, -0.160, -59.802, 242]
+    region:   c_173
     level:    [26, 29]
     script:   Ancient_Bat
 
   17588648:
     template: Ancient_Bat_LDT_MoS
-    at:       [99.890, -0.089, -37.058, 188]
+    region:   c_173
     level:    [26, 29]
     script:   Ancient_Bat

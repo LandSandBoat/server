@@ -5,175 +5,176 @@ spawns:
 
   17100899:
     template: Caedarva_Leech
-    at:       [140.752, -6.612, -256.849, 60]
+    region:   c_99
     level:    [63, 65]
 
   17100903:
     template: Mature_Treant
-    at:       [169.621, -11.393, -214.379, 165]
+    region:   c_103
     level:    [70, 72]
 
   17100946:
     template: Heraldic_Imp_CM
-    at:       [397.728, -8.000, -239.809, 176]
+    region:   e_146
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17100949:
     template: Heraldic_Imp_CM
-    at:       [399.509, -8.232, -194.174, 58]
+    region:   e_151
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17100950:
     template: Heraldic_Imp_CM
-    at:       [395.563, -7.811, -208.597, 71]
+    region:   e_146
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17100951:
     template: Heraldic_Imp_CM
-    at:       [411.253, -9.565, -211.172, 208]
+    region:   e_151
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17100953:
     template: Caedarva_Leech
-    at:       [291.693, -18.446, -143.229, 254]
+    region:   c_155
     level:    [63, 65]
 
   17100961:
     template: Heraldic_Imp_CM
-    at:       [441.390, -16.050, -75.657, 53]
+    region:   e_160
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17101021:
     template: Heraldic_Imp_CM
-    at:       [-578.579, -6.392, -13.347, 6]
+    region:   w_300
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17101022:
     template: Lamia_Idolater_drk
-    at:       [-587.084, -7.000, -15.282, 74]
+    region:   w_300
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101023:
     template: Lamia_Idolater_drk
-    at:       [-573.403, -5.718, -6.204, 217]
+    region:   w_300
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101024:
     template: Lamia_Idolater_drk
-    at:       [-574.172, -3.915, -24.145, 63]
+    region:   w_300
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101025:
     template: Guard_Bhoot
-    at:       [-583.285, -8.130, -3.699, 41]
+    region:   w_300
     level:    [81, 83]
 
   17101026:
     template: Lamia_Idolater_drk
-    at:       [-576.313, 1.824, -40.475, 78]
+    region:   w_306
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101027:
     template: Lamia_Idolater_drk
-    at:       [-565.781, 3.770, -40.786, 1]
+    region:   w_306
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101028:
     template: Lamia_Idolater_drk
-    at:       [-575.809, 3.415, -51.966, 73]
+    region:   w_306
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101029:
     template: Lamia_Idolater_drk
-    at:       [-586.904, -0.250, -43.476, 118]
+    region:   w_306
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101030:
     template: Lamia_Idolater_drk
-    at:       [-606.534, 3.760, -109.112, 102]
+    region:   w_290
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101031:
     template: Lamia_Idolater_drk
-    at:       [-594.047, 3.749, -116.708, 33]
+    region:   w_290
     level:    [79, 81]
     script:   Lamia_Idolater
 
   17101032:
     template: Treant_Sapling_AS_CM
-    at:       [-289.629, 6.602, -494.341, 228]
+    region:   sw_225
     level:    [61, 63]
     script:   Treant_Sapling
 
   17101033:
     template: Heraldic_Imp_CM
-    at:       [-282.002, 8.000, -482.480, 218]
+    region:   sw_225
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17101034:
     template: Elder_Treant
-    at:       [-264.623, 6.519, -466.302, 250]
+    region:   sw_225
     level:    [80, 82]
 
   17101035:
     template: Elder_Treant
-    at:       [-270.826, 4.158, -456.665, 88]
+    region:   sw_225
     level:    [80, 82]
 
   17101100:
     template: Treant_Sapling_AS_CM
-    at:       [-231.127, 7.114, -478.458, 12]
+    region:   sw_230
     level:    [61, 63]
     script:   Treant_Sapling
 
   17101101:
     template: Heraldic_Imp_CM
-    at:       [-231.796, 7.447, -491.088, 53]
+    region:   sw_230
     level:    [79, 81]
     script:   Heraldic_Imp
 
   17101102:
     template: Elder_Treant
-    at:       [-223.701, 6.000, -499.892, 47]
+    region:   sw_230
     level:    [80, 82]
 
   17101103:
     template: Elder_Treant
-    at:       [-217.912, 4.084, -483.894, 139]
+    region:   sw_230
     level:    [80, 82]
 
   17101104:
     template: Treant_Sapling_AS_CM
-    at:       [-250.661, 6.625, -525.505, 99]
+    region:   sw_221
     level:    [61, 63]
     script:   Treant_Sapling
 
   17101105:
     template: Elder_Treant
-    at:       [-255.433, 6.000, -537.713, 72]
+    region:   sw_221
     level:    [80, 82]
 
   17101106:
     template: Elder_Treant
-    at:       [-241.958, 4.356, -540.688, 22]
+    region:   sw_221
     level:    [80, 82]
 
   17101197:
     template: Khimaira
-    at:       [840.174, 0.232, 354.088, 190]
+    at:       null
+    region:   ne_461
     level:    [85, 85]

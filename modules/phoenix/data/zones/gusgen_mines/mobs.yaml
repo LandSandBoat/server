@@ -142,338 +142,338 @@ spawns:
 
   17580125:
     template: Bogy
-    at:       [-117.593, -38.956, -0.251, 15]
+    region:   w_153
     level:    [27, 29]
 
   17580126:
     template: Bogy
-    at:       [-101.689, -38.253, 4.605, 193]
+    region:   w_162
     level:    [27, 29]
 
   17580135:
     template: Jelly_KT_GM
-    at:       [-104.569, -37.419, 26.069, 245]
+    region:   w_162
     level:    [27, 29]
     script:   Jelly
 
   17580139:
     template: Wendigo_war
-    at:       [-84.715, -38.606, 33.992, 215]
+    region:   w_170
     level:    [30, 30]
     script:   Wendigo
 
   17580140:
     template: Wendigo_war
-    at:       [-100.016, -38.250, 37.922, 130]
+    region:   w_166
     level:    [28, 30]
     script:   Wendigo
 
   17580141:
     template: Wendigo_war
-    at:       [-86.135, -38.750, 81.147, 73]
+    region:   w_149
     level:    [28, 30]
     script:   Wendigo
 
   17580142:
     template: Bogy
-    at:       [-81.732, -38.280, 62.182, 67]
+    region:   w_149
     level:    [27, 29]
 
   17580143:
     template: Bogy
-    at:       [-122.696, -39.000, 82.539, 251]
+    region:   w_149
     level:    [27, 29]
 
   17580144:
     template: Bogy
-    at:       [-65.754, -39.818, -13.072, 214]
+    region:   w_153
     level:    [27, 29]
 
   17580145:
     template: Jelly_KT_GM
-    at:       [-105.070, -37.692, 13.738, 80]
+    region:   w_162
     level:    [27, 29]
     script:   Jelly
 
   17580146:
     template: Sadfly
-    at:       [-85.727, -38.854, -4.807, 3]
+    region:   w_153
     level:    [27, 29]
 
   17580147:
     template: Sadfly
-    at:       [-116.583, -38.740, 6.240, 254]
+    region:   w_126
     level:    [27, 29]
 
   17580148:
     template: Spunkie_GM
-    at:       [-88.751, -38.750, 37.936, 175]
+    region:   w_170
     level:    [28, 30]
     script:   Spunkie
 
   17580149:
     template: Spunkie_GM
-    at:       [-109.071, -38.432, 72.876, 69]
+    region:   w_166
     level:    [28, 30]
     script:   Spunkie
 
   17580150:
     template: Wight_blm
-    at:       [-126.139, -38.921, 36.563, 6]
+    region:   w_159
     level:    [30, 34]
     script:   Wight
 
   17580151:
     template: Wight_blm
-    at:       [-139.711, -39.875, 151.405, 148]
+    region:   w_183
     level:    [30, 34]
     script:   Wight
 
   17580152:
     template: Wendigo_war
-    at:       [-76.730, -39.000, 238.788, 72]
+    region:   nw_175
     level:    [28, 30]
     script:   Wendigo
 
   17580153:
     template: Wendigo_war
-    at:       [-105.829, -40.182, 185.206, 200]
+    region:   w_183
     level:    [28, 30]
     script:   Wendigo
 
   17580154:
     template: Wendigo_war
-    at:       [-118.822, -38.500, 214.534, 218]
+    region:   w_183
     level:    [28, 30]
     script:   Wendigo
 
   17580155:
     template: Amphisbaena
-    at:       [-92.111, -38.500, 200.690, 215]
+    region:   w_179
     level:    [28, 30]
 
   17580156:
     template: Amphisbaena
-    at:       [-79.858, -38.250, 219.073, 166]
+    region:   nw_175
     level:    [28, 30]
 
   17580157:
     template: Amphisbaena
-    at:       [-85.777, -38.480, 231.957, 178]
+    region:   w_191
     level:    [28, 30]
 
   17580158:
     template: Amphisbaena
-    at:       [-102.794, -38.356, 240.337, 112]
+    region:   nw_187
     level:    [28, 30]
 
   17580159:
     template: Amphisbaena
-    at:       [-120.474, -38.500, 227.726, 76]
+    region:   nw_187
     level:    [28, 30]
 
   17580160:
     template: Spunkie_GM
-    at:       [-93.964, -37.677, 212.102, 151]
+    region:   w_179
     level:    [28, 30]
     script:   Spunkie
 
   17580161:
     template: Spunkie_GM
-    at:       [-91.095, -37.550, 229.020, 238]
+    region:   w_191
     level:    [28, 30]
     script:   Spunkie
 
   17580162:
     template: Wight_blm
-    at:       [-116.070, -38.290, 211.315, 111]
+    region:   w_183
     level:    [30, 34]
     script:   Wight
 
   17580163:
     template: Banshee_GM
-    at:       [-119.354, -39.927, 241.603, 148]
+    region:   nw_208
     level:    [31, 34]
     script:   Banshee
 
   17580164:
     template: Banshee_GM
-    at:       [-71.266, -39.002, 202.728, 236]
+    region:   w_179
     level:    [31, 34]
     script:   Banshee
 
   17580165:
     template: Wendigo_war
-    at:       [-0.062, -40.100, 178.242, 7]
+    region:   c_146
     level:    [28, 30]
     script:   Wendigo
 
   17580166:
     template: Wight_blm
-    at:       [24.008, -40.100, 189.982, 232]
+    region:   c_143
     level:    [30, 34]
     script:   Wight
 
   17580167:
     template: Wight_blm
-    at:       [36.826, -40.100, 188.138, 255]
+    region:   c_143
     level:    [30, 34]
     script:   Wight
 
   17580168:
     template: Banshee_GM
-    at:       [46.631, -40.100, 179.633, 27]
+    region:   c_143
     level:    [31, 34]
     script:   Banshee
 
   17580169:
     template: Banshee_GM
-    at:       [-4.851, -40.100, 190.098, 59]
+    region:   c_146
     level:    [31, 34]
     script:   Banshee
 
   17580170:
     template: Wendigo_war
-    at:       [136.005, -38.506, 199.329, 174]
+    region:   e_131
     level:    [28, 30]
     script:   Wendigo
 
   17580171:
     template: Wendigo_war
-    at:       [160.944, -39.000, 153.909, 13]
+    region:   e_123
     level:    [28, 30]
     script:   Wendigo
 
   17580172:
     template: Bogy
-    at:       [114.254, -39.276, 160.446, 186]
+    region:   e_127
     level:    [27, 29]
 
   17580173:
     template: Bogy
-    at:       [166.118, -39.000, 202.286, 58]
+    region:   e_135
     level:    [27, 29]
 
   17580174:
     template: Sadfly
-    at:       [134.440, -38.205, 192.094, 120]
+    region:   e_139
     level:    [27, 29]
 
   17580175:
     template: Sadfly
-    at:       [120.408, -38.250, 180.495, 87]
+    region:   e_131
     level:    [27, 29]
 
   17580176:
     template: Sadfly
-    at:       [118.679, -38.750, 167.489, 69]
+    region:   e_127
     level:    [27, 29]
 
   17580177:
     template: Sadfly
-    at:       [135.130, -38.500, 159.200, 251]
+    region:   e_127
     level:    [27, 29]
 
   17580178:
     template: Sadfly
-    at:       [157.555, -38.746, 167.792, 197]
+    region:   e_123
     level:    [27, 29]
 
   17580179:
     template: Sadfly
-    at:       [165.557, -38.681, 175.433, 241]
+    region:   e_135
     level:    [27, 29]
 
   17580180:
     template: Sadfly
-    at:       [159.259, -38.500, 185.519, 199]
+    region:   e_135
     level:    [27, 29]
 
   17580181:
     template: Sadfly
-    at:       [158.576, -38.750, 192.399, 131]
+    region:   e_135
     level:    [27, 29]
 
   17580182:
     template: Wight_blm
-    at:       [121.537, -38.500, 173.966, 96]
+    region:   e_127
     level:    [30, 34]
     script:   Wight
 
   17580183:
     template: Wight_blm
-    at:       [156.039, -38.394, 179.444, 231]
+    region:   e_135
     level:    [30, 34]
     script:   Wight
 
   17580184:
     template: Banshee_GM
-    at:       [133.725, -37.483, 181.285, 158]
+    region:   e_139
     level:    [31, 34]
     script:   Banshee
 
   17580185:
     template: Wight_blm
-    at:       [218.879, -39.875, 189.617, 57]
+    region:   e_135
     level:    [30, 34]
     script:   Wight
 
   17580186:
     template: Wight_blm
-    at:       [179.694, -39.875, 113.981, 161]
+    region:   e_119
     level:    [30, 34]
     script:   Wight
 
   17580187:
     template: Ore_Eater
-    at:       [163.263, -39.000, 78.690, 51]
+    region:   e_119
     level:    [23, 26]
 
   17580188:
     template: Ore_Eater
-    at:       [154.399, -38.844, 71.337, 96]
+    region:   e_115
     level:    [23, 26]
 
   17580189:
     template: Ore_Eater
-    at:       [161.941, -38.417, 63.185, 32]
+    region:   e_111
     level:    [23, 26]
 
   17580190:
     template: Ore_Eater
-    at:       [164.935, -38.589, 56.744, 45]
+    region:   e_111
     level:    [23, 26]
 
   17580191:
     template: Ore_Eater
-    at:       [157.322, -38.785, 44.476, 48]
+    region:   e_107
     level:    [23, 26]
 
   17580192:
     template: Ore_Eater
-    at:       [162.579, -39.000, 37.941, 68]
+    region:   e_111
     level:    [23, 26]
 
   17580193:
     template: Jelly_KT_GM
-    at:       [161.924, -38.500, 52.432, 17]
+    region:   e_111
     level:    [27, 29]
     script:   Jelly
 
   17580194:
     template: Jelly_KT_GM
-    at:       [155.652, -38.684, 49.626, 117]
+    region:   e_111
     level:    [27, 29]
     script:   Jelly
 
   17580195:
     template: Mauthe_Doog_GM
-    at:       [173.000, -39.728, 31.028, 144]
+    region:   e_111
     level:    [28, 31]
     script:   Mauthe_Doog
 
   17580196:
     template: Mauthe_Doog_GM
-    at:       [177.733, -40.153, 55.467, 231]
+    region:   e_111
     level:    [28, 31]
     script:   Mauthe_Doog

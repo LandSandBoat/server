@@ -23,7 +23,7 @@ templates:
         - chance: always
           one_of:
             andvaranauts: 95
-            ridill: 5
+            ridill:        5
         - chance: always
           one_of:
             neptunal_abjuration_head:  31

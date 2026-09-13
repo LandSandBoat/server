@@ -20,8 +20,8 @@ templates:
           type:  standard
           model: 272
         entity_flags:  129
-        animation_sub: 8
-        hitbox:        8
+        animation_sub:   8
+        hitbox:          8
 
   Tunnel_Worm_Launch:
     id:            4053
@@ -39,7 +39,7 @@ templates:
           type:  standard
           model: 424
         entity_flags: 129
-        hitbox:       11
+        hitbox:        11
 
   Huge_Hornet:
     attributes:
@@ -48,9 +48,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: insect_wing
+          item:   insect_wing
         - chance: very_rare
-          item: pot_of_honey
+          item:   pot_of_honey
       despoil:
         beehive_chip:  0
         giant_stinger: 0
@@ -63,13 +63,13 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: slice_of_giant_sheep_meat
+          item:   slice_of_giant_sheep_meat
         - chance: rare
-          item: sheepskin
+          item:   sheepskin
         - chance: super_rare
-          item: vial_of_fresh_blood
+          item:   vial_of_fresh_blood
         - chance: super_rare
-          item: sheep_tooth
+          item:   sheep_tooth
       steal: clump_of_sheep_wool
       despoil:
         sheep_tooth: 50
@@ -81,9 +81,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: chunk_of_rock_salt
+          item:   chunk_of_rock_salt
         - chance: super_rare
-          item: slice_of_land_crab_meat
+          item:   slice_of_land_crab_meat
       steal: chunk_of_rock_salt
       despoil:
         slice_of_land_crab_meat: 0
@@ -96,7 +96,7 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: lizard_tail
+          item:   lizard_tail
       steal: lizard_tail
       despoil:
         lizard_skin: 0
@@ -110,13 +110,13 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: flint_stone
+          item:   flint_stone
         - chance: rare
-          item: chunk_of_copper_ore
+          item:   chunk_of_copper_ore
         - chance: very_rare
-          item: chunk_of_zinc_ore
+          item:   chunk_of_zinc_ore
         - chance: super_rare
-          item: chunk_of_silver_ore
+          item:   chunk_of_silver_ore
       steal: pebble
       despoil:
         chunk_of_copper_ore: 0
@@ -131,7 +131,7 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: flint_stone
+          item:   flint_stone
       steal: pebble
       despoil:
         chunk_of_copper_ore: 0
@@ -146,9 +146,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: bird_feather
+          item:   bird_feather
         - chance: rare
-          item: bird_egg
+          item:   bird_egg
       steal: bird_feather
       despoil:
         bird_feather: 0
@@ -158,900 +158,900 @@ spawns:
 
   17212266:
     template: Huge_Hornet_Launch
-    at:       [-660.151, 42.272, 379.111, 127]
+    region:   w_433
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212267:
     template: Huge_Hornet_Launch
-    at:       [310.277, -30.478, 1065.680, 105]
+    region:   n_345
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212268:
     template: Huge_Hornet_Launch
-    at:       [-32.037, -0.929, 607.363, 127]
+    region:   c_295
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212269:
     template: Huge_Hornet_Launch
-    at:       [380.248, -20.406, 641.414, 11]
+    region:   e_58
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212270:
     template: Huge_Hornet_Launch
-    at:       [-328.114, 42.717, 449.949, 72]
+    region:   w_418
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212271:
     template: Huge_Hornet_Launch
-    at:       [-170.329, 2.521, 258.660, 31]
+    region:   s_266
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212272:
     template: Huge_Hornet_Launch
-    at:       [524.141, -1.036, 461.284, 121]
+    region:   e_22
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212273:
     template: Huge_Hornet_Launch
-    at:       [-474.521, 38.281, 342.159, 127]
+    region:   w_406
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212274:
     template: Huge_Hornet_Launch
-    at:       [175.315, -20.569, 582.728, 127]
+    region:   c_89
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212275:
     template: Huge_Hornet_Launch
-    at:       [352.231, -40.463, 449.782, 37]
+    region:   c_139
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212276:
     template: Huge_Hornet_Launch
-    at:       [66.444, -0.979, 284.167, 74]
+    region:   c_207
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212277:
     template: Huge_Hornet_Launch
-    at:       [228.582, 2.577, 258.864, 37]
+    region:   s_212
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212278:
     template: Huge_Hornet_Launch
-    at:       [290.544, -2.638, 840.552, 76]
+    region:   n_323
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212279:
     template: Huge_Hornet_Launch
-    at:       [446.202, -0.842, 362.610, 52]
+    region:   e_38
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212280:
     template: Huge_Hornet_Launch
-    at:       [276.456, -20.757, 712.285, 127]
+    region:   c_73
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212281:
     template: Huge_Hornet_Launch
-    at:       [-47.607, 0.091, 276.050, 127]
+    region:   c_251
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212282:
     template: Huge_Hornet_Launch
-    at:       [308.116, -60.352, 550.771, 27]
+    region:   c_187
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212283:
     template: Huge_Hornet_Launch
-    at:       [-472.150, 40.193, 142.478, 127]
+    region:   sw_379
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212284:
     template: Huge_Hornet_Launch
-    at:       [249.912, -19.523, 982.728, 127]
+    region:   n_345
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212285:
     template: Huge_Hornet_Launch
-    at:       [437.497, -1.061, 558.592, 25]
+    region:   e_334
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212286:
     template: Huge_Hornet_Launch
-    at:       [50.108, -0.042, 556.192, 13]
+    region:   c_295
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212287:
     template: Huge_Hornet_Launch
-    at:       [654.290, -4.362, 460.722, 127]
+    region:   e_6
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212288:
     template: Huge_Hornet_Launch
-    at:       [-549.567, 40.003, -15.043, 127]
+    region:   sw_379
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212289:
     template: Huge_Hornet_Launch
-    at:       [-408.493, 38.851, 489.700, 127]
+    region:   w_418
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212290:
     template: Huge_Hornet_Launch
-    at:       [-472.145, 49.293, 45.652, 10]
+    region:   sw_372
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212291:
     template: Huge_Hornet_Launch
-    at:       [113.645, -20.793, 460.213, 127]
+    region:   c_93
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212292:
     template: Huge_Hornet_Launch
-    at:       [439.133, -20.722, 443.996, 5]
+    region:   e_120
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212293:
     template: Huge_Hornet_Launch
-    at:       [-272.108, 39.700, 392.405, 104]
+    region:   w_391
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212294:
     template: Huge_Hornet_Launch
-    at:       [-25.184, 0.784, 118.137, 127]
+    region:   s_228
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212295:
     template: Huge_Hornet_Launch
-    at:       [377.859, 1.615, 333.445, 127]
+    region:   e_38
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212296:
     template: Huge_Hornet_Launch
-    at:       [540.457, -7.681, 611.901, 127]
+    region:   e_329
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212297:
     template: Huge_Hornet_Launch
-    at:       [-252.976, -2.938, 218.517, 127]
+    region:   s_266
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212298:
     template: Huge_Hornet_Launch
-    at:       [-469.713, 39.504, 460.650, 127]
+    region:   w_433
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212299:
     template: Huge_Hornet_Launch
-    at:       [317.031, -0.829, 200.952, 127]
+    region:   s_212
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212300:
     template: Huge_Hornet_Launch
-    at:       [122.405, -20.478, 544.060, 97]
+    region:   c_89
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212301:
     template: Huge_Hornet_Launch
-    at:       [-450.864, 51.437, -26.670, 127]
+    region:   sw_372
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212302:
     template: Huge_Hornet_Launch
-    at:       [-616.327, 38.771, 443.984, 127]
+    region:   w_433
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212303:
     template: Huge_Hornet_Launch
-    at:       [294.288, -40.193, 430.849, 86]
+    region:   c_139
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212304:
     template: Huge_Hornet_Launch
-    at:       [605.192, 1.278, 425.553, 65]
+    region:   e_22
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212305:
     template: Huge_Hornet_Launch
-    at:       [51.357, -0.909, 415.332, 20]
+    region:   c_239
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212306:
     template: Huge_Hornet_Launch
-    at:       [238.064, -20.778, 322.383, 123]
+    region:   c_105
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212307:
     template: Huge_Hornet_Launch
-    at:       [363.973, -40.774, 562.355, 127]
+    region:   c_164
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212308:
     template: Huge_Hornet_Launch
-    at:       [150.107, -0.465, 652.312, 2]
+    region:   c_305
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212309:
     template: Huge_Hornet_Launch
-    at:       [-18.429, 2.334, 488.857, 127]
+    region:   c_288
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212310:
     template: Huge_Hornet_Launch
-    at:       [507.254, -8.200, 681.224, 127]
+    region:   e_329
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212311:
     template: Huge_Hornet_Launch
-    at:       [201.342, -40.532, 508.101, 85]
+    region:   c_139
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212312:
     template: Huge_Hornet_Launch
-    at:       [335.943, -60.319, 507.148, 9]
+    region:   c_187
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212313:
     template: Huge_Hornet_Launch
-    at:       [239.000, -20.000, 640.000, 72]
+    region:   c_73
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212314:
     template: Huge_Hornet_Launch
-    at:       [277.886, -0.645, 236.391, 127]
+    region:   s_212
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212315:
     template: Huge_Hornet_Launch
-    at:       [-138.399, -0.285, 395.959, 2]
+    region:   c_279
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212316:
     template: Huge_Hornet_Launch
-    at:       [104.007, 1.999, 254.672, 127]
+    region:   s_212
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212317:
     template: Huge_Hornet_Launch
-    at:       [211.259, -20.306, 361.402, 127]
+    region:   c_105
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212318:
     template: Huge_Hornet_Launch
-    at:       [13.076, 1.917, 146.693, 16]
+    region:   s_228
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212319:
     template: Huge_Hornet_Launch
-    at:       [-507.241, 40.132, 115.592, 45]
+    region:   sw_379
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212320:
     template: Huge_Hornet_Launch
-    at:       [-467.662, 40.266, 89.362, 70]
+    region:   sw_379
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212321:
     template: Huge_Hornet_Launch
-    at:       [-370.407, 41.048, 460.262, 117]
+    region:   w_418
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212322:
     template: Huge_Hornet_Launch
-    at:       [-130.599, 0.074, 119.179, 127]
+    region:   s_228
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212323:
     template: Huge_Hornet_Launch
-    at:       [-435.400, 48.607, 23.684, 121]
+    region:   sw_372
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212324:
     template: Huge_Hornet_Launch
-    at:       [406.166, -2.337, 301.692, 13]
+    region:   e_38
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212325:
     template: Huge_Hornet_Launch
-    at:       [-154.114, -0.553, 437.674, 127]
+    region:   c_279
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212326:
     template: Huge_Hornet_Launch
-    at:       [203.606, -0.607, 721.541, 86]
+    region:   c_305
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212327:
     template: Huge_Hornet_Launch
-    at:       [349.559, -30.534, 1077.590, 123]
+    region:   n_345
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212328:
     template: Huge_Hornet_Launch
-    at:       [-523.001, 39.369, 318.381, 127]
+    region:   w_406
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212329:
     template: Huge_Hornet_Launch
-    at:       [285.813, -60.784, 518.539, 127]
+    region:   c_196
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212330:
     template: Huge_Hornet_Launch
-    at:       [149.412, -19.895, 429.194, 46]
+    region:   c_105
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212331:
     template: Huge_Hornet_Launch
-    at:       [349.298, -20.214, 663.793, 84]
+    region:   e_58
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212332:
     template: Huge_Hornet_Launch
-    at:       [261.593, -0.540, 293.156, 19]
+    region:   s_212
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212333:
     template: Huge_Hornet_Launch
-    at:       [-380.843, 47.750, -28.829, 127]
+    region:   sw_372
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212334:
     template: Huge_Hornet_Launch
-    at:       [410.946, -0.736, 369.732, 107]
+    region:   e_38
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212335:
     template: Huge_Hornet_Launch
-    at:       [-537.127, 42.265, 17.690, 127]
+    region:   sw_379
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212336:
     template: Huge_Hornet_Launch
-    at:       [-309.436, 40.449, 242.257, 127]
+    region:   w_391
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212337:
     template: Huge_Hornet_Launch
-    at:       [348.555, 2.170, 258.482, 95]
+    region:   e_38
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212338:
     template: Huge_Hornet_Launch
-    at:       [676.608, -0.637, 437.112, 87]
+    region:   e_6
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212339:
     template: Huge_Hornet_Launch
-    at:       [248.730, -19.929, 352.612, 127]
+    region:   c_105
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212340:
     template: Huge_Hornet_Launch
-    at:       [-31.595, -0.135, 517.629, 118]
+    region:   c_295
     level:    [1, 1]
     script:   Huge_Hornet
 
   17212341:
     template: Tunnel_Worm_Launch
-    at:       [760.369, -1.109, 440.386, 105]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212342:
     template: Tunnel_Worm_Launch
-    at:       [50.015, -0.667, 120.202, 127]
+    region:   s_228
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212343:
     template: Tunnel_Worm_Launch
-    at:       [-394.567, 47.032, 4.769, 127]
+    region:   sw_372
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212344:
     template: Tunnel_Worm_Launch
-    at:       [396.369, -0.696, 223.970, 127]
+    region:   e_38
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212345:
     template: Tunnel_Worm_Launch
-    at:       [171.894, -20.730, 398.063, 127]
+    region:   c_105
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212346:
     template: Tunnel_Worm_Launch
-    at:       [170.252, 0.972, 761.254, 127]
+    region:   c_305
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212347:
     template: Tunnel_Worm_Launch
-    at:       [561.892, -11.574, 682.501, 127]
+    region:   e_334
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212348:
     template: Tunnel_Worm_Launch
-    at:       [-6.669, 0.058, 423.016, 100]
+    region:   c_239
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212349:
     template: Tunnel_Worm_Launch
-    at:       [-555.020, 40.116, 79.087, 127]
+    region:   sw_379
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212350:
     template: Tunnel_Worm_Launch
-    at:       [-322.589, 40.511, 210.612, 79]
+    region:   w_391
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212351:
     template: Tunnel_Worm_Launch
-    at:       [-99.142, 1.975, 82.611, 127]
+    region:   s_228
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212352:
     template: Tunnel_Worm_Launch
-    at:       [-185.608, -1.038, 409.255, 34]
+    region:   c_279
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212353:
     template: Tunnel_Worm_Launch
-    at:       [642.443, -0.039, 366.534, 64]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212354:
     template: Tunnel_Worm_Launch
-    at:       [-553.150, 39.234, 442.016, 250]
+    region:   w_433
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212355:
     template: Tunnel_Worm_Launch
-    at:       [-610.187, 39.390, 273.496, 3]
+    region:   w_406
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212356:
     template: Tunnel_Worm_Launch
-    at:       [278.890, -20.545, 363.406, 127]
+    region:   e_130
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212357:
     template: Tunnel_Worm_Launch
-    at:       [-315.447, 39.724, 317.924, 25]
+    region:   w_391
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212358:
     template: Tunnel_Worm_Launch
-    at:       [94.521, 2.365, 648.439, 124]
+    region:   c_305
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212359:
     template: Tunnel_Worm_Launch
-    at:       [-72.028, -0.688, 500.205, 97]
+    region:   c_295
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212360:
     template: Tunnel_Worm_Launch
-    at:       [237.753, -40.500, 469.738, 127]
+    region:   c_139
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212361:
     template: Tunnel_Worm_Launch
-    at:       [542.093, -1.303, 352.770, 109]
+    region:   e_22
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212362:
     template: Tunnel_Worm_Launch
-    at:       [-87.629, -20.981, 176.370, 103]
+    region:   s_277
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212363:
     template: Tunnel_Worm_Launch
-    at:       [-269.649, 39.878, 521.024, 127]
+    region:   w_418
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212364:
     template: Tunnel_Worm_Launch
-    at:       [316.644, 0.854, 266.637, 127]
+    region:   e_38
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212365:
     template: Tunnel_Worm_Launch
-    at:       [-167.021, -0.901, 142.762, 85]
+    region:   s_266
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212366:
     template: Tunnel_Worm_Launch
-    at:       [197.696, -20.688, 679.911, 127]
+    region:   c_73
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212367:
     template: Tunnel_Worm_Launch
-    at:       [345.004, -30.776, 991.871, 127]
+    region:   n_345
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212368:
     template: Tunnel_Worm_Launch
-    at:       [288.447, -40.842, 634.161, 82]
+    region:   c_164
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212369:
     template: Tunnel_Worm_Launch
-    at:       [717.268, -1.246, 360.553, 62]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212370:
     template: Tunnel_Worm_Launch
-    at:       [-407.882, 39.814, 374.188, 104]
+    region:   w_406
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212371:
     template: Tunnel_Worm_Launch
-    at:       [239.992, -0.493, 788.037, 99]
+    region:   n_323
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212372:
     template: Tunnel_Worm_Launch
-    at:       [588.706, -2.262, 484.678, 16]
+    region:   e_22
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212373:
     template: Tunnel_Worm_Launch
-    at:       [133.203, 2.019, 294.903, 127]
+    region:   s_212
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212374:
     template: Tunnel_Worm_Launch
-    at:       [241.917, -40.487, 587.815, 36]
+    region:   c_164
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212375:
     template: Tunnel_Worm_Launch
-    at:       [-69.251, 2.413, 337.290, 127]
+    region:   c_251
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212376:
     template: Tunnel_Worm_Launch
-    at:       [-563.778, 39.553, 317.016, 60]
+    region:   w_406
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212377:
     template: Tunnel_Worm_Launch
-    at:       [336.660, -0.344, 722.842, 127]
+    region:   n_323
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212378:
     template: Tunnel_Worm_Launch
-    at:       [-117.328, -0.716, 288.055, 8]
+    region:   c_251
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212379:
     template: Tunnel_Worm_Launch
-    at:       [233.074, -1.709, 853.486, 127]
+    region:   n_323
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212380:
     template: Tunnel_Worm_Launch
-    at:       [498.515, 0.222, 409.013, 116]
+    region:   e_22
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212381:
     template: Tunnel_Worm_Launch
-    at:       [717.037, -0.503, 478.574, 117]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212382:
     template: Tunnel_Worm_Launch
-    at:       [394.092, -20.384, 411.639, 127]
+    region:   e_120
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212383:
     template: Tunnel_Worm_Launch
-    at:       [-196.763, -0.488, 306.674, 127]
+    region:   s_266
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212384:
     template: Tunnel_Worm_Launch
-    at:       [-214.908, -0.620, 363.117, 9]
+    region:   c_279
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212385:
     template: Tunnel_Worm_Launch
-    at:       [34.843, -0.248, 505.412, 127]
+    region:   c_279
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212386:
     template: Tunnel_Worm_Launch
-    at:       [86.374, -0.457, 594.108, 127]
+    region:   c_295
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212387:
     template: Tunnel_Worm_Launch
-    at:       [548.776, 2.250, 412.706, 127]
+    region:   e_22
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212388:
     template: Tunnel_Worm_Launch
-    at:       [312.000, -20.000, 678.000, 127]
+    region:   c_73
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212389:
     template: Tunnel_Worm_Launch
-    at:       [368.323, -2.044, 183.731, 83]
+    region:   e_38
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212390:
     template: Tunnel_Worm_Launch
-    at:       [679.805, -0.561, 396.573, 18]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212391:
     template: Tunnel_Worm_Launch
-    at:       [-594.757, 40.024, 401.742, 95]
+    region:   w_433
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212392:
     template: Tunnel_Worm_Launch
-    at:       [403.252, -20.672, 601.387, 74]
+    region:   e_58
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212393:
     template: Tunnel_Worm_Launch
-    at:       [-281.025, 39.598, 289.938, 127]
+    region:   w_391
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212394:
     template: Tunnel_Worm_Launch
-    at:       [197.928, -20.393, 620.463, 127]
+    region:   c_73
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212395:
     template: Tunnel_Worm_Launch
-    at:       [397.499, -20.911, 456.764, 127]
+    region:   e_120
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212396:
     template: Tunnel_Worm_Launch
-    at:       [197.369, -40.612, 453.688, 5]
+    region:   c_139
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212397:
     template: Tunnel_Worm_Launch
-    at:       [158.149, -40.746, 520.429, 127]
+    region:   c_139
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212398:
     template: Tunnel_Worm_Launch
-    at:       [244.852, -20.460, 683.652, 127]
+    region:   c_73
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212399:
     template: Tunnel_Worm_Launch
-    at:       [357.973, -30.557, 1032.320, 61]
+    region:   n_345
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212400:
     template: Tunnel_Worm_Launch
-    at:       [-534.755, 45.451, 404.160, 101]
+    region:   w_433
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212401:
     template: Tunnel_Worm_Launch
-    at:       [-1.500, -0.786, 83.630, 127]
+    region:   s_228
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212402:
     template: Tunnel_Worm_Launch
-    at:       [203.635, -40.536, 553.291, 4]
+    region:   c_164
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212403:
     template: Tunnel_Worm_Launch
-    at:       [289.709, -0.297, 750.252, 127]
+    region:   n_323
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212404:
     template: Tunnel_Worm_Launch
-    at:       [-204.365, -0.221, 239.463, 121]
+    region:   s_266
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212405:
     template: Tunnel_Worm_Launch
-    at:       [441.918, -0.578, 596.643, 127]
+    region:   e_334
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212406:
     template: Tunnel_Worm_Launch
-    at:       [-10.685, -0.680, 282.842, 127]
+    region:   c_251
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212407:
     template: Tunnel_Worm_Launch
-    at:       [306.698, -20.118, 387.934, 127]
+    region:   e_130
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212408:
     template: Tunnel_Worm_Launch
-    at:       [-61.402, -0.433, 119.843, 110]
+    region:   s_228
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212409:
     template: Tunnel_Worm_Launch
-    at:       [-177.332, 2.529, 109.169, 127]
+    region:   s_266
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212410:
     template: Tunnel_Worm_Launch
-    at:       [515.188, -1.607, 495.021, 127]
+    region:   e_30
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212411:
     template: Tunnel_Worm_Launch
-    at:       [556.943, -0.553, 457.778, 127]
+    region:   e_22
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212412:
     template: Tunnel_Worm_Launch
-    at:       [266.694, -0.114, 806.914, 127]
+    region:   n_323
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212413:
     template: Tunnel_Worm_Launch
-    at:       [635.418, -0.697, 413.852, 97]
+    region:   e_6
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212414:
     template: Tunnel_Worm_Launch
-    at:       [-621.717, 40.199, 303.203, 8]
+    region:   w_406
     level:    [1, 1]
     script:   Tunnel_Worm
 
   17212415:
     template: Tunnel_Worm_Launch
-    at:       [302.809, -41.405, 606.049, 127]
+    region:   c_164
     level:    [1, 1]
     script:   Tunnel_Worm

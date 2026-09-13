@@ -34,207 +34,207 @@ spawns:
 
   16998602:
     template: Nipper
-    at:       [341.541, -4.229, 377.891, 215]
+    region:   ne_280
     level:    [72, 73]
 
   16998603:
     template: Nipper
-    at:       [343.851, -3.491, 360.657, 11]
+    region:   ne_280
     level:    [72, 73]
 
   16998604:
     template: Soulflayer
-    at:       [336.840, -6.952, 369.697, 19]
+    region:   ne_280
     level:    [82, 83]
 
   16998605:
     template: Nipper
-    at:       [330.118, -3.553, 295.282, 39]
+    region:   ne_276
     level:    [72, 73]
 
   16998606:
     template: Soulflayer
-    at:       [338.124, -5.560, 307.578, 36]
+    region:   ne_276
     level:    [82, 83]
 
   16998607:
     template: Nipper
-    at:       [273.326, -3.486, 335.285, 104]
+    region:   ne_273
     level:    [72, 73]
 
   16998608:
     template: Nipper
-    at:       [258.887, -3.873, 333.983, 87]
+    region:   ne_273
     level:    [72, 73]
 
   16998609:
     template: Soulflayer
-    at:       [282.690, -6.732, 343.383, 98]
+    region:   ne_273
     level:    [82, 83]
 
   16998610:
     template: Phasma
-    at:       [225.780, -4.300, 182.071, 65]
+    region:   e_215
     level:    [73, 74]
 
   16998611:
     template: Heraldic_Imp
-    at:       [261.862, -7.731, 138.536, 148]
+    region:   e_206
     level:    [72, 74]
 
   16998612:
     template: Heraldic_Imp
-    at:       [260.912, -7.634, 127.885, 79]
+    region:   e_206
     level:    [72, 74]
 
   16998613:
     template: Arrapago_Apkallu
-    at:       [269.122, -3.171, 190.996, 215]
+    region:   e_209
     level:    [70, 72]
 
   16998614:
     template: Arrapago_Apkallu
-    at:       [267.137, -3.055, 209.110, 199]
+    region:   e_211
     level:    [70, 72]
 
   16998615:
     template: Arrapago_Apkallu
-    at:       [254.745, -7.357, 203.188, 148]
+    region:   e_211
     level:    [70, 72]
 
   16998616:
     template: Arrapago_Apkallu
-    at:       [233.501, -2.903, 227.336, 214]
+    region:   ne_213
     level:    [70, 72]
 
   16998617:
     template: Arrapago_Apkallu
-    at:       [220.970, -4.426, 228.608, 155]
+    region:   ne_213
     level:    [70, 72]
 
   16998618:
     template: Arrapago_Apkallu
-    at:       [220.766, -4.529, 236.167, 189]
+    region:   ne_213
     level:    [70, 72]
 
   16998619:
     template: Arrapago_Apkallu
-    at:       [230.271, -3.380, 246.833, 6]
+    region:   ne_213
     level:    [70, 72]
 
   16998620:
     template: Reserve_Draugar_AR_drg
-    at:       [303.769, -3.861, 151.298, 25]
+    region:   e_64
     level:    [72, 73]
     script:   Reserve_Draugar
 
   16998621:
     template: Reserve_Draugar_AR_drg
-    at:       [314.258, -3.327, 142.851, 17]
+    region:   e_64
     level:    [72, 73]
     script:   Reserve_Draugar
 
   16998622:
     template: Reserve_Draugar_AR_drg
-    at:       [304.991, -4.820, 136.124, 90]
+    region:   e_61
     level:    [72, 73]
     script:   Reserve_Draugar
 
   16998623:
     template: Purgatory_Bat_Arrapago
-    at:       [-596.717, -9.498, -82.155, 138]
+    region:   w_218
     level:    [72, 73]
     script:   Purgatory_Bat
 
   16998624:
     template: Purgatory_Bat_Arrapago
-    at:       [-609.796, -9.771, -73.031, 158]
+    region:   w_218
     level:    [72, 73]
     script:   Purgatory_Bat
 
   16998625:
     template: Purgatory_Bat_Arrapago
-    at:       [-594.194, -9.656, -66.930, 16]
+    region:   w_218
     level:    [72, 73]
     script:   Purgatory_Bat
 
   16998626:
     template: Purgatory_Bat_Arrapago
-    at:       [-582.361, -8.254, -23.143, 166]
+    region:   w_221
     level:    [72, 73]
     script:   Purgatory_Bat
 
   16998627:
     template: Purgatory_Bat_Arrapago
-    at:       [-572.823, -7.922, -14.600, 218]
+    region:   w_221
     level:    [72, 73]
     script:   Purgatory_Bat
 
   16998628:
     template: Fallen_Imperial_Wizard
-    at:       [-532.435, -6.085, -18.139, 205]
+    region:   w_224
     level:    [72, 74]
     script:   Fallen_Imperial
 
   16998629:
     template: Fallen_Volunteer
-    at:       [-536.900, -4.060, -6.122, 213]
+    region:   w_224
     level:    [72, 74]
 
   16998630:
     template: Fallen_Volunteer
-    at:       [-520.112, -3.755, -16.717, 246]
+    region:   w_224
     level:    [72, 74]
 
   16998631:
     template: Fallen_Imperial_Wizard
-    at:       [-548.692, -2.578, 68.063, 203]
+    region:   w_230
     level:    [72, 74]
     script:   Fallen_Imperial
 
   16998632:
     template: Fallen_Imperial_Wizard
-    at:       [-549.204, -6.146, 56.608, 190]
+    region:   w_227
     level:    [72, 74]
     script:   Fallen_Imperial
 
   16998633:
     template: Fallen_Volunteer
-    at:       [-561.727, -3.058, 64.914, 137]
+    region:   w_230
     level:    [72, 74]
 
   16998634:
     template: Jnun_AR
-    at:       [-346.812, -4.864, 219.216, 121]
+    region:   nw_352
     level:    [77, 80]
     script:   Jnun
 
   16998635:
     template: Jnun_AR
-    at:       [-305.468, -4.004, 205.326, 59]
+    region:   region_197
     level:    [77, 80]
     script:   Jnun
 
   16998669:
     template: Jnun_AR
-    at:       [-333.501, -2.923, 268.169, 99]
+    region:   nw_313
     level:    [77, 80]
     script:   Jnun
 
   16998670:
     template: Jnun_AR
-    at:       [-347.587, -3.962, 266.065, 195]
+    region:   nw_313
     level:    [77, 80]
     script:   Jnun
 
   16998671:
     template: Jnun_AR
-    at:       [-371.601, -2.703, 292.464, 121]
+    region:   nw_315
     level:    [77, 80]
     script:   Jnun
 
   16998672:
     template: Jnun_AR
-    at:       [-378.125, -4.222, 297.671, 33]
+    region:   nw_315
     level:    [77, 80]
     script:   Jnun

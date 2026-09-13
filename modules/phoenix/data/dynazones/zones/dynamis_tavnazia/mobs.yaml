@@ -52,8 +52,8 @@ templates:
         look:
           type:  standard
           model: 1348
-        entity_flags: 3
-        model_size:   2
+        entity_flags:  3
+        model_size:    2
         hitbox:       13
       behaviors:
         flags:      [aggro_ambush]
@@ -91,9 +91,9 @@ templates:
           type:  standard
           model: 1145
         entity_flags: 157
-        name_prefix:  32
-        model_size:   2
-        hitbox:       13
+        name_prefix:   32
+        model_size:     2
+        hitbox:        13
       behaviors:
         aggressive:     true
         links:          true
