@@ -142,522 +142,522 @@ spawns:
 
   17567835:
     template: Goblin_Gambler
-    at:       [-220.246, 28.500, -82.308, 189]
+    region:   sw_119
     level:    [22, 26]
 
   17567836:
     template: Goblin_Gambler
-    at:       [-172.579, 32.510, 30.926, 206]
+    region:   w_91
     level:    [22, 26]
 
   17567837:
     template: Goblin_Leecher
-    at:       [-203.495, 32.000, 36.968, 76]
+    region:   w_91
     level:    [22, 26]
 
   17567838:
     template: Goblin_Mugger
-    at:       [-200.277, 32.500, 8.528, 67]
+    region:   sw_95
     level:    [22, 26]
 
   17567839:
     template: Will-o-the-Wisp
-    at:       [-198.530, 32.500, -7.986, 26]
+    region:   sw_95
     level:    [23, 25]
 
   17567840:
     template: Dung_Beetle
-    at:       [-186.126, 32.492, -11.017, 147]
+    region:   sw_95
     level:    [23, 26]
 
   17567841:
     template: Dung_Beetle
-    at:       [-205.900, 32.500, 0.624, 94]
+    region:   sw_95
     level:    [23, 26]
 
   17567842:
     template: Dung_Beetle
-    at:       [-206.696, 32.002, 20.465, 66]
+    region:   w_91
     level:    [23, 26]
 
   17567843:
     template: Dung_Beetle
-    at:       [-184.209, 32.973, 42.030, 163]
+    region:   w_91
     level:    [23, 26]
 
   17567844:
     template: Dung_Beetle
-    at:       [-180.348, 32.614, 13.853, 201]
+    region:   sw_95
     level:    [23, 26]
 
   17567845:
     template: Goblin_Gambler
-    at:       [-149.204, 32.935, -5.213, 237]
+    region:   sw_103
     level:    [22, 26]
 
   17567846:
     template: Goblin_Leecher
-    at:       [-133.859, 32.938, 1.330, 7]
+    region:   sw_103
     level:    [22, 26]
 
   17567847:
     template: Goblin_Leecher
-    at:       [-117.450, 32.109, -6.095, 246]
+    region:   sw_103
     level:    [22, 26]
 
   17567848:
     template: Goblin_Mugger
-    at:       [-110.567, 31.841, 26.002, 190]
+    region:   w_99
     level:    [22, 26]
 
   17567849:
     template: Dung_Beetle
-    at:       [-131.108, 32.500, 38.344, 155]
+    region:   w_99
     level:    [23, 26]
 
   17567850:
     template: Dung_Beetle
-    at:       [-120.912, 32.500, 29.913, 147]
+    region:   w_99
     level:    [23, 26]
 
   17567851:
     template: Dung_Beetle
-    at:       [-116.823, 32.500, 12.690, 164]
+    region:   sw_103
     level:    [23, 26]
 
   17567852:
     template: Dung_Beetle
-    at:       [-112.836, 32.311, 3.111, 199]
+    region:   sw_103
     level:    [23, 26]
 
   17567853:
     template: Dung_Beetle
-    at:       [-143.451, 33.008, 2.943, 255]
+    region:   sw_103
     level:    [23, 26]
 
   17567854:
     template: Goblin_Gambler
-    at:       [-120.766, 28.000, -75.858, 208]
+    region:   sw_115
     level:    [22, 26]
 
   17567855:
     template: Goblin_Gambler
-    at:       [-118.776, 28.614, -52.560, 163]
+    region:   sw_107
     level:    [22, 26]
 
   17567856:
     template: Goblin_Leecher
-    at:       [-133.560, 28.861, -37.886, 164]
+    region:   sw_107
     level:    [22, 26]
 
   17567857:
     template: Goblin_Mugger
-    at:       [-145.758, 29.000, -41.941, 34]
+    region:   sw_107
     level:    [22, 26]
 
   17567858:
     template: Jelly_MS_OC
-    at:       [-146.342, 28.698, -76.956, 237]
+    region:   sw_111
     level:    [26, 28]
     script:   Jelly
 
   17567859:
     template: Stroper
-    at:       [-162.653, 28.139, -45.227, 1]
+    region:   sw_107
     level:    [31, 34]
 
   17567860:
     template: Stroper_Chyme
-    at:       [-121.214, 28.000, -43.998, 35]
+    region:   sw_107
     level:    [33, 35]
 
   17567869:
     template: Stink_Bats
-    at:       [-13.457, 33.178, 172.280, 84]
+    region:   c_135
     level:    [15, 18]
 
   17567870:
     template: Stink_Bats
-    at:       [-9.179, 32.292, 149.325, 41]
+    region:   c_135
     level:    [15, 18]
 
   17567871:
     template: Hognosed_Bat
-    at:       [-33.828, 32.556, 169.122, 180]
+    region:   c_135
     level:    [17, 20]
 
   17567872:
     template: Stalking_Sapling_OC
-    at:       [-63.388, 33.016, 155.318, 106]
+    region:   c_130
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567873:
     template: Stalking_Sapling_OC
-    at:       [-71.500, 32.339, 167.024, 127]
+    region:   c_125
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567874:
     template: Stalking_Sapling_OC
-    at:       [-84.076, 32.470, 157.316, 70]
+    region:   c_125
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567875:
     template: Goblin_Gambler
-    at:       [-49.227, 32.584, 163.537, 130]
+    region:   c_130
     level:    [22, 26]
 
   17567876:
     template: Goblin_Gambler
-    at:       [-32.679, 32.304, 160.003, 153]
+    region:   c_135
     level:    [22, 26]
 
   17567877:
     template: Goblin_Leecher
-    at:       [-12.561, 32.840, 156.248, 63]
+    region:   c_135
     level:    [22, 26]
 
   17567879:
     template: Stink_Bats
-    at:       [-2.435, 32.500, 190.108, 54]
+    region:   c_145
     level:    [15, 18]
 
   17567880:
     template: Stink_Bats
-    at:       [-2.054, 32.501, 172.171, 57]
+    region:   c_140
     level:    [15, 18]
 
   17567881:
     template: Hognosed_Bat
-    at:       [-5.038, 32.136, 156.258, 41]
+    region:   c_140
     level:    [17, 20]
 
   17567882:
     template: Stalking_Sapling_OC
-    at:       [4.875, 32.348, 162.905, 205]
+    region:   c_140
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567883:
     template: Stalking_Sapling_OC
-    at:       [8.321, 31.821, 177.141, 207]
+    region:   c_140
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567884:
     template: Stalking_Sapling_OC
-    at:       [4.129, 32.442, 184.418, 173]
+    region:   c_145
     level:    [18, 21]
     script:   Stalking_Sapling
 
   17567885:
     template: Goblin_Leecher
-    at:       [1.383, 32.000, 194.752, 181]
+    region:   c_145
     level:    [22, 26]
 
   17567886:
     template: Goblin_Leecher
-    at:       [8.630, 32.500, 200.060, 221]
+    region:   c_145
     level:    [22, 26]
 
   17567887:
     template: Goblin_Mugger
-    at:       [2.276, 32.500, 209.494, 165]
+    region:   c_145
     level:    [22, 26]
 
   17567889:
     template: Poison_Leech_OC_2
-    at:       [-78.202, 32.872, 205.781, 109]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567890:
     template: Poison_Leech_OC_2
-    at:       [-89.519, 31.982, 206.266, 138]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567891:
     template: Poison_Leech_OC_2
-    at:       [-88.680, 32.086, 192.661, 72]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567892:
     template: Poison_Leech_OC_2
-    at:       [-77.656, 31.944, 188.550, 26]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567893:
     template: Poison_Leech_OC_2
-    at:       [-77.483, 32.101, 199.148, 197]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567894:
     template: Poison_Leech_OC_2
-    at:       [-73.392, 32.575, 206.504, 18]
+    region:   c_153
     level:    [25, 27]
     script:   Poison_Leech
 
   17567895:
     template: Stink_Bats
-    at:       [-44.518, 32.500, 218.232, 85]
+    region:   c_151
     level:    [15, 18]
     script:   null
 
   17567896:
     template: Hognosed_Bat
-    at:       [-35.627, 32.459, 221.799, 251]
+    region:   c_151
     level:    [17, 20]
     script:   null
 
   17567897:
     template: Jelly_MS_OC
-    at:       [-217.369, 28.500, -129.887, 29]
+    region:   sw_119
     level:    [26, 28]
     script:   Jelly
 
   17567898:
     template: Jelly_MS_OC
-    at:       [-207.766, 28.500, -137.337, 26]
+    region:   sw_119
     level:    [26, 28]
     script:   Jelly
 
   17567899:
     template: Jelly_MS_OC
-    at:       [-188.809, 28.447, -140.583, 131]
+    region:   sw_119
     level:    [26, 28]
     script:   Jelly
 
   17567900:
     template: Jelly_MS_OC
-    at:       [-220.924, 28.448, -105.012, 212]
+    region:   sw_119
     level:    [26, 28]
     script:   Jelly
 
   17567901:
     template: Agar_Agar
-    at:       [-219.257, 28.274, -96.741, 245]
+    region:   sw_119
     level:    [64, 66]
 
   17567906:
     template: Goblin_Gambler
-    at:       [38.757, 32.000, 37.294, 237]
+    region:   e_170
     level:    [22, 26]
 
   17567907:
     template: Goblin_Leecher
-    at:       [40.924, 33.000, 24.623, 211]
+    region:   e_170
     level:    [22, 26]
 
   17567908:
     template: Goblin_Mugger
-    at:       [33.305, 32.146, -1.315, 103]
+    region:   se_174
     level:    [22, 26]
 
   17567909:
     template: Goblin_Mugger
-    at:       [11.814, 32.500, 0.138, 52]
+    region:   se_174
     level:    [22, 26]
 
   17567910:
     template: Vorpal_Bunny
-    at:       [10.529, 33.016, -14.579, 195]
+    region:   se_174
     level:    [23, 26]
 
   17567911:
     template: Vorpal_Bunny
-    at:       [20.172, 32.986, 41.780, 100]
+    region:   e_170
     level:    [23, 26]
 
   17567912:
     template: Vorpal_Bunny
-    at:       [24.241, 33.063, 19.873, 162]
+    region:   e_170
     level:    [23, 26]
 
   17567913:
     template: Vorpal_Bunny
-    at:       [30.301, 32.264, 10.323, 202]
+    region:   se_174
     level:    [23, 26]
 
   17567914:
     template: Vorpal_Bunny
-    at:       [44.051, 32.412, 7.926, 70]
+    region:   se_174
     level:    [23, 26]
 
   17567915:
     template: Goblin_Gambler
-    at:       [-38.528, 32.174, 42.799, 48]
+    region:   c_162
     level:    [22, 26]
 
   17567916:
     template: Goblin_Leecher
-    at:       [-45.261, 32.288, 17.146, 28]
+    region:   c_162
     level:    [22, 26]
 
   17567917:
     template: Goblin_Leecher
-    at:       [-19.921, 33.000, -1.864, 225]
+    region:   s_166
     level:    [22, 26]
 
   17567918:
     template: Goblin_Mugger
-    at:       [-7.858, 32.000, 23.480, 157]
+    region:   c_162
     level:    [22, 26]
 
   17567919:
     template: Will-o-the-Wisp
-    at:       [-23.510, 33.000, 39.897, 151]
+    region:   c_162
     level:    [23, 25]
 
   17567920:
     template: Vorpal_Bunny
-    at:       [-13.983, 32.389, 35.706, 156]
+    region:   c_162
     level:    [23, 26]
 
   17567921:
     template: Vorpal_Bunny
-    at:       [-13.465, 32.000, 6.886, 231]
+    region:   sw_107
     level:    [23, 26]
 
   17567922:
     template: Vorpal_Bunny
-    at:       [-32.342, 32.290, -0.303, 32]
+    region:   s_166
     level:    [23, 26]
 
   17567923:
     template: Vorpal_Bunny
-    at:       [-36.861, 32.873, 15.313, 8]
+    region:   c_162
     level:    [23, 26]
 
   17567924:
     template: Vorpal_Bunny
-    at:       [-42.731, 32.500, 31.667, 28]
+    region:   c_162
     level:    [23, 26]
 
   17567925:
     template: Seeker_Bats_MoS_Ord
-    at:       [-0.210, 28.000, -44.504, 169]
+    region:   s_186
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567926:
     template: Seeker_Bats_MoS_Ord
-    at:       [-13.403, 28.779, -42.132, 112]
+    region:   s_178
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567927:
     template: Seeker_Bats_MoS_Ord
-    at:       [-30.360, 28.000, -48.118, 34]
+    region:   s_178
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567928:
     template: Seeker_Bats_MoS_Ord
-    at:       [-14.382, 29.000, -80.101, 29]
+    region:   s_182
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567929:
     template: Goblin_Pathfinder
-    at:       [-27.725, 28.610, -32.626, 159]
+    region:   s_178
     level:    [31, 34]
 
   17567930:
     template: Goblins_Bats
-    at:       [1.000, 1.000, 1.000, 159]
+    region:   se_174
     level:    [24, 26]
 
   17567931:
     template: Goblin_Furrier
-    at:       [-22.382, 28.641, -59.255, 58]
+    region:   s_182
     level:    [31, 34]
 
   17567932:
     template: Goblin_Shaman
-    at:       [7.112, 28.251, -86.198, 188]
+    region:   s_186
     level:    [31, 34]
 
   17567933:
     template: Stroper
-    at:       [-22.294, 29.036, -82.903, 20]
+    region:   s_182
     level:    [31, 34]
 
   17567945:
     template: Stroper
-    at:       [-40.063, 29.000, -61.232, 70]
+    region:   s_182
     level:    [31, 34]
 
   17567946:
     template: Stroper_Chyme
-    at:       [5.559, 29.480, -54.124, 213]
+    region:   s_186
     level:    [33, 35]
 
   17567947:
     template: Vorpal_Bunny
-    at:       [-39.263, 0.000, -1.585, 71]
+    region:   s_203
     level:    [23, 26]
 
   17567948:
     template: Vorpal_Bunny
-    at:       [-38.165, 0.758, 6.340, 186]
+    region:   s_203
     level:    [23, 26]
 
   17567949:
     template: Vorpal_Bunny
-    at:       [-19.928, 0.500, -40.901, 67]
+    region:   s_206
     level:    [23, 26]
 
   17567950:
     template: Seeker_Bats_MoS_Ord
-    at:       [-39.663, 0.000, -79.600, 94]
+    region:   s_208
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567951:
     template: Seeker_Bats_MoS_Ord
-    at:       [-36.050, 0.944, -75.957, 182]
+    region:   s_208
     level:    [23, 26]
     script:   Seeker_Bats
 
   17567952:
     template: Dung_Beetle
-    at:       [-73.587, 0.492, -20.002, 99]
+    region:   s_211
     level:    [23, 26]
 
   17567953:
     template: Vorpal_Bunny
-    at:       [-89.678, 0.500, -17.881, 150]
+    region:   s_211
     level:    [23, 26]
 
   17567954:
     template: Dung_Beetle
-    at:       [-121.121, 0.000, 0.451, 17]
+    region:   sw_213
     level:    [23, 26]
 
   17567955:
     template: Dung_Beetle
-    at:       [-126.525, 0.557, -3.444, 89]
+    region:   sw_213
     level:    [23, 26]
 
   17567956:
     template: Dung_Beetle
-    at:       [-139.240, 0.500, -38.794, 168]
+    region:   sw_216
     level:    [23, 26]
 
   17567957:
     template: Jelly_MS_OC
-    at:       [-120.129, 0.000, -80.298, 136]
+    region:   sw_218
     level:    [26, 28]
     script:   Jelly
 
   17567958:
     template: Jelly_MS_OC
-    at:       [-129.358, 0.035, -86.256, 105]
+    region:   sw_218
     level:    [26, 28]
     script:   Jelly

@@ -27,7 +27,7 @@ class AccountVarsModule : public CPPModule
         db::preparedStmt("DELETE FROM account_vars WHERE expiry > 0 AND expiry <= ?", currentTimestamp);
 
         // Extend CLuaBaseEntity with account variable methods
-        sol::usertype<CLuaBaseEntity> baseEntityType = lua["CBaseEntity"];
+        sol::usertype<CLuaBaseEntity> baseEntityType = ::lua["CBaseEntity"];
 
         baseEntityType["getAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, std::string varname) -> int32
         {
@@ -64,7 +64,7 @@ class AccountVarsModule : public CPPModule
 
         // Register setAccountVar method: player:setAccountVar(varname, value, expiry)
         // Notes: Passing a '0' value will delete the variable
-        baseEntityType["setAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, std::string varname, int32 value, sol::object const& expiry) -> void
+        baseEntityType["setAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, std::string varname, int32 value, const sol::object& expiry) -> void
         {
             if (auto PChar = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity()))
             {

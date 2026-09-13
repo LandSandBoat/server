@@ -267,196 +267,196 @@ spawns:
 
   17571874:
     template: Blade_Bat
-    at:       [-223.642, -0.924, 731.584, 163]
+    region:   nw_34
     level:    [4, 7]
 
   17571875:
     template: Blade_Bat
-    at:       [-218.473, 1.307, 720.319, 42]
+    region:   nw_34
     level:    [4, 7]
 
   17571876:
     template: Blade_Bat
-    at:       [-227.160, -0.094, 712.795, 62]
+    region:   nw_34
     level:    [4, 7]
 
   17571877:
     template: Blade_Bat
-    at:       [-227.216, -0.386, 709.837, 218]
+    region:   nw_34
     level:    [4, 7]
 
   17571878:
     template: Goblin_Ambusher
-    at:       [-256.513, 0.435, 703.909, 4]
+    region:   nw_38
     level:    [10, 14]
 
   17571879:
     template: Goblin_Ambusher
-    at:       [-257.784, 0.500, 687.220, 75]
+    region:   nw_38
     level:    [10, 14]
 
   17571880:
     template: Goblin_Tinkerer
-    at:       [-256.907, 0.490, 676.688, 187]
+    region:   nw_41
     level:    [10, 14]
 
   17571881:
     template: Goblin_Butcher
-    at:       [-257.669, 0.355, 661.585, 255]
+    region:   nw_41
     level:    [10, 14]
 
   17571882:
     template: Rotten_Jam
-    at:       [-217.688, 0.195, 655.145, 142]
+    region:   nw_43
     level:    [12, 15]
 
   17571883:
     template: Rotten_Jam
-    at:       [-217.719, 0.047, 661.256, 187]
+    region:   nw_43
     level:    [12, 15]
 
   17571884:
     template: Goblin_Ambusher
-    at:       [-270.512, -0.194, 646.561, 87]
+    region:   nw_46
     level:    [10, 14]
 
   17571885:
     template: Goblin_Butcher
-    at:       [-273.237, 0.391, 636.248, 175]
+    region:   nw_46
     level:    [10, 14]
 
   17571886:
     template: Goblin_Butcher
-    at:       [-284.337, 0.059, 647.071, 48]
+    region:   nw_46
     level:    [10, 14]
 
   17571887:
     template: Stink_Bats_OHR
-    at:       [-316.433, -0.053, 620.975, 132]
+    region:   nw_49
     level:    [15, 18]
     script:   Stink_Bats
 
   17571888:
     template: Stink_Bats_OHR
-    at:       [-328.153, -0.236, 620.061, 253]
+    region:   nw_49
     level:    [15, 18]
     script:   Stink_Bats
 
   17571889:
     template: Stink_Bats_OHR
-    at:       [-358.754, -0.029, 595.434, 173]
+    region:   nw_76
     level:    [15, 18]
     script:   Stink_Bats
 
   17571890:
     template: Stink_Bats_OHR
-    at:       [-357.749, -0.172, 606.483, 170]
+    region:   nw_76
     level:    [15, 18]
     script:   Stink_Bats
 
   17571892:
     template: Black_Slime
-    at:       [-463.791, -0.282, 736.043, 193]
+    region:   nw_66
     level:    [23, 25]
 
   17571904:
     template: Stink_Bats_OHR
-    at:       [-364.412, 0.573, 611.331, 152]
+    region:   nw_76
     level:    [15, 18]
     script:   Stink_Bats
 
   17571905:
     template: Stink_Bats_OHR
-    at:       [-371.045, -0.216, 622.335, 210]
+    region:   nw_76
     level:    [15, 18]
     script:   Stink_Bats
 
   17571906:
     template: Combat_OH
-    at:       [-357.746, 0.971, 624.131, 239]
+    region:   nw_76
     level:    [20, 23]
     script:   Combat
 
   17571907:
     template: Combat_OH
-    at:       [-351.406, 0.000, 635.382, 175]
+    region:   nw_81
     level:    [20, 23]
     script:   Combat
 
   17571908:
     template: Combat_OH
-    at:       [-360.033, 0.000, 640.133, 141]
+    region:   nw_81
     level:    [20, 23]
     script:   Combat
 
   17571909:
     template: Combat_OH
-    at:       [-372.686, 0.386, 644.706, 160]
+    region:   nw_81
     level:    [20, 23]
     script:   Combat
 
   17571910:
     template: Ghoul_war
-    at:       [-381.905, 0.479, 674.382, 123]
+    region:   nw_84
     level:    [23, 26]
     script:   Ghoul
 
   17571911:
     template: Ghoul_war
-    at:       [-381.777, 0.500, 689.250, 230]
+    region:   nw_84
     level:    [23, 26]
     script:   Ghoul
 
   17571912:
     template: Ghoul_blm
-    at:       [-382.437, 0.500, 707.311, 80]
+    region:   nw_87
     level:    [23, 26]
     script:   Ghoul
 
   17571913:
     template: Ghoul_war
-    at:       [-443.249, -0.433, 716.420, 143]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571914:
     template: Ghoul_war
-    at:       [-469.194, 0.553, 721.592, 154]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571915:
     template: Ghoul_war
-    at:       [-483.007, -0.067, 764.615, 140]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571916:
     template: Ghoul_war
-    at:       [-486.663, 0.140, 757.371, 73]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571917:
     template: Ghoul_blm
-    at:       [-459.190, 0.502, 708.803, 128]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571918:
     template: Ghoul_blm
-    at:       [-469.420, 0.436, 748.717, 179]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571919:
     template: Ghoul_blm
-    at:       [-490.756, -0.046, 740.368, 41]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul
 
   17571920:
     template: Ghoul_blm
-    at:       [-480.455, 1.000, 734.654, 40]
+    region:   nw_66
     level:    [23, 26]
     script:   Ghoul

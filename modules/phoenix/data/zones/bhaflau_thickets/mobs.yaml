@@ -19,8 +19,8 @@ templates:
           type:  standard
           model: 2233
         entity_flags: 131
-        model_size:   1
-        hitbox:       30
+        model_size:     1
+        hitbox:        30
       behaviors:
         flags: [no_turn]
       spawn:
@@ -28,11 +28,11 @@ templates:
     loot:
       drops:
         - chance: common
-          item: bugard_skin
+          item:   bugard_skin
         - chance: very_rare
-          item: bugard_tusk
+          item:   bugard_tusk
         - chance: rare
-          item: high-quality_bugard_skin
+          item:   high-quality_bugard_skin
       despoil:
         bugard_skin: 0
         bugard_tusk: 0
@@ -41,166 +41,166 @@ spawns:
 
   16990444:
     template: Lesser_Colibri
-    at:       [-584.403, -5.797, 5.683, 208]
+    region:   w_274
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990445:
     template: Lesser_Colibri
-    at:       [-574.636, -7.644, 13.720, 91]
+    region:   w_274
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990446:
     template: Lesser_Colibri
-    at:       [-576.312, -8.208, 3.622, 70]
+    region:   w_274
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990447:
     template: Lesser_Colibri
-    at:       [-587.839, -6.104, -0.361, 104]
+    region:   w_274
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990448:
     template: Lesser_Colibri
-    at:       [-591.282, -4.684, -9.360, 74]
+    region:   w_279
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990449:
     template: Lesser_Colibri
-    at:       [-606.804, -4.299, -29.342, 58]
+    region:   w_283
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990450:
     template: Lesser_Colibri
-    at:       [-605.478, -4.191, -39.112, 58]
+    region:   w_287
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990451:
     template: Lesser_Colibri
-    at:       [-593.863, -4.274, -34.931, 196]
+    region:   w_283
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990452:
     template: Lesser_Colibri
-    at:       [-605.928, -7.595, -59.732, 86]
+    region:   w_287
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990453:
     template: Lesser_Colibri
-    at:       [-595.016, -7.926, -63.114, 227]
+    region:   w_293
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990454:
     template: Lesser_Colibri
-    at:       [-600.906, -4.000, -38.975, 170]
+    region:   w_287
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990455:
     template: Wivre
-    at:       [-602.595, -3.750, -12.142, 110]
+    region:   w_283
     level:    [82, 83]
 
   16990456:
     template: Wivre
-    at:       [-609.509, -4.381, -21.543, 33]
+    region:   w_283
     level:    [82, 83]
 
   16990457:
     template: Wivre
-    at:       [-596.769, -4.000, -42.004, 10]
+    region:   w_287
     level:    [82, 83]
 
   16990458:
     template: Wivre
-    at:       [-589.847, -7.500, -55.077, 165]
+    region:   w_293
     level:    [82, 83]
 
   16990459:
     template: Lesser_Colibri
-    at:       [-561.075, -11.648, -53.655, 244]
+    region:   w_236
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990460:
     template: Lesser_Colibri
-    at:       [-550.845, -11.782, -48.483, 236]
+    region:   w_248
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990461:
     template: Lesser_Colibri
-    at:       [-535.123, -11.500, -49.013, 252]
+    region:   w_248
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990462:
     template: Lesser_Colibri
-    at:       [-515.238, -11.566, -59.215, 40]
+    region:   w_243
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990463:
     template: Lesser_Colibri
-    at:       [-514.605, -11.869, -72.554, 57]
+    region:   w_243
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990464:
     template: Lesser_Colibri
-    at:       [-505.450, -14.000, -78.810, 41]
+    region:   w_243
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990465:
     template: Lesser_Colibri
-    at:       [-533.786, -11.640, -77.928, 132]
+    region:   w_253
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990466:
     template: Lesser_Colibri
-    at:       [-538.503, -12.000, -67.044, 168]
+    region:   w_236
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990467:
     template: Lesser_Colibri
-    at:       [-531.677, -11.967, -57.842, 219]
+    region:   w_236
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990468:
     template: Lesser_Colibri
-    at:       [-561.063, -12.000, -78.761, 61]
+    region:   w_260
     level:    [82, 83]
     script:   Greater_Colibri
 
   16990469:
     template: Wivre
-    at:       [-571.875, -11.000, -63.827, 232]
+    region:   w_236
     level:    [82, 83]
 
   16990470:
     template: Wivre
-    at:       [-523.476, -12.000, -41.690, 238]
+    region:   w_243
     level:    [82, 83]
 
   16990471:
     template: Wivre
-    at:       [-523.622, -12.000, -80.549, 124]
+    region:   w_236
     level:    [82, 83]
 
   16990472:
     template: Wivre
-    at:       [-523.475, -11.624, -54.037, 209]
+    region:   w_243
     level:    [82, 83]

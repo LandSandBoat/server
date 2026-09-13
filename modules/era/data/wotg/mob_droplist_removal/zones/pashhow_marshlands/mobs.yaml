@@ -27,7 +27,7 @@ templates:
 
   Copper_Quadav:
     loot: # seedspall_luna removed
-      drops:
+      drops: null
 
   Greater_Quadav:
     loot: # seedspall_luna removed

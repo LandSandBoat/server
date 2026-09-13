@@ -117,15 +117,15 @@ spawns:
 
   17649818:
     template: Soulstealer_Skullnix
-    at:       [31.207, 4.372, 284.198, 69]
+    region:   n_191
     level:    [69, 72]
 
   17649848:
     template: Goblin_Mercenary
-    at:       [2.601, 5.060, 287.128, 170]
+    region:   n_185
     level:    [66, 69]
 
   17649849:
     template: Labyrinth_Manticore
-    at:       [28.582, 5.390, 269.455, 134]
+    region:   n_188
     level:    [71, 74]

@@ -8,32 +8,32 @@ templates:
 
   Orcish_Cursemaker:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Cursemaker_3:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Fighter:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Grunt:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Neckchopper:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Serjeant:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Serjeant_3:
     loot: # seedspall_lux removed
-      drops:
+      drops: null
 
   Orcish_Stonechucker:
     loot: # seedspall_lux removed
-      drops:
+      drops: null

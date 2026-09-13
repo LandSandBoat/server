@@ -97,30 +97,32 @@ spawns:
 
   17506646:
     template: Aura_Pot
-    at:       [91.927, 32.576, 2.118, 13]
+    at:       null
+    region:   w_346
     level:    [75, 80]
 
   17506647:
     template: Aura_Pot
-    at:       [80.232, 32.576, -17.418, 81]
+    region:   w_358
     level:    [75, 80]
 
   17506648:
     template: Aura_Pot
-    at:       [73.114, 32.392, 22.530, 159]
+    region:   w_347
     level:    [75, 80]
 
   17506649:
     template: Aura_Pot
-    at:       [105.769, 32.102, 12.688, 155]
+    at:       null
+    region:   c_353
     level:    [75, 80]
 
   17506650:
     template: Aura_Pot
-    at:       [118.454, 32.525, -4.775, 14]
+    region:   c_353
     level:    [75, 80]
 
   17506651:
     template: Aura_Pot
-    at:       [51.640, 32.000, 60.262, 129]
+    region:   w_347
     level:    [75, 80]

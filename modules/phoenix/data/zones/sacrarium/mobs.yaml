@@ -22,40 +22,40 @@ spawns:
 
   16892075:
     template: Fomor_Ranger
-    at:       [140.200, 0.000, -78.973, 165]
+    region:   region_46
     level:    [55, 56]
 
   16892076:
     template: Fomor_Samurai
-    at:       [138.904, 0.025, -77.356, 226]
+    region:   region_46
     level:    [55, 56]
 
   16892077:
     template: Blubber_Eyes
-    at:       [179.113, -4.000, -59.894, 58]
+    region:   se_163
     level:    [57, 59]
 
   16892078:
     template: Blubber_Eyes
-    at:       [180.032, -4.750, -65.326, 56]
+    region:   se_163
     level:    [57, 59]
 
   16892079:
     template: Blubber_Eyes
-    at:       [140.677, 3.750, 96.573, 46]
+    region:   ne_158
     level:    [57, 59]
 
   16892080:
     template: Blubber_Eyes
-    at:       [149.023, 5.250, 101.879, 227]
+    region:   ne_158
     level:    [57, 59]
 
   16892081:
     template: Fomor_Red_Mage
-    at:       [158.753, 0.000, 59.494, 252]
+    region:   region_43
     level:    [55, 56]
 
   16892082:
     template: Fomor_Dark_Knight
-    at:       [163.604, -1.000, 61.793, 47]
+    region:   region_43
     level:    [55, 56]

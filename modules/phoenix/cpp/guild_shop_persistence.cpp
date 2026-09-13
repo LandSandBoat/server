@@ -106,7 +106,7 @@ private:
 
     void restore()
     {
-        const sol::optional<sol::table> helper = lua["xi"]["guildShops"]["persistence"];
+        const sol::optional<sol::table> helper = ::lua["xi"]["guildShops"]["persistence"];
         if (!helper)
         {
             disarm("helper not loaded; is modules/phoenix/lua enabled in init.txt?");
@@ -134,11 +134,11 @@ private:
             return;
         }
 
-        auto        rows     = lua.create_table();
+        auto        rows     = ::lua.create_table();
         std::size_t rowCount = 0;
         while (rset->next())
         {
-            auto row         = lua.create_table();
+            auto row         = ::lua.create_table();
             row["shop"]      = rset->get<std::string>("shop");
             row["itemId"]    = rset->get<uint16>("itemid");
             row["stock"]     = rset->get<uint16>("stock");

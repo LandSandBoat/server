@@ -147,405 +147,407 @@ spawns:
 
   17584199:
     template: Hornfly
-    at:       [98.655, -0.648, -246.855, 46]
+    region:   s_86
     level:    [51, 53]
 
   17584200:
     template: Hornfly
-    at:       [122.901, -0.191, -244.969, 240]
+    region:   s_86
     level:    [51, 53]
 
   17584201:
     template: Hornfly
-    at:       [104.684, -0.092, -242.699, 53]
+    region:   s_86
     level:    [51, 53]
 
   17584202:
     template: Hornfly
-    at:       [121.680, -0.108, -317.859, 54]
+    region:   s_96
     level:    [51, 53]
 
   17584203:
     template: Hornfly
-    at:       [104.356, -0.254, -332.160, 90]
+    region:   s_96
     level:    [51, 53]
 
   17584204:
     template: Exoray
-    at:       [137.951, -1.014, -348.527, 201]
+    region:   s_106
     level:    [51, 53]
 
   17584205:
     template: Hornfly
-    at:       [120.652, -0.033, -399.295, 138]
+    region:   s_106
     level:    [51, 53]
 
   17584206:
     template: Hornfly
-    at:       [109.967, -0.275, -396.692, 201]
+    region:   s_106
     level:    [51, 53]
 
   17584207:
     template: Exoray
-    at:       [129.536, -0.213, -400.018, 35]
+    region:   s_106
     level:    [51, 53]
 
   17584208:
     template: Hornfly
-    at:       [88.600, -0.088, -399.100, 93]
+    region:   s_114
     level:    [51, 53]
 
   17584209:
     template: Exoray
-    at:       [6.109, -0.123, -299.004, 4]
+    region:   s_168
     level:    [51, 53]
 
   17584210:
     template: Exoray
-    at:       [30.013, -0.356, -302.766, 220]
+    region:   s_168
     level:    [51, 53]
 
   17584211:
     template: Exoray
-    at:       [27.741, -0.938, -316.021, 77]
+    region:   s_168
     level:    [51, 53]
 
   17584212:
     template: Exoray
-    at:       [27.032, -0.933, -327.157, 72]
+    region:   s_168
     level:    [51, 53]
 
   17584213:
     template: Exoray
-    at:       [45.176, -0.178, -316.656, 202]
+    region:   s_168
     level:    [51, 53]
 
   17584214:
     template: Worker_Crawler_CN
-    at:       [98.274, -28.066, -218.636, 68]
+    region:   s_77
     level:    [41, 43]
     script:   Worker_Crawler
 
   17584215:
     template: Worker_Crawler_CN
-    at:       [122.275, -23.680, -220.212, 253]
+    region:   se_80
     level:    [41, 43]
     script:   Worker_Crawler
 
   17584216:
     template: Worker_Crawler_CN
-    at:       [135.733, -20.480, -221.773, 194]
+    region:   se_80
     level:    [41, 43]
     script:   Worker_Crawler
 
   17584217:
     template: Worker_Crawler_CN
-    at:       [127.117, -9.248, -178.100, 134]
+    region:   s_83
     level:    [41, 43]
     script:   Worker_Crawler
 
   17584218:
     template: Soldier_Crawler
-    at:       [93.769, -0.680, -232.424, 80]
+    region:   s_86
     level:    [47, 49]
 
   17584219:
     template: Soldier_Crawler
-    at:       [128.601, -0.926, -229.873, 145]
+    region:   s_86
     level:    [47, 49]
 
   17584220:
     template: Soldier_Crawler
-    at:       [88.528, -0.540, -251.141, 55]
+    region:   s_86
     level:    [47, 49]
 
   17584221:
     template: Exoray
-    at:       [115.024, -0.225, -252.901, 236]
+    region:   s_86
     level:    [51, 53]
 
   17584222:
     template: Soldier_Crawler
-    at:       [105.077, -0.899, -304.963, 178]
+    region:   s_96
     level:    [47, 49]
 
   17584223:
     template: Soldier_Crawler
-    at:       [117.889, -0.390, -317.889, 30]
+    region:   s_96
     level:    [47, 49]
 
   17584224:
     template: Soldier_Crawler
-    at:       [134.277, -0.687, -311.183, 221]
+    region:   s_96
     level:    [47, 49]
 
   17584225:
     template: Hornfly
-    at:       [119.035, -0.179, -353.911, 198]
+    region:   s_106
     level:    [51, 53]
 
   17584226:
     template: Soldier_Crawler
-    at:       [98.508, -0.538, -386.524, 89]
+    region:   s_106
     level:    [47, 49]
 
   17584227:
     template: Soldier_Crawler
-    at:       [103.840, -1.088, -417.612, 3]
+    region:   s_114
     level:    [47, 49]
 
   17584228:
     template: Soldier_Crawler
-    at:       [85.653, -1.391, -412.609, 50]
+    region:   s_114
     level:    [47, 49]
 
   17584229:
     template: Hornfly
-    at:       [30.456, -0.723, -410.140, 159]
+    region:   s_146
     level:    [51, 53]
 
   17584230:
     template: Hornfly
-    at:       [14.930, -0.255, -396.929, 154]
+    region:   s_146
     level:    [51, 53]
 
   17584231:
     template: Hornfly
-    at:       [6.102, -0.190, -401.788, 112]
+    region:   s_146
     level:    [51, 53]
 
   17584232:
     template: Exoray
-    at:       [10.545, -0.625, -416.765, 242]
+    region:   s_146
     level:    [51, 53]
 
   17584233:
     template: Mushussu_CN
-    at:       [20.779, -0.670, -391.850, 202]
+    region:   s_146
     level:    [56, 57]
     script:   Mushussu
 
   17584234:
     template: Hornfly
-    at:       [-27.948, -0.283, -415.805, 112]
+    region:   s_146
     level:    [51, 53]
 
   17584235:
     template: Hornfly
-    at:       [-29.898, -0.677, -369.557, 183]
+    region:   s_156
     level:    [51, 53]
 
   17584236:
     template: Hornfly
-    at:       [-41.674, -0.101, -368.693, 142]
+    region:   s_156
     level:    [51, 53]
 
   17584237:
     template: Exoray
-    at:       [-44.726, -0.482, -376.235, 98]
+    region:   s_156
     level:    [51, 53]
 
   17584238:
     template: Blazer_Beetle
-    at:       [-44.067, -0.519, -390.834, 42]
+    region:   s_146
     level:    [52, 54]
 
   17584239:
     template: Mushussu_CN
-    at:       [-56.597, -0.874, -367.487, 172]
+    region:   s_156
     level:    [56, 57]
     script:   Mushussu
 
   17584240:
     template: Hornfly
-    at:       [-49.503, -0.395, -334.372, 190]
+    region:   s_156
     level:    [51, 53]
 
   17584241:
     template: Hornfly
-    at:       [-21.855, -0.933, -313.503, 233]
+    region:   s_156
     level:    [51, 53]
 
   17584242:
     template: Hornfly
-    at:       [-55.644, -0.544, -297.375, 78]
+    region:   s_136
     level:    [51, 53]
 
   17584243:
     template: Exoray
-    at:       [-48.057, -1.039, -326.659, 200]
+    region:   s_156
     level:    [51, 53]
 
   17584244:
     template: Mushussu_CN
-    at:       [-33.127, -1.265, -291.116, 3]
+    region:   s_136
     level:    [56, 57]
     script:   Mushussu
 
   17584245:
     template: Hornfly
-    at:       [-46.262, -0.380, -265.228, 198]
+    region:   s_136
     level:    [51, 53]
 
   17584246:
     template: Hornfly
-    at:       [-18.703, -1.540, -260.347, 253]
+    region:   s_126
     level:    [51, 53]
 
   17584247:
     template: Hornfly
-    at:       [-12.257, -0.285, -245.329, 195]
+    region:   s_126
     level:    [51, 53]
 
   17584248:
     template: Exoray
-    at:       [-13.886, -0.059, -225.570, 158]
+    region:   s_126
     level:    [51, 53]
 
   17584249:
     template: Blazer_Beetle
-    at:       [-28.829, -0.776, -267.478, 88]
+    region:   s_136
     level:    [52, 54]
 
   17584250:
     template: Soldier_Crawler
-    at:       [67.338, -0.220, -229.206, 252]
+    region:   s_86
     level:    [47, 49]
 
   17584251:
     template: Soldier_Crawler
-    at:       [39.148, -0.070, -253.275, 11]
+    region:   s_126
     level:    [47, 49]
 
   17584252:
     template: Soldier_Crawler
-    at:       [14.946, -0.313, -245.554, 242]
+    region:   s_126
     level:    [47, 49]
 
   17584253:
     template: Hornfly
-    at:       [74.401, -0.121, -245.007, 38]
+    region:   s_86
     level:    [51, 53]
 
   17584254:
     template: Hornfly
-    at:       [42.680, -0.218, -235.441, 211]
+    region:   s_86
     level:    [51, 53]
 
   17584255:
     template: Hornfly
-    at:       [29.111, -1.174, -246.442, 25]
+    region:   s_126
     level:    [51, 53]
 
   17584256:
     template: Exoray
-    at:       [18.348, -0.482, -231.074, 188]
+    region:   s_126
     level:    [51, 53]
 
   17584257:
     template: Helm_Beetle_aggro
-    at:       [-218.454, -0.173, -275.849, 65]
+    region:   sw_187
     level:    [59, 62]
     script:   Helm_Beetle
 
   17584258:
     template: Crawler_Hunter
-    at:       [-247.535, -0.493, -251.012, 109]
+    region:   sw_189
     level:    [60, 62]
 
   17584259:
     template: Crawler_Hunter
-    at:       [-243.222, -0.168, -234.504, 185]
+    region:   sw_189
     level:    [60, 62]
 
   17584260:
     template: Soldier_Crawler
-    at:       [59.083, -0.419, 98.668, 212]
+    region:   c_206
     level:    [47, 49]
 
   17584261:
     template: Soldier_Crawler
-    at:       [58.402, -0.268, 104.993, 28]
+    region:   region_62
     level:    [47, 49]
 
   17584262:
     template: Soldier_Crawler
-    at:       [65.427, -0.420, 99.689, 22]
+    region:   c_206
     level:    [47, 49]
 
   17584263:
     template: Soldier_Crawler
-    at:       [60.486, -0.592, 93.077, 189]
+    region:   c_206
     level:    [47, 49]
 
   17584298:
     template: Blazer_Beetle
-    at:       [64.174, -0.520, -411.316, 127]
+    region:   s_114
     level:    [52, 54]
 
   17584299:
     template: Blazer_Beetle
-    at:       [52.767, -0.380, -408.184, 140]
+    region:   s_114
     level:    [52, 54]
 
   17584300:
     template: Blazer_Beetle
-    at:       [32.942, -1.186, -415.281, 107]
+    region:   s_146
     level:    [52, 54]
 
   17584303:
     template: Blazer_Beetle
-    at:       [-25.900, -0.038, -402.240, 193]
+    region:   s_146
     level:    [52, 54]
 
   17584304:
     template: Blazer_Beetle
-    at:       [-18.257, -1.730, -379.105, 254]
+    region:   s_146
     level:    [52, 54]
 
   17584307:
     template: Blazer_Beetle
-    at:       [-34.952, -0.281, -317.154, 210]
+    region:   s_156
     level:    [52, 54]
 
   17584308:
     template: Blazer_Beetle
-    at:       [-34.710, -0.522, -295.524, 152]
+    region:   s_136
     level:    [52, 54]
 
   17584309:
     template: Blazer_Beetle
-    at:       [-46.615, -0.205, -282.439, 179]
+    region:   s_136
     level:    [52, 54]
 
   17584310:
     template: Blazer_Beetle
-    at:       [-1.213, -0.087, -226.918, 12]
+    region:   s_126
     level:    [52, 54]
 
   17584311:
     template: Blazer_Beetle
-    at:       [-26.054, -0.283, -250.442, 136]
+    region:   s_126
     level:    [52, 54]
 
   17584321:
     template: Knight_Crawler_CN
-    at:       [-297.892, -0.475, -256.962, 116]
+    region:   sw_193
     level:    [60, 63]
     script:   Knight_Crawler
 
   17584378:
     template: Mushussu_CN
-    at:       [48.385, -0.474, 367.872, 177]
+    region:   n_249
     level:    [56, 57]
     script:   Mushussu
 
   17584389:
     template: Rumble_Crawler
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [53, 55]
 
   17584390:
     template: Rumble_Crawler
     at:       [0.000, 0.000, 0.000, 0]
+    region:   null
     level:    [53, 55]

@@ -19,8 +19,8 @@ templates:
           type:  standard
           model: 408
         entity_flags: 133
-        model_size:   2
-        hitbox:       14
+        model_size:     2
+        hitbox:        14
       behaviors:
         links: true
       spawn:
@@ -28,11 +28,11 @@ templates:
     loot:
       drops:
         - chance: common
-          item: insect_wing
+          item:   insect_wing
         - chance: uncommon
-          item: beetle_shell
+          item:   beetle_shell
         - chance: rare
-          item: beetle_jaw
+          item:   beetle_jaw
       despoil:
         insect_wing:  0
         beetle_shell: 0
@@ -53,8 +53,8 @@ templates:
           type:  standard
           model: 284
         entity_flags: 131
-        model_size:   1
-        hitbox:       27
+        model_size:     1
+        hitbox:        27
       behaviors:
         aggressive: true
       spawn:
@@ -62,11 +62,11 @@ templates:
     loot:
       drops:
         - chance: very_common
-          item: scorpion_claw
+          item:   scorpion_claw
         - chance: uncommon
-          item: scorpion_shell
+          item:   scorpion_shell
         - chance: rare
-          item: high-quality_scorpion_shell
+          item:   high-quality_scorpion_shell
       steal: antlion_jaw
       despoil:
         scorpion_shell: 0
@@ -86,9 +86,9 @@ templates:
           type:  standard
           model: 256
         entity_flags:  645
-        animation_sub: 8
-        model_size:    2
-        hitbox:        14
+        animation_sub:   8
+        model_size:      2
+        hitbox:         14
       behaviors:
         aggressive: true
         links:      true
@@ -97,13 +97,13 @@ templates:
     loot:
       drops:
         - chance: very_common
-          item: bat_wing
+          item:   bat_wing
         - chance: uncommon
-          item: bat_fang
+          item:   bat_fang
         - chance: rare
-          item: vial_of_fiend_blood
+          item:   vial_of_fiend_blood
         - chance: very_rare
-          item: vial_of_beastman_blood
+          item:   vial_of_beastman_blood
       despoil:
         bat_wing: 0
 
@@ -122,8 +122,8 @@ templates:
           type:  standard
           model: 368
         entity_flags: 131
-        model_size:   1
-        hitbox:       8
+        model_size:     1
+        hitbox:         8
       behaviors:
         aggressive: true
       spawn:
@@ -131,9 +131,9 @@ templates:
     loot:
       drops:
         - chance: common
-          item: revival_tree_root
+          item:   revival_tree_root
         - chance: uncommon
-          item: square_of_wool_cloth
+          item:   square_of_wool_cloth
       despoil:
         square_of_cotton_cloth: 0
 
@@ -153,8 +153,8 @@ templates:
           type:  standard
           model: 384
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
       spawn:
@@ -162,9 +162,9 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: hecteyes_eye
+          item:   hecteyes_eye
         - chance: common
-          item: vial_of_mercury
+          item:   vial_of_mercury
       despoil:
         hecteyes_eye: 0
 
@@ -184,20 +184,20 @@ templates:
           type:  standard
           model: 424
         entity_flags: 1157
-        model_size:   2
-        hitbox:       14
+        model_size:      2
+        hitbox:         14
       spawn:
         respawn: 960 # Era dungeon timers
     loot:
       drops:
         - chance: common
-          item: flint_stone
+          item:   flint_stone
         - chance: uncommon
-          item: chunk_of_copper_ore
+          item:   chunk_of_copper_ore
         - chance: rare
-          item: chunk_of_zinc_ore
+          item:   chunk_of_zinc_ore
         - chance: very_rare
-          item: chunk_of_silver_ore
+          item:   chunk_of_silver_ore
       steal: pebble
       despoil:
         chunk_of_copper_ore: 0
@@ -374,590 +374,595 @@ spawns:
 
   17555777:
     template: Tomb_Worm
-    at:       [-133.765, 7.500, -146.929, 95]
+    region:   sw_322
     level:    [60, 62]
 
   17555778:
     template: Tomb_Worm
-    at:       [-136.783, 7.500, -170.917, 30]
+    region:   sw_325
     level:    [60, 62]
 
   17555779:
     template: Dire_Bat
-    at:       [-110.714, 7.997, -139.710, 123]
+    region:   sw_322
     level:    [62, 64]
 
   17555780:
     template: Dire_Bat
-    at:       [-123.299, 7.500, -140.003, 121]
+    region:   sw_322
     level:    [62, 64]
 
   17555781:
     template: Dire_Bat
-    at:       [-138.351, 7.500, -158.030, 25]
+    region:   sw_322
     level:    [62, 64]
 
   17555782:
     template: Dire_Bat
-    at:       [-110.305, 6.912, -180.251, 245]
+    region:   sw_325
     level:    [62, 64]
 
   17555783:
     template: Tomb_Worm
-    at:       [-69.454, 7.380, -211.315, 104]
+    region:   s_334
     level:    [60, 62]
 
   17555784:
     template: Tomb_Worm
-    at:       [-53.887, 8.080, -200.660, 30]
+    region:   s_334
     level:    [60, 62]
 
   17555785:
     template: Tomb_Worm
-    at:       [-64.093, 8.305, -192.187, 112]
+    region:   s_334
     level:    [60, 62]
 
   17555786:
     template: Tomb_Worm
-    at:       [-60.567, 8.435, -181.700, 25]
+    region:   s_329
     level:    [60, 62]
 
   17555787:
     template: Tomb_Worm
-    at:       [-88.647, 6.500, -185.210, 24]
+    region:   s_329
     level:    [60, 62]
 
   17555788:
     template: Tomb_Worm
-    at:       [-70.792, 7.918, -175.261, 217]
+    region:   s_329
     level:    [60, 62]
 
   17555789:
     template: Dire_Bat
-    at:       [-61.609, 8.685, -189.471, 199]
+    region:   s_334
     level:    [62, 64]
 
   17555790:
     template: Dire_Bat
-    at:       [-62.030, 8.598, -211.829, 87]
+    region:   s_334
     level:    [62, 64]
 
   17555791:
     template: Dire_Bat
-    at:       [-79.572, 8.807, -179.789, 213]
+    region:   s_329
     level:    [62, 64]
 
   17555792:
     template: Cutlass_Scorpion
-    at:       [-66.420, 7.784, -194.532, 196]
+    region:   s_334
     level:    [63, 65]
 
   17555793:
     template: Tomb_Worm
-    at:       [-41.449, 7.197, -216.829, 21]
+    region:   s_402
     level:    [60, 62]
 
   17555794:
     template: Tomb_Worm
-    at:       [-37.576, 7.500, -221.844, 21]
+    region:   s_402
     level:    [60, 62]
 
   17555795:
     template: Tomb_Worm
-    at:       [-30.864, 7.500, -217.096, 211]
+    region:   s_402
     level:    [60, 62]
 
   17555796:
     template: Tomb_Worm
-    at:       [-24.009, 7.167, -208.120, 184]
+    region:   s_402
     level:    [60, 62]
 
   17555797:
     template: Tomb_Worm
-    at:       [-19.327, 7.500, -197.638, 164]
+    region:   s_406
     level:    [60, 62]
 
   17555798:
     template: Dire_Bat
-    at:       [-49.668, 8.256, -218.122, 12]
+    region:   s_402
     level:    [62, 64]
 
   17555799:
     template: Dire_Bat
-    at:       [-8.490, 7.500, -181.661, 212]
+    region:   s_406
     level:    [62, 64]
 
   17555800:
     template: Cutlass_Scorpion
-    at:       [-24.429, 7.037, -216.490, 2]
+    region:   s_402
     level:    [63, 65]
 
   17555801:
     template: Tomb_Worm
-    at:       [19.908, 7.437, -187.034, 1]
+    region:   s_410
     level:    [60, 62]
 
   17555802:
     template: Tomb_Worm
-    at:       [19.226, 7.500, -196.808, 62]
+    region:   s_478
     level:    [60, 62]
 
   17555803:
     template: Dire_Bat
-    at:       [19.889, 7.485, -209.644, 61]
+    region:   s_478
     level:    [62, 64]
 
   17555804:
     template: Tomb_Worm
-    at:       [53.359, 7.500, -186.357, 40]
+    region:   s_414
     level:    [60, 62]
 
   17555805:
     template: Tomb_Worm
-    at:       [60.417, 7.500, -200.026, 73]
+    region:   s_414
     level:    [60, 62]
 
   17555806:
     template: Tomb_Worm
-    at:       [60.712, 8.114, -212.287, 65]
+    region:   region_106
     level:    [60, 62]
 
   17555807:
     template: Tomb_Worm
-    at:       [61.851, 7.601, -242.632, 54]
+    region:   region_106
     level:    [60, 62]
 
   17555808:
     template: Tomb_Worm
-    at:       [51.307, 7.629, -250.440, 126]
+    region:   region_106
     level:    [60, 62]
 
   17555809:
     template: Dire_Bat
-    at:       [57.391, 6.733, -231.071, 56]
+    region:   region_106
     level:    [62, 64]
 
   17555810:
     template: Cutlass_Scorpion
-    at:       [55.796, 7.842, -220.792, 120]
+    region:   region_106
     level:    [63, 65]
 
   17555811:
     template: Tomb_Worm
-    at:       [7.764, 0.000, -237.612, 179]
+    region:   s_482
     level:    [60, 62]
 
   17555812:
     template: Tomb_Worm
-    at:       [31.319, 0.000, -235.891, 35]
+    region:   s_482
     level:    [60, 62]
 
   17555813:
     template: Tomb_Worm
-    at:       [34.522, 0.000, -244.786, 47]
+    region:   s_482
     level:    [60, 62]
 
   17555814:
     template: Tomb_Worm
-    at:       [18.294, 0.000, -252.535, 123]
+    region:   s_482
     level:    [60, 62]
 
   17555815:
     template: Armet_Beetle
-    at:       [12.506, 0.000, -227.834, 215]
+    region:   s_482
     level:    [64, 66]
 
   17555816:
     template: Armet_Beetle
-    at:       [23.872, 0.000, -225.810, 13]
+    region:   s_482
     level:    [64, 66]
 
   17555817:
     template: Armet_Beetle
-    at:       [27.563, 0.000, -253.586, 80]
+    region:   s_482
     level:    [64, 66]
 
   17555818:
     template: Tomb_Worm
-    at:       [-4.344, 0.106, -242.749, 67]
+    region:   s_299
     level:    [60, 62]
 
   17555819:
     template: Tomb_Worm
-    at:       [35.726, 0.000, -261.999, 222]
+    region:   s_299
     level:    [60, 62]
 
   17555820:
     template: Armet_Beetle
-    at:       [2.041, 0.000, -261.503, 13]
+    region:   s_299
     level:    [64, 66]
 
   17555821:
     template: Armet_Beetle
-    at:       [43.352, 0.000, -244.666, 190]
+    region:   s_299
     level:    [64, 66]
 
   17555822:
     template: Tomb_Worm
-    at:       [9.603, 0.000, -285.873, 154]
+    region:   s_295
     level:    [60, 62]
 
   17555823:
     template: Tomb_Worm
-    at:       [28.502, 0.000, -291.077, 233]
+    region:   s_292
     level:    [60, 62]
 
   17555824:
     template: Tomb_Worm
-    at:       [32.310, 0.000, -282.516, 199]
+    region:   s_292
     level:    [60, 62]
 
   17555825:
     template: Dire_Bat
-    at:       [-63.071, 7.447, -233.409, 45]
+    region:   s_339
     level:    [62, 64]
 
   17555826:
     template: Thousand_Eyes
-    at:       [-77.695, 8.786, -258.965, 105]
+    region:   s_343
     level:    [60, 62]
 
   17555827:
     template: Thousand_Eyes
-    at:       [-82.887, 8.051, -263.719, 167]
+    region:   s_343
     level:    [60, 62]
 
   17555828:
     template: Thousand_Eyes
-    at:       [-92.234, 8.400, -259.829, 120]
+    region:   s_343
     level:    [60, 62]
 
   17555829:
     template: Thousand_Eyes
-    at:       [-84.125, 7.817, -253.344, 56]
+    region:   s_343
     level:    [60, 62]
 
   17555830:
     template: Thousand_Eyes
-    at:       [-76.971, 7.935, -253.296, 46]
+    region:   s_343
     level:    [60, 62]
 
   17555831:
     template: Hati
-    at:       [-142.993, 8.084, -260.963, 135]
+    region:   sw_353
     level:    [77, 79]
 
   17555832:
     template: Spartoi_Warrior
-    at:       [-117.312, 7.500, -259.660, 102]
+    region:   sw_349
     level:    [78, 80]
 
   17555833:
     template: Hati
-    at:       [-177.501, 7.547, -261.134, 110]
+    region:   sw_357
     level:    [77, 79]
 
   17555834:
     template: Hati
-    at:       [-180.960, 7.500, -283.995, 75]
+    region:   region_105
     level:    [77, 79]
 
   17555835:
     template: Hati
-    at:       [-191.516, 7.330, -223.505, 166]
+    region:   sw_361
     level:    [77, 79]
 
   17555836:
     template: Spartoi_Warrior
-    at:       [-177.580, 7.559, -270.994, 85]
+    region:   region_105
     level:    [78, 80]
 
   17555837:
     template: Spartoi_Warrior
-    at:       [-180.245, 7.500, -238.267, 172]
+    region:   sw_361
     level:    [78, 80]
 
   17555838:
     template: Spartoi_Warrior
-    at:       [-237.536, 8.741, -222.064, 11]
+    region:   region_104
     level:    [78, 80]
 
   17555839:
     template: Lemures
-    at:       [-266.783, 6.500, -255.084, 61]
+    region:   sw_375
     level:    [80, 80]
 
   17555840:
     template: Spartoi_Sorcerer
-    at:       [-260.078, 7.378, -245.819, 30]
+    region:   sw_375
     level:    [80, 82]
 
   17555841:
     template: Spartoi_Sorcerer
-    at:       [-264.131, 8.360, -239.995, 240]
+    region:   sw_375
     level:    [80, 82]
 
   17555842:
     template: Spartoi_Sorcerer
-    at:       [-255.846, 7.710, -230.053, 185]
+    region:   sw_375
     level:    [80, 82]
 
   17555843:
     template: Spartoi_Sorcerer
-    at:       [-249.036, 8.388, -215.514, 99]
+    region:   sw_372
     level:    [80, 82]
 
   17555844:
     template: Spartoi_Warrior
-    at:       [-258.022, 7.000, -261.269, 53]
+    region:   sw_380
     level:    [78, 80]
 
   17555845:
     template: Spartoi_Warrior
-    at:       [-261.523, 8.807, -279.875, 12]
+    region:   sw_385
     level:    [78, 80]
 
   17555846:
     template: Lemures
-    at:       [-254.358, 8.196, -277.083, 130]
+    region:   sw_385
     level:    [80, 80]
 
   17555847:
     template: Spartoi_Sorcerer
-    at:       [-253.543, 7.608, -286.889, 60]
+    region:   sw_385
     level:    [80, 82]
 
   17555848:
     template: Spartoi_Sorcerer
-    at:       [-252.332, 6.500, -297.185, 34]
+    region:   sw_385
     level:    [80, 82]
 
   17555849:
     template: Spartoi_Sorcerer
-    at:       [-244.064, 7.871, -299.689, 219]
+    region:   sw_385
     level:    [80, 82]
 
   17555850:
     template: Spartoi_Warrior
-    at:       [-227.803, 6.731, -297.469, 254]
+    region:   sw_390
     level:    [78, 80]
 
   17555851:
     template: Spartoi_Warrior
-    at:       [-216.194, 8.266, -297.315, 17]
+    region:   sw_390
     level:    [78, 80]
 
   17555852:
     template: Spartoi_Warrior
-    at:       [-210.190, 8.058, -300.649, 238]
+    region:   sw_390
     level:    [78, 80]
 
   17555853:
     template: Spartoi_Sorcerer
-    at:       [-196.831, 7.500, -298.812, 255]
+    region:   sw_390
     level:    [80, 82]
 
   17555854:
     template: Hati
-    at:       [-94.748, 7.452, -300.993, 133]
+    region:   sw_398
     level:    [77, 79]
 
   17555855:
     template: Hati
-    at:       [-97.221, 7.871, -307.547, 171]
+    region:   sw_398
     level:    [77, 79]
 
   17555856:
     template: Spartoi_Warrior
     at:       [-116.104, 7.298, -357.310, 253]
+    region:   null
     level:    [78, 80]
 
   17555857:
     template: Lemures
     at:       [-122.111, 7.500, -359.243, 229]
+    region:   null
     level:    [80, 80]
 
   17555858:
     template: Spartoi_Sorcerer
     at:       [-112.872, 7.878, -363.590, 41]
+    region:   null
     level:    [80, 82]
 
   17555859:
     template: Spartoi_Sorcerer
     at:       [-126.241, 7.662, -363.651, 116]
+    region:   null
     level:    [80, 82]
 
   17555860:
     template: Spartoi_Sorcerer
     at:       [-121.881, 7.638, -351.527, 223]
+    region:   null
     level:    [80, 82]
 
   17555861:
     template: Hati
-    at:       [-34.517, 7.389, -302.306, 255]
+    region:   s_434
     level:    [77, 79]
 
   17555862:
     template: Spartoi_Warrior
-    at:       [-70.120, 8.158, -298.668, 255]
+    region:   s_438
     level:    [78, 80]
 
   17555863:
     template: Spartoi_Warrior
-    at:       [-62.778, 8.230, -303.574, 23]
+    region:   s_438
     level:    [78, 80]
 
   17555864:
     template: Spartoi_Sorcerer
-    at:       [-58.093, 7.493, -301.100, 241]
+    region:   s_438
     level:    [80, 82]
 
   17555865:
     template: Spartoi_Sorcerer
-    at:       [-45.290, 6.728, -302.869, 12]
+    region:   s_438
     level:    [80, 82]
 
   17555866:
     template: Spartoi_Warrior
-    at:       [-17.838, 7.500, -328.954, 19]
+    region:   s_442
     level:    [78, 80]
 
   17555867:
     template: Spartoi_Warrior
-    at:       [-10.911, 7.321, -334.008, 226]
+    region:   s_442
     level:    [78, 80]
 
   17555868:
     template: Spartoi_Sorcerer
-    at:       [7.256, 6.616, -339.294, 4]
+    region:   s_442
     level:    [80, 82]
 
   17555869:
     template: Spartoi_Sorcerer
-    at:       [-1.787, 7.500, -340.017, 11]
+    region:   s_442
     level:    [80, 82]
 
   17555870:
     template: Spartoi_Sorcerer
-    at:       [20.141, 8.083, -337.284, 7]
+    region:   region_107
     level:    [80, 82]
 
   17555871:
     template: Spartoi_Sorcerer
-    at:       [32.010, 8.027, -342.099, 7]
+    region:   region_107
     level:    [80, 82]
 
   17555872:
     template: Hati
-    at:       [44.253, 8.661, -302.241, 151]
+    region:   s_427
     level:    [77, 79]
 
   17555873:
     template: Hati
-    at:       [60.372, 8.661, -283.772, 185]
+    region:   s_422
     level:    [77, 79]
 
   17555874:
     template: Spartoi_Warrior
-    at:       [57.878, 7.670, -316.806, 174]
+    region:   region_109
     level:    [78, 80]
 
   17555875:
     template: Spartoi_Warrior
-    at:       [36.200, 8.492, -296.413, 148]
+    region:   s_427
     level:    [78, 80]
 
   17555876:
     template: Spartoi_Warrior
-    at:       [56.929, 8.677, -272.398, 183]
+    region:   s_422
     level:    [78, 80]
 
   17555877:
     template: Lemures
-    at:       [55.869, 6.586, -302.885, 120]
+    region:   region_108
     level:    [80, 80]
 
   17555878:
     template: Spartoi_Sorcerer
-    at:       [62.828, 7.028, -311.591, 210]
+    region:   region_109
     level:    [80, 82]
 
   17555879:
     template: Spartoi_Sorcerer
-    at:       [51.575, 7.772, -290.301, 215]
+    region:   s_427
     level:    [80, 82]
 
   17555880:
     template: Spartoi_Sorcerer
-    at:       [60.346, 8.807, -280.095, 190]
+    region:   s_422
     level:    [80, 82]
 
   17555881:
     template: Hati
-    at:       [99.513, 7.500, -240.047, 217]
+    region:   se_458
     level:    [77, 79]
 
   17555882:
     template: Hati
-    at:       [115.036, 7.500, -220.560, 228]
+    region:   region_110
     level:    [77, 79]
 
   17555883:
     template: Spartoi_Warrior
-    at:       [137.017, 7.500, -231.600, 76]
+    region:   se_466
     level:    [78, 80]
 
   17555884:
     template: Spartoi_Warrior
-    at:       [141.222, 7.631, -269.913, 49]
+    region:   se_470
     level:    [78, 80]
 
   17555885:
     template: Spartoi_Warrior
-    at:       [142.766, 8.706, -290.725, 11]
+    region:   se_474
     level:    [78, 80]
 
   17555886:
     template: Spartoi_Warrior
-    at:       [159.404, 8.776, -297.546, 34]
+    region:   se_474
     level:    [78, 80]
 
   17555887:
     template: Lemures
-    at:       [138.287, 8.807, -281.347, 23]
+    region:   se_470
     level:    [80, 80]
 
   17555888:
     template: Lemures
-    at:       [140.449, 8.640, -300.059, 76]
+    region:   se_474
     level:    [80, 80]
 
   17555889:
     template: Spartoi_Sorcerer
-    at:       [140.643, 8.479, -282.520, 28]
+    region:   se_470
     level:    [80, 82]
 
   17555890:
     template: Spartoi_Sorcerer
-    at:       [151.312, 7.955, -297.952, 215]
+    region:   se_474
     level:    [80, 82]
 
   17555891:
     template: Spartoi_Sorcerer
-    at:       [151.312, 7.955, -297.952, 207]
+    region:   se_474
     level:    [80, 82]
 
   17555892:
     template: Spartoi_Sorcerer
-    at:       [159.631, 8.807, -299.800, 57]
+    region:   se_474
     level:    [80, 82]
 
   17555893:
     template: Spartoi_Sorcerer
-    at:       [166.164, 8.786, -301.686, 13]
+    region:   se_474
     level:    [80, 82]
 
   17555894:
     template: Lemures
-    at:       [224.408, 8.136, -299.960, 245]
+    region:   se_304
     level:    [80, 80]

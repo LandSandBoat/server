@@ -187,209 +187,209 @@ spawns:
 
   17596644:
     template: Funnel_Bats_GC
-    at:       [-353.189, 19.193, 236.476, 13]
+    region:   w_240
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596645:
     template: Funnel_Bats_GC
-    at:       [-315.631, 19.571, 254.821, 205]
+    region:   nw_255
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596646:
     template: Funnel_Bats_GC
-    at:       [-318.545, 19.000, 289.354, 169]
+    region:   nw_249
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596647:
     template: Chamber_Beetle
-    at:       [-336.801, 19.257, 233.240, 7]
+    region:   w_240
     level:    [56, 58]
 
   17596648:
     template: Chamber_Beetle
-    at:       [-323.229, 19.147, 241.602, 224]
+    region:   w_261
     level:    [56, 58]
 
   17596649:
     template: Chamber_Beetle
-    at:       [-313.224, 19.451, 269.647, 200]
+    region:   nw_249
     level:    [56, 58]
 
   17596650:
     template: Chamber_Beetle
-    at:       [-344.053, 19.169, 287.848, 137]
+    region:   nw_228
     level:    [56, 58]
 
   17596651:
     template: Magic_Jug
-    at:       [-369.323, 19.067, 287.222, 11]
+    region:   nw_228
     level:    [62, 64]
 
   17596652:
     template: Magic_Jug
-    at:       [-368.109, 19.052, 230.875, 72]
+    region:   w_240
     level:    [62, 64]
 
   17596653:
     template: Funnel_Bats_GC
-    at:       [-338.821, 12.610, 257.584, 17]
+    region:   nw_245
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596654:
     template: Funnel_Bats_GC
-    at:       [-343.507, 12.442, 263.537, 169]
+    region:   nw_245
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596655:
     template: Funnel_Bats_GC
-    at:       [-246.954, 19.265, 283.105, 148]
+    region:   nw_272
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596656:
     template: Funnel_Bats_GC
-    at:       [-290.606, 19.318, 278.143, 85]
+    region:   nw_249
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596657:
     template: Chamber_Beetle
-    at:       [-236.283, 19.518, 264.702, 207]
+    region:   nw_275
     level:    [56, 58]
 
   17596658:
     template: Chamber_Beetle
-    at:       [-273.146, 18.992, 291.973, 101]
+    region:   nw_249
     level:    [56, 58]
 
   17596659:
     template: Chamber_Beetle
-    at:       [-290.365, 19.521, 253.081, 102]
+    region:   nw_255
     level:    [56, 58]
 
   17596660:
     template: Funnel_Bats_GC
-    at:       [-257.435, 12.452, 255.291, 119]
+    region:   nw_266
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596661:
     template: Funnel_Bats_GC
-    at:       [-257.472, 12.588, 265.317, 176]
+    region:   nw_266
     level:    [51, 53]
     script:   Funnel_Bat
 
   17596662:
     template: Chamber_Beetle
-    at:       [-211.858, 19.550, 291.341, 204]
+    region:   nw_285
     level:    [56, 58]
 
   17596663:
     template: Fallen_Mage
-    at:       [-188.151, 19.459, 305.849, 87]
+    region:   nw_290
     level:    [59, 62]
 
   17596664:
     template: Fallen_Mage
-    at:       [-167.078, 19.177, 312.483, 109]
+    region:   nw_290
     level:    [59, 62]
 
   17596665:
     template: Fallen_Major
-    at:       [-181.761, 19.540, 324.427, 141]
+    region:   nw_135
     level:    [59, 62]
 
   17596666:
     template: Fallen_Major
-    at:       [-156.567, 19.117, 324.803, 93]
+    region:   nw_290
     level:    [59, 62]
 
   17596667:
     template: Fallen_Mage
-    at:       [-161.417, 19.250, 207.019, 211]
+    region:   c_302
     level:    [59, 62]
 
   17596668:
     template: Fallen_Mage
-    at:       [-128.025, 19.250, 240.710, 159]
+    region:   c_302
     level:    [59, 62]
 
   17596669:
     template: Fallen_Major
-    at:       [-129.394, 19.250, 199.934, 112]
+    region:   c_302
     level:    [59, 62]
 
   17596670:
     template: Fallen_Major
-    at:       [-159.133, 19.000, 240.424, 89]
+    region:   c_302
     level:    [59, 62]
 
   17596671:
     template: Hellmine
-    at:       [-173.075, 18.250, 251.671, 133]
+    region:   region_114
     level:    [60, 62]
 
   17596672:
     template: Hellmine
-    at:       [-170.796, 18.367, 190.109, 177]
+    region:   region_103
     level:    [60, 62]
 
   17596717:
     template: Wraith
-    at:       [-159.000, 19.000, 217.000, 127]
+    region:   c_302
     level:    [60, 62]
 
   17596718:
     template: Wraith
-    at:       [-152.174, 19.138, 193.684, 5]
+    region:   c_302
     level:    [60, 62]
 
   17596719:
     template: Wraith
-    at:       [-115.204, 19.038, 192.837, 87]
+    region:   c_302
     level:    [60, 62]
 
   17596720:
     template: Serket
-    at:       [-262.057, 19.736, 281.540, 134]
+    region:   nw_272
     level:    [70, 70]
 
   17596721:
     template: Wraith
-    at:       [-208.198, 18.994, 305.655, 87]
+    region:   nw_290
     level:    [60, 62]
 
   17596722:
     template: Magic_Jug
-    at:       [-189.752, 19.000, 272.353, 14]
+    region:   nw_285
     level:    [62, 64]
 
   17596723:
     template: Magic_Jug
-    at:       [-212.930, 18.246, 331.082, 1]
+    region:   nw_290
     level:    [62, 64]
 
   17596724:
     template: Magic_Jug
-    at:       [-147.050, 18.265, 306.954, 145]
+    region:   nw_290
     level:    [62, 64]
 
   17596725:
     template: Magic_Jug
-    at:       [-147.210, 18.263, 333.103, 100]
+    region:   nw_290
     level:    [62, 64]
 
   17596726:
     template: Hellmine
-    at:       [-105.881, 18.262, 193.591, 17]
+    region:   region_118
     level:    [60, 62]
 
   17596727:
     template: Hellmine
-    at:       [-109.087, 18.270, 251.370, 188]
+    region:   region_115
     level:    [60, 62]

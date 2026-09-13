@@ -20,8 +20,8 @@ templates:
           type:  standard
           model: 273
         entity_flags:  641
-        animation_sub: 8
-        hitbox:        8
+        animation_sub:   8
+        hitbox:          8
 
   Tiny_Mandragora_Launch:
     id:            3924
@@ -41,8 +41,8 @@ templates:
           type:  standard
           model: 300
         entity_flags:  641
-        animation_sub: 8
-        hitbox:        6
+        animation_sub:   8
+        hitbox:          6
 
   Bumblebee:
     attributes:
@@ -51,11 +51,11 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: insect_wing
+          item:   insect_wing
         - chance: rare
-          item: rarab_tail
+          item:   rarab_tail
         - chance: very_rare
-          item: pot_of_honey
+          item:   pot_of_honey
       steal: pot_of_honey
       despoil:
         beehive_chip:  0
@@ -69,11 +69,11 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: spool_of_silk_thread
+          item:   spool_of_silk_thread
         - chance: rare
-          item: crawler_calculus
+          item:   crawler_calculus
         - chance: very_rare
-          item: smooth_stone
+          item:   smooth_stone
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
@@ -85,13 +85,13 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: spool_of_silk_thread
+          item:   spool_of_silk_thread
         - chance: rare
-          item: crawler_calculus
+          item:   crawler_calculus
         - chance: very_rare
-          item: smooth_stone
+          item:   smooth_stone
         - chance: rare
-          item: meteorite
+          item:   meteorite
       despoil:
         piece_of_crawler_cocoon: 0
         crawler_egg:             0
@@ -103,13 +103,13 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: beehive_chip
+          item:   beehive_chip
         - chance: rare
-          item: pot_of_honey
+          item:   pot_of_honey
         - chance: very_rare
-          item: insect_wing
+          item:   insect_wing
         - chance: super_rare
-          item: giant_stinger
+          item:   giant_stinger
       steal: pot_of_honey
       despoil:
         beehive_chip:  0
@@ -123,9 +123,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: uncommon
-          item: chunk_of_rock_salt
+          item:   chunk_of_rock_salt
         - chance: super_rare
-          item: slice_of_land_crab_meat
+          item:   slice_of_land_crab_meat
       steal: chunk_of_rock_salt
       despoil:
         slice_of_land_crab_meat: 0
@@ -138,9 +138,9 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: rabbit_hide
+          item:   rabbit_hide
         - chance: rare
-          item: torn_epistle
+          item:   torn_epistle
       steal: slice_of_hare_meat
       despoil:
         rabbit_hide:        0
@@ -153,7 +153,7 @@ templates:
     loot: # Launch starter zones
       drops:
         - chance: rare
-          item: two-leaf_mandragora_bud
+          item:   two-leaf_mandragora_bud
       steal: two-leaf_mandragora_bud
       despoil:
         two-leaf_mandragora_bud: 0
@@ -163,900 +163,900 @@ spawns:
 
   17249130:
     template: Tiny_Mandragora_Launch
-    at:       [-398.622, 3.926, -364.970, 18]
+    region:   sw_102
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249131:
     template: Tiny_Mandragora_Launch
-    at:       [-396.253, -28.661, 375.657, 127]
+    region:   nw_326
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249132:
     template: Tiny_Mandragora_Launch
-    at:       [89.000, 4.000, -481.000, 75]
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249133:
     template: Tiny_Mandragora_Launch
-    at:       [-168.139, -20.956, 637.569, 57]
+    region:   nw_333
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249134:
     template: Tiny_Mandragora_Launch
-    at:       [314.790, -19.904, 288.276, 64]
+    region:   ne_178
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249135:
     template: Tiny_Mandragora_Launch
-    at:       [390.056, -4.899, 38.792, 29]
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249136:
     template: Tiny_Mandragora_Launch
-    at:       [79.112, -1.608, -258.494, 49]
+    region:   s_6
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249137:
     template: Tiny_Mandragora_Launch
-    at:       [-161.935, -16.904, 382.379, 27]
+    region:   n_157
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249138:
     template: Tiny_Mandragora_Launch
-    at:       [217.000, -5.000, 121.000, 54]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249139:
     template: Tiny_Mandragora_Launch
-    at:       [-243.363, -0.196, -251.188, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249140:
     template: Tiny_Mandragora_Launch
-    at:       [-245.488, -29.477, 501.622, 70]
+    region:   nw_333
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249141:
     template: Tiny_Mandragora_Launch
-    at:       [-105.614, -5.432, -246.014, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249142:
     template: Tiny_Mandragora_Launch
-    at:       [154.520, -32.600, 281.810, 126]
+    region:   e_188
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249143:
     template: Tiny_Mandragora_Launch
-    at:       [59.340, -0.218, -123.724, 102]
+    region:   s_51
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249144:
     template: Tiny_Mandragora_Launch
-    at:       [-284.501, -20.023, 324.259, 80]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249145:
     template: Tiny_Mandragora_Launch
-    at:       [359.353, -7.621, 148.047, 2]
+    region:   e_91
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249146:
     template: Tiny_Mandragora_Launch
-    at:       [-32.000, -16.000, 424.000, 20]
+    region:   n_249
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249147:
     template: Tiny_Mandragora_Launch
-    at:       [285.000, -4.000, 33.000, 127]
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249148:
     template: Tiny_Mandragora_Launch
-    at:       [221.000, -34.000, 360.000, 127]
+    region:   ne_228
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249149:
     template: Tiny_Mandragora_Launch
-    at:       [-305.869, 2.114, -343.517, 62]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249150:
     template: Tiny_Mandragora_Launch
-    at:       [-4.000, -1.000, -192.000, 127]
+    region:   s_51
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249151:
     template: Tiny_Mandragora_Launch
-    at:       [-328.583, -28.676, 468.765, 113]
+    region:   nw_326
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249152:
     template: Tiny_Mandragora_Launch
-    at:       [-194.350, -1.381, -337.210, 127]
+    region:   s_40
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249153:
     template: Tiny_Mandragora_Launch
-    at:       [194.175, -22.256, 214.724, 123]
+    region:   e_188
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249154:
     template: Tiny_Mandragora_Launch
-    at:       [-348.550, -16.861, 278.209, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249155:
     template: Tiny_Mandragora_Launch
-    at:       [119.000, -30.000, 378.000, 127]
+    region:   n_210
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249156:
     template: Tiny_Mandragora_Launch
-    at:       [246.967, -24.908, 261.980, 47]
+    region:   e_188
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249157:
     template: Tiny_Mandragora_Launch
-    at:       [-308.507, -17.808, 388.128, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249158:
     template: Tiny_Mandragora_Launch
-    at:       [245.293, -22.125, 423.282, 127]
+    region:   ne_228
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249159:
     template: Tiny_Mandragora_Launch
-    at:       [354.532, -20.357, 356.230, 6]
+    region:   ne_178
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249160:
     template: Tiny_Mandragora_Launch
-    at:       [-3.000, -4.000, 80.000, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249161:
     template: Tiny_Mandragora_Launch
-    at:       [301.072, -5.142, 117.693, 105]
+    region:   e_91
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249162:
     template: Tiny_Mandragora_Launch
-    at:       [121.173, -1.140, -99.807, 127]
+    region:   s_51
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249163:
     template: Tiny_Mandragora_Launch
-    at:       [284.830, -23.668, 350.717, 41]
+    region:   ne_228
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249164:
     template: Tiny_Mandragora_Launch
-    at:       [53.268, 0.135, -316.739, 119]
+    region:   s_6
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249165:
     template: Tiny_Mandragora_Launch
-    at:       [-1.417, -1.053, -414.101, 127]
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249166:
     template: Tiny_Mandragora_Launch
-    at:       [-72.222, -4.813, -389.866, 71]
+    region:   s_40
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249167:
     template: Tiny_Mandragora_Launch
-    at:       [-39.000, -12.000, 319.000, 77]
+    region:   n_157
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249168:
     template: Tiny_Mandragora_Launch
-    at:       [203.852, -5.016, -11.164, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249169:
     template: Tiny_Mandragora_Launch
-    at:       [120.934, -35.018, 324.168, 53]
+    region:   n_210
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249170:
     template: Tiny_Mandragora_Launch
-    at:       [-289.689, -1.394, -276.775, 110]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249171:
     template: Tiny_Mandragora_Launch
-    at:       [330.459, -5.012, 75.235, 115]
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249172:
     template: Tiny_Mandragora_Launch
-    at:       [225.119, -20.828, 517.797, 19]
+    region:   ne_287
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249173:
     template: Tiny_Mandragora_Launch
-    at:       [113.086, -6.353, 92.558, 26]
+    region:   c_138
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249174:
     template: Tiny_Mandragora_Launch
-    at:       [79.000, -1.000, -54.000, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249175:
     template: Tiny_Mandragora_Launch
-    at:       [48.190, -1.231, -364.085, 62]
+    region:   s_6
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249176:
     template: Tiny_Mandragora_Launch
-    at:       [-86.680, -13.155, 246.950, 127]
+    region:   n_157
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249177:
     template: Tiny_Mandragora_Launch
-    at:       [170.490, -5.161, 85.110, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249178:
     template: Tiny_Mandragora_Launch
-    at:       [394.767, -4.811, 119.513, 127]
+    region:   e_91
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249179:
     template: Tiny_Mandragora_Launch
-    at:       [274.296, -20.357, 587.339, 41]
+    region:   ne_287
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249180:
     template: Tiny_Mandragora_Launch
-    at:       [-351.000, -17.000, 377.000, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249181:
     template: Tiny_Mandragora_Launch
-    at:       [-204.473, -4.037, -209.063, 113]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249182:
     template: Tiny_Mandragora_Launch
-    at:       [76.958, -22.995, 373.200, 106]
+    region:   n_210
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249183:
     template: Tiny_Mandragora_Launch
-    at:       [116.754, -0.181, -35.827, 90]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249184:
     template: Tiny_Mandragora_Launch
-    at:       [-202.432, -16.838, 372.774, 61]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249185:
     template: Tiny_Mandragora_Launch
-    at:       [157.000, -40.000, 363.000, 48]
+    region:   n_210
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249186:
     template: Tiny_Mandragora_Launch
-    at:       [-207.333, -0.990, -382.393, 127]
+    region:   s_40
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249187:
     template: Tiny_Mandragora_Launch
-    at:       [306.486, -6.960, 156.738, 127]
+    region:   e_91
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249188:
     template: Tiny_Mandragora_Launch
-    at:       [-332.558, -16.703, 312.921, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249189:
     template: Tiny_Mandragora_Launch
-    at:       [96.258, -2.705, 58.418, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249190:
     template: Tiny_Mandragora_Launch
-    at:       [218.250, -20.617, 554.114, 11]
+    region:   ne_287
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249191:
     template: Tiny_Mandragora_Launch
-    at:       [95.000, -1.000, -128.000, 127]
+    region:   s_51
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249192:
     template: Tiny_Mandragora_Launch
-    at:       [6.613, -0.936, -226.094, 127]
+    region:   s_51
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249193:
     template: Tiny_Mandragora_Launch
-    at:       [-327.000, -1.000, -315.000, 11]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249194:
     template: Tiny_Mandragora_Launch
-    at:       [239.421, -19.659, 583.122, 127]
+    region:   ne_287
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249195:
     template: Tiny_Mandragora_Launch
-    at:       [58.854, -2.690, 56.479, 23]
+    region:   c_138
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249196:
     template: Tiny_Mandragora_Launch
-    at:       [-233.943, -0.433, -283.561, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249197:
     template: Tiny_Mandragora_Launch
-    at:       [-156.730, -16.653, -82.972, 127]
+    region:   c_267
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249198:
     template: Tiny_Mandragora_Launch
-    at:       [345.752, -19.460, 397.321, 20]
+    region:   ne_178
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249199:
     template: Tiny_Mandragora_Launch
-    at:       [-132.460, -17.463, 396.822, 127]
+    region:   n_157
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249200:
     template: Tiny_Mandragora_Launch
-    at:       [230.849, -26.081, 394.268, 127]
+    region:   ne_228
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249201:
     template: Tiny_Mandragora_Launch
-    at:       [-42.076, -16.246, 393.777, 41]
+    region:   n_249
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249202:
     template: Tiny_Mandragora_Launch
-    at:       [241.934, -21.235, 454.672, 127]
+    region:   ne_228
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249203:
     template: Tiny_Mandragora_Launch
-    at:       [100.000, -1.000, -281.000, 39]
+    region:   s_6
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249204:
     template: Tiny_Mandragora_Launch
-    at:       [167.464, -4.039, 16.278, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Tiny_Mandragora
 
   17249205:
     template: Bumblebee_Launch
-    at:       [317.483, -20.557, 598.166, 127]
+    region:   ne_287
     level:    [1, 1]
     script:   Bumblebee
 
   17249206:
     template: Bumblebee_Launch
-    at:       [162.373, -1.026, -49.043, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Bumblebee
 
   17249207:
     template: Bumblebee_Launch
-    at:       [27.459, -18.435, 328.847, 127]
+    region:   n_210
     level:    [1, 1]
     script:   Bumblebee
 
   17249208:
     template: Bumblebee_Launch
-    at:       [-165.337, -16.696, -115.157, 106]
+    region:   c_267
     level:    [1, 1]
     script:   Bumblebee
 
   17249209:
     template: Bumblebee_Launch
-    at:       [-144.452, -2.608, -406.263, 101]
+    region:   s_40
     level:    [1, 1]
     script:   Bumblebee
 
   17249210:
     template: Bumblebee_Launch
-    at:       [53.159, -24.540, 554.652, 93]
+    region:   n_249
     level:    [1, 1]
     script:   Bumblebee
 
   17249211:
     template: Bumblebee_Launch
-    at:       [-84.265, -21.114, 141.736, 127]
+    region:   c_267
     level:    [1, 1]
     script:   Bumblebee
 
   17249212:
     template: Bumblebee_Launch
-    at:       [-323.237, -21.425, 209.837, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Bumblebee
 
   17249213:
     template: Bumblebee_Launch
-    at:       [198.575, -20.399, 474.479, 113]
+    region:   ne_228
     level:    [1, 1]
     script:   Bumblebee
 
   17249214:
     template: Bumblebee_Launch
-    at:       [63.437, -5.960, 90.056, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Bumblebee
 
   17249215:
     template: Bumblebee_Launch
-    at:       [-287.000, 4.000, -449.000, 127]
+    region:   sw_102
     level:    [1, 1]
     script:   Bumblebee
 
   17249216:
     template: Bumblebee_Launch
-    at:       [-49.558, -16.782, 8.425, 125]
+    region:   c_267
     level:    [1, 1]
     script:   Bumblebee
 
   17249217:
     template: Bumblebee_Launch
-    at:       [-24.000, -2.000, -360.000, 12]
+    region:   s_40
     level:    [1, 1]
     script:   Bumblebee
 
   17249218:
     template: Bumblebee_Launch
-    at:       [315.783, -17.755, 411.539, 127]
+    region:   ne_178
     level:    [1, 1]
     script:   Bumblebee
 
   17249219:
     template: Bumblebee_Launch
-    at:       [77.509, -20.719, 434.757, 127]
+    region:   n_210
     level:    [1, 1]
     script:   Bumblebee
 
   17249220:
     template: Bumblebee_Launch
-    at:       [199.047, -21.135, 585.533, 71]
+    region:   ne_287
     level:    [1, 1]
     script:   Bumblebee
 
   17249221:
     template: Bumblebee_Launch
-    at:       [-40.023, -12.607, 242.778, 127]
+    region:   n_157
     level:    [1, 1]
     script:   Bumblebee
 
   17249222:
     template: Bumblebee_Launch
-    at:       [104.000, -1.000, -359.000, 128]
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
 
   17249223:
     template: Bumblebee_Launch
-    at:       [92.305, -14.906, 202.505, 127]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249224:
     template: Bumblebee_Launch
-    at:       [278.620, -16.619, 200.447, 57]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249225:
     template: Bumblebee_Launch
-    at:       [152.480, -4.072, 42.575, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Bumblebee
 
   17249226:
     template: Bumblebee_Launch
-    at:       [81.690, -0.034, -5.733, 127]
+    region:   e_71
     level:    [1, 1]
     script:   Bumblebee
 
   17249227:
     template: Bumblebee_Launch
-    at:       [-95.384, -17.345, 299.281, 127]
+    region:   n_157
     level:    [1, 1]
     script:   Bumblebee
 
   17249228:
     template: Bumblebee_Launch
-    at:       [-226.000, -16.000, 419.000, 127]
+    region:   nw_304
     level:    [1, 1]
     script:   Bumblebee
 
   17249229:
     template: Bumblebee_Launch
-    at:       [-94.268, -5.387, -123.833, 103]
+    region:   sw_115
     level:    [1, 1]
     script:   Bumblebee
 
   17249230:
     template: Bumblebee_Launch
-    at:       [145.399, 2.798, -440.488, 127]
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
 
   17249231:
     template: Bumblebee_Launch
-    at:       [-69.529, -15.934, 366.459, 58]
+    region:   n_157
     level:    [1, 1]
     script:   Bumblebee
 
   17249232:
     template: Bumblebee_Launch
-    at:       [86.000, -1.000, -191.000, 114]
+    region:   s_51
     level:    [1, 1]
     script:   Bumblebee
 
   17249233:
     template: Bumblebee_Launch
-    at:       [-245.000, -1.000, -396.000, 59]
+    region:   sw_102
     level:    [1, 1]
     script:   Bumblebee
 
   17249234:
     template: Bumblebee_Launch
-    at:       [57.000, -18.000, 260.000, 92]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249235:
     template: Bumblebee_Launch
-    at:       [139.154, -21.418, 505.416, 127]
+    region:   n_249
     level:    [1, 1]
     script:   Bumblebee
 
   17249236:
     template: Bumblebee_Launch
-    at:       [22.027, -21.285, 496.959, 127]
+    region:   n_249
     level:    [1, 1]
     script:   Bumblebee
 
   17249237:
     template: Bumblebee_Launch
-    at:       [-160.801, -4.953, -212.011, 50]
+    region:   sw_115
     level:    [1, 1]
     script:   Bumblebee
 
   17249238:
     template: Bumblebee_Launch
-    at:       [-351.000, 4.000, -446.000, 52]
+    region:   sw_102
     level:    [1, 1]
     script:   Bumblebee
 
   17249239:
     template: Bumblebee_Launch
-    at:       [-81.736, -20.260, 79.743, 127]
+    region:   c_267
     level:    [1, 1]
     script:   Bumblebee
 
   17249240:
     template: Bumblebee_Launch
-    at:       [236.674, -22.824, 628.339, 11]
+    region:   ne_287
     level:    [1, 1]
     script:   Bumblebee
 
   17249241:
     template: Bumblebee_Launch
-    at:       [-371.527, -29.366, 432.002, 100]
+    region:   nw_326
     level:    [1, 1]
     script:   Bumblebee
 
   17249242:
     template: Bumblebee_Launch
-    at:       [-49.068, -4.617, -225.605, 79]
+    region:   s_51
     level:    [1, 1]
     script:   Bumblebee
 
   17249243:
     template: Bumblebee_Launch
-    at:       [-124.677, -4.717, -168.971, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Bumblebee
 
   17249244:
     template: Bumblebee_Launch
-    at:       [205.994, -5.347, 45.930, 43]
+    region:   e_71
     level:    [1, 1]
     script:   Bumblebee
 
   17249245:
     template: Bumblebee_Launch
-    at:       [64.530, -9.016, 142.134, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Bumblebee
 
   17249246:
     template: Bumblebee_Launch
-    at:       [36.716, -1.162, 18.953, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Bumblebee
 
   17249247:
     template: Bumblebee_Launch
-    at:       [353.000, -4.000, 5.000, 82]
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
 
   17249248:
     template: Bumblebee_Launch
-    at:       [-369.781, -17.120, 334.355, 4]
+    region:   nw_304
     level:    [1, 1]
     script:   Bumblebee
 
   17249249:
     template: Bumblebee_Launch
-    at:       [-265.000, -1.000, -318.000, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Bumblebee
 
   17249250:
     template: Bumblebee_Launch
-    at:       [104.000, -1.000, -312.000, 21]
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
 
   17249251:
     template: Bumblebee_Launch
-    at:       [14.576, -17.892, 420.890, 127]
+    region:   n_249
     level:    [1, 1]
     script:   Bumblebee
 
   17249252:
     template: Bumblebee_Launch
-    at:       [-241.855, -31.463, 547.105, 127]
+    region:   nw_333
     level:    [1, 1]
     script:   Bumblebee
 
   17249253:
     template: Bumblebee_Launch
-    at:       [-4.703, -13.400, 270.752, 124]
+    region:   n_157
     level:    [1, 1]
     script:   Bumblebee
 
   17249254:
     template: Bumblebee_Launch
-    at:       [42.376, -0.526, -183.944, 127]
+    region:   s_51
     level:    [1, 1]
     script:   Bumblebee
 
   17249255:
     template: Bumblebee_Launch
-    at:       [98.126, 2.825, -438.103, 121]
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
 
   17249256:
     template: Bumblebee_Launch
-    at:       [-259.000, 8.000, -481.000, 89]
+    region:   sw_102
     level:    [1, 1]
     script:   Bumblebee
 
   17249257:
     template: Bumblebee_Launch
-    at:       [-203.581, -25.260, 495.907, 70]
+    region:   nw_333
     level:    [1, 1]
     script:   Bumblebee
 
   17249258:
     template: Bumblebee_Launch
-    at:       [271.000, -21.000, 296.000, 40]
+    region:   ne_228
     level:    [1, 1]
     script:   Bumblebee
 
   17249259:
     template: Bumblebee_Launch
-    at:       [-10.968, -5.529, 22.895, 20]
+    region:   c_138
     level:    [1, 1]
     script:   Bumblebee
 
   17249260:
     template: Bumblebee_Launch
-    at:       [212.000, -28.000, 282.000, 127]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249261:
     template: Bumblebee_Launch
-    at:       [26.555, -7.943, 106.358, 127]
+    region:   c_138
     level:    [1, 1]
     script:   Bumblebee
 
   17249262:
     template: Bumblebee_Launch
-    at:       [190.000, -34.000, 384.000, 122]
+    region:   ne_228
     level:    [1, 1]
     script:   Bumblebee
 
   17249263:
     template: Bumblebee_Launch
-    at:       [46.000, -0.425, -88.000, 92]
+    region:   s_51
     level:    [1, 1]
     script:   Bumblebee
 
   17249264:
     template: Bumblebee_Launch
-    at:       [-369.000, 4.000, -388.000, 127]
+    region:   sw_102
     level:    [1, 1]
     script:   Bumblebee
 
   17249265:
     template: Bumblebee_Launch
-    at:       [158.000, -40.000, 318.000, 91]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249266:
     template: Bumblebee_Launch
-    at:       [338.455, -5.653, 118.878, 110]
+    region:   e_91
     level:    [1, 1]
     script:   Bumblebee
 
   17249267:
     template: Bumblebee_Launch
-    at:       [317.414, -16.674, 365.212, 34]
+    region:   ne_178
     level:    [1, 1]
     script:   Bumblebee
 
   17249268:
     template: Bumblebee_Launch
-    at:       [47.658, -0.944, -274.880, 127]
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
 
   17249269:
     template: Bumblebee_Launch
-    at:       [22.597, -1.500, -341.177, 127]
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
 
   17249270:
     template: Bumblebee_Launch
-    at:       [-90.983, -5.230, -215.546, 127]
+    region:   sw_115
     level:    [1, 1]
     script:   Bumblebee
 
   17249271:
     template: Bumblebee_Launch
-    at:       [190.000, -24.000, 248.000, 127]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249272:
     template: Bumblebee_Launch
-    at:       [269.468, -17.978, 237.457, 91]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249273:
     template: Bumblebee_Launch
-    at:       [-320.000, -18.000, 262.000, 47]
+    region:   nw_304
     level:    [1, 1]
     script:   Bumblebee
 
   17249274:
     template: Bumblebee_Launch
-    at:       [284.223, -5.116, 65.791, 127]
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
 
   17249275:
     template: Bumblebee_Launch
-    at:       [-297.408, -17.063, 353.975, 35]
+    region:   nw_304
     level:    [1, 1]
     script:   Bumblebee
 
   17249276:
     template: Bumblebee_Launch
-    at:       [300.000, -5.000, 5.000, 35]
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
 
   17249277:
     template: Bumblebee_Launch
-    at:       [123.000, -32.000, 282.000, 93]
+    region:   e_188
     level:    [1, 1]
     script:   Bumblebee
 
   17249278:
     template: Bumblebee_Launch
-    at:       [281.750, -22.548, 380.852, 34]
+    region:   ne_228
     level:    [1, 1]
     script:   Bumblebee
 
   17249279:
     template: Bumblebee_Launch
-    at:       [-21.189, -2.700, -391.333, 127]
+    region:   s_40
     level:    [1, 1]
     script:   Bumblebee

@@ -172,324 +172,324 @@ spawns:
 
   17575953:
     template: Shade_war
-    at:       [162.655, -14.972, 268.909, 236]
+    region:   ne_59
     level:    [42, 46]
     script:   Shade
 
   17575954:
     template: Shade_thf
-    at:       [159.901, -15.000, 289.027, 86]
+    region:   ne_65
     level:    [46, 48]
     script:   Shade
 
   17575955:
     template: Shade_drk
-    at:       [168.757, -15.718, 292.243, 205]
+    region:   ne_63
     level:    [46, 48]
     script:   Shade
 
   17575956:
     template: Shade_war
-    at:       [172.975, -15.757, 268.928, 134]
+    region:   ne_62
     level:    [46, 48]
     script:   Shade
 
   17575957:
     template: Lost_Soul_blm_EN
-    at:       [158.746, -15.000, 280.221, 96]
+    region:   ne_65
     level:    [42, 46]
     script:   Lost_Soul
 
   17575958:
     template: Lost_Soul_blm_EN
-    at:       [161.402, -15.570, 294.503, 137]
+    region:   ne_65
     level:    [42, 46]
     script:   Lost_Soul
 
   17575959:
     template: Tomb_Wolf
-    at:       [219.469, -2.480, -134.139, 185]
+    region:   se_61
     level:    [53, 55]
 
   17575960:
     template: Tomb_Wolf
-    at:       [219.778, -5.146, -145.706, 64]
+    region:   se_145
     level:    [53, 55]
 
   17575961:
     template: Tomb_Wolf
-    at:       [219.650, -7.800, -159.891, 62]
+    region:   se_145
     level:    [53, 55]
 
   17575962:
     template: Lich
-    at:       [378.067, -36.000, -140.576, 117]
+    region:   se_64
     level:    [51, 55]
 
   17575963:
     template: Lich
-    at:       [351.022, -32.000, -142.041, 164]
+    region:   se_64
     level:    [51, 55]
 
   17575964:
     template: Fallen_Knight_EN
-    at:       [323.817, -32.000, -137.164, 229]
+    region:   se_64
     level:    [54, 56]
     script:   Fallen_Knight
 
   17575965:
     template: Fallen_Knight_EN
-    at:       [359.413, -32.000, -138.067, 118]
+    region:   se_64
     level:    [54, 56]
     script:   Fallen_Knight
 
   17575966:
     template: Tomb_Warrior
-    at:       [344.579, -32.000, -124.596, 102]
+    region:   se_153
     level:    [60, 62]
 
   17575978:
     template: Tomb_Mage
-    at:       [335.415, -32.000, -127.566, 92]
+    region:   se_153
     level:    [60, 63]
 
   17575979:
     template: Tomb_Warrior
-    at:       [340.388, -32.000, -153.382, 64]
+    region:   se_154
     level:    [60, 62]
 
   17575980:
     template: Tomb_Mage
-    at:       [336.345, -32.000, -157.653, 98]
+    region:   se_154
     level:    [60, 63]
 
   17575981:
     template: Utukku_EN_FY
-    at:       [253.737, -15.988, -179.220, 191]
+    region:   se_146
     level:    [55, 57]
     script:   Utukku
 
   17575982:
     template: Utukku_EN_FY
-    at:       [261.698, -15.972, -203.049, 48]
+    region:   se_146
     level:    [55, 57]
     script:   Utukku
 
   17575983:
     template: Utukku_EN_FY
-    at:       [276.086, -15.806, -221.110, 214]
+    region:   se_46
     level:    [55, 57]
     script:   Utukku
 
   17575984:
     template: Utukku_EN_FY
-    at:       [287.576, -15.679, -222.858, 239]
+    region:   se_46
     level:    [55, 57]
     script:   Utukku
 
   17575985:
     template: Utukku_EN_FY
-    at:       [297.937, -15.744, -243.712, 192]
+    region:   se_43
     level:    [55, 57]
     script:   Utukku
 
   17575995:
     template: Tomb_Wolf
-    at:       [340.244, -31.787, -317.849, 62]
+    region:   se_26
     level:    [53, 55]
 
   17575996:
     template: Tomb_Wolf
-    at:       [342.435, -31.971, -330.357, 29]
+    region:   se_26
     level:    [53, 55]
 
   17575997:
     template: Lost_Soul_blm_EN
-    at:       [151.078, -15.000, 268.726, 197]
+    region:   ne_59
     level:    [42, 46]
     script:   Lost_Soul
 
   17575998:
     template: Lost_Soul_blm_EN
-    at:       [170.777, -15.000, 279.574, 95]
+    region:   ne_63
     level:    [42, 46]
     script:   Lost_Soul
 
   17575999:
     template: Lost_Soul_blm_EN
-    at:       [151.833, -15.000, 290.517, 138]
+    region:   ne_65
     level:    [42, 46]
     script:   Lost_Soul
 
   17576000:
     template: Revenant_NGS_EN_GC
-    at:       [-23.058, -7.991, 213.662, 89]
+    region:   c_18
     level:    [44, 47]
     script:   Revenant
 
   17576001:
     template: Revenant_NGS_EN_GC
-    at:       [-16.789, -8.058, 221.060, 187]
+    region:   c_18
     level:    [44, 47]
     script:   Revenant
 
   17576002:
     template: Revenant_NGS_EN_GC
-    at:       [-52.277, -8.016, 222.801, 13]
+    region:   c_18
     level:    [44, 47]
     script:   Revenant
 
   17576069:
     template: Lost_Soul_blm_EN
-    at:       [55.433, -15.686, 318.596, 215]
+    region:   n_23
     level:    [42, 46]
     script:   Lost_Soul
 
   17576070:
     template: Lost_Soul_blm_EN
-    at:       [47.123, -14.988, 330.646, 193]
+    region:   n_30
     level:    [42, 46]
     script:   Lost_Soul
 
   17576071:
     template: Lost_Soul_blm_EN
-    at:       [24.547, -15.692, 318.377, 122]
+    region:   ne_65
     level:    [42, 46]
     script:   Lost_Soul
 
   17576072:
     template: Spriggan_war
-    at:       [84.826, -0.755, 100.052, 246]
+    region:   e_304
     level:    [64, 66]
     script:   Spriggan
 
   17576073:
     template: Spriggan_blm
-    at:       [101.004, -7.882, 122.037, 200]
+    region:   e_300
     level:    [64, 66]
     script:   Spriggan
 
   17576074:
     template: Spriggan_thf
-    at:       [87.938, -8.542, 141.998, 89]
+    region:   e_300
     level:    [64, 66]
     script:   Spriggan
 
   17576075:
     template: Spriggan_rng
-    at:       [69.843, -4.980, 138.771, 124]
+    region:   e_306
     level:    [64, 66]
     script:   Spriggan
 
   17576076:
     template: Spriggan_war
-    at:       [181.839, -0.456, -184.097, 68]
+    region:   se_245
     level:    [64, 66]
     script:   Spriggan
 
   17576077:
     template: Spriggan_blm
-    at:       [178.006, 0.047, -183.649, 133]
+    region:   se_245
     level:    [64, 66]
     script:   Spriggan
 
   17576078:
     template: Spriggan_thf
-    at:       [171.626, -0.200, -186.459, 211]
+    region:   se_245
     level:    [64, 66]
     script:   Spriggan
 
   17576079:
     template: Spriggan_rng
-    at:       [178.652, 0.000, -178.465, 214]
+    region:   se_245
     level:    [64, 66]
     script:   Spriggan
 
   17576080:
     template: Gazer
-    at:       [-259.799, 0.126, 155.096, 55]
+    region:   c_72
     level:    [41, 43]
 
   17576180:
     template: Shade_war
-    at:       [33.145, -15.000, 320.309, 42]
+    region:   n_25
     level:    [46, 48]
     script:   Shade
 
   17576181:
     template: Shade_thf
-    at:       [36.679, -14.943, 330.277, 123]
+    region:   n_27
     level:    [46, 48]
     script:   Shade
 
   17576182:
     template: Shade_drk
-    at:       [46.713, -15.000, 319.918, 125]
+    region:   n_23
     level:    [46, 48]
     script:   Shade
 
   17576183:
     template: Shade_war
-    at:       [48.785, -15.000, 310.562, 190]
+    region:   n_23
     level:    [46, 48]
     script:   Shade
 
   17576184:
     template: Lost_Soul_blm_EN
-    at:       [42.543, -15.528, 305.220, 196]
+    region:   n_23
     level:    [42, 46]
     script:   Lost_Soul
 
   17576185:
     template: Lost_Soul_blm_EN
-    at:       [30.645, -14.909, 325.404, 101]
+    region:   n_27
     level:    [42, 46]
     script:   Lost_Soul
 
   17576236:
     template: Shade_war
-    at:       [127.330, 8.110, -64.530, 111]
+    region:   se_44
     level:    [46, 48]
     script:   Shade
 
   17576237:
     template: Shade_thf
-    at:       [109.760, 9.031, -76.684, 194]
+    region:   se_47
     level:    [46, 48]
     script:   Shade
 
   17576238:
     template: Shade_drk
-    at:       [115.548, 8.341, -94.093, 126]
+    region:   se_48
     level:    [46, 48]
     script:   Shade
 
   17576239:
     template: Shade_war
-    at:       [127.054, 9.000, -88.512, 52]
+    region:   se_42
     level:    [46, 48]
     script:   Shade
 
   17576240:
     template: Lost_Soul_blm_EN
-    at:       [117.207, 9.000, -78.817, 30]
+    region:   se_47
     level:    [42, 46]
     script:   Lost_Soul
 
   17576241:
     template: Lost_Soul_blm_EN
-    at:       [126.153, 9.000, -79.008, 26]
+    region:   se_42
     level:    [42, 46]
     script:   Lost_Soul
 
   17576242:
     template: Lost_Soul_blm_EN
-    at:       [108.298, 8.879, -82.100, 221]
+    region:   se_48
     level:    [42, 46]
     script:   Lost_Soul
 
   17576243:
     template: Lost_Soul_blm_EN
-    at:       [115.651, 8.808, -68.754, 246]
+    region:   se_47
     level:    [42, 46]
     script:   Lost_Soul

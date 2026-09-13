@@ -19,9 +19,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true
@@ -80,8 +80,8 @@ templates:
           type:  standard
           model: 761
         entity_flags: 131
-        model_size:   1
-        hitbox:       8
+        model_size:     1
+        hitbox:         8
       behaviors:
         aggressive: true
         links:      true
@@ -106,9 +106,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true
@@ -143,9 +143,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true
@@ -180,9 +180,9 @@ templates:
           type:  standard
           model: 288
         entity_flags:  131
-        animation_sub: 8
-        model_size:    1
-        hitbox:        37
+        animation_sub:   8
+        model_size:      1
+        hitbox:         37
       behaviors:
         aggressive: true
       spawn:
@@ -196,9 +196,9 @@ templates:
         - chance: uncommon
           one_of: [tukuku_whiteshell, ordelle_bronzepiece, one_byne_bill]
         - chance: common
-          item: slice_of_cockatrice_meat
+          item:   slice_of_cockatrice_meat
         - chance: uncommon
-          item: cockatrice_skin
+          item:   cockatrice_skin
       steal: giant_bird_feather
       despoil:
         giant_bird_feather: 0
@@ -218,9 +218,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true
@@ -255,9 +255,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true
@@ -292,9 +292,9 @@ templates:
           type:  standard
           model: 420
         entity_flags: 1179
-        name_prefix:  32
-        model_size:   1
-        hitbox:       34
+        name_prefix:    32
+        model_size:      1
+        hitbox:         34
       behaviors:
         aggressive:     true
         links:          true

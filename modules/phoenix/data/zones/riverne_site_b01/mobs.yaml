@@ -52,80 +52,80 @@ spawns:
 
   16896063:
     template: Nitro_Cluster
-    at:       [109.783, 0.918, -657.409, 154]
+    region:   s_63
     level:    [55, 57]
 
   16896064:
     template: Nitro_Cluster
-    at:       [99.135, 0.540, -650.783, 140]
+    region:   s_63
     level:    [55, 57]
 
   16896065:
     template: Ignidrake
-    at:       [93.091, 0.880, -662.086, 75]
+    region:   s_63
     level:    [57, 59]
 
   16896066:
     template: Ignidrake
-    at:       [116.677, 0.200, -671.818, 2]
+    region:   s_67
     level:    [57, 59]
 
   16896067:
     template: Strato_Hippogryph
-    at:       [-72.837, 0.646, -503.169, 3]
+    region:   s_78
     level:    [55, 57]
 
   16896068:
     template: Strato_Hippogryph
-    at:       [-81.832, 0.103, -515.326, 87]
+    region:   s_78
     level:    [55, 57]
 
   16896069:
     template: Lunantishee
-    at:       [-86.433, 0.485, -497.470, 253]
+    region:   s_78
     level:    [55, 58]
 
   16896078:
     template: Strato_Hippogryph
-    at:       [-82.908, 0.040, -608.204, 33]
+    region:   s_82
     level:    [55, 57]
 
   16896079:
     template: Strato_Hippogryph
-    at:       [-82.242, 0.715, -623.690, 63]
+    region:   s_82
     level:    [55, 57]
 
   16896080:
     template: Strato_Hippogryph
-    at:       [-40.735, 0.116, -647.091, 80]
+    region:   s_89
     level:    [55, 57]
 
   16896081:
     template: Strato_Hippogryph
-    at:       [-40.835, 0.030, -684.617, 44]
+    region:   s_86
     level:    [55, 57]
 
   16896082:
     template: Strato_Hippogryph
-    at:       [-43.454, 0.520, -704.748, 67]
+    region:   s_91
     level:    [55, 57]
 
   16896083:
     template: Strato_Hippogryph
-    at:       [-4.035, 0.001, -679.794, 170]
+    region:   s_89
     level:    [55, 57]
 
   16896084:
     template: Lunantishee
-    at:       [-50.373, 0.497, -667.745, 79]
+    region:   s_86
     level:    [55, 57]
 
   16896085:
     template: Lunantishee
-    at:       [-44.282, 0.217, -627.778, 254]
+    region:   s_89
     level:    [55, 58]
 
   16896086:
     template: Lunantishee
-    at:       [-62.176, 0.861, -630.730, 20]
+    region:   s_82
     level:    [55, 58]

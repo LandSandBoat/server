@@ -72,417 +72,417 @@ spawns:
 
   17461295:
     template: Haunt
-    at:       [-218.619, 0.000, -180.240, 205]
+    region:   w_28
     level:    [60, 63]
 
   17461301:
     template: Mousse_BO
-    at:       [99.942, 0.991, -237.671, 53]
+    region:   se_118
     level:    [58, 62]
     script:   Mousse
 
   17461302:
     template: Mousse_BO
-    at:       [91.502, 1.133, -219.619, 161]
+    region:   e_121
     level:    [58, 62]
     script:   Mousse
 
   17461303:
     template: Mousse_BO
-    at:       [-38.164, 0.986, -301.358, 18]
+    region:   s_99
     level:    [58, 62]
     script:   Mousse
 
   17461304:
     template: Mousse_BO
-    at:       [-26.201, 1.150, -300.197, 253]
+    region:   s_98
     level:    [58, 62]
     script:   Mousse
 
   17461305:
     template: Mousse_BO
-    at:       [-23.472, 1.028, -335.962, 197]
+    region:   s_109
     level:    [58, 62]
     script:   Mousse
 
   17461306:
     template: Mousse_BO
-    at:       [-16.998, 1.000, -341.704, 34]
+    region:   s_107
     level:    [58, 62]
     script:   Mousse
 
   17461307:
     template: Sewer_Syrup
-    at:       [-24.138, 0.996, -340.245, 127]
+    region:   s_109
     level:    [64, 66]
 
   17461308:
     template: Garm_BO
-    at:       [99.615, 0.059, -56.860, 153]
+    region:   ne_155
     level:    [64, 66]
     script:   Garm
 
   17461309:
     template: Garm_BO
-    at:       [111.489, 0.046, -63.056, 113]
+    region:   ne_157
     level:    [64, 66]
     script:   Garm
 
   17461310:
     template: Garm_BO
-    at:       [23.244, 0.000, -140.705, 249]
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
   17461311:
     template: Garm_BO
-    at:       [134.682, 0.339, -46.602, 94]
+    region:   ne_157
     level:    [64, 66]
     script:   Garm
 
   17461312:
     template: Garm_BO
-    at:       [15.952, 0.045, -145.443, 248]
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
   17461313:
     template: Garm_BO
-    at:       [38.603, 1.000, -140.011, 253]
+    region:   region_97
     level:    [64, 66]
     script:   Garm
 
   17461314:
     template: Garm_BO
-    at:       [22.021, -0.001, -137.418, 24]
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
   17461315:
     template: Shii
-    at:       [26.511, 0.000, -145.520, 193]
+    region:   c_136
     level:    [70, 71]
 
   17461334:
     template: Garm_BO
-    at:       [-195.880, 0.500, -179.708, 253]
+    region:   w_174
     level:    [64, 66]
     script:   Garm
 
   17461335:
     template: Garm_BO
-    at:       [78.934, 0.250, -263.952, 162]
+    region:   se_123
     level:    [64, 66]
     script:   Garm
 
   17461338:
     template: Drexerion_the_Condemned
-    at:       [203.216, 0.278, -23.637, 169]
+    region:   ne_170
     level:    [72, 73]
 
   17461339:
     template: Garm_BO
-    at:       [63.609, -0.026, -266.697, 142]
+    region:   se_127
     level:    [64, 66]
     script:   Garm
 
   17461340:
     template: Garm_BO
-    at:       [66.165, 0.154, -293.123, 41]
+    region:   se_127
     level:    [64, 66]
     script:   Garm
 
   17461341:
     template: Haunt
-    at:       [-19.673, 0.056, -347.876, 191]
+    region:   s_109
     level:    [60, 63]
 
   17461342:
     template: Haunt
-    at:       [-12.880, -0.027, -338.666, 205]
+    region:   s_107
     level:    [60, 63]
 
   17461343:
     template: Phanduron_the_Condemned
-    at:       [210.731, 0.250, -51.200, 79]
+    region:   ne_170
     level:    [72, 73]
 
   17461344:
     template: Dark_Aspic
-    at:       [-17.357, 1.129, 19.557, 133]
+    region:   n_6
     level:    [52, 54]
 
   17461345:
     template: Dark_Aspic
-    at:       [-21.675, 1.165, 21.303, 228]
+    region:   n_6
     level:    [52, 54]
 
   17461346:
     template: Werebat
-    at:       [-180.957, 4.000, -181.448, 71]
+    region:   w_177
     level:    [55, 59]
 
   17461347:
     template: Hecatomb_Hound
-    at:       [-80.539, 0.250, -254.625, 116]
+    region:   region_90
     level:    [56, 59]
 
   17461348:
     template: Hecatomb_Hound
-    at:       [-60.531, 0.000, -242.759, 21]
+    region:   s_91
     level:    [56, 59]
 
   17461349:
     template: Hecatomb_Hound
-    at:       [-76.063, 0.027, -221.635, 200]
+    region:   s_91
     level:    [56, 59]
 
   17461350:
     template: Hecatomb_Hound
-    at:       [-100.419, -0.007, -243.226, 29]
+    region:   s_86
     level:    [56, 59]
 
   17461351:
     template: Hecatomb_Hound
-    at:       [-54.654, 0.042, -136.752, 135]
+    region:   region_96
     level:    [56, 59]
 
   17461352:
     template: Hecatomb_Hound
-    at:       [-65.766, -0.006, -139.349, 65]
+    region:   region_96
     level:    [56, 59]
 
   17461353:
     template: Hecatomb_Hound
-    at:       [-65.647, 0.000, -144.838, 83]
+    region:   c_221
     level:    [56, 59]
 
   17461354:
     template: Werebat
-    at:       [-59.804, 0.988, -338.308, 178]
+    region:   s_102
     level:    [55, 59]
 
   17461355:
     template: Werebat
-    at:       [-59.679, 0.978, -323.099, 188]
+    region:   s_102
     level:    [55, 59]
 
   17461356:
     template: Werebat
-    at:       [-52.496, 1.045, -300.569, 7]
+    region:   s_99
     level:    [55, 59]
 
   17461357:
     template: Werebat
-    at:       [-38.321, 1.000, -340.142, 131]
+    region:   s_102
     level:    [55, 59]
 
   17461358:
     template: Werebat
-    at:       [-34.184, 1.053, -340.346, 0]
+    region:   s_102
     level:    [55, 59]
 
   17461359:
     template: Werebat
-    at:       [-20.200, 1.000, -242.725, 212]
+    region:   c_114
     level:    [55, 59]
 
   17461360:
     template: Werebat
-    at:       [-1.050, 1.000, -219.572, 11]
+    region:   c_114
     level:    [55, 59]
 
   17461361:
     template: Mousse_BO
-    at:       [12.731, 1.105, -219.837, 4]
+    region:   region_93
     level:    [58, 62]
     script:   Mousse
 
   17461362:
     template: Haunt
-    at:       [-19.920, 1.000, -242.153, 63]
+    region:   c_114
     level:    [60, 63]
 
   17461363:
     template: Haunt
-    at:       [27.922, 0.982, -220.210, 2]
+    region:   region_93
     level:    [60, 63]
 
   17461364:
     template: Werebat
-    at:       [76.910, 0.987, -220.631, 249]
+    region:   e_121
     level:    [55, 59]
 
   17461365:
     template: Werebat
-    at:       [85.677, 1.132, -220.395, 254]
+    region:   e_121
     level:    [55, 59]
 
   17461366:
     template: Werebat
-    at:       [98.623, 0.972, -222.785, 55]
+    region:   se_118
     level:    [55, 59]
 
   17461367:
     template: Werebat
-    at:       [99.438, 1.088, -248.885, 65]
+    region:   se_118
     level:    [55, 59]
 
   17461368:
     template: Werebat
-    at:       [60.162, 1.013, -176.359, 193]
+    region:   region_97
     level:    [55, 59]
 
   17461369:
     template: Mousse_BO
-    at:       [60.350, 1.000, -163.117, 192]
+    region:   region_97
     level:    [58, 62]
     script:   Mousse
 
   17461370:
     template: Garm_BO
-    at:       [24.699, 0.000, -139.467, 132]
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
   17461371:
     template: Garm_BO
-    at:       [37.918, 1.000, -139.967, 254]
+    region:   region_97
     level:    [64, 66]
     script:   Garm
 
   17461372:
     template: Garm_BO
-    at:       [15.904, 0.047, -145.490, 45]
+    region:   c_136
     level:    [64, 66]
     script:   Garm
 
   17461373:
     template: Mousse_BO
-    at:       [65.873, 1.138, -100.403, 131]
+    region:   ne_148
     level:    [58, 62]
     script:   Mousse
 
   17461374:
     template: Mousse_BO
-    at:       [83.132, 1.023, -101.335, 125]
+    region:   ne_148
     level:    [58, 62]
     script:   Mousse
 
   17461375:
     template: Mousse_BO
-    at:       [81.026, 1.000, -179.825, 254]
+    region:   e_139
     level:    [58, 62]
     script:   Mousse
 
   17461376:
     template: Haunt
-    at:       [98.958, 1.080, -164.055, 186]
+    region:   e_140
     level:    [60, 63]
 
   17461377:
     template: Haunt
-    at:       [99.455, 1.103, -105.647, 172]
+    region:   ne_148
     level:    [60, 63]
 
   17461378:
     template: Gespenst
-    at:       [84.760, 0.279, -24.670, 22]
+    region:   ne_150
     level:    [68, 70]
 
   17461379:
     template: Werebat
-    at:       [-180.966, 12.000, -219.129, 41]
+    region:   w_181
     level:    [55, 59]
 
   17461380:
     template: Garm_BO
-    at:       [-174.678, 12.250, -221.972, 8]
+    region:   w_181
     level:    [64, 66]
     script:   Garm
 
   17461381:
     template: Garm_BO
-    at:       [-159.248, 16.000, -218.747, 249]
+    region:   w_181
     level:    [64, 66]
     script:   Garm
 
   17461423:
     template: Werebat
-    at:       [72.703, 0.978, -180.202, 244]
+    region:   e_139
     level:    [55, 59]
 
   17461424:
     template: Werebat
-    at:       [91.717, 0.982, -181.475, 3]
+    region:   e_140
     level:    [55, 59]
 
   17461425:
     template: Werebat
-    at:       [96.998, 0.977, -178.718, 245]
+    region:   e_140
     level:    [55, 59]
 
   17461426:
     template: Werebat
-    at:       [100.731, 1.114, -174.800, 192]
+    region:   e_140
     level:    [55, 59]
 
   17461427:
     template: Werebat
-    at:       [99.430, 0.940, -145.815, 198]
+    region:   e_143
     level:    [55, 59]
 
   17461428:
     template: Werebat
-    at:       [60.534, 1.059, -72.314, 195]
+    region:   ne_146
     level:    [55, 59]
 
   17461429:
     template: Werebat
-    at:       [152.110, 0.000, -20.514, 254]
+    region:   ne_162
     level:    [55, 59]
 
   17461430:
     template: Werebat
-    at:       [164.629, 0.024, -21.239, 14]
+    region:   ne_162
     level:    [55, 59]
 
   17461431:
     template: Werebat
-    at:       [175.467, 0.039, -19.208, 248]
+    region:   ne_162
     level:    [55, 59]
 
   17461432:
     template: Werebat
-    at:       [147.438, 0.018, -20.577, 87]
+    region:   ne_162
     level:    [55, 59]
 
   17461433:
     template: Arioch
-    at:       [67.603, 0.038, -23.879, 188]
+    region:   ne_150
     level:    [56, 62]
 
   17461469:
     template: Gespenst
-    at:       [98.242, 0.000, -284.310, 212]
+    region:   se_123
     level:    [68, 70]
 
   17461470:
     template: Gespenst
-    at:       [93.325, 0.310, -270.763, 194]
+    region:   se_123
     level:    [68, 70]
 
   17461471:
     template: Manes
-    at:       [81.706, 0.250, -293.819, 240]
+    region:   se_127
     level:    [72, 73]
 
   17461476:
     template: Gespenst
-    at:       [199.051, 0.250, -35.576, 36]
+    region:   ne_166
     level:    [68, 70]
 
   17461477:
     template: Gespenst
-    at:       [212.019, 0.250, -39.687, 47]
+    region:   ne_170
     level:    [68, 70]

@@ -5,235 +5,235 @@ spawns:
 
   16793764:
     template: Tropical_Rarab
-    at:       [121.049, -36.104, 604.350, 102]
+    region:   n_200
     level:    [73, 76]
 
   16793782:
     template: Catoblepas
-    at:       [106.144, -28.891, 528.495, 30]
+    region:   n_213
     level:    [76, 77]
 
   16793787:
     template: Tropical_Rarab
-    at:       [121.846, -36.081, 595.766, 190]
+    region:   n_200
     level:    [73, 76]
 
   16793790:
     template: Catoblepas
-    at:       [79.444, -33.570, 544.507, 58]
+    region:   n_206
     level:    [76, 77]
 
   16793791:
     template: Tropical_Rarab
-    at:       [125.222, -27.196, 497.663, 24]
+    region:   n_217
     level:    [73, 76]
 
   16793800:
     template: Hobgoblin_Toreador
-    at:       [76.466, -36.243, 563.214, 226]
+    region:   n_203
     level:    [72, 74]
 
   16793801:
     template: Hobgoblin_Toreador
-    at:       [91.049, -33.076, 541.276, 159]
+    region:   n_206
     level:    [72, 74]
 
   16793802:
     template: Hobgoblin_Blagger
-    at:       [80.499, -28.016, 516.031, 212]
+    region:   n_209
     level:    [72, 74]
 
   16793803:
     template: Tropical_Rarab
-    at:       [138.567, -28.607, 492.143, 19]
+    region:   n_217
     level:    [73, 76]
 
   16793804:
     template: Tropical_Rarab
-    at:       [133.934, -27.441, 475.411, 66]
+    region:   n_217
     level:    [73, 76]
 
   16793805:
     template: Tropical_Rarab
-    at:       [123.394, -27.811, 447.810, 39]
+    region:   n_221
     level:    [73, 76]
 
   16793806:
     template: Catoblepas
-    at:       [138.780, -27.062, 436.019, 20]
+    region:   n_221
     level:    [76, 77]
 
   16793807:
     template: Catoblepas
-    at:       [153.088, -27.855, 436.673, 255]
+    region:   n_231
     level:    [76, 77]
 
   16793808:
     template: Hobgoblin_Physician
-    at:       [164.627, -28.052, 446.758, 231]
+    region:   n_227
     level:    [72, 74]
 
   16793809:
     template: Hobgoblin_Blagger
-    at:       [160.451, -27.634, 468.659, 133]
+    region:   n_227
     level:    [72, 74]
 
   16793810:
     template: Tartarus_Eft
-    at:       [201.965, -27.834, 487.345, 211]
+    region:   n_247
     level:    [76, 77]
 
   16793811:
     template: Tartarus_Eft
-    at:       [185.571, -28.847, 498.672, 74]
+    region:   n_247
     level:    [76, 77]
 
   16793812:
     template: Catoblepas
-    at:       [200.803, -27.003, 500.036, 179]
+    region:   n_247
     level:    [76, 77]
 
   16793813:
     template: Catoblepas
-    at:       [196.549, -27.695, 509.888, 244]
+    region:   n_247
     level:    [76, 77]
 
   16793814:
     template: Tartarus_Eft
-    at:       [232.414, -21.238, 549.482, 230]
+    region:   ne_251
     level:    [76, 77]
 
   16793815:
     template: Tartarus_Eft
-    at:       [243.385, -20.000, 559.248, 216]
+    region:   ne_255
     level:    [76, 77]
 
   16793816:
     template: Tartarus_Eft
-    at:       [263.670, -19.196, 564.142, 242]
+    region:   ne_259
     level:    [76, 77]
 
   16793817:
     template: Tartarus_Eft
-    at:       [281.386, -19.663, 589.244, 97]
+    region:   ne_265
     level:    [76, 77]
 
   16793818:
     template: Hobgoblin_Toreador
-    at:       [259.467, -22.561, 547.593, 79]
+    region:   ne_259
     level:    [72, 74]
 
   16793819:
     template: Catoblepas
-    at:       [182.108, -28.358, 389.782, 76]
+    region:   n_231
     level:    [76, 77]
 
   16793820:
     template: Catoblepas
-    at:       [196.687, -27.322, 374.818, 1]
+    region:   n_231
     level:    [76, 77]
 
   16793821:
     template: Catoblepas
-    at:       [212.029, -28.171, 374.471, 9]
+    region:   n_235
     level:    [76, 77]
 
   16793822:
     template: Hobgoblin_Alastor
-    at:       [205.817, -27.967, 389.452, 131]
+    region:   n_235
     level:    [72, 74]
 
   16793823:
     template: Tartarus_Eft
-    at:       [340.330, -17.266, 302.079, 124]
+    region:   ne_271
     level:    [76, 77]
 
   16793824:
     template: Tartarus_Eft
-    at:       [357.508, -15.418, 300.815, 118]
+    region:   ne_271
     level:    [76, 77]
 
   16793825:
     template: Tartarus_Eft
-    at:       [329.830, -19.165, 249.035, 28]
+    region:   e_277
     level:    [76, 77]
 
   16793826:
     template: Tartarus_Eft
-    at:       [340.786, -13.724, 261.979, 192]
+    region:   e_277
     level:    [76, 77]
 
   16793827:
     template: Hobgoblin_Alastor
-    at:       [321.071, -19.258, 255.466, 169]
+    region:   e_277
     level:    [72, 74]
 
   16793828:
     template: Tropical_Rarab
-    at:       [254.752, -21.755, 180.487, 167]
+    region:   e_319
     level:    [73, 76]
 
   16793829:
     template: Tartarus_Eft
-    at:       [295.414, -2.317, 168.903, 114]
+    region:   e_319
     level:    [76, 77]
 
   16793830:
     template: Tartarus_Eft
-    at:       [280.035, -1.788, 168.560, 129]
+    region:   e_319
     level:    [76, 77]
 
   16793831:
     template: Tartarus_Eft
-    at:       [267.012, -1.129, 172.085, 158]
+    region:   e_319
     level:    [76, 77]
 
   16793832:
     template: Tartarus_Eft
-    at:       [260.542, -0.580, 179.793, 19]
+    region:   e_319
     level:    [76, 77]
 
   16793833:
     template: Hobgoblin_Physician
-    at:       [283.475, -20.000, 162.466, 116]
+    region:   e_303
     level:    [72, 74]
 
   16793834:
     template: Hobgoblin_Angler
-    at:       [300.790, -15.124, 159.924, 223]
+    region:   e_303
     level:    [72, 74]
 
   16793835:
     template: Tropical_Rarab
-    at:       [162.457, -20.000, 240.469, 236]
+    region:   c_283
     level:    [73, 76]
 
   16793836:
     template: Hobgoblin_Physician
-    at:       [184.798, -19.355, 245.389, 219]
+    region:   c_283
     level:    [72, 74]
 
   16793837:
     template: Hobgoblin_Alastor
-    at:       [193.863, -20.001, 249.660, 235]
+    region:   c_283
     level:    [72, 74]
 
   16793838:
     template: Hobgoblin_Toreador
-    at:       [199.973, -20.000, 241.310, 41]
+    region:   c_283
     level:    [72, 74]
 
   16793839:
     template: Hobgoblin_Toreador
-    at:       [195.938, -19.031, 260.161, 177]
+    region:   c_283
     level:    [72, 74]
 
   16793840:
     template: Tartarus_Eft
-    at:       [85.295, -29.166, 208.189, 131]
+    region:   c_287
     level:    [76, 77]
 
   16793841:
     template: Tartarus_Eft
-    at:       [63.527, -28.500, 214.218, 52]
+    region:   c_287
     level:    [76, 77]

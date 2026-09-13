@@ -5,16 +5,16 @@ spawns:
 
   16888011:
     template: Makara_PA
-    at:       [179.708, 1.002, 141.484, 175]
+    region:   region_77
     level:    [44, 47]
     script:   Makara
 
   16888012:
     template: Oil_Spill
-    at:       [173.292, 1.152, 139.795, 166]
+    region:   region_78
     level:    [44, 47]
 
   16888013:
     template: Foul_Meat
-    at:       [179.909, 1.000, 178.220, 59]
+    region:   ne_223
     level:    [45, 47]

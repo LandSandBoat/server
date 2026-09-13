@@ -5,88 +5,90 @@ spawns:
 
   16797929:
     template: Molech
-    at:       [-243.692, -176.000, 242.924, 135]
+    region:   nw_233
     level:    [79, 82]
 
   16797930:
     template: Smolenkos
-    at:       [-196.044, -176.003, 241.686, 107]
+    region:   n_237
     level:    [80, 82]
 
   16797931:
     template: Kindred_Warrior_UR
-    at:       [-206.619, -175.870, 243.071, 0]
+    region:   nw_233
     level:    [81, 84]
     script:   Kindred_Warrior
 
   16797932:
     template: Kindred_Dark_Knight_UR
-    at:       [-218.246, -176.643, 222.861, 18]
+    region:   nw_233
     level:    [81, 84]
     script:   Kindred_Dark_Knight
 
   16797933:
     template: Kindred_Summoner_UR
-    at:       [-201.556, -175.242, 224.378, 209]
+    region:   nw_233
     level:    [81, 84]
     script:   Kindred_Summoner
 
   16797934:
     template: Demons_Elemental
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [72, 74]
 
   16797935:
     template: Molech
-    at:       [-199.230, -176.006, 283.906, 226]
+    region:   nw_240
     level:    [79, 82]
 
   16797936:
     template: Molech
-    at:       [-230.371, -177.015, 331.144, 217]
+    region:   nw_250
     level:    [79, 82]
 
   16797937:
     template: Smolenkos
-    at:       [-209.641, -176.000, 292.149, 219]
+    region:   nw_240
     level:    [80, 82]
 
   16797938:
     template: Kindred_Warrior_UR
-    at:       [-231.961, -175.209, 302.350, 144]
+    region:   nw_240
     level:    [81, 84]
     script:   Kindred_Warrior
 
   16797939:
     template: Kindred_Black_Mage_UR
-    at:       [-243.874, -175.263, 304.594, 9]
+    region:   nw_240
     level:    [81, 84]
     script:   Kindred_Black_Mage
 
   16797940:
     template: Kindred_Dark_Knight_UR
-    at:       [-262.033, -175.501, 328.231, 29]
+    region:   nw_246
     level:    [81, 84]
     script:   Kindred_Dark_Knight
 
   16797941:
     template: Molech
-    at:       [-206.930, -176.000, 357.166, 214]
+    region:   n_252
     level:    [79, 82]
 
   16797942:
     template: Kindred_Warrior_UR
-    at:       [-190.696, -180.942, 377.509, 150]
+    region:   n_256
     level:    [81, 84]
     script:   Kindred_Warrior
 
   16797943:
     template: Kindred_Summoner_UR
-    at:       [-164.763, -183.496, 391.057, 216]
+    region:   n_256
     level:    [81, 84]
     script:   Kindred_Summoner
 
   16797944:
     template: Demons_Elemental
     at:       [1.000, 1.000, 1.000, 1]
+    region:   null
     level:    [72, 74]

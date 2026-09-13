@@ -21,8 +21,8 @@ templates:
           type:  standard
           model: 424
         entity_flags: 133
-        model_size:   2
-        hitbox:       14
+        model_size:     2
+        hitbox:        14
       behaviors:
         aggressive: true
         links:      true
@@ -31,7 +31,7 @@ templates:
     loot:
       drops:
         - chance: common
-          item: flint_stone
+          item:   flint_stone
       steal: pebble
       despoil:
         chunk_of_copper_ore: 0
@@ -53,8 +53,8 @@ templates:
           type:  standard
           model: 494
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -63,15 +63,15 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: bag_of_poison_flour
+          item:   bag_of_poison_flour
         - chance: very_rare
-          item: poets_circlet
+          item:   poets_circlet
         - chance: very_rare
-          item: linen_cuffs
+          item:   linen_cuffs
         - chance: very_rare
-          item: linen_slops
+          item:   linen_slops
         - chance: very_rare
-          item: holly_clogs
+          item:   holly_clogs
       steal: silver_beastcoin
       despoil:
         loaf_of_goblin_bread:      0
@@ -93,8 +93,8 @@ templates:
           type:  standard
           model: 488
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -103,29 +103,29 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: scroll_of_paralyze
+          item:   scroll_of_paralyze
         - chance: rare
-          item: scroll_of_barsleep
+          item:   scroll_of_barsleep
         - chance: rare
-          item: scroll_of_silence
+          item:   scroll_of_silence
         - chance: very_rare
-          item: scroll_of_barpoison
+          item:   scroll_of_barpoison
         - chance: rare
-          item: scroll_of_protectra
+          item:   scroll_of_protectra
         - chance: rare
-          item: scroll_of_sneak
+          item:   scroll_of_sneak
         - chance: very_rare
-          item: scroll_of_invisible
+          item:   scroll_of_invisible
         - chance: very_rare
-          item: scroll_of_deodorize
+          item:   scroll_of_deodorize
         - chance: very_rare
-          item: poets_circlet
+          item:   poets_circlet
         - chance: very_rare
-          item: linen_cuffs
+          item:   linen_cuffs
         - chance: very_rare
-          item: linen_slops
+          item:   linen_slops
         - chance: very_rare
-          item: holly_clogs
+          item:   holly_clogs
       steal: silver_beastcoin
       despoil:
         loaf_of_goblin_bread:      0
@@ -146,8 +146,8 @@ templates:
           type:  standard
           model: 485
         entity_flags: 131
-        model_size:   1
-        hitbox:       12
+        model_size:     1
+        hitbox:        12
       behaviors:
         aggressive: true
         links:      true
@@ -156,17 +156,17 @@ templates:
     loot:
       drops:
         - chance: rare
-          item: block_of_yagudo_caulk
+          item:   block_of_yagudo_caulk
         - chance: very_rare
-          item: horutoto_chest_key
+          item:   horutoto_chest_key
         - chance: very_rare
-          item: brass_cap
+          item:   brass_cap
         - chance: very_rare
-          item: brass_mittens
+          item:   brass_mittens
         - chance: very_rare
-          item: brass_subligar
+          item:   brass_subligar
         - chance: very_rare
-          item: brass_leggings
+          item:   brass_leggings
       steal: silver_beastcoin
       despoil:
         loaf_of_goblin_bread:      0
@@ -263,1049 +263,1049 @@ spawns:
 
   17559577:
     template: Goblin_Thug
-    at:       [-196.786, 4.030, 74.185, 185]
+    region:   c_25
     level:    [5, 8]
 
   17559578:
     template: Goblin_Weaver
-    at:       [-186.430, 3.969, 89.104, 195]
+    region:   c_25
     level:    [5, 8]
 
   17559585:
     template: Goblin_Ambusher
-    at:       [-127.328, 4.000, 198.336, 79]
+    region:   e_134
     level:    [12, 16]
 
   17559586:
     template: Goblin_Ambusher
-    at:       [-120.043, 4.000, 229.485, 163]
+    region:   e_134
     level:    [12, 16]
 
   17559587:
     template: Goblin_Tinkerer
-    at:       [-109.735, 3.697, 218.359, 159]
+    region:   e_134
     level:    [12, 16]
 
   17559588:
     template: Goblin_Butcher
-    at:       [-115.644, 3.917, 194.328, 215]
+    region:   e_134
     level:    [12, 16]
 
   17559589:
     template: Wadi_Hare
-    at:       [-123.901, 4.031, 366.337, 233]
+    region:   ne_159
     level:    [11, 14]
 
   17559590:
     template: Wadi_Hare
-    at:       [-110.224, 3.973, 373.271, 231]
+    region:   ne_153
     level:    [11, 14]
 
   17559591:
     template: Wadi_Hare
-    at:       [-116.371, 4.015, 395.043, 193]
+    region:   ne_153
     level:    [11, 14]
 
   17559592:
     template: Steam_Lizard
-    at:       [-275.291, 3.952, 394.130, 162]
+    region:   n_225
     level:    [16, 20]
 
   17559593:
     template: Goblin_Ambusher
-    at:       [-83.299, 4.000, 264.652, 210]
+    region:   e_144
     level:    [12, 16]
 
   17559594:
     template: Goblin_Ambusher
-    at:       [-130.086, 4.000, 401.848, 99]
+    region:   ne_156
     level:    [12, 16]
 
   17559595:
     template: Goblin_Tinkerer
-    at:       [-90.487, 4.750, 253.253, 234]
+    region:   e_144
     level:    [12, 16]
 
   17559596:
     template: Goblin_Butcher
-    at:       [-109.186, 4.000, 243.384, 205]
+    region:   e_134
     level:    [12, 16]
 
   17559597:
     template: Wadi_Hare
-    at:       [-107.807, 3.977, 405.784, 194]
+    region:   ne_156
     level:    [11, 14]
 
   17559598:
     template: Wadi_Hare
-    at:       [-85.513, 4.000, 399.991, 5]
+    region:   ne_156
     level:    [11, 14]
 
   17559599:
     template: Wadi_Hare
-    at:       [-70.125, 4.016, 410.017, 235]
+    region:   ne_156
     level:    [11, 14]
 
   17559600:
     template: Steam_Lizard
-    at:       [-261.895, 3.828, 423.578, 231]
+    region:   n_219
     level:    [16, 20]
 
   17559601:
     template: Wadi_Hare
-    at:       [-239.080, 4.000, 331.372, 128]
+    region:   n_165
     level:    [11, 14]
 
   17559602:
     template: Wadi_Hare
-    at:       [-264.446, 3.982, 335.079, 122]
+    region:   n_171
     level:    [11, 14]
 
   17559606:
     template: Goblin_Thug
-    at:       [-318.009, 4.000, -162.779, 151]
+    region:   s_99
     level:    [5, 8]
 
   17559607:
     template: Goblin_Weaver
-    at:       [-318.009, 4.000, -162.779, 151]
+    region:   s_99
     level:    [5, 8]
 
   17559627:
     template: Rock_Lizard
-    at:       [-137.312, -0.473, -247.251, 176]
+    region:   se_74
     level:    [5, 8]
 
   17559628:
     template: Rock_Lizard
-    at:       [-139.962, -0.082, -233.015, 186]
+    region:   se_74
     level:    [5, 8]
 
   17559629:
     template: Goblin_Thug
-    at:       [-43.160, 4.000, -244.646, 173]
+    region:   se_55
     level:    [5, 8]
 
   17559630:
     template: Goblin_Weaver
-    at:       [-43.160, 4.000, -244.646, 173]
+    region:   se_55
     level:    [5, 8]
 
   17559635:
     template: Rock_Lizard
-    at:       [-161.026, 0.000, -220.443, 121]
+    region:   se_74
     level:    [5, 8]
 
   17559662:
     template: Goblin_Ambusher
-    at:       [-232.700, 4.006, 287.013, 184]
+    region:   n_171
     level:    [12, 16]
 
   17559663:
     template: Goblin_Ambusher
-    at:       [-180.566, -0.240, 428.546, 191]
+    region:   ne_182
     level:    [12, 16]
 
   17559664:
     template: Goblin_Tinkerer
-    at:       [-459.861, 3.676, -94.710, 102]
+    region:   sw_314
     level:    [12, 16]
 
   17559665:
     template: Goblin_Butcher
-    at:       [-458.553, 3.966, -73.548, 66]
+    region:   sw_314
     level:    [12, 16]
 
   17559666:
     template: Wadi_Leech
-    at:       [-344.039, 3.996, -88.609, 235]
+    region:   s_118
     level:    [7, 9]
     script:   Stickpin
 
   17559667:
     template: Wadi_Leech
-    at:       [-324.888, 4.000, -87.431, 17]
+    region:   s_118
     level:    [7, 9]
     script:   Stickpin
 
   17559668:
     template: Wadi_Leech
-    at:       [-319.055, 4.000, -72.528, 219]
+    region:   s_110
     level:    [7, 9]
     script:   Stickpin
 
   17559669:
     template: Steam_Lizard
-    at:       [-268.626, 4.000, 454.971, 124]
+    region:   n_219
     level:    [16, 20]
 
   17559670:
     template: Goblin_Ambusher
-    at:       [-262.295, -0.019, 140.840, 45]
+    region:   c_257
     level:    [12, 16]
 
   17559671:
     template: Goblin_Ambusher
-    at:       [-264.596, -0.305, 152.599, 224]
+    region:   c_257
     level:    [12, 16]
 
   17559672:
     template: Goblin_Tinkerer
-    at:       [-459.891, 4.000, -118.440, 58]
+    region:   sw_314
     level:    [12, 16]
 
   17559673:
     template: Goblin_Butcher
-    at:       [-65.901, 4.001, 290.972, 104]
+    region:   e_144
     level:    [12, 16]
 
   17559674:
     template: Wadi_Leech
-    at:       [-306.157, 4.000, -79.672, 29]
+    region:   s_110
     level:    [7, 9]
     script:   Stickpin
 
   17559675:
     template: Wadi_Leech
-    at:       [-305.364, 4.058, -90.448, 69]
+    region:   s_110
     level:    [7, 9]
     script:   Stickpin
 
   17559676:
     template: Wadi_Leech
-    at:       [-293.881, 3.982, -70.482, 211]
+    region:   s_110
     level:    [7, 9]
     script:   Stickpin
 
   17559677:
     template: Steam_Lizard
-    at:       [-312.166, 3.752, 450.357, 150]
+    region:   n_231
     level:    [16, 20]
 
   17559678:
     template: Rock_Lizard
-    at:       [-60.231, -0.084, -146.292, 189]
+    region:   se_53
     level:    [5, 8]
 
   17559679:
     template: Rock_Lizard
-    at:       [-285.048, 0.595, -138.437, 17]
+    region:   s_97
     level:    [5, 8]
 
   17559680:
     template: Giant_Grub
-    at:       [-539.497, 0.028, -42.370, 108]
+    region:   sw_311
     level:    [9, 10]
 
   17559681:
     template: Giant_Grub
-    at:       [-531.399, -0.813, -23.827, 191]
+    region:   sw_311
     level:    [9, 10]
 
   17559682:
     template: Giant_Grub
-    at:       [-531.930, 0.865, -60.398, 110]
+    region:   sw_311
     level:    [9, 10]
 
   17559683:
     template: Rock_Lizard
-    at:       [-180.446, -0.307, -44.597, 56]
+    region:   se_51
     level:    [5, 8]
 
   17559684:
     template: Rock_Lizard
-    at:       [-167.911, -0.304, -60.612, 243]
+    region:   se_51
     level:    [5, 8]
 
   17559685:
     template: Goblin_Thug
-    at:       [-346.517, 4.189, -93.367, 208]
+    region:   s_118
     level:    [5, 8]
 
   17559686:
     template: Goblin_Thug
-    at:       [-318.178, 3.998, -91.906, 1]
+    region:   s_110
     level:    [5, 8]
 
   17559687:
     template: Goblin_Thug
-    at:       [-294.214, 4.000, -81.351, 220]
+    region:   s_110
     level:    [5, 8]
 
   17559688:
     template: Goblin_Weaver
-    at:       [-305.198, 3.754, -62.952, 113]
+    region:   s_110
     level:    [5, 8]
 
   17559689:
     template: Rock_Lizard
-    at:       [-295.908, 4.441, -66.733, 144]
+    region:   s_110
     level:    [5, 8]
 
   17559690:
     template: Rock_Lizard
-    at:       [-324.669, 4.000, -87.092, 107]
+    region:   s_118
     level:    [5, 8]
 
   17559691:
     template: Goblin_Fisher
-    at:       [-260.075, 4.000, 39.783, 3]
+    region:   c_33
     level:    [5, 8]
 
   17559692:
     template: Goblin_Fisher
-    at:       [-312.201, 4.000, 1.853, 21]
+    region:   c_41
     level:    [5, 8]
 
   17559693:
     template: Goblin_Thug
-    at:       [-330.660, 3.806, 7.567, 145]
+    region:   c_41
     level:    [5, 8]
 
   17559694:
     template: Goblin_Thug
-    at:       [-255.259, 3.525, 31.139, 40]
+    region:   c_33
     level:    [5, 8]
 
   17559695:
     template: Goblin_Thug
-    at:       [-268.282, 3.902, 13.280, 135]
+    region:   c_33
     level:    [5, 8]
 
   17559696:
     template: Goblin_Weaver
-    at:       [-274.587, 3.990, -8.230, 13]
+    region:   c_33
     level:    [5, 8]
 
   17559697:
     template: Hoarder_Hare
-    at:       [-283.509, 4.000, 16.117, 182]
+    region:   c_33
     level:    [6, 8]
 
   17559698:
     template: Hoarder_Hare
-    at:       [-281.614, 4.000, 34.922, 164]
+    region:   c_33
     level:    [6, 8]
 
   17559699:
     template: Hoarder_Hare
-    at:       [-257.865, 3.903, 44.726, 225]
+    region:   c_33
     level:    [6, 8]
 
   17559700:
     template: Hoarder_Hare
-    at:       [-224.741, 3.503, 23.481, 144]
+    region:   c_33
     level:    [6, 8]
 
   17559701:
     template: Hoarder_Hare
-    at:       [-320.687, 4.000, -10.148, 156]
+    region:   c_41
     level:    [6, 8]
 
   17559702:
     template: Hoarder_Hare
-    at:       [-328.154, 4.000, 39.387, 146]
+    region:   c_41
     level:    [6, 8]
 
   17559703:
     template: Wadi_Leech
-    at:       [-99.478, 3.340, 226.106, 218]
+    region:   e_134
     level:    [11, 14]
 
   17559704:
     template: Wadi_Leech
-    at:       [-79.197, 4.000, 243.804, 223]
+    region:   e_144
     level:    [11, 14]
 
   17559705:
     template: Wadi_Leech
-    at:       [-80.097, 4.000, 254.231, 197]
+    region:   e_144
     level:    [11, 14]
 
   17559706:
     template: Wadi_Leech
-    at:       [-89.533, 4.000, 280.274, 159]
+    region:   e_144
     level:    [11, 14]
 
   17559707:
     template: Wadi_Leech
-    at:       [-98.519, 4.000, 281.889, 142]
+    region:   e_139
     level:    [11, 14]
 
   17559708:
     template: Wadi_Leech
-    at:       [-102.052, 4.602, 260.662, 228]
+    region:   e_139
     level:    [11, 14]
 
   17559709:
     template: Wadi_Leech
-    at:       [-121.836, 4.000, 232.688, 120]
+    region:   e_134
     level:    [11, 14]
 
   17559710:
     template: Goblin_Tinkerer
-    at:       [-118.942, 4.000, 285.495, 71]
+    region:   e_139
     level:    [12, 16]
 
   17559711:
     template: Giant_Grub
-    at:       [-155.437, -0.285, 300.244, 121]
+    region:   e_149
     level:    [9, 10]
 
   17559712:
     template: Goblin_Butcher
-    at:       [-178.460, -0.280, 285.493, 69]
+    region:   e_149
     level:    [12, 16]
 
   17559713:
     template: Giant_Grub
-    at:       [-213.406, 0.000, 218.317, 47]
+    region:   c_126
     level:    [9, 10]
 
   17559714:
     template: Giant_Grub
-    at:       [-218.857, 0.000, 203.008, 70]
+    region:   c_133
     level:    [9, 10]
 
   17559715:
     template: Goblin_Butcher
-    at:       [-221.132, 0.000, 238.340, 61]
+    region:   c_126
     level:    [12, 16]
 
   17559716:
     template: Goblin_Butcher
-    at:       [-230.174, -0.576, 172.433, 55]
+    region:   c_133
     level:    [12, 16]
 
   17559717:
     template: Wadi_Hare
-    at:       [-271.603, 3.993, 315.684, 47]
+    region:   n_171
     level:    [11, 14]
 
   17559718:
     template: Wadi_Hare
-    at:       [-260.275, 3.800, 304.447, 35]
+    region:   n_171
     level:    [11, 14]
 
   17559719:
     template: Wadi_Hare
-    at:       [-241.650, 4.000, 297.045, 22]
+    region:   n_171
     level:    [11, 14]
 
   17559720:
     template: Wadi_Hare
-    at:       [-216.726, 4.039, 316.416, 216]
+    region:   n_165
     level:    [11, 14]
 
   17559721:
     template: Goblin_Tinkerer
-    at:       [-241.344, 4.000, 315.546, 187]
+    region:   n_171
     level:    [12, 16]
 
   17559722:
     template: Goblin_Tinkerer
-    at:       [-211.291, 4.121, 324.693, 4]
+    region:   n_165
     level:    [12, 16]
 
   17559723:
     template: Giant_Grub
-    at:       [-179.532, -0.654, 410.541, 190]
+    region:   ne_182
     level:    [9, 10]
 
   17559724:
     template: Giant_Grub
-    at:       [-140.871, -0.365, 435.354, 203]
+    region:   ne_177
     level:    [9, 10]
 
   17559725:
     template: Giant_Grub
-    at:       [-180.930, -0.306, 448.678, 191]
+    region:   ne_182
     level:    [9, 10]
 
   17559726:
     template: Giant_Grub
-    at:       [-178.688, 0.253, 456.304, 201]
+    region:   ne_182
     level:    [9, 10]
 
   17559727:
     template: Goblin_Butcher
-    at:       [-163.902, -0.316, 416.763, 248]
+    region:   ne_177
     level:    [12, 16]
 
   17559728:
     template: Goblin_Butcher
-    at:       [-162.745, -0.135, 459.844, 255]
+    region:   ne_182
     level:    [12, 16]
 
   17559729:
     template: Goblin_Tinkerer
-    at:       [-149.381, -1.230, 422.664, 224]
+    region:   ne_177
     level:    [12, 16]
 
   17559730:
     template: Goblin_Tinkerer
-    at:       [-132.008, -0.683, 453.449, 254]
+    region:   ne_177
     level:    [12, 16]
 
   17559731:
     template: Goblin_Tinkerer
-    at:       [-143.215, -2.263, 462.908, 4]
+    region:   ne_182
     level:    [12, 16]
 
   17559732:
     template: Steam_Lizard
-    at:       [-330.757, 4.001, 429.671, 66]
+    region:   n_231
     level:    [16, 20]
 
   17559733:
     template: Steam_Lizard
-    at:       [-317.992, 4.000, 428.614, 8]
+    region:   n_231
     level:    [16, 20]
 
   17559734:
     template: Steam_Lizard
-    at:       [-293.182, 4.000, 431.925, 50]
+    region:   n_231
     level:    [16, 20]
 
   17559735:
     template: Steam_Lizard
-    at:       [-283.848, 4.000, 392.468, 12]
+    region:   n_225
     level:    [16, 20]
 
   17559736:
     template: Goblin_Gambler
-    at:       [-277.056, 4.006, 411.119, 177]
+    region:   n_225
     level:    [21, 23]
 
   17559737:
     template: Goblin_Gambler
-    at:       [-283.117, 4.000, 443.837, 84]
+    region:   n_231
     level:    [21, 23]
 
   17559738:
     template: Goblin_Gambler
-    at:       [-333.637, 4.000, 439.066, 72]
+    region:   n_231
     level:    [21, 23]
 
   17559739:
     template: Goblin_Gambler
-    at:       [-313.446, 4.000, 437.971, 237]
+    region:   n_231
     level:    [21, 23]
 
   17559740:
     template: Goblin_Leecher
-    at:       [-238.182, 4.000, 442.947, 233]
+    region:   n_219
     level:    [21, 23]
 
   17559741:
     template: Goblin_Leecher
-    at:       [-299.290, 4.000, 399.803, 60]
+    region:   n_225
     level:    [21, 23]
 
   17559742:
     template: Goblin_Mugger
-    at:       [-252.101, 4.178, 452.168, 140]
+    region:   n_219
     level:    [21, 23]
 
   17559743:
     template: Goblin_Mugger
-    at:       [-300.154, 4.000, 442.179, 117]
+    region:   n_231
     level:    [21, 23]
 
   17559744:
     template: Goblin_Mugger
-    at:       [-326.145, 3.850, 455.001, 144]
+    region:   n_231
     level:    [21, 23]
 
   17559745:
     template: Goblin_Mugger
-    at:       [-293.360, 4.872, 417.340, 83]
+    region:   n_225
     level:    [21, 23]
 
   17559746:
     template: Goblin_Leecher
-    at:       [-403.516, 3.889, 378.846, 120]
+    region:   nw_239
     level:    [21, 23]
 
   17559747:
     template: Goblin_Mugger
-    at:       [-419.603, 3.977, 355.270, 60]
+    region:   nw_239
     level:    [21, 23]
 
   17559748:
     template: Goblin_Mugger
-    at:       [-435.450, 4.035, 339.180, 244]
+    region:   nw_239
     level:    [21, 23]
 
   17559749:
     template: Wadi_Crab
-    at:       [-155.062, 3.789, 513.414, 141]
+    region:   ne_213
     level:    [16, 20]
     script:   Snipper
 
   17559750:
     template: Wadi_Crab
-    at:       [-164.526, 4.032, 530.715, 118]
+    region:   ne_213
     level:    [16, 20]
     script:   Snipper
 
   17559751:
     template: Wadi_Crab
-    at:       [-180.935, 3.708, 529.718, 122]
+    region:   ne_213
     level:    [16, 20]
     script:   Snipper
 
   17559752:
     template: Wadi_Crab
-    at:       [-186.850, 3.965, 522.647, 104]
+    region:   ne_213
     level:    [16, 20]
     script:   Snipper
 
   17559753:
     template: Wadi_Crab
-    at:       [-202.293, 4.000, 544.580, 159]
+    region:   n_201
     level:    [16, 20]
     script:   Snipper
 
   17559754:
     template: Wadi_Crab
-    at:       [-244.928, 3.958, 566.747, 118]
+    region:   n_207
     level:    [16, 20]
     script:   Snipper
 
   17559755:
     template: Wadi_Crab
-    at:       [-250.222, 3.976, 516.942, 65]
+    region:   n_207
     level:    [16, 20]
     script:   Snipper
 
   17559756:
     template: Wadi_Crab
-    at:       [-199.901, 4.000, 511.458, 93]
+    region:   ne_213
     level:    [16, 20]
     script:   Snipper
 
   17559757:
     template: Goblin_Gambler
-    at:       [-204.820, 4.000, 559.091, 168]
+    region:   n_201
     level:    [21, 23]
 
   17559758:
     template: Goblin_Gambler
-    at:       [-236.668, 3.948, 569.461, 92]
+    region:   n_201
     level:    [21, 23]
 
   17559759:
     template: Goblin_Gambler
-    at:       [-228.962, 4.000, 516.767, 16]
+    region:   ne_213
     level:    [21, 23]
 
   17559760:
     template: Goblin_Gambler
-    at:       [-250.289, 3.976, 554.934, 63]
+    region:   n_207
     level:    [21, 23]
 
   17559761:
     template: Goblin_Leecher
-    at:       [-238.514, 4.000, 522.847, 226]
+    region:   n_207
     level:    [21, 23]
 
   17559762:
     template: Goblin_Leecher
-    at:       [-215.445, 3.783, 510.803, 141]
+    region:   ne_213
     level:    [21, 23]
 
   17559763:
     template: Goblin_Leecher
-    at:       [-255.228, 3.663, 539.124, 66]
+    region:   n_207
     level:    [21, 23]
 
   17559764:
     template: Goblin_Leecher
-    at:       [-214.612, 3.985, 526.234, 188]
+    region:   ne_213
     level:    [21, 23]
 
   17559765:
     template: Goblin_Mugger
-    at:       [-214.719, 4.178, 571.558, 149]
+    region:   n_201
     level:    [21, 23]
 
   17559766:
     template: Goblin_Gambler
-    at:       [-139.673, -0.373, 565.445, 68]
+    region:   ne_198
     level:    [21, 23]
 
   17559767:
     template: Goblin_Mugger
-    at:       [-126.914, -0.382, 540.686, 248]
+    region:   ne_198
     level:    [21, 23]
 
   17559768:
     template: Steam_Lizard
-    at:       [-81.227, 4.000, 518.548, 45]
+    region:   ne_187
     level:    [16, 20]
 
   17559769:
     template: Steam_Lizard
-    at:       [-73.409, 4.000, 497.325, 27]
+    region:   ne_187
     level:    [16, 20]
 
   17559770:
     template: Steam_Lizard
-    at:       [-85.566, 3.865, 476.775, 87]
+    region:   ne_187
     level:    [16, 20]
 
   17559771:
     template: Steam_Lizard
-    at:       [-68.077, 3.402, 464.368, 158]
+    region:   ne_187
     level:    [16, 20]
 
   17559772:
     template: Goblin_Gambler
-    at:       [-87.491, 3.907, 499.532, 32]
+    region:   ne_187
     level:    [21, 23]
 
   17559773:
     template: Goblin_Leecher
-    at:       [-78.083, 4.000, 484.035, 59]
+    region:   ne_187
     level:    [21, 23]
 
   17559774:
     template: Goblin_Mugger
-    at:       [-96.673, 3.573, 486.786, 191]
+    region:   ne_187
     level:    [21, 23]
 
   17559775:
     template: Goblin_Leecher
-    at:       [-58.210, 0.002, 576.522, 210]
+    region:   ne_195
     level:    [21, 23]
 
   17559776:
     template: Goblin_Mugger
-    at:       [-22.763, 0.386, 582.877, 204]
+    region:   ne_195
     level:    [21, 23]
 
   17559777:
     template: Giant_Grub
-    at:       [-266.940, -0.023, 146.347, 19]
+    region:   c_257
     level:    [11, 12]
 
   17559778:
     template: Giant_Grub
-    at:       [-259.630, 0.000, 160.923, 209]
+    region:   c_257
     level:    [11, 12]
 
   17559779:
     template: Goblin_Butcher
-    at:       [-255.077, -0.324, 171.482, 205]
+    region:   c_257
     level:    [12, 16]
 
   17559780:
     template: Wadi_Hare
-    at:       [-316.909, 3.750, 209.228, 95]
+    region:   c_262
     level:    [11, 14]
 
   17559781:
     template: Wadi_Hare
-    at:       [-326.890, 3.519, 218.851, 191]
+    region:   c_262
     level:    [11, 14]
 
   17559782:
     template: Wadi_Hare
-    at:       [-325.633, 4.225, 229.251, 189]
+    region:   c_262
     level:    [11, 14]
 
   17559783:
     template: Wadi_Hare
-    at:       [-322.223, 4.000, 242.779, 198]
+    region:   c_262
     level:    [11, 14]
 
   17559784:
     template: Wadi_Hare
-    at:       [-337.606, 3.998, 238.691, 111]
+    region:   c_262
     level:    [11, 14]
 
   17559785:
     template: Wadi_Hare
-    at:       [-343.953, 3.970, 231.272, 99]
+    region:   c_262
     level:    [11, 14]
 
   17559786:
     template: Wadi_Hare
-    at:       [-351.755, 4.022, 228.483, 111]
+    region:   c_262
     level:    [11, 14]
 
   17559787:
     template: Wadi_Hare
-    at:       [-371.412, 4.005, 234.681, 130]
+    region:   c_262
     level:    [11, 14]
 
   17559788:
     template: Goblin_Tinkerer
-    at:       [-310.855, 4.035, 221.129, 135]
+    region:   c_262
     level:    [12, 16]
 
   17559789:
     template: Giant_Grub
-    at:       [-290.434, -0.822, 260.166, 155]
+    region:   c_252
     level:    [11, 12]
 
   17559790:
     template: Giant_Grub
-    at:       [-400.142, -0.035, 262.035, 132]
+    region:   c_252
     level:    [11, 12]
 
   17559791:
     template: Goblin_Ambusher
-    at:       [-303.693, -2.191, 291.427, 169]
+    region:   c_252
     level:    [12, 16]
 
   17559792:
     template: Goblin_Butcher
-    at:       [-338.213, -0.003, 301.998, 51]
+    region:   c_252
     level:    [12, 16]
 
   17559793:
     template: Goblin_Butcher
-    at:       [-359.478, 0.000, 299.606, 135]
+    region:   c_252
     level:    [12, 16]
 
   17559794:
     template: Wadi_Hare
-    at:       [-435.348, 4.000, 239.707, 85]
+    region:   w_242
     level:    [11, 14]
 
   17559795:
     template: Wadi_Hare
-    at:       [-486.439, 3.995, 220.409, 71]
+    region:   w_242
     level:    [11, 14]
 
   17559796:
     template: Wadi_Hare
-    at:       [-475.785, 3.993, 205.756, 36]
+    region:   w_247
     level:    [11, 14]
 
   17559797:
     template: Wadi_Hare
-    at:       [-472.546, 3.767, 186.925, 140]
+    region:   w_247
     level:    [11, 14]
 
   17559798:
     template: Wadi_Hare
-    at:       [-496.390, 3.719, 218.080, 145]
+    region:   w_247
     level:    [11, 14]
 
   17559799:
     template: Wadi_Hare
-    at:       [-449.623, 4.238, 205.946, 210]
+    region:   w_247
     level:    [11, 14]
 
   17559800:
     template: Goblin_Ambusher
-    at:       [-449.938, 3.805, 234.493, 99]
+    region:   w_242
     level:    [12, 16]
 
   17559801:
     template: Goblin_Butcher
-    at:       [-478.619, 4.000, 244.287, 140]
+    region:   w_242
     level:    [12, 16]
 
   17559802:
     template: Goblin_Butcher
-    at:       [-448.320, 3.745, 190.113, 59]
+    region:   w_247
     level:    [12, 16]
 
   17559803:
     template: Goblin_Tinkerer
-    at:       [-482.423, 3.988, 194.416, 141]
+    region:   w_247
     level:    [12, 16]
 
   17559804:
     template: Goblin_Tinkerer
-    at:       [-493.605, 3.975, 189.739, 99]
+    region:   w_247
     level:    [12, 16]
 
   17559805:
     template: Goblin_Tinkerer
-    at:       [-428.001, 3.739, 187.392, 155]
+    region:   w_247
     level:    [12, 16]
 
   17559806:
     template: Giant_Grub
-    at:       [-339.967, 0.000, 159.227, 61]
+    region:   region_59
     level:    [11, 12]
 
   17559807:
     template: Giant_Grub
-    at:       [-345.563, -2.266, 65.812, 140]
+    region:   c_272
     level:    [11, 12]
 
   17559808:
     template: Goblin_Ambusher
-    at:       [-340.596, -0.253, 138.702, 65]
+    region:   c_272
     level:    [12, 16]
 
   17559809:
     template: Goblin_Butcher
-    at:       [-339.513, -0.258, 115.101, 67]
+    region:   c_272
     level:    [12, 16]
 
   17559810:
     template: Goblin_Tinkerer
-    at:       [-344.033, -0.271, 88.235, 68]
+    region:   c_272
     level:    [12, 16]
 
   17559811:
     template: Wadi_Leech
-    at:       [-405.164, 3.959, 111.369, 147]
+    region:   w_282
     level:    [11, 14]
 
   17559812:
     template: Wadi_Leech
-    at:       [-416.047, 4.000, 126.703, 171]
+    region:   w_282
     level:    [11, 14]
 
   17559813:
     template: Wadi_Leech
-    at:       [-427.395, 4.000, 124.008, 129]
+    region:   w_282
     level:    [11, 14]
 
   17559814:
     template: Wadi_Leech
-    at:       [-433.054, 4.000, 117.905, 107]
+    region:   w_282
     level:    [11, 14]
 
   17559815:
     template: Wadi_Leech
-    at:       [-442.730, 3.979, 124.502, 170]
+    region:   w_282
     level:    [11, 14]
 
   17559816:
     template: Wadi_Leech
-    at:       [-450.525, 4.000, 119.734, 39]
+    region:   w_282
     level:    [11, 14]
 
   17559817:
     template: Wadi_Leech
-    at:       [-411.733, 4.000, 103.711, 239]
+    region:   w_282
     level:    [11, 14]
 
   17559818:
     template: Wadi_Leech
-    at:       [-408.530, 4.000, 118.859, 144]
+    region:   w_282
     level:    [11, 14]
 
   17559819:
     template: Goblin_Butcher
-    at:       [-413.267, 4.000, 116.243, 170]
+    region:   w_282
     level:    [12, 16]
 
   17559820:
     template: Giant_Grub
-    at:       [-445.262, 4.000, 32.906, 24]
+    region:   w_289
     level:    [11, 12]
 
   17559821:
     template: Giant_Grub
-    at:       [-462.331, 4.603, 9.747, 113]
+    region:   sw_306
     level:    [11, 12]
 
   17559822:
     template: Wadi_Leech
-    at:       [-483.813, 4.000, 9.216, 99]
+    region:   w_300
     level:    [11, 14]
 
   17559823:
     template: Wadi_Leech
-    at:       [-461.989, 4.000, -7.008, 238]
+    region:   sw_306
     level:    [11, 14]
 
   17559824:
     template: Wadi_Leech
-    at:       [-424.949, 3.951, 3.464, 247]
+    region:   sw_306
     level:    [11, 14]
 
   17559825:
     template: Wadi_Leech
-    at:       [-403.631, 4.000, 18.349, 205]
+    region:   sw_294
     level:    [11, 14]
 
   17559826:
     template: Wadi_Leech
-    at:       [-392.046, 4.000, -7.490, 62]
+    region:   sw_294
     level:    [11, 14]
 
   17559827:
     template: Wadi_Leech
-    at:       [-397.828, 4.000, -19.011, 78]
+    region:   sw_294
     level:    [11, 14]
 
   17559828:
     template: Wadi_Leech
-    at:       [-398.532, 4.000, -46.795, 244]
+    region:   sw_294
     level:    [11, 14]
 
   17559829:
     template: Wadi_Leech
-    at:       [-391.680, 3.750, 46.853, 157]
+    region:   w_289
     level:    [11, 14]
 
   17559830:
     template: Wadi_Leech
-    at:       [-404.448, 3.952, 49.517, 119]
+    region:   w_289
     level:    [11, 14]
 
   17559831:
     template: Wadi_Leech
-    at:       [-422.146, 3.962, 44.282, 116]
+    region:   w_289
     level:    [11, 14]
 
   17559832:
     template: Goblin_Ambusher
-    at:       [-455.397, 4.000, 37.033, 53]
+    region:   w_289
     level:    [12, 16]
 
   17559833:
     template: Goblin_Ambusher
-    at:       [-436.065, 4.000, 5.809, 234]
+    region:   sw_306
     level:    [12, 16]
 
   17559834:
     template: Goblin_Ambusher
-    at:       [-411.231, 3.626, -28.296, 107]
+    region:   sw_294
     level:    [12, 16]
 
   17559835:
     template: Goblin_Butcher
-    at:       [-445.976, 4.356, 18.822, 60]
+    region:   sw_306
     level:    [12, 16]
 
   17559836:
     template: Goblin_Butcher
-    at:       [-387.987, 4.000, 41.232, 187]
+    region:   w_289
     level:    [12, 16]
 
   17559837:
     template: Goblin_Tinkerer
-    at:       [-414.846, 3.953, 46.755, 126]
+    region:   w_289
     level:    [12, 16]
 
   17559838:
     template: Goblin_Tinkerer
-    at:       [-442.123, 4.000, 43.266, 120]
+    region:   w_289
     level:    [12, 16]
 
   17559839:
     template: Goblin_Tinkerer
-    at:       [-479.655, 4.000, -11.909, 1]
+    region:   w_300
     level:    [12, 16]
 
   17559840:
     template: Goblin_Tinkerer
-    at:       [-391.076, 3.959, 12.923, 14]
+    region:   sw_294
     level:    [12, 16]
 
   17559841:
     template: Goblin_Tinkerer
-    at:       [-411.472, 4.000, -39.573, 61]
+    region:   sw_294
     level:    [12, 16]

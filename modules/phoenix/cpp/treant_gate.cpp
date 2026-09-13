@@ -21,7 +21,7 @@ class TreantGate : public CPPModule
     {
         // Lets the module test know the gate is compiled in, since xi_test links core without modules
         // Probably remove this later
-        lua["TreantGateLoaded"] = true;
+        ::lua["TreantGateLoaded"] = true;
     }
 
     auto OnIncomingPacket(MapSession* PSession, CCharEntity* PChar, CBasicPacket& data) -> bool override
@@ -55,7 +55,7 @@ class TreantGate : public CPPModule
 
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotAttackTarget);
 
-        const auto treantEvent = lua["xi"]["treantEvent"].get<sol::optional<sol::table>>();
+        const auto treantEvent = ::lua["xi"]["treantEvent"].get<sol::optional<sol::table>>();
         if (treantEvent)
         {
             const auto onGateRejected = (*treantEvent)["onGateRejected"].get<sol::optional<sol::protected_function>>();

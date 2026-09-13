@@ -17,16 +17,16 @@ public:
     void OnInit() override
     {
         // Counts sessions, so stale rows after a crash can inflate the number
-        lua.set_function("GetOnlinePlayerCount", []() -> uint32
-                         {
-                             auto rset = db::preparedStmt("SELECT COUNT(*) AS count FROM accounts_sessions");
-                             if (rset && rset->next())
-                             {
-                                 return rset->get<uint32>("count");
-                             }
+        ::lua.set_function("GetOnlinePlayerCount", []() -> uint32
+                           {
+                               auto rset = db::preparedStmt("SELECT COUNT(*) AS count FROM accounts_sessions");
+                               if (rset && rset->next())
+                               {
+                                   return rset->get<uint32>("count");
+                               }
 
-                             return 0;
-                         });
+                               return 0;
+                           });
     }
 };
 
