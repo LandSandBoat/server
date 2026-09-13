@@ -1230,6 +1230,7 @@ templates:
         hitbox:         17
       behaviors:
         links: true
+      detects: [hearing]
       spawn:
         respawn: 300
     loot:
@@ -1518,6 +1519,7 @@ templates:
         hitbox:        22
       behaviors:
         links: true
+      detects: [hearing]
       spawn:
         respawn: 300
     loot:
