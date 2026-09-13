@@ -500,60 +500,60 @@ public:
 
         // __gilAuditSetReason(charId, source [, detail [, counterparty]])
         // charId is whose gil moves, which is the target for !givegil rather than the caller
-        lua.set_function("__gilAuditSetReason",
-                         [](const uint32 charId, const uint8 source, sol::variadic_args va)
-                         {
-                             if (!settings::get<bool>("map.AUDIT_GIL"))
-                             {
-                                 return;
-                             }
+        ::lua.set_function("__gilAuditSetReason",
+                           [](const uint32 charId, const uint8 source, sol::variadic_args va)
+                           {
+                               if (!settings::get<bool>("map.AUDIT_GIL"))
+                               {
+                                   return;
+                               }
 
-                             GilReason reason{};
-                             reason.source = toGilSource(source);
-                             reason.actor  = charId;
+                               GilReason reason{};
+                               reason.source = toGilSource(source);
+                               reason.actor  = charId;
 
-                             if (va.size() > 0 && va[0].is<std::string>())
-                             {
-                                 reason.detail = va[0].as<std::string>().substr(0, MAX_DETAIL_LENGTH);
-                             }
+                               if (va.size() > 0 && va[0].is<std::string>())
+                               {
+                                   reason.detail = va[0].as<std::string>().substr(0, MAX_DETAIL_LENGTH);
+                               }
 
-                             if (va.size() > 1 && va[1].is<uint32>())
-                             {
-                                 reason.counterparty = va[1].as<uint32>();
-                             }
+                               if (va.size() > 1 && va[1].is<uint32>())
+                               {
+                                   reason.counterparty = va[1].as<uint32>();
+                               }
 
-                             // npcUtil helpers do not know their NPC; the current event's target or the open
-                             // NPC trade identifies who the player is dealing with
-                             if (reason.counterparty == 0)
-                             {
-                                 if (auto* PChar = zoneutils::GetChar(charId))
-                                 {
-                                     if (PChar->isInEvent() && PChar->currentEvent->targetEntity && PChar->currentEvent->targetEntity->objtype != TYPE_PC)
-                                     {
-                                         reason.counterparty = PChar->currentEvent->targetEntity->id;
-                                     }
-                                     else if (PChar->activeTransaction<NpcTradeTransaction>())
-                                     {
-                                         reason.counterparty = lastNpcFor(charId);
-                                     }
-                                 }
-                             }
+                               // npcUtil helpers do not know their NPC; the current event's target or the open
+                               // NPC trade identifies who the player is dealing with
+                               if (reason.counterparty == 0)
+                               {
+                                   if (auto* PChar = zoneutils::GetChar(charId))
+                                   {
+                                       if (PChar->isInEvent() && PChar->currentEvent->targetEntity && PChar->currentEvent->targetEntity->objtype != TYPE_PC)
+                                       {
+                                           reason.counterparty = PChar->currentEvent->targetEntity->id;
+                                       }
+                                       else if (PChar->activeTransaction<NpcTradeTransaction>())
+                                       {
+                                           reason.counterparty = lastNpcFor(charId);
+                                       }
+                                   }
+                               }
 
-                             if (reason.source == GilSource::MobDrop)
-                             {
-                                 includeAlliance(reason);
-                             }
+                               if (reason.source == GilSource::MobDrop)
+                               {
+                                   includeAlliance(reason);
+                               }
 
-                             pushReason(std::move(reason));
-                         });
+                               pushReason(std::move(reason));
+                           });
 
-        lua.set_function("__gilAuditRetireReason", []()
-                         {
-                             if (settings::get<bool>("map.AUDIT_GIL"))
-                             {
-                                 popReason();
-                             }
-                         });
+        ::lua.set_function("__gilAuditRetireReason", []()
+                           {
+                               if (settings::get<bool>("map.AUDIT_GIL"))
+                               {
+                                   popReason();
+                               }
+                           });
 
         if (settings::get<bool>("map.AUDIT_GIL"))
         {

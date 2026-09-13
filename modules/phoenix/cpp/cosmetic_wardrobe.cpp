@@ -79,7 +79,7 @@ class CosmeticWardrobe : public CPPModule
     // list while enabled means the Lua half broke, and nothing gets in.
     auto isAllowedItem(const uint16 itemId) -> bool
     {
-        const auto maybeList = lua["xi"]["phoenix"]["cosmeticWardrobe"].get<sol::optional<sol::table>>();
+        const auto maybeList = ::lua["xi"]["phoenix"]["cosmeticWardrobe"].get<sol::optional<sol::table>>();
         if (!maybeList)
         {
             // One log line, not one per attempt.
