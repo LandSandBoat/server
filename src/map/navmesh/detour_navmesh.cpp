@@ -364,8 +364,15 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> 
         return std::nullopt;
     }
 
+    // Use the height of the last reachable poly, otherwise a partial path can end on a layer it never reached.
+    float* const lastPoint = &navMeshQueryStraightPathFloatData_[(straightPathCount - 1) * 3];
+    if (detourPartial)
+    {
+        navMeshQuery_.getPolyHeight(navMeshQueryPolyData_[pathPolyCount - 1], lastPoint, &lastPoint[1]);
+    }
+
     // Drop the best-guess final waypoint of a partial path, since it lands far from the request and traps the entity.
-    const float* pathEnd = &navMeshQueryStraightPathFloatData_[(straightPathCount - 1) * 3];
+    const float* pathEnd = lastPoint;
     const float* wantEnd = endPoly->nearest.data();
     const float  dx      = pathEnd[0] - wantEnd[0];
     const float  dy      = pathEnd[1] - wantEnd[1];
