@@ -10,9 +10,18 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_RES_RANK, 9)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 9)
     mob:setMod(xi.mod.BLIND_RES_RANK, 9)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.REGAIN, 100)
-    mob:setMod(xi.mod.ATT, 110)
+end
+
+entity.onMobWeaponSkill = function(mob, target, skill, action)
+    if skill:getID() == xi.mobSkill.CALL_OF_THE_GRAVE then
+        mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+        mob:clearTimerQueue()
+        mob:timer(30000, function(mobArg)
+            mobArg:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+        end)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)

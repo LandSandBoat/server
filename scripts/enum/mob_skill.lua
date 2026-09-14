@@ -306,6 +306,7 @@ xi.mobSkill =
 
     STINKING_GAS                  =  489,
 
+    CALL_OF_THE_GRAVE             =  491,
     ABYSS_BLAST                   =  492,
 
     SNORT_1                       =  495,
