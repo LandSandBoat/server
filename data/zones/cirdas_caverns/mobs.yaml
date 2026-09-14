@@ -26,7 +26,7 @@ templates:
 
   Ancestral_Rage:
     id:            6941
-    species:       dark_elemental
+    species:       byrgen
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 100
@@ -807,7 +807,7 @@ templates:
 
   Subterrane_Spider:
     id:            5071
-    species:       spider
+    species:       arachne
     skill_list_id: 236
     attributes:
       combat:

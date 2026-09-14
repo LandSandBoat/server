@@ -230,7 +230,7 @@ templates:
 
   Chepelles_Hare:
     id:            7068
-    species:       lapinion
+    species:       rabbit
     type:          [called]
     skill_list_id: 206
     attributes:
@@ -491,7 +491,7 @@ templates:
 
   Goblin_Fisher:
     id:            1659
-    species:       armored_goblin
+    species:       goblin
     skill_list_id: 133
     attributes:
       combat:

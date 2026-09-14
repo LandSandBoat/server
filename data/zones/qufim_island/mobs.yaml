@@ -1186,7 +1186,7 @@ templates:
 
   Ophiotaurus:
     id:            6169
-    species:       yztarg
+    species:       red_yztarg
     skill_list_id: 1009
     attributes:
       combat:

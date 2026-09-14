@@ -1057,7 +1057,7 @@ templates:
 
   Suspended_Sculpture:
     id:            5247
-    species:       unclassified
+    species:       sculptures
     type:          [notorious]
     skill_list_id: 349
     attributes:
@@ -1075,7 +1075,7 @@ templates:
 
   Unrepentant_Byrgen:
     id:            5452
-    species:       dark_elemental
+    species:       byrgen
     spell_list_id: 21
     skill_list_id: 100
     attributes:

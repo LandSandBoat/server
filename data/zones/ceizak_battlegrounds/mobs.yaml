@@ -202,7 +202,7 @@ templates:
 
   Colossal_Spider:
     id:            5016
-    species:       spider
+    species:       attercop
     skill_list_id: 236
     attributes:
       combat:
@@ -415,7 +415,7 @@ templates:
 
   Irascible_Baelfyr:
     id:            6696
-    species:       ice_elemental
+    species:       baelfyr
     spell_list_id: 3
     attributes:
       combat:
@@ -686,7 +686,7 @@ templates:
 
   Resplendent_Luckybug:
     id:            5015
-    species:       ladybug
+    species:       luckybug
     skill_list_id: 170
     attributes:
       combat:
@@ -715,7 +715,7 @@ templates:
 
   Sedge_Scorpion:
     id:            5012
-    species:       scorpion
+    species:       scolopendrid
     skill_list_id: 217
     attributes:
       combat:
@@ -765,7 +765,7 @@ templates:
 
   Taxet:
     id:            4864
-    species:       wamoura
+    species:       coral_wamoura
     type:          [notorious]
     skill_list_id: 253
     attributes:
@@ -836,7 +836,7 @@ templates:
 
   Twigtrip_Lapinion:
     id:            5003
-    species:       rabbit
+    species:       lapinion
     skill_list_id: 206
     attributes:
       combat:
@@ -854,7 +854,7 @@ templates:
 
   Unbridled_Ungeweder:
     id:            2245
-    species:       thunder_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 105
     attributes:

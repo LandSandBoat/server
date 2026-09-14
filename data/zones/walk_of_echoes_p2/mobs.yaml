@@ -4,7 +4,7 @@ templates:
 
   Aegypius:
     id:      7835
-    species: unclassified
+    species: bird
     type:    [battlefield]
     attributes:
       combat:
@@ -1391,7 +1391,7 @@ templates:
 
   Ailuros:
     id:      7908
-    species: unclassified
+    species: coeurl
     type:    [battlefield]
     attributes:
       combat:
@@ -1410,7 +1410,7 @@ templates:
 
   Akidu:
     id:      7909
-    species: unclassified
+    species: fly
     type:    [battlefield]
     attributes:
       combat:
@@ -1448,7 +1448,7 @@ templates:
 
   Allergorhai:
     id:      7911
-    species: unclassified
+    species: worm
     type:    [battlefield]
     attributes:
       combat:
@@ -1486,7 +1486,7 @@ templates:
 
   Apollinaris_VII-II:
     id:      7913
-    species: unclassified
+    species: antica
     type:    [battlefield]
     attributes:
       combat:
@@ -1524,7 +1524,7 @@ templates:
 
   Arebati:
     id:      7915
-    species: unclassified
+    species: cehuetzi
     type:    [battlefield]
     attributes:
       combat:
@@ -1562,7 +1562,7 @@ templates:
 
   Aristaeus:
     id:      7917
-    species: unclassified
+    species: chapuli
     type:    [battlefield]
     attributes:
       combat:
@@ -1619,7 +1619,7 @@ templates:
 
   Azdaha:
     id:      7920
-    species: unclassified
+    species: wyvern
     type:    [battlefield]
     attributes:
       combat:
@@ -1657,7 +1657,7 @@ templates:
 
   Bendigeidfran:
     id:      7922
-    species: unclassified
+    species: golem
     type:    [battlefield]
     attributes:
       combat:
@@ -1695,7 +1695,7 @@ templates:
 
   Bes:
     id:      7924
-    species: unclassified
+    species: hecteye
     type:    [battlefield]
     attributes:
       combat:
@@ -1733,7 +1733,7 @@ templates:
 
   Brachys:
     id:      7926
-    species: unclassified
+    species: crab
     type:    [battlefield]
     attributes:
       combat:
@@ -1752,7 +1752,7 @@ templates:
 
   Bumba:
     id:      7927
-    species: unclassified
+    species: black_feathered
     type:    [battlefield]
     attributes:
       combat:
@@ -1923,7 +1923,7 @@ templates:
 
   Chelamma:
     id:      7936
-    species: unclassified
+    species: scorpion
     type:    [battlefield]
     attributes:
       combat:
@@ -1961,7 +1961,7 @@ templates:
 
   Chnubis:
     id:      7938
-    species: unclassified
+    species: manticore
     type:    [battlefield]
     attributes:
       combat:
@@ -1999,7 +1999,7 @@ templates:
 
   Count_Malefis:
     id:      7940
-    species: unclassified
+    species: vampyr
     type:    [battlefield]
     attributes:
       combat:
@@ -2018,7 +2018,7 @@ templates:
 
   Cynara:
     id:      7941
-    species: unclassified
+    species: sabotender
     type:    [battlefield]
     attributes:
       combat:
@@ -2037,7 +2037,7 @@ templates:
 
   Dabbat_al-Ard:
     id:      7942
-    species: unclassified
+    species: behemoth
     type:    [battlefield]
     attributes:
       combat:
@@ -2056,7 +2056,7 @@ templates:
 
   Damysus:
     id:      7943
-    species: unclassified
+    species: goobbue
     type:    [battlefield]
     attributes:
       combat:
@@ -2075,7 +2075,7 @@ templates:
 
   Dealan-dhe:
     id:      7944
-    species: unclassified
+    species: twitherym
     type:    [battlefield]
     attributes:
       combat:
@@ -2113,7 +2113,7 @@ templates:
 
   Dione:
     id:      7946
-    species: unclassified
+    species: flytrap
     type:    [battlefield]
     attributes:
       combat:
@@ -2132,7 +2132,7 @@ templates:
 
   Eurytus:
     id:      7947
-    species: unclassified
+    species: goobbue
     type:    [battlefield]
     attributes:
       combat:
@@ -2151,7 +2151,7 @@ templates:
 
   Fleet-footed_Lokberry:
     id:      7948
-    species: unclassified
+    species: tonberry
     type:    [battlefield]
     attributes:
       combat:
@@ -2170,7 +2170,7 @@ templates:
 
   Fornax:
     id:      7949
-    species: unclassified
+    species: cluster
     type:    [battlefield]
     attributes:
       combat:
@@ -2208,7 +2208,7 @@ templates:
 
   Gandji:
     id:      7951
-    species: unclassified
+    species: roc
     type:    [battlefield]
     attributes:
       combat:
@@ -2246,7 +2246,7 @@ templates:
 
   Gigelorum:
     id:      7953
-    species: unclassified
+    species: matamata
     type:    [battlefield]
     attributes:
       combat:
@@ -2284,7 +2284,7 @@ templates:
 
   Gloios:
     id:      7955
-    species: unclassified
+    species: slime
     type:    [battlefield]
     attributes:
       combat:
@@ -2303,7 +2303,7 @@ templates:
 
   Gogmagog:
     id:      7956
-    species: unclassified
+    species: dullahan
     type:    [battlefield]
     attributes:
       combat:
@@ -2341,7 +2341,7 @@ templates:
 
   Gravehaunter:
     id:      7958
-    species: unclassified
+    species: corse
     type:    [battlefield]
     attributes:
       combat:
@@ -2379,7 +2379,7 @@ templates:
 
   Gumdrop:
     id:      7749
-    species: unclassified
+    species: flan
     type:    [battlefield]
     attributes:
       combat:
@@ -2417,7 +2417,7 @@ templates:
 
   Henwen:
     id:      7961
-    species: unclassified
+    species: raaz
     type:    [battlefield]
     attributes:
       combat:
@@ -2455,7 +2455,7 @@ templates:
 
   Ishum:
     id:      7963
-    species: unclassified
+    species: bomb
     type:    [battlefield]
     attributes:
       combat:
@@ -2493,7 +2493,7 @@ templates:
 
   Kalunga:
     id:      7965
-    species: unclassified
+    species: gabbrath
     type:    [battlefield]
     attributes:
       combat:
@@ -2550,7 +2550,7 @@ templates:
 
   Kuk:
     id:      7968
-    species: unclassified
+    species: dragon
     type:    [battlefield]
     attributes:
       combat:
@@ -2588,7 +2588,7 @@ templates:
 
   Kurmajara:
     id:      7970
-    species: unclassified
+    species: adamantoise
     type:    [battlefield]
     attributes:
       combat:
@@ -2607,7 +2607,7 @@ templates:
 
   Kusarikku:
     id:      7971
-    species: unclassified
+    species: bugard
     type:    [battlefield]
     attributes:
       combat:
@@ -2626,7 +2626,7 @@ templates:
 
   Langmeidong:
     id:      7972
-    species: unclassified
+    species: roc
     type:    [battlefield]
     attributes:
       combat:
@@ -2664,7 +2664,7 @@ templates:
 
   Leucippe:
     id:      7974
-    species: unclassified
+    species: bat
     type:    [battlefield]
     attributes:
       combat:
@@ -2721,7 +2721,7 @@ templates:
 
   Lotanu:
     id:      7977
-    species: unclassified
+    species: black_wyrm
     type:    [battlefield]
     attributes:
       combat:
@@ -2759,7 +2759,7 @@ templates:
 
   Man-kheper-re:
     id:      7979
-    species: unclassified
+    species: beetle
     type:    [battlefield]
     attributes:
       combat:
@@ -2778,7 +2778,7 @@ templates:
 
   Marmorkrebs:
     id:      7980
-    species: unclassified
+    species: craklaw
     type:    [battlefield]
     attributes:
       combat:
@@ -2835,7 +2835,7 @@ templates:
 
   Maverick_Maude:
     id:      7983
-    species: unclassified
+    species: morbol
     type:    [battlefield]
     attributes:
       combat:
@@ -2854,7 +2854,7 @@ templates:
 
   Mboze:
     id:      7984
-    species: unclassified
+    species: yggdreant
     type:    [battlefield]
     attributes:
       combat:
@@ -2892,7 +2892,7 @@ templates:
 
   Megaera:
     id:      7986
-    species: unclassified
+    species: cockatrice
     type:    [battlefield]
     attributes:
       combat:
@@ -2939,7 +2939,7 @@ templates:
 
   Nerites:
     id:      7987
-    species: unclassified
+    species: crab
     type:    [battlefield]
     attributes:
       combat:
@@ -2977,7 +2977,7 @@ templates:
 
   Ngai:
     id:      7989
-    species: unclassified
+    species: rockfin
     type:    [battlefield]
     attributes:
       combat:
@@ -3072,7 +3072,7 @@ templates:
 
   Nostos_Bat:
     id:      7994
-    species: unclassified
+    species: bat
     type:    [battlefield]
     attributes:
       combat:
@@ -4573,7 +4573,7 @@ templates:
 
   Ongo:
     id:      8073
-    species: unclassified
+    species: waktza
     type:    [battlefield]
     attributes:
       combat:
@@ -4611,7 +4611,7 @@ templates:
 
   Physis:
     id:      8075
-    species: unclassified
+    species: morbol
     type:    [battlefield]
     attributes:
       combat:
@@ -4630,7 +4630,7 @@ templates:
 
   Procne:
     id:      8076
-    species: unclassified
+    species: tulfaire
     type:    [battlefield]
     attributes:
       combat:
@@ -4668,7 +4668,7 @@ templates:
 
   Ptelea:
     id:      8078
-    species: unclassified
+    species: treant
     type:    [battlefield]
     attributes:
       combat:
@@ -4687,7 +4687,7 @@ templates:
 
   Ptesan_Wi:
     id:      8079
-    species: unclassified
+    species: buffalo
     type:    [battlefield]
     attributes:
       combat:
@@ -4725,7 +4725,7 @@ templates:
 
   Raskovniche:
     id:      8081
-    species: unclassified
+    species: snapweed
     type:    [battlefield]
     attributes:
       combat:
@@ -4763,7 +4763,7 @@ templates:
 
   Salmandra:
     id:      8083
-    species: unclassified
+    species: eft
     type:    [battlefield]
     attributes:
       combat:
@@ -4782,7 +4782,7 @@ templates:
 
   Sgili:
     id:      8084
-    species: unclassified
+    species: umbril
     type:    [battlefield]
     attributes:
       combat:
@@ -4820,7 +4820,7 @@ templates:
 
   Shara:
     id:      8086
-    species: unclassified
+    species: evil_weapon
     type:    [battlefield]
     attributes:
       combat:
@@ -4858,7 +4858,7 @@ templates:
 
   Simir:
     id:      8088
-    species: unclassified
+    species: colibri
     type:    [battlefield]
     attributes:
       combat:
@@ -4896,7 +4896,7 @@ templates:
 
   Spyrysyon:
     id:      8090
-    species: unclassified
+    species: fomor
     type:    [battlefield]
     attributes:
       combat:
@@ -4934,7 +4934,7 @@ templates:
 
   Tabitjet:
     id:      8092
-    species: unclassified
+    species: scorpion
     type:    [battlefield]
     attributes:
       combat:
@@ -4972,7 +4972,7 @@ templates:
 
   Taniwha:
     id:      8094
-    species: unclassified
+    species: sea_monk
     type:    [battlefield]
     attributes:
       combat:
@@ -5010,7 +5010,7 @@ templates:
 
   Tipuli:
     id:      8096
-    species: unclassified
+    species: fly
     type:    [battlefield]
     attributes:
       combat:
@@ -5029,7 +5029,7 @@ templates:
 
   Tripix:
     id:      8097
-    species: unclassified
+    species: goblin
     type:    [battlefield]
     attributes:
       combat:
@@ -5067,7 +5067,7 @@ templates:
 
   U_Bnai:
     id:      8099
-    species: unclassified
+    species: acuex
     type:    [battlefield]
     attributes:
       combat:
@@ -5124,7 +5124,7 @@ templates:
 
   Xevioso:
     id:      8102
-    species: unclassified
+    species: bztavian
     type:    [battlefield]
     attributes:
       combat:
@@ -5162,7 +5162,7 @@ templates:
 
   Zacatzontli:
     id:      8104
-    species: unclassified
+    species: roc
     type:    [battlefield]
     attributes:
       combat:

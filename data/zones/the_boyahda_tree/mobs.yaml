@@ -14,14 +14,8 @@ templates:
         delay: 180
       jobs: [blm, war]
       resists:
-        rank_element:
-          light: -2
-          dark:   6
         rank_status:
-          silence:     10
-          light_sleep: -2
-          dark_sleep:   4
-          blind:        6
+          silence: 10
       render:
         look:
           type:  standard
@@ -215,7 +209,7 @@ templates:
 
   Blood_Ball:
     id:            469
-    species:       leech
+    species:       parasite
     skill_list_id: 172
     attributes:
       combat:
@@ -575,7 +569,7 @@ templates:
 
   Korrigan:
     id:            2282
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -816,7 +810,7 @@ templates:
 
   Mourning_Crawler:
     id:            4578
-    species:       crawler
+    species:       defoliator
     skill_list_id: 79
     attributes:
       combat:
@@ -1010,7 +1004,7 @@ templates:
 
   Snaggletooth_Peapuk:
     id:            4577
-    species:       puk
+    species:       peapuk
     skill_list_id: 2006
     attributes:
       combat:

@@ -394,7 +394,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -605,7 +605,7 @@ templates:
 
   Clan_Bear_Fighter:
     id:            735
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -626,7 +626,7 @@ templates:
 
   Clan_Reaper_Grunt:
     id:            737
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -729,7 +729,7 @@ templates:
 
   Conqueror_Bakgodek:
     id:            777
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -754,7 +754,7 @@ templates:
 
   Cottus:
     id:            4656
-    species:       gigas
+    species:       hecatoncheirs
     skill_list_id: 328
     attributes:
       combat:
@@ -854,7 +854,7 @@ templates:
 
   Deathlord_Rojgnoj:
     id:            935
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -921,7 +921,7 @@ templates:
 
   Dismemberment_Grappler:
     id:            1051
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -1140,7 +1140,7 @@ templates:
 
   Faytrapper_Vashgash:
     id:            1310
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       render:
@@ -1358,7 +1358,7 @@ templates:
 
   Goblin_Draftee:
     id:            1652
-    species:       goblin
+    species:       goblin_s
     spell_list_id: 3
     skill_list_id: 133
     attributes:
@@ -1399,7 +1399,7 @@ templates:
 
   Goblin_Franctireur:
     id:            1662
-    species:       armored_goblin
+    species:       goblin_s
     spell_list_id: 5
     skill_list_id: 133
     attributes:
@@ -1440,7 +1440,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1501,7 +1501,7 @@ templates:
 
   Goblin_Patrolman:
     id:            1695
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1535,7 +1535,7 @@ templates:
 
   Goblin_Picaroon:
     id:            1696
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -1556,7 +1556,7 @@ templates:
   Goblin_Picaroon_Large:
     id:            7259
     display_name:  Goblin_Picaroon
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -1576,7 +1576,7 @@ templates:
 
   Goblin_Skirmisher:
     id:            1713
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1683,7 +1683,7 @@ templates:
 
   Gutrender_Trooper:
     id:            1852
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -1721,7 +1721,7 @@ templates:
 
   Jagidbod_of_Clan_Reaper:
     id:            6677
-    species:       orc
+    species:       orc_s
     type:          [notorious, battlefield]
     skill_list_id: 189
     attributes:
@@ -2381,7 +2381,7 @@ templates:
   One-eyed_Gwajboj_S:
     id:            6759
     display_name:  One-eyed_Gwajboj
-    species:       orc
+    species:       masked_orc_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 189
@@ -2405,7 +2405,7 @@ templates:
 
   Orcish_Fodder_past:
     id:            6265
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2436,7 +2436,7 @@ templates:
 
   Orcish_Guard:
     id:            3018
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2454,7 +2454,7 @@ templates:
 
   Orcish_Mesmerizer_past:
     id:            6266
-    species:       orc
+    species:       orc_s
     spell_list_id: 21
     skill_list_id: 189
     attributes:
@@ -2485,7 +2485,7 @@ templates:
 
   Orcish_Neckchopper_past:
     id:            6267
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -2518,7 +2518,7 @@ templates:
 
   Orcish_Stonechucker_past:
     id:            6268
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2548,7 +2548,7 @@ templates:
 
   Orcish_Strongarm:
     id:            3037
-    species:       orc
+    species:       masked_orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2571,7 +2571,7 @@ templates:
 
   Orcish_Transporter:
     id:            3038
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2589,7 +2589,7 @@ templates:
 
   Orcish_Turret:
     id:            3040
-    species:       orcish_warmachine
+    species:       orcish_turret
     skill_list_id: 248
     attributes:
       combat:
@@ -2652,7 +2652,7 @@ templates:
   Poisonhand_Gnadgad_S:
     id:            6970
     display_name:  Poisonhand_Gnadgad
-    species:       orc
+    species:       orc_s
     type:          [notorious]
     skill_list_id: 189
     attributes:
@@ -3467,7 +3467,7 @@ templates:
 
   Spinebeak_Neckchopper:
     id:            3730
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -3488,7 +3488,7 @@ templates:
 
   Steelhide_Protector:
     id:            3767
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:

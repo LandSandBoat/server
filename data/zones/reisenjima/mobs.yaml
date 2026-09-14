@@ -22,7 +22,7 @@ templates:
 
   Albumen:
     id:            5605
-    species:       mandragora
+    species:       adenium
     skill_list_id: 178
     attributes:
       combat:
@@ -260,7 +260,7 @@ templates:
 
   Ascended_Gefyrst:
     id:            5576
-    species:       ice_elemental
+    species:       gefyrst
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 103
@@ -537,7 +537,7 @@ templates:
 
   Ascended_Ungeweder:
     id:            5577
-    species:       thunder_elemental
+    species:       ungeweder
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 105
@@ -1315,7 +1315,7 @@ templates:
 
   Perfervid_Naraka:
     id:            5378
-    species:       naraka
+    species:       white_naraka
     skill_list_id: 227
     attributes:
       combat:
@@ -1469,7 +1469,7 @@ templates:
 
   Sang_Buaya:
     id:            5587
-    species:       bugard
+    species:       abyssobugard
     type:          [notorious]
     skill_list_id: 58
     attributes:
@@ -1641,7 +1641,7 @@ templates:
 
   Selkit:
     id:            5586
-    species:       scorpion
+    species:       scolopendrid
     type:          [notorious]
     skill_list_id: 217
     attributes:
@@ -1753,7 +1753,7 @@ templates:
 
   Teles:
     id:            5597
-    species:       harpeia
+    species:       siren
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 471

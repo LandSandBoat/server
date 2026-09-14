@@ -1809,7 +1809,7 @@ templates:
 
   Palila:
     id:            5674
-    species:       waktza
+    species:       black_waktza
     skill_list_id: 460
     attributes:
       combat:
@@ -1990,7 +1990,7 @@ templates:
   Suzaku_ER:
     id:            5692
     display_name:  Suzaku
-    species:       bird
+    species:       legendary_roc
     type:          [notorious]
     spell_list_id: 27
     skill_list_id: 280
@@ -2000,13 +2000,9 @@ templates:
         dmg_mult: 125
       jobs: [rdm, rdm]
       resists:
-        dmg_physical:
-          slashing: -2500
-          blunt:    -2500
         rank_element:
           fire:    10
           ice:     10
-          wind:     4
           earth:    4
           thunder:  4
           light:    4
@@ -2014,7 +2010,6 @@ templates:
         rank_status:
           paralyze:    10
           bind:        10
-          silence:      4
           slow:         4
           light_sleep:  4
           dark_sleep:   4
@@ -2071,7 +2066,7 @@ templates:
 
   Virava:
     id:            6989
-    species:       rafflesia
+    species:       belladonna
     type:          [notorious]
     skill_list_id: 207
     attributes:

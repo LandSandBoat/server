@@ -51,7 +51,7 @@ templates:
 
   Blood_Toad:
     id:            4898
-    species:       blue_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       combat:
@@ -690,7 +690,7 @@ templates:
 
   Skinsipper_Chigoe:
     id:            4971
-    species:       chigoe
+    species:       djigga
     roam:          [stealth]
     skill_list_id: 64
     attributes:
@@ -739,7 +739,7 @@ templates:
 
   Treefrost_Gefyrst:
     id:            4972
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 14
     skill_list_id: 103
     attributes:
@@ -849,7 +849,7 @@ templates:
 
   Vorst_Gnat:
     id:            4974
-    species:       gnat
+    species:       midge
     skill_list_id: 131
     attributes:
       combat:

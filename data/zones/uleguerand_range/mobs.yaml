@@ -1214,7 +1214,7 @@ templates:
 
   Polar_Hare:
     id:            3168
-    species:       rabbit
+    species:       alabaster_rabbit
     skill_list_id: 405
     attributes:
       combat:

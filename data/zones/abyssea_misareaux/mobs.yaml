@@ -31,7 +31,7 @@ templates:
 
   Abyssobugard:
     id:            26
-    species:       bugard
+    species:       abyssobugard
     skill_list_id: 58
     attributes:
       combat:

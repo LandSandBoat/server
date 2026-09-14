@@ -478,7 +478,7 @@ templates:
 
   BoDho_Hundredfist:
     id:            516
-    species:       quadav
+    species:       horned_quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -510,7 +510,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -696,7 +696,7 @@ templates:
 
   Conqueror_Bakgodek:
     id:            777
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -868,7 +868,7 @@ templates:
 
   DiDha_Adamantfist:
     id:            1066
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
@@ -877,13 +877,6 @@ templates:
         skill: club
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -900,7 +893,7 @@ templates:
 
   DiDhas_Elite_Guard:
     id:            1067
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -923,7 +916,7 @@ templates:
 
   Divine_Disseminator:
     id:            1057
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -944,7 +937,7 @@ templates:
 
   Divine_Templar:
     id:            1064
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -1608,7 +1601,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1630,7 +1623,7 @@ templates:
   Goblin_Lansquenet_Large:
     id:            7167
     display_name:  Goblin_Lansquenet
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1722,7 +1715,7 @@ templates:
 
   Gutrender_Trooper:
     id:            1852
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -2274,7 +2267,7 @@ templates:
   Moo_Ouzi_the_SwiftbladeS:
     id:            1247
     display_name:  Moo_Ouzi_the_Swiftblade
-    species:       yagudo
+    species:       whitehead_yagudo_s
     type:          [notorious]
     skill_list_id: 360
     attributes:
@@ -2358,7 +2351,7 @@ templates:
   One-eyed_Gwajboj_S:
     id:            6759
     display_name:  One-eyed_Gwajboj
-    species:       orc
+    species:       masked_orc_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 189
@@ -2382,7 +2375,7 @@ templates:
 
   Orcish_Bloodletter:
     id:            6859
-    species:       orc
+    species:       orc_s
     type:          [notorious]
     skill_list_id: 189
     attributes:
@@ -3118,7 +3111,7 @@ templates:
 
   Siege_Turret:
     id:            3621
-    species:       orcish_warmachine
+    species:       orcish_turret
     skill_list_id: 248
     attributes:
       combat:
@@ -3153,7 +3146,7 @@ templates:
 
   Steelhide_Protector:
     id:            3767
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -3363,7 +3356,7 @@ templates:
 
   Vee_Qiqa_the_Decreer:
     id:            4212
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -3412,7 +3405,7 @@ templates:
 
   Waughroon_Heavyshell:
     id:            4315
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:

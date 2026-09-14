@@ -82,7 +82,7 @@ templates:
 
   Anthousai:
     id:            4952
-    species:       morbol
+    species:       ameretat
     skill_list_id: 186
     attributes:
       combat:
@@ -299,7 +299,7 @@ templates:
 
   Hoarfrost_Gefyrst:
     id:            5105
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 14
     skill_list_id: 103
     attributes:
@@ -523,7 +523,7 @@ templates:
 
   Qohanyk:
     id:            5103
-    species:       morbol
+    species:       ameretat
     skill_list_id: 186
     attributes:
       combat:
@@ -750,7 +750,7 @@ templates:
 
   Volcanic_Wivre:
     id:            4960
-    species:       wivre
+    species:       unusual_wivre
     skill_list_id: 257
     attributes:
       combat:

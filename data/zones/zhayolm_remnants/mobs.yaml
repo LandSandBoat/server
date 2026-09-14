@@ -3658,7 +3658,7 @@ templates:
 
   Ziz:
     id:            4508
-    species:       cockatrice
+    species:       ziz
     skill_list_id: 70
     attributes:
       combat:

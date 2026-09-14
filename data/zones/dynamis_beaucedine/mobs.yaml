@@ -148,7 +148,7 @@ templates:
 
   Ascetox_Ratgums:
     id:            257
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 373
@@ -156,25 +156,6 @@ templates:
       combat:
         skill: staff
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -282,7 +263,7 @@ templates:
 
   BeZhe_Keeprazer:
     id:            401
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 705
@@ -294,24 +275,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -349,7 +312,7 @@ templates:
 
   Bhuu_Wjato_the_Firepool:
     id:            408
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 710
@@ -394,32 +357,13 @@ templates:
 
   Bordox_Kittyback:
     id:            508
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -455,7 +399,7 @@ templates:
 
   Brewnix_Bittypupils:
     id:            529
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 373
@@ -463,25 +407,6 @@ templates:
       combat:
         skill: dagger
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -517,7 +442,7 @@ templates:
 
   Caa_Xaza_the_Madpiercer:
     id:            594
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 710
@@ -604,7 +529,7 @@ templates:
 
   Cobraclaw_Buchzvotch:
     id:            755
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -722,7 +647,7 @@ templates:
 
   DeBho_Pyrohand:
     id:            1021
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 705
@@ -734,24 +659,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -789,7 +696,7 @@ templates:
 
   Deathcaller_Bidfbid:
     id:            934
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 2104
@@ -834,7 +741,7 @@ templates:
 
   Drakefeast_Wubmfub:
     id:            1107
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2105
     attributes:
@@ -878,32 +785,13 @@ templates:
 
   Draklix_Scalecrust:
     id:            1109
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: sword
       jobs: [drg, drg]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -939,7 +827,7 @@ templates:
 
   Droprix_Granitepalms:
     id:            1125
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -947,25 +835,6 @@ templates:
         skill: hand_to_hand
         delay: 240
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1001,7 +870,7 @@ templates:
 
   Elvaanlopper_Grokdok:
     id:            1204
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -1071,7 +940,7 @@ templates:
 
   Foo_Peku_the_Bloodcloak:
     id:            1399
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -1114,7 +983,7 @@ templates:
 
   GaFho_Venomtouch:
     id:            1484
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 705
@@ -1126,24 +995,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -1181,7 +1032,7 @@ templates:
 
   Galkarider_Retzpratz:
     id:            1453
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -1225,7 +1076,7 @@ templates:
 
   Gibberox_Pimplebeak:
     id:            1542
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -1233,25 +1084,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1287,7 +1119,7 @@ templates:
 
   GoTyo_Magenapper:
     id:            1784
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -1298,24 +1130,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -1456,7 +1270,7 @@ templates:
 
   GuKhu_Dukesniper:
     id:            1857
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -1467,24 +1281,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -1522,7 +1318,7 @@ templates:
 
   GuNha_Wallstormer:
     id:            1858
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -1532,24 +1328,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -1587,7 +1365,7 @@ templates:
 
   Guu_Waji_the_Preacher:
     id:            1853
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -1629,7 +1407,7 @@ templates:
 
   Heavymail_Djidzbad:
     id:            1909
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 2104
@@ -1674,7 +1452,7 @@ templates:
 
   Hee_Mida_the_Meticulous:
     id:            1914
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 710
@@ -1760,7 +1538,7 @@ templates:
 
   Humegutter_Adzjbadj:
     id:            2005
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -2951,7 +2729,7 @@ templates:
 
   Jeunoraider_Gepkzip:
     id:            2148
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 2104
@@ -2996,7 +2774,7 @@ templates:
 
   JiFhu_Infiltrator:
     id:            2151
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -3007,24 +2785,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3062,7 +2822,7 @@ templates:
 
   JiKhu_Towercleaver:
     id:            2153
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -3073,24 +2833,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3128,7 +2870,7 @@ templates:
 
   Knii_Hoqo_the_Bisector:
     id:            2273
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -3172,7 +2914,7 @@ templates:
 
   Koo_Saxu_the_Everfast:
     id:            2281
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 710
@@ -3217,7 +2959,7 @@ templates:
 
   Kuu_Xuka_the_Nimble:
     id:            2303
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 710
@@ -3262,7 +3004,7 @@ templates:
 
   Lockbuster_Zapdjipp:
     id:            2429
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -3306,7 +3048,7 @@ templates:
 
   Maa_Zaua_the_Wyrmkeeper:
     id:            2466
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -3348,7 +3090,7 @@ templates:
 
   MiRhe_Whisperblade:
     id:            2683
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 705
@@ -3360,24 +3102,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3445,7 +3169,7 @@ templates:
 
   Mithraslaver_Debhabob:
     id:            2681
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2104
     attributes:
@@ -3489,31 +3213,12 @@ templates:
 
   Moltenox_Stubthumbs:
     id:            2728
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -3549,7 +3254,7 @@ templates:
 
   Morblox_Chubbychin:
     id:            2740
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 373
@@ -3557,25 +3262,6 @@ templates:
       combat:
         skill: club
       jobs: [smn, smn]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -3611,7 +3297,7 @@ templates:
 
   MuGha_Legionkiller:
     id:            2778
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 705
@@ -3623,24 +3309,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3678,7 +3346,7 @@ templates:
 
   NaHya_Floodmaker:
     id:            2814
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 705
@@ -3690,24 +3358,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3745,7 +3395,7 @@ templates:
 
   Nee_Huxa_the_Judgmental:
     id:            2818
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -3789,7 +3439,7 @@ templates:
 
   NuBhi_Spiraleye:
     id:            2928
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 705
@@ -3801,24 +3451,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -3950,7 +3582,7 @@ templates:
 
   Puu_Timu_the_Phantasmal:
     id:            3238
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 710
@@ -4054,32 +3686,13 @@ templates:
 
   Routsix_Rubbertendon:
     id:            3399
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
       jobs: [bst, bst]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4115,7 +3728,7 @@ templates:
 
   Ruffbix_Jumbolobes:
     id:            3412
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 373
@@ -4123,25 +3736,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4177,7 +3771,7 @@ templates:
 
   Ryy_Qihi_the_Idolrobber:
     id:            3423
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -4261,32 +3855,13 @@ templates:
 
   Shisox_Widebrow:
     id:            3606
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: sword
       jobs: [sam, sam]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4322,7 +3897,7 @@ templates:
 
   Skinmask_Ugghfogg:
     id:            3650
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 2104
@@ -4367,32 +3942,13 @@ templates:
 
   Slinkix_Trufflesniff:
     id:            3671
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4428,7 +3984,7 @@ templates:
 
   SoGho_Adderhandler:
     id:            3715
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -4439,24 +3995,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -4494,7 +4032,7 @@ templates:
 
   SoZho_Metalbender:
     id:            3717
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -4505,24 +4043,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -4560,7 +4080,7 @@ templates:
 
   Soo_Jopo_the_Fiendking:
     id:            3702
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -4604,7 +4124,7 @@ templates:
 
   Spinalsucker_Galflmall:
     id:            3729
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 2104
@@ -4649,7 +4169,7 @@ templates:
 
   Swypestix_Tigershins:
     id:            3829
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 373
@@ -4657,25 +4177,6 @@ templates:
       combat:
         skill: dagger
       jobs: [nin, nin]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4711,7 +4212,7 @@ templates:
 
   TaHyu_Gallanthunter:
     id:            3857
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 705
@@ -4723,24 +4224,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -4849,7 +4332,7 @@ templates:
 
   Taruroaster_Biggsjig:
     id:            3849
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 2104
@@ -4894,7 +4377,7 @@ templates:
 
   Tocktix_Thinlids:
     id:            3940
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 373
@@ -4902,25 +4385,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4956,7 +4420,7 @@ templates:
 
   Ultrasonic_Zeknajak:
     id:            4084
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 2104
@@ -5001,7 +4465,7 @@ templates:
 
   Vanguard_Alchemist:
     id:            4133
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -5038,7 +4502,7 @@ templates:
 
   Vanguard_Ambusher:
     id:            4134
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5074,7 +4538,7 @@ templates:
 
   Vanguard_Amputator:
     id:            4135
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -5115,7 +4579,7 @@ templates:
 
   Vanguard_Armorer:
     id:            4136
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -5154,7 +4618,7 @@ templates:
 
   Vanguard_Assassin:
     id:            4137
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 7
     skill_list_id: 2106
     attributes:
@@ -5195,7 +4659,7 @@ templates:
 
   Vanguard_Backstabber:
     id:            4138
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -5238,7 +4702,7 @@ templates:
 
   Vanguard_Beasttender:
     id:            4139
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5279,7 +4743,7 @@ templates:
 
   Vanguard_Bugler:
     id:            4140
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -5322,7 +4786,7 @@ templates:
 
   Vanguard_Chanter:
     id:            4141
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 6
     skill_list_id: 2106
     attributes:
@@ -5363,7 +4827,7 @@ templates:
 
   Vanguard_Constable:
     id:            4142
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -5403,7 +4867,7 @@ templates:
 
   Vanguard_Defender:
     id:            4143
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -5445,7 +4909,7 @@ templates:
 
   Vanguard_Dollmaster:
     id:            4144
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -5486,7 +4950,7 @@ templates:
 
   Vanguard_Dragontamer:
     id:            4649
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5524,7 +4988,7 @@ templates:
 
   Vanguard_Drakekeeper:
     id:            4146
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5564,7 +5028,7 @@ templates:
 
   Vanguard_Enchanter:
     id:            4147
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -5603,7 +5067,7 @@ templates:
 
   Vanguard_Exemplar:
     id:            4148
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 4
     skill_list_id: 2106
     attributes:
@@ -5679,7 +5143,7 @@ templates:
 
   Vanguard_Footsoldier:
     id:            4150
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5720,7 +5184,7 @@ templates:
 
   Vanguard_Grappler:
     id:            4151
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5761,7 +5225,7 @@ templates:
 
   Vanguard_Gutslasher:
     id:            4152
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5803,7 +5267,7 @@ templates:
 
   Vanguard_Hatamoto:
     id:            4153
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5844,7 +5308,7 @@ templates:
 
   Vanguard_Hawker:
     id:            4154
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5886,7 +5350,7 @@ templates:
 
   Vanguard_Hitman:
     id:            4155
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -5925,7 +5389,7 @@ templates:
 
   Vanguard_Impaler:
     id:            4156
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2103
     attributes:
       combat:
@@ -5968,7 +5432,7 @@ templates:
 
   Vanguard_Inciter:
     id:            4157
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 5
     skill_list_id: 2106
     attributes:
@@ -6009,7 +5473,7 @@ templates:
 
   Vanguard_Kusa:
     id:            4158
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -6051,7 +5515,7 @@ templates:
 
   Vanguard_Liberator:
     id:            4159
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6091,7 +5555,7 @@ templates:
 
   Vanguard_Maestro:
     id:            4160
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -6130,7 +5594,7 @@ templates:
 
   Vanguard_Mason:
     id:            4161
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6169,7 +5633,7 @@ templates:
 
   Vanguard_Mesmerizer:
     id:            4162
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -6210,7 +5674,7 @@ templates:
 
   Vanguard_Militant:
     id:            4163
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6248,7 +5712,7 @@ templates:
 
   Vanguard_Minstrel:
     id:            4164
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -6290,7 +5754,7 @@ templates:
 
   Vanguard_Neckchopper:
     id:            4165
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -6333,7 +5797,7 @@ templates:
 
   Vanguard_Necromancer:
     id:            4166
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -6370,7 +5834,7 @@ templates:
 
   Vanguard_Ogresoother:
     id:            4167
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6410,7 +5874,7 @@ templates:
 
   Vanguard_Oracle:
     id:            4168
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 141
     skill_list_id: 2106
     attributes:
@@ -6450,7 +5914,7 @@ templates:
 
   Vanguard_Partisan:
     id:            4169
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6490,7 +5954,7 @@ templates:
 
   Vanguard_Pathfinder:
     id:            4170
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6528,7 +5992,7 @@ templates:
 
   Vanguard_Persecutor:
     id:            4171
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6568,7 +6032,7 @@ templates:
 
   Vanguard_Pillager:
     id:            4172
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -6610,7 +6074,7 @@ templates:
 
   Vanguard_Pitfighter:
     id:            4173
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6646,7 +6110,7 @@ templates:
 
   Vanguard_Predator:
     id:            4174
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -6686,7 +6150,7 @@ templates:
 
   Vanguard_Prelate:
     id:            4175
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 21
     skill_list_id: 2106
     attributes:
@@ -6725,7 +6189,7 @@ templates:
 
   Vanguard_Priest:
     id:            4176
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 20
     skill_list_id: 2106
     attributes:
@@ -6764,7 +6228,7 @@ templates:
 
   Vanguard_Protector:
     id:            4177
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -6806,7 +6270,7 @@ templates:
 
   Vanguard_Purloiner:
     id:            4178
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6846,7 +6310,7 @@ templates:
 
   Vanguard_Ronin:
     id:            4179
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6884,7 +6348,7 @@ templates:
 
   Vanguard_Salvager:
     id:            4180
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6922,7 +6386,7 @@ templates:
 
   Vanguard_Sentinel:
     id:            4181
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6961,7 +6425,7 @@ templates:
 
   Vanguard_Shaman:
     id:            4182
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -6998,7 +6462,7 @@ templates:
 
   Vanguard_Skirmisher:
     id:            4183
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -7037,7 +6501,7 @@ templates:
 
   Vanguard_Smithy:
     id:            4184
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -7074,7 +6538,7 @@ templates:
 
   Vanguard_Thaumaturge:
     id:            4191
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -7113,7 +6577,7 @@ templates:
 
   Vanguard_Tinkerer:
     id:            4192
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -7152,7 +6616,7 @@ templates:
 
   Vanguard_Trooper:
     id:            4193
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -7195,7 +6659,7 @@ templates:
 
   Vanguard_Undertaker:
     id:            4194
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -7234,7 +6698,7 @@ templates:
 
   Vanguard_Vexer:
     id:            4195
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -7277,7 +6741,7 @@ templates:
 
   Vanguard_Vigilante:
     id:            4196
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -7319,7 +6783,7 @@ templates:
 
   Vanguard_Vindicator:
     id:            4197
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -7359,7 +6823,7 @@ templates:
 
   Vanguard_Visionary:
     id:            4198
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 3
     skill_list_id: 2106
     attributes:
@@ -7400,7 +6864,7 @@ templates:
 
   Vanguard_Welldigger:
     id:            4199
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -7667,7 +7131,7 @@ templates:
 
   Whistrix_Toadthroat:
     id:            4330
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 373
@@ -7675,25 +7139,6 @@ templates:
       combat:
         skill: dagger
       jobs: [brd, brd]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -7755,7 +7200,7 @@ templates:
 
   Wraithdancer_Gidbnod:
     id:            4380
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 2104
@@ -7800,7 +7245,7 @@ templates:
 
   Xaa_Chau_the_Roctalon:
     id:            4391
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     skill_list_id: 710
     attributes:
@@ -7845,7 +7290,7 @@ templates:
 
   Xhoo_Fuza_the_Sublime:
     id:            4394
-    species:       yagudo
+    species:       dynamis_yagudo
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 710

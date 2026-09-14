@@ -158,7 +158,7 @@ templates:
 
   Lancelord_Gaheel_Ja:
     id:            2370
-    species:       knight
+    species:       knight_ja
     type:          [battlefield, event]
     spell_list_id: 4
     skill_list_id: 780

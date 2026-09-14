@@ -467,7 +467,7 @@ templates:
 
   Tzee_Xicu_the_Manifest:
     id:            4072
-    species:       yagudo
+    species:       manifest
     type:          [notorious]
     spell_list_id: 30
     skill_list_id: 360

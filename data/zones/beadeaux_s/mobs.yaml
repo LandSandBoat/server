@@ -87,7 +87,7 @@ templates:
 
   1st_Legion_Mercenary:
     id:            5
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -254,7 +254,7 @@ templates:
   Adaman_Quadav_past:
     id:            5553
     display_name:  Adaman_Quadav
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -359,7 +359,7 @@ templates:
 
   Ancient_Quadav_past:
     id:            6233
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -501,7 +501,7 @@ templates:
 
   BaTho_Mercifulheart:
     id:            377
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -510,13 +510,6 @@ templates:
         skill: dagger
         delay: 245
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -553,7 +546,7 @@ templates:
 
   Baetyl_Quadav_BS:
     id:            324
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -620,7 +613,7 @@ templates:
 
   Beadeaux_Vanguard:
     id:            381
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -643,7 +636,7 @@ templates:
   BiGho_Headtaker_past:
     id:            6680
     display_name:  BiGho_Headtaker
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -652,13 +645,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -696,7 +682,7 @@ templates:
 
   Blifnix_Oilycheeks:
     id:            450
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -728,7 +714,7 @@ templates:
 
   BoDho_Hundredfist:
     id:            516
-    species:       quadav
+    species:       horned_quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -760,7 +746,7 @@ templates:
 
   BoDhos_Shieldwarrior_C:
     id:            517
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -781,7 +767,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -886,7 +872,7 @@ templates:
 
   Chatoyant_Quadav_BS:
     id:            703
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -999,20 +985,13 @@ templates:
 
   DaDha_Hundredmask:
     id:            928
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1033,7 +1012,7 @@ templates:
 
   Dadough_Vanguard:
     id:            889
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -1096,7 +1075,7 @@ templates:
   DeVyu_Headhunter_past:
     id:            6681
     display_name:  DeVyu_Headhunter
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 202
@@ -1105,13 +1084,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1146,7 +1118,7 @@ templates:
 
   DiDha_Adamantfist:
     id:            1066
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
@@ -1155,13 +1127,6 @@ templates:
         skill: club
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1178,7 +1143,7 @@ templates:
 
   DiDhas_Elite_Guard:
     id:            1067
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -1201,7 +1166,7 @@ templates:
 
   DiMho_Platekeeper:
     id:            1068
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1221,7 +1186,7 @@ templates:
 
   DiZho_Spongeshell:
     id:            1069
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -1230,13 +1195,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1262,7 +1220,7 @@ templates:
 
   DoBho_Venomtail:
     id:            1096
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -1286,7 +1244,7 @@ templates:
 
   Doyen_Quadav:
     id:            1094
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1372,7 +1330,7 @@ templates:
   EaTho_Cruelheart_past:
     id:            6068
     display_name:  EaTho_Cruelheart
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -1381,13 +1339,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1561,7 +1512,7 @@ templates:
 
   Ferroalloy_Quadav:
     id:            1325
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -1663,7 +1614,7 @@ templates:
 
   GaDho_Softstep:
     id:            1483
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1686,7 +1637,7 @@ templates:
 
   GaLhu_Nevermolt:
     id:            1485
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 202
@@ -1695,13 +1646,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1727,7 +1671,7 @@ templates:
 
   GiGhi_Rockchopper:
     id:            1611
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
@@ -1735,13 +1679,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [bst, bst]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1758,7 +1695,7 @@ templates:
 
   GiGhis_Elite_Guard:
     id:            1612
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1824,20 +1761,13 @@ templates:
 
   GoBhu_Herohunter:
     id:            1779
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: sword
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1854,7 +1784,7 @@ templates:
 
   GoBhus_Elite_Raider:
     id:            1780
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -1877,7 +1807,7 @@ templates:
 
   GoDha_Jademaiden:
     id:            1781
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1900,7 +1830,7 @@ templates:
 
   GoDhas_Elite_Raider:
     id:            1782
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -1923,7 +1853,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1964,7 +1894,7 @@ templates:
 
   Gold_Quadav:
     id:            1753
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1996,20 +1926,13 @@ templates:
 
   GuDho_Staggershell:
     id:            1856
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: axe
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2041,7 +1964,7 @@ templates:
 
   Iron_Quadav_BS:
     id:            6247
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -2149,7 +2072,7 @@ templates:
 
   Khroma_Quadav:
     id:            2224
-    species:       quadav
+    species:       horned_quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -2319,7 +2242,7 @@ templates:
 
   Magnes_Quadav_BS:
     id:            6254
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -2380,7 +2303,7 @@ templates:
 
   Meteor_Quadav:
     id:            2644
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -2429,7 +2352,7 @@ templates:
 
   MuNhi_Thimbletail:
     id:            2779
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
@@ -2437,13 +2360,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2486,7 +2402,7 @@ templates:
   NoMho_Crimsonarmor_past:
     id:            6682
     display_name:  NoMho_Crimsonarmor
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
@@ -2495,13 +2411,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [war, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -2518,7 +2427,7 @@ templates:
 
   NoMhos_Elite_Guard:
     id:            2917
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -2688,7 +2597,7 @@ templates:
 
   Platinum_Quadav_BS:
     id:            6234
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -2785,7 +2694,7 @@ templates:
 
   Qulun_Heavyshell:
     id:            3293
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -2807,20 +2716,13 @@ templates:
 
   RaDha_Scarscute:
     id:            3337
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: dagger
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3190,7 +3092,7 @@ templates:
 
   Star_Ruby_Quadav_BS:
     id:            3757
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -3221,7 +3123,7 @@ templates:
 
   Steel_Quadav_BS:
     id:            6248
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -3327,7 +3229,7 @@ templates:
 
   VaGho_Bloodbasked:
     id:            4208
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 337
@@ -3398,7 +3300,7 @@ templates:
 
   Vajra_Quadav:
     id:            4120
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -3431,7 +3333,7 @@ templates:
 
   Vhuud_Vanguard:
     id:            4228
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 337
     attributes:
       combat:
@@ -3532,7 +3434,7 @@ templates:
 
   Waughroon_Heavyshell:
     id:            4315
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -3553,7 +3455,7 @@ templates:
   ZaDha_Adamantking_BS:
     id:            4494
     display_name:  ZaDha_Adamantking
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
@@ -3563,13 +3465,6 @@ templates:
         delay:    265
         dmg_mult: 125
       jobs: [whm, war]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -3587,7 +3482,7 @@ templates:
 
   ZaDhas_Biographer:
     id:            4495
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -3609,7 +3504,7 @@ templates:
 
   ZaDhas_Minister:
     id:            4496
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -3631,7 +3526,7 @@ templates:
 
   ZiBhe_Gauntletkeeper:
     id:            4510
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -3651,7 +3546,7 @@ templates:
 
   ZoBha_Helmkeeper:
     id:            4520
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:

@@ -158,7 +158,7 @@ templates:
 
   Boulder_Eater:
     id:            4580
-    species:       worm
+    species:       entozoon
     roam:          [worm]
     spell_list_id: 9
     skill_list_id: 258

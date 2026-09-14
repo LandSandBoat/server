@@ -2472,7 +2472,7 @@ templates:
 
   Skoffin:
     id:            3652
-    species:       blue_wyvern
+    species:       wyvern
     skill_list_id: 266
     attributes:
       combat:
@@ -2531,7 +2531,7 @@ templates:
 
   Troll_Sabreur:
     id:            4027
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -2566,7 +2566,7 @@ templates:
 
   Troll_Shieldbearer:
     id:            4029
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -2601,7 +2601,7 @@ templates:
 
   Troll_Surveillant:
     id:            4034
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:

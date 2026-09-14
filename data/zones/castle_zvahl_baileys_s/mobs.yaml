@@ -154,7 +154,7 @@ templates:
   Adaman_Quadav_past:
     id:            5553
     display_name:  Adaman_Quadav
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -303,7 +303,7 @@ templates:
 
   Ancient_Quadav_past:
     id:            6233
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -515,7 +515,7 @@ templates:
 
   Beadeaux_Vanguard:
     id:            381
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -538,7 +538,7 @@ templates:
   BiGho_Headtaker_past:
     id:            6680
     display_name:  BiGho_Headtaker
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -547,13 +547,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -570,7 +563,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -691,7 +684,7 @@ templates:
 
   Clan_Reaper_Grunt:
     id:            737
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -818,7 +811,7 @@ templates:
   DeVyu_Headhunter_past:
     id:            6681
     display_name:  DeVyu_Headhunter
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 202
@@ -827,13 +820,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -850,7 +836,7 @@ templates:
 
   Deathlord_Rojgnoj:
     id:            935
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -905,7 +891,7 @@ templates:
 
   Dee_Xalmo_the_Grim:
     id:            953
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -1375,7 +1361,7 @@ templates:
 
   Divine_Ascetic:
     id:            1055
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -1397,7 +1383,7 @@ templates:
 
   Divine_Assassin:
     id:            1056
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -1787,20 +1773,13 @@ templates:
 
   GoBhu_Herohunter:
     id:            1779
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: sword
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1817,7 +1796,7 @@ templates:
 
   GoBhus_Elite_Raider:
     id:            1780
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -1840,7 +1819,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1889,7 +1868,7 @@ templates:
 
   Gold_Quadav_CZBS:
     id:            6251
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -2026,7 +2005,7 @@ templates:
 
   Iron_Quadav_CZBS:
     id:            6246
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -2059,7 +2038,7 @@ templates:
 
   Jagidbod_of_Clan_Reaper:
     id:            6677
-    species:       orc
+    species:       orc_s
     type:          [notorious, battlefield]
     skill_list_id: 189
     attributes:
@@ -2180,7 +2159,7 @@ templates:
 
   Kazan_the_Peerless:
     id:            2198
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -2427,7 +2406,7 @@ templates:
 
   Magnes_Quadav_CZBS:
     id:            6255
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -2500,7 +2479,7 @@ templates:
 
   Muu_Buxu_the_Elusive:
     id:            2776
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -2647,7 +2626,7 @@ templates:
 
   Orcish_Augur_CZBS:
     id:            6293
-    species:       orc
+    species:       orc_s
     spell_list_id: 21
     skill_list_id: 189
     attributes:
@@ -2675,7 +2654,7 @@ templates:
 
   Orcish_Bowshooter_CZBS:
     id:            6275
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2696,7 +2675,7 @@ templates:
 
   Orcish_Champion_CZBS:
     id:            6290
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2727,7 +2706,7 @@ templates:
 
   Orcish_Dragonbrander_CZB:
     id:            6294
-    species:       orc
+    species:       orc_s
     skill_list_id: 713
     attributes:
       combat:
@@ -2757,7 +2736,7 @@ templates:
 
   Orcish_Protector_CZBS:
     id:            6292
-    species:       orc
+    species:       orc_s
     spell_list_id: 4
     skill_list_id: 189
     attributes:
@@ -2788,7 +2767,7 @@ templates:
 
   Orcish_Veteran_CZBS:
     id:            6285
-    species:       orc
+    species:       orc_s
     skill_list_id: 189
     attributes:
       combat:
@@ -2817,7 +2796,7 @@ templates:
 
   Orcish_Warlord_CZBS:
     id:            6295
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -2892,7 +2871,7 @@ templates:
 
   Plenilune_Ronin:
     id:            3158
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -3009,7 +2988,7 @@ templates:
 
   Qulun_Heavyshell:
     id:            3293
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -3492,7 +3471,7 @@ templates:
 
   Siege_Turret:
     id:            3621
-    species:       orcish_warmachine
+    species:       orcish_turret
     skill_list_id: 248
     attributes:
       combat:
@@ -3569,7 +3548,7 @@ templates:
 
   Spinebeak_Neckchopper:
     id:            3730
-    species:       orc
+    species:       orc_s
     spell_list_id: 5
     skill_list_id: 189
     attributes:
@@ -3590,7 +3569,7 @@ templates:
 
   Star_Ruby_Quadav_CZBS:
     id:            6256
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -3678,7 +3657,7 @@ templates:
 
   Vajra_Quadav_CZBS:
     id:            6253
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -3760,7 +3739,7 @@ templates:
 
   Yagudo_Chanter_past:
     id:            5493
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 6
     skill_list_id: 270
     attributes:
@@ -3793,7 +3772,7 @@ templates:
 
   Yagudo_Eradicator_past:
     id:            4417
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 270
     attributes:
@@ -3824,7 +3803,7 @@ templates:
 
   Yagudo_High_Priest_past:
     id:            5478
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 20
     skill_list_id: 270
     attributes:
@@ -3863,7 +3842,7 @@ templates:
 
   Yagudo_Knight_Templar:
     id:            4430
-    species:       yagudo
+    species:       yagudo_s
     type:          [battlefield]
     skill_list_id: 270
     attributes:
@@ -3894,7 +3873,7 @@ templates:
 
   Yagudo_Prelate_past:
     id:            4442
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 21
     skill_list_id: 270
     attributes:
@@ -3933,7 +3912,7 @@ templates:
 
   Yagudo_Sentinel_past:
     id:            5481
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -4027,7 +4006,7 @@ templates:
 
   Zvahl_Fortalice:
     id:      6712
-    species: unclassified
+    species: fortalices
     type:    [notorious]
     attributes:
       combat:

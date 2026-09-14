@@ -87,7 +87,7 @@ templates:
 
   1st_Legion_Mercenary:
     id:            5
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -352,7 +352,7 @@ templates:
 
   Amber_Quadav:
     id:            103
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -382,7 +382,7 @@ templates:
 
   Amethyst_Quadav:
     id:            107
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -597,7 +597,7 @@ templates:
 
   Beadeaux_Vanguard:
     id:            381
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -620,7 +620,7 @@ templates:
   BiGho_Headtaker_past:
     id:            6680
     display_name:  BiGho_Headtaker
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -629,13 +629,6 @@ templates:
         skill: dagger
         delay: 265
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -841,7 +834,7 @@ templates:
 
   BoDho_Hundredfist:
     id:            516
-    species:       quadav
+    species:       horned_quadav_s
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 202
@@ -873,7 +866,7 @@ templates:
 
   BoDhos_Shieldwarrior_C:
     id:            517
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -894,7 +887,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -1048,7 +1041,7 @@ templates:
 
   Copper_Quadav_past:
     id:            6241
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -1107,7 +1100,7 @@ templates:
 
   Dadough_Vanguard:
     id:            889
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 21
     skill_list_id: 202
     attributes:
@@ -1170,7 +1163,7 @@ templates:
   DeVyu_Headhunter_past:
     id:            6681
     display_name:  DeVyu_Headhunter
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 202
@@ -1179,13 +1172,6 @@ templates:
         skill: sword
         delay: 265
       jobs: [pld, rdm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1220,7 +1206,7 @@ templates:
 
   DiDha_Adamantfist:
     id:            1066
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
@@ -1229,13 +1215,6 @@ templates:
         skill: club
         delay: 265
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1252,7 +1231,7 @@ templates:
 
   DiDhas_Elite_Guard:
     id:            1067
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 20
     skill_list_id: 202
     attributes:
@@ -1302,7 +1281,7 @@ templates:
 
   DoBho_Venomtail:
     id:            1096
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -1799,20 +1778,13 @@ templates:
 
   GoBhu_Herohunter:
     id:            1779
-    species:       quadav
+    species:       quadav_s
     type:          [notorious]
     skill_list_id: 202
     attributes:
       combat:
         skill: sword
         delay: 265
-      resists:
-        rank_element:
-          fire:     2
-          thunder: -1
-          water:    2
-        rank_status:
-          poison: 2
       render:
         look:
           type:  standard
@@ -1829,7 +1801,7 @@ templates:
 
   GoBhus_Elite_Raider:
     id:            1780
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -1852,7 +1824,7 @@ templates:
 
   Goblin_Aidman:
     id:            1633
-    species:       goblin
+    species:       moblin
     spell_list_id: 20
     skill_list_id: 133
     attributes:
@@ -1888,7 +1860,7 @@ templates:
 
   Goblin_Chapman:
     id:            1644
-    species:       goblin
+    species:       moblin
     spell_list_id: 21
     skill_list_id: 133
     attributes:
@@ -1934,7 +1906,7 @@ templates:
 
   Goblin_Draftee:
     id:            1652
-    species:       goblin
+    species:       goblin_s
     spell_list_id: 3
     skill_list_id: 133
     attributes:
@@ -1975,7 +1947,7 @@ templates:
 
   Goblin_Franctireur:
     id:            1662
-    species:       armored_goblin
+    species:       goblin_s
     spell_list_id: 5
     skill_list_id: 133
     attributes:
@@ -2016,7 +1988,7 @@ templates:
 
   Goblin_Freelance_past:
     id:            6661
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -2048,7 +2020,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -2070,7 +2042,7 @@ templates:
   Goblin_Lansquenet_Large:
     id:            7167
     display_name:  Goblin_Lansquenet
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -2131,7 +2103,7 @@ templates:
 
   Goblin_Patrolman:
     id:            1695
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -2165,7 +2137,7 @@ templates:
 
   Goblin_Picaroon:
     id:            1696
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -2186,7 +2158,7 @@ templates:
   Goblin_Picaroon_Large:
     id:            7259
     display_name:  Goblin_Picaroon
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -2206,7 +2178,7 @@ templates:
 
   Goblin_Skirmisher:
     id:            1713
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -2257,7 +2229,7 @@ templates:
 
   Greater_Quadav_past:
     id:            6237
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -2489,7 +2461,7 @@ templates:
 
   Khroma_Quadav:
     id:            2224
-    species:       quadav
+    species:       horned_quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -2909,7 +2881,7 @@ templates:
 
   Onyx_Quadav_past:
     id:            6238
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 3
     skill_list_id: 202
     attributes:
@@ -3139,7 +3111,7 @@ templates:
 
   Quadav_Guard:
     id:            3274
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -3160,7 +3132,7 @@ templates:
 
   Quadav_Transporter:
     id:            3276
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -3202,7 +3174,7 @@ templates:
 
   Qulun_Heavyshell:
     id:            3293
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 5
     skill_list_id: 202
     attributes:
@@ -3775,7 +3747,7 @@ templates:
 
   Stabnix_Skewerfinger:
     id:            3750
-    species:       goblin
+    species:       goblin_s
     type:          [notorious]
     skill_list_id: 133
     attributes:
@@ -3999,7 +3971,7 @@ templates:
 
   Veteran_Quadav_past:
     id:            6239
-    species:       quadav
+    species:       quadav_s
     spell_list_id: 4
     skill_list_id: 202
     attributes:
@@ -4108,7 +4080,7 @@ templates:
 
   Waughroon_Heavyshell:
     id:            4315
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:
@@ -4278,7 +4250,7 @@ templates:
 
   Young_Quadav_past:
     id:            6236
-    species:       quadav
+    species:       quadav_s
     skill_list_id: 202
     attributes:
       combat:

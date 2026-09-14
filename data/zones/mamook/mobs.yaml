@@ -325,7 +325,7 @@ templates:
 
   Firedance_Magmaal_Ja:
     id:            4737
-    species:       wivre
+    species:       knight_ja
     type:          [notorious]
     skill_list_id: 257
     attributes:
@@ -1326,7 +1326,7 @@ templates:
 
   Mikilulu:
     id:            2656
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1350,7 +1350,7 @@ templates:
 
   Mikiluru:
     id:            2657
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1374,7 +1374,7 @@ templates:
 
   Mikirulu:
     id:            2658
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1398,7 +1398,7 @@ templates:
 
   Mikiruru:
     id:            2659
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1422,7 +1422,7 @@ templates:
 
   Nikilulu:
     id:            2881
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1893,7 +1893,7 @@ templates:
 
   Wartkin:
     id:            4295
-    species:       blue_poroggo
+    species:       toad
     type:          [called]
     spell_list_id: 21
     skill_list_id: 196
@@ -1914,7 +1914,7 @@ templates:
 
   Watch_Wyvern:
     id:            4308
-    species:       shadow_wyvern
+    species:       wyvern
     skill_list_id: 266
     attributes:
       combat:
@@ -1942,7 +1942,7 @@ templates:
 
   Yalungur:
     id:            6755
-    species:       colibri
+    species:       toucalibri
     skill_list_id: 72
     attributes:
       combat:
@@ -1963,7 +1963,7 @@ templates:
 
   Ziz:
     id:            4508
-    species:       cockatrice
+    species:       ziz
     skill_list_id: 70
     attributes:
       combat:

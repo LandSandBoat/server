@@ -419,7 +419,7 @@ templates:
 
   Korrigan:
     id:            2282
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:

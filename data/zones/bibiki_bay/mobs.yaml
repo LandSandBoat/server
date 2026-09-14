@@ -475,7 +475,7 @@ templates:
 
   Hobgoblin_Alastor:
     id:            1968
-    species:       goblin
+    species:       armored_goblin
     spell_list_id: 5
     skill_list_id: 133
     attributes:
@@ -599,7 +599,7 @@ templates:
 
   Hobgoblin_Martialist:
     id:            1976
-    species:       goblin
+    species:       armored_goblin
     skill_list_id: 133
     attributes:
       combat:
@@ -835,7 +835,7 @@ templates:
 
   Island_Rarab:
     id:            2107
-    species:       rabbit
+    species:       onyx_rabbit
     skill_list_id: 404
     attributes:
       combat:

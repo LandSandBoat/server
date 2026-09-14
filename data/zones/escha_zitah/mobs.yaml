@@ -382,7 +382,7 @@ templates:
 
   Eschan_Jewelweed:
     id:            5429
-    species:       snapweed
+    species:       jewelweed
     skill_list_id: 464
     attributes:
       combat:
@@ -701,7 +701,7 @@ templates:
 
   Fleetstalker:
     id:            5720
-    species:       yztarg
+    species:       red_yztarg
     skill_list_id: 459
     attributes:
       combat:

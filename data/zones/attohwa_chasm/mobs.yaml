@@ -278,7 +278,7 @@ templates:
 
   Cave_Antlion:
     id:            662
-    species:       antlion
+    species:       pitlion
     roam:          [ambush]
     skill_list_id: 357
     attributes:

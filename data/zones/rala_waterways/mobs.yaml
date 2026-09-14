@@ -44,7 +44,7 @@ templates:
 
   Barnacle_Crab:
     id:            5047
-    species:       crab
+    species:       carrier_crab
     type:          [battlefield]
     spell_list_id: 4
     skill_list_id: 77

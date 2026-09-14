@@ -56,7 +56,7 @@ templates:
 
   Crackling_Ungeweder:
     id:            4767
-    species:       fire_elemental
+    species:       ungeweder
     spell_list_id: 17
     skill_list_id: 102
     attributes:
@@ -235,7 +235,7 @@ templates:
 
   Gully_Toad:
     id:            4947
-    species:       blue_poroggo
+    species:       toad
     type:          [fished]
     skill_list_id: 196
     attributes:
