@@ -10,6 +10,18 @@ from ruamel.yaml.comments import CommentedMap, CommentedSeq
 from .common import ENUMS_DIR, ROOT
 
 YAML_LOADER = YAML(typ="rt")
+
+try:
+    import yaml
+    from yaml import CSafeLoader
+except ImportError:
+    CSafeLoader = None
+
+
+def load_for_validation(path: Path) -> Any:
+    """Plain data for the validator; the line-tracking round-trip load only happens when there are errors to report."""
+    with path.open(encoding="utf-8") as f:
+        return yaml.load(f, Loader=CSafeLoader) if CSafeLoader else YAML_LOADER.load(f)
 MAX_ERRORS = 50
 
 
@@ -72,14 +84,16 @@ def validate_data_yamls(schemas_dir: Path) -> None:
     for data_path, schema in sorted(schema_by_data.items()):
         rel = data_path.relative_to(ROOT).as_posix()
         print(f"validating {rel} ...", end="", flush=True)
-        with data_path.open(encoding="utf-8") as f:
-            data = YAML_LOADER.load(f)
+        data = load_for_validation(data_path)
 
         validator = Draft202012Validator(schema, registry=registry)
-        errs = [
-            (data_path, node_line(data, list(error.absolute_path)), error)
-            for error in validator.iter_errors(data)
-        ]
+        errors = list(validator.iter_errors(data))
+        if errors:
+            with data_path.open(encoding="utf-8") as f:
+                located = YAML_LOADER.load(f)
+            errs = [(data_path, node_line(located, list(error.absolute_path)), error) for error in errors]
+        else:
+            errs = []
         if errs:
             print(f" {len(errs)} errors", flush=True)
             all_errors.extend(errs)

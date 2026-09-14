@@ -1,7 +1,14 @@
+import copy
 from pathlib import Path
 from typing import Any
 
 from ruamel.yaml import YAML
+
+try:
+    import yaml
+    from yaml import CSafeLoader
+except ImportError:
+    CSafeLoader = None
 
 from .common import (
     CASE_FNS,
@@ -15,6 +22,15 @@ from .common import (
 )
 
 YAML_LOADER = YAML(typ="safe")
+
+
+def load_yaml(path: Path) -> Any:
+    """PyYAML's C loader when present: ruamel's pure-Python one is many times slower on large data files."""
+    if CSafeLoader is None:
+        with path.open(encoding="utf-8") as f:
+            return YAML_LOADER.load(f)
+    with path.open(encoding="utf-8") as f:
+        return yaml.load(f, Loader=CSafeLoader)
 
 
 def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags: bool, case: str, none: bool, values: dict[str, int]) -> str:
@@ -135,21 +151,17 @@ def module_copies(yaml_path: Path) -> list[Path]:
 
 def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
     """One entry per `meta.enum:` block. Members emit in id order."""
-    with yaml_path.open(encoding="utf-8") as f:
-        doc = YAML_LOADER.load(f)
-
-    for module_path in module_copies(yaml_path):
-        with module_path.open(encoding="utf-8") as f:
-            union_into(doc, YAML_LOADER.load(f))
-
-    if not isinstance(doc, dict):
+    core_doc = load_yaml(yaml_path)
+    if not isinstance(core_doc, dict):
         return []
+
+    doc = copy.deepcopy(core_doc) if module_copies(yaml_path) else core_doc
+    for module_path in module_copies(yaml_path):
+        union_into(doc, load_yaml(module_path))
+
     meta_enum = (doc.get("meta") or {}).get("enum")
     if not meta_enum:
         return []
-
-    with yaml_path.open(encoding="utf-8") as f:
-        core_doc = YAML_LOADER.load(f)
 
     source_name = str(yaml_path.relative_to(ENUMS_DIR.parents[1])).replace("\\", "/")
     out: list[dict[str, Any]] = []
@@ -167,8 +179,14 @@ def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
                                      f"(ids {values[key]} and {value}); keys must be unique across the tree")
                 values[key] = value
 
+        # Values the section cannot hold, e.g. `none: 0` for a table whose ids start at 1.
+        for key, value in (block.get("values") or {}).items():
+            if key in values:
+                raise ValueError(f"{yaml_path}: meta enum value '{key}' is also an entry in '{path}'")
+            values[key] = int(value)
+
         # Names this file defines, before any module is folded in.
-        own: dict[str, int] = {}
+        own: dict[str, int] = dict(block.get("values") or {})
         for section in resolve_sections(core_doc, path):
             own.update(derive_values(yaml_path, section, block.get("name_from")))
 
