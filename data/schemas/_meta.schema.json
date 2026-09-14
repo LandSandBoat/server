@@ -60,6 +60,12 @@
             "pattern": "^[a-z][a-z0-9_]*([.](\\*|[a-z][a-z0-9_]*))*$",
             "description": "Dotted path to the section holding the entries; `*` matches every entry at that level (`ecosystems.*.families` = the families of every ecosystem). Defaults to the filename."
           },
+          "values": {
+            "type": "object",
+            "description": "Extra members that are not entries of the section, e.g. `none: 0`.",
+            "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+            "additionalProperties": { "type": "integer" }
+          },
           "name_from": {
             "type": "string",
             "description": "Dot-path to a string inside each entry, slugged into the member name (e.g. `name.en`). When set, the YAML key is the integer id."
