@@ -2176,6 +2176,7 @@ npcs:
       moving:        1
     status:   normal
     widescan: true
+    content:  cop
 
   17784956:
     script: blank
