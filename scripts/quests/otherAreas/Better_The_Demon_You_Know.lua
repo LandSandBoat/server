@@ -78,6 +78,7 @@ quest.sections =
                 [22] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 1)
+                    -- TODO: Check when the wait starts and how it is rounded. Retail can advance less than a minute after this cutscene.
                     quest:setVar(player, 'Wait', GetSystemTime() + 60) -- 1 Minute wait time
                 end,
 
