@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- Items
 -- Item table by ID (used by quests)
 -----------------------------------
@@ -1535,6 +1535,9 @@ xi.item =
     HALVUNG_SHAKUDO_KEY                 = 2221,
     HALVUNG_BRONZE_KEY                  = 2222,
     HALVUNG_BRASS_KEY                   = 2223,
+    MAMOOK_SILVERSCALE_KEY              = 2224,
+    MAMOOK_TANSCALE_KEY                 = 2225,
+    MAMOOK_BLACKSCALE_KEY               = 2226,
     MAMOOL_JA_COLLAR                    = 2227,
     CHUNK_OF_LUMINIUM_ORE               = 2228,
     VIAL_OF_CHIMERA_BLOOD               = 2229,
