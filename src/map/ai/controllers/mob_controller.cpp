@@ -341,11 +341,11 @@ auto CMobController::TryMobSkill(const uint16 skillId, CBattleEntity* PTarget) -
 
     // Resolve the action target: enemy/self defaults, then let lua substitute.
     CBattleEntity* PActionTarget = nullptr;
-    if (PMobSkill->getValidTargets() & TARGET_ENEMY)
+    if ((PMobSkill->getValidTargets() & xi::TargetType::Enemy) != xi::TargetType::None)
     {
         PActionTarget = PTarget;
     }
-    else if (PMobSkill->getValidTargets() & TARGET_SELF)
+    else if ((PMobSkill->getValidTargets() & xi::TargetType::Self) != xi::TargetType::None)
     {
         PActionTarget = PMob;
     }
@@ -436,7 +436,7 @@ auto CMobController::TryCastSpell() -> bool
     }
 
     // Cast target: Lua override wins, else self for self-targeted spells, else PTarget.
-    auto* const PCastTarget = maybeTargetOverride.value_or((PSpell->getValidTarget() & TARGET_SELF) ? PMob : PTarget);
+    auto* const PCastTarget = maybeTargetOverride.value_or((PSpell->getValidTarget() & xi::TargetType::Self) != xi::TargetType::None ? PMob : PTarget);
     if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
     {
         return false; // Target out of range.
@@ -524,7 +524,7 @@ auto CMobController::TrySpecialSkill() -> bool
     // Ability target: self-targeted skills hit the mob, otherwise PTarget must be in range.
     CBattleEntity* const PAbilityTarget = [&]() -> CBattleEntity*
     {
-        if (PSpecialSkill->getValidTargets() & TARGET_SELF)
+        if ((PSpecialSkill->getValidTargets() & xi::TargetType::Self) != xi::TargetType::None)
         {
             return PMob;
         }
@@ -1149,7 +1149,7 @@ void CMobController::CastSpell(SpellID spellid)
         }
 
         PMob->PAI->TargetFind->reset();
-        PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, TARGET_NONE);
+        PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, xi::TargetType::None);
 
         const auto& candidates = PMob->PAI->TargetFind->m_targets;
         if (candidates.empty())
@@ -1164,11 +1164,11 @@ void CMobController::CastSpell(SpellID spellid)
 
     auto* const PCastTarget = [&]() -> CBattleEntity*
     {
-        if (!(PSpell->getValidTarget() & TARGET_SELF))
+        if ((PSpell->getValidTarget() & xi::TargetType::Self) == xi::TargetType::None)
         {
             return PTarget;
         }
-        if (PSpell->getValidTarget() & TARGET_PLAYER_PARTY)
+        if ((PSpell->getValidTarget() & xi::TargetType::PlayerParty) != xi::TargetType::None)
         {
             return pickPartyBuffTarget();
         }

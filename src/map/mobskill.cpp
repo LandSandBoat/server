@@ -34,7 +34,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_AoeRadius(0)
 , m_Distance(0)
 , m_Flag(0)
-, m_ValidTarget(0)
+, m_ValidTarget(xi::TargetType::None)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
 , m_Message(MsgBasic::None)
@@ -188,7 +188,7 @@ void CMobSkill::setActivationTime(timer::duration ActivationTime)
     m_ActivationTime = ActivationTime;
 }
 
-void CMobSkill::setValidTargets(uint16 targ)
+void CMobSkill::setValidTargets(xi::TargetType targ)
 {
     m_ValidTarget = targ;
 }
@@ -319,7 +319,7 @@ void CMobSkill::setKnockback(const Knockback knockback)
     m_knockback = knockback;
 }
 
-auto CMobSkill::getValidTargets() const -> uint16
+auto CMobSkill::getValidTargets() const -> xi::TargetType
 {
     return m_ValidTarget;
 }

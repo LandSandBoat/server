@@ -584,7 +584,7 @@ auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
 
     auto* PSpell = spell::GetSpell(spellid);
 
-    const auto castTarget = PSpell->getValidTarget() == TARGET_SELF ? EntityId(POwner) : target;
+    const auto castTarget = PSpell->getValidTarget() == xi::TargetType::Self ? EntityId(POwner) : target;
 
     const auto PTarget      = castTarget.resolve<CBattleEntity>();
     const auto PSpellFamily = PSpell->getSpellFamily();

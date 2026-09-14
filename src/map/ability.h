@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 
 #include "data/enums/recast.h"
+#include "data/enums/target_type.h"
 #include "entities/battle_entity.h"
 #include "enums/action/animation.h"
 #include "status_effect.h"
@@ -711,7 +712,7 @@ public:
     auto getRange() const -> float;
     auto getAOE() const -> uint8;
     auto getRadius() const -> uint8;
-    auto getValidTarget() const -> uint16;
+    auto getValidTarget() const -> xi::TargetType;
     auto getAddType() const -> uint16;
     auto getMessage() const -> MsgBasic;
     auto getRecastTime() const -> timer::duration;
@@ -731,7 +732,7 @@ public:
     void setRange(float range);
     void setAOE(uint8 aoe);
     void setRadius(uint8 radius);
-    void setValidTarget(uint16 validTarget);
+    void setValidTarget(xi::TargetType validTarget);
     void setAddType(uint16 addtype);
     void setMessage(MsgBasic message);
     void setRecastTime(timer::duration recastTime);
@@ -755,7 +756,7 @@ private:
     float            m_range;
     uint8            m_aoe;
     uint8            m_radius{ 0 };
-    uint16           m_validTarget;
+    xi::TargetType   m_validTarget;
     uint16           m_addType;
     MsgBasic         m_message;
     timer::duration  m_recastTime{};

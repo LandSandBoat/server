@@ -686,7 +686,7 @@ auto CMobEntity::GetRangedAttackRange() -> float
     return rangedAttackRange > 0 ? static_cast<float>(rangedAttackRange) : 14.0f;
 }
 
-auto CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
+auto CMobEntity::ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool
 {
     TracyZoneScopedN("CMobEntity::ValidTarget");
 
@@ -700,17 +700,17 @@ auto CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> b
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_DEAD && ((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None) && isDead())
+    if ((targetFlags & xi::TargetType::PlayerDead) != xi::TargetType::None && ((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None) && isDead())
     {
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
+    if ((targetFlags & xi::TargetType::Player) != xi::TargetType::None && allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
     {
         return true;
     }
 
-    if (targetFlags & TARGET_NPC)
+    if ((targetFlags & xi::TargetType::Npc) != xi::TargetType::None)
     {
         if (allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
         {

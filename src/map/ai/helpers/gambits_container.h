@@ -34,6 +34,7 @@
 #include "status_effect.h"
 #include "status_effect_container.h"
 
+#include "data/enums/target_type.h"
 #include <set>
 #include <utility>
 
@@ -261,12 +262,12 @@ struct Chain_t
 // TODO: smaller types, make less bad.
 struct TrustSkill_t
 {
-    G_REACTION skill_type{};
-    uint32     skill_id;
-    uint8      primary;
-    uint8      secondary;
-    uint8      tertiary;
-    TARGETTYPE valid_targets{};
+    G_REACTION     skill_type{};
+    uint32         skill_id;
+    uint8          primary;
+    uint8          secondary;
+    uint8          tertiary;
+    xi::TargetType valid_targets{};
 
     TrustSkill_t()
     : skill_id(0)
@@ -276,7 +277,7 @@ struct TrustSkill_t
     {
     }
 
-    TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, TARGETTYPE _valid_targets)
+    TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, xi::TargetType _valid_targets)
     : skill_type(_skill_type)
     , skill_id(_skill_id)
     , primary(_primary)

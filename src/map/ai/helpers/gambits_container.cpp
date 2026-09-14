@@ -799,7 +799,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                     }
                 }
 
-                if (PAbility->getValidTarget() == TARGET_SELF)
+                if (PAbility->getValidTarget() == xi::TargetType::Self)
                 {
                     target = POwner;
                 }
@@ -1798,7 +1798,7 @@ auto CGambitsContainer::TryTrustSkill() -> bool
                 return false;
             }
 
-            if (chosen_skill->valid_targets & TARGET_SELF)
+            if ((chosen_skill->valid_targets & xi::TargetType::Self) != xi::TargetType::None)
             {
                 target = POwner;
             }
@@ -1810,7 +1810,7 @@ auto CGambitsContainer::TryTrustSkill() -> bool
         }
         else // Mobskill
         {
-            if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
+            if ((chosen_skill->valid_targets & xi::TargetType::Self) != xi::TargetType::None || (chosen_skill->valid_targets & xi::TargetType::PlayerParty) != xi::TargetType::None)
             {
                 target = POwner;
             }

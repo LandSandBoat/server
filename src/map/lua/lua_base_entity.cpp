@@ -11791,15 +11791,15 @@ auto CLuaBaseEntity::getEntitiesInRange(CLuaBaseEntity* PLuaEntityTarget, sol::v
     }
 
     auto findFlags    = va[3].is<uint8>() ? va[3].as<uint8>() : 0;
-    auto validTargets = va[4].is<uint16>() ? va[4].as<uint16>() : 0;
+    auto validTargets = va[4].is<uint16>() ? static_cast<xi::TargetType>(va[4].as<uint16>()) : xi::TargetType::None;
 
     // Mob buff abilities also hit monster's pets
-    if (validTargets & TARGET_SELF)
+    if ((validTargets & xi::TargetType::Self) != xi::TargetType::None)
     {
         findFlags |= FINDFLAGS_PET;
     }
 
-    if ((validTargets & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((validTargets & xi::TargetType::IgnoreBattleid) == xi::TargetType::IgnoreBattleid)
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
@@ -19509,7 +19509,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
             {
                 PEntity->PAI->MobSkill(PEntity->entityId(), skillid, castTimeOverride);
             }
-            else if (PMobSkill->getValidTargets() & TARGET_ENEMY)
+            else if ((PMobSkill->getValidTargets() & xi::TargetType::Enemy) != xi::TargetType::None)
             {
                 auto defaultTarget = mobObj->GetBattleTarget();
                 if (defaultTarget)
@@ -19522,7 +19522,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
                     }
                 }
             }
-            else if (PMobSkill->getValidTargets() & TARGET_SELF)
+            else if ((PMobSkill->getValidTargets() & xi::TargetType::Self) != xi::TargetType::None)
             {
                 PEntity->PAI->MobSkill(PEntity->entityId(), skillid, castTimeOverride);
             }

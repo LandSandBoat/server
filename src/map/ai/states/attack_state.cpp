@@ -154,7 +154,7 @@ void CAttackState::UpdateTarget(const EntityId& target)
     CBattleEntity* PNewTarget{ nullptr };
     if (newTarget.isSet())
     {
-        PNewTarget = m_PEntity->IsValidTarget(newTarget, TARGET_ENEMY, m_errorMsg);
+        PNewTarget = m_PEntity->IsValidTarget(newTarget, xi::TargetType::Enemy, m_errorMsg);
         if (!PNewTarget)
         {
             const auto* PLostTarget = newTarget.resolve<CBattleEntity>();
@@ -169,7 +169,7 @@ void CAttackState::UpdateTarget(const EntityId& target)
                         distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
                     {
                         std::unique_ptr<CBasicPacket> errMsg;
-                        if (PChar->IsValidTarget(EntityId(PPotentialTarget.second), TARGET_ENEMY, errMsg))
+                        if (PChar->IsValidTarget(EntityId(PPotentialTarget.second), xi::TargetType::Enemy, errMsg))
                         {
                             newTarget          = EntityId(PPotentialTarget.second);
                             auto PBattleTarget = static_cast<CBattleEntity*>(PPotentialTarget.second);

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+# Used to determine if a pending target is valid based on comparison to the acting entity.
+meta:
+  flags: true
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.targetType
+
+values:
+  none:                    0x0000
+  self:                    0x0001
+  player_party:            0x0002
+  enemy:                   0x0004
+  player_alliance:         0x0008
+  player:                  0x0010
+  player_dead:             0x0020
+  npc:                     0x0040 # A mob that looks like an npc and fights on the side of the character
+  player_party_pianissimo: 0x0080
+  pet:                     0x0100
+  player_party_entrust:    0x0200
+  ignore_battleid:         0x0400 # Can hit targets that do not have the same battle ID
+  any_allegiance:          0x0800 # Can hit targets from any allegiance simultaneously; only makes sense with other flags on non-single-target skills

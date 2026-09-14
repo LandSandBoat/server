@@ -60,7 +60,7 @@ public:
     void Spawn() override;
     void Die() override;
 
-    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool override;
 
     void OnMobSkillFinished(CMobSkillState&, action_t&) override;
     void OnCastFinished(CMagicState&, action_t&) override;

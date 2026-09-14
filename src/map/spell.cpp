@@ -141,7 +141,7 @@ void CSpell::setSkillType(xi::SkillType SkillType)
 
 auto CSpell::isBuff() const -> bool
 {
-    return (getValidTarget() & TARGET_SELF) && !(getValidTarget() & TARGET_ENEMY);
+    return (getValidTarget() & xi::TargetType::Self) != xi::TargetType::None && (getValidTarget() & xi::TargetType::Enemy) == xi::TargetType::None;
 }
 
 auto CSpell::statusEffect() const -> Maybe<xi::StatusEffect>
@@ -176,7 +176,7 @@ auto CSpell::hasMPCost() -> bool
 
 auto CSpell::isHeal() -> bool
 {
-    return ((getValidTarget() & TARGET_SELF) && getSkillType() == xi::SkillType::HealingMagic) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
+    return ((getValidTarget() & xi::TargetType::Self) != xi::TargetType::None && getSkillType() == xi::SkillType::HealingMagic) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
            m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
 }
 
@@ -188,7 +188,7 @@ auto CSpell::isCure() -> bool
 
 auto CSpell::isDebuff() -> bool
 {
-    return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == xi::SkillType::EnfeeblingMagic) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
+    return ((getValidTarget() & xi::TargetType::Enemy) != xi::TargetType::None && getSkillType() == xi::SkillType::EnfeeblingMagic) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
            m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
 }
 
@@ -265,7 +265,7 @@ void CSpell::setMPCost(uint16 MP)
 
 auto CSpell::canTargetEnemy() const -> bool
 {
-    return (getValidTarget() & TARGET_ENEMY) && !(getValidTarget() & TARGET_SELF);
+    return (getValidTarget() & xi::TargetType::Enemy) != xi::TargetType::None && (getValidTarget() & xi::TargetType::Self) == xi::TargetType::None;
 }
 
 auto CSpell::getAOE() const -> uint8
@@ -288,12 +288,12 @@ void CSpell::setBase(uint16 base)
     m_base = base;
 }
 
-auto CSpell::getValidTarget() const -> uint16
+auto CSpell::getValidTarget() const -> xi::TargetType
 {
     return m_ValidTarget;
 }
 
-void CSpell::setValidTarget(uint16 ValidTarget)
+void CSpell::setValidTarget(xi::TargetType ValidTarget)
 {
     m_ValidTarget = ValidTarget;
 }
@@ -514,7 +514,7 @@ void LoadSpellList()
 
         PSpell->setSpellGroup(rset->get<SPELLGROUP>("group"));
         PSpell->setSpellFamily(rset->get<SPELLFAMILY>("family"));
-        PSpell->setValidTarget(rset->get<uint16>("validTargets"));
+        PSpell->setValidTarget(rset->get<xi::TargetType>("validTargets"));
         PSpell->setSkillType(rset->get<xi::SkillType>("skill"));
         PSpell->setCastTime(std::chrono::milliseconds(rset->get<uint32>("castTime")));
         PSpell->setRecastTime(std::chrono::milliseconds(rset->get<uint32>("recastTime")));

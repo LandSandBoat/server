@@ -48,7 +48,7 @@ CRangeState::CRangeState(xi::Badge<CState>, CBattleEntity* PEntity, const Entity
 
 auto CRangeState::init() -> StateErrorOr<void>
 {
-    auto* PTarget = m_PEntity->IsValidTarget(target(), TARGET_ENEMY, m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target(), xi::TargetType::Enemy, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
@@ -155,7 +155,7 @@ auto CRangeState::Update(const timer::time_point tick) -> bool
 {
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
-        auto* PTarget = m_PEntity->IsValidTarget(target(), TARGET_ENEMY, m_errorMsg);
+        auto* PTarget = m_PEntity->IsValidTarget(target(), xi::TargetType::Enemy, m_errorMsg);
 
         CanUseRangedAttack(PTarget, true);
 

@@ -229,8 +229,8 @@ void LoadMobSkillsList()
         PMobSkill->setDistance(rset->get<float>("mob_skill_distance"));
         PMobSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("mob_anim_time")));
         PMobSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("mob_prepare_time")));
-        auto validTargets = rset->get<uint16>("mob_valid_targets");
-        if ((validTargets & TARGET_SELF) && (validTargets & TARGET_ENEMY))
+        auto validTargets = rset->get<xi::TargetType>("mob_valid_targets");
+        if ((validTargets & xi::TargetType::Self) != xi::TargetType::None && (validTargets & xi::TargetType::Enemy) != xi::TargetType::None)
         {
             ShowWarningFmt("Mob skill {} ({}) has both TARGET_SELF and TARGET_ENEMY set", PMobSkill->getName(), PMobSkill->getID());
         }
@@ -276,7 +276,7 @@ void LoadPetSkillsList()
         PPetSkill->setDistance(rset->get<float>("pet_skill_distance"));
         PPetSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("pet_anim_time")));
         PPetSkill->setActivationTime(std::chrono::milliseconds(rset->get<uint32>("pet_prepare_time")));
-        PPetSkill->setValidTargets(rset->get<uint16>("pet_valid_targets"));
+        PPetSkill->setValidTargets(rset->get<xi::TargetType>("pet_valid_targets"));
         PPetSkill->setMsg(rset->get<MsgBasic>("pet_message"));
         PPetSkill->setFlag(rset->get<uint8>("pet_skill_flag"));
         PPetSkill->setParam(rset->get<int16>("pet_skill_param"));

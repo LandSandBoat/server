@@ -24,6 +24,7 @@
 #include "ability.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "data/enums/target_type.h"
 #include "enums/action/knockback.h"
 
 class CPetSkill
@@ -50,7 +51,7 @@ public:
     auto getActivationTime() const -> timer::duration;
     auto getMsg() const -> MsgBasic;
     auto getSkillFinishCategory() const -> ActionCategory;
-    auto getValidTargets() const -> uint16;
+    auto getValidTargets() const -> xi::TargetType;
     auto getTP() const -> int16;
     auto getHP() const -> int32;
     auto getHPP() const -> uint8;
@@ -80,7 +81,7 @@ public:
     void setActivationTime(timer::duration ActivationTime);
     void setMsg(MsgBasic msg);
     void setSkillFinishCategory(uint8 category);
-    void setValidTargets(uint16 targ);
+    void setValidTargets(xi::TargetType targ);
     void setTP(int16 tp);
     void setHP(int32 hp);
     void setHPP(uint8 hpp);
@@ -108,7 +109,7 @@ private:
     float           m_Distance;
     timer::duration m_AnimationTime;  // how long the tp animation lasts
     timer::duration m_ActivationTime; // how long the pet prepares the tp move for
-    uint16          m_ValidTarget;
+    xi::TargetType  m_ValidTarget;
     MsgBasic        m_Message; // message param, scripters can edit this depending on self/resist/etc.
     uint8           m_Flag;
     int16           m_Param;

@@ -159,9 +159,9 @@ void CAutomatonEntity::Die()
     CPetEntity::Die();
 }
 
-auto CAutomatonEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
+auto CAutomatonEntity::ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool
 {
-    if (targetFlags & TARGET_PLAYER && this == PInitiator)
+    if ((targetFlags & xi::TargetType::Player) != xi::TargetType::None && this == PInitiator)
     {
         return true;
     }

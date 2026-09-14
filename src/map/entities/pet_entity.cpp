@@ -352,9 +352,9 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
     this->processActionEffectFlags(action);
 }
 
-auto CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
+auto CPetEntity::ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool
 {
-    if (targetFlags & TARGET_PLAYER && PInitiator->allegiance == allegiance)
+    if ((targetFlags & xi::TargetType::Player) != xi::TargetType::None && PInitiator->allegiance == allegiance)
     {
         return false;
     }
@@ -399,7 +399,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     uint8 findFlags = 0;
 
     // Mob buff abilities also hit monster's pets
-    if (PSkill->getValidTargets() & TARGET_SELF)
+    if ((PSkill->getValidTargets() & xi::TargetType::Self) != xi::TargetType::None)
     {
         findFlags |= FINDFLAGS_PET;
         // skill can target self and is aoe, add itself to targetfind first
@@ -409,12 +409,12 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         }
     }
 
-    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((PSkill->getValidTargets() & xi::TargetType::IgnoreBattleid) == xi::TargetType::IgnoreBattleid)
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
 
-    if ((PSkill->getValidTargets() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    if ((PSkill->getValidTargets() & xi::TargetType::PlayerDead) == xi::TargetType::PlayerDead)
     {
         findFlags |= FINDFLAGS_DEAD;
     }
@@ -456,7 +456,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
             // special jug pet skills that affect pet and owner: non-aoe-skill, primary target is the pet, and targetflag includes "actor's party"
             // If we didn't filter on pet type, skills like healing ruby would fit the condition
-            if (this->getPetType() == PET_TYPE::JUG_PET && this->PMaster != nullptr && PTarget == this && PSkill->getValidTargets() & TARGET_PLAYER_PARTY)
+            if (this->getPetType() == PET_TYPE::JUG_PET && this->PMaster != nullptr && PTarget == this && (PSkill->getValidTargets() & xi::TargetType::PlayerParty) != xi::TargetType::None)
             {
                 // addEntity does not handle range checking
                 if (PAI->TargetFind->isWithinRange(&this->PMaster->loc.p, PSkill->getRadius()))
