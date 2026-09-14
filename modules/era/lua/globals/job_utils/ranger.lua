@@ -63,7 +63,7 @@ m:addOverrideByEra('xi.job_utils.ranger.useEagleEyeShot', {
 local scavengeData = require('modules/era/lua/data/scavenge_data')
 
 -- Scavenge: Revert to pre-SoA zone-based item gathering and reduce duration with merits
--- Source: https://ffxiclopedia.fandom.com/wiki/Scavenge/Items
+-- Sources: https://ffxiclopedia.fandom.com/wiki/Scavenge/Items, https://wiki.ffo.jp/html/2985.html
 m:addOverrideByEra('xi.job_utils.ranger.useScavenge', {
     [xi.expansion.SOA] = function(player, target, ability, action)
         local meritReduction = player:getMerit(xi.merit.SCAVENGE_EFFECT)
@@ -75,10 +75,11 @@ m:addOverrideByEra('xi.job_utils.ranger.useScavenge', {
         end
 
         local playerID = target:getID()
-        local zonePool = scavengeData.zonePoolMap[player:getZoneID()]
+        local zoneID   = player:getZoneID()
+        local zoneData = scavengeData.zonePoolMap[zoneID]
 
         -- Zone has no scavenge pool, return nothing
-        if not zonePool then
+        if not zoneData then
             action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_NOTHING)
 
             return 0
@@ -110,14 +111,23 @@ m:addOverrideByEra('xi.job_utils.ranger.useScavenge', {
             return 0
         end
 
-        -- Build item pool from zone-specific and guaranteed items
+        -- Build the item pool for scavenge rewards with common items + zone specific items + that zones ammo tier.
         local itemPool = {}
+        local supplies = {}
 
-        for _, v in pairs(zonePool) do
+        for _, v in pairs(zoneData.scavengePool) do
             itemPool[#itemPool + 1] = v
         end
 
-        itemPool[#itemPool + 1] = scavengeData.guaranteedItems[math.randomInt(1, #scavengeData.guaranteedItems)]
+        for _, itemID in ipairs(scavengeData.commonItems) do
+            supplies[#supplies + 1] = itemID
+        end
+
+        for _, itemID in ipairs(zoneData.ammoPool) do
+            supplies[#supplies + 1] = itemID
+        end
+
+        itemPool[#itemPool + 1] = supplies[math.randomInt(1, #supplies)]
 
         local selectedItem = itemPool[math.randomInt(1, #itemPool)]
 
