@@ -25,6 +25,7 @@
 #include "common/mmo.h"
 #include "entities/base_entity.h"
 
+#include "data/enums/target_type.h"
 #include <vector>
 
 class CBattleEntity;
@@ -97,9 +98,9 @@ public:
     void reset(); // remove all found targets
 
     // Main methods for finding targets
-    void findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint16 targetflags);
-    void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, uint16 targetFlags);
-    void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, uint16 targetFlags, uint8 aoeType = 4);
+    void findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, xi::TargetType targetFlags);
+    void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, xi::TargetType targetFlags);
+    void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, xi::TargetType targetFlags, uint8 aoeType = 4);
 
     // add all targets in contexts
     void addAllInZone(CBattleEntity* PTarget, bool withPet);
@@ -120,8 +121,8 @@ public:
     auto isWithinCone(position_t* pos) -> bool;
     auto isWithinRange(position_t* pos, float range) -> bool;
 
-    auto getValidTarget(uint16 actionTargetID, uint16 validTargetFlags) const -> CBattleEntity*;
-    auto getValidTarget(CBattleEntity* PTarget, uint16 validTargetFlags) const -> CBattleEntity*;
+    auto getValidTarget(uint16 actionTargetID, xi::TargetType validTargetFlags) const -> CBattleEntity*;
+    auto getValidTarget(CBattleEntity* PTarget, xi::TargetType validTargetFlags) const -> CBattleEntity*;
 
     std::vector<CBattleEntity*> m_targets; // contains all found entities
 
@@ -135,10 +136,10 @@ protected:
     CBattleEntity* m_PMasterTarget; // mater of target
     CBattleEntity* m_PTarget;       // first target
 
-    xi::ZoneId m_zone;
-    FIND_TYPE  m_findType;
-    uint8      m_findFlags;   // what to search for
-    uint16     m_targetFlags; // targetflags to reject potentially bad targets
+    xi::ZoneId     m_zone;
+    FIND_TYPE      m_findType;
+    uint8          m_findFlags;   // what to search for
+    xi::TargetType m_targetFlags; // targetflags to reject potentially bad targets
 
     // conal vars
     bool        m_conal;

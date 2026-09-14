@@ -123,12 +123,12 @@ auto CItemUsable::getActivationTime() const -> timer::duration
     return m_ActivationTime;
 }
 
-void CItemUsable::setValidTarget(uint16 ValidTarget)
+void CItemUsable::setValidTarget(xi::TargetType ValidTarget)
 {
     m_ValidTarget = ValidTarget;
 }
 
-auto CItemUsable::getValidTarget() const -> uint16
+auto CItemUsable::getValidTarget() const -> xi::TargetType
 {
     return m_ValidTarget;
 }

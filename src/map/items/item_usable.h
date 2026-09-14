@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 
+#include "data/enums/target_type.h"
 #include "enums/action/animation.h"
 #include "item.h"
 
@@ -42,7 +43,7 @@ public:
     auto getAnimationID() const -> ActionAnimation;
     auto getAnimationTime() const -> timer::duration;
     auto getActivationTime() const -> timer::duration;
-    auto getValidTarget() const -> uint16;
+    auto getValidTarget() const -> xi::TargetType;
     auto getReuseTime() -> timer::duration;
     auto getReuseDelay() const -> timer::duration;
     auto getLastUseTime() -> timer::time_point;
@@ -55,7 +56,7 @@ public:
     void setAnimationID(uint16 Animation);
     void setAnimationTime(timer::duration AnimationTime);
     void setActivationTime(timer::duration ActivationTime);
-    void setValidTarget(uint16 ValidTarget);
+    void setValidTarget(xi::TargetType ValidTarget);
     void setReuseDelay(timer::duration ReuseDelay);
     void setLastUseTime(timer::time_point LastUseTime);
     void setAssignTime(timer::time_point VanaTime);
@@ -67,7 +68,7 @@ private:
     uint16            m_Animation{};
     timer::duration   m_AnimationTime;
     timer::duration   m_ActivationTime;
-    uint16            m_ValidTarget{};
+    xi::TargetType    m_ValidTarget{};
     timer::duration   m_ReuseDelay;
     timer::time_point m_AssignTime;
     timer::time_point m_LastUseTime;

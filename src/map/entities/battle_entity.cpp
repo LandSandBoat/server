@@ -2227,9 +2227,9 @@ auto CBattleEntity::hasTrait(uint16 traitID) -> bool
     return std::ranges::contains(TraitList, traitID, &CTrait::getID);
 }
 
-auto CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
+auto CBattleEntity::ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool
 {
-    if (targetFlags & TARGET_ENEMY)
+    if ((targetFlags & xi::TargetType::Enemy) != xi::TargetType::None)
     {
         if (!isDead())
         {
@@ -2268,7 +2268,7 @@ auto CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -
         }
     }
 
-    return (targetFlags & TARGET_SELF) &&
+    return ((targetFlags & xi::TargetType::Self) != xi::TargetType::None) &&
            (this == PInitiator ||
             (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));
 }
@@ -2408,7 +2408,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     // can this spell target the dead?
 
     uint8 flags = FINDFLAGS_NONE;
-    if (PSpell->getValidTarget() & TARGET_PLAYER_DEAD)
+    if ((PSpell->getValidTarget() & xi::TargetType::PlayerDead) != xi::TargetType::None)
     {
         flags |= FINDFLAGS_DEAD;
     }
@@ -2855,12 +2855,12 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     uint8 findFlags = 0;
 
     // Mob buff abilities also hit monster's pets
-    if (PSkill->getValidTargets() == TARGET_SELF)
+    if (PSkill->getValidTargets() == xi::TargetType::Self)
     {
         findFlags |= FINDFLAGS_PET;
     }
 
-    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    if ((PSkill->getValidTargets() & xi::TargetType::IgnoreBattleid) == xi::TargetType::IgnoreBattleid)
     {
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
@@ -2897,7 +2897,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         // For self-centered AoE damaging moves (TARGET_ENEMY), use battle target for allegiance
         // For self-centered AoE buffs (TARGET_SELF), use self/state target
         CBattleEntity* PFindTarget = PTarget;
-        if (isSelfCenteredAoE && (PSkill->getValidTargets() & TARGET_ENEMY))
+        if (isSelfCenteredAoE && (PSkill->getValidTargets() & xi::TargetType::Enemy) != xi::TargetType::None)
         {
             PFindTarget = GetBattleTarget();
             if (!PFindTarget)
@@ -3972,7 +3972,7 @@ auto CBattleEntity::OnAttack(CAttackState& state, action_t& action) -> bool
     return true;
 }
 
-auto CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+auto CBattleEntity::IsValidTarget(uint16 targid, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
 {
     TracyZoneScopedN("CBattleEntity::IsValidTarget");
 
@@ -3980,7 +3980,7 @@ auto CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::u
     return PTarget;
 }
 
-auto CBattleEntity::IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+auto CBattleEntity::IsValidTarget(EntityId target, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
 {
     TracyZoneScopedN("CBattleEntity::IsValidTarget");
 

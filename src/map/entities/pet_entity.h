@@ -79,7 +79,7 @@ public:
     void Die() override;
     void Spawn() override;
     void OnAbility(CAbilityState&, action_t&) override;
-    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool override;
     auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
 
 private:

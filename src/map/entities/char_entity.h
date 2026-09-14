@@ -767,7 +767,7 @@ public:
     void addTrait(CTrait*) override;
     void delTrait(CTrait*) override;
 
-    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool override;
     auto CanUseSpell(CSpell*) -> bool override;
     auto IsMobOwner(CBattleEntity* PTarget) -> bool;
 
@@ -810,8 +810,8 @@ public:
     auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
     auto OnAttack(CAttackState&, action_t&) -> bool override;
     auto OnAttackError(CAttackState&) -> bool override;
-    auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
-    auto IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
+    auto IsValidTarget(uint16 targid, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
+    auto IsValidTarget(EntityId target, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
     void OnChangeTarget(CBattleEntity* PNewTarget) override;
     void OnEngage(CAttackState&) override;
     void OnDisengage(CAttackState&) override;
@@ -849,7 +849,7 @@ protected:
     void changeMoghancement(uint16 moghancementID, bool isAdding);
 
 private:
-    auto applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+    auto applyTargetRestrictions(CBaseEntity* PResolved, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
 
     Maybe<DeathParams> nextDeath_;
 

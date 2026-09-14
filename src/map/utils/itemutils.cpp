@@ -343,7 +343,7 @@ void LoadItemList()
             if (PItem->isType(ITEM_USABLE) &&
                 (!(PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)) || !rset->isNull("validTargets")))
             {
-                static_cast<CItemUsable*>(PItem)->setValidTarget(rset->get<uint16>("validTargets"));
+                static_cast<CItemUsable*>(PItem)->setValidTarget(rset->get<xi::TargetType>("validTargets"));
                 static_cast<CItemUsable*>(PItem)->setActivationTime(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::duration<float>(rset->get<float>("activation"))));
                 static_cast<CItemUsable*>(PItem)->setAnimationID(rset->get<uint16>("animation"));
                 static_cast<CItemUsable*>(PItem)->setAnimationTime(std::chrono::seconds(rset->get<uint32>("animationTime")));
@@ -377,7 +377,7 @@ void LoadItemList()
                 static_cast<CItemEquipment*>(PItem)->setRemoveSlotLookId(rset->get<uint16>("rslotlook"));
                 static_cast<CItemEquipment*>(PItem)->setSuperiorLevel(rset->get<uint8>("su_level"));
 
-                if (static_cast<CItemEquipment*>(PItem)->getValidTarget() != 0)
+                if (static_cast<CItemEquipment*>(PItem)->getValidTarget() != xi::TargetType::None)
                 {
                     PItem->setSubType(ITEM_CHARGED);
                 }

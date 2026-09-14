@@ -52,7 +52,7 @@ auto CWeaponSkillState::init() -> StateErrorOr<void>
         return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::CannotUseWeaponskill) };
     }
 
-    const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(m_wsid) ? TARGET_SELF : TARGET_ENEMY;
+    const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(m_wsid) ? xi::TargetType::Self : xi::TargetType::Enemy;
     auto*      PTarget     = m_PEntity->IsValidTarget(target(), targetFlags, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())

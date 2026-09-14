@@ -127,7 +127,7 @@ public:
 
     void PostTick() override;
     auto GetRoamDistance() const -> float;
-    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool override;
 
     void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
     {

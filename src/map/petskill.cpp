@@ -32,7 +32,7 @@ CPetSkill::CPetSkill(uint16 id)
 , m_Distance(0)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
-, m_ValidTarget(0)
+, m_ValidTarget(xi::TargetType::None)
 , m_Message(MsgBasic::None)
 , m_Flag(0)
 , m_Param(0)
@@ -188,7 +188,7 @@ void CPetSkill::setActivationTime(timer::duration ActivationTime)
     m_ActivationTime = ActivationTime;
 }
 
-void CPetSkill::setValidTargets(uint16 targ)
+void CPetSkill::setValidTargets(xi::TargetType targ)
 {
     m_ValidTarget = targ;
 }
@@ -311,7 +311,7 @@ void CPetSkill::setKnockback(uint8 knockback)
     m_knockback = knockback;
 }
 
-auto CPetSkill::getValidTargets() const -> uint16
+auto CPetSkill::getValidTargets() const -> xi::TargetType
 {
     return m_ValidTarget;
 }

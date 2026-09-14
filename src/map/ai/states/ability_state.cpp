@@ -85,7 +85,7 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
             return false;
         }
 
-        if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+        if ((PPetSkill->getValidTargets() & xi::TargetType::Enemy) != xi::TargetType::None)
         {
             if (auto* PPetTarget = PPet->GetBattleTarget(); PPetTarget && distance(PPet->loc.p, PPetTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PPetTarget->modelHitboxSize)
             {
@@ -168,7 +168,7 @@ void CAbilityState::ApplyEnmity() const
     auto* PTarget = target().resolve();
     if (PTarget)
     {
-        if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
+        if ((m_PAbility->getValidTarget() & xi::TargetType::Enemy) != xi::TargetType::None && PTarget->allegiance != m_PEntity->allegiance)
         {
             if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
             {

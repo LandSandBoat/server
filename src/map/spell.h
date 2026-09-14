@@ -28,6 +28,7 @@
 #include "data/enums/zone_misc.h"
 #include "entities/battle_entity.h"
 
+#include "data/enums/target_type.h"
 #include <string_view>
 
 #define CANNOT_USE_SPELL 0
@@ -1189,7 +1190,7 @@ public:
     auto getMPCost() const -> uint16;
     auto getCastTime() const -> timer::duration;
     auto getRecastTime() const -> timer::duration;
-    auto getValidTarget() const -> uint16;
+    auto getValidTarget() const -> xi::TargetType;
     auto getAnimationID() const -> ActionAnimation;
     auto getAnimationTime() const -> timer::duration;
     auto getSpellGroup() const -> SPELLGROUP;
@@ -1230,7 +1231,7 @@ public:
     void setMPCost(uint16 MP);
     void setCastTime(timer::duration CastTime);
     void setRecastTime(timer::duration RecastTime);
-    void setValidTarget(uint16 ValidTarget);
+    void setValidTarget(xi::TargetType ValidTarget);
     void setAnimationID(uint16 AnimationID);
     void setAnimationTime(timer::duration AnimationTime);
     void setSpellGroup(SPELLGROUP SpellGroup);
@@ -1281,7 +1282,7 @@ private:
     uint16                         m_totalTargets{};
     uint16                         m_mpCost{};                        // mpCost/itemId for ninjitsu tool
     std::array<uint8, MAX_JOBTYPE> m_job{};                           // job
-    uint16                         m_ValidTarget{};                   // target pc/npc/both
+    xi::TargetType                 m_ValidTarget{};                   // target pc/npc/both
     SPELLGROUP                     m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
     SPELLFAMILY                    m_spellFamily{ SPELLFAMILY_NONE }; // spell family
     xi::ZoneMisc                   m_zoneMisc{};                      // spellcasting conditions

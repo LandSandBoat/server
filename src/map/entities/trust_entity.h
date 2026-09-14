@@ -55,7 +55,7 @@ public:
     void FadeOut() override;
     void Die() override;
     void Spawn() override;
-    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool override;
     void OnDespawn(CDespawnState&) override;
 
     void OnCastFinished(CMagicState& state, action_t& action) override;

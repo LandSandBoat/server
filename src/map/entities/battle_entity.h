@@ -41,6 +41,7 @@
 #include "data/enums/job.h"
 #include "data/enums/skill_type.h"
 #include "data/enums/skillchain_type.h"
+#include "data/enums/target_type.h"
 #include "party.h"
 #include "trait.h"
 
@@ -100,25 +101,6 @@ enum SLOTTYPE : uint8
 
 #define MAX_SLOTTYPE 18
 DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
-
-enum TARGETTYPE : uint16
-{
-    TARGET_NONE                    = 0x0000,
-    TARGET_SELF                    = 0x0001,
-    TARGET_PLAYER_PARTY            = 0x0002,
-    TARGET_ENEMY                   = 0x0004,
-    TARGET_PLAYER_ALLIANCE         = 0x0008,
-    TARGET_PLAYER                  = 0x0010,
-    TARGET_PLAYER_DEAD             = 0x0020,
-    TARGET_NPC                     = 0x0040, // an npc is a mob that looks like an npc and fights on the side of the character
-    TARGET_PLAYER_PARTY_PIANISSIMO = 0x0080,
-    TARGET_PET                     = 0x0100,
-    TARGET_PLAYER_PARTY_ENTRUST    = 0x0200,
-    TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
-    TARGET_ANY_ALLEGIANCE          = 0x0800, // Can hit targets from any allegiance simultaneously. To be used with other flags above and only makes sense for non-single-target skills
-};
-
-DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
 struct battlehistory_t
 {
@@ -295,7 +277,7 @@ public:
     virtual void delTrait(CTrait*);
     virtual auto hasTrait(uint16) -> bool;
 
-    virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool;
+    virtual auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool;
     virtual auto CanUseSpell(CSpell*) -> bool;
 
     void         Spawn() override;
@@ -319,8 +301,8 @@ public:
     /* Returns whether to call Attack or not (which includes error messages) */
     virtual auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool;
 
-    virtual auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
-    virtual auto IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+    virtual auto IsValidTarget(uint16 targid, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+    virtual auto IsValidTarget(EntityId target, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
 
     virtual void OnEngage(CAttackState&);
     virtual void OnDisengage(CAttackState&);

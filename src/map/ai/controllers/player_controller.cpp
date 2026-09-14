@@ -69,7 +69,7 @@ auto CPlayerController::Engage(const EntityId& target) -> bool
     // TODO: pet engage/disengage
     std::unique_ptr<CBasicPacket> errMsg;
     auto*                         PChar   = static_cast<CCharEntity*>(POwner);
-    auto*                         PTarget = PChar->IsValidTarget(target, TARGET_ENEMY, errMsg);
+    auto*                         PTarget = PChar->IsValidTarget(target, xi::TargetType::Enemy, errMsg);
 
     if (PTarget)
     {
@@ -159,7 +159,7 @@ auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 
         std::unique_ptr<CBasicPacket> errMsg;
 
-        auto* PTarget = PChar->IsValidTarget(target, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
+        auto* PTarget = PChar->IsValidTarget(target, battleutils::isValidSelfTargetWeaponskill(wsid) ? xi::TargetType::Self : xi::TargetType::Enemy, errMsg);
         if (PTarget)
         {
             if (PTarget->PAI->IsUntargetable())

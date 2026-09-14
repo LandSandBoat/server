@@ -43,7 +43,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 , m_zone(xi::ZoneId::Unknown)
 , m_findType{}
 , m_findFlags(0)
-, m_targetFlags(0)
+, m_targetFlags(xi::TargetType::None)
 , m_conal(false)
 , m_scalar(0.0f)
 , m_APoint(nullptr)
@@ -70,7 +70,7 @@ void CTargetFind::reset()
     m_PMasterTarget = nullptr;
 }
 
-void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint16 targetFlags)
+void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, xi::TargetType targetFlags)
 {
     // Ensure caster and target are valid before proceeding.
     if (m_PBattleEntity == nullptr || PTarget == nullptr)
@@ -87,7 +87,7 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint
     addEntity(PTarget, false);
 }
 
-void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, uint16 targetFlags)
+void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, xi::TargetType targetFlags)
 {
     // Ensure caster and target are valid before proceeding.
     if (m_PBattleEntity == nullptr || PTarget == nullptr)
@@ -180,10 +180,10 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     else
     {
         // handle this as a mob
-        if (m_targetFlags & TARGET_ANY_ALLEGIANCE)
+        if ((m_targetFlags & xi::TargetType::AnyAllegiance) != xi::TargetType::None)
         {
             m_findType = FIND_TYPE::MONSTER_PLAYER;
-            if ((m_targetFlags & TARGET_SELF) && m_PBattleEntity->GetBattleTarget())
+            if ((m_targetFlags & xi::TargetType::Self) != xi::TargetType::None && m_PBattleEntity->GetBattleTarget())
             {
                 // This ability targets self for aoe skills (such as Frozen Mist)
                 // We must update the base target for allegiance checks
@@ -241,7 +241,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     }
 }
 
-void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, uint16 targetFlags, uint8 aoeType)
+void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, xi::TargetType targetFlags, uint8 aoeType)
 {
     // Ensure caster and target are valid before proceeding.
     if (m_PBattleEntity == nullptr || PTarget == nullptr)
@@ -531,8 +531,8 @@ auto CTargetFind::validEntity(CBattleEntity* PTarget) -> bool
     // This must run BEFORE the "first target always allowed" short-circuit.
     // -------------------------------------------------
     if (m_selfCenteredAoE &&
-        (m_targetFlags & TARGET_ANY_ALLEGIANCE) == 0 &&
-        (m_targetFlags & TARGET_ENEMY) == 0)
+        (m_targetFlags & xi::TargetType::AnyAllegiance) == xi::TargetType::None &&
+        (m_targetFlags & xi::TargetType::Enemy) == xi::TargetType::None)
     {
         CBattleEntity* PCasterMaster = findMaster(m_PBattleEntity);
         if (PCasterMaster && PCasterMaster->allegiance != PTarget->allegiance)
@@ -559,7 +559,7 @@ auto CTargetFind::validEntity(CBattleEntity* PTarget) -> bool
     }
 
     // short-circuit allegiance checks for aoe skills/abilities/spells that can hit players and mobs simultaneously
-    if (m_targetFlags & TARGET_ANY_ALLEGIANCE)
+    if ((m_targetFlags & xi::TargetType::AnyAllegiance) != xi::TargetType::None)
     {
         if (m_PBattleEntity == PTarget)
         {
@@ -576,7 +576,7 @@ auto CTargetFind::validEntity(CBattleEntity* PTarget) -> bool
 
         // If offensive, don't target other entities with same allegiance
         // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
-        if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
+        if ((m_targetFlags & xi::TargetType::Enemy) != xi::TargetType::None && (m_targetFlags & xi::TargetType::PlayerParty) == xi::TargetType::None &&
             m_PBattleEntity->allegiance == PTarget->allegiance)
         {
             return false;
@@ -687,24 +687,24 @@ auto CTargetFind::isWithinRange(position_t* pos, float range) -> bool
     return distance(m_PBattleEntity->loc.p, *pos) <= range;
 }
 
-auto CTargetFind::getValidTarget(const uint16 actionTargetID, const uint16 validTargetFlags) const -> CBattleEntity*
+auto CTargetFind::getValidTarget(const uint16 actionTargetID, const xi::TargetType validTargetFlags) const -> CBattleEntity*
 {
     return getValidTarget(dynamic_cast<CBattleEntity*>(m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST)), validTargetFlags);
 }
 
-auto CTargetFind::getValidTarget(CBattleEntity* PTarget, const uint16 validTargetFlags) const -> CBattleEntity*
+auto CTargetFind::getValidTarget(CBattleEntity* PTarget, const xi::TargetType validTargetFlags) const -> CBattleEntity*
 {
     if (PTarget == nullptr)
     {
         return nullptr;
     }
 
-    if (validTargetFlags & TARGET_PET && m_PBattleEntity->PPet)
+    if ((validTargetFlags & xi::TargetType::Pet) != xi::TargetType::None && m_PBattleEntity->PPet)
     {
         return m_PBattleEntity->PPet;
     }
 
-    bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;
+    bool ignoreBattleId  = (validTargetFlags & xi::TargetType::IgnoreBattleid) == xi::TargetType::IgnoreBattleid;
     bool hasSameBattleId = m_PBattleEntity->getBattleID() == PTarget->getBattleID();
     if ((ignoreBattleId || hasSameBattleId) && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {
