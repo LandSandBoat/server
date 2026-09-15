@@ -531,7 +531,7 @@ templates:
 
   Goblin_Fisher:
     id:            1659
-    species:       goblin
+    species:       armored_goblin
     skill_list_id: 133
     attributes:
       combat:

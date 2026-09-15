@@ -295,7 +295,7 @@ templates:
 
   Dextrose:
     id:            1020
-    species:       flan
+    species:       gold_flan
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 299

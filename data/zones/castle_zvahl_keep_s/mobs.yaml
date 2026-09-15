@@ -1856,7 +1856,7 @@ templates:
   Fortification_NV80:
     id:           6880
     display_name: Fortification
-    species:      unclassified
+    species:      fortifications
     type:         [event]
     attributes:
       combat:

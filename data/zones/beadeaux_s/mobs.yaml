@@ -1596,7 +1596,7 @@ templates:
   Fortification_F641:
     id:           6653
     display_name: Fortification
-    species:      unclassified
+    species:      fortifications
     type:         [event]
     attributes:
       combat:

@@ -3099,7 +3099,7 @@ templates:
 
   Vee_Qiqa_the_Decreer:
     id:            4212
-    species:       yagudo_s
+    species:       manifest
     skill_list_id: 360
     attributes:
       combat:

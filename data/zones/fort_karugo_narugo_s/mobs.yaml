@@ -1511,7 +1511,7 @@ templates:
 
   Kalasutrax:
     id:            4708
-    species:       naraka
+    species:       green_naraka
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 472
@@ -2699,7 +2699,7 @@ templates:
 
   Vee_Qiqa_the_Decreer:
     id:            4212
-    species:       yagudo_s
+    species:       manifest
     skill_list_id: 360
     attributes:
       combat:

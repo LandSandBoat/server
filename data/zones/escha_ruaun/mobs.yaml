@@ -1746,30 +1746,12 @@ templates:
 
   Pakecet:
     id:            5688
-    species:       pteraketo
+    species:       white_pteraketos
     type:          [notorious]
     skill_list_id: 451
     attributes:
       combat:
         skill: dagger
-      resists:
-        rank_element:
-          fire:  2
-          ice:   4
-          wind:  2
-          earth: 4
-          water: 4
-          light: 1
-          dark:  6
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     2
-          slow:        4
-          poison:      4
-          light_sleep: 1
-          dark_sleep:  6
-          blind:       6
       render:
         look:
           type:  standard
@@ -1982,21 +1964,6 @@ templates:
         dmg_mult: 125
       jobs:    [rdm, rdm]
       element: fire
-      resists:
-        rank_element:
-          fire:    10
-          ice:     10
-          earth:    4
-          thunder:  4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    10
-          bind:        10
-          slow:         4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -2049,7 +2016,7 @@ templates:
 
   Virava:
     id:            6989
-    species:       belladonna
+    species:       white_belladonna
     type:          [notorious]
     skill_list_id: 207
     attributes:

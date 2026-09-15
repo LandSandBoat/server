@@ -753,7 +753,7 @@ templates:
 
   Gwynn_ap_Nudd:
     id:            5163
-    species:       corpselight
+    species:       crowned_corpselight
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 74

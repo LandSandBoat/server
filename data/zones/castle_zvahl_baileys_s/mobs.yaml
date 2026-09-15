@@ -860,7 +860,7 @@ templates:
 
   Deathwreaker_Demon:
     id:            6609
-    species:       kindred
+    species:       red_demon
     skill_list_id: 169
     attributes:
       combat:
@@ -1733,7 +1733,7 @@ templates:
   Fortification_NV80:
     id:           6880
     display_name: Fortification
-    species:      unclassified
+    species:      fortifications
     type:         [event]
     attributes:
       combat:

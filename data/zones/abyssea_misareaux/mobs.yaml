@@ -382,7 +382,7 @@ templates:
 
   Cirein-croin:
     id:            729
-    species:       orobon
+    species:       ogrebon
     type:          [notorious]
     skill_list_id: 889
     attributes:

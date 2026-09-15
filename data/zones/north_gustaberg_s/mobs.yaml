@@ -3930,7 +3930,7 @@ templates:
 
   Ushumgal:
     id:            6820
-    species:       peiste
+    species:       sibilus
     type:          [notorious]
     skill_list_id: 803
     attributes:

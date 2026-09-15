@@ -1144,7 +1144,7 @@ templates:
 
   Ogbunabali:
     id:            5161
-    species:       antlion
+    species:       formiceros
     type:          [notorious]
     skill_list_id: 26
     attributes:

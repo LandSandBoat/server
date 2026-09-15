@@ -759,7 +759,7 @@ templates:
 
   Long-Armed_Chariot:
     id:            2431
-    species:       chariot
+    species:       long_armed_chariot
     type:          [notorious]
     skill_list_id: 63
     attributes:
@@ -767,24 +767,6 @@ templates:
         skill: great_axe
         delay: 320
       jobs: [war, bst]
-      resists:
-        rank_element:
-          ice:      1
-          wind:     1
-          earth:    1
-          thunder:  5
-          water:   -1
-          light:    6
-          dark:     1
-        rank_status:
-          paralyze:     1
-          bind:         1
-          silence:      1
-          slow:         1
-          poison:      -1
-          light_sleep:  6
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard

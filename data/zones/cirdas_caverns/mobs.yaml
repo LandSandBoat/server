@@ -935,7 +935,7 @@ templates:
 
   Wetscale_Toad:
     id:            6379
-    species:       red_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       combat:

@@ -1045,30 +1045,12 @@ templates:
 
   Cetus:
     id:            6821
-    species:       pteraketo
+    species:       white_pteraketos
     type:          [notorious]
     skill_list_id: 451
     attributes:
       combat:
         skill: dagger
-      resists:
-        rank_element:
-          fire:  2
-          ice:   4
-          wind:  2
-          earth: 4
-          water: 4
-          light: 1
-          dark:  6
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     2
-          slow:        4
-          poison:      4
-          light_sleep: 1
-          dark_sleep:  6
-          blind:       6
       render:
         look:
           type:  standard

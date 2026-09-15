@@ -2399,7 +2399,7 @@ templates:
 
   Melancholic_Moira:
     id:            4683
-    species:       morbol
+    species:       purbol
     type:          [notorious]
     skill_list_id: 186
     attributes:

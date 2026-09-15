@@ -2857,7 +2857,7 @@ templates:
 
   Silagilith:
     id:      7801
-    species: marolith
+    species: mirulith
     type:    [battlefield]
     attributes:
       combat:

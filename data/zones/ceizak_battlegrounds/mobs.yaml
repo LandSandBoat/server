@@ -46,7 +46,7 @@ templates:
 
   Belaboring_Wasp:
     id:            5009
-    species:       yellow_bee
+    species:       blue_bee
     skill_list_id: 48
     attributes:
       combat:
@@ -876,7 +876,7 @@ templates:
 
   Undergrowth_Hornet:
     id:            5010
-    species:       yellow_bee
+    species:       pephredo
     skill_list_id: 48
     attributes:
       combat:

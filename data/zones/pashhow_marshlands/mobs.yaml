@@ -1630,7 +1630,7 @@ templates:
 
   Murk-veined_Baneberry:
     id:            5312
-    species:       tonberry
+    species:       wantonberry
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 243

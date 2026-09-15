@@ -46,7 +46,7 @@ templates:
 
   Akupara:
     id:            4684
-    species:       adamantoise
+    species:       ferromantoise
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 2
@@ -1228,7 +1228,7 @@ templates:
   Fortification_NV80:
     id:           6880
     display_name: Fortification
-    species:      unclassified
+    species:      fortifications
     type:         [event]
     attributes:
       combat:
@@ -3340,7 +3340,7 @@ templates:
 
   Vee_Qiqa_the_Decreer:
     id:            4212
-    species:       yagudo_s
+    species:       manifest
     skill_list_id: 360
     attributes:
       combat:

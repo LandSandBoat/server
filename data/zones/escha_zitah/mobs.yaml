@@ -1006,7 +1006,7 @@ templates:
 
   Nosoi:
     id:            5716
-    species:       tulfaire
+    species:       blue_tulfaire
     type:          [notorious]
     skill_list_id: 454
     attributes:
@@ -1268,7 +1268,7 @@ templates:
 
   Urmahlullu:
     id:            5722
-    species:       behemoth
+    species:       skormoth
     type:          [notorious]
     skill_list_id: 51
     attributes:

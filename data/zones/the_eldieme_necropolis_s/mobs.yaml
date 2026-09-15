@@ -561,7 +561,7 @@ templates:
 
   Conqueror_Bakgodek:
     id:            777
-    species:       orc_s
+    species:       warchief
     spell_list_id: 4
     skill_list_id: 189
     attributes:

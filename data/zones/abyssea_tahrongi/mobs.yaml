@@ -1440,21 +1440,6 @@ templates:
       combat:
         skill: club
       jobs: [whm, blm]
-      resists:
-        rank_element:
-          fire:    10
-          ice:     10
-          earth:    4
-          thunder:  4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    10
-          bind:        10
-          slow:         4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard

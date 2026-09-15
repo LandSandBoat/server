@@ -1990,7 +1990,7 @@ templates:
   Mamool_Ja_Hussar_Small:
     id:            7143
     display_name:  Mamool_Ja_Hussar
-    species:       knight
+    species:       knight_ja
     spell_list_id: 4
     skill_list_id: 177
     attributes:
