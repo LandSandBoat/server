@@ -198,9 +198,9 @@ xi.settings.main =
     -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
     -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
     COFFER_MAX_ILLUSION_TIME = 3600,  -- 1 hour
-    COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
+    COFFER_MIN_ILLUSION_TIME =  900,  -- 15 minutes
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
-    CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
+    CHEST_MIN_ILLUSION_TIME  =  900,  -- 15 minutes
 
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
