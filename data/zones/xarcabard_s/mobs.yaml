@@ -431,7 +431,7 @@ templates:
 
   Berserker_Demon:
     id:            396
-    species:       kindred
+    species:       red_demon
     skill_list_id: 169
     attributes:
       combat:
@@ -2325,7 +2325,7 @@ templates:
 
   Megalotaur:
     id:            2609
-    species:       taurus
+    species:       red_taurus
     skill_list_id: 240
     attributes:
       combat:
@@ -3276,7 +3276,7 @@ templates:
 
   Tarbotaur:
     id:            3845
-    species:       taurus
+    species:       red_taurus
     skill_list_id: 240
     attributes:
       render:
@@ -3389,7 +3389,7 @@ templates:
 
   Torvotaur:
     id:            3978
-    species:       taurus
+    species:       red_taurus
     skill_list_id: 240
     attributes:
       render:

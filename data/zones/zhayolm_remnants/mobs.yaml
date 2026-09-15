@@ -1006,7 +1006,7 @@ templates:
 
   Mamool_Ja_Bounder:
     id:            2508
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1037,7 +1037,7 @@ templates:
   Mamool_Ja_Bounder_2:
     id:            2508
     display_name:  Mamool_Ja_Bounder
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1074,7 +1074,7 @@ templates:
   Mamool_Ja_Bounder_3:
     id:            2508
     display_name:  Mamool_Ja_Bounder
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1111,7 +1111,7 @@ templates:
   Mamool_Ja_Bounder_4:
     id:            2508
     display_name:  Mamool_Ja_Bounder
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1154,7 +1154,7 @@ templates:
   Mamool_Ja_Bounder_5:
     id:            2508
     display_name:  Mamool_Ja_Bounder
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1176,7 +1176,7 @@ templates:
 
   Mamool_Ja_Mimicker:
     id:            2526
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1202,7 +1202,7 @@ templates:
   Mamool_Ja_Mimicker_2:
     id:            2526
     display_name:  Mamool_Ja_Mimicker
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1228,7 +1228,7 @@ templates:
   Mamool_Ja_Mimicker_3:
     id:            2526
     display_name:  Mamool_Ja_Mimicker
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1260,7 +1260,7 @@ templates:
   Mamool_Ja_Mimicker_4:
     id:            2526
     display_name:  Mamool_Ja_Mimicker
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1292,7 +1292,7 @@ templates:
   Mamool_Ja_Mimicker_5:
     id:            2526
     display_name:  Mamool_Ja_Mimicker
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1315,7 +1315,7 @@ templates:
 
   Mamool_Ja_Savant:
     id:            2533
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1345,7 +1345,7 @@ templates:
   Mamool_Ja_Savant_2:
     id:            2533
     display_name:  Mamool_Ja_Savant
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1372,7 +1372,7 @@ templates:
   Mamool_Ja_Savant_3:
     id:            2533
     display_name:  Mamool_Ja_Savant
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1405,7 +1405,7 @@ templates:
   Mamool_Ja_Savant_4:
     id:            2533
     display_name:  Mamool_Ja_Savant
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1438,7 +1438,7 @@ templates:
   Mamool_Ja_Savant_5:
     id:            2533
     display_name:  Mamool_Ja_Savant
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1465,7 +1465,7 @@ templates:
   Mamool_Ja_Savant_6:
     id:            2533
     display_name:  Mamool_Ja_Savant
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1488,7 +1488,7 @@ templates:
 
   Mamool_Ja_Sophist:
     id:            2534
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1515,7 +1515,7 @@ templates:
   Mamool_Ja_Sophist_2:
     id:            2534
     display_name:  Mamool_Ja_Sophist
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1547,7 +1547,7 @@ templates:
   Mamool_Ja_Sophist_3:
     id:            2534
     display_name:  Mamool_Ja_Sophist
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1579,7 +1579,7 @@ templates:
   Mamool_Ja_Sophist_4:
     id:            2534
     display_name:  Mamool_Ja_Sophist
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1611,7 +1611,7 @@ templates:
   Mamool_Ja_Sophist_5:
     id:            2534
     display_name:  Mamool_Ja_Sophist
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1643,7 +1643,7 @@ templates:
   Mamool_Ja_Sophist_6:
     id:            2534
     display_name:  Mamool_Ja_Sophist
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1666,7 +1666,7 @@ templates:
 
   Mamool_Ja_Spearman:
     id:            2535
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1697,7 +1697,7 @@ templates:
   Mamool_Ja_Spearman_2:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1734,7 +1734,7 @@ templates:
   Mamool_Ja_Spearman_3:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1771,7 +1771,7 @@ templates:
   Mamool_Ja_Spearman_4:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1808,7 +1808,7 @@ templates:
   Mamool_Ja_Spearman_5:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1845,7 +1845,7 @@ templates:
   Mamool_Ja_Spearman_6:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1882,7 +1882,7 @@ templates:
   Mamool_Ja_Spearman_7:
     id:            2535
     display_name:  Mamool_Ja_Spearman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1924,7 +1924,7 @@ templates:
 
   Mamool_Ja_Strapper:
     id:            2538
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1961,7 +1961,7 @@ templates:
   Mamool_Ja_Strapper_2:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1998,7 +1998,7 @@ templates:
   Mamool_Ja_Strapper_3:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2035,7 +2035,7 @@ templates:
   Mamool_Ja_Strapper_4:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2072,7 +2072,7 @@ templates:
   Mamool_Ja_Strapper_5:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2097,7 +2097,7 @@ templates:
   Mamool_Ja_Strapper_6:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2140,7 +2140,7 @@ templates:
   Mamool_Ja_Strapper_7:
     id:            2538
     display_name:  Mamool_Ja_Strapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2162,7 +2162,7 @@ templates:
 
   Mamool_Ja_Zenist:
     id:            2545
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2194,7 +2194,7 @@ templates:
   Mamool_Ja_Zenist_2:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2226,7 +2226,7 @@ templates:
   Mamool_Ja_Zenist_3:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2264,7 +2264,7 @@ templates:
   Mamool_Ja_Zenist_4:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2302,7 +2302,7 @@ templates:
   Mamool_Ja_Zenist_5:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2340,7 +2340,7 @@ templates:
   Mamool_Ja_Zenist_6:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2366,7 +2366,7 @@ templates:
   Mamool_Ja_Zenist_7:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2404,7 +2404,7 @@ templates:
   Mamool_Ja_Zenist_8:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2448,7 +2448,7 @@ templates:
   Mamool_Ja_Zenist_9:
     id:            2545
     display_name:  Mamool_Ja_Zenist
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:

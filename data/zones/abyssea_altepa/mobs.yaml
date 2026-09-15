@@ -190,7 +190,7 @@ templates:
 
   Barrens_Treant:
     id:            350
-    species:       treant
+    species:       winter_treant
     skill_list_id: 245
     attributes:
       combat:

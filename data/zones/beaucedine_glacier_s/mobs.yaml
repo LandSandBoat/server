@@ -958,7 +958,7 @@ templates:
 
   Dryptotaur:
     id:            1127
-    species:       taurus
+    species:       red_taurus
     skill_list_id: 240
     attributes:
       combat:

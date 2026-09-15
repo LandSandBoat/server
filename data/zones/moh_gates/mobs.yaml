@@ -602,7 +602,7 @@ templates:
 
   Ruby_Raptor:
     id:            5085
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -624,7 +624,7 @@ templates:
   Ruby_Raptor_Small:
     id:            7285
     display_name:  Ruby_Raptor
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -725,7 +725,7 @@ templates:
 
   Steelclaw_Raptor:
     id:            5645
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:

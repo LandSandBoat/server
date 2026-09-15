@@ -122,7 +122,7 @@ templates:
 
   Droughted_Treant:
     id:            4937
-    species:       treant
+    species:       winter_treant
     skill_list_id: 245
     attributes:
       combat:

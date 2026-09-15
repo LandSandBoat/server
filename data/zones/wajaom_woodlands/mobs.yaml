@@ -607,7 +607,7 @@ templates:
 
   Decimator_Mabel_Ja:
     id:            944
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -694,7 +694,7 @@ templates:
 
   Eidolic_Qufeel_Ja:
     id:            1182
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -1049,7 +1049,7 @@ templates:
 
   Gotoh_Zha_the_Redolent:
     id:            1773
-    species:       knight_ja
+    species:       sage
     type:          [notorious]
     spell_list_id: 296
     skill_list_id: 305
@@ -1166,7 +1166,7 @@ templates:
 
   Gulool_Ja_Ja:
     id:            1846
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
@@ -1213,7 +1213,7 @@ templates:
   Gulool_Ja_Ja_Besieged:
     id:            7142
     display_name:  Gulool_Ja_Ja
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
@@ -1607,7 +1607,7 @@ templates:
 
   Mamool_Ja_Bounder:
     id:            2508
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1639,7 +1639,7 @@ templates:
 
   Mamool_Ja_Cataphract:
     id:            2510
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1662,7 +1662,7 @@ templates:
   Mamool_Ja_Cataphract_Small:
     id:            7136
     display_name:  Mamool_Ja_Cataphract
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1683,7 +1683,7 @@ templates:
 
   Mamool_Ja_Entrancer:
     id:            2514
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1706,7 +1706,7 @@ templates:
 
   Mamool_Ja_Fetial:
     id:            2517
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -1729,7 +1729,7 @@ templates:
 
   Mamool_Ja_Handler:
     id:            2519
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1751,7 +1751,7 @@ templates:
 
   Mamool_Ja_Hospitaler:
     id:            2520
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 176
     attributes:
@@ -1775,7 +1775,7 @@ templates:
   Mamool_Ja_Hospitaler_Small:
     id:            7134
     display_name:  Mamool_Ja_Hospitaler
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 176
     attributes:
@@ -1837,7 +1837,7 @@ templates:
 
   Mamool_Ja_Mimicker:
     id:            2526
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1870,7 +1870,7 @@ templates:
 
   Mamool_Ja_Sapper:
     id:            2532
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1893,7 +1893,7 @@ templates:
   Mamool_Ja_Sapper_Small:
     id:            7133
     display_name:  Mamool_Ja_Sapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1914,7 +1914,7 @@ templates:
 
   Mamool_Ja_Savant:
     id:            2533
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1947,7 +1947,7 @@ templates:
 
   Mamool_Ja_Sophist:
     id:            2534
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1980,7 +1980,7 @@ templates:
 
   Mamool_Ja_Spotter:
     id:            2536
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2003,7 +2003,7 @@ templates:
   Mamool_Ja_Spotter_Small:
     id:            7135
     display_name:  Mamool_Ja_Spotter
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2024,7 +2024,7 @@ templates:
 
   Mamool_Ja_Zenist:
     id:            2545
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -2153,7 +2153,7 @@ templates:
 
   Panurgic_Ryubool_Ja:
     id:            3093
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -2179,7 +2179,7 @@ templates:
 
   Percipient_Zoraal_Ja:
     id:            3118
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2452,7 +2452,7 @@ templates:
   Sagelord_Molaal_Ja_WW:
     id:            3437
     display_name:  Sagelord_Molaal_Ja
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -2478,7 +2478,7 @@ templates:
 
   Scalding_Fafool_Ja:
     id:            3493
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2643,7 +2643,7 @@ templates:
 
   Strifelord_Bakool_Ja:
     id:            3789
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2757,7 +2757,7 @@ templates:
 
   Thunderclap_Sareel_Ja:
     id:            3910
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -3163,7 +3163,7 @@ templates:
 
   Vigilant_Kubool_Ja:
     id:            6745
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:

@@ -1533,7 +1533,7 @@ templates:
 
   Mamool_Ja_Blusterer:
     id:            2507
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1564,7 +1564,7 @@ templates:
 
   Mamool_Ja_Infiltrator:
     id:            2522
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -1596,7 +1596,7 @@ templates:
 
   Mamool_Ja_Lurker:
     id:            2523
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1628,7 +1628,7 @@ templates:
 
   Mamool_Ja_Mimer:
     id:            2525
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1661,7 +1661,7 @@ templates:
 
   Mamool_Ja_Philosopher:
     id:            2528
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1692,7 +1692,7 @@ templates:
 
   Mamool_Ja_Pikeman:
     id:            2529
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1722,7 +1722,7 @@ templates:
 
   Mamool_Ja_Stabler:
     id:            2537
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:

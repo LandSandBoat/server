@@ -62,7 +62,7 @@ templates:
 
   Animosiraptor:
     id:            5099
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -343,7 +343,7 @@ templates:
 
   Lavawalker_Raptor:
     id:            4953
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -481,7 +481,7 @@ templates:
 
   Perdurable_Raptor:
     id:            4868
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -584,7 +584,7 @@ templates:
 
   Snaggletooth_Raptor:
     id:            4775
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:

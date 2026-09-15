@@ -542,7 +542,7 @@ templates:
 
   Berserker_Demon:
     id:            396
-    species:       kindred
+    species:       red_demon
     skill_list_id: 169
     attributes:
       combat:
@@ -3849,7 +3849,7 @@ templates:
 
   Titanotaur:
     id:            6639
-    species:       taurus
+    species:       red_taurus
     skill_list_id: 240
     attributes:
       render:

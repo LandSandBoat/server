@@ -4,7 +4,7 @@ templates:
 
   Blacktattoo_Vedool_Ja:
     id:            430
-    species:       knight_ja
+    species:       sage
     type:          [battlefield]
     spell_list_id: 21
     skill_list_id: 176
@@ -208,7 +208,7 @@ templates:
 
   Mamool_Ja_Flamerearer:
     id:            6959
-    species:       knight_ja
+    species:       warrior
     type:          [battlefield]
     skill_list_id: 176
     attributes:
@@ -232,7 +232,7 @@ templates:
 
   Mamool_Ja_Isangoma:
     id:            6955
-    species:       knight_ja
+    species:       sage
     type:          [battlefield]
     spell_list_id: 20
     skill_list_id: 176
@@ -257,7 +257,7 @@ templates:
 
   Mamool_Ja_Palatine:
     id:            7599
-    species:       knight_ja
+    species:       warrior
     type:          [battlefield]
     skill_list_id: 176
     attributes:
@@ -280,7 +280,7 @@ templates:
 
   Mamool_Ja_Polemicist:
     id:            6956
-    species:       knight_ja
+    species:       sage
     type:          [battlefield]
     spell_list_id: 21
     skill_list_id: 176
@@ -305,7 +305,7 @@ templates:
 
   Mamool_Ja_Profligate:
     id:            6957
-    species:       knight_ja
+    species:       warrior
     type:          [battlefield]
     skill_list_id: 176
     attributes:
@@ -329,7 +329,7 @@ templates:
 
   Mamool_Ja_Unseen:
     id:            6958
-    species:       knight_ja
+    species:       warrior
     type:          [battlefield]
     spell_list_id: 7
     skill_list_id: 176
@@ -476,7 +476,7 @@ templates:
 
   Shadowhand_Kajeel_Ja:
     id:            3567
-    species:       knight_ja
+    species:       warrior
     type:          [battlefield]
     spell_list_id: 7
     skill_list_id: 176
@@ -550,7 +550,7 @@ templates:
 
   Whitetattoo_Rahool_Ja:
     id:            4332
-    species:       knight_ja
+    species:       sage
     type:          [battlefield]
     spell_list_id: 20
     skill_list_id: 176
