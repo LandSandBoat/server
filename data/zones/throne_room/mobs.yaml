@@ -189,7 +189,6 @@ templates:
     id:            1132
     species:       kindred
     type:          [battlefield]
-    spell_list_id: 31
     skill_list_id: 358
     attributes:
       combat:
@@ -216,7 +215,6 @@ templates:
     display_name:  Duke_Dantalian
     species:       kindred
     type:          [battlefield]
-    spell_list_id: 31
     skill_list_id: 358
     attributes:
       combat:

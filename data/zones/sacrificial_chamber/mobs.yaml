@@ -474,7 +474,6 @@ templates:
     id:            4224
     species:       tonberry
     type:          [notorious, battlefield]
-    spell_list_id: 141
     skill_list_id: 243
     attributes:
       combat:
@@ -501,7 +500,6 @@ templates:
     display_name:  Vermilion-eared_Noberry
     species:       tonberry
     type:          [notorious, battlefield]
-    spell_list_id: 141
     skill_list_id: 243
     attributes:
       combat:
