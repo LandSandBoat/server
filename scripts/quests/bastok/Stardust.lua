@@ -104,7 +104,10 @@ quest.sections =
                 end,
 
                 [555] = function(player, csid, option, npc)
-                    if quest:complete(player) then
+                    if
+                        not quest:getMustZone(player) and
+                        quest:complete(player)
+                    then
                         player:tradeComplete()
                         quest:setMustZone(player)
                     end
