@@ -2384,8 +2384,8 @@ INSERT INTO `item_basic` VALUES (2388,0,'chunk_of_diorite','diorite','ダイオ�
 INSERT INTO `item_basic` VALUES (2389,0,'speed_apple','speed_apple','スピードアップル',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,24);
 INSERT INTO `item_basic` VALUES (2390,0,'stamina_apple','stamina_apple','スタミナアップル',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,48);
 INSERT INTO `item_basic` VALUES (2391,0,'shadow_apple','shadow_apple','シャドウアップル',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,75);
-INSERT INTO `item_basic` VALUES (2392,0,'pepper_biscuit','pepper_biscuit','ペッパークッキー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,87);
-INSERT INTO `item_basic` VALUES (2393,0,'fire_biscuit','fire_biscuit','ホットクッキー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,87);
+INSERT INTO `item_basic` VALUES (2392,0,'pepper_biscuit','pepper_biscuit','ペッパークッキー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,20);
+INSERT INTO `item_basic` VALUES (2393,0,'fire_biscuit','fire_biscuit','ホットクッキー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,34);
 INSERT INTO `item_basic` VALUES (2394,0,'gysahl_bomb','gysahl_bomb','ギサールクラッカー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,95);
 INSERT INTO `item_basic` VALUES (2395,0,'spore_bomb','spore_bomb','マッシュクラッカー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,245);
 INSERT INTO `item_basic` VALUES (2396,0,'fairweather_fetish','fairwth._fetish','照る照る坊主',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@PET_ITEMS,35);
@@ -4490,7 +4490,7 @@ INSERT INTO `item_basic` VALUES (4600,0,'lucky_egg','lucky_egg','幸運の卵',@
 INSERT INTO `item_basic` VALUES (4601,0,'bowl_of_sopa_de_pez_blanco','sopa_pez_blanco','真白身魚のシチュー',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SOUPS,1100);
 INSERT INTO `item_basic` VALUES (4602,0,'warm_egg','warm_egg','温かい卵',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@INGREDIENTS,500);
 INSERT INTO `item_basic` VALUES (4603,0,'cup_of_chamomile_tea','chamomile_tea','カモミールティー',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@DRINKS,93);
-INSERT INTO `item_basic` VALUES (4604,0,'rogue_rice_ball','rogue_rice_ball','山賊おにぎり',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,153);
+INSERT INTO `item_basic` VALUES (4604,0,'rogue_rice_ball','rogue_rice_ball','山賊おにぎり',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,80);
 INSERT INTO `item_basic` VALUES (4605,0,'naval_rice_ball','naval_rice_ball','水軍おにぎり',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,153);
 INSERT INTO `item_basic` VALUES (4606,23,'scroll_of_dia_ex','dia','ディア',@USABLE_TYPE,1,@FLAG_MOG_GARDEN | @FLAG_NOAUCTION | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (4607,159,'scroll_of_stone_ex','stone','ストーン',@USABLE_TYPE,1,@FLAG_MOG_GARDEN | @FLAG_NOAUCTION | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
@@ -5009,7 +5009,7 @@ INSERT INTO `item_basic` VALUES (5190,0,'dish_of_spaghetti_carbonara','carbonara
 INSERT INTO `item_basic` VALUES (5191,0,'dish_of_spaghetti_pescatora','pescatora','ペスカトーレ',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,915);
 INSERT INTO `item_basic` VALUES (5192,0,'dish_of_spaghetti_boscaiola','boscaiola','ボスカイオーラ',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,715);
 INSERT INTO `item_basic` VALUES (5193,0,'dish_of_spaghetti_nero_di_seppia','nero_di_seppia','ネロディセピア',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,660);
-INSERT INTO `item_basic` VALUES (5194,0,'bowl_of_pomodoro_sauce','pomodoro_sauce','ポモドーロソース',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,232);
+INSERT INTO `item_basic` VALUES (5194,0,'bowl_of_pomodoro_sauce','pomodoro_sauce','ポモドーロソース',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,85);
 INSERT INTO `item_basic` VALUES (5195,0,'sprig_of_misareaux_parsley','misx._parsley','ミザレオパセリ',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,79);
 INSERT INTO `item_basic` VALUES (5196,0,'strip_of_buffalo_jerky','buffalo_jerky','野牛の干し肉',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@MEAT_EGGS,168);
 INSERT INTO `item_basic` VALUES (5197,0,'dish_of_spaghetti_peperoncino_+1','peperoncino_+1','ペペロンチーノ+1',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@BREADS_RICE,575);
@@ -5371,8 +5371,8 @@ INSERT INTO `item_basic` VALUES (5553,0,'serving_of_dusky_indulgence','dusky_ind
 INSERT INTO `item_basic` VALUES (5554,0,'serving_of_squirrels_delight','squirrels_delight','リスの忘れ物',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,400);
 INSERT INTO `item_basic` VALUES (5555,0,'serving_of_flurry_courante','flurry_courante','細雪のダンス',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,616);
 INSERT INTO `item_basic` VALUES (5556,0,'cone_of_seraphs_kiss','seraphs_kiss','氷の女王の微笑み',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,900);
-INSERT INTO `item_basic` VALUES (5557,0,'serving_of_mont_blanc','mont_blanc','モンブラン',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,390);
-INSERT INTO `item_basic` VALUES (5558,0,'serving_of_golden_royale','golden_royale','白銀の貴婦人',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,487);
+INSERT INTO `item_basic` VALUES (5557,0,'serving_of_mont_blanc','mont_blanc','モンブラン',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,128);
+INSERT INTO `item_basic` VALUES (5558,0,'serving_of_golden_royale','golden_royale','白銀の貴婦人',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,132);
 INSERT INTO `item_basic` VALUES (5559,0,'serving_of_mille-feuille','mille-feuille','ミルフィーユ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,128);
 INSERT INTO `item_basic` VALUES (5560,0,'serving_of_elysian_eclair','elysian_eclair','谷間の姫百合',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SWEETS,132);
 INSERT INTO `item_basic` VALUES (5561,0,'moogle_pie','moogle_pie','モーグリパイ',@USABLE_TYPE,1,@FLAG_MOG_GARDEN | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,242);
