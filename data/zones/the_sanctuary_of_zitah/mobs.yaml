@@ -763,8 +763,6 @@ templates:
         entity_flags: 643
         model_size:     1
         hitbox:        11
-      behaviors:
-        links: true
       spawn:
         type: [scripted]
 
@@ -1173,7 +1171,6 @@ templates:
         hitbox:        20
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 7200
       stats:

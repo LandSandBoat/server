@@ -100,7 +100,6 @@ templates:
         hitbox:         36
       behaviors:
         aggressive: true
-        links:      true
       mob_mods:
         exp_bonus: 23
       spawn:
