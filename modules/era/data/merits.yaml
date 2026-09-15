@@ -224,7 +224,7 @@ merits:
         diabolic_eye:
           value: 150
         desperate_blows:
-          value: 5
+          value: 500
 
     bst_group_1:
       merits:
