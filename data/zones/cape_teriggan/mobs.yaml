@@ -665,7 +665,6 @@ templates:
         hitbox:        32
       behaviors:
         aggressive: true
-        links:      true
       mob_mods:
         exp_bonus: 10
       spawn:
@@ -1194,7 +1193,6 @@ templates:
         hitbox:        27
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 300
     loot:
