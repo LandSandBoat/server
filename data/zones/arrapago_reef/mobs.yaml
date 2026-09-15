@@ -926,8 +926,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -961,8 +959,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -997,8 +993,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1033,8 +1027,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1088,8 +1080,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1123,8 +1113,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1233,8 +1221,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1408,8 +1394,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1501,8 +1485,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1534,8 +1516,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1568,8 +1548,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1701,8 +1679,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1876,8 +1852,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1911,8 +1885,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1947,8 +1919,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -1984,8 +1954,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2091,8 +2059,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2128,8 +2094,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2162,8 +2126,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2196,8 +2158,6 @@ templates:
         hitbox:         13
       behaviors:
         aggressive: true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2229,8 +2189,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2362,8 +2320,6 @@ templates:
         aggressive:     true
         links:          true
         true_detection: true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2398,8 +2354,6 @@ templates:
         aggressive:     true
         links:          true
         true_detection: true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2432,8 +2386,6 @@ templates:
         aggressive:     true
         links:          true
         true_detection: true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
@@ -2466,8 +2418,6 @@ templates:
         aggressive:     true
         links:          true
         true_detection: true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:

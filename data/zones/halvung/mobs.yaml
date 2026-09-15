@@ -204,8 +204,6 @@ templates:
       behaviors:
         aggressive: true
         links:      true
-      mob_mods:
-        exp_bonus: 6
       spawn:
         respawn: 960
     loot:
