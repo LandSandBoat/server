@@ -224,6 +224,14 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Overlords_Tombstone:
     id:            3076
@@ -1794,7 +1802,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190

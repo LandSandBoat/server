@@ -523,6 +523,14 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Gabblox_Magpietongue:
     id:            1444
@@ -3644,8 +3652,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190

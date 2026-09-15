@@ -1028,8 +1028,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 3300
-        mp: 1000
+        hp:  3300
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Hydras_Wyvern:
     id:            2033
@@ -1094,7 +1101,7 @@ templates:
 
   Kindred_Bard:
     id:            2232
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 6
     skill_list_id: 358
     attributes:
@@ -1129,7 +1136,7 @@ templates:
 
   Kindred_Beastmaster:
     id:            2233
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1163,7 +1170,7 @@ templates:
 
   Kindred_Black_Mage:
     id:            2234
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 21
     skill_list_id: 358
     attributes:
@@ -1199,7 +1206,7 @@ templates:
 
   Kindred_Dark_Knight:
     id:            2235
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 5
     skill_list_id: 358
     attributes:
@@ -1234,7 +1241,7 @@ templates:
 
   Kindred_Dragoon:
     id:            2236
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1268,7 +1275,7 @@ templates:
 
   Kindred_Monk:
     id:            2237
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1302,7 +1309,7 @@ templates:
 
   Kindred_Ninja:
     id:            2238
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 7
     skill_list_id: 358
     attributes:
@@ -1338,7 +1345,7 @@ templates:
 
   Kindred_Paladin:
     id:            2239
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 4
     skill_list_id: 358
     attributes:
@@ -1373,7 +1380,7 @@ templates:
 
   Kindred_Ranger:
     id:            2240
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1407,7 +1414,7 @@ templates:
 
   Kindred_Red_Mage:
     id:            2241
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 3
     skill_list_id: 358
     attributes:
@@ -1442,7 +1449,7 @@ templates:
 
   Kindred_Samurai:
     id:            2242
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1476,7 +1483,7 @@ templates:
 
   Kindred_Summoner:
     id:            2243
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 31
     skill_list_id: 358
     attributes:
@@ -1512,7 +1519,7 @@ templates:
 
   Kindred_Thief:
     id:            2248
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1546,7 +1553,7 @@ templates:
 
   Kindred_Warrior:
     id:            2249
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 358
     attributes:
       combat:
@@ -1579,7 +1586,7 @@ templates:
 
   Kindred_White_Mage:
     id:            2250
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 20
     skill_list_id: 358
     attributes:
@@ -1655,7 +1662,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 3300
+        hp:  3300
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Kindreds_Wyvern:
     id:            2247
@@ -1740,7 +1754,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1774,7 +1795,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1810,7 +1838,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1843,7 +1878,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1878,7 +1920,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1914,7 +1963,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 10000
+        hp:  10000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1952,7 +2008,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1967,7 +2030,7 @@ templates:
 
   Prototype_Eye:
     id:            5121
-    species:       ahriman
+    species:       dynamis_ahriman
     type:          [notorious]
     spell_list_id: 11
     skill_list_id: 4
@@ -2103,7 +2166,7 @@ templates:
 
   Vanguard_Eye:
     id:            4149
-    species:       ahriman
+    species:       dynamis_ahriman
     type:          [notorious]
     spell_list_id: 11
     skill_list_id: 4

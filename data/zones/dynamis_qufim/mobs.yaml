@@ -90,7 +90,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 37000
+        hp:  37000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -123,6 +130,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: common
@@ -262,6 +277,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -301,6 +324,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -340,6 +371,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -414,7 +453,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -451,7 +497,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -487,7 +540,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -523,7 +583,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -558,7 +625,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -593,7 +667,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -629,7 +710,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -666,7 +754,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -700,7 +795,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -735,7 +837,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -770,7 +879,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -805,7 +921,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -841,7 +964,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -877,7 +1007,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -912,7 +1049,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -947,7 +1091,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -983,7 +1134,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1019,7 +1177,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -1059,7 +1224,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -1134,7 +1306,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -1173,7 +1352,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -7068,7 +7254,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Hecteyes:
     id:            4187
@@ -7099,7 +7292,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Scorpion:
     id:            4188
@@ -7128,7 +7328,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Slime:
     id:            4189
@@ -7158,7 +7365,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190

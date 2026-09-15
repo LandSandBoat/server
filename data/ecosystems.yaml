@@ -7196,6 +7196,45 @@ ecosystems:
                   gravity:      0
               mods:
                 mdef: 20
+          dynamis_ahriman:
+            id: 500
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              resists:
+                rank_element:
+                  fire:     1
+                  ice:      1
+                  wind:     1
+                  earth:    1
+                  thunder:  1
+                  water:    1
+                  light:   -1
+                  dark:     7
+                rank_status:
+                  paralyze:     1
+                  bind:         1
+                  silence:      1
+                  slow:         1
+                  poison:       1
+                  light_sleep: -1
+                  dark_sleep:   7
+                  blind:        7
+                  stun:         1
+                  gravity:      1
+                dmg_magic:
+                  all: -2500
+              mob_mods:
+                ga_chance:    60
+                hp_standback: -1
+              mods:
+                mdef: 150
           shadow_eyes:
             id: 197
             attributes:
@@ -7293,6 +7332,46 @@ ecosystems:
                   blind:        0
                   stun:         0
                   gravity:      0
+          dynamis_kindred:
+            id: 498
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              detects:
+                - sight
+                - scent
+              resists:
+                dmg_magic:
+                  all: -2500
+                rank_element:
+                  fire:     0
+                  ice:      0
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:    0
+                  light:   -2
+                  dark:     0
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:      0
+                  slow:         0
+                  poison:       0
+                  light_sleep: -2
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         0
+                  gravity:      0
+              mob_mods:
+                sublink:      1
+                link_radius: 15
           golden_demon:
             id: 200
             attributes:
@@ -13964,6 +14043,41 @@ ecosystems:
             roam_rate:  15
             roam_turns:  2
         species:
+          dynamis_fomor:
+            id: 499
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              detects:
+                - hearing
+                - lowhp
+              resists:
+                rank_element:
+                  fire:    -2
+                  ice:      4
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:    0
+                  light:   -2
+                  dark:     4
+                rank_status:
+                  paralyze:     4
+                  bind:         4
+                  silence:      0
+                  slow:         0
+                  poison:       0
+                  light_sleep: -2
+                  dark_sleep:   4
+                  blind:        4
+                  stun:         0
+                  gravity:      0
           ephramadian:
             id: 401
             attributes:
@@ -14066,12 +14180,13 @@ ecosystems:
             id: 404
             attributes:
               stats:
-                str: d
-                dex: d
-                vit: d
-                agi: e
-                int: d
-                mnd: d
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 rank_element:
                   fire:    -2
@@ -16982,6 +17097,14 @@ ecosystems:
           goblin_statue:
             id: 478
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -17012,11 +17135,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         112
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           orc_statue:
             id: 479
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -17047,11 +17179,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:          62
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           quadav_statue:
             id: 480
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -17082,11 +17223,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         112
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           yagudo_statue:
             id: 481
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -17117,8 +17267,9 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         162
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
       ultima:
         id: 206
         species:

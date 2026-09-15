@@ -2479,7 +2479,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190
