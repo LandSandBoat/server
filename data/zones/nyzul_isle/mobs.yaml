@@ -5784,7 +5784,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [rdm, war]
+      jobs:    [rdm, war]
+      element: fire
       resists:
         rank_element:
           fire:    10

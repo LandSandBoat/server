@@ -1943,7 +1943,7 @@ templates:
   Seiryu_ER:
     id:            5691
     display_name:  Seiryu
-    species:       wyvern
+    species:       legendary_wyvern
     type:          [notorious]
     spell_list_id: 25
     skill_list_id: 278
@@ -1953,24 +1953,6 @@ templates:
         delay:    360
         dmg_mult: 125
       jobs: [mnk, blm]
-      resists:
-        rank_element:
-          ice:     -2
-          wind:    10
-          earth:   10
-          thunder:  4
-          water:    4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     10
-          slow:        10
-          poison:       4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1998,7 +1980,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [rdm, rdm]
+      jobs:    [rdm, rdm]
+      element: fire
       resists:
         rank_element:
           fire:    10
