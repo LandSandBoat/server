@@ -230,7 +230,7 @@ templates:
 
   Chepelles_Hare:
     id:            7068
-    species:       lapinion
+    species:       rabbit
     type:          [called]
     skill_list_id: 206
     attributes:

@@ -1179,7 +1179,7 @@ templates:
 
   Sabotender_Campeador:
     id:            6851
-    species:       sabotender
+    species:       sabotender_florido
     type:          [notorious]
     skill_list_id: 212
     attributes:

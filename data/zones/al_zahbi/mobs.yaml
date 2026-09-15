@@ -509,7 +509,7 @@ templates:
 
   Dartorgor_the_Austere:
     id:            922
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -534,7 +534,7 @@ templates:
 
   Decimator_Mabel_Ja:
     id:            944
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -620,7 +620,7 @@ templates:
 
   Eidolic_Qufeel_Ja:
     id:            1182
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -824,7 +824,7 @@ templates:
 
   Fleetfingered_Mobel_Ja:
     id:            1365
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1073,7 +1073,7 @@ templates:
 
   Girzorhor_the_Imprudent:
     id:            1608
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1119,7 +1119,7 @@ templates:
 
   Gulool_Ja_Ja:
     id:            1846
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
@@ -1166,7 +1166,7 @@ templates:
   Gulool_Ja_Ja_Besieged:
     id:            7142
     display_name:  Gulool_Ja_Ja
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
@@ -1212,7 +1212,7 @@ templates:
 
   Gurfurlur_the_Menacing:
     id:            1851
-    species:       troll
+    species:       general
     type:          [notorious]
     skill_list_id: 326
     attributes:
@@ -1220,26 +1220,9 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 125
+      mods:
+        udmgbreath: -6725
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    7
-          ice:     7
-          wind:    2
-          earth:   7
-          thunder: 7
-          water:   2
-          light:   4
-          dark:    4
-        rank_status:
-          paralyze:    7
-          bind:        7
-          silence:     2
-          slow:        7
-          poison:      2
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -1258,7 +1241,7 @@ templates:
   Gurfurlur_the_Menacing_Besieged:
     id:            7153
     display_name:  Gurfurlur_the_Menacing
-    species:       troll
+    species:       general
     type:          [notorious]
     skill_list_id: 326
     attributes:
@@ -1266,26 +1249,9 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 125
+      mods:
+        udmgbreath: -6725
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    7
-          ice:     7
-          wind:    2
-          earth:   7
-          thunder: 7
-          water:   2
-          light:   4
-          dark:    4
-        rank_status:
-          paralyze:    7
-          bind:        7
-          silence:     2
-          slow:        7
-          poison:      2
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -1845,7 +1811,7 @@ templates:
 
   Mamool_Ja_Cataphract:
     id:            2510
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1868,7 +1834,7 @@ templates:
   Mamool_Ja_Cataphract_Small:
     id:            7136
     display_name:  Mamool_Ja_Cataphract
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1889,7 +1855,7 @@ templates:
 
   Mamool_Ja_Entrancer:
     id:            2514
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -1912,7 +1878,7 @@ templates:
 
   Mamool_Ja_Fetial:
     id:            2517
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -1935,7 +1901,7 @@ templates:
 
   Mamool_Ja_Handler:
     id:            2519
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1957,7 +1923,7 @@ templates:
 
   Mamool_Ja_Hospitaler:
     id:            2520
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 176
     attributes:
@@ -1981,7 +1947,7 @@ templates:
   Mamool_Ja_Hospitaler_Small:
     id:            7134
     display_name:  Mamool_Ja_Hospitaler
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 176
     attributes:
@@ -2003,7 +1969,7 @@ templates:
 
   Mamool_Ja_Hussar:
     id:            2521
-    species:       knight
+    species:       knight_ja
     spell_list_id: 4
     skill_list_id: 177
     attributes:
@@ -2024,7 +1990,7 @@ templates:
   Mamool_Ja_Hussar_Small:
     id:            7143
     display_name:  Mamool_Ja_Hussar
-    species:       knight
+    species:       knight_ja
     spell_list_id: 4
     skill_list_id: 177
     attributes:
@@ -2043,7 +2009,7 @@ templates:
 
   Mamool_Ja_Ravager:
     id:            2530
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2065,7 +2031,7 @@ templates:
 
   Mamool_Ja_Sapper:
     id:            2532
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2088,7 +2054,7 @@ templates:
   Mamool_Ja_Sapper_Small:
     id:            7133
     display_name:  Mamool_Ja_Sapper
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2109,7 +2075,7 @@ templates:
 
   Mamool_Ja_Spotter:
     id:            2536
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2132,7 +2098,7 @@ templates:
   Mamool_Ja_Spotter_Small:
     id:            7135
     display_name:  Mamool_Ja_Spotter
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2496,7 +2462,7 @@ templates:
 
   Panurgic_Ryubool_Ja:
     id:            3093
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -2832,7 +2798,7 @@ templates:
   Sagelord_Molaal_Ja_WW:
     id:            3437
     display_name:  Sagelord_Molaal_Ja
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -2858,7 +2824,7 @@ templates:
 
   Scalding_Fafool_Ja:
     id:            3493
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -2923,7 +2889,7 @@ templates:
 
   Searing_Vogaal_Ja:
     id:            3516
-    species:       knight
+    species:       knight_ja
     spell_list_id: 4
     skill_list_id: 177
     attributes:
@@ -3009,7 +2975,7 @@ templates:
 
   Strifelord_Bakool_Ja:
     id:            3789
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -3034,7 +3000,7 @@ templates:
 
   Surmerdar_the_Unbridled:
     id:            3812
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3078,7 +3044,7 @@ templates:
 
   Thunderclap_Sareel_Ja:
     id:            3910
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -3103,7 +3069,7 @@ templates:
 
   Troll_Cannoneer:
     id:            4011
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3125,7 +3091,7 @@ templates:
   Troll_Cannoneer_Small:
     id:            7146
     display_name:  Troll_Cannoneer
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3145,7 +3111,7 @@ templates:
 
   Troll_Destroyer:
     id:            4014
-    species:       troll
+    species:       destroyer
     skill_list_id: 247
     attributes:
       combat:
@@ -3166,7 +3132,7 @@ templates:
   Troll_Destroyer_Small:
     id:            7154
     display_name:  Troll_Destroyer
-    species:       troll
+    species:       destroyer
     skill_list_id: 247
     attributes:
       combat:
@@ -3185,7 +3151,7 @@ templates:
 
   Troll_Forager:
     id:            4016
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -3205,7 +3171,7 @@ templates:
 
   Troll_Hoplite:
     id:            4020
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -3228,7 +3194,7 @@ templates:
   Troll_Hoplite_Small:
     id:            7145
     display_name:  Troll_Hoplite
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -3249,7 +3215,7 @@ templates:
 
   Troll_Paviser:
     id:            4025
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -3269,7 +3235,7 @@ templates:
 
   Troll_Pezhetairoi:
     id:            4026
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -3291,7 +3257,7 @@ templates:
 
   Troll_Speculator:
     id:            4031
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3313,7 +3279,7 @@ templates:
   Troll_Speculator_Small:
     id:            7147
     display_name:  Troll_Speculator
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3333,7 +3299,7 @@ templates:
 
   Troll_Stormer:
     id:            4033
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -3356,7 +3322,7 @@ templates:
   Troll_Stormer_Small:
     id:            7144
     display_name:  Troll_Stormer
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -3377,7 +3343,7 @@ templates:
 
   Troll_Velites:
     id:            4037
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3439,7 +3405,7 @@ templates:
 
   Vorjirzur_the_Valiant:
     id:            4255
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 246
     attributes:
@@ -3465,7 +3431,7 @@ templates:
 
   Vorporlor_the_Barbaric:
     id:            4257
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 246
     attributes:
@@ -3491,7 +3457,7 @@ templates:
 
   Vyurvarjur_the_Nimble:
     id:            4269
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3671,7 +3637,7 @@ templates:
 
   Wordorbor_the_Artificer:
     id:            4373
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -3696,7 +3662,7 @@ templates:
 
   Xarhorkur_the_Claviger:
     id:            4393
-    species:       troll
+    species:       destroyer
     skill_list_id: 246
     attributes:
       combat:
@@ -3720,7 +3686,7 @@ templates:
 
   Zurmurwur_the_Ruthless:
     id:            4524
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 246
     attributes:

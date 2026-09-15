@@ -90,6 +90,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: common
@@ -160,7 +168,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 37000
+        hp:  37000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -193,7 +208,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -300,6 +322,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -340,6 +370,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -378,6 +416,14 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -455,7 +501,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -491,7 +544,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -527,7 +587,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -564,7 +631,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -601,7 +675,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -635,7 +716,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -670,7 +758,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -706,7 +801,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -743,7 +845,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -778,7 +887,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -814,7 +930,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -849,7 +972,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -885,7 +1015,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -922,7 +1059,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -959,7 +1103,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -995,7 +1146,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1031,7 +1189,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -1065,7 +1230,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -1100,7 +1272,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 5000
+        hp:  5000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: rare
@@ -1174,7 +1353,14 @@ templates:
       spawn:
         respawn: 900
       stats:
-        hp: 20000
+        hp:  20000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -1191,7 +1377,7 @@ templates:
 
   Vanguard_Alchemist:
     id:            4133
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -1225,7 +1411,7 @@ templates:
   Vanguard_Alchemist_2:
     id:            4133
     display_name:  Vanguard_Alchemist
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -1259,7 +1445,7 @@ templates:
   Vanguard_Alchemist_Large:
     id:            7255
     display_name:  Vanguard_Alchemist
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -1292,7 +1478,7 @@ templates:
 
   Vanguard_Ambusher:
     id:            4134
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -1325,7 +1511,7 @@ templates:
   Vanguard_Ambusher_2:
     id:            4134
     display_name:  Vanguard_Ambusher
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -1358,7 +1544,7 @@ templates:
   Vanguard_Ambusher_Large:
     id:            7249
     display_name:  Vanguard_Ambusher
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -1390,7 +1576,7 @@ templates:
 
   Vanguard_Amputator:
     id:            4135
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -1424,7 +1610,7 @@ templates:
   Vanguard_Amputator_2:
     id:            4135
     display_name:  Vanguard_Amputator
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -1458,7 +1644,7 @@ templates:
   Vanguard_Amputator_Large:
     id:            7220
     display_name:  Vanguard_Amputator
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -1491,7 +1677,7 @@ templates:
 
   Vanguard_Armorer:
     id:            4136
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -1527,7 +1713,7 @@ templates:
   Vanguard_Armorer_2:
     id:            4136
     display_name:  Vanguard_Armorer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -1563,7 +1749,7 @@ templates:
   Vanguard_Armorer_Large:
     id:            7246
     display_name:  Vanguard_Armorer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -1596,7 +1782,7 @@ templates:
 
   Vanguard_Assassin:
     id:            4137
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 7
     skill_list_id: 2106
     attributes:
@@ -1632,7 +1818,7 @@ templates:
   Vanguard_Assassin_2:
     id:            4137
     display_name:  Vanguard_Assassin
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 7
     skill_list_id: 2106
     attributes:
@@ -1668,7 +1854,7 @@ templates:
   Vanguard_Assassin_Large:
     id:            7229
     display_name:  Vanguard_Assassin
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 7
     skill_list_id: 2106
     attributes:
@@ -1701,7 +1887,7 @@ templates:
 
   Vanguard_Backstabber:
     id:            4138
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -1737,7 +1923,7 @@ templates:
   Vanguard_Backstabber_2:
     id:            4138
     display_name:  Vanguard_Backstabber
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -1773,7 +1959,7 @@ templates:
   Vanguard_Backstabber_Large:
     id:            7216
     display_name:  Vanguard_Backstabber
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -1806,7 +1992,7 @@ templates:
 
   Vanguard_Beasttender:
     id:            4139
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1842,7 +2028,7 @@ templates:
   Vanguard_Beasttender_2:
     id:            4139
     display_name:  Vanguard_Beasttender
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1878,7 +2064,7 @@ templates:
   Vanguard_Beasttender_Large:
     id:            7201
     display_name:  Vanguard_Beasttender
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1911,7 +2097,7 @@ templates:
 
   Vanguard_Bugler:
     id:            4140
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -1947,7 +2133,7 @@ templates:
   Vanguard_Bugler_2:
     id:            4140
     display_name:  Vanguard_Bugler
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -1983,7 +2169,7 @@ templates:
   Vanguard_Bugler_Large:
     id:            7227
     display_name:  Vanguard_Bugler
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -2016,7 +2202,7 @@ templates:
 
   Vanguard_Chanter:
     id:            4141
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 6
     skill_list_id: 2106
     attributes:
@@ -2052,7 +2238,7 @@ templates:
   Vanguard_Chanter_2:
     id:            4141
     display_name:  Vanguard_Chanter
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 6
     skill_list_id: 2106
     attributes:
@@ -2087,7 +2273,7 @@ templates:
 
   Vanguard_Constable:
     id:            4142
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -2122,7 +2308,7 @@ templates:
   Vanguard_Constable_2:
     id:            4142
     display_name:  Vanguard_Constable
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -2157,7 +2343,7 @@ templates:
   Vanguard_Constable_Large:
     id:            7205
     display_name:  Vanguard_Constable
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -2191,7 +2377,7 @@ templates:
 
   Vanguard_Defender:
     id:            4143
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -2228,7 +2414,7 @@ templates:
   Vanguard_Defender_2:
     id:            4143
     display_name:  Vanguard_Defender
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -2265,7 +2451,7 @@ templates:
   Vanguard_Defender_Large:
     id:            7200
     display_name:  Vanguard_Defender
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -2299,7 +2485,7 @@ templates:
 
   Vanguard_Dollmaster:
     id:            4144
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -2333,7 +2519,7 @@ templates:
   Vanguard_Dollmaster_2:
     id:            4144
     display_name:  Vanguard_Dollmaster
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -2367,7 +2553,7 @@ templates:
   Vanguard_Dollmaster_Large:
     id:            7223
     display_name:  Vanguard_Dollmaster
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -2400,7 +2586,7 @@ templates:
 
   Vanguard_Dragontamer:
     id:            4649
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2435,7 +2621,7 @@ templates:
   Vanguard_Dragontamer_2:
     id:            4649
     display_name:  Vanguard_Dragontamer
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2470,7 +2656,7 @@ templates:
   Vanguard_Dragontamer_Large:
     id:            7254
     display_name:  Vanguard_Dragontamer
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2502,7 +2688,7 @@ templates:
 
   Vanguard_Drakekeeper:
     id:            4146
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2537,7 +2723,7 @@ templates:
   Vanguard_Drakekeeper_2:
     id:            4146
     display_name:  Vanguard_Drakekeeper
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2572,7 +2758,7 @@ templates:
   Vanguard_Drakekeeper_Large:
     id:            7208
     display_name:  Vanguard_Drakekeeper
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2604,7 +2790,7 @@ templates:
 
   Vanguard_Enchanter:
     id:            4147
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -2640,7 +2826,7 @@ templates:
   Vanguard_Enchanter_2:
     id:            4147
     display_name:  Vanguard_Enchanter
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -2676,7 +2862,7 @@ templates:
   Vanguard_Enchanter_Large:
     id:            7244
     display_name:  Vanguard_Enchanter
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -2709,7 +2895,7 @@ templates:
 
   Vanguard_Exemplar:
     id:            4148
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 4
     skill_list_id: 2106
     attributes:
@@ -2745,7 +2931,7 @@ templates:
   Vanguard_Exemplar_2:
     id:            4148
     display_name:  Vanguard_Exemplar
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 4
     skill_list_id: 2106
     attributes:
@@ -2781,7 +2967,7 @@ templates:
   Vanguard_Exemplar_Large:
     id:            7233
     display_name:  Vanguard_Exemplar
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 4
     skill_list_id: 2106
     attributes:
@@ -2814,7 +3000,7 @@ templates:
 
   Vanguard_Footsoldier:
     id:            4150
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -2848,7 +3034,7 @@ templates:
   Vanguard_Footsoldier_2:
     id:            4150
     display_name:  Vanguard_Footsoldier
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -2882,7 +3068,7 @@ templates:
   Vanguard_Footsoldier_Large:
     id:            7214
     display_name:  Vanguard_Footsoldier
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -2913,7 +3099,7 @@ templates:
 
   Vanguard_Grappler:
     id:            4151
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -2947,7 +3133,7 @@ templates:
   Vanguard_Grappler_2:
     id:            4151
     display_name:  Vanguard_Grappler
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -2981,7 +3167,7 @@ templates:
   Vanguard_Grappler_Large:
     id:            7217
     display_name:  Vanguard_Grappler
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3014,7 +3200,7 @@ templates:
 
   Vanguard_Gutslasher:
     id:            4152
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3049,7 +3235,7 @@ templates:
   Vanguard_Gutslasher_2:
     id:            4152
     display_name:  Vanguard_Gutslasher
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3083,7 +3269,7 @@ templates:
 
   Vanguard_Hatamoto:
     id:            4153
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3119,7 +3305,7 @@ templates:
   Vanguard_Hatamoto_2:
     id:            4153
     display_name:  Vanguard_Hatamoto
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3155,7 +3341,7 @@ templates:
   Vanguard_Hatamoto_Large:
     id:            7206
     display_name:  Vanguard_Hatamoto
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3188,7 +3374,7 @@ templates:
 
   Vanguard_Hawker:
     id:            4154
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3223,7 +3409,7 @@ templates:
   Vanguard_Hawker_2:
     id:            4154
     display_name:  Vanguard_Hawker
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3258,7 +3444,7 @@ templates:
   Vanguard_Hawker_Large:
     id:            7225
     display_name:  Vanguard_Hawker
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -3290,7 +3476,7 @@ templates:
 
   Vanguard_Hitman:
     id:            4155
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3326,7 +3512,7 @@ templates:
   Vanguard_Hitman_2:
     id:            4155
     display_name:  Vanguard_Hitman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3362,7 +3548,7 @@ templates:
   Vanguard_Hitman_Large:
     id:            7252
     display_name:  Vanguard_Hitman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3395,7 +3581,7 @@ templates:
 
   Vanguard_Impaler:
     id:            4156
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2103
     attributes:
       combat:
@@ -3431,7 +3617,7 @@ templates:
   Vanguard_Impaler_2:
     id:            4156
     display_name:  Vanguard_Impaler
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2103
     attributes:
       combat:
@@ -3466,7 +3652,7 @@ templates:
 
   Vanguard_Inciter:
     id:            4157
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 5
     skill_list_id: 2106
     attributes:
@@ -3502,7 +3688,7 @@ templates:
   Vanguard_Inciter_2:
     id:            4157
     display_name:  Vanguard_Inciter
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 5
     skill_list_id: 2106
     attributes:
@@ -3538,7 +3724,7 @@ templates:
   Vanguard_Inciter_Large:
     id:            7236
     display_name:  Vanguard_Inciter
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 5
     skill_list_id: 2106
     attributes:
@@ -3571,7 +3757,7 @@ templates:
 
   Vanguard_Kusa:
     id:            4158
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -3608,7 +3794,7 @@ templates:
   Vanguard_Kusa_2:
     id:            4158
     display_name:  Vanguard_Kusa
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -3645,7 +3831,7 @@ templates:
   Vanguard_Kusa_Large:
     id:            7207
     display_name:  Vanguard_Kusa
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -3679,7 +3865,7 @@ templates:
 
   Vanguard_Liberator:
     id:            4159
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -3714,7 +3900,7 @@ templates:
   Vanguard_Liberator_2:
     id:            4159
     display_name:  Vanguard_Liberator
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -3749,7 +3935,7 @@ templates:
   Vanguard_Liberator_Large:
     id:            7232
     display_name:  Vanguard_Liberator
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -3781,7 +3967,7 @@ templates:
 
   Vanguard_Maestro:
     id:            4160
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3817,7 +4003,7 @@ templates:
   Vanguard_Maestro_2:
     id:            4160
     display_name:  Vanguard_Maestro
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3853,7 +4039,7 @@ templates:
   Vanguard_Maestro_Large:
     id:            7248
     display_name:  Vanguard_Maestro
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3886,7 +4072,7 @@ templates:
 
   Vanguard_Mason:
     id:            4161
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3920,7 +4106,7 @@ templates:
   Vanguard_Mason_2:
     id:            4161
     display_name:  Vanguard_Mason
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3954,7 +4140,7 @@ templates:
   Vanguard_Mason_Large:
     id:            7210
     display_name:  Vanguard_Mason
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -3987,7 +4173,7 @@ templates:
 
   Vanguard_Mesmerizer:
     id:            4162
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -4021,7 +4207,7 @@ templates:
   Vanguard_Mesmerizer_2:
     id:            4162
     display_name:  Vanguard_Mesmerizer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -4055,7 +4241,7 @@ templates:
   Vanguard_Mesmerizer_Large:
     id:            7224
     display_name:  Vanguard_Mesmerizer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -4088,7 +4274,7 @@ templates:
 
   Vanguard_Militant:
     id:            4163
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -4121,7 +4307,7 @@ templates:
   Vanguard_Militant_2:
     id:            4163
     display_name:  Vanguard_Militant
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -4154,7 +4340,7 @@ templates:
   Vanguard_Militant_Large:
     id:            7199
     display_name:  Vanguard_Militant
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -4186,7 +4372,7 @@ templates:
 
   Vanguard_Minstrel:
     id:            4164
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -4223,7 +4409,7 @@ templates:
   Vanguard_Minstrel_2:
     id:            4164
     display_name:  Vanguard_Minstrel
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -4260,7 +4446,7 @@ templates:
   Vanguard_Minstrel_Large:
     id:            7209
     display_name:  Vanguard_Minstrel
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -4294,7 +4480,7 @@ templates:
 
   Vanguard_Neckchopper:
     id:            4165
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -4330,7 +4516,7 @@ templates:
   Vanguard_Neckchopper_2:
     id:            4165
     display_name:  Vanguard_Neckchopper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -4366,7 +4552,7 @@ templates:
   Vanguard_Neckchopper_Large:
     id:            7213
     display_name:  Vanguard_Neckchopper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -4399,7 +4585,7 @@ templates:
 
   Vanguard_Necromancer:
     id:            4166
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -4433,7 +4619,7 @@ templates:
   Vanguard_Necromancer_2:
     id:            4166
     display_name:  Vanguard_Necromancer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -4467,7 +4653,7 @@ templates:
   Vanguard_Necromancer_Large:
     id:            7250
     display_name:  Vanguard_Necromancer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -4500,7 +4686,7 @@ templates:
 
   Vanguard_Ogresoother:
     id:            4167
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4535,7 +4721,7 @@ templates:
   Vanguard_Ogresoother_2:
     id:            4167
     display_name:  Vanguard_Ogresoother
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4570,7 +4756,7 @@ templates:
   Vanguard_Ogresoother_Large:
     id:            7234
     display_name:  Vanguard_Ogresoother
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4602,7 +4788,7 @@ templates:
 
   Vanguard_Oracle:
     id:            4168
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 141
     skill_list_id: 2106
     attributes:
@@ -4637,7 +4823,7 @@ templates:
   Vanguard_Oracle_2:
     id:            4168
     display_name:  Vanguard_Oracle
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 141
     skill_list_id: 2106
     attributes:
@@ -4671,7 +4857,7 @@ templates:
 
   Vanguard_Partisan:
     id:            4169
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4706,7 +4892,7 @@ templates:
   Vanguard_Partisan_2:
     id:            4169
     display_name:  Vanguard_Partisan
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4741,7 +4927,7 @@ templates:
   Vanguard_Partisan_Large:
     id:            7239
     display_name:  Vanguard_Partisan
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4773,7 +4959,7 @@ templates:
 
   Vanguard_Pathfinder:
     id:            4170
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4808,7 +4994,7 @@ templates:
   Vanguard_Pathfinder_2:
     id:            4170
     display_name:  Vanguard_Pathfinder
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4843,7 +5029,7 @@ templates:
   Vanguard_Pathfinder_Large:
     id:            7257
     display_name:  Vanguard_Pathfinder
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4875,7 +5061,7 @@ templates:
 
   Vanguard_Persecutor:
     id:            4171
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4910,7 +5096,7 @@ templates:
   Vanguard_Persecutor_2:
     id:            4171
     display_name:  Vanguard_Persecutor
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4945,7 +5131,7 @@ templates:
   Vanguard_Persecutor_Large:
     id:            7242
     display_name:  Vanguard_Persecutor
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -4977,7 +5163,7 @@ templates:
 
   Vanguard_Pillager:
     id:            4172
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5012,7 +5198,7 @@ templates:
   Vanguard_Pillager_2:
     id:            4172
     display_name:  Vanguard_Pillager
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5047,7 +5233,7 @@ templates:
   Vanguard_Pillager_Large:
     id:            7226
     display_name:  Vanguard_Pillager
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5079,7 +5265,7 @@ templates:
 
   Vanguard_Pitfighter:
     id:            4173
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5112,7 +5298,7 @@ templates:
   Vanguard_Pitfighter_2:
     id:            4173
     display_name:  Vanguard_Pitfighter
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5145,7 +5331,7 @@ templates:
   Vanguard_Pitfighter_Large:
     id:            7253
     display_name:  Vanguard_Pitfighter
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5177,7 +5363,7 @@ templates:
 
   Vanguard_Predator:
     id:            4174
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5210,7 +5396,7 @@ templates:
   Vanguard_Predator_2:
     id:            4174
     display_name:  Vanguard_Predator
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5243,7 +5429,7 @@ templates:
   Vanguard_Predator_Large:
     id:            7222
     display_name:  Vanguard_Predator
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -5275,7 +5461,7 @@ templates:
 
   Vanguard_Prelate:
     id:            4175
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 21
     skill_list_id: 2106
     attributes:
@@ -5309,7 +5495,7 @@ templates:
   Vanguard_Prelate_2:
     id:            4175
     display_name:  Vanguard_Prelate
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 21
     skill_list_id: 2106
     attributes:
@@ -5343,7 +5529,7 @@ templates:
   Vanguard_Prelate_Large:
     id:            7238
     display_name:  Vanguard_Prelate
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 21
     skill_list_id: 2106
     attributes:
@@ -5376,7 +5562,7 @@ templates:
 
   Vanguard_Priest:
     id:            4176
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 20
     skill_list_id: 2106
     attributes:
@@ -5410,7 +5596,7 @@ templates:
   Vanguard_Priest_2:
     id:            4176
     display_name:  Vanguard_Priest
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 20
     skill_list_id: 2106
     attributes:
@@ -5444,7 +5630,7 @@ templates:
   Vanguard_Priest_Large:
     id:            7235
     display_name:  Vanguard_Priest
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 20
     skill_list_id: 2106
     attributes:
@@ -5477,7 +5663,7 @@ templates:
 
   Vanguard_Protector:
     id:            4177
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -5514,7 +5700,7 @@ templates:
   Vanguard_Protector_2:
     id:            4177
     display_name:  Vanguard_Protector
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -5551,7 +5737,7 @@ templates:
   Vanguard_Protector_Large:
     id:            7198
     display_name:  Vanguard_Protector
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -5585,7 +5771,7 @@ templates:
 
   Vanguard_Purloiner:
     id:            4178
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5620,7 +5806,7 @@ templates:
   Vanguard_Purloiner_2:
     id:            4178
     display_name:  Vanguard_Purloiner
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5655,7 +5841,7 @@ templates:
   Vanguard_Purloiner_Large:
     id:            7203
     display_name:  Vanguard_Purloiner
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -5687,7 +5873,7 @@ templates:
 
   Vanguard_Ronin:
     id:            4179
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5722,7 +5908,7 @@ templates:
   Vanguard_Ronin_2:
     id:            4179
     display_name:  Vanguard_Ronin
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5757,7 +5943,7 @@ templates:
   Vanguard_Ronin_Large:
     id:            7251
     display_name:  Vanguard_Ronin
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -5789,7 +5975,7 @@ templates:
 
   Vanguard_Salvager:
     id:            4180
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5822,7 +6008,7 @@ templates:
   Vanguard_Salvager_2:
     id:            4180
     display_name:  Vanguard_Salvager
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5855,7 +6041,7 @@ templates:
   Vanguard_Salvager_Large:
     id:            7240
     display_name:  Vanguard_Salvager
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5887,7 +6073,7 @@ templates:
 
   Vanguard_Sentinel:
     id:            4181
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5921,7 +6107,7 @@ templates:
   Vanguard_Sentinel_2:
     id:            4181
     display_name:  Vanguard_Sentinel
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5955,7 +6141,7 @@ templates:
   Vanguard_Sentinel_Large:
     id:            7228
     display_name:  Vanguard_Sentinel
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -5988,7 +6174,7 @@ templates:
 
   Vanguard_Shaman:
     id:            4182
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -6022,7 +6208,7 @@ templates:
   Vanguard_Shaman_2:
     id:            4182
     display_name:  Vanguard_Shaman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -6056,7 +6242,7 @@ templates:
   Vanguard_Shaman_Large:
     id:            7247
     display_name:  Vanguard_Shaman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -6089,7 +6275,7 @@ templates:
 
   Vanguard_Skirmisher:
     id:            4183
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6123,7 +6309,7 @@ templates:
   Vanguard_Skirmisher_2:
     id:            4183
     display_name:  Vanguard_Skirmisher
-    species:       yagudo
+    species:       dynamis_yagudo
     skill_list_id: 2106
     attributes:
       combat:
@@ -6156,7 +6342,7 @@ templates:
 
   Vanguard_Smithy:
     id:            4184
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6190,7 +6376,7 @@ templates:
   Vanguard_Smithy_2:
     id:            4184
     display_name:  Vanguard_Smithy
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6224,7 +6410,7 @@ templates:
   Vanguard_Smithy_Large:
     id:            7243
     display_name:  Vanguard_Smithy
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -6255,7 +6441,7 @@ templates:
 
   Vanguard_Thaumaturge:
     id:            4191
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -6289,7 +6475,7 @@ templates:
   Vanguard_Thaumaturge_2:
     id:            4191
     display_name:  Vanguard_Thaumaturge
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -6323,7 +6509,7 @@ templates:
   Vanguard_Thaumaturge_Large:
     id:            7202
     display_name:  Vanguard_Thaumaturge
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -6356,7 +6542,7 @@ templates:
 
   Vanguard_Tinkerer:
     id:            4192
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -6392,7 +6578,7 @@ templates:
   Vanguard_Tinkerer_2:
     id:            4192
     display_name:  Vanguard_Tinkerer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -6428,7 +6614,7 @@ templates:
   Vanguard_Tinkerer_Large:
     id:            7256
     display_name:  Vanguard_Tinkerer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -6461,7 +6647,7 @@ templates:
 
   Vanguard_Trooper:
     id:            4193
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -6497,7 +6683,7 @@ templates:
   Vanguard_Trooper_2:
     id:            4193
     display_name:  Vanguard_Trooper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -6533,7 +6719,7 @@ templates:
   Vanguard_Trooper_Large:
     id:            7212
     display_name:  Vanguard_Trooper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -6566,7 +6752,7 @@ templates:
 
   Vanguard_Undertaker:
     id:            4194
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -6600,7 +6786,7 @@ templates:
   Vanguard_Undertaker_2:
     id:            4194
     display_name:  Vanguard_Undertaker
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -6634,7 +6820,7 @@ templates:
   Vanguard_Undertaker_Large:
     id:            7211
     display_name:  Vanguard_Undertaker
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -6667,7 +6853,7 @@ templates:
 
   Vanguard_Vexer:
     id:            4195
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -6703,7 +6889,7 @@ templates:
   Vanguard_Vexer_2:
     id:            4195
     display_name:  Vanguard_Vexer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -6739,7 +6925,7 @@ templates:
   Vanguard_Vexer_Large:
     id:            7215
     display_name:  Vanguard_Vexer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -6772,7 +6958,7 @@ templates:
 
   Vanguard_Vigilante:
     id:            4196
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -6809,7 +6995,7 @@ templates:
   Vanguard_Vigilante_2:
     id:            4196
     display_name:  Vanguard_Vigilante
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -6846,7 +7032,7 @@ templates:
   Vanguard_Vigilante_Large:
     id:            7204
     display_name:  Vanguard_Vigilante
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -6880,7 +7066,7 @@ templates:
 
   Vanguard_Vindicator:
     id:            4197
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6915,7 +7101,7 @@ templates:
   Vanguard_Vindicator_2:
     id:            4197
     display_name:  Vanguard_Vindicator
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6950,7 +7136,7 @@ templates:
   Vanguard_Vindicator_Large:
     id:            7197
     display_name:  Vanguard_Vindicator
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -6982,7 +7168,7 @@ templates:
 
   Vanguard_Visionary:
     id:            4198
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 3
     skill_list_id: 2106
     attributes:
@@ -7018,7 +7204,7 @@ templates:
   Vanguard_Visionary_2:
     id:            4198
     display_name:  Vanguard_Visionary
-    species:       yagudo
+    species:       dynamis_yagudo
     spell_list_id: 3
     skill_list_id: 2106
     attributes:
@@ -7053,7 +7239,7 @@ templates:
 
   Vanguard_Welldigger:
     id:            4199
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -7088,7 +7274,7 @@ templates:
   Vanguard_Welldigger_2:
     id:            4199
     display_name:  Vanguard_Welldigger
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -7123,7 +7309,7 @@ templates:
   Vanguard_Welldigger_Large:
     id:            7245
     display_name:  Vanguard_Welldigger
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -7204,8 +7390,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Hecteyes:
     id:            4187
@@ -7236,8 +7429,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Scorpion:
     id:            4188
@@ -7266,8 +7466,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Slime:
     id:            4189
@@ -7297,8 +7504,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190

@@ -227,7 +227,7 @@ templates:
 
   Goblin_Flesher:
     id:            6667
-    species:       goblin
+    species:       armored_goblin
     skill_list_id: 133
     attributes:
       combat:
@@ -404,7 +404,7 @@ templates:
 
   Goblin_Metallurgist:
     id:            6663
-    species:       goblin
+    species:       armored_goblin
     spell_list_id: 5
     skill_list_id: 133
     attributes:

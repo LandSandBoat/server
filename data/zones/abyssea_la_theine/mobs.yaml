@@ -973,7 +973,7 @@ templates:
 
   Hadhayosh:
     id:            1872
-    species:       behemoth
+    species:       elasmoth
     type:          [notorious]
     skill_list_id: 817
     attributes:

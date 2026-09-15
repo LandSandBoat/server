@@ -62,7 +62,7 @@ templates:
 
   Broken_Troll_Soldier_mnk:
     id:            535
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -84,7 +84,7 @@ templates:
 
   Broken_Troll_Soldier_pld:
     id:            5470
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 246
     attributes:
@@ -109,7 +109,7 @@ templates:
 
   Broken_Troll_Soldier_rdm:
     id:            5472
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -134,7 +134,7 @@ templates:
 
   Broken_Troll_Soldier_war:
     id:            5471
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -214,7 +214,7 @@ templates:
 
   Jorporbor_the_Hellraker:
     id:            2157
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 246
     attributes:
@@ -298,7 +298,7 @@ templates:
 
   Old_Troll:
     id:            2967
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -457,7 +457,7 @@ templates:
 
   Troll_Combatant:
     id:            4012
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:

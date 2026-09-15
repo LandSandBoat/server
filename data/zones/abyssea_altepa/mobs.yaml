@@ -168,7 +168,7 @@ templates:
 
   Baelfyr:
     id:            323
-    species:       ice_elemental
+    species:       baelfyr
     spell_list_id: 3
     attributes:
       combat:
@@ -190,7 +190,7 @@ templates:
 
   Barrens_Treant:
     id:            350
-    species:       treant
+    species:       winter_treant
     skill_list_id: 245
     attributes:
       combat:
@@ -391,7 +391,7 @@ templates:
 
   Byrgen:
     id:            593
-    species:       dark_elemental
+    species:       byrgen
     spell_list_id: 21
     skill_list_id: 100
     attributes:
@@ -841,7 +841,7 @@ templates:
 
   Gefyrst:
     id:            1487
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 3
     attributes:
       combat:
@@ -1429,7 +1429,7 @@ templates:
 
   Ungeweder:
     id:            4099
-    species:       thunder_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 105
     attributes:

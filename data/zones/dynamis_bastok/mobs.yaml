@@ -123,7 +123,7 @@ templates:
 
   BuBho_Truesteel:
     id:            6063
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 705
@@ -135,24 +135,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -194,7 +176,7 @@ templates:
 
   GiPha_Manameister:
     id:            1614
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 705
@@ -205,24 +187,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -314,7 +278,7 @@ templates:
 
   GuNhi_Noondozer:
     id:            1859
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 705
@@ -325,24 +289,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -382,7 +328,7 @@ templates:
 
   KoDho_Cannonball:
     id:            2285
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -392,24 +338,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -449,7 +377,7 @@ templates:
 
   RaGho_Darkfount:
     id:            6060
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 705
@@ -461,24 +389,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -542,7 +452,7 @@ templates:
 
   Vanguard_Beasttender:
     id:            4139
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -586,7 +496,7 @@ templates:
   Vanguard_Beasttender_2:
     id:            4139
     display_name:  Vanguard_Beasttender
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -632,7 +542,7 @@ templates:
   Vanguard_Beasttender_Large:
     id:            7201
     display_name:  Vanguard_Beasttender
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -675,7 +585,7 @@ templates:
 
   Vanguard_Constable:
     id:            4142
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -718,7 +628,7 @@ templates:
   Vanguard_Constable_2:
     id:            4142
     display_name:  Vanguard_Constable
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -763,7 +673,7 @@ templates:
   Vanguard_Constable_Large:
     id:            7205
     display_name:  Vanguard_Constable
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 20
     skill_list_id: 2107
     attributes:
@@ -807,7 +717,7 @@ templates:
 
   Vanguard_Defender:
     id:            4143
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -852,7 +762,7 @@ templates:
   Vanguard_Defender_2:
     id:            4143
     display_name:  Vanguard_Defender
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -899,7 +809,7 @@ templates:
   Vanguard_Defender_Large:
     id:            7200
     display_name:  Vanguard_Defender
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 4
     skill_list_id: 2107
     attributes:
@@ -943,7 +853,7 @@ templates:
 
   Vanguard_Drakekeeper:
     id:            4146
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -986,7 +896,7 @@ templates:
   Vanguard_Drakekeeper_2:
     id:            4146
     display_name:  Vanguard_Drakekeeper
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1031,7 +941,7 @@ templates:
   Vanguard_Drakekeeper_Large:
     id:            7208
     display_name:  Vanguard_Drakekeeper
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1073,7 +983,7 @@ templates:
 
   Vanguard_Hatamoto:
     id:            4153
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1117,7 +1027,7 @@ templates:
   Vanguard_Hatamoto_2:
     id:            4153
     display_name:  Vanguard_Hatamoto
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1163,7 +1073,7 @@ templates:
   Vanguard_Hatamoto_Large:
     id:            7206
     display_name:  Vanguard_Hatamoto
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1206,7 +1116,7 @@ templates:
 
   Vanguard_Kusa:
     id:            4158
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -1251,7 +1161,7 @@ templates:
   Vanguard_Kusa_2:
     id:            4158
     display_name:  Vanguard_Kusa
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -1298,7 +1208,7 @@ templates:
   Vanguard_Kusa_Large:
     id:            7207
     display_name:  Vanguard_Kusa
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 7
     skill_list_id: 2107
     attributes:
@@ -1342,7 +1252,7 @@ templates:
 
   Vanguard_Mason:
     id:            4161
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1384,7 +1294,7 @@ templates:
   Vanguard_Mason_2:
     id:            4161
     display_name:  Vanguard_Mason
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1428,7 +1338,7 @@ templates:
   Vanguard_Mason_Large:
     id:            7210
     display_name:  Vanguard_Mason
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1471,7 +1381,7 @@ templates:
 
   Vanguard_Militant:
     id:            4163
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1512,7 +1422,7 @@ templates:
   Vanguard_Militant_2:
     id:            4163
     display_name:  Vanguard_Militant
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1555,7 +1465,7 @@ templates:
   Vanguard_Militant_Large:
     id:            7199
     display_name:  Vanguard_Militant
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1597,7 +1507,7 @@ templates:
 
   Vanguard_Minstrel:
     id:            4164
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -1642,7 +1552,7 @@ templates:
   Vanguard_Minstrel_2:
     id:            4164
     display_name:  Vanguard_Minstrel
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -1689,7 +1599,7 @@ templates:
   Vanguard_Minstrel_Large:
     id:            7209
     display_name:  Vanguard_Minstrel
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 6
     skill_list_id: 2107
     attributes:
@@ -1733,7 +1643,7 @@ templates:
 
   Vanguard_Protector:
     id:            4177
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -1778,7 +1688,7 @@ templates:
   Vanguard_Protector_2:
     id:            4177
     display_name:  Vanguard_Protector
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -1825,7 +1735,7 @@ templates:
   Vanguard_Protector_Large:
     id:            7198
     display_name:  Vanguard_Protector
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 3
     skill_list_id: 2107
     attributes:
@@ -1869,7 +1779,7 @@ templates:
 
   Vanguard_Purloiner:
     id:            4178
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1912,7 +1822,7 @@ templates:
   Vanguard_Purloiner_2:
     id:            4178
     display_name:  Vanguard_Purloiner
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1957,7 +1867,7 @@ templates:
   Vanguard_Purloiner_Large:
     id:            7203
     display_name:  Vanguard_Purloiner
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -1999,7 +1909,7 @@ templates:
 
   Vanguard_Thaumaturge:
     id:            4191
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -2041,7 +1951,7 @@ templates:
   Vanguard_Thaumaturge_2:
     id:            4191
     display_name:  Vanguard_Thaumaturge
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -2085,7 +1995,7 @@ templates:
   Vanguard_Thaumaturge_Large:
     id:            7202
     display_name:  Vanguard_Thaumaturge
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 21
     skill_list_id: 2107
     attributes:
@@ -2128,7 +2038,7 @@ templates:
 
   Vanguard_Undertaker:
     id:            4194
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -2170,7 +2080,7 @@ templates:
   Vanguard_Undertaker_2:
     id:            4194
     display_name:  Vanguard_Undertaker
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -2214,7 +2124,7 @@ templates:
   Vanguard_Undertaker_Large:
     id:            7211
     display_name:  Vanguard_Undertaker
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 141
     skill_list_id: 2107
     attributes:
@@ -2257,7 +2167,7 @@ templates:
 
   Vanguard_Vigilante:
     id:            4196
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -2302,7 +2212,7 @@ templates:
   Vanguard_Vigilante_2:
     id:            4196
     display_name:  Vanguard_Vigilante
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -2349,7 +2259,7 @@ templates:
   Vanguard_Vigilante_Large:
     id:            7204
     display_name:  Vanguard_Vigilante
-    species:       quadav
+    species:       dynamis_quadav
     spell_list_id: 5
     skill_list_id: 2107
     attributes:
@@ -2393,7 +2303,7 @@ templates:
 
   Vanguard_Vindicator:
     id:            4197
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2436,7 +2346,7 @@ templates:
   Vanguard_Vindicator_2:
     id:            4197
     display_name:  Vanguard_Vindicator
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2481,7 +2391,7 @@ templates:
   Vanguard_Vindicator_Large:
     id:            7197
     display_name:  Vanguard_Vindicator
-    species:       quadav
+    species:       dynamis_quadav
     skill_list_id: 2107
     attributes:
       combat:
@@ -2569,7 +2479,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190
@@ -2598,7 +2515,7 @@ templates:
 
   Vazhe_Pummelsong:
     id:            6062
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 705
@@ -2610,24 +2527,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -2667,7 +2566,7 @@ templates:
 
   ZeVho_Fallsplitter:
     id:            4499
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 705
@@ -2679,24 +2578,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard
@@ -2736,7 +2617,7 @@ templates:
 
   ZoPha_Forgesoul:
     id:            6088
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 705
@@ -2748,24 +2629,6 @@ templates:
       resists:
         dmg_physical:
           piercing: 2500
-        rank_element:
-          fire:     1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -2
-          water:    1
-          light:   -1
-          dark:    -1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:       1
-          light_sleep: -1
-          dark_sleep:  -1
-          blind:       -1
       render:
         look:
           type:  standard

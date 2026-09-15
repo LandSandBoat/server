@@ -155,7 +155,7 @@ templates:
 
   Baelfyr:
     id:            323
-    species:       ice_elemental
+    species:       baelfyr
     spell_list_id: 3
     attributes:
       combat:
@@ -272,7 +272,7 @@ templates:
 
   Byrgen:
     id:            593
-    species:       dark_elemental
+    species:       byrgen
     spell_list_id: 21
     skill_list_id: 100
     attributes:
@@ -574,7 +574,7 @@ templates:
 
   Gefyrst:
     id:            1487
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 3
     attributes:
       combat:
@@ -1248,7 +1248,7 @@ templates:
 
   Svelldrake:
     id:            3817
-    species:       blue_wyvern
+    species:       wyvern
     skill_list_id: 266
     attributes:
       combat:
@@ -1276,7 +1276,7 @@ templates:
 
   Ungeweder:
     id:            4099
-    species:       thunder_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 105
     attributes:
@@ -1359,7 +1359,7 @@ templates:
 
   Veri_Selen:
     id:            4223
-    species:       blue_wyvern
+    species:       wyvern
     type:          [notorious]
     spell_list_id: 279
     skill_list_id: 973
@@ -1369,7 +1369,6 @@ templates:
       jobs: [blm, blm]
       resists:
         rank_element:
-          fire:     4
           wind:    10
           earth:   10
           thunder:  4

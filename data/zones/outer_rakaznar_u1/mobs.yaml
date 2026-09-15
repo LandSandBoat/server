@@ -61,7 +61,7 @@ templates:
 
   Abject_Obdella:
     id:      8109
-    species: unclassified
+    species: obdella
     type:    [battlefield]
     attributes:
       combat:
@@ -308,7 +308,7 @@ templates:
 
   Cachaemic_Bhoot:
     id:      8122
-    species: unclassified
+    species: bhoot
     type:    [battlefield]
     attributes:
       combat:
@@ -441,7 +441,7 @@ templates:
 
   Demisang_Deleterious:
     id:      8129
-    species: unclassified
+    species: fomor
     type:    [battlefield]
     attributes:
       combat:
@@ -555,7 +555,7 @@ templates:
 
   Dhartok:
     id:      8135
-    species: unclassified
+    species: plovid
     type:    [battlefield]
     attributes:
       combat:
@@ -650,7 +650,7 @@ templates:
 
   Dreyruk:
     id:      7658
-    species: unclassified
+    species: red_wyvern
     type:    [battlefield]
     attributes:
       combat:
@@ -669,7 +669,7 @@ templates:
 
   Esurient_Botulus:
     id:      8136
-    species: unclassified
+    species: botulus
     type:    [battlefield]
     attributes:
       combat:
@@ -821,7 +821,7 @@ templates:
 
   Fetid_Ixion:
     id:      8143
-    species: unclassified
+    species: monoceros
     type:    [battlefield]
     attributes:
       combat:
@@ -878,7 +878,7 @@ templates:
 
   Gartell:
     id:      8146
-    species: unclassified
+    species: macuil
     type:    [battlefield]
     attributes:
       combat:
@@ -897,7 +897,7 @@ templates:
 
   Ghatjot:
     id:      8147
-    species: unclassified
+    species: plovid
     type:    [battlefield]
     attributes:
       combat:
@@ -954,7 +954,7 @@ templates:
 
   Gyvewrapped_Naraka:
     id:      8150
-    species: unclassified
+    species: naraka
     type:    [battlefield]
     attributes:
       combat:
@@ -1144,7 +1144,7 @@ templates:
 
   Haughty_Tulittia:
     id:      8160
-    species: unclassified
+    species: tulittia
     type:    [battlefield]
     attributes:
       combat:
@@ -1163,7 +1163,7 @@ templates:
 
   Leshonn:
     id:      8161
-    species: unclassified
+    species: macuil
     type:    [battlefield]
     attributes:
       combat:
@@ -1220,7 +1220,7 @@ templates:
 
   Skomora:
     id:      8164
-    species: unclassified
+    species: defiant
     type:    [battlefield]
     attributes:
       combat:
@@ -1239,7 +1239,7 @@ templates:
 
   Triboulex:
     id:      8165
-    species: unclassified
+    species: defiant
     type:    [battlefield]
     attributes:
       combat:

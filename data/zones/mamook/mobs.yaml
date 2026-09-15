@@ -227,7 +227,7 @@ templates:
 
   Darting_Kachaal_Ja:
     id:            921
-    species:       knight_ja
+    species:       sage
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 176
@@ -260,7 +260,7 @@ templates:
 
   Devout_Radol_Ja:
     id:            1019
-    species:       knight_ja
+    species:       sage
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 176
@@ -293,7 +293,7 @@ templates:
 
   Dragonscaled_Bugaal_Ja:
     id:            1102
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     skill_list_id: 176
     attributes:
@@ -325,7 +325,7 @@ templates:
 
   Firedance_Magmaal_Ja:
     id:            4737
-    species:       wivre
+    species:       knight_ja
     type:          [notorious]
     skill_list_id: 257
     attributes:
@@ -345,7 +345,7 @@ templates:
 
   Forbidding_Koheel_Ja:
     id:            1400
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -368,7 +368,7 @@ templates:
 
   Gulool_Ja_Ja:
     id:            1846
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
@@ -422,7 +422,7 @@ templates:
 
   Hundredfaced_Hapool_Ja:
     id:            2008
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 176
@@ -456,7 +456,7 @@ templates:
   Hundredfaced_clone:
     id:            7056
     display_name:  Hundredfaced_Hapool_Ja
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 176
@@ -483,7 +483,7 @@ templates:
 
   Hunting_Raptor:
     id:            2013
-    species:       raptor
+    species:       green_raptor
     skill_list_id: 210
     attributes:
       combat:
@@ -588,7 +588,7 @@ templates:
 
   Mamool_Ja:
     id:            2505
-    species:       knight_ja
+    species:       warrior
     type:          [notorious]
     skill_list_id: 2030
     attributes:
@@ -638,7 +638,7 @@ templates:
   Mamool_Ja_Blusterer_Mamook:
     id:            213
     display_name:  Mamool_Ja_Blusterer
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -670,7 +670,7 @@ templates:
 
   Mamool_Ja_Bounder:
     id:            2508
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -702,7 +702,7 @@ templates:
 
   Mamool_Ja_Chamberlain:
     id:            2511
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 176
     attributes:
@@ -726,7 +726,7 @@ templates:
 
   Mamool_Ja_Conservator:
     id:            2512
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -821,7 +821,7 @@ templates:
   Mamool_Ja_Infiltrator_Mamook:
     id:            212
     display_name:  Mamool_Ja_Infiltrator
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -855,7 +855,7 @@ templates:
   Mamool_Ja_Lurker_Mamook:
     id:            209
     display_name:  Mamool_Ja_Lurker
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -889,7 +889,7 @@ templates:
   Mamool_Ja_Mimer_Mamook:
     id:            211
     display_name:  Mamool_Ja_Mimer
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -923,7 +923,7 @@ templates:
 
   Mamool_Ja_Mimicker:
     id:            2526
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 8
     skill_list_id: 176
     attributes:
@@ -956,7 +956,7 @@ templates:
 
   Mamool_Ja_Palatine:
     id:            2527
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -979,7 +979,7 @@ templates:
   Mamool_Ja_Philosopher_Mamook:
     id:            210
     display_name:  Mamool_Ja_Philosopher
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1012,7 +1012,7 @@ templates:
   Mamool_Ja_Pikeman_Mamook:
     id:            214
     display_name:  Mamool_Ja_Pikeman
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1043,7 +1043,7 @@ templates:
 
   Mamool_Ja_Savant:
     id:            2533
-    species:       knight_ja
+    species:       sage
     spell_list_id: 20
     skill_list_id: 177
     attributes:
@@ -1076,7 +1076,7 @@ templates:
 
   Mamool_Ja_Sophist:
     id:            2534
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 177
     attributes:
@@ -1109,7 +1109,7 @@ templates:
 
   Mamool_Ja_Spearman:
     id:            2535
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1142,7 +1142,7 @@ templates:
   Mamool_Ja_Stabler_Mamook:
     id:            248
     display_name:  Mamool_Ja_Stabler
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1175,7 +1175,7 @@ templates:
 
   Mamool_Ja_Strapper:
     id:            2538
-    species:       knight_ja
+    species:       warrior
     skill_list_id: 176
     attributes:
       combat:
@@ -1207,7 +1207,7 @@ templates:
 
   Mamool_Ja_Treasurer:
     id:            2543
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -1230,7 +1230,7 @@ templates:
 
   Mamool_Ja_Zenist:
     id:            2545
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -1326,7 +1326,7 @@ templates:
 
   Mikilulu:
     id:            2656
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1350,7 +1350,7 @@ templates:
 
   Mikiluru:
     id:            2657
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1374,7 +1374,7 @@ templates:
 
   Mikirulu:
     id:            2658
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1398,7 +1398,7 @@ templates:
 
   Mikiruru:
     id:            2659
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1422,7 +1422,7 @@ templates:
 
   Nikilulu:
     id:            2881
-    species:       green_poroggo
+    species:       toad
     type:          [notorious]
     skill_list_id: 196
     attributes:
@@ -1686,7 +1686,7 @@ templates:
   Sagelord_Molaal_Ja_M:
     id:            6969
     display_name:  Sagelord_Molaal_Ja
-    species:       knight_ja
+    species:       sage
     spell_list_id: 21
     skill_list_id: 176
     attributes:
@@ -1743,7 +1743,7 @@ templates:
 
   Shadelurking_Zolool_Ja:
     id:            3560
-    species:       knight_ja
+    species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
@@ -1893,7 +1893,7 @@ templates:
 
   Wartkin:
     id:            4295
-    species:       blue_poroggo
+    species:       toad
     type:          [called]
     spell_list_id: 21
     skill_list_id: 196
@@ -1914,7 +1914,7 @@ templates:
 
   Watch_Wyvern:
     id:            4308
-    species:       shadow_wyvern
+    species:       wyvern
     skill_list_id: 266
     attributes:
       combat:
@@ -1942,7 +1942,7 @@ templates:
 
   Yalungur:
     id:            6755
-    species:       colibri
+    species:       toucalibri
     skill_list_id: 72
     attributes:
       combat:
@@ -1963,7 +1963,7 @@ templates:
 
   Ziz:
     id:            4508
-    species:       cockatrice
+    species:       ziz
     skill_list_id: 70
     attributes:
       combat:

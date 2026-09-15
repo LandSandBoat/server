@@ -184,31 +184,13 @@ templates:
 
   Armored_Chariot:
     id:            246
-    species:       chariot
+    species:       shielded_chariot
     type:          [notorious]
     skill_list_id: 1002
     attributes:
       combat:
         skill: great_axe
         delay: 320
-      resists:
-        rank_element:
-          ice:      1
-          wind:     1
-          earth:    1
-          thunder:  5
-          water:   -1
-          light:    6
-          dark:     1
-        rank_status:
-          paralyze:     1
-          bind:         1
-          silence:      1
-          slow:         1
-          poison:      -1
-          light_sleep:  6
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -419,7 +401,7 @@ templates:
 
   Korrigan:
     id:            2282
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -1219,7 +1201,7 @@ templates:
 
   Vile_Wahzil:
     id:            4233
-    species:       soulflayer
+    species:       imp
     spell_list_id: 21
     skill_list_id: 233
     attributes:

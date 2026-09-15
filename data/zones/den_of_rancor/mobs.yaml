@@ -847,7 +847,7 @@ templates:
 
   Sozu_Bliberry:
     id:            3711
-    species:       tonberry
+    species:       kingberry
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 243

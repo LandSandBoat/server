@@ -654,7 +654,7 @@ templates:
 
   Speleothem_Gefyrst:
     id:            4773
-    species:       earth_elemental
+    species:       gefyrst
     spell_list_id: 14
     skill_list_id: 103
     attributes:
@@ -677,7 +677,7 @@ templates:
 
   Speleothem_Ungeweder:
     id:            4774
-    species:       earth_elemental
+    species:       ungeweder
     spell_list_id: 17
     skill_list_id: 102
     attributes:

@@ -4,22 +4,12 @@ templates:
 
   Aiatar:
     id:            68
-    species:       shadow_wyvern
+    species:       wyvern
     type:          [notorious]
     skill_list_id: 266
     attributes:
       combat:
         skill: scythe
-      resists:
-        rank_element:
-          fire:  4
-          ice:   1
-          dark: -3
-        rank_status:
-          paralyze:    1
-          bind:        1
-          dark_sleep: -3
-          blind:      -3
       render:
         look:
           type:  standard
@@ -256,7 +246,7 @@ templates:
 
   Firedrake:
     id:            1340
-    species:       shadow_wyvern
+    species:       wyvern
     skill_list_id: 266
     attributes:
       combat:

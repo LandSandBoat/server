@@ -910,7 +910,7 @@ templates:
 
   Lord_Asag:
     id:            5189
-    species:       vampyr
+    species:       strigoi
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 309

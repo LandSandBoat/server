@@ -4,7 +4,7 @@ templates:
 
   Akvan:
     id:            5162
-    species:       ahriman
+    species:       akoman
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 4

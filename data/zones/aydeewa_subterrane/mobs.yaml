@@ -421,7 +421,7 @@ templates:
 
   Great_Ameretat:
     id:            1809
-    species:       morbol
+    species:       ameretat
     skill_list_id: 2044
     attributes:
       combat:

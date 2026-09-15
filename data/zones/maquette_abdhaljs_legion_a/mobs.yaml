@@ -100,7 +100,7 @@ templates:
 
   Auspicious_Entity_ice2:
     id:            5809
-    species:       thunder_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 105
     attributes:
@@ -120,7 +120,7 @@ templates:
 
   Auspicious_Entity_ice3:
     id:            5812
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 3
     skill_list_id: 103
     attributes:

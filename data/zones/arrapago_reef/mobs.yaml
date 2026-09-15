@@ -1449,7 +1449,7 @@ templates:
 
   Lamias_Skeleton:
     id:            2360
-    species:       skeleton
+    species:       draugar
     skill_list_id: 227
     attributes:
       combat:

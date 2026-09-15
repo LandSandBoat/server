@@ -1159,7 +1159,7 @@ templates:
 
   Nival_Raptor:
     id:            2892
-    species:       raptor
+    species:       nival_raptor
     skill_list_id: 377
     attributes:
       combat:
@@ -1215,7 +1215,7 @@ templates:
 
   Polar_Hare:
     id:            3168
-    species:       rabbit
+    species:       alabaster_rabbit
     skill_list_id: 405
     attributes:
       combat:

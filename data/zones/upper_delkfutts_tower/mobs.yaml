@@ -402,7 +402,7 @@ templates:
 
   Jotunn_Gatekeeper:
     id:            2158
-    species:       gigas
+    species:       jotunn
     skill_list_id: 126
     attributes:
       combat:
@@ -437,7 +437,7 @@ templates:
 
   Jotunn_Hallkeeper:
     id:            2159
-    species:       gigas
+    species:       jotunn
     skill_list_id: 127
     attributes:
       combat:
@@ -474,7 +474,7 @@ templates:
 
   Jotunn_Wallkeeper:
     id:            2161
-    species:       gigas
+    species:       jotunn
     skill_list_id: 126
     attributes:
       combat:
@@ -512,7 +512,7 @@ templates:
 
   Jotunn_Wildkeeper:
     id:            2162
-    species:       gigas
+    species:       jotunn
     skill_list_id: 126
     attributes:
       combat:

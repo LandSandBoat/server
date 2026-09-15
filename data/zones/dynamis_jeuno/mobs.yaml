@@ -4,31 +4,12 @@ templates:
 
   Anvilix_Sootwrists:
     id:            194
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -118,32 +99,13 @@ templates:
 
   Bandrix_Rockjaw:
     id:            336
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -181,32 +143,13 @@ templates:
 
   Blazox_Boneybod:
     id:            449
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
       jobs: [bst, bst]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -244,7 +187,7 @@ templates:
 
   Bootrix_Jaggedelbow:
     id:            505
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
@@ -252,25 +195,6 @@ templates:
         skill: dagger
         delay: 240
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -308,7 +232,7 @@ templates:
 
   Buffrix_Eargone:
     id:            554
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 373
@@ -316,25 +240,6 @@ templates:
       combat:
         skill: sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -372,7 +277,7 @@ templates:
 
   Cloktix_Longnail:
     id:            745
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 373
@@ -380,25 +285,6 @@ templates:
       combat:
         skill: great_sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -436,7 +322,7 @@ templates:
 
   Distilix_Stickytoes:
     id:            1052
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 373
@@ -444,25 +330,6 @@ templates:
       combat:
         skill: club
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -500,7 +367,7 @@ templates:
 
   Elixmix_Hooknose:
     id:            1199
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -508,25 +375,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -564,7 +412,7 @@ templates:
 
   Eremix_Snottynostril:
     id:            1251
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 373
@@ -572,25 +420,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -628,7 +457,7 @@ templates:
 
   Feralox_Honeylips:
     id:            4653
-    species:       goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 373
@@ -636,25 +465,6 @@ templates:
       combat:
         skill: dagger
       jobs: [brd, bst]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -713,10 +523,18 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Gabblox_Magpietongue:
     id:            1444
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -724,25 +542,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -903,7 +702,7 @@ templates:
 
   Hermitrix_Toothrot:
     id:            1935
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 373
@@ -911,25 +710,6 @@ templates:
       combat:
         skill: club
       jobs: [blm, blm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -967,7 +747,7 @@ templates:
 
   Humnox_Drumbelly:
     id:            2007
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 373
@@ -975,25 +755,6 @@ templates:
       combat:
         skill: dagger
       jobs: [brd, brd]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1031,7 +792,7 @@ templates:
 
   Jabbrox_Grannyguise:
     id:            2115
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -1039,25 +800,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1095,7 +837,7 @@ templates:
 
   Jabkix_Pigeonpecs:
     id:            2116
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -1103,25 +845,6 @@ templates:
       combat:
         skill: dagger
       jobs: [rdm, rdm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1159,32 +882,13 @@ templates:
 
   Karashix_Swollenskull:
     id:            2191
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: great_katana
       jobs: [sam, sam]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1222,31 +926,12 @@ templates:
 
   Kikklix_Longlegs:
     id:            2225
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1284,32 +969,13 @@ templates:
 
   Lurklox_Dhalmelneck:
     id:            2453
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1347,32 +1013,13 @@ templates:
 
   Mobpix_Mucousmouth:
     id:            2711
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [thf, thf]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1410,7 +1057,7 @@ templates:
 
   Morgmox_Moldnoggin:
     id:            2747
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 373
@@ -1418,25 +1065,6 @@ templates:
       combat:
         skill: club
       jobs: [smn, smn]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1474,7 +1102,7 @@ templates:
 
   Mortilox_Wartpaws:
     id:            2751
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 373
@@ -1482,25 +1110,6 @@ templates:
       combat:
         skill: club
       jobs: [smn, smn]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1538,32 +1147,13 @@ templates:
 
   Prowlox_Barrelbelly:
     id:            3213
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: dagger
       jobs: [rng, rng]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1601,7 +1191,7 @@ templates:
 
   Quicktrix_Hexhands:
     id:            4241
-    species:       goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 373
@@ -1609,25 +1199,6 @@ templates:
       combat:
         skill: sword
       jobs: [rdm, nin]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1665,32 +1236,13 @@ templates:
 
   Rutrix_Hamgams:
     id:            3419
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
       jobs: [bst, bst]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1728,32 +1280,13 @@ templates:
 
   Scourquix_Scaleskin:
     id:            2846
-    species:       goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: sword
       jobs: [rng, drg]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1815,7 +1348,7 @@ templates:
 
   Scruffix_Shaggychest:
     id:            3507
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 373
@@ -1823,25 +1356,6 @@ templates:
       combat:
         skill: sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1879,7 +1393,7 @@ templates:
 
   Slystix_Megapeepers:
     id:            3674
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 373
@@ -1887,25 +1401,6 @@ templates:
       combat:
         skill: sword
       jobs: [nin, nin]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -1944,31 +1439,12 @@ templates:
 
   Smeltix_Thickhide:
     id:            3676
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: great_sword
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2006,7 +1482,7 @@ templates:
 
   Snypestix_Eaglebeak:
     id:            3692
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 373
@@ -2014,25 +1490,6 @@ templates:
       combat:
         skill: dagger
       jobs: [nin, nin]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2070,31 +1527,12 @@ templates:
 
   Sparkspox_Sweatbrow:
     id:            3718
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2132,7 +1570,7 @@ templates:
 
   Ticktox_Beadyeyes:
     id:            3917
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 373
@@ -2140,25 +1578,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2196,32 +1615,13 @@ templates:
 
   Trailblix_Goatmug:
     id:            3985
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: axe
       jobs: [bst, bst]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2259,7 +1659,7 @@ templates:
 
   Tufflix_Loglimbs:
     id:            4047
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 373
@@ -2267,25 +1667,6 @@ templates:
       combat:
         skill: sword
       jobs: [pld, pld]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2323,7 +1704,7 @@ templates:
 
   Tymexox_Ninefingers:
     id:            4064
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 373
@@ -2331,25 +1712,6 @@ templates:
       combat:
         skill: sword
       jobs: [drk, drk]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -2387,7 +1749,7 @@ templates:
 
   Vanguard_Alchemist:
     id:            4133
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -2427,7 +1789,7 @@ templates:
   Vanguard_Alchemist_2:
     id:            4133
     display_name:  Vanguard_Alchemist
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -2469,7 +1831,7 @@ templates:
   Vanguard_Alchemist_Large:
     id:            7255
     display_name:  Vanguard_Alchemist
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 20
     skill_list_id: 2108
     attributes:
@@ -2510,7 +1872,7 @@ templates:
 
   Vanguard_Ambusher:
     id:            4134
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2549,7 +1911,7 @@ templates:
   Vanguard_Ambusher_2:
     id:            4134
     display_name:  Vanguard_Ambusher
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2590,7 +1952,7 @@ templates:
   Vanguard_Ambusher_Large:
     id:            7249
     display_name:  Vanguard_Ambusher
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2630,7 +1992,7 @@ templates:
 
   Vanguard_Armorer:
     id:            4136
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -2672,7 +2034,7 @@ templates:
   Vanguard_Armorer_2:
     id:            4136
     display_name:  Vanguard_Armorer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -2716,7 +2078,7 @@ templates:
   Vanguard_Armorer_Large:
     id:            7246
     display_name:  Vanguard_Armorer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 4
     skill_list_id: 2108
     attributes:
@@ -2757,7 +2119,7 @@ templates:
 
   Vanguard_Dragontamer:
     id:            4649
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2796,7 +2158,7 @@ templates:
   Vanguard_Dragontamer_2:
     id:            4649
     display_name:  Vanguard_Dragontamer
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2837,7 +2199,7 @@ templates:
   Vanguard_Dragontamer_Large:
     id:            7254
     display_name:  Vanguard_Dragontamer
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -2875,7 +2237,7 @@ templates:
 
   Vanguard_Enchanter:
     id:            4147
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -2917,7 +2279,7 @@ templates:
   Vanguard_Enchanter_2:
     id:            4147
     display_name:  Vanguard_Enchanter
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -2961,7 +2323,7 @@ templates:
   Vanguard_Enchanter_Large:
     id:            7244
     display_name:  Vanguard_Enchanter
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 3
     skill_list_id: 2108
     attributes:
@@ -3002,7 +2364,7 @@ templates:
 
   Vanguard_Hitman:
     id:            4155
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3044,7 +2406,7 @@ templates:
   Vanguard_Hitman_2:
     id:            4155
     display_name:  Vanguard_Hitman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3088,7 +2450,7 @@ templates:
   Vanguard_Hitman_Large:
     id:            7252
     display_name:  Vanguard_Hitman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 7
     skill_list_id: 2108
     attributes:
@@ -3129,7 +2491,7 @@ templates:
 
   Vanguard_Maestro:
     id:            4160
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3171,7 +2533,7 @@ templates:
   Vanguard_Maestro_2:
     id:            4160
     display_name:  Vanguard_Maestro
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3215,7 +2577,7 @@ templates:
   Vanguard_Maestro_Large:
     id:            7248
     display_name:  Vanguard_Maestro
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 6
     skill_list_id: 2108
     attributes:
@@ -3256,7 +2618,7 @@ templates:
 
   Vanguard_Necromancer:
     id:            4166
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -3296,7 +2658,7 @@ templates:
   Vanguard_Necromancer_2:
     id:            4166
     display_name:  Vanguard_Necromancer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -3338,7 +2700,7 @@ templates:
   Vanguard_Necromancer_Large:
     id:            7250
     display_name:  Vanguard_Necromancer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 141
     skill_list_id: 2108
     attributes:
@@ -3379,7 +2741,7 @@ templates:
 
   Vanguard_Pathfinder:
     id:            4170
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3420,7 +2782,7 @@ templates:
   Vanguard_Pathfinder_2:
     id:            4170
     display_name:  Vanguard_Pathfinder
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3463,7 +2825,7 @@ templates:
   Vanguard_Pathfinder_Large:
     id:            7257
     display_name:  Vanguard_Pathfinder
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3503,7 +2865,7 @@ templates:
 
   Vanguard_Pitfighter:
     id:            4173
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3542,7 +2904,7 @@ templates:
   Vanguard_Pitfighter_2:
     id:            4173
     display_name:  Vanguard_Pitfighter
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3583,7 +2945,7 @@ templates:
   Vanguard_Pitfighter_Large:
     id:            7253
     display_name:  Vanguard_Pitfighter
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3623,7 +2985,7 @@ templates:
 
   Vanguard_Ronin:
     id:            4179
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3664,7 +3026,7 @@ templates:
   Vanguard_Ronin_2:
     id:            4179
     display_name:  Vanguard_Ronin
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3707,7 +3069,7 @@ templates:
   Vanguard_Ronin_Large:
     id:            7251
     display_name:  Vanguard_Ronin
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3747,7 +3109,7 @@ templates:
 
   Vanguard_Shaman:
     id:            4182
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -3787,7 +3149,7 @@ templates:
   Vanguard_Shaman_2:
     id:            4182
     display_name:  Vanguard_Shaman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -3829,7 +3191,7 @@ templates:
   Vanguard_Shaman_Large:
     id:            7247
     display_name:  Vanguard_Shaman
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 21
     skill_list_id: 2108
     attributes:
@@ -3870,7 +3232,7 @@ templates:
 
   Vanguard_Smithy:
     id:            4184
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3910,7 +3272,7 @@ templates:
   Vanguard_Smithy_2:
     id:            4184
     display_name:  Vanguard_Smithy
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3952,7 +3314,7 @@ templates:
   Vanguard_Smithy_Large:
     id:            7243
     display_name:  Vanguard_Smithy
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -3991,7 +3353,7 @@ templates:
 
   Vanguard_Tinkerer:
     id:            4192
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -4033,7 +3395,7 @@ templates:
   Vanguard_Tinkerer_2:
     id:            4192
     display_name:  Vanguard_Tinkerer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -4077,7 +3439,7 @@ templates:
   Vanguard_Tinkerer_Large:
     id:            7256
     display_name:  Vanguard_Tinkerer
-    species:       goblin
+    species:       dynamis_goblin
     spell_list_id: 5
     skill_list_id: 2108
     attributes:
@@ -4118,7 +3480,7 @@ templates:
 
   Vanguard_Welldigger:
     id:            4199
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4159,7 +3521,7 @@ templates:
   Vanguard_Welldigger_2:
     id:            4199
     display_name:  Vanguard_Welldigger
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4202,7 +3564,7 @@ templates:
   Vanguard_Welldigger_Large:
     id:            7245
     display_name:  Vanguard_Welldigger
-    species:       goblin
+    species:       dynamis_goblin
     skill_list_id: 2108
     attributes:
       combat:
@@ -4290,8 +3652,15 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
-        mp: 1000
+        hp:  2400
+        mp:  1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190
@@ -4321,32 +3690,13 @@ templates:
 
   Wasabix_Callusdigit:
     id:            4303
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: sword
       jobs: [sam, sam]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4384,7 +3734,7 @@ templates:
 
   Wilywox_Tenderpalm:
     id:            3843
-    species:       goblin
+    species:       dynamis_goblin
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 373
@@ -4392,25 +3742,6 @@ templates:
       combat:
         skill: club
       jobs: [whm, whm]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard
@@ -4448,32 +3779,13 @@ templates:
 
   Wyrmwix_Snakespecs:
     id:            4388
-    species:       armored_goblin
+    species:       dynamis_goblin
     type:          [notorious]
     skill_list_id: 373
     attributes:
       combat:
         skill: sword
       jobs: [drg, drg]
-      resists:
-        rank_element:
-          fire:    -1
-          ice:     -1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -1
-          light:   -2
-          dark:     1
-        rank_status:
-          paralyze:    -1
-          bind:        -1
-          silence:     -1
-          slow:        -1
-          poison:      -1
-          light_sleep: -2
-          dark_sleep:   1
-          blind:        1
       render:
         look:
           type:  standard

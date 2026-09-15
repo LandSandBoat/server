@@ -671,7 +671,7 @@ templates:
 
   Neith:
     id:      6726
-    species: diremite
+    species: arundimite
     type:    [notorious]
     attributes:
       combat:

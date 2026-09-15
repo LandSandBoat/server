@@ -295,7 +295,7 @@ templates:
 
   Leafdancer_Twitherym:
     id:            4979
-    species:       twitherym
+    species:       brown_twitherym
     skill_list_id: 338
     attributes:
       combat:

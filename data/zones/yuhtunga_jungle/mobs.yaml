@@ -796,7 +796,7 @@ templates:
 
   Holy_Moly:
     id:            6847
-    species:       rafflesia
+    species:       mitrastema
     type:          [notorious]
     skill_list_id: 207
     attributes:

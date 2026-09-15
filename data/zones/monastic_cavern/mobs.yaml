@@ -428,7 +428,7 @@ templates:
 
   Orcish_Overlord:
     id:            3027
-    species:       orc
+    species:       warchief
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 189
@@ -737,7 +737,7 @@ templates:
 
   Overlord_Bakgodek:
     id:            3075
-    species:       orc
+    species:       warchief
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 189

@@ -57,7 +57,7 @@ templates:
 
   Battlechoir_Gitchfotch:
     id:            363
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 2104
@@ -84,7 +84,7 @@ templates:
 
   Bladeburner_Rokgevok:
     id:            6081
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 2104
@@ -131,7 +131,7 @@ templates:
 
   Bloodfist_Voshgrosh:
     id:            6084
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 2104
@@ -224,6 +224,14 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Overlords_Tombstone:
     id:            3076
@@ -279,7 +287,7 @@ templates:
 
   Reapertongue_Gadgquok:
     id:            3340
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 2104
@@ -364,7 +372,7 @@ templates:
 
   Soulsender_Fugbrag:
     id:            3705
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 2104
@@ -391,7 +399,7 @@ templates:
 
   Spellspear_Djokvukk:
     id:            6085
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 2105
@@ -438,7 +446,7 @@ templates:
 
   Steelshank_Kratzvatz:
     id:            6082
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 2104
@@ -485,7 +493,7 @@ templates:
 
   Vanguard_Amputator:
     id:            4135
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -527,7 +535,7 @@ templates:
   Vanguard_Amputator_2:
     id:            4135
     display_name:  Vanguard_Amputator
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 20
     skill_list_id: 2102
     attributes:
@@ -568,7 +576,7 @@ templates:
 
   Vanguard_Backstabber:
     id:            4138
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -612,7 +620,7 @@ templates:
   Vanguard_Backstabber_2:
     id:            4138
     display_name:  Vanguard_Backstabber
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 7
     skill_list_id: 2102
     attributes:
@@ -657,7 +665,7 @@ templates:
 
   Vanguard_Bugler:
     id:            4140
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -701,7 +709,7 @@ templates:
   Vanguard_Bugler_2:
     id:            4140
     display_name:  Vanguard_Bugler
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 6
     skill_list_id: 2102
     attributes:
@@ -746,7 +754,7 @@ templates:
 
   Vanguard_Dollmaster:
     id:            4144
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -788,7 +796,7 @@ templates:
   Vanguard_Dollmaster_2:
     id:            4144
     display_name:  Vanguard_Dollmaster
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 141
     skill_list_id: 2102
     attributes:
@@ -831,7 +839,7 @@ templates:
 
   Vanguard_Footsoldier:
     id:            4150
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -873,7 +881,7 @@ templates:
   Vanguard_Footsoldier_2:
     id:            4150
     display_name:  Vanguard_Footsoldier
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -906,7 +914,7 @@ templates:
 
   Vanguard_Grappler:
     id:            4151
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -948,7 +956,7 @@ templates:
   Vanguard_Grappler_2:
     id:            4151
     display_name:  Vanguard_Grappler
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -991,7 +999,7 @@ templates:
 
   Vanguard_Gutslasher:
     id:            4152
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1034,7 +1042,7 @@ templates:
   Vanguard_Gutslasher_2:
     id:            4152
     display_name:  Vanguard_Gutslasher
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1078,7 +1086,7 @@ templates:
 
   Vanguard_Hawker:
     id:            4154
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1121,7 +1129,7 @@ templates:
   Vanguard_Hawker_2:
     id:            4154
     display_name:  Vanguard_Hawker
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1165,7 +1173,7 @@ templates:
 
   Vanguard_Impaler:
     id:            4156
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2103
     attributes:
       combat:
@@ -1209,7 +1217,7 @@ templates:
   Vanguard_Impaler_2:
     id:            4156
     display_name:  Vanguard_Impaler
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2103
     attributes:
       combat:
@@ -1254,7 +1262,7 @@ templates:
 
   Vanguard_Mesmerizer:
     id:            4162
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -1296,7 +1304,7 @@ templates:
   Vanguard_Mesmerizer_2:
     id:            4162
     display_name:  Vanguard_Mesmerizer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 21
     skill_list_id: 2102
     attributes:
@@ -1339,7 +1347,7 @@ templates:
 
   Vanguard_Neckchopper:
     id:            4165
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -1383,7 +1391,7 @@ templates:
   Vanguard_Neckchopper_2:
     id:            4165
     display_name:  Vanguard_Neckchopper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 5
     skill_list_id: 2102
     attributes:
@@ -1428,7 +1436,7 @@ templates:
 
   Vanguard_Pillager:
     id:            4172
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1471,7 +1479,7 @@ templates:
   Vanguard_Pillager_2:
     id:            4172
     display_name:  Vanguard_Pillager
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1505,7 +1513,7 @@ templates:
 
   Vanguard_Predator:
     id:            4174
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1546,7 +1554,7 @@ templates:
   Vanguard_Predator_2:
     id:            4174
     display_name:  Vanguard_Predator
-    species:       orc
+    species:       dynamis_orc
     skill_list_id: 2102
     attributes:
       combat:
@@ -1578,7 +1586,7 @@ templates:
 
   Vanguard_Trooper:
     id:            4193
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -1622,7 +1630,7 @@ templates:
   Vanguard_Trooper_2:
     id:            4193
     display_name:  Vanguard_Trooper
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 4
     skill_list_id: 2102
     attributes:
@@ -1667,7 +1675,7 @@ templates:
 
   Vanguard_Vexer:
     id:            4195
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -1711,7 +1719,7 @@ templates:
   Vanguard_Vexer_2:
     id:            4195
     display_name:  Vanguard_Vexer
-    species:       orc
+    species:       dynamis_orc
     spell_list_id: 3
     skill_list_id: 2102
     attributes:
@@ -1794,7 +1802,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 2400
+        hp:  2400
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Wyvern:
     id:            4190
@@ -1823,7 +1838,7 @@ templates:
 
   Voidstreaker_Butchnotch:
     id:            4243
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 2104
@@ -1902,7 +1917,7 @@ templates:
 
   Wyrmgnasher_Bjakdek:
     id:            4387
-    species:       orc
+    species:       dynamis_orc
     type:          [notorious]
     skill_list_id: 2105
     attributes:

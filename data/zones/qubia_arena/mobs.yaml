@@ -1546,7 +1546,7 @@ templates:
 
   Son_of_Anansi:
     id:            3701
-    species:       spider
+    species:       anansi
     type:          [battlefield]
     skill_list_id: 501
     attributes:
@@ -1715,7 +1715,7 @@ templates:
 
   Warlord_Rojgnoj:
     id:            4294
-    species:       orc
+    species:       warchief
     type:          [notorious, battlefield]
     spell_list_id: 1
     skill_list_id: 189

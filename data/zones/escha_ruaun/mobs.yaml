@@ -1746,30 +1746,12 @@ templates:
 
   Pakecet:
     id:            5688
-    species:       pteraketo
+    species:       white_pteraketos
     type:          [notorious]
     skill_list_id: 451
     attributes:
       combat:
         skill: dagger
-      resists:
-        rank_element:
-          fire:  2
-          ice:   4
-          wind:  2
-          earth: 4
-          water: 4
-          light: 1
-          dark:  6
-        rank_status:
-          paralyze:    4
-          bind:        4
-          silence:     2
-          slow:        4
-          poison:      4
-          light_sleep: 1
-          dark_sleep:  6
-          blind:       6
       render:
         look:
           type:  standard
@@ -1809,7 +1791,7 @@ templates:
 
   Palila:
     id:            5674
-    species:       waktza
+    species:       black_waktza
     skill_list_id: 460
     attributes:
       combat:
@@ -1943,7 +1925,7 @@ templates:
   Seiryu_ER:
     id:            5691
     display_name:  Seiryu
-    species:       wyvern
+    species:       legendary_wyvern
     type:          [notorious]
     spell_list_id: 25
     skill_list_id: 278
@@ -1953,24 +1935,6 @@ templates:
         delay:    360
         dmg_mult: 125
       jobs: [mnk, blm]
-      resists:
-        rank_element:
-          ice:     -2
-          wind:    10
-          earth:   10
-          thunder:  4
-          water:    4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    -2
-          bind:        -2
-          silence:     10
-          slow:        10
-          poison:       4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -1990,7 +1954,7 @@ templates:
   Suzaku_ER:
     id:            5692
     display_name:  Suzaku
-    species:       bird
+    species:       legendary_roc
     type:          [notorious]
     spell_list_id: 27
     skill_list_id: 280
@@ -1998,27 +1962,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [rdm, rdm]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          blunt:    -2500
-        rank_element:
-          fire:    10
-          ice:     10
-          wind:     4
-          earth:    4
-          thunder:  4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    10
-          bind:        10
-          silence:      4
-          slow:         4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
+      jobs:    [rdm, rdm]
+      element: fire
       render:
         look:
           type:  standard
@@ -2071,7 +2016,7 @@ templates:
 
   Virava:
     id:            6989
-    species:       rafflesia
+    species:       white_belladonna
     type:          [notorious]
     skill_list_id: 207
     attributes:
