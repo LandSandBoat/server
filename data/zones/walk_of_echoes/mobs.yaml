@@ -1371,7 +1371,7 @@ templates:
 
   Saltopus:
     id:            3446
-    species:       wyvern
+    species:       ajattara
     type:          [notorious, battlefield]
     skill_list_id: 266
     attributes:
