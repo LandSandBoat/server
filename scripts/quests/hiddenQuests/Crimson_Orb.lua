@@ -49,9 +49,9 @@ local pondOnTrigger = function(player, npc)
         quest:setLocalVar(player, 'npcOffset', npcOffset)
         player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET)
         return quest:progressCutscene(50 + npcOffset, 0, numPonds, player:getRace())
-    else
-        return quest:messageSpecial(davoiID.text.COLOR_OF_BLOOD)
     end
+
+    -- Intentional fallthrough to default action (Pool is the color of blood)
 end
 
 local pondEventFinish = function(player, csid, option, npc)
@@ -65,7 +65,7 @@ local pondEventFinish = function(player, csid, option, npc)
     player:addKeyItem(xi.keyItem.WHITE_ORB + numPonds + 1)
 
     if numPonds == 3 then
-        player:addStatusEffect(xi.effect.CURSE_I, { power = 50, duration = 900, origin = player })
+        player:addStatusEffect(xi.effect.CURSE_I, { power = 50, duration = 600, origin = player })
         player:messageSpecial(davoiID.text.ORB_QUEST_OFFSET + 5)
         quest:setVar(player, 'Prog', 3)
     end
@@ -120,11 +120,11 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        return quest:progressEvent(24, { canSkip = true })
+                        return quest:event(24, { canSkip = true }):replaceDefault()
                     elseif questProgress == 1 then
                         return quest:progressEvent(22, { canSkip = true })
                     elseif questProgress == 2 then
-                        return quest:progressEvent(21, { canSkip = true })
+                        return quest:event(21, { canSkip = true })
                     elseif questProgress == 3 then
                         return quest:progressCutscene(25, 0, 0, 0, 136)
                     end
