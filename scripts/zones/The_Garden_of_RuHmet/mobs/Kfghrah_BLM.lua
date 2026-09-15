@@ -2,58 +2,57 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Kf'ghrah BLM
 -----------------------------------
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.JAILER_OF_FORTITUDE):getTargID())
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:setMod(xi.mod.STORETP, 45)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Set core Skin and mob elemental bonus
+    -- Spawns in ball form.
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(true)
     mob:setAnimationSub(0)
-    mob:setLocalVar('roamTime', GetSystemTime())
-    mob:setModelId(1169)
-
-    -- TODO: confirm this is legit and move to mob_reistances table if so.
-    -- It isn't.
-    mob:addMod(xi.mod.LIGHT_MEVA, -100)
-    mob:addMod(xi.mod.DARK_MEVA, 100)
-end
-
-entity.onMobRoam = function(mob)
-    local currentTime = GetSystemTime()
-    if currentTime - mob:getLocalVar('changeTime') <= 90 then
-        return
-    end
-
-    if mob:getAnimationSub() == 0 then
-        mob:setAnimationSub(math.randomInt(2, 3)) -- Switch from form 0 to form 2 or 3
-    else
-        mob:setAnimationSub(0)                    -- Switch back to form 0
-    end
-
-    mob:setLocalVar('changeTime', currentTime)
+    mob:setLocalVar('desiredForm', 0)
 end
 
 entity.onMobFight = function(mob, target)
-    local currentTime = GetSystemTime()
-    if currentTime - mob:getLocalVar('changeTime') <= 90 then
+    local currentForm = mob:getAnimationSub()
+    local desiredForm = mob:getLocalVar('desiredForm')
+
+    -- If current form is the same as the desired form, do nothing.
+    if currentForm == desiredForm then
         return
     end
 
-    if mob:getAnimationSub() == 0 then
-        mob:setAnimationSub(math.randomInt(2, 3)) -- Switch from form 0 to form 2 or 3
-    else
-        mob:setAnimationSub(0)                    -- Switch back to form 0
+    if desiredForm == 0 then -- Ball
+        mob:setAutoAttackEnabled(false)
+        mob:setMagicCastingEnabled(true)
+        mob:setDelay(240)
+        mob:setAnimationSub(0)
+    elseif desiredForm == 2 then -- Spider
+        mob:setAutoAttackEnabled(true)
+        mob:setMagicCastingEnabled(false)
+        mob:setDelay(240)
+        mob:setAnimationSub(2)
+    elseif desiredForm == 3 then -- Bird
+        mob:setAutoAttackEnabled(true)
+        mob:setMagicCastingEnabled(false)
+        mob:setDelay(180)
+        mob:setAnimationSub(3)
     end
-
-    mob:setLocalVar('changeTime', currentTime)
 end
 
 return entity
