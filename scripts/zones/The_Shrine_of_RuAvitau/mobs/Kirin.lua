@@ -174,4 +174,14 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
+-- Cleanup Kirin pets on idle despawn.
+entity.onMobDespawn = function(mob)
+    for _, godId in ipairs(gods) do
+        local pet = GetMobByID(godId)
+        if pet and pet:isAlive() then
+            DespawnMob(godId)
+        end
+    end
+end
+
 return entity
