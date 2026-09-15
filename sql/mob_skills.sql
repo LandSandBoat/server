@@ -698,7 +698,7 @@ INSERT INTO `mob_skills` VALUES (666,410,'power_attack_unarmed',0,0.0,7.0,3766,3
 INSERT INTO `mob_skills` VALUES (667,411,'power_attack_armed',0,0.0,7.0,2400,3000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (668,412,'kick_back',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (669,413,'implosion',1,0.0,35.0,2000,0,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (670,414,'implosion',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (670,414,'shadow_lord_death',0,0.0,7.0,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (671,415,'umbra_smash',1,0.0,12.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (672,416,'giga_slash',1,0.0,12.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (673,417,'dark_nova',1,0.0,12.0,3000,1500,4,0,0,0,0,0,0);

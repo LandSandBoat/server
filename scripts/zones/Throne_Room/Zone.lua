@@ -34,7 +34,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 7 then
         -- You will be transported back to the entrance of Castle Zvahl Baileys
-        player:setPos(378.222, -12, -20.299, 125, 161)
+        player:setPos(379.877, -12, -20.141, 127, xi.zone.CASTLE_ZVAHL_BAILEYS)
     end
 end
 

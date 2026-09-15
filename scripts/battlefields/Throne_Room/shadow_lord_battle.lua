@@ -13,7 +13,7 @@ local content = BattlefieldMission:new({
     isMission     = true,
     allowTrusts   = true,
     maxPlayers    = 6,
-    levelCap      = 75,
+    levelCap      = xi.settings.main.MAX_LEVEL,
     timeLimit     = utils.minutes(30),
     index         = 0,
     entryNpc      = '_4l1',
@@ -59,7 +59,7 @@ content.groups =
             local players = battlefield:getPlayers()
 
             for _, player in pairs(players) do
-                player:startEvent(32004)
+                player:startEvent(32004, battlefield:getArea())
             end
         end
     },
@@ -79,5 +79,38 @@ content.groups =
         end
     }
 }
+
+function content:onBattlefieldTick(battlefield, tick)
+    Battlefield.onBattlefieldTick(self, battlefield, tick)
+
+    if battlefield:getStatus() ~= xi.battlefield.status.LOCKED then
+        return
+    end
+
+    local phaseTwo = GetMobByID(ID.mob.SHADOW_LORD_RANK_5_OFFSET + battlefield:getArea() + 2)
+    if not phaseTwo or not phaseTwo:isAlive() then
+        return
+    end
+
+    local defeated = phaseTwo:getLocalVar('[ShadowLord]Defeated')
+    if defeated == 0 then
+        return
+    end
+
+    local defeatTime = phaseTwo:getLocalVar('[ShadowLord]DefeatTime')
+
+    -- The mobskill stamps DefeatTime when the animation starts.
+    -- A wipe before his next tp move leaves it unset.
+    if defeatTime == 0 then
+        defeatTime = defeated + 30
+    end
+
+    if GetSystemTime() < defeatTime then
+        return
+    end
+
+    phaseTwo:setUnkillable(false)
+    phaseTwo:setHP(0)
+end
 
 return content:register()
