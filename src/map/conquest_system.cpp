@@ -440,7 +440,7 @@ void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpd
  *  Ranking for the 3 nations                                           *
  ************************************************************************/
 
-uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev)
+uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst)
 {
     // Based on the below values, it seems to be in pairs of bits.
     // Order is Windurst, Bastok, San d'Oria
@@ -448,53 +448,29 @@ uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_pr
     // 45 = 0b101101 = Windurst in second, Bastok in third, San d'Oria in first
     // 30 = 0b011110 = Windurst in first, Bastok in third, San d'Oria in second
 
-    uint8 ranking = 63;
-    if (sandoria >= bastok)
+    auto calculateRank = [](int inNation, int otherNationA, int otherNationB)
     {
-        ranking -= 1;
-    }
+        uint8 rank = 1; // default 1st place, 0b01
 
-    if (sandoria >= windurst)
-    {
-        ranking -= 1;
-    }
-
-    if (bastok >= sandoria)
-    {
-        ranking -= 4;
-    }
-
-    if (bastok >= windurst)
-    {
-        ranking -= 4;
-    }
-
-    if (windurst >= sandoria)
-    {
-        ranking -= 16;
-    }
-
-    if (windurst >= bastok)
-    {
-        ranking -= 16;
-    }
-
-    if (GetAlliance(sandoria_prev, bastok_prev, windurst_prev) != 0)
-    {
-        // there was an alliance last conquest week, so the allied nations will be tied for first (unless they didn't pass the other nation)
-        if (sandoria_prev > bastok_prev && sandoria_prev > windurst_prev && (ranking & 0x03) != 0x01)
+        // For each nation above us, drop ranking by 1
+        if (inNation < otherNationA)
         {
-            ranking = 0x17;
+            rank++;
         }
-        else if (bastok_prev > sandoria_prev && bastok_prev > windurst_prev && (ranking & 0x0C) != 0x04)
+
+        if (inNation < otherNationB)
         {
-            ranking = 0x1D;
+            rank++;
         }
-        else if (windurst_prev > bastok_prev && windurst_prev > sandoria_prev && (ranking & 0x30) != 0x10)
-        {
-            ranking = 0x35;
-        }
-    }
+
+        return rank;
+    };
+
+    uint8 sandyRank  = calculateRank(sandoria, bastok, windurst);
+    uint8 bastokRank = calculateRank(bastok, sandoria, windurst);
+    uint8 windyRank  = calculateRank(windurst, bastok, sandoria);
+
+    uint8 ranking = sandyRank + (bastokRank << 2) + (windyRank << 4);
 
     return ranking;
 }
@@ -505,51 +481,27 @@ uint8 GetBalance()
     uint8 bastok   = GetConquestData().getRegionControlCount(NATION_BASTOK);
     uint8 windurst = GetConquestData().getRegionControlCount(NATION_WINDURST);
 
-    uint8 sandoria_prev = GetConquestData().getPrevRegionControlCount(NATION_SANDORIA);
-    uint8 bastok_prev   = GetConquestData().getPrevRegionControlCount(NATION_BASTOK);
-    uint8 windurst_prev = GetConquestData().getPrevRegionControlCount(NATION_WINDURST);
-
-    return GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
+    return GetBalance(sandoria, bastok, windurst);
 }
 
-// TODO: Retail returns 0, 0b011, 0b101, or 0b110. Bits are nations allied: Sandoria, Bastok, Windurst
+// Bits are nations allied: Sandoria, Bastok, Windurst
 uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst)
 {
-    if (sandoria > bastok + windurst ||
-        bastok > sandoria + windurst ||
-        windurst > sandoria + bastok)
+    if (sandoria > bastok + windurst)
     {
-        return 1;
+        return 0b011; // Bastok + Windurst allied
     }
-    return 0;
-}
 
-uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev)
-{
-    if (sandoria > (bastok + windurst) && sandoria > bastok && sandoria > windurst)
+    if (bastok > sandoria + windurst)
     {
-        uint8 ranking = GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
-        if ((ranking & 0x03) == 0x01)
-        {
-            return 1;
-        }
+        return 0b101; // Sandoria + Windurst allied
     }
-    else if (bastok > (sandoria + windurst) && bastok > sandoria && bastok > windurst)
+
+    if (windurst > sandoria + bastok)
     {
-        uint8 ranking = GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
-        if ((ranking & 0x0C) == 0x04)
-        {
-            return 1;
-        }
+        return 0b110; // Sandoria + Bastok allied
     }
-    else if (windurst > (sandoria + bastok) && windurst > bastok && windurst > sandoria)
-    {
-        uint8 ranking = GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
-        if ((ranking & 0x30) == 0x10)
-        {
-            return 1;
-        }
-    }
+
     return 0;
 }
 
@@ -559,11 +511,7 @@ bool IsAlliance()
     uint8 bastok   = GetConquestData().getRegionControlCount(NATION_BASTOK);
     uint8 windurst = GetConquestData().getRegionControlCount(NATION_WINDURST);
 
-    uint8 sandoria_prev = GetConquestData().getPrevRegionControlCount(NATION_SANDORIA);
-    uint8 bastok_prev   = GetConquestData().getPrevRegionControlCount(NATION_BASTOK);
-    uint8 windurst_prev = GetConquestData().getPrevRegionControlCount(NATION_WINDURST);
-
-    return GetAlliance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev) == 1;
+    return GetAlliance(sandoria, bastok, windurst) > 0;
 }
 
 /************************************************************************

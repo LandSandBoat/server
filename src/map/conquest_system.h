@@ -67,11 +67,10 @@ void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls); 
 
 // Ranking for 3 nations
 uint8 GetBalance();
-uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
+uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst);
 
-// Determine if losing nations are allied
+// Determine which nations are allied
 uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst);
-uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst, uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
 
 bool  IsAlliance();                         // Determine if losing nations are allied
 uint8 GetNextTally();                       // Vana'diel days until next weekly conquest tally
