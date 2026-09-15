@@ -1011,6 +1011,8 @@ templates:
         flags:          [no_assist, no_turn]
         aggressive:     true
         true_detection: true
+      mob_mods:
+        exp_bonus: 35
       spawn:
         respawn: 3600
       stats:
@@ -1316,6 +1318,8 @@ templates:
         aggressive:     true
         links:          true
         true_detection: true
+      mob_mods:
+        exp_bonus: 10
       spawn:
         type: [scripted]
       stats:
@@ -1873,6 +1877,8 @@ templates:
       behaviors:
         aggressive:     true
         true_detection: true
+      mob_mods:
+        exp_bonus: 10
       spawn:
         respawn: 300
     loot:
@@ -1975,6 +1981,8 @@ templates:
         flags:          [no_assist, no_turn]
         aggressive:     true
         true_detection: true
+      mob_mods:
+        exp_bonus: 35
       spawn:
         respawn: 3600
       stats:
