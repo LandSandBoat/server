@@ -465,8 +465,12 @@ content.groups =
             end)
         end,
 
-        death = function(battlefield, mob, count)
-            if count == 7 then
+        death = function(battlefield, mob)
+            -- Set a fresh variable on battlefield creation and increment it for each enemy killed.
+            local kills = battlefield:getLocalVar('floorTwoEnemiesDefeated') + 1
+            battlefield:setLocalVar('floorTwoEnemiesDefeated', kills)
+
+            if kills == 7 then
                 npcUtil.showCrate(GetNPCByID(ID.SW_APOLLYON.npc.ITEM_CRATES[2]))
                 npcUtil.showCrate(GetNPCByID(ID.SW_APOLLYON.npc.TIME_CRATES[2]))
                 xi.limbus.showRecoverCrate(ID.SW_APOLLYON.npc.RECOVER_CRATES[2])

@@ -250,14 +250,14 @@ content.groups =
             local boss = mob:getZone():queryEntitiesByName('Evil_Armory')[1]
 
             -- Increase delay per kill
-            local delay = 3000
+            local delay = 180
             if count == 8 then
-                delay = 5000
+                delay = 300
 
                 -- Boss loses magic immunity when all 8 are dead
                 boss:setMod(xi.mod.NULL_MAGICAL_DAMAGE, 0)
             elseif count >= 5 then
-                delay = 4000
+                delay = 240
 
                 -- Increase physical damage taken
                 boss:setMod(xi.mod.SLASH_SDT, 20000)
