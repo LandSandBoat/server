@@ -17,7 +17,7 @@ UPDATE abilities SET recastTime = 900 WHERE name = 'mug';
 ------------------------------------
 
 -- Desperate Blows: Revert job trait to be merit unlocked
-UPDATE traits SET meritid = 2502, level = 75 WHERE name = 'desperate blows';
+UPDATE traits SET meritid = 2502, level = 75, value = 0 WHERE name = 'desperate blows';
 
 ------------------------------------
 -- Beastmaster
