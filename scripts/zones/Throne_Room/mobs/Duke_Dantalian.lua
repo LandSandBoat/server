@@ -4,7 +4,11 @@
 -- BCNM : Kindred Spirits
 -- Job  : Summoner
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins =
+{
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/pet_resummon'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
