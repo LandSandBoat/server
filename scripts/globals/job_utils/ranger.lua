@@ -70,6 +70,10 @@ xi.job_utils.ranger.checkSharpshot = function(player, target, ability)
 end
 
 xi.job_utils.ranger.checkScavenge = function(player, target, ability)
+    if player:getFreeSlotsCount() == 0 then
+        return xi.msg.basic.FULL_INVENTORY, 0
+    end
+
     return 0, 0
 end
 
