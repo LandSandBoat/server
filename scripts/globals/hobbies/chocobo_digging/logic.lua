@@ -237,7 +237,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
 
     -- Add weather crystals and ores to regular layer only.
     if currentLayer == xi.chocoboDig.layer.REGULAR then
-        local weather            = player:getWeather()
+        local weather            = player:getWeather(true)
         local currentDay         = VanadielDayOfTheWeek()
         local isElementalOreZone = elementalOreZoneTable[player:getZoneID()] or false
 
