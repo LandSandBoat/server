@@ -867,7 +867,7 @@ INSERT INTO `mob_skills` VALUES (835,517,'lunar_roar',2,30.0,8.0,2000,2000,4,128
 INSERT INTO `mob_skills` VALUES (836,518,'eclipse_bite',0,0.0,8.0,2000,800,4,64,0,0,9,4,0); -- Gravitation (9) / Scission (4)
 INSERT INTO `mob_skills` VALUES (837,519,'ecliptic_howl',1,0.0,10.0,517,3000,1,128,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (838,521,'howling_moon',1,0.0,30.0,520,3000,4,64,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (839,521,'howling_moon',1,0.0,30.0,2000,0,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (839,521,'howling_moon',1,0.0,30.0,2000,2000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (840,526,'punch',0,0.0,10.0,528,3000,4,64,0,0,3,0,0); -- Liquefication (3)
 INSERT INTO `mob_skills` VALUES (841,527,'fire_ii',0,0.0,10.0,529,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (842,528,'burning_strike',0,0.0,10.0,530,3000,4,64,0,0,8,0,0); -- Impaction (8)

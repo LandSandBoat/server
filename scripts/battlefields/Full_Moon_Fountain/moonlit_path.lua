@@ -20,11 +20,6 @@ local content = BattlefieldQuest:new({
     quest     = xi.quest.id.windurst.THE_MOONLIT_PATH,
 })
 
-function content:onEventFinishWin(player, csid, option, npc)
-    player:delKeyItem(xi.keyItem.MOON_BAUBLE)
-    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_THE_MOON)
-end
-
 content.groups =
 {
     {

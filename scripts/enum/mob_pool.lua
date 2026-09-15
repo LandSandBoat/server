@@ -19,6 +19,7 @@ xi.mobPool =
     EOZDEI_RIGHT           = 1242, -- Eo'zdei right rotation
     LEAFLESS_JIDRA         = 1346, -- Specific variant of Entangle
     FEELER_ANTLION         = 1318, -- Needed for Feeler Antlion special behavior
+    FENRIR_PRIME           = 1322, -- Lunar Roar strips every buff
     GULOOL_JA_JA           = 1846, -- Gulool Ja Ja skill check
     HADAL_SATIATOR         = 1869, -- Fission (Number of Adds)
     INGESTER               = 2080, -- Fission (Number of Adds)
