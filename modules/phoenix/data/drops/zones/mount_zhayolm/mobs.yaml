@@ -1,0 +1,16 @@
+# Remove Plumbago, introduced with the March 23, 2010 Alexander quests.
+# Update: https://www.playonline.com/pcd/verup/ff11us/detail/5338/detail.html
+
+templates:
+  Hilltroll_Dark_Knight:
+    loot:
+      drops:
+        - chance: very_rare
+          item:   troll_vambrace
+  Hilltroll_Warrior:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   hydrangea
+        - chance: very_rare
+          item:   troll_vambrace

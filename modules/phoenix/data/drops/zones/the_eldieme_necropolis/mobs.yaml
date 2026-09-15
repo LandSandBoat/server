@@ -1,0 +1,9 @@
+# Remove Cytherea Pearl, introduced in the March 2012 update.
+# New equipment: https://www.bg-wiki.com/ffxi/March_2012_Version_Update_Changes
+
+templates:
+  Skull_of_Sloth:
+    loot:
+      drops:
+        - chance: always
+          item:   zircon

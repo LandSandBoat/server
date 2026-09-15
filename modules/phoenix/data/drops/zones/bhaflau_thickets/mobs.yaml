@@ -1,0 +1,31 @@
+# Remove Moblin Oil, added in the June 17, 2014 update.
+# Source: https://forum.square-enix.com/ffxi/threads/42614
+
+templates:
+  Troll_Sabreur:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   puppetmasters_testimony
+        - chance: rare
+          item:   halvung_brass_key
+        - chance: very_rare
+          item:   troll_pauldron
+  Troll_Shieldbearer:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   puppetmasters_testimony
+        - chance: rare
+          item:   halvung_brass_key
+        - chance: very_rare
+          item:   troll_vambrace
+  Troll_Surveillant:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   puppetmasters_testimony
+        - chance: rare
+          item:   halvung_brass_key
+        - chance: very_rare
+          item:   troll_pauldron

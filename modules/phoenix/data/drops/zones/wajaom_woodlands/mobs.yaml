@@ -1,0 +1,22 @@
+# Remove Plumbago, introduced with the March 23, 2010 Alexander quests.
+# Update: https://www.playonline.com/pcd/verup/ff11us/detail/5338/detail.html
+
+templates:
+  Woodtroll_Dark_Knight:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   puppetmasters_testimony
+        - chance: rare
+          item:   halvung_brass_key
+        - chance: very_rare
+          item:   troll_vambrace
+  Woodtroll_Warrior:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   puppetmasters_testimony
+        - chance: rare
+          item:   halvung_brass_key
+        - chance: very_rare
+          item:   troll_vambrace
