@@ -88,7 +88,7 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [drk, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -151,6 +151,7 @@ templates:
       combat:
         skill: scythe
         delay: 360
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -518,7 +519,7 @@ templates:
       combat:
         skill: staff
         delay: 360
-      jobs: [war, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -889,7 +890,7 @@ templates:
       combat:
         skill: staff
         delay: 360
-      jobs: [war, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
