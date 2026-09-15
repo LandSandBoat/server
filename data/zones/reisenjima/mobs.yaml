@@ -1010,7 +1010,7 @@ templates:
 
   Lentic_Toad:
     id:            5373
-    species:       green_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       combat:
@@ -1031,7 +1031,7 @@ templates:
   Lentic_Toad_fished:
     id:            6943
     display_name:  Lentic_Toad
-    species:       green_poroggo
+    species:       toad
     type:          [fished]
     skill_list_id: 196
     attributes:

@@ -2475,7 +2475,7 @@ templates:
 
   Poroggo_Servant:
     id:            3186
-    species:       green_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       render:
