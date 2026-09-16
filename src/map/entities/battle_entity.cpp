@@ -2354,9 +2354,19 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         flags |= FINDFLAGS_DEAD;
     }
 
-    const auto     result    = luautils::callGlobal<sol::table>("xi.combat.magicAoE.calculateTypeAndRadius", this, PSpell);
-    const SPELLAOE aoeType   = result.get_or(1, SPELLAOE_NONE);
-    const float    aoeRadius = result.get_or(2, 0.0f);
+    const auto result    = luautils::callGlobal<sol::table>("xi.combat.magicAoE.calculateTypeAndRadius", this, PSpell);
+    SPELLAOE   aoeType   = result.get_or(1, SPELLAOE_NONE);
+    float      aoeRadius = result.get_or(2, 0.0f);
+
+    // Convergence reduces AoEs to a single target
+    // TODO: there isn't a good way to pick out which spells are supposed to be compatible with convergence
+    // So you could accidentally use Battle Dance with Convergence and lose AoE for no bonus
+    if (PSpell->getSpellGroup() == SPELLGROUP_BLUE && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Convergence))
+    {
+        aoeType   = SPELLAOE_NONE;
+        aoeRadius = 0.0f;
+    }
+
     switch (aoeType)
     {
         case SPELLAOE_RADIAL:
