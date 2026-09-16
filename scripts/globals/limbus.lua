@@ -82,6 +82,7 @@ function Limbus:new(data)
     setmetatable(obj, self)
     obj.name          = data.name
     obj.ID            = zones[obj.zoneId][obj.name] or { npc = {} }
+    obj.ID.npc        = obj.ID.npc or {}
     obj.serverVar     = '[' .. obj.name .. ']Time'
     obj.exitLocation  = data.exitLocation or 0
     obj.timeExtension = data.timeExtension or 0
@@ -95,7 +96,7 @@ function Limbus:register()
     Battlefield.register(self)
 
     -- Add recover crates that are technically "mobs"
-    if self.ID and self.ID.npc then
+    if self.ID.npc.RECOVER_CRATES then
         table.insert(self.groups, { mobIds = self.ID.npc.RECOVER_CRATES })
     end
 

@@ -1275,6 +1275,8 @@ templates:
       jobs: [war, war]
       resists:
         immune_status: [light_sleep]
+        rank_element:
+          ice: 4
         dmg_physical:
           slashing: -10000
           piercing: -10000
@@ -1428,6 +1430,8 @@ templates:
       jobs: [war, war]
       resists:
         immune_status: [light_sleep]
+        rank_element:
+          ice: 4
       render:
         look:
           type:  standard
@@ -1672,7 +1676,7 @@ templates:
     species:       corse
     type:          [notorious, battlefield]
     roam:          [scripted]
-    spell_list_id: 2
+    spell_list_id: 21
     skill_list_id: 74
     attributes:
       combat:
