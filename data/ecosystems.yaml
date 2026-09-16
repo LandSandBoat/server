@@ -209,7 +209,8 @@ ecosystems:
           detects:
             - sight
             - ability
-          speed: 32
+          speed:           32
+          animation_speed: 50
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -1649,6 +1650,7 @@ ecosystems:
       acrolith:
         id: 21
         attributes:
+          speed: 28
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -2368,6 +2370,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed: 60
         species:
           khimaira:
             id: 67
@@ -3141,6 +3144,7 @@ ecosystems:
       buffalo:
         id: 40
         attributes:
+          speed: 45
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3202,7 +3206,6 @@ ecosystems:
                 chr: e
               detects:
                 - hearing
-              speed: 60
               resists:
                 rank_element:
                   fire:    2
@@ -3237,7 +3240,7 @@ ecosystems:
             chr: b
           detects:
             - hearing
-          speed: 80
+          speed: 72
         species:
           cerberus:
             id: 90
@@ -3487,7 +3490,7 @@ ecosystems:
           detects:
             - sight
             - scent
-          speed: 50
+          speed: 75
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3547,6 +3550,8 @@ ecosystems:
       marid:
         id: 47
         attributes:
+          speed:           24
+          animation_speed: 70
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3644,7 +3649,6 @@ ecosystems:
             chr: e
           detects:
             - hearing
-          speed: 60
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -4028,7 +4032,7 @@ ecosystems:
             int: f
             mnd: d
             chr: d
-          speed:     60
+          speed:     68
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -4133,6 +4137,7 @@ ecosystems:
             - sight
             - lowhp
             - scent
+          speed: 70
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -5814,6 +5819,7 @@ ecosystems:
             chr: d
           detects:
             - sight
+          speed: 32
           mods:
             hpp: 50
           mob_mods:
@@ -5825,6 +5831,7 @@ ecosystems:
           destroyer:
             id: 161
             attributes:
+              speed: 40
               resists:
                 rank_element:
                   fire:     3
@@ -5851,6 +5858,7 @@ ecosystems:
           general:
             id: 162
             attributes:
+              speed: 40
               resists:
                 rank_element:
                   fire:    7
@@ -6257,6 +6265,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed: 28
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -6558,7 +6567,7 @@ ecosystems:
             eva: d
           detects:
             - sight
-          speed:     60
+          speed:     64
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -6885,6 +6894,7 @@ ecosystems:
             def: b
           detects:
             - sight
+          speed: 60
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -7054,6 +7064,7 @@ ecosystems:
           element: fire
           detects:
             - scent
+          speed: 80
         species:
           black_waktza:
             id: 193
@@ -7313,6 +7324,7 @@ ecosystems:
             attributes:
               detects:
                 - sight
+              speed: 70
               resists:
                 dmg_magic:
                   all: -2500
@@ -7339,6 +7351,7 @@ ecosystems:
           dynamis_kindred:
             id: 498
             attributes:
+              speed: 70
               stats:
                 str: a
                 dex: a
@@ -7410,6 +7423,7 @@ ecosystems:
               detects:
                 - sight
                 - scent
+              speed: 70
               resists:
                 dmg_magic:
                   all: -2500
@@ -7440,6 +7454,7 @@ ecosystems:
           red_demon:
             id: 202
             attributes:
+              speed: 70
               detects:
                 - sight
               resists:
@@ -7587,7 +7602,6 @@ ecosystems:
             mnd: f
           detects:
             - hearing
-          speed: 70
         species:
           gallu:
             id: 206
@@ -7733,7 +7747,7 @@ ecosystems:
           detects:
             - sight
             - hearing
-          speed: 50
+          speed: 64
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -8136,6 +8150,7 @@ ecosystems:
             mnd: e
           detects:
             - hearing
+          speed: 32
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -8218,6 +8233,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed:     56
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -8501,7 +8517,7 @@ ecosystems:
             chr: e
           detects:
             - sight
-          speed: 70
+          speed: 75
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -8625,7 +8641,7 @@ ecosystems:
             acc: a
           detects:
             - sight
-          speed: 70
+          speed: 40
           mob_mods:
             roam_turns: 6
         species:
@@ -8688,7 +8704,6 @@ ecosystems:
               element: dark
               detects:
                 - hearing
-              speed: 50
               resists:
                 rank_element:
                   fire:     2
@@ -9756,6 +9771,7 @@ ecosystems:
           detects:
             - sight
             - magic
+          speed: 70
         species:
           alicorn:
             id: 271
@@ -10084,7 +10100,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
+          speed: 30
         species:
           apex_craver:
             id: 280
@@ -10149,7 +10165,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
         species:
           apex_gorger:
             id: 282
@@ -10255,7 +10270,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10325,7 +10339,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
+          speed: 45
         species:
           apex_thinker:
             id: 287
@@ -10391,7 +10405,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  15
             roam_rate:  15
@@ -10464,7 +10477,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -10727,7 +10739,7 @@ ecosystems:
             mnd: a
             chr: a
             def: b
-          speed: 30
+          speed: 27
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10836,6 +10848,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
+          speed: 60
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10976,7 +10989,7 @@ ecosystems:
                 chr: d
               detects:
                 - scent
-              speed: 30
+              speed: 60
               resists:
                 rank_element:
                   fire:    9
@@ -11105,7 +11118,6 @@ ecosystems:
           detects:
             - sight
             - hearing
-          speed: 30
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -11282,7 +11294,7 @@ ecosystems:
           detects:
             - hearing
             - scent
-          speed:     50
+          speed:     70
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -11650,6 +11662,7 @@ ecosystems:
       phuabo:
         id: 134
         attributes:
+          speed: 80
           mob_mods:
             roam_cool:  20
             roam_rate:  13
@@ -11665,7 +11678,6 @@ ecosystems:
                 int: a
               detects:
                 - hearing
-              speed: 70
               resists:
                 rank_element:
                   fire:    -2
@@ -11739,7 +11751,7 @@ ecosystems:
             chr: d
           detects:
             - sight
-          speed: 50
+          speed: 72
         species:
           xzomit:
             id: 325
@@ -13346,7 +13358,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 50
               resists:
                 rank_element:
                   fire:     3
@@ -13506,7 +13517,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 50
               resists:
                 dmg_magic:
                   all: -2000
@@ -13627,7 +13637,6 @@ ecosystems:
                 chr: b
               detects:
                 - sight
-              speed: 50
               resists:
                 rank_element:
                   fire:    3
@@ -15240,6 +15249,7 @@ ecosystems:
             chr: e
           detects:
             - sight
+          speed:     80
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -15506,6 +15516,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
+          speed:     45
           charmable: true
           mob_mods:
             roam_cool:  15
@@ -16502,6 +16513,7 @@ ecosystems:
       wamouracampa:
         id: 198
         attributes:
+          speed: 24
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -17067,6 +17079,8 @@ ecosystems:
                 mp_base: 50
       omega:
         id: 204
+        attributes:
+          speed: 60
         species:
           omega:
             id: 477
@@ -17105,7 +17119,7 @@ ecosystems:
             mnd: b
           detects:
             - sight
-          speed: 20
+          speed: 15
         species:
           goblin_statue:
             id: 478
@@ -17292,7 +17306,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 20
               resists:
                 dmg_magic:
                   all: -3000

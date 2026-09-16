@@ -446,6 +446,8 @@ templates:
     spell_list_id: 21
     skill_list_id: 165
     attributes:
+      speed:           250
+      animation_speed:  64
       combat:
         skill: scythe
       jobs: [blm, blm]

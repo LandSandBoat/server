@@ -521,6 +521,7 @@ templates:
     type:          [notorious, battlefield]
     skill_list_id: 470
     attributes:
+      animation_speed: 50
       combat:
         skill: scythe
       render:

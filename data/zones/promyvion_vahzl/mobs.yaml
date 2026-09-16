@@ -119,7 +119,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-      jobs: [war, blm]
+      jobs:  [war, blm]
+      speed: 50
       resists:
         rank_element:
           fire: -3

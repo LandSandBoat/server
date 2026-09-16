@@ -1439,7 +1439,8 @@ templates:
     attributes:
       combat:
         skill: club
-      jobs: [whm, blm]
+      jobs:    [whm, blm]
+      element: fire
       render:
         look:
           type:  standard

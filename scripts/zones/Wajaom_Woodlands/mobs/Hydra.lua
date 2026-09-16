@@ -77,7 +77,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(32)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
     mob:setMod(xi.mod.MDEF, 30)

@@ -11,7 +11,8 @@ templates:
     attributes:
       combat:
         skill: club
-      jobs: [rdm, blm]
+      jobs:  [rdm, blm]
+      speed: 30
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
         dmg_physical:
@@ -242,7 +243,8 @@ templates:
     attributes:
       combat:
         skill: club
-      jobs: [rdm, blm]
+      jobs:  [rdm, blm]
+      speed: 30
       resists:
         immune_status: [silence, slow, elegy, light_sleep, dark_sleep]
         dmg_physical:

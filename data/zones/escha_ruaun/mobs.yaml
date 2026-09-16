@@ -76,7 +76,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [pld, whm]
+      jobs:  [pld, whm]
+      speed: 56
       render:
         look:
           type:  standard
@@ -103,7 +104,8 @@ templates:
       combat:
         skill:    great_katana
         dmg_mult: 125
-      jobs: [sam, drg]
+      jobs:  [sam, drg]
+      speed: 52
       resists:
         rank_element:
           fire:    1
@@ -146,7 +148,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [war, nin]
+      jobs:  [war, nin]
+      speed: 56
       resists:
         rank_element:
           fire:    2
@@ -188,7 +191,8 @@ templates:
       combat:
         skill:    dagger
         dmg_mult: 125
-      jobs: [bst, thf]
+      jobs:  [bst, thf]
+      speed: 52
       resists:
         rank_element:
           fire:    1

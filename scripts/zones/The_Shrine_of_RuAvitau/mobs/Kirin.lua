@@ -42,7 +42,6 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:setBaseSpeed(75)
     mob:setMod(xi.mod.STUN_RES_RANK, 11)
     mob:setLocalVar('godSpawnTime', GetSystemTime() + math.randomInt(180, 300)) -- 3-5 minutes
 

@@ -360,6 +360,7 @@ templates:
     type:          [battlefield]
     spell_list_id: 21
     attributes:
+      speed: 50
       combat:
         delay: 0
       jobs: [blm, blm]
@@ -381,6 +382,7 @@ templates:
     species: goblin
     type:    [battlefield]
     attributes:
+      speed: 50
       render:
         look:
           type:  standard
@@ -399,6 +401,7 @@ templates:
     species: orc
     type:    [battlefield]
     attributes:
+      speed: 50
       render:
         look:
           type:  standard
@@ -417,6 +420,7 @@ templates:
     species: quadav
     type:    [battlefield]
     attributes:
+      speed: 50
       render:
         look:
           type:  standard
@@ -465,6 +469,7 @@ templates:
     species: yagudo
     type:    [battlefield]
     attributes:
+      speed: 50
       render:
         look:
           type:  standard

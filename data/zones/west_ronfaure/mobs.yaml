@@ -65,6 +65,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           90
+      animation_speed: 45
       combat:
         delay: 0
       render:
@@ -80,6 +82,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           90
+      animation_speed: 45
       combat:
         delay: 0
       render:
@@ -95,6 +99,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           90
+      animation_speed: 45
       combat:
         delay: 0
       render:
@@ -194,6 +200,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           27
+      animation_speed: 45
       combat:
         delay: 0
       render:
@@ -210,6 +218,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           27
+      animation_speed: 45
       combat:
         delay: 0
       render:
@@ -226,6 +236,8 @@ templates:
     species:       sheep
     skill_list_id: 226
     attributes:
+      speed:           27
+      animation_speed: 45
       combat:
         delay: 0
       render:

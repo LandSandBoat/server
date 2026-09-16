@@ -1212,7 +1212,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1316,7 +1317,8 @@ templates:
       combat:
         skill: scythe
         delay: 240
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1454,7 +1456,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard

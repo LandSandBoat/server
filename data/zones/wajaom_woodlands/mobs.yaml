@@ -2697,6 +2697,7 @@ templates:
     type:          [notorious]
     skill_list_id: 164
     attributes:
+      speed: 50
       combat:
         skill:    scythe
         dmg_mult: 125

@@ -28,7 +28,6 @@ end
 entity.onMobSpawn = function(mob)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.animation.CLOSE_DOOR)
 
-    mob:setBaseSpeed(60)
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 4)
     mob:setMod(xi.mod.SLOW_RES_RANK, 4)
     mob:setMod(xi.mod.BLIND_RES_RANK, 4)

@@ -1330,6 +1330,8 @@ templates:
     type:          [notorious]
     skill_list_id: 133
     attributes:
+      speed:           30
+      animation_speed: 40
       combat:
         skill: dagger
       jobs: [rng, rng]

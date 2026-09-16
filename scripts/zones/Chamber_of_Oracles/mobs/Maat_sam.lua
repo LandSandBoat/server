@@ -28,7 +28,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:setUnkillable(true)
-    mob:setBaseSpeed(60)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)

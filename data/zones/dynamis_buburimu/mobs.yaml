@@ -72,6 +72,7 @@ templates:
     type:          [notorious]
     skill_list_id: 2082
     attributes:
+      speed: 27
       combat:
         skill: great_axe
       render:
@@ -116,6 +117,7 @@ templates:
     type:          [notorious]
     skill_list_id: 2081
     attributes:
+      speed: 27
       combat:
         skill: great_axe
       render:
@@ -160,6 +162,7 @@ templates:
     type:          [notorious]
     skill_list_id: 87
     attributes:
+      speed: 27
       combat:
         skill: great_axe
       render:
@@ -200,6 +203,7 @@ templates:
     type:          [notorious]
     skill_list_id: 87
     attributes:
+      speed: 27
       combat:
         skill: great_axe
       render:
@@ -336,6 +340,7 @@ templates:
     type:          [notorious]
     skill_list_id: 2083
     attributes:
+      speed: 27
       combat:
         skill: staff
       render:
@@ -1955,6 +1960,7 @@ templates:
     type:          [notorious]
     skill_list_id: 2084
     attributes:
+      speed: 27
       combat:
         skill: staff
       render:
