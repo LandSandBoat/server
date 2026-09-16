@@ -3,7 +3,7 @@ local hunts =
     {
         name       = 'Elshimo Lowlands',
         zone       = xi.zone.YUHTUNGA_JUNGLE,
-        map        = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        map        = xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,
         statusVar  = 'BMT_Lowlands_Status',
         digsiteVar = 'BMT_Lowlands_Digsite',
         maxGil     = 5000,
@@ -12,7 +12,7 @@ local hunts =
     {
         name       = 'Elshimo Uplands',
         zone       = xi.zone.YHOATOR_JUNGLE,
-        map        = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        map        = xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,
         statusVar  = 'BMT_Uplands_Status',
         digsiteVar = 'BMT_Uplands_Digsite',
         maxGil     = 7000,
@@ -21,7 +21,7 @@ local hunts =
     {
         name       = 'Kuzotz',
         zone       = xi.zone.WESTERN_ALTEPA_DESERT,
-        map        = xi.ki.MAP_OF_THE_KUZOTZ_REGION,
+        map        = xi.keyItem.MAP_OF_THE_KUZOTZ_REGION,
         statusVar  = 'BMT_Kuzotz_Status',
         digsiteVar = 'BMT_Kuzotz_Digsite',
         maxGil     = 10000,

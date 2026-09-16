@@ -8151,6 +8151,10 @@ ecosystems:
           detects:
             - hearing
           speed: 32
+          mob_mods:
+            roam_cool:  35
+            roam_rate:  35
+            roam_turns:  3
         species:
           alfard:
             id: 221
