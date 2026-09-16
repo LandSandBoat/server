@@ -443,6 +443,15 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
         (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
     then
         duration = duration + target:getMod(xi.mod.ENSPELL_DURATION)
+
+    -- Bar-element spells cast by mobs wear after 150s: Hilltroll Red Mages re-applied Barwater at a 152s floor over 408 casts (Retail data)
+    -- This means mobs use the old durations for certain spells
+    elseif
+        caster:isMob() and
+        spellEffect >= xi.effect.BARFIRE and
+        spellEffect <= xi.effect.BARWATER
+    then
+        duration = 150
     end
 
     --------------------
