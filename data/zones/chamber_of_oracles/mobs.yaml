@@ -316,7 +316,8 @@ templates:
       combat:
         skill: polearm
         delay: 400
-      jobs: [drg, none]
+      jobs:  [drg, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -341,7 +342,8 @@ templates:
       combat:
         skill: katana
         delay: 300
-      jobs: [nin, none]
+      jobs:  [nin, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -365,7 +367,8 @@ templates:
       combat:
         skill: great_katana
         delay: 360
-      jobs: [sam, none]
+      jobs:  [sam, none]
+      speed: 60
       render:
         look:
           type:  standard

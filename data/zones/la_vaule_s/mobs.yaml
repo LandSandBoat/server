@@ -1976,7 +1976,8 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 110
-      jobs: [mnk, none]
+      jobs:  [mnk, none]
+      speed: 60
       render:
         look:
           type:  standard

@@ -241,6 +241,8 @@ templates:
     type:          [battlefield]
     skill_list_id: 254
     attributes:
+      speed:           20
+      animation_speed: 24
       combat:
         skill: scythe
         delay: 170

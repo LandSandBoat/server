@@ -578,6 +578,7 @@ templates:
     type:          [notorious]
     skill_list_id: 359
     attributes:
+      speed: 60
       combat:
         skill: polearm
         delay: 360
@@ -1252,6 +1253,7 @@ templates:
     type:          [notorious]
     skill_list_id: 359
     attributes:
+      speed: 60
       combat:
         skill: sword
       resists:
@@ -3157,6 +3159,7 @@ templates:
     type:          [notorious]
     skill_list_id: 359
     attributes:
+      speed: 60
       combat:
         skill: hand_to_hand
         delay: 180
@@ -3660,6 +3663,7 @@ templates:
     type:          [notorious]
     skill_list_id: 359
     attributes:
+      speed: 60
       combat:
         skill: axe
         delay: 300
@@ -7129,6 +7133,7 @@ templates:
     type:          [notorious]
     skill_list_id: 359
     attributes:
+      speed: 60
       combat:
         skill: scythe
         delay: 280

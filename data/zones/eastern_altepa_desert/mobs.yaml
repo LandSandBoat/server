@@ -399,6 +399,8 @@ templates:
     roam:          [ignore]
     skill_list_id: 703
     attributes:
+      speed:           180
+      animation_speed: 180
       combat:
         skill: scythe
         delay: 180
@@ -446,6 +448,8 @@ templates:
     type:          [notorious]
     skill_list_id: 703
     attributes:
+      speed:           180
+      animation_speed: 180
       combat:
         skill: scythe
         delay: 180

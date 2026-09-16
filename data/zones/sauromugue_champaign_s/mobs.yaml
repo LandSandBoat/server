@@ -2049,7 +2049,8 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 110
-      jobs: [mnk, none]
+      jobs:  [mnk, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -3506,6 +3507,8 @@ templates:
     species:       yagudo_s
     skill_list_id: 270
     attributes:
+      speed:           72
+      animation_speed: 40
       combat:
         skill: great_katana
       jobs: [sam, sam]
@@ -3704,6 +3707,8 @@ templates:
     species:       yagudo_s
     skill_list_id: 270
     attributes:
+      speed:           72
+      animation_speed: 40
       combat:
         skill: hand_to_hand
         delay: 480

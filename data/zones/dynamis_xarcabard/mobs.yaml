@@ -730,6 +730,7 @@ templates:
     type:          [notorious]
     spell_list_id: 86
     attributes:
+      speed: 60
       combat:
         skill: scythe
       resists:
@@ -984,7 +985,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1179,7 +1181,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1219,7 +1222,8 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 60
       resists:
         rank_element:
           fire:    1
@@ -1611,7 +1615,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1644,7 +1649,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1812,7 +1818,8 @@ templates:
       combat:
         skill: scythe
         delay: 240
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1846,7 +1853,8 @@ templates:
       combat:
         skill: scythe
         delay: 240
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2082,7 +2090,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2114,7 +2123,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2572,7 +2582,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [bst, nin]
+      jobs:  [bst, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2690,7 +2701,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard

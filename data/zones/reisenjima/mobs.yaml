@@ -2105,7 +2105,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [blm, blm]
+      jobs:            [blm, blm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250
@@ -2152,7 +2154,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [whm, whm]
+      jobs:            [whm, whm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250
@@ -2199,7 +2203,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [blm, blm]
+      jobs:            [blm, blm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250

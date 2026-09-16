@@ -1388,6 +1388,8 @@ templates:
     species: bird
     type:    [notorious]
     attributes:
+      speed:           48
+      animation_speed: 40
       combat:
         skill: axe
       render:
@@ -1776,6 +1778,8 @@ templates:
     species: bird
     type:    [notorious]
     attributes:
+      speed:           48
+      animation_speed: 40
       combat:
         skill: axe
       render:
@@ -2209,6 +2213,8 @@ templates:
     species: tiger
     type:    [notorious]
     attributes:
+      speed:           81
+      animation_speed: 68
       combat:
         skill: scythe
       render:

@@ -1169,7 +1169,8 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [whm, whm]
+      jobs:            [whm, whm]
+      animation_speed: 32
       resists:
         dmg_physical:
           slashing: -1250
