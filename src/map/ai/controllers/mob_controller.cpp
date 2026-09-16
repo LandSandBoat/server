@@ -445,6 +445,49 @@ auto CMobController::TryCastSpell() -> bool
     return true;
 }
 
+auto CMobController::TryCastIdleBuff() -> bool
+{
+    TracyZoneScoped;
+
+    if (!CanCastSpells(IgnoreRecastsAndCosts::No))
+    {
+        return false;
+    }
+
+    // Every buff is still up on everyone in range so we wait for one to wear off
+    const auto maybeIdleBuff = PickIdleBuff();
+    if (!maybeIdleBuff.has_value())
+    {
+        return false;
+    }
+
+    // Since the OnMobSpellChoose can override the spell list we need to check for it just in case
+    const auto [maybeSpellOverride, maybeTargetOverride] = luautils::OnMobSpellChoose(PMob, maybeIdleBuff->PTarget, maybeIdleBuff->spellId);
+
+    const auto  spellId = maybeSpellOverride.value_or(maybeIdleBuff->spellId);
+    auto* const PSpell  = spell::GetSpell(spellId);
+    if (!PSpell || PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellId)) || !battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+    {
+        return false;
+    }
+
+    // If the lua script has chosen a spell but not a target cast like you normally would
+    if (maybeSpellOverride.has_value() && !maybeTargetOverride.has_value())
+    {
+        CastSpell(spellId);
+        return true;
+    }
+
+    auto* const PCastTarget = maybeTargetOverride.value_or(maybeIdleBuff->PTarget);
+    if (distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
+    {
+        return false; // Target out of range.
+    }
+
+    Cast(PCastTarget->entityId(), spellId);
+    return true;
+}
+
 auto CMobController::TrySpecialSkill() -> bool
 {
     TracyZoneScoped;
@@ -1469,7 +1512,90 @@ auto CMobController::DoBuffTick() -> bool
         return false;
     }
 
-    return TryCastSpell();
+    return TryCastIdleBuff();
+}
+
+auto CMobController::PickIdleBuff() -> Maybe<IdleBuff>
+{
+    TracyZoneScoped;
+
+    const auto buffFor = [&](CBattleEntity* PTarget) -> Maybe<IdleBuff>
+    {
+        if (PTarget == nullptr)
+        {
+            return {};
+        }
+
+        const auto missingBuffs = PMob->SpellContainer->GetBuffSpellsFor(PTarget);
+        if (missingBuffs.empty())
+        {
+            return {};
+        }
+
+        return IdleBuff{ PTarget, xirand::GetRandomElement(missingBuffs) };
+    };
+
+    const auto allies = FindBuffAllies();
+
+    // Retail gives every entity lacking a buff in range an equal share of the cast, the caster included. The closest ally gets the buff first.
+    if (xirand::GetRandomNumber(1u + allies.lacking) == 0)
+    {
+        if (const auto maybeSelfBuff = buffFor(PMob); maybeSelfBuff.has_value())
+        {
+            return maybeSelfBuff;
+        }
+
+        return buffFor(allies.PNearest);
+    }
+
+    if (const auto maybeAllyBuff = buffFor(allies.PNearest); maybeAllyBuff.has_value())
+    {
+        return maybeAllyBuff;
+    }
+
+    return buffFor(PMob);
+}
+
+auto CMobController::FindBuffAllies() -> BuffAllies
+{
+    TracyZoneScoped;
+
+    // From 271 hours of idle capturing this is what the data shows. Please note this may change if new data arrises that contradicts these findings.
+    // Retail buffs the group thats linked together, not the family. For instance a Moblin buffs a Bugbear it links with, an NM never buffs the plain mobs around it.
+    if (PMob->PParty == nullptr)
+    {
+        return { nullptr, 0 };
+    }
+
+    CMobEntity* PNearest          = nullptr;
+    float       nearestDistanceSq = 0.0f;
+    uint32      lacking           = 0;
+
+    for (auto* PMember : PMob->PParty->members)
+    {
+        auto* const PCandidate = dynamic_cast<CMobEntity*>(PMember);
+        if (PCandidate == nullptr || PCandidate == PMob || PCandidate->PMaster != nullptr || PCandidate->PBattlefield != PMob->PBattlefield ||
+            !PCandidate->isAlive() || !PCandidate->PAI->IsRoaming())
+        {
+            continue;
+        }
+
+        const auto range      = kBuffAllyHitboxScale * (PMob->modelHitboxSize + PCandidate->modelHitboxSize);
+        const auto distanceSq = distanceSquared(PMob->loc.p, PCandidate->loc.p);
+        if (distanceSq > square(range) || PMob->SpellContainer->GetBuffSpellsFor(PCandidate).empty())
+        {
+            continue;
+        }
+
+        lacking++;
+        if (PNearest == nullptr || distanceSq < nearestDistanceSq)
+        {
+            PNearest          = PCandidate;
+            nearestDistanceSq = distanceSq;
+        }
+    }
+
+    return { PNearest, lacking };
 }
 
 void CMobController::FaceTarget(const EntityId& target) const
