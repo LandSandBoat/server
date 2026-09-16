@@ -25,6 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.HAND_TO_HAND
     params.skillchainType = xi.skillchainType.INDURATION
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- guessed
 
     params.numHits       = 1
     params.ftp0          = 1.0

@@ -133,7 +133,7 @@ end
 ---Creates a default HitInfo table for a physical hit before damage resolution.
 ---@param hitNumber integer The index of this hit in a multi-hit attack sequence.
 ---@return physicalHitInfo
-local function defaultHitInfo(hitNumber)
+xi.mobskills.defaultHitInfo = function(hitNumber)
     return {
         hitNumber       = hitNumber,
         hitLanded       = false,
@@ -160,7 +160,7 @@ end
 ---@return number hitsAbsorbed Count of hits absorbed by shadows (Utsusemi/Blink)
 ---@return number shadowsAbsorbed Total number of shadow images consumed across all absorbed hits
 ---@return boolean anyCrit True if any landed hit was a critical strike
-local function tallyHitResults(hitData)
+xi.mobskills.tallyHitResults = function(hitData)
     local totalDamage     = 0
     local hitsLanded      = 0
     local hitsYaegasumi   = false
@@ -265,7 +265,7 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
     local isCritical               = false
     local hitBlocked               = false
     local blockedWithShieldMastery = false
-    local hitInfo                  = defaultHitInfo(hitNumber)
+    local hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
 
     ----------------------------------
     -- Parry / Guard
@@ -387,7 +387,7 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     local hitGuarded               = xi.combat.physical.isGuarded(target, mob) and not params.skipGuard
     local isCritical               = false
     local hitBlocked               = false
-    local hitInfo                  = defaultHitInfo(hitNumber)
+    local hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
 
     ----------------------------------
     -- Parry / Guard
@@ -600,7 +600,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
         if not hitInfo then
             -- If the skill did not penetrate and deal damage through the target's shadows, record hit as absorbed.
             if hitAbsorbed then
-                hitInfo                  = defaultHitInfo(hitNumber)
+                hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitAbsorbed      = true
                 hitInfo.missType         = 'Shadow'
                 hitInfo.shadowsConsumed  = shadowsConsumed or 0
@@ -611,12 +611,12 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
                 -- TODO: How does this interact with shadows/third eye? Do they overwrite? If they coexist, which takes priority?
             then
                 attackYaegasumi      = true -- TODO: Assuming this acts like Third Eye for now in that it blocks all hits.
-                hitInfo              = defaultHitInfo(hitNumber)
+                hitInfo              = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitYaegasumi = true
                 hitInfo.missType     = 'Yaegasumi Evade'
             elseif xi.combat.physicalHitRate.checkAnticipated(mob, target) then
                 attackAnticipated      = true -- We use this below to break the attack loop since Third Eye blocks the whole skill.
-                hitInfo                = defaultHitInfo(hitNumber)
+                hitInfo                = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitAnticipated = true
                 hitInfo.missType       = 'Anticipated'
             elseif math.randomInt(1, 100) <= hitChance * 100 then
@@ -628,7 +628,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
 
                 hitInfo.shadowsConsumed = shadowsConsumed
             else
-                hitInfo          = defaultHitInfo(hitNumber)
+                hitInfo          = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.missType = 'Evaded / Missed'
                 attackMissed     = true
             end
@@ -657,7 +657,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Tally All Hit Results
     ----------------------------------
-    local totalDamage, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, anyCrit = tallyHitResults(returnInfo.hitData)
+    local totalDamage, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, anyCrit = xi.mobskills.tallyHitResults(returnInfo.hitData)
 
     ----------------------------------
     -- Handle Automaton Analyzer Attachment
@@ -678,7 +678,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Handle Miss Messaging
     ----------------------------------
-    totalDamage = resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, params.primaryMessage, totalDamage)
+    totalDamage = xi.mobskills.resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, params.primaryMessage, totalDamage)
 
     -- Mob only gets TP for hitting the initial target. AOE hits do not count.
     xi.mobskills.calculateSkillTPReturn(totalDamage, mob, skill, target, params.attackType, hitsLanded)
@@ -839,7 +839,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         if not hitInfo then
             -- If the skill did not penetrate and deal damage through the target's shadows, record hit as absorbed.
             if hitAbsorbed then
-                hitInfo                  = defaultHitInfo(hitNumber)
+                hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitAbsorbed      = true
                 hitInfo.missType         = 'Shadow'
                 hitInfo.shadowsConsumed  = shadowsConsumed or 0
@@ -850,12 +850,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
                 -- TODO: How does this interact with shadows/third eye? Do they overwrite? If they coexist, which takes priority?
             then
                 attackYaegasumi      = true -- TODO: Assuming this acts like Third Eye for now in that it blocks all hits.
-                hitInfo              = defaultHitInfo(hitNumber)
+                hitInfo              = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitYaegasumi = true
                 hitInfo.missType     = 'Yaegasumi Evade'
             elseif xi.combat.physicalHitRate.checkAnticipated(mob, target) then
                 attackAnticipated      = true -- We use this below to break the attack loop since Third Eye blocks the whole skill.
-                hitInfo                = defaultHitInfo(hitNumber)
+                hitInfo                = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.hitAnticipated = true
                 hitInfo.missType       = 'Anticipated'
             elseif math.randomInt(1, 100) <= hitChance * 100 then
@@ -867,7 +867,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
 
                 hitInfo.shadowsConsumed  = shadowsConsumed
             else
-                hitInfo          = defaultHitInfo(hitNumber)
+                hitInfo          = xi.mobskills.defaultHitInfo(hitNumber)
                 hitInfo.missType = 'Evaded / Missed'
             end
         end
@@ -894,7 +894,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Tally All Hit Results
     ----------------------------------
-    local totalDamage, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, anyCrit = tallyHitResults(returnInfo.hitData)
+    local totalDamage, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, anyCrit = xi.mobskills.tallyHitResults(returnInfo.hitData)
 
     ----------------------------------
     -- Handle Automaton Analyzer Attachment
@@ -1648,7 +1648,7 @@ end
 
 ---@param mob CBaseEntity
 ---@param target CBaseEntity
----@param skill CMobSkill|CPetSkill
+---@param skill CMobSkill|CPetSkill|CSpell
 ---@param params table
 ---@param shadowsToRemove xi.mobskills.shadowBehavior | integer
 xi.mobskills.handleShadowConsumption = function(mob, target, skill, params, shadowsToRemove)

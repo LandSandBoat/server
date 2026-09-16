@@ -134,6 +134,7 @@ describe('BATTLE2', function()
         mob:setLevelRange(28, 28)
         mob:respawn()
         mob.assert:isAlive()
+        mob:updateEnmity(player)
     end)
 
     -- Iterate through test suites in deterministic order
