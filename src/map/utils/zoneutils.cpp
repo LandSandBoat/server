@@ -1359,6 +1359,8 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::HazhalmTestingGrounds:
         case xi::ZoneId::TalaccaCove:
         case xi::ZoneId::Periqia:
+        case xi::ZoneId::IlrusiAtoll:
+        case xi::ZoneId::TheAshuTalif:
             return REGION_TYPE::ARRAPAGO;
         case xi::ZoneId::NyzulIsle:
         case xi::ZoneId::ArrapagoRemnants:
