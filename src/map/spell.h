@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/types/maybe.h"
 #include "data/enums/skill_type.h"
+#include "data/enums/status_effect.h"
 #include "data/enums/zone_misc.h"
 #include "entities/battle_entity.h"
 
@@ -1218,6 +1219,8 @@ public:
     bool               isNa();             // is a -na spell
     bool               isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
     bool               canHitShadow();     // check if spell ignores shadows
+    auto               statusEffect() const -> Maybe<xi::StatusEffect>;
+    auto               statusEffectTier() const -> uint8;
 
     void setRadius(float radius);
     void setTotalTargets(uint16 total);
@@ -1252,6 +1255,8 @@ public:
     void setFlag(uint8 flag);
     void setContentTag(const std::string& contentTag);
     void setRange(float range);
+    void setStatusEffect(Maybe<xi::StatusEffect> statusEffect);
+    void setStatusEffectTier(uint8 tier);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -1292,6 +1297,8 @@ private:
     uint8                          m_requirements{};                  // requirements before being able to cast spell
     uint8                          m_flag{};
     std::string                    m_contentTag{};
+    Maybe<xi::StatusEffect>        statusEffect_{};
+    uint8                          statusEffectTier_{};
 };
 
 // Namespace to work with spells
