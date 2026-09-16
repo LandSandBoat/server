@@ -324,7 +324,7 @@ void dboxutils::CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO B
                         "AND slot >= 8 LIMIT 1",
                         PChar->id, charid, PItem->getID(), PItem->getQuantity());
 
-                    if (rset2 && rset->rowsAffected())
+                    if (rset2 && rset2->rowsAffected())
                     {
                         PChar->UContainer->GetItem(PostWorkNo)->setSent(false);
                         PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Cancel, BoxNo, PChar->UContainer->GetItem(PostWorkNo), PostWorkNo, PChar->UContainer->GetItemsCount(), 0x02);
