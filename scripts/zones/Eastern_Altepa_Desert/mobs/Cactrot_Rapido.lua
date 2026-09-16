@@ -179,9 +179,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ONE_WAY_LINKING, 1)
-    mob:setBaseSpeed(72)
-    mob:setAnimationSpeed(180)
-    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
