@@ -1,14 +1,14 @@
 -----------------------------------
---  Everyones Grudge
---
---  Notes: Invokes collective hatred to spite a single target.
---   Damage done is 5x the amount of tonberries you have killed! For NM's using this it is 50 x damage.
+-- Everyones Grudge
+-- Family: Tonberry
+-- Notes: Invokes collective hatred to spite a single target.
+-- Damage done is 5x the amount of tonberries you have killed!
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isNM() then
+    if mob:isNM() then -- TODO: Set skill lists
         return 1
     end
 
@@ -16,34 +16,44 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local power   = 5
-    local realDmg = power * target:getCharVar('EVERYONES_GRUDGE_KILLS') -- Damage is 5 times the amount you have killed
+    local params = {}
+
+    params.baseDamage         = target:getCharVar('EVERYONES_GRUDGE_KILLS')
+    params.fTP                = { 5.0, 5.0, 5.0 }
+    params.element            = xi.element.NONE -- TODO: Unaspected or Dark?
+    params.attackType         = xi.attackType.MAGICAL
+    params.damageType         = xi.damageType.ELEMENTAL
+    params.shadowBehavior     = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.skipMagicBonusDiff = true -- TODO: Capture if MDB reduces damage.
 
     -- TODO: Verify if this is accurate
     if target:isPet() then
-        realDmg = power * math.randomInt(30, 100)
+        local master = target:getMaster()
+
+        if master then
+            params.baseDamage = master:getCharVar('EVERYONES_GRUDGE_KILLS')
+        end
     end
 
-    if mob:isNM() then
-        realDmg = realDmg * 10 -- sets the multiplier to 50 for NM's
-    end
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
-    -- Uggalepih Necklace mitigation
-    -- While worn, consumes all TP to mitigate damage at flat breakpoints
-    -- 1500 TP = 50% reduction, 3000 TP = 100% reduction
+    -- TODO: Capture what order this takes place. (Before or after Stoneskin)
     if
         target:isPC() and
         target:getEquipID(xi.slot.NECK) == xi.item.UGGALEPIH_NECKLACE
     then
         local tpFactor = 1 - 0.5 * math.floor(target:getTP() / 1500)
-        realDmg        = math.floor(realDmg * tpFactor)
+
+        info.damage = math.floor(info.damage * tpFactor)
 
         target:setTP(0)
     end
 
-    target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+    end
 
-    return realDmg
+    return info.damage
 end
 
 return mobskillObject
