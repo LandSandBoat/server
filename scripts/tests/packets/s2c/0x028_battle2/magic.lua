@@ -219,9 +219,11 @@ local packets =
             player.actions:setBlueSpells({ xi.magic.spell.HEAD_BUTT })
             player:resetRecasts()
             stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
+            mob:updateEnmity(player)
             mob:updateClaim(player)
             mob:setMaxHP(1)
             mob:setHP(1)
+            xi.test.world:skipTime(3)
             player.actions:useSpell(mob, xi.magic.spell.HEAD_BUTT)
             xi.test.world:skipTime(10)
         end,
