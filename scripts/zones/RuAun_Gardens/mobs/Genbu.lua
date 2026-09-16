@@ -26,7 +26,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(27)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 5):setAnimation(xi.animation.CLOSE_DOOR)
     mob:setLocalVar('defaultATT', mob:getMod(xi.mod.ATT))
 

@@ -30,7 +30,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
-    mob:setBaseSpeed(60)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 6)
 
     -- Reset mob.

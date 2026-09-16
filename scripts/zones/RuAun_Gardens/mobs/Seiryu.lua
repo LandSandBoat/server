@@ -23,7 +23,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(75)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 2):setAnimation(xi.animation.CLOSE_DOOR)
     mob:setMod(xi.mod.REGAIN, 450) -- Uses TP move every 20 seconds
 

@@ -30,7 +30,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
-    mob:setBaseSpeed(60)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
 
