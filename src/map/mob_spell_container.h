@@ -36,10 +36,11 @@ public:
     CMobSpellContainer(CMobEntity* PMob);
 
     // These methods return a random spell
-    Maybe<SpellID> GetAggroSpell();  // -ga spell, dia, bio, paralyze, silence, blind
-    Maybe<SpellID> GetGaSpell();     // AoE damage spells, stonega, diaga
-    Maybe<SpellID> GetDamageSpell(); // Single target damage spells, stone
-    Maybe<SpellID> GetBuffSpell();   // stoneskin, utsusemi, blink
+    Maybe<SpellID> GetAggroSpell();                                                  // -ga spell, dia, bio, paralyze, silence, blind
+    Maybe<SpellID> GetGaSpell();                                                     // AoE damage spells, stonega, diaga
+    Maybe<SpellID> GetDamageSpell();                                                 // Single target damage spells, stone
+    Maybe<SpellID> GetBuffSpell();                                                   // stoneskin, utsusemi, blink
+    auto           GetBuffSpellsFor(CBattleEntity* PTarget) -> std::vector<SpellID>; // castable buffs the target still lacks
     Maybe<SpellID> GetDebuffSpell();
     Maybe<SpellID> GetHealSpell();   // cures, regen, armys paeon
     Maybe<SpellID> GetNaSpell();     // silena, blindna etc
