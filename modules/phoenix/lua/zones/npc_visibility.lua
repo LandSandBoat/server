@@ -175,6 +175,14 @@ local zoneEntities =
         },
     },
 
+    Upper_Jeuno =
+    {
+        hidden =
+        {
+            'Afdeen',
+        },
+    },
+
     Valley_of_Sorrows =
     {
         shown =
