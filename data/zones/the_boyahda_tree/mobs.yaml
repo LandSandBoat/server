@@ -395,7 +395,6 @@ templates:
         hitbox:         36
       behaviors:
         aggressive: true
-        links:      true
       mob_mods:
         exp_bonus: 23
       spawn:
@@ -1016,6 +1015,8 @@ templates:
         entity_flags: 133
         model_size:     2
         hitbox:        21
+      behaviors:
+        aggressive: true
       spawn:
         respawn: 300
     loot:
@@ -1236,7 +1237,6 @@ templates:
         hitbox:         16
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 300
     loot:
