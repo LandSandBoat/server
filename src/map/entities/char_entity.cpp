@@ -1508,16 +1508,20 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                     actionResult.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTarget, actionResult.param, taChar));
                 }
 
-                if (StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Sekkanoki, xi::StatusEffect::MeikyoShisui }))
+                // only Chain Affinity reduces TP
+                if (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::ChainAffinity))
                 {
-                    health.tp = (health.tp > 1000 ? health.tp - 1000 : 0);
-                }
-                else
-                {
-                    health.tp = 0;
-                }
+                    if (StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Sekkanoki, xi::StatusEffect::MeikyoShisui }))
+                    {
+                        health.tp = (health.tp > 1000 ? health.tp - 1000 : 0);
+                    }
+                    else
+                    {
+                        health.tp = 0;
+                    }
 
-                StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::ChainAffinity);
+                    StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::ChainAffinity);
+                }
             }
 
             // Immanence will create or extend a skillchain for elemental spells
