@@ -5039,7 +5039,7 @@ void DrawIn(CBattleEntity* PTarget, const position_t pos, const float offset, co
     constexpr float ENTITY_HEIGHT = 2.0f;
 
     const auto src = Vector3{ pos.x, pos.y - ENTITY_HEIGHT, pos.z };
-    const auto dst = Vector3{ nearEntity.x, nearEntity.y, nearEntity.z };
+    const auto dst = Vector3{ nearEntity.x, nearEntity.y - ENTITY_HEIGHT, nearEntity.z };
     if (PTarget->loc.zone->xiMesh()->rayIntersect(src, dst))
     {
         return;
