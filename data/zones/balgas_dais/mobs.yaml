@@ -892,7 +892,7 @@ templates:
     attributes:
       combat:
         skill: scythe
-      jobs: [war, war]
+      jobs: [drk, war]
       render:
         look:
           type:  standard
