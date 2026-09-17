@@ -29,16 +29,16 @@ xi.promyvion.mobType =
 -- Contains model IDs and subAnimations, in elemental order, per mob type.
 local mobTable =
 {
-    [xi.promyvion.mobType.WANDERER] = { { 1108,  6 }, { 1110,  5 }, { 1110,  6 }, { 1107,  6 }, { 1107,  5 }, { 1106,  6 }, { 1108,  5 }, { 1106,  5 } },
-    [xi.promyvion.mobType.STRAY   ] = { { 1108, 14 }, { 1110, 13 }, { 1110, 14 }, { 1107, 14 }, { 1107, 13 }, { 1106, 14 }, { 1108, 13 }, { 1106, 13 } },
-    [xi.promyvion.mobType.WEEPER  ] = { { 1114,  6 }, { 1115,  5 }, { 1115,  6 }, { 1113,  6 }, { 1113,  5 }, { 1112,  6 }, { 1114,  5 }, { 1112,  5 } },
-    [xi.promyvion.mobType.SEETHER ] = { { 1120,  6 }, { 1121,  5 }, { 1121,  6 }, { 1119,  6 }, { 1119,  5 }, { 1117,  6 }, { 1120,  5 }, { 1117,  5 } },
-    [xi.promyvion.mobType.THINKER ] = { { 1126, 14 }, { 1127, 13 }, { 1127, 14 }, { 1124, 14 }, { 1124, 13 }, { 1123, 14 }, { 1126, 13 }, { 1123, 13 } },
-    [xi.promyvion.mobType.GORGER  ] = { { 1131, 14 }, { 1132, 13 }, { 1132, 14 }, { 1130, 14 }, { 1130, 13 }, { 1129, 14 }, { 1131, 13 }, { 1129, 13 } },
-    [xi.promyvion.mobType.CRAVER  ] = { { 1137, 14 }, { 1138, 13 }, { 1138, 14 }, { 1135, 14 }, { 1135, 13 }, { 1134, 14 }, { 1137, 13 }, { 1134, 13 } },
-    [xi.promyvion.mobType.DRIFTER ] = { { 3616,  6 }, { 3617,  5 }, { 3617,  6 }, { 3615,  6 }, { 3615,  5 }, { 3614,  6 }, { 3616,  5 }, { 3614,  5 } },
-    [xi.promyvion.mobType.LAMENTER] = { { 3621,  6 }, { 3622,  5 }, { 3622,  6 }, { 3620,  6 }, { 3620,  5 }, { 3619,  6 }, { 3621,  5 }, { 3619,  5 } },
-    [xi.promyvion.mobType.RAGER   ] = { { 3626,  6 }, { 3627,  5 }, { 3627,  6 }, { 3625,  6 }, { 3625,  5 }, { 3624,  6 }, { 3626,  5 }, { 3624,  5 } },
+    [xi.promyvion.mobType.WANDERER] = { { 1108,  6, 40 }, { 1110,  5, 50 }, { 1110,  6, 50 }, { 1107,  6, 40 }, { 1107,  5, 40 }, { 1106,  6, 40 }, { 1108,  5, 40 }, { 1106,  5, 40 } },
+    [xi.promyvion.mobType.STRAY   ] = { { 1108, 14, 40 }, { 1110, 13, 50 }, { 1110, 14, 50 }, { 1107, 14, 40 }, { 1107, 13, 40 }, { 1106, 14, 40 }, { 1108, 13, 40 }, { 1106, 13, 40 } },
+    [xi.promyvion.mobType.WEEPER  ] = { { 1114,  6, 40 }, { 1115,  5, 40 }, { 1115,  6, 40 }, { 1113,  6, 40 }, { 1113,  5, 40 }, { 1112,  6, 50 }, { 1114,  5, 40 }, { 1112,  5, 50 } },
+    [xi.promyvion.mobType.SEETHER ] = { { 1120,  6, 40 }, { 1121,  5, 40 }, { 1121,  6, 40 }, { 1119,  6, 40 }, { 1119,  5, 40 }, { 1117,  6, 40 }, { 1120,  5, 40 }, { 1117,  5, 40 } },
+    [xi.promyvion.mobType.THINKER ] = { { 1126, 14, 40 }, { 1127, 13, 40 }, { 1127, 14, 40 }, { 1124, 14, 40 }, { 1124, 13, 40 }, { 1123, 14, 40 }, { 1126, 13, 40 }, { 1123, 13, 40 } },
+    [xi.promyvion.mobType.GORGER  ] = { { 1131, 14, 40 }, { 1132, 13, 40 }, { 1132, 14, 40 }, { 1130, 14, 40 }, { 1130, 13, 40 }, { 1129, 14, 40 }, { 1131, 13, 40 }, { 1129, 13, 40 } },
+    [xi.promyvion.mobType.CRAVER  ] = { { 1137, 14, 40 }, { 1138, 13, 40 }, { 1138, 14, 40 }, { 1135, 14, 40 }, { 1135, 13, 40 }, { 1134, 14, 40 }, { 1137, 13, 40 }, { 1134, 13, 40 } },
+    [xi.promyvion.mobType.DRIFTER ] = { { 3616,  6, 40 }, { 3617,  5, 40 }, { 3617,  6, 40 }, { 3615,  6, 40 }, { 3615,  5, 40 }, { 3614,  6, 40 }, { 3616,  5, 40 }, { 3614,  5, 40 } },
+    [xi.promyvion.mobType.LAMENTER] = { { 3621,  6, 40 }, { 3622,  5, 40 }, { 3622,  6, 40 }, { 3620,  6, 40 }, { 3620,  5, 40 }, { 3619,  6, 40 }, { 3621,  5, 40 }, { 3619,  5, 40 } },
+    [xi.promyvion.mobType.RAGER   ] = { { 3626,  6, 40 }, { 3627,  5, 40 }, { 3627,  6, 40 }, { 3625,  6, 40 }, { 3625,  5, 40 }, { 3624,  6, 40 }, { 3626,  5, 40 }, { 3624,  5, 40 } },
 }
 
 local receptacleInfoTable =
@@ -244,9 +244,13 @@ xi.promyvion.emptyOnMobSpawn = function(mob, mobType)
         mob:setMod(resRankModId, value)
     end
 
-    -- Set model and animationSub
-    mob:setModelId(mobTable[mobType][element][1])
-    mob:setAnimationSub(mobTable[mobType][element][2])
+    -- Set model, animationSub and speed.
+    local info = mobTable[mobType][element]
+
+    mob:setModelId(info[1])
+    mob:setAnimationSub(info[2])
+    mob:setBaseSpeed(info[3])
+    mob:setAnimationSpeed(info[3])
 end
 
 -----------------------------------
