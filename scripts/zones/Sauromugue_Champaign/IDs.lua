@@ -53,13 +53,14 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
     },
     mob =
     {
-        DEADLY_DODO        = GetFirstID('Deadly_Dodo'),
-        BLIGHTING_BRAND    = GetFirstID('Blighting_Brand'),
-        BASHE              = GetFirstID('Bashe'),
-        OLD_SABERTOOTH     = GetFirstID('Old_Sabertooth'),
-        ROC                = GetFirstID('Roc'),
-        CLIMBPIX_HIGHRISE  = GetFirstID('Climbpix_Highrise'),
-        DRIBBLIX_GREASEMAW = GetFirstID('Dribblix_Greasemaw'),
+        BASHE                = GetFirstID('Bashe'),
+        BLIGHTING_BRAND      = GetFirstID('Blighting_Brand'),
+        CLIMBPIX_HIGHRISE    = GetFirstID('Climbpix_Highrise'),
+        DEADLY_DODO          = GetFirstID('Deadly_Dodo'),
+        DRIBBLIX_GREASEMAW   = GetFirstID('Dribblix_Greasemaw'),
+        GOBLIN_BOUNTY_HUNTER = GetFirstID('Goblin_Bounty_Hunter'),
+        OLD_SABERTOOTH       = GetFirstID('Old_Sabertooth'),
+        ROC                  = GetFirstID('Roc'),
 
         VOIDWALKER =
         {

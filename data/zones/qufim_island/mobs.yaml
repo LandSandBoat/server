@@ -626,6 +626,7 @@ templates:
   Goblin_Bounty_Hunter:
     id:            1642
     species:       armored_goblin
+    roam:          [scripted]
     skill_list_id: 133
     attributes:
       combat:
@@ -640,8 +641,10 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        dont_roam_home: 1
       spawn:
-        type: [scripted]
+        respawn: 300
     loot:
       drops:
         - chance: rare
@@ -3113,51 +3116,51 @@ spawns:
   17293651:
     template: Goblin_Bounty_Hunter
     at:       [91.148, -21.365, -66.309, 16]
-    level:    [32, 36]
+    level:    [30, 36]
   17293652:
     template: Goblin_Bounty_Hunter
     at:       [43.732, -18.879, -105.300, 15]
-    level:    [32, 36]
+    level:    [30, 36]
   17293653:
     template: Goblin_Bounty_Hunter
     at:       [-30.420, -18.696, -70.234, 76]
-    level:    [32, 36]
+    level:    [30, 36]
   17293654:
     template: Goblin_Bounty_Hunter
     at:       [-56.626, -19.798, -62.189, 250]
-    level:    [32, 36]
+    level:    [30, 36]
   17293655:
     template: Goblin_Bounty_Hunter
     at:       [-225.331, -18.870, -3.738, 117]
-    level:    [32, 36]
+    level:    [30, 36]
   17293656:
     template: Goblin_Bounty_Hunter
     at:       [-288.229, -7.039, 14.614, 137]
-    level:    [32, 36]
+    level:    [30, 36]
   17293657:
     template: Goblin_Bounty_Hunter
     at:       [-329.932, -18.535, 49.133, 39]
-    level:    [32, 36]
+    level:    [30, 36]
   17293658:
     template: Goblin_Bounty_Hunter
     at:       [-107.449, -19.151, 394.440, 11]
-    level:    [32, 36]
+    level:    [30, 36]
   17293659:
     template: Goblin_Bounty_Hunter
     at:       [-80.198, -20.483, 368.466, 1]
-    level:    [32, 36]
+    level:    [30, 36]
   17293660:
     template: Goblin_Bounty_Hunter
     at:       [3.481, -20.111, 329.441, 36]
-    level:    [32, 36]
+    level:    [30, 36]
   17293661:
     template: Goblin_Bounty_Hunter
     at:       [44.547, -20.690, 289.820, 106]
-    level:    [32, 36]
+    level:    [30, 36]
   17293662:
     template: Goblin_Bounty_Hunter
     at:       [-17.459, -18.679, 87.008, 149]
-    level:    [11, 11]
+    level:    [10, 13]
   17293663:
     template: Jester_Malatrix
     at:       [136.852, -21.084, 21.419, 220]
