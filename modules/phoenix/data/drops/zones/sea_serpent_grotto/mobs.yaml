@@ -1,0 +1,34 @@
+# Remove the Army's Paeon V drop added in the June 17, 2014 update.
+# Source: https://forum.square-enix.com/ffxi/threads/42614
+
+templates:
+  Coastal_Sahagin:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   seashell
+        - chance: uncommon
+          item:   bards_testimony
+        - chance: uncommon
+          item:   scroll_of_warding_round
+        - chance: rare
+          item:   scroll_of_foe_requiem_vi
+        - chance: rare
+          item:   scroll_of_goddesss_hymnus
+        - chance: very_rare
+          item:   scroll_of_knights_minne_iv
+        - chance: super_rare
+          item:   scroll_of_valor_minuet_iv
+        - chance: super_rare
+          item:   scroll_of_chocobo_mazurka
+        - chance: very_rare
+          item:   coral_fragment
+        - chance: uncommon
+          one_of:
+            - scroll_of_bewitching_etude
+            - scroll_of_sage_etude
+            - scroll_of_swift_etude
+            - scroll_of_vital_etude
+            - scroll_of_logical_etude
+            - scroll_of_herculean_etude
+            - scroll_of_uncanny_etude

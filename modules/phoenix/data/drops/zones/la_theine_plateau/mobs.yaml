@@ -1,0 +1,15 @@
+# Remove Bee Pollen, added to Huge Wasps on May 14, 2015.
+# Source: https://forum.square-enix.com/ffxi/threads/46976
+
+templates:
+  Huge_Wasp:
+    loot:
+      drops:
+        - chance: common
+          item:   beehive_chip
+        - chance: uncommon
+          item:   pot_of_honey
+        - chance: rare
+          item:   insect_wing
+        - chance: very_rare
+          item:   giant_stinger

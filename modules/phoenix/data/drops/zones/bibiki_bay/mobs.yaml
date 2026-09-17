@@ -1,0 +1,16 @@
+# Revert the January 10, 2023 Air Tank source change from Blagger to Venerer.
+# Source: https://forum.square-enix.com/ffxi/threads/60314
+
+templates:
+  Hobgoblin_Blagger:
+    loot:
+      drops:
+        - chance: rare
+          item:   air_tank
+  Hobgoblin_Venerer:
+    loot:
+      drops:
+        - chance: rare
+          item:   goblin_mask
+        - chance: very_rare
+          item:   goblin_armor

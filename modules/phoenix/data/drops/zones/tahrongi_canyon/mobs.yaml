@@ -1,0 +1,15 @@
+# Remove Mandragora Dewdrop, added to Pygmaioi on May 14, 2015.
+# Source: https://forum.square-enix.com/ffxi/threads/46976
+
+templates:
+  Pygmaioi:
+    loot:
+      drops:
+        - chance: uncommon
+          item:   ball_of_saruta_cotton
+        - chance: uncommon
+          item:   two-leaf_mandragora_bud
+        - chance: rare
+          item:   pinch_of_yuhtunga_sulfur
+        - chance: super_rare
+          item:   four-leaf_mandragora_bud

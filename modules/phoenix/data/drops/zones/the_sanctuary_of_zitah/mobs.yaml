@@ -1,0 +1,11 @@
+# Remove Goobbue Humus, added to Gardeners on February 19, 2015.
+# Source: https://forum.square-enix.com/ffxi/threads/46068
+
+templates:
+  Goobbue_Gardener:
+    loot:
+      drops:
+        - chance: common
+          item:   clump_of_boyahda_moss
+        - chance: uncommon
+          item:   bag_of_tree_cuttings

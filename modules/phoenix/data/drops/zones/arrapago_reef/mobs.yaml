@@ -1,0 +1,16 @@
+# Remove Timeworn Talisman, introduced with the March 23, 2010 Odin quests.
+# Update: https://www.playonline.com/pcd/verup/ff11us/detail/5338/detail.html
+
+templates:
+  Ephramadian_Shade_cor:
+    loot:
+      drops: []
+  Ephramadian_Shade_mnk:
+    loot:
+      drops: []
+  Ephramadian_Shade_rdm:
+    loot:
+      drops: []
+  Ephramadian_Shade_rng:
+    loot:
+      drops: []

@@ -1,0 +1,15 @@
+# Restore Elder Goobbue's Humus, replaced by Great Boyahda Moss on February 19, 2015.
+# Source: https://forum.square-enix.com/ffxi/threads/46068
+
+templates:
+  Elder_Goobbue:
+    loot:
+      drops:
+        - chance: very_common
+          item:   clump_of_boyahda_moss
+        - chance: very_common
+          item:   bag_of_tree_cuttings
+        - chance: uncommon
+          item:   piece_of_wisteria_lumber
+        - chance: rare
+          item:   clump_of_goobbue_humus

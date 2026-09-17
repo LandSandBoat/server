@@ -1,0 +1,15 @@
+# Remove Refresh II, introduced September 9, 2010. JP Wiki says it is very_common but not guaranteed.
+# Source: https://www.playonline.com/pcd/verup/ff11us/detail/5835/detail.html
+
+templates:
+  Taisaijin:
+    loot:
+      drops:
+        - chance: common
+          item:   vial_of_mercury
+        - chance: common
+          item:   hecteyes_eye
+        - chance: rare
+          item:   spelunkers_hat
+        - chance: very_common
+          item:   scroll_of_refresh
