@@ -1119,10 +1119,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     end
 
     -- Early return: Out of gaze.
-    if
-        params.isGaze and
-        (not target:isFacing(caster) or not caster:isFacing(target))
-    then
+    if params.isGaze and not target:isFacing(caster) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return effect
     end
