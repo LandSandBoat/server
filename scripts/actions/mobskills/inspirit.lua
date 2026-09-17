@@ -1,6 +1,7 @@
 -----------------------------------
 -- Inspirit
--- Restores HP to nearby allies.
+-- Family: Trust - Lehko Habhoka
+-- Description: Restores HP to nearby allies.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,10 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    local params = {}
 
-    -- Todo: verify/correct maths
-    return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP() / 7) * 2)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getHP()
+    params.fTP = -- TODO: Capture fTPs
+    {
+        { tp = 1000, modifier = 73 / 256 },
+        { tp = 2000, modifier = 73 / 256 },
+        { tp = 3000, modifier = 73 / 256 },
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

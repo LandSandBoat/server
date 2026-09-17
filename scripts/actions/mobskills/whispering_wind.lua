@@ -1,7 +1,7 @@
 -----------------------------------
 -- Whispering Wind
+-- Family: Avatar (Garuda)
 -- Description: Restores HP
--- Type: Magical (Wind)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,15 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- Formula needs redone with retail MOB VERSION not players avatar
-    local base = mob:getMainLvl() + 2 * mob:getMainLvl() * (skill:getTP() / 1000) --base is around 5~150 level depending
-    local m = 5
-    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * m    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
-    base = base * multiplier
+    local params = {}
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        { tp = 1000, modifier = 68 / 1024 },
+        { tp = 2000, modifier = 101 / 1024 },
+        { tp = 3000, modifier = 134 / 1024 }, -- TODO: Do not have a capture for 2000-3000 TP. Using linear scale for now.
+    }
 
-    return xi.mobskills.mobHealMove(target, base)
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

@@ -1609,7 +1609,66 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration, subT
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, healAmount)
+-- LLS definitions for normalizeHealSkillParams()
+--- @class healSkillParams
+--- @field baseHeal       number
+--- @field additiveHeal   number
+--- @field str_wSC        number
+--- @field dex_wSC        number
+--- @field vit_wSC        number
+--- @field agi_wSC        number
+--- @field int_wSC        number
+--- @field mnd_wSC        number
+--- @field chr_wSC        number
+--- @field fTP            number[]
+--- @field fTPBonus       number
+--- @field primaryMessage xi.msg.basic
+--- @field messageBypass  boolean
+
+--- Table of default skill params shared by healing mobskills.
+--- Sets default values if the params are not explicitly defined in the mobskill script.
+--- @param fedData healSkillParams
+--- @return healSkillParams
+local function validateHealSkillParameters(fedData)
+    local params = {}
+
+    params.baseHeal       = fedData.baseHeal or 0
+    params.additiveHeal   = fedData.additiveHeal or 0
+    params.str_wSC        = fedData.str_wSC or 0
+    params.dex_wSC        = fedData.dex_wSC or 0
+    params.vit_wSC        = fedData.vit_wSC or 0
+    params.agi_wSC        = fedData.agi_wSC or 0
+    params.int_wSC        = fedData.int_wSC or 0
+    params.mnd_wSC        = fedData.mnd_wSC or 0
+    params.chr_wSC        = fedData.chr_wSC or 0
+    params.fTP            = fedData.fTP or { { tp = 1000, modifier = 1.0 }, { tp = 2000, modifier = 1.0 }, { tp = 3000, modifier = 1.0 } }
+    params.fTPBonus       = fedData.fTPBonus or 0
+    params.primaryMessage = fedData.primaryMessage or xi.msg.basic.SELF_HEAL
+    params.messageBypass  = fedData.messageBypass or false
+
+    return params
+end
+
+xi.mobskills.mobHealMove = function(mob, target, skill, action, fedData)
+    -- Sanitizes skillParams and sets defaults for any params not explicitly set in mob skill scripts.
+    local params = validateHealSkillParameters(fedData)
+
+    if not params.messageBypass then
+        skill:setMsg(params.primaryMessage)
+    end
+
+    local healAmount = 0
+    local wscMods    = xi.combat.physical.calculateWSC(mob, params.str_wSC, params.dex_wSC, params.vit_wSC, params.agi_wSC, params.int_wSC, params.mnd_wSC, params.chr_wSC)
+    local tpValue    = skill:getTP() + mob:getMod(xi.mod.TP_BONUS) + params.fTPBonus
+    local basefTP    = xi.combat.physical.calculateTPScaling(tpValue, params.fTP)
+    -- TODO: Check/capture if weather/day has any influence on healing power (Avatars, etc.)
+
+    -- TODO: Handle Curse II effect (Sometimes refered to as "Zombie")
+    -- https://www.bg-wiki.com/ffxi/Curse_(Recovery)
+
+    healAmount = math.floor((params.baseHeal + wscMods) * basefTP) + params.additiveHeal
+
+    -- TODO: Handle Cure Potency/Cure Potency Received modifiers (See: Leviathan's Soothing Current)
     healAmount = math.min(healAmount, target:getMaxHP() - target:getHP())
 
     target:wakeUp()

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Molting Burst
 -- Family: Limules
--- Description: Deals Light damage to . Restores HP of mob. Transfers any negative status effects on the mob to the target.
+-- Description: Deals Light damage to targets in range. Restores HP of mob. Transfers any negative status effects on the mob to the target.
 -- Notes: Used by Limules affiliated with Light element.
 -----------------------------------
 ---@type TMobSkill
@@ -30,11 +30,23 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         -- TODO: This skill also transfers debuffs on the mob to the target.
     end
 
-    return info.damage
-end
+    if skill:getPrimaryTargetID() == target:getID() then
+        local healParams = {}
 
-mobskillObject.onMobSkillFinalize = function(mob, skill)
-    xi.mobskills.mobHealMove(mob, mob:getMaxHP() * 0.10) -- TODO: Capture heal power
+        healParams.baseHeal = mob:getMaxHP() -- TODO: Capture fTPs/power
+        healParams.fTP =
+        {
+            { tp = 1000, modifier = 0.10 },
+            { tp = 2000, modifier = 0.10 },
+            { tp = 3000, modifier = 0.10 },
+        }
+        healParams.messageBypass = true
+
+        -- Target = mob in this case because the skill targets the player for damage but the skill should also heal the mob.
+        xi.mobskills.mobHealMove(mob, mob, skill, action, healParams)
+    end
+
+    return info.damage
 end
 
 return mobskillObject

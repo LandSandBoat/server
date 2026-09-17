@@ -1,5 +1,6 @@
 -----------------------------------
 -- Whispering Wind
+-- Family: Avatar (Garuda)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,22 +10,16 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local base = 16 + pet:getMainLvl() * 2.5
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    if target:getHP() + base > target:getMaxHP() then
-        base = target:getMaxHP() - target:getHP() --cap it
-    end
+    -- TODO: AOE range scales with TP
 
-    if target:getID() == action:getPrimaryTargetID() then
-        petskill:setMsg(xi.msg.basic.JA_RECOVERS_HP_2)
-    else
-        petskill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    end
+    local params = {}
 
-    target:addHP(base)
-    return base
+    params.primaryMessage = xi.msg.basic.JA_RECOVERS_HP_2
+    params.baseHeal       = pet:getMainLvl() * 10 - 190
+
+    return xi.mobskills.mobHealMove(pet, target, petskill, action, params)
 end
 
 return abilityObject

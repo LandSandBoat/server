@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spring Water
--- Description: restores hit points and cures some status ailments.
--- Type: Magical (Water)
+-- Family: Avatar (Leviathan)
+-- Description: Restores hit points and cures some status ailments.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,15 +11,20 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    -- Formula needs redone with retail MOB VERSION not players avatar
-    local base = mob:getMainLvl() + 2 * mob:getMainLvl() * (skill:getTP() / 1000) --base is around 5~150 level depending
-    local m = 5
-    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * m    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
-    base = base * multiplier
+    -- TODO: Does mob version erase debuffs?
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    local params = {}
 
-    return xi.mobskills.mobHealMove(target, base)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        { tp = 1000, modifier = 64 / 1024 },
+        { tp = 2000, modifier = 88 / 1024 },
+        { tp = 3000, modifier = 112 / 1024 }, -- TODO: Do not have a capture for 2000-3000 TP. Using linear scale for now.
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

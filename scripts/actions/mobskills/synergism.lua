@@ -1,7 +1,7 @@
 -----------------------------------
 -- Synergism
+-- Family: Flan
 -- Description: Steals HP from any nearby flans.
--- Type: Magical
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -26,11 +26,22 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
                 end
             end
 
-            xi.mobskills.mobHealMove(mob, absorbed)
+            local params = {}
+
+            params.baseHeal = absorbed
+            params.fTP =
+            {
+                { tp = 1000, modifier = 1.00 },
+                { tp = 2000, modifier = 1.00 },
+                { tp = 3000, modifier = 1.00 },
+            }
+
+            xi.mobskills.mobHealMove(mob, target, skill, action, params)
         end
     end
 
     skill:setMsg(xi.msg.basic.NONE)
+
     return 0
 end
 
