@@ -32,9 +32,11 @@
 #include <common/utils.h>
 
 #include <map/entities/mob_entity.h> // xi::RoamFlag::Worm
+#include <map/map_constants.h>
 #include <map/roam_region.h>
 
 #include <algorithm>
+#include <chrono>
 #include <memory>
 
 namespace
@@ -45,6 +47,9 @@ constexpr size_t kMaxPathPoints = 50;
 
 // region points tried for a recovery walk before settling for a far one
 constexpr int kRecoveryPointAttempts = 8;
+
+// entity speed to yalms per second
+constexpr float kYalmsPerSecondPerSpeed = 1.0f / 17.0f;
 
 } // namespace
 
@@ -365,7 +370,7 @@ auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort)
         return static_cast<float>(baseSpeed);
     }();
 
-    const float stepDistance = speed / (run ? 50.0f : 40.0f);
+    const float stepDistance = speed * kYalmsPerSecondPerSpeed * std::chrono::duration<float>(kLogicUpdateInterval).count();
 
     // Kinematics live in pathfind_step so tests can exercise the exact math; stepTowards() also faces the owner.
     position_t& ownerPos = owner_->position();
