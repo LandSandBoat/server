@@ -40,21 +40,15 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     params.mnd_wsc = 0.3
 
-    local damage = 0
-    if target:isUndead() then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    else
-        damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 
-        local mpDrained = utils.clamp(damage, 0, target:getMP())
-        if mpDrained == 0 then
-            spell:setMsg(xi.msg.basic.MAGIC_DMG)
-        else
-            damage = mpDrained
-            caster:addMP(damage)
-            target:delMP(damage)
-            spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP)
-        end
+    local mpDrained = utils.clamp(damage, 0, target:getMP())
+
+    -- Magic Hammer is a damaging spell that also restores MP. There is no messaging about MP restoration.
+    -- Despite this, magic hammer doesn't work on undead.
+    if mpDrained > 0 and not target:isUndead() then
+        caster:addMP(mpDrained)
+        target:delMP(mpDrained)
     end
 
     return damage
