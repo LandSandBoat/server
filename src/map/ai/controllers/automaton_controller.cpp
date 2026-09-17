@@ -787,7 +787,7 @@ auto CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers) -> boo
             {
                 castPriority.emplace_back(SpellID::Dispel);
             }
-            break;
+            [[fallthrough]];
         }
         default:
         {
