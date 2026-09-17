@@ -14,6 +14,7 @@ local petTable =
         name = 'Rabbit',
         job = xi.job.WAR,
         modelId = 268,
+        speed = 40,
         skillList =
         {
             xi.mobSkill.FOOT_KICK_1,
@@ -26,6 +27,7 @@ local petTable =
         name = 'Mandragora',
         job = xi.job.MNK,
         modelId = 301,
+        speed = 40,
         skillList =
         {
             xi.mobSkill.DREAM_FLOWER_1,
@@ -41,6 +43,7 @@ local petTable =
         name = 'Tiger',
         job = xi.job.WAR,
         modelId = 308,
+        speed = 68,
         skillList =
         {
             xi.mobSkill.CLAW_CYCLONE_1,
@@ -53,6 +56,7 @@ local petTable =
         name = 'Beetle',
         job = xi.job.PLD,
         modelId = 408,
+        speed = 40,
         skillList =
         {
             xi.mobSkill.SPOIL_1,
@@ -67,6 +71,7 @@ local petTable =
         name = 'Damselfly',
         job = xi.job.WAR,
         modelId = 448,
+        speed = 40,
         skillList =
         {
             xi.mobSkill.CURSED_SPHERE_1,
@@ -83,6 +88,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setModelId(petInfo.modelId)
     mob:changeJob(petInfo.job)
+    mob:setBaseSpeed(petInfo.speed)
     mob:setDelay(240)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setLocalVar('petIndex', petChosen)
