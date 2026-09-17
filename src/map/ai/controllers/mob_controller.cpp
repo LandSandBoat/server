@@ -1507,6 +1507,12 @@ auto CMobController::DoBuffTick() -> bool
         return true;
     }
 
+    // Mobs finish roaming before trying to buff something
+    if (PMob->PAI->PathFind->IsFollowingPath())
+    {
+        return false;
+    }
+
     if (!IsSpellReady(0, 0) || !PMob->SpellContainer->HasBuffSpells())
     {
         return false;
@@ -1913,13 +1919,6 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                        PMob->SpellContainer->HasBuffSpells();
             };
 
-            const auto wantsRandomBuff = [&]
-            {
-                return CanCastSpells(IgnoreRecastsAndCosts::No) &&
-                       xirand::GetRandomNumber(10) < 3 &&
-                       PMob->SpellContainer->HasBuffSpells();
-            };
-
             if (IsSpecialSkillReady(0) && TrySpecialSkill())
             {
                 // (Probably) spawned a pet via special skill.
@@ -1927,10 +1926,6 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
             else if (wantsSummon())
             {
                 // battlefield.lua summons the first pet so the first player sees it; later summons come through here.
-                TryCastSpell();
-            }
-            else if (wantsRandomBuff())
-            {
                 TryCastSpell();
             }
             else if ((PMob->m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None)
