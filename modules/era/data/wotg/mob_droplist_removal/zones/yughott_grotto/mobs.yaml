@@ -1,0 +1,69 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Orcish_Fighter:
+    loot: # orcish_armor_plate removed
+      drops:
+        - chance: common
+          item:   cathedral_tapestry
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: rare
+          item:   red_cryptex
+        - chance: very_rare
+          item:   lizard_helm
+        - chance: very_rare
+          item:   lizard_gloves
+        - chance: very_rare
+          item:   lizard_trousers
+        - chance: very_rare
+          item:   lizard_ledelsens
+
+  Orcish_Grunt:
+    loot: # orcish_armor_plate removed
+      drops:
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+
+  Orcish_Neckchopper:
+    loot: # orcish_armor_plate removed
+      drops:
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+
+  Orcish_Serjeant:
+    loot: # orcish_armor_plate removed
+      drops:
+        - chance: rare
+          item:   ghelsba_chest_key
+        - chance: rare
+          item:   copy_of_the_castle_floor_plans
+
+  Orcish_Stonechucker:
+    loot: # orcish_armor_plate removed
+      drops:
+        - chance: very_rare
+          item:   leather_bandana
+        - chance: very_rare
+          item:   leather_gloves
+        - chance: very_rare
+          item:   leather_trousers
+        - chance: very_rare
+          item:   leather_highboots

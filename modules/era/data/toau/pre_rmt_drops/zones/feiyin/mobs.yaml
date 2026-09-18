@@ -1,0 +1,21 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Eastern_Shadow:
+    loot: # valis_bow replaced by eurytos_bow
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: uncommon
+          item:   eurytos_bow
+
+  Western_Shadow:
+    loot: # retaliators replaced by cross-counters
+      drops:
+        - chance: always
+          item:   revival_tree_root
+        - chance: common
+          item:   cross-counters
