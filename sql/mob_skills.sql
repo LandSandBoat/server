@@ -303,7 +303,7 @@ INSERT INTO `mob_skills` VALUES (271,15,'razor_fang',0,0.0,7.0,2900,1000,4,0,0,0
 INSERT INTO `mob_skills` VALUES (272,16,'ranged_attack',0,0.0,25.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (273,17,'claw_cyclone',4,0.0,15.0,3316,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (274,6,'sheep_charge_melee',0,0.0,7.0,2000,0,4,4,0,1,0,0,0); -- Hostile Herbivores BCNM melee specials
-INSERT INTO `mob_skills` VALUES (275,809,'sand_blast',1,0.0,8.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (275,809,'sand_blast',1,0.0,8.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (276,810,'sand_pit',0,0.0,7.0,1600,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (277,811,'venom_spray',4,0.0,10.0,1683,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (278,812,'pit_ambush',0,0.0,11.0,2666,0,4,4,0,0,0,0,0);

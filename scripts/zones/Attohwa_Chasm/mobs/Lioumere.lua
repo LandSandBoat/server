@@ -2,7 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Lioumere
 -----------------------------------
-mixins = { require('scripts/mixins/families/antlion_ambush_no_rehide') }
+mixins = { require('scripts/mixins/families/antlion_ambush_popped') }
 -----------------------------------
 
 ---@type TMobEntity

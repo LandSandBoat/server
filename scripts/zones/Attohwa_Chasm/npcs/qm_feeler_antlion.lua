@@ -13,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
     if
         nm and
         not nm:isSpawned() and
-        trade:hasItemQty(xi.item.ANTLION_TRAP, 1) and
-        trade:getItemCount() == 1
+        npcUtil.tradeMatches(trade, { { xi.item.ANTLION_TRAP, 1 } })
     then
         player:tradeComplete()
-        nm:setSpawn(npc:getXPos() - 3, npc:getYPos() - 2, npc:getZPos() - 1)
+        player:messageSpecial(ID.text.ANTLION_TRAP_SET, xi.item.ANTLION_TRAP)
         SpawnMob(ID.mob.FEELER_ANTLION):updateClaim(player)
         npc:setStatus(xi.status.DISAPPEAR)
     end

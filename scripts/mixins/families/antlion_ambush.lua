@@ -10,7 +10,8 @@ local function hide(mob)
     mob:hideName(true)
     mob:setUntargetable(true)
     mob:setAutoAttackEnabled(false)
-    mob:setAnimationSub(0)
+    mob:setMagicCastingEnabled(false)
+    mob:setAnimationSub(4)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     -- mob:setStatus(xi.status.INVISIBLE) -- TODO: Implement once packet 0x00E is rewritten.
 end
@@ -22,7 +23,8 @@ g_mixins.families.antlion_ambush = function(antlion)
 
     antlion:addListener('ENGAGE', 'ANTLION_AMBUSH_ENGAGE', function(mob, target)
         -- mob:setStatus(xi.status.UPDATE)
-        mob:useMobAbility(xi.mobSkill.PIT_AMBUSH_1)
+        -- Ignore distance. A skipped ambush leaves the mob underground for life.
+        mob:useMobAbility(xi.mobSkill.PIT_AMBUSH_1, target, nil, true)
     end)
 
     antlion:addListener('WEAPONSKILL_STATE_EXIT', 'ANTLION_AMBUSH_FINISH', function(mob, skillId, wasExecuted)
@@ -30,7 +32,8 @@ g_mixins.families.antlion_ambush = function(antlion)
             mob:hideName(false)
             mob:setUntargetable(false)
             mob:setAutoAttackEnabled(true)
-            mob:setAnimationSub(1)
+            mob:setMagicCastingEnabled(true)
+            mob:setAnimationSub(5)
             mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end
     end)

@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 40) -- Don't know exact value
-    mob:addMod(xi.mod.REGEN, 120) -- Regen is 2% of HP per tick; intense HP regen
+    mob:addMod(xi.mod.REGEN, 100) -- Regen is 2% of HP per tick; intense HP regen
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 120)
 
     mob:addImmunity(xi.immunity.BIND)
@@ -30,6 +30,73 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('SAND_BLAST', 1)
+end
+
+entity.onMobWeaponSkill = function(mob, target, skill, action)
+    local skillId = skill:getID()
+    local alastor = GetMobByID(ID.mob.ALASTOR_ANTLION)
+
+    -- Sand Pit pops the next Executioner Antlion 3 seconds later, under the Feeler's target.
+    if skillId == xi.mobSkill.SANDPIT_1 then
+        mob:timer(3000, function(mobArg)
+            local ambushTarget = mobArg:getTarget()
+            if not ambushTarget then
+                return
+            end
+
+            for _, executionerId in ipairs(ID.mob.EXECUTIONER_ANTLION) do
+                local executioner = GetMobByID(executionerId)
+                if executioner and not executioner:isSpawned() then
+                    local pos = ambushTarget:getPos()
+
+                    executioner:setSpawn(pos.x, pos.y, pos.z)
+                    SpawnMob(executionerId)
+
+                    -- Players only see a popped mob after their next position update. setPos lets that update find it.
+                    -- Engage one tick later so the ambush is not dropped for anyone who has not seen it yet.
+                    -- Both can go once SpawnMob announces new mobs itself.
+                    executioner:setPos(pos.x, pos.y, pos.z)
+                    executioner:queue(0, function(executionerArg)
+                        local liveTarget = mobArg:getTarget()
+                        if liveTarget then
+                            executionerArg:updateEnmity(liveTarget)
+                        end
+                    end)
+
+                    break
+                end
+            end
+        end)
+
+    -- Sand Blast pops Alastor Antlion the same way, once per Feeler.
+    elseif
+        skillId == xi.mobSkill.SANDBLAST_1 and
+        mob:getLocalVar('SAND_BLAST') == 1 and
+        alastor and
+        not alastor:isSpawned()
+    then
+        mob:setLocalVar('SAND_BLAST', 0)
+        mob:timer(3000, function(mobArg)
+            local ambushTarget = mobArg:getTarget()
+            if not ambushTarget then
+                return
+            end
+
+            local pos = ambushTarget:getPos()
+
+            alastor:setSpawn(pos.x, pos.y, pos.z)
+            SpawnMob(ID.mob.ALASTOR_ANTLION)
+
+            -- Same one tick wait as the Executioners.
+            alastor:setPos(pos.x, pos.y, pos.z)
+            alastor:queue(0, function(alastorArg)
+                local liveTarget = mobArg:getTarget()
+                if liveTarget then
+                    alastorArg:updateClaim(liveTarget)
+                end
+            end)
+        end)
+    end
 end
 
 entity.onMobDespawn = function(mob)

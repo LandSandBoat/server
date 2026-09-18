@@ -3,7 +3,7 @@
 --  Mob: Executioner Antlion
 -----------------------------------
 local ID = zones[xi.zone.ATTOHWA_CHASM]
-mixins = { require('scripts/mixins/families/antlion_ambush_no_rehide') }
+mixins = { require('scripts/mixins/families/antlion_ambush_popped') }
 local attohwaChasmGlobal = require('scripts/zones/Attohwa_Chasm/globals')
 -----------------------------------
 ---@type TMobEntity
@@ -11,6 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 120)
+    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
 
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.GRAVITY)
