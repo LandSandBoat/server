@@ -1407,7 +1407,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     -- JEUNO OVERSEERS
     elseif guardType == xi.conquest.guard.CITY and guardNation == xi.nation.OTHER then
         local a1 = getArg1(player, guardNation, guardType)
-        local a3 = GetConquestBalance()
+        local a3 = GetNationRank(xi.nation.SANDORIA) + bit.lshift(GetNationRank(xi.nation.BASTOK), 2) + bit.lshift(GetNationRank(xi.nation.WINDURST), 4)
         local a6 = getArg6(player)
         local a7 = player:getCP()
 
@@ -1417,7 +1417,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     elseif guardType <= xi.conquest.guard.FOREIGN then
         local a1 = getArg1(player, guardNation, guardType)
         local a2 = getExForceAvailable(player, npc, guardNation)
-        local a3 = GetConquestBalance()
+        local a3 = GetNationRank(xi.nation.SANDORIA) + bit.lshift(GetNationRank(xi.nation.BASTOK), 2) + bit.lshift(GetNationRank(xi.nation.WINDURST), 4)
         local a4 = suppliesAvailableBitmask(player, guardNation)
         local a5 = player:getTeleport(guardNation)
         local a6 = getArg6(player)
@@ -1529,13 +1529,13 @@ local function handlePurchuase(player, option, pNation, pRank, guardNation, mOff
     player:setLocalVar('boughtItemCP', 0)
 
     if stock.item ~= boughtItem then
-        player:messageSpecial(mOffset + 61, stock.item) -- 'Your rank is too low to purchase the <item>.'
+        player:messageSpecial(mOffset + 61, 0, 0, stock.item) -- 'Your rank is too low to purchase the <item>.'
         return
     end
 
     -- validate rank
     if stock.rank and pRank < stock.rank then
-        player:messageSpecial(mOffset + 61, stock.item) -- 'Your rank is too low to purchase the <item>.'
+        player:messageSpecial(mOffset + 61, 0, 0, stock.item) -- 'Your rank is too low to purchase the <item>.'
         return
     end
 
