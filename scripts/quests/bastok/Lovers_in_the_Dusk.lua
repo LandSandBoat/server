@@ -31,7 +31,7 @@ quest.sections =
             onEventFinish =
             {
                 [275] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CHANSON_DE_LIBERTE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CHANSON_DE_LIBERTE)
                     quest:begin(player)
                 end,
             },
@@ -63,7 +63,7 @@ quest.sections =
             {
                 [204] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.CHANSON_DE_LIBERTE)
+                        player:delKeyItem(xi.keyItem.CHANSON_DE_LIBERTE)
                     end
                 end,
             },

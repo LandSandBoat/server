@@ -30,21 +30,21 @@ entity.onTrigger = function(player, npc)
             if not rancorDoor then
                 return
             elseif rancorDoor:getAnimation() == xi.animation.OPEN_DOOR then
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 23, xi.ki.PAINTBRUSH_OF_SOULS) -- The <KEY_ITEM> begins to twitch. The canvas is graced with the image from your soul.
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 23, xi.keyItem.PAINTBRUSH_OF_SOULS) -- The <KEY_ITEM> begins to twitch. The canvas is graced with the image from your soul.
             elseif
-                player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) and
+                player:hasKeyItem(xi.keyItem.PAINTBRUSH_OF_SOULS) and
                 xPos >= -53.2 and
                 zPos <= 0.1 and
                 zPos >= -0.1
             then
                 -- has paintbrush of souls + close enough
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, xi.ki.PAINTBRUSH_OF_SOULS)
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, xi.keyItem.PAINTBRUSH_OF_SOULS)
                 player:setCharVar('started_painting', GetSystemTime())
-                player:startEvent(60, xi.ki.PAINTBRUSH_OF_SOULS)
-            elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 15, xi.ki.PAINTBRUSH_OF_SOULS)
+                player:startEvent(60, xi.keyItem.PAINTBRUSH_OF_SOULS)
+            elseif player:hasKeyItem(xi.keyItem.PAINTBRUSH_OF_SOULS) then
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 15, xi.keyItem.PAINTBRUSH_OF_SOULS)
             else
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET, xi.ki.PAINTBRUSH_OF_SOULS) -- When the paintbrush of souls projects the deepest, darkest corner of your soul...
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET, xi.keyItem.PAINTBRUSH_OF_SOULS) -- When the paintbrush of souls projects the deepest, darkest corner of your soul...
             end
         else
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 11) -- It is a painting of a sublime-looking woman.

@@ -75,13 +75,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.INDIGESTED_ORE) and
+                        player:hasKeyItem(xi.keyItem.INDIGESTED_ORE) and
                         quest:getVar(player, 'Informed') == 0
                     then
                         return quest:progressEvent(16) -- Sends the player to Raifa.
                     elseif player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                         return quest:progressEvent(15) -- Offers to remove the ointment.
-                    elseif not player:hasKeyItem(xi.ki.INDIGESTED_ORE) then
+                    elseif not player:hasKeyItem(xi.keyItem.INDIGESTED_ORE) then
                         return quest:progressEvent(13) -- Offers to apply the ointment.
                     end
                 end,
@@ -121,9 +121,9 @@ quest.sections =
                         return quest:messageSpecial(gusgenID.text.OINTMENT_DRAWS_MONSTERS)
                     elseif
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.INDIGESTED_ORE)
+                        not player:hasKeyItem(xi.keyItem.INDIGESTED_ORE)
                     then
-                        return quest:keyItem(xi.ki.INDIGESTED_ORE)
+                        return quest:keyItem(xi.keyItem.INDIGESTED_ORE)
                     end
                 end,
             },
@@ -160,7 +160,7 @@ quest.sections =
             ['Raifa'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.INDIGESTED_ORE) then
+                    if player:hasKeyItem(xi.keyItem.INDIGESTED_ORE) then
                         return quest:progressEvent(282) -- Completes the quest.
                     else
                         return quest:event(280) -- Reminder to see Degga.
@@ -172,7 +172,7 @@ quest.sections =
             {
                 [282] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INDIGESTED_ORE)
+                        player:delKeyItem(xi.keyItem.INDIGESTED_ORE)
                         player:setCharVar('EcoReset', 1, NextConquestTally())
                     end
                 end,

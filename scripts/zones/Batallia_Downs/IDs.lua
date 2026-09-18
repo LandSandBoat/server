@@ -64,15 +64,16 @@ zones[xi.zone.BATALLIA_DOWNS] =
     },
     mob =
     {
-        AHTU              = GetFirstID('Ahtu'),
-        BADSHAH_OFFSET    = GetFirstID('Badshah'),
-        EYEGOURGER        = GetFirstID('Eyegouger'),
-        PRANKSTER_MAVERIX = GetFirstID('Prankster_Maverix'),
-        STURMTIGER        = GetFirstID('Sturmtiger'),
-        SUPARNA           = GetFirstID('Suparna'),
-        SUPARNA_FLEDGLING = GetFirstID('Suparna_Fledgling'),
-        TOTTERING_TOBY    = GetFirstID('Tottering_Toby'),
-        VEGNIX_GREENTHUMB = GetFirstID('Vegnix_Greenthumb'),
+        AHTU                 = GetFirstID('Ahtu'),
+        BADSHAH_OFFSET       = GetFirstID('Badshah'),
+        EYEGOURGER           = GetFirstID('Eyegouger'),
+        GOBLIN_BOUNTY_HUNTER = GetFirstID('Goblin_Bounty_Hunter'),
+        PRANKSTER_MAVERIX    = GetFirstID('Prankster_Maverix'),
+        STURMTIGER           = GetFirstID('Sturmtiger'),
+        SUPARNA              = GetFirstID('Suparna'),
+        SUPARNA_FLEDGLING    = GetFirstID('Suparna_Fledgling'),
+        TOTTERING_TOBY       = GetFirstID('Tottering_Toby'),
+        VEGNIX_GREENTHUMB    = GetFirstID('Vegnix_Greenthumb'),
 
         VOIDWALKER =
         {

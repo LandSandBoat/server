@@ -25,7 +25,7 @@ Rewards in this table are given when the class `complete(player)` function is ca
 ```
 mission.reward =
 {
-    keyItem     = xi.ki.SACRIFICIAL_CHAMBER_KEY,
+    keyItem     = xi.keyItem.SACRIFICIAL_CHAMBER_KEY,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH },
 }
 ```

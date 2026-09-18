@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         npcUtil.tradeHas(trade, xi.item.JUDGMENT_KEY) and
-        player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
+        player:hasKeyItem(xi.keyItem.BALGA_CHAMPION_CERTIFICATE) and
         zPos >= 80 and zPos < 86
     then
         npc:openDoor(2.5)

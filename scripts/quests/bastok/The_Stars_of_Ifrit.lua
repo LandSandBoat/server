@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasKeyItem(xi.ki.AIRSHIP_PASS) and
+                player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) and
                 player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
@@ -48,7 +48,7 @@ quest.sections =
             ['Agapito'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) then
+                    if player:hasKeyItem(xi.keyItem.CARRIER_PIGEON_LETTER) then
                         return quest:progressEvent(181)
                     end
                 end,
@@ -71,8 +71,8 @@ quest.sections =
                     -- and is handled in onGameHour in Zone.lua for San d'Oria-Jeuno Airship.
                     -- This is a permanent Key Item.
 
-                    if not player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) then
-                        return quest:keyItem(xi.ki.CARRIER_PIGEON_LETTER)
+                    if not player:hasKeyItem(xi.keyItem.CARRIER_PIGEON_LETTER) then
+                        return quest:keyItem(xi.keyItem.CARRIER_PIGEON_LETTER)
                     end
                 end,
             },

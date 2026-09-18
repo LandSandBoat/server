@@ -61,10 +61,10 @@ quest.sections =
             ['Oggbi'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(290)
                     else
-                        local hideReacquireMenuItem = (player:hasItem(xi.item.KNUCKLES_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
+                        local hideReacquireMenuItem = (player:hasItem(xi.item.KNUCKLES_OF_TRIALS) or player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
                         return quest:event(287, hideReacquireMenuItem)
                     end
                 end,
@@ -89,21 +89,21 @@ quest.sections =
                         npcUtil.giveItem(player, xi.item.KNUCKLES_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end
                 end,
 
                 [289] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
 
                 [290] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
                         player:addLearnedWeaponskill(xi.wsUnlock.ASURAN_FISTS)
                         player:messageSpecial(portBastokID.text.ASURAN_FISTS_LEARNED)
                     end
@@ -118,9 +118,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
-                        return quest:keyItem(xi.ki.ANNALS_OF_TRUTH)
+                        return quest:keyItem(xi.keyItem.ANNALS_OF_TRUTH)
                     elseif
-                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
                         npcUtil.popFromQM(player, npc, bostaunieuxID.mob.BODACH, { hide = 0 })
                     then
@@ -132,7 +132,7 @@ quest.sections =
             ['Bodach'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         player:setLocalVar('killed_wsnm', 1)
                     end
                 end,

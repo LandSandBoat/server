@@ -10,7 +10,7 @@ local ID = zones[xi.zone.PORT_JEUNO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
         if
             trade:hasItemQty(xi.item.GHELSBA_CHEST_KEY, 1) and
             trade:hasItemQty(xi.item.PALBOROUGH_CHEST_KEY, 1) and
@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
         player:startEvent(300)
     else
         player:startEvent(300, 0, 0, 0, 0, 0, 6)
@@ -36,7 +36,7 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 300 and option == 99 then
         if player:delGil(148000) then
-            player:addKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+            player:addKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
             player:updateEvent(0, 1)
         end
     end
@@ -45,11 +45,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 300 and option == 33 and
-        player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
     then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
     elseif csid == 301 then
-        npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        npcUtil.giveKeyItem(player, xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
         player:tradeComplete()
     end
 end

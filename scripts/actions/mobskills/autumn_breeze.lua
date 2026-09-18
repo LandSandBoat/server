@@ -1,6 +1,6 @@
 -----------------------------------
 -- Autumn Breeze
---
+-- Family: Pixie
 -- Description: Recovers HP.
 -----------------------------------
 ---@type TMobSkill
@@ -21,11 +21,22 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skuld     : 250 ish
     carabosse : 100-250 ish (lowest lv mob of the 3)
     ]]
-    local heal = math.randomInt(100, 400)
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    -- Note: JPWiki says may also give a regen effect.
+    -- https://wiki.ffo.jp/html/24432.html
 
-    return xi.mobskills.mobHealMove(mob, heal)
+    local params = {}
+
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = math.randomInt(100, 400) -- TODO: Capture heal power. Most mobskills use mob's max HP.
+    params.fTP =
+    {
+        { tp = 1000, modifier = 1.00 },
+        { tp = 2000, modifier = 1.00 },
+        { tp = 3000, modifier = 1.00 },
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

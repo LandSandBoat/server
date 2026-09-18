@@ -23,7 +23,7 @@ Retail packet captures are essential for accurate migrations. They provide the e
 - **Quest IDs:** `scripts/globals/quests.lua`.
 - **Mission IDs:** `scripts/globals/missions.lua`.
 - **Item Constants:** `scripts/enum/item.lua`.
-- **Key Item Constants:** `scripts/enum/key_item.lua`.
+- **Key Item Constants:** `data/enums/key_item.yaml`.
 - **Zone Constants:** `scripts/enum/zone.lua`.
 
 ### Retail Event Dumps

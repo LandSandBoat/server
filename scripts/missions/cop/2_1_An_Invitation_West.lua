@@ -33,8 +33,8 @@ mission.sections =
             onEventFinish =
             {
                 [110] = function(player, csid, option, npc)
-                    player:messageSpecial(lufaiseID.text.KI_STOLEN, 0, xi.ki.MYSTERIOUS_AMULET)
-                    player:delKeyItem(xi.ki.MYSTERIOUS_AMULET)
+                    player:messageSpecial(lufaiseID.text.KI_STOLEN, 0, xi.keyItem.MYSTERIOUS_AMULET)
+                    player:delKeyItem(xi.keyItem.MYSTERIOUS_AMULET)
                     mission:setVar(player, 'Status', 1)
                 end,
             },

@@ -26,6 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.skillchainType = xi.skillchainType.IMPACTION
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- This can take 1, 2 or 3. It seems to behave strangely. Tested in PVP.
 
     params.numHits       = 1
     params.ftp0          = 2.0

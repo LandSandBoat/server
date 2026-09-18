@@ -83,7 +83,7 @@ mission.sections =
                 if
                     prevZone == xi.zone.QUICKSAND_CAVES and
                     player:getMissionStatus(mission.areaId) == 1 and
-                    not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+                    not player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ALTEPA)
                 then
                     local cutsceneFlags = bit.bor(
                         xi.cutsceneFlag.RESET_CAMERA,
@@ -98,7 +98,7 @@ mission.sections =
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANCIENT_VERSE_OF_ALTEPA)
                 end,
             },
         },
@@ -112,9 +112,9 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 2 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.MOON_READING
                     then
-                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
-                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
-                        player:delKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
+                        player:delKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ROMAEVE)
+                        player:delKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ALTEPA)
+                        player:delKeyItem(xi.keyItem.ANCIENT_VERSE_OF_UGGALEPIH)
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,
@@ -132,13 +132,13 @@ mission.sections =
                         return mission:progressEvent(384)
                     elseif
                         missionStatus == 1 and
-                        player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE) and
-                        player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA) and
-                        player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
+                        player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ROMAEVE) and
+                        player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ALTEPA) and
+                        player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_UGGALEPIH)
                     then
                         return mission:progressEvent(385)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(386, 0, 0, xi.ki.ORASTERY_RING)
+                        return mission:progressEvent(386, 0, 0, xi.keyItem.ORASTERY_RING)
                     elseif missionStatus == 4 then
                         -- This does not use the npcUtil function, as in both cases we need to return
                         -- an appropriate mission function.
@@ -188,7 +188,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
+                        not player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_ROMAEVE)
                     then
                         return mission:progressCutscene(4)
                     end
@@ -198,7 +198,7 @@ mission.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANCIENT_VERSE_OF_ROMAEVE)
                 end,
             },
         },
@@ -210,7 +210,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        not player:hasKeyItem(xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
+                        not player:hasKeyItem(xi.keyItem.ANCIENT_VERSE_OF_UGGALEPIH)
                     then
                         return mission:progressCutscene(68)
                     end
@@ -220,7 +220,7 @@ mission.sections =
             onEventFinish =
             {
                 [68] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_VERSE_OF_UGGALEPIH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANCIENT_VERSE_OF_UGGALEPIH)
                 end,
             },
         },

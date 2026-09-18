@@ -11,7 +11,7 @@ local entity = {}
 
 local trustMemory = function(player)
     local memories = 0
-    if player:hasKeyItem(xi.ki.BALLISTA_LICENSE) then
+    if player:hasKeyItem(xi.keyItem.BALLISTA_LICENSE) then
         memories = memories + 2
     end
 
@@ -77,10 +77,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.EXCENMILLE)
         player:setCharVar('SandoriaFirstTrust', 1)
     elseif csid == 895 then
-        player:delKeyItem(xi.ki.RED_INSTITUTE_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.RED_INSTITUTE_CARD)
+        player:delKeyItem(xi.keyItem.RED_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA, {
-            keyItem = xi.ki.SAN_DORIA_TRUST_PERMIT,
+            keyItem = xi.keyItem.SAN_DORIA_TRUST_PERMIT,
             title = xi.title.THE_TRUSTWORTHY,
             var = 'SandoriaFirstTrust'
         })
@@ -88,10 +88,10 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 897 then
         player:addSpell(xi.magic.spell.EXCENMILLE, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.EXCENMILLE)
-        player:delKeyItem(xi.ki.RED_INSTITUTE_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.RED_INSTITUTE_CARD)
+        player:delKeyItem(xi.keyItem.RED_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA, {
-            keyItem = xi.ki.SAN_DORIA_TRUST_PERMIT
+            keyItem = xi.keyItem.SAN_DORIA_TRUST_PERMIT
         })
     end
 end

@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF
 
 mission.reward =
 {
-    keyItem     = xi.ki.MOONSHADE_EARRING,
+    keyItem     = xi.keyItem.MOONSHADE_EARRING,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.WHERE_IT_ALL_BEGAN },
 }
 
@@ -31,7 +31,7 @@ mission.sections =
                         local hasDeclined = mission:getVar(player, 'Option')
 
                         return mission:progressEvent(38, 89, 23, 1756, 0, 0, 0, hasDeclined, 0)
-                    elseif not player:hasKeyItem(xi.ki.PRIMAL_GLOW) then
+                    elseif not player:hasKeyItem(xi.keyItem.PRIMAL_GLOW) then
                         -- The wait for reobtaining this keyitem is only triggered after the initial
                         -- replacement.  It is possible that a timer is set on complete of last mission
                         -- for this piece, but unconfirmed.
@@ -58,7 +58,7 @@ mission.sections =
 
                 [44] = function(player, csid, option, npc)
                     mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                    npcUtil.giveKeyItem(player, xi.ki.PRIMAL_GLOW)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PRIMAL_GLOW)
                 end,
             },
         },

@@ -14,7 +14,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.fameArea.BASTOK,
-    keyItem  = xi.ki.JOB_GESTURE_DARK_KNIGHT,
+    keyItem  = xi.keyItem.JOB_GESTURE_DARK_KNIGHT,
     title    = xi.title.DARK_SIDER,
 }
 

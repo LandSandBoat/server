@@ -15,7 +15,7 @@ describe('Rise of the Zilart', function()
             -- After defeating the Shadow Lord and gaining rank 6, head to Norg for a cut-scene.
             player:gotoZone(xi.zone.NORG)
             player.events:expect({ eventId = 1, finishOption = 1 }) -- Yes (View cutscene).
-            player.assert:hasKI(xi.ki.MAP_OF_NORG)
+            player.assert:hasKI(xi.keyItem.MAP_OF_NORG)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
         end)
 
@@ -31,7 +31,7 @@ describe('Rise of the Zilart', function()
             -- Examine the Tales' Beginning at H-9 to start the storyline.
             player.entities:gotoAndTrigger('Tales_Beginning', { eventId = 293, finishOption = 1 })
             player.events:expect({ eventId = 1 })
-            player.assert:hasKI(xi.ki.MAP_OF_NORG)
+            player.assert:hasKI(xi.keyItem.MAP_OF_NORG)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
         end)
 
@@ -51,7 +51,7 @@ describe('Rise of the Zilart', function()
             -- which is required to enter the deeper areas of the Temple of Uggalepih.
             player:gotoZone(xi.zone.KAZHAM)
             player.entities:gotoAndTrigger('Jakoh_Wahcondalo', { eventId = 114 })
-            player.assert:hasKI(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+            player.assert:hasKI(xi.keyItem.SACRIFICIAL_CHAMBER_KEY)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
         end)
     end)
@@ -59,7 +59,7 @@ describe('Rise of the Zilart', function()
     describe('ZM4 - The Temple of Uggalepih', function()
         it('should complete the Sacrificial Chamber battle', function()
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
-            player:addKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+            player:addKeyItem(xi.keyItem.SACRIFICIAL_CHAMBER_KEY)
 
             -- After entering the Sacrificial Chamber, examine the heavy door to enter the Battlefield.
             player:gotoZone(xi.zone.SACRIFICIAL_CHAMBER)
@@ -70,8 +70,8 @@ describe('Rise of the Zilart', function()
             player.events:expect({ eventId = 7 })
             player.events:expect({ eventId = 8 })
 
-            player.assert.no:hasKI(xi.ki.SACRIFICIAL_CHAMBER_KEY)
-            player.assert:hasKI(xi.ki.DARK_FRAGMENT)
+            player.assert.no:hasKI(xi.keyItem.SACRIFICIAL_CHAMBER_KEY)
+            player.assert:hasKI(xi.keyItem.DARK_FRAGMENT)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE)
         end)
     end)
@@ -84,7 +84,7 @@ describe('Rise of the Zilart', function()
         it('should collect Water fragment', function()
             player:gotoZone(xi.zone.LA_THEINE_PLATEAU)
             player.entities:gotoAndTrigger('Cermet_Headstone', { eventId = 200, finishOption = 1 })
-            player.assert:hasKI(xi.ki.WATER_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.WATER_FRAGMENT)
             player.entities:gotoAndTrigger('Cermet_Headstone')
             player.events:expectNotInEvent()
         end)
@@ -92,7 +92,7 @@ describe('Rise of the Zilart', function()
         it('should collect Ice fragment', function()
             player:gotoZone(xi.zone.CLOISTER_OF_FROST)
             player.entities:gotoAndTrigger('Cermet_Headstone', { eventId = 200, finishOption = 1 })
-            player.assert:hasKI(xi.ki.ICE_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.ICE_FRAGMENT)
             player.entities:gotoAndTrigger('Cermet_Headstone')
             player.events:expectNotInEvent()
         end)
@@ -100,7 +100,7 @@ describe('Rise of the Zilart', function()
         it('should collect Earth fragment', function()
             player:gotoZone(xi.zone.WESTERN_ALTEPA_DESERT)
             player.entities:gotoAndTrigger('Cermet_Headstone', { eventId = 200, finishOption = 1 })
-            player.assert:hasKI(xi.ki.EARTH_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.EARTH_FRAGMENT)
             player.entities:gotoAndTrigger('Cermet_Headstone')
             player.events:expectNotInEvent()
         end)
@@ -124,7 +124,7 @@ describe('Rise of the Zilart', function()
             player:claimAndKillMob(carthi)
 
             player.entities:gotoAndTrigger(yuhtungaHeadstone, { finishOption = 1 })
-            player.assert:hasKI(xi.ki.FIRE_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.FIRE_FRAGMENT)
             player.events:expectNotInEvent()
             tipha.assert.no:isSpawned()
             carthi.assert.no:isSpawned()
@@ -145,7 +145,7 @@ describe('Rise of the Zilart', function()
             player:claimAndKillMob(axesarion)
 
             player.entities:gotoAndTrigger(terigganHeadstone, { eventId = 201, finishOption = 1 })
-            player.assert:hasKI(xi.ki.WIND_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.WIND_FRAGMENT)
             player.events:expectNotInEvent()
             axesarion.assert.no:isSpawned()
         end)
@@ -169,7 +169,7 @@ describe('Rise of the Zilart', function()
             player:claimAndKillMob(ancWeapon)
 
             player.entities:gotoAndTrigger(bdHeadstone, { eventId = 201, finishOption = 1 })
-            player.assert:hasKI(xi.ki.LIGHTNING_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.LIGHTNING_FRAGMENT)
             player.events:expectNotInEvent()
             legWeapon.assert.no:isSpawned()
             ancWeapon.assert.no:isSpawned()
@@ -190,22 +190,22 @@ describe('Rise of the Zilart', function()
             player:claimAndKillMob(pilgrim)
 
             player.entities:gotoAndTrigger(zitahHeadstone, { eventId = 201, finishOption = 1 })
-            player.assert:hasKI(xi.ki.LIGHT_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.LIGHT_FRAGMENT)
             player.events:expectNotInEvent()
             pilgrim.assert.no:isSpawned()
         end)
 
         it('Earth fragment should complete the mission after collecting all fragments', function()
-            player:addKeyItem(xi.ki.WATER_FRAGMENT)
-            player:addKeyItem(xi.ki.ICE_FRAGMENT)
-            player:addKeyItem(xi.ki.FIRE_FRAGMENT)
-            player:addKeyItem(xi.ki.WIND_FRAGMENT)
-            player:addKeyItem(xi.ki.LIGHTNING_FRAGMENT)
-            player:addKeyItem(xi.ki.LIGHT_FRAGMENT)
-            player:addKeyItem(xi.ki.DARK_FRAGMENT)
+            player:addKeyItem(xi.keyItem.WATER_FRAGMENT)
+            player:addKeyItem(xi.keyItem.ICE_FRAGMENT)
+            player:addKeyItem(xi.keyItem.FIRE_FRAGMENT)
+            player:addKeyItem(xi.keyItem.WIND_FRAGMENT)
+            player:addKeyItem(xi.keyItem.LIGHTNING_FRAGMENT)
+            player:addKeyItem(xi.keyItem.LIGHT_FRAGMENT)
+            player:addKeyItem(xi.keyItem.DARK_FRAGMENT)
             player:gotoZone(xi.zone.WESTERN_ALTEPA_DESERT)
             player.entities:gotoAndTrigger('Cermet_Headstone', { eventId = 200, finishOption = 1 })
-            player.assert:hasKI(xi.ki.EARTH_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.EARTH_FRAGMENT)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
         end)
     end)
@@ -215,14 +215,14 @@ describe('Rise of the Zilart', function()
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
             local pedestalsFragmentsTable =
             {
-                { xi.ki.FIRE_FRAGMENT,      'Pedestal_of_Fire' },
-                { xi.ki.EARTH_FRAGMENT,     'Pedestal_of_Earth' },
-                { xi.ki.WATER_FRAGMENT,     'Pedestal_of_Water' },
-                { xi.ki.WIND_FRAGMENT,      'Pedestal_of_Wind' },
-                { xi.ki.ICE_FRAGMENT,       'Pedestal_of_Ice' },
-                { xi.ki.LIGHTNING_FRAGMENT, 'Pedestal_of_Lightning' },
-                { xi.ki.LIGHT_FRAGMENT,     'Pedestal_of_Light' },
-                { xi.ki.DARK_FRAGMENT,      'Pedestal_of_Darkness' },
+                { xi.keyItem.FIRE_FRAGMENT,      'Pedestal_of_Fire' },
+                { xi.keyItem.EARTH_FRAGMENT,     'Pedestal_of_Earth' },
+                { xi.keyItem.WATER_FRAGMENT,     'Pedestal_of_Water' },
+                { xi.keyItem.WIND_FRAGMENT,      'Pedestal_of_Wind' },
+                { xi.keyItem.ICE_FRAGMENT,       'Pedestal_of_Ice' },
+                { xi.keyItem.LIGHTNING_FRAGMENT, 'Pedestal_of_Lightning' },
+                { xi.keyItem.LIGHT_FRAGMENT,     'Pedestal_of_Light' },
+                { xi.keyItem.DARK_FRAGMENT,      'Pedestal_of_Darkness' },
             }
             for _, info in ipairs(pedestalsFragmentsTable) do
                 player:addKeyItem(info[1])
@@ -260,7 +260,7 @@ describe('Rise of the Zilart', function()
                 player.assert.no:hasKI(info[1])
             end
 
-            player.assert:hasKI(xi.ki.PRISMATIC_FRAGMENT)
+            player.assert:hasKI(xi.keyItem.PRISMATIC_FRAGMENT)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
         end)
     end)
@@ -325,24 +325,24 @@ describe('Rise of the Zilart', function()
             player:gotoZone(xi.zone.QUICKSAND_CAVES)
             -- Touch the ??? and select Yes to spawn the Ancient Vessel.
             player.entities:gotoAndTrigger('qm7', { eventId = 12, finishOption = 1 })
-            player.assert.no:hasKI(xi.ki.SCRAP_OF_PAPYRUS)
+            player.assert.no:hasKI(xi.keyItem.SCRAP_OF_PAPYRUS)
 
             -- Kill the Ancient Vessel and inspect the ??? again to dig out the Scrap of Papyrus (key item).
             player:claimAndKillMob('Ancient_Vessel')
             player.entities:gotoAndTrigger('qm7', { eventId = 13, finishOption = 1 })
-            player.assert:hasKI(xi.ki.SCRAP_OF_PAPYRUS)
+            player.assert:hasKI(xi.keyItem.SCRAP_OF_PAPYRUS)
 
             -- Return it to Maryoh Comyujah who will give you the Cerulean Crystal (key item).
             player:gotoZone(xi.zone.RABAO)
             player.events:expectNotInEvent()
             player.entities:gotoAndTrigger('Maryoh_Comyujah', { eventId = 83 })
-            player.assert.no:hasKI(xi.ki.SCRAP_OF_PAPYRUS)
-            player.assert:hasKI(xi.ki.CERULEAN_CRYSTAL)
+            player.assert.no:hasKI(xi.keyItem.SCRAP_OF_PAPYRUS)
+            player.assert:hasKI(xi.keyItem.CERULEAN_CRYSTAL)
         end)
 
         it('should complete ZM13 - The Gate of the Gods', function()
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
-            player:addKeyItem(xi.ki.CERULEAN_CRYSTAL)
+            player:addKeyItem(xi.keyItem.CERULEAN_CRYSTAL)
 
             -- Head back to the Hall of the Gods and touch the sealed gate and watch the cutscenes.
             player:gotoZone(xi.zone.HALL_OF_THE_GODS)
@@ -376,7 +376,7 @@ describe('Rise of the Zilart', function()
             player.bcnm:killMobs()
             player.bcnm:expectWin()
 
-            player.assert:hasKI(xi.ki.SHARD_OF_APATHY)
+            player.assert:hasKI(xi.keyItem.SHARD_OF_APATHY)
             player.assert:hasMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
         end)
     end)

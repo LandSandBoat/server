@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SANGUIN
 
 mission.reward =
 {
-    keyItem     = xi.ki.AROMA_BUG,
+    keyItem     = xi.keyItem.AROMA_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.DUNGEONS_AND_DANCERS },
 }
 

@@ -91,9 +91,9 @@ quest.sections =
                         return quest:messageSpecial(ordellesID.text.OINTMENT_DRAWS_CREATURE)
                     elseif
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE)
+                        not player:hasKeyItem(xi.keyItem.INDIGESTED_STALAGMITE)
                     then
-                        return quest:keyItem(xi.ki.INDIGESTED_STALAGMITE)
+                        return quest:keyItem(xi.keyItem.INDIGESTED_STALAGMITE)
                     end
                 end,
             },
@@ -102,13 +102,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE) and
+                        player:hasKeyItem(xi.keyItem.INDIGESTED_STALAGMITE) and
                         quest:getVar(player, 'Informed') == 0
                     then
                         return quest:progressEvent(54) -- Sends the player to Norejaie.
                     elseif player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                         return quest:progressEvent(53) -- Offers to remove the ointment.
-                    elseif not player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE) then
+                    elseif not player:hasKeyItem(xi.keyItem.INDIGESTED_STALAGMITE) then
                         return quest:progressEvent(51) -- Offers to apply the ointment.
                     end
                 end,
@@ -146,7 +146,7 @@ quest.sections =
             ['Norejaie'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE) then
+                    if player:hasKeyItem(xi.keyItem.INDIGESTED_STALAGMITE) then
                         return quest:progressEvent(681) -- Completes the quest.
                     else
                         return quest:event(679) -- Reminder to see Rojaireaut.
@@ -158,7 +158,7 @@ quest.sections =
             {
                 [681] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INDIGESTED_STALAGMITE)
+                        player:delKeyItem(xi.keyItem.INDIGESTED_STALAGMITE)
                         player:setCharVar('EcoReset', 1, NextConquestTally())
                     end
                 end,

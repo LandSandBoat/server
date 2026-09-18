@@ -98,9 +98,9 @@ quest.sections =
                         else
                             return quest:progressEvent(388) -- Meet Apururu.
                         end
-                    elseif player:hasKeyItem(xi.ki.JOKER_CARD) then -- Second meeting at house of hero.
+                    elseif player:hasKeyItem(xi.keyItem.JOKER_CARD) then -- Second meeting at house of hero.
                         if player:getRank(xi.nation.WINDURST) < 9 then
-                            return quest:progressEvent(387, 0, xi.ki.JOKER_CARD) -- Meet Joker after meeting Joker first.
+                            return quest:progressEvent(387, 0, xi.keyItem.JOKER_CARD) -- Meet Joker after meeting Joker first.
                         else
                             return quest:progressEvent(389) -- Meet Apururu after meeting Joker first.
                         end
@@ -115,7 +115,7 @@ quest.sections =
                 end,
 
                 [387] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.JOKER_CARD)
+                    player:delKeyItem(xi.keyItem.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,
@@ -125,7 +125,7 @@ quest.sections =
                 end,
 
                 [389] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.JOKER_CARD)
+                    player:delKeyItem(xi.keyItem.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,
@@ -169,7 +169,7 @@ quest.sections =
             onEventFinish =
             {
                 [600] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.JOKER_CARD)
+                    player:delKeyItem(xi.keyItem.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 4)
                 end,

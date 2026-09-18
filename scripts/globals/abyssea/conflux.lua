@@ -149,7 +149,7 @@ local function updateCruorCosts(player, confluxInfo)
     local discount = 1
     local updatedConfluxInfo = {}
 
-    for keyItem = xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, xi.ki.INDIGO_ABYSSITE_OF_CONFLUENCE do
+    for keyItem = xi.keyItem.IVORY_ABYSSITE_OF_CONFLUENCE, xi.keyItem.INDIGO_ABYSSITE_OF_CONFLUENCE do
         if player:hasKeyItem(keyItem) then
             discount = discount - 0.2
         end

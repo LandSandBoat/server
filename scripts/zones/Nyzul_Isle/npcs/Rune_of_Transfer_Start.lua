@@ -21,16 +21,16 @@ entity.onTrigger = function(player, npc)
     local floorGroup    = math.floor(player:getCharVar('NyzulFloorProgress') / 5)
     local floorProgress = 0xFFFFFFFC - bit.bxor(bit.lshift(2, floorGroup + 1) - 1, 3)
 
-    if not player:hasKeyItem(xi.ki.RUNIC_DISC) then
-        player:messageSpecial(ID.text.NEW_USER, xi.ki.RUNIC_DISC)
-        npcUtil.giveKeyItem(player, xi.ki.RUNIC_DISC)
+    if not player:hasKeyItem(xi.keyItem.RUNIC_DISC) then
+        player:messageSpecial(ID.text.NEW_USER, xi.keyItem.RUNIC_DISC)
+        npcUtil.giveKeyItem(player, xi.keyItem.RUNIC_DISC)
     elseif instance:getLocalVar('runeHandler') ~= 0 then
         player:messageSpecial(ID.text.IN_OPERATION)
 
         return
     else
         instance:setLocalVar('runeHandler', player:getID())
-        player:startEvent(94, xi.ki.RUNIC_DISC, tokens, 1, prefered, 100, 200, 300, floorProgress)
+        player:startEvent(94, xi.keyItem.RUNIC_DISC, tokens, 1, prefered, 100, 200, 300, floorProgress)
     end
 end
 

@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(225) -- Start quest
     elseif
         anUndyingPledge == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.CALIGINOUS_BLADE)
+        player:hasKeyItem(xi.keyItem.CALIGINOUS_BLADE)
     then
         player:startEvent(227) -- Quest Finish
     elseif
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             var = 'anUndyingPledgeCS',
         })
     then
-        player:delKeyItem(xi.ki.CALIGINOUS_BLADE)
+        player:delKeyItem(xi.keyItem.CALIGINOUS_BLADE)
     end
 end
 

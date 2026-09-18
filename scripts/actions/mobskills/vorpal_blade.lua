@@ -7,16 +7,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- TODO: Split this into a file for each mob family
-
-    -- Handle Ghrah family humanoid form.
-    -- If not in Paladin form, then ignore.
-    if
-        mob:getFamily() == xi.mobFamily.GHRAH and
-        mob:getAnimationSub() ~= 1
-    then
-        return 1
-    elseif mob:getFamily() == xi.mobFamily.MAMOOL_JA then
+    if mob:getFamily() == xi.mobFamily.MAMOOL_JA then
         -- Handle Mamool Ja BLU
         if
             mob:getAnimationSub() == 0 and
@@ -27,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     elseif mob:getPool() ~= xi.mobPool.THRONE_ROOM_VOLKER then
-        mob:messageBasic(xi.msg.basic.READIES_WS, 0, 40)
+        mob:messageBasic(xi.msg.basic.READIES_WS, 0, xi.weaponskill.VORPAL_BLADE)
     end
 
     return 0

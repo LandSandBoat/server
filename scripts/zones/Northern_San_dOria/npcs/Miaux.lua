@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
+        not player:hasKeyItem(xi.keyItem.ALTEPA_POLISHING_STONE)
     then
         player:startEvent(69)
     elseif aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED then
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
         if npcUtil.giveItem(player, xi.item.PEREGRINE) then
             player:setCharVar('aCraftsmanWork', 0)
-            player:delKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
+            player:delKeyItem(xi.keyItem.ALTEPA_POLISHING_STONE)
             player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK)
         end

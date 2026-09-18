@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_PORTENT_M
 
 mission.reward =
 {
-    keyItem     = { xi.ki.SKY_BLUE_POME, xi.ki.SUN_YELLOW_POME },
+    keyItem     = { xi.keyItem.SKY_BLUE_POME, xi.keyItem.SUN_YELLOW_POME },
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL_BECKONS },
 }
 

@@ -33,7 +33,7 @@ quest.sections =
             {
                 [130] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZEID)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_ZEID)
                 end,
             },
         },
@@ -82,7 +82,7 @@ quest.sections =
                 [10] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:delKeyItem(xi.ki.LETTER_FROM_ZEID)
+                        player:delKeyItem(xi.keyItem.LETTER_FROM_ZEID)
                     end
                 end,
             },

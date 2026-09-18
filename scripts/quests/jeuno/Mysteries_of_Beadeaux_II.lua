@@ -27,7 +27,7 @@ quest.sections =
                         return
                     end
 
-                    player:addKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
+                    player:addKeyItem(xi.keyItem.BLACK_MATINEE_NECKLACE)
                     player:addFame(xi.fameArea.SANDORIA, 7)
                     player:addFame(xi.fameArea.BASTOK, 7)
                     player:addFame(xi.fameArea.WINDURST, 7)
@@ -41,7 +41,7 @@ quest.sections =
             {
                 [92] = function(player, csid, option, npc)
                     player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
-                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.ki.BLACK_MATINEE_NECKLACE)
+                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.keyItem.BLACK_MATINEE_NECKLACE)
                 end,
             },
         },

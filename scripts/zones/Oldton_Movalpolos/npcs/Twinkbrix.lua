@@ -11,11 +11,11 @@ entity.onTrigger = function(player, npc)
     -- Trigger is only ever informative events about key item and cooldown status
     local operatingLeverCD = player:getCharVar('[ENM]OperatingLever')
     local operatingLeverWaiting = operatingLeverCD > VanadielTime()
-    local operatingLeverHas = player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
+    local operatingLeverHas = player:hasKeyItem(xi.keyItem.SHAFT_2716_OPERATING_LEVER)
 
     local gateDialCD = player:getCharVar('[ENM]GateDial')
     local gateDialWaiting = gateDialCD > VanadielTime()
-    local gateDialHas = player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+    local gateDialHas = player:hasKeyItem(xi.keyItem.SHAFT_GATE_OPERATING_DIAL)
 
     if
         operatingLeverHas and
@@ -49,19 +49,19 @@ entity.onTrade = function(player, npc, trade)
     local tradeGil = trade:getGil()
 
     if
-        player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+        player:hasKeyItem(xi.keyItem.SHAFT_GATE_OPERATING_DIAL) and
         npcUtil.tradeHasExactly(trade, { { 'gil', mineShaftWarpCost } })
     then
         -- teleport for mineShaftWarpCost relies on having SHAFT_GATE_OPERATING_DIAL
         -- but consumes SHAFT_2716_OPERATING_LEVER (after confirming with you)
-        if player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) then
+        if player:hasKeyItem(xi.keyItem.SHAFT_2716_OPERATING_LEVER) then
             player:startEvent(56, xi.item.SYLVAN_STONE, 23) -- capture contained these additional, unimportant items:, 1757, 177552692, 8, 17407, 15, 0)
         else
             player:startEvent(56)
         end
 
     elseif
-        not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+        not player:hasKeyItem(xi.keyItem.SHAFT_GATE_OPERATING_DIAL) and
         tradeGil > 0 and tradeGil <= 10000 and
         gateDialCD < VanadielTime() and
         npcUtil.tradeHasExactly(trade, { { 'gil', tradeGil } })
@@ -102,16 +102,16 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 51 then
         -- TODO entering battle sets the cooldown (extra important here as using the teleport consumes this key item, and it should be possible to immediately get another)
         player:setCharVar('[ENM]OperatingLever', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
-        npcUtil.giveKeyItem(player, xi.ki.SHAFT_2716_OPERATING_LEVER)
+        npcUtil.giveKeyItem(player, xi.keyItem.SHAFT_2716_OPERATING_LEVER)
         player:tradeComplete()
 
     elseif csid == 55 and option == 1 then
         -- TODO entering battle sets the cooldown
         player:setCharVar('[ENM]GateDial', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
-        npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
+        npcUtil.giveKeyItem(player, xi.keyItem.SHAFT_GATE_OPERATING_DIAL)
 
     elseif csid == 56 and option == 1 then
-        player:delKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
+        player:delKeyItem(xi.keyItem.SHAFT_2716_OPERATING_LEVER)
         player:tradeComplete()
         xi.teleport.to(player, xi.teleport.id.MINESHAFT)
     end

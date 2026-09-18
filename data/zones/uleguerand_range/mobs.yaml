@@ -88,7 +88,7 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [drk, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -151,6 +151,7 @@ templates:
       combat:
         skill: scythe
         delay: 360
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -518,7 +519,7 @@ templates:
       combat:
         skill: staff
         delay: 360
-      jobs: [war, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -889,7 +890,7 @@ templates:
       combat:
         skill: staff
         delay: 360
-      jobs: [war, drk]
+      jobs: [pld, pld]
       render:
         look:
           type:  standard
@@ -1158,7 +1159,7 @@ templates:
 
   Nival_Raptor:
     id:            2892
-    species:       raptor
+    species:       nival_raptor
     skill_list_id: 377
     attributes:
       combat:
@@ -1214,7 +1215,7 @@ templates:
 
   Polar_Hare:
     id:            3168
-    species:       rabbit
+    species:       alabaster_rabbit
     skill_list_id: 405
     attributes:
       combat:

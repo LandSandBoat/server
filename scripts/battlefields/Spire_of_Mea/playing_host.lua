@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_0l0',
     exitNpcs         = { '_0l1', '_0l2', '_0l3' },
-    requiredKeyItems = { xi.ki.CENSER_OF_ANIMUS, message = spireOfMeaID.text.FADES_INTO_NOTHINGNESS },
+    requiredKeyItems = { xi.keyItem.CENSER_OF_ANIMUS, message = spireOfMeaID.text.FADES_INTO_NOTHINGNESS },
     grantXP          = 3000,
     armouryCrates    =
     {

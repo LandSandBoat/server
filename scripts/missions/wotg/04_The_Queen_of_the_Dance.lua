@@ -56,7 +56,7 @@ mission.sections =
             onEventFinish =
             {
                 [10172] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAYAKOV_SHOW_TICKET)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAYAKOV_SHOW_TICKET)
                     player:setMissionStatus(mission.areaId, 2)
                 end,
             },
@@ -112,7 +112,7 @@ mission.sections =
 
                 [153] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.MAYAKOV_SHOW_TICKET)
+                        player:delKeyItem(xi.keyItem.MAYAKOV_SHOW_TICKET)
                     end
                 end,
             },

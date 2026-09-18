@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
-        player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)
+        player:hasKeyItem(xi.keyItem.CHOCOBO_LICENSE)
     then
         if questStatus ~= xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(103)

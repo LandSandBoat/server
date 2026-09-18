@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
         medicineWoman == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(538)
-    elseif player:hasKeyItem(xi.ki.COUGH_MEDICINE) then
+    elseif player:hasKeyItem(xi.keyItem.COUGH_MEDICINE) then
         player:startEvent(647)
     else
         player:startEvent(584)
@@ -30,8 +30,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 647 then
         player:addTitle(xi.title.A_MOSS_KIND_PERSON)
         player:setCharVar('toCureaCough', 0)
-        player:delKeyItem(xi.ki.COUGH_MEDICINE)
-        npcUtil.giveKeyItem(player, xi.ki.SCROLL_OF_TREASURE)
+        player:delKeyItem(xi.keyItem.COUGH_MEDICINE)
+        npcUtil.giveKeyItem(player, xi.keyItem.SCROLL_OF_TREASURE)
         player:addFame(xi.fameArea.SANDORIA, 30)
         player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     end

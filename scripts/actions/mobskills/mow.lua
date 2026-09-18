@@ -31,6 +31,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
+        -- level 82: 26/tick poison
+        -- level 70: 22/tick
+        -- level 69: 22/tick
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 25, 3, 30)
     end
 

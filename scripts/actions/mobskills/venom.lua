@@ -27,8 +27,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         -- TODO: Jugpet differences
 
-        -- TODO: Dynamis - Nightmare Fly
-
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 1, 3, 60) -- TODO: Capture duration
     end
 

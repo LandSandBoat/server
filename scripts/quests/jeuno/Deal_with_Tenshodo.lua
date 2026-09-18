@@ -11,7 +11,7 @@ quest.reward =
 {
     fame     = 50,
     fameArea = xi.fameArea.NORG,
-    keyItem  = xi.ki.CLOCK_TOWER_OIL,
+    keyItem  = xi.keyItem.CLOCK_TOWER_OIL,
     title    = xi.title.TRADER_OF_RENOWN,
 }
 

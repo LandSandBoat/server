@@ -94,7 +94,7 @@ quest.sections =
             onEventFinish =
             {
                 [68] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.FLARE_GRENADE) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.FLARE_GRENADE) then
                         quest:setVar(player, 'Prog', 3)
                     end
                 end,
@@ -135,7 +135,7 @@ quest.sections =
             ['Gentle_Tiger'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FLARE_GRENADE) then
+                    if player:hasKeyItem(xi.keyItem.FLARE_GRENADE) then
                         return quest:event(69)
                     else
                         return quest:progressEvent(70)
@@ -146,7 +146,7 @@ quest.sections =
             onEventFinish =
             {
                 [70] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FLARE_GRENADE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FLARE_GRENADE)
                 end,
             },
         },

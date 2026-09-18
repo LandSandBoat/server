@@ -440,7 +440,7 @@ templates:
   Groundskeeper_5128:
     id:            5128
     display_name:  Groundskeeper
-    species:       gargoyles
+    species:       doll
     type:          [event]
     skill_list_id: 85
     attributes:
@@ -620,7 +620,7 @@ templates:
 
   Seiryu:
     id:            3540
-    species:       blue_wyvern
+    species:       legendary_wyvern
     type:          [notorious]
     spell_list_id: 25
     skill_list_id: 278
@@ -629,22 +629,6 @@ templates:
         skill:    scythe
         dmg_mult: 125
       jobs: [war, rdm]
-      resists:
-        rank_element:
-          fire:     4
-          wind:    10
-          earth:   10
-          thunder:  4
-          water:    4
-          light:    4
-          dark:     4
-        rank_status:
-          silence:     10
-          slow:        10
-          poison:       4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
       render:
         look:
           type:  standard
@@ -742,7 +726,7 @@ templates:
 
   Suzaku:
     id:            3816
-    species:       bird
+    species:       legendary_roc
     type:          [notorious]
     spell_list_id: 27
     skill_list_id: 280
@@ -750,27 +734,8 @@ templates:
       combat:
         skill:    sword
         dmg_mult: 125
-      jobs: [rdm, war]
-      resists:
-        dmg_physical:
-          slashing: -2500
-          blunt:    -2500
-        rank_element:
-          fire:    10
-          ice:     10
-          wind:     4
-          earth:    4
-          thunder:  4
-          light:    4
-          dark:     4
-        rank_status:
-          paralyze:    10
-          bind:        10
-          silence:      4
-          slow:         4
-          light_sleep:  4
-          dark_sleep:   4
-          blind:        4
+      jobs:    [rdm, war]
+      element: fire
       render:
         look:
           type:  standard

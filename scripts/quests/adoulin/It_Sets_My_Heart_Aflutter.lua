@@ -28,7 +28,7 @@ quest.sections =
     -- Section: Begin quest (First time)
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:hasKeyItem(xi.ki.PIONEERS_BADGE)
+            return status == xi.questStatus.QUEST_AVAILABLE and player:hasKeyItem(xi.keyItem.PIONEERS_BADGE)
         end,
 
         [xi.zone.RALA_WATERWAYS] =

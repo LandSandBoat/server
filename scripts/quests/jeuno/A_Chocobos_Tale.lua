@@ -90,7 +90,7 @@ quest.sections =
                         player:addFame(xi.fameArea.SANDORIA, 7)
                         player:addFame(xi.fameArea.BASTOK, 7)
                         player:addFame(xi.fameArea.WINDURST, 7)
-                        player:delKeyItem(xi.ki.SILVER_COMETS_COLLAR)
+                        player:delKeyItem(xi.keyItem.SILVER_COMETS_COLLAR)
                     end
                 end,
             },
@@ -173,7 +173,7 @@ quest.sections =
                         if quest:getLocalVar(player, 'nmDefeated') == 1 then
                             quest:setVar(player, 'Prog', 5)
 
-                            return quest:keyItem(xi.ki.SILVER_COMETS_COLLAR)
+                            return quest:keyItem(xi.keyItem.SILVER_COMETS_COLLAR)
                         else
                             for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
                                 SpawnMob(nmId):updateClaim(player)

@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local zephyrFanCD = player:getCharVar('[ENM]ZephyrFan')
 
-    if player:hasKeyItem(xi.ki.ZEPHYR_FAN) then
+    if player:hasKeyItem(xi.keyItem.ZEPHYR_FAN) then
         player:startEvent(12)
     else
         if zephyrFanCD >= VanadielTime() then
@@ -42,7 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 13 then
-        npcUtil.giveKeyItem(player, xi.ki.ZEPHYR_FAN)
+        npcUtil.giveKeyItem(player, xi.keyItem.ZEPHYR_FAN)
         player:setCharVar('[ENM]ZephyrFan', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 14 then
         npcUtil.giveItem(player, xi.item.COTTON_POUCH)

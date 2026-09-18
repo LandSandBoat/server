@@ -150,17 +150,17 @@ local groupStartIndex =
 
 local runeKeyItems =
 {
-    xi.ki.SAN_DORIA_WARP_RUNE,
-    xi.ki.BASTOK_WARP_RUNE,
-    xi.ki.WINDURST_WARP_RUNE,
-    xi.ki.SELBINA_WARP_RUNE,
-    xi.ki.MHAURA_WARP_RUNE,
-    xi.ki.KAZHAM_WARP_RUNE,
-    xi.ki.RABAO_WARP_RUNE,
-    xi.ki.NORG_WARP_RUNE,
-    xi.ki.TAVNAZIA_WARP_RUNE,
-    xi.ki.WHITEGATE_WARP_RUNE,
-    xi.ki.NASHMAU_WARP_RUNE,
+    xi.keyItem.SAN_DORIA_WARP_RUNE,
+    xi.keyItem.BASTOK_WARP_RUNE,
+    xi.keyItem.WINDURST_WARP_RUNE,
+    xi.keyItem.SELBINA_WARP_RUNE,
+    xi.keyItem.MHAURA_WARP_RUNE,
+    xi.keyItem.KAZHAM_WARP_RUNE,
+    xi.keyItem.RABAO_WARP_RUNE,
+    xi.keyItem.NORG_WARP_RUNE,
+    xi.keyItem.TAVNAZIA_WARP_RUNE,
+    xi.keyItem.WHITEGATE_WARP_RUNE,
+    xi.keyItem.NASHMAU_WARP_RUNE,
 }
 
 -- Number of Kinetic Units granted for each item trade.
@@ -320,7 +320,7 @@ xi.waypoint.onTrigger = function(player, npc)
         local ID = zones[zoneId]
 
         player:addTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][5])
-        player:messageSpecial(ID.text.WAYPOINT_ATTUNED, waypointIndex - waypointStartIndex[zoneId], xi.ki.GEOMAGNETRON)
+        player:messageSpecial(ID.text.WAYPOINT_ATTUNED, waypointIndex - waypointStartIndex[zoneId], xi.keyItem.GEOMAGNETRON)
     end
 end
 

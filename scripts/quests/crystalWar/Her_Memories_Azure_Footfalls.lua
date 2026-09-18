@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMO
 
 quest.reward =
 {
-    keyItem = xi.ki.LARGE_MEMORY_FRAGMENT4,
+    keyItem = xi.keyItem.LARGE_MEMORY_FRAGMENT4,
 }
 
 quest.sections =

@@ -107,7 +107,7 @@ mission.sections =
                 end,
 
                 [3] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.TEAR_OF_ALTANA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TEAR_OF_ALTANA)
                     mission:setVar(player, 'Timer', 1, JstMidnight())
                     mission:setVar(player, 'Option', 31)
                     mission:setVar(player, 'Status', 4)

@@ -24,7 +24,7 @@ quest.sections =
                 not (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
                 player:getCurrentMission(xi.mission.log_id.COP) <= xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN) and
                 player:getCurrentMission(xi.mission.log_id.COP) ~= xi.mission.id.cop.A_FATE_DECIDED and
-                player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
+                player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT)
         end,
 
         [xi.zone.WINDURST_WOODS] =

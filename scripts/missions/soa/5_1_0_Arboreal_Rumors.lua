@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARBOREAL_RU
 
 mission.reward =
 {
-    keyItem     = xi.ki.HASTILY_SCRIBBLED_NOTE,
+    keyItem     = xi.keyItem.HASTILY_SCRIBBLED_NOTE,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_MISSIVE },
 }
 

@@ -67,7 +67,7 @@ mission.sections =
             ['Halver'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RAILLEFALS_LETTER) then
+                    if player:hasKeyItem(xi.keyItem.RAILLEFALS_LETTER) then
                         return mission:progressEvent(564)
                     end
                 end,
@@ -84,14 +84,14 @@ mission.sections =
             {
                 -- Force zones the player out of the Chateau if they don't have access.
                 [563] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
+                    player:delKeyItem(xi.keyItem.RAILLEFALS_LETTER)
                     mission:complete(player)
                     player:setPos(0, 0, 100, 64, xi.zone.NORTHERN_SAN_DORIA)
                 end,
 
                 [564] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
+                        player:delKeyItem(xi.keyItem.RAILLEFALS_LETTER)
                         mission:complete(player)
                     end
                 end,
@@ -105,7 +105,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.RAILLEFALS_LETTER) and
+                        player:hasKeyItem(xi.keyItem.RAILLEFALS_LETTER) and
                         not canEnterChateau(player)
                     then
                         return mission:progressEvent(810)

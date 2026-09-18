@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
 quest.reward =
 {
-    keyItem = xi.ki.CREST_OF_DAVOI,
+    keyItem = xi.keyItem.CREST_OF_DAVOI,
 }
 
 quest.sections =
@@ -17,7 +17,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasKeyItem(xi.ki.SILVER_BELL)
+                player:hasKeyItem(xi.keyItem.SILVER_BELL)
         end,
 
         [xi.zone.UPPER_JEUNO] =

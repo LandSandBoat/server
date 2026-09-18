@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.ASTRAL_CUBE
+local keyItemId = xi.keyItem.ASTRAL_CUBE
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

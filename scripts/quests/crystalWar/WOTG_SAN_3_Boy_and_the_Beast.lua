@@ -73,7 +73,7 @@ quest.sections =
             onEventFinish =
             {
                 [105] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.VUNKERL_HERB_MEMO)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VUNKERL_HERB_MEMO)
                     quest:begin(player)
                 end,
             },
@@ -90,7 +90,7 @@ quest.sections =
             ['qm7'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.VUNKERL_HERB) then
+                    if player:hasKeyItem(xi.keyItem.VUNKERL_HERB) then
                         if quest:getVar(player, 'Prog') == 3 then
                             return quest:progressEvent(108)
                         else
@@ -114,7 +114,7 @@ quest.sections =
             ['Leafy_Patch'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.VUNKERL_HERB) then
+                    if not player:hasKeyItem(xi.keyItem.VUNKERL_HERB) then
                         local vanadielHour = VanadielHour()
                         local hourParam = 0
 
@@ -136,18 +136,18 @@ quest.sections =
                         quest:setVar(player, 'Prog', 3)
                     end
 
-                    npcUtil.giveKeyItem(player, xi.ki.VUNKERL_HERB)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VUNKERL_HERB)
                 end,
 
                 [108] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.VUNKERL_HERB)
-                        player:delKeyItem(xi.ki.VUNKERL_HERB_MEMO)
+                        player:delKeyItem(xi.keyItem.VUNKERL_HERB)
+                        player:delKeyItem(xi.keyItem.VUNKERL_HERB_MEMO)
                     end
                 end,
 
                 [109] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.VUNKERL_HERB)
+                    player:delKeyItem(xi.keyItem.VUNKERL_HERB)
                 end,
 
                 [110] = function(player, csid, option, npc)

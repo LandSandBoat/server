@@ -12,7 +12,7 @@ local ID = zones[xi.zone.ABYSSEA_TAHRONGI]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.GLAVOID_OFFSET, { xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.STICKY_GNAT_WING, xi.ki.SODDEN_SANDWORM_HUSK })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.GLAVOID_OFFSET, { xi.keyItem.LUXURIANT_MANTICORE_MANE, xi.keyItem.FAT_LINED_COCKATRICE_SKIN, xi.keyItem.STICKY_GNAT_WING, xi.keyItem.SODDEN_SANDWORM_HUSK })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

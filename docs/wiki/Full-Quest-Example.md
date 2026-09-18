@@ -55,9 +55,9 @@ quest.sections = {
         [xi.zone.CHATEAU_DORAGUILLE] = {
             ['Curilla'] = {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(48) -- complete
-                    elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    elseif player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(47) -- cont 2
                     else
                         return quest:event(46, player:hasItem(xi.items.SAPARA_OF_TRIALS) and 1 or 0) -- cont 1
@@ -83,20 +83,20 @@ quest.sections = {
                         npcUtil.giveItem(player, xi.items.SAPARA_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end
                 end,
 
                 [44] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
 
                 [48] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                    player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
+                    player:delKeyItem(xi.keyItem.ANNALS_OF_TRUTH)
+                    player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
                     player:addLearnedWeaponskill(xi.ws_unlock.SAVAGE_BLADE)
                     player:messageSpecial(chateauID.text.SAVAGE_BLADE_LEARNED)
                     quest:complete(player)
@@ -109,10 +109,10 @@ quest.sections = {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
-                        player:addKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        return quest:messageSpecial(quicksandCavesID.text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
+                        player:addKeyItem(xi.keyItem.ANNALS_OF_TRUTH)
+                        return quest:messageSpecial(quicksandCavesID.text.KEYITEM_OBTAINED, xi.keyItem.ANNALS_OF_TRUTH)
                     elseif
-                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
                         npcUtil.popFromQM(player, npc, quicksandCavesID.mob.GIRTABLULU, {hide = 0})
                     then

@@ -89,10 +89,16 @@ local packets =
             player:addItem(xi.item.TERPSICHORE_99)
             player:equipItem(xi.item.TERPSICHORE_99, nil, xi.slot.MAIN)
             player:setTP(3000)
+
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+            xi.test.world:skipTime(10)
+
             player.actions:engage(mob)
             player.actions:move(mob:getXPos() - 15, mob:getYPos(), mob:getZPos())
             player.actions:useWeaponskill(mob, xi.weaponskill.PYRRHIC_KLEOS)
             xi.test.world:skipTime(2)
+
+            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end,
 
         expected =

@@ -24,7 +24,7 @@ mission.reward =
 {
     rank = 5,
     gil = 10000,
-    keyItem = xi.ki.MESSAGE_TO_JEUNO_SANDORIA,
+    keyItem = xi.keyItem.MESSAGE_TO_JEUNO_SANDORIA,
 }
 
 mission.sections =
@@ -57,7 +57,7 @@ mission.sections =
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
+                    if player:hasKeyItem(xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT) then
                         return mission:progressEvent(130, 1)
                     end
 
@@ -77,7 +77,7 @@ mission.sections =
                     mission:begin(player)
                     player:setMissionStatus(mission.areaId, 1)
                     player:messageText(npc, ruludeID.text.YOU_ACCEPT_THE_MISSION, false, 6)
-                    npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
             },
         },
@@ -116,7 +116,7 @@ mission.sections =
             {
                 [128] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_ALDO)
                 end,
             },
         },
@@ -130,7 +130,7 @@ mission.sections =
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.SILVER_BELL) then
+                    if player:hasKeyItem(xi.keyItem.SILVER_BELL) then
                         return mission:progressEvent(152, 1)
                     end
 
@@ -142,10 +142,10 @@ mission.sections =
             {
                 [152] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
-                    player:delKeyItem(xi.ki.LETTER_TO_ALDO)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_ALDO)
 
-                    if not player:hasKeyItem(xi.ki.SILVER_BELL) then
-                        npcUtil.giveKeyItem(player, xi.ki.SILVER_BELL)
+                    if not player:hasKeyItem(xi.keyItem.SILVER_BELL) then
+                        npcUtil.giveKeyItem(player, xi.keyItem.SILVER_BELL)
                     end
                 end,
             },
@@ -165,14 +165,14 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) or
-                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) or
-                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_OPTISTONE) or
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_AURASTONE) or
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_ORASTONE)
                     then
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+                    if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
                         return mission:progressEvent(60, 1, 0)
                     end
 
@@ -190,14 +190,14 @@ mission.sections =
             onEventFinish =
             {
                 [60] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAGICITE_OPTISTONE)
-                    player:delKeyItem(xi.ki.MAGICITE_AURASTONE)
-                    player:delKeyItem(xi.ki.MAGICITE_ORASTONE)
+                    player:delKeyItem(xi.keyItem.MAGICITE_OPTISTONE)
+                    player:delKeyItem(xi.keyItem.MAGICITE_AURASTONE)
+                    player:delKeyItem(xi.keyItem.MAGICITE_ORASTONE)
 
-                    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+                    if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
                         npcUtil.giveCurrency(player, 'gil', 20000)
                     else
-                        npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AIRSHIP_PASS)
                     end
 
                     player:addTitle(xi.title.HAVE_WINGS_WILL_FLY)
@@ -212,9 +212,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
-                        not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
-                        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_OPTISTONE) and
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_AURASTONE) and
+                        not player:hasKeyItem(xi.keyItem.MAGICITE_ORASTONE)
                     then
                         return mission:event(161)
                     end
@@ -226,7 +226,7 @@ mission.sections =
             ['Muckvix'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                    if not player:hasKeyItem(xi.keyItem.YAGUDO_TORCH) then
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else
@@ -245,7 +245,7 @@ mission.sections =
             onEventFinish =
             {
                 [184] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.YAGUDO_TORCH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.YAGUDO_TORCH)
                     mission:setVar(player, 'Option', 2) -- Fickbix CS
                 end,
             },
@@ -257,7 +257,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.YAGUDO_TORCH) and
+                        not player:hasKeyItem(xi.keyItem.YAGUDO_TORCH) and
                         mission:getVar(player, 'Option') == 1
                     then
                         return mission:messageText(upperJeunoID.text.WITHER_AND_DIE)
@@ -268,7 +268,7 @@ mission.sections =
             ['Paya-Sabya'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                    if player:hasKeyItem(xi.keyItem.YAGUDO_TORCH) then
                         return
                     end
 
@@ -296,13 +296,13 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
+                    if player:hasKeyItem(xi.keyItem.MAGICITE_ORASTONE) then
                         return
                     end
 
                     if
-                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
-                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE)
+                        player:hasKeyItem(xi.keyItem.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.keyItem.MAGICITE_AURASTONE)
                     then
                         -- Play Lion part of the CS (Last Magicite Received)
                         return mission:progressEvent(44, xi.zone.ALTAR_ROOM, 3)
@@ -321,7 +321,7 @@ mission.sections =
             onEventFinish =
             {
                 [44] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGICITE_ORASTONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGICITE_ORASTONE)
                 end,
 
                 -- A cancelled event does not retire the Fickblix scene.
@@ -340,13 +340,13 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) then
+                    if player:hasKeyItem(xi.keyItem.MAGICITE_OPTISTONE) then
                         return
                     end
 
                     if
-                        player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and
-                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                        player:hasKeyItem(xi.keyItem.MAGICITE_AURASTONE) and
+                        player:hasKeyItem(xi.keyItem.MAGICITE_ORASTONE)
                     then
                         -- Play Lion part of the CS (Last Magicite Received)
                         return mission:progressEvent(0, 1, 1, 1, 1, 1, 1, 1, 1)
@@ -359,7 +359,7 @@ mission.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGICITE_OPTISTONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGICITE_OPTISTONE)
                 end,
             },
         },
@@ -369,13 +369,13 @@ mission.sections =
             ['Magicite'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
+                    if player:hasKeyItem(xi.keyItem.MAGICITE_AURASTONE) then
                         return
                     end
 
                     if
-                        player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and
-                        player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)
+                        player:hasKeyItem(xi.keyItem.MAGICITE_OPTISTONE) and
+                        player:hasKeyItem(xi.keyItem.MAGICITE_ORASTONE)
                     then
                         -- Play Lion part of the CS (Last Magicite Received)
                         return mission:progressEvent(0, 1, 46, 47)
@@ -388,7 +388,7 @@ mission.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGICITE_AURASTONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGICITE_AURASTONE)
                 end,
             },
         },

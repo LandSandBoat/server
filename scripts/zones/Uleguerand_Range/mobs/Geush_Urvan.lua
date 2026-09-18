@@ -6,7 +6,6 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setBaseSpeed(45) -- Note: setBaseSpeed() also updates the animation speed to match.
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 15000)

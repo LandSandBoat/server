@@ -39,7 +39,7 @@ quest.sections =
                 [523] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CHIEFTAINNESSS_TWINSTONE_EARRING)
                     end
                 end,
             },
@@ -72,8 +72,8 @@ quest.sections =
             {
                 [527] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
-                        player:delKeyItem(xi.ki.PERCHONDS_ENVELOPE)
+                        player:delKeyItem(xi.keyItem.CHIEFTAINNESSS_TWINSTONE_EARRING)
+                        player:delKeyItem(xi.keyItem.PERCHONDS_ENVELOPE)
                     end
                 end,
             },
@@ -116,7 +116,7 @@ quest.sections =
                 [5] = function(player, csid, option, npc)
                     if option == 0 then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.PERCHONDS_ENVELOPE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.PERCHONDS_ENVELOPE)
                         quest:setVar(player, 'Prog', 2)
                     end
                 end,

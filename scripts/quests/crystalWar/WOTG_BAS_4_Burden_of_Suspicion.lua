@@ -41,7 +41,7 @@ quest.sections =
             {
                 [30] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:delKeyItem(xi.ki.WARNING_LETTER)
+                    player:delKeyItem(xi.keyItem.WARNING_LETTER)
                 end,
             },
         },

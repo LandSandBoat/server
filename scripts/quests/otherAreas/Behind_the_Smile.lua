@@ -48,7 +48,7 @@ quest.sections =
             ['Enaremand'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RED_OIL) then
+                    if player:hasKeyItem(xi.keyItem.RED_OIL) then
                         return quest:progressEvent(534)
                     else
                         return quest:event(541)
@@ -60,7 +60,7 @@ quest.sections =
             {
                 [534] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.RED_OIL)
+                        player:delKeyItem(xi.keyItem.RED_OIL)
                     end
                 end,
             },
@@ -99,7 +99,7 @@ quest.sections =
                         return quest:messageSpecial(carpentersLandingID.text.STENCH_OF_DECAY)
                     elseif questProgress == 2 then
                         quest:setVar(player, 'Prog', 3)
-                        npcUtil.giveKeyItem(player, xi.ki.RED_OIL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_OIL)
                         return quest:noAction()
                     end
                 end,

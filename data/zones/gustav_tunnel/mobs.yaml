@@ -158,7 +158,7 @@ templates:
 
   Boulder_Eater:
     id:            4580
-    species:       worm
+    species:       entozoon
     roam:          [worm]
     spell_list_id: 9
     skill_list_id: 258
@@ -1270,7 +1270,6 @@ templates:
         hitbox:        32
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 300
     loot:
@@ -1331,6 +1330,8 @@ templates:
     type:          [notorious]
     skill_list_id: 133
     attributes:
+      speed:           30
+      animation_speed: 40
       combat:
         skill: dagger
       jobs: [rng, rng]

@@ -15,7 +15,7 @@ local multiTicketRides = 10
 
 -- Rides left on the player's multi-ticket, or -1 when they don't own one.
 local function ridesRemaining(player)
-    if player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) then
+    if player:hasKeyItem(xi.keyItem.MANACLIPPER_MULTI_TICKET) then
         return player:getCharVar('Manaclipper_Ticket')
     end
 
@@ -23,7 +23,7 @@ local function ridesRemaining(player)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(35, xi.ki.MANACLIPPER_TICKET, xi.ki.MANACLIPPER_MULTI_TICKET, singlePrice, player:getGil(), ridesRemaining(player), multiPrice)
+    player:startEvent(35, xi.keyItem.MANACLIPPER_TICKET, xi.keyItem.MANACLIPPER_MULTI_TICKET, singlePrice, player:getGil(), ridesRemaining(player), multiPrice)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
@@ -32,10 +32,10 @@ entity.onEventUpdate = function(player, csid, option, npc)
     end
 
     local ownedTickets = bit.bor(
-        player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) and 0x01 or 0,        -- bit 0: owns a single ticket
-        player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) and 0x02 or 0)  -- bit 1: owns a multi-ticket
+        player:hasKeyItem(xi.keyItem.MANACLIPPER_TICKET) and 0x01 or 0,        -- bit 0: owns a single ticket
+        player:hasKeyItem(xi.keyItem.MANACLIPPER_MULTI_TICKET) and 0x02 or 0)  -- bit 1: owns a multi-ticket
 
-    player:updateEvent(xi.ki.MANACLIPPER_TICKET, xi.ki.MANACLIPPER_MULTI_TICKET, ownedTickets, player:getGil(), ridesRemaining(player), multiPrice)
+    player:updateEvent(xi.keyItem.MANACLIPPER_TICKET, xi.keyItem.MANACLIPPER_MULTI_TICKET, ownedTickets, player:getGil(), ridesRemaining(player), multiPrice)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
@@ -45,11 +45,11 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     if option == 1 then -- single ticket
         if
-            not player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) and
+            not player:hasKeyItem(xi.keyItem.MANACLIPPER_TICKET) and
             player:getGil() >= singlePrice
         then
             player:delGil(singlePrice)
-            npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_TICKET)
+            npcUtil.giveKeyItem(player, xi.keyItem.MANACLIPPER_TICKET)
         end
 
     elseif option == 2 then -- multi-ticket
@@ -59,11 +59,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         then
             player:delGil(multiPrice)
 
-            if player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) then
+            if player:hasKeyItem(xi.keyItem.MANACLIPPER_MULTI_TICKET) then
                 player:setCharVar('Manaclipper_Ticket', multiTicketRides)
-                player:messageSpecial(ID.text.NUM_TICKETS_ADDED_TO_MULTI, xi.ki.MANACLIPPER_MULTI_TICKET, multiTicketRides)
+                player:messageSpecial(ID.text.NUM_TICKETS_ADDED_TO_MULTI, xi.keyItem.MANACLIPPER_MULTI_TICKET, multiTicketRides)
             else
-                npcUtil.giveKeyItem(player, xi.ki.MANACLIPPER_MULTI_TICKET)
+                npcUtil.giveKeyItem(player, xi.keyItem.MANACLIPPER_MULTI_TICKET)
                 player:setCharVar('Manaclipper_Ticket', multiTicketRides)
             end
         end

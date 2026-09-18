@@ -98,13 +98,13 @@ mission.sections =
             {
                 [1005] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
+                        player:delKeyItem(xi.keyItem.RESCUE_TRAINING_CERTIFICATE)
                     end
                 end,
 
                 [2005] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
+                        player:delKeyItem(xi.keyItem.RESCUE_TRAINING_CERTIFICATE)
                     end
                 end,
             },
@@ -127,7 +127,7 @@ mission.sections =
             {
                 [1005] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
+                        player:delKeyItem(xi.keyItem.RESCUE_TRAINING_CERTIFICATE)
                     end
                 end,
             },
@@ -293,7 +293,7 @@ mission.sections =
                     elseif missionStatus == 10 then
                         return mission:progressEvent(115)
                     elseif missionStatus == 11 then
-                        return mission:messageText(laTheinePlateauID.text.RESCUE_DRILL + 29, xi.ki.RESCUE_TRAINING_CERTIFICATE)
+                        return mission:messageText(laTheinePlateauID.text.RESCUE_DRILL + 29, xi.keyItem.RESCUE_TRAINING_CERTIFICATE)
                     else
                         return mission:progressEvent(5)
                     end
@@ -362,7 +362,7 @@ mission.sections =
                 end,
 
                 [115] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.RESCUE_TRAINING_CERTIFICATE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.RESCUE_TRAINING_CERTIFICATE)
                     player:setMissionStatus(mission.areaId, 11)
                 end,
             },

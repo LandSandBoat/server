@@ -31,7 +31,7 @@ quest.sections =
             {
                 [44] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ANGELICA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_ANGELICA)
                 end,
             },
         },
@@ -76,13 +76,13 @@ quest.sections =
             {
                 [47] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.ANGELICAS_LETTER)
+                    player:delKeyItem(xi.keyItem.ANGELICAS_LETTER)
                 end,
 
                 [50] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:addFame(xi.fameArea.WINDURST, 16)
-                        player:delKeyItem(xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                        player:delKeyItem(xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setMustZone(player)
                     end
                 end,
@@ -100,14 +100,14 @@ quest.sections =
                     if progress == 2 then
                         if quest:getVar(player, 'Wait') > GetSystemTime() then
                             player:messageSpecial(templeID.text.FRAME_FOR_A_PAINTING + 1)
-                            return quest:messageSpecial(templeID.text.STILL_HANGS_ON_THE_WALL, xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                            return quest:messageSpecial(templeID.text.STILL_HANGS_ON_THE_WALL, xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         elseif not questNM then
                             return
                         elseif not questNM:isSpawned() then
-                            return quest:progressEvent(50, xi.ki.FINAL_FANTASY)
+                            return quest:progressEvent(50, xi.keyItem.FINAL_FANTASY)
                         end
                     elseif progress == 3 then
-                        npcUtil.giveKeyItem(player, xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setVar(player, 'Prog', 4)
                         return quest:noAction()
                     end
@@ -127,7 +127,7 @@ quest.sections =
             {
                 [50] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.FINAL_FANTASY)
+                        player:delKeyItem(xi.keyItem.FINAL_FANTASY)
                         SpawnMob(templeID.mob.TROMPE_LOEIL):updateClaim(player)
                         quest:setVar(player, 'Wait', GetSystemTime() + 900) -- Sets a 15min cooldown before the player can repop the NM.
                     end
@@ -159,9 +159,9 @@ quest.sections =
             {
                 [771] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    npcUtil.giveKeyItem(player, xi.ki.FINAL_FANTASY)
-                    npcUtil.giveKeyItem(player, xi.ki.ANGELICAS_LETTER)
-                    player:delKeyItem(xi.ki.LETTER_TO_ANGELICA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FINAL_FANTASY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANGELICAS_LETTER)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_ANGELICA)
                 end,
             },
         },
@@ -223,7 +223,7 @@ quest.sections =
                     else
                         quest:setVar(player, 'Prog', 1)
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.FINAL_FANTASY_PART_II)
+                        npcUtil.giveKeyItem(player, xi.keyItem.FINAL_FANTASY_PART_II)
                     end
                 end,
 
@@ -231,14 +231,14 @@ quest.sections =
                     if option == 1 then
                         quest:setVar(player, 'Prog', 1)
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.FINAL_FANTASY_PART_II)
+                        npcUtil.giveKeyItem(player, xi.keyItem.FINAL_FANTASY_PART_II)
                     end
                 end,
 
                 [57] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:addFame(xi.fameArea.WINDURST, 16)
-                        player:delKeyItem(xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                        player:delKeyItem(xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setMustZone(player)
                     end
                 end,
@@ -256,14 +256,14 @@ quest.sections =
                     if progress == 1 then
                         if quest:getVar(player, 'Wait') > GetSystemTime() then
                             player:messageSpecial(templeID.text.FRAME_FOR_A_PAINTING + 1)
-                            return quest:messageSpecial(templeID.text.STILL_HANGS_ON_THE_WALL, xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                            return quest:messageSpecial(templeID.text.STILL_HANGS_ON_THE_WALL, xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         elseif not questNM then
                             return
                         elseif not questNM:isSpawned() then
-                            return quest:progressEvent(51, xi.ki.FINAL_FANTASY_PART_II)
+                            return quest:progressEvent(51, xi.keyItem.FINAL_FANTASY_PART_II)
                         end
                     elseif progress == 2 then
-                        npcUtil.giveKeyItem(player, xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setVar(player, 'Prog', 3)
                         return quest:noAction()
                     end
@@ -283,7 +283,7 @@ quest.sections =
             {
                 [51] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.FINAL_FANTASY_PART_II)
+                        player:delKeyItem(xi.keyItem.FINAL_FANTASY_PART_II)
                         SpawnMob(templeID.mob.TROMPE_LOEIL):updateClaim(player)
                         quest:setVar(player, 'Wait', GetSystemTime() + 900) -- Sets a 15min cooldown before the player can repop the NM.
                     end

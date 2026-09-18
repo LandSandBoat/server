@@ -52,7 +52,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(21, 137, 300, 200, 100, 0, 6553620, 0, 0)
                     elseif missionStatus == 1 then
-                        if player:hasKeyItem(xi.ki.MAGELIGHT_SIGNAL_FLARE) then
+                        if player:hasKeyItem(xi.keyItem.MAGELIGHT_SIGNAL_FLARE) then
                             player:messageName(pastXarcabardID.text.HELP_FEDERATION_PREPARE, nil)
 
                             return mission:noAction()
@@ -81,7 +81,7 @@ mission.sections =
             onEventFinish =
             {
                 [21] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGELIGHT_SIGNAL_FLARE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGELIGHT_SIGNAL_FLARE)
                     mission:setVar(player, 'Status', 1)
                 end,
 
@@ -94,7 +94,7 @@ mission.sections =
                 end,
 
                 [25] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGELIGHT_SIGNAL_FLARE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGELIGHT_SIGNAL_FLARE)
                 end,
             },
         },

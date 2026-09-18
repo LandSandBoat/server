@@ -29,7 +29,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 8 then
         player:tradeComplete()
         player:setCharVar('recollectionsQuest', 3)
-        npcUtil.giveKeyItem(player, xi.ki.FOE_FINDER_MK_I)
+        npcUtil.giveKeyItem(player, xi.keyItem.FOE_FINDER_MK_I)
     end
 end
 

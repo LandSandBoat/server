@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LOST_AV
 
 mission.reward =
 {
-    keyItem     = xi.ki.RHAPSODY_IN_AZURE,
+    keyItem     = xi.keyItem.RHAPSODY_IN_AZURE,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO },
 }
 

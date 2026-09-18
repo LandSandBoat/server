@@ -25,11 +25,11 @@ entity.onTrigger = function(player, npc)
 
     elseif
         cooksPride == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.SUPER_SOUP_POT)
+        not player:hasKeyItem(xi.keyItem.SUPER_SOUP_POT)
     then
         player:startEvent(186) -- During quest "Cook's pride"
 
-    elseif player:hasKeyItem(xi.ki.SUPER_SOUP_POT) then
+    elseif player:hasKeyItem(xi.keyItem.SUPER_SOUP_POT) then
         player:startEvent(187) -- Finish quest "Cook's pride"
 
     elseif
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MYTHRIL_RING)
         else
             player:addTitle(xi.title.MERCY_ERRAND_RUNNER)
-            player:delKeyItem(xi.ki.SUPER_SOUP_POT)
+            player:delKeyItem(xi.keyItem.SUPER_SOUP_POT)
             player:setCharVar('CooksPrideVar', 0)
             npcUtil.giveCurrency(player, 'gil', 3000)
             player:addItem(xi.item.MYTHRIL_RING)

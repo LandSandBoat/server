@@ -74,7 +74,7 @@ local failMission = function(player, csid, option, npc)
     mission:setVar(player, 'KillCount', 0)
     mission:setVar(player, 'Failed', 1)
     mission:setMustZone(player)
-    player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+    player:delKeyItem(xi.keyItem.CREATURE_COUNTER_MAGIC_DOLL)
     player:setMissionStatus(mission.areaId, 0)
 
     -- delMission also wipes the completion bit. A repeat run is dropped with completeMission.
@@ -91,7 +91,7 @@ local acceptAssessment = function(player, csid, option, npc)
     end
 
     player:setMissionStatus(mission.areaId, 2)
-    npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+    npcUtil.giveKeyItem(player, xi.keyItem.CREATURE_COUNTER_MAGIC_DOLL)
     mission:setVar(player, 'EndTime', VanadielTime() + xi.vanaTime.DAY)
 
     -- The retry briefing has played.
@@ -100,7 +100,7 @@ end
 
 local clearMission = function(player, csid, option, npc)
     if mission:complete(player) then
-        player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+        player:delKeyItem(xi.keyItem.CREATURE_COUNTER_MAGIC_DOLL)
     end
 end
 
@@ -231,7 +231,7 @@ mission.sections =
                 [687] = function(player, csid, option, npc)
                     if option == 2 then
                         player:setMissionStatus(mission.areaId, 2)
-                        npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CREATURE_COUNTER_MAGIC_DOLL)
                         mission:setVar(player, 'EndTime', VanadielTime() + (2 * xi.vanaTime.DAY))
                     end
                 end,

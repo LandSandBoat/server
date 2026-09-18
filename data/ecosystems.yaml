@@ -209,7 +209,8 @@ ecosystems:
           detects:
             - sight
             - ability
-          speed: 32
+          speed:           32
+          animation_speed: 50
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -1649,6 +1650,7 @@ ecosystems:
       acrolith:
         id: 21
         attributes:
+          speed: 28
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -2271,7 +2273,7 @@ ecosystems:
             attributes:
               resists:
                 rank_element:
-                  fire:    2
+                  fire:    8
                   ice:     2
                   wind:    2
                   earth:   2
@@ -2368,6 +2370,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed: 60
         species:
           khimaira:
             id: 67
@@ -2808,6 +2811,8 @@ ecosystems:
                   blind:       3
                   stun:        7
                   gravity:     3
+                dmg_magic:
+                  all: -1250
               mods:
                 udmgbreath: -1250
       gear:
@@ -3115,28 +3120,31 @@ ecosystems:
                 dmg_magic:
                   all: 5000
                 rank_element:
-                  fire:    10
-                  ice:      1
-                  wind:     1
-                  earth:    1
-                  thunder:  1
-                  water:   -2
-                  light:    1
-                  dark:     1
+                  fire:     8
+                  ice:      7
+                  wind:     7
+                  earth:    3
+                  thunder: 11
+                  water:    9
+                  light:    7
+                  dark:     8
                 rank_status:
-                  paralyze:     1
-                  bind:         1
-                  silence:      1
-                  slow:         1
-                  poison:      -2
-                  light_sleep:  1
-                  dark_sleep:   1
-                  blind:        1
-                  stun:         1
-                  gravity:      1
+                  paralyze:     7
+                  bind:         7
+                  silence:      7
+                  slow:         3
+                  poison:       9
+                  light_sleep:  7
+                  dark_sleep:   8
+                  blind:        8
+                  stun:        11
+                  gravity:      7
+              mods:
+                mdef: 10
       buffalo:
         id: 40
         attributes:
+          speed: 45
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3198,7 +3206,6 @@ ecosystems:
                 chr: e
               detects:
                 - hearing
-              speed: 60
               resists:
                 rank_element:
                   fire:    2
@@ -3233,7 +3240,7 @@ ecosystems:
             chr: b
           detects:
             - hearing
-          speed: 80
+          speed: 72
         species:
           cerberus:
             id: 90
@@ -3483,7 +3490,7 @@ ecosystems:
           detects:
             - sight
             - scent
-          speed: 50
+          speed: 75
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3543,6 +3550,8 @@ ecosystems:
       marid:
         id: 47
         attributes:
+          speed:           24
+          animation_speed: 70
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3640,7 +3649,6 @@ ecosystems:
             chr: e
           detects:
             - hearing
-          speed: 60
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -3836,6 +3844,33 @@ ecosystems:
             roam_rate:  40
             roam_turns:  6
         species:
+          mosshorn:
+            id: 496
+            attributes:
+              resists:
+                rank_element:
+                  fire:     0
+                  ice:      2
+                  wind:     0
+                  earth:    2
+                  thunder: -1
+                  water:   -1
+                  light:    0
+                  dark:     0
+                rank_status:
+                  paralyze:     2
+                  bind:         2
+                  silence:      0
+                  slow:         2
+                  poison:      -1
+                  light_sleep:  0
+                  dark_sleep:   0
+                  blind:        0
+                  stun:        -1
+                  gravity:      0
+              mods:
+                attp: 10
+                defp: 20
           ovim:
             id: 107
             attributes:
@@ -3997,7 +4032,7 @@ ecosystems:
             int: f
             mnd: d
             chr: d
-          speed:     60
+          speed:     68
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -4046,23 +4081,23 @@ ecosystems:
                 rank_element:
                   fire:    -2
                   ice:      1
-                  wind:     1
+                  wind:     0
                   earth:    1
-                  thunder: -2
+                  thunder: -1
                   water:   -1
                   light:    1
                   dark:     1
                 rank_status:
                   paralyze:     1
                   bind:         1
-                  silence:      1
+                  silence:      0
                   slow:         1
                   poison:      -1
                   light_sleep:  1
                   dark_sleep:   1
                   blind:        1
-                  stun:        -2
-                  gravity:      1
+                  stun:        -1
+                  gravity:      0
           tiger:
             id: 114
             attributes:
@@ -4102,6 +4137,7 @@ ecosystems:
             - sight
             - lowhp
             - scent
+          speed: 70
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -4294,7 +4330,7 @@ ecosystems:
                   blind:       2
                   stun:        2
                   gravity:     2
-          giants:
+          blizzard_gigas:
             id: 120
             attributes:
               resists:
@@ -4436,31 +4472,43 @@ ecosystems:
                   blind:        0
                   stun:        -2
                   gravity:     -2
-          armored_moblin:
+          dynamis_goblin:
             id: 125
             attributes:
-              element: thunder
+              element: fire
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 rank_element:
-                  fire:    -2
-                  ice:     -2
-                  wind:    -2
-                  earth:   -2
-                  thunder: -2
-                  water:   -2
-                  light:   -3
-                  dark:     0
+                  fire:    -1
+                  ice:     -1
+                  wind:    -1
+                  earth:   -1
+                  thunder: -1
+                  water:   -1
+                  light:   -2
+                  dark:     1
                 rank_status:
-                  paralyze:    -2
-                  bind:        -2
-                  silence:     -2
-                  slow:        -2
-                  poison:      -2
-                  light_sleep: -3
-                  dark_sleep:   0
-                  blind:        0
-                  stun:        -2
-                  gravity:     -2
+                  paralyze:    -1
+                  bind:        -1
+                  silence:     -1
+                  slow:        -1
+                  poison:      -1
+                  light_sleep: -2
+                  dark_sleep:   1
+                  blind:        1
+                  stun:        -1
+                  gravity:     -1
+              mob_mods:
+                sublink: 5
+              mods:
+                mdef: 20
           goblin:
             id: 126
             attributes:
@@ -4486,6 +4534,33 @@ ecosystems:
                   blind:        0
                   stun:        -2
                   gravity:     -2
+              mob_mods:
+                sublink: 5
+          goblin_s:
+            id: 493
+            attributes:
+              element: fire
+              resists:
+                rank_element:
+                  fire:     0
+                  ice:      0
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:    0
+                  light:   -1
+                  dark:     2
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:      0
+                  slow:         0
+                  poison:       0
+                  light_sleep: -1
+                  dark_sleep:   2
+                  blind:        2
+                  stun:         0
+                  gravity:      0
               mob_mods:
                 sublink: 5
           moblin:
@@ -4674,25 +4749,25 @@ ecosystems:
             attributes:
               resists:
                 rank_element:
-                  fire:     0
-                  ice:     -2
-                  wind:     2
-                  earth:    0
-                  thunder: -1
-                  water:    0
-                  light:    0
-                  dark:    -1
+                  fire:     3
+                  ice:     -1
+                  wind:     4
+                  earth:    5
+                  thunder:  3
+                  water:    1
+                  light:    1
+                  dark:     0
                 rank_status:
-                  paralyze:    -2
-                  bind:        -2
-                  silence:      2
-                  slow:         0
-                  poison:       0
-                  light_sleep:  0
-                  dark_sleep:  -1
-                  blind:       -1
-                  stun:        -1
-                  gravity:      2
+                  paralyze:    -1
+                  bind:        -1
+                  silence:      4
+                  slow:         5
+                  poison:       1
+                  light_sleep:  1
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         3
+                  gravity:      4
               mods:
                 eva:  10
                 hpp: -10
@@ -4722,6 +4797,8 @@ ecosystems:
                   blind:       -1
                   stun:        -1
                   gravity:      2
+              mods:
+                mdef: 16
           two_headed:
             id: 134
             attributes:
@@ -4895,6 +4972,71 @@ ecosystems:
             roam_rate:  15
             roam_turns:  6
         species:
+          dynamis_orc:
+            id: 140
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              resists:
+                rank_element:
+                  fire:     1
+                  ice:      1
+                  wind:    -1
+                  earth:   -1
+                  thunder: -1
+                  water:   -2
+                  light:   -1
+                  dark:    -1
+                rank_status:
+                  paralyze:     1
+                  bind:         1
+                  silence:     -1
+                  slow:        -1
+                  poison:      -2
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:        -1
+                  gravity:     -1
+              mods:
+                hpp: 5
+              mob_mods:
+                sublink: 2
+          masked_orc_s:
+            id: 488
+            attributes:
+              resists:
+                rank_element:
+                  fire:    4
+                  ice:     4
+                  wind:    2
+                  earth:   2
+                  thunder: 2
+                  water:   0
+                  light:   2
+                  dark:    2
+                rank_status:
+                  paralyze:    4
+                  bind:        4
+                  silence:     2
+                  slow:        2
+                  poison:      0
+                  light_sleep: 2
+                  dark_sleep:  2
+                  blind:       2
+                  stun:        2
+                  gravity:     2
+              mods:
+                mdef: 30
+                hpp:   5
+              mob_mods:
+                sublink: 2
           orc:
             id: 139
             attributes:
@@ -4923,30 +5065,34 @@ ecosystems:
                 hpp: 5
               mob_mods:
                 sublink: 2
-          red_orc:
-            id: 140
+          orc_s:
+            id: 142
             attributes:
               resists:
                 rank_element:
-                  fire:     0
-                  ice:      0
-                  wind:    -2
-                  earth:   -2
-                  thunder: -2
-                  water:   -3
-                  light:   -2
-                  dark:    -2
+                  fire:     2
+                  ice:      2
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:   -2
+                  light:    0
+                  dark:     0
                 rank_status:
-                  paralyze:     0
-                  bind:         0
-                  silence:     -2
-                  slow:        -2
-                  poison:      -3
-                  light_sleep: -2
-                  dark_sleep:  -2
-                  blind:       -2
-                  stun:        -2
-                  gravity:     -2
+                  paralyze:     2
+                  bind:         2
+                  silence:      0
+                  slow:         0
+                  poison:      -2
+                  light_sleep:  0
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         0
+                  gravity:      0
+              mods:
+                hpp: 5
+              mob_mods:
+                sublink: 2
           warchief:
             id: 141
             attributes:
@@ -4971,30 +5117,10 @@ ecosystems:
                   blind:       -2
                   stun:        -2
                   gravity:     -2
-          white_orc:
-            id: 142
-            attributes:
-              resists:
-                rank_element:
-                  fire:     0
-                  ice:      0
-                  wind:    -2
-                  earth:   -2
-                  thunder: -2
-                  water:   -3
-                  light:   -2
-                  dark:    -2
-                rank_status:
-                  paralyze:     0
-                  bind:         0
-                  silence:     -2
-                  slow:        -2
-                  poison:      -3
-                  light_sleep: -2
-                  dark_sleep:  -2
-                  blind:       -2
-                  stun:        -2
-                  gravity:     -2
+              mods:
+                hpp: 5
+              mob_mods:
+                sublink: 2
       orcish_warmachine:
         id: 64
         attributes:
@@ -5246,30 +5372,68 @@ ecosystems:
             roam_rate:  15
             roam_turns:  6
         species:
-          golden_quadav:
+          dynamis_quadav:
             id: 149
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              resists:
+                rank_element:
+                  fire:     1
+                  ice:     -1
+                  wind:    -1
+                  earth:   -1
+                  thunder: -2
+                  water:    1
+                  light:   -1
+                  dark:    -1
+                rank_status:
+                  paralyze:    -1
+                  bind:        -1
+                  silence:     -1
+                  slow:        -1
+                  poison:       1
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:        -2
+                  gravity:     -1
+              mods:
+                mdef:  10
+                hpp:  -10
+          horned_quadav_s:
+            id: 490
             attributes:
               resists:
                 rank_element:
-                  fire:     0
-                  ice:     -2
-                  wind:    -2
-                  earth:   -2
-                  thunder: -3
-                  water:    0
-                  light:   -2
-                  dark:    -2
+                  fire:    4
+                  ice:     2
+                  wind:    2
+                  earth:   2
+                  thunder: 1
+                  water:   4
+                  light:   2
+                  dark:    2
                 rank_status:
-                  paralyze:    -2
-                  bind:        -2
-                  silence:     -2
-                  slow:        -2
-                  poison:       0
-                  light_sleep: -2
-                  dark_sleep:  -2
-                  blind:       -2
-                  stun:        -3
-                  gravity:     -2
+                  paralyze:    2
+                  bind:        2
+                  silence:     2
+                  slow:        2
+                  poison:      4
+                  light_sleep: 2
+                  dark_sleep:  2
+                  blind:       2
+                  stun:        1
+                  gravity:     2
+              mods:
+                mdef:  30
+                hpp:  -10
           quadav:
             id: 150
             attributes:
@@ -5294,6 +5458,32 @@ ecosystems:
                   blind:       -2
                   stun:        -3
                   gravity:     -2
+              mods:
+                hpp: -10
+          quadav_s:
+            id: 489
+            attributes:
+              resists:
+                rank_element:
+                  fire:     2
+                  ice:      0
+                  wind:     0
+                  earth:    0
+                  thunder: -1
+                  water:    2
+                  light:    0
+                  dark:     0
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:      0
+                  slow:         0
+                  poison:       2
+                  light_sleep:  0
+                  dark_sleep:   0
+                  blind:        0
+                  stun:        -1
+                  gravity:      0
               mods:
                 hpp: -10
       sahagin:
@@ -5421,28 +5611,28 @@ ecosystems:
             id: 154
             attributes:
               resists:
-                dmg_magic:
-                  all: -5000
                 rank_element:
                   fire:    4
-                  ice:     2
+                  ice:     4
                   wind:    2
                   earth:   2
-                  thunder: 1
-                  water:   4
+                  thunder: 2
+                  water:   0
                   light:   2
                   dark:    2
                 rank_status:
-                  paralyze:    2
-                  bind:        2
+                  paralyze:    4
+                  bind:        4
                   silence:     2
                   slow:        2
-                  poison:      4
+                  poison:      0
                   light_sleep: 2
                   dark_sleep:  2
                   blind:       2
-                  stun:        1
+                  stun:        2
                   gravity:     2
+                dmg_magic:
+                  all: -5000
               mods:
                 mdef: 50
           quadav_turret:
@@ -5477,28 +5667,28 @@ ecosystems:
             id: 156
             attributes:
               resists:
-                dmg_magic:
-                  all: -5000
                 rank_element:
-                  fire:    4
-                  ice:     2
-                  wind:    2
-                  earth:   2
-                  thunder: 1
-                  water:   4
+                  fire:    2
+                  ice:     1
+                  wind:    4
+                  earth:   4
+                  thunder: 2
+                  water:   2
                   light:   2
                   dark:    2
                 rank_status:
-                  paralyze:    2
-                  bind:        2
-                  silence:     2
-                  slow:        2
-                  poison:      4
+                  paralyze:    1
+                  bind:        1
+                  silence:     4
+                  slow:        4
+                  poison:      2
                   light_sleep: 2
                   dark_sleep:  2
                   blind:       2
-                  stun:        1
-                  gravity:     2
+                  stun:        2
+                  gravity:     4
+                dmg_magic:
+                  all: -5000
               mods:
                 mdef: 50
       tonberry:
@@ -5629,62 +5819,19 @@ ecosystems:
             chr: d
           detects:
             - sight
+          speed: 32
+          mods:
+            hpp: 50
           mob_mods:
             roam_cool:  45
             roam_rate:  15
             roam_turns:  6
+            sublink:     9
         species:
           destroyer:
             id: 161
             attributes:
-              resists:
-                rank_element:
-                  fire:     3
-                  ice:      0
-                  wind:    -1
-                  earth:    0
-                  thunder:  0
-                  water:   -2
-                  light:   -1
-                  dark:    -1
-                rank_status:
-                  paralyze:     0
-                  bind:         0
-                  silence:     -1
-                  slow:         0
-                  poison:      -2
-                  light_sleep: -1
-                  dark_sleep:  -1
-                  blind:       -1
-                  stun:         0
-                  gravity:     -1
-          general:
-            id: 162
-            attributes:
-              resists:
-                rank_element:
-                  fire:     3
-                  ice:      0
-                  wind:    -1
-                  earth:    0
-                  thunder:  0
-                  water:   -2
-                  light:   -1
-                  dark:    -1
-                rank_status:
-                  paralyze:     0
-                  bind:         0
-                  silence:     -1
-                  slow:         0
-                  poison:      -2
-                  light_sleep: -1
-                  dark_sleep:  -1
-                  blind:       -1
-                  stun:         0
-                  gravity:     -1
-          troll:
-            id: 163
-            attributes:
+              speed: 40
               resists:
                 rank_element:
                   fire:     3
@@ -5707,9 +5854,108 @@ ecosystems:
                   stun:         0
                   gravity:     -1
               mods:
-                hpp: 50
-              mob_mods:
-                sublink: 9
+                mdef: 20
+          general:
+            id: 162
+            attributes:
+              speed: 40
+              resists:
+                rank_element:
+                  fire:    7
+                  ice:     7
+                  wind:    2
+                  earth:   7
+                  thunder: 7
+                  water:   2
+                  light:   4
+                  dark:    4
+                rank_status:
+                  paralyze:    7
+                  bind:        7
+                  silence:     2
+                  slow:        7
+                  poison:      2
+                  light_sleep: 4
+                  dark_sleep:  4
+                  blind:       4
+                  stun:        7
+                  gravity:     2
+                dmg_physical:
+                  slashing: -5000
+              mods:
+                mdef: 80
+          heavy_troll:
+            id: 486
+            attributes:
+              resists:
+                rank_element:
+                  fire:     3
+                  ice:      0
+                  wind:    -1
+                  earth:    0
+                  thunder:  0
+                  water:   -2
+                  light:   -1
+                  dark:    -1
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:     -1
+                  slow:         0
+                  poison:      -2
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:         0
+                  gravity:     -1
+          light_troll:
+            id: 485
+            attributes:
+              resists:
+                rank_element:
+                  fire:     3
+                  ice:      0
+                  wind:    -1
+                  earth:    0
+                  thunder:  0
+                  water:   -2
+                  light:   -1
+                  dark:    -1
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:     -1
+                  slow:         0
+                  poison:      -2
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:         0
+                  gravity:     -1
+          plated_troll:
+            id: 487
+            attributes:
+              resists:
+                rank_element:
+                  fire:    5
+                  ice:     2
+                  wind:    1
+                  earth:   2
+                  thunder: 2
+                  water:   0
+                  light:   1
+                  dark:    1
+                rank_status:
+                  paralyze:    2
+                  bind:        2
+                  silence:     1
+                  slow:        2
+                  poison:      0
+                  light_sleep: 1
+                  dark_sleep:  1
+                  blind:       1
+                  stun:        2
+                  gravity:     1
       velkk:
         id: 73
         attributes:
@@ -5791,54 +6037,90 @@ ecosystems:
             roam_rate:  15
             roam_turns:  6
         species:
-          armored_yagudo:
+          dynamis_yagudo:
             id: 166
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 rank_element:
-                  fire:    -2
-                  ice:     -3
-                  wind:     0
-                  earth:    0
-                  thunder: -2
-                  water:   -2
-                  light:   -2
-                  dark:    -2
+                  fire:    -1
+                  ice:     -2
+                  wind:     1
+                  earth:    1
+                  thunder: -1
+                  water:   -1
+                  light:   -1
+                  dark:    -1
                 rank_status:
-                  paralyze:    -3
-                  bind:        -3
-                  silence:      0
-                  slow:         0
-                  poison:      -2
-                  light_sleep: -2
-                  dark_sleep:  -2
-                  blind:       -2
-                  stun:        -2
-                  gravity:      0
+                  paralyze:    -2
+                  bind:        -2
+                  silence:      1
+                  slow:         1
+                  poison:      -1
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:        -1
+                  gravity:      1
+              mods:
+                mdef: 50
           manifest:
             id: 167
             attributes:
               resists:
                 rank_element:
-                  fire:    -2
-                  ice:     -3
-                  wind:     0
-                  earth:    0
-                  thunder: -2
-                  water:   -2
-                  light:   -2
-                  dark:    -2
+                  fire:     0
+                  ice:     -2
+                  wind:     4
+                  earth:    4
+                  thunder:  0
+                  water:    0
+                  light:    0
+                  dark:     0
                 rank_status:
-                  paralyze:    -3
-                  bind:        -3
-                  silence:      0
-                  slow:         0
-                  poison:      -2
-                  light_sleep: -2
-                  dark_sleep:  -2
-                  blind:       -2
-                  stun:        -2
-                  gravity:      0
+                  paralyze:    -2
+                  bind:        -2
+                  silence:      4
+                  slow:         4
+                  poison:       0
+                  light_sleep:  0
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         0
+                  gravity:      4
+          whitehead_yagudo_s:
+            id: 492
+            attributes:
+              resists:
+                rank_element:
+                  fire:    2
+                  ice:     1
+                  wind:    4
+                  earth:   4
+                  thunder: 2
+                  water:   2
+                  light:   2
+                  dark:    2
+                rank_status:
+                  paralyze:    1
+                  bind:        1
+                  silence:     4
+                  slow:        4
+                  poison:      2
+                  light_sleep: 2
+                  dark_sleep:  2
+                  blind:       2
+                  stun:        2
+                  gravity:     4
+              mods:
+                mdef: 30
           yagudo:
             id: 168
             attributes:
@@ -5864,6 +6146,30 @@ ecosystems:
                   stun:        -2
                   gravity:      0
 
+          yagudo_s:
+            id: 491
+            attributes:
+              resists:
+                rank_element:
+                  fire:     0
+                  ice:     -1
+                  wind:     2
+                  earth:    2
+                  thunder:  0
+                  water:    0
+                  light:    0
+                  dark:     0
+                rank_status:
+                  paralyze:    -1
+                  bind:        -1
+                  silence:      2
+                  slow:         2
+                  poison:       0
+                  light_sleep:  0
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         0
+                  gravity:      2
   bird:
     id: 7
     families:
@@ -5959,6 +6265,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed: 28
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -6260,7 +6567,7 @@ ecosystems:
             eva: d
           detects:
             - sight
-          speed:     60
+          speed:     64
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -6307,25 +6614,25 @@ ecosystems:
                 dmg_magic:
                   all: -9000
                 rank_element:
-                  fire:     2
+                  fire:     0
                   ice:      0
-                  wind:     2
-                  earth:   -2
-                  thunder:  6
-                  water:    2
+                  wind:     7
+                  earth:    1
+                  thunder:  0
+                  water:    0
                   light:    1
-                  dark:     2
+                  dark:    -1
                 rank_status:
                   paralyze:     0
                   bind:         0
-                  silence:      2
-                  slow:        -2
-                  poison:       2
+                  silence:      7
+                  slow:         1
+                  poison:       0
                   light_sleep:  1
-                  dark_sleep:   2
-                  blind:        2
-                  stun:         6
-                  gravity:      2
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:         0
+                  gravity:      7
               mods:
                 mdef: 14
       flock_bat:
@@ -6587,6 +6894,7 @@ ecosystems:
             def: b
           detects:
             - sight
+          speed: 60
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -6631,24 +6939,24 @@ ecosystems:
                   piercing:  2500
                   blunt:    -2500
                 rank_element:
-                  fire:     1
-                  ice:     -3
+                  fire:    10
+                  ice:     10
                   wind:     4
-                  earth:    1
-                  thunder:  1
-                  water:    1
-                  light:    1
-                  dark:     1
+                  earth:    4
+                  thunder:  4
+                  water:   -2
+                  light:    4
+                  dark:     4
                 rank_status:
-                  paralyze:    -3
-                  bind:        -3
+                  paralyze:    10
+                  bind:        10
                   silence:      4
-                  slow:         1
-                  poison:       1
-                  light_sleep:  1
-                  dark_sleep:   1
-                  blind:        1
-                  stun:         1
+                  slow:         4
+                  poison:      -2
+                  light_sleep:  4
+                  dark_sleep:   4
+                  blind:        4
+                  stun:         4
                   gravity:      4
               mods:
                 mdef: 14
@@ -6756,6 +7064,7 @@ ecosystems:
           element: fire
           detects:
             - scent
+          speed: 80
         species:
           black_waktza:
             id: 193
@@ -6896,12 +7205,51 @@ ecosystems:
                   slow:         0
                   poison:       0
                   light_sleep: -2
-                  dark_sleep:   4
+                  dark_sleep:   6
                   blind:        6
                   stun:         0
                   gravity:      0
               mods:
                 mdef: 20
+          dynamis_ahriman:
+            id: 500
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              resists:
+                rank_element:
+                  fire:     1
+                  ice:      1
+                  wind:     1
+                  earth:    1
+                  thunder:  1
+                  water:    1
+                  light:   -1
+                  dark:     7
+                rank_status:
+                  paralyze:     1
+                  bind:         1
+                  silence:     11
+                  slow:         1
+                  poison:       1
+                  light_sleep: -1
+                  dark_sleep:   7
+                  blind:        7
+                  stun:         1
+                  gravity:      1
+                dmg_magic:
+                  all: -2500
+              mob_mods:
+                ga_chance:    60
+                hp_standback: -1
+              mods:
+                mdef: 150
           shadow_eyes:
             id: 197
             attributes:
@@ -6976,6 +7324,7 @@ ecosystems:
             attributes:
               detects:
                 - sight
+              speed: 70
               resists:
                 dmg_magic:
                   all: -2500
@@ -6999,6 +7348,47 @@ ecosystems:
                   blind:        0
                   stun:         0
                   gravity:      0
+          dynamis_kindred:
+            id: 498
+            attributes:
+              speed: 70
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              detects:
+                - sight
+                - scent
+              resists:
+                dmg_magic:
+                  all: -2500
+                rank_element:
+                  fire:     0
+                  ice:      0
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:    0
+                  light:   -2
+                  dark:     0
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:      0
+                  slow:         0
+                  poison:       0
+                  light_sleep: -2
+                  dark_sleep:   0
+                  blind:        0
+                  stun:         0
+                  gravity:      0
+              mob_mods:
+                sublink:      1
+                link_radius: 15
           golden_demon:
             id: 200
             attributes:
@@ -7033,6 +7423,7 @@ ecosystems:
               detects:
                 - sight
                 - scent
+              speed: 70
               resists:
                 dmg_magic:
                   all: -2500
@@ -7063,6 +7454,7 @@ ecosystems:
           red_demon:
             id: 202
             attributes:
+              speed: 70
               detects:
                 - sight
               resists:
@@ -7088,8 +7480,6 @@ ecosystems:
                   blind:        1
                   stun:         1
                   gravity:      1
-              mods:
-                mdef: 10
       dvergr:
         id: 89
         attributes:
@@ -7212,7 +7602,6 @@ ecosystems:
             mnd: f
           detects:
             - hearing
-          speed: 70
         species:
           gallu:
             id: 206
@@ -7358,7 +7747,7 @@ ecosystems:
           detects:
             - sight
             - hearing
-          speed: 50
+          speed: 64
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -7596,6 +7985,34 @@ ecosystems:
                   blind:        2
                   stun:        -1
                   gravity:     -1
+          red_taurus:
+            id: 495
+            attributes:
+              resists:
+                rank_element:
+                  fire:     1
+                  ice:      3
+                  wind:     1
+                  earth:    1
+                  thunder:  1
+                  water:    1
+                  light:   -2
+                  dark:     4
+                rank_status:
+                  paralyze:     3
+                  bind:         3
+                  silence:      1
+                  slow:         1
+                  poison:       1
+                  light_sleep: -2
+                  dark_sleep:   4
+                  blind:        4
+                  stun:         1
+                  gravity:      1
+                dmg_magic:
+                  all: -630
+              mob_mods:
+                sublink: 1
           taurus:
             id: 217
             attributes:
@@ -7733,6 +8150,11 @@ ecosystems:
             mnd: e
           detects:
             - hearing
+          speed: 32
+          mob_mods:
+            roam_cool:  35
+            roam_rate:  35
+            roam_turns:  3
         species:
           alfard:
             id: 221
@@ -7811,6 +8233,7 @@ ecosystems:
           detects:
             - sight
             - hearing
+          speed:     56
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -8094,7 +8517,7 @@ ecosystems:
             chr: e
           detects:
             - sight
-          speed: 70
+          speed: 75
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -8218,7 +8641,7 @@ ecosystems:
             acc: a
           detects:
             - sight
-          speed: 70
+          speed: 40
           mob_mods:
             roam_turns: 6
         species:
@@ -8281,7 +8704,6 @@ ecosystems:
               element: dark
               detects:
                 - hearing
-              speed: 50
               resists:
                 rank_element:
                   fire:     2
@@ -9349,6 +9771,7 @@ ecosystems:
           detects:
             - sight
             - magic
+          speed: 70
         species:
           alicorn:
             id: 271
@@ -9677,7 +10100,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
+          speed: 30
         species:
           apex_craver:
             id: 280
@@ -9742,7 +10165,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
         species:
           apex_gorger:
             id: 282
@@ -9848,7 +10270,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -9918,7 +10339,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
+          speed: 45
         species:
           apex_thinker:
             id: 287
@@ -9984,7 +10405,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  15
             roam_rate:  15
@@ -10057,7 +10477,6 @@ ecosystems:
             chr: d
           detects:
             - hearing
-          speed: 50
           mob_mods:
             roam_cool:  35
             roam_rate:  35
@@ -10320,7 +10739,7 @@ ecosystems:
             mnd: a
             chr: a
             def: b
-          speed: 30
+          speed: 27
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10429,6 +10848,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
+          speed: 60
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10569,7 +10989,7 @@ ecosystems:
                 chr: d
               detects:
                 - scent
-              speed: 30
+              speed: 60
               resists:
                 rank_element:
                   fire:    9
@@ -10698,7 +11118,6 @@ ecosystems:
           detects:
             - sight
             - hearing
-          speed: 30
           mob_mods:
             roam_cool:  60
             roam_rate:  40
@@ -10864,27 +11283,51 @@ ecosystems:
         id: 129
         attributes:
           element: fire
+          stats:
+            str: d
+            dex: d
+            vit: e
+            int: d
+            mnd: d
+            chr: d
+            eva: a
           detects:
             - hearing
             - scent
-          speed:     50
+          speed:     70
           charmable: true
           mob_mods:
             roam_cool:  45
             roam_rate:  15
             roam_turns:  6
         species:
+          green_raptor:
+            id: 494
+            attributes:
+              resists:
+                rank_element:
+                  fire:     0
+                  ice:     -2
+                  wind:     1
+                  earth:   -1
+                  thunder: -1
+                  water:   -1
+                  light:   -1
+                  dark:    -1
+                rank_status:
+                  paralyze:    -2
+                  bind:        -2
+                  silence:      1
+                  slow:        -1
+                  poison:      -1
+                  light_sleep: -1
+                  dark_sleep:  -1
+                  blind:       -1
+                  stun:        -1
+                  gravity:      1
           lindwurm:
             id: 314
             attributes:
-              stats:
-                str: d
-                dex: d
-                vit: e
-                int: d
-                mnd: d
-                chr: d
-                eva: a
               resists:
                 rank_element:
                   fire:     0
@@ -10906,16 +11349,33 @@ ecosystems:
                   blind:       -2
                   stun:        -2
                   gravity:     -2
+          nival_raptor:
+            id: 497
+            attributes:
+              resists:
+                rank_element:
+                  fire:    -3
+                  ice:      0
+                  wind:     0
+                  earth:   -2
+                  thunder: -2
+                  water:   -2
+                  light:   -2
+                  dark:    -2
+                rank_status:
+                  paralyze:     0
+                  bind:         0
+                  silence:      0
+                  slow:        -2
+                  poison:      -2
+                  light_sleep: -2
+                  dark_sleep:  -2
+                  blind:       -2
+                  stun:        -2
+                  gravity:      0
           raptor:
             id: 315
             attributes:
-              stats:
-                str: d
-                dex: d
-                vit: e
-                int: d
-                mnd: d
-                chr: d
               resists:
                 rank_element:
                   fire:     0
@@ -10940,14 +11400,6 @@ ecosystems:
           ruby_raptors:
             id: 316
             attributes:
-              stats:
-                str: d
-                dex: d
-                vit: e
-                int: d
-                mnd: d
-                chr: d
-                eva: a
               resists:
                 rank_element:
                   fire:     0
@@ -11210,6 +11662,7 @@ ecosystems:
       phuabo:
         id: 134
         attributes:
+          speed: 80
           mob_mods:
             roam_cool:  20
             roam_rate:  13
@@ -11225,7 +11678,6 @@ ecosystems:
                 int: a
               detects:
                 - hearing
-              speed: 70
               resists:
                 rank_element:
                   fire:    -2
@@ -11267,25 +11719,25 @@ ecosystems:
                 dmg_magic:
                   all: -5000
                 rank_element:
-                  fire:    2
-                  ice:     2
-                  wind:    2
-                  earth:   2
-                  thunder: 2
-                  water:   2
-                  light:   2
-                  dark:    2
+                  fire:    -2
+                  ice:     -2
+                  wind:    -2
+                  earth:   -2
+                  thunder: -2
+                  water:   -2
+                  light:   -2
+                  dark:    -2
                 rank_status:
-                  paralyze:    2
-                  bind:        2
-                  silence:     2
-                  slow:        2
-                  poison:      2
-                  light_sleep: 2
-                  dark_sleep:  2
-                  blind:       2
-                  stun:        2
-                  gravity:     2
+                  paralyze:    -2
+                  bind:        -2
+                  silence:     -2
+                  slow:        -2
+                  poison:      -2
+                  light_sleep: -2
+                  dark_sleep:  -2
+                  blind:       -2
+                  stun:        -2
+                  gravity:     -2
               mods:
                 mdef: 34
       xzomit:
@@ -11299,7 +11751,7 @@ ecosystems:
             chr: d
           detects:
             - sight
-          speed: 50
+          speed: 72
         species:
           xzomit:
             id: 325
@@ -12282,27 +12734,27 @@ ecosystems:
             attributes:
               resists:
                 rank_element:
-                  fire:     0
-                  ice:      4
-                  wind:     4
-                  earth:   11
-                  thunder:  0
-                  water:   11
-                  light:    4
-                  dark:     9
+                  fire:    0
+                  ice:     0
+                  wind:    0
+                  earth:   4
+                  thunder: 0
+                  water:   4
+                  light:   4
+                  dark:    5
                 rank_status:
-                  paralyze:     4
-                  bind:         4
-                  silence:      4
-                  slow:        11
-                  poison:      11
-                  light_sleep:  4
-                  dark_sleep:   9
-                  blind:        9
-                  stun:         0
-                  gravity:      4
+                  paralyze:    0
+                  bind:        0
+                  silence:     0
+                  slow:        4
+                  poison:      4
+                  light_sleep: 4
+                  dark_sleep:  5
+                  blind:       5
+                  stun:        0
+                  gravity:     0
               mods:
-                mdef: 20
+                mdef: 30
           scarce_morbol:
             id: 356
             attributes:
@@ -12690,25 +13142,25 @@ ecosystems:
             attributes:
               resists:
                 rank_element:
-                  fire:    -3
-                  ice:     -2
-                  wind:    -2
-                  earth:    0
-                  thunder: -2
-                  water:    0
-                  light:    0
-                  dark:    -3
+                  fire:    -2
+                  ice:     -1
+                  wind:    -1
+                  earth:    1
+                  thunder: -1
+                  water:    1
+                  light:    1
+                  dark:    -2
                 rank_status:
-                  paralyze:    -2
-                  bind:        -2
-                  silence:     -2
-                  slow:         0
-                  poison:       0
-                  light_sleep:  0
-                  dark_sleep:  -3
-                  blind:       -3
-                  stun:        -2
-                  gravity:     -2
+                  paralyze:    -1
+                  bind:        -1
+                  silence:     -1
+                  slow:         1
+                  poison:       1
+                  light_sleep:  1
+                  dark_sleep:  -2
+                  blind:       -2
+                  stun:        -1
+                  gravity:     -1
       yggdreant:
         id: 153
         attributes:
@@ -12906,7 +13358,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 50
               resists:
                 rank_element:
                   fire:     3
@@ -13066,7 +13517,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 50
               resists:
                 dmg_magic:
                   all: -2000
@@ -13187,7 +13637,6 @@ ecosystems:
                 chr: b
               detects:
                 - sight
-              speed: 50
               resists:
                 rank_element:
                   fire:    3
@@ -13270,27 +13719,28 @@ ecosystems:
                 dmg_magic:
                   all: -630
                 rank_element:
-                  fire:     0
-                  ice:      2
-                  wind:     0
-                  earth:    2
-                  thunder:  0
-                  water:    2
-                  light:   -1
-                  dark:     6
+                  fire:    2
+                  ice:     4
+                  wind:    2
+                  earth:   4
+                  thunder: 2
+                  water:   4
+                  light:   4
+                  dark:    8
                 rank_status:
-                  paralyze:     2
-                  bind:         2
-                  silence:      0
-                  slow:         2
-                  poison:       2
-                  light_sleep: -1
-                  dark_sleep:   6
-                  blind:        6
-                  stun:         0
-                  gravity:      0
+                  paralyze:    4
+                  bind:        4
+                  silence:     2
+                  slow:        4
+                  poison:      4
+                  light_sleep: 4
+                  dark_sleep:  8
+                  blind:       8
+                  stun:        2
+                  gravity:     2
               mods:
                 udmgbreath: -630
+                mdef:         20
           psychopomp:
             id: 393
             attributes:
@@ -13611,6 +14061,41 @@ ecosystems:
             roam_rate:  15
             roam_turns:  2
         species:
+          dynamis_fomor:
+            id: 499
+            attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
+              detects:
+                - hearing
+                - lowhp
+              resists:
+                rank_element:
+                  fire:    -2
+                  ice:      4
+                  wind:     0
+                  earth:    0
+                  thunder:  0
+                  water:    0
+                  light:   -2
+                  dark:     4
+                rank_status:
+                  paralyze:     4
+                  bind:         4
+                  silence:      0
+                  slow:         0
+                  poison:       0
+                  light_sleep: -2
+                  dark_sleep:   4
+                  blind:        4
+                  stun:         0
+                  gravity:      0
           ephramadian:
             id: 401
             attributes:
@@ -13713,12 +14198,13 @@ ecosystems:
             id: 404
             attributes:
               stats:
-                str: d
-                dex: d
-                vit: d
-                agi: e
-                int: d
-                mnd: d
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 rank_element:
                   fire:    -2
@@ -13785,25 +14271,27 @@ ecosystems:
                 mnd: d
               resists:
                 rank_element:
-                  fire:    -2
-                  ice:      4
-                  wind:     0
-                  earth:    0
-                  thunder:  0
-                  water:    0
+                  fire:    -1
+                  ice:      1
+                  wind:    -1
+                  earth:    1
+                  thunder: -1
+                  water:    1
                   light:   -2
                   dark:     4
                 rank_status:
-                  paralyze:     4
-                  bind:         4
-                  silence:      0
-                  slow:         0
-                  poison:       0
+                  paralyze:     1
+                  bind:         1
+                  silence:     -1
+                  slow:         1
+                  poison:       1
                   light_sleep: -2
                   dark_sleep:   4
                   blind:        4
-                  stun:         0
-                  gravity:      0
+                  stun:        -1
+                  gravity:     -1
+              mods:
+                mdef: 30
       ghost:
         id: 173
         attributes:
@@ -13971,6 +14459,8 @@ ecosystems:
                   blind:       9
                   stun:        2
                   gravity:     2
+              mods:
+                mdef: 30
           naraka:
             id: 411
             attributes:
@@ -14759,6 +15249,7 @@ ecosystems:
             chr: e
           detects:
             - sight
+          speed:     80
           charmable: true
           mob_mods:
             roam_cool:  45
@@ -15025,6 +15516,7 @@ ecosystems:
             chr: d
           detects:
             - hearing
+          speed:     45
           charmable: true
           mob_mods:
             roam_cool:  15
@@ -16021,6 +16513,7 @@ ecosystems:
       wamouracampa:
         id: 198
         attributes:
+          speed: 24
           mob_mods:
             roam_cool:  45
             roam_rate:  15
@@ -16586,6 +17079,8 @@ ecosystems:
                 mp_base: 50
       omega:
         id: 204
+        attributes:
+          speed: 60
         species:
           omega:
             id: 477
@@ -16624,11 +17119,19 @@ ecosystems:
             mnd: b
           detects:
             - sight
-          speed: 20
+          speed: 15
         species:
           goblin_statue:
             id: 478
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -16659,11 +17162,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         112
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           orc_statue:
             id: 479
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -16694,11 +17206,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:          62
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           quadav_statue:
             id: 480
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -16729,11 +17250,20 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         112
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
           yagudo_statue:
             id: 481
             attributes:
+              stats:
+                str: a
+                dex: a
+                vit: a
+                agi: a
+                int: a
+                mnd: a
+                chr: a
               resists:
                 dmg_physical:
                   slashing: -1875
@@ -16764,8 +17294,9 @@ ecosystems:
                 udmgbreath: -8750
                 mdef:         162
               mob_mods:
-                immunity:     2047
-                hp_standback:   -1
+                immunity:             2047
+                hp_standback:           -1
+                base_damage_modifier:  220
       ultima:
         id: 206
         species:
@@ -16775,7 +17306,6 @@ ecosystems:
               detects:
                 - sight
                 - hearing
-              speed: 20
               resists:
                 dmg_magic:
                   all: -3000

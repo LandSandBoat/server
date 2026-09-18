@@ -363,6 +363,7 @@ templates:
   Goblin_Bounty_Hunter:
     id:            1642
     species:       armored_goblin
+    roam:          [scripted]
     skill_list_id: 133
     attributes:
       combat:
@@ -377,6 +378,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        dont_roam_home: 1
       spawn:
         respawn: 300
     loot:
@@ -524,7 +527,7 @@ templates:
 
   Goblin_Guide:
     id:            1672
-    species:       goblin
+    species:       armored_goblin
     spell_list_id: 5
     skill_list_id: 133
     attributes:

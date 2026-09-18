@@ -10,6 +10,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    -- Fenrir Prime strips every buff.
+    if mob:getPool() == xi.mobPool.FENRIR_PRIME then
+        local dispel = target:dispelAllStatusEffect(xi.effectFlag.DISPELABLE)
+
+        if dispel == 0 then
+            skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        else
+            skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+        end
+
+        return dispel
+    end
+
     local effects = target:getStatusEffects()
     local num = 0
 

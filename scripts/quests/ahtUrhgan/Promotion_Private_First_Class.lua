@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_
 
 quest.reward =
 {
-    keyItem = xi.ki.PFC_WILDCAT_BADGE,
+    keyItem = xi.keyItem.PFC_WILDCAT_BADGE,
     title   = xi.title.PRIVATE_FIRST_CLASS,
 }
 
@@ -57,7 +57,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:setCharVar('AssaultPromotion', 0)
                         player:confirmTrade()
-                        player:delKeyItem(xi.ki.PSC_WILDCAT_BADGE)
+                        player:delKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)
                     end
                 end,
             },

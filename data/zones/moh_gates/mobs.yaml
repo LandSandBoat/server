@@ -146,7 +146,7 @@ templates:
 
   Consecrated_Baelfyr:
     id:            4818
-    species:       earth_elemental
+    species:       baelfyr
     spell_list_id: 3
     skill_list_id: 101
     attributes:
@@ -168,7 +168,7 @@ templates:
 
   Crestfallen_Baelfyr:
     id:            4920
-    species:       earth_elemental
+    species:       baelfyr
     spell_list_id: 3
     skill_list_id: 101
     attributes:
@@ -318,7 +318,7 @@ templates:
 
   Gleeful_Ungeweder:
     id:            5092
-    species:       fire_elemental
+    species:       ungeweder
     spell_list_id: 17
     skill_list_id: 102
     attributes:
@@ -378,7 +378,7 @@ templates:
 
   Incandescent_Baelfyr:
     id:            5473
-    species:       fire_elemental
+    species:       baelfyr
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 102
@@ -602,7 +602,7 @@ templates:
 
   Ruby_Raptor:
     id:            5085
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -624,7 +624,7 @@ templates:
   Ruby_Raptor_Small:
     id:            7285
     display_name:  Ruby_Raptor
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:
@@ -701,7 +701,7 @@ templates:
 
   Staumarth:
     id:            4817
-    species:       ice_elemental
+    species:       gefyrst
     type:          [notorious]
     spell_list_id: 14
     skill_list_id: 103
@@ -725,7 +725,7 @@ templates:
 
   Steelclaw_Raptor:
     id:            5645
-    species:       raptor
+    species:       ruby_raptors
     skill_list_id: 210
     attributes:
       combat:

@@ -1194,7 +1194,7 @@ templates:
 
   Kalasutrax:
     id:            4708
-    species:       naraka
+    species:       green_naraka
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 472

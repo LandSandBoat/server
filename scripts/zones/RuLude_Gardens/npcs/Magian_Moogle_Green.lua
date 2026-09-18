@@ -36,9 +36,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10151)
     elseif
         player:getCharVar('MetGreenMagianMog') == 0 and
-        not player:hasKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
+        not player:hasKeyItem(xi.keyItem.MAGIAN_LEARNERS_LOG)
     then
-        if not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
+        if not player:hasKeyItem(xi.keyItem.MAGIAN_TRIAL_LOG) then
             player:startEvent(10160, 0)
         else
             player:startEvent(10160, 1)
@@ -50,8 +50,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10160 and option == 1 then
-        if not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
-            npcUtil.giveKeyItem(player, xi.ki.MAGIAN_LEARNERS_LOG)
+        if not player:hasKeyItem(xi.keyItem.MAGIAN_TRIAL_LOG) then
+            npcUtil.giveKeyItem(player, xi.keyItem.MAGIAN_LEARNERS_LOG)
         end
 
         player:setCharVar('MetGreenMagianMog', 1)

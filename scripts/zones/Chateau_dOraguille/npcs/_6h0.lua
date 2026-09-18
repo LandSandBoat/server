@@ -56,7 +56,7 @@ entity.onTrigger = function(player, npc)
     -- Trust: San d'Oria (Trion)
     elseif
         player:getRank(player:getNation()) >= 6 and
-        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
+        player:hasKeyItem(xi.keyItem.SAN_DORIA_TRUST_PERMIT) and
         not player:hasSpell(xi.magic.spell.TRION)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
 
-            player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
+            player:delKeyItem(xi.keyItem.KNIGHTS_BOOTS)
             player:addItem(xi.item.GALLANT_LEGGINGS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar('aBoysDreamCS', 0)

@@ -5,7 +5,7 @@ describe('Treasure', function()
             {
                 zone = xi.zone.ORDELLES_CAVES,
             })
-        player:addKeyItem(xi.ki.MAP_OF_ORDELLES_CAVES)
+        player:addKeyItem(xi.keyItem.MAP_OF_ORDELLES_CAVES)
 
         -- Skip time to let the chest's 'opened' var reset (queued at 5s)
         xi.test.world:skipTime(6)

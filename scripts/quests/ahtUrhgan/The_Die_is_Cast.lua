@@ -129,7 +129,7 @@ quest.sections =
             {
                 [213] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    npcUtil.giveKeyItem(player, xi.ki.BAG_OF_GOLD_PIECES)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BAG_OF_GOLD_PIECES)
                 end,
             },
         },
@@ -148,7 +148,7 @@ quest.sections =
             {
                 [593] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.BAG_OF_GOLD_PIECES)
+                        player:delKeyItem(xi.keyItem.BAG_OF_GOLD_PIECES)
                     end
                 end,
             },

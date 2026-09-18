@@ -35,8 +35,14 @@
 
 #include <fmt/ranges.h>
 
-enum LSTYPE : std::uint8_t;
+namespace xi
+{
+
 enum class KeyItem : uint16_t;
+
+}
+
+enum LSTYPE : std::uint8_t;
 class CCharEntity;
 
 class PacketValidationResult
@@ -237,7 +243,7 @@ public:
     // Character must be in Mog House
     auto isInMogHouse() -> PacketValidator&;
     // Character must have a specific key item
-    auto hasKeyItem(KeyItem keyItemId) -> PacketValidator&;
+    auto hasKeyItem(xi::KeyItem keyItemId) -> PacketValidator&;
     // The previous packet received from this character must match the expected packet ID
     auto requiresPriorPacket(PacketC2S expectedPacketId) -> PacketValidator&;
 

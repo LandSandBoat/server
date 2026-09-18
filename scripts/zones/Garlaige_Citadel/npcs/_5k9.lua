@@ -10,10 +10,10 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if npc:getAnimation() == xi.animation.CLOSE_DOOR then
-        if player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) then
+        if player:hasKeyItem(xi.keyItem.POUCH_OF_WEIGHTED_STONES) then
             -- Only the north side displays a message when interacting.
             if player:getZPos() > 80.5 then
-                player:messageSpecial(ID.text.THE_GATE_OPENS_FOR_YOU, xi.ki.POUCH_OF_WEIGHTED_STONES)
+                player:messageSpecial(ID.text.THE_GATE_OPENS_FOR_YOU, xi.keyItem.POUCH_OF_WEIGHTED_STONES)
             end
 
             -- Door opens from both sides. There's a short delay.
@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         else
             -- North side regular interaction.
             if player:getZPos() > 80.5 then
-                player:messageSpecial(ID.text.YOU_COULD_OPEN_THE_GATE, xi.ki.POUCH_OF_WEIGHTED_STONES)
+                player:messageSpecial(ID.text.YOU_COULD_OPEN_THE_GATE, xi.keyItem.POUCH_OF_WEIGHTED_STONES)
             end
         end
     end

@@ -491,7 +491,7 @@ templates:
 
   Uptala:
     id:            4719
-    species:       naraka
+    species:       white_naraka
     type:          [notorious]
     skill_list_id: 472
     attributes:

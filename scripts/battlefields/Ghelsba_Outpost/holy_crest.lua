@@ -26,15 +26,15 @@ function content:entryRequirement(player, npc, isRegistrant, trade)
         return true
     end
 
-    return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+    return player:hasKeyItem(xi.keyItem.DRAGON_CURSE_REMEDY)
 end
 
 function content:onEventFinishWin(player, csid, option, npc)
     if
         option ~= 0 and
-        player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+        player:hasKeyItem(xi.keyItem.DRAGON_CURSE_REMEDY)
     then
-        player:delKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+        player:delKeyItem(xi.keyItem.DRAGON_CURSE_REMEDY)
         player:unlockJob(xi.job.DRG)
         player:setPetName(xi.petType.WYVERN, option + 1)
         player:messageSpecial(ghelsbaID.text.YOU_CAN_NOW_BECOME_A_DRAGOON)
@@ -43,7 +43,7 @@ function content:onEventFinishWin(player, csid, option, npc)
             fame     = 20,
             fameArea = xi.fameArea.SANDORIA,
             title    = xi.title.HEIR_TO_THE_HOLY_CREST,
-            keyItem  = xi.ki.JOB_GESTURE_DRAGOON,
+            keyItem  = xi.keyItem.JOB_GESTURE_DRAGOON,
             var      = 'TheHolyCrest_Event',
         })
     end

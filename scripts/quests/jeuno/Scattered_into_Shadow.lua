@@ -20,9 +20,9 @@ quest.reward =
 
 local function beginQuest(player)
     quest:begin(player)
-    player:addKeyItem(xi.ki.AQUAFLORA1)
-    player:addKeyItem(xi.ki.AQUAFLORA2)
-    player:addKeyItem(xi.ki.AQUAFLORA3)
+    player:addKeyItem(xi.keyItem.AQUAFLORA1)
+    player:addKeyItem(xi.keyItem.AQUAFLORA2)
+    player:addKeyItem(xi.keyItem.AQUAFLORA3)
 end
 
 quest.sections =
@@ -53,14 +53,14 @@ quest.sections =
                 [143] = function(player, csid, option, npc)
                     if option == 1 then
                         beginQuest(player)
-                        player:messageSpecial(upperJeunoID.text.YOU_ARE_GIVEN_THREE_SPRIGS, xi.ki.AQUAFLORA1)
+                        player:messageSpecial(upperJeunoID.text.YOU_ARE_GIVEN_THREE_SPRIGS, xi.keyItem.AQUAFLORA1)
                     end
                 end,
 
                 [141] = function(player, csid, option, npc)
                     if option == 1 then
                         beginQuest(player)
-                        player:messageSpecial(upperJeunoID.text.YOU_ARE_GIVEN_THREE_SPRIGS, xi.ki.AQUAFLORA1)
+                        player:messageSpecial(upperJeunoID.text.YOU_ARE_GIVEN_THREE_SPRIGS, xi.keyItem.AQUAFLORA1)
                     else
                         quest:setVar(player, 'Prog', 1)
                     end
@@ -83,21 +83,21 @@ quest.sections =
 
                     if
                         offset == 0 and
-                        player:hasKeyItem(xi.ki.AQUAFLORA2)
+                        player:hasKeyItem(xi.keyItem.AQUAFLORA2)
                     then
                         return quest:progressEvent(20)
                     elseif offset == 1 then
                         if quest:getVar(player, 'Prog') == 2 then
                             return quest:progressEvent(18)
                         elseif
-                            player:hasKeyItem(xi.ki.AQUAFLORA3) and
+                            player:hasKeyItem(xi.keyItem.AQUAFLORA3) and
                             npcUtil.popFromQM(player, npc, feiyinID.mob.DABOTZS_GHOST, { claim = true, hide = 0 })
                         then
                             return quest:noAction()
                         end
                     elseif
                         offset == 2 and
-                        player:hasKeyItem(xi.ki.AQUAFLORA1)
+                        player:hasKeyItem(xi.keyItem.AQUAFLORA1)
                     then
                         return quest:progressEvent(21)
                     end
@@ -107,7 +107,7 @@ quest.sections =
             ['Dabotzs_Ghost'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if player:hasKeyItem(xi.ki.AQUAFLORA3) then
+                    if player:hasKeyItem(xi.keyItem.AQUAFLORA3) then
                         quest:setVar(player, 'Prog', 2)
                     end
                 end,
@@ -116,18 +116,18 @@ quest.sections =
             onEventFinish =
             {
                 [18] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.AQUAFLORA3)
+                    player:delKeyItem(xi.keyItem.AQUAFLORA3)
                     quest:setVar(player, 'Prog', 3)
                     quest:setVarBit(player, 'Stage', 2)
                 end,
 
                 [20] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.AQUAFLORA2)
+                    player:delKeyItem(xi.keyItem.AQUAFLORA2)
                     quest:setVarBit(player, 'Stage', 1)
                 end,
 
                 [21] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.AQUAFLORA1)
+                    player:delKeyItem(xi.keyItem.AQUAFLORA1)
                     quest:setVarBit(player, 'Stage', 0)
                 end,
             },
@@ -225,9 +225,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.AQUAFLORA1) or
-                        player:hasKeyItem(xi.ki.AQUAFLORA2) or
-                        player:hasKeyItem(xi.ki.AQUAFLORA3)
+                        player:hasKeyItem(xi.keyItem.AQUAFLORA1) or
+                        player:hasKeyItem(xi.keyItem.AQUAFLORA2) or
+                        player:hasKeyItem(xi.keyItem.AQUAFLORA3)
                     then
                         return quest:event(142)
                     elseif quest:getVar(player, 'Prog') == 3 then

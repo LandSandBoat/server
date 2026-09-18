@@ -26,9 +26,9 @@ local content = Battlefield:new({
 function content:entryRequirement(player, npc, isRegistrant, trade)
     local promathiaMission    = player:getCurrentMission(xi.mission.log_id.COP)
     local currentRequirements = promathiaMission == xi.mission.id.cop.BELOW_THE_ARKS or
-        (promathiaMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_MEA))
+        (promathiaMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.keyItem.LIGHT_OF_MEA))
     local nonRegistrantReqs   = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
-        player:hasKeyItem(xi.ki.LIGHT_OF_MEA) or
+        player:hasKeyItem(xi.keyItem.LIGHT_OF_MEA) or
         currentRequirements
 
     return (not isRegistrant and nonRegistrantReqs) or currentRequirements
@@ -36,7 +36,7 @@ end
 
 function content:checkSkipCutscene(player)
     return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
-        player:hasKeyItem(xi.ki.LIGHT_OF_MEA)
+        player:hasKeyItem(xi.keyItem.LIGHT_OF_MEA)
 end
 
 function content:onBattlefieldWin(player, battlefield)
@@ -49,7 +49,7 @@ function content:onBattlefieldWin(player, battlefield)
     if
         (copMission == xi.mission.id.cop.BELOW_THE_ARKS or
         copMission == xi.mission.id.cop.THE_MOTHERCRYSTALS) and
-        not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        not player:hasKeyItem(xi.keyItem.LIGHT_OF_HOLLA + promyvionId)
     then
         player:setLocalVar('newPromy', 1)
     end

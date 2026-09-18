@@ -17,7 +17,7 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMO
 
 quest.reward =
 {
-    keyItem = xi.ki.LARGE_MEMORY_FRAGMENT2,
+    keyItem = xi.keyItem.LARGE_MEMORY_FRAGMENT2,
 }
 
 quest.sections =
@@ -115,7 +115,7 @@ quest.sections =
                         return quest:messageSpecial(graubergID.text.SUITABLE_PLACE_TO_SOAK, xi.item.PHILOSOPHERS_STONE)
                     elseif
                         questProgress == 3 and
-                        not player:hasKeyItem(xi.ki.FEY_STONE)
+                        not player:hasKeyItem(xi.keyItem.FEY_STONE)
                     then
                         if quest:getVar(player, 'Timer') <= VanadielUniqueDay() then
                             return quest:progressEvent(32, 89, 6, 0, 56, 0, 6029328, 0, 0)
@@ -136,7 +136,7 @@ quest.sections =
                 end,
 
                 [32] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FEY_STONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FEY_STONE)
                 end,
             },
         },
@@ -146,7 +146,7 @@ quest.sections =
             ['Raustigne'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FEY_STONE) then
+                    if player:hasKeyItem(xi.keyItem.FEY_STONE) then
                         return quest:progressEvent(169, 80, 23, 1756, 0, 67108863, 85453257, 3903, 131140)
                     end
                 end,
@@ -157,7 +157,7 @@ quest.sections =
                 [169] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         xi.wotg.helpers.checkMemoryFragments(player)
-                        player:delKeyItem(xi.ki.FEY_STONE)
+                        player:delKeyItem(xi.keyItem.FEY_STONE)
                     end
                 end,
             },

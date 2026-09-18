@@ -14,7 +14,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasKeyItem(xi.ki.SILVER_BELL)
+                player:hasKeyItem(xi.keyItem.SILVER_BELL)
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -52,7 +52,7 @@ quest.sections =
                         return
                     end
 
-                    player:addKeyItem(xi.ki.CORUSCANT_ROSARY)
+                    player:addKeyItem(xi.keyItem.CORUSCANT_ROSARY)
                     player:addFame(xi.fameArea.SANDORIA, 7)
                     player:addFame(xi.fameArea.BASTOK, 7)
                     player:addFame(xi.fameArea.WINDURST, 7)
@@ -69,7 +69,7 @@ quest.sections =
             {
                 [91] = function(player, csid, option, npc)
                     player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
-                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.ki.CORUSCANT_ROSARY)
+                    player:messageSpecial(lowerJeunoID.text.KEYITEM_OBTAINED, xi.keyItem.CORUSCANT_ROSARY)
                 end,
             },
         },

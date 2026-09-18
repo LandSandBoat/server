@@ -1,6 +1,6 @@
 -----------------------------------
 -- White Wind
---
+-- Family: Puks
 -- Description:
 -- HP recovery on all nearby mobs centered on the user.
 -- The higher the user's HP, the higher the HP recovery.
@@ -17,8 +17,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP() / 7) * 2)
+    local params = {}
+
+    params.primaryMessage = xi.msg.basic.SELF_HEAL_SECONDARY -- TODO: Capture msg
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP = -- TODO: Could use more captures
+    {
+        { tp = 1000, modifier = 0.10 },
+        { tp = 2000, modifier = 0.30 },
+        { tp = 3000, modifier = 0.50 },
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

@@ -62,7 +62,7 @@ local eldiemeGlobal = {
     -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
         if npc:getAnimation() == xi.animation.CLOSE_DOOR then
-            if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
+            if player:hasKeyItem(xi.keyItem.MAGICKED_ASTROLABE) then
                 npc:openDoor(8)
             else
                 player:messageSpecial(ID.text.SOLID_STONE)

@@ -12,10 +12,13 @@ entity.onTrigger = function(player, npc)
 
     if sayItWithAHandbag == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(175)
-    elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
+    elseif
+        player:hasKeyItem(xi.keyItem.REPAIRED_HANDBAG) and
+        sayItWithAHandbagCS == 4
+    then
         player:startEvent(174)
     elseif
-        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) or
+        player:hasKeyItem(xi.keyItem.TORN_PATCHES_OF_LEATHER) or
         sayItWithAHandbagCS == 3
     then
         player:startEvent(173)
@@ -39,11 +42,11 @@ entity.onEventFinish = function(player, csid, option, npc)
                 var = 'sayItWithAHandbagCS'
             })
         then
-            player:delKeyItem(xi.ki.REPAIRED_HANDBAG)
+            player:delKeyItem(xi.keyItem.REPAIRED_HANDBAG)
             player:setCharVar('sayItWithAHandbagBonusCS', 1)
         end
     elseif csid == 172 then
-        npcUtil.giveKeyItem(player, xi.ki.TORN_PATCHES_OF_LEATHER)
+        npcUtil.giveKeyItem(player, xi.keyItem.TORN_PATCHES_OF_LEATHER)
     elseif csid == 169 then
         player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     end

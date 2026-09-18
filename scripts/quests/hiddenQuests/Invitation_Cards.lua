@@ -8,10 +8,10 @@ local quest = HiddenQuest:new('Invitation_Cards')
 
 local invitationCards =
 {
-    xi.ki.RED_INVITATION_CARD,
-    xi.ki.BLUE_INVITATION_CARD,
-    xi.ki.GREEN_INVITATION_CARD,
-    xi.ki.WHITE_INVITATION_CARD,
+    xi.keyItem.RED_INVITATION_CARD,
+    xi.keyItem.BLUE_INVITATION_CARD,
+    xi.keyItem.GREEN_INVITATION_CARD,
+    xi.keyItem.WHITE_INVITATION_CARD,
 }
 
 local rewards =

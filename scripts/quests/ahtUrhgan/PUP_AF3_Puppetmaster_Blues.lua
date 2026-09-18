@@ -99,7 +99,7 @@ quest.sections =
             onEventFinish =
             {
                 [437] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.VALKENGS_MEMORY_CHIP)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VALKENGS_MEMORY_CHIP)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
@@ -116,9 +116,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.TOGGLE_SWITCH)
+                        not player:hasKeyItem(xi.keyItem.TOGGLE_SWITCH)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.TOGGLE_SWITCH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TOGGLE_SWITCH)
                         return quest:noAction()
                     end
                 end,
@@ -150,8 +150,8 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.PUPPETMASTER_BLUES then
-                        player:delKeyItem(xi.ki.VALKENGS_MEMORY_CHIP)
-                        player:delKeyItem(xi.ki.TOGGLE_SWITCH)
+                        player:delKeyItem(xi.keyItem.VALKENGS_MEMORY_CHIP)
+                        player:delKeyItem(xi.keyItem.TOGGLE_SWITCH)
                         quest:setVar(player, 'Prog', 2)
                     end
                 end,

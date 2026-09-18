@@ -1,36 +1,22 @@
 -----------------------------------
 -- Area: Throne Room
---  Mob: Demons Elemental (Thunder Elemental)
+--  Mob: Demon's Elemental
 -- BCNM: Kindred Spirits
--- Job : Black Mage / Warrior
+-----------------------------------
+require('scripts/globals/pets/summon')
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpellChoose = function(mob, target, spellId)
-    local spellList =
-    {
-        xi.magic.spell.THUNDER_II,
-        xi.magic.spell.THUNDAGA,
-    }
+local possibleSpirits =
+{
+    xi.pets.summon.type.ICE_SPIRIT,
+    xi.pets.summon.type.THUNDER_SPIRIT,
+    xi.pets.summon.type.DARK_SPIRIT,
+}
 
-    if not mob:hasStatusEffect(xi.effect.SHOCK_SPIKES) then
-        table.insert(spellList, xi.magic.spell.SHOCK_SPIKES)
-    end
-
-    if not mob:hasStatusEffect(xi.effect.ENTHUNDER) then
-        table.insert(spellList, xi.magic.spell.ENTHUNDER)
-    end
-
-    if not target:hasStatusEffect(xi.effect.SHOCK) then
-        table.insert(spellList, xi.magic.spell.SHOCK)
-    end
-
-    if not target:hasStatusEffect(xi.effect.STUN) then
-        table.insert(spellList, xi.magic.spell.STUN)
-    end
-
-    return spellList[math.randomInt(1, #spellList)]
+entity.onMobSpawn = function(mob)
+    xi.pets.summon.setupSummon(mob, possibleSpirits, true)
 end
 
 return entity

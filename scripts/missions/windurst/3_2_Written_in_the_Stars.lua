@@ -155,7 +155,7 @@ mission.sections =
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CHARM_OF_LIGHT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CHARM_OF_LIGHT)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
 
@@ -173,7 +173,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(41, 0, xi.ki.CHARM_OF_LIGHT)
+                        return mission:progressEvent(41, 0, xi.keyItem.CHARM_OF_LIGHT)
                     end
                 end,
             },
@@ -182,7 +182,7 @@ mission.sections =
             {
                 [41] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    player:delKeyItem(xi.ki.CHARM_OF_LIGHT)
+                    player:delKeyItem(xi.keyItem.CHARM_OF_LIGHT)
                 end,
             },
         },

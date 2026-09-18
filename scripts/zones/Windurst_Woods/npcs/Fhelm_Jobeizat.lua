@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     if player:getEminenceProgress(1) then
         player:startEvent(848, 0, player:getGil())
-    elseif not player:hasKeyItem(xi.ki.MEMORANDOLL) then
+    elseif not player:hasKeyItem(xi.keyItem.MEMORANDOLL) then
         player:startEvent(849)
     else
         player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC)

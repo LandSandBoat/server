@@ -46,7 +46,7 @@ templates:
 
   Akupara:
     id:            4684
-    species:       adamantoise
+    species:       ferromantoise
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 2
@@ -387,7 +387,7 @@ templates:
 
   Boodlix:
     id:            502
-    species:       goblin
+    species:       goblin_s
     type:          [event]
     skill_list_id: 133
     attributes:
@@ -629,7 +629,7 @@ templates:
 
   Condor:
     id:            5342
-    species:       bird
+    species:       crow
     skill_list_id: 55
     attributes:
       combat:
@@ -758,7 +758,7 @@ templates:
 
   Dee_Xalmo_the_Grim:
     id:            953
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -800,7 +800,7 @@ templates:
 
   Divine_Ascetic:
     id:            1055
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -822,7 +822,7 @@ templates:
 
   Divine_Assassin:
     id:            1056
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -843,7 +843,7 @@ templates:
 
   Divine_Disseminator:
     id:            1057
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -864,7 +864,7 @@ templates:
 
   Divine_Inciter:
     id:            1058
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -885,7 +885,7 @@ templates:
 
   Divine_Pilgrim:
     id:            1062
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -907,7 +907,7 @@ templates:
 
   Divine_Templar:
     id:            1064
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -1228,7 +1228,7 @@ templates:
   Fortification_NV80:
     id:           6880
     display_name: Fortification
-    species:      unclassified
+    species:      fortifications
     type:         [event]
     attributes:
       combat:
@@ -1321,7 +1321,7 @@ templates:
 
   Goblin_Bombardier:
     id:            1639
-    species:       goblin
+    species:       goblin_s
     spell_list_id: 21
     skill_list_id: 133
     attributes:
@@ -1355,7 +1355,7 @@ templates:
 
   Goblin_Field_Doctor:
     id:            1657
-    species:       goblin
+    species:       goblin_s
     spell_list_id: 20
     skill_list_id: 133
     attributes:
@@ -1391,7 +1391,7 @@ templates:
 
   Goblin_Lansquenet:
     id:            1681
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1432,7 +1432,7 @@ templates:
 
   Goblin_Paratrooper:
     id:            1693
-    species:       armored_goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1466,7 +1466,7 @@ templates:
 
   Goblin_Picket:
     id:            1697
-    species:       goblin
+    species:       goblin_s
     skill_list_id: 133
     attributes:
       combat:
@@ -1804,7 +1804,7 @@ templates:
 
   Kazan_the_Peerless:
     id:            2198
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -1972,7 +1972,7 @@ templates:
 
   Lycopodium:
     id:            2456
-    species:       mandragora
+    species:       lycopodium
     skill_list_id: 178
     attributes:
       combat:
@@ -2037,7 +2037,8 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 110
-      jobs: [mnk, none]
+      jobs:  [mnk, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -2095,7 +2096,7 @@ templates:
   Moo_Ouzi_the_SwiftbladeS:
     id:            1247
     display_name:  Moo_Ouzi_the_Swiftblade
-    species:       yagudo
+    species:       whitehead_yagudo_s
     type:          [notorious]
     skill_list_id: 360
     attributes:
@@ -2208,7 +2209,7 @@ templates:
 
   Muu_Buxu_the_Elusive:
     id:            2776
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -2277,7 +2278,7 @@ templates:
 
   Nuu_Gazo_the_Dirgerimer:
     id:            2926
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -2541,7 +2542,7 @@ templates:
 
   Plenilune_Ronin:
     id:            3158
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 360
     attributes:
@@ -2595,7 +2596,7 @@ templates:
 
   Poroggo_Servant:
     id:            3186
-    species:       green_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       render:
@@ -3277,7 +3278,7 @@ templates:
 
   Vaa_Oozu_the_Redolent:
     id:            4115
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:
@@ -3340,7 +3341,7 @@ templates:
 
   Vee_Qiqa_the_Decreer:
     id:            4212
-    species:       yagudo
+    species:       manifest
     skill_list_id: 360
     attributes:
       combat:
@@ -3514,7 +3515,7 @@ templates:
 
   Yagudo_Chanter_past:
     id:            5493
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 6
     skill_list_id: 270
     attributes:
@@ -3549,7 +3550,7 @@ templates:
 
   Yagudo_Eradicator_past:
     id:            4417
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 7
     skill_list_id: 270
     attributes:
@@ -3582,7 +3583,7 @@ templates:
 
   Yagudo_Genja:
     id:            4420
-    species:       yagudo
+    species:       whitehead_yagudo_s
     spell_list_id: 7
     skill_list_id: 270
     attributes:
@@ -3605,9 +3606,11 @@ templates:
 
   Yagudo_Guard:
     id:            4421
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
+      speed:           72
+      animation_speed: 40
       combat:
         skill: great_katana
       jobs: [sam, sam]
@@ -3626,7 +3629,7 @@ templates:
 
   Yagudo_High_Priest_past:
     id:            5478
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 20
     skill_list_id: 270
     attributes:
@@ -3665,7 +3668,7 @@ templates:
 
   Yagudo_Knight_Templar:
     id:            4430
-    species:       yagudo
+    species:       yagudo_s
     type:          [battlefield]
     skill_list_id: 270
     attributes:
@@ -3698,7 +3701,7 @@ templates:
 
   Yagudo_Prelate_past:
     id:            4442
-    species:       yagudo
+    species:       yagudo_s
     spell_list_id: 21
     skill_list_id: 270
     attributes:
@@ -3739,7 +3742,7 @@ templates:
 
   Yagudo_Prioress:
     id:            4446
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -3772,7 +3775,7 @@ templates:
 
   Yagudo_Sentinel_past:
     id:            5481
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -3811,7 +3814,7 @@ templates:
 
   Yagudo_Transporter:
     id:            4457
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 270
     attributes:
       combat:
@@ -3833,7 +3836,7 @@ templates:
 
   Yagudo_Turret:
     id:            4458
-    species:       yagudo
+    species:       yagudo_turret
     skill_list_id: 250
     attributes:
       combat:
@@ -3876,7 +3879,7 @@ templates:
 
   Yii_Haqi_the_Threnodist:
     id:            4472
-    species:       yagudo
+    species:       yagudo_s
     skill_list_id: 360
     attributes:
       combat:

@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.LEAF_BENCH
+local keyItemId = xi.keyItem.LEAF_BENCH
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

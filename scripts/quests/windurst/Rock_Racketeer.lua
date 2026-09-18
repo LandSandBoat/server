@@ -35,7 +35,7 @@ quest.sections =
                 [93] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.SHARP_GRAY_STONE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SHARP_GRAY_STONE)
                     end
                 end,
             },
@@ -152,7 +152,7 @@ quest.sections =
                 [261] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:setVar(player, 'Prog', 1)
-                        player:delKeyItem(xi.ki.SHARP_GRAY_STONE) -- Silent
+                        player:delKeyItem(xi.keyItem.SHARP_GRAY_STONE) -- Silent
                         npcUtil.giveCurrency(player, 'gil', 10)
                     elseif option == 1 then
                         quest:setVar(player, 'Option', 1)

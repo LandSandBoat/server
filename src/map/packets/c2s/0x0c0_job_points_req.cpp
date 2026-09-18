@@ -21,6 +21,7 @@
 
 #include "0x0c0_job_points_req.h"
 
+#include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "packets/s2c/0x08d_job_points.h"
 #include "utils/charutils.h"
@@ -34,7 +35,7 @@ auto GP_CLI_COMMAND_JOB_POINTS_REQ::validate(MapSession* PSession, const CCharEn
 void GP_CLI_COMMAND_JOB_POINTS_REQ::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Move this check to the validate function once hasKeyItem becomes const
-    if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
+    if (charutils::hasKeyItem(PChar, xi::KeyItem::JobBreaker))
     {
         // Only send Job Points Packet if the player has unlocked them
         PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar);

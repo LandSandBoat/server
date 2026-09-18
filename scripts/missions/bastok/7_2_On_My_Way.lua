@@ -132,7 +132,7 @@ mission.sections =
 
                 [177] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', 0)
-                    player:delKeyItem(xi.ki.LETTER_FROM_WEREI)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_WEREI)
                 end,
             },
         },
@@ -243,7 +243,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 2 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.ON_MY_WAY
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_WEREI)
+                        npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_WEREI)
                         player:setMissionStatus(mission.areaId, 3)
                         mission:setVar(player, 'Option', 1)
                     end
@@ -287,7 +287,7 @@ mission.sections =
 
                 [177] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', 0)
-                    player:delKeyItem(xi.ki.LETTER_FROM_WEREI)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_WEREI)
                 end,
             },
         },

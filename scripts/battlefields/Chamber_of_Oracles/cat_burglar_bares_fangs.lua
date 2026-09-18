@@ -19,7 +19,7 @@ local content = BattlefieldMission:new({
     allowedAreas          = set{ 1 },
     entryNpc              = 'SC_Entrance',
     exitNpc               = 'Shimmering_Circle',
-    requiredKeyItems      = { xi.ki.NAVARATNA_TALISMAN, onlyInitiator = true },
+    requiredKeyItems      = { xi.keyItem.NAVARATNA_TALISMAN, onlyInitiator = true },
 
     -- TODO: Currently AMK does not depend on this fight in mission scripts.  Verify
     -- that this mission status is updated/correct once doing so.

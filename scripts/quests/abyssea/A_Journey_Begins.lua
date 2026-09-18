@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGIN
 
 quest.reward =
 {
-    keyItem = xi.ki.TRAVERSER_STONE1,
+    keyItem = xi.keyItem.TRAVERSER_STONE1,
 }
 
 quest.sections =

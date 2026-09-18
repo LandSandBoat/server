@@ -196,7 +196,7 @@ templates:
 
   Alicanto:
     id:      7645
-    species: unclassified
+    species: roc
     type:    [battlefield]
     attributes:
       combat:
@@ -250,7 +250,7 @@ templates:
 
   Baricos:
     id:      7646
-    species: unclassified
+    species: manticore
     type:    [battlefield]
     attributes:
       combat:
@@ -269,7 +269,7 @@ templates:
 
   Battlegorged_Wamoura:
     id:      7647
-    species: unclassified
+    species: wamoura
     type:    [battlefield]
     attributes:
       combat:
@@ -481,7 +481,7 @@ templates:
 
   Coalcruncher_Lizard:
     id:      7651
-    species: unclassified
+    species: ash_lizard
     type:    [battlefield]
     attributes:
       combat:
@@ -500,7 +500,7 @@ templates:
 
   Craggy_Marolith:
     id:      7652
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -637,7 +637,7 @@ templates:
 
   Dreyruk:
     id:      7658
-    species: unclassified
+    species: red_wyvern
     type:    [battlefield]
     attributes:
       combat:
@@ -770,7 +770,7 @@ templates:
 
   Forcer:
     id:      7665
-    species: unclassified
+    species: boxxes
     type:    [battlefield]
     attributes:
       combat:
@@ -808,7 +808,7 @@ templates:
 
   Glibber:
     id:      7667
-    species: unclassified
+    species: slime
     type:    [battlefield]
     attributes:
       combat:
@@ -827,7 +827,7 @@ templates:
 
   Goblin_Digger:
     id:      7668
-    species: unclassified
+    species: goblin
     type:    [battlefield]
     attributes:
       combat:
@@ -887,7 +887,7 @@ templates:
 
   Grannus:
     id:      7670
-    species: unclassified
+    species: coral_wamoura
     type:    [battlefield]
     attributes:
       combat:
@@ -925,7 +925,7 @@ templates:
 
   Guardian_Behemoth:
     id:      7672
-    species: unclassified
+    species: behemoth
     type:    [battlefield]
     attributes:
       combat:
@@ -974,7 +974,7 @@ templates:
 
   Haietlik:
     id:      7673
-    species: unclassified
+    species: wyvern
     type:    [battlefield]
     attributes:
       combat:
@@ -1012,7 +1012,7 @@ templates:
 
   Hulking_Marolith:
     id:      7675
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -1031,7 +1031,7 @@ templates:
 
   Ignoble_Ghoisdos:
     id:      7676
-    species: unclassified
+    species: ghost
     type:    [battlefield]
     attributes:
       combat:
@@ -1092,7 +1092,7 @@ templates:
 
   Lacquered_Mimic:
     id:      7678
-    species: unclassified
+    species: mimic
     type:    [battlefield]
     attributes:
       combat:
@@ -1184,7 +1184,7 @@ templates:
 
   Maze_Keeper:
     id:      7679
-    species: unclassified
+    species: doll
     type:    [battlefield]
     attributes:
       combat:
@@ -1222,7 +1222,7 @@ templates:
 
   Meeble_Horticulturist:
     id:      7681
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -1241,7 +1241,7 @@ templates:
 
   Mesetetef:
     id:      7682
-    species: unclassified
+    species: scorpion
     type:    [battlefield]
     attributes:
       combat:
@@ -1260,7 +1260,7 @@ templates:
 
   Mudcaked_Crawler:
     id:      7683
-    species: unclassified
+    species: crawler
     type:    [battlefield]
     attributes:
       combat:
@@ -1279,7 +1279,7 @@ templates:
 
   Nefarious_Ghoisdos:
     id:      7684
-    species: unclassified
+    species: ghost
     type:    [battlefield]
     attributes:
       combat:
@@ -1298,7 +1298,7 @@ templates:
 
   Oregnasher_Lizard:
     id:      7685
-    species: unclassified
+    species: ash_lizard
     type:    [battlefield]
     attributes:
       combat:
@@ -1431,7 +1431,7 @@ templates:
 
   Predacious_Wamouracampa:
     id:      7692
-    species: unclassified
+    species: wamouracampa
     type:    [battlefield]
     attributes:
       combat:
@@ -1528,7 +1528,7 @@ templates:
 
   Reinforced_Crate:
     id:      7693
-    species: unclassified
+    species: boxxes
     type:    [battlefield]
     attributes:
       combat:
@@ -1592,7 +1592,7 @@ templates:
 
   Rowdy_Meeble:
     id:      7694
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -1611,7 +1611,7 @@ templates:
 
   Sanguinary_Wamoura:
     id:      7695
-    species: unclassified
+    species: wamoura
     type:    [battlefield]
     attributes:
       combat:
@@ -1678,7 +1678,7 @@ templates:
 
   Shambling_Marolith:
     id:      7696
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -1697,7 +1697,7 @@ templates:
 
   Skeleton_Aggressor:
     id:      7697
-    species: unclassified
+    species: skeleton
     type:    [battlefield]
     attributes:
       combat:
@@ -1716,7 +1716,7 @@ templates:
 
   Skeleton_Skirmisher:
     id:      7698
-    species: unclassified
+    species: skeleton
     type:    [battlefield]
     attributes:
       combat:
@@ -1735,7 +1735,7 @@ templates:
 
   Sombre_Mimic:
     id:      7699
-    species: unclassified
+    species: mimic
     type:    [battlefield]
     attributes:
       combat:
@@ -1814,7 +1814,7 @@ templates:
 
   Terrormonger:
     id:      7701
-    species: unclassified
+    species: wyvern
     type:    [battlefield]
     attributes:
       combat:
@@ -1879,7 +1879,7 @@ templates:
 
   Treasure_Gobbler:
     id:      7702
-    species: unclassified
+    species: flan
     type:    [battlefield]
     attributes:
       combat:
@@ -1898,7 +1898,7 @@ templates:
 
   Twilight_Truffle:
     id:      7703
-    species: unclassified
+    species: funguar
     type:    [battlefield]
     attributes:
       combat:
@@ -1941,7 +1941,7 @@ templates:
 
   Vociferous_Meeble:
     id:      7704
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -1981,7 +1981,7 @@ templates:
 
   Watcher:
     id:      7705
-    species: unclassified
+    species: ahriman
     type:    [battlefield]
     attributes:
       combat:

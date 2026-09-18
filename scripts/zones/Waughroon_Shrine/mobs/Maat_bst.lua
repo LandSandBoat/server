@@ -41,7 +41,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
     mob:setUnkillable(true)
-    mob:setBaseSpeed(60)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)
@@ -151,14 +150,14 @@ entity.onMobFight = function(mob, target)
     end
 
     -- If pet is alive, return.
-    if pet and pet:isAlive() then
+    if pet and pet:isSpawned() then
         return
     end
 
     -- If it's time to resummon our pet, summon it.
     if GetSystemTime() >= mob:getLocalVar('petSummonTime') then
         xi.mob.callPets(mob, petId, callPetParams)
-        mob:stun(5000)
+        mob:wait(5000)
     end
 end
 

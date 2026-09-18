@@ -71,14 +71,14 @@ local attohwaChasmGlobal =
     end,
 
     removeMimeoKIs = function(player)
-        if player:hasKeyItem(xi.ki.MIMEO_STONE) then
-            player:delKeyItem(xi.ki.MIMEO_STONE)
-            player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_STONE)
+        if player:hasKeyItem(xi.keyItem.MIMEO_STONE) then
+            player:delKeyItem(xi.keyItem.MIMEO_STONE)
+            player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_STONE)
         end
 
-        if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
-            player:delKeyItem(xi.ki.MIMEO_JEWEL)
-            player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
+        if player:hasKeyItem(xi.keyItem.MIMEO_JEWEL) then
+            player:delKeyItem(xi.keyItem.MIMEO_JEWEL)
+            player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_JEWEL)
         end
     end,
 }

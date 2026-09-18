@@ -19,7 +19,7 @@ local handleEventFinish = function(player, csid, option, npc)
     local gilReward = csid == 233 and 200 or 100
 
     if quest:complete(player) then
-        player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
+        player:delKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH)
         npcUtil.giveCurrency(player, 'gil', gilReward)
         quest:setMustZone(player)
     end
@@ -57,8 +57,8 @@ quest.sections =
             ['Nbu_Latteh'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
-                        if player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
+                    if player:hasKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH) then
+                        if player:seenKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH) then
                             return quest:progressEvent(234)
                         else
                             return quest:progressEvent(233)
@@ -85,7 +85,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeMatches(trade, { { xi.item.COPPER_RING, 1 } }) and
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH)
                     then
                         return quest:progressEvent(95)
                     end
@@ -96,7 +96,7 @@ quest.sections =
             {
                 [95] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ROH_LATTEH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_ROH_LATTEH)
                 end,
             },
         },
@@ -114,8 +114,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     -- Allow quest completion regardless of fame level.
-                    if player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
-                        if player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
+                    if player:hasKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH) then
+                        if player:seenKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH) then
                             return quest:progressEvent(234)
                         else
                             return quest:progressEvent(233)
@@ -159,7 +159,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) and
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_ROH_LATTEH) and
                         npcUtil.tradeMatches(trade, { { xi.item.COPPER_RING, 1 } })
                     then
                         return quest:progressEvent(95)
@@ -171,7 +171,7 @@ quest.sections =
             {
                 [95] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ROH_LATTEH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_ROH_LATTEH)
                 end,
             },
         },

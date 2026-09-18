@@ -54,7 +54,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(752)
-                    elseif player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA) then
+                    elseif player:hasKeyItem(xi.keyItem.DARKSTEEL_FORMULA) then
                         return quest:event(754)
                     end
                 end,
@@ -63,7 +63,7 @@ quest.sections =
             ['Raibaht'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA) then
+                    if player:hasKeyItem(xi.keyItem.DARKSTEEL_FORMULA) then
                         return quest:progressEvent(755)
                     end
                 end,
@@ -72,13 +72,13 @@ quest.sections =
             onEventFinish =
             {
                 [752] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_THE_DARKSTEEL_FORGE)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
                 [755] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.DARKSTEEL_FORMULA)
+                        player:delKeyItem(xi.keyItem.DARKSTEEL_FORMULA)
                     end
                 end,
             },
@@ -95,7 +95,7 @@ quest.sections =
                         return quest:progressEvent(697)
                     elseif questProgress == 2 then
                         return quest:event(698)
-                    elseif player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA) then
+                    elseif player:hasKeyItem(xi.keyItem.DARKSTEEL_FORMULA) then
                         return quest:event(699)
                     end
                 end,
@@ -104,7 +104,7 @@ quest.sections =
             onEventFinish =
             {
                 [697] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_THE_DARKSTEEL_FORGE)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -129,10 +129,10 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA) and
+                        not player:hasKeyItem(xi.keyItem.DARKSTEEL_FORMULA) and
                         quest:getVar(player, 'Prog') == 3
                     then
-                        return quest:keyItem(xi.ki.DARKSTEEL_FORMULA)
+                        return quest:keyItem(xi.keyItem.DARKSTEEL_FORMULA)
                     end
                 end,
             },

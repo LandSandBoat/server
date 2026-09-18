@@ -12,7 +12,7 @@ local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BLOODEYE_VILEBERRY_OFFSET, { xi.ki.TWISTED_TONBERRY_CROWN })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BLOODEYE_VILEBERRY_OFFSET, { xi.keyItem.TWISTED_TONBERRY_CROWN })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

@@ -208,7 +208,7 @@ xi.trust.checkBattlefieldTrustCount = function(caster)
 
         if
             rovKIBattlefieldIDs[battlefield:getID()] and
-            caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER)
+            caster:hasKeyItem(xi.keyItem.RHAPSODY_IN_UMBER)
         then
             maxParticipants = 6
         end
@@ -228,9 +228,9 @@ xi.trust.checkBattlefieldTrustCount = function(caster)
 end
 
 xi.trust.hasPermit = function(player)
-    return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
-        player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
-        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
+    return player:hasKeyItem(xi.keyItem.WINDURST_TRUST_PERMIT) or
+        player:hasKeyItem(xi.keyItem.BASTOK_TRUST_PERMIT) or
+        player:hasKeyItem(xi.keyItem.SAN_DORIA_TRUST_PERMIT)
 end
 
 xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
@@ -372,7 +372,7 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
     -- to checking the battlefield's definitions.
     local casterBattlefieldID = caster:getBattlefieldID()
     if rovKIBattlefieldIDs[casterBattlefieldID] then
-        if not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER) then
+        if not caster:hasKeyItem(xi.keyItem.RHAPSODY_IN_UMBER) then
             return xi.msg.basic.TRUST_NO_CAST_TRUST
         end
     elseif
@@ -383,10 +383,10 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
     end
 
     -- Limits set by ROV Key Items
-    if numTrusts >= 3 and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+    if numTrusts >= 3 and not caster:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
         caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
-    elseif numTrusts >= 4 and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_CRIMSON) then
+    elseif numTrusts >= 4 and not caster:hasKeyItem(xi.keyItem.RHAPSODY_IN_CRIMSON) then
         caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
     end

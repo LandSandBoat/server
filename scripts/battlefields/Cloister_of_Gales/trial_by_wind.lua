@@ -12,7 +12,7 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'WP_Entrance',
     exitNpc          = 'Wind_Protocrystal',
-    requiredKeyItems = { xi.ki.TUNING_FORK_OF_WIND },
+    requiredKeyItems = { xi.keyItem.TUNING_FORK_OF_WIND },
 
     questArea = xi.questLog.OUTLANDS,
     quest     = xi.quest.id.outlands.TRIAL_BY_WIND,
@@ -20,7 +20,7 @@ local content = BattlefieldQuest:new({
 
 function content:onEventFinishWin(player, csid, option, npc)
     player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_GALES)
+    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_GALES)
 end
 
 content.groups =

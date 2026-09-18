@@ -125,7 +125,7 @@ quest.sections =
                 end,
 
                 [4] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.ULBRECHTS_MORTARBOARD) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.ULBRECHTS_MORTARBOARD) then
                         quest:setVar(player, 'Prog', 4)
                     end
                 end,

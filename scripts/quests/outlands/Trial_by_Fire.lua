@@ -70,13 +70,13 @@ quest.sections =
         [xi.zone.KAZHAM] =
         {
             -- Fourth event param plays the injured researcher introduction only seen before the first completion.
-            ['Ronta-Onta'] = quest:progressEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE, 0, 1),
+            ['Ronta-Onta'] = quest:progressEvent(270, 0, xi.keyItem.TUNING_FORK_OF_FIRE, 0, 1),
 
             onEventFinish =
             {
                 [270] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_FIRE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_FIRE)
                         quest:begin(player)
                     end
                 end,
@@ -97,13 +97,13 @@ quest.sections =
             ['Ronta-Onta'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) then
+                    if player:hasKeyItem(xi.keyItem.WHISPER_OF_FLAMES) then
                         return quest:progressEvent(273, 0, 1, 0, 0, getRewardMask(player))
-                    elseif not player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) then
+                    elseif not player:hasKeyItem(xi.keyItem.TUNING_FORK_OF_FIRE) then
                         -- Player has failed the BCNM and requires a new Tuning Fork.
-                        return quest:progressEvent(285, 0, xi.ki.TUNING_FORK_OF_FIRE)
+                        return quest:progressEvent(285, 0, xi.keyItem.TUNING_FORK_OF_FIRE)
                     else
-                        return quest:event(271, 4, xi.ki.TUNING_FORK_OF_FIRE)
+                        return quest:event(271, 4, xi.keyItem.TUNING_FORK_OF_FIRE)
                     end
                 end,
             },
@@ -118,13 +118,13 @@ quest.sections =
 
                     if giveQuestReward(player, option) then
                         quest:complete(player)
-                        player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
+                        player:delKeyItem(xi.keyItem.WHISPER_OF_FLAMES)
                         quest:setTimedVar(player, 'Timer', NextJstDay())
                     end
                 end,
 
                 [285] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_FIRE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_FIRE)
                 end,
             },
         },
@@ -135,7 +135,7 @@ quest.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == xi.battlefield.id.TRIAL_BY_FIRE then
-                        npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_FLAMES)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_FLAMES)
                         player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
                     end
                 end,
@@ -156,7 +156,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     -- Repeatable once per JST day.
                     if quest:getVar(player, 'Timer') == 0 then
-                        return quest:progressEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE)
+                        return quest:progressEvent(270, 0, xi.keyItem.TUNING_FORK_OF_FIRE)
                     end
                 end,
             },
@@ -167,7 +167,7 @@ quest.sections =
                     if option == 1 then
                         player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
 
-                        npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_FIRE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TUNING_FORK_OF_FIRE)
 
                         quest:begin(player)
                     end

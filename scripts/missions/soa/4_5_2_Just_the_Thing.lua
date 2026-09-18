@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.JUST_THE_TH
 
 mission.reward =
 {
-    keyItem     = xi.ki.SUFFERING_SACCHARIFEROUS,
+    keyItem     = xi.keyItem.SUFFERING_SACCHARIFEROUS,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.SUGARCOATED_SALVATION },
 }
 

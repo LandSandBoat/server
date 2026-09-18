@@ -490,6 +490,7 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
 end
 
 -- TP factor equation. Used to determine TP modifer across all cases of 'X varies with TP'
+-- TODO: Note - Will be depreciated/superceded by calculateTPScaling()
 xi.combat.physical.calculateTPfactor = function(actorTP, tpModifierTable)
     if not tpModifierTable then
         return 0
@@ -504,6 +505,36 @@ xi.combat.physical.calculateTPfactor = function(actorTP, tpModifierTable)
     end
 
     return tpFactor
+end
+
+xi.combat.physical.calculateTPScaling = function(actorTP, tpModifierTable)
+    if
+        not tpModifierTable or
+        #tpModifierTable == 0
+    then
+        return 0
+    end
+
+    -- At or below the first breakpoint, use the first modifier
+    if actorTP <= tpModifierTable[1].tp then
+        return tpModifierTable[1].modifier
+    end
+
+    -- Find the two TP breakpoints actorTP falls between
+    for i = 1, #tpModifierTable - 1 do
+        local lowerBreakpoint = tpModifierTable[i]
+        local upperBreakpoint = tpModifierTable[i + 1]
+
+        if actorTP <= upperBreakpoint.tp then
+            return lowerBreakpoint.modifier +
+                (actorTP - lowerBreakpoint.tp) *
+                (upperBreakpoint.modifier - lowerBreakpoint.modifier) /
+                (upperBreakpoint.tp - lowerBreakpoint.tp)
+        end
+    end
+
+    -- At or above the final breakpoint, use the final modifier
+    return tpModifierTable[#tpModifierTable].modifier
 end
 
 -- TP Multiplier calculations.

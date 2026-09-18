@@ -11,7 +11,7 @@ entity.onTrigger = function(player, npc)
     local monarchBeardCD = player:getCharVar('[ENM]MonarchBeard')
 
     if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.AN_ETERNAL_MELODY then
-        if player:hasKeyItem(xi.ki.MONARCH_BEARD) then
+        if player:hasKeyItem(xi.keyItem.MONARCH_BEARD) then
             player:startEvent(520)
         else
             if monarchBeardCD < VanadielTime() then
@@ -30,7 +30,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 521 then
-        npcUtil.giveKeyItem(player, xi.ki.MONARCH_BEARD)
+        npcUtil.giveKeyItem(player, xi.keyItem.MONARCH_BEARD)
         player:setCharVar('[ENM]MonarchBeard', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     end
 end

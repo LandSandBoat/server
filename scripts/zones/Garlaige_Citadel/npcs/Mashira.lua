@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.BROKEN_WAND) then
+        if player:hasKeyItem(xi.keyItem.BROKEN_WAND) then
             player:startEvent(11, 3)
         else player:startEvent(11, 0) -- Making Amens dialogue
         end
@@ -24,7 +24,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         option == 0 and
         player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == xi.questStatus.QUEST_ACCEPTED
     then
-        npcUtil.giveKeyItem(player, xi.ki.BROKEN_WAND)
+        npcUtil.giveKeyItem(player, xi.keyItem.BROKEN_WAND)
         player:tradeComplete()
     end
 end

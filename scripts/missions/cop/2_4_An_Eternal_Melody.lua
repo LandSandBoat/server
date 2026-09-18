@@ -65,7 +65,7 @@ mission.sections =
             onEventFinish =
             {
                 [104] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MYSTERIOUS_AMULET)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MYSTERIOUS_AMULET)
                     mission:setVar(player, 'Status', 1)
                 end,
 

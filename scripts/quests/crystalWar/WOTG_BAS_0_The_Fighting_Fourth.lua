@@ -169,7 +169,7 @@ quest.sections =
 
                     if quest:complete(player) then
                         if hasNoAllegiance then
-                            npcUtil.giveKeyItem(player, xi.ki.BRONZE_RIBBON_OF_SERVICE)
+                            npcUtil.giveKeyItem(player, xi.keyItem.BRONZE_RIBBON_OF_SERVICE)
                         end
 
                         player:setCampaignAllegiance(2)

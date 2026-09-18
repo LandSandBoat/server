@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:getNation() == 2 then
-        if player:hasKeyItem(xi.ki.STARWAY_STAIRWAY_BAUBLE) then
+        if player:hasKeyItem(xi.keyItem.STARWAY_STAIRWAY_BAUBLE) then
             if player:getXPos() < -14 then
                 player:startEvent(106)
             else

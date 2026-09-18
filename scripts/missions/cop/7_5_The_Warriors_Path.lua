@@ -18,11 +18,11 @@ mission.reward =
 
 local stolenKeyTable =
 {
-    [1] = xi.ki.LIGHT_OF_VAHZL,
-    [2] = xi.ki.LIGHT_OF_MEA,
-    [3] = xi.ki.LIGHT_OF_HOLLA,
-    [4] = xi.ki.LIGHT_OF_DEM,
-    [5] = xi.ki.LIGHT_OF_ALTAIEU,
+    [1] = xi.keyItem.LIGHT_OF_VAHZL,
+    [2] = xi.keyItem.LIGHT_OF_MEA,
+    [3] = xi.keyItem.LIGHT_OF_HOLLA,
+    [4] = xi.keyItem.LIGHT_OF_DEM,
+    [5] = xi.keyItem.LIGHT_OF_ALTAIEU,
 }
 
 local function getStolenKeyItem(player)
@@ -104,13 +104,13 @@ mission.sections =
                 [1] = function(player, csid, option, npc)
                     local stolenLight = getStolenKeyItem(player)
 
-                    player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
-                    player:messageSpecial(altaieuID.text.AMULET_SHATTERED, xi.ki.MYSTERIOUS_AMULET)
+                    player:delKeyItem(xi.keyItem.MYSTERIOUS_AMULET_DRAINED)
+                    player:messageSpecial(altaieuID.text.AMULET_SHATTERED, xi.keyItem.MYSTERIOUS_AMULET)
 
-                    if stolenLight ~= xi.ki.LIGHT_OF_ALTAIEU then
+                    if stolenLight ~= xi.keyItem.LIGHT_OF_ALTAIEU then
                         player:delKeyItem(stolenLight)
                         player:messageSpecial(altaieuID.text.LIGHT_STOLEN, stolenLight)
-                        npcUtil.giveKeyItem(player, xi.ki.LIGHT_OF_ALTAIEU)
+                        npcUtil.giveKeyItem(player, xi.keyItem.LIGHT_OF_ALTAIEU)
                     else
                         player:messageSpecial(altaieuID.text.OBTAIN_BUT_STOLEN, stolenLight)
                     end

@@ -48,11 +48,11 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delKeyItem(xi.ki.CRIMSON_GRANULES_OF_TIME)
-    target:delKeyItem(xi.ki.AZURE_GRANULES_OF_TIME)
-    target:delKeyItem(xi.ki.AMBER_GRANULES_OF_TIME)
-    target:delKeyItem(xi.ki.ALABASTER_GRANULES_OF_TIME)
-    target:delKeyItem(xi.ki.OBSIDIAN_GRANULES_OF_TIME)
+    target:delKeyItem(xi.keyItem.CRIMSON_GRANULES_OF_TIME)
+    target:delKeyItem(xi.keyItem.AZURE_GRANULES_OF_TIME)
+    target:delKeyItem(xi.keyItem.AMBER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.keyItem.ALABASTER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.keyItem.OBSIDIAN_GRANULES_OF_TIME)
     if target:getCurrentRegion() == xi.region.DYNAMIS then
         if effect:getTimeRemaining() == 0 then
             target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_EXPIRED)

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
 
 quest.reward =
 {
-    keyItem = xi.ki.BASTOK_TRUST_PERMIT,
+    keyItem = xi.keyItem.BASTOK_TRUST_PERMIT,
 }
 
 local function trustMemoryAyame(player)
@@ -183,14 +183,14 @@ quest.sections =
                 [434] = function(player, csid, option, npc)
                     if option == 2 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.BLUE_INSTITUTE_CARD)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BLUE_INSTITUTE_CARD)
                     end
                 end,
 
                 [438] = function(player, csid, option, npc)
                     if option == 2 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.BLUE_INSTITUTE_CARD)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BLUE_INSTITUTE_CARD)
                     end
                 end,
             },
@@ -237,8 +237,8 @@ quest.sections =
                 [982] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:addTitle(xi.title.THE_TRUSTWORTHY)
-                        player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
-                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
+                        player:delKeyItem(xi.keyItem.BLUE_INSTITUTE_CARD)
+                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.keyItem.BLUE_INSTITUTE_CARD)
                         player:messageSpecial(metalworksID.text.CALL_MULTIPLE_ALTER_EGO)
                     end
                 end,
@@ -247,8 +247,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:addSpell(xi.magic.spell.NAJI, { silentLog = true })
                         player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NAJI)
-                        player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
-                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
+                        player:delKeyItem(xi.keyItem.BLUE_INSTITUTE_CARD)
+                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.keyItem.BLUE_INSTITUTE_CARD)
                     end
                 end,
             },
@@ -259,7 +259,7 @@ quest.sections =
             ['Clarion_Star'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.BLUE_INSTITUTE_CARD) then
+                    if player:hasKeyItem(xi.keyItem.BLUE_INSTITUTE_CARD) then
                         return quest:progressEvent(435)
                     end
                 end,

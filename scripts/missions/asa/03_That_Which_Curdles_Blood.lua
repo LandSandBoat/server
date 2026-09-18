@@ -15,12 +15,12 @@ mission.reward =
 {
     keyItem =
     {
-        xi.ki.DOMINAS_SCARLET_SEAL,
-        xi.ki.DOMINAS_CERULEAN_SEAL,
-        xi.ki.DOMINAS_EMERALD_SEAL,
-        xi.ki.DOMINAS_AMBER_SEAL,
-        xi.ki.DOMINAS_VIOLET_SEAL,
-        xi.ki.DOMINAS_AZURE_SEAL
+        xi.keyItem.DOMINAS_SCARLET_SEAL,
+        xi.keyItem.DOMINAS_CERULEAN_SEAL,
+        xi.keyItem.DOMINAS_EMERALD_SEAL,
+        xi.keyItem.DOMINAS_AMBER_SEAL,
+        xi.keyItem.DOMINAS_VIOLET_SEAL,
+        xi.keyItem.DOMINAS_AZURE_SEAL
     },
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE },
 }

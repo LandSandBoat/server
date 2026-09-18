@@ -95,7 +95,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if
-                        not player:hasKeyItem(xi.ki.SMALL_BAG) and
+                        not player:hasKeyItem(xi.keyItem.SMALL_BAG) and
                         questProgress >= 4 and
                         questProgress <= 7
                     then
@@ -115,7 +115,7 @@ quest.sections =
             onEventFinish =
             {
                 [141] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SMALL_BAG)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SMALL_BAG)
 
                     -- Track timing by day in which the KI is due to be delivered in order
                     -- to simplify the logic for completing this quest.
@@ -133,7 +133,7 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SMALL_BAG) then
+                    if player:hasKeyItem(xi.keyItem.SMALL_BAG) then
                         local dueDate = quest:getVar(player, 'dueDate')
                         local currentDay = VanadielUniqueDay()
 
@@ -183,14 +183,14 @@ quest.sections =
 
                 [346] = function(player, csid, option, npc)
                     player:delQuest(quest.areaId, quest.questId)
-                    player:delKeyItem(xi.ki.SMALL_BAG)
+                    player:delKeyItem(xi.keyItem.SMALL_BAG)
                     quest:setVar(player, 'dueDate', 0)
                     quest:setVar(player, 'Prog', 256)
                 end,
 
                 [348] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.SMALL_BAG)
+                        player:delKeyItem(xi.keyItem.SMALL_BAG)
                         quest:setMustZone(player)
                     end
                 end,

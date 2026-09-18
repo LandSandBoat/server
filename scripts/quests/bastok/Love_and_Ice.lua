@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER)
+                player:seenKeyItem(xi.keyItem.CARRIER_PIGEON_LETTER)
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -43,7 +43,7 @@ quest.sections =
             onEventFinish =
             {
                 [185] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CARMELOS_SONG_SHEET)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CARMELOS_SONG_SHEET)
                     quest:begin(player)
                 end,
             },
@@ -60,7 +60,7 @@ quest.sections =
             ['Carmelo'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.CARMELOS_SONG_SHEET) then
+                    if not player:hasKeyItem(xi.keyItem.CARMELOS_SONG_SHEET) then
                         return quest:progressEvent(186)
                     end
                 end,
@@ -81,7 +81,7 @@ quest.sections =
             ['Mirror_Pond_1'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.CARMELOS_SONG_SHEET) then
+                    if player:hasKeyItem(xi.keyItem.CARMELOS_SONG_SHEET) then
                         return quest:progressEvent(100)
                     end
                 end,
@@ -90,7 +90,7 @@ quest.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CARMELOS_SONG_SHEET)
+                    player:delKeyItem(xi.keyItem.CARMELOS_SONG_SHEET)
                 end,
             },
         },

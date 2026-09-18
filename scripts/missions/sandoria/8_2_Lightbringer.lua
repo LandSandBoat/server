@@ -148,13 +148,13 @@ mission.sections =
 
                 [104] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.CRYSTAL_DOWSER)
+                        player:delKeyItem(xi.keyItem.CRYSTAL_DOWSER)
                     end
                 end,
 
                 [106] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.CRYSTAL_DOWSER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CRYSTAL_DOWSER)
                 end,
             }
         },
@@ -169,9 +169,9 @@ mission.sections =
 
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
-                        player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
-                        player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
-                        player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) and
+                        player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY1) and
+                        player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY2) and
+                        player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY3) and
                         nioA and
                         nioHum and
                         (not nioA:isSpawned() or nioA:isDead()) and
@@ -182,7 +182,7 @@ mission.sections =
                         else
                             SpawnMob(uggalepihID.mob.NIO_A)
                             SpawnMob(uggalepihID.mob.NIO_HUM)
-                            return mission:messageSpecial(uggalepihID.text.BEGINS_TO_QUIVER, xi.ki.CRYSTAL_DOWSER)
+                            return mission:messageSpecial(uggalepihID.text.BEGINS_TO_QUIVER, xi.keyItem.CRYSTAL_DOWSER)
                         end
                     end
 
@@ -226,11 +226,11 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
+                        not player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY1) and
                         player:getMissionStatus(mission.areaId) >= 2
                     then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
-                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1)
+                        return mission:keyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY1)
                     end
                 end,
             },
@@ -239,11 +239,11 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
+                        not player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY2) and
                         player:getMissionStatus(mission.areaId) >= 2
                     then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
-                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2)
+                        return mission:keyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY2)
                     end
                 end,
             },
@@ -252,11 +252,11 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) and
+                        not player:hasKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY3) and
                         player:getMissionStatus(mission.areaId) >= 2
                     then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
-                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
+                        return mission:keyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY3)
                     end
                 end,
             },
@@ -264,7 +264,7 @@ mission.sections =
             ['qm17'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(uggalepihID.text.SLIGHTLY_QUIVERS, xi.ki.CRYSTAL_DOWSER)
+                    return mission:messageSpecial(uggalepihID.text.SLIGHTLY_QUIVERS, xi.keyItem.CRYSTAL_DOWSER)
                 end,
             },
 
@@ -272,9 +272,9 @@ mission.sections =
             {
                 [65] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 6)
-                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1)
-                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2)
-                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
+                    player:delKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY1)
+                    player:delKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY2)
+                    player:delKeyItem(xi.keyItem.PIECE_OF_A_BROKEN_KEY3)
                 end,
             },
         },

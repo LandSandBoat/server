@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.CREST_OF_DAVOI) then
+    if player:hasKeyItem(xi.keyItem.CREST_OF_DAVOI) then
         player:startEvent(54) -- TODO: Check if this should be a cutscene that can be Event Skipped
     end
 end

@@ -9,7 +9,7 @@ local ID = zones[xi.zone.PORT_JEUNO]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.GAVIN_DIALOG, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    player:showText(npc, ID.text.GAVIN_DIALOG, xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
 end
 
 return entity

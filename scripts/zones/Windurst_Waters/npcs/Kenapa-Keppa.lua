@@ -11,10 +11,10 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if
-        player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
+        player:hasKeyItem(xi.keyItem.NEW_MODEL_HAT) and
         not utils.mask.getBit(player:getCharVar('QuestHatInHand_var'), 2)
     then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.keyItem.NEW_MODEL_HAT)
         player:startEvent(56)
     else
         if math.randomInt(1, 100) <= 50 then

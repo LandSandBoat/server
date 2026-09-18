@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.TEODORS_SUM
 
 mission.reward =
 {
-    keyItem     = xi.ki.ASH_RUNIC_BOARD,
+    keyItem     = xi.keyItem.ASH_RUNIC_BOARD,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_SEVENTH_GUARDIAN },
 }
 

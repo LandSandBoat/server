@@ -110,7 +110,7 @@ quest.sections =
                     if quest:getVar(player, 'Killed') == 1 then
                         quest:setVar(player, 'Prog', 6)
                         quest:setVar(player, 'Killed', 0)
-                        return quest:keyItem(xi.ki.RANCHURIOMES_LEGACY)
+                        return quest:keyItem(xi.keyItem.RANCHURIOMES_LEGACY)
                     end
 
                     -- Retail sends both lines as speakerless npc text (flag unset, type 6).
@@ -157,7 +157,7 @@ quest.sections =
             onEventFinish =
             {
                 [67] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SHINY_EARRING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SHINY_EARRING)
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -207,7 +207,7 @@ quest.sections =
 
                 [15] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.RANCHURIOMES_LEGACY)
+                        player:delKeyItem(xi.keyItem.RANCHURIOMES_LEGACY)
                     end
                 end,
 
@@ -237,7 +237,7 @@ quest.sections =
             onEventFinish =
             {
                 [137] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SHINY_EARRING)
+                    player:delKeyItem(xi.keyItem.SHINY_EARRING)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },

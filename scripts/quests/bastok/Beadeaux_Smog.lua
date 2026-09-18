@@ -49,7 +49,7 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:keyItem(xi.ki.CORRUPTED_DIRT)
+                    return quest:keyItem(xi.keyItem.CORRUPTED_DIRT)
                 end,
             },
         },

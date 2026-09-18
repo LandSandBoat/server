@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         npcUtil.tradeHas(trade, xi.item.FLORID_STONE) and
-        player:hasKeyItem(xi.ki.PSOXJA_PASS) and
+        player:hasKeyItem(xi.keyItem.PSOXJA_PASS) and
         astralCovenantCD < VanadielTime()
     then
         player:startEvent(10047, 1782)
@@ -28,15 +28,15 @@ entity.onTrigger = function(player, npc)
     local astralCovenantCD = player:getCharVar('[ENM]AstralCovenant')
 
     if
-        player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-        not player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
+        player:hasKeyItem(xi.keyItem.PSOXJA_PASS) and
+        not player:hasKeyItem(xi.keyItem.ASTRAL_COVENANT)
     then
         if astralCovenantCD < VanadielTime() then
             -- Tells player about Florid Stone - option 1 value 4 filters the "hidden" selection for Tenshodo Membership
-            player:startEvent(106, 4, 1, xi.item.FLORID_STONE, xi.ki.PSOXJA_PASS, xi.ki.ASTRAL_COVENANT)
+            player:startEvent(106, 4, 1, xi.item.FLORID_STONE, xi.keyItem.PSOXJA_PASS, xi.keyItem.ASTRAL_COVENANT)
         else
             -- Tells player they are on cooldown
-            player:startEvent(106, 4, 2, xi.ki.ASTRAL_COVENANT, astralCovenantCD)
+            player:startEvent(106, 4, 2, xi.keyItem.ASTRAL_COVENANT, astralCovenantCD)
         end
     else
         -- Standard interaction
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         xi.shop.general(player, stock, xi.fameArea.NORG)
     elseif csid == 10047 then
         player:setCharVar('[ENM]AstralCovenant', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
-        npcUtil.giveKeyItem(player, xi.ki.ASTRAL_COVENANT)
+        npcUtil.giveKeyItem(player, xi.keyItem.ASTRAL_COVENANT)
     end
 end
 

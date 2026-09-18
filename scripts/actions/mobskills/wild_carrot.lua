@@ -1,5 +1,6 @@
 -----------------------------------
 -- Wild Carrot
+-- Family: Rabbit
 -- Description: Restores HP.
 -----------------------------------
 ---@type TMobSkill
@@ -10,9 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    local params = {}
 
-    return xi.mobskills.mobHealMove(target, mob:getMaxHP() * 104 / 1024)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        { tp = 1000, modifier = 104 / 1024 },
+        { tp = 2000, modifier = 104 / 1024 },
+        { tp = 3000, modifier = 104 / 1024 },
+    }
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

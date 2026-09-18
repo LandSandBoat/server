@@ -27,11 +27,11 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         TIME_EXTENSION =
         {
-            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17326207 },
-            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17326279 },
-            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17326353 },
-            { minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17326468 },
-            { minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = { 17326742, 17326748, 17326754, 17326760, 17326765, 17326771 } },
+            { minutes = 10, ki = xi.keyItem.CRIMSON_GRANULES_OF_TIME,   mob = 17326207 },
+            { minutes = 10, ki = xi.keyItem.AZURE_GRANULES_OF_TIME,     mob = 17326279 },
+            { minutes = 10, ki = xi.keyItem.AMBER_GRANULES_OF_TIME,     mob = 17326353 },
+            { minutes = 10, ki = xi.keyItem.ALABASTER_GRANULES_OF_TIME, mob = 17326468 },
+            { minutes = 20, ki = xi.keyItem.OBSIDIAN_GRANULES_OF_TIME,  mob = { 17326742, 17326748, 17326754, 17326760, 17326765, 17326771 } },
         },
 
         REFILL_STATUE =

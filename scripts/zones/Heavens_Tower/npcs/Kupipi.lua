@@ -81,20 +81,20 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
         player:setCharVar('WindurstFirstTrust', 1)
     elseif csid == 437 then
-        player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
+        player:delKeyItem(xi.keyItem.GREEN_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
-            keyItem = xi.ki.WINDURST_TRUST_PERMIT,
+            keyItem = xi.keyItem.WINDURST_TRUST_PERMIT,
             title = xi.title.THE_TRUSTWORTHY,
             var = 'WindurstFirstTrust' })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 439 then
         player:addSpell(xi.magic.spell.KUPIPI, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
-        player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
+        player:delKeyItem(xi.keyItem.GREEN_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.keyItem.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
-            keyItem = xi.ki.WINDURST_TRUST_PERMIT })
+            keyItem = xi.keyItem.WINDURST_TRUST_PERMIT })
     end
 end
 

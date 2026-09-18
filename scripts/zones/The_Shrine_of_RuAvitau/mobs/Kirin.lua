@@ -42,7 +42,6 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:setBaseSpeed(75)
     mob:setMod(xi.mod.STUN_RES_RANK, 11)
     mob:setLocalVar('godSpawnTime', GetSystemTime() + math.randomInt(180, 300)) -- 3-5 minutes
 
@@ -171,6 +170,16 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.KIRIN_CAPTIVATOR)
         player:showText(mob, ID.text.KIRIN_OFFSET + 1)
+    end
+end
+
+-- Cleanup Kirin pets on idle despawn.
+entity.onMobDespawn = function(mob)
+    for _, godId in ipairs(gods) do
+        local pet = GetMobByID(godId)
+        if pet and pet:isAlive() then
+            DespawnMob(godId)
+        end
     end
 end
 

@@ -50,7 +50,7 @@ quest.sections =
                 end,
 
                 [643] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SUSPICIOUS_ENVELOPE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SUSPICIOUS_ENVELOPE)
                     quest:begin(player)
                 end,
             },
@@ -59,7 +59,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
+                player:hasKeyItem(xi.keyItem.SUSPICIOUS_ENVELOPE)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -74,7 +74,7 @@ quest.sections =
             onEventFinish =
             {
                 [549] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
+                    player:delKeyItem(xi.keyItem.SUSPICIOUS_ENVELOPE)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },

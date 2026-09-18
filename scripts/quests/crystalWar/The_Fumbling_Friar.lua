@@ -17,7 +17,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and -- TODO: Change to BRASS_RIBBON_OF_SERVICE when Campaign has been added.
+                player:hasKeyItem(xi.keyItem.BRONZE_RIBBON_OF_SERVICE) and -- TODO: Change to BRASS_RIBBON_OF_SERVICE when Campaign has been added.
                 player:getMainLvl() >= 30
         end,
 
@@ -49,7 +49,7 @@ quest.sections =
             ['Fondactiont'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ORNATE_PACKAGE) then
+                    if player:hasKeyItem(xi.keyItem.ORNATE_PACKAGE) then
                         return quest:progressEvent(28)
                     else
                         return quest:event(27)
@@ -61,7 +61,7 @@ quest.sections =
             {
                 [28] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ORNATE_PACKAGE)
+                        player:delKeyItem(xi.keyItem.ORNATE_PACKAGE)
                     end
                 end,
             },
@@ -72,8 +72,8 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ORNATE_PACKAGE) then
-                        quest:keyItem(xi.ki.ORNATE_PACKAGE)
+                    if not player:hasKeyItem(xi.keyItem.ORNATE_PACKAGE) then
+                        quest:keyItem(xi.keyItem.ORNATE_PACKAGE)
                         return quest:noAction()
                     end
                 end,

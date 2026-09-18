@@ -97,7 +97,7 @@ quest.sections =
                         progress == 3 and
                         player:getLocalVar('NMKilled') == 1
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.PARTICULARLY_POIGNANT_PETAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.PARTICULARLY_POIGNANT_PETAL)
                         return quest:progressCutscene(115)
                     elseif
                         progress == 3 and
@@ -133,7 +133,7 @@ quest.sections =
             {
                 [516] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.PARTICULARLY_POIGNANT_PETAL)
+                        player:delKeyItem(xi.keyItem.PARTICULARLY_POIGNANT_PETAL)
                     end
                 end,
             },

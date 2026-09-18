@@ -69,6 +69,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     {
         BACKOO                = GetFirstID('Backoo'),
         BUBURIMBOO            = GetFirstID('Buburimboo'),
+        GOBLIN_BOUNTY_HUNTER  = GetFirstID('Goblin_Bounty_Hunter'),
         HELLDIVER             = GetFirstID('Helldiver'),
         HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
         HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),

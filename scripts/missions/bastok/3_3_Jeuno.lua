@@ -102,7 +102,7 @@ mission.sections =
             {
                 [322] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_AMBASSADOR)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_THE_AMBASSADOR)
                 end,
             },
         },
@@ -146,7 +146,7 @@ mission.sections =
 
                 [41] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_AMBASSADOR)
                 end,
             },
         },
@@ -168,7 +168,7 @@ mission.sections =
 
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 2 then
-                        if player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+                        if player:hasKeyItem(xi.keyItem.DELKFUTT_KEY) then
                             return mission:progressCutscene(1)
                         else
                             return mission:messageSpecial(lowerDelkfuttID.text.THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY):setPriority(1000)
@@ -182,8 +182,8 @@ mission.sections =
                 [1] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
 
-                    if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
-                        npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
+                    if not player:hasKeyItem(xi.keyItem.DELKFUTT_KEY) then
+                        npcUtil.giveKeyItem(player, xi.keyItem.DELKFUTT_KEY)
                         player:tradeComplete()
                     end
                 end,

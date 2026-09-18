@@ -169,7 +169,7 @@ templates:
 
   Apollyon_Demon:
     id:      7439
-    species: demon
+    species: kindred
     attributes:
       combat:
         skill: hand_to_hand

@@ -38,7 +38,7 @@ quest.sections =
             {
                 [797] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LIFE_FLOAT)
                     quest:setVar(player, 'Wait', JstMidnight())
                 end,
             },
@@ -57,7 +57,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.LIFE_FLOAT) and
+                        not player:hasKeyItem(xi.keyItem.LIFE_FLOAT) and
                         (
                             quest:getVar(player, 'Wait') < GetSystemTime() or
                             quest:getVar(player, 'Wait') == 0
@@ -71,7 +71,7 @@ quest.sections =
             onEventFinish =
             {
                 [798] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LIFE_FLOAT)
                     quest:setVar(player, 'Wait', JstMidnight())
                 end,
             },

@@ -188,7 +188,13 @@ end
 
 -- Calculate potency.
 xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellEffect, skillType, statUsed)
-    local potency    = pTable[spellId][column.BASE_POTENCY]
+    local potency = pTable[spellId][column.BASE_POTENCY]
+
+    -- Ninjutsu debuffs have fixed potency per tier and are not affected by dINT or enfeebling potency gear.
+    if skillType == xi.skill.NINJUTSU then
+        return potency
+    end
+
     local statDiff   = caster:getStat(statUsed) - target:getStat(statUsed)
     local skillLevel = caster:getSkillLevel(skillType)
 

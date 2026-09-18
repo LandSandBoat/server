@@ -43,7 +43,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(120)
     mob:setBehavior(xi.behavior.STANDBACK)
     mob:setMod(xi.mod.BLIND_RES_RANK, 7)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)

@@ -16,7 +16,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_0n0',
     exitNpcs         = { '_0n1', '_0n2', '_0n3' },
-    requiredKeyItems = { xi.ki.CENSER_OF_ACRIMONY, message = spireOfVahzlID.text.FADES_INTO_NOTHINGNESS },
+    requiredKeyItems = { xi.keyItem.CENSER_OF_ACRIMONY, message = spireOfVahzlID.text.FADES_INTO_NOTHINGNESS },
     grantXP          = 3000,
     armouryCrates    =
     {

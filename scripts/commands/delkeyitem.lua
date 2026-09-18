@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, keyId, target)
         return
     end
 
-    keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
+    keyId = tonumber(keyId) or xi.keyItem[string.upper(keyId)]
     if keyId == nil or keyId < 1 then
         error(player, 'Invalid Key Item ID.')
         return

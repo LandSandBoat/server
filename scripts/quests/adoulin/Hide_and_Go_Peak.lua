@@ -99,13 +99,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.LARGE_STRIP_OF_VELKK_HIDE) and
+                        not player:hasKeyItem(xi.keyItem.LARGE_STRIP_OF_VELKK_HIDE) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         player:messageSpecial(marjamiID.text.LEATHER_SCRAPS_STREWN)
                         quest:setVar(player, 'Prog', 1)
 
-                        return quest:keyItem(xi.ki.LARGE_STRIP_OF_VELKK_HIDE)
+                        return quest:keyItem(xi.keyItem.LARGE_STRIP_OF_VELKK_HIDE)
                     end
                 end,
             },
@@ -113,16 +113,16 @@ quest.sections =
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LARGE_STRIP_OF_VELKK_HIDE)
+                    player:delKeyItem(xi.keyItem.LARGE_STRIP_OF_VELKK_HIDE)
                     quest:setVar(player, 'Prog', 2)
 
-                    player:messageSpecial(marjamiID.text.KEYITEM_LOST, xi.ki.LARGE_STRIP_OF_VELKK_HIDE)
+                    player:messageSpecial(marjamiID.text.KEYITEM_LOST, xi.keyItem.LARGE_STRIP_OF_VELKK_HIDE)
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.PAIR_OF_VELKK_GLOVES)
-                    player:addKeyItem(xi.ki.CLIMBING)
-                    player:messageSpecial(marjamiID.text.YOU_HAVE_LEARNED, xi.ki.CLIMBING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PAIR_OF_VELKK_GLOVES)
+                    player:addKeyItem(xi.keyItem.CLIMBING)
+                    player:messageSpecial(marjamiID.text.YOU_HAVE_LEARNED, xi.keyItem.CLIMBING)
                     quest:complete(player)
                 end,
             },

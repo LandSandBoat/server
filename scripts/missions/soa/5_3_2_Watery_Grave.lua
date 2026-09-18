@@ -31,15 +31,15 @@ mission.sections =
 
             afterZoneIn = function(player)
                 if
-                    not player:hasKeyItem(xi.ki.ASH_RUNIC_BOARD) and
+                    not player:hasKeyItem(xi.keyItem.ASH_RUNIC_BOARD) and
                     mission:getVar(player, 'Status') == 0 and
                     mission:getVar(player, 'Timer') <= VanadielUniqueDay()
                 then
                     -- TODO: This message needs verification, and need to determine if there
                     -- is a unique event or message.  For future Instance implementation, on
                     -- instance fail, Timer var should be set to VanadielUniqueDay() + 1
-                    player:delKeyItem(xi.ki.BLANK_ASH_RUNIC_BOARD)
-                    npcUtil.giveKeyItem(player, xi.ki.ASH_RUNIC_BOARD)
+                    player:delKeyItem(xi.keyItem.BLANK_ASH_RUNIC_BOARD)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ASH_RUNIC_BOARD)
                 end
             end,
 
@@ -47,12 +47,12 @@ mission.sections =
             {
                 [375] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.BLANK_ASH_RUNIC_BOARD)
-                        player:messageSpecial(ralaID.text.KEYITEM_LOST, xi.ki.BLANK_ASH_RUNIC_BOARD)
-                        npcUtil.giveKeyItem(player, xi.ki.AGED_UNDYING_NAAKUAL_CREST)
-                        npcUtil.giveKeyItem(player, xi.ki.TEODORS_BLOOD_SIGIL)
+                        player:delKeyItem(xi.keyItem.BLANK_ASH_RUNIC_BOARD)
+                        player:messageSpecial(ralaID.text.KEYITEM_LOST, xi.keyItem.BLANK_ASH_RUNIC_BOARD)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AGED_UNDYING_NAAKUAL_CREST)
+                        npcUtil.giveKeyItem(player, xi.keyItem.TEODORS_BLOOD_SIGIL)
                         player:messageSpecial(ralaID.text.THREE_BLOOD_SIGILS_PULSE)
-                        npcUtil.giveKeyItem(player, xi.ki.CRYSTALLIZED_PSYCHE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CRYSTALLIZED_PSYCHE)
                     end
                 end,
             },

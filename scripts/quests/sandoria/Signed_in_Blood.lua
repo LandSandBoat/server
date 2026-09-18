@@ -137,7 +137,7 @@ quest.sections =
             ['Abelard'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TORN_OUT_PAGES) then
+                    if player:hasKeyItem(xi.keyItem.TORN_OUT_PAGES) then
                         return quest:progressEvent(1106)
                     else
                         return quest:event(1105)
@@ -193,7 +193,7 @@ quest.sections =
             {
                 [736] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.TORN_OUT_PAGES)
+                        player:delKeyItem(xi.keyItem.TORN_OUT_PAGES)
                         player:needToZone(true)
                     end
                 end,

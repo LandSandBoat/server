@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     -- Param 0 picks between the guards turning the player away and the no permit line.
-    if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
+    if player:hasKeyItem(xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT) then
         player:startEvent(138, 1)
     else
         player:startEvent(138, 0)

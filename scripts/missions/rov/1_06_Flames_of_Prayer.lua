@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_P
 
 mission.reward =
 {
-    keyItem     = xi.ki.RHAPSODY_IN_WHITE,
+    keyItem     = xi.keyItem.RHAPSODY_IN_WHITE,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED },
 }
 

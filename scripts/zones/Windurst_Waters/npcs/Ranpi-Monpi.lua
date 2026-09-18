@@ -75,14 +75,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 267 then -- A Crisis in the Making: Quest Finish
         npcUtil.giveCurrency(player, 'gil', 400)
         player:setCharVar('QuestCrisisMaking_var', 0)
-        player:delKeyItem(xi.ki.OFF_OFFERING)
+        player:delKeyItem(xi.keyItem.OFF_OFFERING)
         player:addFame(xi.fameArea.WINDURST, 10)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif csid == 268 then -- A Crisis in the Making: Repeatable Quest Finish
         npcUtil.giveCurrency(player, 'gil', 400)
         player:setCharVar('QuestCrisisMaking_var', 0)
-        player:delKeyItem(xi.ki.OFF_OFFERING)
+        player:delKeyItem(xi.keyItem.OFF_OFFERING)
         player:addFame(xi.fameArea.WINDURST, 10)
         player:needToZone(true)
     end

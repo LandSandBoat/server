@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.CALAMITY_IN
 
 mission.reward =
 {
-    keyItem     = xi.ki.BOX_OF_ADOULINIAN_TOMATOES,
+    keyItem     = xi.keyItem.BOX_OF_ADOULINIAN_TOMATOES,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_PROMISE },
 }
 

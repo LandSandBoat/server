@@ -121,7 +121,7 @@ quest.sections =
                 [198] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.MAGIC_TRASH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.MAGIC_TRASH)
                         quest:setVar(player, 'Prog', 0)
                     end
                 end,
@@ -174,7 +174,7 @@ quest.sections =
             {
                 [11] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.MAGIC_TRASH)
+                        player:delKeyItem(xi.keyItem.MAGIC_TRASH)
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,

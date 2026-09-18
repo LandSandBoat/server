@@ -12,21 +12,21 @@ local chambersByTier =
     {
         {
             id     = xi.einherjar.chamber.ROSSWEISSE,
-            ki     = xi.ki.ROSSWEISSES_FEATHER,
+            ki     = xi.keyItem.ROSSWEISSES_FEATHER,
             menu   = 0x2,
             center = { 401.1, -216, 40.6, 28 },
             ichor  = 960,
         },
         {
             id     = xi.einherjar.chamber.GRIMGERDE,
-            ki     = xi.ki.GRIMGERDES_FEATHER,
+            ki     = xi.keyItem.GRIMGERDES_FEATHER,
             menu   = 0x4,
             center = { 159.6, -196, -41.4, 220 },
             ichor  = 960,
         },
         {
             id     = xi.einherjar.chamber.SIEGRUNE,
-            ki     = xi.ki.SIEGRUNES_FEATHER,
+            ki     = xi.keyItem.SIEGRUNES_FEATHER,
             menu   = 0x8,
             center = { 78.5, -176, -281, 221 },
             ichor  = 960,
@@ -36,21 +36,21 @@ local chambersByTier =
     {
         {
             id     = xi.einherjar.chamber.HELMWIGE,
-            ki     = xi.ki.HELMWIGES_FEATHER,
+            ki     = xi.keyItem.HELMWIGES_FEATHER,
             menu   = 0x10,
             center = { -197.32, -146, -439.5, 218 },
             ichor  = 1440,
         },
         {
             id     = xi.einherjar.chamber.SCHWERTLEITE,
-            ki     = xi.ki.SCHWERTLEITES_FEATHER,
+            ki     = xi.keyItem.SCHWERTLEITES_FEATHER,
             menu   = 0x20,
             center = { -437.3986, -126.0, -281.89, 34 },
             ichor  = 1440,
         },
         {
             id     = xi.einherjar.chamber.WALTRAUTE,
-            ki     = xi.ki.WALTRAUTES_FEATHER,
+            ki     = xi.keyItem.WALTRAUTES_FEATHER,
             menu   = 0x40,
             center = { -678, -106, -120, 28 },
             ichor  = 1440,
@@ -60,21 +60,21 @@ local chambersByTier =
     {
         {
             id     = xi.einherjar.chamber.ORTLINDE,
-            ki     = xi.ki.ORTLINDES_FEATHER,
+            ki     = xi.keyItem.ORTLINDES_FEATHER,
             menu   = 0x80,
             center = { -519.36, -66, 158.96, 56 },
             ichor  = 1920,
         },
         {
             id     = xi.einherjar.chamber.GERHILDE,
-            ki     = xi.ki.GERHILDES_FEATHER,
+            ki     = xi.keyItem.GERHILDES_FEATHER,
             menu   = 0x100,
             center = { -360.81, -46, 398.3684, 96 },
             ichor  = 1920,
         },
         {
             id     = xi.einherjar.chamber.BRUNNHILDE,
-            ki     = xi.ki.BRUNHILDES_FEATHER,
+            ki     = xi.keyItem.BRUNHILDES_FEATHER,
             menu   = 0x200,
             center = { -82.26, -6, 242.05, 159 },
             ichor  = 1920,
@@ -129,7 +129,7 @@ xi.einherjar.getChambersMenu = function(player)
 
     -- Mark of the Einherjar owners don't need to have all previous tiers KI
     -- Odin requires at least 1 feather of each tier to be owned.
-    if player:hasKeyItem(xi.ki.MARK_OF_THE_EINHERJAR) then
+    if player:hasKeyItem(xi.keyItem.MARK_OF_THE_EINHERJAR) then
         -- TODO: Uncomment when Odin is implemented
         --local ownedFeathers = xi.einherjar.getFeathers(player)
         --if
@@ -185,8 +185,8 @@ xi.einherjar.getMissingFeathersMenu = function(player, tier)
 end
 
 xi.einherjar.giveMark = function(player)
-    player:addKeyItem(xi.ki.MARK_OF_THE_EINHERJAR)
-    player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MARK_OF_THE_EINHERJAR)
+    player:addKeyItem(xi.keyItem.MARK_OF_THE_EINHERJAR)
+    player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.MARK_OF_THE_EINHERJAR)
 end
 
 -- Give the player the chamber feather and the Mark of the Einherjar if all feathers are owned
@@ -198,7 +198,7 @@ xi.einherjar.giveChamberFeather = function(player, chamberId)
         end
 
         -- If that was the 9th feather, give the Mark of the Einherjar
-        if not player:hasKeyItem(xi.ki.MARK_OF_THE_EINHERJAR) then
+        if not player:hasKeyItem(xi.keyItem.MARK_OF_THE_EINHERJAR) then
             local allFeathers = xi.einherjar.getFeathers(player)
             if
                 #allFeathers[xi.einherjar.wing.WING_1] == 3 and

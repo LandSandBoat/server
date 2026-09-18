@@ -134,7 +134,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 2 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.THE_SECRET_WEAPON
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.CRYSTAL_DOWSER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.CRYSTAL_DOWSER)
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,
@@ -156,7 +156,7 @@ mission.sections =
             {
                 [1043] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.CRYSTAL_DOWSER)
+                        player:delKeyItem(xi.keyItem.CRYSTAL_DOWSER)
                     end
                 end,
             },
@@ -186,13 +186,13 @@ mission.sections =
             {
                 [1043] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.CRYSTAL_DOWSER)
+                        player:delKeyItem(xi.keyItem.CRYSTAL_DOWSER)
                     end
                 end,
 
                 [1044] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.CRYSTAL_DOWSER)
+                        player:delKeyItem(xi.keyItem.CRYSTAL_DOWSER)
                     end
                 end,
             },

@@ -14,7 +14,7 @@ quest.reward =
 {
     exp     = 2000,
     gil     = 2000,
-    keyItem = xi.ki.MAP_OF_CAPE_RIVERNE,
+    keyItem = xi.keyItem.MAP_OF_CAPE_RIVERNE,
 }
 
 local nmBitTable =

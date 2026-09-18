@@ -61,7 +61,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 7500
+        hp:  7500
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Animated_Claymore:
     id:            143
@@ -723,6 +730,7 @@ templates:
     type:          [notorious]
     spell_list_id: 86
     attributes:
+      speed: 60
       combat:
         skill: scythe
       resists:
@@ -822,7 +830,7 @@ templates:
 
   Baron_Avnas:
     id:            6056
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 2111
@@ -881,10 +889,18 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Count_Haagenti:
     id:            6057
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 30
     skill_list_id: 2111
@@ -925,7 +941,7 @@ templates:
 
   Count_Raum:
     id:            817
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -963,13 +979,14 @@ templates:
 
   Count_Vine:
     id:            818
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1001,7 +1018,7 @@ templates:
 
   Count_Zaebos:
     id:            819
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -1038,7 +1055,7 @@ templates:
 
   Duke_Berith:
     id:            1131
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 2111
@@ -1077,7 +1094,7 @@ templates:
 
   Duke_Gomory:
     id:            1133
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -1116,7 +1133,7 @@ templates:
 
   Duke_Haures:
     id:            6053
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 2111
@@ -1157,14 +1174,15 @@ templates:
 
   Duke_Scox:
     id:            1135
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1204,7 +1222,8 @@ templates:
       combat:
         skill: scythe
         delay: 200
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 60
       resists:
         rank_element:
           fire:    1
@@ -1386,7 +1405,7 @@ templates:
 
   Kindred_Bard:
     id:            2232
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 6
     skill_list_id: 2111
     attributes:
@@ -1419,7 +1438,7 @@ templates:
 
   Kindred_Bard_HI:
     id:            6615
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 6
     skill_list_id: 2111
     attributes:
@@ -1454,7 +1473,7 @@ templates:
 
   Kindred_Beastmaster:
     id:            2233
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1486,7 +1505,7 @@ templates:
 
   Kindred_Beastmaster_HI:
     id:            6616
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1520,7 +1539,7 @@ templates:
 
   Kindred_Black_Mage:
     id:            2234
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 21
     skill_list_id: 2111
     attributes:
@@ -1554,7 +1573,7 @@ templates:
 
   Kindred_Black_Mage_HI:
     id:            6618
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 21
     skill_list_id: 2111
     attributes:
@@ -1590,13 +1609,14 @@ templates:
 
   Kindred_Dark_Knight:
     id:            2235
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 5
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1623,13 +1643,14 @@ templates:
 
   Kindred_Dark_Knight_HI:
     id:            6620
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 5
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [drk, drk]
+      jobs:  [drk, drk]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1658,7 +1679,7 @@ templates:
 
   Kindred_Dragoon:
     id:            2236
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1690,7 +1711,7 @@ templates:
 
   Kindred_Dragoon_HI:
     id:            6621
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1724,7 +1745,7 @@ templates:
 
   Kindred_Monk:
     id:            2237
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1756,7 +1777,7 @@ templates:
 
   Kindred_Monk_HI:
     id:            6622
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1790,14 +1811,15 @@ templates:
 
   Kindred_Ninja:
     id:            2238
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 7
     skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
         delay: 240
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1824,14 +1846,15 @@ templates:
 
   Kindred_Ninja_HI:
     id:            6623
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 7
     skill_list_id: 2111
     attributes:
       combat:
         skill: scythe
         delay: 240
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -1860,7 +1883,7 @@ templates:
 
   Kindred_Paladin:
     id:            2239
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 4
     skill_list_id: 2111
     attributes:
@@ -1893,7 +1916,7 @@ templates:
 
   Kindred_Paladin_HI:
     id:            6624
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 4
     skill_list_id: 2111
     attributes:
@@ -1928,7 +1951,7 @@ templates:
 
   Kindred_Ranger:
     id:            2240
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1960,7 +1983,7 @@ templates:
 
   Kindred_Ranger_HI:
     id:            6625
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -1994,7 +2017,7 @@ templates:
 
   Kindred_Red_Mage:
     id:            2241
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 3
     skill_list_id: 2111
     attributes:
@@ -2027,7 +2050,7 @@ templates:
 
   Kindred_Red_Mage_HI:
     id:            6626
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 3
     skill_list_id: 2111
     attributes:
@@ -2062,12 +2085,13 @@ templates:
 
   Kindred_Samurai:
     id:            2242
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2094,12 +2118,13 @@ templates:
 
   Kindred_Samurai_HI:
     id:            6627
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [sam, sam]
+      jobs:  [sam, sam]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2128,7 +2153,7 @@ templates:
 
   Kindred_Summoner:
     id:            2243
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 31
     skill_list_id: 2111
     attributes:
@@ -2162,7 +2187,7 @@ templates:
 
   Kindred_Summoner_HI:
     id:            6629
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 31
     skill_list_id: 2111
     attributes:
@@ -2198,7 +2223,7 @@ templates:
 
   Kindred_Thief:
     id:            2248
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -2230,7 +2255,7 @@ templates:
 
   Kindred_Thief_HI:
     id:            6630
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -2264,7 +2289,7 @@ templates:
 
   Kindred_Warrior:
     id:            2249
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -2295,7 +2320,7 @@ templates:
 
   Kindred_Warrior_HI:
     id:            6632
-    species:       kindred
+    species:       dynamis_kindred
     skill_list_id: 2111
     attributes:
       combat:
@@ -2328,7 +2353,7 @@ templates:
 
   Kindred_White_Mage:
     id:            2250
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 20
     skill_list_id: 2111
     attributes:
@@ -2361,7 +2386,7 @@ templates:
 
   Kindred_White_Mage_HI:
     id:            6633
-    species:       kindred
+    species:       dynamis_kindred
     spell_list_id: 20
     skill_list_id: 2111
     attributes:
@@ -2437,7 +2462,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 3300
+        hp:  3300
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Kindreds_Wyvern:
     id:            2247
@@ -2467,7 +2499,7 @@ templates:
 
   King_Zagan:
     id:            2263
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -2504,7 +2536,7 @@ templates:
 
   Marquis_Andras:
     id:            2570
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -2543,14 +2575,15 @@ templates:
 
   Marquis_Caim:
     id:            6054
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [bst, nin]
+      jobs:  [bst, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2582,7 +2615,7 @@ templates:
 
   Marquis_Cimeries:
     id:            2572
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     skill_list_id: 2111
     attributes:
@@ -2621,7 +2654,7 @@ templates:
 
   Marquis_Decarabia:
     id:            2573
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 2111
@@ -2661,14 +2694,15 @@ templates:
 
   Marquis_Gamygyn:
     id:            2575
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 2111
     attributes:
       combat:
         skill: sword
-      jobs: [nin, nin]
+      jobs:  [nin, nin]
+      speed: 40
       render:
         look:
           type:  standard
@@ -2701,7 +2735,7 @@ templates:
 
   Marquis_Nebiros:
     id:            2576
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 2111
@@ -2741,7 +2775,7 @@ templates:
 
   Marquis_Orias:
     id:            2577
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 2111
@@ -2781,7 +2815,7 @@ templates:
 
   Marquis_Sabnak:
     id:            2578
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 2111
@@ -2844,7 +2878,7 @@ templates:
 
   Prince_Seere:
     id:            3198
-    species:       kindred
+    species:       dynamis_kindred
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 2111
@@ -2883,7 +2917,7 @@ templates:
 
   Prototype_Eye:
     id:            5121
-    species:       ahriman
+    species:       dynamis_ahriman
     type:          [notorious]
     spell_list_id: 11
     skill_list_id: 2110
@@ -3657,7 +3691,14 @@ templates:
       spawn:
         respawn: 300
       stats:
-        hp: 30000
+        hp:  30000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -3667,7 +3708,7 @@ templates:
 
   Vanguard_Eye:
     id:            4149
-    species:       ahriman
+    species:       dynamis_ahriman
     type:          [notorious]
     spell_list_id: 11
     skill_list_id: 2110
@@ -3724,7 +3765,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 17000
+        hp:  17000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Ying:
     id:            4473
@@ -3750,7 +3798,14 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 17000
+        hp:  17000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Zagans_Wyvern:
     id:            4487

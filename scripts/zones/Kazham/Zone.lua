@@ -33,7 +33,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
         player:startEvent(10001)
         return
     end

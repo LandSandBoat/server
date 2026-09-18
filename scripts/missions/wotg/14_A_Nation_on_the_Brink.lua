@@ -30,7 +30,7 @@ mission.sections =
             ['Bulwark_Gate'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.UNDERPASS_HATCH_KEY) then
+                    if not player:hasKeyItem(xi.keyItem.UNDERPASS_HATCH_KEY) then
                         return mission:progressEvent(6, 98, 23, 1756)
                     else
                         return mission:messageSpecial(pastSauromugueID.text.SURRENDER_CEREMONY_HASTE):oncePerZone()
@@ -41,7 +41,7 @@ mission.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.UNDERPASS_HATCH_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.UNDERPASS_HATCH_KEY)
                 end,
             },
         },

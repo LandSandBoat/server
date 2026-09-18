@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local finao = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     if finao == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.HUNK_OF_BEDROCK) then
+        if player:hasKeyItem(xi.keyItem.HUNK_OF_BEDROCK) then
             -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'
             player:startEvent(76)
         else
@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     elseif
         finao == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.fameArea.ADOULIN) >= 4 and
-        player:hasKeyItem(xi.ki.FAIL_BADGE)
+        player:hasKeyItem(xi.keyItem.FAIL_BADGE)
     then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     elseif csid == 76 then
         -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'
-        player:delKeyItem(xi.ki.HUNK_OF_BEDROCK)
+        player:delKeyItem(xi.keyItem.HUNK_OF_BEDROCK)
         player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
         player:addExp(1000 * xi.settings.main.EXP_RATE)
         player:addCurrency('bayld', 500 * xi.settings.main.BAYLD_RATE)

@@ -12,7 +12,7 @@ local content = InstanceAssault:new(
     assaultID        = xi.assault.mission.GOLDEN_SALVAGE,
     instanceID       = xi.assault.instance.GOLDEN_SALVAGE,
     assaultArea      = xi.assault.assaultArea.ILRUSI_ATOLL,
-    requiredOrders   = xi.ki.ILRUSI_ASSAULT_ORDERS,
+    requiredOrders   = xi.keyItem.ILRUSI_ASSAULT_ORDERS,
 
     -- Retail capture coordinates are listed in x, z, y order; setPos takes x, y (height), z.
     runeOfReleasePos = { x = 380.000, y = -7.885, z = 64.999, rot = 0 },

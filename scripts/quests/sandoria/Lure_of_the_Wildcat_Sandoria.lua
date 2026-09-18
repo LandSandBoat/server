@@ -13,7 +13,7 @@ quest.reward =
 {
     fame     = 0,
     fameArea = xi.fameArea.SANDORIA,
-    keyItem  = xi.ki.RED_INVITATION_CARD,
+    keyItem  = xi.keyItem.RED_INVITATION_CARD,
 }
 
 local wildcatNpcData =
@@ -67,7 +67,7 @@ quest.sections =
             onEventFinish =
             {
                 [812] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.RED_SENTINEL_BADGE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.RED_SENTINEL_BADGE)
                     quest:begin(player)
                 end,
             },
@@ -165,8 +165,8 @@ quest.sections =
                 [811] = wildcatOnEventFinish,
 
                 [815] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.RED_SENTINEL_BADGE)
-                    player:messageSpecial(southernSanDoriaID.text.KEYITEM_LOST, xi.ki.RED_SENTINEL_BADGE)
+                    player:delKeyItem(xi.keyItem.RED_SENTINEL_BADGE)
+                    player:messageSpecial(southernSanDoriaID.text.KEYITEM_LOST, xi.keyItem.RED_SENTINEL_BADGE)
 
                     quest:complete(player)
                 end,

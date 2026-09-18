@@ -24,7 +24,7 @@ local enmOptionToEnablementCriteria =
     [  3] = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]animusTimer'      }, --Spire Of Mea
     [  4] = { missionReq = xi.mission.id.cop.SLANDEROUS_UTTERINGS, cooldownPlayerVar = '[ENM]acrimonyTimer'    }, --Spire Of Vahzl
     [  5] = { missionReq = xi.mission.id.cop.AN_ETERNAL_MELODY,    cooldownPlayerVar = '[ENM]MonarchBeard'     }, --Monarch Linn
-    [  6] = { missionReq = xi.ki.PSOXJA_PASS,                      cooldownPlayerVar = '[ENM]AstralCovenant'   }, --The Shrouded Maw
+    [  6] = { missionReq = xi.keyItem.PSOXJA_PASS,                 cooldownPlayerVar = '[ENM]AstralCovenant'   }, --The Shrouded Maw
     [  7] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]OperatingLever'   }, --Mine Shaft 2716 Lever
     [  8] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]ZephyrFan'        }, --Bearclaw Pinnacle
     [  9] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]MiasmaFilter'     }, --Boneyard Gully
@@ -54,7 +54,7 @@ local function getBitmaskForAvailableENMs(player)
     end
 
     -- Special case for AstralCovenant, which is holding a ki vs a mission
-    if not player:hasKeyItem(xi.ki.PSOXJA_PASS) then
+    if not player:hasKeyItem(xi.keyItem.PSOXJA_PASS) then
         bitmask = bitmask + bit.lshift(1, 6)
     end
 

@@ -40,7 +40,7 @@ function CTestEntityAssertions:hasNationRank(expectedRank)
 end
 
 ---Assert player has specified key item
----@param keyItemId xi.ki
+---@param keyItemId xi.keyItem
 ---@return CTestEntityAssertions self for chaining
 function CTestEntityAssertions:hasKI(keyItemId)
 end

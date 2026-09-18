@@ -16,7 +16,6 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:setBaseSpeed(75)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
     mob:setMod(xi.mod.REGAIN, 450)

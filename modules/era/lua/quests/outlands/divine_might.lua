@@ -50,7 +50,7 @@ m:addOverride('xi.server.onServerStart', function()
                 if npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT }) then
                     return quest:progressEvent(7, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK)
                 elseif
-                    not player:hasKeyItem(xi.ki.MOONLIGHT_ORE) and
+                    not player:hasKeyItem(xi.keyItem.MOONLIGHT_ORE) and
                     npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_LIGHT_ORE)
                 then
                     return quest:progressEvent(8)

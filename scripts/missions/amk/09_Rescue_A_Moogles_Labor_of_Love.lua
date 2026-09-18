@@ -56,7 +56,7 @@ local getMarkerSet = function(player)
 end
 
 local hasAllStones = function(player)
-    for keyItemId = xi.ki.STONE_OF_SURYA, xi.ki.STONE_OF_KETU do
+    for keyItemId = xi.keyItem.STONE_OF_SURYA, xi.keyItem.STONE_OF_KETU do
         if not player:hasKeyItem(keyItemId) then
             return false
         end
@@ -79,7 +79,7 @@ mission.sections =
             ['Goblin_Geologist'] =
             {
                 onTrigger = function(player, npc)
-                    local hasMap = player:hasKeyItem(xi.ki.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
+                    local hasMap = player:hasKeyItem(xi.keyItem.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
                     return mission:progressEvent(100, 0, hasMap, getMarkerSet(player))
                 end,
             },
@@ -99,7 +99,7 @@ mission.sections =
             return currentMission >= mission.missionId and
                 player:getCharVar('Mission[10][8]progress') == 1 and
                 not hasAllStones(player) and
-                not player:hasKeyItem(xi.ki.NAVARATNA_TALISMAN)
+                not player:hasKeyItem(xi.keyItem.NAVARATNA_TALISMAN)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =
@@ -107,7 +107,7 @@ mission.sections =
             ['Goblin_Geologist'] =
             {
                 onTrigger = function(player, npc)
-                    local hasMap = player:hasKeyItem(xi.ki.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
+                    local hasMap = player:hasKeyItem(xi.keyItem.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
                     return mission:progressEvent(100, 2, hasMap, getMarkerSet(player))
                 end,
             },
@@ -126,7 +126,7 @@ mission.sections =
                     local keyItem
                     for idx, markerIdIndex in ipairs(markerSets[amkMarkerSet]) do
                         if npc:getID() == ID.npc.QM_AMK[markerIdIndex] then
-                            keyItem = xi.ki.STONE_OF_SURYA + idx - 1
+                            keyItem = xi.keyItem.STONE_OF_SURYA + idx - 1
                         end
                     end
 
@@ -144,7 +144,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 hasAllStones(player) and
-                not player:hasKeyItem(xi.ki.NAVARATNA_TALISMAN)
+                not player:hasKeyItem(xi.keyItem.NAVARATNA_TALISMAN)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =
@@ -152,7 +152,7 @@ mission.sections =
             ['Goblin_Geologist'] =
             {
                 onTrigger = function(player, npc)
-                    local hasMap = player:hasKeyItem(xi.ki.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
+                    local hasMap = player:hasKeyItem(xi.keyItem.MAP_OF_THE_QUICKSAND_CAVES) and 1 or 0
                     return mission:progressEvent(100, 1, hasMap, 0)
                 end,
             },
@@ -160,12 +160,12 @@ mission.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    for keyItemId = xi.ki.STONE_OF_SURYA, xi.ki.STONE_OF_KETU do
+                    for keyItemId = xi.keyItem.STONE_OF_SURYA, xi.keyItem.STONE_OF_KETU do
                         player:delKeyItem(keyItemId)
                     end
 
                     player:setCharVar('Mission[10][8]markerSet', 0)
-                    npcUtil.giveKeyItem(player, xi.ki.NAVARATNA_TALISMAN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NAVARATNA_TALISMAN)
                 end,
             },
         },
@@ -175,7 +175,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:hasKeyItem(xi.ki.NAVARATNA_TALISMAN)
+                player:hasKeyItem(xi.keyItem.NAVARATNA_TALISMAN)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =
@@ -183,7 +183,7 @@ mission.sections =
             ['Goblin_Geologist'] =
             {
                 onTrigger = function(player, npc)
-                    player:messageSpecial(ID.text.GRANT_YOU_EASY_ENTRANCE, xi.ki.NAVARATNA_TALISMAN)
+                    player:messageSpecial(ID.text.GRANT_YOU_EASY_ENTRANCE, xi.keyItem.NAVARATNA_TALISMAN)
                 end,
             },
         },

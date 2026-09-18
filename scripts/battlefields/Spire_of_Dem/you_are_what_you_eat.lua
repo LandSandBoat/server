@@ -16,7 +16,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_0j0',
     exitNpcs         = { '_0j1', '_0j2', '_0j3' },
-    requiredKeyItems = { xi.ki.CENSER_OF_ANTIPATHY, message = spireOfDemID.text.FADES_INTO_NOTHINGNESS },
+    requiredKeyItems = { xi.keyItem.CENSER_OF_ANTIPATHY, message = spireOfDemID.text.FADES_INTO_NOTHINGNESS },
     grantXP          = 3000,
 })
 

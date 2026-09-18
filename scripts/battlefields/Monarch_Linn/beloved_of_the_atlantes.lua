@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index            = 5,
     entryNpc         = 'SD_Entrance',
     exitNpcs         = { 'SD_BCNM_Exit_1', 'SD_BCNM_Exit_2', 'SD_BCNM_Exit_3' },
-    requiredKeyItems = { xi.ki.MONARCH_BEARD, message = monarchLinnID.text.TORN_FROM_YOUR_HANDS },
+    requiredKeyItems = { xi.keyItem.MONARCH_BEARD, message = monarchLinnID.text.TORN_FROM_YOUR_HANDS },
     grantXP          = 2500,
 })
 

@@ -4,7 +4,7 @@ templates:
 
   Gurfurlur_the_Menacing:
     id:            7596
-    species:       troll
+    species:       general
     type:          [battlefield]
     skill_list_id: 326
     attributes:
@@ -12,6 +12,8 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 125
+      mods:
+        udmgbreath: -6725
       jobs: [mnk, mnk]
       render:
         look:
@@ -30,7 +32,7 @@ templates:
 
   Hilltroll_Elite_Guard:
     id:            7594
-    species:       troll
+    species:       heavy_troll
     type:          [battlefield]
     spell_list_id: 4
     skill_list_id: 247
@@ -239,6 +241,8 @@ templates:
     type:          [battlefield]
     skill_list_id: 254
     attributes:
+      speed:           20
+      animation_speed: 24
       combat:
         skill: scythe
         delay: 170
@@ -261,7 +265,7 @@ templates:
 
   Woodtroll_Elite_Guard:
     id:            7595
-    species:       troll
+    species:       light_troll
     type:          [battlefield]
     skill_list_id: 246
     attributes:

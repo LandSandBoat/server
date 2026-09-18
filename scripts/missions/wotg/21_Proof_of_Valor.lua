@@ -38,7 +38,7 @@ local function completePetition(player, posBit, numSignatures)
 
     local totalSignatures = mission:getVar(player, 'Option')
 
-    player:messageSpecial(pastSandoriaID.text.HAVE_GATHERED_SIGNATURE, xi.ki.NORTH_BOUND_PETITION, totalSignatures)
+    player:messageSpecial(pastSandoriaID.text.HAVE_GATHERED_SIGNATURE, xi.keyItem.NORTH_BOUND_PETITION, totalSignatures)
 end
 
 local function updateGameRound(player, option, correctOptions)
@@ -73,7 +73,7 @@ mission.sections =
                             mission:setMustZone(player)
 
                             player:messageSpecial(pastSandoriaID.text.MUST_GATHER_SIGNATURES, 20)
-                            return mission:messageSpecial(pastSandoriaID.text.CURRENT_PETITIONS, 0, numPetitions, xi.ki.NORTH_BOUND_PETITION)
+                            return mission:messageSpecial(pastSandoriaID.text.CURRENT_PETITIONS, 0, numPetitions, xi.keyItem.NORTH_BOUND_PETITION)
                         else
                             return mission:progressEvent(148, player:getCampaignAllegiance(), mission:getVar(player, 'Option'))
                         end

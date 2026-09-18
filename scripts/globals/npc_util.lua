@@ -496,9 +496,9 @@ end
     Message is displayed showing key items obtained.
 
     Examples of valid keyitems parameter:
-        xi.ki.ZERUHN_REPORT
-        { xi.ki.PALBOROUGH_MINES_LOGS }
-        { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
+        xi.keyItem.ZERUHN_REPORT
+        { xi.keyItem.PALBOROUGH_MINES_LOGS }
+        { xi.keyItem.BLUE_ACIDITY_TESTER, xi.keyItem.RED_ACIDITY_TESTER }
 --]]
 ---@param player CBaseEntity
 ---@param keyitems xi.keyItem|{ [integer]: xi.keyItem }
@@ -536,7 +536,7 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            keyItem = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.keyItem.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
             fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
@@ -639,7 +639,7 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            keyItem = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.keyItem.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
             fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
@@ -743,7 +743,7 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
+            keyItem = xi.keyItem.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
             bayld = 500,
             gil   = 200,
             exp   = 1000,

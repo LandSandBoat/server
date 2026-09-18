@@ -36,7 +36,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         player:setCharVar('CarbuncleDebacleProgress', 7)
     end
 
-    player:delKeyItem(xi.ki.DAZE_BREAKER_CHARM)
+    player:delKeyItem(xi.keyItem.DAZE_BREAKER_CHARM)
 end
 
 content.groups =

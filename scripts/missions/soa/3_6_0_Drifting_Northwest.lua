@@ -36,8 +36,8 @@ mission.sections =
             {
                 [29] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.TINTINNABULUM)
-                        player:messageSpecial(kamihrID.text.LOST_KEYITEM, xi.ki.TINTINNABULUM)
+                        player:delKeyItem(xi.keyItem.TINTINNABULUM)
+                        player:messageSpecial(kamihrID.text.LOST_KEYITEM, xi.keyItem.TINTINNABULUM)
                     end
                 end,
             },

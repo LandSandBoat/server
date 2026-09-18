@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_
 
 quest.reward =
 {
-    keyItem = xi.ki.SL_WILDCAT_BADGE,
+    keyItem = xi.keyItem.SL_WILDCAT_BADGE,
     title   = xi.title.SECOND_LIEUTENANT,
 }
 
@@ -69,7 +69,7 @@ quest.sections =
                 [5073] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 1)
-                    npcUtil.giveKeyItem(player, xi.ki.OFFICER_ACADEMY_MANUAL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OFFICER_ACADEMY_MANUAL)
                 end,
             },
         },
@@ -229,7 +229,7 @@ quest.sections =
                     if option == 1 then
                         if quest:complete(player) then
                             player:setCharVar('AssaultPromotion', 0)
-                            player:delKeyItem(xi.ki.CS_WILDCAT_BADGE)
+                            player:delKeyItem(xi.keyItem.CS_WILDCAT_BADGE)
                             quest:messageSpecial(ID.text.SECOND_LIEUTENANT)
                         end
                     end

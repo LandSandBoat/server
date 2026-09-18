@@ -10,9 +10,9 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH) == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.THYME_MOSS)
+        not player:hasKeyItem(xi.keyItem.THYME_MOSS)
     then
-        npcUtil.giveKeyItem(player, xi.ki.THYME_MOSS)
+        npcUtil.giveKeyItem(player, xi.keyItem.THYME_MOSS)
     end
 end
 

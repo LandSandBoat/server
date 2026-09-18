@@ -11,7 +11,7 @@ xi.abyssea.surveyorOnTrigger = function(player, npc)
     local prevTime = 0
     local numStones = xi.abyssea.getHeldTraverserStones(player)
     local numSojourn = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.SOJOURN)
-    local hasRhapsody = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE)
+    local hasRhapsody = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_MAUVE)
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
     local hasVisitantStatusEffect = 0
 
@@ -48,7 +48,7 @@ xi.abyssea.surveyorOnEventFinish = function(player, csid, option, npc)
         end
 
         local numSojourn = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.SOJOURN)
-        local timePerStone = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 1800
+        local timePerStone = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_MAUVE) and 3600 or 1800
 
         visitantTime = visitantTime + timePerStone * additionalStones + additionalStones * (numSojourn * 180)
 

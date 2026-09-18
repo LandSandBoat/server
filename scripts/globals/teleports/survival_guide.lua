@@ -74,7 +74,7 @@ xi.survivalGuide.onTrigger = function(player)
     end
 
     -- "Rhapsody in White" key item reduces teleport fee by 80%
-    if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
         param = bit.bor(param, 0x2000)
     end
 
@@ -197,7 +197,7 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
         teleportCostTabs = 0
 
     -- If the player has the "Rhapsody in White" KI, the cost is 1/5 of original gil or 1/5 of original tabs.
-    elseif player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+    elseif player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
         teleportCostGil  = math.floor(teleportCostGil / 5)
         teleportCostTabs = math.floor(teleportCostTabs / 5)
     end

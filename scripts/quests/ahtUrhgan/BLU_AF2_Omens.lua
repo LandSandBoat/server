@@ -107,7 +107,7 @@ quest.sections =
                 end,
 
                 [712] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SEALED_IMMORTAL_ENVELOPE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SEALED_IMMORTAL_ENVELOPE)
                     quest:setVar(player, 'Prog', 2)
                 end,
 
@@ -127,7 +127,7 @@ quest.sections =
 
                 [716] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
+                        player:delKeyItem(xi.keyItem.SEALED_IMMORTAL_ENVELOPE)
 
                         xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
                         xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer', GetSystemTime() + 60) -- 1 minute wait time

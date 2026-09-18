@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.amk.helpers.cardianOrbDrop(mob, player, xi.ki.ORB_OF_BATONS)
+    xi.amk.helpers.cardianOrbDrop(mob, player, xi.keyItem.ORB_OF_BATONS)
 end
 
 return entity

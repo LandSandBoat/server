@@ -69,7 +69,7 @@ mission.sections =
                         return mission:progressEvent(7)
                     elseif missionStatus == 1 then
                         return mission:progressEvent(9)
-                    elseif player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_TABLET) then
+                    elseif player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_TABLET) then
                         return mission:progressEvent(8)
                     end
                 end,
@@ -83,7 +83,7 @@ mission.sections =
 
                 [8] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_TABLET)
+                        player:delKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_TABLET)
                     end
                 end,
             },
@@ -101,7 +101,7 @@ mission.sections =
                         if player:getLocalVar('Mission[0][18]Stage') == 1 then
                             player:setLocalVar('Mission[0][18]Stage', 0)
                             player:setMissionStatus(mission.areaId, 2)
-                            return mission:keyItem(xi.ki.ANCIENT_SAN_DORIAN_TABLET)
+                            return mission:keyItem(xi.keyItem.ANCIENT_SAN_DORIAN_TABLET)
                         else
                             SpawnMob(westRonfaureID.mob.MARAUDER_DVOGZOG):updateClaim(player)
                             return mission:messageSpecial(westRonfaureID.text.SOMETHING_IS_AMISS)

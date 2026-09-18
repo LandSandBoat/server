@@ -28,8 +28,8 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar('HalvungDoor') == 1 then
-        player:addKeyItem(xi.ki.CAST_METAL_PLATE)
-        player:messageSpecial(ID.text.FITS_LARGE_KEYHOLE, xi.ki.CAST_METAL_PLATE)
+        player:addKeyItem(xi.keyItem.CAST_METAL_PLATE)
+        player:messageSpecial(ID.text.FITS_LARGE_KEYHOLE, xi.keyItem.CAST_METAL_PLATE)
         player:setCharVar('HalvungDoor', 0)
         npc:setPos(unpack(castMetalPlatePos[math.randomInt(1, 10)]))
     else

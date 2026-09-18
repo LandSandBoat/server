@@ -17,7 +17,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_N
 
 mission.reward =
 {
-    keyItem     = xi.ki.MAP_OF_NORG,
+    keyItem     = xi.keyItem.MAP_OF_NORG,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG },
 }
 

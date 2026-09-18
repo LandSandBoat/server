@@ -25,7 +25,7 @@ quest.sections =
             ['Rholont'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.LETTER_TO_COUNT_AURCHIAT) then
+                    if not player:hasKeyItem(xi.keyItem.LETTER_TO_COUNT_AURCHIAT) then
                         return quest:progressEvent(649)
                     else
                         return quest:event(651)
@@ -36,7 +36,7 @@ quest.sections =
             onEventFinish =
             {
                 [649] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_COUNT_AURCHIAT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_COUNT_AURCHIAT)
                 end,
             },
         },
@@ -46,7 +46,7 @@ quest.sections =
             ['Shimmering_Pondweed'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.LETTER_TO_COUNT_AURCHIAT) then
+                    if player:hasKeyItem(xi.keyItem.LETTER_TO_COUNT_AURCHIAT) then
                         return quest:progressEvent(107)
                     end
                 end,
@@ -56,7 +56,7 @@ quest.sections =
             {
                 [107] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:delKeyItem(xi.ki.LETTER_TO_COUNT_AURCHIAT)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_COUNT_AURCHIAT)
                 end,
             },
         },
@@ -78,7 +78,7 @@ quest.sections =
                         return quest:progressEvent(212)
                     elseif
                         questProgress == 1 and
-                        player:hasKeyItem(xi.ki.LENGTH_OF_JUGNER_IVY)
+                        player:hasKeyItem(xi.keyItem.LENGTH_OF_JUGNER_IVY)
                     then
                         return quest:progressEvent(213)
                     end

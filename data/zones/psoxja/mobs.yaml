@@ -196,7 +196,7 @@ templates:
 
   Cryptonberry_Plaguer:
     id:            854
-    species:       tonberry
+    species:       cryptonberry
     spell_list_id: 21
     skill_list_id: 500
     attributes:

@@ -144,8 +144,8 @@ quest.sections =
                         return quest:event(46):oncePerZone()
                     elseif
                         progress == 4 and
-                        player:hasKeyItem(xi.ki.LETTER_FROM_MAGRIFFON) and
-                        player:hasKeyItem(xi.ki.PROVIDENCE_POT)
+                        player:hasKeyItem(xi.keyItem.LETTER_FROM_MAGRIFFON) and
+                        player:hasKeyItem(xi.keyItem.PROVIDENCE_POT)
                     then
                         return quest:progressEvent(100)
                     elseif progress == 5 then
@@ -159,15 +159,15 @@ quest.sections =
                 [99] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_MUCKVIX)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_MUCKVIX)
                     npcUtil.giveCurrency(player, 'gil', 2000)
                 end,
 
                 [100] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    npcUtil.giveKeyItem(player, xi.ki.PUNGENT_PROVIDENCE_POT)
-                    player:delKeyItem(xi.ki.PROVIDENCE_POT)
-                    player:delKeyItem(xi.ki.LETTER_FROM_MAGRIFFON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PUNGENT_PROVIDENCE_POT)
+                    player:delKeyItem(xi.keyItem.PROVIDENCE_POT)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_MAGRIFFON)
                 end,
             },
         },
@@ -181,16 +181,16 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 3 and
                         trade:getGil() == 10000
                     then
-                        return quest:progressEvent(301, 1, xi.ki.PROVIDENCE_POT)
+                        return quest:progressEvent(301, 1, xi.keyItem.PROVIDENCE_POT)
                     end
                 end,
 
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        player:hasKeyItem(xi.ki.LETTER_FROM_MUCKVIX)
+                        player:hasKeyItem(xi.keyItem.LETTER_FROM_MUCKVIX)
                     then
-                        return quest:progressEvent(299, 75, xi.ki.PROVIDENCE_POT, 10000)
+                        return quest:progressEvent(299, 75, xi.keyItem.PROVIDENCE_POT, 10000)
                     end
                 end,
             },
@@ -199,14 +199,14 @@ quest.sections =
             {
                 [299] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    player:delKeyItem(xi.ki.LETTER_FROM_MUCKVIX)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_MUCKVIX)
                 end,
 
                 [301] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
                     player:tradeComplete()
-                    npcUtil.giveKeyItem(player, xi.ki.PROVIDENCE_POT)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_MAGRIFFON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.PROVIDENCE_POT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_MAGRIFFON)
                 end,
             },
         },
@@ -282,8 +282,8 @@ quest.sections =
             ['Ravorara'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.PUNGENT_PROVIDENCE_POT) then
-                        return quest:progressEvent(313, 0, 0, 0, xi.ki.PUNGENT_PROVIDENCE_POT)
+                    if player:hasKeyItem(xi.keyItem.PUNGENT_PROVIDENCE_POT) then
+                        return quest:progressEvent(313, 0, 0, 0, xi.keyItem.PUNGENT_PROVIDENCE_POT)
                     else
                         return quest:event(314)
                     end
@@ -295,7 +295,7 @@ quest.sections =
                 [313] = function(player, csid, option, npc)
                     if option == 1 then
                         npcUtil.giveCurrency(player, 'gil', 1000)
-                        player:delKeyItem(xi.ki.PUNGENT_PROVIDENCE_POT)
+                        player:delKeyItem(xi.keyItem.PUNGENT_PROVIDENCE_POT)
                     end
                 end,
             },

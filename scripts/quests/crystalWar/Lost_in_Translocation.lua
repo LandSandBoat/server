@@ -14,14 +14,14 @@ quest.reward =
 {
     gil     = 2000,
     exp     = 2000,
-    keyItem = xi.ki.MAP_OF_GRAUBERG,
+    keyItem = xi.keyItem.MAP_OF_GRAUBERG,
 }
 
 local mapKeyItems =
 {
-    xi.ki.LEFT_MAP_PIECE,
-    xi.ki.MIDDLE_MAP_PIECE,
-    xi.ki.RIGHT_MAP_PIECE,
+    xi.keyItem.LEFT_MAP_PIECE,
+    xi.keyItem.MIDDLE_MAP_PIECE,
+    xi.keyItem.RIGHT_MAP_PIECE,
 }
 
 local function getNumMapPieces(player)
@@ -88,9 +88,9 @@ quest.sections =
 
                 [107] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LEFT_MAP_PIECE)
-                        player:delKeyItem(xi.ki.MIDDLE_MAP_PIECE)
-                        player:delKeyItem(xi.ki.RIGHT_MAP_PIECE)
+                        player:delKeyItem(xi.keyItem.LEFT_MAP_PIECE)
+                        player:delKeyItem(xi.keyItem.MIDDLE_MAP_PIECE)
+                        player:delKeyItem(xi.keyItem.RIGHT_MAP_PIECE)
                     end
                 end,
             },
@@ -101,7 +101,7 @@ quest.sections =
             ['Erik'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.LEFT_MAP_PIECE) then
+                    if not player:hasKeyItem(xi.keyItem.LEFT_MAP_PIECE) then
                         return quest:progressEvent(3)
                     end
                 end,
@@ -110,7 +110,7 @@ quest.sections =
             ['Gravestone'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MIDDLE_MAP_PIECE) then
+                    if not player:hasKeyItem(xi.keyItem.MIDDLE_MAP_PIECE) then
                         return quest:progressEvent(4)
                     end
                 end,
@@ -119,7 +119,7 @@ quest.sections =
             ['Sarcophagus_map_quest'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.RIGHT_MAP_PIECE) then
+                    if not player:hasKeyItem(xi.keyItem.RIGHT_MAP_PIECE) then
                         return quest:progressEvent(5)
                     end
                 end,
@@ -128,15 +128,15 @@ quest.sections =
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LEFT_MAP_PIECE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LEFT_MAP_PIECE)
                 end,
 
                 [4] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MIDDLE_MAP_PIECE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MIDDLE_MAP_PIECE)
                 end,
 
                 [5] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.RIGHT_MAP_PIECE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.RIGHT_MAP_PIECE)
                 end,
             },
         },

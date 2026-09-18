@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local atfta = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
-    local atftaNeedKI = player:getCharVar('ATFTA_Status') < 2 and not player:hasKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
+    local atftaNeedKI = player:getCharVar('ATFTA_Status') < 2 and not player:hasKeyItem(xi.keyItem.COPY_OF_THE_ALLIANCE_AGREEMENT)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
@@ -22,7 +22,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5053 then
-        npcUtil.giveKeyItem(player, xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
+        npcUtil.giveKeyItem(player, xi.keyItem.COPY_OF_THE_ALLIANCE_AGREEMENT)
     end
 end
 

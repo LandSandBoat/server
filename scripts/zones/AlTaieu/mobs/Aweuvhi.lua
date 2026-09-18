@@ -23,8 +23,8 @@ entity.onMobDeath = function(mob, player, optParams)
         mobID == ID.mob.EUVHIS_OFFSET + 2 or
         mobID == ID.mob.EUVHIS_OFFSET + 4
     then
-        if not player:hasKeyItem(xi.ki.WHITE_CARD) then
-            npcUtil.giveKeyItem(player, xi.ki.WHITE_CARD)
+        if not player:hasKeyItem(xi.keyItem.WHITE_CARD) then
+            npcUtil.giveKeyItem(player, xi.keyItem.WHITE_CARD)
         end
 
     elseif
@@ -32,8 +32,8 @@ entity.onMobDeath = function(mob, player, optParams)
         mobID == ID.mob.EUVHIS_OFFSET + 8 or
         mobID == ID.mob.EUVHIS_OFFSET + 10
     then
-        if not player:hasKeyItem(xi.ki.RED_CARD) then
-            npcUtil.giveKeyItem(player, xi.ki.RED_CARD)
+        if not player:hasKeyItem(xi.keyItem.RED_CARD) then
+            npcUtil.giveKeyItem(player, xi.keyItem.RED_CARD)
         end
 
     elseif
@@ -41,8 +41,8 @@ entity.onMobDeath = function(mob, player, optParams)
         mobID == ID.mob.EUVHIS_OFFSET + 14 or
         mobID == ID.mob.EUVHIS_OFFSET + 16
     then
-        if not player:hasKeyItem(xi.ki.BLACK_CARD) then
-            npcUtil.giveKeyItem(player, xi.ki.BLACK_CARD)
+        if not player:hasKeyItem(xi.keyItem.BLACK_CARD) then
+            npcUtil.giveKeyItem(player, xi.keyItem.BLACK_CARD)
         end
     end
 end

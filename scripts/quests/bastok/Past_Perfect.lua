@@ -59,8 +59,8 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS) then
-                        return quest:keyItem(xi.ki.TATTERED_MISSION_ORDERS)
+                    if not player:hasKeyItem(xi.keyItem.TATTERED_MISSION_ORDERS) then
+                        return quest:keyItem(xi.keyItem.TATTERED_MISSION_ORDERS)
                     end
                 end,
             },
@@ -71,7 +71,7 @@ quest.sections =
             ['Evi'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS) then
+                    if player:hasKeyItem(xi.keyItem.TATTERED_MISSION_ORDERS) then
                         return quest:progressEvent(131)
                     else
                         return quest:event(104)
@@ -83,7 +83,7 @@ quest.sections =
             {
                 [131] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.TATTERED_MISSION_ORDERS)
+                        player:delKeyItem(xi.keyItem.TATTERED_MISSION_ORDERS)
                     end
                 end,
             },

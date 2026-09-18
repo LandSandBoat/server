@@ -92,7 +92,7 @@ templates:
 
   Berserk_Bunny:
     id:      7609
-    species: unclassified
+    species: rabbit
     type:    [battlefield]
     attributes:
       combat:
@@ -134,7 +134,7 @@ templates:
 
   Cave_Kraken:
     id:      7610
-    species: unclassified
+    species: sea_monk
     type:    [battlefield]
     attributes:
       combat:
@@ -178,7 +178,7 @@ templates:
 
   Cornucopieyes:
     id:      7611
-    species: unclassified
+    species: hecteye
     type:    [battlefield]
     attributes:
       combat:
@@ -197,7 +197,7 @@ templates:
 
   Daimoxinos:
     id:      7612
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -216,7 +216,7 @@ templates:
 
   Dendigger_Crab:
     id:      7613
-    species: unclassified
+    species: crab
     type:    [battlefield]
     attributes:
       combat:
@@ -235,7 +235,7 @@ templates:
 
   Elkopsikor:
     id:      7614
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -277,7 +277,7 @@ templates:
 
   Fangmonger_Colossus:
     id:            5785
-    species:       orc
+    species:       goblin_statue
     type:          [notorious, battlefield]
     spell_list_id: 3
     skill_list_id: 93
@@ -293,19 +293,14 @@ templates:
           blunt:    -5000
           h2h:      -5000
         rank_element:
-          fire:     1
-          ice:      1
-          wind:    -1
-          earth:   -1
-          thunder: -1
-          water:   -2
-          light:   -1
-          dark:    -1
+          fire:   1
+          ice:    1
+          water: -2
+          light: -1
+          dark:  -1
         rank_status:
           paralyze:     1
           bind:         1
-          silence:     -1
-          slow:        -1
           poison:      -2
           light_sleep: -1
           dark_sleep:  -1
@@ -345,7 +340,7 @@ templates:
 
   Felsic_Marolith:
     id:      7616
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -389,7 +384,7 @@ templates:
 
   Floppy_Hare:
     id:      7617
-    species: unclassified
+    species: rabbit
     type:    [battlefield]
     attributes:
       combat:
@@ -408,7 +403,7 @@ templates:
 
   Forcer:
     id:      7618
-    species: unclassified
+    species: boxxes
     type:    [battlefield]
     attributes:
       combat:
@@ -484,7 +479,7 @@ templates:
 
   Goblin_Browbeater:
     id:      7621
-    species: unclassified
+    species: goblin
     type:    [battlefield]
     attributes:
       combat:
@@ -521,7 +516,7 @@ templates:
 
   Grotto_Panopt:
     id:      7622
-    species: unclassified
+    species: panopt
     type:    [battlefield]
     attributes:
       combat:
@@ -540,7 +535,7 @@ templates:
 
   Hirudinid:
     id:      7623
-    species: unclassified
+    species: leech
     type:    [battlefield]
     attributes:
       combat:
@@ -583,7 +578,7 @@ templates:
 
   Izyx:
     id:      7624
-    species: unclassified
+    species: panopt
     type:    [battlefield]
     attributes:
       combat:
@@ -719,7 +714,7 @@ templates:
 
   Limber_Lynx:
     id:      7626
-    species: unclassified
+    species: lynx
     type:    [battlefield]
     attributes:
       combat:
@@ -738,7 +733,7 @@ templates:
 
   Mafic_Marolith:
     id:      7627
-    species: unclassified
+    species: marolith
     type:    [battlefield]
     attributes:
       combat:
@@ -757,7 +752,7 @@ templates:
 
   Magisterial_Meeble:
     id:      7628
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -825,7 +820,7 @@ templates:
 
   Melisseus:
     id:      7630
-    species: unclassified
+    species: gnat
     type:    [battlefield]
     attributes:
       combat:
@@ -863,7 +858,7 @@ templates:
 
   Moblin_Commander:
     id:      7632
-    species: unclassified
+    species: moblin
     type:    [battlefield]
     attributes:
       combat:
@@ -882,7 +877,7 @@ templates:
 
   Moblin_Rapscallion:
     id:      7633
-    species: unclassified
+    species: moblin
     type:    [battlefield]
     attributes:
       combat:
@@ -901,7 +896,7 @@ templates:
 
   Moblin_Ruffian:
     id:      7634
-    species: unclassified
+    species: moblin
     type:    [battlefield]
     attributes:
       combat:
@@ -920,7 +915,7 @@ templates:
 
   Moblin_Thaumaturge:
     id:      7635
-    species: unclassified
+    species: moblin
     type:    [battlefield]
     attributes:
       combat:
@@ -1295,7 +1290,7 @@ templates:
 
   Rambunctious_Meeble:
     id:      7636
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -1314,7 +1309,7 @@ templates:
 
   Rapacious_Meeble:
     id:      7637
-    species: unclassified
+    species: meeble
     type:    [battlefield]
     attributes:
       combat:
@@ -1514,7 +1509,7 @@ templates:
 
   Samursk:
     id:      7638
-    species: unclassified
+    species: gallu
     type:    [battlefield]
     attributes:
       combat:
@@ -1624,7 +1619,7 @@ templates:
 
   Stagdella:
     id:      7640
-    species: unclassified
+    species: leech
     type:    [battlefield]
     attributes:
       combat:
@@ -1708,7 +1703,7 @@ templates:
 
   Tunnel_Crab:
     id:      7642
-    species: unclassified
+    species: crab
     type:    [battlefield]
     attributes:
       combat:

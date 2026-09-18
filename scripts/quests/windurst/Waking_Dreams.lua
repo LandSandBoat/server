@@ -55,7 +55,7 @@ quest.sections =
             {
                 [918] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_DREAM_INCENSE)
                 end,
             },
         },
@@ -73,7 +73,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     -- Quest complete.
-                    if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
+                    if player:hasKeyItem(xi.keyItem.WHISPER_OF_DREAMS) then
                         return quest:progressEvent(920, xi.item.DIABOLOSS_POLE, xi.item.DIABOLOSS_EARRING, xi.item.DIABOLOSS_RING, xi.item.DIABOLOSS_TORQUE, 0, 0, 0, getAvailableRewards(player))
 
                     -- 1-time optional dialog.
@@ -105,7 +105,7 @@ quest.sections =
 
                     if quest:complete(player) then
                         player:addFame(xi.fameArea.WINDURST, 60)
-                        player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
+                        player:delKeyItem(xi.keyItem.WHISPER_OF_DREAMS)
                         player:setCharVar('Darkness_Named_date', JstMidnight())
                         quest:setMustZone(player)
                     end
@@ -131,11 +131,11 @@ quest.sections =
                         return quest:event(306)
 
                     -- "Re-start" quest
-                    elseif not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) then
+                    elseif not player:hasKeyItem(xi.keyItem.VIAL_OF_DREAM_INCENSE) then
                         return quest:progressEvent(918)
 
                     -- Quest complete.
-                    elseif player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
+                    elseif player:hasKeyItem(xi.keyItem.WHISPER_OF_DREAMS) then
                         return quest:progressEvent(920, xi.item.DIABOLOSS_POLE, xi.item.DIABOLOSS_EARRING, xi.item.DIABOLOSS_RING, xi.item.DIABOLOSS_TORQUE, 0, 0, 0, getAvailableRewards(player))
 
                     -- 1-time optional dialog.
@@ -152,7 +152,7 @@ quest.sections =
             onEventFinish =
             {
                 [918] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_DREAM_INCENSE)
                 end,
 
                 [919] = function(player, csid, option, npc)
@@ -169,7 +169,7 @@ quest.sections =
                         player:messageSpecial(windurstWatersID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
                     end
 
-                    player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
+                    player:delKeyItem(xi.keyItem.WHISPER_OF_DREAMS)
                     player:setCharVar('Darkness_Named_date', JstMidnight())
                 end,
             },

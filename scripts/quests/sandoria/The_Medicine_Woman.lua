@@ -73,7 +73,7 @@ quest.sections =
             ['Abeaule'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.COLD_MEDICINE) then
+                    if player:hasKeyItem(xi.keyItem.COLD_MEDICINE) then
                         return quest:progressEvent(614)
                     else
                         return quest:messageText(northernSandoriaID.text.ABEAULE_DIALOG_HOME)
@@ -85,7 +85,7 @@ quest.sections =
             {
                 [614] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.COLD_MEDICINE)
+                        player:delKeyItem(xi.keyItem.COLD_MEDICINE)
                     end
                 end,
             },
@@ -97,7 +97,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        player:hasKeyItem(xi.ki.AMAURAS_FORMULA) and
+                        player:hasKeyItem(xi.keyItem.AMAURAS_FORMULA) and
                         npcUtil.tradeHasExactly(trade, { xi.item.MALBORO_VINE, xi.item.CHUNK_OF_ZINC_ORE, xi.item.INSECT_WING })
                     then
                         return quest:progressEvent(637)
@@ -105,8 +105,8 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    local hasFormula = player:hasKeyItem(xi.ki.AMAURAS_FORMULA)
-                    local hasColdMedicine = player:hasKeyItem(xi.ki.COLD_MEDICINE)
+                    local hasFormula = player:hasKeyItem(xi.keyItem.AMAURAS_FORMULA)
+                    local hasColdMedicine = player:hasKeyItem(xi.keyItem.COLD_MEDICINE)
 
                     if
                         not hasFormula and
@@ -125,14 +125,14 @@ quest.sections =
             {
                 [636] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.AMAURAS_FORMULA)
+                        npcUtil.giveKeyItem(player, xi.keyItem.AMAURAS_FORMULA)
                     end
                 end,
 
                 [637] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:delKeyItem(xi.ki.AMAURAS_FORMULA)
-                    npcUtil.giveKeyItem(player, xi.ki.COLD_MEDICINE)
+                    player:delKeyItem(xi.keyItem.AMAURAS_FORMULA)
+                    npcUtil.giveKeyItem(player, xi.keyItem.COLD_MEDICINE)
                 end,
             },
         },

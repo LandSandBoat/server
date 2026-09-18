@@ -669,7 +669,8 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [bst, none]
+      jobs:  [bst, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -693,7 +694,8 @@ templates:
     attributes:
       combat:
         skill: sword
-      jobs: [rdm, none]
+      jobs:  [rdm, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -717,7 +719,8 @@ templates:
     attributes:
       combat:
         skill: dagger
-      jobs: [thf, none]
+      jobs:  [thf, none]
+      speed: 60
       render:
         look:
           type:  standard

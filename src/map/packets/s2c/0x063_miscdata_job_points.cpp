@@ -21,8 +21,8 @@
 
 #include "0x063_miscdata_job_points.h"
 
+#include "data/enums/key_item.h"
 #include "entities/char_entity.h"
-#include "enums/key_items.h"
 #include "job_points.h"
 #include "utils/charutils.h"
 
@@ -33,7 +33,7 @@ GP_SERV_COMMAND_MISCDATA::JOB_POINTS::JOB_POINTS(const CCharEntity* PChar)
     packet.type      = GP_SERV_COMMAND_MISCDATA_TYPE::JobPoints;
     packet.unknown06 = sizeof(PacketData);
 
-    packet.access = charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER);
+    packet.access = charutils::hasKeyItem(PChar, xi::KeyItem::JobBreaker);
 
     const JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 

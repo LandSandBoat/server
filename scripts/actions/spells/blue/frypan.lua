@@ -33,6 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
     params.skillchainType = xi.skillchainType.IMPACTION
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- guessed
 
     params.numHits       = 1
     params.ftp0          = 1.7734375

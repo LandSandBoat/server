@@ -7,10 +7,10 @@ xi.wotg.helpers = xi.wotg.helpers or {}
 
 local memoryFragments =
 {
-    xi.ki.LARGE_MEMORY_FRAGMENT1,
-    xi.ki.LARGE_MEMORY_FRAGMENT2,
-    xi.ki.LARGE_MEMORY_FRAGMENT3,
-    xi.ki.LARGE_MEMORY_FRAGMENT4,
+    xi.keyItem.LARGE_MEMORY_FRAGMENT1,
+    xi.keyItem.LARGE_MEMORY_FRAGMENT2,
+    xi.keyItem.LARGE_MEMORY_FRAGMENT3,
+    xi.keyItem.LARGE_MEMORY_FRAGMENT4,
 }
 
 -- NOTE: The naming convention here is: "meets requirements to complete mission X".
@@ -89,17 +89,17 @@ xi.wotg.helpers.helmTrade = function(player, helmType, broke)
     then
         if
             zoneId == xi.zone.EAST_RONFAURE_S and
-            not player:hasKeyItem(xi.ki.RONFAURE_MAPLE_SYRUP) and
+            not player:hasKeyItem(xi.keyItem.RONFAURE_MAPLE_SYRUP) and
             xi.quest.getVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR, 'Prog') == 1
         then
-            npcUtil.giveKeyItem(player, xi.ki.RONFAURE_MAPLE_SYRUP)
+            npcUtil.giveKeyItem(player, xi.keyItem.RONFAURE_MAPLE_SYRUP)
             return true
         elseif
             zoneId == xi.zone.JUGNER_FOREST_S and
-            not player:hasKeyItem(xi.ki.LENGTH_OF_JUGNER_IVY) and
+            not player:hasKeyItem(xi.keyItem.LENGTH_OF_JUGNER_IVY) and
             xi.quest.getVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_THAT_NEVER_DIE, 'Prog') == 1
         then
-            npcUtil.giveKeyItem(player, xi.ki.LENGTH_OF_JUGNER_IVY)
+            npcUtil.giveKeyItem(player, xi.keyItem.LENGTH_OF_JUGNER_IVY)
             return true
         end
     end

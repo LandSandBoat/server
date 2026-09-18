@@ -35,7 +35,7 @@ quest.sections =
                 [110] = function(player, csid, option, npc)
                     quest:begin(player)
 
-                    npcUtil.giveKeyItem(player, xi.ki.TAMIS_NOTE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.TAMIS_NOTE)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -98,7 +98,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        if player:seenKeyItem(xi.ki.TAMIS_NOTE) then
+                        if player:seenKeyItem(xi.keyItem.TAMIS_NOTE) then
                             return quest:progressEvent(162)
                         else
                             return quest:progressEvent(161)
@@ -113,12 +113,12 @@ quest.sections =
             {
                 [161] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:delKeyItem(xi.ki.TAMIS_NOTE)
+                    player:delKeyItem(xi.keyItem.TAMIS_NOTE)
                 end,
 
                 [162] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    player:delKeyItem(xi.ki.TAMIS_NOTE)
+                    player:delKeyItem(xi.keyItem.TAMIS_NOTE)
                 end,
             },
         },

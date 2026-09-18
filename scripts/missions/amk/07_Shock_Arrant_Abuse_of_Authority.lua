@@ -21,7 +21,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                not player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
+                not player:hasKeyItem(xi.keyItem.MOLDY_WORM_EATEN_CHEST)
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -43,7 +43,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
+                player:hasKeyItem(xi.keyItem.MOLDY_WORM_EATEN_CHEST)
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -59,7 +59,7 @@ mission.sections =
             {
                 [10183] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
+                        player:delKeyItem(xi.keyItem.MOLDY_WORM_EATEN_CHEST)
                     end
                 end,
             },

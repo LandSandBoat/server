@@ -39,7 +39,7 @@ mission.sections =
             onZoneIn = function(player, prevZone)
                 if
                     mission:isVarBitsSet(player, 'Status', 3) and
-                    not player:hasKeyItem(xi.ki.DHOKMAKS_BLOOD_SIGIL)
+                    not player:hasKeyItem(xi.keyItem.DHOKMAKS_BLOOD_SIGIL)
                 then
                     return 36
                 end
@@ -55,9 +55,9 @@ mission.sections =
                 end,
 
                 [36] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DHOKMAKS_BLOOD_SIGIL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DHOKMAKS_BLOOD_SIGIL)
 
-                    if player:hasKeyItem(xi.ki.ASHRAKKS_BLOOD_SIGIL) then
+                    if player:hasKeyItem(xi.keyItem.ASHRAKKS_BLOOD_SIGIL) then
                         mission:complete(player)
                     end
                 end,
@@ -95,7 +95,7 @@ mission.sections =
             onZoneIn = function(player, prevZone)
                 if
                     mission:isVarBitsSet(player, 'Status', 1) and
-                    not player:hasKeyItem(xi.ki.ASHRAKKS_BLOOD_SIGIL)
+                    not player:hasKeyItem(xi.keyItem.ASHRAKKS_BLOOD_SIGIL)
                 then
                     return 4
                 end
@@ -111,9 +111,9 @@ mission.sections =
                 end,
 
                 [4] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ASHRAKKS_BLOOD_SIGIL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ASHRAKKS_BLOOD_SIGIL)
 
-                    if player:hasKeyItem(xi.ki.DHOKMAKS_BLOOD_SIGIL) then
+                    if player:hasKeyItem(xi.keyItem.DHOKMAKS_BLOOD_SIGIL) then
                         mission:complete(player)
                     end
                 end,
@@ -146,17 +146,17 @@ mission.sections =
                     -- This needs to be verified
 
                     if
-                        not player:hasKeyItem(xi.ki.SKY_BLUE_POME) and
-                        not player:hasKeyItem(xi.ki.ASHRAKKS_BLOOD_SIGIL)
+                        not player:hasKeyItem(xi.keyItem.SKY_BLUE_POME) and
+                        not player:hasKeyItem(xi.keyItem.ASHRAKKS_BLOOD_SIGIL)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.SKY_BLUE_POME)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SKY_BLUE_POME)
                     end
 
                     if
-                        not player:hasKeyItem(xi.ki.SUN_YELLOW_POME) and
-                        not player:hasKeyItem(xi.ki.DHOKMAKS_BLOOD_SIGIL)
+                        not player:hasKeyItem(xi.keyItem.SUN_YELLOW_POME) and
+                        not player:hasKeyItem(xi.keyItem.DHOKMAKS_BLOOD_SIGIL)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.SUN_YELLOW_POME)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SUN_YELLOW_POME)
                     end
 
                     return mission:noAction()

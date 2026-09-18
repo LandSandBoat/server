@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.MOONGATE_PASS) then
+    if player:hasKeyItem(xi.keyItem.MOONGATE_PASS) then
         npc:openDoor(10)
     end
 end

@@ -62,9 +62,9 @@ quest.sections =
             ['Novalmauge'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(5) -- complete
-                    elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    elseif player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(4) -- cont 2
                     else
                         return quest:event(3, player:hasItem(xi.item.SCYTHE_OF_TRIALS) and 1 or 0) -- cont 1
@@ -91,21 +91,21 @@ quest.sections =
                         npcUtil.giveItem(player, xi.item.SCYTHE_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end
                 end,
 
                 [1] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
 
                 [5] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:delKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
                         player:addLearnedWeaponskill(xi.wsUnlock.SPIRAL_HELL)
                         player:messageSpecial(bostaunieuxID.text.SPIRAL_HELL_LEARNED)
                     end
@@ -120,9 +120,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
-                        return quest:keyItem(xi.ki.ANNALS_OF_TRUTH)
+                        return quest:keyItem(xi.keyItem.ANNALS_OF_TRUTH)
                     elseif
-                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
                         npcUtil.popFromQM(player, npc, denOfRancorID.mob.MOKUMOKUREN, { hide = 0 })
                     then
@@ -134,7 +134,7 @@ quest.sections =
             ['Mokumokuren'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+                    if player:hasKeyItem(xi.keyItem.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         player:setLocalVar('killed_wsnm', 1)
                     end
                 end,

@@ -284,7 +284,8 @@ templates:
       combat:
         skill: great_axe
         delay: 200
-      jobs: [war, blm]
+      jobs:  [war, blm]
+      speed: 84
       render:
         look:
           type:  standard
@@ -601,7 +602,7 @@ templates:
 spawns:
   17473537:
     template: Fenrir_Prime
-    at:       [340.000, 47.000, -337.000, 65]
+    at:       [339.704, 47.098, -342.845, 64]
     level:    [80, 80]
   17473538:
     template: Fenrir_Prime

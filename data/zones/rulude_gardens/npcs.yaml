@@ -4658,6 +4658,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
+    content:  trust_quests
 
   17772855:
     script:       Survival_Guide

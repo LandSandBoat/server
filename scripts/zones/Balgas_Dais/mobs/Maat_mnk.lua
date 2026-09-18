@@ -13,6 +13,17 @@ local function tauntPlayer(player, mob)
     mob:setLocalVar('initialTaunt', 1)
 end
 
+local accuracyTable =
+    {
+        [65] = 227,
+        [66] = 227,
+        [67] = 231,
+        [68] = 234,
+        [69] = 237,
+        [70] = 241,
+        [71] = 251,
+    }
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_H2H_PENALTY, 1)
 
@@ -30,7 +41,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:setBaseSpeed(60)
-    mob:setMod(xi.mod.ACC, 229)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)
@@ -66,6 +76,10 @@ end
 
 entity.onMobEngage = function(mob, target)
     mob:setLocalVar('enrageTime', GetSystemTime() + 300)
+
+    -- TODO: Figure out appropriate level scaling for Maat
+    local targetLevel = math.min(target:getMainLvl(), 71)
+    mob:setMod(xi.mod.ACC, accuracyTable[targetLevel])
 
     if mob:getLocalVar('initialTaunt') == 1 then
         return

@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.FROM_THE_RU
 
 mission.reward =
 {
-    keyItem = xi.ki.RHAPSODY_IN_CRIMSON,
+    keyItem = xi.keyItem.RHAPSODY_IN_CRIMSON,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.CAUTERIZE },
 }
 

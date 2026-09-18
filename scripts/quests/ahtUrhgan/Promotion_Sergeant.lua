@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_
 
 quest.reward =
 {
-    keyItem = xi.ki.S_WILDCAT_BADGE,
+    keyItem = xi.keyItem.S_WILDCAT_BADGE,
     title   = xi.title.SERGEANT,
 }
 
@@ -170,7 +170,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:setCharVar('AssaultPromotion', 0)
                         player:messageSpecial(whitegateID.text.PROMOTION_SERGEANT)
-                        player:delKeyItem(xi.ki.C_WILDCAT_BADGE)
+                        player:delKeyItem(xi.keyItem.C_WILDCAT_BADGE)
                     end
                 end,
             },

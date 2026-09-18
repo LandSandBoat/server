@@ -215,7 +215,7 @@ templates:
 
   Chiliarch_Gordarvor:
     id:            718
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 246
     attributes:
@@ -295,7 +295,7 @@ templates:
 
   Dextrose:
     id:            1020
-    species:       flan
+    species:       gold_flan
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 299
@@ -335,7 +335,7 @@ templates:
 
   Dorgerwor_the_Astute:
     id:            1091
-    species:       troll
+    species:       light_troll
     type:          [notorious]
     skill_list_id: 246
     attributes:
@@ -429,7 +429,7 @@ templates:
 
   Farlarder_the_Shrewd:
     id:            1302
-    species:       troll
+    species:       light_troll
     type:          [notorious]
     skill_list_id: 246
     attributes:
@@ -585,7 +585,7 @@ templates:
 
   Gurfurlur_the_Menacing:
     id:            1851
-    species:       troll
+    species:       general
     type:          [notorious]
     skill_list_id: 326
     attributes:
@@ -593,26 +593,9 @@ templates:
         skill:    hand_to_hand
         delay:    480
         dmg_mult: 125
+      mods:
+        udmgbreath: -6725
       jobs: [mnk, mnk]
-      resists:
-        rank_element:
-          fire:    7
-          ice:     7
-          wind:    2
-          earth:   7
-          thunder: 7
-          water:   2
-          light:   4
-          dark:    4
-        rank_status:
-          paralyze:    7
-          bind:        7
-          silence:     2
-          slow:        7
-          poison:      2
-          light_sleep: 4
-          dark_sleep:  4
-          blind:       4
       render:
         look:
           type:  standard
@@ -638,7 +621,7 @@ templates:
 
   Hetairoi_Vuryargur:
     id:            1937
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -658,7 +641,7 @@ templates:
 
   Hetairoi_Zarwarkur:
     id:            1938
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -679,7 +662,7 @@ templates:
 
   Hilltroll_Elite_Guard:
     id:            1947
-    species:       troll
+    species:       heavy_troll
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 247
@@ -704,7 +687,7 @@ templates:
 
   Hilltroll_Mirror_Guard:
     id:            1948
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -728,7 +711,7 @@ templates:
 
   Kirlirger_the_Abhorrent:
     id:            2267
-    species:       troll
+    species:       heavy_troll
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 246
@@ -1079,7 +1062,7 @@ templates:
   Troll_Artilleryman_H:
     id:            4009
     display_name:  Troll_Artilleryman
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1112,7 +1095,7 @@ templates:
 
   Troll_Cameist:
     id:            4010
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -1147,7 +1130,7 @@ templates:
 
   Troll_Combatant:
     id:            4012
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1182,7 +1165,7 @@ templates:
   Troll_Cuirasser_H:
     id:            4013
     display_name:  Troll_Cuirasser
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -1214,7 +1197,7 @@ templates:
 
   Troll_Engraver:
     id:            4015
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1249,7 +1232,7 @@ templates:
 
   Troll_Gemologist:
     id:            4017
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -1285,7 +1268,7 @@ templates:
   Troll_Grenadier_H:
     id:            4018
     display_name:  Troll_Grenadier
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1316,7 +1299,7 @@ templates:
 
   Troll_Ironworker:
     id:            4021
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1349,7 +1332,7 @@ templates:
 
   Troll_Lapidarist:
     id:            4022
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -1384,7 +1367,7 @@ templates:
 
   Troll_Machinist:
     id:            4023
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1417,7 +1400,7 @@ templates:
 
   Troll_Mythril_Guard:
     id:            4024
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -1441,7 +1424,7 @@ templates:
 
   Troll_Scrimer:
     id:            4028
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1473,7 +1456,7 @@ templates:
 
   Troll_Smelter:
     id:            4030
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1505,7 +1488,7 @@ templates:
 
   Troll_Stoneworker:
     id:            4032
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1538,7 +1521,7 @@ templates:
 
   Troll_Targeteer:
     id:            4036
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -1732,7 +1715,7 @@ templates:
 
   Woodtroll_Elite_Guard:
     id:            4365
-    species:       troll
+    species:       light_troll
     type:          [notorious]
     skill_list_id: 246
     attributes:
@@ -1756,7 +1739,7 @@ templates:
 
   Woodtroll_Mirror_Guard:
     id:            4366
-    species:       troll
+    species:       heavy_troll
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 247

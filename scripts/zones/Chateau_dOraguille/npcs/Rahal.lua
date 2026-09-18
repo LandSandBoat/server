@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local crestProgress = player:getCharVar('TheHolyCrest_Event')
-    local hasDragonCurseRemedy = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+    local hasDragonCurseRemedy = player:hasKeyItem(xi.keyItem.DRAGON_CURSE_REMEDY)
     local stalkerQuest = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar('KnightStalker_Progress')
 
@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     elseif stalkerQuest == xi.questStatus.QUEST_ACCEPTED then
         if stalkerProgress == 0 then
             player:startEvent(119) -- Reminder to go to Brugaire/Ceraulian
-        elseif player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
+        elseif player:hasKeyItem(xi.keyItem.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
             if stalkerProgress == 1 then
                 player:startEvent(78) -- Reaction to challenge, go talk to Balasiel
             elseif stalkerProgress == 2 then
@@ -51,7 +51,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 60 then
-        npcUtil.giveKeyItem(player, xi.ki.DRAGON_CURSE_REMEDY)
+        npcUtil.giveKeyItem(player, xi.keyItem.DRAGON_CURSE_REMEDY)
     elseif csid == 121 then
         if option == 1 then
             player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)

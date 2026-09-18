@@ -44,7 +44,7 @@ local triggerPatch = function(player, npc)
 
     -- Dont have KI have not picked or planted at patch
     if
-        not player:hasKeyItem(xi.ki.SCOURSHROOM) and
+        not player:hasKeyItem(xi.keyItem.SCOURSHROOM) and
         mushroomVar == patchStage.NONE
     then
         return quest:progressEvent(14)
@@ -55,7 +55,7 @@ local triggerPatch = function(player, npc)
 
     -- Section Planting if have KI and has not yet been touched
     elseif
-        player:hasKeyItem(xi.ki.SCOURSHROOM) and
+        player:hasKeyItem(xi.keyItem.SCOURSHROOM) and
         mushroomVar == patchStage.NONE
     then
         return quest:progressEvent(19)
@@ -85,7 +85,7 @@ local triggerPatch = function(player, npc)
 
     -- player has KI and has not been harvested already
     elseif
-        player:hasKeyItem(xi.ki.SCOURSHROOM) and
+        player:hasKeyItem(xi.keyItem.SCOURSHROOM) and
         mushroomVar == patchStage.NONE
     then
         return quest:progressEvent(16)
@@ -106,7 +106,7 @@ end
 quest.reward =
 {
     item    = xi.item.IMPERIAL_MYTHRIL_PIECE,
-    keyItem = xi.ki.CS_WILDCAT_BADGE,
+    keyItem = xi.keyItem.CS_WILDCAT_BADGE,
     title   = xi.title.CHIEF_SERGEANT,
 }
 
@@ -213,7 +213,7 @@ quest.sections =
                     local mushroomPatchOffset = npc:getID() - aydeewaID.npc.MUSHROOM_PATCH
 
                     quest:setVar(player, 'MPatch'..mushroomPatchOffset, patchStage.HARVESTED)
-                    player:addKeyItem(xi.ki.SCOURSHROOM)
+                    player:addKeyItem(xi.keyItem.SCOURSHROOM)
                 end,
 
                 [19] = function(player, csid, option, npc)
@@ -223,7 +223,7 @@ quest.sections =
                         quest:setVar(player, 'MPatch'..mushroomPatchOffset, patchStage.PLANTED)
                         quest:setVar(player, 'MPatch_Time'..mushroomPatchOffset, VanadielUniqueDay() + 1)
                         player:needToZone(true)
-                        player:delKeyItem(xi.ki.SCOURSHROOM)
+                        player:delKeyItem(xi.keyItem.SCOURSHROOM)
                     end
                 end,
 
@@ -281,7 +281,7 @@ quest.sections =
 
                             player:setCharVar('AssaultPromotion', 0)
                             player:messageSpecial(whitegateID.text.PROMOTION_CHIEF_SERGEANT)
-                            player:delKeyItem(xi.ki.SCOURSHROOM)
+                            player:delKeyItem(xi.keyItem.SCOURSHROOM)
                         end
                     end
                 end,

@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_C
 
 mission.reward =
 {
-    keyItem     = xi.ki.PRISMATIC_FRAGMENT,
+    keyItem     = xi.keyItem.PRISMATIC_FRAGMENT,
     title       = xi.title.LIGHTWEAVER,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER },
 }
@@ -68,63 +68,63 @@ mission.sections =
             ['Pedestal_of_Darkness'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.DARK_FRAGMENT, 2)
+                    return handleActiveOnTrigger(player, xi.keyItem.DARK_FRAGMENT, 2)
                 end,
             },
 
             ['Pedestal_of_Earth'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.EARTH_FRAGMENT, 4)
+                    return handleActiveOnTrigger(player, xi.keyItem.EARTH_FRAGMENT, 4)
                 end,
             },
 
             ['Pedestal_of_Fire'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.FIRE_FRAGMENT, 1)
+                    return handleActiveOnTrigger(player, xi.keyItem.FIRE_FRAGMENT, 1)
                 end,
             },
 
             ['Pedestal_of_Ice'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.ICE_FRAGMENT, 8)
+                    return handleActiveOnTrigger(player, xi.keyItem.ICE_FRAGMENT, 8)
                 end,
             },
 
             ['Pedestal_of_Light'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.LIGHT_FRAGMENT, 16)
+                    return handleActiveOnTrigger(player, xi.keyItem.LIGHT_FRAGMENT, 16)
                 end,
             },
 
             ['Pedestal_of_Lightning'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.LIGHTNING_FRAGMENT, 32)
+                    return handleActiveOnTrigger(player, xi.keyItem.LIGHTNING_FRAGMENT, 32)
                 end,
             },
 
             ['Pedestal_of_Water'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.WATER_FRAGMENT, 64)
+                    return handleActiveOnTrigger(player, xi.keyItem.WATER_FRAGMENT, 64)
                 end,
             },
 
             ['Pedestal_of_Wind'] =
             {
                 onTrigger = function(player, npc)
-                    return handleActiveOnTrigger(player, xi.ki.WIND_FRAGMENT, 128)
+                    return handleActiveOnTrigger(player, xi.keyItem.WIND_FRAGMENT, 128)
                 end,
             },
 
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    for fragment = xi.ki.FIRE_FRAGMENT, xi.ki.DARK_FRAGMENT do
+                    for fragment = xi.keyItem.FIRE_FRAGMENT, xi.keyItem.DARK_FRAGMENT do
                         player:delKeyItem(fragment)
                     end
 
@@ -142,14 +142,14 @@ mission.sections =
 
         [xi.zone.CHAMBER_OF_ORACLES] =
         {
-            ['Pedestal_of_Darkness']  = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.DARK_FRAGMENT),
-            ['Pedestal_of_Earth']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.EARTH_FRAGMENT),
-            ['Pedestal_of_Fire']      = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.FIRE_FRAGMENT),
-            ['Pedestal_of_Ice']       = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.ICE_FRAGMENT),
-            ['Pedestal_of_Light']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.LIGHT_FRAGMENT),
-            ['Pedestal_of_Lightning'] = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.LIGHTNING_FRAGMENT),
-            ['Pedestal_of_Water']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.WATER_FRAGMENT),
-            ['Pedestal_of_Wind']      = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.ki.WIND_FRAGMENT),
+            ['Pedestal_of_Darkness']  = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.DARK_FRAGMENT),
+            ['Pedestal_of_Earth']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.EARTH_FRAGMENT),
+            ['Pedestal_of_Fire']      = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.FIRE_FRAGMENT),
+            ['Pedestal_of_Ice']       = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.ICE_FRAGMENT),
+            ['Pedestal_of_Light']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.LIGHT_FRAGMENT),
+            ['Pedestal_of_Lightning'] = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.LIGHTNING_FRAGMENT),
+            ['Pedestal_of_Water']     = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.WATER_FRAGMENT),
+            ['Pedestal_of_Wind']      = mission:messageSpecial(oraclesID.text.HAS_LOST_ITS_POWER, xi.keyItem.WIND_FRAGMENT),
         },
     },
 }

@@ -97,7 +97,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc)
     -- Reisenjima only.
     if zoneId == xi.zone.REISENJIMA then
         -- Scintillating Rhapsody. Unlocks Portal #8 and #10.
-        if player:hasKeyItem(xi.ki.SCINTILLATING_RHAPSODY) then
+        if player:hasKeyItem(xi.keyItem.SCINTILLATING_RHAPSODY) then
             lockValue           = lockValue + 4
             zonePortalsUnlocked = zonePortalsUnlocked + 1
         end

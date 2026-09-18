@@ -11,24 +11,24 @@ local entity = {}
 
 local optionToKI =
 {
-    [ 1] = xi.ki.CRIMSON_KEY,
-    [ 2] = xi.ki.VIRIDIAN_KEY,
-    [ 3] = xi.ki.AMBER_KEY,
-    [ 4] = xi.ki.AZURE_KEY,
-    [ 5] = xi.ki.IVORY_KEY,
-    [ 6] = xi.ki.EBON_KEY,
-    [ 8] = xi.ki.WHITE_CORAL_KEY,
-    [ 9] = xi.ki.BLUE_CORAL_KEY,
-    [10] = xi.ki.PEACH_CORAL_KEY,
-    [11] = xi.ki.BLACK_CORAL_KEY,
-    [12] = xi.ki.RED_CORAL_KEY,
-    [13] = xi.ki.ANGEL_SKIN_KEY,
-    [15] = xi.ki.MOOGLE_KEY,
-    [16] = xi.ki.BIRD_KEY,
-    [17] = xi.ki.CACTUAR_KEY,
-    [18] = xi.ki.BOMB_KEY,
-    [19] = xi.ki.CHOCOBO_KEY,
-    [20] = xi.ki.TONBERRY_KEY,
+    [ 1] = xi.keyItem.CRIMSON_KEY,
+    [ 2] = xi.keyItem.VIRIDIAN_KEY,
+    [ 3] = xi.keyItem.AMBER_KEY,
+    [ 4] = xi.keyItem.AZURE_KEY,
+    [ 5] = xi.keyItem.IVORY_KEY,
+    [ 6] = xi.keyItem.EBON_KEY,
+    [ 8] = xi.keyItem.WHITE_CORAL_KEY,
+    [ 9] = xi.keyItem.BLUE_CORAL_KEY,
+    [10] = xi.keyItem.PEACH_CORAL_KEY,
+    [11] = xi.keyItem.BLACK_CORAL_KEY,
+    [12] = xi.keyItem.RED_CORAL_KEY,
+    [13] = xi.keyItem.ANGEL_SKIN_KEY,
+    [15] = xi.keyItem.MOOGLE_KEY,
+    [16] = xi.keyItem.BIRD_KEY,
+    [17] = xi.keyItem.CACTUAR_KEY,
+    [18] = xi.keyItem.BOMB_KEY,
+    [19] = xi.keyItem.CHOCOBO_KEY,
+    [20] = xi.keyItem.TONBERRY_KEY,
 }
 
 -- No good data on augments.  Just pulled from each key on: https://ffxiclopedia.fandom.com/wiki/Treasure_Coffer_(Tenshodo)
@@ -37,7 +37,7 @@ local optionToKI =
 -- augments that span negative and positive range are grouped into a single array of augments (not to pollute the pool of augments)
 local keyitems =
 {
-    [xi.ki.CRIMSON_KEY] =
+    [xi.keyItem.CRIMSON_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.THE_ECHO_AWAKENS,
@@ -146,7 +146,7 @@ local keyitems =
             { cutoff = 1003, itemId = xi.item.SCROLL_OF_UTSUSEMI_NI },
         },
     },
-    [xi.ki.VIRIDIAN_KEY] =
+    [xi.keyItem.VIRIDIAN_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.GATHERER_OF_LIGHT_I,
@@ -242,7 +242,7 @@ local keyitems =
             { cutoff = 1056, itemId = xi.item.TURQUOISE },
         },
     },
-    [xi.ki.AMBER_KEY] =
+    [xi.keyItem.AMBER_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.GATHERER_OF_LIGHT_II,
@@ -337,7 +337,7 @@ local keyitems =
             { cutoff = 961, itemId = xi.item.WYVERN_SKIN },
         },
     },
-    [xi.ki.AZURE_KEY] =
+    [xi.keyItem.AZURE_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II,
@@ -428,7 +428,7 @@ local keyitems =
             { cutoff = 960, itemId = xi.item.HANDFUL_OF_WYVERN_SCALES },
         },
     },
-    [xi.ki.IVORY_KEY] =
+    [xi.keyItem.IVORY_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III,
@@ -554,7 +554,7 @@ local keyitems =
             { cutoff = 1172, itemId = xi.item.VILE_ELIXIR },
         },
     },
-    [xi.ki.EBON_KEY] =
+    [xi.keyItem.EBON_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.ODE_OF_LIFE_BESTOWING,
@@ -690,13 +690,13 @@ local keyitems =
             { cutoff = 997, itemId = xi.item.SCROLL_OF_RAISE_III },
         },
     },
-    [xi.ki.PRISMATIC_KEY] =
+    [xi.keyItem.PRISMATIC_KEY] =
     {
         expansion = xi.mission.log_id.ACP,
         mission = xi.mission.id.acp.ODE_OF_LIFE_BESTOWING,
         repeatable = false,
     },
-    [xi.ki.WHITE_CORAL_KEY] =
+    [xi.keyItem.WHITE_CORAL_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP,
@@ -783,7 +783,7 @@ local keyitems =
             { cutoff = 1031, itemId = xi.item.SCROLL_OF_ERASE },
         },
     },
-    [xi.ki.BLUE_CORAL_KEY] =
+    [xi.keyItem.BLUE_CORAL_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE,
@@ -861,7 +861,7 @@ local keyitems =
             { cutoff = 1002, itemId = xi.item.TURQUOISE },
         },
     },
-    [xi.ki.PEACH_CORAL_KEY] =
+    [xi.keyItem.PEACH_CORAL_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE,
@@ -949,7 +949,7 @@ local keyitems =
             { cutoff = 1103, itemId = xi.item.WYVERN_SKIN },
         },
     },
-    [xi.ki.BLACK_CORAL_KEY] =
+    [xi.keyItem.BLACK_CORAL_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY,
@@ -1032,7 +1032,7 @@ local keyitems =
             { cutoff = 1015, itemId = xi.item.ZIRCON },
         },
     },
-    [xi.ki.RED_CORAL_KEY] =
+    [xi.keyItem.RED_CORAL_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS,
@@ -1116,7 +1116,7 @@ local keyitems =
             { cutoff = 1017, itemId = xi.item.SERVING_OF_YELLOW_CURRY },
         },
     },
-    [xi.ki.ANGEL_SKIN_KEY] =
+    [xi.keyItem.ANGEL_SKIN_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.SMASH_A_MALEVOLENT_MENACE,
@@ -1205,13 +1205,13 @@ local keyitems =
             { cutoff = 1047, itemId = xi.item.SCROLL_OF_RAISE_III },
         },
     },
-    [xi.ki.OXBLOOD_KEY] =
+    [xi.keyItem.OXBLOOD_KEY] =
     {
         expansion = xi.mission.log_id.AMK,
         mission = xi.mission.id.amk.SMASH_A_MALEVOLENT_MENACE,
         repeatable = false,
     },
-    [xi.ki.MOOGLE_KEY] =
+    [xi.keyItem.MOOGLE_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD,
@@ -1253,7 +1253,7 @@ local keyitems =
             { cutoff = 1100, itemId = xi.item.SILVER_INGOT },
         }
     },
-    [xi.ki.BIRD_KEY] =
+    [xi.keyItem.BIRD_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
@@ -1328,7 +1328,7 @@ local keyitems =
             { cutoff = 972, itemId = xi.item.PURPLE_ROCK },
         }
     },
-    [xi.ki.CACTUAR_KEY] =
+    [xi.keyItem.CACTUAR_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_II,
@@ -1402,7 +1402,7 @@ local keyitems =
             { cutoff = 935, itemId = xi.item.RAM_SKIN },
         }
     },
-    [xi.ki.BOMB_KEY] =
+    [xi.keyItem.BOMB_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.SHANTOTTO_IN_CHAINS,
@@ -1461,7 +1461,7 @@ local keyitems =
             { cutoff = 901, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
         },
     },
-    [xi.ki.CHOCOBO_KEY] =
+    [xi.keyItem.CHOCOBO_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.BATTARU_ROYALE,
@@ -1538,7 +1538,7 @@ local keyitems =
             { cutoff = 1186, itemId = xi.item.PHOENIX_FEATHER },
         },
     },
-    [xi.ki.TONBERRY_KEY] =
+    [xi.keyItem.TONBERRY_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.PROJECT_SHANTOTTOFICATION,
@@ -1590,7 +1590,7 @@ local keyitems =
             { cutoff = 1082, itemId = xi.item.VILE_ELIXIR },
         },
     },
-    [xi.ki.BEHEMOTH_KEY] =
+    [xi.keyItem.BEHEMOTH_KEY] =
     {
         expansion = xi.mission.log_id.ASA,
         mission = xi.mission.id.asa.AN_UNEASY_PEACE,
@@ -1782,7 +1782,7 @@ local function givePrize(player, ki)
     end
 end
 
-local scenarioKeys = { xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY }
+local scenarioKeys = { xi.keyItem.PRISMATIC_KEY, xi.keyItem.OXBLOOD_KEY, xi.keyItem.BEHEMOTH_KEY }
 
 local function scenarioArmor(player, option, giveToPlayer)
     local aug2 = bit.band(bit.rshift(option, 16), 31) -- 5 bits for 2nd selected augment
@@ -1849,35 +1849,35 @@ local argumentKeyItems =
 {
     [1] =
     {
-        xi.ki.CRIMSON_KEY,
-        xi.ki.VIRIDIAN_KEY,
-        xi.ki.AMBER_KEY,
-        xi.ki.AZURE_KEY,
-        xi.ki.IVORY_KEY,
-        xi.ki.EBON_KEY,
-        xi.ki.PRISMATIC_KEY,
+        xi.keyItem.CRIMSON_KEY,
+        xi.keyItem.VIRIDIAN_KEY,
+        xi.keyItem.AMBER_KEY,
+        xi.keyItem.AZURE_KEY,
+        xi.keyItem.IVORY_KEY,
+        xi.keyItem.EBON_KEY,
+        xi.keyItem.PRISMATIC_KEY,
     },
 
     [2] =
     {
-        xi.ki.WHITE_CORAL_KEY,
-        xi.ki.BLUE_CORAL_KEY,
-        xi.ki.PEACH_CORAL_KEY,
-        xi.ki.BLACK_CORAL_KEY,
-        xi.ki.RED_CORAL_KEY,
-        xi.ki.ANGEL_SKIN_KEY,
-        xi.ki.OXBLOOD_KEY,
+        xi.keyItem.WHITE_CORAL_KEY,
+        xi.keyItem.BLUE_CORAL_KEY,
+        xi.keyItem.PEACH_CORAL_KEY,
+        xi.keyItem.BLACK_CORAL_KEY,
+        xi.keyItem.RED_CORAL_KEY,
+        xi.keyItem.ANGEL_SKIN_KEY,
+        xi.keyItem.OXBLOOD_KEY,
     },
 
     [3] =
     {
-        xi.ki.MOOGLE_KEY,
-        xi.ki.BIRD_KEY,
-        xi.ki.CACTUAR_KEY,
-        xi.ki.BOMB_KEY,
-        xi.ki.CHOCOBO_KEY,
-        xi.ki.TONBERRY_KEY,
-        xi.ki.BEHEMOTH_KEY,
+        xi.keyItem.MOOGLE_KEY,
+        xi.keyItem.BIRD_KEY,
+        xi.keyItem.CACTUAR_KEY,
+        xi.keyItem.BOMB_KEY,
+        xi.keyItem.CHOCOBO_KEY,
+        xi.keyItem.TONBERRY_KEY,
+        xi.keyItem.BEHEMOTH_KEY,
     },
 }
 

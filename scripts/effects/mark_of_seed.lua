@@ -30,8 +30,8 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     if
-        not target:hasKeyItem(xi.ki.MARK_OF_SEED) and
-        not target:hasKeyItem(xi.ki.AZURE_KEY)
+        not target:hasKeyItem(xi.keyItem.MARK_OF_SEED) and
+        not target:hasKeyItem(xi.keyItem.AZURE_KEY)
     then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end

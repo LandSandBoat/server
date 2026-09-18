@@ -17,7 +17,7 @@ local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.T
 
 mission.reward =
 {
-    keyItem    = xi.ki.BLANK_BOOK_OF_THE_GODS,
+    keyItem    = xi.keyItem.BLANK_BOOK_OF_THE_GODS,
     rankPoints = 700,
 }
 
@@ -112,9 +112,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(715, 0, xi.ki.OPTISTERY_RING)
+                        return mission:progressEvent(715, 0, xi.keyItem.OPTISTERY_RING)
                     elseif missionStatus == 1 then
-                        return mission:event(716, 0, xi.ki.OPTISTERY_RING)
+                        return mission:event(716, 0, xi.keyItem.OPTISTERY_RING)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(724)
                     end
@@ -124,13 +124,13 @@ mission.sections =
             onEventFinish =
             {
                 [715] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING)
+                    npcUtil.giveKeyItem(player, xi.keyItem.OPTISTERY_RING)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
 
                 [724] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.OPTISTERY_RING)
+                        player:delKeyItem(xi.keyItem.OPTISTERY_RING)
                     end
                 end
             },
@@ -181,7 +181,7 @@ mission.sections =
                         player:getCurrentMission(mission.areaId) == mission.missionId and
                         player:getMissionStatus(mission.areaId) == 1
                     then
-                        return mission:progressEvent(69, 0, xi.ki.OPTISTERY_RING)
+                        return mission:progressEvent(69, 0, xi.keyItem.OPTISTERY_RING)
                     end
                 end,
             },

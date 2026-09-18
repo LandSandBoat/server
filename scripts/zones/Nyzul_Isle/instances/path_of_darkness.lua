@@ -9,7 +9,7 @@ local instanceObject = {}
 -- Requirements for the first player registering the instance
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and
-        player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) and
+        player:hasKeyItem(xi.keyItem.NYZUL_ISLE_ROUTE) and
         player:getMissionStatus(xi.mission.log_id.TOAU) == 1
 end
 
@@ -44,9 +44,9 @@ instanceObject.afterInstanceRegister = function(player)
     -- but moving here from that reference.
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
-    if player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) then
-        player:delKeyItem(xi.ki.NYZUL_ISLE_ROUTE)
-        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.NYZUL_ISLE_ROUTE)
+    if player:hasKeyItem(xi.keyItem.NYZUL_ISLE_ROUTE) then
+        player:delKeyItem(xi.keyItem.NYZUL_ISLE_ROUTE)
+        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.keyItem.NYZUL_ISLE_ROUTE)
     end
 
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)

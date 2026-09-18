@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MARTIAL_MASTERY)
 
 quest.reward =
 {
-    keyItem = xi.ki.HEART_OF_THE_BUSHIN,
+    keyItem = xi.keyItem.HEART_OF_THE_BUSHIN,
     title = xi.title.BUSHIN_RYU_INHERITOR,
 }
 

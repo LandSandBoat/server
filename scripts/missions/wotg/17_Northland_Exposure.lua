@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.NORTHLAND
 
 mission.reward =
 {
-    keyItem     = xi.ki.SHADOW_BUG,
+    keyItem     = xi.keyItem.SHADOW_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.TRAITOR_IN_THE_MIDST },
 }
 

@@ -38,7 +38,7 @@ quest.sections =
             onEventFinish =
             {
                 [576] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_X)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_SHIKAREE_X)
                     player:setCharVar('ShikareeBattleWait', NextConquestTally())   -- Player can only get a new letter once per conquest reset.
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -77,7 +77,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('ShikareeBattleWait') < NextConquestTally() and
-                        not player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+                        not player:hasKeyItem(xi.keyItem.LETTER_FROM_SHIKAREE_X)
                     then
                         return quest:progressEvent(577) -- Recieve a subsequent letter
                     end
@@ -87,7 +87,7 @@ quest.sections =
             onEventFinish =
             {
                 [577] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_X)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_SHIKAREE_X)
                     player:setCharVar('ShikareeBattleWait', NextConquestTally())   -- Player can only get a new letter once per conquest reset.
                 end,
             },

@@ -8,7 +8,7 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
-        player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
+        player:hasKeyItem(xi.keyItem.MYTHRIL_MIRROR) and
         player:getMissionStatus(xi.mission.log_id.TOAU) == 1
 end
 
@@ -36,7 +36,7 @@ instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 
-    player:delKeyItem(xi.ki.MYTHRIL_MIRROR)
+    player:delKeyItem(xi.keyItem.MYTHRIL_MIRROR)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)

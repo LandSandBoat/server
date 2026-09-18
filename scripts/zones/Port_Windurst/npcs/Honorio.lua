@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) and player:getGil() >= 200 then
+    if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) and player:getGil() >= 200 then
         player:startEvent(181, 0, 8, 0, 0, 0, 0, 0, 200)
     else
         player:startEvent(183, 0, 8)

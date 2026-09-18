@@ -21,7 +21,7 @@ mission.reward =
 {
     rank    = 3,
     gil     = 3000,
-    keyItem = xi.ki.ADVENTURERS_CERTIFICATE,
+    keyItem = xi.keyItem.ADVENTURERS_CERTIFICATE,
     title   = xi.title.CERTIFIED_ADVENTURER,
 }
 
@@ -111,12 +111,12 @@ mission.sections =
                         if xi.settings.main.ENABLE_TRUST_QUESTS == 1 then
                             local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
 
-                            return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST, 0, 0, 0, needsSemihTrust)
+                            return mission:progressEvent(95, 0, 0, 0, xi.keyItem.LETTER_TO_THE_CONSULS_WINDURST, 0, 0, 0, needsSemihTrust)
                         else
-                            return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+                            return mission:progressEvent(95, 0, 0, 0, xi.keyItem.LETTER_TO_THE_CONSULS_WINDURST)
                         end
                     elseif missionStatus == 11 then
-                        return mission:progressEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
+                        return mission:progressEvent(101, 0, 0, xi.keyItem.ADVENTURERS_CERTIFICATE)
                     -- Kupipi alternates two lines. The toggle advances in onEventFinish.
                     elseif player:getLocalVar('KupipiRepeatLine') == 0 then
                         return mission:progressEvent(97)
@@ -130,7 +130,7 @@ mission.sections =
             {
                 [95] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_TO_THE_CONSULS_WINDURST)
 
                     if
                         xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
@@ -152,7 +152,7 @@ mission.sections =
 
                 [101] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.KINDRED_REPORT)
+                        player:delKeyItem(xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },
@@ -234,7 +234,7 @@ mission.sections =
                 [256] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
             },
@@ -283,7 +283,7 @@ mission.sections =
                 [547] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+                    player:delKeyItem(xi.keyItem.LETTER_TO_THE_CONSULS_WINDURST)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
 

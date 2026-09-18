@@ -57,6 +57,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         GIANT_HIGH_RANGER     = GetFirstID('Giant_High_Ranger'),
         GIANT_MONK            = GetFirstID('Giant_Monk'),
         GIANT_WARRIOR         = GetFirstID('Giant_Warrior'),
+        GOBLIN_BOUNTY_HUNTER  = GetFirstID('Goblin_Bounty_Hunter'),
         HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
         HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),
         HOBGOBLIN_DARK_KNIGHT = GetFirstID('Hobgoblin_Dark_Knight'),

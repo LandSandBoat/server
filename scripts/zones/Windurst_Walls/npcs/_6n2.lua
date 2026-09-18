@@ -39,7 +39,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- CLASS REUNION
     if csid == 413 then
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-        npcUtil.giveKeyItem(player, xi.ki.CARBUNCLES_TEAR)
+        npcUtil.giveKeyItem(player, xi.keyItem.CARBUNCLES_TEAR)
         player:setCharVar('ClassReunionProgress', 1)
 
     -- CARBUNCLE DEBACLE

@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.UNDERSEA_
 
 mission.reward =
 {
-    keyItem     = xi.ki.ASTRAL_COMPASS,
+    keyItem     = xi.keyItem.ASTRAL_COMPASS,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.ASTRAL_WAVES },
 }
 

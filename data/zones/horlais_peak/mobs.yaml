@@ -572,6 +572,7 @@ templates:
     type:          [notorious, battlefield]
     skill_list_id: 702
     attributes:
+      speed: 60
       combat:
         skill: scythe
         delay: 210
@@ -911,7 +912,8 @@ templates:
       combat:
         skill: staff
         delay: 480
-      jobs: [blm, none]
+      jobs:  [blm, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -936,7 +938,8 @@ templates:
       combat:
         skill: archery
         delay: 480
-      jobs: [rng, none]
+      jobs:  [rng, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -960,7 +963,8 @@ templates:
       combat:
         skill: great_axe
         delay: 480
-      jobs: [war, none]
+      jobs:  [war, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -1075,6 +1079,7 @@ templates:
     spell_list_id: 71
     skill_list_id: 190
     attributes:
+      speed: 120
       combat:
         skill: scythe
         delay: 210

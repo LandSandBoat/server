@@ -43,7 +43,7 @@ local jewelTimer
 jewelTimer = function(player)
     if
         not player or
-        not player:hasKeyItem(xi.ki.MIMEO_JEWEL)
+        not player:hasKeyItem(xi.keyItem.MIMEO_JEWEL)
     then
         return
     end
@@ -52,15 +52,15 @@ jewelTimer = function(player)
     if secondsRemaining <= 0 then
         -- There are some conditions that can instantly break the jewel.  Short-circuit out
         -- here and display the final message should that occur.
-        player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
-        player:delKeyItem(xi.ki.MIMEO_JEWEL)
+        player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_JEWEL)
+        player:delKeyItem(xi.keyItem.MIMEO_JEWEL)
     else
         local messageOffset = mission:getLocalVar(player, 'Option')
         local nextMessageTime = 30 - (messageOffset * 6)
         local minutesRemaining = secondsRemaining / 60
 
         if minutesRemaining <= nextMessageTime then
-            player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + messageOffset - 1, xi.ki.MIMEO_JEWEL)
+            player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + messageOffset - 1, xi.keyItem.MIMEO_JEWEL)
             mission:setLocalVar(player, 'Option', messageOffset + 1)
         end
 
@@ -206,7 +206,7 @@ mission.sections =
                     if missionStatus == 5 then
                         return mission:progressEvent(874)
                     elseif missionStatus == 6 then
-                        return mission:event(879, 0, xi.ki.CRACKED_MIMEO_MIRROR):importantEvent()
+                        return mission:event(879, 0, xi.keyItem.CRACKED_MIMEO_MIRROR):importantEvent()
                     end
                 end,
             },
@@ -271,7 +271,7 @@ mission.sections =
                 end,
 
                 [874] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MIMEO_MIRROR)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CRACKED_MIMEO_MIRROR)
                     player:setMissionStatus(mission.areaId, 6, xi.mission.status.COP.WINDURST)
                 end,
 
@@ -293,12 +293,12 @@ mission.sections =
                     elseif missionStatus == 3 then
                         return mission:event(474):importantEvent()
                     elseif missionStatus == 6 then
-                        return mission:progressEvent(470, 0, xi.ki.MIMEO_FEATHER, xi.ki.CRACKED_MIMEO_MIRROR, xi.ki.MIMEO_JEWEL)
+                        return mission:progressEvent(470, 0, xi.keyItem.MIMEO_FEATHER, xi.keyItem.CRACKED_MIMEO_MIRROR, xi.keyItem.MIMEO_JEWEL)
                     elseif missionStatus == 8 then
-                        if player:hasKeyItem(xi.ki.MIMEO_FEATHER) then
+                        if player:hasKeyItem(xi.keyItem.MIMEO_FEATHER) then
                             return mission:progressEvent(471)
                         else
-                            return mission:event(476, 0, xi.ki.MIMEO_FEATHER, 0, xi.ki.MIMEO_JEWEL):importantEvent()
+                            return mission:event(476, 0, xi.keyItem.MIMEO_FEATHER, 0, xi.keyItem.MIMEO_JEWEL):importantEvent()
                         end
                     elseif missionStatus == 9 then
                         return mission:event(477):importantEvent()
@@ -317,14 +317,14 @@ mission.sections =
                 end,
 
                 [470] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CRACKED_MIMEO_MIRROR)
+                    player:delKeyItem(xi.keyItem.CRACKED_MIMEO_MIRROR)
                     player:setMissionStatus(mission.areaId, 8, xi.mission.status.COP.WINDURST)
                 end,
 
                 [471] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MIMEO_FEATHER)
-                    player:delKeyItem(xi.ki.SECOND_MIMEO_FEATHER)
-                    player:delKeyItem(xi.ki.THIRD_MIMEO_FEATHER)
+                    player:delKeyItem(xi.keyItem.MIMEO_FEATHER)
+                    player:delKeyItem(xi.keyItem.SECOND_MIMEO_FEATHER)
+                    player:delKeyItem(xi.keyItem.THIRD_MIMEO_FEATHER)
 
                     player:setMissionStatus(mission.areaId, 9, xi.mission.status.COP.WINDURST)
                 end,
@@ -363,7 +363,7 @@ mission.sections =
             ['Cradle_of_Rebirth'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
+                    if player:hasKeyItem(xi.keyItem.MIMEO_JEWEL) then
                         local animationNpc = GetNPCByID(npc:getID() + 1)
                         if animationNpc then
                             animationNpc:entityAnimationPacket('krtu')
@@ -403,9 +403,9 @@ mission.sections =
                                 return mission:noAction()
                             elseif
                                 lioumereStatus == 1 and
-                                not player:hasKeyItem(xi.ki.MIMEO_JEWEL)
+                                not player:hasKeyItem(xi.keyItem.MIMEO_JEWEL)
                             then
-                                npcUtil.giveKeyItem(player, xi.ki.MIMEO_JEWEL)
+                                npcUtil.giveKeyItem(player, xi.keyItem.MIMEO_JEWEL)
                                 mission:setLocalVar(player, 'Option', 0)
                                 mission:setLocalVar(player, 'Timer', GetSystemTime() + 30 * 60)
                                 jewelTimer(player)
@@ -419,20 +419,20 @@ mission.sections =
             },
 
             onZoneOut = function(player)
-                if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
-                    player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
-                    player:delKeyItem(xi.ki.MIMEO_JEWEL)
+                if player:hasKeyItem(xi.keyItem.MIMEO_JEWEL) then
+                    player:messageSpecial(attohwaChasmID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_JEWEL)
+                    player:delKeyItem(xi.keyItem.MIMEO_JEWEL)
                 end
             end,
 
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MIMEO_JEWEL)
+                    player:delKeyItem(xi.keyItem.MIMEO_JEWEL)
 
-                    npcUtil.giveKeyItem(player, xi.ki.MIMEO_FEATHER)
-                    npcUtil.giveKeyItem(player, xi.ki.SECOND_MIMEO_FEATHER)
-                    npcUtil.giveKeyItem(player, xi.ki.THIRD_MIMEO_FEATHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MIMEO_FEATHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SECOND_MIMEO_FEATHER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.THIRD_MIMEO_FEATHER)
                 end,
             },
         },

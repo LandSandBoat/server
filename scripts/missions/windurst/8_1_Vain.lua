@@ -117,7 +117,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(752, 0, xi.ki.AURASTERY_RING)
+                        return mission:progressEvent(752, 0, xi.keyItem.AURASTERY_RING)
                     elseif missionStatus <= 3 then
                         return mission:event(753)
                     elseif missionStatus == 4 then
@@ -152,13 +152,13 @@ mission.sections =
             {
                 [752] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    npcUtil.giveKeyItem(player, xi.ki.STAR_SEEKER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STAR_SEEKER)
                     player:addTitle(xi.title.FUGITIVE_MINISTER_BOUNTY_HUNTER)
                 end,
 
                 [758] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
+                        player:delKeyItem(xi.keyItem.MAGIC_DRAINED_STAR_SEEKER)
                     end
                 end,
             },
@@ -242,7 +242,7 @@ mission.sections =
                     if
                         npcUtil.tradeMatches(trade, { { xi.item.CURSE_WAND, 1 } }) and
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
+                        player:hasKeyItem(xi.keyItem.MAGIC_DRAINED_STAR_SEEKER)
                     then
                         return mission:progressCutscene(120)
                     end
@@ -252,15 +252,15 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 2 then
-                        if player:hasKeyItem(xi.ki.STAR_SEEKER) then
-                            return mission:progressCutscene(118, 0, xi.item.CURSE_WAND, xi.ki.STAR_SEEKER)
+                        if player:hasKeyItem(xi.keyItem.STAR_SEEKER) then
+                            return mission:progressCutscene(118, 0, xi.item.CURSE_WAND, xi.keyItem.STAR_SEEKER)
                         elseif
-                            player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and
+                            player:hasKeyItem(xi.keyItem.MAGIC_DRAINED_STAR_SEEKER) and
                             missionStatus == 4
                         then
                             return mission:event(121)
                         else
-                            return mission:event(119, 0, xi.item.CURSE_WAND, xi.ki.STAR_SEEKER)
+                            return mission:event(119, 0, xi.item.CURSE_WAND, xi.keyItem.STAR_SEEKER)
                         end
                     end
                 end,
@@ -269,8 +269,8 @@ mission.sections =
             onEventFinish =
             {
                 [118] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.STAR_SEEKER)
-                    npcUtil.giveKeyItem(player, xi.ki.MAGIC_DRAINED_STAR_SEEKER)
+                    player:delKeyItem(xi.keyItem.STAR_SEEKER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAGIC_DRAINED_STAR_SEEKER)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
 

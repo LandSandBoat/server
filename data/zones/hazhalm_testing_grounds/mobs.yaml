@@ -131,7 +131,7 @@ templates:
 
   Balrahn:
     id:            334
-    species:       soulflayer
+    species:       ephramadian
     type:          [notorious, battlefield]
     spell_list_id: 538
     skill_list_id: 234
@@ -337,7 +337,7 @@ templates:
 
   Brunhilde:
     id:            547
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -851,7 +851,7 @@ templates:
 
   Gerhilde:
     id:            1499
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -903,7 +903,7 @@ templates:
 
   Grimgerde:
     id:            1815
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -1145,7 +1145,7 @@ templates:
 
   Helmwige:
     id:            1927
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     spell_list_id: 4
     skill_list_id: 115
@@ -1388,6 +1388,8 @@ templates:
     species: bird
     type:    [notorious]
     attributes:
+      speed:           48
+      animation_speed: 40
       combat:
         skill: axe
       render:
@@ -1776,6 +1778,8 @@ templates:
     species: bird
     type:    [notorious]
     attributes:
+      speed:           48
+      animation_speed: 40
       combat:
         skill: axe
       render:
@@ -1981,7 +1985,7 @@ templates:
 
   Ortlinde:
     id:            3062
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     spell_list_id: 4
     skill_list_id: 115
@@ -2036,7 +2040,7 @@ templates:
 
   Rossweisse:
     id:            3394
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -2061,7 +2065,7 @@ templates:
   Rossweisse_Large:
     id:            7270
     display_name:  Rossweisse
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -2209,6 +2213,8 @@ templates:
     species: tiger
     type:    [notorious]
     attributes:
+      speed:           81
+      animation_speed: 68
       combat:
         skill: scythe
       render:
@@ -2228,7 +2234,7 @@ templates:
 
   Schwertleite:
     id:            3499
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -2277,7 +2283,7 @@ templates:
 
   Siegrune:
     id:            3622
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:
@@ -2830,7 +2836,7 @@ templates:
 
   Waltraute:
     id:            4279
-    species:       fomor
+    species:       valkyr
     type:          [called, battlefield]
     skill_list_id: 115
     attributes:

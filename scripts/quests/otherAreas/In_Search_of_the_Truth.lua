@@ -41,7 +41,7 @@ quest.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Tressia'] = quest:progressEvent(544, { [1] = xi.ki.SHADED_CRUSE }),
+            ['Tressia'] = quest:progressEvent(544, { [1] = xi.keyItem.SHADED_CRUSE }),
 
             onEventFinish =
             {
@@ -189,13 +189,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.SHADED_CRUSE) and
+                        not player:hasKeyItem(xi.keyItem.SHADED_CRUSE) and
                         quest:getVar(player, 'Option') == 0
                     then
-                        player:addKeyItem(xi.ki.SHADED_CRUSE)
+                        player:addKeyItem(xi.keyItem.SHADED_CRUSE)
                         quest:setVar(player, 'Water', 1)
-                        return quest:messageSpecial(ID.text.CRUSE_ON_THE_GROUND, xi.ki.SHADED_CRUSE)
-                    elseif player:hasKeyItem(xi.ki.SHADED_CRUSE) then
+                        return quest:messageSpecial(ID.text.CRUSE_ON_THE_GROUND, xi.keyItem.SHADED_CRUSE)
+                    elseif player:hasKeyItem(xi.keyItem.SHADED_CRUSE) then
                         return quest:message(ID.text.TRAIL_OF_WATER)
                     end
                 end,
@@ -205,7 +205,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.SHADED_CRUSE) and
+                        player:hasKeyItem(xi.keyItem.SHADED_CRUSE) and
                         quest:getVar(player, 'Water') >= 1
                     then
                         quest:setVar(player, 'Water', 2)
@@ -218,7 +218,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.SHADED_CRUSE) and
+                        player:hasKeyItem(xi.keyItem.SHADED_CRUSE) and
                         quest:getVar(player, 'Water') >= 2
                     then
                         quest:setVar(player, 'Water', 3)
@@ -231,7 +231,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.SHADED_CRUSE) and
+                        player:hasKeyItem(xi.keyItem.SHADED_CRUSE) and
                         quest:getVar(player, 'Water') >= 3
                     then
                         quest:setVar(player, 'Water', 4)
@@ -244,10 +244,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.SHADED_CRUSE) and
+                        player:hasKeyItem(xi.keyItem.SHADED_CRUSE) and
                         quest:getVar(player, 'Water') == 4
                     then
-                        return quest:progressEvent(558, { [1] = xi.ki.SHADED_CRUSE })
+                        return quest:progressEvent(558, { [1] = xi.keyItem.SHADED_CRUSE })
                     end
                 end,
             },
@@ -255,7 +255,7 @@ quest.sections =
             onEventFinish =
             {
                 [558] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SHADED_CRUSE)
+                    player:delKeyItem(xi.keyItem.SHADED_CRUSE)
                     quest:setVar(player, 'Option', 1)
                     quest:setVar(player, 'Water', 0)
                     player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_SEARCH_OF_THE_TRUTH)

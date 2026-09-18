@@ -601,7 +601,7 @@ templates:
 
   Elder_Treant:
     id:            1193
-    species:       treant
+    species:       winter_treant
     skill_list_id: 245
     attributes:
       combat:
@@ -1542,7 +1542,7 @@ templates:
 
   Mosshorn:
     id:            2753
-    species:       ram
+    species:       mosshorn
     skill_list_id: 208
     attributes:
       combat:

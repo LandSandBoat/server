@@ -231,17 +231,17 @@ local function GetBlueChestInfos(player, lightValues)
     -- Lowers the required amount of correct guesses for blue pyxides by 1
     local abyssitesAmountCorrect =
     {
-        xi.ki.EMERALD_ABYSSITE_OF_ACUMEN,
-        xi.ki.CRIMSON_ABYSSITE_OF_ACUMEN,
-        xi.ki.IVORY_ABYSSITE_OF_ACUMEN
+        xi.keyItem.EMERALD_ABYSSITE_OF_ACUMEN,
+        xi.keyItem.CRIMSON_ABYSSITE_OF_ACUMEN,
+        xi.keyItem.IVORY_ABYSSITE_OF_ACUMEN
     }
 
     -- The bearer will experience greater fortune with blue pyxides in Abyssea.
     local abyssitesExperiences =
     {
-        xi.ki.IVORY_ABYSSITE_OF_KISMET,
-        xi.ki.SCARLET_ABYSSITE_OF_KISMET,
-        xi.ki.VERMILLION_ABYSSITE_OF_KISMET
+        xi.keyItem.IVORY_ABYSSITE_OF_KISMET,
+        xi.keyItem.SCARLET_ABYSSITE_OF_KISMET,
+        xi.keyItem.VERMILLION_ABYSSITE_OF_KISMET
     }
 
     local dataAzureTiers =
@@ -327,9 +327,9 @@ local function GetRedChestInfos(player, lightValues)
     -- The bearer will experience greater fortune with blue pyxides in Abyssea.
     local abyssitesExperiences =
     {
-        xi.ki.AZURE_ABYSSITE_OF_PROSPERITY,
-        xi.ki.JADE_ABYSSITE_OF_PROSPERITY,
-        xi.ki.IVORY_ABYSSITE_OF_PROSPERITY,
+        xi.keyItem.AZURE_ABYSSITE_OF_PROSPERITY,
+        xi.keyItem.JADE_ABYSSITE_OF_PROSPERITY,
+        xi.keyItem.IVORY_ABYSSITE_OF_PROSPERITY,
     }
 
     local dataRubyTiers =
@@ -385,9 +385,9 @@ end
 local function GetGoldChestInfos(player, lightValues)
     local abyssites =
     {
-        xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY,
-        xi.ki.CRIMSON_ABYSSITE_OF_DESTINY,
-        xi.ki.IVORY_ABYSSITE_OF_DESTINY,
+        xi.keyItem.VIRIDIAN_ABYSSITE_OF_DESTINY,
+        xi.keyItem.CRIMSON_ABYSSITE_OF_DESTINY,
+        xi.keyItem.IVORY_ABYSSITE_OF_DESTINY,
     }
 
     local dataAmberTiers =

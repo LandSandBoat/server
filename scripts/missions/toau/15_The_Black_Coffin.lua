@@ -36,14 +36,14 @@ mission.sections =
             {
                 [1] = function(player, triggerArea)
                     if
-                        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) and
+                        player:hasKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN) and
                         player:getMissionStatus(mission.areaId) == 0
                     then
                         player:startEvent(8)
                         player:startEvent(34, { [7] = 1, isHidden = true })
                         return mission:progressEvent(35, { isHidden = true })
                     elseif
-                        not player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) and
+                        not player:hasKeyItem(xi.keyItem.EPHRAMADIAN_GOLD_COIN) and
                         player:getMissionStatus(mission.areaId) == 1
                     then
                         return mission:event(12):oncePerZone()

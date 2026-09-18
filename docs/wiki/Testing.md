@@ -738,13 +738,13 @@ describe('xi_test', function()
         assert(not true, 'Expected condition to be false')
 
         -- Custom CLuaBaseEntity assertions
-        player.assert:hasKI(xi.ki.BLUE_ACIDITY_TESTER)
-        player.assert.no:hasKI(xi.ki.RED_ACIDITY_TESTER)
+        player.assert:hasKI(xi.keyItem.BLUE_ACIDITY_TESTER)
+        player.assert.no:hasKI(xi.keyItem.RED_ACIDITY_TESTER)
 
         -- Different syntax to chain assertions
         player.assert
-            :hasKI(xi.ki.BLUE_ACIDITY_TESTER)
-            .no:hasKI(xi.ki.RED_ACIDITY_TESTER)
+            :hasKI(xi.keyItem.BLUE_ACIDITY_TESTER)
+            .no:hasKI(xi.keyItem.RED_ACIDITY_TESTER)
     end)
 end)
 ```

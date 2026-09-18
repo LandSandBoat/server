@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.FANGS_OF_
 
 mission.reward =
 {
-    keyItem     = xi.ki.MYTHRIL_MIRROR,
+    keyItem     = xi.keyItem.MYTHRIL_MIRROR,
     title       = xi.title.NASHMEIRAS_LOYALIST,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA },
 }

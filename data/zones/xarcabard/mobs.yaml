@@ -152,7 +152,7 @@ templates:
 
   Blizzard_Gigas:
     id:            453
-    species:       gigas
+    species:       blizzard_gigas
     skill_list_id: 128
     attributes:
       combat:

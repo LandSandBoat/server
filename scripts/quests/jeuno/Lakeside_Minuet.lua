@@ -51,7 +51,7 @@ quest.sections =
             ['Laila'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.STARDUST_PEBBLE) then
+                    if player:hasKeyItem(xi.keyItem.STARDUST_PEBBLE) then
                         return quest:progressEvent(10118)
                     else
                         return quest:progressEvent(10112)
@@ -109,8 +109,8 @@ quest.sections =
                         player:addFame(xi.fameArea.WINDURST, 7)
                         player:unlockJob(xi.job.DNC)
                         player:messageSpecial(upperJeunoID.text.UNLOCK_DANCER)
-                        player:delKeyItem(xi.ki.STARDUST_PEBBLE)
-                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_DANCER)
+                        player:delKeyItem(xi.keyItem.STARDUST_PEBBLE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.JOB_GESTURE_DANCER)
                         player:needToZone(true)
                     end
                 end,
@@ -147,7 +147,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
-                        not player:hasKeyItem(xi.ki.STARDUST_PEBBLE)
+                        not player:hasKeyItem(xi.keyItem.STARDUST_PEBBLE)
                     then
                         return quest:progressEvent(100)
                     end
@@ -157,7 +157,7 @@ quest.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.STARDUST_PEBBLE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STARDUST_PEBBLE)
                     quest:setVar(player, 'Prog', 4)
                 end,
             }

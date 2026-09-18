@@ -238,9 +238,9 @@ local function getSigilTimeStamp(player)
 end
 
 local function getSigilRank(player)
-    for keyItemId = xi.ki.MEDAL_OF_ALTANA, xi.ki.BRONZE_RIBBON_OF_SERVICE, -1 do
+    for keyItemId = xi.keyItem.MEDAL_OF_ALTANA, xi.keyItem.BRONZE_RIBBON_OF_SERVICE, -1 do
         if player:hasKeyItem(keyItemId) then
-            return 1 + keyItemId - xi.ki.BRONZE_RIBBON_OF_SERVICE
+            return 1 + keyItemId - xi.keyItem.BRONZE_RIBBON_OF_SERVICE
         end
     end
 
@@ -269,7 +269,7 @@ end
 xi.campaign.getMedalRank = function(player)
     local rank = 0
 
-    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
+    for keyItemId = xi.keyItem.BRONZE_RIBBON_OF_SERVICE, xi.keyItem.MEDAL_OF_ALTANA do
         if player:hasKeyItem(keyItemId) then
             rank = rank + 1
         else

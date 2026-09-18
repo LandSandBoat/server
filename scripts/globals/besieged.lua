@@ -116,17 +116,17 @@ end
 
 xi.besieged.badges =
 {
-    xi.ki.PSC_WILDCAT_BADGE,
-    xi.ki.PFC_WILDCAT_BADGE,
-    xi.ki.SP_WILDCAT_BADGE,
-    xi.ki.LC_WILDCAT_BADGE,
-    xi.ki.C_WILDCAT_BADGE,
-    xi.ki.S_WILDCAT_BADGE,
-    xi.ki.SM_WILDCAT_BADGE,
-    xi.ki.CS_WILDCAT_BADGE,
-    xi.ki.SL_WILDCAT_BADGE,
-    xi.ki.FL_WILDCAT_BADGE,
-    xi.ki.CAPTAIN_WILDCAT_BADGE
+    xi.keyItem.PSC_WILDCAT_BADGE,
+    xi.keyItem.PFC_WILDCAT_BADGE,
+    xi.keyItem.SP_WILDCAT_BADGE,
+    xi.keyItem.LC_WILDCAT_BADGE,
+    xi.keyItem.C_WILDCAT_BADGE,
+    xi.keyItem.S_WILDCAT_BADGE,
+    xi.keyItem.SM_WILDCAT_BADGE,
+    xi.keyItem.CS_WILDCAT_BADGE,
+    xi.keyItem.SL_WILDCAT_BADGE,
+    xi.keyItem.FL_WILDCAT_BADGE,
+    xi.keyItem.CAPTAIN_WILDCAT_BADGE
 }
 
 xi.besieged.getMercenaryRank = function(player)
@@ -145,9 +145,9 @@ end
 -- Maps sold by the sanction NPCs, indexed by their bit in the menu mask
 local sanctionMaps =
 {
-    [0] = xi.ki.MAP_OF_MAMOOK,
-    [1] = xi.ki.MAP_OF_HALVUNG,
-    [2] = xi.ki.MAP_OF_ARRAPAGO_REEF,
+    [0] = xi.keyItem.MAP_OF_MAMOOK,
+    [1] = xi.keyItem.MAP_OF_HALVUNG,
+    [2] = xi.keyItem.MAP_OF_ARRAPAGO_REEF,
 }
 
 local function getMapBitmask(player)
@@ -308,7 +308,7 @@ xi.besieged.hasAssaultOrders = function(player)
     local keyitem = 0
 
     for i = 0, 4 do
-        local ki = xi.ki.LEUJAOAM_ASSAULT_ORDERS + i
+        local ki = xi.keyItem.LEUJAOAM_ASSAULT_ORDERS + i
         if player:hasKeyItem(ki) then
             event = 120 + i
             keyitem = ki

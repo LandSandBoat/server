@@ -50,7 +50,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- Making Headlines
     if csid == 281 or csid == 283 or csid == 284 then
-        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WALLS_SCOOP)
+        npcUtil.giveKeyItem(player, xi.keyItem.WINDURST_WALLS_SCOOP)
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(player:getCharVar('QuestMakingHeadlines_var'), 2, true))
     end
 end

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
 quest.reward =
 {
-    keyItem  = xi.ki.CHOCOBO_LICENSE,
+    keyItem  = xi.keyItem.CHOCOBO_LICENSE,
     title    = xi.title.CHOCOBO_TRAINER,
 }
 

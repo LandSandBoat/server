@@ -56,7 +56,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     quest:setVar(player, 'Prog', 1)
-                    return quest:keyItem(xi.ki.LILAC_RIBBON)
+                    return quest:keyItem(xi.keyItem.LILAC_RIBBON)
                 end,
             },
         },

@@ -51,7 +51,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.STEAMING_SHEEP_INVITATION) and
+                        not player:hasKeyItem(xi.keyItem.STEAMING_SHEEP_INVITATION) and
                         npcUtil.tradeMatches(trade, { { xi.item.KING_TRUFFLE, 1 } })
                     then
                         return quest:progressEvent(135)
@@ -70,12 +70,12 @@ quest.sections =
                 [135] = function(player, csid, option, npc)
                     player:tradeComplete()
 
-                    npcUtil.giveKeyItem(player, xi.ki.STEAMING_SHEEP_INVITATION)
+                    npcUtil.giveKeyItem(player, xi.keyItem.STEAMING_SHEEP_INVITATION)
                 end,
 
                 [136] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.STEAMING_SHEEP_INVITATION)
+                        player:delKeyItem(xi.keyItem.STEAMING_SHEEP_INVITATION)
                     end
                 end,
             },
@@ -87,7 +87,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.STEAMING_SHEEP_INVITATION) and
+                        player:hasKeyItem(xi.keyItem.STEAMING_SHEEP_INVITATION) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         return quest:progressEvent(510)

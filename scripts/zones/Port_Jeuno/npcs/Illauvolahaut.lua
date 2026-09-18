@@ -9,7 +9,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local kazhamPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    local kazhamPass = player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
 
     if not kazhamPass then
         player:startEvent(35) -- without pass

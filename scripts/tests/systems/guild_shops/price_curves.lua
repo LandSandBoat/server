@@ -365,7 +365,7 @@ describe('Guild shop price curves', function()
         local player
         before_each(function()
             player = xi.test.world:spawnPlayer({ zone = xi.zone.NASHMAU })
-            player:addKeyItem(xi.ki.TENSHODO_MEMBERS_CARD)
+            player:addKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD)
             player.entities:gotoAndTrigger('Tsutsuroon')
         end)
 

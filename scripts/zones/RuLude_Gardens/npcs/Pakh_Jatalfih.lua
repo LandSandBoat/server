@@ -11,7 +11,7 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
     if pNation == xi.nation.WINDURST then
-        if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
+        if player:hasKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(57)
         else
             player:startEvent(103)

@@ -11,8 +11,8 @@ local entity = {}
 
 local wares =
 {
-    [0x0001000A] = { ki = xi.ki.LEGION_TOME_PAGE_MAXIMUS, gil = 360000 },
-    [0x0001000B] = { ki = xi.ki.LEGION_TOME_PAGE_MINIMUS, gil = 180000 },
+    [0x0001000A] = { ki = xi.keyItem.LEGION_TOME_PAGE_MAXIMUS, gil = 360000 },
+    [0x0001000B] = { ki = xi.keyItem.LEGION_TOME_PAGE_MINIMUS, gil = 180000 },
 
     [0x00000002] = { item = xi.item.GAIARDAS_RING,   lp = 1000 },
     [0x00010002] = { item = xi.item.GAUBIOUS_RING,   lp = 1000 },
@@ -55,8 +55,8 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar('LegionStatus') == 0 then
         player:startEvent(8004)
     elseif player:getCharVar('LegionStatus') == 1 then
-        local maximus = player:hasKeyItem(xi.ki.LEGION_TOME_PAGE_MAXIMUS) and 1 or 0
-        local minimus = player:hasKeyItem(xi.ki.LEGION_TOME_PAGE_MINIMUS) and 1 or 0
+        local maximus = player:hasKeyItem(xi.keyItem.LEGION_TOME_PAGE_MAXIMUS) and 1 or 0
+        local minimus = player:hasKeyItem(xi.keyItem.LEGION_TOME_PAGE_MINIMUS) and 1 or 0
 
         -- TODO: Table these and iterate
         local title =

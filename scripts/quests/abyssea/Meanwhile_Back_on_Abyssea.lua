@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.MEANWHILE_BACK_
 
 quest.reward =
 {
-    keyItem = xi.ki.ABYSSITE_OF_THE_COSMOS,
+    keyItem = xi.keyItem.ABYSSITE_OF_THE_COSMOS,
 }
 
 quest.sections =

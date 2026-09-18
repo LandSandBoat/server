@@ -53,7 +53,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:event(352)
-                    elseif player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
+                    elseif player:hasKeyItem(xi.keyItem.OLD_TIGERS_FANG) then
                         return quest:progressEvent(357)
                     end
                 end,
@@ -87,9 +87,9 @@ quest.sections =
 
                 [357] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
+                        player:delKeyItem(xi.keyItem.OLD_TIGERS_FANG)
                         player:unlockJob(xi.job.RNG)
-                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RANGER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.JOB_GESTURE_RANGER)
                         player:messageSpecial(windurstWoodsID.text.PERIH_VASHAI_DIALOG)
                         quest:setMustZone(player)
                     end
@@ -114,9 +114,9 @@ quest.sections =
 
                     if
                         quest:getVar(player, 'Timer') > GetSystemTime() and
-                        not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
+                        not player:hasKeyItem(xi.keyItem.OLD_TIGERS_FANG)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.OLD_TIGERS_FANG)
+                        npcUtil.giveKeyItem(player, xi.keyItem.OLD_TIGERS_FANG)
                         quest:setVar(player, 'Prog', 1)
                         return quest:noAction()
                     elseif

@@ -25,10 +25,10 @@ mission.reward =
 local orbKeyItems =
 {
     -- keyItem, mod, immune value, vulnerable value
-    { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT  },
-    { xi.ki.ORB_OF_CUPS,   xi.mod.IMPACT_SDT },
-    { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT },
-    { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC  },
+    { xi.keyItem.ORB_OF_SWORDS, xi.mod.SLASH_SDT  },
+    { xi.keyItem.ORB_OF_CUPS,   xi.mod.IMPACT_SDT },
+    { xi.keyItem.ORB_OF_BATONS, xi.mod.PIERCE_SDT },
+    { xi.keyItem.ORB_OF_COINS,  xi.mod.UDMGMAGIC  },
 }
 
 local beginCardianFight = function(player, npc)
@@ -102,7 +102,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 missionStatus == 0 and
-                not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
+                not player:hasKeyItem(xi.keyItem.RIPE_STARFRUIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -122,16 +122,16 @@ mission.sections =
                 -- Only need one KI orb to start fight
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.ORB_OF_SWORDS) or
-                        player:hasKeyItem(xi.ki.ORB_OF_CUPS) or
-                        player:hasKeyItem(xi.ki.ORB_OF_BATONS) or
-                        player:hasKeyItem(xi.ki.ORB_OF_COINS)
+                        player:hasKeyItem(xi.keyItem.ORB_OF_SWORDS) or
+                        player:hasKeyItem(xi.keyItem.ORB_OF_CUPS) or
+                        player:hasKeyItem(xi.keyItem.ORB_OF_BATONS) or
+                        player:hasKeyItem(xi.keyItem.ORB_OF_COINS)
                     then
                         -- Prompt to start the fight
                         return mission:progressEvent(100)
                     else
                         -- Remind that orbs are needed
-                        return mission:messageSpecial(horutotoID.text.IF_HAD_ORBS, xi.ki.ORB_OF_SWORDS, xi.ki.ORB_OF_CUPS, xi.ki.ORB_OF_BATONS, xi.ki.ORB_OF_COINS)
+                        return mission:messageSpecial(horutotoID.text.IF_HAD_ORBS, xi.keyItem.ORB_OF_SWORDS, xi.keyItem.ORB_OF_CUPS, xi.keyItem.ORB_OF_BATONS, xi.keyItem.ORB_OF_COINS)
                     end
                 end,
             },
@@ -153,7 +153,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
                 missionStatus == 0 and
-                player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and
+                player:hasKeyItem(xi.keyItem.RIPE_STARFRUIT) and
                 not player:needToZone()
         end,
 
@@ -174,7 +174,7 @@ mission.sections =
                         player:needToZone(true)
                     elseif option == 1 then -- Pay
                         player:delGil(5000)
-                        player:delKeyItem(xi.ki.RIPE_STARFRUIT)
+                        player:delKeyItem(xi.keyItem.RIPE_STARFRUIT)
                         player:setMissionStatus(xi.mission.log_id.AMK, 1)
                     end
                 end,
@@ -186,7 +186,7 @@ mission.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
+                    return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.keyItem.RIPE_STARFRUIT):setPriority(1000)
                 end,
             },
         },

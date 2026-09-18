@@ -79,7 +79,7 @@ quest.sections =
             onEventFinish =
             {
                 [66] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.WHEEL_LOCK_TRIGGER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.WHEEL_LOCK_TRIGGER)
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -99,7 +99,7 @@ quest.sections =
             onEventFinish =
             {
                 [231] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.WHEEL_LOCK_TRIGGER)
+                    player:delKeyItem(xi.keyItem.WHEEL_LOCK_TRIGGER)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },

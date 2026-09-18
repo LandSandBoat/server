@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
 
 quest.reward =
 {
-    keyItem  = xi.ki.WONDER_MAGIC_SET,
+    keyItem  = xi.keyItem.WONDER_MAGIC_SET,
     title    = xi.title.TRADER_OF_MYSTERIES,
 }
 

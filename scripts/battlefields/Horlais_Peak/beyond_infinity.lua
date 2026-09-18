@@ -22,14 +22,14 @@ local content = BattlefieldQuest:new({
 
     requiredKeyItems =
     {
-        xi.ki.SOUL_GEM_CLASP,
+        xi.keyItem.SOUL_GEM_CLASP,
         onlyInitiator = true,
         message =
         {
             horlaisID.text.SOUL_GEM_REACTS,
             {
-                xi.ki.SOUL_GEM_CLASP,
-                xi.ki.SOUL_GEM,
+                xi.keyItem.SOUL_GEM_CLASP,
+                xi.keyItem.SOUL_GEM,
             }
         },
         deleteMessage = horlaisID.text.LOST_KEYITEM,

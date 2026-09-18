@@ -57,7 +57,7 @@ quest.sections =
             onEventFinish =
             {
                 [1103] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.YE_OLDE_MANNEQUIN_CATALOGUE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.YE_OLDE_MANNEQUIN_CATALOGUE)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -83,7 +83,7 @@ quest.sections =
             onEventFinish =
             {
                 [759] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MANNEQUIN_JOINT_DIAGRAMS)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MANNEQUIN_JOINT_DIAGRAMS)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },

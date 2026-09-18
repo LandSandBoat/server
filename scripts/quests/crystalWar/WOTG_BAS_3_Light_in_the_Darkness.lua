@@ -136,7 +136,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.MINE_SHAFT_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MINE_SHAFT_KEY)
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -281,7 +281,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.MINE_SHAFT_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MINE_SHAFT_KEY)
                 end,
             },
         },

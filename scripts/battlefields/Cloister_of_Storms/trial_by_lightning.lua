@@ -12,7 +12,7 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'LP_Entrance',
     exitNpc          = 'Lightning_Protocrystal',
-    requiredKeyItems = { xi.ki.TUNING_FORK_OF_LIGHTNING },
+    requiredKeyItems = { xi.keyItem.TUNING_FORK_OF_LIGHTNING },
 
     questArea = xi.questLog.OTHER_AREAS,
     quest     = xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING,
@@ -20,7 +20,7 @@ local content = BattlefieldQuest:new({
 
 function content:onEventFinishWin(player, csid, option, npc)
     player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_STORMS)
+    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_STORMS)
 end
 
 content.groups =

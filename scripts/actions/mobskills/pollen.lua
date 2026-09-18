@@ -10,13 +10,28 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local potencyBonus = mob:isNM() and math.randomInt(0, 294) or 0
-    local potency      = (147 + potencyBonus) / 1024
-    local finalPotency = math.floor(mob:getMaxHP() * potency)
+    local params = {}
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        { tp = 1000, modifier = 147 / 1024 },
+        { tp = 2000, modifier = 147 / 1024 },
+        { tp = 3000, modifier = 147 / 1024 },
+    }
 
-    return xi.mobskills.mobHealMove(mob, finalPotency)
+    -- TODO: Is the NM heal potency random or based on fTP?
+    if mob:isNM() then
+        params.fTP =
+        {
+            { tp = 1000, modifier = math.randomInt(147, 441) / 1024 },
+            { tp = 2000, modifier = math.randomInt(147, 441) / 1024 },
+            { tp = 3000, modifier = math.randomInt(147, 441) / 1024 },
+        }
+    end
+
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

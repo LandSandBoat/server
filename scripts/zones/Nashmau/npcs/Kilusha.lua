@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local lampCost = xi.einherjar.settings.SMOLDERING_LAMP_BASE_COST -- base cost without RHAPSODY_IN_AZURE key item
 
-    if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then
         lampCost = 1000
     end
 
@@ -39,12 +39,12 @@ entity.onTrigger = function(player, npc)
     local reentryTime         = xi.einherjar.settings.EINHERJAR_REENTRY_TIME -- in hours
     local toau                = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
-    if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then
         lampCost = 1000
         reentryTime = 1
     end
 
-    if player:hasKeyItem(xi.ki.MARK_OF_THE_EINHERJAR) then -- June 2012 update added Valkyrie items
+    if player:hasKeyItem(xi.keyItem.MARK_OF_THE_EINHERJAR) then -- June 2012 update added Valkyrie items
         allowValkyrieBuying = 0
     end
 

@@ -24,7 +24,7 @@ local content = BattlefieldMission:new({
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    return not player:hasKeyItem(xi.ki.SHARD_OF_RAGE)
+    return not player:hasKeyItem(xi.keyItem.SHARD_OF_RAGE)
 end
 
 function content:onBattlefieldLoss(player, battlefield)

@@ -26,7 +26,7 @@ m:addOverride('xi.server.onServerStart', function()
         -- Copy of the base handler. A Thief in Norg!? is offered at JST midnight.
         norg.onEventFinish[156] = function(player, csid, option, npc)
             if quest:complete(player) then
-                player:delKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)
+                player:delKeyItem(xi.keyItem.FADED_YOMOTSU_HIRASAKA)
                 xi.quest.setMustZone(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
                 xi.quest.setVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Timer', JstMidnight()) -- Module change
             end

@@ -921,7 +921,7 @@ templates:
 
   Troll_Cameist:
     id:            4010
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -945,7 +945,7 @@ templates:
   Troll_Cameist_2:
     id:            4010
     display_name:  Troll_Cameist
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -975,7 +975,7 @@ templates:
   Troll_Cameist_3:
     id:            4010
     display_name:  Troll_Cameist
-    species:       troll
+    species:       light_troll
     spell_list_id: 3
     skill_list_id: 246
     attributes:
@@ -1004,7 +1004,7 @@ templates:
 
   Troll_Engraver:
     id:            4015
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1028,7 +1028,7 @@ templates:
   Troll_Engraver_2:
     id:            4015
     display_name:  Troll_Engraver
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1058,7 +1058,7 @@ templates:
   Troll_Engraver_3:
     id:            4015
     display_name:  Troll_Engraver
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1087,7 +1087,7 @@ templates:
 
   Troll_Gemologist:
     id:            4017
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -1111,7 +1111,7 @@ templates:
   Troll_Gemologist_2:
     id:            4017
     display_name:  Troll_Gemologist
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -1141,7 +1141,7 @@ templates:
   Troll_Gemologist_3:
     id:            4017
     display_name:  Troll_Gemologist
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 4
     skill_list_id: 247
     attributes:
@@ -1170,7 +1170,7 @@ templates:
 
   Troll_Ironworker:
     id:            4021
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1198,7 +1198,7 @@ templates:
   Troll_Ironworker_2:
     id:            4021
     display_name:  Troll_Ironworker
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1226,7 +1226,7 @@ templates:
   Troll_Ironworker_3:
     id:            4021
     display_name:  Troll_Ironworker
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1254,7 +1254,7 @@ templates:
   Troll_Ironworker_4:
     id:            4021
     display_name:  Troll_Ironworker
-    species:       troll
+    species:       heavy_troll
     skill_list_id: 247
     attributes:
       combat:
@@ -1281,7 +1281,7 @@ templates:
 
   Troll_Lapidarist:
     id:            4022
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -1305,7 +1305,7 @@ templates:
   Troll_Lapidarist_2:
     id:            4022
     display_name:  Troll_Lapidarist
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -1335,7 +1335,7 @@ templates:
   Troll_Lapidarist_3:
     id:            4022
     display_name:  Troll_Lapidarist
-    species:       troll
+    species:       heavy_troll
     spell_list_id: 5
     skill_list_id: 247
     attributes:
@@ -1364,7 +1364,7 @@ templates:
 
   Troll_Smelter:
     id:            4030
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1387,7 +1387,7 @@ templates:
   Troll_Smelter_2:
     id:            4030
     display_name:  Troll_Smelter
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1416,7 +1416,7 @@ templates:
   Troll_Smelter_3:
     id:            4030
     display_name:  Troll_Smelter
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1444,7 +1444,7 @@ templates:
 
   Troll_Stoneworker:
     id:            4032
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1468,7 +1468,7 @@ templates:
   Troll_Stoneworker_2:
     id:            4032
     display_name:  Troll_Stoneworker
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:
@@ -1498,7 +1498,7 @@ templates:
   Troll_Stoneworker_3:
     id:            4032
     display_name:  Troll_Stoneworker
-    species:       troll
+    species:       light_troll
     skill_list_id: 246
     attributes:
       combat:

@@ -254,26 +254,26 @@ GetSystemTime() -- PASS
 quest.reward =
 {
     xp = 5000, -- FAIL
-    ki = xi.ki.SOME_KEYITEM, -- FAIL
+    ki = xi.keyItem.SOME_KEYITEM, -- FAIL
 }
 
 mission.reward =
 {
     xp = 5000, -- FAIL
-    ki = xi.ki.SOME_KEYITEM, -- FAIL
+    ki = xi.keyItem.SOME_KEYITEM, -- FAIL
 }
 
 -- quest/mission reward table
 quest.reward =
 {
     exp = 5000, -- PASS
-    keyItem = xi.ki.SOME_KEYITEM, -- PASS
+    keyItem = xi.keyItem.SOME_KEYITEM, -- PASS
 }
 
 mission.reward =
 {
     exp = 5000, -- PASS
-    keyItem = xi.ki.SOME_KEYITEM, -- PASS
+    keyItem = xi.keyItem.SOME_KEYITEM, -- PASS
 }
 
 -- getPool magic numbers

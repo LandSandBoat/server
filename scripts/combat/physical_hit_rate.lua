@@ -172,6 +172,26 @@ local function accuracyAndEvasionToHitRate(attacker, target, acc, eva)
     return hitrate
 end
 
+-- Signet provides a static +25% evasion bonus which is untested on modifiers that are not on /checkparam.
+local function shouldApplySignetBonus(attacker, target)
+    if
+        target:hasStatusEffect(xi.effect.SIGNET) and
+        attacker:isMob() and
+        not attacker:isNM() and
+        target:isPC() and
+        target:checkDifficulty(attacker) <= xi.mobDifficulty.EVEN_MATCH and
+        target:getCurrentRegion() <= xi.region.LIMBUS
+    then
+        local playerTarget = target:getTarget() -- Fetch their auto attack target
+
+        if playerTarget and playerTarget:getID() == attacker:getID() then
+            return true
+        end
+    end
+
+    return false
+end
+
 ---@param attacker CBaseEntity
 ---@param target CBaseEntity
 ---@param bonus number
@@ -191,6 +211,11 @@ xi.combat.physicalHitRate.getPhysicalHitRate = function(attacker, target, bonus,
     end
 
     acc = acc + bonus + accBonus
+
+    if shouldApplySignetBonus(attacker, target) then
+        eva = math.floor(eva * 1.25)
+    end
+
     eva = eva + evaBonus
 
     local hitrate = accuracyAndEvasionToHitRate(attacker, target, acc, eva)
@@ -224,6 +249,12 @@ xi.combat.physicalHitRate.getRangedHitRate = function(attacker, target, bonus, i
     end
 
     acc = acc + bonus + accBonus - xi.combat.ranged.accuracyDistancePenalty(attacker, target)
+
+    -- TODO: verify this works on ranged attacks. I assume it does since the wording is "Evasion"
+    if shouldApplySignetBonus(attacker, target) then
+        eva = math.floor(eva * 1.25)
+    end
+
     eva = eva + evaBonus
 
     local hitrate = accuracyAndEvasionToHitRate(attacker, target, acc, eva)

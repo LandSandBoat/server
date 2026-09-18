@@ -27,25 +27,25 @@ local sealDoor = function(player, bitNum)
     local doors = quest:getVar(player, 'Doors')
 
     if utils.mask.getBit(doors, bitNum) then
-        return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+        return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     end
 
     local sealed = utils.mask.setBit(doors, bitNum, true)
     quest:setVar(player, 'Doors', sealed)
 
     if utils.mask.isFull(sealed, 3) then
-        player:delKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+        player:delKeyItem(xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
 
-        return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 4, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+        return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 4, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     end
 
-    return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 1, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+    return quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 1, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
 end
 
 local sealedEntrance =
 {
     onTrigger = function(player, npc)
-        if player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
+        if player:hasKeyItem(xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
             -- Sealed_Entrance_1/2/3 map to door bits 0/1/2.
             local bitNum = tonumber(string.sub(npc:getName(), -1)) - 1
 
@@ -70,7 +70,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if otherNationAccepted(player) then
                         return quest:event(122)
-                    elseif player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) then
+                    elseif player:hasKeyItem(xi.keyItem.GREEN_RECOMMENDATION_LETTER) then
                         return quest:progressEvent(103)
                     elseif quest:getVar(player, 'LetterUsed') == 1 or player:getCampaignAllegiance() > 0 then
                         -- Already spent a letter on a previous attempt, no second letter needed.
@@ -86,19 +86,19 @@ quest.sections =
                 [103] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
                         quest:setVar(player, 'LetterUsed', 1)
-                        player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
+                        player:delKeyItem(xi.keyItem.GREEN_RECOMMENDATION_LETTER)
                     elseif option == 1 then
                         quest:setVar(player, 'LetterUsed', 1)
-                        player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
+                        player:delKeyItem(xi.keyItem.GREEN_RECOMMENDATION_LETTER)
                     end
                 end,
 
                 [105] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
                     end
                 end,
             },
@@ -130,7 +130,7 @@ quest.sections =
 
                     if utils.mask.isFull(doors, 3) then
                         return quest:progressEvent(106)
-                    elseif player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
+                    elseif player:hasKeyItem(xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
                         local puttyUsed = 0
                         for bitNum = 0, 2 do
                             if utils.mask.getBit(doors, bitNum) then
@@ -150,7 +150,7 @@ quest.sections =
                 [104] = function(player, csid, option, npc)
                     if option == 1 then
                         player:delQuest(quest.areaId, quest.questId)
-                        player:delKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+                        player:delKeyItem(xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
                         quest:setVar(player, 'Doors', 0)
                     end
                 end,
@@ -171,7 +171,7 @@ quest.sections =
 
                     if quest:complete(player) then
                         if hasNoAllegiance then
-                            npcUtil.giveKeyItem(player, xi.ki.BRONZE_RIBBON_OF_SERVICE)
+                            npcUtil.giveKeyItem(player, xi.keyItem.BRONZE_RIBBON_OF_SERVICE)
                         end
 
                         player:setCampaignAllegiance(3)
@@ -212,9 +212,9 @@ quest.sections =
 
         [xi.zone.WEST_SARUTABARUTA_S] =
         {
-            ['Sealed_Entrance_1'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
-            ['Sealed_Entrance_2'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
-            ['Sealed_Entrance_3'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
+            ['Sealed_Entrance_1'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
+            ['Sealed_Entrance_2'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
+            ['Sealed_Entrance_3'] = quest:messageSpecial(westSarutabarutaID.text.DOOR_OFFSET + 2, xi.keyItem.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY):replaceDefault(),
         },
     },
 }

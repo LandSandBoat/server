@@ -57,8 +57,8 @@ quest.sections =
             ['Clandestine_Marking'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ORCISH_INFILTRATION_KIT) then
-                        return quest:keyItem(xi.ki.ORCISH_INFILTRATION_KIT)
+                    if not player:hasKeyItem(xi.keyItem.ORCISH_INFILTRATION_KIT) then
+                        return quest:keyItem(xi.keyItem.ORCISH_INFILTRATION_KIT)
                     end
                 end,
             },

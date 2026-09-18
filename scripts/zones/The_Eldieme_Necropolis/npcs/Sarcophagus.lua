@@ -36,7 +36,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, { item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE })
     then
         player:setCharVar('ANewDawn_Event', 6)
-        player:delKeyItem(xi.ki.TAMERS_WHISTLE)
+        player:delKeyItem(xi.keyItem.TAMERS_WHISTLE)
     end
 end
 

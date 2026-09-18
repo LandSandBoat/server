@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LAND_OF_S
 
 mission.reward =
 {
-    keyItem     = xi.ki.SUPPLIES_PACKAGE,
+    keyItem     = xi.keyItem.SUPPLIES_PACKAGE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES },
 }
 
@@ -21,7 +21,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                 xi.settings.main.ENABLE_TOAU == 1 and
-                player:hasKeyItem(xi.ki.BOARDING_PERMIT)
+                player:hasKeyItem(xi.keyItem.BOARDING_PERMIT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

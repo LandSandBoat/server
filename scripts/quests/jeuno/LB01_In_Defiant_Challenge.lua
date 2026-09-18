@@ -25,9 +25,9 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENG
 
 local keyItemTable =
 {
-    [xi.zone.CRAWLERS_NEST         ] = { xi.item.CLUMP_OF_EXORAY_MOLD,     crawlersID.text.COMBINE_INTO_A_CLUMP,     crawlersID.text.ITEM_CANNOT_BE_OBTAINED, xi.ki.EXORAY_MOLD_CRUMB1,     xi.ki.EXORAY_MOLD_CRUMB2,     xi.ki.EXORAY_MOLD_CRUMB3     },
-    [xi.zone.GARLAIGE_CITADEL      ] = { xi.item.CHUNK_OF_BOMB_COAL,       garlaigeID.text.COMBINE_INTO_A_CHUNK,     garlaigeID.text.ITEM_CANNOT_BE_OBTAINED, xi.ki.BOMB_COAL_FRAGMENT1,    xi.ki.BOMB_COAL_FRAGMENT2,    xi.ki.BOMB_COAL_FRAGMENT3    },
-    [xi.zone.THE_ELDIEME_NECROPOLIS] = { xi.item.PIECE_OF_ANCIENT_PAPYRUS, eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, eldiemeID.text.ITEM_CANNOT_BE_OBTAINED,  xi.ki.ANCIENT_PAPYRUS_SHRED1, xi.ki.ANCIENT_PAPYRUS_SHRED2, xi.ki.ANCIENT_PAPYRUS_SHRED3 },
+    [xi.zone.CRAWLERS_NEST         ] = { xi.item.CLUMP_OF_EXORAY_MOLD,     crawlersID.text.COMBINE_INTO_A_CLUMP,     crawlersID.text.ITEM_CANNOT_BE_OBTAINED, xi.keyItem.EXORAY_MOLD_CRUMB1,     xi.keyItem.EXORAY_MOLD_CRUMB2,     xi.keyItem.EXORAY_MOLD_CRUMB3     },
+    [xi.zone.GARLAIGE_CITADEL      ] = { xi.item.CHUNK_OF_BOMB_COAL,       garlaigeID.text.COMBINE_INTO_A_CHUNK,     garlaigeID.text.ITEM_CANNOT_BE_OBTAINED, xi.keyItem.BOMB_COAL_FRAGMENT1,    xi.keyItem.BOMB_COAL_FRAGMENT2,    xi.keyItem.BOMB_COAL_FRAGMENT3    },
+    [xi.zone.THE_ELDIEME_NECROPOLIS] = { xi.item.PIECE_OF_ANCIENT_PAPYRUS, eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, eldiemeID.text.ITEM_CANNOT_BE_OBTAINED,  xi.keyItem.ANCIENT_PAPYRUS_SHRED1, xi.keyItem.ANCIENT_PAPYRUS_SHRED2, xi.keyItem.ANCIENT_PAPYRUS_SHRED3 },
 }
 
 -- Key Item removals. Needs to be called separately by the quest cleanup.
@@ -151,21 +151,21 @@ quest.sections =
             ['qm10'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB1)
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.keyItem.EXORAY_MOLD_CRUMB1)
                 end,
             },
 
             ['qm11'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB2)
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.keyItem.EXORAY_MOLD_CRUMB2)
                 end,
             },
 
             ['qm12'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.ki.EXORAY_MOLD_CRUMB3)
+                    handleQMTrigger(player, xi.zone.CRAWLERS_NEST, xi.keyItem.EXORAY_MOLD_CRUMB3)
                 end,
             },
         },
@@ -175,21 +175,21 @@ quest.sections =
             ['qm18'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT1)
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.keyItem.BOMB_COAL_FRAGMENT1)
                 end,
             },
 
             ['qm19'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT2)
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.keyItem.BOMB_COAL_FRAGMENT2)
                 end,
             },
 
             ['qm20'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.ki.BOMB_COAL_FRAGMENT3)
+                    handleQMTrigger(player, xi.zone.GARLAIGE_CITADEL, xi.keyItem.BOMB_COAL_FRAGMENT3)
                 end,
             },
         },
@@ -199,21 +199,21 @@ quest.sections =
             ['qm7'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED1)
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.keyItem.ANCIENT_PAPYRUS_SHRED1)
                 end,
             },
 
             ['qm8'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED2)
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.keyItem.ANCIENT_PAPYRUS_SHRED2)
                 end,
             },
 
             ['qm9'] =
             {
                 onTrigger = function(player, npc)
-                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.ki.ANCIENT_PAPYRUS_SHRED3)
+                    handleQMTrigger(player, xi.zone.THE_ELDIEME_NECROPOLIS, xi.keyItem.ANCIENT_PAPYRUS_SHRED3)
                 end,
             },
         },

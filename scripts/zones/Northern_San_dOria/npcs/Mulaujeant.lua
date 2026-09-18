@@ -28,13 +28,13 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 698 then
         player:setCharVar('MissionaryManVar', 3)
         player:setCharVar('MissionaryMan_date', GetSystemTime() + 60)
-        player:delKeyItem(xi.ki.RAUTEINOTS_PARCEL)
+        player:delKeyItem(xi.keyItem.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 
     elseif csid == 700 then
         player:setCharVar('MissionaryManVar', 4)
         player:setCharVar('MissionaryMan_date', 0)
-        npcUtil.giveKeyItem(player, xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
+        npcUtil.giveKeyItem(player, xi.keyItem.SUBLIME_STATUE_OF_THE_GODDESS)
     end
 end
 

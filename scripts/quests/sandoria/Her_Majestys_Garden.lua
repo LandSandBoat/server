@@ -12,7 +12,7 @@ quest.reward =
 {
     fame     = 40,
     fameArea = xi.fameArea.SANDORIA,
-    keyItem  = xi.ki.MAP_OF_THE_NORTHLANDS_AREA,
+    keyItem  = xi.keyItem.MAP_OF_THE_NORTHLANDS_AREA,
 }
 
 quest.sections =

@@ -784,7 +784,7 @@ templates:
 
   Maze_Lizard:
     id:            2598
-    species:       ash_lizard
+    species:       hill_lizard
     skill_list_id: 174
     attributes:
       combat:

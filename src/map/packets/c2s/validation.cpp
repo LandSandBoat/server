@@ -245,7 +245,7 @@ auto PacketValidator::isInMogHouse() -> PacketValidator&
     return *this;
 }
 
-auto PacketValidator::hasKeyItem(const KeyItem keyItemId) -> PacketValidator&
+auto PacketValidator::hasKeyItem(const xi::KeyItem keyItemId) -> PacketValidator&
 {
     if (!result_.valid())
     {

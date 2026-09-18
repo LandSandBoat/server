@@ -34,7 +34,7 @@ quest.sections =
             {
                 [2590] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.MISDELIVERED_PARCEL)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MISDELIVERED_PARCEL)
                 end,
             },
         },
@@ -91,8 +91,8 @@ quest.sections =
             onEventFinish =
             {
                 [2802] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MISDELIVERED_PARCEL)
-                    player:messageSpecial(ralaID.text.KEYITEM_LOST, xi.ki.MISDELIVERED_PARCEL)
+                    player:delKeyItem(xi.keyItem.MISDELIVERED_PARCEL)
+                    player:messageSpecial(ralaID.text.KEYITEM_LOST, xi.keyItem.MISDELIVERED_PARCEL)
 
                     quest:setVar(player, 'Prog', 2)
                 end,

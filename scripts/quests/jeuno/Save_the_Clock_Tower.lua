@@ -60,7 +60,7 @@ quest.sections =
             ['Derrick'] =
             {
                 onTrigger = function(player, npc)
-                    local hasAirshipPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS) and 2 or 0
+                    local hasAirshipPass = player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) and 2 or 0
 
                     return quest:progressEvent(230, 8 + hasAirshipPass, 10)
                 end,
@@ -104,7 +104,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    local hasAirshipPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS) and 2 or 0
+                    local hasAirshipPass = player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) and 2 or 0
 
                     return quest:progressEvent(230, 4 + hasAirshipPass, 10)
                 end,

@@ -61,7 +61,7 @@ quest.sections =
             ['Elki'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.OLD_TOOLBOX) then
+                    if player:hasKeyItem(xi.keyItem.OLD_TOOLBOX) then
                         return quest:progressEvent(44)
                     end
                 end,
@@ -86,7 +86,7 @@ quest.sections =
 
                 [45] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OLD_TOOLBOX)
+                        player:delKeyItem(xi.keyItem.OLD_TOOLBOX)
                     end
                 end,
             },
@@ -97,7 +97,7 @@ quest.sections =
             ['Old_Toolbox'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.OLD_TOOLBOX) then
+                    if not player:hasKeyItem(xi.keyItem.OLD_TOOLBOX) then
                         return quest:progressEvent(23)
                     end
                 end,
@@ -107,7 +107,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:addKeyItem(xi.ki.OLD_TOOLBOX)
+                        player:addKeyItem(xi.keyItem.OLD_TOOLBOX)
                     end
                 end
             },

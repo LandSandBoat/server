@@ -11,9 +11,9 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if
-        not player:hasKeyItem(xi.ki.SILVER_BELL) or
-        not player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) or
-        not player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
+        not player:hasKeyItem(xi.keyItem.SILVER_BELL) or
+        not player:hasKeyItem(xi.keyItem.CORUSCANT_ROSARY) or
+        not player:hasKeyItem(xi.keyItem.BLACK_MATINEE_NECKLACE)
     then
         player:messageSpecial(ID.text.IT_SEEMS_TO_BE_LOCKED_BY_POWERFUL_MAGIC)
         return
@@ -29,7 +29,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 50 or csid == 51) and option == 1 then
-        player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, xi.ki.SILVER_BELL, xi.ki.CORUSCANT_ROSARY, xi.ki.BLACK_MATINEE_NECKLACE)
+        player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, xi.keyItem.SILVER_BELL, xi.keyItem.CORUSCANT_ROSARY, xi.keyItem.BLACK_MATINEE_NECKLACE)
     end
 end
 

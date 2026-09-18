@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemKeyItemMapping =
     {
-        [xi.item.BRONZE_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_I,
-        [xi.item.BRASS_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_II,
-        [xi.item.SHAKUDO_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_III,
-        [xi.item.PAKTONG_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_IV,
-        [xi.item.PIG_IRON_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_V,
-        [xi.item.IRON_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_VI,
-        [xi.item.CAST_IRON_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_VII,
-        [xi.item.WROUGHT_IRON_LETTERBOX] = xi.ki.THE_WORDS_OF_DONHU_VIII
+        [xi.item.BRONZE_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_I,
+        [xi.item.BRASS_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_II,
+        [xi.item.SHAKUDO_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_III,
+        [xi.item.PAKTONG_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_IV,
+        [xi.item.PIG_IRON_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_V,
+        [xi.item.IRON_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_VI,
+        [xi.item.CAST_IRON_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_VII,
+        [xi.item.WROUGHT_IRON_LETTERBOX] = xi.keyItem.THE_WORDS_OF_DONHU_VIII
     }
     -- Make sure we're only trading 1 Strongbox at a time.
     if

@@ -13,10 +13,10 @@ entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
 
     if
-        player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
+        player:hasKeyItem(xi.keyItem.NEW_MODEL_HAT) and
         not utils.mask.getBit(player:getCharVar('QuestHatInHand_var'), 4)
     then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.keyItem.NEW_MODEL_HAT)
         player:startEvent(60)
     elseif makingHeadlines == xi.questStatus.QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
@@ -38,7 +38,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 668 then
-        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WATERS_SCOOP)
+        npcUtil.giveKeyItem(player, xi.keyItem.WINDURST_WATERS_SCOOP)
         player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(player:getCharVar('QuestMakingHeadlines_var'), 0, true))
     elseif csid == 60 then
         player:setCharVar('QuestHatInHand_var', utils.mask.setBit(player:getCharVar('QuestHatInHand_var'), 4, true))

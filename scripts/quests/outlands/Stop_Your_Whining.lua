@@ -36,7 +36,7 @@ quest.sections =
                 [21] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                        npcUtil.giveKeyItem(player, xi.ki.EMPTY_BARREL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.EMPTY_BARREL)
                     end
                 end,
             },
@@ -53,9 +53,9 @@ quest.sections =
             ['Washu'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.EMPTY_BARREL) then
+                    if player:hasKeyItem(xi.keyItem.EMPTY_BARREL) then
                         return quest:progressEvent(22)
-                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW) then
+                    elseif player:hasKeyItem(xi.keyItem.BARREL_OF_OPO_OPO_BREW) then
                         return quest:progressEvent(23)
                     end
                 end,
@@ -65,7 +65,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW)
+                        player:delKeyItem(xi.keyItem.BARREL_OF_OPO_OPO_BREW)
                     end
                 end,
             },
@@ -76,11 +76,11 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.EMPTY_BARREL) then
+                    if player:hasKeyItem(xi.keyItem.EMPTY_BARREL) then
                         player:messageSpecial(yhoatorID.text.TREE_CHECK)
-                        player:delKeyItem(xi.ki.EMPTY_BARREL)
-                        return quest:keyItem(xi.ki.BARREL_OF_OPO_OPO_BREW)
-                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW) then
+                        player:delKeyItem(xi.keyItem.EMPTY_BARREL)
+                        return quest:keyItem(xi.keyItem.BARREL_OF_OPO_OPO_BREW)
+                    elseif player:hasKeyItem(xi.keyItem.BARREL_OF_OPO_OPO_BREW) then
                         return quest:messageSpecial(yhoatorID.text.TREE_FULL)
                     end
                 end,

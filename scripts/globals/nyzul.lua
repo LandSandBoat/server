@@ -188,19 +188,19 @@ xi.nyzul.handleRunicKey = function(mob)
             -- Does players Runic Disk have data saved to a floor of entering or higher
             if
                 entity:getVar('NyzulFloorProgress') + 1 >= startFloor and
-                not entity:hasKeyItem(xi.ki.RUNIC_KEY)
+                not entity:hasKeyItem(xi.keyItem.RUNIC_KEY)
             then
                 -- On early version only initiator of floor got progress saves and key credit
                 if not xi.settings.main.RUNIC_DISK_SAVE then
                     if entity:getID() == instance:getLocalVar('diskHolder') then
-                        if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
+                        if npcUtil.giveKeyItem(entity, xi.keyItem.RUNIC_KEY) then
                             entity:setVar('NyzulFloorProgress', 0)
                         end
                     end
 
                 -- Anyone can get a key on 100 win if disk passed check
                 else
-                    npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY)
+                    npcUtil.giveKeyItem(entity, xi.keyItem.RUNIC_KEY)
                 end
             end
         end

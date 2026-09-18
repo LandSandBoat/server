@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RECKONING)
 
 mission.reward =
 {
-    keyItem     = xi.ki.AWAKENED_CRYSTALLIZED_PSYCHE,
+    keyItem     = xi.keyItem.AWAKENED_CRYSTALLIZED_PSYCHE,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ABOMINATION },
 }
 
@@ -48,12 +48,12 @@ mission.sections =
         {
             afterZoneIn = function(player)
                 if
-                    not player:hasKeyItem(xi.ki.CRYSTALLIZED_PSYCHE) and
+                    not player:hasKeyItem(xi.keyItem.CRYSTALLIZED_PSYCHE) and
                     mission:getVar(player, 'Status') == 0
                 then
                     -- TODO: This message needs verification, and need to determine if there
                     -- is a unique event or message.
-                    npcUtil.giveKeyItem(player, xi.ki.CRYSTALLIZED_PSYCHE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.CRYSTALLIZED_PSYCHE)
                 end
             end,
         },

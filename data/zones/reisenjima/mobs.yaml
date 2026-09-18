@@ -22,7 +22,7 @@ templates:
 
   Albumen:
     id:            5605
-    species:       mandragora
+    species:       adenium
     skill_list_id: 178
     attributes:
       combat:
@@ -260,7 +260,7 @@ templates:
 
   Ascended_Gefyrst:
     id:            5576
-    species:       ice_elemental
+    species:       gefyrst
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 103
@@ -537,7 +537,7 @@ templates:
 
   Ascended_Ungeweder:
     id:            5577
-    species:       thunder_elemental
+    species:       ungeweder
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 105
@@ -744,7 +744,7 @@ templates:
 
   Dazzling_Dolores:
     id:            5582
-    species:       morbol
+    species:       purbol
     type:          [notorious]
     skill_list_id: 186
     attributes:
@@ -1010,7 +1010,7 @@ templates:
 
   Lentic_Toad:
     id:            5373
-    species:       green_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       combat:
@@ -1031,7 +1031,7 @@ templates:
   Lentic_Toad_fished:
     id:            6943
     display_name:  Lentic_Toad
-    species:       green_poroggo
+    species:       toad
     type:          [fished]
     skill_list_id: 196
     attributes:
@@ -1146,7 +1146,7 @@ templates:
 
   Neak:
     id:            6794
-    species:       dragon
+    species:       purple_dragon
     type:          [notorious]
     skill_list_id: 87
     attributes:
@@ -1315,7 +1315,7 @@ templates:
 
   Perfervid_Naraka:
     id:            5378
-    species:       naraka
+    species:       white_naraka
     skill_list_id: 227
     attributes:
       combat:
@@ -1469,7 +1469,7 @@ templates:
 
   Sang_Buaya:
     id:            5587
-    species:       bugard
+    species:       abyssobugard
     type:          [notorious]
     skill_list_id: 58
     attributes:
@@ -1641,7 +1641,7 @@ templates:
 
   Selkit:
     id:            5586
-    species:       scorpion
+    species:       scolopendrid
     type:          [notorious]
     skill_list_id: 217
     attributes:
@@ -1753,7 +1753,7 @@ templates:
 
   Teles:
     id:            5597
-    species:       harpeia
+    species:       siren
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 471
@@ -2105,7 +2105,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [blm, blm]
+      jobs:            [blm, blm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250
@@ -2152,7 +2154,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [whm, whm]
+      jobs:            [whm, whm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250
@@ -2199,7 +2203,9 @@ templates:
     attributes:
       combat:
         skill: staff
-      jobs: [blm, blm]
+      jobs:            [blm, blm]
+      speed:           32
+      animation_speed: 50
       resists:
         dmg_physical:
           slashing: -1250

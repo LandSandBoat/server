@@ -83,7 +83,7 @@ describe('San d\'Oria', function()
             player.bcnm:enter('Hut_Door', xi.battlefield.id.SAVE_THE_CHILDREN)
             player.bcnm:killMobs()
             player.bcnm:expectWin({ finishOption = 2 })
-            player.assert:hasKI(xi.ki.ORCISH_HUT_KEY)
+            player.assert:hasKI(xi.keyItem.ORCISH_HUT_KEY)
             player.entities:gotoAndTrigger('Hut_Door', { eventId = 55 })
 
             -- Go back to gate guard and finish mission.
@@ -110,7 +110,7 @@ describe('San d\'Oria', function()
             player.entities:gotoAndTrigger('Nelcabrit', { eventId = 45 })
 
             player.assert:hasMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.NONE)
-            player.assert.no:hasKI(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+            player.assert.no:hasKI(xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT)
         end)
 
         it('should not start the mission when the door event is cancelled', function()
@@ -118,7 +118,7 @@ describe('San d\'Oria', function()
             player.entities:gotoAndTrigger('_6r5', { eventId = 130, finishOption = utils.EVENT_CANCELLED_OPTION })
 
             player.assert:hasMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.NONE)
-            player.assert.no:hasKI(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+            player.assert.no:hasKI(xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT)
         end)
 
         it('should start the mission at the embassy door', function()
@@ -126,7 +126,7 @@ describe('San d\'Oria', function()
             player.entities:gotoAndTrigger('_6r5', { eventId = 130, finishOption = 1 })
 
             player.assert:hasMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
-            player.assert:hasKI(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+            player.assert:hasKI(xi.keyItem.ARCHDUCAL_AUDIENCE_PERMIT)
         end)
 
         it('should give Paya-Sabya a follow up line once the garden scene has played', function()
@@ -146,40 +146,40 @@ describe('San d\'Oria', function()
             player:gotoZone(xi.zone.RULUDE_GARDENS)
             player.entities:gotoAndTrigger('_6r5', { eventId = 130, finishOption = 1 })
             player.entities:gotoAndTrigger('_6r9', { eventId = 128 })
-            player.assert:hasKI(xi.ki.LETTER_TO_ALDO)
+            player.assert:hasKI(xi.keyItem.LETTER_TO_ALDO)
 
             -- Aldo trades the letter for the silver bell.
             player:gotoZone(xi.zone.LOWER_JEUNO)
             player.entities:gotoAndTrigger('Aldo', { eventId = 152 })
-            player.assert:hasKI(xi.ki.SILVER_BELL)
-            player.assert.no:hasKI(xi.ki.LETTER_TO_ALDO)
+            player.assert:hasKI(xi.keyItem.SILVER_BELL)
+            player.assert.no:hasKI(xi.keyItem.LETTER_TO_ALDO)
 
             player:gotoZone(xi.zone.MONASTIC_CAVERN)
             player.entities:gotoAndTrigger('Magicite', { eventId = 0 })
-            player.assert:hasKI(xi.ki.MAGICITE_OPTISTONE)
+            player.assert:hasKI(xi.keyItem.MAGICITE_OPTISTONE)
 
             player:gotoZone(xi.zone.ALTAR_ROOM)
             player.entities:gotoAndTrigger('Magicite', { eventId = 44 })
-            player.assert:hasKI(xi.ki.MAGICITE_ORASTONE)
+            player.assert:hasKI(xi.keyItem.MAGICITE_ORASTONE)
 
             -- The last stone appends the Lion and Shadow of Darkness scene to the same event.
             player:gotoZone(xi.zone.QULUN_DOME)
             player.entities:gotoAndTrigger('Magicite', { eventId = 0 })
-            player.assert:hasKI(xi.ki.MAGICITE_AURASTONE)
+            player.assert:hasKI(xi.keyItem.MAGICITE_AURASTONE)
 
             -- The archduke takes all three stones and issues the airship pass.
             player:gotoZone(xi.zone.RULUDE_GARDENS)
             player.entities:gotoAndTrigger('_6r9', { eventId = 60 })
-            player.assert:hasKI(xi.ki.AIRSHIP_PASS)
-            player.assert.no:hasKI(xi.ki.MAGICITE_OPTISTONE)
-            player.assert.no:hasKI(xi.ki.MAGICITE_ORASTONE)
-            player.assert.no:hasKI(xi.ki.MAGICITE_AURASTONE)
+            player.assert:hasKI(xi.keyItem.AIRSHIP_PASS)
+            player.assert.no:hasKI(xi.keyItem.MAGICITE_OPTISTONE)
+            player.assert.no:hasKI(xi.keyItem.MAGICITE_ORASTONE)
+            player.assert.no:hasKI(xi.keyItem.MAGICITE_AURASTONE)
 
             player.entities:gotoAndTrigger('Nelcabrit', { eventId = 36 })
             player.assert
                 :hasMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.NONE)
                 :hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
-                :hasKI(xi.ki.MESSAGE_TO_JEUNO_SANDORIA)
+                :hasKI(xi.keyItem.MESSAGE_TO_JEUNO_SANDORIA)
         end)
     end)
 end)

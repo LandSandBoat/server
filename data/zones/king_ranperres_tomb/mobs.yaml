@@ -1591,7 +1591,7 @@ templates:
 
   Vrtra:
     id:            4261
-    species:       black_wyrm
+    species:       dark_wyrm
     type:          [notorious]
     spell_list_id: 57
     skill_list_id: 391
@@ -1600,14 +1600,6 @@ templates:
         skill: scythe
         delay: 210
       jobs: [blm, bst]
-      resists:
-        rank_element:
-          light: -2
-          dark:  11
-        rank_status:
-          light_sleep: -2
-          dark_sleep:  11
-          blind:       11
       render:
         look:
           type:  standard

@@ -114,7 +114,7 @@ quest.sections =
                 end,
 
                 [173] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.WHISPERING_CONCH)
+                    player:delKeyItem(xi.keyItem.WHISPERING_CONCH)
                     quest:setVar(player, 'Prog', 4)
                 end,
 
@@ -141,7 +141,7 @@ quest.sections =
                         progress == 2 and
                         player:getLocalVar('NMKilled') == 1
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.WHISPERING_CONCH)
+                        npcUtil.giveKeyItem(player, xi.keyItem.WHISPERING_CONCH)
                         quest:setVar(player, 'Prog', 3)
                         return quest:noAction()
                     elseif

@@ -513,14 +513,22 @@ describe('Regular elemental pet stats', function()
         assert(linkedPet)
         local pet = player.entities:get(linkedPet)
 
+        xi.test.world:setVanaTime(0, 0) -- set to night time
+        xi.test.world:skipTime(3)
+
         owner:spawn()
         owner:clearPath()
         pet:despawn()
+
+        xi.test.world:skipTime(20) -- Tick to give the pet time to despawn if it was up
+
         local pos = owner:getPos()
         owner:triggerListener('TICK', owner, 400)
         owner:triggerListener('TICK', owner, 60000)
-        xi.test.world:skipTime(3)
+        xi.test.world:skipTime(20) -- Wait for pet to respawn
 
+        assert(owner:isAlive())
+        assert(pet ~= nil)
         assert(pet:isAlive())
         assert(pet:getName() == 'Fomors_Elemental')
         assert(pet:getMainJob() == xi.job.DRK)

@@ -118,9 +118,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        return mission:progressEvent(554, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                        return mission:progressEvent(554, 0, xi.keyItem.ROYAL_KNIGHTS_DAVOI_REPORT)
                     elseif missionStatus == 0 then
-                        return mission:progressEvent(553, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                        return mission:progressEvent(553, 0, xi.keyItem.ROYAL_KNIGHTS_DAVOI_REPORT)
                     end
                 end,
             },
@@ -133,7 +133,7 @@ mission.sections =
 
                 [554] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                        player:delKeyItem(xi.keyItem.ROYAL_KNIGHTS_DAVOI_REPORT)
                         player:addRankPoints(100)
                     end
                 end,
@@ -167,7 +167,7 @@ mission.sections =
                 [117] = function(player, csid, option, npc)
                     npc:continuePath()
                     player:setMissionStatus(mission.areaId, 4)
-                    npcUtil.giveKeyItem(player, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ROYAL_KNIGHTS_DAVOI_REPORT)
                 end,
             },
         },
@@ -259,28 +259,28 @@ mission.sections =
                             xPos <= 296 and
                             zPos >= -30 and
                             zPos <= -26 and
-                            not player:hasKeyItem(xi.ki.EAST_BLOCK_CODE)
+                            not player:hasKeyItem(xi.keyItem.EAST_BLOCK_CODE)
                         then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
-                            return mission:keyItem(xi.ki.EAST_BLOCK_CODE):setPriority(1000)
+                            return mission:keyItem(xi.keyItem.EAST_BLOCK_CODE):setPriority(1000)
                         elseif
                             xPos >= 333 and
                             xPos <= 337 and
                             zPos >= -138 and
                             zPos <= -134 and
-                            not player:hasKeyItem(xi.ki.SOUTH_BLOCK_CODE)
+                            not player:hasKeyItem(xi.keyItem.SOUTH_BLOCK_CODE)
                         then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
-                            return mission:keyItem(xi.ki.SOUTH_BLOCK_CODE):setPriority(1000)
+                            return mission:keyItem(xi.keyItem.SOUTH_BLOCK_CODE):setPriority(1000)
                         elseif
                             xPos >= 161 and
                             xPos <= 165 and
                             zPos >= -20 and
                             zPos <= -16 and
-                            not player:hasKeyItem(xi.ki.NORTH_BLOCK_CODE)
+                            not player:hasKeyItem(xi.keyItem.NORTH_BLOCK_CODE)
                         then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
-                            return mission:keyItem(xi.ki.NORTH_BLOCK_CODE):setPriority(1000)
+                            return mission:keyItem(xi.keyItem.NORTH_BLOCK_CODE):setPriority(1000)
                         end
                     end
                 end,
@@ -307,9 +307,9 @@ mission.sections =
 
                 [105] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 10)
-                    player:delKeyItem(xi.ki.EAST_BLOCK_CODE)
-                    player:delKeyItem(xi.ki.SOUTH_BLOCK_CODE)
-                    player:delKeyItem(xi.ki.NORTH_BLOCK_CODE)
+                    player:delKeyItem(xi.keyItem.EAST_BLOCK_CODE)
+                    player:delKeyItem(xi.keyItem.SOUTH_BLOCK_CODE)
+                    player:delKeyItem(xi.keyItem.NORTH_BLOCK_CODE)
                 end,
             },
         },

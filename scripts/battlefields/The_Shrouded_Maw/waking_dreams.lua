@@ -15,7 +15,7 @@ local content = BattlefieldQuest:new({
     index            = 2,
     entryNpc         = 'MC_Entrance',
     exitNpc          = 'Memento_Circle',
-    requiredKeyItems = { xi.ki.VIAL_OF_DREAM_INCENSE, keep = true },
+    requiredKeyItems = { xi.keyItem.VIAL_OF_DREAM_INCENSE, keep = true },
     csParam8         = 5,
 
     questArea = xi.questLog.WINDURST,
@@ -31,8 +31,8 @@ function content:setupBattlefield(battlefield)
 end
 
 function content:onEventFinishWin(player, csid, option, npc)
-    player:delKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_DREAMS)
+    player:delKeyItem(xi.keyItem.VIAL_OF_DREAM_INCENSE)
+    npcUtil.giveKeyItem(player, xi.keyItem.WHISPER_OF_DREAMS)
     player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)
 end
 

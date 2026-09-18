@@ -32,8 +32,8 @@ mission.sections =
             ['Large_Animal_Track'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TUFT_OF_GOLDEN_FUR) then
-                        npcUtil.giveKeyItem(player, xi.ki.TUFT_OF_GOLDEN_FUR)
+                    if not player:hasKeyItem(xi.keyItem.TUFT_OF_GOLDEN_FUR) then
+                        npcUtil.giveKeyItem(player, xi.keyItem.TUFT_OF_GOLDEN_FUR)
 
                         return mission:noAction()
                     end

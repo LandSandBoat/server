@@ -17,7 +17,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_TH
 quest.reward =
 {
     item    = xi.item.CORSAIR_DIE,
-    keyItem = xi.ki.JOB_GESTURE_CORSAIR,
+    keyItem = xi.keyItem.JOB_GESTURE_CORSAIR,
     title   = xi.title.SEAGULL_PHRATRIE_CREW_MEMBER,
 }
 
@@ -120,12 +120,12 @@ quest.sections =
             {
                 [2] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
-                    npcUtil.giveKeyItem(player, xi.ki.FORGOTTEN_HEXAGUN)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FORGOTTEN_HEXAGUN)
                 end,
 
                 [3] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
+                        player:delKeyItem(xi.keyItem.FORGOTTEN_HEXAGUN)
                         player:unlockJob(xi.job.COR)
                         player:messageSpecial(talaccaCoveID.text.YOU_CAN_NOW_BECOME_A_CORSAIR)
                     end

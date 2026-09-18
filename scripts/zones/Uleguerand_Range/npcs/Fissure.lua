@@ -14,13 +14,13 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local z = player:getZPos()
 
-    if player:hasKeyItem(xi.ki.MYSTIC_ICE) then
+    if player:hasKeyItem(xi.keyItem.MYSTIC_ICE) then
         if z > -200 and z < -150 then                -- southern Fissure (J-9)
-            player:startEvent(2, xi.ki.MYSTIC_ICE)
+            player:startEvent(2, xi.keyItem.MYSTIC_ICE)
         elseif z > 200 and z < 250 then            -- middle Fissure (K-7)
-            player:startEvent(3, xi.ki.MYSTIC_ICE)
+            player:startEvent(3, xi.keyItem.MYSTIC_ICE)
         elseif z > 450 then                        -- northern Fissure (I-6)
-            player:startEvent(4, xi.ki.MYSTIC_ICE)
+            player:startEvent(4, xi.keyItem.MYSTIC_ICE)
         end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -29,7 +29,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 2 or csid == 3 or csid == 4) and option == 2 then
-        player:delKeyItem(xi.ki.MYSTIC_ICE)
+        player:delKeyItem(xi.keyItem.MYSTIC_ICE)
     end
 end
 

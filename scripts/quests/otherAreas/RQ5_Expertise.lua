@@ -78,8 +78,8 @@ quest.sections =
             {
                 [62] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LAND_CRAB_BISQUE) -- Give Land Crab Bisque from Valgeir.
-                        player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED + 1, xi.ki.LAND_CRAB_BISQUE)
+                        player:delKeyItem(xi.keyItem.LAND_CRAB_BISQUE) -- Give Land Crab Bisque from Valgeir.
+                        player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED + 1, xi.keyItem.LAND_CRAB_BISQUE)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Completition day of Expertise quest.
                     end
                 end,
@@ -134,7 +134,7 @@ quest.sections =
 
                 [105] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    npcUtil.giveKeyItem(player, xi.ki.LAND_CRAB_BISQUE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LAND_CRAB_BISQUE)
                 end,
             },
         },

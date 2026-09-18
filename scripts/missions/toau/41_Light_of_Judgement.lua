@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_
 
 mission.reward =
 {
-    keyItem     = xi.ki.NYZUL_ISLE_ROUTE,
+    keyItem     = xi.keyItem.NYZUL_ISLE_ROUTE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS },
 }
 

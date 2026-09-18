@@ -214,7 +214,7 @@ templates:
 
   Capricious_Cassie:
     id:            630
-    species:       morbol
+    species:       scarce_morbol
     type:          [notorious]
     skill_list_id: 411
     attributes:

@@ -65,9 +65,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
-                        player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
-                        player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
+                        player:hasKeyItem(xi.keyItem.ROUND_FRIGICITE) and
+                        player:hasKeyItem(xi.keyItem.SQUARE_FRIGICITE) and
+                        player:hasKeyItem(xi.keyItem.TRIANGULAR_FRIGICITE)
                     then
                         return quest:progressEvent(84)
                     else
@@ -80,9 +80,9 @@ quest.sections =
             {
                 [84] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ROUND_FRIGICITE)
-                        player:delKeyItem(xi.ki.SQUARE_FRIGICITE)
-                        player:delKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
+                        player:delKeyItem(xi.keyItem.ROUND_FRIGICITE)
+                        player:delKeyItem(xi.keyItem.SQUARE_FRIGICITE)
+                        player:delKeyItem(xi.keyItem.TRIANGULAR_FRIGICITE)
                         player:setLevelCap(60)
                         player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_60)
                     end
@@ -96,10 +96,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+                        not player:hasKeyItem(xi.keyItem.ROUND_FRIGICITE) and
                         (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
                     then
-                        return quest:keyItem(xi.ki.ROUND_FRIGICITE)
+                        return quest:keyItem(xi.keyItem.ROUND_FRIGICITE)
                     end
                 end,
             },
@@ -108,10 +108,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
+                        not player:hasKeyItem(xi.keyItem.SQUARE_FRIGICITE) and
                         (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
                     then
-                        return quest:keyItem(xi.ki.SQUARE_FRIGICITE)
+                        return quest:keyItem(xi.keyItem.SQUARE_FRIGICITE)
                     end
                 end,
             },
@@ -120,10 +120,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
+                        not player:hasKeyItem(xi.keyItem.TRIANGULAR_FRIGICITE) and
                         (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
                     then
-                        return quest:keyItem(xi.ki.TRIANGULAR_FRIGICITE)
+                        return quest:keyItem(xi.keyItem.TRIANGULAR_FRIGICITE)
                     end
                 end,
             },

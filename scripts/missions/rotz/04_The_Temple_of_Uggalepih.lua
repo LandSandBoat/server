@@ -12,7 +12,7 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.DARK_FRAGMENT,
+    keyItem     = xi.keyItem.DARK_FRAGMENT,
     title       = xi.title.BEARER_OF_THE_WISEWOMANS_HOPE,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE },
 }
@@ -79,7 +79,7 @@ mission.sections =
 
                 [8] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+                        player:delKeyItem(xi.keyItem.SACRIFICIAL_CHAMBER_KEY)
 
                         -- NOTE: RoV mission transition occurs if the player is on Cursed Temple following the completion
                         -- of this event.

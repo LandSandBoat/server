@@ -19,7 +19,7 @@ m:addOverride('xi.server.onServerStart', function()
         norg.onEventFinish[141] = function(player, csid, option, npc)
             if quest:complete(player) then
                 player:tradeComplete()
-                player:delKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
+                player:delKeyItem(xi.keyItem.HANDFUL_OF_CRYSTAL_SCALES)
 
                 -- Player must zone before being able to flag the next quest
                 xi.quest.setMustZone(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)

@@ -42,7 +42,7 @@ quest.sections =
 
         [xi.zone.RABAO] =
         {
-            ['Alfesar'] = quest:progressEvent(6, xi.ki.ANCIENT_TABLET_FRAGMENT),
+            ['Alfesar'] = quest:progressEvent(6, xi.keyItem.ANCIENT_TABLET_FRAGMENT),
 
             onEventFinish =
             {
@@ -66,11 +66,11 @@ quest.sections =
                     local progress = quest:getVar(player, 'Prog')
 
                     if progress == 0 then
-                        return quest:event(7, xi.ki.ANCIENT_TABLET_FRAGMENT) -- Reminder to get KI
+                        return quest:event(7, xi.keyItem.ANCIENT_TABLET_FRAGMENT) -- Reminder to get KI
                     elseif progress == 1 then
-                        return quest:progressEvent(8, xi.ki.ANCIENT_TABLET_FRAGMENT, xi.ki.TABLET_OF_ANCIENT_MAGIC, xi.ki.LETTER_FROM_ALFESAR) -- Player has returned with KI
+                        return quest:progressEvent(8, xi.keyItem.ANCIENT_TABLET_FRAGMENT, xi.keyItem.TABLET_OF_ANCIENT_MAGIC, xi.keyItem.LETTER_FROM_ALFESAR) -- Player has returned with KI
                     elseif progress == 2 then
-                        return quest:event(9, 0, xi.ki.TABLET_OF_ANCIENT_MAGIC) -- Reminder to go to Sandy
+                        return quest:event(9, 0, xi.keyItem.TABLET_OF_ANCIENT_MAGIC) -- Reminder to go to Sandy
                     end
                 end,
             },
@@ -78,11 +78,11 @@ quest.sections =
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
-                    player.addKeyItem(player, xi.ki.TABLET_OF_ANCIENT_MAGIC)
-                    player.addKeyItem(player, xi.ki.LETTER_FROM_ALFESAR)
+                    player:delKeyItem(xi.keyItem.ANCIENT_TABLET_FRAGMENT)
+                    player.addKeyItem(player, xi.keyItem.TABLET_OF_ANCIENT_MAGIC)
+                    player.addKeyItem(player, xi.keyItem.LETTER_FROM_ALFESAR)
                     quest:setVar(player, 'Prog', 2)
-                    player:messageSpecial(rabaoID.text.ACCEPTED_KEYITEM, 0, xi.ki.TABLET_OF_ANCIENT_MAGIC, xi.ki.LETTER_FROM_ALFESAR)
+                    player:messageSpecial(rabaoID.text.ACCEPTED_KEYITEM, 0, xi.keyItem.TABLET_OF_ANCIENT_MAGIC, xi.keyItem.LETTER_FROM_ALFESAR)
                 end,
             },
         },
@@ -96,7 +96,7 @@ quest.sections =
                         quest:setVar(player, 'Prog', 1)
                         local newPosition = npcUtil.pickNewPosition(npc:getID(), positionTable)
                         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-                        return quest:keyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+                        return quest:keyItem(xi.keyItem.ANCIENT_TABLET_FRAGMENT)
                     end
                 end,
             },
@@ -130,8 +130,8 @@ quest.sections =
                 [703] = function(player, csid, option, npc)
                     quest:setVar(player, 'Wait', GetSystemTime() + 60)
                     player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
-                    player:delKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
-                    player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)
+                    player:delKeyItem(xi.keyItem.TABLET_OF_ANCIENT_MAGIC)
+                    player:delKeyItem(xi.keyItem.LETTER_FROM_ALFESAR)
                     quest:setVar(player, 'Prog', 3)
                 end,
 

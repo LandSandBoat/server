@@ -40,7 +40,7 @@ templates:
 
   Bergschrund_Gefyrst:
     id:            6697
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 14
     skill_list_id: 103
     attributes:
@@ -300,7 +300,7 @@ templates:
 
   Metalcruncher_Worm:
     id:            6421
-    species:       worm
+    species:       morion
     roam:          [worm]
     spell_list_id: 9
     skill_list_id: 258
@@ -524,7 +524,7 @@ templates:
 
   Touched_Gefyrst:
     id:            6698
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 3
     skill_list_id: 103
     attributes:

@@ -18,7 +18,7 @@ local content = BattlefieldMission:new({
     entryNpc      = 'IP_Entrance',
     exitNpc       = 'Ice_Protocrystal',
 
-    requiredKeyItems = { xi.ki.DOMINAS_AZURE_SEAL, keep = true },
+    requiredKeyItems = { xi.keyItem.DOMINAS_AZURE_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
     requiredVar      = 'Mission[11][3]Shiva',

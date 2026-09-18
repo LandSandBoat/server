@@ -15,10 +15,10 @@ mission.reward =
 
 local purgationKeyItems =
 {
-    xi.ki.ETERNAL_FLAME,
-    xi.ki.VIAL_OF_UNTAINTED_HOLY_WATER,
-    xi.ki.PIECE_OF_A_STONE_WALL,
-    xi.ki.WEATHER_VANE_WINGS,
+    xi.keyItem.ETERNAL_FLAME,
+    xi.keyItem.VIAL_OF_UNTAINTED_HOLY_WATER,
+    xi.keyItem.PIECE_OF_A_STONE_WALL,
+    xi.keyItem.WEATHER_VANE_WINGS,
 }
 
 mission.sections =

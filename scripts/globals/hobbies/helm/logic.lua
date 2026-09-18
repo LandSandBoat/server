@@ -265,11 +265,11 @@ xi.helm.result = function(player, helmType, broke, itemID)
     if
         helmType == xi.helmType.HARVESTING and
         player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
+        not player:hasKeyItem(xi.keyItem.RAINBOW_BERRY) and
         broke ~= 1 and
         zoneId == xi.zone.WAJAOM_WOODLANDS
     then
-        npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
+        npcUtil.giveKeyItem(player, xi.keyItem.RAINBOW_BERRY)
     end
 
     -- AMK mission 4 (index 3)

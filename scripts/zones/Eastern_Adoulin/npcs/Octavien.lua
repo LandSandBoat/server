@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(26, 1)
     elseif
         cotrQuestStatus == xi.questStatus.QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
+        player:hasKeyItem(xi.keyItem.YAHSE_WILDFLOWER_PETAL)
     then
         player:startEvent(26)
     elseif cotrQuestStatus == xi.questStatus.QUEST_ACCEPTED then
@@ -94,9 +94,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         if npcUtil.giveItem(player, xi.item.SOWILO_CLAYMORE) then  -- Sowilo Claymore
             player:unlockJob(xi.job.RUN)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 1)  -- You can now become a rune fencer!
-            npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
+            npcUtil.giveKeyItem(player, xi.keyItem.JOB_GESTURE_RUNE_FENCER)
             player:setCharVar('RUN_COTR', 0)
-            player:delKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
+            player:delKeyItem(xi.keyItem.YAHSE_WILDFLOWER_PETAL)
             player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     end

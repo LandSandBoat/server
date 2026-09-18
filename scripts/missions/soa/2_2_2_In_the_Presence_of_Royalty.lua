@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_THE_PRES
 
 mission.reward =
 {
-    keyItem     = xi.ki.ROSULATIAS_POME,
+    keyItem     = xi.keyItem.ROSULATIAS_POME,
     title       = xi.title.QUEENS_CONFIDANTE,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES },
 }
@@ -21,7 +21,7 @@ mission.sections =
     -- Need the key item
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and not player:hasKeyItem(xi.ki.YORCIAS_TEAR)
+            return currentMission == mission.missionId and not player:hasKeyItem(xi.keyItem.YORCIAS_TEAR)
         end,
 
         [xi.zone.YORCIA_WEALD] =
@@ -32,14 +32,14 @@ mission.sections =
             --     onTrade = function(player, npc, trade)
             --         -- No CS for HELM in Adoulin
             --         xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil, nil)
-            --         return mission:keyItem(xi.ki.YORCIAS_TEAR)
+            --         return mission:keyItem(xi.keyItem.YORCIAS_TEAR)
             --     end,
             -- },
 
             ['Ergon_Locus_qm'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:keyItem(xi.ki.YORCIAS_TEAR)
+                    return mission:keyItem(xi.keyItem.YORCIAS_TEAR)
                 end,
             },
         },
@@ -48,7 +48,7 @@ mission.sections =
     -- Has the key item
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:hasKeyItem(xi.ki.YORCIAS_TEAR)
+            return currentMission == mission.missionId and player:hasKeyItem(xi.keyItem.YORCIAS_TEAR)
         end,
 
         [xi.zone.YORCIA_WEALD] =

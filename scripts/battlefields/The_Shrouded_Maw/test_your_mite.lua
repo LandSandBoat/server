@@ -15,7 +15,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = 'MC_Entrance',
     exitNpc          = 'Memento_Circle',
-    requiredKeyItems = { xi.ki.ASTRAL_COVENANT, message = ID.text.ASTRAL_DISINTEGRATES },
+    requiredKeyItems = { xi.keyItem.ASTRAL_COVENANT, message = ID.text.ASTRAL_DISINTEGRATES },
     grantXP          = 3000,
 })
 

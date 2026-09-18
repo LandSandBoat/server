@@ -27,8 +27,8 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 8 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_2_MISSION
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-                        player:delKeyItem(xi.ki.DARK_KEY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_CREST)
+                        player:delKeyItem(xi.keyItem.DARK_KEY)
                         player:setMissionStatus(mission.areaId, 9)
                     end
                 end,
@@ -57,7 +57,7 @@ mission.sections =
             onEventFinish =
             {
                 [242] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.DARK_KEY)
+                    npcUtil.giveKeyItem(player, xi.keyItem.DARK_KEY)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
 
@@ -87,9 +87,9 @@ mission.sections =
                 [467] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
-                        player:delKeyItem(xi.ki.KINDRED_CREST)
+                        player:delKeyItem(xi.keyItem.KINDRED_CREST)
                         player:setMissionStatus(mission.areaId, 11)
-                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.KINDRED_REPORT)
                     end
                 end,
             },

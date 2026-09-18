@@ -63,9 +63,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.ORCISH_CREST) and
-                        player:hasKeyItem(xi.ki.QUADAV_CREST) and
-                        player:hasKeyItem(xi.ki.YAGUDO_CREST)
+                        player:hasKeyItem(xi.keyItem.ORCISH_CREST) and
+                        player:hasKeyItem(xi.keyItem.QUADAV_CREST) and
+                        player:hasKeyItem(xi.keyItem.YAGUDO_CREST)
                     then
                         return quest:progressEvent(87)
                     else
@@ -78,9 +78,9 @@ quest.sections =
             {
                 [87] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.ORCISH_CREST)
-                        player:delKeyItem(xi.ki.QUADAV_CREST)
-                        player:delKeyItem(xi.ki.YAGUDO_CREST)
+                        player:delKeyItem(xi.keyItem.ORCISH_CREST)
+                        player:delKeyItem(xi.keyItem.QUADAV_CREST)
+                        player:delKeyItem(xi.keyItem.YAGUDO_CREST)
                         player:setLevelCap(65)
                         player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
                     end
@@ -93,8 +93,8 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.YAGUDO_CREST) then
-                        return quest:keyItem(xi.ki.YAGUDO_CREST)
+                    if not player:hasKeyItem(xi.keyItem.YAGUDO_CREST) then
+                        return quest:keyItem(xi.keyItem.YAGUDO_CREST)
                     end
                 end,
             },
@@ -105,8 +105,8 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ORCISH_CREST) then
-                        return quest:keyItem(xi.ki.ORCISH_CREST)
+                    if not player:hasKeyItem(xi.keyItem.ORCISH_CREST) then
+                        return quest:keyItem(xi.keyItem.ORCISH_CREST)
                     end
                 end,
             },
@@ -117,8 +117,8 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.QUADAV_CREST) then
-                        return quest:keyItem(xi.ki.QUADAV_CREST)
+                    if not player:hasKeyItem(xi.keyItem.QUADAV_CREST) then
+                        return quest:keyItem(xi.keyItem.QUADAV_CREST)
                     end
                 end,
             },

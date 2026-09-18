@@ -154,7 +154,7 @@ quest.sections =
     -- Section: Go to Yahse Hunting Grounds and harvest a Key Item Blightberry using a Sickle
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and not player:hasKeyItem(xi.ki.BLIGHTBERRY)
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and not player:hasKeyItem(xi.keyItem.BLIGHTBERRY)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -175,7 +175,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     -- No CS for HELM in Adoulin
                     xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil)
-                    return quest:keyItem(xi.ki.BLIGHTBERRY)
+                    return quest:keyItem(xi.keyItem.BLIGHTBERRY)
                 end,
             },
         },
@@ -184,7 +184,7 @@ quest.sections =
     -- Section: Return to Berghent for your reward
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and player:hasKeyItem(xi.ki.BLIGHTBERRY)
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and player:hasKeyItem(xi.keyItem.BLIGHTBERRY)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =

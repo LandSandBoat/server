@@ -54,7 +54,7 @@ entity.onTrigger = function(player, npc)
     elseif aBoysDreamCS >= 6 then
         player:startEvent(25) -- During Quest 'A Boy's Dream' (after Zaldon CS)
     elseif
-        player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and
+        player:hasKeyItem(xi.keyItem.KNIGHTS_CONFESSION) and
         player:getCharVar('UnderOathCS') == 6
     then
         player:startEvent(59) -- During Quest 'Under Oath' (he's going fishing in Jugner)

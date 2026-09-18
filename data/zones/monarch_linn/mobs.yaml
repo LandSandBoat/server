@@ -69,7 +69,7 @@ templates:
 
   Gullin_Baelfyr:
     id:            6950
-    species:       ice_elemental
+    species:       baelfyr
     type:          [battlefield]
     spell_list_id: 3
     attributes:
@@ -90,7 +90,7 @@ templates:
 
   Gullin_Byrgen:
     id:            6953
-    species:       dark_elemental
+    species:       byrgen
     type:          [battlefield]
     spell_list_id: 21
     skill_list_id: 100
@@ -113,7 +113,7 @@ templates:
   Gullin_Gefyrst:
     id:            6951
     display_name:  Gefyrst
-    species:       ice_elemental
+    species:       gefyrst
     type:          [battlefield]
     spell_list_id: 3
     attributes:
@@ -134,7 +134,7 @@ templates:
 
   Gullin_Ungeweder:
     id:            6952
-    species:       thunder_elemental
+    species:       ungeweder
     type:          [battlefield]
     spell_list_id: 3
     skill_list_id: 105

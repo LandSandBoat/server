@@ -384,7 +384,7 @@ templates:
 
   Obfuscous_Obdella:
     id:            5249
-    species:       leech
+    species:       obdella
     skill_list_id: 172
     attributes:
       combat:
@@ -403,7 +403,7 @@ templates:
 
   Phlegmatic_Byrgen:
     id:            5241
-    species:       dark_elemental
+    species:       byrgen
     spell_list_id: 21
     skill_list_id: 100
     attributes:
@@ -671,7 +671,7 @@ templates:
 
   Suspended_Sculpture:
     id:            5247
-    species:       unclassified
+    species:       sculptures
     type:          [notorious]
     skill_list_id: 349
     attributes:

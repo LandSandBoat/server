@@ -21,6 +21,7 @@
 
 #include "0x0cb_myroom_is.h"
 
+#include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
 #include "utils/charutils.h"
@@ -95,7 +96,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
                 ShowWarning(fmt::format("Player {} remodeling MH2F without it unlocked.", PChar->getName()));
             }
 
-            if (this->Param2 == static_cast<uint16_t>(GP_CLI_COMMAND_MYROOM_IS_PARAM2::MogPatio) && !charutils::hasKeyItem(PChar, KeyItem::MOG_PATIO_DESIGN_DOCUMENT))
+            if (this->Param2 == static_cast<uint16_t>(GP_CLI_COMMAND_MYROOM_IS_PARAM2::MogPatio) && !charutils::hasKeyItem(PChar, xi::KeyItem::MogPatioDesignDocument))
             {
                 ShowWarning(fmt::format("Player {} remodeling MH2F to Patio without owning the KI to unlock it.", PChar->getName()));
                 newStyle = static_cast<uint16_t>(default2fStyle);

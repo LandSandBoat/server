@@ -246,7 +246,7 @@ xi.synergy.synergyFurnaceOnTrigger = function(player, npc)
     local handleFurnaceState =
     {
         [furnaceStates.AVAILABLE] = function()
-            player:messageSpecial(synergyMessages.CLAIM_SET, xi.ki.SYNERGY_CRUCIBLE, 1)
+            player:messageSpecial(synergyMessages.CLAIM_SET, xi.keyItem.SYNERGY_CRUCIBLE, 1)
 
             xi.synergy.attachToSynergyFurnace(player, npc)
         end,

@@ -19,6 +19,7 @@ templates:
         hitbox:          22
       behaviors:
         aggressive: true
+        links:      true
       spawn:
         respawn: 300
 
@@ -210,6 +211,7 @@ templates:
         hitbox:          22
       behaviors:
         aggressive: true
+        links:      true
       spawn:
         respawn: 300
       stats:
@@ -273,6 +275,7 @@ templates:
         hitbox:         20
       behaviors:
         aggressive: true
+        links:      true
       spawn:
         respawn: 300
 

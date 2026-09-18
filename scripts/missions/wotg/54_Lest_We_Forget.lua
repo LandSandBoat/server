@@ -127,7 +127,7 @@ mission.sections =
                         player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK)
                         xi.mission.setVar(player, xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK, 'Status', 2)
 
-                        npcUtil.giveKeyItem(player, xi.ki.PRIMAL_GLOW)
+                        npcUtil.giveKeyItem(player, xi.keyItem.PRIMAL_GLOW)
                         player:messageSpecial(graubergID.text.YOU_HAVE_RETRACED_RIVER)
                     else
                         mission:setMustZone(player)

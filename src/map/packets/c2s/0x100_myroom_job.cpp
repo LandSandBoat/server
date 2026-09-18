@@ -24,6 +24,7 @@
 #include "ai/ai_container.h"
 #include "ai/states/item_state.h"
 #include "ai/states/magic_state.h"
+#include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
@@ -93,7 +94,7 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
         // If removing RemoveAllEquipment, please add a charutils::CheckUnarmedItem(PChar) if main hand is empty.
         puppetutils::LoadAutomaton(PChar);
 
-        bool canUseMeritMode = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
+        bool canUseMeritMode = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, xi::KeyItem::LimitBreaker);
         if (!canUseMeritMode && PChar->MeritMode)
         {
             if (db::preparedStmt("UPDATE char_exp SET mode = ? WHERE charid = ? LIMIT 1", 0, PChar->id))

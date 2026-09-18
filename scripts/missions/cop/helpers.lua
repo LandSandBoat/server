@@ -16,19 +16,19 @@ xi.cop.helpers.promyvionCrags =
 
 xi.cop.helpers.shatteredTelepointInfo =
 {
-    [xi.zone.LA_THEINE_PLATEAU  ] = { xi.cop.helpers.promyvionCrags.HOLLA, 202, 212, { -266.76,   -0.635,  280.058,   0, 14 }, xi.ki.LIGHT_OF_HOLLA },
-    [xi.zone.KONSCHTAT_HIGHLANDS] = { xi.cop.helpers.promyvionCrags.DEM,   913, 918, { -267.194, -40.634, -280.019,   0, 14 }, xi.ki.LIGHT_OF_DEM   },
-    [xi.zone.TAHRONGI_CANYON    ] = { xi.cop.helpers.promyvionCrags.MEA,   913, 918, {  280.066, -80.635,  -67.096, 191, 14 }, xi.ki.LIGHT_OF_MEA   },
+    [xi.zone.LA_THEINE_PLATEAU  ] = { xi.cop.helpers.promyvionCrags.HOLLA, 202, 212, { -266.76,   -0.635,  280.058,   0, 14 }, xi.keyItem.LIGHT_OF_HOLLA },
+    [xi.zone.KONSCHTAT_HIGHLANDS] = { xi.cop.helpers.promyvionCrags.DEM,   913, 918, { -267.194, -40.634, -280.019,   0, 14 }, xi.keyItem.LIGHT_OF_DEM   },
+    [xi.zone.TAHRONGI_CANYON    ] = { xi.cop.helpers.promyvionCrags.MEA,   913, 918, {  280.066, -80.635,  -67.096, 191, 14 }, xi.keyItem.LIGHT_OF_MEA   },
 }
 
 xi.cop.helpers.numPromyvionCompleted = function(player, excludeArea)
     local numKeyItems = 0
 
-    for keyItem = xi.ki.LIGHT_OF_HOLLA, xi.ki.LIGHT_OF_MEA do
+    for keyItem = xi.keyItem.LIGHT_OF_HOLLA, xi.keyItem.LIGHT_OF_MEA do
         if player:hasKeyItem(keyItem) then
             if
                 excludeArea == nil or
-                excludeArea and xi.ki.LIGHT_OF_HOLLA + excludeArea - 1 ~= keyItem
+                excludeArea and xi.keyItem.LIGHT_OF_HOLLA + excludeArea - 1 ~= keyItem
             then
                 numKeyItems = numKeyItems + 1
             end
@@ -74,7 +74,7 @@ xi.cop.helpers.shatteredTelepointOnTrigger = function(mission, player, npc)
     local currentMemory = mission:getVar(player, 'Option')
 
     if
-        player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionOffset)
+        player:hasKeyItem(xi.keyItem.LIGHT_OF_HOLLA + promyvionOffset)
     then
         return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2])
     elseif
@@ -133,7 +133,7 @@ xi.cop.helpers.largeApparatusOnTrigger = function(mission, player, npc)
         -- for "The Mothercrystals."
         if
             currentMemory == cragLocation and
-            not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + cragLocation - 1)
+            not player:hasKeyItem(xi.keyItem.LIGHT_OF_HOLLA + cragLocation - 1)
         then
             player:setLocalVar('exitOffset', cragLocation)
             return mission:progressEvent(122 + 3 * (cragLocation - 1))
@@ -158,8 +158,8 @@ xi.cop.helpers.spireEventFinish = function(mission, player, csid, option, npc)
         local promyvionId = (player:getZoneID() - 17) / 2
         local teleportLocation = xi.teleport.id.EXITPROMHOLLA + promyvionId
 
-        player:addKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
-        player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        player:addKeyItem(xi.keyItem.LIGHT_OF_HOLLA + promyvionId)
+        player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.keyItem.LIGHT_OF_HOLLA + promyvionId)
         mission:setVar(player, 'Option', 0)
 
         local numCompletedPromyvions = xi.cop.helpers.numPromyvionCompleted(player)

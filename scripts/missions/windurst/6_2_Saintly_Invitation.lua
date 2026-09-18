@@ -141,12 +141,12 @@ mission.sections =
                 [310] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                     player:addTitle(xi.title.HERO_ON_BEHALF_OF_WINDURST)
-                    npcUtil.giveKeyItem(player, xi.ki.HOLY_ONES_INVITATION)
+                    npcUtil.giveKeyItem(player, xi.keyItem.HOLY_ONES_INVITATION)
                 end,
 
                 [312] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.HOLY_ONES_OATH)
+                        player:delKeyItem(xi.keyItem.HOLY_ONES_OATH)
                     end
                 end,
             },
@@ -162,8 +162,8 @@ mission.sections =
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.SAINTLY_INVITATION
                     then
                         player:addTitle(xi.title.VICTOR_OF_THE_BALGA_CONTEST)
-                        npcUtil.giveKeyItem(player, xi.ki.BALGA_CHAMPION_CERTIFICATE)
-                        player:delKeyItem(xi.ki.HOLY_ONES_INVITATION)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BALGA_CHAMPION_CERTIFICATE)
+                        player:delKeyItem(xi.keyItem.HOLY_ONES_INVITATION)
                         player:setMissionStatus(mission.areaId, 2)
                     end
                 end,
@@ -178,7 +178,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 2 then
-                        return mission:progressCutscene(45, 0, xi.ki.HOLY_ONES_OATH)
+                        return mission:progressCutscene(45, 0, xi.keyItem.HOLY_ONES_OATH)
                     elseif missionStatus == 3 then
                         return mission:event(46)
                     end
@@ -189,8 +189,8 @@ mission.sections =
             {
                 [45] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.item.ASHURA_NECKLACE) then
-                        npcUtil.giveKeyItem(player, xi.ki.HOLY_ONES_OATH)
-                        player:delKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.HOLY_ONES_OATH)
+                        player:delKeyItem(xi.keyItem.BALGA_CHAMPION_CERTIFICATE)
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,

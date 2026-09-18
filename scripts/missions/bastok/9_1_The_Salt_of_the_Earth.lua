@@ -185,9 +185,9 @@ mission.sections =
                         return mission:messageSpecial(gustavID.text.BAD_FEELING_ABOUT_PLACE)
                     elseif
                         missionStatus == 3 and
-                        not player:hasKeyItem(xi.ki.MIRACLESALT)
+                        not player:hasKeyItem(xi.keyItem.MIRACLESALT)
                     then
-                        return mission:keyItem(xi.ki.MIRACLESALT)
+                        return mission:keyItem(xi.keyItem.MIRACLESALT)
                     end
                 end,
             },

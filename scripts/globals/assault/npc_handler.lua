@@ -12,7 +12,7 @@ xi.assault = xi.assault or {}
 
 xi.assault.onMissionGiverTrigger = function(player, npc, eventOffset, assaultArea)
     local rank             = xi.besieged.getMercenaryRank(player)
-    local hasimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
+    local hasimperialIDtag = player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     local assaultPoints    = player:getAssaultPoint(assaultArea)
     local active           = xi.extravaganza.campaignActive()
     local cipher           = 0
@@ -64,11 +64,11 @@ xi.assault.onMissionGiverEventFinish = function(player, csid, option, npc, event
 
             if
                 xi.assault.missionToArea[missionId] == assaultArea and
-                player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and
+                player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and
                 npcUtil.giveKeyItem(player, xi.assault.areaData[assaultArea].orders)
             then
                 player:addAssault(missionId)
-                player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+                player:delKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG)
                 player:addKeyItem(xi.assault.areaData[assaultArea].map)
             end
 
@@ -106,7 +106,7 @@ local function handleAssaultFinish(player, currentAssault)
         player:delAssault(currentAssault)
     end
 
-    for mapId = xi.ki.MAP_OF_LEUJAOAM_SANCTUM, xi.ki.MAP_OF_NYZUL_ISLE do
+    for mapId = xi.keyItem.MAP_OF_LEUJAOAM_SANCTUM, xi.keyItem.MAP_OF_NYZUL_ISLE do
         if player:hasKeyItem(mapId) then
             player:delKeyItem(mapId)
         end
@@ -203,7 +203,7 @@ local function replenishFromTimer(player, tagStock, maxTagStock, idTagPeriod)
 end
 
 local function calculateTags(player)
-    local idTagPeriod = player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) and 600 or 86400 -- Restock is 1 tag per day, or 1 tag per 10 minutes with Rhapsody in Azure equipped
+    local idTagPeriod = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) and 600 or 86400 -- Restock is 1 tag per day, or 1 tag per 10 minutes with Rhapsody in Azure equipped
     local maxTagStock = getMaxTagStock(player)
     local tagStock    = initializeTagStock(player, maxTagStock)
     tagStock          = applyMaxStockBonus(player, maxTagStock, tagStock)
@@ -239,7 +239,7 @@ xi.assault.onRytaalTrigger = function(player, npc)
     -- Player has not started an assault, give them a tag
     local tagStock, allTagsTimeCS = calculateTags(player)
     local tagsAvail               = tagStock > 0 and 1 or 0
-    local haveimperialIDtag       = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
+    local haveimperialIDtag       = player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     player:startEvent(268, 2, tagStock, currentAssault, haveimperialIDtag, allTagsTimeCS, tagsAvail)
 end
 
@@ -252,7 +252,7 @@ xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
     -- Player selected to obtain a new tag
     if
         option == 1 and
-        not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+        not player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG)
     then
         local tagStock = player:getCurrency('id_tags')
         if tagStock == 0 then
@@ -260,12 +260,12 @@ xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
         end
 
         if player:getCurrentAssault() ~= 0 then
-            player:messageSpecial(ID.text.CANNOT_ISSUE_TAG, xi.ki.IMPERIAL_ARMY_ID_TAG)
+            player:messageSpecial(ID.text.CANNOT_ISSUE_TAG, xi.keyItem.IMPERIAL_ARMY_ID_TAG)
 
             return
         end
 
-        npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
+        npcUtil.giveKeyItem(player, xi.keyItem.IMPERIAL_ARMY_ID_TAG)
         player:setCharVar('tagStockInitialized', 1)
 
         -- Start the replenishment timer only when taking from a full stock
@@ -279,7 +279,7 @@ xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
     elseif
         option == 2 and
         xi.assault.hasOrders(player) and
-        not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+        not player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG)
     then
         local currentAssault = player:getCurrentAssault()
         for _, orders in ipairs(xi.assault.assaultOrders) do
@@ -288,7 +288,7 @@ xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
             end
         end
 
-        npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
+        npcUtil.giveKeyItem(player, xi.keyItem.IMPERIAL_ARMY_ID_TAG)
         player:delAssault(currentAssault)
     end
 end

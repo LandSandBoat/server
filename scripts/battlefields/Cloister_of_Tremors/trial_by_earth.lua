@@ -12,7 +12,7 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'EP_Entrance',
     exitNpc          = 'Earth_Protocrystal',
-    requiredKeyItems = { xi.ki.TUNING_FORK_OF_EARTH },
+    requiredKeyItems = { xi.keyItem.TUNING_FORK_OF_EARTH },
 
     questArea = xi.questLog.BASTOK,
     quest     = xi.quest.id.bastok.TRIAL_BY_EARTH,

@@ -29,7 +29,7 @@ m:addOverride('xi.server.onServerStart', function()
         -- Copy of the base handler with the one Vana'diel day wait extended to JST midnight.
         ruludeGardens.onEventFinish[162] = function(player, csid, option, npc)
             if quest:complete(player) then
-                for keyItemId = xi.ki.PROMYVION_HOLLA_SLIVER, xi.ki.PROMYVION_HOLLA_SLIVER + 2 do
+                for keyItemId = xi.keyItem.PROMYVION_HOLLA_SLIVER, xi.keyItem.PROMYVION_HOLLA_SLIVER + 2 do
                     player:delKeyItem(keyItemId)
                 end
 

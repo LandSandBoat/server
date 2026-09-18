@@ -29,7 +29,7 @@ quest.sections =
             {
                 [882] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.BIYAADAS_LETTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BIYAADAS_LETTER)
                 end,
             },
         },
@@ -59,7 +59,7 @@ quest.sections =
             {
                 [883] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.BIYAADAS_LETTER)
+                        player:delKeyItem(xi.keyItem.BIYAADAS_LETTER)
                     end
                 end,
             },

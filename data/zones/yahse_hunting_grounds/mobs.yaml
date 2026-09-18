@@ -253,7 +253,7 @@ templates:
 
   Jungle_Baelfyr:
     id:            4861
-    species:       fire_elemental
+    species:       baelfyr
     spell_list_id: 17
     skill_list_id: 102
     attributes:
@@ -563,7 +563,7 @@ templates:
 
   Thrashing_Mantis:
     id:            4740
-    species:       green_mantid
+    species:       red_mantid
     skill_list_id: 340
     attributes:
       combat:
@@ -701,7 +701,7 @@ templates:
 
   Wooded_Ungeweder:
     id:            4738
-    species:       earth_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 101
     attributes:

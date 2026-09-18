@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local miasmaFilterCD = player:getCharVar('[ENM]MiasmaFilter')
 
-    if player:hasKeyItem(xi.ki.MIASMA_FILTER) then
+    if player:hasKeyItem(xi.keyItem.MIASMA_FILTER) then
         player:startEvent(11)
     else
         if miasmaFilterCD >= VanadielTime() then
@@ -42,7 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
-        npcUtil.giveKeyItem(player, xi.ki.MIASMA_FILTER)
+        npcUtil.giveKeyItem(player, xi.keyItem.MIASMA_FILTER)
         player:setCharVar('[ENM]MiasmaFilter', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 13 then
         npcUtil.giveItem(player, xi.item.FLAXEN_POUCH)

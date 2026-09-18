@@ -126,7 +126,7 @@ quest.sections =
                 end,
 
                 [524] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_LUMINOUS_WATER) then
+                    if npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_LUMINOUS_WATER) then
                         quest:setVar(player, 'Prog', 4)
                     end
                 end,
@@ -134,7 +134,7 @@ quest.sections =
                 [525] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:setVar(player, 'Prog', 5)
-                        player:delKeyItem(xi.ki.VIAL_OF_LUMINOUS_WATER)
+                        player:delKeyItem(xi.keyItem.VIAL_OF_LUMINOUS_WATER)
                     end
                 end,
 

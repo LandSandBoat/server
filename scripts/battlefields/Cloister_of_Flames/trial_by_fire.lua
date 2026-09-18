@@ -12,7 +12,7 @@ local content = BattlefieldQuest:new({
     index            = 0,
     entryNpc         = 'FP_Entrance',
     exitNpc          = 'Fire_Protocrystal',
-    requiredKeyItems = { xi.ki.TUNING_FORK_OF_FIRE },
+    requiredKeyItems = { xi.keyItem.TUNING_FORK_OF_FIRE },
 
     questArea = xi.questLog.OUTLANDS,
     quest     = xi.quest.id.outlands.TRIAL_BY_FIRE,

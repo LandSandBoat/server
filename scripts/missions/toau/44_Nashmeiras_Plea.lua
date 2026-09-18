@@ -27,7 +27,7 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) then
+                    if not player:hasKeyItem(xi.keyItem.MYTHRIL_MIRROR) then
                         return mission:progressEvent(3156, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
                     else
                         return mission:event(3149, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
@@ -38,7 +38,7 @@ mission.sections =
             onEventFinish =
             {
                 [3156] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MYTHRIL_MIRROR)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MYTHRIL_MIRROR)
                 end,
             },
         },

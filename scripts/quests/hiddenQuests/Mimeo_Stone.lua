@@ -29,7 +29,7 @@ stoneTimer = function(player)
     -- so don't continue the timer after this point
     if
         not player or
-        not player:hasKeyItem(xi.ki.MIMEO_STONE) or
+        not player:hasKeyItem(xi.keyItem.MIMEO_STONE) or
         quest:getLocalVar(player, 'Progress') == 1
     then
         return
@@ -37,14 +37,14 @@ stoneTimer = function(player)
 
     local numFades = quest:getLocalVar(player, 'NumFades') + 1
     if numFades == 5 then
-        player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_STONE)
-        player:delKeyItem(xi.ki.MIMEO_STONE)
+        player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_STONE)
+        player:delKeyItem(xi.keyItem.MIMEO_STONE)
         return
     end
 
     quest:setLocalVar(player, 'NumFades', numFades)
 
-    player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + numFades - 1, xi.ki.MIMEO_STONE)
+    player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + numFades - 1, xi.keyItem.MIMEO_STONE)
 
     -- Captures show ranges from 49 to 88, but it may not necessarily be purely random
     -- For Luminant Offset+3, all times (12 recorded) were below 60s except 1
@@ -60,7 +60,7 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return not player:hasKeyItem(xi.ki.MIMEO_STONE)
+            return not player:hasKeyItem(xi.keyItem.MIMEO_STONE)
         end,
 
         [xi.zone.ATTOHWA_CHASM] =
@@ -68,8 +68,8 @@ quest.sections =
             ['Luminant'] =
             {
                 onTrigger = function(player, npc, trade)
-                    npcUtil.giveKeyItem(player, xi.ki.MIMEO_STONE)
-                    player:messageSpecial(ID.text.MIMEO_STONE_PICKUP, xi.ki.MIMEO_STONE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MIMEO_STONE)
+                    player:messageSpecial(ID.text.MIMEO_STONE_PICKUP, xi.keyItem.MIMEO_STONE)
 
                     attohwaChasmGlobal.handleLuminantUsed(npc)
 
@@ -86,7 +86,7 @@ quest.sections =
 
     {
         check = function(player, questVars, vars)
-            return player:hasKeyItem(xi.ki.MIMEO_STONE)
+            return player:hasKeyItem(xi.keyItem.MIMEO_STONE)
         end,
 
         [xi.zone.ATTOHWA_CHASM] =
@@ -102,11 +102,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.MIMEO_STONE) and
+                        player:hasKeyItem(xi.keyItem.MIMEO_STONE) and
                         quest:getLocalVar(player, 'Progress') == 0
                     then
                         local numFades = quest:getLocalVar(player, 'NumFades')
-                        player:messageSpecial(ID.text.MIMEO_STONE_BRIGHTNESS_OFFSET + numFades, xi.ki.MIMEO_STONE)
+                        player:messageSpecial(ID.text.MIMEO_STONE_BRIGHTNESS_OFFSET + numFades, xi.keyItem.MIMEO_STONE)
 
                         -- Make sure player has room for reward, otherwise timer keeps running
                         local reward = rewards[numFades]
@@ -127,14 +127,14 @@ quest.sections =
             },
 
             onZoneOut = function(player)
-                player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_STONE)
-                player:delKeyItem(xi.ki.MIMEO_STONE)
+                player:messageSpecial(ID.text.MIMEO_JEWEL_OFFSET + 4, xi.keyItem.MIMEO_STONE)
+                player:delKeyItem(xi.keyItem.MIMEO_STONE)
             end,
 
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MIMEO_STONE)
+                    player:delKeyItem(xi.keyItem.MIMEO_STONE)
                     local numFades = quest:getLocalVar(player, 'NumFades')
                     npcUtil.giveItem(player, rewards[numFades])
                 end,

@@ -190,8 +190,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         end
     elseif areaId == 2 then
         if
-            player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
-            player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)
+            player:hasKeyItem(xi.keyItem.BRAND_OF_DAWN) and
+            player:hasKeyItem(xi.keyItem.BRAND_OF_TWILIGHT)
         then
             player:startEvent(156)
         else

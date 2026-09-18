@@ -76,7 +76,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        return quest:progressEvent(256, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, xi.item.EARTH_PENDULUM):progress() -- Takes priority over quest "Trial by Earth"
+                        return quest:progressEvent(256, 0, xi.keyItem.TUNING_FORK_OF_EARTH, 0, xi.item.EARTH_PENDULUM):progress() -- Takes priority over quest "Trial by Earth"
                     elseif
                         questProgress == 1 and
                         not player:hasItem(xi.item.EARTH_PENDULUM) and

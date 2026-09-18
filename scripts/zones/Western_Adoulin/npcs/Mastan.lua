@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local tccom = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
-    local tccomNeedKI = player:hasKeyItem(xi.ki.MELVIENS_TURN) and not player:hasKeyItem(xi.ki.MELVIENS_DEATH)
+    local tccomNeedKI = player:hasKeyItem(xi.keyItem.MELVIENS_TURN) and not player:hasKeyItem(xi.keyItem.MELVIENS_DEATH)
     local orderUp = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
     local orderMastan = utils.mask.getBit(player:getCharVar('Order_Up_NPCs'), 11)
 
@@ -27,7 +27,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 70 then
         player:setCharVar('Order_Up_NPCs', utils.mask.setBit(player:getCharVar('Order_Up_NPCs'), 11, true))
     elseif csid == 184 and option == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.MELVIENS_DEATH)
+        npcUtil.giveKeyItem(player, xi.keyItem.MELVIENS_DEATH)
     end
 end
 

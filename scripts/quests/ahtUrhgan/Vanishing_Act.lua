@@ -93,7 +93,7 @@ quest.sections =
             ['Ulamaal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RAINBOW_BERRY) then
+                    if player:hasKeyItem(xi.keyItem.RAINBOW_BERRY) then
                         return quest:progressEvent(45)
                     else
                         return quest:event(54)
@@ -104,7 +104,7 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RAINBOW_BERRY) then
+                    if player:hasKeyItem(xi.keyItem.RAINBOW_BERRY) then
                         return quest:progressEvent(45)
                     else
                         return quest:event(54)
@@ -135,7 +135,7 @@ quest.sections =
                 [45] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:needToZone(true)
-                        player:delKeyItem(xi.ki.RAINBOW_BERRY)
+                        player:delKeyItem(xi.keyItem.RAINBOW_BERRY)
                         xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.A_TASTE_OF_HONEY, 'Stage', GetSystemTime() + 60) -- 1 minute wait time
                     end
                 end,
@@ -150,7 +150,7 @@ quest.sections =
                     if
                         npcUtil.tradeMatches(trade, { { xi.item.SICKLE, 1 } }) and
                         quest:getVar(player, 'Prog') == 2 and
-                        not player:hasKeyItem(xi.ki.RAINBOW_BERRY)
+                        not player:hasKeyItem(xi.keyItem.RAINBOW_BERRY)
                     then
                         player:setLocalVar('questItem', 1)
                         return quest:progressEvent(507, { [0] = 4294966520 })
@@ -162,7 +162,7 @@ quest.sections =
             {
                 [507] = function(player, csid, option, npc)
                     if player:getLocalVar('questItem') == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RAINBOW_BERRY)
                         player:setLocalVar('questItem', 0)
                     end
                 end,

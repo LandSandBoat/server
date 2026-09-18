@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS
 quest.reward =
 {
     item    = xi.item.ANIMATOR,
-    keyItem = xi.ki.JOB_GESTURE_PUPPETMASTER,
+    keyItem = xi.keyItem.JOB_GESTURE_PUPPETMASTER,
     title   = xi.title.PROUD_AUTOMATON_OWNER,
 }
 
@@ -107,7 +107,7 @@ quest.sections =
                         return quest:event(263):oncePerZone()
                     elseif
                         questProgress == 2 and
-                        player:hasKeyItem(xi.ki.ANTIQUE_AUTOMATON)
+                        player:hasKeyItem(xi.keyItem.ANTIQUE_AUTOMATON)
                     then
                         return quest:progressEvent(264)
                     elseif
@@ -128,7 +128,7 @@ quest.sections =
                 [264] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                    player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
+                    player:delKeyItem(xi.keyItem.ANTIQUE_AUTOMATON)
                 end,
 
                 [265] = function(player, csid, option, npc)
@@ -163,7 +163,7 @@ quest.sections =
             onEventFinish =
             {
                 [214] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANTIQUE_AUTOMATON)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ANTIQUE_AUTOMATON)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },

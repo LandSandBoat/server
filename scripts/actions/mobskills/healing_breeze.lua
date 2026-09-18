@@ -1,7 +1,7 @@
 -----------------------------------
 -- Healing Breeze
+-- Family: Dhalmel
 -- Description: Restores HP for party members within area of effect.
--- Type: Magical (Wind)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,17 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local power       = mob:getMaxHP()
-    local skillTP     = utils.clamp(skill:getTP() - 1000, 0, 2000)
-    local skillFactor = 172 / 1024
-    local tpFactor    = 1 + 0.25 * skillTP / 1000
+    local params = {}
 
-    power = math.floor(power * skillFactor)
-    power = math.floor(power * tpFactor)
+    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.baseHeal       = mob:getMaxHP()
+    params.fTP =
+    {
+        { tp = 1000, modifier = 172 / 1024 },
+        { tp = 2000, modifier = 215 / 1024 },
+        { tp = 3000, modifier = 258 / 1024 },
+    }
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
-
-    return xi.mobskills.mobHealMove(target, power)
+    return xi.mobskills.mobHealMove(mob, target, skill, action, params)
 end
 
 return mobskillObject

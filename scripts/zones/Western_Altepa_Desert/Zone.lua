@@ -8,7 +8,7 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
 
     -- loop through Altepa Gate, Ruby/Topaz/Emerald/Sapphire pillar/column, set them all always relevant
     for i = 0, 8, 1 do

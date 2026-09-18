@@ -75,13 +75,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.INDIGESTED_MEAT) and
+                        player:hasKeyItem(xi.keyItem.INDIGESTED_MEAT) and
                         quest:getVar(player, 'Informed') == 0
                     then
                         return quest:progressEvent(65) -- Sends the player to Lumomo.
                     elseif player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                         return quest:progressEvent(64) -- Offers to remove the ointment.
-                    elseif not player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
+                    elseif not player:hasKeyItem(xi.keyItem.INDIGESTED_MEAT) then
                         return quest:progressEvent(62) -- Offers to apply the ointment.
                     end
                 end,
@@ -98,9 +98,9 @@ quest.sections =
                         return quest:messageSpecial(mazeID.text.OINTMENT_DRAWS_MONSTERS)
                     elseif
                         quest:getVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.INDIGESTED_MEAT)
+                        not player:hasKeyItem(xi.keyItem.INDIGESTED_MEAT)
                     then
-                        return quest:keyItem(xi.ki.INDIGESTED_MEAT)
+                        return quest:keyItem(xi.keyItem.INDIGESTED_MEAT)
                     end
                 end,
             },
@@ -160,7 +160,7 @@ quest.sections =
             ['Lumomo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
+                    if player:hasKeyItem(xi.keyItem.INDIGESTED_MEAT) then
                         return quest:progressEvent(822) -- Completes the quest.
                     else
                         return quest:event(820) -- Reminder to see Ahko Mhalijikhari.
@@ -172,7 +172,7 @@ quest.sections =
             {
                 [822] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INDIGESTED_MEAT)
+                        player:delKeyItem(xi.keyItem.INDIGESTED_MEAT)
                         player:setCharVar('EcoReset', 1, NextConquestTally())
                     end
                 end,

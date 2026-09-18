@@ -94,8 +94,16 @@ end
 
 -- Get hitrate
 local function calculateHitrate(attacker, target, bonusacc)
+    if
+        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)
+    then
+        return -1
+    end
+
     -- your mainhand may not be a sword, so hit rate would vary here
     -- TODO: verify hit rate of physical blue magic with different weapons
+
     return xi.combat.physicalHitRate.getPhysicalHitRate(attacker, target, bonusacc + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2, xi.attackAnimation.RIGHT_ATTACK, false)
 end
 
@@ -165,29 +173,6 @@ end
 
 ---@param caster CBaseEntity
 ---@param target CBaseEntity
----@param spell CSpell
----@param params blueSkillParams
----@return number
-local function getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
-    local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    local multiplier = 1
-    local extraDmg   = 0
-
-    if params.hasEfflux then
-        multiplier = 1.5
-    end
-
-    if params.hasChainAffinity then
-        extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
-    end
-
-    -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
-    -- There's no documentation on it doing that and ilvl gear plainly states +X
-    return (math.floor(skill * 0.11) * 2 + 3) * multiplier + extraDmg
-end
-
----@param caster CBaseEntity
----@param target CBaseEntity
 ---@param params blueSkillParams
 ---@return number
 local calculateCritChance = function(caster, target, params)
@@ -245,6 +230,286 @@ local getWSCBonuses = function(caster, params)
     return bonusWSC
 end
 
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params blueSkillParams
+---@param isCannonball boolean
+---@return number
+local function getPhysicalBlueMagicBaseDamage(caster, target, spell, params, isCannonball)
+    local skill      = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
+    local multiplier = 1
+    local extraDmg   = 0
+
+    if params.hasEfflux then
+        multiplier = 1.5
+    end
+
+    if params.hasChainAffinity then
+        extraDmg = caster:getMod(xi.mod.ENHANCES_CHAIN_AFFINITY)
+    end
+
+    -- TODO: verify the chain affinity bonus is supposed to be multiplied here.
+    -- There's no documentation on it doing that and ilvl gear plainly states +X
+    local baseDamage = (math.floor(skill * 0.11) * 2 + 3) * multiplier + extraDmg
+
+    baseDamage = utils.clamp(baseDamage, 0, params.baseDamageCap)
+
+     -- fSTR
+    local dSTR = caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
+    local fStr = 0
+
+    if params.attackType and params.attackType == xi.attackType.RANGED then
+        fStr = calculatefSTR2(dSTR, caster:getMainLvl())
+    else
+        fStr = calculatefSTR(dSTR, caster:getMainLvl())
+    end
+
+    -- Cannonball specifically is capped to 22 fSTR
+    if isCannonball then
+        fStr = math.min(fStr, 22)
+    end
+
+    -- WSC
+    local wsc        = calculateWSC(caster, params)
+    local bonusWSC   = getWSCBonuses(caster, params)
+
+    wsc = wsc + wsc * bonusWSC -- Bonus WSC from AF3/CA
+
+    -- Final D
+    return math.floor(baseDamage + fStr + wsc)
+end
+
+---@class blueReturnInfo
+---@field damage number
+---@field hybridDamage number
+---@field hitsLanded number
+---@field attackType xi.attackType
+---@field damageType xi.damageType
+---@field hybridAttackType xi.physicalAttackType
+---@field hybridDamageType xi.damageType
+---@field isCritical boolean
+---@field hitData physicalHitInfo
+
+---@params params blueSkillParams
+---@return blueReturnInfo
+local function getDefaultReturnInfo(params)
+    local returnInfo = {}
+
+    -- Initialize return structure
+    returnInfo.damage           = 0
+    returnInfo.hybridDamage     = 0
+    returnInfo.hitsLanded       = 0
+    returnInfo.attackType       = params.attackType
+    returnInfo.damageType       = params.damageType
+    returnInfo.hybridAttackType = xi.attackType.NONE
+    returnInfo.hybridDamageType = xi.damageType.NONE
+    returnInfo.isCritical       = false
+    returnInfo.hitData          = {}
+
+    return returnInfo
+end
+
+---@params caster BaseEnitity
+---@params params blueSkillParams
+---@params attackMultiplier number
+---@params isCannonball boolean
+---@return table
+local function getDefaultHitParams(caster, params, attackMultiplier, isCannonball)
+    ----------------------------------
+    -- Params for the individual hits
+    ----------------------------------
+    local hitParams =
+    {
+        hitNumber            = 0,
+        attackType           = params.attackType,
+        damageType           = params.damageType,
+        skipStoneskin        = false,
+        canCrit              = params.critChance > 0,
+        weaponType           = xi.skill.NONE,
+        tpValue              = 0,
+        attackMultiplier     = attackMultiplier,
+        critModTable         = { 0, 0, 0 },
+        applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster),
+        isCannonball         = isCannonball,
+        ignoreDefense        = false,
+        ignoreDefenseFactor  = nil, -- If the table exists, it ignores defense
+        skipPDIF             = false,
+        skipParry            = params.skipParry,
+        skipGuard            = params.skipGuard,
+        skipBlock            = params.skipBlock,
+    }
+
+    return hitParams
+end
+
+-- helper function to handle a single hit and check for parrying, guarding, and blocking
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param baseHitDamage number
+---@param params physicalMobSkillHitParams
+---@param isSneakAttack boolean
+---@param critChance number
+---@return physicalHitInfo
+local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, isSneakAttack, critChance)
+    local hitParried               = xi.combat.physical.isParried(target, caster) and not params.skipParry
+    local hitGuarded               = xi.combat.physical.isGuarded(target, caster) and not params.skipGuard
+    local isCritical               = isSneakAttack or math.randomFloat(0, 1) < critChance -- TODO: check if ranged can crit with SA
+    local hitBlocked               = false
+    local blockedWithShieldMastery = false
+    local hitInfo                  = xi.mobskills.defaultHitInfo(params.hitNumber)
+
+    ----------------------------------
+    -- Parry / Guard
+    ----------------------------------
+    if hitParried then
+        hitInfo.hitParried = true
+        hitInfo.missType   = 'Parried'
+
+        return hitInfo
+    end
+
+    ----------------------------------
+    -- PDIF + Damage
+    ----------------------------------
+    local pDif             = xi.combat.physical.calculateMeleePDIF(caster, target, xi.skill.BLUE_MAGIC, params.attackMultiplier, isCritical, params.applyLevelCorrection, params.ignoreDefense, params.ignoreDefenseFactor, false, xi.slot.MAIN, params.isCannonball)
+    local hitDamage        = 0
+
+    -- TODO: is this true of blue magic too?
+    -- Guard does work and isnt a miss like mobskills
+    if hitGuarded then
+        hitInfo.hitGuarded = true
+        pDif = pDif - 1
+    end
+
+    hitDamage = math.floor(baseHitDamage * pDif)
+
+    if
+        xi.combat.physical.isBlocked(target, caster) and
+        not params.skipBlock
+    then
+        hitBlocked = true
+
+        hitDamage = hitDamage - xi.combat.physical.getDamageReductionForBlock(target, caster, hitDamage)
+
+        if target:getMod(xi.mod.SHIELD_MASTERY_TP) > 0 then
+            blockedWithShieldMastery = true
+        end
+    end
+
+    hitDamage = math.floor(hitDamage * xi.combat.damage.physicalElementSDT(target, params.damageType))
+    hitDamage = math.floor(hitDamage * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
+
+    hitDamage = xi.automaton.handleEqualizer(target, hitDamage)
+
+    -- TODO: Need captures for different severe damage mechanics. Do they proc per hit or per skill
+    hitDamage = math.floor(target:handleSevereDamage(hitDamage, true))
+
+    hitDamage = utils.handlePhalanx(target, hitDamage)
+
+    if not params.skipStoneskin then
+        hitDamage = utils.handleStoneskin(target, hitDamage, xi.attackType.PHYSICAL)
+    end
+
+    hitDamage = math.floor(target:checkDamageCap(hitDamage))
+
+    if hitDamage > 0 then
+        target:trySkillUp(xi.skill.EVASION, target:getMainLvl())
+
+        if not blockedWithShieldMastery then
+            target:tryHitInterrupt(target)
+        end
+    end
+
+    if params.attackType ~= xi.attackType.RANGED then
+        caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
+        caster:delStatusEffect(xi.effect.TRICK_ATTACK)
+    end
+
+    ----------------------------------
+    -- Successful Hit
+    ----------------------------------
+    hitInfo.hitLanded  = true
+    hitInfo.hitDamage  = hitDamage
+    hitInfo.hitBlocked = hitBlocked
+    hitInfo.isCritical = isCritical
+    hitInfo.pDif       = pDif
+
+    return hitInfo
+end
+
+-- Apply spell damage
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param spell CSpell
+---@param params blueSkillParams
+---@param returnInfo blueReturnInfo
+---@param trickAttackTarget CBaseEntity?
+local function applyPhysicalSpellDamage(caster, target, spell, params, returnInfo, trickAttackTarget)
+    ----------------------------------
+    -- Tally All Hit Results
+    ----------------------------------
+    local totalDamage, hitsLanded, _, _, hitsAbsorbed, shadowsAbsorbed, anyCrit = xi.mobskills.tallyHitResults(returnInfo.hitData) -- Param 3, 4 aren't used in blue magic. TODO: check yaegasumi and TE messages just to be sure.
+
+    ----------------------------------
+    -- TODO: Automaton analyzer? probably the most edge of cases....
+    ----------------------------------
+
+    ----------------------------------
+    -- TODO: Hybrid skill damage?
+    ----------------------------------
+
+    ----------------------------------
+    -- Handle Miss Messaging
+    ----------------------------------
+    if hitsLanded == 0 then
+        -- TODO: Yaegasumi?
+        if hitsAbsorbed > 0 then
+            -- Utsusemi and Blink
+            spell:setMsg(xi.msg.basic.SHADOW_ABSORB)
+            totalDamage = shadowsAbsorbed
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_FAIL)
+            totalDamage = 0
+        end
+    end
+
+    returnInfo.damage       = totalDamage * xi.settings.main.BLUE_POWER
+    returnInfo.hybridDamage = 0
+    returnInfo.hitsLanded   = hitsLanded
+    returnInfo.isCritical   = anyCrit
+
+    if anyCrit and hitsLanded > 0 or hitsAbsorbed > 0 then
+        target:triggerListener('CRITICAL_TAKE', target, caster)
+    end
+
+    spell:setCritical(anyCrit)
+
+    caster:delStatusEffectSilent(xi.effect.EFFLUX)
+
+    if hitsLanded > 0 and totalDamage > 0 then
+        local tpToCaster = xi.combat.tp.calculateTPGainOnMagicalDamage(caster, target, totalDamage) * math.max(params.tpHitsLanded - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
+
+        if tpToCaster > 0 then
+            target:addTP(tpToCaster)
+        end
+
+        target:takeSpellDamage(caster, spell, totalDamage, params.attackType, params.damageType)
+
+        -- Handle Afflatus Misery.
+        target:handleAfflatusMiseryDamage(totalDamage)
+
+        -- Handle Enmity
+        if trickAttackTarget then
+            target:updateEnmityFromDamage(trickAttackTarget, totalDamage)
+        else
+            target:updateEnmityFromDamage(caster, totalDamage)
+        end
+    end
+
+    return totalDamage
+end
+
 -----------------------------------
 -- Global functions
 -----------------------------------
@@ -278,6 +543,11 @@ end
 ---@field tpModifier       xi.spells.blue.tpMod
 ---@field skillchainType   xi.skillchainType
 ---@field skillchainType2  xi.skillchainType
+---@field shadowBehavior   xi.mobskills.shadowBehavior
+---@field skipParry        boolean
+---@field skipGuard        boolean
+---@field skipBlock        boolean
+---@field skipYaegasumi    boolean
 ---@field str_wsc          number
 ---@field dex_wsc          number
 ---@field vit_wsc          number
@@ -318,6 +588,11 @@ xi.spells.blue.getDefaultParams = function(caster)
     params.tpModifier      = xi.spells.blue.tpMod.NONE
     params.skillchainType  = xi.skillchainType.NONE
     params.skillchainType2 = xi.skillchainType.NONE
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- sane default for 1 per hit
+    params.skipParry       = false
+    params.skipGuard       = false
+    params.skipBlock       = false
+    params.skipYaegasumi   = false -- ??? TODO: test this
 
     params.str_wsc = 0.0
     params.dex_wsc = 0.0
@@ -349,38 +624,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
 
     local isCannonball = spell:getID() == xi.magic.spell.CANNONBALL
-
-    -- Initial D value
-    local initialD = getPhysicalBlueMagicBaseDamage(caster, target, spell, params)
-    initialD       = utils.clamp(initialD, 0, params.baseDamageCap)
-
-    -- fSTR
-    local dSTR = caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
-    local fStr = 0
-
-    if params.attackType and params.attackType == xi.attackType.RANGED then
-        fStr = calculatefSTR2(dSTR, caster:getMainLvl())
-    else
-        fStr = calculatefSTR(dSTR, caster:getMainLvl())
-    end
-
-    -- Cannonball specifically is capped to 22 fSTR
-    if isCannonball then
-        fStr = math.min(fStr, 22)
-    end
-
-    -- ftp, bonus WSC
-    local ftp        = params.ftp0 or 1
-    local bonusWSC   = getWSCBonuses(caster, params)
-    local tp         = getTPBonus(caster, params)
+    local baseDamage   = getPhysicalBlueMagicBaseDamage(caster, target, spell, params, isCannonball)
+    local ftp          = params.ftp0 or 1
+    local tp           = getTPBonus(caster, params)
 
     if tp > 0 then
         ftp = xi.spells.blue.calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
     end
-
-    -- WSC
-    local wsc = calculateWSC(caster, params)
-    wsc       = wsc + wsc * bonusWSC -- Bonus WSC from AF3/CA
 
     -- Monster correlation
     local correlationBonus = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0) - 1
@@ -390,9 +640,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         ftp = params.ftpAzure
     end
 
-    -- Final D
-    local finalD = math.floor(initialD + fStr + wsc)
-
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
@@ -400,23 +647,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.bonusAcc     = params.bonusAcc or 0
     params.critChance   = calculateCritChance(caster, target, params)
 
-    local potencyAttackMod     = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
-    local spellAttackMod       = params.attackMult
-    local attackMultiplier     = spellAttackMod * potencyAttackMod
-    local applyLevelCorrection = xi.data.levelCorrection.isLevelCorrectedZone(caster)
-    local hitrate              = calculateHitrate(caster, target, params.bonusAcc)
-
-    -------------------------
-    -- Perform the attacks --
-    -------------------------
-
-    local hitsdone          = 0
+    local potencyAttackMod  = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
+    local spellAttackMod    = params.attackMult
+    local attackMultiplier  = spellAttackMod * potencyAttackMod
+    local hitrate           = calculateHitrate(caster, target, params.bonusAcc)
     local finaldmg          = 0
-    local anyCrit           = false
     local sneakIsApplicable = false
     local trickAttackTarget = nil
-
     if
+        hitrate ~= -1 and -- -1 = PD/ALL_MISS
         spell:getAoE() == xi.aoeType.NONE and
         params.attackType ~= xi.attackType.RANGED
     then
@@ -432,70 +671,85 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
     end
 
-    if
-        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-        target:hasStatusEffect(xi.effect.ALL_MISS)
-    then
-        hitrate           = -1
-        sneakIsApplicable = false
-    end
+    params.tpHitsLanded    = 0
+    params.hitsLanded      = 0
+    local firstHitDamage   = baseDamage * (ftp + correlationBonus)
+    local subsequentDamage = finaldmg + baseDamage * (1 + correlationBonus)
+    local hitParams        = getDefaultHitParams(caster, params, attackMultiplier, isCannonball)
+    local returnInfo       = getDefaultReturnInfo(params)
 
-    params.tpHitsLanded = 0
-    params.hitsLanded   = 0
+    for hitNumber = 1, params.numHits do
+        local hitInfo           = nil
+        local shadowsConsumed   = 0
+        local hitAbsorbed       = false
+        local attackAnticipated = false
+        local attackYaegasumi   = false
+        local chance            = math.randomFloat(0, 1)
 
-    while hitsdone < params.numHits do
-        local chance = math.randomFloat(0, 1)
+        ----------------------------------
+        -- Handle Utsusemi and Blink
+        ----------------------------------
+        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(target, target, spell, params, params.shadowBehavior)
 
-        if
-            sneakIsApplicable or
-            chance <= hitrate
+        -- If the skill did not penetrate and deal damage through the target's shadows, record hit as absorbed.
+        if hitAbsorbed then
+            hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
+            hitInfo.hitAbsorbed      = true
+            hitInfo.missType         = 'Shadow'
+            hitInfo.shadowsConsumed  = shadowsConsumed or 0
+        elseif
+            not params.skipYaegasumi and
+            target:hasStatusEffect(xi.effect.YAEGASUMI)
+            -- TODO: Fully implement mechanics of this ability (TP Return to target evading, WS damage bonus)
+            -- TODO: How does this interact with shadows/third eye? Do they overwrite? If they coexist, which takes priority?
         then
-            -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
+            attackYaegasumi      = true -- TODO: Assuming this acts like Third Eye for now in that it blocks all hits.
+            hitInfo              = xi.mobskills.defaultHitInfo(hitNumber)
+            hitInfo.hitYaegasumi = true
+            hitInfo.missType     = 'Yaegasumi Evade'
+        elseif xi.combat.physicalHitRate.checkAnticipated(caster, target) then
+            attackAnticipated      = true -- We use this below to break the attack loop since Third Eye blocks the whole skill.
+            hitInfo                = xi.mobskills.defaultHitInfo(hitNumber)
+            hitInfo.hitAnticipated = true
+            hitInfo.missType       = 'Anticipated'
+        elseif sneakIsApplicable or chance <= hitrate * 100 then
+            hitParams.hitNumber = hitNumber
 
-            local isCritical = sneakIsApplicable or math.randomFloat(0, 1) < params.critChance
-            local pdif       = xi.combat.physical.calculateMeleePDIF(caster, target, xi.skill.BLUE_MAGIC, attackMultiplier, isCritical, applyLevelCorrection, false, 0, false, xi.slot.MAIN, isCannonball)
+            local damageForThisHit = (hitNumber == 1) and firstHitDamage or subsequentDamage
 
-            anyCrit = anyCrit or isCritical
+            hitInfo = handleSinglePhysicalHit(caster, target, damageForThisHit, hitParams, sneakIsApplicable, params.critChance)
 
-            -- Add it to our final damage
-            if hitsdone == 0 then
-                finaldmg = finaldmg + finalD * (ftp + correlationBonus) * pdif -- first hit gets full ftp bonus
-            else
-                finaldmg = finaldmg + finalD * (1 + correlationBonus) * pdif
-            end
+            hitInfo.shadowsConsumed  = shadowsConsumed
 
-            params.hitsLanded = params.hitsLanded + 1
-            sneakIsApplicable = false
-
-            -- Store number of hits that did > 0 damage
-            if finaldmg > 0 then
+            if hitInfo.hitDamage > 0 then
                 params.tpHitsLanded = params.tpHitsLanded + 1
             end
+        else
+            hitInfo          = xi.mobskills.defaultHitInfo(hitNumber)
+            hitInfo.missType = 'Evaded / Missed'
         end
 
-        if params.attackType ~= xi.attackType.RANGED then
-            caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
-            caster:delStatusEffect(xi.effect.TRICK_ATTACK)
+            -- Debugging
+        if not hitInfo then
+            error('hitInfo was never assigned for hit #' .. tostring(hitNumber))
         end
 
-        hitsdone = hitsdone + 1
+        -- Record the individual hit into hitData table.
+        table.insert(returnInfo.hitData, hitInfo)
+
+        -- Third Eye treats multi hit attacks as a single hit.
+        -- Exit early if there are remaining hits after the anticipated hit.
+        if
+            (hitAbsorbed and
+            shadowsConsumed == 0) or
+            attackAnticipated or
+            attackYaegasumi
+        then
+            break
+        end
     end
 
-    finaldmg = math.floor(finaldmg * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
-
-    if params.hitsLanded == 0 then
-        spell:setMsg(xi.msg.basic.MAGIC_FAIL)
-    end
-
-    if anyCrit and params.hitsLanded > 0 then
-        target:triggerListener('CRITICAL_TAKE', target, caster)
-    end
-
-    spell:setCritical(anyCrit)
-
-    caster:delStatusEffectSilent(xi.effect.EFFLUX)
-
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
+    return applyPhysicalSpellDamage(caster, target, spell, params, returnInfo, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell. Called from spell scripts.
@@ -865,10 +1119,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     end
 
     -- Early return: Out of gaze.
-    if
-        params.isGaze and
-        (not target:isFacing(caster) or not caster:isFacing(target))
-    then
+    if params.isGaze and not target:isFacing(caster) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return effect
     end

@@ -36,7 +36,7 @@ quest.sections =
             onEventFinish =
             {
                 [594] = function(player, csid, option, npc)
-                    if option == 0 and npcUtil.giveKeyItem(player, xi.ki.WEAPONS_ORDER) then
+                    if option == 0 and npcUtil.giveKeyItem(player, xi.keyItem.WEAPONS_ORDER) then
                         quest:begin(player)
                     end
                 end,
@@ -47,7 +47,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                player:hasKeyItem(xi.ki.WEAPONS_ORDER)
+                player:hasKeyItem(xi.keyItem.WEAPONS_ORDER)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -62,8 +62,8 @@ quest.sections =
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
-                    if npcUtil.giveKeyItem(player, xi.ki.WEAPONS_RECEIPT) then
-                        player:delKeyItem(xi.ki.WEAPONS_ORDER)
+                    if npcUtil.giveKeyItem(player, xi.keyItem.WEAPONS_RECEIPT) then
+                        player:delKeyItem(xi.keyItem.WEAPONS_ORDER)
                     end
                 end,
             },
@@ -73,12 +73,12 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                not player:hasKeyItem(xi.ki.WEAPONS_ORDER)
+                not player:hasKeyItem(xi.keyItem.WEAPONS_ORDER)
         end,
 
         [xi.zone.JUGNER_FOREST] =
         {
-            ['Alexius'] = quest:messageName(forestID.text.ALEXIUS_ORDERS, xi.ki.WEAPONS_RECEIPT, 0, 0, 0, true, false),
+            ['Alexius'] = quest:messageName(forestID.text.ALEXIUS_ORDERS, xi.keyItem.WEAPONS_RECEIPT, 0, 0, 0, true, false),
         },
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -89,7 +89,7 @@ quest.sections =
             {
                 [607] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.WEAPONS_RECEIPT)
+                        player:delKeyItem(xi.keyItem.WEAPONS_RECEIPT)
                     end
                 end,
             },

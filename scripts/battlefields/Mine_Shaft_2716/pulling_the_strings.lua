@@ -16,7 +16,7 @@ local content = Battlefield:new({
     index            = 3,
     entryNpc         = '_0d0',
     exitNpcs         = { '_0d1', '_0d2', '_0d3' },
-    requiredKeyItems = { xi.ki.SHAFT_GATE_OPERATING_DIAL, message = mineshaftID.text.SNAPS_IN_TWO, },
+    requiredKeyItems = { xi.keyItem.SHAFT_GATE_OPERATING_DIAL, message = mineshaftID.text.SNAPS_IN_TWO, },
     grantXP          = 2000,
     armouryCrates    =
     {

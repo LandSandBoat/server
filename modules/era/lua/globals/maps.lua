@@ -20,112 +20,112 @@ local m = Module:new('era_map_vendors', xi.pre(xi.expansion.SOA))
 local eraMaps =
 {
 --   ID      Key Item                             Cost
-    [ 0] = { xi.ki.MAP_OF_THE_SAN_DORIA_AREA,      200 },
-    [ 1] = { xi.ki.MAP_OF_THE_BASTOK_AREA,         200 },
-    [ 2] = { xi.ki.MAP_OF_THE_WINDURST_AREA,       200 },
-    [ 3] = { xi.ki.MAP_OF_THE_JEUNO_AREA,          600 },
-    [ 4] = { xi.ki.MAP_OF_ORDELLES_CAVES,          600 },
-    [ 5] = { xi.ki.MAP_OF_GHELSBA,                 600 },
-    [ 6] = { xi.ki.MAP_OF_DAVOI,                  3000 },
-    [ 7] = { xi.ki.MAP_OF_CARPENTERS_LANDING,     3000 },
-    [ 8] = { xi.ki.MAP_OF_THE_ZERUHN_MINES,        200 },
-    [ 9] = { xi.ki.MAP_OF_THE_PALBOROUGH_MINES,    600 },
-    [10] = { xi.ki.MAP_OF_BEADEAUX,               3000 }, -- The base table has 600.
-    [11] = { xi.ki.MAP_OF_GIDDEUS,                 600 },
-    [12] = { xi.ki.MAP_OF_CASTLE_OZTROJA,         3000 },
-    [13] = { xi.ki.MAP_OF_THE_MAZE_OF_SHAKHRAMI,   600 },
-    [14] = { xi.ki.MAP_OF_THE_LITELOR_REGION,     3000 },
-    [15] = { xi.ki.MAP_OF_BIBIKI_BAY,             3000 },
-    [16] = { xi.ki.MAP_OF_QUFIM_ISLAND,           3000 },
-    [17] = { xi.ki.MAP_OF_THE_ELDIEME_NECROPOLIS, 3000 },
-    [18] = { xi.ki.MAP_OF_THE_GARLAIGE_CITADEL,   3000 },
-    [19] = { xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,    3000 },
-    [32] = { xi.ki.MAP_OF_THE_KUZOTZ_REGION,      3000 },
-    [37] = { xi.ki.MAP_OF_THE_KORROLOKA_TUNNEL,   3000 },
-    [44] = { xi.ki.MAP_OF_THE_VOLLBOW_REGION,     3000 },
-    [58] = { xi.ki.MAP_OF_AL_ZAHBI,                600 },
-    [59] = { xi.ki.MAP_OF_NASHMAU,                3000 },
-    [60] = { xi.ki.MAP_OF_WAJAOM_WOODLANDS,       3000 },
-    [68] = { xi.ki.MAP_OF_BHAFLAU_THICKETS,       3000 },
+    [ 0] = { xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,      200 },
+    [ 1] = { xi.keyItem.MAP_OF_THE_BASTOK_AREA,         200 },
+    [ 2] = { xi.keyItem.MAP_OF_THE_WINDURST_AREA,       200 },
+    [ 3] = { xi.keyItem.MAP_OF_THE_JEUNO_AREA,          600 },
+    [ 4] = { xi.keyItem.MAP_OF_ORDELLES_CAVES,          600 },
+    [ 5] = { xi.keyItem.MAP_OF_GHELSBA,                 600 },
+    [ 6] = { xi.keyItem.MAP_OF_DAVOI,                  3000 },
+    [ 7] = { xi.keyItem.MAP_OF_CARPENTERS_LANDING,     3000 },
+    [ 8] = { xi.keyItem.MAP_OF_THE_ZERUHN_MINES,        200 },
+    [ 9] = { xi.keyItem.MAP_OF_THE_PALBOROUGH_MINES,    600 },
+    [10] = { xi.keyItem.MAP_OF_BEADEAUX,               3000 }, -- The base table has 600.
+    [11] = { xi.keyItem.MAP_OF_GIDDEUS,                 600 },
+    [12] = { xi.keyItem.MAP_OF_CASTLE_OZTROJA,         3000 },
+    [13] = { xi.keyItem.MAP_OF_THE_MAZE_OF_SHAKHRAMI,   600 },
+    [14] = { xi.keyItem.MAP_OF_THE_LITELOR_REGION,     3000 },
+    [15] = { xi.keyItem.MAP_OF_BIBIKI_BAY,             3000 },
+    [16] = { xi.keyItem.MAP_OF_QUFIM_ISLAND,           3000 },
+    [17] = { xi.keyItem.MAP_OF_THE_ELDIEME_NECROPOLIS, 3000 },
+    [18] = { xi.keyItem.MAP_OF_THE_GARLAIGE_CITADEL,   3000 },
+    [19] = { xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,    3000 },
+    [32] = { xi.keyItem.MAP_OF_THE_KUZOTZ_REGION,      3000 },
+    [37] = { xi.keyItem.MAP_OF_THE_KORROLOKA_TUNNEL,   3000 },
+    [44] = { xi.keyItem.MAP_OF_THE_VOLLBOW_REGION,     3000 },
+    [58] = { xi.keyItem.MAP_OF_AL_ZAHBI,                600 },
+    [59] = { xi.keyItem.MAP_OF_NASHMAU,                3000 },
+    [60] = { xi.keyItem.MAP_OF_WAJAOM_WOODLANDS,       3000 },
+    [68] = { xi.keyItem.MAP_OF_BHAFLAU_THICKETS,       3000 },
 }
 
 local sandoriaStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
-    xi.ki.MAP_OF_ORDELLES_CAVES,
-    xi.ki.MAP_OF_GHELSBA,
-    xi.ki.MAP_OF_DAVOI,
-    xi.ki.MAP_OF_CARPENTERS_LANDING,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_ORDELLES_CAVES,
+    xi.keyItem.MAP_OF_GHELSBA,
+    xi.keyItem.MAP_OF_DAVOI,
+    xi.keyItem.MAP_OF_CARPENTERS_LANDING,
 }
 
 local bastokStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
-    xi.ki.MAP_OF_THE_ZERUHN_MINES,
-    xi.ki.MAP_OF_THE_PALBOROUGH_MINES,
-    xi.ki.MAP_OF_BEADEAUX,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_THE_ZERUHN_MINES,
+    xi.keyItem.MAP_OF_THE_PALBOROUGH_MINES,
+    xi.keyItem.MAP_OF_BEADEAUX,
 }
 
 local windurstStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
-    xi.ki.MAP_OF_GIDDEUS,
-    xi.ki.MAP_OF_CASTLE_OZTROJA,
-    xi.ki.MAP_OF_THE_MAZE_OF_SHAKHRAMI,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_GIDDEUS,
+    xi.keyItem.MAP_OF_CASTLE_OZTROJA,
+    xi.keyItem.MAP_OF_THE_MAZE_OF_SHAKHRAMI,
 }
 
 local selbinaStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
 }
 
 local mhauraStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
-    xi.ki.MAP_OF_THE_LITELOR_REGION,
-    xi.ki.MAP_OF_BIBIKI_BAY,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_THE_LITELOR_REGION,
+    xi.keyItem.MAP_OF_BIBIKI_BAY,
 }
 
 local jeunoStock =
 {
-    xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
-    xi.ki.MAP_OF_THE_BASTOK_AREA,
-    xi.ki.MAP_OF_THE_WINDURST_AREA,
-    xi.ki.MAP_OF_THE_JEUNO_AREA,
-    xi.ki.MAP_OF_QUFIM_ISLAND,
-    xi.ki.MAP_OF_THE_ELDIEME_NECROPOLIS,
-    xi.ki.MAP_OF_THE_GARLAIGE_CITADEL,
-    xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+    xi.keyItem.MAP_OF_THE_SAN_DORIA_AREA,
+    xi.keyItem.MAP_OF_THE_BASTOK_AREA,
+    xi.keyItem.MAP_OF_THE_WINDURST_AREA,
+    xi.keyItem.MAP_OF_THE_JEUNO_AREA,
+    xi.keyItem.MAP_OF_QUFIM_ISLAND,
+    xi.keyItem.MAP_OF_THE_ELDIEME_NECROPOLIS,
+    xi.keyItem.MAP_OF_THE_GARLAIGE_CITADEL,
+    xi.keyItem.MAP_OF_THE_ELSHIMO_REGIONS,
 }
 
 local rabaoStock =
 {
-    xi.ki.MAP_OF_THE_KUZOTZ_REGION,
-    xi.ki.MAP_OF_THE_KORROLOKA_TUNNEL,
-    xi.ki.MAP_OF_THE_VOLLBOW_REGION,
+    xi.keyItem.MAP_OF_THE_KUZOTZ_REGION,
+    xi.keyItem.MAP_OF_THE_KORROLOKA_TUNNEL,
+    xi.keyItem.MAP_OF_THE_VOLLBOW_REGION,
 }
 
 local whitegateStock =
 {
-    xi.ki.MAP_OF_AL_ZAHBI,
-    xi.ki.MAP_OF_NASHMAU,
-    xi.ki.MAP_OF_WAJAOM_WOODLANDS,
-    xi.ki.MAP_OF_BHAFLAU_THICKETS,
+    xi.keyItem.MAP_OF_AL_ZAHBI,
+    xi.keyItem.MAP_OF_NASHMAU,
+    xi.keyItem.MAP_OF_WAJAOM_WOODLANDS,
+    xi.keyItem.MAP_OF_BHAFLAU_THICKETS,
 }
 
 local mapVendors =

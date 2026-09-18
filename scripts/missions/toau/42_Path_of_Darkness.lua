@@ -35,7 +35,7 @@ mission.sections =
             ['Rodin-Comidin'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) then
+                    if not player:hasKeyItem(xi.keyItem.NYZUL_ISLE_ROUTE) then
                         return mission:progressEvent(3142, { text_table = 0 })
                     else
                         return mission:progressEvent(3141, { text_table = 0 })
@@ -66,7 +66,7 @@ mission.sections =
             onEventFinish =
             {
                 [3142] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ROUTE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.NYZUL_ISLE_ROUTE)
                 end,
 
                 [3143] = function(player, csid, option, npc)

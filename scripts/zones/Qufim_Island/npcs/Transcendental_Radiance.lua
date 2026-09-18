@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    local hasCrimson = player:hasKeyItem(xi.ki.CRIMSON_TRAVERSER_STONE)
+    local hasCrimson = player:hasKeyItem(xi.keyItem.CRIMSON_TRAVERSER_STONE)
     local traverserStones = xi.abyssea.getHeldTraverserStones(player)
     local cruor = player:getCurrency('cruor')
 
@@ -41,13 +41,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         return
     end
 
-    if not player:hasKeyItem(xi.ki.CRIMSON_TRAVERSER_STONE) then
+    if not player:hasKeyItem(xi.keyItem.CRIMSON_TRAVERSER_STONE) then
         if
             player:getCurrency('cruor') >= 10000 and
             xi.abyssea.getHeldTraverserStones(player) >= 1
         then
             player:delCurrency('cruor', 10000)
-            npcUtil.giveKeyItem(player, xi.ki.CRIMSON_TRAVERSER_STONE)
+            npcUtil.giveKeyItem(player, xi.keyItem.CRIMSON_TRAVERSER_STONE)
             xi.abyssea.spendTravStones(player, 1)
         else
             return

@@ -776,7 +776,10 @@ Maybe<SpellID> CMobSpellContainer::GetSpell()
 
     if (HasBuffSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::BuffChance))
     {
-        return GetBuffSpell();
+        if (const auto maybeBuffSpell = GetBuffSpell(); maybeBuffSpell.has_value())
+        {
+            return maybeBuffSpell;
+        }
     }
 
     // Grab whatever spell can be found
@@ -794,7 +797,10 @@ Maybe<SpellID> CMobSpellContainer::GetSpell()
 
     if (HasBuffSpells())
     {
-        return GetBuffSpell();
+        if (const auto maybeBuffSpell = GetBuffSpell(); maybeBuffSpell.has_value())
+        {
+            return maybeBuffSpell;
+        }
     }
 
     if (HasGaSpells())
@@ -857,14 +863,76 @@ Maybe<SpellID> CMobSpellContainer::GetDamageSpell()
     return m_damageList[xirand::GetRandomNumber(m_damageList.size())];
 }
 
+namespace
+{
+
+auto targetLacksBuff(CBattleEntity* PTarget, const CSpell& spell) -> bool
+{
+    const auto statusEffect = spell.statusEffect();
+    if (!statusEffect.has_value())
+    {
+        return true;
+    }
+
+    const auto* const PEffect = PTarget->StatusEffectContainer->GetStatusEffect(statusEffect.value());
+    if (PEffect == nullptr)
+    {
+        return true;
+    }
+
+    // A tier of 0 on either side means the buff is considered already present.
+    return spell.statusEffectTier() != 0 && PEffect->GetTier() != 0 && PEffect->GetTier() < spell.statusEffectTier();
+}
+
+} // namespace
+
+// What buffs does the target have on them?
+auto CMobSpellContainer::GetBuffSpellsFor(CBattleEntity* PTarget) -> std::vector<SpellID>
+{
+    std::vector<SpellID> missingBuffs;
+    missingBuffs.reserve(m_buffList.size());
+    for (const auto spellId : m_buffList)
+    {
+        const auto* const PSpell = spell::GetSpell(spellId);
+        if (PSpell == nullptr || !GetAvailable(spellId).has_value())
+        {
+            continue;
+        }
+
+        if (PTarget != m_PMob && !PTarget->ValidTarget(m_PMob, PSpell->getValidTarget()))
+        {
+            continue;
+        }
+
+        if (targetLacksBuff(PTarget, *PSpell))
+        {
+            missingBuffs.emplace_back(spellId);
+        }
+    }
+
+    return missingBuffs;
+}
+
 Maybe<SpellID> CMobSpellContainer::GetBuffSpell()
 {
-    if (m_buffList.empty())
+    // Buffs still active on the mob are skipped
+    std::vector<SpellID> missingBuffs;
+    missingBuffs.reserve(m_buffList.size());
+    for (const auto spellId : m_buffList)
+    {
+        const auto statusEffect = spell::GetSpell(spellId)->statusEffect();
+        if (!statusEffect.has_value() || !m_PMob->StatusEffectContainer->HasStatusEffect(statusEffect.value()))
+        {
+            missingBuffs.emplace_back(spellId);
+        }
+    }
+
+    if (missingBuffs.empty())
     {
         return {};
     }
 
-    return m_buffList[xirand::GetRandomNumber(m_buffList.size())];
+    return missingBuffs[xirand::GetRandomNumber(missingBuffs.size())];
 }
 
 Maybe<SpellID> CMobSpellContainer::GetDebuffSpell()

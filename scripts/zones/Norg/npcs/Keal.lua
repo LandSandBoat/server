@@ -77,12 +77,12 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.fameArea.NORG) >= 3 and
         mLvl >= 5
     then
-        player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
+        player:startEvent(36, xi.keyItem.SEALED_IRON_BOX) -- Start quest
     elseif vault == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then
+        if player:hasKeyItem(xi.keyItem.SEALED_IRON_BOX) then
             player:startEvent(38) -- Finish quest
         else
-            player:startEvent(37, xi.ki.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
+            player:startEvent(37, xi.keyItem.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
         end
     elseif vault == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
@@ -96,7 +96,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
         else
-            player:delKeyItem(xi.ki.SEALED_IRON_BOX)
+            player:delKeyItem(xi.keyItem.SEALED_IRON_BOX)
             player:addItem(xi.item.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
             player:addFame(xi.fameArea.NORG, 30)

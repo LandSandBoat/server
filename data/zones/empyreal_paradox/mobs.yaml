@@ -10,6 +10,7 @@ templates:
     spell_list_id: 432
     skill_list_id: 1144
     attributes:
+      speed: 80
       combat:
         skill:    katana
         delay:    220

@@ -39,7 +39,7 @@ quest.sections =
             {
                 [10019] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SPIRIT_INCENSE)
                         quest:begin(player)
                     end
                 end,
@@ -57,9 +57,9 @@ quest.sections =
             ['Gantineux'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
+                    if player:hasKeyItem(xi.keyItem.SPIRIT_INCENSE) then
                         return quest:event(10020)
-                    elseif player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+                    elseif player:hasKeyItem(xi.keyItem.GANTINEUXS_LETTER) then
                         return quest:event(10022)
                     else
                         return quest:progressEvent(10021)
@@ -70,7 +70,7 @@ quest.sections =
             onEventFinish =
             {
                 [10021] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.GANTINEUXS_LETTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.GANTINEUXS_LETTER)
                 end,
             },
         },
@@ -80,7 +80,7 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
+                    if player:hasKeyItem(xi.keyItem.SPIRIT_INCENSE) then
                         return quest:progressEvent(50)
                     end
                 end,
@@ -89,8 +89,8 @@ quest.sections =
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
-                    player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
-                    player:delKeyItem(xi.ki.SPIRIT_INCENSE)
+                    player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.keyItem.SPIRIT_INCENSE)
+                    player:delKeyItem(xi.keyItem.SPIRIT_INCENSE)
 
                     npc:setPos(unpack(eldiemeID.npc.QM1_POS[math.randomInt(1, 4)])) -- move QM1 randomly on quest completion
                 end,
@@ -102,7 +102,7 @@ quest.sections =
             ['Eperdur'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+                    if player:hasKeyItem(xi.keyItem.GANTINEUXS_LETTER) then
                         return quest:progressEvent(680)
                     end
                 end,
@@ -112,7 +112,7 @@ quest.sections =
             {
                 [680] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.GANTINEUXS_LETTER)
+                        player:delKeyItem(xi.keyItem.GANTINEUXS_LETTER)
                     end
                 end,
             },

@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(xi.ki.CERULEAN_CRYSTAL) then
+    if not player:hasKeyItem(xi.keyItem.CERULEAN_CRYSTAL) then
         player:startEvent(1) -- NOTE: This CS onEventFinish is handled by ZM10 mission script
     else
         player:startEvent(2)

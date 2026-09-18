@@ -28,34 +28,13 @@ templates:
 
   Alfard:
     id:            83
-    species:       hydra
+    species:       alfard
     type:          [notorious]
     skill_list_id: 976
     attributes:
       combat:
         skill: great_axe
       jobs: [war, thf]
-      resists:
-        dmg_physical:
-          blunt: -1250
-        rank_element:
-          fire:    6
-          ice:     6
-          wind:    6
-          earth:   3
-          thunder: 3
-          water:   3
-          light:   3
-          dark:    3
-        rank_status:
-          paralyze:    6
-          bind:        6
-          silence:     6
-          slow:        3
-          poison:      3
-          light_sleep: 3
-          dark_sleep:  3
-          blind:       3
       render:
         look:
           type:  standard
@@ -204,7 +183,7 @@ templates:
 
   Baelfyr:
     id:            323
-    species:       ice_elemental
+    species:       baelfyr
     spell_list_id: 3
     attributes:
       combat:
@@ -288,7 +267,7 @@ templates:
 
   Byrgen:
     id:            593
-    species:       dark_elemental
+    species:       byrgen
     spell_list_id: 21
     skill_list_id: 100
     attributes:
@@ -456,7 +435,7 @@ templates:
 
   Frog_Prince:
     id:            1428
-    species:       green_poroggo
+    species:       toad
     skill_list_id: 196
     attributes:
       render:
@@ -548,7 +527,7 @@ templates:
 
   Gefyrst:
     id:            1487
-    species:       ice_elemental
+    species:       gefyrst
     spell_list_id: 3
     attributes:
       combat:
@@ -633,7 +612,7 @@ templates:
 
   Goblin_Meatgrinder:
     id:            1686
-    species:       goblin
+    species:       armored_goblin
     spell_list_id: 5
     skill_list_id: 133
     attributes:
@@ -1188,7 +1167,7 @@ templates:
 
   Rencounter_Chariot:
     id:            3350
-    species:       elvaan
+    species:       chariot
     type:          [notorious]
     spell_list_id: 289
     skill_list_id: 63
@@ -1489,7 +1468,7 @@ templates:
 
   Ungeweder:
     id:            4099
-    species:       thunder_elemental
+    species:       ungeweder
     spell_list_id: 3
     skill_list_id: 105
     attributes:
@@ -1511,7 +1490,7 @@ templates:
 
   Unseelie:
     id:            4101
-    species:       pixie
+    species:       undeen
     spell_list_id: 20
     skill_list_id: 195
     attributes:

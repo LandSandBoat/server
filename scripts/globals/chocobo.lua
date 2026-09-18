@@ -133,7 +133,7 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
         if not info.past then -- Does nothing in past zones
             if
                 player:getMainLvl() >= 20 and
-                player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)
+                player:hasKeyItem(xi.keyItem.CHOCOBO_LICENSE)
             then
                 local currency = player:getGil()
                 local price    = 0
@@ -165,7 +165,7 @@ xi.chocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
     end
 
     if
-        player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) and
+        player:hasKeyItem(xi.keyItem.CHOCOBO_LICENSE) and
         mLvl >= info.levelReq and
         (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past)
     then

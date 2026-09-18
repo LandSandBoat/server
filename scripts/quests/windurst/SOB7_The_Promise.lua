@@ -52,9 +52,9 @@ quest.sections =
                         not quest:getMustZone(player)
                     then
                         if player:getRank(xi.nation.WINDURST) < 9 then
-                            return quest:progressEvent(513, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest starting event in time.
+                            return quest:progressEvent(513, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Quest starting event in time.
                         else
-                            return quest:progressEvent(532, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest starting event late.
+                            return quest:progressEvent(532, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Quest starting event late.
                         end
                     else
                         if player:getRank(xi.nation.WINDURST) < 9 then
@@ -91,25 +91,25 @@ quest.sections =
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER) then
+                    if player:hasKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER) then
                         if quest:getVar(player, 'Prog') == 1 then
                             if player:getRank(xi.nation.WINDURST) < 9 then
-                                return quest:progressEvent(522, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest Complete. In time.
+                                return quest:progressEvent(522, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Quest Complete. In time.
                             else
-                                return quest:progressEvent(542, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest Complete. Started in time, arrived late.
+                                return quest:progressEvent(542, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Quest Complete. Started in time, arrived late.
                             end
                         else
-                            return quest:progressEvent(534, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest Complete. Started late.
+                            return quest:progressEvent(534, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Quest Complete. Started late.
                         end
                     else
                         if quest:getVar(player, 'Prog') == 1 then
                             if player:getRank(xi.nation.WINDURST) < 9 then
                                 return quest:event(514) -- Reminder. In time.
                             else
-                                return quest:event(543, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Reminder. Started in time, but are late.
+                                return quest:event(543, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Reminder. Started in time, but are late.
                             end
                         else
-                            return quest:event(533, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Reminder. Started late.
+                            return quest:event(533, 0, xi.keyItem.INVISIBLE_MAN_STICKER) -- Reminder. Started late.
                         end
                     end
                 end,
@@ -171,21 +171,21 @@ quest.sections =
             {
                 [522] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+                        player:delKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
 
                 [534] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+                        player:delKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
 
                 [542] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+                        player:delKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER)
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
@@ -197,12 +197,12 @@ quest.sections =
             ['Chamama'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER) then
+                    if player:hasKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER) then
                         return quest:event(800)
                     elseif quest:getVar(player, 'Chamama') > 0 then
-                        return quest:event(798, 0, xi.item.SHOALWEED, xi.ki.INVISIBLE_MAN_STICKER)
+                        return quest:event(798, 0, xi.item.SHOALWEED, xi.keyItem.INVISIBLE_MAN_STICKER)
                     else
-                        return quest:progressEvent(797, 0, xi.item.SHOALWEED, xi.ki.INVISIBLE_MAN_STICKER)
+                        return quest:progressEvent(797, 0, xi.item.SHOALWEED, xi.keyItem.INVISIBLE_MAN_STICKER)
                     end
                 end,
 
@@ -210,9 +210,9 @@ quest.sections =
                     if
                         quest:getVar(player, 'Chamama') == 1 and
                         npcUtil.tradeHasExactly(trade, xi.item.SHOALWEED) and
-                        not player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+                        not player:hasKeyItem(xi.keyItem.INVISIBLE_MAN_STICKER)
                     then
-                        return quest:progressEvent(799, 0, 0, xi.ki.INVISIBLE_MAN_STICKER)
+                        return quest:progressEvent(799, 0, 0, xi.keyItem.INVISIBLE_MAN_STICKER)
                     end
                 end,
             },
@@ -225,7 +225,7 @@ quest.sections =
 
                 [799] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.INVISIBLE_MAN_STICKER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.INVISIBLE_MAN_STICKER)
                 end,
             },
         },
@@ -250,7 +250,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar('SOBfinalEvent') == 1 then
-                        if player:hasKeyItem(xi.ki.DARK_MANA_ORB) then
+                        if player:hasKeyItem(xi.keyItem.DARK_MANA_ORB) then
                             return quest:progressEvent(584)
                         else
                             return quest:event(528)

@@ -85,23 +85,23 @@ mission.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-                        player:delKeyItem(xi.ki.BLUE_ACIDITY_TESTER)
-                        npcUtil.giveKeyItem(player, xi.ki.RED_ACIDITY_TESTER)
+                    if player:hasKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER) then
+                        player:delKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_ACIDITY_TESTER)
                     end
                 end,
 
                 [11] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-                        player:delKeyItem(xi.ki.BLUE_ACIDITY_TESTER)
-                        npcUtil.giveKeyItem(player, xi.ki.RED_ACIDITY_TESTER)
+                    if player:hasKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER) then
+                        player:delKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_ACIDITY_TESTER)
                     end
                 end,
 
                 [12] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-                        player:delKeyItem(xi.ki.BLUE_ACIDITY_TESTER)
-                        npcUtil.giveKeyItem(player, xi.ki.RED_ACIDITY_TESTER)
+                    if player:hasKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER) then
+                        player:delKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER)
+                        npcUtil.giveKeyItem(player, xi.keyItem.RED_ACIDITY_TESTER)
                     end
                 end,
             },
@@ -112,9 +112,9 @@ mission.sections =
             ['Cid'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.RED_ACIDITY_TESTER) then
+                    if player:hasKeyItem(xi.keyItem.RED_ACIDITY_TESTER) then
                         return mission:progressEvent(504)
-                    elseif not player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
+                    elseif not player:hasKeyItem(xi.keyItem.BLUE_ACIDITY_TESTER) then
                         return mission:progressEvent(503)
                     else
                         return mission:event(502)
@@ -127,12 +127,12 @@ mission.sections =
             onEventFinish =
             {
                 [503] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BLUE_ACIDITY_TESTER)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BLUE_ACIDITY_TESTER)
                 end,
 
                 [504] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.RED_ACIDITY_TESTER)
+                        player:delKeyItem(xi.keyItem.RED_ACIDITY_TESTER)
                     end
                 end,
             },

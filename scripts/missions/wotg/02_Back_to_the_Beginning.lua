@@ -21,7 +21,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_T
 
 mission.reward =
 {
-    keyItem     = xi.ki.LIGHTSWORM,
+    keyItem     = xi.keyItem.LIGHTSWORM,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH },
 }
 

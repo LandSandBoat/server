@@ -955,7 +955,8 @@ templates:
       combat:
         skill: dagger
         delay: 360
-      jobs: [brd, none]
+      jobs:  [brd, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -980,7 +981,8 @@ templates:
       combat:
         skill: great_sword
         delay: 480
-      jobs: [drk, none]
+      jobs:  [drk, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -1006,7 +1008,8 @@ templates:
       combat:
         skill: sword
         delay: 360
-      jobs: [pld, none]
+      jobs:  [pld, none]
+      speed: 60
       render:
         look:
           type:  standard
@@ -1546,7 +1549,7 @@ templates:
 
   Son_of_Anansi:
     id:            3701
-    species:       spider
+    species:       anansi
     type:          [battlefield]
     skill_list_id: 501
     attributes:
@@ -1715,7 +1718,7 @@ templates:
 
   Warlord_Rojgnoj:
     id:            4294
-    species:       orc
+    species:       warchief
     type:          [notorious, battlefield]
     spell_list_id: 1
     skill_list_id: 189

@@ -57,7 +57,7 @@ quest.sections =
             onEventFinish =
             {
                 [344] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ABYSSITE_OF_DISCERNMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.ABYSSITE_OF_DISCERNMENT)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },

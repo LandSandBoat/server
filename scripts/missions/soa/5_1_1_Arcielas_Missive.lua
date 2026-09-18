@@ -31,7 +31,7 @@ mission.sections =
             ['Sunrise_Beacon'] =
             {
                 onTrigger = function(player, npc)
-                    if player:seenKeyItem(xi.ki.HASTILY_SCRIBBLED_NOTE) then
+                    if player:seenKeyItem(xi.keyItem.HASTILY_SCRIBBLED_NOTE) then
                         return mission:progressEvent(179, 256, 3930, 5, 5, 65306623, 1589031, 4095, 131116)
                     end
                 end,
@@ -41,8 +41,8 @@ mission.sections =
             {
                 [179] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.HASTILY_SCRIBBLED_NOTE)
-                        player:messageSpecial(westernAdoulinID.text.KEYITEM_LOST, xi.ki.HASTILY_SCRIBBLED_NOTE)
+                        player:delKeyItem(xi.keyItem.HASTILY_SCRIBBLED_NOTE)
+                        player:messageSpecial(westernAdoulinID.text.KEYITEM_LOST, xi.keyItem.HASTILY_SCRIBBLED_NOTE)
                     end
                 end,
             },

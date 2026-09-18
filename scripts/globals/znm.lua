@@ -444,7 +444,7 @@ end
 -----------------------------------
 
 xi.znm.sanraku.handleTradeWithPlate = function(player, npc, item)
-    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    if not player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then
         local tradeLimit = xi.znm.SOULPLATE_TRADE_LIMIT
 
         if xi.znm.sanraku.platesTradedToday(player) >= tradeLimit then
@@ -568,7 +568,7 @@ xi.znm.sanraku.handleGainingAccessToIslets = function(player, option)
     end
 
     -- Give the correct island's information + salt
-    local keyItem = xi.ki.SICKLEMOON_SALT + option - 300
+    local keyItem = xi.keyItem.SICKLEMOON_SALT + option - 300
     if player:getCurrency('zeni_point') < zeniCost then -- Not enough zeni
         player:updateEvent(2)
     elseif player:hasKeyItem(keyItem) then -- Already have the salt

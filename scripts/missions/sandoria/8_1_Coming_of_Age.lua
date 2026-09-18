@@ -71,7 +71,7 @@ mission.sections =
                         return mission:progressEvent(58)
                     elseif
                         missionStatus == 3 and
-                        player:hasKeyItem(xi.ki.DROPS_OF_AMNIO)
+                        player:hasKeyItem(xi.keyItem.DROPS_OF_AMNIO)
                     then
                         return mission:progressEvent(102)
                     end
@@ -114,7 +114,7 @@ mission.sections =
                         -- before allowing further gate guard interaction (Mission[0][20]Progress).  Required
                         -- final CS will set this to 0, and we should disallow on non-zero values
                         mission:setVar(player, 'Progress', GetSystemTime() + 60)
-                        player:delKeyItem(xi.ki.DROPS_OF_AMNIO)
+                        player:delKeyItem(xi.keyItem.DROPS_OF_AMNIO)
                     end
                 end,
 
@@ -144,8 +144,8 @@ mission.sections =
                             SpawnMob(quicksandCavesID.mob.VALOR)
                             SpawnMob(quicksandCavesID.mob.HONOR)
                             return mission:messageSpecial(quicksandCavesID.text.SENSE_SOMETHING_EVIL)
-                        elseif missionStatus == 3 and not player:hasKeyItem(xi.ki.DROPS_OF_AMNIO) then
-                            return mission:keyItem(xi.ki.DROPS_OF_AMNIO)
+                        elseif missionStatus == 3 and not player:hasKeyItem(xi.keyItem.DROPS_OF_AMNIO) then
+                            return mission:keyItem(xi.keyItem.DROPS_OF_AMNIO)
                         end
                     end
                 end,

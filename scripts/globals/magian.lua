@@ -352,7 +352,7 @@ xi.magian.magianOnTrade = function(player, npc, trade)
     local trialData          = xi.magian.trials[trialId]
 
     if
-        player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and
+        player:hasKeyItem(xi.keyItem.MAGIAN_TRIAL_LOG) and
         trade:getSlotCount() == 1 and
         itemObj:isType(moogleData[7])
     then
@@ -422,7 +422,7 @@ xi.magian.magianOnTrigger = function(player, npc)
         player:getMainLvl() < 75
     then
         player:startEvent(moogleData[1])
-    elseif not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
+    elseif not player:hasKeyItem(xi.keyItem.MAGIAN_TRIAL_LOG) then
         player:startEvent(moogleData[2])
     else
         local packedData, numActiveTrials = packActiveTrials(player)
@@ -581,7 +581,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
         csid == moogleData[2] and
         option == 1
     then
-        npcUtil.giveKeyItem(player, xi.ki.MAGIAN_TRIAL_LOG)
+        npcUtil.giveKeyItem(player, xi.keyItem.MAGIAN_TRIAL_LOG)
     elseif csid == moogleData[4] then
         -- Trial Item Traded without Trial Inscribed
 

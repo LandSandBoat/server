@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK) then
+    if player:hasKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_BASTOK) then
         player:changeMusic(xi.musicSlot.ZONE_DAY, 161)   -- Despair
         player:changeMusic(xi.musicSlot.ZONE_NIGHT, 161) -- Despair
     end

@@ -26,7 +26,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        not player:hasKeyItem(xi.ki.BOTTLED_PUNCH_BUG) and
+                        not player:hasKeyItem(xi.keyItem.BOTTLED_PUNCH_BUG) and
                         npcUtil.tradeMatches(trade, { { xi.item.PUNCH_BUG, 1 } }) -- NOTE: No associated trade completion?
                     then
                         return mission:progressEvent(42, 76, 0, 1267351, 120, 0, 8323092, 0, 0)
@@ -34,7 +34,7 @@ mission.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.BOTTLED_PUNCH_BUG) then
+                    if player:hasKeyItem(xi.keyItem.BOTTLED_PUNCH_BUG) then
                         return mission:event(29, 89, 6)
                     else
                         return mission:event(41, 89, 23, 1756)
@@ -51,7 +51,7 @@ mission.sections =
                 end,
 
                 [42] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.BOTTLED_PUNCH_BUG)
+                    npcUtil.giveKeyItem(player, xi.keyItem.BOTTLED_PUNCH_BUG)
                 end,
             },
         },

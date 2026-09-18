@@ -116,7 +116,7 @@ mission.sections =
 
                 [182] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.ALTEPA_MOONPEBBLE)
+                        player:delKeyItem(xi.keyItem.ALTEPA_MOONPEBBLE)
                     end
                 end,
             },
@@ -165,7 +165,7 @@ mission.sections =
 
                     if mission:getLocalVar(player, 'nmDefeated') == 1 then
                         player:setMissionStatus(mission.areaId, 3)
-                        return mission:keyItem(xi.ki.ALTEPA_MOONPEBBLE)
+                        return mission:keyItem(xi.keyItem.ALTEPA_MOONPEBBLE)
                     elseif
                         mobEasternSphinx and
                         mobWesternSphinx and

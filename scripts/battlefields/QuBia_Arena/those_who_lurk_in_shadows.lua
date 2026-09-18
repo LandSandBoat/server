@@ -21,7 +21,7 @@ local content = BattlefieldMission:new({
     mission               = xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III,
     missionStatusArea     = xi.mission.log_id.ACP,
     requiredMissionStatus = 0,
-    requiredKeyItems      = { xi.ki.MARK_OF_SEED, message = qubiaID.text.LOST_KEYITEM },
+    requiredKeyItems      = { xi.keyItem.MARK_OF_SEED, message = qubiaID.text.LOST_KEYITEM },
 
     experimental = true,
 })
@@ -34,11 +34,11 @@ function content:onEventFinishWin(player, csid, option, npc)
     end
 
     if
-        not player:hasKeyItem(xi.ki.IVORY_KEY) and
+        not player:hasKeyItem(xi.keyItem.IVORY_KEY) and
         player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
     then
         player:setCharVar('LastIvoryKey', JstMidnight())
-        npcUtil.giveKeyItem(player, xi.ki.IVORY_KEY)
+        npcUtil.giveKeyItem(player, xi.keyItem.IVORY_KEY)
     end
 end
 

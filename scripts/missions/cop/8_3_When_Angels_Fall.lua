@@ -23,11 +23,11 @@ mission.reward =
 
 local ebonPanel =
 {
-    ['_iz2']              = { 1, 120, xi.ki.LIGHT_OF_VAHZL   },
-    ['Ebon_Panel_Elvaan'] = { 2, 121, xi.ki.LIGHT_OF_MEA     },
-    ['Ebon_Panel_Taru']   = { 3, 123, xi.ki.LIGHT_OF_HOLLA   },
-    ['Ebon_Panel_Mithra'] = { 4, 124, xi.ki.LIGHT_OF_DEM     },
-    ['Ebon_Panel_Galka']  = { 5, 122, xi.ki.LIGHT_OF_ALTAIEU },
+    ['_iz2']              = { 1, 120, xi.keyItem.LIGHT_OF_VAHZL   },
+    ['Ebon_Panel_Elvaan'] = { 2, 121, xi.keyItem.LIGHT_OF_MEA     },
+    ['Ebon_Panel_Taru']   = { 3, 123, xi.keyItem.LIGHT_OF_HOLLA   },
+    ['Ebon_Panel_Mithra'] = { 4, 124, xi.keyItem.LIGHT_OF_DEM     },
+    ['Ebon_Panel_Galka']  = { 5, 122, xi.keyItem.LIGHT_OF_ALTAIEU },
 }
 
 local ebonPanelOnTrigger = function(player, npc)
@@ -103,7 +103,7 @@ mission.sections =
             ['_0zu'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_DAWN) then
                         return mission:progressOptionalCutscene(110, { cs_option = 0, canSkip = true })
                     end
                 end,
@@ -112,7 +112,7 @@ mission.sections =
             ['_0zv'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) then
+                    if not player:hasKeyItem(xi.keyItem.BRAND_OF_TWILIGHT) then
                         return mission:progressOptionalCutscene(111, { cs_option = 0, canSkip = true })
                     end
                 end,
@@ -122,13 +122,13 @@ mission.sections =
             {
                 [110] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_DAWN)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_DAWN)
                     end
                 end,
 
                 [111] = function(player, csid, option, npc)
                     if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.BRAND_OF_TWILIGHT)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BRAND_OF_TWILIGHT)
                     end
                 end,
 
@@ -139,7 +139,7 @@ mission.sections =
                 [124] = ebonPanelOnEventFinish,
 
                 [201] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MYSTERIOUS_AMULET_PRISHE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.MYSTERIOUS_AMULET_PRISHE)
                     mission:setVar(player, 'Status', 1)
                 end,
 
@@ -179,8 +179,8 @@ mission.sections =
             onEventFinish =
             {
                 [165] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-                    player:messageSpecial(altaieuID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
+                    player:delKeyItem(xi.keyItem.MYSTERIOUS_AMULET_PRISHE)
+                    player:messageSpecial(altaieuID.text.RETURN_AMULET_TO_PRISHE, xi.keyItem.MYSTERIOUS_AMULET)
                     mission:complete(player)
                 end,
             },

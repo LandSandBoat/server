@@ -66,12 +66,12 @@ quest.sections =
                         return
                     end
 
-                    if player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
+                    if player:hasKeyItem(xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
                         player:messageSpecial(davoiID.text.YOU_FIND_NOTHING)
                     elseif quest:getLocalVar(player, 'nmKilled') == 3 then
-                        npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
                     elseif
-                        player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK) and
+                        player:hasKeyItem(xi.keyItem.LETTER_FROM_DALZAKK) and
                         not GetMobByID(davoiID.mob.BILOPDOP):isSpawned() and
                         not GetMobByID(davoiID.mob.DELOKNOK):isSpawned()
                     then
@@ -87,7 +87,7 @@ quest.sections =
             ['Bilopdop'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
+                    if not player:hasKeyItem(xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
                         local nmStatus = quest:getLocalVar(player, 'nmKilled')
 
                         quest:setLocalVar(player, 'nmKilled', utils.mask.setBit(nmStatus, 0, true))
@@ -98,7 +98,7 @@ quest.sections =
             ['Deloknok'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if not player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
+                    if not player:hasKeyItem(xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
                         local nmStatus = quest:getLocalVar(player, 'nmKilled')
 
                         quest:setLocalVar(player, 'nmKilled', utils.mask.setBit(nmStatus, 1, true))
@@ -112,7 +112,7 @@ quest.sections =
             onZoneIn = function(player, prevZone)
                 if
                     prevZone == xi.zone.QUBIA_ARENA and
-                    not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)
+                    not player:hasKeyItem(xi.keyItem.LETTER_FROM_DALZAKK)
                 then
                     return 16
                 end
@@ -121,7 +121,7 @@ quest.sections =
             onEventFinish =
             {
                 [16] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_DALZAKK)
+                    npcUtil.giveKeyItem(player, xi.keyItem.LETTER_FROM_DALZAKK)
                 end,
             },
         },
@@ -132,8 +132,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK) and
-                        player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
+                        player:hasKeyItem(xi.keyItem.LETTER_FROM_DALZAKK) and
+                        player:hasKeyItem(xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
                     then
                         return quest:progressEvent(234)
                     end
@@ -144,8 +144,8 @@ quest.sections =
             {
                 [234] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.LETTER_FROM_DALZAKK)
-                        player:delKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
+                        player:delKeyItem(xi.keyItem.LETTER_FROM_DALZAKK)
+                        player:delKeyItem(xi.keyItem.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
                     end
                 end,
             },

@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-local keyItemId = xi.ki.SHADOW_THRONE
+local keyItemId = xi.keyItem.SHADOW_THRONE
 
 itemObject.onItemCheck = function(target, item, caster)
     if target:hasKeyItem(keyItemId) then

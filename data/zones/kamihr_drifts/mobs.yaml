@@ -66,7 +66,7 @@ templates:
 
   Bedraggled_Lucerewe:
     id:            4803
-    species:       sheep
+    species:       lucerewe
     skill_list_id: 226
     attributes:
       combat:
@@ -104,7 +104,7 @@ templates:
 
   Cherti:
     id:            6939
-    species:       ram
+    species:       ovim
     type:          [notorious]
     skill_list_id: 208
     attributes:
@@ -439,7 +439,7 @@ templates:
 
   Shaggy_Ovim:
     id:            4804
-    species:       ram
+    species:       ovim
     skill_list_id: 208
     attributes:
       combat:
@@ -460,7 +460,7 @@ templates:
   Shaggy_Ovim_Small:
     id:            7283
     display_name:  Shaggy_Ovim
-    species:       ram
+    species:       ovim
     skill_list_id: 208
     attributes:
       combat:

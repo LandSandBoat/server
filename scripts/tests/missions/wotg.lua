@@ -45,7 +45,7 @@ describe('Wings of the Goddess', function()
             player.entities:gotoAndTrigger('Cavernous_Maw', { eventId = 500 })
 
             player.assert:hasMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
-            player.assert:hasKI(xi.ki.PURE_WHITE_FEATHER)
+            player.assert:hasKI(xi.keyItem.PURE_WHITE_FEATHER)
             assert(playerIsInPastMawZone())
         end
 

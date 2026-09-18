@@ -54,7 +54,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and
+                        player:hasKeyItem(xi.keyItem.HANDFUL_OF_CRYSTAL_SCALES) and
                         npcUtil.tradeMatches(trade, { { xi.item.MUMEITO, 1 } })
                     then
                         return quest:progressEvent(141)
@@ -95,7 +95,7 @@ quest.sections =
                 [141] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:delKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
+                        player:delKeyItem(xi.keyItem.HANDFUL_OF_CRYSTAL_SCALES)
 
                         -- Player must zone before being able to flag the next quest
                         xi.quest.setMustZone(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
@@ -135,9 +135,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getLocalVar(player, 'Prog') == 1 and
-                        not player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
+                        not player:hasKeyItem(xi.keyItem.HANDFUL_OF_CRYSTAL_SCALES)
                     then
-                        return quest:keyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
+                        return quest:keyItem(xi.keyItem.HANDFUL_OF_CRYSTAL_SCALES)
                     end
                 end,
             },

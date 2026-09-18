@@ -10,7 +10,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.STONEWALLED
 
 mission.reward =
 {
-    keyItem     = xi.ki.SOUL_SIPHON,
+    keyItem     = xi.keyItem.SOUL_SIPHON,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.SALVATION },
 }
 
@@ -31,8 +31,8 @@ mission.sections =
             ['Crawling_Cave'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.AUREATE_BALL_OF_FUR) then
-                        npcUtil.giveKeyItem(player, xi.ki.AUREATE_BALL_OF_FUR)
+                    if not player:hasKeyItem(xi.keyItem.AUREATE_BALL_OF_FUR) then
+                        npcUtil.giveKeyItem(player, xi.keyItem.AUREATE_BALL_OF_FUR)
 
                         return mission:noAction()
                     end

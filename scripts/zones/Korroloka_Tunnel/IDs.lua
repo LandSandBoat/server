@@ -41,11 +41,12 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
     },
     mob =
     {
-        CARGO_CRAB_COLIN = GetFirstID('Cargo_Crab_Colin'),
-        DAME_BLANCHE     = GetFirstID('Dame_Blanche'),
-        FALCATUS_ARANEI  = GetFirstID('Falcatus_Aranei'),
-        KORROLOKA_LEECH  = GetFirstID('Korroloka_Leech'),
-        MORION_WORM      = GetFirstID('Morion_Worm'),
+        CARGO_CRAB_COLIN     = GetFirstID('Cargo_Crab_Colin'),
+        DAME_BLANCHE         = GetFirstID('Dame_Blanche'),
+        FALCATUS_ARANEI      = GetFirstID('Falcatus_Aranei'),
+        GOBLIN_BOUNTY_HUNTER = GetFirstID('Goblin_Bounty_Hunter'),
+        KORROLOKA_LEECH      = GetFirstID('Korroloka_Leech'),
+        MORION_WORM          = GetFirstID('Morion_Worm'),
     },
     npc =
     {

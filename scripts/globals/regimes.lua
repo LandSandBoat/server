@@ -1091,7 +1091,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
             end
         end
 
-        if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+        if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) then
             arg4 = 1
         end
 
@@ -1141,7 +1141,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     local msgOffset    = zones[zoneId].text.REGIME_REGISTERED
     local tabs         = player:getCurrency('valor_point')
     local regimeRepeat = bit.band(option, 0x80000000)
-    local hasKI        = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
+    local hasKI        = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
 

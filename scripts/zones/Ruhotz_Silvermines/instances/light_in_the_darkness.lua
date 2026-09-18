@@ -22,11 +22,11 @@ local ID = zones[xi.zone.RUHOTZ_SILVERMINES]
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.MINE_SHAFT_KEY)
+    return player:hasKeyItem(xi.keyItem.MINE_SHAFT_KEY)
 end
 
 instanceObject.entryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.MINE_SHAFT_KEY)
+    return player:hasKeyItem(xi.keyItem.MINE_SHAFT_KEY)
 end
 
 instanceObject.onInstanceCreated = function(instance)
@@ -40,7 +40,7 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
 end
 
 instanceObject.afterInstanceRegister = function(player)
-    player:delKeyItem(xi.ki.MINE_SHAFT_KEY)
+    player:delKeyItem(xi.keyItem.MINE_SHAFT_KEY)
 
     local questStatus = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
     local questProgVar = player:getCharVar('Quest[7][19]Prog')

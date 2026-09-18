@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local rank          = xi.besieged.getMercenaryRank(player)
-    local haveIDTag     = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
+    local haveIDTag     = player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.NYZUL_ISLE)
 
     if rank > 0 and xi.settings.main.NYZUL_ENABLED then
@@ -45,13 +45,13 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if
             selectiontype == 1 and
-            player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and
+            player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and
             xi.assault.missionToArea[missionId] == xi.assault.assaultArea.NYZUL_ISLE
         then
             -- taken assault mission
             player:addAssault(missionId)
-            player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
-            npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+            player:delKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG)
+            npcUtil.giveKeyItem(player, xi.keyItem.NYZUL_ISLE_ASSAULT_ORDERS)
         end
     end
 end

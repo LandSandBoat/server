@@ -52,7 +52,7 @@ quest.sections =
             ['Rarcasmeault'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.FIREPOWER_CASE) then
+                    if player:hasKeyItem(xi.keyItem.FIREPOWER_CASE) then
                         return quest:progressEvent(9)
                     else
                         return quest:event(8) -- This is their default action until the quest is completed.
@@ -63,7 +63,7 @@ quest.sections =
             ['_qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.FIREPOWER_CASE) then
+                    if not player:hasKeyItem(xi.keyItem.FIREPOWER_CASE) then
                         return quest:progressEvent(7)
                     end
                 end,
@@ -72,12 +72,12 @@ quest.sections =
             onEventFinish =
             {
                 [7] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.FIREPOWER_CASE)
+                    npcUtil.giveKeyItem(player, xi.keyItem.FIREPOWER_CASE)
                 end,
 
                 [9] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:delKeyItem(xi.ki.FIREPOWER_CASE)
+                    player:delKeyItem(xi.keyItem.FIREPOWER_CASE)
                 end,
             },
         },

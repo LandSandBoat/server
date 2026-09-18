@@ -36,7 +36,7 @@ mission.sections =
             {
                 [4] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        npcUtil.giveKeyItem(player, xi.ki.DINNER_INVITATION)
+                        npcUtil.giveKeyItem(player, xi.keyItem.DINNER_INVITATION)
                     end
                 end,
             },

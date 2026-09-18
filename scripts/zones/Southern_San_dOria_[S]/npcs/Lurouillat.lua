@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemKeyItemMapping =
     {
-        [xi.item.MAPLE_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_I,
-        [xi.item.MAGNOLIA_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_II,
-        [xi.item.BEECH_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_III,
-        [xi.item.EVERGREEN_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_IV,
-        [xi.item.HOLLY_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_V,
-        [xi.item.OAK_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VI,
-        [xi.item.ELM_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VII,
-        [xi.item.WILLOW_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VIII
+        [xi.item.MAPLE_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_I,
+        [xi.item.MAGNOLIA_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_II,
+        [xi.item.BEECH_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_III,
+        [xi.item.EVERGREEN_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_IV,
+        [xi.item.HOLLY_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_V,
+        [xi.item.OAK_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_VI,
+        [xi.item.ELM_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_VII,
+        [xi.item.WILLOW_STRONGBOX] = xi.keyItem.IMPERIAL_LINEAGE_CHAPTER_VIII
     }
     -- Make sure we're only trading 1 Basket at a time.
     if

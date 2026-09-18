@@ -22,8 +22,10 @@
 #include "pet_controller.h"
 
 #include "ai/ai_container.h"
+#include "ai/states/magic_state.h"
 #include "common/utils.h"
 #include "entities/pet_entity.h"
+#include "mob_spell_container.h"
 #include "status_effect_container.h"
 #include "utils/petutils.h"
 
@@ -203,6 +205,7 @@ auto CPetController::Tick(const timer::time_point tick) -> Task<void>
 }
 
 // Light Spirit is the only elemental spirit that is allowed to cast out of combat.
+// Pet workings are unknown so keep the combat cast path how it was
 auto CPetController::DoBuffTick() -> bool
 {
     const auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
@@ -211,7 +214,17 @@ auto CPetController::DoBuffTick() -> bool
         return false;
     }
 
-    return CMobController::DoBuffTick();
+    if (PPet->PAI->IsCurrentState<CMagicState>())
+    {
+        return true;
+    }
+
+    if (!IsSpellReady(0, 0) || !PPet->SpellContainer->HasBuffSpells())
+    {
+        return false;
+    }
+
+    return TryCastSpell();
 }
 
 void CPetController::HandleEnmity()

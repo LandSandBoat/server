@@ -13,7 +13,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_081',
     exitNpcs         = { '_082', '_084', '_086' },
-    requiredKeyItems = { xi.ki.MIASMA_FILTER },
+    requiredKeyItems = { xi.keyItem.MIASMA_FILTER },
 
     grantXP = 2000,
 

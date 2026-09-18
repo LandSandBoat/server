@@ -36,10 +36,10 @@ local rewardMap =
 -- ENM configuration table
 local enmTable =
 {
-    [1] = { keyItem = xi.ki.CENSER_OF_ABANDONMENT, timer = '[ENM]abandonmentTimer' }, -- Simulant
-    [2] = { keyItem = xi.ki.CENSER_OF_ANTIPATHY,   timer = '[ENM]antipathyTimer'   }, -- You Are What You Eat
-    [3] = { keyItem = xi.ki.CENSER_OF_ANIMUS,      timer = '[ENM]animusTimer'      }, -- Playing Host
-    [4] = { keyItem = xi.ki.CENSER_OF_ACRIMONY,    timer = '[ENM]acrimonyTimer'    }, -- Pulling the Plug
+    [1] = { keyItem = xi.keyItem.CENSER_OF_ABANDONMENT, timer = '[ENM]abandonmentTimer' }, -- Simulant
+    [2] = { keyItem = xi.keyItem.CENSER_OF_ANTIPATHY,   timer = '[ENM]antipathyTimer'   }, -- You Are What You Eat
+    [3] = { keyItem = xi.keyItem.CENSER_OF_ANIMUS,      timer = '[ENM]animusTimer'      }, -- Playing Host
+    [4] = { keyItem = xi.keyItem.CENSER_OF_ACRIMONY,    timer = '[ENM]acrimonyTimer'    }, -- Pulling the Plug
 }
 
 entity.onTrade = function(player, npc, trade)

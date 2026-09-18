@@ -12,7 +12,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if
         target:isPC() and
         target:getRace() == xi.race.MITHRA and
-        not target:hasKeyItem(xi.ki.LIGHT_OF_DEM)
+        not target:hasKeyItem(xi.keyItem.LIGHT_OF_DEM)
     then
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 30))
     else

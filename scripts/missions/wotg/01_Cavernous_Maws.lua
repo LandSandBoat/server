@@ -13,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS
 
 mission.reward =
 {
-    keyItem     = xi.ki.PURE_WHITE_FEATHER,
+    keyItem     = xi.keyItem.PURE_WHITE_FEATHER,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING },
 }
 

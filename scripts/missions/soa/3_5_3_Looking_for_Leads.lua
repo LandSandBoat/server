@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LOOKING_FOR
 
 mission.reward =
 {
-    keyItem     = xi.ki.TINTINNABULUM,
+    keyItem     = xi.keyItem.TINTINNABULUM,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.DRIFTING_NORTHWEST },
 }
 

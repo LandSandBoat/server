@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) then
+    if player:hasKeyItem(xi.keyItem.RHINOSTERY_CERTIFICATE) then
         player:startEvent(390)
     else
         player:startEvent(264)

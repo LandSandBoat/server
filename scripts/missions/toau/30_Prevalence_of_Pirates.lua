@@ -9,7 +9,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PREVALENC
 
 mission.reward =
 {
-    keyItem     = xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT,
+    keyItem     = xi.keyItem.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.SHADES_OF_VENGEANCE },
 }
 

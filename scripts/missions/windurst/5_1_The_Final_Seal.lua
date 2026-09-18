@@ -22,10 +22,10 @@ local handleAcceptMission = function(player, csid, option, npc)
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 10)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
-        npcUtil.giveKeyItem(player, xi.ki.NEW_FEIYIN_SEAL)
+        npcUtil.giveKeyItem(player, xi.keyItem.NEW_FEIYIN_SEAL)
     end
 
-    player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)
+    player:delKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_WINDURST)
 end
 
 mission.sections =
@@ -87,7 +87,7 @@ mission.sections =
                     -- This mission is handled a bit differently when compared to Bastok and San d'Oria.  Without
                     -- the need of gate guard interaction, KI tracking is used to determine whether its the first
                     -- or subsequent time the door has been triggered.
-                    if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
+                    if player:hasKeyItem(xi.keyItem.MESSAGE_TO_JEUNO_WINDURST) then
                         return mission:progressEvent(166)
                     else
                         return mission:progressEvent(190)
@@ -116,7 +116,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 12 and
-                        player:hasKeyItem(xi.ki.BURNT_SEAL)
+                        player:hasKeyItem(xi.keyItem.BURNT_SEAL)
                     then
                         return mission:progressEvent(192)
                     end
@@ -127,7 +127,7 @@ mission.sections =
             {
                 [192] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.BURNT_SEAL)
+                        player:delKeyItem(xi.keyItem.BURNT_SEAL)
                     end
                 end,
             },
@@ -158,9 +158,9 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 11 and
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.RANK_5_MISSION
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.BURNT_SEAL)
+                        npcUtil.giveKeyItem(player, xi.keyItem.BURNT_SEAL)
                         player:setMissionStatus(mission.areaId, 12)
-                        player:delKeyItem(xi.ki.NEW_FEIYIN_SEAL)
+                        player:delKeyItem(xi.keyItem.NEW_FEIYIN_SEAL)
                     end
                 end,
             },
