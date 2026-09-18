@@ -14,6 +14,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
+    [ID.mob.IGNAMOTH - 2] = ID.mob.IGNAMOTH,
     [ID.mob.IGNAMOTH - 1] = ID.mob.IGNAMOTH, -- Confirmed on retail
 }
 
