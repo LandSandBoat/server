@@ -82,7 +82,7 @@ quest.sections =
 
         [xi.zone.NORTH_GUSTABERG_S] =
         {
-            ['qm1'] =
+            ['qm3'] =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
