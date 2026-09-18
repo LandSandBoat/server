@@ -1638,7 +1638,7 @@ templates:
       despoil:
         wamoura_scale: 0
 
-  Wamoura_2:
+  Wamoura_Eclosion:
     id:            4280
     display_name:  Wamoura
     species:       wamoura
@@ -2309,11 +2309,11 @@ spawns:
     level:    [79, 81]
   17027197:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   n_124
     level:    [79, 81]
   17027198:
-    template: Wamoura_2
-    script:   Wamoura
+    template: Wamoura_Eclosion
     region:   n_124
     level:    [80, 82]
   17027199:
@@ -2322,11 +2322,11 @@ spawns:
     level:    [79, 81]
   17027200:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   n_127
     level:    [79, 81]
   17027201:
-    template: Wamoura_2
-    script:   Wamoura
+    template: Wamoura_Eclosion
     region:   n_127
     level:    [80, 82]
   17027202:
@@ -2892,10 +2892,11 @@ spawns:
     level:    [79, 81]
   17027341:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   e_268
     level:    [79, 81]
   17027342:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   e_268
     level:    [80, 82]
   17027343:
@@ -2912,10 +2913,11 @@ spawns:
     level:    [79, 81]
   17027346:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   e_275
     level:    [79, 81]
   17027347:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   e_275
     level:    [80, 82]
   17027348:
@@ -3197,18 +3199,20 @@ spawns:
     level:    [79, 81]
   17027417:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   nw_345
     level:    [79, 81]
   17027418:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   nw_345
     level:    [80, 82]
   17027419:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   nw_345
     level:    [79, 81]
   17027420:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   nw_345
     level:    [80, 82]
   17027421:
@@ -3229,10 +3233,11 @@ spawns:
     level:    [73, 76]
   17027425:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   nw_354
     level:    [79, 81]
   17027426:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   nw_354
     level:    [80, 82]
   17027427:
@@ -3241,10 +3246,11 @@ spawns:
     level:    [79, 81]
   17027428:
     template: Wamoura_Prince
+    script:   Wamoura_Prince_Eclosion
     region:   nw_355
     level:    [79, 81]
   17027429:
-    template: Wamoura
+    template: Wamoura_Eclosion
     region:   nw_355
     level:    [80, 82]
   17027430:
@@ -3565,23 +3571,3 @@ spawns:
     template: Awoken_Mokkuralfi
     at:       [333.370, -15.000, -361.760, 95]
     level:    [119, 119]
-
-slots:
-  - members:
-      17027341: {} # Wamoura_Prince
-      17027342: {} # Wamoura
-  - members:
-      17027346: {} # Wamoura_Prince
-      17027347: {} # Wamoura
-  - members:
-      17027417: {} # Wamoura_Prince
-      17027418: {} # Wamoura
-  - members:
-      17027419: {} # Wamoura_Prince
-      17027420: {} # Wamoura
-  - members:
-      17027425: {} # Wamoura_Prince
-      17027426: {} # Wamoura
-  - members:
-      17027428: {} # Wamoura_Prince
-      17027429: {} # Wamoura

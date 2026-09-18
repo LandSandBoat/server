@@ -1628,7 +1628,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [scripted]
+        respawn: 960
     loot:
       drops:
         - chance: common
