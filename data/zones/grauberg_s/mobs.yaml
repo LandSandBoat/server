@@ -2034,6 +2034,8 @@ templates:
       behaviors:
         aggressive:     true
         true_detection: true
+      mob_mods:
+        exp_bonus: 15
       spawn:
         respawn: 300
     loot:

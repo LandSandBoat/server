@@ -1120,6 +1120,8 @@ templates:
         hitbox:        27
       behaviors:
         links: true
+      mob_mods:
+        exp_bonus: 10
       spawn:
         type: [lottery]
     loot:
@@ -1624,6 +1626,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        exp_bonus: 6
       spawn:
         respawn: 300
     loot:
@@ -1855,6 +1859,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        exp_bonus: 6
       spawn:
         respawn: 300
     loot:
@@ -1932,6 +1938,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        exp_bonus: 6
       spawn:
         respawn: 300
     loot:
@@ -1965,6 +1973,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        exp_bonus: 6
       spawn:
         respawn: 300
     loot:
@@ -2042,6 +2052,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mob_mods:
+        exp_bonus: 6
       spawn:
         respawn: 300
     loot:
@@ -2110,6 +2122,8 @@ templates:
           model: 1738
         entity_flags: 129
         hitbox:        20
+      mob_mods:
+        exp_bonus: 10
       spawn:
         respawn: 300
     loot:
