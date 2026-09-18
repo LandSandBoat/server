@@ -1,65 +1,106 @@
 -----------------------------------
--- Names the launch month mobs in the starter zones otherwise they would be "NPC" in the client.
--- Their IDs sit past the client DAT name table.
--- renameEntity sends the name in the entity update packet instead.
--- Remove together with pxi_launch_starter_zones.sql
--- phoenix/lua/custom/pxi_launch_names.lua
+-- Extra starter mobs have their own names, respawn after 15 seconds, and keep the original loot.
+-- They only drop items if the credited killer gets combat EXP.
+-- Enable or remove together with phoenix/data/launch_starter_zones in modules/init.txt.
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
 local m = Module:new('pxi_launch_names')
 
--- The first 75 ids are group 200, the next 75 are group 201.
-local eventMobNames =
+-- The first mob type uses offsets 824-923 in each zone. The second uses 924-1023.
+local starterZones =
 {
-    West_Ronfaure     = { 'Wild Rabbit',     'Tunnel Worm' },
-    East_Ronfaure     = { 'Wild Rabbit',     'Tunnel Worm' },
-    North_Gustaberg   = { 'Huge Hornet',     'Tunnel Worm' },
-    South_Gustaberg   = { 'Huge Hornet',     'Tunnel Worm' },
-    West_Sarutabaruta = { 'Tiny Mandragora', 'Bumblebee'   },
-    East_Sarutabaruta = { 'Tiny Mandragora', 'Bumblebee'   },
+    [xi.zone.WEST_RONFAURE    ] = { name = 'West_Ronfaure',     mobs = { { 'Wild_Rabbit',     'Field Rabbit'    }, { 'Tunnel_Worm', 'Burrowing Worm' } } },
+    [xi.zone.EAST_RONFAURE    ] = { name = 'East_Ronfaure',     mobs = { { 'Wild_Rabbit',     'Field Rabbit'    }, { 'Tunnel_Worm', 'Burrowing Worm' } } },
+    [xi.zone.NORTH_GUSTABERG  ] = { name = 'North_Gustaberg',   mobs = { { 'Huge_Hornet',     'Large Hornet'    }, { 'Tunnel_Worm', 'Burrowing Worm' } } },
+    [xi.zone.SOUTH_GUSTABERG  ] = { name = 'South_Gustaberg',   mobs = { { 'Huge_Hornet',     'Large Hornet'    }, { 'Tunnel_Worm', 'Burrowing Worm' } } },
+    [xi.zone.WEST_SARUTABARUTA] = { name = 'West_Sarutabaruta', mobs = { { 'Tiny_Mandragora', 'Baby Mandragora' }, { 'Bumblebee',   'Fuzzy Bumblebee' } } },
+    [xi.zone.EAST_SARUTABARUTA] = { name = 'East_Sarutabaruta', mobs = { { 'Tiny_Mandragora', 'Baby Mandragora' }, { 'Bumblebee',   'Fuzzy Bumblebee' } } },
 }
 
-for zoneName, names in pairs(eventMobNames) do
-    m:addOverride(string.format('xi.zones.%s.Zone.onInitialize', zoneName), function(zone)
-        super(zone)
+m:addOverride('xi.player.onGameIn', function(player, firstLogin, zoning)
+    super(player, firstLogin, zoning)
 
-        -- The event mobs occupy offsets 874-1023.
-        local firstId = 0x1000000 + zone:getID() * 0x1000 + 874
-        for i = 0, 149 do
-            local mob = GetMobByID(firstId + i)
-            if mob then
-                mob:renameEntity(i < 75 and names[1] or names[2], true)
-            end
+    player:removeListener('PXI_LAUNCH_EXP')
+    if not starterZones[player:getZoneID()] then
+        return
+    end
+
+    player:addListener('EXPERIENCE_POINTS', 'PXI_LAUNCH_EXP', function(playerArg, mob, exp)
+        if not mob or not mob:isMob() or exp <= 0 then
+            return
         end
+
+        local offset = mob:getID() % 0x1000
+        if
+            not starterZones[mob:getZoneID()] or
+            offset < 824 or
+            offset > 1023 or
+            mob:getLocalVar('[PXI]LaunchKiller') ~= playerArg:getID()
+        then
+            return
+        end
+
+        -- Combat EXP is awarded before the engine rolls item drops.
+        mob:setMobMod(xi.mobMod.NO_DROPS, 0)
     end)
-end
+end)
 
--- Stop starter mobs from granting items if killer gets no exp
-local starterMobs =
-{
-    West_Ronfaure     = { 'Wild_Rabbit',     'Tunnel_Worm' },
-    East_Ronfaure     = { 'Wild_Rabbit',     'Tunnel_Worm' },
-    North_Gustaberg   = { 'Huge_Hornet',     'Tunnel_Worm' },
-    South_Gustaberg   = { 'Huge_Hornet',     'Tunnel_Worm' },
-    West_Sarutabaruta = { 'Tiny_Mandragora', 'Bumblebee'   },
-    East_Sarutabaruta = { 'Tiny_Mandragora', 'Bumblebee'   },
-}
+for _, zoneData in pairs(starterZones) do
+    for index, mobData in ipairs(zoneData.mobs) do
+        local firstOffset = 824 + (index - 1) * 100
 
-for zoneName, mobNames in pairs(starterMobs) do
-    for _, mobName in ipairs(mobNames) do
-        m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobDeath', zoneName, mobName), function(mob, player, optParams)
-            super(mob, player, optParams)
+        m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobSpawn', zoneData.name, mobData[1]), function(mob)
+            super(mob)
 
-            -- Only run for killer
-            if not optParams.isKiller then
+            local offset = mob:getID() % 0x1000
+            if offset < firstOffset or offset >= firstOffset + 100 then
                 return
             end
 
-            -- No drops if killer does not get xp
-            if not player:checkKillCredit(mob) then
-                mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+            -- Worms can roam at zero speed. Keep the extra worms where they spawn.
+            if mobData[1] == 'Tunnel_Worm' then
+                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
             end
+
+            mob:renameEntity(mobData[2], true)
+            mob:setRespawnTime(0)
+            -- Keep a 12-second corpse delay plus the engine's three-second fade.
+            mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 3)
+            mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+            mob:setLocalVar('[PXI]LaunchKiller', 0)
+        end)
+
+        m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobDeath', zoneData.name, mobData[1]), function(mob, player, optParams)
+            super(mob, player, optParams)
+
+            local offset = mob:getID() % 0x1000
+            if
+                offset < firstOffset or
+                offset >= firstOffset + 100 or
+                not optParams.isKiller or
+                not player
+            then
+                return
+            end
+
+            mob:setLocalVar('[PXI]LaunchKiller', player:getID())
+        end)
+
+        m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobDespawn', zoneData.name, mobData[1]), function(mob)
+            super(mob)
+
+            local offset = mob:getID() % 0x1000
+            if offset < firstOffset or offset >= firstOffset + 100 or mob:getHP() > 0 then
+                return
+            end
+
+            -- Let the despawn state finish before spawning again.
+            mob:timer(1, function(mobArg)
+                if not mobArg:isSpawned() then
+                    mobArg:spawn()
+                end
+            end)
         end)
     end
 end
