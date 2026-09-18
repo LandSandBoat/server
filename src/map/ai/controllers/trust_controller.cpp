@@ -300,7 +300,7 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
             const auto  new_pos = sidestepPosition(PTrust->loc.p, POtherTrust->loc.p, amount);
 
             if (PTrust->PAI->PathFind->ValidPosition(new_pos) &&
-                PTrust->PAI->PathFind->PathAround(new_pos, desiredFollowDistance, PATHFLAG_RUN))
+                PTrust->PAI->PathFind->PathTo(new_pos, PATHFLAG_RUN))
             {
                 PTrust->PAI->PathFind->FollowPath(m_Tick);
             }
@@ -390,7 +390,12 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
     if (currentDistance < declumpDistance)
     {
         // Too close to follow target - push away to maintain formation spacing
-        if (PFollowTarget && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget + 0.5f, PATHFLAG_RUN))
+        position_t awayFromTarget = PFollowTarget->loc.p;
+        awayFromTarget.rotation   = worldAngle(PFollowTarget->loc.p, POwner->loc.p);
+        const auto spacedPos      = nearPosition(awayFromTarget, followTarget + 0.5f, 0.0f);
+
+        if (POwner->PAI->PathFind->ValidPosition(spacedPos) &&
+            POwner->PAI->PathFind->PathTo(spacedPos, PATHFLAG_RUN))
         {
             POwner->PAI->PathFind->FollowPath(m_Tick);
         }
