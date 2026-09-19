@@ -34,6 +34,7 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     mob =
     {
+        BRITTLE_ROCK   = GetFirstID('Brittle_Rock'),
         VOLCANIC_BOMB  = GetFirstID('Volcanic_Bomb'),
         WAMOURA_OFFSET = GetTableOfIDs('Ranch_Wamoura'),
         [xi.assault.mission.LEBROS_SUPPLIES] =

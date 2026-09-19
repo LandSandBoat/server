@@ -45,7 +45,7 @@ templates:
       combat:
         delay: 0
       resists:
-        immune_status: [blind, light_sleep, dark_sleep]
+        immune_status: [gravity, bind, paralyze, blind, slow, poison, light_sleep, dark_sleep]
       render:
         look:
           type:  standard
