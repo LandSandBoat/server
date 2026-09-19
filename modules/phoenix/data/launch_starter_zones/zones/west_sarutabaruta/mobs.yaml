@@ -1,1062 +1,1881 @@
 # Launch starter zones for west_sarutabaruta.
-# Temporary launch-week module: faster trash respawns, loot one TH bracket down, 150 level 1 mobs per zone.
-# To end it, remove phoenix/data/launch_starter_zones from modules/init.txt and restart.
+# Adds 200 level 1 mobs, 100 of each type, using the original mobs' spawn regions.
+# The original non-aggressive mobs listed below use a 60-second respawn setting.
+# NMs, aggressive mobs, quest/scripted mobs, fished mobs, event mobs, and
+# night/evening/weather/fog spawns keep their normal timers.
+# NM placeholders keep their normal timers through the individual spawn overrides below.
+# Other mobs of the same type use the 60-second setting.
+# Dropping a quest item does not make a normal mob a quest mob.
+# Extra mobs keep the original loot and respawn after 15 seconds.
+# pxi_launch_names.lua blocks their drops if the credited killer gets no EXP.
+# Disable this data module and pxi_launch_names.lua together, then restart.
 
 templates:
-
-  # -- Custom templates for mobs the core file lacks, scaffolded from the module's mob_groups/mob_pools inserts --
-
-  Bumblebee_Launch:
-    id:            583
-    display_name:  Bumblebee
-    species:       yellow_bee
-    skill_list_id: 48
-    attributes:
-      combat:
-        skill: dagger
-      jobs: [war, war]
-      render:
-        look:
-          type:  standard
-          model: 273
-        entity_flags:  641
-        animation_sub:   8
-        hitbox:          8
-
-  Tiny_Mandragora_Launch:
-    id:            3924
-    display_name:  Tiny_Mandragora
-    species:       mandragora
-    skill_list_id: 178
-    attributes:
-      combat:
-        skill: hand_to_hand
-        delay: 360
-      jobs: [mnk, mnk]
-      resists:
-        dmg_physical:
-          piercing: 2500
-      render:
-        look:
-          type:  standard
-          model: 300
-        entity_flags:  641
-        animation_sub:   8
-        hitbox:          6
 
   Bumblebee:
     attributes:
       spawn:
-        respawn: 0 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   insect_wing
-        - chance: rare
-          item:   rarab_tail
-        - chance: very_rare
-          item:   pot_of_honey
-      steal: pot_of_honey
-      despoil:
-        beehive_chip:  0
-        giant_stinger: 0
-        pot_of_honey:  0
+        respawn: 60
+
+  Carrion_Crow:
+    attributes:
+      spawn:
+        respawn: 60
 
   Crawler:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   spool_of_silk_thread
-        - chance: rare
-          item:   crawler_calculus
-        - chance: very_rare
-          item:   smooth_stone
-      despoil:
-        piece_of_crawler_cocoon: 0
-        crawler_egg:             0
+        respawn: 60
 
   Crawler_2:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   spool_of_silk_thread
-        - chance: rare
-          item:   crawler_calculus
-        - chance: very_rare
-          item:   smooth_stone
-        - chance: rare
-          item:   meteorite
-      despoil:
-        piece_of_crawler_cocoon: 0
-        crawler_egg:             0
+        respawn: 60
 
   Giant_Bee:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   beehive_chip
-        - chance: rare
-          item:   pot_of_honey
-        - chance: very_rare
-          item:   insect_wing
-        - chance: super_rare
-          item:   giant_stinger
-      steal: pot_of_honey
-      despoil:
-        beehive_chip:  0
-        giant_stinger: 0
-        pot_of_honey:  0
+        respawn: 60
+
+  Mandragora:
+    attributes:
+      spawn:
+        respawn: 60
 
   River_Crab:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   chunk_of_rock_salt
-        - chance: super_rare
-          item:   slice_of_land_crab_meat
-      steal: chunk_of_rock_salt
-      despoil:
-        slice_of_land_crab_meat: 0
-        crab_shell:              0
+        respawn: 60
 
   Savanna_Rarab:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   rabbit_hide
-        - chance: rare
-          item:   torn_epistle
-      steal: slice_of_hare_meat
-      despoil:
-        rabbit_hide:        0
-        slice_of_hare_meat: 0
+        respawn: 60
 
   Tiny_Mandragora:
     attributes:
       spawn:
-        respawn: 0 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   two-leaf_mandragora_bud
-      steal: two-leaf_mandragora_bud
-      despoil:
-        two-leaf_mandragora_bud: 0
-        ball_of_saruta_cotton:   0
+        respawn: 60
 
 spawns:
 
-  17249130:
-    template: Tiny_Mandragora_Launch
-    region:   sw_102
+  17248467: # Tom Tit Tat placeholder
+    attributes:
+      spawn:
+        respawn: 300
+
+  17248485: # Tom Tit Tat placeholder
+    attributes:
+      spawn:
+        respawn: 300
+
+  17248516: # Nunyenunc placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  # Tiny_Mandragora: 100 copies, split between regions based on the original spawn counts.
+  # s_6: 35, e_18: 30, s_28: 35.
+
+  17249080:
+    template: Tiny_Mandragora
+    region:   s_6
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249081:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249082:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249083:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249084:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249085:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249086:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249087:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249088:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249089:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249090:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249091:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249092:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249093:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249094:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249095:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249096:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249097:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249098:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249099:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249100:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249101:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249102:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249103:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249104:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249105:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249106:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249107:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249108:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249109:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249110:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249111:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249112:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249113:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249114:
+    template: Tiny_Mandragora
+    region:   s_6
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249115:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249116:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249117:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249118:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249119:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249120:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249121:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249122:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249123:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249124:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249125:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249126:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249127:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249128:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249129:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249130:
+    template: Tiny_Mandragora
+    region:   e_18
+    level:    [1, 1]
+    script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249131:
-    template: Tiny_Mandragora_Launch
-    region:   nw_326
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249132:
-    template: Tiny_Mandragora_Launch
-    region:   s_28
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249133:
-    template: Tiny_Mandragora_Launch
-    region:   nw_333
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249134:
-    template: Tiny_Mandragora_Launch
-    region:   ne_178
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249135:
-    template: Tiny_Mandragora_Launch
+    template: Tiny_Mandragora
     region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249136:
-    template: Tiny_Mandragora_Launch
-    region:   s_6
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249137:
-    template: Tiny_Mandragora_Launch
-    region:   n_157
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249138:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249139:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249140:
-    template: Tiny_Mandragora_Launch
-    region:   nw_333
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249141:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249142:
-    template: Tiny_Mandragora_Launch
-    region:   e_188
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249143:
-    template: Tiny_Mandragora_Launch
-    region:   s_51
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249144:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Tiny_Mandragora
+    region:   e_18
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249145:
-    template: Tiny_Mandragora_Launch
-    region:   e_91
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249146:
-    template: Tiny_Mandragora_Launch
-    region:   n_249
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249147:
-    template: Tiny_Mandragora_Launch
-    region:   e_18
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249148:
-    template: Tiny_Mandragora_Launch
-    region:   ne_228
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249149:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249150:
-    template: Tiny_Mandragora_Launch
-    region:   s_51
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249151:
-    template: Tiny_Mandragora_Launch
-    region:   nw_326
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249152:
-    template: Tiny_Mandragora_Launch
-    region:   s_40
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249153:
-    template: Tiny_Mandragora_Launch
-    region:   e_188
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249154:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249155:
-    template: Tiny_Mandragora_Launch
-    region:   n_210
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249156:
-    template: Tiny_Mandragora_Launch
-    region:   e_188
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249157:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249158:
-    template: Tiny_Mandragora_Launch
-    region:   ne_228
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249159:
-    template: Tiny_Mandragora_Launch
-    region:   ne_178
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249160:
-    template: Tiny_Mandragora_Launch
-    region:   c_138
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249161:
-    template: Tiny_Mandragora_Launch
-    region:   e_91
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249162:
-    template: Tiny_Mandragora_Launch
-    region:   s_51
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249163:
-    template: Tiny_Mandragora_Launch
-    region:   ne_228
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249164:
-    template: Tiny_Mandragora_Launch
-    region:   s_6
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249165:
-    template: Tiny_Mandragora_Launch
+    template: Tiny_Mandragora
     region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249166:
-    template: Tiny_Mandragora_Launch
-    region:   s_40
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249167:
-    template: Tiny_Mandragora_Launch
-    region:   n_157
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249168:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249169:
-    template: Tiny_Mandragora_Launch
-    region:   n_210
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249170:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249171:
-    template: Tiny_Mandragora_Launch
-    region:   e_18
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249172:
-    template: Tiny_Mandragora_Launch
-    region:   ne_287
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249173:
-    template: Tiny_Mandragora_Launch
-    region:   c_138
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249174:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249175:
-    template: Tiny_Mandragora_Launch
-    region:   s_6
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249176:
-    template: Tiny_Mandragora_Launch
-    region:   n_157
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249177:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249178:
-    template: Tiny_Mandragora_Launch
-    region:   e_91
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
 
   17249179:
-    template: Tiny_Mandragora_Launch
-    region:   ne_287
+    template: Tiny_Mandragora
+    region:   s_28
     level:    [1, 1]
     script:   Tiny_Mandragora
+    attributes:
+      spawn:
+        respawn: 0
+
+  # Bumblebee: 100 copies, split between regions based on the original spawn counts.
+  # s_6: 40, e_18: 30, s_28: 30.
 
   17249180:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249181:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249182:
-    template: Tiny_Mandragora_Launch
-    region:   n_210
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249183:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249184:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249185:
-    template: Tiny_Mandragora_Launch
-    region:   n_210
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249186:
-    template: Tiny_Mandragora_Launch
-    region:   s_40
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249187:
-    template: Tiny_Mandragora_Launch
-    region:   e_91
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249188:
-    template: Tiny_Mandragora_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249189:
-    template: Tiny_Mandragora_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249190:
-    template: Tiny_Mandragora_Launch
-    region:   ne_287
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249191:
-    template: Tiny_Mandragora_Launch
-    region:   s_51
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249192:
-    template: Tiny_Mandragora_Launch
-    region:   s_51
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249193:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249194:
-    template: Tiny_Mandragora_Launch
-    region:   ne_287
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249195:
-    template: Tiny_Mandragora_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249196:
-    template: Tiny_Mandragora_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249197:
-    template: Tiny_Mandragora_Launch
-    region:   c_267
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249198:
-    template: Tiny_Mandragora_Launch
-    region:   ne_178
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249199:
-    template: Tiny_Mandragora_Launch
-    region:   n_157
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249200:
-    template: Tiny_Mandragora_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249201:
-    template: Tiny_Mandragora_Launch
-    region:   n_249
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249202:
-    template: Tiny_Mandragora_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249203:
-    template: Tiny_Mandragora_Launch
+    template: Bumblebee
     region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249204:
-    template: Tiny_Mandragora_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
-    script:   Tiny_Mandragora
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249205:
-    template: Bumblebee_Launch
-    region:   ne_287
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249206:
-    template: Bumblebee_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249207:
-    template: Bumblebee_Launch
-    region:   n_210
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249208:
-    template: Bumblebee_Launch
-    region:   c_267
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249209:
-    template: Bumblebee_Launch
-    region:   s_40
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249210:
-    template: Bumblebee_Launch
-    region:   n_249
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249211:
-    template: Bumblebee_Launch
-    region:   c_267
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249212:
-    template: Bumblebee_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249213:
-    template: Bumblebee_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249214:
-    template: Bumblebee_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249215:
-    template: Bumblebee_Launch
-    region:   sw_102
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249216:
-    template: Bumblebee_Launch
-    region:   c_267
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249217:
-    template: Bumblebee_Launch
-    region:   s_40
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249218:
-    template: Bumblebee_Launch
-    region:   ne_178
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249219:
-    template: Bumblebee_Launch
-    region:   n_210
+    template: Bumblebee
+    region:   s_6
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249220:
-    template: Bumblebee_Launch
-    region:   ne_287
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249221:
-    template: Bumblebee_Launch
-    region:   n_157
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249222:
-    template: Bumblebee_Launch
-    region:   s_28
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249223:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249224:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249225:
-    template: Bumblebee_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249226:
-    template: Bumblebee_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249227:
-    template: Bumblebee_Launch
-    region:   n_157
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249228:
-    template: Bumblebee_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249229:
-    template: Bumblebee_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249230:
-    template: Bumblebee_Launch
-    region:   s_28
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249231:
-    template: Bumblebee_Launch
-    region:   n_157
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249232:
-    template: Bumblebee_Launch
-    region:   s_51
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249233:
-    template: Bumblebee_Launch
-    region:   sw_102
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249234:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249235:
-    template: Bumblebee_Launch
-    region:   n_249
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249236:
-    template: Bumblebee_Launch
-    region:   n_249
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249237:
-    template: Bumblebee_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249238:
-    template: Bumblebee_Launch
-    region:   sw_102
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249239:
-    template: Bumblebee_Launch
-    region:   c_267
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249240:
-    template: Bumblebee_Launch
-    region:   ne_287
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249241:
-    template: Bumblebee_Launch
-    region:   nw_326
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249242:
-    template: Bumblebee_Launch
-    region:   s_51
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249243:
-    template: Bumblebee_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249244:
-    template: Bumblebee_Launch
-    region:   e_71
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249245:
-    template: Bumblebee_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249246:
-    template: Bumblebee_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249247:
-    template: Bumblebee_Launch
+    template: Bumblebee
     region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249248:
-    template: Bumblebee_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249249:
-    template: Bumblebee_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   e_18
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249250:
-    template: Bumblebee_Launch
+    template: Bumblebee
     region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249251:
-    template: Bumblebee_Launch
-    region:   n_249
-    level:    [1, 1]
-    script:   Bumblebee
-
-  17249252:
-    template: Bumblebee_Launch
-    region:   nw_333
-    level:    [1, 1]
-    script:   Bumblebee
-
-  17249253:
-    template: Bumblebee_Launch
-    region:   n_157
-    level:    [1, 1]
-    script:   Bumblebee
-
-  17249254:
-    template: Bumblebee_Launch
-    region:   s_51
-    level:    [1, 1]
-    script:   Bumblebee
-
-  17249255:
-    template: Bumblebee_Launch
+    template: Bumblebee
     region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249252:
+    template: Bumblebee
+    region:   s_28
+    level:    [1, 1]
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249253:
+    template: Bumblebee
+    region:   s_28
+    level:    [1, 1]
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249254:
+    template: Bumblebee
+    region:   s_28
+    level:    [1, 1]
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
+
+  17249255:
+    template: Bumblebee
+    region:   s_28
+    level:    [1, 1]
+    script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249256:
-    template: Bumblebee_Launch
-    region:   sw_102
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249257:
-    template: Bumblebee_Launch
-    region:   nw_333
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249258:
-    template: Bumblebee_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249259:
-    template: Bumblebee_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249260:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249261:
-    template: Bumblebee_Launch
-    region:   c_138
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249262:
-    template: Bumblebee_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249263:
-    template: Bumblebee_Launch
-    region:   s_51
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249264:
-    template: Bumblebee_Launch
-    region:   sw_102
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249265:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249266:
-    template: Bumblebee_Launch
-    region:   e_91
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249267:
-    template: Bumblebee_Launch
-    region:   ne_178
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249268:
-    template: Bumblebee_Launch
-    region:   s_6
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249269:
-    template: Bumblebee_Launch
-    region:   s_6
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249270:
-    template: Bumblebee_Launch
-    region:   sw_115
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249271:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249272:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249273:
-    template: Bumblebee_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249274:
-    template: Bumblebee_Launch
-    region:   e_18
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249275:
-    template: Bumblebee_Launch
-    region:   nw_304
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249276:
-    template: Bumblebee_Launch
-    region:   e_18
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249277:
-    template: Bumblebee_Launch
-    region:   e_188
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249278:
-    template: Bumblebee_Launch
-    region:   ne_228
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
 
   17249279:
-    template: Bumblebee_Launch
-    region:   s_40
+    template: Bumblebee
+    region:   s_28
     level:    [1, 1]
     script:   Bumblebee
+    attributes:
+      spawn:
+        respawn: 0
