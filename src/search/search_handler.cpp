@@ -70,6 +70,13 @@ SearchHandler::SearchHandler(Scheduler& scheduler, asio::ip::tcp::socket socket,
             socket_.lowest_layer().close();
             return;
         }
+
+        if (settings::get<bool>("logging.LOG_INFO"))
+        {
+            const CDataLoader PDataLoader;
+            const auto        names = PDataLoader.GetPlayerNamesByIP(ipAddress_);
+            requestingPlayers_      = names.empty() ? "unknown" : fmt::format("{}", fmt::join(names, ", "));
+        }
     }
 }
 
@@ -235,6 +242,31 @@ inline auto searchTypeToString(const uint8 type) -> std::string
     }
 }
 
+inline auto ahSortToString(const uint8 sortType) -> std::string
+{
+    switch (sortType)
+    {
+        case 2:
+            return "level";
+        case 3:
+            return "race";
+        case 4:
+            return "job";
+        case 5:
+            return "damage";
+        case 6:
+            return "delay";
+        case 7:
+            return "defense";
+        case 8:
+            return "resistance";
+        case 9:
+            return "name";
+        default:
+            return "unknown";
+    }
+}
+
 void SearchHandler::read_func(const uint16_t length)
 {
     if (length != ref<uint16>(buffer_.data(), 0x00) || length < 28)
@@ -249,7 +281,10 @@ void SearchHandler::read_func(const uint16_t length)
     {
         uint8 packetType = buffer_[0x0B];
 
-        ShowInfoFmt("Search Request: {} ({}), size: {}, ip: {}", searchTypeToString(packetType), packetType, length, ipAddress_);
+        if (packetType != TCP_AH_REQUEST_MORE)
+        {
+            ShowInfoFmt("Search Request: {} ({}) from [{}], size: {}, ip: {}", searchTypeToString(packetType), packetType, requestingPlayers_, length, ipAddress_);
+        }
 
         switch (packetType)
         {
@@ -329,15 +364,13 @@ void SearchHandler::HandleGroupListRequest()
     uint32       linkshellid1 = ref<uint32>(buffer_.data(), 0x18);
     uint32       linkshellid2 = ref<uint32>(buffer_.data(), 0x1C);
 
-    ShowInfoFmt("SEARCH::PartyID = {}", partyid);
-    ShowInfoFmt("SEARCH::LinkshellIDs = {}, {}", linkshellid1, linkshellid2);
-
     const CDataLoader PDataLoader;
 
     if (partyid != 0 || allianceid != 0)
     {
         const auto PartyList = PDataLoader.GetPartyList(partyid, allianceid);
 
+        ShowInfoFmt("Group list request: party={}, alliance={}, results={}", partyid, allianceid, PartyList.size());
         CPartyListPacket PPartyPacket(partyid, static_cast<uint32>(PartyList.size()));
 
         std::size_t membersSent = 0;
@@ -364,6 +397,8 @@ void SearchHandler::HandleGroupListRequest()
 
         const uint32 totalResults  = static_cast<uint32>(LinkshellList.size());
         uint32       currentResult = 0;
+
+        ShowInfoFmt("Group list request: linkshell={}, results={}", linkshellid, totalResults);
 
         // Iterate through the linkshell list, splitting up the results into
         // smaller chunks.
@@ -401,10 +436,12 @@ void SearchHandler::HandleGroupListRequest()
 
 void SearchHandler::HandleSearchComment()
 {
-    const uint32 playerId = ref<uint32>(buffer_.data(), 0x10);
-
+    const uint32      playerId = ref<uint32>(buffer_.data(), 0x10);
     const CDataLoader PDataLoader;
-    const std::string comment = PDataLoader.GetSearchComment(playerId);
+    const std::string comment    = PDataLoader.GetSearchComment(playerId);
+    const std::string playerName = PDataLoader.GetCharName(playerId);
+
+    ShowInfoFmt("Search comment request: target={}({}), length={}", playerName, playerId, comment.length());
     if (comment.empty())
     {
         return;
@@ -475,12 +512,16 @@ void SearchHandler::HandleAuctionHouseRequest()
     // 7 - defense
     // 8 - resistance
     // 9 - name
-    std::string OrderByString = "ORDER BY";
-    const uint8 paramCount    = ref<uint8>(buffer_.data(), 0x12);
+    std::string OrderByString    = "ORDER BY";
+    const uint8 paramCount       = ref<uint8>(buffer_.data(), 0x12);
+    const bool  isInitialRequest = (buffer_[0x0B] == TCP_AH_REQUEST);
     for (uint8 i = 0; i < paramCount; ++i) // Item sort options
     {
         uint8 param = ref<uint32>(buffer_.data(), 0x18 + 8 * i);
-        ShowInfoFmt(" Param{}: {}", i, param);
+        if (isInitialRequest)
+        {
+            ShowInfoFmt("AH sort option: code={} ({})", param, ahSortToString(param));
+        }
         switch (param)
         {
             case 2:
@@ -505,6 +546,10 @@ void SearchHandler::HandleAuctionHouseRequest()
     const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
 
     const std::size_t itemListSize = ItemList.size();
+    if (isInitialRequest)
+    {
+        ShowInfoFmt("AH request: category={}, results={}", AHCatID, itemListSize);
+    }
     const std::size_t PacketsCount = (itemListSize / 20) + (itemListSize % 20 != 0) + (itemListSize == 0);
 
     for (std::size_t i = 0; i < PacketsCount; ++i)
@@ -538,6 +583,8 @@ void SearchHandler::HandleAuctionHouseHistory()
 
     CAHHistoryPacket PAHPacket = CAHHistoryPacket(item, stack);
 
+    ShowInfoFmt("AH history request: itemid={}, stack={}", ItemID, stack);
+
     for (const auto& i : HistoryList)
     {
         PAHPacket.AddItem(i);
@@ -547,6 +594,7 @@ void SearchHandler::HandleAuctionHouseHistory()
 
     DebugPrintPacket(PAHPacket.GetData(), length);
     searchPackets_.emplace_back(PAHPacket.GetData(), length);
+    ShowInfoFmt("AH history: results={}", HistoryList.size());
 }
 
 auto SearchHandler::_HandleSearchRequest() -> SearchRequest
