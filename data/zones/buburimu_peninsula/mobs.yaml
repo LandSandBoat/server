@@ -217,7 +217,7 @@ templates:
           item:   slice_of_dhalmel_meat
         - chance: very_common
           item:   slice_of_dhalmel_meat
-        - chance: uncommon
+        - chance: common
           item:   cup_of_dhalmel_saliva
         - chance: uncommon
           item:   dhalmel_hide

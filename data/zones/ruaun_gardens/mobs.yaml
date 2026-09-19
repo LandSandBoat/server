@@ -196,7 +196,7 @@ templates:
 
   Despot:
     id:            1012
-    species:       gargoyles
+    species:       doll
     type:          [notorious]
     skill_list_id: 368
     attributes:
