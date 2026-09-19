@@ -104,15 +104,13 @@ m:addOverrideByEra('xi.job_utils.dragoon.useSpiritLink', {
 
         -- Handle Stoneskin.
         local stoneskinPower = 0
-
-        if player:hasStatusEffect(xi.effect.STONESKIN) then
-            stoneskinPower = player:getMod(xi.mod.STONESKIN)
+        local stoneskin      = player:getStatusEffect(xi.effect.STONESKIN)
+        if stoneskin then
+            stoneskinPower = stoneskin:getPower()
 
             -- If stoneskin is more powerfull than the amount to be drained.
             if stoneskinPower > drainamount then
-                local effect = player:getStatusEffect(xi.effect.STONESKIN)
-                effect:setPower(effect:getPower() - drainamount) -- Fixes the status effect so when it ends it uses the new power instead of old.
-                player:delMod(xi.mod.STONESKIN, drainamount)     -- Removes the amount from the mod.
+                stoneskin:setPower(stoneskinPower - drainamount) -- Fixes the status effect so when it ends it uses the new power instead of old.
 
             -- If stoneskin is as powerful or less than the amount to be drained.
             else
@@ -127,7 +125,7 @@ m:addOverrideByEra('xi.job_utils.dragoon.useSpiritLink', {
         local alpha     = math.floor(wyvern:getMainLvl() * 0.7)
         local healPet   = (drainamount + playerMND + alpha) * 2
 
-        if player:getEquipID(xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
+        if xi.equipment.getUsableEquipID(player, xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
             healPet = healPet + 10
         end
 
@@ -162,15 +160,13 @@ m:addOverrideByEra('xi.job_utils.dragoon.useSpiritLink', {
 
         -- Handle Stoneskin.
         local stoneskinPower = 0
-
-        if player:hasStatusEffect(xi.effect.STONESKIN) then
-            stoneskinPower = player:getMod(xi.mod.STONESKIN)
+        local stoneskin      = player:getStatusEffect(xi.effect.STONESKIN)
+        if stoneskin then
+            stoneskinPower = stoneskin:getPower()
 
             -- If stoneskin is more powerfull than the amount to be drained.
             if stoneskinPower > drainAmount then
-                local effect = player:getStatusEffect(xi.effect.STONESKIN)
-                effect:setPower(effect:getPower() - drainAmount) -- Fixes the status effect so when it ends it uses the new power instead of old.
-                player:delMod(xi.mod.STONESKIN, drainAmount)     -- Removes the amount from the mod.
+                stoneskin:setPower(stoneskinPower - drainAmount) -- Fixes the status effect so when it ends it uses the new power instead of old.
 
             -- If stoneskin is as powerful or less than the amount to be drained.
             else
@@ -187,7 +183,7 @@ m:addOverrideByEra('xi.job_utils.dragoon.useSpiritLink', {
         local alpha     = math.floor(wyvern:getMainLvl() * 0.7)
         local healPet   = drainAmount + playerMND + alpha
 
-        if player:getEquipID(xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
+        if xi.equipment.getUsableEquipID(player, xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
             healPet = healPet + 10
         end
 
