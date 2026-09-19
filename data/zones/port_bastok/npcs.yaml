@@ -2831,7 +2831,7 @@ npcs:
       moving:        8
     status:   normal
     widescan: true
-    content:  toau
+    content:  cop
 
   17744039:
     script:       Alib-Mufalib
