@@ -5493,7 +5493,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
-            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
+            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((50 + bonus) / 100.0f));
             applyArts = false;
         }
         // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
@@ -5536,7 +5536,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
-            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
+            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((50 + bonus) / 100.0f));
             applyArts = false;
         }
         else if (applyArts)
