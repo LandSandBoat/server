@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local duration = 120
 
     if mob:isNM() then
-        power = 25
+        power    = 25
+        duration = 90
     end
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration))

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Sand Blast
--- Deals Earth damage to targets in a fan-shaped area of effect. Additional effect: Blind
--- Range: 8' cone
+-- Blinds targets in a radius around the user. No damage.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,20 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 40, 0, 180))
-
-    if
-        mob:getPool() == xi.mobPool.FEELER_ANTLION and
-        mob:getLocalVar('SAND_BLAST') == 1
-    then
-        local alastorId = mob:getID() + 6
-        local alastor = GetMobByID(alastorId)
-        if alastor and not alastor:isSpawned() then -- Alastor Antlion
-            mob:setLocalVar('SAND_BLAST', 0) -- Don't spawn more NMs
-            alastor:setSpawn(mob:getXPos() + 1, mob:getYPos() + 1, mob:getZPos() + 1) -- Set its spawn location.
-            SpawnMob(alastorId, 120):updateClaim(target)
-        end
-    end
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 40, 0, 90))
 
     return xi.effect.BLINDNESS
 end

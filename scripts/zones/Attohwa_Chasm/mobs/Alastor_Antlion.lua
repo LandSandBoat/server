@@ -3,7 +3,7 @@
 --   NM: Alastor Antlion
 -----------------------------------
 local ID = zones[xi.zone.ATTOHWA_CHASM]
-mixins = { require('scripts/mixins/families/antlion_ambush_no_rehide') }
+mixins = { require('scripts/mixins/families/antlion_ambush_popped') }
 local attohwaChasmGlobal = require('scripts/zones/Attohwa_Chasm/globals')
 -----------------------------------
 ---@type TMobEntity
@@ -11,10 +11,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.GA_CHANCE, 50) -- Needs verification
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
-    mob:setMobMod(xi.mobMod.MUG_GIL, 10000) -- Needs verification
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 120)
     mob:addMod(xi.mod.FASTCAST, 10) -- Needs verification
 
     mob:addImmunity(xi.immunity.BIND)
@@ -37,7 +36,15 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY)
+    local pTable =
+    {
+        chance         = 20,
+        effectId       = xi.effect.PETRIFICATION,
+        magicalElement = xi.element.EARTH,
+        duration       = 30,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
