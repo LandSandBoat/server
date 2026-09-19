@@ -108,11 +108,12 @@ local function handleCache(player, text, zoneId)
         zoneId == xi.zone.BHAFLAU_THICKETS
     then
         player:addCurrency('imperial_standing', pointsAwarded)
+        player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 1, pointsAwarded)
     else
         player:addCP(pointsAwarded)
+        player:messageSpecial(text.BEASTMEN_CACHE_OFFSET, pointsAwarded)
     end
 
-    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET, pointsAwarded)
     awardExperience(player, text, xi.craftRank.AMATEUR)
 end
 
