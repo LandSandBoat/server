@@ -3220,6 +3220,8 @@ INSERT INTO `synth_recipes` VALUES (49968,1,0,0,0,0,24,0,0,0,0,4100,4242,15161,0
 -- INSERT INTO `synth_recipes` VALUES (49970,1,0,8,0,0,32,0,0,0,0,4100,4242,12714,0,0,0,0,0,0,0,706,817,819,819,1,1,3,6,'Soil Tekko (desynth)',NULL); -- 2022.03.03 Base on normal desynth behavior
 -- INSERT INTO `synth_recipes` VALUES (49971,1,0,0,0,0,36,0,0,0,0,4100,4242,12842,0,0,0,0,0,0,0,817,819,819,820,1,3,6,3,'Soil Sitabaki (desynth)',NULL); -- 2022.03.03 Base on FFXIclopedia unknown yield and level
 INSERT INTO `synth_recipes` VALUES (49972,1,0,0,0,0,34,0,0,0,0,4100,4242,12970,0,0,0,0,0,0,0,818,819,819,819,1,7,8,8,'Soil Kyahan (desynth)',NULL); -- 2022.03.03 Base on FFXIclopedia unknown level used synth level
+INSERT INTO `synth_recipes` VALUES (49973,1,0,0,0,0,0,95,0,0,0,4100,4242,16212,0,0,0,0,0,0,0,2169,2169,2169,2169,1,1,1,1,'Cerberus Mantle (desynth)','TOAU');
+INSERT INTO `synth_recipes` VALUES (49974,1,0,0,0,0,0,95,0,0,0,4100,4242,16216,0,0,0,0,0,0,0,2169,2169,2169,2169,1,1,1,1,'Cerberus Mantle +1 (desynth)','TOAU');
 INSERT INTO `synth_recipes` VALUES (50001,0,0,0,0,0,0,0,1,0,0,4098,4240,888,888,888,0,0,0,0,0,1883,1883,1883,1883,1,2,3,4,'Shell Powder','COP');
 INSERT INTO `synth_recipes` VALUES (50002,0,2025,0,0,0,0,0,2,0,0,4098,4240,880,1642,1644,1648,0,0,0,0,2141,2141,2141,2141,1,1,1,1,'Wailing Bone Chip','COP');
 INSERT INTO `synth_recipes` VALUES (50003,0,0,0,0,0,0,0,3,0,0,4098,4240,888,888,0,0,0,0,0,0,13313,13314,13314,13314,1,1,1,1,'Shell Earring',NULL);

@@ -794,6 +794,7 @@ static const FlatHashMap<uint16, uint8> materialLossRates = {
     { 1291, 100 }, // Golden Hakutaku Eye
     { 1292, 100 }, // Damp Hakutaku Eye
     { 1409, 100 }, // Spool of Siren's Macrame
+    { 2169, 100 }, // Cerberus Hide
     { 9091, 0 },   // Broken Lu Shang's Fishing Rod +1
 };
 
