@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- Appraisal Utilities
 -- desc: Common functionality for Appraisals
 -----------------------------------
@@ -1539,9 +1539,10 @@ xi.appraisal.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
                 local appraisedItem  = xi.appraisal.itemPick(player, info, appraisalID)
 
                 if appraisedItem ~= 0 and trade:confirmItem(tradedItem) then
-                    player:startEvent(appraisalCsid, 1, appraisedItem)
-                    player:setLocalVar('Appraisal', appraisedItem) -- anticheat
                     player:confirmTrade()
+                    player:delGil(gil)
+                    player:addTreasure(appraisedItem, npc)
+                    player:startEvent(appraisalCsid, 1, appraisedItem)
                 end
 
                 break
@@ -1574,13 +1575,4 @@ xi.appraisal.itemPick = function(player, info, appraisalID)
     end
 
     return item
-end
-
-xi.appraisal.appraisalOnEventFinish = function(player, csid, option, gil, appraisalCsid, npc)
-    if csid == appraisalCsid then
-        local appraisedItem = player:getLocalVar('Appraisal')
-        player:addTreasure(appraisedItem, npc)
-        player:delGil(gil)
-        player:setLocalVar('Appraisal', 0)
-    end
 end
