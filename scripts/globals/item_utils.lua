@@ -277,6 +277,52 @@ xi.itemUtils.removeMultipleEffects = function(target, effects, count, random)
     end
 end
 
+-- Maat's Concoction / Maat's Mix: grant job points to the current job.
+-- Retail cap is 500 total (unspent + spent) for that job.
+-- https://www.bg-wiki.com/ffxi/Maat%27s_Mix
+-- https://www.bg-wiki.com/ffxi/Maat%27s_Concoction
+-- Animation 34 and 0x028 message 807 from siknoz captures (Concoction Raguza 2021-10-13,
+-- Mix Siknawz 2025-07-21 and 2026-05-23). At 500 JP retail sends no 0x029; capturer
+-- noted "just doesnt use it, no error message". onItemCheck -1 is RefuseSilently.
+-- Under-99 fail message is unverified.
+local jobPointsMax = 500
+
+---@nodiscard
+---@param target CBaseEntity
+---@return integer
+xi.itemUtils.jobPointItemOnItemCheck = function(target)
+    if
+        not target:isPC() or
+        target:getMainLvl() < 99
+    then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE_2
+    end
+
+    local job   = target:getMainJob()
+    local total = target:getJobPoints(job) + target:getSpentJobPoints()
+    if total >= jobPointsMax then
+        return -1
+    end
+
+    return 0
+end
+
+---@param target CBaseEntity
+---@param amount integer
+---@param action Action
+---@return integer
+xi.itemUtils.jobPointItemOnItemUse = function(target, amount, action)
+    local job   = target:getMainJob()
+    local total = target:getJobPoints(job) + target:getSpentJobPoints()
+    local grant = math.min(amount, jobPointsMax - total)
+    if grant > 0 then
+        target:addJobPoints(job, grant)
+        action:messageID(target:getID(), xi.msg.basic.RECEIVES_JOB_POINTS)
+    end
+
+    return grant
+end
+
 -- for applying pet mods based on arbitrary conditions
 -- I.E. avatar attack only for a particular pet
 -- example usage in fervor_ring.lua
