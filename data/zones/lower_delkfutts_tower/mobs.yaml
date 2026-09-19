@@ -45,7 +45,6 @@ templates:
         hitbox:          11
       behaviors:
         aggressive: true
-        links:      true
       spawn:
         respawn: 300
     loot:
@@ -786,7 +785,7 @@ templates:
         name_prefix:    64
         hitbox:         13
       behaviors:
-        links: true
+        aggressive: true
       spawn:
         respawn: 300
     loot:
