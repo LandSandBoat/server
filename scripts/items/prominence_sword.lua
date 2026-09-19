@@ -1,7 +1,8 @@
 -----------------------------------
--- ID: 17706
--- Item: Vulcan Blade
--- Item Effect: Enfire
+-- ID: 18381
+-- Item: Prominence Sword
+-- Additional effect: fire damage
+-- Enchantment: Enfire
 -- Duration: 3 minutes
 -----------------------------------
 ---@type TItem
@@ -23,15 +24,15 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 end
 
 itemObject.onItemCheck = function(target, user)
-    if target:getStatusEffectBySource(xi.effect.ENFIRE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VULCAN_BLADE) ~= nil then
-        target:delStatusEffect(xi.effect.ENFIRE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VULCAN_BLADE)
+    if target:getStatusEffectBySource(xi.effect.ENFIRE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_SWORD) ~= nil then
+        target:delStatusEffect(xi.effect.ENFIRE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_SWORD)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target, user)
-    if target:hasEquipped(xi.item.VULCAN_BLADE) then
+    if target:hasEquipped(xi.item.PROMINENCE_SWORD) then
         local effect = xi.effect.ENFIRE
         local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
         local potency = 0
@@ -44,8 +45,9 @@ itemObject.onItemUse = function(target, user)
 
         potency = utils.clamp(potency, 3, 25)
 
-        target:addStatusEffect(effect, { power = potency, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.VULCAN_BLADE })
+        target:addStatusEffect(effect, { power = potency, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.PROMINENCE_SWORD })
     end
 end
+
 
 return itemObject

@@ -1,11 +1,27 @@
 -----------------------------------
 -- ID: 18379
 -- Item: Vulcan Claymore
+-- Additional effect: fire damage
 -- Item Effect: Enfire
 -- Duration: 3 minutes
 -----------------------------------
 ---@type TItem
 local itemObject = {}
+
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
+    local pTable =
+    {
+        chance          = 10,
+        basePower       = math.randomInt(6, 8),
+        attackType      = xi.attackType.MAGICAL,
+        magicalElement  = xi.element.FIRE,
+        canMAB          = false,
+        canResist       = true,
+        lowestResist    = 0.5,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
+end
 
 itemObject.onItemCheck = function(target, user)
     if target:getStatusEffectBySource(xi.effect.ENFIRE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VULCAN_CLAYMORE) ~= nil then
