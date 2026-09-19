@@ -331,7 +331,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         player:hasKeyItem(xi.keyItem.PRISMATIC_HOURGLASS) and
         player:getMainLvl() < xi.settings.main.DYNA_LEVEL_MIN
     then
-        player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
+        player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL, xi.settings.main.DYNA_LEVEL_MIN)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
     elseif not unlockingDyna and player:getCharVar(info.beatVar) ~= 1 then
         player:messageSpecial(ID.text.DYNA_NPC_DEFAULT_MESSAGE)
