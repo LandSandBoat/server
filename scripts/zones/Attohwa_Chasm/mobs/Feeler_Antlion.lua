@@ -50,19 +50,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
                     local pos = ambushTarget:getPos()
 
                     executioner:setSpawn(pos.x, pos.y, pos.z)
-                    SpawnMob(executionerId)
-
-                    -- Players only see a popped mob after their next position update. setPos lets that update find it.
-                    -- Engage one tick later so the ambush is not dropped for anyone who has not seen it yet.
-                    -- Both can go once SpawnMob announces new mobs itself.
-                    executioner:setPos(pos.x, pos.y, pos.z)
-                    executioner:queue(0, function(executionerArg)
-                        local liveTarget = mobArg:getTarget()
-                        if liveTarget then
-                            executionerArg:updateEnmity(liveTarget)
-                        end
-                    end)
-
+                    SpawnMob(executionerId):updateEnmity(ambushTarget)
                     break
                 end
             end
@@ -85,16 +73,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             local pos = ambushTarget:getPos()
 
             alastor:setSpawn(pos.x, pos.y, pos.z)
-            SpawnMob(ID.mob.ALASTOR_ANTLION)
-
-            -- Same one tick wait as the Executioners.
-            alastor:setPos(pos.x, pos.y, pos.z)
-            alastor:queue(0, function(alastorArg)
-                local liveTarget = mobArg:getTarget()
-                if liveTarget then
-                    alastorArg:updateClaim(liveTarget)
-                end
-            end)
+            SpawnMob(ID.mob.ALASTOR_ANTLION):updateClaim(ambushTarget)
         end)
     end
 end

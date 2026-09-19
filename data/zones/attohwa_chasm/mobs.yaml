@@ -3293,27 +3293,27 @@ spawns:
     level:    [78, 78]
   16806243:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.890, 3.500, -199.250, 236]
     level:    [80, 80]
   16806244:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-398.800, 3.460, -204.180, 236]
     level:    [80, 80]
   16806245:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-400.670, 3.040, -205.940, 236]
     level:    [80, 80]
   16806246:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.574, 3.500, -202.750, 236]
     level:    [80, 80]
   16806247:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.574, 3.500, -202.750, 236]
     level:    [80, 80]
   16806248:
     template: Alastor_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-400.190, 3.500, -200.590, 236]
     level:    [83, 83]
   16806249:
     template: Ambusher_Antlion
