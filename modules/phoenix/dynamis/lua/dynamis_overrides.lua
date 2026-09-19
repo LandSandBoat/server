@@ -1358,7 +1358,7 @@ m:addOverride('xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade', function(play
     -- Zero this out, just in case
     player:setLocalVar('currencyExchange', 0)
 
-    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+    if player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND) then
         -- buy timeless hourglass
         if
             gil == xi.dynamis.settings.TIMELESS_HOURGLASS_COST and
@@ -1416,7 +1416,7 @@ m:addOverride('xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrigger', function(pl
     local baseCs   = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].baseCs
     local currency = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].currency
 
-    if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+    if player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND) then
         player:startEvent(baseCs + 3, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.dynamis.settings.TIMELESS_HOURGLASS_COST, xi.item.TIMELESS_HOURGLASS, xi.dynamis.settings.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(baseCs + 0)

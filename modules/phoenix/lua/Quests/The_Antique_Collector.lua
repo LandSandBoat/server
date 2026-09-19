@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/jeuno/The_Antique_Collector', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_DELKFUTTS_TOWER,
+            keyItem = xi.keyItem.MAP_OF_DELKFUTTS_TOWER,
             title   = xi.title.TRADER_OF_ANTIQUITIES,
         }
     end)

@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/otherAreas/Unforgiven', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_TAVNAZIA,
+            keyItem = xi.keyItem.MAP_OF_TAVNAZIA,
         }
     end)
 end)

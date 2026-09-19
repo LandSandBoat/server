@@ -17,9 +17,9 @@ m:addOverride('xi.besieged.onTrigger', function(player, npc, eventBase)
     end
 
     local maps = bit.bor(
-        player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0,
-        player:hasKeyItem(xi.ki.MAP_OF_HALVUNG) and 2 or 0,
-        player:hasKeyItem(xi.ki.MAP_OF_ARRAPAGO_REEF) and 4 or 0)
+        player:hasKeyItem(xi.keyItem.MAP_OF_MAMOOK) and 1 or 0,
+        player:hasKeyItem(xi.keyItem.MAP_OF_HALVUNG) and 2 or 0,
+        player:hasKeyItem(xi.keyItem.MAP_OF_ARRAPAGO_REEF) and 4 or 0)
 
     player:startEvent(eventBase, player:getCurrency('imperial_standing'), maps + xi.besieged.cipherValue(), mercenaryRank, 0, 0, 0, 0, 0)
 end)

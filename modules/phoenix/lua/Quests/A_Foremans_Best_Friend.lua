@@ -14,8 +14,8 @@ m:addOverride('xi.server.onServerStart', function()
         quest.sections[2][xi.zone.PORT_BASTOK].onEventFinish[112] = function(player, csid, option, npc)
             if quest:complete(player) then
                 player:tradeComplete()
-                if not player:hasKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES) then
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_GUSGEN_MINES)
+                if not player:hasKeyItem(xi.keyItem.MAP_OF_THE_GUSGEN_MINES) then
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_THE_GUSGEN_MINES)
                 end
             end
         end
