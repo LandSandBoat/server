@@ -629,8 +629,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT) == xi.questStatus.QUEST_COMPLETED and
-                xi.crafting.getTotalSkill(player, xi.skill.FISHING) >= 30 and
-                xi.settings.map.FISHING_ENABLE == true
+                xi.crafting.getTotalSkill(player, xi.skill.FISHING) >= 30
         end,
 
         [xi.zone.SELBINA] =
@@ -649,8 +648,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
-                xi.crafting.getTotalSkill(player, xi.skill.FISHING) >= 30 and
-                xi.settings.map.FISHING_ENABLE == true
+                xi.crafting.getTotalSkill(player, xi.skill.FISHING) >= 30
         end,
 
         [xi.zone.SELBINA] =
@@ -689,8 +687,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED and
-                xi.settings.map.FISHING_ENABLE == true
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SELBINA] =
