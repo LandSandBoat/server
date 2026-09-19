@@ -188,7 +188,7 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
  *  Notes   : Mainly used for showing retail text specific to an NPC
  ************************************************************************/
 
-void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& p4, const sol::object& p5)
+void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& p4, const sol::object& p5, const sol::object& messageType)
 {
     if (!entity)
     {
@@ -219,13 +219,23 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, const so
         PBaseEntity->loc.zone->UpdateEntityPacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
     }
 
+    const auto type = [&]() -> std::optional<uint8>
+    {
+        if (messageType == sol::lua_nil)
+        {
+            return std::nullopt;
+        }
+
+        return messageType.as<uint8>();
+    }();
+
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param2, param3, showName);
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param2, param3, showName, type);
     }
     else if (m_PBaseEntity->loc.zone)
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param3, showName));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param2, param3, showName, type));
     }
 }
 
@@ -475,11 +485,11 @@ void CLuaBaseEntity::messageBasic(uint16 messageID, const sol::object& p0, const
 /************************************************************************
  *  Function: messageName()
  *  Purpose : Message displayed with an entity's name in it
- *  Example : target:messageName(messageID, entity, param0, param1, param2, param3, chatType);
+ *  Example : target:messageName(messageID, entity, param0, param1, param2, param3, chatType, sender);
  *  Notes   : Used in Doom countdown messages, as an example
  ************************************************************************/
 
-void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& chat)
+void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& chat, const sol::object& sender)
 {
     CLuaBaseEntity* PLuaEntity  = (entity != sol::lua_nil) ? entity.as<CLuaBaseEntity*>() : nullptr;
     CBaseEntity*    PNameEntity = PLuaEntity ? PLuaEntity->m_PBaseEntity : nullptr;
@@ -493,7 +503,18 @@ void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, co
 
     if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, messageID, PNameEntity, param0, param1, param2, param3, chatType);
+        CLuaBaseEntity* const PLuaSender = [&]() -> CLuaBaseEntity*
+        {
+            if (sender == sol::lua_nil)
+            {
+                return nullptr;
+            }
+
+            return sender.as<CLuaBaseEntity*>();
+        }();
+        CBaseEntity* PSender = PLuaSender ? PLuaSender->m_PBaseEntity : PChar;
+
+        PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PSender, messageID, PNameEntity, param0, param1, param2, param3, chatType, PLuaSender != nullptr);
     }
     else if (m_PBaseEntity->loc.zone)
     {
