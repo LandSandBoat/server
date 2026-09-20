@@ -13,13 +13,13 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        chance          = 10, -- TODO: this probably scales with dINT but sample sizes are insanely low.
-        basePower       = math.randomInt(9, 12),
-        attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.FIRE,
-        canMAB          = false,
-        canResist       = true,
-        lowestResist    = 0.5,
+        chance         = 10, -- TODO: this probably scales with dINT but sample sizes are insanely low.
+        basePower      = math.randomInt(9, 12),
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.FIRE,
+        canMAB         = false,
+        canResist      = true,
+        lowestResist   = 0.5,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)

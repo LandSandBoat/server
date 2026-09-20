@@ -15,13 +15,13 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
     local power  = 10 + utils.clamp(math.floor(dStat / 1.5), 0, 55) -- Somewhat approximate. It looks like x/256 madness is going on
     local pTable =
     {
-        chance          = 100,
-        basePower       = math.randomInt(power, power + 5), -- Upper range is sometimes not +5, but this is good enough.
-        attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.FIRE,
-        canMAB          = false,
-        canResist       = true,
-        lowestResist    = 0.5,
+        chance         = 100,
+        basePower      = math.randomInt(power, power + 5), -- Upper range is sometimes not +5, but this is good enough.
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.FIRE,
+        canMAB         = false,
+        canResist      = true,
+        lowestResist   = 0.5,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)

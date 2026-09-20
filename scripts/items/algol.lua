@@ -10,13 +10,13 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
     -- TODO: chance and damage is made up.
     local pTable =
     {
-        chance          = 33,
-        basePower       = 33,
-        attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.FIRE,
-        canMAB          = false,
-        canResist       = true,
-        lowestResist    = 0.5,
+        chance         = 33,
+        basePower      = 33,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.FIRE,
+        canMAB         = false,
+        canResist      = true,
+        lowestResist   = 0.5,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
