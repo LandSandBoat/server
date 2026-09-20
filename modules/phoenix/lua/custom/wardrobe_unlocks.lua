@@ -157,8 +157,8 @@ local questRewards =
 -- Rewards based off of receiving specific key items
 local keyItemRewards =
 {
-    [xi.ki.LIMIT_BREAKER  ] = { var = '[Wardrobe]UnlockMerits', bag = xi.inv.WARDROBE,  amount = 5 }, -- Unlocking merits
-    [xi.ki.BOARDING_PERMIT] = { var = '[Wardrobe]ToAU_Access',  bag = xi.inv.WARDROBE3, amount = 5 }, -- Unlocking ToAU access
+    [xi.keyItem.LIMIT_BREAKER  ] = { var = '[Wardrobe]UnlockMerits', bag = xi.inv.WARDROBE,  amount = 5 }, -- Unlocking merits
+    [xi.keyItem.BOARDING_PERMIT] = { var = '[Wardrobe]ToAU_Access',  bag = xi.inv.WARDROBE3, amount = 5 }, -- Unlocking ToAU access
 }
 
 local function announceBagSpace(player, bag, amount)

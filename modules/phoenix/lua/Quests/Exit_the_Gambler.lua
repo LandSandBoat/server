@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/sandoria/Exit_the_Gambler', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_KING_RANPERRES_TOMB,
+            keyItem = xi.keyItem.MAP_OF_KING_RANPERRES_TOMB,
             title   = xi.title.DAYBREAK_GAMBLER,
         }
     end)

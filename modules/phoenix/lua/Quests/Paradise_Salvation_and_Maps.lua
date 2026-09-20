@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/otherAreas/Paradise_Salvation_and_Maps', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_THE_SACRARIUM,
+            keyItem = xi.keyItem.MAP_OF_THE_SACRARIUM,
         }
     end)
 end)

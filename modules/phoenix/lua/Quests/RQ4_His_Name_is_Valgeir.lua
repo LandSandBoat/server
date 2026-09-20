@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/otherAreas/RQ4_His_Name_is_Valgeir', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
+            keyItem = xi.keyItem.MAP_OF_THE_TORAIMARAI_CANAL,
         }
 
         quest.sections[2][xi.zone.MHAURA].onEventFinish[88] = function(player, csid, option, npc)

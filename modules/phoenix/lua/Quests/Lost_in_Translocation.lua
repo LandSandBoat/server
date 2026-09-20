@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/crystalWar/Lost_in_Translocation', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_GRAUBERG,
+            keyItem = xi.keyItem.MAP_OF_GRAUBERG,
         }
     end)
 end)

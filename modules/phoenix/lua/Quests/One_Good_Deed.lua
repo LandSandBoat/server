@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/windurst/One_Good_Deed', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_THE_ATTOHWA_CHASM,
+            keyItem = xi.keyItem.MAP_OF_THE_ATTOHWA_CHASM,
             title   = xi.title.DEED_VERIFIER,
         }
     end)

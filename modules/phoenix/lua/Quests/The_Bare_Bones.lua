@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/bastok/The_Bare_Bones', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_THE_DANGRUF_WADI,
+            keyItem = xi.keyItem.MAP_OF_THE_DANGRUF_WADI,
         }
     end)
 end)

@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/otherAreas/Go_Go_Gobmuffin', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_CAPE_RIVERNE,
+            keyItem = xi.keyItem.MAP_OF_CAPE_RIVERNE,
         }
     end)
 end)

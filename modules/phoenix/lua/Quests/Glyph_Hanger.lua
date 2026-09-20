@@ -11,7 +11,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/windurst/Glyph_Hanger', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
+            keyItem = xi.keyItem.MAP_OF_THE_HORUTOTO_RUINS,
         }
     end)
 end)
