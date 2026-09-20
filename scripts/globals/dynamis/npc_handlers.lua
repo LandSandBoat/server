@@ -187,7 +187,7 @@ end
 
 local function tavWinCutscene(player)
     -- Tavnazia Win CS are unique depending on how far you are in the story
-    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         return 3  -- AN (includes ZM and CoP)
     end
 
@@ -244,10 +244,11 @@ xi.dynamis.entryNpcOnTriggerEra = function(player, npc)
         player:getCharVar(entryInfo.hasSeenWinCSVar) == 0
     then
         -- Tavnazia has zone-dependent win cutscenes based on mission progress
-        if zoneId == xi.zone.DYNAMIS_TAVNAZIA then
+        if zoneId == xi.zone.TAVNAZIAN_SAFEHOLD then
             player:startEvent(entryInfo.csWin, 0, tavWinCutscene(player))
         else
-            player:startEvent(entryInfo.csWin)
+            -- NOTE: The hourglass and shrouded sand parameter is only required for Beaucedine, but has no effect on the others.
+            player:startEvent(entryInfo.csWin, entryInfo.winKI, 0, xi.keyItem.PRISMATIC_HOURGLASS, xi.keyItem.VIAL_OF_SHROUDED_SAND)
         end
 
         return
@@ -415,8 +416,8 @@ xi.dynamis.entryNpcOnEventFinishEra = function(player, csid, option)
         player:setCharVar(entryInfo.hasSeenWinCSVar, 1)
 
         -- Tavnazia awards a unique title
-        if zoneId == xi.zone.DYNAMIS_TAVNAZIA then
-            player:addTitle(xi.dynamis.dynaInfoEra[zoneId].csTitle)
+        if zoneId == xi.zone.TAVNAZIAN_SAFEHOLD then
+            player:addTitle(xi.dynamis.dynaInfoEra[entryInfo.dynaZone].csTitle)
         end
 
         return
