@@ -802,7 +802,8 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local spellElement     = spell:getElement()
     local spellGroup       = spell:getSpellGroup()
     local skillType        = xi.skill.BLUE_MAGIC
-    local skillchainCount  = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+    local canMB            = params.hasBurstAffinity or params.hasAzureLore
+    local skillchainCount  = canMB and xi.combat.magicBurst.getMagicBurstTier(target, spellElement) or 0
     local convergenceBonus = 1
     local bonusMacc        = 0
 
@@ -833,18 +834,13 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     finalDamage = math.floor(finalDamage * xi.combat.damage.steamJacketMultiplier(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
-    if
-        params.hasBurstAffinity or
-        params.hasAzureLore
-    then
-        if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+    if skillchainCount > 0 then
+        finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
+        finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
-            spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
-            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-        end
+        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
@@ -882,7 +878,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     local spellElement    = spell:getElement()
     local spellGroup      = spell:getSpellGroup()
     local skillType       = xi.skill.BLUE_MAGIC
-    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+    local canMB           = caster:hasStatusEffect(xi.effect.AZURE_LORE) or caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    local skillchainCount = canMB and xi.combat.magicBurst.getMagicBurstTier(target, spellElement) or 0
     local bonusMacc       = 0
 
     if params.hasConvergence then
@@ -908,18 +905,13 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0))
 
-    if
-        params.hasBurstAffinity or
-        params.hasAzureLore
-    then
-        if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
+    if skillchainCount > 0 then
+        finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
+        finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
-            spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
-            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-        end
+        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
@@ -983,6 +975,8 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local spellElement     = spell:getElement() or 0
     local attackType       = params.attackType or xi.attackType.NONE
     local damageType       = params.damageType or xi.damageType.NONE
+    local canMB            = caster:hasStatusEffect(xi.effect.AZURE_LORE) or caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    local skillchainCount  = canMB and xi.combat.magicBurst.getMagicBurstTier(target, spellElement) or 0
     local bonusMacc        = 0
 
     if params.hasConvergence then
@@ -996,6 +990,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     {
         magicalElement = spellElement,
         skillType      = xi.skill.BLUE_MAGIC,
+        magicBurstTier = skillchainCount,
         spellGroup     = spellFamily,
         bonusMacc      = bonusMacc
     }
@@ -1066,6 +1061,13 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     target:updateEnmityFromDamage(caster, dmg)
 
     caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
+
+    if skillchainCount > 0 then
+        spell:setMsg(spell:getMagicBurstMessage())
+
+        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+    end
 
     return dmg
 end
@@ -1185,8 +1187,8 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
         return effect
     end
 
-    -- Early return: Regular resist.
-    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+    local canMB           = caster:hasStatusEffect(xi.effect.AZURE_LORE) or caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    local skillchainCount = canMB and xi.combat.magicBurst.getMagicBurstTier(target, spellElement) or 0
     local maccParams =
     {
         magicalElement = spellElement,
