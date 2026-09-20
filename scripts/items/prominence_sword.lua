@@ -1,6 +1,6 @@
 -----------------------------------
--- ID: 18220
--- Item: Prominence Axe
+-- ID: 18381
+-- Item: Prominence Sword
 -- Additional effect: fire damage
 -- Enchantment: Enfire
 -- Duration: 3 minutes
@@ -24,16 +24,16 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 end
 
 itemObject.onItemCheck = function(target, user)
-    if target:getStatusEffectBySource(xi.effect.ENFIRE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_AXE) ~= nil then
-        target:delStatusEffect(xi.effect.ENFIRE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_AXE)
+    if target:getStatusEffectBySource(xi.effect.ENFIRE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_SWORD) ~= nil then
+        target:delStatusEffect(xi.effect.ENFIRE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.PROMINENCE_SWORD)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target, user)
-    if target:hasEquipped(xi.item.PROMINENCE_AXE) then
-        target:addStatusEffect(xi.effect.ENFIRE, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.PROMINENCE_AXE })
+    if target:hasEquipped(xi.item.PROMINENCE_SWORD) then
+        target:addStatusEffect(xi.effect.ENFIRE, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.PROMINENCE_SWORD })
     end
 end
 
