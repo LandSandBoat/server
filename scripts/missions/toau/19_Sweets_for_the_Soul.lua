@@ -22,6 +22,15 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            ['Abquhbah'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'SeenAbquhbah') == 0 then
+                        return mission:progressEvent(3106, { text_table = 0 })
+                    end
+                end,
+            },
+
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
@@ -40,6 +49,10 @@ mission.sections =
             {
                 [3092] = function(player, csid, option, npc)
                     mission:complete(player)
+                end,
+
+                [3106] = function(player, csid, option, npc)
+                    mission:setVar(player, 'SeenAbquhbah', 1)
                 end,
             },
         },
