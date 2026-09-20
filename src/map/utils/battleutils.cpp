@@ -5493,7 +5493,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
-            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
+            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((50 + bonus) / 100.0f));
             applyArts = false;
         }
         // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
@@ -5536,7 +5536,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
-            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((100 - (50 + bonus)) / 100.0f));
+            cast -= std::chrono::floor<std::chrono::milliseconds>(base * ((50 + bonus) / 100.0f));
             applyArts = false;
         }
         else if (applyArts)
@@ -5866,16 +5866,21 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Alacrity))
         {
             recast = std::chrono::floor<std::chrono::milliseconds>(recast * 0.60); // 40% reduction from Alacrity alone
-            recast = std::max<timer::duration>(recast, recastCapFloor(alacrityCelerityRecastReductionCap));
 
-            // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
+            auto reductionCap = recastReductionCap;
+
+            // the relic feet bonus only applies when the spell element matches the weather, and only then does the cap extend to 90%
             if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
             {
                 uint16 bonus = PEntity->getMod(xi::Mod::ALACRITY_CELERITY_EFFECT);
-
-                recast = std::chrono::floor<std::chrono::milliseconds>(recast * ((100 - bonus) / 100.0f));
-                recast = std::max<timer::duration>(recast, recastCapFloor(alacrityCelerityRecastReductionCap));
+                if (bonus > 0)
+                {
+                    recast       = std::chrono::floor<std::chrono::milliseconds>(recast * ((100 - bonus) / 100.0f));
+                    reductionCap = alacrityCelerityRecastReductionCap;
+                }
             }
+
+            recast = std::max<timer::duration>(recast, recastCapFloor(reductionCap));
         }
     }
     else if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
@@ -5908,16 +5913,21 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Celerity))
         {
             recast = std::chrono::floor<std::chrono::milliseconds>(recast * 0.60); // 40% reduction from Celerity alone
-            recast = std::max<timer::duration>(recast, recastCapFloor(alacrityCelerityRecastReductionCap));
 
-            // Only apply bonus mod if the spell element matches the weather.
+            auto reductionCap = recastReductionCap;
+
+            // the relic feet bonus only applies when the spell element matches the weather, and only then does the cap extend to 90%
             if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
             {
                 uint16 bonus = PEntity->getMod(xi::Mod::ALACRITY_CELERITY_EFFECT);
-
-                recast = std::chrono::floor<std::chrono::milliseconds>(recast * ((100 - bonus) / 100.0f));
-                recast = std::max<timer::duration>(recast, recastCapFloor(alacrityCelerityRecastReductionCap));
+                if (bonus > 0)
+                {
+                    recast       = std::chrono::floor<std::chrono::milliseconds>(recast * ((100 - bonus) / 100.0f));
+                    reductionCap = alacrityCelerityRecastReductionCap;
+                }
             }
+
+            recast = std::max<timer::duration>(recast, recastCapFloor(reductionCap));
         }
     }
 
