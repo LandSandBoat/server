@@ -30,6 +30,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -63,6 +70,13 @@ templates:
       stats:
         hp: 2400
         mp: 1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Dragons_Wyvern:
     id:            4190
@@ -90,6 +104,13 @@ templates:
       stats:
         hp: 2400
         mp: 1000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Jurik:
     id:            73
@@ -117,6 +138,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -154,6 +182,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -187,6 +222,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_common
@@ -229,6 +272,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -266,6 +316,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -303,6 +360,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: very_rare
@@ -388,6 +452,15 @@ templates:
 
   Baas_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Barong:
     attributes:
@@ -407,6 +480,15 @@ templates:
 
   Bxafraffs_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Doo_Peku_the_Fleetfoot:
     attributes:
@@ -1954,6 +2036,14 @@ templates:
       spawn:
         respawn: 0
         type:    [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Crow:
     type: [called, notorious]
@@ -1969,6 +2059,15 @@ templates:
 
   Vanguards_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Woodnix_Shrillwhistle:
     attributes:

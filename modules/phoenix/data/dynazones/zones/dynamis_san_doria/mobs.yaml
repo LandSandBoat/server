@@ -494,12 +494,30 @@ templates:
 
   Vanguards_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Hecteyes:
     type: [called, notorious]
 
   Vanguards_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Voidstreaker_Butchnotch:
     attributes:

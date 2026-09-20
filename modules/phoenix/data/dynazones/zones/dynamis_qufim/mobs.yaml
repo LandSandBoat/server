@@ -28,6 +28,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -69,6 +77,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -102,6 +118,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -135,6 +159,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -168,6 +200,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -199,6 +239,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -232,6 +280,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -265,6 +321,14 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -1698,6 +1762,15 @@ templates:
 
   Vanguards_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Crow:
     type: [called, notorious]
@@ -1713,6 +1786,15 @@ templates:
 
   Vanguards_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Warchief_Tombstone:
     loot:

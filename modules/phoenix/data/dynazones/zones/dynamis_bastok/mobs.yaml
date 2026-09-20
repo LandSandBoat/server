@@ -6,7 +6,7 @@ templates:
 
   AaNyu_Dismantler:
     id:            16
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious, battlefield]
     spell_list_id: 5
     skill_list_id: 705
@@ -56,7 +56,7 @@ templates:
 
   BeEbo_Tortoisedriver:
     id:            20015
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 337
     attributes:
@@ -108,7 +108,7 @@ templates:
   Effigy_Shield_WAR:
     id:            20000
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -159,7 +159,7 @@ templates:
   Effigy_Shield_WHM:
     id:            20001
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 705
@@ -212,7 +212,7 @@ templates:
   Effigy_Shield_MNK:
     id:            20002
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -264,7 +264,7 @@ templates:
   Effigy_Shield_BLM:
     id:            20003
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 2
     skill_list_id: 705
@@ -317,7 +317,7 @@ templates:
   Effigy_Shield_THF:
     id:            20004
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -368,7 +368,7 @@ templates:
   Effigy_Shield_DRK:
     id:            20005
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 705
@@ -421,7 +421,7 @@ templates:
   Effigy_Shield_PLD:
     id:            20006
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 705
@@ -474,7 +474,7 @@ templates:
   Effigy_Shield_BRD:
     id:            20007
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 705
@@ -527,7 +527,7 @@ templates:
   Effigy_Shield_NIN:
     id:            20008
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 705
@@ -580,7 +580,7 @@ templates:
   Effigy_Shield_SAM:
     id:            20009
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -631,7 +631,7 @@ templates:
   Effigy_Shield_RNG:
     id:            20010
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -682,7 +682,7 @@ templates:
   Effigy_Shield_SMN:
     id:            20011
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 141
     skill_list_id: 705
@@ -735,7 +735,7 @@ templates:
   Effigy_Shield_RDM:
     id:            20012
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     spell_list_id: 3
     skill_list_id: 705
@@ -788,7 +788,7 @@ templates:
   Effigy_Shield_DRG:
     id:            20013
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -839,7 +839,7 @@ templates:
   Effigy_Shield_BST:
     id:            20014
     display_name:  Effigy_Shield
-    species:       quadav
+    species:       dynamis_quadav
     type:          [notorious]
     skill_list_id: 705
     attributes:
@@ -1411,12 +1411,30 @@ templates:
 
   Vanguards_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Scorpion:
     type: [called, notorious]
 
   Vanguards_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   ZeVho_Fallsplitter:
     attributes:

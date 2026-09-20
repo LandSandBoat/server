@@ -392,12 +392,30 @@ templates:
 
   Kindreds_Avatar:
     type: [called, battlefield, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Kindreds_Vouivre:
     type: [called, notorious]
 
   Kindreds_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   King_Zagan:
     attributes:
@@ -505,6 +523,15 @@ templates:
 
   Nebiross_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Prince_Seere:
     attributes:
@@ -656,6 +683,15 @@ templates:
 
   Zagans_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
 spawns:
 

@@ -3,6 +3,15 @@
 templates:
 
   Diabolos_Club:
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -11,6 +20,15 @@ templates:
           one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
 
   Diabolos_Diamond:
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -19,6 +37,15 @@ templates:
           one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
 
   Diabolos_Heart:
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -27,6 +54,15 @@ templates:
           one_of: [lungo-nango_jadeshell, montiont_silverpiece, one_hundred_byne_bill]
 
   Diabolos_Spade:
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -63,6 +99,13 @@ templates:
         type: [scripted]
       stats:
         hp: 16000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: common
@@ -102,6 +145,13 @@ templates:
         type: [scripted]
       stats:
         hp: 15000
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
     loot:
       drops:
         - chance: always
@@ -123,6 +173,15 @@ templates:
 
   Diaboloss_Shard:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Hydra_Bard:
     type: [notorious]
@@ -411,12 +470,30 @@ templates:
 
   Hydras_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Hydras_Hound:
     type: [called, notorious]
 
   Hydras_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Kindred_Bard:
     type: [notorious]
@@ -705,12 +782,30 @@ templates:
 
   Kindreds_Avatar:
     type: [called, battlefield, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Kindreds_Vouivre:
     type: [called, notorious]
 
   Kindreds_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Nightmare_Bugard:
     type: [notorious]

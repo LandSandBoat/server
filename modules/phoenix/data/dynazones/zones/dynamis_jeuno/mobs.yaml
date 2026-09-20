@@ -1138,12 +1138,30 @@ templates:
 
   Vanguards_Avatar:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Vanguards_Slime:
     type: [called, notorious]
 
   Vanguards_Wyvern:
     type: [called, notorious]
+    attributes:
+      stats:
+        str: a
+        dex: a
+        vit: a
+        agi: a
+        int: a
+        mnd: a
+        chr: a
 
   Wasabix_Callusdigit:
     attributes:
@@ -2683,7 +2701,7 @@ spawns:
 
   17547532:
     template: Vanguard_Shaman
-    at:       [19.142, 8.000, 64.016, 128]
+    at:       [19.142, 2.000, 64.016, 128]
     level:    [75, 77]
 
   17547533:
@@ -2968,7 +2986,7 @@ spawns:
 
   17547589:
     template: Snypestix_Eaglebeak
-    at:       [-0.969, 9.000, 0.999, 192]
+    at:       [-0.969, 3.000, 0.999, 192]
     level:    [80, 80]
 
   17547590:
@@ -2983,7 +3001,7 @@ spawns:
 
   17547592:
     template: Vanguard_Necromancer
-    at:       [-2.989, 9.000, 1.001, 192]
+    at:       [-2.989, 3.000, 1.001, 192]
     level:    [75, 77]
 
   17547593:

@@ -440,6 +440,7 @@ xi.dynamis.lineSpawns[zoneID] =
     [17543569] = { behind = { 3, 6, 9 } }, -- (131) Mobs spawn in a line behind the statue
     [17543573] = { behind = { 3, 6, 9 } }, -- (132) Mobs spawn in a line behind the statue
     [17543247] = { behind = { 4, 8, -4, -8 } }, -- (27) Mobs spawn front and back
+    [17543187] = { behindLine = { behind = { 2, 2, 4 }, side = { -1.5, 1.5, 0 } } }, -- (8) Triangle behind the statue: bottom left, bottom right, top
 }
 
 -- Pathing table
