@@ -52,6 +52,8 @@ public:
     auto name() const -> const std::string& override;
     auto id() const -> uint32 override;
 
+    auto hitboxRadius() const -> float override;
+
 private:
     CBaseEntity* entity_;
 };

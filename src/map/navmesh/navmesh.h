@@ -39,7 +39,7 @@ class NavMesh
 public:
     virtual ~NavMesh() = default;
 
-    virtual auto findPath(const position_t& start, const position_t& end) -> Maybe<PathResult>                                     = 0;
+    virtual auto findPath(const position_t& start, const position_t& end, float clearance) -> Maybe<PathResult>                    = 0;
     virtual auto findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t>                           = 0;
     virtual auto validPosition(const position_t& position) const -> bool                                                           = 0;
     virtual auto findClosestValidPoint(const position_t& position) const -> Maybe<position_t>                                      = 0;

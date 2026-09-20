@@ -20,6 +20,7 @@
 */
 
 #include "detour_navmesh.h"
+#include "path_inset.h"
 
 #include <DetourNavMesh.h>
 #include <DetourNavMeshQuery.h>
@@ -125,10 +126,8 @@ DetourNavMesh::DetourNavMesh(uint16 zoneID)
 : zoneID_(zoneID)
 , navMesh_(nullptr)
 {
-    navMeshQueryPolyData_.resize(kMaxNavPolys);
-    navMeshQueryStraightPathFloatData_.resize(kMaxNavPolys * 3);
-    navMeshQueryStraightPathFlagData_.resize(kMaxNavPolys);
-    navMeshQueryStraightPathPolyData_.resize(kMaxNavPolys);
+    navMeshQueryPolyData_.resize(kPathPolyLimit);
+    navMeshQueryStraightPathFloatData_.resize(kPathPolyLimit * 3);
 }
 
 DetourNavMesh::~DetourNavMesh()
@@ -291,7 +290,7 @@ auto DetourNavMesh::save(const std::string& path) const -> bool
     return true;
 }
 
-auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> Maybe<PathResult>
+auto DetourNavMesh::findPath(const position_t& start, const position_t& end, const float clearance) -> Maybe<PathResult>
 {
     TracyZoneScopedS(12);
 
@@ -353,15 +352,24 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> 
         return std::nullopt;
     }
 
-    // Straighten the corridor into waypoints; DT_STRAIGHTPATH_ALL_CROSSINGS worsens local-minima trapping.
+    // Straighten the corridor into waypoints, through portals shrunk for the body when it has one.
     int32 straightPathCount = 0;
-    status                  = navMeshQuery_.findStraightPath(
-        startPoly->nearest.data(), endPoly->nearest.data(), navMeshQueryPolyData_.data(), pathPolyCount, navMeshQueryStraightPathFloatData_.data(), navMeshQueryStraightPathFlagData_.data(), navMeshQueryStraightPathPolyData_.data(), &straightPathCount, static_cast<int>(kPathPolyLimit) /* , DT_STRAIGHTPATH_ALL_CROSSINGS */);
-    if (dtStatusFailed(status))
+    if (clearance > 0.0f)
     {
-        ShowError("DetourNavMesh::findPath findStraightPath error (%u)", zoneID_);
-        ShowError(detourStatusString(status));
-        return std::nullopt;
+        straightPathCount = pathinset::pullString(navMeshQuery_, filter, { navMeshQueryPolyData_.data(), static_cast<std::size_t>(pathPolyCount) }, startPoly->nearest.data(), endPoly->nearest.data(), clearance + pathinset::kBerthMargin, navMeshQueryStraightPathFloatData_.data(), static_cast<int>(kPathPolyLimit));
+    }
+
+    // A body that cannot be kept off the walls still has to walk somewhere.
+    // DT_STRAIGHTPATH_ALL_CROSSINGS worsens local-minima trapping.
+    if (straightPathCount == 0)
+    {
+        status = navMeshQuery_.findStraightPath(startPoly->nearest.data(), endPoly->nearest.data(), navMeshQueryPolyData_.data(), pathPolyCount, navMeshQueryStraightPathFloatData_.data(), nullptr, nullptr, &straightPathCount, static_cast<int>(kPathPolyLimit));
+        if (dtStatusFailed(status))
+        {
+            ShowError("DetourNavMesh::findPath findStraightPath error (%u)", zoneID_);
+            ShowError(detourStatusString(status));
+            return std::nullopt;
+        }
     }
 
     // Drop the best-guess final waypoint of a partial path, since it lands far from the request and traps the entity.

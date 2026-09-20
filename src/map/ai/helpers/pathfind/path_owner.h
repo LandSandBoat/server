@@ -56,6 +56,8 @@ public:
 
     virtual auto name() const -> const std::string& = 0; // diagnostics (Tracy / logging)
     virtual auto id() const -> uint32               = 0; // diagnostics
+
+    virtual auto hitboxRadius() const -> float = 0; // half the mob's hitbox
 };
 
 } // namespace pathfind

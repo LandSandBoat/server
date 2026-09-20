@@ -250,7 +250,7 @@ auto CPathFind::LimitDistance(float maxLength) -> void
     maxDistance_ = maxLength;
 }
 
-auto CPathFind::FollowPath(timer::time_point tick) -> void
+auto CPathFind::FollowPath(const timer::time_point tick) -> void
 {
     TracyZoneScoped;
     TracyZoneString(owner_->name());
@@ -431,7 +431,7 @@ auto CPathFind::FindPathInternal(const position_t& start, const position_t& end)
     }
 
     const pathfind::NavPathBuilder builder{ navMesh() };
-    auto                           built = builder.findPath(start, end);
+    auto                           built = builder.findPath(start, end, owner_->hitboxRadius());
 
     if (!built)
     {

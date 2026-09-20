@@ -34,9 +34,9 @@ NavPathBuilder::NavPathBuilder(NavMesh& navMesh)
 {
 }
 
-auto NavPathBuilder::findPath(const position_t& start, const position_t& end) const -> Maybe<PathResult>
+auto NavPathBuilder::findPath(const position_t& start, const position_t& end, const float clearance) const -> Maybe<PathResult>
 {
-    auto result = navMesh_.findPath(start, end);
+    auto result = navMesh_.findPath(start, end, clearance);
 
     // findPath searches 2.5f XZ per endpoint, so two fallbacks handle endpoints outside that radius.
     // An off-mesh end paths to the nearest on-mesh point via the wider 30f radius.
@@ -47,7 +47,7 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
         {
             if (!isNear(start, *closestEnd))
             {
-                result = navMesh_.findPath(start, *closestEnd);
+                result = navMesh_.findPath(start, *closestEnd, clearance);
             }
         }
     }
@@ -58,7 +58,7 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
         {
             if (!isNear(*closestStart, end))
             {
-                result = navMesh_.findPath(*closestStart, end);
+                result = navMesh_.findPath(*closestStart, end, clearance);
             }
         }
     }

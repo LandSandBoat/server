@@ -37,7 +37,7 @@ struct NavMeshConfig
     float cellHeight{ 0.2f };             // Previous xiNavmeshes value: 0.2
     float walkableSlopeAngle{ 46.0f };    // Previous xiNavmeshes value: 46.0
     float agentHeight{ 2.0f };            // Previous xiNavmeshes value: 1.8
-    float agentRadius{ 0.5f };            // Previous xiNavmeshes value: 0.3
+    float agentRadius{ 0.0f };            // Previous xiNavmeshes value: 0.3
     float agentMaxClimb{ 1.0f };          // Previous xiNavmeshes value: 0.6
     float maxEdgeLen{ 0.0f };             // Previous xiNavmeshes value: 12.0
     float maxSimplificationError{ 1.3f }; // Previous xiNavmeshes value: 1.3
