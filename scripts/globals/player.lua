@@ -1,4 +1,4 @@
-require('scripts/globals/abyssea')
+﻿require('scripts/globals/abyssea')
 require('scripts/globals/gear_sets')
 require('scripts/globals/quests')
 require('scripts/globals/teleports')
@@ -175,11 +175,19 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         end
     end
 
-    local zoneID    = player:getZoneID()
-    local questVars = player:getCharVarsWithSuffix(']mustZone')
+    local zoneID         = player:getZoneID()
+    local questVars      = player:getCharVarsWithSuffix(']mustZone')
+    local previousZoneID = player:getPreviousZone()
 
     for tag, value in pairs(questVars) do
         if value ~= zoneID then
+            player:setCharVar(tag, 0)
+        elseif -- Catch the case of zoning from Moghouse to the zone the Moghouse was entered from
+            previousZoneID == zoneID and
+            value == zoneID and
+            zoning and
+            utils.contains(value, xi.moghouse.moghouseZones)
+        then
             player:setCharVar(tag, 0)
         end
     end
