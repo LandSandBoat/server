@@ -250,7 +250,7 @@ auto CPathFind::LimitDistance(float maxLength) -> void
     maxDistance_ = maxLength;
 }
 
-auto CPathFind::FollowPath(const timer::time_point tick) -> void
+auto CPathFind::FollowPath(const timer::time_point tick, const float stepCap) -> void
 {
     TracyZoneScoped;
     TracyZoneString(owner_->name());
@@ -303,7 +303,7 @@ auto CPathFind::FollowPath(const timer::time_point tick) -> void
     // Update speed before taking the budget.
     const bool speedChange = owner_->baseSpeed() != owner_->updateSpeed((pathFlags_ & PATHFLAG_RUN) != 0);
 
-    float       budget   = StepBudget();
+    float       budget   = std::min(StepBudget(), stepCap);
     position_t& ownerPos = owner_->position();
 
     // A stop-short path ends once within range of the destination and never steps inside it.

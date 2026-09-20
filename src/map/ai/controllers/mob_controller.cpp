@@ -45,6 +45,8 @@
 #include "utils/petutils.h"
 #include "zone.h"
 
+#include <limits>
+
 namespace
 {
 
@@ -53,6 +55,8 @@ constexpr float kRoamHomeStepDistance = 10.0f;
 
 // A mob notices nobody for this long after spawning or losing its target.
 constexpr auto kNeutralDuration = 15s;
+
+constexpr float kChaseRepathDrift = 2.0f; // re-aim when the target drifts this far from where the path was headed
 
 } // namespace
 
@@ -120,6 +124,7 @@ auto CMobController::Disengage() -> bool
 
     rePathCooldownEnd_ = timer::time_point::min();
     lastRePathTarget_  = {};
+    lastRePathMobPos_  = {};
     stuckRePathCount_  = 0;
 
     lastDirectProbeTarget_.clean();
@@ -161,6 +166,7 @@ auto CMobController::Engage(const EntityId& target) -> bool
     m_firstSpell       = true;
     rePathCooldownEnd_ = timer::time_point::min();
     lastRePathTarget_  = {};
+    lastRePathMobPos_  = {};
     stuckRePathCount_  = 0;
 
     lastDirectProbeTarget_.clean();
@@ -224,6 +230,7 @@ void CMobController::Reset()
     // Clear pathing state so a respawned mob doesn't inherit stale re-path / direct-probe caches.
     rePathCooldownEnd_ = timer::time_point::min();
     lastRePathTarget_  = {};
+    lastRePathMobPos_  = {};
     stuckRePathCount_  = 0;
 
     lastDirectProbeTarget_.clean();
@@ -1243,7 +1250,7 @@ void CMobController::Move()
         }
     }
 
-    // In range and stationary: face the target, but keep checking LOS so a mob cannot attack through a thin wall.
+    // In range, face the target, but keep checking LOS so a mob cannot attack through a thin wall.
     const bool inAttackRange = currentDistance <= attackRange;
     if (!PMob->PAI->CanFollowPath())
     {
@@ -1251,7 +1258,7 @@ void CMobController::Move()
         return;
     }
 
-    if (inAttackRange && !isFollowingPath && CanSeeTargetCached())
+    if (inAttackRange && CanSeeTargetCached())
     {
         // Settle and attack unless the mob must not close, or the navmesh route is a detour worth walking instead.
         const bool canMove = PMob->GetSpeed() != 0 && PMob->getMobMod(xi::MobMod::NoMove) == 0 && m_Tick >= m_LastSpecialTime;
@@ -1271,9 +1278,9 @@ void CMobController::Move()
             lastDirectProbePos_       = PMob->loc.p;
             lastDirectProbeTargetPos_ = PTarget->loc.p;
 
-            const auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
-            PMob->PAI->PathFind->PathTo(projectedPosition, PATHFLAG_RUN);
-            lastDirectProbeWasDirect_ = PMob->PAI->PathFind->IsPathDirect();
+            PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
+            // tighter than 2.0 so corner detours aren't treated as direct
+            lastDirectProbeWasDirect_ = PMob->PAI->PathFind->IsPathDirect(1.1f);
             if (lastDirectProbeWasDirect_)
             {
                 PMob->PAI->PathFind->Clear();
@@ -1320,7 +1327,7 @@ void CMobController::Move()
     bool targetMoved   = false;
     if (isFollowingPath)
     {
-        needNewPath = !isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, attackRange);
+        needNewPath = !isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, kChaseRepathDrift);
     }
     else
     {
@@ -1329,14 +1336,17 @@ void CMobController::Move()
         const bool cooldownDone    = m_Tick >= rePathCooldownEnd_;
         const bool losCooldownDone = m_Tick >= lostSightRePathCooldownEnd_;
 
-        targetMoved   = !isWithinDistance(lastRePathTarget_, PTarget->loc.p, attackRange);
-        needNewPath   = (outOfRange && (targetMoved || cooldownDone)) || (lostLOS && (targetMoved || losCooldownDone));
-        isStuckRepath = needNewPath && !targetMoved && cooldownDone;
+        targetMoved = !isWithinDistance(lastRePathTarget_, PTarget->loc.p, kChaseRepathDrift);
+        needNewPath = (outOfRange && (targetMoved || cooldownDone)) || (lostLOS && (targetMoved || losCooldownDone));
+        // Stuck means the mob went nowhere on its last path. One that walked and got pushed back out of range is just chasing.
+        const bool mobMoved = !isWithinDistance(lastRePathMobPos_, PMob->loc.p, 1.0f);
+        isStuckRepath       = outOfRange && cooldownDone && !targetMoved && !mobMoved;
     }
 
     if (needNewPath)
     {
         lastRePathTarget_           = PTarget->loc.p;
+        lastRePathMobPos_           = PMob->loc.p;
         rePathCooldownEnd_          = m_Tick + kRePathCooldown;
         lostSightRePathCooldownEnd_ = m_Tick + kLostSightRePathCooldown;
 
@@ -1363,7 +1373,15 @@ void CMobController::Move()
         }
     }
 
-    PMob->PAI->PathFind->FollowPath(m_Tick);
+    // Out of range, a step stops at melee range of where the target is now.
+    // In range the mob is walking a detour and needs the full step.
+    float stepCap = std::numeric_limits<float>::max();
+    if (!inAttackRange)
+    {
+        stepCap = currentDistance - closeDistance;
+    }
+
+    PMob->PAI->PathFind->FollowPath(m_Tick, stepCap);
 
     if (PMob->PAI->PathFind->IsFollowingPath())
     {
