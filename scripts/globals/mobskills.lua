@@ -678,7 +678,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Handle Miss Messaging
     ----------------------------------
-    totalDamage = xi.mobskills.resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, params.primaryMessage, totalDamage)
+    totalDamage = resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipated, hitsAbsorbed, shadowsAbsorbed, params.primaryMessage, totalDamage)
 
     -- Mob only gets TP for hitting the initial target. AOE hits do not count.
     xi.mobskills.calculateSkillTPReturn(totalDamage, mob, skill, target, params.attackType, hitsLanded)
