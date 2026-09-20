@@ -704,23 +704,6 @@ xi.spells.damage.calculateMagicCriticalMultiplier = function(caster)
     return 1
 end
 
--- Divine seal applies its own multiplier to healing spells when used against undead.
-xi.spells.damage.calculateDivineSealMultiplier = function(caster, target, skillType)
-    if not caster:hasStatusEffect(xi.effect.DIVINE_SEAL) then
-        return 1
-    end
-
-    if not target:isUndead() then
-        return 1
-    end
-
-    if skillType ~= xi.skill.HEALING_MAGIC then
-        return 1
-    end
-
-    return 2
-end
-
 -- Divine Emblem applies its own damage multiplier to divine spells.
 xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     if not caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) then
@@ -1136,7 +1119,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local sdt                         = not absorb and xi.combat.damage.magicalElementSDT(target, spellElement) or 1
     local ecosystemMultiplier         = xi.combat.damage.ecosystemMultiplier(caster, target, 0)
     local criticalDamageMultiplier    = xi.spells.damage.calculateMagicCriticalMultiplier(caster)
-    local divineSealMultiplier        = xi.spells.damage.calculateDivineSealMultiplier(caster, target, skillType)
     local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
     local eleSealMultiplier           = xi.spells.damage.calculateEnhancedElementalSealMultiplier(caster, skillType, spellElement)
     local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup)
@@ -1165,7 +1147,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * ecosystemMultiplier)
     finalDamage = math.floor(finalDamage * criticalDamageMultiplier)
-    finalDamage = math.floor(finalDamage * divineSealMultiplier)
     finalDamage = math.floor(finalDamage * divineEmblemMultiplier)
     finalDamage = math.floor(finalDamage * eleSealMultiplier)
     finalDamage = math.floor(finalDamage * ebullienceMultiplier)
