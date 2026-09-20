@@ -1,1034 +1,1901 @@
 # Launch starter zones for east_ronfaure.
-# Temporary launch-week module: faster trash respawns, loot one TH bracket down, 150 level 1 mobs per zone.
-# To end it, remove phoenix/data/launch_starter_zones from modules/init.txt and restart.
+# Adds 200 level 1 mobs, 100 of each type, using the original mobs' spawn regions.
+# The original non-aggressive mobs listed below use a 60-second respawn setting.
+# NMs, aggressive mobs, quest/scripted mobs, fished mobs, event mobs, and
+# night/evening/weather/fog spawns keep their normal timers.
+# NM placeholders keep their normal timers through the individual spawn overrides below.
+# Other mobs of the same type use the 60-second setting.
+# Dropping a quest item does not make a normal mob a quest mob.
+# Extra mobs keep the original loot and respawn after 15 seconds.
+# pxi_launch_names.lua blocks their drops if the credited killer gets no EXP.
+# Disable this data module and pxi_launch_names.lua together, then restart.
 
 templates:
 
-  # -- Custom templates for mobs the core file lacks, scaffolded from the module's mob_groups/mob_pools inserts --
-
-  Tunnel_Worm_Launch:
-    id:            4053
-    display_name:  Tunnel_Worm
-    species:       worm
-    roam:          [worm]
-    spell_list_id: 9
-    skill_list_id: 258
+  Carrion_Worm:
     attributes:
-      combat:
-        skill: scythe
-      jobs: [blm, rdm]
-      render:
-        look:
-          type:  standard
-          model: 424
-        entity_flags: 129
-        hitbox:        11
-
-  Wild_Rabbit_Launch:
-    id:            4343
-    display_name:  Wild_Rabbit
-    species:       rabbit
-    skill_list_id: 206
-    attributes:
-      combat:
-        skill: scythe
-      jobs: [war, war]
-      render:
-        look:
-          type:  standard
-          model: 268
-        entity_flags: 129
-        hitbox:        11
+      spawn:
+        respawn: 60
 
   Forest_Funguar:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   sleepshroom
-      steal: sleepshroom
-      despoil:
-        woozyshroom:       0
-        sleepshroom:       0
-        danceshroom:       0
-        agaricus_mushroom: 0
+        respawn: 60
 
   Forest_Hare:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   slice_of_hare_meat
-        - chance: rare
-          item:   rabbit_hide
-      steal: san_dorian_carrot
-      despoil:
-        rabbit_hide:        0
-        slice_of_hare_meat: 0
+        respawn: 60
+
+  Pugil:
+    attributes:
+      spawn:
+        respawn: 60
 
   Scarab_Beetle:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: rare
-          item:   insect_wing
-        - chance: super_rare
-          item:   beetle_jaw
-      despoil:
-        insect_wing:  0
-        beetle_shell: 0
-        beetle_jaw:   0
+        respawn: 60
 
   Tunnel_Worm:
     attributes:
       spawn:
-        respawn: 0 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   flint_stone
-      steal: pebble
-      despoil:
-        chunk_of_copper_ore: 0
-        chunk_of_iron_ore:   0
-        chunk_of_silver_ore: 0
-        chunk_of_zinc_ore:   0
+        respawn: 60
 
   Wild_Rabbit:
     attributes:
       spawn:
-        respawn: 0 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   rabbit_hide
-        - chance: rare
-          item:   rabbit_hide
-      steal: san_dorian_carrot
-      despoil:
-        rabbit_hide:        0
-        slice_of_hare_meat: 0
+        respawn: 60
 
   Wild_Sheep:
     attributes:
       spawn:
-        respawn: 60 # Launch starter zones
-    loot: # Launch starter zones
-      drops:
-        - chance: uncommon
-          item:   slice_of_giant_sheep_meat
-        - chance: very_rare
-          item:   sheep_tooth
-        - chance: rare
-          item:   sheepskin
-      steal: clump_of_sheep_wool
-      despoil:
-        sheep_tooth: 50
+        respawn: 60
 
 spawns:
 
-  17191786:
-    template: Wild_Rabbit_Launch
+  17191187: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191188: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191194: # Bigmouth Billy placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191195: # Bigmouth Billy placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191287: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191288: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191289: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  17191290: # Swamfisk placeholder
+    attributes:
+      spawn:
+        respawn: 180
+
+  # Wild_Rabbit: 100 copies, split between regions based on the original spawn counts.
+  # w_6: 40, w_26: 40, nw_52: 20.
+
+  17191736:
+    template: Wild_Rabbit
     region:   w_6
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191737:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191738:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191739:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191740:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191741:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191742:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191743:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191744:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191745:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191746:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191747:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191748:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191749:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191750:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191751:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191752:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191753:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191754:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191755:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191756:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191757:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191758:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191759:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191760:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191761:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191762:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191763:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191764:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191765:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191766:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191767:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191768:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191769:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191770:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191771:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191772:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191773:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191774:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191775:
+    template: Wild_Rabbit
+    region:   w_6
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191776:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191777:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191778:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191779:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191780:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191781:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191782:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191783:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191784:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191785:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191786:
+    template: Wild_Rabbit
+    region:   w_26
+    level:    [1, 1]
+    script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191787:
-    template: Wild_Rabbit_Launch
-    region:   ne_192
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191788:
-    template: Wild_Rabbit_Launch
-    region:   sw_326
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191789:
-    template: Wild_Rabbit_Launch
-    region:   s_248
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191790:
-    template: Wild_Rabbit_Launch
+    template: Wild_Rabbit
     region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191791:
-    template: Wild_Rabbit_Launch
-    region:   w_63
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191792:
-    template: Wild_Rabbit_Launch
-    region:   c_106
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191793:
-    template: Wild_Rabbit_Launch
-    region:   nw_52
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191794:
-    template: Wild_Rabbit_Launch
-    region:   s_278
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191795:
-    template: Wild_Rabbit_Launch
-    region:   w_6
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191796:
-    template: Wild_Rabbit_Launch
-    region:   n_137
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191797:
-    template: Wild_Rabbit_Launch
-    region:   c_110
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191798:
-    template: Wild_Rabbit_Launch
-    region:   s_368
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191799:
-    template: Wild_Rabbit_Launch
-    region:   c_226
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191800:
-    template: Wild_Rabbit_Launch
-    region:   region_42
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191801:
-    template: Wild_Rabbit_Launch
-    region:   nw_52
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191802:
-    template: Wild_Rabbit_Launch
-    region:   c_209
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191803:
-    template: Wild_Rabbit_Launch
-    region:   n_150
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191804:
-    template: Wild_Rabbit_Launch
-    region:   sw_302
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191805:
-    template: Wild_Rabbit_Launch
-    region:   s_248
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191806:
-    template: Wild_Rabbit_Launch
+    template: Wild_Rabbit
     region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191807:
-    template: Wild_Rabbit_Launch
-    region:   c_110
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191808:
-    template: Wild_Rabbit_Launch
-    region:   s_248
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191809:
-    template: Wild_Rabbit_Launch
-    region:   s_380
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191810:
-    template: Wild_Rabbit_Launch
-    region:   c_209
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191811:
-    template: Wild_Rabbit_Launch
-    region:   c_83
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191812:
-    template: Wild_Rabbit_Launch
-    region:   c_209
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191813:
-    template: Wild_Rabbit_Launch
-    region:   ne_171
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191814:
-    template: Wild_Rabbit_Launch
-    region:   n_150
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191815:
-    template: Wild_Rabbit_Launch
-    region:   c_209
+    template: Wild_Rabbit
+    region:   w_26
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191816:
-    template: Wild_Rabbit_Launch
-    region:   w_6
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191817:
-    template: Wild_Rabbit_Launch
-    region:   se_395
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191818:
-    template: Wild_Rabbit_Launch
-    region:   sw_302
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191819:
-    template: Wild_Rabbit_Launch
-    region:   n_150
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191820:
-    template: Wild_Rabbit_Launch
-    region:   s_350
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191821:
-    template: Wild_Rabbit_Launch
-    region:   c_110
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191822:
-    template: Wild_Rabbit_Launch
-    region:   w_26
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191823:
-    template: Wild_Rabbit_Launch
-    region:   s_278
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191824:
-    template: Wild_Rabbit_Launch
-    region:   region_49
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191825:
-    template: Wild_Rabbit_Launch
-    region:   w_26
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191826:
-    template: Wild_Rabbit_Launch
-    region:   w_49
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191827:
-    template: Wild_Rabbit_Launch
-    region:   region_49
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191828:
-    template: Wild_Rabbit_Launch
-    region:   n_150
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191829:
-    template: Wild_Rabbit_Launch
-    region:   s_248
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191830:
-    template: Wild_Rabbit_Launch
-    region:   s_350
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191831:
-    template: Wild_Rabbit_Launch
-    region:   s_334
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191832:
-    template: Wild_Rabbit_Launch
-    region:   w_6
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191833:
-    template: Wild_Rabbit_Launch
-    region:   w_6
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191834:
-    template: Wild_Rabbit_Launch
-    region:   n_137
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
 
   17191835:
-    template: Wild_Rabbit_Launch
-    region:   region_48
+    template: Wild_Rabbit
+    region:   nw_52
     level:    [1, 1]
     script:   Wild_Rabbit
+    attributes:
+      spawn:
+        respawn: 0
+
+  # Tunnel_Worm: 100 copies, split between regions based on the original spawn counts.
+  # w_6: 39, w_26: 38, nw_52: 23.
 
   17191836:
-    template: Wild_Rabbit_Launch
-    region:   s_248
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191837:
-    template: Wild_Rabbit_Launch
-    region:   region_47
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191838:
-    template: Wild_Rabbit_Launch
+    template: Tunnel_Worm
     region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191839:
-    template: Wild_Rabbit_Launch
-    region:   n_150
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191840:
-    template: Wild_Rabbit_Launch
-    region:   c_110
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191841:
-    template: Wild_Rabbit_Launch
-    region:   c_110
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191842:
-    template: Wild_Rabbit_Launch
-    region:   ne_192
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191843:
-    template: Wild_Rabbit_Launch
+    template: Tunnel_Worm
     region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191844:
-    template: Wild_Rabbit_Launch
-    region:   n_150
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191845:
-    template: Wild_Rabbit_Launch
-    region:   n_137
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191846:
-    template: Wild_Rabbit_Launch
-    region:   ne_171
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191847:
-    template: Wild_Rabbit_Launch
-    region:   c_209
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191848:
-    template: Wild_Rabbit_Launch
-    region:   n_150
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191849:
-    template: Wild_Rabbit_Launch
-    region:   w_26
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191850:
-    template: Wild_Rabbit_Launch
-    region:   sw_302
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191851:
-    template: Wild_Rabbit_Launch
-    region:   c_209
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191852:
-    template: Wild_Rabbit_Launch
-    region:   c_226
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191853:
-    template: Wild_Rabbit_Launch
-    region:   n_150
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191854:
-    template: Wild_Rabbit_Launch
-    region:   s_350
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191855:
-    template: Wild_Rabbit_Launch
-    region:   nw_52
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191856:
-    template: Wild_Rabbit_Launch
-    region:   s_248
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191857:
-    template: Wild_Rabbit_Launch
-    region:   w_63
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191858:
-    template: Wild_Rabbit_Launch
-    region:   nw_52
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191859:
-    template: Wild_Rabbit_Launch
-    region:   w_63
-    level:    [1, 1]
-    script:   Wild_Rabbit
-
-  17191860:
-    template: Wild_Rabbit_Launch
+    template: Tunnel_Worm
     region:   w_6
     level:    [1, 1]
-    script:   Wild_Rabbit
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191845:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191846:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191847:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191848:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191849:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191850:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191851:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191852:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191853:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191854:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191855:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191856:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191857:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191858:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191859:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191860:
+    template: Tunnel_Worm
+    region:   w_6
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191861:
-    template: Tunnel_Worm_Launch
-    region:   se_395
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191862:
-    template: Tunnel_Worm_Launch
-    region:   c_209
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191863:
-    template: Tunnel_Worm_Launch
-    region:   n_137
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191864:
-    template: Tunnel_Worm_Launch
-    region:   n_150
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191865:
-    template: Tunnel_Worm_Launch
-    region:   s_334
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191866:
-    template: Tunnel_Worm_Launch
-    region:   s_278
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191867:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191868:
-    template: Tunnel_Worm_Launch
-    region:   s_350
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191869:
-    template: Tunnel_Worm_Launch
-    region:   ne_192
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191870:
-    template: Tunnel_Worm_Launch
-    region:   c_206
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191871:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191872:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191873:
-    template: Tunnel_Worm_Launch
-    region:   n_137
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191874:
-    template: Tunnel_Worm_Launch
-    region:   s_380
+    template: Tunnel_Worm
+    region:   w_6
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191875:
-    template: Tunnel_Worm_Launch
-    region:   s_334
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191876:
-    template: Tunnel_Worm_Launch
-    region:   s_278
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191877:
-    template: Tunnel_Worm_Launch
-    region:   s_248
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191878:
-    template: Tunnel_Worm_Launch
-    region:   c_110
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191879:
-    template: Tunnel_Worm_Launch
-    region:   ne_192
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191880:
-    template: Tunnel_Worm_Launch
-    region:   w_47
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191881:
-    template: Tunnel_Worm_Launch
+    template: Tunnel_Worm
     region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191882:
-    template: Tunnel_Worm_Launch
-    region:   s_278
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191883:
-    template: Tunnel_Worm_Launch
-    region:   w_63
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191884:
-    template: Tunnel_Worm_Launch
-    region:   n_150
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191885:
-    template: Tunnel_Worm_Launch
-    region:   sw_326
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191886:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191887:
-    template: Tunnel_Worm_Launch
-    region:   se_395
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191888:
-    template: Tunnel_Worm_Launch
-    region:   s_248
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191889:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191890:
-    template: Tunnel_Worm_Launch
+    template: Tunnel_Worm
     region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191883:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191884:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191885:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191886:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191887:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191888:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191889:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191890:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191891:
-    template: Tunnel_Worm_Launch
-    region:   region_49
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191892:
-    template: Tunnel_Worm_Launch
-    region:   n_137
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191893:
-    template: Tunnel_Worm_Launch
-    region:   w_63
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191894:
-    template: Tunnel_Worm_Launch
-    region:   region_47
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191895:
-    template: Tunnel_Worm_Launch
-    region:   c_83
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191896:
-    template: Tunnel_Worm_Launch
-    region:   c_83
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191897:
-    template: Tunnel_Worm_Launch
-    region:   s_334
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191898:
-    template: Tunnel_Worm_Launch
-    region:   c_226
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191899:
-    template: Tunnel_Worm_Launch
-    region:   w_63
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191900:
-    template: Tunnel_Worm_Launch
-    region:   s_248
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191901:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191902:
-    template: Tunnel_Worm_Launch
-    region:   c_275
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191903:
-    template: Tunnel_Worm_Launch
-    region:   s_380
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191904:
-    template: Tunnel_Worm_Launch
-    region:   s_278
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191905:
-    template: Tunnel_Worm_Launch
-    region:   w_47
+    template: Tunnel_Worm
+    region:   w_26
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191906:
-    template: Tunnel_Worm_Launch
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191907:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191908:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191909:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191910:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191911:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191912:
+    template: Tunnel_Worm
+    region:   w_26
+    level:    [1, 1]
+    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
+
+  17191913:
+    template: Tunnel_Worm
     region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
-
-  17191907:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191908:
-    template: Tunnel_Worm_Launch
-    region:   c_106
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191909:
-    template: Tunnel_Worm_Launch
-    region:   region_47
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191910:
-    template: Tunnel_Worm_Launch
-    region:   w_26
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191911:
-    template: Tunnel_Worm_Launch
-    region:   w_63
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191912:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
-    level:    [1, 1]
-    script:   Tunnel_Worm
-
-  17191913:
-    template: Tunnel_Worm_Launch
-    region:   c_110
-    level:    [1, 1]
-    script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191914:
-    template: Tunnel_Worm_Launch
-    region:   s_350
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191915:
-    template: Tunnel_Worm_Launch
-    region:   c_226
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191916:
-    template: Tunnel_Worm_Launch
-    region:   c_209
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191917:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191918:
-    template: Tunnel_Worm_Launch
-    region:   n_150
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191919:
-    template: Tunnel_Worm_Launch
-    region:   sw_302
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191920:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191921:
-    template: Tunnel_Worm_Launch
-    region:   c_110
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191922:
-    template: Tunnel_Worm_Launch
-    region:   w_63
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191923:
-    template: Tunnel_Worm_Launch
-    region:   s_380
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191924:
-    template: Tunnel_Worm_Launch
-    region:   w_26
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191925:
-    template: Tunnel_Worm_Launch
-    region:   s_380
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191926:
-    template: Tunnel_Worm_Launch
-    region:   se_395
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191927:
-    template: Tunnel_Worm_Launch
-    region:   c_83
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191928:
-    template: Tunnel_Worm_Launch
-    region:   s_278
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191929:
-    template: Tunnel_Worm_Launch
-    region:   s_375
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191930:
-    template: Tunnel_Worm_Launch
-    region:   s_278
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191931:
-    template: Tunnel_Worm_Launch
-    region:   n_137
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191932:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191933:
-    template: Tunnel_Worm_Launch
-    region:   region_47
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191934:
-    template: Tunnel_Worm_Launch
-    region:   c_209
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
 
   17191935:
-    template: Tunnel_Worm_Launch
-    region:   ne_171
+    template: Tunnel_Worm
+    region:   nw_52
     level:    [1, 1]
     script:   Tunnel_Worm
+    attributes:
+      spawn:
+        respawn: 0
