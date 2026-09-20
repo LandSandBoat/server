@@ -87,6 +87,11 @@ auto Path::restart() -> void
     currentPoint_ = 0;
 }
 
+auto Path::finish() -> void
+{
+    currentPoint_ = size();
+}
+
 auto Path::consumed() const -> bool
 {
     return currentPoint_ >= size();
@@ -119,15 +124,25 @@ auto Path::pruneTailWithin(float within) -> void
         return;
     }
 
-    // Drop waypoints within `within` of the destination so the entity stops short of the destination tile.
+    // Drop tail waypoints within `within` so the entity stops short, keeping real bends.
     const position_t destinationPos = points_.back().position;
-    while (points_.size() > 1)
+    while (points_.size() > 2)
     {
-        const position_t& penultimate = points_[points_.size() - 2].position;
+        const std::size_t penultimateIndex = points_.size() - 2;
+        const position_t& penultimate      = points_[penultimateIndex].position;
         if (distance(destinationPos, penultimate) > within)
         {
             break;
         }
+
+        // A turn at the penultimate is a corner to keep. Retail legs are straight to under 2 rotation units.
+        const position_t& previous = points_[penultimateIndex - 1].position;
+        const int16       bend     = angleDifference(worldAngle(previous, penultimate), worldAngle(penultimate, destinationPos));
+        if (bend > 2 || bend < -2)
+        {
+            break;
+        }
+
         points_.erase(points_.end() - 2);
     }
 }

@@ -306,6 +306,18 @@ auto CPathFind::FollowPath(const timer::time_point tick) -> void
     float       budget   = StepBudget();
     position_t& ownerPos = owner_->position();
 
+    // A stop-short path ends once within range of the destination and never steps inside it.
+    if (distanceFromPoint_ > 0.0f)
+    {
+        const float toDestination = distance(ownerPos, GetDestination());
+        if (toDestination <= distanceFromPoint_ + 0.2f)
+        {
+            path_.finish();
+        }
+
+        budget = std::min(budget, std::max(0.0f, toDestination - distanceFromPoint_));
+    }
+
     // Use the whole tick's movement, even past several waypoints.
     while (!path_.consumed())
     {
