@@ -17,17 +17,46 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player) and
-                VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            ['Naja_Salaheem'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        not mission:getMustZone(player) and
+                        VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+                    then
+                        return mission:progressEvent(3090, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                    else
+                        -- Option cycles between 2 and either a 1 or a 0.
+                        local dialog = mission:getVar(player, 'Option')
+                        if dialog == 2 then
+                            -- Condition for Naja being friendly is unknown. Probably the same as ToAU 8.
+                            local altOption = 0 -- 1 -> Friendly. 0 -> Not.
+                            dialog = altOption
+                        else
+                            dialog = 2
+                        end
+
+                        mission:setVar(player, 'Option', dialog)
+
+                        return mission:event(3079, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, dialog, 0)
+                    end
+                end,
+            },
+
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3090, { text_table = 0 })
+                    if
+                        not mission:getMustZone(player) and
+                        VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+                    then
+                        return mission:progressEvent(3090, { text_table = 0 })
+                    end
                 end,
             },
 
