@@ -81,7 +81,7 @@ templates:
           type:  standard
           model: 1580
         entity_flags: 2179
-        name_vis:        1
+        name_vis:       88
         name_prefix:     2
         model_size:      1
         hitbox:         12
@@ -387,20 +387,20 @@ templates:
         type: [scripted]
 
   Mamool_Ja_Warder_bst:
+    display_name:  Mamool_Ja_Warder
     id:            5465
     species:       warrior
     skill_list_id: 176
     attributes:
       combat:
         skill: dagger
-        delay: 280
+        delay: 240
       jobs: [bst, bst]
       render:
         look:
           type:  automaton
           model: 1609
         entity_flags: 131
-        name_vis:       1
         model_size:     1
         hitbox:        12
       behaviors:
@@ -410,14 +410,15 @@ templates:
         type: [scripted]
 
   Mamool_Ja_Warder_nin:
+    display_name:  Mamool_Ja_Warder
     id:            2544
     species:       warrior
     spell_list_id: 7
     skill_list_id: 176
     attributes:
       combat:
-        skill: dagger
-        delay: 280
+        skill: hand_to_hand
+        delay: 390
       jobs: [nin, nin]
       render:
         look:
@@ -433,6 +434,7 @@ templates:
         type: [scripted]
 
   Mamool_Ja_Warder_whm:
+    display_name:  Mamool_Ja_Warder
     id:            5466
     species:       sage
     spell_list_id: 20
@@ -447,7 +449,6 @@ templates:
           type:  automaton
           model: 1634
         entity_flags: 131
-        name_vis:       1
         model_size:     1
         hitbox:        12
       behaviors:
@@ -821,71 +822,60 @@ templates:
 spawns:
   17047553:
     template: Mamool_Ja_Warder_whm
-    script:   Mamool_Ja_Warder
     at:       [-52.529, 11.454, -481.784, 173]
-    level:    [77, 78]
+    level:    [75, 78]
   17047554:
     template: Mamool_Ja_Warder_bst
-    script:   Mamool_Ja_Warder
     at:       [-56.889, 11.425, -478.689, 120]
-    level:    [77, 78]
+    level:    [75, 78]
   17047555:
     template: Mamool_Jas_Lizard
     at:       [-56.888, 11.328, -478.687, 120]
-    level:    [70, 70]
+    level:    [70, 72]
   17047556:
     template: Mamool_Ja_Warder_whm
-    script:   Mamool_Ja_Warder
     at:       [-73.562, 11.445, -476.531, 197]
-    level:    [77, 78]
+    level:    [75, 78]
   17047557:
     template: Mamool_Ja_Warder_bst
-    script:   Mamool_Ja_Warder
     at:       [-83.271, 11.411, -451.202, 110]
-    level:    [77, 78]
+    level:    [75, 78]
   17047558:
     template: Mamool_Jas_Lizard
     at:       [-83.271, 11.411, -451.202, 120]
-    level:    [70, 70]
+    level:    [70, 72]
   17047559:
     template: Mamool_Ja_Warder_whm
-    script:   Mamool_Ja_Warder
     at:       [166.512, 1.886, -418.296, 127]
-    level:    [77, 78]
+    level:    [75, 78]
   17047560:
     template: Mamool_Ja_Warder_whm
-    script:   Mamool_Ja_Warder
     at:       [261.726, 1.318, -421.633, 90]
-    level:    [77, 78]
+    level:    [75, 78]
   17047561:
     template: Mamool_Ja_Warder_bst
-    script:   Mamool_Ja_Warder
     at:       [214.891, 1.294, -578.562, 204]
-    level:    [77, 78]
+    level:    [75, 78]
   17047562:
     template: Mamool_Jas_Lizard
     at:       [215.239, 1.254, -580.130, 191]
-    level:    [70, 70]
+    level:    [70, 72]
   17047563:
     template: Mamool_Ja_Warder_nin
-    script:   Mamool_Ja_Warder
     at:       [197.111, 2.415, -458.513, 140]
-    level:    [77, 78]
+    level:    [75, 78]
   17047564:
     template: Mamool_Ja_Warder_nin
-    script:   Mamool_Ja_Warder
     at:       [215.755, 2.173, -461.893, 103]
-    level:    [77, 78]
+    level:    [75, 78]
   17047565:
     template: Mamool_Ja_Warder_nin
-    script:   Mamool_Ja_Warder
     at:       [258.477, 5.566, -471.841, 188]
-    level:    [77, 78]
+    level:    [75, 78]
   17047566:
     template: Mamool_Ja_Warder_nin
-    script:   Mamool_Ja_Warder
     at:       [178.120, 5.206, -522.340, 196]
-    level:    [77, 78]
+    level:    [75, 78]
   17047567:
     template: Dilapidated_Gate
     at:       [220.004, 0.690, -439.999]
