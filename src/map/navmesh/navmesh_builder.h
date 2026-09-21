@@ -101,6 +101,7 @@ public:
 private:
     auto buildTile(int tx, int ty, const rcConfig& cfg, const NavMeshConfig& config, float tileWorldSize) const -> TileResult;
     auto worldToCell(float x, float z) const -> CellCoord;
+    void measureCellMargin(const NavMeshConfig& config);
 
     static auto onYSkipPlane(float y0, float y1, float y2, const std::vector<float>& ySkipPlanes) -> bool;
     static auto insideSkipSphere(const float* v0, const float* v1, const float* v2, const std::vector<NavMeshSkipSphere>& skipSpheres) -> bool;
@@ -118,4 +119,6 @@ private:
     float         worldBmax_[3]{ FloatLowest, FloatLowest, FloatLowest };
 
     HashMap<uint32, PreTransformedBlock> preTransformed_;
+
+    int cellMargin_{}; // extra ximesh cells a gather covers so every triangle over the box is found
 };

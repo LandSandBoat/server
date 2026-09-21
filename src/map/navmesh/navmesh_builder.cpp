@@ -675,6 +675,76 @@ void NavMeshBuilder::getFilteredWorldBounds(const NavMeshConfig& config, float* 
     }
 }
 
+// A block is registered in one cell but its triangles can reach well past it.
+// The worst reach, in cells, widens every gather so a tile finds all the geometry over it.
+void NavMeshBuilder::measureCellMargin(const NavMeshConfig& config)
+{
+    const auto& blocks  = xiMesh_->blocks();
+    const auto& entries = xiMesh_->entries();
+    const auto& cells   = xiMesh_->cells();
+
+    // xz box of each block's surviving triangles
+    struct Box
+    {
+        float xMin{ FloatMax };
+        float zMin{ FloatMax };
+        float xMax{ FloatLowest };
+        float zMax{ FloatLowest };
+    };
+
+    HashMap<uint32, Box> boxes;
+    for (const auto& [key, ptb] : preTransformed_)
+    {
+        const auto& block = blocks[key >> 16];
+        Box         box;
+        for (std::size_t tri = 0; tri < block.metas.size(); ++tri)
+        {
+            const auto* v0 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 0]) * 3];
+            const auto* v1 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 1]) * 3];
+            const auto* v2 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 2]) * 3];
+
+            if (onYSkipPlane(v0[1], v1[1], v2[1], config.ySkipPlanes) ||
+                insideSkipSphere(v0, v1, v2, config.skipSpheres))
+            {
+                continue;
+            }
+
+            box.xMin = std::min({ box.xMin, v0[0], v1[0], v2[0] });
+            box.zMin = std::min({ box.zMin, v0[2], v1[2], v2[2] });
+            box.xMax = std::max({ box.xMax, v0[0], v1[0], v2[0] });
+            box.zMax = std::max({ box.zMax, v0[2], v1[2], v2[2] });
+        }
+
+        if (box.xMin <= box.xMax)
+        {
+            boxes.emplace(key, box);
+        }
+    }
+
+    float worst = 0.0f;
+    for (uint32 cellIndex = 0; cellIndex < cells.size(); ++cellIndex)
+    {
+        const auto cellX0 = static_cast<float>(static_cast<int>(cellIndex % gridWidth_) - gridWidth_ / 2) * XIMESH_CELL_SIZE;
+        const auto cellZ0 = static_cast<float>(static_cast<int>(cellIndex / gridWidth_) - gridHeight_ / 2) * XIMESH_CELL_SIZE;
+
+        const auto& cell = cells[cellIndex];
+        for (uint16 ref = 0; ref < cell.count; ++ref)
+        {
+            const auto& entry = entries[cell.offset + ref];
+            const auto  it    = boxes.find((static_cast<uint32>(entry.blockIdx) << 16) | entry.placementIdx);
+            if (it == boxes.end())
+            {
+                continue;
+            }
+
+            const auto& box = it->second;
+            worst           = std::max({ worst, cellX0 - box.xMin, box.xMax - (cellX0 + XIMESH_CELL_SIZE), cellZ0 - box.zMin, box.zMax - (cellZ0 + XIMESH_CELL_SIZE) });
+        }
+    }
+
+    cellMargin_ = static_cast<int>(std::ceil(worst / XIMESH_CELL_SIZE));
+}
+
 void NavMeshBuilder::gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out, const std::vector<float>& ySkipPlanes, const std::vector<NavMeshSkipSphere>& skipSpheres) const
 {
     out.verts.clear();
@@ -688,10 +758,10 @@ void NavMeshBuilder::gatherTrianglesInAABB(const float* bmin, const float* bmax,
     const auto [cxMin, czMin] = worldToCell(bmin[0], bmin[2]);
     const auto [cxMax, czMax] = worldToCell(bmax[0], bmax[2]);
 
-    const auto xStart = std::max(0, cxMin);
-    const auto xEnd   = std::min(static_cast<int>(gridWidth_) - 1, cxMax);
-    const auto zStart = std::max(0, czMin);
-    const auto zEnd   = std::min(static_cast<int>(gridHeight_) - 1, czMax);
+    const auto xStart = std::max(0, cxMin - cellMargin_);
+    const auto xEnd   = std::min(static_cast<int>(gridWidth_) - 1, cxMax + cellMargin_);
+    const auto zStart = std::max(0, czMin - cellMargin_);
+    const auto zEnd   = std::min(static_cast<int>(gridHeight_) - 1, czMax + cellMargin_);
 
     std::unordered_set<uint32> visited;
 
@@ -1055,6 +1125,7 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
     float worldBmin[3];
     float worldBmax[3];
     getFilteredWorldBounds(config, worldBmin, worldBmax);
+    measureCellMargin(config);
 
     // No geometry was gathered (empty or null ximesh) - nothing to build.
     if (worldBmin[0] > worldBmax[0])
