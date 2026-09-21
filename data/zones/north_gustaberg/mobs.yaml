@@ -2929,7 +2929,7 @@ spawns:
           end:    5
   17211588:
     template: Ding_Bats
-    region:   c_196
+    region:   c_187
     level:    [4, 5]
     attributes:
       spawn:
