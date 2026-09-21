@@ -41,11 +41,12 @@ namespace
 {
 
 // Recast/Detour constants (not tunable)
-constexpr uint16 SAMPLE_POLYFLAGS_WALK  = 0x0001; // RecastDemo/Include/Sample.h
-constexpr int    TILE_BORDER_PADDING    = 8;      // Extra cells beyond walkableRadius for tile stitching; <8 leaves eroded seam gaps on continuous terrain
-constexpr float  MIN_DETAIL_SAMPLE_DIST = 0.9f;   // Recast clamps non-zero detailSampleDist to >= 0.9
-constexpr int    DT_MAX_TILE_BITS       = 14;     // dtNavMesh max bits for tile indexing
-constexpr int    DT_TOTAL_REF_BITS      = 22;     // dtNavMesh total bits for tile + poly refs
+constexpr uint16 SAMPLE_POLYFLAGS_WALK     = 0x0001; // RecastDemo/Include/Sample.h
+constexpr uint16 SAMPLE_POLYFLAGS_DISABLED = 0x0010; // RecastDemo/Include/Sample.h, the flag the query filter excludes
+constexpr int    TILE_BORDER_PADDING       = 8;      // Extra cells beyond walkableRadius for tile stitching; <8 leaves eroded seam gaps on continuous terrain
+constexpr float  MIN_DETAIL_SAMPLE_DIST    = 0.9f;   // Recast clamps non-zero detailSampleDist to >= 0.9
+constexpr int    DT_MAX_TILE_BITS          = 14;     // dtNavMesh max bits for tile indexing
+constexpr int    DT_TOTAL_REF_BITS         = 22;     // dtNavMesh total bits for tile + poly refs
 
 // FFXI dat format constant (not tunable)
 constexpr float XIMESH_CELL_SIZE = 4.0f; // Each ximesh grid cell covers 4x4 world units
@@ -73,6 +74,7 @@ auto transform(const std::array<float, 9>& rot, const std::array<float, 3>& tran
 // Scan each walkable poly's ledge (border) edges.
 // Where a walkable surface sits below within the drop window, link the ledge down to it.
 // Landings come only from this tile's own detail mesh, so both endpoints are real polys.
+// Whether the landing was walk-reachable anyway is decided on the assembled mesh, see disableRedundantOffMeshLinks.
 // Detour space, Y up.
 auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dmesh, const NavMeshConfig& config, const int tileX, const int tileY, const std::vector<std::array<float, 9>>& barriers) -> TileOffMeshConnections
 {
@@ -93,48 +95,6 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
         outXyz[1] = boundsMin[1] + pmesh.verts[vertIndex * 3 + 1] * cellHeight;
         outXyz[2] = boundsMin[2] + pmesh.verts[vertIndex * 3 + 2] * cellSize;
     };
-
-    // Union-find of walk-connected polys; skip a link whose landing shares the source poly's component.
-    std::vector<int> parent(pmesh.npolys);
-    for (int p = 0; p < pmesh.npolys; ++p)
-    {
-        parent[p] = p;
-    }
-
-    const auto findRoot = [&](int x) -> int
-    {
-        while (parent[x] != x)
-        {
-            parent[x] = parent[parent[x]];
-            x         = parent[x];
-        }
-        return x;
-    };
-
-    for (int p = 0; p < pmesh.npolys; ++p)
-    {
-        const unsigned short* poly = &pmesh.polys[p * 2 * vertsPerPoly];
-        for (int j = 0; j < vertsPerPoly; ++j)
-        {
-            if (poly[j] == RC_MESH_NULL_IDX)
-            {
-                break;
-            }
-
-            const unsigned short neighborPoly = poly[vertsPerPoly + j];
-            if (neighborPoly == RC_MESH_NULL_IDX || (neighborPoly & 0x8000)) // border or tile portal, not internal
-            {
-                continue;
-            }
-
-            const int rootA = findRoot(p);
-            const int rootB = findRoot(neighborPoly);
-            if (rootA != rootB)
-            {
-                parent[rootA] = rootB;
-            }
-        }
-    }
 
     // Per-poly xz-AABB of the detail surface, to cull the height search.
     struct PolyAABB
@@ -159,8 +119,8 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
         aabb[p] = box;
     }
 
-    // Highest walkable detail-surface Y at (x, z) within [loY, hiY], excluding srcPoly, plus the poly it lands on (used by the same-component skip below).
-    const auto sampleBelow = [&](const float x, const float z, const float loY, const float hiY, const int srcPoly, float& outY, int& outPoly) -> bool
+    // Highest walkable detail-surface Y at (x, z) within [loY, hiY], excluding srcPoly.
+    const auto sampleBelow = [&](const float x, const float z, const float loY, const float hiY, const int srcPoly, float& outY) -> bool
     {
         bool  found = false;
         float best  = FloatLowest;
@@ -191,9 +151,8 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
                 float       y        = 0.0f;
                 if (dtClosestHeightPointTriangle(probe, va, vb, vc, y) && y >= loY && y <= hiY && y > best)
                 {
-                    best    = y;
-                    found   = true;
-                    outPoly = p;
+                    best  = y;
+                    found = true;
                 }
             }
         }
@@ -343,14 +302,13 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
             float       landingX     = 0.0f;
             float       landingY     = 0.0f;
             float       landingZ     = 0.0f;
-            int         landingPoly  = -1;
             bool        foundLanding = false;
             for (float reach = linkRadius; reach <= maxReach + 1e-3f; reach += 0.5f)
             {
                 const float probeX = edgeMid[0] + outwardX * reach;
                 const float probeZ = edgeMid[2] + outwardZ * reach;
 
-                if (sampleBelow(probeX, probeZ, ledgeY - maxDrop, ledgeY - minDrop, p, landingY, landingPoly))
+                if (sampleBelow(probeX, probeZ, ledgeY - maxDrop, ledgeY - minDrop, p, landingY))
                 {
                     landingX     = probeX;
                     landingZ     = probeZ;
@@ -360,12 +318,6 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
             }
 
             if (!foundLanding)
-            {
-                continue;
-            }
-
-            // Skip when the landing is already walk-reachable within this tile.
-            if (findRoot(landingPoly) == findRoot(p))
             {
                 continue;
             }
@@ -430,6 +382,139 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
     out.dir.assign(out.count, DT_OFFMESH_CON_BIDIR);
 
     return out;
+}
+
+// Every ground poly of the assembled mesh, off-mesh connection polys left out.
+template <typename F>
+void forEachGroundPoly(const dtNavMesh& navMesh, F&& fn)
+{
+    for (int i = 0; i < navMesh.getMaxTiles(); ++i)
+    {
+        const dtMeshTile* tile = navMesh.getTile(i);
+        if (!tile || !tile->header)
+        {
+            continue;
+        }
+
+        const dtPolyRef base = navMesh.getPolyRefBase(tile);
+        for (int p = 0; p < tile->header->polyCount; ++p)
+        {
+            if (tile->polys[p].getType() != DT_POLYTYPE_OFFMESH_CONNECTION)
+            {
+                fn(tile, p, base | static_cast<dtPolyRef>(p));
+            }
+        }
+    }
+}
+
+// Every off-mesh connection of the assembled mesh, with its tile and the tile's poly ref base.
+template <typename F>
+void forEachOffMeshConnection(const dtNavMesh& navMesh, F&& fn)
+{
+    for (int i = 0; i < navMesh.getMaxTiles(); ++i)
+    {
+        const dtMeshTile* tile = navMesh.getTile(i);
+        if (!tile || !tile->header)
+        {
+            continue;
+        }
+
+        const dtPolyRef base = navMesh.getPolyRefBase(tile);
+        for (int c = 0; c < tile->header->offMeshConCount; ++c)
+        {
+            fn(tile, base, tile->offMeshCons[c]);
+        }
+    }
+}
+
+// The two ground polys a connection joins, read off its poly's links.
+// Edge 0 is the start, edge 1 the landing.
+// An end is 0 while its tile is missing.
+auto offMeshEnds(const dtMeshTile* tile, const dtOffMeshConnection& con) -> std::array<dtPolyRef, 2>
+{
+    std::array<dtPolyRef, 2> ends{};
+    for (unsigned int l = tile->polys[con.poly].firstLink; l != DT_NULL_LINK; l = tile->links[l].next)
+    {
+        ends[tile->links[l].edge] = tile->links[l].ref;
+    }
+
+    return ends;
+}
+
+// Union-find over the ground polys joined by in-mesh links.
+class WalkComponents
+{
+public:
+    explicit WalkComponents(const dtNavMesh& navMesh)
+    {
+        forEachGroundPoly(navMesh, [&](const dtMeshTile* tile, const int p, const dtPolyRef ref)
+                          {
+                              for (unsigned int l = tile->polys[p].firstLink; l != DT_NULL_LINK; l = tile->links[l].next)
+                              {
+                                  const dtMeshTile* linkTile = nullptr;
+                                  const dtPoly*     linkPoly = nullptr;
+                                  navMesh.getTileAndPolyByRefUnsafe(tile->links[l].ref, &linkTile, &linkPoly);
+                                  if (linkPoly->getType() != DT_POLYTYPE_OFFMESH_CONNECTION)
+                                  {
+                                      unite(ref, tile->links[l].ref);
+                                  }
+                              }
+                          });
+    }
+
+    auto root(dtPolyRef x) -> dtPolyRef
+    {
+        while (true)
+        {
+            const auto parent = parent_.try_emplace(x, x).first->second;
+            if (parent == x)
+            {
+                return x;
+            }
+
+            const auto grandparent = parent_.try_emplace(parent, parent).first->second;
+            parent_[x]             = grandparent;
+            x                      = grandparent;
+        }
+    }
+
+private:
+    void unite(const dtPolyRef a, const dtPolyRef b)
+    {
+        const auto rootA = root(a);
+        const auto rootB = root(b);
+        if (rootA != rootB)
+        {
+            parent_[rootA] = rootB;
+        }
+    }
+
+    HashMap<dtPolyRef, dtPolyRef> parent_;
+};
+
+void disablePoly(dtNavMesh& navMesh, const dtPolyRef ref)
+{
+    unsigned short flags = 0;
+    navMesh.getPolyFlags(ref, &flags);
+    navMesh.setPolyFlags(ref, flags | SAMPLE_POLYFLAGS_DISABLED);
+}
+
+// A drop link is kept only where its two ends sit on different walk islands.
+// The poly stays in the tile and the query filter skips it.
+auto disableRedundantOffMeshLinks(dtNavMesh& navMesh, WalkComponents& components) -> int
+{
+    int disabled = 0;
+    forEachOffMeshConnection(navMesh, [&](const dtMeshTile* tile, const dtPolyRef base, const dtOffMeshConnection& con)
+                             {
+                                 const auto ends = offMeshEnds(tile, con);
+                                 if (ends[0] && ends[1] && !(tile->polys[con.poly].flags & SAMPLE_POLYFLAGS_DISABLED) && components.root(ends[0]) == components.root(ends[1]))
+                                 {
+                                     disablePoly(navMesh, base | con.poly);
+                                     ++disabled;
+                                 }
+                             });
+
+    return disabled;
 }
 
 } // namespace
@@ -1130,6 +1215,9 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
         dtFreeNavMesh(navMesh);
         co_return nullptr;
     }
+
+    WalkComponents components(*navMesh);
+    offMeshCons -= disableRedundantOffMeshLinks(*navMesh, components);
 
     const auto endTime    = timer::now();
     const auto durationMs = timer::count_milliseconds(endTime - startTime);
