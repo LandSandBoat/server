@@ -202,9 +202,10 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     if
         spellEffect == xi.effect.CHARM_I and
         (not target:isMob() or
-        target:getMobMod(xi.mobMod.CHARMABLE) <= 0)
+        target:getMobMod(xi.mobMod.CHARMABLE) <= 0 or
+        target:getMaster() ~= nil)
     then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return spellEffect
     end
 
