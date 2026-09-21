@@ -27,7 +27,7 @@ local varPrefix = '[PXI][TNM]'
 local timedNMs =
 {
     -- { zone script folder, { mob file names } }
-    { 'Arrapago_Reef',          { 'Lamia_No19', 'Lamie_No9' } },
+    { 'Arrapago_Reef',          { 'Lamia_No19' } },
     { 'Attohwa_Chasm',          { 'Tiamat', 'Xolotl' } },
     { 'Batallia_Downs',         { 'Ahtu', 'Weeping_Willow' } },
     { 'Bostaunieux_Oubliette',  { 'Bloodsucker_NM', 'Drexerion_the_Condemned', 'Phanduron_the_Condemned' } },
@@ -42,7 +42,7 @@ local timedNMs =
     { 'Gustav_Tunnel',          { 'Bune' } },
     { 'Ifrits_Cauldron',        { 'Ash_Dragon' } },
     { 'Inner_Horutoto_Ruins',   { 'Maltha' } },
-    { 'Jugner_Forest',          { 'Fraelissa', 'Meteormauler_Zhagtegg' } },
+    { 'Jugner_Forest',          { 'Meteormauler_Zhagtegg' } },
     { 'King_Ranperres_Tomb',    { 'Vrtra' } },
     { 'Kuftal_Tunnel',          { 'Guivre' } },
     { 'Labyrinth_of_Onzozo',    { 'Mysticmaker_Profblix' } },
@@ -77,7 +77,7 @@ local timedNMs =
 
 -- TODO: add these live stronghold NMs once Besieged is implemented.
 -- Lamie_No7 and Merrow_No5 need xi.module.ensureTable because they have no scripts.
---   Arrapago Reef  Lamie_No7, Medusa, Merrow_No5
+--   Arrapago Reef  Lamie_No7, Lamie_No9, Medusa, Merrow_No5
 --   Halvung        Dorgerwor_the_Astute
 --   Mamook         Darting_Kachaal_Ja, Dragonscaled_Bugaal_Ja,
 --                  Gulool_Ja_Ja, Hundredfaced_Hapool_Ja
@@ -254,6 +254,109 @@ for _, pair in ipairs(sharedPairs) do
         GetMobByID(nextId):setRespawnTime(math.max(deadline - GetSystemTime(), 60))
     end)
 end
+
+-----------------------------------
+-- Fraelissa / Fradubio (Jugner Forest)
+-- Save the lottery winner and its window. Fradubio's return to Fraelissa must
+-- also work after restart, when the lottery helper's despawn listener is gone.
+-----------------------------------
+local fraelissaId      = zones[xi.zone.JUGNER_FOREST].mob.FRAELISSA
+local fradubioId       = zones[xi.zone.JUGNER_FOREST].mob.FRADUBIO
+local fraelissaVar     = varPrefix .. 'Fraelissa'
+local fraelissaPickVar = fraelissaVar .. '_Next'
+local fradubioPopVar   = varPrefix .. 'Fradubio_Pop'
+
+m:addOverride('xi.zones.Jugner_Forest.mobs.Fraelissa.onMobInitialize', function(mob)
+    super(mob)
+
+    local baseWindow = GetMobRespawnTime(mob:getID())
+
+    mob:addListener('SPAWN', 'PXI_TNM_SPAWN', function(mobArg)
+        SetServerVariable(fraelissaVar, 0)
+        SetServerVariable(fraelissaPickVar, 0)
+        mobArg:setRespawnTime(baseWindow)
+    end)
+end)
+
+m:addOverride('xi.zones.Jugner_Forest.mobs.Fraelissa.onMobDespawn', function(mob)
+    super(mob)
+
+    local nextMob = GetMobByID(fradubioId)
+    if nextMob:getRespawnTime() == 0 then
+        nextMob = mob
+    end
+
+    SetServerVariable(fraelissaVar, GetSystemTime() + nextMob:getRespawnTime())
+    SetServerVariable(fraelissaPickVar, nextMob:getID())
+end)
+
+m:addOverride('xi.zones.Jugner_Forest.mobs.Fradubio.onMobInitialize', function(mob)
+    super(mob)
+
+    local deadline = GetServerVariable(fradubioPopVar)
+    if deadline > 0 then
+        mob:setLocalVar('pop', deadline)
+    end
+end)
+
+m:addOverride('xi.zones.Jugner_Forest.mobs.Fradubio.onMobSpawn', function(mob)
+    super(mob)
+
+    SetServerVariable(fraelissaVar, 0)
+    SetServerVariable(fraelissaPickVar, 0)
+    mob:setRespawnTime(0)
+end)
+
+m:addOverride('xi.zones.Jugner_Forest.mobs.Fradubio.onMobDespawn', function(mob)
+    super(mob)
+
+    -- Replace the helper's handoff before DESPAWN listeners run, so it runs once.
+    mob:removeListener('DESPAWN_' .. mob:getID())
+    mob:setRespawnTime(0)
+
+    local fraelissa = GetMobByID(fraelissaId)
+    fraelissa:setRespawnTime(GetMobRespawnTime(fraelissaId))
+
+    if mob:getLocalVar('doNotInvokeCooldown') == 0 then
+        local cooldown   = 75600
+        local multiplier = xi.settings.main.NM_LOTTERY_COOLDOWN
+        if multiplier and multiplier >= 0 then
+            cooldown = cooldown * multiplier
+        end
+
+        mob:setLocalVar('pop', GetSystemTime() + cooldown)
+    end
+
+    SetServerVariable(fraelissaVar, GetSystemTime() + fraelissa:getRespawnTime())
+    SetServerVariable(fraelissaPickVar, fraelissaId)
+    SetServerVariable(fradubioPopVar, mob:getLocalVar('pop'))
+end)
+
+m:addOverride('xi.zones.Jugner_Forest.Zone.onInitialize', function(zone)
+    super(zone)
+
+    local deadline = GetServerVariable(fraelissaVar)
+    if deadline == 0 then
+        return
+    end
+
+    local nextId = GetServerVariable(fraelissaPickVar)
+    if nextId ~= fraelissaId and nextId ~= fradubioId then
+        -- Old generic saves have no winner and may contain a stale Fraelissa timer.
+        SetServerVariable(fraelissaVar, 0)
+        SetServerVariable(fraelissaPickVar, 0)
+        return
+    end
+
+    if nextId == fradubioId then
+        -- Keep Fraelissa's normal window for the return handoff.
+        DisallowRespawn(fraelissaId, true)
+        xi.mob.updateNMSpawnPoint(nextId)
+    end
+
+    -- Zone init runs after the loader disables lottery respawns.
+    GetMobByID(nextId):setRespawnTime(math.max(deadline - GetSystemTime(), 60))
+end)
 
 -----------------------------------
 -- Beastmen kings
