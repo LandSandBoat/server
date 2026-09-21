@@ -378,7 +378,7 @@ templates:
         animation_sub:   8
         name_vis:        2
         name_prefix:    40
-        model_size:      1
+        model_size:      0
         hitbox:         12
       behaviors:
         aggressive:     true
@@ -489,11 +489,11 @@ templates:
       render:
         look:
           type:  standard
-          model: 281
+          model: 280
         entity_flags:  645
         animation_sub:   8
-        model_size:      2
-        hitbox:         13
+        model_size:      1
+        hitbox:         12
       behaviors:
         aggressive: true
       spawn:
