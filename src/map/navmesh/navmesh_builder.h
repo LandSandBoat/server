@@ -66,6 +66,8 @@ struct TileResult
     unsigned char* data{};
     int            dataSize{};
     int            offMeshCount{};
+
+    std::vector<bool> covered; // per ground poly, up-facing collision geometry over every corner and the centre
 };
 
 // Off-mesh links for one tile, in the SoA layout dtNavMeshCreateParams wants.

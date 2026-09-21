@@ -29,6 +29,7 @@
 #include <DetourCommon.h>
 #include <DetourNavMesh.h>
 #include <DetourNavMeshBuilder.h>
+#include <DetourNavMeshQuery.h>
 #include <Recast.h>
 
 #include <algorithm>
@@ -441,22 +442,48 @@ auto offMeshEnds(const dtMeshTile* tile, const dtOffMeshConnection& con) -> std:
     return ends;
 }
 
-// Union-find over the ground polys joined by in-mesh links.
+// Whether a seam link joins two surfaces that meet within the climb height.
+// Detour links tiles with twice that slack and always links crossing edges, enough to step off a beach onto the sea plane under it.
+// Sampled at both ends of the shared sub-segment and its middle.
+auto seamMeets(const dtNavMeshQuery& query, const dtMeshTile* tile, const dtPoly& poly, const dtLink& link) -> bool
+{
+    const float* edgeStart  = &tile->verts[poly.verts[link.edge] * 3];
+    const float* edgeEnd    = &tile->verts[poly.verts[(link.edge + 1) % poly.vertCount] * 3];
+    const float  samples[3] = { link.bmin / 255.0f, link.bmax / 255.0f, (link.bmin + link.bmax) / 510.0f };
+
+    return std::ranges::any_of(samples, [&](const float t)
+                               {
+                                   float point[3];
+                                   float closest[3];
+                                   dtVlerp(point, edgeStart, edgeEnd, t);
+                                   query.closestPointOnPoly(link.ref, point, closest, nullptr);
+                                   return dtAbs(closest[1] - point[1]) <= tile->header->walkableClimb;
+                               });
+}
+
+// Union-find over the ground polys joined by in-mesh links, seam links only where the surfaces meet.
 class WalkComponents
 {
 public:
-    explicit WalkComponents(const dtNavMesh& navMesh)
+    WalkComponents(const dtNavMesh& navMesh, const dtNavMeshQuery& query)
     {
         forEachGroundPoly(navMesh, [&](const dtMeshTile* tile, const int p, const dtPolyRef ref)
                           {
-                              for (unsigned int l = tile->polys[p].firstLink; l != DT_NULL_LINK; l = tile->links[l].next)
+                              const dtPoly& poly = tile->polys[p];
+                              for (unsigned int l = poly.firstLink; l != DT_NULL_LINK; l = tile->links[l].next)
                               {
+                                  const dtLink&     link     = tile->links[l];
                                   const dtMeshTile* linkTile = nullptr;
                                   const dtPoly*     linkPoly = nullptr;
-                                  navMesh.getTileAndPolyByRefUnsafe(tile->links[l].ref, &linkTile, &linkPoly);
-                                  if (linkPoly->getType() != DT_POLYTYPE_OFFMESH_CONNECTION)
+                                  navMesh.getTileAndPolyByRefUnsafe(link.ref, &linkTile, &linkPoly);
+                                  if (linkPoly->getType() == DT_POLYTYPE_OFFMESH_CONNECTION)
                                   {
-                                      unite(ref, tile->links[l].ref);
+                                      continue;
+                                  }
+
+                                  if (link.side == 0xff || seamMeets(query, tile, poly, link))
+                                  {
+                                      unite(ref, link.ref);
                                   }
                               }
                           });
@@ -515,6 +542,75 @@ auto disableRedundantOffMeshLinks(dtNavMesh& navMesh, WalkComponents& components
                              });
 
     return disabled;
+}
+
+// A surface with ground over every part of it, like the sea plane running on under a beach, is only ever reached by a snap, which then leaves the mob under the ground.
+// Every walk-connected component with no uncovered poly and no seed on it is switched off, and so is any drop link touching it.
+// Drop links do not join components here, since the beach's own ledges drop onto the buried plane.
+auto disableBuriedPolys(dtNavMesh& navMesh, const dtNavMeshQuery& query, WalkComponents& components, const std::vector<TileResult>& results, const NavMeshConfig& config) -> int
+{
+    std::unordered_set<dtPolyRef> exposedRoots;
+
+    // a seed is a retail position, so it sits within a step of its floor
+    constexpr float     kSeedExtents[3] = { 2.0f, 4.0f, 2.0f };
+    const dtQueryFilter filter;
+    for (const auto& seed : config.seeds)
+    {
+        const float point[3] = { seed[0], -seed[1], -seed[2] };
+        dtPolyRef   ref      = 0;
+        float       nearest[3];
+        if (dtStatusSucceed(query.findNearestPoly(point, kSeedExtents, &filter, &ref, nearest)) && ref)
+        {
+            exposedRoots.insert(components.root(ref));
+        }
+    }
+
+    for (const auto& result : results)
+    {
+        const dtMeshTile* tile = navMesh.getTileAt(result.tx, result.ty, 0);
+        if (!tile)
+        {
+            continue;
+        }
+
+        const dtPolyRef base = navMesh.getPolyRefBase(tile);
+        for (std::size_t p = 0; p < result.covered.size(); ++p)
+        {
+            if (!result.covered[p])
+            {
+                exposedRoots.insert(components.root(base | static_cast<dtPolyRef>(p)));
+            }
+        }
+    }
+
+    int disabled = 0;
+    forEachGroundPoly(navMesh, [&](const dtMeshTile*, int, const dtPolyRef ref)
+                      {
+                          if (!exposedRoots.contains(components.root(ref)))
+                          {
+                              disablePoly(navMesh, ref);
+                              ++disabled;
+                          }
+                      });
+
+    return disabled;
+}
+
+// A partial path may still end on a link whose landing is off, so a link touching a disabled poly goes too.
+void disableLinksIntoDisabledPolys(dtNavMesh& navMesh)
+{
+    forEachOffMeshConnection(navMesh, [&](const dtMeshTile* tile, const dtPolyRef base, const dtOffMeshConnection& con)
+                             {
+                                 const bool touchesDisabled = std::ranges::any_of(offMeshEnds(tile, con), [&](const dtPolyRef end)
+                                                                                  {
+                                                                                      unsigned short flags = 0;
+                                                                                      return end && dtStatusSucceed(navMesh.getPolyFlags(end, &flags)) && (flags & SAMPLE_POLYFLAGS_DISABLED);
+                                                                                  });
+                                 if (touchesDisabled)
+                                 {
+                                     disablePoly(navMesh, base | con.poly);
+                                 }
+                             });
 }
 
 } // namespace
@@ -1031,6 +1127,78 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
     }
 
     //
+    // Cover: up-facing collision geometry more than a climb above every corner of the poly and its centre
+    //
+
+    const auto coveredAt = [&](const float* point) -> bool
+    {
+        for (int i = 0; i < numTris; ++i)
+        {
+            if (tileMesh.areas[i] == RC_NULL_AREA)
+            {
+                continue;
+            }
+
+            const float* a = &tileMesh.verts[tileMesh.indices[i * 3 + 0] * 3];
+            const float* b = &tileMesh.verts[tileMesh.indices[i * 3 + 1] * 3];
+            const float* c = &tileMesh.verts[tileMesh.indices[i * 3 + 2] * 3];
+            if (dtTriArea2D(a, b, c) <= 0.0f)
+            {
+                continue;
+            }
+
+            float height = 0.0f;
+            if (dtClosestHeightPointTriangle(point, a, b, c, height) && height > point[1] + config.agentMaxClimb)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    std::vector<bool> covered(pmesh->npolys, false);
+    for (int p = 0; p < pmesh->npolys; ++p)
+    {
+        const unsigned short* poly = &pmesh->polys[p * 2 * pmesh->nvp];
+
+        std::vector<std::array<float, 3>> corners;
+        for (int j = 0; j < pmesh->nvp && poly[j] != RC_MESH_NULL_IDX; ++j)
+        {
+            const unsigned short* v = &pmesh->verts[poly[j] * 3];
+            corners.push_back({ pmesh->bmin[0] + v[0] * pmesh->cs, pmesh->bmin[1] + v[1] * pmesh->ch, pmesh->bmin[2] + v[2] * pmesh->cs });
+        }
+
+        if (!std::ranges::all_of(corners, [&](const auto& corner)
+                                 {
+                                     return coveredAt(corner.data());
+                                 }))
+        {
+            continue;
+        }
+
+        const auto count     = static_cast<float>(corners.size());
+        float      centre[3] = {};
+        for (const auto& corner : corners)
+        {
+            centre[0] += corner[0] / count;
+            centre[2] += corner[2] / count;
+        }
+
+        // the centre's height comes from the poly's own detail surface
+        const unsigned int* detail      = &dmesh->meshes[p * 4];
+        const float*        detailVerts = &dmesh->verts[detail[0] * 3];
+        bool                onSurface   = false;
+        for (unsigned int t = 0; t < detail[3] && !onSurface; ++t)
+        {
+            const unsigned char* tri = &dmesh->tris[(detail[2] + t) * 4];
+            onSurface                = dtClosestHeightPointTriangle(centre, &detailVerts[tri[0] * 3], &detailVerts[tri[1] * 3], &detailVerts[tri[2] * 3], centre[1]);
+        }
+
+        covered[p] = onSurface && coveredAt(centre);
+    }
+
+    //
     // Auto-generated off-mesh connections (drop / step links across ledges)
     //
 
@@ -1113,6 +1281,7 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
         .data         = navData,
         .dataSize     = navDataSize,
         .offMeshCount = offMesh.count,
+        .covered      = std::move(covered),
     };
 }
 
@@ -1287,12 +1456,21 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
         co_return nullptr;
     }
 
-    WalkComponents components(*navMesh);
+    dtNavMeshQuery query;
+    if (dtStatusFailed(query.init(navMesh, 64)))
+    {
+        ShowErrorFmt("NavMeshBuilder::build: query init failed, links and buried surfaces left as built ({})", zoneID);
+        co_return navMesh;
+    }
+
+    WalkComponents components(*navMesh, query);
+    const auto     buriedPolys = disableBuriedPolys(*navMesh, query, components, results, config);
+    disableLinksIntoDisabledPolys(*navMesh);
     offMeshCons -= disableRedundantOffMeshLinks(*navMesh, components);
 
     const auto endTime    = timer::now();
     const auto durationMs = timer::count_milliseconds(endTime - startTime);
 
-    ShowInfoFmt("Built {} nav tiles ({} off-mesh links) in {}x{} grid for {} ({}) in {}ms", tilesBuilt, offMeshCons, tw, th, zoneName, zoneID, durationMs);
+    ShowInfoFmt("Built {} nav tiles ({} off-mesh links, {} buried polys disabled) in {}x{} grid for {} ({}) in {}ms", tilesBuilt, offMeshCons, buriedPolys, tw, th, zoneName, zoneID, durationMs);
     co_return navMesh;
 }
