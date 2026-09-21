@@ -63,7 +63,7 @@ m:addOverride('xi.actions.weaponskills.sniper_shot.onUseWeaponSkill', function(p
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor(140 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
