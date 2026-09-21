@@ -49,8 +49,6 @@ templates:
         entity_flags:  641
         animation_sub:   8
         hitbox:         11
-      behaviors:
-        links: true
       spawn:
         respawn: 480 # Era dungeon timers
     loot:
