@@ -9,3 +9,7 @@ zonelines:
     to:    ifrits_cauldron
     at:    [-60.296, 48.884, 105.967, 1.834907]
     scale: [1.000, 3.000]
+
+# three staggered copies of the arena, each over a flat plane
+navmesh:
+  skip_planes: [-60.0, 0.0, 60.0]

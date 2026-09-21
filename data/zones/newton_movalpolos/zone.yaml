@@ -57,3 +57,7 @@ zonelines:
     to:    mine_shaft_2716
     at:    [-155.302, 178.261, 500.121]
     scale: [1.000, 4.000]
+
+# flat planes below the walkable floors
+navmesh:
+  skip_planes: [48.0, 52.0, 56.0]

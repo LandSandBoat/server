@@ -29,6 +29,7 @@
 #include "data/enums/zone_misc.h"
 #include "data/enums/zone_type.h"
 
+#include <array>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -85,6 +86,24 @@ struct ZoneMusicData
     uint16 BattleParty{};
 };
 
+struct NavMeshSkipSphereData
+{
+    std::array<float, 3> Center{};
+    float                Radius{};
+};
+
+// What this zone tells the navmesh bake beyond its collision mesh.
+struct ZoneNavMeshData
+{
+    std::vector<float>                 SkipPlanes{}; // world Y of flat planes
+    std::vector<NavMeshSkipSphereData> SkipSpheres{};
+    std::optional<bool>                OffMeshLinks;
+    std::optional<float>               OffMeshMaxDrop;
+    std::optional<float>               OffMeshReach;
+    std::optional<float>               WalkableSlopeAngle;
+    std::optional<float>               AgentMaxClimb;
+};
+
 struct ZoneSettings
 {
     xi::ZoneType               Type{};
@@ -94,6 +113,7 @@ struct ZoneSettings
     uint8                      LevelRestriction{};
     std::vector<ZoneLineData>  ZoneLines{};
     std::vector<TransportData> Transports{};
+    ZoneNavMeshData            NavMesh{};
 };
 
 } // namespace xi::data

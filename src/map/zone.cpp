@@ -21,6 +21,9 @@
 
 #include "packets/s2c/0x057_weather.h"
 
+#include "data/datasets/zones/mobs/dataset.h"
+#include "data/datasets/zones/npcs/dataset.h"
+#include "data/datasets/zones/regions/dataset.h"
 #include "data/datasets/zones/settings/dataset.h"
 #include "data/enums/weather.h"
 #include "data/loader.h"
@@ -33,6 +36,9 @@ namespace
 constexpr std::uint16_t WeatherCycle = 2160;
 
 using ZoneSettingsDataset = xi::data::datasets::zones::settings::Dataset;
+using MobsDataset         = xi::data::datasets::zones::mobs::Dataset;
+using NpcsDataset         = xi::data::datasets::zones::npcs::Dataset;
+using RegionsDataset      = xi::data::datasets::zones::regions::Dataset;
 
 } // namespace
 
@@ -439,6 +445,7 @@ void CZone::LoadZoneSettings(const std::optional<xi::data::ZoneSettings>& settin
             m_tax                   = static_cast<uint16>(settings->Tax * 100); // tax for bazaar
             m_miscMask              = settings->Misc;
             m_zoneType              = settings->Type;
+            navMeshData_            = settings->NavMesh;
         }
 
         if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
@@ -458,62 +465,73 @@ void CZone::LoadZoneSettings(const std::optional<xi::data::ZoneSettings>& settin
     }
 }
 
-namespace
+// The zone's lists join whatever the caller asked for, and the knobs it sets replace the caller's.
+// Seeds come from the data files, since the bake runs before the zone's mobs, NPCs and regions exist.
+// Zone lines are already loaded by then.
+void CZone::applyNavMeshOverrides(NavMeshConfig& config) const
 {
+    const auto& data = navMeshData_;
 
-// TODO: These should be baked into per-zone navmesh configs, and should be assumed to have been
-//     : already applied to the xiNavmeshes submodule repo.
-void applyZoneNavMeshOverrides(const xi::ZoneId zoneId, NavMeshConfig& config)
-{
-    // Ceizak Battlegrounds carries a small island of stray triangles parked around
-    // Z = -9932912, roughly ten million units outside a zone whose grid only covers
-    // +/- 640 x 600. Left in, it stretches the world bounds and with them the tile
-    // grid: 38x310421 tiles, nearly all empty, taking over three minutes to walk.
-    if (zoneId == xi::ZoneId::CeizakBattlegrounds && config.skipSpheres.empty())
+    config.ySkipPlanes.insert(config.ySkipPlanes.end(), data.SkipPlanes.begin(), data.SkipPlanes.end());
+    for (const auto& sphere : data.SkipSpheres)
     {
-        config.skipSpheres = {
-            NavMeshSkipSphere{ .center = { -496.0f, -6.5f, -9932914.5f }, .radius = 100.0f },
-        };
+        config.skipSpheres.push_back({ .center = sphere.Center, .radius = sphere.Radius });
     }
 
-    // An explicitly-supplied list (e.g. from !rebuildnavmesh) wins over the
-    // per-zone defaults below.
-    if (!config.ySkipPlanes.empty())
+    config.generateOffMeshLinks = data.OffMeshLinks.value_or(config.generateOffMeshLinks);
+    config.offMeshMaxDrop       = data.OffMeshMaxDrop.value_or(config.offMeshMaxDrop);
+    config.offMeshHorizReach    = data.OffMeshReach.value_or(config.offMeshHorizReach);
+    config.walkableSlopeAngle   = data.WalkableSlopeAngle.value_or(config.walkableSlopeAngle);
+    config.agentMaxClimb        = data.AgentMaxClimb.value_or(config.agentMaxClimb);
+
+    const auto seed = [&](const position_t& position)
     {
-        return;
+        config.seeds.push_back({ position.x, position.y, position.z });
+    };
+
+    if (const auto mobs = xi::data::loadZoneFile<MobsDataset>(GetID()))
+    {
+        for (const auto& spawn : mobs->Spawns)
+        {
+            if (!spawn.Placed || !spawn.Regions.empty())
+            {
+                continue;
+            }
+
+            // a patrol lives on its route and its position is a placeholder
+            if (spawn.Route.empty())
+            {
+                seed(spawn.Position);
+            }
+
+            for (const auto& waypoint : spawn.Route)
+            {
+                seed(waypoint);
+            }
+        }
     }
 
-    //
-    // For some reason, there are staggered flat planes below the regularly navigable areas.
-    // These were observed by hand, and then given these exceptions.
-    //
-
-    if (zoneId == xi::ZoneId::NewtonMovalpolos)
+    if (const auto npcs = xi::data::loadZoneFile<NpcsDataset>(GetID()))
     {
-        config.ySkipPlanes = { 48.0f, 52.0f, 56.0f };
+        for (const auto& npc : *npcs)
+        {
+            seed(npc.Position);
+        }
     }
 
-    if (zoneId == xi::ZoneId::OldtonMovalpolos)
+    for (const auto* zoneLine : m_zoneLineList)
     {
-        config.ySkipPlanes = { 32.0f, 40.0f, 48.0f, 52.0f, 56.0f, 60.0f };
+        seed(zoneLine->originPos);
     }
 
-    // Similar to above, all the Cloisters have big flat planes below the regular
-    // navigable areas. Cloisters are BCNM zones with 3x staggered copies of the
-    // arena, so the plane repeats at each copy's altitude.
-    const auto isCloister = zoneId == xi::ZoneId::CloisterOfFlames ||
-                            zoneId == xi::ZoneId::CloisterOfFrost ||
-                            zoneId == xi::ZoneId::CloisterOfGales ||
-                            zoneId == xi::ZoneId::CloisterOfStorms ||
-                            zoneId == xi::ZoneId::CloisterOfTides ||
-                            zoneId == xi::ZoneId::CloisterOfTremors;
-    if (isCloister)
+    if (const auto regions = xi::data::loadZoneFile<RegionsDataset>(GetID()))
     {
-        config.ySkipPlanes = { -60.0f, 0.0f, 60.0f };
+        for (const auto& region : *regions)
+        {
+            config.seeds.insert(config.seeds.end(), region.Outer.begin(), region.Outer.end());
+        }
     }
 }
-
-} // namespace
 
 auto CZone::LoadNavMesh() -> Task<void>
 {
@@ -530,7 +548,7 @@ auto CZone::LoadNavMesh() -> Task<void>
 
     auto config = NavMeshConfig{};
 
-    applyZoneNavMeshOverrides(GetID(), config);
+    applyNavMeshOverrides(config);
 
     auto* dtNavMesh = co_await builder.buildAsync(scheduler_, getName(), static_cast<uint16>(GetID()), config);
     if (dtNavMesh && navMesh->installNavMesh(dtNavMesh))
@@ -550,7 +568,7 @@ void CZone::RebuildNavMesh(const NavMeshConfig& configIn)
     const auto* xiMeshPtr = xiMesh_.get();
 
     auto config = configIn;
-    applyZoneNavMeshOverrides(GetID(), config);
+    applyNavMeshOverrides(config);
 
     scheduler_.postToMainThread(
         [this, zoneName, zoneID, config, xiMeshPtr]() -> Task<void>

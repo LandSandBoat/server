@@ -246,6 +246,29 @@ auto convertTransports(const std::optional<wire::TransportSchedule>& schedule) -
     return transports;
 }
 
+auto convertNavMesh(const std::optional<wire::NavMesh>& source) -> ZoneNavMeshData
+{
+    if (!source)
+    {
+        return {};
+    }
+
+    ZoneNavMeshData navMesh{
+        .SkipPlanes         = source->skip_planes.value_or(std::vector<float>{}),
+        .OffMeshLinks       = source->off_mesh_links,
+        .OffMeshMaxDrop     = source->off_mesh_max_drop,
+        .OffMeshReach       = source->off_mesh_reach,
+        .WalkableSlopeAngle = source->walkable_slope_angle,
+        .AgentMaxClimb      = source->agent_max_climb,
+    };
+    for (const auto& sphere : source->skip_spheres.value_or(std::vector<wire::SkipSphere>{}))
+    {
+        navMesh.SkipSpheres.push_back({ .Center = sphere.center, .Radius = sphere.radius });
+    }
+
+    return navMesh;
+}
+
 } // namespace
 
 auto Dataset::decode(const std::string_view text) -> Records
@@ -260,6 +283,7 @@ auto Dataset::decode(const std::string_view text) -> Records
         .LevelRestriction = document.level_restriction.value_or(0),
         .ZoneLines        = convertZoneLines(document.zonelines),
         .Transports       = convertTransports(document.transport),
+        .NavMesh          = convertNavMesh(document.navmesh),
     };
 }
 

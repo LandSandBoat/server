@@ -15,3 +15,7 @@ zonelines:
     to:    den_of_rancor
     at:    [179.837, 13.394, -157.074, 4.712389]
     scale: [1.000, 4.000]
+
+# three staggered copies of the arena, each over a flat plane
+navmesh:
+  skip_planes: [-60.0, 0.0, 60.0]

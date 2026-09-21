@@ -45,3 +45,8 @@ zonelines:
     to:    western_adoulin
     at:    [-142.000, 0.950, -20.000]
     scale: [2.000, 15.000]
+
+# a few stray triangles sit ten million units south of the zone
+navmesh:
+  skip_spheres:
+    - {center: [-496.0, -6.5, -9932914.5], radius: 100.0}
