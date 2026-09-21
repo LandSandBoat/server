@@ -29,7 +29,7 @@ m:addOverride('xi.actions.weaponskills.shield_break.onUseWeaponSkill', function(
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -85,7 +85,7 @@ m:addOverride('xi.actions.weaponskills.armor_break.onUseWeaponSkill', function(p
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -129,7 +129,7 @@ m:addOverride('xi.actions.weaponskills.weapon_break.onUseWeaponSkill', function(
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -181,7 +181,7 @@ m:addOverride('xi.actions.weaponskills.full_break.onUseWeaponSkill', function(pl
 
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-        if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
             local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
 
             xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -228,7 +228,7 @@ m:addOverride('xi.actions.weaponskills.metatron_torment.onUseWeaponSkill', funct
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor(120 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
