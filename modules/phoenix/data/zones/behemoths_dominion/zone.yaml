@@ -1,0 +1,4 @@
+# Mounts not allowed in this zone before the June 7, 2016 version update.
+# Source: https://forum.square-enix.com/ffxi/threads/50760-Jun.-7-2016-(JST)-Version-Update
+
+misc: [fellow, mazurka, tractor, pet, trust]
