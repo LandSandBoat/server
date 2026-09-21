@@ -51,6 +51,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         YOU_BETTER_NOT_LOSE_IT_AGAIN  = 5878,  -- You better not lose it again.
         PROMOTION_SERGEANT_MAJOR      = 6183,  -- <player> has been promoted to Sergeant Major!
         NYZUL_FAIL                    = 6200,  -- Your mission was not successful. I regret to inform you that the Imperial Army does not officially recognize your efforts within this Assault area.
+        PRIVATE_FIRST_CLASS           = 6272,  -- <player> has been promoted to Private First Class!
         SUPERIOR_PRIVATE              = 6324,  -- <player> has been promoted to Superior Private!
         LANCE_CORPORAL                = 6690,  -- <player> has been promoted to Lance Corporal!
         BESIEGED_OFFSET               = 6841,  -- Your Imperial Standing has increased!
