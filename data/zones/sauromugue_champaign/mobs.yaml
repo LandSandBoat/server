@@ -1082,6 +1082,7 @@ templates:
     id:            2966
     species:       tiger
     type:          [notorious]
+    roam:          [scripted]
     skill_list_id: 242
     attributes:
       combat:
