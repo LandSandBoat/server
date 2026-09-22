@@ -582,7 +582,6 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 360
       jobs: [war, rdm]
       render:
         look:
