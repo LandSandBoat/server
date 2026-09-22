@@ -320,9 +320,9 @@ void dboxutils::CancelSendingItem(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO B
                 if (rset && rset->rowsAffected())
                 {
                     const auto rset2 = db::preparedStmt(
-                        "DELETE FROM delivery_box WHERE senderid = ? AND box = 1 AND charid = ? AND itemid = ? AND quantity = ? "
+                        "DELETE FROM delivery_box WHERE senderid = ? AND box = 1 AND charid = ? AND itemid = ? AND quantity = ? AND extra = ? "
                         "AND slot >= 8 LIMIT 1",
-                        PChar->id, charid, PItem->getID(), PItem->getQuantity());
+                        PChar->id, charid, PItem->getID(), PItem->getQuantity(), PItem->m_extra);
 
                     if (rset2 && rset2->rowsAffected())
                     {
