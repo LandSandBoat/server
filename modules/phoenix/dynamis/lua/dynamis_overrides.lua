@@ -102,7 +102,7 @@ local mobNames =
         { 'GuDha_Effigy',         mobType.BOSS  , 3 },
         { 'Adamantking_Effigy',   mobType.STATUE, 1 },
         { 'AaNyu_Dismantler',     mobType.NORMAL, 3 },
-        { 'BeEbo_Tortoisedriver', mobType.NORMAL, 3 },
+        { 'BeEbo_Tortoisedriver', mobType.MASTER, 3 },
         { 'Effigy_Shield',        mobType.NORMAL, 3 },
         { 'GiPha_Manameister',    mobType.NORMAL, 3 },
         { 'GuNhi_Noondozer',      mobType.MASTER, 3 },
@@ -1241,6 +1241,7 @@ local mobOverrideOrder =
 -- Mobs whose base zone script should keep running (upstream code that matches era)
 -- original = run the base script function first (via super), then the era handler
 -- only     = base script only; the era module does not override this mob at all (not sure if this will ever be used bc we need to set the rank stats but added it anyway)
+-- A table limits 'original' to the listed events, so the era handlers still own everything else
 local baseScriptMobs =
 {
     ['Dynamis-Xarcabard'] =
@@ -1249,7 +1250,31 @@ local baseScriptMobs =
         Ying = 'original',
         Yang = 'original',
     },
+    ['Dynamis-Beaucedine'] =
+    {
+        Angra_Mainyu = { onMobInitialize = 'original', onMobSpawn = 'original' }, -- Graviga/Charm teleport listeners, spell interrupt, teleport and 2hr vars
+    },
+    ['Dynamis-Valkurm'] =
+    {
+        Cirrate_Christelle = { onMobSpawn = 'original' }, -- Breath auto attacks, bind/gravity/silence immunity, damage modifier
+        Fairy_Ring         = { onMobSpawn = 'original' }, -- Mephitic Spore auto attack, speed, damage modifier
+        Nantina            = { onMobSpawn = 'original' }, -- Skill auto attack feeding the Blow/Uppercut/Attractant rotation
+        Stcemqestcint      = { onMobSpawn = 'original' }, -- Gouging Branch auto attack
+    },
+    ['Dynamis-Qufim'] =
+    {
+        Antaeus     = { onMobInitialize = 'original', onMobSpawn = 'original' }, -- Trebuchet special skill and EES 2hr threshold
+        Scolopendra = { onMobSpawn = 'original' }, -- Double attack
+    },
 }
+
+local function getBaseScriptMode(baseMode, eventName)
+    if type(baseMode) == 'table' then
+        return baseMode[eventName]
+    end
+
+    return baseMode
+end
 
 local function registerMobOverrides(zoneName, mobName, overrideMobType, modelSize)
     local mobPath  = string.format('xi.zones.%s.mobs.%s', zoneName, mobName)
@@ -1264,8 +1289,9 @@ local function registerMobOverrides(zoneName, mobName, overrideMobType, modelSiz
     end
 
     for _, eventName in ipairs(mobOverrideOrder) do
-        local handler    = handlers[eventName]
-        local hasMobHook = hasSpecialMobHook(zoneName, mobName, eventName)
+        local handler       = handlers[eventName]
+        local hasMobHook    = hasSpecialMobHook(zoneName, mobName, eventName)
+        local eventBaseMode = getBaseScriptMode(baseMode, eventName)
 
         -- onMobSpawn needs modelSize injected via closure
         if eventName == 'onMobSpawn' then
@@ -1314,7 +1340,7 @@ local function registerMobOverrides(zoneName, mobName, overrideMobType, modelSiz
             -- target is the engage/fight target, or the killer player for onMobDeath
             m:addOverride(mobPath .. '.' .. eventName, function(mob, target, optParams)
                 -- run the original code first
-                if baseMode == 'original' then
+                if eventBaseMode == 'original' then
                     super(mob, target, optParams)
                 end
 

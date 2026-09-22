@@ -127,6 +127,68 @@ local function holdSpawnedAdd(mob, durationMs)
     end)
 end
 
+-- This is a workaround for when the statue is casting while being engaged/pulled.
+-- The mob that is casting should spawn its adds immediately, even if its in the middle of a cast
+-- Added setting for how frequently to poll the enmity list during a cast so we can tweak as needed
+local castAggroPollMs   = 500
+local castAggroPollsMax = 60
+
+-- castAggroPolls: 0 = not watching, otherwise the number of polls so far
+local function pollCastAggro(mob)
+    local polls = mob:getLocalVar('castAggroPolls')
+    if
+        polls == 0 or
+        not mob:isSpawned() or
+        mob:isDead()
+    then
+        return
+    end
+
+    if
+        mob:isEngaged() or
+        mob:getLocalVar('engageCheck') == 1 or
+        polls >= castAggroPollsMax
+    then
+        mob:setLocalVar('castAggroPolls', 0)
+        return
+    end
+
+    for _, entry in pairs(mob:getEnmityList()) do
+        if entry.entity then
+            mob:setLocalVar('castAggroPolls', 0)
+            xi.dynamis.onSharedEngage(mob, entry.entity)
+            xi.dynamis.checkEyeColor(mob)
+            return
+        end
+    end
+
+    mob:setLocalVar('castAggroPolls', polls + 1)
+    mob:timer(castAggroPollMs, function(mobArg)
+        pollCastAggro(mobArg)
+    end)
+end
+
+local function addCastAggroListeners(mob)
+    mob:removeListener('DYNAMIS_CAST_AGGRO_START')
+    mob:addListener('MAGIC_START', 'DYNAMIS_CAST_AGGRO_START', function(mobArg)
+        if
+            mobArg:isEngaged() or
+            mobArg:getLocalVar('engageCheck') == 1 or
+            mobArg:getLocalVar('castAggroPolls') > 0
+        then
+            return
+        end
+
+        mobArg:setLocalVar('castAggroPolls', 1)
+        pollCastAggro(mobArg)
+    end)
+
+    mob:removeListener('DYNAMIS_CAST_AGGRO_EXIT')
+    mob:addListener('MAGIC_STATE_EXIT', 'DYNAMIS_CAST_AGGRO_EXIT', function(mobArg)
+        mobArg:setLocalVar('castAggroPolls', 0)
+    end)
+end
+
 -- Need to add a table to track spawn positions
 xi.dynamis.insideSpawnAdds = xi.dynamis.insideSpawnAdds or {}
 
@@ -152,14 +214,8 @@ end
 -- General Info functions
 -- ---------------------
 -- Must be called in onMobInitialize so that setStatRank runs before CalculateMobStats on first spawn.
+-- Stat ranks come from the dynamis_* ecosystems; DEF is the only rank they don't define.
 xi.dynamis.onSharedInitialize = function(mob)
-    mob:setStatRank(xi.stat.STR, xi.statRank.A)
-    mob:setStatRank(xi.stat.DEX, xi.statRank.A)
-    mob:setStatRank(xi.stat.VIT, xi.statRank.A)
-    mob:setStatRank(xi.stat.AGI, xi.statRank.A)
-    mob:setStatRank(xi.stat.INT, xi.statRank.A)
-    mob:setStatRank(xi.stat.MND, xi.statRank.A)
-    mob:setStatRank(xi.stat.CHR, xi.statRank.A)
     mob:setStatRank(xi.stat.DEF, xi.statRank.A)
 
     mob:addMod(xi.mod.STR, 10)
@@ -217,10 +273,13 @@ xi.dynamis.onSharedEngage = function(mob, target)
     local defaultInside   = firstAdd ~= nil and isDefaultInsideAdd(firstAdd)
 
     -- Default inside statues use a short stun; explicit line spawns keep the normal stun.
-    if lineSpawnConfig or not defaultInside then
-        mob:stun(3000) -- Stun for 3 seconds
-    else
-        mob:stun(1000) -- Stun for 1 second
+    -- Stun would interrupt a cast, so a statue pulled mid-cast finishes it instead.
+    if mob:getCurrentAction() ~= xi.action.category.MAGIC_CASTING then
+        if lineSpawnConfig or not defaultInside then
+            mob:stun(3000) -- Stun for 3 seconds
+        else
+            mob:stun(1000) -- Stun for 1 second
+        end
     end
 
     -- Check for mobs on aggro conditions
@@ -257,11 +316,17 @@ xi.dynamis.statueOnSpawn = function(mob, modelSize)
     mob:setMod(xi.mod.UDMGMAGIC, -5000) -- 50% damage from magic
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.SILENCE)
+    addCastAggroListeners(mob)
 
     if mob:getName() == 'Vanguard_Eye' then
         mob:setBaseSpeed(35)
     else
         mob:setBaseSpeed(15)
+    end
+
+    -- The statue behind the palace by Maat never leaves its spot, even while engaged
+    if mob:getID() == xi.jeuno.mobs.GOBLIN_STATUE_64 then
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     end
 
     local mobId  = mob:getID()
@@ -915,6 +980,15 @@ local function calculateSideSpawnPosition(statuePos, distance)
         false
 end
 
+local function calculateRingSpawnPosition(statuePos, spawnedCount, count, radius)
+    local angle = (spawnedCount / count) * 2 * math.pi
+
+    return
+        statuePos.x + math.cos(angle) * radius,
+        statuePos.y,
+        statuePos.z + math.sin(angle) * radius
+end
+
 local function calculateLineSpawnPosition(statuePos, lineSpawnConfig, spawnedCount, defaultInside)
     local spawnIndex = spawnedCount + 1
 
@@ -999,21 +1073,19 @@ xi.dynamis.spawnNextMobsOnce = function(statue, count, target)
 
             local spawnX, spawnY, spawnZ, shouldSetSpawn, spawnOnTop
             if isAnimatedMob then
-                local angle = (spawnedCount / count) * 2 * math.pi
-                local radius = 3
-
-                spawnX         = statuePos.x + math.cos(angle) * radius
-                spawnY         = statuePos.y
-                spawnZ         = statuePos.z + math.sin(angle) * radius
-                shouldSetSpawn = true
-                spawnOnTop     = false
+                spawnX, spawnY, spawnZ = calculateRingSpawnPosition(statuePos, spawnedCount, count, 3)
+                shouldSetSpawn         = true
+                spawnOnTop             = false
             else
                 spawnX, spawnY, spawnZ, shouldSetSpawn, spawnOnTop = calculateLineSpawnPosition(statuePos, lineSpawnConfig, spawnedCount, defaultInside)
             end
 
+            -- Inside adds share the statue's position, so spread their return points or they stack after disengaging
             if spawnOnTop then
-                setSpawnPosition(mobToSpawn, statuePos.x, statuePos.y, statuePos.z, statuePos.rot)
-            elseif shouldSetSpawn then
+                spawnX, spawnY, spawnZ = calculateRingSpawnPosition(statuePos, spawnedCount, count, 1.5)
+            end
+
+            if shouldSetSpawn then
                 setSpawnPosition(mobToSpawn, spawnX, spawnY, spawnZ, statuePos.rot, statuePos)
             end
 
@@ -1026,14 +1098,19 @@ xi.dynamis.spawnNextMobsOnce = function(statue, count, target)
             end
 
             if spawnOnTop then
-                -- Start after 2 seconds, then spawn 2 seconds apart at the statue's position.
+                -- Start after 2 seconds, then spawn 2 seconds apart at wherever the statue is by then.
                 local capturedMob    = mobToSpawn
+                local capturedIndex  = spawnedCount
                 local capturedDelay  = (spawnedCount + 1) * 2000
                 local capturedTarget = target
-                statue:timer(capturedDelay, function(_statueArg)
+                statue:timer(capturedDelay, function(statueArg)
                     if not capturedMob or capturedMob:isSpawned() then
                         return
                     end
+
+                    local currentPos = statueArg:getPos()
+                    local ringX, ringY, ringZ = calculateRingSpawnPosition(currentPos, capturedIndex, count, 1.5)
+                    setSpawnPosition(capturedMob, ringX, ringY, ringZ, currentPos.rot, currentPos)
 
                     spawnWithAnim(capturedMob)
 
