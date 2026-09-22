@@ -19,7 +19,7 @@ describe('Module: exp_penalties', function()
             mod           = xi.mod,
             mobMod        = xi.mobMod,
             mobDifficulty = xi.mobDifficulty,
-            ki            = xi.ki,
+            keyItem       = xi.keyItem,
             data          = { experiencePoints = { baseTable = {} } },
         }
 

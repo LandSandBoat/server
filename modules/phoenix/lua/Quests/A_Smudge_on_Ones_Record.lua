@@ -12,7 +12,7 @@ m:addOverride('xi.server.onServerStart', function()
 
     xi.module.modifyInteractionEntry('scripts/quests/windurst/A_Smudge_on_Ones_Record', function(quest)
         quest.reward = {
-            keyItem = xi.ki.MAP_OF_FEIYIN,
+            keyItem = xi.keyItem.MAP_OF_FEIYIN,
             gil     = 3000,
         }
     end)

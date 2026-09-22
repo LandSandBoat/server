@@ -117,7 +117,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
         -- 2. GM bypass - allow unrestricted entry
         if xi.dynamis.isGM(player) then
             zone:setLocalVar(varZoneCooldown, 0)
-            player:startEvent(entryInfo.csRegisterGlass, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
+            player:startEvent(entryInfo.csRegisterGlass, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.keyItem.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
             return
         end
 
@@ -138,14 +138,14 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
         -- 5. All checks passed - reset zone cooldown and initiate Dynamis registration
         zone:setLocalVar(varZoneCooldown, 0)
 
-        player:startEvent(entryInfo.csRegisterGlass, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
+        player:startEvent(entryInfo.csRegisterGlass, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.keyItem.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
     -- Player trades a Perpetual Hourglass
     else
         xi.dynamis.debugPrint('Perpetual hourglass trade detected')
 
         -- 1. GM bypass - allow direct entry and registration
         if xi.dynamis.isGM(player) then
-            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
+            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.keyItem.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
             return
         end
 
@@ -160,7 +160,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
 
         -- 3. If player is already registered, allow entry immediately
         if glassValid == xi.dynamis.hourglassTradeResult.REGISTERED then
-            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
+            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.keyItem.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
             return
         end
 
@@ -171,7 +171,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
                 return
             end
 
-            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
+            player:startEvent(entryInfo.csDyna, entryInfo.csBit, playerEntered == 1 and 0 or 1, xi.dynamis.settings.RESERVATION_TIMEOUT, xi.dynamis.settings.REENTRY_DAYS, entryInfo.maxCapacity, xi.keyItem.VIAL_OF_SHROUDED_SAND, dynamisTimelessHourglass, dynamisPerpetual)
             return
         end
 
@@ -187,7 +187,7 @@ end
 
 local function tavWinCutscene(player)
     -- Tavnazia Win CS are unique depending on how far you are in the story
-    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         return 3  -- AN (includes ZM and CoP)
     end
 
@@ -221,7 +221,7 @@ xi.dynamis.entryNpcOnTriggerEra = function(player, npc)
     if
         entryInfo.csVial ~= nil and
         status == 1 and
-        not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)
+        not player:hasKeyItem(xi.keyItem.VIAL_OF_SHROUDED_SAND)
     then
         player:startEvent(entryInfo.csVial)
         return
@@ -244,10 +244,11 @@ xi.dynamis.entryNpcOnTriggerEra = function(player, npc)
         player:getCharVar(entryInfo.hasSeenWinCSVar) == 0
     then
         -- Tavnazia has zone-dependent win cutscenes based on mission progress
-        if zoneId == xi.zone.DYNAMIS_TAVNAZIA then
+        if zoneId == xi.zone.TAVNAZIAN_SAFEHOLD then
             player:startEvent(entryInfo.csWin, 0, tavWinCutscene(player))
         else
-            player:startEvent(entryInfo.csWin)
+            -- NOTE: The hourglass and shrouded sand parameter is only required for Beaucedine, but has no effect on the others.
+            player:startEvent(entryInfo.csWin, entryInfo.winKI, 0, xi.keyItem.PRISMATIC_HOURGLASS, xi.keyItem.VIAL_OF_SHROUDED_SAND)
         end
 
         return
@@ -366,7 +367,7 @@ xi.dynamis.entryNpcOnEventFinishEra = function(player, csid, option)
 
     -- Give player Vial of Shrouded Sand when sand distribution CS completes
     if entryInfo.csVial and csid == entryInfo.csVial then
-        npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
+        npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_SHROUDED_SAND)
         return
     end
 
@@ -415,8 +416,8 @@ xi.dynamis.entryNpcOnEventFinishEra = function(player, csid, option)
         player:setCharVar(entryInfo.hasSeenWinCSVar, 1)
 
         -- Tavnazia awards a unique title
-        if zoneId == xi.zone.DYNAMIS_TAVNAZIA then
-            player:addTitle(xi.dynamis.dynaInfoEra[zoneId].csTitle)
+        if zoneId == xi.zone.TAVNAZIAN_SAFEHOLD then
+            player:addTitle(xi.dynamis.dynaInfoEra[entryInfo.dynaZone].csTitle)
         end
 
         return

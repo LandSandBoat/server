@@ -290,7 +290,7 @@ xi.chocoboDig.zoneTable =
 {
     [xi.zone.BATALLIA_DOWNS] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.FLINT_STONE,              xi.craftRank.AMATEUR,     910,  910,  910,  910,  910,  910,  910,  910,  910,  910,  910 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     810,  810,  810,  810,  810,  810,  810,  810,  810,  810,  810 },
         { xi.item.CHUNK_OF_COPPER_ORE,      xi.craftRank.INITIATE,    370,  450,  530,  530,  530,  530,  530,  530,  530,  530,  530 },
@@ -304,7 +304,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        { xi.item.CHUNK_OF_TIN_ORE,         xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.CHUNK_OF_TIN_ORE,         xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,     765,  765,  765,  765,  765,  765,  765,  765,  765,  765,  765 },
         { xi.item.LUGWORM,                  xi.craftRank.INITIATE,    420,  510,  600,  600,  600,  600,  600,  600,  600,  600,  600 },
         { xi.item.GIANT_FEMUR,              xi.craftRank.INITIATE,    310,  385,  450,  450,  450,  450,  450,  450,  450,  450,  450 },
@@ -317,7 +317,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.EAST_RONFAURE] =
     {
-        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     875,  875,  875,  875,  875,  875,  875,  875,  875,  875,  875 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     780,  780,  780,  780,  780,  780,  780,  780,  780,  780,  780 },
         { xi.item.CHOCOBO_FEATHER,          xi.craftRank.RECRUIT,     455,  535,  535,  535,  535,  535,  535,  535,  535,  535,  535 },
@@ -331,7 +331,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.EAST_SARUTABARUTA] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LAUAN_LOG,                xi.craftRank.AMATEUR,     930,  930,  930,  930,  930,  930,  930,  930,  930,  930,  930 },
         { xi.item.PAPAKA_GRASS,             xi.craftRank.AMATEUR,     825,  825,  825,  825,  825,  825,  825,  825,  825,  825,  825 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     630,  630,  630,  630,  630,  630,  630,  630,  630,  630,  630 },
@@ -345,7 +345,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.JUGNER_FOREST] =
     {
-        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     745,  745,  745,  745,  745,  745,  745,  745,  745,  745,  745 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     730,  730,  730,  730,  730,  730,  730,  730,  730,  730,  730 },
         { xi.item.MAPLE_LOG,                xi.craftRank.INITIATE,    505,  615,  725,  725,  725,  725,  725,  725,  725,  725,  725 },
@@ -358,7 +358,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.KONSCHTAT_HIGHLANDS] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     820,  820,  820,  820,  820,  820,  820,  820,  820,  820,  820 },
         { xi.item.FLINT_STONE,              xi.craftRank.AMATEUR,     550,  550,  550,  550,  550,  550,  550,  550,  550,  550,  550 },
         { xi.item.HANDFUL_OF_FISH_SCALES,   xi.craftRank.AMATEUR,     520,  520,  520,  520,  520,  520,  520,  520,  520,  520,  520 },
@@ -372,7 +372,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.LA_THEINE_PLATEAU] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     905,  905,  905,  905,  905,  905,  905,  905,  905,  905,  905 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800 },
         { xi.item.CHUNK_OF_TIN_ORE,         xi.craftRank.AMATEUR,     700,  700,  700,  700,  700,  700,  700,  700,  700,  700,  700 },
@@ -386,7 +386,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.FLINT_STONE,              xi.craftRank.AMATEUR,     810,  810,  810,  810,  810,  810,  810,  810,  810,  810,  810 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     635,  635,  635,  635,  635,  635,  635,  635,  635,  635,  635 },
         { xi.item.LIZARD_MOLT,              xi.craftRank.AMATEUR,     615,  615,  615,  615,  615,  615,  615,  615,  615,  615,  615 },
@@ -400,7 +400,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.NORTH_GUSTABERG] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     785,  785,  785,  785,  785,  785,  785,  785,  785,  785,  785 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     775,  775,  775,  775,  775,  775,  775,  775,  775,  775,  775 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     625,  625,  625,  625,  625,  625,  625,  625,  625,  625,  625 },
@@ -414,7 +414,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,     700,  700,  700,  700,  700,  700,  700,  700,  700,  700,  700 },
         { xi.item.LIZARD_MOLT,              xi.craftRank.AMATEUR,     615,  615,  615,  615,  615,  615,  615,  615,  615,  615,  615 },
         { xi.item.WILLOW_LOG,               xi.craftRank.INITIATE,    210,  255,  300,  300,  300,  300,  300,  300,  300,  300,  300 },
@@ -427,7 +427,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.ROLANBERRY_FIELDS] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.FLINT_STONE,              xi.craftRank.AMATEUR,     890,  890,  890,  890,  890,  890,  890,  890,  890,  890,  890 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     820,  820,  820,  820,  820,  820,  820,  820,  820,  820,  820 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     630,  630,  630,  630,  630,  630,  630,  630,  630,  630,  630 },
@@ -441,7 +441,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.SAUROMUGUE_CHAMPAIGN] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     685,  685,  685,  685,  685,  685,  685,  685,  685,  685,  685 },
         { xi.item.FLINT_STONE,              xi.craftRank.AMATEUR,     665,  665,  665,  665,  665,  665,  665,  665,  665,  665,  665 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     610,  610,  610,  610,  610,  610,  610,  610,  610,  610,  610 },
@@ -454,7 +454,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.SOUTH_GUSTABERG] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     910,  910,  910,  910,  910,  910,  910,  910,  910,  910,  910 },
         { xi.item.LIZARD_MOLT,              xi.craftRank.AMATEUR,     735,  735,  735,  735,  735,  735,  735,  735,  735,  735,  735 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     635,  635,  635,  635,  635,  635,  635,  635,  635,  635,  635 },
@@ -467,7 +467,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.TAHRONGI_CANYON] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     875,  875,  875,  875,  875,  875,  875,  875,  875,  875,  875 },
         { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,     800,  800,  800,  800,  800,  800,  800,  800,  800,  800,  800 },
         { xi.item.CHUNK_OF_TIN_ORE,         xi.craftRank.AMATEUR,     550,  550,  550,  550,  550,  550,  550,  550,  550,  550,  550 },
@@ -480,7 +480,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.VALKURM_DUNES] =
     {
-        { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     755,  755,  755,  755,  755,  755,  755,  755,  755,  755,  755 },
         { xi.item.HANDFUL_OF_FISH_SCALES,   xi.craftRank.AMATEUR,     470,  470,  470,  470,  470,  470,  470,  470,  470,  470,  470 },
         { xi.item.LIZARD_MOLT,              xi.craftRank.AMATEUR,     435,  435,  435,  435,  435,  435,  435,  435,  435,  435,  435 },
@@ -493,7 +493,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.WEST_RONFAURE] =
     {
-        { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     900,  900,  900,  900,  900,  900,  900,  900,  900,  900,  900 },
         { xi.item.CLUMP_OF_MOKO_GRASS,      xi.craftRank.AMATEUR,     450,  450,  450,  450,  450,  450,  450,  450,  450,  450,  450 },
@@ -508,7 +508,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.WEST_SARUTABARUTA] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     830,  830,  830,  830,  830,  830,  830,  830,  830,  830,  830 },
         { xi.item.LAUAN_LOG,                xi.craftRank.AMATEUR,     740,  740,  740,  740,  740,  740,  740,  740,  740,  740,  740 },
         { xi.item.INSECT_WING,              xi.craftRank.AMATEUR,     565,  565,  565,  565,  565,  565,  565,  565,  565,  565,  565 },
@@ -521,7 +521,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
-        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,     740,  690,  640,  590,  540,  490,  490,  490,  490,  490,  490 },
         { xi.item.GIANT_FEMUR,              xi.craftRank.RECRUIT,     425,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500 },
         { xi.item.CHUNK_OF_ZINC_ORE,        xi.craftRank.NOVICE,      180,  230,  280,  330,  330,  330,  330,  330,  330,  330,  330 },
@@ -534,7 +534,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,     750,  750,  750,  750,  750,  750,  750,  750,  750,  750,  750 },
         { xi.item.CLUMP_OF_MOKO_GRASS,      xi.craftRank.AMATEUR,     715,  715,  715,  715,  715,  715,  715,  715,  715,  715,  715 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     570,  570,  570,  570,  570,  570,  570,  570,  570,  570,  570 },
@@ -546,7 +546,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.WESTERN_ALTEPA_DESERT] =
     {
-        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,     650,  650,  650,  650,  650,  650,  650,  650,  650,  650,  650 },
         { xi.item.GIANT_FEMUR,              xi.craftRank.RECRUIT,     445,  525,  525,  525,  525,  525,  525,  525,  525,  525,  525 },
         { xi.item.CHUNK_OF_ZINC_ORE,        xi.craftRank.NOVICE,      215,  275,  330,  390,  390,  390,  390,  390,  390,  390,  390 },
@@ -559,7 +559,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LAUAN_LOG,                xi.craftRank.AMATEUR,     545,  545,  545,  545,  545,  545,  545,  545,  545,  545,  545 },
         { xi.item.KAZHAM_PINEAPPLE,         xi.craftRank.AMATEUR,     540,  540,  540,  540,  540,  540,  540,  540,  540,  540,  540 },
         { xi.item.DRYAD_ROOT,               xi.craftRank.AMATEUR,     365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365 },
@@ -572,7 +572,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.BONE_CHIP,                xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PIECE_OF_RATTAN_LUMBER,   xi.craftRank.AMATEUR,     750,  750,  750,  750,  750,  750,  750,  750,  750,  750,  750 },
         { xi.item.STICK_OF_CINNAMON,        xi.craftRank.AMATEUR,     560,  560,  560,  560,  560,  560,  560,  560,  560,  560,  560 },
         { xi.item.DANCESHROOM,              xi.craftRank.INITIATE,    275,  335,  395,  395,  395,  395,  395,  395,  395,  395,  395 },
@@ -585,7 +585,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.BIBIKI_BAY] =
     {
-        { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.SEASHELL,                 xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.CHUNK_OF_TIN_ORE,         xi.craftRank.AMATEUR,     875,  875,  875,  875,  875,  875,  875,  875,  875,  875,  875 },
         { xi.item.LUGWORM,                  xi.craftRank.INITIATE,    560,  675,  795,  795,  795,  795,  795,  795,  795,  795,  795 },
         { xi.item.GIANT_FEMUR,              xi.craftRank.INITIATE,    280,  345,  400,  400,  400,  400,  400,  400,  400,  400,  400 },
@@ -597,7 +597,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.CARPENTERS_LANDING] =
     {
-        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.ACORN,                    xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.LITTLE_WORM,              xi.craftRank.AMATEUR,     835,  835,  835,  835,  835,  835,  835,  835,  835,  835,  835 },
         { xi.item.ARROWWOOD_LOG,            xi.craftRank.AMATEUR,     610,  610,  610,  610,  610,  610,  610,  610,  610,  610,  610 },
         { xi.item.MAPLE_LOG,                xi.craftRank.INITIATE,    530,  645,  760,  760,  760,  760,  760,  760,  760,  760,  760 },
@@ -611,7 +611,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.BHAFLAU_THICKETS] =
     {
-        { xi.item.PINCH_OF_DRIED_MARJORAM,  xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.PINCH_OF_DRIED_MARJORAM,  xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,     650,  650,  650,  650,  650,  650,  650,  650,  650,  650,  650 },
         { xi.item.HANDFUL_OF_PINE_NUTS,     xi.craftRank.RECRUIT,     470,  550,  550,  550,  550,  550,  550,  550,  550,  550,  550 },
         { xi.item.COLIBRI_FEATHER,          xi.craftRank.JOURNEYMAN,   80,  150,  215,  280,  345,  430,  430,  430,  430,  430,  430 },
@@ -624,7 +624,7 @@ xi.chocoboDig.zoneTable =
 
     [xi.zone.WAJAOM_WOODLANDS] =
     {
-        { xi.item.CLUMP_OF_MOKO_GRASS,      xi.craftRank.AMATEUR,    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 },
+        { xi.item.CLUMP_OF_MOKO_GRASS,      xi.craftRank.AMATEUR,    1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250, 1250 },
         { xi.item.PEBBLE,                   xi.craftRank.AMATEUR,     900,  900,  900,  900,  900,  900,  900,  900,  900,  900,  900 },
         { xi.item.HANDFUL_OF_PINE_NUTS,     xi.craftRank.RECRUIT,     480,  600,  600,  600,  600,  600,  600,  600,  600,  600,  600 },
         { xi.item.BLACK_CHOCOBO_FEATHER,    xi.craftRank.RECRUIT,     315,  315,  315,  315,  315,  315,  315,  315,  315,  315,  315 },

@@ -64,7 +64,7 @@ m:addOverride('xi.conquest.overseerOnEventUpdate', function(player, csid, option
     if
         option >= 32933 and
         option <= 32935 and
-        player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+        player:hasKeyItem(xi.keyItem.CONQUEST_PROMOTION_VOUCHER)
     then
         u2 = 0
     end

@@ -90,7 +90,7 @@ end)
 -- that was already in place on their files.
 -----------------------------------
 m:addOverride('xi.zones.Lower_Jeuno.npcs.Akamafula.onTrigger', function(player, npc)
-    if not player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
+    if not player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) then
         return -- Anti-Cheat.
     end
 
@@ -100,7 +100,7 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Akamafula.onTrigger', function(player, 
 end)
 
 m:addOverride('xi.zones.Lower_Jeuno.npcs.Amalasanda.onTrigger', function(player, npc)
-    if not player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
+    if not player:hasKeyItem(xi.keyItem.TENSHODO_MEMBERS_CARD) then
         return -- Anti-Cheat.
     end
 

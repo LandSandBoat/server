@@ -35,7 +35,9 @@ local function awardExperience(player, text, itemRank)
         player:setSkillRank(xi.skill.DIG, newLevel / 10)
     end
 
-    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, newLevel, 1)
+    player:timer(3000, function(playerArg)
+        playerArg:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, newLevel, 1)
+    end)
 end
 
 -- Handle item roll
@@ -78,42 +80,24 @@ local function handleItemRoll(player, zoneId, rank, currentHour, currentWeather,
         table.insert(entries, { itemId = ore, rank = xi.craftRank.EXPERT, weight = xi.chocoboDig.elementalOreWeight[rank] })
     end
 
-    -- Add a chance to dig up a cache.
-    table.insert(entries, { itemId = 0, weight = 250 })
-
     local loot = utils.selectFromLootGroups(player, { entries })
 
-    -- An empty result means the cache entry was rolled.
-    return loot[1] or { itemId = 0 }
+    return loot[1]
 end
 
 -- Make sure we have enough room for the item.
 local function handleItemObtained(player, text, itemId, itemRank)
     if player:addItem(itemId) then
-        player:messageSpecial(text.ITEM_OBTAINED, itemId)
+        player:timer(3000, function(playerArg)
+            playerArg:messageSpecial(text.ITEM_OBTAINED, itemId)
+        end)
     else
-        player:messageSpecial(text.DIG_THROW_AWAY, itemId)
+        player:timer(3000, function(playerArg)
+            playerArg:messageSpecial(text.DIG_THROW_AWAY, itemId)
+        end)
     end
 
     awardExperience(player, text, itemRank)
-end
-
--- If the player digs up a cache, award Imperial Standing or Conquest Points based on the zone.
--- Retail caches award 100-700 points in 5 point increments. Reduced by 80% to 20-140.
-local function handleCache(player, text, zoneId)
-    local pointsAwarded = math.random(4, 28) * 5
-
-    if
-        zoneId == xi.zone.WAJAOM_WOODLANDS or
-        zoneId == xi.zone.BHAFLAU_THICKETS
-    then
-        player:addCurrency('imperial_standing', pointsAwarded)
-    else
-        player:addCP(pointsAwarded)
-    end
-
-    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET, pointsAwarded)
-    awardExperience(player, text, xi.craftRank.AMATEUR)
 end
 
 -- Return false exits the digging function without playing the dig animation, return true exits the digging function after playing the dig animation.
@@ -153,7 +137,10 @@ m:addOverride('xi.chocoboDig.start', function(player)
         xi.settings.main.DIG_FATIGUE > 0 and
         itemsDug >= xi.settings.main.DIG_FATIGUE
     then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
+
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
@@ -167,7 +154,10 @@ m:addOverride('xi.chocoboDig.start', function(player)
         player:getLocalVar('[DIG]LastDigTime') > 0 and
         player:checkDistance(lastX, lastY, lastZ) < 4
     then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
+
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
@@ -183,7 +173,9 @@ m:addOverride('xi.chocoboDig.start', function(player)
 
     -- Accuracy check
     if math.randomInt(1, 100) > xi.chocoboDig.accuracy[skillRank] then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
 
         return true
     end
@@ -195,15 +187,10 @@ m:addOverride('xi.chocoboDig.start', function(player)
     local isWaxingCrescent   = currentMoonPhase == xi.moonCycle.LESSER_WAXING_CRESCENT or currentMoonPhase == xi.moonCycle.GREATER_WAXING_CRESCENT
     local elementalOreActive = xi.chocoboDig.elementalOreZones[zoneId] and isActiveWeather and isWaxingCrescent
 
-    -- Check for regular items. Crystals, Clusters, Elemental Ores & Beastmen Caches are all inserted into this layer.
+    -- Check for regular items. Crystals, Clusters & Elemental Ores are all inserted into this layer.
     local result = handleItemRoll(player, zoneId, skillRank, currentHour, currentWeather, elementalOreActive)
 
-    -- If no item was obtained from the regular item roll, award a cache. Otherwise, award the obtained item.
-    if result.itemId == 0 then
-        handleCache(player, text, zoneId)
-    else
-        handleItemObtained(player, text, result.itemId, result.rank)
-    end
+    handleItemObtained(player, text, result.itemId, result.rank)
 
     xi.chocoboDig.updateFatigue(player, itemsDug + 1)
 
