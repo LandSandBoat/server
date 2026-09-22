@@ -35,7 +35,9 @@ local function awardExperience(player, text, itemRank)
         player:setSkillRank(xi.skill.DIG, newLevel / 10)
     end
 
-    player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, newLevel, 1)
+    player:timer(3000, function(playerArg)
+        playerArg:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 5, newLevel, 1)
+    end)
 end
 
 -- Handle item roll
@@ -86,9 +88,13 @@ end
 -- Make sure we have enough room for the item.
 local function handleItemObtained(player, text, itemId, itemRank)
     if player:addItem(itemId) then
-        player:messageSpecial(text.ITEM_OBTAINED, itemId)
+        player:timer(3000, function(playerArg)
+            playerArg:messageSpecial(text.ITEM_OBTAINED, itemId)
+        end)
     else
-        player:messageSpecial(text.DIG_THROW_AWAY, itemId)
+        player:timer(3000, function(playerArg)
+            playerArg:messageSpecial(text.DIG_THROW_AWAY, itemId)
+        end)
     end
 
     awardExperience(player, text, itemRank)
@@ -131,7 +137,10 @@ m:addOverride('xi.chocoboDig.start', function(player)
         xi.settings.main.DIG_FATIGUE > 0 and
         itemsDug >= xi.settings.main.DIG_FATIGUE
     then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
+
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
@@ -145,7 +154,10 @@ m:addOverride('xi.chocoboDig.start', function(player)
         player:getLocalVar('[DIG]LastDigTime') > 0 and
         player:checkDistance(lastX, lastY, lastZ) < 4
     then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
+
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
         return true
@@ -161,7 +173,9 @@ m:addOverride('xi.chocoboDig.start', function(player)
 
     -- Accuracy check
     if math.randomInt(1, 100) > xi.chocoboDig.accuracy[skillRank] then
-        player:messageText(player, text.FIND_NOTHING)
+        player:timer(3000, function(playerArg)
+            playerArg:messageText(playerArg, text.FIND_NOTHING)
+        end)
 
         return true
     end
