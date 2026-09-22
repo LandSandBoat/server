@@ -1,0 +1,12 @@
+# Remove Warhorse Hoofprints from widescan.
+
+npcs:
+
+  16990601:
+    widescan: false
+
+  16990602:
+    widescan: false
+
+  16990603:
+    widescan: false
