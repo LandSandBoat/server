@@ -25,6 +25,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         FIND_NOTHING                  = 7084, -- You dig and you dig, but find nothing.
         FOUND_ITEM_WITH_EASE          = 7159, -- It appears your chocobo found this item with ease.
         BEASTMEN_CACHE_OFFSET         = 7164, -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
+        YOU_SEE_SOMETHING_SHINY       = 7348, -- You see something shiny on the ground...
         PLACE_HYDROGAUGE              = 7363, -- You set the <item> in the glowing trench.
         ENIGMATIC_LIGHT               = 7364, -- The <item> is giving off an enigmatic light.
         LEYPOINT                      = 7419, -- An eerie red glow emanates from this stone platform. The surrounding air feels alive with energy...
