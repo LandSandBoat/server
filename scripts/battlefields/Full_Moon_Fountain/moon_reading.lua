@@ -59,6 +59,7 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
     player:setPos(unpack(playerCoords[battlefieldArea]))
     ajido:setSpawn(unpack(ajidoCoords[battlefieldArea]))
     ajido:spawn()
+    ajido:setMobLevel(75)
 end
 
 content.groups =
