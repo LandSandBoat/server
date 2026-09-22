@@ -1,19 +1,21 @@
 -----------------------------------
--- ID: 18359
--- Item: Boreas Cesti
--- Additional effect: Wind damage
+-- ID: 18503
+-- Item: Mammut
+-- Additional effect: ice damage
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
+-- Made up stats, taken from old sql.
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     local pTable =
     {
-        chance          = 100,
-        basePower       = math.random(5, 7),
-        attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.WIND,
-        canResist       = true,
+        chance         = 10,
+        basePower      = 15,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.ICE,
+        canMAB         = false,
+        canResist      = true,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)

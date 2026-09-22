@@ -1,7 +1,7 @@
 -----------------------------------
--- ID: 18359
--- Item: Boreas Cesti
--- Additional effect: Wind damage
+-- ID: 17559
+-- Item: Dark Staff
+-- Additional effect: darkness damage
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -9,11 +9,12 @@ local itemObject = {}
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     local pTable =
     {
-        chance          = 100,
-        basePower       = math.random(5, 7),
-        attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.WIND,
-        canResist       = true,
+        chance         = 15, -- guessed
+        basePower      = math.randomInt(12, 16),
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.DARK,
+        canMAB         = false,
+        canResist      = true,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
