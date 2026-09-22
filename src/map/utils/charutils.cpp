@@ -3125,13 +3125,19 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
 
     if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
     {
+        bool isRangedInstrument = false;
+
         // Instruments and Handbells swapping keeps TP.
         // The outgoing instruments should have saved the TP in UnequipItem before getting here.
-        const bool isRangedInstrument =
-            PItem && PItem->isType(ITEM_EQUIPMENT) &&
-            (static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::StringInstrument ||
-             static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::WindInstrument ||
-             static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::Handbell);
+        if (auto* PRangedInstrument = dynamic_cast<CItemWeapon*>(PChar->getEquip(static_cast<SLOTTYPE>(equipSlotID))); PRangedInstrument)
+        {
+            if (PRangedInstrument->getSkillType() == xi::SkillType::StringInstrument ||
+                PRangedInstrument->getSkillType() == xi::SkillType::WindInstrument ||
+                PRangedInstrument->getSkillType() == xi::SkillType::Handbell)
+            {
+                isRangedInstrument = true;
+            }
+        }
 
         if (equipSucceeded && !isRangedInstrument)
         {
