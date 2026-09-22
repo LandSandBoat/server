@@ -1,6 +1,8 @@
 -----------------------------------
 -- Thunderspark
 -- Family: Ramuh (Player Pet)
+-- Note: Ability range was increased in Sept. 6, 2016 update:
+-- https://wiki.ffo.jp/html/35741.html
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}

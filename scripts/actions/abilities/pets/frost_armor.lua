@@ -1,5 +1,6 @@
 -----------------------------------
 -- Frost Armor
+-- Family: Avatar (Shiva)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,15 +10,17 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local typeEffect = xi.effect.ICE_SPIKES
-    target:delStatusEffect(typeEffect)
+    -- TODO: JPWiki says this will overwrite Reprisal. Possibly other spike effects.
+    target:delStatusEffect(xi.effect.ICE_SPIKES)
 
-    if target:addStatusEffect(typeEffect, { power = 15, duration = duration, origin = pet }) then
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
+
+    -- TODO: Does power ever scale?
+    if target:addStatusEffect(xi.effect.ICE_SPIKES, { power = 15, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else
@@ -28,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return
     end
 
-    return typeEffect
+    return xi.effect.ICE_SPIKES
 end
 
 return abilityObject

@@ -1,5 +1,6 @@
 -----------------------------------
 -- Lunar Cry
+-- Family: Avatar (Fenrir)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -31,16 +32,31 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     local buffValue = cycleBuffs[moonCycle]
 
-    target:delStatusEffect(xi.effect.ACCURACY_DOWN)
-    target:delStatusEffect(xi.effect.EVASION_DOWN)
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, { power = buffValue, duration = 180, origin = pet })
-    target:addStatusEffect(xi.effect.EVASION_DOWN, { power = 32-buffValue, duration = 180, origin = pet })
+    -- TODO: Fenrir's Lunar Cry does not overwrite itself. Unknown interactions with other Accuracy Down/Evasion Down effects.
 
-    if target:getID() == action:getPrimaryTargetID() then
-        petskill:setMsg(xi.msg.basic.ACC_EVA_DOWN)
-    end
+    local messageParams =
+    {
+        messageBypass          = false,
+        messageCantGain        = xi.msg.basic.JA_NO_EFFECT,
+        messageIsImmune        = xi.msg.basic.JA_MISS,
+        messageIsTraitResisted = xi.msg.basic.JA_MISS,
+        messageIsIncompatible  = xi.msg.basic.JA_MISS,
+        messageIsResisted      = xi.msg.basic.JA_MISS,
+        messageIsNotSuccessful = xi.msg.basic.JA_MISS,
+        messageIsSuccessful    = xi.msg.basic.ACC_EVA_DOWN,
+    }
 
-    return 0
+    local baseDuration = 180 -- TODO: Capture retail baseDuration
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
+
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.ACCURACY_DOWN, power = buffValue, origin = pet, duration = duration, tier = 1, magicalElement = xi.element.DARK },
+        [2] = { effectId = xi.effect.EVASION_DOWN, power = 32 - buffValue, origin = pet, duration = duration, tier = 1, magicalElement = xi.element.DARK },
+    }
+
+    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = false })
 end
 
 return abilityObject

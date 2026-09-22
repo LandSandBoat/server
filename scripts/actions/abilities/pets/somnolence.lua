@@ -1,6 +1,6 @@
 -----------------------------------
 -- Somnolence
--- Family: Diabolos
+-- Family: Avatar (Diabolos)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -28,7 +28,15 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if xi.mobskills.processDamage(pet, target, petskill, action, info) then
         target:takeDamage(info.damage, pet, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(pet, target, xi.effect.WEIGHT, 50, 0, 120)
+        local duration = 120 -- TODO: Capture retail baseDuration.
+
+        local effectTable =
+        {
+            -- TODO: Is effect element Wind or Dark?
+            [1] = { effectId = xi.effect.WEIGHT, power = 50, duration = duration, magicalElement = xi.element.WIND },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = true })
     end
 
     return info.damage

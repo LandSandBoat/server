@@ -1,5 +1,6 @@
 -----------------------------------
 -- Glittering Ruby
+-- Family: Avatar (Carbuncle)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,7 +10,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    --randomly give str/dex/vit/agi/int/mnd/chr (+12)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+
+    -- Randomly gives STR/DEX/VIT/AGI/INT/MND/CHR
+    -- Can overwrite an existing Glittering Ruby stat bonus
     local effects =
     {
         xi.effect.STR_BOOST,
@@ -21,17 +25,28 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         xi.effect.CHR_BOOST,
     }
 
-    local effectId    = utils.randomEntry(effects)
-    local effectPower = 3 + math.floor(pet:getMainLvl() / 5)
+    local effectId     = utils.randomEntry(effects)
+    local effectPower  = 3 + math.floor(pet:getMainLvl() / 5)
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    -- TODO: Ecliptic Growl does not overwrite this.
+    -- This does not overwrite Ecliptic Growl.
+    -- This can overwrite itself.
+    -- Unknown how it interacts with STAT_DOWN effects.
+    -- Unknown how it interacts with GAIN/BOOST spells.
 
-    target:addStatusEffect(effectId, { power = effectPower, duration = 90, origin = pet })
-
-    if target:getID() == action:getPrimaryTargetID() then
-        petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+    if target:addStatusEffect(effectId, { power = effectPower, duration = duration, origin = pet }) then
+        if target:getID() == action:getPrimaryTargetID() then
+            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+        else
+            petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+        end
     else
-        petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+
+        return
     end
 
     return effectId

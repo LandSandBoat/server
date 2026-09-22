@@ -1,5 +1,7 @@
 -----------------------------------
 -- Perfect Defense
+-- Family: Avatar (Alexander)
+-- Notes: Astral Flow
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -12,6 +14,8 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     if master == nil then
         return 0
     end
+
+    -- TODO: Audit this whole skill
 
     local power    = master:getLocalVar('perfectDefPower')
 

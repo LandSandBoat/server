@@ -1,5 +1,6 @@
 -----------------------------------
 -- Ecliptic Growl
+-- Family: Avatar (Fenrir)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,10 +10,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
 
     local moonCycle = getVanadielMoonCycle()
 
@@ -34,12 +36,11 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     local buffValue = cycleBuffs[moonCycle]
 
-    target:delStatusEffect(xi.effect.STR_BOOST)
-    target:delStatusEffect(xi.effect.DEX_BOOST)
-    target:delStatusEffect(xi.effect.VIT_BOOST)
-    target:delStatusEffect(xi.effect.AGI_BOOST)
-    target:delStatusEffect(xi.effect.MND_BOOST)
-    target:delStatusEffect(xi.effect.CHR_BOOST)
+    -- TODO: Glittering Ruby does not overwrite this.
+    -- This does not overwrite Glittering Ruby.
+    -- This can overwrite itself.
+    -- Unknown how it interacts with STAT_DOWN effects.
+    -- Unknown how it interacts with GAIN/BOOST spells.
 
     target:addStatusEffect(xi.effect.STR_BOOST, { power = buffValue, duration = duration, origin = pet })
     target:addStatusEffect(xi.effect.DEX_BOOST, { power = buffValue, duration = duration, origin = pet })

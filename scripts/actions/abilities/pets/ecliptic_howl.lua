@@ -1,5 +1,6 @@
 -----------------------------------
 -- Ecliptic Howl
+-- Family: Avatar (Fenrir)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,12 +10,12 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local moonCycle = getVanadielMoonCycle()
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
+    local moonCycle    = getVanadielMoonCycle()
 
     local cycleBuffs =
     {
@@ -37,7 +38,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     target:delStatusEffect(xi.effect.ACCURACY_BOOST)
     target:delStatusEffect(xi.effect.EVASION_BOOST)
     target:addStatusEffect(xi.effect.ACCURACY_BOOST, { power = buffValue, duration = duration, origin = pet })
-    target:addStatusEffect(xi.effect.EVASION_BOOST, { power = 25-buffValue, duration = duration, origin = pet })
+    target:addStatusEffect(xi.effect.EVASION_BOOST, { power = 25 - buffValue, duration = duration, origin = pet })
 
     if target:getID() == action:getPrimaryTargetID() then
         petskill:setMsg(xi.msg.basic.ACC_EVA_BOOST)

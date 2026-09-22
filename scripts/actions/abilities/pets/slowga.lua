@@ -1,5 +1,7 @@
 -----------------------------------
 -- Slowga
+-- Family: Avatar (Leviathan)
+-- Note: Ability range was increased in Sept. 6, 2016 update.
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,23 +11,30 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local duration = 180 + summoner:getMod(xi.mod.SUMMONING)
-    if duration > 350 then
-        duration = 350
-    end
-
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    if target:addStatusEffect(xi.effect.SLOW, { power = 3000, duration = duration, origin = pet, tier = 3 }) then
-        petskill:setMsg(xi.msg.basic.JA_RECEIVES_EFFECT_2)
-    else
-        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
-    end
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
 
-    -- TODO: Verify enmity gain total
-    target:addEnmity(pet, 1, 60)
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.SLOW, power = 3000, origin = pet, duration = duration, tier = 3, magicalElement = xi.element.EARTH, bonusMacc = xi.summon.getSummoningSkillOverCap(pet) },
+    }
 
-    return xi.effect.SLOW
+    local messageParams =
+    {
+        messageBypass          = false,
+        messageCantGain        = xi.msg.basic.JA_NO_EFFECT,
+        messageIsImmune        = xi.msg.basic.JA_MISS,
+        messageIsTraitResisted = xi.msg.basic.JA_MISS,
+        messageIsIncompatible  = xi.msg.basic.JA_MISS,
+        messageIsResisted      = xi.msg.basic.JA_MISS,
+        messageIsNotSuccessful = xi.msg.basic.JA_MISS,
+        messageIsSuccessful    = xi.msg.basic.JA_ENFEEB_IS,
+    }
+
+    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, messageParams )
 end
 
 return abilityObject
