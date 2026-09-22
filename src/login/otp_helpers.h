@@ -22,6 +22,7 @@
 
 #include <cctype>
 #include <chrono>
+#include <openssl/crypto.h>
 #include <openssl/hmac.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
@@ -131,18 +132,22 @@ inline uint64_t getCurrentTime()
     return std::chrono::duration_cast<std::chrono::seconds>(dur).count();
 }
 
+// accepts one 30s step either side of now for clock drift and input delay (RFC 6238 5.2)
 inline bool validateTOTP(const std::string& totpCode, const std::string& secret)
 {
-    bool valid = false;
+    constexpr int period = 30;
+    const auto    now    = getCurrentTime();
 
-    auto res = generateTOTP(secret, getCurrentTime());
-
-    if (totpCode == res)
+    for (const int step : { 0, -1, 1 })
     {
-        valid = true;
+        const auto expected = generateTOTP(secret, now + step * period, 6, period);
+        if (totpCode.size() == expected.size() && CRYPTO_memcmp(totpCode.data(), expected.data(), expected.size()) == 0)
+        {
+            return true;
+        }
     }
 
-    return valid;
+    return false;
 }
 
 inline std::string getNewBase32Secret()
