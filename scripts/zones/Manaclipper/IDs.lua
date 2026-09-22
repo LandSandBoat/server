@@ -25,7 +25,12 @@ zones[xi.zone.MANACLIPPER] =
     },
     mob =
     {
-        ZOREDONITE = GetFirstID('Zoredonite'),
+        CUTTER            = GetFirstID('Cutter'),
+        FATTY_PUGIL       = GetFirstID('Fatty_Pugil'),
+        URAGNITE          = GetTableOfIDs('Uragnite'),
+        CLOT              = GetTableOfIDs('Clot'),
+        COLOSSAL_CALAMARI = GetFirstID('Colossal_Calamari'),
+        ZOREDONITE        = GetFirstID('Zoredonite'),
     },
     npc =
     {

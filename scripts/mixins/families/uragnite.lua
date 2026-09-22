@@ -49,18 +49,25 @@ local function enterShell(mob)
     mob:addMod(xi.mod.UDMGRANGE, -7500)
     mob:addMod(xi.mod.UDMGMAGIC, -7500)
     mob:addMod(xi.mod.UDMGBREATH, -7500)
-    mob:addMod(xi.mod.REGEN, mob:getLocalVar('[uragnite]inShellRegen'))
+    local regen = mob:getLocalVar('[uragnite]inShellRegen')
+    mob:setLocalVar('[uragnite]appliedRegen', regen)
+    mob:addMod(xi.mod.REGEN, regen)
     mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar('[uragnite]inShellSkillList'))
 end
 
 local function exitShell(mob)
+    if mob:getAnimationSub() ~= closed then
+        return
+    end
+
     mob:setAnimationSub(open)
     mob:setAutoAttackEnabled(true)
     mob:delMod(xi.mod.UDMGPHYS, -7500)
     mob:delMod(xi.mod.UDMGRANGE, -7500)
     mob:delMod(xi.mod.UDMGMAGIC, -7500)
     mob:delMod(xi.mod.UDMGBREATH, -7500)
-    mob:delMod(xi.mod.REGEN, mob:getLocalVar('[uragnite]inShellRegen'))
+    mob:delMod(xi.mod.REGEN, mob:getLocalVar('[uragnite]appliedRegen'))
+    mob:setLocalVar('[uragnite]appliedRegen', 0)
     mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar('[uragnite]noShellSkillList'))
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
@@ -103,6 +110,7 @@ g_mixins.families.uragnite = function(uragniteMob)
         mob:setLocalVar('[uragnite]timeInShellMax', 45)
         mob:setLocalVar('[uragnite]inShellRegen', 50)
         mob:setAnimationSub(open)
+        mob:setAutoAttackEnabled(true)
     end)
 
     uragniteMob:addListener('TAKE_DAMAGE', 'URAGNITE_TAKE_DAMAGE', function(mob, amount, attacker, attackType, damageType)
@@ -136,18 +144,24 @@ g_mixins.families.uragnite = function(uragniteMob)
             return
         end
 
-        local openAt  = rest - idleOpenBefore
-        local closeAt = math.max(0, openAt - math.randomInt(idleClosedMin, idleClosedMax))
+        local openAt        = rest - idleOpenBefore
+        local closeAt       = math.max(0, openAt - math.randomInt(idleClosedMin, idleClosedMax))
+        local closedForRest = false
         mob:timer(closeAt * 1000, function(mobArg)
-            if mobArg:getAnimationSub() == open and not mobArg:isEngaged() then
-                enterShell(mobArg)
+            if mobArg:getAnimationSub() ~= open or mobArg:isEngaged() then
+                return
             end
+
+            enterShell(mobArg)
+            closedForRest = true
         end)
 
         mob:timer(openAt * 1000, function(mobArg)
-            if mobArg:getAnimationSub() == closed then
-                exitShell(mobArg)
+            if not closedForRest then
+                return
             end
+
+            exitShell(mobArg)
         end)
     end)
 end
