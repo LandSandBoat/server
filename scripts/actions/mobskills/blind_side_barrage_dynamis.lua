@@ -1,5 +1,5 @@
 -----------------------------------
--- Broadside Barrage
+-- Blindside Barrage
 -- Family: Lesser Bird
 -- Description: Deals physical damage to a single target. Additional Effect: INT Down, MND Down
 -- Notes: Notorious Monster/Nightmare version deals damage in a 10 yalm area of effect around target.
@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- Upper limit needs to be captured
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
@@ -29,8 +29,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         local power = 3 + math.floor(mob:getMainLvl() / 5)
 
         -- Note: Status effects do not decay.
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, power, 0, 120)
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.VIT_DOWN, power, 0, 120)
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.MND_DOWN, power = power, duration = 90 },
+            [2] = { effectId = xi.effect.INT_DOWN, power = power, duration = 90 },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

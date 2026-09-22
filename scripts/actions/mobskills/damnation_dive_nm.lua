@@ -22,12 +22,14 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.canCrit        = true
     params.criticalChance = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
 
+    -- Capture Needed: Packet says no crit but the damage variance cannot be explained. Needs more research. Possibly ATT boost.
+
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 15)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.randomInt(10, 15))
     end
 
     return info.damage

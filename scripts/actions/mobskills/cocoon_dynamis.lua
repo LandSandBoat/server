@@ -1,6 +1,6 @@
 -----------------------------------
--- Sonic Wave
--- Reduces defense of enemies in an area of effect.
+-- Cocoon
+-- Enhances defense.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,12 +10,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local effectTable =
-    {
-        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 40, duration = 180 },
-    }
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 200, 0, 90))
 
-    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
+    return xi.effect.DEFENSE_BOOST
 end
 
 return mobskillObject

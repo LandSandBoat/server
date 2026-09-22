@@ -1,7 +1,7 @@
 -----------------------------------
--- Stomping
--- Family: Dhalmel
--- Description: Deals heavy damage to a single target.
+-- Foot Kick
+-- Family: Rabbit
+-- Description: Deals critical damage to a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,15 +13,14 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage       = mob:getWeaponDmg()
-    params.numHits          = 1
-    params.fTP              = { 1.5, 1.5, 1.5 }
-    params.attackType       = xi.attackType.PHYSICAL
-    params.damageType       = xi.damageType.SLASHING
-    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    params.attackMultiplier = { 1.5, 1.5, 1.5 }
-    params.canCrit          = true
-    params.criticalChance   = { 0.10, 0.15, 0.20 } -- TODO: Rate needs accurate caps
+    params.baseDamage      = mob:getWeaponDmg()
+    params.numHits         = 1
+    params.fTP             = { 2.0, 2.0, 2.0 }
+    params.attackType      = xi.attackType.PHYSICAL
+    params.damageType      = xi.damageType.SLASHING
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.canCrit         = true
+    params.criticalChance  = { 1.0, 1.0, 1.0 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

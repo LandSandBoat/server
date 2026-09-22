@@ -1,6 +1,7 @@
 -----------------------------------
--- Sonic Wave
--- Reduces defense of enemies in an area of effect.
+-- Cold Stare
+-- Silences enemies in a line area of effect.
+-- Notes: Only applies when face-to-face with the dhalmel.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,12 +11,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local effectTable =
-    {
-        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 40, duration = 180 },
-    }
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SILENCE, 1, 0, 90))
 
-    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
+    return xi.effect.SILENCE
 end
 
 return mobskillObject

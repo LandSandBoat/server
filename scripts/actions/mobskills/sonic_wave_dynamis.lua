@@ -12,7 +12,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local effectTable =
     {
-        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 40, duration = 180 },
+        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 50, duration = 240 },
     }
 
     return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})

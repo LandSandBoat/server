@@ -1,6 +1,6 @@
 -----------------------------------
--- Sonic Wave
--- Reduces defense of enemies in an area of effect.
+-- Sticky Thread
+-- Inflicts slow on targets in a fan-shaped area of effect.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,7 +12,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local effectTable =
     {
-        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 40, duration = 180 },
+        [1] = { effectId = xi.effect.SLOW, power = 7500, duration = 180, tier = 8 },
     }
 
     return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
