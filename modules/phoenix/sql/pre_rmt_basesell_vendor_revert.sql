@@ -567,6 +567,81 @@ UPDATE item_basic SET baseSell = 212 WHERE itemid = 17537;
 
 -- Yahata Sushi
 UPDATE item_basic SET baseSell = 270 WHERE itemid = 5186;
+
+-- Acrobat's Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15866;
+
+-- Ametrine Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13340;
+
+-- Blood Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13338;
+
+-- Caliginous Wolf Hide
+UPDATE item_basic SET baseSell = 129 WHERE itemid = 871;
+
+-- Chasuble
+UPDATE item_basic SET baseSell = 7500 WHERE itemid = 14440;
+
+-- Coral Subligar
+UPDATE item_basic SET baseSell = 3335 WHERE itemid = 12878;
+
+-- Ebony Harp
+UPDATE item_basic SET baseSell = 2587 WHERE itemid = 17357;
+
+-- Fragrant Ram Skin
+UPDATE item_basic SET baseSell = 400 WHERE itemid = 2140;
+
+-- Gaia Mantle
+UPDATE item_basic SET baseSell = 3200 WHERE itemid = 13637;
+
+-- Gold Arrow
+UPDATE item_basic SET baseSell = 5 WHERE itemid = 17317;
+
+-- Khimaira Jacket
+UPDATE item_basic SET baseSell = 9187 WHERE itemid = 14566;
+
+-- Mist Pumps
+UPDATE item_basic SET baseSell = 1305 WHERE itemid = 15312;
+
+-- Partisan
+UPDATE item_basic SET baseSell = 2415 WHERE itemid = 16839;
+
+-- Runner's Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15865;
+
+-- Samsonian Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15863;
+
+-- Sipahi Dastanas
+UPDATE item_basic SET baseSell = 2910 WHERE itemid = 14932;
+
+-- Smash Cesti
+UPDATE item_basic SET baseSell = 252 WHERE itemid = 18747;
+
+-- Spartan Hoplon
+UPDATE item_basic SET baseSell = 1650 WHERE itemid = 15071;
+
+-- Sphene Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13342;
+
+-- Tiger Ledelsens
+UPDATE item_basic SET baseSell = 2040 WHERE itemid = 12958;
+
+-- Tough Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15864;
+
+-- Tree Sap
+UPDATE item_basic SET baseSell = 92 WHERE itemid = 17872;
+
+-- Waistbelt +1
+UPDATE item_basic SET baseSell = 1740 WHERE itemid = 13214;
+
+-- Windurstian Hachimaki
+UPDATE item_basic SET baseSell = 1208 WHERE itemid = 13901;
+
+-- Wise Gloves
+UPDATE item_basic SET baseSell = 1125 WHERE itemid = 14880;
 ----------------------------------------------------------------------------------------------------------------------------
 -- PENDING -- I could not find prices for these items, but they were mentioned in patch notes as having price values changed
 ----------------------------------------------------------------------------------------------------------------------------
