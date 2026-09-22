@@ -1442,6 +1442,7 @@ spawns:
     level:    [41, 44]
   16887851:
     template: Fomors_Bat
+    at:       [1.000, 1.000, 1.000]
     level:    [36, 43]
   16887852:
     template: Stegotaur_PA
