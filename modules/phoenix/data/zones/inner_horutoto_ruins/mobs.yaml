@@ -49,7 +49,8 @@ templates:
         model_size:     1
         hitbox:        12
       behaviors:
-        links: true
+        aggressive: true
+        links:      true
       spawn:
         respawn: 480 # Era dungeon timers
     loot:
