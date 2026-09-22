@@ -47,6 +47,8 @@ itemObject.onItemUse = function(target)
         bomb:spawn()
     end
 
+    bomb:setMobLevel(75)
+
     if targ ~= nil then
         bomb:updateEnmity(targ)
     end

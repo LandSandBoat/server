@@ -40,6 +40,7 @@ function content:setupBattlefield(battlefield)
     local karababa = battlefield:insertEntity(8, true, true)
     karababa:setSpawn(unpack(karababaCoords[battlefield:getArea()]))
     karababa:spawn()
+    karababa:setMobLevel(75)
 end
 
 content.groups =
