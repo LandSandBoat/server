@@ -26,8 +26,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Capture power/duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 25, 0, 90)
+        -- TODO: Capture power.
+        -- Capture: the weight lasted 181 seconds.
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 25, 0, 180)
     end
 
     return info.damage

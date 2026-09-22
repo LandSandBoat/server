@@ -15,6 +15,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
+    -- Capture: 44 of 44 Camisados were critical hits.
+    params.canCrit        = true
+    params.criticalChance = { 1.00, 1.00, 1.00 }
     params.fTP            = { 2.75, 2.75, 2.75 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
