@@ -7,6 +7,10 @@ local ID = zones[xi.zone.LEBROS_CAVERN]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.HPP, 50)
+end
+
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
