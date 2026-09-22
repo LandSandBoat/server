@@ -5,6 +5,7 @@ pyyaml
 ruamel.yaml
 colorama
 zmq
+cbor2
 black
 regex
 argparse
