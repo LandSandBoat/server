@@ -20293,7 +20293,7 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table)
                         "weather_preference = VALUES(weather_preference), "
                         "hunger = VALUES(hunger), "
                         "care_plan = VALUES(care_plan), "
-                        "held_item = VALUES(held_item);";
+                        "held_item = VALUES(held_item)";
 
     const auto rset = db::preparedStmt(
         Query,
