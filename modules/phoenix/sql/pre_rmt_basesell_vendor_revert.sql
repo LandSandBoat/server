@@ -439,14 +439,11 @@ UPDATE item_basic SET baseSell = 495 WHERE itemid = 1967;
 -- Elm Pole +1
 UPDATE item_basic SET baseSell = 817 WHERE itemid = 17119;
 
--- Ether Cotton
-UPDATE item_basic SET baseSell = 517 WHERE itemid = 1994;
-
 -- Ether Drop
 UPDATE item_basic SET baseSell = 214 WHERE itemid = 5357;
 
--- Fisherman's Hose
-UPDATE item_basic SET baseSell = 525 WHERE itemid = 14292;
+-- Angler's Hose (Fisherman's Hose HQ)
+UPDATE item_basic SET baseSell = 525 WHERE itemid = 14293;
 
 -- Flexible Pole
 UPDATE item_basic SET baseSell = 447 WHERE itemid = 18586;
@@ -466,8 +463,8 @@ UPDATE item_basic SET baseSell = 96 WHERE itemid = 4286;
 -- Hi-Ether Drop
 UPDATE item_basic SET baseSell = 307 WHERE itemid = 5358;
 
--- Holy Shield
-UPDATE item_basic SET baseSell = 717 WHERE itemid = 12379;
+-- Divine Shield (Holy Shield HQ)
+UPDATE item_basic SET baseSell = 717 WHERE itemid = 12380;
 
 -- Humidified Velvet
 UPDATE item_basic SET baseSell = 572 WHERE itemid = 2425;
@@ -489,9 +486,6 @@ UPDATE item_basic SET baseSell = 1976 WHERE itemid = 14491;
 
 -- Mana Willow Lumber
 UPDATE item_basic SET baseSell = 111 WHERE itemid = 2132;
-
--- Manashell Ring
-UPDATE item_basic SET baseSell = 111 WHERE itemid = 15782;
 
 -- Maple Cake
 UPDATE item_basic SET baseSell = 200 WHERE itemid = 5625;
@@ -570,9 +564,6 @@ UPDATE item_basic SET baseSell = 1228 WHERE itemid = 17535;
 
 -- Windurstian Staff
 UPDATE item_basic SET baseSell = 212 WHERE itemid = 17537;
-
--- Windurstian Sword
-UPDATE item_basic SET baseSell = 2456 WHERE itemid = 16946;
 
 -- Yahata Sushi
 UPDATE item_basic SET baseSell = 270 WHERE itemid = 5186;
