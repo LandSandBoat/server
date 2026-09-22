@@ -6,6 +6,7 @@
 --  Dyer's Woad: https://www.bg-wiki.com/ffxi/September_2008_Version_Update_Changes#Other_Usable_Items
 --  Aquilaria Log: https://www.bg-wiki.com/ffxi/September_2010_Version_Update_Changes#Usable_Items
 --  Butterpear and Kapor Log: https://www.bg-wiki.com/ffxi/September_2011_Version_Update_Changes#Wings_of_the_Goddess_Quests
+--  Slab of Plumbago: https://wiki.ffo.jp/html/19538.html (added in the March 23, 2010 version update)
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
@@ -26,7 +27,9 @@ local removalsByContent =
 
             [xi.zone.YUHTUNGA_JUNGLE] =
             {
+                xi.item.BUTTERPEAR,
                 xi.item.AQUILARIA_LOG,
+                xi.item.KAPOR_LOG,
             },
         },
     },
@@ -53,6 +56,19 @@ local removalsByContent =
             [xi.zone.WEST_SARUTABARUTA] =
             {
                 xi.item.SPRIG_OF_DYERS_WOAD,
+            },
+        },
+
+        [xi.helmType.MINING] =
+        {
+            [xi.zone.HALVUNG] =
+            {
+                xi.item.SLAB_OF_PLUMBAGO,
+            },
+
+            [xi.zone.MOUNT_ZHAYOLM] =
+            {
+                xi.item.SLAB_OF_PLUMBAGO,
             },
         },
     },
