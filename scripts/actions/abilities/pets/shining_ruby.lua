@@ -10,7 +10,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     -- TODO: BGWiki says this shares a buff slot with Rampart, Winds Blessing and One For All.
     -- Need to capture tier priority.

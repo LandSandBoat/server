@@ -12,7 +12,7 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local amount = pet:getMainLvl() * 2 + 50
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     if target:addStatusEffect(xi.effect.STONESKIN, { power = amount, duration = 900, origin = pet, tier = 3 }) then
         if target:getID() == action:getPrimaryTargetID() then

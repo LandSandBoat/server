@@ -10,7 +10,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     -- Randomly gives STR/DEX/VIT/AGI/INT/MND/CHR
     -- Can overwrite an existing Glittering Ruby stat bonus

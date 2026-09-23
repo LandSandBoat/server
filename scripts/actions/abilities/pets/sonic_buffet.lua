@@ -11,7 +11,7 @@ end
 
 -- http://wiki.ffo.jp/html/37931.html
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 

@@ -14,7 +14,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration     = baseDuration + bonusTime
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local magicskill = xi.data.skillLevel.getSkillCap(target:getMainLvl(), xi.skillRank.A_PLUS)
     local potency    = 3 + 6 * magicskill / 100

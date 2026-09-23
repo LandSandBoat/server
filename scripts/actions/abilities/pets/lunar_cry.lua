@@ -10,7 +10,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local moonCycle = getVanadielMoonCycle()
 
@@ -34,18 +34,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     -- TODO: Fenrir's Lunar Cry does not overwrite itself. Unknown interactions with other Accuracy Down/Evasion Down effects.
 
-    local messageParams =
-    {
-        messageBypass          = false,
-        messageCantGain        = xi.msg.basic.JA_NO_EFFECT,
-        messageIsImmune        = xi.msg.basic.JA_MISS,
-        messageIsTraitResisted = xi.msg.basic.JA_MISS,
-        messageIsIncompatible  = xi.msg.basic.JA_MISS,
-        messageIsResisted      = xi.msg.basic.JA_MISS,
-        messageIsNotSuccessful = xi.msg.basic.JA_MISS,
-        messageIsSuccessful    = xi.msg.basic.ACC_EVA_DOWN,
-    }
-
     local baseDuration = 180 -- TODO: Capture retail baseDuration
     local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration     = baseDuration + bonusTime
@@ -56,7 +44,10 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         [2] = { effectId = xi.effect.EVASION_DOWN, power = 32 - buffValue, origin = pet, duration = duration, tier = 1, magicalElement = xi.element.DARK },
     }
 
-    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = false })
+    -- Skill has a unique message that is not tied to one status effect.
+    petskill:setMsg(xi.msg.basic.ACC_EVA_DOWN)
+
+    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = true })
 end
 
 return abilityObject

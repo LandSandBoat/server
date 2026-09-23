@@ -11,7 +11,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local baseDuration = 180
     local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
@@ -34,7 +34,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         messageIsSuccessful    = xi.msg.basic.JA_ENFEEB_IS,
     }
 
-    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, messageParams )
+    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, messageParams)
 end
 
 return abilityObject

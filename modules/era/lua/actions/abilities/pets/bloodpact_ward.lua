@@ -14,7 +14,7 @@ local m = Module:new('era_bloodpact_ward')
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.shining_ruby.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         -- TODO: BGWiki says this shares a buff slot with Rampart, Winds Blessing and One For All.
         -- Need to capture tier priority.
@@ -25,7 +25,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.shining_ruby.onPetAbility', {
             return xi.effect.SHINING_RUBY
         end
 
-        local baseDuration = 180
+        local duration = 180
 
         target:addStatusEffect(xi.effect.SHINING_RUBY, { power = 10, subPower = 390, duration = duration, origin = pet })
 
@@ -45,7 +45,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.shining_ruby.onPetAbility', {
 m:addOverrideByEra('xi.actions.abilities.pets.hastega.onPetAbility', {
     -- Reverts doubled base duration
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local baseDuration = 90
         local bonusTime    = xi.summon.getSummoningSkillOverCap(pet) * 3
@@ -77,7 +77,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.hastega.onPetAbility', {
         local bonusTime    = xi.summon.getSummoningSkillOverCap(pet) * 3
         local duration     = math.min(baseDuration + bonusTime, 180)
 
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         if target:addStatusEffect(xi.effect.HASTE, { power = 1494, duration = duration, origin = pet, tier = 1 }) then
             if target:getID() == action:getPrimaryTargetID() then
@@ -99,7 +99,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.hastega.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.crimson_howl.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local baseDuration = 30
         local bonusTime    = xi.summon.getSummoningSkillOverCap(pet)
@@ -126,7 +126,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.crimson_howl.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.frost_armor.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         -- TODO: JPWiki says this will overwrite Reprisal. Possibly other spike effects.
         target:delStatusEffect(xi.effect.ICE_SPIKES)
@@ -156,7 +156,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.frost_armor.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.glittering_ruby.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         -- Randomly gives STR/DEX/VIT/AGI/INT/MND/CHR
         -- Can overwrite an existing Glittering Ruby effect
@@ -208,7 +208,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.rolling_thunder.onPetAbility', {
         local bonusTime    = xi.summon.getSummoningSkillOverCap(pet) * 2
         local duration     = math.min(baseDuration + bonusTime, 180)
 
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local magicskill = xi.data.skillLevel.getSkillCap(target:getMainLvl(), xi.skillRank.A_PLUS)
         local potency    = 3 + 6 * magicskill / 100
@@ -238,7 +238,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.lightning_armor.onPetAbility', {
         local bonusTime    = xi.summon.getSummoningSkillOverCap(pet) * 3
         local duration     = math.min(baseDuration + bonusTime, 180)
 
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         target:delStatusEffect(xi.effect.SHOCK_SPIKES)
 
@@ -262,7 +262,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.lightning_armor.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.ecliptic_growl.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local duration  = 180
         local moonCycle = getVanadielMoonCycle()
@@ -315,7 +315,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.ecliptic_growl.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.ecliptic_howl.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local duration  = 180
         local moonCycle = getVanadielMoonCycle()
@@ -358,7 +358,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.ecliptic_howl.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.healing_ruby.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local params = {}
 
@@ -386,7 +386,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.healing_ruby.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.healing_ruby_ii.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         -- https://wiki.ffo.jp/html/4080.html
 
@@ -411,7 +411,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.healing_ruby_ii.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.noctoshield.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
         local duration = 180
 
         if target:addStatusEffect(xi.effect.PHALANX, { power = 13, duration = duration, origin = pet }) then
@@ -434,7 +434,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.noctoshield.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.dream_shroud.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local baseDuration = 180
     local duration     = baseDuration
@@ -463,7 +463,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.dream_shroud.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.spring_water.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local removableEffects =
         {
@@ -516,7 +516,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.spring_water.onPetAbility', {
 -----------------------------------
 m:addOverrideByEra('xi.actions.abilities.pets.whispering_wind.onPetAbility', {
     [xi.expansion.ABYSSEA] = function(target, pet, petskill, summoner, action)
-        xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+        xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
         local params = {}
 

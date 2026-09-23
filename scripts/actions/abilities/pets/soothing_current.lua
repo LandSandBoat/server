@@ -9,7 +9,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     if target:addStatusEffect(xi.effect.CURING_CONDUIT, { power = 15, duration = 180, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then

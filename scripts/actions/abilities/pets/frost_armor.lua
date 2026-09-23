@@ -10,7 +10,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     -- TODO: JPWiki says this will overwrite Reprisal. Possibly other spike effects.
     target:delStatusEffect(xi.effect.ICE_SPIKES)
