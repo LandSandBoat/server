@@ -544,7 +544,7 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
     if (auto* battle = dynamic_cast<CBattleEntity*>(PEntity);
         battle && battle->isAlive() && !IsCurrentState<CInactiveState>() &&
         !IsCurrentState<CMagicState>() && !IsCurrentState<CMobSkillState>() &&
-        battle->StatusEffectContainer->HasPreventActionEffect())
+        battle->StatusEffectContainer->HasPreventActionEffect(true))
     {
         Inactive(0ms, false);
     }
