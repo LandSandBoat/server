@@ -12,8 +12,9 @@ local CBaseEntity = {}
 ---@param p3 integer?
 ---@param showName boolean?
 ---@param turn boolean?
+---@param messageType integer? Message type. Omit for the full type 0 packet. Otherwise compact unless showName is true.
 ---@return nil
-function CBaseEntity:showText(mob, messageID, p0, p1, p2, p3, showName, turn)
+function CBaseEntity:showText(mob, messageID, p0, p1, p2, p3, showName, turn, messageType)
 end
 
 ---@param PLuaBaseEntity CBaseEntity
@@ -55,8 +56,9 @@ end
 ---@param p2 integer?
 ---@param p3 integer?
 ---@param chat integer?
+---@param sender CBaseEntity? Speaker for private messages, separate from the named entity.
 ---@return nil
-function CBaseEntity:messageName(messageID, entity, p0, p1, p2, p3, chat)
+function CBaseEntity:messageName(messageID, entity, p0, p1, p2, p3, chat, sender)
 end
 
 ---@param messageID integer

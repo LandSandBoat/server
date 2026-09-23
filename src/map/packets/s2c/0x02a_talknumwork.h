@@ -23,6 +23,8 @@
 
 #include "base.h"
 
+#include <optional>
+
 class CBaseEntity;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x002A
@@ -43,11 +45,12 @@ public:
     };
 
     GP_SERV_COMMAND_TALKNUMWORK(
-        const CBaseEntity* PEntity,
-        uint16             messageID,
-        uint32             param0   = 0,
-        uint32             param1   = 0,
-        uint32             param2   = 0,
-        uint32             param3   = 0,
-        bool               ShowName = false);
+        const CBaseEntity*   PEntity,
+        uint16               messageID,
+        uint32               param0   = 0,
+        uint32               param1   = 0,
+        uint32               param2   = 0,
+        uint32               param3   = 0,
+        bool                 ShowName = false,
+        std::optional<uint8> type     = std::nullopt);
 };

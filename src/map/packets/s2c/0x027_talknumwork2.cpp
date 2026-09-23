@@ -64,4 +64,11 @@ GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(
 
     CBaseEntity* PNameEntity = PNameActor ? PNameActor : PActor;
     std::memcpy(packet.String1, PNameEntity->getName().c_str(), std::min<size_t>(PNameEntity->getName().size(), sizeof(packet.String1)));
+
+    if (showSender)
+    {
+        const auto& senderName = PActor->getName();
+
+        std::memcpy(packet.String2, senderName.c_str(), std::min<size_t>(senderName.size(), sizeof(packet.String2) - 1));
+    }
 }
