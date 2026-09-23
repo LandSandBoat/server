@@ -86,9 +86,9 @@ local spawnPets = function(mob, minionOffset)
             GetMobByID(minionOffset + 0):setSpawn(mobArg:getXPos() + 4, mobArg:getYPos(), mobArg:getZPos())
             GetMobByID(minionOffset + 1):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() + 4)
             GetMobByID(minionOffset + 2):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() - 4)
-            SpawnMob(minionOffset + 0):setMobMod(xi.mobMod.SUPERLINK, mobArg:getTargID())
-            SpawnMob(minionOffset + 1):setMobMod(xi.mobMod.SUPERLINK, mobArg:getTargID())
-            SpawnMob(minionOffset + 2):setMobMod(xi.mobMod.SUPERLINK, mobArg:getTargID())
+            SpawnMob(minionOffset + 0)
+            SpawnMob(minionOffset + 1)
+            SpawnMob(minionOffset + 2)
             GetMobByID(minionOffset + 0):updateEnmity(mobArg:getTarget())
             GetMobByID(minionOffset + 1):updateEnmity(mobArg:getTarget())
             GetMobByID(minionOffset + 2):updateEnmity(mobArg:getTarget())
@@ -132,7 +132,6 @@ local spawnSharks = function(mob)
         if phuabo then
             phuabo:setSpawn(target:getXPos() + math.randomInt(-2, 2), target:getYPos(), target:getZPos())
             SpawnMob(phuaboDn[i])
-            phuabo:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
             phuabo:updateEnmity(target)
         end
     end
@@ -153,6 +152,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 end
 
 local function getAbsorbMod(element)

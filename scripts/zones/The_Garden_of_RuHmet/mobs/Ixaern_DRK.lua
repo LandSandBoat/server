@@ -89,6 +89,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 100)
     mob:setAnimationSub(1)
 
     xi.mix.jobSpecial.config(mob, {

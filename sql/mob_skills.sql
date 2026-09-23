@@ -1385,7 +1385,7 @@ INSERT INTO `mob_skills` VALUES (1353,1004,'aerial_collision',4,0.0,10.0,2500,10
 INSERT INTO `mob_skills` VALUES (1354,1005,'vapor_spray',4,0.0,12.0,2833,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1355,1006,'spine_lash',0,0.0,12.0,4333,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1356,1007,'voiceless_storm',1,0.0,15.0,2233,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1357,1008,'tidal_dive',1,0.0,15.0,5500,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1357,1008,'tidal_dive',1,0.0,15.0,6900,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1358,1009,'plasma_charge',0,0.0,7.0,2833,1000,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1359,855,'chthonian_ray',4,0.0,25.0,2000,2800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1360,855,'apocalyptic_ray',4,0.0,10.0,2000,2800,4,0,0,0,0,0,0);

@@ -3,15 +3,18 @@
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.IXAERN_DRG):getTargID())
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobAbilityEnabled(false)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.BIND)

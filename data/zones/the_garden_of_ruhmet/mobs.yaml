@@ -803,7 +803,7 @@ templates:
   Ixaern_drgs_Wynav:
     id:            5536
     species:       wynav
-    type:          [called]
+    type:          [notorious, called]
     spell_list_id: 136
     skill_list_id: 714
     attributes:
