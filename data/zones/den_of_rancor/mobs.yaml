@@ -3169,9 +3169,6 @@ spawns:
 
 slots:
   - members:
-      17432608: {} # Tonberry_Imprecator
-      17432609: {} # Sozu_Bliberry
-  - members:
       17432622: {} # Tonberry_Trailer
       17432625: {} # Tonberry_Trailer
   - members:
@@ -3210,7 +3207,6 @@ slots:
       17432911: {} # Demonic_Pugil
   - members:
       17432973: {} # Doom_Toad
-      17432974: {} # Ogama
       17432979: {} # Doom_Toad
   - members:
       17432990: {} # Doom_Toad

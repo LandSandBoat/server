@@ -13,14 +13,9 @@ local ID = zones[xi.zone.DEN_OF_RANCOR]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -32.000, y =  16.000, z = -178.000 }
-}
-
 entity.phList =
 {
-    [ID.mob.BISTRE_HEARTED_MALBERRY - 23] = ID.mob.BISTRE_HEARTED_MALBERRY,
+    [ID.mob.BISTRE_HEARTED_MALBERRY - 25] = ID.mob.BISTRE_HEARTED_MALBERRY, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
