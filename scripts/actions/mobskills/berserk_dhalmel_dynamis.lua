@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 200, 0, 180)) -- Needs to reduce defense by 50%
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 200, 0, 180, 0, 50))
     return xi.effect.BERSERK
 end
 
