@@ -3346,7 +3346,6 @@ npcs:
         main:  24576
         sub:   28672
       entity_flags: 27
-      animation:    animation_53
       name_prefix:  32
       moving:       14
     status:   normal

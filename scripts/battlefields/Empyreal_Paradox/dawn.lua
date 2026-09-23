@@ -63,11 +63,13 @@ function content:setupBattlefield(battlefield)
     local prishePos = prisheCoords[battlefieldArea]
     prishe:setSpawn(prishePos.x, prishePos.y, prishePos.z, prishePos.r)
     prishe:spawn()
+    prishe:setMobLevel(75)
 
     local selhteus    = battlefield:insertEntity(12, true, true)
     local selhteusPos = selhteusCoords[battlefieldArea]
     selhteus:setSpawn(selhteusPos.x, selhteusPos.y, selhteusPos.z, selhteusPos.r)
     selhteus:spawn()
+    selhteus:setMobLevel(75)
 end
 
 function content:onEventFinishBattlefield(player, csid, option, npc)

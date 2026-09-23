@@ -584,14 +584,19 @@ templates:
         type: [scripted]
 
   Zeid:
-    id:            4498
-    species:       galks
-    type:          [notorious, battlefield]
-    spell_list_id: 396
+    id:      4498
+    species: galks
+    type:    [notorious, battlefield]
+    spells:
+      - absorb-str
+      - absorb-dex
+      - absorb-vit
+      - absorb-agi
     skill_list_id: 480
     attributes:
       combat:
         skill: great_sword
+        delay: 180
       jobs: [drk, drk]
       render:
         look:

@@ -41,7 +41,9 @@ values:
   sit:                    47
   ranged:                 48
   fishing_start:          50
-  animation_53:           53
+  fishing_fight_1:        51
+  fishing_fight_2:        52
+  fishing_fight_3:        53
   animation_55:           55
   new_fishing_start:      56
   new_fishing_fish:       57

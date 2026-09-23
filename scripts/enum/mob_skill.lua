@@ -1138,8 +1138,11 @@ xi.mobSkill =
     FAZE                          = 1728,
 
     FORCEFUL_BLOW                 = 1731, -- Used with Mamool's weapons break.
-
+    SOMERSAULT_KICK_1             = 1732,
     FIRESPIT                      = 1733,
+    WARM_UP_1                     = 1734,
+
+    AXE_THROW                     = 1736,
 
     LAVA_SPIT                     = 1785,
     SULFUROUS_BREATH              = 1786,
@@ -1167,6 +1170,9 @@ xi.mobSkill =
     SERPENTINE_TAIL               = 1835,
     NERVE_GAS                     = 1836,
 
+    MINE_BLAST                    = 1838,
+    RUSHING_SLASH_2               = 1839,
+
     SANDBLAST_2                   = 1841,
     SANDPIT_2                     = 1842,
     VENOM_SPRAY_2                 = 1843,
@@ -1176,7 +1182,12 @@ xi.mobSkill =
     ROAR_CERBERUS                 = 1892,
     -- SPIRIT_SURGE                  = 1893,
 
+    RUSHING_DRUB                  = 1920,
+    FORCEFUL_BLOW_2               = 1921,
+    SOMERSAULT_KICK_2             = 1922,
     FIRESPIT_BLUE_MAMOOLJA        = 1923, -- Ignores shadows
+    WARM_UP_2                     = 1924,
+    STAVE_TOSS_1                  = 1925,
 
     EES_LAMIA                     = 1931,
     EES_MERROW                    = 1932,

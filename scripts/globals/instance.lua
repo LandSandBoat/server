@@ -106,7 +106,7 @@ xi.instance.lookup =
 
     [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
-        { 6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4 }, { 511, 0 } }, -- Assault: Imperial Agent Rescue
+        -- Assault: Imperial Agent Rescue (scripts/assaults/Mamool_Ja_Training_Grounds/imperial_agent_rescue.lua)
         -- Assault: Preemptive Strike
         -- Assault: Sagelord Elimination
         -- Assault: Breaking Morale

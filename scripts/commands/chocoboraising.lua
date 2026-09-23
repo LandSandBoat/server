@@ -75,8 +75,7 @@ commandObj.onTrigger = function(player)
             function(playerArg)
                 playerArg:deleteRaisedChocobo()
 
-                local egg = {}
-                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg)
                 player:setChocoboRaisingInfo(newChoco)
 
                 local info = playerArg:getChocoboRaisingInfo()
@@ -92,8 +91,7 @@ commandObj.onTrigger = function(player)
             function(playerArg)
                 playerArg:deleteRaisedChocobo()
 
-                local egg      = {}
-                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg)
                 player:setChocoboRaisingInfo(newChoco)
 
                 local info = playerArg:getChocoboRaisingInfo()
@@ -113,8 +111,7 @@ commandObj.onTrigger = function(player)
             function(playerArg)
                 playerArg:deleteRaisedChocobo()
 
-                local egg      = {}
-                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg)
                 player:setChocoboRaisingInfo(newChoco)
 
                 local info = playerArg:getChocoboRaisingInfo()
@@ -130,8 +127,7 @@ commandObj.onTrigger = function(player)
             function(playerArg)
                 playerArg:deleteRaisedChocobo()
 
-                local egg      = {}
-                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg)
                 player:setChocoboRaisingInfo(newChoco)
 
                 local info = playerArg:getChocoboRaisingInfo()
@@ -155,8 +151,7 @@ commandObj.onTrigger = function(player)
         table.insert(menu.options, {
             'Create default chocoState',
             function(playerArg)
-                local egg = {}
-                local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
+                local newChoco = xi.chocoboRaising.newChocobo(playerArg)
                 player:setChocoboRaisingInfo(newChoco)
                 playerArg:printToPlayer('Created default chocoState', xi.msg.channel.SYSTEM_3, '')
             end,

@@ -367,7 +367,7 @@ m:addOverride('xi.actions.weaponskills.death_blossom.onUseWeaponSkill', function
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor(60 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)

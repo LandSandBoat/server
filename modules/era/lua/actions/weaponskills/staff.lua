@@ -115,7 +115,7 @@ m:addOverride('xi.actions.weaponskills.shell_crusher.onUseWeaponSkill', function
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -196,7 +196,7 @@ m:addOverride('xi.actions.weaponskills.gate_of_tartarus.onUseWeaponSkill', funct
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor(120 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -235,7 +235,7 @@ m:addOverride('xi.actions.weaponskills.vidohunir.onUseWeaponSkill', function(pla
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor(6 * tp / 100 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
@@ -275,7 +275,7 @@ m:addOverride('xi.actions.weaponskills.garland_of_bliss.onUseWeaponSkill', funct
 
     local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
-    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 1) then
         local duration = math.floor((6 * tp / 100) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)

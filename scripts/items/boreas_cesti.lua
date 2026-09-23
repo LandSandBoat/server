@@ -9,6 +9,7 @@ local itemObject = {}
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     local pTable =
     {
+        chance          = 100,
         basePower       = math.random(5, 7),
         attackType      = xi.attackType.MAGICAL,
         magicalElement  = xi.element.WIND,

@@ -66,6 +66,7 @@ function content:onEventFinishBattlefield(player, csid, option, npc)
     player:setPos(unpack(playerCoords[battlefieldArea]))
     trion:setSpawn(unpack(trionCoords[battlefieldArea]))
     trion:spawn()
+    trion:setMobLevel(75)
 end
 
 content.groups =

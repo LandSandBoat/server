@@ -2098,15 +2098,15 @@ spawns:
     level:    [71, 74]
   17240258:
     template: Velociraptor
-    region:   e_194
+    region:   region_54
     level:    [66, 69]
   17240259:
     template: Sand_Cockatrice
-    region:   e_194
+    region:   region_54
     level:    [71, 74]
   17240260:
     template: Sand_Cockatrice
-    region:   e_194
+    region:   region_54
     level:    [71, 74]
   17240261:
     template: Velociraptor

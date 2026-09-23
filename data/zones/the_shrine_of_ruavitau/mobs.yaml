@@ -426,7 +426,7 @@ templates:
 
   Faust:
     id:            1306
-    species:       gargoyles
+    species:       doll
     type:          [notorious]
     roam:          [scripted]
     skill_list_id: 367

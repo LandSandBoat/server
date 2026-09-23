@@ -744,6 +744,7 @@ templates:
         hitbox:          24
       behaviors:
         aggressive: true
+        links:      true
       spawn:
         respawn: 960
     loot:

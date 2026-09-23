@@ -1,11 +1,28 @@
 -----------------------------------
 -- ID: 16550
 -- Item: Hallowed Sword
+-- Additional effect: light damage
 -- Item Effect: Enlight
 -----------------------------------
 ---@type TItem
 
 local itemObject = {}
+
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
+    local dStat = actor:getStat(xi.mod.MND) - target:getStat(xi.mod.INT)
+    local pTable =
+    {
+        chance         = utils.clamp(dStat * 4 / 9, 0, 24), -- Seems to be a linear scale over 54 dSTAT, 4 / 9 = 0.4444...
+        basePower      = math.randomInt(5, 7),
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.LIGHT,
+        canMAB         = false,
+        canResist      = true,
+        lowestResist   = 0.5,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
+end
 
 itemObject.onItemCheck = function(target, user)
     if target:getStatusEffectBySource(xi.effect.ENLIGHT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HALLOWED_SWORD) ~= nil then
@@ -37,6 +54,7 @@ itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.ENSPELL_CHANCE, 100)
 end
 
+-- Needed for onEffectGain to work
 itemObject.onEffectLose = function(target, effect)
 end
 

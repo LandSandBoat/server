@@ -1,6 +1,7 @@
 -----------------------------------
--- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
---  MOB: Mamool Ja Lizard
+-- Area: Mamool Ja Training Grounds
+--  Mob: Mamool Ja's Lizard
+-- Involved in Assault: Imperial Agent Rescue
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

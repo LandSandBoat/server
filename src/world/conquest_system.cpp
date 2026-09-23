@@ -162,42 +162,28 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         points = std::max<int>(points / 10, 1);
     }
 
-    const int total = influences[0] + influences[1] + influences[2];
-
     // Restricted by a factor of 100 because of packet lines in 0x05e_conquest.cpp
     constexpr int32 influenceCap = INT32_MAX / 100;
 
-    const int room = influenceCap - total;
+    const int room = influenceCap - influences[nation];
 
-    if (points <= room) // Pool is not capped and there is space. Straight add.
+    if (points <= room) // Nation is not full and there is space. Straight add.
     {
         influences[nation] += points;
     }
-    else // Pool is full. Gains come out of the other nations.
+    else // Nation is full. Gains come out of the other nations.
     {
-        // Fill the remaining room first, then redistribute the overflow.
+        // Fill the remaining room first, then decrease the other nations by the overflow.
         influences[nation] += room;
 
-        // Do not adjust anything if the nation is already at the pool maximum.
-        if (influences[nation] < influenceCap)
+        const int overflow = points - room;
+
+        for (auto i = 0u; i < 3; ++i)
         {
-            const int overflow = points - room;
-
-            auto lost = 0;
-            for (auto i = 0u; i < 3; ++i)
+            if (i != nation)
             {
-                if (i == nation)
-                {
-                    continue;
-                }
-
-                const int64 share = static_cast<int64>(overflow) * influences[i] / (influenceCap - influences[nation]);
-                auto        loss  = std::min<int>(static_cast<int>(share), influences[i]);
-                influences[i] -= loss;
-                lost += loss;
+                influences[i] -= std::min(influences[i], overflow); // Do not allow to drop below 0.
             }
-
-            influences[nation] += lost;
         }
     }
 

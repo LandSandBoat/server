@@ -48,18 +48,6 @@ local function resetCount(mob)
 end
 
 g_mixins.families.wamouracampa = function(wamouracampaMob)
-    -- Determine if this mob can use eclosion.
-    -- Any wamouracampa that is followed by a Wamoura means that it can evolve into it via eclosion.
-    local ID = zones[wamouracampaMob:getZoneID()]
-
-    local canUseEclosion = false
-    local eclosionID = wamouracampaMob:getID() + 1
-    for _, wamouraID in pairs(ID.mob.WAMOURA_OFFSET) do
-        if eclosionID == wamouraID then
-            canUseEclosion = true
-        end
-    end
-
     -- Set spawn.
     wamouracampaMob:addListener('SPAWN', 'WAMOURACAMPA_SPAWN', function(mob)
         mob:setAnimationSub(4)
@@ -68,10 +56,6 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
         mob:setLocalVar('hitPoints', mob:getHP())
         mob:setLocalVar('formTimeRoam', GetSystemTime() + math.randomInt(30, 90))
         mob:setLocalVar('formTimeEngaged', GetSystemTime())
-
-        if canUseEclosion then
-            mob:setLocalVar('eclosionTime', GetSystemTime() + math.randomInt(2400, 3000))
-        end
     end)
 
     -- Handle regular changes on roam.
@@ -81,13 +65,6 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
                 curlUpRoaming(mob)
             elseif mob:getAnimationSub() == 5 then
                 strechUpRoaming(mob)
-            end
-        end
-
-        if canUseEclosion then
-            local eclosionTime = mob:getLocalVar('eclosionTime')
-            if eclosionTime ~= 0 and GetSystemTime() >= eclosionTime then
-                mob:useMobAbility(xi.mobSkill.ECLOSION, mob)
             end
         end
     end)
@@ -100,12 +77,6 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
         then
             curlUpEngaged(mob)
             resetCount(mob)
-        end
-    end)
-
-    wamouracampaMob:addListener('DISENGAGE', 'WAMOURACAMPA_DISENGAGE', function(mob)
-        if canUseEclosion then
-            mob:setLocalVar('eclosionTime', GetSystemTime() + math.randomInt(2400, 3000))
         end
     end)
 

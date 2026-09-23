@@ -763,6 +763,8 @@ templates:
         entity_flags: 643
         model_size:     1
         hitbox:        11
+      behaviors:
+        links: true
       spawn:
         type: [scripted]
 

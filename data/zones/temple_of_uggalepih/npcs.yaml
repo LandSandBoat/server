@@ -36,6 +36,7 @@ npcs:
         type:  standard
         model: 52
       moving: 7
+    status: normal
 
   17428861:
     script:       qm3
@@ -46,6 +47,7 @@ npcs:
         type:  standard
         model: 52
       moving: 7
+    status: normal
 
   17428862:
     script:       qm4

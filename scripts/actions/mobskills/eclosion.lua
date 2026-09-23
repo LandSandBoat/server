@@ -21,8 +21,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
             return
         end
 
-        wamoura:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos())
         SpawnMob(mobID + 1)
+        wamoura:setPos(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mobArg:getRotPos())
 
         wamoura:addListener('DESPAWN', 'WAMOURA_DESPAWN', function(wamouraMob)
             GetMobByID(mobID):setRespawnTime(GetMobRespawnTime(mobID))

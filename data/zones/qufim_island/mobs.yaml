@@ -2124,7 +2124,7 @@ spawns:
   17293439:
     template: Land_Worm_Qufim
     script:   Land_Worm
-    region:   e_127
+    region:   c_118
     level:    [26, 27]
   17293440:
     template: Banshee

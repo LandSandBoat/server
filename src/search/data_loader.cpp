@@ -779,17 +779,27 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays) const
                 listing.sellerName = rset1->get<std::string>("charname");
             }
 
-            const auto rset2 = db::preparedStmt("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                                                "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
-                                                listing.sellerID,
-                                                listing.sellerName,
-                                                listing.itemID,
-                                                listing.ahStack == 1 ? listing.itemStack : 1);
-            if (rset2 && rset2->rowsAffected())
-            {
-                // delete the item from the auction house
-                db::preparedStmt("DELETE FROM auction_house WHERE id = ?", listing.saleID);
-            }
+            // the listing must leave the auction house before its item is returned
+            db::transaction(
+                [&]()
+                {
+                    const auto rset2 = db::preparedStmt("DELETE FROM auction_house WHERE id = ? AND buyer_name IS NULL", listing.saleID);
+                    if (!rset2 || !rset2->rowsAffected())
+                    {
+                        return;
+                    }
+
+                    const auto rset3 = db::preparedStmt("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+                                                        "(?, ?, 1, ?, 0, ?, 0, 'AH-Jeuno')",
+                                                        listing.sellerID,
+                                                        listing.sellerName,
+                                                        listing.itemID,
+                                                        listing.ahStack == 1 ? listing.itemStack : 1);
+                    if (!rset3 || !rset3->rowsAffected())
+                    {
+                        throw std::runtime_error(fmt::format("AH: could not return expired listing {} to seller {}", listing.saleID, listing.sellerID));
+                    }
+                });
         }
     }
     ShowInfoFmt("Sent {} expired auction house listings back to sellers", expiredAuctions);

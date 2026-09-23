@@ -34,6 +34,21 @@ m:addOverrideByEra('xi.zones.Nashmau.npcs.Yoyoroon.onTrigger', {
     end,
 })
 
+m:addOverrideByEra('xi.zones.Nashmau.npcs.Poporoon.onTrigger', {
+    [xi.expansion.ABYSSEA] = function(player, npc)
+        local stock =
+        {
+            { xi.item.LEATHER_HIGHBOOTS,   336 },
+            { xi.item.LIZARD_LEDELSENS,   3438 },
+            { xi.item.STUDDED_BOOTS,     11172 },
+            { xi.item.CUIR_HIGHBOOTS,    20832 },
+        }
+
+        player:showText(npc, zones[xi.zone.NASHMAU].text.POPOROON_SHOP_DIALOG)
+        xi.shop.general(player, stock)
+    end,
+})
+
 -- Pipiroon: Remove Nashmau Waystone from stock
 -- TODO: find a patch note or source for this change
 m:addOverrideByEra('xi.zones.Nashmau.npcs.Pipiroon.onTrigger', {

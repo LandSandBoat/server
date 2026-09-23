@@ -47,15 +47,14 @@ templates:
         skill: scythe
         delay: 200
       jobs: [blm, blm]
-      resists:
-        immune_status: [stun, blind, slow, elegy]
       render:
         look:
           type:  standard
           model: 1348
-        entity_flags:  3
-        model_size:    3
-        hitbox:       16
+        entity_flags:  1159
+        animation_sub:    4
+        model_size:       3
+        hitbox:          16
       behaviors:
         links: true
       spawn:
@@ -525,9 +524,10 @@ templates:
         look:
           type:  standard
           model: 1348
-        entity_flags:  3
-        model_size:    1
-        hitbox:       12
+        entity_flags:  1155
+        animation_sub:    4
+        model_size:       1
+        hitbox:          12
       behaviors:
         aggressive: true
         links:      true
@@ -548,15 +548,15 @@ templates:
         look:
           type:  standard
           model: 1347
-        entity_flags:  3
-        hitbox:       10
+        entity_flags: 129
+        hitbox:        10
       behaviors:
         aggressive: true
         links:      true
       spawn:
         type: [scripted]
       stats:
-        hp: 6000
+        hp: 5000
 
   Fjalar:
     id:            6814
@@ -3289,31 +3289,31 @@ spawns:
     level:    [77, 79]
   16806242:
     template: Feeler_Antlion
-    at:       [-402.574, 4.000, -202.750, 107]
+    at:       [-402.574, 3.500, -202.750, 107]
     level:    [78, 78]
   16806243:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.890, 3.500, -199.250, 236]
     level:    [80, 80]
   16806244:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-398.800, 3.460, -204.180, 236]
     level:    [80, 80]
   16806245:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-400.670, 3.040, -205.940, 236]
     level:    [80, 80]
   16806246:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.574, 3.500, -202.750, 236]
     level:    [80, 80]
   16806247:
     template: Executioner_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-402.574, 3.500, -202.750, 236]
     level:    [80, 80]
   16806248:
     template: Alastor_Antlion
-    at:       [1.000, 1.000, 1.000, 1]
+    at:       [-400.190, 3.500, -200.590, 236]
     level:    [83, 83]
   16806249:
     template: Ambusher_Antlion
