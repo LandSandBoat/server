@@ -8,6 +8,10 @@ local ID = zones[xi.zone.ALTAIEU]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.JAILER_OF_LOVE):getTargID())
+end
+
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(6) -- Mouth Closed
 

@@ -5,12 +5,14 @@
 --       All Qn'aerns can use their respective two-hour abilities multiple times
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.IXAERN_MNK):getTargID())
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -20,6 +22,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 45)
     local mJob = mob:getMainJob()
 
     if mJob == xi.job.RDM then
