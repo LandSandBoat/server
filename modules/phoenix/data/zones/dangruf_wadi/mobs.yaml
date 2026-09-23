@@ -155,10 +155,6 @@ templates:
         respawn: 600 # Era dungeon timers
     loot:
       drops:
-        - chance: rare
-          item:   block_of_yagudo_caulk
-        - chance: very_rare
-          item:   horutoto_chest_key
         - chance: very_rare
           item:   brass_cap
         - chance: very_rare
