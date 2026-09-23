@@ -7,11 +7,6 @@ local ID = zones[xi.zone.BIBIKI_BAY]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -634.000, y =  0.001, z = -669.000 }
-}
-
 entity.phList =
 {
     [ID.mob.SERRA - 1] = ID.mob.SERRA, -- Confirmed on retail
