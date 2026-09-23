@@ -1,4 +1,3 @@
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -368,7 +367,7 @@ INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
 
 -- Uggalepih Pendant
-INSERT INTO `item_latents` VALUES (13145,28,8,4,51);     -- "Magic Atk. Bonus" while MP <51%
+INSERT INTO `item_latents` VALUES (13145,28,8,45,51);    -- "Magic Atk. Bonus" while MP <51%, visible gear only
 
 -- Brisingamen +1
 INSERT INTO `item_latents` VALUES (13162,2,12,26,0);     -- Daytime: HP +12
@@ -1540,7 +1539,7 @@ INSERT INTO `item_latents` VALUES (15406,68,3,1,75);     -- Evasion+3 when HP >7
 INSERT INTO `item_latents` VALUES (15407,68,4,1,75);     -- Evasion+4 when HP >75%
 
 -- Resentment Cape
-INSERT INTO `item_latents` VALUES (15468,163,-500,53,1);   -- magic damge taken -5% ( in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (15468,163,-500,53,1); -- magic damage taken -5% (in areas outside own nation's control)
 
 -- Storm Mantle
 INSERT INTO `item_latents` VALUES (15483,2,75,58,0);     -- HP +75
@@ -1553,7 +1552,7 @@ INSERT INTO `item_latents` VALUES (15504,23,3,53,0);     -- ATK +3 in areas insi
 INSERT INTO `item_latents` VALUES (15504,25,3,53,0);     -- ACC +3 in areas inside own nation's control
 
 -- Parade Gorget
-INSERT INTO `item_latents` VALUES (15506,369,1,1,85);    -- Refresh when HP >=85%
+INSERT INTO `item_latents` VALUES (15506,369,1,46,85);   -- Refresh when HP >=85%, visible gear only
 
 -- Diabolos's Torque
 INSERT INTO `item_latents` VALUES (15516,24,8,52,8);     -- RATT+8 in Dark weather

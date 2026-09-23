@@ -34,4 +34,7 @@ struct Health
 
     int32 modhp; // modified maximum values
     int32 modmp; // modified maximum values
+
+    int32 latenthp;
+    int32 latentmp;
 };
