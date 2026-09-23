@@ -385,4 +385,5 @@ npcs:
       name_vis:     112
       name_prefix:   34
       moving:         1
-    status: normal
+    status:  normal
+    content: wotg
