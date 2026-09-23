@@ -1,4 +1,4 @@
--- local ID = zones[xi.zone.NASHMAU]
+local ID = zones[xi.zone.NASHMAU]
 
 return {
     ['Awaheen']           = { event = 240 },
@@ -13,6 +13,7 @@ return {
     ['Kyokyoroon']        = { event = 263 },
     ['Leleroon']          = { event = 264 },
     ['Loloroon']          = { event = 269 },
+    ['Mimiroon']          = { text = ID.text.MIMIROON_DIALOG },
     ['Mumuroon']          = { event = 262 },
     ['Paparoon']          = { event = 26 },
     ['Pyopyoroon']        = { event = 275 },
