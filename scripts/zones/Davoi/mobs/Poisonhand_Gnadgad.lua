@@ -15,11 +15,6 @@ entity.phList =
     [ID.mob.POISONHAND_GNADGAD - 6]  = ID.mob.POISONHAND_GNADGAD,  -- Orcish Impaler:     Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = -61.045, y = -0.517, z = 41.996 },
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 195)
 end
