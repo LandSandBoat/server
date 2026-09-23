@@ -47,8 +47,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.BLUESTREAK_GYUGYUROON - 215] = ID.mob.BLUESTREAK_GYUGYUROON, -- -221.7 13.762 -346.83
-    [ID.mob.BLUESTREAK_GYUGYUROON - 214] = ID.mob.BLUESTREAK_GYUGYUROON, -- -219 14.003 -364.83
+    [ID.mob.BLUESTREAK_GYUGYUROON - 201] = ID.mob.BLUESTREAK_GYUGYUROON, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
