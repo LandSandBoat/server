@@ -11,7 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.EATHO_CRUELHEART - 1] = ID.mob.EATHO_CRUELHEART,
+    [ID.mob.EATHO_CRUELHEART - 1] = ID.mob.EATHO_CRUELHEART, -- Confirmed on retail
 }
 
 return entity

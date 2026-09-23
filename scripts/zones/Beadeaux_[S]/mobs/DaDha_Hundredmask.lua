@@ -12,7 +12,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.DA_DHA_HUNDREDMASK - 100] = ID.mob.DA_DHA_HUNDREDMASK, -- -37.741 0.344 -127.037
+    [ID.mob.DA_DHA_HUNDREDMASK + 1] = ID.mob.DA_DHA_HUNDREDMASK, -- Confirmed on retail
 }
 
 entity.onMobSpawn = function(mob)
