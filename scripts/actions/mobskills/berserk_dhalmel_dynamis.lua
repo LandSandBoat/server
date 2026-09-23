@@ -1,6 +1,6 @@
 -----------------------------------
--- Sonic Wave
--- Reduces defense of enemies in an area of effect.
+-- Berserk
+-- Berserk Ability
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -10,12 +10,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local effectTable =
-    {
-        [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 40, duration = 180 },
-    }
-
-    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 200, 0, 180)) -- Needs to reduce defense by 50%
+    return xi.effect.BERSERK
 end
 
 return mobskillObject

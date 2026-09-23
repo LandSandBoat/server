@@ -1081,6 +1081,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mods:
+        mdef: 30
       spawn:
         respawn: 300
       stats:
@@ -1125,6 +1127,8 @@ templates:
       behaviors:
         aggressive: true
         links:      true
+      mods:
+        mdef: 30
       spawn:
         respawn: 300
       stats:
@@ -1462,7 +1466,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 360
+        delay: 380
       jobs: [mnk, mnk]
       render:
         look:
@@ -1507,7 +1511,7 @@ templates:
     attributes:
       combat:
         skill: hand_to_hand
-        delay: 360
+        delay: 380
       jobs: [mnk, mnk]
       render:
         look:
@@ -1554,6 +1558,7 @@ templates:
     attributes:
       combat:
         skill: axe
+      jobs: [war, thf]
       render:
         look:
           type:  standard
@@ -1596,6 +1601,7 @@ templates:
     attributes:
       combat:
         skill: axe
+      jobs: [war, thf]
       render:
         look:
           type:  standard
@@ -1724,7 +1730,7 @@ templates:
   Nightmare_Uragnite:
     id:            2872
     species:       uragnite
-    skill_list_id: 251
+    skill_list_id: 2113
     attributes:
       combat:
         skill: scythe
@@ -1768,7 +1774,7 @@ templates:
   Nightmare_Uragnite_HI:
     id:            6380
     species:       uragnite
-    skill_list_id: 251
+    skill_list_id: 2113
     attributes:
       combat:
         skill: scythe

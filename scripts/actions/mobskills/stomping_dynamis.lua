@@ -20,13 +20,18 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.damageType       = xi.damageType.SLASHING
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     params.attackMultiplier = { 1.5, 1.5, 1.5 }
-    params.canCrit          = true
-    params.criticalChance   = { 0.10, 0.15, 0.20 } -- TODO: Rate needs accurate caps
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.STUN, power = 1, duration = math.randomInt(5, 10) },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

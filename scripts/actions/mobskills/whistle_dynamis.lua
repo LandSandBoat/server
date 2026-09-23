@@ -1,7 +1,7 @@
 -----------------------------------
 --  Whistle
 --
---  Description: Increases agility.
+--  Description: Increases evasion.
 --  Type: Enhancing
 --  Utsusemi/Blink absorb: N/A
 --  Range: Self
@@ -14,12 +14,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local power = 10
-    local duration = 210
+    local power    =  30
+    local duration = 180
 
-    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.AGI_BOOST, power, 3, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.EVASION_BOOST, power, 3, duration))
 
-    return xi.effect.AGI_BOOST
+    return xi.effect.EVASION_BOOST
 end
 
 return mobskillObject
