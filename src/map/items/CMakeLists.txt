@@ -68,8 +68,6 @@ set(ITEM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/item_currency.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_equipment.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/item_equipment.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/item_fish.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/item_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_flowerpot.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/item_flowerpot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_furnishing.cpp
