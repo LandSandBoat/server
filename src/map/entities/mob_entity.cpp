@@ -1298,6 +1298,18 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 {
     TracyZoneScopedN("CMobEntity::CanAttack");
 
+    // prevent pets from attacking mobs that the PC master does not own
+    if (this->PMaster)
+    {
+        auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
+        if (PChar && !PChar->IsMobOwner(PTarget))
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
+            PAI->Disengage();
+            return false;
+        }
+    }
+
     // Refuse the attack while the navmesh route is far longer than the straight line, until we have walked the detour.
     if (PAI->PathFind && PAI->PathFind->IsFollowingPath() && !PAI->PathFind->IsPathDirect())
     {
