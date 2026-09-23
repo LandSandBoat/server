@@ -248,8 +248,9 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
             -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
             -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
-            -DPCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }} \
+            -DPCH_ENABLE=OFF \
             ${{ (runner.os == 'macOS' && startsWith(inputs.compiler, 'clang')) && '-DCMAKE_AR=$AR -DCMAKE_RANLIB=$RANLIB -DCMAKE_NM=$NM ' || '' }} \
+            ${{ runner.os == 'Windows' && '-DCMAKE_MSVC_DEBUG_INFORMATION_FORMAT=Embedded ' || '' }} \
             -DCACHE_OPTION=sccache
 
       - name: Build
