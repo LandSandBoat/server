@@ -42,6 +42,12 @@ templates:
     attributes:
       spawn:
         respawn: 840 # Era dungeon timers
+    loot:
+      drops:
+        - chance: very_common
+          item:   vial_of_mercury
+        - chance: very_common
+          item:   hecteyes_eye
 
   Haunt_EN:
     attributes:
