@@ -78,5 +78,9 @@ era/lua
 phoenix/cpp
 phoenix/lua
 
+phoenix_private/cpp
+phoenix_private/lua
+phoenix_private/sql
+
 # Dynamis
 phoenix/dynamis/lua/
