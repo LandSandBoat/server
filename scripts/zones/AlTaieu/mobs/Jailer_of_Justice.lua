@@ -28,6 +28,7 @@ local callPetParams =
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Qnxzomit')
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.BLIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -40,6 +41,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 100)
     mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
     xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.FAMILIAR_1, hpp = 50, cooldown = 210 }, }, })
 end

@@ -243,8 +243,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 57000
-        mp: 25000
+        hp:  57000
+        mp: 100000
     loot:
       drops:
         - chance: always
@@ -1029,6 +1029,7 @@ templates:
   Qnhpemde:
     id:            3270
     species:       hpemde
+    type:          [notorious]
     skill_list_id: 144
     attributes:
       combat:
@@ -1051,6 +1052,7 @@ templates:
   Qnxzomit:
     id:            3271
     species:       xzomit
+    type:          [notorious]
     skill_list_id: 269
     attributes:
       combat:
@@ -1300,6 +1302,7 @@ templates:
   Ruphuabo:
     id:            3422
     species:       phuabo
+    type:          [notorious]
     skill_list_id: 194
     attributes:
       combat:

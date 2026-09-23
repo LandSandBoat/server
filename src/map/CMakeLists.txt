@@ -118,6 +118,8 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_builder.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_builder.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_config.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/path_inset.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/path_inset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/null_navmesh.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/null_navmesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/nominate_manager.cpp

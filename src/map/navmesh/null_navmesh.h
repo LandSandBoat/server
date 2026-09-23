@@ -27,7 +27,7 @@
 class NullNavMesh final : public NavMesh
 {
 public:
-    auto findPath(const position_t& start, const position_t& end) -> Maybe<PathResult> override;
+    auto findPath(const position_t& start, const position_t& end, float clearance) -> Maybe<PathResult> override;
     auto findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t> override;
     auto validPosition(const position_t& position) const -> bool override;
     auto findClosestValidPoint(const position_t& position) const -> Maybe<position_t> override;

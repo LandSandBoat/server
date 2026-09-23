@@ -125,4 +125,9 @@ auto EntityPathOwner::id() const -> uint32
     return entity_->id;
 }
 
+auto EntityPathOwner::hitboxRadius() const -> float
+{
+    return entity_->modelHitboxSize * 0.5f;
+}
+
 } // namespace pathfind

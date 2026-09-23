@@ -38,7 +38,7 @@ namespace
 class FlatNavMesh final : public NavMesh
 {
 public:
-    auto findPath(const position_t&, const position_t& end) -> Maybe<PathResult> override
+    auto findPath(const position_t&, const position_t& end, float) -> Maybe<PathResult> override
     {
         return PathResult{ { pathpoint_t{ end, 0s, false } }, false };
     }
@@ -148,6 +148,11 @@ public:
     auto id() const -> uint32 override
     {
         return 1;
+    }
+
+    auto hitboxRadius() const -> float override
+    {
+        return 0.0f;
     }
 
 private:

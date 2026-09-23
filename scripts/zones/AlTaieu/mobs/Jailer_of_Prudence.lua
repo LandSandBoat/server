@@ -42,6 +42,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.STORETP, 100)
     mob:setAnimationSub(0) -- Mouth closed
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:addMod(xi.mod.DEFP, 33)

@@ -21,7 +21,7 @@
 
 #include "null_navmesh.h"
 
-auto NullNavMesh::findPath(const position_t&, const position_t&) -> Maybe<PathResult>
+auto NullNavMesh::findPath(const position_t&, const position_t&, float) -> Maybe<PathResult>
 {
     return std::nullopt;
 }

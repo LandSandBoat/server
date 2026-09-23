@@ -12,12 +12,15 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     if mob:getID() < ID.mob.JAILER_OF_LOVE then
+        mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.JAILER_OF_JUSTICE):getTargID())
         mob:addImmunity(xi.immunity.BIND)
         mob:addImmunity(xi.immunity.BLIND)
         mob:addImmunity(xi.immunity.DARK_SLEEP)
         mob:addImmunity(xi.immunity.LIGHT_SLEEP)
         mob:addImmunity(xi.immunity.PETRIFY)
         mob:addImmunity(xi.immunity.STUN)
+    else
+        mob:setMobMod(xi.mobMod.SUPERLINK, GetMobByID(ID.mob.JAILER_OF_LOVE):getTargID())
     end
 end
 
@@ -28,6 +31,7 @@ entity.onMobSpawn = function(mob)
 
     -- only JoJ pops
     if mob:getID() < ID.mob.JAILER_OF_LOVE then
+        mob:setMod(xi.mod.STORETP, 45)
         xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.MIJIN_GAKURE_1, hpp = 20 }, }, })
     end
 end

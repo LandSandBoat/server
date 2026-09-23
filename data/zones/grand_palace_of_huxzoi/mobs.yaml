@@ -830,6 +830,7 @@ templates:
   Qnaern_rdm:
     id:            3269
     species:       aern
+    type:          [notorious]
     spell_list_id: 3
     skill_list_id: 441
     attributes:
@@ -854,6 +855,7 @@ templates:
   Qnaern_whm:
     id:            4651
     species:       aern
+    type:          [notorious]
     spell_list_id: 20
     skill_list_id: 439
     attributes:

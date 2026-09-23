@@ -32,6 +32,7 @@
 
 #include <array>
 #include <cstddef>
+#include <limits>
 #include <memory>
 #include <vector>
 
@@ -77,8 +78,8 @@ public:
 
     auto ResumePatrol() -> void;
 
-    // Move the mob toward the next point.
-    auto FollowPath(timer::time_point tick) -> void;
+    // Move the mob toward the next point, walking at most stepCap this tick.
+    auto FollowPath(timer::time_point tick, float stepCap = std::numeric_limits<float>::max()) -> void;
 
     // True if the entity is on a waypoint.
     auto OnPoint() const -> bool;
