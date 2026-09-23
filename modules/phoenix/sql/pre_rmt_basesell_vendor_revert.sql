@@ -398,6 +398,250 @@ UPDATE item_basic SET baseSell = 22000 WHERE itemid = 16711;
 
 -- Goshisho's Scythe
 UPDATE item_basic SET baseSell = 17000 WHERE itemid = 16792;
+
+-----------------------------------
+-- Items missing LSB price captures that are problematic. These use JP wiki primarily for the changed values.
+-----------------------------------
+
+-- Accelerator II
+UPDATE item_basic SET baseSell = 530 WHERE itemid = 2249;
+
+-- Arhat's Tekko
+UPDATE item_basic SET baseSell = 3305 WHERE itemid = 14023;
+
+-- Armored Arrowheads
+UPDATE item_basic SET baseSell = 162 WHERE itemid = 1627;
+
+-- Beetle Leggings +1
+UPDATE item_basic SET baseSell = 1183 WHERE itemid = 13043;
+
+-- Bison Jerky
+UPDATE item_basic SET baseSell = 377 WHERE itemid = 5207;
+
+-- Bittern
+UPDATE item_basic SET baseSell = 102 WHERE itemid = 2109;
+
+-- Brilliant Gold Thread
+UPDATE item_basic SET baseSell = 495 WHERE itemid = 1966;
+
+-- Chocobo Hood
+UPDATE item_basic SET baseSell = 52 WHERE itemid = 2401;
+
+-- Copper Nugget
+UPDATE item_basic SET baseSell = 1 WHERE itemid = 1230;
+
+-- Dried Date +1
+UPDATE item_basic SET baseSell = 65 WHERE itemid = 5574;
+
+-- Dull Gold Thread
+UPDATE item_basic SET baseSell = 495 WHERE itemid = 1967;
+
+-- Elm Pole +1
+UPDATE item_basic SET baseSell = 817 WHERE itemid = 17119;
+
+-- Ether Drop
+UPDATE item_basic SET baseSell = 214 WHERE itemid = 5357;
+
+-- Angler's Hose (Fisherman's Hose HQ)
+UPDATE item_basic SET baseSell = 525 WHERE itemid = 14293;
+
+-- Flexible Pole
+UPDATE item_basic SET baseSell = 447 WHERE itemid = 18586;
+
+-- Garden Bangles
+UPDATE item_basic SET baseSell = 630 WHERE itemid = 14065;
+
+-- Goshenite Ring
+UPDATE item_basic SET baseSell = 1234 WHERE itemid = 13478;
+
+-- Healing Justaucorps
+UPDATE item_basic SET baseSell = 4680 WHERE itemid = 14496;
+
+-- Healing Tea
+UPDATE item_basic SET baseSell = 96 WHERE itemid = 4286;
+
+-- Hi-Ether Drop
+UPDATE item_basic SET baseSell = 307 WHERE itemid = 5358;
+
+-- Divine Shield (Holy Shield HQ)
+UPDATE item_basic SET baseSell = 717 WHERE itemid = 12380;
+
+-- Humidified Velvet
+UPDATE item_basic SET baseSell = 572 WHERE itemid = 2425;
+
+-- Ikra Gunkan +1
+UPDATE item_basic SET baseSell = 123 WHERE itemid = 5220;
+
+-- Luminous Shell
+UPDATE item_basic SET baseSell = 390 WHERE itemid = 2420;
+
+-- Magical Silk Cloth
+UPDATE item_basic SET baseSell = 620 WHERE itemid = 1965;
+
+-- Mailbreaker +1
+UPDATE item_basic SET baseSell = 3213 WHERE itemid = 16618;
+
+-- Mana Cloak
+UPDATE item_basic SET baseSell = 1976 WHERE itemid = 14491;
+
+-- Mana Willow Lumber
+UPDATE item_basic SET baseSell = 111 WHERE itemid = 2132;
+
+-- Maple Cake
+UPDATE item_basic SET baseSell = 200 WHERE itemid = 5625;
+
+-- Marid Mittens
+UPDATE item_basic SET baseSell = 746 WHERE itemid = 14941;
+
+-- Melt Katana
+UPDATE item_basic SET baseSell = 1240 WHERE itemid = 18410;
+
+-- Noct Beret +1
+UPDATE item_basic SET baseSell = 1050 WHERE itemid = 15172;
+
+-- Paralysis Arrowheads
+UPDATE item_basic SET baseSell = 47 WHERE itemid = 2294;
+
+-- Pogaca
+UPDATE item_basic SET baseSell = 1 WHERE itemid = 5637;
+
+-- Pogaca +1
+UPDATE item_basic SET baseSell = 2 WHERE itemid = 5638;
+
+-- Potion Drop
+UPDATE item_basic SET baseSell = 50 WHERE itemid = 5327;
+
+-- Sacred Lance
+UPDATE item_basic SET baseSell = 3100 WHERE itemid = 16858;
+
+-- San d'Orian Bow
+UPDATE item_basic SET baseSell = 529 WHERE itemid = 17197;
+
+-- Silk Cuffs
+UPDATE item_basic SET baseSell = 2652 WHERE itemid = 12732;
+
+-- Silken Coat
+UPDATE item_basic SET baseSell = 4228 WHERE itemid = 14542;
+
+-- Silk Headband +1
+UPDATE item_basic SET baseSell = 2399 WHERE itemid = 13851;
+
+-- Smooth Beetle Jaw
+UPDATE item_basic SET baseSell = 121 WHERE itemid = 1716;
+
+-- Smooth Velvet
+UPDATE item_basic SET baseSell = 550 WHERE itemid = 1702;
+
+-- Sphene Ring
+UPDATE item_basic SET baseSell = 1234 WHERE itemid = 13481;
+
+-- Spore Bomb
+UPDATE item_basic SET baseSell = 124 WHERE itemid = 2395;
+
+-- Sturdy Slacks
+UPDATE item_basic SET baseSell = 185 WHERE itemid = 15611;
+
+-- Taikyoku Kenpogi
+UPDATE item_basic SET baseSell = 312 WHERE itemid = 14541;
+
+-- Twinthread Obi
+UPDATE item_basic SET baseSell = 1500 WHERE itemid = 13273;
+
+-- Vivio Scorpion Claw
+UPDATE item_basic SET baseSell = 315 WHERE itemid = 1975;
+
+-- Wailing Shell
+UPDATE item_basic SET baseSell = 31 WHERE itemid = 2234;
+
+-- Water Arrowheads
+UPDATE item_basic SET baseSell = 90 WHERE itemid = 2297;
+
+-- Windurstian Doublet
+UPDATE item_basic SET baseSell = 3427 WHERE itemid = 14352;
+
+-- Windurstian Pole
+UPDATE item_basic SET baseSell = 1228 WHERE itemid = 17535;
+
+-- Windurstian Staff
+UPDATE item_basic SET baseSell = 212 WHERE itemid = 17537;
+
+-- Yahata Sushi
+UPDATE item_basic SET baseSell = 270 WHERE itemid = 5186;
+
+-- Acrobat's Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15866;
+
+-- Ametrine Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13340;
+
+-- Blood Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13338;
+
+-- Caliginous Wolf Hide
+UPDATE item_basic SET baseSell = 129 WHERE itemid = 871;
+
+-- Chasuble
+UPDATE item_basic SET baseSell = 7500 WHERE itemid = 14440;
+
+-- Coral Subligar
+UPDATE item_basic SET baseSell = 3335 WHERE itemid = 12878;
+
+-- Ebony Harp
+UPDATE item_basic SET baseSell = 2587 WHERE itemid = 17357;
+
+-- Fragrant Ram Skin
+UPDATE item_basic SET baseSell = 400 WHERE itemid = 2140;
+
+-- Gaia Mantle
+UPDATE item_basic SET baseSell = 3200 WHERE itemid = 13637;
+
+-- Gold Arrow
+UPDATE item_basic SET baseSell = 5 WHERE itemid = 17317;
+
+-- Khimaira Jacket
+UPDATE item_basic SET baseSell = 9187 WHERE itemid = 14566;
+
+-- Mist Pumps
+UPDATE item_basic SET baseSell = 1305 WHERE itemid = 15312;
+
+-- Partisan
+UPDATE item_basic SET baseSell = 2415 WHERE itemid = 16839;
+
+-- Runner's Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15865;
+
+-- Samsonian Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15863;
+
+-- Sipahi Dastanas
+UPDATE item_basic SET baseSell = 2910 WHERE itemid = 14932;
+
+-- Smash Cesti
+UPDATE item_basic SET baseSell = 252 WHERE itemid = 18747;
+
+-- Spartan Hoplon
+UPDATE item_basic SET baseSell = 1650 WHERE itemid = 15071;
+
+-- Sphene Earring
+UPDATE item_basic SET baseSell = 1000 WHERE itemid = 13342;
+
+-- Tiger Ledelsens
+UPDATE item_basic SET baseSell = 2040 WHERE itemid = 12958;
+
+-- Tough Belt
+UPDATE item_basic SET baseSell = 747 WHERE itemid = 15864;
+
+-- Tree Sap
+UPDATE item_basic SET baseSell = 92 WHERE itemid = 17872;
+
+-- Waistbelt +1
+UPDATE item_basic SET baseSell = 1740 WHERE itemid = 13214;
+
+-- Windurstian Hachimaki
+UPDATE item_basic SET baseSell = 1208 WHERE itemid = 13901;
+
+-- Wise Gloves
+UPDATE item_basic SET baseSell = 1125 WHERE itemid = 14880;
 ----------------------------------------------------------------------------------------------------------------------------
 -- PENDING -- I could not find prices for these items, but they were mentioned in patch notes as having price values changed
 ----------------------------------------------------------------------------------------------------------------------------
