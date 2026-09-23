@@ -8,6 +8,8 @@
 #include <cmath>
 #include <cstdlib>
 
+// cppcheck cannot parse Catch2's TEST_CASE expansion; the compiler is the real check
+// cppcheck-suppress syntaxError
 TEST_CASE("Fishing small-fish losses depend on fish level, not angler skill or rank", "[phoenix][fishing]")
 {
     auto rod     = rod_t{};
@@ -115,17 +117,60 @@ TEST_CASE("Fishing oversized catches have a fifty percent size-loss ceiling", "[
     CHECK(result.chance == 50);
 }
 
+TEST_CASE("Fishing oversized catches never outrank a certain low-skill loss or punish a master angler", "[phoenix][fishing]")
+{
+    auto rod    = rod_t{};
+    rod.maxRank = 10;
+
+    struct SizeCase
+    {
+        uint8 fishingSkill;
+        uint8 maxSkill;
+        uint8 ranking;
+        uint8 reason;
+        uint8 chance;
+    };
+
+    // The first row used to let the raw oversized value beat the fifty-level rule; the second used to wrap below zero
+    const SizeCase cases[] = {
+        { 0, 51, 11, FISHINGFAILTYPE_LOST_LOWSKILL, 100 },
+        { 100, 18, 16, FISHINGFAILTYPE_NONE, 0 },
+    };
+
+    for (const auto& [fishingSkill, maxSkill, ranking, reason, chance] : cases)
+    {
+        CAPTURE(fishingSkill, maxSkill, ranking);
+        const auto result = fishingutils::CalculateLoseChance(FISHINGCATCHTYPE_BIGFISH, fishingSkill, maxSkill, FISHINGSIZETYPE_LARGE, false, ranking, &rod);
+        CHECK(result.failReason == reason);
+        CHECK(result.chance == chance);
+    }
+}
+
 TEST_CASE("Fishing line snaps begin above rod durability and cap at fifty-five", "[phoenix][fishing]")
 {
     auto rod    = rod_t{};
     rod.maxRank = 10;
 
-    for (const auto rank : { 10, 11, 12, 13 })
+    struct SnapCase
+    {
+        uint8 rank;
+        uint8 chance;
+    };
+
+    // Rank 24 is the first gap whose raw chance passes 255, so it guards the arithmetic as well as the cap
+    const SnapCase cases[] = {
+        { 10, 0 },
+        { 11, 19 },
+        { 12, 38 },
+        { 13, 55 },
+        { 24, 55 },
+    };
+
+    for (const auto& [rank, chance] : cases)
     {
         CAPTURE(rank);
-        const auto  result    = fishingutils::CalculateSnapChance(FISHINGCATCHTYPE_SMALLFISH, 0, 10, FISHINGSIZETYPE_SMALL, false, rank, &rod);
-        const uint8 chances[] = { 0, 19, 38, 55 };
-        CHECK(result.chance == chances[rank - 10]);
+        const auto result = fishingutils::CalculateSnapChance(FISHINGCATCHTYPE_SMALLFISH, 0, 10, FISHINGSIZETYPE_SMALL, false, rank, &rod);
+        CHECK(result.chance == chance);
         if (rank == 10)
         {
             CHECK(result.failReason == FISHINGFAILTYPE_NONE);
@@ -163,6 +208,11 @@ TEST_CASE("Fishing rod breaks begin above durability and cap at twenty", "[phoen
     const auto capped = fishingutils::CalculateBreakChance(FISHINGCATCHTYPE_SMALLFISH, 0, 10, FISHINGSIZETYPE_SMALL, false, 100, &rod);
     CHECK(capped.failReason == FISHINGFAILTYPE_RODBREAK);
     CHECK(capped.chance == 20);
+
+    // Rank 37 is the first gap whose raw chance passes 255, so it guards the arithmetic as well as the cap
+    const auto wide = fishingutils::CalculateBreakChance(FISHINGCATCHTYPE_SMALLFISH, 0, 10, FISHINGSIZETYPE_SMALL, false, 37, &rod);
+    CHECK(wide.failReason == FISHINGFAILTYPE_RODBREAK);
+    CHECK(wide.chance == 20);
 }
 
 TEST_CASE("Fishing legendary attack bonuses also increase wrong-arrow healing", "[phoenix][fishing]")
@@ -217,6 +267,76 @@ TEST_CASE("Fishing cylinders include the radius and reject points beyond it", "[
     CHECK_FALSE(fishingutils::isInsideCylinder(center, { 10, 17, 30 }, 5, 4));
 }
 
+TEST_CASE("Fishing fatigue for a landed fish follows size, level gap and legend", "[phoenix][fishing][fatigue]")
+{
+    auto hooked = fishresponse_t{};
+
+    struct FatigueCase
+    {
+        uint8  catchtype;
+        uint8  catchlevel;
+        bool   legendary;
+        uint32 catchid;
+        uint8  fishingSkill;
+        int32  fatigue;
+    };
+
+    // Seventeen levels up quadruples the cost; a legendary fish ignores size and skill entirely
+    const FatigueCase cases[] = {
+        { FISHINGCATCHTYPE_SMALLFISH, 30, false, 4401, 30, 25 },
+        { FISHINGCATCHTYPE_BIGFISH, 30, false, 4401, 30, 50 },
+        { FISHINGCATCHTYPE_SMALLFISH, 47, false, 4401, 30, 100 },
+        { FISHINGCATCHTYPE_BIGFISH, 47, false, 4401, 30, 200 },
+        { FISHINGCATCHTYPE_SMALLFISH, 46, false, 4401, 30, 25 },
+        { FISHINGCATCHTYPE_BIGFISH, 90, true, 5455, 0, 140 },
+        { FISHINGCATCHTYPE_BIGFISH, 90, true, 5127, 100, 780 },
+    };
+
+    for (const auto& entry : cases)
+    {
+        CAPTURE(entry.catchtype, entry.catchlevel, entry.legendary, entry.catchid, entry.fishingSkill);
+        hooked.catchtype  = entry.catchtype;
+        hooked.catchlevel = entry.catchlevel;
+        hooked.legendary  = entry.legendary;
+        hooked.catchid    = entry.catchid;
+        CHECK(fishingutils::CatchFatigue(entry.fishingSkill, hooked) == entry.fatigue);
+    }
+}
+
+TEST_CASE("Fishing fatigue for a lost fish matches landing it until the fish was hopeless", "[phoenix][fishing][fatigue]")
+{
+    auto hooked      = fishresponse_t{};
+    hooked.catchtype = FISHINGCATCHTYPE_BIGFISH;
+
+    // Thirty-nine levels up is still an ordinary loss; forty is the flat penalty regardless of size or legend
+    hooked.catchlevel = 69;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == fishingutils::CatchFatigue(30, hooked));
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 200);
+
+    hooked.catchlevel = 70;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 1000);
+
+    hooked.legendary = true;
+    hooked.catchid   = 5127;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 1000);
+
+    hooked.catchlevel = 20;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 780);
+}
+
+TEST_CASE("Fishing fatigue relief belongs to the legendary rods alone", "[phoenix][fishing][fatigue]")
+{
+    // Integer division rounds the relief down, so 25 becomes 21 and 23 rather than 21.25 and 23.75
+    CHECK(fishingutils::RodFatigue(EBISU, 100) == 85);
+    CHECK(fishingutils::RodFatigue(EBISU_1, 100) == 85);
+    CHECK(fishingutils::RodFatigue(LU_SHANG, 100) == 95);
+    CHECK(fishingutils::RodFatigue(LU_SHANG_1, 100) == 95);
+    CHECK(fishingutils::RodFatigue(EBISU, 25) == 21);
+    CHECK(fishingutils::RodFatigue(LU_SHANG, 25) == 23);
+    CHECK(fishingutils::RodFatigue(COMPOSITE, 100) == 100);
+    CHECK(fishingutils::RodFatigue(TARUTARU, 1000) == 1000);
+}
+
 TEST_CASE("Fishing a Nebimonite from the Selbina ship warns without promising", "[phoenix][fishing][simulation]")
 {
     // The Tarutaru rod and Nebimonite as sql/fishing_rod.sql and sql/fishing_fish.sql hold them.
@@ -261,40 +381,51 @@ TEST_CASE("Fishing a Nebimonite from the Selbina ship warns without promising", 
         int terribleBroke = 0;
         int doubtLost     = 0;
 
-        int landed    = 0;
-        int snapped   = 0;
-        int cracked   = 0;
-        int lostSkill = 0;
+        int landed     = 0;
+        int snapped    = 0;
+        int cracked    = 0;
+        int lostSkill  = 0;
         int quietBreak = 0;
 
         for (int reel = 0; reel < reels; ++reel)
         {
             auto response = fishresponse_t{};
 
-            const auto sense = fishingutils::CalculateFishSense(nullptr, &response, anglerSkill, FISHINGCATCHTYPE_SMALLFISH,
-                                                                FISHINGSIZETYPE_SMALL, fishLevel, fishingutils::Legendary::No, 1, 1, fishRanking, &rod);
+            const auto sense = fishingutils::CalculateFishSense(nullptr, &response, anglerSkill, FISHINGCATCHTYPE_SMALLFISH, FISHINGSIZETYPE_SMALL, fishLevel, fishingutils::Legendary::No, 1, 1, fishRanking, &rod);
 
             auto* outcome = fishingutils::ReelCheck(nullptr, &response, &rod);
 
             if (sense == FISHINGSENSETYPE_TERRIBLE)
             {
                 ++terrible;
-                terribleBroke += outcome->rodbreak ? 1 : 0;
+                if (outcome->rodbreak)
+                {
+                    ++terribleBroke;
+                }
             }
             else if (sense == FISHINGSENSETYPE_BAD)
             {
                 ++bad;
-                badSnapped += outcome->linebreak ? 1 : 0;
+                if (outcome->linebreak)
+                {
+                    ++badSnapped;
+                }
             }
             else if (sense == FISHINGSENSETYPE_GOOD)
             {
                 ++good;
-                goodLanded += outcome->caught ? 1 : 0;
+                if (outcome->caught)
+                {
+                    ++goodLanded;
+                }
             }
             else
             {
                 ++doubt;
-                doubtLost += outcome->failReason == FISHINGFAILTYPE_LOST_LOWSKILL ? 1 : 0;
+                if (outcome->failReason == FISHINGFAILTYPE_LOST_LOWSKILL)
+                {
+                    ++doubtLost;
+                }
             }
 
             // A fish may still prove too small under a good feeling, but the line and the rod
@@ -325,17 +456,17 @@ TEST_CASE("Fishing a Nebimonite from the Selbina ship warns without promising", 
         }
 
         WARN("Nebimonite, Tarutaru Fishing Rod, skill " << anglerSkill << ", over " << reels << " reels"
-             << "\n  rolled chances    loss " << static_cast<int>(lose.chance)
-             << ", snap " << static_cast<int>(snap.chance)
-             << ", break " << static_cast<int>(crack.chance)
-             << "\n  good      shown " << good << ", landed " << goodLanded
-             << "\n  unsure    shown " << doubt << ", lost to skill " << doubtLost
-             << "\n  bad       shown " << bad << ", line snapped " << badSnapped
-             << "\n  terrible  shown " << terrible << ", rod broke " << terribleBroke
-             << "\n  outcomes  landed " << landed << " (expected " << static_cast<int>(landRate * reels) << ")"
-             << ", snapped " << snapped << " (" << static_cast<int>(snapRate * reels) << ")"
-             << ", broke " << cracked << " (" << static_cast<int>(crackRate * reels) << ")"
-             << ", lost to skill " << lostSkill << " (" << static_cast<int>(loseRate * reels) << ")");
+                                                        << "\n  rolled chances    loss " << static_cast<int>(lose.chance)
+                                                        << ", snap " << static_cast<int>(snap.chance)
+                                                        << ", break " << static_cast<int>(crack.chance)
+                                                        << "\n  good      shown " << good << ", landed " << goodLanded
+                                                        << "\n  unsure    shown " << doubt << ", lost to skill " << doubtLost
+                                                        << "\n  bad       shown " << bad << ", line snapped " << badSnapped
+                                                        << "\n  terrible  shown " << terrible << ", rod broke " << terribleBroke
+                                                        << "\n  outcomes  landed " << landed << " (expected " << static_cast<int>(landRate * reels) << ")"
+                                                        << ", snapped " << snapped << " (" << static_cast<int>(snapRate * reels) << ")"
+                                                        << ", broke " << cracked << " (" << static_cast<int>(crackRate * reels) << ")"
+                                                        << ", lost to skill " << lostSkill << " (" << static_cast<int>(loseRate * reels) << ")");
 
         // A warning is a strong hint and never a promise, so the angler who drops every one of
         // them throws away fish, and the angler who fights them all still lands most

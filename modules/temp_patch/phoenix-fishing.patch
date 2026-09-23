@@ -1,3 +1,46 @@
+diff --git a/modules/phoenix/cpp/fishing_meters.cpp b/modules/phoenix/cpp/fishing_meters.cpp
+new file mode 100644
+index 0000000000..41db2e69b0
+--- /dev/null
++++ b/modules/phoenix/cpp/fishing_meters.cpp
+@@ -0,0 +1,24 @@
++/************************************************************************
++ * Fishing Meters
++ *
++ * Hands the fishing system its daily point and fatigue storage, which lives
++ * in account_vars. Ships inside the fishing patch because the registration
++ * point only exists once that patch is applied.
++ ************************************************************************/
++
++#include "account_vars.h"
++
++#include "map/utils/fishingutils.h"
++#include "map/utils/moduleutils.h"
++
++class FishingMetersModule : public CPPModule
++{
++    void OnInit() override
++    {
++        TracyZoneScoped;
++
++        fishingutils::SetAccountMeterAccess(accountvars::fetchAccountVar, accountvars::persistAccountVar);
++    }
++};
++
++REGISTER_CPP_MODULE(FishingMetersModule);
+diff --git a/src/map/packets/c2s/0x036_item_transfer.cpp b/src/map/packets/c2s/0x036_item_transfer.cpp
+index 2d1f7e1ff9..c18ac6d2f6 100644
+--- a/src/map/packets/c2s/0x036_item_transfer.cpp
++++ b/src/map/packets/c2s/0x036_item_transfer.cpp
+@@ -43,7 +43,7 @@ constexpr uint8 MAX_TRADE_SLOTS = 9;
+ auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
++        .blockedBy({ BlockedState::InEvent, BlockedState::Fishing, BlockedState::Monstrosity })
+         .range("ItemNum", this->ItemNum, 1, MAX_TRADE_SLOTS);
+ }
+ 
 diff --git a/src/map/packets/c2s/0x050_equip_set.cpp b/src/map/packets/c2s/0x050_equip_set.cpp
 index 765d204faf..879ace1698 100644
 --- a/src/map/packets/c2s/0x050_equip_set.cpp
@@ -24,8 +67,73 @@ index e8404adb4b..c4c7fe58fb 100644
                    .range("Count", this->Count, 1, 16);
  
      if (this->Count <= 16)
+diff --git a/src/map/packets/c2s/0x096_combine_ask.cpp b/src/map/packets/c2s/0x096_combine_ask.cpp
+index 38f2504490..db3c4f0a5e 100644
+--- a/src/map/packets/c2s/0x096_combine_ask.cpp
++++ b/src/map/packets/c2s/0x096_combine_ask.cpp
+@@ -69,7 +69,7 @@ const std::set validCrystals = {
+ auto GP_CLI_COMMAND_COMBINE_ASK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Monstrosity })
++        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Monstrosity })
+         .oneOf("Crystal", static_cast<ITEMID>(this->Crystal), validCrystals)
+         .range("Items", this->Items, 1, 8);
+ }
+diff --git a/src/map/packets/c2s/0x0e7_reqlogout.cpp b/src/map/packets/c2s/0x0e7_reqlogout.cpp
+index d6c42a9108..b3ae54f589 100644
+--- a/src/map/packets/c2s/0x0e7_reqlogout.cpp
++++ b/src/map/packets/c2s/0x0e7_reqlogout.cpp
+@@ -27,7 +27,7 @@
+ auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
++        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction })
+         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
+         .oneOf<GP_CLI_COMMAND_REQLOGOUT_KIND>(this->Kind);
+ }
+diff --git a/src/map/packets/c2s/0x0e8_camp.cpp b/src/map/packets/c2s/0x0e8_camp.cpp
+index a2dbb8134f..e55cb53e98 100644
+--- a/src/map/packets/c2s/0x0e8_camp.cpp
++++ b/src/map/packets/c2s/0x0e8_camp.cpp
+@@ -29,7 +29,7 @@
+ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Engaged })
++        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Engaged })
+         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
+         .mustNotEqual(
+             PChar->animation == xi::Animation::Healing &&
+diff --git a/src/map/packets/c2s/0x0ea_sit.cpp b/src/map/packets/c2s/0x0ea_sit.cpp
+index fe1777eb1a..3be3cf1f15 100644
+--- a/src/map/packets/c2s/0x0ea_sit.cpp
++++ b/src/map/packets/c2s/0x0ea_sit.cpp
+@@ -28,7 +28,7 @@
+ auto GP_CLI_COMMAND_SIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
++        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction })
+         .oneOf<GP_CLI_COMMAND_SIT_MODE>(this->Mode);
+ }
+ 
+diff --git a/src/map/packets/c2s/0x113_sitchair.cpp b/src/map/packets/c2s/0x113_sitchair.cpp
+index 1e12c0f2eb..2a659b1c9e 100644
+--- a/src/map/packets/c2s/0x113_sitchair.cpp
++++ b/src/map/packets/c2s/0x113_sitchair.cpp
+@@ -29,7 +29,7 @@
+ auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+ {
+     return PacketValidator(PChar)
+-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
++        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction })
+         .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(this->Mode)
+         .range("ChairId", this->ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
+ }
 diff --git a/src/map/utils/fishingutils.cpp b/src/map/utils/fishingutils.cpp
-index b2f1ebdff0..193b96f166 100644
+index b2f1ebdff0..9928983b31 100644
 --- a/src/map/utils/fishingutils.cpp
 +++ b/src/map/utils/fishingutils.cpp
 @@ -21,6 +21,7 @@
@@ -116,7 +224,7 @@ index b2f1ebdff0..193b96f166 100644
      {
          return;
      }
-@@ -163,6 +215,111 @@ void CreateFishingPools()
+@@ -163,6 +215,214 @@ void CreateFishingPools()
      }
  }
  
@@ -134,7 +242,12 @@ index b2f1ebdff0..193b96f166 100644
 +// The allowance sits on the account rather than the character, and clears itself at Japanese midnight
 +auto getFishingMeter(const CCharEntity* PChar, const std::string& varName) -> int32
 +{
-+    return accountMeterFetch ? accountMeterFetch(PChar->accid, varName) : 0;
++    if (!accountMeterFetch)
++    {
++        return 0;
++    }
++
++    return accountMeterFetch(PChar->accid, varName);
 +}
 +
 +void addFishingMeter(const CCharEntity* PChar, const std::string& varName, const int32 amount)
@@ -153,68 +266,103 @@ index b2f1ebdff0..193b96f166 100644
 +    return getFishingMeter(PChar, "[Fish]DailyPoints") < 200 && getFishingMeter(PChar, "[Fish]Fatigue") < 20000;
 +}
 +
-+void chargeFishing(CCharEntity* PChar, const int32 daily, int32 fatigue)
++// The rod in hand when the outcome is settled decides the relief, so this runs before a rod can break
++void chargeFishing(CCharEntity* PChar, const int32 daily, const int32 fatigue)
 +{
-+    // An Ebisu rod leaves the angler less worn out than any other, and a Lu Shang's a little
 +    const auto* rod = PChar->getEquip(SLOT_RANGED);
 +
-+    if (rod != nullptr)
++    const auto owed = [&]() -> int32
 +    {
-+        if (rod->getID() == EBISU || rod->getID() == EBISU_1)
++        if (rod == nullptr)
 +        {
-+            fatigue = fatigue * 85 / 100;
++            return fatigue;
 +        }
-+        else if (rod->getID() == LU_SHANG || rod->getID() == LU_SHANG_1)
-+        {
-+            fatigue = fatigue * 95 / 100;
-+        }
-+    }
++
++        return RodFatigue(rod->getID(), fatigue);
++    }();
 +
 +    addFishingMeter(PChar, "[Fish]DailyPoints", daily);
-+    addFishingMeter(PChar, "[Fish]Fatigue", fatigue);
++    addFishingMeter(PChar, "[Fish]Fatigue", owed);
 +}
 +
-+// A fish costs the angler by its size, four times that from seventeen levels up, and far more when legendary
-+auto catchFatigue(CCharEntity* PChar, const fishresponse_t* hooked) -> int32
++// An item tires the angler by what an NPC would pay for it: the coral fragment, rusty cap and rusty pick
++// named in the 2006-04-18 update are the cheapest that do, and nothing worthless costs anything at all
++auto itemFatigue(const fishresponse_t& hooked) -> int32
 +{
-+    const bool large = hooked->catchtype == FISHINGCATCHTYPE_BIGFISH;
++    const auto* item = xi::items::lookup(static_cast<uint16>(hooked.catchid));
 +
-+    if (hooked->legendary)
++    if (item == nullptr || item->getBasePrice() == 0)
 +    {
-+        // Gugrusaurus, Lik, Matsya and Abaia wear an angler out far more than the lesser legendary catches
-+        const std::set<uint32> superLegendary = { 5127, 5129, 5468, 5476 };
-+
-+        return superLegendary.count(hooked->catchid) > 0 ? 780 : 140;
++        return 0;
 +    }
 +
-+    if (hooked->catchlevel >= GetFishingSkill(PChar) + 17)
++    if (item->getBasePrice() >= 97)
 +    {
-+        return large ? 200 : 100;
++        return 400;
 +    }
 +
-+    return large ? 50 : 25;
++    return 25;
 +}
 +
++// Only fish and items wear the angler out; monsters and chests sit outside the allowance
++auto isChargedCatch(const fishresponse_t& hooked) -> bool
++{
++    return hooked.catchtype == FISHINGCATCHTYPE_SMALLFISH || hooked.catchtype == FISHINGCATCHTYPE_BIGFISH || hooked.catchtype == FISHINGCATCHTYPE_ITEM;
++}
++
++// A landed catch counts against the day and tires the angler
 +void chargeCatch(CCharEntity* PChar)
 +{
-+    const auto* hooked = PChar->hookedFish;
++    const auto& hooked = *PChar->hookedFish;
 +
-+    if (hooked->catchtype == FISHINGCATCHTYPE_ITEM)
++    if (hooked.catchtype == FISHINGCATCHTYPE_ITEM)
 +    {
-+        // An item tires the angler by what an NPC would pay for it: the coral fragment, rusty cap and rusty pick
-+        // named in the 2006-04-18 update are the cheapest that do, and nothing worthless costs anything at all
-+        const auto*  item  = xi::items::lookup(static_cast<uint16>(hooked->catchid));
-+        const uint32 price = item != nullptr ? item->getBasePrice() : 0;
++        const auto fatigue = itemFatigue(hooked);
 +
-+        if (price > 0)
++        if (fatigue > 0)
 +        {
-+            chargeFishing(PChar, 1, price >= 97 ? 400 : 25);
++            chargeFishing(PChar, 1, fatigue);
 +        }
 +
 +        return;
 +    }
 +
-+    chargeFishing(PChar, 1, catchFatigue(PChar, hooked));
++    chargeFishing(PChar, 1, CatchFatigue(GetFishingSkill(PChar), hooked));
++}
++
++// A catch that got away tires the angler as landing it would, and never counts against the day.
++// Every failed outcome calls this exactly once, before the rod that was fished with can break.
++void chargeFailedCatch(CCharEntity* PChar)
++{
++    if (PChar->hookedFish == nullptr || !PChar->hookedFish->hooked || !isChargedCatch(*PChar->hookedFish))
++    {
++        return;
++    }
++
++    const auto& hooked = *PChar->hookedFish;
++    const auto  skill  = GetFishingSkill(PChar);
++
++    if (hooked.catchtype == FISHINGCATCHTYPE_ITEM)
++    {
++        const auto fatigue = [&]() -> int32
++        {
++            if (hooked.catchlevel >= skill + 40)
++            {
++                return 1000;
++            }
++
++            return itemFatigue(hooked);
++        }();
++
++        if (fatigue > 0)
++        {
++            chargeFishing(PChar, 0, fatigue);
++        }
++
++        return;
++    }
++
++    chargeFishing(PChar, 0, FailedCatchFatigue(skill, hooked));
 +}
 +
 +} // namespace
@@ -225,10 +373,73 @@ index b2f1ebdff0..193b96f166 100644
 +    accountMeterPersist = std::move(persist);
 +}
 +
++// An Ebisu rod leaves the angler less worn out than any other, and a Lu Shang's a little
++auto RodFatigue(const uint16 rodId, const int32 fatigue) -> int32
++{
++    if (rodId == EBISU || rodId == EBISU_1)
++    {
++        return fatigue * 85 / 100;
++    }
++
++    if (rodId == LU_SHANG || rodId == LU_SHANG_1)
++    {
++        return fatigue * 95 / 100;
++    }
++
++    return fatigue;
++}
++
++// A fish costs the angler by its size, four times that from seventeen levels up, and far more when legendary
++auto CatchFatigue(const uint8 fishingSkill, const fishresponse_t& hooked) -> int32
++{
++    const bool large = hooked.catchtype == FISHINGCATCHTYPE_BIGFISH;
++
++    if (hooked.legendary)
++    {
++        // Gugrusaurus, Lik, Matsya and Abaia wear an angler out far more than the lesser legendary catches
++        static const std::set<uint32> superLegendary = { 5127, 5129, 5468, 5476 };
++
++        if (superLegendary.count(hooked.catchid) > 0)
++        {
++            return 780;
++        }
++
++        return 140;
++    }
++
++    if (hooked.catchlevel >= fishingSkill + 17)
++    {
++        if (large)
++        {
++            return 200;
++        }
++
++        return 100;
++    }
++
++    if (large)
++    {
++        return 50;
++    }
++
++    return 25;
++}
++
++// Forty levels up the fish never stood a chance, and losing it costs far more than landing it would have
++auto FailedCatchFatigue(const uint8 fishingSkill, const fishresponse_t& hooked) -> int32
++{
++    if (hooked.catchlevel >= fishingSkill + 40)
++    {
++        return 1000;
++    }
++
++    return CatchFatigue(fishingSkill, hooked);
++}
++
  /************************************************************************
   *                                                                       *
   *                             CALCULATIONS                              *
-@@ -356,7 +513,13 @@ uint8 GetLuckyMoonModifier()
+@@ -356,7 +616,13 @@ uint8 GetLuckyMoonModifier()
  
  auto GetWeatherModifier(const CCharEntity* PChar) -> float
  {
@@ -243,9 +454,23 @@ index b2f1ebdff0..193b96f166 100644
      float      weatherMod = 1.0f;
  
      if (weather == xi::Weather::Rain)
-@@ -764,18 +927,10 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
-                 tooBigChance -= fishingSkill - maxSkill;
-             }
+@@ -753,29 +1019,14 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+     {
+         if (sizeType > rod->sizeType && ranking > rod->maxRank)
+         {
+-            tooBigChance = 50;
+-            if (fishingSkill < maxSkill)
+-            {
+-                tooBigChance += maxSkill - fishingSkill;
+-            }
+-
+-            if (fishingSkill > maxSkill)
+-            {
+-                tooBigChance -= fishingSkill - maxSkill;
+-            }
++            // Capped here so a big fish can never outrank a certain low-skill loss below
++            const auto skillGap = static_cast<int>(fishingSkill) - static_cast<int>(maxSkill);
++            tooBigChance        = static_cast<uint8>(std::clamp(50 - skillGap, 0, 50));
          }
 -        else if (sizeType < rod->sizeType && ranking < rod->minRank)
 +        else if (sizeType < rod->sizeType)
@@ -265,7 +490,7 @@ index b2f1ebdff0..193b96f166 100644
          }
      }
  
-@@ -783,7 +938,13 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+@@ -783,23 +1034,29 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
      {
          uint8 diff     = maxSkill - (fishingSkill + 7);
          float diffAdd  = diff * 0.8f;
@@ -280,7 +505,11 @@ index b2f1ebdff0..193b96f166 100644
      }
  
      if (tooBigChance > 0 && tooBigChance > lowSkillChance)
-@@ -794,12 +955,12 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+     {
+         lsb.failReason = FISHINGFAILTYPE_LOST_TOOBIG;
+-        lsb.chance     = std::clamp<uint8>(tooBigChance, 0, 50);
++        lsb.chance     = tooBigChance;
+     }
      else if (tooSmallChance > 0 && tooSmallChance > lowSkillChance)
      {
          lsb.failReason = FISHINGFAILTYPE_LOST_TOOSMALL;
@@ -295,7 +524,7 @@ index b2f1ebdff0..193b96f166 100644
      }
  
      return lsb;
-@@ -808,18 +969,12 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+@@ -808,18 +1065,12 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
  lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
  {
      lsbret_t lsb;
@@ -314,7 +543,7 @@ index b2f1ebdff0..193b96f166 100644
      if (!rod->legendary && sizeType > rod->sizeType)
      {
          sizePenalty = 2;
-@@ -837,13 +992,13 @@ lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+@@ -837,13 +1088,13 @@ lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
          }
      }
  
@@ -326,11 +555,11 @@ index b2f1ebdff0..193b96f166 100644
          uint8 strDuraDiff = ranking - totalDurability;
          lsb.failReason    = FISHINGFAILTYPE_LINESNAP;
 -        lsb.chance        = std::clamp<uint8>((uint8)std::floor(strDuraDiff * 8.5f), 0, 55);
-+        lsb.chance        = std::clamp<uint8>((uint8)std::floor(strDuraDiff * 19.0f), 0, 55);
++        lsb.chance        = static_cast<uint8>(std::min(55, strDuraDiff * 19));
      }
  
      return lsb;
-@@ -852,7 +1007,6 @@ lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
+@@ -852,7 +1103,6 @@ lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
  lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
  {
      lsbret_t lsb;
@@ -338,7 +567,7 @@ index b2f1ebdff0..193b96f166 100644
      uint8    legendaryBonus = 0;
      uint8    sizePenalty    = 0;
      lsb.failReason          = FISHINGFAILTYPE_NONE;
-@@ -863,11 +1017,6 @@ lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkil
+@@ -863,11 +1113,6 @@ lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkil
          return lsb;
      }
  
@@ -350,7 +579,7 @@ index b2f1ebdff0..193b96f166 100644
      if (!rod->legendary && sizeType > rod->sizeType)
      {
          sizePenalty = 2;
-@@ -882,11 +1031,11 @@ lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkil
+@@ -882,11 +1127,11 @@ lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkil
          sizePenalty = 5;
      }
  
@@ -361,11 +590,11 @@ index b2f1ebdff0..193b96f166 100644
 +        uint8 strDuraDiff = ranking - (rod->maxRank + legendaryBonus);
          lsb.failReason    = FISHINGFAILTYPE_RODBREAK;
 -        lsb.chance        = std::clamp<uint8>((uint8)std::floor((strDuraDiff + sizePenalty) * 1.3f), 0, 55);
-+        lsb.chance        = std::clamp<uint8>((uint8)std::floor((strDuraDiff + sizePenalty) * 10.0f), 0, 20);
++        lsb.chance        = static_cast<uint8>(std::min(20, (strDuraDiff + sizePenalty) * 10));
      }
  
      return lsb;
-@@ -910,44 +1059,43 @@ uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fis
+@@ -910,44 +1155,53 @@ uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fis
      lsbret_t lsnap  = CalculateSnapChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
      lsbret_t rbreak = CalculateBreakChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
  
@@ -399,15 +628,15 @@ index b2f1ebdff0..193b96f166 100644
 -            }
 -        }
 +        sense = FISHINGSENSETYPE_TERRIBLE;
-+    }
-+    else if (snapped || (willLand && xirand::GetRandomNumber(100) < lsnap.chance / 2))
-+    {
-+        sense = FISHINGSENSETYPE_BAD;
      }
 -    else if (lsnap.chance > 0 || rbreak.chance > 0)
-+    else if (lose.failReason == FISHINGFAILTYPE_LOST_LOWSKILL || lose.failReason == FISHINGFAILTYPE_LOST_TOOBIG)
++    else if (snapped || (willLand && xirand::GetRandomNumber(100) < lsnap.chance / 2))
      {
 -        if (lsnap.chance < 30 && rbreak.chance < 30)
++        sense = FISHINGSENSETYPE_BAD;
++    }
++    else if (lose.failReason == FISHINGFAILTYPE_LOST_LOWSKILL || lose.failReason == FISHINGFAILTYPE_LOST_TOOBIG)
++    {
 +        // Doubt is about the gap between angler and fish
 +        if (lose.chance < 20)
          {
@@ -428,32 +657,42 @@ index b2f1ebdff0..193b96f166 100644
      }
  
 +    // The reel reads these back as the outcome rather than as a chance
-+    lose.chance   = lost ? 100 : 0;
-+    lsnap.chance  = snapped ? 100 : 0;
-+    rbreak.chance = broken ? 100 : 0;
++    const auto asOutcome = [](const bool happened) -> uint8
++    {
++        if (happened)
++        {
++            return 100;
++        }
++
++        return 0;
++    };
++
++    lose.chance   = asOutcome(lost);
++    lsnap.chance  = asOutcome(snapped);
++    rbreak.chance = asOutcome(broken);
 +
      response->lose   = lose;
      response->lsnap  = lsnap;
      response->rbreak = rbreak;
-@@ -1105,9 +1253,15 @@ auto GetFishPool(const xi::ZoneId zoneID, const uint8 areaID, const uint16 BaitI
+@@ -1105,9 +1359,15 @@ auto GetFishPool(const xi::ZoneId zoneID, const uint8 areaID, const uint16 BaitI
  
      for (auto fish : FishingGroups[groupId])
      {
 -        if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first))
 +        auto* fishEntry = GetFish(fish.first);
 +        if (fishEntry == nullptr)
-         {
--            pool.insert(std::make_pair(FishList[fish.first], fish.second));
++        {
 +            continue;
 +        }
 +
 +        if (!fishEntry->item && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first))
-+        {
+         {
+-            pool.insert(std::make_pair(FishList[fish.first], fish.second));
 +            pool.insert(std::make_pair(fishEntry, fish.second));
          }
      }
  
-@@ -1121,9 +1275,10 @@ auto GetItemPool(const xi::ZoneId zoneID, const uint8 areaID) -> std::vector<fis
+@@ -1121,9 +1381,10 @@ auto GetItemPool(const xi::ZoneId zoneID, const uint8 areaID) -> std::vector<fis
  
      for (auto fish : FishingGroups[groupId])
      {
@@ -466,7 +705,7 @@ index b2f1ebdff0..193b96f166 100644
          }
      }
  
-@@ -1319,7 +1474,7 @@ fishingarea_t* GetFishingArea(CCharEntity* PChar)
+@@ -1319,7 +1580,7 @@ fishingarea_t* GetFishingArea(CCharEntity* PChar)
  
      for (auto area : FishingAreaList[zoneId])
      {
@@ -475,7 +714,7 @@ index b2f1ebdff0..193b96f166 100644
  
          switch (fishingArea->areatype)
          {
-@@ -1406,7 +1561,7 @@ void RodBreak(CCharEntity* PChar)
+@@ -1406,7 +1667,7 @@ void RodBreak(CCharEntity* PChar)
          return;
      }
  
@@ -484,24 +723,7 @@ index b2f1ebdff0..193b96f166 100644
      if (PRod == nullptr)
      {
          ShowWarning("PRod was null.");
-@@ -1486,6 +1641,16 @@ int32 LoseCatch(CCharEntity* PChar, uint8 FailType)
-         case FISHINGFAILTYPE_LOST_LOWSKILL:
-             PChar->animation = xi::Animation::NewFishingStop;
-             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
-+
-+            // Losing a fish costs what landing it would, unless it was forty levels up and never stood a chance
-+            if (PChar->hookedFish != nullptr)
-+            {
-+                const auto* hooked   = PChar->hookedFish;
-+                const bool  hopeless = hooked->catchlevel >= GetFishingSkill(PChar) + 40;
-+
-+                chargeFishing(PChar, 0, hopeless ? 1000 : catchFatigue(PChar, hooked));
-+            }
-+
-             break;
-         case FISHINGFAILTYPE_LOST_TOOBIG:
-             PChar->animation = xi::Animation::NewFishingStop;
-@@ -1613,7 +1778,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
+@@ -1613,7 +1874,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
  {
      uint16      MessageOffset = GetMessageOffset(PChar->getZone());
      CMobEntity* PMob          = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(MobID, TYPE_MOB));
@@ -510,7 +732,15 @@ index b2f1ebdff0..193b96f166 100644
  
      if (!PMob || !mob)
      {
-@@ -1759,7 +1924,7 @@ bool SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobL
+@@ -1650,6 +1911,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
+     PMob->setMobMod(xi::MobMod::IdleDespawn, 180);
+     PMob->SetDespawnTime(180s);
+     PMob->SetLocalVar("hooked", 0);
++    PMob->SetLocalVar("hookedBy", 0);
+ 
+     if (mob->maxRespawn > mob->minRespawn)
+     {
+@@ -1759,7 +2021,7 @@ bool SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobL
              break;
          case FISHINGCATCHTYPE_MOB:
          {
@@ -519,10 +749,12 @@ index b2f1ebdff0..193b96f166 100644
  
              if (CanFishMob(PMob))
              {
-@@ -1839,51 +2004,6 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
+@@ -1837,53 +2099,6 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
+     // Configuration multiplier.
+     maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
  
-     vanadiel_time::time_point vanaTime = vanadiel_time::now();
- 
+-    vanadiel_time::time_point vanaTime = vanadiel_time::now();
+-
 -    // Moon phase skillup modifiers
 -    uint8 phase         = static_cast<uint8>(vanadiel_time::moon::get_phase(vanaTime));
 -    uint8 moonDirection = vanadiel_time::moon::get_direction(vanaTime);
@@ -571,7 +803,20 @@ index b2f1ebdff0..193b96f166 100644
      // Not in City bonus
      CZone* PZone = zoneutils::GetZone(PChar->getZone());
      if (!(PZone && (PZone->GetTypeMask() & xi::ZoneType::City) != xi::ZoneType::Unknown))
-@@ -2049,8 +2169,8 @@ void StartFishing(CCharEntity* PChar)
+@@ -2011,6 +2226,12 @@ void StartFishing(CCharEntity* PChar)
+ 
+     if (FishingAreaID > 0)
+     {
++        // A hook still live from the previous cast was escaped without an end packet
++        if (PChar->hookedFish != nullptr && PChar->hookedFish->hooked && PChar->fishingToken != 0)
++        {
++            AbandonHook(PChar);
++        }
++
+         PChar->fishingToken = 1 + xirand::GetRandomNumber(9999);
+         destroy(PChar->hookedFish);
+ 
+@@ -2049,8 +2270,8 @@ void StartFishing(CCharEntity* PChar)
              return;
          }
  
@@ -582,7 +827,7 @@ index b2f1ebdff0..193b96f166 100644
  
          if (rod != nullptr && bait != nullptr)
          {
-@@ -2077,6 +2197,8 @@ void ReelInCatch(CCharEntity* PChar)
+@@ -2077,6 +2298,8 @@ void ReelInCatch(CCharEntity* PChar)
  {
      if (PChar->hookedFish != nullptr)
      {
@@ -591,7 +836,7 @@ index b2f1ebdff0..193b96f166 100644
          switch (PChar->hookedFish->catchtype)
          {
              case FISHINGCATCHTYPE_NONE:
-@@ -2085,15 +2207,15 @@ void ReelInCatch(CCharEntity* PChar)
+@@ -2085,15 +2308,15 @@ void ReelInCatch(CCharEntity* PChar)
                  break;
              case FISHINGCATCHTYPE_SMALLFISH:
                  PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHSMALL;
@@ -610,23 +855,55 @@ index b2f1ebdff0..193b96f166 100644
                  break;
              case FISHINGCATCHTYPE_MOB:
                  PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHMOB;
-@@ -2104,6 +2226,12 @@ void ReelInCatch(CCharEntity* PChar)
+@@ -2104,6 +2327,16 @@ void ReelInCatch(CCharEntity* PChar)
                  CatchChest(PChar, PChar->hookedFish->catchid, PChar->hookedFish->distance, PChar->hookedFish->angle);
                  break;
          }
 +
-+        // A catch that never made it into the bag costs the angler nothing
++        // A catch that never made it into the bag costs the angler nothing, and teaches them nothing either
 +        if (landed)
 +        {
 +            chargeCatch(PChar);
 +        }
++        else if (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH)
++        {
++            PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
++        }
      }
  }
  
-@@ -2726,6 +2854,33 @@ catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* fishResponse, rod
+@@ -2113,9 +2346,12 @@ uint8 UnhookMob(CCharEntity* PChar, Lost lost)
+     {
+         CMobEntity* PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(PChar->hookedFish->catchid, TYPE_MOB));
+ 
+-        if (PMob != nullptr)
++        // Only the angler holding the reservation may clear it; a later cleanup of an already
++        // released hook must not knock off whoever hooked the mob since
++        if (PMob != nullptr && PMob->GetLocalVar("hookedBy") == PChar->id)
+         {
+             PMob->SetLocalVar("hooked", 0);
++            PMob->SetLocalVar("hookedBy", 0);
+ 
+             if (lost && PChar->hookedFish->nm && PChar->hookedFish->nmFlags & FISHINGNM_RESET_RESPAWN_ON_FAIL)
+             {
+@@ -2627,6 +2863,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
+         if (PMob != nullptr && PMob->GetLocalVar("hooked") == 0)
+         {
+             PMob->SetLocalVar("hooked", 1);
++            PMob->SetLocalVar("hookedBy", PChar->id);
+             PMob->SetLocalVar("hookedTime", earth_time::timestamp());
+ 
+             response->hooked              = true;
+@@ -2726,6 +2963,39 @@ catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* fishResponse, rod
      return catchResponse;
  }
  
++// The same cost as giving up through the minigame: the bait and the mob's hook, never fatigue
++void AbandonHook(CCharEntity* PChar)
++{
++    BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
++    UnhookMob(PChar, Lost::Yes);
++}
 +
 +void ReleaseFishing(CCharEntity* PChar)
 +{
@@ -657,7 +934,7 @@ index b2f1ebdff0..193b96f166 100644
  void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode, const uint32 para, const uint32 para2)
  {
      const uint32 stamina = para;
-@@ -2742,16 +2897,15 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2742,16 +3012,21 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
      uint16 MessageOffset = GetMessageOffset(PChar->getZone());
      uint32 vanaTime      = earth_time::vanadiel_timestamp();
  
@@ -676,24 +953,36 @@ index b2f1ebdff0..193b96f166 100644
 +                return;
 +            }
 +
++            // A fish already on the line has to be fought or given up, never re-checked
++            if (PChar->animation == xi::Animation::NewFishingFish)
++            {
++                return;
++            }
++
              if (PChar->animation != xi::Animation::NewFishingStart)
              {
                  CatchNothing(PChar, FISHINGFAILTYPE_NONE);
-@@ -2769,11 +2923,11 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2766,14 +3041,17 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+ 
+             fishingarea_t*  fishingArea = GetFishingArea(PChar);
+             fishresponse_t* response    = nullptr;
++            bool            chartActive = false;
  
              if (PChar->getZone() == xi::ZoneId::ValkurmDunes && PChar->GetLocalVar("pChartActive") == 1)
              {
 -                fishingArea = FishingAreaList[xi::ZoneId::ValkurmDunes][2];
 +                fishingArea = findFishingArea(xi::ZoneId::ValkurmDunes, 2);
++                chartActive = true;
              }
              else if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
              {
 -                fishingArea = FishingAreaList[xi::ZoneId::BuburimuPeninsula][2];
 +                fishingArea = findFishingArea(xi::ZoneId::BuburimuPeninsula, 2);
++                chartActive = true;
              }
  
              if (PChar->hookedFish != nullptr)
-@@ -2789,10 +2943,11 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2789,10 +3067,12 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
  
                  if (Rod != nullptr && Bait != nullptr)
                  {
@@ -704,11 +993,23 @@ index b2f1ebdff0..193b96f166 100644
  
 -                    if (FishingRod != nullptr && FishingBait != nullptr)
 +                    // Once the day's allowance is spent the line still goes out, but nothing takes the bait
-+                    if (FishingRod != nullptr && FishingBait != nullptr && mayBite(PChar))
++                    // A chart quest has already consumed its chart and started its timer, so the allowance never blocks it
++                    if (FishingRod != nullptr && FishingBait != nullptr && (chartActive || mayBite(PChar)))
                      {
                          uint8 fishingSkill = GetFishingSkill(PChar);
                          response           = FishingCheck(PChar, fishingSkill, FishingRod, FishingBait, fishingArea);
-@@ -2838,12 +2993,18 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2817,6 +3097,10 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+                 // send catch message
+                 if (!SendHookResponse(PChar, response, CancelOnMobLoadFailBait::Yes))
+                 {
++                    // The angler was told nothing bit, so the hook must not survive to cost them bait later
++                    UnhookMob(PChar, Lost::No);
++                    destroy(PChar->hookedFish);
++                    PChar->hookedFish = nullptr;
+                     return;
+                 }
+ 
+@@ -2838,12 +3122,26 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
  
          case GP_CLI_COMMAND_FISHING_2_MODE::RequestEndMiniGame:
          {
@@ -722,15 +1023,23 @@ index b2f1ebdff0..193b96f166 100644
 -                CItemWeapon* Rod = nullptr;
 -                Rod              = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
 +                CItemWeapon* Rod        = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
-+                rod_t*       FishingRod = Rod != nullptr ? findRod(Rod->getID()) : nullptr;
++                rod_t*       FishingRod = [&]() -> rod_t*
++                {
++                    if (Rod == nullptr)
++                    {
++                        return nullptr;
++                    }
  
 -                if (PChar->hookedFish == nullptr || Rod == nullptr)
++                    return findRod(Rod->getID());
++                }();
++
 +                // A ranged slot emptied or filled with something the catalog does not know loses the catch
 +                if (PChar->hookedFish == nullptr || FishingRod == nullptr)
                  {
                      LoseCatch(PChar, FISHINGFAILTYPE_NONE);
                      UnhookMob(PChar, Lost::Yes);
-@@ -2851,8 +3012,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2851,8 +3149,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                  }
                  else
                  {
@@ -740,23 +1049,48 @@ index b2f1ebdff0..193b96f166 100644
  
                      if (response->fishingToken != PChar->fishingToken || PChar->hookedFish->special != special)
                      {
-@@ -2924,6 +3084,15 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2868,6 +3165,8 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+                     }
+                     else
+                     {
++                        chargeFailedCatch(PChar);
++
+                         if (response->linebreak)
+                         {
+                             BaitLoss(PChar, RemoveFly::Yes, SendUpdate::Yes);
+@@ -2896,6 +3195,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+                 // lose bait but keep lure
+                 PChar->animation = xi::Animation::NewFishingLineBreak;
+                 PChar->updatemask |= UPDATE_HP;
++                chargeFailedCatch(PChar);
+                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
+                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
+ 
+@@ -2909,6 +3209,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+                 // message: "Your line breaks!"
+                 PChar->animation = xi::Animation::NewFishingLineBreak;
+                 PChar->updatemask |= UPDATE_HP;
++                chargeFailedCatch(PChar);
+                 BaitLoss(PChar, RemoveFly::Yes, SendUpdate::Yes);
+                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
+ 
+@@ -2924,6 +3225,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                  PChar->updatemask |= UPDATE_HP;
                  PChar->lastCastTime = 0;
  
-+                // Giving up tires the angler only on a fish from seventeen levels up, which is why a day
-+                // of dropping easy catches runs as long as retail lets it
-+                if (PChar->hookedFish && PChar->hookedFish->hooked &&
-+                    (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH) &&
-+                    PChar->hookedFish->catchlevel >= GetFishingSkill(PChar) + 17)
-+                {
-+                    chargeFishing(PChar, 0, 100);
-+                }
-+
++                // Giving up is free of fatigue; only the bait is spent
                  if (PChar->hookedFish && PChar->hookedFish->hooked && BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes))
                  {
                      PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP_BAITLOSS);
-@@ -2955,38 +3124,24 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+@@ -2940,6 +3242,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
+                 // message: "You lost your catch!"
+                 PChar->animation = xi::Animation::NewFishingStop;
+                 PChar->updatemask |= UPDATE_HP;
++                chargeFailedCatch(PChar);
+                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
+                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+ 
+@@ -2955,38 +3258,31 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
  
          case GP_CLI_COMMAND_FISHING_2_MODE::RequestPotentialTimeout:
          {
@@ -782,15 +1116,19 @@ index b2f1ebdff0..193b96f166 100644
 -
 -                // No skillups for items or mobs.
 -                if (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH)
--                {
++                // A hook that reaches the release without an end packet is a give-up, so a release
++                // mid-fight costs the same as giving up and can never leave the angler stuck
++                if (PChar->hookedFish != nullptr && PChar->hookedFish->hooked && PChar->fishingToken != 0)
+                 {
 -                    uint16 skillUpChances = 1 + PChar->getMod(xi::Mod::PELICAN_RING_EFFECT);
 -
 -                    for (int i = 0; i < skillUpChances; i++)
 -                    {
 -                        FishingSkillup(PChar, PChar->hookedFish->catchlevel, PChar->hookedFish->successtype);
 -                    }
--                }
--
++                    AbandonHook(PChar);
+                 }
+ 
 -                destroy(PChar->hookedFish);
 -                PChar->hookedFish = nullptr;
 +                ReleaseFishing(PChar);
@@ -803,7 +1141,7 @@ index b2f1ebdff0..193b96f166 100644
          break;
      }
  }
-@@ -2995,7 +3150,7 @@ auto GetFish(uint16 itemid) -> std::unique_ptr<CItemFish>
+@@ -2995,7 +3291,7 @@ auto GetFish(uint16 itemid) -> std::unique_ptr<CItemFish>
  {
      const CItem* PItem = xi::items::lookup(itemid);
  
@@ -812,7 +1150,7 @@ index b2f1ebdff0..193b96f166 100644
      {
          return std::make_unique<CItemFish>(*PItem);
      }
-@@ -3341,12 +3496,6 @@ void CleanupFishing()
+@@ -3341,12 +3637,6 @@ void CleanupFishing()
          fishArealist.second.clear();
      }
      FishingAreaList.clear();
@@ -826,7 +1164,7 @@ index b2f1ebdff0..193b96f166 100644
  
  } // namespace fishingutils
 diff --git a/src/map/utils/fishingutils.h b/src/map/utils/fishingutils.h
-index 9329dcf23e..1dd48d8e16 100644
+index 9329dcf23e..f1239159f0 100644
 --- a/src/map/utils/fishingutils.h
 +++ b/src/map/utils/fishingutils.h
 @@ -27,6 +27,7 @@
@@ -837,7 +1175,7 @@ index 9329dcf23e..1dd48d8e16 100644
  #include <map>
  
  enum class GP_CLI_COMMAND_FISHING_2_MODE : uint8_t;
-@@ -915,6 +916,13 @@ using BigFish                 = xi::Flag<struct BigFishTag>;
+@@ -915,6 +916,18 @@ using BigFish                 = xi::Flag<struct BigFishTag>;
  using CancelOnMobLoadFailBait = xi::Flag<struct CancelOnMobLoadFailBaitTag>;
  using Lost                    = xi::Flag<struct LostTag>;
  
@@ -848,10 +1186,15 @@ index 9329dcf23e..1dd48d8e16 100644
 +
 +void SetAccountMeterAccess(AccountMeterFetch fetch, AccountMeterPersist persist);
 +
++// Fatigue owed for a fish: by size and by how far above the angler it sat; failure adds the certain-loss penalty
++auto RodFatigue(uint16 rodId, int32 fatigue) -> int32;
++auto CatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
++auto FailedCatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
++
  // Catch Pools
  void ReduceFishPool(xi::ZoneId zoneId, uint8 areaId, uint16 fishId);
  void RestockFishingAreas();
-@@ -937,6 +945,9 @@ uint8               CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill,
+@@ -937,6 +950,9 @@ uint8               CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill,
  uint16              CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod);
  uint8               CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count);
  uint8               CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count);
@@ -861,6 +1204,15 @@ index 9329dcf23e..1dd48d8e16 100644
  uint8               CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod);
  uint16              CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod);
  big_fish_stats_t    CalculateBigFishStats(uint16 minLength, uint16 maxLength);
+@@ -983,6 +999,8 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType);
+ 
+ // Fishing
+ void             InterruptFishing(CCharEntity* PChar);
++void             AbandonHook(CCharEntity* PChar);
++void             ReleaseFishing(CCharEntity* PChar);
+ void             StartFishing(CCharEntity* PChar);
+ void             ReelInCatch(CCharEntity* PChar);
+ uint8            UnhookMob(CCharEntity* PChar, Lost lost);
 diff --git a/src/test/CMakeLists.txt b/src/test/CMakeLists.txt
 index 0f2265ba32..9c9bfc5dd1 100644
 --- a/src/test/CMakeLists.txt

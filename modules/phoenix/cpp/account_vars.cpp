@@ -9,15 +9,16 @@
  * - player:setAccountVar(varname, value, expiry) - Set an account variable (value 0 = delete)
  ************************************************************************/
 
+#include "account_vars.h"
+
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/vana_time.h"
 #include "map/entities/char_entity.h"
 #include "map/lua/luautils.h"
-#include "map/utils/fishingutils.h"
 #include "map/utils/moduleutils.h"
 
-namespace
+namespace accountvars
 {
 
 auto fetchAccountVar(const uint32 accountId, const std::string& varname) -> int32
@@ -66,7 +67,7 @@ void persistAccountVar(const uint32 accountId, const std::string& varname, const
                      expiry);
 }
 
-} // namespace
+} // namespace accountvars
 
 class AccountVarsModule : public CPPModule
 {
@@ -78,16 +79,14 @@ class AccountVarsModule : public CPPModule
         uint32 currentTimestamp = earth_time::timestamp();
         db::preparedStmt("DELETE FROM account_vars WHERE expiry > 0 AND expiry <= ?", currentTimestamp);
 
-        fishingutils::SetAccountMeterAccess(fetchAccountVar, persistAccountVar);
-
         // Extend CLuaBaseEntity with account variable methods
         sol::usertype<CLuaBaseEntity> baseEntityType = ::lua["CBaseEntity"];
 
-        baseEntityType["getAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, std::string varname) -> int32
+        baseEntityType["getAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, const std::string& varname) -> int32
         {
             if (auto PChar = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity()))
             {
-                return fetchAccountVar(PChar->accid, varname);
+                return accountvars::fetchAccountVar(PChar->accid, varname);
             }
 
             return 0;
@@ -95,7 +94,7 @@ class AccountVarsModule : public CPPModule
 
         // Register setAccountVar method: player:setAccountVar(varname, value, expiry)
         // Notes: Passing a '0' value will delete the variable
-        baseEntityType["setAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, std::string varname, int32 value, const sol::object& expiry) -> void
+        baseEntityType["setAccountVar"] = [](CLuaBaseEntity* PLuaBaseEntity, const std::string& varname, int32 value, const sol::object& expiry) -> void
         {
             if (auto PChar = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity()))
             {
@@ -106,7 +105,7 @@ class AccountVarsModule : public CPPModule
                     expiryValue = expiry.as<uint32>();
                 }
 
-                persistAccountVar(PChar->accid, varname, value, expiryValue);
+                accountvars::persistAccountVar(PChar->accid, varname, value, expiryValue);
             }
         };
     }
