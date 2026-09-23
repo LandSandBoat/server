@@ -1553,7 +1553,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Iron_Giant',350,2627);
 INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Return to Delkfutt Tower)',351,829);
 INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Return to Delkfutt Tower)',351,830);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,933);
-INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,934);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,942);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,943);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-GK',353,937);
