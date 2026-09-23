@@ -44,7 +44,7 @@ public:
 
     // NavMesh
 
-    auto findPath(const position_t& start, const position_t& end) -> Maybe<PathResult> override;
+    auto findPath(const position_t& start, const position_t& end, float clearance) -> Maybe<PathResult> override;
     auto findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t> override;
     auto validPosition(const position_t& position) const -> bool override;
     auto findClosestValidPoint(const position_t& position) const -> Maybe<position_t> override;
@@ -76,8 +76,6 @@ private:
     dtNavMesh*     navMesh_;
     dtNavMeshQuery navMeshQuery_;
 
-    std::vector<dtPolyRef>     navMeshQueryPolyData_;
-    std::vector<float>         navMeshQueryStraightPathFloatData_;
-    std::vector<unsigned char> navMeshQueryStraightPathFlagData_;
-    std::vector<dtPolyRef>     navMeshQueryStraightPathPolyData_;
+    std::vector<dtPolyRef> navMeshQueryPolyData_;
+    std::vector<float>     navMeshQueryStraightPathFloatData_;
 };

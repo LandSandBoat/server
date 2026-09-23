@@ -158,6 +158,7 @@ private:
     timer::time_point rePathCooldownEnd_{ timer::time_point::min() };
     timer::time_point lostSightRePathCooldownEnd_{ timer::time_point::min() };
     position_t        lastRePathTarget_{};
+    position_t        lastRePathMobPos_{};
     uint8_t           stuckRePathCount_{ 0 };
 
     // Directness probe cache, re-run only when the target or either position changes; an EntityId because it outlives the tick.

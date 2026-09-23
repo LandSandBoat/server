@@ -54,6 +54,7 @@ public:
     auto cursor() const -> int16;
     auto advance() -> void;
     auto restart() -> void;                 // reset cursor to first point (e.g. looping a patrol)
+    auto finish() -> void;                  // move the cursor past the last point (arrived early)
     auto consumed() const -> bool;          // cursor past the last point (whole path walked)
     auto atLastIndex() const -> bool;       // cursor exactly on the final point
     auto atOrPastLastIndex() const -> bool; // cursor on or past the final point

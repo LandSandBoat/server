@@ -56,7 +56,7 @@ public:
         return true;
     }
 
-    auto findPath(const position_t&, const position_t&) -> Maybe<PathResult> override
+    auto findPath(const position_t&, const position_t&, float) -> Maybe<PathResult> override
     {
         return std::nullopt;
     }
