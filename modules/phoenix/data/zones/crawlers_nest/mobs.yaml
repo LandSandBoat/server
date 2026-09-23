@@ -553,15 +553,3 @@ spawns:
     region:   n_249
     level:    [56, 57]
     script:   Mushussu
-
-  17584389:
-    template: Rumble_Crawler
-    at:       [0.000, 0.000, 0.000, 0]
-    region:   null
-    level:    [53, 55]
-
-  17584390:
-    template: Rumble_Crawler
-    at:       [0.000, 0.000, 0.000, 0]
-    region:   null
-    level:    [53, 55]
