@@ -55,6 +55,7 @@
 #include "enums/four_cc.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
+#include "items/exdata/fish.h"
 #include "items/transactions/item_claim.h"
 #include "itemutils.h"
 #include "packets/c2s/0x110_fishing_2.h"
@@ -1534,8 +1535,9 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
 
         if (bigFish && length > 1 && weight > 1)
         {
-            Fish->SetLength(length);
-            Fish->SetWeight(weight);
+            auto& fishData  = Fish->exdata<Exdata::Fish>();
+            fishData.Size   = length;
+            fishData.Weight = weight;
         }
 
         Fish->setQuantity(Count);
@@ -2991,15 +2993,14 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
     }
 }
 
-auto GetFish(uint16 itemid) -> std::unique_ptr<CItemFish>
+auto GetFish(uint16 itemid) -> std::unique_ptr<CItem>
 {
-    const CItem* PItem = xi::items::lookup(itemid);
-
-    if (PItem && FishList[itemid])
+    if (!FishList[itemid])
     {
-        return std::make_unique<CItemFish>(*PItem);
+        return nullptr;
     }
-    return nullptr;
+
+    return xi::items::spawn(itemid);
 }
 
 /************************************************************************
