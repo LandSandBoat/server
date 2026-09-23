@@ -1,5 +1,6 @@
 -----------------------------------
 -- Earthen Ward
+-- Family: Avatar (Titan)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,13 +10,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    target:delStatusEffect(xi.effect.STONESKIN)
     local amount = pet:getMainLvl() * 2 + 50
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    local typeEffect = xi.effect.STONESKIN
-    if target:addStatusEffect(typeEffect, { power = amount, duration = 900, origin = pet, tier = 3 }) then
+    if target:addStatusEffect(xi.effect.STONESKIN, { power = amount, duration = 900, origin = pet, tier = 3 }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else
@@ -26,7 +25,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return
     end
 
-    return typeEffect
+    return xi.effect.STONESKIN
 end
 
 return abilityObject

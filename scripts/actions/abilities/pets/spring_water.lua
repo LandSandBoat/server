@@ -1,5 +1,6 @@
 -----------------------------------
 -- Spring Water
+-- Family: Avatar (Leviathan)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,41 +10,44 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local base = 47 + pet:getMainLvl() * 3
-    local tp   = petskill:getTP()
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    -- TODO: Ability range scales with TP.
 
-    if tp < 1000 then
-        tp = 1000
+    local removableEffects =
+    {
+        xi.effect.BLINDNESS,
+        xi.effect.DISEASE,
+        xi.effect.PARALYSIS,
+        xi.effect.PETRIFICATION,
+        xi.effect.POISON,
+        xi.effect.SILENCE,
+        -- TODO: JPWiki mentions that Spring Water can remove Mute inflicted by Promathia. Need captures.
+        -- Mute inflicted from Eight of Cups mob could not be removed by this skill.
+    }
+
+    local activeEffects = {}
+
+    -- Fetch list of removable effects currently on target
+    for _, effectId in ipairs(removableEffects) do
+        if target:getStatusEffect(effectId) then
+            table.insert(activeEffects, effectId)
+        end
     end
 
-    base = base * tp / 1000
+    -- Remove one removable effect from the target, chosen at random
+    if #activeEffects > 0 then
+        activeEffects = utils.shuffle(activeEffects)
 
-    if target:getHP() + base > target:getMaxHP() then
-        base = target:getMaxHP() - target:getHP() --cap it
+        target:delStatusEffect(activeEffects[1])
     end
 
-    target:delStatusEffect(xi.effect.BLINDNESS)
-    target:delStatusEffect(xi.effect.POISON)
-    target:delStatusEffect(xi.effect.PARALYSIS)
-    target:delStatusEffect(xi.effect.DISEASE)
-    target:delStatusEffect(xi.effect.PETRIFICATION)
-    target:wakeUp()
-    target:delStatusEffect(xi.effect.SILENCE)
+    local params = {}
 
-    if math.randomInt(1, 100) <= 50 then
-        target:delStatusEffect(xi.effect.SLOW)
-    end
+    params.baseHeal       = pet:getMainLvl() * 8 - 152
+    params.primaryMessage = xi.msg.basic.JA_RECOVERS_HP_2
 
-    if target:getID() == action:getPrimaryTargetID() then
-        petskill:setMsg(xi.msg.basic.JA_RECOVERS_HP_2)
-    else
-        petskill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    end
-
-    target:addHP(base)
-    return base
+    return xi.mobskills.mobHealMove(pet, target, petskill, action, params)
 end
 
 return abilityObject

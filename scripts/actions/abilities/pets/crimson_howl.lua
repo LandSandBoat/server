@@ -1,5 +1,6 @@
 -----------------------------------
 -- Crimson Howl
+-- Family: Avatar (Ifrit)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,13 +10,14 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 60 + bonusTime
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    local baseDuration = 60
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
+    local power        = (math.floor((pet:getMainLvl() / 4) + 4.75) / 256) * 100
 
-    local typeEffect = xi.effect.WARCRY
-    if target:addStatusEffect(typeEffect, { power = 9, duration = duration, origin = pet }) then
+    if target:addStatusEffect(xi.effect.WARCRY, { power = power, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else
@@ -26,7 +28,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return
     end
 
-    return typeEffect
+    return xi.effect.WARCRY
 end
 
 return abilityObject
