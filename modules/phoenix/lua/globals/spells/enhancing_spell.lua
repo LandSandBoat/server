@@ -9,6 +9,7 @@ local column =
 {
     EFFECT_LEVEL     = 3,
     EFFECT_POWER     = 4,
+    EFFECT_DURATION  = 5,
     EFFECT_COMPOSURE = 6,
 }
 
@@ -43,9 +44,28 @@ for spellId, basePower in pairs(eraBasePower) do
 end
 
 -- Deodorize / Sneak / Invisible: Revert base duration to a random 30s-300s.
--- Capture needed
--- TODO: Everything past the base duration mirrors core.
+-- Bar-status: Revert the flat 480s base to a skill scaled duration.
+-- Source: https://forum.square-enix.com/ffxi/threads/32909-April-30-2013-%28JST%29-Version-Update
 m:addOverride('xi.spells.enhancing.calculateEnhancingDuration', function(caster, target, spell, spellId, spellGroup, spellEffect)
+    -- Swap the base duration in for the cast; everything past it mirrors core.
+    if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
+        local barRow         = xi.spells.enhancing.spellPTable[spellId]
+        local coreDuration   = barRow[column.EFFECT_DURATION]
+        local enhancingSkill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
+
+        barRow[column.EFFECT_DURATION] = 150 + math.max(enhancingSkill - 180, 0) * 0.8
+
+        local castOk, duration = pcall(super, caster, target, spell, spellId, spellGroup, spellEffect)
+
+        barRow[column.EFFECT_DURATION] = coreDuration
+
+        if not castOk then
+            error(duration, 0)
+        end
+
+        return duration
+    end
+
     if
         spellEffect ~= xi.effect.DEODORIZE and
         spellEffect ~= xi.effect.INVISIBLE and
@@ -92,9 +112,8 @@ end)
 -- Source: https://forum.square-enix.com/ffxi/threads/55751-August.-6-2019-%28JST%29-Version-Update
 -----------------------------------
 
--- ranksInBase: merit ranks the value out of core already carries. Protectra V and
--- Shellra V are reverted above; Phalanx II keeps its 2019 base (skill / 25 + 16 and
--- 240s), which is the five rank value.
+-- ranksInBase: merit ranks the value out of core already carries.
+-- Phalanx II keeps its 2019 base (skill / 25 + 16 and 240s)
 local meritBonusBySpell =
 {
     [xi.magic.spell.PROTECTRA_V] = { merit = xi.merit.PROTECTRA_V, valuePerRank = 5, ranksInBase = 1, power = 2  },
