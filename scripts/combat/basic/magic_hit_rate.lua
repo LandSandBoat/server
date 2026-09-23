@@ -448,14 +448,6 @@ local function calculateTargetMagicEvasion(actor, target, params)
         magicEva = magicEva + target:getMod(xi.data.statusEffect.getAssociatedMagicEvasionModifier(params.effectId)) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
-    -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
-    if
-        not target:isPC() and
-        xi.data.levelCorrection.isLevelCorrectedZone(actor)
-    then
-        magicEva = magicEva + utils.clamp(target:getMainLvl() - actor:getMainLvl(), 0, 100) * 4
-    end
-
     -- Apply resistance rank multiplier.
     magicEva = math.floor(magicEva * resistRankMultiplier[params.resistanceRank])
 
@@ -465,8 +457,9 @@ end
 -----------------------------------
 -- Magic Hit Rate. The function gets fed the result of both functions above.
 -----------------------------------
-local function calculateMagicHitRate(params)
+local function calculateMagicHitRate(actor, target, params)
     -- macc == meva = 75% hit rate
+    -- bake in an extra +25 macc to accomplish that ratio
     -- below 50% hit rate it takes 2 macc to move hitrate by 1%
     local magicHitRate = params.actorMagicAccuracy - params.targetMagicEvasion + 25
 
@@ -475,6 +468,15 @@ local function calculateMagicHitRate(params)
         magicHitRate = math.floor(magicHitRate / 2)
     end
 
+    -- Level correction. Target gets a bonus the higher the level if it's a mob. Never a penalty.
+    if
+        not target:isPC() and
+        xi.data.levelCorrection.isLevelCorrectedZone(actor)
+    then
+        magicHitRate = magicHitRate - utils.clamp(target:getMainLvl() - actor:getMainLvl(), 0, 100) * 4
+    end
+
+    -- This includes an extra +25 hit rate (see above), using 50 instead of 75 is not a mistake.
     magicHitRate = utils.clamp((50 + magicHitRate) / 100, 0.05, 0.95)
 
     return magicHitRate
@@ -572,7 +574,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, fedData)
     -- Calculate and table MACC, MEVA and MHR.
     params.actorMagicAccuracy = calculateActorMagicAccuracy(actor, target, params)
     params.targetMagicEvasion = calculateTargetMagicEvasion(actor, target, params)
-    params.magicHitRate       = calculateMagicHitRate(params)
+    params.magicHitRate       = calculateMagicHitRate(actor, target, params)
 
     return calculateResistanceFactor(actor, target, params)
 end
