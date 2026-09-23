@@ -199,7 +199,7 @@ void RetreatToMaster(CBattleEntity* PMaster)
 
     CBattleEntity* PPet = PMaster->PPet;
 
-    if (!PPet->StatusEffectContainer->HasPreventActionEffect())
+    if (PPet && PPet->PAI)
     {
         PPet->PAI->Disengage();
     }
