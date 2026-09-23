@@ -29,6 +29,7 @@ zones[xi.zone.NASHMAU] =
         HUNT_CANCELED                 = 7402,  -- Hunt canceled.
         JAJAROON_SHOP_DIALOG          = 10500, -- Hellooo. Yooo have caaard? Can do gaaame? Jajaroon have diiice.
         TSUTSUROON_SHOP_DIALOG        = 10510, -- What yooo want? Have katana, katana, and nin-nin...yooo want?
+        MIMIROON_DIALOG               = 10512, -- Oooh, byoootiful. Byoootiful magic. Tired of sprinkling sand. Still no loook like magic! Want use reeeal magic!
         MAMAROON_SHOP_DIALOG          = 10513, -- Welcome to maaagic shop. Lots of magics for yooo.
         POPOROON_SHOP_DIALOG          = 10515, -- Come, come. Buy aaarmor, looots of armor!
         WATAKHAMAZOM_SHOP_DIALOG      = 10516, -- Looking for some bows and bolts to strrrike fear into the hearts of your enemies? You can find 'em here!
