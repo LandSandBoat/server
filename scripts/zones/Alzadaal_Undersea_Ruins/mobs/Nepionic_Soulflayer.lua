@@ -26,7 +26,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMod(xi.mod.DARK_RES_RANK, 10)
     mob:setMod(xi.mod.WATER_RES_RANK, 10)
     mob:setMod(xi.mod.POISON_RES_RANK, 10)

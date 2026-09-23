@@ -13,7 +13,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)

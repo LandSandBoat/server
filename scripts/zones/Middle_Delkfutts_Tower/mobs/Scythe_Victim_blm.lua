@@ -15,7 +15,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
     mob:setMod(xi.mod.ATT, 425)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
 end
 

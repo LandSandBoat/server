@@ -23,7 +23,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_RES_RANK, 10)
     mob:setMod(xi.mod.STUN_RES_RANK, 10)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -25,7 +25,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
