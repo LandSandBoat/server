@@ -172,6 +172,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DMGMAGIC, -5000) -- starts the fight with -50% magic damage taken, reduced to 25% after regen is taken off.
     mob:setMod(xi.mod.ATT, 452)
     mob:setMod(xi.mod.DEF, 620)
+    mob:setMod(xi.mod.DEFP, 0) -- TODO: Negate family bonus until someone can audit DEF
     mob:setMod(xi.mod.EVA, 328)
 
     -- TODO - used to be catch all for SLEEP immunity, but I assume it's immune to both

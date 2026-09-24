@@ -13,9 +13,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, mob:getMainLvl() - 2) -- Base damage is level * 2
-    -- Yovra have a +50% bonus to defense.
-    mob:addMod(xi.mod.DEF, mob:getStat(xi.mod.DEF) * 0.5)
     mob:hideName(true)
     mob:setUntargetable(true)
     mob:setAnimationSub(5)

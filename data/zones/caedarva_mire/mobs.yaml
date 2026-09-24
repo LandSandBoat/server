@@ -939,7 +939,7 @@ templates:
 
   Jnun_CM:
     id:            6483
-    species:       doomed
+    species:       jnun
     skill_list_id: 86
     attributes:
       combat:
@@ -1250,7 +1250,7 @@ templates:
 
   Llamhigyn_Y_Dwr:
     id:            2426
-    species:       doomed
+    species:       jnun
     type:          [fished, battlefield]
     skill_list_id: 86
     attributes:
