@@ -91,3 +91,102 @@ UPDATE pet_skills SET pet_skill_radius = 10 WHERE pet_skill_name IN (
     'noctoshield',
     'dream_shroud'
 );
+
+-- Avatar Bloodpact Prepare Times
+-- https://wiki.ffo.jp/html/32936.html
+
+-- Carbuncle
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'healing_ruby';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'poison_nails';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'shining_ruby';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'glittering_ruby';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'meteorite';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'healing_ruby_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'searing_light';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'soothing_ruby';
+
+-- Fenrir
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'moonlit_charge';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'crescent_fang';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'lunar_cry';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'lunar_roar';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'ecliptic_growl';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'ecliptic_howl';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'eclipse_bite';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'howling_moon';
+
+-- Ifrit
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'punch';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'fire_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'burning_strike';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'double_punch';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'crimson_howl';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'fire_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'flaming_crush';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'meteor_strike';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'inferno';
+
+-- Titan
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'rock_throw';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'stone_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'rock_buster';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'megalith_throw';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'earthen_ward';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'stone_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'mountain_buster';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'geocrush';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'earthen_fury';
+
+-- Leviathan
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'barracuda_dive';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'water_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'tail_whip';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'spring_water';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'slowga';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'water_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'spinning_dive';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'grand_fall';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'tidal_wave';
+
+-- Garuda
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'claw';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'aero_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'whispering_wind';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'hastega';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'aerial_armor';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'aero_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'predator_claws';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'wind_blade';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'aerial_blast';
+
+-- Shiva
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'axe_kick';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'blizzard_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'frost_armor';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'sleepga';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'double_slap';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'blizzard_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'rush';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'heavenly_strike';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'diamond_dust';
+
+-- Ramuh
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'shock_strike';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'thunder_ii';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'rolling_thunder';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'thunderspark';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'lightning_armor';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'thunder_iv';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'chaotic_strike';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'thunderstorm';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'judgment_bolt';
+
+-- Diabolos
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'camisado';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'somnolence';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'nightmare';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'ultimate_terror';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'noctoshield';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'dream_shroud';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'nether_blast';
+UPDATE pet_skills SET pet_prepare_time = 3000 WHERE pet_skill_name = 'ruinous_omen';
