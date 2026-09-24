@@ -714,7 +714,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             hitInfo                = xi.mobskills.defaultHitInfo(hitNumber)
             hitInfo.hitAnticipated = true
             hitInfo.missType       = 'Anticipated'
-        elseif sneakIsApplicable or chance <= hitrate * 100 then
+        elseif sneakIsApplicable or chance <= hitrate then
             hitParams.hitNumber = hitNumber
 
             local damageForThisHit = (hitNumber == 1) and firstHitDamage or subsequentDamage
