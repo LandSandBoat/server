@@ -26,18 +26,125 @@ local npcTable =
     ['Piketo-Puketo' ] = { 10013, xi.guild.COOKING,      xi.skill.COOKING,      xi.item.FIRE_CRYSTAL,  xi.keyItem.WAY_OF_THE_CULINARIAN, '[Expert]Cooking'      },
 }
 
--- TODO: Enum this items. This PR is already massive.
 local testItemTable =
 {
-    [xi.guild.FISHING     ] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
-    [xi.guild.WOODWORKING ] = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
-    [xi.guild.SMITHING    ] = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
-    [xi.guild.GOLDSMITHING] = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
-    [xi.guild.CLOTHCRAFT  ] = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
-    [xi.guild.LEATHERCRAFT] = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
-    [xi.guild.BONECRAFT   ] = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
-    [xi.guild.ALCHEMY     ] = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
-    [xi.guild.COOKING     ] = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
+    [xi.guild.FISHING] =
+    {
+        xi.item.MOAT_CARP_1,
+        xi.item.CHEVAL_SALMON,
+        xi.item.GIANT_CATFISH_1,
+        xi.item.GUGRU_TUNA_1,
+        xi.item.MONKE_ONKE_1,
+        xi.item.BHEFHEL_MARLIN_1,
+        xi.item.BLADEFISH_1,
+        xi.item.THREE_EYED_FISH_1,
+        xi.item.GIGANT_SQUID,
+        xi.item.TIGER_SHARK,
+    },
+    [xi.guild.WOODWORKING] =
+    {
+        xi.item.WORKBENCH,
+        xi.item.MAPLE_TABLE,
+        xi.item.HARP,
+        xi.item.TRAVERSIERE,
+        xi.item.ROSE_WAND,
+        xi.item.KAMAN,
+        xi.item.EBONY_WAND,
+        xi.item.COMMODE,
+        xi.item.MYTHIC_POLE,
+        xi.item.VEJOVIS_WAND,
+    },
+    [xi.guild.SMITHING] =
+    {
+        xi.item.XIPHOS,
+        xi.item.ASPIS,
+        xi.item.BILBO,
+        xi.item.WAR_PICK,
+        xi.item.MYTHRIL_PICK,
+        xi.item.DARKSTEEL_FALCHION,
+        xi.item.BASCINET,
+        xi.item.BASTARD_SWORD,
+        xi.item.CELATA,
+        xi.item.GORKHALI_KUKRI,
+    },
+    [xi.guild.GOLDSMITHING] =
+    {
+        xi.item.COPPER_HAIRPIN,
+        xi.item.BRASS_HAIRPIN,
+        xi.item.SILVER_HAIRPIN,
+        xi.item.CHAIN_GORGET,
+        xi.item.MYTHRIL_RING,
+        xi.item.MYTHRIL_GORGET,
+        xi.item.MYTHRIL_BREASTPLATE,
+        xi.item.TORQUE,
+        xi.item.COLICHEMARDE,
+        xi.item.EVADER_EARRING,
+    },
+    [xi.guild.CLOTHCRAFT] =
+    {
+        xi.item.CAPE,
+        xi.item.COTTON_CAPE,
+        xi.item.HEKO_OBI,
+        xi.item.FEATHER_COLLAR,
+        xi.item.WOOL_BRACERS,
+        xi.item.RED_CAPE,
+        xi.item.WOOL_DOUBLET,
+        xi.item.SILK_CLOAK,
+        xi.item.ARHATS_HAKAMA,
+        xi.item.SWITH_CAPE,
+    },
+    [xi.guild.LEATHERCRAFT] =
+    {
+        xi.item.RABBIT_MANTLE,
+        xi.item.LIZARD_CESTI,
+        xi.item.DHALMEL_MANTLE,
+        xi.item.MAGIC_BELT,
+        xi.item.CUIR_BOUILLI,
+        xi.item.RAPTOR_JERKIN,
+        xi.item.BATTLE_BOOTS,
+        xi.item.TIGER_GLOVES,
+        xi.item.COEURL_MASK,
+        xi.item.URJA_TROUSERS,
+    },
+    [xi.guild.BONECRAFT] =
+    {
+        xi.item.SHELL_RING,
+        xi.item.BONE_RING,
+        xi.item.BEETLE_EARRING,
+        xi.item.HORN_RING,
+        xi.item.CARAPACE_GORGET,
+        xi.item.ASTRAGALOS,
+        xi.item.BONE_PATAS,
+        xi.item.CORAL_HAIRPIN,
+        xi.item.CORAL_BANGLES,
+        xi.item.HAJDUK_RING,
+    },
+    [xi.guild.ALCHEMY] =
+    {
+        xi.item.BLOCK_OF_ANIMAL_GLUE,
+        xi.item.FLASK_OF_POISON_POTION,
+        xi.item.FLASK_OF_BLINDING_POTION,
+        xi.item.JAR_OF_FIRESAND,
+        xi.item.FIRE_SWORD,
+        xi.item.HI_POTION,
+        xi.item.ACID_KUKRI,
+        xi.item.X_POTION,
+        xi.item.BLOODY_SWORD,
+        xi.item.SAIDA_RING,
+    },
+    [xi.guild.COOKING] =
+    {
+        xi.item.SALMON_SUB_SANDWICH,
+        xi.item.BOWL_OF_PEA_SOUP,
+        xi.item.BOWL_OF_VEGETABLE_GRUEL,
+        xi.item.MEAT_MITHKABOB,
+        xi.item.APPLE_PIE,
+        xi.item.BOTTLE_OF_YAGUDO_DRINK,
+        xi.item.PIECE_OF_RAISIN_BREAD,
+        xi.item.BOWL_OF_WHITEFISH_STEW,
+        xi.item.BOWL_OF_SEAFOOD_STEW,
+        xi.item.BOWL_OF_SPRIGHTLY_SOUP,
+    },
 }
 
 local function giveNewRank(player, skillId, newRank)
