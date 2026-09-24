@@ -42,8 +42,14 @@ local poisonPotency =
 
 -- Blind / Blind II: Revert post-2015 potency formula.
 -- Poison / Poison II / Poisonga: Revert post-2015 potency formula
+-- Dokumori: Ichi: Revert slip damage to 2 HP per tick.
 -- Source: https://forum.square-enix.com/ffxi/threads/46531-Mar-26-2015-%28JST%29-Version-Update
+-- Source: https://wiki.ffo.jp/html/3596.html
 m:addOverride('xi.spells.enfeebling.calculatePotency', function(caster, target, spellId, spellEffect, skillType, statUsed)
+    if spellId == xi.magic.spell.DOKUMORI_ICHI then
+        return 2
+    end
+
     local potency
 
     if
