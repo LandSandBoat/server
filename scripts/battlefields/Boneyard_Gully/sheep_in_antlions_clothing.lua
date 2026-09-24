@@ -139,23 +139,23 @@ end
 content.loot =
 {
     {
-        { itemId = xi.item.NONE,                   weight = 950 },
-        { itemId = xi.item.CLOUD_EVOKER,           weight =  50 },
+        { itemId = xi.item.NONE,                   weight = 9750 },
+        { itemId = xi.item.CLOUD_EVOKER,           weight =  250 },
     },
     {
-        { itemId = xi.item.NONE,                   weight = 150 },
-        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 250 },
-        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 250 },
-        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 350 },
+        { itemId = xi.item.NONE,                   weight = 1500 },
+        { itemId = xi.item.SQUARE_OF_GALATEIA,     weight = 2500 },
+        { itemId = xi.item.SQUARE_OF_KEJUSU_SATIN, weight = 2500 },
+        { itemId = xi.item.POT_OF_VIRIDIAN_URUSHI, weight = 3500 },
     },
     {
         quantity = 2,
-        { itemId = xi.item.NONE,                   weight = 750 },
-        { itemId = xi.item.HAGUN,                  weight =  50 },
-        { itemId = xi.item.MARTIAL_AXE,            weight =  50 },
-        { itemId = xi.item.MARTIAL_WAND,           weight =  50 },
-        { itemId = xi.item.FORAGERS_MANTLE,        weight =  50 },
-        { itemId = xi.item.HARMONIAS_TORQUE,       weight =  50 },
+        { itemId = xi.item.NONE,                   weight = 7500 },
+        { itemId = xi.item.HAGUN,                  weight =  500 },
+        { itemId = xi.item.MARTIAL_AXE,            weight =  500 },
+        { itemId = xi.item.MARTIAL_WAND,           weight =  500 },
+        { itemId = xi.item.FORAGERS_MANTLE,        weight =  500 },
+        { itemId = xi.item.HARMONIAS_TORQUE,       weight =  500 },
     },
 }
 

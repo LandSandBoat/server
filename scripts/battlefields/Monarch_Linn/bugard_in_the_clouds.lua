@@ -30,8 +30,8 @@ content.groups =
 content.loot =
 {
     {
-        { itemId    = xi.item.NONE,               weight =  9500 }, -- Nothing
-        { itemId    = xi.item.CLOUD_EVOKER,       weight =   500 }, -- Cloud Evoker
+        { itemId    = xi.item.NONE,               weight =  9750 }, -- Nothing
+        { itemId    = xi.item.CLOUD_EVOKER,       weight =   250 }, -- Cloud Evoker
     },
 
     {
