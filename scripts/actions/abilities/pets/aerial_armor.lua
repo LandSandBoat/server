@@ -1,5 +1,6 @@
 -----------------------------------
 -- Aerial Armor
+-- Family: Avatar (Garuda)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,12 +10,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    local typeEffect = xi.effect.BLINK
-    target:delStatusEffect(typeEffect)
+    target:delStatusEffect(xi.effect.BLINK) -- TODO: Capture overwrite tiers
 
-    if target:addStatusEffect(typeEffect, { power = 3, duration = 900, origin = pet }) then
+    if target:addStatusEffect(xi.effect.BLINK, { power = 3, duration = 900, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
             petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
         else
@@ -25,7 +25,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return
     end
 
-    return typeEffect
+    return xi.effect.BLINK
 end
 
 return abilityObject

@@ -17,7 +17,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
     mob:setMod(xi.mod.POWER_MULTIPLIER_SPELL, 50)

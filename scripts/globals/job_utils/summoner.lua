@@ -193,13 +193,17 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
             return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
         end
 
+        if target:isMob() then
+            target:addBaseEnmity(player)
+        end
+
         return 0, 0
     end
 
     return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
 end
 
-xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, action)
+xi.job_utils.summoner.onUseBloodPact = function(target, pet, petskill, summoner, action)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
     if not bloodPactAbility then
         return
@@ -209,13 +213,13 @@ xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, acti
     local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
     local bloodPactRecast  = math.max(0, summoner:getLocalVar('bpRecastTime'))
 
+    if target:isMob() then
+        target:addBaseEnmity(pet)
+    end
+
     if target:getID() == action:getPrimaryTargetID() then
         -- MP and Cooldown is only consumed if the ability goes off
         summoner:delMP(mpCost)
-
-        if target:isMob() then
-            target:addBaseEnmity(summoner)
-        end
 
         if summoner:hasStatusEffect(xi.effect.APOGEE) then
             summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())

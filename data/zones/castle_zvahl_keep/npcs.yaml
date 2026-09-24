@@ -717,7 +717,7 @@ npcs:
         type: door
       door_id:      1852403039
       entity_flags: 4099
-      animation:    open_door
+      animation:    close_door
       moving:       1
     status: normal
 
@@ -753,7 +753,7 @@ npcs:
         type: door
       door_id:      1969828959
       entity_flags: 6147
-      animation:    open_door
+      animation:    close_door
       moving:       1
     status: normal
 
@@ -777,7 +777,7 @@ npcs:
         type: door
       door_id:      2003383391
       entity_flags: 6147
-      animation:    open_door
+      animation:    close_door
       moving:       1
     status: normal
 
@@ -825,7 +825,7 @@ npcs:
         type: door
       door_id:      1919497311
       entity_flags: 6147
-      animation:    open_door
+      animation:    close_door
       moving:       1
     status: normal
 

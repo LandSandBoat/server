@@ -241,8 +241,16 @@ void CBattleEntity::UpdateHealth()
 
     // Calculate "base" hp/mp with weakness, curse, HP mods. Raw HP/MP mods from food are post-curse.
     // Note: Afflictor was noted to use exactly 75/256 for curse power
-    int32 baseHPBonus = std::floor((std::floor((health.maxhp + getMod(xi::Mod::BASE_HP)) * weaknessPower) + getMod(xi::Mod::HP)) * cursePower) + getMod(xi::Mod::FOOD_HP);
-    int32 baseMPBonus = std::floor((std::floor((health.maxmp + getMod(xi::Mod::BASE_MP)) * weaknessPower) + getMod(xi::Mod::MP)) * cursePower) + getMod(xi::Mod::FOOD_MP);
+    int32 baseHPBonus = std::floor((std::floor((health.maxhp + getMod(xi::Mod::BASE_HP)) * weaknessPower) + getMod(xi::Mod::HP)) * cursePower);
+    int32 baseMPBonus = std::floor((std::floor((health.maxmp + getMod(xi::Mod::BASE_MP)) * weaknessPower) + getMod(xi::Mod::MP)) * cursePower);
+
+    // Store base HP/MP Bonus for HP/MP% latents here
+    health.latenthp = baseHPBonus;
+    health.latentmp = baseMPBonus;
+
+    // add in food
+    baseHPBonus += getMod(xi::Mod::FOOD_HP);
+    baseMPBonus += getMod(xi::Mod::FOOD_MP);
 
     // Resolve HP/MP conversion
     int32 HPMPConvertDiff = getMod(xi::Mod::CONVMPTOHP) - getMod(xi::Mod::CONVHPTOMP);

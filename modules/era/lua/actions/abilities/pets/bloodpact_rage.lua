@@ -14,7 +14,7 @@ local m = Module:new('era_bloodpact_rage', xi.pre(xi.expansion.ROV))
 -- Axe Kick
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.axe_kick.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -42,7 +42,7 @@ end)
 -- Barracuda Dive
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.barracuda_dive.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -70,7 +70,7 @@ end)
 -- Blindside
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.blindside.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -98,7 +98,7 @@ end)
 -- Burning Strike
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.burning_strike.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -140,7 +140,7 @@ end)
 -- Camisado
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.camisado.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -176,7 +176,7 @@ end)
 -- Chaotic Strike
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.chaotic_strike.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -211,7 +211,7 @@ end)
 -- Claw
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.claw.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -244,7 +244,7 @@ end)
 -- Crescent Fang
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.crescent_fang.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -279,7 +279,7 @@ end)
 -- Double Punch
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.double_punch.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -306,7 +306,7 @@ end)
 -- Double Slap
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.double_slap.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -333,7 +333,7 @@ end)
 -- Eclipse Bite
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.eclipse_bite.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -360,7 +360,7 @@ end)
 -- Flaming Crush
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.flaming_crush.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -402,7 +402,7 @@ end)
 -- Megalith Throw
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.megalith_throw.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -440,7 +440,7 @@ end)
 -- Moonlit Charge
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.moonlit_charge.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -475,7 +475,7 @@ end)
 -- Mountain Buster
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.mountain_buster.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -503,7 +503,7 @@ end)
 -- Poison Nails
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.poison_nails.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -538,7 +538,7 @@ end)
 -- Predator Claws
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.predator_claws.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -565,7 +565,7 @@ end)
 -- Punch
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.punch.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -598,7 +598,7 @@ end)
 -- Regal Scratch
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.regal_scratch.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -629,7 +629,7 @@ end)
 -- Rock Buster
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.rock_buster.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -664,7 +664,7 @@ end)
 -- Rock Throw
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.rock_throw.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -702,7 +702,7 @@ end)
 -- Rush
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.rush.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -729,7 +729,7 @@ end)
 -- Shock Strike
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.shock_strike.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -765,7 +765,7 @@ end)
 -- Spinning Dive
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.spinning_dive.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 
@@ -793,7 +793,7 @@ end)
 -- Tail Whip
 -----------------------------------
 m:addOverride('xi.actions.abilities.pets.tail_whip.onPetAbility', function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
     local params = {}
 

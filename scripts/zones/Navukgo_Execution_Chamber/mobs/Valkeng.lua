@@ -12,7 +12,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 075)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMod(xi.mod.DEF, 140)
 end
 

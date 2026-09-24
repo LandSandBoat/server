@@ -199,7 +199,7 @@ void RetreatToMaster(CBattleEntity* PMaster)
 
     CBattleEntity* PPet = PMaster->PPet;
 
-    if (!PPet->StatusEffectContainer->HasPreventActionEffect())
+    if (PPet && PPet->PAI)
     {
         PPet->PAI->Disengage();
     }
@@ -892,7 +892,6 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(weaponDamage);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_SUB])->setDmgType(PPetData->m_dmgType);
 
     PPet->addModifier(xi::Mod::DEF, mobutils::GetBaseDefEva(PPet, PPetData->defRank));
     PPet->addModifier(xi::Mod::EVA, mobutils::GetBaseDefEva(PPet, mobutils::JobSkillRankToBaseEvaRank(PPet->GetMJob(), PPet->GetSJob())));

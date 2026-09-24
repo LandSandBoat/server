@@ -1222,7 +1222,7 @@ INSERT INTO `item_usable` VALUES (5350,'phial_of_volant_serum',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5351,'phial_of_osseous_serum',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5352,'phial_of_spectral_serum',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5353,'iron_bullet_pouch',1,1,55,0,0,0,0,0);
-INSERT INTO `item_usable` VALUES (5354,'flask_of_walahra_water',1,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5354,'flask_of_walahra_water',1,1,34,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5355,'elixir_vitae',1,1,34,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5356,'jar_of_remedy_ointment',1,1,7,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5357,'bottle_of_ether_drops',1,1.5,32,0,0,0,0,0);

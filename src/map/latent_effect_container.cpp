@@ -1144,57 +1144,57 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             expression = m_POwner->health.hp < latentEffect.GetConditionsValue() && m_POwner->animation == xi::Animation::Attack;
             break;
         case xi::Latent::MpUnderVisibleGear:
-            // TODO: figure out if this is actually right
-            // CItemEquipment* head = (CItemEquipment*)(m_POwner->getEquip(SLOT_HEAD));
-            // CItemEquipment* body = (CItemEquipment*)(m_POwner->getEquip(SLOT_BODY));
-            // CItemEquipment* hands = (CItemEquipment*)(m_POwner->getEquip(SLOT_HANDS));
-            // CItemEquipment* legs = (CItemEquipment*)(m_POwner->getEquip(SLOT_LEGS));
-            // CItemEquipment* feet = (CItemEquipment*)(m_POwner->getEquip(SLOT_FEET));
+        {
+            uint32_t totalMpMod = 0;
 
-            // int32 visibleMp = 0;
-            // visibleMp += (head ? head->getModifier(Mod::MP) : 0);
-            // visibleMp += (body ? body->getModifier(Mod::MP) : 0);
-            // visibleMp += (hands ? hands->getModifier(Mod::MP) : 0);
-            // visibleMp += (legs ? legs->getModifier(Mod::MP) : 0);
-            // visibleMp += (feet ? feet->getModifier(Mod::MP) : 0);
+            // TODO: does this also check MPP?
+            // Get the mod values for non-visible gear so we can subtract them out of latentmp
+            for (auto&& slot : { SLOT_NECK, SLOT_EAR1, SLOT_EAR2, SLOT_RING1, SLOT_RING2, SLOT_BACK, SLOT_WAIST })
+            {
+                CItemEquipment* equip = m_POwner->getEquip(slot);
+                if (equip)
+                {
+                    totalMpMod += equip->getModifier(xi::Mod::MP);
+                }
+            }
 
-            // TODO: add mp percent too
-            // if ((float)( mp / ((m_POwner->health.mp - m_POwner->health.modmp) + (m_POwner->PMeritPoints->GetMerit(xi::Merit::MaxMp)->count * 10 ) +
-            //    visibleMp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
-            //{
-            //    m_LatentEffectList.at(i)->Activate();
-            //}
-            // else
-            //{
-            //    m_LatentEffectList.at(i)->Deactivate();
-            //}
+            if (m_POwner->health.mp <= static_cast<float>(m_POwner->health.latentmp - totalMpMod) * static_cast<float>(latentEffect.GetConditionsValue() / 100.f))
+            {
+                expression = true;
+            }
+            else
+            {
+                expression = false;
+            }
+
             break;
+        }
         case xi::Latent::HpOverVisibleGear:
-            // TODO: figure out if this is actually right
-            // CItemEquipment* head = (CItemEquipment*)(m_POwner->getEquip(SLOT_HEAD));
-            // CItemEquipment* body = (CItemEquipment*)(m_POwner->getEquip(SLOT_BODY));
-            // CItemEquipment* hands = (CItemEquipment*)(m_POwner->getEquip(SLOT_HANDS));
-            // CItemEquipment* legs = (CItemEquipment*)(m_POwner->getEquip(SLOT_LEGS));
-            // CItemEquipment* feet = (CItemEquipment*)(m_POwner->getEquip(SLOT_FEET));
+        {
+            uint32_t totalHpMod = 0;
 
-            // int32 visibleHp = 0;
-            // visibleHp += (head ? head->getModifier(Mod::HP) : 0);
-            // visibleHp += (body ? body->getModifier(Mod::HP) : 0);
-            // visibleHp += (hands ? hands->getModifier(Mod::HP) : 0);
-            // visibleHp += (legs ? legs->getModifier(Mod::HP) : 0);
-            // visibleHp += (feet ? feet->getModifier(Mod::HP) : 0);
+            // TODO: does this also check HPP?
+            // Get the mod values for non-visible gear so we can subtract them out of latenthp
+            for (auto&& slot : { SLOT_NECK, SLOT_EAR1, SLOT_EAR2, SLOT_RING1, SLOT_RING2, SLOT_BACK, SLOT_WAIST })
+            {
+                CItemEquipment* equip = m_POwner->getEquip(slot);
+                if (equip)
+                {
+                    totalHpMod += equip->getModifier(xi::Mod::HP);
+                }
+            }
 
-            // TODO: add mp percent too
-            // if ((float)( hp / ((m_POwner->health.hp - m_POwner->health.modhp) + (m_POwner->PMeritPoints->GetMerit(xi::Merit::MaxHp)->count * 10 ) +
-            //    visibleHp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
-            //{
-            //    m_LatentEffectList.at(i)->Activate();
-            //}
-            // else
-            //{
-            //    m_LatentEffectList.at(i)->Deactivate();
-            //}
+            if (m_POwner->health.hp >= static_cast<float>(m_POwner->health.latenthp - totalHpMod) * static_cast<float>(latentEffect.GetConditionsValue() / 100.f))
+            {
+                expression = true;
+            }
+            else
+            {
+                expression = false;
+            }
+
             break;
+        }
         case xi::Latent::WeaponBroken:
         {
             auto  slot = latentEffect.GetSlot();

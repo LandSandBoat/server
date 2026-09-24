@@ -14,6 +14,10 @@ local trialSizeBattles = set{
 }
 
 -- TODO: Determine if this is the correct way of calculating this.
+-- Note: https://wiki.ffo.jp/html/30566.html
+-- It seems that in this patch, avatars gained a flat +30 ACC Bonus.
+-- Through retail testing, it seems avatars no longer gain ACC from skill over cap.
+-- Unknown if this also applies to MACC
 xi.summon.getSummoningSkillOverCap = function(avatar)
     local summoner       = avatar:getMaster()
     local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)

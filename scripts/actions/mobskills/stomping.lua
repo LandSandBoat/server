@@ -20,6 +20,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.damageType       = xi.damageType.SLASHING
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     params.attackMultiplier = { 1.5, 1.5, 1.5 }
+    params.canCrit          = true
+    params.criticalChance   = { 0.10, 0.15, 0.20 } -- TODO: Rate needs accurate caps
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

@@ -279,7 +279,7 @@ void auth_session::read_func()
                         return;
                     }
 
-                    if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
+                    if (!otpHelpers::validateTOTP(accountID, otp, otpHelpers::getAccountSecret(username, "TOTP")))
                     {
                         sendLoginResult(login_result::LOGIN_ERROR);
                         return;
@@ -456,7 +456,7 @@ void auth_session::read_func()
 
             if (otpHelpers::doesAccountNeedOTP(username, "TOTP"))
             {
-                if (!otpHelpers::validateTOTP(otp, otpHelpers::getAccountSecret(username, "TOTP")))
+                if (!otpHelpers::validateTOTP(accid, otp, otpHelpers::getAccountSecret(username, "TOTP")))
                 {
                     sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);
                     return;
@@ -539,22 +539,23 @@ void auth_session::read_func()
         case login_cmd::LOGIN_REMOVE_TOTP:
         {
             // Look up and validate account password
-            if (!validatePassword(username, password))
+            const auto accountInfo = validatePassword(username, password);
+            if (!accountInfo)
             {
                 sendJsonOnlyErrorMessage("Failed to validate credentials");
                 return;
             }
 
+            const auto accid        = accountInfo->first;
             const auto secret       = otpHelpers::getAccountSecret(username, "TOTP");
             const auto recoveryCode = otpHelpers::getAccountRecoveryCode(username, "TOTP");
 
             // Perform case-insensitive comparison on the recovery code vs input otp
             // use c_str() because that guarantees both have a null terminator (and thus are the same length)
-            if (otpHelpers::validateTOTP(otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
+            if (otpHelpers::validateTOTP(accid, otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
             {
                 // validated
-                uint32     accid = loginHelpers::getAccountId(username);
-                const auto rset  = db::preparedStmt("DELETE FROM accounts_totp WHERE accounts_totp.accid = ? LIMIT 1", accid);
+                const auto rset = db::preparedStmt("DELETE FROM accounts_totp WHERE accounts_totp.accid = ? LIMIT 1", accid);
 
                 otpHelpers::removeAllTrustTokens(accid);
 
@@ -572,18 +573,20 @@ void auth_session::read_func()
         case login_cmd::LOGIN_REGENERATE_RECOVERY:
         {
             // Look up and validate account password
-            if (!validatePassword(username, password))
+            const auto accountInfo = validatePassword(username, password);
+            if (!accountInfo)
             {
                 sendJsonOnlyErrorMessage("Failed to validate credentials");
                 return;
             }
 
+            const auto accid        = accountInfo->first;
             const auto secret       = otpHelpers::getAccountSecret(username, "TOTP");
             const auto recoveryCode = otpHelpers::getAccountRecoveryCode(username, "TOTP");
 
             // Perform case-insensitive comparison on the recovery code vs input otp
             // use c_str() because that guarantees both have a null terminator (and thus are the same length)
-            if (otpHelpers::validateTOTP(otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
+            if (otpHelpers::validateTOTP(accid, otp, secret) || strcmpi(otp.c_str(), recoveryCode.c_str()) == 0)
             {
                 const auto newRecoveryCode = otpHelpers::regenerateAccountRecoveryCode(username, "TOTP");
 
@@ -602,18 +605,20 @@ void auth_session::read_func()
         case login_cmd::LOGIN_VERIFY_TOTP:
         {
             // Look up and validate account password
-            if (!validatePassword(username, password))
+            const auto accountInfo = validatePassword(username, password);
+            if (!accountInfo)
             {
                 sendJsonOnlyErrorMessage("Failed to validate credentials");
                 return;
             }
 
+            const auto accid  = accountInfo->first;
             const auto secret = otpHelpers::getAccountSecret(username, "TOTP");
 
-            if (otpHelpers::validateTOTP(otp, secret))
+            if (otpHelpers::validateTOTP(accid, otp, secret))
             {
                 // validated
-                const auto rset = db::preparedStmt("UPDATE accounts_totp SET validated = TRUE WHERE accid = ? LIMIT 1", loginHelpers::getAccountId(username));
+                const auto rset = db::preparedStmt("UPDATE accounts_totp SET validated = TRUE WHERE accid = ? LIMIT 1", accid);
 
                 json sendTOTP;
                 sendTOTP["result"]        = login_result::LOGIN_SUCCESS_VERIFY_TOTP;

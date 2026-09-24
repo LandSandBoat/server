@@ -1,5 +1,6 @@
 -----------------------------------
 -- Dream Shroud
+-- Family: Avatar (Diabolos)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,13 +10,18 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-    local hour = VanadielHour()
-    local buffvalue = math.abs(12 - hour) + 1
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
+
+    local baseDuration = 180
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
+    local hour         = VanadielHour()
+    local buffvalue    = math.abs(12 - hour) + 1
+
+    -- TODO: Does this overwrite itself?
     target:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
     target:delStatusEffect(xi.effect.MAGIC_DEF_BOOST)
+
     target:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { power = buffvalue, duration = duration, origin = pet })
     target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, { power = 14 - buffvalue, duration = duration, origin = pet })
 

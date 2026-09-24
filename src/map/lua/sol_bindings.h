@@ -145,7 +145,6 @@ SOL_BIND_DEC_CONST(CLuaItem, CItem);
 
 class CItemCurrency;
 class CItemEquipment;
-class CItemFish;
 class CItemFlowerpot;
 class CItemFurnishing;
 class CItemGeneral;
@@ -156,7 +155,6 @@ class CItemUsable;
 class CItemWeapon;
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemCurrency);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemEquipment);
-SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemFish);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemFlowerpot);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemFurnishing);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemGeneral);

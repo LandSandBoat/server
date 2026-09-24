@@ -10,7 +10,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
 end
 

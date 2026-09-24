@@ -22,13 +22,16 @@
 
 #include <cctype>
 #include <chrono>
+#include <openssl/crypto.h>
 #include <openssl/hmac.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
 #include <stdexcept>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
+#include "common/synchronized.h"
 #include "common/xirand.h"
 #include "login_helpers.h"
 
@@ -131,18 +134,42 @@ inline uint64_t getCurrentTime()
     return std::chrono::duration_cast<std::chrono::seconds>(dur).count();
 }
 
-inline bool validateTOTP(const std::string& totpCode, const std::string& secret)
+// accepts one 30s step either side of now for clock drift and input delay (RFC 6238 5.2)
+inline bool validateTOTP(uint32 accid, const std::string& totpCode, const std::string& secret)
 {
-    bool valid = false;
+    // last accepted time step per account, so a code can't be used twice (RFC 6238 5.2)
+    static Synchronized<std::unordered_map<uint32, uint64_t>> lastAcceptedStep;
 
-    auto res = generateTOTP(secret, getCurrentTime());
+    constexpr uint64_t period  = 30;
+    const auto         current = getCurrentTime() / period;
 
-    if (totpCode == res)
+    for (const auto step : { current, current - 1, current + 1 })
     {
-        valid = true;
+        const auto expected = generateTOTP(secret, step * period, 6, period);
+        if (totpCode.size() != expected.size() || CRYPTO_memcmp(totpCode.data(), expected.data(), expected.size()) != 0)
+        {
+            continue;
+        }
+
+        return lastAcceptedStep.write(
+            [&](auto& lastSteps)
+            {
+                auto [it, inserted] = lastSteps.try_emplace(accid, step);
+                if (!inserted)
+                {
+                    if (it->second >= step)
+                    {
+                        return false;
+                    }
+
+                    it->second = step;
+                }
+
+                return true;
+            });
     }
 
-    return valid;
+    return false;
 }
 
 inline std::string getNewBase32Secret()

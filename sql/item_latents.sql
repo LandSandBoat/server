@@ -1,4 +1,3 @@
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -368,7 +367,7 @@ INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
 
 -- Uggalepih Pendant
-INSERT INTO `item_latents` VALUES (13145,28,8,4,51);     -- "Magic Atk. Bonus" while MP <51%
+INSERT INTO `item_latents` VALUES (13145,28,8,45,51);    -- "Magic Atk. Bonus" while MP <51%, visible gear only
 
 -- Brisingamen +1
 INSERT INTO `item_latents` VALUES (13162,2,12,26,0);     -- Daytime: HP +12
@@ -1540,7 +1539,7 @@ INSERT INTO `item_latents` VALUES (15406,68,3,1,75);     -- Evasion+3 when HP >7
 INSERT INTO `item_latents` VALUES (15407,68,4,1,75);     -- Evasion+4 when HP >75%
 
 -- Resentment Cape
-INSERT INTO `item_latents` VALUES (15468,163,-500,53,1);   -- magic damge taken -5% ( in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (15468,163,-500,53,1); -- magic damage taken -5% (in areas outside own nation's control)
 
 -- Storm Mantle
 INSERT INTO `item_latents` VALUES (15483,2,75,58,0);     -- HP +75
@@ -1553,7 +1552,7 @@ INSERT INTO `item_latents` VALUES (15504,23,3,53,0);     -- ATK +3 in areas insi
 INSERT INTO `item_latents` VALUES (15504,25,3,53,0);     -- ACC +3 in areas inside own nation's control
 
 -- Parade Gorget
-INSERT INTO `item_latents` VALUES (15506,369,1,1,85);    -- Refresh when HP >=85%
+INSERT INTO `item_latents` VALUES (15506,369,1,46,85);   -- Refresh when HP >=85%, visible gear only
 
 -- Diabolos's Torque
 INSERT INTO `item_latents` VALUES (15516,24,8,52,8);     -- RATT+8 in Dark weather
@@ -2055,6 +2054,9 @@ INSERT INTO `item_latents` VALUES (16793,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (16793,19,-10,47,0);
 INSERT INTO `item_latents` VALUES (16793,21,-10,47,0);
 
+-- Senior Gold Musketeer's scythe
+INSERT INTO `item_latents` VALUES (16799,25,7,44,1); -- Citizens of Bastok: Accuracy +7
+
 -- Monsoon Spear
 INSERT INTO `item_latents` VALUES (16883,25,10,52,6);    -- Accuracy +10 in Water weather
 
@@ -2098,7 +2100,7 @@ INSERT INTO `item_latents` VALUES (16952,16,-10,47,0);
 INSERT INTO `item_latents` VALUES (16952,18,-10,47,0);
 
 -- Reserve Captain's Greatsword
-INSERT INTO `item_latents` VALUES (16953,25,7,44,0);  -- Citizens of San d'Oria:  Accuracy +7
+INSERT INTO `item_latents` VALUES (16953,25,7,44,0);  -- Citizens of San d'Oria: Accuracy +7
 
 -- Kamewari
 INSERT INTO `item_latents` VALUES (16968,165,7,59,3);    -- Vs. arcana: Critical hit rate +7%
@@ -2199,6 +2201,9 @@ INSERT INTO `item_latents` VALUES (17456,5,-10,47,0);
 INSERT INTO `item_latents` VALUES (17456,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17456,20,-10,47,0);
 
+-- Senior Gold Musketeer's rod
+INSERT INTO `item_latents` VALUES (17457,71,7,44,1); -- Citizens of Bastok: MPHEAL +7
+
 -- Reserve Captain's mace
 INSERT INTO `item_latents` VALUES (17458,71,7,44,0);  -- Citizens of San d'Oria: MP recovered while healing +7
 
@@ -2229,7 +2234,7 @@ INSERT INTO `item_latents` VALUES (17507,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17507,20,-10,47,0);
 
 -- Master Caster's baghnakhs
--- INSERT INTO `item_latents` VALUES (17508,23,10,?,?);  -- Citizens of Windurst: Attack+10
+INSERT INTO `item_latents` VALUES (17508,23,10,44,2);  -- Citizens of Windurst: Attack +10
 
 -- Destroyers
 INSERT INTO `item_latents` VALUES (17509,141,6,47,0);    -- Crit Rate +6% (for this weapon only) when broken (500 WS points)
@@ -2243,6 +2248,9 @@ INSERT INTO `item_latents` VALUES (17527,21,-10,47,0);
 
 -- Sunlight Pole
 INSERT INTO `item_latents` VALUES (17529,370,1,42,1);     -- Regen Effect +1/tick in Sunny weather
+
+-- Master Caster's pole
+INSERT INTO `item_latents` VALUES (17530,71,8,44,2); -- Citizens of Windurst: MPHEAL +8
 
 -- Musketeer's Pole +1/+2
 INSERT INTO `item_latents` VALUES (17539,2,10,53,1);     -- HP +10 in areas outside own nation's control
@@ -2285,6 +2293,9 @@ INSERT INTO `item_latents` VALUES (17616,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17616,16,-10,47,0);
 INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
 
+-- Master Caster's knife
+INSERT INTO `item_latents` VALUES (17617,1,10,44,2); -- Citizens of Windurst: DEF +10
+
 -- Daylight Dagger
 INSERT INTO `item_latents` VALUES (17619,25,12,26,0);    -- Daytime: ACC +12
 
@@ -2298,6 +2309,9 @@ INSERT INTO `item_latents` VALUES (17649,25,12,26,1);    -- Nighttime: ACC +12
 INSERT INTO `item_latents` VALUES (17654,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17654,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17654,17,-10,47,0);
+
+-- Senior Gold Musketeer's scimitar
+INSERT INTO `item_latents` VALUES (17655,1,10,44,1); -- Citizens of Bastok: DEF +10
 
 -- Storm Scimitar
 INSERT INTO `item_latents` VALUES (17661,27,5,58,0);     -- Enmity +5 in Assault
@@ -2630,6 +2644,9 @@ INSERT INTO `item_latents` VALUES (18144,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18144,17,-10,47,0);
 INSERT INTO `item_latents` VALUES (18144,19,-10,47,0);
 
+-- Master Caster's bow
+INSERT INTO `item_latents` VALUES (18145,26,7,44,2); -- Citizens of Windurst: RACC +7
+
 -- Gun Of Trials
 INSERT INTO `item_latents` VALUES (18146,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18146,18,-10,47,0);
@@ -2639,10 +2656,13 @@ INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
 INSERT INTO `item_latents` VALUES (18165,2,30,26,0);     -- Daytime: HP+30
 INSERT INTO `item_latents` VALUES (18165,68,10,26,1);    -- Nighttime: Evasion+10
 
+-- Senior Gold Musketeer's Axe
+INSERT INTO `item_latents` VALUES (18196,23,10,44,1); -- Citizens of Bastok: Attack +10
+
 -- Rune Chopper
-INSERT INTO `item_latents` VALUES (18206,25,5,56,0);     -- +5 Acc.
+INSERT INTO `item_latents` VALUES (18206,25,5,56,0);    -- +5 Acc.
 INSERT INTO `item_latents` VALUES (18206,405,3,56,0);   -- -3 MP/tick (while weapon is drawn)
-INSERT INTO `item_latents` VALUES (18206,384,900,56,0);  -- +9% haste
+INSERT INTO `item_latents` VALUES (18206,384,900,56,0); -- +9% haste
 
 -- Mighty Axe
 INSERT INTO `item_latents` VALUES (18213,15,15,28,0);    -- [Element: Fire]+15 on Firesday
@@ -3716,8 +3736,17 @@ INSERT INTO `item_latents` VALUES (23954,21,50,9,17); -- Alexander (Light)
 INSERT INTO `item_latents` VALUES (23954,22,50,9,18); -- Odin (Dark)
 INSERT INTO `item_latents` VALUES (23954,21,50,9,20); -- Cait Sith (Light)
 
+-- Elite Royal Collar
+INSERT INTO `item_latents` VALUES (25414,370,3,44,0); -- Citizens of San d'Oria: Regen +3
+
+-- Republican Platinum Medal
+INSERT INTO `item_latents` VALUES (25415,368,2,44,1); -- Citizens of Bastok: Regain +2
+
+-- Sibyl Scarf
+INSERT INTO `item_latents` VALUES (25416,369,1,44,2); -- Citizens of Windurst: Refresh +1
+
 -- Carbie Cap +1
-INSERT INTO `item_latents` VALUES (25633,346,1,9,8);     -- Carbuncle perpetuation -1
+INSERT INTO `item_latents` VALUES (25633,346,1,9,8); -- Carbuncle perpetuation -1
 
 -- Arbatel Bracers
 INSERT INTO `item_latents` VALUES (27090,175,1000,13,470);  -- EFFECT_IMMANENCE: SKILLCHAINDMG: 10%

@@ -45,7 +45,6 @@ entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:castSpell(xi.magic.spell.UTSUSEMI_NI, mob)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)

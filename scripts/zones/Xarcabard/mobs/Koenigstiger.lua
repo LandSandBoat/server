@@ -15,7 +15,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 300)
     mob:setMod(xi.mod.STORETP, 75) -- 8 hits to 1k tp
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

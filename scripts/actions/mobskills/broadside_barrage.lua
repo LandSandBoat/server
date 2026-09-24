@@ -21,8 +21,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
-    -- TODO: AOE Version may take more shadows since it is AoE
-
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then

@@ -1,5 +1,7 @@
 -----------------------------------
 -- Tidal Roar
+-- Family: Avatar (Leviathan)
+-- https://wiki.ffo.jp/html/21081.html
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,32 +11,32 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    if not target:getStatusEffect(xi.effect.ATTACK_DOWN) then
-        target:addStatusEffect(xi.effect.ATTACK_DOWN, { power = 25, duration = 60, origin = pet })
+    local baseDuration = 60 -- TODO: Capture baseDuration
+    local bonusTime    = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local duration     = baseDuration + bonusTime
 
-        -- The status effect requires the NO_LOSS_MESSAGE flag to be set
-        local statusEffect = target:getStatusEffect(xi.effect.ATTACK_DOWN)
-        if statusEffect then
-            statusEffect:addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
-        end
+    local effectTable =
+    {
+        -- TODO: Capture Tier
+        -- TODO: Research how half resists are handled
+        [1] = { effectId = xi.effect.ATTACK_DOWN, power = 25, origin = pet, duration = duration, tier = 1, magicalElement = xi.element.WATER },
+    }
 
-        -- TODO: Verify enmity gain total
-        target:addEnmity(pet, 1, 60)
+    local messageParams =
+    {
+        messageBypass          = false,
+        messageCantGain        = xi.msg.basic.JA_NO_EFFECT,
+        messageIsImmune        = xi.msg.basic.JA_MISS,
+        messageIsTraitResisted = xi.msg.basic.JA_MISS,
+        messageIsIncompatible  = xi.msg.basic.JA_MISS,
+        messageIsResisted      = xi.msg.basic.JA_MISS,
+        messageIsNotSuccessful = xi.msg.basic.JA_MISS,
+        messageIsSuccessful    = xi.msg.basic.JA_ENFEEB_IS,
+    }
 
-        -- TODO: Refactor this logic globally for pet abilities
-        if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.JA_RECEIVES_EFFECT_2)
-        else
-            petskill:setMsg(xi.msg.basic.JA_RECEIVES_EFFECT)
-        end
-    else
-        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
-        return
-    end
-
-    return xi.effect.ATTACK_DOWN
+    return xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, messageParams)
 end
 
 return abilityObject

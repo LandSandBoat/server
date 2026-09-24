@@ -15,7 +15,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 9)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 9)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 9)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
 end
 
 return entity

@@ -34,6 +34,9 @@ zones[xi.zone.AL_ZAHBI] =
         TATEN_BILTEN_SHOP_DIALOG      = 7871, -- Weave something beautiful with the materials you buy here, okay?
         YAYAROON_DIALOG               = 7873, -- Yayaroon is meeercenary! Nice meet yooo. Three cheeeers for clink clink!
         CHOCOBO_HAPPY                 = 7874, -- The chocobo appears to be extremely happy.
+        GAJAAD_DONATION_REMINDER      = 7979, -- <player>! Yes, you! Level <number> [unemployed/warrior/monk/white mage/black mage/red mage/thief/paladin/dark knight/beastmaster/bard/ranger/samurai/ninja/dragoon/summoner/blue mage/corsair/puppetmaster/dancer/scholar/geomancer/rune fencer]! Are you going to donate to Al Zahbi or what?
+        GAJAAD_DONATION_THANKS        = 7980, -- Why, thank you! This brings your total donation to <number>. Keep it up for the sake of Al Zahbi!
+        GAJAAD_DONATION_REWARD        = 7981, -- Why, thank you! This brings your total donation to <number>. I would like to show my appreciation for your efforts... Please accept this.
         SANCTION                      = 7999, -- You have received the Empire's Sanction.
     },
     mob =

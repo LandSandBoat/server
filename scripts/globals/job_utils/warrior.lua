@@ -48,7 +48,7 @@ xi.job_utils.warrior.useBerserk = function(player, target, ability)
     local power    = 25 + player:getMod(xi.mod.BERSERK_POTENCY) + utils.clamp(levelScale, 0, 10)
     local duration = 180 + player:getMod(xi.mod.BERSERK_DURATION)
 
-    player:addStatusEffect(xi.effect.BERSERK, { power = power, duration = duration, origin = player })
+    player:addStatusEffect(xi.effect.BERSERK, { power = power, duration = duration, origin = player, subPower = 25 })
 
     return xi.effect.BERSERK
 end

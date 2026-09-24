@@ -18,10 +18,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
 end
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 0)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar('aCraftsmanWork') == 1 then
         player:setCharVar('Decurio_I_IIIKilled', 1)
