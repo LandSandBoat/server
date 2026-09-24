@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <fmt/ranges.h>
 
 #include "data_loader.h"
 #include "search.h"
@@ -232,6 +233,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     if (sr.commentType != 0)
     {
         filterQry.append(fmt::format(" AND (seacom_type & 0xF0) = {}", sr.commentType));
+    }
+
+    if (!sr.characterIds.empty())
+    {
+        filterQry.append(fmt::format(" AND charid IN ({})", fmt::join(sr.characterIds, ", ")));
     }
 
     std::string fmtQuery =
