@@ -62,6 +62,7 @@ jobs:
       # hit, but ninja cannot tell which compiler produced the objects it finds, and four
       # multi-GB trees evicted each other out of the 10GB repo budget anyway.
       SCCACHE_GHA_ENABLED: "true"
+      SCCACHE_GHA_RW_MODE: ${{ github.event_name == 'pull_request' && 'READ_ONLY' || 'READ_WRITE' }}
       CPM_SOURCE_CACHE: ${{ format('{0}/.cpm-cache', github.workspace) }}
       SKIP_BUILD: false
       HOMEBREW_NO_AUTO_UPDATE: 1
