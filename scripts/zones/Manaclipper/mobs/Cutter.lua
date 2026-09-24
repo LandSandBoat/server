@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Manaclipper
---  Mob: Uragnite
------------------------------------
-mixins = { require('scripts/mixins/families/uragnite') }
+--  Mob: Cutter
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

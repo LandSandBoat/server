@@ -360,32 +360,32 @@ spawns:
   16789511:
     template: Cutter_Manaclipper
     script:   Cutter
-    at:       [5.242, -3.590, -13.648, 38]
-    level:    [25, 35]
+    region:   region_1
+    level:    [31, 34]
   16789512:
     template: Fatty_Pugil
-    at:       [-1.172, -3.529, -10.424, 31]
-    level:    [25, 35]
+    region:   region_1
+    level:    [25, 34]
   16789513:
     template: Uragnite
-    at:       [5.242, -3.590, -13.648, 38]
-    level:    [30, 37]
+    region:   region_1
+    level:    [31, 35]
   16789514:
     template: Uragnite
-    at:       [-7.155, -3.376, -7.715, 68]
-    level:    [30, 37]
+    region:   region_1
+    level:    [35, 40]
   16789515:
     template: Clot
-    at:       [5.791, -3.599, -10.697, 203]
-    level:    [30, 35]
+    region:   region_1
+    level:    [31, 35]
   16789516:
     template: Clot
-    at:       [5.997, -3.501, -8.611, 63]
-    level:    [30, 35]
+    region:   region_1
+    level:    [36, 37]
   16789517:
     template: Colossal_Calamari
-    at:       [-6.575, -3.599, -9.876, 136]
-    level:    [40, 42]
+    region:   region_1
+    level:    [41, 42]
   16789518:
     template: Zoredonite
     at:       [-2.370, -3.492, -11.285, 32]
