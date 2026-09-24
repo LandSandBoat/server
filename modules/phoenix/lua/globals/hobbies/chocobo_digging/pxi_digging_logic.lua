@@ -184,7 +184,7 @@ m:addOverride('xi.chocoboDig.start', function(player)
     local currentMoonPhase   = getVanadielMoonCycle()
     local currentHour        = VanadielHour()
     local isActiveWeather    = currentWeather ~= xi.weather.NONE and currentWeather ~= xi.weather.SUNSHINE and currentWeather ~= xi.weather.CLOUDS
-    local isWaxingCrescent   = currentMoonPhase == xi.moonCycle.LESSER_WAXING_CRESCENT or currentMoonPhase == xi.moonCycle.GREATER_WAXING_CRESCENT
+    local isWaxingCrescent   = currentMoonPhase == xi.moonCycle.LESSER_WAXING_CRESCENT
     local elementalOreActive = xi.chocoboDig.elementalOreZones[zoneId] and isActiveWeather and isWaxingCrescent
 
     -- Check for regular items. Crystals, Clusters & Elemental Ores are all inserted into this layer.
