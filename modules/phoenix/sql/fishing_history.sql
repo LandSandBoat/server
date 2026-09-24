@@ -34,4 +34,3 @@ CREATE TABLE IF NOT EXISTS `char_fishing_records` (
   `heaviest_itemid` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-

@@ -4,3 +4,7 @@
 [submodule "ximeshes"]
     path = ximeshes
     url = https://github.com/InoUno/ximeshes.git
+[submodule "phoenix_ac"]
+    path = modules/phoenix_ac
+    url = https://github.com/phoenixffxi/phoenix-staff.git
+    update = none

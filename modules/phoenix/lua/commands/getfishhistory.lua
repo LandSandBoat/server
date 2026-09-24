@@ -3,6 +3,8 @@
 -- desc: Shows lifetime fishing records and the last 10 fish or items the cursor target or named player landed.
 --       A named player does not need to be online.
 -----------------------------------
+-- luacheck: globals GetFishingRecords GetFishingHistory
+-----------------------------------
 ---@type TCommand
 local commandObj = {}
 
