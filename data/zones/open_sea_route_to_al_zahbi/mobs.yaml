@@ -348,11 +348,11 @@ spawns:
     level:    [35, 35]
   16965635:
     template: Gugru_Jagil
-    at:       [1.000, 1.000, 1.000]
+    region:   region_1
     level:    [34, 37]
   16965636:
     template: Gugru_Jagil
-    at:       [1.000, 1.000, 1.000]
+    region:   region_1
     level:    [34, 37]
   16965637:
     template: Blanched_Kraken
@@ -368,34 +368,34 @@ spawns:
     level:    [81, 81]
   16965640:
     template: Gugru_Crab
-    at:       [-0.621, -7.228, 19.369, 159]
+    region:   region_1
     level:    [33, 35]
   16965641:
     template: Gugru_Crab
-    at:       [5.393, -7.163, 5.183, 8]
+    region:   region_1
     level:    [33, 35]
   16965642:
     template: Ocean_Jagil
-    at:       [-1.100, -7.230, 20.602, 39]
+    region:   region_1
     level:    [34, 36]
   16965643:
     template: Ocean_Jagil
-    at:       [-4.843, -7.163, 11.669, 142]
+    region:   region_1
     level:    [34, 36]
   16965644:
     template: Ocean_Kraken
-    at:       [-1.975, -7.244, 23.072, 162]
+    region:   region_1
     level:    [41, 43]
   16965645:
     template: Revenant_SoZ_ENS_FY
     script:   Revenant
-    at:       [2.034, -7.163, 11.363, 156]
+    region:   region_1
     level:    [41, 41]
   16965646:
     template: Thunder_Elemental
-    at:       [4.848, -7.163, 11.751, 6]
+    region:   region_1
     level:    [39, 40]
   16965647:
     template: Water_Elemental
-    at:       [0.515, -7.192, 16.639, 40]
+    region:   region_1
     level:    [39, 40]
