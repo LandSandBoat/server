@@ -335,6 +335,8 @@ templates:
         hitbox:        12
       behaviors:
         aggressive: true
+      mods:
+        defp:  20
       spawn:
         respawn: 300
     loot:
@@ -1116,6 +1118,8 @@ templates:
         hitbox:        12
       behaviors:
         aggressive: true
+      mods:
+        defp:  20
       spawn:
         respawn: 300
     loot:
@@ -1493,6 +1497,8 @@ templates:
         hitbox:        13
       behaviors:
         aggressive: true
+      mods:
+        defp:  20
       spawn:
         type: [scripted]
 
@@ -1514,6 +1520,8 @@ templates:
         entity_flags: 159
       behaviors:
         aggressive: true
+      mods:
+        defp:  20
       spawn:
         type: [scripted]
       stats:
@@ -1608,6 +1616,8 @@ templates:
         hitbox:        13
       behaviors:
         aggressive: true
+      mods:
+        defp:  20
       spawn:
         type: [lottery]
       stats:
