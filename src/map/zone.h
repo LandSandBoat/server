@@ -366,6 +366,7 @@ protected:
 
 private:
     void LoadZoneSettings(const std::optional<xi::data::ZoneSettings>& settings);
+    void applyNavMeshOverrides(NavMeshConfig& config) const;
     void LoadZoneLines(const std::optional<xi::data::ZoneSettings>& settings);
     void LoadZoneWeather();
 
@@ -391,6 +392,8 @@ private:
     xi::ZoneMisc m_miscMask{};
 
     zoneMusic_t m_zoneMusic{};
+
+    xi::data::ZoneNavMeshData navMeshData_{};
 
     zoneLineList_t m_zoneLineList;
 

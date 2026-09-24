@@ -15,3 +15,7 @@ zonelines:
     to:    the_boyahda_tree
     at:    [4.992, 6.323, -340.571, 3.141593]
     scale: [1.000, 3.000]
+
+# three staggered copies of the arena, each over a flat plane
+navmesh:
+  skip_planes: [-60.0, 0.0, 60.0]

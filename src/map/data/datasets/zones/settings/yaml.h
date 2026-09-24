@@ -102,6 +102,23 @@ struct TransportSchedule
     std::map<std::string, Transport> runs;
 };
 
+struct SkipSphere
+{
+    std::array<float, 3> center;
+    float                radius;
+};
+
+struct NavMesh
+{
+    std::optional<std::vector<float>>      skip_planes;
+    std::optional<std::vector<SkipSphere>> skip_spheres;
+    std::optional<bool>                    off_mesh_links;
+    std::optional<float>                   off_mesh_max_drop;
+    std::optional<float>                   off_mesh_reach;
+    std::optional<float>                   walkable_slope_angle;
+    std::optional<float>                   agent_max_climb;
+};
+
 struct Document
 {
     ZoneType                                       type;
@@ -111,6 +128,7 @@ struct Document
     std::optional<uint8>                           level_restriction;
     std::optional<std::map<std::string, ZoneLine>> zonelines;
     std::optional<TransportSchedule>               transport;
+    std::optional<NavMesh>                         navmesh;
 };
 
 } // namespace xi::data::datasets::zones::settings::wire
@@ -172,6 +190,18 @@ struct glz::json_schema<xi::data::datasets::zones::settings::wire::TransportSche
 };
 
 template <>
+struct glz::json_schema<xi::data::datasets::zones::settings::wire::NavMesh>
+{
+    glz::schema skip_planes{ .description = "World Y of flat planes to drop from the bake. A triangle is dropped when all three vertices lie on one of them." };
+    glz::schema skip_spheres{ .description = "Spheres to drop from the bake, as center x, y, z and radius. A triangle is dropped when all three vertices lie inside one of them." };
+    glz::schema off_mesh_links{ .description = "Whether drop links across ledges are generated. Defaults to true." };
+    glz::schema off_mesh_max_drop{ .description = "Largest vertical drop a link may bridge. Defaults to 5." };
+    glz::schema off_mesh_reach{ .description = "Largest horizontal offset from a ledge to its landing. Defaults to 3." };
+    glz::schema walkable_slope_angle{ .description = "Slopes steeper than this, in degrees, are not walkable. Defaults to 46." };
+    glz::schema agent_max_climb{ .description = "Tallest step that still connects two surfaces. Defaults to 1." };
+};
+
+template <>
 struct glz::json_schema<xi::data::datasets::zones::settings::wire::Document>
 {
     glz::schema type{
@@ -195,4 +225,5 @@ struct glz::json_schema<xi::data::datasets::zones::settings::wire::Document>
     };
     glz::schema zonelines{ .description = "Outbound transitions, keyed by their four-character client id such as z2s0." };
     glz::schema transport{ .description = "The ship docking in this zone and the runs it serves." };
+    glz::schema navmesh{ .description = "Per-zone navmesh bake settings: geometry to leave out and the bake knobs this zone overrides." };
 };

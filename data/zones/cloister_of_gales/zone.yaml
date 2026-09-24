@@ -9,3 +9,7 @@ zonelines:
     to:    cape_teriggan
     at:    [-294.009, -12.278, 539.901, 3.141593]
     scale: [1.000, 4.000]
+
+# three staggered copies of the arena, each over a flat plane
+navmesh:
+  skip_planes: [-60.0, 0.0, 60.0]

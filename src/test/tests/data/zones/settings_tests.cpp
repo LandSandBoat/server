@@ -58,6 +58,8 @@ TEST_CASE("zone settings: omitted fields fall back to their defaults", "[data][z
     REQUIRE(records.Music.BattleParty == 0);
     REQUIRE(records.Tax == 0.0f);
     REQUIRE(records.LevelRestriction == 0);
+    REQUIRE(records.NavMesh.SkipPlanes.empty());
+    REQUIRE_FALSE(records.NavMesh.OffMeshLinks.has_value());
 }
 
 TEST_CASE("zone settings: a zone line keeps its four-character id", "[data][zone]")

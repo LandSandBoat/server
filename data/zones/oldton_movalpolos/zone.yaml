@@ -63,3 +63,7 @@ zonelines:
     to:    newton_movalpolos
     at:    [-356.944, 6.047, -179.974]
     scale: [1.000, 4.000]
+
+# flat planes below the walkable floors
+navmesh:
+  skip_planes: [32.0, 40.0, 48.0, 52.0, 56.0, 60.0]

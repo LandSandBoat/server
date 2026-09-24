@@ -64,6 +64,10 @@ struct NavMeshConfig
     // inflate the world bounds and with them the tile grid.
     std::vector<NavMeshSkipSphere> skipSpheres{};
 
+    // World-space positions something is known to stand on, such as spawn points and roam region corners.
+    // A surface buried under other ground is kept when one of these sits on it, since a floor under a floor is a real floor.
+    std::vector<std::array<float, 3>> seeds{};
+
     // Auto-generate off-mesh drop/step links across ledges Recast severs; zone-wide.
     bool  generateOffMeshLinks{ true };
     float offMeshMaxDrop{ 5.0f };    // largest vertical drop (wu) a link may bridge

@@ -15,3 +15,7 @@ zonelines:
     to:    eastern_altepa_desert
     at:    [80.866, 8.464, -100.362, 3.141593]
     scale: [1.000, 4.000]
+
+# three staggered copies of the arena, each over a flat plane
+navmesh:
+  skip_planes: [-60.0, 0.0, 60.0]
