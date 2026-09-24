@@ -457,31 +457,31 @@ spawns:
     level:    [10, 20]
   16781320:
     template: Giant_Pugil
-    at:       [0.015, -3.070, 13.997, 191]
+    region:   region_1
     level:    [10, 20]
   16781321:
     template: Flytrap
-    at:       [-5.397, -3.096, 14.759, 136]
+    region:   region_1
     level:    [15, 25]
   16781322:
     template: Flytrap
-    at:       [-7.224, -2.100, -8.691, 69]
+    region:   region_2
     level:    [15, 25]
   16781323:
     template: Ooze
-    at:       [4.495, -3.084, 13.966, 224]
+    region:   region_1
     level:    [25, 29]
   16781324:
     template: Thunder_Elemental
-    at:       [3.938, -3.101, 14.569, 254]
+    region:   region_1
     level:    [27, 29]
   16781325:
     template: Water_Elemental
-    at:       [-6.726, -3.017, 10.120, 69]
+    region:   region_1
     level:    [27, 29]
   16781326:
     template: Vodyanoi
-    at:       [4.616, -2.636, 4.485, 59]
+    region:   region_1
     level:    [45, 47]
     attributes:
       spawn:
