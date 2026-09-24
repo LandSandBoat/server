@@ -7315,7 +7315,7 @@ INSERT INTO `item_mods` VALUES (11467,2,13);  -- HP: 13
 INSERT INTO `item_mods` VALUES (11467,8,4);   -- STR: 4
 INSERT INTO `item_mods` VALUES (11467,11,4);  -- AGI: 4
 INSERT INTO `item_mods` VALUES (11467,26,9);  -- RACC: 9
-INSERT INTO `item_mods` VALUES (11467,411,5); -- QUICK_DRAW_DMG: 5
+INSERT INTO `item_mods` VALUES (11467,411,10); -- QUICK_DRAW_DMG: 10
 
 -- Commodore Tricorne
 INSERT INTO `item_mods` VALUES (11468,1,24);   -- DEF: 24
@@ -26763,7 +26763,7 @@ INSERT INTO `item_mods` VALUES (15266,1,22);  -- DEF: 22
 INSERT INTO `item_mods` VALUES (15266,2,8);   -- HP: 8
 INSERT INTO `item_mods` VALUES (15266,8,2);   -- STR: 2
 INSERT INTO `item_mods` VALUES (15266,26,8);  -- RACC: 8
-INSERT INTO `item_mods` VALUES (15266,411,5); -- QUICK_DRAW_DMG: 5
+INSERT INTO `item_mods` VALUES (15266,411,10); -- QUICK_DRAW_DMG: 10
 
 -- Puppetry Taj
 INSERT INTO `item_mods` VALUES (15267,1,15); -- DEF: 15
