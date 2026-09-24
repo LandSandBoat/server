@@ -5,7 +5,7 @@
 `navmeshes` are included in a separate image. You can load these into a volume with the following command:
 
 ```sh
-docker run --rm -v navmeshes:/navmeshes ghcr.io/landsandboat/ximeshes:latest
+docker run --rm -v navmeshes:/navmeshes -v ximeshes:/ximeshes ghcr.io/landsandboat/ximeshes:latest
 ```
 Once the volumes are created, you can delete the image.
 
@@ -114,6 +114,7 @@ x-common: &common
     # XI_{file}_{setting}: value
   volumes:
     - navmeshes:/server/navmeshes
+    - ximeshes:/server/ximeshes
     # - ./config.yaml:/server/tools/config.yaml
     # - ./map.lua:/server/settings/map.lua
     # - ./modules:/server/modules
@@ -200,6 +201,8 @@ services:
 volumes:
   database:
   navmeshes:
+    external: true
+  ximeshes:
     external: true
 ```
 
