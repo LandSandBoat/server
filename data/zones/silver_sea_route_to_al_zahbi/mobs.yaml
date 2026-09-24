@@ -457,46 +457,46 @@ spawns:
     level:    [74, 74]
   17018887:
     template: Apkallu
-    at:       [-0.309, -7.163, 5.317, 106]
+    region:   region_1
     level:    [54, 56]
   17018888:
     template: Apkallu
-    at:       [-0.460, -7.240, 23.490, 141]
+    region:   region_1
     level:    [54, 56]
   17018889:
     template: Bigclaw_noaggro
     script:   Bigclaw
-    at:       [-1.700, -7.170, 13.730, 64]
+    region:   region_1
     level:    [49, 49]
   17018890:
     template: Bigclaw_noaggro
     script:   Bigclaw
-    at:       [-5.450, -7.160, 11.580, 163]
+    region:   region_1
     level:    [49, 49]
   17018891:
     template: Cyan_Deep_Pugil
-    at:       [5.890, -7.190, 13.580, 67]
+    region:   region_1
     level:    [50, 55]
   17018892:
     template: Kulshedra
-    at:       [5.110, -7.160, 15.370, 214]
+    region:   region_1
     level:    [61, 63]
   17018893:
     template: Utukku_S
     script:   Utukku
-    at:       [-1.530, -7.160, 11.080, 157]
+    region:   region_1
     level:    [55, 56]
   17018894:
     template: Imp
-    at:       [-2.010, -7.160, 15.230, 161]
+    region:   region_1
     level:    [54, 54]
   17018895:
     template: Air_Elemental
-    at:       [-1.900, -7.240, 22.360, 155]
+    region:   region_1
     level:    [60, 60]
   17018896:
     template: Thunder_Elemental
-    at:       [-2.320, -7.160, 4.040, 89]
+    region:   region_1
     level:    [60, 60]
   17018897:
     template: Almighty_Apkallu
