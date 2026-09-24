@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
         { xi.item.WATERMELON,                  200 },
         { xi.item.POTION,                      910 },
         { xi.item.ANTIDOTE,                    316 },
-        { xi.item.FLASK_OF_BLINDNESS_POTION,  1200 },
+        { xi.item.FLASK_OF_BLINDING_POTION,   1200 },
         { xi.item.MYTHRIL_EARRING,            4500 },
         { xi.item.WATER_JUG,                   200 },
     }
