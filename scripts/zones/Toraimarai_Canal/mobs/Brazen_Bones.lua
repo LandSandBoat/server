@@ -5,13 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  169.270, y =   8.028, z = -110.580 },
-    { x =  155.792, y =   8.334, z = -124.494 },
-    { x =  169.525, y =  11.964, z = -128.288 }
-}
-
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.ICE_SPIKES, { power = 50, origin = mob })

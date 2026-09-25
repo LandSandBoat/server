@@ -5,19 +5,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  387.000, y =  -8.873, z =  -338.999 },
-    { x =  403.000, y =  -9.000, z =  -362.000 },
-    { x =  400.000, y =  -8.000, z =  -342.000 },
-    { x =  349.000, y = -16.000, z =  -444.000 },
-    { x =  401.000, y =  -9.000, z =  -369.000 },
-    { x =  393.000, y =  -9.000, z =  -359.000 },
-    { x =  381.000, y = -10.000, z =  -331.000 },
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60~70 min repop.
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     -- For its TP drain melee.
@@ -51,7 +39,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60~70 min repop.
 end
 

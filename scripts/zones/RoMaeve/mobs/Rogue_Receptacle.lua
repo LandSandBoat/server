@@ -10,22 +10,10 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.ROGUE_RECEPTACLE - 4] = ID.mob.ROGUE_RECEPTACLE,
-    [ID.mob.ROGUE_RECEPTACLE - 1] = ID.mob.ROGUE_RECEPTACLE,
-}
-
-entity.spawnPoints =
-{
-    { x =  219.800, y = -3.200, z = -41.220 },
-    { x = -307.000, y =  2.000, z = 216.000 },
-    { x = -299.000, y =  0.000, z = 192.000 },
-    { x = -334.000, y =  3.000, z = 182.000 },
-    { x = -301.000, y =  0.000, z = 166.000 },
+    [ID.mob.ROGUE_RECEPTACLE - 3] = ID.mob.ROGUE_RECEPTACLE, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
-
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -54,10 +42,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 328)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

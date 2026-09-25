@@ -13,16 +13,6 @@ entity.phList =
     [ID.mob.KILLER_JONNY - 14] = ID.mob.KILLER_JONNY, -- Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = -90.636, y = -8.859, z = 152.899 },
-    { x = -80.809, y = -7.032, z = 147.464 },
-    { x = -77.167, y = -8.000, z = 156.316 },
-    { x = -61.131, y = -7.005, z = 151.069 },
-    { x = -54.285, y = -8.151, z = 165.535 },
-    { x = -35.874, y = -8.162, z = 166.132 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 100)

@@ -14,15 +14,6 @@ entity.phList =
     [ID.mob.ZORAAL_JAS_PKUUCHA - 1] = ID.mob.ZORAAL_JAS_PKUUCHA, -- Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = 193.000, y = -18.000, z = -65.000 },
-    { x = 221.000, y = -19.000, z = -75.000 },
-    { x = 207.000, y = -16.000, z = -77.000 },
-    { x = 181.000, y = -18.000, z = -42.000 },
-    { x = 170.000, y = -18.000, z = -21.000 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

@@ -7,11 +7,6 @@ local ID = zones[xi.zone.ULEGUERAND_RANGE]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -615.121, y = -40.062, z =  6.126 }
-}
-
 entity.phList =
 {
     [ID.mob.BONNACON - 1] = ID.mob.BONNACON, -- Confirmed on retail

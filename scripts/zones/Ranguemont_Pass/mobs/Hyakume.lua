@@ -14,7 +14,7 @@ local entity = {}
 -- TODO: More spawn points
 entity.phList =
 {
-    [ID.mob.HYAKUME - 7] = ID.mob.HYAKUME, -- PH is 0x4D
+    [ID.mob.HYAKUME - 7] = ID.mob.HYAKUME, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

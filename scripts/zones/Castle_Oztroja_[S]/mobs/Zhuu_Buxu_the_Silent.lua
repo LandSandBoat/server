@@ -16,7 +16,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.ZHUU_BUXU_THE_SILENT - 1] = ID.mob.ZHUU_BUXU_THE_SILENT,
+    [ID.mob.ZHUU_BUXU_THE_SILENT - 1] = ID.mob.ZHUU_BUXU_THE_SILENT, -- Confirmed on retail
 }
 
 return entity

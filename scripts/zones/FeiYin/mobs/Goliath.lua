@@ -7,11 +7,6 @@ local ID = zones[xi.zone.FEIYIN]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -165.800, y = -0.112, z =  148.027 }
-}
-
 -- TODO:
 -- Implement through the spawn slot system when chance is refactored to per-mob basis
 entity.phList =

@@ -24,19 +24,6 @@ local arenaBoundaries =
     { { -278.562,  18.208 }, { -286.242, -24.521 } },
 }
 
-entity.spawnPoints =
-{
-    { x = -276.309, y = -24.000, z =   0.997 },
-    { x = -271.083, y = -23.750, z =   0.008 },
-    { x = -265.027, y = -23.566, z =  -3.346 },
-    { x = -264.331, y = -23.500, z =  -8.112 },
-    { x = -269.145, y = -23.500, z = -11.040 },
-    { x = -275.083, y = -23.645, z = -12.815 },
-    { x = -275.782, y = -23.526, z = -19.857 },
-    { x = -270.596, y = -23.625, z = -22.021 },
-    { x = -262.854, y = -24.000, z = -24.542 },
-}
-
 local regenPerHead =
 {
     [0] = 150,
@@ -46,7 +33,6 @@ local regenPerHead =
 
 entity.onMobInitialize = function(mob)
     mob:setRespawnTime(math.randomInt(48, 72) * 3600) -- 48 - 72 hours with 1 hour windows
-    xi.mob.updateNMSpawnPoint(mob)
 
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -177,7 +163,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(48, 72) * 3600) -- 48 to 72 hours, in 1 hour windows
 end
 

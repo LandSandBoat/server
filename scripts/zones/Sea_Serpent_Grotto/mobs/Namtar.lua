@@ -7,11 +7,6 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -148.457, y =  9.171, z =  175.332 }
-}
-
 entity.phList =
 {
     [ID.mob.NAMTAR - 6] = ID.mob.NAMTAR, -- Confirmed on retail

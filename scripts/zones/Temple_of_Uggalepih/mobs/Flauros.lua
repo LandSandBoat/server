@@ -9,11 +9,6 @@ local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  240.000, y = -0.500, z =  60.000 }
-}
-
 entity.phList =
 {
     [ID.mob.FLAUROS + 4] = ID.mob.FLAUROS, -- Confirmed on retail

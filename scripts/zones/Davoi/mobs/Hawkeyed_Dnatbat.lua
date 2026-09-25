@@ -9,11 +9,6 @@ local ID = zones[xi.zone.DAVOI]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  333.895, y = -0.582, z = -144.558 }
-}
-
 entity.phList =
 {
     [ID.mob.HAWKEYED_DNATBAT - 7] = ID.mob.HAWKEYED_DNATBAT, -- Confirmed on retail

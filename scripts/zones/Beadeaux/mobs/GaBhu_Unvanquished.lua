@@ -9,11 +9,6 @@ local ID = zones[xi.zone.BEADEAUX]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  139.642, y = -2.445, z =  161.557 }
-}
-
 entity.phList =
 {
     [ID.mob.GA_BHU_UNVANQUISHED - 1] = ID.mob.GA_BHU_UNVANQUISHED, -- Confirmed on retail

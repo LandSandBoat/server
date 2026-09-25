@@ -6,16 +6,7 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = 340.385, y =  0.188, z = -133.432 },
-    { x = 363.777, y =  0.151, z = -167.571 },
-    { x = 369.662, y = -0.882, z = -148.873 },
-    { x = 321.290, y =  0.000, z = -121.171 },
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
@@ -36,7 +27,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200 + math.randomInt(0, 600)) -- 2 hours, then 10 minute window
 end
 

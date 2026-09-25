@@ -15,11 +15,6 @@ entity.phList =
     [ID.mob.RAMPAGING_RAM] = ID.mob.STEELFLEECE, -- Rampaging can't spawn if Steelfleece is up
 }
 
-entity.spawnPoints =
-{
-    { x = 160.000, y = 24.000, z = 121.000 },
-}
-
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 205)
 end

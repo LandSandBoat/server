@@ -7,17 +7,10 @@ local ID = zones[xi.zone.QUFIM_ISLAND]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  16.350, y = -21.300, z = -25.500 }
-}
-
 entity.phList =
 {
-    [ID.mob.SLIPPERY_SUCKER - 11] = ID.mob.SLIPPERY_SUCKER, -- Giant_Trapper
-    [ID.mob.SLIPPERY_SUCKER - 13] = ID.mob.SLIPPERY_SUCKER, -- Giant_Ranger
-    [ID.mob.SLIPPERY_SUCKER - 9] = ID.mob.SLIPPERY_SUCKER, -- Giant_Hunter
-    [ID.mob.SLIPPERY_SUCKER - 12] = ID.mob.SLIPPERY_SUCKER, -- Giant_Ascetic
+    [ID.mob.SLIPPERY_SUCKER - 13] = ID.mob.SLIPPERY_SUCKER, -- Confirmed on retail
+    [ID.mob.SLIPPERY_SUCKER - 9] = ID.mob.SLIPPERY_SUCKER, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

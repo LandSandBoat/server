@@ -7,11 +7,6 @@ local ID = zones[xi.zone.LUFAISE_MEADOWS]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -175.852, y = -7.811, z =  22.823 }
-}
-
 entity.phList =
 {
     [ID.mob.MEGALOBUGARD - 30] = ID.mob.MEGALOBUGARD, -- Confirmed on retail

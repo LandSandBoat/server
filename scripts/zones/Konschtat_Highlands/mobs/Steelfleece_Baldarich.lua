@@ -16,11 +16,6 @@ entity.phList =
     [ID.mob.RAMPAGING_RAM] = ID.mob.STEELFLEECE, -- 160 24 121
 }
 
-entity.spawnPoints =
-{
-    { x = -10.000, y = 7.000, z = 45.000 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:addImmunity(xi.immunity.SILENCE)

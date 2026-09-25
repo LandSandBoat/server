@@ -10,13 +10,7 @@ local ID = zones[xi.zone.QULUN_DOME]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  277.930, y =  42.625, z =  96.177 }
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(75600 + 1800 * math.randomInt(1, 6))
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.DIAMOND_QUADAV + 2 then
@@ -52,10 +46,8 @@ entity.onMobDespawn = function(mob)
     if GetSystemTime() > timeOfDeath and popNow then
         DisallowRespawn(mobId, true)
         DisallowRespawn(hqId, false)
-        xi.mob.updateNMSpawnPoint(hqId)
         GetMobByID(hqId):setRespawnTime(respawnTime)
     else
-        xi.mob.updateNMSpawnPoint(mobId)
         mob:setRespawnTime(respawnTime)
         SetServerVariable('[PH]Za_Dha_Adamantking', kills)
     end

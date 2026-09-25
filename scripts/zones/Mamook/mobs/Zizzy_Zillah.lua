@@ -7,18 +7,9 @@ local ID = zones[xi.zone.MAMOOK]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  83.000, y =  14.500, z = -222.000 }
-}
-
 entity.phList =
 {
-    [ID.mob.ZIZZY_ZILLAH + 6]  = ID.mob.ZIZZY_ZILLAH,
-    [ID.mob.ZIZZY_ZILLAH + 7]  = ID.mob.ZIZZY_ZILLAH,
-    [ID.mob.ZIZZY_ZILLAH + 8]  = ID.mob.ZIZZY_ZILLAH,
-    [ID.mob.ZIZZY_ZILLAH + 9]  = ID.mob.ZIZZY_ZILLAH,
-    [ID.mob.ZIZZY_ZILLAH + 10] = ID.mob.ZIZZY_ZILLAH,
+    [ID.mob.ZIZZY_ZILLAH - 1] = ID.mob.ZIZZY_ZILLAH, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)

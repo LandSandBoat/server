@@ -9,10 +9,6 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = 281.000, y = 43.000, z = 96.000 }
-}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
@@ -52,7 +48,6 @@ entity.onMobDespawn = function(mob)
     SetServerVariable('[PH]Za_Dha_Adamantking', 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
-    xi.mob.updateNMSpawnPoint(nqId)
     GetMobByID(nqId):setRespawnTime(math.randomInt(75600, 86400))
 end
 

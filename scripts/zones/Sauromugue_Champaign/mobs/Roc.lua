@@ -11,30 +11,7 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  213.997, y = -1.672, z = -255.685 },
-    { x =  205.831, y = -0.116, z = -243.033 },
-    { x =  197.226, y =  0.757, z = -295.616 },
-    { x =  198.305, y =  0.916, z = -258.350 },
-    { x =  203.876, y =  0.000, z = -236.865 },
-    { x =  209.015, y =  0.491, z = -224.618 },
-    { x =  196.563, y =  0.134, z = -273.294 },
-    { x =  173.726, y =  0.565, z = -244.018 },
-    { x =  202.205, y =  0.247, z = -271.049 },
-    { x =  195.317, y =  0.111, z = -287.885 },
-    { x =  153.669, y =  0.145, z = -226.129 },
-    { x =  206.695, y = -0.034, z = -267.380 },
-    { x =  197.310, y =  0.167, z = -272.637 },
-    { x =  188.566, y = -1.168, z = -296.794 },
-    { x =  215.711, y =  0.404, z = -312.421 },
-    { x =  212.596, y = -0.216, z = -249.303 },
-    { x =  199.956, y =  0.000, z = -278.615 },
-    { x =  191.796, y =  0.263, z = -250.968 }
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(3600, 7200))
 
     mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
@@ -73,7 +50,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(3600, 7200)) -- 1 to 2 hours
 end
 

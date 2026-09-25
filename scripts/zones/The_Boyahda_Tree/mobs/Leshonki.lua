@@ -17,14 +17,6 @@ entity.phList =
     [ID.mob.LESHONKI + 4] = ID.mob.LESHONKI, -- Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = -220.500, y = 13.621, z = 73.357 },
-    { x = -209.231, y = 14.243, z = 66.595 },
-    { x = -211.494, y = 13.755, z = 59.057 },
-    { x = -224.433, y = 13.898, z = 55.985 },
-}
-
 local mobRegen = function(mob)
     local hour = VanadielHour()
     if hour >= 6 and hour < 18 then
@@ -59,10 +51,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 360)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

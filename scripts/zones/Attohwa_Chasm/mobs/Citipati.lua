@@ -12,14 +12,6 @@ entity.phList =
     [ID.mob.CITIPATI - 1] = ID.mob.CITIPATI, -- Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = -364.014, y = -4.634,  z = -2.627 },
-    { x = -328.973, y = -12.876, z = 67.481 },
-    { x = -398.931, y = -4.536,  z = 79.640 },
-    { x = -381.284, y = -9.233,  z = 40.054 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

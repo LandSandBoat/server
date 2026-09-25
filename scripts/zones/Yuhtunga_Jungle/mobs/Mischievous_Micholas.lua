@@ -7,11 +7,6 @@ local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -279.575, y =  3.317, z =  16.011 }
-}
-
 entity.phList =
 {
     [ID.mob.MISCHIEVOUS_MICHOLAS - 1] = ID.mob.MISCHIEVOUS_MICHOLAS, -- Confirmed on retail
@@ -34,10 +29,6 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 126, 1, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 128, 1, xi.regime.type.FIELDS)
     xi.magian.onMobDeath(mob, player, optParams, set{ 780 })
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

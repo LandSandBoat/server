@@ -16,8 +16,7 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.AA_XALMO_THE_SAVAGE - 16] = ID.mob.AA_XALMO_THE_SAVAGE,
-    [ID.mob.AA_XALMO_THE_SAVAGE - 5]  = ID.mob.AA_XALMO_THE_SAVAGE,
+    [ID.mob.AA_XALMO_THE_SAVAGE - 5] = ID.mob.AA_XALMO_THE_SAVAGE, -- Confirmed on retail
 }
 
 entity.onMobSpawn = function(mob)
