@@ -9,11 +9,6 @@ local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -226.158, y = -144.099, z =  28.522 }
-}
-
 entity.phList =
 {
     [ID.mob.ENKELADOS[1] + 3] = ID.mob.ENKELADOS[1], -- Confirmed on retail
