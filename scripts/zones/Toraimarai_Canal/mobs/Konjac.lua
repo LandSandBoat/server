@@ -7,16 +7,9 @@ local ID = zones[xi.zone.TORAIMARAI_CANAL]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  60.000, y =  22.500, z =  135.400 }
-}
-
 entity.phList =
 {
-    [ID.mob.KONJAC - 3] = ID.mob.KONJAC,
-    [ID.mob.KONJAC - 2] = ID.mob.KONJAC,
-    [ID.mob.KONJAC - 1] = ID.mob.KONJAC,
+    [ID.mob.KONJAC - 3] = ID.mob.KONJAC, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
