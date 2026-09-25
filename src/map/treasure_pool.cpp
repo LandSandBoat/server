@@ -338,14 +338,12 @@ void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     // Cannot lot if player's inventory is full
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
     {
-        ShowError(fmt::format("Player {} is trying to lot on item {} while full inventory (Packet injection)!", PChar->getName(), m_PoolItems[SlotID].ID));
         return;
     }
 
     // Cannot lot if item is RARE and player already has it
     if (PItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, m_PoolItems[SlotID].ID))
     {
-        ShowError(fmt::format("Player {} is trying to lot on item {} (Rare) while already holding one (Packet injection)! ", PChar->getName(), m_PoolItems[SlotID].ID));
         return;
     }
 
