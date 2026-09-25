@@ -29,6 +29,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp0            = 1.50
     params.dStatMultiplier = 1.0
     params.baseDamageCap   = 30
+    params.halfThreshold   = 46
+    params.lowThreshold    = -6
 
     params.int_wsc = 0.3
 
