@@ -14,8 +14,8 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.BUGBEAR_STRONGMAN[1] - 2] = ID.mob.BUGBEAR_STRONGMAN[1], -- -81.31 31.493 210.675 (west)
-    [ID.mob.BUGBEAR_STRONGMAN[2] - 1] = ID.mob.BUGBEAR_STRONGMAN[2], -- 58.013, 15.5, -121.928 (east)
+    [ID.mob.BUGBEAR_STRONGMAN[1] - 1] = ID.mob.BUGBEAR_STRONGMAN[1], -- Confirmed on retail
+    [ID.mob.BUGBEAR_STRONGMAN[2] - 1] = ID.mob.BUGBEAR_STRONGMAN[2], -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
