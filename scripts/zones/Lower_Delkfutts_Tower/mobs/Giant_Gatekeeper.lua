@@ -13,7 +13,6 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.EPIALTES, 5, 1) -- no cooldown
-    xi.mob.phOnDespawn(mob, ID.mob.HIPPOLYTOS, 5, 1) -- no cooldown
 end
 
 return entity
