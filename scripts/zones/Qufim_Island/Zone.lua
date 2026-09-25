@@ -55,7 +55,6 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 
     if xi.data.element.getWeatherElement(weather) == xi.element.THUNDER then
-        xi.mob.updateNMSpawnPoint(dosetsuTree)
         SpawnMob(ID.mob.DOSETSU_TREE)
     end
 end

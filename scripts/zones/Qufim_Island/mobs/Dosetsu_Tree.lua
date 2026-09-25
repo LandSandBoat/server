@@ -8,12 +8,6 @@
 local entity = {}
 
 -- Spawn points in F-8/G-9 area
-entity.spawnPoints =
-{
-    { x = -240.000, y = -20.795, z =  37.000 },  -- Original database point (F-8 area)
-    { x = -161.386, y = -20.190, z =  69.814 },  -- From packet capture (G-9 area)
-}
-
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.PARALYZE)
