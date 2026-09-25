@@ -5,17 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -107.888, y = 4.000, z = 112.399 },
-    { x = -111.739, y = 4.000, z = 114.772 },
-    { x = -119.399, y = 4.000, z = 109.537 },
-    { x = -127.626, y = 4.000, z = 106.828 },
-    { x = -143.349, y = 4.000, z = 108.313 },
-    { x = -147.202, y = 4.000, z = 99.363 },
-    { x = -144.044, y = 4.000, z = 90.136 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.BIND)
@@ -25,7 +14,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:addImmunity(xi.immunity.TERROR)
 
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 
@@ -42,7 +30,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200)
 end
 
