@@ -21,6 +21,7 @@
 
 #include "persist_batch.h"
 
+#include <algorithm>
 #include <unordered_set>
 
 #include "entities/char_entity.h"
@@ -119,6 +120,14 @@ void PersistBatch::write()
 
                 flushed.clear();
             }
+
+            std::ranges::stable_sort(positions, {}, &CharPosition::charid);
+            std::ranges::sort(replaceEffectsFor);
+            std::ranges::stable_sort(effectRows, {}, &PersistedEffect::charid);
+            std::ranges::sort(replaceEquipFor);
+            std::ranges::stable_sort(equipRows, {}, &CharEquipSlot::charid);
+            std::ranges::stable_sort(appearances, {}, &CharAppearance::charid);
+            std::ranges::stable_sort(charVars, {}, &CharVarChange::charid);
 
             writeRows(*this);
         });
