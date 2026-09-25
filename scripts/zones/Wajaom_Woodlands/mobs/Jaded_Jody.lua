@@ -8,11 +8,6 @@ local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -572.000, y = -8.500, z = -335.000 }
-}
-
 entity.phList =
 {
     [ID.mob.JADED_JODY - 1]  = ID.mob.JADED_JODY, -- Confirmed on retail
