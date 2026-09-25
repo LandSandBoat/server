@@ -9,14 +9,9 @@ local ID = zones[xi.zone.FORT_GHELSBA]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  1.000, y = -28.000, z = -52.000 }
-}
-
 entity.phList =
 {
-    [ID.mob.HUNDREDSCAR_HAJWAJ - 3] = ID.mob.HUNDREDSCAR_HAJWAJ,
+    [ID.mob.HUNDREDSCAR_HAJWAJ - 3] = ID.mob.HUNDREDSCAR_HAJWAJ, -- Confirmed on retail
 }
 
 entity.onMobDeath = function(mob, player, optParams)
