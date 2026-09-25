@@ -29,7 +29,7 @@
 auto GP_CLI_COMMAND_SITCHAIR::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
+        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
         .oneOf<GP_CLI_COMMAND_SITCHAIR_MODE>(this->Mode)
         .range("ChairId", this->ChairId, 0, 20); // 10 chairs + 10 reserved slots for future use
 }
