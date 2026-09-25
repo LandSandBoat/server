@@ -9,11 +9,6 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -82.000, y =  21.000, z =  62.000 }
-}
-
 entity.phList =
 {
     [ID.mob.MOUU_THE_WAVERIDER - 1] = ID.mob.MOUU_THE_WAVERIDER, -- Confirmed on retail

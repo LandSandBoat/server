@@ -7,14 +7,6 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x =  -2.000, y = 21.000, z = -19.000 },
-    { x =  -1.530, y = 21.715, z = -14.659 },
-    { x =  -4.827, y = 20.686, z = -14.350 },
-    { x =  -2.462, y = 21.242, z = -22.502 }
-}
-
 entity.phList =
 {
     [ID.mob.PAHH_THE_GULLCALLER - 5] = ID.mob.PAHH_THE_GULLCALLER, -- -13.532 21.301 -20.861
@@ -44,7 +36,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity
