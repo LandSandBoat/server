@@ -391,53 +391,53 @@ spawns:
     level:    [21, 29]
   17711110:
     template: Sea_Crab
-    at:       [1.570, -7.270, 10.230, 127]
+    region:   region_1
     level:    [10, 20]
   17711111:
     template: Sea_Crab
-    at:       [8.560, -7.640, 3.380, 191]
+    region:   region_1
     level:    [10, 20]
   17711112:
     template: Sea_Pugil
-    at:       [-3.390, -7.270, 13.780, 129]
+    region:   region_1
     level:    [10, 20]
   17711113:
     template: Sea_Pugil
-    at:       [4.620, -7.270, 10.200, 54]
+    region:   region_1
     level:    [10, 20]
   17711114:
     template: Sea_Monk
-    at:       [-7.310, -7.660, 7.280]
+    region:   region_1
     level:    [21, 29]
   17711115:
     template: Phantom
-    at:       [-3.740, -7.270, 17.710, 101]
+    region:   region_1
     level:    [22, 25]
   17711116:
     template: Crossbones_blm
     script:   Crossbones
-    at:       [-0.080, -7.270, 3.690, 63]
+    region:   region_1
     level:    [28, 31]
   17711117:
     template: Crossbones_blm
     script:   Crossbones
-    at:       [8.070, -7.660, 19.320]
+    region:   region_1
     level:    [28, 31]
   17711118:
     template: Crossbones_war
     script:   Crossbones
-    at:       [8.710, -7.560, 13.220, 176]
+    region:   region_1
     level:    [28, 31]
   17711119:
     template: Crossbones_war
     script:   Crossbones
-    at:       [7.040, -7.510, 11.060, 107]
+    region:   region_1
     level:    [28, 31]
   17711120:
     template: Ship_Wight
-    at:       [7.770, -7.450, 17.190, 188]
+    region:   region_1
     level:    [36, 39]
   17711121:
     template: Silverhook
-    at:       [7.770, -7.450, 17.190, 188]
+    region:   region_1
     level:    [68, 70]

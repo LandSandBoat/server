@@ -398,42 +398,42 @@ spawns:
     level:    [21, 29]
   17678342:
     template: Sea_Crab
-    at:       [1.320, -7.270, 21.040, 164]
+    region:   region_1
     level:    [10, 20]
   17678343:
     template: Sea_Crab
-    at:       [2.930, -7.270, 3.840, 32]
+    region:   region_1
     level:    [10, 20]
   17678344:
     template: Sea_Pugil
-    at:       [-7.450, -7.270, 5.170, 61]
+    region:   region_1
     level:    [10, 20]
   17678345:
     template: Sea_Pugil
-    at:       [-7.650, -7.660, 11.550]
+    region:   region_1
     level:    [10, 20]
   17678346:
     template: Sea_Monk
-    at:       [-7.550, -7.270, 5.160, 70]
+    region:   region_1
     level:    [21, 29]
   17678347:
     template: Phantom
-    at:       [-7.550, -7.270, 5.160, 28]
+    region:   region_1
     level:    [22, 25]
   17678348:
     template: Thunder_Elemental
-    at:       [-8.090, -7.270, 16.010, 152]
+    region:   region_1
   17678349:
     template: Water_Elemental
-    at:       [4.930, -7.270, 16.550, 148]
+    region:   region_1
     level:    [27, 29]
   17678350:
     template: Sea_Horror
-    at:       [-0.230, -7.660, 2.860, 7]
+    region:   region_1
     level:    [60, 62]
   17678351:
     template: Enagakure
-    at:       [8.199, -7.663, 19.189]
+    region:   region_1
     level:    [55, 55]
     attributes:
       spawn:

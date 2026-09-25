@@ -416,59 +416,59 @@ spawns:
     level:    [21, 29]
   17707014:
     template: Sea_Crab
-    at:       [1.698, -7.268, 21.497, 139]
+    region:   region_1
     level:    [10, 20]
   17707015:
     template: Sea_Crab
-    at:       [-1.870, -7.270, 3.210, 130]
+    region:   region_1
     level:    [10, 20]
   17707016:
     template: Sea_Pugil
-    at:       [-7.699, -7.663, 7.549]
+    region:   region_1
     level:    [10, 14]
   17707017:
     template: Sea_Pugil
-    at:       [0.200, -7.270, 6.870, 60]
+    region:   region_1
     level:    [10, 14]
   17707018:
     template: Sea_Monk
-    at:       [-4.000, -7.270, 8.900, 69]
+    region:   region_1
     level:    [21, 29]
   17707019:
     template: Phantom
-    at:       [-7.629, -7.663, 3.749]
+    region:   region_1
     level:    [22, 25]
   17707020:
     template: Crossbones_blm
     script:   Crossbones
-    at:       [-1.093, -7.288, 20.947, 228]
+    region:   region_1
     level:    [28, 31]
   17707021:
     template: Crossbones_blm
     script:   Crossbones
-    at:       [0.492, -7.268, 14.328, 108]
+    region:   region_1
     level:    [28, 31]
   17707022:
     template: Crossbones_war
     script:   Crossbones
-    at:       [-7.737, -7.279, 11.354, 155]
+    region:   region_1
     level:    [28, 31]
   17707023:
     template: Crossbones_war
     script:   Crossbones
-    at:       [7.177, -7.309, 17.648, 54]
+    region:   region_1
     level:    [28, 31]
   17707024:
     template: Ship_Wight
-    at:       [-0.725, -7.312, 23.111, 60]
+    region:   region_1
     level:    [36, 39]
   17707025:
     template: Blackbeard
-    at:       [-0.725, -7.312, 23.111, 60]
+    region:   region_1
     level:    [67, 68]
   17707026:
     template: Enagakure
-    at:       [8.199, -7.663, 19.189]
+    region:   region_1
     level:    [55, 55]
     attributes:
       spawn:
