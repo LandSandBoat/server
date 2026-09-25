@@ -4,6 +4,9 @@
 -- Log ID: 2, Quest ID: 93
 -- Kerutoto : !pos 13 -5 -157 238
 -----------------------------------
+-- Event 920 hides the pact option (bit 5) for players who have not unlocked SMN or already know it.
+-- A seventh event param of 1 plays Kerutoto's repeat lines in 918 and 920.
+-----------------------------------
 local windurstWatersID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
@@ -26,11 +29,27 @@ local function getAvailableRewards(player)
         end
     end
 
-    local diabolosCheck = not player:hasJob(xi.job.SMN) or player:hasSpell(xi.magic.spell.DIABOLOS)
-
-    rewardMask = utils.mask.setBit(rewardMask, diabolosCheck and 5 or 4, true)
+    if
+        player:hasSpell(xi.magic.spell.DIABOLOS) or
+        not player:hasJob(xi.job.SMN)
+    then
+        rewardMask = utils.mask.setBit(rewardMask, 5, true)
+    end
 
     return rewardMask
+end
+
+local function giveQuestReward(player, npc, option)
+    if option <= 4 then
+        return npcUtil.giveItem(player, rewardItems[option])
+    elseif option == 5 then
+        npcUtil.giveCurrency(player, 'gil', 15000)
+    elseif option == 6 then
+        player:addSpell(xi.magic.spell.DIABOLOS, { silentLog = true })
+        player:messageText(npc, windurstWatersID.text.DIABOLOS_UNLOCKED, false, 6)
+    end
+
+    return true
 end
 
 quest.sections =
@@ -94,13 +113,13 @@ quest.sections =
                 end,
 
                 [920] = function(player, csid, option, npc)
-                    if option >= 1 and option <= 4 and not player:hasItem(rewardItems[option]) then
-                        npcUtil.giveItem(player, rewardItems[option])
-                    elseif option == 5 then
-                        npcUtil.giveCurrency(player, 'gil', 15000)
-                    elseif option == 6 and not player:hasSpell(xi.magic.spell.DIABOLOS) then
-                        player:addSpell(xi.magic.spell.DIABOLOS)
-                        player:messageSpecial(windurstWatersID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
+                    -- Retail does not advance the quest on an escaped cutscene.
+                    if option < 1 or option > 6 then
+                        return
+                    end
+
+                    if not giveQuestReward(player, npc, option) then
+                        return
                     end
 
                     if quest:complete(player) then
@@ -126,17 +145,17 @@ quest.sections =
             ['Kerutoto'] =
             {
                 onTrigger = function(player, npc)
-                    -- Time lockout.
+                    -- Time lockout. Retail keeps the in-quest lines until the next offer.
                     if GetSystemTime() < player:getCharVar('Darkness_Named_date') then
-                        return quest:event(306)
-
-                    -- "Re-start" quest
-                    elseif not player:hasKeyItem(xi.keyItem.VIAL_OF_DREAM_INCENSE) then
-                        return quest:progressEvent(918)
+                        return quest:event(789):replaceDefault()
 
                     -- Quest complete.
                     elseif player:hasKeyItem(xi.keyItem.WHISPER_OF_DREAMS) then
-                        return quest:progressEvent(920, xi.item.DIABOLOSS_POLE, xi.item.DIABOLOSS_EARRING, xi.item.DIABOLOSS_RING, xi.item.DIABOLOSS_TORQUE, 0, 0, 0, getAvailableRewards(player))
+                        return quest:progressEvent(920, xi.item.DIABOLOSS_POLE, xi.item.DIABOLOSS_EARRING, xi.item.DIABOLOSS_RING, xi.item.DIABOLOSS_TORQUE, 0, 0, 1, getAvailableRewards(player))
+
+                    -- "Re-start" quest
+                    elseif not player:hasKeyItem(xi.keyItem.VIAL_OF_DREAM_INCENSE) then
+                        return quest:progressEvent(918, 0, 0, 0, 0, 0, 0, 1)
 
                     -- 1-time optional dialog.
                     elseif quest:getVar(player, 'Option') == 0 then
@@ -152,7 +171,10 @@ quest.sections =
             onEventFinish =
             {
                 [918] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_DREAM_INCENSE)
+                    -- "Not yet." returns the escape value.
+                    if option == 1 then
+                        npcUtil.giveKeyItem(player, xi.keyItem.VIAL_OF_DREAM_INCENSE)
+                    end
                 end,
 
                 [919] = function(player, csid, option, npc)
@@ -160,13 +182,13 @@ quest.sections =
                 end,
 
                 [920] = function(player, csid, option, npc)
-                    if option >= 1 and option <= 4 and not player:hasItem(rewardItems[option]) then
-                        npcUtil.giveItem(player, rewardItems[option])
-                    elseif option == 5 then
-                        npcUtil.giveCurrency(player, 'gil', 15000)
-                    elseif option == 6 and not player:hasSpell(xi.magic.spell.DIABOLOS) then
-                        player:addSpell(xi.magic.spell.DIABOLOS)
-                        player:messageSpecial(windurstWatersID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
+                    -- Retail does not advance the quest on an escaped cutscene.
+                    if option < 1 or option > 6 then
+                        return
+                    end
+
+                    if not giveQuestReward(player, npc, option) then
+                        return
                     end
 
                     player:delKeyItem(xi.keyItem.WHISPER_OF_DREAMS)

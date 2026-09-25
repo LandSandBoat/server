@@ -28,7 +28,7 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 5900
+        hp: 6030
         mp: 5900
 
   Diabolos_WD:
@@ -41,7 +41,7 @@ templates:
     attributes:
       combat:
         skill: staff
-        delay: 190
+        delay: 240
       jobs: [blm, rdm]
       render:
         look:
@@ -57,7 +57,7 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 11000
+        hp: 9100
 
   Diabolos_WD_2:
     id:            5186
