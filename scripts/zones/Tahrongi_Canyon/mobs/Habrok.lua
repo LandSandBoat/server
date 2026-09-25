@@ -5,11 +5,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -292.000, y = 15.000, z = -540.000 }
-}
-
 entity.onMobInitialize = function(mob)
     mob:setLocalVar('pop', GetSystemTime() + math.randomInt(1200, 7200))
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -24,7 +19,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setLocalVar('pop', GetSystemTime() + math.randomInt(1200, 7200))
 end
 
