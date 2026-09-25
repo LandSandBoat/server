@@ -24,21 +24,21 @@ content:addEssentialMobs({ 'Pasuk' })
 content.loot =
 {
     {
-        { itemId = xi.item.NONE,              weight = 950 }, -- Nothing
-        { itemId = xi.item.CLOUD_EVOKER,      weight =  50 }, -- Cloud Evoker
+        { itemId = xi.item.NONE,              weight = 9750 }, -- Nothing
+        { itemId = xi.item.CLOUD_EVOKER,      weight =  250 }, -- Cloud Evoker
     },
 
     {
-        { itemId = xi.item.NONE,              weight = 500 }, -- Nothing
-        { itemId = xi.item.GEIST_EARRING,     weight = 250 }, -- Geist Earring
-        { itemId = xi.item.QUICK_BELT,        weight = 250 }, -- Quick Belt
+        { itemId = xi.item.NONE,              weight = 5000 }, -- Nothing
+        { itemId = xi.item.GEIST_EARRING,     weight = 2500 }, -- Geist Earring
+        { itemId = xi.item.QUICK_BELT,        weight = 2500 }, -- Quick Belt
     },
 
     {
-        { itemId = xi.item.NONE,              weight = 350 }, -- Nothing
-        { itemId = xi.item.CROSSBOWMANS_RING, weight = 200 }, -- Crossbowman's Ring
-        { itemId = xi.item.WOODSMAN_RING,     weight = 150 }, -- Woodsman Ring
-        { itemId = xi.item.ETHER_RING,        weight = 300 }, -- Ether Ring
+        { itemId = xi.item.NONE,              weight = 3500 }, -- Nothing
+        { itemId = xi.item.CROSSBOWMANS_RING, weight = 2000 }, -- Crossbowman's Ring
+        { itemId = xi.item.WOODSMAN_RING,     weight = 1500 }, -- Woodsman Ring
+        { itemId = xi.item.ETHER_RING,        weight = 3000 }, -- Ether Ring
     },
 }
 

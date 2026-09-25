@@ -130,8 +130,8 @@ end
 content.loot =
 {
     {
-        { itemId = xi.item.NONE,                   weight = 9500 },
-        { itemId = xi.item.CLOUD_EVOKER,           weight =  500 },
+        { itemId = xi.item.NONE,                   weight = 9750 },
+        { itemId = xi.item.CLOUD_EVOKER,           weight =  250 },
     },
 
     {
