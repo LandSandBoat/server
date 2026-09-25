@@ -16,19 +16,7 @@ entity.phList =
 
 }
 
-entity.spawnPoints =
-{
-    { x = 104.340, y = 8.423, z = 81.217 },
-    { x = 109.771, y = 8.673, z = 74.235 },
-    { x = 120.899, y = 8.843, z = 77.341 },
-    { x = 123.823, y = 8.668, z = 91.314 },
-    { x = 105.215, y = 8.356, z = 97.292 },
-    { x =  92.628, y = 7.221, z = 97.590 },
-    { x =  91.597, y = 8.326, z = 85.349 },
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3600)
     mob:setMobMod(xi.mobMod.GIL_MAX, 3600)
 end
@@ -43,7 +31,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity

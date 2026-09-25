@@ -9,26 +9,11 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.AQUARIUS - 5] = ID.mob.AQUARIUS, -- Confirmed on retail
     [ID.mob.AQUARIUS - 1] = ID.mob.AQUARIUS, -- Confirmed on retail
     [ID.mob.AQUARIUS + 4] = ID.mob.AQUARIUS, -- Confirmed on retail
 }
 
-entity.spawnPoints =
-{
-    { x = 165.930, y = 9.344, z = -56.348 },
-    { x = 162.448, y = 9.620, z = -55.495 },
-    { x = 164.711, y = 9.541, z = -66.727 },
-    { x = 178.612, y = 9.296, z = -73.433 },
-    { x = 193.725, y = 9.425, z = -70.498 },
-    { x = 193.785, y = 9.346, z = -54.751 },
-    { x = 187.045, y = 9.514, z = -46.248 },
-    { x = 177.735, y = 9.537, z = -44.149 },
-    { x = 172.981, y = 6.746, z = -51.870 }
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -64,7 +49,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity
