@@ -218,6 +218,8 @@ inline auto searchTypeToString(const uint8 type) -> std::string
             return "SEARCH";
         case TCP_SEARCH_ALL:
             return "SEARCH_ALL";
+        case TCP_ID_LIST:
+            return "ID_LIST";
         case TCP_SEARCH_COMMENT:
             return "SEARCH_COMMENT";
         case TCP_GROUP_LIST:
@@ -262,6 +264,11 @@ void SearchHandler::read_func(const uint16_t length)
             case TCP_SEARCH_COMMENT:
             {
                 HandleSearchComment();
+            }
+            break;
+            case TCP_ID_LIST:
+            {
+                HandleIdListRequest(length);
             }
             break;
             case TCP_GROUP_LIST:
@@ -420,8 +427,40 @@ void SearchHandler::HandleSearchComment()
 
 void SearchHandler::HandleSearchRequest()
 {
-    const SearchRequest sr = _HandleSearchRequest();
+    SendPlayersList(_HandleSearchRequest());
+}
 
+// Friend list refreshes 20 character IDs at a time. uint16 count at 0x10, uint32 IDs from 0x12
+void SearchHandler::HandleIdListRequest(const uint16_t length)
+{
+    constexpr uint16 maxIds     = 20;
+    constexpr uint16 idsOffset  = 0x12;
+    const uint16     dataLength = length - searchPacketTrailerSize;
+    if (dataLength < idsOffset)
+    {
+        return;
+    }
+
+    SearchRequest sr{};
+    sr.nation = 255; // any
+    sr.race   = 255; // any
+
+    const auto count = std::min<uint16>({ ref<uint16>(buffer_.data(), 0x10), maxIds, static_cast<uint16>((dataLength - idsOffset) / 4) });
+    for (uint16 index = 0; index < count; ++index)
+    {
+        sr.characterIds.push_back(ref<uint32>(buffer_.data(), idsOffset + index * 4));
+    }
+
+    if (sr.characterIds.empty())
+    {
+        return;
+    }
+
+    SendPlayersList(sr);
+}
+
+void SearchHandler::SendPlayersList(const SearchRequest& sr)
+{
     const CDataLoader PDataLoader;
     int               totalCount = 0;
 

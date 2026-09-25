@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 
+#include <vector>
+
 // md5 hash + blowfish key appended by SearchHandler::encrypt()
 inline constexpr uint32 searchPacketTrailerSize = 0x10 + 0x04;
 
@@ -44,6 +46,8 @@ struct SearchRequest
     std::string   name;
     uint8         nameLen;
     uint8         commentType;
+
+    std::vector<uint32> characterIds;
 };
 
 class SearchPacket

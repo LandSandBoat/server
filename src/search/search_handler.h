@@ -36,6 +36,7 @@
 enum TCPREQUESTTYPE
 {
     TCP_SEARCH_ALL        = 0x00,
+    TCP_ID_LIST           = 0x01,
     TCP_GROUP_LIST        = 0x02,
     TCP_SEARCH            = 0x03,
     TCP_AH_HISTORY_SINGLE = 0x05,
@@ -64,12 +65,14 @@ private:
     void encrypt(uint16_t length);
 
     void HandleSearchRequest();
+    void HandleIdListRequest(uint16_t length);
     void HandleGroupListRequest();
     void HandleSearchComment();
     void HandleAuctionHouseRequest();
     void HandleAuctionHouseHistory();
 
     auto _HandleSearchRequest() -> SearchRequest;
+    void SendPlayersList(const SearchRequest& sr);
 
     Scheduler&               scheduler_;
     blowfish_t               blowfish_;
