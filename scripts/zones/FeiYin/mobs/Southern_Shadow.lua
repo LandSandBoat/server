@@ -33,7 +33,4 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
-entity.onMobDespawn = function(mob)
-end
-
 return entity

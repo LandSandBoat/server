@@ -53,7 +53,4 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 360)
 end
 
-entity.onMobDespawn = function(mob)
-end
-
 return entity

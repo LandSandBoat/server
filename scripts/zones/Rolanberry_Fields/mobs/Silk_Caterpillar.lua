@@ -10,7 +10,4 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 210)
 end
 
-entity.onMobDespawn = function(mob)
-end
-
 return entity

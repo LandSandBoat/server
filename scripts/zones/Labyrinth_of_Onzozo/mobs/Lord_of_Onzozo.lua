@@ -34,7 +34,4 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
 end
 
-entity.onMobDespawn = function(mob)
-end
-
 return entity

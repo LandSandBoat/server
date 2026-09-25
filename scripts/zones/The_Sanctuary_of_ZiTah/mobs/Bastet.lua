@@ -6,9 +6,6 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-end
-
 entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -19,9 +16,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 325)
-end
-
-entity.onMobDespawn = function(mob)
 end
 
 return entity

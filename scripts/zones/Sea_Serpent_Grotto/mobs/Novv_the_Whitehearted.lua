@@ -30,7 +30,4 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
-entity.onMobDespawn = function(mob)
-end
-
 return entity

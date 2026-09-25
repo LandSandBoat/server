@@ -12,15 +12,9 @@ entity.phList =
     [ID.mob.NORTHERN_SHADOW - 4] = ID.mob.NORTHERN_SHADOW, -- Confirmed on retail
 }
 
-entity.onMobInitialize = function(mob)
-end
-
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-end
-
-entity.onMobDespawn = function(mob)
 end
 
 return entity
