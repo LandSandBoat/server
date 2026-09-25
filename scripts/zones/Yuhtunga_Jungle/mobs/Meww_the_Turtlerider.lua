@@ -7,15 +7,6 @@ mixins = { require('scripts/mixins/job_special'), require('scripts/mixins/rotz_b
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -404.454, y =  17.021, z = -378.427 },
-    { x = -426.268, y =  17.000, z = -398.560 },
-    { x = -438.751, y =  17.000, z = -323.948 },
-    { x = -362.094, y =  17.000, z = -357.573 },
-    { x = -319.390, y =  17.000, z = -364.417 }
-}
-
 -- all body guard functionality in the rotz_bodyguarded_nm mixin
 
 entity.onMobInitialize = function(mob)
@@ -39,7 +30,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(75600, 86400)) -- 21 to 24 hours
 end
 
