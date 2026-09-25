@@ -642,11 +642,13 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     session->server_packet_id = 0;
     testChar->setSession(session);
 
-    // Set playtime to non-zero so that firstLogin is false (avoids 120ms+ processing in OnGameIn)
+    // Grant NEW_ADVENTURER so that firstLogin is false (avoids 120ms+ processing in OnGameIn)
     // Unless explicitly spawning a new player
     if (!isNewPlayer)
     {
-        db::preparedStmt("UPDATE chars SET playtime = 60 WHERE charid = ?", testChar->charId());
+        uint8 titles[sizeof(CCharEntity::m_TitleList)]{};
+        addBit(206, titles, sizeof(titles)); // 206 == xi.title.NEW_ADVENTURER
+        db::preparedStmt("UPDATE chars SET playtime = 60, titles = ? WHERE charid = ?", titles, testChar->charId());
     }
 
     // Create client wrapper and track setup context
