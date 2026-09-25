@@ -9,23 +9,12 @@ local entity = {}
 
 -- Hellion does not spawn near its PHs.
 
-entity.spawnPoints =
-{
-    { x =  97.454, y = 14.882, z = 58.474 },
-    { x =  98.482, y = 14.868, z = 64.923 },
-    { x = 109.078, y = 15.216, z = 61.308 },
-    { x = 102.868, y = 15.368, z = 61.308 },
-    { x =  89.113, y = 14.437, z = 61.137 }
-}
-
 entity.phList =
 {
-    [ID.mob.HELLION + 2 ] = ID.mob.HELLION, -- 136.566 14.708 70.077
-    [ID.mob.HELLION + 15] = ID.mob.HELLION, -- 127.523 14.327 210.258
+    [ID.mob.HELLION + 2] = ID.mob.HELLION, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -59,7 +48,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity
