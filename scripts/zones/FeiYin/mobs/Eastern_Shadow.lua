@@ -7,21 +7,12 @@ local ID = zones[xi.zone.FEIYIN]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -83.000, y = -15.000, z =  171.000 },
-    { x = -73.000, y = -15.000, z =  166.000 },
-    { x = -75.000, y = -15.000, z =  154.000 },
-    { x = -86.000, y = -15.000, z =  154.000 }
-}
-
 entity.phList =
 {
-    [ID.mob.EASTERN_SHADOW - 2] = ID.mob.EASTERN_SHADOW, -- -159.000 -16.000 146.000
+    [ID.mob.EASTERN_SHADOW - 1] = ID.mob.EASTERN_SHADOW, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 entity.onMobSpawn = function(mob)
@@ -31,7 +22,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity
