@@ -9,16 +9,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.TUMBLING_TRUFFLE - 1] = ID.mob.TUMBLING_TRUFFLE, -- Confirmed pop on retail
-}
-
-entity.spawnPoints =
-{
-    { x = 339.000, y = 56.000, z = 155.000 },
-    { x = 384.000, y = 71.000, z = 205.000 },
-    { x = 467.000, y = 71.000, z = 239.000 },
-    { x = 528.000, y = 70.000, z = 278.000 },
-    { x = 592.000, y = 59.000, z = 297.000 },
+    [ID.mob.TUMBLING_TRUFFLE - 1] = ID.mob.TUMBLING_TRUFFLE, -- Confirmed on retail
 }
 
 entity.onMobDeath = function(mob, player, optParams)
