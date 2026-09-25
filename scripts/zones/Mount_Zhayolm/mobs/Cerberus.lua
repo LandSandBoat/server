@@ -17,27 +17,8 @@ local drawInPositions =
     { 321.795, -23.978, -73.724 },
 }
 
-entity.spawnPoints =
-{
-    { x = 310.427, y = -24.142, z = -86.671 },
-    { x = 319.374, y = -24.007, z = -88.509 },
-    { x = 319.599, y = -23.992, z = -82.799 },
-    { x = 313.390, y = -23.871, z = -78.151 },
-    { x = 318.662, y = -23.890, z = -73.773 },
-    { x = 324.362, y = -24.269, z = -75.149 },
-    { x = 323.935, y = -24.000, z = -80.289 },
-    { x = 323.565, y = -24.000, z = -84.583 },
-    { x = 323.058, y = -23.995, z = -90.231 },
-    { x = 328.670, y = -23.984, z = -90.623 },
-    { x = 331.835, y = -23.889, z = -89.472 },
-    { x = 330.609, y = -24.054, z = -84.279 },
-    { x = 330.292, y = -24.000, z = -79.809 },
-    { x = 329.868, y = -24.109, z = -76.046 },
-}
-
 entity.onMobInitialize = function(mob)
     mob:setRespawnTime(math.randomInt(48, 72) * 3600) -- 48 - 72 hours with 1 hour windows
-    xi.mob.updateNMSpawnPoint(mob)
 
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

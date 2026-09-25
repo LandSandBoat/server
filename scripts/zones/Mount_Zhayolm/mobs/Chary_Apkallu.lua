@@ -30,7 +30,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(7200) -- 2 hours
 end
 
