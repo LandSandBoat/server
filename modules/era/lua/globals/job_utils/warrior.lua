@@ -12,7 +12,7 @@ m:addOverride('xi.job_utils.warrior.useBerserk', function(player, target, abilit
     local power    = 25 + player:getMod(xi.mod.BERSERK_POTENCY)
     local duration = 180 + player:getMod(xi.mod.BERSERK_DURATION)
 
-    player:addStatusEffect(xi.effect.BERSERK, { power = power, duration = duration, origin = player })
+    player:addStatusEffect(xi.effect.BERSERK, { power = power, duration = duration, origin = player, subPower = 25 })
 
     return xi.effect.BERSERK
 end)
