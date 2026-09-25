@@ -7,17 +7,7 @@ mixins = { require('scripts/mixins/job_special'), require('scripts/mixins/rotz_b
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -232.300, y = -8.180, z = -571.660 },
-    { x = -229.100, y = -7.650, z = -556.170 },
-    { x = -218.120, y = -8.000, z = -566.110 },
-    { x = -217.610, y = -8.570, z = -551.960 },
-    { x = -205.580, y = -7.810, z = -553.790 }
-}
-
 entity.onMobInitialize = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(75600 + math.randomInt(0, 600))
 end
 
@@ -32,7 +22,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(75600 + math.randomInt(0, 600)) -- 21 hours, 10 minute window
 end
 
