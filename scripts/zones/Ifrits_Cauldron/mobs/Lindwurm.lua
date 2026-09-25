@@ -7,21 +7,10 @@ local ID = zones[xi.zone.IFRITS_CAULDRON]
 ---@type TMobEntity
 local entity = {}
 
-entity.spawnPoints =
-{
-    { x = -271.000, y =  3.700, z = -129.000 },
-    { x = -277.875, y =  3.960, z = -149.239 },
-    { x = -238.112, y =  4.000, z = -143.615 },
-    { x = -249.902, y =  4.000, z = -119.366 },
-    { x = -279.284, y =  4.000, z = -117.433 }
-}
-
 entity.phList =
 {
-    [ID.mob.LINDWURM - 6]  = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM - 5]  = ID.mob.LINDWURM, -- Confirmed on retail
-    [ID.mob.LINDWURM - 2]  = ID.mob.LINDWURM,
-    [ID.mob.LINDWURM - 1]  = ID.mob.LINDWURM, -- Confirmed on retail
+    [ID.mob.LINDWURM - 5] = ID.mob.LINDWURM, -- Confirmed on retail
+    [ID.mob.LINDWURM - 1] = ID.mob.LINDWURM, -- Confirmed on retail
 }
 
 entity.onMobInitialize = function(mob)
@@ -44,7 +33,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
 end
 
 return entity
