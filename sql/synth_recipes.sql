@@ -1383,6 +1383,8 @@ INSERT INTO `synth_recipes` VALUES (19984,1,0,0,66,0,0,0,0,0,0,4100,4242,13111,0
 INSERT INTO `synth_recipes` VALUES (19985,1,0,0,84,0,0,0,0,0,0,4100,4242,12684,0,0,0,0,0,0,0,850,651,654,654,1,1,1,1,'Thick Mufflers (desynth)','ROTZ');
 INSERT INTO `synth_recipes` VALUES (19986,1,0,0,38,0,0,0,0,0,0,4100,4242,16650,0,0,0,0,0,0,0,715,715,652,652,1,1,1,1,'War Pick (desynth)',NULL); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19987,1,0,0,9,0,0,0,0,0,0,4100,4242,12832,0,0,0,0,0,0,0,649,817,850,850,1,3,1,1,'Bronze Subligar (desynth)',NULL); -- 2022.03.04 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (19988,1,0,0,100,0,0,0,0,0,0,4100,4242,2355,0,0,0,0,0,0,0,654,686,686,812,1,1,2,1,'Ja Ja\'s Chestplate (desynth)','TOAU'); -- https://wiki.ffo.jp/html/13506.html
+INSERT INTO `synth_recipes` VALUES (19989,1,0,0,100,0,0,0,0,0,0,4100,4242,2356,0,0,0,0,0,0,0,2302,686,2275,2275,1,2,2,3,'Gurfurlur\'s Helmet (desynth)','TOAU'); -- https://wiki.ffo.jp/html/13507.html
 INSERT INTO `synth_recipes` VALUES (20001,0,0,0,0,1,0,0,0,0,0,4096,4238,642,642,642,0,0,0,0,0,1884,1884,1884,1884,1,1,1,1,'Zinc Oxide','COP');
 INSERT INTO `synth_recipes` VALUES (20002,1,0,0,0,1,0,0,0,0,0,4100,4242,498,0,0,0,0,0,0,0,648,648,648,648,1,1,1,1,'Yagudo Necklace (desynth)',NULL);
 INSERT INTO `synth_recipes` VALUES (20003,0,0,0,0,2,0,0,0,0,0,4098,4240,768,768,0,0,0,0,0,0,1214,1214,1214,1214,6,8,10,12,'Stone Arrowheads',NULL);
@@ -2101,6 +2103,7 @@ INSERT INTO `synth_recipes` VALUES (29973,1,0,0,0,23,0,0,0,0,0,4100,4242,17081,0
 INSERT INTO `synth_recipes` VALUES (29974,1,0,0,0,52,0,0,0,0,0,4100,4242,14864,0,0,0,0,0,0,0,744,744,744,744,1,1,2,3,'Palmer\'s Bangles (desynth)','COP'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29975,1,0,0,0,37,0,0,0,0,0,4100,4242,13082,0,0,0,0,0,0,0,744,744,744,744,3,4,5,6,'Chain Gorget (desynth)',NULL); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29976,1,0,0,0,78,0,0,0,0,0,4100,4242,2167,0,0,0,0,0,0,0,1225,1225,1225,1225,1,2,3,3,'Lamian Armlet (desynth)','TOAU'); -- 2022.03.04 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (29977,1,0,0,0,100,0,0,0,0,0,4100,4242,2357,0,0,0,0,0,0,0,1227,1227,2275,2275,1,3,1,2,'Medusa\'s Armlet (desynth)','TOAU'); -- https://wiki.ffo.jp/html/13508.html
 INSERT INTO `synth_recipes` VALUES (30001,0,0,0,0,0,1,1,0,0,1,4099,4241,917,4497,13568,0,0,0,0,0,5230,5231,5231,5231,1,1,1,1,'Love Chocolate','COP');
 INSERT INTO `synth_recipes` VALUES (30002,1,0,0,0,0,1,0,0,0,0,4098,4240,498,0,0,0,0,0,0,0,817,817,817,817,3,6,9,12,'Yagudo Necklace (desynth)',NULL);
 INSERT INTO `synth_recipes` VALUES (30003,0,2011,0,0,0,2,0,0,0,0,4098,4240,840,840,840,840,840,840,2145,0,1221,1221,1221,1221,18,24,30,36,'Chocobo Fletchings','COP');
