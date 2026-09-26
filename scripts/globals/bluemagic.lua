@@ -1,6 +1,7 @@
 -----------------------------------
 -- Blue Magic utilities
 -- Used for Blue Magic spells.
+-- https://docs.google.com/spreadsheets/d/1UdAmVJwx8zCcDQ0KM4uJd-IxbUBEHBvys3jWpmDfrF0/edit?gid=909381162#gid=909381162
 -----------------------------------
 require('scripts/globals/magic')
 require('scripts/globals/mobskills')
@@ -555,6 +556,8 @@ end
 ---@field int_wsc          number
 ---@field mnd_wsc          number
 ---@field chr_wsc          number
+---@field halfThreshold    number
+---@field lowThreshold     number
 ---@field hasEfflux        boolean
 ---@field hasAzureLore     boolean
 ---@field hasBurstAffinity boolean
@@ -602,6 +605,10 @@ xi.spells.blue.getDefaultParams = function(caster)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
+    -- Default of no effective upper and very low minimum
+    params.halfThreshold = 999
+    params.lowThreshold  = -399
 
     params.hasEfflux        = caster:hasStatusEffect(xi.effect.EFFLUX)
     params.hasAzureLore     = caster:hasStatusEffect(xi.effect.AZURE_LORE)
@@ -787,6 +794,16 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- INT/MND/CHR dmg bonuses
     local statDiff  = caster:getStat(params.dStat) - target:getStat(params.dStat)
     local statBonus = statDiff * params.dStatMultiplier
+
+    -- Apply statBonus halfThrehold and lowThreshold. These are not performed on dSTAT according to the sheet.
+    -- When you are above halfThreshold, any points above it count for half
+    -- Most are uncapped
+    if statBonus > params.halfThreshold then
+        statBonus = math.floor((statBonus - params.halfThreshold) * 0.5 + params.halfThreshold)
+    end
+
+    -- statBonus cannot go below this number. Most do not have a reasonable floor.
+    statBonus = math.max(statBonus, params.lowThreshold)
 
     -- Azure Lore
     local azureBonus = 0
