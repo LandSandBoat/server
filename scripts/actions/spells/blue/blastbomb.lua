@@ -29,7 +29,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ftp0            = 1.375
     params.dStatMultiplier = 1.0
     params.baseDamageCap   = 30
-    params.int_wsc         = 0.2
+    params.halfThreshold   = 25
+    params.lowThreshold    = -10
+
+    params.int_wsc =  0.2
 
     -- Handle damage.
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)

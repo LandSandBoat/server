@@ -37,6 +37,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.azureBonus      = 0.5
     params.dStatMultiplier = 1.0
     params.baseDamageCap   = 35
+    params.halfThreshold   = 60
+    params.lowThreshold    = -17
 
     params.mnd_wsc = 0.3
 
