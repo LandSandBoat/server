@@ -6621,16 +6621,10 @@ void ReloadParty(CCharEntity* PChar)
         PChar->ReloadPartyDec();
     }
 
-    // Attempt to disband party if the last trust was just released
-    // NOTE: Trusts are not counted as party members, so the current member count will be 1
-    if (PChar->PParty && PChar->PParty->HasOnlyOneMember() && PChar->PTrusts.empty())
+    // A party that was created with trusts disbands if they get dismissed
+    if (PChar->PParty && PChar->PParty->IsFormedByTrusts() && PChar->PTrusts.empty())
     {
-        // Looks good so far, check OTHER processes to see if we should disband
-        if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
-        {
-            PChar->PParty->DisbandParty();
-            destroy(PChar->PParty);
-        }
+        PChar->PParty->DisbandParty();
     }
 }
 
@@ -7544,6 +7538,12 @@ void removeCharFromZone(CCharEntity* PChar)
     if (!PChar->PTrusts.empty())
     {
         PChar->ClearTrusts();
+    }
+
+    // The char wont tick again so ReloadParty needs to end the trust party here
+    if (PChar->PParty && PChar->PParty->IsFormedByTrusts())
+    {
+        PChar->PParty->DisbandParty();
     }
 
     if (PChar->status == xi::Status::Shutdown)
