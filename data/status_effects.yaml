@@ -1792,7 +1792,7 @@ status_effects:
       - on_zone
       - song
       - no_cancel
-    overwrite: higher
+    overwrite: equal_higher
     element:   light
     sort_key:  2000
 
@@ -1820,8 +1820,9 @@ status_effects:
       - on_zone
       - song
       - no_cancel
-    element:  earth
-    sort_key: 2000
+    overwrite: equal_higher
+    element:   earth
+    sort_key:  2000
 
   paeon:
     id: 195
@@ -2096,7 +2097,7 @@ status_effects:
       - no_loss_message
       - song
       - no_cancel
-    overwrite: higher
+    overwrite: equal_higher
     sort_key:  2000
 
   hymnus:
