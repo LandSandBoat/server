@@ -42,7 +42,6 @@
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x076_group_effects.h"
 #include "packets/s2c/0x0ac_command_data.h"
-#include "packets/s2c/0x0b4_config.h"
 #include "packets/s2c/0x0c8_group_tbl.h"
 #include "packets/s2c/0x0dd_group_list.h"
 
@@ -683,15 +682,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
         if (PChar->isSeekingParty())
         {
-            PChar->playerConfig.InviteFlg = false;
-            PChar->updatemask |= UPDATE_HP;
-
-            charutils::SaveCharStats(PChar);
-            charutils::SavePlayerSettings(PChar);
-
-            PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
-            PChar->pushPacket<CCharStatusPacket>(PChar);
-            PChar->pushPacket<CCharSyncPacket>(PChar);
+            charutils::RemoveSeekFlag(PChar);
         }
 
         PChar->PTreasurePool->updatePool(PChar);
@@ -766,20 +757,6 @@ void CParty::AddMember(uint32 id)
                 .partyId = m_PartyID,
             });
         }
-
-        /*if (PChar->nameflags.flags & FLAG_INVITE)
-        {
-            PChar->nameflags.flags ^= FLAG_INVITE;
-            PChar->updatemask |= UPDATE_HP;
-
-            charutils::SaveCharStats(PChar);
-
-            PChar->status = STATUS_UPDATE;
-            PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
-            PChar->pushPacket<CCharStatusPacket>(PChar);
-            PChar->pushPacket<CCharSyncPacket>(PChar);
-        }
-        PChar->PTreasurePool->UpdatePool(PChar);*/
     }
 }
 
