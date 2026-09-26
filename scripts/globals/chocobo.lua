@@ -240,7 +240,8 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
             end
         end
 
-        player:addStatusEffect(xi.effect.MOUNTED, { duration = duration, origin = player, silent = true })
+        player:setCharVar('[CHOCOBO]MusicEnd', GetSystemTime() + 390)
+        player:addStatusEffect(xi.effect.MOUNTED, { duration = duration, origin = player, silent = true, tick = 15 })
 
         -- Renting a chocobo force despawns every type of pets
         -- Note: This does not honor cooldown reductions offered otherwise when dismissing pets with full life.
@@ -249,6 +250,9 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
 
         if info.pos then
             player:setPos(unpack(info.pos))
+        else
+            -- Set chocobo music if not renting from a city
+            player:changeMusic(xi.musicSlot.MOUNT, 212)
         end
     elseif chocoGame ~= 0 and csid == eventSucceed then
         player:despawnPet()
