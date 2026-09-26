@@ -100,7 +100,7 @@ Source filer: IPv4 ranges
 Source IPv4 ranges: 0.0.0.0/0
 Second source filter: None
 Specific protocols and ports:
-TCP: 54230,54231,54001,54002
+TCP: 54230,54231,54001,54002,51220,51240
 UDP: 54230
 ```
 
@@ -181,6 +181,7 @@ screen -d -m -S xi_connect ./xi_connect
 screen -d -m -S xi_map ./xi_map
 screen -d -m -S xi_world ./xi_world
 screen -d -m -S xi_search ./xi_search
+screen -d -m -S xi_profile ./xi_profile
 ```
 
 - Using `screen` will allow your processes to continue when you close your `SSH` window, but they won't survive a VM restart, or come back up after a crash of any kind.

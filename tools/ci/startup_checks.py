@@ -187,6 +187,12 @@ def main():
             text=True,
         ),
         subprocess.Popen(
+            [from_server_path("xi_profile")],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+        ),
+        subprocess.Popen(
             [
                 from_server_path("xi_map"),
                 *(["--ci"] if runCI else []),
@@ -218,7 +224,7 @@ def main():
                 )
                 db.commit()
                 processes.insert(
-                    3,
+                    4,
                     subprocess.Popen(
                         [
                             from_server_path("xi_map"),

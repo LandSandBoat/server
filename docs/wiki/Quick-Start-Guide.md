@@ -482,7 +482,7 @@ python3 ./tools/dbtool.py
 
 Windows: `py -3 ./tools/dbtool.py`
 
-2. Choose `l. Launch Server`. This starts `xi_connect`, `xi_search` and `xi_world`, then starts one `xi_map` for each distinct zone port you have configured (default 1).
+2. Choose `l. Launch Server`. This starts `xi_connect`, `xi_search`, `xi_profile` and `xi_world`, then starts one `xi_map` for each distinct zone port you have configured (default 1).
 
 **By hand:**
 
@@ -491,9 +491,10 @@ Launch the newly-built `xi_*` executables from your repo root:
 * `xi_connect`
 * `xi_world`
 * `xi_search`
+* `xi_profile`
 * `xi_map`
 
-On Windows these have an `.exe` extension. Each one opens its own console window; leave them all running. Start `xi_map` last, after the other three are up.
+On Windows these have an `.exe` extension. Each one opens its own console window; leave them all running. Start `xi_map` last, after the others are up.
 
 _If a process doesn't run, or closes immediately, check the log output in the `log/` or `dmp/` folders for clues._
 
