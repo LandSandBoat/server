@@ -21,14 +21,15 @@
 
 #include "auth_session.h"
 
+#include "common/database.h"
 #include "common/ipc.h"
-#include "common/md52.h"
+#include "common/ipp.h"
 #include "common/utils.h"
 #include "otp_helpers.h"
 
 #include <bcrypt/BCrypt.hpp>
 
-#include <atomic>
+#include <openssl/rand.h>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -161,7 +162,7 @@ void auth_session::read_func()
     // Check major.minor but ignore trivial
     if (version[0] != SupportedXiloaderVersion[0] || version[1] != SupportedXiloaderVersion[1])
     {
-        std::string errorMessage = fmt::format("Your xiloader is too old.\nPlease update to version '{}.{}.x'.\nYour client reported '{}.{}.{}'.", SupportedXiloaderVersion[0], SupportedXiloaderVersion[1], version[0], version[1], version[2]);
+        std::string errorMessage = fmt::format("Unsupported xiloader version {}.{}.{}.\nThis server requires version {}.{}.x.", version[0], version[1], version[2], SupportedXiloaderVersion[0], SupportedXiloaderVersion[1]);
         sendJsonOnlyErrorMessage(errorMessage);
         return;
     }
@@ -296,16 +297,25 @@ void auth_session::read_func()
             }
             */
 
-            // Success
-            static std::atomic<uint32> authSeq{ 0 };
-
-            uint32 hashData[] = {
-                earth_time::timestamp() ^ static_cast<uint32>(getpid()),
-                authSeq.fetch_add(1, std::memory_order_relaxed),
-            };
-
+            // the session hash is also the profile server credential, so it must be unguessable
             unsigned char hash[16];
-            md5(reinterpret_cast<uint8*>(hashData), hash, sizeof(hashData));
+            if (RAND_bytes(hash, sizeof(hash)) != 1)
+            {
+                ShowError("Failed to generate a session hash");
+                sendLoginResult(login_result::LOGIN_ERROR);
+                return;
+            }
+
+            // keeps the account's last open status
+            if (!db::preparedStmt("INSERT INTO accounts_profile(accid, session_hash) VALUES(?, ?) "
+                                  "ON DUPLICATE KEY UPDATE session_hash = VALUES(session_hash), refreshed = NOW()",
+                                  accountID,
+                                  hash))
+            {
+                ShowErrorFmt("Failed to store the profile credential of account {}", accountID);
+                sendLoginResult(login_result::LOGIN_ERROR);
+                return;
+            }
 
             json loginSuccessReply;
             loginSuccessReply["result"]       = static_cast<uint8>(login_result::LOGIN_SUCCESS);

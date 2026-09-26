@@ -25,21 +25,26 @@
 
 #include <asio/ssl.hpp>
 #include <filesystem>
+#include <string>
 
 namespace certificateHelpers
 {
 
-inline void generateSelfSignedCert()
+// creates <name>.key and <name>.cert on first start
+inline void generateSelfSignedCert(const std::string& name = "login", const bool ellipticCurve = false)
 {
-    if (std::filesystem::exists("login.key"))
+    const auto keyFile  = name + ".key";
+    const auto certFile = name + ".cert";
+
+    if (std::filesystem::exists(keyFile))
     {
-        FILE* fileHandle = fopen("login.key", "r");
+        FILE* fileHandle = fopen(keyFile.c_str(), "r");
         if (fileHandle)
         {
             EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, nullptr, nullptr, nullptr);
             if (pkey)
             {
-                ShowInfo(fmt::format("Found existing login.key"));
+                ShowInfo(fmt::format("Found existing {}", keyFile));
             }
 
             EVP_PKEY_free(pkey);
@@ -47,9 +52,9 @@ inline void generateSelfSignedCert()
         }
     }
 
-    if (std::filesystem::exists("login.cert"))
+    if (std::filesystem::exists(certFile))
     {
-        FILE* fileHandle = fopen("login.cert", "r");
+        FILE* fileHandle = fopen(certFile.c_str(), "r");
         if (fileHandle)
         {
             X509* cert = PEM_read_X509(fileHandle, nullptr, nullptr, nullptr);
@@ -62,12 +67,12 @@ inline void generateSelfSignedCert()
                 X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
 
                 // This is internal, so we can trust it.
-                ShowInfo(fmt::format("Found existing login.cert: {}", asStringFromUntrustedSource(cn)));
+                ShowInfo(fmt::format("Found existing {}: {}", certFile, asStringFromUntrustedSource(cn)));
 
                 // if current time not within the bounds of valid date, note it's expired
                 if (X509_cmp_time(X509_get_notAfter(cert), nullptr) != 1 || X509_cmp_time(X509_get_notBefore(cert), nullptr) != -1)
                 {
-                    ShowWarning("Existing login.cert is not valid for the current time. Please regenerate or obtain a new certificate.");
+                    ShowWarning(fmt::format("Existing {} is not valid for the current time. Please regenerate or obtain a new certificate.", certFile));
                 }
             }
 
@@ -76,15 +81,23 @@ inline void generateSelfSignedCert()
         }
     }
 
-    if (!std::filesystem::exists("login.key") && !std::filesystem::exists("login.cert"))
+    if (!std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile))
     {
         ShowInfo("Generating self-signed certificate");
 
-        EVP_PKEY* pkey = EVP_RSA_gen(4096);
+        EVP_PKEY* pkey = [&]()
+        {
+            if (ellipticCurve)
+            {
+                return EVP_EC_gen("P-256");
+            }
+
+            return EVP_RSA_gen(4096);
+        }();
 
         if (pkey == nullptr)
         {
-            ShowError("Failed to generate RSA private key!");
+            ShowError("Failed to generate private key!");
         }
 
         X509* x509 = X509_new();
@@ -103,43 +116,40 @@ inline void generateSelfSignedCert()
             ShowError("Failed to assign private key to X509 cert!");
         }
 
-        X509_NAME* name;
-        name = X509_get_subject_name(x509);
+        X509_NAME* subject = X509_get_subject_name(x509);
 
         std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
         unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
 
         std::memcpy(commonNameIpAddr, authIpAddr.c_str(), authIpAddr.length());
 
-        // TODO: do we need to set/support country code, among others?
-        /* X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC,
-                                   (unsigned char*)"CA", -1, -1, 0);*/
-        X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC, (unsigned char*)"LSB self-signed certificate for login server", -1, -1, 0);
-        X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, commonNameIpAddr, -1, -1, 0);
+        const auto organization = fmt::format("LSB self-signed certificate for {} server", name);
+        X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>(organization.c_str()), -1, -1, 0);
+        X509_NAME_add_entry_by_txt(subject, "CN", MBSTRING_ASC, commonNameIpAddr, -1, -1, 0);
 
-        X509_set_issuer_name(x509, name);
+        X509_set_issuer_name(x509, subject);
 
         if (!X509_sign(x509, pkey, EVP_sha384()))
         {
             ShowError("Failed to sign X509 cert!");
         }
 
-        FILE* fileHandle = fopen("login.key", "wb");
+        FILE* fileHandle = fopen(keyFile.c_str(), "wb");
         if (fileHandle)
         {
             if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, 0, nullptr))
             {
-                ShowError("Failed to write login.key!");
+                ShowError(fmt::format("Failed to write {}!", keyFile));
             }
             fclose(fileHandle);
         }
 
-        fileHandle = fopen("login.cert", "wb");
+        fileHandle = fopen(certFile.c_str(), "wb");
         if (fileHandle)
         {
             if (!PEM_write_X509(fileHandle, x509))
             {
-                ShowError("Failed to write login.cert!");
+                ShowError(fmt::format("Failed to write {}!", certFile));
             }
             fclose(fileHandle);
         }

@@ -21,6 +21,25 @@
 
 #include "profile_engine.h"
 
-ProfileEngine::ProfileEngine() = default;
+#include "common/logging.h"
+
+#include <stdexcept>
+
+ProfileEngine::ProfileEngine()
+: tls_(asio::ssl::context::tlsv13_server)
+{
+    auto ec = asio::error_code{};
+    tls_.set_options(asio::ssl::context::default_workarounds);
+    tls_.use_certificate_chain_file("profile.cert", ec);
+    if (!ec)
+    {
+        tls_.use_private_key_file("profile.key", asio::ssl::context::file_format::pem, ec);
+    }
+
+    if (ec)
+    {
+        throw std::runtime_error(fmt::format("Cannot load profile.cert and profile.key ({})", ec.message()));
+    }
+}
 
 ProfileEngine::~ProfileEngine() = default;

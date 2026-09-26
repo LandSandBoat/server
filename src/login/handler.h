@@ -41,7 +41,7 @@ public:
     handler(Scheduler& scheduler, unsigned int port, ipc::Channel<zmq::message_t> dealerChannel)
     : scheduler_(scheduler)
     , acceptor_(scheduler_.mainContext(), asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
-    , sslContext_(asio::ssl::context::tls_server)
+    , sslContext_(asio::ssl::context::tlsv13_server)
     , dealerChannel_(dealerChannel)
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));

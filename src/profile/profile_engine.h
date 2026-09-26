@@ -23,10 +23,15 @@
 
 #include "common/engine.h"
 
+#include <asio/ssl/context.hpp>
+
 // the profile server (friend lists, status, files) and the IRC server (presence, message notices)
 class ProfileEngine final : public Engine
 {
 public:
     ProfileEngine();
     ~ProfileEngine() override;
+
+private:
+    asio::ssl::context tls_;
 };
