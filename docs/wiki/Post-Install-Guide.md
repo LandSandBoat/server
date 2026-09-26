@@ -65,7 +65,7 @@ Do not rely on remembering. Make the change reproducible:
 Make sure you have the following ports forwarded by your router and open in any firewall software if accessing the server over a network:
 
 ```txt
-TCP ports: 54230, 54231, 54001, 54002, 51220
+TCP ports: 54230, 54231, 54001, 54002, 51220, 51240
 UDP port: 54230
 ```
 

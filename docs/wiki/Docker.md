@@ -81,6 +81,9 @@ sleep 5
 echo "starting xi_search"
 nohup ./xi_search &
 
+echo "starting xi_profile"
+nohup ./xi_profile &
+
 sleep 5
 echo "starting xi_map"
 ./xi_map
