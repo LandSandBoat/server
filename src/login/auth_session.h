@@ -67,7 +67,7 @@ enum class login_result : uint8_t
     LOGIN_ERROR_TRUST_TOKEN_INVALID = 0x13,
 };
 
-constexpr std::array<uint8, 3> SupportedXiloaderVersion = { 2, 1, 0 };
+constexpr std::array<uint8, 3> SupportedXiloaderVersion = { 2, 2, 0 };
 
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS

@@ -244,6 +244,8 @@ inline auto format_as(type v) \
 #define DebugBazaars(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_BAZAARS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugPerformance(...) LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PERFORMANCE", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugTest(...)        LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_TEST", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugIRC(...)         LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_IRC", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugProfile(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PROFILE", __FILE__, __LINE__, __VA_ARGS__)
 
 // Debug Loggers fmt variants
 #define DebugSocketsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_SOCKETS", __FILE__, __LINE__, __VA_ARGS__)
@@ -259,5 +261,7 @@ inline auto format_as(type v) \
 #define DebugBazaarsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_BAZAARS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugPerformanceFmt(...) LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PERFORMANCE", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugTestFmt(...)        LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_TEST", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugIRCFmt(...)         LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_IRC", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugProfileFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PROFILE", __FILE__, __LINE__, __VA_ARGS__)
 
 // clang-format on
