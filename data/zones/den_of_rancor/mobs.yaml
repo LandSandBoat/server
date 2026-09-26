@@ -736,7 +736,7 @@ templates:
 
   Puck:
     id:            3217
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
