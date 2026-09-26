@@ -1,0 +1,13 @@
+# Drops removed from mob loot after the Abyssea era: the Sky NM stone drops (December 7, 2010) and later targeted removals.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(12/06/2010)
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/23/2012)
+
+templates:
+
+  Pygmytoise:
+    loot: # chunk_of_adaman_ore removed
+      drops:
+        - chance: uncommon
+          item:   seasoning_stone
+        - chance: rare
+          item:   fossilized_fang
