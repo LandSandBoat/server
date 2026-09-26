@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 require('scripts/globals/interaction/interaction_lookup')
 -----------------------------------
 
@@ -137,6 +137,14 @@ end
 
 function InteractionGlobal.onEventUpdate(player, csid, option, npc, fallbackFn)
     return InteractionGlobal.lookup:onEventUpdate(player, csid, option, npc, fallbackFn)
+end
+
+function InteractionGlobal.onFurniturePlaced(player, item, fallbackFn)
+    return InteractionGlobal.lookup:onFurniturePlaced(player, item, fallbackFn)
+end
+
+function InteractionGlobal.onFurnitureRemoved(player, item, fallbackFn)
+    return InteractionGlobal.lookup:onFurnitureRemoved(player, item, fallbackFn)
 end
 
 return InteractionGlobal
