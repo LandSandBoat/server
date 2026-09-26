@@ -81,6 +81,30 @@
             }
         },
         {
+            "label": "Kill xi_profile",
+            "type": "shell",
+            "linux": {
+                "command": "killall",
+                "args": [
+                    "xi_profile",
+                    "||",
+                    "exit",
+                    "0",
+                ]
+            },
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/C",
+                    "taskkill /F /IM xi_profile.exe || exit 0",
+                ]
+            },
+            "presentation": {
+                "reveal": "never",
+                "close": true,
+            }
+        },
+        {
             "label": "Kill xi_world",
             "type": "shell",
             "linux": {
@@ -111,6 +135,7 @@
                 "Kill xi_connect",
                 "Kill xi_map",
                 "Kill xi_search",
+                "Kill xi_profile",
                 "Kill xi_world"
             ],
             "command": "cmake",

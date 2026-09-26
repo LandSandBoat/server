@@ -32,7 +32,7 @@ if(ENABLE_VALGRIND)
         message(FATAL_ERROR "ENABLE_VALGRIND is ON but valgrind is not found!")
     endif()
 
-    foreach(server xi_connect xi_map xi_search xi_world)
+    foreach(server xi_connect xi_map xi_profile xi_search xi_world)
         xi_add_valgrind_targets(${server})
     endforeach()
 endif()
