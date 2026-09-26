@@ -249,7 +249,6 @@ if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
             ${bcrypt_SOURCE_DIR}/src/crypt_blowfish.c
             ${bcrypt_SOURCE_DIR}/src/crypt_gensalt.c
             ${bcrypt_SOURCE_DIR}/src/wrapper.c
-            ${bcrypt_SOURCE_DIR}/src/x86.S
     )
     target_include_directories(bcrypt
         SYSTEM INTERFACE
