@@ -880,6 +880,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         -- Record the individual hit into hitData table.
         table.insert(returnInfo.hitData, hitInfo)
 
+        -- Some trusts with SA/TA pipe through here so catch that edge case
+        if hitNumber == 1 then
+            mob:delStatusEffect(xi.effect.SNEAK_ATTACK)
+            mob:delStatusEffect(xi.effect.TRICK_ATTACK)
+        end
+
         -- Third Eye treats multi hit attacks as a single hit.
         -- Exit early if there are remaining hits after the anticipated hit.
         if
@@ -890,6 +896,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
             break
         end
     end
+
+    -- Remove boost after all hits landed
+    mob:delStatusEffect(xi.effect.BOOST)
 
     ----------------------------------
     -- Tally All Hit Results

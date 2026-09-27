@@ -450,7 +450,6 @@ status_effects:
   boost:
     id: 45
     flags:
-      - attack
       - empathy
       - death
       - on_jobchange
@@ -610,7 +609,6 @@ status_effects:
   sneak_attack:
     id: 65
     flags:
-      - attack
       - death
       - on_zone
       - on_jobchange
@@ -823,7 +821,6 @@ status_effects:
   trick_attack:
     id: 87
     flags:
-      - attack
       - death
       - on_zone
       - on_jobchange
