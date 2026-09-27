@@ -29,7 +29,7 @@ Virtual machines, machine images, stuff in the cloud etc. are all very cool and 
 
 ### Minimise inter-process latency
 
-Your server processes (`xi_connect`, `xi_map`, `xi_search`, `xi_world`, etc.) and your database service (`MariaDB database server`, `mariadb.service`, etc.) should be running on the same machine. Splitting these processes/services onto different real/virtual machine introduces latency into systems that are blocking and will have a direct effect on the experience of your players.
+Your server processes (`xi_connect`, `xi_map`, `xi_search`, `xi_profile`, `xi_world`, etc.) and your database service (`MariaDB database server`, `mariadb.service`, etc.) should be running on the same machine. Splitting these processes/services onto different real/virtual machine introduces latency into systems that are blocking and will have a direct effect on the experience of your players.
 
 ### Avoid heavy database operations
 
@@ -397,6 +397,33 @@ WantedBy=xi.service
 ```
 
 ```ini
+#xi_profile.service
+
+[Unit]
+Description=XI Profile Server
+Wants=network.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+PartOf=xi.service
+After=xi.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+# You can use your regular system user or a custom user you make
+# ie User=xiplayer or User=myregularusername
+User=
+# omit Group and it will use the Users primary group. Otherwise you can explicitly list it
+#Group=
+WorkingDirectory=/path/to/lsb
+ExecStart=/path/to/lsb/xi_profile
+
+[Install]
+WantedBy=xi.service
+```
+
+```ini
 #xi_world.service
 
 [Unit]
@@ -423,4 +450,4 @@ ExecStart=/path/to/lsb/xi_world
 WantedBy=xi.service
 ```
 
-After adding these to `/etc/systemd/system/`, run `systemctl daemon-reload` followed by `systemctl enable xi_connect xi_map xi_search xi_world`. You can start/stop all the servers at once with `systemctl start/stop xi` or each individual service separately. To enable auto-start, type `systemctl enable xi`. Make sure lsb is in a location accessible to the user that will be running the service, and the correct permissions are set.
+After adding these to `/etc/systemd/system/`, run `systemctl daemon-reload` followed by `systemctl enable xi_connect xi_map xi_search xi_profile xi_world`. You can start/stop all the servers at once with `systemctl start/stop xi` or each individual service separately. To enable auto-start, type `systemctl enable xi`. Make sure lsb is in a location accessible to the user that will be running the service, and the correct permissions are set.

@@ -190,6 +190,10 @@ settings, default_settings = populate_settings()
 player_data = [
     "accounts.sql",
     "accounts_banned.sql",
+    "accounts_files.sql",
+    "accounts_friends.sql",
+    "accounts_messages.sql",
+    "accounts_profile.sql",
     "accounts_totp.sql",
     "auction_house_items.sql",
     "auction_house.sql",
@@ -1223,6 +1227,7 @@ def launch_using_zone_settings():
     xi_connect_executable = from_server_path(f"xi_connect{exe}")
     xi_map_executable = from_server_path(f"xi_map{exe}")
     xi_search_executable = from_server_path(f"xi_search{exe}")
+    xi_profile_executable = from_server_path(f"xi_profile{exe}")
     xi_world_executable = from_server_path(f"xi_world{exe}")
 
     print(f"Launching {xi_connect_executable} --log log/connect-server.log")
@@ -1233,6 +1238,11 @@ def launch_using_zone_settings():
     print(f"Launching {xi_search_executable} --log log/search-server.log")
     launch_process_in_background(
         [xi_search_executable, "--log", f"log/search-server.log"]
+    )
+
+    print(f"Launching {xi_profile_executable} --log log/profile-server.log")
+    launch_process_in_background(
+        [xi_profile_executable, "--log", f"log/profile-server.log"]
     )
 
     print(f"Launching {xi_world_executable} --log log/world-server.log")

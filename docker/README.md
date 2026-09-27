@@ -170,6 +170,20 @@ services:
       database-update:
         condition: service_completed_successfully
 
+  profile:
+    <<: *common
+    command: ["/server/xi_profile"]
+    restart: unless-stopped
+    ports:
+      - "51220:51220"
+      - "51240:51240"
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+      database-update:
+        condition: service_completed_successfully
+
   world:
     <<: *common
     command: ["/server/xi_world"]

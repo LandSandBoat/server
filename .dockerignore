@@ -138,6 +138,7 @@ UpgradeLog*.XML
 /xi_connect*
 /xi_map*
 /xi_search*
+/xi_profile*
 /xi_test*
 /xi_world*
 
@@ -239,6 +240,7 @@ doxygen/
 xi_map.dSYM
 xi_connect.dSYM
 xi_search.dSYM
+xi_profile.dSYM
 
 # Keys and Certs
 **/*.key

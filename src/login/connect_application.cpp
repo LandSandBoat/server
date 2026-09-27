@@ -22,7 +22,7 @@
 #include "connect_application.h"
 #include "login_helpers.h"
 
-#include "cert_helpers.h"
+#include "common/cert_helpers.h"
 #include "common/console_service.h"
 #include "connect_engine.h"
 

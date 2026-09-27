@@ -61,7 +61,7 @@ To connect to a private server you need to point your client at that private ser
 
 # 5. Connecting to a Private Server
 
-* Execute xiloader.exe as an administrator (_after_ launching `xi_connect`, `xi_map`, `xi_search`, and `xi_world`, if connecting to your own local sever), then select the "Create New Account" option by hitting "2" then:
+* Execute xiloader.exe as an administrator (_after_ launching `xi_connect`, `xi_map`, `xi_search`, `xi_profile`, and `xi_world`, if connecting to your own local sever), then select the "Create New Account" option by hitting "2" then:
 
 ```txt
 Username: Username
