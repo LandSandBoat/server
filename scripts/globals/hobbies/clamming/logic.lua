@@ -7,6 +7,8 @@ xi.clamming = xi.clamming or {}
 local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local function giveClammedItems(player)
+    player:setCharVar('[Clam]OweItems', 0)
+
     for itemId, _ in pairs(xi.clamming.itemData) do
         local varName    = xi.clamming.itemData[itemId][2]
         local itemAmount = player:getCharVar(varName)
