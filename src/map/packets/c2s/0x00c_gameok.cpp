@@ -82,7 +82,7 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     PChar->pushPacket<GP_SERV_COMMAND_DUNGEON>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharSyncPacket>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar, PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MERIT>(PChar);
     charutils::SendInventory(PChar);
     blacklistutils::SendBlacklist(PChar);

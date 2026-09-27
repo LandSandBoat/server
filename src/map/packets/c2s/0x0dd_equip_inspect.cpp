@@ -131,7 +131,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                     PCharTarget->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::Examine);
                 }
 
-                PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PCharTarget);
+                PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar, PCharTarget);
                 PChar->pushPacket<GP_SERV_COMMAND_EQUIP_INSPECT::EQUIPMENT>(PChar, PCharTarget);
                 PChar->pushPacket<GP_SERV_COMMAND_EQUIP_INSPECT::GENERAL>(PChar, PCharTarget);
             }

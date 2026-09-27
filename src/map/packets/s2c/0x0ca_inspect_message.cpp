@@ -23,17 +23,17 @@
 
 #include "entities/char_entity.h"
 
-GP_SERV_COMMAND_INSPECT_MESSAGE::GP_SERV_COMMAND_INSPECT_MESSAGE(const CCharEntity* PChar)
+GP_SERV_COMMAND_INSPECT_MESSAGE::GP_SERV_COMMAND_INSPECT_MESSAGE(const CCharEntity* PChar, const CCharEntity* PTarget)
 {
     auto& packet = this->data();
 
-    std::memcpy(packet.sInspectMessage, PChar->bazaar.message.c_str(), std::min<size_t>(PChar->bazaar.message.size(), sizeof(packet.sInspectMessage)));
+    std::memcpy(packet.sInspectMessage, PTarget->bazaar.message.c_str(), std::min<size_t>(PTarget->bazaar.message.size(), sizeof(packet.sInspectMessage)));
 
     packet.BazaarFlag = 1;
-    packet.MyFlag     = 1;
+    packet.MyFlag     = PChar == PTarget ? 1 : 0;
     packet.Race       = 1;
 
-    packet.DesignationNo = PChar->profile.title;
+    packet.DesignationNo = PTarget->profile.title;
 
-    std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
+    std::memcpy(packet.sName, PTarget->getName().c_str(), std::min<size_t>(PTarget->getName().size(), sizeof(packet.sName)));
 }
