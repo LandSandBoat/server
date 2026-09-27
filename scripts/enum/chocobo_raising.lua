@@ -4,6 +4,9 @@
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 
+-- MOUNTED subPower bit for the registered chocobo; mirrors mountutils::kPersonalChocoboFlag.
+xi.chocoboRaising.personalChocoboFlag = 0x40
+
 ---@enum xi.chocoboRaising.color
 xi.chocoboRaising.color =
 {
@@ -46,6 +49,15 @@ xi.chocoboRaising.ability =
     BORE            = 4,
     AUTO_REGEN      = 5,
     TREASURE_FINDER = 6,
+}
+
+-- Adult features, fixed on day 29 and stored in char_chocobos.appearance.
+---@enum xi.chocoboRaising.appearance
+xi.chocoboRaising.appearance =
+{
+    LARGE_TALONS = 0x01, -- Strength
+    FULL_TAIL    = 0x02, -- Endurance
+    LARGE_BEAK   = 0x04, -- Discernment
 }
 
 ---@enum xi.chocoboRaising.temperament

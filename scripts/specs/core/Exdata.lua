@@ -71,7 +71,7 @@
 ---@class ExdataChocoboEgg
 ---@field dna?      integer[]                                   # 3 color genes indexed [1-3], each [0-7]
 ---@field ability?  xi.chocoboRaising.ability
----@field plan?     xi.chocoboRaising.honeymoonPlan
+---@field plan?     integer                                     # Honeymoon plan, 0-based: 0 Gourmet (A) to 3 Jeuno Tour (D)
 ---@field isBred?   boolean                                     # Whether the egg is from breeding
 
 ---@class ExdataChocoboStatByte
