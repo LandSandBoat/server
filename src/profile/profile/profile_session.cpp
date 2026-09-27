@@ -26,6 +26,7 @@
 #include "profile/answer.h"
 #include "profile/characters.h"
 #include "profile/context.h"
+#include "profile/status.h"
 #include "protocol/bytes.h"
 #include "protocol/profile/c2s/prof_file_head.h"
 #include "protocol/profile/c2s/prof_open_data.h"
@@ -146,12 +147,14 @@ auto ProfileSession::handle(const ProfRequest request, const std::span<const uin
             return searchPolId(body);
         case ProfRequest::LoadGroupList:
             return ProfileAnswer().add(ProfCount{});
+        case ProfRequest::LoadMyStatus:
+            return loadMyStatus(context_);
+        case ProfRequest::ChangeMyStatus:
+            return changeMyStatus(context_, body);
         case ProfRequest::SecurityToken:
             return ProfileAnswer();
         case ProfRequest::LoadFriendList:
         case ProfRequest::StoreFriendList:
-        case ProfRequest::LoadMyStatus:
-        case ProfRequest::ChangeMyStatus:
         case ProfRequest::ReadFile:
         case ProfRequest::WriteFile:
         case ProfRequest::RemoveFile:

@@ -24,12 +24,24 @@
 #include "data/accounts.h"
 #include "irc/irc_session.h"
 
+#include "common/logging.h"
+
+#include <magic_enum/magic_enum.hpp>
+
 namespace profile
 {
 
 auto PresenceManager::signOn(const uint32 accountId, const SessionHash& sessionHash, IrcSession* session) -> uint64
 {
-    auto& online = online_[accountId];
+    const auto [entry, signedOn] = online_.try_emplace(accountId);
+    auto& online                 = entry->second;
+
+    // restore the saved status so invisible stays invisible
+    if (signedOn)
+    {
+        online.status.openStatus = accounts::openStatus(accountId).value_or(OpenStatus::Invisible);
+    }
+
     if (online.session != nullptr)
     {
         online.session->close();
@@ -38,6 +50,9 @@ auto PresenceManager::signOn(const uint32 accountId, const SessionHash& sessionH
     online.session     = session;
     online.sessionHash = sessionHash;
     online.signOnId    = ++lastSignOnId_;
+
+    // the new client reports its character again
+    online.status = Status{ .openStatus = online.status.openStatus, .receiveMessages = online.status.receiveMessages };
     return online.signOnId;
 }
 
@@ -54,12 +69,44 @@ auto PresenceManager::isOnline(const uint32 accountId) const -> bool
     return online_.contains(accountId);
 }
 
+auto PresenceManager::status(const uint32 accountId) const -> Maybe<Status>
+{
+    if (const auto online = online_.find(accountId); online != online_.end())
+    {
+        return online->second.status;
+    }
+
+    return std::nullopt;
+}
+
 void PresenceManager::refreshCredentials() const
 {
     for (const auto& [accountId, online] : online_)
     {
         accounts::refresh(accountId, online.sessionHash);
     }
+}
+
+auto PresenceManager::setStatus(const uint32 accountId, const Status& status) -> bool
+{
+    const auto online = online_.find(accountId);
+    if (online == online_.end())
+    {
+        return false;
+    }
+
+    if (status.openStatus != online->second.status.openStatus)
+    {
+        if (!accounts::setOpenStatus(accountId, status.openStatus))
+        {
+            return false;
+        }
+
+        ShowInfoFmt("account {} changed status to {}", accountId, magic_enum::enum_name(status.openStatus));
+    }
+
+    online->second.status = status;
+    return true;
 }
 
 } // namespace profile

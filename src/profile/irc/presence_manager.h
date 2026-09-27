@@ -21,9 +21,11 @@
 
 #pragma once
 
+#include "enums/open_status.h"
 #include "protocol/codec.h"
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 
 #include <unordered_map>
 
@@ -36,10 +38,20 @@ class IrcSession;
 class PresenceManager
 {
 public:
+    struct Status
+    {
+        OpenStatus openStatus{ OpenStatus::Online };
+        bool       inGame{};
+        uint8      characterSlot{}; // when in game
+        bool       receiveMessages{ true };
+    };
+
     auto signOn(uint32 accountId, const SessionHash& sessionHash, IrcSession* session) -> uint64; // kicks the previous session, if any
     void signOff(uint32 accountId, uint64 signOnId);                                              // no-op if a newer session took over
     auto isOnline(uint32 accountId) const -> bool;
-    void refreshCredentials() const; // bumps the credential timestamp of everyone online
+    auto status(uint32 accountId) const -> Maybe<Status>;
+    void refreshCredentials() const;                                // bumps the credential timestamp of everyone online
+    auto setStatus(uint32 accountId, const Status& status) -> bool; // false if saving the open status failed
 
 private:
     struct Online
@@ -47,6 +59,7 @@ private:
         IrcSession* session{};
         SessionHash sessionHash{};
         uint64      signOnId{};
+        Status      status;
     };
 
     std::unordered_map<uint32, Online> online_;
