@@ -22,8 +22,10 @@
 #include "profile_engine.h"
 
 #include "irc/irc_session.h"
+#include "profile/profile_session.h"
 
 #include "common/logging.h"
+#include "common/settings.h"
 
 #include <asio/read.hpp>
 
@@ -63,6 +65,13 @@ ProfileEngine::ProfileEngine(Scheduler& scheduler)
         throw std::runtime_error(fmt::format("Cannot load profile.cert and profile.key ({})", ec.message()));
     }
 
+    const auto profilePort = settings::get<uint16>("network.PROFILE_PORT");
+    listen(profilePort,
+           [this](profile::Stream stream, std::string peer, const profile::accounts::Credential credential)
+           {
+               return profile::runProfileSession(std::move(stream), std::move(peer), credential.accountId, presence_);
+           });
+
     listen(kIrcPort,
            [this](profile::Stream stream, std::string peer, const profile::accounts::Credential credential)
            {
@@ -75,7 +84,7 @@ ProfileEngine::ProfileEngine(Scheduler& scheduler)
                                                         presence_.refreshCredentials();
                                                     });
 
-    ShowInfoFmt("listening on {} (irc)", kIrcPort);
+    ShowInfoFmt("listening on {} (profile) and {} (irc)", profilePort, kIrcPort);
 }
 
 ProfileEngine::~ProfileEngine() = default;
