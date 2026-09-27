@@ -7,6 +7,8 @@ xi.clamming = xi.clamming or {}
 local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local function giveClammedItems(player)
+    player:setCharVar('[Clam]OweItems', 0)
+
     for itemId, _ in pairs(xi.clamming.itemData) do
         local varName    = xi.clamming.itemData[itemId][2]
         local itemAmount = player:getCharVar(varName)
@@ -139,7 +141,7 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     local itemId     = lootList[#lootList][1]
     local randomRoll = math.randomInt(1, rateSum)
     for i = 1, #lootList do
-        randomRoll = randomRoll - lootList[i][2]
+        randomRoll = randomRoll - lootList[i][rateColumn]
         if randomRoll <= 0 then
             itemId = lootList[i][1]
             break
