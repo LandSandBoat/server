@@ -4,13 +4,31 @@
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
 require('scripts/globals/hobbies/chocobo_digging/data')
+require('scripts/globals/hobbies/chocobo_raising/whistle')
 require('scripts/globals/roe')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
 
--- This contais all digging zones with the ones without loot tables defined commented out.
+-----------------------------------
+-- Tables
+-----------------------------------
+-- Registered chocobo effects.
+xi.chocoboDig.personal =
+{
+    endurancePerExtraDig = 2,
+    maxExtraDigs         = 100,
+    rareRateBelow        = 100,
+    receptivityPerRank   = 0.05,
+    keepGreensPerRank    = 5,
+}
+
+-- TODO: Whether the weather preference changes finds, and by how much.
+-- TODO: STR adds conquest points to beastman supplies once that layer exists.
+-- TODO: [S], Adoulin, Uleguerand, Attohwa, Lufaise and Misareaux need a personal chocobo; enable them once their regular tables exist.
+
+-- This contains all digging zones with the ones without loot tables defined commented out.
 local diggingZoneList =
 set{
     xi.zone.CARPENTERS_LANDING,
@@ -121,6 +139,50 @@ local diggingDayTable =
     [xi.day.DARKSDAY    ] = { xi.item.BLACK_ROCK,       xi.item.CHUNK_OF_DARK_ORE      },
 }
 
+-----------------------------------
+-- Specs
+-----------------------------------
+---@class ChocoboDigChocobo : ChocoboRegisteredStats
+---@field abilities xi.chocoboRaising.ability[]
+
+-----------------------------------
+-- Helpers
+-----------------------------------
+local function hasAbility(chocobo, ability)
+    return chocobo ~= nil and (chocobo.abilities[1] == ability or chocobo.abilities[2] == ability)
+end
+
+local function statRank(chocobo, stat)
+    if not chocobo then
+        return 0
+    end
+
+    return xi.chocoboRaising.numberToRank(chocobo[stat])
+end
+
+-----------------------------------
+-- Private Functions
+-----------------------------------
+-- A rental has no registered stats or abilities.
+---@param player CBaseEntity
+---@return ChocoboDigChocobo?
+local function chocoboFor(player)
+    local mount = player:getStatusEffect(xi.effect.MOUNTED)
+    if
+        not mount or
+        mount:getPower() ~= xi.mount.CHOCOBO or
+        bit.band(mount:getSubPower(), xi.chocoboRaising.personalChocoboFlag) == 0 or
+        not player:getFieldChocobo()
+    then
+        return nil
+    end
+
+    local stats = xi.chocoboRaising.whistle.registeredStats(player)
+    stats.abilities = xi.chocoboRaising.whistle.registeredAbilities(player)
+
+    return stats
+end
+
 -- This function handles zone and cooldown checks before digging can be attempted, before any animation is sent.
 local function checkDiggingCooldowns(player)
     -- Check if current zone has digging enabled.
@@ -188,7 +250,7 @@ local function calculateSkillUp(player, text)
     end
 end
 
-local function handleDiggingLayer(player, zoneId, currentLayer)
+local function handleDiggingLayer(player, zoneId, currentLayer, chocobo)
     local digTable = xi.chocoboDig.digInfo[zoneId][currentLayer]
 
     -- Early return.
@@ -203,16 +265,17 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
     local rewardItem    = 0
 
     -- Determine moon multiplier.
+    -- Moon phase 0 and 100: multiplier = 0.5
+    -- Moon phase 50:        multiplier = 1.5
+    -- Moon phase 25 and 75: multiplier = 1
     local moon           = VanadielMoonPhase()
     local rollMultiplier = 1.5 - math.abs(moon - 50) / 50 -- The lower the multiplier, the better for the player.
-    -- Moon phase 0 and 100 -> multiplier = 0.5
-    -- Moon phase 50        -> multiplier = 1.5
-    -- Moon phase 25 and 75 -> multiplier = 1
 
     -- Add valid items to dynamic table
-    local playerRank = player:getSkillRank(xi.skill.DIG)
-    local randomRoll = 1000
-    local digRate    = 0
+    local playerRank     = player:getSkillRank(xi.skill.DIG)
+    local randomRoll     = 1000
+    local digRate        = 0
+    local rareMultiplier = 1 + statRank(chocobo, 'receptivity') * xi.chocoboDig.personal.receptivityPerRank
 
     for i = 1, #digTable do
         randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
@@ -225,6 +288,10 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
             else
                 digRate = digRate * 2
             end
+        end
+
+        if digTable[i][2] < xi.chocoboDig.personal.rareRateBelow then
+            digRate = math.floor(digRate * rareMultiplier)
         end
 
         if
@@ -259,12 +326,12 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
             table.insert(dTableItemIds, #dTableItemIds + 1, diggingDayTable[currentDay][1]) -- Insert item ID to table.
         end
 
-        -- Elemenal Ores.
+        -- Elemental Ores.
         randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
         if
             isElementalOreZone and                                              -- Zone can drop ore.
             playerRank >= xi.craftRank.CRAFTSMAN and                            -- Digging level must be 60+
-            xi.data.element.getWeatherElement(weather) ~= xi.element.NONE and -- Weather must be elemental.
+            xi.data.element.getWeatherElement(weather) ~= xi.element.NONE and   -- Weather must be elemental.
             moon >= 7 and moon <= 21 and                                        -- Moon must be between those values.
             randomRoll <= 100
         then
@@ -303,14 +370,26 @@ local function handleFatigue(player, text, todayDigCount)
     end
 end
 
+-----------------------------------
+-- Global Functions
+-----------------------------------
+---@param player CBaseEntity
+---@return integer
 xi.chocoboDig.fetchFatigue = function(player)
     return player:getCharVar('[DIG]DigCount')
 end
 
+---@param player CBaseEntity
+---@param newValue integer
+---@return nil
 xi.chocoboDig.updateFatigue = function(player, newValue)
     player:setVar('[DIG]DigCount', newValue, NextJstDay())
 end
 
+-- Returns whether the dig went ahead, then whether the chocobo left the Gysahl Greens.
+---@param player CBaseEntity
+---@return boolean
+---@return boolean?
 xi.chocoboDig.start = function(player)
     local zoneId        = player:getZoneID()
     local text          = zones[zoneId].text
@@ -343,10 +422,17 @@ xi.chocoboDig.start = function(player)
         return true
     end
 
+    local chocobo  = chocoboFor(player)
+    local digLimit = xi.settings.main.DIG_FATIGUE
+    if chocobo then
+        local personal = xi.chocoboDig.personal
+        digLimit = digLimit + math.min(math.floor(chocobo.endurance / personal.endurancePerExtraDig), personal.maxExtraDigs)
+    end
+
     -- Handle auto-fail from fatigue.
     if
         xi.settings.main.DIG_FATIGUE > 0 and
-        xi.settings.main.DIG_FATIGUE <= todayDigCount
+        digLimit <= todayDigCount
     then
         player:messageText(player, text.FIND_NOTHING)
         player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
@@ -379,41 +465,57 @@ xi.chocoboDig.start = function(player)
     player:setLocalVar('[DIG]LastZPosSign', currentZSign)
     player:setLocalVar('[DIG]LastDigTime', GetSystemTime())
 
+    -- Rank E keeps none; each rank above it adds keepGreensPerRank percent.
+    local keepGreens = math.randomInt(1, 100) <= (statRank(chocobo, 'discernment') - 1) * xi.chocoboDig.personal.keepGreensPerRank
+    if keepGreens and text.BEASTMEN_CACHE_OFFSET then
+        -- Your chocobo refuses to partake of the <item>.
+        player:messageSpecial(text.BEASTMEN_CACHE_OFFSET + 4, xi.item.BUNCH_OF_GYSAHL_GREENS)
+    end
+
     -- Handle treasure layer. Incompatible with the other 3 layers. "Early" return.
-    local trasureItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.TREASURE)
+    local trasureItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.TREASURE, chocobo)
 
     if trasureItemId > 0 then
         handleItemObtained(player, text, trasureItemId)
         handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
-        return true
+        return true, keepGreens
     end
 
     -- Handle regional currency here. Incompatible with the other 3 layers. "Early" return.
     -- TODO: Implement logic and message to zones.
 
     -- Handle regular layer. This also contains, elemental ores, weather crystals and day-element geodes.
-    local regularItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.REGULAR)
+    local regularItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.REGULAR, chocobo)
 
     handleItemObtained(player, text, regularItemId)
 
-    -- Handle Burrow layer. Requires Burrow skill.
     local burrowItemId = 0
 
-    if xi.settings.main.DIG_GRANT_BURROW > 0 then -- TODO: Implement Chocobo Raising and Burrow chocobo skill. Good luck
-        burrowItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.BURROW)
+    if hasAbility(chocobo, xi.chocoboRaising.ability.BURROW) then
+        burrowItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.BURROW, chocobo)
 
         handleItemObtained(player, text, burrowItemId)
     end
 
-    -- Handle Bore layer. Requires Bore skill.
     local boreItemId = 0
 
-    if xi.settings.main.DIG_GRANT_BORE > 0 then -- TODO: Implement Chocobo Raising and Bore chocobo skill. Good luck
-        boreItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.BORE)
+    if hasAbility(chocobo, xi.chocoboRaising.ability.BORE) then
+        boreItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.BORE, chocobo)
 
         handleItemObtained(player, text, boreItemId)
+    end
+
+    if
+        regularItemId == 0 and
+        burrowItemId == 0 and
+        boreItemId == 0 and
+        hasAbility(chocobo, xi.chocoboRaising.ability.TREASURE_FINDER)
+    then
+        regularItemId = handleDiggingLayer(player, zoneId, xi.chocoboDig.layer.REGULAR, chocobo)
+
+        handleItemObtained(player, text, regularItemId)
     end
 
     -- Handle no item OR record of eminence.
@@ -429,5 +531,5 @@ xi.chocoboDig.start = function(player)
     end
 
     -- Dig ended. Send digging animation to players.
-    return true
+    return true, keepGreens
 end

@@ -5647,11 +5647,34 @@ void OnPlayerVolunteer(CCharEntity* PChar, const std::string& text)
     callGlobal<void>("xi.player.onPlayerVolunteer", PChar, text);
 }
 
-bool OnChocoboDig(CCharEntity* PChar)
+auto OnChocoboDig(CCharEntity* PChar) -> ChocoboDigResult
 {
     TracyZoneScoped;
 
-    return callGlobal<bool>("xi.chocoboDig.start", PChar);
+    auto func = detail::findGlobalLuaFunction("xi.chocoboDig.start");
+    if (!func.valid())
+    {
+        ShowErrorFmt("luautils::OnChocoboDig: xi.chocoboDig.start: Function not found");
+        return {};
+    }
+
+    const auto result = func(PChar);
+    if (!result.valid())
+    {
+        const auto err = result.get<sol::error>();
+        ShowErrorFmt("luautils::OnChocoboDig: {}", err.what());
+        return {};
+    }
+
+    const auto returned = [&](const int index)
+    {
+        return result.get_type(index) == sol::type::boolean && result.get<bool>(index);
+    };
+
+    return ChocoboDigResult{
+        .dug        = returned(0),
+        .keepGreens = returned(1),
+    };
 }
 
 // Loads a Lua function with a fallback hierarchy
