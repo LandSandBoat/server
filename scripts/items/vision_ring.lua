@@ -3,27 +3,46 @@
 -- Item: vision_ring
 -- Item Effect: ACC+2 RACC+2
 -- Duration: 30 Minutes
+-- https://wiki.ffo.jp/html/2256.html
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, caster)
-    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VISION_RING) ~= nil then
-        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.VISION_RING)
-    end
-
     return 0
 end
 
-itemObject.onItemUse = function(target, user)
-    if target:hasEquipped(xi.item.VISION_RING) then
-        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 1800, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.VISION_RING })
+itemObject.onItemUse = function(target, user, item, action, equipSlotID)
+    if equipSlotID then
+        local effect = target:getStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
+
+        if
+            effect and
+            effect:getSourceType() == xi.effectSourceType.EQUIPPED_ITEM and
+            effect:getSourceTypeParam() == xi.item.VISION_RING
+        then
+            effect:resetStartTime()
+        else
+            target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 1800, origin = user, subType = equipSlotID, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.VISION_RING })
+        end
     end
 end
 
 itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.ACC, 2)
     effect:addMod(xi.mod.RACC, 2)
+end
+
+itemObject.onItemUnequip = function(target, item, equipSlotID)
+    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
+
+    if
+        effect and
+        effect:getSourceType() == xi.effectSourceType.EQUIPPED_ITEM and
+        effect:getSourceTypeParam() == xi.item.VISION_RING
+    then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
+    end
 end
 
 itemObject.onEffectLose = function(target, effect)
