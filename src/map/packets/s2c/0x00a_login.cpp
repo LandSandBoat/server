@@ -179,7 +179,18 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     packet.MusicNum[1] = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicNight() : PChar->loc.zone->GetBackgroundMusicNight();
     packet.MusicNum[2] = PChar->PInstance ? PChar->PInstance->GetSoloBattleMusic() : PChar->loc.zone->GetSoloBattleMusic();
     packet.MusicNum[3] = PChar->PInstance ? PChar->PInstance->GetPartyBattleMusic() : PChar->loc.zone->GetPartyBattleMusic();
-    packet.MusicNum[4] = PChar->animation == xi::Animation::Mount ? 0x54 : 0xD4;
+    if (PChar->animation == xi::Animation::Chocobo && PChar->getCharVar("[CHOCOBO]MusicEnd") != -1) // Music has not played to completion yet.
+    {
+        packet.MusicNum[4] = 0xD4;
+    }
+    else if (PChar->animation == xi::Animation::Mount)
+    {
+        packet.MusicNum[4] = 0x54;
+    }
+    else
+    {
+        packet.MusicNum[4] = 0;
+    }
 
     const auto csid = currentEvent->eventId;
     if (csid != -1)
