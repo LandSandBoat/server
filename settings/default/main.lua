@@ -300,9 +300,9 @@ xi.settings.main =
     ENABLE_VIGIL_DROPS   = true,  -- Enable Vigil Weapon drops from NMs.
     ACTIVATE_LAMP_TIME   = 6000,  -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
 
-    -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
+    -- CHOCOBO RAISING
     -- GMs open the developer debug menu on the chocobo next to each VCS trainer.
-    ENABLE_CHOCOBO_RAISING = false, -- true/false. Enable Chocobo Raising features.
+    ENABLE_CHOCOBO_RAISING = true,  -- true/false. Enable Chocobo Raising features.
     DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
 
     -- SYNERGY (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
