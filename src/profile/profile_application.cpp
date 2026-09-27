@@ -48,5 +48,5 @@ ProfileApplication::~ProfileApplication() = default;
 auto ProfileApplication::createEngine() -> std::unique_ptr<Engine>
 {
     certificateHelpers::generateSelfSignedCert("profile", true);
-    return std::make_unique<ProfileEngine>();
+    return std::make_unique<ProfileEngine>(scheduler_);
 }

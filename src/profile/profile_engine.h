@@ -21,17 +21,39 @@
 
 #pragma once
 
+#include "data/accounts.h"
+#include "irc/presence_manager.h"
+#include "stream.h"
+
 #include "common/engine.h"
+#include "common/scheduler.h"
 
 #include <asio/ssl/context.hpp>
+
+#include <functional>
+#include <map>
+#include <string>
+#include <utility>
 
 // the profile server (friend lists, status, files) and the IRC server (presence, message notices)
 class ProfileEngine final : public Engine
 {
 public:
-    ProfileEngine();
+    explicit ProfileEngine(Scheduler& scheduler);
     ~ProfileEngine() override;
 
 private:
-    asio::ssl::context tls_;
+    using Session = std::function<Task<void>(profile::Stream, std::string, profile::accounts::Credential)>;
+    using Peer    = std::pair<uint16, std::string>; // port, address
+
+    void listen(uint16 port, Session session);
+    auto accept(asio::ip::tcp::acceptor acceptor, Session session) -> Task<void>;
+    auto serve(asio::ip::tcp::socket socket, Peer peer, Session session) -> Task<void>;
+    auto authenticate(profile::Stream& stream) -> Task<Maybe<profile::accounts::Credential>>;
+
+    Scheduler&               scheduler_;
+    asio::ssl::context       tls_;
+    profile::PresenceManager presence_;
+    std::map<Peer, uint16>   connections_;
+    Maybe<Scheduler::Token>  refreshToken_;
 };
