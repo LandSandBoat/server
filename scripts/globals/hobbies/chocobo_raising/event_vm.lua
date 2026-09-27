@@ -1,109 +1,261 @@
 -----------------------------------
 -- Chocobo Raising - Update Event VM
+-- Options are a command in the low byte and an argument above it.
 -----------------------------------
 require('scripts/globals/hobbies/chocobo_raising/constants')
+require('scripts/globals/hobbies/chocobo_raising/walks')
+require('scripts/globals/hobbies/chocobo_raising/whistle')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 
+-----------------------------------
+-- Constants
+-----------------------------------
 local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
-local vmOpCodes =
+local skipReportArg = 1
+
+local failedCareAction = 0x80000000
+
+local maxCarePlanSlot   = 3
+local maxCarePlanLength = 7
+
+-- The hiding walk is picked once per quest; a cured handkerchief comes back dirty, a missed one plain.
+local whistleSearchVar = '[ChocoboRaising]WhistleSearchWalk'
+
+-----------------------------------
+-- Tables
+-----------------------------------
+---@enum chocoboRaisingCommand
+local command =
 {
-    RETIRE_YOUR_CHOCOBO        = 40,
+    UNKNOWN_32                 = 32,
+    AFTER_RETIREMENT           = 40,
     PRESENT_CHOCOBO_MOOD       = 46,
+    TELL_STORY                 = 50,
+    WHISTLE_SEARCH             = 88,
+    RECEIVE_STORY_KEY_ITEM     = 95,
+    RETIRE_YOUR_CHOCOBO        = 96,
     CHECK_REPORT_STATUS        = 208,
-    INTRO_MENU_PT_2            = 214,
-    INTRO_MENU_PT_3            = 215,
+    PRE_MENU                   = 214,
+    MAIN_MENU                  = 215,
     FORCED_NAMING              = 216,
+    WALK_ENCOUNTER             = 217,
     BUY_CHOCOBO_WHISTLE        = 221,
     RECEIVE_CHOCOBO_WHISTLE    = 222,
     REGISTER_CHOCOBO_WHISTLE   = 223,
+    DEBUG_GO_FORWARD           = 226,
     DEBUG_ABILITIES_PRINT      = 229,
     DEBUG_USER_WORK_PRINT      = 232,
     GIVE_UP_CHOCOBO            = 240,
     FEED_CHOCOBO               = 241,
+    CARE_ACTION                = 242,
     CARE_FOR_CHOCOBO_MENU      = 243,
     PRESENT_CHOCOBO_APPEARANCE = 244,
     EVENT_PLAYOUT              = 246,
-    INTRO_MENU_PT_1            = 248,
+    REPORT                     = 248,
     SET_CARE_SCHEDULE_MENU     = 250,
     ASK_ABOUT_CONDITION_MENU   = 251,
     UNKNOWN_252                = 252,
-    SET_BASIC_CARE_PLAN_1      = 254,
-    BRIEF_REPORT               = 256,
-    WHISTLE_GAME_RESULT        = 344,
-    DEBUG_GO_FORWARD_1_UNIT    = 482,
-    SKIP_REPORT                = 504,
-    SET_BASIC_CARE_PLAN_2      = 510,
-    UNKNOWN_600                = 600,
-    SET_BASIC_CARE_PLAN_3      = 766,
-    SET_BASIC_CARE_PLAN_4      = 1022,
-    UNKNOWN_1056               = 1056,
-    UNKNOWN_1241               = 1241,
-    GO_ON_A_WALK_SHORT         = 10994,
-    GO_ON_A_WALK_REGULAR       = 11250,
-    GO_ON_A_WALK_LONG          = 11506,
-    WATCH_OVER_CHOCOBO_CONFIRM = 12530,
-    TELL_A_STORY               = 13042,
-    SCOLD_CHOCOBO              = 13298,
-    COMPETE_WITH_OTHERS        = 13554,
-    UNKNOWN_24672              = 24672,
+    SET_CARE_PLAN              = 254,
+    NAME_CHOCOBO               = 255,
 }
 
-local vmOpCodeNames =
+local commandNames = {}
+for name, value in pairs(command) do
+    commandNames[value] = name
+end
+
+-- Cutscenes that still play when the report is skipped.
+local mandatoryCutscenes = set
 {
-    [vmOpCodes.RETIRE_YOUR_CHOCOBO]        = 'Retire your chocobo',
-    [vmOpCodes.PRESENT_CHOCOBO_MOOD]       = 'Present chocobo mood',
-    [vmOpCodes.CHECK_REPORT_STATUS]        = 'Check report status',
-    [vmOpCodes.INTRO_MENU_PT_2]            = 'Intro menu pt 2',
-    [vmOpCodes.INTRO_MENU_PT_3]            = 'Intro menu pt 3',
-    [vmOpCodes.FORCED_NAMING]              = 'Forced naming',
-    [vmOpCodes.BUY_CHOCOBO_WHISTLE]        = 'Buy chocobo whistle',
-    [vmOpCodes.RECEIVE_CHOCOBO_WHISTLE]    = 'Receive chocobo whistle',
-    [vmOpCodes.REGISTER_CHOCOBO_WHISTLE]   = 'Register chocobo whistle',
-    [vmOpCodes.DEBUG_ABILITIES_PRINT]      = 'Debug abilities print',
-    [vmOpCodes.DEBUG_USER_WORK_PRINT]      = 'Debug user work print',
-    [vmOpCodes.GIVE_UP_CHOCOBO]            = 'Give up your chocobo',
-    [vmOpCodes.FEED_CHOCOBO]               = 'Feed chocobo',
-    [vmOpCodes.CARE_FOR_CHOCOBO_MENU]      = 'Care for your chocobo (menu)',
-    [vmOpCodes.PRESENT_CHOCOBO_APPEARANCE] = 'Present chocobo appearance',
-    [vmOpCodes.EVENT_PLAYOUT]              = 'Event playout',
-    [vmOpCodes.INTRO_MENU_PT_1]            = 'Intro menu pt 1',
-    [vmOpCodes.SET_CARE_SCHEDULE_MENU]     = 'Set care schedule (menu)',
-    [vmOpCodes.ASK_ABOUT_CONDITION_MENU]   = 'Ask about chocobos condition (menu)',
-    [vmOpCodes.UNKNOWN_252]                = 'Unknown 252',
-    [vmOpCodes.SET_BASIC_CARE_PLAN_1]      = 'Set basic care plan 1',
-    [vmOpCodes.BRIEF_REPORT]               = 'Brief report',
-    [vmOpCodes.WHISTLE_GAME_RESULT]        = 'Chocobo Whistle game result',
-    [vmOpCodes.DEBUG_GO_FORWARD_1_UNIT]    = 'Debug go forward 1 unit',
-    [vmOpCodes.SKIP_REPORT]                = 'Skip the report',
-    [vmOpCodes.SET_BASIC_CARE_PLAN_2]      = 'Set basic care plan 2',
-    [vmOpCodes.UNKNOWN_600]                = 'Unknown 600',
-    [vmOpCodes.SET_BASIC_CARE_PLAN_3]      = 'Set basic care plan 3',
-    [vmOpCodes.SET_BASIC_CARE_PLAN_4]      = 'Set basic care plan 4',
-    [vmOpCodes.UNKNOWN_1056]               = 'Unknown 1056',
-    [vmOpCodes.UNKNOWN_1241]               = 'Unknown 1241',
-    [vmOpCodes.GO_ON_A_WALK_SHORT]         = 'Go on a walk (Short) - Leisurely / Brisk',
-    [vmOpCodes.GO_ON_A_WALK_REGULAR]       = 'Go on a walk (Regular) - Leisurely / Brisk',
-    [vmOpCodes.GO_ON_A_WALK_LONG]          = 'Go on a walk (Long) - Leisurely / Brisk',
-    [vmOpCodes.WATCH_OVER_CHOCOBO_CONFIRM] = 'Watch over your your chocobo (confirm)',
-    [vmOpCodes.TELL_A_STORY]               = 'Tell a story',
-    [vmOpCodes.SCOLD_CHOCOBO]              = 'Scold the chocobo',
-    [vmOpCodes.COMPETE_WITH_OTHERS]        = 'Compete with others',
-    [vmOpCodes.UNKNOWN_24672]              = 'Something around retirement?',
+    xi.chocoboRaising.cutscenes.ADULT_2_TO_ADULT_3,
+    xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4,
 }
 
-local function handleNamingUpdate(player, chocoState, option)
-    debug('handleNamingUpdate')
+local carePlanStage =
+{
+    [xi.chocoboRaising.carePlans.BASIC_CARE]               = xi.chocoboRaising.stage.EGG,
+    [xi.chocoboRaising.carePlans.RESTING]                  = xi.chocoboRaising.stage.CHICK,
+    [xi.chocoboRaising.carePlans.TAKING_A_WALK]            = xi.chocoboRaising.stage.CHICK,
+    [xi.chocoboRaising.carePlans.LISTENING_TO_MUSIC]       = xi.chocoboRaising.stage.CHICK,
+    [xi.chocoboRaising.carePlans.EXERCISING_ALONE]         = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.EXCERCISING_IN_A_GROUP]   = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.PLAYING_WITH_CHILDREN]    = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.PLAYING_WITH_CHOCOBOS]    = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.CARRYING_PACKAGES]        = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.EXHIBITING_TO_THE_PUBLIC] = xi.chocoboRaising.stage.ADOLESCENT,
+    [xi.chocoboRaising.carePlans.DELIVERING_MESSAGES]      = xi.chocoboRaising.stage.ADULT_1,
+    [xi.chocoboRaising.carePlans.DIGGING_FOR_TREASURE]     = xi.chocoboRaising.stage.ADULT_1,
+    [xi.chocoboRaising.carePlans.ACTING_IN_A_PLAY]         = xi.chocoboRaising.stage.ADULT_1,
+}
 
-    local offset1     = bit.band(0x3FF, bit.rshift(option, 8))
-    local offset2     = bit.band(0x3FF, bit.rshift(option, 18))
+local walkDistance =
+{
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_SHORT]   = 1,
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_REGULAR] = 2,
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_LONG]    = 3,
+}
+
+local walkLocations =
+{
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_SHORT]   = 'shortWalkLocation',
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_REGULAR] = 'mediumWalkLocation',
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_LONG]    = 'longWalkLocation',
+}
+
+local careActionMenu =
+{
+    [xi.chocoboRaising.cutscenes.HAPPY_TO_SEE_YOU]         = { bit = 0, stage = xi.chocoboRaising.stage.EGG },
+    [xi.chocoboRaising.cutscenes.INTERESTED_IN_YOUR_STORY] = { bit = 1, stage = xi.chocoboRaising.stage.ADOLESCENT },
+    [xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME]      = { bit = 2, stage = xi.chocoboRaising.stage.CHICK },
+    [xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS]      = { bit = 3, stage = xi.chocoboRaising.stage.ADOLESCENT },
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_SHORT]       = { bit = 4, stage = xi.chocoboRaising.stage.CHICK },
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_REGULAR]     = { bit = 5, stage = xi.chocoboRaising.stage.ADOLESCENT },
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_LONG]        = { bit = 6, stage = xi.chocoboRaising.stage.ADULT_1 },
+}
+
+-- Trainer stories heard on a walk, by RECEIVE_STORY_KEY_ITEM's argument.
+local walkStoryKeyItems =
+{
+    [1] = xi.keyItem.STORY_OF_AN_IMPATIENT_CHOCOBO,
+    [2] = xi.keyItem.STORY_OF_A_CURIOUS_CHOCOBO,
+    [3] = xi.keyItem.STORY_OF_A_WORRISOME_CHOCOBO,
+    [4] = xi.keyItem.STORY_OF_A_YOUTHFUL_CHOCOBO,
+    [5] = xi.keyItem.STORY_OF_A_HAPPY_CHOCOBO,
+}
+
+-- A sleeping chocobo can only be watched over or scolded awake.
+local sleepingCareActions = set
+{
+    xi.chocoboRaising.cutscenes.HAPPY_TO_SEE_YOU,
+    xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME,
+}
+
+-----------------------------------
+-- Helpers
+-----------------------------------
+-- Energy before in bits 0-7 and after in bits 8-15, or the failure flag with the action.
+local function spendEnergy(chocoState, careAction, weather)
+    local costs = xi.chocoboRaising.careActionEnergy[careAction]
+    if chocoState.energy < costs[2] then
+        return bit.bor(failedCareAction, careAction), false
+    end
+
+    local cost = costs[2]
+    if
+        weather == xi.weather.NONE or
+        weather == xi.weather.SUNSHINE
+    then
+        cost = costs[1]
+    end
+
+    local before      = chocoState.energy
+    chocoState.energy = before - cost
+
+    return before + bit.lshift(chocoState.energy, 8), true
+end
+
+local function sendNameStrings(player, chocoState)
+    local fullName, firstName, lastName = xi.chocoboRaising.nameStrings(chocoState)
+
+    player:updateEventString(fullName, firstName, lastName, lastName, 0, 0, 0, 0, 0, 0, 0, 0)
+end
+
+local function carePlanOffered(chocoState, planType)
+    local stage = carePlanStage[planType]
+
+    return stage ~= nil and chocoState.stage >= stage
+end
+
+local function unpackCarePlanArg(arg)
+    return
+        bit.band(0xFF, arg),
+        bit.band(0x7, bit.rshift(arg, 8)),
+        bit.band(0x1F, bit.rshift(arg, 11))
+end
+
+local function containsRetirement(cutscenes)
+    for _, cutscene in ipairs(cutscenes) do
+        if cutscene == xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4 then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Any GM level counts, whether or not GM visibility is on.
+local function isGM(player)
+    return player:getGMLevel() >= 1
+end
+
+-- The client redraws from 244 after every report scene, so it shows the stage the report has reached.
+local function shownStage(chocoState)
+    local report = chocoState.report
+    if
+        not report or
+        (#report.events == 0 and #chocoState.csList == 0)
+    then
+        return chocoState.stage
+    end
+
+    if chocoState.reportStage then
+        return chocoState.reportStage
+    end
+
+    return xi.chocoboRaising.ageToStage(report.events[1][1])
+end
+
+local function careActionOffered(chocoState, careAction)
+    local entry = careActionMenu[careAction]
+    if
+        not entry or
+        chocoState.stage < entry.stage or
+        xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY)
+    then
+        return false
+    end
+
+    if
+        xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.SLEEPING) and
+        not sleepingCareActions[careAction]
+    then
+        return false
+    end
+
+    if careAction == xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS then
+        return xi.chocoboRaising.walks.canCompete(chocoState)
+    end
+
+    return true
+end
+
+-- A paste has other values for a chick.
+local function foodValue(itemData, chocoState, key)
+    if
+        itemData.chick and
+        chocoState.stage == xi.chocoboRaising.stage.CHICK and
+        itemData.chick[key]
+    then
+        return itemData.chick[key]
+    end
+
+    return itemData[key]
+end
+
+-----------------------------------
+-- Private Functions
+-----------------------------------
+local function handleNamingUpdate(player, chocoState, arg)
+    local offset1     = bit.band(0x3FF, arg)
+    local offset2     = bit.band(0x3FF, bit.rshift(arg, 10))
     local fname       = xi.chocoboNames[offset1]
     local lname       = xi.chocoboNames[offset2]
     local fullnamekey = string.format('%s %s', fname, lname)
 
-    local nameTooLong = string.len(fullnamekey) > (15 + 1)
+    local nameTooLong = string.len(fullnamekey) > 15 + 1
 
     if not fname or not lname then
         print('ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!')
@@ -116,26 +268,17 @@ local function handleNamingUpdate(player, chocoState, option)
         chocoState.last_name  = lname
 
         debug(string.format('%s updating chocobo name: %s', player:getName(), fullnamekey))
+    end
 
-        xi.chocoboRaising.chocoState[player:getID()] = chocoState
-
-        if chocoState.first_name == 'Chocobo' and chocoState.last_name == 'Chocobo' then
-            player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
-        else
-            player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-        end
+    if xi.chocoboRaising.isNamed(chocoState) then
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    else
+        player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
     end
 end
 
-local function handleCarePlanUpdate(player, chocoState, option)
-    debug('handleCarePlanUpdate')
-
-    local carePlanSlot   = bit.band(0xF, bit.rshift(option, 8))
-    local carePlanLength = bit.band(0x7, bit.rshift(option, 16))
-    local carePlanType   = bit.band(0xF, bit.rshift(option, 19))
-
-    debug(string.format('carePlanSlot: %i, carePlanLength: %i, carePlanType: %i',
-        carePlanSlot, carePlanLength, carePlanType))
+local function handleCarePlanUpdate(player, chocoState, arg)
+    local carePlanSlot, carePlanLength, carePlanType = unpackCarePlanArg(arg)
 
     if chocoState.care_plan == 0 then
         local defaultCarePlan = bit.lshift(7, 4) + 0
@@ -147,600 +290,707 @@ local function handleCarePlanUpdate(player, chocoState, option)
             bit.lshift(defaultCarePlan,  0)
     end
 
-    local carePlan = bit.lshift(carePlanLength, 4) + carePlanType
-    local targetSlotOffset = 24 - (carePlanSlot * 8)
+    local carePlan         = bit.lshift(carePlanLength, 4) + carePlanType
+    local targetSlotOffset = 24 - carePlanSlot * 8
     local mask             = bit.bnot(bit.lshift(0xFF, targetSlotOffset))
     local zerodCarePlan    = bit.band(chocoState.care_plan, mask)
 
-    local finalCarePlan  = bit.bor(zerodCarePlan, bit.lshift(carePlan, targetSlotOffset))
-    chocoState.care_plan = finalCarePlan
+    chocoState.care_plan = bit.bor(zerodCarePlan, bit.lshift(carePlan, targetSlotOffset))
 
     debug(string.format('%s updating chocobo care plan: slot: %i type: %i length: %i',
         player:getName(), carePlanSlot + 1, carePlanType, carePlanLength))
 
-    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
 end
 
--- Events 1842, and others, derived from the option mask
-local function handleStoryUpdate(player, chocoState, option)
-    debug('handleStoryUpdate')
+-- Reply p0: 0 interested, 1 learned, 2 inspired.
+local function handleStoryUpdate(player, chocoState, arg)
+    debug(string.format('Story: %i', arg))
 
-    -- TODO: We could shift this index to be nicer, but it doesn't matter?
-    local story = bit.rshift(option, 8)
+    chocoState.storyPending = nil
 
-    -- TODO: Extract into constants?
-    local abilities =
-    {
-        GALLOP          = 0,
-        CANTER          = 1,
-        BURROW          = 2,
-        BORE            = 3,
-        AUTO_REGEN      = 4,
-        TREASURE_FINDER = 5,
-    }
+    local result, effects = xi.chocoboRaising.walks.tellStory(chocoState, arg)
 
-    -- TODO: Extract into constants?
-    local unlocks =
-    {
-        [xi.keyItem.STORY_OF_AN_IMPATIENT_CHOCOBO] = abilities.GALLOP,
-        [xi.keyItem.STORY_OF_A_CURIOUS_CHOCOBO]    = abilities.CANTER,
-        [xi.keyItem.STORY_OF_A_WORRISOME_CHOCOBO]  = abilities.BURROW,
-        [xi.keyItem.STORY_OF_A_YOUTHFUL_CHOCOBO]   = abilities.BORE,
-        [xi.keyItem.STORY_OF_A_HAPPY_CHOCOBO]      = abilities.GALLOP,
-        [xi.keyItem.STORY_OF_A_DILIGENT_CHOCOBO]   = abilities.TREASURE_FINDER,
-    }
-
-    utils.unused(unlocks)
-
-    local stories =
-    {
-        [4] = 'An impatient chocobo (Gallop)',
-        [5] = 'A curious chocobo (Canter)',
-        [6] = 'A worrisome chocobo (Burrow)',
-        [7] = 'A youthful chocobo (Bore)',
-        [8] = 'A happy chocobo (Auto-Regen)',
-        [9] = 'A diligent chocobo (Treasure Finder)',
-    }
-
-    debug(string.format('Story: %s', stories[story]))
-
-    -- TODO: Remove key items?
-    if math.randomInt(1, 100) <= 25 then
-        debug('-> Chocobo learned ability')
-        player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1) -- TODO: What do the caps say?
-    else
-        debug('-> Chocobo did not learn ability')
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end
+    -- The key item goes at once, so the gains are saved with it.
+    xi.chocoboRaising.updateChocoState(player, chocoState)
+    xi.chocoboRaising.applyEffects(player, effects)
+    player:updateEvent(result, 0, 0, 0, 0, 0, 0, 0)
 end
 
-local walkConfig =
-{
-    [vmOpCodes.GO_ON_A_WALK_SHORT]   = { energyIdx = 1, locationMap = 'shortWalkLocation' },
-    [vmOpCodes.GO_ON_A_WALK_REGULAR] = { energyIdx = 2, locationMap = 'mediumWalkLocation' },
-    [vmOpCodes.GO_ON_A_WALK_LONG]    = { energyIdx = 3, locationMap = 'longWalkLocation' },
-}
+-- Reply: cutscene, energy, walk event, event data, stage, trainer met, meeting count, weather.
+local function handleGoOnAWalk(player, chocoState, careAction)
+    local location   = xi.chocoboRaising.raisingLocation[player:getZoneID()]
+    local walkZoneId = xi.chocoboRaising[walkLocations[careAction]][location]
+    local weather    = xi.chocoboRaising.getWeatherInZone(walkZoneId)
+    local cutscene   = xi.chocoboRaising.getCutsceneWithOffset(player, careAction)
 
-local function handleGoOnAWalk(player, chocoState, option)
-    local zoneId = player:getZoneID()
-    local config = walkConfig[option]
+    sendNameStrings(player, chocoState)
 
-    player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
-        0, 0, 0, 0, 0, 0, 0, 0)
-
-    local baseCS       = xi.chocoboRaising.csidTable[zoneId][6]
-    local energyAmount = xi.chocoboRaising.walkEnergyAmount[config.energyIdx] + math.randomInt(0, xi.chocoboRaising.walkEnergyRandomness)
-    local walkZoneId   = xi.chocoboRaising[config.locationMap][xi.chocoboRaising.raisingLocation[zoneId]]
-    local csWeather    = xi.chocoboRaising.getWeatherInZone(walkZoneId)
-
-    -- 1. Energy Check
-    if chocoState.energy < energyAmount then
-        player:updateEvent(baseCS, -1, 0, 0, chocoState.stage, 0, 0, csWeather)
+    local energy, walked = spendEnergy(chocoState, careAction, weather)
+    if not walked then
+        player:updateEvent(cutscene, energy, 0, 0, chocoState.stage, 0, 0, weather)
         return
     end
 
-    chocoState.energy = chocoState.energy - energyAmount
-
-    -- 2. Quest Events (e.g. Chocobo Whistle)
-    local isWhistleQuestProg = player:getCharVar('HQuest[ChocoboWhistle]Prog') == 2
+    local isWhistleQuestProg = xi.chocoboRaising.whistleProgress(player) == xi.chocoboRaising.whistle.prog.SEARCH
     if
         isWhistleQuestProg and
         chocoState.stage >= xi.chocoboRaising.stage.ADULT_1
     then
-        player:updateEvent(baseCS, 14929, 1, 0, 4, 0, 2, csWeather)
+        chocoState.whistleSearchWalk = walkDistance[careAction]
+        xi.chocoboRaising.updateChocoState(player, chocoState)
+        -- A nonzero p6 is a meeting count, which skips the search.
+        player:updateEvent(cutscene, energy, 1, 0, chocoState.stage, 0, 0, weather)
         return
     end
 
-    if math.randomInt(1, 100) <= xi.chocoboRaising.walkEventChance then
-        -- Event: Find an item
-        if chocoState.held_item == 0 then
-            local itemId         = utils.randomEntry(xi.chocoboRaising.walkItems[walkZoneId])
-            chocoState.held_item = itemId
-            player:updateEvent(baseCS, itemId, 7, 0, chocoState.stage, 0, 0, csWeather)
+    local ctx =
+    {
+        location        = location,
+        walkZone        = walkZoneId,
+        lostChick       = player:getCharVar(xi.chocoboRaising.walks.lostChickVar),
+        canMeetDietmund = player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) and
+            not xi.chocoboRaising.hasUserFlag(player, xi.chocoboRaising.userFlag.MET_DIETMUND),
+    }
+
+    local result, effects = xi.chocoboRaising.walks.walk(chocoState, careAction, ctx)
+
+    -- Saved before the rewards, so leaving the event cannot earn them twice.
+    xi.chocoboRaising.updateChocoState(player, chocoState)
+    xi.chocoboRaising.applyEffects(player, effects)
+    player:updateEvent(cutscene, energy, result.event, result.data, chocoState.stage, result.trainer, result.meeting, weather)
+end
+
+-- Reply p2: 1 item given, 2 inventory full.
+local function handleWatchOver(player, chocoState, careAction)
+    local weather  = xi.chocoboRaising.getWeatherInZone(player:getZoneID())
+    local cutscene = xi.chocoboRaising.getCutsceneWithOffset(player, careAction)
+
+    local energy  = chocoState.energy + bit.lshift(chocoState.energy, 8)
+    local watched = true
+
+    if chocoState.stage ~= xi.chocoboRaising.stage.EGG then
+        energy, watched = spendEnergy(chocoState, careAction, weather)
+    end
+
+    if not watched then
+        player:updateEvent(cutscene, energy, 0, 0, chocoState.stage, 0, 0, weather)
+        return
+    end
+
+    local givingItem = 0
+    local givenItem  = 0
+
+    if chocoState.held_item > 0 then
+        givingItem = 1
+        givenItem  = chocoState.held_item
+
+        if player:getFreeSlotsCount() == 0 then
+            givingItem = 2
+        end
+    end
+
+    -- Saved before the item is given, so leaving the event or a failed save cannot give it twice.
+    if givingItem == 1 then
+        chocoState.held_item = 0
+
+        if not xi.chocoboRaising.updateChocoState(player, chocoState) then
+            chocoState.held_item = givenItem
+            givingItem           = 0
+            givenItem            = 0
+        end
+    end
+
+    player:updateEvent(cutscene, energy, givingItem, givenItem, chocoState.stage, 0, 0, weather)
+
+    if givingItem == 1 then
+        player:addItem({ id = givenItem, silent = true })
+    end
+end
+
+-- Reply p2: a set bit hides the story.
+local function handleTellAStory(player, chocoState, careAction)
+    local weather  = xi.chocoboRaising.getWeatherInZone(player:getZoneID())
+    local cutscene = xi.chocoboRaising.getCutsceneWithOffset(player, careAction)
+
+    local stories =
+    {
+        xi.keyItem.STORY_OF_AN_IMPATIENT_CHOCOBO,
+        xi.keyItem.STORY_OF_A_CURIOUS_CHOCOBO,
+        xi.keyItem.STORY_OF_A_WORRISOME_CHOCOBO,
+        xi.keyItem.STORY_OF_A_YOUTHFUL_CHOCOBO,
+        xi.keyItem.STORY_OF_A_HAPPY_CHOCOBO,
+        xi.keyItem.STORY_OF_A_DILIGENT_CHOCOBO,
+    }
+
+    -- Bit 0 is chitchat, always offered.
+    local storyMask = bit.bnot(1)
+    for index, keyItem in ipairs(stories) do
+        if player:hasKeyItem(keyItem) then
+            storyMask = bit.band(storyMask, bit.bnot(bit.lshift(1, index)))
+        end
+    end
+
+    sendNameStrings(player, chocoState)
+
+    local energy, told = spendEnergy(chocoState, careAction, weather)
+    if told then
+        chocoState.storyPending = true
+        xi.chocoboRaising.updateChocoState(player, chocoState)
+    end
+
+    player:updateEvent(cutscene, energy, storyMask, 0, chocoState.stage, 0, 0, weather)
+end
+
+local function handleScold(player, chocoState, careAction)
+    local weather  = xi.chocoboRaising.getWeatherInZone(player:getZoneID())
+    local cutscene = xi.chocoboRaising.getCutsceneWithOffset(player, careAction)
+
+    local energy, scolded = spendEnergy(chocoState, careAction, weather)
+    local woke            = 0
+
+    if scolded then
+        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.SLEEPING) then
+            xi.chocoboRaising.setCondition(chocoState, xi.chocoboRaising.conditions.SLEEPING, false)
+            woke = 1
+        end
+
+        xi.chocoboRaising.onRaisingEventPlayout(player, careAction, chocoState)
+    end
+
+    sendNameStrings(player, chocoState)
+
+    -- p2 is 1 when the scold woke the chocobo.
+    player:updateEvent(cutscene, energy, woke, 0, chocoState.stage, 0, 0, weather)
+end
+
+-- Result: 0 win, 2 loss, 3 the win that earns the happy story.
+local function handleCompete(player, chocoState, careAction)
+    local weather  = xi.chocoboRaising.getWeatherInZone(player:getZoneID())
+    local cutscene = xi.chocoboRaising.getCutsceneWithOffset(player, careAction)
+
+    local energy, competed = spendEnergy(chocoState, careAction, weather)
+    local result           = 0
+
+    if competed then
+        local effects
+
+        result, effects = xi.chocoboRaising.walks.compete(chocoState)
+
+        -- Saved before the rewards, so leaving the event cannot earn them twice.
+        xi.chocoboRaising.updateChocoState(player, chocoState)
+        xi.chocoboRaising.applyEffects(player, effects)
+        xi.chocoboRaising.onRaisingEventPlayout(player, careAction, chocoState)
+    end
+
+    local rivalsName = xi.chocoboRaising.walks.friendName(xi.chocoboRaising.walkTrainer.RIVALS, player:getChocoboUserData().chocobosRaised)
+    local fullName   = xi.chocoboRaising.nameStrings(chocoState)
+
+    player:updateEventString(fullName, rivalsName, '', '', 0, 0, 0, 0, 0, 0, 0, 0)
+    player:updateEvent(cutscene, energy, result, 0, chocoState.stage, 0, 0, weather)
+end
+
+-- Header: first day in bits 0-9, day count in 10-19, last day in 20-29, bit 31 when more follow.
+local function handleReport(player, chocoState, arg)
+    chocoState.skipping = arg == skipReportArg
+
+    if #chocoState.report.events == 0 then
+        local nextDay = chocoState.last_update_age
+        local header  = nextDay + bit.lshift(nextDay - 1, 20)
+
+        player:updateEvent(command.REPORT, header, 0, 0, chocoState.stage, xi.chocoboRaising.isNamed(chocoState) and 1 or 0, 0, 0)
+        return
+    end
+
+    local record = table.remove(chocoState.report.events, 1)
+    local first  = record[1]
+    local last   = record[2]
+    local days   = last - first + 1
+
+    chocoState.reportStage = xi.chocoboRaising.ageToStage(first)
+
+    for _, cutscene in ipairs(record[3]) do
+        table.insert(chocoState.csList, { cutscene, days, #record[3] })
+    end
+
+    local header = first + bit.lshift(days, 10) + bit.lshift(last, 20)
+    if #chocoState.report.events > 0 then
+        header = header + 0x80000000
+    end
+
+    local retirement = 0
+    if containsRetirement(record[3]) then
+        retirement            = 1
+        chocoState.retiring   = true
+        chocoState.rewardCard = true
+    end
+
+    -- p3: gil in bits 0-15, good days in 16-23, poor days in 24-31. p6: the record's conditions.
+    local totals  = record[4]
+    local outcome = bit.band(totals.gil, 0xFFFF) + bit.lshift(totals.good, 16) + bit.lshift(totals.poor, 24)
+
+    -- Unnamed until the growth scene: then the client names the chocobo from the event strings.
+    local shownNamed = xi.chocoboRaising.isNamed(chocoState) and 1 or 0
+    if
+        chocoState.last_name == '' and
+        chocoState.reportStage < xi.chocoboRaising.stage.ADULT_3
+    then
+        shownNamed = 0
+    end
+
+    player:updateEvent(command.REPORT, header, #chocoState.csList, outcome, chocoState.reportStage, shownNamed, record[5], retirement)
+end
+
+local function handlePlayout(player, chocoState, arg)
+    if #chocoState.csList == 0 then
+        player:updateEvent(0xFFFFFFFF, 0, 0, 0, chocoState.reportStage or chocoState.stage, 0, 0, 0)
+        return
+    end
+
+    if chocoState.skipping then
+        while #chocoState.csList > 0 and not mandatoryCutscenes[chocoState.csList[1][1]] do
+            table.remove(chocoState.csList, 1)
+        end
+
+        if #chocoState.csList == 0 then
+            player:updateEvent(0xFFFFFFFF, 0, 0, 0, chocoState.reportStage or chocoState.stage, 0, 0, 0)
             return
         end
     end
 
-    -- 4. Default Walk
-    player:updateEvent(baseCS, 0, 0, 0, chocoState.stage, 0, 0, csWeather)
+    xi.chocoboRaising.handleCSUpdate(player, chocoState)
 end
 
-local vmHandlers =
-{
-    [vmOpCodes.CHECK_REPORT_STATUS] = function(player, chocoState, option)
-        local hasReport = 0
-        if #chocoState.report.events > 0 then
-            hasReport = 0xFFFFFFFF
-        end
+local function handleMainMenu(player, chocoState, arg)
+    local menuFlags = 0xFFFFFFFF
 
-        player:updateEvent(hasReport, 0, 0, 0, chocoState.stage, 0, 0, 0)
-    end,
+    local askAboutChocoboCondition = -bit.lshift(0x01, 0)
+    local setUpCareSchedule        = -bit.lshift(0x01, 2)
 
-    [vmOpCodes.UNKNOWN_252] = function(player, chocoState, option)
-        local hasReport = 0
-        if #chocoState.report.events > 0 then
-            hasReport = 0xFFFFFFFF
-        end
+    menuFlags = menuFlags +
+        askAboutChocoboCondition +
+        setUpCareSchedule
 
-        player:updateEvent(hasReport, 1, 1, 1, chocoState.stage, 1, 1, 1)
-    end,
+    -- A chocobo that ran away can be neither cared for nor let go.
+    local ranAway = xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY)
 
-    [vmOpCodes.INTRO_MENU_PT_1] = function(player, chocoState, option)
-        local report = 0x00000000
+    if not ranAway then
+        local careForYourChocobo = -bit.lshift(0x01, 1)
+        menuFlags                = menuFlags + careForYourChocobo
+    end
 
-        if #chocoState.report.events > 0 then
-            local currentEvent = chocoState.report.events[1]
-            table.remove(chocoState.report.events, 1)
+    if
+        chocoState.stage > xi.chocoboRaising.stage.EGG and
+        not xi.chocoboRaising.isNamed(chocoState)
+    then
+        local nameYourChocobo = -bit.lshift(0x01, 3)
+        menuFlags             = menuFlags + nameYourChocobo
+    end
 
-            local eventStartStart = currentEvent[1]
-            local eventStartEnd   = currentEvent[2]
-            local eventCSList     = currentEvent[3]
+    if chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 then
+        local requestDocumentation = -bit.lshift(0x01, 4)
+        menuFlags                  = menuFlags + requestDocumentation
+    end
 
-            chocoState.age   = eventStartStart
-            chocoState.stage = xi.chocoboRaising.ageToStage(chocoState.age)
+    if
+        chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 and
+        xi.chocoboRaising.hasUserFlag(player, xi.chocoboRaising.userFlag.WHISTLE_QUEST_DONE)
+    then
+        local registerToCallYourChocobo = -bit.lshift(0x01, 5)
+        menuFlags                       = menuFlags + registerToCallYourChocobo
+    end
 
-            for _, cs in ipairs(eventCSList) do
-                table.insert(chocoState.csList, { cs, eventStartEnd - eventStartStart + 1 })
-            end
+    if xi.chocoboRaising.whistle.canReceiveWhistle(player) then
+        local receiveChocoboWhistle = -bit.lshift(0x01, 6)
+        menuFlags                   = menuFlags + receiveChocoboWhistle
+    end
 
-            report = bit.lshift(eventStartStart, 0) + bit.lshift(eventStartEnd, 20)
+    if xi.chocoboRaising.whistle.canBuyWhistle(player) then
+        local purchaseChocoboWhistle = -bit.lshift(0x01, 7)
+        menuFlags                    = menuFlags + purchaseChocoboWhistle
+    end
 
-            if eventStartStart == eventStartEnd then
-                report = report + 0x00000400
-            else
-                report = report + 0x00001000
-            end
-        end
-
-        local playMultipleCutscenes = 0
-
-        if #chocoState.report.events > 0 then
-            report = report + 0x80000000
-            playMultipleCutscenes = 0x00010000
-        end
-
-        -- If we're ABOUT to play out the care plan followed by the retirement CS, set the exit flag
-        local exitFlag = 0
-        for _, entry in ipairs(chocoState.csList) do
-            local cs = entry[1]
-            if cs == xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4 then
-                exitFlag = 1
-                break
-            end
-        end
-
-        player:updateEvent(248, report, #chocoState.csList, playMultipleCutscenes, chocoState.stage, exitFlag, 0, exitFlag)
-    end,
-
-    [vmOpCodes.INTRO_MENU_PT_2] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.INTRO_MENU_PT_3] = function(player, chocoState, option)
-        local menuFlags = 0xFFFFFFFF
-
-        local askAboutChocoboCondition = -bit.lshift(0x01, 0)
-        local careForYourChocobo       = -bit.lshift(0x01, 1)
-        local setUpCareSchedule        = -bit.lshift(0x01, 2)
+    -- The same check as the guard, so a GM sees exactly what the guard allows.
+    if isGM(player) then
+        local goForward1UnitDebug = -bit.lshift(0x01, 26)
+        local abilitiesPrintDebug = -bit.lshift(0x01, 27)
+        local userWorkPrintDebug  = -bit.lshift(0x01, 28)
 
         menuFlags = menuFlags +
-            askAboutChocoboCondition +
-            careForYourChocobo +
-            setUpCareSchedule
+            goForward1UnitDebug +
+            abilitiesPrintDebug +
+            userWorkPrintDebug
+    end
 
-        if
-            chocoState.stage > xi.chocoboRaising.stage.EGG and
-            chocoState.first_name == 'Chocobo' and
-            chocoState.last_name == 'Chocobo'
-        then
-            local nameYourChocobo = -bit.lshift(0x01, 3)
-            menuFlags             = menuFlags + nameYourChocobo
-        end
-
-        if player:getCharVar('HQuest[ChocoboWhistle]Prog') >= 4 then
-            local requestDocumentation      = -bit.lshift(0x01, 4)
-            local registerToCallYourChocobo = -bit.lshift(0x01, 5)
-            local receiveYourChocoboWhistle = -bit.lshift(0x01, 6)
-            local purchaseAChocoboWhistle   = -bit.lshift(0x01, 7)
-
-            menuFlags = menuFlags +
-                requestDocumentation +
-                registerToCallYourChocobo +
-                receiveYourChocoboWhistle +
-                purchaseAChocoboWhistle
-        end
-
-        local gmModeToggled = player:getVisibleGMLevel() >= 3
-        if gmModeToggled then
-            local goForward1UnitDebug = -bit.lshift(0x01, 26)
-            local abilitiesPrintDebug = -bit.lshift(0x01, 27)
-            local userWorkPrintDebug = -bit.lshift(0x01, 28)
-
-            menuFlags = menuFlags +
-                goForward1UnitDebug +
-                abilitiesPrintDebug +
-                userWorkPrintDebug
-        end
-
+    if not ranAway then
         if chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 then
             local retireYourChocobo = -bit.lshift(0x01, 29)
-            menuFlags = menuFlags + retireYourChocobo
+            menuFlags               = menuFlags + retireYourChocobo
         else
             local giveUpChocoboRaising = -bit.lshift(0x01, 30)
-            menuFlags = menuFlags + giveUpChocoboRaising
+            menuFlags                  = menuFlags + giveUpChocoboRaising
+        end
+    end
+
+    local exit = -bit.lshift(0x01, 31)
+    menuFlags  = menuFlags + exit
+
+    player:updateEvent(menuFlags, 0, 0, 0, 0, 0, 0, 0)
+end
+
+-- Egg: p1 1. Adult: p1 large beak, p2 large talons, p3 full tail.
+local function handleAppearance(player, chocoState, arg)
+    local stage = shownStage(chocoState)
+
+    local color = xi.chocoboRaising.color.YELLOW
+    if stage >= xi.chocoboRaising.stage.ADOLESCENT then
+        color = chocoState.color
+    end
+
+    if stage == xi.chocoboRaising.stage.EGG then
+        player:updateEvent(color, 1, 0, 0, stage, 1, 0, 0)
+        return
+    end
+
+    if stage < xi.chocoboRaising.stage.ADULT_1 then
+        player:updateEvent(color, 0, 0, 0, stage, 1, 0, 0)
+        return
+    end
+
+    local appearance  = chocoState.appearance or 0
+    local largeBeak   = bit.band(appearance, xi.chocoboRaising.appearance.LARGE_BEAK) ~= 0 and 1 or 0
+    local largeTalons = bit.band(appearance, xi.chocoboRaising.appearance.LARGE_TALONS) ~= 0 and 1 or 0
+    local fullTail    = bit.band(appearance, xi.chocoboRaising.appearance.FULL_TAIL) ~= 0 and 1 or 0
+
+    player:updateEvent(color, largeBeak, largeTalons, fullTail, stage, 1, 0, 0)
+end
+
+local function handleCondition(player, chocoState, arg)
+    local affection = xi.chocoboRaising.affectionToAffectionRank(chocoState.affection)
+    local energy    = xi.chocoboRaising.energyToRank(chocoState.energy)
+    local hunger    = xi.chocoboRaising.numberToRank(chocoState.hunger)
+
+    local female = 0
+    if
+        chocoState.stage > xi.chocoboRaising.stage.EGG and
+        chocoState.sex == xi.chocoboRaising.gender.FEMALE
+    then
+        female = 1
+    end
+
+    local arg1 = xi.chocoboRaising.packStats1(chocoState)
+    local arg2 = affection + bit.lshift(energy, 8) + bit.lshift(hunger, 16)
+    local arg3 = bit.lshift(chocoState.personality, 0) +
+        bit.lshift(chocoState.weather_preference, 4) +
+        bit.lshift(chocoState.ability1, 8) +
+        bit.lshift(chocoState.ability2, 12) +
+        bit.lshift(chocoState.stage, 16) +
+        bit.lshift(female, 19)
+
+    -- The pending cures above bit 15 stay on the server.
+    local arg4 = bit.band(chocoState.conditions, 0xFFFF)
+
+    player:updateEvent(command.ASK_ABOUT_CONDITION_MENU, arg1, arg2, arg3, arg4, 0, 0, 0)
+end
+
+local function handleCareMenu(player, chocoState, arg)
+    local mask = 0x7FFFFFFF
+    for careAction, entry in pairs(careActionMenu) do
+        if careActionOffered(chocoState, careAction) then
+            mask = mask - bit.lshift(1, entry.bit)
+        end
+    end
+
+    player:updateEvent(mask, chocoState.energy, 0, 0, 0, 0, 0, 0)
+end
+
+local function eatFood(chocoState, itemData)
+    local hunger    = foodValue(itemData, chocoState, 'hunger') * xi.chocoboRaising.hungerPerArrow
+    local affection = foodValue(itemData, chocoState, 'affection') * xi.chocoboRaising.affectionPerArrow
+
+    chocoState.hunger    = utils.clamp(chocoState.hunger + hunger, 0, xi.chocoboRaising.maxHunger)
+    chocoState.affection = utils.clamp(chocoState.affection + affection, 0, 255)
+
+    if itemData.energy then
+        chocoState.energy = utils.clamp(chocoState.energy + itemData.energy, 0, 100)
+    end
+
+    if itemData.stats then
+        for index, field in ipairs(xi.chocoboRaising.statFields) do
+            xi.chocoboRaising.addToStat(chocoState, field, itemData.stats[index] * xi.chocoboRaising.statPerFoodArrow)
+        end
+    end
+
+    -- Cures wait for the next rollover.
+    for _, condition in ipairs(foodValue(itemData, chocoState, 'cures') or {}) do
+        xi.chocoboRaising.addPendingCure(chocoState, condition)
+    end
+
+    local randomStat = itemData.randomStat
+    if
+        randomStat and
+        xi.chocoboRaising.rolls(randomStat.chance)
+    then
+        local index  = randomStat.stats[math.randomInt(1, #randomStat.stats)]
+        local change = xi.chocoboRaising.statPerFoodArrow
+        if randomStat.eitherWay and math.randomInt(1, 2) == 1 then
+            change = -change
         end
 
-        local exit = -bit.lshift(0x01, 31)
-        menuFlags = menuFlags + exit
+        xi.chocoboRaising.addToStat(chocoState, xi.chocoboRaising.statFields[index], change)
+    end
 
-        player:updateEvent(menuFlags, 0, 0, 0, 0, 0, 0, 0)
+    if itemData.wakes then
+        xi.chocoboRaising.setCondition(chocoState, xi.chocoboRaising.conditions.SLEEPING, false)
+    end
+
+    -- Once the colour shows, a new gene only matters for breeding.
+    if itemData.rerollGene then
+        local gene = string.format('allele%d', math.randomInt(1, 3))
+
+        chocoState[gene] = math.randomInt(xi.chocoboRaising.color.YELLOW, xi.chocoboRaising.color.GREEN)
+
+        if chocoState.stage < xi.chocoboRaising.stage.ADOLESCENT then
+            chocoState.color = xi.chocoboRaising.allelesToColor({ chocoState.allele1, chocoState.allele2, chocoState.allele3 })
+        end
+    end
+
+    if itemData.forgetsAbility then
+        local learned = {}
+        for _, slot in ipairs({ 'ability1', 'ability2' }) do
+            if chocoState[slot] ~= 0 then
+                table.insert(learned, slot)
+            end
+        end
+
+        if #learned > 0 then
+            chocoState[utils.randomEntry(learned)] = 0
+        end
+    end
+end
+
+-- Reply: item (10 for several), glow or the refused item, -1 when overfed, 1 when the items differ, 1, hunger rank.
+local function handleFeed(player, chocoState, arg)
+    if not player:confirmTrade() then
+        chocoState.foodGiven = {}
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+        return
+    end
+
+    local ID     = zones[player:getZoneID()]
+    local glow   = xi.chocoboRaising.glow.NONE
+    local mixed  = 0
+    local forced = 0
+
+    for idx, itemId in ipairs(chocoState.foodGiven) do
+        local itemData = xi.chocoboRaising.validFoods[itemId]
+
+        -- An item eaten while full counts as forced, even if earlier ones were not.
+        if xi.chocoboRaising.numberToRank(chocoState.hunger) >= xi.chocoboRaising.hunger.COMPLETELY_FULL then
+            forced = 0xFFFFFFFF
+        end
+
+        player:messageSpecial(ID.text.CHOCOBO_FEEDING_ITEM, itemId, idx)
+        eatFood(chocoState, itemData)
+        glow = itemData.glow
+
+        if itemId ~= chocoState.foodGiven[1] then
+            mixed = 1
+        end
+    end
+
+    local shown = 10
+    if #chocoState.foodGiven == 1 then
+        shown = chocoState.foodGiven[1]
+    end
+
+    if forced ~= 0 then
+        glow = chocoState.foodGiven[#chocoState.foodGiven]
+        chocoState.conditions = bit.bor(chocoState.conditions, bit.lshift(1, xi.chocoboRaising.forcedFeedFlag))
+    end
+
+    player:updateEvent(shown, glow, forced, mixed, 1, xi.chocoboRaising.numberToRank(chocoState.hunger), 0, 0)
+
+    chocoState.foodGiven = {}
+    xi.chocoboRaising.updateChocoState(player, chocoState)
+end
+
+local function handleMood(player, chocoState, arg)
+    player:updateEvent(bit.band(chocoState.conditions, 0xFFFF), 0, 0, 0, 0, 0, 0, 0)
+end
+
+local function handleWhistleSearch(player, chocoState, arg)
+    chocoState.whistleSearchWalk = nil
+
+    local hidingWalk = player:getCharVar(whistleSearchVar)
+    if hidingWalk == 0 then
+        hidingWalk = math.randomInt(1, 3)
+        player:setCharVar(whistleSearchVar, hidingWalk)
+    end
+
+    if arg ~= hidingWalk then
+        player:updateEvent(0, 0, 0, 0, 0, 2, 0, 0)
+        return
+    end
+
+    local keyItem = xi.keyItem.HANDKERCHIEF
+    if xi.chocoboRaising.handkerchiefState(player) == xi.chocoboRaising.handkerchief.DONE then
+        keyItem = xi.keyItem.DIRTY_HANDKERCHIEF
+    end
+
+    player:updateEvent(keyItem, 0, 0, 0, 0, 1, 0, 0)
+    xi.chocoboRaising.setWhistleProgress(player, xi.chocoboRaising.whistle.prog.FOUND)
+    player:setCharVar(whistleSearchVar, 0)
+    player:addKeyItem(keyItem)
+end
+
+-- Argument: the retirement cutscene, location * 256 + 96.
+local function handleRetire(player, chocoState, arg)
+    player:updateEvent(0, arg, 0, 0, xi.chocoboRaising.stage.ADULT_4, 0, 0, 0)
+
+    chocoState.retiring   = true
+    chocoState.rewardCard = true
+end
+
+-- TODO: The reply without the gil.
+local function handleRegister(player, chocoState, arg)
+    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    xi.chocoboRaising.whistle.register(player, chocoState)
+end
+
+local careActions =
+{
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_SHORT]       = handleGoOnAWalk,
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_REGULAR]     = handleGoOnAWalk,
+    [xi.chocoboRaising.cutscenes.GO_ON_A_WALK_LONG]        = handleGoOnAWalk,
+    [xi.chocoboRaising.cutscenes.HAPPY_TO_SEE_YOU]         = handleWatchOver,
+    [xi.chocoboRaising.cutscenes.INTERESTED_IN_YOUR_STORY] = handleTellAStory,
+    [xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME]      = handleScold,
+    [xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS]      = handleCompete,
+}
+
+local handlers =
+{
+    [command.AFTER_RETIREMENT] = function(player, chocoState, arg)
+        player:updateEvent(chocoState.color, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.FORCED_NAMING] = function(player, chocoState, option)
+    [command.PRESENT_CHOCOBO_MOOD] = handleMood,
+    [command.TELL_STORY]           = handleStoryUpdate,
+    [command.WHISTLE_SEARCH]       = handleWhistleSearch,
+
+    [command.UNKNOWN_32] = function(player, chocoState, arg)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.FEED_CHOCOBO] = function(player, chocoState, option)
-        player:confirmTrade()
-
-        local ID = zones[player:getZoneID()]
-
-        for idx, itemId in ipairs(chocoState.foodGiven) do
-            local itemData     = xi.chocoboRaising.validFoods[itemId]
-            local hungerAmount = itemData[1]
-            local energyAmount = itemData[3]
-            local glowColor    = itemData[10]
-
-            player:messageSpecial(ID.text.CHOCOBO_FEEDING_ITEM, itemId, idx)
-
-            if xi.chocoboRaising.hasCondition(chocoState) then
-                for _, condition in ipairs(chocoState.conditions) do
-                    if xi.chocoboRaising.getCondition(chocoState, condition) then
-                        local foodCureTable = xi.chocoboRaising.conditionsHealedByItems[condition]
-
-                        if foodCureTable then
-                            if utils.contains(itemId, foodCureTable) then
-                                xi.chocoboRaising.setCondition(chocoState, condition, false)
-                            end
-                        end
-                    end
-                end
-            end
-
-            -- TODO:
-            -- 0: Nothing
-            -- 1: I hope we can make this animal into a fine chocobo.
-            --
-            -- Other values: Nothing
-            local reaction = 0
-
-            chocoState.hunger = utils.clamp(chocoState.hunger + hungerAmount, 0, 255)
-            chocoState.energy = utils.clamp(chocoState.energy + energyAmount, 0, 100)
-
-            if #chocoState.foodGiven > 1 then
-                glowColor = xi.chocoboRaising.glow.GREEN
-            end
-
-            player:updateEvent(10, glowColor, 0, 0, reaction, xi.chocoboRaising.numberToRank(chocoState.hunger), 0, 0)
-        end
-
-        chocoState.foodGiven = nil
-        xi.chocoboRaising.updateChocoState(player, chocoState)
-    end,
-
-    [vmOpCodes.PRESENT_CHOCOBO_APPEARANCE] = function(player, chocoState, option)
-        if chocoState.stage == xi.chocoboRaising.stage.EGG then
-            player:updateEvent(xi.chocobo.color.YELLOW, 0, 0, 0, chocoState.stage, 0, 0, 0)
-        elseif chocoState.stage < xi.chocoboRaising.stage.ADOLESCENT then
-            player:updateEvent(xi.chocobo.color.YELLOW, 0, 0, 0, chocoState.stage, chocoState.sex, 0, 0)
-        elseif chocoState.stage < xi.chocoboRaising.stage.ADULT_1 then
-            player:updateEvent(chocoState.color, 0, 0, 0, chocoState.stage, chocoState.sex, 0, 0)
-        else
-            local enlargedCrest    = chocoState.discernment >= 128 and 1 or 0
-            local enlargedFeet     = chocoState.strength >= 128 and 1 or 0
-            local moreTailFeathers = chocoState.endurance >= 128 and 1 or 0
-
-            player:updateEvent(chocoState.color, enlargedCrest, enlargedFeet, moreTailFeathers, chocoState.stage, chocoState.sex, 0, 0)
-        end
-    end,
-
-    [vmOpCodes.PRESENT_CHOCOBO_MOOD] = function(player, chocoState, option)
-        -- This seems to feed the 'Watch over your chocobo' menu, and the chocobo's stance
-
-        -- Caps: Chocobo doesn't look very happy
-        -- (136, 0, 0, 0, 0, 0, 0, 0)
-        -- 136: 1000 1000
-
-        -- (Standing, neutral) Happy to see you (Default)
-        -- (0, 0, 0, 0, 0, 0, 0, 0)
-
-        -- Notes:
-        -- Are these flags?
-        --
-        -- 1: (Laying down, head down - flap, blink, shiver) Chocobo doesn't look very happy.
-        -- 2: (Standing, head down) Chocobo doesn't look very happy.
-        -- 4: (Laying down, head down, shivering) Chocobo doesn't look very happy.
-        -- 8: (Standing, head up, stamping foot) Chocobo doesn't look very happy.
-        --
-        -- 16: Chocobo is in high spirits.
-        -- 32: (Sleeping) Chocobo is sleeping peacefully
-        -- 64: (Laying down, head down) Chocobo doesn't look very happy.
-        -- 128: Chocobo looks irritated.
-        --
-        -- It doesn't seem like you can combine these. Higher bits get precedence.
-        -- But the retail cap prefers the 8 (stompy) choice, is this LE/BE stuff?
-        -- In regular usage you'll only see one mood per day, so you can get some strange results
-        -- by changing the mood multiple times while in the same menu session.
-
-        -- TODO: What are the conditions for a chocobo to change its visible mood
-
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.UNKNOWN_600] = function(player, chocoState, option)
-        local ki    = xi.keyItem.DIRTY_HANDKERCHIEF
-        local getKi = 1
-
-        player:updateEvent(ki, 0, 0, 0, 0, getKi, 0, 0)
-        player:addKeyItem(ki)
-    end,
-
-    [vmOpCodes.ASK_ABOUT_CONDITION_MENU] = function(player, chocoState, option)
-        local arg0 = vmOpCodes.ASK_ABOUT_CONDITION_MENU
-        local arg1 = xi.chocoboRaising.packStats1(chocoState)
-        local affection = xi.chocoboRaising.affectionToAffectionRank(chocoState.affection)
-        local arg2 = bit.lshift(affection, 0) + bit.lshift(chocoState.hunger, 16)
-        local arg3 = bit.lshift(chocoState.personality, 0) +
-            bit.lshift(chocoState.weather_preference, 4) +
-            bit.lshift(chocoState.ability1, 8) +
-            bit.lshift(chocoState.ability2, 12) +
-            bit.lshift(chocoState.stage, 16)
-
-        local legWounded         = bit.lshift(0x01, 0)
-        local slightlyIll        = bit.lshift(0x01, 1)
-        local stomachAche        = bit.lshift(0x01, 2)
-        local depressed          = bit.lshift(0x01, 3)
-        local excellentCondition = bit.lshift(0x01, 4)
-        local sleepingSoundly    = bit.lshift(0x01, 5)
-        local veryIll            = bit.lshift(0x01, 6)
-        local boredRestless      = bit.lshift(0x01, 7)
-        local hopelesslySpoiled  = bit.lshift(0x01, 8)
-        local ranAway            = bit.lshift(0x01, 9)
-        local inLove             = bit.lshift(0x01, 10)
-        local makingAFuss        = bit.lshift(0x01, 11)
-        local fullOfEnergy       = bit.lshift(0x01, 12)
-        local brightAndFocussed  = bit.lshift(0x01, 13)
-
-        local arg4 = 0x00000000
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.INJURED) then
-            arg4 = arg4 + legWounded
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.SICK) then
-            arg4 = arg4 + slightlyIll
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.ILL) then
-            arg4 = arg4 + stomachAche
-        end
-
-        utils.unused(depressed)
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.HIGH_SPIRITS) then
-            arg4 = arg4 + excellentCondition
-        end
-
-        utils.unused(sleepingSoundly)
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.VERY_ILL) then
-            arg4 = arg4 + veryIll
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.BORED) then
-            arg4 = arg4 + boredRestless
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.SPOILED) then
-            arg4 = arg4 + hopelesslySpoiled
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY) then
-            arg4 = arg4 + ranAway
-        end
-
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.LOVESICK) then
-            arg4 = arg4 + inLove
-        end
-
-        utils.unused(makingAFuss)
-
+    -- The key item was given at walk time; this only shows the message.
+    [command.RECEIVE_STORY_KEY_ITEM] = function(player, chocoState, arg)
+        local keyItem = walkStoryKeyItems[arg]
         if
-            xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.FULL_OF_ENERGY_1) or
-            xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.FULL_OF_ENERGY_2)
+            keyItem and
+            player:hasKeyItem(keyItem)
         then
-            arg4 = arg4 + fullOfEnergy
+            player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, keyItem)
         end
 
-        if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.BRIGHT_AND_FOCUSED) then
-            arg4 = arg4 + brightAndFocussed
-        end
-
-        player:updateEvent(arg0, arg1, arg2, arg3, arg4, 0, 0, 0)
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.CARE_FOR_CHOCOBO_MENU] = function(player, chocoState, option)
-        local watchOverChocobo  = -bit.lshift(0x01, 0)
-        local tellAStory        = -bit.lshift(0x01, 1)
-        local scoldTheChocobo   = -bit.lshift(0x01, 2)
-        local competeWithOthers = -bit.lshift(0x01, 3)
-        local goOnAWalkShort    = -bit.lshift(0x01, 4)
-        local goOnAWalkRegular  = -bit.lshift(0x01, 5)
-        local goOnAWalkLong     = -bit.lshift(0x01, 6)
+    [command.RETIRE_YOUR_CHOCOBO] = handleRetire,
 
-        local mask = 0x7FFFFFFF + watchOverChocobo
-
-        if chocoState.stage >= xi.chocoboRaising.stage.CHICK then
-            mask = mask + scoldTheChocobo + goOnAWalkShort
+    [command.CHECK_REPORT_STATUS] = function(player, chocoState, arg)
+        if #chocoState.report.events > 0 then
+            player:updateEvent(0xFFFFFFFF, command.CHECK_REPORT_STATUS, 0, 0, shownStage(chocoState), 0, 0, 0)
+        else
+            player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
         end
-
-        if chocoState.stage >= xi.chocoboRaising.stage.ADOLESCENT then
-            local knowsAStory = true
-            if knowsAStory then
-                mask = mask + tellAStory
-            end
-
-            mask = mask + goOnAWalkRegular
-
-            local hasGoneOnRegularWalk = true
-            if hasGoneOnRegularWalk then
-                mask = mask + competeWithOthers
-            end
-        end
-
-        if chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 then
-            mask = mask + goOnAWalkLong
-        end
-
-        player:updateEvent(mask, chocoState.energy, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.GO_ON_A_WALK_SHORT]   = handleGoOnAWalk,
-    [vmOpCodes.GO_ON_A_WALK_REGULAR] = handleGoOnAWalk,
-    [vmOpCodes.GO_ON_A_WALK_LONG]    = handleGoOnAWalk,
+    -- The handkerchief hand-in plays from p1, outside the report.
+    [command.PRE_MENU] = function(player, chocoState, arg)
+        if xi.chocoboRaising.model.canReturnHandkerchief(xi.chocoboRaising.characterView(player)) then
+            local cutscene = xi.chocoboRaising.getCutsceneWithOffset(player, xi.chocoboRaising.cutscenes.THAT_SHOULD_BE_ENOUGH)
 
-    [vmOpCodes.WATCH_OVER_CHOCOBO_CONFIRM] = function(player, chocoState, option)
-        local baseCS = xi.chocoboRaising.csidTable[player:getZoneID()][9]
+            player:updateEvent(0, cutscene, 0, 0, 0, 0, 0, 0)
+            xi.chocoboRaising.applyEffects(player, xi.chocoboRaising.model.returnHandkerchief())
 
-        if chocoState.stage == xi.chocoboRaising.stage.EGG then
-            local badEggFlag = 0
-            player:updateEvent(baseCS, badEggFlag, 0, 0, 0, 0, 0, 0)
             return
         end
 
-        local energyFlag = 0
-        if chocoState.energy < xi.chocoboRaising.watchOverEnergy then
-            energyFlag = -1
-        else
-            chocoState.energy = chocoState.energy - xi.chocoboRaising.watchOverEnergy
-        end
-
-        local givingItem = 0
-        local givenItem  = 0
-
-        if chocoState.held_item > 0 then
-            givingItem = 1
-            givenItem  = chocoState.held_item
-        end
-
-        if givingItem == 1 and player:getFreeSlotsCount() == 0 then
-            givingItem = 2
-        end
-
-        local unknown = 1 -- TODO: What's this?
-
-        player:updateEvent(baseCS, energyFlag, givingItem, givenItem, chocoState.stage, 0, 0, unknown)
-
-        if givingItem == 1 then
-            player:addItem({ id = givenItem, silent = true })
-            chocoState.held_item = 0
-        end
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.TELL_A_STORY] = function(player, chocoState, option)
-        local randomChitchat     = -bit.lshift(0x01, 0)
-        local anImpatientChocobo = -bit.lshift(0x01, 1)
-        local aCuriousChocobo    = -bit.lshift(0x01, 2)
-        local aWorrisomeChocobo  = -bit.lshift(0x01, 3)
-        local aYouthfulChocobo   = -bit.lshift(0x01, 4)
-        local aHappyChocobo      = -bit.lshift(0x01, 5)
-        local aDiligentChocobo   = -bit.lshift(0x01, 6)
+    [command.MAIN_MENU] = handleMainMenu,
 
-        -- Random chitchat always available
-        local storyMask = 0x7FFFFFFF + randomChitchat
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_AN_IMPATIENT_CHOCOBO) then
-            storyMask = storyMask + anImpatientChocobo
-        end
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_A_CURIOUS_CHOCOBO) then
-            storyMask = storyMask + aCuriousChocobo
-        end
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_A_WORRISOME_CHOCOBO) then
-            storyMask = storyMask + aWorrisomeChocobo
-        end
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_A_YOUTHFUL_CHOCOBO) then
-            storyMask = storyMask + aYouthfulChocobo
-        end
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_A_HAPPY_CHOCOBO) then
-            storyMask = storyMask + aHappyChocobo
-        end
-
-        if player:hasKeyItem(xi.keyItem.STORY_OF_A_DILIGENT_CHOCOBO) then
-            storyMask = storyMask + aDiligentChocobo
-        end
-
-        xi.chocoboRaising.onRaisingEventPlayout(player, xi.chocoboRaising.cutscenes.INTERESTED_IN_YOUR_STORY, chocoState)
-
-        local unknown = 3 -- Seen as 1 or 3, does this matter?
-
-        player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
-        player:updateEvent(xi.chocoboRaising.getCutsceneWithOffset(player, xi.chocoboRaising.cutscenes.INTERESTED_IN_YOUR_STORY), 0, storyMask, 0, chocoState.stage, 0, 0, unknown)
+    -- The client names the chocobo itself and waits for no reply.
+    [command.FORCED_NAMING] = function(player, chocoState, arg)
     end,
 
-    [vmOpCodes.SCOLD_CHOCOBO] = function(player, chocoState, option)
-        xi.chocoboRaising.onRaisingEventPlayout(player, xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME, chocoState)
+    -- The friend chocobo's name replaces the first name.
+    [command.WALK_ENCOUNTER] = function(player, chocoState, arg)
+        local trainerId  = xi.chocoboRaising.walks.followUpTrainer[arg]
+        local friendName = xi.chocoboRaising.walks.friendName(trainerId, player:getChocoboUserData().chocobosRaised)
+        local fullName, _, lastName = xi.chocoboRaising.nameStrings(chocoState)
 
-        player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
-        player:updateEvent(xi.chocoboRaising.getCutsceneWithOffset(player, xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME), 0, 0, 0, chocoState.stage, 0, 0, 0)
+        player:updateEventString(fullName, friendName, lastName, lastName, 0, 0, 0, 0, 0, 0, 0, 0)
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.COMPETE_WITH_OTHERS] = function(player, chocoState, option)
-        local winner = utils.randomEntry({ 0, 2 })
-        if math.randomInt(1, 100) <= 5 then
-            winner = 1
+    [command.REGISTER_CHOCOBO_WHISTLE] = handleRegister,
+
+    -- Argument: days, always 1 from the menu. The client reads no reply.
+    [command.DEBUG_GO_FORWARD] = function(player, chocoState, arg)
+        xi.chocoboRaising.model.moveTime(chocoState, arg, xi.chocoboRaising.dayLength)
+        xi.chocoboRaising.updateChocoState(player, chocoState)
+        debug(string.format('Debug: moved time forward %d days', arg))
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    end,
+
+    -- The client prints p1 as STR/VIT/INT/MND bytes and p2 as affection/energy/satisfaction bytes.
+    [command.DEBUG_ABILITIES_PRINT] = function(player, chocoState, arg)
+        local packedRawStats =
+            bit.lshift(chocoState.strength,     0) +
+            bit.lshift(chocoState.endurance,    8) +
+            bit.lshift(chocoState.discernment, 16) +
+            bit.lshift(chocoState.receptivity, 24)
+
+        debug(string.format('Debug: abilities print STR:%d/VIT:%d/INT:%d/MND:%d, Affection:%d/Energy:%d/Satisfaction:%d',
+            chocoState.strength, chocoState.endurance, chocoState.discernment, chocoState.receptivity,
+            chocoState.affection, chocoState.energy, chocoState.satisfaction))
+        player:updateEvent(1, packedRawStats, xi.chocoboRaising.packStats2(chocoState), 0, 0, 0, 0, 0)
+    end,
+
+    -- The client reads no reply and prints nothing, so the server prints what the debug menu shows.
+    [command.DEBUG_USER_WORK_PRINT] = function(player, chocoState, arg)
+        xi.chocoboRaising.printUserWork(player)
+        debug('Debug: user work print')
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    end,
+
+    [command.GIVE_UP_CHOCOBO] = function(player, chocoState, arg)
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+        chocoState.retiring = true
+    end,
+
+    [command.FEED_CHOCOBO] = handleFeed,
+
+    [command.CARE_ACTION] = function(player, chocoState, arg)
+        local handler = careActions[arg]
+        if handler then
+            handler(player, chocoState, arg)
+            return
         end
 
-        local winnerStr =
-        {
-            [0] = 'Player',
-            [1] = 'Tie',
-            [2] = 'Rival',
-        }
-
-        debug('Competition Winner: ' .. winnerStr[winner])
-        local rivalsName = 'Hero'
-
-        xi.chocoboRaising.onRaisingEventPlayout(player, xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS, chocoState)
-
-        player:updateEventString(chocoState.first_name, rivalsName, '', '', 0, 0, 0, 0, 0, 0, 0)
-        player:updateEvent(xi.chocoboRaising.getCutsceneWithOffset(player, xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
+        print(string.format('ERROR! Unknown chocobo care action: %i', arg))
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end,
 
-    [vmOpCodes.SET_CARE_SCHEDULE_MENU] = function(player, chocoState, option)
+    [command.CARE_FOR_CHOCOBO_MENU]      = handleCareMenu,
+    [command.PRESENT_CHOCOBO_APPEARANCE] = handleAppearance,
+    [command.EVENT_PLAYOUT]              = handlePlayout,
+    [command.REPORT]                     = handleReport,
+
+    [command.SET_CARE_SCHEDULE_MENU] = function(player, chocoState, arg)
         local plan1Length = bit.rshift(bit.band(chocoState.care_plan, 0xF0000000), 28)
         local plan1Type   = bit.rshift(bit.band(chocoState.care_plan, 0x0F000000), 24)
         local plan2Length = bit.rshift(bit.band(chocoState.care_plan, 0x00F00000), 20)
@@ -756,208 +1006,161 @@ local vmHandlers =
             bit.lshift(plan3Length,  16) + bit.lshift(plan3Type,  19) +
             bit.lshift(plan4Length,  24) + bit.lshift(plan4Type,  27)
 
-        local emptyMask            = 0x7FFFFFFF
-        local basicCare            = -bit.lshift(0x01, 0)
-        local rest                 = -bit.lshift(0x01, 1)
-        local takeAWalkInTown      = -bit.lshift(0x01, 2)
-        local listenToMusic        = -bit.lshift(0x01, 3)
-        local exerciseAlone        = -bit.lshift(0x01, 4)
-        local exerciseInAGroup     = -bit.lshift(0x01, 5)
-        local interactWithChildren = -bit.lshift(0x01, 6)
-        local interactWithChocobos = -bit.lshift(0x01, 7)
-        local carryPackages        = -bit.lshift(0x01, 8)
-        local exhibitToThePublic   = -bit.lshift(0x01, 9)
-        local deliverMessages      = -bit.lshift(0x01, 10)
-        local digForTreasure       = -bit.lshift(0x01, 11)
-        local actInAPlay           = -bit.lshift(0x01, 12)
-
-        local menuMask = emptyMask + basicCare
-
-        if chocoState.stage >= xi.chocoboRaising.stage.CHICK then
-            menuMask = menuMask +
-                rest +
-                takeAWalkInTown +
-                listenToMusic
-        end
-
-        if chocoState.stage >= xi.chocoboRaising.stage.ADOLESCENT then
-            menuMask = menuMask +
-                exerciseAlone +
-                exerciseInAGroup +
-                interactWithChildren +
-                interactWithChocobos +
-                carryPackages +
-                exhibitToThePublic
-        end
-
-        if chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 then
-            menuMask = menuMask +
-                deliverMessages +
-                digForTreasure +
-                actInAPlay
-        end
-
-        player:updateEvent(250, planInfo, 0, 0, 0, 0, 0, menuMask)
-    end,
-
-    [vmOpCodes.SET_BASIC_CARE_PLAN_1] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.SET_BASIC_CARE_PLAN_2] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.SET_BASIC_CARE_PLAN_3] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.SET_BASIC_CARE_PLAN_4] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.UNKNOWN_1056] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.UNKNOWN_1241] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-
-    [vmOpCodes.EVENT_PLAYOUT] = function(player, chocoState, option)
-        chocoState = xi.chocoboRaising.handleCSUpdate(player, chocoState, true)
-    end,
-
-    [vmOpCodes.BRIEF_REPORT] = function(player, chocoState, option)
-    end,
-
-    [vmOpCodes.WHISTLE_GAME_RESULT] = function(player, chocoState, option)
-        local keyItem = xi.keyItem.HANDKERCHIEF
-
-        if math.randomInt(1, 100) < 25 then
-            player:updateEvent(keyItem, 0, 0, 0, 0, 1, 0, 0)
-            player:addKeyItem(keyItem)
-            player:setCharVar('HQuest[ChocoboWhistle]Prog', 3)
-        else
-            player:updateEvent(0, 0, 0, 0, 0, 2, 0, 0)
-        end
-    end,
-
-    [vmOpCodes.SKIP_REPORT] = function(player, chocoState, option)
-        for _, currentEvent in ipairs(chocoState.report.events) do
-            local eventStartStart = currentEvent[1]
-            local eventStartEnd   = currentEvent[2]
-            local eventCSList     = currentEvent[3]
-
-            chocoState.age   = eventStartStart
-            chocoState.stage = xi.chocoboRaising.ageToStage(chocoState.age)
-
-            for _, cs in ipairs(eventCSList) do
-                table.insert(chocoState.csList, { cs, eventStartEnd - eventStartStart + 1 })
+        local menuMask = 0x7FFFFFFF
+        for planType in pairs(carePlanStage) do
+            if carePlanOffered(chocoState, planType) then
+                menuMask = menuMask - bit.lshift(1, planType)
             end
         end
 
-        chocoState.report.events = {}
+        -- p2 is the plan locked for the next day.
+        player:updateEvent(command.SET_CARE_SCHEDULE_MENU, planInfo, chocoState.locked_plan, 0, 0, 0, 0, menuMask)
+    end,
 
-        while #chocoState.csList > 0 do
-            chocoState = xi.chocoboRaising.handleCSUpdate(player, chocoState, false)
+    [command.ASK_ABOUT_CONDITION_MENU] = handleCondition,
+
+    [command.UNKNOWN_252] = function(player, chocoState, arg)
+        local hasReport = 0
+        if #chocoState.report.events > 0 then
+            hasReport = 0xFFFFFFFF
         end
 
-        xi.chocoboRaising.updateChocoState(player, chocoState)
+        player:updateEvent(hasReport, 1, 1, 1, chocoState.stage, 1, 1, 1)
     end,
 
-    [vmOpCodes.BUY_CHOCOBO_WHISTLE] = function(player, chocoState, option)
+    [command.SET_CARE_PLAN] = handleCarePlanUpdate,
+    [command.NAME_CHOCOBO]  = handleNamingUpdate,
+}
+
+-- The client can send any option, so each command a menu hides is checked here.
+local allowed =
+{
+    [command.DEBUG_GO_FORWARD]      = isGM,
+    [command.DEBUG_ABILITIES_PRINT] = isGM,
+    [command.DEBUG_USER_WORK_PRINT] = isGM,
+
+    [command.RETIRE_YOUR_CHOCOBO] = function(player, chocoState, arg)
+        return chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 and not xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY)
     end,
 
-    [vmOpCodes.RECEIVE_CHOCOBO_WHISTLE] = function(player, chocoState, option)
+    [command.GIVE_UP_CHOCOBO] = function(player, chocoState, arg)
+        return chocoState.stage < xi.chocoboRaising.stage.ADULT_1 and not xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY)
     end,
 
-    [vmOpCodes.REGISTER_CHOCOBO_WHISTLE] = function(player, chocoState, option)
-        debug('Registering field chocobo details')
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-
-        local traits =
-        {
-            largeBeak   = chocoState.discernment >= 128 and 1 or 0,
-            fullTail    = chocoState.endurance >= 128 and 1 or 0,
-            largeTalons = chocoState.strength >= 128 and 1 or 0,
-        }
-
-        player:registerChocobo(chocoState.color, traits)
+    [command.REGISTER_CHOCOBO_WHISTLE] = function(player, chocoState, arg)
+        return chocoState.stage >= xi.chocoboRaising.stage.ADULT_1 and xi.chocoboRaising.hasUserFlag(player, xi.chocoboRaising.userFlag.WHISTLE_QUEST_DONE)
     end,
 
-    [vmOpCodes.DEBUG_GO_FORWARD_1_UNIT] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    [command.WHISTLE_SEARCH] = function(player, chocoState, arg)
+        return chocoState.whistleSearchWalk == arg and
+            xi.chocoboRaising.whistleProgress(player) == xi.chocoboRaising.whistle.prog.SEARCH
     end,
 
-    [vmOpCodes.DEBUG_ABILITIES_PRINT] = function(player, chocoState, option)
-        local packedRawStats =
-            bit.lshift(chocoState.strength,     0) +
-            bit.lshift(chocoState.endurance,    8) +
-            bit.lshift(chocoState.discernment, 16) +
-            bit.lshift(chocoState.receptivity, 24)
+    [command.TELL_STORY] = function(player, chocoState, arg)
+        local keyItem = xi.chocoboRaising.walks.storyKeyItems[arg]
 
-        player:updateEvent(1, packedRawStats, xi.chocoboRaising.packStats2(chocoState), 0, 0, 0, 0, 0)
+        return chocoState.storyPending and
+            (not keyItem or player:hasKeyItem(keyItem))
     end,
 
-    [vmOpCodes.DEBUG_USER_WORK_PRINT] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    [command.CARE_ACTION] = function(player, chocoState, arg)
+        return careActionOffered(chocoState, arg)
     end,
 
-    [vmOpCodes.GIVE_UP_CHOCOBO] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-        chocoState.retiring = true
+    [command.NAME_CHOCOBO] = function(player, chocoState, arg)
+        return chocoState.stage > xi.chocoboRaising.stage.EGG and not xi.chocoboRaising.isNamed(chocoState)
     end,
 
-    [vmOpCodes.RETIRE_YOUR_CHOCOBO] = function(player, chocoState, option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-        chocoState.retiring = true
-    end,
+    [command.SET_CARE_PLAN] = function(player, chocoState, arg)
+        local slot, length, planType = unpackCarePlanArg(arg)
 
-    [vmOpCodes.UNKNOWN_24672] = function(player, chocoState, option)
-        player:updateEvent(0, 20, 0, 0, chocoState.stage, 0, 0, 0)
-
-        -- TODO?:
-        -- chocoState.retiring = true
+        return slot <= maxCarePlanSlot and
+            length >= 1 and
+            length <= maxCarePlanLength and
+            carePlanOffered(chocoState, planType)
     end,
 }
 
+-----------------------------------
+-- Global Functions
+-----------------------------------
+-- Shared by the debug menu's "User work display" and the trainer's "User work print".
+---@param player CBaseEntity
+xi.chocoboRaising.printUserWork = function(player)
+    local chick    = xi.chocoboRaising.walks.lostChick(player:getCharVar(xi.chocoboRaising.walks.lostChickVar))
+    local userData = player:getChocoboUserData()
+
+    player:printToPlayer(string.format('Handkerchief: %d, same zone: %d, whistle: %d, chocobos raised: %d, flags: 0x%X',
+        xi.chocoboRaising.handkerchiefState(player),
+        player:getLocalVar(xi.chocoboRaising.handkerchiefZoneVar),
+        xi.chocoboRaising.whistleProgress(player),
+        userData.chocobosRaised,
+        userData.flags), xi.msg.channel.SYSTEM_3)
+    player:printToPlayer(string.format('Lost chick: owner %d, stable %d, clues %d, solved %d',
+        chick.owner, chick.location, chick.clues, chick.solved and 1 or 0), xi.msg.channel.SYSTEM_3)
+end
+
+---@param player CBaseEntity
+---@param csid integer
+---@param option integer
+---@param npc CBaseEntity
 xi.chocoboRaising.eventVM = function(player, csid, option, npc)
-    local mainCsid   = xi.chocoboRaising.csidTable[player:getZoneID()][2]
-    local tradeCsid  = xi.chocoboRaising.csidTable[player:getZoneID()][3]
-    local chocoState = xi.chocoboRaising.chocoState[player:getID()]
+    local zoneID        = player:getZoneID()
+    local csids         = xi.chocoboRaising.csidTable[zoneID]
+    local mainCSID      = csids[2]
+    local tradeCSID     = csids[3]
+    local rejectionCSID = csids[4]
 
-    if csid == tradeCsid then
-        if option == 252 then
-            player:updateEvent(0, xi.chocoboRaising.raisingLocation[player:getZoneID()], 0, 0, 0, 0, 0, 0)
-        end
-    elseif csid == mainCsid then
-        if chocoState == nil then
-            print('ERROR! onEventUpdateVCSTrainer \'chocoState\' is nil!')
-            return
+    if csid == tradeCSID then
+        if option == command.UNKNOWN_252 then
+            player:updateEvent(0, xi.chocoboRaising.raisingLocation[zoneID], 0, 0, 0, 0, 0, 0)
         end
 
-        if bit.band(0x000000FF, option) == 0xFF then
-            handleNamingUpdate(player, chocoState, option)
-            return
-        end
-
-        if bit.band(0x000000FF, option) == 0xFE then
-            handleCarePlanUpdate(player, chocoState, option)
-            return
-        end
-
-        if bit.band(0x000000FF, option) == 0x32 then
-            handleStoryUpdate(player, chocoState, option)
-            return
-        end
-
-        local opCodeName = vmOpCodeNames[option] or '?'
-        debug(string.format('ChocoVM Op: %i: %s', option, opCodeName))
-
-        local handler = vmHandlers[option]
-        if handler then
-            handler(player, chocoState, option)
-        end
+        return
     end
+
+    -- The egg rejection waits for the chocobo's stage.
+    if csid == rejectionCSID then
+        if option ~= command.PRESENT_CHOCOBO_APPEARANCE then
+            return
+        end
+
+        local saved = player:getChocoboRaisingInfo()
+        if saved then
+            player:updateEvent(0, 0, 0, 0, saved.stage, 1, 0, 0)
+        end
+
+        return
+    end
+
+    if csid ~= mainCSID then
+        return
+    end
+
+    local chocoState = xi.chocoboRaising.chocoState[player:getID()]
+    if not chocoState then
+        print('ERROR! onEventUpdateVCSTrainer \'chocoState\' is nil!')
+        return
+    end
+
+    local opCommand = bit.band(option, 0xFF)
+    local arg       = bit.rshift(option, 8)
+
+    debug(string.format('ChocoVM: %s (%i), arg %i', commandNames[opCommand] or '?', opCommand, arg))
+
+    local check = allowed[opCommand]
+    if check and not check(player, chocoState, arg) then
+        print(string.format('WARNING! %s sent chocobo raising option %i, which the menu does not offer', player:getName(), option))
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+        return
+    end
+
+    local handler = handlers[opCommand]
+    if handler then
+        handler(player, chocoState, arg)
+        return
+    end
+
+    print(string.format('ERROR! Unknown chocobo raising option: %i (command %i, arg %i)', option, opCommand, arg))
+    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
 end

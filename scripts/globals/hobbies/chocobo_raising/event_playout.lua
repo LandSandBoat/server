@@ -1,20 +1,71 @@
 -----------------------------------
--- Chocobo Raising
+-- Chocobo Raising - Event Playout
 -----------------------------------
 require('scripts/globals/hobbies/chocobo_raising/care_plan')
 require('scripts/globals/hobbies/chocobo_raising/constants')
+require('scripts/globals/hobbies/chocobo_raising/whistle')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 
+-----------------------------------
+-- Constants
+-----------------------------------
 local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
+-- The egg handed in, checked again when the hatching event finishes.
+xi.chocoboRaising.tradedEggVar = '[ChocoboRaising]TradedEgg'
+
+-----------------------------------
+-- Helpers
+-----------------------------------
+local function tradeHasWakingFood(trade)
+    for slotId = 0, 7 do
+        local item = trade:getItem(slotId)
+        local food = item and xi.chocoboRaising.validFoods[item:getID()]
+
+        if food and food.wakes then
+            return true
+        end
+    end
+
+    return false
+end
+
+-----------------------------------
+-- Private Functions
+-----------------------------------
+-- Report cutscenes change nothing here; the day model applied those days at rollover.
+local playoutHandlers =
+{
+    [xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME] = function(player, chocoState)
+        -- TODO: Affection loss amount. Energy is charged by the care action.
+        chocoState.affection = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.AFFECTION, chocoState.affection, -10, 255)
+        xi.chocoboRaising.setCondition(chocoState, xi.chocoboRaising.conditions.SPOILED, false)
+    end,
+
+    [xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS] = function(player, chocoState)
+        -- Energy is charged by the care action.
+        chocoState.affection = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.AFFECTION, chocoState.affection, 1, 255)
+        xi.chocoboRaising.addPendingCure(chocoState, xi.chocoboRaising.conditions.BORED)
+    end,
+}
+
+-----------------------------------
+-- Global Functions
+-----------------------------------
+---@param player CBaseEntity
+---@param npc CBaseEntity
+---@param trade CTradeContainer
 xi.chocoboRaising.onTrade = function(player, npc, trade)
-    local ID            = zones[player:getZoneID()]
-    local mainCsid      = xi.chocoboRaising.csidTable[player:getZoneID()][2]
-    local tradeCsid     = xi.chocoboRaising.csidTable[player:getZoneID()][3]
-    local rejectionCsid = xi.chocoboRaising.csidTable[player:getZoneID()][4]
-    local chocoState    = xi.chocoboRaising.initChocoState(player)
+    local zoneID        = player:getZoneID()
+    local ID            = zones[zoneID]
+    local csids         = xi.chocoboRaising.csidTable[zoneID]
+    local mainCSID      = csids[2]
+    local tradeCSID     = csids[3]
+    local rejectionCSID = csids[4]
+    local location      = xi.chocoboRaising.raisingLocation[zoneID]
+    local saved         = player:getChocoboRaisingInfo()
 
     if
         npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_EGG_FAINTLY_WARM) or
@@ -23,274 +74,197 @@ xi.chocoboRaising.onTrade = function(player, npc, trade)
         npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_EGG_A_LITTLE_WARM) or
         npcUtil.tradeHasExactly(trade, xi.item.CHOCOBO_EGG_SOMEWHAT_WARM)
     then
-        if chocoState == nil then
-            -- Handed over egg, handled in onEventFinish and xi.chocoboRaising.newChocobo
-            player:startEvent(tradeCsid, 0, 0, 0, 0, 0, 0, 0, 1)
-        else -- Already has a chocobo
-            -- Check location
-            if chocoState.location ~= xi.chocoboRaising.raisingLocation[player:getZoneID()] then
-                player:startEvent(rejectionCsid, 1)
-            else
-                player:startEvent(rejectionCsid, 0)
-            end
+        if not saved then
+            -- The egg is taken in onEventFinish and xi.chocoboRaising.newChocobo.
+            player:setLocalVar(xi.chocoboRaising.tradedEggVar, trade:getItem():getID())
+            player:startEvent(tradeCSID, VanadielTime(), 0, 0, 0, 0, 0, 0, location)
+        else
+            -- A chocobo is already raised. p0 is its stable, p7 this one; the client picks "another nation's stables" when they differ.
+            player:startEvent(rejectionCSID, saved.location, 0, 0, 0, 0, 0, 0, location)
         end
 
         return
     end
 
-    -- TODO: Confirm this on retail
-    -- 'Your chocobo has not hatched, so you cannot feed it yet.'
-    if chocoState.stage == xi.chocoboRaising.stage.EGG then
-        player:messageSpecial(ID.text.CHOCOBO_FEEDING_STILL_EGG)
+    if not saved then
         return
     end
 
-    -- Validate traded items
-    local tradedItems = {}
+    if saved.location ~= location then
+        player:startEvent(csids[1], 1, 1, 1, 1)
+        return
+    end
+
+    local chocoState = xi.chocoboRaising.initChocoState(player, saved)
+    if not chocoState then
+        return
+    end
+
+    if chocoState.stage == xi.chocoboRaising.stage.EGG then
+        player:showText(npc, ID.text.CHOCOBO_FEEDING_STILL_EGG)
+        return
+    end
+
+    if
+        not tradeHasWakingFood(trade) and
+        xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.SLEEPING)
+    then
+        player:showText(npc, ID.text.CHOCOBO_FEEDING_SLEEP)
+        return
+    end
+
+    if xi.chocoboRaising.getCondition(chocoState, xi.chocoboRaising.conditions.RUN_AWAY) then
+        player:showText(npc, ID.text.CHOCOBO_FEEDING_RUN_AWAY)
+        return
+    end
+
+    -- At most 4, cures then chocolixirs, stat items and food; a chocotonic alone; non-food is left.
+    local maxItemsEaten = 4
+    local offered       = {}
 
     for slotId = 0, 7 do
         local item = trade:getItem(slotId)
 
-        if item then
+        if item and xi.chocoboRaising.validFoods[item:getID()] then
             local id = item:getID()
-            -- Invalid foods are skipped and valid foods are accepted
-            if xi.chocoboRaising.validFoods[id] then
-                local quantity = trade:getSlotQty(slotId)
 
-                for _ = 1, quantity do
-                    table.insert(tradedItems, id)
-                end
-
-                trade:confirmItem(id, quantity)
+            for _ = 1, trade:getSlotQty(slotId) do
+                table.insert(offered, { id = id, order = #offered })
             end
         end
     end
 
-    if #tradedItems > 0 then
-        chocoState.foodGiven = tradedItems
+    table.sort(offered, function(left, right)
+        local leftCategory  = xi.chocoboRaising.validFoods[left.id].category
+        local rightCategory = xi.chocoboRaising.validFoods[right.id].category
+
+        if leftCategory ~= rightCategory then
+            return leftCategory < rightCategory
+        end
+
+        return left.order < right.order
+    end)
+
+    local tradedItems = {}
+    for _, entry in ipairs(offered) do
+        if xi.chocoboRaising.validFoods[entry.id].alone then
+            tradedItems = { entry.id }
+            break
+        end
+
+        if #tradedItems < maxItemsEaten then
+            table.insert(tradedItems, entry.id)
+        end
     end
 
-    local isTradeEvent = 0
-
-    if chocoState.foodGiven and #chocoState.foodGiven > 0 then
-        isTradeEvent = 8
+    local eaten = {}
+    for _, id in ipairs(tradedItems) do
+        eaten[id] = (eaten[id] or 0) + 1
     end
 
-    -- 0: Hello, x. What brings you here today?
-    -- 1: Hello, x. I have some information to relay to you regarding your egg.
-    local infoFlag = 0
-    if #chocoState.report.events > 0 then
-        infoFlag = 1
+    for id, quantity in pairs(eaten) do
+        trade:confirmItem(id, quantity)
     end
 
-    -- Now that we're done modifiying it, write chocoState to cache
-    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+    chocoState.foodGiven = tradedItems
 
-    player:startEventString(mainCsid, chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
-        isTradeEvent, infoFlag, chocoState.sex, 0, 0, 0, 0, 0)
-end
-
-xi.chocoboRaising.onTrigger = function(player, npc)
-    local reminderCsid  = xi.chocoboRaising.csidTable[player:getZoneID()][1]
-    local mainCsid      = xi.chocoboRaising.csidTable[player:getZoneID()][2]
-    local chocoState    = xi.chocoboRaising.initChocoState(player)
-
-    -- Trade an egg to me if you want to start raising a chocobo.
-    if chocoState == nil then
-        player:startEvent(reminderCsid, 1)
+    if #tradedItems == 0 then
         return
-    else
-        -- Check location
-        if chocoState.location ~= xi.chocoboRaising.raisingLocation[player:getZoneID()] then
-            player:startEvent(reminderCsid, 1, 1, 1, 1)
-
-            return
-        end
     end
 
-    -- 0: Hello, x. What brings you here today?
-    -- 1: Hello, x. I have some information to relay to you regarding your egg.
+    -- p0 is the item for a single item, 10 for a mixed trade; p7 the number of items.
+    local shown = 10
+    if #tradedItems == 1 then
+        shown = tradedItems[1]
+    end
+
+    -- 1 opens with the report greeting.
     local infoFlag = 0
     if #chocoState.report.events > 0 then
         infoFlag = 1
     end
 
-    -- Now that we're done modifiying it, write chocoState to cache
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
 
-    player:startEventString(mainCsid, chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
-        0, infoFlag, chocoState.sex, 0, 0, 0, 0, 0)
+    local fullName, firstName, lastName = xi.chocoboRaising.nameStrings(chocoState)
+    player:startEventString(mainCSID, fullName, firstName, lastName, '', shown, infoFlag, chocoState.sex, 0, 0, 0, 0, #tradedItems)
 end
 
-xi.chocoboRaising.handleCSUpdate = function(player, chocoState, doEventUpdate)
-    -- Generate final CS value from (location offset * 256) + cutscene offset
-    local csListEntry    = chocoState.csList[1]
-    local csOffset       = type(csListEntry) == 'table' and csListEntry[1] or csListEntry
-    local elapsedDays    = type(csListEntry) == 'table' and csListEntry[2] or 1
-    local locationOffset = xi.chocoboRaising.raisingLocation[player:getZoneID()] * 256
-    local csToPlay       = locationOffset + csOffset
+---@param player CBaseEntity
+---@param npc CBaseEntity
+xi.chocoboRaising.onTrigger = function(player, npc)
+    local zoneID       = player:getZoneID()
+    local csids        = xi.chocoboRaising.csidTable[zoneID]
+    local reminderCSID = csids[1]
+    local mainCSID     = csids[2]
+    local saved        = player:getChocoboRaisingInfo()
 
-    debug('Playing CS: ' .. csToPlay .. ' (' .. csOffset .. ')')
-    table.remove(chocoState.csList, 1)
-
-    local currentAgeOfChocoboDuringCutscene = 0
-
-    xi.chocoboRaising.onRaisingEventPlayout(player, csOffset, chocoState, elapsedDays)
-
-    -- This will skip the event updates during 'Skip Report'
-    if doEventUpdate then
-        player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
-            0, 0, 0, 0, 0, 0, 0, 0)
-        player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.color, chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 3)
+    if not saved then
+        player:startEvent(reminderCSID, 1)
+        return
     end
 
-    return chocoState
+    if saved.location ~= xi.chocoboRaising.raisingLocation[zoneID] then
+        player:startEvent(reminderCSID, 1, 1, 1, 1)
+        return
+    end
+
+    local chocoState = xi.chocoboRaising.initChocoState(player, saved)
+    if not chocoState then
+        return
+    end
+
+    -- 1 opens with the report greeting.
+    local infoFlag = 0
+    if #chocoState.report.events > 0 then
+        infoFlag = 1
+    end
+
+    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+    local fullName, firstName, lastName = xi.chocoboRaising.nameStrings(chocoState)
+    player:startEventString(mainCSID, fullName, firstName, lastName, '', 0, infoFlag, chocoState.sex, 0, 0, 0, 0, chocoState.location)
 end
 
-local playoutHandlers =
-{
-    -- EGG ONWARDS:
-    [xi.chocoboRaising.cutscenes.REPORT_BASIC_CARE] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.BASIC_CARE, elapsedDays)
-    end,
+-- csList entries are { cutscene, days in the record, cutscenes in the record }.
+---@param player CBaseEntity
+---@param chocoState ChocoboState
+xi.chocoboRaising.handleCSUpdate = function(player, chocoState)
+    local entry    = table.remove(chocoState.csList, 1)
+    local csOffset = entry[1]
 
-    -- CHICK ONWARDS:
-    [xi.chocoboRaising.cutscenes.REPORT_REST] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.RESTING, elapsedDays)
-    end,
+    -- Scene id is location * 256 plus the cutscene offset.
+    local csToPlay = xi.chocoboRaising.raisingLocation[player:getZoneID()] * 256 + csOffset
 
-    [xi.chocoboRaising.cutscenes.REPORT_TAKE_A_WALK] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.TAKING_A_WALK, elapsedDays)
-    end,
+    debug(string.format('Playing CS: %d (%d)', csToPlay, csOffset))
 
-    [xi.chocoboRaising.cutscenes.REPORT_LISTEN_TO_MUSIC] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.LISTENING_TO_MUSIC, elapsedDays)
-    end,
-
-    -- ADOLESCENT ONWARDS:
-    [xi.chocoboRaising.cutscenes.REPORT_EXERCISE_ALONE] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.EXERCISING_ALONE, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_EXERCISE_IN_A_GROUP] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.EXCERCISING_IN_A_GROUP, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_INTERACT_WITH_CHILDREN] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.PLAYING_WITH_CHILDREN, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_INTERACT_WITH_CHOCOBOS] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.PLAYING_WITH_CHOCOBOS, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_CARRY_PACKAGES] = function(player, chocoState, elapsedDays)
-        -- TODO: Handle dropping packages
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.CARRYING_PACKAGES, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_EXHIBIT_TO_THE_PUBLIC] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.EXHIBITING_TO_THE_PUBLIC, elapsedDays)
-    end,
-
-    -- ADULT ONWARDS:
-    [xi.chocoboRaising.cutscenes.REPORT_DELIVER_MESSAGES] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.DELIVERING_MESSAGES, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_DIG_FOR_TREASURE] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.DIGGING_FOR_TREASURE, elapsedDays)
-    end,
-
-    [xi.chocoboRaising.cutscenes.REPORT_ACT_IN_A_PLAY] = function(player, chocoState, elapsedDays)
-        xi.chocoboRaising.handleCarePlan(player, chocoState, xi.chocoboRaising.carePlans.ACTING_IN_A_PLAY, elapsedDays)
-    end,
-
-    -- Growth CSs
-    [xi.chocoboRaising.cutscenes.EGG_HATCHING] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.CHICK
-    end,
-
-    [xi.chocoboRaising.cutscenes.CHICK_TO_ADOLESCENT] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.ADOLESCENT
-    end,
-
-    [xi.chocoboRaising.cutscenes.ADOLESCENT_TO_ADULT_1] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.ADULT_1
-    end,
-
-    [xi.chocoboRaising.cutscenes.ADULT_1_TO_ADULT_2] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.ADULT_2
-    end,
-
-    [xi.chocoboRaising.cutscenes.ADULT_2_TO_ADULT_3] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.ADULT_3
-
-        -- You waited too long to name your chocobo, trainer is going to do it for you!
-        if
-            chocoState.first_name == 'Chocobo' and
-            chocoState.last_name == 'Chocobo'
-        then
-            -- Pick a name at random: First name only
-            chocoState.first_name = xi.chocoboNames.getRandomName()
-            chocoState.last_name  = ''
-
-            debug(string.format('Forcing rename of chocobo to: %s', chocoState.first_name))
+    -- A growth scene and the rest of its record show the new stage.
+    for _, boundary in ipairs(xi.chocoboRaising.ageBoundaries()) do
+        if boundary[3] == csOffset then
+            chocoState.reportStage = boundary[4]
         end
-    end,
+    end
 
-    [xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4] = function(player, chocoState, elapsedDays)
-        chocoState.stage = xi.chocoboRaising.stage.ADULT_4
-    end,
+    -- p2 = 1 makes the adult scene mention the open whistle quest.
+    local whistleProg      = xi.chocoboRaising.whistleProgress(player)
+    local whistleQuestOpen = csOffset == xi.chocoboRaising.cutscenes.ADOLESCENT_TO_ADULT_1 and
+        whistleProg >= 1 and
+        whistleProg < xi.chocoboRaising.whistleProg.DONE and 1 or 0
 
-    [xi.chocoboRaising.cutscenes.CRYING_AT_NIGHT] = function(player, chocoState, elapsedDays)
-        debug('Giving KI White Handkerchief')
-        -- NOTE: The messaging is handled in the CS
-        player:addKeyItem(xi.keyItem.WHITE_HANDKERCHIEF)
-    end,
+    local fullName, firstName, lastName = xi.chocoboRaising.nameStrings(chocoState)
+    player:updateEventString(fullName, firstName, lastName, lastName, 0, 0, 0, 0, 0, 0, 0, 0)
 
-    [xi.chocoboRaising.cutscenes.THAT_SHOULD_BE_ENOUGH] = function(player, chocoState, elapsedDays)
-        debug('Removing KI White Handkerchief')
-        player:delKeyItem(xi.keyItem.WHITE_HANDKERCHIEF)
-        player:setCharVar('HQuest[ChocoboWhistle]Prog', 1)
-    end,
+    -- TODO: p6 is a byte that changes on egg days (255, 250, 245, 240); p7 looks like the weather.
+    player:updateEvent(#chocoState.csList, csToPlay, whistleQuestOpen, entry[3], chocoState.reportStage or chocoState.stage, 0, 0, 3)
+end
 
-    [xi.chocoboRaising.cutscenes.HAVENT_SEEN_YOU] = function(player, chocoState, elapsedDays)
-        debug('Removing KI White Handkerchief')
-        player:delKeyItem(xi.keyItem.WHITE_HANDKERCHIEF)
-    end,
-
-    [xi.chocoboRaising.cutscenes.INTERESTED_IN_YOUR_STORY] = function(player, chocoState, elapsedDays)
-        -- A chocobo must have a DSC of D (A bit deficient, 64-95) or
-        -- higher to have a chance at learning a skill from a story
-        if chocoState.discernment >= 64 then
-            utils.unused()
-            -- TODO: Chance to learn skill
-        end
-    end,
-
-    [xi.chocoboRaising.cutscenes.HANGS_HEAD_IN_SHAME] = function(player, chocoState, elapsedDays)
-        -- TODO: How much energy and affection?
-        chocoState.affection = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.AFFECTION, chocoState.affection, -10, 255)
-        chocoState.energy    = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.ENERGY, chocoState.energy, -5, 100)
-        xi.chocoboRaising.setCondition(chocoState, xi.chocoboRaising.conditions.SPOILED, false)
-    end,
-
-    [xi.chocoboRaising.cutscenes.COMPETE_WITH_OTHERS] = function(player, chocoState, elapsedDays)
-        -- TODO: How much energy and affection?
-        -- 'Increases affection slightly - confirmed.'
-        chocoState.affection = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.AFFECTION, chocoState.affection, 1, 255)
-        chocoState.energy    = xi.chocoboRaising.handleStatChange(xi.chocoboRaising.carePlanStats.ENERGY, chocoState.energy, -5, 100)
-        xi.chocoboRaising.setCondition(chocoState, xi.chocoboRaising.conditions.BORED, false)
-    end,
-}
-
-xi.chocoboRaising.onRaisingEventPlayout = function(player, csOffset, chocoState, elapsedDays)
-    elapsedDays = elapsedDays or 1
-
+---@param player CBaseEntity
+---@param csOffset integer
+---@param chocoState ChocoboState
+xi.chocoboRaising.onRaisingEventPlayout = function(player, csOffset, chocoState)
     local handler = playoutHandlers[csOffset]
     if handler then
-        handler(player, chocoState, elapsedDays)
+        handler(player, chocoState)
     end
 
     xi.chocoboRaising.updateChocoState(player, chocoState)
