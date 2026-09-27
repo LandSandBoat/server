@@ -2726,7 +2726,7 @@ INSERT INTO `item_usable` VALUES (15487,'high_breath_mantle',1,3,0,0,50,30,1800,
 INSERT INTO `item_usable` VALUES (15505,'dhalmel_whistle',1,1,0,0,25,30,900,0);
 INSERT INTO `item_usable` VALUES (15507,'purgatory_collar',1,10,0,0,20,30,900,0);
 INSERT INTO `item_usable` VALUES (15526,'regen_collar',1,3,0,0,50,30,600,0);
-INSERT INTO `item_usable` VALUES (15533,'chocobo_whistle',1,8,0,0,25,30,300,0);
+INSERT INTO `item_usable` VALUES (15533,'chocobo_whistle',1,8,55,0,25,30,300,0);
 INSERT INTO `item_usable` VALUES (15541,'homing_ring',1,8,80,0,30,30,3600,0);
 INSERT INTO `item_usable` VALUES (15542,'return_ring',1,8,80,0,10,30,3600,0);
 INSERT INTO `item_usable` VALUES (15552,'albatross_ring',1,3,0,0,30,30,72000,0);
