@@ -18,24 +18,24 @@ commandObj.cmdprops =
     parameters = 'ssss'
 }
 
-local chocobo = {}
-
-chocobo.color =
+local colors =
 {
-    yellow = xi.chocobo.color.YELLOW,
-    black  = xi.chocobo.color.BLACK,
-    blue   = xi.chocobo.color.BLUE,
-    red    = xi.chocobo.color.RED,
-    green  = xi.chocobo.color.GREEN,
+    yellow = xi.chocoboRaising.color.YELLOW,
+    black  = xi.chocoboRaising.color.BLACK,
+    blue   = xi.chocoboRaising.color.BLUE,
+    red    = xi.chocoboRaising.color.RED,
+    green  = xi.chocoboRaising.color.GREEN,
 }
 
 commandObj.onTrigger = function(player, arg, arg2, arg3, arg4)
-    local color = chocobo.color[arg] or xi.chocobo.color.YELLOW
-    local traits =
+    local chocobo =
     {
+        color       = colors[arg] or xi.chocoboRaising.color.YELLOW,
         largeBeak   = false,
         fullTail    = false,
         largeTalons = false,
+        speed       = xi.settings.map.MOUNT_SPEED,
+        minutes     = xi.chocoboRaising.ridingTimeCap,
     }
 
     local traitArgs = { arg2, arg3, arg4 }
@@ -43,19 +43,26 @@ commandObj.onTrigger = function(player, arg, arg2, arg3, arg4)
     for _, traitArg in ipairs(traitArgs) do
         if traitArg then
             if traitArg == 'head' then
-                traits.largeBeak = true
+                chocobo.largeBeak = true
             elseif traitArg == 'tail' then
-                traits.fullTail = true
+                chocobo.fullTail = true
             elseif traitArg == 'feet' then
-                traits.largeTalons = true
+                chocobo.largeTalons = true
             end
         end
     end
 
-    player:registerChocobo(color, traits)
+    player:registerChocobo(chocobo)
 
     player:delStatusEffectSilent(xi.effect.MOUNTED)
-    player:addStatusEffect(xi.effect.MOUNTED, { power = xi.mount.CHOCOBO, duration = 1800, origin = player, subPower = 64, silent = true })
+    player:addStatusEffect(xi.effect.MOUNTED,
+    {
+        power    = xi.mount.CHOCOBO,
+        duration = chocobo.minutes * 60,
+        origin   = player,
+        subPower = xi.chocoboRaising.personalChocoboFlag,
+        silent   = true,
+    })
 end
 
 return commandObj

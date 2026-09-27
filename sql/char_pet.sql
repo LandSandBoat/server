@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS `char_pet` (
   `equipped_attachments` blob,
   `adventuringfellowid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `chocoboid` int(11) unsigned NOT NULL DEFAULT '0',
-  `field_chocobo` int(11) unsigned NOT NULL DEFAULT '0',
+  `chocobo_user_data` blob,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

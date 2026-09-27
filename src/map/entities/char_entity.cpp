@@ -165,7 +165,7 @@ CCharEntity::CCharEntity()
     std::memset(&m_PetCommands, 0, sizeof(m_PetCommands));
     std::memset(&m_WeaponSkills, 0, sizeof(m_WeaponSkills));
     std::memset(&m_SetBlueSpells, 0, sizeof(m_SetBlueSpells));
-    std::memset(&m_FieldChocobo, 0, sizeof(m_FieldChocobo));
+    std::memset(&m_chocoboUserData, 0, sizeof(m_chocoboUserData));
     std::memset(&m_unlockedAttachments, 0, sizeof(m_unlockedAttachments));
 
     std::memset(&m_questLog, 0, sizeof(m_questLog));

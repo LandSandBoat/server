@@ -3555,10 +3555,36 @@ end
 function CBaseEntity:setPetName(pType, value, arg2)
 end
 
----@param color xi.chocobo.color
----@param traits table
+---@param chocobo { color: xi.chocoboRaising.color?, largeBeak: boolean?, fullTail: boolean?, largeTalons: boolean?, speed: integer?, minutes: integer?, ability1: integer?, ability2: integer?, strength: integer?, endurance: integer?, discernment: integer?, receptivity: integer?, weather: integer?, silksSpeedBonus: integer? }
 ---@return nil
-function CBaseEntity:registerChocobo(color, traits)
+function CBaseEntity:registerChocobo(chocobo)
+end
+
+---@nodiscard
+---@return { color: xi.chocoboRaising.color, largeBeak: boolean, fullTail: boolean, largeTalons: boolean, speed: integer, minutes: integer, properties: integer }?
+function CBaseEntity:getFieldChocobo()
+end
+
+---@class ChocoboUserData
+---@field flags integer
+---@field chocobosRaised integer
+---@field registeredAbility1 integer
+---@field registeredAbility2 integer
+---@field registeredStrength integer
+---@field registeredEndurance integer
+---@field registeredDiscernment integer
+---@field registeredReceptivity integer
+---@field registeredWeather integer
+---@field silksSpeedBonus integer
+
+---@nodiscard
+---@return ChocoboUserData
+function CBaseEntity:getChocoboUserData()
+end
+
+---@param data { flags: integer?, chocobosRaised: integer? }
+---@return nil
+function CBaseEntity:setChocoboUserData(data)
 end
 
 ---@nodiscard

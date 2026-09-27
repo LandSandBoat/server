@@ -44,6 +44,7 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "utils/battleutils.h"
+#include "utils/mountutils.h"
 
 namespace
 {
@@ -587,15 +588,36 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                     return;
                 }
 
-                PChar->m_mountId = this->Mount.MountId ? this->Mount.MountId + 1 : 0;
+                const auto duration = [&]() -> std::chrono::minutes
+                {
+                    const auto chocobo = ChocoboCustomProperties{ .properties = PChar->m_chocoboUserData.fieldChocobo };
+                    if (!this->Mount.MountId && chocobo.minutes > 0)
+                    {
+                        return std::chrono::minutes{ chocobo.minutes };
+                    }
+
+                    return 30min;
+                }();
+
+                const auto mountId = [&]() -> uint32
+                {
+                    if (this->Mount.MountId)
+                    {
+                        return this->Mount.MountId + 1;
+                    }
+
+                    return 0;
+                }();
+
+                PChar->m_mountId = static_cast<uint8>(mountId);
                 PChar->StatusEffectContainer->AddStatusEffectSilent(
                     xi::StatusEffect::Mounted,
                     static_cast<uint16>(xi::StatusEffect::Mounted),
-                    this->Mount.MountId ? this->Mount.MountId + 1 : 0,
+                    static_cast<uint16>(mountId),
                     0s,
-                    30min,
+                    duration,
                     0,
-                    0x40); // previously known as nameflag "FLAG_CHOCOBO"
+                    mountutils::personalChocoboFlag); // previously known as nameflag "FLAG_CHOCOBO"
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, Recast::Mount, 60s);
                 PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);

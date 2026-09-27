@@ -10,7 +10,11 @@ def check_preconditions(cur):
 
 
 def needs_to_run(cur):
-    # Ensure timecreated column exists in chars
+    # 068 moves field_chocobo into chocobo_user_data.
+    cur.execute("SHOW COLUMNS FROM char_pet LIKE 'chocobo_user_data'")
+    if cur.fetchone():
+        return False
+
     cur.execute("SHOW COLUMNS FROM char_pet LIKE 'field_chocobo'")
     if not cur.fetchone():
         return True

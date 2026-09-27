@@ -76,11 +76,11 @@ page2 =
 local registerRandomChocobo = function(player, npc)
     local colors =
     {
-        xi.chocobo.color.YELLOW,
-        xi.chocobo.color.BLACK,
-        xi.chocobo.color.BLUE,
-        xi.chocobo.color.RED,
-        xi.chocobo.color.GREEN,
+        xi.chocoboRaising.color.YELLOW,
+        xi.chocoboRaising.color.BLACK,
+        xi.chocoboRaising.color.BLUE,
+        xi.chocoboRaising.color.RED,
+        xi.chocoboRaising.color.GREEN,
     }
 
     local color = utils.randomEntry(colors)
@@ -91,13 +91,16 @@ local registerRandomChocobo = function(player, npc)
 
     local traits =
     {
+        color       = color,
         largeBeak   = randomBool(),
         fullTail    = randomBool(),
         largeTalons = randomBool(),
+        speed       = xi.settings.map.MOUNT_SPEED,
+        minutes     = 30,
     }
 
     -- Permanently registers the chocobo to the player!
-    player:registerChocobo(color, traits)
+    player:registerChocobo(traits)
 
     -- Mount the registered chocobo
     player:addStatusEffect(xi.effect.MOUNTED, { power = xi.mount.CHOCOBO, duration = 1800, origin = player, subPower = 64, silent = true })
@@ -108,11 +111,11 @@ local registerRandomChocobo = function(player, npc)
 
     local colorToStr =
     {
-        [xi.chocobo.color.YELLOW] = 'Yellow',
-        [xi.chocobo.color.BLACK]  = 'Black',
-        [xi.chocobo.color.BLUE]   = 'Blue',
-        [xi.chocobo.color.RED]    = 'Red',
-        [xi.chocobo.color.GREEN]  = 'Green',
+        [xi.chocoboRaising.color.YELLOW] = 'Yellow',
+        [xi.chocoboRaising.color.BLACK]  = 'Black',
+        [xi.chocoboRaising.color.BLUE]   = 'Blue',
+        [xi.chocoboRaising.color.RED]    = 'Red',
+        [xi.chocoboRaising.color.GREEN]  = 'Green',
     }
 
     local boolToStr =

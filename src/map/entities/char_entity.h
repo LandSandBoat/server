@@ -188,6 +188,26 @@ struct UnlockedAttachments_t
     uint32 attachments[8];
 };
 
+// Chocobo raising state that outlives any one chocobo. Stored as a blob in char_pet.chocobo_user_data.
+struct ChocoboUserData_t
+{
+    uint32 fieldChocobo; // ChocoboCustomProperties of the registered chocobo, 0 when none
+    uint32 flags;
+    uint16 chocobosRaised;
+    uint8  registeredAbility1;
+    uint8  registeredAbility2;
+    uint8  registeredStrength;
+    uint8  registeredEndurance;
+    uint8  registeredDiscernment;
+    uint8  registeredReceptivity;
+    uint8  registeredWeather;
+    uint8  silksSpeedBonus; // Speed added while Purple Race Silks are worn
+    uint8  reserved[14];
+};
+
+// Saved as raw bytes; a new field must go in reserved or every stored blob loads shifted.
+static_assert(sizeof(ChocoboUserData_t) == 32);
+
 struct GearSetMod_t
 {
     uint8   setId;
@@ -409,10 +429,10 @@ public:
 
     std::array<uint8, 20> m_SetBlueSpells{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
 
-    uint32 m_FieldChocobo{};
-    uint8  m_mountId{}; // Do not reset to 0. Only update when the mount changes.
-    uint32 m_claimedDeeds[5]{};
-    uint32 m_uniqueEvents[5]{};
+    ChocoboUserData_t m_chocoboUserData{};
+    uint8             m_mountId{}; // Do not reset to 0. Only update when the mount changes.
+    uint32            m_claimedDeeds[5]{};
+    uint32            m_uniqueEvents[5]{};
 
     // Store a copy of calculated stats to use when automaton is deactivated for the job info packet (automaton menu)
     AutomatonInfo automatonInfo_{};
