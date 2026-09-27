@@ -21,11 +21,13 @@
 
 #include "profile/profile_session.h"
 
+#include "data/files.h"
 #include "enums/prof_error.h"
 #include "enums/prof_request.h"
 #include "profile/answer.h"
 #include "profile/characters.h"
 #include "profile/context.h"
+#include "profile/files.h"
 #include "profile/status.h"
 #include "protocol/bytes.h"
 #include "protocol/profile/c2s/prof_file_head.h"
@@ -59,6 +61,17 @@ constexpr uint8 kRequestKind     = 2;
 // across all connections
 constexpr std::size_t kBodyBudget       = 64 * 1024 * 1024;
 std::size_t           bodyBytesInFlight = 0;
+
+auto bodyLimit(const ProfRequest request) -> std::size_t
+{
+    switch (request)
+    {
+        case ProfRequest::WriteFile:
+            return sizeof(ProfFileHead) + files::fileSizeLimit + sizeof(uint32);
+        default:
+            return sizeof(ProfFileRequest);
+    }
+}
 
 } // namespace
 
@@ -94,7 +107,7 @@ auto ProfileSession::run() -> Task<void>
     }
 
     const auto header = fromBytes<ProfSendReqData>(*headerBytes);
-    if (!header || header->kind != kRequestKind || header->size > sizeof(ProfFileRequest))
+    if (!header || header->kind != kRequestKind || header->size > bodyLimit(header->request()))
     {
         ShowWarningFmt("{} refused a malformed or oversized request", context_.peer);
         co_return;
@@ -153,12 +166,16 @@ auto ProfileSession::handle(const ProfRequest request, const std::span<const uin
             return changeMyStatus(context_, body);
         case ProfRequest::SecurityToken:
             return ProfileAnswer();
+        case ProfRequest::ReadFile:
+            return readFile(context_, body);
+        case ProfRequest::WriteFile:
+            return writeFile(context_, body);
+        case ProfRequest::RemoveFile:
+            return deleteFile(context_, body);
+        case ProfRequest::GetFileList:
+            return getFileList(context_, body);
         case ProfRequest::LoadFriendList:
         case ProfRequest::StoreFriendList:
-        case ProfRequest::ReadFile:
-        case ProfRequest::WriteFile:
-        case ProfRequest::RemoveFile:
-        case ProfRequest::GetFileList:
         // adds, renames, deletes and reorders handles
         case ProfRequest::StoreHandleNameList:
         // attaches characters to handles and reorders them
