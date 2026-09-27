@@ -1,14 +1,118 @@
 -----------------------------------
--- Chocobo Raising
+-- Chocobo Raising - Chocobo State
 -----------------------------------
 require('scripts/globals/hobbies/chocobo_raising/breeding')
 require('scripts/globals/hobbies/chocobo_raising/constants')
+require('scripts/globals/hobbies/chocobo_raising/model')
+require('scripts/globals/hobbies/chocobo_raising/user_data')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 
+-----------------------------------
+-- Constants
+-----------------------------------
 local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
+local effect = xi.chocoboRaising.effect
+
+-----------------------------------
+-- Specs
+-----------------------------------
+-- The saved row from getChocoboRaisingInfo, plus the fields a visit adds.
+---@class ChocoboState
+---@field charid             integer?
+---@field first_name         string
+---@field last_name          string
+---@field sex                integer
+---@field created            integer
+---@field age                integer?
+---@field last_update_age    integer
+---@field stage              integer
+---@field location           integer
+---@field color              integer
+---@field allele1            integer
+---@field allele2            integer
+---@field allele3            integer
+---@field strength           integer
+---@field endurance          integer
+---@field discernment        integer
+---@field receptivity        integer
+---@field affection          integer
+---@field energy             integer
+---@field satisfaction       integer
+---@field conditions         integer
+---@field ability1           integer
+---@field ability2           integer
+---@field personality        integer
+---@field weather_preference integer
+---@field hunger             integer
+---@field care_plan          integer
+---@field held_item          integer
+---@field locked_plan        integer
+---@field appearance         integer
+---@field walk_progress      integer
+---@field csList             table[]?
+---@field foodGiven          integer[]?
+---@field report             { events: table[] }?
+---@field reportStage        integer?
+---@field retiring           boolean?
+---@field rewardCard         boolean?
+---@field skipping           boolean?
+---@field storyPending       boolean?
+---@field whistleSearchWalk  integer?
+
+-----------------------------------
+-- Helpers
+-----------------------------------
+local function hasRetirementRecord(records)
+    for _, record in ipairs(records) do
+        for _, cutscene in ipairs(record[3]) do
+            if cutscene == xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4 then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+-----------------------------------
+-- Private Functions
+-----------------------------------
+local effectHandlers =
+{
+    [effect.ADD_KEY_ITEM] = function(player, keyItem)
+        player:addKeyItem(keyItem)
+    end,
+
+    [effect.DEL_KEY_ITEM] = function(player, keyItem)
+        player:delKeyItem(keyItem)
+    end,
+
+    [effect.SET_CHAR_VAR] = function(player, name, value)
+        player:setCharVar(name, value)
+    end,
+
+    [effect.SET_LOCAL_VAR] = function(player, name, value)
+        player:setLocalVar(name, value)
+    end,
+
+    [effect.ADD_GIL] = function(player, amount)
+        npcUtil.giveCurrency(player, 'gil', amount)
+    end,
+
+    [effect.SET_HANDKERCHIEF    ] = xi.chocoboRaising.setHandkerchiefState,
+    [effect.SET_WHISTLE_PROGRESS] = xi.chocoboRaising.setWhistleProgress,
+    [effect.SET_USER_FLAG       ] = xi.chocoboRaising.setUserFlag,
+}
+
+-----------------------------------
+-- Global Functions
+-----------------------------------
+---@param player CBaseEntity
+---@param egg CItem?
+---@return ChocoboState
 xi.chocoboRaising.newChocobo = function(player, egg)
     local newChoco = {}
 
@@ -43,7 +147,9 @@ xi.chocoboRaising.newChocobo = function(player, egg)
     newChoco.ability2           = 0
     newChoco.personality        = 0
     newChoco.weather_preference = 0
-    newChoco.hunger             = 0
+    newChoco.hunger             = xi.chocoboRaising.maxHunger
+
+    xi.chocoboRaising.seedEggStats(newChoco, egg)
 
     local defaultCarePlan = bit.lshift(7, 4) + 0
     newChoco.care_plan =
@@ -52,157 +158,107 @@ xi.chocoboRaising.newChocobo = function(player, egg)
         bit.lshift(defaultCarePlan,  8) +
         bit.lshift(defaultCarePlan,  0)
 
-    newChoco.held_item = 0
+    newChoco.held_item     = 0
+    newChoco.locked_plan   = xi.chocoboRaising.carePlans.BASIC_CARE
+    newChoco.appearance    = 0
+    newChoco.walk_progress = 0
 
     return newChoco
 end
 
+-- Days only advance in initChocoState.
+---@param player CBaseEntity
+---@param chocoState ChocoboState
+---@return boolean
 xi.chocoboRaising.updateChocoState = function(player, chocoState)
-    chocoState.age             = math.floor((GetSystemTime() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
-    chocoState.age             = math.min(chocoState.age, xi.chocoboRaising.daysToAdult4 + 1)
-    chocoState.last_update_age = chocoState.age
-
-    debug(string.format('Writing chocoState to cache and db. age: %d, last_update_age: %d', chocoState.age, chocoState.last_update_age))
+    debug(string.format('Writing chocoState to cache and db. last_update_age: %d', chocoState.last_update_age))
 
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
-    player:setChocoboRaisingInfo(chocoState)
 
-    return chocoState
+    return player:setChocoboRaisingInfo(chocoState)
 end
 
-local function handleQuestEvents(player, events, age, reportLength, questState)
-    if
-        not questState.whiteHandkerchiefStarted and
-        not player:hasKeyItem(xi.keyItem.WHITE_HANDKERCHIEF) and
-        age == 7 and
-        not questState.chocoboWhistleQuestBegan
-    then
-        debug('Starting White Handkerchief quest')
-        table.insert(events, { age, { xi.chocoboRaising.cutscenes.CRYING_AT_NIGHT } })
-        questState.whiteHandkerchiefStarted = true
-    elseif
-        questState.whiteHandkerchiefStarted and
-        not questState.whiteHandkerchiefCancelled and
-        age == 15 and
-        reportLength >= 7
-    then
-        debug('Cancelling White Handkerchief quest')
-        table.insert(events, { age, { xi.chocoboRaising.cutscenes.HAVENT_SEEN_YOU } })
-        questState.whiteHandkerchiefCancelled = true
-    elseif
-        not questState.whiteHandkerchiefStarted and
-        not questState.whiteHandkerchiefCancelled and
-        not questState.whiteHandkerchiefFinished and
-        age >= 8 and
-        player:hasKeyItem(xi.keyItem.WHITE_HANDKERCHIEF)
-    then
-        debug('Ending White Handkerchief quest')
-        table.insert(events, { age, { xi.chocoboRaising.cutscenes.THAT_SHOULD_BE_ENOUGH } })
-        questState.whiteHandkerchiefFinished = true
-    end
+---@param player CBaseEntity
+---@return ChocoboCharacterView
+xi.chocoboRaising.characterView = function(player)
+    return
+    {
+        handkerchief         = xi.chocoboRaising.handkerchiefState(player),
+        handkerchiefSameZone = player:getLocalVar(xi.chocoboRaising.handkerchiefZoneVar) == 1,
+        hasWhiteHandkerchief = player:hasKeyItem(xi.keyItem.WHITE_HANDKERCHIEF),
+        hasWhistle           = player:hasItem(xi.item.CHOCOBO_WHISTLE),
+        whistleProg          = xi.chocoboRaising.whistleProgress(player),
+        debugOnset           = player:getCharVar(xi.chocoboRaising.debugOnsetVar),
+    }
 end
 
--- TODO: There's a lot of logic in here about reporting, should we move this into it's own file?
-xi.chocoboRaising.initChocoState = function(player)
-    local chocoState = player:getChocoboRaisingInfo()
-    if not chocoState then
-        return chocoState
-    end
-
-    -- Generate data that doesn't need to be persisted to the db
-    -- but is needed at runtime
-
-    -- Age is worked out alongside 'the day you handed in your egg'
-    -- So on the 0th day, the chocobo is 1 day old.
-    chocoState.age = math.floor((GetSystemTime() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
-    chocoState.age = math.min(chocoState.age, xi.chocoboRaising.daysToAdult4 + 1)
-
-    debug('chocoState.age = ' .. chocoState.age)
-    debug('chocoState.last_update_age = ' .. chocoState.last_update_age)
-
-    -- Add helpers and empty tables to navigate CSs
-    chocoState.csList        = {}
-    chocoState.foodGiven     = {}
-    chocoState.report        = {}
-    chocoState.report.events = {}
-
-    -- Step 1: Determine if enough time has passed to show a report (n > 0 day)
-    local daysPassed = chocoState.age - chocoState.last_update_age
-    if daysPassed <= 0 then
-        chocoState.last_update_age = chocoState.age
-        return chocoState
-    end
-
-    chocoState.report.day_start = chocoState.last_update_age
-    chocoState.report.day_end   = chocoState.age
-
-    local reportLength = chocoState.report.day_end - chocoState.report.day_start
-    debug('Report length:', reportLength)
-
-    chocoState.last_update_age = chocoState.age
-
-    -- Step 2: Build a table of every event that happened on every day
-    local events                 = {}
-    local possibleCarePlanFuture = {}
-
-    -- Extract care plan logic into a clean array of future plan types
-    for i = 0, 3 do
-        local offset   = 24 - (i * 8)
-        local length   = bit.band(bit.rshift(chocoState.care_plan, offset + 4), 0xF)
-        local planType = bit.band(bit.rshift(chocoState.care_plan, offset), 0xF)
-
-        for _ = 1, length do
-            table.insert(possibleCarePlanFuture, planType)
+---@param player CBaseEntity
+---@param effects ChocoboEffect[]
+xi.chocoboRaising.applyEffects = function(player, effects)
+    for _, entry in ipairs(effects) do
+        local handler = effectHandlers[entry[1]]
+        if not handler then
+            print(string.format('ERROR! Unknown chocobo raising effect: %s', tostring(entry[1])))
+        else
+            handler(player, entry[2], entry[3])
         end
     end
+end
 
-    -- Track quest states
-    local questState =
+-- Applies every rollover since the last visit, so the report only shows past days.
+---@param player CBaseEntity
+---@param saved ChocoboState?
+---@return ChocoboState?
+xi.chocoboRaising.initChocoState = function(player, saved)
+    local chocoState = saved or player:getChocoboRaisingInfo()
+    if not chocoState then
+        return nil
+    end
+
+    local changed = false
+    if not xi.chocoboRaising.carePlanData[chocoState.locked_plan] then
+        chocoState.locked_plan = xi.chocoboRaising.carePlans.BASIC_CARE
+        changed                = true
+    end
+
+    local ctx =
     {
-        whiteHandkerchiefStarted   = false,
-        whiteHandkerchiefCancelled = false,
-        whiteHandkerchiefFinished  = false,
-        chocoboWhistleQuestBegan   = player:getCharVar('HQuest[ChocoboWhistle]Prog') > 0,
+        dayLength = xi.chocoboRaising.dayLength,
+        character = xi.chocoboRaising.characterView(player),
     }
 
-    for idx = 1, reportLength do
-        local possibleCarePlanEvent = possibleCarePlanFuture[idx] or xi.chocoboRaising.carePlans.BASIC_CARE
+    local nextDay          = chocoState.last_update_age
+    local records, effects = xi.chocoboRaising.model.advance(chocoState, GetSystemTime(), ctx)
 
-        local age          = chocoState.report.day_start + idx - 1
-        local currentStage = xi.chocoboRaising.ageToStage(age)
-
-        table.insert(events, { age, { possibleCarePlanEvent } })
-
-        -- If the chocobo doesn't have any conditions, roll to see if they get one
-        if not xi.chocoboRaising.hasCondition(chocoState) then
-            for _, condition in ipairs(xi.chocoboRaising.conditions) do
-                -- TODO: Use stats and history instead of pure chance
-                if math.randomInt(1, 100) <= 5 then
-                    xi.chocoboRaising.setCondition(chocoState, condition, true)
-                    break
-                end
-            end
-        end
-
-        -- Evaluate condition logic (stubbed)
-        for _, condition in ipairs(xi.chocoboRaising.conditions) do
-            if xi.chocoboRaising.getCondition(chocoState, condition) then
-                utils.unused()
-            end
-        end
-
-        -- Handle age-up cs's
-        for _, entry in ipairs(xi.chocoboRaising.ageBoundaries) do
-            if currentStage == entry[1] and age >= entry[2] then
-                table.insert(events, { age, { entry[3] } })
-            end
-        end
-
-        handleQuestEvents(player, events, age, reportLength, questState)
+    -- Every visit replays the retirement until it finishes.
+    if
+        chocoState.stage == xi.chocoboRaising.stage.ADULT_4 and
+        not hasRetirementRecord(records)
+    then
+        local lastDay = xi.chocoboRaising.daysToAdult4
+        table.insert(records, { lastDay, lastDay, { xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4 }, { gil = 0, good = 1, poor = 0 }, 0 })
     end
 
-    -- Step 3: Condense that table down and assign to report
-    chocoState.report.events = xi.chocoboRaising.condenseEvents(events)
+    chocoState.age       = chocoState.last_update_age
+    chocoState.csList    = {}
+    chocoState.foodGiven = {}
+    chocoState.report    = { events = records }
+
+    if
+        chocoState.last_update_age == nextDay and
+        not changed
+    then
+        xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+        return chocoState
+    end
+
+    -- Saved first: a failed save must not grant the same days' gil and key items twice.
+    if not xi.chocoboRaising.updateChocoState(player, chocoState) then
+        return nil
+    end
+
+    xi.chocoboRaising.applyEffects(player, effects)
 
     return chocoState
 end
