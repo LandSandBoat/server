@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "enums/message_type.h"
 #include "protocol/profile/s2c/0x0303_get_file_list.h"
 
 #include "common/cbasetypes.h"
@@ -35,10 +36,13 @@
 namespace profile::files
 {
 
+constexpr std::string_view mailbox = "O/m/";
+
 constexpr uint32 fileSizeLimit = 0x400000;
 
 auto read(uint32 accountId, const std::string& path) -> ErrorOr<Maybe<std::string>>;
-auto write(uint32 accountId, const std::string& path, uint32 offset, std::span<const uint8> data) -> bool; // offset 0 starts over, anything else appends
+auto write(uint32 accountId, const std::string& path, uint32 offset, std::span<const uint8> data) -> bool;                                    // offset 0 starts over, anything else appends
+auto post(uint32 senderAccountId, uint32 recipientAccountId, const std::string& name, MessageType type, std::span<const uint8> data) -> bool; // false if it exists or a limit is hit
 auto erase(uint32 accountId, const std::string& path) -> bool;
 auto list(uint32 accountId, std::string_view directory, uint16 limit) -> Maybe<std::vector<ProfFileInfo>>; // oldest first, names relative to the directory
 

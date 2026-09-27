@@ -196,6 +196,18 @@ void PresenceManager::hide(const uint32 accountId, const uint32 otherAccountId)
     }
 }
 
+void PresenceManager::deliverMessage(const uint32 senderAccountId, const uint32 recipientAccountId, const std::string_view name)
+{
+    if (!online_.contains(recipientAccountId))
+    {
+        DebugIRCFmt("account {} left a message for offline account {}", senderAccountId, recipientAccountId);
+        return;
+    }
+
+    DebugIRCFmt("account {} notified of a message from account {}", recipientAccountId, senderAccountId);
+    send(senderAccountId, recipientAccountId, messageNotice(name));
+}
+
 void PresenceManager::announce(const uint32 accountId)
 {
     const auto friendList = friends::visibleFriends(accountId);

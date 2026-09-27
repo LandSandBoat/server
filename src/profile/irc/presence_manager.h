@@ -56,6 +56,7 @@ public:
     void sendFriendsTo(uint32 accountId);
     void introduce(uint32 accountId, uint32 otherAccountId); // new friends see each other
     void hide(uint32 accountId, uint32 otherAccountId);      // accountId appears offline to otherAccountId
+    void deliverMessage(uint32 senderAccountId, uint32 recipientAccountId, std::string_view name);
 
 private:
     struct Online

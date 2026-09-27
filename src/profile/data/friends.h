@@ -48,6 +48,10 @@ struct StoreResult
 // sets each entry's result, 0 = applied
 auto store(uint32 accountId, const StoreFriendListHead& head, std::span<FriendInfo> entries) -> Maybe<StoreResult>;
 
+auto blocks(uint32 accountId, uint32 otherAccountId) -> Maybe<bool>;
+auto accept(uint32 accountId, uint32 otherAccountId) -> bool; // throws on failure, call inside db::transaction
+void dropPending(uint32 accountId, uint32 otherAccountId);    // throws on failure, call inside db::transaction
+
 // both list each other, neither pending, neither blocked
 struct Friend
 {

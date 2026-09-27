@@ -225,6 +225,28 @@ auto store(const uint32 accountId, const StoreFriendListHead& head, const std::s
     return result;
 }
 
+auto blocks(const uint32 accountId, const uint32 otherAccountId) -> Maybe<bool>
+{
+    const auto rset = db::preparedStmt("SELECT list_index FROM accounts_friends WHERE accid = ? AND blacklist = 1 AND friend_accid = ?", accountId, otherAccountId);
+    if (!rset)
+    {
+        return std::nullopt;
+    }
+
+    return rset->next();
+}
+
+auto accept(const uint32 accountId, const uint32 otherAccountId) -> bool
+{
+    const auto rset = run("UPDATE accounts_friends SET pending = 0 WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId);
+    return rset->rowsAffected() == 1;
+}
+
+void dropPending(const uint32 accountId, const uint32 otherAccountId)
+{
+    run("DELETE FROM accounts_friends WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId);
+}
+
 auto visibleFriends(const uint32 accountId) -> ErrorOr<std::vector<Friend>>
 {
     const auto rset = db::preparedStmt("SELECT mine.friend_accid, mine.list_index AS my_index, theirs.list_index AS their_index, sessions.charid AS playing "

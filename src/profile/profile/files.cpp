@@ -22,6 +22,7 @@
 #include "profile/files.h"
 
 #include "data/files.h"
+#include "profile/messages.h"
 #include "protocol/profile/c2s/prof_file_head.h"
 #include "protocol/profile/s2c/prof_count.h"
 
@@ -81,6 +82,7 @@ auto readFile(const Context& context, const std::span<const uint8> body) -> Mayb
     return answer;
 }
 
+// writes to another account are messages
 auto writeFile(Context& context, const std::span<const uint8> body) -> Maybe<ProfileAnswer>
 {
     if (body.size() < sizeof(ProfFileHead) + sizeof(uint32) || !hasTrailingChecksum(body))
@@ -98,7 +100,7 @@ auto writeFile(Context& context, const std::span<const uint8> body) -> Maybe<Pro
     const auto data = body.subspan(sizeof(ProfFileHead), body.size() - sizeof(ProfFileHead) - sizeof(uint32));
     if (!isOwnFile(*head, context.accountId))
     {
-        return ProfileAnswer(ProfError::Refused);
+        return postMessage(context, *head, path, data);
     }
 
     if (!files::write(context.accountId, path, head->offset, data))
@@ -131,7 +133,7 @@ auto deleteFile(const Context& context, const std::span<const uint8> body) -> Ma
     return ProfileAnswer();
 }
 
-// file count and file list share this request
+// file count, file list and message list share this request
 auto getFileList(const Context& context, const std::span<const uint8> body) -> Maybe<ProfileAnswer>
 {
     const auto request = parse<ProfFileRequest>(body);
@@ -146,9 +148,10 @@ auto getFileList(const Context& context, const std::span<const uint8> body) -> M
         return ProfileAnswer(ProfError::Refused);
     }
 
-    const auto directory  = asStringFromUntrustedSource(head.path, sizeof(head.path));
-    const auto maxEntries = static_cast<uint16>(head.offset);
-    auto       limit      = maxEntries;
+    const auto directory     = asStringFromUntrustedSource(head.path, sizeof(head.path));
+    const auto isMessageList = directory == files::mailbox;
+    const auto maxEntries    = static_cast<uint16>(head.offset);
+    auto       limit         = maxEntries;
     if (maxEntries == 0)
     {
         limit = std::numeric_limits<uint16>::max();
@@ -160,7 +163,7 @@ auto getFileList(const Context& context, const std::span<const uint8> body) -> M
         return ProfileAnswer(ProfError::Refused);
     }
 
-    if (maxEntries == 0)
+    if (!isMessageList && maxEntries == 0)
     {
         return ProfileAnswer().add(ProfCount{ .count = static_cast<uint32>(entries->size()) });
     }
@@ -168,8 +171,8 @@ auto getFileList(const Context& context, const std::span<const uint8> body) -> M
     auto answer = ProfileAnswer();
     answer.add(ProfCount{ .count = static_cast<uint32>(entries->size()) }).addAll(*entries);
 
-    // an empty list has no checksum
-    if (!entries->empty())
+    // an empty file list has no checksum, the message list always does
+    if (isMessageList || !entries->empty())
     {
         answer.addChecksum();
     }
