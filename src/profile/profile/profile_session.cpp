@@ -22,17 +22,22 @@
 #include "profile/profile_session.h"
 
 #include "data/files.h"
+#include "data/friends.h"
 #include "enums/prof_error.h"
 #include "enums/prof_request.h"
 #include "profile/answer.h"
 #include "profile/characters.h"
 #include "profile/context.h"
 #include "profile/files.h"
+#include "profile/friends.h"
 #include "profile/status.h"
 #include "protocol/bytes.h"
+#include "protocol/profile/c2s/0x0206_store_friend_list.h"
 #include "protocol/profile/c2s/prof_file_head.h"
 #include "protocol/profile/c2s/prof_open_data.h"
 #include "protocol/profile/c2s/prof_send_req_data.h"
+#include "protocol/profile/friend_info.h"
+#include "protocol/profile/prof_trailer.h"
 #include "protocol/profile/s2c/prof_count.h"
 #include "protocol/profile/s2c/prof_open_ans.h"
 
@@ -55,8 +60,9 @@ namespace
 
 using namespace std::chrono_literals;
 
-constexpr auto  kRequestDeadline = 30s;
-constexpr uint8 kRequestKind     = 2;
+constexpr auto        kRequestDeadline  = 30s;
+constexpr uint8       kRequestKind      = 2;
+constexpr std::size_t kFriendStoreLimit = friends::friendListSize + friends::blockListSize;
 
 // across all connections
 constexpr std::size_t kBodyBudget       = 64 * 1024 * 1024;
@@ -68,6 +74,8 @@ auto bodyLimit(const ProfRequest request) -> std::size_t
     {
         case ProfRequest::WriteFile:
             return sizeof(ProfFileHead) + files::fileSizeLimit + sizeof(uint32);
+        case ProfRequest::StoreFriendList:
+            return sizeof(StoreFriendListHead) + kFriendStoreLimit * sizeof(FriendInfo) + sizeof(ProfTrailer);
         default:
             return sizeof(ProfFileRequest);
     }
@@ -160,6 +168,10 @@ auto ProfileSession::handle(const ProfRequest request, const std::span<const uin
             return searchPolId(body);
         case ProfRequest::LoadGroupList:
             return ProfileAnswer().add(ProfCount{});
+        case ProfRequest::LoadFriendList:
+            return loadFriendList(context_);
+        case ProfRequest::StoreFriendList:
+            return storeFriendList(context_, body);
         case ProfRequest::LoadMyStatus:
             return loadMyStatus(context_);
         case ProfRequest::ChangeMyStatus:
@@ -174,8 +186,6 @@ auto ProfileSession::handle(const ProfRequest request, const std::span<const uin
             return deleteFile(context_, body);
         case ProfRequest::GetFileList:
             return getFileList(context_, body);
-        case ProfRequest::LoadFriendList:
-        case ProfRequest::StoreFriendList:
         // adds, renames, deletes and reorders handles
         case ProfRequest::StoreHandleNameList:
         // attaches characters to handles and reorders them

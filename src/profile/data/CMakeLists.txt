@@ -3,4 +3,6 @@ target_sources(xi_profile_lib PRIVATE
     accounts.cpp
     files.h
     files.cpp
+    friends.h
+    friends.cpp
 )

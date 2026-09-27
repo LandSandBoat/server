@@ -27,6 +27,7 @@
 #include "common/cbasetypes.h"
 #include "common/types/maybe.h"
 
+#include <string_view>
 #include <unordered_map>
 
 namespace profile
@@ -34,7 +35,7 @@ namespace profile
 
 class IrcSession;
 
-// tracks online accounts
+// tracks online accounts and sends their friends status notices
 class PresenceManager
 {
 public:
@@ -52,6 +53,9 @@ public:
     auto status(uint32 accountId) const -> Maybe<Status>;
     void refreshCredentials() const;                                // bumps the credential timestamp of everyone online
     auto setStatus(uint32 accountId, const Status& status) -> bool; // false if saving the open status failed
+    void sendFriendsTo(uint32 accountId);
+    void introduce(uint32 accountId, uint32 otherAccountId); // new friends see each other
+    void hide(uint32 accountId, uint32 otherAccountId);      // accountId appears offline to otherAccountId
 
 private:
     struct Online
@@ -62,8 +66,15 @@ private:
         Status      status;
     };
 
+    void announce(uint32 accountId);
+    auto playing(uint32 accountId) const -> Maybe<uint32>;
+    void notify(uint32 subjectAccountId, uint32 recipientAccountId, uint8 listIndex, bool visible, Maybe<uint32> character);
+    void send(uint32 senderAccountId, uint32 recipientAccountId, std::string_view text);
+    auto nextTimestamp() -> uint64;
+
     std::unordered_map<uint32, Online> online_;
     uint64                             lastSignOnId_{};
+    uint64                             lastTimestamp_{};
 };
 
 } // namespace profile

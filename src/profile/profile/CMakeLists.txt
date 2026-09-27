@@ -5,6 +5,8 @@ target_sources(xi_profile_lib PRIVATE
     context.h
     files.cpp
     files.h
+    friends.cpp
+    friends.h
     profile_session.cpp
     profile_session.h
     status.cpp
