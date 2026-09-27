@@ -16921,7 +16921,13 @@ void saveChocoboUserData(CCharEntity* PChar)
 
 } // namespace
 
-// Values beyond a field's width are clamped rather than wrapped. Stats left out are stored as 0.
+/************************************************************************
+ *  Function: registerChocobo()
+ *  Purpose : Registers a raised chocobo as the player's personal chocobo
+ *  Example : player:registerChocobo({ color = 1, largeBeak = true, speed = 90, minutes = 40 })
+ *  Notes   : Values beyond a field's width are clamped. Stats left out are stored as 0.
+ ************************************************************************/
+
 void CLuaBaseEntity::registerChocobo(const sol::table& chocobo) const
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
@@ -16959,10 +16965,23 @@ void CLuaBaseEntity::registerChocobo(const sol::table& chocobo) const
     ShowWarning("CLuaBaseEntity::registerChocobo() - Entity is null, or not PC.");
 }
 
+/************************************************************************
+ *  Function: getFieldChocobo()
+ *  Purpose : Returns the registered chocobo's appearance, speed and minutes
+ *  Example : local chocobo = player:getFieldChocobo()
+ *  Notes   : Returns nil when no chocobo is registered
+ ************************************************************************/
+
 auto CLuaBaseEntity::getFieldChocobo() const -> sol::object
 {
     const auto* PChar = dynamic_cast<const CCharEntity*>(m_PBaseEntity);
-    if (!PChar || !PChar->m_chocoboUserData.fieldChocobo)
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::getFieldChocobo() - Entity is null, or not PC.");
+        return sol::lua_nil;
+    }
+
+    if (!PChar->m_chocoboUserData.fieldChocobo)
     {
         return sol::lua_nil;
     }
@@ -16980,6 +16999,13 @@ auto CLuaBaseEntity::getFieldChocobo() const -> sol::object
 
     return table;
 }
+
+/************************************************************************
+ *  Function: getChocoboUserData()
+ *  Purpose : Returns the chocobo raising state that outlives any one chocobo
+ *  Example : local raised = player:getChocoboUserData().chocobosRaised
+ *  Notes   :
+ ************************************************************************/
 
 auto CLuaBaseEntity::getChocoboUserData() const -> sol::object
 {
@@ -17007,7 +17033,13 @@ auto CLuaBaseEntity::getChocoboUserData() const -> sol::object
     return table;
 }
 
-// Only the flags and the count. registerChocobo writes the registered chocobo. Fields left out keep their values.
+/************************************************************************
+ *  Function: setChocoboUserData()
+ *  Purpose : Sets the chocobo raising flags and the count of chocobos raised
+ *  Example : player:setChocoboUserData({ flags = flags })
+ *  Notes   : registerChocobo writes the registered chocobo. Fields left out keep their values.
+ ************************************************************************/
+
 void CLuaBaseEntity::setChocoboUserData(const sol::table& data) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -20287,7 +20319,10 @@ auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
                             "weather_preference, "
                             "hunger, "
                             "care_plan, "
-                            "held_item "
+                            "held_item, "
+                            "locked_plan, "
+                            "appearance, "
+                            "walk_progress "
                             "FROM char_chocobos WHERE charid = ? LIMIT 1";
 
         const auto rset = db::preparedStmt(Query, m_PBaseEntity->id);
@@ -20339,6 +20374,10 @@ auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
             table["care_plan"] = rset->get<uint32>("care_plan");
             table["held_item"] = rset->get<uint32>("held_item");
 
+            table["locked_plan"]   = rset->get<uint32>("locked_plan");
+            table["appearance"]    = rset->get<uint32>("appearance");
+            table["walk_progress"] = rset->get<uint32>("walk_progress");
+
             return table;
         }
     }
@@ -20383,7 +20422,10 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table)
                         "weather_preference = ?, "
                         "hunger = ?, "
                         "care_plan = ?, "
-                        "held_item = ? "
+                        "held_item = ?, "
+                        "locked_plan = ?, "
+                        "appearance = ?, "
+                        "walk_progress = ? "
                         "ON DUPLICATE KEY UPDATE "
                         "first_name = VALUES(first_name), "
                         "last_name = VALUES(last_name), "
@@ -20410,7 +20452,10 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table)
                         "weather_preference = VALUES(weather_preference), "
                         "hunger = VALUES(hunger), "
                         "care_plan = VALUES(care_plan), "
-                        "held_item = VALUES(held_item)";
+                        "held_item = VALUES(held_item), "
+                        "locked_plan = VALUES(locked_plan), "
+                        "appearance = VALUES(appearance), "
+                        "walk_progress = VALUES(walk_progress)";
 
     const auto rset = db::preparedStmt(
         Query,
@@ -20440,7 +20485,10 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table)
         table.get_or<uint32>("weather_preference", 0),
         table.get_or<uint32>("hunger", 0),
         table.get_or<uint32>("care_plan", 0),
-        table.get_or<uint32>("held_item", 0));
+        table.get_or<uint32>("held_item", 0),
+        table.get_or<uint32>("locked_plan", 0),
+        table.get_or<uint32>("appearance", 0),
+        table.get_or<uint32>("walk_progress", 0));
 
     if (!rset)
     {
