@@ -24,6 +24,7 @@
 #include "enums/prof_error.h"
 #include "enums/prof_request.h"
 #include "profile/answer.h"
+#include "profile/characters.h"
 #include "profile/context.h"
 #include "protocol/bytes.h"
 #include "protocol/profile/c2s/prof_file_head.h"
@@ -119,7 +120,7 @@ auto ProfileSession::run() -> Task<void>
 
     DebugProfileFmt("{} account {} request {}/{} size {:#x}", context_.peer, context_.accountId, header->command, header->subCommand, header->size);
 
-    const auto answer = handle(header->request());
+    const auto answer = handle(header->request(), *body);
     if (answer)
     {
         const auto head = answer->head();
@@ -133,17 +134,20 @@ auto ProfileSession::run() -> Task<void>
     }
 }
 
-auto ProfileSession::handle(const ProfRequest request) -> Maybe<ProfileAnswer>
+auto ProfileSession::handle(const ProfRequest request, const std::span<const uint8> body) -> Maybe<ProfileAnswer>
 {
     switch (request)
     {
+        case ProfRequest::LoadHandleNameList:
+            return loadHandleNameList(context_);
+        case ProfRequest::LoadCharacterList:
+            return loadCharacterList(context_);
+        case ProfRequest::SearchPolId:
+            return searchPolId(body);
         case ProfRequest::LoadGroupList:
             return ProfileAnswer().add(ProfCount{});
         case ProfRequest::SecurityToken:
             return ProfileAnswer();
-        case ProfRequest::LoadHandleNameList:
-        case ProfRequest::LoadCharacterList:
-        case ProfRequest::SearchPolId:
         case ProfRequest::LoadFriendList:
         case ProfRequest::StoreFriendList:
         case ProfRequest::LoadMyStatus:
