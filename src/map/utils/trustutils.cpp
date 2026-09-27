@@ -174,6 +174,7 @@ auto trustutils::SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntit
     if (PMaster->PParty == nullptr)
     {
         PMaster->PParty = new CParty(PMaster);
+        PMaster->PParty->MarkFormedByTrusts();
     }
 
     PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);

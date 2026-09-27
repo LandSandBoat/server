@@ -101,6 +101,8 @@ public:
 
     timer::time_point GetTimeLastMemberJoined();
     bool              HasTrusts();
+    void              MarkFormedByTrusts();
+    bool              IsFormedByTrusts() const;
 
     std::size_t GetMemberCountAcrossAllProcesses();
 
@@ -125,6 +127,7 @@ private:
     CBattleEntity* m_PQuarterMaster; // the assigned Quartermaster
 
     bool m_EffectsChanged;
+    bool m_FormedByTrusts{ false };
 
     void                     SetLeader(const std::string& MemberName);        // set party leader
     void                     SetQuarterMaster(const std::string& MemberName); // set Quartermaster
