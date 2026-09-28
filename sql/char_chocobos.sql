@@ -34,5 +34,8 @@ CREATE TABLE `char_chocobos` (
   `hunger` tinyint unsigned NOT NULL,
   `care_plan` int unsigned NOT NULL,
   `held_item` int unsigned NOT NULL,
+  `locked_plan` tinyint unsigned NOT NULL DEFAULT 0,
+  `appearance` tinyint unsigned NOT NULL DEFAULT 0,
+  `walk_progress` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

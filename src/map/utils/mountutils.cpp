@@ -21,8 +21,11 @@
 
 #include "mountutils.h"
 
+#include "common/settings.h"
 #include "entities/base_entity.h"
 #include "entities/char_entity.h"
+#include "items.h"
+#include "items/item_equipment.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 
@@ -48,11 +51,11 @@ auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition
         case MOUNT_CHOCOBO:
         {
             // Customized chocobos need ChocoboIndex 2
-            if (PChar->m_FieldChocobo)
+            if (isPersonalChocobo(PChar))
             {
                 return MountPacketDefinition{
                     .ChocoboIndex     = 2,
-                    .CustomProperties = { PChar->m_FieldChocobo, 0 },
+                    .CustomProperties = { PChar->m_chocoboUserData.fieldChocobo, 0 },
                 };
             }
 
@@ -77,6 +80,40 @@ auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition
                 .ChocoboIndex = static_cast<uint8_t>((mount % 8) + 1),
             };
     }
+}
+
+auto isPersonalChocobo(const CCharEntity* PChar) -> bool
+{
+    if (!PChar->m_chocoboUserData.fieldChocobo)
+    {
+        return false;
+    }
+
+    const auto* effect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Mounted);
+
+    return effect &&
+           effect->GetPower() == MOUNT_CHOCOBO &&
+           (effect->GetSubPower() & kPersonalChocoboFlag) != 0;
+}
+
+auto personalChocoboSpeed(const CCharEntity* PChar) -> uint8_t
+{
+    const auto chocobo = ChocoboCustomProperties{ .properties = PChar->m_chocoboUserData.fieldChocobo };
+
+    // Registered before speeds were stored.
+    if (chocobo.speed == 0)
+    {
+        return settings::get<uint8>("map.MOUNT_SPEED");
+    }
+
+    // Purple Race Silks add their rank only while worn; lockstyle does not count.
+    auto speed = uint32_t{ chocobo.speed };
+    if (const auto* PBody = PChar->getEquip(SLOT_BODY); PBody && PBody->getID() == ITEMID::PURPLE_RACING_SILKS)
+    {
+        speed += PChar->m_chocoboUserData.silksSpeedBonus;
+    }
+
+    return static_cast<uint8_t>(std::min<uint32_t>(speed, 0xFF));
 }
 
 }; // namespace mountutils

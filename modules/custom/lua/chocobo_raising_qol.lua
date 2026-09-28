@@ -4,13 +4,12 @@
 -- - Make resultant ridable chocobo speed/endurance etc. more rewarding
 -----------------------------------
 require('modules/module_utils')
-require('scripts/globals/chocobo_raising')
+require('scripts/globals/hobbies/chocobo_raising/chocobo_raising')
 -----------------------------------
 local m = Module:new('chocobo_raising_qol')
 
 -- When the server has started and everything is ready, apply changes to global settings in Chocobo Raising
 m:addOverride('xi.server.onServerStart', function()
-    -- Call super!
     super()
 
     -- Speed up growth boundaries
@@ -34,8 +33,8 @@ m:addOverride('xi.server.onServerStart', function()
     xi.chocoboRaising.ridingSpeedCap     = 120
     -- Ability: Gallop adds 1 rank
     -- Purple Race Silks add 1 rank
-    -- Original: Leads to absolute max of: 80 + (2.5 * 9): 102.5 -> clamped to 100
-    -- Original: Leads to absolute max of: 90 + (4 * 9): 126 -> clamped to 120
+    -- Original: Leads to absolute max of: 80 + (2.5 * 9): 102.5, clamped to 100
+    -- New: Leads to absolute max of: 90 + (4 * 9): 126, clamped to 120
 
     -- Chocobo Endurance Ratings (minutes)
     xi.chocoboRaising.ridingTimeBase    = 20
@@ -43,6 +42,6 @@ m:addOverride('xi.server.onServerStart', function()
     xi.chocoboRaising.ridingTimeCap     = 60
     -- Ability: Canter adds 1 rank
     -- Red Race Silks add 1 rank
-    -- Original: Leads to absolute max of: 17 + (4 * 9): 53 -> clamped to 45
-    -- New: Leads to absolute max of: 20 + (5 * 9): 65 -> clamped to 60
+    -- Original: Leads to absolute max of: 17 + (4 * 9): 53, clamped to 45
+    -- New: Leads to absolute max of: 20 + (5 * 9): 65, clamped to 60
 end)

@@ -42,6 +42,7 @@ zones[xi.zone.UPPER_JEUNO] =
         DECIMATION_LEARNED               = 8223,  -- You have learned the weapon skill Decimation!
         LEND_PRISHE_AMULET               = 8360,  -- You lend the <item> to Prishe.
         YOU_OBTAIN_ITEM                  = 11204, -- You obtain <item>!
+        FINBARR_TRADE_TICKET_AND_CARDS   = 11748, -- When you're ready, trade your ticket and both of the chocobo's chococards to me.
         UNLOCK_DANCER                    = 11863, -- You can now become a dancer!
     },
     mob =

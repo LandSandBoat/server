@@ -1058,7 +1058,7 @@ npcs:
     widescan: true
 
   17764414:
-    script:       Chocobo
+    script:       blank
     display_name: Chocobo
     at:           [139.746, -5.250, -129.686, 124]
     render:
@@ -1071,7 +1071,7 @@ npcs:
     widescan:        true
 
   17764415:
-    script:       Chocobo
+    script:       blank
     display_name: Chocobo
     at:           [139.796, -5.250, -124.677, 129]
     render:
@@ -1084,7 +1084,7 @@ npcs:
     widescan:        true
 
   17764416:
-    script:       Chocobo
+    script:       blank
     display_name: Chocobo
     at:           [140.065, -5.250, -119.933, 124]
     render:
@@ -1490,7 +1490,7 @@ npcs:
     content:  toau
 
   17764444:
-    script: blank
+    script: VCS_Debug
     at:     [134.041, -7.000, -115.267, 32]
     render:
       look:

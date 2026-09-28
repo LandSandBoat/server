@@ -354,7 +354,7 @@ describe('Exdata', function()
     end)
 
     it('can get and set Chocobo Card exdata', function()
-        local item = player:addItem({ id = xi.item.VCS_REGISTRATION_FORM, quantity = 1 })
+        local item = player:addItem({ id = xi.item.VCS_REGISTRATION_CARD, quantity = 1 })
         assert(item)
 
         item:setExData(

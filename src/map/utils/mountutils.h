@@ -31,28 +31,6 @@ struct MountPacketDefinition
     uint32_t CustomProperties[2];
 };
 
-// Odd values work but will force short tail, even if the bit is set in traits.
-enum class ChocoboColor : uint8_t
-{
-    Yellow = 0,
-    Black  = 2,
-    Blue   = 4,
-    Red    = 6,
-    Green  = 8,
-};
-
-struct ChocoboPhysicalTraits
-{
-    uint8_t largeBeak : 1;
-    uint8_t unknown1 : 1;
-    uint8_t unknown2 : 1;
-    uint8_t largeTalons : 1;
-    uint8_t unknown4 : 1;
-    uint8_t unknown5 : 1;
-    uint8_t fullTail : 1;
-    uint8_t unknown7 : 1; // Gives an unknown purple tail variant on yellow chocobos
-};
-
 struct ChocoboCustomProperties
 {
     union
@@ -61,18 +39,36 @@ struct ChocoboCustomProperties
 
         struct
         {
-            ChocoboPhysicalTraits traits;
-            ChocoboColor          color;
-
-            uint8_t unknown8; // Might be personal chocobo statistics.
-            uint8_t unknown9; // Might be personal chocobo statistics.
+            uint32_t largeBeak : 1;
+            uint32_t unknown1 : 1;
+            uint32_t unknown2 : 1;
+            uint32_t largeTalons : 1;
+            uint32_t unknown4 : 1;
+            uint32_t unknown5 : 1;
+            uint32_t fullTail : 1;
+            uint32_t unknown7 : 1; // Gives an unknown purple tail variant on yellow chocobos
+            uint32_t unknown8 : 1; // Set, it forces a short tail
+            uint32_t color : 3;    // xi.chocoboRaising.color
+            uint32_t speed : 7;    // Full speed units; a rental is 80
+            uint32_t minutes : 6;
+            uint32_t unknown25 : 7;
         };
     };
 };
 
+static_assert(sizeof(ChocoboCustomProperties) == sizeof(uint32_t));
+
 namespace mountutils
 {
 
+// MOUNTED effect subPower set by the whistle and /mount; rental chocobos leave it clear.
+constexpr auto kPersonalChocoboFlag = uint16_t{ 0x40 };
+
 auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition;
+
+[[nodiscard]] auto isPersonalChocobo(const CCharEntity* PChar) -> bool;
+
+// Requires isPersonalChocobo. Includes the Purple Race Silks bonus while they are worn.
+[[nodiscard]] auto personalChocoboSpeed(const CCharEntity* PChar) -> uint8_t;
 
 }; // namespace mountutils

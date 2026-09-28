@@ -135,6 +135,7 @@ enum ITEMID : uint16
     FURUSUMI                       = 8804,
     WOODWORKING_SET_25             = 9412,
     COOKING_SET_95                 = 9483,
+    PURPLE_RACING_SILKS            = 11323,
     DREAM_BELL                     = 18863,
     DREAM_BELL_P1                  = 18864,
     LADY_BELL                      = 18868,

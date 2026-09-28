@@ -44,6 +44,7 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "utils/battleutils.h"
+#include "utils/mountutils.h"
 
 namespace
 {
@@ -452,6 +453,9 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
+            // Kept greens can only go back to their own stack or to a free slot.
+            const auto greensStayInSlot = PGysahl->getQuantity() > 1;
+
             auto transaction = ItemClaimTransaction::start(PChar);
             if (!transaction || !transaction->take(LOC_INVENTORY, slotID, 1))
             {
@@ -460,14 +464,19 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            // greens are taken first, and a dig refused before it starts rolls them back.
-            // Digging and finding nothing returns true, so those greens are spent
-            if (!luautils::OnChocoboDig(PChar))
+            // A refused dig, or one whose chocobo keeps the greens, rolls them back.
+            const auto dig = luautils::OnChocoboDig(PChar);
+            if (!dig.dug)
             {
                 return;
             }
 
-            if (!transaction->commit())
+            const auto returnsGreens = dig.keepGreens && (greensStayInSlot || PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() > 0);
+            if (returnsGreens)
+            {
+                transaction->rollback();
+            }
+            else if (!transaction->commit())
             {
                 return;
             }
@@ -587,15 +596,36 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                     return;
                 }
 
-                PChar->m_mountId = this->Mount.MountId ? this->Mount.MountId + 1 : 0;
+                const auto duration = [&]() -> std::chrono::minutes
+                {
+                    const auto chocobo = ChocoboCustomProperties{ .properties = PChar->m_chocoboUserData.fieldChocobo };
+                    if (!this->Mount.MountId && chocobo.minutes > 0)
+                    {
+                        return std::chrono::minutes{ chocobo.minutes };
+                    }
+
+                    return 30min;
+                }();
+
+                const auto mountId = [&]() -> uint32
+                {
+                    if (this->Mount.MountId)
+                    {
+                        return this->Mount.MountId + 1;
+                    }
+
+                    return 0;
+                }();
+
+                PChar->m_mountId = static_cast<uint8>(mountId);
                 PChar->StatusEffectContainer->AddStatusEffectSilent(
                     xi::StatusEffect::Mounted,
                     static_cast<uint16>(xi::StatusEffect::Mounted),
-                    this->Mount.MountId ? this->Mount.MountId + 1 : 0,
+                    static_cast<uint16>(mountId),
                     0s,
-                    30min,
+                    duration,
                     0,
-                    0x40); // previously known as nameflag "FLAG_CHOCOBO"
+                    mountutils::kPersonalChocoboFlag); // previously known as nameflag "FLAG_CHOCOBO"
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, Recast::Mount, 60s);
                 PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);

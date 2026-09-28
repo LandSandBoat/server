@@ -1,13 +1,18 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kiria-Romaria
+-- Type: Chocobo Stable Clerk
+-- !pos 127.687 -5.250 -121.720 241
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- param [0] is related to having a chocobo in raising. it adds more help text to the event.
-    player:startEvent(761, { [0] = 0, [1] =  math.floor(player:getCharSkillLevel(xi.skill.DIG) / 10) })
+    local walks  = xi.chocoboRaising.walks
+    local params = walks.clerkReview(player:getCharVar(walks.lostChickVar), xi.chocoboRaising.raisingLocation[player:getZoneID()])
+    params[1]    = math.floor(player:getCharSkillLevel(xi.skill.DIG) / 10)
+
+    player:startEvent(761, params)
 end
 
 return entity
