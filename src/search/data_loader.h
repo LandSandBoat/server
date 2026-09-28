@@ -88,6 +88,8 @@ public:
     auto GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::vector<SearchEntity>;
     auto GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>;
     auto GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>;
+    auto GetPlayerNamesByIP(const std::string& ipAddress) const -> std::vector<std::string>;
+    auto GetCharName(uint32 playerId) const -> std::string;
     auto GetSearchComment(uint32 playerId) const -> std::string;
     auto GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>;
     auto GetAHItemFromItemID(uint16 ItemID) const -> AuctionHouseItem;
