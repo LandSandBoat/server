@@ -150,7 +150,25 @@ void auth_session::read_func()
         return;
     }
 
-    int8                   code                = loginHelpers::jsonGet<int8>(jsonBuffer, "command").value_or(0);
+    int8 code = loginHelpers::jsonGet<int8>(jsonBuffer, "command").value_or(0);
+
+    // Lets launchers and updaters ask which client version this server expects, and where it is
+    // published, without logging in. Handled before the xiloader version check so any tool can ask.
+    if (static_cast<login_cmd>(code) == login_cmd::LOGIN_VERSION_INFO)
+    {
+        DebugSockets(fmt::format("LOGIN_VERSION_INFO from {}", ipAddress));
+
+        json reply;
+        reply["client_ver"] = settings::get<std::string>("login.CLIENT_VER");
+        reply["ver_lock"]   = settings::get<uint8>("login.VER_LOCK");
+        reply["update_url"] = settings::get<std::string>("login.UPDATE_URL");
+        // The loader protocol this server speaks, so a launcher can pick the matching variant
+        reply["loader_version"] = SupportedXiloaderVersion;
+        reply["profile_port"]   = settings::get<uint16>("network.PROFILE_PORT");
+        sendJsonAsBuffer(reply);
+        return;
+    }
+
     std::string            username            = loginHelpers::jsonGet<std::string>(jsonBuffer, "username").value_or("");
     std::string            password            = loginHelpers::jsonGet<std::string>(jsonBuffer, "password").value_or("");
     std::string            updated_password    = loginHelpers::jsonGet<std::string>(jsonBuffer, "new_password").value_or("");

@@ -21,6 +21,11 @@ xi.settings.login =
     -- WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
     VER_LOCK = 2,
 
+    -- Where players can download the client files for CLIENT_VER, e.g. 'http://update.example.com:54080'.
+    -- Launchers and updaters that support it read this from the login server along with CLIENT_VER
+    -- and VER_LOCK. Leave empty if you do not publish client files.
+    UPDATE_URL = '',
+
     -- 0 - disabled (normal operation)
     -- 1 - enabled (only GM characters allowed online, no new character creation)
     MAINT_MODE = 0,

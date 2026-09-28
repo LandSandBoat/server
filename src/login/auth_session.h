@@ -44,6 +44,9 @@ enum class login_cmd : uint8_t
     LOGIN_REMOVE_TOTP         = 0x32,
     LOGIN_REGENERATE_RECOVERY = 0x33,
     LOGIN_VERIFY_TOTP         = 0x34,
+
+    // Client version query (no login required)
+    LOGIN_VERSION_INFO = 0x40,
 };
 
 /*return result*/
