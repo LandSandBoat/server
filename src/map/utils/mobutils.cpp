@@ -1228,6 +1228,7 @@ void SetupJob(CMobEntity* PMob)
             if (PMob->m_Family == 57) // Gigas
             {
                 PMob->defaultMobMod(xi::MobMod::SpecialSkill, 658); // Catapult only used while at range
+                PMob->defaultMobMod(xi::MobMod::SpecialCool, 14);
             }
             else if (PMob->m_Family == 72) // Trolls
             {

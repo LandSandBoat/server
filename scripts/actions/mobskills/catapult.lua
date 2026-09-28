@@ -9,7 +9,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Ranged attack only used when target is out of range
-    if mob:checkDistance(target) > 2 then
+    if mob:checkDistance(target) > mob:getMeleeRange(target) then
         return 0
     else
         return 1
