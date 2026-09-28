@@ -25,4 +25,21 @@ describe('Level Sync', function()
         assert(joiner:getMainLvl() == 20, string.format('expected joiner sync to 20, level=%d', joiner:getMainLvl()))
         assert(joiner:getTP() == 0, string.format('expected joiner TP reset, TP=%d', joiner:getTP()))
     end)
+
+    -- Exp is handed out one member at a time, so the target can level before the rest of the party on the same kill
+    it('raises a member who levels up right after the sync target', function()
+        local target = xi.test.world:spawnPlayer({ job = xi.job.WAR, level = 21, zone = xi.zone.WEST_RONFAURE })
+        local member = xi.test.world:spawnPlayer({ job = xi.job.SAM, level = 21, zone = xi.zone.WEST_RONFAURE })
+        member:setPos(target:getXPos(), target:getYPos(), target:getZPos())
+
+        target.actions:inviteToParty(member)
+        member.actions:acceptPartyInvite()
+        target.actions:setLevelSync(target)
+
+        target:addExp(20000)
+        member:addExp(20000)
+
+        assert(target:getMainLvl() == 22, string.format('expected target to reach 22, level=%d', target:getMainLvl()))
+        assert(member:getMainLvl() == 22, string.format('expected member to follow the sync to 22, level=%d', member:getMainLvl()))
+    end)
 end)
