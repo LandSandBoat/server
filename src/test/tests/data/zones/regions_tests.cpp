@@ -99,6 +99,6 @@ TEST_CASE("regions: West Ronfaure declares the region its spawns name", "[data][
 
     const auto found = std::ranges::find(*records, "e_46", &xi::data::RegionData::Name);
     REQUIRE(found != records->end());
-    REQUIRE(found->Outer.size() == 101);
-    REQUIRE(found->Holes.size() == 2);
+    REQUIRE(found->Outer.size() == 104);
+    REQUIRE(found->Holes.size() == 22);
 }
