@@ -29,6 +29,13 @@ local piratesSchedule =
     { endTime = utils.timeStringToMinutes('04:48'), action = actions.DEPARTING       },
 }
 
+-- Mhaura pirates arrive 50 minutes after Selbina pirates
+local scheduleOffset =
+{
+    [xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] = 0,
+    [xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]  = 50,
+}
+
 local piratesData =
 {
     -- Pirate ship is on left side of boat.
@@ -159,8 +166,9 @@ xi.pirates.setupPirateNPCSchedule = function(npc)
     npc:initNpcAi()
 
     -- Create triggers for every stage of the encounter on each Pirate NPC.
+    local offset = scheduleOffset[npc:getZoneID()]
     for _, eventData in ipairs(piratesSchedule) do
-        npc:addPeriodicTrigger(eventData.action, 480, eventData.endTime)
+        npc:addPeriodicTrigger(eventData.action, 480, eventData.endTime + offset)
     end
 end
 
@@ -236,7 +244,7 @@ xi.pirates.zoneStateChange = function(zone, action)
     local zoneId = zone:getID()
     local ID     = zones[zoneId]
 
-    if action == actions.ARRIVING then
+    if action == actions.PIRATES_ARRIVE then
         setShipMusic(zone, 170) -- Pirate attack theme
     elseif action == actions.MOBS_SPAWN then
         -- clear any mobs lingering from a previous ride before summoning fresh ones
