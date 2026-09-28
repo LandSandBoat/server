@@ -24,5 +24,28 @@ local eraFameRequirements =
 m:addOverride('xi.jeuno.helpers.GobbiebagQuest.new', function(self, params)
     params.fame = eraFameRequirements[params.questId] or params.fame
 
-    return super(self, params)
+    local quest = super(self, params)
+
+    table.insert(quest.sections,
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
+                player:getFameLevel(xi.fameArea.JEUNO) < params.fame and
+                (params.prerequisite == nil or player:hasCompletedQuest(xi.questLog.JEUNO, params.prerequisite))
+        end,
+
+        -- Restores the original lines for the quest before fame requirements were abolished.
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Bluffnix'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(42, player:getContainerSize(xi.inv.INVENTORY) + 1)
+                end,
+            },
+        },
+    })
+
+    return quest
 end)
