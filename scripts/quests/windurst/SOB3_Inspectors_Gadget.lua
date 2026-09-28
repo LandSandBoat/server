@@ -76,7 +76,7 @@ quest.sections =
             ['Pichichi']       = quest:event(415, 0, xi.keyItem.FAKE_MOUSTACHE),
             ['Pyo_Nzon']       = quest:event(418),
             ['Shanruru']       = quest:event(420),
-            ['Yafa_Yaa']       = quest:event(419),
+            ['Yafa_Yaa']       = quest:event(419, 0, xi.item.LINKSHELL),
 
             onEventFinish =
             {
