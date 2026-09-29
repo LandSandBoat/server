@@ -64,14 +64,14 @@ private:
     void decrypt(uint16_t length);
     void encrypt(uint16_t length);
 
-    void HandleSearchRequest();
+    void HandleSearchRequest(uint16_t length);
     void HandleIdListRequest(uint16_t length);
     void HandleGroupListRequest();
     void HandleSearchComment();
     void HandleAuctionHouseRequest();
     void HandleAuctionHouseHistory();
 
-    auto _HandleSearchRequest() -> SearchRequest;
+    auto _HandleSearchRequest(uint16_t length) -> SearchRequest;
     void SendPlayersList(const SearchRequest& sr);
 
     Scheduler&               scheduler_;

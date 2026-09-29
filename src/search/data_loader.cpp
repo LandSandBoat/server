@@ -204,6 +204,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     std::vector<SearchEntity> PlayersList;
     std::string               filterQry;
 
+    if (sr.friendsOnly && sr.characterIds.empty())
+    {
+        return PlayersList;
+    }
+
     if (sr.jobid > 0 && sr.jobid < 21)
     {
         filterQry.append(" AND ");
