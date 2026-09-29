@@ -6271,7 +6271,7 @@ INSERT INTO `item_equipment` VALUES (16530,'xiphos',7,0,2209777,264,0,0,3,0,0,0)
 INSERT INTO `item_equipment` VALUES (16531,'brass_xiphos',13,0,2209777,265,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16532,'gladius',27,0,2209777,266,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16533,'ancient_sword',45,0,2209777,283,0,0,3,0,0,0);
-INSERT INTO `item_equipment` VALUES (16534,'onion_sword',1,0,2209777,265,0,0,3,0,0,0);
+INSERT INTO `item_equipment` VALUES (16534,'onion_sword',1,0,2209777,264,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16535,'bronze_sword',1,0,2143985,268,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16536,'iron_sword',18,0,2143985,270,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16537,'mythril_sword',36,0,2143985,271,0,0,3,0,0,0);
@@ -6281,7 +6281,7 @@ INSERT INTO `item_equipment` VALUES (16540,'tyrfing',78,0,32897,518,0,0,3,0,0,0)
 INSERT INTO `item_equipment` VALUES (16541,'jagdplaute',64,0,2143985,269,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16542,'wing_sword',69,0,2143985,288,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16543,'fire_sword',18,0,2143985,268,0,0,3,0,0,0);
-INSERT INTO `item_equipment` VALUES (16544,'ryl.arc._sword',10,0,2209777,251,0,0,3,0,0,0);
+INSERT INTO `item_equipment` VALUES (16544,'ryl.arc._sword',10,0,2209777,265,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16545,'broadsword',30,0,2195665,276,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16546,'katzbalger',62,0,2195665,275,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16547,'anelace',72,0,2195665,274,0,0,3,0,0,0);
