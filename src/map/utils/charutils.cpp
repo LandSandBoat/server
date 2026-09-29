@@ -2892,7 +2892,7 @@ void LoadJobChangeGear(CCharEntity* PChar)
                 {
                     bool found = false;
 
-                    for (uint8 slot = 0; slot < PChar->getStorage(container)->GetSize(); slot++)
+                    for (uint8 slot = 1; slot <= PChar->getStorage(container)->GetSize(); slot++)
                     {
                         auto* PEquip = dynamic_cast<CItemEquipment*>(PChar->getStorage(container)->GetItem(slot));
 

@@ -77,6 +77,7 @@ public:
     void dropItem(uint8 container, uint8 slot, uint32 quantity) const;
     void setLockstyle(uint8 mode, sol::optional<sol::table> items) const;
     void equipSet(const sol::table& entries) const;
+    void changeJob(uint8 mainJob, sol::optional<uint8> subJob) const;
     void craft(uint16 crystalItemId, const sol::table& ingredients) const;
 
     void plantAdd(uint8 potContainer, uint8 potSlot, uint8 addContainer, uint8 addSlot, sol::optional<uint16> addItemNo = sol::nullopt) const;
