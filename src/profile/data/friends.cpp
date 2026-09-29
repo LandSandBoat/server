@@ -238,8 +238,14 @@ auto blocks(const uint32 accountId, const uint32 otherAccountId) -> Maybe<bool>
 
 auto accept(const uint32 accountId, const uint32 otherAccountId) -> bool
 {
-    const auto rset = run("UPDATE accounts_friends SET pending = 0 WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId);
-    return rset->rowsAffected() == 1;
+    const auto rset = run("UPDATE accounts_friends SET pending = 0 "
+                          "WHERE blacklist = 0 AND pending = 1 "
+                          "AND ((accid = ? AND friend_accid = ?) OR (accid = ? AND friend_accid = ?))",
+                          accountId,
+                          otherAccountId,
+                          otherAccountId,
+                          accountId);
+    return rset->rowsAffected() > 0;
 }
 
 void dropPending(const uint32 accountId, const uint32 otherAccountId)
