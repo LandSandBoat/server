@@ -64,16 +64,9 @@ auto pendingEntry(const uint32 accountId, const uint32 otherAccountId) -> Maybe<
     return rset->get<bool>("pending");
 }
 
-// pending until the other side adds us back
 auto isPending(const uint32 accountId, const uint32 friendAccountId) -> bool
 {
-    if (const auto existing = pendingEntry(accountId, friendAccountId))
-    {
-        return *existing;
-    }
-
-    const auto theirs = pendingEntry(friendAccountId, accountId);
-    return !theirs || !*theirs;
+    return pendingEntry(accountId, friendAccountId).value_or(true);
 }
 
 auto apply(const uint32 accountId, FriendInfo& entry) -> bool
