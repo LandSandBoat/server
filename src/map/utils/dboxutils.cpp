@@ -668,6 +668,12 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             return;
         }
 
+        if (BoxNo == GP_CLI_COMMAND_PBX_BOXNO::Outgoing && PItem->isSent())
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xBA);
+            return;
+        }
+
         auto transaction = ItemClaimTransaction::start(PChar);
         if (!transaction)
         {
