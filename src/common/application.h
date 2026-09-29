@@ -24,6 +24,7 @@
 #include "arguments.h"
 #include "common/engine.h"
 #include "common/scheduler.h"
+#include "common/types/maybe.h"
 #include "common/zmq/zmq_service.h"
 
 #include <asio.hpp> // for signal_set
@@ -111,6 +112,8 @@ protected:
     std::chrono::steady_clock::time_point startTime_{ std::chrono::steady_clock::now() };
 
     Scheduler scheduler_;
+
+    Maybe<Scheduler::Token> statementUsageToken_;
 
     ZMQService zmqService_;
 

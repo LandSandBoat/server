@@ -77,6 +77,11 @@ public:
     virtual void clearStatementCache()
     {
     }
+
+    // Have every thread close its cached statements the next time it uses the database.
+    virtual void purgeStatementCaches()
+    {
+    }
 };
 
 // Get the active database backend.
@@ -132,6 +137,9 @@ auto enableTimers() -> void;
 
 // Close the calling thread's cached statements, freeing their slots on the server.
 auto clearStatementCache() -> void;
+
+// Log the server's prepared statement usage, and purge every thread's cache once it reaches 75% of the limit.
+auto checkStatementUsage() -> void;
 
 // Execute a transaction with the given transaction function.
 //

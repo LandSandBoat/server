@@ -420,3 +420,25 @@ auto db::clearStatementCache() -> void
 {
     getDatabase().clearStatementCache();
 }
+
+auto db::checkStatementUsage() -> void
+{
+    const auto rset = db::preparedStmt("SELECT CAST(VARIABLE_VALUE AS UNSIGNED) AS used, @@max_prepared_stmt_count AS max_count "
+                                       "FROM information_schema.GLOBAL_STATUS WHERE VARIABLE_NAME = 'PREPARED_STMT_COUNT'");
+    if (!rset || !rset->next())
+    {
+        ShowWarning("Could not read the server's prepared statement usage");
+        return;
+    }
+
+    const auto used     = rset->get<uint64>("used");
+    const auto maxCount = rset->get<uint64>("max_count");
+
+    ShowInfoFmt("Prepared statements in use on the database server: {} of {}", used, maxCount);
+
+    if (used * 4 >= maxCount * 3)
+    {
+        ShowWarningFmt("Prepared statements are at {} of {}, purging this process's statement caches", used, maxCount);
+        getDatabase().purgeStatementCaches();
+    }
+}

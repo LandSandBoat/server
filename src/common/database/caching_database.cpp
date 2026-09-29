@@ -111,6 +111,12 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
             });
     }
 
+    if (const auto generation = purgeGeneration_.load(); state.purgeGeneration != generation)
+    {
+        state.statements.clear();
+        state.purgeGeneration = generation;
+    }
+
     return state;
 }
 
@@ -248,6 +254,11 @@ void db::CachingDatabase::clearStatementCache()
         ShowInfoFmt("Closing {} cached prepared statements", it->second.statements.size());
         it->second.statements.clear();
     }
+}
+
+void db::CachingDatabase::purgeStatementCaches()
+{
+    ++purgeGeneration_;
 }
 
 auto db::CachingDatabase::getSchema() -> std::string
