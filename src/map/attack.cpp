@@ -537,8 +537,8 @@ void CAttack::ProcessDamage()
         // SA/TA should wear off on the first swing
         if (m_isFirstSwing)
         {
-            m_attacker->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::SneakAttack);
-            m_attacker->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::TrickAttack);
+            m_attacker->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::SneakAttack);
+            m_attacker->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::TrickAttack);
         }
     };
 
@@ -830,7 +830,6 @@ void CAttack::ProcessDamage()
             effect->SetSubPower(remainder);
             m_attacker->addModifier(xi::Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
         }
-
-        removePostSwingEffects();
     }
+    removePostSwingEffects();
 }

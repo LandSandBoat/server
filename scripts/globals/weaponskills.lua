@@ -438,8 +438,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local mainhandHitsDone = 0
 
     if not isRanged then
-        attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
-        attacker:delStatusEffect(xi.effect.TRICK_ATTACK)
+        attacker:delStatusEffectSilent(xi.effect.SNEAK_ATTACK)
+        attacker:delStatusEffectSilent(xi.effect.TRICK_ATTACK)
     end
 
     if isRanged and ammoCount ~= -1 then
@@ -636,7 +636,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     end
 
     -- Remove boost after all hits
-    attacker:delStatusEffect(xi.effect.BOOST)
+    attacker:delStatusEffectSilent(xi.effect.BOOST)
 
     -- Return our raw damage to then be modified by enemy reductions based off of melee/ranged
     calcParams.finalDmg = finaldmg
