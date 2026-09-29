@@ -38,20 +38,19 @@ def print_help():
     print('python3 .\\announce.py "Here is a message from python!"')
 
 
-def encode_varint(value):
-    # Implements Alpaca's Base-128 variable-length encoding (Varint)
-    # used for serializing integers and container lengths.
-    bytes_list = bytearray()
-    while value > 127:
-        bytes_list.append((value & 127) | 128)
-        value >>= 7
-    bytes_list.append(value & 127)
-    return bytes_list
+def encode_uint32(value):
+    # Alpaca's fixed length encoding (kSerializeOptions in src/common/ipc.h):
+    # integers are written little-endian at their own size, and container
+    # lengths as uint32.
+    return struct.pack("<I", value)
 
 
 def build_chat_packet(gm_flag, zone, sender, msg):
     if sender is None:
         sender = ""
+
+    sender_bytes = sender.encode("utf-8")
+    msg_bytes = msg.encode("utf-8")
 
     # alpaca encoding for:
     #
@@ -76,21 +75,21 @@ def build_chat_packet(gm_flag, zone, sender, msg):
     buffer.append(12)
 
     # senderId
-    buffer.extend(encode_varint(0))
+    buffer.extend(encode_uint32(0))
 
-    # senderName length
-    buffer.extend(encode_varint(len(sender)))
+    # senderName length (in bytes)
+    buffer.extend(encode_uint32(len(sender_bytes)))
 
     # senderName string
-    buffer.extend(sender.encode("utf-8"))
+    buffer.extend(sender_bytes)
 
-    # message length
-    buffer.extend(encode_varint(len(msg)))
+    # message length (in bytes)
+    buffer.extend(encode_uint32(len(msg_bytes)))
 
     # message string
-    buffer.extend(msg.encode("utf-8"))
+    buffer.extend(msg_bytes)
 
-    # zoneId (uint16 native endianness, assuming little-endian x86/x64)
+    # zoneId (uint16, little-endian)
     buffer.extend(struct.pack("<H", zone))
 
     # gmLevel
