@@ -64,16 +64,9 @@ auto pendingEntry(const uint32 accountId, const uint32 otherAccountId) -> Maybe<
     return rset->get<bool>("pending");
 }
 
-// pending until the other side adds us back
 auto isPending(const uint32 accountId, const uint32 friendAccountId) -> bool
 {
-    if (const auto existing = pendingEntry(accountId, friendAccountId))
-    {
-        return *existing;
-    }
-
-    const auto theirs = pendingEntry(friendAccountId, accountId);
-    return !theirs || !*theirs;
+    return pendingEntry(accountId, friendAccountId).value_or(true);
 }
 
 auto apply(const uint32 accountId, FriendInfo& entry) -> bool
@@ -238,8 +231,14 @@ auto blocks(const uint32 accountId, const uint32 otherAccountId) -> Maybe<bool>
 
 auto accept(const uint32 accountId, const uint32 otherAccountId) -> bool
 {
-    const auto rset = run("UPDATE accounts_friends SET pending = 0 WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId);
-    return rset->rowsAffected() == 1;
+    const auto rset = run("UPDATE accounts_friends SET pending = 0 "
+                          "WHERE blacklist = 0 AND pending = 1 "
+                          "AND ((accid = ? AND friend_accid = ?) OR (accid = ? AND friend_accid = ?))",
+                          accountId,
+                          otherAccountId,
+                          otherAccountId,
+                          accountId);
+    return rset->rowsAffected() > 0;
 }
 
 void dropPending(const uint32 accountId, const uint32 otherAccountId)
