@@ -44,7 +44,7 @@ public:
 
     // NavMesh
 
-    auto findPath(const position_t& start, const position_t& end, float clearance) -> Maybe<PathResult> override;
+    auto findPath(const position_t& start, const position_t& end, float clearance, AvoidLinks avoidLinks) -> Maybe<PathResult> override;
     auto findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t> override;
     auto validPosition(const position_t& position) const -> bool override;
     auto findClosestValidPoint(const position_t& position) const -> Maybe<position_t> override;
@@ -55,8 +55,11 @@ public:
     [[nodiscard]] static auto detourStatusString(const uint32 status) -> std::string;
 
 private:
-    // Traversal filter: walk all flags, skip DISABLED.
-    auto makeFilter() const -> dtQueryFilter;
+    // Traversal filter: walk all flags, skip DISABLED, and skip links when asked to.
+    auto makeFilter(AvoidLinks avoidLinks) const -> dtQueryFilter;
+
+    // links are baked with the ground flag
+    auto flagLinks() -> void;
 
     struct PolyLookup
     {
