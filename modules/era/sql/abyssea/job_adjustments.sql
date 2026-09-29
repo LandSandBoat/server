@@ -87,25 +87,6 @@ UPDATE abilities SET recastTime = 900 WHERE name = 'feral_howl';
 UPDATE abilities SET recastTime = 900 WHERE name = 'killer_instinct';
 
 ------------------------------------
--- Bard
-------------------------------------
-
--- Mazurka: Revert to town/field only
--- Source: https://www.bg-wiki.com/ffxi/Version_Update_(09/08/2010)
-SET @TYPE_CITY     = 1;
-SET @TYPE_OUTDOORS = 2;
-SET @MISC_MAZURKA  = 8;
-
--- Remove mazurka from all zones
-UPDATE zone_settings
-SET misc = misc & ~@MISC_MAZURKA;
-
--- Reapply to cities and outdoor zones
-UPDATE zone_settings
-SET misc = misc | @MISC_MAZURKA
-WHERE (zonetype & (@TYPE_CITY | @TYPE_OUTDOORS)) <> 0;
-
-------------------------------------
 -- Samurai
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
 ------------------------------------

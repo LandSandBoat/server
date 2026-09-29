@@ -1,0 +1,29 @@
+# Drops removed from mob loot after the Abyssea era: the Sky NM stone drops (December 7, 2010) and later targeted removals.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(12/06/2010)
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/23/2012)
+
+templates:
+
+  Brigandish_Blade:
+    loot: # gem_of_the_south removed
+      drops:
+        - chance: very_common
+          item:   libation_abjuration
+
+  Steam_Cleaner:
+    loot: # gem_of_the_east removed
+      drops:
+        - chance: common
+          item:   libation_abjuration
+        - chance: uncommon
+          item:   indra_katars
+        - chance: rare
+          item:   freyas_tear
+
+  Zipacna:
+    loot: # gem_of_the_north removed
+      drops:
+        - chance: common
+          item:   oblation_abjuration
+        - chance: uncommon
+          item:   ushikirimaru
