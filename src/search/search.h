@@ -46,6 +46,7 @@ struct SearchRequest
     std::string   name;
     uint8         nameLen;
     uint8         commentType;
+    bool          friendsOnly = false;
 
     std::vector<uint32> characterIds;
 };

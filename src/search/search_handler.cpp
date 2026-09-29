@@ -258,7 +258,7 @@ void SearchHandler::read_func(const uint16_t length)
             case TCP_SEARCH:
             case TCP_SEARCH_ALL:
             {
-                HandleSearchRequest();
+                HandleSearchRequest(length);
             }
             break;
             case TCP_SEARCH_COMMENT:
@@ -425,9 +425,9 @@ void SearchHandler::HandleSearchComment()
     searchPackets_.emplace_back(commentPacket.GetData(), length);
 }
 
-void SearchHandler::HandleSearchRequest()
+void SearchHandler::HandleSearchRequest(const uint16_t length)
 {
-    SendPlayersList(_HandleSearchRequest());
+    SendPlayersList(_HandleSearchRequest(length));
 }
 
 // Friend list refreshes 20 character IDs at a time. uint16 count at 0x10, uint32 IDs from 0x12
@@ -588,7 +588,7 @@ void SearchHandler::HandleAuctionHouseHistory()
     searchPackets_.emplace_back(PAHPacket.GetData(), length);
 }
 
-auto SearchHandler::_HandleSearchRequest() -> SearchRequest
+auto SearchHandler::_HandleSearchRequest(const uint16_t length) -> SearchRequest
 {
     // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
@@ -791,7 +791,7 @@ auto SearchHandler::_HandleSearchRequest() -> SearchRequest
             }
             case SearchType::Friend: // Friend Packet, 0 byte
             {
-                ShowInfoFmt("Friend Entry found.");
+                sr.friendsOnly = true;
                 break;
             }
             case SearchType::Flags1: // Flag Entry #1, 2 byte,
@@ -843,6 +843,23 @@ auto SearchHandler::_HandleSearchRequest() -> SearchRequest
     if (nameLen > 0)
     {
         sr.name.insert(0, name);
+    }
+
+    // Friend searches append a uint16 count and the uint32 charids of online friends after the query block
+    if (sr.friendsOnly)
+    {
+        constexpr uint16 maxFriendIds = 200;
+        const uint16     countOffset  = 0x11 + size;
+        const uint16     idsOffset    = countOffset + 2;
+        const uint16     dataLength   = length - searchPacketTrailerSize;
+        if (dataLength >= idsOffset)
+        {
+            const auto count = std::min<uint16>({ ref<uint16>(buffer_.data(), countOffset), maxFriendIds, static_cast<uint16>((dataLength - idsOffset) / 4) });
+            for (uint16 index = 0; index < count; ++index)
+            {
+                sr.characterIds.push_back(ref<uint32>(buffer_.data(), idsOffset + index * 4));
+            }
+        }
     }
 
     return sr;
