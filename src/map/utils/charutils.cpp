@@ -192,22 +192,13 @@ const std::set traverserStoneReductionKeyItems = {
     xi::KeyItem::IvoryAbyssiteOfCelerity
 };
 
-// Callers reach these from Lua, so validate against the schema before formatting into a query.
-// TODO: Extract this into some sort of database metadata system that's populated on startup.
-auto isCharPointsColumn(const char* type) -> bool
+struct CharPointsQueries
 {
-    static std::unordered_set<std::string> charPointsColumnNames;
-    if (charPointsColumnNames.empty())
-    {
-        const auto names = db::getTableColumnNames("char_points");
-        for (const auto& name : names)
-        {
-            charPointsColumnNames.insert(name);
-        }
-    }
+    std::string select;
+    std::string update;
+};
 
-    return charPointsColumnNames.find(type) != charPointsColumnNames.end();
-}
+HashMap<std::string, CharPointsQueries> charPointsQueries;
 
 } // namespace
 
@@ -6692,17 +6683,14 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
 {
     TracyZoneScoped;
 
-    if (!isCharPointsColumn(type))
+    const auto it = charPointsQueries.find(type);
+    if (it == charPointsQueries.end())
     {
         ShowErrorFmt("charutils::SetPoints: Invalid type {} for {}", type, PChar->getName());
         return;
     }
 
-    // NOTE: We normally don't want to build a prepared statement with fmt::format,
-    //     : but this query is entirely internal and we've just validated the incoming
-    //     : column name, so it's OK.
-    const auto query = fmt::format("UPDATE char_points SET {} = ? WHERE charid = ?", type);
-    db::preparedStmt(query, amount, PChar->id);
+    db::preparedStmt(it->second.update, amount, PChar->id);
 
     if (strcmp(type, "spark_of_eminence") == 0)
     {
@@ -6714,21 +6702,36 @@ int32 GetPoints(CCharEntity* PChar, const char* type)
 {
     TracyZoneScoped;
 
-    if (!isCharPointsColumn(type))
+    const auto it = charPointsQueries.find(type);
+    if (it == charPointsQueries.end())
     {
         ShowErrorFmt("charutils::GetPoints: Invalid type {} for {}", type, PChar->getName());
         return 0;
     }
 
-    // char_points is 200 columns wide, so SELECT * bound and fetched all of them to read one.
-    const auto query = fmt::format("SELECT {} FROM char_points WHERE charid = ? LIMIT 1", type);
-    const auto rset  = db::preparedStmt(query, PChar->id);
+    const auto rset = db::preparedStmt(it->second.select, PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
-        return rset->get<int32>(type);
+        return rset->get<int32>(0);
     }
 
     return 0;
+}
+
+void LoadCharPointsQueries()
+{
+    charPointsQueries.clear();
+    for (const auto& name : db::getTableColumnNames("char_points"))
+    {
+        if (name != "charid")
+        {
+            charPointsQueries.emplace(name,
+                                      CharPointsQueries{
+                                          .select = fmt::format("SELECT {} FROM char_points WHERE charid = ? LIMIT 1", name),
+                                          .update = fmt::format("UPDATE char_points SET {} = ? WHERE charid = ?", name),
+                                      });
+        }
+    }
 }
 
 void SetUnityLeader(CCharEntity* PChar, uint8 leaderID)
