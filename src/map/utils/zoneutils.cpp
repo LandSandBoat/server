@@ -623,22 +623,14 @@ auto GetCharToUpdate(uint32 primary, uint32 tertiary) -> CCharEntity*
 
 auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<xi::ZoneId>
 {
-    const auto ip    = mapIPP.getIP();
-    const auto ipStr = mapIPP.getIPString();
-    const auto port  = mapIPP.getPort();
-
-    // NOTE: We normally don't want to build a prepared statement with fmt::format,
-    //     : but this query is entirely internal, so it's OK.
-    const auto zonesQuery = fmt::format("SELECT zoneid "
-                                        "FROM zone_settings "
-                                        "WHERE IF({} <> 0, '{}' = zoneip AND {} = zoneport, TRUE)",
-                                        ip,
-                                        ipStr,
-                                        port);
-
     std::vector<xi::ZoneId> zonesOnThisProcess;
 
-    const auto rset = db::preparedStmt(zonesQuery);
+    const auto rset = db::preparedStmt("SELECT zoneid "
+                                       "FROM zone_settings "
+                                       "WHERE ? = 0 OR (zoneip = ? AND zoneport = ?)",
+                                       mapIPP.getIP(),
+                                       mapIPP.getIPString(),
+                                       mapIPP.getPort());
     if (rset && rset->rowsCount())
     {
         while (rset->next())
@@ -1088,9 +1080,8 @@ auto GetManagedZones() -> std::vector<std::pair<xi::ZoneId, std::string>>
     // Lazy loading enabled: fetch from database
     if (!lazyLoad.managedZones.empty())
     {
-        const auto query = fmt::format("SELECT zoneid, name FROM zone_settings WHERE zoneid IN ({})",
-                                       fmt::join(lazyLoad.managedZones, ","));
-        const auto rset  = db::preparedStmt(query);
+        const auto rset = db::preparedStmt("SELECT zoneid, name FROM zone_settings WHERE FIND_IN_SET(zoneid, ?)",
+                                           fmt::format("{}", fmt::join(lazyLoad.managedZones, ",")));
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
             result.emplace_back(rset->get<xi::ZoneId>("zoneid"), rset->get<std::string>("name"));

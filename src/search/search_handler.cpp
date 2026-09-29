@@ -514,34 +514,24 @@ void SearchHandler::HandleAuctionHouseRequest()
     // 7 - defense
     // 8 - resistance
     // 9 - name
-    std::string OrderByString = "ORDER BY";
-    const uint8 paramCount    = ref<uint8>(buffer_.data(), 0x12);
-    for (uint8 i = 0; i < paramCount; ++i) // Item sort options
+    // A repeated key cannot change the order, so the four distinct keys fill every slot the query has.
+    auto        sortKeys   = std::array<uint8, 4>{};
+    auto        keyCount   = 0U;
+    const uint8 paramCount = ref<uint8>(buffer_.data(), 0x12);
+    for (uint8 i = 0; i < paramCount && keyCount < sortKeys.size(); ++i) // Item sort options
     {
-        uint8 param = ref<uint32>(buffer_.data(), 0x18 + 8 * i);
+        const uint8 param = ref<uint32>(buffer_.data(), 0x18 + 8 * i);
         ShowInfoFmt(" Param{}: {}", i, param);
-        switch (param)
+
+        const auto isSortKey = param == 2 || param == 5 || param == 6 || param == 9;
+        if (isSortKey && std::ranges::find(sortKeys, param) == sortKeys.end())
         {
-            case 2:
-                OrderByString.append(" item_equipment.level DESC,");
-                break;
-            case 5:
-                OrderByString.append(" item_weapon.dmg DESC,");
-                break;
-            case 6:
-                OrderByString.append(" item_weapon.delay DESC,");
-                break;
-            case 9:
-                OrderByString.append(" item_basic.sortname,");
-                break;
+            sortKeys[keyCount++] = param;
         }
     }
 
-    OrderByString.append(" item_basic.itemid");
-    const char* OrderByArray = OrderByString.data();
-
     const CDataLoader PDataLoader;
-    const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
+    const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, sortKeys);
 
     const std::size_t itemListSize = ItemList.size();
     const std::size_t PacketsCount = (itemListSize / 20) + (itemListSize % 20 != 0) + (itemListSize == 0);

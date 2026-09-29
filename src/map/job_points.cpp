@@ -112,8 +112,26 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         job->totalJpSpent += cost;
         jobPoint->value++;
 
-        const auto query = std::format("UPDATE char_job_points SET jptype{}=?, job_points=?, job_points_spent=? WHERE charid=? AND jobid=?", JobPointTypeIndex(jobPoint->id));
-        db::preparedStmt(query, jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
+        const auto& types = job->job_point_types;
+        db::preparedStmt("UPDATE char_job_points SET "
+                         "jptype0 = ?, jptype1 = ?, jptype2 = ?, jptype3 = ?, jptype4 = ?, "
+                         "jptype5 = ?, jptype6 = ?, jptype7 = ?, jptype8 = ?, jptype9 = ?, "
+                         "job_points = ?, job_points_spent = ? "
+                         "WHERE charid = ? AND jobid = ?",
+                         types[0].value,
+                         types[1].value,
+                         types[2].value,
+                         types[3].value,
+                         types[4].value,
+                         types[5].value,
+                         types[6].value,
+                         types[7].value,
+                         types[8].value,
+                         types[9].value,
+                         job->currentJp,
+                         job->totalJpSpent,
+                         m_PChar->id,
+                         job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);
     }

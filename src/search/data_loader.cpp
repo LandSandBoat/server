@@ -27,7 +27,13 @@
 #include "data/enums/job.h"
 
 #include <algorithm>
+#include <array>
+#include <cctype>
+#include <compare>
 #include <cstring>
+#include <limits>
+#include <span>
+
 #include <fmt/ranges.h>
 
 #include "data_loader.h"
@@ -84,38 +90,48 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>
+auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint8, 4>& sortKeys) const -> std::vector<AuctionHouseItem>
 {
     ShowDebugFmt("Try find category: {}", ahCategoryID);
 
-    std::vector<AuctionHouseItem> ItemList;
-
-    const auto rset = [&]()
+    struct SortableItem
     {
-        const auto subQuery = "(SELECT item_basic.* "
-                              "FROM item_basic "
-                              "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid"
-                              ") AS item_basic ";
+        AuctionHouseItem item;
+        int64            level;
+        int64            damage;
+        int64            delay;
+        std::string      sortName;
+    };
 
-        const auto fromTable = settings::get<bool>("search.OMIT_NO_HISTORY") ? subQuery : "item_basic";
+    std::vector<SortableItem> rows;
 
-        // Build the query string with optional subquery and order-by statements before passing it to the prepared statement.
-        //
-        // NOTE: We normally don't want to build a prepared statement with fmt::format,
-        //     : but this query is entirely internal, so it's OK.
-        const auto queryStr = fmt::format("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack) "
-                                          "FROM {} "
-                                          "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
-                                          "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
-                                          "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                                          "WHERE aH = ? "
-                                          "GROUP BY item_basic.itemid "
-                                          "{}",
-                                          fromTable,
-                                          orderByString);
+    const auto rset = [&]
+    {
+        if (settings::get<bool>("search.OMIT_NO_HISTORY"))
+        {
+            return db::preparedStmt("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack), "
+                                    "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_weapon.dmg, item_weapon.delay "
+                                    "FROM (SELECT item_basic.* FROM item_basic "
+                                    "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid) AS item_basic "
+                                    "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
+                                    "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
+                                    "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                    "WHERE aH = ? "
+                                    "GROUP BY item_basic.itemid "
+                                    "ORDER BY item_basic.itemid",
+                                    ahCategoryID);
+        }
 
-        // We will now populate the ? in the prepared statement.
-        return db::preparedStmt(queryStr, ahCategoryID);
+        return db::preparedStmt("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack), "
+                                "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_weapon.dmg, item_weapon.delay "
+                                "FROM item_basic "
+                                "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
+                                "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
+                                "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                "WHERE aH = ? "
+                                "GROUP BY item_basic.itemid "
+                                "ORDER BY item_basic.itemid",
+                                ahCategoryID);
     }();
 
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -133,7 +149,63 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& or
             item.StackAmount = -1;
         }
 
-        ItemList.emplace_back(item);
+        // INT64_MIN stands in for NULL, which MariaDB puts last in a DESC sort; delay is signed, so -1 is a real value.
+        rows.push_back(SortableItem{
+            .item     = item,
+            .level    = rset->getOrDefault<int64>("level", std::numeric_limits<int64>::min()),
+            .damage   = rset->getOrDefault<int64>("dmg", std::numeric_limits<int64>::min()),
+            .delay    = rset->getOrDefault<int64>("delay", std::numeric_limits<int64>::min()),
+            .sortName = rset->get<std::string>("sortname"),
+        });
+    }
+
+    const auto compareKey = [](const SortableItem& lhs, const SortableItem& rhs, const uint8 key) -> std::weak_ordering
+    {
+        switch (key)
+        {
+            case 2:
+                return rhs.level <=> lhs.level;
+            case 5:
+                return rhs.damage <=> lhs.damage;
+            case 6:
+                return rhs.delay <=> lhs.delay;
+            case 9:
+                // utf8mb4_general_ci weighs a letter as its capital, so 'a' sorts before '_'.
+                return std::lexicographical_compare_three_way(
+                    lhs.sortName.begin(),
+                    lhs.sortName.end(),
+                    rhs.sortName.begin(),
+                    rhs.sortName.end(),
+                    [](const char a, const char b)
+                    {
+                        return std::toupper(static_cast<unsigned char>(a)) <=> std::toupper(static_cast<unsigned char>(b));
+                    });
+            default:
+                return std::weak_ordering::equivalent;
+        }
+    };
+
+    // Stable, so the itemid order from the query breaks the remaining ties.
+    std::ranges::stable_sort(
+        rows,
+        [&](const SortableItem& lhs, const SortableItem& rhs)
+        {
+            for (const auto key : sortKeys)
+            {
+                if (const auto order = compareKey(lhs, rhs, key); order != 0)
+                {
+                    return order < 0;
+                }
+            }
+
+            return false;
+        });
+
+    std::vector<AuctionHouseItem> ItemList;
+    ItemList.reserve(rows.size());
+    for (const auto& row : rows)
+    {
+        ItemList.push_back(row.item);
     }
 
     return ItemList;
@@ -202,66 +274,63 @@ auto CDataLoader::GetPlayersCount(const SearchRequest& sr) const -> uint32
 auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>
 {
     std::vector<SearchEntity> PlayersList;
-    std::string               filterQry;
 
     if (sr.friendsOnly && sr.characterIds.empty())
     {
         return PlayersList;
     }
 
-    if (sr.jobid > 0 && sr.jobid < 21)
-    {
-        filterQry.append(" AND ");
-        filterQry.append(" mjob = ");
-        filterQry.append(std::to_string(static_cast<unsigned long long>(sr.jobid)));
-    }
+    // Bound as a JSON array for JSON_TABLE; performance is comparable or better than a formatted IN list.
+    const auto characterIds = fmt::format("[{}]", fmt::join(sr.characterIds, ","));
 
-    if (sr.zoneid[0] > 0)
-    {
-        std::string zoneList;
-        int         i = 1;
-        zoneList.append(std::to_string(static_cast<unsigned long long>(sr.zoneid[0])));
-        while (i < 10 && sr.zoneid[i] != 0)
-        {
-            zoneList.append(", ");
-            zoneList.append(std::to_string(static_cast<unsigned long long>(sr.zoneid[i])));
-            i++;
-        }
-        filterQry.append(" AND ");
-        filterQry.append("(pos_zone IN (");
-        filterQry.append(zoneList);
-        filterQry.append(") OR (pos_zone = 0 AND pos_prevzone IN (");
-        filterQry.append(zoneList);
-        filterQry.append("))) ");
-    }
+    // Unused zone slots repeat the first zone, which leaves the IN list matches unchanged.
+    auto zones = std::array<uint16, 10>{};
+    std::ranges::copy(std::span(sr.zoneid, zones.size()), zones.begin());
+    std::fill(std::ranges::find(zones, 0), zones.end(), zones[0]);
 
-    if (sr.commentType != 0)
-    {
-        filterQry.append(fmt::format(" AND (seacom_type & 0xF0) = {}", sr.commentType));
-    }
-
-    if (!sr.characterIds.empty())
-    {
-        filterQry.append(fmt::format(" AND charid IN ({})", fmt::join(sr.characterIds, ", ")));
-    }
-
-    std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
-        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
-        "linkshellid1, linkshellid2 "
-        "FROM accounts_sessions "
-        "LEFT JOIN accounts_parties USING (charid) "
-        "LEFT JOIN chars USING (charid) "
-        "LEFT JOIN char_look USING (charid) "
-        "LEFT JOIN char_stats USING (charid) "
-        "LEFT JOIN char_profile USING(charid) "
-        "LEFT JOIN char_flags USING(charid) "
-        "WHERE charname IS NOT NULL ";
-
-    fmtQuery.append(filterQry);
-    fmtQuery.append(" ORDER BY charname ASC");
-
-    auto rset = db::preparedStmt(fmtQuery);
+    const auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
+                                       "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
+                                       "linkshellid1, linkshellid2 "
+                                       "FROM accounts_sessions "
+                                       "LEFT JOIN accounts_parties USING (charid) "
+                                       "LEFT JOIN chars USING (charid) "
+                                       "LEFT JOIN char_look USING (charid) "
+                                       "LEFT JOIN char_stats USING (charid) "
+                                       "LEFT JOIN char_profile USING(charid) "
+                                       "LEFT JOIN char_flags USING(charid) "
+                                       "WHERE charname IS NOT NULL "
+                                       "AND (? = 0 OR mjob = ?) "
+                                       "AND (? = 0 OR pos_zone IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR (pos_zone = 0 AND pos_prevzone IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?))) "
+                                       "AND (? = 0 OR (seacom_type & 0xF0) = ?) "
+                                       "AND (? = '[]' OR charid IN (SELECT id FROM JSON_TABLE(?, '$[*]' COLUMNS (id INT UNSIGNED PATH '$')) AS ids)) "
+                                       "ORDER BY charname ASC",
+                                       sr.jobid,
+                                       sr.jobid,
+                                       zones[0],
+                                       zones[0],
+                                       zones[1],
+                                       zones[2],
+                                       zones[3],
+                                       zones[4],
+                                       zones[5],
+                                       zones[6],
+                                       zones[7],
+                                       zones[8],
+                                       zones[9],
+                                       zones[0],
+                                       zones[1],
+                                       zones[2],
+                                       zones[3],
+                                       zones[4],
+                                       zones[5],
+                                       zones[6],
+                                       zones[7],
+                                       zones[8],
+                                       zones[9],
+                                       sr.commentType,
+                                       sr.commentType,
+                                       characterIds,
+                                       characterIds);
     if (rset && rset->rowsCount())
     {
         int totalResults   = 0; // gives ALL matching criteria (total)

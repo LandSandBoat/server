@@ -952,35 +952,22 @@ void LoadFromCharSpellsSQL(CCharEntity* PChar)
     // disable all spells
     PChar->m_SpellList.reset();
 
-    // Compile a list of all enabled expansions
-    std::vector<std::string> enabledExpansions;
+    std::vector<std::string_view> enabledExpansions;
     for (const auto& expansion : { "ROTZ", "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV", "TVR", "VOIDWATCH" })
     {
         if (luautils::IsContentEnabled(expansion))
         {
-            enabledExpansions.push_back(fmt::format("\"{}\"", expansion));
+            enabledExpansions.emplace_back(expansion);
         }
     }
 
-    std::string condition = "spell_list.content_tag IS NULL";
-
-    if (!enabledExpansions.empty())
-    {
-        condition = fmt::format("spell_list.content_tag IN ({}) OR spell_list.content_tag IS NULL", fmt::join(enabledExpansions, ","));
-    }
-
-    // Select all player spells from enabled expansions
-    //
-    // NOTE: We normally don't want to build a prepared statement with fmt::format,
-    //     : but this query is entirely internal, so it's OK.
-    auto query = fmt::format("SELECT char_spells.spellid "
-                             "FROM char_spells "
-                             "JOIN spell_list "
-                             "ON spell_list.spellid = char_spells.spellid "
-                             "WHERE charid = ? AND ({})",
-                             condition);
-
-    auto rset = db::preparedStmt(query, PChar->id);
+    const auto rset = db::preparedStmt("SELECT char_spells.spellid "
+                                       "FROM char_spells "
+                                       "JOIN spell_list "
+                                       "ON spell_list.spellid = char_spells.spellid "
+                                       "WHERE charid = ? AND (spell_list.content_tag IS NULL OR FIND_IN_SET(spell_list.content_tag, ?))",
+                                       PChar->id,
+                                       fmt::format("{}", fmt::join(enabledExpansions, ",")));
     if (rset && rset->rowsCount())
     {
         while (rset->next())
