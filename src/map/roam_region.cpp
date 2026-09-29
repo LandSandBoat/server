@@ -228,6 +228,12 @@ auto RoamRegion::clampToRegion(const position_t& from, const Vector3& direction,
         return 0.0f;
     }
 
+    // heading out from the boundary crosses at t = 0, which the scan below skips
+    if (!contains(from.x + direction.x * kEdgeMargin, from.z + direction.z * kEdgeMargin))
+    {
+        return 0.0f;
+    }
+
     // first crossing of a ring edge; the ray may leave and come back
     float nearest = distance;
     for (const auto& edge : edges_)
