@@ -3924,7 +3924,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     /////////////////////////////////////////////////////////////////////////////////////////////
 
     // Boost lasts the entire attack around
-    this->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Boost);
+    this->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Boost);
     this->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Detectable);
     this->processActionEffectFlags(action);
 
