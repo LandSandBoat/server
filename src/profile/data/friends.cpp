@@ -28,6 +28,7 @@
 #include "common/macros.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <iterator>
 #include <ranges>
@@ -41,8 +42,9 @@ namespace
 {
 
 // throws so the transaction rolls back
-template <typename... Args>
-auto run(const char* query, Args&&... args)
+// Takes the query as a char array so only a string literal compiles, which keeps each statement's text fixed.
+template <std::size_t N, typename... Args>
+auto run(const char (&query)[N], Args&&... args)
 {
     auto rset = db::preparedStmt(query, std::forward<Args>(args)...);
     if (!rset)

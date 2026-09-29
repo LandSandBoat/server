@@ -29,6 +29,7 @@
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
+#include <atomic>
 #include <memory>
 #include <string>
 
@@ -46,6 +47,9 @@ struct ConnectionState
 
     // open transaction on this connection
     bool inTransaction{ false };
+
+    // the purge request this connection's statements were last cleared for
+    uint64 purgeGeneration{ 0 };
 };
 
 } // namespace detail
@@ -57,6 +61,8 @@ public:
     auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
+    void clearStatementCache() override;
+    void purgeStatementCaches() override;
 
     auto getSchema() -> std::string override;
     auto getVersion() -> std::string override;
@@ -76,6 +82,9 @@ private:
     //
     // Terminates if the connection can't be re-established.
     auto runWithRetry(const std::string& query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
+
+    // Bumped by purgeStatementCaches; each thread's cache lives in thread-local state, so only its own thread can clear it.
+    std::atomic<uint64> purgeGeneration_{ 0 };
 };
 
 } // namespace db

@@ -26,17 +26,6 @@
 namespace
 {
 
-const std::vector<std::string> craftSkillDbNames = {
-    "Wood",
-    "Smith",
-    "Gold",
-    "Cloth",
-    "Leather",
-    "Bone",
-    "Alchemy",
-    "Cook",
-};
-
 auto processRecipeDetails = [](auto& rset, GP_SERV_COMMAND_RECIPE_TYPE1_3& details, uint16 skillID)
 {
     std::map<uint16, uint16> ingredients;
@@ -114,19 +103,21 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
         {
             // We don't get a skillRank from the client request, figure out the rank range based off level.
             // Retail observed to send a random recipe up to +10 but unclear if it's strictly limited to current rank and if it can send back recipes below your current skill.
-            const char* craftName      = craftSkillDbNames[skillID - 1].c_str();
             const uint8 calculatedRank = skillLevel / 10;
             const uint8 minSkill       = calculatedRank * 10;
             const uint8 maxSkill       = (calculatedRank + 1) * 10;
 
-            const auto query = std::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
-                                           "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
-                                           "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
-                                           "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
-                                           "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY RAND() LIMIT 1",
-                                           craftName,
-                                           craftName);
-            const auto rset  = db::preparedStmt(query, minSkill, maxSkill);
+            const auto rset = db::preparedStmt("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
+                                               "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
+                                               "FROM (SELECT *, CASE ? WHEN 1 THEN Wood WHEN 2 THEN Smith WHEN 3 THEN Gold WHEN 4 THEN Cloth "
+                                               "WHEN 5 THEN Leather WHEN 6 THEN Bone WHEN 7 THEN Alchemy WHEN 8 THEN Cook END AS craftLevel "
+                                               "FROM synth_recipes WHERE Desynth = 0) AS recipes "
+                                               "INNER JOIN item_basic ON Result = item_basic.itemid "
+                                               "WHERE craftLevel >= GREATEST(Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook) AND "
+                                               "craftLevel BETWEEN ? AND ? ORDER BY RAND() LIMIT 1",
+                                               skillID,
+                                               minSkill,
+                                               maxSkill);
             FOR_DB_SINGLE_RESULT(rset)
             {
                 processRecipeDetails(rset, packet.Details, skillID);
@@ -137,24 +128,26 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
         }
         case GP_SERV_COMMAND_RECIPE_TYPE::RecipeDetail2:
         {
-            const char* craftName = craftSkillDbNames[skillID - 1].c_str();
-            uint8       minSkill  = skillRank * 10;
-            uint8       maxSkill  = (skillRank + 1) * 10;
+            uint8 minSkill = skillRank * 10;
+            uint8 maxSkill = (skillRank + 1) * 10;
 
             if (skillLevel < maxSkill)
             {
                 maxSkill = skillLevel;
             }
 
-            const auto query = std::format("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
-                                           "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
-                                           "FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid "
-                                           "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
-                                           "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 1",
-                                           craftName,
-                                           craftName,
-                                           craftName);
-            const auto rset  = db::preparedStmt(query, minSkill, maxSkill, offset);
+            const auto rset = db::preparedStmt("SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, "
+                                               "Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 "
+                                               "FROM (SELECT *, CASE ? WHEN 1 THEN Wood WHEN 2 THEN Smith WHEN 3 THEN Gold WHEN 4 THEN Cloth "
+                                               "WHEN 5 THEN Leather WHEN 6 THEN Bone WHEN 7 THEN Alchemy WHEN 8 THEN Cook END AS craftLevel "
+                                               "FROM synth_recipes WHERE Desynth = 0) AS recipes "
+                                               "INNER JOIN item_basic ON Result = item_basic.itemid "
+                                               "WHERE craftLevel >= GREATEST(Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook) AND "
+                                               "craftLevel BETWEEN ? AND ? ORDER BY craftLevel, item_basic.name LIMIT ?, 1",
+                                               skillID,
+                                               minSkill,
+                                               maxSkill,
+                                               offset);
             FOR_DB_SINGLE_RESULT(rset)
             {
                 processRecipeDetails(rset, packet.Details, skillID);
@@ -165,24 +158,26 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
         }
         case GP_SERV_COMMAND_RECIPE_TYPE::RecipeList:
         {
-            const char* craftName = craftSkillDbNames[skillID - 1].c_str();
-            const uint8 minSkill  = skillRank * 10;
-            uint8       maxSkill  = (skillRank + 1) * 10;
-            uint8       idx       = 0;
+            const uint8 minSkill = skillRank * 10;
+            uint8       maxSkill = (skillRank + 1) * 10;
+            uint8       idx      = 0;
 
             if (skillLevel < maxSkill)
             {
                 maxSkill = skillLevel;
             }
 
-            const auto query = std::format("SELECT Result FROM synth_recipes "
-                                           "INNER JOIN item_basic ON Result = item_basic.itemid "
-                                           "WHERE {} >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND "
-                                           "{} BETWEEN ? AND ? AND Desynth = 0 ORDER BY {}, item_basic.name LIMIT ?, 17",
-                                           craftName,
-                                           craftName,
-                                           craftName);
-            const auto rset  = db::preparedStmt(query, minSkill, maxSkill, offset);
+            const auto rset = db::preparedStmt("SELECT Result "
+                                               "FROM (SELECT *, CASE ? WHEN 1 THEN Wood WHEN 2 THEN Smith WHEN 3 THEN Gold WHEN 4 THEN Cloth "
+                                               "WHEN 5 THEN Leather WHEN 6 THEN Bone WHEN 7 THEN Alchemy WHEN 8 THEN Cook END AS craftLevel "
+                                               "FROM synth_recipes WHERE Desynth = 0) AS recipes "
+                                               "INNER JOIN item_basic ON Result = item_basic.itemid "
+                                               "WHERE craftLevel >= GREATEST(Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook) AND "
+                                               "craftLevel BETWEEN ? AND ? ORDER BY craftLevel, item_basic.name LIMIT ?, 17",
+                                               skillID,
+                                               minSkill,
+                                               maxSkill,
+                                               offset);
             FOR_DB_MULTIPLE_RESULTS(rset)
             {
                 if (idx == 16)

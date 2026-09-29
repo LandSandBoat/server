@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 
+#include <array>
 #include <vector>
 
 struct SearchRequest;
@@ -89,7 +90,7 @@ public:
     auto GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>;
     auto GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>;
     auto GetSearchComment(uint32 playerId) const -> std::string;
-    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>;
+    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint8, 4>& sortKeys) const -> std::vector<AuctionHouseItem>;
     auto GetAHItemFromItemID(uint16 ItemID) const -> AuctionHouseItem;
     void ExpireAHItems(uint16 expireAgeInDays) const;
 };

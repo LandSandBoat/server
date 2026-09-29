@@ -27,7 +27,10 @@
 #include "map/entities/char_entity.h"
 #include "test_common.h"
 
+#include <array>
 #include <format>
+#include <limits>
+#include <utility>
 
 #include <bcrypt/BCrypt.hpp>
 
@@ -73,31 +76,50 @@ std::vector<std::string> charIdTables = {
 // Cleans the given character ID or all characters with IDs >= MinTestCharId.
 void TestChar::clean(uint32 charId /* = 0 */)
 {
-    std::string matchingCondition = std::format(">= {}", MinTestCharId);
-    if (charId > 0)
+    const auto ids = [&]() -> std::pair<uint32, uint32>
     {
-        matchingCondition = std::format("= {}", charId);
-    }
+        if (charId > 0)
+        {
+            return { charId, charId };
+        }
 
-    std::vector cleanupQueries = {
-        std::format("DELETE FROM accounts WHERE id {}", matchingCondition),
-        std::format("DELETE FROM auction_house WHERE seller {}", matchingCondition),
-        std::format("DELETE FROM delivery_box WHERE charid {} OR senderid {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_bazaar WHERE seller {} OR purchaser {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_trade WHERE sender {} OR receiver {}", matchingCondition, matchingCondition),
-        std::format("DELETE FROM audit_vendor WHERE seller {}", matchingCondition),
+        return { MinTestCharId, std::numeric_limits<uint32>::max() };
+    }();
+
+    constexpr auto oneIdColumn = std::array{
+        "DELETE FROM accounts WHERE id BETWEEN ? AND ?",
+        "DELETE FROM auction_house WHERE seller BETWEEN ? AND ?",
+        "DELETE FROM audit_vendor WHERE seller BETWEEN ? AND ?",
     };
 
-    for (auto& tableName : charIdTables)
+    constexpr auto twoIdColumns = std::array{
+        "DELETE FROM delivery_box WHERE charid BETWEEN ? AND ? OR senderid BETWEEN ? AND ?",
+        "DELETE FROM audit_bazaar WHERE seller BETWEEN ? AND ? OR purchaser BETWEEN ? AND ?",
+        "DELETE FROM audit_trade WHERE sender BETWEEN ? AND ? OR receiver BETWEEN ? AND ?",
+    };
+
+    for (const auto* query : oneIdColumn)
     {
-        cleanupQueries.emplace_back(std::format("DELETE FROM {} WHERE charid {}", tableName, matchingCondition));
+        if (!db::preparedStmt(query, ids.first, ids.second))
+        {
+            ShowErrorFmt("Failed to execute cleanup query: {}", query);
+        }
     }
 
-    for (auto& query : cleanupQueries)
+    for (const auto* query : twoIdColumns)
     {
-        if (const auto rset = db::preparedStmt(query); !rset)
+        if (!db::preparedStmt(query, ids.first, ids.second, ids.first, ids.second))
         {
-            ShowErrorFmt("Failed to execute cleanup query: {}", query.c_str());
+            ShowErrorFmt("Failed to execute cleanup query: {}", query);
+        }
+    }
+
+    for (const auto& tableName : charIdTables)
+    {
+        const auto query = std::format("DELETE FROM {} WHERE charid BETWEEN ? AND ?", tableName);
+        if (!db::preparedStmt(query, ids.first, ids.second))
+        {
+            ShowErrorFmt("Failed to execute cleanup query: {}", query);
         }
     }
 }

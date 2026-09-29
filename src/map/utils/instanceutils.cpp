@@ -71,15 +71,14 @@ auto LoadInstances(const std::vector<uint16>& instanceIds) -> void
         return;
     }
 
-    const auto query = fmt::format("SELECT instanceid,instance_name,instance_zone,entrance_zone,"
-                                   "time_limit,start_x,start_y,start_z,"
-                                   "start_rot,instance_list.music_day,instance_list.music_night,instance_list.battlesolo,"
-                                   "instance_list.battlemulti,zone_settings.name AS zone_name "
-                                   "FROM instance_list INNER JOIN zone_settings "
-                                   "ON instance_zone = zone_settings.zoneid "
-                                   "WHERE instanceid IN ({})",
-                                   fmt::join(instanceIds, ","));
-    const auto rset  = db::preparedStmt(query);
+    const auto rset = db::preparedStmt("SELECT instanceid,instance_name,instance_zone,entrance_zone,"
+                                       "time_limit,start_x,start_y,start_z,"
+                                       "start_rot,instance_list.music_day,instance_list.music_night,instance_list.battlesolo,"
+                                       "instance_list.battlemulti,zone_settings.name AS zone_name "
+                                       "FROM instance_list INNER JOIN zone_settings "
+                                       "ON instance_zone = zone_settings.zoneid "
+                                       "WHERE FIND_IN_SET(instanceid, ?)",
+                                       fmt::format("{}", fmt::join(instanceIds, ",")));
 
     FOR_DB_MULTIPLE_RESULTS(rset)
     {

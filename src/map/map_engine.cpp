@@ -187,6 +187,7 @@ auto MapEngine::init() -> Task<void>
 
     guildutils::Initialize();
     charutils::LoadExpTable();
+    charutils::LoadCharPointsQueries();
     traits::LoadTraitsList();
     effects::LoadEffectsParameters();
     grade::LoadGrades();
@@ -277,6 +278,9 @@ auto MapEngine::init() -> Task<void>
     }
 
     db::enableTimers();
+
+    // Most startup queries never run again, so stop them holding server statement slots for the process lifetime.
+    db::clearStatementCache();
 
     //
     // Set up the watchdog tasks

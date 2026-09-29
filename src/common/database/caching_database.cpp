@@ -32,7 +32,10 @@
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
+#include <algorithm>
+#include <atomic>
 #include <chrono>
+#include <mutex>
 #include <thread>
 using namespace std::chrono_literals;
 
@@ -44,6 +47,10 @@ namespace
 thread_local HashMap<const db::CachingDatabase*, db::detail::ConnectionState> tlsStates;
 
 bool timersEnabled = false;
+
+// Each cached statement holds one of the server's max_prepared_stmt_count slots until its connection closes.
+std::once_flag           statementLimitRead;
+std::atomic<std::size_t> maxCachedStatements{ 2048U };
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
 auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
@@ -80,6 +87,34 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
     {
         state.connection = createConnection();
         state.statements.clear();
+
+        std::call_once(
+            statementLimitRead,
+            [&]
+            {
+                // Runs outside runWithRetry, so a dropped connection here must not escape: keep the default cap.
+                try
+                {
+                    const auto query = std::string("SELECT @@max_prepared_stmt_count");
+                    const auto rset  = state.connection->prepare(query)->executeQuery(query);
+                    if (rset && rset->next())
+                    {
+                        const auto serverLimit = rset->get<uint32>(0);
+                        maxCachedStatements    = std::min<std::size_t>(maxCachedStatements, serverLimit);
+                        ShowInfoFmt("Server allows {} prepared statements, caching up to {} per connection", serverLimit, maxCachedStatements.load());
+                    }
+                }
+                catch (const std::exception& e)
+                {
+                    ShowWarningFmt("Could not read max_prepared_stmt_count, caching up to {} statements per connection: {}", maxCachedStatements.load(), e.what());
+                }
+            });
+    }
+
+    if (const auto generation = purgeGeneration_.load(); state.purgeGeneration != generation)
+    {
+        state.statements.clear();
+        state.purgeGeneration = generation;
     }
 
     return state;
@@ -91,6 +126,12 @@ auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, cons
     auto it = connState.statements.find(rawQuery);
     if (it == connState.statements.end())
     {
+        if (connState.statements.size() >= maxCachedStatements)
+        {
+            ShowWarningFmt("Prepared statement cache full, clearing it. A query is likely being built from runtime values: {}", rawQuery);
+            connState.statements.clear();
+        }
+
         it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
     }
 
@@ -204,6 +245,20 @@ auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::ve
 void db::CachingDatabase::setInTransaction(bool value)
 {
     getState().inTransaction = value;
+}
+
+void db::CachingDatabase::clearStatementCache()
+{
+    if (const auto it = tlsStates.find(this); it != tlsStates.end())
+    {
+        ShowInfoFmt("Closing {} cached prepared statements", it->second.statements.size());
+        it->second.statements.clear();
+    }
+}
+
+void db::CachingDatabase::purgeStatementCaches()
+{
+    ++purgeGeneration_;
 }
 
 auto db::CachingDatabase::getSchema() -> std::string

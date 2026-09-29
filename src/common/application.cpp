@@ -21,6 +21,8 @@
 
 #include "application.h"
 
+#include "common/database.h"
+
 #include "arguments.h"
 #include "console_service.h"
 #include "debug.h"
@@ -86,6 +88,8 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
     ShowInfoFmt("Build type: {}", XI_BUILD_TYPE);
 
     consoleService_ = std::make_unique<ConsoleService>(*this);
+
+    statementUsageToken_.emplace(scheduler_.intervalOnMainThread(std::chrono::hours(1), db::checkStatementUsage));
 }
 
 Application::~Application()
