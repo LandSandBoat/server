@@ -271,6 +271,13 @@ end
 function CClientEntityPairActions:equipSet(entries)
 end
 
+---Send a job change packet (requires a mog house or a zone with the mog menu)
+---@param mainJob xi.job Main job, 0 to leave unchanged
+---@param subJob? xi.job Support job, 0 or nil to leave unchanged
+---@return nil
+function CClientEntityPairActions:changeJob(mainJob, subJob)
+end
+
 ---Start a synthesis. Inventory slots are resolved automatically.
 ---@param crystal xi.item Crystal item ID
 ---@param ingredients xi.item[] Ingredient item IDs (1..8)

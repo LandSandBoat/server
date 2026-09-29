@@ -131,6 +131,30 @@ describe('Equipment', function()
         assert(player:getEquippedItem(xi.slot.MAIN) == nil)
     end)
 
+    it('changing job back re-equips gear from the last inventory slot', function()
+        player:gotoMogHouse(xi.zone.WINDURST_WOODS)
+        if player:isInEvent() then
+            player.events:finish()
+        end
+
+        while player:getFreeSlotsCount() > 1 do
+            player:addItem(xi.item.BRONZE_CAP)
+        end
+
+        player:addItem(xi.item.BRONZE_SWORD)
+        player:equipItem(xi.item.BRONZE_SWORD, nil, xi.slot.MAIN)
+        assert(player:getEquippedItem(xi.slot.MAIN))
+
+        player.actions:changeJob(xi.job.WHM)
+        assert(player:getEquippedItem(xi.slot.MAIN) == nil)
+
+        player.actions:changeJob(xi.job.WAR)
+
+        local weapon = player:getEquippedItem(xi.slot.MAIN)
+        assert(weapon, 'main hand not re-equipped')
+        assert(weapon:getID() == xi.item.BRONZE_SWORD)
+    end)
+
     it('equipped ammo stack decrements on use', function()
         player:addItem(xi.item.FIRE_ARROW, 50)
         player:equipItem(xi.item.FIRE_ARROW, nil, xi.slot.AMMO)
