@@ -442,8 +442,11 @@ auto CPathFind::FindPathInternal(const position_t& start, const position_t& end)
         return false;
     }
 
+    // links are for chasing only
+    const auto avoidLinks = AvoidLinks{ roamRegion_ != nullptr && !recoveringToRegion_ };
+
     const pathfind::NavPathBuilder builder{ navMesh() };
-    auto                           built = builder.findPath(start, end, owner_->hitboxRadius());
+    auto                           built = builder.findPath(start, end, owner_->hitboxRadius(), avoidLinks);
 
     if (!built)
     {

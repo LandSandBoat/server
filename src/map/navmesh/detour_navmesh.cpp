@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <common/types/maybe.h>
 #include <fstream>
+#include <utility>
 #include <vector>
 
 namespace
@@ -98,12 +99,37 @@ auto DetourNavMesh::fromDetour(const float* p) -> position_t
     return { p[0], p[1] * -1.0f, p[2] * -1.0f, 0, 0 };
 }
 
-auto DetourNavMesh::makeFilter() const -> dtQueryFilter
+auto DetourNavMesh::makeFilter(const AvoidLinks avoidLinks) const -> dtQueryFilter
 {
     dtQueryFilter filter;
     filter.setIncludeFlags(kIncludeFlags);
     filter.setExcludeFlags(kExcludeFlags);
+    if (avoidLinks)
+    {
+        filter.setExcludeFlags(kExcludeFlags | SamplePolyFlags::SAMPLE_POLYFLAGS_JUMP);
+    }
+
     return filter;
+}
+
+auto DetourNavMesh::flagLinks() -> void
+{
+    const auto& navMesh = std::as_const(*navMesh_);
+    for (int i = 0; i < navMesh.getMaxTiles(); ++i)
+    {
+        const auto* tile = navMesh.getTile(i);
+        if (!tile || !tile->header)
+        {
+            continue;
+        }
+
+        const auto base = navMesh.getPolyRefBase(tile);
+        for (int c = 0; c < tile->header->offMeshConCount; ++c)
+        {
+            const auto poly = tile->offMeshCons[c].poly;
+            navMesh_->setPolyFlags(base | poly, tile->polys[poly].flags | SamplePolyFlags::SAMPLE_POLYFLAGS_JUMP);
+        }
+    }
 }
 
 auto DetourNavMesh::lookupPoly(const std::array<float, 3>& pos, const float* extents, const dtQueryFilter& filter) const -> Maybe<DetourNavMesh::PolyLookup>
@@ -207,6 +233,8 @@ auto DetourNavMesh::load(const std::string& filename) -> bool
         return false;
     }
 
+    flagLinks();
+
     return true;
 }
 
@@ -234,6 +262,8 @@ auto DetourNavMesh::installNavMesh(dtNavMesh* newNavMesh) -> bool
         unload();
         return false;
     }
+
+    flagLinks();
 
     return true;
 }
@@ -290,7 +320,7 @@ auto DetourNavMesh::save(const std::string& path) const -> bool
     return true;
 }
 
-auto DetourNavMesh::findPath(const position_t& start, const position_t& end, const float clearance) -> Maybe<PathResult>
+auto DetourNavMesh::findPath(const position_t& start, const position_t& end, const float clearance, const AvoidLinks avoidLinks) -> Maybe<PathResult>
 {
     TracyZoneScopedS(12);
 
@@ -311,7 +341,7 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end, con
                  zoneID_,
                  kMaxNavPolys);
 
-    const auto filter    = makeFilter();
+    const auto filter    = makeFilter(avoidLinks);
     const auto startPoly = lookupPoly(toDetour(start), polyPickExt, filter);
     if (!startPoly)
     {
@@ -422,7 +452,7 @@ auto DetourNavMesh::findRandomPosition(const position_t& start, float maxRadius)
 
     DebugNavmesh("DetourNavMesh::findRandomPosition (%f, %f, %f) (%u)", start.x, start.y, start.z, zoneID_);
 
-    const auto filter    = makeFilter();
+    const auto filter    = makeFilter(AvoidLinks::No);
     const auto spos      = toDetour(start);
     const auto startPoly = lookupPoly(spos, polyPickExt, filter);
     if (!startPoly)
@@ -455,7 +485,7 @@ auto DetourNavMesh::validPosition(const position_t& position) const -> bool
     TracyZoneScoped;
 
     DebugNavmesh("DetourNavMesh::validPosition (%f, %f, %f) (%u)", position.x, position.y, position.z, zoneID_);
-    return lookupPoly(toDetour(position), smallPolyPickExt, makeFilter()).has_value();
+    return lookupPoly(toDetour(position), smallPolyPickExt, makeFilter(AvoidLinks::No)).has_value();
 }
 
 auto DetourNavMesh::findClosestValidPoint(const position_t& position) const -> Maybe<position_t>
@@ -464,7 +494,7 @@ auto DetourNavMesh::findClosestValidPoint(const position_t& position) const -> M
 
     DebugNavmesh("DetourNavMesh::findClosestValidPoint (%f, %f, %f) (%u)", position.x, position.y, position.z, zoneID_);
 
-    const auto hit = lookupPoly(toDetour(position), largePolyPickExt, makeFilter());
+    const auto hit = lookupPoly(toDetour(position), largePolyPickExt, makeFilter(AvoidLinks::No));
     if (!hit)
     {
         return std::nullopt;
@@ -486,7 +516,7 @@ auto DetourNavMesh::findFurthestValidPoint(const position_t& startPosition, cons
                  endPosition.z,
                  zoneID_);
 
-    const auto filter    = makeFilter();
+    const auto filter    = makeFilter(AvoidLinks::No);
     const auto startPoly = lookupPoly(toDetour(startPosition), largePolyPickExt, filter);
     if (!startPoly)
     {
@@ -514,7 +544,7 @@ auto DetourNavMesh::moveAlongSurface(const position_t& start, const position_t& 
     TracyZoneScoped;
 
     // A tight start extent assumes the entity is on the mesh; report failure otherwise so the caller free-moves back on.
-    const auto filter    = makeFilter();
+    const auto filter    = makeFilter(AvoidLinks::No);
     const auto startPoly = lookupPoly(toDetour(start), polyPickExt, filter);
     if (!startPoly)
     {
@@ -550,7 +580,7 @@ auto DetourNavMesh::snapToValidPosition(position_t& position) const -> void
 
     DebugNavmesh("DetourNavMesh::snapToValidPosition (%f, %f, %f) (%u)", position.x, position.y, position.z, zoneID_);
 
-    const auto filter = makeFilter();
+    const auto filter = makeFilter(AvoidLinks::No);
     const auto spos   = toDetour(position);
 
     // Try a cheap small radius first, then 30f XZ for genuinely off-mesh positions.
