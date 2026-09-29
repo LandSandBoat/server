@@ -57,6 +57,7 @@ public:
     auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
+    void clearStatementCache() override;
 
     auto getSchema() -> std::string override;
     auto getVersion() -> std::string override;

@@ -72,6 +72,11 @@ public:
     virtual void setInTransaction(bool)
     {
     }
+
+    // Close the calling thread's cached statements, freeing their slots on the server.
+    virtual void clearStatementCache()
+    {
+    }
 };
 
 // Get the active database backend.
@@ -124,6 +129,9 @@ auto transactionCommit() -> bool;
 auto transactionRollback() -> bool;
 
 auto enableTimers() -> void;
+
+// Close the calling thread's cached statements, freeing their slots on the server.
+auto clearStatementCache() -> void;
 
 // Execute a transaction with the given transaction function.
 //

@@ -415,3 +415,8 @@ auto db::getTableColumnNames(const std::string& tableName) -> std::vector<std::s
 
     return {};
 }
+
+auto db::clearStatementCache() -> void
+{
+    getDatabase().clearStatementCache();
+}
