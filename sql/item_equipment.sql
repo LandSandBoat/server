@@ -6281,7 +6281,7 @@ INSERT INTO `item_equipment` VALUES (16540,'tyrfing',78,0,32897,518,0,0,3,0,0,0)
 INSERT INTO `item_equipment` VALUES (16541,'jagdplaute',64,0,2143985,269,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16542,'wing_sword',69,0,2143985,288,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16543,'fire_sword',18,0,2143985,268,0,0,3,0,0,0);
-INSERT INTO `item_equipment` VALUES (16544,'ryl.arc._sword',10,0,2209777,251,0,0,3,0,0,0);
+INSERT INTO `item_equipment` VALUES (16544,'ryl.arc._sword',10,0,2209777,265,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16545,'broadsword',30,0,2195665,276,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16546,'katzbalger',62,0,2195665,275,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (16547,'anelace',72,0,2195665,274,0,0,3,0,0,0);
