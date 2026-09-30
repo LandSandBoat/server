@@ -264,10 +264,12 @@ void IrcSession::login(const std::string_view argument)
     const auto nick = argument.substr(0, argument.find(':'));
 
     accounts::refresh(credential_.accountId, credential_.sessionHash);
-    ShowInfoFmt("{} account {} signed on", peer_, credential_.accountId);
+
+    const auto udpPortSlot = accounts::udpPortSlot(credential_);
+    ShowInfoFmt("{} account {} signed on, udp port slot {}", peer_, credential_.accountId, udpPortSlot);
 
     send(fmt::format(":srv 422 {} :no motd", nick));
-    send(fmt::format(":{}!p@pol NOTICE {} :{}", scrambleNick(1), nick, profileAvailableNotice()));
+    send(fmt::format(":{}!p@pol NOTICE {} :{}", scrambleNick(1), nick, profileAvailableNotice(udpPortSlot)));
     signOnId_ = presence_.signOn(credential_.accountId, credential_.sessionHash, this);
 }
 

@@ -276,7 +276,7 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
                 }
                 else
                 {
-                    ShowWarning("map_cleanup: WITHOUT CHAR timed out, session closed on this process");
+                    ShowWarningFmt("map_cleanup: session {} (charid {}) timed out without a character, closing", map_session_data->client_ipp.toString(), map_session_data->charID);
                     if (!otherMap)
                     {
                         db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", map_session_data->charID);
@@ -314,7 +314,7 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
 
             if (now > map_session_data->last_update + std::chrono::seconds(timeoutSetting))
             {
-                ShowDebugFmt("Clearing map server pending session for pending char ID: '{}'", map_session_data->charID);
+                ShowWarningFmt("map_cleanup: pending session for charid {} expired, client did not connect", map_session_data->charID);
 
                 db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", map_session_data->charID);
 

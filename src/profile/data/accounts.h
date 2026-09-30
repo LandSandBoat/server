@@ -45,6 +45,9 @@ auto freshness(const Credential& credential) -> Maybe<bool>; // nothing if the h
 // no-op if a newer login replaced the hash
 void refresh(uint32 accountId, const SessionHash& sessionHash);
 
+// 0 if the session is gone
+auto udpPortSlot(const Credential& credential) -> uint16;
+
 auto exists(uint32 accountId) -> bool;
 
 // online if never set
