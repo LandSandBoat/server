@@ -797,9 +797,9 @@ void CLuaClientEntityPairActions::engage(CLuaBaseEntity* mob) const
     PChar->loc.p.rotation = worldAngle(PChar->loc.p, PMob->loc.p);
     PMob->loc.p.rotation  = worldAngle(PMob->loc.p, PChar->loc.p);
 
-    // 3. Change last attack time so we can engage immediately
+    // 3. Clear the engage lockout so we can engage immediately
     auto* controller = static_cast<CPlayerController*>(parent_->testChar()->entity()->PAI->GetController());
-    controller->setLastAttackTime(timer::now() - 30s);
+    controller->setEngageLockedUntil(timer::now());
 
     // 4. Send packet to engage
     const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_ACTION>();

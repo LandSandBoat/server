@@ -1411,6 +1411,11 @@ void CCharEntity::OnDisengage(CAttackState& state)
 {
     TracyZoneScopedN("CCharEntity::OnDisengage");
 
+    if (auto* controller = dynamic_cast<CPlayerController*>(PAI->GetController()))
+    {
+        controller->setEngageLockedUntil(timer::now() + state.EngageLockout());
+    }
+
     battleutils::RelinquishClaim(this);
     CBattleEntity::OnDisengage(state);
     if (state.HasErrorMsg())

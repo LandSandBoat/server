@@ -36,6 +36,7 @@ public:
     auto CanFollowPath() -> bool override;
     auto CanInterrupt() -> bool override;
     void ResetAttackTimer();
+    auto EngageLockout() const -> timer::duration;
 
 protected:
     void UpdateTarget(const EntityId& target = {}) override;
@@ -46,5 +47,6 @@ private:
     // Shadows CState::m_PEntity
     CBattleEntity* const m_PEntity;
 
-    timer::duration m_attackTime{ 2s };
+    timer::duration m_attackTime;
+    timer::duration m_swingDelay{};
 };

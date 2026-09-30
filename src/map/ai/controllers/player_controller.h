@@ -44,6 +44,7 @@ public:
 
     auto getLastAttackTime() -> timer::time_point;
     void setLastAttackTime(timer::time_point);
+    void setEngageLockedUntil(timer::time_point);
 
     auto getLastSpellFinishedTime() -> timer::time_point;
     void setLastSpellFinishedTime(timer::time_point);
@@ -57,6 +58,7 @@ public:
 
 protected:
     timer::time_point m_lastAttackTime{ timer::now() };
+    timer::time_point m_engageLockedUntil{};
     timer::time_point m_spellFinishedTime{ timer::now() };
     timer::time_point m_errMsgTime{ timer::now() };
     CWeaponSkill*     m_lastWeaponSkill{ nullptr };
