@@ -120,7 +120,7 @@ auto friendStatusNotice(const FriendStatusNotice& notice) -> std::string
     return base64Encode(asBytes(header)) + text;
 }
 
-auto profileAvailableNotice() -> std::string
+auto profileAvailableNotice(const uint16 udpPortSlot) -> std::string
 {
     const auto header = FriendStatNotice{
         .SenderPolId    = kMessagePolIdMask,
@@ -129,6 +129,7 @@ auto profileAvailableNotice() -> std::string
         .handleNumber   = kNoHandle,
         .legacyBlock    = 1,
         .listIndex      = kNoHandle,
+        .udpPortSlot    = udpPortSlot,
         .Type           = static_cast<uint16>(MessageType::FriendStatus),
         .bPolproRequest = 1,
     };

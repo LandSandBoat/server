@@ -12,6 +12,8 @@ CREATE TABLE `accounts_profile` (
   `accid` int(10) unsigned NOT NULL,
   `session_hash` binary(16) NOT NULL,
   `refreshed` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `client_addr` varchar(45) NOT NULL DEFAULT '',
+  `udp_port_slot` smallint(5) unsigned NOT NULL DEFAULT '0',
   `open_status` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`accid`),
   CONSTRAINT `fk_accounts_profile_accid` FOREIGN KEY (`accid`) REFERENCES `accounts` (`id`) ON DELETE CASCADE

@@ -44,8 +44,9 @@ struct FriendStatusNotice
 
 auto friendStatusNotice(const FriendStatusNotice& notice) -> std::string;
 
-// polcore waits for this before finishing login
-auto profileAvailableNotice() -> std::string;
+// polcore waits for this before finishing login.
+// the slot keeps clients behind the same nat on different game ports.
+auto profileAvailableNotice(uint16 udpPortSlot) -> std::string;
 
 // only types a client may send
 struct MessageName

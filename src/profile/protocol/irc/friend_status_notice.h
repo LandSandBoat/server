@@ -48,7 +48,9 @@ struct FriendStatNotice
     uint8   unused1A;
     uint8   legacyBlock;
     uint8   listIndex; // index in the recipient's FriendList
-    uint8   unused1D[0x13];
+    uint8   unused1D[5];
+    uint16  udpPortSlot; // login notice: the game binds 54090 + slot - 1, 0 leaves the port alone
+    uint8   unused24[0x0C];
     uint64  __SystemAgeOfData; // the client applies only newer ones
     uint32  Length;            // payload characters + 1
     uint8   SenderHandleNumber;

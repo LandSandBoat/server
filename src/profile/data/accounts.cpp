@@ -53,6 +53,19 @@ void refresh(const uint32 accountId, const SessionHash& sessionHash)
     db::preparedStmt("UPDATE accounts_profile SET refreshed = NOW() WHERE accid = ? AND session_hash = ?", accountId, hash);
 }
 
+auto udpPortSlot(const Credential& credential) -> uint16
+{
+    auto hash = credential.sessionHash;
+
+    const auto rset = db::preparedStmt("SELECT udp_port_slot FROM accounts_profile WHERE accid = ? AND session_hash = ?", credential.accountId, hash);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        return rset->get<uint16>("udp_port_slot");
+    }
+
+    return 0;
+}
+
 auto exists(const uint32 accountId) -> bool
 {
     const auto rset = db::preparedStmt("SELECT id FROM accounts WHERE id = ?", accountId);
