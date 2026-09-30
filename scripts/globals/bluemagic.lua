@@ -629,6 +629,9 @@ end
 ---@param spell CSpell
 ---@param params blueSkillParams
 ---@return number
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     spell:setCritical(false)
 
@@ -659,12 +662,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local potencyAttackMod  = 1 + (caster:getMerit(xi.merit.PHYSICAL_POTENCY) * 2) / 256 -- Each merit value is 2, but SE uses 4/256 for attack merit values.
     local spellAttackMod    = params.attackMult
     local attackMultiplier  = spellAttackMod * potencyAttackMod
-    local hitrate           = calculateHitrate(caster, target, params.bonusAcc)
+    local firstHitrate      = calculateHitrate(caster, target, params.bonusAcc + 100)
+    local subsequentHitrate = calculateHitrate(caster, target, params.bonusAcc)
     local finaldmg          = 0
     local sneakIsApplicable = false
     local trickAttackTarget = nil
     if
-        hitrate ~= -1 and -- -1 = PD/ALL_MISS
+        firstHitrate ~= -1 and -- -1 = PD/ALL_MISS
         spell:getAoE() == xi.aoeType.NONE and
         params.attackType ~= xi.attackType.RANGED
     then
@@ -694,6 +698,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         local attackAnticipated = false
         local attackYaegasumi   = false
         local chance            = math.randomFloat(0, 1)
+        local hitrate           = hitNumber == 1 and firstHitrate or subsequentHitrate
 
         ----------------------------------
         -- Handle Utsusemi and Blink
