@@ -549,7 +549,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
                 hasteMagic   = std::clamp<float>(hasteMagic, -1.0f, 0.4375f);
                 hasteAbility = std::clamp<float>(hasteAbility, -0.25f, 0.25f);
-                hasteGear    = std::clamp<float>(hasteGear, -0.25f, 0.25f);
+                hasteGear    = std::min(hasteGear, 0.25f);
 
                 float hasteCap  = 1.0f - settings::get<float>("main.DELAY_REDUCTION_CAP");
                 hasteMultiplier = std::clamp<float>(1.0f - hasteMagic - hasteAbility - hasteGear, hasteCap, 2.0f);

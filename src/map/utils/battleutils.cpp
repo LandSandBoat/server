@@ -5775,7 +5775,7 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
 
     // Apply Haste (Magic and Gear)
     int32 hasteMagic = std::clamp<int32>(PEntity->getMod(xi::Mod::HASTE_MAGIC), -10000, 4375); // 43.75% cap -- handle 100% slow for weakness
-    int32 hasteGear  = std::clamp<int32>(PEntity->getMod(xi::Mod::HASTE_GEAR), -2500, 2500);   // 25%
+    int32 hasteGear  = std::min<int32>(PEntity->getMod(xi::Mod::HASTE_GEAR), 2500);            // 25% haste cap, slow is uncapped
     int32 haste      = hasteMagic + hasteGear;
     recast           = std::chrono::floor<std::chrono::milliseconds>(recast * ((10000.0f - haste) / 10000.0f));
 
