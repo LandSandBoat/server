@@ -19,7 +19,10 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 230 and option == 10 then
-        if player:delGil(500000) then
+        if
+            player:getGil() >= 500000 and
+            player:delGil(500000)
+        then
             player:addKeyItem(xi.keyItem.AIRSHIP_PASS)
             player:addTitle(xi.title.HAVE_WINGS_WILL_FLY)
             player:updateEvent(0, 1)

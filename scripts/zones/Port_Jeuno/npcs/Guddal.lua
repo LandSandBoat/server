@@ -35,7 +35,10 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 300 and option == 99 then
-        if player:delGil(148000) then
+        if
+            player:getGil() >= 148000 and
+            player:delGil(148000)
+        then
             player:addKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM)
             player:updateEvent(0, 1)
         end
