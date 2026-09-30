@@ -330,6 +330,16 @@ void data_session::read_func()
                 return;
             }
 
+            // the client got the same 16 bytes from xi_profile (accounts::keyValue), the loader's are placeholders
+            {
+                const auto profile = db::preparedStmt("SELECT session_hash FROM accounts_profile WHERE accid = ?", session.accountID);
+                if (profile && profile->next())
+                {
+                    auto hash = profile->get<std::array<uint8, 16>>("session_hash");
+                    md5(hash.data(), key3, sizeof(hash));
+                }
+            }
+
             uint32 charid    = session.requestedCharacterID;
             uint32 accountIP = str2ip(ipAddress);
 
@@ -382,13 +392,21 @@ void data_session::read_func()
                 characterSelectionResponse.ffxi_id_world = charid & 0xFFFF;
                 characterSelectionResponse.server_id     = (charid >> 16) & 0xFF; // TODO: Looks wrong? shouldn't this be a server index?
 
-                ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}, key counter {:08X}",
+                // FNV-1a of the key value, the same fingerprint the zonetrace client log prints
+                uint32 keyFingerprint = 2166136261u;
+                for (std::size_t i = 0; i < 16; ++i)
+                {
+                    keyFingerprint = (keyFingerprint ^ key3[i]) * 16777619u;
+                }
+
+                ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}, key value {:08X}, key counter {:08X}",
                                      ZoneID,
                                      ip2str(ZoneIP),
                                      ZonePort,
                                      ip2str(characterSelectionResponse.cache_ip),
                                      characterSelectionResponse.cache_port,
                                      charid,
+                                     keyFingerprint,
                                      ref<uint32>(key3, 16)));
 
                 // If client was zoning out but was never seen at the destination past 2 minutes, remove old session

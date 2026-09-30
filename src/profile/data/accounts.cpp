@@ -23,6 +23,7 @@
 
 #include "common/database.h"
 #include "common/macros.h"
+#include "common/md52.h"
 
 namespace profile::accounts
 {
@@ -64,6 +65,20 @@ auto udpPortSlot(const Credential& credential) -> uint16
     }
 
     return 0;
+}
+
+auto keyValue(const uint32 accountId) -> std::array<uint8, 16>
+{
+    auto value = std::array<uint8, 16>{};
+
+    const auto rset = db::preparedStmt("SELECT session_hash FROM accounts_profile WHERE accid = ?", accountId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        auto hash = rset->get<SessionHash>("session_hash");
+        md5(hash.data(), value.data(), sizeof(hash));
+    }
+
+    return value;
 }
 
 auto exists(const uint32 accountId) -> bool
