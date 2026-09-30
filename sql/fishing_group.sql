@@ -78,7 +78,6 @@ INSERT INTO `fishing_group` VALUES (4,4461,250,230,6);     -- Bastore Bream
 INSERT INTO `fishing_group` VALUES (4,4514,1000,500,15);   -- Quus
 INSERT INTO `fishing_group` VALUES (4,14117,500,300,9);    -- Rusty Leggings
 INSERT INTO `fishing_group` VALUES (4,14242,500,300,9);    -- Rusty Subligar
-INSERT INTO `fishing_group` VALUES (4,65535,1000,300,9);   -- Gil
 
 -- Bastok Markets, North Side
 
