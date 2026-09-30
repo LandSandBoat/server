@@ -188,7 +188,7 @@ int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSessio
     return -1;
 }
 
-int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSession, const IPP& ipp)
+int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp)
 {
     TracyZoneScoped;
 

@@ -58,7 +58,7 @@ public:
     int32 map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey);
 
     // main function to parse recv packets
-    int32 recv_parse(uint8* buff, size_t* buffsize, MapSession* PSession, const IPP& ipp);
+    int32 recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp);
 
     // main function parsing the packets
     int32 parse(uint8* buff, size_t* buffsize, MapSession* PSession);
