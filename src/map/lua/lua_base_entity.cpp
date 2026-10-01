@@ -5039,13 +5039,12 @@ auto CLuaBaseEntity::getItems(const sol::object& location) -> sol::table
         locationId = (locationId < CONTAINER_ID::MAX_CONTAINER_ID ? locationId : static_cast<uint8>(LOC_INVENTORY));
     }
 
-    for (int i = 0; i < PChar->getStorage(locationId)->GetSize(); ++i)
-    {
-        if (auto item = PChar->getStorage(locationId)->GetItem(i))
+    auto* PContainer = PChar->getStorage(locationId);
+    PContainer->ForEachItem(
+        [&](CItem* PItem)
         {
-            table.add(item);
-        }
-    }
+            table.add(PItem);
+        });
 
     return table;
 }

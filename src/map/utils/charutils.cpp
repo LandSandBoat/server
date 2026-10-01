@@ -2746,13 +2746,11 @@ void EmptyRecycleBin(CCharEntity* PChar)
 
     CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
 
-    for (uint8 slotID = 1; slotID <= recycleBin->GetSize(); ++slotID)
-    {
-        if (CItem* PItem = recycleBin->GetItem(slotID))
+    recycleBin->ForEachItem(
+        [&](CItem* PItem)
         {
             luautils::OnItemDrop(PChar, PItem);
-        }
-    }
+        });
 
     db::preparedStmt("DELETE FROM char_inventory WHERE charid = ? AND location = 17", PChar->id);
     recycleBin->Clear();
@@ -2866,45 +2864,35 @@ void LoadJobChangeGear(CCharEntity* PChar)
 
             if (itemId > 0)
             {
+                CItemEquipment* compareItem = nullptr;
+
+                // Get item that theoretically could be equipped an adjacent slot
+                if (equipSlot == SLOT_MAIN || equipSlot == SLOT_EAR1 || equipSlot == SLOT_RING1)
+                {
+                    // Check one item to the "right"
+                    compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1));
+                }
+                else if (equipSlot == SLOT_SUB || equipSlot == SLOT_EAR2 || equipSlot == SLOT_RING2)
+                {
+                    // Check one item to the "left"
+                    compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1));
+                }
+
                 for (const auto container : validContainers)
                 {
-                    bool found = false;
+                    auto* PContainer = PChar->getStorage(container);
 
-                    for (uint8 slot = 1; slot <= PChar->getStorage(container)->GetSize(); slot++)
-                    {
-                        auto* PEquip = dynamic_cast<CItemEquipment*>(PChar->getStorage(container)->GetItem(slot));
-
-                        // ensure this is the item we actually want from the db
-                        if (PEquip && PEquip->getID() == itemId)
+                    const auto* PEquip = PContainer->FindItem(
+                        [&](CItem* PItem)
                         {
+                            // ensure this is the item we actually want from the db
                             // Validate that we're not trying to equip the same item to two different slots
-                            CItemEquipment* compareItem = nullptr;
+                            return dynamic_cast<CItemEquipment*>(PItem) && PItem->getID() == itemId && PItem != compareItem;
+                        });
 
-                            // Get item that theoretically could be equipped an adjacent slot
-                            if (equipSlot == SLOT_MAIN || equipSlot == SLOT_EAR1 || equipSlot == SLOT_RING1)
-                            {
-                                // Check one item to the "right"
-                                compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1));
-                            }
-                            else if (equipSlot == SLOT_SUB || equipSlot == SLOT_EAR2 || equipSlot == SLOT_RING2)
-                            {
-                                // Check one item to the "left"
-                                compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1));
-                            }
-
-                            // If there's no item to compare then this item is valid
-                            // If there is, check they aren't the same via pointer comparison (2 unique copies)
-                            if (!compareItem || (compareItem && compareItem != PEquip))
-                            {
-                                found = true;
-                                charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
-                                break;
-                            }
-                        }
-                    }
-
-                    if (found)
+                    if (PEquip)
                     {
+                        charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
                         break;
                     }
                 }
@@ -7646,18 +7634,17 @@ bool isOrchestrionPlaced(CCharEntity* PChar)
 {
     for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
-        CItemContainer* PContainer = PChar->getStorage(safeContainerId);
-        for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-        {
-            CItem* PContainerItem = PContainer->GetItem(slotIndex);
-            if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
+        auto* PContainer = PChar->getStorage(safeContainerId);
+
+        const auto* POrchestrion = PContainer->FindItem(
+            [](CItem* PItem)
             {
-                CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PContainerItem);
-                if (PFurniture->isInstalled() && PFurniture->getID() == 426)
-                {
-                    return true;
-                }
-            }
+                return PItem->isType(ITEM_FURNISHING) && PItem->getID() == 426 && static_cast<CItemFurnishing*>(PItem)->isInstalled();
+            });
+
+        if (POrchestrion)
+        {
+            return true;
         }
     }
 
@@ -7668,13 +7655,16 @@ void updateMannequins(CCharEntity* PChar)
 {
     for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
-        CItemContainer* PContainer = PChar->getStorage(safeContainerId);
-        for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-        {
-            CItem* PContainerItem = PContainer->GetItem(slotIndex);
-            if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
+        auto* PContainer = PChar->getStorage(safeContainerId);
+        PContainer->ForEachItem(
+            [&](CItem* PItem)
             {
-                auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
+                if (!PItem->isType(ITEM_FURNISHING))
+                {
+                    return;
+                }
+
+                auto* PFurnishing = static_cast<CItemFurnishing*>(PItem);
                 if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
                 {
                     auto& mannequin = PFurnishing->exdata<Exdata::Mannequin>();
@@ -7684,10 +7674,9 @@ void updateMannequins(CCharEntity* PChar)
                         ShowWarning("Invalid Mannequin placed (race of 0 in exdata, when races start at 1). It will be unusable.");
                     }
 
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(PChar, safeContainerId, slotIndex, mannequin);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(PChar, safeContainerId, PItem->getSlotID(), mannequin);
                 }
-            }
-        }
+            });
     }
 }
 
