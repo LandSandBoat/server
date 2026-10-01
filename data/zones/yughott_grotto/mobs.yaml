@@ -56,7 +56,6 @@ templates:
         links:      true
       spawn:
         respawn: 480
-        type:    [at_evening]
     loot:
       drops:
         - chance: common
