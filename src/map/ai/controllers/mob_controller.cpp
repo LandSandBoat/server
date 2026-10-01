@@ -1439,6 +1439,12 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 
     if (TryDeaggro())
     {
+        // losing interest cancels a cast in progress
+        if (PMob->PAI->IsCurrentState<CMagicState>())
+        {
+            PMob->PAI->InterruptStates();
+        }
+
         Disengage();
         co_return;
     }
