@@ -5,53 +5,29 @@
 ---@type TSpell
 local spellObject = {}
 
+local cureTiers =
+{
+    old =
+    {
+        { powerFloor = 460, divisor =    6.5, constant = 354.6666 },
+        { powerFloor = 220, divisor =      2, constant =      275 },
+        { powerFloor =   0, divisor = 0.6666, constant =      165 },
+    },
+}
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local minCure = 270
+    local params =
+    {
+        baseCure  = xi.combat.action.calculateSpellCureBase(caster, cureTiers),
+        minCure   = 270,
+        skillType = xi.skill.HEALING_MAGIC,
+    }
 
-    local divisor = 0.6666
-    local constant = 165
-    local power = getCurePowerOld(caster)
-    if power > 460 then
-        divisor = 6.5
-        constant = 354.6666
-    elseif power > 220 then
-        divisor = 2
-        constant = 275
-    end
-
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
-
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-
-    --Applying server mods
-    final = final * xi.settings.main.CURE_POWER
-
-    local diff = (target:getMaxHP() - target:getHP())
-    if final > diff then
-        final = diff
-    end
-
-    target:addHP(final)
-
-    target:wakeUp()
-    caster:updateEnmityFromCure(target, final)
-
-    if target:getID() == spell:getPrimaryTargetID() then
-        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
-    else
-        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
-    end
-
-    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if mpBonusPercent > 0 then
-        caster:addMP(mpBonusPercent)
-    end
-
-    return final
+    return xi.combat.action.executeSpellCure(caster, target, spell, params)
 end
 
 return spellObject

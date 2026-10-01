@@ -93,12 +93,6 @@ global_objects=(
     calculateDuration
     finalMagicAdjustments
     finalMagicNonSpellAdjustments
-    getBaseCure
-    getCurePower
-    getCurePowerOld
-    getCureFinal
-    getBaseCureOld
-    isValidHealTarget
 
     ForceCrash
     BuildString
