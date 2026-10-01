@@ -358,11 +358,7 @@ templates:
         respawn: 300
     loot:
       drops:
-        - chance: uncommon
-          item:   chunk_of_bomb_coal
-        - chance: uncommon
-          item:   chunk_of_bomb_coal
-        - chance: uncommon
+        - chance: very_common
           item:   chunk_of_bomb_coal
         - chance: rare
           item:   garlaige_chest_key
