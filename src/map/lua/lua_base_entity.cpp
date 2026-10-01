@@ -157,6 +157,7 @@
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
 #include "utils/dboxutils.h"
+#include "utils/fellowutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -20519,6 +20520,133 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+/************************************************************************
+ *  Function: hasFellow()
+ *  Purpose : Returns true if the player has created an Adventuring Fellow
+ *  Example : if player:hasFellow() then
+ ************************************************************************/
+
+auto CLuaBaseEntity::hasFellow() const -> bool
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("Called on a non-player entity");
+        return false;
+    }
+
+    return fellowutils::HasFellow(PChar->id);
+}
+
+/************************************************************************
+ *  Function: createFellow()
+ *  Purpose : Creates the player's Adventuring Fellow from packed event data
+ *  Example : player:createFellow(quest:getVar(player, 'Data'))
+ *  Notes   : Fails if the player already has a fellow
+ ************************************************************************/
+
+auto CLuaBaseEntity::createFellow(uint32 packed) -> bool
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("Called on a non-player entity");
+        return false;
+    }
+
+    return fellowutils::CreateFellow(PChar->id, packed);
+}
+
+/************************************************************************
+ *  Function: getFellowData()
+ *  Purpose : Returns a table of the player's fellow data, or nil
+ *  Example : local data = player:getFellowData()
+ ************************************************************************/
+
+auto CLuaBaseEntity::getFellowData() const -> sol::object
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("Called on a non-player entity");
+        return sol::lua_nil;
+    }
+
+    auto data = fellowutils::LoadFellow(PChar->id);
+    if (!data)
+    {
+        return sol::lua_nil;
+    }
+
+    auto       table  = lua.create_table();
+    const auto setKey = [&](const char* key, const auto& member)
+    {
+        table[key] = member;
+    };
+
+    fellowutils::ForEachField(data->appearance, setKey);
+    fellowutils::ForEachField(data->progress, setKey);
+
+    return table;
+}
+
+/************************************************************************
+ *  Function: setFellowData()
+ *  Purpose : Updates the given fields of the player's fellow
+ *  Example : player:setFellowData({ bondCap = 70 })
+ ************************************************************************/
+
+auto CLuaBaseEntity::setFellowData(const sol::table& fields) -> bool
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("Called on a non-player entity");
+        return false;
+    }
+
+    auto data = fellowutils::LoadFellow(PChar->id);
+    if (!data)
+    {
+        return false;
+    }
+
+    for (const auto& [keyObj, valueObj] : fields)
+    {
+        const auto key     = keyObj.is<std::string>() ? keyObj.as<std::string>() : std::string{};
+        bool       applied = false;
+
+        fellowutils::ForEachField(
+            data->progress,
+            [&](const std::string_view name, auto& member)
+            {
+                using T = std::decay_t<decltype(member)>;
+
+                if (name != key || valueObj.get_type() != sol::type::number)
+                {
+                    return;
+                }
+
+                const auto value = valueObj.as<int64>();
+                if (value < 0 || value > std::numeric_limits<T>::max())
+                {
+                    return;
+                }
+
+                member  = static_cast<T>(value);
+                applied = true;
+            });
+
+        if (!applied)
+        {
+            ShowErrorFmt("Rejected field '{}' for {}", key, PChar->getName());
+            return false;
+        }
+    }
+
+    return fellowutils::SaveFellow(PChar->id, data->progress);
+}
+
 void CLuaBaseEntity::clearActionQueue()
 {
     if (m_PBaseEntity->PAI)
@@ -21613,6 +21741,11 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
     SOL_REGISTER("deleteRaisedChocobo", CLuaBaseEntity::deleteRaisedChocobo);
+
+    SOL_REGISTER("hasFellow", CLuaBaseEntity::hasFellow);
+    SOL_REGISTER("createFellow", CLuaBaseEntity::createFellow);
+    SOL_REGISTER("getFellowData", CLuaBaseEntity::getFellowData);
+    SOL_REGISTER("setFellowData", CLuaBaseEntity::setFellowData);
 
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);

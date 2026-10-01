@@ -207,6 +207,7 @@ player_data = [
     "char_equip.sql",
     "char_equip_saved.sql",
     "char_exp.sql",
+    "char_fellows.sql",
     "char_fishing_contest_history.sql",
     "char_flags.sql",
     "char_history.sql",
