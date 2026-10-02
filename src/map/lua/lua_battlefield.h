@@ -22,7 +22,11 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/zone.h"
 
+#include <sol/forward.hpp>
+
+class CBaseEntity;
 class CBattlefield;
 
 class CLuaBattlefield

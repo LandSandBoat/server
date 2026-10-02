@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class PartyKind : uint8_t
 {
     Party    = 0,

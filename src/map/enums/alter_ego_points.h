@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 // Alter Ego upgrade categories
 enum class AlterEgoCategory : uint8_t
 {

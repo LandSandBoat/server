@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class ItemType : uint8_t
 {
     General    = 1, // CItemGeneral

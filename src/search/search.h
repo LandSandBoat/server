@@ -22,6 +22,8 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/logging.h"
+#include "common/types/maybe.h"
 
 #include <vector>
 

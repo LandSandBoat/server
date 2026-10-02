@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class ChatMessageArea : uint8_t
 {
     System = 0, // All zones worldwide

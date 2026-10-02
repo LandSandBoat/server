@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include "common/cbasetypes.h"
+
 // Only add items as utilized in core. There is no need to maintain a complete list
 // here.
 

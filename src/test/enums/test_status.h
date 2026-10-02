@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class TestStatus : uint8_t
 {
     Passed,

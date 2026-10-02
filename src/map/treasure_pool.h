@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/timer.h"
 #include "common/types/maybe.h"
 
 #include <vector>

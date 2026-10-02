@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 // Valid MessageIDs for both standard and SYSTEM type messages
 // Found in ROM/27/76.dat or 1-27-76.xml if using mass extractor
 enum class MsgStd : uint16_t
