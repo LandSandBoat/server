@@ -26,6 +26,7 @@
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
 
 namespace

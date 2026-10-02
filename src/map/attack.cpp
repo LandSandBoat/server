@@ -22,6 +22,7 @@
 #include "attack.h"
 #include "ai/ai_container.h"
 #include "attackround.h"
+#include "common/lua.h"
 #include "data/enums/mob_mod.h"
 #include "entities/automaton_entity.h"
 #include "entities/battle_entity.h"
@@ -29,6 +30,7 @@
 #include "job_points.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
+#include "zone.h"
 
 CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound)
 : m_attacker(attacker)

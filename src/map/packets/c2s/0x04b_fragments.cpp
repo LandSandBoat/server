@@ -24,6 +24,7 @@
 #include "entities/char_entity.h"
 #include "fishingcontest.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x04d_fragments_fishranking.h"
 #include "packets/s2c/0x04d_fragments_servmes.h"
 

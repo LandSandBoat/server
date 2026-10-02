@@ -31,6 +31,7 @@
 #include "entities/mob_entity.h"
 #include "enums/action/category.h"
 #include "enums/four_cc.h"
+#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "mobskill.h"
 #include "packets/s2c/0x028_battle2.h"

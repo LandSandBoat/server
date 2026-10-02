@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "enums/party_kind.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_GROUP_LEAVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

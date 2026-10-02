@@ -22,6 +22,7 @@
 #include "0x0d8_dungeon_param.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_DUNGEON_PARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

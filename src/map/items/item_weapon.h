@@ -25,7 +25,6 @@
 #include "entities/battle_entity.h"
 
 #include "item_equipment.h"
-#include "items/exdata.h"
 
 class CItemWeapon : public CItemEquipment
 {

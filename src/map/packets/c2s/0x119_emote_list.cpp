@@ -22,6 +22,7 @@
 #include "0x119_emote_list.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x11a_emote_list.h"
 
 auto GP_CLI_COMMAND_EMOTE_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

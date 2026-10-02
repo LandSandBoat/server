@@ -22,6 +22,7 @@
 #include "0x11c_party_request.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_PARTY_REQUEST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

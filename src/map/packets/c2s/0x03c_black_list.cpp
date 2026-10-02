@@ -21,6 +21,7 @@
 
 #include "0x03c_black_list.h"
 
+#include "packets/c2s/validation.h"
 #include "utils/blacklistutils.h"
 
 auto GP_CLI_COMMAND_BLACK_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

@@ -32,6 +32,7 @@
 #include "blue_spell.h"
 #include "blue_trait.h"
 #include "charutils.h"
+#include "enums/msg_basic.h"
 #include "job_points.h"
 #include "merit.h"
 #include "modifier.h"

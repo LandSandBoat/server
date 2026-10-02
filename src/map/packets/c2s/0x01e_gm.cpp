@@ -22,6 +22,7 @@
 #include "0x01e_gm.h"
 
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_GM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

@@ -23,6 +23,7 @@
 
 #include "enums/recast.h"
 
+#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 
 #include <map>

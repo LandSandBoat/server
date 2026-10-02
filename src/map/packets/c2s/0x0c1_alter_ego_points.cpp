@@ -24,6 +24,7 @@
 #include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "enums/alter_ego_points.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x08e_alter_ego_points.h"
 
 auto GP_CLI_COMMAND_ALTER_EGO_POINTS::validate(MapSession* PSession, const CCharEntity* PChar) const

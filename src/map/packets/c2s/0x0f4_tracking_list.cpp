@@ -22,7 +22,9 @@
 #include "0x0f4_tracking_list.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_TRACKING_LIST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

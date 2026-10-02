@@ -28,6 +28,7 @@
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"

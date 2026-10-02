@@ -22,6 +22,7 @@
 #include "0x0d4_faq_gmparam.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x0b5_faq_gmparam.h"
 
 auto GP_CLI_COMMAND_FAQ_GMPARAM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

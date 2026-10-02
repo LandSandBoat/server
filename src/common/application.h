@@ -32,6 +32,7 @@
 #include <chrono>
 #include <memory>
 #include <string>
+#include <vector>
 
 struct ApplicationConfig
 {

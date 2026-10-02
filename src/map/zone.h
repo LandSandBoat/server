@@ -45,12 +45,14 @@
 
 #include <map/navmesh/navmesh.h>
 #include <map/navmesh/navmesh_config.h>
-#include <map/ximesh/ximesh.h>
 
 #include <common/types/hash_map.h>
 #include <list>
 #include <memory>
 #include <optional>
+#include <string>
+#include <string_view>
+#include <vector>
 
 //
 // Forward Declarations

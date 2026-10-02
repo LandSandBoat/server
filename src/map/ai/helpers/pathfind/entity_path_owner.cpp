@@ -29,6 +29,7 @@
 
 #include <map/lua/luautils.h>
 
+#include "ximesh/ximesh.h"
 #include <map/navmesh/navmesh.h>
 #include <map/zone.h>
 

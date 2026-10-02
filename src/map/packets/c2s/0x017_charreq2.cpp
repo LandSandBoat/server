@@ -27,8 +27,10 @@
 #include <array>
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
+#include "zone.h"
 
 namespace
 {

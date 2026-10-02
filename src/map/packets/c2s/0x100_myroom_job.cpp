@@ -30,6 +30,7 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x01b_job_info.h"
@@ -44,6 +45,7 @@
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
 #include "utils/puppetutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

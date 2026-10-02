@@ -36,6 +36,7 @@
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
+#include "lua/luautils.h"
 #include "mob_spell_container.h"
 #include "mobskill.h"
 #include "party.h"

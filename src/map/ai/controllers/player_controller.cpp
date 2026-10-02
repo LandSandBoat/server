@@ -24,6 +24,7 @@
 #include "ability.h"
 #include "ai/ai_container.h"
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
 #include "items/item_weapon.h"
 #include "latent_effect_container.h"
 #include "packets/s2c/0x029_battle_message.h"

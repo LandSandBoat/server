@@ -24,6 +24,7 @@
 #include "entities/char_entity.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 
 auto GP_CLI_COMMAND_SET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

@@ -30,6 +30,7 @@
 #include "lua/helpers/lua_client_entity_pair_packets.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
+#include "lua/luautils.h"
 #include "map/ability.h"
 #include "map/ai/controllers/player_controller.h"
 #include "map/entities/char_entity.h"

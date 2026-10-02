@@ -32,7 +32,10 @@
 #include "enums/action/proc_kind.h"
 #include "enums/action/react_kind.h"
 #include "enums/action/resolution.h"
+#include "enums/msg_basic.h"
 #include "spell.h"
+
+#include <vector>
 
 #define MAX_ACTION_TARGETS 64
 

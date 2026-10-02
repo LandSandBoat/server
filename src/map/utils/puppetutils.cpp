@@ -24,6 +24,7 @@
 #include "charutils.h"
 #include "entities/automaton_entity.h"
 #include "enums/automaton.h"
+#include "enums/msg_basic.h"
 #include "items/item_puppet.h"
 #include "itemutils.h"
 #include "lua/luautils.h"

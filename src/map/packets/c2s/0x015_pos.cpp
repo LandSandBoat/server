@@ -24,7 +24,9 @@
 #include <cmath>
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x0f5_tracking_pos.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

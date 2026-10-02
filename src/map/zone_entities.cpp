@@ -62,6 +62,7 @@
 #include "packets/s2c/0x05f_music.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "utils/fishingutils.h"
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/synthutils.h"

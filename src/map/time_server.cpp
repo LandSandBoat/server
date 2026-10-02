@@ -30,6 +30,7 @@
 #include "roe.h"
 #include "spawn_handler.h"
 #include "timetriggers.h"
+#include "utils/fishingutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/moduleutils.h"

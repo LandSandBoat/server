@@ -22,6 +22,8 @@
 #include "0x110_fishing_2.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
+#include "utils/fishingutils.h"
 
 auto GP_CLI_COMMAND_FISHING_2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

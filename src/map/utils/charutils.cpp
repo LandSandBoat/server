@@ -119,6 +119,7 @@
 
 #include "data/enums/key_item.h"
 #include "enums/mission_log.h"
+#include "enums/msg_basic.h"
 #include "enums/quest_log.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"

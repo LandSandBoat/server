@@ -88,6 +88,7 @@
 #include "data/datasets/zones/npcs/dataset.h"
 #include "data/enums/mob_mod.h"
 #include "data/loader.h"
+#include "enums/msg_basic.h"
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"

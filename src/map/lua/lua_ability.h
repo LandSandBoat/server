@@ -25,6 +25,8 @@
 
 #include <sol/forward.hpp>
 
+#include <string>
+
 enum class ActionAnimation : uint16_t;
 enum class MsgBasic : uint16_t;
 class CAbility;

@@ -29,6 +29,7 @@
 
 #include "utils/charutils.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 MapSessionContainer::MapSessionContainer(Scheduler& scheduler)
 : scheduler_(scheduler)

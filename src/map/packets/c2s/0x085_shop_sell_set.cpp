@@ -27,6 +27,8 @@
 #include "enums/packet_c2s.h"
 #include "items/transactions/item_claim.h"
 #include "lua/luautils.h"
+#include "map_session.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "trade_container.h"

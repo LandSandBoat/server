@@ -22,6 +22,8 @@
 #include "0x04d_pbx.h"
 
 #include "entities/char_entity.h"
+#include "map_session.h"
+#include "packets/c2s/validation.h"
 #include "utils/dboxutils.h"
 #include "utils/zoneutils.h"
 

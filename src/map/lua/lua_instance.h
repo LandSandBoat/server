@@ -25,6 +25,8 @@
 
 #include <sol/forward.hpp>
 
+#include <string>
+
 class CBaseEntity;
 class CLuaBaseEntity;
 class CLuaZone;

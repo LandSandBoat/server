@@ -23,7 +23,10 @@
 
 #include "common/cbasetypes.h"
 #include "enums/packet_c2s.h"
-#include "validation.h"
+
+#include <string_view>
+
+class PacketValidationResult;
 
 // https://github.com/atom0s/XiPackets/blob/main/world/Header.md
 struct GP_CLI_HEADER

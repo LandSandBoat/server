@@ -22,6 +22,7 @@
 #include "0x016_charreq.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "utils/zoneutils.h"
 

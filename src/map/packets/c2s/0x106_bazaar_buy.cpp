@@ -27,6 +27,8 @@
 #include <limits>
 
 #include "entities/char_entity.h"
+#include "map_session.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x105_bazaar_list.h"
@@ -36,6 +38,7 @@
 #include "packets/s2c/0x10a_bazaar_sale.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_BAZAAR_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

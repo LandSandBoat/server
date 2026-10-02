@@ -24,6 +24,7 @@
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
 #include "items/transactions/player_trade.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x021_item_trade_req.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "packets/s2c/0x053_systemmes.h"

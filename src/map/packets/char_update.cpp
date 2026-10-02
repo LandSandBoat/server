@@ -23,10 +23,12 @@
 
 #include "char_update.h"
 
+#include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
 #include "utils/mountutils.h"
+#include "zone.h"
 
 namespace
 {

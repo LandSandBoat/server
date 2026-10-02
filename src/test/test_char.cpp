@@ -26,6 +26,7 @@
 #include "map/entities/base_entity.h"
 #include "map/entities/char_entity.h"
 #include "test_common.h"
+#include "zone.h"
 
 #include <array>
 #include <format>

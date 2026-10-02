@@ -26,6 +26,7 @@
 #include "entities/char_entity.h"
 #include "enums/party_kind.h"
 #include "ipc_client.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x009_message.h"
 #include "party.h"
 #include "status_effect_container.h"

@@ -29,7 +29,6 @@
 #include "item_container.h"
 #include "items/craft_state.h"
 #include "items/transaction.h"
-#include "map_session.h"
 #include "monstrosity.h"
 
 #include <common/cbasetypes.h>
@@ -42,8 +41,12 @@
 
 #include <array>
 #include <deque>
+#include <list>
 #include <memory>
+#include <string>
 #include <unordered_set>
+#include <utility>
+#include <vector>
 
 #include "persist_batch.h"
 
@@ -51,11 +54,8 @@
 #include "battle_entity.h"
 #include "linkshell.h"
 #include "maze.h"
-#include "pet_entity.h"
 
 #include <map/entities/types/automaton_info.h>
-
-#include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
@@ -66,6 +66,9 @@
 class CItemWeapon;
 class CTrustEntity;
 class PlayerTradeTransaction;
+struct fishresponse_t;
+class CTreasurePool;
+enum class PET_TYPE : uint8;
 
 struct jobs_t
 {

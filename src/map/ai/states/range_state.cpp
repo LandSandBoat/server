@@ -30,12 +30,14 @@
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
 #include "enums/action/category.h"
+#include "enums/msg_basic.h"
 #include "items/item_weapon.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "zone.h"
 
 CRangeState::CRangeState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target)
 : CState(PEntity, target)

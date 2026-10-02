@@ -25,6 +25,8 @@
 #include "common/logging.h"
 #include "common/types/maybe.h"
 
+#include <array>
+#include <string>
 #include <vector>
 
 // md5 hash + blowfish key appended by SearchHandler::encrypt()

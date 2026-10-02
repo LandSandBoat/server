@@ -55,6 +55,7 @@
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x0ac_command_data.h"
+#include "zone.h"
 
 std::vector<Pet_t*> g_PPetList;
 

@@ -25,6 +25,7 @@
 #include "items.h"
 #include "items/item_linkshell.h"
 #include "items/transactions/item_claim.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 

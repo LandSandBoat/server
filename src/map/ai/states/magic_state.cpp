@@ -33,6 +33,7 @@
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
+#include "enums/msg_basic.h"
 #include "job_points.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x028_battle2.h"

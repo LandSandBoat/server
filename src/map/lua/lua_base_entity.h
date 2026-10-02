@@ -22,10 +22,14 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/behavior.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/fame_area.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/mob_type.h"
 #include "data/enums/music_slot.h"
+#include "data/enums/roam_flag.h"
+#include "data/enums/zone_misc.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
 #include "packets/s2c/0x009_message.h"
@@ -33,6 +37,10 @@
 #include "utils/charutils.h"
 
 #include <sol/forward.hpp>
+
+#include <map>
+#include <string>
+#include <tuple>
 
 enum class QuestLog : uint8_t;
 enum class POSMODE : uint8;

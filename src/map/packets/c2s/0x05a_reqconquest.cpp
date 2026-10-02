@@ -22,6 +22,7 @@
 #include "0x05a_reqconquest.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x05e_conquest.h"
 #include "packets/s2c/0x071_influence_colonization.h"
 

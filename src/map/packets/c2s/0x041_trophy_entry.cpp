@@ -22,6 +22,7 @@
 #include "0x041_trophy_entry.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "treasure_pool.h"
 
 auto GP_CLI_COMMAND_TROPHY_ENTRY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

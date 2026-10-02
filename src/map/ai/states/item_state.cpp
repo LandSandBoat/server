@@ -41,10 +41,13 @@
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 
+#include "enums/msg_basic.h"
 #include "items/item_equipment.h"
 #include "items/item_usable.h"
+#include "lua/luautils.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "zone.h"
 
 CItemState::CItemState(xi::Badge<CState>, CCharEntity* PEntity, const EntityId& target, const uint8 loc, const uint8 slotid)
 : CState(PEntity, target)

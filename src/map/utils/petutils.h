@@ -29,6 +29,8 @@
 #include "data/enums/skill_type.h"
 #include "modifier.h"
 
+#include <string>
+
 enum PETID
 {
     PETID_FIRESPIRIT             = 0,

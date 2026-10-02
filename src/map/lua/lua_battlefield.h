@@ -26,6 +26,10 @@
 
 #include <sol/forward.hpp>
 
+#include <string>
+#include <tuple>
+#include <utility>
+
 class CBaseEntity;
 class CBattlefield;
 

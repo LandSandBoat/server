@@ -27,6 +27,8 @@
 #include "entities/base_entity.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
+#include "entities/pet_entity.h"
+#include "lua/luautils.h"
 #include "states/ability_state.h"
 #include "states/attack_state.h"
 #include "states/death_state.h"

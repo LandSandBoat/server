@@ -21,8 +21,10 @@
 
 #include "0x00c_gameok.h"
 
+#include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
 #include "gmcall_container.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x008_enterzone.h"
@@ -44,6 +46,7 @@
 #include "utils/blacklistutils.h"
 #include "utils/charutils.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_GAMEOK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

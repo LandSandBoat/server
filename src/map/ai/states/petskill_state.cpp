@@ -28,6 +28,7 @@
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "enums/four_cc.h"
+#include "enums/msg_basic.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "petskill.h"
 #include "status_effect_container.h"

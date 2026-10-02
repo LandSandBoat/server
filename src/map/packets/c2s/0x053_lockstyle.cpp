@@ -23,6 +23,7 @@
 
 #include "enums/msg_std.h"
 #include "items/item_equipment.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x051_grap_list.h"

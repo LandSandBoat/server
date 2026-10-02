@@ -31,6 +31,7 @@
 #include "instance.h"
 #include "lua/luautils.h"
 #include "utils/zoneutils.h"
+#include "ximesh/ximesh.h"
 #include "zone.h"
 #include "zone_instance.h"
 

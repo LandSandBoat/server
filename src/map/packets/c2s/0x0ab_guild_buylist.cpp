@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x083_guild_buylist.h"
 #include "utils/zoneutils.h"
 

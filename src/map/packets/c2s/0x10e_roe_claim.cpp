@@ -22,6 +22,7 @@
 #include "0x10e_roe_claim.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x113_currencies_1.h"
 #include "roe.h"
 

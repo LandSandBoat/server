@@ -38,9 +38,14 @@
 
 #include "data/enums/content.h"
 
+#include <array>
+#include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
+#include <tuple>
 #include <type_traits>
+#include <vector>
 
 #include "common/lua.h"
 

@@ -24,10 +24,13 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
+#include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
+#include "lua/lua_base_entity.h"
 #include "lua_base_entity.h"
 #include "luautils.h"
 #include "trigger_area.h"
+#include "ximesh/ximesh.h"
 #include "zone.h"
 
 CLuaZone::CLuaZone(CZone* PZone)

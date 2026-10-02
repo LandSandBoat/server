@@ -27,6 +27,8 @@
 
 #include <sol/forward.hpp>
 
+#include <string>
+
 class CZone;
 
 class CLuaZone

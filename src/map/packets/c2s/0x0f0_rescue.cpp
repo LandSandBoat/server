@@ -25,6 +25,7 @@
 #include "common/settings.h"
 #include "entities/char_entity.h"
 #include "enums/chat_message_type.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x017_chat_std.h"
 #include "utils/charutils.h"
 

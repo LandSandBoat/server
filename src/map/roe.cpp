@@ -29,6 +29,7 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
+#include "enums/msg_basic.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"

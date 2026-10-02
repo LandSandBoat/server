@@ -29,6 +29,7 @@
 #include "enums/four_cc.h"
 #include "zone.h"
 
+#include "enums/msg_basic.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "petskill.h"
 

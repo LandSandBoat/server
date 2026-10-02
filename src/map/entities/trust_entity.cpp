@@ -32,6 +32,8 @@
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
+#include "lua/luautils.h"
 #include "packets/entity_set_name.h"
 #include "packets/s2c/0x0df_group_attr.h"
 #include "recast_container.h"

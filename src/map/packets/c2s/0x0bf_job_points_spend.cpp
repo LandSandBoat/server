@@ -22,6 +22,8 @@
 #include "0x0bf_job_points_spend.h"
 
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_job_points.h"
 #include "packets/s2c/0x08d_job_points.h"

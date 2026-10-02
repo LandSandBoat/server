@@ -30,7 +30,9 @@
 #include "mob_spell_list.h"
 #include "spell.h"
 
+#include "entities/pet_entity.h"
 #include "enums/four_cc.h"
+#include "enums/msg_basic.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
 

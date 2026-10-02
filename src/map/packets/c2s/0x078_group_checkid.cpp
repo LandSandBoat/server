@@ -22,6 +22,7 @@
 #include "0x078_group_checkid.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x0e1_group_checkid.h"
 
 auto GP_CLI_COMMAND_GROUP_CHECKID::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
