@@ -93,3 +93,10 @@
 
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
+
+#include "common/cbasetypes.h"
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/utils.h"
+#include "common/xi.h"
