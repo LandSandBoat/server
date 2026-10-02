@@ -121,16 +121,6 @@ mission.sections =
                 end
             end,
 
-            afterZoneIn = function(player)
-                if
-                    player:getMissionStatus(mission.areaId) == 3 and
-                    mission:getVar(player, 'PostBattle') == 1 and
-                    not player:hasKeyItem(xi.keyItem.SHADOW_FRAGMENT)
-                then
-                    player:addKeyItem(xi.keyItem.SHADOW_FRAGMENT)
-                end
-            end,
-
             ['_4l1'] =
             {
                 onTrigger = function(player, npc)
@@ -167,7 +157,7 @@ mission.sections =
                 [7] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
                     mission:setVar(player, 'PostBattle', 0)
-                    player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.keyItem.SHADOW_FRAGMENT)
+                    npcUtil.giveKeyItem(player, xi.keyItem.SHADOW_FRAGMENT)
                 end,
             },
         },
