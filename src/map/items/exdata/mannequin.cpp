@@ -21,6 +21,8 @@
 
 #include "mannequin.h"
 
+#include "base.h"
+
 void Exdata::Mannequin::toTable(sol::table& table) const
 {
     table["x"]        = this->X;

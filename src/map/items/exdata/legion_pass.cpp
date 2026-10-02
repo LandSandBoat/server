@@ -21,6 +21,8 @@
 
 #include "legion_pass.h"
 
+#include "base.h"
+
 void Exdata::LegionPass::toTable(sol::table& table) const
 {
     table["timestamp"] = this->Timestamp;

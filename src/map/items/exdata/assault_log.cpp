@@ -21,6 +21,7 @@
 
 #include "assault_log.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 void Exdata::AssaultLog::toTable(sol::table& table) const

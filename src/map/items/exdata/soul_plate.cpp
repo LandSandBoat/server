@@ -21,6 +21,8 @@
 
 #include "soul_plate.h"
 
+#include "base.h"
+
 void Exdata::SoulPlate::toTable(sol::table& table) const
 {
     table["signature"]   = UnpackSoultrapperName(this->Signature);

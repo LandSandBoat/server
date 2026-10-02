@@ -21,6 +21,8 @@
 
 #include "betting_slip.h"
 
+#include "base.h"
+
 void Exdata::BettingSlip::toTable(sol::table& table) const
 {
     table["raceId"]       = this->RaceId;

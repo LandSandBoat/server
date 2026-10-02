@@ -21,6 +21,8 @@
 
 #include "fish.h"
 
+#include "base.h"
+
 void Exdata::Fish::toTable(sol::table& table) const
 {
     table["size"]     = this->Size;

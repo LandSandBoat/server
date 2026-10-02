@@ -21,6 +21,8 @@
 
 #include "brenner_book.h"
 
+#include "base.h"
+
 void Exdata::BrennerBook::toTable(sol::table& table) const
 {
     table["timeValue"] = this->TimeValue;

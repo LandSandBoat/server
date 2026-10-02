@@ -21,6 +21,8 @@
 
 #include "flower_pot.h"
 
+#include "base.h"
+
 void Exdata::FlowerPot::toTable(sol::table& table) const
 {
     table["step"]         = this->Step;

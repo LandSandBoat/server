@@ -24,6 +24,7 @@
 #include "common/utils.h"
 #include "exdata/appraisable.h"
 #include "exdata/augment_standard.h"
+#include "exdata/base.h"
 #include "item.h"
 
 #include <atomic>

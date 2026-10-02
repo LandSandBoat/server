@@ -21,6 +21,8 @@
 
 #include "evolith.h"
 
+#include "base.h"
+
 void Exdata::Evolith::toTable(sol::table& table) const
 {
     table["augment"]   = static_cast<uint32_t>(this->Augment);

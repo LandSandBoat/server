@@ -21,6 +21,8 @@
 
 #include "perpetual_hourglass.h"
 
+#include "base.h"
+
 void Exdata::PerpetualHourglass::toTable(sol::table& table) const
 {
     table["flags"]     = this->Flags;
