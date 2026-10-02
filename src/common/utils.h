@@ -165,7 +165,6 @@ auto to_upper(const std::string& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 void rtrim(std::string& s);
 bool matches(const std::string& target, const std::string& pattern);
-bool starts_with(const std::string& target, const std::string& pattern);
 auto replace(const std::string& target, const std::string& search, const std::string& replace) -> std::string;
 
 look_t stringToLook(std::string str);
@@ -227,7 +226,7 @@ static Synchronized<HashMap<std::string, timer::time_point>> lastExecutionTimes;
     const auto key         = std::string(__FILE__) + ":" + std::to_string(__LINE__);  \
     lastExecutionTimes.write([&](auto& lastExecutionTimes)                            \
     {                                                                                 \
-        if (lastExecutionTimes.find(key) == lastExecutionTimes.end() ||               \
+        if (!lastExecutionTimes.contains(key) ||                                      \
             currentTime - lastExecutionTimes[key] > std::chrono::seconds(duration))   \
         {                                                                             \
             lastExecutionTimes[key] = currentTime;                                    \

@@ -290,7 +290,7 @@ Maybe<std::string> validateCharacterName(const std::string& name)
         for (const auto& entry : badWordsList)
         {
             const auto badWord = to_upper(entry.second.as<std::string>());
-            if (potentialName.find(badWord) != std::string::npos)
+            if (potentialName.contains(badWord))
             {
                 return fmt::format("Name matched with bad words list <{}>.", badWord);
             }
@@ -738,7 +738,7 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
 std::string getHashFromPacket(const std::string& ip_str, uint8* data)
 {
     auto hash = asStringFromUntrustedSource(data + 12, 16);
-    if (authenticatedSessions_[ip_str].find(hash) == authenticatedSessions_[ip_str].end())
+    if (!authenticatedSessions_[ip_str].contains(hash))
     {
         return "";
     }

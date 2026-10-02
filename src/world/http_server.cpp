@@ -138,7 +138,7 @@ HTTPServer::HTTPServer(Scheduler& scheduler)
                             const auto lowerKey = to_lower(key);
                             for (const auto& text : textToOmit)
                             {
-                                if (lowerKey.find(text) != std::string::npos)
+                                if (lowerKey.contains(text))
                                 {
                                     return;
                                 }

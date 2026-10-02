@@ -1117,7 +1117,7 @@ auto CStatusEffectContainer::GetHighestRuneEffect() -> xi::StatusEffect
     {
         if (PStatusEffect->GetStatusID() >= xi::StatusEffect::Ignis && PStatusEffect->GetStatusID() <= xi::StatusEffect::Tenebrae && !PStatusEffect->isDeleted())
         {
-            if (runeEffects.count(PStatusEffect->GetStatusID()) == 0)
+            if (!runeEffects.contains(PStatusEffect->GetStatusID()))
             {
                 runeEffects[PStatusEffect->GetStatusID()] = 1;
             }

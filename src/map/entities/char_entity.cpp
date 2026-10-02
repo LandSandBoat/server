@@ -2935,7 +2935,7 @@ bool CCharEntity::OnAttackError(CAttackState& state)
 
 bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
 {
-    return charTriggerAreaIDs.find(triggerAreaID) != charTriggerAreaIDs.end();
+    return charTriggerAreaIDs.contains(triggerAreaID);
 }
 
 void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
@@ -3247,7 +3247,7 @@ void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
     auto iter = charVarCache.begin();
     while (iter != charVarCache.end())
     {
-        if (iter->first.rfind(prefix, 0) == 0)
+        if (iter->first.starts_with(prefix))
         {
             iter->second = { 0, 0 };
         }

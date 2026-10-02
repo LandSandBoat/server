@@ -445,7 +445,7 @@ void CItemEquipment::setAugment(uint8 slot, uint16 type, uint8 value)
 
 void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
 {
-    if (sAugmentData.find(type) == sAugmentData.end())
+    if (!sAugmentData.contains(type))
     {
         ShowErrorFmt("Invalid augment type {} requested for item {}", type, this->getID());
         return;

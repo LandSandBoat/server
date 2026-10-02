@@ -1369,7 +1369,7 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, con
         "GetFirstID",
         [&](const std::string& name) -> Maybe<uint32>
         {
-            if (lookup.find(name) != lookup.end())
+            if (lookup.contains(name))
             {
                 return lookup[name].front();
             }
@@ -1387,13 +1387,13 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, con
         [&](const std::string& name) -> sol::table
         {
             // Is it already built and cached: return it
-            if (idLuaTables.find(name) != idLuaTables.end())
+            if (idLuaTables.contains(name))
             {
                 return idLuaTables[name];
             }
 
             // If we have no entries, bail out and return nil
-            if (lookup.find(name) == lookup.end())
+            if (!lookup.contains(name))
             {
                 ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
                 return sol::lua_nil;
@@ -5882,14 +5882,14 @@ void HandleCustomMenu(CCharEntity* PChar, const std::string& selection)
         cancelMsgs,
         [&selection](const auto& s)
         {
-            return selection.find(s) != selection.npos;
+            return selection.contains(s);
         });
 
     const auto wasCancelledEvent = std::ranges::any_of(
         eventCancelMsgs,
         [&selection](const auto& s)
         {
-            return selection.find(s) != selection.npos;
+            return selection.contains(s);
         });
 
     const auto context = customMenuContext[PChar->id];

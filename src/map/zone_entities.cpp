@@ -915,7 +915,7 @@ void CZoneEntities::syncSpawnListWithGrid(CCharEntity*                     PChar
             return;
         }
 
-        if (spawnList.find(entity->id) != spawnList.end())
+        if (spawnList.contains(entity->id))
         {
             if (onUpdate)
             {
@@ -1154,7 +1154,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
     const auto considerCandidate = [&](CCharEntity* PCurrentChar)
     {
-        if (PCurrentChar != nullptr && PChar != PCurrentChar && PChar->SpawnPCList.find(PCurrentChar->id) == PChar->SpawnPCList.end())
+        if (PCurrentChar != nullptr && PChar != PCurrentChar && !PChar->SpawnPCList.contains(PCurrentChar->id))
         {
             if (PCurrentChar->m_isGMHidden || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
             {
@@ -1599,7 +1599,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
                                 auto pushPacketIfInSpawnList = [&](CCharEntity* PChar, SpawnIDList_t const& spawnlist)
                                 {
-                                    if (spawnlist.find(id) != spawnlist.end())
+                                    if (spawnlist.contains(id))
                                     {
                                         PChar->pushPacket(packet->copy());
                                     }
@@ -1746,7 +1746,7 @@ auto CZoneEntities::mobTick(CMobEntity* PMob, timer::time_point tick) -> Task<vo
                 PChar->PClaimedMob = nullptr;
             }
 
-            if (PChar->SpawnMOBList.find(PMob->id) != PChar->SpawnMOBList.end())
+            if (PChar->SpawnMOBList.contains(PMob->id))
             {
                 PChar->SpawnMOBList.erase(PMob->id);
             }
@@ -1815,7 +1815,7 @@ auto CZoneEntities::npcTick(CNpcEntity* PNpc, timer::time_point tick) -> Task<vo
     {
         FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
         {
-            if (PChar->SpawnNPCList.find(PNpc->id) != PChar->SpawnNPCList.end())
+            if (PChar->SpawnNPCList.contains(PNpc->id))
             {
                 PChar->SpawnNPCList.erase(PNpc->id);
             }
@@ -1850,7 +1850,7 @@ auto CZoneEntities::petTick(CPetEntity* PPet, timer::time_point tick) -> Task<vo
 
         FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
         {
-            if (PChar->SpawnPETList.find(PPet->id) != PChar->SpawnPETList.end())
+            if (PChar->SpawnPETList.contains(PPet->id))
             {
                 PChar->SpawnPETList.erase(PPet->id);
             }
@@ -1899,7 +1899,7 @@ auto CZoneEntities::trustTick(CTrustEntity* PTrust, timer::time_point tick) -> T
 
         FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
         {
-            if (PChar->SpawnTRUSTList.find(PTrust->id) != PChar->SpawnTRUSTList.end())
+            if (PChar->SpawnTRUSTList.contains(PTrust->id))
             {
                 PChar->SpawnTRUSTList.erase(PTrust->id);
             }

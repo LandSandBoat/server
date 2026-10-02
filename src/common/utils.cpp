@@ -781,11 +781,6 @@ bool matches(const std::string& target, const std::string& pattern)
     return std::regex_match(target, std::regex(pattern));
 }
 
-bool starts_with(const std::string& target, const std::string& pattern)
-{
-    return target.starts_with(pattern);
-}
-
 std::string replace(const std::string& target, const std::string& search, const std::string& replace)
 {
     try

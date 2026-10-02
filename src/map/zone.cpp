@@ -264,7 +264,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern
 
     // Always ignore cache for queries explicitly looking for dynamic entities
     // TODO: make this memoization work for dynamic entities somehow?
-    if (pattern.rfind("DE_", 0) != 0)
+    if (!pattern.starts_with("DE_"))
     {
         // Use memoization since lookups are typically for the same mob names
         auto result = m_queryByNameResults.find(pattern);

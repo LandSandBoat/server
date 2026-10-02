@@ -95,7 +95,7 @@ auto MapSessionContainer::getSessionByIPP(IPP ipp) -> MapSession*
 {
     TracyZoneScoped;
 
-    if (sessions_.find(ipp) != sessions_.end())
+    if (sessions_.contains(ipp))
     {
         return sessions_[ipp].get();
     }
@@ -109,7 +109,7 @@ auto MapSessionContainer::getSessionByIPP(uint64 ipp) -> MapSession*
 
     auto ippObj = IPP(ipp);
 
-    if (sessions_.find(ippObj) != sessions_.end())
+    if (sessions_.contains(ippObj))
     {
         return sessions_[ippObj].get();
     }

@@ -256,7 +256,7 @@ auto debug::coreDumpHint() -> Maybe<std::string>
     // to a file (systemd-coredump, apport, ...).
     if (pattern.front() == '|')
     {
-        if (pattern.find("systemd-coredump") != std::string::npos)
+        if (pattern.contains("systemd-coredump"))
         {
             return "handled by systemd-coredump (retrieve with: coredumpctl dump " + std::to_string(getpid()) + ")";
         }

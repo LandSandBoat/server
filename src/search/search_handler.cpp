@@ -864,7 +864,7 @@ auto SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr) const -
     if (IPAddressWhitelist_.read(
             [ipAddressStr](const auto& ipWhitelist)
             {
-                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+                return ipWhitelist.contains(ipAddressStr);
             }))
     {
         return 0;
@@ -873,7 +873,7 @@ auto SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr) const -
     return IPAddressesInUse_.read(
         [ipAddressStr](const auto& ipAddrsInUse) -> uint16_t
         {
-            if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
+            if (ipAddrsInUse.contains(ipAddressStr))
             {
                 return ipAddrsInUse.at(ipAddressStr);
             }
@@ -889,7 +889,7 @@ void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr) c
     if (IPAddressWhitelist_.read(
             [ipAddressStr](const auto& ipWhitelist)
             {
-                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+                return ipWhitelist.contains(ipAddressStr);
             }))
     {
         return;
@@ -898,7 +898,7 @@ void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr) c
     IPAddressesInUse_.write(
         [ipAddressStr](auto& ipAddrsInUse)
         {
-            if (ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end())
+            if (ipAddrsInUse.contains(ipAddressStr))
             {
                 ipAddrsInUse[ipAddressStr] -= 1;
             }
@@ -922,7 +922,7 @@ void SearchHandler::addToUsedIPAddresses(const std::string& ipAddressStr) const
     if (IPAddressWhitelist_.read(
             [ipAddressStr](const auto& ipWhitelist)
             {
-                return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+                return ipWhitelist.contains(ipAddressStr);
             }))
     {
         return;
@@ -931,7 +931,7 @@ void SearchHandler::addToUsedIPAddresses(const std::string& ipAddressStr) const
     IPAddressesInUse_.write(
         [ipAddressStr](auto& ipAddrsInUse)
         {
-            if (ipAddrsInUse.find(ipAddressStr) == ipAddrsInUse.end())
+            if (!ipAddrsInUse.contains(ipAddressStr))
             {
                 ipAddrsInUse[ipAddressStr] = 1;
             }

@@ -21,6 +21,8 @@
 
 #include "battle_entity.h"
 
+#include <algorithm>
+
 #include "enums/four_cc.h"
 
 #include "common/database.h"
@@ -2173,15 +2175,7 @@ void CBattleEntity::delTrait(CTrait* PTrait)
 
 bool CBattleEntity::hasTrait(uint16 traitID)
 {
-    for (CTrait* Trait : TraitList)
-    {
-        if (Trait->getID() == traitID)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::contains(TraitList, traitID, &CTrait::getID);
 }
 
 bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)

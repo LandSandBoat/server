@@ -303,7 +303,7 @@ bool CBattlefield::IsOccupied() const
 
 bool CBattlefield::isEntered(CCharEntity* PChar) const
 {
-    return m_EnteredPlayers.find(PChar->id) != m_EnteredPlayers.end();
+    return m_EnteredPlayers.contains(PChar->id);
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -511,7 +511,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
 
 bool CBattlefield::IsRegistered(CCharEntity* PChar)
 {
-    return PChar && m_RegisteredPlayers.find(PChar->id) != m_RegisteredPlayers.end();
+    return PChar && m_RegisteredPlayers.contains(PChar->id);
 }
 
 // The Battlefield effect is the players clearance and names the battlefield it was granted for

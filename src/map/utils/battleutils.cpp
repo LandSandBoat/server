@@ -490,7 +490,7 @@ CMobSkill* GetMobSkill(uint16 SkillID)
 
 CPetSkill* GetPetSkill(uint16 SkillID)
 {
-    if (g_PPetSkillList.find(SkillID) != g_PPetSkillList.end())
+    if (g_PPetSkillList.contains(SkillID))
     {
         return g_PPetSkillList[SkillID];
     }

@@ -41,7 +41,7 @@ void GP_CLI_COMMAND_SET_USERMSG::process(MapSession* PSession, CCharEntity* PCha
 
     auto type = message.empty() ? GP_CLI_COMMAND_SET_USERMSG_MSGTYPE::Default : static_cast<GP_CLI_COMMAND_SET_USERMSG_MSGTYPE>(this->msgType);
 
-    if (static_cast<uint8_t>(type) == PChar->search.messagetype && strcmp(message.c_str(), PChar->search.message.c_str()) == 0)
+    if (static_cast<uint8_t>(type) == PChar->search.messagetype && message == PChar->search.message)
     {
         return;
     }

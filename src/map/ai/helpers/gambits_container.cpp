@@ -93,7 +93,7 @@ void CGambitsContainer::RemoveGambit(const std::string& id)
     const auto prefix = fmt::format("{}:", id);
     std::erase_if(m_timerConditionLastTrigger, [&](const auto& kv)
                   {
-                      return kv.first.rfind(prefix, 0) == 0;
+                      return kv.first.starts_with(prefix);
                   });
 }
 
@@ -224,7 +224,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                 static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
-                        melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
+                        melee_jobs.contains(PMember->GetMJob()))
                     {
                         potentialTargets.push_back(PMember);
                     }
@@ -250,7 +250,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                 static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(target, PMember) &&
-                        caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
+                        caster_jobs.contains(PMember->GetMJob()))
                     {
                         potentialTargets.push_back(PMember);
                     }
@@ -1740,7 +1740,7 @@ bool CGambitsContainer::TryTrustSkill()
                 if (maybeDaybreakActive)
                 {
                     // Only trigger No Quarter if the last skill used was ACTUALLY a Daybreak opener
-                    if (daybreak_ws.count(lastSkillUsed))
+                    if (daybreak_ws.contains(lastSkillUsed))
                     {
                         for (const auto& tskill : tp_skills)
                         {
@@ -1757,7 +1757,7 @@ bool CGambitsContainer::TryTrustSkill()
                     {
                         for (const auto& tskill : tp_skills)
                         {
-                            if (daybreak_ws.count(tskill.skill_id))
+                            if (daybreak_ws.contains(tskill.skill_id))
                             {
                                 candidates.push_back(tskill);
                             }
@@ -1769,7 +1769,7 @@ bool CGambitsContainer::TryTrustSkill()
                     // Normal state: use standard rotation
                     for (const auto& tskill : tp_skills)
                     {
-                        if (regular_ws.count(tskill.skill_id))
+                        if (regular_ws.contains(tskill.skill_id))
                         {
                             candidates.push_back(tskill);
                         }

@@ -845,7 +845,7 @@ void CLuaBaseEntity::clearLocalVarsWithPrefix(const std::string& prefix)
 {
     for (const auto& [localVar, _] : m_PBaseEntity->GetLocalVars())
     {
-        if (starts_with(localVar, prefix))
+        if (localVar.starts_with(prefix))
         {
             m_PBaseEntity->SetLocalVar(localVar, 0);
         }

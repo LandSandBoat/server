@@ -333,7 +333,7 @@ FishingContestEntry* GetPlayerEntry(CCharEntity* PChar)
     for (auto&& entry : FishingContestEntries)
     {
         // Set the rank value
-        if (strcmp(PChar->name.c_str(), entry.name) == 0)
+        if (PChar->name == entry.name)
         {
             return &entry;
         }
@@ -506,7 +506,7 @@ bool SubmitFish(CCharEntity* PChar, uint32 score)
     // Check to see if the player has already submitted a fish
     for (int it = 0; it < (int)FishingContestEntries.size(); it++)
     {
-        if (std::strcmp(PChar->name.c_str(), FishingContestEntries[it].name) == 0)
+        if (PChar->name == FishingContestEntries[it].name)
         {
             FishingContestEntries.erase(FishingContestEntries.begin() + it);
             break;
@@ -558,7 +558,7 @@ bool WithdrawFish(CCharEntity* PChar)
         auto it = std::ranges::find_if(FishingContestEntries,
                                        [&PChar](auto&& e) -> bool
                                        {
-                                           return std::strcmp(PChar->name.c_str(), e.name) == 0;
+                                           return PChar->name == e.name;
                                        });
 
         if (it != FishingContestEntries.end())
