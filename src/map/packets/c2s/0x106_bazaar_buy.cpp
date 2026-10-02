@@ -174,18 +174,14 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
         DebugBazaarsFmt("Bazaar Interaction [Purchase Successful] - Buyer: {}, Seller: {}, Item: {}, Qty: {}, Cost: {}", PChar->name, PTarget->name, PItem->getName(), this->BuyNum, PriceWithTax);
 
-        bool BazaarIsEmpty = true;
-
-        for (uint8 BazaarSlotID = 1; BazaarSlotID <= PBazaar->GetSize(); ++BazaarSlotID)
-        {
-            PItem = PBazaar->GetItem(BazaarSlotID);
-
-            if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
+        const auto* PListedItem = PBazaar->FindItem(
+            [](CItem* PBazaarItem)
             {
-                BazaarIsEmpty = false;
-                break;
-            }
-        }
+                return PBazaarItem->getCharPrice() != 0;
+            });
+
+        const bool BazaarIsEmpty = PListedItem == nullptr;
+
         for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
             PEntity = PTarget->BazaarCustomers[i].resolve<CCharEntity>();

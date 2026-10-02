@@ -120,18 +120,23 @@ auto anyInstalledFurnishing(CCharEntity* PChar, const uint8 selfCat, const uint8
 {
     for (const auto cat : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
-        const auto* container = PChar->getStorage(cat);
-        for (int slot = 1; slot <= container->GetSize(); ++slot)
-        {
-            if (cat == selfCat && slot == selfSlot)
-            {
-                continue;
-            }
+        auto* PContainer = PChar->getStorage(cat);
 
-            if (auto* PFurn = dynamic_cast<CItemFurnishing*>(container->GetItem(slot)); PFurn && PFurn->isInstalled() && pred(PFurn))
+        const auto* PMatch = PContainer->FindItem(
+            [&](CItem* PItem)
             {
-                return true;
-            }
+                if (cat == selfCat && PItem->getSlotID() == selfSlot)
+                {
+                    return false;
+                }
+
+                auto* PFurn = dynamic_cast<CItemFurnishing*>(PItem);
+                return PFurn && PFurn->isInstalled() && pred(PFurn);
+            });
+
+        if (PMatch)
+        {
+            return true;
         }
     }
 

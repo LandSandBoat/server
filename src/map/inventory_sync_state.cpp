@@ -104,19 +104,19 @@ void InventorySyncState::flushDirtyItems(CCharEntity* PChar) const
             continue;
         }
 
-        for (uint8 slot = 0; slot <= PContainer->GetSize(); ++slot)
-        {
-            auto* PItem = PContainer->GetItem(slot);
-            if (PItem && PItem->isDirty())
+        PContainer->ForEachItem(
+            [&](CItem* PItem)
             {
-                db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                 PItem->m_extra,
-                                 PChar->id,
-                                 loc,
-                                 slot);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(loc), slot);
-                PItem->setDirty(false);
-            }
-        }
+                if (PItem->isDirty())
+                {
+                    db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                     PItem->m_extra,
+                                     PChar->id,
+                                     loc,
+                                     PItem->getSlotID());
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(loc), PItem->getSlotID());
+                    PItem->setDirty(false);
+                }
+            });
     }
 }

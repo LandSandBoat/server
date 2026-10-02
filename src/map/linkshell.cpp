@@ -292,29 +292,31 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
 
             for (uint8 LocationID = 0; LocationID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocationID)
             {
-                CItemContainer* Inventory = PMember->getStorage(LocationID);
-                for (uint8 SlotID = 0; SlotID < Inventory->GetSize(); ++SlotID)
-                {
-                    CItemLinkshell* newPItemLinkshell = (CItemLinkshell*)Inventory->GetItem(SlotID);
-                    if (newPItemLinkshell != nullptr && newPItemLinkshell->isType(ITEM_LINKSHELL) && newPItemLinkshell->GetLSID() == lsid)
+                auto* PContainer = PMember->getStorage(LocationID);
+                PContainer->ForEachItem(
+                    [&](CItem* PItem)
                     {
-                        if (requesterRank == LSTYPE_LINKSHELL || newPItemLinkshell == PItemLinkshell)
+                        if (!PItem->isType(ITEM_LINKSHELL))
                         {
-                            if (newPItemLinkshell->GetLSType() != LSTYPE_LINKSHELL)
-                            {
-                                newPItemLinkshell->SetLSType(LSTYPE_BROKEN);
-
-                                db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                                 newPItemLinkshell->m_extra,
-                                                 PMember->id,
-                                                 LocationID,
-                                                 SlotID);
-
-                                PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(newPItemLinkshell, static_cast<CONTAINER_ID>(LocationID), SlotID);
-                            }
+                            return;
                         }
-                    }
-                }
+
+                        auto* newPItemLinkshell = static_cast<CItemLinkshell*>(PItem);
+                        if (newPItemLinkshell->GetLSID() == lsid &&
+                            (requesterRank == LSTYPE_LINKSHELL || newPItemLinkshell == PItemLinkshell) &&
+                            newPItemLinkshell->GetLSType() != LSTYPE_LINKSHELL)
+                        {
+                            newPItemLinkshell->SetLSType(LSTYPE_BROKEN);
+
+                            db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                             newPItemLinkshell->m_extra,
+                                             PMember->id,
+                                             LocationID,
+                                             newPItemLinkshell->getSlotID());
+
+                            PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(newPItemLinkshell, static_cast<CONTAINER_ID>(LocationID), newPItemLinkshell->getSlotID());
+                        }
+                    });
             }
 
             charutils::SaveCharStats(PMember);

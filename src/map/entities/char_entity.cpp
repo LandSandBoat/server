@@ -901,21 +901,18 @@ bool CCharEntity::hasBazaar()
     }
 
     CItemContainer* playerInventory = getStorage(LOC_INVENTORY);
-
-    if (playerInventory)
+    if (!playerInventory)
     {
-        for (uint8 slotID = 1; slotID <= playerInventory->GetSize(); ++slotID)
-        {
-            CItem* PItem = playerInventory->GetItem(slotID);
-
-            if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
-            {
-                return true;
-                break;
-            }
-        }
+        return false;
     }
-    return false;
+
+    const auto* PListedItem = playerInventory->FindItem(
+        [](CItem* PItem)
+        {
+            return PItem->getCharPrice() != 0;
+        });
+
+    return PListedItem != nullptr;
 }
 
 void CCharEntity::SetName(const std::string& name)
@@ -2597,19 +2594,19 @@ void CCharEntity::UpdateMoghancement()
     std::array<uint16, 8> elements = { 0 };
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
-        CItemContainer* PContainer = getStorage(containerID);
-        for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
-        {
-            CItem* PItem = PContainer->GetItem(slotID);
-            if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+        auto* PContainer = getStorage(containerID);
+        PContainer->ForEachItem(
+            [&](CItem* PItem)
             {
-                CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
-                if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor())
+                if (PItem->isType(ITEM_FURNISHING))
                 {
-                    elements[PFurniture->getElement() - 1] += PFurniture->getAura();
+                    auto* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor())
+                    {
+                        elements[PFurniture->getElement() - 1] += PFurniture->getAura();
+                    }
                 }
-            }
-        }
+            });
     }
 
     // Determine the dominant aura
@@ -2638,26 +2635,26 @@ void CCharEntity::UpdateMoghancement()
     {
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
-            CItemContainer* PContainer = getStorage(containerID);
-            for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
-            {
-                CItem* PItem = PContainer->GetItem(slotID);
-                if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+            auto* PContainer = getStorage(containerID);
+            PContainer->ForEachItem(
+                [&](CItem* PItem)
                 {
-                    CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
-                    // Highest aura wins, ties broken by highest moghancement id.
-                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement)
+                    if (PItem->isType(ITEM_FURNISHING))
                     {
-                        const uint8  aura         = PFurniture->getAura();
-                        const uint16 moghancement = PFurniture->getMoghancement();
-                        if (aura > bestAura || (aura == bestAura && moghancement > newMoghancementID))
+                        auto* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                        // Highest aura wins, ties broken by highest moghancement id.
+                        if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement)
                         {
-                            bestAura          = aura;
-                            newMoghancementID = moghancement;
+                            const uint8  aura         = PFurniture->getAura();
+                            const uint16 moghancement = PFurniture->getMoghancement();
+                            if (aura > bestAura || (aura == bestAura && moghancement > newMoghancementID))
+                            {
+                                bestAura          = aura;
+                                newMoghancementID = moghancement;
+                            }
                         }
                     }
-                }
-            }
+                });
         }
     }
 

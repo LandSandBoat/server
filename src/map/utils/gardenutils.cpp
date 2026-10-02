@@ -91,45 +91,44 @@ void UpdateGardening(CCharEntity* PChar, SendPacket sendPacket)
     uint32 vanatime = earth_time::vanadiel_timestamp();
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
-        CItemContainer* PContainer = PChar->getStorage(containerID);
-        for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
-        {
-            CItem* PItem = PContainer->GetItem(slotID);
-            if (PItem != nullptr && PItem->isType(ITEM_FLOWERPOT))
+        auto* PContainer = PChar->getStorage(containerID);
+        PContainer->ForEachItem(
+            [&](CItem* PItem)
             {
-                CItemFlowerpot* PPotItem = dynamic_cast<CItemFlowerpot*>(PItem);
-                if (PPotItem != nullptr && PPotItem->canGrow() && vanatime >= PPotItem->getStageTimestamp())
+                auto* PPotItem = dynamic_cast<CItemFlowerpot*>(PItem);
+                if (PPotItem == nullptr || !PPotItem->canGrow() || vanatime < PPotItem->getStageTimestamp())
                 {
-                    uint32 stageDuration        = GetStageDuration(PPotItem);
-                    uint32 daysSinceStageChange = std::floor<uint32>(std::max<float>(0.f, static_cast<float>(vanatime - PPotItem->getStageTimestamp()) / static_cast<float>(VANADAY_SECONDS)));
-                    uint32 wiltTime             = VANADAYS_TO_WILT + PChar->getMod(xi::Mod::GARDENING_WILT_BONUS);
-                    bool   wasExamined          = PPotItem->wasExamined();
-                    if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) ||
-                        daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
-                    {
-                        PPotItem->setStage(FLOWERPOT_STAGE_WILTED);
-                        PPotItem->setStageTimestamp(vanatime + VANATIME_FOR_WILT_STAGE);
-                    }
-                    else
-                    {
-                        GrowToNextStage(PPotItem);
-                    }
-
-                    PPotItem->clearExamined();
-
-                    db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                     PItem->m_extra,
-                                     PChar->id,
-                                     containerID,
-                                     slotID);
-
-                    if (sendPacket)
-                    {
-                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, containerID, slotID);
-                    }
+                    return;
                 }
-            }
-        }
+
+                uint32 stageDuration        = GetStageDuration(PPotItem);
+                uint32 daysSinceStageChange = std::floor<uint32>(std::max<float>(0.f, static_cast<float>(vanatime - PPotItem->getStageTimestamp()) / static_cast<float>(VANADAY_SECONDS)));
+                uint32 wiltTime             = VANADAYS_TO_WILT + PChar->getMod(xi::Mod::GARDENING_WILT_BONUS);
+                bool   wasExamined          = PPotItem->wasExamined();
+                if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) ||
+                    daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
+                {
+                    PPotItem->setStage(FLOWERPOT_STAGE_WILTED);
+                    PPotItem->setStageTimestamp(vanatime + VANATIME_FOR_WILT_STAGE);
+                }
+                else
+                {
+                    GrowToNextStage(PPotItem);
+                }
+
+                PPotItem->clearExamined();
+
+                db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                                 PItem->m_extra,
+                                 PChar->id,
+                                 containerID,
+                                 PItem->getSlotID());
+
+                if (sendPacket)
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, containerID, PItem->getSlotID());
+                }
+            });
     }
 }
 
@@ -253,21 +252,18 @@ std::tuple<uint16, uint8> CalculateResults(CCharEntity* PChar, CItemFlowerpot* P
         std::array<uint16, 8> auras = { 0 };
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
-            CItemContainer* PContainer = PChar->getStorage(containerID);
-            for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
-            {
-                CItem* PItemContained = PContainer->GetItem(slotID);
-                if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
+            auto* PContainer = PChar->getStorage(containerID);
+            PContainer->ForEachItem(
+                [&](CItem* PItemContained)
                 {
-                    auto PFurniture = dynamic_cast<CItemFurnishing*>(PItemContained);
+                    auto* PFurniture = dynamic_cast<CItemFurnishing*>(PItemContained);
                     if (PFurniture && PFurniture->isInstalled())
                     {
                         // -1 because element values range from 1-8
                         // Converts from lua 1 based index to c/c++ 0 based index
                         auras[PFurniture->getElement() - 1] += PFurniture->getAura();
                     }
-                }
-            }
+                });
         }
 
         // Determine the dominant aura
