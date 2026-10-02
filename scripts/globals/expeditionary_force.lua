@@ -27,21 +27,22 @@ local regionPointsEarned =
     [3] = 20000,
 }
 
+-- killWeights are taken from \src\map\conquest_data.h
 local zoneInfoTable =
 {
-    [xi.zone.BEAUCEDINE_GLACIER    ] = { levelCap = 40 },
-    [xi.zone.BUBURIMU_PENINSULA    ] = { levelCap = 30 },
-    [xi.zone.CAPE_TERIGGAN         ] = { levelCap = xi.settings.main.MAX_LEVEL },  -- Uncapped
-    [xi.zone.EASTERN_ALTEPA_DESERT ] = { levelCap = 50 },
-    [xi.zone.JUGNER_FOREST         ] = { levelCap = 30 },
-    [xi.zone.MERIPHATAUD_MOUNTAINS ] = { levelCap = 30 },
-    [xi.zone.PASHHOW_MARSHLANDS    ] = { levelCap = 30 },
-    [xi.zone.QUFIM_ISLAND          ] = { levelCap = 30 },
-    [xi.zone.THE_SANCTUARY_OF_ZITAH] = { levelCap = 40 },
-    [xi.zone.VALKURM_DUNES         ] = { levelCap = 30 },
-    [xi.zone.XARCABARD             ] = { levelCap = 50 },
-    [xi.zone.YHOATOR_JUNGLE        ] = { levelCap = 50 },
-    [xi.zone.YUHTUNGA_JUNGLE       ] = { levelCap = 40 },
+    [xi.zone.BEAUCEDINE_GLACIER    ] = { killWeight = 150, levelCap = 40 },
+    [xi.zone.BUBURIMU_PENINSULA    ] = { killWeight =  25, levelCap = 30 },
+    [xi.zone.CAPE_TERIGGAN         ] = { killWeight =  25, levelCap = xi.settings.main.MAX_LEVEL },  -- Uncapped
+    [xi.zone.EASTERN_ALTEPA_DESERT ] = { killWeight =  50, levelCap = 50 },
+    [xi.zone.JUGNER_FOREST         ] = { killWeight = 100, levelCap = 30 },
+    [xi.zone.MERIPHATAUD_MOUNTAINS ] = { killWeight = 100, levelCap = 30 },
+    [xi.zone.PASHHOW_MARSHLANDS    ] = { killWeight = 100, levelCap = 30 },
+    [xi.zone.QUFIM_ISLAND          ] = { killWeight =  50, levelCap = 30 },
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = { killWeight =  25, levelCap = 40 },
+    [xi.zone.VALKURM_DUNES         ] = { killWeight =  25, levelCap = 30 },
+    [xi.zone.XARCABARD             ] = { killWeight = 150, levelCap = 50 },
+    [xi.zone.YHOATOR_JUNGLE        ] = { killWeight =  50, levelCap = 50 },
+    [xi.zone.YUHTUNGA_JUNGLE       ] = { killWeight =  50, levelCap = 40 },
 }
 
 local bannerTable =
@@ -977,8 +978,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player)
     player:gainConquestInfluence(regionPointsEarned[GetNationRank(creditNation)])
 
     -- Award mob kills for Conquest
-    -- TODO: Get a more accurate number and check per region values.
-    player:addConquestMobKills(25)
+    player:addConquestMobKills(zoneInfoTable[zoneId].killWeight * 2)
 
     -- SEND ZONE MESSAGE
     for _, person in pairs(mob:getZone():getPlayers()) do
