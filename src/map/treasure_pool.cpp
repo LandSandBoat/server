@@ -135,7 +135,7 @@ void CTreasurePool::delMember(CCharEntity* PChar)
         }
     }
 
-    auto memberToDelete = std::find(m_Members.begin(), m_Members.end(), PChar);
+    auto memberToDelete = std::ranges::find(m_Members, PChar);
     if (memberToDelete != m_Members.end())
     {
         PChar->PTreasurePool = nullptr;

@@ -184,7 +184,7 @@ struct bitset
 
     void reset()
     {
-        std::fill(data.begin(), data.end(), 0);
+        std::ranges::fill(data, 0);
     }
 
     void reset(std::size_t pos)

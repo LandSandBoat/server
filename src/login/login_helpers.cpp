@@ -37,6 +37,7 @@
 #include "data/enums/zone_type.h"
 #include "data/loader.h"
 
+#include <algorithm>
 #include <array>
 #include <fstream>
 #include <unordered_set>
@@ -389,10 +390,7 @@ bool isStringMalformed(const std::string& str, std::size_t max_length)
     const bool isEmpty   = str.empty();
     const bool isTooLong = str.size() > max_length;
 
-    const bool hasInvalidChar = std::any_of(
-        str.cbegin(),
-        str.cend(),
-        unprintableChar);
+    const bool hasInvalidChar = std::ranges::any_of(str, unprintableChar);
 
     return isEmpty || isTooLong || hasInvalidChar;
 }

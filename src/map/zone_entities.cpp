@@ -1208,7 +1208,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         {
             candidates.emplace_back(candidateCharacters.pop());
         }
-        std::reverse(candidates.begin(), candidates.end());
+        std::ranges::reverse(candidates);
 
         // Track how many characters have been spawned/despawned this check and limit it to avoid flooding the client
         uint8 swapCount = 0;

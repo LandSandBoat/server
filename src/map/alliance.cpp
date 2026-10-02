@@ -219,7 +219,7 @@ void CAlliance::delParty(CParty* party)
     }
 
     // Delete the party from the alliance list
-    auto partyToDelete = std::find(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), party);
+    auto partyToDelete = std::ranges::find(party->m_PAlliance->partyList, party);
 
     if (partyToDelete != party->m_PAlliance->partyList.end())
     {

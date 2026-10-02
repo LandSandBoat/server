@@ -29,6 +29,7 @@
 #include "exdata/augment_standard.h"
 #include "exdata/augment_trial.h"
 
+#include <algorithm>
 #include <cstring>
 
 namespace
@@ -344,12 +345,11 @@ void CItemEquipment::addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, 
 
 bool CItemEquipment::delModifier(xi::Mod mod, int16 modValue)
 {
-    // clang-format off
-    auto it = std::find_if(modList.begin(), modList.end(), [mod, modValue](const CModifier& compare)
-    {
-        return compare.getModID() == mod && compare.getModAmount() == modValue;
-    });
-    // clang-format on
+    auto it = std::ranges::find_if(modList,
+                                   [mod, modValue](const CModifier& compare)
+                                   {
+                                       return compare.getModID() == mod && compare.getModAmount() == modValue;
+                                   });
 
     if (it == modList.end())
     {
@@ -362,12 +362,11 @@ bool CItemEquipment::delModifier(xi::Mod mod, int16 modValue)
 
 bool CItemEquipment::delPetModifier(xi::Mod mod, PetModType petType, int16 modValue)
 {
-    // clang-format off
-    auto it = std::find_if(petModList.begin(), petModList.end(), [mod, petType, modValue](const CPetModifier& compare)
-    {
-        return compare.getModID() == mod && compare.getPetModType() == petType && compare.getModAmount() == modValue;
-    });
-    // clang-format on
+    auto it = std::ranges::find_if(petModList,
+                                   [mod, petType, modValue](const CPetModifier& compare)
+                                   {
+                                       return compare.getModID() == mod && compare.getPetModType() == petType && compare.getModAmount() == modValue;
+                                   });
 
     if (it == petModList.end())
     {

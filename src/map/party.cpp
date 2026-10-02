@@ -242,9 +242,8 @@ auto CParty::MemberCount(const xi::ZoneId ZoneID) -> uint8
         if (member->objtype == TYPE_PC)
         {
             auto* charMember = static_cast<CCharEntity*>(member);
-            std::for_each(
-                charMember->PTrusts.begin(),
-                charMember->PTrusts.end(),
+            std::ranges::for_each(
+                charMember->PTrusts,
                 [&](CTrustEntity* trust)
                 {
                     count++;
@@ -298,7 +297,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
     }
     else
     {
-        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+        auto memberToDelete = std::ranges::find(members, PEntity);
 
         if (memberToDelete != members.end())
         {
@@ -395,7 +394,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
     }
     else
     {
-        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+        auto memberToDelete = std::ranges::find(members, PEntity);
 
         if (memberToDelete != members.end())
         {
@@ -465,7 +464,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
         return;
     }
 
-    auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+    auto memberToDelete = std::ranges::find(members, PEntity);
 
     if (memberToDelete != members.end())
     {

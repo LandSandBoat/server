@@ -101,21 +101,7 @@ void LoadState()
             }
         });
 
-    std::sort(
-        state.regions.begin(),
-        state.regions.end(),
-        [](const CampaignRegion& a, const CampaignRegion& b) -> bool
-        {
-            if (a.campaignId < b.campaignId)
-            {
-                return true;
-            }
-            if (a.campaignId > b.campaignId)
-            {
-                return false;
-            }
-            return false;
-        });
+    std::ranges::sort(state.regions, {}, &CampaignRegion::campaignId);
 
     CState = state;
 }

@@ -786,7 +786,7 @@ std::string trim(const std::string& str, const std::string& whitespace)
 void rtrim(std::string& s)
 {
     s.erase(
-        std::find_if(
+        std::ranges::find_if(
             s.rbegin(),
             s.rend(),
             [](unsigned char ch)
@@ -935,9 +935,8 @@ auto utils::isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool
 
 auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
 {
-    return std::all_of(
-        str.begin(),
-        str.end(),
+    return std::ranges::all_of(
+        str,
         [mode](unsigned char ch)
         {
             return isPrintableASCII(ch, mode);

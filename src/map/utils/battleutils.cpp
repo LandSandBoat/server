@@ -3834,7 +3834,7 @@ CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity*
     if (!taTargetList.empty())
     {
         // sorts by distance then by pointer id (only if floats are equal)
-        std::sort(taTargetList.begin(), taTargetList.end());
+        std::ranges::sort(taTargetList);
         for (const auto& [dist, potentialTAtarget] : taTargetList)
         {
             if (taUser->id == potentialTAtarget->id || // can't TA self

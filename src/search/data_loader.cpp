@@ -79,7 +79,7 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
 
             HistoryList.emplace_back(std::move(history));
         }
-        std::reverse(HistoryList.begin(), HistoryList.end());
+        std::ranges::reverse(HistoryList);
     }
     return HistoryList;
 }
@@ -286,7 +286,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     // Unused zone slots repeat the first zone, which leaves the IN list matches unchanged.
     auto zones = std::array<uint16, 10>{};
     std::ranges::copy(std::span(sr.zoneid, zones.size()), zones.begin());
-    std::fill(std::ranges::find(zones, 0), zones.end(), zones[0]);
+    std::ranges::fill(std::ranges::find(zones, 0), zones.end(), zones[0]);
 
     const auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
                                        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "

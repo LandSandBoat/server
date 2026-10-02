@@ -355,7 +355,7 @@ Maybe<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* P
     };
     // clang-format on
 
-    std::size_t    weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t    weakestIndex     = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
     Maybe<SpellID> choice           = std::nullopt;
     auto           Weakness_Element = weakestIndex + 1;
     if (spell::GetSpell(spellId) != nullptr)
@@ -430,7 +430,7 @@ Maybe<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* P
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;
@@ -487,7 +487,7 @@ Maybe<SpellID> CMobSpellContainer::StormDayAgainstTargetWeakness(CBattleEntity* 
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;
@@ -554,7 +554,7 @@ Maybe<SpellID> CMobSpellContainer::HelixAgainstTargetWeakness(CBattleEntity* PTa
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;

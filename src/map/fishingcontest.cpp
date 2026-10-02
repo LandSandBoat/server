@@ -240,19 +240,18 @@ void ScoreContest()
     TracyZoneScoped;
 
     // Sort the list first
-    // clang-format off
-        std::sort(FishingContestEntries.begin(), FishingContestEntries.end(), [](auto&& a, auto&& b) -> bool
-        {
-            if (CurrentFishingContest.measure == FISHING_CONTEST_MEASURE::GREATEST)
-            {
-                return a.score == b.score ? a.submitTime < b.submitTime : a.score > b.score;
-            }
-            else
-            {
-                return a.score == b.score ? a.submitTime < b.submitTime : b.score > a.score;
-            }
-        });
-    // clang-format on
+    std::ranges::sort(FishingContestEntries,
+                      [](const auto& a, const auto& b)
+                      {
+                          if (CurrentFishingContest.measure == FISHING_CONTEST_MEASURE::GREATEST)
+                          {
+                              return a.score == b.score ? a.submitTime < b.submitTime : a.score > b.score;
+                          }
+                          else
+                          {
+                              return a.score == b.score ? a.submitTime < b.submitTime : b.score > a.score;
+                          }
+                      });
 
     // Apply Rankings
     // Iterate over the vector and apply the contestRank value
@@ -275,12 +274,7 @@ void ScoreContest()
         }
 
         // Set the number of times the score appears and copy it to dataset a and b
-        // clang-format off
-            entry.share   = std::count_if(FishingContestEntries.begin(), FishingContestEntries.end(), [&score](auto& a) -> bool
-            {
-                return a.score == score;
-            });
-        // clang-format on
+        entry.share = std::ranges::count(FishingContestEntries, score, &FishingContestEntry::score);
 
         entry.dataset_b   = entry.share; // Duplicated.  Uncertain as to definition
         entry.resultCount = FishingRankEntryCount();
@@ -561,12 +555,11 @@ bool WithdrawFish(CCharEntity* PChar)
         }
 
         // Remove from the in-memory vector
-        // clang-format off
-            auto it = std::find_if(FishingContestEntries.begin(), FishingContestEntries.end(), [&PChar](auto&& e) -> bool
-            {
-                return std::strcmp(PChar->name.c_str(), e.name) == 0;
-            });
-        // clang-format on
+        auto it = std::ranges::find_if(FishingContestEntries,
+                                       [&PChar](auto&& e) -> bool
+                                       {
+                                           return std::strcmp(PChar->name.c_str(), e.name) == 0;
+                                       });
 
         if (it != FishingContestEntries.end())
         {
