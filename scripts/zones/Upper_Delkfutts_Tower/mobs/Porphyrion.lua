@@ -1,12 +1,20 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
 --   NM: Porphyrion
+-- Note: Mob uses EES and ranged attacks but is WAR main job.
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SPECIAL_SKILL, xi.mobSkill.CATAPULT)
+    mob:setMobMod(xi.mobMod.SPECIAL_COOL, 14)
+    mob:setMobMod(xi.mobMod.STANDBACK_COOL, 6)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, 66)
+end
+
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[2hour]HPP', math.randomInt(30, 35))
+    mob:setLocalVar('[2hour]HPP', math.randomInt(30, 50))
     mob:setLocalVar('[2hour]Used', 0)
 end
 

@@ -436,6 +436,7 @@ xi.mobSkill =
 
     CHAOTIC_EYE_1                 =  653,
 
+    CATAPULT                      =  658,
     CURSED_SPHERE_1               =  659,
     VENOM_1                       =  660,
     SNOW_CLOUD_1                  =  661,
