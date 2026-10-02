@@ -23,7 +23,6 @@
 
 #include <vector>
 
-#include "common/cbasetypes.h"
 #include "common/mmo.h"
 
 #include "entities/mob_entity.h"

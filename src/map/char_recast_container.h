@@ -24,8 +24,6 @@
 #include "common/cbasetypes.h"
 #include "recast_container.h"
 
-#include <vector>
-
 class CCharEntity;
 
 class CCharRecastContainer : public CRecastContainer

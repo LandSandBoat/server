@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
 #include "data/yaml/schema_annotations.h"
 
 #include <glaze/glaze.hpp>

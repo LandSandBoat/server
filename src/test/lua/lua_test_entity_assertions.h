@@ -22,7 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "common/lua.h"
 #include <string>
 
 #include "data/enums/animation.h"

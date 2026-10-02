@@ -21,28 +21,13 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
 #include "common/types/hash_map.h"
-#include "data/enums/animation.h"
-#include "data/enums/behavior.h"
-#include "data/enums/detects.h"
 #include "data/enums/ecosystem.h"
-#include "data/enums/element.h"
 #include "data/enums/family.h"
-#include "data/enums/immunity.h"
-#include "data/enums/job.h"
-#include "data/enums/mob_mod.h"
-#include "data/enums/mod.h"
-#include "data/enums/skill_type.h"
-#include "data/enums/spawn_type.h"
 #include "data/enums/species.h"
-#include "data/enums/stat_rank.h"
 #include "data/shared_types/mob_attributes/dataset.h"
 
-#include <array>
-#include <optional>
 #include <string_view>
-#include <utility>
 
 namespace xi::data
 {

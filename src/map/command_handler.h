@@ -22,10 +22,8 @@
 #pragma once
 
 #include <common/cbasetypes.h>
-#include <common/logging.h>
 #include <common/scheduler.h>
 
-#include <list>
 #include <string>
 
 //

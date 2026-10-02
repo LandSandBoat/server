@@ -30,7 +30,6 @@
 #include <atomic>
 #include <cstdlib>
 #include <exception>
-#include <typeinfo>
 
 namespace
 {

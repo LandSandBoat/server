@@ -30,7 +30,6 @@
 
 #include <atomic>
 #include <cstdint>
-#include <functional>
 #include <string>
 #include <string_view>
 #include <type_traits>

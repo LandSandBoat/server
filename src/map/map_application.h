@@ -24,7 +24,6 @@
 #include "map_engine.h"
 
 #include <common/application.h>
-#include <common/timer.h>
 
 #include "zone.h"
 

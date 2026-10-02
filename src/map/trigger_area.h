@@ -24,8 +24,6 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
-#include <memory>
-
 class ITriggerArea
 {
 public:

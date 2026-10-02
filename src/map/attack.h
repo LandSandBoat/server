@@ -25,7 +25,6 @@
 #include "entities/battle_entity.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"
-#include <vector>
 
 enum class PHYSICAL_ATTACK_TYPE
 {

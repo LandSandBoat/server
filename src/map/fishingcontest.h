@@ -23,11 +23,6 @@
 
 #include "utils/fishingutils.h"
 
-#include <cstring>
-#include <list>
-#include <map>
-#include <vector>
-
 class CBasicPacket;
 class CCharEntity;
 

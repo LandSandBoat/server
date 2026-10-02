@@ -19,10 +19,8 @@
 ===========================================================================
 */
 
-#include <cstring>
-
-#include "entities/base_entity.h"
 #include "universal_container.h"
+#include "entities/base_entity.h"
 #include "utils/itemutils.h"
 
 CUContainer::CUContainer()

@@ -22,7 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
