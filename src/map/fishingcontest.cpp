@@ -522,7 +522,7 @@ bool SubmitFish(CCharEntity* PChar, uint32 score)
     // Fill out the entry with the current data
     FishingContestEntry entry;
 
-    std::strncpy(entry.name, PChar->name.c_str(), PChar->name.size());
+    PChar->name.copy(entry.name, sizeof(entry.name) - 1);
     entry.mjob        = (uint8)PChar->GetMJob();
     entry.sjob        = (uint8)PChar->GetSJob();
     entry.mlvl        = PChar->GetMLevel();
@@ -759,7 +759,7 @@ void LoadContestEntries()
         {
             FishingContestEntry entry;
 
-            std::strncpy(entry.name, rset->get<std::string>("charname").c_str(), rset->get<std::string>("charname").size());
+            rset->get<std::string>("charname").copy(entry.name, sizeof(entry.name) - 1);
 
             entry.mjob        = rset->get<uint8>("mjob");
             entry.sjob        = rset->get<uint8>("sjob");
@@ -812,7 +812,7 @@ void BuildPlaceholderEntries()
         // Build the entry based on generated data
         std::string fakeName = fmt::format(" SmallFisher{:02d} ", fakeEntryNumber);
 
-        std::strncpy(fakeEntry.name, fakeName.c_str(), fakeName.size());
+        fakeName.copy(fakeEntry.name, sizeof(fakeEntry.name) - 1);
         fakeEntry.mjob        = ((fakeEntryNumber - 1) % 18) + 1;
         fakeEntry.sjob        = 0;
         fakeEntry.mlvl        = jobLevels[(fakeEntryNumber - 1) % 5];

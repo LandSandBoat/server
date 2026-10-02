@@ -629,7 +629,7 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
 {
     char_mini createchar{};
 
-    std::memcpy(createchar.m_name, session.requestedNewCharacterName.c_str(), 16);
+    session.requestedNewCharacterName.copy(reinterpret_cast<char*>(createchar.m_name), sizeof(createchar.m_name) - 1);
 
     const auto charName = asStringFromUntrustedSource(createchar.m_name);
 

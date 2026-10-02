@@ -46,7 +46,7 @@ CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
     }
 
     packBitsBE(buffer_.data() + 0x04, 0x18 + PEntity->packetName.size(), 0, 6, 10); // Message Size
-    std::memcpy(buffer_.data() + 0x18, PEntity->packetName.c_str(), PEntity->packetName.size());
+    PEntity->packetName.copy(reinterpret_cast<char*>(buffer_.data() + 0x18), PACKET_SIZE - 0x18);
 
     // Unknown, maybe entity flags?
     ref<uint8>(0x10) = 0x04;

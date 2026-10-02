@@ -54,6 +54,6 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
             ref<uint32>(0x14) = PTarget->id;
         }
 
-        std::memcpy(buffer_.data() + 0x18, PChar->PPet->getName().c_str(), PChar->PPet->getName().size());
+        PChar->PPet->getName().copy(reinterpret_cast<char*>(buffer_.data() + 0x18), PACKET_SIZE - 0x18);
     }
 }

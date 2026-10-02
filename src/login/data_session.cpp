@@ -166,7 +166,7 @@ void data_session::read_func()
                         std::memset(strCharName, 0, sizeof(strCharName));
 
                         std::string dbCharName = rset1->get<std::string>("charname");
-                        std::memcpy(strCharName, dbCharName.c_str(), dbCharName.length());
+                        dbCharName.copy(strCharName, sizeof(strCharName) - 1);
 
                         int32 gmlevel = rset1->get<int32>("gmlevel");
                         if (maintMode == 0 || gmlevel > 0)
@@ -374,7 +374,7 @@ void data_session::read_func()
                 std::memset(strCharName, 0, sizeof(strCharName));
 
                 std::string dbCharName = rset->get<std::string>("charname");
-                std::memcpy(strCharName, dbCharName.c_str(), std::clamp<size_t>(dbCharName.length(), 3, PacketNameLength - 1));
+                dbCharName.copy(strCharName, PacketNameLength - 1);
                 std::memcpy(characterSelectionResponse.character_name, &strCharName, 16);
 
                 characterSelectionResponse.ffxi_id       = charid;
