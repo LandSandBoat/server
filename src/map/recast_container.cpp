@@ -63,14 +63,9 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
 Recast_t* CRecastContainer::GetRecast(const RECASTTYPE type, const Recast id)
 {
     RecastList_t* list = GetRecastList(type);
-    for (auto&& recast : *list)
-    {
-        if (recast.ID == id)
-        {
-            return &recast;
-        }
-    }
-    return nullptr;
+
+    const auto it = std::ranges::find(*list, id, &Recast_t::ID);
+    return it != list->end() ? &*it : nullptr;
 }
 
 Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)

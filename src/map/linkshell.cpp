@@ -21,6 +21,7 @@
 
 #include "common/utils.h"
 
+#include <algorithm>
 #include <cstring>
 
 #include "packets/char_status.h"
@@ -116,7 +117,7 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
         return;
     }
 
-    if (std::find(members.begin(), members.end(), PChar) != members.end())
+    if (std::ranges::contains(members, PChar))
     {
         ShowWarning("CLinkshell::AddMember attempted to add member '%s' who is already in the online member list.", PChar->getName());
         return;

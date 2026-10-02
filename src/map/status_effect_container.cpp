@@ -193,29 +193,20 @@ CStatusEffectContainer::~CStatusEffectContainer()
 
 auto CStatusEffectContainer::GetEffectsCount(xi::StatusEffect ID) -> uint8
 {
-    uint8 count = 0;
-
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == ID && !PStatusEffect->isDeleted())
-        {
-            count++;
-        }
-    }
-    return count;
+    return static_cast<uint8>(std::ranges::count_if(m_StatusEffectSet,
+                                                    [&](const auto& PStatusEffect)
+                                                    {
+                                                        return PStatusEffect->GetStatusID() == ID && !PStatusEffect->isDeleted();
+                                                    }));
 }
 
 auto CStatusEffectContainer::GetEffectsCountWithFlag(xi::StatusEffectFlag flag) -> uint8
 {
-    uint8 count = 0;
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->HasEffectFlag(flag) && PStatusEffect->GetDuration() > 0s && !PStatusEffect->isDeleted())
-        {
-            count++;
-        }
-    }
-    return count;
+    return static_cast<uint8>(std::ranges::count_if(m_StatusEffectSet,
+                                                    [&](const auto& PStatusEffect)
+                                                    {
+                                                        return PStatusEffect->HasEffectFlag(flag) && PStatusEffect->GetDuration() > 0s && !PStatusEffect->isDeleted();
+                                                    }));
 }
 
 uint8 CStatusEffectContainer::GetLowestFreeSlot()
@@ -1012,26 +1003,20 @@ auto CStatusEffectContainer::DispelAllStatusEffect(xi::StatusEffectFlag flag) ->
 
 auto CStatusEffectContainer::HasStatusEffect(xi::StatusEffect StatusID) -> bool
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && !PStatusEffect->isDeleted())
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(m_StatusEffectSet,
+                               [&](const auto& PStatusEffect)
+                               {
+                                   return PStatusEffect->GetStatusID() == StatusID && !PStatusEffect->isDeleted();
+                               });
 }
 
 auto CStatusEffectContainer::HasStatusEffectByFlag(xi::StatusEffectFlag flag) -> bool
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->HasEffectFlag(flag) && !PStatusEffect->isDeleted())
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(m_StatusEffectSet,
+                               [&](const auto& PStatusEffect)
+                               {
+                                   return PStatusEffect->HasEffectFlag(flag) && !PStatusEffect->isDeleted();
+                               });
 }
 
 /************************************************************************
@@ -1187,14 +1172,11 @@ void CStatusEffectContainer::RemoveAllRunes()
 
 auto CStatusEffectContainer::HasStatusEffect(xi::StatusEffect StatusID, uint16 SubID) -> bool
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSubID() == SubID && !PStatusEffect->isDeleted())
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(m_StatusEffectSet,
+                               [&](const auto& PStatusEffect)
+                               {
+                                   return PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSubID() == SubID && !PStatusEffect->isDeleted();
+                               });
 }
 
 auto CStatusEffectContainer::HasStatusEffect(std::initializer_list<xi::StatusEffect> effects) -> bool
@@ -1217,38 +1199,32 @@ auto CStatusEffectContainer::HasStatusEffect(std::initializer_list<xi::StatusEff
 
 auto CStatusEffectContainer::GetStatusEffect(xi::StatusEffect StatusID) -> CStatusEffect*
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && !PStatusEffect->isDeleted())
-        {
-            return PStatusEffect.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_StatusEffectSet,
+                                         [&](const auto& PStatusEffect)
+                                         {
+                                             return PStatusEffect->GetStatusID() == StatusID && !PStatusEffect->isDeleted();
+                                         });
+    return it != m_StatusEffectSet.end() ? it->get() : nullptr;
 }
 
 auto CStatusEffectContainer::GetStatusEffect(xi::StatusEffect StatusID, uint32 SubID) -> CStatusEffect*
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSubID() == SubID && !PStatusEffect->isDeleted())
-        {
-            return PStatusEffect.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_StatusEffectSet,
+                                         [&](const auto& PStatusEffect)
+                                         {
+                                             return PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSubID() == SubID && !PStatusEffect->isDeleted();
+                                         });
+    return it != m_StatusEffectSet.end() ? it->get() : nullptr;
 }
 
 auto CStatusEffectContainer::GetStatusEffectBySource(xi::StatusEffect StatusID, EffectSourceType SourceType, uint16 SourceTypeParam) -> CStatusEffect*
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSourceType() == SourceType && PStatusEffect->GetSourceTypeParam() == SourceTypeParam && !PStatusEffect->isDeleted())
-        {
-            return PStatusEffect.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_StatusEffectSet,
+                                         [&](const auto& PStatusEffect)
+                                         {
+                                             return PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSourceType() == SourceType && PStatusEffect->GetSourceTypeParam() == SourceTypeParam && !PStatusEffect->isDeleted();
+                                         });
+    return it != m_StatusEffectSet.end() ? it->get() : nullptr;
 }
 
 /************************************************************************
@@ -1364,15 +1340,11 @@ auto CStatusEffectContainer::GetStatusEffectsInIDRange(xi::StatusEffect start, x
 
 auto CStatusEffectContainer::GetStatusEffectCountInIDRange(xi::StatusEffect start, xi::StatusEffect end) -> uint8
 {
-    uint8 count = 0;
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->isDeleted())
-        {
-            count++;
-        }
-    }
-    return count;
+    return static_cast<uint8>(std::ranges::count_if(m_StatusEffectSet,
+                                                    [&](const auto& PStatusEffect)
+                                                    {
+                                                        return PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->isDeleted();
+                                                    }));
 }
 
 auto CStatusEffectContainer::GetNewestStatusEffectInIDRange(xi::StatusEffect start, xi::StatusEffect end) -> xi::StatusEffect
@@ -2226,24 +2198,31 @@ bool CStatusEffectContainer::HasPreventActionEffect(bool ignoreCharm)
 
 uint16 CStatusEffectContainer::GetConfrontationEffect()
 {
-    for (const auto& PEffect : m_StatusEffectSet)
+    const auto it = std::ranges::find_if(m_StatusEffectSet,
+                                         [](const auto& PEffect)
+                                         {
+                                             return PEffect->HasEffectFlag(xi::StatusEffectFlag::Confrontation);
+                                         });
+
+    if (it != m_StatusEffectSet.end())
     {
-        if (PEffect->HasEffectFlag(xi::StatusEffectFlag::Confrontation))
-        {
-            return PEffect->GetPower();
-        }
+        return (*it)->GetPower();
     }
+
     return 0;
 }
 
 auto CStatusEffectContainer::GetConfrontationSubPower() const -> uint16
 {
-    for (const auto& PEffect : m_StatusEffectSet)
+    const auto it = std::ranges::find_if(m_StatusEffectSet,
+                                         [](const auto& PEffect)
+                                         {
+                                             return PEffect->HasEffectFlag(xi::StatusEffectFlag::Confrontation);
+                                         });
+
+    if (it != m_StatusEffectSet.end())
     {
-        if (PEffect->HasEffectFlag(xi::StatusEffectFlag::Confrontation))
-        {
-            return PEffect->GetSubPower();
-        }
+        return (*it)->GetSubPower();
     }
 
     return 0;
@@ -2288,14 +2267,11 @@ void CStatusEffectContainer::WakeUp()
 
 bool CStatusEffectContainer::HasBustEffect(uint16 id)
 {
-    for (const auto& PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == xi::StatusEffect::Bust && PStatusEffect->GetSubPower() == id)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(m_StatusEffectSet,
+                               [&](const auto& PStatusEffect)
+                               {
+                                   return PStatusEffect->GetStatusID() == xi::StatusEffect::Bust && PStatusEffect->GetSubPower() == id;
+                               });
 }
 
 auto CStatusEffectContainer::statusIcons() const -> const uint8*

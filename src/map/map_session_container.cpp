@@ -126,30 +126,26 @@ auto MapSessionContainer::getSessionByChar(CCharEntity* PChar) -> MapSession*
         return nullptr;
     }
 
-    for (const auto& [_, session] : sessions_)
-    {
-        if (session->PChar->id == PChar->id)
-        {
-            return session.get();
-        }
-    }
+    const auto it = std::ranges::find_if(sessions_,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->PChar->id == PChar->id;
+                                         });
 
-    return nullptr;
+    return it != sessions_.end() ? it->second.get() : nullptr;
 }
 
 auto MapSessionContainer::getSessionByCharId(uint32 charId) -> MapSession*
 {
     TracyZoneScoped;
 
-    for (const auto& [_, session] : sessions_)
-    {
-        if (session->charID == charId)
-        {
-            return session.get();
-        }
-    }
+    const auto it = std::ranges::find_if(sessions_,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->charID == charId;
+                                         });
 
-    return nullptr;
+    return it != sessions_.end() ? it->second.get() : nullptr;
 }
 
 auto MapSessionContainer::getPendingSessionByCharId(uint32 charId) -> MapSession*
@@ -168,30 +164,26 @@ auto MapSessionContainer::getSessionByAccountId(uint32 accountId) -> MapSession*
 {
     TracyZoneScoped;
 
-    for (const auto& [_, session] : sessions_)
-    {
-        if (session->accountID == accountId)
-        {
-            return session.get();
-        }
-    }
+    const auto it = std::ranges::find_if(sessions_,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->accountID == accountId;
+                                         });
 
-    return nullptr;
+    return it != sessions_.end() ? it->second.get() : nullptr;
 }
 
 auto MapSessionContainer::getSessionByCharName(const std::string& name) -> MapSession*
 {
     TracyZoneScoped;
 
-    for (const auto& [_, session] : sessions_)
-    {
-        if (session->PChar && session->PChar->name == name)
-        {
-            return session.get();
-        }
-    }
+    const auto it = std::ranges::find_if(sessions_,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->PChar && entry.second->PChar->name == name;
+                                         });
 
-    return nullptr;
+    return it != sessions_.end() ? it->second.get() : nullptr;
 }
 
 void MapSessionContainer::cleanupSessions(IPP mapIPP)

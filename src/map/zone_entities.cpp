@@ -39,6 +39,7 @@
 #include <common/types/hash_map.h>
 #include <common/types/heap.h>
 
+#include <algorithm>
 #include <tuple>
 
 #include "ai/ai_container.h"
@@ -667,7 +668,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
     uint16 counter = 0;
 
     // Find next available targid, starting with the computed one above.
-    while (std::find(m_dynamicTargIds.begin(), m_dynamicTargIds.end(), targid) != m_dynamicTargIds.end())
+    while (std::ranges::contains(m_dynamicTargIds, targid))
     {
         ++targid;
 

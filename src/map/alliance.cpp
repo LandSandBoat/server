@@ -263,7 +263,7 @@ void CAlliance::addParty(CParty* party)
         return;
     }
 
-    if (std::find(partyList.begin(), partyList.end(), party) != partyList.end())
+    if (std::ranges::contains(partyList, party))
     {
         ShowWarning("CAlliance::addParty - party is already in the alliance list!");
         return;

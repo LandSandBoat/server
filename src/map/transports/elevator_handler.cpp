@@ -297,12 +297,9 @@ auto ElevatorHandler::elevatorState(const xi::Elevator elevatorID) -> std::optio
 {
     return elevators_.read([&](const auto& lifts) -> std::optional<xi::ElevatorState>
                            {
-                               for (const auto& elevator : lifts)
+                               if (const auto it = std::ranges::find(lifts, elevatorID, &Elevator::id); it != lifts.end())
                                {
-                                   if (elevator.id == elevatorID)
-                                   {
-                                       return elevator.state;
-                                   }
+                                   return it->state;
                                }
 
                                return std::nullopt;

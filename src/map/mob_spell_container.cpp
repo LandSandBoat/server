@@ -711,23 +711,12 @@ bool CMobSpellContainer::HasSpells() const
 
 bool CMobSpellContainer::HasMPSpells() const
 {
-    for (auto spell : m_damageList)
+    const auto hasMPCost = [](SpellID spell)
     {
-        if (spell::GetSpell(spell)->hasMPCost())
-        {
-            return true;
-        }
-    }
+        return spell::GetSpell(spell)->hasMPCost();
+    };
 
-    for (auto spell : m_buffList)
-    {
-        if (spell::GetSpell(spell)->hasMPCost())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(m_damageList, hasMPCost) || std::ranges::any_of(m_buffList, hasMPCost);
 }
 
 Maybe<SpellID> CMobSpellContainer::GetAggroSpell()
@@ -1051,12 +1040,5 @@ bool CMobSpellContainer::HasSevereSpells() const
 
 bool CMobSpellContainer::HasNaSpell(SpellID spellId) const
 {
-    for (auto spell : m_naList)
-    {
-        if (spell == spellId)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::contains(m_naList, spellId);
 }

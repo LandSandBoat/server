@@ -96,13 +96,11 @@ void LoadSynergyRecipes()
 auto GetSynergyRecipeByID(uint32 id) -> Maybe<SynergyRecipe>
 {
     // TODO: Use a map instead of a vector for faster lookups
-    for (const auto& recipe : synergyRecipes)
+    if (const auto it = std::ranges::find(synergyRecipes, id, &SynergyRecipe::id); it != synergyRecipes.end())
     {
-        if (recipe.id == id)
-        {
-            return recipe;
-        }
+        return *it;
     }
+
     return std::nullopt;
 }
 

@@ -74,12 +74,9 @@ void CLuaAction::actionID(const uint16 actionid) const
 
 auto CLuaAction::getParam(const uint32 actionTargetId) const -> uint16
 {
-    for (auto&& actionTarget : m_PLuaAction->targets)
+    if (const auto it = std::ranges::find(m_PLuaAction->targets, actionTargetId, &action_target_t::actorId); it != m_PLuaAction->targets.end())
     {
-        if (actionTarget.actorId == actionTargetId)
-        {
-            return actionTarget.results[0].param;
-        }
+        return it->results[0].param;
     }
 
     return 0;
@@ -111,12 +108,9 @@ void CLuaAction::messageId(const uint32 actionTargetId, const MsgBasic messageId
 
 auto CLuaAction::getMsg(const uint32 actionTargetId) const -> Maybe<MsgBasic>
 {
-    for (auto&& actionTarget : m_PLuaAction->targets)
+    if (const auto it = std::ranges::find(m_PLuaAction->targets, actionTargetId, &action_target_t::actorId); it != m_PLuaAction->targets.end())
     {
-        if (actionTarget.actorId == actionTargetId)
-        {
-            return actionTarget.results[0].messageID;
-        }
+        return it->results[0].messageID;
     }
 
     return std::nullopt;
@@ -124,12 +118,9 @@ auto CLuaAction::getMsg(const uint32 actionTargetId) const -> Maybe<MsgBasic>
 
 auto CLuaAction::getAnimation(const uint32 actionTargetId) const -> Maybe<ActionAnimation>
 {
-    for (auto&& actionTarget : m_PLuaAction->targets)
+    if (const auto it = std::ranges::find(m_PLuaAction->targets, actionTargetId, &action_target_t::actorId); it != m_PLuaAction->targets.end())
     {
-        if (actionTarget.actorId == actionTargetId)
-        {
-            return actionTarget.results[0].animation;
-        }
+        return it->results[0].animation;
     }
 
     return std::nullopt;

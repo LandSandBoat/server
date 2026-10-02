@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include <algorithm>
 #include <cstring>
 
 #include "trade_container.h"
@@ -81,15 +82,11 @@ uint32 CTradeContainer::getTotalQuantity()
 
 uint8 CTradeContainer::getSlotCount()
 {
-    uint8 count = 0;
-    for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
-    {
-        if (m_itemID[slotID] != 0)
-        {
-            count += 1;
-        }
-    }
-    return count;
+    return static_cast<uint8>(std::ranges::count_if(m_itemID,
+                                                    [](const uint16 itemID)
+                                                    {
+                                                        return itemID != 0;
+                                                    }));
 }
 
 auto CTradeContainer::getRestriction(uint8 slotID) const -> SlotRestriction

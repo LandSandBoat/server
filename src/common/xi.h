@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <functional>
 #include <memory>
@@ -174,14 +175,11 @@ struct bitset
 
     bool none() const
     {
-        for (std::size_t i = 0; i < storage_size; ++i)
-        {
-            if (data[i] != 0)
-            {
-                return false;
-            }
-        }
-        return true;
+        return std::ranges::all_of(data,
+                                   [](const uint8 byte)
+                                   {
+                                       return byte == 0;
+                                   });
     }
 
     void reset()

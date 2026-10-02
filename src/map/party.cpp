@@ -268,15 +268,13 @@ CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
         return nullptr;
     }
 
-    for (auto& member : members)
-    {
-        if (strcmpi(memberName.c_str(), member->getName().c_str()) == 0)
-        {
-            return member;
-        }
-    }
+    const auto it = std::ranges::find_if(members,
+                                         [&](const auto* member)
+                                         {
+                                             return strcmpi(memberName.c_str(), member->getName().c_str()) == 0;
+                                         });
 
-    return nullptr;
+    return it != members.end() ? *it : nullptr;
 }
 
 void CParty::RemoveMember(CBattleEntity* PEntity)
@@ -612,7 +610,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
         return;
     }
 
-    if (std::find(members.begin(), members.end(), PEntity) != members.end())
+    if (std::ranges::contains(members, PEntity))
     {
         ShowWarning("CParty::AddMember() - PEntity was already in the member list!");
         return;

@@ -490,7 +490,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
 
     // Check if entity is already in list
     // TODO: Does it make sense to use a hashmap here instead?
-    if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
+    if (std::ranges::contains(m_targets, PTarget))
     {
         return false;
     }

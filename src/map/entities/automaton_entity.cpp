@@ -68,14 +68,7 @@ uint8 CAutomatonEntity::attachment(const uint8 slotid) const
 
 auto CAutomatonEntity::hasAttachment(const uint8 attachment) const -> bool
 {
-    for (auto&& attachmentid : equip_.attachments)
-    {
-        if (attachmentid == attachment)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::contains(equip_.attachments, attachment);
 }
 
 void CAutomatonEntity::setEquip(const AutomatonEquip& equip)
