@@ -65,15 +65,11 @@ void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLa
 
 void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
 {
-    m_LatentEffectList.erase(
-        std::remove_if(
-            m_LatentEffectList.begin(),
-            m_LatentEffectList.end(),
-            [slot](auto& latent)
-            {
-                return latent.GetSlot() == slot;
-            }),
-        m_LatentEffectList.end());
+    std::erase_if(m_LatentEffectList,
+                  [slot](auto& latent)
+                  {
+                      return latent.GetSlot() == slot;
+                  });
 }
 
 /************************************************************************

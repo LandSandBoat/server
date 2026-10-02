@@ -76,37 +76,25 @@ void ConnectApplication::registerCommands(ConsoleService& console)
         "Run periodic session cleanup routine",
         [](std::vector<std::string>& inputs)
         {
-            auto& sessions       = loginHelpers::getAuthenticatedSessions();
-            auto  ipAddrIterator = sessions.begin();
-            while (ipAddrIterator != sessions.end())
+            auto& sessions = loginHelpers::getAuthenticatedSessions();
+            for (auto& [_, ipSessions] : sessions)
             {
-                auto sessionIterator = ipAddrIterator->second.begin();
-                while (sessionIterator != ipAddrIterator->second.end())
-                {
-                    session_t& session = sessionIterator->second;
-
-                    // If it's been 15 minutes, erase it from the session list
-                    if (!session.data_session &&
-                        !session.view_session &&
-                        timer::now() > session.authorizedTime)
-                    {
-                        sessionIterator = ipAddrIterator->second.erase(sessionIterator);
-                    }
-                    else
-                    {
-                        ++sessionIterator;
-                    }
-                }
-
-                // If this map entry is empty, clean it up
-                if (ipAddrIterator->second.size() == 0)
-                {
-                    ipAddrIterator = sessions.erase(ipAddrIterator);
-                }
-                else
-                {
-                    ++ipAddrIterator;
-                }
+                // If it's been 15 minutes, erase it from the session list
+                std::erase_if(ipSessions,
+                              [](const auto& entry)
+                              {
+                                  const session_t& session = entry.second;
+                                  return !session.data_session &&
+                                         !session.view_session &&
+                                         timer::now() > session.authorizedTime;
+                              });
             }
+
+            // If this map entry is empty, clean it up
+            std::erase_if(sessions,
+                          [](const auto& entry)
+                          {
+                              return entry.second.empty();
+                          });
         });
 }

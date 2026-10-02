@@ -2168,7 +2168,7 @@ void CBattleEntity::delTrait(CTrait* PTrait)
     TracyZoneScoped;
 
     delModifier(PTrait->getMod(), PTrait->getValue());
-    TraitList.erase(std::remove(TraitList.begin(), TraitList.end(), PTrait), TraitList.end());
+    std::erase(TraitList, PTrait);
 }
 
 bool CBattleEntity::hasTrait(uint16 traitID)

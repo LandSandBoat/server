@@ -496,16 +496,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
                 m_PAlliance->setMainParty(nullptr);
             }
 
-            auto it = m_PAlliance->partyList.begin();
-            while (it != m_PAlliance->partyList.end())
-            {
-                if (this == *it)
-                {
-                    it = m_PAlliance->partyList.erase(it);
-                    continue;
-                }
-                it++;
-            }
+            std::erase(m_PAlliance->partyList, this);
 
             if (m_PAlliance->partyList.empty())
             {

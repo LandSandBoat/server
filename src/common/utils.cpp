@@ -614,7 +614,7 @@ void PackSoultrapperName(std::string name, uint8* output)
         name.resize(15);
     }
 
-    name.erase(std::ranges::remove(name, '_').begin(), name.end());
+    std::erase(name, '_');
 
     uint8 current = 0;
     uint8 next    = 0;

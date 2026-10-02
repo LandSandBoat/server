@@ -119,20 +119,11 @@ void CTreasurePool::delMember(CCharEntity* PChar)
     // ^ TODO: verify what happens when a winner leaves zone
     for (int i = 0; i < 10; i++)
     {
-        if (!m_PoolItems[i].Lotters.empty())
-        {
-            auto lotterIterator = m_PoolItems[i].Lotters.begin();
-            while (lotterIterator != m_PoolItems[i].Lotters.end())
-            {
-                // remove their lot info
-                if (LotInfo* info = &(*lotterIterator); PChar->id == info->member->id)
-                {
-                    lotterIterator = m_PoolItems[i].Lotters.erase(lotterIterator);
-                    continue;
-                }
-                ++lotterIterator;
-            }
-        }
+        std::erase_if(m_PoolItems[i].Lotters,
+                      [PChar](const LotInfo& info)
+                      {
+                          return PChar->id == info.member->id;
+                      });
     }
 
     auto memberToDelete = std::ranges::find(m_Members, PChar);

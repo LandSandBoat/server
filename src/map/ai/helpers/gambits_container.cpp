@@ -84,15 +84,11 @@ std::string CGambitsContainer::AddGambit(const Gambit_t& gambit)
 
 void CGambitsContainer::RemoveGambit(const std::string& id)
 {
-    gambits.erase(
-        std::remove_if(
-            gambits.begin(),
-            gambits.end(),
-            [&id](const Gambit_t& gambit)
-            {
-                return gambit.identifier == id;
-            }),
-        gambits.end());
+    std::erase_if(gambits,
+                  [&id](const Gambit_t& gambit)
+                  {
+                      return gambit.identifier == id;
+                  });
 
     const auto prefix = fmt::format("{}:", id);
     std::erase_if(m_timerConditionLastTrigger, [&](const auto& kv)
