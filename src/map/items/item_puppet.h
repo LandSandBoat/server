@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMPUPPET_H
-#define _CITEMPUPPET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -50,5 +49,3 @@ private:
     uint8  m_equipSlot;
     uint32 m_elementSlots;
 };
-
-#endif

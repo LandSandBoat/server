@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMWEAPON_H
-#define _CITEMWEAPON_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "entities/battle_entity.h"
@@ -95,4 +94,3 @@ private:
     bool m_ranged;
     bool m_twoHanded;
 };
-#endif

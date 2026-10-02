@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BLUEUTILS_H
-#define _BLUEUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -49,5 +48,3 @@ void  ValidateBlueSpells(CCharEntity* PChar);
 void  CalculateTraits(CCharEntity* PChar);
 
 }; // namespace blueutils
-
-#endif

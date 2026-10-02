@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _NOTORIETYCONTAINER_H
-#define _NOTORIETYCONTAINER_H
+#pragma once
 
 #include <set>
 
@@ -47,5 +46,3 @@ private:
     CBattleEntity*           m_POwner;
     std::set<CBattleEntity*> m_Lookup;
 };
-
-#endif // _NOTORIETYCONTAINER_H

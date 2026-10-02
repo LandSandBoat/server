@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CENTITYUPDATEPACKET_H
-#define _CENTITYUPDATEPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -46,5 +45,3 @@ public:
     CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
     void updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
 };
-
-#endif

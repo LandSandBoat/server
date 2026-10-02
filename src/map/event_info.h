@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _EVENT_INFO_H
-#define _EVENT_INFO_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -86,5 +85,3 @@ struct EventInfo : EventPrep
         isHidden   = false;
     }
 };
-
-#endif

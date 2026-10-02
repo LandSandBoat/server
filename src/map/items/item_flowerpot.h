@@ -21,8 +21,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMFLOWERPOT_H
-#define _CITEMFLOWERPOT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -122,5 +121,3 @@ public:
     void  setStrength(uint8 strength);
     uint8 getStrength();
 };
-
-#endif // _CITEMFLOWERPOT_H

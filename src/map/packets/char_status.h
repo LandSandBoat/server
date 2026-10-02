@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CCHARSTATUSPACKET_H
-#define _CCHARSTATUSPACKET_H
+#pragma once
 
 #include "basic.h"
 
@@ -31,5 +30,3 @@ class CCharStatusPacket : public CBasicPacket
 public:
     CCharStatusPacket(CCharEntity* PChar);
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CATTACKROUND_H
-#define _CATTACKROUND_H
+#pragma once
 
 #include "attack.h"
 #include "common/cbasetypes.h"
@@ -74,5 +73,3 @@ private:
 
     std::vector<PHYSICAL_ATTACK_DIRECTION> m_followUpSwings; // The list of follow-up attacks for this round.
 };
-
-#endif

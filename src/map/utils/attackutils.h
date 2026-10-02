@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _ATTACKUTILS_H
-#define _ATTACKUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -41,5 +40,3 @@ bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the at
 bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack blocked.
 
 }; // namespace attackutils
-
-#endif

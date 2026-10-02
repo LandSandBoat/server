@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _FISHINGCONTEST_H
-#define _FISHINGCONTEST_H
+#pragma once
 
 #include "utils/fishingutils.h"
 
@@ -160,5 +159,3 @@ void BuildPlaceholderEntries();
 void InitializeFishingContestSystem();
 
 }; // namespace fishingcontest
-
-#endif // _FISHINGCONTEST_H

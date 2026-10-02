@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTIMETRIGGERS_H
-#define _CTIMETRIGGERS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/singleton.h"
@@ -52,4 +51,3 @@ protected:
 private:
     std::vector<Trigger_t> triggerList;
 };
-#endif

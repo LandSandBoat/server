@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CPETSKILL_H
-#define _CPETSKILL_H
+#pragma once
 
 #include "ability.h"
 #include "common/cbasetypes.h"
@@ -129,5 +128,3 @@ private:
 
     Maybe<uint8> m_FinalAnimationSub; // If non-null, entity will get this new animation sub after state exits
 };
-
-#endif

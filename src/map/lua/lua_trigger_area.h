@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUATRIGGERAREA_H
-#define _LUATRIGGERAREA_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -52,5 +51,3 @@ public:
 
     static void Register();
 };
-
-#endif // _LUATRIGGERAREA_H

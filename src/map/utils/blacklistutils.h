@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BLACKLISTUTILS_H
-#define _BLACKLISTUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -35,5 +34,3 @@ auto DeleteBlacklisted(uint32 ownerId, uint32 targetId) -> bool;
 void SendBlacklist(CCharEntity* PChar);
 
 } // namespace blacklistutils
-
-#endif

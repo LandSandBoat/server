@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CABILITY_H
-#define _CABILITY_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -789,5 +788,3 @@ Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
 auto GetAbilities(xi::Job JobID) -> std::vector<CAbility*>;
 
 }; // namespace ability
-
-#endif

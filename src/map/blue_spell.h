@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CBLUESPELL_H
-#define _CBLUESPELL_H
+#pragma once
 
 #include "enums/action/knockback.h"
 #include "spell.h"
@@ -66,5 +65,3 @@ private:
     uint8     m_TertiarySkillchain{};
     Knockback knockback_{ Knockback::None };
 };
-
-#endif

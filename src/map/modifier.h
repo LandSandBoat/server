@@ -14,8 +14,7 @@
 ===========================================================================
 */
 
-#ifndef _CMODIFIER_H
-#define _CMODIFIER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "data/enums/mod.h"
@@ -71,5 +70,3 @@ public:
 private:
     PetModType m_pettype{ PetModType::All };
 };
-
-#endif

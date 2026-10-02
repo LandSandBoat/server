@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAZONE_H
-#define _LUAZONE_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "enums/terrain_type.h"
@@ -89,5 +88,3 @@ public:
 
     static void Register();
 };
-
-#endif

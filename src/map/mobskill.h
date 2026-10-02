@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMOBSKILL_H
-#define _CMOBSKILL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -155,5 +154,3 @@ private:
 
     std::vector<CBattleEntity*> m_Targets;
 };
-
-#endif

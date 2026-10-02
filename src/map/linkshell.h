@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CLINKSHELL_H
-#define _CLINKSHELL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -84,5 +83,3 @@ uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
 CLinkshell* GetLinkshell(uint32 id);
 
 }; // namespace linkshell
-
-#endif

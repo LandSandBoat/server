@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMOBSPELLCONTAINER_H
-#define _CMOBSPELLCONTAINER_H
+#pragma once
 
 #include <vector>
 
@@ -89,5 +88,3 @@ private:
     CMobEntity* m_PMob;
     bool        m_hasSpells;
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUATRADECONTAINER_H
-#define _LUATRADECONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -70,5 +69,3 @@ public:
 
     static void Register();
 };
-
-#endif // _LUATRADECONTAINER_H

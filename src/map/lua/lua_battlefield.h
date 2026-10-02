@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUABATTLEFIELD_H
-#define _LUABATTLEFIELD_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -80,5 +79,3 @@ public:
 
     static void Register();
 };
-
-#endif

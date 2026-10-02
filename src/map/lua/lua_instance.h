@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAINSTANCE_H
-#define _LUAINSTANCE_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -85,5 +84,3 @@ public:
 
     static void Register();
 };
-
-#endif

@@ -14,8 +14,7 @@
 ===========================================================================
 */
 
-#ifndef _CUNITYCHAT_H
-#define _CUNITYCHAT_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -52,5 +51,3 @@ bool DelOnlineMember(CCharEntity* PChar, uint32 leader);
 CUnityChat* GetUnityChat(uint32 leader);
 
 }; // namespace unitychat
-
-#endif

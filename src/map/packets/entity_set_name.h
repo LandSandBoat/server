@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CENTITYSETNAMEPACKET_H
-#define _CENTITYSETNAMEPACKET_H
+#pragma once
 
 #include "basic.h"
 
@@ -31,5 +30,3 @@ class CEntitySetNamePacket : public CBasicPacket
 public:
     CEntitySetNamePacket(CBaseEntity* PEntity);
 };
-
-#endif // _CENTITYSETNAMEPACKET_H
