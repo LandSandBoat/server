@@ -34,6 +34,8 @@
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
 
+#include <bit>
+
 #define ROE_CACHETIME 15s
 
 std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
@@ -297,16 +299,11 @@ auto GetNumEminenceCompleted(const CCharEntity* PChar) -> uint16
 
     for (uint16 page = 0; page < 512; page++)
     {
-        unsigned long bitIndex{ 0 };
-        uint8         pageVal = PChar->m_eminenceLog.complete[page];
+        uint8 pageVal = PChar->m_eminenceLog.complete[page];
         // Strip off and check only the set bits - Hidden records are not counted.
         while (pageVal)
         {
-#ifdef _MSC_VER
-            _BitScanForward(&bitIndex, pageVal);
-#else
-            bitIndex = __builtin_ctz(pageVal);
-#endif
+            const auto bitIndex = std::countr_zero(pageVal);
             completedCount += !RoeSystem.HiddenRecords.test(page * 8 + bitIndex);
             pageVal &= (pageVal - 1);
         }

@@ -27,16 +27,13 @@
 #include "common/stdext.h"
 
 #include <algorithm>
+#include <bit>
 #include <cctype>
 #include <charconv>
 #include <cstdlib>
 #include <cstring>
 #include <regex>
 #include <string>
-
-#ifdef _MSC_VER
-#include <intrin.h>
-#endif
 
 int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 {
@@ -86,25 +83,6 @@ int32 intpow32(int32 base, int32 exponent)
         base *= base;
     }
     return power;
-}
-
-void getMSB(uint32* result, uint32 value)
-{
-    *result = 0;
-    if (value == 0)
-    {
-        return;
-    }
-#ifdef __GNUC__
-    *result = 31 - (unsigned)__builtin_clz(value);
-#elif defined _MSC_VER
-    _BitScanReverse((unsigned long*)result, value);
-#else
-    while (value >>= 1)
-    {
-        (*result)++;
-    }
-#endif
 }
 
 /****************************************************************************
@@ -853,10 +831,7 @@ look_t stringToLook(std::string str)
 
     for (auto& entry : hex)
     {
-        // Swap endian-ness
-        auto top    = entry << 8;
-        auto bottom = entry >> 8;
-        entry       = top | bottom;
+        entry = std::byteswap(entry);
     }
 
     out.size = hex[0];

@@ -24,6 +24,8 @@
 #include "common/utils.h"
 #include "exdata/linkshell.h"
 
+#include <bit>
+
 CItemLinkshell::CItemLinkshell(const uint16 id)
 : CItem(id)
 {
@@ -59,14 +61,12 @@ auto CItemLinkshell::GetLSColor() -> Exdata::lscolor_t
 
 uint16 CItemLinkshell::GetLSRawColor()
 {
-    uint16 raw = 0;
-    std::memcpy(&raw, &this->exdata<Exdata::Linkshell>().Color, sizeof(raw));
-    return raw;
+    return std::bit_cast<uint16>(this->exdata<Exdata::Linkshell>().Color);
 }
 
 void CItemLinkshell::SetLSColor(const uint16 color)
 {
-    std::memcpy(&this->exdata<Exdata::Linkshell>().Color, &color, sizeof(color));
+    this->exdata<Exdata::Linkshell>().Color = std::bit_cast<Exdata::lscolor_t>(color);
 }
 
 auto CItemLinkshell::getSignature() const -> const std::string

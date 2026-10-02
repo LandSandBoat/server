@@ -30,7 +30,7 @@
 #include "exdata/augment_trial.h"
 
 #include <algorithm>
-#include <cstring>
+#include <bit>
 
 namespace
 {
@@ -228,9 +228,7 @@ void CItemEquipment::setRemoveSlotLookId(uint16 removeSlotLook)
 
 uint8 CItemEquipment::getSlotType() const
 {
-    uint32 result = 0;
-    getMSB(&result, (uint32)m_equipSlotID);
-    return result;
+    return m_equipSlotID ? static_cast<uint8>(std::bit_width(static_cast<uint32>(m_equipSlotID)) - 1) : 0;
 }
 
 uint8 CItemEquipment::getSuperiorLevel()
@@ -408,20 +406,19 @@ auto CItemEquipment::getTrialNumber() const -> uint16
  ************************************************************************/
 void CItemEquipment::LoadAugment(uint8 slot, uint16 augment)
 {
-    auto& augData = this->exdata<Exdata::AugmentStandard>();
-    std::memcpy(&augData.Augments[slot], &augment, sizeof(uint16));
+    auto& augData          = this->exdata<Exdata::AugmentStandard>();
+    augData.Augments[slot] = std::bit_cast<Exdata::Augment>(augment);
 }
 
 bool CItemEquipment::PushAugment(uint16 type, uint8 value)
 {
     auto&  augData = this->exdata<Exdata::AugmentStandard>();
     uint8  slot    = 0;
-    uint16 augment = 0;
-    std::memcpy(&augment, &augData.Augments[slot], sizeof(uint16));
+    uint16 augment = std::bit_cast<uint16>(augData.Augments[slot]);
     while (augment != 0 && slot < 4)
     {
         ++slot;
-        std::memcpy(&augment, &augData.Augments[slot], sizeof(uint16));
+        augment = std::bit_cast<uint16>(augData.Augments[slot]);
     }
     if (augment == 0)
     {
@@ -498,8 +495,6 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
 
 auto CItemEquipment::getAugment(uint8 slot) const -> uint16
 {
-    auto&  augData = this->exdata<Exdata::AugmentStandard>();
-    uint16 result  = 0;
-    std::memcpy(&result, &augData.Augments[slot], sizeof(uint16));
-    return result;
+    auto& augData = this->exdata<Exdata::AugmentStandard>();
+    return std::bit_cast<uint16>(augData.Augments[slot]);
 }
