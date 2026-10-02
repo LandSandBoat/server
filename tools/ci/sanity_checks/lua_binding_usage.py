@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 #
 # Run from repo root!
 
@@ -77,6 +77,8 @@ def main():
     function_names.append("onTriggerAreaLeave")
     function_names.append("onEventFinish")
     function_names.append("onEventUpdate")
+    function_names.append("onFurniturePlaced")
+    function_names.append("onFurnitureRemoved")
     function_names.append("sequence")
     function_names.append("setVarBit")
     function_names.append("isVarBitsSet")
