@@ -97,7 +97,8 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
         if (!PItem)
         {
-            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with an empty inventory slot {}!", PChar->getName(), PNpc->getName(), invSlotId);
+            // This is a warning because inventory desync/stale state and/or addons using a stale state can use empty slots and is rather spammy on a live server.
+            ShowWarningFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with an empty inventory slot {}!", PChar->getName(), PNpc->getName(), invSlotId);
             return;
         }
 
