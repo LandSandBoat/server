@@ -655,7 +655,7 @@ templates:
     attributes:
       combat:
         skill: great_axe
-      jobs: [mnk, war]
+      jobs: [war, war]
       render:
         look:
           type:  standard
@@ -669,8 +669,6 @@ templates:
         links:      true
       spawn:
         respawn: 900
-      stats:
-        hp: 1150
     loot:
       drops:
         - chance: rare
@@ -748,7 +746,7 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [rng, rng]
+      jobs: [war, war]
       render:
         look:
           type:  standard
@@ -762,8 +760,6 @@ templates:
         links:      true
       spawn:
         respawn: 600
-      stats:
-        hp: 1130
     loot:
       drops:
         - chance: always
