@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _MOBENTITY_H
-#define _MOBENTITY_H
+#pragma once
 
 #include "battle_entity.h"
 
@@ -253,5 +252,3 @@ private:
     const RoamRegion*                     roamRegion_{ nullptr }; // the one picked for this life
     std::vector<position_t>               patrolRoute_;           // waypoints it loops while roaming, empty for a free roamer
 };
-
-#endif

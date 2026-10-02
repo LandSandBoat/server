@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEM_H
-#define _CITEM_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -171,5 +170,3 @@ private:
 
     ItemState state_{ ItemState::Free };
 };
-
-#endif

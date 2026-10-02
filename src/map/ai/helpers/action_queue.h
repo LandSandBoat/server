@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _ACTIONQUEUE_H
-#define _ACTIONQUEUE_H
+#pragma once
 
 #include "common/timer.h"
 
@@ -77,5 +76,3 @@ private:
     ActionHeap_t actionQueue;
     ActionHeap_t timerQueue;
 };
-
-#endif

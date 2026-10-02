@@ -19,12 +19,10 @@
 ===========================================================================
 */
 
-#ifndef _CMOBSPELLCONTAINER_H
-#define _CMOBSPELLCONTAINER_H
+#pragma once
 
 #include <vector>
 
-#include "common/cbasetypes.h"
 #include "common/mmo.h"
 
 #include "entities/mob_entity.h"
@@ -89,5 +87,3 @@ private:
     CMobEntity* m_PMob;
     bool        m_hasSpells;
 };
-
-#endif

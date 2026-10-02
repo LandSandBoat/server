@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUASPELL_H
-#define _LUASPELL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "enums/action/knockback.h"
@@ -79,5 +78,3 @@ public:
 
     static void Register();
 };
-
-#endif

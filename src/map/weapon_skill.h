@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CWEAPONSKILL_H
-#define _CWEAPONSKILL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -92,5 +91,3 @@ private:
 
     std::string m_name;
 };
-
-#endif

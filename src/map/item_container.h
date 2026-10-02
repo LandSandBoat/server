@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMCONTAINER_H
-#define _CITEMCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/logging.h"
@@ -124,5 +123,3 @@ private:
 
     std::array<std::unique_ptr<CItem>, MAX_CONTAINER_SIZE + 1> m_ItemList{};
 };
-
-#endif

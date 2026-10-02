@@ -23,7 +23,6 @@
 
 #include "common/cbasetypes.h"
 #include "common/ipc.h"
-#include "common/lua.h"
 #include "common/mmo.h"
 #include "common/zmq/zmq_service.h"
 

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CBATTLEFIELD_H
-#define _CBATTLEFIELD_H
+#pragma once
 
 #include <memory>
 #include <set>
@@ -240,5 +239,3 @@ private:
     HashMap<std::string, uint64_t> localVars_;
     std::vector<BattlefieldGroup>  m_groups;
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAPETSKILL_H
-#define _LUAPETSKILL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -67,5 +66,3 @@ public:
 
     static void Register();
 };
-
-#endif

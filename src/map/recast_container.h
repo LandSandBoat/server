@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _RECASTCONTAINER_H
-#define _RECASTCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/timer.h"
@@ -95,5 +94,3 @@ protected:
 private:
     CBattleEntity* m_PEntity;
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CCHARUPDATEPACKET_H
-#define _CCHARUPDATEPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -34,5 +33,3 @@ public:
     CCharUpdatePacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
 };
-
-#endif

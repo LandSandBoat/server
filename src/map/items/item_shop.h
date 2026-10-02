@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMSHOP_H
-#define _CITEMSHOP_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -55,5 +54,3 @@ private:
     uint16 m_DailyIncrease;
     uint16 m_InitialQuantity;
 };
-
-#endif

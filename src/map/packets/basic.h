@@ -22,7 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "common/tracy.h"
 #include "common/utils.h"
 
 #include <cstdio>

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BATTLEENTITY_H
-#define _BATTLEENTITY_H
+#pragma once
 
 #include "common/types/hash_map.h"
 #include "common/types/maybe.h"
@@ -425,5 +424,3 @@ private:
     static_assert(std::is_same_v<decltype(m_modStatSave), HashMap<xi::Mod, int16, EnumClassHash>>);
     static_assert(std::is_same_v<decltype(m_petMod), HashMap<PetModType, HashMap<xi::Mod, int16, EnumClassHash>, EnumClassHash>>);
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAABILITY_H
-#define _LUAABILITY_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -70,5 +69,3 @@ public:
 
     static void Register();
 };
-
-#endif

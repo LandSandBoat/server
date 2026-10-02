@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BASEENTITY_H
-#define _BASEENTITY_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -237,5 +236,3 @@ protected:
 private:
     uint64 serial_{ 0 };
 };
-
-#endif // _BASEENTITY_H

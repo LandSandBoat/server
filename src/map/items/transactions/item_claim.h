@@ -29,7 +29,6 @@
 
 #include <memory>
 #include <optional>
-#include <vector>
 
 class CCharEntity;
 class CItem;

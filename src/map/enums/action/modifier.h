@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include "common/logging.h"
-
 #include <cstdint>
 
 // result.bit (31 bits)

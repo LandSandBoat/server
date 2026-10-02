@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CAMPAIGNSYSTEM_H
-#define _CAMPAIGNSYSTEM_H
+#pragma once
 
 #include "campaign_handler.h"
 #include "common/cbasetypes.h"
@@ -49,4 +48,3 @@ void SendUpdate(CCharEntity* PChar);
 // CampaignState state;
 
 }; // namespace campaign
-#endif

@@ -19,15 +19,9 @@
 ===========================================================================
 */
 
-#ifndef _FISHINGCONTEST_H
-#define _FISHINGCONTEST_H
+#pragma once
 
 #include "utils/fishingutils.h"
-
-#include <cstring>
-#include <list>
-#include <map>
-#include <vector>
 
 class CBasicPacket;
 class CCharEntity;
@@ -160,5 +154,3 @@ void BuildPlaceholderEntries();
 void InitializeFishingContestSystem();
 
 }; // namespace fishingcontest
-
-#endif // _FISHINGCONTEST_H

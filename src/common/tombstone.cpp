@@ -24,7 +24,6 @@
 #include <common/debug.h>
 #include <common/earth_time.h>
 #include <common/logging.h>
-#include <common/macros.h>
 #include <common/version.h>
 
 #include <cpptrace/cpptrace.hpp>

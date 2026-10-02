@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMGENERAL_H
-#define _CITEMGENERAL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -33,5 +32,3 @@ public:
     CItemGeneral(const CItemGeneral& other);
     virtual ~CItemGeneral();
 };
-
-#endif

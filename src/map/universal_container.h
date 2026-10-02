@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CUNIVERSALCONTAINER_H
-#define _CUNIVERSALCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -81,5 +80,3 @@ private:
     uint16              m_target{};
     std::vector<CItem*> m_PItem;
 };
-
-#endif

@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAMOBSKILL_H
-#define _LUAMOBSKILL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
@@ -70,5 +69,3 @@ public:
 
     static void Register();
 };
-
-#endif

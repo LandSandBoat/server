@@ -21,8 +21,7 @@
 ===========================================================================
 */
 
-#ifndef _SERVERUTILS_H
-#define _SERVERUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -39,5 +38,3 @@ void  SetVolatileServerVar(const std::string& var, int32 value, uint32 expiry = 
 void PersistVolatileServerVars();
 
 } // namespace serverutils
-
-#endif // _SERVERUTILS_H

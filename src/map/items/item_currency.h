@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMCURRENCY_H
-#define _CITEMCURRENCY_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -36,5 +35,3 @@ public:
 
 private:
 };
-
-#endif

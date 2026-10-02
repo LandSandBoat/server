@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CBATTLEFIELDHANDLER_H
-#define _CBATTLEFIELDHANDLER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/timer.h"
@@ -76,5 +75,3 @@ private:
     // Players that need to be kicked from whatever battlefield they were in
     std::vector<std::pair<uint32, timer::time_point>> m_orphanedPlayers;
 };
-
-#endif

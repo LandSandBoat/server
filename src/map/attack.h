@@ -19,14 +19,12 @@
 ===========================================================================
 */
 
-#ifndef _CATTACK_H
-#define _CATTACK_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "entities/battle_entity.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"
-#include <vector>
 
 enum class PHYSICAL_ATTACK_TYPE
 {
@@ -129,5 +127,3 @@ private:
     int32                     m_naturalH2hDamage{ 0 };
     int32                     m_baseDamage{ 0 };
 };
-
-#endif

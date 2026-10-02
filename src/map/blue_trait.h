@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CBLUETRAIT_H
-#define _CBLUETRAIT_H
+#pragma once
 
 #include "trait.h"
 
@@ -40,5 +39,3 @@ private:
     uint8 m_category;
     bool  m_jobPointsOnly;
 };
-
-#endif

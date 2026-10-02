@@ -23,7 +23,6 @@
 
 #include "data_session.h"
 
-#include <common/lua.h>
 #include <common/md52.h>
 #include <common/settings.h>
 #include <common/utils.h>

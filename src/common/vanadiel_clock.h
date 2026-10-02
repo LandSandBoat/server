@@ -23,7 +23,6 @@
 
 #include <chrono>
 
-#include "cbasetypes.h"
 #include "earth_time.h"
 
 namespace xi

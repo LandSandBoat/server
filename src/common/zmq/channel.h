@@ -21,10 +21,6 @@
 
 #pragma once
 
-#include <common/logging.h>
-
-#include <atomic>
-#include <cstddef>
 #include <utility>
 
 #include <concurrentqueue.h>

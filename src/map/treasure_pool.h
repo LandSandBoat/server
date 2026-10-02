@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CTREASUREPOOL_H
-#define _CTREASUREPOOL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/types/maybe.h"
@@ -111,5 +110,3 @@ private:
     std::array<TreasurePoolItem, TREASUREPOOL_SIZE> m_PoolItems;
     std::vector<CCharEntity*>                       m_Members;
 };
-
-#endif

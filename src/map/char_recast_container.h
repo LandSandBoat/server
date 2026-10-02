@@ -19,13 +19,10 @@
 ===========================================================================
 */
 
-#ifndef _CHARRECASTCONTAINER_H
-#define _CHARRECASTCONTAINER_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "recast_container.h"
-
-#include <vector>
 
 class CCharEntity;
 
@@ -54,5 +51,3 @@ protected:
 private:
     CCharEntity* m_PChar;
 };
-
-#endif

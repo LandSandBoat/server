@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CITEMLINKSHELL_H
-#define _CITEMLINKSHELL_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -53,5 +52,3 @@ public:
     void              setSignature(const std::string& signature) override;
     void              SetLSType(LSTYPE value);
 };
-
-#endif

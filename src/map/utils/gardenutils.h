@@ -21,8 +21,7 @@
 ===========================================================================
 */
 
-#ifndef _GARDENUTILS_H
-#define _GARDENUTILS_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -52,5 +51,3 @@ void                      GrowToNextStage(CItemFlowerpot* PItem, bool growFromFe
 uint8                     GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
 
 } // namespace gardenutils
-
-#endif // _GARDENUTILS_H

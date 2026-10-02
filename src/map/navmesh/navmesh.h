@@ -25,7 +25,6 @@
 
 #include <common/types/flag.h>
 #include <common/types/maybe.h>
-#include <utility>
 #include <vector>
 
 // isPartial marks a path that stopped short of `end` because the poly buffer ran out, so callers can chunk.

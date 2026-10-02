@@ -27,7 +27,6 @@
 
 #include <array>
 #include <limits>
-#include <optional>
 #include <vector>
 
 //

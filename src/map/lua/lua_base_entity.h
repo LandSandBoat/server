@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CLUABASEENTITY_H
-#define _CLUABASEENTITY_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "data/enums/entity_flags.h"
@@ -1004,5 +1003,3 @@ public:
 
     static void Register();
 };
-
-#endif
