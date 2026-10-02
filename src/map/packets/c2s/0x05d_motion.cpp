@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "items.h"
+#include "items/item_equipment.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x05a_motionmes.h"

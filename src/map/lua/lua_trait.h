@@ -22,8 +22,9 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 #include "modifier.h"
+
+#include <sol/forward.hpp>
 
 class CTrait;
 

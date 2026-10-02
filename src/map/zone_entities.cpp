@@ -58,6 +58,7 @@
 #include "battlefield.h"
 #include "data/enums/weather.h"
 #include "items/transactions/synth.h"
+#include "lua/lua_base_entity.h"
 #include "packets/s2c/0x05f_music.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"

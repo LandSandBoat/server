@@ -26,6 +26,7 @@
 #include "action/action.h"
 #include "ai/ai_container.h"
 #include "entities/battle_entity.h"
+#include "entities/char_entity.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"

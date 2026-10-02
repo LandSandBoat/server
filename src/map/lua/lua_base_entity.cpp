@@ -153,6 +153,7 @@
 #include "packets/s2c/0x0f9_res.h"
 #include "packets/s2c/0x119_abil_recast.h"
 
+#include "utils/attackutils.h"
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"

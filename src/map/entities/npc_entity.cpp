@@ -22,6 +22,7 @@
 #include "npc_entity.h"
 
 #include "ai/ai_container.h"
+#include "zone.h"
 
 /************************************************************************
  *                                                                       *

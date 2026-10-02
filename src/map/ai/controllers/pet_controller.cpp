@@ -28,6 +28,7 @@
 #include "mob_spell_container.h"
 #include "status_effect_container.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 namespace
 {

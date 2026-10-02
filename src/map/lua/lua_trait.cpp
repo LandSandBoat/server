@@ -20,6 +20,8 @@
 */
 
 #include "lua_trait.h"
+#include "common/logging.h"
+#include "luautils.h"
 #include "trait.h"
 
 CLuaTrait::CLuaTrait(CTrait* PTrait)

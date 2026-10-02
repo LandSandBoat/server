@@ -34,7 +34,10 @@
 #include <common/vana_time.h>
 #include <common/version.h>
 
+#include <map/lua/lua_ability.h>
 #include <map/lua/lua_action.h>
+#include <map/lua/lua_attack.h>
+#include <map/lua/lua_base_entity.h>
 #include <map/lua/lua_battlefield.h>
 #include <map/lua/lua_cache.h>
 #include <map/lua/lua_instance.h>

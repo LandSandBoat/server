@@ -28,6 +28,7 @@
 #include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
+#include "utils/charutils.h"
 
 #include <algorithm>
 #include <array>

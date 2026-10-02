@@ -23,6 +23,7 @@
 #include "common/timer.h"
 
 #include "lua_statuseffect.h"
+#include "luautils.h"
 #include "status_effect.h"
 
 //======================================================//

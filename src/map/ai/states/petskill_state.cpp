@@ -25,6 +25,7 @@
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"
+#include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "enums/four_cc.h"
 #include "packets/s2c/0x028_battle2.h"
@@ -32,6 +33,7 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
+#include "zone.h"
 
 CPetSkillState::CPetSkillState(xi::Badge<CState>, CPetEntity* PEntity, const EntityId& target, uint16 wsid)
 : CState(PEntity, target)

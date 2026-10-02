@@ -38,6 +38,7 @@
 #include "entities/char_entity.h"
 #include "enums/loot_recast.h"
 #include "items.h"
+#include "lua/lua_base_entity.h"
 #include "lua/luautils.h"
 #include "mob_spell_container.h"
 #include "mobskill.h"

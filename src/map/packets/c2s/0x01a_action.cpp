@@ -44,6 +44,7 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "utils/battleutils.h"
+#include "utils/charutils.h"
 #include "utils/mountutils.h"
 
 namespace

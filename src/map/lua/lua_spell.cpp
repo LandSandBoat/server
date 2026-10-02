@@ -24,6 +24,7 @@
 #include "lua_spell.h"
 
 #include "blue_spell.h"
+#include "luautils.h"
 #include "spell.h"
 
 /************************************************************************

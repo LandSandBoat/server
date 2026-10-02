@@ -28,10 +28,11 @@
 #include "data/enums/music_slot.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
-#include "luautils.h"
 #include "packets/s2c/0x009_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+
+#include <sol/forward.hpp>
 
 enum class QuestLog : uint8_t;
 enum class POSMODE : uint8;

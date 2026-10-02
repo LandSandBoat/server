@@ -21,8 +21,9 @@
 
 #pragma once
 
-#include "luautils.h"
 #include "utils/itemutils.h"
+
+#include <sol/forward.hpp>
 
 struct action_t;
 struct action_target_t;

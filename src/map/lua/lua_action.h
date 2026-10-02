@@ -25,8 +25,10 @@
 #include "common/cbasetypes.h"
 #include "enums/action/knockback.h"
 #include "enums/action/proc_kind.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+class CLuaBaseEntity;
 enum class HitDistortion : uint8_t;
 enum class ActionInfo : uint8_t;
 enum class ActionResolution : uint8_t;

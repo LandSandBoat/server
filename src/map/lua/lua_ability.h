@@ -22,10 +22,20 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+enum class ActionAnimation : uint16_t;
+enum class MsgBasic : uint16_t;
 class CAbility;
 enum class Recast : uint16_t;
+
+namespace xi
+{
+
+enum class StatusEffect : uint16_t;
+
+} // namespace xi
 
 class CLuaAbility
 {

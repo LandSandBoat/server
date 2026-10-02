@@ -31,11 +31,13 @@
 #include "ai/states/weaponskill_state.h"
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
+#include "entities/char_entity.h"
 #include "packets/entity_set_name.h"
 #include "packets/s2c/0x0df_group_attr.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "zone.h"
 
 namespace
 {

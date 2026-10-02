@@ -52,27 +52,20 @@
 
 #include "common/xi.h"
 
-#include "attack.h"
-#include "items/item_equipment.h"
 #include "spell.h"
-
-#include "lua_ability.h"
-#include "lua_action.h"
-#include "lua_attack.h"
-#include "lua_base_entity.h"
-#include "lua_battlefield.h"
-#include "lua_instance.h"
-#include "lua_item.h"
-#include "lua_mobskill.h"
-#include "lua_petskill.h"
-#include "lua_spell.h"
-#include "lua_statuseffect.h"
-#include "lua_trade_container.h"
-#include "lua_trigger_area.h"
-#include "lua_zone.h"
 
 #include "data/datasets/zones/mobs/dataset.h"
 #include "data/datasets/zones/npcs/dataset.h"
+
+class IPP;
+enum class ItemFlag : uint32;
+
+namespace xi
+{
+
+enum class Weather : uint16_t;
+
+} // namespace xi
 
 enum class SendToDBoxReturnCode : uint8
 {

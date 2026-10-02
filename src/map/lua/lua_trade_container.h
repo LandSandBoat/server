@@ -22,8 +22,10 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+class CItem;
 class CCharEntity;
 class CTradeContainer;
 

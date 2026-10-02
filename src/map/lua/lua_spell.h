@@ -23,9 +23,19 @@
 
 #include "common/cbasetypes.h"
 #include "enums/action/knockback.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+enum class ActionModifier : uint32_t;
+enum class MsgBasic : uint16_t;
 class CSpell;
+
+namespace xi
+{
+
+enum class Job : uint8_t;
+
+} // namespace xi
 
 class CLuaSpell
 {

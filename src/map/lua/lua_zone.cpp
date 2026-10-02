@@ -26,6 +26,7 @@
 
 #include "entities/npc_entity.h"
 #include "lua_base_entity.h"
+#include "luautils.h"
 #include "trigger_area.h"
 #include "zone.h"
 

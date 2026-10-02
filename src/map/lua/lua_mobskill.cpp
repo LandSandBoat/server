@@ -21,7 +21,9 @@
 
 #include "common/logging.h"
 
+#include "lua_base_entity.h"
 #include "lua_mobskill.h"
+#include "luautils.h"
 #include "mobskill.h"
 
 /************************************************************************

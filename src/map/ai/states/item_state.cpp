@@ -41,6 +41,8 @@
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 
+#include "items/item_equipment.h"
+#include "items/item_usable.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
