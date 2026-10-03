@@ -1352,7 +1352,7 @@ end
 function CBaseEntity:setModelId(modelId, slotObj)
 end
 
----@param look table
+---@param look { model: integer?, race: integer?, face: integer? }
 ---@return nil
 function CBaseEntity:setLook(look)
 end
