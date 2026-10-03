@@ -137,24 +137,24 @@ CCharEntity::CCharEntity()
     Container      = new CTradeContainer();
     UContainer     = new CUContainer();
 
-    m_Inventory  = std::make_unique<CItemContainer>(LOC_INVENTORY);
-    m_Mogsafe    = std::make_unique<CItemContainer>(LOC_MOGSAFE);
-    m_Storage    = std::make_unique<CItemContainer>(LOC_STORAGE);
-    m_Tempitems  = std::make_unique<CItemContainer>(LOC_TEMPITEMS);
-    m_Moglocker  = std::make_unique<CItemContainer>(LOC_MOGLOCKER);
-    m_Mogsatchel = std::make_unique<CItemContainer>(LOC_MOGSATCHEL);
-    m_Mogsack    = std::make_unique<CItemContainer>(LOC_MOGSACK);
-    m_Mogcase    = std::make_unique<CItemContainer>(LOC_MOGCASE);
-    m_Wardrobe   = std::make_unique<CItemContainer>(LOC_WARDROBE);
-    m_Mogsafe2   = std::make_unique<CItemContainer>(LOC_MOGSAFE2);
-    m_Wardrobe2  = std::make_unique<CItemContainer>(LOC_WARDROBE2);
-    m_Wardrobe3  = std::make_unique<CItemContainer>(LOC_WARDROBE3);
-    m_Wardrobe4  = std::make_unique<CItemContainer>(LOC_WARDROBE4);
-    m_Wardrobe5  = std::make_unique<CItemContainer>(LOC_WARDROBE5);
-    m_Wardrobe6  = std::make_unique<CItemContainer>(LOC_WARDROBE6);
-    m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7);
-    m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8);
-    m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
+    m_Inventory  = std::make_unique<CItemContainer>(LOC_INVENTORY, this);
+    m_Mogsafe    = std::make_unique<CItemContainer>(LOC_MOGSAFE, this);
+    m_Storage    = std::make_unique<CItemContainer>(LOC_STORAGE, this);
+    m_Tempitems  = std::make_unique<CItemContainer>(LOC_TEMPITEMS, this);
+    m_Moglocker  = std::make_unique<CItemContainer>(LOC_MOGLOCKER, this);
+    m_Mogsatchel = std::make_unique<CItemContainer>(LOC_MOGSATCHEL, this);
+    m_Mogsack    = std::make_unique<CItemContainer>(LOC_MOGSACK, this);
+    m_Mogcase    = std::make_unique<CItemContainer>(LOC_MOGCASE, this);
+    m_Wardrobe   = std::make_unique<CItemContainer>(LOC_WARDROBE, this);
+    m_Mogsafe2   = std::make_unique<CItemContainer>(LOC_MOGSAFE2, this);
+    m_Wardrobe2  = std::make_unique<CItemContainer>(LOC_WARDROBE2, this);
+    m_Wardrobe3  = std::make_unique<CItemContainer>(LOC_WARDROBE3, this);
+    m_Wardrobe4  = std::make_unique<CItemContainer>(LOC_WARDROBE4, this);
+    m_Wardrobe5  = std::make_unique<CItemContainer>(LOC_WARDROBE5, this);
+    m_Wardrobe6  = std::make_unique<CItemContainer>(LOC_WARDROBE6, this);
+    m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7, this);
+    m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8, this);
+    m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN, this);
 
     keys = {};
 
@@ -559,6 +559,20 @@ bool CCharEntity::isAway() const
 bool CCharEntity::hasAutoTargetEnabled() const
 {
     return !playerConfig.AutoTargetOffFlg;
+}
+
+auto CCharEntity::heldSlots(const uint8 location) const -> uint8
+{
+    uint8 held = 0;
+    for (const auto& transaction : transactions_)
+    {
+        if (transaction->isOpen())
+        {
+            held += transaction->heldSlots(location);
+        }
+    }
+
+    return held;
 }
 
 auto CCharEntity::isCrafting() const -> bool

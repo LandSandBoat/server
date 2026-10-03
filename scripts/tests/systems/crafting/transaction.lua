@@ -124,6 +124,59 @@ describe('SynthTransaction', function()
         assert(not inMogSafe, 'ingredient must not have moved to mog safe')
     end)
 
+    local function leaveOneFreeSlot()
+        player:addItem(crystal, 2)
+        player:addItem(ingredient)
+        player:changeContainerSize(xi.inventoryLocation.INVENTORY, 1 - player:getFreeSlotsCount())
+    end
+
+    it('inventory has one less free slot while crafting', function()
+        leaveOneFreeSlot()
+
+        player.actions:craft(crystal, { ingredient })
+
+        assert(player:getFreeSlotsCount() == 0, 'free slots: ' .. player:getFreeSlotsCount())
+
+        player:addItem(xi.item.CHUNK_OF_IRON_ORE)
+        player.assert.no:hasItem(xi.item.CHUNK_OF_IRON_ORE)
+
+        xi.test.world:skipTime(17)
+        xi.test.world:skipTime(15)
+
+        player:delContainerItems(xi.inv.INVENTORY)
+        assert(player:getFreeSlotsCount() == player:getContainerSize(xi.inventoryLocation.INVENTORY))
+    end)
+
+    it('cannot buy from a bazaar while crafting', function()
+        local seller = xi.test.world:spawnPlayer({ zone = xi.zone.SOUTHERN_SAN_DORIA })
+        player:setPos(seller:getXPos(), seller:getYPos(), seller:getZPos())
+
+        seller:addItem(xi.item.CHUNK_OF_IRON_ORE)
+        local slot = seller:findItem(xi.item.CHUNK_OF_IRON_ORE):getSlotID()
+        seller.actions:bazaarPrice(slot, 100)
+
+        leaveOneFreeSlot()
+        player:addGil(1000)
+
+        player.actions:craft(crystal, { ingredient })
+        player.actions:bazaarOpen(seller)
+        player.actions:bazaarBuy(slot, 1)
+
+        player.assert.no:hasItem(xi.item.CHUNK_OF_IRON_ORE)
+        seller.assert:hasItem(xi.item.CHUNK_OF_IRON_ORE)
+    end)
+
+    it('cannot synth with a full inventory', function()
+        player:addItem(crystal)
+        player:addItem(ingredient)
+        player:changeContainerSize(xi.inventoryLocation.INVENTORY, -player:getFreeSlotsCount())
+
+        player.actions:craft(crystal, { ingredient })
+
+        player.assert:hasItem(ingredient)
+        assert(player:findItem(crystal):state() == xi.itemState.FREE)
+    end)
+
     it('zoning mid-synth consumes claimed ingredients', function()
         player:addItem(crystal)
         player:addItem(ingredient)

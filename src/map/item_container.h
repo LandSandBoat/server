@@ -60,10 +60,12 @@ enum CONTAINER_ID : uint8
 #define ERROR_SLOTID       255
 DECLARE_FORMAT_AS_UNDERLYING(CONTAINER_ID);
 
+class CCharEntity;
+
 class CItemContainer
 {
 public:
-    CItemContainer(uint16 LocationID);
+    CItemContainer(uint16 LocationID, const CCharEntity* owner = nullptr);
     ~CItemContainer();
 
     uint16 GetID() const;
@@ -120,6 +122,8 @@ private:
     uint16 m_buff; // This appears to be the "usable" amount of your storage. You can have a locker size of 30, but a "buff" of 0 when it is out of use.
     uint8  m_size;
     uint8  m_count;
+
+    const CCharEntity* owner_;
 
     std::array<std::unique_ptr<CItem>, MAX_CONTAINER_SIZE + 1> m_ItemList{};
 };
