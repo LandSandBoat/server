@@ -101,8 +101,8 @@ struct MobSpawnData
 struct MobSlotMemberData
 {
     uint16 ActIndex{};
-    uint8  Chance{};   // not implemented: no zone sets one
-    uint32 Cooldown{}; // not implemented: nothing reads it
+    uint8  Chance{};   // percent
+    uint32 Cooldown{}; // seconds
 };
 
 struct MobSlotData

@@ -155,11 +155,11 @@ template <>
 struct glz::json_schema<xi::data::datasets::zones::mobs::wire::Slot::Member>
 {
     glz::schema chance{
-        .description = "Not implemented: no zone sets one, so a slot always picks uniformly among its members.",
+        .description = "Percent chance this mob wins any roll but the first one after a server restart.",
         .minimum     = 0L,
         .maximum     = 100L,
     };
-    glz::schema cooldown{ .description = "Seconds this member should stay out of the roll after its own death. Recorded but not yet implemented." };
+    glz::schema cooldown{ .description = "Seconds this mob sits out the slot's roll after it despawns." };
 };
 
 template <>

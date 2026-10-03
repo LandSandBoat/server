@@ -903,7 +903,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 640
     loot:
@@ -2013,7 +2013,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1180
     loot:
@@ -4458,3 +4458,9 @@ slots:
   - members:
       17199554: {} # Snipper
       17199561: {} # Bogy
+  - members:
+      17199434: {}           # Damselfly
+      17199438: {chance: 15} # Valkurm_Emperor
+  - members:
+      17199562: {}                           # Giant_Bat
+      17199564: {chance: 15, cooldown: 3600} # Golden_Bat
