@@ -1,6 +1,7 @@
 -----------------------------------
 -- Chocobo Raising - Chocobo Whistle
 -----------------------------------
+require('scripts/globals/rental_chocobo')
 require('scripts/globals/hobbies/chocobo_raising/breeding')
 require('scripts/globals/hobbies/chocobo_raising/constants')
 require('scripts/globals/hobbies/chocobo_raising/model')
@@ -26,9 +27,6 @@ local rechargePriceVar = '[ChocoboRaising]WhistlePrice'
 
 -- Set when the quest's whistle did not fit in the inventory.
 whistle.pendingVar = '[ChocoboRaising]WhistlePending'
-
--- For a chocobo registered before riding times were stored.
-local legacyRidingMinutes = 30
 
 -----------------------------------
 -- Tables
@@ -174,7 +172,12 @@ end
 -----------------------------------
 -- Global Functions
 -----------------------------------
--- The riding speed settings are a percentage of rental speed (map.MOUNT_SPEED).
+---@param ranks integer
+---@return integer
+whistle.ridingMinutes = function(ranks)
+    return math.floor(xi.chocoboRaising.ridingTimeBase + xi.chocoboRaising.ridingTimePerRank * math.min(ranks, xi.chocoboRaising.ridingTimeMaxRank))
+end
+
 ---@param strength integer
 ---@param abilities xi.chocoboRaising.ability[]
 ---@param extraRanks? integer
@@ -188,9 +191,10 @@ whistle.ridingSpeed = function(strength, abilities, extraRanks)
         ranks = ranks + 1
     end
 
-    local percent = math.min(xi.chocoboRaising.ridingSpeedBase + xi.chocoboRaising.ridingSpeedPerRank * ranks, xi.chocoboRaising.ridingSpeedCap)
+    local percent = xi.chocoboRaising.ridingSpeedBase + xi.chocoboRaising.ridingSpeedPerRank * math.min(ranks, xi.chocoboRaising.ridingSpeedMaxRank)
 
-    return math.floor(xi.settings.map.MOUNT_SPEED * percent / 100)
+    -- The client is sent half of this, and 0 reads as rental speed, so 2 is the slowest a chocobo can ride.
+    return math.max(math.floor(xi.settings.map.MOUNT_SPEED * percent / 100), 2)
 end
 
 ---@param chocobo table
@@ -215,9 +219,9 @@ whistle.registration = function(chocobo)
         fullTail    = bit.band(appearance, xi.chocoboRaising.appearance.FULL_TAIL) ~= 0,
         largeTalons = bit.band(appearance, xi.chocoboRaising.appearance.LARGE_TALONS) ~= 0,
         speed       = speed,
-        minutes     = math.min(xi.chocoboRaising.ridingTimeBase + xi.chocoboRaising.ridingTimePerRank * timeRanks, xi.chocoboRaising.ridingTimeCap),
+        minutes     = whistle.ridingMinutes(timeRanks),
 
-        -- Purple Race Silks count as one more STR rank, within the cap, while they are worn.
+        -- Purple Race Silks count as one more STR rank while they are worn.
         silksSpeedBonus = whistle.ridingSpeed(chocobo.strength, abilities, 1) - speed,
 
         -- Kept for digging, which reads more than the mount stores.
@@ -279,14 +283,15 @@ whistle.ride = function(player)
         return nil
     end
 
+    -- Registered before riding times were stored, so it rides as long as a rental.
     local minutes = chocobo.minutes
     if minutes == 0 then
-        minutes = legacyRidingMinutes
+        minutes = xi.rentalChocobo.rideMinutes
     end
 
     local body = player:getEquippedItem(xi.slot.BODY)
     if body and body:getID() == xi.item.RED_RACING_SILKS then
-        minutes = math.min(minutes + xi.chocoboRaising.ridingTimePerRank, xi.chocoboRaising.ridingTimeCap)
+        minutes = math.min(minutes + xi.chocoboRaising.ridingTimePerRank, whistle.ridingMinutes(xi.chocoboRaising.ridingTimeMaxRank))
     end
 
     return

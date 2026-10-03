@@ -121,7 +121,7 @@ describe('Chocobo whistle', function()
         })
 
         assert(capped.speed == xi.settings.map.MOUNT_SPEED, 'Expected rental speed')
-        assert(capped.minutes == xi.chocoboRaising.ridingTimeCap, 'Expected the time cap')
+        assert(capped.minutes == 45, 'Expected the time cap')
 
         local firstClass = whistle.registration({ strength = 255, endurance = 0, ability1 = xi.chocoboRaising.ability.GALLOP, ability2 = 0, color = 0 })
         assert(firstClass.speed == xi.settings.map.MOUNT_SPEED, 'Expected SS STR with Gallop to match a rental')

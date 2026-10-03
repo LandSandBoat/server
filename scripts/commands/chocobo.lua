@@ -34,8 +34,8 @@ commandObj.onTrigger = function(player, arg, arg2, arg3, arg4)
         largeBeak   = false,
         fullTail    = false,
         largeTalons = false,
-        speed       = xi.settings.map.MOUNT_SPEED,
-        minutes     = xi.chocoboRaising.ridingTimeCap,
+        speed       = xi.chocoboRaising.whistle.ridingSpeed(255, { xi.chocoboRaising.ability.GALLOP }, 1),
+        minutes     = xi.chocoboRaising.whistle.ridingMinutes(xi.chocoboRaising.ridingTimeMaxRank),
     }
 
     local traitArgs = { arg2, arg3, arg4 }
