@@ -21,6 +21,7 @@
 
 #include "chocobo_egg.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 void Exdata::ChocoboEgg::toTable(sol::table& table) const

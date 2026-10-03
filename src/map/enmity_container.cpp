@@ -26,6 +26,7 @@
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
+#include "map_constants.h"
 #include "notoriety_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"

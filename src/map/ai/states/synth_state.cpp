@@ -24,6 +24,7 @@
 #include "entities/battle_entity.h"
 
 #include "ai/ai_container.h"
+#include "entities/char_entity.h"
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(xi::Badge<CState>, CCharEntity* PChar, const xi::SkillType skill)

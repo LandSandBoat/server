@@ -27,14 +27,17 @@
 #include "ai/helpers/targetfind.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
+#include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "enums/action/category.h"
 #include "enums/four_cc.h"
+#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "mobskill.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "zone.h"
 
 CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
 : CState(PEntity, target)

@@ -21,6 +21,8 @@
 
 #include "lua_treasure_pool.h"
 
+#include "entities/char_entity.h"
+#include "luautils.h"
 #include "treasure_pool.h"
 #include "utils/zoneutils.h"
 

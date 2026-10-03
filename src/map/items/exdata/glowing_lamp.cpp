@@ -21,6 +21,8 @@
 
 #include "glowing_lamp.h"
 
+#include "base.h"
+
 namespace
 {
 

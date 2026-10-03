@@ -21,7 +21,8 @@
 
 #pragma once
 
-#include "base.h"
+#include <cstdint>
+#include <sol/forward.hpp>
 
 namespace Exdata
 {

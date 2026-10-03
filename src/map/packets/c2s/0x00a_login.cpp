@@ -26,6 +26,8 @@
 #include "ai/helpers/action_queue.h"
 #include "entities/char_entity.h"
 #include "lua/luautils.h"
+#include "map_session.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x04f_equip_clear.h"
 #include "packets/s2c/0x050_equip_list.h"

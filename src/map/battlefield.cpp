@@ -44,6 +44,7 @@
 
 #include "status_effect_container.h"
 
+#include "entities/pet_entity.h"
 #include "enums/four_cc.h"
 #include "utils/charutils.h"
 #include "utils/petutils.h"

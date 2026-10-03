@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 // TODO: Migrate to enum class
 enum CHAT_MESSAGE_TYPE : uint8_t
 {

@@ -21,6 +21,8 @@
 
 #include "escutcheon.h"
 
+#include "base.h"
+
 void Exdata::Escutcheon::toTable(sol::table& table) const
 {
     table["status"]             = this->Status;

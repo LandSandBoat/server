@@ -53,6 +53,7 @@
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
+#include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
 #include "items.h"
@@ -76,6 +77,7 @@
 #include "trait.h"
 #include "utils/petutils.h"
 #include "weapon_skill.h"
+#include "ximesh/ximesh.h"
 #include "zoneutils.h"
 
 /************************************************************************

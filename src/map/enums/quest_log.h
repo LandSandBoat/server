@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 // Indices as used in CCharEntity::m_questLog
 enum class QuestLog : uint8_t
 {

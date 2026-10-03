@@ -22,8 +22,12 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+#include <string>
+
+enum class ItemFlag : uint32;
 enum class ItemState : uint8;
 class CItem;
 

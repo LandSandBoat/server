@@ -22,6 +22,7 @@
 #include "0x11b_mastery_display.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "utils/charutils.h"

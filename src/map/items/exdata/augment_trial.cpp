@@ -21,6 +21,7 @@
 
 #include "augment_trial.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 void Exdata::AugmentTrial::toTable(sol::table& table) const

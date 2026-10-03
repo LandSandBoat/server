@@ -23,8 +23,11 @@
 
 #include "common/cbasetypes.h"
 #include "enums/terrain_type.h"
-#include "luautils.h"
 #include "zone.h"
+
+#include <sol/forward.hpp>
+
+#include <string>
 
 class CZone;
 

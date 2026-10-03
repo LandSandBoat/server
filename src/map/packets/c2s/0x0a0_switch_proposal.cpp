@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "nominate_manager.h"
+#include "packets/c2s/validation.h"
 #include "zone.h"
 
 auto GP_CLI_COMMAND_SWITCH_PROPOSAL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

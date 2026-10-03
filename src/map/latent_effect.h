@@ -22,7 +22,6 @@
 #pragma once
 
 #include "./entities/battle_entity.h"
-#include "./items/item_equipment.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "modifier.h"

@@ -24,6 +24,7 @@
 #include "blue_spell.h"
 #include "entities/automaton_entity.h"
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "recast_container.h"
@@ -31,6 +32,7 @@
 #include "utils/charutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

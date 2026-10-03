@@ -22,6 +22,7 @@
 #include "0x01c_unknown.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_UNKNOWN::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

@@ -44,6 +44,7 @@
 #include "attackround.h"
 #include "data/enums/mob_mod.h"
 #include "entities/char_entity.h"
+#include "entities/pet_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"

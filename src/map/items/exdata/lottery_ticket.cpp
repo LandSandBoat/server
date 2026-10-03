@@ -21,6 +21,8 @@
 
 #include "lottery_ticket.h"
 
+#include "base.h"
+
 void Exdata::LotteryTicket::toTable(sol::table& table) const
 {
     table["number"] = static_cast<uint32_t>(this->Number);

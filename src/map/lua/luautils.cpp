@@ -34,7 +34,10 @@
 #include <common/vana_time.h>
 #include <common/version.h>
 
+#include <map/lua/lua_ability.h>
 #include <map/lua/lua_action.h>
+#include <map/lua/lua_attack.h>
+#include <map/lua/lua_base_entity.h>
 #include <map/lua/lua_battlefield.h>
 #include <map/lua/lua_cache.h>
 #include <map/lua/lua_instance.h>
@@ -85,6 +88,7 @@
 #include "data/datasets/zones/npcs/dataset.h"
 #include "data/enums/mob_mod.h"
 #include "data/loader.h"
+#include "enums/msg_basic.h"
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"

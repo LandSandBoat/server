@@ -24,6 +24,7 @@
 #include "alliance.h"
 #include "entities/char_entity.h"
 #include "enums/party_kind.h"
+#include "packets/c2s/validation.h"
 #include "party.h"
 
 auto GP_CLI_COMMAND_GROUP_BREAKUP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

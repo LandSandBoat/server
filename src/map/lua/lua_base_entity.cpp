@@ -153,6 +153,9 @@
 #include "packets/s2c/0x0f9_res.h"
 #include "packets/s2c/0x119_abil_recast.h"
 
+#include "enums/msg_basic.h"
+#include "lua/lua_base_entity.h"
+#include "utils/attackutils.h"
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
@@ -167,6 +170,7 @@
 #include "utils/puppetutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
+#include "ximesh/ximesh.h"
 
 #include <magic_enum/magic_enum.hpp>
 

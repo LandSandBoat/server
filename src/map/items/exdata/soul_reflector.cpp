@@ -21,6 +21,7 @@
 
 #include "soul_reflector.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 namespace

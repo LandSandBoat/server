@@ -126,6 +126,6 @@ static_assert(sizeof(void*) == 8, "Only 64-bit builds are supported");
 #endif
 
 // MSVC doesn't have __PRETTY_FUNCTION__ so we use an equivalent
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && !defined(__clang__)
 #define __PRETTY_FUNCTION__ __FUNCSIG__
 #endif

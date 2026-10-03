@@ -21,6 +21,7 @@
 
 #include "linkshell.h"
 
+#include "base.h"
 #include "common/lua.h"
 #include "common/utils.h"
 

@@ -22,6 +22,7 @@
 #include "0x02b_translate.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x047_translate.h"
 #include "utils/itemutils.h"
 

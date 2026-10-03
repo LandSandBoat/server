@@ -22,6 +22,7 @@
 #include "mobskill.h"
 
 #include "enums/action/knockback.h"
+#include "enums/msg_basic.h"
 
 CMobSkill::CMobSkill(uint16 id)
 : m_ID(id)

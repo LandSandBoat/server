@@ -21,6 +21,7 @@
 
 #include "test_engine.h"
 #include "common/logging.h"
+#include "common/lua.h"
 #include "common/settings.h"
 #include "common/tracy.h"
 #include "enums/test_status.h"

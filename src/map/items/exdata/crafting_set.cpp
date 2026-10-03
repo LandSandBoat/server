@@ -21,6 +21,8 @@
 
 #include "crafting_set.h"
 
+#include "base.h"
+
 void Exdata::CraftingSet::toTable(sol::table& table) const
 {
     table["quality"]   = this->Quality;

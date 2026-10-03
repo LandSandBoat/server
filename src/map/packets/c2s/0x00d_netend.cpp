@@ -20,6 +20,7 @@
 */
 
 #include "0x00d_netend.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_NETEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

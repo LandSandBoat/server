@@ -27,6 +27,7 @@
 #include "ipc_client.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+#include "packets/c2s/validation.h"
 #include "party.h"
 #include "utils/charutils.h"
 

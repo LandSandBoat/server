@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "items/transactions/player_trade.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 
 auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

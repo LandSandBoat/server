@@ -30,9 +30,11 @@
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "enums/automaton.h"
+#include "lua/luautils.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
+#include "utils/charutils.h"
 #include "utils/mobutils.h"
 #include "utils/puppetutils.h"
 

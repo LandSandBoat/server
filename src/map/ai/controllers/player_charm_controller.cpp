@@ -23,6 +23,7 @@
 
 #include "ai/ai_container.h"
 #include "common/utils.h"
+#include "entities/char_entity.h"
 #include "status_effect_container.h"
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)

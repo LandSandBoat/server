@@ -20,6 +20,7 @@
 */
 
 #include "0x063_dig.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_DIG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

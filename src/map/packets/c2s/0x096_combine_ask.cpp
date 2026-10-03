@@ -22,9 +22,11 @@
 #include "0x096_combine_ask.h"
 
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "items.h"
 #include "items/transactions/synth.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "universal_container.h"

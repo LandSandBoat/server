@@ -22,6 +22,7 @@
 #include "0x0f2_submapchange.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_SUBMAPCHANGE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

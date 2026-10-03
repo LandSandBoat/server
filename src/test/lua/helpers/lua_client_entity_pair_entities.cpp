@@ -26,6 +26,7 @@
 #include "lua/helpers/lua_client_entity_pair_actions.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_test_entity.h"
+#include "lua/luautils.h"
 #include "map/lua/lua_base_entity.h"
 #include "map/map_engine.h"
 #include "map/utils/zoneutils.h"

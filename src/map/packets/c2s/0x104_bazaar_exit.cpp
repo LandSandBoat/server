@@ -22,6 +22,7 @@
 #include "0x104_bazaar_exit.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x108_bazaar_shopping.h"
 
 auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

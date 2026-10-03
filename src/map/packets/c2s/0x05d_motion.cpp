@@ -22,11 +22,15 @@
 #include "0x05d_motion.h"
 
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
 #include "items.h"
+#include "items/item_equipment.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "utils/jailutils.h"
+#include "zone.h"
 
 namespace
 {

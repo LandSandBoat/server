@@ -29,10 +29,13 @@
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
+#include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "items.h"
 #include "items/transactions/item_claim.h"
 #include "latent_effect_container.h"
+#include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x02f_dig.h"
@@ -44,7 +47,10 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "utils/fishingutils.h"
 #include "utils/mountutils.h"
+#include "zone.h"
 
 namespace
 {

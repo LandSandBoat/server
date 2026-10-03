@@ -21,6 +21,7 @@
 
 #include "item_furnishing.h"
 
+#include "exdata/base.h"
 #include "exdata/furniture.h"
 #include "exdata/mannequin.h"
 

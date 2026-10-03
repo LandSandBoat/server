@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x03d_shop_sell.h"
 #include "trade_container.h"
 

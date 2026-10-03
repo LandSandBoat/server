@@ -27,10 +27,12 @@
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
 #include "map/enums/furnishing_placement.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
+#include "zone.h"
 
 namespace
 {

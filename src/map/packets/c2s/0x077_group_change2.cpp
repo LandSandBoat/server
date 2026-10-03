@@ -27,6 +27,7 @@
 #include "common/ipc_structs.h"
 #include "entities/char_entity.h"
 #include "items/item_linkshell.h"
+#include "packets/c2s/validation.h"
 
 namespace
 {

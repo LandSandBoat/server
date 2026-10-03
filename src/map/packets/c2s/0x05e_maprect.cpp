@@ -28,6 +28,7 @@
 #include "common/utils.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x065_wpos2.h"
 #include "status_effect.h"

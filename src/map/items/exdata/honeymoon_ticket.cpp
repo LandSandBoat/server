@@ -21,6 +21,8 @@
 
 #include "honeymoon_ticket.h"
 
+#include "base.h"
+
 #include <format>
 
 void Exdata::HoneymoonTicket::toTable(sol::table& table) const

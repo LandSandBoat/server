@@ -28,6 +28,7 @@
 #include "entities/base_entity.h"
 #include "entities/char_entity.h"
 #include "items/item.h"
+#include "map_session.h"
 #include "utils/charutils.h"
 
 #include <algorithm>

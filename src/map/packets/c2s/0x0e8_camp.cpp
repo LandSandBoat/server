@@ -24,6 +24,8 @@
 #include "0x0e7_reqlogout.h"
 #include "ai/ai_container.h"
 #include "entities/char_entity.h"
+#include "entities/pet_entity.h"
+#include "packets/c2s/validation.h"
 #include "status_effect_container.h"
 
 auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

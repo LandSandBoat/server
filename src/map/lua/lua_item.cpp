@@ -28,6 +28,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
+#include "luautils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_readItem(PItem)

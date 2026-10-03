@@ -22,6 +22,7 @@
 #include "0x115_currencies_2.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x118_currencies_2.h"
 
 auto GP_CLI_COMMAND_CURRENCIES_2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

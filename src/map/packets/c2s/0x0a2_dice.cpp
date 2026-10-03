@@ -23,7 +23,9 @@
 
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x009_message.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_DICE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

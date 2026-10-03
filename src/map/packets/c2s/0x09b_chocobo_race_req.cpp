@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x073_chocobo_toteboard.h"
 #include "packets/s2c/0x074_chocobo_list.h"
 

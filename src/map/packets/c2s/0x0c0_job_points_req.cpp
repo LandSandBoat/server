@@ -23,6 +23,7 @@
 
 #include "data/enums/key_item.h"
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x08d_job_points.h"
 #include "utils/charutils.h"
 

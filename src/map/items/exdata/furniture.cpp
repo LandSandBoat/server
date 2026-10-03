@@ -21,6 +21,8 @@
 
 #include "furniture.h"
 
+#include "base.h"
+
 void Exdata::Furniture::toTable(sol::table& table) const
 {
     table["on2ndFloor"] = static_cast<bool>(this->On2ndFloor);

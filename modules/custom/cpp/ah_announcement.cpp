@@ -8,6 +8,7 @@
 
 #include "common/database.h"
 
+#include "map/entities/char_entity.h"
 #include "map/ipc_client.h"
 #include "map/map_session.h"
 #include "map/packets/basic.h"

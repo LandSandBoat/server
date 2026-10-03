@@ -23,7 +23,9 @@
 
 #include "ai/ai_container.h"
 #include "entities/mob_entity.h"
+#include "lua/lua_base_entity.h"
 #include "lua/lua_test_entity_assertions.h"
+#include "lua/luautils.h"
 #include "test_common.h"
 
 // Thin wrapper over CBaseEntity with assertions and some helpers.

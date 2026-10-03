@@ -22,6 +22,8 @@
 #include "0x0be_merits.h"
 
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
+#include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x029_battle_message.h"

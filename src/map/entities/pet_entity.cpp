@@ -39,7 +39,10 @@
 
 #include "action/action.h"
 #include "action/interrupts.h"
+#include "entities/char_entity.h"
+#include "lua/luautils.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "zone.h"
 
 CPetEntity::CPetEntity(PET_TYPE petType, uint32 petID)
 : CMobEntity()

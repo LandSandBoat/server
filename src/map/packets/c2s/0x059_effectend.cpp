@@ -20,6 +20,7 @@
 */
 
 #include "0x059_effectend.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_EFFECTEND::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

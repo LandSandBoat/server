@@ -22,6 +22,7 @@
 #include "0x118_unity_toggle.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "unitychat.h"
 #include "utils/charutils.h"
 

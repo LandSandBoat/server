@@ -21,7 +21,9 @@
 
 #include "0x04e_auc.h"
 
+#include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "utils/auctionutils.h"
 #include "utils/jailutils.h"
 

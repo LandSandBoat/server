@@ -24,11 +24,13 @@
 
 #include "ai/ai_container.h"
 #include "battlefield.h"
+#include "common/lua.h"
 #include "data/enums/mob_mod.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "entities/trust_entity.h"
+#include "lua/luautils.h"
 #include "lua_base_entity.h"
 #include "lua_battlefield.h"
 #include "utils/mobutils.h"

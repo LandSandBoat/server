@@ -27,6 +27,7 @@
 
 #include "lua/luautils.h"
 
+#include "entities/char_entity.h"
 #include "instance_loader.h"
 #include "zoneutils.h"
 

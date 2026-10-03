@@ -22,6 +22,8 @@
 #include "lua_action.h"
 
 #include "action/action.h"
+#include "lua_base_entity.h"
+#include "luautils.h"
 
 CLuaAction::CLuaAction(action_t* Action)
 : m_PLuaAction(Action)

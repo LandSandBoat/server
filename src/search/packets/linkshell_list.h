@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data_loader.h"
 
 class CLinkshellListPacket
 {

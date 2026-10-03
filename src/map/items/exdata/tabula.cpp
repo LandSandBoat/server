@@ -20,6 +20,8 @@
 */
 
 #include "tabula.h"
+
+#include "base.h"
 #include "common/lua.h"
 
 namespace

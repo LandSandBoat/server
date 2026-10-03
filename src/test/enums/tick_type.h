@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class TickType : uint8_t
 {
     ZoneTick       = 0,

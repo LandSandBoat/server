@@ -21,6 +21,7 @@
 
 #include "meeble_grimoire.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 namespace

@@ -46,6 +46,7 @@
 #include "packets/c2s/0x102_extended_job.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "status_effect_container.h"
+#include "zone.h"
 
 struct MonstrositySpeciesRow
 {

@@ -22,9 +22,12 @@
 #include "0x11d_jump.h"
 
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x11e_jump.h"
 #include "utils/jailutils.h"
+#include "zone.h"
 
 auto GP_CLI_COMMAND_JUMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

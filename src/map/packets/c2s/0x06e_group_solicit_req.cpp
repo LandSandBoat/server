@@ -23,7 +23,9 @@
 
 #include "common/ipc_structs.h"
 #include "entities/char_entity.h"
+#include "enums/msg_basic.h"
 #include "ipc_client.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x053_systemmes.h"

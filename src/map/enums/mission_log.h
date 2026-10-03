@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 enum class MissionLog : uint8_t
 {
     Sandoria = 0,

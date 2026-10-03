@@ -21,6 +21,8 @@
 
 #include "weapon_unlock.h"
 
+#include "base.h"
+
 void Exdata::WeaponUnlock::toTable(sol::table& table) const
 {
     table["unlockPoints"] = this->UnlockPoints;

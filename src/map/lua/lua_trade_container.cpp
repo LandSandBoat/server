@@ -26,6 +26,7 @@
 #include "items/transactions/npc_trade.h"
 #include "lua_item.h"
 #include "lua_trade_container.h"
+#include "luautils.h"
 #include "trade_container.h"
 
 //======================================================//

@@ -21,6 +21,8 @@
 
 #include "timer_info.h"
 
+#include "base.h"
+
 void Exdata::ItemTimerInfo::toTable(sol::table& table) const
 {
     table["remainingCharges"] = this->RemainingCharges;

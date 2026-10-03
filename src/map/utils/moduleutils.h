@@ -23,11 +23,17 @@
 
 #include "lua/luautils.h"
 
+#include <memory>
 #include <string>
 #include <string_view>
+#include <vector>
 
 // Forward declare
+class CBasicPacket;
+class CCharEntity;
 class CPPModule;
+class IPP;
+struct MapSession;
 
 namespace moduleutils
 {

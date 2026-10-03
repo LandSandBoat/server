@@ -29,6 +29,7 @@
 
 #include "entities/battle_entity.h"
 #include "ipc_client.h"
+#include "map_session.h"
 #include "party.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"

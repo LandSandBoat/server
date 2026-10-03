@@ -24,7 +24,9 @@
 #include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
+#include "zone.h"
 
 namespace
 {

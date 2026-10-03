@@ -27,11 +27,12 @@
 #include "common/types/maybe.h"
 #include "common/zmq/zmq_service.h"
 
-#include <asio.hpp> // for signal_set
+#include <asio/signal_set.hpp>
 
 #include <chrono>
 #include <memory>
 #include <string>
+#include <vector>
 
 struct ApplicationConfig
 {

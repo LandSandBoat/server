@@ -25,9 +25,11 @@
 #include "enums/msg_std.h"
 #include "items/transactions/npc_trade.h"
 #include "lua/luautils.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"
 #include "trade_container.h"
+#include "utils/charutils.h"
 
 #include <algorithm>
 #include <array>

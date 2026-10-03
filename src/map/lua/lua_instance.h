@@ -22,8 +22,12 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+#include <string>
+
+class CBaseEntity;
 class CLuaBaseEntity;
 class CLuaZone;
 class CInstance;

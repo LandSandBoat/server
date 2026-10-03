@@ -42,6 +42,7 @@
 #include "mobskill.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
+#include "zone.h"
 
 //
 // Forward declarations

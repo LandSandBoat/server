@@ -21,6 +21,8 @@
 
 #include "augment_bundle.h"
 
+#include "base.h"
+
 void Exdata::AugmentBundle::toTable(sol::table& table) const
 {
     table["augmentKind"]    = static_cast<uint8_t>(this->AugmentKind);

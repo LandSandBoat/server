@@ -22,6 +22,7 @@
 #include "0x0f1_buffcancel.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 #include "status_effect_container.h"
 
 auto GP_CLI_COMMAND_BUFFCANCEL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

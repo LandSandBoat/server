@@ -21,6 +21,7 @@
 
 #include "augment_mezzotint.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 void Exdata::AugmentMezzotint::toTable(sol::table& table) const

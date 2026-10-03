@@ -21,6 +21,7 @@
 
 #include "augment_standard.h"
 
+#include "base.h"
 #include "common/lua.h"
 
 void Exdata::AugmentStandard::toTable(sol::table& table) const

@@ -27,6 +27,7 @@
 #include "common/types/flat_hash_map.h"
 #include "data/enums/key_item.h"
 #include "entities/battle_entity.h"
+#include "enums/msg_basic.h"
 #include "enums/synthesis_effect.h"
 #include "enums/synthesis_result.h"
 #include "items.h"

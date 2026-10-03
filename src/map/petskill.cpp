@@ -20,6 +20,7 @@
 */
 
 #include "petskill.h"
+#include "enums/msg_basic.h"
 
 #include "mobskill.h" // used for skillflags
 

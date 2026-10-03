@@ -21,6 +21,8 @@
 
 #include "serialized.h"
 
+#include "base.h"
+
 void Exdata::Serialized::toTable(sol::table& table) const
 {
     table["augmentKind"]    = static_cast<uint8_t>(this->AugmentKind);

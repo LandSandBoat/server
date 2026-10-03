@@ -25,6 +25,7 @@
 #include "common/ipc_structs.h"
 #include "entities/char_entity.h"
 #include "ipc_client.h"
+#include "packets/c2s/validation.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_ASSIST_CHANNEL::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

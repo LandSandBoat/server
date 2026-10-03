@@ -22,9 +22,19 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
+#include <sol/forward.hpp>
+
+enum class Knockback : uint8_t;
+enum class MsgBasic : uint16_t;
 class CMobSkill;
+
+namespace xi
+{
+
+enum class AttackType : uint8_t;
+
+} // namespace xi
 
 class CLuaMobSkill
 {

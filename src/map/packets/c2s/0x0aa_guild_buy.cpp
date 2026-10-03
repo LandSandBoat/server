@@ -25,6 +25,8 @@
 #include "entities/char_entity.h"
 #include "items/item.h"
 #include "lua/luautils.h"
+#include "map_session.h"
+#include "packets/c2s/validation.h"
 #include "packets/s2c/0x082_guild_buy.h"
 #include "utils/itemutils.h"
 #include "utils/zoneutils.h"

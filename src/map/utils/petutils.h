@@ -24,6 +24,12 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "data/enums/damage_type.h"
+#include "data/enums/ecosystem.h"
+#include "data/enums/skill_type.h"
+#include "modifier.h"
+
+#include <string>
 
 enum PETID
 {

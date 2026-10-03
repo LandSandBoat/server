@@ -21,6 +21,8 @@
 
 #include "race_certificate.h"
 
+#include "base.h"
+
 void Exdata::RaceCertificate::toTable(sol::table& table) const
 {
     table["raceId"]    = static_cast<uint32_t>(this->RaceId);

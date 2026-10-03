@@ -38,6 +38,7 @@
 #include "ai/controllers/trust_controller.h"
 
 #include "packets/s2c/0x038_schedulor.h"
+#include "zone.h"
 
 #include <algorithm>
 

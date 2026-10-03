@@ -20,6 +20,7 @@
 */
 
 #include "0x011_zone_transition.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_ZONE_TRANSITION::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

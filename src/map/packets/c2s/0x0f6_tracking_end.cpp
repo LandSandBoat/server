@@ -22,6 +22,7 @@
 #include "0x0f6_tracking_end.h"
 
 #include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
 
 auto GP_CLI_COMMAND_TRACKING_END::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

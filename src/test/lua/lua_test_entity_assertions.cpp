@@ -21,6 +21,7 @@
 
 #include "lua_test_entity_assertions.h"
 
+#include "lua/luautils.h"
 #include "lua_test_entity.h"
 #include "test_common.h"
 

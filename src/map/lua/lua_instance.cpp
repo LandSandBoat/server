@@ -27,6 +27,7 @@
 #include "entities/npc_entity.h"
 #include "instance.h"
 #include "lua_base_entity.h"
+#include "lua_zone.h"
 #include "luautils.h"
 #include "utils/instanceutils.h"
 #include "utils/mobutils.h"

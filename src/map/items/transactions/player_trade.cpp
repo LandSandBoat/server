@@ -31,6 +31,7 @@
 #include "enums/msg_std.h"
 #include "item_container.h"
 #include "items/item.h"
+#include "map_session.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x022_item_trade_res.h"
