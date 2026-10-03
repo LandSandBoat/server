@@ -6,7 +6,7 @@
 # python3 announce.py "Here is a message from python!"
 #
 # Requirements
-# pip3 install zmq pyzmq
+# pip3 install zmq pyzmq cbor2
 #
 #############################
 
@@ -14,6 +14,7 @@ import socket
 import sys
 import zmq
 import struct
+import cbor2
 
 context = zmq.Context()
 sock = context.socket(zmq.DEALER)
@@ -38,72 +39,22 @@ def print_help():
     print('python3 .\\announce.py "Here is a message from python!"')
 
 
-def encode_varint(value):
-    # Implements Alpaca's Base-128 variable-length encoding (Varint)
-    # used for serializing integers and container lengths.
-    bytes_list = bytearray()
-    while value > 127:
-        bytes_list.append((value & 127) | 128)
-        value >>= 7
-    bytes_list.append(value & 127)
-    return bytes_list
-
-
 def build_chat_packet(gm_flag, zone, sender, msg):
-    if sender is None:
-        sender = ""
+    # Keys map onto ipc::ChatMessageServerMessage (server/src/common/ipc_structs.h) by name,
+    # so field order and integer widths don't matter here.
+    body = {
+        "senderId": 0,
+        "senderName": sender or "",
+        "message": msg,
+        "zoneId": zone,
+        "gmLevel": gm_flag,
+        # MESSAGE_SYSTEM_1, see server/src/map/enums/chat_message_type.h
+        "messageType": 6,
+        "skipSender": False,
+    }
 
-    # alpaca encoding for:
-    #
-    # server/src/common/ipc_structs.h:
-    #
-    # struct ChatMessageServerMessage
-    # {
-    #     uint32            senderId{};
-    #     std::string       senderName{};
-    #     std::string       message{};
-    #     uint16            zoneId{};
-    #     uint8             gmLevel{};
-    #     CHAT_MESSAGE_TYPE messageType{ MESSAGE_SYSTEM_1 };
-    #     bool              skipSender{};
-    # };
-
-    buffer = bytearray()
-
-    # ChatMessageServerMessage (ipc message type)
-    # server/tools/build/generated/ipc_stubs.h
-    #     ChatMessageServerMessage  = 12,
-    buffer.append(12)
-
-    # senderId
-    buffer.extend(encode_varint(0))
-
-    # senderName length
-    buffer.extend(encode_varint(len(sender)))
-
-    # senderName string
-    buffer.extend(sender.encode("utf-8"))
-
-    # message length
-    buffer.extend(encode_varint(len(msg)))
-
-    # message string
-    buffer.extend(msg.encode("utf-8"))
-
-    # zoneId (uint16 native endianness, assuming little-endian x86/x64)
-    buffer.extend(struct.pack("<H", zone))
-
-    # gmLevel
-    buffer.append(gm_flag)
-
-    # messageType (MESSAGE_SYSTEM_1 = 6)
-    # server/src/map/enums/chat_message_type.h
-    buffer.append(6)
-
-    # skipSender
-    buffer.append(0)
-
-    return buffer
+    # MessageType::ChatMessageServerMessage, see build/generated/ipc_stubs.h
+    return bytearray([12]) + cbor2.dumps(body)
 
 
 def send_server_message(msg):
