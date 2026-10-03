@@ -17,6 +17,7 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         HARVESTING_IS_POSSIBLE_HERE   = 7093, -- Harvesting is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET        = 7100, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7190, -- It appears your chocobo found this item with ease.
         DOOR_OFFSET                   = 7459, -- The door is sealed shut...
         CAMPAIGN_RESULTS_TALLIED      = 7801, -- Campaign results tallied.
         VOIDWALKER_DESPAWN            = 7985, -- The monster fades before your eyes, a look of disappointment on its face.

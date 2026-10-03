@@ -18,6 +18,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028,  -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS            = 7052,  -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CAMPAIGN_RESULTS_TALLIED      = 7530,  -- Campaign results tallied.
+        FOUND_ITEM_WITH_EASE          = 7721,  -- It appears your chocobo found this item with ease.
         DOOR_FIRMLY_SEALED            = 7740,  -- The door is firmly sealed.
         SURRENDER_CEREMONY_HASTE      = 8488,  -- The surrender ceremony is about to commence underground. Make haste before all is lost!
         VOIDWALKER_DESPAWN            = 8500,  -- The monster fades before your eyes, a look of disappointment on its face.

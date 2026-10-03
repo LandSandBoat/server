@@ -16,6 +16,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         SPONDULIX_SHOP_DIALOG         = 7229, -- Spondulix comes all the way from Boodlix's Emporium to help Tarutaru and Mithra. I can help you, too! You have gil, no?
         CAMPAIGN_RESULTS_TALLIED      = 7611, -- Campaign results tallied.
         LOGGING_IS_POSSIBLE_HERE      = 7696, -- Logging is possible here if you have <item>.

@@ -18,6 +18,7 @@ zones[xi.zone.MORIMAR_BASALT_FIELDS] =
         BAYLD_OBTAINED                = 7012, -- You have obtained <number> bayld!
         YOU_HAVE_LEARNED              = 7020, -- You have learned <keyitem>!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         WAYPOINT_ATTUNED              = 7612, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4/ at Frontier Bivouac #5]!
         EXPENDED_KINETIC_UNITS        = 7621, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS            = 7622, -- Your stock of kinetic units is insufficient.

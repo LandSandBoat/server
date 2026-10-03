@@ -21,6 +21,7 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
         LOGIN_NUMBER                  = 7008,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7073,  -- Tallying conquest results...
+        FOUND_ITEM_WITH_EASE          = 7322,  -- It appears your chocobo found this item with ease.
         SOMETHING_BURRIED             = 7333,  -- It looks like something was buried here.
         PLAYER_OBTAINS_ITEM           = 7523,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7524,  -- You were unable to obtain the item.

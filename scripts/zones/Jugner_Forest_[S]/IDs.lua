@@ -21,6 +21,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         YOU_FIND_NOTHING_ORDINARY     = 7133, -- You find nothing out of the ordinary.
         CAMPAIGN_RESULTS_TALLIED      = 7301, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7386, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7476, -- It appears your chocobo found this item with ease.
         ALREADY_OBTAINED_TELE         = 7723, -- You already possess the gate crystal for this telepoint.
         YOU_FIND_SPARKLING_STONE      = 7741, -- You find a sparkling stone.
         ELEGANT_FOOTPRINTS            = 8416, -- You see numerous sets of elegant footprints.

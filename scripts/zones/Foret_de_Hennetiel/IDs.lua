@@ -17,6 +17,7 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
         BAYLD_OBTAINED                = 7012, -- You have obtained <number> bayld!
         YOU_HAVE_LEARNED              = 7020, -- You have learned <keyitem>!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         STARTED_TO_LEARN_BOAT         = 7535, -- You have started to learn a bit about how to operate your boat.
         FIGURED_OUT_BOAT              = 7536, -- You have figured out how to properly use the boat! Report your progress to Choubollet.
         WAYPOINT_ATTUNED              = 7694, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4]!

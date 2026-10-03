@@ -27,6 +27,7 @@ zones[xi.zone.XARCABARD] =
         BEASTMEN_BANNER                = 7167,  -- There is a beastmen's banner.
         PRESENCE_IN_CAVE               = 7246,  -- You sense a presence in the cave...
         MONSTER_APPEARS                = 7249,  -- A monster appears from deep within the cave!
+        FOUND_ITEM_WITH_EASE           = 7361,  -- It appears your chocobo found this item with ease.
         SENSE_EVIL                     = 7375,  -- You can sense an evil force around you.
         DO_NOT_SENSE                   = 7376,  -- You do not sense anything out of the ordinary.
         ALREADY_OBTAINED_TELE          = 7396,  -- You already possess the gate crystal for this telepoint.

@@ -17,6 +17,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         NONDESCRIPT_MASS              = 7776, -- A nondescript mass squirms hypnotically beneath the rock.
         REMAINS_OF_COOKFIRE           = 7800, -- You see the charred remains of a cookfire.
         UNWANTED_ATTENTION            = 8601, -- Your presence has drawn unwanted attention!

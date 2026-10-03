@@ -21,6 +21,7 @@ zones[xi.zone.ATTOHWA_CHASM] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7073, -- Tallying conquest results...
         MINING_IS_POSSIBLE_HERE       = 7232, -- Mining is possible here if you have <item>.
+        FOUND_ITEM_WITH_EASE          = 7329, -- It appears your chocobo found this item with ease.
         MIMEO_STONE_PICKUP            = 7340, -- The <keyitem> is shining brilliantly.
         MIMEO_JEWEL_OFFSET            = 7341, -- The light from the <keyitem> is beginning to fade.
         MIMEO_STONE_BRIGHTNESS_OFFSET = 7346, -- The <keyitem> is shining brilliantly.

@@ -22,6 +22,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         CONQUEST_BASE                 = 7073, -- Tallying conquest results...
         CONQUEST                      = 7241, -- You've earned conquest points!
         FISHING_MESSAGE_OFFSET        = 7575, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7665, -- It appears your chocobo found this item with ease.
         KI_STOLEN                     = 7705, -- The <keyitem> has been stolen!
         NO_ROOM_COME_BACK_LATER       = 7720, -- You do not have any room in your bag, so you hide the <item> in the grass nearby. Come and retrieve it later.
         LOGGING_IS_POSSIBLE_HERE      = 7753, -- Logging is possible here if you have <item>.

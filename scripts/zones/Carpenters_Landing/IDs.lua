@@ -28,6 +28,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         FISHING_MESSAGE_OFFSET        = 7294, -- You can't fish here.
         DIG_THROW_AWAY                = 7307, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7309, -- You dig and you dig, but find nothing.
+        FOUND_ITEM_WITH_EASE          = 7384, -- It appears your chocobo found this item with ease.
         BEASTMEN_CACHE_OFFSET         = 7389, -- You discover a cache of beastman resources and receive <number> conquest point[/s]!
         LOGGING_IS_POSSIBLE_HERE      = 7412, -- Logging is possible here if you have <item>.
         BEUGUNGEL_SHOP_DIALOG         = 7444, -- Hello, [sir/ma'am]! I'm selling goods direct from the Carpenters' Guild.

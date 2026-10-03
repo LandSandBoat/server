@@ -29,6 +29,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
         BEASTMEN_BANNER               = 7154,  -- There is a beastmen's banner.
         CONQUEST                      = 7241,  -- You've earned conquest points!
         FISHING_MESSAGE_OFFSET        = 7574,  -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7664,  -- It appears your chocobo found this item with ease.
         SOMETHING_BETTER              = 7687,  -- Don't you have something better to do right now?
         CANNOT_REMOVE_FRAG            = 7690,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
         ALREADY_OBTAINED_FRAG         = 7691,  -- You have already obtained this monument's <keyitem>. Try searching for another.

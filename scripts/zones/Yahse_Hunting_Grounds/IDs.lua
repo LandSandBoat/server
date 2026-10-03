@@ -16,6 +16,7 @@ zones[xi.zone.YAHSE_HUNTING_GROUNDS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         WAYPOINT_ATTUNED              = 7625, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3]!
         EXPENDED_KINETIC_UNITS        = 7640, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS            = 7641, -- Your stock of kinetic units is insufficient.
