@@ -162,6 +162,7 @@ Fitted to few samples or taken from guides, with no capture behind them:
 - Energy rank `energy * 2 / 25`; stat ranks of 32 points
 - Green Racing Silks taking a tenth off care energy, rounded up (FFXIclopedia; BG says about half and the
   JP wiki gives no figure)
+- Sky Blue Racing Silks: a 50% chance per dig of the knowledge message, read as one more skill-up roll
 - Care plans: stat changes per arrow, success chance, Basic Care raising a stat 1 day in 6, poor
   days halving, no stat drops from day 64, next-day energy for Exercise Alone and the Interact plans
 - The 639 stat cap is our choice, not a guide's: it stops grades at SS/SS/A/F and SS/A/B/C. Guides

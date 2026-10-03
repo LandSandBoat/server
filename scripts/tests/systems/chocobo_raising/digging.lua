@@ -327,6 +327,34 @@ describe('Chocobo digging', function()
         end)
     end)
 
+    describe('Sky Blue Racing Silks', function()
+        it('rolls one more skill-up per dig while worn', function()
+            player:setSkillLevel(xi.skill.DIG, 0)
+            player:addItem(xi.item.SKY_BLUE_RACING_SILKS)
+            player:equipItem(xi.item.SKY_BLUE_RACING_SILKS, nil, xi.slot.BODY)
+            ridePersonal(chocobo({ ability1 = ability.BURROW, ability2 = ability.BORE }))
+            percentRoll = 1
+            player.packets:clear()
+            dig()
+
+            local knowledge = zones[zoneId].text.FOUND_ITEM_WITH_EASE + 1
+            local shown     = 0
+            for _, packet in ipairs(player.packets:getIncoming()) do
+                if
+                    packet.type == 0x02A and
+                    bit.band(packet.data[0x1A] + packet.data[0x1B] * 256, 0x7FFF) == knowledge
+                then
+                    shown = shown + 1
+                end
+            end
+
+            assert(shown == 1, string.format('Expected the message once per dig, got %d', shown))
+
+            -- Three finds roll three skill-ups, and the silks one more.
+            assert(player:getCharSkillLevel(xi.skill.DIG) == 4, string.format('Expected skill 4, got %d', player:getCharSkillLevel(xi.skill.DIG)))
+        end)
+    end)
+
     describe('DSC', function()
         -- DSC 255 is rank 7: a 30% chance.
         it('keeps the greens on a winning roll and eats them on a losing one', function()
