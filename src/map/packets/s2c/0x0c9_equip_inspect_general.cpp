@@ -32,8 +32,8 @@ GP_SERV_COMMAND_EQUIP_INSPECT::GENERAL::GENERAL(const CCharEntity* PChar, const 
     packet.ActIndex   = PTarget->targid;
     packet.OptionFlag = 0x01;
 
-    auto* PLinkshell = reinterpret_cast<CItemLinkshell*>(PTarget->getEquip(SLOT_LINK1));
-    if (PLinkshell && PLinkshell->isType(ITEM_LINKSHELL))
+    auto* PLinkshell = PTarget->getLinkshell(SLOT_LINK1);
+    if (PLinkshell)
     {
         packet.ItemNo = PLinkshell->getID();
         std::memcpy(packet.sComLinkName, PLinkshell->exdata<Exdata::Linkshell>().Name, sizeof(PLinkshell->exdata<Exdata::Linkshell>().Name));

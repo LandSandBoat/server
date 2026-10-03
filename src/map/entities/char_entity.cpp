@@ -78,6 +78,7 @@
 #include "item_container.h"
 #include "items/item_equipment.h"
 #include "items/item_furnishing.h"
+#include "items/item_linkshell.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
 #include "items/transactions/npc_trade.h"
@@ -996,7 +997,30 @@ auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
         return nullptr;
     }
 
-    return static_cast<CItemEquipment*>(equipped_[slot]);
+    auto* PItem = equipped_[slot];
+    if (!PItem || !PItem->isType(ITEM_EQUIPMENT))
+    {
+        return nullptr;
+    }
+
+    return static_cast<CItemEquipment*>(PItem);
+}
+
+auto CCharEntity::getLinkshell(const SLOTTYPE slot) const -> CItemLinkshell*
+{
+    if (slot != SLOT_LINK1 && slot != SLOT_LINK2)
+    {
+        ShowWarningFmt("getLinkshell: slot {} is not a linkshell slot", slot);
+        return nullptr;
+    }
+
+    auto* PItem = equipped_[slot];
+    if (!PItem || !PItem->isType(ITEM_LINKSHELL))
+    {
+        return nullptr;
+    }
+
+    return static_cast<CItemLinkshell*>(PItem);
 }
 
 auto CCharEntity::equipLocation(const uint8 equipSlot) const -> Maybe<ItemLocation>

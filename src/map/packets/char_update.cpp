@@ -298,7 +298,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         // Only known to be used by Noble Chocobo at this time.
         packet->CustomProperties[1] = CustomProperties[1];
 
-        auto* linkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
+        auto* linkshell = PChar->getLinkshell(SLOT_LINK1);
 
         packet->Flags1.CliPosInitFlag  = 0; // Unused
         packet->Flags1.GraphSize       = PChar->look.size;
@@ -318,7 +318,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         packet->Flags1.TurnFlag        = 0; // I do not believe we currently use this. // TOOD: get the lerp values from retail somehow.
         packet->Flags1.BazaarFlag      = PChar->hasBazaar();
 
-        if (linkshell && linkshell->isType(ITEM_LINKSHELL))
+        if (linkshell)
         {
             const Exdata::lscolor_t LSColor = linkshell->GetLSColor();
 

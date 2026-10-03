@@ -727,6 +727,7 @@ public:
     timer::duration GetPlayTime(bool needUpdate = true);   // Get playtime
 
     auto getEquip(SLOTTYPE slot) const -> CItemEquipment*;
+    auto getLinkshell(SLOTTYPE slot) const -> CItemLinkshell*;
 
     bool requestedInfoSync = false;
 
