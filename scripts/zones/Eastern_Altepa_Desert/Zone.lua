@@ -8,7 +8,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
 
     xi.expeditionaryForce.initZone(zone)
 end

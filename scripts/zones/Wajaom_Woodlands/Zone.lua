@@ -6,7 +6,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.darkRider.addHoofprints(zone)
 end
 

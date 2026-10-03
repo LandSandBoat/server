@@ -12,7 +12,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

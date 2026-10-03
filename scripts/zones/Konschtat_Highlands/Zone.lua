@@ -8,7 +8,7 @@ require('scripts/missions/amk/helpers')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 

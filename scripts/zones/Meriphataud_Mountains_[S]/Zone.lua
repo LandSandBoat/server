@@ -7,7 +7,7 @@ local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 

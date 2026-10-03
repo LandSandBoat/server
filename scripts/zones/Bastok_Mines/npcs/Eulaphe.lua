@@ -11,15 +11,15 @@ local eventSucceed = 62
 local eventFail    = 65
 
 entity.onTrade = function(player, npc, trade)
-    xi.chocobo.renterOnTrade(player, npc, trade, eventSucceed, eventFail)
+    xi.rentalChocobo.renterOnTrade(player, npc, trade, eventSucceed, eventFail)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.chocobo.renterOnTrigger(player, npc, eventSucceed, eventFail)
+    xi.rentalChocobo.renterOnTrigger(player, npc, eventSucceed, eventFail)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+    xi.rentalChocobo.renterOnEventFinish(player, csid, option, eventSucceed)
 end
 
 return entity
