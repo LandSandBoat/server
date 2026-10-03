@@ -27,8 +27,9 @@ xi.chocoboRaising.gilMultiplier          = 1.0
 -- True keeps an adult ageing past the retirement day; the player can still retire it.
 xi.chocoboRaising.disableRetirement = false
 
--- The four stats together stop growing here; 0 lifts the cap. Each stat still stops at 255 (SS).
-xi.chocoboRaising.statGrowthCap = 640
+-- The four stats together stop growing here, and 0 lifts the cap. Each stat still stops at 255 (SS).
+-- Below 640, no chocobo reaches SS/SS/S.
+xi.chocoboRaising.statGrowthCap = 639
 
 -- Speed is a percent of map.MOUNT_SPEED. Gallop and Purple Racing Silks each add a rank.
 xi.chocoboRaising.ridingSpeedBase    = 80

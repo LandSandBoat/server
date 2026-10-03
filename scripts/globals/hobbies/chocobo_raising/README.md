@@ -162,7 +162,8 @@ Fitted to few samples or taken from guides, with no capture behind them:
 - Energy rank `energy * 2 / 25`; stat ranks of 32 points
 - Care plans: stat changes per arrow, success chance, Basic Care raising a stat 1 day in 6, poor
   days halving, no stat drops from day 64, next-day energy for Exercise Alone and the Interact plans
-- The 640 stat cap (another guide says 637)
+- The 639 stat cap is our choice, not a guide's: it stops grades at SS/SS/A/F and SS/A/B/C. Guides
+  give 637, 640 and 641, and players report retail birds at 640
 - Food affection per arrow (24), stat arrows, worm stat drops, La Theine Millet, stat foods'
   chances, Parasite Worm changing a gene
 - Condition onset and end chances (`odds`, `conditionEndOdds`), scene order in a day, a compete
