@@ -73,6 +73,7 @@ zones[xi.zone.WINDURST_WOODS] =
         HERE_TAKE_THIS                = 9782,  -- Here, take this...
         IF_YOU_WEAR_THIS              = 9783,  -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 9784,  -- Thank you...
+        HARVEST_PITCHFORK_HINT        = 9785,  -- If two people with the same costumes form a party and approach a bomb balloon, then...
         NOKKHI_BAD_COUNT              = 9802,  -- What kinda smart-alecky baloney is this!? I told you to bring me the same kinda ammunition in complete sets. And don't forget the flowers, neither.
         NOKKHI_GOOD_TRADE             = 9804,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM               = 9805,  -- I'm real sorry, but there's nothing I can do with those.
@@ -99,14 +100,6 @@ zones[xi.zone.WINDURST_WOODS] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17764400] = 55, -- Meriri
-            [17764401] = 54, -- Kuzah Hpirohpon
-            [17764462] = 58, -- Taraihi-Perunhi
-            [17764464] = 56, -- Nhobi Zalkia
-            [17764465] = 57, -- Millerovieunet
-        },
         AMIMI   = GetFirstID('Amimi'),
         SARIALE = GetFirstID('Sariale'),
         ORLAINE = GetFirstID('Orlaine'),

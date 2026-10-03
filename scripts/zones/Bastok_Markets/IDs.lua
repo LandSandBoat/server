@@ -67,7 +67,11 @@ zones[xi.zone.BASTOK_MARKETS] =
         HERE_TAKE_THIS                = 8315,  -- Here, take this...
         IF_YOU_WEAR_THIS              = 8316,  -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                     = 8317,  -- Thank you...
+        HARVEST_PITCHFORK_HINT        = 8318,  -- If two people with the same costumes form a party and approach a bomb balloon, then...
         EGG_HUNT_OFFSET               = 8324,  -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
+        HARVEST_LILIES_DETECTED       = 12304, -- Ooops! You've stepped in front of the witch!
+        HARVEST_LILIES_PROGRESS       = 12305, -- You can't stop now. You've just started!
+        HARVEST_LILIES_JOINED         = 12315, -- You've joined the procession.
         RETRIEVE_DIALOG_ID            = 13022, -- You retrieve <item> from the porter moogle's care.
         TURNING_IN_SPARKS             = 14347, -- Ohohoho... Turning in sparks, I see.
         DO_NOT_POSSESS_ENOUGH         = 14371, -- You do not possess enough <item> to complete the transaction.
@@ -82,12 +86,10 @@ zones[xi.zone.BASTOK_MARKETS] =
     },
     npc =
     {
+        HARVEST_LILIES_EXORCIST = GetFirstID('Brian'),
+        HARVEST_LILIES_WITCHES  = { GetFirstID('Selma'), GetFirstID('Pretty_Heart') },
         AQUILLINA = GetFirstID('Aquillina'),
 
-        HALLOWEEN_SKINS =
-        {
-            [17739805] = 45, -- Olwyn
-        },
     },
 }
 

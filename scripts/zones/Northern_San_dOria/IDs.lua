@@ -127,6 +127,11 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         THANK_YOU                     = 13101, -- Thank you...
         EGG_HUNT_OFFSET               = 13136, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         FFR_LOOKS_CURIOUSLY_BASE      = 13425, -- Coullene looks over curiously for a moment.
+        HARVEST_SHOP                  = 14587, -- Trick or treat? I've seen the most sensationally scary costumes around town, kupo!
+        HARVEST_SHOP_HAT              = 14588, -- What a wonderful witch hat, kupo! Since you've shown me your costume, I'll bring out some of my special merchandise, kupo!
+        HARVEST_LILIES_DETECTED       = 17281, -- Ooops! You've stepped in front of the witch!
+        HARVEST_LILIES_PROGRESS       = 17282, -- You can't stop now. You've just started!
+        HARVEST_LILIES_JOINED         = 17292, -- You've joined the procession.
         FRAGMENT_FAR_TOO_SMALL        = 18145, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18146, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         RETRIEVE_DIALOG_ID            = 18181, -- You retrieve <item> from the porter moogle's care.
@@ -143,12 +148,8 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17723487] = 53, -- Vichuel
-            [17723492] = 52, -- Antonian
-            [17723497] = 51, -- Attarena
-        },
+        HARVEST_LILIES_EXORCIST = GetFirstID('Gertrude'),
+        HARVEST_LILIES_WITCHES  = { GetFirstID('Poseaulloie'), GetFirstID('Maryse') },
         EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
     },
 }

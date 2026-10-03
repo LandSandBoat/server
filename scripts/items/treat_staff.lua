@@ -1,18 +1,9 @@
 -----------------------------------
 -- ID: 17566
 -- Treat Staff
--- Latent effect during Harvest Festival events
---
--- This effect is triggered similar to an Additional Effect when attacking monsters.
--- when the effect activates, you will be Warped to your Home Point.
--- This allegedly can trigger on missed attacks and Weapon Skills. TODO: confirm
--- There is no animation present when this effect activates, you will simply disappear and reappear at your Home Point.
--- According to https://wiki.ffo.jp/html/3736.html the effect is
--- only moon phase based when the Harvest Festival event is NOT active but ...
--- Hours were spent attempting to trigger a proc during the moon conditions describe to no avail.
--- (it wasn't changed, seems that information was simply incorrect)
---
--- Calling it 10% proc rate, this is tough to get a decent sample for even during harvest fest event.
+-- Outside the festival: full moon, Darksday, and nighttime.
+-- https://wiki.ffo.jp/html/3736.html
+-- Proc rates and delay are estimates.
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -21,25 +12,38 @@ itemObject.onItemCheck = function(target, item, caster)
     return 0
 end
 
-itemObject.onItemEquip  = function(user, item)
-    user:addListener('ATTACK', 'TREAT_STAFF_MELEE', function(player, target, action)
-        if
-            math.randomInt(1, 100) <= 10 and
-            xi.events.harvestFestival.isHalloweenEnabled()
-        then
-            -- Need a small delay for the swing animation.
-            player:timer(100, function(playerArg)
-                -- We normally NEVER do this, but we want to skip animating the warp itself.
-                playerArg:warp()
-            end)
-        end
-    end)
-end
+itemObject.onItemAdditionalEffect = function(player, target, baseAttackDamage, item)
+    if player:getLocalVar('TreatStaffWarpPending') ~= 0 then
+        return 0, 0, 0
+    end
 
-itemObject.onItemUnequip = function(user, item)
-    user:removeListener('TREAT_STAFF_MELEE')
-    -- user:removeListener('TREAT_STAFF_WS')
-    -- user:removeListener('TREAT_STAFF_MISSED')
+    local moon = VanadielMoonPhase()
+    local hour = VanadielHour()
+    if
+        not xi.events.harvestFestival.isEnabled() and
+        not (
+            VanadielDayOfTheWeek() == xi.day.DARKSDAY and
+            (moon >= 95 or moon >= 90 and VanadielMoonDirection() == 2) and
+            (hour >= 18 or hour < 6)
+        )
+    then
+        return 0, 0, 0
+    end
+
+    local chance = 10
+    if target:getMainLvl() > player:getMainLvl() then
+        chance = 20
+    end
+
+    if math.randomInt(1, 100) <= chance then
+        player:setLocalVar('TreatStaffWarpPending', 1)
+        player:timer(2500, function(playerArg)
+            playerArg:setLocalVar('TreatStaffWarpPending', 0)
+            playerArg:warp()
+        end)
+    end
+
+    return 0, 0, 0
 end
 
 return itemObject
