@@ -400,7 +400,8 @@ void CLatentEffectContainer::CheckLatentsDay()
     ProcessLatentEffects(
         [this](CLatentEffect& latentEffect)
         {
-            if (latentEffect.GetConditionsID() == xi::Latent::TimeOfDay)
+            if (latentEffect.GetConditionsID() == xi::Latent::TimeOfDay ||
+                latentEffect.GetConditionsID() == xi::Latent::HalloweenMoon)
             {
                 return ProcessLatentEffect(latentEffect);
             }
@@ -451,6 +452,7 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
                 case xi::Latent::Iceday:
                 case xi::Latent::Lightningsday:
                 case xi::Latent::Lightsday:
+                case xi::Latent::HalloweenMoon:
                     return ProcessLatentEffect(latentEffect);
                     break;
                 default:
@@ -1115,6 +1117,26 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
                     // Waning Crescent - 43% -> 12%
                     expression = MoonPhase >= 12 && MoonPhase <= 43 && MoonDirection == 1;
                     break;
+            }
+            break;
+        }
+        case xi::Latent::HalloweenMoon:
+        {
+            const auto moonPhase     = vanadiel_time::moon::get_phase(vanaTime);
+            const auto moonDirection = vanadiel_time::moon::get_direction(vanaTime);
+            const auto hour          = vanadiel_time::get_hour(vanaTime);
+
+            if (latentEffect.GetConditionsValue() == 0)
+            {
+                expression = vanadiel_time::get_weekday(vanaTime) == DARKSDAY &&
+                             (hour >= 18 || hour < 6) &&
+                             (moonPhase >= 95 || (moonPhase >= 90 && moonDirection == 2));
+            }
+            else if (latentEffect.GetConditionsValue() == 1)
+            {
+                expression = vanadiel_time::get_weekday(vanaTime) == LIGHTSDAY &&
+                             hour >= 6 && hour < 18 &&
+                             (moonPhase <= 5 || (moonPhase <= 10 && moonDirection == 1));
             }
             break;
         }

@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.initializeZone(zone)
     xi.chocobo.initZone(zone)
     xi.chocoboGame.clearRecord(zone)
     xi.conquest.toggleRegionalNPCs(zone)
@@ -23,6 +23,11 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaEnter(player, triggerArea)
+end
+
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaLeave(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

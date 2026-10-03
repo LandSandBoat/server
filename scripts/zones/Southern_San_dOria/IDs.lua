@@ -42,6 +42,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         HERE_TAKE_THIS                 = 7400,  -- Here, take this...
         IF_YOU_WEAR_THIS               = 7401,  -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                      = 7402,  -- Thank you...
+        HARVEST_PITCHFORK_HINT         = 7403,  -- If two people with the same costumes form a party and approach a bomb balloon, then...
         NOKKHI_BAD_COUNT               = 7420,  -- What kinda smart-alecky baloney is this!? I told you to bring me the same kinda ammunition in complete sets. And don't forget the flowers, neither.
         NOKKHI_GOOD_TRADE              = 7422,  -- And here you go! Come back soon, and bring your friends!
         NOKKHI_BAD_ITEM                = 7423,  -- I'm real sorry, but there's nothing I can do with those.
@@ -142,14 +143,6 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17719303] = 47, -- Machielle
-            [17719304] = 50, -- Corua
-            [17719305] = 48, -- Phamelise
-            [17719306] = 46, -- Apairemant
-            [17719493] = 49, -- Pourette
-        },
         ARPETION  = GetFirstID('Arpetion'),
         CAMEREINE = GetFirstID('Camereine'),
         EMOUSSINE = GetFirstID('Emoussine'),

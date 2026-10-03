@@ -67,7 +67,12 @@ zones[xi.zone.WINDURST_WATERS] =
         CHEF_IN_TRAINING              = 10706, -- I'm a chef-in-training, don'taru you know? One day I'll be as famous-wamous as that Rycharde character in Mhaura.
         NESSRUGETOMALL_SHOP_DIALOG    = 11509, -- Welcome to the Rarab Tail Hostelry.
         DIABOLOS_UNLOCKED             = 11938, -- You are now able to summon Diabolos!
+        HARVEST_SHOP                  = 12263, -- Trick or treat? I've seen the most sensationally scary costumes around town, kupo!
+        HARVEST_SHOP_HAT              = 12264, -- What a wonderful witch hat, kupo! Since you've shown me your costume, I'll bring out some of my special merchandise, kupo!
         DOOR_FIRMLY_SHUT              = 12346, -- The door is firmly shut...
+        HARVEST_LILIES_DETECTED       = 15000, -- Ooops! You've stepped in front of the witch!
+        HARVEST_LILIES_PROGRESS       = 15001, -- You can't stop now. You've just started!
+        HARVEST_LILIES_JOINED         = 15011, -- You've joined the procession.
     },
 
     mob =
@@ -76,14 +81,8 @@ zones[xi.zone.WINDURST_WATERS] =
 
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17752097] = 61, -- Ensasa
-            [17752098] = 60, -- Upih Khachla
-            [17752101] = 59, -- Ness Rugetomal
-            [17752102] = 63, -- Maqu Molpih
-            [17752103] = 62, -- Ahyeekih
-        },
+        HARVEST_LILIES_EXORCIST = GetFirstID('Roger'),
+        HARVEST_LILIES_WITCHES  = { GetFirstID('Bikho_Ronpotteh'), GetFirstID('Guwanana') },
 
         LELEROON_GREEN_DOOR = GetFirstID('Door_House'),
     },

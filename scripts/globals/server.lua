@@ -14,6 +14,7 @@ end
 
 xi.server.onTimeServerTick = function()
     xi.chocobo.onTimeServerTick()
+    xi.events.harvestFestival.onTimeServerTick()
 end
 
 -- Message for use with SmallPacket0x04B

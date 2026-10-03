@@ -99,14 +99,6 @@ zones[xi.zone.BASTOK_MINES] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17735742] = 41, -- Faustin
-            [17735744] = 43, -- Mille
-            [17735747] = 42, -- Aulavia
-            [17735795] = 40, -- Proud Beard
-            [17735818] = 44, -- Emaliveulaux
-        },
         EXPLORER_MOOGLE    = GetFirstID('Explorer_Moogle'),
         LELEROON_BLUE_DOOR = GetFirstID('Door_House'),
         AZETTE             = GetFirstID('Azette'),
