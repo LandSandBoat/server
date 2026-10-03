@@ -24,8 +24,6 @@
 #include "common/settings.h"
 #include "entities/base_entity.h"
 #include "entities/char_entity.h"
-#include "items.h"
-#include "items/item_equipment.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 
@@ -108,7 +106,7 @@ auto personalChocoboSpeed(const CCharEntity* PChar) -> uint8_t
 
     // Purple Race Silks add their rank only while worn; lockstyle does not count.
     auto speed = uint32_t{ chocobo.speed };
-    if (const auto* PBody = PChar->getEquip(SLOT_BODY); PBody && PBody->getID() == ITEMID::PURPLE_RACING_SILKS)
+    if (PChar->getMod(xi::Mod::PERSONAL_CHOCOBO_SPEED) > 0)
     {
         speed += PChar->m_chocoboUserData.silksSpeedBonus;
     }

@@ -274,7 +274,7 @@ whistle.registeredStats = function(player)
     }
 end
 
--- Red Race Silks add a time rank when the chocobo is called; purple ones count only while worn.
+-- Red Racing Silks add their minutes when the chocobo is called. Purple ones count only while worn.
 ---@param player CBaseEntity
 ---@return ChocoboRide?
 whistle.ride = function(player)
@@ -289,10 +289,7 @@ whistle.ride = function(player)
         minutes = xi.rentalChocobo.rideMinutes
     end
 
-    local body = player:getEquippedItem(xi.slot.BODY)
-    if body and body:getID() == xi.item.RED_RACING_SILKS then
-        minutes = math.min(minutes + xi.chocoboRaising.ridingTimePerRank, whistle.ridingMinutes(xi.chocoboRaising.ridingTimeMaxRank))
-    end
+    minutes = minutes + math.max(player:getMod(xi.mod.PERSONAL_CHOCOBO_TIME), 0)
 
     return
     {

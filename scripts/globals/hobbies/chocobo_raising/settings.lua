@@ -36,7 +36,7 @@ xi.chocoboRaising.ridingSpeedBase    = 80
 xi.chocoboRaising.ridingSpeedPerRank = 2.5
 xi.chocoboRaising.ridingSpeedMaxRank = 8
 
--- Minutes. Canter and Red Racing Silks each add a rank.
+-- Minutes. Canter adds a rank, and Red Racing Silks add PERSONAL_CHOCOBO_TIME on top.
 xi.chocoboRaising.ridingTimeBase    = 17
 xi.chocoboRaising.ridingTimePerRank = 4
 xi.chocoboRaising.ridingTimeMaxRank = 7

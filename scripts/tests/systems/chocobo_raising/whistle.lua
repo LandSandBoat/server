@@ -1,6 +1,7 @@
 -----------------------------------
 -- The Chocobo Whistle quest, registration, riding, and the whistle and card trades.
 -----------------------------------
+local ffi           = require('ffi')
 local raisingClient = require('scripts.tests.systems.chocobo_raising.client')
 local helpers       = require('scripts.tests.systems.chocobo_raising.helpers')
 
@@ -220,6 +221,30 @@ describe('Chocobo whistle', function()
             end
         end)
 
+        -- No source shows Red Racing Silks extending /mount, so they do not.
+        it('ignores Red Racing Silks on a personal chocobo called with /mount', function()
+            player:registerChocobo(whistle.registration(gFat))
+            player:addKeyItem(xi.keyItem.CHOCOBO_COMPANION)
+            raisingClient.gotoZone(player, xi.zone.EAST_RONFAURE)
+            player:addItem(xi.item.RED_RACING_SILKS)
+            player:equipItem(xi.item.RED_RACING_SILKS, nil, xi.slot.BODY)
+
+            -- Mount ID 0 is the chocobo.
+            local packet = ffi.new('uint8_t[28]')
+            local id     = player:getID()
+            for byte = 0, 3 do
+                packet[4 + byte] = bit.band(bit.rshift(id, byte * 8), 0xFF)
+            end
+
+            packet[8]  = bit.band(player:getTargID(), 0xFF)
+            packet[9]  = bit.rshift(player:getTargID(), 8)
+            packet[10] = 0x1A
+            player.packets:send(0x01A, packet, assert(ffi.sizeof(packet)))
+
+            local effect = assert(player:getStatusEffect(xi.effect.MOUNTED), 'Expected to mount')
+            assert(effect:getDuration() == gFat.minutes * 60 * 1000, string.format('Expected %d minutes, got %d ms', gFat.minutes, effect:getDuration()))
+        end)
+
         it('rides a rental at rental speed after registering', function()
             player:registerChocobo(whistle.registration(gFat))
             raisingClient.gotoZone(player, xi.zone.EAST_RONFAURE)
@@ -233,13 +258,13 @@ describe('Chocobo whistle', function()
         end)
 
         -- bg-wiki: the purple silks rank does not snapshot, and it works on /mount too.
-        it('adds a rank of time with red racing silks when called, and of speed only while purple silks are worn', function()
+        it('adds time with red racing silks when called, and a rank of speed only while purple silks are worn', function()
             local registration = whistle.registration(gFat)
             player:registerChocobo(registration)
 
             player:addItem(xi.item.RED_RACING_SILKS)
             player:equipItem(xi.item.RED_RACING_SILKS, nil, xi.slot.BODY)
-            assert(whistle.ride(player).seconds == (gFat.minutes + 4) * 60, 'Expected one time rank')
+            assert(whistle.ride(player).seconds == (gFat.minutes + 10) * 60, 'Expected 10 more minutes')
             player:unequipItem(xi.slot.BODY)
 
             assert(registration.silksSpeedBonus == 2, string.format('Expected one speed rank, got %d', registration.silksSpeedBonus))

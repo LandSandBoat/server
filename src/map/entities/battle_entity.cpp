@@ -1989,7 +1989,7 @@ void CBattleEntity::delEquipModifiers(CItemEquipment* PItem, bool isDelevel /* =
  *                                                                      *
  ************************************************************************/
 
-int16 CBattleEntity::getMod(xi::Mod modID)
+int16 CBattleEntity::getMod(xi::Mod modID) const
 {
     if (modID == xi::Mod::NONE)
     {

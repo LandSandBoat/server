@@ -178,8 +178,9 @@ Fitted to few samples or taken from guides, with no capture behind them:
 - Personality: an exact tie gives easygoing; which of DSC and RCP is sensitive. Captures show it
   settling in the chick stage while every stat is under 32, and hint that the plan history drives it
 - Adult features need the stat highest and at Average (96)
-- Whistle: Canter's 4 minutes, Red Racing Silks applied when called, event 830's variant after a
-  miss, the paid recharge after accepting, buying a lost whistle for 20000 gil
+- Whistle: Canter's 4 minutes, Red Racing Silks' 10 minutes (the JP wiki; a BG talk page test saw 4)
+  applied on the whistle only, event 830's variant after a miss, the paid recharge after accepting, buying
+  a lost whistle for 20000 gil
 - A handkerchief out at give-up or retirement counts as missed; a day away changes nothing;
   registering needs an adult
 - Breeding: 5% mutation per gene, ability inheritance at 60% plus 3 per RCP rank, the plans' sire
