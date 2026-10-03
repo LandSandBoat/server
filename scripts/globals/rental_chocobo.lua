@@ -9,6 +9,11 @@ require('scripts/globals/missions')
 xi = xi or {}
 xi.rentalChocobo = xi.rentalChocobo or {}
 
+xi.rentalChocobo.rideMinutes = 30
+
+-- Below level 20, a rental rides this long and gear adds nothing.
+xi.rentalChocobo.lowLevelRideMinutes = 15
+
 --[[
 Description:
 [1] Level required to rent a chocobo
@@ -137,7 +142,7 @@ xi.rentalChocobo.renterOnTrade = function(player, npc, trade, eventSucceed, even
             then
                 local currency = player:getGil()
                 local price    = 0
-                local duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
+                local duration = (xi.rentalChocobo.rideMinutes + player:getMod(xi.mod.CHOCOBO_RIDING_TIME)) * 60
 
                 player:setLocalVar('Chocopass', 1)
                 player:setLocalVar('ChocopassDuration', duration)
@@ -203,7 +208,7 @@ xi.rentalChocobo.renterOnEventFinish = function(player, csid, option, eventSucce
         local zoneId   = player:getZoneID()
         local info     = xi.rentalChocobo.chocoboInfo[zoneId]
         local trade    = player:getLocalVar('Chocopass')
-        local duration = 900
+        local duration = xi.rentalChocobo.lowLevelRideMinutes * 60
 
         if not info then
             return
@@ -220,7 +225,7 @@ xi.rentalChocobo.renterOnEventFinish = function(player, csid, option, eventSucce
             player:setLocalVar('[CHOCOBO]price', 0)
 
             if mLvl >= 20 then
-                duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
+                duration = (xi.rentalChocobo.rideMinutes + player:getMod(xi.mod.CHOCOBO_RIDING_TIME)) * 60
             end
 
             if chocoGame ~= 0 then -- Start A Chocobo Riding Game
