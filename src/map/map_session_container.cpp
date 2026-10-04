@@ -318,6 +318,27 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
         });
 }
 
+void MapSessionContainer::shutdown()
+{
+    TracyZoneScoped;
+
+    while (!sessions_.empty())
+    {
+        destroySession(sessions_.begin()->second.get());
+    }
+
+    for (auto& [charId, session] : pending_sessions_)
+    {
+        if (session->PChar && session->PChar->loc.zone)
+        {
+            session->PChar->loc.zone->DecreaseZoneCounter(session->PChar.get());
+        }
+
+        session->PChar.reset();
+    }
+    pending_sessions_.clear();
+}
+
 void MapSessionContainer::destroySession(IPP ipp)
 {
     TracyZoneScoped;
