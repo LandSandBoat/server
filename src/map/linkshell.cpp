@@ -195,9 +195,9 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                     slot = SLOT_LINK2;
                 }
 
-                CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PMember->getEquip(slot);
+                CItemLinkshell* PItemLinkshell = PMember->getLinkshell(slot);
 
-                if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL) && PItemLinkshell->GetLSID() == m_id)
+                if (PItemLinkshell != nullptr && PItemLinkshell->GetLSID() == m_id)
                 {
                     auto PNewItem = xi::items::spawn(newId);
                     if (PNewItem == nullptr)
@@ -265,18 +265,18 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
         {
             CCharEntity* PMember = member;
 
-            CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK1);
+            CItemLinkshell* PItemLinkshell = PMember->getLinkshell(SLOT_LINK1);
             SLOTTYPE        slot           = SLOT_LINK1;
             int             lsNum          = 1;
 
             if (!PItemLinkshell || (PItemLinkshell->GetLSID() != lsid))
             {
-                PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK2);
+                PItemLinkshell = PMember->getLinkshell(SLOT_LINK2);
                 slot           = SLOT_LINK2;
                 lsNum          = 2;
             }
 
-            if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
+            if (PItemLinkshell != nullptr)
             {
                 linkshell::DelOnlineMember(PMember, PItemLinkshell);
 

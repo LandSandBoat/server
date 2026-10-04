@@ -136,9 +136,9 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
     // Unequip old linkshell
     if (oldLinkshell)
     {
-        auto* POldItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(slot));
+        auto* POldItemLinkshell = PChar->getLinkshell(slot);
 
-        if (POldItemLinkshell && POldItemLinkshell->isType(ITEM_LINKSHELL))
+        if (POldItemLinkshell)
         {
             linkshell::DelOnlineMember(PChar, POldItemLinkshell);
 

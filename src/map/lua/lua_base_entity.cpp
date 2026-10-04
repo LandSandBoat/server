@@ -4372,13 +4372,13 @@ auto CLuaBaseEntity::getEquippedItem(uint8 slot) -> CItem*
             return nullptr;
         }
 
-        auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
-        auto* slotItem = PChar->getEquip(static_cast<SLOTTYPE>(slot));
-
-        if (slotItem)
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        if (slot >= SLOT_LINK1)
         {
-            return slotItem;
+            return PChar->getLinkshell(static_cast<SLOTTYPE>(slot));
         }
+
+        return PChar->getEquip(static_cast<SLOTTYPE>(slot));
     }
 
     return nullptr;
@@ -5738,9 +5738,13 @@ auto CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID
             PItem = PStorage->GetItem(slotID);
         }
     }
+    else if (equipID >= SLOT_LINK1)
+    {
+        PItem = PChar->getLinkshell(static_cast<SLOTTYPE>(equipID));
+    }
     else
     {
-        PItem = PChar->getEquip((SLOTTYPE)equipID);
+        PItem = PChar->getEquip(static_cast<SLOTTYPE>(equipID));
     }
 
     return PItem;

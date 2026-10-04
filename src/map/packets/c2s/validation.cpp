@@ -93,17 +93,17 @@ auto PacketValidator::hasLinkshellRank(const uint8_t slot, const LSTYPE rank) ->
     switch (slot)
     {
         case 1:
-            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar_->getEquip(SLOT_LINK1));
+            PItemLinkshell = PChar_->getLinkshell(SLOT_LINK1);
             break;
         case 2:
-            PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar_->getEquip(SLOT_LINK2));
+            PItemLinkshell = PChar_->getLinkshell(SLOT_LINK2);
             break;
         default:
             result_.addError("Invalid linkshell slot.");
             return *this;
     }
 
-    if (!PItemLinkshell || !PItemLinkshell->isType(ITEM_LINKSHELL))
+    if (!PItemLinkshell)
     {
         result_.addError("Invalid linkshell item.");
         return *this;

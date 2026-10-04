@@ -33,20 +33,9 @@ namespace
 
 const auto hasLinkshellEquipped = [](const CCharEntity* PChar, CItemLinkshell* POffered) -> bool
 {
-    const auto asLinkshell = [](CItemEquipment* PEquipped) -> CItemLinkshell*
-    {
-        auto* PLinkshell = reinterpret_cast<CItemLinkshell*>(PEquipped);
-        if (!PLinkshell || !PLinkshell->isType(ITEM_LINKSHELL))
-        {
-            return nullptr;
-        }
-
-        return PLinkshell;
-    };
-
     for (const auto slot : { SLOT_LINK1, SLOT_LINK2 })
     {
-        auto* PEquipped = asLinkshell(PChar->getEquip(slot));
+        auto* PEquipped = PChar->getLinkshell(slot);
         if (PEquipped && PEquipped->GetLSID() == POffered->GetLSID())
         {
             return true;

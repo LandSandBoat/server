@@ -99,13 +99,13 @@ void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PC
             {
                 case 1:
                 {
-                    PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
+                    PItemLinkshell = PChar->getLinkshell(SLOT_LINK1);
                     PLinkshell     = PChar->PLinkshell1;
                 }
                 break;
                 case 2:
                 {
-                    PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK2));
+                    PItemLinkshell = PChar->getLinkshell(SLOT_LINK2);
                     PLinkshell     = PChar->PLinkshell2;
                 }
                 break;
