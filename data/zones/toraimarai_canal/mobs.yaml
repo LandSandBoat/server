@@ -302,7 +302,7 @@ templates:
           item:   aptant_of_pera
         - chance: uncommon
           item:   aptant_of_geoc
-    content: abyssea
+    content: wotg
 
   Dark_Aspic:
     id:            908
@@ -739,7 +739,7 @@ templates:
           item:   aptant_of_aecus
         - chance: common
           item:   aptant_of_durus
-    content: abyssea
+    content: wotg
 
   Lich:
     id:            2407
