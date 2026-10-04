@@ -811,6 +811,7 @@ templates:
         - chance: uncommon
           item:   circes_hat
       steal: silver_beastcoin
+    content: wotg
 
   Troika_Bats:
     id:            4915
