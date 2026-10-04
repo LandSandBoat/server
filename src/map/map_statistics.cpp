@@ -82,7 +82,7 @@ void MapStatistics::set(Key key, int64 value)
 
 auto MapStatistics::get(Key key) const -> int64
 {
-    if (statistics_.find(key) == statistics_.end())
+    if (!statistics_.contains(key))
     {
         return 0;
     }

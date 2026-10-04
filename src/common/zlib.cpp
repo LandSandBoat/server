@@ -26,40 +26,11 @@
 
 #include "common/types/error_or.h"
 
+#include <bit>
 #include <cassert>
 #include <cstring>
 #include <memory>
 #include <string>
-
-#if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||           \
-    defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) || \
-    defined(__MIBSEB__)
-#define XI_BIG_ENDIAN 1
-#else
-#define XI_BIG_ENDIAN 0
-#endif
-
-#if XI_BIG_ENDIAN
-#if defined(__clang__) || (__GNUC__ >= 4 && __GNUC_MINOR__ >= 3 && !defined(__MINGW32__) && !defined(__MINGW64__))
-#define bswap16 __builtin_bswap16
-#define bswap32 __builtin_bswap32
-#define bswap64 __builtin_bswap64
-#elif defined(__GLIBC__)
-#include <byteswap.h>
-#define bswap16 __bswap_16
-#define bswap32 __bswap_32
-#define bswap64 __bswap_64
-#elif defined(__NetBSD__)
-#include <machine/bswap.h> /* already named bswap16/32/64 */
-#include <sys/types.h>
-#elif defined(_MSC_VER)
-#define bswap16 _byteswap_ushort
-#define bswap32 _byteswap_ulong
-#define bswap64 _byteswap_uint64
-#else
-#error "No compiler builtins for byteswap available"
-#endif
-#endif
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
 #define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
@@ -77,16 +48,15 @@ struct zlib
 
 static zlib zlib;
 
-static void swap32_if_be(const uint32* v, const size_t memb)
+static void swap32_if_be(uint32* v, const size_t memb)
 {
-#if XI_BIG_ENDIAN
-    for (size_t i = 0; i < memb; ++i)
+    if constexpr (std::endian::native == std::endian::big)
     {
-        v[i] = bswap32(v[i]);
+        for (size_t i = 0; i < memb; ++i)
+        {
+            v[i] = std::byteswap(v[i]);
+        }
     }
-#else
-    (void)v, (void)memb;
-#endif
 }
 
 static auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<uint32>>

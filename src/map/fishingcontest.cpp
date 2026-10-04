@@ -240,19 +240,18 @@ void ScoreContest()
     TracyZoneScoped;
 
     // Sort the list first
-    // clang-format off
-        std::sort(FishingContestEntries.begin(), FishingContestEntries.end(), [](auto&& a, auto&& b) -> bool
-        {
-            if (CurrentFishingContest.measure == FISHING_CONTEST_MEASURE::GREATEST)
-            {
-                return a.score == b.score ? a.submitTime < b.submitTime : a.score > b.score;
-            }
-            else
-            {
-                return a.score == b.score ? a.submitTime < b.submitTime : b.score > a.score;
-            }
-        });
-    // clang-format on
+    std::ranges::sort(FishingContestEntries,
+                      [](const auto& a, const auto& b)
+                      {
+                          if (CurrentFishingContest.measure == FISHING_CONTEST_MEASURE::GREATEST)
+                          {
+                              return a.score == b.score ? a.submitTime < b.submitTime : a.score > b.score;
+                          }
+                          else
+                          {
+                              return a.score == b.score ? a.submitTime < b.submitTime : b.score > a.score;
+                          }
+                      });
 
     // Apply Rankings
     // Iterate over the vector and apply the contestRank value
@@ -275,12 +274,7 @@ void ScoreContest()
         }
 
         // Set the number of times the score appears and copy it to dataset a and b
-        // clang-format off
-            entry.share   = std::count_if(FishingContestEntries.begin(), FishingContestEntries.end(), [&score](auto& a) -> bool
-            {
-                return a.score == score;
-            });
-        // clang-format on
+        entry.share = std::ranges::count(FishingContestEntries, score, &FishingContestEntry::score);
 
         entry.dataset_b   = entry.share; // Duplicated.  Uncertain as to definition
         entry.resultCount = FishingRankEntryCount();
@@ -339,7 +333,7 @@ FishingContestEntry* GetPlayerEntry(CCharEntity* PChar)
     for (auto&& entry : FishingContestEntries)
     {
         // Set the rank value
-        if (strcmp(PChar->name.c_str(), entry.name) == 0)
+        if (PChar->name == entry.name)
         {
             return &entry;
         }
@@ -512,7 +506,7 @@ bool SubmitFish(CCharEntity* PChar, uint32 score)
     // Check to see if the player has already submitted a fish
     for (int it = 0; it < (int)FishingContestEntries.size(); it++)
     {
-        if (std::strcmp(PChar->name.c_str(), FishingContestEntries[it].name) == 0)
+        if (PChar->name == FishingContestEntries[it].name)
         {
             FishingContestEntries.erase(FishingContestEntries.begin() + it);
             break;
@@ -522,7 +516,7 @@ bool SubmitFish(CCharEntity* PChar, uint32 score)
     // Fill out the entry with the current data
     FishingContestEntry entry;
 
-    std::strncpy(entry.name, PChar->name.c_str(), PChar->name.size());
+    PChar->name.copy(entry.name, sizeof(entry.name) - 1);
     entry.mjob        = (uint8)PChar->GetMJob();
     entry.sjob        = (uint8)PChar->GetSJob();
     entry.mlvl        = PChar->GetMLevel();
@@ -561,12 +555,11 @@ bool WithdrawFish(CCharEntity* PChar)
         }
 
         // Remove from the in-memory vector
-        // clang-format off
-            auto it = std::find_if(FishingContestEntries.begin(), FishingContestEntries.end(), [&PChar](auto&& e) -> bool
-            {
-                return std::strcmp(PChar->name.c_str(), e.name) == 0;
-            });
-        // clang-format on
+        auto it = std::ranges::find_if(FishingContestEntries,
+                                       [&PChar](auto&& e) -> bool
+                                       {
+                                           return PChar->name == e.name;
+                                       });
 
         if (it != FishingContestEntries.end())
         {
@@ -759,7 +752,7 @@ void LoadContestEntries()
         {
             FishingContestEntry entry;
 
-            std::strncpy(entry.name, rset->get<std::string>("charname").c_str(), rset->get<std::string>("charname").size());
+            rset->get<std::string>("charname").copy(entry.name, sizeof(entry.name) - 1);
 
             entry.mjob        = rset->get<uint8>("mjob");
             entry.sjob        = rset->get<uint8>("sjob");
@@ -812,7 +805,7 @@ void BuildPlaceholderEntries()
         // Build the entry based on generated data
         std::string fakeName = fmt::format(" SmallFisher{:02d} ", fakeEntryNumber);
 
-        std::strncpy(fakeEntry.name, fakeName.c_str(), fakeName.size());
+        fakeName.copy(fakeEntry.name, sizeof(fakeEntry.name) - 1);
         fakeEntry.mjob        = ((fakeEntryNumber - 1) % 18) + 1;
         fakeEntry.sjob        = 0;
         fakeEntry.mlvl        = jobLevels[(fakeEntryNumber - 1) % 5];

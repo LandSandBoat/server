@@ -348,10 +348,11 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
     std::vector<OffMeshCandidate> unique;
     for (const auto& c : candidates)
     {
-        const bool dupe = std::any_of(unique.begin(), unique.end(), [&](const OffMeshCandidate& u)
-                                      {
-                                          return closeBy(c.start, u.start) && closeBy(c.end, u.end);
-                                      });
+        const bool dupe = std::ranges::any_of(unique,
+                                              [&](const OffMeshCandidate& u)
+                                              {
+                                                  return closeBy(c.start, u.start) && closeBy(c.end, u.end);
+                                              });
         if (!dupe)
         {
             unique.push_back(c);
@@ -693,9 +694,8 @@ void NavMeshBuilder::getWorldBounds(float* bmin, float* bmax) const
 // Requiring all three leaves sloped geometry that merely crosses the plane alone.
 auto NavMeshBuilder::onYSkipPlane(const float y0, const float y1, const float y2, const std::vector<float>& ySkipPlanes) -> bool
 {
-    return std::any_of(
-        ySkipPlanes.begin(),
-        ySkipPlanes.end(),
+    return std::ranges::any_of(
+        ySkipPlanes,
         [&](const float plane)
         {
             return std::abs(y0 - plane) <= Y_SKIP_PLANE_TOLERANCE &&
@@ -721,9 +721,8 @@ auto NavMeshBuilder::insideSkipSphere(const float* v0, const float* v1, const fl
         return (dx2 + dy2 + dz2) <= (sphere.radius * sphere.radius);
     };
 
-    return std::any_of(
-        skipSpheres.begin(),
-        skipSpheres.end(),
+    return std::ranges::any_of(
+        skipSpheres,
         [&](const NavMeshSkipSphere& sphere)
         {
             return contains(sphere, v0) && contains(sphere, v1) && contains(sphere, v2);

@@ -25,6 +25,7 @@
 #include "lua.h"
 #include "utils.h"
 
+#include <algorithm>
 #include <filesystem>
 #include <stdexcept>
 #include <string>
@@ -114,15 +115,11 @@ std::atomic<uint64_t> generation{ 0 };
 // so we can pass them to the lua settings properly typed.
 bool isNumber(const std::string& stringValue)
 {
-    for (const char c : stringValue)
-    {
-        if (std::isdigit(c) == 0)
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return std::ranges::all_of(stringValue,
+                               [](const char c)
+                               {
+                                   return std::isdigit(c) != 0;
+                               });
 }
 
 //

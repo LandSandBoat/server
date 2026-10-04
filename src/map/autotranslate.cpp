@@ -28525,7 +28525,7 @@ std::string doLookup(const std::string& str, std::vector<uint16>& data)
 
     uint32 key = (type << (8 * 0)) + (language << (8 * 1)) + (category << (8 * 2)) + (index << (8 * 3));
 
-    if (values.find(key) == values.end())
+    if (!values.contains(key))
     {
         ShowError(fmt::format("Invalid key generation during autotranslate lookup: {}, using '?'", str));
         return "?";

@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
+#include <algorithm>
 #include <bitset>
 #include <deque>
 #include <map>
@@ -67,7 +68,7 @@ struct EventInfo : EventPrep
 
     bool hasCutsceneOption(int32 _option)
     {
-        return std::find(cutsceneOptions.begin(), cutsceneOptions.end(), _option) != cutsceneOptions.end();
+        return std::ranges::contains(cutsceneOptions, _option);
     }
 
     void reset()

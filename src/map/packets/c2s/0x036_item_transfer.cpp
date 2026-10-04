@@ -110,7 +110,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
             return;
         }
 
-        if (std::find(tradeItems.begin(), tradeItems.begin() + slotId, PItem) != tradeItems.begin() + slotId)
+        if (std::ranges::contains(tradeItems.begin(), tradeItems.begin() + slotId, PItem))
         {
             ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with duplicate inventory slot {}!", PChar->getName(), PNpc->getName(), invSlotId);
             return;

@@ -63,14 +63,9 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
 Recast_t* CRecastContainer::GetRecast(const RECASTTYPE type, const Recast id)
 {
     RecastList_t* list = GetRecastList(type);
-    for (auto&& recast : *list)
-    {
-        if (recast.ID == id)
-        {
-            return &recast;
-        }
-    }
-    return nullptr;
+
+    const auto it = std::ranges::find(*list, id, &Recast_t::ID);
+    return it != list->end() ? &*it : nullptr;
 }
 
 Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
@@ -177,15 +172,11 @@ void CRecastContainer::Del(RECASTTYPE type, Recast id)
     }
     else
     {
-        PRecastList->erase(
-            std::remove_if(
-                PRecastList->begin(),
-                PRecastList->end(),
-                [&id](auto& recast)
-                {
-                    return recast.ID == id;
-                }),
-            PRecastList->end());
+        std::erase_if(*PRecastList,
+                      [&id](auto& recast)
+                      {
+                          return recast.ID == id;
+                      });
     }
 }
 
@@ -218,13 +209,7 @@ bool CRecastContainer::Has(RECASTTYPE type, Recast id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    auto maybeRecast = std::find_if(
-        PRecastList->begin(),
-        PRecastList->end(),
-        [&id](auto& recast)
-        {
-            return recast.ID == id;
-        });
+    auto maybeRecast = std::ranges::find(*PRecastList, id, &Recast_t::ID);
 
     return maybeRecast != PRecastList->end();
 }

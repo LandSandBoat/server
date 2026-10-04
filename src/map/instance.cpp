@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include <algorithm>
 #include <atomic>
 #include <filesystem>
 #include <thread>
@@ -266,14 +267,7 @@ void CInstance::CheckTime(timer::time_point tick)
 
 bool CInstance::CharRegistered(CCharEntity* PChar)
 {
-    for (auto id : m_registeredChars)
-    {
-        if (PChar->id == id)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::contains(m_registeredChars, PChar->id);
 }
 
 void CInstance::ClearEntities()

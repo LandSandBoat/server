@@ -106,30 +106,12 @@ uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
 
 uint8 ConquestData::getRegionControlCount(NATION_TYPE nation) const
 {
-    uint8 count = 0;
-    for (const auto& regionControl : regionControls)
-    {
-        if (regionControl.current == nation)
-        {
-            count++;
-        }
-    }
-
-    return count;
+    return static_cast<uint8>(std::ranges::count(regionControls, nation, &region_control_t::current));
 }
 
 uint8 ConquestData::getPrevRegionControlCount(NATION_TYPE nation) const
 {
-    uint8 count = 0;
-    for (const auto& regionControl : regionControls)
-    {
-        if (regionControl.prev == nation)
-        {
-            count++;
-        }
-    }
-
-    return count;
+    return static_cast<uint8>(std::ranges::count(regionControls, nation, &region_control_t::prev));
 }
 
 auto ConquestData::getRegionControls() const -> const std::vector<region_control_t>&

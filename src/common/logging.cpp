@@ -282,10 +282,7 @@ auto logging::GetBacktrace() -> std::vector<std::string>
     const auto traces  = TraceBuffer->snapshot();
     entries.insert(entries.end(), traces.begin(), traces.end());
 
-    std::sort(entries.begin(), entries.end(), [](const BacktraceEntry& lhs, const BacktraceEntry& rhs)
-              {
-                  return lhs.sequence < rhs.sequence;
-              });
+    std::ranges::sort(entries, {}, &BacktraceEntry::sequence);
 
     std::vector<std::string> backtrace;
     backtrace.reserve(entries.size());

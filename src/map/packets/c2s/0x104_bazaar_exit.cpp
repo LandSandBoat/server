@@ -42,13 +42,11 @@ void GP_CLI_COMMAND_BAZAAR_EXIT::process(MapSession* PSession, CCharEntity* PCha
 
     if (auto* PTarget = static_cast<CCharEntity*>(PEntity); PTarget->id == PChar->BazaarID.UniqueNo)
     {
-        for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
-        {
-            if (PTarget->BazaarCustomers[i].UniqueNo == PChar->id)
-            {
-                PTarget->BazaarCustomers.erase(PTarget->BazaarCustomers.begin() + i--);
-            }
-        }
+        std::erase_if(PTarget->BazaarCustomers,
+                      [PChar](const auto& customer)
+                      {
+                          return customer.UniqueNo == PChar->id;
+                      });
         if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
         {
             PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SHOPPING>(PChar, GP_SERV_COMMAND_BAZAAR_SHOPPING_STATE::Exit);

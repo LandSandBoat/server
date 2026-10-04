@@ -242,9 +242,8 @@ auto CParty::MemberCount(const xi::ZoneId ZoneID) -> uint8
         if (member->objtype == TYPE_PC)
         {
             auto* charMember = static_cast<CCharEntity*>(member);
-            std::for_each(
-                charMember->PTrusts.begin(),
-                charMember->PTrusts.end(),
+            std::ranges::for_each(
+                charMember->PTrusts,
                 [&](CTrustEntity* trust)
                 {
                     count++;
@@ -268,15 +267,13 @@ CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
         return nullptr;
     }
 
-    for (auto& member : members)
-    {
-        if (strcmpi(memberName.c_str(), member->getName().c_str()) == 0)
-        {
-            return member;
-        }
-    }
+    const auto it = std::ranges::find_if(members,
+                                         [&](const auto* member)
+                                         {
+                                             return strcmpi(memberName.c_str(), member->getName().c_str()) == 0;
+                                         });
 
-    return nullptr;
+    return it != members.end() ? *it : nullptr;
 }
 
 void CParty::RemoveMember(CBattleEntity* PEntity)
@@ -300,7 +297,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
     }
     else
     {
-        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+        auto memberToDelete = std::ranges::find(members, PEntity);
 
         if (memberToDelete != members.end())
         {
@@ -397,7 +394,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
     }
     else
     {
-        auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+        auto memberToDelete = std::ranges::find(members, PEntity);
 
         if (memberToDelete != members.end())
         {
@@ -467,7 +464,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
         return;
     }
 
-    auto memberToDelete = std::find(members.begin(), members.end(), PEntity);
+    auto memberToDelete = std::ranges::find(members, PEntity);
 
     if (memberToDelete != members.end())
     {
@@ -499,16 +496,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
                 m_PAlliance->setMainParty(nullptr);
             }
 
-            auto it = m_PAlliance->partyList.begin();
-            while (it != m_PAlliance->partyList.end())
-            {
-                if (this == *it)
-                {
-                    it = m_PAlliance->partyList.erase(it);
-                    continue;
-                }
-                it++;
-            }
+            std::erase(m_PAlliance->partyList, this);
 
             if (m_PAlliance->partyList.empty())
             {
@@ -612,7 +600,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
         return;
     }
 
-    if (std::find(members.begin(), members.end(), PEntity) != members.end())
+    if (std::ranges::contains(members, PEntity))
     {
         ShowWarning("CParty::AddMember() - PEntity was already in the member list!");
         return;

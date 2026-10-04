@@ -426,9 +426,8 @@ auto CZoneInstance::ZoneServer(timer::time_point tick) -> Task<void>
         instancesByRun_.erase(PInstance->runId());
 
         m_InstanceList.erase(
-            std::find_if(
-                m_InstanceList.begin(),
-                m_InstanceList.end(),
+            std::ranges::find_if(
+                m_InstanceList,
                 [&PInstance](const auto& el)
                 {
                     return el.get() == PInstance;

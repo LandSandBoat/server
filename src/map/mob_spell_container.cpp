@@ -355,7 +355,7 @@ Maybe<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* P
     };
     // clang-format on
 
-    std::size_t    weakestIndex     = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t    weakestIndex     = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
     Maybe<SpellID> choice           = std::nullopt;
     auto           Weakness_Element = weakestIndex + 1;
     if (spell::GetSpell(spellId) != nullptr)
@@ -430,7 +430,7 @@ Maybe<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* P
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;
@@ -487,7 +487,7 @@ Maybe<SpellID> CMobSpellContainer::StormDayAgainstTargetWeakness(CBattleEntity* 
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;
@@ -554,7 +554,7 @@ Maybe<SpellID> CMobSpellContainer::HelixAgainstTargetWeakness(CBattleEntity* PTa
     };
     // clang-format on
 
-    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+    std::size_t weakestIndex = std::ranges::distance(resistances.begin(), std::ranges::min_element(resistances));
 
     // TODO: Figure this out properly:
     Maybe<SpellID> choice = std::nullopt;
@@ -711,23 +711,12 @@ bool CMobSpellContainer::HasSpells() const
 
 bool CMobSpellContainer::HasMPSpells() const
 {
-    for (auto spell : m_damageList)
+    const auto hasMPCost = [](SpellID spell)
     {
-        if (spell::GetSpell(spell)->hasMPCost())
-        {
-            return true;
-        }
-    }
+        return spell::GetSpell(spell)->hasMPCost();
+    };
 
-    for (auto spell : m_buffList)
-    {
-        if (spell::GetSpell(spell)->hasMPCost())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(m_damageList, hasMPCost) || std::ranges::any_of(m_buffList, hasMPCost);
 }
 
 Maybe<SpellID> CMobSpellContainer::GetAggroSpell()
@@ -1051,12 +1040,5 @@ bool CMobSpellContainer::HasSevereSpells() const
 
 bool CMobSpellContainer::HasNaSpell(SpellID spellId) const
 {
-    for (auto spell : m_naList)
-    {
-        if (spell == spellId)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::contains(m_naList, spellId);
 }

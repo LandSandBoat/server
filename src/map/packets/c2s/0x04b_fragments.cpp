@@ -94,7 +94,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
             const FishingContestEntry* PEntry = fishingcontest::GetPlayerEntry(PChar);
 
             // For any chunk, we include at least the char name and the total number of entries
-            std::strncpy(selfEntry.name, PChar->name.c_str(), PChar->name.size());
+            PChar->name.copy(selfEntry.name, sizeof(selfEntry.name) - 1);
             selfEntry.resultCount = totalEntries;
 
             if (PEntry != nullptr)

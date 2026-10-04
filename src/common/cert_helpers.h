@@ -121,7 +121,7 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
         std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
         unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
 
-        std::memcpy(commonNameIpAddr, authIpAddr.c_str(), authIpAddr.length());
+        authIpAddr.copy(reinterpret_cast<char*>(commonNameIpAddr), sizeof(commonNameIpAddr) - 1);
 
         const auto organization = fmt::format("LSB self-signed certificate for {} server", name);
         X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>(organization.c_str()), -1, -1, 0);

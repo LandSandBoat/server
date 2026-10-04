@@ -37,6 +37,7 @@
 #include "data/enums/zone_type.h"
 #include "data/loader.h"
 
+#include <algorithm>
 #include <array>
 #include <fstream>
 #include <unordered_set>
@@ -289,7 +290,7 @@ Maybe<std::string> validateCharacterName(const std::string& name)
         for (const auto& entry : badWordsList)
         {
             const auto badWord = to_upper(entry.second.as<std::string>());
-            if (potentialName.find(badWord) != std::string::npos)
+            if (potentialName.contains(badWord))
             {
                 return fmt::format("Name matched with bad words list <{}>.", badWord);
             }
@@ -389,10 +390,7 @@ bool isStringMalformed(const std::string& str, std::size_t max_length)
     const bool isEmpty   = str.empty();
     const bool isTooLong = str.size() > max_length;
 
-    const bool hasInvalidChar = std::any_of(
-        str.cbegin(),
-        str.cend(),
-        unprintableChar);
+    const bool hasInvalidChar = std::ranges::any_of(str, unprintableChar);
 
     return isEmpty || isTooLong || hasInvalidChar;
 }
@@ -629,7 +627,7 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
 {
     char_mini createchar{};
 
-    std::memcpy(createchar.m_name, session.requestedNewCharacterName.c_str(), 16);
+    session.requestedNewCharacterName.copy(reinterpret_cast<char*>(createchar.m_name), sizeof(createchar.m_name) - 1);
 
     const auto charName = asStringFromUntrustedSource(createchar.m_name);
 
@@ -740,7 +738,7 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
 std::string getHashFromPacket(const std::string& ip_str, uint8* data)
 {
     auto hash = asStringFromUntrustedSource(data + 12, 16);
-    if (authenticatedSessions_[ip_str].find(hash) == authenticatedSessions_[ip_str].end())
+    if (!authenticatedSessions_[ip_str].contains(hash))
     {
         return "";
     }

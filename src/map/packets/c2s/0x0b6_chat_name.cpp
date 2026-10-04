@@ -78,7 +78,7 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
     const auto recipientName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
     const auto rawMessage    = asStringFromUntrustedSource(this->Mes, messageLength);
 
-    if (strcmp(recipientName.c_str(), "_CUSTOM_MENU") == 0 &&
+    if (recipientName == "_CUSTOM_MENU" &&
         luautils::HasCustomMenuContext(PChar))
     {
         luautils::HandleCustomMenu(PChar, rawMessage);

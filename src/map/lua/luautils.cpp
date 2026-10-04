@@ -111,8 +111,10 @@
 
 #include <common/types/hash_map.h>
 
+#include <algorithm>
 #include <array>
 #include <filesystem>
+#include <functional>
 #include <limits>
 #include <ranges>
 #include <string>
@@ -1094,7 +1096,7 @@ sol::table GetLuaObjectFromFilename(const std::string& filename)
         parts.emplace_back(part.string());
     }
 
-    auto it = std::find(parts.begin(), parts.end(), "scripts");
+    auto it = std::ranges::find(parts, "scripts");
     if (it == parts.end())
     {
         ShowError("luautils::GetLuaObjectFromFilename: Invalid filename: %s", filename);
@@ -1208,13 +1210,7 @@ void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, const uint8
     }
 
     // Sort highest to lowest
-    std::sort(
-        expDifficultyTable.begin(),
-        expDifficultyTable.end(),
-        [](const std::pair<uint16, EMobDifficulty>& a, const std::pair<uint16, EMobDifficulty>& b)
-        {
-            return a.first > b.first;
-        });
+    std::ranges::sort(expDifficultyTable, std::greater{}, &std::pair<uint16, EMobDifficulty>::first);
 
     std::pair<uint16, uint8> iep = { incrediblyEasyPreyLevel, incrediblyEasyPreyMinExp };
 
@@ -1373,7 +1369,7 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, con
         "GetFirstID",
         [&](const std::string& name) -> Maybe<uint32>
         {
-            if (lookup.find(name) != lookup.end())
+            if (lookup.contains(name))
             {
                 return lookup[name].front();
             }
@@ -1391,13 +1387,13 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, con
         [&](const std::string& name) -> sol::table
         {
             // Is it already built and cached: return it
-            if (idLuaTables.find(name) != idLuaTables.end())
+            if (idLuaTables.contains(name))
             {
                 return idLuaTables[name];
             }
 
             // If we have no entries, bail out and return nil
-            if (lookup.find(name) == lookup.end())
+            if (!lookup.contains(name))
             {
                 ShowError(fmt::format("GetTableOfIDs({}) in zone {}: Returning nil", name, zoneName));
                 return sol::lua_nil;
@@ -5882,16 +5878,18 @@ void HandleCustomMenu(CCharEntity* PChar, const std::string& selection)
         "\x3A\x20\x52\x65\x73\x75\x6C\x74\x20\x28\x43\x61\x6E\x63\x65\x6C\x65\x64\x20\x64\x75\x65\x20\x74\x6F\x20\x65\x76\x65\x6E\x74\x20\x61\x63\x74\x69\x76\x61\x74\x69\x6F\x6E\x2E\x29",
     };
 
-    const auto wasCancelled = std::any_of(
-        cancelMsgs.begin(), cancelMsgs.end(), [&selection](const auto& s)
+    const auto wasCancelled = std::ranges::any_of(
+        cancelMsgs,
+        [&selection](const auto& s)
         {
-            return selection.find(s) != selection.npos;
+            return selection.contains(s);
         });
 
-    const auto wasCancelledEvent = std::any_of(
-        eventCancelMsgs.begin(), eventCancelMsgs.end(), [&selection](const auto& s)
+    const auto wasCancelledEvent = std::ranges::any_of(
+        eventCancelMsgs,
+        [&selection](const auto& s)
         {
-            return selection.find(s) != selection.npos;
+            return selection.contains(s);
         });
 
     const auto context = customMenuContext[PChar->id];
@@ -6393,7 +6391,7 @@ auto GetSynergyRecipeByTrade(CLuaTradeContainer luaTradeContainer) -> sol::table
     }
 
     // We will sort now, because we want to insert zeroes at the end of the vector for lookup
-    std::sort(itemIds.begin(), itemIds.end());
+    std::ranges::sort(itemIds);
 
     // We will still need to fill out the call to GetSynergyRecipeByIngredients
     // with zeroes for empty slots.

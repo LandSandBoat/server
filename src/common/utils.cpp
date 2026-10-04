@@ -27,16 +27,13 @@
 #include "common/stdext.h"
 
 #include <algorithm>
+#include <bit>
 #include <cctype>
 #include <charconv>
 #include <cstdlib>
 #include <cstring>
 #include <regex>
 #include <string>
-
-#ifdef _MSC_VER
-#include <intrin.h>
-#endif
 
 int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 {
@@ -86,25 +83,6 @@ int32 intpow32(int32 base, int32 exponent)
         base *= base;
     }
     return power;
-}
-
-void getMSB(uint32* result, uint32 value)
-{
-    *result = 0;
-    if (value == 0)
-    {
-        return;
-    }
-#ifdef __GNUC__
-    *result = 31 - (unsigned)__builtin_clz(value);
-#elif defined _MSC_VER
-    _BitScanReverse((unsigned long*)result, value);
-#else
-    while (value >>= 1)
-    {
-        (*result)++;
-    }
-#endif
 }
 
 /****************************************************************************
@@ -614,7 +592,7 @@ void PackSoultrapperName(std::string name, uint8* output)
         name.resize(15);
     }
 
-    name.erase(std::ranges::remove(name, '_').begin(), name.end());
+    std::erase(name, '_');
 
     uint8 current = 0;
     uint8 next    = 0;
@@ -786,7 +764,7 @@ std::string trim(const std::string& str, const std::string& whitespace)
 void rtrim(std::string& s)
 {
     s.erase(
-        std::find_if(
+        std::ranges::find_if(
             s.rbegin(),
             s.rend(),
             [](unsigned char ch)
@@ -801,11 +779,6 @@ void rtrim(std::string& s)
 bool matches(const std::string& target, const std::string& pattern)
 {
     return std::regex_match(target, std::regex(pattern));
-}
-
-bool starts_with(const std::string& target, const std::string& pattern)
-{
-    return target.starts_with(pattern);
 }
 
 std::string replace(const std::string& target, const std::string& search, const std::string& replace)
@@ -853,10 +826,7 @@ look_t stringToLook(std::string str)
 
     for (auto& entry : hex)
     {
-        // Swap endian-ness
-        auto top    = entry << 8;
-        auto bottom = entry >> 8;
-        entry       = top | bottom;
+        entry = std::byteswap(entry);
     }
 
     out.size = hex[0];
@@ -935,9 +905,8 @@ auto utils::isPrintableASCII(unsigned char ch, ASCIIMode mode) -> bool
 
 auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
 {
-    return std::all_of(
-        str.begin(),
-        str.end(),
+    return std::ranges::all_of(
+        str,
         [mode](unsigned char ch)
         {
             return isPrintableASCII(ch, mode);

@@ -30,7 +30,6 @@
 #include "tracy.h"
 
 #include <iostream>
-#include <numeric>
 #include <string>
 
 namespace
@@ -182,14 +181,7 @@ std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
             // Accumulate into a pretty string
 
             std::string outStr = "\n" + unindent + "{" + (stringVec.empty() ? "" : "\n");
-            outStr += std::accumulate(
-                std::begin(stringVec),
-                std::end(stringVec),
-                std::string(),
-                [](const std::string& ss, const std::string& s)
-                {
-                    return ss.empty() ? s : (ss + ",\n" + s);
-                });
+            outStr += fmt::format("{}", fmt::join(stringVec, ",\n"));
 
             return outStr + (stringVec.empty() ? "" : "\n") + unindent + "}";
         }

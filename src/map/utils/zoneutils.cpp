@@ -644,15 +644,7 @@ auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<xi::ZoneId>
 
 auto IsZoneAssignedToThisProcess(const IPP mapIPP, const xi::ZoneId zoneId) -> bool
 {
-    for (const auto zone : GetZonesAssignedToThisProcess(mapIPP))
-    {
-        if (zone == zoneId)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::contains(GetZonesAssignedToThisProcess(mapIPP), zoneId);
 }
 
 /************************************************************************

@@ -117,7 +117,6 @@ constexpr auto roundUpToNearestFour(uint32 input) -> uint32
 }
 
 int32      intpow32(int32 base, int32 exponent);                                              // Exponential power of integers
-void       getMSB(uint32* result, uint32 value);                                              // fast Most Significant Byte search under GCC or MSVC. Fallback included.
 uint8      worldAngle(const position_t& A, const position_t& B);                              // А - the main entity, B - target entity (vector projection onto the X-axis)
 uint8      relativeAngle(uint8 world, int16 diff);                                            // Returns a new world angle which is diff degrees in a given (signed) direction
 int16      angleDifference(uint8 worldAngleA, uint8 worldAngleB);                             // Returns difference between two world angles (0~128), sign indicates direction
@@ -166,7 +165,6 @@ auto to_upper(const std::string& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 void rtrim(std::string& s);
 bool matches(const std::string& target, const std::string& pattern);
-bool starts_with(const std::string& target, const std::string& pattern);
 auto replace(const std::string& target, const std::string& search, const std::string& replace) -> std::string;
 
 look_t stringToLook(std::string str);
@@ -228,7 +226,7 @@ static Synchronized<HashMap<std::string, timer::time_point>> lastExecutionTimes;
     const auto key         = std::string(__FILE__) + ":" + std::to_string(__LINE__);  \
     lastExecutionTimes.write([&](auto& lastExecutionTimes)                            \
     {                                                                                 \
-        if (lastExecutionTimes.find(key) == lastExecutionTimes.end() ||               \
+        if (!lastExecutionTimes.contains(key) ||                                      \
             currentTime - lastExecutionTimes[key] > std::chrono::seconds(duration))   \
         {                                                                             \
             lastExecutionTimes[key] = currentTime;                                    \

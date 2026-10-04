@@ -65,10 +65,10 @@ auto unquoteNumericKeys(std::string yaml) -> std::string
             const auto close = yaml.find('\'', start + 1);
             if (close != std::string::npos && close + 1 < end && yaml[close + 1] == ':' &&
                 close > start + 1 &&
-                std::all_of(yaml.begin() + start + 1, yaml.begin() + close, [](const char digit)
-                            {
-                                return std::isdigit(static_cast<unsigned char>(digit)) != 0;
-                            }))
+                std::ranges::all_of(yaml.begin() + start + 1, yaml.begin() + close, [](const char digit)
+                                    {
+                                        return std::isdigit(static_cast<unsigned char>(digit)) != 0;
+                                    }))
             {
                 yaml.erase(close, 1);
                 yaml.erase(start, 1);

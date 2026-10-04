@@ -234,7 +234,7 @@ auto db::checkCharset() -> void
         {
             const auto charsetSetting   = rset->get<std::string>(0);
             const auto collationSetting = rset->get<std::string>(1);
-            if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
+            if (!charsetSetting.starts_with("utf8") || !collationSetting.starts_with("utf8"))
             {
                 foundError = true;
 

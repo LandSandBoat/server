@@ -138,13 +138,11 @@ void CCharRecastContainer::ChangeJob()
 {
     RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
 
-    // clang-format off
-    PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(),
-    [](auto& recast)
-    {
-        return recast.ID != Recast::Special && recast.ID != Recast::Special2;
-    }), PRecastList->end());
-    // clang-format on
+    std::erase_if(*PRecastList,
+                  [](auto& recast)
+                  {
+                      return recast.ID != Recast::Special && recast.ID != Recast::Special2;
+                  });
 
     db::preparedStmt("DELETE FROM char_recast WHERE charid = ? AND id != 0", m_PChar->id);
 }

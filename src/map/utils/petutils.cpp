@@ -778,12 +778,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
     uint32 petID = PPet->petID();
 
-    // clang-format off
-        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-        {
-            return t->PetID == petID;
-        });
-    // clang-format on
+    auto maybePetData = std::ranges::find(g_PPetList, petID, &Pet_t::PetID);
 
     if (maybePetData == g_PPetList.end())
     {
@@ -958,12 +953,7 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
     uint32 petID = PPet->petID();
 
-    // clang-format off
-    auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-    {
-        return t->PetID == petID;
-    });
-    // clang-format on
+    auto maybePetData = std::ranges::find(g_PPetList, petID, &Pet_t::PetID);
 
     if (maybePetData == g_PPetList.end())
     {
@@ -1087,12 +1077,7 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
     uint32 petID = PPet->petID();
 
-    // clang-format off
-        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-        {
-            return t->PetID == petID;
-        });
-    // clang-format on
+    auto maybePetData = std::ranges::find(g_PPetList, petID, &Pet_t::PetID);
 
     if (maybePetData == g_PPetList.end())
     {
@@ -1805,13 +1790,7 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         }
     }
 
-    auto maybePetData = std::find_if(
-        g_PPetList.begin(),
-        g_PPetList.end(),
-        [PetID](Pet_t* t)
-        {
-            return t->PetID == PetID;
-        });
+    auto maybePetData = std::ranges::find(g_PPetList, PetID, &Pet_t::PetID);
 
     if (maybePetData == g_PPetList.end())
     {
@@ -2124,15 +2103,8 @@ bool IsTandemActive(CBattleEntity* PAttacker)
 
 Pet_t* GetPetInfo(uint32 PetID)
 {
-    for (Pet_t* info : g_PPetList)
-    {
-        if (info->PetID == PetID)
-        {
-            return info;
-        }
-    }
-
-    return nullptr;
+    const auto it = std::ranges::find(g_PPetList, PetID, &Pet_t::PetID);
+    return it != g_PPetList.end() ? *it : nullptr;
 }
 
 }; // namespace petutils

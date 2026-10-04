@@ -75,7 +75,7 @@ auto CTreasurePool::memberCount() const -> size_t
 
 bool CTreasurePool::isMember(const CCharEntity* PChar)
 {
-    return std::find(m_Members.begin(), m_Members.end(), PChar) != m_Members.end();
+    return std::ranges::contains(m_Members, PChar);
 }
 
 void CTreasurePool::addMember(CCharEntity* PChar)
@@ -86,7 +86,7 @@ void CTreasurePool::addMember(CCharEntity* PChar)
         return;
     }
 
-    if (std::find(m_Members.begin(), m_Members.end(), PChar) != m_Members.end())
+    if (std::ranges::contains(m_Members, PChar))
     {
         ShowWarning("CTreasurePool::AddMember() - PChar was already in the members list!");
         return;
@@ -119,23 +119,14 @@ void CTreasurePool::delMember(CCharEntity* PChar)
     // ^ TODO: verify what happens when a winner leaves zone
     for (int i = 0; i < 10; i++)
     {
-        if (!m_PoolItems[i].Lotters.empty())
-        {
-            auto lotterIterator = m_PoolItems[i].Lotters.begin();
-            while (lotterIterator != m_PoolItems[i].Lotters.end())
-            {
-                // remove their lot info
-                if (LotInfo* info = &(*lotterIterator); PChar->id == info->member->id)
-                {
-                    lotterIterator = m_PoolItems[i].Lotters.erase(lotterIterator);
-                    continue;
-                }
-                ++lotterIterator;
-            }
-        }
+        std::erase_if(m_PoolItems[i].Lotters,
+                      [PChar](const LotInfo& info)
+                      {
+                          return PChar->id == info.member->id;
+                      });
     }
 
-    auto memberToDelete = std::find(m_Members.begin(), m_Members.end(), PChar);
+    auto memberToDelete = std::ranges::find(m_Members, PChar);
     if (memberToDelete != m_Members.end())
     {
         PChar->PTreasurePool = nullptr;
@@ -445,15 +436,11 @@ bool CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID)
         return false;
     }
 
-    for (const auto& lotter : m_PoolItems[SlotID].Lotters)
-    {
-        if (lotter.member->id == PChar->id)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(m_PoolItems[SlotID].Lotters,
+                               [&](const auto& lotter)
+                               {
+                                   return lotter.member->id == PChar->id;
+                               });
 }
 
 bool CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID)
@@ -463,15 +450,15 @@ bool CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID)
         return false;
     }
 
-    for (auto& lotter : m_PoolItems[SlotID].Lotters)
-    {
-        if (lotter.member->id == PChar->id)
-        {
-            return lotter.lot == 0;
-        }
-    }
+    const auto& lotters = m_PoolItems[SlotID].Lotters;
 
-    return false;
+    const auto it = std::ranges::find_if(lotters,
+                                         [&](const auto& lotter)
+                                         {
+                                             return lotter.member->id == PChar->id;
+                                         });
+
+    return it != lotters.end() && it->lot == 0;
 }
 
 void CTreasurePool::checkItems(timer::time_point tick)

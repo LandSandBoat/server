@@ -303,7 +303,7 @@ bool CBattlefield::IsOccupied() const
 
 bool CBattlefield::isEntered(CCharEntity* PChar) const
 {
-    return m_EnteredPlayers.find(PChar->id) != m_EnteredPlayers.end();
+    return m_EnteredPlayers.contains(PChar->id);
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -511,7 +511,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
 
 bool CBattlefield::IsRegistered(CCharEntity* PChar)
 {
-    return PChar && m_RegisteredPlayers.find(PChar->id) != m_RegisteredPlayers.end();
+    return PChar && m_RegisteredPlayers.contains(PChar->id);
 }
 
 // The Battlefield effect is the players clearance and names the battlefield it was granted for
@@ -694,8 +694,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                     }
                     return false;
                 };
-                m_RequiredEnemyList.erase(std::remove_if(m_RequiredEnemyList.begin(), m_RequiredEnemyList.end(), checkEnemy), m_RequiredEnemyList.end());
-                m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), checkEnemy), m_AdditionalEnemyList.end());
+                std::erase_if(m_RequiredEnemyList, checkEnemy);
+                std::erase_if(m_AdditionalEnemyList, checkEnemy);
             }
 
             // Clear the mob's enmity

@@ -25,6 +25,7 @@
 #include "common/timer.h"
 #include "common/utils.h"
 
+#include <algorithm>
 #include <cstring>
 
 #include "enums/item_lockflg.h"
@@ -319,14 +320,11 @@ CCharEntity::~CCharEntity()
             }
             if (PParty->GetSyncTarget() != nullptr)
             {
-                uint8 count = 0;
-                for (uint32 i = 0; i < PParty->members.size(); ++i)
-                {
-                    if (PParty->members.at(i) != this && PParty->members.at(i)->getZone() == PParty->GetSyncTarget()->getZone())
-                    {
-                        count++;
-                    }
-                }
+                const auto count = static_cast<uint8>(std::ranges::count_if(PParty->members,
+                                                                            [&](const auto* member)
+                                                                            {
+                                                                                return member != this && member->getZone() == PParty->GetSyncTarget()->getZone();
+                                                                            }));
                 if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
                 {
                     PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
@@ -755,14 +753,7 @@ auto CCharEntity::getAutomatonAttachment(const uint8 slotid) const -> uint8
 
 auto CCharEntity::hasAutomatonAttachment(const uint8 attachment) const -> bool
 {
-    for (auto&& attachmentid : automatonInfo_.equip.attachments)
-    {
-        if (attachmentid == attachment)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::contains(automatonInfo_.equip.attachments, attachment);
 }
 
 auto CCharEntity::getAutomatonElementMax(const uint8 element) const -> uint8
@@ -1106,12 +1097,7 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         return;
     }
 
-    // clang-format off
-    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust)
-    {
-        return PTrust == trust;
-    });
-    // clang-format on
+    auto trustIt = std::ranges::find(PTrusts, PTrust);
 
     if (trustIt != PTrusts.end())
     {
@@ -2973,7 +2959,7 @@ bool CCharEntity::OnAttackError(CAttackState& state)
 
 bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
 {
-    return charTriggerAreaIDs.find(triggerAreaID) != charTriggerAreaIDs.end();
+    return charTriggerAreaIDs.contains(triggerAreaID);
 }
 
 void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
@@ -3285,7 +3271,7 @@ void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
     auto iter = charVarCache.begin();
     while (iter != charVarCache.end())
     {
-        if (iter->first.rfind(prefix, 0) == 0)
+        if (iter->first.starts_with(prefix))
         {
             iter->second = { 0, 0 };
         }

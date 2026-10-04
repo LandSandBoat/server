@@ -319,7 +319,7 @@ auto extractFromBlob(const WrapperPtrT& rset, const std::string& blobKey, T& des
         if constexpr (std::is_array_v<T>)
         {
             using Element = std::remove_extent_t<T>;
-            std::fill(std::begin(destination), std::end(destination), Element{});
+            std::ranges::fill(destination, Element{});
         }
         else if constexpr (std::is_assignable_v<T&, T>)
         {

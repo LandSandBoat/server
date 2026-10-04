@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include <algorithm>
 #include <cstring>
 
 #include "battlefield.h"
@@ -162,24 +163,21 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
     if (checkRegistered && entity && entity->objtype == TYPE_PC)
     {
         auto* PChar = static_cast<CCharEntity*>(entity);
-        for (auto& [area, battlefield] : m_Battlefields)
-        {
-            if (battlefield->IsRegistered(PChar) && battlefield->HasClearance(PChar))
-            {
-                return battlefield.get();
-            }
-        }
-        return nullptr;
+
+        const auto it = std::ranges::find_if(m_Battlefields,
+                                             [&](const auto& entry)
+                                             {
+                                                 return entry.second->IsRegistered(PChar) && entry.second->HasClearance(PChar);
+                                             });
+        return it != m_Battlefields.end() ? it->second.get() : nullptr;
     }
 
-    for (auto& [area, battlefield] : m_Battlefields)
-    {
-        if (battlefield->GetEntity(entity))
-        {
-            return battlefield.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_Battlefields,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->GetEntity(entity);
+                                         });
+    return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
 CBattlefield* CBattlefieldHandler::GetBattlefieldByArea(uint8 area) const
@@ -190,26 +188,22 @@ CBattlefield* CBattlefieldHandler::GetBattlefieldByArea(uint8 area) const
 
 CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
 {
-    for (auto& [area, battlefield] : m_Battlefields)
-    {
-        if (battlefield->GetInitiator().id == charID)
-        {
-            return battlefield.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_Battlefields,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->GetInitiator().id == charID;
+                                         });
+    return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
 CBattlefield* CBattlefieldHandler::GetRegisteredBattlefield(CCharEntity* PChar)
 {
-    for (auto& [area, battlefield] : m_Battlefields)
-    {
-        if (battlefield->IsRegistered(PChar))
-        {
-            return battlefield.get();
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find_if(m_Battlefields,
+                                         [&](const auto& entry)
+                                         {
+                                             return entry.second->IsRegistered(PChar);
+                                         });
+    return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
 // A registration the clearance effect does not name is left over from an earlier party
@@ -311,14 +305,11 @@ bool CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefie
 
 bool CBattlefieldHandler::IsRegistered(CCharEntity* PChar)
 {
-    for (const auto& [area, battlefield] : m_Battlefields)
-    {
-        if (battlefield->IsRegistered(PChar))
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(m_Battlefields,
+                               [&](const auto& entry)
+                               {
+                                   return entry.second->IsRegistered(PChar);
+                               });
 }
 
 bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const

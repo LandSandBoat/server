@@ -674,7 +674,7 @@ auto CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse) -> vo
 
     if (reverse)
     {
-        std::reverse(points.begin(), points.end());
+        std::ranges::reverse(points);
     }
 
     path_.assign(std::move(points));

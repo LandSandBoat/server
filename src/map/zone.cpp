@@ -54,6 +54,7 @@ using RegionsDataset      = xi::data::datasets::zones::regions::Dataset;
 #include "common/utils.h"
 #include "common/vana_time.h"
 
+#include <algorithm>
 #include <filesystem>
 
 #include "battlefield.h"
@@ -263,7 +264,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern
 
     // Always ignore cache for queries explicitly looking for dynamic entities
     // TODO: make this memoization work for dynamic entities somehow?
-    if (pattern.rfind("DE_", 0) != 0)
+    if (!pattern.starts_with("DE_"))
     {
         // Use memoization since lookups are typically for the same mob names
         auto result = m_queryByNameResults.find(pattern);
@@ -325,14 +326,8 @@ bool CZone::CanUseMisc(xi::ZoneMisc misc) const
 
 zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 {
-    for (const auto& zoneLine : m_zoneLineList)
-    {
-        if (zoneLine->zoneLineId == zoneLineID)
-        {
-            return zoneLine;
-        }
-    }
-    return nullptr;
+    const auto it = std::ranges::find(m_zoneLineList, zoneLineID, &zoneLine_t::zoneLineId);
+    return it != m_zoneLineList.end() ? *it : nullptr;
 }
 
 // Spawns players across 8 fixed slots along the target zoneline area.
@@ -1319,14 +1314,11 @@ void CZone::CharZoneOut(CCharEntity* PChar)
             }
             if (PChar->PParty->GetSyncTarget() != nullptr)
             {
-                uint8 count = 0;
-                for (uint32 i = 0; i < PChar->PParty->members.size(); ++i)
-                {
-                    if (PChar->PParty->members.at(i) != PChar && PChar->PParty->members.at(i)->getZone() == PChar->PParty->GetSyncTarget()->getZone())
-                    {
-                        count++;
-                    }
-                }
+                const auto count = static_cast<uint8>(std::ranges::count_if(PChar->PParty->members,
+                                                                            [&](const auto* member)
+                                                                            {
+                                                                                return member != PChar && member->getZone() == PChar->PParty->GetSyncTarget()->getZone();
+                                                                            }));
                 if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
                 {
                     PChar->PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
