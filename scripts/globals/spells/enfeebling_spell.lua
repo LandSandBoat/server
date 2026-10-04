@@ -330,6 +330,11 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
         duration = math.randomInt(13, 60)
     end
 
+    -- Seems to be anywhere from 2 - 8 seconds with float precision.
+    if spellEffect == xi.effect.STUN then
+        duration = math.randomFloat(2, 8)
+    end
+
     -- Additions to base duration.
     if
         spellEffect == xi.effect.BURN or

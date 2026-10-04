@@ -46,9 +46,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Handle status effects.
+    -- Duration seems to be 2 - 8 seconds with float precision
     local effectTable =
     {
-        [1] = { xi.effect.STUN, 1, 0, 5 },
+        [1] = { xi.effect.STUN, 1, 0, math.randomFloat(2, 8) },
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

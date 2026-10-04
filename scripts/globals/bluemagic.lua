@@ -738,6 +738,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             if hitInfo.hitDamage > 0 then
                 params.tpHitsLanded = params.tpHitsLanded + 1
             end
+
+            params.hitsLanded = params.hitsLanded + 1
         else
             hitInfo          = xi.mobskills.defaultHitInfo(hitNumber)
             hitInfo.missType = 'Evaded / Missed'
