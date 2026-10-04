@@ -5,11 +5,10 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerCuboidTriggerArea(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
-    zone:registerCuboidTriggerArea(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
+    zone:registerCuboidTriggerArea(1, -90, 17, 45, -84, 19, 51)   -- map 4 NW porter
     zone:registerCuboidTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
     zone:registerCuboidTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
-    zone:registerCuboidTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
+    zone:registerCuboidTriggerArea(4, -34, 17, 45, -30, 18, 51)   -- map 4 NE porter
 
     xi.treasure.initZone(zone)
 end
@@ -44,7 +43,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local areaId = triggerArea:getTriggerAreaID()
 
     if teleportEventsByArea[areaId] then
-        player:startEvent(teleportEventsByArea[areaId])
+        player:startCutscene(teleportEventsByArea[areaId])
     end
 end
 
