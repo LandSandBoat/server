@@ -196,15 +196,9 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
             THlevel = std::min<int16>(4, PEntity->getMod(xi::Mod::TREASURE_HUNTER));
         }
 
-        if (m_EnmityHolder->m_THLvl < THlevel)
-        {
-            m_EnmityHolder->m_THLvl = THlevel;
-        }
+        m_EnmityHolder->m_THLvl = std::max(m_EnmityHolder->m_THLvl, THlevel);
 
-        if (m_EnmityHolder->m_GilfinderLevel < GFlevel)
-        {
-            m_EnmityHolder->m_GilfinderLevel = GFlevel;
-        }
+        m_EnmityHolder->m_GilfinderLevel = std::max(m_EnmityHolder->m_GilfinderLevel, GFlevel);
     }
 
     auto enmity_obj = m_EnmityList.find(PEntity->id);
@@ -310,7 +304,7 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
     }
     else
     {
-        CureAmount = (CureAmount < 1 ? 1 : CureAmount);
+        CureAmount = std::max(CureAmount, 1);
 
         CE = (int32)(40.0f / battleutils::GetEnmityModCure(level) * CureAmount * bonus * tranquilHeartReduction);
         VE = (int32)(240.0f / battleutils::GetEnmityModCure(level) * CureAmount * bonus * tranquilHeartReduction);
@@ -348,10 +342,10 @@ void CEnmityContainer::LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percen
         float mod = ((float)(percent) / 100.0f);
 
         auto CEValue = (int32)(enmity_obj->second.CE * mod);
-        enmity_obj->second.CE -= (CEValue < 0 ? 0 : CEValue);
+        enmity_obj->second.CE -= std::max(CEValue, 0);
 
         auto VEValue = (int32)(enmity_obj->second.VE * mod);
-        enmity_obj->second.VE -= (VEValue < 0 ? 0 : VEValue);
+        enmity_obj->second.VE -= std::max(VEValue, 0);
 
         // transfer hate if HateReceiver not nullptr
         if (HateReceiver != nullptr)
@@ -431,7 +425,7 @@ void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Dama
             return;
         }
 
-        Damage          = (Damage < 1 ? 1 : Damage);
+        Damage          = std::max(Damage, 1);
         int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
         int32 CE = (int32)(80.0f / damageMod * Damage);
@@ -439,10 +433,7 @@ void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Dama
 
         UpdateEnmity(PEntity, CE, VE);
 
-        if (m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
-        {
-            m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
-        }
+        m_EnmityHolder->m_HiPCLvl = std::max(m_EnmityHolder->m_HiPCLvl, PEntity->GetMLevel());
     }
 }
 
@@ -532,7 +523,7 @@ void CEnmityContainer::DecayEnmity()
         EnmityObject_t& PEnmityObject = it.second;
         constexpr int   decay_amount  = (int)(60 / kLogicUpdateRate); // TODO: This should decay relative to the delta tick time?
 
-        PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
+        PEnmityObject.VE -= std::min(PEnmityObject.VE, decay_amount);
     }
 }
 

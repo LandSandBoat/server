@@ -629,7 +629,7 @@ uint8 CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSk
     }
 
     luckyTiming += (uint8)std::floor(bonus);
-    luckyTiming -= (uint8)std::floor((penalty > luckyTiming) ? luckyTiming : penalty);
+    luckyTiming -= (uint8)std::floor(std::min<float>(penalty, luckyTiming));
 
     return std::max<uint8>(5, luckyTiming);
 }
@@ -2244,7 +2244,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
                 uint16 hookChance = CalculateHookChance(fishingSkill, fishIter, bait, rod);
                 FishHookPool.insert(std::make_pair(fishIter, hookChance));
                 FishHookChanceTotal += hookChance;
-                maxChance = (hookChance > maxChance) ? hookChance : maxChance;
+                maxChance = std::max(maxChance, hookChance);
             }
         }
 

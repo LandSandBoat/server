@@ -3581,16 +3581,10 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         // Main Job Skills.
         if (maxMainSkill != 0)
         {
-            if (currentSkill > maxMainSkill)
-            {
-                currentSkill = maxMainSkill;
-            }
+            currentSkill = std::min(currentSkill, maxMainSkill);
 
             int16 newSkillValue = currentSkill + skillBonus;
-            if (newSkillValue < 0)
-            {
-                newSkillValue = 0;
-            }
+            newSkillValue       = std::max<int16>(newSkillValue, 0);
 
             PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
 
@@ -3603,16 +3597,10 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         // Sub Job Skills.
         else if (maxSubSkill != 0)
         {
-            if (currentSkill > maxSubSkill)
-            {
-                currentSkill = maxSubSkill;
-            }
+            currentSkill = std::min(currentSkill, maxSubSkill);
 
             int16 newSkillValue = currentSkill + skillBonus;
-            if (newSkillValue < 0)
-            {
-                newSkillValue = 0;
-            }
+            newSkillValue       = std::max<int16>(newSkillValue, 0);
 
             PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
 
@@ -3625,10 +3613,7 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         // Job setup doesn't have this skill.
         else
         {
-            if (skillBonus < 0)
-            {
-                skillBonus = 0;
-            }
+            skillBonus                    = std::max<int16>(skillBonus, 0);
             PChar->WorkingSkills.skill[i] = static_cast<uint16>(skillBonus) | 0x8000; // New value AND Blue text.
         }
 
@@ -3781,10 +3766,7 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
 
         double random = xirand::GetRandomNumber(1.);
 
-        if (SkillUpChance > 0.5)
-        {
-            SkillUpChance = 0.5;
-        }
+        SkillUpChance = std::min(SkillUpChance, 0.5);
 
         // Check for skillup% bonus. https://www.bg-wiki.com/bg/Category:Skill_Up_Food
         // Assuming multiplicative even though rate is already a % because 0.5 + 0.8 would be > 1.
@@ -3848,19 +3830,13 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
                                                                                }));
 
             SkillAmount *= rovBonus;
-            if (SkillAmount > 9)
-            {
-                SkillAmount = 9;
-            }
+            SkillAmount = std::min<uint8>(SkillAmount, 9);
 
             // Do skill amount multiplier (Will only be applied if default setting is changed)
             if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
             {
                 SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
-                if (SkillAmount > 9)
-                {
-                    SkillAmount = 9;
-                }
+                SkillAmount = std::min<uint8>(SkillAmount, 9);
             }
 
             if (SkillAmount + CurSkill >= CapSkill)

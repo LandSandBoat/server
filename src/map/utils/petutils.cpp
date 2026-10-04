@@ -658,20 +658,20 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         switch (PAutomaton->frame())
         {
             default: // case AutomatonFrame::Harlequin:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(4, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(7, mlvl > 99 ? 99 : mlvl) / 2); // C
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(4, std::min<uint8>(mlvl, 99));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(7, std::min<uint8>(mlvl, 99)) / 2); // C
                 break;
             case AutomatonFrame::Valoredge:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(7, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl) / 2); // B-
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(7, std::min<uint8>(mlvl, 99));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(5, std::min<uint8>(mlvl, 99)) / 2); // B-
                 break;
             case AutomatonFrame::Sharpshot:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(8, mlvl > 99 ? 99 : mlvl) / 2); // C-
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, std::min<uint8>(mlvl, 99));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(8, std::min<uint8>(mlvl, 99)) / 2); // C-
                 break;
             case AutomatonFrame::Stormwaker:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
-                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(9, mlvl > 99 ? 99 : mlvl) / 2); // D
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, std::min<uint8>(mlvl, 99));
+                PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(9, std::min<uint8>(mlvl, 99)) / 2); // D
                 break;
         }
 
@@ -817,8 +817,8 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         // According to JP wiki, this takes on the players main job level but caps at 75~. TODO: Need to confirm.
         // https://wiki.ffo.jp/html/9155.html
-        PPet->SetMLevel(mLvl = (mLvl > 75) ? 75 : mLvl);
-        PPet->SetSLevel(mLvl = (mLvl > 75) ? 75 : mLvl);
+        PPet->SetMLevel(mLvl = std::min<uint8>(mLvl, 75));
+        PPet->SetSLevel(mLvl = std::min<uint8>(mLvl, 75));
     }
     else
     {
@@ -899,7 +899,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     // Cap all magic skills so they play nice with spell scripts
     for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetMJob(), std::min<uint8>(mLvl, 99));
         if (maxSkill != 0)
         {
             PPet->WorkingSkills.skill[i] = maxSkill;
@@ -907,7 +907,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         else
         {
             // Set skill as high as main level, so their spells won't get resisted
-            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
+            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetSJob(), std::min<uint8>(mLvl, 99));
 
             if (maxSubSkill != 0)
             {
@@ -1096,10 +1096,7 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     // And cap it to the master's level or weapon ilvl, whichever is greater
     auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
-    if (highestLvl > capLevel)
-    {
-        highestLvl = capLevel;
-    }
+    highestLvl    = std::min(highestLvl, capLevel);
 
     // Randomize: 0-2 lvls lower, less Monster Gloves(+1/+2) bonus
     highestLvl -= xirand::GetRandomNumber(3 - std::clamp<int16>(PChar->getMod(xi::Mod::JUG_LEVEL_RANGE), 0, 2));

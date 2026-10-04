@@ -403,7 +403,7 @@ void auth_session::read_func()
                     return;
                 }
 
-                accid = (accid < 1000 ? 1000 : accid);
+                accid = std::max<uint32>(accid, 1000);
 
                 // creating new account
                 std::tm timecreateinfo = earth_time::to_local_tm();

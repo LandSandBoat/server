@@ -27,6 +27,7 @@
 #include "exdata/base.h"
 #include "item.h"
 
+#include <algorithm>
 #include <atomic>
 
 /************************************************************************
@@ -221,7 +222,7 @@ auto CItem::uid() const -> uint64
 
 void CItem::setQuantity(uint32 quantity)
 {
-    m_quantity = (quantity < m_stackSize ? quantity : m_stackSize);
+    m_quantity = std::min(quantity, m_stackSize);
 }
 
 uint32 CItem::getQuantity() const

@@ -32,6 +32,7 @@
 #include <common/rng/squirrel5.h>
 #include <test/tests/utils/saturated_engine.h>
 
+#include <algorithm>
 #include <array>
 #include <cstdint>
 
@@ -46,7 +47,7 @@ template <std::size_t Buckets>
     for (const std::uint32_t count : histogram)
     {
         const std::uint32_t deviation = count > ideal ? count - ideal : ideal - count;
-        worst                         = deviation > worst ? deviation : worst;
+        worst                         = std::max(worst, deviation);
     }
 
     return worst;

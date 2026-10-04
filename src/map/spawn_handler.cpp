@@ -177,7 +177,7 @@ auto SpawnHandler::getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<time
         if (auto it = pendingSlotRespawns_.find(slot); it != pendingSlotRespawns_.end())
         {
             const auto remaining = it->second.respawnAt - now;
-            return remaining > timer::duration::zero() ? remaining : timer::duration::zero();
+            return std::max(remaining, timer::duration::zero());
         }
     }
     else
@@ -185,7 +185,7 @@ auto SpawnHandler::getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<time
         if (auto it = pendingRespawns_.find(respawnKeyOf(PMob)); it != pendingRespawns_.end())
         {
             const auto remaining = it->second.respawnAt - now;
-            return remaining > timer::duration::zero() ? remaining : timer::duration::zero();
+            return std::max(remaining, timer::duration::zero());
         }
     }
 
