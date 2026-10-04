@@ -141,7 +141,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     if (isPlayer)
     {
         // handle this as a player
-        if (m_PMasterTarget->objtype == TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(m_PMasterTarget) != nullptr)
         {
             // players will never need to add whole alliance
             m_findType = FIND_TYPE::PLAYER_PLAYER;
@@ -190,7 +190,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
                 m_PMasterTarget = findMaster(m_PBattleEntity->GetBattleTarget());
             }
         }
-        else if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == xi::Allegiance::Player || m_PMasterTarget->allegiance == xi::Allegiance::Player)
+        else if (dynamic_cast<const CCharEntity*>(m_PMasterTarget) != nullptr || m_PBattleEntity->allegiance == xi::Allegiance::Player || m_PMasterTarget->allegiance == xi::Allegiance::Player)
         {
             m_findType = FIND_TYPE::MONSTER_PLAYER;
         }
@@ -343,9 +343,9 @@ void CTargetFind::addAllInAlliance(CBattleEntity* PTarget, bool withPet)
 void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
 {
     // clang-format off
-    if (PTarget->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
     {
-        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
+        PChar->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
         {
             if (!PMember->inMogHouse())
             {
@@ -386,9 +386,8 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, xi::Allegi
 
     if (PTarget && allegiance == xi::Allegiance::Player)
     {
-        if (PTarget->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
         {
-            CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
             for (const auto* spawnList : { &PChar->SpawnPCList, &PChar->SpawnPETList })
             {
                 FOR_EACH_PAIR_CAST_SECOND(CBattleEntity*, PBattleEntity, *spawnList)
@@ -443,7 +442,7 @@ CBattleEntity* CTargetFind::findMaster(CBattleEntity* PTarget)
 
 bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 {
-    if (findMaster(m_PBattleEntity)->objtype != TYPE_PC || PTarget->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(findMaster(m_PBattleEntity)) == nullptr || dynamic_cast<const CCharEntity*>(PTarget) != nullptr)
     {
         // always true for mobs, npcs, pets
         return true;
@@ -595,7 +594,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
             }
             else if (m_findType == FIND_TYPE::PLAYER_MONSTER)
             {
-                if (PTarget->PMaster->objtype == TYPE_PC)
+                if (dynamic_cast<const CCharEntity*>(PTarget->PMaster) != nullptr)
                 {
                     return false;
                 }
@@ -635,13 +634,13 @@ bool CTargetFind::checkIsPlayer(CBattleEntity* PTarget)
     {
         return false;
     }
-    if (PTarget->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(PTarget) != nullptr)
     {
         return true;
     }
 
     // check if i'm owned by a pc
-    return PTarget->PMaster != nullptr && PTarget->PMaster->objtype == TYPE_PC;
+    return PTarget->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PTarget->PMaster) != nullptr;
 }
 
 bool CTargetFind::isWithinArea(position_t* pos)

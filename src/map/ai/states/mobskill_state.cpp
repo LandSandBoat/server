@@ -99,7 +99,7 @@ auto CMobSkillState::init() -> StateErrorOr<void>
 
         auto targetID = PActionTarget ? PActionTarget->id : m_PEntity->id;
 
-        if (m_PEntity->objtype != TYPE_PC && settings::get<bool>("map.HIDE_READIES_TARGET"))
+        if (dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr && settings::get<bool>("map.HIDE_READIES_TARGET"))
         {
             targetID = m_PEntity->id;
         }
@@ -235,10 +235,9 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0, withMaster);
         }
 
-        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
+        if (auto* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster); m_PEntity->objtype == TYPE_PET && PSummoner && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {
-            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
-            if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::AvatarsFavor))
+            if (PSummoner->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::AvatarsFavor))
             {
                 auto power = PSummoner->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::AvatarsFavor)->GetPower();
                 // Retail: Power is gained for BP use

@@ -66,7 +66,7 @@ auto CDeathState::init() -> StateErrorOr<void>
 
 auto CDeathState::Update(const timer::time_point tick) -> bool
 {
-    if (m_PEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity); !PChar)
     {
         if (IsCompleted() || !m_PEntity->isDead())
         {
@@ -91,8 +91,7 @@ auto CDeathState::Update(const timer::time_point tick) -> bool
     }
     else
     {
-        auto*      PChar = static_cast<CCharEntity*>(m_PEntity);
-        const auto time  = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(xi::Mod::DESPAWN_TIME_REDUCTION));
+        const auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(xi::Mod::DESPAWN_TIME_REDUCTION));
 
         // exit state after 2 seconds on raise
         if (m_raiseAccepted && IsCompleted() && tick > m_raiseAcceptedTime + 2s)

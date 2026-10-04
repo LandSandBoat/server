@@ -1092,7 +1092,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         }
 
         CBaseEntity* PTarget = PState->target().resolve();
-        if (PTarget && PTarget->objtype == TYPE_PC && PTarget->id != PChar->id)
+        if (PTarget && dynamic_cast<const CCharEntity*>(PTarget) != nullptr && PTarget->id != PChar->id)
         {
             scoreBonus[PTarget->id] += CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
         }
@@ -1194,9 +1194,9 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         CHARACTER_SYNC_DISTANCE,
         [&](CBaseEntity* entity)
         {
-            if (entity->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(entity))
             {
-                considerCandidate(static_cast<CCharEntity*>(entity));
+                considerCandidate(PChar);
             }
         });
 
@@ -1454,9 +1454,8 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
     TracyZoneScopedN("CZoneEntities::UpdateEntityPacket");
 
     // Do not send packets that are updates of a hidden GM
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (PChar->m_isGMHidden && type != ENTITY_DESPAWN)
         {
             return;
@@ -1481,12 +1480,11 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
             ENTITY_RENDER_DISTANCE,
             [&](CBaseEntity* candidate)
             {
-                if (candidate->objtype != TYPE_PC || candidate == PEntity)
+                auto* PCurrentChar = dynamic_cast<CCharEntity*>(candidate);
+                if (!PCurrentChar || PCurrentChar == PEntity)
                 {
                     return;
                 }
-
-                auto* PCurrentChar = static_cast<CCharEntity*>(candidate);
                 if (charutils::hasEntitySpawned(PCurrentChar, PEntity))
                 {
                     PCurrentChar->updateEntityPacket(PEntity, type, updatemask);
@@ -1520,13 +1518,13 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         return;
     }
 
-    // Do not send packets that are updates of a hidden GM..
-    if (packet->getType() == 0x00D && PEntity != nullptr && PEntity->objtype == TYPE_PC)
-    {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
+    const auto* PSourceChar = dynamic_cast<const CCharEntity*>(PEntity);
 
+    // Do not send packets that are updates of a hidden GM..
+    if (packet->getType() == 0x00D && PSourceChar)
+    {
         // Ensure this packet is not despawning us..
-        if (PChar->m_isGMHidden && packet->ref<uint8>(0x0A) != 0x20)
+        if (PSourceChar->m_isGMHidden && packet->ref<uint8>(0x0A) != 0x20)
         {
             return;
         }
@@ -1558,7 +1556,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                     if (PEntity != PCurrentChar)
                     {
                         if (isWithinDistance(PEntity->loc.p, PCurrentChar->loc.p, checkDistance) &&
-                            (PEntity->objtype != TYPE_PC || static_cast<CCharEntity*>(PEntity)->m_moghouseID == PCurrentChar->m_moghouseID))
+                            (!PSourceChar || PSourceChar->m_moghouseID == PCurrentChar->m_moghouseID))
                         {
                             uint16 packetType = packet->getType();
                             if
@@ -1643,7 +1641,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                     if (PEntity != PCurrentChar)
                     {
                         if (distance(PEntity->loc.p, PCurrentChar->loc.p) < 180.0f &&
-                            (PEntity->objtype != TYPE_PC || static_cast<CCharEntity*>(PEntity)->m_moghouseID == PCurrentChar->m_moghouseID))
+                            (!PSourceChar || PSourceChar->m_moghouseID == PCurrentChar->m_moghouseID))
                         {
                             PCurrentChar->pushPacket(packet->copy());
                         }

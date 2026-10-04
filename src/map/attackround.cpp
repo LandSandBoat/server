@@ -42,7 +42,7 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
     m_taEntity = battleutils::getAvailableTrickAttackChar(attacker, attacker->GetBattleTarget());
 
     // Get cover partner
-    if (attacker->GetBattleTarget()->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(attacker->GetBattleTarget()) != nullptr)
     {
         m_coverAbilityUserEntity = battleutils::GetCoverAbilityUser(attacker->GetBattleTarget(), attacker);
     }
@@ -241,7 +241,8 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
 
     uint8 num = 1;
 
-    bool isPC = m_attacker->objtype == TYPE_PC;
+    auto*      PChar = dynamic_cast<CCharEntity*>(m_attacker);
+    const bool isPC  = PChar != nullptr;
 
     // Checking the players weapon hit count
     if (PWeapon->getReqLvl() <= m_attacker->GetMLevel())
@@ -252,7 +253,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Existance of "Occasionally attacks X times" overwrites PWeapon hit count
     if (isPC && m_attacker->getMod(xi::Mod::MAX_SWINGS))
     {
-        auto modSwings = std::min<uint8>((uint8) static_cast<CCharEntity*>(m_attacker)->getMod(xi::Mod::MAX_SWINGS), 8);
+        auto modSwings = std::min<uint8>((uint8)PChar->getMod(xi::Mod::MAX_SWINGS), 8);
         num            = battleutils::getHitCount(modSwings);
     }
 
@@ -281,8 +282,6 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Checking for merit upgrades
     if (isPC)
     {
-        CCharEntity* PChar = (CCharEntity*)m_attacker;
-
         // Merit chance only applies if player has the job trait
         if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
         {
@@ -505,9 +504,9 @@ void CAttackRound::CreateKickAttacks()
         // kick attack mod (All jobs)
         uint16 kickAttack = m_attacker->getMod(xi::Mod::KICK_ATTACK_RATE);
 
-        if (m_attacker->GetMJob() == xi::Job::MNK && m_attacker->objtype == TYPE_PC) // MNK (Main job)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_attacker); m_attacker->GetMJob() == xi::Job::MNK && PChar) // MNK (Main job)
         {
-            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(xi::Merit::KickAttackRate, (CCharEntity*)m_attacker);
+            kickAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::KickAttackRate, PChar);
         }
 
         kickAttack = std::clamp<uint16>(kickAttack, 0, 100);
@@ -533,7 +532,7 @@ void CAttackRound::CreateKickAttacks()
  ************************************************************************/
 void CAttackRound::CreateDakenAttack()
 {
-    if (m_attacker->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(m_attacker) != nullptr)
     {
         auto* PAmmo = static_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_AMMO]);
         if (PAmmo && PAmmo->isShuriken())

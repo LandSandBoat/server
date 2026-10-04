@@ -875,7 +875,8 @@ void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
 
         const bool shouldWarp = message.warp && isSpawned;
 
-        const auto moghouseId = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity)->m_moghouseID : 0;
+        const auto* PChar      = dynamic_cast<const CCharEntity*>(PEntity);
+        const auto  moghouseId = PChar ? PChar->m_moghouseID : 0;
 
         message::send(ipc::EntityInformationResponse{
             .requesterId = message.requesterId,

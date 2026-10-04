@@ -669,9 +669,9 @@ void CMobEntity::PostTick()
             loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
             // If this mob is charmed, it should sync with its master
-            if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster); PChar && PChar->PPet == this)
             {
-                ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
+                PChar->pushPacket<CPetSyncPacket>(PChar);
             }
 
             updatemask = 0;
@@ -1377,10 +1377,10 @@ void CMobEntity::OnEngage(CAttackState& state)
         // TODO: Supertanking might be effected by this block when we don't want it to be.
         // Things like Ambuscade "don't have" supertanking, though.
         // This block apparently only effects rare things like NW apollyon, so might be ok for now.
-        if (PTarget->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
         {
             // clang-format off
-            ((CCharEntity*)PTarget)->ForAlliance([this, PTarget, range](CBattleEntity* PMember)
+            PChar->ForAlliance([this, PTarget, range](CBattleEntity* PMember)
             {
                 auto currentDistance = distance(PMember->loc.p, PTarget->loc.p);
                 if (currentDistance < range)
@@ -1465,7 +1465,7 @@ void CMobEntity::Die()
     }));
     // clang-format on
 
-    if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
+    if (PMaster && PMaster->PPet == this && dynamic_cast<const CCharEntity*>(PMaster) != nullptr)
     {
         petutils::DetachPet(PMaster);
     }

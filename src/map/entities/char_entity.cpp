@@ -445,15 +445,7 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     auto       itr              = EntityUpdatePackets.find(PEntity->id);
     const bool hasPendingPacket = itr != EntityUpdatePackets.end() && itr->second != nullptr;
 
-    auto* PChar = [&]() -> CCharEntity*
-    {
-        if (PEntity->objtype == TYPE_PC)
-        {
-            return static_cast<CCharEntity*>(PEntity);
-        }
-
-        return nullptr;
-    }();
+    auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
     if (hasPendingPacket)
     {
@@ -2124,7 +2116,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return false;
     }
 
-    if (PBattleTarget->m_OwnerID.UniqueNo == 0 || PBattleTarget->m_OwnerID.UniqueNo == this->id || PBattleTarget->objtype == TYPE_PC)
+    if (PBattleTarget->m_OwnerID.UniqueNo == 0 || PBattleTarget->m_OwnerID.UniqueNo == this->id || dynamic_cast<const CCharEntity*>(PBattleTarget) != nullptr)
     {
         return true;
     }
@@ -2390,12 +2382,12 @@ auto CCharEntity::applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTa
     auto* PTarget = PAI->TargetFind->getValidTarget(dynamic_cast<CBattleEntity*>(PResolved), validTargetFlags);
     if (PTarget)
     {
-        if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget); PChar && charutils::IsAidBlocked(this, PChar))
         {
             // Target is blocking assistance
             errMsg = std::make_unique<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
+            PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
         }
         else if (IsMobOwner(PTarget))
         {

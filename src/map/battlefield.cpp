@@ -319,11 +319,10 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         return false;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
         if (GetPlayerCount() < GetMaxParticipants())
         {
-            CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
             if (enter)
             {
                 ApplyLevelRestrictions(PChar);
@@ -366,7 +365,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         {
             auto* pet = dynamic_cast<CPetEntity*>(PEntity);
 
-            if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
+            if (pet && pet->PMaster && dynamic_cast<const CCharEntity*>(pet->PMaster) != nullptr)
             {
                 // Properly set the existing pet to exist within this battlefield
                 pet->m_bcnmID        = GetID();
@@ -443,7 +442,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
         return nullptr;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(PEntity) != nullptr)
     {
         for (const auto id : m_EnteredPlayers)
         {
@@ -662,7 +661,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             {
                 // Disappear pets that do not belong to players
                 auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity);
-                if (PPetEntity && (!PPetEntity->PMaster || PPetEntity->PMaster->objtype != TYPE_PC))
+                if (PPetEntity && (!PPetEntity->PMaster || dynamic_cast<const CCharEntity*>(PPetEntity->PMaster) == nullptr))
                 {
                     PEntity->status = xi::Status::Disappear;
                 }

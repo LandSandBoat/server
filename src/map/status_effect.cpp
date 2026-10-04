@@ -80,9 +80,9 @@ auto CStatusEffect::SetOwner(CBattleEntity* owner) -> void
 
 auto CStatusEffect::MarkPersistDirty() const -> void
 {
-    if (owner_ != nullptr && owner_->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(owner_))
     {
-        static_cast<CCharEntity*>(owner_)->setPersist(CharPersist::Effects);
+        PChar->setPersist(CharPersist::Effects);
     }
 }
 

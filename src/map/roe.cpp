@@ -216,7 +216,7 @@ auto event(const ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& p
 {
     TracyZoneScoped;
 
-    if (!settings::get<bool>("main.ENABLE_ROE") || !PChar || PChar->objtype != TYPE_PC)
+    if (!settings::get<bool>("main.ENABLE_ROE") || !PChar)
     {
         return false;
     }

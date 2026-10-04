@@ -232,9 +232,8 @@ auto CAbilityState::Update(const timer::time_point tick) -> bool
 
     if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_PAbility->getAnimationTime())
     {
-        if (m_PEntity->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
         {
-            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
             PChar->m_charHistory.abilitiesUsed++;
         }
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", m_PEntity, m_PAbility.get());
@@ -251,10 +250,8 @@ auto CAbilityState::CanUseAbility() const -> bool
 
     std::unique_ptr<CBasicPacket> errMsg;
 
-    if (m_PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PEntity);
-
         const bool isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
 
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))

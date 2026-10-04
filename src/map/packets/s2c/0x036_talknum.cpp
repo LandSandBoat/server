@@ -22,6 +22,7 @@
 #include "0x036_talknum.h"
 
 #include "entities/base_entity.h"
+#include "entities/char_entity.h"
 
 GP_SERV_COMMAND_TALKNUM::GP_SERV_COMMAND_TALKNUM(CBaseEntity* PEntity, const uint16 messageID, const bool showName, const uint8 mode)
 {
@@ -29,6 +30,6 @@ GP_SERV_COMMAND_TALKNUM::GP_SERV_COMMAND_TALKNUM(CBaseEntity* PEntity, const uin
 
     packet.UniqueNo = PEntity->id;
     packet.ActIndex = PEntity->targid;
-    packet.MesNum   = (PEntity->objtype == TYPE_PC || !showName) ? (messageID + 0x8000) : messageID;
+    packet.MesNum   = (dynamic_cast<const CCharEntity*>(PEntity) != nullptr || !showName) ? (messageID + 0x8000) : messageID;
     packet.Type     = mode;
 }

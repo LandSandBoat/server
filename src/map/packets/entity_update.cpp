@@ -26,6 +26,7 @@
 #include "entity_update.h"
 
 #include "entities/base_entity.h"
+#include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "status_effect_container.h"
@@ -403,7 +404,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint32>(0x21) = static_cast<uint32>(PMob->m_flags);
                 ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
                 ref<uint8>(0x27)  = PMob->m_name_prefix;
-                if (PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
+                if (PMob->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PMob->PMaster) != nullptr)
                 {
                     ref<uint8>(0x27) |= 0x08;
                 }
@@ -618,7 +619,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     }
 
     //  Don't overwrite data for model size and hitbox size from look string on NPCs
-    if (packet->SendFlg.General && (PEntity->objtype == TYPE_PC || PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_MOB))
+    if (packet->SendFlg.General && (dynamic_cast<const CCharEntity*>(PEntity) != nullptr || PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_MOB))
     {
         packet->Flags1.GraphSize = PEntity->modelSize;
         // For some reason, SE reused a player struct where this "g" value is the hitbox size.

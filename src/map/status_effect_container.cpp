@@ -526,9 +526,9 @@ bool CStatusEffectContainer::AddStatusEffect(std::unique_ptr<CStatusEffect> PSta
 
         m_POwner->addModifiers(&PStatusEffect->modList());
 
-        if (PStatusEffect->GetStatusID() >= xi::StatusEffect::FireManeuver && PStatusEffect->GetStatusID() <= xi::StatusEffect::DarkManeuver && m_POwner->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_POwner); PStatusEffect->GetStatusID() >= xi::StatusEffect::FireManeuver && PStatusEffect->GetStatusID() <= xi::StatusEffect::DarkManeuver && PChar)
         {
-            puppetutils::CheckAttachmentsForManeuver((CCharEntity*)m_POwner, PStatusEffect->GetStatusID(), true);
+            puppetutils::CheckAttachmentsForManeuver(PChar, PStatusEffect->GetStatusID(), true);
         }
 
         if (m_POwner->health.maxhp != 0) // make sure we're not in the middle of logging in
@@ -536,10 +536,8 @@ bool CStatusEffectContainer::AddStatusEffect(std::unique_ptr<CStatusEffect> PSta
             m_POwner->UpdateHealth();
         }
 
-        if (m_POwner->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_POwner))
         {
-            CCharEntity* PChar = (CCharEntity*)m_POwner;
-
             PChar->setPersist(CharPersist::Effects);
 
             if (PStatusEffect->GetIcon() != 0)
@@ -596,10 +594,8 @@ void CStatusEffectContainer::DeleteStatusEffects()
 
     if (effects_removed)
     {
-        if (m_POwner->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_POwner))
         {
-            CCharEntity* PChar = (CCharEntity*)m_POwner;
-
             if (update_icons)
             {
                 UpdateStatusIcons();
@@ -625,10 +621,8 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, co
         m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", m_POwner, PStatusEffect);
 
         m_POwner->delModifiers(&PStatusEffect->modList());
-        if (m_POwner->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_POwner))
         {
-            auto* PChar = static_cast<CCharEntity*>(m_POwner);
-
             PChar->setPersist(CharPersist::Effects);
 
             if (notice != EffectNotice::Silent && PStatusEffect->GetIcon() != 0 && !(PStatusEffect->HasEffectFlag(xi::StatusEffectFlag::NoLossMessage)))
@@ -797,7 +791,7 @@ void CStatusEffectContainer::HandleEffectGainSideEffects(CStatusEffect* StatusEf
     if (m_POwner->isAlive())
     {
         // this should actually go into a char charm AI
-        if (m_POwner->objtype == TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(m_POwner) != nullptr)
         {
             if (effect == xi::StatusEffect::CharmI || effect == xi::StatusEffect::CharmIi)
             {
@@ -1280,12 +1274,11 @@ auto CStatusEffectContainer::StealStatusEffect(xi::StatusEffectFlag flag, Effect
 
 void CStatusEffectContainer::UpdateStatusIcons()
 {
-    if (m_POwner->objtype != TYPE_PC)
+    auto* PChar = dynamic_cast<CCharEntity*>(m_POwner);
+    if (!PChar)
     {
         return;
     }
-
-    auto* PChar = static_cast<CCharEntity*>(m_POwner);
 
     m_Flags = 0;
     std::memset(m_StatusIcons, static_cast<int>(xi::StatusEffect::None), sizeof(m_StatusIcons));
@@ -1528,7 +1521,7 @@ auto CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect) -> voi
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
-    if (m_POwner->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(m_POwner) == nullptr)
     {
         ShowWarning("Non-PC calling function (%s).", m_POwner->getName());
         return;
@@ -1621,7 +1614,7 @@ auto CStatusEffectContainer::BuildPersistRows(const IsLogout logout) -> std::vec
 {
     std::vector<PersistedEffect> rows;
 
-    if (m_POwner->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(m_POwner) == nullptr)
     {
         return rows;
     }
@@ -1701,7 +1694,7 @@ auto CStatusEffectContainer::BuildPersistRows(const IsLogout logout) -> std::vec
 void CStatusEffectContainer::DropEffectsForTransition(const IsLogout logout)
 {
     // Print entity name and bail out if entity isn't a player.
-    if (m_POwner->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(m_POwner) == nullptr)
     {
         ShowDebug("Non-player entity %s (ID: %d) attempt to drop Status Effects.", m_POwner->getName(), m_POwner->id);
 
@@ -1791,9 +1784,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         PEntity = PEntity->PMaster;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (auraTarget == AURA_TARGET::ALLIES)
         {
             PChar->ForPartyWithTrusts(
@@ -2034,11 +2026,7 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
 
     if (!m_POwner->isDead())
     {
-        CCharEntity* PChar = nullptr;
-        if (m_POwner->objtype == TYPE_PC)
-        {
-            PChar = (CCharEntity*)m_POwner;
-        }
+        auto* PChar = dynamic_cast<CCharEntity*>(m_POwner);
 
         // Regen / Refresh are clamped to 0 so that negative values don't drain HP/MP from the player.
         // A busted Dancer(Regen) or Evoker(Refresh) carry negative values but do not cause the player to lose HP/MP.
@@ -2072,7 +2060,7 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
         }
 
         // Final perpetuation = (Base / Half_Factor +- Reductions Or Penalties) * Avatar_Favor_Factor -> Minimum perpetuation is 1 except with 2Hour. Then refresh is applied.
-        if (m_POwner->getMod(xi::Mod::AVATAR_PERPETUATION) > 0 && (m_POwner->objtype == TYPE_PC))
+        if (m_POwner->getMod(xi::Mod::AVATAR_PERPETUATION) > 0 && (dynamic_cast<const CCharEntity*>(m_POwner) != nullptr))
         {
             int16 perpetuationCost = m_POwner->getMod(xi::Mod::AVATAR_PERPETUATION);
 
