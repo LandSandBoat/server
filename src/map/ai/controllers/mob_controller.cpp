@@ -1049,7 +1049,7 @@ auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
         return false;
     }
 
-    return !CanTrackByScent(PTarget);
+    return true;
 }
 
 auto CMobController::CheckDetection(CBattleEntity* PTarget) -> bool
