@@ -59,6 +59,7 @@
 #include "map/packets/c2s/0x0ab_guild_buylist.h"
 #include "map/packets/c2s/0x0ac_guild_sell.h"
 #include "map/packets/c2s/0x0ad_guild_selllist.h"
+#include "map/packets/c2s/0x0c4_group_comlink_active.h"
 #include "map/packets/c2s/0x0e0_set_usermsg.h"
 #include "map/packets/c2s/0x0fa_myroom_layout.h"
 #include "map/packets/c2s/0x0fc_myroom_plant_add.h"
@@ -591,6 +592,34 @@ void CLuaClientEntityPairActions::setSearchMessage(const std::string& message, s
 
     std::memcpy(data->sMessage, message.data(), std::min(message.size(), sizeof(data->sMessage)));
     data->msgType = msgType.value_or(0);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: linkshellActive()
+ *  Purpose : Emits packet 0x0C4 to equip, unequip or create a linkshell item.
+ *  Example : player.actions:linkshellActive(invSlot, 1, true)
+ *  Notes   : name is only used when creating
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::linkshellActive(const uint8 invSlot, const uint8 lsNum, const bool active, sol::optional<std::string> name) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE>();
+    auto*      data   = packet->as<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE>();
+
+    data->a           = 15;
+    data->ItemIndex   = invSlot;
+    data->Category    = LOC_INVENTORY;
+    data->ActiveFlg   = active ? 1 : 0;
+    data->LinkshellId = lsNum;
+
+    if (name)
+    {
+        char encoded[LinkshellStringLength] = {};
+        EncodeStringLinkshell(*name, encoded);
+        std::memcpy(data->sComLinkName, encoded, sizeof(data->sComLinkName));
+    }
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -1205,6 +1234,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("bazaarPrice", CLuaClientEntityPairActions::bazaarPrice);
     SOL_REGISTER("bazaarOpen", CLuaClientEntityPairActions::bazaarOpen);
     SOL_REGISTER("setSearchMessage", CLuaClientEntityPairActions::setSearchMessage);
+    SOL_REGISTER("linkshellActive", CLuaClientEntityPairActions::linkshellActive);
     SOL_REGISTER("bazaarBuy", CLuaClientEntityPairActions::bazaarBuy);
     SOL_REGISTER("acceptRaise", CLuaClientEntityPairActions::acceptRaise);
     SOL_REGISTER("engage", CLuaClientEntityPairActions::engage);

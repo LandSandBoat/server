@@ -48,6 +48,13 @@ end
 function CClientEntityPair:getSearchMessage()
 end
 
+---Linkshell id in slot 1 or 2, 0 if none
+---@nodiscard
+---@param lsNum integer 1 or 2
+---@return integer
+function CClientEntityPair:getLinkshellId(lsNum)
+end
+
 ---Get the inventory slot of an item with the specified quantity.
 ---@nodiscard
 ---@param itemId integer Item ID to search for

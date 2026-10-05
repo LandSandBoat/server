@@ -163,6 +163,15 @@ end
 function CClientEntityPairActions:setSearchMessage(message, msgType)
 end
 
+---Send 0x0C4 to equip, unequip or create a linkshell
+---@param invSlot integer
+---@param lsNum integer 1 or 2
+---@param active boolean
+---@param name? string Only used when creating
+---@return nil
+function CClientEntityPairActions:linkshellActive(invSlot, lsNum, active, name)
+end
+
 ---@param sellerInvSlot integer
 ---@param quantity integer
 ---@return nil
