@@ -29,7 +29,6 @@ describe('Linkshell equip', function()
     end)
 
     after_each(function()
-        player.actions:linkshellActive(pearlSlot, 1, false)
         player.actions:dropItem(xi.inventoryLocation.INVENTORY, shellSlot, 1)
     end)
 
@@ -53,6 +52,13 @@ describe('Linkshell equip', function()
 
         assert(player:getLinkshellId(1) == lsId, 'dropped from the linkshell')
         assert(linkSlotItemId(xi.slot.LINK1) == xi.item.LINKPEARL, 'linkpearl no longer equipped')
+    end)
+
+    it('drops equipped members when the linkshell is thrown away', function()
+        player.actions:dropItem(xi.inventoryLocation.INVENTORY, shellSlot, 1)
+
+        assert(player:getLinkshellId(1) == 0, 'still in the linkshell')
+        assert(linkSlotItemId(xi.slot.LINK1) == 0, 'linkpearl still equipped')
     end)
 
     it('unequips the pearl in the slot', function()

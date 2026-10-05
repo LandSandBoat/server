@@ -345,9 +345,11 @@ void CLinkshell::BreakLinkshell()
     uint32 lsid = m_id;
 
     // break logged in and equipped members
-    while (!members.empty())
+    // iterate a copy, the last DelOnlineMember deletes this linkshell
+    const auto onlineMembers = members;
+    for (const auto* PMember : onlineMembers)
     {
-        RemoveMemberByName(members.at(0)->getName(), LSTYPE_LINKSHELL, true);
+        RemoveMemberByName(PMember->getName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
     db::preparedStmt("UPDATE linkshells SET broken = 1 WHERE linkshellid = ? LIMIT 1", lsid);
