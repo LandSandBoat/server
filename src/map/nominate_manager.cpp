@@ -101,26 +101,44 @@ auto parseInput(const std::string& raw) -> std::pair<std::string, std::vector<st
         }
     }
 
+    // No options given offers the full set of blank choices.
+    if (options.empty())
+    {
+        options.resize(maxOptions);
+    }
+
     return { std::move(question), std::move(options) };
 }
 
 //   withTallies=false: "[question]\n1:opt1\n2:opt2\n..."
 //   withTallies=true:  "[question]\n1[N]:opt1\n2[N]:opt2\n..."
+// Without a question the start body is empty and the results are "1[N] 2[N] ...".
 // Tally is 1-indexed
 auto formatBody(const NominateProposal& proposal, const bool withTallies) -> std::string
 {
-    std::string out;
-    out.reserve(80);
-    out.append("[").append(proposal.question).append("]");
+    if (proposal.question.empty())
+    {
+        std::string out;
+        for (size_t optionNumber = 1; withTallies && optionNumber <= proposal.options.size(); ++optionNumber)
+        {
+            out += fmt::format("{}[{}] ", optionNumber, proposal.voteTbl[optionNumber]);
+        }
+
+        return out;
+    }
+
+    auto out = fmt::format("[{}]", proposal.question);
     for (size_t i = 0; i < proposal.options.size(); ++i)
     {
         const auto optionNumber = i + 1;
-        out.append("\n").append(std::to_string(optionNumber));
         if (withTallies)
         {
-            out.append("[").append(std::to_string(proposal.voteTbl[optionNumber])).append("]");
+            out += fmt::format("\n{}[{}]:{}", optionNumber, proposal.voteTbl[optionNumber], proposal.options[i]);
         }
-        out.append(":").append(proposal.options[i]);
+        else
+        {
+            out += fmt::format("\n{}:{}", optionNumber, proposal.options[i]);
+        }
     }
 
     return out;
