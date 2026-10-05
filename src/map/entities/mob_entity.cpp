@@ -827,7 +827,8 @@ void CMobEntity::Spawn()
     // Roam immediately on spawn
     const auto minTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurnsMin));
     const auto maxTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns));
-    if (CanRoam() && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), minTurns, maxTurns, m_roamFlags, roamRegion_))
+    const bool isWorm   = (m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None;
+    if (CanRoam() && !isWorm && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), minTurns, maxTurns, m_roamFlags, roamRegion_))
     {
         PAI->PathFind->FollowPath(timer::now());
     }
