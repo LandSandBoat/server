@@ -849,25 +849,25 @@ look_t stringToLook(std::string str)
 bool approximatelyEqual(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return fabs(a - b) <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return fabs(a - b) <= (std::max(fabs(a), fabs(b)) * epsilon);
 }
 
 bool essentiallyEqual(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return fabs(a - b) <= ((fabs(a) > fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return fabs(a - b) <= (std::min(fabs(a), fabs(b)) * epsilon);
 }
 
 bool definitelyGreaterThan(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return (a - b) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return (a - b) > (std::max(fabs(a), fabs(b)) * epsilon);
 }
 
 bool definitelyLessThan(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
-    return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+    return (b - a) > (std::max(fabs(a), fabs(b)) * epsilon);
 }
 
 XI_NOINLINE void crash()

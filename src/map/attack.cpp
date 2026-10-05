@@ -759,10 +759,7 @@ void CAttack::ProcessDamage()
     // TODO: find out proper fSTR calc for low level mobs when your VIT is ridiculously high. It's likely that this is slightly wrong (possibly you'd get more hits for 0 than you should)
     // However, there are legitimate strategies on retail with 1 dmg weapons and negative fSTR ranks that result in all auto attacks hitting for 0 but using enspells for damage so no TP is fed.
     // Absorption isn't possible at this point in the calculation, so zero it.
-    if (m_damage < 0)
-    {
-        m_damage = 0;
-    }
+    m_damage = std::max(m_damage, 0);
 
     // Try skill up.
     if (m_damage > 0)

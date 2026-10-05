@@ -291,10 +291,7 @@ uint32 CMobEntity::GetRandomGil()
 
     float gil = (float)pow(GetMLevel(), 1.05f);
 
-    if (gil < 1)
-    {
-        gil = 1;
-    }
+    gil = std::max(gil, 1.0f);
 
     uint16 highGil = (uint16)(gil / 3 + 4);
 
@@ -303,10 +300,7 @@ uint32 CMobEntity::GetRandomGil()
         highGil = max;
     }
 
-    if (highGil < 2)
-    {
-        highGil = 2;
-    }
+    highGil = std::max<uint16>(highGil, 2);
 
     // randomize it
     gil += xirand::GetRandomNumber(highGil);

@@ -2242,7 +2242,7 @@ void CCharEntity::OnRaise()
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
 
-        addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addHP(std::max<uint16>(hpReturned, 1));
         updatemask |= UPDATE_HP;
 
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));

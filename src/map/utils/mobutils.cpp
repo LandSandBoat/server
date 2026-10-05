@@ -272,15 +272,9 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
     }
 
     // Clamp to 0 for edge cases that might cause the offset go negative.
-    if (offset < 0)
-    {
-        offset = 0;
-    }
+    offset = std::max<int8>(offset, 0);
 
-    if (rangedOffset < 0)
-    {
-        rangedOffset = 0;
-    }
+    rangedOffset = std::max<int8>(rangedOffset, 0);
 
     // Set default offsets. Will be calculated in battlentity::GetMainWeaponDmg()
     PMob->setMobMod(xi::MobMod::DamageOffset, offset);
@@ -1012,7 +1006,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     // cap all stats for mLvl / job
     for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PMob->GetMJob(), mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PMob->GetMJob(), std::min<uint8>(mLvl, 99));
         if (maxSkill != 0)
         {
             PMob->WorkingSkills.skill[i] = maxSkill;
@@ -1020,7 +1014,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         else // if the mob is WAR/BLM and can cast spell
         {
             // set skill as high as main level, so their spells won't get resisted
-            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PMob->GetSJob(), mLvl > 99 ? 99 : mLvl);
+            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PMob->GetSJob(), std::min<uint8>(mLvl, 99));
 
             if (maxSubSkill != 0)
             {
@@ -1030,7 +1024,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     }
     for (int i = static_cast<int>(xi::SkillType::HandToHand); i <= static_cast<int>(xi::SkillType::Staff); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill(3, mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill(3, std::min<uint8>(mLvl, 99));
         if (maxSkill != 0)
         {
             PMob->WorkingSkills.skill[i] = maxSkill;

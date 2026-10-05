@@ -140,10 +140,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     }
 
     // Prevent purchasing larger stacks than the actual stack size in database.
-    if (quantity > PItem->getStackSize())
-    {
-        quantity = PItem->getStackSize();
-    }
+    quantity = std::min(quantity, PItem->getStackSize());
 
     auto transaction = ItemClaimTransaction::start(PChar);
     if (!transaction)

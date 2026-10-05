@@ -354,10 +354,7 @@ auto GetMaxSkill(xi::SkillType SkillID, xi::Job JobID, uint8 level) -> uint16
 
     // TODO: Research on mobs level 99+ is still on-going. This line can be removed once the correct formula/skilltype have been established.
     // max indexed value and level is capped at 99 as stated above for skill_caps table
-    if (level > 99)
-    {
-        level = 99;
-    }
+    level = std::min<uint8>(level, 99);
 
     if (level > maxLevel)
     {
@@ -703,10 +700,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
 
     // Split into non-weapon vs weapon
     int32 nonWeaponPct = pctApplicable - weaponPct;
-    if (nonWeaponPct < 0)
-    {
-        nonWeaponPct = 0; // safety clamp, shouldn't happen unless data is weird
-    }
+    nonWeaponPct       = std::max(nonWeaponPct, 0); // safety clamp, shouldn't happen unless data is weird
 
     float mult = 1.0f;
 
@@ -1638,10 +1632,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
                 if (lvlDiff > 0)
                 {
-                    if (lvlDiff > 10)
-                    {
-                        lvlDiff = 10;
-                    }
+                    lvlDiff = std::min<int8>(lvlDiff, 10);
                     Samba -= ceil(Samba * lvlDiff * .04); // 4% penalty per level
                 }
 
@@ -4633,10 +4624,7 @@ float HandleTranquilHeart(CBattleEntity* PEntity)
         reductionPercent   = ((healingSkill / 10.0f) * 0.5f);
 
         // Reduction Percent Caps at 25%
-        if (reductionPercent > 25)
-        {
-            reductionPercent = 25;
-        }
+        reductionPercent = std::min(reductionPercent, 25.0f);
 
         reductionPercent = reductionPercent / 100.0f;
     }
@@ -5600,7 +5588,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
             cast = std::chrono::floor<std::chrono::milliseconds>(cast * 1.5f);
         }
         uint16 songcasting = PEntity->getMod(xi::Mod::SONG_SPELLCASTING_TIME);
-        cast               = std::chrono::floor<std::chrono::milliseconds>(cast * (1.0f - ((songcasting > 50 ? 50 : songcasting) / 100.0f)));
+        cast               = std::chrono::floor<std::chrono::milliseconds>(cast * (1.0f - (std::min<uint16>(songcasting, 50) / 100.0f)));
     }
     else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
     {
