@@ -617,9 +617,14 @@ public:
                       });
     }
 
+    // free slots of the location that open transactions keep counted as used
+    auto heldSlots(uint8 location) const -> uint8;
+
     void clearTransactions()
     {
-        transactions_.clear();
+        // emptied before the transactions are destroyed, since their rollback can read this list
+        auto closing = std::exchange(transactions_, {});
+        closing.clear();
     }
 
     // The transaction is owned by the initiator

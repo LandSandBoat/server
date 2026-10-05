@@ -23,13 +23,18 @@
 
 #include "item_container.h"
 
-CItemContainer::CItemContainer(uint16 LocationID)
+#include "entities/char_entity.h"
+
+#include <algorithm>
+
+CItemContainer::CItemContainer(uint16 LocationID, const CCharEntity* owner)
 : SortingPacket(0)
 , LastSortingTime(timer::time_point::min())
 , m_id(LocationID)
 , m_buff(0)
 , m_size(0)
 , m_count(0)
+, owner_(owner)
 {
 }
 
@@ -47,7 +52,13 @@ uint8 CItemContainer::GetSize() const
 
 uint8 CItemContainer::GetFreeSlotsCount() const
 {
-    return m_size - m_count;
+    int32 used = m_count;
+    if (owner_)
+    {
+        used += owner_->heldSlots(static_cast<uint8>(m_id));
+    }
+
+    return static_cast<uint8>(std::max(m_size - used, 0));
 }
 
 /************************************************************************
@@ -116,6 +127,12 @@ auto CItemContainer::InsertItem(std::unique_ptr<CItem> PItem) -> uint8
     if (PItem == nullptr)
     {
         ShowWarning("Null item passed into function.");
+        return ERROR_SLOTID;
+    }
+
+    if (GetFreeSlotsCount() == 0)
+    {
+        ShowDebug("ItemContainer: Container is full");
         return ERROR_SLOTID;
     }
 

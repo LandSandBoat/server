@@ -454,6 +454,11 @@ auto Transaction::reversible() const -> bool
     return true;
 }
 
+auto Transaction::heldSlots(uint8 /* location */) const -> uint8
+{
+    return 0;
+}
+
 // The undo takes back what landed rather than what was requested; the two differ when a stack hits its size limit
 auto Transaction::recordGive(CCharEntity* PChar, const uint8 location, const uint8 slot, const int32 applied) -> std::optional<uint8>
 {

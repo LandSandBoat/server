@@ -76,6 +76,9 @@ public:
     // whether this transaction is the one allowed to mutate the item
     auto holds(const CItem* item) const -> bool;
 
+    // free slots of the location this transaction keeps counted as used
+    virtual auto heldSlots(uint8 location) const -> uint8;
+
     [[nodiscard]] auto commit() -> bool;
     void               rollback();
 

@@ -87,6 +87,13 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
         return nullptr;
     };
 
+    // the result needs a free slot
+    if (container->GetFreeSlotsCount() == 0)
+    {
+        ShowWarningFmt("SynthTransaction::start: {} has no free inventory slot", player->getName());
+        return abandon();
+    }
+
     auto* crystalItem = container->GetItem(offer.crystal.invSlot);
 
     const auto crystalClaim = transaction->claimAndLock(crystalItem);
@@ -175,9 +182,22 @@ void SynthTransaction::setResultDelivery(const CCraftState::Result result)
     pendingResult_ = result;
 }
 
+auto SynthTransaction::heldSlots(const uint8 location) const -> uint8
+{
+    if (location != LOC_INVENTORY || this->delivering_)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
 // Synthesis is complete: consume all ingredients not explicitly saved and deliver result
 auto SynthTransaction::doCommit() -> bool
 {
+    // free the held slot so the result can take it
+    this->delivering_ = true;
+
     std::array<uint8, MAX_CONTAINER_SIZE> consumePerSlot{};
     for (const auto& s : this->slots_)
     {

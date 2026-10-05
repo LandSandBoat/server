@@ -71,6 +71,9 @@ public:
 
     void setResultDelivery(CCraftState::Result result);
 
+    // the inventory shows one less free slot until the result is delivered
+    auto heldSlots(uint8 location) const -> uint8 override;
+
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
@@ -84,4 +87,5 @@ private:
     std::array<Slot, MaxSlots> slots_{}; // [0] crystal, [1..8] ingredients
 
     Maybe<CCraftState::Result> pendingResult_;
+    bool                       delivering_{ false };
 };
