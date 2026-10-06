@@ -257,8 +257,9 @@ end
 ---@param target CBaseEntity
 ---@param baseHitDamage number
 ---@param params physicalMobSkillHitParams
+---@param action CAction
 ---@return physicalHitInfo
-local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
+local function handleSinglePhysicalHit(mob, target, baseHitDamage, params, action)
     local hitNumber                = params.hitNumber
     local hitParried               = xi.combat.physical.isParried(target, mob) and not params.skipParry
     local hitGuarded               = xi.combat.physical.isGuarded(target, mob) and not params.skipGuard
@@ -316,6 +317,8 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
         if target:getMod(xi.mod.SHIELD_MASTERY_TP) > 0 then
             blockedWithShieldMastery = true
         end
+
+        action:resolution(target:getID(), xi.action.resolution.BLOCK)
     end
 
     hitDamage = math.floor(hitDamage * xi.combat.damage.physicalElementSDT(target, params.damageType))
@@ -863,7 +866,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
 
                 local damageForThisHit = (hitNumber == 1) and baseDamage or subsequentDamage
 
-                hitInfo = handleSinglePhysicalHit(mob, target, damageForThisHit, hitParams)
+                hitInfo = handleSinglePhysicalHit(mob, target, damageForThisHit, hitParams, action)
 
                 hitInfo.shadowsConsumed  = shadowsConsumed
             else
