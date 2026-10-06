@@ -2997,7 +2997,7 @@ npcs:
     content:  toau
 
   17064113:
-    script:       ???
+    script:       qm_map
     display_name: ???
     at:           [-318.752, -1.075, -488.509]
     render:
@@ -3009,7 +3009,7 @@ npcs:
     content: toau
 
   17064114:
-    script:       ???
+    script:       qm_map
     display_name: ???
     at:           [-321.128, -1.131, -523.518]
     render:
@@ -3385,7 +3385,7 @@ npcs:
     widescan: true
 
   17064135:
-    script:       GateChocoboC
+    script:       Gate_Chocobo_Circuit
     display_name: 'Gate: Chocobo Circuit'
     at:           [-482.700, -1.250, -371.000]
     render:
@@ -3398,7 +3398,7 @@ npcs:
     content:  toau
 
   17064136:
-    script:       GateChocoboC
+    script:       Gate_Chocobo_Circuit
     display_name: 'Gate: Chocobo Circuit'
     at:           [-514.159, -1.350, -524.358]
     render:
@@ -3411,7 +3411,7 @@ npcs:
     content:  toau
 
   17064137:
-    script:       GateChocoboC
+    script:       Gate_Chocobo_Circuit
     display_name: 'Gate: Chocobo Circuit'
     at:           [-136.000, -1.499, -521.750]
     render:
@@ -3424,7 +3424,7 @@ npcs:
     content:  toau
 
   17064138:
-    script:       GateChocoboC
+    script:       Gate_Chocobo_Circuit
     display_name: 'Gate: Chocobo Circuit'
     at:           [-340.000, -1.500, -314.299]
     render:
@@ -3437,7 +3437,7 @@ npcs:
     content:  toau
 
   17064139:
-    script:       GateChocoboC
+    script:       Gate_Chocobo_Circuit
     display_name: 'Gate: Chocobo Circuit'
     at:           [-150.000, -2.000, -392.750]
     render:

@@ -16,13 +16,18 @@ zones[xi.zone.CHOCOBO_CIRCUIT] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FIND_ON_COUNTER               = 9511, -- You find <keyitem> on the counter.
+        ALREADY_POSSESS               = 9513, -- You already possess <keyitem>.
+        WELCOME_ADVENTURER            = 9514, -- Welcome, adventurer!
     },
     mob =
     {
     },
     npc =
     {
-        RUNGAGA = GetFirstID('Rungaga'),
+        RUNGAGA       = GetFirstID('Rungaga'),
+        GATE_OFFSET   = GetFirstID('Gate_Chocobo_Circuit'),
+        QM_MAP_OFFSET = GetFirstID('qm_map'),
     },
 }
 
