@@ -3904,6 +3904,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             }
         }
 
+        if (attack.IsFirstSwing())
+        {
+            StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::SneakAttack);
+            StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::TrickAttack);
+        }
+
         attackRound.DeleteAttackSwing();
 
         if (list.results.size() == 8)
