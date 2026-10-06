@@ -10,7 +10,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 220 and option == 333 then
+    if csid == 220 and option == 256 then
         player:delKeyItem(xi.keyItem.FERRY_TICKET)
     end
 end

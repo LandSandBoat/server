@@ -26,7 +26,7 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    xi.transport.dockMessage(npc, triggerID, messages, xi.zone.SELBINA)
+    xi.transport.dockMessage(npc, triggerID, messages)
 end
 
 entity.onTrigger = function(player, npc)
