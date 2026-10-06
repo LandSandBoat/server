@@ -5,10 +5,13 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.chocoboRacing.registerPads(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+
+    xi.chocoboRacing.onPadsZoneIn(player, prevZone)
 
     if
         player:getXPos() == 0 and
@@ -21,10 +24,16 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.onZoneOut = function(player)
+    xi.chocoboRacing.onPadsZoneOut(player)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.chocoboRacing.onPadTriggerAreaEnter(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
+    xi.chocoboRacing.onPadEventUpdate(player, csid, option)
     xi.chocoboRacing.onEventUpdate(player, csid, option, npc)
 end
 
