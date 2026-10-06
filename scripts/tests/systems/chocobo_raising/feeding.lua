@@ -85,6 +85,70 @@ describe('Chocobo raising feeding', function()
         assert(player:getChocoboRaisingInfo().energy == 100, 'Expected full energy')
     end)
 
+    it('gives no energy to a chocobo fed while completely full', function()
+        raisingClient.setChocobo(player, { hunger = xi.chocoboRaising.maxHunger, energy = 18 })
+
+        player:addItem(xi.item.GREGARIOUS_WORM)
+        feedItems({ xi.item.GREGARIOUS_WORM })
+
+        local energy = player:getChocoboRaisingInfo().energy
+        assert(energy == 18, string.format('Expected energy to stay at 18, got %d', energy))
+    end)
+
+    it('fills a starving chocobo to completely full with a Gregarious Worm', function()
+        player:addItem(xi.item.GREGARIOUS_WORM)
+        feedItems({ xi.item.GREGARIOUS_WORM })
+
+        local hunger = xi.chocoboRaising.numberToRank(player:getChocoboRaisingInfo().hunger)
+        assert(hunger == xi.chocoboRaising.hunger.COMPLETELY_FULL, string.format('Expected completely full, got rank %d', hunger))
+    end)
+
+    it('forgets an ability on a winning Lethe roll and keeps it on a losing one', function()
+        raisingClient.setChocobo(player, { ability1 = xi.chocoboRaising.ability.GALLOP })
+
+        player:addItem(xi.item.LETHE_CONSOMME)
+        feedItems({ xi.item.LETHE_CONSOMME })
+        assert(player:getChocoboRaisingInfo().ability1 == xi.chocoboRaising.ability.GALLOP, 'Expected the ability kept')
+
+        stub('xi.chocoboRaising.rolls', true)
+
+        player:addItem(xi.item.LETHE_CONSOMME)
+        feedItems({ xi.item.LETHE_CONSOMME })
+        assert(player:getChocoboRaisingInfo().ability1 == 0, 'Expected the ability forgotten')
+    end)
+
+    it('lowers a stat with a Parasite Worm', function()
+        raisingClient.setChocobo(player, { strength = 50, endurance = 50, discernment = 50, receptivity = 50 })
+
+        player:addItem(xi.item.PARASITE_WORM)
+        feedItems({ xi.item.PARASITE_WORM })
+
+        local strength = player:getChocoboRaisingInfo().strength
+        assert(strength == 50 - xi.chocoboRaising.statPerFoodArrow, string.format('Expected STR lowered, got %d', strength))
+    end)
+
+    it('lowers a chick\'s stat with Worm Paste, and no adult\'s', function()
+        raisingClient.setChocobo(player, { strength = 50 })
+
+        player:addItem(xi.item.WORM_PASTE)
+        feedItems({ xi.item.WORM_PASTE })
+        assert(player:getChocoboRaisingInfo().strength == 50 - xi.chocoboRaising.statPerFoodArrow, 'Expected the chick\'s STR lowered')
+
+        raisingClient.setChocobo(player, { stage = xi.chocoboRaising.stage.ADULT_1, strength = 50, hunger = 0 })
+        player:addItem(xi.item.WORM_PASTE)
+        feedItems({ xi.item.WORM_PASTE })
+        assert(player:getChocoboRaisingInfo().strength == 50, 'Expected the adult\'s STR kept')
+    end)
+
+    it('leaves La Theine Millet in the trade', function()
+        player:addItem(xi.item.BUNCH_OF_GYSAHL_GREENS)
+        player:addItem(xi.item.LA_THEINE_MILLET)
+        feedItems({ xi.item.BUNCH_OF_GYSAHL_GREENS, xi.item.LA_THEINE_MILLET })
+
+        player.assert:hasItem(xi.item.LA_THEINE_MILLET)
+        player.assert.no:hasItem(xi.item.BUNCH_OF_GYSAHL_GREENS)
+    end)
+
     it('heals an injury at the next rollover', function()
         raisingClient.setChocobo(player, { conditions = bit.lshift(1, xi.chocoboRaising.conditions.INJURED) })
         player:addItem(xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS)

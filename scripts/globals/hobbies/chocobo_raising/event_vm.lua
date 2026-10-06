@@ -710,13 +710,16 @@ local function handleCareMenu(player, chocoState, arg)
 end
 
 local function eatFood(chocoState, itemData)
-    local hunger    = foodValue(itemData, chocoState, 'hunger') * xi.chocoboRaising.hungerPerArrow
-    local affection = foodValue(itemData, chocoState, 'affection') * xi.chocoboRaising.affectionPerArrow
+    -- A chocobo fed while completely full gets no energy from it.
+    local full = xi.chocoboRaising.numberToRank(chocoState.hunger) >= xi.chocoboRaising.hunger.COMPLETELY_FULL
 
-    chocoState.hunger    = utils.clamp(chocoState.hunger + hunger, 0, xi.chocoboRaising.maxHunger)
-    chocoState.affection = utils.clamp(chocoState.affection + affection, 0, 255)
+    chocoState.hunger    = utils.clamp(chocoState.hunger + foodValue(itemData, chocoState, 'hunger'), 0, xi.chocoboRaising.maxHunger)
+    chocoState.affection = utils.clamp(chocoState.affection + foodValue(itemData, chocoState, 'affection'), 0, 255)
 
-    if itemData.energy then
+    if
+        itemData.energy and
+        not full
+    then
         chocoState.energy = utils.clamp(chocoState.energy + itemData.energy, 0, 100)
     end
 
@@ -731,14 +734,17 @@ local function eatFood(chocoState, itemData)
         xi.chocoboRaising.addPendingCure(chocoState, condition)
     end
 
-    local randomStat = itemData.randomStat
+    local randomStat = foodValue(itemData, chocoState, 'randomStat')
     if
         randomStat and
         xi.chocoboRaising.rolls(randomStat.chance)
     then
         local index  = randomStat.stats[math.randomInt(1, #randomStat.stats)]
         local change = xi.chocoboRaising.statPerFoodArrow
-        if randomStat.eitherWay and math.randomInt(1, 2) == 1 then
+        if
+            randomStat.lowers or
+            (randomStat.eitherWay and math.randomInt(1, 2) == 1)
+        then
             change = -change
         end
 
@@ -760,7 +766,10 @@ local function eatFood(chocoState, itemData)
         end
     end
 
-    if itemData.forgetsAbility then
+    if
+        itemData.forgetsAbility and
+        xi.chocoboRaising.rolls(xi.chocoboRaising.forgetChance)
+    then
         local learned = {}
         for _, slot in ipairs({ 'ability1', 'ability2' }) do
             if chocoState[slot] ~= 0 then

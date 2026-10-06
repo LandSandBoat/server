@@ -25,11 +25,11 @@ xi.chocoboRaising.affectionPerPlanArrow = 2
 -- Finish option of "Request documentation" that asks for a chococard.
 xi.chocoboRaising.documentChococard = 239
 
--- Raw points per food arrow. One hunger arrow is one hunger rank. Affection and stat per arrow are guesses.
-xi.chocoboRaising.hungerPerArrow    = 32
-xi.chocoboRaising.maxHunger         = 255
-xi.chocoboRaising.affectionPerArrow = 24
-xi.chocoboRaising.statPerFoodArrow  = 2
+xi.chocoboRaising.maxHunger        = 255
+xi.chocoboRaising.statPerFoodArrow = 2
+
+-- Lethe Consomme and Potage can take several feedings to make a chocobo forget.
+xi.chocoboRaising.forgetChance = 25
 
 -----------------------------------
 -- Tables
@@ -398,36 +398,34 @@ xi.chocoboRaising.conditionEndOdds =
     [cond.BRIGHT_AND_FOCUSED] = 50,
 }
 
--- Values are in arrows; stats are STR, END, DSC, RCP. chick overrides for chicks. energy 100 fills.
--- randomStat raises one of its stats by an arrow at its chance.
+-- Hunger and affection are raw points, 32 to a rank. Stats are arrows of STR, END, DSC and RCP.
 ---@type table<xi.item, ChocoboFood>
 xi.chocoboRaising.validFoods =
 {
-    [xi.item.BUNCH_OF_SHARUG_GREENS      ] = { category = food.FOOD,   hunger = 2, affection =  1, glow = glow.RED,    randomStat = { stats = { 1, 2 }, chance = odds.foodStat } },
-    [xi.item.BUNCH_OF_GYSAHL_GREENS      ] = { category = food.FOOD,   hunger = 3, affection =  2, glow = glow.RED },
-    [xi.item.BUNCH_OF_AZOUPH_GREENS      ] = { category = food.FOOD,   hunger = 4, affection =  3, glow = glow.RED,    randomStat = { stats = { 3, 4 }, chance = odds.foodStat } },
-    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS ] = { category = food.CURE,   hunger = 2, affection =  1, glow = glow.YELLOW, cures = { cond.INJURED } },
-    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { category = food.CURE,   hunger = 2, affection =  1, glow = glow.YELLOW, cures = illness },
-    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS  ] = { category = food.CURE,   hunger = 2, affection =  1, glow = glow.YELLOW, cures = { cond.STOMACHACHE } },
-    [xi.item.VOMP_CARROT                 ] = { category = food.STAT,   hunger = 2, affection =  1, glow = glow.RED,    stats = {  1,  1, -1, -1 } },
-    [xi.item.ZEGHAM_CARROT               ] = { category = food.STAT,   hunger = 3, affection =  1, glow = glow.BLUE,   stats = { -1, -1,  1,  1 } },
-    [xi.item.SAN_DORIAN_CARROT           ] = { category = food.STAT,   hunger = 3, affection =  1, glow = glow.RED,    randomStat = { stats = { 1, 2, 3, 4 }, chance = odds.foodStat } },
-    [xi.item.CUPID_WORM                  ] = { category = food.STAT,   hunger = 3, affection =  5, glow = glow.BLUE,   stats = { -1, -1,  0,  0 } },
-    [xi.item.PARASITE_WORM               ] = { category = food.STAT,   hunger = 2, affection =  0, glow = glow.BLUE,   rerollGene = true },
-    [xi.item.GREGARIOUS_WORM             ] = { category = food.STAT,   hunger = 5, affection =  0, glow = glow.YELLOW, energy = 20, stats = { 0, 0, -1, -1 } },
-    [xi.item.CHOCOLIXIR                  ] = { category = food.ELIXIR, hunger = 4, affection =  0, glow = glow.YELLOW, energy = 100 },
-    [xi.item.HI_CHOCOLIXIR               ] = { category = food.ELIXIR, hunger = 3, affection =  0, glow = glow.YELLOW, energy = 100 },
-    [xi.item.CELERITY_SALAD              ] = { category = food.CURE,   hunger = 3, affection =  0, glow = glow.GREEN,  cures = allBad },
-    [xi.item.TORNADO_SALAD               ] = { category = food.CURE,   hunger = 3, affection =  0, glow = glow.GREEN,  cures = allBad },
+    [xi.item.BUNCH_OF_SHARUG_GREENS      ] = { category = food.FOOD,   hunger =  64, affection =   8, glow = glow.RED,    randomStat = { stats = { 1, 2 }, chance = odds.foodStat } },
+    [xi.item.BUNCH_OF_GYSAHL_GREENS      ] = { category = food.FOOD,   hunger = 104, affection =   8, glow = glow.RED },
+    [xi.item.BUNCH_OF_AZOUPH_GREENS      ] = { category = food.FOOD,   hunger = 128, affection =  24, glow = glow.RED,    randomStat = { stats = { 3, 4 }, chance = odds.foodStat } },
+    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS ] = { category = food.CURE,   hunger =  16, affection =   8, glow = glow.YELLOW, cures = { cond.INJURED } },
+    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { category = food.CURE,   hunger =  16, affection =   8, glow = glow.YELLOW, cures = illness },
+    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS  ] = { category = food.CURE,   hunger =  16, affection =   8, glow = glow.YELLOW, cures = { cond.STOMACHACHE } },
+    [xi.item.VOMP_CARROT                 ] = { category = food.STAT,   hunger =  96, affection =   8, glow = glow.RED,    stats = {  1,  1, -1, -1 } },
+    [xi.item.ZEGHAM_CARROT               ] = { category = food.STAT,   hunger =  96, affection =   8, glow = glow.BLUE,   stats = { -1, -1,  1,  1 } },
+    [xi.item.SAN_DORIAN_CARROT           ] = { category = food.STAT,   hunger =  96, affection =   8, glow = glow.RED,    randomStat = { stats = { 1, 2, 3, 4 }, chance = odds.foodStat } },
+    [xi.item.CUPID_WORM                  ] = { category = food.STAT,   hunger =  80, affection = 120, glow = glow.BLUE,   stats = { -1, -1,  0,  0 } },
+    [xi.item.PARASITE_WORM               ] = { category = food.STAT,   hunger =  64, affection =   0, glow = glow.BLUE,   rerollGene = true, randomStat = { stats = { 1, 2, 3, 4 }, chance = 100, lowers = true } },
+    [xi.item.GREGARIOUS_WORM             ] = { category = food.STAT,   hunger = 224, affection =   0, glow = glow.YELLOW, energy = 20, stats = { 0, 0, -1, -1 } },
+    [xi.item.CHOCOLIXIR                  ] = { category = food.ELIXIR, hunger = 128, affection =   0, glow = glow.YELLOW, energy = 100 },
+    [xi.item.HI_CHOCOLIXIR               ] = { category = food.ELIXIR, hunger =  96, affection =   0, glow = glow.YELLOW, energy = 100 },
+    [xi.item.CELERITY_SALAD              ] = { category = food.CURE,   hunger =  96, affection =   0, glow = glow.GREEN,  cures = allBad },
+    [xi.item.TORNADO_SALAD               ] = { category = food.CURE,   hunger =  64, affection =   0, glow = glow.GREEN,  cures = allBad },
     -- Only the tonic is used when traded with other items.
-    [xi.item.CHOCOTONIC                  ] = { category = food.CURE,   hunger = 1, affection = -2, glow = glow.YELLOW, wakes = true, alone = true },
-    [xi.item.VEGETABLE_PASTE             ] = { category = food.FOOD,   hunger = 1, affection =  0, glow = glow.RED,    chick = { hunger = 2, affection = 2 } },
-    [xi.item.HERB_PASTE                  ] = { category = food.FOOD,   hunger = 1, affection = -2, glow = glow.RED,    chick = { hunger = 2, affection = 2, cures = { cond.STOMACHACHE, cond.SICK, cond.VERY_ILL, cond.INJURED } } },
-    [xi.item.CARROT_PASTE                ] = { category = food.FOOD,   hunger = 2, affection =  3, glow = glow.RED,    chick = { hunger = 5, affection = 1 }, randomStat = { stats = { 1, 2, 3, 4 }, chance = 100, eitherWay = true } },
-    [xi.item.WORM_PASTE                  ] = { category = food.FOOD,   hunger = 1, affection =  0, glow = glow.RED,    chick = { hunger = 4, affection = 3 } },
-    [xi.item.LETHE_CONSOMME              ] = { category = food.STAT,   hunger = 2, affection =  1, glow = glow.GREEN,  forgetsAbility = true },
-    [xi.item.LETHE_POTAGE                ] = { category = food.STAT,   hunger = 2, affection =  1, glow = glow.GREEN,  forgetsAbility = true },
-    [xi.item.LA_THEINE_MILLET            ] = { category = food.FOOD,   hunger = 1, affection =  0, glow = glow.GREEN },
+    [xi.item.CHOCOTONIC                  ] = { category = food.CURE,   hunger =  32, affection = -48, glow = glow.YELLOW, wakes = true, alone = true },
+    [xi.item.VEGETABLE_PASTE             ] = { category = food.FOOD,   hunger =  16, affection =   0, glow = glow.RED,    chick = { hunger = 64, affection = 16 } },
+    [xi.item.HERB_PASTE                  ] = { category = food.FOOD,   hunger =  32, affection = -48, glow = glow.RED,    chick = { hunger = 64, affection = 16, cures = { cond.STOMACHACHE, cond.SICK, cond.VERY_ILL, cond.INJURED } } },
+    [xi.item.CARROT_PASTE                ] = { category = food.FOOD,   hunger =  64, affection =  24, glow = glow.RED,    chick = { hunger = 160, affection = 8 }, randomStat = { stats = { 1, 2, 3, 4 }, chance = 100, eitherWay = true } },
+    [xi.item.WORM_PASTE                  ] = { category = food.FOOD,   hunger =  32, affection =   0, glow = glow.RED,    chick = { hunger = 128, affection = 24, randomStat = { stats = { 1, 2, 3, 4 }, chance = 100, lowers = true } } },
+    [xi.item.LETHE_CONSOMME              ] = { category = food.STAT,   hunger =  64, affection =   8, glow = glow.GREEN,  forgetsAbility = true },
+    [xi.item.LETHE_POTAGE                ] = { category = food.STAT,   hunger =  64, affection =   8, glow = glow.GREEN,  forgetsAbility = true },
 }
 
 -- Rest has a chance to cure these.
@@ -598,9 +596,9 @@ xi.chocoboRaising.walkItems =
 ---@field affection      integer
 ---@field glow           xi.chocoboRaising.glow
 ---@field stats          integer[]?
----@field randomStat     { stats: integer[], chance: integer, eitherWay: boolean? }?
+---@field randomStat     { stats: integer[], chance: integer, eitherWay: boolean?, lowers: boolean? }?
 ---@field cures          xi.chocoboRaising.conditions[]?
----@field chick          { hunger: integer, affection: integer, cures: xi.chocoboRaising.conditions[]? }?
+---@field chick          { hunger: integer, affection: integer, cures: xi.chocoboRaising.conditions[]?, randomStat: table? }?
 ---@field energy         integer?
 ---@field rerollGene     boolean?
 ---@field wakes          boolean?
