@@ -13,6 +13,34 @@ local settings =
     RACE_PERIOD = 900, -- A race every 15 minutes.
 }
 
+local vars =
+{
+    STANDS_PAID  = '[ChocoboCircuit]StandsPaid',
+    CIRCUIT_GATE = '[ChocoboCircuit]Gate',
+}
+
+local standsAdmissionFee = 50
+
+-- Each circuit section: the zone its gate leads to and the teleport pad down to the inner circuit.
+local circuitGates =
+{
+    { zone = xi.zone.SOUTHERN_SAN_DORIA,   pad = { -509,   -357   } },
+    { zone = xi.zone.BASTOK_MINES,         pad = { -485.4, -532.9 } },
+    { zone = xi.zone.WINDURST_WOODS,       pad = { -150,   -548   } },
+    { zone = xi.zone.PORT_JEUNO,           pad = { -325.8, -287.7 } },
+    { zone = xi.zone.AHT_URHGAN_WHITEGATE, pad = { -163.8, -367.6 } },
+}
+
+-- Pads in the inner circuit, which send the player back up to their section.
+local innerPads =
+{
+    { -318.5, -439.8 },
+    { -361.1, -457.7 },
+    { -361.1, -501.5 },
+    { -279.9, -501.4 },
+    { -280.2, -457.5 },
+}
+
 -- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
 -- TODO: When ready for release, publish these to main settings files.
 xi.settings.main.ENABLE_CHOCOBO_RACING = false
@@ -466,6 +494,107 @@ xi.chocoboRacing.onChocobuckExchangeEventUpdate = function(player, csid, option,
 end
 
 xi.chocoboRacing.onChocobuckExchangeEventFinish = function(player, csid, option, npc)
+end
+
+xi.chocoboRacing.onStandsEntranceTrigger = function(player, index)
+    local hasPass = 0
+    if player:hasKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS) then
+        hasPass = 1
+    end
+
+    player:setLocalVar(vars.STANDS_PAID, 0)
+    player:startEvent(
+        261 + index,
+        hasPass,
+        index, -- Grandstand arrival, in attendant order
+        0      -- TODO: This is set to 1 if you have free entry
+    )
+end
+
+xi.chocoboRacing.onStandsEntranceEventUpdate = function(player, csid, option, npc)
+    if option == 16 then
+        if player:hasKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS) then
+            player:delKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+            player:setLocalVar(vars.STANDS_PAID, 1)
+        end
+
+        player:updateEvent(0)
+    elseif option == 17 then
+        if player:delGil(standsAdmissionFee) then
+            player:setLocalVar(vars.STANDS_PAID, 1)
+            player:updateEvent(0)
+        else
+            player:updateEvent(1)
+        end
+    end
+
+    if player:getLocalVar(vars.STANDS_PAID) == 0 then
+        player:setLocalVar('noPosUpdate', 1)
+    end
+end
+
+xi.chocoboRacing.onStandsEntranceEventFinish = function(player, csid, option, npc)
+    player:setLocalVar('noPosUpdate', 0)
+    player:setLocalVar(vars.STANDS_PAID, 0)
+end
+
+xi.chocoboRacing.onStandsExitTrigger = function(player, index)
+    player:startEvent(
+        327 + index,
+        index -- Circuit arrival, in attendant order
+    )
+end
+
+xi.chocoboRacing.registerPads = function(zone)
+    for gate, circuitGate in ipairs(circuitGates) do
+        zone:registerCylindricalTriggerArea(gate, circuitGate.pad[1], circuitGate.pad[2], 3)
+    end
+
+    for index, pad in ipairs(innerPads) do
+        zone:registerCylindricalTriggerArea(#circuitGates + index, pad[1], pad[2], 3)
+    end
+end
+
+-- Sections only connect through the inner circuit, which always leads back to the section the player came from.
+xi.chocoboRacing.onPadsZoneIn = function(player, prevZone)
+    for gate, circuitGate in ipairs(circuitGates) do
+        if circuitGate.zone == prevZone then
+            player:setCharVar(vars.CIRCUIT_GATE, gate)
+            break
+        end
+    end
+end
+
+xi.chocoboRacing.onPadsZoneOut = function(player)
+    if player:getStatus() ~= xi.status.SHUTDOWN then
+        player:setCharVar(vars.CIRCUIT_GATE, 0)
+    end
+end
+
+xi.chocoboRacing.onPadTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaId = triggerArea:getTriggerAreaID()
+
+    if triggerAreaId <= #circuitGates then
+        player:startEvent(247 + triggerAreaId * 2)
+    else
+        local gate = player:getCharVar(vars.CIRCUIT_GATE)
+        if gate == 0 then
+            gate = 4 -- Jeuno for GMs / broken charvars
+        end
+
+        player:startEvent(248 + gate * 2)
+    end
+end
+
+-- The city pad events only send an update once the player confirms.
+xi.chocoboRacing.onPadEventUpdate = function(player, csid, option)
+    if
+        csid >= 249 and
+        csid <= 257 and
+        csid % 2 == 1
+    then
+        player:setCharVar(vars.CIRCUIT_GATE, (csid - 247) / 2)
+    end
 end
 
 xi.chocoboRacing.onToteboardEventUpdate = function(player, option)
