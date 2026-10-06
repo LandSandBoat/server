@@ -24,6 +24,7 @@
 #include "common/settings.h"
 #include "entities/char_entity.h"
 #include "items/transactions/item_claim.h"
+#include "lua/luautils.h"
 #include "map_session.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -163,6 +164,11 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     if (!transaction->pay(cost) || !transaction->give(LOC_INVENTORY, itemId, quantity) || !transaction->commit())
     {
         return;
+    }
+
+    if (auto* PNpc = zoneutils::GetEntity(PChar->Container->getShopVendorId(), TYPE_NPC))
+    {
+        luautils::OnShopBuy(PChar, PNpc, itemId, quantity, cost);
     }
 
     // Audit the purchase if enabled

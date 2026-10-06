@@ -440,6 +440,7 @@ void OnPetLevelRestriction(CBaseEntity* PMob);
 void OnPath(CBaseEntity* PEntity);
 void OnPathPoint(CBaseEntity* PEntity);
 void OnPathComplete(CBaseEntity* PEntity);
+void OnShopBuy(CCharEntity* PChar, CBaseEntity* PNpc, uint16 itemId, uint32 quantity, uint32 gil);
 
 int32 OnBattlefieldHandlerInitialize(CZone* PZone);
 void  OnBattlefieldInitialize(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
