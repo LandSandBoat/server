@@ -46,6 +46,7 @@ def main():
     function_names.append("cutscene")
     function_names.append("optionalCutscene")
     function_names.append("progressEvent")
+    function_names.append("priorityEvent")
     function_names.append("progressCutscene")
     function_names.append("progressOptionalCutscene")
     function_names.append("importantOnce")
