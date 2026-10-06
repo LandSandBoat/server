@@ -1461,6 +1461,7 @@ xi.combat.physical.calculateBlockRate = function(defender, attacker)
     return blockRate
 end
 
+-- Returns a number to reduce block damage by
 xi.combat.physical.getDamageReductionForBlock = function(defender, attacker, damage)
     -- save original damage for comparison
     local originalDamage = damage
@@ -1477,6 +1478,8 @@ xi.combat.physical.getDamageReductionForBlock = function(defender, attacker, dam
         else
             damage = math.floor(damage * 0.5)
         end
+    else
+        return 0 -- Return no reduction if damage is <= 0
     end
 
     -- return the difference between original and new damage
