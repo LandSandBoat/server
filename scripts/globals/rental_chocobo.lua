@@ -38,7 +38,7 @@ xi.rentalChocobo.chocoboInfo =
     [xi.zone.EASTERN_ALTEPA_DESERT]   = { levelReq = 20, sales = 0, premiumCost = true,  past = false, pos = nil                                                     },
     [xi.zone.TAHRONGI_CANYON]         = { levelReq = 20, sales = 0, premiumCost = true,  past = false, pos = nil                                                     },
     [xi.zone.YHOATOR_JUNGLE]          = { levelReq = 20, sales = 0, premiumCost = true,  past = false, pos = nil                                                     },
-    [xi.zone.SOUTHERN_SAN_DORIA]      = { levelReq = 15, sales = 0, premiumCost = false, past = false, pos = { -126, -62,  274, 101, xi.zone.WEST_RONFAURE         } },
+    [xi.zone.SOUTHERN_SAN_DORIA]      = { levelReq = 15, sales = 0, premiumCost = false, past = false, pos = { -134.940, -62.500, 270.874, 95, xi.zone.WEST_RONFAURE } },
     [xi.zone.BASTOK_MINES]            = { levelReq = 15, sales = 0, premiumCost = false, past = false, pos = {  580,   0, -305,  64, xi.zone.SOUTH_GUSTABERG       } },
     [xi.zone.WINDURST_WOODS]          = { levelReq = 15, sales = 0, premiumCost = false, past = false, pos = { -122,  -4, -520,   0, xi.zone.EAST_SARUTABARUTA     } },
     [xi.zone.UPPER_JEUNO]             = { levelReq = 20, sales = 0, premiumCost = true,  past = false, pos = {  486,   8, -160, 128, xi.zone.BATALLIA_DOWNS        } },

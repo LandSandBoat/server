@@ -89,7 +89,7 @@ xi.chocoboGame.startRaceEvent = function(player, destination, eventSucceed)
 
     -- Temp destination var until player confirms race
     player:setCharVar('[ChocoGame]DestCity', destination)
-    player:startEvent(eventSucceed, -3, 0, 0, eventParam)
+    player:startEvent(eventSucceed, -1, 0, 0, eventParam)
 end
 
 -- Apply race vars, check for csid and option is done in rental_chocobo.lua
