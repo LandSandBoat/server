@@ -2997,7 +2997,7 @@ npcs:
     content:  toau
 
   17064113:
-    script:       ???
+    script:       qm_map
     display_name: ???
     at:           [-318.752, -1.075, -488.509]
     render:
@@ -3009,7 +3009,7 @@ npcs:
     content: toau
 
   17064114:
-    script:       ???
+    script:       qm_map
     display_name: ???
     at:           [-321.128, -1.131, -523.518]
     render:
