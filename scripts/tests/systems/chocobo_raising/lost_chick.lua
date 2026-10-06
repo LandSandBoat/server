@@ -101,7 +101,7 @@ describe('Chocobo raising lost chick', function()
             assert(meeting.event == 0 and meeting.trainer == trainer.HANTILEON, 'Expected a plain meeting')
 
             local adolescent = walk(newState(xi.chocoboRaising.stage.ADOLESCENT), shortWalk, 0, { 100 })
-            assert(adolescent.event == 0, 'Expected no find past the chick stage')
+            assert(adolescent.event == walkEvent.LOST_CHICK, 'Expected an adolescent to find the chick too')
 
             local lost = walk(newState(), shortWalk, chickValue(6), { 100 })
             assert(lost.event == 0, 'Expected no second chick')
@@ -211,7 +211,7 @@ describe('Chocobo raising lost chick', function()
             assert(barred.trainer == trainer.BRUTUS, 'Expected no Dietmund without the gate')
 
             local regular = walks.candidates(sandoria, regularWalk, true)
-            assert(#regular == 2, 'Expected Dietmund only on long walks')
+            assert(#regular == 1, 'Expected Dietmund only on long walks')
         end)
 
         it('adds 1% meeting chance per 16 receptivity above 63', function()

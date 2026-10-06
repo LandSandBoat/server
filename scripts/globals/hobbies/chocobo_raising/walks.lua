@@ -65,19 +65,19 @@ local trainers =
     [1] = -- San d'Oria
     {
         [cutscenes.GO_ON_A_WALK_SHORT  ] = { trainer.HANTILEON },
-        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.ZOPAGO, trainer.RIVALS },
+        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.ZOPAGO },
         [cutscenes.GO_ON_A_WALK_LONG   ] = { trainer.PULONONO, trainer.BRUTUS },
     },
     [2] = -- Bastok
     {
         [cutscenes.GO_ON_A_WALK_SHORT  ] = { trainer.ZOPAGO },
-        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.HANTILEON, trainer.RIVALS },
+        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.HANTILEON },
         [cutscenes.GO_ON_A_WALK_LONG   ] = { trainer.PULONONO, trainer.BRUTUS },
     },
     [3] = -- Windurst
     {
         [cutscenes.GO_ON_A_WALK_SHORT  ] = { trainer.PULONONO },
-        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.HANTILEON, trainer.RIVALS },
+        [cutscenes.GO_ON_A_WALK_REGULAR] = { trainer.HANTILEON },
         [cutscenes.GO_ON_A_WALK_LONG   ] = { trainer.ZOPAGO, trainer.BRUTUS },
     },
 }
@@ -523,7 +523,6 @@ walks.walk = function(state, careAction, ctx)
         not met and
         result.event == 0 and
         careAction == cutscenes.GO_ON_A_WALK_SHORT and
-        state.stage == xi.chocoboRaising.stage.CHICK and
         chick.owner == 0 and
         not chick.solved
     then

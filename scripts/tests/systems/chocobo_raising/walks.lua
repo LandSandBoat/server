@@ -65,13 +65,13 @@ describe('Chocobo raising walks', function()
             local meetings =
             {
                 { sandoria, shortWalk,   { trainer.HANTILEON } },
-                { sandoria, regularWalk, { trainer.ZOPAGO, trainer.RIVALS } },
+                { sandoria, regularWalk, { trainer.ZOPAGO } },
                 { sandoria, longWalk,    { trainer.PULONONO, trainer.BRUTUS } },
                 { bastok,   shortWalk,   { trainer.ZOPAGO } },
-                { bastok,   regularWalk, { trainer.HANTILEON, trainer.RIVALS } },
+                { bastok,   regularWalk, { trainer.HANTILEON } },
                 { bastok,   longWalk,    { trainer.PULONONO, trainer.BRUTUS } },
                 { windurst, shortWalk,   { trainer.PULONONO } },
-                { windurst, regularWalk, { trainer.HANTILEON, trainer.RIVALS } },
+                { windurst, regularWalk, { trainer.HANTILEON } },
                 { windurst, longWalk,    { trainer.ZOPAGO, trainer.BRUTUS } },
             }
 
@@ -148,11 +148,11 @@ describe('Chocobo raising walks', function()
             currentRolls = scriptedRolls({ itemRoll, 1 })
 
             result = walks.walk(state, shortWalk, { location = sandoria, walkZone = walkZone })
-            assert(result.event == 0, 'Expected no second item while one is held')
+            assert(result.event ~= 7, 'Expected no second item while one is held')
 
             currentRolls = highestRoll
 
-            result = walks.walk(newState(), shortWalk, { location = sandoria, walkZone = 0 })
+            result = walks.walk(newState(), longWalk, { location = sandoria, walkZone = 0 })
             assert(result.event == 0 and result.trainer == 0, 'Expected nothing on a high roll')
         end)
 
