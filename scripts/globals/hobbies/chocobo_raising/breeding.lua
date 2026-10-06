@@ -609,6 +609,7 @@ breeding.onTrade = function(player, npc, trade)
     end
 
     if not npcUtil.tradeHasExactly(trade, { xi.item.VCS_HONEYMOON_TICKET, xi.item.CHOCOCARD_M, xi.item.CHOCOCARD_F }) then
+        player:startEvent(event.TICKET_MENU)
         return
     end
 

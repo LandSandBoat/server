@@ -312,6 +312,17 @@ describe('Chocobo raising lost chick', function()
             assert(params[0] == 1 and params[3] == 1 and params[4] == 1 and params[5] == 0 and params[6] == 6, 'Expected [1, _, 0, 1, 1, 0, 6, 0]')
         end)
 
+        it('plays a dedicated owner\'s question every time, not their shop', function()
+            player:setCharVar(walks.lostChickVar, chickValue(3, 3))
+
+            for _ = 1, 2 do
+                local victoire = raisingClient.forNPC(player, 'Victoire', 848)
+                local start    = raisingClient.talk(victoire)
+                assert(start.eventId == 848, string.format('Expected event 848, got %d', start.eventId))
+                raisingClient.finish(victoire, 0)
+            end
+        end)
+
         it('teaches the diligent story at the right owner, then Hantileon reports it', function()
             player:setCharVar(walks.lostChickVar, chickValue(6, 3))
 
