@@ -171,8 +171,8 @@ Fitted to few samples or taken from guides, with no capture behind them:
   chances, Parasite Worm changing a gene
 - Condition onset and end chances (`odds`, `conditionEndOdds`), scene order in a day, a compete
   curing boredom, no affection decay from neglect
-- Walk rates from 144 captured walks (regular walks have few samples); the receptivity bonus;
-  Bastok's walk trainers; some friend chocobo names; an even compete chance
+- Walk rates: at or below 144 captured walks, mostly their 90% low end (regular walks have few samples);
+  the receptivity bonus; Bastok's walk trainers; some friend chocobo names; an even compete chance
 - Lost chick: found on the first empty chick short walk (3 of 4 captured walks found it; the miss
   was on day 8), once per chocobo and again after a wrong guess; random owner; clues only from the
   four story trainers at the finding stable
