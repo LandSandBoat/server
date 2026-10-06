@@ -55,4 +55,41 @@ describe('Stable chocobo patrols', function()
             assert(moved, 'Expected the chocobo to walk')
         end)
     end
+
+    it('walks Eight of Spades around its three points', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.WINDURST_WOODS })
+
+        local npc   = player.entities:get(17764518)
+        local start = npc:getPos()
+        local moved = false
+
+        for _ = 1, 70 do
+            xi.test.world:skipTime(1)
+
+            local pos = npc:getPos()
+            moved     = moved or pos.x ~= start.x or pos.z ~= start.z
+
+            assert(pos.x >= 89.8 - margin and pos.x <= 96.9 + margin and pos.z >= -79.9 - margin and pos.z <= -61.8 + margin, string.format('Left the route at %.3f %.3f', pos.x, pos.z))
+        end
+
+        assert(moved, 'Expected Eight of Spades to walk')
+    end)
+
+    it('turns Femardaque between two headings without moving', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.WINDURST_WOODS })
+
+        local npc      = player.entities:get(17764505)
+        local start    = npc:getPos()
+        local headings = {}
+
+        for _ = 1, 60 do
+            xi.test.world:skipTime(1)
+
+            local pos = npc:getPos()
+            assert(pos.x == start.x and pos.z == start.z, 'Expected Femardaque to stay put')
+            headings[npc:getRotPos()] = true
+        end
+
+        assert(headings[56] and headings[250], 'Expected both headings within a minute')
+    end)
 end)
