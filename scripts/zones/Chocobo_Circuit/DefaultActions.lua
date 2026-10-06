@@ -13,6 +13,7 @@ return {
     ['Gustavo']            = { event = 226 },
     ['Joilevin']           = { event = 236 },
     ['Jolande']            = { event = 346 },
+    ['Karsten']            = { event = 345 },
     ['Khatri']             = { event = 339 },
     ['Lisette']            = { event = 348 },
     ['Luca']               = { event = 338 },

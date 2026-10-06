@@ -455,6 +455,19 @@ xi.chocoboRacing.onToteboardTrigger     = function(player, eventId)
     )
 end
 
+xi.chocoboRacing.onChocobuckExchangeTrigger = function(player, eventId)
+    player:startEvent(
+        eventId,
+        0 -- Member of this nation's CRA branch
+    )
+end
+
+xi.chocoboRacing.onChocobuckExchangeEventUpdate = function(player, csid, option, npc)
+end
+
+xi.chocoboRacing.onChocobuckExchangeEventFinish = function(player, csid, option, npc)
+end
+
 xi.chocoboRacing.onToteboardEventUpdate = function(player, option)
     -- Client is browsing to the Toteboard or the client is requesting an automatic update
     if option == 3 or option == 4 then
