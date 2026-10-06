@@ -22,7 +22,8 @@ zones[xi.zone.CHOCOBO_CIRCUIT] =
     },
     npc =
     {
-        RUNGAGA = GetFirstID('Rungaga'),
+        RUNGAGA     = GetFirstID('Rungaga'),
+        GATE_OFFSET = GetFirstID('Gate_Chocobo_Circuit'),
     },
 }
 
