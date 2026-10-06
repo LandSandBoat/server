@@ -92,7 +92,7 @@ xi.chocoboGame.startRaceEvent = function(player, destination, eventSucceed)
     player:startEvent(eventSucceed, -3, 0, 0, eventParam)
 end
 
--- Apply race vars, check for csid and option is done in chocobo.lua
+-- Apply race vars, check for csid and option is done in rental_chocobo.lua
 xi.chocoboGame.beginRace = function(player, option)
     if option == 0 then
         local zoneId   = player:getZone():getID()

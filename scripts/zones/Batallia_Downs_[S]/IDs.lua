@@ -20,6 +20,7 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
         UNABLE_TO_PROGRESS            = 7052, -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         LYCOPODIUM_ENTRANCED          = 7080, -- The lycopodium is entranced by a sparkling light...
         FISHING_MESSAGE_OFFSET        = 7093, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7183, -- It appears your chocobo found this item with ease.
         CAMPAIGN_RESULTS_TALLIED      = 7631, -- Campaign results tallied.
         NO_RESPONSE                   = 7716, -- There is no response...
         VOIDWALKER_DESPAWN            = 8280, -- The monster fades before your eyes, a look of disappointment on its face.

@@ -19,6 +19,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST             = 7030, -- You learned Trust: <name>!
         FISHING_MESSAGE_OFFSET        = 7095, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7185, -- It appears your chocobo found this item with ease.
         CONQUEST_BASE                 = 7196, -- Tallying conquest results...
         DOOR_CLOSED                   = 7372, -- The door is locked tight.
         SNOWMINT_POINT_LOCKED         = 7375, -- This gate leads to Snowmint Point. However, it seems to be locked...

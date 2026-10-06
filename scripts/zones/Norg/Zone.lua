@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     zone:registerCuboidTriggerArea(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
 end
 

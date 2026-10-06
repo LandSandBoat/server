@@ -18,6 +18,7 @@ zones[xi.zone.GRAUBERG_S] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7073, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7163, -- It appears your chocobo found this item with ease.
         GATE_IS_LOCKED                = 7220,  -- The gate is locked.
         A_SHIVER_RUNS_DOWN            = 7444, -- A shiver runs down your spine...
         ATTEND_TO_MORE_PRESSING       = 7445, -- Perhaps you should first attend to more pressing matters...

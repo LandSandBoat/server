@@ -5,7 +5,7 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

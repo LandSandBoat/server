@@ -13,7 +13,7 @@ local berths =
 }
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     zone:registerCuboidTriggerArea(474, -84.1, 7.1,  113.1, -51.9, 12.9,  141.2) -- San d'Oria airship berth
     zone:registerCuboidTriggerArea(475, -86.1, 7.1, -141.2, -53.9, 12.9, -113.1) -- Bastok airship berth
     zone:registerCuboidTriggerArea(476, -22.1, 7.1, -141.2,  10.1, 12.9, -113.1) -- Windurst airship berth

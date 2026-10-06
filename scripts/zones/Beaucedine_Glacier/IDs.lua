@@ -27,6 +27,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         LOGIN_NUMBER                   = 7189,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED  = 7209,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET         = 7254,  -- You can't fish here.
+        FOUND_ITEM_WITH_EASE           = 7344,  -- It appears your chocobo found this item with ease.
         CONQUEST                       = 7508,  -- You've earned conquest points!
         YOU_CANNOT_ENTER_DYNAMIS       = 7888,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7890,  -- Players who have not reached level <number> are prohibited from entering Dynamis.

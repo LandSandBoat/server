@@ -19,6 +19,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         LOGIN_NUMBER                  = 7021, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7041, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7086, -- Tallying conquest results...
+        FOUND_ITEM_WITH_EASE          = 7335, -- It appears your chocobo found this item with ease.
         SOMETHING_GLITTERING          = 7358, -- You see something glittering beneath the surface of the ice.
         WHAT_LIES_BENEATH             = 7359, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
         SOMETHING_GLITTERING_BUT      = 7360, -- You see something glittering below the surface here, but the ice encases it completely.

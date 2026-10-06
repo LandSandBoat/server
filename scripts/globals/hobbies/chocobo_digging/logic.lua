@@ -362,6 +362,18 @@ local function handleItemObtained(player, text, itemId)
     end
 end
 
+-- Guess: the knowledge message is one more skill-up roll.
+local function rollExtraSkillUp(player, text)
+    if
+        player:getCharSkillLevel(xi.skill.DIG) < 1000 and
+        math.randomInt(1, 100) <= player:getMod(xi.mod.DIG_SKILL_UP)
+    then
+        -- Your chocobo appears to have gained valuable knowledge from this discovery.
+        player:messageSpecial(text.FOUND_ITEM_WITH_EASE + 1)
+        calculateSkillUp(player, text)
+    end
+end
+
 local function handleFatigue(player, text, todayDigCount)
     if math.randomInt(1, 100) <= player:getMod(xi.mod.DIG_BYPASS_FATIGUE) then
         player:messageSpecial(text.FOUND_ITEM_WITH_EASE)
@@ -477,6 +489,7 @@ xi.chocoboDig.start = function(player)
 
     if trasureItemId > 0 then
         handleItemObtained(player, text, trasureItemId)
+        rollExtraSkillUp(player, text)
         handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
@@ -526,6 +539,7 @@ xi.chocoboDig.start = function(player)
     then
         player:messageText(player, text.FIND_NOTHING)
     else
+        rollExtraSkillUp(player, text)
         handleFatigue(player, text, todayDigCount)
         player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
     end

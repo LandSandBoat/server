@@ -17,6 +17,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7170, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7260, -- It appears your chocobo found this item with ease.
         CAMPAIGN_RESULTS_TALLIED      = 7631, -- Campaign results tallied.
         ALREADY_OBTAINED_TELE         = 7716, -- You already possess the gate crystal for this telepoint.
         VOIDWALKER_DESPAWN            = 8012, -- The monster fades before your eyes, a look of disappointment on its face.

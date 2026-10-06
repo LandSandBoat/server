@@ -182,6 +182,15 @@ values:
   albatross_ring_effect: 153 # adds 30 seconds to mini - game time
   pelican_ring_effect:   154 # adds extra skillup roll for fishing
   fishing_skill_gain:    155 # food for fishing skill ups
+  # Chocobo riding, raising and digging
+  dig_bypass_fatigue:     1074 # Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+  dig_rare_ability:       1133 # Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
+  chocobo_care_energy:    1215 # Percent off the energy of a chocobo care action (Green Race Silks)
+  personal_chocobo_speed: 1216 # Above 0, a personal chocobo gains a speed rank (Purple Race Silks)
+  personal_chocobo_time:  1217 # Minutes added when the whistle calls a personal chocobo (Red Race Silks)
+  dig_skill_up:           1218 # Percent chance of one more digging skill-up per dig (Sky Blue Race Silks)
+  hot_cold_jackpot:       1219 # TODO: Hot and Cold Game jackpot chance, amount unknown (Black Race Silks)
+  hot_cold_endurance:     1220 # TODO: Hot and Cold Game digs added by Tandjana Wildgrass (White Race Silks)
   # Damage - 10000 base, 375 = 3.75%
   dmg:                     160 # Damage Taken %
   dmgphys:                 161 # Physical Damage Taken %
@@ -1029,8 +1038,6 @@ values:
   augment_blood_boon:         1035 # Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
   augment_blu_magic:          1036 # Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
   geomancy_mp_no_deplete:     1037 # Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
-  dig_bypass_fatigue:         1074 # Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
-  dig_rare_ability:           1133 # Chocobo digging modifier found in "Black Chocobo Suit" and "Denim Pants +1".
   breath_dmg_dealt:           1075 # Breath damage dealt
   damage_limit:               1080 # Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
   damage_limitp:              1081 # Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
@@ -1275,4 +1282,4 @@ values:
 
   # The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
   # 570 through 825 used by WS DMG mods these are not spares.
-  # SPARE IDs: 1215 and onward, 378
+  # SPARE IDs: 1221 and onward, 378

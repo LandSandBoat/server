@@ -9,7 +9,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     laTheineGlobal.moveFallenEgg()
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 
     local rainbow = GetNPCByID(ID.npc.RAINBOW)

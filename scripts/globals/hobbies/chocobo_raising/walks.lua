@@ -82,12 +82,12 @@ local trainers =
     },
 }
 
--- Percent chance of meeting someone, then of finding an item. From 144 captured walks; few are regular walks.
+-- Percent chance of meeting someone, then of finding an item, at or below the captured rates.
 walks.eventChance =
 {
-    [cutscenes.GO_ON_A_WALK_SHORT  ] = { 28, 24 },
-    [cutscenes.GO_ON_A_WALK_REGULAR] = { 15, 37 },
-    [cutscenes.GO_ON_A_WALK_LONG   ] = { 26, 23 },
+    [cutscenes.GO_ON_A_WALK_SHORT  ] = { 21, 18 },
+    [cutscenes.GO_ON_A_WALK_REGULAR] = { 15, 26 },
+    [cutscenes.GO_ON_A_WALK_LONG   ] = { 18, 15 },
 }
 
 ---@enum xi.chocoboRaising.walks.lostChickResult

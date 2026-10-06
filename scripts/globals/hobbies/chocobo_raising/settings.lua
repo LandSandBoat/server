@@ -27,18 +27,16 @@ xi.chocoboRaising.gilMultiplier          = 1.0
 -- True keeps an adult ageing past the retirement day; the player can still retire it.
 xi.chocoboRaising.disableRetirement = false
 
--- The four stats together stop growing here; 0 lifts the cap. Each stat still stops at 255 (SS).
-xi.chocoboRaising.statGrowthCap = 640
+-- The four stats together stop growing here, and 0 lifts the cap. Each stat still stops at 255 (SS).
+-- Below 640, no chocobo reaches SS/SS/S.
+xi.chocoboRaising.statGrowthCap = 639
 
--- Riding speed and minutes. Grades run from F (0 ranks) to SS (+7 ranks); an ability and silks reach +9.
--- Gallop and Purple Racing Silks add a speed rank; Canter and Red Racing Silks a time rank.
--- Speeds are percent of a rental (map.MOUNT_SPEED). At the default cap of 100 an SS STR chocobo with
--- Gallop, or with Purple Race Silks, matches a rental, as the guides say. A higher cap such as 105 lets
--- SS STR with Gallop and the silks ride slightly faster than a rental (102.5).
+-- Speed is a percent of map.MOUNT_SPEED. Gallop and Purple Racing Silks each add a rank.
 xi.chocoboRaising.ridingSpeedBase    = 80
 xi.chocoboRaising.ridingSpeedPerRank = 2.5
-xi.chocoboRaising.ridingSpeedCap     = 100
+xi.chocoboRaising.ridingSpeedMaxRank = 8
 
+-- Minutes. Canter adds a rank, and Red Racing Silks add PERSONAL_CHOCOBO_TIME on top.
 xi.chocoboRaising.ridingTimeBase    = 17
 xi.chocoboRaising.ridingTimePerRank = 4
-xi.chocoboRaising.ridingTimeCap     = 45
+xi.chocoboRaising.ridingTimeMaxRank = 7

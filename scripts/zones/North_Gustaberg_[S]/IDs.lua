@@ -18,6 +18,7 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
         LYCOPODIUM_ENTRANCED          = 7080, -- The lycopodium is entranced by a sparkling light...
         CAMPAIGN_RESULTS_TALLIED      = 7294, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7379, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7469, -- It appears your chocobo found this item with ease.
         MINING_IS_POSSIBLE_HERE       = 7569, -- Mining is possible here if you have <item>.
         NO_WAY_PAST_BARRIER           = 7937, -- It seems there is no way past this imposing barrier...
         VOIDWALKER_DESPAWN            = 8154, -- The monster fades before your eyes, a look of disappointment on its face.

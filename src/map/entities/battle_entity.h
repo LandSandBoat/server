@@ -242,7 +242,7 @@ public:
     // Deals damage and updates the last attacker which is used when sending a player death message
     virtual auto takeDamage(int32 amount, CBattleEntity* attacker = nullptr, xi::AttackType attackType = xi::AttackType::None, xi::DamageType damageType = xi::DamageType::None, bool isSkillchainDamage = false) -> int32;
 
-    int16 getMod(xi::Mod modID);
+    int16 getMod(xi::Mod modID) const;
     int16 getMaxGearMod(xi::Mod modID);
 
     bool CanRest();        // checks if able to heal

@@ -118,6 +118,21 @@ describe('Chocobo raising guards', function()
         end
     end)
 
+    it('takes a tenth off the energy of a care action with Green Racing Silks', function()
+        stub('xi.chocoboRaising.getWeatherInZone', xi.weather.SUNSHINE)
+        raisingClient.setChocobo(player, { stage = xi.chocoboRaising.stage.ADOLESCENT, energy = 100 })
+        player:addItem(xi.item.GREEN_RACING_SILKS)
+        player:equipItem(xi.item.GREEN_RACING_SILKS, nil, xi.slot.BODY)
+
+        raisingClient.talk(client)
+        raisingClient.send(client, careAction(cutscenes.INTERESTED_IN_YOUR_STORY))
+        raisingClient.finish(client, 0)
+
+        -- A tenth off a story's 11 energy rounds up to 10.
+        local energy = player:getChocoboRaisingInfo().energy
+        assert(energy == 90, string.format('Expected a 10 energy story, got %d energy', energy))
+    end)
+
     it('allows one story only after a paid telling, and only one the player holds', function()
         local tellImpatientStory = 50 + 4 * 256
 

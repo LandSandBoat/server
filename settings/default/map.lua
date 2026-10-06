@@ -112,7 +112,8 @@ xi.settings.map =
     -- Player movement speed limit
     SPEED_LIMIT = 80,
 
-    -- Mount speed, expressed as player speed. Can surpass speed limit.
+    -- The /mount and rental chocobo speed, excluding silks.
+    -- Raised chocobo speed is built as a percentage of this.
     MOUNT_SPEED = 80,
 
     -- Player animation speed divisor

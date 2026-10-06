@@ -20,6 +20,7 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
         LOGIN_NUMBER                  = 7008,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7073,  -- Tallying conquest results...
+        FOUND_ITEM_WITH_EASE          = 7322,  -- It appears your chocobo found this item with ease.
         THERE_ARE_SYMBOLS             = 7333,  -- There are some symbols inscribed upon it.
         YOU_HEAR_A_NOISE              = 7335,  -- You hear a noise behind you.
         AIR_AROUND_YOU_CHANGED        = 7339,  -- The air around you has suddenly changed!

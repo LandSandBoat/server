@@ -7,7 +7,7 @@ local ID = zones[xi.zone.BASTOK_MARKETS_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.extravaganza.shadowEraHide(ID.npc.SHENNI)
 end
 

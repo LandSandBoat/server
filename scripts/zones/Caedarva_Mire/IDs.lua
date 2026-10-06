@@ -20,6 +20,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7159, -- It appears your chocobo found this item with ease.
         STAGING_GATE_CLOSER           = 7330, -- You must move closer.
         STAGING_GATE_INTERACT         = 7331, -- This gate guards an area under Imperial control.
         STAGING_GATE_AZOUPH           = 7332, -- Azouph Isle Staging Point.

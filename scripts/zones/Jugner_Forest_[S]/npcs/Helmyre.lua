@@ -11,11 +11,11 @@ local eventSucceed = 208
 local eventFail    = 209
 
 entity.onTrigger = function(player, npc)
-    xi.chocobo.renterOnTrigger(player, npc, eventSucceed, eventFail)
+    xi.rentalChocobo.renterOnTrigger(player, npc, eventSucceed, eventFail)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+    xi.rentalChocobo.renterOnEventFinish(player, csid, option, eventSucceed)
 end
 
 return entity

@@ -312,9 +312,24 @@ describe('Chocobo raising model', function()
             assert(missed.strength == 0 and missed.receptivity == 0, 'Expected no gain when the 1 in 6 roll misses')
         end)
 
+        it('allows SS/A/B/C and SS/SS/A/F with room to spare, and no higher grades', function()
+            local ranks = xi.chocoboRaising.skillRanks
+
+            local allRounder = newState()
+            setStats(allRounder, 224, 160, 128, 96)
+            xi.chocoboRaising.addToStat(allRounder, 'receptivity', 16)
+            assert(allRounder.receptivity == 112, string.format('Expected room above SS/A/B/C, got RCP %d', allRounder.receptivity))
+
+            local mount = newState()
+            setStats(mount, 224, 224, 160, 0)
+            xi.chocoboRaising.addToStat(mount, 'discernment', 255)
+            assert(mount.discernment >= 176, string.format('Expected room above SS/SS/A/F, got DSC %d', mount.discernment))
+            assert(xi.chocoboRaising.numberToRank(mount.discernment) == ranks.A_IMPRESSIVE, 'Expected DSC to stop short of S')
+        end)
+
         it('keeps the four stats within the total cap, and not at all with a cap of 0', function()
             local state = stateOnDay(10, stages.CHICK, plans.TAKING_A_WALK)
-            setStats(state, 200, 200, 120, 120)
+            setStats(state, 200, 200, 120, 119)
 
             model.advance(state, nextDayTime, newContext(kerchief.DONE))
 

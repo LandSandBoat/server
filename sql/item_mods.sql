@@ -6441,26 +6441,32 @@ INSERT INTO `item_mods` VALUES (11321,1,2);    -- DEF: 2
 INSERT INTO `item_mods` VALUES (11321,511,10); -- CHOCOBO_RIDING_TIME: 10
 
 -- Black Racing Silks
-INSERT INTO `item_mods` VALUES (11322,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11322,1,2);    -- DEF: 2
+INSERT INTO `item_mods` VALUES (11322,1219,1); -- HOT_COLD_JACKPOT: 1
 
 -- Purple Racing Silks
-INSERT INTO `item_mods` VALUES (11323,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11323,1,2);    -- DEF: 2
+INSERT INTO `item_mods` VALUES (11323,1216,1); -- PERSONAL_CHOCOBO_SPEED: 1
 
 -- Sky Blue Racing Silks
-INSERT INTO `item_mods` VALUES (11324,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11324,1,2);     -- DEF: 2
+INSERT INTO `item_mods` VALUES (11324,1218,50); -- DIG_SKILL_UP: 50
 
 -- Blue Racing Silks
 INSERT INTO `item_mods` VALUES (11325,1,2);     -- DEF: 2
 INSERT INTO `item_mods` VALUES (11325,1074,50); -- DIG_BYPASS_FATIGUE: 50
 
 -- Red Racing Silks
-INSERT INTO `item_mods` VALUES (11326,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11326,1,2);     -- DEF: 2
+INSERT INTO `item_mods` VALUES (11326,1217,10); -- PERSONAL_CHOCOBO_TIME: 10
 
 -- White Racing Silks
-INSERT INTO `item_mods` VALUES (11327,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11327,1,2);    -- DEF: 2
+INSERT INTO `item_mods` VALUES (11327,1220,1); -- HOT_COLD_ENDURANCE: 1
 
 -- Green Racing Silks
-INSERT INTO `item_mods` VALUES (11328,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11328,1,2);     -- DEF: 2
+INSERT INTO `item_mods` VALUES (11328,1215,10); -- CHOCOBO_CARE_ENERGY: 10
 
 -- Carpenters Smock
 INSERT INTO `item_mods` VALUES (11329,1,3);   -- DEF: 3

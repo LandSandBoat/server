@@ -28,6 +28,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         BEASTMEN_BANNER_LIFTED         = 7153,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER                = 7154,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET         = 7232,  -- You can't fish here.
+        FOUND_ITEM_WITH_EASE           = 7322,  -- It appears your chocobo found this item with ease.
         THESE_WITHERED_FLOWERS         = 7353,  -- These withered flowers seem unable to bloom.
         NOW_THAT_NIGHT_HAS_FALLEN      = 7354,  -- Now that night has fallen, the flowers bloom with a strange glow.
         CONQUEST                       = 7402,  -- You've earned conquest points!

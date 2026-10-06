@@ -1,5 +1,5 @@
 -----------------------------------
--- Chocobo functions
+-- Rental chocobos
 -- Info from:
 --     http://wiki.ffxiclopedia.org/wiki/Chocobo_Renter
 --     http://ffxi.allakhazam.com/wiki/Traveling_in_Vana'diel
@@ -7,7 +7,12 @@
 require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
-xi.chocobo = xi.chocobo or {}
+xi.rentalChocobo = xi.rentalChocobo or {}
+
+xi.rentalChocobo.rideMinutes = 30
+
+-- Below level 20, a rental rides this long and gear adds nothing.
+xi.rentalChocobo.lowLevelRideMinutes = 15
 
 --[[
 Description:
@@ -18,7 +23,7 @@ Description:
 [5] Position player is sent to after event, if applicable
 --]]
 
-xi.chocobo.chocoboInfo =
+xi.rentalChocobo.chocoboInfo =
 {
     [xi.zone.AL_ZAHBI]                = { levelReq = 20, sales = 0, premiumCost = false, past = false, pos = {  610, -24,  356, 128, xi.zone.WAJAOM_WOODLANDS      } },
     [xi.zone.WAJAOM_WOODLANDS]        = { levelReq = 20, sales = 0, premiumCost = true,  past = false, pos = nil                                                     },
@@ -46,17 +51,17 @@ xi.chocobo.chocoboInfo =
 
 local timeServerCounter = 0
 
--- This runs on every zone in the xi.chocobo.chocoboInfo global.
+-- This runs on every zone in the xi.rentalChocobo.chocoboInfo global.
 -- This will also run for every unloaded zone (on another process), but the computation is so cheap it may not matter.
 ---@return nil
-xi.chocobo.onTimeServerTick = function()
+xi.rentalChocobo.onTimeServerTick = function()
     -- Run every (2,400 * 25) ms (1 minute)
     if timeServerCounter % 25 == 0 then
-        for idx, _ in pairs(xi.chocobo.chocoboInfo) do
-            local sales = xi.chocobo.chocoboInfo[idx].sales
+        for idx, _ in pairs(xi.rentalChocobo.chocoboInfo) do
+            local sales = xi.rentalChocobo.chocoboInfo[idx].sales
 
             -- Reduce sales by 1, but don't go below zero
-            xi.chocobo.chocoboInfo[idx].sales = math.max(0, sales - 1)
+            xi.rentalChocobo.chocoboInfo[idx].sales = math.max(0, sales - 1)
         end
     end
 
@@ -65,17 +70,17 @@ end
 
 ---@param zoneId integer
 ---@return nil
-xi.chocobo.increaseSales = function(zoneId)
+xi.rentalChocobo.increaseSales = function(zoneId)
     -- Increase sales to boost price
-    xi.chocobo.chocoboInfo[zoneId].sales = xi.chocobo.chocoboInfo[zoneId].sales + 1
+    xi.rentalChocobo.chocoboInfo[zoneId].sales = xi.rentalChocobo.chocoboInfo[zoneId].sales + 1
 end
 
 ---@param player CBaseEntity
 ---@return integer
-xi.chocobo.getPrice = function(player)
+xi.rentalChocobo.getPrice = function(player)
     local zoneId      = player:getZoneID()
-    local sales       = xi.chocobo.chocoboInfo[zoneId].sales
-    local premiumCost = xi.chocobo.chocoboInfo[zoneId].premiumCost
+    local sales       = xi.rentalChocobo.chocoboInfo[zoneId].sales
+    local premiumCost = xi.rentalChocobo.chocoboInfo[zoneId].premiumCost
     local basePrice   = premiumCost and 100 or 50
     local levelMult   = premiumCost and 2 or 1
     local level       = player and player:getMainLvl() or 100 -- If we don't have a player, assume lvl 100
@@ -89,13 +94,13 @@ end
 
 ---@param zone CZone
 ---@return nil
-xi.chocobo.initZone = function(zone)
+xi.rentalChocobo.initZone = function(zone)
     local zoneId = zone:getID()
 
-    if xi.chocobo.chocoboInfo[zoneId] then
-        xi.chocobo.chocoboInfo[zoneId].sales = 0
+    if xi.rentalChocobo.chocoboInfo[zoneId] then
+        xi.rentalChocobo.chocoboInfo[zoneId].sales = 0
     else
-        printf('[warning] bad zoneId %i in xi.chocobo.initZone (%s)', zoneId, zone:getName())
+        printf('[warning] bad zoneId %i in xi.rentalChocobo.initZone (%s)', zoneId, zone:getName())
     end
 end
 
@@ -105,12 +110,12 @@ end
 ---@param eventSucceed integer
 ---@param eventFail integer
 ---@return nil
-xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
+xi.rentalChocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
     local zoneId = player:getZoneID()
-    local info   = xi.chocobo.chocoboInfo[zoneId]
+    local info   = xi.rentalChocobo.chocoboInfo[zoneId]
 
     if not info then
-        printf('[warning] player %s passed bad zoneId %i in xi.chocobo.renterOntrade', player:getName(), zoneId)
+        printf('[warning] player %s passed bad zoneId %i in xi.rentalChocobo.renterOntrade', player:getName(), zoneId)
         return
     end
 
@@ -137,7 +142,7 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
             then
                 local currency = player:getGil()
                 local price    = 0
-                local duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
+                local duration = (xi.rentalChocobo.rideMinutes + player:getMod(xi.mod.CHOCOBO_RIDING_TIME)) * 60
 
                 player:setLocalVar('Chocopass', 1)
                 player:setLocalVar('ChocopassDuration', duration)
@@ -154,10 +159,10 @@ end
 ---@param eventSucceed integer
 ---@param eventFail integer
 ---@return nil
-xi.chocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
+xi.rentalChocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
     local mLvl    = player:getMainLvl()
     local zoneId  = player:getZoneID()
-    local info    = xi.chocobo.chocoboInfo[zoneId]
+    local info    = xi.rentalChocobo.chocoboInfo[zoneId]
     local canRace = xi.chocoboGame.raceCheck(player, npc)
 
     if not info then
@@ -172,7 +177,7 @@ xi.chocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
         if canRace then -- Check if NPC can start A Chocobo Riding Game
             xi.chocoboGame.startRaceEvent(player, canRace, eventSucceed)
         else
-            local price = xi.chocobo.getPrice(player)
+            local price = xi.rentalChocobo.getPrice(player)
             player:setLocalVar('[CHOCOBO]price', price)
 
             local currency = 0
@@ -182,7 +187,7 @@ xi.chocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail)
                 currency = player:getGil()
             end
 
-            local soundParam = xi.chocobo.chocoboInfo[zoneId].pos and 0 or 1
+            local soundParam = xi.rentalChocobo.chocoboInfo[zoneId].pos and 0 or 1
             player:startEvent(eventSucceed, price, currency, soundParam)
         end
     else
@@ -195,15 +200,15 @@ end
 ---@param option integer
 ---@param eventSucceed integer
 ---@return nil
-xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
+xi.rentalChocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
     local chocoGame = player:getCharVar('[ChocoGame]DestCity')
 
     if csid == eventSucceed and option == 0 then
         local mLvl     = player:getMainLvl()
         local zoneId   = player:getZoneID()
-        local info     = xi.chocobo.chocoboInfo[zoneId]
+        local info     = xi.rentalChocobo.chocoboInfo[zoneId]
         local trade    = player:getLocalVar('Chocopass')
-        local duration = 900
+        local duration = xi.rentalChocobo.lowLevelRideMinutes * 60
 
         if not info then
             return
@@ -220,7 +225,7 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
             player:setLocalVar('[CHOCOBO]price', 0)
 
             if mLvl >= 20 then
-                duration = 1800 + (player:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
+                duration = (xi.rentalChocobo.rideMinutes + player:getMod(xi.mod.CHOCOBO_RIDING_TIME)) * 60
             end
 
             if chocoGame ~= 0 then -- Start A Chocobo Riding Game
@@ -234,7 +239,7 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
                     player:delCurrency('allied_notes', price)
                 end
 
-                xi.chocobo.increaseSales(zoneId)
+                xi.rentalChocobo.increaseSales(zoneId)
             else
                 return
             end

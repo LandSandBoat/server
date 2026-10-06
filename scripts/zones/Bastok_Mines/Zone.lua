@@ -10,7 +10,7 @@ zoneObject.onInitialize = function(zone)
     xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
-    xi.chocobo.initZone(zone)
+    xi.rentalChocobo.initZone(zone)
     xi.chocoboGame.clearRecord(zone)
 end
 

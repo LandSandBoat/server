@@ -16,6 +16,7 @@ zones[xi.zone.XARCABARD_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        FOUND_ITEM_WITH_EASE          = 7685, -- It appears your chocobo found this item with ease.
         VOIDWALKER_DESPAWN            = 8189, -- The monster fades before your eyes, a look of disappointment on its face.
         NO_RESPONSE                   = 8236, -- There is no response...
         REQUIRED_TO_DELIVER           = 8272, -- You are required to deliver word of Operation Snowstorm's commencement to the Windurstian and Bastokan forces. First, make your way to the Federation encampment.

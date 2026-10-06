@@ -95,8 +95,6 @@ xi.chocoboRaising.handleStatChange = function(stat, value, change, max)
         change = change * xi.chocoboRaising.statNegativeMultiplier
     end
 
-    -- TODO: Green Race Silks energy effect.
-
     return utils.clamp(value + change, 0, max)
 end
 

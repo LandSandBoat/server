@@ -7,7 +7,7 @@ describe('Chocobo Rental', function()
     ---@type CClientEntityPair
     local player
     -- The data we'll be testing
-    local chocoboTable = xi.chocobo.chocoboInfo[xi.zone.LA_THEINE_PLATEAU]
+    local chocoboTable = xi.rentalChocobo.chocoboInfo[xi.zone.LA_THEINE_PLATEAU]
 
     before_each(function()
         player = xi.test.world:spawnPlayer({ level = 20, zone = xi.zone.LA_THEINE_PLATEAU })
@@ -45,8 +45,8 @@ describe('Chocobo Rental', function()
 
     it('price increases after each sale', function()
         -- Setup stubs to ensure they get called when renting a chocobo
-        local increaseSalesStub = stub('xi.chocobo.increaseSales')
-        local getPriceStub      = stub('xi.chocobo.getPrice')
+        local increaseSalesStub = stub('xi.rentalChocobo.increaseSales')
+        local getPriceStub      = stub('xi.rentalChocobo.getPrice')
 
         player:setGil(140)
         player.entities:gotoAndTrigger('Coumaine', { eventId = 120, finishOption = 0 })
@@ -57,17 +57,17 @@ describe('Chocobo Rental', function()
 
         -- Next getPrice should be 5% higher
         local expectedPrice = math.floor(140 + 140 * 0.05)
-        assert(xi.chocobo.getPrice(player) == expectedPrice, 'Chocobo price did not increase')
+        assert(xi.rentalChocobo.getPrice(player) == expectedPrice, 'Chocobo price did not increase')
     end)
 
     it('price decreases every minute', function()
-        local onTimeServerTickStub = stub('xi.chocobo.onTimeServerTick')
+        local onTimeServerTickStub = stub('xi.rentalChocobo.onTimeServerTick')
 
         -- Simulate that 1000 sales have occured
         -- Verify that the price reflects the change
         chocoboTable.sales = 1000
         local expectedPrice = math.floor(140 + 140 * (0.05 * 1000))
-        assert(xi.chocobo.getPrice(player) == expectedPrice, 'Chocobo price did not increase')
+        assert(xi.rentalChocobo.getPrice(player) == expectedPrice, 'Chocobo price did not increase')
 
         -- Now pass 1 Vanadiel minute (25 ticks)
         -- TODO: Figure out a better notation?
@@ -79,6 +79,6 @@ describe('Chocobo Rental', function()
         expectedPrice = math.floor(140 + 140 * (0.05 * 999))
         onTimeServerTickStub:called(25)
         assert(chocoboTable.sales == 999, 'Chocobo sales did not decrease after 1 minute')
-        assert(xi.chocobo.getPrice(player) == expectedPrice, 'Chocobo price did not decrease')
+        assert(xi.rentalChocobo.getPrice(player) == expectedPrice, 'Chocobo price did not decrease')
     end)
 end)
