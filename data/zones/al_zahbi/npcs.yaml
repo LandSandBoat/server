@@ -1580,7 +1580,7 @@ npcs:
   16974332:
     script:       Chocobo
     display_name: Chocobo
-    at:           [-65.917, 0.000, -41.178, 255]
+    at:           [-114.456, 1.999, 67.368, 255]
     render:
       look:
         type:  standard
