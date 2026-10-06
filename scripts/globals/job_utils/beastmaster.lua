@@ -85,6 +85,18 @@ local getValidJugPetID = function(player)
     return nil
 end
 
+local function doSic(mob)
+    if mob:getTP() >= 1000 then
+        mob:setLocalVar('sicQueued', 0)
+        mob:useMobAbility()
+    elseif mob:hasSpellList() then
+        mob:setLocalVar('sicQueued', 0)
+        mob:castSpell()
+    else
+        mob:queue(0, doSic)
+    end
+end
+
 xi.job_utils.beastmaster.getCharmChance = function(charmer, target, includeMods)
     if
         not charmer or                                -- Invalid charmer
@@ -626,17 +638,14 @@ xi.job_utils.beastmaster.useSnarl = function(player, target, ability)
 end
 
 xi.job_utils.beastmaster.useSic = function(player, target, ability)
-    local function doSic(mob)
-        if mob:getTP() >= 1000 then
-            mob:useMobAbility()
-        elseif mob:hasSpellList() then
-            mob:castSpell()
-        else
-            mob:queue(0, doSic)
-        end
+    local pet = player:getPet()
+
+    if pet:getLocalVar('sicQueued') == 1 then
+        return
     end
 
-    player:getPet():queue(0, doSic)
+    pet:setLocalVar('sicQueued', 1)
+    pet:queue(0, doSic)
 end
 
 xi.job_utils.beastmaster.useHeel = function(player, target, ability)
