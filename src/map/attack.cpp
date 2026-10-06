@@ -534,16 +534,6 @@ bool CAttack::CheckCover()
  ************************************************************************/
 void CAttack::ProcessDamage()
 {
-    auto removePostSwingEffects = [&]() -> void
-    {
-        // SA/TA should wear off on the first swing
-        if (m_isFirstSwing)
-        {
-            m_attacker->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::SneakAttack);
-            m_attacker->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::TrickAttack);
-        }
-    };
-
     if (settings::get<bool>("map.ENABLE_AUTO_ATTACK_LUA"))
     {
         // Sneak attack.
@@ -603,8 +593,6 @@ void CAttack::ProcessDamage()
             sol::error err = result;
             ShowError("attack.cpp::ProcessDamage(): %s", err.what());
         }
-
-        removePostSwingEffects();
         return;
     }
 
@@ -830,5 +818,4 @@ void CAttack::ProcessDamage()
             m_attacker->addModifier(xi::Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
         }
     }
-    removePostSwingEffects();
 }
