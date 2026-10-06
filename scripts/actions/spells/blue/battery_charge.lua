@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local power    = 3 + caster:getMod(xi.mod.ENHANCES_REFRESH)
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)
 

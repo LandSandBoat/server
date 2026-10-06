@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params          = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem      = xi.ecosystem.VERMIN
     params.tpModifier     = xi.spells.blue.tpMod.ATTACK
@@ -44,7 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.str_wsc = 0.2
     params.int_wsc = 0.2
 
-    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params, action)
 end
 
 return spellObject

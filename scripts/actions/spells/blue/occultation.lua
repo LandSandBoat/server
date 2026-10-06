@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local skill    = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power    = skill / 50
     local duration = 300

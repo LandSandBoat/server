@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local blueSkill = utils.clamp(caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 500)
     local power     = (blueSkill / 3) * 2
     local duration  = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)

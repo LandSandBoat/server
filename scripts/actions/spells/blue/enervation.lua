@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local duration        = 30
     local resistThreshold = 0.5
     local returnEffect    = xi.effect.DEFENSE_DOWN

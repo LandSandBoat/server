@@ -26,7 +26,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params        = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem    = xi.ecosystem.BEASTMEN
     params.attackType   = xi.attackType.MAGICAL
