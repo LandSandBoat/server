@@ -60,6 +60,7 @@ public:
     void bazaarPrice(uint8 invSlot, uint32 price) const;
     void bazaarOpen(CLuaBaseEntity* seller) const;
     void setSearchMessage(const std::string& message, sol::optional<uint32> msgType) const;
+    void linkshellActive(uint8 invSlot, uint8 lsNum, bool active, sol::optional<std::string> name) const;
     void bazaarBuy(uint8 sellerInvSlot, uint32 quantity) const;
     void acceptRaise() const;
     void engage(CLuaBaseEntity* mob) const;

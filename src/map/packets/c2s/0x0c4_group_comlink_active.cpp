@@ -212,13 +212,13 @@ void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEnt
     {
         case GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG::EquipOrCreate:
         {
+            if (PItemLinkshell->isBusy())
+            {
+                return;
+            }
+
             if (PItemLinkshell->getID() == ITEMID::NEW_LINKSHELL)
             {
-                if (PItemLinkshell->isBusy())
-                {
-                    return;
-                }
-
                 // Case 1. New Linkshell, create it.
                 createLinkshell(PChar, PItemLinkshell, *this);
             }
@@ -231,6 +231,11 @@ void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEnt
         break;
         case GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE_ACTIVEFLG::Unequip:
         {
+            if (PChar->getLinkshell(static_cast<SLOTTYPE>(SLOT_BACK + this->LinkshellId)) != PItemLinkshell)
+            {
+                return;
+            }
+
             unequipLinkshell(PChar, PItemLinkshell, *this);
         }
         break;
