@@ -1097,7 +1097,7 @@ npcs:
     widescan:        true
 
   17764417:
-    script:       Chocobo
+    script:       Chocobo_1
     display_name: Chocobo
     at:           [121.099, -5.000, -108.742, 84]
     render:
