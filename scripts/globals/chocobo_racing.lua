@@ -468,6 +468,57 @@ end
 xi.chocoboRacing.onChocobuckExchangeEventFinish = function(player, csid, option, npc)
 end
 
+local standsAdmissionFee = 50
+
+xi.chocoboRacing.onStandsEntranceTrigger = function(player, index)
+    local hasPass = 0
+    if player:hasKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS) then
+        hasPass = 1
+    end
+
+    player:setLocalVar('[ChocoboCircuit]StandsPaid', 0)
+    player:startEvent(
+        261 + index,
+        hasPass,
+        index, -- Grandstand arrival, in attendant order
+        0      -- TODO: This is set to 1 if you have free entry
+    )
+end
+
+xi.chocoboRacing.onStandsEntranceEventUpdate = function(player, csid, option, npc)
+    if option == 16 then
+        if player:hasKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS) then
+            player:delKeyItem(xi.keyItem.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+            player:setLocalVar('[ChocoboCircuit]StandsPaid', 1)
+        end
+
+        player:updateEvent(0)
+    elseif option == 17 then
+        if player:delGil(standsAdmissionFee) then
+            player:setLocalVar('[ChocoboCircuit]StandsPaid', 1)
+            player:updateEvent(0)
+        else
+            player:updateEvent(1)
+        end
+    end
+
+    if player:getLocalVar('[ChocoboCircuit]StandsPaid') == 0 then
+        player:setLocalVar('noPosUpdate', 1)
+    end
+end
+
+xi.chocoboRacing.onStandsEntranceEventFinish = function(player, csid, option, npc)
+    player:setLocalVar('noPosUpdate', 0)
+    player:setLocalVar('[ChocoboCircuit]StandsPaid', 0)
+end
+
+xi.chocoboRacing.onStandsExitTrigger = function(player, index)
+    player:startEvent(
+        327 + index,
+        index -- Circuit arrival, in attendant order
+    )
+end
+
 xi.chocoboRacing.onToteboardEventUpdate = function(player, option)
     -- Client is browsing to the Toteboard or the client is requesting an automatic update
     if option == 3 or option == 4 then
