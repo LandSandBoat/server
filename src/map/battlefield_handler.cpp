@@ -160,10 +160,8 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
 
-    if (checkRegistered && entity && entity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(entity); checkRegistered && PChar)
     {
-        auto* PChar = static_cast<CCharEntity*>(entity);
-
         const auto it = std::ranges::find_if(m_Battlefields,
                                              [&](const auto& entry)
                                              {

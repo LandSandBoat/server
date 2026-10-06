@@ -90,6 +90,7 @@ MapEngine::MapEngine(Application& application, MapConfig& config)
 
 MapEngine::~MapEngine()
 {
+    networking_->sessions().shutdown();
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();

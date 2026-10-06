@@ -142,9 +142,9 @@ void CAutomatonEntity::PostTick()
     CPetEntity::PostTick();
     if (pre_mask && status != xi::Status::Disappear)
     {
-        if (PMaster && PMaster->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster))
         {
-            charutils::SendExtendedJobPackets(static_cast<CCharEntity*>(PMaster));
+            charutils::SendExtendedJobPackets(PChar);
         }
     }
 }
@@ -184,7 +184,7 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
         {
             auto* PMob    = static_cast<CMobEntity*>(PTarget);
             auto* PMaster = dynamic_cast<CBattleEntity*>(this->PMaster);
-            if (PMaster && PMaster->objtype == TYPE_PC)
+            if (PMaster && dynamic_cast<const CCharEntity*>(PMaster) != nullptr)
             {
                 PMob->PEnmityContainer->AddBaseEnmity(PMaster);
             }
@@ -203,7 +203,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
     {
         auto* PMob    = static_cast<CMobEntity*>(PTarget);
         auto* PMaster = dynamic_cast<CBattleEntity*>(this->PMaster);
-        if (PMaster && PMaster->objtype == TYPE_PC)
+        if (PMaster && dynamic_cast<const CCharEntity*>(PMaster) != nullptr)
         {
             PMob->PEnmityContainer->AddBaseEnmity(PMaster);
         }

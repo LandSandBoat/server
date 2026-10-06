@@ -539,13 +539,13 @@ auto getSkillCap(const CCharEntity* PChar, const xi::SkillType skill, const uint
 
 void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
 {
-    if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
+    auto* PChar = dynamic_cast<CCharEntity*>(PAutomaton->PMaster);
+    if (!PChar)
     {
         ShowWarning("puppetutils::TrySkillUP() - PMaster was null, or was not a player.");
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(PAutomaton->PMaster);
     if (getSkillCap(PChar, SkillID, PAutomaton->GetMLevel()) != 0 && !(PAutomaton->WorkingSkills.skill[static_cast<uint8>(SkillID)] & 0x8000))
     {
         const uint16 CurSkill = PChar->RealSkills.skill[static_cast<uint8>(SkillID)];

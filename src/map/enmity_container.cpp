@@ -252,7 +252,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         if (withMaster && PEntity->PMaster != nullptr)
         {
             // add master to the enmity list (pet and charmed mob)
-            if (PEntity->objtype == TYPE_PET || (PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && PEntity->PMaster->objtype == TYPE_PC))
+            if (PEntity->objtype == TYPE_PET || (PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PEntity->PMaster) != nullptr))
             {
                 AddBaseEnmity(PEntity->PMaster);
             }
@@ -554,7 +554,7 @@ bool CEnmityContainer::IgnorePets(CBattleEntity* PEntity) const
         return true;
     }
 
-    return PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && PEntity->PMaster->objtype == TYPE_PC;
+    return PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PEntity->PMaster) != nullptr;
 }
 
 bool CEnmityContainer::IsTameable() const

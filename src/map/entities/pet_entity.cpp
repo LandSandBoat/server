@@ -218,9 +218,9 @@ void CPetEntity::PostTick()
         m_nextUpdateTimer = now + 250ms;
         loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
-        if (PMaster && PMaster->PPet == this)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster); PChar && PChar->PPet == this)
         {
-            ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
+            PChar->pushPacket<CPetSyncPacket>(PChar);
         }
 
         updatemask = 0;
@@ -238,7 +238,7 @@ void CPetEntity::Die()
     PAI->ClearStateStack();
 
     // master is zoning, don't go to death state, instead despawn instantly
-    if (health.hp > 0 && PMaster && PMaster->objtype == TYPE_PC && static_cast<CCharEntity*>(PMaster)->petZoningInfo.respawnPet)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster); health.hp > 0 && PChar && PChar->petZoningInfo.respawnPet)
     {
         PAI->Internal_Despawn(true);
     }
@@ -252,7 +252,7 @@ void CPetEntity::Die()
     // NOTE: This is purposefully calling CBattleEntity's impl.
     // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::Die();
-    if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
+    if (PMaster && PMaster->PPet == this && dynamic_cast<const CCharEntity*>(PMaster) != nullptr)
     {
         petutils::DetachPet(PMaster);
     }
@@ -261,7 +261,7 @@ void CPetEntity::Die()
 void CPetEntity::Spawn()
 {
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
-    if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == xi::Ecosystem::Elemental)
+    if (PMaster && dynamic_cast<const CCharEntity*>(PMaster) != nullptr && m_EcoSystem == xi::Ecosystem::Elemental)
     {
         this->defaultMobMod(xi::MobMod::MagicDelay, 12);
         this->defaultMobMod(xi::MobMod::MagicCool, 48);
@@ -447,7 +447,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         }
         else
         {
-            if (this->objtype == TYPE_MOB && PTarget->objtype == TYPE_PC)
+            if (this->objtype == TYPE_MOB && dynamic_cast<const CCharEntity*>(PTarget) != nullptr)
             {
                 CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PTarget, this);
                 if (PCoverAbilityUser != nullptr)

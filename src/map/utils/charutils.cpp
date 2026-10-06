@@ -4216,31 +4216,16 @@ bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
 
 int32 hasTrait(CCharEntity* PChar, uint16 TraitID)
 {
-    if (PChar->objtype != TYPE_PC)
-    {
-        ShowError("charutils::hasTrait Attempt to reference a trait from a non-character entity: %s %i", PChar->name.c_str(), PChar->id);
-        return 0;
-    }
     return hasBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
 int32 addTrait(CCharEntity* PChar, uint16 TraitID)
 {
-    if (PChar->objtype != TYPE_PC)
-    {
-        ShowError("charutils::addTrait Attempt to reference a trait from a non-character entity: %s %i", PChar->name.c_str(), PChar->id);
-        return 0;
-    }
     return addBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
 int32 delTrait(CCharEntity* PChar, uint16 TraitID)
 {
-    if (PChar->objtype != TYPE_PC)
-    {
-        ShowError("charutils::delTrait Attempt to reference a trait from a non-character entity: %s %i", PChar->name.c_str(), PChar->id);
-        return 0;
-    }
     return delBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
@@ -7391,7 +7376,7 @@ bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
     {
         spawnlist = &PChar->SpawnNPCList;
     }
-    else if (entity->objtype == TYPE_PC)
+    else if (dynamic_cast<const CCharEntity*>(entity) != nullptr)
     {
         spawnlist = &PChar->SpawnPCList;
     }

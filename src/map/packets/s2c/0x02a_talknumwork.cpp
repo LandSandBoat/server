@@ -22,6 +22,7 @@
 #include "0x02a_talknumwork.h"
 
 #include "entities/base_entity.h"
+#include "entities/char_entity.h"
 
 GP_SERV_COMMAND_TALKNUMWORK::GP_SERV_COMMAND_TALKNUMWORK(
     const CBaseEntity*         PEntity,
@@ -48,7 +49,7 @@ GP_SERV_COMMAND_TALKNUMWORK::GP_SERV_COMMAND_TALKNUMWORK(
     {
         std::memcpy(packet.String, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), sizeof(packet.String) - 1));
     }
-    else if (PEntity->objtype == TYPE_PC)
+    else if (dynamic_cast<const CCharEntity*>(PEntity) != nullptr)
     {
         messageID += 0x8000;
     }

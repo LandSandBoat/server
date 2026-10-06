@@ -35,9 +35,9 @@ CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar)
 : CRecastContainer(PChar)
 , m_PChar(PChar)
 {
-    if (m_PChar == nullptr || m_PChar->objtype != TYPE_PC)
+    if (m_PChar == nullptr)
     {
-        ShowError("m_PChar is null or not a Player.");
+        ShowError("m_PChar is null.");
     }
 }
 

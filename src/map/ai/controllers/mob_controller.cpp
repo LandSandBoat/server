@@ -594,7 +594,7 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
                                 ((PMob->m_Type & xi::MobType::Notorious) == xi::MobType::Normal) &&
                                 PMob->getZone() >= xi::ZoneId::LufaiseMeadows &&
                                 PMob->getZone() <= xi::ZoneId::Sacrarium;
-    if (isCopFomorZone && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(PTarget)->getCharVar("FOMOR_HATE") < 8)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget); isCopFomorZone && PChar && PChar->getCharVar("FOMOR_HATE") < 8)
     {
         return false;
     }
@@ -856,10 +856,9 @@ void CMobController::TryLink()
         }
 
         // PCs only get bodyguarded by the avatar they own; non-PC targets always do.
-        if (PTarget->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
         {
-            auto* const PChar = dynamic_cast<CCharEntity*>(PTarget);
-            if (!PChar || !PChar->IsMobOwner(PMob))
+            if (!PChar->IsMobOwner(PMob))
             {
                 return;
             }
@@ -1030,9 +1029,9 @@ auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
     // Resolve the (potentially pet-owning) character whose Locked flag we care about.
     const auto* PChar = [&]() -> const CCharEntity*
     {
-        if (PTarget->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
         {
-            return dynamic_cast<CCharEntity*>(PTarget);
+            return PChar;
         }
 
         if (PTarget->objtype == TYPE_PET)
@@ -1392,9 +1391,9 @@ void CMobController::Move()
     }
 
     // Arrived: shuffle aside if another mob is stacked on us.
-    if (PTarget->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
     {
-        for (const auto& [_, PSpawnedMob] : static_cast<CCharEntity*>(PTarget)->SpawnMOBList)
+        for (const auto& [_, PSpawnedMob] : PChar->SpawnMOBList)
         {
             if (PSpawnedMob == PMob ||
                 PSpawnedMob->PAI->PathFind->IsFollowingPath() ||

@@ -763,9 +763,9 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
         resist = 0.5f;
     }
 
-    if (PAttacker->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker))
     {
-        CItemEquipment* waist = ((CCharEntity*)PAttacker)->getEquip(SLOT_WAIST);
+        CItemEquipment* waist = PChar->getEquip(SLOT_WAIST);
         if (waist && waist->getID() == obi[element - 1])
         {
             obiBonus = true;
@@ -882,7 +882,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
         {
             xi::SkillType skilltype = xi::SkillType::None;
 
-            if (PDefender->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender))
             {
                 if (auto* weapon = dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]))
                 {
@@ -894,7 +894,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
                 }
 
                 // Check for skillup
-                charutils::TrySkillUP(static_cast<CCharEntity*>(PDefender), skilltype, PAttacker->GetMLevel());
+                charutils::TrySkillUP(PChar, skilltype, PAttacker->GetMLevel());
             }
 
             // Check if crit
@@ -1208,12 +1208,10 @@ void HandleSpikesStatusEffect(const CBattleEntity* PAttacker, const CBattleEntit
 
 void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 finaldamage, CAttack& attack)
 {
-    CCharEntity* PChar = nullptr;
+    auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
 
-    if (PAttacker->objtype == TYPE_PC)
+    if (PChar)
     {
-        PChar = dynamic_cast<CCharEntity*>(PAttacker);
-
         if (!settings::get<bool>("map.DISABLE_TREASURE_HUNTER_PROCS"))
         {
             // TODO: cleanup lua further so we can handle all this add effect stuff somewhere else
@@ -1311,7 +1309,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
     if (previous_daze != xi::StatusEffect::None)
     {
-        if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
+        if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr && PAttacker->PParty != nullptr)
         {
             for (auto* PMember : PAttacker->PParty->members)
             {
@@ -1338,7 +1336,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::HasteDaze, PAttacker->id);
             PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::AspirDaze, PAttacker->id);
         }
-        if (PDefender->objtype == TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(PDefender) != nullptr)
         {
             PDefender->StatusEffectContainer->AddStatusEffectSilent(previous_daze, 0, previous_daze_power, 0s, 10s, PAttacker->id);
         }
@@ -1357,7 +1355,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
     auto checkWeaponAdditionalEffect = [&]() -> bool
     {
-        if (PAttacker->objtype == TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr)
         {
             bool hasGlobalAdditionalEffect     = battleutils::GetScaledItemModifier(PAttacker, weapon, xi::Mod::ITEM_ADDEFFECT_TYPE) > 0;     // additional_effect.lua
             bool hasItemScriptAdditionalEffect = battleutils::GetScaledItemModifier(PAttacker, weapon, xi::Mod::ITEM_ADDEFFECT_SCRIPTED) > 0; // scripts/items/{}.lua
@@ -1392,7 +1390,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
     bool checkedPriorityWeaponAddEffect = false;
 
     // TODO: grip priority too?
-    if (PAttacker->objtype == TYPE_PC && battleutils::GetScaledItemModifier(PAttacker, weapon, xi::Mod::ITEM_ADDEFFECT_PRIORITY) > 0)
+    if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr && battleutils::GetScaledItemModifier(PAttacker, weapon, xi::Mod::ITEM_ADDEFFECT_PRIORITY) > 0)
     {
         if (checkWeaponAdditionalEffect())
         {
@@ -1426,10 +1424,10 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
             // Increase HP Absorbed by 2% per JP
             int32 absorbed = Action->param;
-            if (PAttacker->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker))
             {
                 absorbed += (int32)floor(
-                    absorbed * 0.02f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_BLOOD_WEAPON_EFFECT));
+                    absorbed * 0.02f * PChar->PJobPoints->GetJobPointValue(JP_BLOOD_WEAPON_EFFECT));
             }
 
             Action->addEffectParam = PAttacker->addHP(absorbed);
@@ -1532,9 +1530,9 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
         return; // Lambda handled the function
     }
     // check script for grip if main failed
-    else if (PAttacker->objtype == TYPE_PC && static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB) && weapon == PAttacker->m_Weapons[SLOT_MAIN])
+    else if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker); PChar && PChar->getEquip(SLOT_SUB) && weapon == PAttacker->m_Weapons[SLOT_MAIN])
     {
-        if (auto* PSubWeapon = dynamic_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB));
+        if (auto* PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
             PSubWeapon &&
             PSubWeapon->getSkillType() == xi::SkillType::None &&
             GetScaledItemModifier(PAttacker, PSubWeapon, xi::Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
@@ -1584,7 +1582,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
 
             attackerID = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetSubID();
 
-            if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
+            if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr && PAttacker->PParty != nullptr)
             {
                 if (PChar)
                 {
@@ -1929,11 +1927,10 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
     float skillRatio     = 1.0f;
     uint8 meritReduction = 0;
 
-    if (PDefender->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender))
     {
-        CCharEntity* PChar      = (CCharEntity*)PDefender;
-        float        skillCap   = GetMaxSkill(PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
-        float        skillLevel = PChar->GetSkill(PSpell->getSkillType());
+        float skillCap   = GetMaxSkill(PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
+        float skillLevel = PChar->GetSkill(PSpell->getSkillType());
 
         // If skill cap is 0, player may be using a spell from their subjob.
         if (skillCap == 0)
@@ -1952,7 +1949,7 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
         }
 
         // Fetch player-only interruption rate reduction from merits.
-        meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::SpellInterruptionRate, (CCharEntity*)PDefender);
+        meritReduction = PChar->PMeritPoints->GetMeritValue(xi::Merit::SpellInterruptionRate, PChar);
     }
 
     // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
@@ -2015,9 +2012,9 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
 
         // https://www.bg-wiki.com/ffxi/Formless_Strikes
         // Merit value of 1 is +5%, so 60% normal power
-        if (PAttacker->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker))
         {
-            formlessMod += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(xi::Merit::FormlessStrikes, (CCharEntity*)PAttacker);
+            formlessMod += PChar->PMeritPoints->GetMeritValue(xi::Merit::FormlessStrikes, PChar);
         }
 
         damage = damage * formlessMod / 100;
@@ -2215,7 +2212,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
                 }
 
                 // if the mob is charmed by player
-                if (PDefender->PMaster != nullptr && PDefender->PMaster->objtype == TYPE_PC)
+                if (PDefender->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PDefender->PMaster) != nullptr)
                 {
                     ((CPetEntity*)PDefender)
                         ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
@@ -2255,7 +2252,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
         }
 
         // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-        if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender); (!isRanged) && !((isBlocked) && (PChar) && (charutils::hasTrait(PChar, TRAIT_SHIELD_MASTERY))))
         {
             PDefender->TryHitInterrupt(PAttacker);
         }
@@ -2273,7 +2270,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
         {
             int32 delay = 0;
 
-            if (isRanged && PAttacker->objtype == TYPE_PC)
+            if (isRanged && dynamic_cast<const CCharEntity*>(PAttacker) != nullptr)
             {
                 delay = GetBaseRangedDelay(PAttacker);
             }
@@ -2345,7 +2342,7 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
         damage = -corrected;
     }
 
-    if (PAttacker->objtype == TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr)
     {
         battleutils::ClaimMob(PDefender, PAttacker);
     }
@@ -2363,7 +2360,7 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
         {
             case TYPE_MOB:
                 // if the mob is charmed by player
-                if (PDefender->PMaster != nullptr && PDefender->PMaster->objtype == TYPE_PC)
+                if (PDefender->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PDefender->PMaster) != nullptr)
                 {
                     ((CPetEntity*)PDefender)
                         ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
@@ -2554,7 +2551,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
     {
         return 100;
     }
-    else if (PAttacker->objtype == TYPE_PC && (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
+    else if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr && (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
     {
         if (PAttacker->GetMJob() == xi::Job::THF and PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Doubt))
         {
@@ -2565,8 +2562,8 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
             critHitRate = 100;
         }
     }
-    else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == xi::Job::THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
-             (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
+    else if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker); PChar && PAttacker->GetMJob() == xi::Job::THF && charutils::hasTrait(PChar, TRAIT_ASSASSIN) &&
+                                                                  (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
     {
         CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
         if (taChar != nullptr)
@@ -2577,9 +2574,8 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
     else
     {
         // apply merit mods and traits
-        if (PAttacker->objtype == TYPE_PC)
+        if (auto* PCharAttacker = dynamic_cast<CCharEntity*>(PAttacker))
         {
-            CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
             critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(xi::Merit::CritHitRate, PCharAttacker);
 
             // Add Fencer crit hit rate
@@ -2594,9 +2590,9 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
             }
         }
 
-        if (PDefender->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender))
         {
-            critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, (CCharEntity*)PDefender);
+            critHitRate -= PChar->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, PChar);
         }
 
         // Check for Innin crit rate bonus from behind target
@@ -2679,15 +2675,14 @@ uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
 {
     int32 critHitRate = 5;
     // apply merit mods and traits
-    if (PAttacker->objtype == TYPE_PC)
+    if (auto* PCharAttacker = dynamic_cast<CCharEntity*>(PAttacker))
     {
-        CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
         critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(xi::Merit::CritHitRate, PCharAttacker);
     }
 
-    if (PDefender->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender))
     {
-        critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, (CCharEntity*)PDefender);
+        critHitRate -= PChar->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, PChar);
     }
 
     // Check for Innin crit rate bonus from behind target
@@ -3016,18 +3011,16 @@ uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon)
     int16 quadAttack   = PEntity->getMod(xi::Mod::QUAD_ATTACK);
 
     // check for merit upgrades
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        CCharEntity* PChar = (CCharEntity*)PEntity;
-
         // merit chance only applies if player has the job trait
         if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
         {
-            tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, (CCharEntity*)PEntity);
+            tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, PChar);
         }
         if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
         {
-            doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, (CCharEntity*)PEntity);
+            doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, PChar);
         }
     }
 
@@ -3054,9 +3047,9 @@ uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon)
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hasso))
         {
             uint16 zanshin = PEntity->getMod(xi::Mod::ZANSHIN);
-            if (PEntity->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
-                zanshin += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::ZanshinAttackRate, (CCharEntity*)PEntity);
+                zanshin += PChar->PMeritPoints->GetMeritValue(xi::Merit::ZanshinAttackRate, PChar);
             }
 
             if (xirand::GetRandomNumber(100) < (zanshin / 4))
@@ -3105,13 +3098,13 @@ bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     {
         PDefender->setModifier(modShadow, --Shadow);
 
-        if (PDefender->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PDefender))
         {
-            static_cast<CCharEntity*>(PDefender)->setPersist(CharPersist::Effects);
+            PChar->setPersist(CharPersist::Effects);
         }
 
         // player loses 25 CE every time an attack is absorbed by an utsusemi shadow
-        if (xi::Mod::UTSUSEMI == modShadow && PDefender->objtype == TYPE_PC)
+        if (xi::Mod::UTSUSEMI == modShadow && dynamic_cast<const CCharEntity*>(PDefender) != nullptr)
         {
             if (auto* PMob = dynamic_cast<CMobEntity*>(PAttacker))
             {
@@ -3135,7 +3128,7 @@ bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
         }
         else if (Shadow < 4 && xi::Mod::UTSUSEMI == modShadow)
         {
-            if (PDefender->objtype == TYPE_PC)
+            if (dynamic_cast<const CCharEntity*>(PDefender) != nullptr)
             {
                 CStatusEffect* PStatusEffect = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::CopyImage);
 
@@ -3554,9 +3547,9 @@ CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot)
         return nullptr;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        return (((CCharEntity*)PEntity)->getEquip(Slot));
+        return (PChar->getEquip(Slot));
     }
 
     return nullptr;
@@ -3581,10 +3574,8 @@ void MakeEntityStandUp(CBattleEntity* PEntity)
         return;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PPlayer = dynamic_cast<CCharEntity*>(PEntity))
     {
-        CCharEntity* PPlayer = ((CCharEntity*)PEntity);
-
         if (PPlayer->animation == xi::Animation::Healing)
         {
             PPlayer->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Healing);
@@ -3620,10 +3611,8 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
         return false;
     }
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        CCharEntity* PChar = ((CCharEntity*)PEntity);
-
         uint8  SlotID = 0;
         uint16 toolID = PSpell->getMPCost();
 
@@ -3881,18 +3870,10 @@ void GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE)
         return;
     }
 
-    CCharEntity* PIterSource = nullptr;
-
-    if (PSource->objtype != TYPE_PC)
+    auto* PIterSource = dynamic_cast<CCharEntity*>(PSource);
+    if (!PIterSource)
     {
-        if (PSource->PMaster && PSource->PMaster->objtype == TYPE_PC)
-        {
-            PIterSource = static_cast<CCharEntity*>(PSource->PMaster);
-        }
-    }
-    else
-    {
-        PIterSource = static_cast<CCharEntity*>(PSource);
+        PIterSource = dynamic_cast<CCharEntity*>(PSource->PMaster);
     }
 
     if (PIterSource)
@@ -4013,11 +3994,11 @@ uint16 doConsumeManaEffect(CCharEntity* m_PChar)
 
 uint8 getStoreTPbonusFromMerit(CBattleEntity* PEntity)
 {
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        if (((CCharEntity*)PEntity)->GetMJob() == xi::Job::SAM)
+        if (PChar->GetMJob() == xi::Job::SAM)
         {
-            return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::StoreTpEffect, (CCharEntity*)PEntity);
+            return PChar->PMeritPoints->GetMeritValue(xi::Merit::StoreTpEffect, PChar);
         }
     }
     return 0;
@@ -4107,25 +4088,22 @@ uint8 getBarrageShotCount(CBattleEntity* PBattleEntity)
     shotCount += PBattleEntity->getMod(xi::Mod::BARRAGE_COUNT);
 
     // only archery + marksmanship can use barrage
-    if (PBattleEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PBattleEntity))
     {
-        if (auto* PChar = dynamic_cast<CCharEntity*>(PBattleEntity); PChar)
+        CItemWeapon* PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+
+        if (PItem && PItem->getSkillType() != xi::SkillType::Archery && PItem->getSkillType() != xi::SkillType::Marksmanship)
         {
-            CItemWeapon* PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+            return 0;
+        }
 
-            if (PItem && PItem->getSkillType() != xi::SkillType::Archery && PItem->getSkillType() != xi::SkillType::Marksmanship)
-            {
-                return 0;
-            }
+        // make sure we have enough ammo for all these shots
+        CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
-            // make sure we have enough ammo for all these shots
-            CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-
-            // TODO: Check if this should be here. Recycle can proc and potentially allow more shots to land
-            if (PAmmo && PAmmo->getQuantity() < shotCount + 1u) // This function is additive to the first shot. So one ammo is already consumed before we get here
-            {
-                shotCount = PAmmo->getQuantity() - 1;
-            }
+        // TODO: Check if this should be here. Recycle can proc and potentially allow more shots to land
+        if (PAmmo && PAmmo->getQuantity() < shotCount + 1u) // This function is additive to the first shot. So one ammo is already consumed before we get here
+        {
+            shotCount = PAmmo->getQuantity() - 1;
         }
     }
 
@@ -4181,18 +4159,18 @@ void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, timer::duration
         PVictim->updatemask |= UPDATE_STATUS;
     }
 
-    else if (PVictim->objtype == TYPE_PC)
+    else if (auto* PChar = dynamic_cast<CCharEntity*>(PVictim))
     {
         if (PVictim->PPet)
         {
             petutils::DespawnPet(PVictim);
         }
 
-        static_cast<CCharEntity*>(PVictim)->ClearTrusts();
+        PChar->ClearTrusts();
 
-        battleutils::RelinquishClaim(static_cast<CCharEntity*>(PVictim));
+        battleutils::RelinquishClaim(PChar);
         PVictim->PMaster = PCharmer;
-        PVictim->PAI->SetController(std::make_unique<CPlayerCharmController>(static_cast<CCharEntity*>(PVictim)));
+        PVictim->PAI->SetController(std::make_unique<CPlayerCharmController>(PChar));
         PVictim->updatemask |= UPDATE_ALL_CHAR;
 
         // Prevent auto attacks for a little bit to simulate retail
@@ -4206,10 +4184,10 @@ void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, timer::duration
 
 void unCharm(CBattleEntity* PEntity)
 {
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
         PEntity->isCharmed = false;
-        PEntity->PAI->SetController(std::make_unique<CPlayerController>(static_cast<CCharEntity*>(PEntity)));
+        PEntity->PAI->SetController(std::make_unique<CPlayerController>(PChar));
 
         PEntity->PMaster = nullptr;
         if (PEntity->PAI->IsEngaged())
@@ -4237,9 +4215,9 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     if (auto* mob = dynamic_cast<CMobEntity*>(PDefender))
     {
         CBattleEntity* original = PAttacker;
-        if (PAttacker->objtype != TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(PAttacker) == nullptr)
         {
-            if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
+            if (PAttacker->PMaster && dynamic_cast<const CCharEntity*>(PAttacker->PMaster) != nullptr)
             { // claim by master
                 PAttacker = PAttacker->PMaster;
             }
@@ -4323,9 +4301,9 @@ void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     if (PDefender->objtype == TYPE_MOB)
     {
         CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
-        if (PAttacker->objtype != TYPE_PC)
+        if (dynamic_cast<const CCharEntity*>(PAttacker) == nullptr)
         {
-            if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
+            if (PAttacker->PMaster && dynamic_cast<const CCharEntity*>(PAttacker->PMaster) != nullptr)
             {
                 PAttacker = PAttacker->PMaster;
             }
@@ -4555,7 +4533,8 @@ void HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttack
         // Issekigan is Known to Grant 300 CE per parry, but unknown how it effects VE (per bgwiki). So VE is left alone for now.
         // JP is known to give 10 VE per point
         // Only give jpBonus if the defender is a player, as mobs don't have job points.
-        uint16 jpBonus = PDefender->objtype == TYPE_PC ? static_cast<CCharEntity*>(PDefender)->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10 : 0;
+        const auto* PChar   = dynamic_cast<CCharEntity*>(PDefender);
+        uint16      jpBonus = PChar ? PChar->PJobPoints->GetJobPointValue(JP_ISSEKIGAN_EFFECT) * 10 : 0;
         static_cast<CMobEntity*>(PAttacker)->PEnmityContainer->UpdateEnmity(PDefender, 300, 0 + jpBonus, false, false);
     }
 }
@@ -4618,7 +4597,7 @@ float HandleTranquilHeart(CBattleEntity* PEntity)
 {
     float reductionPercent = 0.0f;
 
-    if (PEntity->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PEntity, TRAIT_TRANQUIL_HEART))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar && charutils::hasTrait(PChar, TRAIT_TRANQUIL_HEART))
     {
         int16 healingSkill = PEntity->GetSkill(xi::SkillType::HealingMagic);
         reductionPercent   = ((healingSkill / 10.0f) * 0.5f);
@@ -4804,7 +4783,7 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
     CBattleEntity* EntityToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
     if (EntityToAssist != nullptr)
     {
-        if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->battleTarget().isSet())
+        if (dynamic_cast<const CCharEntity*>(EntityToAssist) != nullptr && EntityToAssist->battleTarget().isSet())
         {
             // get that players engaged target
             CBattleEntity* EntityToLockon = EntityToAssist->GetBattleTarget();
@@ -5287,7 +5266,7 @@ int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay)
 
 int32 GetRangedAttackBonuses(CBattleEntity* battleEntity)
 {
-    if (battleEntity->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(battleEntity) == nullptr)
     {
         return 0;
     }
@@ -5311,7 +5290,7 @@ int32 GetRangedAttackBonuses(CBattleEntity* battleEntity)
 
 int32 GetRangedAccuracyBonuses(CBattleEntity* battleEntity)
 {
-    if (battleEntity->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(battleEntity) == nullptr)
     {
         return 0;
     }
@@ -5480,10 +5459,8 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
             }
 
             // SCH JP: Stratagem II - 1% reduction in cast time per point
-            if (PEntity->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
-                auto* PChar = static_cast<CCharEntity*>(PEntity);
-
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
@@ -5523,10 +5500,8 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
             }
 
             // SCH JP: Stratagem II - 1% reduction in cast time per point
-            if (PEntity->objtype == TYPE_PC)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
-                auto* PChar = static_cast<CCharEntity*>(PEntity);
-
                 bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
             }
 
@@ -5550,9 +5525,8 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     {
         auto amount = 1000ms * PEntity->getMod(xi::Mod::SUMMONING_MAGIC_CAST);
 
-        if (PEntity->objtype == TYPE_PC && settings::get<bool>("main.ENABLE_SMN_MAGIC_CAST_TIME_MERIT"))
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar && settings::get<bool>("main.ENABLE_SMN_MAGIC_CAST_TIME_MERIT"))
         {
-            auto* PChar = static_cast<CCharEntity*>(PEntity);
             amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(xi::Merit::SummoningMagicCastTime, PChar));
         }
 
@@ -5576,8 +5550,8 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Nightingale))
         {
-            if (PEntity->objtype == TYPE_PC &&
-                xirand::GetRandomNumber(100) < ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::Nightingale, (CCharEntity*)PEntity) - 25)
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar &&
+                                                                   xirand::GetRandomNumber(100) < PChar->PMeritPoints->GetMeritValue(xi::Merit::Nightingale, PChar) - 25)
             {
                 return 0s;
             }
@@ -5592,9 +5566,9 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     }
     else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
     {
-        if (PEntity->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
         {
-            uint8 jpValue = static_cast<CCharEntity*>(PEntity)->PJobPoints->GetJobPointValue(JP_NINJITSU_CAST_TIME_BONUS);
+            uint8 jpValue = PChar->PJobPoints->GetJobPointValue(JP_NINJITSU_CAST_TIME_BONUS);
             cast          = std::chrono::floor<std::chrono::milliseconds>(cast * (1.0f - (0.03f * jpValue)));
         }
     }
@@ -5607,14 +5581,13 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     else if (PSpell->isCure()) // Cure cast time reductions
     {
         fastCast += PEntity->getMod(xi::Mod::CURE_CAST_TIME);
-        if (PEntity->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
         {
-            fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::CureCastTime, (CCharEntity*)PEntity);
+            fastCast += PChar->PMeritPoints->GetMeritValue(xi::Merit::CureCastTime, PChar);
         }
     }
-    else if (PSpell->getSkillType() == xi::SkillType::Geomancy && PEntity->objtype == TYPE_PC)
+    else if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PSpell->getSkillType() == xi::SkillType::Geomancy && PChar)
     {
-        auto* PChar = static_cast<CCharEntity*>(PEntity);
         fastCast += PChar->PJobPoints->GetJobPointValue(JP_WIDENED_COMPASS_EFFECT);
     }
 
@@ -5777,9 +5750,8 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
         }
 
         // The following modifiers are not multiplicative - as such they must be applied last.
-        if (PEntity->objtype == TYPE_PC)
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
         {
-            auto* PChar = static_cast<CCharEntity*>(PEntity);
             if (PSpell->getID() == SpellID::Magic_Finale) // apply Finale recast merits
             {
                 recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(xi::Merit::FinaleRecast, PChar));
@@ -5935,9 +5907,8 @@ int16 CalculateWeaponSkillTP(CBattleEntity* PEntity, CWeaponSkill* PWeaponSkill,
     // apply TP Bonus
     int16 tp = spentTP + PEntity->getMod(xi::Mod::TP_BONUS);
 
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        auto* PChar   = static_cast<CCharEntity*>(PEntity);
         uint8 damslot = SLOT_MAIN;
         if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 221)
         {
@@ -6027,9 +5998,9 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
 
 int32 GetMeritValue(CBattleEntity* PEntity, xi::Merit merit)
 {
-    if (PEntity->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        return static_cast<CCharEntity*>(PEntity)->PMeritPoints->GetMeritValue(merit, static_cast<CCharEntity*>(PEntity));
+        return PChar->PMeritPoints->GetMeritValue(merit, PChar);
     }
     return 0;
 }

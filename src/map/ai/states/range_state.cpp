@@ -76,7 +76,7 @@ auto CRangeState::init() -> StateErrorOr<void>
     delay      = battleutils::GetRangedDelayReduction(m_PEntity, delay);
 
     // Rapid Shot
-    if (m_PEntity->objtype == TYPE_PC || m_PEntity->objtype == TYPE_TRUST)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity); PChar || m_PEntity->objtype == TYPE_TRUST)
     {
         const CItemWeapon* weapon     = dynamic_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_RANGED]);
         const CItemWeapon* ammo       = dynamic_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_AMMO]);
@@ -86,7 +86,7 @@ auto CRangeState::init() -> StateErrorOr<void>
         {
             auto chance{ m_PEntity->getMod(xi::Mod::RAPID_SHOT) };
 
-            if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+            if (PChar)
             {
                 chance += PChar->PMeritPoints->GetMeritValue(xi::Merit::RapidShotRate, PChar);
             }
@@ -314,7 +314,7 @@ void CRangeState::InterruptRangedAttack(action_t& action)
 
 auto CRangeState::HasMoved() const -> bool
 {
-    if (m_PEntity->objtype != TYPE_PC)
+    if (dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr)
     {
         return false;
     }

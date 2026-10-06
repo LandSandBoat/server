@@ -769,7 +769,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                         }
                     }
                 }
-                if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
+                if (auto* PChar = dynamic_cast<CCharEntity*>(PCaster); spell->getSpellGroup() == SPELLGROUP_BLUE && PChar)
                 {
                     if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
                     {
@@ -778,7 +778,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                             usable = false;
                         }
                     }
-                    else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                    else if (!blueutils::IsSpellSet(PChar, (CBlueSpell*)spell))
                     {
                         usable = false;
                     }
@@ -817,7 +817,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                         }
                     }
                 }
-                if (spell->getSpellGroup() == SPELLGROUP_BLUE && PCaster->objtype == TYPE_PC)
+                if (auto* PChar = dynamic_cast<CCharEntity*>(PCaster); spell->getSpellGroup() == SPELLGROUP_BLUE && PChar)
                 {
                     if (requirements & SPELLREQ_UNBRIDLED_LEARNING)
                     {
@@ -826,7 +826,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                             usable = false;
                         }
                     }
-                    else if (!blueutils::IsSpellSet((CCharEntity*)PCaster, (CBlueSpell*)spell))
+                    else if (!blueutils::IsSpellSet(PChar, (CBlueSpell*)spell))
                     {
                         usable = false;
                     }

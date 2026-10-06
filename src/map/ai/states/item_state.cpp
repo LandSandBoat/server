@@ -133,12 +133,7 @@ auto CItemState::init() -> StateErrorOr<void>
     m_castTime      = m_PItem->getActivationTime();
     m_animationTime = m_PItem->getAnimationTime();
 
-    auto targetID = PTarget->id;
-
-    if (m_PEntity->objtype != TYPE_PC && settings::get<bool>("map.HIDE_READIES_TARGET"))
-    {
-        targetID = m_PEntity->id;
-    }
+    const auto targetID = PTarget->id;
 
     action_t action{
         .actorId    = m_PEntity->id,
@@ -226,11 +221,7 @@ auto CItemState::Update(const timer::time_point tick) -> bool
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_animationTime)
     {
-        if (m_PEntity->objtype == TYPE_PC)
-        {
-            CCharEntity* PChar = m_PEntity;
-            PChar->m_charHistory.itemsUsed++;
-        }
+        m_PEntity->m_charHistory.itemsUsed++;
         m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", m_PEntity, m_PItem);
         return true;
     }
