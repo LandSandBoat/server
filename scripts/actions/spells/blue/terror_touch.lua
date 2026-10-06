@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params      = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem  = xi.ecosystem.UNDEAD
     params.tpModifier = xi.spells.blue.tpMod.ACC
@@ -49,7 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
 
     -- Handle damage.
-    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params, action)
 
     if params.hitsLanded <= 0 then
         return damage

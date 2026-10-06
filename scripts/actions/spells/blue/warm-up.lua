@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local duration     = xi.spells.blue.calculateDurationWithDiffusion(caster, 180)
     local returnEffect = xi.effect.ACCURACY_BOOST
 

@@ -351,8 +351,9 @@ end
 ---@param params physicalMobSkillHitParams
 ---@param isSneakAttack boolean
 ---@param critChance number
+---@param action CAction
 ---@return physicalHitInfo
-local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, isSneakAttack, critChance)
+local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, isSneakAttack, critChance, action)
     local hitParried               = xi.combat.physical.isParried(target, caster) and not params.skipParry
     local hitGuarded               = xi.combat.physical.isGuarded(target, caster) and not params.skipGuard
     local isCritical               = isSneakAttack or math.randomFloat(0, 1) < critChance -- TODO: check if ranged can crit with SA
@@ -379,8 +380,9 @@ local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, 
     -- Guard does work and isnt a miss like mobskills
     if hitGuarded then
         hitInfo.hitGuarded = true
+        pDif               = math.max(pDif - 1, 0)
 
-        pDif = math.max(pDif - 1, 0)
+        action:resolution(target:getID(), xi.action.resolution.GUARD)
     end
 
     hitDamage = math.floor(baseHitDamage * pDif)
@@ -396,6 +398,8 @@ local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, 
         if target:getMod(xi.mod.SHIELD_MASTERY_TP) > 0 then
             blockedWithShieldMastery = true
         end
+
+        action:resolution(target:getID(), xi.action.resolution.BLOCK)
     end
 
     hitDamage = math.floor(hitDamage * xi.combat.damage.physicalElementSDT(target, params.damageType))
@@ -628,11 +632,12 @@ end
 ---@param target CBaseEntity
 ---@param spell CSpell
 ---@param params blueSkillParams
+---@param action CAction
 ---@return number
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
-xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
+xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params, action)
     spell:setCritical(false)
 
     local isCannonball = spell:getID() == xi.magic.spell.CANNONBALL
@@ -731,7 +736,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
             local damageForThisHit = (hitNumber == 1) and firstHitDamage or subsequentDamage
 
-            hitInfo = handleSinglePhysicalHit(caster, target, damageForThisHit, hitParams, sneakIsApplicable, params.critChance)
+            hitInfo = handleSinglePhysicalHit(caster, target, damageForThisHit, hitParams, sneakIsApplicable, params.critChance, action)
 
             hitInfo.shadowsConsumed  = shadowsConsumed
 

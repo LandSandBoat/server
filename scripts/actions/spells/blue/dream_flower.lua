@@ -20,7 +20,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params           = {}
     params.ecosystem       = xi.ecosystem.PLANTOID
     params.effect          = xi.effect.SLEEP_I -- https://wiki.ffo.jp/html/5502.html

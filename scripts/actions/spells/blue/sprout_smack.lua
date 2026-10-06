@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params          = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem      = xi.ecosystem.PLANTOID
     params.tpModifier     = xi.spells.blue.tpMod.DURATION
@@ -37,7 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.vit_wsc = 0.3
 
     -- Handle damage.
-    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params, action)
 
     if params.hitsLanded <= 0 then
         return damage

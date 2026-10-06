@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell, action)
     local params          = xi.spells.blue.getDefaultParams(caster)
     params.ecosystem      = xi.ecosystem.BEASTMEN
     params.tpModifier     = xi.spells.blue.tpMod.EFFECT_CHANCE
@@ -40,7 +40,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Enmity Down amount is trivial, not worth implementing
     -- Sources: https://www.applySpellDamagethreads/37619-Blue-Mage-Best-thread-ever?p=4845494&viewfull=1#post4845494 and https://www.bg-wiki.com/ffxi/Hydro_Shot
 
-    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params, action)
 end
 
 return spellObject

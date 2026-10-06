@@ -3301,7 +3301,7 @@ void CheckForGearSet(CBaseEntity* PTarget)
     }
 }
 
-int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
+int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell, action_t* action)
 {
     TracyZoneScoped;
 
@@ -3317,7 +3317,7 @@ int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell
         return 0;
     }
 
-    auto result = onSpellCast(PCaster, PTarget, PSpell);
+    auto result = onSpellCast(PCaster, PTarget, PSpell, action);
     if (!result.valid())
     {
         sol::error err = result;
