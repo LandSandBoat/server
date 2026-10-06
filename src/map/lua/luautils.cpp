@@ -3719,6 +3719,24 @@ void OnPathComplete(CBaseEntity* PEntity)
     }
 }
 
+void OnShopBuy(CCharEntity* PChar, CBaseEntity* PNpc, uint16 itemId, uint32 quantity, uint32 gil)
+{
+    TracyZoneScoped;
+
+    sol::function onShopBuy = getEntityCachedFunction(PNpc, "onShopBuy");
+    if (!onShopBuy.valid())
+    {
+        return;
+    }
+
+    auto result = onShopBuy(PChar, PNpc, itemId, quantity, gil);
+    if (!result.valid())
+    {
+        sol::error err = result;
+        ShowError("luautils::OnShopBuy: %s", err.what());
+    }
+}
+
 int32 OnBattlefieldHandlerInitialize(CZone* PZone)
 {
     TracyZoneScoped;
