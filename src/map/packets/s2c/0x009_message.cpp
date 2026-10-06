@@ -21,8 +21,11 @@
 
 #include "0x009_message.h"
 
+#include "common/utils.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
+
+#include <cstring>
 
 GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const MsgStd messageID)
 {
@@ -52,12 +55,12 @@ GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const uint32 param0, const MsgS
 
 GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const std::string& string2, const MsgStd messageID)
 {
-    this->setSize(0x1C);
     auto& packet = this->data();
 
     packet.MesNo = static_cast<uint16>(messageID);
 
     snprintf(packet.Data, 24, "string2 %s", string2.c_str());
+    this->setSize(roundUpToNearestFour(static_cast<uint32>(0x10 + std::strlen(packet.Data))));
 }
 
 GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const uint32 param0, const uint32 param1, const uint16 messageID)
@@ -82,16 +85,15 @@ GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(CCharEntity* PChar, const uint3
 
         if (messageID == MsgStd::Examine)
         {
-            this->setSize(0x60);
             packet.Attr = 0x10;
 
             snprintf(packet.Data, 24, "string2 %s", PChar->getName().c_str());
+            this->setSize(roundUpToNearestFour(static_cast<uint32>(0x10 + std::strlen(packet.Data))));
         }
         else if (messageID == MsgStd::MonstrosityCheckIn || messageID == MsgStd::MonstrosityCheckOut)
         {
-            this->setSize(0x20);
-
             snprintf(packet.Data, 24, "string2 %s", PChar->getName().c_str());
+            this->setSize(roundUpToNearestFour(static_cast<uint32>(0x10 + std::strlen(packet.Data))));
         }
     }
     else
@@ -114,9 +116,9 @@ GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const uint32 param0, const uint
 // Only used with MsgStd::DiceRoll (/random)
 GP_SERV_COMMAND_MESSAGE::GP_SERV_COMMAND_MESSAGE(const CCharEntity* PChar, const uint32 param0, const MsgStd messageID)
 {
-    this->setSize(0x34);
     auto& packet = this->data();
     packet.MesNo = static_cast<uint16>(messageID);
 
     snprintf(packet.Data, 40, "string2 %s string3 %u", PChar->getName().c_str(), param0);
+    this->setSize(roundUpToNearestFour(static_cast<uint32>(0x10 + std::strlen(packet.Data))));
 }
