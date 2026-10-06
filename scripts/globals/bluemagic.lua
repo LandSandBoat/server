@@ -376,11 +376,11 @@ local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, 
     local pDif             = xi.combat.physical.calculateMeleePDIF(caster, target, xi.skill.BLUE_MAGIC, params.attackMultiplier, isCritical, params.applyLevelCorrection, params.ignoreDefense, params.ignoreDefenseFactor, false, xi.slot.MAIN, params.isCannonball)
     local hitDamage        = 0
 
-    -- TODO: is this true of blue magic too?
     -- Guard does work and isnt a miss like mobskills
     if hitGuarded then
         hitInfo.hitGuarded = true
-        pDif = pDif - 1
+
+        pDif = math.max(pDif - 1, 0)
     end
 
     hitDamage = math.floor(baseHitDamage * pDif)
