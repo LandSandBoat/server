@@ -38,6 +38,13 @@ xi.transport.trigger =
         FERRY_ARRIVING_FROM_MHAURA = 0,
         FERRY_DEPARTING_TO_MHAURA  = 1,
     },
+    whitegate =
+    {
+        FERRY_ARRIVING_FROM_NASHMAU = 0,
+        FERRY_DEPARTING_TO_NASHMAU  = 1,
+        FERRY_ARRIVING_FROM_MHAURA  = 2,
+        FERRY_DEPARTING_TO_MHAURA   = 3,
+    },
 }
 
 xi.transport.interval =
@@ -50,6 +57,11 @@ xi.transport.interval =
     selbina =
     {
         FROM_TO_MHAURA = 480,
+    },
+    whitegate =
+    {
+        FROM_TO_NASHMAU = 480,
+        FROM_TO_MHAURA  = 480,
     },
 }
 
@@ -66,6 +78,13 @@ xi.transport.offset =
     {
         FERRY_ARRIVING_FROM_MHAURA = 399,
         FERRY_DEPARTING_TO_MHAURA  = 479,
+    },
+    whitegate =
+    {
+        FERRY_ARRIVING_FROM_NASHMAU = 299,
+        FERRY_DEPARTING_TO_NASHMAU  = 479,
+        FERRY_ARRIVING_FROM_MHAURA  = 159,
+        FERRY_DEPARTING_TO_MHAURA   = 239,
     },
 }
 
@@ -176,26 +195,42 @@ xi.transport.captainMessage = function(npc, triggerID, messages)
     end
 end
 
-xi.transport.dockMessage = function(npc, triggerID, messages, dock)
+xi.transport.dockMessage = function(npc, triggerID, messages)
     local dockNpcPos =
     {
-        [xi.zone.MHAURA] =
+        -- Mhaura
+        ['Dieh_Yamilsiah'] =
         {
             ARRIVING  = { { x = 7.06, y = -1.36, z = 2.20, rotation = 211 }, },
             DEPARTING = { { x = 8.26, y = -1.36, z = 2.20, rotation = 193 }, },
         },
-        [xi.zone.SELBINA] =
+        -- Selbina
+        ['Humilitie'] =
         {
             ARRIVING  = { { x = 16.768, y = -1.38,  z = -58.843, rotation = 209 }, },
             DEPARTING = { { x = 17.979, y = -1.389, z = -58.800, rotation = 191 }, },
         },
+        -- Aht Urhgan Whitegate (Nashmau)
+        ['Kuhn_Tsahnpri'] =
+        {
+            ARRIVING  = { { x = 14.047, y = 1.999, z = 143.496, rotation = 64 }, },
+            DEPARTING = { { x = 12.082, y = 1.999, z = 143.392, rotation = 64 }, },
+        },
+        -- Aht Urhgan Whitegate (Mhaura)
+        ['Baya_Hiramayuh'] =
+        {
+            ARRIVING  = { { x = -13.964, y = 1.999, z = -143.494, rotation = 192 }, },
+            DEPARTING = { { x = -12.082, y = 1.999, z = -143.367, rotation = 192 }, },
+        },
     }
+
+    local npcPos = dockNpcPos[npc:getName()]
 
     npc:showText(npc, messages[triggerID])
     if (triggerID % 2) == 0 then
-        npc:pathThrough(dockNpcPos[dock].ARRIVING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
+        npc:pathThrough(npcPos.ARRIVING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
     else
-        npc:pathThrough(dockNpcPos[dock].DEPARTING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
+        npc:pathThrough(npcPos.DEPARTING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
     end
 end
 
