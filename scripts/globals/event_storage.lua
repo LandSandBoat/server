@@ -26,8 +26,7 @@ xi.eventStorage.withdrawalFee = 250
 -- Bit n means the item at position n + 1 is in storage.
 -- The client pairs bits with names by position, so the lists stay in the order the NPC recites them.
 -- Race and gender locked slots hold every variant.
--- The player can only store the one they can wear.
--- Withdrawal gives the variant for the player's current race, which is how retail converts these items after a race change.
+-- Withdrawal gives the item for the player's current race and gender.
 -- The client answers "Remove <item>" with an option number, not the bit.
 -- The options for one category are not contiguous. optionBlocks holds { first position, option for that position } per block.
 --
@@ -326,11 +325,8 @@ xi.eventStorage.onTrade = function(player, npc, trade)
     local category = categories[slot[1]]
     local mask     = player:getCharVar(category.var)
 
-    -- Only the variant the player can wear is accepted, and only while that slot is empty.
-    if
-        itemForPlayer(player, category.items[slot[2]]) ~= itemId or
-        utils.mask.getBit(mask, slot[2] - 1)
-    then
+    -- Only one variant can be stored in each slot.
+    if utils.mask.getBit(mask, slot[2] - 1) then
         return
     end
 

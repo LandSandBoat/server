@@ -112,17 +112,50 @@ describe('Event Storage NPCs', function()
         player.assert:hasItem(xi.item.MOOGLE_CAP)
     end)
 
-    it('only stores the race variant the player can wear', function()
-        -- Test characters are male Humes. The Hume Top is the female piece of the same slot.
-        player:addItem(xi.item.HUME_TOP)
-        player.actions:tradeNpc('Garridan', { xi.item.HUME_TOP })
-        player.events:expectNotInEvent()
-        player.assert:hasItem(xi.item.HUME_TOP)
-
+    it('stores a former race variant and returns the current one', function()
+        player = xi.test.world:spawnPlayer({ zone = xi.zone.PORT_JEUNO, race = xi.race.MITHRA })
+        player:setGil(1000)
         player:addItem(xi.item.HUME_GILET)
         player.actions:tradeNpc('Garridan', { xi.item.HUME_GILET }, { eventId = storeEventId })
+
         player.assert.no:hasItem(xi.item.HUME_GILET)
         assert(player:getCharVar('[eventStorage]body') == 4, 'the gilet slot was not recorded')
+
+        player.entities:gotoAndTrigger('Garridan', { eventId = menuEventId, finishOption = 50 })
+
+        player.assert:hasItem(xi.item.MITHRA_TOP)
+        player.assert.no:hasItem(xi.item.HUME_GILET)
+        assert(player:getGil() == 750, 'the fee was not charged')
+        assert(player:getCharVar('[eventStorage]body') == 0, 'the gilet slot was not cleared')
+    end)
+
+    it('stores a former gender variant and returns the current one', function()
+        player:addItem(xi.item.OMINA_YUKATA)
+        player.actions:tradeNpc('Garridan', { xi.item.OMINA_YUKATA }, { eventId = storeEventId })
+
+        player.assert.no:hasItem(xi.item.OMINA_YUKATA)
+        assert(player:getCharVar('[eventStorage]body') == 1, 'the yukata slot was not recorded')
+
+        player.entities:gotoAndTrigger('Garridan', { eventId = menuEventId, finishOption = 48 })
+
+        player.assert:hasItem(xi.item.ONOKO_YUKATA)
+        player.assert.no:hasItem(xi.item.OMINA_YUKATA)
+        assert(player:getGil() == 750, 'the fee was not charged')
+        assert(player:getCharVar('[eventStorage]body') == 0, 'the yukata slot was not cleared')
+    end)
+
+    it('ignores another variant of a stored item', function()
+        player:addItem(xi.item.HUME_TOP)
+        player.actions:tradeNpc('Garridan', { xi.item.HUME_TOP }, { eventId = storeEventId })
+        player.assert.no:hasItem(xi.item.HUME_TOP)
+
+        player:addItem(xi.item.MITHRA_TOP)
+        player.actions:tradeNpc('Garridan', { xi.item.MITHRA_TOP })
+
+        player.events:expectNotInEvent()
+        player.assert:hasItem(xi.item.MITHRA_TOP)
+        assert(player:getCharVar('[eventStorage]body') == 4, 'the stored variant was lost')
+        assert(player:getGil() == 1000, 'the deposit charged a fee')
     end)
 
     it('hands the item back for the fee with its recast reset', function()
