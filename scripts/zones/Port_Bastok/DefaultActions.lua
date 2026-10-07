@@ -56,7 +56,6 @@ return {
     ['Tiger_Tooth']      = { event = 12 },
     ['Tilian']           = { event = 100 },
     ['Trilok']           = { event = 44 },
-    ['Wurteh']           = { event = 95 },
     ['Yazan']            = { event = 190 },
     ['Zeldaff']          = { event = 30 },
 }

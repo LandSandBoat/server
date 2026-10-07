@@ -1,13 +1,13 @@
 -----------------------------------
--- Area: Northern San d'Oria
---  NPC: Pulloie
--- !pos 132.847 -0.199 -2.627 231
+-- Area: Port Bastok
+--  NPC: Wurteh
+-- !pos 72.782 8.499 -242.102 236
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(838, player:getNation())
+    player:startEvent(382, player:getNation())
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

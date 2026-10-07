@@ -68,6 +68,7 @@ zones[xi.zone.WINDURST_WATERS] =
         NESSRUGETOMALL_SHOP_DIALOG    = 11509, -- Welcome to the Rarab Tail Hostelry.
         DIABOLOS_UNLOCKED             = 11938, -- You are now able to summon Diabolos!
         DOOR_FIRMLY_SHUT              = 12346, -- The door is firmly shut...
+        MOG_HOUSE_NOT_OPEN            = 15080, -- That Mog House is not currently open for visits.
     },
 
     mob =

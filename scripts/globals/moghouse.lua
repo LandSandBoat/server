@@ -356,6 +356,17 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     return cs
 end
 
+xi.moghouse.visitNpcOnEventFinish = function(player, csid, option, npc)
+    -- Option is the picked host's char id, anything else is a cancel or the explanation (bit 31)
+    if option <= 0 or option >= utils.EVENT_CANCELLED_OPTION then
+        return
+    end
+
+    if not player:visitMogHouse(option, npc) then
+        player:messageSpecial(zones[player:getZoneID()].text.MOG_HOUSE_NOT_OPEN)
+    end
+end
+
 xi.moghouse.moogleTrade = function(player, npc, trade)
     if not player:inMogHouse() then
         return

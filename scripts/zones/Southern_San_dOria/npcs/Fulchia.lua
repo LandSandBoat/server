@@ -1,13 +1,13 @@
 -----------------------------------
--- Area: Northern San d'Oria
---  NPC: Pulloie
--- !pos 132.847 -0.199 -2.627 231
+-- Area: Southern San d'Oria
+--  NPC: Fulchia
+-- !pos 158.522 -1.999 164.928 230
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(838, player:getNation())
+    player:startEvent(893, player:getNation())
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

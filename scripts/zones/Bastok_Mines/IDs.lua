@@ -23,6 +23,7 @@ zones[xi.zone.BASTOK_MINES] =
         HOMEPOINT_SET                  = 6503,  -- Home point set!
         YOU_ACCEPT_THE_MISSION         = 6532,  -- You have accepted the mission.
         ORIGINAL_MISSION_OFFSET        = 6537,  -- You can consult the Mission section of the main menu to review your objectives. Speed and efficiency are your priorities. Dismissed.
+        MOG_HOUSE_NOT_OPEN             = 6604,  -- That Mog House is not currently open for visits.
         CONQUEST_BASE                  = 6605,  -- Tallying conquest results...
         MARIADOK_DIALOG                = 6764,  -- Your fate rides on the changing winds of Vana'diel. I can give you insight on the local weather.
         MOG_LOCKER_OFFSET              = 6877,  -- Your Mog Locker lease is valid until <timestamp>, kupo.

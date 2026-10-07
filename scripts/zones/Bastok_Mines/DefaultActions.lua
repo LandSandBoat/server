@@ -19,7 +19,6 @@ return {
     ['Gray_Wolf']            = { event = 19 },
     ['Gumbah']               = { event = 52 },
     ['Hound_Nose']           = { event = 132 },
-    ['Leonie']               = { event = 568 },
     ['Medicine_Eagle']       = { event = 25 },
     ['Mydon']                = { event = 20 },
     ['Nangst']               = { event = 24 },

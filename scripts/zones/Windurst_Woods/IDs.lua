@@ -86,6 +86,7 @@ zones[xi.zone.WINDURST_WOODS] =
         CHOCOBO_FEEDING_RUN_AWAY      = 11198, -- Your chocobo has run away. Please wait until it returns and then feed it.
         CHOCOBO_FEEDING_STILL_EGG     = 11199, -- Your chocobo has not hatched, so you cannot feed it yet.
         CHOCOBO_FEEDING_ITEM          = 11742, -- #: %
+        MOG_HOUSE_NOT_OPEN            = 13296, -- That Mog House is not currently open for visits.
         TRRRADE_IN_SPARKS             = 13973, -- You want to trrrade in sparks, do you?
         DO_NOT_POSSESS_ENOUGH         = 13992, -- You do not possess enough <item> to complete the transaction.
         NOT_ENOUGH_SPARKS             = 13993, -- You do not possess enough sparks of eminence to complete the transaction.

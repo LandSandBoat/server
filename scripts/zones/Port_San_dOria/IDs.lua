@@ -82,6 +82,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
         IMPERIAL_STANDING_INCREASED    = 11190, -- Your Imperial Standing has increased!
         EARNED_ALLIED_NOTES            = 11191, -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 11192, -- Obtained: <number> guild points.
+        MOG_HOUSE_NOT_OPEN             = 11230, -- That Mog House is not currently open for visits.
         FRAGMENT_FAR_TOO_SMALL         = 11553, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                 = 11554, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         OBTAINED_NUM_KEYITEMS          = 11579, -- Obtained key item: <number> <keyitem>!

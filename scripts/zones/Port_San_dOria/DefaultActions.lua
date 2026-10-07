@@ -35,7 +35,6 @@ return {
     ['Miene']        = { event = 553 },
     ['Noquerelle']   = { event = 583 },
     ['Parcarin']     = { event = 566 },
-    ['Phersula']     = { event = 775 },
     ['Portaure']     = { event = 650 },
     ['Prietta']      = { event = 596 },
     ['Raqtibahl']    = { event = 759 },

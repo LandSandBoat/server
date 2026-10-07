@@ -126,6 +126,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         CHOCOBO_FEEDING_RUN_AWAY       = 11303, -- Your chocobo has run away. Please wait until it returns and then feed it.
         CHOCOBO_FEEDING_STILL_EGG      = 11304, -- Your chocobo has not hatched, so you cannot feed it yet.
         CHOCOBO_FEEDING_ITEM           = 11847, -- #: %
+        MOG_HOUSE_NOT_OPEN             = 13478, -- That Mog House is not currently open for visits.
         TUTORIAL_NPC                   = 13573, -- Greetings and well met! Guardian of the Kingdom, Alaune, at your most humble service.
         YOU_WISH_TO_EXCHANGE_SPARKS    = 15514, -- You wish to exchange your sparks?
         DO_NOT_POSSESS_ENOUGH          = 15543, -- You do not possess enough <item> to complete the transaction.
