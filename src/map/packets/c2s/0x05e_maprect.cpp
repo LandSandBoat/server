@@ -188,6 +188,17 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                 }
             }
 
+            // Visitors can't change floors or head to the Mog Garden
+            if (PChar->inMogHouse(xi::MogHouse::Visiting) &&
+                (exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog1F ||
+                 exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Mog2F ||
+                 exitDestination == GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::MogGarden))
+            {
+                PChar->status = xi::Status::Normal;
+                ShowWarning("GP_CLI_COMMAND_MAPRECT: Mog House visitor %s requested exit mode %u", PChar->getName(), this->MyRoomExitMode);
+                return;
+            }
+
             switch (exitDestination)
             {
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom:
