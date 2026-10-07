@@ -59,6 +59,7 @@ auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity*
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
+        .mustEqual(this->Kind == static_cast<uint8_t>(GP_CLI_COMMAND_MYROOM_IS_KIND::Remodel) && PChar->moghouse().isOpen(), false, "Mog House is open to visitors")
         .oneOf<GP_CLI_COMMAND_MYROOM_IS_KIND>(this->Kind)
         .oneOf<GP_CLI_COMMAND_MYROOM_IS_PARAM2>(this->Param2);
 }

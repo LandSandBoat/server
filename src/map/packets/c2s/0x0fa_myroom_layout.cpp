@@ -151,7 +151,8 @@ auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEnt
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .isInMogHouse()
+        .isInMogHouse(xi::MogHouse::Own)
+        .mustEqual(PChar->moghouse().isOpen(), false, "Mog House is open to visitors")
         .range("MyroomFloorFlg", this->MyroomFloorFlg, 0, 1) // Flag indicating if 2nd floor
         .range("v", this->v, 0, 3)                           // Rotation of the item (0-3)
         .range("y", this->y, 0, 25);                         // Stacking elevation (parent height / 10)
