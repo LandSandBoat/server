@@ -1185,7 +1185,7 @@ auto CCharEntity::Tick(timer::time_point tick) -> Task<void>
         m_deathSyncTime = tick + death_update_frequency;
     }
 
-    if (inMogHouse())
+    if (inMogHouse(xi::MogHouse::Own))
     {
         gardenutils::UpdateGardening(this, SendPacket::Yes);
     }
