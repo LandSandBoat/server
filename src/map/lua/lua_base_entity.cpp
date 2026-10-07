@@ -3236,12 +3236,12 @@ uint8 CLuaBaseEntity::getContinentID()
 
 /************************************************************************
  *  Function: inMogHouse()
- *  Purpose : Returns true if a PC is in their Mog House
- *  Example : if player:inMogHouse() then -- watch Netflix and chill
+ *  Purpose : Returns true if a PC is in a Mog House, any by default
+ *  Example : if player:inMogHouse(xi.mogHouse.OWN) then
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::inMogHouse()
+auto CLuaBaseEntity::inMogHouse(sol::optional<xi::MogHouse> kind) -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -3249,7 +3249,74 @@ bool CLuaBaseEntity::inMogHouse()
         return false;
     }
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->inMogHouse();
+    return static_cast<CCharEntity*>(m_PBaseEntity)->inMogHouse(kind.value_or(xi::MogHouse::Any));
+}
+
+/************************************************************************
+ *  Function: visitMogHouse()
+ *  Purpose : Sends a PC to a party/alliance member's open Mog House
+ *  Example : player:visitMogHouse(option, npc)
+ *  Notes   : Validates the host, returns false if refused
+ ************************************************************************/
+
+auto CLuaBaseEntity::visitMogHouse(uint32 hostId, CLuaBaseEntity* PLuaNpc) -> bool
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    if (PLuaNpc == nullptr)
+    {
+        ShowWarning("No NPC given (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    return static_cast<CCharEntity*>(m_PBaseEntity)->moghouse().visit(hostId, PLuaNpc->GetBaseEntity());
+}
+
+/************************************************************************
+ *  Function: getMogHouseOwner()
+ *  Purpose : Returns the owner of the Mog House the PC is in (themselves when at home)
+ *  Example : local owner = player:getMogHouseOwner()
+ *  Notes   : nil when not in a Mog House
+ ************************************************************************/
+
+auto CLuaBaseEntity::getMogHouseOwner() -> CBaseEntity*
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return nullptr;
+    }
+
+    return static_cast<CCharEntity*>(m_PBaseEntity)->moghouse().host();
+}
+
+/************************************************************************
+ *  Function: getMogHouseVisitors()
+ *  Purpose : Returns the PCs visiting this PC's Mog House
+ *  Example : for _, visitor in ipairs(player:getMogHouseVisitors()) do
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getMogHouseVisitors() -> sol::table
+{
+    auto table = lua.create_table();
+
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return table;
+    }
+
+    for (auto* PVisitor : PChar->moghouse().visitors())
+    {
+        table.add(CLuaBaseEntity(PVisitor));
+    }
+
+    return table;
 }
 
 /************************************************************************
@@ -20851,6 +20918,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
     SOL_REGISTER("inMogHouse", CLuaBaseEntity::inMogHouse);
+    SOL_REGISTER("visitMogHouse", CLuaBaseEntity::visitMogHouse);
+    SOL_REGISTER("getMogHouseOwner", CLuaBaseEntity::getMogHouseOwner);
+    SOL_REGISTER("getMogHouseVisitors", CLuaBaseEntity::getMogHouseVisitors);
 
     SOL_REGISTER("getPos", CLuaBaseEntity::getPos);
     SOL_REGISTER("showPosition", CLuaBaseEntity::showPosition);

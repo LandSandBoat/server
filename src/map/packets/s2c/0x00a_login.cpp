@@ -197,13 +197,19 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     {
         packet.LoginState = SAVE_LOGIN_STATE::SAVE_LOGIN_STATE_MYROOM;
 
-        if (PChar->profile.mhflag & 0x0040) // On MH2F
+        const auto* POwner = PChar->moghouse().host();
+        if (POwner == nullptr)
+        {
+            POwner = PChar;
+        }
+
+        if (POwner->profile.mhflag & 0x0040) // On MH2F
         {
             // Ensure full exit menu appears
             packet.MyroomSubMapNumber = 0x02;
         }
 
-        packet.MyroomMapNumber = GetMogHouseModelID(PChar);
+        packet.MyroomMapNumber = GetMogHouseModelID(POwner);
     }
     else
     {

@@ -755,8 +755,25 @@ function CBaseEntity:getContinentID()
 end
 
 ---@nodiscard
+---@param kind xi.mogHouse?
 ---@return boolean
-function CBaseEntity:inMogHouse()
+function CBaseEntity:inMogHouse(kind)
+end
+
+---@param hostId integer
+---@param npc CBaseEntity
+---@return boolean
+function CBaseEntity:visitMogHouse(hostId, npc)
+end
+
+---@nodiscard
+---@return CBaseEntity?
+function CBaseEntity:getMogHouseOwner()
+end
+
+---@nodiscard
+---@return CBaseEntity[]
+function CBaseEntity:getMogHouseVisitors()
 end
 
 ---@param triggerAreaId integer

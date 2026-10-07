@@ -218,7 +218,10 @@ public:
     uint32 getPreviousZoneLineID();
     uint8  getCurrentRegion();
     uint8  getContinentID();
-    bool   inMogHouse();
+    auto   inMogHouse(sol::optional<xi::MogHouse> kind) -> bool;
+    auto   visitMogHouse(uint32 hostId, CLuaBaseEntity* PLuaNpc) -> bool;
+    auto   getMogHouseOwner() -> CBaseEntity*;
+    auto   getMogHouseVisitors() -> sol::table;
 
     bool isPlayerInTriggerArea(uint32 triggerAreaId);
     void onPlayerTriggerAreaEnter(uint32 triggerAreaId);

@@ -533,6 +533,9 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 
     battleutils::RelinquishClaim(PChar);
 
+    // Any zone out closes the Mog House, floor changes and logouts included
+    PChar->moghouse().close();
+
     // Remove pets
     if (PChar->PPet != nullptr)
     {
@@ -1259,24 +1262,16 @@ void CZoneEntities::SpawnConditionalNPCs(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    // Player information
-    const bool inMogHouse       = PChar->inMogHouse();
-    const bool inMHinHomeNation = inMogHouse && [&]()
+    auto* POwner = PChar->moghouse().host();
+    if (POwner == nullptr)
     {
-        switch (zoneutils::GetCurrentRegion(PChar->getZone()))
-        {
-            case REGION_TYPE::SANDORIA:
-                return PChar->profile.nation == NATION_SANDORIA;
-            case REGION_TYPE::BASTOK:
-                return PChar->profile.nation == NATION_BASTOK;
-            case REGION_TYPE::WINDURST:
-                return PChar->profile.nation == NATION_WINDURST;
-            default:
-                return false;
-        }
-    }();
-    const bool onMH2F            = PChar->profile.mhflag & 0x40;
-    const bool orchestrionPlaced = charutils::isOrchestrionPlaced(PChar);
+        POwner = PChar;
+    }
+
+    const bool inMogHouse        = PChar->inMogHouse();
+    const bool inMHinHomeNation  = inMogHouse && charutils::IsHomeNation(POwner->profile.nation, zoneutils::GetCurrentRegion(PChar->getZone()));
+    const bool onMH2F            = POwner->profile.mhflag & 0x40;
+    const bool orchestrionPlaced = charutils::isOrchestrionPlaced(POwner);
 
     // NOTE: We're not changing the NPC's status to NORMAL here, because we don't want them to be visible to all players.
     //     : We're sending updates AS IF they were visible, but only to this current player based on their conditions.

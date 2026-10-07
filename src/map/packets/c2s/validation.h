@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/mog_house.h"
 #include "data/enums/zone_misc.h"
 
 #include "enums/blocked_state.h"
@@ -241,7 +242,7 @@ public:
     // Character must be engaged in combat
     auto isEngaged() -> PacketValidator&;
     // Character must be in Mog House
-    auto isInMogHouse() -> PacketValidator&;
+    auto isInMogHouse(xi::MogHouse kind = xi::MogHouse::Any) -> PacketValidator&;
     // Character must have a specific key item
     auto hasKeyItem(xi::KeyItem keyItemId) -> PacketValidator&;
     // The previous packet received from this character must match the expected packet ID

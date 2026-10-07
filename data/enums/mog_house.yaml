@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.mogHouse
+
+values:
+  any:      0
+  own:      1
+  visiting: 2

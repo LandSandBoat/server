@@ -230,14 +230,14 @@ auto PacketValidator::isEngaged() -> PacketValidator&
     return *this;
 }
 
-auto PacketValidator::isInMogHouse() -> PacketValidator&
+auto PacketValidator::isInMogHouse(const xi::MogHouse kind) -> PacketValidator&
 {
     if (!result_.valid())
     {
         return *this;
     }
 
-    if (!PChar_->inMogHouse())
+    if (!PChar_->inMogHouse(kind))
     {
         result_.addError("Character is not in Mog House.");
     }

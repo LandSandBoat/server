@@ -191,7 +191,11 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             switch (exitDestination)
             {
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom:
-                    // Return to current zone
+                    // Return to current zone, visitors go back to the NPC they came from
+                    if (PChar->inMogHouse(xi::MogHouse::Visiting))
+                    {
+                        destinationZone = PChar->moghouse().returnZone();
+                    }
                     break;
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Option1:
                 case GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::Option2:
@@ -247,6 +251,11 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             // Validate travel
             if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)
             {
+                if (PChar->inMogHouse(xi::MogHouse::Visiting) && exitDestination != GP_CLI_COMMAND_MAPRECT_MYROOMEXITMODE::AreaEnteredFrom)
+                {
+                    PChar->setCharVar("mh-visit-npc", 0);
+                }
+
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
                 PChar->loc.p           = {};
