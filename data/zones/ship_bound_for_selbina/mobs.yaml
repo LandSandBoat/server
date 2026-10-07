@@ -99,8 +99,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [at_night]
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -156,7 +155,7 @@ templates:
         model_size:      1
         hitbox:         13
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -214,7 +213,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -268,7 +267,7 @@ templates:
         model_size:     1
         hitbox:        27
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: uncommon
@@ -329,8 +328,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -362,8 +360,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -420,9 +417,15 @@ spawns:
     template: Phantom
     region:   region_1
     level:    [22, 25]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    4
   17678348:
     template: Thunder_Elemental
     region:   region_1
+    level:    [27, 29]
   17678349:
     template: Water_Elemental
     region:   region_1

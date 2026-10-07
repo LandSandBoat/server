@@ -45,6 +45,11 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     end
 end
 
+zoneObject.onTransportVoyageEnd = function(zone)
+    zone:setLocalVar('nmCanSpawn', 0)
+    xi.ferry.onTransportVoyageEnd(zone)
+end
+
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 

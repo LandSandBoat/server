@@ -27,6 +27,7 @@
 #include "ship.h"
 #include "voyage.h"
 
+#include <unordered_map>
 #include <vector>
 
 class CZone;
@@ -44,6 +45,7 @@ private:
     void registerShip(const xi::data::TransportData& entry, CZone* PDockZone);
     void registerVoyage(const xi::data::TransportData& entry);
 
-    std::vector<Ship>   ships_;
-    std::vector<Voyage> voyages_;
+    std::vector<Ship>                          ships_;
+    std::vector<Voyage>                        voyages_;
+    std::unordered_map<CZone*, VoyageEndState> voyageEndStates_;
 };

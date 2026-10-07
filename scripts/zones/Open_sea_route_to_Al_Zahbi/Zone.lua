@@ -6,7 +6,24 @@ local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI]
 ---@type TZone
 local zoneObject = {}
 
+-- Deck mob slots.
+local slots =
+{
+    { id = ID.mob.GUGRU_CRAB[1] },
+    { id = ID.mob.GUGRU_CRAB[2] },
+    { id = ID.mob.OCEAN_JAGIL[1] },
+    { id = ID.mob.OCEAN_JAGIL[2] },
+    { id = ID.mob.OCEAN_KRAKEN },
+    { id = ID.mob.REVENANT, night = true },
+    { id = ID.mob.THUNDER_ELEMENTAL, weather = { xi.weather.THUNDER, xi.weather.THUNDERSTORMS } },
+    { id = ID.mob.WATER_ELEMENTAL, weather = { xi.weather.RAIN, xi.weather.SQUALL } },
+}
+
 zoneObject.onInitialize = function(zone)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.ferry.onZoneTick(zone, slots)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -29,7 +46,15 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     player:messageSpecial(ID.text.DOCKING_IN_AL_ZAHBI)
 end
 
+zoneObject.onTransportVoyageEnd = function(zone)
+    xi.ferry.onTransportVoyageEnd(zone)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    xi.ferry.onWeatherChange(weather, slots)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

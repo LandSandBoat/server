@@ -23,8 +23,14 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     },
     mob =
     {
-        ENAGAKURE  = GetFirstID('Enagakure'),
-        SEA_HORROR = GetFirstID('Sea_Horror'),
+        ENAGAKURE         = GetFirstID('Enagakure'),
+        PHANTOM           = GetFirstID('Phantom'),
+        SEA_CRAB          = GetTableOfIDs('Sea_Crab'),
+        SEA_HORROR        = GetFirstID('Sea_Horror'),
+        SEA_MONK          = GetTableOfIDs('Sea_Monk'),
+        SEA_PUGIL         = GetTableOfIDs('Sea_Pugil'),
+        THUNDER_ELEMENTAL = GetFirstID('Thunder_Elemental'),
+        WATER_ELEMENTAL   = GetFirstID('Water_Elemental'),
     },
     npc =
     {

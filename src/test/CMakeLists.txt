@@ -70,6 +70,7 @@ xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/pathfind_region_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/transport_voyage_tests.cpp
 )
 add_dependencies(xi_test data_schema_generate)
 

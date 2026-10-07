@@ -24,7 +24,15 @@ zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =
     },
     mob =
     {
-        PROTEUS = GetFirstID('Proteus'),
+        AIR_ELEMENTAL     = GetFirstID('Air_Elemental'),
+        APKALLU           = GetTableOfIDs('Apkallu'),
+        BIGCLAW           = GetTableOfIDs('Bigclaw'),
+        CYAN_DEEP_PUGIL   = GetFirstID('Cyan_Deep_Pugil'),
+        IMP               = GetFirstID('Imp'),
+        KULSHEDRA         = GetFirstID('Kulshedra'),
+        PROTEUS           = GetFirstID('Proteus'),
+        THUNDER_ELEMENTAL = GetFirstID('Thunder_Elemental'),
+        UTUKKU            = GetFirstID('Utukku'),
     },
     npc =
     {

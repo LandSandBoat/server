@@ -6,7 +6,26 @@ local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
 ---@type TZone
 local zoneObject = {}
 
+-- Deck mob slots.
+-- Entry 1 of the Sea Monk and Sea Pugil ids is the fished copy.
+local slots =
+{
+    { id = ID.mob.SEA_CRAB[1] },
+    { id = ID.mob.SEA_CRAB[2] },
+    { id = ID.mob.SEA_PUGIL[2] },
+    { id = ID.mob.SEA_PUGIL[3] },
+    { id = ID.mob.SEA_MONK[2] },
+    { id = ID.mob.SEA_HORROR },
+    { id = ID.mob.PHANTOM, night = true },
+    { id = ID.mob.THUNDER_ELEMENTAL, weather = { xi.weather.THUNDER, xi.weather.THUNDERSTORMS } },
+    { id = ID.mob.WATER_ELEMENTAL, weather = { xi.weather.RAIN, xi.weather.SQUALL } },
+}
+
 zoneObject.onInitialize = function(zone)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.ferry.onZoneTick(zone, slots)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -40,6 +59,14 @@ end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
     player:startEvent(255)
+end
+
+zoneObject.onTransportVoyageEnd = function(zone)
+    xi.ferry.onTransportVoyageEnd(zone)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    xi.ferry.onWeatherChange(weather, slots)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

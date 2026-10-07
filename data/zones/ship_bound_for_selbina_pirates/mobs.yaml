@@ -425,11 +425,11 @@ spawns:
   17707016:
     template: Sea_Pugil
     region:   region_1
-    level:    [10, 14]
+    level:    [10, 20]
   17707017:
     template: Sea_Pugil
     region:   region_1
-    level:    [10, 14]
+    level:    [10, 20]
   17707018:
     template: Sea_Monk
     region:   region_1
@@ -461,7 +461,7 @@ spawns:
   17707024:
     template: Ship_Wight
     region:   region_1
-    level:    [36, 39]
+    level:    [35, 39]
   17707025:
     template: Blackbeard
     region:   region_1

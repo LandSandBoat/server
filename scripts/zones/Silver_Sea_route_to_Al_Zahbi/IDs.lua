@@ -24,7 +24,15 @@ zones[xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
     },
     mob =
     {
-        ALMIGHTY_APKALLU = GetFirstID('Almighty_Apkallu'),
+        AIR_ELEMENTAL     = GetFirstID('Air_Elemental'),
+        ALMIGHTY_APKALLU  = GetFirstID('Almighty_Apkallu'),
+        APKALLU           = GetTableOfIDs('Apkallu'),
+        BIGCLAW           = GetTableOfIDs('Bigclaw'),
+        CYAN_DEEP_PUGIL   = GetFirstID('Cyan_Deep_Pugil'),
+        IMP               = GetFirstID('Imp'),
+        KULSHEDRA         = GetFirstID('Kulshedra'),
+        THUNDER_ELEMENTAL = GetFirstID('Thunder_Elemental'),
+        UTUKKU            = GetFirstID('Utukku'),
     },
     npc =
     {
