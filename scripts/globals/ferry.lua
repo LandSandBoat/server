@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ferry deck mobs
--- Shared by the Selbina and Mhaura boats and the four Al Zahbi routes.
+-- Normal deck mobs use the same rules on all eight ferry routes.
 -- The deck mobs are not on respawn timers.
 -- Every 60 seconds the zone rolls once and boards at most one mob.
 -- A boarding skips the next two rolls.

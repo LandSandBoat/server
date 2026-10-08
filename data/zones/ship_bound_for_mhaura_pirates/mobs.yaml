@@ -132,8 +132,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [at_night]
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -189,7 +188,7 @@ templates:
         model_size:      1
         hitbox:         13
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -215,7 +214,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -269,7 +268,7 @@ templates:
         model_size:     1
         hitbox:        27
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: uncommon
@@ -413,6 +412,11 @@ spawns:
     template: Phantom
     region:   region_1
     level:    [22, 25]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    4
   17711116:
     template: Crossbones_blm
     script:   Crossbones
