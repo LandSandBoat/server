@@ -17,7 +17,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.fameArea.NORG,
+    fameArea = xi.fameArea.BASTOK,
     keyItem  = xi.keyItem.JOB_GESTURE_NINJA,
     title    = xi.title.SHADOW_WALKER,
 }
