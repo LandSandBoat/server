@@ -46,7 +46,7 @@ templates:
         model_size:     1
         hitbox:        13
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -167,7 +167,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: uncommon
@@ -194,7 +194,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -259,8 +259,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [at_night]
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -293,8 +292,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -326,8 +324,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -348,11 +345,11 @@ spawns:
     level:    [35, 35]
   16965635:
     template: Gugru_Jagil
-    region:   region_1
+    at:       [1.000, 1.000, 1.000]
     level:    [34, 37]
   16965636:
     template: Gugru_Jagil
-    region:   region_1
+    at:       [1.000, 1.000, 1.000]
     level:    [34, 37]
   16965637:
     template: Blanched_Kraken
@@ -390,7 +387,12 @@ spawns:
     template: Revenant_SoZ_ENS_FY
     script:   Revenant
     region:   region_1
-    level:    [41, 41]
+    level:    [40, 41]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    4
   16965646:
     template: Thunder_Elemental
     region:   region_1

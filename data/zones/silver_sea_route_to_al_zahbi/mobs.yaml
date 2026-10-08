@@ -43,8 +43,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -148,7 +147,7 @@ templates:
         model_size:     1
         hitbox:        13
       spawn:
-        respawn: 300
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -242,8 +241,7 @@ templates:
         aggressive:     true
         true_detection: true
       spawn:
-        respawn: 300
-        type:    [at_night]
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -387,8 +385,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [weather]
+        type: [scripted]
     loot:
       drops:
         - chance: always
@@ -417,8 +414,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        respawn: 300
-        type:    [at_night]
+        type: [scripted]
     loot:
       drops:
         - chance: common
@@ -467,12 +463,12 @@ spawns:
     template: Bigclaw_noaggro
     script:   Bigclaw
     region:   region_1
-    level:    [49, 49]
+    level:    [50, 52]
   17018890:
     template: Bigclaw_noaggro
     script:   Bigclaw
     region:   region_1
-    level:    [49, 49]
+    level:    [50, 52]
   17018891:
     template: Cyan_Deep_Pugil
     region:   region_1
@@ -486,10 +482,20 @@ spawns:
     script:   Utukku
     region:   region_1
     level:    [55, 56]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    4
   17018894:
     template: Imp
     region:   region_1
-    level:    [54, 54]
+    level:    [55, 57]
+    attributes:
+      spawn:
+        window:
+          start: 20
+          end:    4
   17018895:
     template: Air_Elemental
     region:   region_1

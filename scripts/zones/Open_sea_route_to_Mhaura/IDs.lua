@@ -24,6 +24,12 @@ zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
     },
     mob =
     {
+        GUGRU_CRAB        = GetTableOfIDs('Gugru_Crab'),
+        OCEAN_JAGIL       = GetTableOfIDs('Ocean_Jagil'),
+        OCEAN_KRAKEN      = GetFirstID('Ocean_Kraken'),
+        REVENANT          = GetFirstID('Revenant'),
+        THUNDER_ELEMENTAL = GetFirstID('Thunder_Elemental'),
+        WATER_ELEMENTAL   = GetFirstID('Water_Elemental'),
     },
     npc =
     {

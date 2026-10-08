@@ -25,6 +25,7 @@
 #include "common/enum_traits.h"
 
 #include "data/loader.h"
+#include "lua/luautils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
 
@@ -206,39 +207,42 @@ void ShipHandler::tick()
         ship.conceal(intoPhase);
     }
 
-    // Aboard from the moment boarding closes until they go ashore, a span that wraps past the end of the cycle on the airships.
-    const auto carrying = [&](const Voyage& leg)
-    {
-        const auto into = cyclePosition(now, leg.offset, leg.every);
-        if (leg.boardingEnds <= leg.disembarkFrom)
-        {
-            return into >= leg.boardingEnds && into < leg.disembarkFrom;
-        }
-
-        return into >= leg.boardingEnds || into < leg.disembarkFrom;
-    };
-
     // Both directions cross the same zone, so it is only empty when neither leg has anyone aboard.
     // Check one leg alone and each direction throws the other's passengers out the moment they board.
-    std::vector<CZone*> emptied;
+    std::vector<CZone*> updated;
     for (const auto& voyage : voyages_)
     {
-        if (std::ranges::contains(emptied, voyage.zone))
+        if (std::ranges::contains(updated, voyage.zone))
         {
             continue;
         }
+
+        updated.emplace_back(voyage.zone);
 
         const auto busy = std::ranges::any_of(voyages_,
                                               [&](const auto& leg)
                                               {
-                                                  return leg.zone == voyage.zone && carrying(leg);
+                                                  return leg.zone == voyage.zone && leg.carrying(now);
                                               });
-        if (busy)
+        if (!busy)
         {
-            continue;
+            voyage.zone->DisembarkAll();
         }
 
-        emptied.emplace_back(voyage.zone);
-        voyage.zone->DisembarkAll();
+        // Remember scheduled ends even when a tick skips the entire interval between runs.
+        auto latestCompletedAt = voyage.latestCompletedAt(now);
+        for (const auto& leg : voyages_)
+        {
+            if (leg.zone == voyage.zone)
+            {
+                const auto completedAt = leg.latestCompletedAt(now);
+                latestCompletedAt      = std::max(latestCompletedAt, completedAt);
+            }
+        }
+
+        if (voyageEndStates_[voyage.zone].update(latestCompletedAt, busy))
+        {
+            luautils::OnTransportVoyageEnd(voyage.zone);
+        }
     }
 }

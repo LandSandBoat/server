@@ -816,7 +816,7 @@ void CMobEntity::Spawn()
             waypoints.push_back({ point, timer::duration::zero(), false });
         }
 
-        if (PAI->PathFind->PathThrough(std::move(waypoints), PATHFLAG_PATROL))
+        if (PAI->PathFind->PathThrough(std::move(waypoints), PATHFLAG_PATROL) && PAI->CanFollowPath())
         {
             PAI->PathFind->FollowPath(timer::now());
         }
@@ -828,7 +828,7 @@ void CMobEntity::Spawn()
     const auto minTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurnsMin));
     const auto maxTurns = static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns));
     const bool isWorm   = (m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None;
-    if (CanRoam() && !isWorm && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), minTurns, maxTurns, m_roamFlags, roamRegion_))
+    if (CanRoam() && !isWorm && PAI->PathFind->RoamAround(GetRoamAnchor(), GetRoamDistance(), minTurns, maxTurns, m_roamFlags, roamRegion_) && PAI->CanFollowPath())
     {
         PAI->PathFind->FollowPath(timer::now());
     }

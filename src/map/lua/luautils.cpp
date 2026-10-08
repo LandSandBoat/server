@@ -5317,6 +5317,26 @@ void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, std::string_vie
     }
 }
 
+void OnTransportVoyageEnd(CZone* PZone)
+{
+    TracyZoneScoped;
+
+    auto name = PZone->getName();
+
+    auto onTransportVoyageEnd = lua["xi"]["zones"][name]["Zone"]["onTransportVoyageEnd"];
+    if (!onTransportVoyageEnd.valid())
+    {
+        return;
+    }
+
+    auto result = onTransportVoyageEnd(PZone);
+    if (!result.valid())
+    {
+        sol::error err = result;
+        ShowError("luautils::onTransportVoyageEnd: %s", err.what());
+    }
+}
+
 void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID)
 {
     TracyZoneScoped;
