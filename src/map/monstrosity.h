@@ -129,6 +129,8 @@ struct SpeciesJobs
 // The jobs and level a Monipulator fights with. Its sub job is at the main level.
 [[nodiscard]] auto GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs;
 [[nodiscard]] auto GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PWeapon) -> uint16;
+[[nodiscard]] auto GetCombatSkill(const CCharEntity* PChar) -> uint16;
+[[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar) -> uint16;

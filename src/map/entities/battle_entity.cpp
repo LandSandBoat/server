@@ -1197,6 +1197,11 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     {
         strMultiplier = 0.5;
     }
+    else if (monstrosity::AsMonipulator(this) != nullptr)
+    {
+        // Retail Monipulator attack fits STR * 0.75 with fists too.
+        strMultiplier = 0.75f;
+    }
     else if (weapon && weapon->isTwoHanded()) // 2-handed weapon
     {
         strMultiplier = settings::get<float>("main.TWO_HANDED_STR_ATTACK_MULTIPLIER");
@@ -1225,7 +1230,11 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
         ATT += this->getMod(xi::Mod::ENSPELL_DMG);
     }
 
-    if (dynamic_cast<const CCharEntity*>(this) != nullptr)
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    {
+        ATT += monstrosity::GetCombatSkill(PMonipulator);
+    }
+    else if (dynamic_cast<const CCharEntity*>(this) != nullptr)
     {
         if (weapon)
         {
@@ -1532,8 +1541,23 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
         }
 
-        uint32_t skillLevel = GetSkill(skill) + iLvlSkill;
-        ACC                 = GetAccFromSkill(skillLevel);
+        const auto* PMonipulator = monstrosity::AsMonipulator(this);
+        const auto  skillLevel   = [&]() -> uint32
+        {
+            if (PMonipulator != nullptr)
+            {
+                return monstrosity::GetCombatSkill(PMonipulator);
+            }
+
+            return GetSkill(skill) + iLvlSkill;
+        }();
+
+        if (PMonipulator != nullptr)
+        {
+            dexMultiplier = 0.75f;
+        }
+
+        ACC = GetAccFromSkill(skillLevel);
 
         if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
@@ -1671,6 +1695,12 @@ uint16 CBattleEntity::DEF()
         }
     }
 
+    // Retail Monipulator defence fits an A+ skill on top. WAR's Defense Bonus adds the step at 10.
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    {
+        DEF += monstrosity::GetCombatSkill(PMonipulator);
+    }
+
     DEF += getMod(xi::Mod::DEF);
 
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance, 0))
@@ -1709,7 +1739,15 @@ uint16 CBattleEntity::EVA()
     else
     {
         // Players and automatons use Evasion skill
-        evasion = GetSkill(xi::SkillType::Evasion);
+        evasion = [&]() -> int32
+        {
+            if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+            {
+                return monstrosity::GetEvasionSkill(PMonipulator);
+            }
+
+            return GetSkill(xi::SkillType::Evasion);
+        }();
 
         if (evasion > 200)
         {

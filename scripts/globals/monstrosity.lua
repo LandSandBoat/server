@@ -297,21 +297,61 @@ end
 -- Relinquish
 -----------------------------------
 
--- Counts down from 4 once a second, then leaves Monstrosity.
--- TODO: Make this countdown interruptable
-xi.monstrosity.relinquishOnAbility = function(player)
-    player:timer(1000, function(playerArg)
-        local step = playerArg:getLocalVar('RELINQUISH_COUNTDOWN')
-        if step >= 4 then
-            playerArg:setLocalVar('RELINQUISH_COUNTDOWN', 0)
+-- Slip damage stops Relinquish before it counts, though the recast is still spent.
+local relinquishBlockers =
+{
+    xi.effect.POISON,
+    xi.effect.BIO,
+    xi.effect.DIA,
+    xi.effect.BURN,
+    xi.effect.FROST,
+    xi.effect.CHOKE,
+    xi.effect.RASP,
+    xi.effect.SHOCK,
+    xi.effect.DROWN,
+}
+
+-- Retail counts 3 s apart. Moving or a hostile action stops it without a message.
+local function relinquishCountdown(player, start)
+    player:timer(3000, function(playerArg)
+        local pos = playerArg:getPos()
+        if
+            playerArg:getLocalVar('RELINQUISH_INTERRUPTED') == 1 or
+            pos.x ~= start.x or
+            pos.z ~= start.z
+        then
+            playerArg:removeListener('RELINQUISH_ATTACKED')
+            return
+        end
+
+        local count = playerArg:getLocalVar('RELINQUISH_COUNTDOWN') - 1
+        if count == 0 then
+            playerArg:removeListener('RELINQUISH_ATTACKED')
             xi.monstrosity.onMonstrosityReturnToEntrance(playerArg)
             return
         end
 
-        playerArg:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4 - step)
-        playerArg:setLocalVar('RELINQUISH_COUNTDOWN', step + 1)
-        xi.monstrosity.relinquishOnAbility(playerArg)
+        playerArg:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, count)
+        playerArg:setLocalVar('RELINQUISH_COUNTDOWN', count)
+        relinquishCountdown(playerArg, start)
     end)
+end
+
+xi.monstrosity.relinquishOnAbility = function(player)
+    for _, effect in ipairs(relinquishBlockers) do
+        if player:hasStatusEffect(effect) then
+            return
+        end
+    end
+
+    player:setLocalVar('RELINQUISH_INTERRUPTED', 0)
+    player:setLocalVar('RELINQUISH_COUNTDOWN', 4)
+    player:addListener('ATTACKED', 'RELINQUISH_ATTACKED', function(target)
+        target:setLocalVar('RELINQUISH_INTERRUPTED', 1)
+    end)
+
+    player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
+    relinquishCountdown(player, player:getPos())
 end
 
 -----------------------------------

@@ -113,6 +113,77 @@ describe('Monstrosity restrictions', function()
         assert(player:getMonstrositySize() == 0, 'editing saved progress entered MON')
     end)
 
+    -- Retail 0x061 for a Rabbit with no instincts equipped.
+    local retailCombat =
+    {
+        [ 1] = { attack = 19, defence =  26 },
+        [10] = { attack = 54, defence =  80 },
+        [18] = { attack = 84, defence = 117 },
+    }
+
+    for level, retail in pairs(retailCombat) do
+        it(string.format('gives a level %d Rabbit close to its retail attack and defence', level), function()
+            becomeSpecies(xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, level)
+
+            local attack  = player:getStat(xi.mod.ATT)
+            local defence = player:getStat(xi.mod.DEF)
+            assert(math.abs(attack - retail.attack) <= 5, string.format('attack %d, retail %d', attack, retail.attack))
+            assert(math.abs(defence - retail.defence) <= 5, string.format('defence %d, retail %d', defence, retail.defence))
+        end)
+    end
+
+    it('gives no MP to a NIN sub job', function()
+        -- New Year Mandragora is MNK/NIN.
+        becomeSpecies(xi.monstrositySpecies.MANDRAGORA, 287, 35)
+
+        assert(player:getMaxMP() == 0, string.format('MNK/NIN has %d MP', player:getMaxMP()))
+    end)
+
+    it('gives an RDM sub job the WHM MP curve', function()
+        -- Vermillion and Onyx Bee is WAR/RDM.
+        becomeSpecies(xi.monstrositySpecies.BEE, 290, 20)
+
+        assert(player:getMaxMP() == 369, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+    end)
+
+    local function waitSeconds(seconds)
+        for _ = 1, seconds do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(player)
+        end
+    end
+
+    local function startRelinquish()
+        player:setMonstrosityEntryData(0, 0, 0, 0, xi.zone.WEST_RONFAURE, xi.job.WAR, xi.job.WAR)
+        player:delStatusEffect(xi.effect.GESTATION)
+        xi.monstrosity.relinquishOnAbility(player)
+    end
+
+    -- Retail counts 4, 3, 2, 1 three seconds apart, then leaves.
+    it('leaves Monstrosity when the Relinquish countdown ends', function()
+        startRelinquish()
+        waitSeconds(15)
+
+        assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
+    end)
+
+    it('stops Relinquish when the player moves', function()
+        startRelinquish()
+        waitSeconds(4)
+        player:setPos(player:getXPos() + 5, player:getYPos(), player:getZPos())
+        waitSeconds(15)
+
+        assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after moving')
+    end)
+
+    it('never starts Relinquish under slip damage', function()
+        player:addStatusEffect(xi.effect.POISON, { power = 1, duration = 60, tick = 3, origin = player })
+        startRelinquish()
+        waitSeconds(15)
+
+        assert(player:getMainJob() == xi.job.MON, 'Relinquish ran under Poison')
+    end)
+
     it('refuses Relinquish off MON', function()
         player:changeJob(xi.job.WAR)
         local relinquish = require('scripts/actions/abilities/relinquish')

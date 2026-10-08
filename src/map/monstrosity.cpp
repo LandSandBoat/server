@@ -58,6 +58,7 @@
 #include "grades.h"
 #include "items/item_weapon.h"
 #include "merit.h"
+#include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/mobutils.h"
 
@@ -890,9 +891,26 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
     const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
     PChar->health.maxhp = static_cast<int32>(species->second.hpScale * baseHP / 100);
 
-    if (data.SubJob == xi::Job::BLM)
+    // Retail MP comes from a mage sub job. A NIN sub has none.
+    // TODO: WHM is one retail point at level 51 and RDM borrows it. Mage main jobs are unverified.
+    const auto baseMP = [&]() -> int32
     {
-        PChar->health.maxmp = (35 * level + 59) / 2 + cappedMerit(xi::Merit::MaxMp, 10);
+        switch (data.SubJob)
+        {
+            case xi::Job::BLM:
+                return (35 * level + 59) / 2;
+            case xi::Job::WHM:
+            case xi::Job::RDM:
+                return (34 * level + 58) / 2;
+            default:
+                return 0;
+        }
+    }();
+
+    PChar->health.maxmp = baseMP;
+    if (baseMP > 0)
+    {
+        PChar->health.maxmp += cappedMerit(xi::Merit::MaxMp, 10);
     }
 
     if (!species->second.mobSpecies)
@@ -1000,11 +1018,30 @@ auto monstrosity::GetBaseDelay(const CCharEntity* PChar) -> uint16
     return 240;
 }
 
-// TODO: Fit retail base damage. This is the lower mob formula.
+// Fitted to retail hits, rounded low. A MNK species splits it over two fists.
 auto monstrosity::GetBaseDamage(const CCharEntity* PChar) -> uint16
 {
-    const auto& data = *PChar->m_PMonstrosity;
-    return std::max<uint8>(1, data.levels[data.MonstrosityId]) + 2;
+    const auto& data   = *PChar->m_PMonstrosity;
+    const auto  level  = std::max<uint8>(1, data.levels[data.MonstrosityId]);
+    const auto  damage = static_cast<uint16>(level * 3 / 2 + 10);
+    if (data.MainJob == xi::Job::MNK)
+    {
+        return damage / 2;
+    }
+
+    return damage;
+}
+
+// Retail attack, defence and accuracy fit an A+ skill at the species level, whatever the weapon.
+auto monstrosity::GetCombatSkill(const CCharEntity* PChar) -> uint16
+{
+    return battleutils::GetMaxSkill(1, PChar->GetMLevel());
+}
+
+// TODO: Unverified. The evasion skill cap of the species' main job.
+auto monstrosity::GetEvasionSkill(const CCharEntity* PChar) -> uint16
+{
+    return battleutils::GetMaxSkill(xi::SkillType::Evasion, PChar->m_PMonstrosity->MainJob, PChar->GetMLevel());
 }
 
 void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)

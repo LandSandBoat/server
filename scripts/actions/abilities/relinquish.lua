@@ -11,7 +11,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.UNABLE_TO_USE_JA2, 0
     end
 
-    -- TODO: Block if being attacked
     return 0, 0
 end
 
