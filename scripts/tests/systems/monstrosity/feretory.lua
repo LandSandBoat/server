@@ -235,6 +235,43 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 0, string.format('%d infamy left', player:getCurrency('infamy')))
     end)
 
+    -- A benediction is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
+    local benedictions =
+    {
+        { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000 },
+        { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400 },
+        { name = 'Regen',        option = 2, effect = xi.effect.REGEN,      cost =   10 },
+        { name = 'Refresh',      option = 3, effect = xi.effect.REFRESH,    cost =   10 },
+        { name = 'Protect',      option = 4, effect = xi.effect.PROTECT,    cost =  100 },
+        { name = 'Shell',        option = 5, effect = xi.effect.SHELL,      cost =  100 },
+        { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100 },
+    }
+
+    for _, benediction in ipairs(benedictions) do
+        it(string.format('casts %s for %d infamy', benediction.name, benediction.cost), function()
+            player:addCurrency('infamy', 5000)
+            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(benediction.option, 8))
+
+            player.assert:hasEffect(benediction.effect)
+            assert(player:getCurrency('infamy') == 5000 - benediction.cost, string.format('%d infamy left', player:getCurrency('infamy')))
+        end)
+    end
+
+    it('casts no benediction the player cannot afford', function()
+        player:addCurrency('infamy', 99)
+        xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(6, 8))
+
+        assert(not player:hasStatusEffect(xi.effect.HASTE), 'Haste was cast for 99 infamy')
+        assert(player:getCurrency('infamy') == 99, 'infamy should be untouched')
+    end)
+
+    it('casts nothing for an unknown benediction', function()
+        player:addCurrency('infamy', 1000)
+        xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(7, 8))
+
+        assert(player:getCurrency('infamy') == 1000, 'infamy should be untouched')
+    end)
+
     it('refuses an instinct purchase with the wrong check value', function()
         player:addCurrency('infamy', 500)
         buyInstinct(xi.monstrosityInstinct.HUME_II, 118)

@@ -172,6 +172,18 @@ local function addPurchasedInstinct(player, purchasableInstinctId)
     player:setMonstrosityData(data)
 end
 
+-- Benediction costs, fixed in the client event, which also plays Teyrnon's cast on the player.
+local benedictionCosts =
+{
+    [0] = 3000, -- Dedication 1
+    [1] =  400, -- Dedication 2
+    [2] =   10, -- Regen
+    [3] =   10, -- Refresh
+    [4] =  100, -- Protect
+    [5] =  100, -- Shell
+    [6] =  100, -- Haste
+}
+
 local function tryPayInfamy(player, cost)
     if player:getCurrency('infamy') < cost then
         player:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
@@ -588,67 +600,54 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
         end
 
     elseif optionType == 3 then
-        -- TODO: The casting effects and animations
-
         local selectedEffect = bit.rshift(option, 8)
+        local cost           = benedictionCosts[selectedEffect]
+        if
+            not cost or
+            not tryPayInfamy(player, cost)
+        then
+            return
+        end
+
         switch(selectedEffect): caseof
         {
             -- 0: Dedication 1
             -- 50% experience bonus 60 minutes or until a maximum bonus of 10,000 EXP is gained
             [0] = function()
-                if not tryPayInfamy(player, 3000) then
-                    return
-                end
-
                 local effect   = xi.effect.DEDICATION
                 local power    = 50
                 local duration = utils.minutes(60)
                 local subpower = 10000
-                player:delStatusEffectSilent(power)
+                player:delStatusEffectSilent(effect)
                 xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
             end,
 
             -- 1: Dedication 2
             -- 100% experience bonus 60 minutes or until a maximum bonus of 2,000 EXP is gained
             [1] = function()
-                if not tryPayInfamy(player, 400) then
-                    return
-                end
-
                 local effect   = xi.effect.DEDICATION
                 local power    = 100
                 local duration = utils.minutes(60)
                 local subpower = 2000
-                player:delStatusEffectSilent(power)
+                player:delStatusEffectSilent(effect)
                 xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
             end,
 
             -- 2: Regen
             [2] = function()
-                if not tryPayInfamy(player, 10) then
-                    return
-                end
-
                 player:delStatusEffectSilent(xi.effect.REGEN)
                 player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
             -- 3: Refresh
             [3] = function()
-                if not tryPayInfamy(player, 10) then
-                    return
-                end
-
+                -- A regular Refresh does overwrite this.
                 player:delStatusEffectSilent(xi.effect.REFRESH)
-                player:addStatusEffect(xi.effect.REFRESH, { power = 1, duration = 3600, origin = player, tick = 3 }) -- Does indeed get overwriten by regular refresh.
+                player:addStatusEffect(xi.effect.REFRESH, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
             -- 4: Protect
             [4] = function()
-                if not tryPayInfamy(player, 100) then
-                    return
-                end
-
                 local mLvl  = player:getMainLvl()
                 local power = 220
                 local tier  = 5
@@ -679,10 +678,6 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             -- 5: Shell
             [5] = function()
-                if not tryPayInfamy(player, 100) then
-                    return
-                end
-
                 local mLvl  = player:getMainLvl()
 
                 -- Shell V (75/256)
