@@ -132,7 +132,7 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
             auto maybePacketSize = compressPacket(PBuff.data(), size);
             if (!maybePacketSize)
             {
-                ShowError("zlib compression error");
+                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, size);
                 size = 0;
             }
             else
@@ -621,7 +621,7 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
             if (!maybePacketSize)
             {
-                ShowError("zlib compression error");
+                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, *buffsize);
                 continue;
             }
             PacketSize = *maybePacketSize;
