@@ -116,6 +116,7 @@ void HandleLevelUp(CCharEntity* PChar);
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
 [[nodiscard]] auto CanCastSpell(CSpell* PSpell) -> bool;
+[[nodiscard]] auto ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool;
 
 void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
 

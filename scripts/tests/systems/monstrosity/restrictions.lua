@@ -1,4 +1,5 @@
 -- Rules a Monipulator plays under, from the JP wiki's Monstrosity pages.
+local ffi = require('ffi')
 
 describe('Monstrosity restrictions', function()
     ---@type CClientEntityPair
@@ -208,4 +209,91 @@ describe('Monstrosity restrictions', function()
             end
         end)
     end
+end)
+
+-- Retail lists, and lets a Monipulator cast, the learned spells its species' jobs know at the
+-- species level. Trusts stay listed but cannot be called.
+describe('Monstrosity spellcasting', function()
+    local onyxRabbit = 256
+
+    ---@type CClientEntityPair
+    local player
+
+    -- Casts and reports the MP it cost.
+    local function cast(spellId, target)
+        player:setMP(300)
+        player.actions:useSpell(target, spellId)
+        for _ = 1, 5 do
+            xi.test.world:skipTime(2)
+        end
+
+        return 300 - player:getMP()
+    end
+
+    -- The spell list goes out once the client reports the zone loaded.
+    local function listsSpell(spellId)
+        player.packets:clear()
+        local gameOk = ffi.new('uint8_t[12]')
+        player.packets:send(0x00C, gameOk, assert(ffi.sizeof(gameOk)))
+
+        local listed = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x0AA then
+                listed = bit.band(pkt.data[0x04 + math.floor(spellId / 8)] or 0, bit.lshift(1, spellId % 8)) ~= 0
+            end
+        end
+
+        return listed
+    end
+
+    before_each(function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
+        player:changeJob(xi.job.MON)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+
+        for _, spellId in ipairs({ xi.magic.spell.STONE, xi.magic.spell.CURE, xi.magic.spell.WARP, xi.magic.spell.SHANTOTTO }) do
+            player:addSpell(spellId, { silentLog = true })
+        end
+
+        -- Onyx Rabbit is WAR/BLM.
+        local data = player:getMonstrosityData()
+        data.monstrosityId                        = xi.monstrositySpecies.RABBIT
+        data.species                              = onyxRabbit
+        data.levels[xi.monstrositySpecies.RABBIT] = 20
+        player:setMonstrosityData(data)
+        player.packets:clear()
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player:delStatusEffect(xi.effect.GESTATION)
+    end)
+
+    it('lists the learned spells its species can cast, and its Trusts', function()
+        assert(listsSpell(xi.magic.spell.STONE) == true, 'Stone should be listed')
+        assert(listsSpell(xi.magic.spell.SHANTOTTO) == true, 'Shantotto should be listed')
+        assert(listsSpell(xi.magic.spell.CURE) == false, 'Cure is not a WAR/BLM spell')
+    end)
+
+    it('casts a spell its species knows', function()
+        -- Not a Tunnel Worm, which burrows out of reach.
+        local mob = player.entities:moveTo('Wild_Rabbit')
+        mob:respawn()
+        mob:setAutoAttackEnabled(false)
+        player.entities:moveTo(mob:getID())
+
+        assert(cast(xi.magic.spell.STONE, mob) > 0, string.format('Stone was not cast, %d MP of %d', player:getMP(), player:getMaxMP()))
+    end)
+
+    it('cannot cast a spell outside its species jobs', function()
+        assert(cast(xi.magic.spell.CURE, player) == 0, 'a WAR/BLM cast Cure')
+    end)
+
+    it('cannot cast a travel spell its job knows', function()
+        assert(cast(xi.magic.spell.WARP, player) == 0, 'a Monipulator cast Warp')
+    end)
+
+    it('cannot call a Trust', function()
+        cast(xi.magic.spell.SHANTOTTO, player)
+
+        assert(player:getPartySize() == 1, 'a Monipulator called a Trust')
+    end)
 end)

@@ -1082,6 +1082,19 @@ auto monstrosity::CanCastSpell(CSpell* PSpell) -> bool
     return !std::ranges::contains(kBlockedSpells, PSpell->getID());
 }
 
+// Retail lists the learned spells the species' jobs can cast at the species level.
+auto monstrosity::ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool
+{
+    const auto& data  = *PChar->m_PMonstrosity;
+    const auto  level = PChar->GetMLevel();
+    if (level >= PSpell->getJob(data.MainJob))
+    {
+        return true;
+    }
+
+    return level >= PSpell->getJob(data.SubJob) && !(PSpell->getRequirements() & SPELLREQ_MAIN_JOB_ONLY);
+}
+
 auto monstrosity::GetFeretoryExits(const xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>
 {
     auto exits = std::vector<std::array<float, 4>>{};
