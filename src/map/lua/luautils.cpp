@@ -4676,9 +4676,7 @@ void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
     {
         for (const auto& [keyObj, valObj] : table.get<sol::table>("levels"))
         {
-            uint8 key = keyObj.as<uint8>();
-            uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->levels[key] |= val;
+            PChar->m_PMonstrosity->levels.at(keyObj.as<uint8>()) = valObj.as<uint8>();
         }
     }
 
@@ -4700,26 +4698,6 @@ void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
             uint8 val = valObj.as<uint8>();
             PChar->m_PMonstrosity->variants[key] |= val;
         }
-    }
-}
-
-void OnMonstrosityUpdate(CCharEntity* PChar)
-{
-    TracyZoneScoped;
-
-    sol::function onMonstrosityUpdate = lua["xi"]["monstrosity"]["onMonstrosityUpdate"];
-    if (!onMonstrosityUpdate.valid())
-    {
-        ShowError("luautils::OnMonstrosityUpdate");
-        return;
-    }
-
-    auto result = onMonstrosityUpdate(PChar, GetMonstrosityLuaTable(PChar));
-    if (!result.valid())
-    {
-        sol::error err = result;
-        ShowError("luautils::OnMonstrosityUpdate: %s", err.what());
-        return;
     }
 }
 

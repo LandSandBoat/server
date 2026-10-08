@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+# Monstrosity species families. The value indexes the per-species level array.
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.monstrositySpecies
+
+values:
+  rabbit:     1
+  behemoth:   2
+  tiger:      3
+  sheep:      4
+  ram:        5
+  dhalmel:    6
+  coeurl:     7
+  opo_opo:    8
+  manticore:  9
+  buffalo:   10
+  marid:     11
+  cerberus:  12
+  gnole:     13
+
+  funguar:        15
+  treant_sapling: 16
+  morbol:         17
+  mandragora:     18
+  sabotender:     19
+  flytrap:        20
+  goobbue:        21
+  rafflesia:      22
+  panopt:         23
+
+  bee:          27
+  beetle:       28
+  crawler:      29
+  fly:          30
+  scorpion:     31
+  spider:       32
+  antlion:      33
+  diremite:     34
+  chigoe:       35
+  wamouracampa: 36
+  ladybug:      37
+  gnat:         38
+
+  lizard:      43
+  raptor:      44
+  adamantoise: 45
+  bugard:      46
+  eft:         47
+  wivre:       48
+  peiste:      49
+
+  slime:    52
+  hecteyes: 53
+  flan:     54
+  slug:     56
+  sandworm: 57
+  leech:    58
+
+  crab:     60
+  pugil:    61
+  sea_monk: 62
+  uragnite: 63
+  orobon:   64
+  ruszor:   65
+  toad:     66
+
+  bird:       69
+  cockatrice: 70
+  roc:        71
+  bat:        72
+  hippogryph: 73
+  apkallu:    74
+  colibri:    75
+  amphiptere: 76
+
+  astoltian_slime:  126
+  eorzean_spriggan: 127

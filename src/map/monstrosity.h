@@ -28,16 +28,35 @@
 #include "entities/battle_entity.h"
 #include "packets/c2s/0x01a_action.h"
 
+#include "data/enums/zone.h"
+
 #include <array>
+#include <vector>
 
 struct mon_data_t;
 class CCharEntity;
+class CSpell;
+
+namespace xi::data
+{
+
+struct Monstrosity;
+
+}
 
 // ===
 // See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
 // ===
 namespace monstrosity
 {
+
+// Purchased instincts sit in a gap of the family instinct bitfield.
+constexpr auto kPurchasedInstinctsOffset = 20;
+constexpr auto kPurchasedInstinctsBytes  = 4;
+
+// Infamy stops rising here, higher while Belligerency is flagged.
+constexpr auto kInfamyCap             = 10000;
+constexpr auto kInfamyCapBelligerency = 50000;
 
 struct MonstrosityData_t
 {
@@ -64,6 +83,8 @@ public:
 
     bool Belligerency;
 
+    timer::time_point LastEquipChange{};
+
     position_t EntryPos{};
     uint16     EntryZoneId;
     uint8      EntryMainJob;
@@ -72,29 +93,35 @@ public:
 
 void LoadStaticData();
 
+[[nodiscard]] auto GetStaticData() -> const xi::data::Monstrosity&;
+
 void ReadMonstrosityData(CCharEntity* PChar);
 void WriteMonstrosityData(CCharEntity* PChar);
 
-void   TryPopulateMonstrosityData(CCharEntity* PChar);
-void   HandleZoneIn(CCharEntity* PChar);
-uint32 GetPackedMonstrosityName(CCharEntity* PChar);
-void   SendFullMonstrosityUpdate(CCharEntity* PChar);
+void TryPopulateMonstrosityData(CCharEntity* PChar);
+void HandleZoneIn(CCharEntity* PChar);
+void SendFullMonstrosityUpdate(CCharEntity* PChar);
 
-void HandleMonsterSkillActionPacket(const CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
+[[nodiscard]] auto GetPackedMonstrosityName(const CCharEntity* PChar) -> uint32;
+
+void HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
 void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
 
+void CalculateStats(CCharEntity* PChar);
 void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
+void HandleLevelUp(CCharEntity* PChar);
+
+[[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
+[[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar) -> uint16;
+[[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
+[[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
+[[nodiscard]] auto CanCastSpell(CSpell* PSpell) -> bool;
 
 void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
 
-bool IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct);
-bool IsVariantUnlocked(CCharEntity* PChar, uint8 variant);
+[[nodiscard]] auto IsInstinctUnlocked(const CCharEntity* PChar, uint16 instinct) -> bool;
+[[nodiscard]] auto IsVariantUnlocked(const CCharEntity* PChar, uint8 variant) -> bool;
 
 void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
-
-// Debug
-void MaxAllLevels(CCharEntity* PChar);
-void UnlockAllInstincts(CCharEntity* PChar);
-void UnlockAllVariants(CCharEntity* PChar);
 
 } // namespace monstrosity

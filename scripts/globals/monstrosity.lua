@@ -31,329 +31,6 @@ require('scripts/globals/quests')
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
 
------------------------------------
--- Enums
------------------------------------
-
-xi.monstrosity.species =
-{
-    RABBIT    = 1,
-    BEHEMOTH  = 2,
-    TIGER     = 3,
-    SHEEP     = 4,
-    RAM       = 5,
-    DHALMEL   = 6,
-    COEURL    = 7,
-    OPO_OPO   = 8,
-    MANTICORE = 9,
-    BUFFALO   = 10,
-    MARID     = 11,
-    CERBERUS  = 12,
-    GNOLE     = 13,
-
-    FUNGUAR        = 15,
-    TREANT_SAPLING = 16,
-    MORBOL         = 17,
-    MANDRAGORA     = 18,
-    SABOTENDER     = 19,
-    FLYTRAP        = 20,
-    GOOBBUE        = 21,
-    RAFFLESIA      = 22,
-    PANOPT         = 23,
-
-    BEE          = 27,
-    BEETLE       = 28,
-    CRAWLER      = 29,
-    FLY          = 30,
-    SCORPION     = 31,
-    SPIDER       = 32,
-    ANTLION      = 33,
-    DIREMITE     = 34,
-    CHIGOE       = 35,
-    WAMOURACAMPA = 36,
-    LADYBUG      = 37,
-    GNAT         = 38,
-
-    LIZARD      = 43,
-    RAPTOR      = 44,
-    ADAMANTOISE = 45,
-    BUGARD      = 46,
-    EFT         = 47,
-    WIVRE       = 48,
-    PEISTE      = 49,
-
-    SLIME    = 52,
-    HECTEYES = 53,
-    FLAN     = 54,
-    SLUG     = 56,
-    SANDWORM = 57,
-    LEECH    = 58,
-
-    CRAB     = 60,
-    PUGIL    = 61,
-    SEA_MONK = 62,
-    URAGNITE = 63,
-    OROBON   = 64,
-    RUSZOR   = 65,
-    TOAD     = 66,
-
-    BIRD       = 69,
-    COCKATRICE = 70,
-    ROC        = 71,
-    BAT        = 72,
-    HIPPOGRYPH = 73,
-    APKALLU    = 74,
-    COLIBRI    = 75,
-    AMPHIPTERE = 76,
-
-    ASTOLTIAN_SLIME  = 126,
-    EORZEAN_SPRIGGAN = 127,
-}
-
-xi.monstrosity.variants =
-{
-    -- Rabbit
-    ONYX_RABBIT      = 0,
-    ALABASTER_RABBIT = 1,
-    LAPINION         = 2,
-
-    -- Behemoth
-    ELASMOTH = 3,
-
-    -- Tiger
-    LEGENDARY_TIGER = 5,
-    SMILODON        = 6,
-
-    -- Sheep
-    KARAKUL = 7,
-
-    -- Coeurl
-    LYNX = 10,
-    COLLARED_LYNX = 11,
-
-    -- Manticore
-    LEGENDARY_MANTICORE = 12,
-
-    -- Cerberus
-    ORTHRUS = 13,
-
-    -- Gnole
-    BIPEDAL_GNOLE = 14,
-
-    -- Funguar
-    COPPERCAP = 15,
-
-    -- Treant Sapling
-    TREANT                = 16,
-    FLOWERING_TREANT      = 17,
-    SCARLET_TINGED_TREANT = 18,
-    BARREN_TREANT         = 19,
-    NECKLACED_TREANT      = 20,
-
-    -- Morbol
-    PYGMY_MORBOL = 21,
-    SCARE_MORBOL = 22,
-    AMERETAT     = 23,
-    PURBOL       = 24,
-
-    -- Mandragora
-    KORRIGAN               = 25,
-    LYCOPODIUM             = 26,
-    PYGMY_MANDRAGORA       = 27,
-    ADENIUM                = 28,
-    PACHYPODIUM            = 29,
-    ENLIGHTENED_MANDRAGORA = 30,
-    NEW_YEAR_MANDRAGORA    = 31,
-
-    -- Sabotender
-    SABOTENDER_FLORIDO = 32,
-
-    -- Rafflesia
-    MITRASTEMA = 33,
-
-    -- Bee
-    VERMILLION_AND_ONYX_BEE = 34,
-    ZAFFRE_BEE              = 35,
-
-    -- Beetle
-    ONYX_BEETLE    = 36,
-    GAMBOGE_BEETLE = 37,
-
-    -- Crawler
-    ERUCA                 = 38,
-    EMERALD_CRAWLER       = 39,
-    PYGMY_EMERALD_CRAWLER = 40,
-
-    -- Fly
-    VERMILLION_FLY = 41,
-
-    -- Scorpion
-    SCOLOPENDRID         = 42,
-    UNUSUAL_SCOLOPENDRID = 43,
-
-    -- Spider
-    RETICULATED_SPIDER         = 44,
-    VERMILLION_AND_ONYX_SPIDER = 45,
-
-    -- Antlion
-    ONYX_ANTLION = 46,
-    FORMICEROS   = 47,
-
-    -- Diremite
-    ARUNDIMITE = 48,
-
-    -- Chigoe
-    AZURE_CHIGOE = 49,
-
-    -- Wamouracampa
-    COILED_WAMOURACAMPA = 50,
-
-    -- Wamoura
-    WAMOURA       = 51,
-    CORAL_WAMOURA = 52,
-
-    -- Ladybug
-    GOLD_LADYBUG = 53,
-
-    -- Gnat
-    MIDGE = 54,
-
-    -- Lizard
-    ASHEN_LIZARD = 59,
-
-    -- Raptor
-    EMERALD_RAPTOR    = 60,
-    VERMILLION_RAPTOR = 61,
-
-    -- Adamantoise
-    PYGMY_ADAMANTOISE     = 62,
-    LEGENDARY_ADAMANTOISE = 63,
-    FERROMANTOISE         = 64,
-
-    -- Bugard
-    ABYSSOBUGARD = 65,
-
-    -- Eft
-    TARICHUK = 66,
-
-    -- Wivre
-    UNUSUAL_WIVRE = 67,
-
-    -- Peiste
-    SIBILUS = 68,
-
-    -- Slime
-    CLOT       = 73,
-    GOLD_SLIME = 74,
-    BOIL       = 75,
-
-    -- Flan
-    GOLD_FLAN  = 76,
-    BLANCMANGE = 77,
-
-    -- Sandworm
-    PYGMY_SANDWORM = 78,
-    GIGAWORM       = 79,
-
-    -- Leech
-    AZURE_LEECH = 80,
-    OBDELLA     = 81,
-
-    -- Crab
-    VERMILLION_CRAB                 = 84,
-    BASKET_BURDENED_CRAB            = 85,
-    VERMILLION_BASKET_BURDENED_CRAB = 86,
-    PORTER_CRAB                     = 87,
-
-    -- Pugil
-    JAGIL = 88,
-
-    -- Sea Monk
-    AZURE_SEA_MONK = 89,
-
-    -- Uragnite
-    LIMASCABRA = 90,
-
-    -- Orobon
-    PYGMY_OROBON = 91,
-    OGREBON      = 92,
-
-    -- Toad
-    AZURE_TOAD      = 93,
-    VERMILLION_TOAD = 94,
-
-    -- Bird
-    ONYX_BIRD = 95,
-
-    -- Cockatrice
-    ZIZ = 96,
-
-    -- Roc
-    LEGENDARY_ROC = 97,
-    GAGANA        = 98,
-
-    -- Bat
-    BATS            = 99,
-    VERMILLION_BAT  = 100,
-    VERMILLION_BATS = 101,
-
-    -- Apkallu
-    INGUZA = 102,
-
-    -- Colibri
-    TOUCALIBRI = 103,
-
-    -- Amphiptere
-    SANGUIPTERE = 104,
-
-    -- Slime
-    SHE_SLIME   = 252,
-    METAL_SLIME = 253,
-
-    -- Spriggan
-    SPRIGGAN_C = 254,
-    SPRIGGAN_G = 255,
-}
-
-xi.monstrosity.purchasableInstincts =
-{
-    -- Default (0x1F)
-    HUME_I   = 0,
-    ELVAAN_I = 1,
-    TARU_I   = 2,
-    MITHRA_I = 3,
-    GALKA_I  = 4,
-
-    HUME_II   = 5,
-    ELVAAN_II = 6,
-    TARU_II   = 7,
-    MITHRA_II = 8,
-    GALKA_II  = 9,
-
-    WAR = 10,
-    MNK = 11,
-    WHM = 12,
-    BLM = 13,
-    RDM = 14,
-    THF = 15,
-    PLD = 16,
-    DRK = 17,
-    BST = 18,
-    BRD = 19,
-    RNG = 20,
-    SAM = 21,
-    NIN = 22,
-    DRG = 23,
-    SMN = 24,
-    BLU = 25,
-    COR = 26,
-    PUP = 27,
-    DNC = 28,
-    SCH = 29,
-    GEO = 30,
-    RUN = 31,
-}
-
 local limitBreakQuests =
 {
     [xi.job.BLU] = { xi.questLog.AHT_URHGAN,  xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN           },
@@ -365,498 +42,8 @@ local limitBreakQuests =
     [xi.job.RUN] = { xi.questLog.ADOULIN,     xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN        },
 }
 
--- NOTE: Cost and granted species/variant are hardcoded into Terynon's event; however, the requirements
--- to get each of these purchasable MONs is not displayed, and can be modified to a different set or
--- level.  The requirements are limited to species!
-local terynonMonData =
-{
-    [0] = -- Beasts
-    {
-        [0] =
-        {
-            monVariant   = xi.monstrosity.variants.LAPINION,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.RABBIT, 90 },
-            },
-        },
-
-        [1] =
-        {
-            monSpecies = xi.monstrosity.species.SHEEP,
-            infamyCost = 3000,
-        },
-
-        [2] =
-        {
-            monSpecies   = xi.monstrosity.species.BEHEMOTH,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.RABBIT,  75 },
-                { xi.monstrosity.species.OPO_OPO, 75 },
-                { xi.monstrosity.species.GNOLE,   75 },
-            },
-        },
-
-        [3] =
-        {
-            monVariant   = xi.monstrosity.variants.ELASMOTH,
-            infamyCost   = 25000,
-            requirements =
-            {
-                { xi.monstrosity.species.BEHEMOTH, 50 },
-            },
-        },
-
-        [4] =
-        {
-            monSpecies   = xi.monstrosity.species.CERBERUS,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.BUFFALO,   60 },
-                { xi.monstrosity.species.MANTICORE, 60 },
-                { xi.monstrosity.species.MARID,     60 },
-                { xi.monstrosity.species.SHEEP,     60 },
-                { xi.monstrosity.species.DHALMEL,   60 },
-            },
-        },
-
-        [5] =
-        {
-            monVariant   = xi.monstrosity.variants.ORTHRUS,
-            infamyCost   = 25000,
-            requirements =
-            {
-                { xi.monstrosity.species.CERBERUS, 50 },
-            },
-        },
-    },
-
-    [1] = -- Plantoids
-    {
-        [0] =
-        {
-            monVariant   = xi.monstrosity.variants.PYGMY_MANDRAGORA,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.MANDRAGORA, 45 },
-            },
-        },
-
-        [1] =
-        {
-            monSpecies = xi.monstrosity.species.TREANT,
-            infamyCost = 3000,
-        },
-
-        [2] =
-        {
-            monVariant   = xi.monstrosity.variants.PYGMY_MORBOL,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.MORBOL, 1 },
-            },
-        },
-
-        [3] =
-        {
-            monVariant   = xi.monstrosity.variants.PURBOL,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.MORBOL, 75 },
-            },
-        },
-    },
-
-    [2] = -- Vermin
-    {
-        [0] =
-        {
-            monVariant   = xi.monstrosity.variants.GOLD_LADYBUG,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.LADYBUG, 50 },
-            },
-        },
-
-        [1] =
-        {
-            monSpecies = xi.monstrosity.species.BEETLE,
-            infamyCost = 3000,
-        },
-
-        [2] =
-        {
-            monVariant   = xi.monstrosity.variants.UNUSUAL_SCOLOPENDRID,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.SCORPION, 60 },
-            },
-        },
-
-        [3] =
-        {
-            monSpecies   = xi.monstrosity.species.ANTLION,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.SCORPION, 60 },
-            },
-        },
-
-        [4] =
-        {
-            monVariant   = xi.monstrosity.variants.FORMICEROS,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.ANTLION, 60 },
-            },
-        },
-
-        [5] =
-        {
-            monVariant   = xi.monstrosity.variants.PYGMY_EMERALD_CRAWLER,
-            infamyCost   = 6000,
-            requirements =
-            {
-                { xi.monstrosity.species.CRAWLER, 60 },
-            },
-        },
-
-        [6] =
-        {
-            monVariant   = xi.monstrosity.variants.CORAL_WAMOURA,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.WAMOURACAMPA, 60 },
-            },
-        },
-
-        [7] =
-        {
-            monSpecies   = xi.monstrosity.species.GNAT,
-            infamyCost   = 5000,
-            requirements =
-            {
-                { xi.monstrosity.species.LADYBUG,      50 },
-                { xi.monstrosity.species.WAMOURACAMPA, 50 },
-            },
-        },
-    },
-
-    [3] = -- Lizards
-    {
-        [0] =
-        {
-            monVariant   = xi.monstrosity.species.UNUSUAL_WIVRE,
-            infamyCost   = 7500,
-            requirements =
-            {
-                { xi.monstrosity.species.WIVRE, 60 },
-            },
-        },
-
-        [1] =
-        {
-            monSpecies   = xi.monstrosity.species.ADAMANTOISE,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.BUGARD, 60 },
-                { xi.monstrosity.species.LIZARD, 60 },
-                { xi.monstrosity.species.WIVRE,  60 },
-            },
-        },
-
-        [2] =
-        {
-            monVariant   = xi.monstrosity.variants.FERROMANTOISE,
-            infamyCost   = 20000,
-            requirements =
-            {
-                { xi.monstrosity.species.ADAMANTOISE, 70 },
-            },
-        },
-
-        [3] =
-        {
-            monSpecies = xi.monstrosity.species.RAPTOR,
-            infamyCost = 3000,
-        },
-
-        [4] =
-        {
-            monSpecies   = xi.monstrosity.species.PEISTE,
-            infamyCost   = 8000,
-            requirements =
-            {
-                { xi.monstrosity.species.EFT,    50 },
-                { xi.monstrosity.species.RAPTOR, 50 },
-            },
-        },
-
-        [5] =
-        {
-            monVariant   = xi.monstrosity.variants.SIBILUS,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.PEISTE, 50 },
-            },
-        },
-    },
-
-    [4] = -- Amorphs
-    {
-        [0] =
-        {
-            monSpecies = xi.monstrosity.species.SLIME,
-            infamyCost = 3000,
-        },
-
-        [1] =
-        {
-            monVariant   = xi.monstrosity.variants.BOIL,
-            infamyCost   = 25000,
-            requirements =
-            {
-                { xi.monstrosity.species.SLIME, 50 },
-            },
-        },
-
-        [2] =
-        {
-            monVariant   = xi.monstrosity.variants.PYGMY_SANDWORM,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.SANDWORM, 1 },
-            },
-        },
-
-        [3] =
-        {
-            monVariant   = xi.monstrosity.variants.GIGAWORM,
-            infamyCost   = 25000,
-            requirements =
-            {
-                { xi.monstrosity.species.SANDWORM, 60 },
-            },
-        },
-
-        [4] =
-        {
-            monSpecies = xi.monstrosity.species.LEECH,
-            infamyCost = 2000,
-        },
-    },
-
-    [5] = -- Aquans
-    {
-        [0] =
-        {
-            monSpecies = xi.monstrosity.species.CRAB,
-            infamyCost = 2000,
-        },
-
-        [1] =
-        {
-            monVariant   = xi.monstrosity.variants.BASKET_BURDENED_CRAB,
-            infamyCost   = 20000,
-            requirements =
-            {
-                { xi.monstrosity.species.CRAB, 1 },
-            },
-        },
-
-        [2] =
-        {
-            monVariant   = xi.monstrosity.variants.VERMILLION_BASKET_BURDENED_CRAB,
-            infamyCost   = 20000,
-            requirements =
-            {
-                { xi.monstrosity.species.CRAB, 15 },
-            },
-        },
-
-        [3] =
-        {
-            monVariant   = xi.monstrosity.variants.PORTER_CRAB,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.CRAB, 60 },
-            },
-        },
-
-        [4] =
-        {
-            monSpecies = xi.monstrosity.species.PUGIL,
-            infamyCost = 3000,
-        },
-
-        [5] =
-        {
-            monVariant   = xi.monstrosity.variants.LIMASCABRA,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.URAGNITE, 50 },
-            },
-        },
-
-        [6] =
-        {
-            monVariant   = xi.monstrosity.variants.PYGMY_OROBON,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.OROBON, 1 },
-            },
-        },
-
-        [7] =
-        {
-            monVariant   = xi.monstrosity.variants.OGREBON,
-            infamyCost   = 18000,
-            requirements =
-            {
-                { xi.monstrosity.species.OROBON, 50 },
-            },
-        },
-
-        [8] =
-        {
-            monSpecies   = xi.monstrosity.species.RUSZOR,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.OROBON,   75 },
-                { xi.monstrosity.species.URAGNITE, 75 },
-            },
-        },
-    },
-
-    [6] = -- Birds
-    {
-        [0] =
-        {
-            monSpecies = xi.monstrosity.species.COCKATRICE,
-            infamyCost = 3000,
-        },
-
-        [1] =
-        {
-            monVariant   = xi.monstrosity.variants.GAGANA,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.ROC, 75 },
-            },
-        },
-
-        [2] =
-        {
-            monSpecies = xi.monstrosity.species.BAT,
-            infamyCost = 2000,
-        },
-
-        [3] =
-        {
-            monVariant   = xi.monstrosity.variants.INGUZA,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.APKALLU, 50 },
-            },
-        },
-
-        [4] =
-        {
-            monSpecies = xi.monstrosity.species.COLIBRI,
-            infamyCost = 5000,
-            requirements =
-            {
-                { xi.monstrosity.species.BAT,  50 },
-                { xi.monstrosity.species.BIRD, 45 },
-            },
-        },
-
-        [5] =
-        {
-            monVariant   = xi.monstrosity.variants.TOUCALIBRI,
-            infamyCost   = 15000,
-            requirements =
-            {
-                { xi.monstrosity.species.COLIBRI, 50 },
-            },
-        },
-
-        [6] =
-        {
-            monSpecies   = xi.monstrosity.species.AMPHIPTERE,
-            infamyCost   = 10000,
-            requirements =
-            {
-                { xi.monstrosity.species.COCKATRICE, 75 },
-                { xi.monstrosity.species.ROC,        75 },
-                { xi.monstrosity.species.HIPPOGRYPH, 75 },
-            },
-        },
-
-        [7] =
-        {
-            monVariant   = xi.monstrosity.variants.SANGUIPTERE,
-            infamyCost   = 20000,
-            requirements =
-            {
-                { xi.monstrosity.species.AMPHIPTERE, 50 },
-            },
-        },
-    },
-}
-
-xi.monstrosity.teleports =
-{
-    [xi.zone.EAST_RONFAURE] =
-    {
-        { 120,     0.5, -530, 192 },
-        { 115, -59.684,  247,  16 },
-    },
-
-    [xi.zone.QUFIM_ISLAND] =
-    {
-        {  -2, -20.001, 324,  64 },
-        { 161,     -20,  37, 192 },
-    },
-
-    [xi.zone.SOUTH_GUSTABERG] =
-    {
-        { -115, -0.136, -165, 64 },
-    },
-
-    [xi.zone.VALKURM_DUNES] =
-    {
-        { 838, 0, -162, 64 },
-    },
-
-    [xi.zone.WESTERN_ALTEPA_DESERT] =
-    {
-        { 685.548, -1.744, -50.395, 128 },
-    },
-}
-
--- NOTE: The zones in this list are not customisable, but the level caps are!
+-- The zones are fixed by the client menu, the level caps are not (JP wiki, BG).
+-- TODO: Apply the cap on entering the zone under Belligerency.
 xi.monstrosity.belligerencyCaps =
 {
     [xi.zone.BUBURIMU_PENINSULA] = 30,
@@ -864,10 +51,19 @@ xi.monstrosity.belligerencyCaps =
     [xi.zone.ULEGUERAND_RANGE]   = 90,
 }
 
+-- Teyrnon's shop lives in data/monstrosity.yaml and does not change once loaded.
+local teyrnonShop = nil
+
+local function getTeyrnonShop(player)
+    teyrnonShop = teyrnonShop or player:getMonstrosityShop()
+
+    return teyrnonShop
+end
+
 -----------------------------------
 -- Helpers
 -----------------------------------
--- Use xi.monstrosity.species
+---@param choice xi.monstrositySpecies
 xi.monstrosity.unlockStartingMONs = function(player, choice)
     local data =
     {
@@ -878,32 +74,32 @@ xi.monstrosity.unlockStartingMONs = function(player, choice)
     player:setMonstrosityData(data)
 end
 
--- Use xi.monstrosity.species
+---@param species xi.monstrositySpecies
 xi.monstrosity.getSpeciesLevel = function(player, species)
     local data = player:getMonstrosityData()
     return data['levels'][species]
 end
 
--- Use xi.monstrosity.species
+---@param species xi.monstrositySpecies
 xi.monstrosity.hasUnlockedSpecies = function(player, species)
     return xi.monstrosity.getSpeciesLevel(player, species) > 0
 end
 
--- Use xi.monstrosity.species
+---@param species xi.monstrositySpecies
 xi.monstrosity.setSpeciesLevel = function(player, species, level)
     local data = player:getMonstrosityData()
     data.levels[species] = level
     player:setMonstrosityData(data)
 end
 
--- Use xi.monstrosity.species
+---@param species xi.monstrositySpecies
 xi.monstrosity.unlockSpecies = function(player, species)
     if not xi.monstrosity.hasUnlockedSpecies(player, species) then
         xi.monstrosity.setSpeciesLevel(player, species, 1)
     end
 end
 
--- Use xi.monstrosity.variants
+---@param variant xi.monstrosityVariant
 xi.monstrosity.hasUnlockedVariant = function(player, variant)
     local data = player:getMonstrosityData()
 
@@ -917,7 +113,7 @@ xi.monstrosity.hasUnlockedVariant = function(player, variant)
     return false
 end
 
--- Use xi.monstrosity.variants
+---@param variant xi.monstrosityVariant
 xi.monstrosity.unlockVariant = function(player, variant)
     if not xi.monstrosity.hasUnlockedVariant(player, variant) then
         local data = player:getMonstrosityData()
@@ -942,20 +138,20 @@ local function hasPurchasedInstinct(player, purchasableInstinctId)
 
     if byteOffset >= 20 and byteOffset < 24 then
         return bit.band(data.instincts[byteOffset], bit.lshift(1, shiftAmount)) > 0
-    else
-        print('byteOffset out of range')
     end
+
+    return false
 end
 
 local function getPurchasedInstinctsMask(player)
     local instinctMask = 0
 
-    for _, purchasableInstinctId in pairs(xi.monstrosity.purchasableInstincts) do
+    for _, purchasableInstinctId in pairs(xi.monstrosityInstinct) do
         if
-            purchasableInstinctId >= xi.monstrosity.purchasableInstincts.HUME_II and
+            purchasableInstinctId >= xi.monstrosityInstinct.HUME_II and
             hasPurchasedInstinct(player, purchasableInstinctId)
         then
-            instinctMask = utils.mask.setBit(instinctMask, purchasableInstinctId - xi.monstrosity.purchasableInstincts.HUME_II, true)
+            instinctMask = utils.mask.setBit(instinctMask, purchasableInstinctId - xi.monstrosityInstinct.HUME_II, true)
         end
     end
 
@@ -976,7 +172,17 @@ local function addPurchasedInstinct(player, purchasableInstinctId)
     player:setMonstrosityData(data)
 end
 
--- When generating Terynon's mask for discounts, we need a bitmask for
+local function tryPayInfamy(player, cost)
+    if player:getCurrency('infamy') < cost then
+        player:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
+        return false
+    end
+
+    player:delCurrency('infamy', cost)
+    return true
+end
+
+-- When generating Teyrnon's mask for discounts, we need a bitmask for
 -- specific jobs.  Since only one quest exists for pre-ToAU jobs, use
 -- Maat's Cap tracking for those.
 local function hasCompletedLimitBreak(player, jobId)
@@ -1002,7 +208,7 @@ local function getLimitBreakMask(player)
 end
 
 local function hasPurchaseRequirements(player, monCategory, selectedMon)
-    local selectedMonData = terynonMonData[monCategory][selectedMon]
+    local selectedMonData = getTeyrnonShop(player)[monCategory][selectedMon]
     local eligibleSpecies = selectedMonData.monSpecies and xi.monstrosity.getSpeciesLevel(player, selectedMonData.monSpecies) == 0
     local eligibleVariant = selectedMonData.monVariant and not xi.monstrosity.hasUnlockedVariant(player, selectedMonData.monVariant)
 
@@ -1027,8 +233,8 @@ end
 local function getMonPageMask(player, monCategory)
     local pageMask = 0
 
-    if terynonMonData[monCategory] then
-        local categoryTable = terynonMonData[monCategory]
+    local categoryTable = getTeyrnonShop(player)[monCategory]
+    if categoryTable then
 
         for bitPos, _ in pairs(categoryTable) do
             if hasPurchaseRequirements(player, monCategory, bitPos) then
@@ -1043,33 +249,6 @@ end
 -----------------------------------
 -- Bound by C++ (DO NOT CHANGE SIGNATURE)
 -----------------------------------
-
-xi.monstrosity.onMonstrosityUpdate = function(player, data)
-    -- Tap level-based unlocks
-
-    -- Instincts by MON level
-    -- NOTE: Since this is a bitfield, it's zero-indexed!
-    for _, val in pairs(xi.monstrosity.species) do
-        local speciesKey   = val
-        local speciesLevel = data.levels[val]
-        local byteOffset   = math.floor(speciesKey / 4)
-        local unlockAmount = math.floor(speciesLevel / 30)
-        local shiftAmount  = (speciesKey * 2) % 8
-
-        -- Special case for writing Slime & Spriggan data at the end of the 64-byte array
-        if byteOffset == 31 then
-            byteOffset = 63
-        end
-
-        if byteOffset < 64 then
-            data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(unlockAmount, shiftAmount))
-        else
-            print('byteOffset out of range')
-        end
-    end
-
-    -- TODO: Handle level-based variants here
-end
 
 xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
     local data = player:getMonstrosityData()
@@ -1106,41 +285,21 @@ end
 -- Relinquish
 -----------------------------------
 
-xi.monstrosity.relinquishSteps =
-{
-    [0] = function(player)
-        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
-    end,
-
-    [1] = function(player)
-        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 3)
-    end,
-
-    [2] = function(player)
-        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 2)
-    end,
-
-    [3] = function(player)
-        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 1)
-    end,
-
-    [4] = function(player)
-        xi.monstrosity.onMonstrosityReturnToEntrance(player)
-    end,
-}
-
-xi.monstrosity.relinquishFuncBody = function(player)
-    -- TODO: Make this countdown interruptable
+-- Counts down from 4 once a second, then leaves Monstrosity.
+-- TODO: Make this countdown interruptable
+xi.monstrosity.relinquishOnAbility = function(player)
     player:timer(1000, function(playerArg)
-        local step = utils.clamp(playerArg:getLocalVar('RELINQUISH_COUNTDOWN'), 0, 4)
-        xi.monstrosity.relinquishSteps[step](playerArg)
-        playerArg:setLocalVar('RELINQUISH_COUNTDOWN', step + 1)
-        xi.monstrosity.relinquishFuncBody(playerArg)
-    end)
-end
+        local step = playerArg:getLocalVar('RELINQUISH_COUNTDOWN')
+        if step >= 4 then
+            playerArg:setLocalVar('RELINQUISH_COUNTDOWN', 0)
+            xi.monstrosity.onMonstrosityReturnToEntrance(playerArg)
+            return
+        end
 
-xi.monstrosity.relinquishOnAbility = function(player, target, ability)
-    xi.monstrosity.relinquishFuncBody(player)
+        playerArg:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4 - step)
+        playerArg:setLocalVar('RELINQUISH_COUNTDOWN', step + 1)
+        xi.monstrosity.relinquishOnAbility(playerArg)
+    end)
 end
 
 -----------------------------------
@@ -1158,13 +317,13 @@ xi.monstrosity.unlockAll = function(player)
     local data = player:getMonstrosityData()
 
     -- Set all levels to 99
-    for _, val in pairs(xi.monstrosity.species) do
+    for _, val in pairs(xi.monstrositySpecies) do
         data.levels[val] = 99
     end
 
     -- Instincts by MON level
     -- NOTE: Since this is a bitfield, it's zero-indexed!
-    for _, val in pairs(xi.monstrosity.species) do
+    for _, val in pairs(xi.monstrositySpecies) do
         local speciesKey   = val
         local speciesLevel = data.levels[val]
         local byteOffset   = math.floor(speciesKey / 4)
@@ -1184,7 +343,7 @@ xi.monstrosity.unlockAll = function(player)
     end
 
     -- Instincts (Purchasable)
-    for _, val in pairs(xi.monstrosity.purchasableInstincts) do
+    for _, val in pairs(xi.monstrosityInstinct) do
         local byteOffset   = 20 + math.floor(val / 8)
         local shiftAmount  = val % 8
 
@@ -1197,7 +356,7 @@ xi.monstrosity.unlockAll = function(player)
 
     -- Variants
     -- Force unlock all
-    for _, val in pairs(xi.monstrosity.variants) do
+    for _, val in pairs(xi.monstrosityVariant) do
         local speciesKey   = val
         local byteOffset   = math.floor(speciesKey / 8)
         local shiftAmount  = speciesKey % 8
@@ -1216,9 +375,6 @@ end
 -----------------------------------
 -- Odyssean Passage (Feretory Only)
 -----------------------------------
-
-xi.monstrosity.odysseanPassageOnTrade = function(player, npc, trade)
-end
 
 xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
@@ -1243,7 +399,7 @@ end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
     local zoneSelected = bit.rshift(option, 4)
-    player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected], 0, 0, 0, 1, 0, 0, 0)
+    player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected] or 0, 0, 0, 0, 1, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
@@ -1253,21 +409,21 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
     if eventOption == 1 then
         if zoneSelected == 0 then
             xi.monstrosity.onMonstrosityReturnToEntrance(player)
-        else
-            if xi.monstrosity.teleports[zoneSelected] then
-                local teleportPos = xi.monstrosity.teleports[zoneSelected][math.randomInt(1, #xi.monstrosity.teleports[zoneSelected])]
-
-                player:setPos(teleportPos[1],
-                    teleportPos[2],
-                    teleportPos[3],
-                    teleportPos[4],
-                    zoneSelected
-                )
-            else
-                print('Monstrosity Teleport - No Valid Entries for Zone ' .. zoneSelected .. '. Setting pos to (0, 0, 0)!')
-                player:setPos(0, 0, 0, 0, zoneSelected)
-            end
+            return
         end
+
+        -- The client only offers visited zones with a Feretory exit, and Belligerency zones while it is on.
+        local exits = player:getMonstrosityExits(zoneSelected)
+        if
+            #exits == 0 or
+            not player:hasVisitedZone(zoneSelected) or
+            (player:getBelligerencyFlag() and not xi.monstrosity.belligerencyCaps[zoneSelected])
+        then
+            return
+        end
+
+        local teleportPos = exits[math.randomInt(1, #exits)]
+        player:setPos(teleportPos[1], teleportPos[2], teleportPos[3], teleportPos[4], zoneSelected)
     end
 end
 
@@ -1314,18 +470,9 @@ xi.monstrosity.feretoryOnZoneOut = function(player)
     end
 end
 
-xi.monstrosity.feretoryOnEventUpdate = function(player, csid, option, npc)
-end
-
-xi.monstrosity.feretoryOnEventFinish = function(player, csid, option, npc)
-end
-
 -----------------------------------
 -- Aengus (Feretory NPC)
 -----------------------------------
-
-xi.monstrosity.aengusOnTrade = function(player, npc, trade)
-end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
@@ -1334,9 +481,6 @@ xi.monstrosity.aengusOnTrigger = function(player, npc)
 
     local inBelligerency = player:getBelligerencyFlag() and 1 or 0
     player:startEvent(13, inBelligerency, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0)
-end
-
-xi.monstrosity.aengusOnEventUpdate = function(player, csid, option, npc)
 end
 
 xi.monstrosity.aengusOnEventFinish = function(player, csid, option, npc)
@@ -1349,9 +493,6 @@ end
 -----------------------------------
 -- Teyrnon (Feretory NPC)
 -----------------------------------
-
-xi.monstrosity.teyrnonOnTrade = function(player, npc, trade)
-end
 
 xi.monstrosity.teyrnonOnTrigger = function(player, npc)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
@@ -1389,10 +530,14 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
     if optionType == 1 then
         local selectedCategory = bit.band(bit.rshift(option, 8), 0xF) - 1
         local selectedMon      = bit.rshift(option, 16)
-        local monData          = terynonMonData[selectedCategory][selectedMon]
+        local shopPage         = getTeyrnonShop(player)[selectedCategory] or {}
+        local monData          = shopPage[selectedMon]
 
-        if not monData then
-            print(string.format('Invalid Event Finish Option received by Terynon! (%s:%d)', player:getName(), option))
+        if
+            not monData or
+            not hasPurchaseRequirements(player, selectedCategory, selectedMon)
+        then
+            print(string.format('Invalid Event Finish Option received by Teyrnon! (%s:%d)', player:getName(), option))
             return
         end
 
@@ -1412,20 +557,20 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
     elseif optionType == 2 then
         -- Instincts: Costs are hardcoded, and adjusted based on having completed certain
-        -- prerequisites.  This data is not tabled with Terynon, as it cannot be controlled.
+        -- prerequisites.  This data is not tabled with Teyrnon, as it cannot be controlled.
 
         local selectedInstinct = bit.band(bit.rshift(option, 8), 0xFF)
-        local instinctPrice    = selectedInstinct > xi.monstrosity.purchasableInstincts.GALKA_II and 10000 or 500
+        local instinctPrice    = selectedInstinct > xi.monstrosityInstinct.GALKA_II and 10000 or 500
         local checkValue       = bit.rshift(option, 16)
 
         if checkValue ~= 119 then
-            print(string.format('Invalid Event Finish Option received by Terynon! (%s:%d)', player:getName(), option))
+            print(string.format('Invalid Event Finish Option received by Teyrnon! (%s:%d)', player:getName(), option))
             return
         end
 
         if
-            selectedInstinct > xi.monstrosity.purchasableInstincts.GALKA_II and
-            hasCompletedLimitBreak(player, selectedInstinct - xi.monstrosity.purchasableInstincts.GALKA_II)
+            selectedInstinct > xi.monstrosityInstinct.GALKA_II and
+            hasCompletedLimitBreak(player, selectedInstinct - xi.monstrosityInstinct.GALKA_II)
         then
             instinctPrice = instinctPrice / 2
         end
@@ -1445,23 +590,13 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
     elseif optionType == 3 then
         -- TODO: The casting effects and animations
 
-        local tryPayCost = function(playerArg, cost)
-            if playerArg:getCurrency('infamy') < cost then
-                playerArg:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
-                return false
-            end
-
-            playerArg:delCurrency('infamy', cost)
-            return true
-        end
-
         local selectedEffect = bit.rshift(option, 8)
         switch(selectedEffect): caseof
         {
             -- 0: Dedication 1
             -- 50% experience bonus 60 minutes or until a maximum bonus of 10,000 EXP is gained
             [0] = function()
-                if not tryPayCost(player, 3000) then
+                if not tryPayInfamy(player, 3000) then
                     return
                 end
 
@@ -1476,7 +611,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
             -- 1: Dedication 2
             -- 100% experience bonus 60 minutes or until a maximum bonus of 2,000 EXP is gained
             [1] = function()
-                if not tryPayCost(player, 400) then
+                if not tryPayInfamy(player, 400) then
                     return
                 end
 
@@ -1490,7 +625,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             -- 2: Regen
             [2] = function()
-                if not tryPayCost(player, 10) then
+                if not tryPayInfamy(player, 10) then
                     return
                 end
 
@@ -1500,7 +635,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             -- 3: Refresh
             [3] = function()
-                if not tryPayCost(player, 10) then
+                if not tryPayInfamy(player, 10) then
                     return
                 end
 
@@ -1510,7 +645,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             -- 4: Protect
             [4] = function()
-                if not tryPayCost(player, 100) then
+                if not tryPayInfamy(player, 100) then
                     return
                 end
 
@@ -1544,7 +679,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             -- 5: Shell
             [5] = function()
-                if not tryPayCost(player, 100) then
+                if not tryPayInfamy(player, 100) then
                     return
                 end
 
@@ -1591,21 +726,10 @@ end
 -- Maccus (Feretory NPC)
 -----------------------------------
 
-xi.monstrosity.maccusOnTrade = function(player, npc, trade)
-end
-
 xi.monstrosity.maccusOnTrigger = function(player, npc)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
         return
     end
 
     player:startEvent(9, 285, 2, 2, 0, 0, 0, 0, 0)
-end
-
-xi.monstrosity.maccusOnEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
-end
-
-xi.monstrosity.maccusOnEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
 end

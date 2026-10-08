@@ -57,7 +57,7 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
     }
 
     const bool atMaxLevelLimit = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= PChar->jobs.genkai;
-    const bool hasCappedXp     = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == (charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1);
+    const bool hasCappedXp     = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == (charutils::GetExpNEXTLevelForChar(PChar, PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1);
 
     packet.canUseMeritMode     = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, xi::KeyItem::LimitBreaker);
     packet.xpCappedOrMeritMode = (atMaxLevelLimit && hasCappedXp) || PChar->MeritMode;

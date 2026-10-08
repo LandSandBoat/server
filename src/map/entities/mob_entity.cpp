@@ -898,6 +898,13 @@ void CMobEntity::DistributeRewards()
                 charutils::DistributeCapacityPoints(PChar, this);
             }
 
+            // JP wiki: a Monipulator never earns gil.
+            // TODO: Monipulators find items under Belligerency.
+            if (PChar->m_PMonstrosity)
+            {
+                return;
+            }
+
             // check for gil (beastmen drop gil, some NMs drop gil)
             if ((settings::get<float>("map.MOB_GIL_MULTIPLIER") > 0.0f && CanDropGil()) ||
                 (settings::get<float>("map.ALL_MOBS_GIL_BONUS") > 0 &&

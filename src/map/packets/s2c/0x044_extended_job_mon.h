@@ -22,6 +22,7 @@
 #pragma once
 
 #include "base.h"
+#include "common/types/flag.h"
 
 class CCharEntity;
 
@@ -44,7 +45,9 @@ public:
         uint8_t  padding03[124];
     };
 
-    MON(const CCharEntity* PChar);
+    using IsSubJob = xi::Flag<struct IsSubJobTag>;
+
+    MON(const CCharEntity* PChar, IsSubJob isSubJob);
 };
 
 } // namespace GP_SERV_COMMAND_EXTENDED_JOB

@@ -90,6 +90,7 @@
 #include "linkshell.h"
 #include "mobskill.h"
 #include "modifier.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x028_battle2.h"
@@ -1417,6 +1418,11 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 bool CCharEntity::CanUseSpell(CSpell* PSpell)
 {
     TracyZoneScopedN("CCharEntity::CanUseSpell");
+
+    if (m_PMonstrosity && !monstrosity::CanCastSpell(PSpell))
+    {
+        return false;
+    }
 
     return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell);
 }

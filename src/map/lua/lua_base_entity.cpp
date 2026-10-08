@@ -38,6 +38,7 @@
 #include "aman.h"
 #include "battlefield.h"
 #include "conquest_system.h"
+#include "data/datasets/monstrosity/dataset.h"
 #include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "fishingcontest.h"
@@ -51,6 +52,7 @@
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
 #include "mobskill.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "recast_container.h"
 #include "roe.h"
@@ -7434,7 +7436,15 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->SetMLevel(level);
         PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] = level;
         PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
-        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1;
+
+        // A Monipulator's level lives per species, so record it there or zoning restores the old one.
+        if (PChar->m_PMonstrosity)
+        {
+            monstrosity::SetLevel(PChar, PChar->m_PMonstrosity->MonstrosityId, level);
+            monstrosity::WriteMonstrosityData(PChar);
+        }
+
+        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = charutils::GetExpNEXTLevelForChar(PChar, level) - 1;
         charutils::ApplyAllEquipMods(PChar);
 
         charutils::SetStyleLock(PChar, false);
@@ -7863,6 +7873,56 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
     {
         PChar->m_PMonstrosity = nullptr;
     }
+}
+
+auto CLuaBaseEntity::getMonstrosityShop() -> sol::table
+{
+    auto shop = lua.create_table();
+    for (const auto& [page, slots] : monstrosity::GetStaticData().teyrnonShop)
+    {
+        auto pageTable = lua.create_table();
+        for (std::size_t slotIdx = 0; slotIdx < slots.size(); ++slotIdx)
+        {
+            const auto& slot = slots[slotIdx];
+
+            auto requirements = lua.create_table();
+            for (const auto& [family, level] : slot.requirements)
+            {
+                requirements.add(lua.create_table_with(1, static_cast<uint8>(family), 2, level));
+            }
+
+            auto slotTable            = lua.create_table();
+            slotTable["infamyCost"]   = slot.infamy;
+            slotTable["requirements"] = requirements;
+            if (slot.species)
+            {
+                slotTable["monSpecies"] = static_cast<uint8>(*slot.species);
+            }
+
+            if (slot.variant)
+            {
+                slotTable["monVariant"] = static_cast<uint8>(*slot.variant);
+            }
+
+            pageTable[slotIdx] = slotTable;
+        }
+
+        shop[page] = pageTable;
+    }
+
+    return shop;
+}
+
+auto CLuaBaseEntity::getMonstrosityExits(const xi::ZoneId zoneId) -> sol::table
+{
+    auto exits = lua.create_table();
+
+    for (const auto& [x, y, z, rot] : monstrosity::GetFeretoryExits(zoneId))
+    {
+        exits.add(lua.create_table_with(1, x, 2, y, 3, z, 4, static_cast<uint8>(rot)));
+    }
+
+    return exits;
 }
 
 /************************************************************************
@@ -21095,6 +21155,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setBelligerencyFlag", CLuaBaseEntity::setBelligerencyFlag);
     SOL_REGISTER("getMonstrositySize", CLuaBaseEntity::getMonstrositySize);
     SOL_REGISTER("setMonstrosityEntryData", CLuaBaseEntity::setMonstrosityEntryData);
+    SOL_REGISTER("getMonstrosityShop", CLuaBaseEntity::getMonstrosityShop);
+    SOL_REGISTER("getMonstrosityExits", CLuaBaseEntity::getMonstrosityExits);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);

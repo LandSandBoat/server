@@ -6,10 +6,6 @@
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.monstrosity.odysseanPassageOnTrade(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     xi.monstrosity.odysseanPassageOnTrigger(player, npc)
 end

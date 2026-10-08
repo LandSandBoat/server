@@ -8,10 +8,6 @@ require('scripts/globals/monstrosity')
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.monstrosity.teyrnonOnTrade(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     xi.monstrosity.teyrnonOnTrigger(player, npc)
 end

@@ -24,10 +24,17 @@
 #include <cstring>
 
 #include "entities/char_entity.h"
+#include "spell.h"
 
 GP_SERV_COMMAND_MAGIC_DATA::GP_SERV_COMMAND_MAGIC_DATA(const CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     std::memcpy(packet.MagicDataTbl, &PChar->m_SpellList, sizeof(packet.MagicDataTbl));
+
+    // A Monipulator keeps only its Trusts listed.
+    if (PChar->m_PMonstrosity)
+    {
+        std::memset(packet.MagicDataTbl, 0, static_cast<uint16>(SpellID::Shantotto) / 8);
+    }
 }

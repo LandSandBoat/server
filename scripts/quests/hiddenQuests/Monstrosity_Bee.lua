@@ -44,7 +44,7 @@ quest.sections =
         check = function(player, questVars, vars)
             return xi.settings.main.ENABLE_MONSTROSITY == 1 and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
-                not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrosity.species.BEE)
+                not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE)
         end,
 
         [xi.zone.FERETORY] =
@@ -68,7 +68,7 @@ quest.sections =
                 [11] = function(player, csid, option, npc)
                     if option == 1 + getCheckValue(quest:getVar(player, 'Option')) then
                         if quest:complete(player) then
-                            xi.monstrosity.unlockSpecies(xi.monstrosity.species.BEE)
+                            xi.monstrosity.unlockSpecies(player, xi.monstrositySpecies.BEE)
                             player:messageSpecial(feretoryID.text.MAY_POSSESS_BEES)
                         end
                     elseif option == 2 then

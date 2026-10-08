@@ -25,9 +25,9 @@ local baseNpcEvents =
 
 local tradeItems =
 {
-    { xi.item.LIZARD_TAIL, xi.monstrosity.species.LIZARD },
-    { xi.item.RABBIT_HIDE, xi.monstrosity.species.RABBIT },
-    { xi.item.TWO_LEAF_MANDRAGORA_BUD, xi.monstrosity.species.MANDRAGORA },
+    { xi.item.LIZARD_TAIL,             xi.monstrositySpecies.LIZARD     },
+    { xi.item.RABBIT_HIDE,             xi.monstrositySpecies.RABBIT     },
+    { xi.item.TWO_LEAF_MANDRAGORA_BUD, xi.monstrositySpecies.MANDRAGORA },
 }
 
 local suspiciousCityNpc =

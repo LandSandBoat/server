@@ -56,13 +56,15 @@ auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity
     if (this->MainJobIndex)
     {
         pv.range("MainJobIndex", this->MainJobIndex, 0x01, MAX_JOBTYPE - 1)
-            .mustEqual((PChar->jobs.unlocked & (1 << this->MainJobIndex)) != 0, true, "Main job not unlocked");
+            .mustEqual((PChar->jobs.unlocked & (1 << this->MainJobIndex)) != 0, true, "Main job not unlocked")
+            .mustEqual(this->MainJobIndex != static_cast<uint8>(xi::Job::MON), true, "MON is only entered through the Feretory");
     }
 
     if (this->SupportJobIndex)
     {
         pv.range("SupportJobIndex", this->SupportJobIndex, 0x00, MAX_JOBTYPE - 1)
-            .mustEqual((PChar->jobs.unlocked & (1 << this->SupportJobIndex)) != 0, true, "Support job not unlocked");
+            .mustEqual((PChar->jobs.unlocked & (1 << this->SupportJobIndex)) != 0, true, "Support job not unlocked")
+            .mustEqual(this->SupportJobIndex != static_cast<uint8>(xi::Job::MON), true, "MON is never a support job");
     }
 
     return pv;

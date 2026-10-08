@@ -39,11 +39,12 @@
 #include "utils/battleutils.h"
 #include "zone.h"
 
-CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
+CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride, const Maybe<uint16> tpCostOverride)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_wsid(wsid)
 , m_castTimeOverride(castTimeOverride)
+, m_tpCostOverride(tpCostOverride)
 , m_spentTP(0)
 {
     // Capture constructor arguments into members and nothing else. All other logic goes into init().
@@ -148,7 +149,12 @@ void CMobSkillState::SpendCost()
 {
     if (!m_PSkill->isTpFreeSkill())
     {
-        if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sekkanoki))
+        if (m_tpCostOverride.has_value())
+        {
+            // Monstrosity skills each cost a fixed amount rather than the whole TP bar.
+            m_spentTP = m_PEntity->addTP(-m_tpCostOverride.value());
+        }
+        else if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sekkanoki))
         {
             m_spentTP = m_PEntity->addTP(-1000);
             m_PEntity->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Sekkanoki);
@@ -297,14 +303,24 @@ void CMobSkillState::reduceTpOnInterrupt() const
         // Thus while incomplete, is better than nothing.
         if (m_PEntity->StatusEffectContainer && m_PEntity->StatusEffectContainer->HasPreventActionEffect() && !m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui))
         {
-            int16 tp = m_spentTP;
-            if (tp >= 2900)
+            const auto refundedTP = [&]() -> int16
             {
-                m_PEntity->health.tp = std::floor(std::round(0.333333f * tp));
+                if (m_spentTP >= 2900)
+                {
+                    return static_cast<int16>(std::round(m_spentTP / 3.0f));
+                }
+
+                return static_cast<int16>(std::floor(0.25f * m_spentTP));
+            }();
+
+            // A fixed-cost skill only spent its cost, so the rest of the bar survives.
+            if (m_tpCostOverride.has_value())
+            {
+                m_PEntity->health.tp = std::clamp<int16>(m_PEntity->health.tp + refundedTP, 0, 3000);
             }
             else
             {
-                m_PEntity->health.tp = std::floor(0.25f * tp);
+                m_PEntity->health.tp = refundedTP;
             }
         }
     }

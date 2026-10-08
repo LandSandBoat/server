@@ -50,6 +50,7 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
@@ -115,6 +116,28 @@ CBattleEntity::~CBattleEntity()
 {
     TracyZoneScoped;
 }
+
+namespace
+{
+
+// Null unless the entity is a player in Monstrosity.
+auto asMonipulator(const CBattleEntity* PEntity) -> const CCharEntity*
+{
+    if (PEntity->objtype != TYPE_PC)
+    {
+        return nullptr;
+    }
+
+    const auto* PChar = static_cast<const CCharEntity*>(PEntity);
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return nullptr;
+    }
+
+    return PChar;
+}
+
+} // namespace
 
 bool CBattleEntity::IsDualWielding()
 {
@@ -492,7 +515,29 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        uint16 weaponDelay = weapon->getDelay() + getMod(xi::Mod::DELAY);
+        const auto* PMonipulator = asMonipulator(this);
+
+        const auto baseDelay = [&]() -> uint16
+        {
+            if (PMonipulator == nullptr)
+            {
+                return weapon->getDelay();
+            }
+
+            const auto swings = [&]() -> uint16
+            {
+                if (weapon->isHandToHand())
+                {
+                    return 2;
+                }
+
+                return 1;
+            }();
+
+            return monstrosity::GetBaseDelay(PMonipulator) * swings * 1000 / 60;
+        }();
+
+        auto weaponDelay = static_cast<uint16>(baseDelay + getMod(xi::Mod::DELAY));
 
         // Flat bonuses/Penalties (Bonuses would be negative in value)
         int16 martialArts = 0;
@@ -502,9 +547,9 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
         float hasteMultiplier     = 1.0f;
         float delayModMultiplier  = 1.0f + getMod(xi::Mod::DELAYP) / 100.0f;
 
-        // H2H (Mobs do not benefit from Martial Arts)
+        // H2H (Mobs and Monipulators do not benefit from Martial Arts)
         // TODO: Do Trusts benefit from Martial Arts?
-        if (weapon->isHandToHand() && objtype != TYPE_MOB)
+        if (weapon->isHandToHand() && objtype != TYPE_MOB && PMonipulator == nullptr)
         {
             martialArts = getMod(xi::Mod::MARTIAL_ARTS) * 1000 / 60; // TODO: Job points?
         }
@@ -713,6 +758,11 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         }
     }
 
+    if (const auto* PMonipulator = asMonipulator(this))
+    {
+        return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::MAIN_DMG_RATING), 1, 65535));
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && dynamic_cast<const CCharEntity*>(this) != nullptr)
@@ -797,6 +847,12 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     TracyZoneScoped;
 
     uint16 dmg = 0;
+
+    // Ranged monster moves such as Sharp Sting hit as hard as the Monipulator's melee.
+    if (const auto* PMonipulator = asMonipulator(this))
+    {
+        return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::RANGED_DMG_RATING), 1, 65535));
+    }
 
     if (objtype == TYPE_MOB)
     {
@@ -1774,6 +1830,11 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
         m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
+    }
+    else if (asMonipulator(this) != nullptr)
+    {
+        // A Monipulator's sub job is MON at its main level.
+        m_slvl = m_mlvl;
     }
     else if (this->objtype == TYPE_PET)
     {

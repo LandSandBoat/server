@@ -94,6 +94,7 @@ xi.msg.basic =
     READIES_SKILL                   = 43,  -- <entity> readies <skill>.
     READIES_WS                      = 43,  -- <actor> readies <weapon_skill>.
     SPIKES_EFFECT_DMG               = 44,  -- <Defender>'s spikes deal <number> points of damage to the <Attacker>.
+    LEARNS_ABILITY                  = 45,  -- <target> learns <ability>!
     MAGIC_CANNOT_CAST               = 47,  -- <caster> cannot cast <spell>.
     MAGIC_CANNOT_BE_CAST            = 48,  -- <spell> cannot be cast on <target>. (example: tractor)
     UNABLE_TO_CAST_SPELLS           = 49,  -- The <player> is unable to cast spells.

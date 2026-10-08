@@ -1,0 +1,211 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+# Monstrosity variants. The value is a bit index into the variant ownership bitfield.
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.monstrosityVariant
+
+values:
+  # Rabbit
+  onyx_rabbit:      0
+  alabaster_rabbit: 1
+  lapinion:         2
+
+  # Behemoth
+  elasmoth: 3
+
+  # Tiger
+  legendary_tiger: 5
+  smilodon:        6
+
+  # Sheep
+  karakul: 7
+
+  # Coeurl
+  lynx:          10
+  collared_lynx: 11
+
+  # Manticore
+  legendary_manticore: 12
+
+  # Cerberus
+  orthrus: 13
+
+  # Gnole
+  bipedal_gnole: 14
+
+  # Funguar
+  coppercap: 15
+
+  # Treant Sapling
+  treant:                16
+  flowering_treant:      17
+  scarlet_tinged_treant: 18
+  barren_treant:         19
+  necklaced_treant:      20
+
+  # Morbol
+  pygmy_morbol: 21
+  scare_morbol: 22
+  ameretat:     23
+  purbol:       24
+
+  # Mandragora
+  korrigan:               25
+  lycopodium:             26
+  pygmy_mandragora:       27
+  adenium:                28
+  pachypodium:            29
+  enlightened_mandragora: 30
+  new_year_mandragora:    31
+
+  # Sabotender
+  sabotender_florido: 32
+
+  # Rafflesia
+  mitrastema: 33
+
+  # Bee
+  vermillion_and_onyx_bee: 34
+  zaffre_bee:              35
+
+  # Beetle
+  onyx_beetle:    36
+  gamboge_beetle: 37
+
+  # Crawler
+  eruca:                 38
+  emerald_crawler:       39
+  pygmy_emerald_crawler: 40
+
+  # Fly
+  vermillion_fly: 41
+
+  # Scorpion
+  scolopendrid:         42
+  unusual_scolopendrid: 43
+
+  # Spider
+  reticulated_spider:         44
+  vermillion_and_onyx_spider: 45
+
+  # Antlion
+  onyx_antlion: 46
+  formiceros:   47
+
+  # Diremite
+  arundimite: 48
+
+  # Chigoe
+  azure_chigoe: 49
+
+  # Wamouracampa
+  coiled_wamouracampa: 50
+
+  # Wamoura
+  wamoura:       51
+  coral_wamoura: 52
+
+  # Ladybug
+  gold_ladybug: 53
+
+  # Gnat
+  midge: 54
+
+  # Lizard
+  ashen_lizard: 59
+
+  # Raptor
+  emerald_raptor:    60
+  vermillion_raptor: 61
+
+  # Adamantoise
+  pygmy_adamantoise:     62
+  legendary_adamantoise: 63
+  ferromantoise:         64
+
+  # Bugard
+  abyssobugard: 65
+
+  # Eft
+  tarichuk: 66
+
+  # Wivre
+  unusual_wivre: 67
+
+  # Peiste
+  sibilus: 68
+
+  # Slime
+  clot:       73
+  gold_slime: 74
+  boil:       75
+
+  # Flan
+  gold_flan:  76
+  blancmange: 77
+
+  # Sandworm
+  pygmy_sandworm: 78
+  gigaworm:       79
+
+  # Leech
+  azure_leech: 80
+  obdella:     81
+
+  # Crab
+  vermillion_crab:                 84
+  basket_burdened_crab:            85
+  vermillion_basket_burdened_crab: 86
+  porter_crab:                     87
+
+  # Pugil
+  jagil: 88
+
+  # Sea Monk
+  azure_sea_monk: 89
+
+  # Uragnite
+  limascabra: 90
+
+  # Orobon
+  pygmy_orobon: 91
+  ogrebon:      92
+
+  # Toad
+  azure_toad:      93
+  vermillion_toad: 94
+
+  # Bird
+  onyx_bird: 95
+
+  # Cockatrice
+  ziz: 96
+
+  # Roc
+  legendary_roc: 97
+  gagana:        98
+
+  # Bat
+  bats:             99
+  vermillion_bat:  100
+  vermillion_bats: 101
+
+  # Apkallu
+  inguza: 102
+
+  # Colibri
+  toucalibri: 103
+
+  # Amphiptere
+  sanguiptere: 104
+
+  # Slime
+  she_slime:   252
+  metal_slime: 253
+
+  # Spriggan
+  spriggan_c: 254
+  spriggan_g: 255

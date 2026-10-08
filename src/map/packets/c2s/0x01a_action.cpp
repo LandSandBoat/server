@@ -106,7 +106,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Attack:
                     {
                         // Note: It is possible to attack while fishing on retail and is disabled here on purpose.
-                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Gestation });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::CastMagic:
@@ -115,7 +115,8 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Weaponskill:
                     case GP_CLI_COMMAND_ACTION_ACTIONID::MonsterSkill: // MonsterSkill is entirely assumed
                     {
-                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted })
+                        // A Monipulator under Gestation cannot be seen, so nothing it starts may land.
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted, BlockedState::Gestation })
                             .mustEqual(PChar->animation == xi::Animation::None || PChar->animation == xi::Animation::Attack, true, "Character in invalid animation state.");
                         break;
                     }

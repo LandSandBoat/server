@@ -108,6 +108,8 @@ void LoadWeaponSkillsList();
 void LoadMobSkillsList();
 void LoadPetSkillsList();
 
+[[nodiscard]] auto GetEcosystemStrongAgainst(xi::Ecosystem ecosystem) -> xi::Ecosystem;
+
 uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon);
 
 uint8 getHitCount(uint8 hits);
