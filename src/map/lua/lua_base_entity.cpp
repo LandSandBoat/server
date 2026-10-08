@@ -7136,6 +7136,13 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         charutils::RemoveAllEquipMods(PChar);
         PChar->jobs.unlocked |= (1 << newJob);
         PChar->SetMJob(newJob);
+
+        // Monstrosity data only exists while the job is MON.
+        if (newJob != static_cast<uint8>(xi::Job::MON))
+        {
+            PChar->m_PMonstrosity = nullptr;
+        }
+
         charutils::ApplyAllEquipMods(PChar);
         puppetutils::LoadAutomaton(PChar);
 
@@ -7753,22 +7760,12 @@ sol::table CLuaBaseEntity::getMonstrosityData()
         return sol::lua_nil;
     }
 
-    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
-    if (!startsWithMonstrosityData)
+    if (PChar->m_PMonstrosity != nullptr)
     {
-        monstrosity::ReadMonstrosityData(PChar);
+        return luautils::GetMonstrosityLuaTable(*PChar->m_PMonstrosity);
     }
 
-    auto table = luautils::GetMonstrosityLuaTable(PChar);
-
-    // If we didn't start with Monstrosity data, we should wipe it out now so we
-    // don't change modes
-    if (!startsWithMonstrosityData)
-    {
-        PChar->m_PMonstrosity = nullptr;
-    }
-
-    return table;
+    return luautils::GetMonstrosityLuaTable(*monstrosity::LoadMonstrosityData(PChar->id));
 }
 
 void CLuaBaseEntity::setMonstrosityData(sol::table table)
@@ -7779,25 +7776,18 @@ void CLuaBaseEntity::setMonstrosityData(sol::table table)
         return;
     }
 
-    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
-
-    // NOTE: This will populate m_PMonstrosity if it doesn't exist
-    monstrosity::ReadMonstrosityData(PChar);
-
-    luautils::SetMonstrosityLuaTable(PChar, std::move(table));
-
-    monstrosity::WriteMonstrosityData(PChar);
-
-    // If we didn't start with Monstrosity data, we should wipe it out now so we
-    // don't change modes
-    if (!startsWithMonstrosityData)
+    if (PChar->m_PMonstrosity != nullptr)
     {
-        PChar->m_PMonstrosity = nullptr;
-    }
-    else
-    {
+        luautils::SetMonstrosityLuaTable(*PChar->m_PMonstrosity, std::move(table));
+        monstrosity::WriteMonstrosityData(PChar);
         monstrosity::SendFullMonstrosityUpdate(PChar);
+        return;
     }
+
+    // Outside MON only the saved progress changes.
+    auto data = monstrosity::LoadMonstrosityData(PChar->id);
+    luautils::SetMonstrosityLuaTable(*data, std::move(table));
+    monstrosity::SaveMonstrosityData(PChar->id, *data);
 }
 
 bool CLuaBaseEntity::getBelligerencyFlag()
@@ -7851,28 +7841,32 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
         return;
     }
 
-    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
-    if (!startsWithMonstrosityData)
+    // Outside MON only the saved progress changes.
+    auto loaded = std::unique_ptr<monstrosity::MonstrosityData_t>{};
+    if (PChar->m_PMonstrosity == nullptr)
     {
-        monstrosity::ReadMonstrosityData(PChar);
+        loaded = monstrosity::LoadMonstrosityData(PChar->id);
     }
 
-    PChar->m_PMonstrosity->EntryPos.x        = x;
-    PChar->m_PMonstrosity->EntryPos.y        = y;
-    PChar->m_PMonstrosity->EntryPos.z        = z;
-    PChar->m_PMonstrosity->EntryPos.rotation = rot;
-    PChar->m_PMonstrosity->EntryZoneId       = zoneId;
-    PChar->m_PMonstrosity->EntryMainJob      = mjob;
-    PChar->m_PMonstrosity->EntrySubJob       = sjob;
-
-    monstrosity::WriteMonstrosityData(PChar);
-
-    // If we didn't start with Monstrosity data, we should wipe it out now so we
-    // don't change modes
-    if (!startsWithMonstrosityData)
+    auto& data = [&]() -> monstrosity::MonstrosityData_t&
     {
-        PChar->m_PMonstrosity = nullptr;
-    }
+        if (loaded)
+        {
+            return *loaded;
+        }
+
+        return *PChar->m_PMonstrosity;
+    }();
+
+    data.EntryPos.x        = x;
+    data.EntryPos.y        = y;
+    data.EntryPos.z        = z;
+    data.EntryPos.rotation = rot;
+    data.EntryZoneId       = zoneId;
+    data.EntryMainJob      = mjob;
+    data.EntrySubJob       = sjob;
+
+    monstrosity::SaveMonstrosityData(PChar->id, data);
 }
 
 auto CLuaBaseEntity::getMonstrosityShop() -> sol::table

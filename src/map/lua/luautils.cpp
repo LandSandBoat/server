@@ -4570,28 +4570,28 @@ int32 OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMo
     return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
 }
 
-auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table
+auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::table
 {
     TracyZoneScoped;
 
     // TODO: lua_monstrosity.cpp?
     auto table = lua.create_table();
 
-    table["monstrosityId"] = PChar->m_PMonstrosity->MonstrosityId;
-    table["species"]       = PChar->m_PMonstrosity->Species;
-    table["flags"]         = PChar->m_PMonstrosity->Flags;
-    table["entry_x"]       = PChar->m_PMonstrosity->EntryPos.x;
-    table["entry_y"]       = PChar->m_PMonstrosity->EntryPos.y;
-    table["entry_z"]       = PChar->m_PMonstrosity->EntryPos.z;
-    table["entry_rot"]     = PChar->m_PMonstrosity->EntryPos.rotation;
-    table["entry_zone_id"] = PChar->m_PMonstrosity->EntryZoneId;
-    table["entry_mjob"]    = PChar->m_PMonstrosity->EntryMainJob;
-    table["entry_sjob"]    = PChar->m_PMonstrosity->EntrySubJob;
+    table["monstrosityId"] = data.MonstrosityId;
+    table["species"]       = data.Species;
+    table["flags"]         = data.Flags;
+    table["entry_x"]       = data.EntryPos.x;
+    table["entry_y"]       = data.EntryPos.y;
+    table["entry_z"]       = data.EntryPos.z;
+    table["entry_rot"]     = data.EntryPos.rotation;
+    table["entry_zone_id"] = data.EntryZoneId;
+    table["entry_mjob"]    = data.EntryMainJob;
+    table["entry_sjob"]    = data.EntrySubJob;
 
     {
         std::size_t idx = 0;
         table["levels"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->levels)
+        for (auto entry : data.levels)
         {
             table["levels"][idx++] = entry;
         }
@@ -4600,7 +4600,7 @@ auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table
     {
         std::size_t idx    = 0;
         table["instincts"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->instincts)
+        for (auto entry : data.instincts)
         {
             table["instincts"][idx++] = entry;
         }
@@ -4609,7 +4609,7 @@ auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table
     {
         std::size_t idx   = 0;
         table["variants"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->variants)
+        for (auto entry : data.variants)
         {
             table["variants"][idx++] = entry;
         }
@@ -4618,65 +4618,65 @@ auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table
     return table;
 }
 
-void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
+void SetMonstrosityLuaTable(monstrosity::MonstrosityData_t& data, sol::table table)
 {
     TracyZoneScoped;
 
     if (table["monstrosityId"].valid())
     {
-        PChar->m_PMonstrosity->MonstrosityId = table.get<uint8>("monstrosityId");
+        data.MonstrosityId = table.get<uint8>("monstrosityId");
     }
 
     if (table["species"].valid())
     {
-        PChar->m_PMonstrosity->Species = table.get<uint16>("species");
+        data.Species = table.get<uint16>("species");
     }
 
     if (table["flags"].valid())
     {
-        PChar->m_PMonstrosity->Flags = table.get<uint16>("flags");
+        data.Flags = table.get<uint16>("flags");
     }
 
     if (table["entry_x"].valid())
     {
-        PChar->m_PMonstrosity->EntryPos.x = table.get<float>("entry_x");
+        data.EntryPos.x = table.get<float>("entry_x");
     }
 
     if (table["entry_y"].valid())
     {
-        PChar->m_PMonstrosity->EntryPos.y = table.get<float>("entry_y");
+        data.EntryPos.y = table.get<float>("entry_y");
     }
 
     if (table["entry_z"].valid())
     {
-        PChar->m_PMonstrosity->EntryPos.z = table.get<float>("entry_z");
+        data.EntryPos.z = table.get<float>("entry_z");
     }
 
     if (table["entry_rot"].valid())
     {
-        PChar->m_PMonstrosity->EntryPos.rotation = table.get<uint8>("entry_rot");
+        data.EntryPos.rotation = table.get<uint8>("entry_rot");
     }
 
     if (table["entry_zone_id"].valid())
     {
-        PChar->m_PMonstrosity->EntryZoneId = table.get<uint16>("entry_zone_id");
+        data.EntryZoneId = table.get<uint16>("entry_zone_id");
     }
 
     if (table["entry_mjob"].valid())
     {
-        PChar->m_PMonstrosity->EntryMainJob = table.get<uint8>("entry_mjob");
+        data.EntryMainJob = table.get<uint8>("entry_mjob");
     }
 
     if (table["entry_sjob"].valid())
     {
-        PChar->m_PMonstrosity->EntrySubJob = table.get<uint8>("entry_sjob");
+        data.EntrySubJob = table.get<uint8>("entry_sjob");
     }
 
     if (table["levels"].valid())
     {
         for (const auto& [keyObj, valObj] : table.get<sol::table>("levels"))
         {
-            PChar->m_PMonstrosity->levels.at(keyObj.as<uint8>()) = valObj.as<uint8>();
+            data.levels.at(keyObj.as<uint8>()) = valObj.as<uint8>();
         }
     }
 
@@ -4686,7 +4686,7 @@ void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
         {
             uint8 key = keyObj.as<uint8>();
             uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->instincts[key] |= val;
+            data.instincts[key] |= val;
         }
     }
 
@@ -4696,7 +4696,7 @@ void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
         {
             uint8 key = keyObj.as<uint8>();
             uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->variants[key] |= val;
+            data.variants[key] |= val;
         }
     }
 }

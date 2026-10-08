@@ -123,6 +123,13 @@ struct action_t;
 struct action_target_t;
 struct action_result_t;
 
+namespace monstrosity
+{
+
+struct MonstrosityData_t;
+
+} // namespace monstrosity
+
 enum ConquestUpdate : uint8;
 enum class Emote : uint8;
 
@@ -464,8 +471,8 @@ void   OnMobSkillFinalize(CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers 
 int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
 int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
-auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table;
-void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table data);
+auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::table;
+void SetMonstrosityLuaTable(monstrosity::MonstrosityData_t& data, sol::table table);
 void OnMonstrosityReturnToEntrance(CCharEntity* PChar);
 
 int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);

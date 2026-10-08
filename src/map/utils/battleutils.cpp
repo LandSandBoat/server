@@ -1785,15 +1785,16 @@ int16 CalculateBaseTP(CBattleEntity* PEntity, int32 delay)
 
 auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
 {
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(PEntity))
+    {
+        return monstrosity::GetBaseDelay(PMonipulator);
+    }
+
     CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(PEntity);
     CMobEntity*  PMobEntity  = dynamic_cast<CMobEntity*>(PEntity);
     uint16       baseDelay   = 480; // h2h "unequipped" base delay
 
-    if (PCharEntity && PCharEntity->m_PMonstrosity != nullptr)
-    {
-        baseDelay = monstrosity::GetBaseDelay(PCharEntity);
-    }
-    else if (PCharEntity)
+    if (PCharEntity)
     {
         CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
         CItemWeapon* PSubWeapon  = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_SUB));

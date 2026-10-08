@@ -56,6 +56,7 @@
 #include "packets/s2c/0x119_abil_recast.h"
 
 #include "grades.h"
+#include "items/item_weapon.h"
 #include "merit.h"
 #include "utils/charutils.h"
 #include "utils/mobutils.h"
@@ -403,7 +404,7 @@ auto monstrosity::GetStaticData() -> const xi::data::Monstrosity&
     return gMonstrosityData;
 }
 
-void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
+auto monstrosity::LoadMonstrosityData(const uint32 charId) -> std::unique_ptr<MonstrosityData_t>
 {
     auto data = std::make_unique<MonstrosityData_t>();
 
@@ -427,7 +428,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
                                  "entry_mjob, "
                                  "entry_sjob "
                                  "FROM char_monstrosity WHERE charid = ? LIMIT 1",
-                                 PChar->id);
+                                 charId);
 
     if (rset && rset->rowsCount() && rset->next())
     {
@@ -464,7 +465,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
 
     applyLevelInstincts(*data);
 
-    PChar->m_PMonstrosity = std::move(data);
+    return data;
 }
 
 void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
@@ -474,6 +475,11 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         return;
     }
 
+    SaveMonstrosityData(PChar->id, *PChar->m_PMonstrosity);
+}
+
+void monstrosity::SaveMonstrosityData(const uint32 charId, const MonstrosityData_t& data)
+{
     const char* query =
         "INSERT INTO char_monstrosity SET "
         "charid = ?, "
@@ -513,26 +519,32 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         "entry_mjob = VALUES(entry_mjob), "
         "entry_sjob = VALUES(entry_sjob)";
 
+    // The blob binding takes mutable arrays.
+    auto equipped  = data.EquippedInstincts;
+    auto levels    = data.levels;
+    auto instincts = data.instincts;
+    auto variants  = data.variants;
+
     db::preparedStmt(
         query,
-        PChar->id,
-        PChar->m_PMonstrosity->MonstrosityId,
-        PChar->m_PMonstrosity->Species,
-        PChar->m_PMonstrosity->NamePrefix1,
-        PChar->m_PMonstrosity->NamePrefix2,
-        PChar->m_PMonstrosity->CurrentExp,
-        PChar->m_PMonstrosity->EquippedInstincts,
-        PChar->m_PMonstrosity->levels,
-        PChar->m_PMonstrosity->instincts,
-        PChar->m_PMonstrosity->variants,
-        static_cast<uint8>(PChar->m_PMonstrosity->Belligerency),
-        PChar->m_PMonstrosity->EntryPos.x,
-        PChar->m_PMonstrosity->EntryPos.y,
-        PChar->m_PMonstrosity->EntryPos.z,
-        PChar->m_PMonstrosity->EntryPos.rotation,
-        PChar->m_PMonstrosity->EntryZoneId,
-        PChar->m_PMonstrosity->EntryMainJob,
-        PChar->m_PMonstrosity->EntrySubJob);
+        charId,
+        data.MonstrosityId,
+        data.Species,
+        data.NamePrefix1,
+        data.NamePrefix2,
+        data.CurrentExp,
+        equipped,
+        levels,
+        instincts,
+        variants,
+        static_cast<uint8>(data.Belligerency),
+        data.EntryPos.x,
+        data.EntryPos.y,
+        data.EntryPos.z,
+        data.EntryPos.rotation,
+        data.EntryZoneId,
+        data.EntryMainJob,
+        data.EntrySubJob);
 }
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
@@ -541,7 +553,7 @@ void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 
     if (settings::get<bool>("main.ENABLE_MONSTROSITY") && PChar->GetMJob() == xi::Job::MON)
     {
-        ReadMonstrosityData(PChar);
+        PChar->m_PMonstrosity = LoadMonstrosityData(PChar->id);
 
         applySpeciesState(PChar);
 
@@ -911,6 +923,70 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
     PChar->stats.INT = values[4];
     PChar->stats.MND = values[5];
     PChar->stats.CHR = values[6];
+}
+
+auto monstrosity::AsMonipulator(const CBattleEntity* PEntity) -> const CCharEntity*
+{
+    if (PEntity->objtype != TYPE_PC)
+    {
+        return nullptr;
+    }
+
+    const auto* PChar = static_cast<const CCharEntity*>(PEntity);
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return nullptr;
+    }
+
+    return PChar;
+}
+
+auto monstrosity::GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs
+{
+    const auto& data = *PChar->m_PMonstrosity;
+    return SpeciesJobs{
+        .mainJob = data.MainJob,
+        .subJob  = data.SubJob,
+        .level   = data.levels[data.MonstrosityId],
+    };
+}
+
+// The round delay in ms. A MNK species swings twice a round, so its round takes two hits' delay.
+auto monstrosity::GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PWeapon) -> uint16
+{
+    const auto swings = [&]() -> uint16
+    {
+        if (PWeapon->isHandToHand())
+        {
+            return 2;
+        }
+
+        return 1;
+    }();
+
+    return static_cast<uint16>(GetBaseDelay(PChar) * swings * 1000 / 60);
+}
+
+// Only kills pay infamy. Infamy already held above the cap is never taken away.
+void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
+{
+    const auto infamy = static_cast<int32>(exp * settings::get<float>("main.MONSTROSITY_INFAMY_RATE"));
+    if (infamy <= 0)
+    {
+        return;
+    }
+
+    const auto cap = [&]() -> int32
+    {
+        if (PChar->m_PMonstrosity->Belligerency)
+        {
+            return kInfamyCapBelligerency;
+        }
+
+        return kInfamyCap;
+    }();
+
+    charutils::AddPoints(PChar, "infamy", infamy, std::max(cap, charutils::GetPoints(PChar, "infamy")));
 }
 
 // Delay per hit. MNK species swing twice a round.

@@ -235,7 +235,7 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
 
     if (PChar->GetMJob() == xi::Job::MON && PChar->m_PMonstrosity == nullptr)
     {
-        monstrosity::ReadMonstrosityData(PChar);
+        PChar->m_PMonstrosity = monstrosity::LoadMonstrosityData(PChar->id);
     }
 
     if (PChar->loc.zone->GetID() == xi::ZoneId::Feretory)

@@ -95,6 +95,24 @@ describe('Monstrosity restrictions', function()
         assert(player:getCurrency('infamy') == 50000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
 
+    it('drops MON behaviour as soon as the job changes away from MON', function()
+        becomeSpecies(xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 10)
+        assert(player:getBaseDelay() == 240, string.format('a Lizard has delay %d', player:getBaseDelay()))
+
+        player:changeJob(xi.job.WAR)
+        assert(player:getBaseDelay() == 480, string.format('a WAR kept delay %d', player:getBaseDelay()))
+    end)
+
+    it('edits saved progress outside MON without entering it', function()
+        player:changeJob(xi.job.WAR)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        xi.monstrosity.setSpeciesLevel(player, xi.monstrositySpecies.LIZARD, 20)
+
+        assert(xi.monstrosity.getSpeciesLevel(player, xi.monstrositySpecies.LIZARD) == 20, 'the Lizard level was not saved')
+        assert(player:getBaseDelay() == 480, string.format('a WAR has delay %d', player:getBaseDelay()))
+        assert(player:getMonstrositySize() == 0, 'editing saved progress entered MON')
+    end)
+
     it('refuses Relinquish off MON', function()
         player:changeJob(xi.job.WAR)
         local relinquish = require('scripts/actions/abilities/relinquish')

@@ -31,10 +31,13 @@
 #include "data/enums/zone.h"
 
 #include <array>
+#include <memory>
 #include <vector>
 
 struct mon_data_t;
+class CBattleEntity;
 class CCharEntity;
+class CItemWeapon;
 class CSpell;
 
 namespace xi::data
@@ -95,8 +98,10 @@ void LoadStaticData();
 
 [[nodiscard]] auto GetStaticData() -> const xi::data::Monstrosity&;
 
-void ReadMonstrosityData(CCharEntity* PChar);
-void WriteMonstrosityData(CCharEntity* PChar);
+// char_monstrosity holds a character's Monstrosity progress even while it is not in MON.
+[[nodiscard]] auto LoadMonstrosityData(uint32 charId) -> std::unique_ptr<MonstrosityData_t>;
+void               SaveMonstrosityData(uint32 charId, const MonstrosityData_t& data);
+void               WriteMonstrosityData(CCharEntity* PChar);
 
 void TryPopulateMonstrosityData(CCharEntity* PChar);
 void HandleZoneIn(CCharEntity* PChar);
@@ -111,6 +116,20 @@ void CalculateStats(CCharEntity* PChar);
 void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 void HandleLevelUp(CCharEntity* PChar);
 
+// The player in MON, or null. m_PMonstrosity is only ever set while the job is MON.
+[[nodiscard]] auto AsMonipulator(const CBattleEntity* PEntity) -> const CCharEntity*;
+
+struct SpeciesJobs
+{
+    xi::Job mainJob;
+    xi::Job subJob;
+    uint8   level;
+};
+
+// The jobs and level a Monipulator fights with. Its sub job is at the main level.
+[[nodiscard]] auto GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs;
+[[nodiscard]] auto GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PWeapon) -> uint16;
+void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;

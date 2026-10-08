@@ -231,14 +231,13 @@ void CalculateStats(CCharEntity* PChar)
         sjob = xi::Job::WAR;
     }
 
-    // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
-    //     : combination of main/sub job for stats, traits and abilities.
     if (PChar->m_PMonstrosity != nullptr)
     {
-        mjob = PChar->m_PMonstrosity->MainJob;
-        sjob = PChar->m_PMonstrosity->SubJob;
-        mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
-        slvl = mlvl;
+        const auto species = monstrosity::GetSpeciesJobs(PChar);
+        mjob               = species.mainJob;
+        sjob               = species.subJob;
+        mlvl               = species.level;
+        slvl               = species.level;
     }
 
     uint8 race = 0; // Hume
@@ -3749,14 +3748,13 @@ void BuildingCharTraitsTable(CCharEntity* PChar)
     auto mlvl = PChar->GetMLevel();
     auto slvl = PChar->GetSLevel();
 
-    // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
-    //     : combination of main/sub job for stats, traits and abilities.
     if (PChar->m_PMonstrosity != nullptr)
     {
-        mjob = PChar->m_PMonstrosity->MainJob;
-        sjob = PChar->m_PMonstrosity->SubJob;
-        mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
-        slvl = mlvl;
+        const auto species = monstrosity::GetSpeciesJobs(PChar);
+        mjob               = species.mainJob;
+        sjob               = species.subJob;
+        mlvl               = species.level;
+        slvl               = species.level;
     }
 
     battleutils::AddTraits(PChar, traits::GetTraits(mjob), mlvl);
@@ -5169,26 +5167,9 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
     PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, PMob, exp);
 
-    // Only kills pay infamy.
     if (PChar->m_PMonstrosity && !expFromRaise && !fromScripts)
     {
-        const auto infamyRate = settings::get<float>("main.MONSTROSITY_INFAMY_RATE");
-        const auto infamy     = static_cast<int32>(exp * infamyRate);
-        if (infamy > 0)
-        {
-            const auto cap = [&]() -> int32
-            {
-                if (PChar->m_PMonstrosity->Belligerency)
-                {
-                    return monstrosity::kInfamyCapBelligerency;
-                }
-
-                return monstrosity::kInfamyCap;
-            }();
-
-            // Infamy already held above the cap is never taken away.
-            AddPoints(PChar, "infamy", infamy, std::max(cap, GetPoints(PChar, "infamy")));
-        }
+        monstrosity::AddInfamy(PChar, exp);
     }
 
     // Player levels up

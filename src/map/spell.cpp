@@ -721,9 +721,10 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
     // A Monipulator casts with its species' jobs.
     const auto [mainJob, subJob] = [&]() -> std::pair<xi::Job, xi::Job>
     {
-        if (const auto* PChar = dynamic_cast<const CCharEntity*>(PCaster); PChar && PChar->m_PMonstrosity)
+        if (const auto* PMonipulator = monstrosity::AsMonipulator(PCaster))
         {
-            return { PChar->m_PMonstrosity->MainJob, PChar->m_PMonstrosity->SubJob };
+            const auto species = monstrosity::GetSpeciesJobs(PMonipulator);
+            return { species.mainJob, species.subJob };
         }
 
         return { PCaster->GetMJob(), PCaster->GetSJob() };

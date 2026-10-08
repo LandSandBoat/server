@@ -117,28 +117,6 @@ CBattleEntity::~CBattleEntity()
     TracyZoneScoped;
 }
 
-namespace
-{
-
-// Null unless the entity is a player in Monstrosity.
-auto asMonipulator(const CBattleEntity* PEntity) -> const CCharEntity*
-{
-    if (PEntity->objtype != TYPE_PC)
-    {
-        return nullptr;
-    }
-
-    const auto* PChar = static_cast<const CCharEntity*>(PEntity);
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return nullptr;
-    }
-
-    return PChar;
-}
-
-} // namespace
-
 bool CBattleEntity::IsDualWielding()
 {
     if (objtype == TYPE_MOB)
@@ -515,26 +493,16 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        const auto* PMonipulator = asMonipulator(this);
+        const auto* PMonipulator = monstrosity::AsMonipulator(this);
 
         const auto baseDelay = [&]() -> uint16
         {
-            if (PMonipulator == nullptr)
+            if (PMonipulator != nullptr)
             {
-                return weapon->getDelay();
+                return monstrosity::GetWeaponDelay(PMonipulator, weapon);
             }
 
-            const auto swings = [&]() -> uint16
-            {
-                if (weapon->isHandToHand())
-                {
-                    return 2;
-                }
-
-                return 1;
-            }();
-
-            return monstrosity::GetBaseDelay(PMonipulator) * swings * 1000 / 60;
+            return weapon->getDelay();
         }();
 
         auto weaponDelay = static_cast<uint16>(baseDelay + getMod(xi::Mod::DELAY));
@@ -758,7 +726,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         }
     }
 
-    if (const auto* PMonipulator = asMonipulator(this))
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
     {
         return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::MAIN_DMG_RATING), 1, 65535));
     }
@@ -849,7 +817,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     uint16 dmg = 0;
 
     // Ranged monster moves such as Sharp Sting hit as hard as the Monipulator's melee.
-    if (const auto* PMonipulator = asMonipulator(this))
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
     {
         return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::RANGED_DMG_RATING), 1, 65535));
     }
@@ -1831,7 +1799,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     {
         m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
     }
-    else if (asMonipulator(this) != nullptr)
+    else if (monstrosity::AsMonipulator(this) != nullptr)
     {
         // A Monipulator's sub job is MON at its main level.
         m_slvl = m_mlvl;
