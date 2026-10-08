@@ -40,6 +40,13 @@ end
 function CClientEntityPairActions:useAbility(target, abilityId)
 end
 
+---Use a Monstrosity TP move on a target
+---@param target CBaseEntity Target entity
+---@param datSkillId integer Client-facing DAT skill id (e.g. 343 for Fireball)
+---@return nil
+function CClientEntityPairActions:useMonsterSkill(target, datSkillId)
+end
+
 ---Change the current target
 ---@param target CBaseEntity New target entity
 ---@return nil
