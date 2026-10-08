@@ -1424,7 +1424,7 @@ templates:
   Ogrefly:
     id:            2953
     species:       fly
-    skill_list_id: 1153
+    skill_list_id: 113
     attributes:
       combat:
         skill: polearm
