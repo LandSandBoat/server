@@ -2744,33 +2744,34 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
         return;
     }
 
-    // Apply the Moghancement
+    // Apply moghancements
+    // Desynth/Crystal data: https://www.bluegartr.com/threads/135055-Extensive-Desynthesis-Rate-Research
     int16 multiplier = isAdding ? 1 : -1;
     switch (moghancementID)
     {
         case MOGHANCEMENT_FIRE:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_FIRE, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_FIRE, 10 * multiplier);
             break;
         case MOGHANCEMENT_ICE:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_ICE, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_ICE, 10 * multiplier);
             break;
         case MOGHANCEMENT_WIND:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_WIND, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_WIND, 10 * multiplier);
             break;
         case MOGHANCEMENT_EARTH:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_EARTH, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_EARTH, 10 * multiplier);
             break;
         case MOGHANCEMENT_LIGHTNING:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_THUNDER, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_THUNDER, 10 * multiplier);
             break;
         case MOGHANCEMENT_WATER:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_WATER, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_WATER, 10 * multiplier);
             break;
         case MOGHANCEMENT_LIGHT:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_LIGHT, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_LIGHT, 10 * multiplier);
             break;
         case MOGHANCEMENT_DARK:
-            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_DARK, 5 * multiplier);
+            addModifier(xi::Mod::SYNTH_MATERIAL_LOSS_DARK, 10 * multiplier);
             break;
 
         case MOGHANCEMENT_FISHING:
@@ -2874,7 +2875,7 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             addModifier(xi::Mod::GARDENING_WILT_BONUS, 36 * multiplier);
             break;
         case MOGHANCEMENT_DESYNTHESIS:
-            addModifier(xi::Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS, 2 * multiplier);
+            addModifier(xi::Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS, 4 * multiplier);
             break;
         case MOGHANCEMENT_CONQUEST:
             addModifier(xi::Mod::CONQUEST_BONUS, 6 * multiplier);
