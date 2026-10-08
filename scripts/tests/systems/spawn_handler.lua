@@ -605,4 +605,89 @@ describe('Spawn Handler', function()
             ph.assert:isSpawned()
         end)
     end)
+
+    -- Valkurm Emperor and Golden Bat each share a spawn slot with their placeholder
+    describe('lottery slot', function()
+        ---@type CTestEntity
+        local nm
+        ---@type CTestEntity
+        local ph
+
+        local function killAndRespawn(mob)
+            player:claimAndKillMob(mob)
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+        end
+
+        before_each(function()
+            player:gotoZone(xi.zone.VALKURM_DUNES)
+            local ID = zones[xi.zone.VALKURM_DUNES]
+            nm = player.entities:get(ID.mob.VALKURM_EMPEROR)
+            ph = player.entities:get(ID.mob.VALKURM_EMPEROR - 4)
+
+            xi.test.world:setSlotChance(nm, 100)
+
+            if nm:isSpawned() then
+                nm:despawn()
+                SpawnMob(ph:getID())
+            end
+        end)
+
+        it('rolls the NM in place of its placeholder', function()
+            killAndRespawn(ph)
+
+            nm.assert:isSpawned()
+            ph.assert.no:isSpawned()
+        end)
+
+        it('brings the same NM back after it deaggros', function()
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
+
+            -- notorious mobs walk home instead of despawning, and a Hill Lizard across the zone marks walkable ground far outside the NM's region
+            nm:setMobMod(xi.mobMod.NO_DESPAWN, 0)
+            local far = player.entities:get(17199263):getPos()
+            nm:setPos(far.x, far.y, far.z)
+            nm:clearPath()
+
+            for _ = 1, 10 do
+                xi.test.world:skipTime(5)
+                xi.test.world:tickEntity(nm)
+            end
+
+            nm.assert.no:isSpawned()
+
+            xi.test.world:skipTime(65)
+            xi.test.world:tick(xi.tick.SPAWN)
+            nm.assert:isSpawned()
+            ph.assert.no:isSpawned()
+        end)
+
+        it('keeps the NM out of the roll until its cooldown ends', function()
+            local ID    = zones[xi.zone.VALKURM_DUNES]
+            local bat   = player.entities:get(ID.mob.GOLDEN_BAT)
+            local batPh = player.entities:get(ID.mob.GOLDEN_BAT - 2)
+            xi.test.world:setSlotChance(bat, 100)
+
+            killAndRespawn(batPh)
+            bat.assert:isSpawned()
+
+            -- the slot rolls again on the NM's own respawn timer
+            player:claimAndKillMob(bat)
+            xi.test.world:tick(xi.tick.SPAWN)
+            batPh.assert.no:isSpawned()
+
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+            batPh.assert:isSpawned()
+
+            killAndRespawn(batPh)
+            batPh.assert:isSpawned()
+            bat.assert.no:isSpawned()
+
+            xi.test.world:skipTime(3600)
+            killAndRespawn(batPh)
+            bat.assert:isSpawned()
+        end)
+    end)
 end)

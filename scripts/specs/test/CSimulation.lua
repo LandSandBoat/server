@@ -92,3 +92,10 @@ end
 ---@return CTestEntity[]
 function CSimulation:getSpawnSlot(zoneId, slotId)
 end
+
+---Sets the percent chance a slotted mob wins its slot's roll
+---@param entity CBaseEntity
+---@param chance integer
+---@return nil
+function CSimulation:setSlotChance(entity, chance)
+end

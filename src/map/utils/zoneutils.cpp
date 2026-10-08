@@ -253,14 +253,21 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
     {
         uint32 SlotId{};
         uint8  Chance{};
+        uint32 Cooldown{};
     };
 
     HashMap<uint16, SlotPlacement> slotByActIndex;
     for (const auto& slot : mobs.Slots)
     {
+        // A lost roll falls back on the members without a chance, so a slot without one comes up empty.
+        if (std::ranges::count(slot.Members, uint8{ 0 }, &xi::data::MobSlotMemberData::Chance) == 0)
+        {
+            ShowErrorFmt("InsertMobs: spawn slot {} in zone {} gives every member a chance", slot.Id, static_cast<uint16>(zoneId));
+        }
+
         for (const auto& member : slot.Members)
         {
-            slotByActIndex[member.ActIndex] = { slot.Id, member.Chance };
+            slotByActIndex[member.ActIndex] = { slot.Id, member.Chance, member.Cooldown };
         }
     }
 
@@ -411,7 +418,7 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
                     ShowError("Mob with ID %u in spawn slot %u in zone %u is a scripted spawn. Scripted spawns should not be assigned to spawn slots.", PMob->id, placement->second.SlotId, zoneId);
                 }
 
-                spawnSlot->AddMob(PMob, placement->second.Chance);
+                spawnSlot->AddMob(PMob, placement->second.Chance, std::chrono::seconds(placement->second.Cooldown));
             }
 
             if ((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown)

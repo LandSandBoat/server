@@ -254,7 +254,7 @@ bool CMobEntity::TrySpawn()
     {
         if (spawnSlot)
         {
-            spawnSlot->TrySpawn();
+            spawnSlot->TrySpawn(std::nullopt, SlotRoll::Boot);
             return false;
         }
 
