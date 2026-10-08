@@ -352,14 +352,15 @@ void data_session::read_func()
                 PrevZone = rset->get<uint16>("pos_prevzone");
                 gmlevel  = rset->get<uint16>("gmlevel");
 
-                // new char only (first login from char create)
-                if (session.justCreatedNewChar)
+                // the client hashes its counter after one more step for the 0x0B below and two at zone connect
+                if (session.keyCounter != 0)
                 {
-                    key3[16] += 6;
+                    ref<uint32>(key3, 16) = session.keyCounter + 3;
                 }
-
-                // TODO: is this and the above compatible?
-                key3[16] += session.incrementKeyValue;
+                else
+                {
+                    ShowWarningFmt("data_session: no lobby key counter for account {}, using the loader's", session.accountID);
+                }
 
                 ZoneIP   = str2ip(rset->get<std::string>("zoneip"));
                 ZonePort = rset->get<uint16>("zoneport");
@@ -381,13 +382,14 @@ void data_session::read_func()
                 characterSelectionResponse.ffxi_id_world = charid & 0xFFFF;
                 characterSelectionResponse.server_id     = (charid >> 16) & 0xFF; // TODO: Looks wrong? shouldn't this be a server index?
 
-                ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}",
+                ShowInfo(fmt::format("data_session: zoneid: {}, zoneipp: {}:{}, searchipp: {}:{}, for charid: {}, key counter {:08X}",
                                      ZoneID,
                                      ip2str(ZoneIP),
                                      ZonePort,
                                      ip2str(characterSelectionResponse.cache_ip),
                                      characterSelectionResponse.cache_port,
-                                     charid));
+                                     charid,
+                                     ref<uint32>(key3, 16)));
 
                 // If client was zoning out but was never seen at the destination past 2 minutes, remove old session
                 const auto rset2 = db::preparedStmt("SELECT * "
@@ -472,7 +474,6 @@ void data_session::read_func()
                         {
                             if (auto viewSession = session.view_session.get())
                             {
-                                session.incrementKeyValue += 1;
                                 loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::CHARACTER_ALREADY_LOGGED_IN);
                                 viewSession->do_write(0x24);
                                 return;
@@ -559,9 +560,7 @@ void data_session::read_func()
                 viewSession->socket_.lowest_layer().close(closeEc);
                 session.view_session = nullptr;
 
-                session.incrementKeyValue  = 0;     // Reset incremented key after inserting into db
-                session.justCreatedNewChar = false; // The client only advances its key for character creation once
-                generatedCharInfo          = false; // Reset this so next time we log out it regenerates the char info
+                generatedCharInfo = false; // Reset this so next time we log out it regenerates the char info
 
                 const auto payload = ipc::toBytesWithHeader(ipc::CharZone{
                     .charId            = charid,
