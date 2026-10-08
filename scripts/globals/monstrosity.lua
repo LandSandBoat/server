@@ -424,13 +424,18 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
             return
         end
 
-        -- The client only offers visited zones with a Feretory exit, and Belligerency zones while it is on.
-        local exits = player:getMonstrosityExits(zoneSelected)
+        -- The client only offers visited zones, and Belligerency zones while it is on.
         if
-            #exits == 0 or
             not player:hasVisitedZone(zoneSelected) or
             (player:getBelligerencyFlag() and not xi.monstrosity.belligerencyCaps[zoneSelected])
         then
+            return
+        end
+
+        -- TODO: Capture the exits for every zone. Until then a zone script places an arrival at (0, 0, 0) on its default entry point.
+        local exits = player:getMonstrosityExits(zoneSelected)
+        if #exits == 0 then
+            player:setPos(0, 0, 0, 0, zoneSelected)
             return
         end
 

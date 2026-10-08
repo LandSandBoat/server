@@ -129,16 +129,28 @@ describe('Monstrosity Feretory exits', function()
         assert(xi.monstrosity.belligerencyCaps[xi.zone.WEST_RONFAURE] == nil, 'other zones have no cap')
     end)
 
-    it('refuses a passage to a zone with no Feretory exit', function()
+    it('refuses a passage to a zone the player has not visited', function()
         xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
         player:changeJob(xi.job.MON)
         player:gotoZone(xi.zone.FERETORY)
 
         local x = player:getXPos()
         local z = player:getZPos()
+        xi.monstrosity.odysseanPassageOnEventFinish(player, 5, 1 + bit.lshift(xi.zone.WEST_SARUTABARUTA, 4))
+
+        assert(player:getXPos() == x and player:getZPos() == z, 'moved towards an unvisited zone')
+    end)
+
+    -- A zone script moves an arrival at (0, 0, 0) to its default entry point.
+    it('sends a visited zone with no listed exits to its default entry point', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player:changeJob(xi.job.MON)
+        player:gotoZone(xi.zone.FERETORY)
+
         xi.monstrosity.odysseanPassageOnEventFinish(player, 5, 1 + bit.lshift(xi.zone.WEST_RONFAURE, 4))
 
-        assert(player:getXPos() == x and player:getZPos() == z, 'moved towards a zone with no exit')
+        assert(player:getXPos() == 0 and player:getZPos() == 0, string.format('sent to (%.1f, %.1f)', player:getXPos(), player:getZPos()))
     end)
 
     it('lists every exit position for a zone', function()

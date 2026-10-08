@@ -1063,16 +1063,22 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
     }
     else if (type == GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityRetry)
     {
-        // Retail picks a random spot in the zone. Zones with no listed spots keep the place of death.
-        if (const auto exits = GetFeretoryExits(PChar->loc.zone->GetID()); !exits.empty())
+        // Retail picks a random listed spot. Without one, the zone script moves (0, 0, 0) to its default entry.
+        const auto exits    = GetFeretoryExits(PChar->loc.zone->GetID());
+        const auto position = [&]() -> std::array<float, 4>
         {
-            const auto& [x, y, z, rot] = exits[xirand::GetRandomNumber(exits.size())];
+            if (exits.empty())
+            {
+                return {};
+            }
 
-            PChar->loc.p.x        = x;
-            PChar->loc.p.y        = y;
-            PChar->loc.p.z        = z;
-            PChar->loc.p.rotation = static_cast<uint8>(rot);
-        }
+            return exits[xirand::GetRandomNumber(exits.size())];
+        }();
+
+        PChar->loc.p.x        = position[0];
+        PChar->loc.p.y        = position[1];
+        PChar->loc.p.z        = position[2];
+        PChar->loc.p.rotation = static_cast<uint8>(position[3]);
 
         PChar->SetDeathTime(timer::time_point::min());
 
