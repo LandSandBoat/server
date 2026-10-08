@@ -77,7 +77,7 @@ INSERT INTO `item_latents` VALUES (11223,175,500,13,470);  -- EFFECT_IMMANENCE: 
 INSERT INTO `item_latents` VALUES (11301,369,1,39,13);    -- Refresh+1 at night when the level of the player's main job is a multiple of 13.
 
 -- Rambler's Cloak
-INSERT INTO `item_latents` VALUES (11312,8,5,7,100);     -- STR+5 while TP >=100%
+INSERT INTO `item_latents` VALUES (11312,8,5,7,1000);     -- STR+5 while TP >=100%
 
 -- Dinner Jacket
 INSERT INTO `item_latents` VALUES (11355,14,1,26,1);     -- CHR+1 during Nighttime
