@@ -638,11 +638,18 @@ local function getHeadyArtificeSkill(mob)
     return xi.mobSkill.MIGHTY_STRIKES_AUTOMATON
 end
 
-xi.pets.automaton.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.CAN_PARRY, 1)
-    mob:setSpawnAnimation(xi.spawnAnimation.SPECIAL)
-    applyAutomatonFrameMods(mob)
+-- NOTE: Called from petutils.cpp
+-- Acts as a hook for functions.
+-- Runs everytime a pet's stats are rebuilt/recalculated.
+---@param master CBaseEntity
+---@param pet CBaseEntity
+xi.pets.automaton.onPetStatCalculate = function(master, pet)
+    pet:setSpawnAnimation(xi.spawnAnimation.SPECIAL)
+    pet:setMobMod(xi.mobMod.CAN_PARRY, 1)
+    applyAutomatonFrameMods(pet)
+end
 
+xi.pets.automaton.onMobSpawn = function(mob)
     mob:setLocalVar('MANEUVER_DURATION', 60)
 
     mob:addListener('EFFECTS_TICK', 'MANEUVER_DURATION', function(automaton)

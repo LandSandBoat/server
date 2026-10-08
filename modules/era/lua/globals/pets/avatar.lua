@@ -14,17 +14,3 @@ m:addOverrideByEra('xi.pets.avatar.calculateAvatarWeaponDamage', {
         pet:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 50)
     end,
 })
-
--- Reverts perpetuation cost which is calculated on pet spawn and set with a AVATAR_PERPETUATION mod on the player.
--- https://forum.square-enix.com/ffxi/threads/22099-March-27-2012-%28JST%29-Version-Update
-m:addOverrideByEra('xi.pets.avatar.onMobSpawn', {
-    [xi.expansion.ABYSSEA] = function(pet)
-        super(pet)
-
-        local master = pet:getMaster()
-
-        if master and master:isPC() then
-            xi.job_utils.summoner.applySpiritPerpetuationCost(master)
-        end
-    end,
-})
