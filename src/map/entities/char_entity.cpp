@@ -847,9 +847,28 @@ void CCharEntity::setLastProposalCloseTime(timer::time_point t)
     lastProposalCloseTime_ = t;
 }
 
-auto CCharEntity::inMogHouse() const -> bool
+auto CCharEntity::inMogHouse(const xi::MogHouse kind) const -> bool
 {
-    return m_moghouseID != 0;
+    switch (kind)
+    {
+        case xi::MogHouse::Own:
+            return m_moghouseID == id;
+        case xi::MogHouse::Visiting:
+            return m_moghouseID != 0 && m_moghouseID != id;
+        case xi::MogHouse::Any:
+        default:
+            return m_moghouseID != 0;
+    }
+}
+
+auto CCharEntity::moghouse() -> MogHouseContainer&
+{
+    return moghouse_;
+}
+
+auto CCharEntity::moghouse() const -> const MogHouseContainer&
+{
+    return moghouse_;
 }
 
 auto CCharEntity::gmCallContainer() -> GMCallContainer&
@@ -1166,7 +1185,7 @@ auto CCharEntity::Tick(timer::time_point tick) -> Task<void>
         m_deathSyncTime = tick + death_update_frequency;
     }
 
-    if (inMogHouse())
+    if (inMogHouse(xi::MogHouse::Own))
     {
         gardenutils::UpdateGardening(this, SendPacket::Yes);
     }

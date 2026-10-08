@@ -98,12 +98,28 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
             return;
         }
 
+        // Host closed or left while the visitor was zoning in
+        if (PChar->inMogHouse(xi::MogHouse::Visiting) && PChar->getCharVar("mh-visit-npc") != 0)
+        {
+            const auto* PHost = zoneutils::GetChar(PChar->m_moghouseID);
+            if (PHost == nullptr || PHost->getZone() != destination || !PHost->moghouse().isOpen() || !PHost->inMogHouse(xi::MogHouse::Own))
+            {
+                PChar->m_moghouseID = 0;
+                PChar->loc.p        = {};
+            }
+        }
+
         destZone->IncreaseZoneCounter(PChar);
 
         if (PChar->loc.zone == nullptr)
         {
             ShowErrorFmt("GP_CLI_COMMAND_LOGIN: {} was not placed in zone {}", PChar->getName(), destination);
             return;
+        }
+
+        if (auto* PHost = PChar->moghouse().host(); PHost != nullptr && PHost != PChar)
+        {
+            PHost->moghouse().addVisitor(PChar);
         }
 
         luautils::OnZoneIn(PChar);
@@ -125,10 +141,13 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
 
         if (PChar->inMogHouse())
         {
+            charutils::updateMannequins(PChar);
+        }
+
+        if (PChar->inMogHouse(xi::MogHouse::Own))
+        {
             PChar->m_charHistory.mhEntrances++;
 
-            // TODO: Does this even work with Mog House sharing?
-            charutils::updateMannequins(PChar);
             gardenutils::UpdateGardening(PChar, SendPacket::No);
         }
     }

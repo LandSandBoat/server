@@ -127,6 +127,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         THANK_YOU                     = 13101, -- Thank you...
         EGG_HUNT_OFFSET               = 13136, -- Egg-cellent! Here's your prize, kupo! Now if only somebody would bring me a super combo... Oh, egg-scuse me! Forget I said that, kupo!
         FFR_LOOKS_CURIOUSLY_BASE      = 13425, -- Coullene looks over curiously for a moment.
+        MOG_HOUSE_NOT_OPEN            = 17361, -- That Mog House is not currently open for visits.
         FRAGMENT_FAR_TOO_SMALL        = 18145, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18146, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         RETRIEVE_DIALOG_ID            = 18181, -- You retrieve <item> from the porter moogle's care.

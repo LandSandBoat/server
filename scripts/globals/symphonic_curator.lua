@@ -178,5 +178,10 @@ xi.symphonic_curator.onEventFinish = function(player, csid, option, npc)
         -- Confirmed, set
         player:setLocalVar('Symphonic_Curator_Music', optionToSongLookup[option])
         player:changeMusic(xi.musicSlot.MOG_HOUSE, optionToSongLookup[option])
+
+        -- Visitors only hear confirmed picks, not previews
+        for _, visitor in ipairs(player:getMogHouseVisitors()) do
+            visitor:changeMusic(xi.musicSlot.MOG_HOUSE, optionToSongLookup[option])
+        end
     end
 end

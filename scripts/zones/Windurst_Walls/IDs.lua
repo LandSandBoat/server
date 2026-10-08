@@ -42,6 +42,7 @@ zones[xi.zone.WINDURST_WALLS] =
         IMPERIAL_STANDING_INCREASED    = 9662,  -- Your Imperial Standing has increased!
         EARNED_ALLIED_NOTES            = 9663,  -- You have earned <number> Allied Note[/s]!
         OBTAINED_GUILD_POINTS          = 9664,  -- Obtained: <number> guild points.
+        MOG_HOUSE_NOT_OPEN             = 9702,  -- That Mog House is not currently open for visits.
         TEAR_IN_FABRIC_OF_SPACE        = 10877, -- There appears to be a tear in the fabric of space...
         UNABLE_RACE_CHANGE             = 11514, -- You were unable to use the specified appearance for your character.
         LINK_CONCIERGE_GOODBYE         = 11257, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.

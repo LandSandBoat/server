@@ -52,6 +52,7 @@ enum PARTYFLAG : uint16
     ALLIANCE_LEADER = 0x0008,
     PARTY_QM        = 0x0010,
     PARTY_SYNC      = 0x0100,
+    PARTY_MOGHOUSE  = 0x0200, // Mog House open to the party/alliance
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(PARTYFLAG);

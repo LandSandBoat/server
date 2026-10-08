@@ -59,6 +59,7 @@ auto GP_CLI_COMMAND_MYROOM_IS::validate(MapSession* PSession, const CCharEntity*
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
+        .mustEqual(this->Kind == static_cast<uint8_t>(GP_CLI_COMMAND_MYROOM_IS_KIND::Remodel) && PChar->moghouse().isOpen(), false, "Mog House is open to visitors")
         .oneOf<GP_CLI_COMMAND_MYROOM_IS_KIND>(this->Kind)
         .oneOf<GP_CLI_COMMAND_MYROOM_IS_PARAM2>(this->Param2);
 }
@@ -75,12 +76,10 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
     switch (static_cast<GP_CLI_COMMAND_MYROOM_IS_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_MYROOM_IS_KIND::Open:
-            // Not implemented
-            // NOTE: If you zone or move floors while in the MH and you have someone visiting, they will be booted.
-            // NOTE: When you zone or move floors your "open MH" flag will be reset.
+            PChar->moghouse().open();
             break;
         case GP_CLI_COMMAND_MYROOM_IS_KIND::Close:
-            // Not implemented
+            PChar->moghouse().close();
             break;
         case GP_CLI_COMMAND_MYROOM_IS_KIND::Remodel:
         {

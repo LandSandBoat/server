@@ -247,6 +247,21 @@ xi.moghouse.onMoghouseZoneEvent = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
+        -- Visitors leaving someone else's Mog House go back to the NPC they came from
+        local visitNpcId = player:getCharVar('mh-visit-npc')
+        if visitNpcId ~= 0 then
+            player:setCharVar('mh-visit-npc', 0)
+
+            local visitNpc = GetNPCByID(visitNpcId)
+            if visitNpc and visitNpc:getZoneID() == player:getZoneID() then
+                local npcRot  = visitNpc:getRotPos()
+                local radians = npcRot * (math.pi * 2 / 256)
+
+                player:setPos(visitNpc:getXPos() + 2 * math.cos(radians), visitNpc:getYPos(), visitNpc:getZPos() - 2 * math.sin(radians), (npcRot + 128) % 256)
+
+                return -1
+            end
+        end
 
         local zoneId                                = player:getZoneID()
         local prevZoneId                            = player:getPreviousZone()
@@ -284,6 +299,19 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     player:delStatusEffectSilent(xi.effect.SILENCE)
 
     player:setPos(0, 0, 0, 192)
+
+    if not player:inMogHouse(xi.mogHouse.OWN) then
+        local owner = player:getMogHouseOwner()
+        local song  = owner and owner:getLocalVar('Symphonic_Curator_Music') or 0
+
+        if song ~= 0 then
+            player:timer(1000, function(playerArg)
+                playerArg:changeMusic(xi.musicSlot.MOG_HOUSE, song)
+            end)
+        end
+
+        return cs
+    end
 
     -- Moghouse data (bit-packed)
     -- 0x0001: SANDORIA exit quest flag
@@ -326,6 +354,17 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     xi.moghouse.trySetMusic(player)
 
     return cs
+end
+
+xi.moghouse.visitNpcOnEventFinish = function(player, csid, option, npc)
+    -- Option is the picked host's char id, anything else is a cancel or the explanation (bit 31)
+    if option <= 0 or option >= utils.EVENT_CANCELLED_OPTION then
+        return
+    end
+
+    if not player:visitMogHouse(option, npc) then
+        player:messageSpecial(zones[player:getZoneID()].text.MOG_HOUSE_NOT_OPEN)
+    end
 end
 
 xi.moghouse.moogleTrade = function(player, npc, trade)

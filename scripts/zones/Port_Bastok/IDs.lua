@@ -23,6 +23,7 @@ zones[xi.zone.PORT_BASTOK] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 6456,  -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST             = 6458,  -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO       = 6459,  -- You are now able to call multiple alter egos.
+        MOG_HOUSE_NOT_OPEN            = 6527,  -- That Mog House is not currently open for visits.
         HOMEPOINT_SET                 = 6530,  -- Home point set!
         CONQUEST_BASE                 = 6550,  -- Tallying conquest results...
         TENSHODO_SHOP_OPEN_DIALOG     = 6751,  -- Ah, one of our members. Welcome to the Tenshodo shop.

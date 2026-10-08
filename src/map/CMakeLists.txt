@@ -102,6 +102,8 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/moghouse_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/moghouse_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/persist_batch.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/persist_batch.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_list.cpp

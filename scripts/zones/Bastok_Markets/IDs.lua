@@ -26,6 +26,7 @@ zones[xi.zone.BASTOK_MARKETS] =
         HOMEPOINT_SET                 = 6503,  -- Home point set!
         YOU_ACCEPT_THE_MISSION        = 6532,  -- You have accepted the mission.
         ORIGINAL_MISSION_OFFSET       = 6537,  -- You can consult the Mission section of the main menu to review your objectives. Speed and efficiency are your priorities. Dismissed.
+        MOG_HOUSE_NOT_OPEN            = 6604,  -- That Mog House is not currently open for visits.
         CONQUEST_BASE                 = 6605,  -- Tallying conquest results...
         MOG_LOCKER_OFFSET             = 6899,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         MAP_MARKER_TUTORIAL           = 7111,  -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.

@@ -45,7 +45,7 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(MapSession* PSession, const CCha
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .isInMogHouse()
+        .isInMogHouse(xi::MogHouse::Own)
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
         .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories);
 }

@@ -24,6 +24,7 @@
 #include "common/logging.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
+#include "party.h"
 
 GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar, const uint8_t MemberNumber, const uint16_t memberflags, const xi::ZoneId ZoneID)
 {
@@ -44,6 +45,7 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar,
     packet.GAttr.unknown06         = (memberflags >> 6) & 0x01; // Bit 6: MasterComFlg
     packet.GAttr.unknown07         = (memberflags >> 7) & 0x01; // Bit 7: SubMasterComFlg
     packet.GAttr.LevelSyncFlg      = (memberflags >> 8) & 0x01; // Bit 8: LevelSyncFlg
+    packet.MoghouseFlg             = (memberflags & PARTY_MOGHOUSE) != 0;
 
     if (PChar->getZone() != ZoneID)
     {
@@ -122,6 +124,7 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const uint32_t id, const 
     packet.GAttr.unknown06         = (memberFlags >> 6) & 0x01; // Bit 6: MasterComFlg
     packet.GAttr.unknown07         = (memberFlags >> 7) & 0x01; // Bit 7: SubMasterComFlg
     packet.GAttr.LevelSyncFlg      = (memberFlags >> 8) & 0x01; // Bit 8: LevelSyncFlg
+    packet.MoghouseFlg             = (memberFlags & PARTY_MOGHOUSE) != 0;
     packet.ZoneNo                  = static_cast<uint16>(ZoneID);
 
     const auto nameSize       = std::min<size_t>(name.size(), sizeof(packet.Name));
