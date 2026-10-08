@@ -499,7 +499,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
         {
             if (PMonipulator != nullptr)
             {
-                return monstrosity::GetWeaponDelay(PMonipulator, weapon);
+                return monstrosity::GetWeaponDelay(PMonipulator);
             }
 
             return weapon->getDelay();
@@ -1192,14 +1192,16 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     float strMultiplier = 0.5;
 
+    const auto* PMonipulator = monstrosity::AsMonipulator(this);
+
     // https://www.bg-wiki.com/ffxi/Strength
     if (dynamic_cast<const CCharEntity*>(this) == nullptr)
     {
         strMultiplier = 0.5;
     }
-    else if (monstrosity::AsMonipulator(this) != nullptr)
+    else if (PMonipulator != nullptr)
     {
-        // Retail Monipulator attack fits STR * 0.75 with fists too.
+        // Retail Monipulator attack fits this with fists too.
         strMultiplier = 0.75f;
     }
     else if (weapon && weapon->isTwoHanded()) // 2-handed weapon
@@ -1230,7 +1232,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
         ATT += this->getMod(xi::Mod::ENSPELL_DMG);
     }
 
-    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    if (PMonipulator != nullptr)
     {
         ATT += monstrosity::GetCombatSkill(PMonipulator);
     }
@@ -1541,23 +1543,16 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
         }
 
-        const auto* PMonipulator = monstrosity::AsMonipulator(this);
-        const auto  skillLevel   = [&]() -> uint32
+        if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
         {
-            if (PMonipulator != nullptr)
-            {
-                return monstrosity::GetCombatSkill(PMonipulator);
-            }
-
-            return GetSkill(skill) + iLvlSkill;
-        }();
-
-        if (PMonipulator != nullptr)
-        {
+            // Retail Monipulator accuracy fits DEX * 0.75 and an A+ skill.
             dexMultiplier = 0.75f;
+            ACC           = GetAccFromSkill(monstrosity::GetCombatSkill(PMonipulator));
         }
-
-        ACC = GetAccFromSkill(skillLevel);
+        else
+        {
+            ACC = GetAccFromSkill(GetSkill(skill) + iLvlSkill);
+        }
 
         if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
@@ -1695,7 +1690,7 @@ uint16 CBattleEntity::DEF()
         }
     }
 
-    // Retail Monipulator defence fits an A+ skill on top. WAR's Defense Bonus adds the step at 10.
+    // Retail Monipulator defence fits an A+ skill on top.
     if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
     {
         DEF += monstrosity::GetCombatSkill(PMonipulator);

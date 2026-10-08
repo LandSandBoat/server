@@ -113,7 +113,7 @@ describe('Monstrosity restrictions', function()
         assert(player:getMonstrositySize() == 0, 'editing saved progress entered MON')
     end)
 
-    -- Retail 0x061 for a Rabbit with no instincts equipped.
+    -- A Rabbit with no instincts equipped.
     local retailCombat =
     {
         [ 1] = { attack = 19, defence =  26 },
@@ -174,6 +174,21 @@ describe('Monstrosity restrictions', function()
         waitSeconds(15)
 
         assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after moving')
+    end)
+
+    it('stops Relinquish when a monster uses a skill on the player', function()
+        local mob = player.entities:moveTo('Wild_Rabbit')
+        mob:respawn()
+        mob:setUnkillable(true)
+        startRelinquish()
+        mob:useMobAbility(xi.mobSkill.FOOT_KICK_1, player, 0)
+        for _ = 1, 15 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(mob)
+            xi.test.world:tickEntity(player)
+        end
+
+        assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after Foot Kick')
     end)
 
     it('never starts Relinquish under slip damage', function()

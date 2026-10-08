@@ -599,7 +599,7 @@ describe('Monstrosity Bee moves', function()
     end)
 end)
 
--- The level 15 variants. Korrigan and Ashen Lizard are checked against a retail capture.
+-- The level 15 variants.
 describe('Monstrosity variant moves', function()
     ---@type CClientEntityPair
     local player
@@ -662,7 +662,7 @@ describe('Monstrosity variant moves', function()
         assert(useOn(455) == nil, 'a base Rabbit used Snow Cloud')
     end)
 
-    -- Retail shows 772. The BLM sub job's share of HP is not fitted yet, so this sits a little under.
+    -- The BLM sub job's share of HP is not fitted yet, so this sits a little low.
     it('gives an Ashen Lizard close to its retail HP', function()
         becomeVariant(xi.monstrositySpecies.LIZARD, 315, 15)
 

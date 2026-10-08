@@ -37,7 +37,6 @@
 struct mon_data_t;
 class CBattleEntity;
 class CCharEntity;
-class CItemWeapon;
 class CSpell;
 
 namespace xi::data
@@ -128,7 +127,7 @@ struct SpeciesJobs
 
 // The jobs and level a Monipulator fights with. Its sub job is at the main level.
 [[nodiscard]] auto GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs;
-[[nodiscard]] auto GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PWeapon) -> uint16;
+[[nodiscard]] auto GetWeaponDelay(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetCombatSkill(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
@@ -136,6 +135,7 @@ void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
+[[nodiscard]] auto IsPassageZone(xi::ZoneId zoneId) -> bool;
 [[nodiscard]] auto CanCastSpell(CSpell* PSpell) -> bool;
 [[nodiscard]] auto ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool;
 

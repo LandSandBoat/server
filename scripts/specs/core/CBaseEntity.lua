@@ -1700,6 +1700,12 @@ function CBaseEntity:getMonstrosityExits(zoneId)
 end
 
 ---@nodiscard
+---@param zoneId xi.zone
+---@return boolean
+function CBaseEntity:isMonstrosityPassageZone(zoneId)
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getTitle()
 end

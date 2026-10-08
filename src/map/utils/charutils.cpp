@@ -5167,6 +5167,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
     PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, PMob, exp);
 
+    // Only kills pay infamy.
     if (PChar->m_PMonstrosity && !expFromRaise && !fromScripts)
     {
         monstrosity::AddInfamy(PChar, exp);

@@ -7842,11 +7842,15 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
     }
 
     // Outside MON only the saved progress changes.
-    auto loaded = std::unique_ptr<monstrosity::MonstrosityData_t>{};
-    if (PChar->m_PMonstrosity == nullptr)
+    const auto loaded = [&]() -> std::unique_ptr<monstrosity::MonstrosityData_t>
     {
-        loaded = monstrosity::LoadMonstrosityData(PChar->id);
-    }
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            return nullptr;
+        }
+
+        return monstrosity::LoadMonstrosityData(PChar->id);
+    }();
 
     auto& data = [&]() -> monstrosity::MonstrosityData_t&
     {
@@ -7905,6 +7909,11 @@ auto CLuaBaseEntity::getMonstrosityShop() -> sol::table
     }
 
     return shop;
+}
+
+auto CLuaBaseEntity::isMonstrosityPassageZone(const xi::ZoneId zoneId) -> bool
+{
+    return monstrosity::IsPassageZone(zoneId);
 }
 
 auto CLuaBaseEntity::getMonstrosityExits(const xi::ZoneId zoneId) -> sol::table
@@ -21151,6 +21160,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMonstrosityEntryData", CLuaBaseEntity::setMonstrosityEntryData);
     SOL_REGISTER("getMonstrosityShop", CLuaBaseEntity::getMonstrosityShop);
     SOL_REGISTER("getMonstrosityExits", CLuaBaseEntity::getMonstrosityExits);
+    SOL_REGISTER("isMonstrosityPassageZone", CLuaBaseEntity::isMonstrosityPassageZone);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);

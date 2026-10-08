@@ -28,6 +28,8 @@
 #include "ai/ai_container.h"
 
 #include "data/datasets/monstrosity/dataset.h"
+#include "data/datasets/zones/settings/dataset.h"
+#include "data/loader.h"
 #include "utils/dataset_loader.h"
 
 #include "common/logging.h"
@@ -56,7 +58,6 @@
 #include "packets/s2c/0x119_abil_recast.h"
 
 #include "grades.h"
-#include "items/item_weapon.h"
 #include "merit.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -409,27 +410,27 @@ auto monstrosity::LoadMonstrosityData(const uint32 charId) -> std::unique_ptr<Mo
 {
     auto data = std::make_unique<MonstrosityData_t>();
 
-    auto rset = db::preparedStmt("SELECT "
-                                 "charid, "
-                                 "current_monstrosity_id, "
-                                 "current_monstrosity_species, "
-                                 "current_monstrosity_name_prefix_1, "
-                                 "current_monstrosity_name_prefix_2, "
-                                 "current_exp, "
-                                 "equip, "
-                                 "levels, "
-                                 "instincts, "
-                                 "variants, "
-                                 "belligerency, "
-                                 "entry_x, "
-                                 "entry_y, "
-                                 "entry_z, "
-                                 "entry_rot, "
-                                 "entry_zone_id, "
-                                 "entry_mjob, "
-                                 "entry_sjob "
-                                 "FROM char_monstrosity WHERE charid = ? LIMIT 1",
-                                 charId);
+    const auto rset = db::preparedStmt("SELECT "
+                                       "charid, "
+                                       "current_monstrosity_id, "
+                                       "current_monstrosity_species, "
+                                       "current_monstrosity_name_prefix_1, "
+                                       "current_monstrosity_name_prefix_2, "
+                                       "current_exp, "
+                                       "equip, "
+                                       "levels, "
+                                       "instincts, "
+                                       "variants, "
+                                       "belligerency, "
+                                       "entry_x, "
+                                       "entry_y, "
+                                       "entry_z, "
+                                       "entry_rot, "
+                                       "entry_zone_id, "
+                                       "entry_mjob, "
+                                       "entry_sjob "
+                                       "FROM char_monstrosity WHERE charid = ? LIMIT 1",
+                                       charId);
 
     if (rset && rset->rowsCount() && rset->next())
     {
@@ -481,7 +482,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::SaveMonstrosityData(const uint32 charId, const MonstrosityData_t& data)
 {
-    const char* query =
+    constexpr auto query =
         "INSERT INTO char_monstrosity SET "
         "charid = ?, "
         "current_monstrosity_id = ?, "
@@ -597,11 +598,11 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
         // TODO: Move these flags into the db
         // Gestation blocks attacking in packet validation, so attacking is not a break flag.
+        // The effect announces wearing off, so Logout/NoLossMessage stay unset.
         const auto gestationFlags = xi::StatusEffectFlag::Invisible |
                                     xi::StatusEffectFlag::Death |
                                     xi::StatusEffectFlag::MagicBegin |
                                     xi::StatusEffectFlag::OnZone;
-        // NOTE: It DOES say the effect wears off, so Logout/NoLossMessage are intentionally not set.
 
         PChar->StatusEffectContainer->AddStatusEffectSilent(
             xi::StatusEffect::Gestation,
@@ -875,7 +876,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
 void monstrosity::CalculateStats(CCharEntity* PChar)
 {
     const auto& data    = *PChar->m_PMonstrosity;
-    const auto  level   = std::max<uint8>(1, data.levels[data.MonstrosityId]);
+    const auto  level   = GetSpeciesJobs(PChar).level;
     const auto  species = gMonstrosityData.species.find(data.Species);
     if (species == gMonstrosityData.species.end())
     {
@@ -891,8 +892,8 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
     const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
     PChar->health.maxhp = static_cast<int32>(species->second.hpScale * baseHP / 100);
 
-    // Retail MP comes from a mage sub job. A NIN sub has none.
-    // TODO: WHM is one retail point at level 51 and RDM borrows it. Mage main jobs are unverified.
+    // Retail MP comes from a mage sub job.
+    // TODO: WHM is fitted to one retail sample and RDM borrows it. PLD and DRK subs and mage main jobs are unverified.
     const auto baseMP = [&]() -> int32
     {
         switch (data.SubJob)
@@ -965,16 +966,16 @@ auto monstrosity::GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs
     return SpeciesJobs{
         .mainJob = data.MainJob,
         .subJob  = data.SubJob,
-        .level   = data.levels[data.MonstrosityId],
+        .level   = std::max<uint8>(1, data.levels[data.MonstrosityId]),
     };
 }
 
-// The round delay in ms. A MNK species swings twice a round, so its round takes two hits' delay.
-auto monstrosity::GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PWeapon) -> uint16
+// The round delay in ms.
+auto monstrosity::GetWeaponDelay(const CCharEntity* PChar) -> uint16
 {
     const auto swings = [&]() -> uint16
     {
-        if (PWeapon->isHandToHand())
+        if (PChar->m_PMonstrosity->MainJob == xi::Job::MNK)
         {
             return 2;
         }
@@ -985,7 +986,7 @@ auto monstrosity::GetWeaponDelay(const CCharEntity* PChar, const CItemWeapon* PW
     return static_cast<uint16>(GetBaseDelay(PChar) * swings * 1000 / 60);
 }
 
-// Only kills pay infamy. Infamy already held above the cap is never taken away.
+// Infamy already held above the cap is never taken away.
 void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
 {
     const auto infamy = static_cast<int32>(exp * settings::get<float>("main.MONSTROSITY_INFAMY_RATE"));
@@ -1021,10 +1022,9 @@ auto monstrosity::GetBaseDelay(const CCharEntity* PChar) -> uint16
 // Fitted to retail hits, rounded low. A MNK species splits it over two fists.
 auto monstrosity::GetBaseDamage(const CCharEntity* PChar) -> uint16
 {
-    const auto& data   = *PChar->m_PMonstrosity;
-    const auto  level  = std::max<uint8>(1, data.levels[data.MonstrosityId]);
-    const auto  damage = static_cast<uint16>(level * 3 / 2 + 10);
-    if (data.MainJob == xi::Job::MNK)
+    const auto species = GetSpeciesJobs(PChar);
+    const auto damage  = static_cast<uint16>(species.level * 3 / 2 + 10);
+    if (species.mainJob == xi::Job::MNK)
     {
         return damage / 2;
     }
@@ -1035,10 +1035,11 @@ auto monstrosity::GetBaseDamage(const CCharEntity* PChar) -> uint16
 // Retail attack, defence and accuracy fit an A+ skill at the species level, whatever the weapon.
 auto monstrosity::GetCombatSkill(const CCharEntity* PChar) -> uint16
 {
-    return battleutils::GetMaxSkill(1, PChar->GetMLevel());
+    constexpr auto rankAPlus = uint8{ 1 };
+    return battleutils::GetMaxSkill(rankAPlus, PChar->GetMLevel());
 }
 
-// TODO: Unverified. The evasion skill cap of the species' main job.
+// TODO: Is evasion an A+ skill like the others?
 auto monstrosity::GetEvasionSkill(const CCharEntity* PChar) -> uint16
 {
     return battleutils::GetMaxSkill(xi::SkillType::Evasion, PChar->m_PMonstrosity->MainJob, PChar->GetMLevel());
@@ -1101,8 +1102,8 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
     else if (type == GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityRetry)
     {
         // Retail picks a random listed spot. Without one, the zone script moves (0, 0, 0) to its default entry.
-        const auto exits    = GetFeretoryExits(PChar->loc.zone->GetID());
-        const auto position = [&]() -> std::array<float, 4>
+        const auto exits          = GetFeretoryExits(PChar->loc.zone->GetID());
+        const auto [x, y, z, rot] = [&]() -> std::array<float, 4>
         {
             if (exits.empty())
             {
@@ -1112,10 +1113,10 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
             return exits[xirand::GetRandomNumber(exits.size())];
         }();
 
-        PChar->loc.p.x        = position[0];
-        PChar->loc.p.y        = position[1];
-        PChar->loc.p.z        = position[2];
-        PChar->loc.p.rotation = static_cast<uint8>(position[3]);
+        PChar->loc.p.x        = x;
+        PChar->loc.p.y        = y;
+        PChar->loc.p.z        = z;
+        PChar->loc.p.rotation = static_cast<uint8>(rot);
 
         PChar->SetDeathTime(timer::time_point::min());
 
@@ -1212,6 +1213,26 @@ auto monstrosity::ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool
     }
 
     return level >= PSpell->getJob(data.SubJob) && !(PSpell->getRequirements() & SPELLREQ_MAIN_JOB_ONLY);
+}
+
+// Monipulators travel to field and dungeon zones, never towns, Dynamis or instances.
+auto monstrosity::IsPassageZone(const xi::ZoneId zoneId) -> bool
+{
+    const auto settings = xi::data::loadZoneFile<xi::data::datasets::zones::settings::Dataset>(zoneId);
+    if (!settings)
+    {
+        return false;
+    }
+
+    const auto has = [&](const xi::ZoneType type) -> bool
+    {
+        return (settings->Type & type) != xi::ZoneType::Unknown;
+    };
+
+    return (has(xi::ZoneType::Outdoors) || has(xi::ZoneType::Dungeon)) &&
+           !has(xi::ZoneType::City) &&
+           !has(xi::ZoneType::Dynamis) &&
+           !has(xi::ZoneType::Instanced);
 }
 
 auto monstrosity::GetFeretoryExits(const xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>

@@ -4591,7 +4591,7 @@ auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::
     {
         std::size_t idx = 0;
         table["levels"] = lua.create_table();
-        for (auto entry : data.levels)
+        for (const auto entry : data.levels)
         {
             table["levels"][idx++] = entry;
         }
@@ -4600,7 +4600,7 @@ auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::
     {
         std::size_t idx    = 0;
         table["instincts"] = lua.create_table();
-        for (auto entry : data.instincts)
+        for (const auto entry : data.instincts)
         {
             table["instincts"][idx++] = entry;
         }
@@ -4609,7 +4609,7 @@ auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::
     {
         std::size_t idx   = 0;
         table["variants"] = lua.create_table();
-        for (auto entry : data.variants)
+        for (const auto entry : data.variants)
         {
             table["variants"][idx++] = entry;
         }

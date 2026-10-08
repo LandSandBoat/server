@@ -311,23 +311,35 @@ local relinquishBlockers =
     xi.effect.DROWN,
 }
 
+-- Any action a monster takes on the player stops Relinquish.
+local relinquishInterrupts =
+{
+    -- The listener argument that holds the monster differs per event.
+    { event = 'ATTACKED',         name = 'RELINQUISH_ATTACKED', actorArg = 2 },
+    { event = 'MAGIC_TAKE',       name = 'RELINQUISH_MAGIC',    actorArg = 2 },
+    { event = 'WEAPONSKILL_TAKE', name = 'RELINQUISH_SKILL',    actorArg = 1 },
+}
+
 -- Retail counts 3 s apart. Moving or a hostile action stops it without a message.
 local function relinquishCountdown(player, start)
     player:timer(3000, function(playerArg)
-        local pos = playerArg:getPos()
-        if
+        local pos     = playerArg:getPos()
+        local count   = playerArg:getLocalVar('RELINQUISH_COUNTDOWN') - 1
+        local stopped =
             playerArg:getLocalVar('RELINQUISH_INTERRUPTED') == 1 or
+            playerArg:isDead() or
             pos.x ~= start.x or
             pos.z ~= start.z
-        then
-            playerArg:removeListener('RELINQUISH_ATTACKED')
-            return
-        end
 
-        local count = playerArg:getLocalVar('RELINQUISH_COUNTDOWN') - 1
-        if count == 0 then
-            playerArg:removeListener('RELINQUISH_ATTACKED')
-            xi.monstrosity.onMonstrosityReturnToEntrance(playerArg)
+        if stopped or count == 0 then
+            for _, listener in ipairs(relinquishInterrupts) do
+                playerArg:removeListener(listener.name)
+            end
+
+            if not stopped then
+                xi.monstrosity.onMonstrosityReturnToEntrance(playerArg)
+            end
+
             return
         end
 
@@ -346,9 +358,15 @@ xi.monstrosity.relinquishOnAbility = function(player)
 
     player:setLocalVar('RELINQUISH_INTERRUPTED', 0)
     player:setLocalVar('RELINQUISH_COUNTDOWN', 4)
-    player:addListener('ATTACKED', 'RELINQUISH_ATTACKED', function(target)
-        target:setLocalVar('RELINQUISH_INTERRUPTED', 1)
-    end)
+    for _, listener in ipairs(relinquishInterrupts) do
+        player:addListener(listener.event, listener.name, function(first, second)
+            local actor  = listener.actorArg == 1 and first or second
+            local target = listener.actorArg == 1 and second or first
+            if actor:isMob() then
+                target:setLocalVar('RELINQUISH_INTERRUPTED', 1)
+            end
+        end)
+    end
 
     player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
     relinquishCountdown(player, player:getPos())
@@ -464,8 +482,9 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
             return
         end
 
-        -- The client only offers visited zones, and Belligerency zones while it is on.
+        -- The client only offers visited field and dungeon zones, and Belligerency zones while it is on.
         if
+            not player:isMonstrosityPassageZone(zoneSelected) or
             not player:hasVisitedZone(zoneSelected) or
             (player:getBelligerencyFlag() and not xi.monstrosity.belligerencyCaps[zoneSelected])
         then

@@ -6200,7 +6200,6 @@ monstrosity:
           unlock_level: 60
           tp_cost:      1000
           enabled:      true
-
     lycopodium_mandragora:
       family:       mandragora
       species_code: 282
@@ -6815,7 +6814,6 @@ monstrosity:
           unlock_level: 30
           tp_cost:      3000
           enabled:      false
-
     zaffre_bee:
       family:       bee
       species_code: 291
@@ -7663,7 +7661,6 @@ monstrosity:
           unlock_level: 70
           tp_cost:      1000
           enabled:      false
-
     emerald_raptor:
       family:       raptor
       species_code: 316

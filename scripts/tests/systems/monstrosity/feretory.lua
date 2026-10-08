@@ -118,6 +118,12 @@ describe('Monstrosity Feretory exits', function()
     ---@type CClientEntityPair
     local player
 
+    local function settle()
+        for _ = 1, 8 do
+            xi.test.world:skipTime(1)
+        end
+    end
+
     before_each(function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
     end)
@@ -134,11 +140,22 @@ describe('Monstrosity Feretory exits', function()
         player:changeJob(xi.job.MON)
         player:gotoZone(xi.zone.FERETORY)
 
-        local x = player:getXPos()
-        local z = player:getZPos()
         xi.monstrosity.odysseanPassageOnEventFinish(player, 5, 1 + bit.lshift(xi.zone.WEST_SARUTABARUTA, 4))
+        settle()
 
-        assert(player:getXPos() == x and player:getZPos() == z, 'moved towards an unvisited zone')
+        assert(player:getZoneID() == xi.zone.FERETORY, 'travelled to an unvisited zone')
+    end)
+
+    it('refuses a passage to a town', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:gotoZone(xi.zone.SOUTHERN_SAN_DORIA)
+        player:changeJob(xi.job.MON)
+        player:gotoZone(xi.zone.FERETORY)
+
+        xi.monstrosity.odysseanPassageOnEventFinish(player, 5, 1 + bit.lshift(xi.zone.SOUTHERN_SAN_DORIA, 4))
+        settle()
+
+        assert(player:getZoneID() == xi.zone.FERETORY, 'travelled to a town')
     end)
 
     -- A zone script moves an arrival at (0, 0, 0) to its default entry point.
@@ -149,8 +166,10 @@ describe('Monstrosity Feretory exits', function()
         player:gotoZone(xi.zone.FERETORY)
 
         xi.monstrosity.odysseanPassageOnEventFinish(player, 5, 1 + bit.lshift(xi.zone.WEST_RONFAURE, 4))
+        settle()
 
-        assert(player:getXPos() == 0 and player:getZPos() == 0, string.format('sent to (%.1f, %.1f)', player:getXPos(), player:getZPos()))
+        assert(player:getZoneID() == xi.zone.WEST_RONFAURE, string.format('arrived in zone %d', player:getZoneID()))
+        assert(player:getXPos() ~= 0 or player:getZPos() ~= 0, 'left at the zone origin')
     end)
 
     it('lists every exit position for a zone', function()
