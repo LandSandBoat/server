@@ -2861,7 +2861,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   monks_roll:
     id: 311
@@ -2874,7 +2875,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   healers_roll:
     id: 312
@@ -2887,7 +2889,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   wizards_roll:
     id: 313
@@ -2900,7 +2903,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   warlocks_roll:
     id: 314
@@ -2913,7 +2917,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   rogues_roll:
     id: 315
@@ -2926,7 +2931,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   gallants_roll:
     id: 316
@@ -2939,7 +2945,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   chaos_roll:
     id: 317
@@ -2952,7 +2959,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   beast_roll:
     id: 318
@@ -2965,7 +2973,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   choral_roll:
     id: 319
@@ -2978,7 +2987,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   hunters_roll:
     id: 320
@@ -2991,7 +3001,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   samurai_roll:
     id: 321
@@ -3004,7 +3015,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   ninja_roll:
     id: 322
@@ -3017,7 +3029,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   drachen_roll:
     id: 323
@@ -3030,7 +3043,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   evokers_roll:
     id: 324
@@ -3043,7 +3057,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   maguss_roll:
     id: 325
@@ -3056,7 +3071,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   corsairs_roll:
     id: 326
@@ -3069,7 +3085,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   puppet_roll:
     id: 327
@@ -3082,7 +3099,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   dancers_roll:
     id: 328
@@ -3095,7 +3113,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   scholars_roll:
     id: 329
@@ -3108,7 +3127,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   bolters_roll:
     id: 330
@@ -3124,7 +3144,8 @@ status_effects:
       - on_jobchange
       - no_cancel
       - on_attack
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   casters_roll:
     id: 331
@@ -3137,7 +3158,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   coursers_roll:
     id: 332
@@ -3150,7 +3172,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   blitzers_roll:
     id: 333
@@ -3163,7 +3186,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   tacticians_roll:
     id: 334
@@ -3176,7 +3200,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   allies_roll:
     id: 335
@@ -3189,7 +3214,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   misers_roll:
     id: 336
@@ -3202,7 +3228,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   companions_roll:
     id: 337
@@ -3215,7 +3242,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   avengers_roll:
     id: 338
@@ -3228,7 +3256,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   naturalists_roll:
     id: 339
@@ -3241,7 +3270,8 @@ status_effects:
       - logout
       - on_jobchange
       - no_cancel
-    sort_key: 2000
+    overwrite: always
+    sort_key:  2000
 
   warriors_charge:
     id: 340
@@ -5137,11 +5167,16 @@ status_effects:
   runeists_roll:
     id: 600
     flags:
+      - dispelable
       - empathy
       - death
       - on_zone
       - roll
+      - logout
+      - on_jobchange
       - no_cancel
+    overwrite: always
+    sort_key:  2000
 
   crooked_cards:
     id: 601
