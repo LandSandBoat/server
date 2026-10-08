@@ -499,7 +499,6 @@ describe('Monstrosity starting family moves', function()
             { dat = 258, mob = 258 },
             { dat = 259, mob = 259 },
             { dat = 314, mob = 323, self = true },
-            { dat = 455, mob = 661 },
         },
         [xi.monstrositySpecies.MANDRAGORA] =
         {
@@ -509,12 +508,10 @@ describe('Monstrosity starting family moves', function()
             { dat = 297, mob = 304, self = true },
             { dat = 298, mob = 305 },
             { dat = 299, mob = 306 },
-            { dat = 599, mob = 2210 },
             { dat = 603, mob = 2410 },
         },
         [xi.monstrositySpecies.LIZARD] =
         {
-            { dat = 342, mob = 366 },
             { dat = 343, mob = 367 },
             { dat = 344, mob = 368 },
             { dat = 345, mob = 369 },
@@ -599,5 +596,76 @@ describe('Monstrosity Bee moves', function()
 
         local expected = 1 + math.floor(player:getMaxHP() / 8)
         assert(player:getHP() == expected, string.format('HP is %d of %d, expected %d', player:getHP(), player:getMaxHP(), expected))
+    end)
+end)
+
+-- The level 15 variants. Korrigan and Ashen Lizard are checked against a retail capture.
+describe('Monstrosity variant moves', function()
+    ---@type CClientEntityPair
+    local player
+
+    local variants =
+    {
+        { name = 'Onyx Rabbit',             family = xi.monstrositySpecies.RABBIT,     species = 256, dat = 257, mob = 257 },
+        { name = 'Korrigan',                family = xi.monstrositySpecies.MANDRAGORA, species = 281, dat = 296, mob = 302 },
+        { name = 'Ashen Lizard',            family = xi.monstrositySpecies.LIZARD,     species = 315, dat = 441, mob = 621 },
+        { name = 'Vermillion and Onyx Bee', family = xi.monstrositySpecies.BEE,        species = 290, dat = 319, mob = 334 },
+    }
+
+    local function becomeVariant(family, species, level)
+        local data = player:getMonstrosityData()
+        data.monstrosityId  = family
+        data.species        = species
+        data.levels[family] = level
+        player:setMonstrosityData(data)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player:delStatusEffect(xi.effect.GESTATION)
+    end
+
+    local function useOn(datSkillId)
+        local mob = player.entities:moveTo('Wild_Rabbit')
+        mob:respawn()
+        player.entities:moveTo(mob:getID())
+
+        local used = nil
+        player:addListener('WEAPONSKILL_STATE_ENTER', 'TEST_MON_VARIANT_SKILL', function(_, skillId)
+            used = skillId
+        end)
+
+        player:setTP(3000)
+        player.actions:useMonsterSkill(mob, datSkillId)
+        player:removeListener('TEST_MON_VARIANT_SKILL')
+
+        return used
+    end
+
+    before_each(function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
+        player:changeJob(xi.job.MON)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+    end)
+
+    for _, variant in ipairs(variants) do
+        it(string.format('gives %s its first move', variant.name), function()
+            becomeVariant(variant.family, variant.species, 15)
+
+            local used = useOn(variant.dat)
+            assert(used == variant.mob, string.format('expected mob skill %d, got %s', variant.mob, tostring(used)))
+        end)
+    end
+
+    -- The JP wiki gives Snow Cloud to Alabaster Rabbit only.
+    it('keeps Snow Cloud from a base Rabbit', function()
+        becomeVariant(xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 60)
+
+        assert(useOn(455) == nil, 'a base Rabbit used Snow Cloud')
+    end)
+
+    -- Retail shows 772. The BLM sub job's share of HP is not fitted yet, so this sits a little under.
+    it('gives an Ashen Lizard close to its retail HP', function()
+        becomeVariant(xi.monstrositySpecies.LIZARD, 315, 15)
+
+        assert(player:getMaxHP() >= 740 and player:getMaxHP() <= 772, string.format('Ashen Lizard 15 has %d HP', player:getMaxHP()))
     end)
 end)

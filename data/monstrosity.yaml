@@ -2674,7 +2674,7 @@ monstrosity:
           mob_skill_id: 661
           unlock_level: 50
           tp_cost:      1000
-          enabled:      true
+          enabled:      false
     behemoth:
       family:       behemoth
       species_code: 2
@@ -3436,7 +3436,7 @@ monstrosity:
           mob_skill_id: 2210
           unlock_level: 60
           tp_cost:      1300
-          enabled:      true
+          enabled:      false
     sabotender:
       family:       sabotender
       species_code: 19
@@ -4087,7 +4087,7 @@ monstrosity:
           mob_skill_id: 366
           unlock_level: 70
           tp_cost:      1000
-          enabled:      true
+          enabled:      false
         - skill:        fireball
           dat_skill_id: 343
           mob_skill_id: 367
@@ -5231,6 +5231,8 @@ monstrosity:
       size:         0
       look:         0x010D
       ecosystem:    beast
+      mob_species:  105
+      hp_scale:     220
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
@@ -6153,79 +6155,52 @@ monstrosity:
       size:         0
       look:         0x012D
       ecosystem:    plantoid
+      mob_species:  348
+      hp_scale:     260
       tp_skills:
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
+
     lycopodium_mandragora:
       family:       mandragora
       species_code: 282
@@ -6813,25 +6788,34 @@ monstrosity:
       size:         0
       look:         0x0111
       ecosystem:    vermin
+      mob_species:  427
+      hp_scale:     220
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
+          enabled:      true
+        - skill:        frenzy_pollen
+          dat_skill_id: 549
+          mob_skill_id: 1847
+          unlock_level: 30
+          tp_cost:      3000
           enabled:      false
+
     zaffre_bee:
       family:       bee
       species_code: 291
@@ -7628,55 +7612,58 @@ monstrosity:
       size:         0
       look:         0x0149
       ecosystem:    lizard
+      mob_species:  306
+      hp_scale:     240
       tp_skills:
         - skill:        snowball
           dat_skill_id: 441
           mob_skill_id: 621
-          unlock_level: 1
+          unlock_level: 15
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        secretion
           dat_skill_id: 349
           mob_skill_id: 373
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        brain_crush
           dat_skill_id: 345
           mob_skill_id: 369
           unlock_level: 20
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        blockhead
           dat_skill_id: 344
           mob_skill_id: 368
           unlock_level: 30
           tp_cost:      1500
-          enabled:      false
-        - skill:        baleful_gaze
-          dat_skill_id: 346
-          mob_skill_id: 411
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        baleful_gaze
           dat_skill_id: 346
           mob_skill_id: 370
           unlock_level: 40
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
+        - skill:        plaguebreath
+          dat_skill_id: 347
+          mob_skill_id: 371
+          unlock_level: 50
+          tp_cost:      1500
+          enabled:      true
         - skill:        infrasonics
           dat_skill_id: 348
           mob_skill_id: 372
           unlock_level: 60
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        tail_blow
           dat_skill_id: 342
           mob_skill_id: 366
           unlock_level: 70
           tp_cost:      1000
           enabled:      false
+
     emerald_raptor:
       family:       raptor
       species_code: 316
