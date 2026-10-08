@@ -77,7 +77,7 @@ INSERT INTO `item_latents` VALUES (11223,175,500,13,470);  -- EFFECT_IMMANENCE: 
 INSERT INTO `item_latents` VALUES (11301,369,1,39,13);    -- Refresh+1 at night when the level of the player's main job is a multiple of 13.
 
 -- Rambler's Cloak
-INSERT INTO `item_latents` VALUES (11312,8,5,7,1000);     -- STR+5 while TP >=100%
+INSERT INTO `item_latents` VALUES (11312,8,5,7,1000);     -- TP_OVER: 1000 - STR+5
 
 -- Dinner Jacket
 INSERT INTO `item_latents` VALUES (11355,14,1,26,1);     -- CHR+1 during Nighttime
@@ -1265,10 +1265,10 @@ INSERT INTO `item_latents` VALUES (14861,68,2,29,0);
 INSERT INTO `item_latents` VALUES (14861,68,2,31,0);
 
 -- Hachiman Kote
-INSERT INTO `item_latents` VALUES (14876,23,10,7,1000);  -- Attack+10 while TP >=100%
+INSERT INTO `item_latents` VALUES (14876,23,10,7,1000);  -- TP_OVER: 1000 - Attack+10
 
 -- Hachiman Kote +1
-INSERT INTO `item_latents` VALUES (14878,23,12,7,1000);  -- Attack+12 while TP >=100%
+INSERT INTO `item_latents` VALUES (14878,23,12,7,1000);  -- TP_OVER: 1000 - Attack+12
 
 -- Sennight Bangles
 INSERT INTO `item_latents` VALUES (14885,30,1,28,0);     -- Weekday: Magic Accuracy+1
@@ -1434,10 +1434,10 @@ INSERT INTO `item_latents` VALUES (15186,5,1,51,75);     -- "HP +27 at Lv 75~"
 INSERT INTO `item_latents` VALUES (15186,5,14,51,20);    -- "HP +14 at Lv 20-29"
 
 -- Hachiman Jinpachi +1
-INSERT INTO `item_latents` VALUES (15187,288,3,7,1000);  -- "Double Attack"+3% while TP >=100%
+INSERT INTO `item_latents` VALUES (15187,288,3,7,1000);  -- TP_OVER: 1000 - "Double Attack"+3%
 
 -- Hachiman Jinpachi
-INSERT INTO `item_latents` VALUES (15188,288,2,7,1000);  -- "Double Attack"+2% while TP >=100%
+INSERT INTO `item_latents` VALUES (15188,288,2,7,1000);  -- TP_OVER: 1000 - "Double Attack"+2%
 
 -- Vampire Mask
 INSERT INTO `item_latents` VALUES (15197,25,3,26,1);     -- Nighttime: ACC +3
@@ -1527,10 +1527,10 @@ INSERT INTO `item_latents` VALUES (15346,384,400,1,75);  -- Haste+4% when HP > 7
 INSERT INTO `item_latents` VALUES (15364,76,24,26,2);   -- Dusk - Dawn: MOVE_SPEED_GEAR_BONUS +25% (retail testing shows +24%)
 
 -- Hachiman Hakama
-INSERT INTO `item_latents` VALUES (15392,24,7,7,1000);   -- Ranged Attack+7 while TP >=100%
+INSERT INTO `item_latents` VALUES (15392,24,7,7,1000);   -- TP_OVER: 1000 - Ranged Attack+7
 
 -- Hachiman Hakama +1
-INSERT INTO `item_latents` VALUES (15394,24,8,7,1000);   -- Ranged Attack+8 while TP >=100%
+INSERT INTO `item_latents` VALUES (15394,24,8,7,1000);   -- TP_OVER: 1000 - Ranged Attack+8
 
 -- Unicorn Subligar
 INSERT INTO `item_latents` VALUES (15406,68,3,1,75);     -- Evasion+3 when HP >75%
@@ -1990,9 +1990,9 @@ INSERT INTO `item_latents` VALUES (16563,287,4,56,0);    -- DMG:43 while drawn a
 INSERT INTO `item_latents` VALUES (16563,405,4,56,0);   -- -4 MP/tick (while weapon is drawn)
 
 -- Perdu Sword
-INSERT INTO `item_latents` VALUES (16602,23,12,6,1000);  -- Attack+12 while TP <100%
-INSERT INTO `item_latents` VALUES (16602,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (16602,287,4,6,1000);  -- DMG+4 while TP <100%
+INSERT INTO `item_latents` VALUES (16602,23,12,6,1000);  -- TP_UNDER: 1000 - Attack+12
+INSERT INTO `item_latents` VALUES (16602,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (16602,287,4,6,1000);  -- TP_UNDER: 1000 - DMG+4
 
 -- Save The Queen
 INSERT INTO `item_latents` VALUES (16604,25,20,13,114);  -- Accuracy+20 (Latent effect is active when Cover is active.)
@@ -2109,9 +2109,9 @@ INSERT INTO `item_latents` VALUES (16968,165,7,59,3);    -- Vs. arcana: Critical
 INSERT INTO `item_latents` VALUES (16969,165,5,59,8);    -- Vs. demons: Critical hit rate +5%
 
 -- Onimaru
-INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- Attack+18 while TP <100%
-INSERT INTO `item_latents` VALUES (16976,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (16976,287,6,6,1000);  -- DMG+6 while TP <100%
+INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- TP_UNDER: 1000 - Attack+18
+INSERT INTO `item_latents` VALUES (16976,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (16976,287,6,6,1000);  -- TP_UNDER: 1000 - DMG+6
 
 -- Living Rod
 INSERT INTO `item_latents` VALUES (17070,370,1,52,6);    -- Regen Effect +1/tick in Water weather
@@ -2388,9 +2388,9 @@ INSERT INTO `item_latents` VALUES (17720,287,1,15,5);    -- DMG: 36~41, increase
 INSERT INTO `item_latents` VALUES (17720,287,1,15,6);    -- DMG: 36~41, increases by 1 for every person above 2 in party
 
 -- Perdu Hanger
-INSERT INTO `item_latents` VALUES (17741,23,15,6,1000);  -- Attack+15 while TP <100%
-INSERT INTO `item_latents` VALUES (17741,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- DMG+6 while TP <100%
+INSERT INTO `item_latents` VALUES (17741,23,15,6,1000);  -- TP_UNDER: 1000 - Attack+15
+INSERT INTO `item_latents` VALUES (17741,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- TP_UNDER: 1000 - DMG+6
 
 -- Koggelmander
 INSERT INTO `item_latents` VALUES (17759,165,7,59,19);   -- Vs. vermin: Critical hit rate +7%
@@ -2483,9 +2483,9 @@ INSERT INTO `item_latents` VALUES (17944,141,6,47,0);    -- Crit Rate +6% (for t
 INSERT INTO `item_latents` VALUES (17944,287,13,47,0);   -- DMG+13 when broken (500 WS points)
 
 -- Maneater
-INSERT INTO `item_latents` VALUES (17946,23,18,6,1000);  -- Attack+18 while TP <100%
-INSERT INTO `item_latents` VALUES (17946,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (17946,287,6,6,1000);  -- DMG+6 while TP <100%
+INSERT INTO `item_latents` VALUES (17946,23,18,6,1000);  -- TP_UNDER: 1000 - Attack+18
+INSERT INTO `item_latents` VALUES (17946,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (17946,287,6,6,1000);  -- TP_UNDER: 1000 - DMG+6
 
 -- Garde Pick
 INSERT INTO `item_latents` VALUES (17947,24,3,53,0);     -- RATK +3 in areas inside own nation's control
@@ -2554,9 +2554,9 @@ INSERT INTO `item_latents` VALUES (18005,141,6,47,0);    -- Crit Rate +6% (for t
 INSERT INTO `item_latents` VALUES (18005,287,15,47,0);   -- DMG+15 when broken (500 WS points)
 
 -- Blau Dolch
-INSERT INTO `item_latents` VALUES (18015,23,16,6,1000);  -- Attack+16 while TP <100%
-INSERT INTO `item_latents` VALUES (18015,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18015,287,7,6,1000);  -- DMG+7 while TP <100%
+INSERT INTO `item_latents` VALUES (18015,23,16,6,1000);  -- TP_UNDER: 1000 - Attack+16
+INSERT INTO `item_latents` VALUES (18015,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18015,287,7,6,1000);  -- TP_UNDER: 1000 - DMG+7
 
 -- Titan's Baselard
 INSERT INTO `item_latents` VALUES (18021,287,5,21,11);   -- DMG+5 when a party member (including yourself) has Titan summoned
@@ -2605,9 +2605,9 @@ INSERT INTO `item_latents` VALUES (18097,141,6,47,0);    -- Crit Rate +6% (for t
 INSERT INTO `item_latents` VALUES (18097,287,13,47,0);   -- DMG+13 when broken (500 WS points)
 
 -- Stone-splitter
-INSERT INTO `item_latents` VALUES (18099,23,24,6,1000);  -- Attack+24 while TP <100%
-INSERT INTO `item_latents` VALUES (18099,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18099,23,24,6,1000);  -- TP_UNDER: 1000 - Attack+24
+INSERT INTO `item_latents` VALUES (18099,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Z's Trident
 INSERT INTO `item_latents` VALUES (18101,8,12,41,0);     -- STR+12 during WS
@@ -2848,9 +2848,9 @@ INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- [Element: Fire]+15
 INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- DMG+10 on Firesday
 
 -- Wagh Baghnakhs
-INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- Attack+14 while TP <100%
-INSERT INTO `item_latents` VALUES (18358,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18358,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- TP_UNDER: 1000 - Attack+14
+INSERT INTO `item_latents` VALUES (18358,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18358,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Pahluwan Katars
 INSERT INTO `item_latents` VALUES (18364,287,2,58,0);    -- dmg +2
@@ -2894,9 +2894,9 @@ INSERT INTO `item_latents` VALUES (18422,62,1,13,445);
 INSERT INTO `item_latents` VALUES (18422,62,1,13,446);
 
 -- Perdu Blade
-INSERT INTO `item_latents` VALUES (18425,23,10,6,1000);  -- Attack+10 while TP <100%
-INSERT INTO `item_latents` VALUES (18425,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18425,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18425,23,10,6,1000);  -- TP_UNDER: 1000 - Attack+10
+INSERT INTO `item_latents` VALUES (18425,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18425,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Kosetsusamonji
 INSERT INTO `item_latents` VALUES (18434,73,2,58,0);     -- Store TP +2 in Assault
@@ -2915,9 +2915,9 @@ INSERT INTO `item_latents` VALUES (18484,288,1,58,0);    -- Wamoura Axe Double A
 INSERT INTO `item_latents` VALUES (18486,171,-500,25,0); -- DELAY: -500 song/roll active (-30 * 1000 / 60)
 
 -- Perdu Voulge
-INSERT INTO `item_latents` VALUES (18491,23,10,6,1000);  -- Attack+10 while TP <100%
-INSERT INTO `item_latents` VALUES (18491,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18491,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18491,23,10,6,1000);  -- TP_UNDER: 1000 - Attack+10
+INSERT INTO `item_latents` VALUES (18491,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18491,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Balestarius
 INSERT INTO `item_latents` VALUES (18498,978,2,13,267); -- Allied Tags: Occasionally attacks twice
@@ -2949,9 +2949,9 @@ INSERT INTO `item_latents` VALUES (18582,6,2,58,0);      -- Yigit Staff MP% +2 i
 INSERT INTO `item_latents` VALUES (18582,287,1,58,0);    -- Yigit Staff DMG+1 in Assault
 
 -- Perdu Staff
-INSERT INTO `item_latents` VALUES (18588,23,10,6,1000);  -- Attack+10 while TP <100%
-INSERT INTO `item_latents` VALUES (18588,25,6,6,1000);   -- Accuracy+6 while TP <100%
-INSERT INTO `item_latents` VALUES (18588,287,6,6,1000);  -- DMG+6 while TP <100%
+INSERT INTO `item_latents` VALUES (18588,23,10,6,1000);  -- TP_UNDER: 1000 - Attack+10
+INSERT INTO `item_latents` VALUES (18588,25,6,6,1000);   -- TP_UNDER: 1000 - Accuracy+6
+INSERT INTO `item_latents` VALUES (18588,287,6,6,1000);  -- TP_UNDER: 1000 - DMG+6
 
 -- Samudra
 INSERT INTO `item_latents` VALUES (18618,25,30,13,267);   -- Allied Tags: Accuracy +30
@@ -2989,14 +2989,14 @@ INSERT INTO `item_latents` VALUES (18709,8,6,13,3);    -- +6 STR while Poisoned
 INSERT INTO `item_latents` VALUES (18709,404,20,13,3); -- -20 HP/tick while Poisoned
 
 -- Perdu Bow
-INSERT INTO `item_latents` VALUES (18717,24,10,6,1000);  -- Ranged Attack+10 while TP <100%,changed to value on bg since it is different value than ffxicyclopedia
-INSERT INTO `item_latents` VALUES (18717,26,5,6,1000);   -- Ranged Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18717,287,4,6,1000);  -- DMG+4 while TP <100%
+INSERT INTO `item_latents` VALUES (18717,24,10,6,1000);  -- TP_UNDER: 1000 - Ranged Attack+10,changed to value on bg since it is different value than ffxicyclopedia
+INSERT INTO `item_latents` VALUES (18717,26,5,6,1000);   -- TP_UNDER: 1000 - Ranged Accuracy+5
+INSERT INTO `item_latents` VALUES (18717,287,4,6,1000);  -- TP_UNDER: 1000 - DMG+4
 
 -- Perdu Crossbow
-INSERT INTO `item_latents` VALUES (18718,24,10,6,1000);  -- Ranged Attack+10 while TP <100%
-INSERT INTO `item_latents` VALUES (18718,26,5,6,1000);   -- Ranged Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18718,287,4,6,1000);  -- DMG+4 while TP <100%
+INSERT INTO `item_latents` VALUES (18718,24,10,6,1000);  -- TP_UNDER: 1000 - Ranged Attack+10
+INSERT INTO `item_latents` VALUES (18718,26,5,6,1000);   -- TP_UNDER: 1000 - Ranged Accuracy+5
+INSERT INTO `item_latents` VALUES (18718,287,4,6,1000);  -- TP_UNDER: 1000 - DMG+4
 
 -- Sturms Report
 INSERT INTO `item_latents` VALUES (18734,30,13,13,267);  -- Allied Tags: Magic Accuracy +13
@@ -3038,9 +3038,9 @@ INSERT INTO `item_latents` VALUES (18771,23,1,16,6);     -- ATT +1~4,party size 
 INSERT INTO `item_latents` VALUES (18811,369,1,4,75);  -- Refresh MP <= 75%
 
 -- Perdu Wand
-INSERT INTO `item_latents` VALUES (18850,23,14,6,1000);  -- Attack+14 while TP <100%
-INSERT INTO `item_latents` VALUES (18850,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18850,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18850,23,14,6,1000);  -- TP_UNDER: 1000 - Attack+14
+INSERT INTO `item_latents` VALUES (18850,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18850,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Octave Club
 INSERT INTO `item_latents` VALUES (18852,978,2,38,2);    -- Occasionally attacks 2 times when mjob multiple of 2
@@ -3074,9 +3074,9 @@ INSERT INTO `item_latents` VALUES (18895,288,4,13,281);      -- Double attack +4
 INSERT INTO `item_latents` VALUES (18895,288,4,13,282);      -- Double attack +4 ENWATER_II
 
 -- Perdu Sickle
-INSERT INTO `item_latents` VALUES (18943,23,14,6,1000);  -- Attack+14 while TP <100%
-INSERT INTO `item_latents` VALUES (18943,25,5,6,1000);   -- Accuracy+5 while TP <100%
-INSERT INTO `item_latents` VALUES (18943,287,5,6,1000);  -- DMG+5 while TP <100%
+INSERT INTO `item_latents` VALUES (18943,23,14,6,1000);  -- TP_UNDER: 1000 - Attack+14
+INSERT INTO `item_latents` VALUES (18943,25,5,6,1000);   -- TP_UNDER: 1000 - Accuracy+5
+INSERT INTO `item_latents` VALUES (18943,287,5,6,1000);  -- TP_UNDER: 1000 - DMG+5
 
 -- Zareehkl Scythe
 INSERT INTO `item_latents` VALUES (18949,302,1,0,25);    -- Tiple Attack 1% when HP <=25%
@@ -3159,9 +3159,9 @@ INSERT INTO `item_latents` VALUES (19125,9,1,16,5);      -- DEX +1~4,party size 
 INSERT INTO `item_latents` VALUES (19125,9,1,16,6);      -- DEX +1~4,party size 3+. Effect strengthens with more members
 
 -- Papilio Kirpan
-INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- ATT+14 TP<1000
-INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- ACC+5  TP<1000
-INSERT INTO `item_latents` VALUES (19126,287,6,6,1000);      -- DMG+6  TP<1000
+INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- TP_UNDER: 1000 - ATT+14
+INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- TP_UNDER: 1000 - ACC+5
+INSERT INTO `item_latents` VALUES (19126,287,6,6,1000);      -- TP_UNDER: 1000 - DMG+6
 
 -- Cruadin
 INSERT INTO `item_latents` VALUES (19155,165,15,13,267); -- Allied Tags: Critical Hit Rate +15%
@@ -3286,9 +3286,9 @@ INSERT INTO `item_latents` VALUES (20510,165,3,13,59);   -- Crit rate +3% if Foc
 INSERT INTO `item_latents` VALUES (20510,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- Eminent Baghnakhs
-INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);      -- Att+10 TP<1000
-INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);      -- Acc+39 (24 normal, +15 more) TP<1000
-INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);      -- Dmg+4  TP<1000
+INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);  -- TP_UNDER: 1000 - Att+10
+INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);  -- TP_UNDER: 1000 - Acc+39 (24 normal, +15 more)
+INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);  -- TP_UNDER: 1000 - Dmg+4
 
 -- Eminent Dagger
 INSERT INTO `item_latents` VALUES (20624,23,10,6,1000);  -- TP_UNDER: 1000 - ATT: 10
@@ -3300,9 +3300,9 @@ INSERT INTO `item_latents` VALUES (20628,287,85,56,0);  -- WEAPON_DRAWN_MP_OVER:
 INSERT INTO `item_latents` VALUES (20628,405,10,56,0); -- -10 MP/tick (while weapon is drawn)
 
 -- Eminent Scimitar
-INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
-INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
-INSERT INTO `item_latents` VALUES (20726,287,6,6,1000);      -- Dmg+6  TP>1000
+INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);  -- TP_UNDER: 1000 - Att+10
+INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);  -- TP_UNDER: 1000 - Acc+15
+INSERT INTO `item_latents` VALUES (20726,287,6,6,1000);  -- TP_UNDER: 1000 - Dmg+6
 
 -- Conqueror 119
 INSERT INTO `item_latents` VALUES (20837,165,14,13,56);  -- Crit Rate +14% if Berserk Active
