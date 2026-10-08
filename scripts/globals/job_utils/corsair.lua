@@ -769,6 +769,19 @@ xi.job_utils.corsair.applyRoll = function(caster, target, inAbility, total, isDo
     local effectpower = total >= 12 and rollInfo.bustPower or rollInfo.powers[total]    -- Get roll or bust power values
     local enhanceMod  = rollEnhanceMods[abilityId]                                      -- Check for roll enhancement gear mod specific to the rolled ability
     local doBonus     = enhanceMod and math.randomInt(1, 100) <= caster:getMod(enhanceMod) -- Chance to enhance roll based on gear mod
+    local effect      = target:getStatusEffect(rollInfo.effect)
+
+    -- Check to see if the double up or new roll applies to us
+    -- if caster == target, then we will always be able to apply to ourselves
+    -- but otherwise only the originator of the roll can double up or re-apply (such as fold and reroll)
+    if
+        effect and
+        caster:getID() ~= target:getID() and
+        caster:getID() ~= effect:getSourceTypeParam()
+    then
+        currentAbility:setMsg(xi.msg.basic.NO_EFFECT)
+        return 0 -- Packet on retail shows this param is always zero here when it rolls no effect in this situation
+    end
 
     -- Apply roll bonus if matching job or gear mod triggers
     if
