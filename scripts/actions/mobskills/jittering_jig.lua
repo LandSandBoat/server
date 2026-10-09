@@ -11,7 +11,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.ATTACK_BOOST, 46, 0, 60))
+    -- TODO: Power and duration are unverified.
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ATTACK_BOOST, 46, 0, 60))
 
     return xi.effect.ATTACK_BOOST
 end

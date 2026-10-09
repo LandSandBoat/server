@@ -26,7 +26,6 @@
 #include "data/enums/ecosystem.h"
 #include "data/enums/job.h"
 #include "data/enums/mod.h"
-#include "data/enums/monstrosity_instinct.h"
 #include "data/enums/monstrosity_species.h"
 #include "data/enums/monstrosity_variant.h"
 #include "data/yaml/enum_keyed_map.h"
@@ -35,7 +34,6 @@
 
 #include <glaze/glaze.hpp>
 
-#include <array>
 #include <map>
 #include <optional>
 #include <string>

@@ -72,8 +72,7 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
     local canZanshin    = false
 
     -- DW/H2H delay is halved for the purposes of a single hit's TP return when applicable, see https://www.bg-wiki.com/ffxi/Tactical_Points
-    if actor:getMainJob() == xi.job.MON then
-        -- A Monipulator's base delay is already per hit.
+    if actor:getMainJob() == xi.job.MON then -- A Monipulator's base delay is already per hit.
         canZanshin = true
     elseif actor:isDualWielding() then -- NOTE: this 'isDualWielding' may trip on non-PCs even if they are 'using h2h'. If this is rectified in core in the future this should fall through correctly.
         modifiedDelay = (delay * (100 - actor:getMod(xi.mod.DUAL_WIELD)) / 100) / 2

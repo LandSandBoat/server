@@ -1,14 +1,6 @@
 -- Feretory rules, read from data/monstrosity.yaml through the entity bindings.
-local ffi = require('ffi')
-
-pcall(ffi.cdef, [[
-    typedef struct {
-        uint16_t idSize;
-        uint16_t sync;
-        uint32_t clientState;
-        uint32_t debugClientFlg;
-    } MONSTROSITY_TEST_GAMEOK;
-]])
+local ffi     = require('ffi')
+local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 -- 0x102 for Monstrosity: flags at 0x0A, species at 0x0C, instinct slots from 0x10.
 local extendedJobSize = 164
@@ -18,10 +10,7 @@ describe('Monstrosity starting state', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     it('starts with Rabbit, Mandragora and Lizard at level 1', function()
@@ -38,8 +27,7 @@ describe('Monstrosity starting state', function()
     it('reports MON as both main and sub job', function()
         player:gotoZone(xi.zone.WEST_RONFAURE)
         player.packets:clear()
-        local gameOk = ffi.new('MONSTROSITY_TEST_GAMEOK')
-        player.packets:send(0x00C, gameOk, assert(ffi.sizeof(gameOk)))
+        helpers.sendGameOk(player)
 
         local subFlags = {}
         local status   = nil
@@ -79,8 +67,7 @@ describe('Monstrosity starting state', function()
     -- Anything sent before that can be dropped, and the client then lists no moves.
     it('sends Monstrosity data once the client has loaded the zone', function()
         player.packets:clear()
-        local gameOk = ffi.new('MONSTROSITY_TEST_GAMEOK')
-        player.packets:send(0x00C, gameOk, assert(ffi.sizeof(gameOk)))
+        helpers.sendGameOk(player)
 
         local species  = nil
         local hasParty = false
@@ -128,11 +115,25 @@ describe('Monstrosity Feretory exits', function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
     end)
 
-    it('caps each Belligerency zone at its level', function()
-        assert(xi.monstrosity.belligerencyCaps[xi.zone.BUBURIMU_PENINSULA] == 30, 'Buburimu should cap at 30')
-        assert(xi.monstrosity.belligerencyCaps[xi.zone.XARCABARD] == 60, 'Xarcabard should cap at 60')
-        assert(xi.monstrosity.belligerencyCaps[xi.zone.ULEGUERAND_RANGE] == 90, 'Uleguerand should cap at 90')
-        assert(xi.monstrosity.belligerencyCaps[xi.zone.WEST_RONFAURE] == nil, 'other zones have no cap')
+    -- The quest sends a player in on their normal job, and the zone changes it to MON.
+    it('builds the Monipulator when a player walks in on another job', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:changeJob(xi.job.WAR)
+        player:setLevel(75)
+        player:gotoZone(xi.zone.FERETORY)
+
+        assert(player:getMainJob() == xi.job.MON, string.format('main job is %d', player:getMainJob()))
+        assert(player:getSubJob() == xi.job.MON, string.format('sub job is %d', player:getSubJob()))
+        assert(player:getMainLvl() < 75, string.format('kept the WAR level %d', player:getMainLvl()))
+        assert(player:getEcosystem() ~= xi.ecosystem.HUMANOID, 'kept the Humanoid ecosystem')
+    end)
+
+    it('drops the species ecosystem on leaving MON', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:changeJob(xi.job.MON)
+        player:changeJob(xi.job.WAR)
+
+        assert(player:getEcosystem() == xi.ecosystem.HUMANOID, 'a WAR kept the species ecosystem')
     end)
 
     it('refuses a passage to a zone the player has not visited', function()
@@ -192,10 +193,7 @@ describe('Monstrosity Teyrnon shop', function()
     end
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.FERETORY)
+        player = helpers.spawnMonipulator(xi.zone.FERETORY)
     end)
 
     it('sells a family for its infamy', function()
@@ -317,10 +315,7 @@ describe('Monstrosity Aengus', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.FERETORY)
+        player = helpers.spawnMonipulator(xi.zone.FERETORY)
     end)
 
     it('toggles Belligerency', function()
@@ -343,10 +338,7 @@ describe('Monstrosity Bee quiz', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.FERETORY)
+        player = helpers.spawnMonipulator(xi.zone.FERETORY)
 
         -- Pin the first quiz, whose answers are Teyrnon, Aengus, Suibhne.
         player:setCharVar('HQuest[monstrosityBee]Option', 1)
@@ -368,6 +360,13 @@ end)
 
 -- Changing family keeps every level but loses the exp in progress. A variant keeps it.
 describe('Monstrosity species change', function()
+    local onyxRabbit = 256 + xi.monstrosityVariant.ONYX_RABBIT
+    local humeI      = 0x300 + xi.monstrosityInstinct.HUME_I
+    local elvaanI    = 0x300 + xi.monstrosityInstinct.ELVAAN_I
+    local taruI      = 0x300 + xi.monstrosityInstinct.TARU_I
+    local mithraI    = 0x300 + xi.monstrosityInstinct.MITHRA_I
+    local galkaI     = 0x300 + xi.monstrosityInstinct.GALKA_I
+
     ---@type CClientEntityPair
     local player
 
@@ -411,23 +410,8 @@ describe('Monstrosity species change', function()
         return count
     end
 
-    -- exp_now in the CLISTATUS the change sends back.
-    local function currentExp()
-        local exp = nil
-        for _, pkt in pairs(player.packets:getIncoming()) do
-            if pkt.type == 0x061 then
-                exp = pkt.data[0x10] + pkt.data[0x11] * 256
-            end
-        end
-
-        return exp
-    end
-
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.FERETORY)
+        player = helpers.spawnMonipulator(xi.zone.FERETORY)
 
         -- setLevel leaves the bar one short, so one point rolls to 11 with an empty bar.
         player:setLevel(10)
@@ -438,7 +422,7 @@ describe('Monstrosity species change', function()
     it('keeps the level but loses the exp in progress when changing family', function()
         changeSpecies(xi.monstrositySpecies.LIZARD)
         assert(player:getMainLvl() == 1, string.format('Lizard is level %d', player:getMainLvl()))
-        assert(currentExp() == 0, string.format('Lizard has %s exp', tostring(currentExp())))
+        assert(helpers.currentExp(player) == 0, string.format('Lizard has %s exp', tostring(helpers.currentExp(player))))
 
         changeSpecies(xi.monstrositySpecies.RABBIT)
         assert(player:getMainLvl() == 11, string.format('Rabbit came back as level %d', player:getMainLvl()))
@@ -453,40 +437,40 @@ describe('Monstrosity species change', function()
 
         assert(syncLevel == 11, string.format('0x067 level was %s', tostring(syncLevel)))
         assert(player:getSubLvl() == 11, string.format('Rabbit sub job came back as level %d', player:getSubLvl()))
-        assert(currentExp() == 0, string.format('Rabbit kept %s exp', tostring(currentExp())))
+        assert(helpers.currentExp(player) == 0, string.format('Rabbit kept %s exp', tostring(helpers.currentExp(player))))
     end)
 
     it('keeps the exp in progress when changing to a variant of the same family', function()
         xi.monstrosity.unlockVariant(player, xi.monstrosityVariant.ONYX_RABBIT)
 
-        changeSpecies(256 + xi.monstrosityVariant.ONYX_RABBIT)
+        changeSpecies(onyxRabbit)
         assert(player:getMainLvl() == 11, string.format('Onyx Rabbit is level %d', player:getMainLvl()))
-        assert(currentExp() == 250, string.format('Onyx Rabbit has %s exp', tostring(currentExp())))
+        assert(helpers.currentExp(player) == 250, string.format('Onyx Rabbit has %s exp', tostring(helpers.currentExp(player))))
     end)
 
     -- Retail keeps race instincts equipped through a family change.
     it('keeps equipped instincts the new species can afford', function()
-        equipInstincts({ 768, 769 })
+        equipInstincts({ humeI, elvaanI })
         changeSpecies(xi.monstrositySpecies.LIZARD)
 
         assert(equippedCount() == 2, string.format('%s instincts survived', tostring(equippedCount())))
     end)
 
     it('drops equipped instincts the new species cannot afford', function()
-        equipInstincts({ 768, 769, 770, 771, 772 })
+        equipInstincts({ humeI, elvaanI, taruI, mithraI, galkaI })
         changeSpecies(xi.monstrositySpecies.LIZARD)
 
         assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
     end)
 
     it('swaps instinct mods when a slot is replaced or resent', function()
-        -- Hume I: CHR+2 among others
-        equipInstincts({ 768 })
-        equipInstincts({ 768 })
+        -- Hume I has CHR+2 among others
+        equipInstincts({ humeI })
+        equipInstincts({ humeI })
         assert(player:getMod(xi.mod.CHR) == 2, string.format('CHR mod is %d after resending', player:getMod(xi.mod.CHR)))
 
-        -- Elvaan I: STR+3 MND+3
-        equipInstincts({ 769 })
+        -- Elvaan I has STR+3 and MND+3
+        equipInstincts({ elvaanI })
         assert(player:getMod(xi.mod.CHR) == 0, string.format('CHR mod is %d after replacing', player:getMod(xi.mod.CHR)))
         assert(player:getMod(xi.mod.STR) == 3, string.format('STR mod is %d after replacing', player:getMod(xi.mod.STR)))
     end)
@@ -519,8 +503,7 @@ describe('Monstrosity species change', function()
 
         player:gotoZone(xi.zone.FERETORY)
         player.packets:clear()
-        local gameOk = ffi.new('MONSTROSITY_TEST_GAMEOK')
-        player.packets:send(0x00C, gameOk, assert(ffi.sizeof(gameOk)))
+        helpers.sendGameOk(player)
 
         assert(afterChange == stats(), string.format('stats after the change %s, after zoning %s', afterChange, stats()))
     end)

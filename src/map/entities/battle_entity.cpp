@@ -728,7 +728,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
     if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
     {
-        return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::MAIN_DMG_RATING), 1, 65535));
+        return monstrosity::GetBaseDamage(PMonipulator, xi::Mod::MAIN_DMG_RATING);
     }
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
@@ -814,13 +814,13 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 {
     TracyZoneScoped;
 
-    uint16 dmg = 0;
-
     // Ranged monster moves such as Sharp Sting hit as hard as the Monipulator's melee.
     if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
     {
-        return static_cast<uint16>(std::clamp(monstrosity::GetBaseDamage(PMonipulator) + getMod(xi::Mod::RANGED_DMG_RATING), 1, 65535));
+        return monstrosity::GetBaseDamage(PMonipulator, xi::Mod::RANGED_DMG_RATING);
     }
+
+    uint16 dmg = 0;
 
     if (objtype == TYPE_MOB)
     {
@@ -1201,7 +1201,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     }
     else if (PMonipulator != nullptr)
     {
-        // Retail Monipulator attack fits this with fists too.
+        // Monipulators use the fist multiplier whatever their species.
         strMultiplier = 0.75f;
     }
     else if (weapon && weapon->isTwoHanded()) // 2-handed weapon
@@ -1545,7 +1545,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 
         if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
         {
-            // Retail Monipulator accuracy fits DEX * 0.75 and an A+ skill.
+            // Fitted to retail Monipulator accuracy.
             dexMultiplier = 0.75f;
             ACC           = GetAccFromSkill(monstrosity::GetCombatSkill(PMonipulator));
         }

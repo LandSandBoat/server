@@ -1,40 +1,21 @@
 -- Rules a Monipulator plays under, from the JP wiki's Monstrosity pages.
-local ffi = require('ffi')
+local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity restrictions', function()
+    local newYearMandragora = 256 + xi.monstrosityVariant.NEW_YEAR_MANDRAGORA
+    local onyxBee           = 256 + xi.monstrosityVariant.VERMILLION_AND_ONYX_BEE
+    local fireballDat       = 343
+
     ---@type CClientEntityPair
     local player
 
-    local function becomeSpecies(family, speciesCode, level)
-        local data = player:getMonstrosityData()
-        data.monstrosityId  = family
-        data.species        = speciesCode
-        data.levels[family] = level
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-    end
-
-    local function killWorm()
-        local mob = player.entities:moveTo('Tunnel_Worm')
-        mob:respawn()
-        mob:updateClaim(player)
-        mob:takeDamage(mob:getHP(), player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-        for _ = 1, 3 do
-            xi.test.world:tickEntity(mob)
-            xi.test.world:skipTime(1)
-        end
-    end
-
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     -- Each family unlocks an instinct at 30, 60 and 90, held as a 2-bit count.
     it('unlocks a level instinct every 30 levels', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 65)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 65)
 
         local data  = player:getMonstrosityData()
         local count = bit.band(bit.rshift(data.instincts[10], 6), 3)
@@ -68,13 +49,15 @@ describe('Monstrosity restrictions', function()
     end)
 
     it('cannot use a monster skill under Gestation', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 15)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 15)
+        -- Zoning grants Gestation again
+        player:gotoZone(xi.zone.WEST_RONFAURE)
         player.assert:hasEffect(xi.effect.GESTATION)
 
         local mob = player.entities:moveTo('Tunnel_Worm')
         mob:respawn()
         player:setTP(3000)
-        player.actions:useMonsterSkill(mob, 343)
+        player.actions:useMonsterSkill(mob, fireballDat)
 
         assert(player:getTP() == 3000, string.format('Fireball went off under Gestation, TP=%d', player:getTP()))
         player.assert:hasEffect(xi.effect.GESTATION)
@@ -82,7 +65,7 @@ describe('Monstrosity restrictions', function()
 
     it('stops infamy at the cap without Belligerency', function()
         player:addCurrency('infamy', 9999)
-        killWorm()
+        helpers.killWorm(player)
 
         assert(player:getCurrency('infamy') == 10000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
@@ -90,13 +73,13 @@ describe('Monstrosity restrictions', function()
     it('stops infamy at the higher cap under Belligerency', function()
         player:setBelligerencyFlag(true)
         player:addCurrency('infamy', 49999)
-        killWorm()
+        helpers.killWorm(player)
 
         assert(player:getCurrency('infamy') == 50000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
 
     it('drops MON behaviour as soon as the job changes away from MON', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 10)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 10)
         assert(player:getBaseDelay() == 240, string.format('a Lizard has delay %d', player:getBaseDelay()))
 
         player:changeJob(xi.job.WAR)
@@ -123,7 +106,7 @@ describe('Monstrosity restrictions', function()
 
     for level, retail in pairs(retailCombat) do
         it(string.format('gives a level %d Rabbit close to its retail attack and defence', level), function()
-            becomeSpecies(xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, level)
+            helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, level)
 
             local attack  = player:getStat(xi.mod.ATT)
             local defence = player:getStat(xi.mod.DEF)
@@ -134,16 +117,24 @@ describe('Monstrosity restrictions', function()
 
     it('gives no MP to a NIN sub job', function()
         -- New Year Mandragora is MNK/NIN.
-        becomeSpecies(xi.monstrositySpecies.MANDRAGORA, 287, 35)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.MANDRAGORA, newYearMandragora, 35)
 
         assert(player:getMaxMP() == 0, string.format('MNK/NIN has %d MP', player:getMaxMP()))
     end)
 
     it('gives an RDM sub job the WHM MP curve', function()
         -- Vermillion and Onyx Bee is WAR/RDM.
-        becomeSpecies(xi.monstrositySpecies.BEE, 290, 20)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
 
         assert(player:getMaxMP() == 369, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+    end)
+
+    it('casts with the magic skill of its species jobs', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
+        assert(player:getSkillLevel(xi.skill.ELEMENTAL_MAGIC) > 0, 'a WAR/RDM has no elemental magic skill')
+
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 20)
+        assert(player:getSkillLevel(xi.skill.ELEMENTAL_MAGIC) == 0, 'a WAR/WAR has elemental magic skill')
     end)
 
     local function waitSeconds(seconds)
@@ -180,6 +171,7 @@ describe('Monstrosity restrictions', function()
         local mob = player.entities:moveTo('Wild_Rabbit')
         mob:respawn()
         mob:setUnkillable(true)
+        player.entities:moveTo(mob:getID())
         startRelinquish()
         mob:useMobAbility(xi.mobSkill.FOOT_KICK_1, player, 0)
         for _ = 1, 15 do
@@ -199,18 +191,9 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.MON, 'Relinquish ran under Poison')
     end)
 
-    it('refuses Relinquish off MON', function()
-        player:changeJob(xi.job.WAR)
-        local relinquish = require('scripts/actions/abilities/relinquish')
-
-        -- The check ignores the ability, and a test has no CAbility to pass.
-        ---@diagnostic disable-next-line: param-type-mismatch
-        assert(relinquish.onAbilityCheck(player, player, nil) == xi.msg.basic.UNABLE_TO_USE_JA2, 'a WAR could Relinquish')
-    end)
-
     it('never takes away infamy held above the cap', function()
         player:addCurrency('infamy', 15000)
-        killWorm()
+        helpers.killWorm(player)
 
         assert(player:getCurrency('infamy') == 15000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
@@ -228,7 +211,7 @@ describe('Monstrosity restrictions', function()
     for _, species in ipairs(retailHP) do
         it(string.format('gives a %s its retail HP', species.name), function()
             for level, expected in pairs(species.hp) do
-                becomeSpecies(species.family, species.family, level)
+                helpers.becomeSpecies(player, species.family, species.family, level)
                 assert(player:getMaxHP() == expected, string.format('%s %d has %d HP, expected %d', species.name, level, player:getMaxHP(), expected))
             end
         end)
@@ -246,7 +229,7 @@ describe('Monstrosity restrictions', function()
         }
 
         for level, values in pairs(expected) do
-            becomeSpecies(xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, level)
+            helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, level)
             for idx, stat in ipairs(stats) do
                 local diff = player:getStat(stat) - values[idx]
                 if level == 1 then
@@ -259,7 +242,7 @@ describe('Monstrosity restrictions', function()
     end)
 
     local function learnedAbilities(family, level)
-        becomeSpecies(family, family, level)
+        helpers.becomeSpecies(player, family, family, level)
         player.packets:clear()
         -- Rebuilds and resends the command table
         player:changeJob(xi.job.MON)
@@ -282,20 +265,48 @@ describe('Monstrosity restrictions', function()
     -- Retail: the species' main job abilities at player levels, never Provoke, plus Relinquish.
     it('learns its species main job abilities except Provoke', function()
         local level1 = learnedAbilities(xi.monstrositySpecies.LIZARD, 1)
-        assert(level1[16] and level1[382], 'level 1 should have Mighty Strikes and Relinquish')
-        assert(not level1[31], 'Berserk is not learned until 15')
+        assert(level1[xi.jobAbility.MIGHTY_STRIKES] and level1[xi.jobAbility.RELINQUISH], 'level 1 should have Mighty Strikes and Relinquish')
+        assert(not level1[xi.jobAbility.BERSERK], 'Berserk is not learned until 15')
 
         local level20 = learnedAbilities(xi.monstrositySpecies.LIZARD, 20)
-        assert(level20[31], 'level 20 should have Berserk')
-        assert(not level20[35], 'a Monipulator never learns Provoke')
+        assert(level20[xi.jobAbility.BERSERK], 'level 20 should have Berserk')
+        assert(not level20[xi.jobAbility.PROVOKE], 'a Monipulator never learns Provoke')
     end)
 
     -- Ability id to the level it is learned at.
     local startingSpeciesAbilities =
     {
-        { name = 'Rabbit',     family = xi.monstrositySpecies.RABBIT,     abilities = { [16] = 1, [382] = 1, [31] = 15 } },
-        { name = 'Mandragora', family = xi.monstrositySpecies.MANDRAGORA, abilities = { [17] = 1, [382] = 1, [39] = 5, [37] = 15 } },
-        { name = 'Bee',        family = xi.monstrositySpecies.BEE,        abilities = { [16] = 1, [382] = 1, [31] = 15 } },
+        {
+            name      = 'Rabbit',
+            family    = xi.monstrositySpecies.RABBIT,
+            abilities =
+            {
+                [xi.jobAbility.MIGHTY_STRIKES] = 1,
+                [xi.jobAbility.RELINQUISH]     = 1,
+                [xi.jobAbility.BERSERK]        = 15,
+            },
+        },
+        {
+            name      = 'Mandragora',
+            family    = xi.monstrositySpecies.MANDRAGORA,
+            abilities =
+            {
+                [xi.jobAbility.HUNDRED_FISTS] = 1,
+                [xi.jobAbility.RELINQUISH]    = 1,
+                [xi.jobAbility.BOOST]         = 5,
+                [xi.jobAbility.DODGE]         = 15,
+            },
+        },
+        {
+            name      = 'Bee',
+            family    = xi.monstrositySpecies.BEE,
+            abilities =
+            {
+                [xi.jobAbility.MIGHTY_STRIKES] = 1,
+                [xi.jobAbility.RELINQUISH]     = 1,
+                [xi.jobAbility.BERSERK]        = 15,
+            },
+        },
     }
 
     for _, species in ipairs(startingSpeciesAbilities) do
@@ -318,7 +329,7 @@ end)
 -- Retail lists, and lets a Monipulator cast, the learned spells its species' jobs know at the
 -- species level. Trusts stay listed but cannot be called.
 describe('Monstrosity spellcasting', function()
-    local onyxRabbit = 256
+    local onyxRabbit = 256 + xi.monstrosityVariant.ONYX_RABBIT
 
     ---@type CClientEntityPair
     local player
@@ -337,8 +348,7 @@ describe('Monstrosity spellcasting', function()
     -- The spell list goes out once the client reports the zone loaded.
     local function listsSpell(spellId)
         player.packets:clear()
-        local gameOk = ffi.new('uint8_t[12]')
-        player.packets:send(0x00C, gameOk, assert(ffi.sizeof(gameOk)))
+        helpers.sendGameOk(player)
 
         local listed = nil
         for _, pkt in pairs(player.packets:getIncoming()) do
@@ -351,24 +361,14 @@ describe('Monstrosity spellcasting', function()
     end
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
 
         for _, spellId in ipairs({ xi.magic.spell.STONE, xi.magic.spell.CURE, xi.magic.spell.WARP, xi.magic.spell.SHANTOTTO }) do
             player:addSpell(spellId, { silentLog = true })
         end
 
         -- Onyx Rabbit is WAR/BLM.
-        local data = player:getMonstrosityData()
-        data.monstrosityId                        = xi.monstrositySpecies.RABBIT
-        data.species                              = onyxRabbit
-        data.levels[xi.monstrositySpecies.RABBIT] = 20
-        player:setMonstrosityData(data)
-        player.packets:clear()
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        player:delStatusEffect(xi.effect.GESTATION)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, onyxRabbit, 20)
     end)
 
     it('lists the learned spells its species can cast, and its Trusts', function()

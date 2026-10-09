@@ -3711,6 +3711,27 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         }
     }
 
+    // A Monipulator casts like a mob of its species: capped skill from its main job, else its sub job.
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(PChar))
+    {
+        const auto species = monstrosity::GetSpeciesJobs(PMonipulator);
+        for (auto i = static_cast<int32>(xi::SkillType::DivineMagic); i <= static_cast<int32>(xi::SkillType::BlueMagic); ++i)
+        {
+            const auto type     = static_cast<xi::SkillType>(i);
+            const auto maxSkill = [&]() -> uint16
+            {
+                if (const auto mainSkill = battleutils::GetMaxSkill(type, species.mainJob, species.level); mainSkill != 0)
+                {
+                    return mainSkill;
+                }
+
+                return battleutils::GetMaxSkill(type, species.subJob, species.level);
+            }();
+
+            PChar->WorkingSkills.skill[i] = static_cast<uint16>(std::max(maxSkill + PChar->getMod(static_cast<xi::Mod>(i + 79)), 0));
+        }
+    }
+
     for (int32 i = 48; i < 58; ++i)
     {
         PChar->WorkingSkills.skill[i] = (PChar->RealSkills.skill[i] / 10) * 0x20 + PChar->RealSkills.rank[i];
@@ -6330,7 +6351,7 @@ void CheckUnarmedWeapon(CCharEntity* PChar)
 
     const auto usesFists = [&]
     {
-        // Retail: only MNK species swing twice per round.
+        // Only MNK species fight with fists.
         if (PChar->m_PMonstrosity != nullptr)
         {
             return PChar->m_PMonstrosity->MainJob == xi::Job::MNK;

@@ -372,6 +372,7 @@ xi.msg.basic =
     PFLUG_GAIN                      = 671, -- <Player> uses <Ability>. <Target> now has enhanced resistance.
     GAMBIT_GAIN                     = 672, -- <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
     SCAVENGE_FIND_ITEMS             = 674, -- <user> uses <ability>, and finds <quantity> <item>.
+    POSSESS_NEW_MONSTER             = 677, -- You are now able to possess a new monster!
     FERETORY_COUNTDOWN              = 679, -- <actor> will return to the Feretory in <n>
     ROE_COMPLETE                    = 690, -- You have completed the following Records of Eminence objective: <record>.
     ROE_REPEAT_OR_CANCEL            = 691, -- This objective may be repeated, and can be cancelled from the menu.

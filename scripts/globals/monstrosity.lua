@@ -52,7 +52,7 @@ xi.monstrosity.belligerencyCaps =
 }
 
 -- Teyrnon's shop lives in data/monstrosity.yaml and does not change once loaded.
-local teyrnonShop = nil
+local teyrnonShop
 
 local function getTeyrnonShop(player)
     teyrnonShop = teyrnonShop or player:getMonstrosityShop()
@@ -131,31 +131,11 @@ xi.monstrosity.unlockVariant = function(player, variant)
     end
 end
 
-local function hasPurchasedInstinct(player, purchasableInstinctId)
-    local data        = player:getMonstrosityData()
-    local byteOffset  = 20 + math.floor(purchasableInstinctId / 8)
-    local shiftAmount = purchasableInstinctId % 8
+-- Purchased instincts sit in bytes 20 to 23 of the instinct bitfield, one bit per instinct.
+local function getPurchasedInstinctBits(player)
+    local instincts = player:getMonstrosityData().instincts
 
-    if byteOffset >= 20 and byteOffset < 24 then
-        return bit.band(data.instincts[byteOffset], bit.lshift(1, shiftAmount)) > 0
-    end
-
-    return false
-end
-
-local function getPurchasedInstinctsMask(player)
-    local instinctMask = 0
-
-    for _, purchasableInstinctId in pairs(xi.monstrosityInstinct) do
-        if
-            purchasableInstinctId >= xi.monstrosityInstinct.HUME_II and
-            hasPurchasedInstinct(player, purchasableInstinctId)
-        then
-            instinctMask = utils.mask.setBit(instinctMask, purchasableInstinctId - xi.monstrosityInstinct.HUME_II, true)
-        end
-    end
-
-    return instinctMask
+    return bit.bor(instincts[20], bit.lshift(instincts[21], 8), bit.lshift(instincts[22], 16), bit.lshift(instincts[23], 24))
 end
 
 local function addPurchasedInstinct(player, purchasableInstinctId)
@@ -243,15 +223,15 @@ local function hasPurchaseRequirements(player, monCategory, selectedMon)
 end
 
 local function getMonPageMask(player, monCategory)
-    local pageMask = 0
-
     local categoryTable = getTeyrnonShop(player)[monCategory]
-    if categoryTable then
+    if not categoryTable then
+        return 0
+    end
 
-        for bitPos, _ in pairs(categoryTable) do
-            if hasPurchaseRequirements(player, monCategory, bitPos) then
-                pageMask = utils.mask.setBit(pageMask, bitPos, true)
-            end
+    local pageMask = 0
+    for bitPos, _ in pairs(categoryTable) do
+        if hasPurchaseRequirements(player, monCategory, bitPos) then
+            pageMask = utils.mask.setBit(pageMask, bitPos, true)
         end
     end
 
@@ -356,8 +336,9 @@ xi.monstrosity.relinquishOnAbility = function(player)
         end
     end
 
+    local count = 4
     player:setLocalVar('RELINQUISH_INTERRUPTED', 0)
-    player:setLocalVar('RELINQUISH_COUNTDOWN', 4)
+    player:setLocalVar('RELINQUISH_COUNTDOWN', count)
     for _, listener in ipairs(relinquishInterrupts) do
         player:addListener(listener.event, listener.name, function(first, second)
             local actor  = listener.actorArg == 1 and first or second
@@ -368,7 +349,7 @@ xi.monstrosity.relinquishOnAbility = function(player)
         end)
     end
 
-    player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
+    player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, count)
     relinquishCountdown(player, player:getPos())
 end
 
@@ -391,37 +372,9 @@ xi.monstrosity.unlockAll = function(player)
         data.levels[val] = 99
     end
 
-    -- Instincts by MON level
-    -- NOTE: Since this is a bitfield, it's zero-indexed!
-    for _, val in pairs(xi.monstrositySpecies) do
-        local speciesKey   = val
-        local speciesLevel = data.levels[val]
-        local byteOffset   = math.floor(speciesKey / 4)
-        local unlockAmount = math.floor(speciesLevel / 30)
-        local shiftAmount  = (speciesKey * 2) % 8
-
-        -- Special case for writing Slime & Spriggan data at the end of the 64-byte array
-        if byteOffset == 31 then
-            byteOffset = 63
-        end
-
-        if byteOffset < 64 then
-            data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(unlockAmount, shiftAmount))
-        else
-            print('byteOffset out of range')
-        end
-    end
-
-    -- Instincts (Purchasable)
-    for _, val in pairs(xi.monstrosityInstinct) do
-        local byteOffset   = 20 + math.floor(val / 8)
-        local shiftAmount  = val % 8
-
-        if byteOffset >= 20 and byteOffset < 24 then
-            data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
-        else
-            print('byteOffset out of range')
-        end
+    -- Level instincts follow from the levels. These are the purchasable ones.
+    for byteOffset = 20, 23 do
+        data.instincts[byteOffset] = 0xFF
     end
 
     -- Variants
@@ -592,7 +545,7 @@ xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)
         elseif optionType == 1 then
             -- Instincts
 
-            local purchasedInstincts = getPurchasedInstinctsMask(player)
+            local purchasedInstincts = bit.rshift(getPurchasedInstinctBits(player), xi.monstrosityInstinct.HUME_II)
             local completedLimits    = getLimitBreakMask(player)
 
             player:updateEvent(purchasedInstincts, completedLimits, 0, 0, 0, 0, 0, 0)
@@ -617,51 +570,46 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
             return
         end
 
-        if player:getCurrency('infamy') >= monData.infamyCost then
-            player:delCurrency('infamy', monData.infamyCost)
-
-            if monData.monSpecies then
-                xi.monstrosity.unlockSpecies(player, monData.monSpecies)
-            elseif monData.monVariant then
-                xi.monstrosity.unlockVariant(player, monData.monVariant)
-            end
-
-            player:messageSpecial(zones[xi.zone.FERETORY].text.MAY_POSSESS_BEASTS + 3 * selectedCategory, 0, selectedMon)
-        else
-            player:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
+        if not tryPayInfamy(player, monData.infamyCost) then
+            return
         end
+
+        if monData.monSpecies then
+            xi.monstrosity.unlockSpecies(player, monData.monSpecies)
+        elseif monData.monVariant then
+            xi.monstrosity.unlockVariant(player, monData.monVariant)
+        end
+
+        player:messageSpecial(zones[xi.zone.FERETORY].text.MAY_POSSESS_BEASTS + 3 * selectedCategory, 0, selectedMon)
 
     elseif optionType == 2 then
         -- Instincts: Costs are hardcoded, and adjusted based on having completed certain
         -- prerequisites.  This data is not tabled with Teyrnon, as it cannot be controlled.
 
         local selectedInstinct = bit.band(bit.rshift(option, 8), 0xFF)
-        local instinctPrice    = selectedInstinct > xi.monstrosityInstinct.GALKA_II and 10000 or 500
-        local checkValue       = bit.rshift(option, 16)
-
-        if checkValue ~= 119 then
+        if
+            bit.rshift(option, 16) ~= 119 or
+            selectedInstinct < xi.monstrosityInstinct.HUME_II or
+            selectedInstinct > xi.monstrosityInstinct.RUN or
+            bit.band(getPurchasedInstinctBits(player), bit.lshift(1, selectedInstinct)) ~= 0
+        then
             print(string.format('Invalid Event Finish Option received by Teyrnon! (%s:%d)', player:getName(), option))
             return
         end
 
-        if
-            selectedInstinct > xi.monstrosityInstinct.GALKA_II and
-            hasCompletedLimitBreak(player, selectedInstinct - xi.monstrosityInstinct.GALKA_II)
-        then
-            instinctPrice = instinctPrice / 2
+        local instinctPrice = 500
+        if selectedInstinct > xi.monstrosityInstinct.GALKA_II then
+            instinctPrice = hasCompletedLimitBreak(player, selectedInstinct - xi.monstrosityInstinct.GALKA_II) and 5000 or 10000
         end
 
-        if player:getCurrency('infamy') >= instinctPrice then
-            player:delCurrency('infamy', instinctPrice)
-            addPurchasedInstinct(player, selectedInstinct)
-
-            -- NOTE: The offset below is the beginning parameter for purchased instincts used by this message, and
-            -- lower values will result in an item being placed in the message.  Base offset for all instincts
-            -- is 29696 (29696 + 3 -> Rabbit Instinct I)
-            player:messageSpecial(zones[xi.zone.FERETORY].text.YOU_LEARNED_INSTINCT, 30464 + selectedInstinct)
-        else
-            player:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
+        if not tryPayInfamy(player, instinctPrice) then
+            return
         end
+
+        addPurchasedInstinct(player, selectedInstinct)
+
+        -- Purchased instinct names start at 30464 in this message. Lower values name an item.
+        player:messageSpecial(zones[xi.zone.FERETORY].text.YOU_LEARNED_INSTINCT, 30464 + selectedInstinct)
 
     elseif optionType == 3 then
         local selectedEffect = bit.rshift(option, 8)
@@ -675,7 +623,6 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
         switch(selectedEffect): caseof
         {
-            -- 0: Dedication 1
             -- 50% experience bonus 60 minutes or until a maximum bonus of 10,000 EXP is gained
             [0] = function()
                 local effect   = xi.effect.DEDICATION
@@ -686,7 +633,6 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
             end,
 
-            -- 1: Dedication 2
             -- 100% experience bonus 60 minutes or until a maximum bonus of 2,000 EXP is gained
             [1] = function()
                 local effect   = xi.effect.DEDICATION
@@ -697,20 +643,17 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
             end,
 
-            -- 2: Regen
             [2] = function()
                 player:delStatusEffectSilent(xi.effect.REGEN)
                 player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
-            -- 3: Refresh
             [3] = function()
                 -- A regular Refresh does overwrite this.
                 player:delStatusEffectSilent(xi.effect.REFRESH)
                 player:addStatusEffect(xi.effect.REFRESH, { power = 1, duration = 3600, origin = player, tick = 3 })
             end,
 
-            -- 4: Protect
             [4] = function()
                 local mLvl  = player:getMainLvl()
                 local power = 220
@@ -740,7 +683,6 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 player:addStatusEffect(xi.effect.PROTECT, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
-            -- 5: Shell
             [5] = function()
                 local mLvl  = player:getMainLvl()
 
@@ -772,7 +714,6 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
                 player:addStatusEffect(xi.effect.SHELL, { power = power, duration = 1800, origin = player, tier = tier })
             end,
 
-            -- 6: Haste
             [6] = function()
                 player:delStatusEffectSilent(xi.effect.HASTE)
                 player:addStatusEffect(xi.effect.HASTE, { power = 1000, duration = 600, origin = player })

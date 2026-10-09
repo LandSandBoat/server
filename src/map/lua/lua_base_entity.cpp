@@ -7137,11 +7137,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->jobs.unlocked |= (1 << newJob);
         PChar->SetMJob(newJob);
 
-        // Monstrosity data only exists while the job is MON.
-        if (newJob != static_cast<uint8>(xi::Job::MON))
-        {
-            PChar->m_PMonstrosity = nullptr;
-        }
+        monstrosity::HandleJobChange(PChar, static_cast<xi::Job>(newJob));
 
         charutils::ApplyAllEquipMods(PChar);
         puppetutils::LoadAutomaton(PChar);
@@ -7447,7 +7443,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         // A Monipulator's level lives per species, so record it there or zoning restores the old one.
         if (PChar->m_PMonstrosity)
         {
-            monstrosity::SetLevel(PChar, PChar->m_PMonstrosity->MonstrosityId, level);
+            PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] = level;
             monstrosity::WriteMonstrosityData(PChar);
         }
 
@@ -7842,35 +7838,23 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
     }
 
     // Outside MON only the saved progress changes.
-    const auto loaded = [&]() -> std::unique_ptr<monstrosity::MonstrosityData_t>
+    auto  loaded = std::unique_ptr<monstrosity::MonstrosityData_t>{};
+    auto* data   = PChar->m_PMonstrosity.get();
+    if (data == nullptr)
     {
-        if (PChar->m_PMonstrosity != nullptr)
-        {
-            return nullptr;
-        }
+        loaded = monstrosity::LoadMonstrosityData(PChar->id);
+        data   = loaded.get();
+    }
 
-        return monstrosity::LoadMonstrosityData(PChar->id);
-    }();
+    data->EntryPos.x        = x;
+    data->EntryPos.y        = y;
+    data->EntryPos.z        = z;
+    data->EntryPos.rotation = rot;
+    data->EntryZoneId       = zoneId;
+    data->EntryMainJob      = mjob;
+    data->EntrySubJob       = sjob;
 
-    auto& data = [&]() -> monstrosity::MonstrosityData_t&
-    {
-        if (loaded)
-        {
-            return *loaded;
-        }
-
-        return *PChar->m_PMonstrosity;
-    }();
-
-    data.EntryPos.x        = x;
-    data.EntryPos.y        = y;
-    data.EntryPos.z        = z;
-    data.EntryPos.rotation = rot;
-    data.EntryZoneId       = zoneId;
-    data.EntryMainJob      = mjob;
-    data.EntrySubJob       = sjob;
-
-    monstrosity::SaveMonstrosityData(PChar->id, data);
+    monstrosity::SaveMonstrosityData(PChar->id, *data);
 }
 
 auto CLuaBaseEntity::getMonstrosityShop() -> sol::table

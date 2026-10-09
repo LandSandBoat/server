@@ -7,10 +7,6 @@ require('scripts/globals/monstrosity')
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getMainJob() ~= xi.job.MON then
-        return xi.msg.basic.UNABLE_TO_USE_JA2, 0
-    end
-
     return 0, 0
 end
 

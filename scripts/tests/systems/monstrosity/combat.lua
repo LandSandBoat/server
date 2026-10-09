@@ -1,56 +1,14 @@
 -- Monipulator melee, kill exp, levelling and level unlocks.
+local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity combat', function()
     ---@type CClientEntityPair
     local player
 
-    local function becomeSpecies(family, level)
-        local data = player:getMonstrosityData()
-        data.monstrosityId  = family
-        data.species        = family
-        data.levels[family] = level
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        player:delStatusEffect(xi.effect.GESTATION)
-    end
-
-    local function currentExp()
-        local exp = nil
-        for _, pkt in pairs(player.packets:getIncoming()) do
-            if pkt.type == 0x061 then
-                exp = pkt.data[0x10] + pkt.data[0x11] * 256
-            end
-        end
-
-        return exp
-    end
-
-    -- Tunnel Worms count two levels lower for exp.
-    local function killWorm(mobLevel)
-        local gained = 0
-        player:addListener('EXPERIENCE_POINTS', 'TEST_MON_KILL_EXP', function(_, _, exp)
-            gained = gained + exp
-        end)
-
-        local mob = player.entities:moveTo('Tunnel_Worm')
-        mob:respawn()
-        mob:setMobLevel(mobLevel)
-        mob:setMod(xi.mod.EXP_LVL_MOD, -2)
-        mob:updateClaim(player)
-        mob:takeDamage(mob:getHP(), player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-        for _ = 1, 3 do
-            xi.test.world:tickEntity(mob)
-            xi.test.world:skipTime(1)
-        end
-
-        player:removeListener('TEST_MON_KILL_EXP')
-        return gained
-    end
-
     -- Melee for a fixed span against a target that never fights back or dies.
-    -- The harness swings at 3/4 of the real delay: a bare-handed human gets 6 rounds in 36 s.
+    -- The harness swings at three quarters of the real delay.
     local function fight(family, seconds)
-        becomeSpecies(family, 1)
+        helpers.becomeSpecies(player, family, family, 1)
 
         local mob = player.entities:moveTo('Wild_Rabbit')
         mob:respawn()
@@ -91,10 +49,7 @@ describe('Monstrosity combat', function()
     end
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     -- Retail swings twice a round, right fist then left.
@@ -144,27 +99,27 @@ describe('Monstrosity combat', function()
 
     for _, case in ipairs(killExp) do
         it(string.format('pays %d exp at level %d for a level %d kill', case.exp, case.level, case.mob - 2), function()
-            becomeSpecies(xi.monstrositySpecies.LIZARD, case.level)
+            helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, case.level)
 
-            local gained = killWorm(case.mob)
+            local gained = helpers.killWorm(player, case.mob)
             assert(gained == case.exp, string.format('paid %d exp', gained))
         end)
     end
 
     it('levels up from kill exp and carries the rest over', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, 1)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 1)
         -- One short of level 2
         player:setLevel(1)
 
-        killWorm(1)
+        helpers.killWorm(player, 1)
 
         assert(player:getMainLvl() == 2, string.format('level is %d', player:getMainLvl()))
         assert(player:getMonstrosityData().levels[xi.monstrositySpecies.LIZARD] == 2, 'Lizard level was not recorded')
-        assert(currentExp() == 159, string.format('exp is %s', tostring(currentExp())))
+        assert(helpers.currentExp(player) == 159, string.format('exp is %s', tostring(helpers.currentExp(player))))
     end)
 
     it('levels a Rabbit from 1 to 15 on kills alone', function()
-        becomeSpecies(xi.monstrositySpecies.RABBIT, 1)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 1)
 
         for _ = 1, 200 do
             if player:getMainLvl() >= 15 then
@@ -172,7 +127,7 @@ describe('Monstrosity combat', function()
             end
 
             -- An even match for the current level.
-            killWorm(player:getMainLvl() + 2)
+            helpers.killWorm(player, player:getMainLvl() + 2)
         end
 
         assert(player:getMainLvl() == 15, string.format('stopped at level %d', player:getMainLvl()))
@@ -190,7 +145,7 @@ describe('Monstrosity combat', function()
 
     for _, unlock in ipairs(levelUnlocks) do
         it(string.format('unlocks a variant and says so when a %s reaches 15', unlock.name), function()
-            becomeSpecies(unlock.family, 14)
+            helpers.becomeSpecies(player, unlock.family, unlock.family, 14)
             assert(not xi.monstrosity.hasUnlockedVariant(player, unlock.variant), 'owned the variant at 14')
 
             -- One short of 15
@@ -203,7 +158,10 @@ describe('Monstrosity combat', function()
 
             local announced = 0
             for _, pkt in pairs(player.packets:getIncoming()) do
-                if pkt.type == 0x029 and pkt.data[0x18] + pkt.data[0x19] * 256 == 677 then
+                if
+                    pkt.type == 0x029 and
+                    pkt.data[0x18] + pkt.data[0x19] * 256 == xi.msg.basic.POSSESS_NEW_MONSTER
+                then
                     assert(pkt.data[0x0C] == 32, string.format('first parameter was %d', pkt.data[0x0C]))
                     announced = announced + 1
                 end
@@ -214,7 +172,7 @@ describe('Monstrosity combat', function()
     end
 
     it('grants a level unlock reached before it existed on zoning', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, 30)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 30)
 
         assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.ASHEN_LIZARD), 'Ashen Lizard was not granted')
         assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BUGARD), 'Bugard was not granted')
@@ -223,24 +181,24 @@ describe('Monstrosity combat', function()
     -- JP wiki: a Monipulator never earns gil.
     it('pays a Monipulator no gil where a normal player gets some', function()
         xi.test.world:setSetting('map.ALL_MOBS_GIL_BONUS', 1)
-        becomeSpecies(xi.monstrositySpecies.LIZARD, 5)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 5)
 
         local gil = player:getGil()
-        killWorm(5)
+        helpers.killWorm(player, 5)
         assert(player:getGil() == gil, string.format('a Monipulator earned %d gil', player:getGil() - gil))
 
         player:changeJob(xi.job.WAR)
         player:gotoZone(xi.zone.WEST_RONFAURE)
-        killWorm(5)
+        helpers.killWorm(player, 5)
         assert(player:getGil() > gil, 'the normal player earned no gil either')
     end)
 
     -- Retail refreshes the infamy in the Monstrosity menu on every kill.
     it('sends the new infamy after a kill that does not level up', function()
-        becomeSpecies(xi.monstrositySpecies.LIZARD, 5)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 5)
         player.packets:clear()
 
-        killWorm(1)
+        helpers.killWorm(player, 1)
 
         local infamy = nil
         for _, pkt in pairs(player.packets:getIncoming()) do

@@ -1,15 +1,16 @@
 -- Monstrosity TP moves. The client sends a DAT skill id, which data/monstrosity.yaml maps to a
 -- mob skill id and a fixed TP cost. Unlike a mob, a Monipulator spends only that cost.
+local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity mobskills', function()
     local lizardSpecies = xi.monstrositySpecies.LIZARD
 
-    local fireballDat   = 343
-    local fireballMob   = 367
-    local fireballCost  = 1000
+    local fireballDat  = 343
+    local fireballMob  = xi.mobSkill.FIREBALL_1
+    local fireballCost = 1000
 
     local secretionDat   = 349
-    local secretionMob   = 373
+    local secretionMob   = xi.mobSkill.SECRETION_1
     local secretionCost  = 500
     local secretionLevel = 10
 
@@ -19,37 +20,9 @@ describe('Monstrosity mobskills', function()
     ---@type CTestEntity
     local target
 
-    -- Monstrosity is populated by TryPopulateMonstrosityData when a character whose
-    -- main job is MON loads, so the job change has to be followed by a zone reload.
-    local function becomeLizard()
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-
-        local data = player:getMonstrosityData()
-        data.monstrosityId         = lizardSpecies
-        data.species               = lizardSpecies
-        data.levels[lizardSpecies] = 15
-        player:setMonstrosityData(data)
-        player:delStatusEffect(xi.effect.GESTATION)
-    end
-
-    -- Records the mob skill id the AI actually entered, which is what proves the
-    -- DAT id was translated rather than passed straight through.
-    local function watchSkill()
-        local used = nil
-        player:addListener('WEAPONSKILL_STATE_ENTER', 'TEST_MON_SKILL', function(_, skillId)
-            used = skillId
-        end)
-
-        return function()
-            return used
-        end
-    end
-
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        becomeLizard()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        helpers.becomeSpecies(player, lizardSpecies, lizardSpecies, 15)
 
         target = player.entities:moveTo('Wild_Rabbit')
         target:respawn()
@@ -60,30 +33,15 @@ describe('Monstrosity mobskills', function()
     end)
 
     after_each(function()
-        if target then
-            target:setAutoAttackEnabled(true)
-        end
+        target:setAutoAttackEnabled(true)
     end)
 
-    it('enters Monstrosity as the requested species', function()
-        assert(player:getMainJob() == xi.job.MON, 'main job should be MON')
-
-        local data = player:getMonstrosityData()
-        assert(data.species == lizardSpecies, string.format('species=%s', tostring(data.species)))
-    end)
-
-    it('translates the DAT skill id to a mob skill id', function()
-        local usedSkill = watchSkill()
+    it('translates the DAT skill id and spends only the listed TP cost', function()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
         player.actions:useMonsterSkill(target, fireballDat)
 
         assert(usedSkill() == fireballMob, string.format('expected mob skill %d, got %s', fireballMob, tostring(usedSkill())))
-    end)
-
-    it('spends only the listed TP cost, not the whole bar', function()
-        player:setTP(3000)
-        player.actions:useMonsterSkill(target, fireballDat)
-
         assert(player:getTP() == 3000 - fireballCost, string.format('TP=%d, expected %d', player:getTP(), 3000 - fireballCost))
     end)
 
@@ -92,7 +50,7 @@ describe('Monstrosity mobskills', function()
         data.levels[lizardSpecies] = secretionLevel - 1
         player:setMonstrosityData(data)
 
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
         player.actions:useMonsterSkill(player, secretionDat)
 
@@ -101,7 +59,7 @@ describe('Monstrosity mobskills', function()
     end)
 
     it('spends a cheaper move for less', function()
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
         player.actions:useMonsterSkill(player, secretionDat)
 
@@ -110,7 +68,7 @@ describe('Monstrosity mobskills', function()
     end)
 
     it('rejects a move the player cannot afford and spends nothing', function()
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(fireballCost - 1)
         player.actions:useMonsterSkill(target, fireballDat)
 
@@ -120,7 +78,7 @@ describe('Monstrosity mobskills', function()
 
     -- A mob spends its whole bar, so the interrupt penalty overwrites TP outright.
     -- A Monstrosity move only ever spent its cost, so the untouched remainder has to
-    -- survive: 1000 spent, a quarter of that handed back, 2000 never at stake.
+    -- survive, plus a quarter of the cost handed back.
     it('keeps the unspent TP when a fixed-cost move is interrupted', function()
         player:setTP(3000)
         player.actions:useMonsterSkill(target, fireballDat)
@@ -135,7 +93,7 @@ describe('Monstrosity mobskills', function()
         assert(player:getTP() == expected, string.format('TP=%d, expected %d', player:getTP(), expected))
     end)
 
-    -- Retail answers a refused monster skill with msg_basic 88 over BATTLE_MESSAGE.
+    -- Retail answers a refused monster skill with a BATTLE_MESSAGE.
     it('answers a refused move with the retail battle message', function()
         player:setTP(0)
         player.packets:clear()
@@ -150,7 +108,7 @@ describe('Monstrosity mobskills', function()
         end
 
         assert(#messages > 0, 'no battle message was sent')
-        assert(messages[1] == 88, string.format('battle message was %d, expected 88', messages[1]))
+        assert(messages[1] == xi.msg.basic.UNABLE_TO_USE_JA2, string.format('battle message was %d', messages[1]))
     end)
 
     it('announces a move learned on level up', function()
@@ -172,7 +130,7 @@ describe('Monstrosity mobskills', function()
     end)
 
     it('rejects an unknown DAT skill id and spends nothing', function()
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
         player.actions:useMonsterSkill(target, 9999)
 
@@ -187,10 +145,7 @@ describe('Monstrosity exp curve', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     -- setLevel leaves the character one point short of the next level, so a single
@@ -243,10 +198,7 @@ describe('Monstrosity levelling entry', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     it('restores the species level on zoning rather than the last job level', function()
@@ -279,21 +231,8 @@ describe('Monstrosity levelling entry', function()
 
     -- Only kills pay infamy, a tenth of the exp rounded down. Records of Eminence exp pays none.
     it('pays a tenth of kill exp as infamy', function()
-        local gainedExp = 0
-        player:addListener('EXPERIENCE_POINTS', 'TEST_MON_EXP', function(_, _, exp)
-            gainedExp = gainedExp + exp
-        end)
-
-        local before = player:getCurrency('infamy')
-        local mob    = player.entities:moveTo('Tunnel_Worm')
-        mob:respawn()
-        mob:updateClaim(player)
-        mob:takeDamage(mob:getHP(), player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
-        for _ = 1, 3 do
-            xi.test.world:tickEntity(mob)
-            xi.test.world:skipTime(1)
-        end
-
+        local before    = player:getCurrency('infamy')
+        local gainedExp = helpers.killWorm(player)
         local gained = player:getCurrency('infamy') - before
         assert(gainedExp > 0, 'the kill paid no exp')
         assert(gained == math.floor(gainedExp / 10), string.format('%d exp paid %d infamy', gainedExp, gained))
@@ -318,21 +257,14 @@ describe('Monstrosity ecosystem', function()
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     it('takes the ecosystem of the species rather than staying Humanoid', function()
         assert(player:getEcosystem() == xi.ecosystem.BEAST,
             string.format('a starting Rabbit reported ecosystem %d', player:getEcosystem()))
 
-        local data = player:getMonstrosityData()
-        data.monstrosityId = lizardSpecies
-        data.species       = lizardSpecies
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        helpers.becomeSpecies(player, lizardSpecies, lizardSpecies, 1)
 
         assert(player:getEcosystem() == xi.ecosystem.LIZARD,
             string.format('a Lizard reported ecosystem %d', player:getEcosystem()))
@@ -361,16 +293,8 @@ describe('Monstrosity ecosystem', function()
         return mob
     end
 
-    local function becomeSpecies(speciesId)
-        local data = player:getMonstrosityData()
-        data.monstrosityId = speciesId
-        data.species       = speciesId
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-    end
-
     it('is not aggroed by the ecosystem it preys on', function()
-        becomeSpecies(mandragoraSpecies)
+        helpers.becomeSpecies(player, mandragoraSpecies, mandragoraSpecies, 1)
         assert(player:getEcosystem() == xi.ecosystem.PLANTOID, 'should be a Plantoid')
 
         local prey = forceAggressive('Wild_Rabbit')
@@ -389,7 +313,9 @@ end)
 -- Only Spriggan.C has Jittering Jig and Romp. Every Spriggan has Frenetic Flurry.
 describe('Monstrosity Spriggan moves', function()
     local sprigganBase = 255
-    local sprigganC    = 510
+    local sprigganC    = 256 + xi.monstrosityVariant.SPRIGGAN_C
+    local jigDat       = 689
+    local rompDat      = 690
 
     ---@type CClientEntityPair
     local player
@@ -397,33 +323,9 @@ describe('Monstrosity Spriggan moves', function()
     ---@type CTestEntity
     local target
 
-    local function becomeSpriggan(speciesCode)
-        local data = player:getMonstrosityData()
-        data.monstrosityId                                  = xi.monstrositySpecies.EORZEAN_SPRIGGAN
-        data.species                                        = speciesCode
-        data.levels[xi.monstrositySpecies.EORZEAN_SPRIGGAN] = 30
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        player:delStatusEffect(xi.effect.GESTATION)
-    end
-
-    local function watchSkill()
-        local used = nil
-        player:addListener('WEAPONSKILL_STATE_ENTER', 'TEST_MON_SKILL', function(_, skillId)
-            used = skillId
-        end)
-
-        return function()
-            return used
-        end
-    end
-
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        becomeSpriggan(sprigganC)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, sprigganC, 30)
 
         target = player.entities:moveTo('Wild_Rabbit')
         target:respawn()
@@ -434,15 +336,13 @@ describe('Monstrosity Spriggan moves', function()
     end)
 
     after_each(function()
-        if target then
-            target:setAutoAttackEnabled(true)
-        end
+        target:setAutoAttackEnabled(true)
     end)
 
     it('Jittering Jig boosts attack for a minute at 700 TP', function()
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
-        player.actions:useMonsterSkill(player, 689)
+        player.actions:useMonsterSkill(player, jigDat)
 
         assert(usedSkill() == 3144, string.format('expected mob skill 3144, got %s', tostring(usedSkill())))
         assert(player:getTP() == 2300, string.format('TP=%d, expected 2300', player:getTP()))
@@ -457,14 +357,11 @@ describe('Monstrosity Spriggan moves', function()
     end)
 
     for _, move in ipairs({
-        { name = 'Romp',            species = sprigganC, dat = 690, mob = 3145, cost = 700  },
-        { name = 'Frenetic Flurry', species = sprigganC, dat = 691, mob = 3146, cost = 1500 },
+        { name = 'Romp',            dat = rompDat, mob = 3145, cost = 700  },
+        { name = 'Frenetic Flurry', dat = 691,     mob = 3146, cost = 1500 },
     }) do
         it(string.format('%s runs mob skill %d for %d TP', move.name, move.mob, move.cost), function()
-            becomeSpriggan(move.species)
-            target = player.entities:moveTo('Wild_Rabbit')
-
-            local usedSkill = watchSkill()
+            local usedSkill = helpers.watchSkill(player)
             player:setTP(3000)
             player.actions:useMonsterSkill(target, move.dat)
 
@@ -474,12 +371,12 @@ describe('Monstrosity Spriggan moves', function()
     end
 
     it('refuses a move that belongs to another species', function()
-        becomeSpriggan(sprigganBase)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, sprigganBase, 30)
         target = player.entities:moveTo('Wild_Rabbit')
 
-        local usedSkill = watchSkill()
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
-        player.actions:useMonsterSkill(target, 690)
+        player.actions:useMonsterSkill(target, rompDat)
 
         assert(usedSkill() == nil, 'plain Spriggan should not have Romp')
         assert(player:getTP() == 3000, string.format('TP=%d, expected untouched', player:getTP()))
@@ -495,30 +392,30 @@ describe('Monstrosity starting family moves', function()
     {
         [xi.monstrositySpecies.RABBIT] =
         {
-            { dat = 257, mob = 257 },
-            { dat = 258, mob = 258 },
-            { dat = 259, mob = 259 },
-            { dat = 314, mob = 323, self = true },
+            { dat = 257, mob = xi.mobSkill.FOOT_KICK_1                },
+            { dat = 258, mob = xi.mobSkill.DUST_CLOUD_1               },
+            { dat = 259, mob = xi.mobSkill.WHIRL_CLAWS_1              },
+            { dat = 314, mob = xi.mobSkill.WILD_CARROT_1, self = true },
         },
         [xi.monstrositySpecies.MANDRAGORA] =
         {
-            { dat = 294, mob = 300 },
-            { dat = 295, mob = 301 },
-            { dat = 296, mob = 302 },
-            { dat = 297, mob = 304, self = true },
-            { dat = 298, mob = 305 },
-            { dat = 299, mob = 306 },
-            { dat = 603, mob = 2410 },
+            { dat = 294, mob = xi.mobSkill.HEAD_BUTT_1                   },
+            { dat = 295, mob = xi.mobSkill.DREAM_FLOWER_1                },
+            { dat = 296, mob = xi.mobSkill.WILD_OATS_1                   },
+            { dat = 297, mob = xi.mobSkill.PHOTOSYNTHESIS_1, self = true },
+            { dat = 298, mob = xi.mobSkill.LEAF_DAGGER_1                 },
+            { dat = 299, mob = xi.mobSkill.SCREAM_1                      },
+            { dat = 603, mob = 2410                                      },
         },
         [xi.monstrositySpecies.LIZARD] =
         {
-            { dat = 343, mob = 367 },
-            { dat = 344, mob = 368 },
-            { dat = 345, mob = 369 },
-            { dat = 346, mob = 370 },
-            { dat = 347, mob = 371 },
-            { dat = 348, mob = 372 },
-            { dat = 349, mob = 373, self = true },
+            { dat = 343, mob = xi.mobSkill.FIREBALL_1               },
+            { dat = 344, mob = xi.mobSkill.BLOCKHEAD_1              },
+            { dat = 345, mob = xi.mobSkill.BRAIN_CRUSH_1            },
+            { dat = 346, mob = xi.mobSkill.BALEFUL_GAZE_LIZARD      },
+            { dat = 347, mob = xi.mobSkill.PLAGUE_BREATH_1          },
+            { dat = 348, mob = xi.mobSkill.INFRASONICS_1            },
+            { dat = 349, mob = xi.mobSkill.SECRETION_1, self = true },
         },
         [xi.monstrositySpecies.BEE] =
         {
@@ -528,22 +425,13 @@ describe('Monstrosity starting family moves', function()
     }
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     for family, list in pairs(moves) do
         for _, move in ipairs(list) do
             it(string.format('family %d DAT %d runs mob skill %d', family, move.dat, move.mob), function()
-                local data = player:getMonstrosityData()
-                data.monstrosityId  = family
-                data.species        = family
-                data.levels[family] = 99
-                player:setMonstrosityData(data)
-                player:gotoZone(xi.zone.WEST_RONFAURE)
-                player:delStatusEffect(xi.effect.GESTATION)
+                helpers.becomeSpecies(player, family, family, 99)
 
                 ---@type CTestEntity
                 local target = player
@@ -552,44 +440,32 @@ describe('Monstrosity starting family moves', function()
                     target:respawn()
                 end
 
-                local used = nil
-                player:addListener('WEAPONSKILL_STATE_ENTER', 'TEST_MON_SKILL', function(_, skillId)
-                    used = skillId
-                end)
-
+                local usedSkill = helpers.watchSkill(player)
                 player:setTP(3000)
                 player.actions:useMonsterSkill(target, move.dat)
 
-                assert(used == move.mob, string.format('expected mob skill %d, got %s', move.mob, tostring(used)))
+                assert(usedSkill() == move.mob, string.format('expected mob skill %d, got %s', move.mob, tostring(usedSkill())))
             end)
         end
     end
 end)
 
 describe('Monstrosity Bee moves', function()
+    local pollenDat = 320
+
     ---@type CClientEntityPair
     local player
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-
-        local data = player:getMonstrosityData()
-        data.monstrosityId                     = xi.monstrositySpecies.BEE
-        data.species                           = xi.monstrositySpecies.BEE
-        data.levels[xi.monstrositySpecies.BEE] = 10
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        player:delStatusEffect(xi.effect.GESTATION)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, xi.monstrositySpecies.BEE, 10)
     end)
 
     -- JP wiki: Pollen heals a Monipulator for an eighth of its max HP.
     it('heals an eighth of max HP with Pollen', function()
         player:setHP(1)
         player:setTP(3000)
-        player.actions:useMonsterSkill(player, 320)
+        player.actions:useMonsterSkill(player, pollenDat)
         for _ = 1, 3 do
             xi.test.world:skipTime(2)
         end
@@ -604,51 +480,40 @@ describe('Monstrosity variant moves', function()
     ---@type CClientEntityPair
     local player
 
+    local onyxRabbit   = 256 + xi.monstrosityVariant.ONYX_RABBIT
+    local korrigan     = 256 + xi.monstrosityVariant.KORRIGAN
+    local ashenLizard  = 256 + xi.monstrosityVariant.ASHEN_LIZARD
+    local onyxBee      = 256 + xi.monstrosityVariant.VERMILLION_AND_ONYX_BEE
+    local snowCloudDat = 455
+
     local variants =
     {
-        { name = 'Onyx Rabbit',             family = xi.monstrositySpecies.RABBIT,     species = 256, dat = 257, mob = 257 },
-        { name = 'Korrigan',                family = xi.monstrositySpecies.MANDRAGORA, species = 281, dat = 296, mob = 302 },
-        { name = 'Ashen Lizard',            family = xi.monstrositySpecies.LIZARD,     species = 315, dat = 441, mob = 621 },
-        { name = 'Vermillion and Onyx Bee', family = xi.monstrositySpecies.BEE,        species = 290, dat = 319, mob = 334 },
+        { name = 'Onyx Rabbit',             family = xi.monstrositySpecies.RABBIT,     species = onyxRabbit,  dat = 257, mob = xi.mobSkill.FOOT_KICK_1 },
+        { name = 'Korrigan',                family = xi.monstrositySpecies.MANDRAGORA, species = korrigan,    dat = 296, mob = xi.mobSkill.WILD_OATS_1 },
+        { name = 'Ashen Lizard',            family = xi.monstrositySpecies.LIZARD,     species = ashenLizard, dat = 441, mob = 621                     },
+        { name = 'Vermillion and Onyx Bee', family = xi.monstrositySpecies.BEE,        species = onyxBee,     dat = 319, mob = 334                     },
     }
-
-    local function becomeVariant(family, species, level)
-        local data = player:getMonstrosityData()
-        data.monstrosityId  = family
-        data.species        = species
-        data.levels[family] = level
-        player:setMonstrosityData(data)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
-        player:delStatusEffect(xi.effect.GESTATION)
-    end
 
     local function useOn(datSkillId)
         local mob = player.entities:moveTo('Wild_Rabbit')
         mob:respawn()
         player.entities:moveTo(mob:getID())
 
-        local used = nil
-        player:addListener('WEAPONSKILL_STATE_ENTER', 'TEST_MON_VARIANT_SKILL', function(_, skillId)
-            used = skillId
-        end)
-
+        local usedSkill = helpers.watchSkill(player)
         player:setTP(3000)
         player.actions:useMonsterSkill(mob, datSkillId)
-        player:removeListener('TEST_MON_VARIANT_SKILL')
+        player:removeListener('TEST_MON_SKILL')
 
-        return used
+        return usedSkill()
     end
 
     before_each(function()
-        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
-        player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
-        player:changeJob(xi.job.MON)
-        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
 
     for _, variant in ipairs(variants) do
         it(string.format('gives %s its first move', variant.name), function()
-            becomeVariant(variant.family, variant.species, 15)
+            helpers.becomeSpecies(player, variant.family, variant.species, 15)
 
             local used = useOn(variant.dat)
             assert(used == variant.mob, string.format('expected mob skill %d, got %s', variant.mob, tostring(used)))
@@ -657,14 +522,14 @@ describe('Monstrosity variant moves', function()
 
     -- The JP wiki gives Snow Cloud to Alabaster Rabbit only.
     it('keeps Snow Cloud from a base Rabbit', function()
-        becomeVariant(xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 60)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 60)
 
-        assert(useOn(455) == nil, 'a base Rabbit used Snow Cloud')
+        assert(useOn(snowCloudDat) == nil, 'a base Rabbit used Snow Cloud')
     end)
 
     -- The BLM sub job's share of HP is not fitted yet, so this sits a little low.
     it('gives an Ashen Lizard close to its retail HP', function()
-        becomeVariant(xi.monstrositySpecies.LIZARD, 315, 15)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, ashenLizard, 15)
 
         assert(player:getMaxHP() >= 740 and player:getMaxHP() <= 772, string.format('Ashen Lizard 15 has %d HP', player:getMaxHP()))
     end)

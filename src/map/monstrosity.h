@@ -35,7 +35,6 @@
 #include <vector>
 
 struct mon_data_t;
-class CBattleEntity;
 class CCharEntity;
 class CSpell;
 
@@ -55,10 +54,6 @@ namespace monstrosity
 // Purchased instincts sit in a gap of the family instinct bitfield.
 constexpr auto kPurchasedInstinctsOffset = 20;
 constexpr auto kPurchasedInstinctsBytes  = 4;
-
-// Infamy stops rising here, higher while Belligerency is flagged.
-constexpr auto kInfamyCap             = 10000;
-constexpr auto kInfamyCapBelligerency = 50000;
 
 struct MonstrosityData_t
 {
@@ -103,6 +98,7 @@ void               SaveMonstrosityData(uint32 charId, const MonstrosityData_t& d
 void               WriteMonstrosityData(CCharEntity* PChar);
 
 void TryPopulateMonstrosityData(CCharEntity* PChar);
+void HandleJobChange(CCharEntity* PChar, xi::Job newJob);
 void HandleZoneIn(CCharEntity* PChar);
 void SendFullMonstrosityUpdate(CCharEntity* PChar);
 
@@ -112,7 +108,6 @@ void HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACT
 void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
 
 void CalculateStats(CCharEntity* PChar);
-void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 void HandleLevelUp(CCharEntity* PChar);
 
 // The player in MON, or null. m_PMonstrosity is only ever set while the job is MON.
@@ -132,7 +127,7 @@ struct SpeciesJobs
 [[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
-[[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar) -> uint16;
+[[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar, xi::Mod rating) -> uint16;
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
 [[nodiscard]] auto IsPassageZone(xi::ZoneId zoneId) -> bool;
@@ -140,9 +135,6 @@ void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool;
 
 void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
-
-[[nodiscard]] auto IsInstinctUnlocked(const CCharEntity* PChar, uint16 instinct) -> bool;
-[[nodiscard]] auto IsVariantUnlocked(const CCharEntity* PChar, uint8 variant) -> bool;
 
 void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
 

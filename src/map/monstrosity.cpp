@@ -29,13 +29,12 @@
 
 #include "data/datasets/monstrosity/dataset.h"
 #include "data/datasets/zones/settings/dataset.h"
+#include "data/enums/monstrosity_instinct.h"
 #include "data/loader.h"
 #include "utils/dataset_loader.h"
 
 #include "common/logging.h"
 #include "common/xirand.h"
-
-#include <common/types/hash_map.h>
 
 #include "enums/msg_basic.h"
 
@@ -209,17 +208,69 @@ constexpr auto kStartingInstincts = std::array{
     xi::MonstrosityInstinct::GalkaI,
 };
 
+auto isInstinctUnlocked(const monstrosity::MonstrosityData_t& data, const uint16 instinct) -> bool
+{
+    // Purchasable instincts are 768 onwards.
+    if (instinct >= 768)
+    {
+        const auto idx        = instinct - 768;
+        const auto byteOffset = monstrosity::kPurchasedInstinctsOffset + (idx / 8);
+        if (byteOffset >= monstrosity::kPurchasedInstinctsOffset + monstrosity::kPurchasedInstinctsBytes)
+        {
+            return false;
+        }
+
+        return (data.instincts[byteOffset] >> (idx % 8)) & 0x01;
+    }
+
+    // Each family has three level instincts and a 2-bit count of how many are unlocked.
+    const auto slot  = instinct / 3;
+    const auto tier  = instinct % 3;
+    const auto owned = (data.instincts[slot / 4] >> ((slot * 2) % 8)) & 0x03;
+
+    return owned > tier;
+}
+
+auto isVariantUnlocked(const monstrosity::MonstrosityData_t& data, const uint8 variant) -> bool
+{
+    return (data.variants[variant / 8] >> (variant % 8)) & 0x01;
+}
+
 // The client allows instincts worth up to the species level plus this.
 constexpr auto kInstinctPointsOverLevel = 10;
 
-auto instinctsCost(const std::array<uint16, 12>& equipped) -> uint8
+// Infamy stops rising here, higher while Belligerency is flagged.
+constexpr auto kInfamyCap             = 10000;
+constexpr auto kInfamyCapBelligerency = 50000;
+
+auto findSpecies(const uint16 speciesCode) -> const xi::data::MonstrositySpecies*
 {
-    auto total = uint8{ 0 };
+    if (const auto it = gMonstrosityData.species.find(speciesCode); it != gMonstrosityData.species.end())
+    {
+        return &it->second;
+    }
+
+    return nullptr;
+}
+
+auto findInstinct(const uint16 instinctId) -> const xi::data::MonstrosityInstinct*
+{
+    if (const auto it = gMonstrosityData.instincts.find(instinctId); it != gMonstrosityData.instincts.end())
+    {
+        return &it->second;
+    }
+
+    return nullptr;
+}
+
+auto instinctsCost(const std::array<uint16, 12>& equipped) -> uint16
+{
+    auto total = uint16{ 0 };
     for (const auto instinctId : equipped)
     {
-        if (const auto instinct = gMonstrosityData.instincts.find(instinctId); instinct != gMonstrosityData.instincts.end())
+        if (const auto* instinct = findInstinct(instinctId))
         {
-            total += instinct->second.cost;
+            total += instinct->cost;
         }
     }
 
@@ -228,9 +279,9 @@ auto instinctsCost(const std::array<uint16, 12>& equipped) -> uint8
 
 void addInstinctMods(CCharEntity* PChar, const uint16 instinctId)
 {
-    if (const auto instinct = gMonstrosityData.instincts.find(instinctId); instinct != gMonstrosityData.instincts.end())
+    if (const auto* instinct = findInstinct(instinctId))
     {
-        for (const auto& [mod, value] : instinct->second.mods)
+        for (const auto& [mod, value] : instinct->mods)
         {
             PChar->addModifier(mod, value);
         }
@@ -239,9 +290,9 @@ void addInstinctMods(CCharEntity* PChar, const uint16 instinctId)
 
 void delInstinctMods(CCharEntity* PChar, const uint16 instinctId)
 {
-    if (const auto instinct = gMonstrosityData.instincts.find(instinctId); instinct != gMonstrosityData.instincts.end())
+    if (const auto* instinct = findInstinct(instinctId))
     {
-        for (const auto& [mod, value] : instinct->second.mods)
+        for (const auto& [mod, value] : instinct->mods)
         {
             PChar->delModifier(mod, value);
         }
@@ -250,9 +301,9 @@ void delInstinctMods(CCharEntity* PChar, const uint16 instinctId)
 
 void refreshDerivedState(CCharEntity* PChar)
 {
-    if (const auto species = gMonstrosityData.species.find(PChar->m_PMonstrosity->Species); species != gMonstrosityData.species.end())
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
-        PChar->m_PMonstrosity->Look = species->second.look;
+        PChar->m_PMonstrosity->Look = species->look;
     }
 
     charutils::BuildingCharTraitsTable(PChar);
@@ -265,34 +316,8 @@ void refreshDerivedState(CCharEntity* PChar)
     }
 }
 
-void applySpeciesEcosystem(CCharEntity* PChar)
-{
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return;
-    }
-
-    // A Monipulator correlates as its species' ecosystem.
-    const auto species = gMonstrosityData.species.find(PChar->m_PMonstrosity->Species);
-
-    PChar->m_EcoSystem = [&]() -> xi::Ecosystem
-    {
-        if (species == gMonstrosityData.species.end())
-        {
-            return xi::Ecosystem::Unclassified;
-        }
-
-        return species->second.ecosystem;
-    }();
-}
-
 void applySpeciesState(CCharEntity* PChar)
 {
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return;
-    }
-
     // The species level wins over char_jobs, with a floor of 1.
     const auto monstrosityId = PChar->m_PMonstrosity->MonstrosityId;
     const auto speciesLevel  = std::max<uint8>(1, PChar->m_PMonstrosity->levels[monstrosityId]);
@@ -305,7 +330,16 @@ void applySpeciesState(CCharEntity* PChar)
     PChar->SetMLevel(speciesLevel);
     PChar->SetSLevel(speciesLevel);
 
-    applySpeciesEcosystem(PChar);
+    // A Monipulator correlates as its species' ecosystem.
+    PChar->m_EcoSystem = [&]() -> xi::Ecosystem
+    {
+        if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
+        {
+            return species->ecosystem;
+        }
+
+        return xi::Ecosystem::Unclassified;
+    }();
 }
 
 // The packet sets below follow retail's order for each change.
@@ -456,12 +490,12 @@ auto monstrosity::LoadMonstrosityData(const uint32 charId) -> std::unique_ptr<Mo
         data->EntryMainJob      = rset->get<uint8>("entry_mjob");
         data->EntrySubJob       = rset->get<uint8>("entry_sjob");
 
-        if (const auto species = gMonstrosityData.species.find(data->Species); species != gMonstrosityData.species.end())
+        if (const auto* species = findSpecies(data->Species))
         {
-            data->Look    = species->second.look;
-            data->MainJob = species->second.mjob;
-            data->SubJob  = species->second.sjob;
-            data->Size    = species->second.size;
+            data->Look    = species->look;
+            data->MainJob = species->mjob;
+            data->SubJob  = species->sjob;
+            data->Size    = species->size;
         }
     }
 
@@ -561,6 +595,42 @@ void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 
         // This handles !monstrosity GM command, is this needed?
         WriteMonstrosityData(PChar);
+    }
+}
+
+// Monstrosity data, instinct mods and the species ecosystem only exist while the job is MON.
+void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
+{
+    if (newJob != xi::Job::MON)
+    {
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+            {
+                delInstinctMods(PChar, instinctId);
+            }
+
+            PChar->m_PMonstrosity = nullptr;
+            PChar->m_EcoSystem    = xi::Ecosystem::Humanoid;
+        }
+
+        return;
+    }
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
+    TryPopulateMonstrosityData(PChar);
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+    {
+        addInstinctMods(PChar, instinctId);
     }
 }
 
@@ -675,25 +745,20 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
 void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data)
 {
-    if (PChar->GetMJob() != xi::Job::MON)
-    {
-        return;
-    }
-
     if (!PChar->m_PMonstrosity)
     {
         return;
     }
 
-    const auto species = gMonstrosityData.species.find(PChar->m_PMonstrosity->Species);
-    if (species == gMonstrosityData.species.end())
+    const auto* species = findSpecies(PChar->m_PMonstrosity->Species);
+    if (species == nullptr)
     {
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
         return;
     }
 
     const auto  level  = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
-    const auto& skills = species->second.tpSkills;
+    const auto& skills = species->tpSkills;
     const auto  skill  = std::ranges::find_if(
         skills,
         [&](const xi::data::MonstrosityTpSkill& entry)
@@ -732,20 +797,20 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
     {
         const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
 
-        const auto species = gMonstrosityData.species.find(data.SpeciesIndex);
-        if (species == gMonstrosityData.species.end())
+        const auto* species = findSpecies(data.SpeciesIndex);
+        if (species == nullptr)
         {
             return;
         }
 
-        const auto& speciesData = species->second;
+        const auto& speciesData = *species;
         if (PChar->m_PMonstrosity->levels[speciesData.monstrosityId] == 0)
         {
             return;
         }
 
         // Variants are species 256 and up.
-        if (data.SpeciesIndex >= 256 && !IsVariantUnlocked(PChar, data.SpeciesIndex - 256))
+        if (data.SpeciesIndex >= 256 && !isVariantUnlocked(*PChar->m_PMonstrosity, data.SpeciesIndex - 256))
         {
             return;
         }
@@ -756,22 +821,16 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         PChar->m_PMonstrosity->MainJob       = speciesData.mjob;
         PChar->m_PMonstrosity->SubJob        = speciesData.sjob;
         PChar->m_PMonstrosity->Size          = speciesData.size;
-        PChar->m_PMonstrosity->Look          = speciesData.look;
 
         familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
         if (familyChanged)
         {
             const auto newMonLvl = PChar->m_PMonstrosity->levels[speciesData.monstrosityId];
 
-            // The exp curve reads jobs.job, so it follows the species.
-            PChar->jobs.job[static_cast<uint8>(xi::Job::MON)] = newMonLvl;
-            PChar->SetMLevel(newMonLvl);
-            PChar->SetSLevel(newMonLvl);
+            applySpeciesState(PChar);
 
-            // Each species tracks its own exp, so the remainder does not carry over.
+            // TODO: Does retail keep exp per species? Until then the remainder is lost on a family change.
             PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
-
-            applySpeciesEcosystem(PChar);
 
             // Retail keeps instincts equipped across species, unless the new level cannot afford them.
             if (instinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > newMonLvl + kInstinctPointsOverLevel)
@@ -809,7 +868,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             }
             else if (data.Slots[idx] != 0)
             {
-                if (!gMonstrosityData.instincts.contains(data.Slots[idx]) || !IsInstinctUnlocked(PChar, data.Slots[idx]))
+                if (!gMonstrosityData.instincts.contains(data.Slots[idx]) || !isInstinctUnlocked(*PChar->m_PMonstrosity, data.Slots[idx]))
                 {
                     return;
                 }
@@ -877,8 +936,8 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
 {
     const auto& data    = *PChar->m_PMonstrosity;
     const auto  level   = GetSpeciesJobs(PChar).level;
-    const auto  species = gMonstrosityData.species.find(data.Species);
-    if (species == gMonstrosityData.species.end())
+    const auto* species = findSpecies(data.Species);
+    if (species == nullptr)
     {
         return;
     }
@@ -890,10 +949,10 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
     };
 
     const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
-    PChar->health.maxhp = static_cast<int32>(species->second.hpScale * baseHP / 100);
+    PChar->health.maxhp = static_cast<int32>(species->hpScale * baseHP / 100);
 
     // Retail MP comes from a mage sub job.
-    // TODO: WHM is fitted to one retail sample and RDM borrows it. PLD and DRK subs and mage main jobs are unverified.
+    // TODO: Verify WHM MP. RDM borrows it. PLD and DRK subs and mage main jobs are unverified.
     const auto baseMP = [&]() -> int32
     {
         switch (data.SubJob)
@@ -914,12 +973,12 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
         PChar->health.maxmp += cappedMerit(xi::Merit::MaxMp, 10);
     }
 
-    if (!species->second.mobSpecies)
+    if (!species->mobSpecies)
     {
         return;
     }
 
-    const auto& ranks = mobutils::GetSpeciesData(*species->second.mobSpecies).MobAttributes.Stats;
+    const auto& ranks = mobutils::GetSpeciesData(*species->mobSpecies).MobAttributes.Stats;
 
     const auto     familyRanks = std::array{ ranks.Str, ranks.Dex, ranks.Vit, ranks.Agi, ranks.Int, ranks.Mnd, ranks.Chr };
     constexpr auto statMerits  = std::array{ xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
@@ -1020,16 +1079,21 @@ auto monstrosity::GetBaseDelay(const CCharEntity* PChar) -> uint16
 }
 
 // Fitted to retail hits, rounded low. A MNK species splits it over two fists.
-auto monstrosity::GetBaseDamage(const CCharEntity* PChar) -> uint16
+auto monstrosity::GetBaseDamage(const CCharEntity* PChar, const xi::Mod rating) -> uint16
 {
     const auto species = GetSpeciesJobs(PChar);
-    const auto damage  = static_cast<uint16>(species.level * 3 / 2 + 10);
-    if (species.mainJob == xi::Job::MNK)
+    const auto damage  = [&]() -> int32
     {
-        return damage / 2;
-    }
+        const auto perRound = species.level * 3 / 2 + 10;
+        if (species.mainJob == xi::Job::MNK)
+        {
+            return perRound / 2;
+        }
 
-    return damage;
+        return perRound;
+    }();
+
+    return static_cast<uint16>(std::clamp(damage + PChar->getMod(rating), 1, 65535));
 }
 
 // Retail attack, defence and accuracy fit an A+ skill at the species level, whatever the weapon.
@@ -1045,22 +1109,12 @@ auto monstrosity::GetEvasionSkill(const CCharEntity* PChar) -> uint16
     return battleutils::GetMaxSkill(xi::SkillType::Evasion, PChar->m_PMonstrosity->MainJob, PChar->GetMLevel());
 }
 
-void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
-{
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return;
-    }
-
-    // TODO: If not unlocked, unlock whatever id is
-    PChar->m_PMonstrosity->levels.at(id) = level;
-}
-
 void monstrosity::HandleLevelUp(CCharEntity* PChar)
 {
     // The MON job level has already been raised by this point.
     const auto mLvl = PChar->jobs.job[static_cast<uint8>(xi::Job::MON)];
-    SetLevel(PChar, PChar->m_PMonstrosity->MonstrosityId, mLvl);
+
+    PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] = mLvl;
 
     // TODO: What does retail's 32 mean?
     for (auto count = grantLevelUnlocks(*PChar->m_PMonstrosity); count > 0; --count)
@@ -1068,9 +1122,9 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 32, 0, MsgBasic::PossessNewMonster);
     }
 
-    if (const auto species = gMonstrosityData.species.find(PChar->m_PMonstrosity->Species); species != gMonstrosityData.species.end())
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
-        for (const auto& skill : species->second.tpSkills)
+        for (const auto& skill : species->tpSkills)
         {
             if (skill.unlockLevel == mLvl)
             {
@@ -1085,6 +1139,12 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
 void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type)
 {
     if (!PChar->m_PMonstrosity)
+    {
+        return;
+    }
+
+    // A Monipulator's death menu only offers these two.
+    if (type != GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityCancel && type != GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityRetry)
     {
         return;
     }
@@ -1131,44 +1191,6 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
     }
 }
 
-auto monstrosity::IsInstinctUnlocked(const CCharEntity* PChar, const uint16 instinct) -> bool
-{
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return false;
-    }
-
-    // Purchasable instincts are 768 onwards.
-    if (instinct >= 768)
-    {
-        const auto idx        = instinct - 768;
-        const auto byteOffset = kPurchasedInstinctsOffset + (idx / 8);
-        if (byteOffset >= kPurchasedInstinctsOffset + kPurchasedInstinctsBytes)
-        {
-            return false;
-        }
-
-        return (PChar->m_PMonstrosity->instincts[byteOffset] >> (idx % 8)) & 0x01;
-    }
-
-    // Each family has three level instincts and a 2-bit count of how many are unlocked.
-    const auto slot  = instinct / 3;
-    const auto tier  = instinct % 3;
-    const auto owned = (PChar->m_PMonstrosity->instincts[slot / 4] >> ((slot * 2) % 8)) & 0x03;
-
-    return owned > tier;
-}
-
-auto monstrosity::IsVariantUnlocked(const CCharEntity* PChar, const uint8 variant) -> bool
-{
-    if (PChar->m_PMonstrosity == nullptr)
-    {
-        return false;
-    }
-
-    return (PChar->m_PMonstrosity->variants[variant / 8] >> (variant % 8)) & 0x01;
-}
-
 void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
 {
     if (PChar->m_PMonstrosity == nullptr)
@@ -1181,7 +1203,7 @@ void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
     WriteMonstrosityData(PChar);
 }
 
-auto monstrosity::GetExpNEXTLevel(uint8 level) -> uint32
+auto monstrosity::GetExpNEXTLevel(const uint8 level) -> uint32
 {
     if (const auto it = gMonstrosityData.expTable.find(level); it != gMonstrosityData.expTable.end())
     {

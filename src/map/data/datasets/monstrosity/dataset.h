@@ -27,14 +27,11 @@
 #include "data/enums/ecosystem.h"
 #include "data/enums/job.h"
 #include "data/enums/mod.h"
-#include "data/enums/monstrosity_instinct.h"
 #include "data/enums/monstrosity_species.h"
 #include "data/enums/monstrosity_variant.h"
 
-#include <array>
 #include <cstddef>
 #include <map>
-#include <string>
 #include <string_view>
 #include <utility>
 #include <vector>
@@ -45,27 +42,21 @@ namespace xi::data
 // dat_skill_id is what the client sends, mob_skill_id is what runs.
 struct MonstrosityTpSkill
 {
-    std::string name{};
-    uint16      speciesCode{};
-    uint16      datSkillId{};
-    uint16      mobSkillId{};
-    uint8       unlockLevel{};
-    uint16      tpCost{};
+    uint16 datSkillId{};
+    uint16 mobSkillId{};
+    uint8  unlockLevel{};
+    uint16 tpCost{};
 };
 
 struct MonstrosityInstinct
 {
-    uint16                  id{};
     uint8                   cost{};
-    std::string             name{};
     HashMap<xi::Mod, int16> mods{};
 };
 
 struct MonstrositySpecies
 {
     uint8                           monstrosityId{};
-    uint16                          speciesCode{};
-    std::string                     name{};
     xi::Job                         mjob{};
     xi::Job                         sjob{};
     uint8                           size{};

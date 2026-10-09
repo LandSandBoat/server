@@ -38,6 +38,26 @@ namespace
 
 constexpr auto kDefaultHPScale = uint16{ 240 };
 
+// Shop slots and level unlocks name a species or variant behind family level requirements.
+template <typename Record, typename Source>
+void resolveUnlock(Record& record, const Source& source)
+{
+    if (source.species.has_value())
+    {
+        record.species = yaml::resolveEnum(source.species.value());
+    }
+
+    if (source.variant.has_value())
+    {
+        record.variant = yaml::resolveEnum(source.variant.value());
+    }
+
+    for (const auto& [family, level] : yaml::resolveKeys(source.requirements))
+    {
+        record.requirements.emplace_back(family, level);
+    }
+}
+
 } // namespace
 
 auto Dataset::decode(const std::string_view text) -> Records
@@ -70,20 +90,7 @@ auto Dataset::decode(const std::string_view text) -> Records
                 .infamy = slot.infamy,
             };
 
-            if (slot.species.has_value())
-            {
-                record.species = yaml::resolveEnum(slot.species.value());
-            }
-
-            if (slot.variant.has_value())
-            {
-                record.variant = yaml::resolveEnum(slot.variant.value());
-            }
-
-            for (const auto& [family, level] : yaml::resolveKeys(slot.requirements))
-            {
-                record.requirements.emplace_back(family, level);
-            }
+            resolveUnlock(record, slot);
 
             resolved.push_back(std::move(record));
         }
@@ -98,39 +105,24 @@ auto Dataset::decode(const std::string_view text) -> Records
 
         auto record = MonstrosityLevelUnlock{};
 
-        if (unlock.species.has_value())
-        {
-            record.species = yaml::resolveEnum(unlock.species.value());
-        }
-
-        if (unlock.variant.has_value())
-        {
-            record.variant = yaml::resolveEnum(unlock.variant.value());
-        }
-
-        for (const auto& [family, level] : yaml::resolveKeys(unlock.requirements))
-        {
-            record.requirements.emplace_back(family, level);
-        }
+        resolveUnlock(record, unlock);
 
         records.levelUnlocks.push_back(std::move(record));
     }
 
-    for (auto& [key, instinct] : source.instincts)
+    for (const auto& [key, instinct] : source.instincts)
     {
         if (records.instincts.contains(instinct.id))
         {
             throw std::runtime_error(fmt::format("instinct '{}' reuses id {}", key, instinct.id));
         }
 
-        auto record = MonstrosityInstinct{
-            .id   = instinct.id,
-            .cost = instinct.cost,
-            .name = std::move(instinct.name),
-            .mods = yaml::resolveKeys(instinct.mods),
-        };
-
-        records.instincts.emplace(record.id, std::move(record));
+        records.instincts.emplace(
+            instinct.id,
+            MonstrosityInstinct{
+                .cost = instinct.cost,
+                .mods = yaml::resolveKeys(instinct.mods),
+            });
     }
 
     for (auto& [key, species] : source.species)
@@ -142,8 +134,6 @@ auto Dataset::decode(const std::string_view text) -> Records
 
         auto record = MonstrositySpecies{
             .monstrosityId = static_cast<uint8>(yaml::resolveEnum(species.family)),
-            .speciesCode   = species.species_code,
-            .name          = std::move(species.name),
             .mjob          = yaml::resolveEnum(species.mjob),
             .sjob          = yaml::resolveEnum(species.sjob),
             .size          = species.size,
@@ -164,8 +154,6 @@ auto Dataset::decode(const std::string_view text) -> Records
                 }
 
                 record.tpSkills.push_back(MonstrosityTpSkill{
-                    .name        = std::move(skill.skill),
-                    .speciesCode = record.speciesCode,
                     .datSkillId  = skill.dat_skill_id,
                     .mobSkillId  = skill.mob_skill_id,
                     .unlockLevel = skill.unlock_level,
@@ -174,7 +162,7 @@ auto Dataset::decode(const std::string_view text) -> Records
             }
         }
 
-        records.species.emplace(record.speciesCode, std::move(record));
+        records.species.emplace(species.species_code, std::move(record));
     }
 
     return records;
