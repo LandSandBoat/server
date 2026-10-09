@@ -323,6 +323,8 @@ auto LoadLinkshellConciergeSlots(uint16 zoneId) -> sol::table;
 void SetLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex, const sol::table& data);
 void DeleteLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex);
 void DecrementLinkshellConciergeMembersGoal(uint16 zoneId, uint32 linkshellid);
+auto LoadChocoboRaceResult(uint32 raceNo) -> sol::object;
+void SaveChocoboRaceResult(const sol::table& data);
 
 uint32 JstDayOfTheYear();
 uint32 JstDayOfTheMonth();

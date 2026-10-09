@@ -111,6 +111,10 @@ struct SectionParam
     auto        toLua() const -> sol::table;
 };
 
+// A whole race's field and sections.
+using Chocobos = std::array<ChocoboParam, kNumRacers>;
+using Sections = std::array<SectionParam, kMaxSections>;
+
 // Mode=1: Updates ChocoboRacingSys.RaceParams.
 // RaceParams[0] contains the weather and the number of entrants, RaceParams[1] contains a race-specific counter 0-3
 class RACINGPARAMS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_CHOCOBO_RACING, RACINGPARAMS>
