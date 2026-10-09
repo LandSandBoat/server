@@ -75,6 +75,7 @@ local announcements =
         local ID   = zones[xi.zone.CHOCOBO_CIRCUIT]
         local race = raceNo + 2
         announceRace(players, race, ID.text.BETS_OPEN, ID.text.BETS_ATTENDANT, (race + 1) % 4, xi.chocoboRacing.getRaceColor(race))
+        xi.chocoboRacing.postRace(race)
     end,
 
     [53] = function(players, raceNo)
@@ -86,6 +87,8 @@ local announcements =
     [359] = function(players, raceNo)
         local ID = zones[xi.zone.CHOCOBO_CIRCUIT]
         announceRace(players, raceNo, ID.text.RACE_STARTING, ID.text.RACE_STARTING_END, 0)
+        xi.chocoboRacing.runRace(raceNo)
+        xi.chocoboRacing.broadcastRace(players, raceNo)
     end,
 
     [625] = function(players)
@@ -111,7 +114,17 @@ xi.chocoboRacing.onZoneTick = function(zone)
     local lastTick = zone:getLocalVar(vars.LAST_TICK)
     zone:setLocalVar(vars.LAST_TICK, now)
 
-    if lastTick == 0 or now <= lastTick then
+    -- On the first tick, post the races the toteboards can already show.
+    if lastTick == 0 then
+        local currentRaceNo = xi.chocoboRacing.raceNoAt(now)
+        for raceNo = currentRaceNo, currentRaceNo + 2 do
+            xi.chocoboRacing.postRace(raceNo)
+        end
+
+        return
+    end
+
+    if now <= lastTick then
         return
     end
 

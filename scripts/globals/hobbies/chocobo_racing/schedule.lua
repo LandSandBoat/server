@@ -8,9 +8,11 @@ xi.chocoboRacing = xi.chocoboRacing or {}
 
 xi.chocoboRacing.schedule =
 {
-    PERIOD = 900,     -- A race every 15 minutes.
-    OFFSET = 1848287, -- Race N starts in 15 minute slot N + OFFSET since the Unix epoch, lines up with retail.
-    WRAP   = 0x40000, -- Players see the race number in 18 bits; retail's last wrapped to 0 in September 2022.
+    PERIOD     = 900,     -- A race every 15 minutes.
+    OFFSET     = 1848287, -- Race N starts in 15 minute slot N + OFFSET since the Unix epoch, lines up with retail.
+    BETS_CLOSE = 47,      -- Seconds into its slot when betting on a race closes.
+    START      = 359,     -- Seconds into its slot when a race starts.
+    WRAP       = 0x40000, -- Players see the race number in 18 bits.
 }
 
 -- Grade by race number % 8, starting at 0.
