@@ -131,6 +131,8 @@ void               AddInfamy(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
 [[nodiscard]] auto IsPassageZone(xi::ZoneId zoneId) -> bool;
+[[nodiscard]] auto CanPartyWith(const CCharEntity* PChar, uint32 otherCharId) -> bool;
+[[nodiscard]] auto CanStayInParty(const CCharEntity* PChar, uint32 partyId) -> bool;
 [[nodiscard]] auto CanCastSpell(CSpell* PSpell) -> bool;
 [[nodiscard]] auto ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool;
 

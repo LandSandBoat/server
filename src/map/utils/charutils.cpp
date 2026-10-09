@@ -6550,6 +6550,29 @@ void ClearTempItems(CCharEntity* PChar)
     Temp->Clear();
 }
 
+void LeaveParty(CCharEntity* PChar)
+{
+    if (PChar->PParty == nullptr)
+    {
+        return;
+    }
+
+    // A party of one leaves its alliance before it disbands.
+    if (PChar->PParty->m_PAlliance && PChar->PParty->HasOnlyOneMember())
+    {
+        if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
+        {
+            PChar->PParty->m_PAlliance->dissolveAlliance();
+        }
+        else
+        {
+            PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
+        }
+    }
+
+    PChar->PParty->RemoveMember(PChar);
+}
+
 void ReloadParty(CCharEntity* PChar)
 {
     TracyZoneScoped;
@@ -6599,6 +6622,13 @@ void ReloadParty(CCharEntity* PChar)
             }
 
             PParty->PushMember(PChar);
+
+            // A party saved before entering Monstrosity comes back here, after the job change.
+            if (PChar->m_PMonstrosity != nullptr && !monstrosity::CanStayInParty(PChar, partyid))
+            {
+                LeaveParty(PChar);
+                return;
+            }
 
             // Joins accepted on another process land here instead of CParty::AddMember
             if (PChar->isSeekingParty())

@@ -258,6 +258,7 @@ void RemoveAllEquipMods(CCharEntity* PChar);
 void ApplyAllEquipMods(CCharEntity* PChar);
 
 void ClearTempItems(CCharEntity* PChar);
+void LeaveParty(CCharEntity* PChar);
 void ReloadParty(CCharEntity* PChar);
 void RemoveSeekFlag(CCharEntity* PChar);
 

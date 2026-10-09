@@ -26,6 +26,7 @@
 #include "entities/char_entity.h"
 #include "enums/party_kind.h"
 #include "ipc_client.h"
+#include "monstrosity.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x009_message.h"
 #include "party.h"
@@ -41,7 +42,8 @@ auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCha
 
 void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res) == GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept && PChar->InvitePending.kind == PartyKind::Party && PChar->PParty != nullptr)
+    const auto accepted = static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res) == GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept;
+    if (accepted && ((PChar->InvitePending.kind == PartyKind::Party && PChar->PParty != nullptr) || !monstrosity::CanPartyWith(PChar, PChar->InvitePending.entity.UniqueNo)))
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
         PChar->InvitePending.clean();

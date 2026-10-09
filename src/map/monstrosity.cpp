@@ -612,6 +612,9 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
 
             PChar->m_PMonstrosity = nullptr;
             PChar->m_EcoSystem    = xi::Ecosystem::Humanoid;
+
+            // A party of Monipulators has no room for an adventurer.
+            charutils::LeaveParty(PChar);
         }
 
         return;
@@ -627,6 +630,9 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
     {
         return;
     }
+
+    // JP wiki: entering Monstrosity leaves any party.
+    charutils::LeaveParty(PChar);
 
     for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
     {
@@ -829,7 +835,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
 
             applySpeciesState(PChar);
 
-            // TODO: Does retail keep exp per species? Until then the remainder is lost on a family change.
+            // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
             PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
 
             // Retail keeps instincts equipped across species, unless the new level cannot afford them.
@@ -1235,6 +1241,44 @@ auto monstrosity::ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool
     }
 
     return level >= PSpell->getJob(data.SubJob) && !(PSpell->getRequirements() & SPELLREQ_MAIN_JOB_ONLY);
+}
+
+// JP wiki: a Monipulator cannot party. The setting allows parties of Monipulators only.
+auto monstrosity::CanPartyWith(const CCharEntity* PChar, const uint32 otherCharId) -> bool
+{
+    // With the setting off, the Monipulator's side refuses for itself.
+    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
+    {
+        return PChar->m_PMonstrosity == nullptr;
+    }
+
+    // The saved job also covers a character on another process.
+    const auto rset = db::preparedStmt("SELECT mjob FROM char_stats WHERE charid = ? LIMIT 1", otherCharId);
+    if (!rset || !rset->next())
+    {
+        return false;
+    }
+
+    const auto otherIsMonipulator = rset->get<uint8>("mjob") == static_cast<uint8>(xi::Job::MON);
+
+    return otherIsMonipulator == (PChar->m_PMonstrosity != nullptr);
+}
+
+auto monstrosity::CanStayInParty(const CCharEntity* PChar, const uint32 partyId) -> bool
+{
+    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
+    {
+        return false;
+    }
+
+    const auto rset = db::preparedStmt("SELECT COUNT(*) AS adventurers "
+                                       "FROM accounts_parties p JOIN char_stats s ON p.charid = s.charid "
+                                       "WHERE p.partyid = ? AND p.charid != ? AND s.mjob != ?",
+                                       partyId,
+                                       PChar->id,
+                                       static_cast<uint8>(xi::Job::MON));
+
+    return rset && rset->next() && rset->get<uint32>("adventurers") == 0;
 }
 
 // Monipulators travel to field and dungeon zones, never towns, Dynamis or instances.
