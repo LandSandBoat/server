@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Camereine
 -- Type: Chocobo Renter
--- !pos -12.3 1.4 -98 230
+-- !pos -8.595 1.548 -101.450 230
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

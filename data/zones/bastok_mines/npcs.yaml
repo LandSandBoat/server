@@ -982,7 +982,7 @@ npcs:
   17735733:
     script:       Neigepance
     display_name: Neigepance
-    at:           [46.673, 0.874, -102.309, 129]
+    at:           [46.673, 0.874, -102.309, 100]
     render:
       look:
         type:  equipped

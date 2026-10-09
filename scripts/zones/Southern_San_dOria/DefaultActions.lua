@@ -37,6 +37,7 @@ return {
     ['Maugie']               = { event =  46 },
     ['Melledanne']           = { event = 943 },
     ['Norejaie']             = { event = 678 },
+    ['Palabelle']            = { event = 876, options = { [2] = 1 } },
     ['Paouala']              = { event =  82 },
     ['Phillone']             = { event =  29 },
     ['qm2']                  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

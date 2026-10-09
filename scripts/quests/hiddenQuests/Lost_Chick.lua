@@ -61,7 +61,7 @@ local function ownerZone(location)
 
     for ownerId, owner in pairs(walks.chickOwners[location]) do
         if not owner.ask then
-            zone[owner.npc] = quest:event(owner.events[1], 1)
+            zone[owner.npc] = quest:priorityEvent(owner.events[1], 1)
         end
 
         for _, csid in ipairs(owner.events) do

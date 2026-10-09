@@ -101,7 +101,7 @@ describe('Chocobo raising lost chick', function()
             assert(meeting.event == 0 and meeting.trainer == trainer.HANTILEON, 'Expected a plain meeting')
 
             local adolescent = walk(newState(xi.chocoboRaising.stage.ADOLESCENT), shortWalk, 0, { 100 })
-            assert(adolescent.event == 0, 'Expected no find past the chick stage')
+            assert(adolescent.event == walkEvent.LOST_CHICK, 'Expected an adolescent to find the chick too')
 
             local lost = walk(newState(), shortWalk, chickValue(6), { 100 })
             assert(lost.event == 0, 'Expected no second chick')
@@ -211,7 +211,7 @@ describe('Chocobo raising lost chick', function()
             assert(barred.trainer == trainer.BRUTUS, 'Expected no Dietmund without the gate')
 
             local regular = walks.candidates(sandoria, regularWalk, true)
-            assert(#regular == 2, 'Expected Dietmund only on long walks')
+            assert(#regular == 1, 'Expected Dietmund only on long walks')
         end)
 
         it('adds 1% meeting chance per 16 receptivity above 63', function()
@@ -310,6 +310,17 @@ describe('Chocobo raising lost chick', function()
             local params = start.params
             assert(start.eventId == 846, string.format('Expected event 846, got %d', start.eventId))
             assert(params[0] == 1 and params[3] == 1 and params[4] == 1 and params[5] == 0 and params[6] == 6, 'Expected [1, _, 0, 1, 1, 0, 6, 0]')
+        end)
+
+        it('plays a dedicated owner\'s question every time, not their shop', function()
+            player:setCharVar(walks.lostChickVar, chickValue(3, 3))
+
+            for _ = 1, 2 do
+                local victoire = raisingClient.forNPC(player, 'Victoire', 848)
+                local start    = raisingClient.talk(victoire)
+                assert(start.eventId == 848, string.format('Expected event 848, got %d', start.eventId))
+                raisingClient.finish(victoire, 0)
+            end
         end)
 
         it('teaches the diligent story at the right owner, then Hantileon reports it', function()

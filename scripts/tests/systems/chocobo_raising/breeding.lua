@@ -234,12 +234,12 @@ describe('Chocobo breeding', function()
             assert(not breeding.pendingEgg(player), 'Expected the egg collected')
         end)
 
-        it('ignores chococards without a ticket', function()
+        it('answers chococards without a ticket with the ticket menu', function()
             cardItem(xi.item.CHOCOCARD_M, { color.BLACK, color.BLACK, color.BLUE }, xi.chocoboRaising.gender.MALE)
             cardItem(xi.item.CHOCOCARD_F, { color.YELLOW, color.BLACK, color.BLUE }, xi.chocoboRaising.gender.FEMALE)
 
             player.actions:tradeNpc('Finbarr', { xi.item.CHOCOCARD_M, xi.item.CHOCOCARD_F })
-            player.events:expectNotInEvent()
+            player.events:expect({ eventId = finbarr.TICKET_MENU, finishOption = 0 })
         end)
 
         it('lays an egg from the parents\' genes after JST midnight', function()
