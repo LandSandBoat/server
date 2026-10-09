@@ -194,10 +194,11 @@ auto CLuaClientEntityPair::getLinkshellId(const uint8 lsNum) const -> uint32
  *  Notes   : Only for LOC_INVENTORY, player-specific
  ************************************************************************/
 
-auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint8 quantity) const -> Maybe<uint16>
+auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint32 quantity) const -> Maybe<uint16>
 {
-    uint8       slotId = 0;
-    const auto* PChar  = testChar_->entity();
+    // Gil occupies inventory slot 0, so "not found" cannot be signalled by slot id.
+    Maybe<uint16> slotId;
+    const auto*   PChar = testChar_->entity();
 
     const auto itemFn = [&](const CItem* item)
     {
@@ -209,12 +210,7 @@ auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint8 quant
 
     PChar->getStorage(LOC_INVENTORY)->ForEachItem(itemFn);
 
-    if (slotId != 0)
-    {
-        return std::make_optional(slotId);
-    }
-
-    return std::nullopt;
+    return slotId;
 }
 
 /************************************************************************
