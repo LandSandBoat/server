@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Feretory
+-- Area: Feretory (285)
 --  NPC: Odyssean Passage
--- !pos TODO
+-- !pos -358.000 -3.150 -470.000 285
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

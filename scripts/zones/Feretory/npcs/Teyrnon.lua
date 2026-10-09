@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Feretory
+-- Area: Feretory (285)
 --  NPC: Teyrnon
--- !pos TODO
+-- !pos -354.000 -3.112 -470.000 285
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------

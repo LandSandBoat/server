@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Feretory
+-- Area: Feretory (285)
 --  NPC: Aengus
--- !pos TODO
+-- !pos -350.000 -3.379 -466.000 285
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------

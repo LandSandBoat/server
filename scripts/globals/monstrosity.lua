@@ -192,7 +192,7 @@ local function getLimitBreakMask(player)
 
     for jobId = xi.job.WAR, xi.job.RUN do
         if hasCompletedLimitBreak(player, jobId) then
-            limitMask = utils.mask.setBit(limitMask, jobId - 1, true)
+            limitMask = utils.mask.setBit(limitMask, jobId, true)
         end
     end
 
@@ -421,13 +421,14 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
-    local zoneSelected = bit.rshift(option, 4)
+    local zoneSelected = bit.band(bit.rshift(option, 4), 0xFFF)
     player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected] or 0, 0, 0, 0, 1, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
+    -- Bits 16 and up carry the exit point when the menu offers one.
     local eventOption  = bit.band(option, 0xF)
-    local zoneSelected = bit.rshift(option, 4)
+    local zoneSelected = bit.band(bit.rshift(option, 4), 0xFFF)
 
     if eventOption == 1 then
         if zoneSelected == 0 then
@@ -528,7 +529,8 @@ xi.monstrosity.teyrnonOnTrigger = function(player, npc)
         return
     end
 
-    player:startEvent(7, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0, 0)
+    player:showText(npc, zones[xi.zone.FERETORY].text.OUT_WITH_THY_BUSINESS)
+    player:startEvent(7, player:getCurrency('infamy'))
 end
 
 xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)

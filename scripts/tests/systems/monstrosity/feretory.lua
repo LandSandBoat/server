@@ -358,6 +358,60 @@ describe('Monstrosity Bee quiz', function()
     end)
 end)
 
+-- Event 15 trades a seasonal item for a family or variant.
+describe('Monstrosity Suibhne trades', function()
+    ---@type CClientEntityPair
+    local player
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.FERETORY)
+    end)
+
+    it('unlocks Astoltian Slime for a Slime Fetish', function()
+        player:addItem(xi.item.SLIME_FETISH)
+        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME), 'Astoltian Slime should be unlocked')
+        assert(not player:hasItem(xi.item.SLIME_FETISH), 'the Slime Fetish was not taken')
+    end)
+
+    it('unlocks the New Year Mandragora for an Ake-Ome Spirit', function()
+        player:addItem(xi.item.AKE_OME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.AKE_OME_SPIRIT }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.NEW_YEAR_MANDRAGORA), 'the New Year Mandragora should be unlocked')
+        assert(not player:hasItem(xi.item.AKE_OME_SPIRIT), 'the Ake-Ome Spirit was not taken')
+    end)
+
+    it('keeps the item when the player declines', function()
+        player:addItem(xi.item.SLIME_FETISH)
+        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 0 })
+
+        assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME), 'declining unlocked Astoltian Slime')
+        assert(player:hasItem(xi.item.SLIME_FETISH), 'declining took the Slime Fetish')
+    end)
+
+    it('starts no event for a family already unlocked', function()
+        xi.monstrosity.unlockSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME)
+        player:addItem(xi.item.SLIME_FETISH)
+        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH })
+
+        assert(player:hasItem(xi.item.SLIME_FETISH), 'took a Slime Fetish for a family already unlocked')
+    end)
+end)
+
+-- Retail spawns only the first of each pair of Feretory NPCs. The second holds unused events.
+describe('Monstrosity Feretory NPCs', function()
+    it('leaves the duplicate NPCs hidden', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.FERETORY })
+        assert(player:getZoneID() == xi.zone.FERETORY, 'precondition: the Feretory did not load')
+
+        for _, id in ipairs({ 17944592, 17944594, 17944596, 17944598, 17944600 }) do
+            assert(GetNPCByID(id):getStatus() == xi.status.DISAPPEAR, string.format('NPC %d is visible', id))
+        end
+    end)
+end)
+
 -- Changing family keeps every level but loses the exp in progress. A variant keeps it.
 describe('Monstrosity species change', function()
     local onyxRabbit = 256 + xi.monstrosityVariant.ONYX_RABBIT

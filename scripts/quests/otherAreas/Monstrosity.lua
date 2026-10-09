@@ -57,6 +57,14 @@ local suspiciousCityNpc =
     end,
 }
 
+-- The client lists the starters as rabbit, lizard, mandragora.
+local starterCutsceneIndex =
+{
+    [xi.monstrositySpecies.RABBIT    ] = 1,
+    [xi.monstrositySpecies.LIZARD    ] = 2,
+    [xi.monstrositySpecies.MANDRAGORA] = 3,
+}
+
 local tradeEventFinish = function(player, csid, option, npc)
     npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
@@ -173,8 +181,10 @@ quest.sections =
             {
                 [2] = function(player, csid, option, npc)
                     if option == 1 then
-                        -- TODO: Character appearance has to be encoded here to make the CS show the right character
-                        player:updateEvent(7, 10, 2, 1024, 2, 0, 0, 0)
+                        -- The cutscene draws the player's race and face, then the starter in the client's order.
+                        -- TODO: Check getFace() matches the client's face numbering.
+                        local starter = starterCutsceneIndex[player:getMonstrosityData().monstrosityId] or 0
+                        player:updateEvent(player:getRace(), player:getFace(), starter)
                     end
                 end,
             },

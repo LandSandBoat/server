@@ -91,23 +91,15 @@ struct LevelUnlock
     std::optional<yaml::EnumKeyedMap<xi::MonstrositySpecies, uint8>> requirements;
 };
 
-struct UnlinkedSpecies
-{
-    uint16               species_code{};
-    std::string          name{};
-    std::vector<TpSkill> tp_skills{};
-};
-
 struct Document
 {
     struct Tables
     {
-        HashMap<uint8, uint32>                                exp_table;
-        std::map<uint8, std::vector<ShopSlot>>                teyrnon_shop;
-        std::vector<LevelUnlock>                              level_unlocks;
-        std::map<std::string, Instinct>                       instincts;
-        std::map<std::string, Species>                        species;
-        std::optional<std::map<std::string, UnlinkedSpecies>> unlinked_tp_skills;
+        HashMap<uint8, uint32>                 exp_table;
+        std::map<uint8, std::vector<ShopSlot>> teyrnon_shop;
+        std::vector<LevelUnlock>               level_unlocks;
+        std::map<std::string, Instinct>        instincts;
+        std::map<std::string, Species>         species;
     };
 
     Tables monstrosity;
@@ -172,14 +164,6 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::LevelUnlock>
 };
 
 template <>
-struct glz::json_schema<xi::data::datasets::monstrosity::wire::UnlinkedSpecies>
-{
-    glz::schema species_code{ .description = "Species code the old table used.", .minimum = 1L, .maximum = 65535L };
-    glz::schema name{ .description = "Species name as it appeared in the old table." };
-    glz::schema tp_skills{ .description = "TP moves recorded for that species." };
-};
-
-template <>
 struct glz::json_schema<xi::data::datasets::monstrosity::wire::Document::Tables>
 {
     glz::schema exp_table{ .description = "Exp needed to clear each level." };
@@ -187,7 +171,6 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::Document::Tables>
     glz::schema level_unlocks{ .description = "Families and variants granted on reaching family levels." };
     glz::schema instincts{ .description = "Instincts keyed by name." };
     glz::schema species{ .description = "Species keyed by name." };
-    glz::schema unlinked_tp_skills{ .description = "TP moves whose species is missing from `species`, kept so they are not lost." };
 };
 
 template <>

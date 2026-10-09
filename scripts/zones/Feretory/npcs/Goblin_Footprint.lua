@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: Feretory (285)
---  NPC: Maccus
--- !pos -362.000 -3.112 -470.000 285
+--  NPC: Goblin Footprint
+-- !pos -323.113 -2.718 -457.763 285
 -----------------------------------
-require('scripts/globals/monstrosity')
+local ID = zones[xi.zone.FERETORY]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
+-- TODO: Does retail follow this with Grumblix's story menu (event 0)?
 entity.onTrigger = function(player, npc)
-    xi.monstrosity.maccusOnTrigger(player, npc)
+    player:showText(npc, ID.text.STRANGE_RASPY_VOICE)
 end
 
 return entity

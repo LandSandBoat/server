@@ -44,8 +44,10 @@ constexpr uint8 MAX_TRADE_SLOTS = 9;
 
 auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
+    // A Monipulator can only trade with the Feretory's NPCs.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
+        .blockedBy({ BlockedState::InEvent })
+        .mustEqual(PChar->m_PMonstrosity == nullptr || PChar->getZone() == xi::ZoneId::Feretory, true, "Monipulators only trade in the Feretory")
         .range("ItemNum", this->ItemNum, 1, MAX_TRADE_SLOTS);
 }
 
