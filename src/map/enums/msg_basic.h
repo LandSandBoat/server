@@ -286,5 +286,13 @@ enum class MsgBasic : uint16_t
     ROEUnable                       = 742, // You are currently unable to undertake this objective.
     AutoExceedsCapacity             = 745, // Your automaton exceeds one or more elemental capacity values and cannot be activated.
     MountRequiredLevel              = 773, // You are unable to call forth your mount because your main job level is not at least <level>.
+    ExemplarPointsGained            = 809, // <player> gains # exemplar points.
+    MasterChain                     = 810, // Master chain #! <player> gains # exemplar points.
+    MasterLevelUp                   = 811, // <player> attains master level #!
+    MasterLevelInfo                 = 812, // Master Level: # (# experience)
+    MasterLevelDown                 = 813, // <player> falls to master level #.
+    LevelSyncMasterLevel            = 814, // Level Sync activated. Your master level has been restricted to #.
+    ExemplarPointsGainedItem        = 822, // <player> gains # exemplar points.
+    ExemplarPointsCampaignBonus     = 825, // <player> gains # bonus exemplar points as part of the active campaign. # points remaining.
     AlterEgoUpgrade                 = 828, // <category> attribute increased to #.
 };
