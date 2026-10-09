@@ -1,10 +1,27 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Mhaura_Pirates (228)
 -----------------------------------
+local ID = zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
+-- The first Sea Monk and Sea Pugil IDs are for fishing.
+local slots =
+{
+    { id = ID.mob.SEA_CRAB[1] },
+    { id = ID.mob.SEA_CRAB[2] },
+    { id = ID.mob.SEA_PUGIL[2] },
+    { id = ID.mob.SEA_PUGIL[3] },
+    { id = ID.mob.SEA_MONK[2] },
+    { id = ID.mob.PHANTOM, night = true },
+}
+
 zoneObject.onInitialize = function(zone)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.ferry.onZoneTick(zone, slots)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

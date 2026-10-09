@@ -24,6 +24,10 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
     mob =
     {
         CROSSBONES = GetTableOfIDs('Crossbones'),
+        PHANTOM    = GetFirstID('Phantom'),
+        SEA_CRAB   = GetTableOfIDs('Sea_Crab'),
+        SEA_MONK   = GetTableOfIDs('Sea_Monk'),
+        SEA_PUGIL  = GetTableOfIDs('Sea_Pugil'),
         SHIP_WIGHT = GetFirstID('Ship_Wight'),
         SILVERHOOK = GetFirstID('Silverhook'),
     },

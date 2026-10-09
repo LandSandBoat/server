@@ -265,7 +265,7 @@ describe('Ferry deck mobs', function()
         spawnCalls:called(2)
     end)
 
-    it('boards every daytime deck slot on all six routes', function()
+    it('boards every daytime deck slot on all eight routes', function()
         local shipSlots =
         {
             { 'SEA_CRAB', 1 },
@@ -283,6 +283,14 @@ describe('Ferry deck mobs', function()
             { 'OCEAN_JAGIL', 2 },
             { 'OCEAN_KRAKEN' },
         }
+        local pirateShipSlots =
+        {
+            { 'SEA_CRAB', 1 },
+            { 'SEA_CRAB', 2 },
+            { 'SEA_PUGIL', 2 },
+            { 'SEA_PUGIL', 3 },
+            { 'SEA_MONK', 2 },
+        }
         local silverSeaSlots =
         {
             { 'APKALLU', 1 },
@@ -296,6 +304,8 @@ describe('Ferry deck mobs', function()
         {
             { xi.zone.SHIP_BOUND_FOR_SELBINA, 'Ship_bound_for_Selbina', shipSlots },
             { xi.zone.SHIP_BOUND_FOR_MHAURA, 'Ship_bound_for_Mhaura', shipSlots },
+            { xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES, 'Ship_bound_for_Selbina_Pirates', pirateShipSlots },
+            { xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES, 'Ship_bound_for_Mhaura_Pirates', pirateShipSlots },
             { xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI, 'Open_sea_route_to_Al_Zahbi', openSeaSlots },
             { xi.zone.OPEN_SEA_ROUTE_TO_MHAURA, 'Open_sea_route_to_Mhaura', openSeaSlots },
             { xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI, 'Silver_Sea_route_to_Al_Zahbi', silverSeaSlots },
@@ -750,6 +760,140 @@ describe('Ferry deck mobs', function()
     }
 
     for _, route in ipairs(pirateRoutes) do
+        it('keeps pirates and fished copies out of the deck lottery on ' .. route[2], function()
+            roll = 100
+            player:gotoZone(route[1])
+            zone = GetZone(route[1])
+            assert(zone, 'pirate ferry is not loaded')
+            zone:setLocalVar('[ferry]nextRoll', now + 60)
+            zone:setLocalVar('nmCanSpawn', 0)
+            local pirateID = zones[route[1]].mob
+            local mobs = {}
+            for _, mobId in ipairs({ pirateID.SEA_CRAB[1], pirateID.SEA_CRAB[2], pirateID.SEA_PUGIL[2], pirateID.SEA_PUGIL[3], pirateID.SEA_MONK[2], pirateID.PHANTOM }) do
+                local mob = player.entities:get(mobId)
+                assert(mob, 'pirate ferry deck mob is not loaded')
+                mob:despawn()
+                table.insert(mobs, mob)
+                table.insert(deckMobs, mob)
+            end
+
+            -- Pirates and fishing mobs do not count toward the deck limit.
+            local excludedIds = { pirateID.SHIP_WIGHT, pirateID[route[3]], pirateID.SEA_PUGIL[1], pirateID.SEA_MONK[1] }
+            for _, mobId in ipairs(pirateID.CROSSBONES) do
+                table.insert(excludedIds, mobId)
+            end
+
+            for _, mobId in ipairs(excludedIds) do
+                local mob = player.entities:get(mobId)
+                assert(mob, 'excluded pirate ferry mob is not loaded')
+                mob:despawn()
+                SpawnMob(mobId)
+                mob.assert:isSpawned()
+                table.insert(deckMobs, mob)
+            end
+
+            zone:setLocalVar('nmCanSpawn', 1)
+            local pirateAction = zone:getLocalVar('currPiratesAction')
+            spawnCalls:clear()
+            despawnCalls:clear()
+            calls = {}
+            roll  = 30
+            pick  = 1
+            now   = now + 60
+            xi.zones[route[2]].Zone.onZoneTick(zone)
+            spawnCalls:called(1)
+            spawnCalls:calledWith(pirateID.SEA_CRAB[1])
+            despawnCalls:calledWith(pirateID.SEA_CRAB[1], 280)
+            assert(calls[2][2] == 5, 'pirates or fished copies joined the daytime pick')
+            assert(zone:getLocalVar('[ferry]nextRoll') == now + 180, 'pirate ferry did not skip two rolls')
+            assert(zone:getLocalVar('nmCanSpawn') == 1, 'deck lottery changed the pirate NM eligibility')
+            assert(zone:getLocalVar('currPiratesAction') == pirateAction, 'deck lottery changed the pirate encounter stage')
+
+            roll = 21
+            now  = now + 180
+            xi.zones[route[2]].Zone.onZoneTick(zone)
+            spawnCalls:called(1)
+            roll = 20
+            now  = now + 60
+            xi.zones[route[2]].Zone.onZoneTick(zone)
+            spawnCalls:called(2)
+            despawnCalls:called(2)
+
+            for _, mobId in ipairs(excludedIds) do
+                local mob = player.entities:get(mobId)
+                assert(mob, 'excluded pirate ferry mob is not loaded')
+                mob.assert:isSpawned()
+            end
+
+            zone:setLocalVar('nmCanSpawn', 0)
+        end)
+
+        it('keeps normal mobs on winning rolls and fades Phantom at dawn on ' .. route[2], function()
+            roll = 100
+            player:gotoZone(route[1])
+            zone = GetZone(route[1])
+            assert(zone, 'pirate ferry is not loaded')
+            zone:setLocalVar('[ferry]nextRoll', now + 60)
+            local pirateID = zones[route[1]].mob
+            local mobs = {}
+            for _, mobId in ipairs({ pirateID.SEA_CRAB[1], pirateID.SEA_CRAB[2], pirateID.SEA_PUGIL[2], pirateID.SEA_PUGIL[3], pirateID.SEA_MONK[2], pirateID.PHANTOM }) do
+                local mob = player.entities:get(mobId)
+                assert(mob, 'pirate ferry deck mob is not loaded')
+                mob:despawn()
+                table.insert(mobs, mob)
+                table.insert(deckMobs, mob)
+            end
+
+            xi.test.world:skipTime(360)
+            xi.test.world:tick(xi.tick.SPAWN)
+            for _, mob in ipairs(mobs) do
+                mob.assert.no:isSpawned()
+            end
+
+            xi.test.world:setVanaTime(20, 0)
+            xi.test.world:tick(xi.tick.VANA_HOUR)
+            xi.test.world:tick(xi.tick.SPAWN)
+            local phantom = player.entities:get(pirateID.PHANTOM)
+            assert(phantom, 'pirate ferry Phantom is not loaded')
+            phantom.assert.no:isSpawned()
+
+            spawnCalls:clear()
+            despawnCalls:clear()
+            calls = {}
+            roll  = 30
+            pick  = 6
+            now   = now + 60
+            xi.zones[route[2]].Zone.onZoneTick(zone)
+            phantom.assert:isSpawned()
+            spawnCalls:calledWith(pirateID.PHANTOM)
+            despawnCalls:called(0)
+            assert(calls[2][2] == 6, 'Phantom did not join the nighttime pick')
+
+            xi.test.world:setVanaTime(4, 0)
+            xi.test.world:tick(xi.tick.VANA_HOUR)
+            xi.test.world:skipTime(4)
+            xi.test.world:tickEntity(phantom)
+            xi.test.world:skipTime(4)
+            xi.test.world:tickEntity(phantom)
+            phantom.assert.no:isSpawned()
+
+            calls = {}
+            pick  = 5
+            now   = now + 180
+            xi.zones[route[2]].Zone.onZoneTick(zone)
+            assert(calls[2][2] == 5, 'Phantom stayed in the daytime pick')
+            local monk = player.entities:get(pirateID.SEA_MONK[2])
+            assert(monk, 'pirate ferry Sea Monk is not loaded')
+            monk.assert:isSpawned()
+            despawnCalls:calledWith(pirateID.SEA_MONK[2], 280)
+            player:claimAndKillMob(monk)
+            monk.assert.no:isSpawned()
+            roll = 100
+            xi.test.world:skipTime(360)
+            xi.test.world:tick(xi.tick.SPAWN)
+            monk.assert.no:isSpawned()
+        end)
+
         it('closes the pirate NM lottery before forced despawn on ' .. route[2], function()
             player:gotoZone(route[1])
             zone = GetZone(route[1])
