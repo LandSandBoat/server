@@ -15,7 +15,6 @@ local settings =
 
 -- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
 -- TODO: When ready for release, publish these to main settings files.
-xi.settings.main.ENABLE_CHOCOBO_RACING = false
 xi.settings.main.DEBUG_CHOCOBO_RACING = false
 
 -- Notes:
@@ -423,11 +422,6 @@ local fakeChocoboRacers                =
         },
     },
 }
-
--- Return auto-generated race number, advancing every 15 minutes
-xi.chocoboRacing.currentRaceNo         = function()
-    return math.floor(GetSystemTime() / settings.RACE_PERIOD)
-end
 
 -- Sends the "Betting ends in..." countdown via a PENDINGNUM
 xi.chocoboRacing.sendBettingCountdown   = function(player, listIndex)
