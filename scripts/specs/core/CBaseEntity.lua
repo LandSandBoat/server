@@ -57,8 +57,9 @@ end
 ---@param p3 integer?
 ---@param chat integer?
 ---@param sender CBaseEntity? Speaker for private messages, separate from the named entity.
+---@param showSender boolean? Print the speaker's name, defaults to true when a sender is given.
 ---@return nil
-function CBaseEntity:messageName(messageID, entity, p0, p1, p2, p3, chat, sender)
+function CBaseEntity:messageName(messageID, entity, p0, p1, p2, p3, chat, sender, showSender)
 end
 
 ---@param messageID integer
