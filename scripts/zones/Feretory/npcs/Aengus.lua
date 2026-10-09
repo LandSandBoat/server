@@ -1,23 +1,15 @@
 -----------------------------------
--- Area: Feretory
+-- Area: Feretory (285)
 --  NPC: Aengus
--- !pos TODO
+-- !pos -350.000 -3.379 -466.000 285
 -----------------------------------
 require('scripts/globals/monstrosity')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.monstrosity.aengusOnTrade(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
     xi.monstrosity.aengusOnTrigger(player, npc)
-end
-
-entity.onEventUpdate = function(player, csid, option, npc)
-    xi.monstrosity.aengusOnEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

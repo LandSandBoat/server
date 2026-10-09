@@ -88,7 +88,9 @@ xi.settings.main =
     MONSTROSITY_TELEPORT_TO_FERETORY = 0,   -- Return to Feretory instead of the zone where you entered Feretory when Relinquishing or after death.
     MONSTROSITY_TRIGGER_NPCS         = 0,   -- Allow Monipulators to trigger NPCs outside of the Feretory.
     MONSTROSITY_DONT_WIPE_BUFFS      = 0,   -- If set, buffs won't be wiped when changing species in the Feretory.
-    MONSTROSITY_PVP_ZONE_BYPASS = 0, -- Show the full zone teleport menu from Feretory while Belligerency is flagged.
+    MONSTROSITY_INFAMY_RATE          = 0.1, -- Share of exp gained as a Monipulator that is also awarded as infamy.
+    MONSTROSITY_PVP_ZONE_BYPASS      = 0,   -- Show the full zone teleport menu from Feretory while Belligerency is flagged.
+    MONSTROSITY_PARTIES              = 0,   -- Allow Monipulators to party with each other. Retail allows no parties at all.
 
     -- TREASURE CASKETS
     -- Retail droprate = 0.1 (10%) with no other effects active

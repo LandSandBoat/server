@@ -15,10 +15,14 @@ zones[xi.zone.FERETORY] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        STRANGE_RASPY_VOICE           = 7242, -- You can hear a strange, raspy voice...
+        OUT_WITH_THY_BUSINESS         = 7337, -- Out with thy business, ere I buffet thy countenance with a relentless tail whipping.
         MAY_POSSESS_BEASTS            = 7343, -- You may now possess [lapinions/sheep/behemoths/elasmoths/cerebruses/orthruses]!
         THY_BRAZEN_DISREGARD          = 7362, -- Thy brazen disregard to count correctly is an affront to monipulators everywhere. Return whenas thou hast the meet amount of infamy.
         YOU_LEARNED_INSTINCT          = 7367, -- You learned <item>!
+        SINKING_THY_CLAWS             = 7383, -- Doth the thought of sinking thy claws into another of thine own kind seem rather droll? Mayhap, yet such confrontations must needs take place for those who aimeth for higher heights.
         MAY_POSSESS_BEES              = 7395, -- You may now possess bees!
+        MAY_POSSESS_NEW_SPECIES       = 7397, -- You may now possess a new species!
     },
     mob =
     {

@@ -179,7 +179,6 @@ npcs:
         model: 2421
       name_vis: 32
       moving:    1
-    status:   normal
     widescan: true
     content:  soa
 
@@ -209,7 +208,6 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:        8
-    status:   normal
     widescan: true
     content:  soa
 
@@ -239,7 +237,6 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:       21
-    status:   normal
     widescan: true
     content:  soa
 
@@ -269,7 +266,6 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:        8
-    status:   normal
     widescan: true
     content:  soa
 
@@ -299,7 +295,6 @@ npcs:
       entity_flags: 27
       name_prefix:  32
       moving:       21
-    status:   normal
     widescan: true
     content:  soa
 

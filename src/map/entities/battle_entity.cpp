@@ -50,6 +50,7 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
@@ -492,7 +493,19 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        uint16 weaponDelay = weapon->getDelay() + getMod(xi::Mod::DELAY);
+        const auto* PMonipulator = monstrosity::AsMonipulator(this);
+
+        const auto baseDelay = [&]() -> uint16
+        {
+            if (PMonipulator != nullptr)
+            {
+                return monstrosity::GetWeaponDelay(PMonipulator);
+            }
+
+            return weapon->getDelay();
+        }();
+
+        auto weaponDelay = static_cast<uint16>(baseDelay + getMod(xi::Mod::DELAY));
 
         // Flat bonuses/Penalties (Bonuses would be negative in value)
         int16 martialArts = 0;
@@ -502,9 +515,9 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
         float hasteMultiplier     = 1.0f;
         float delayModMultiplier  = 1.0f + getMod(xi::Mod::DELAYP) / 100.0f;
 
-        // H2H (Mobs do not benefit from Martial Arts)
+        // H2H (Mobs and Monipulators do not benefit from Martial Arts)
         // TODO: Do Trusts benefit from Martial Arts?
-        if (weapon->isHandToHand() && objtype != TYPE_MOB)
+        if (weapon->isHandToHand() && objtype != TYPE_MOB && PMonipulator == nullptr)
         {
             martialArts = getMod(xi::Mod::MARTIAL_ARTS) * 1000 / 60; // TODO: Job points?
         }
@@ -713,6 +726,11 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         }
     }
 
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    {
+        return monstrosity::GetBaseDamage(PMonipulator, xi::Mod::MAIN_DMG_RATING);
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && dynamic_cast<const CCharEntity*>(this) != nullptr)
@@ -795,6 +813,12 @@ uint16 CBattleEntity::GetSubWeaponDmg()
 uint16 CBattleEntity::GetRangedWeaponDmg()
 {
     TracyZoneScoped;
+
+    // Ranged monster moves such as Sharp Sting hit as hard as the Monipulator's melee.
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    {
+        return monstrosity::GetBaseDamage(PMonipulator, xi::Mod::RANGED_DMG_RATING);
+    }
 
     uint16 dmg = 0;
 
@@ -1168,10 +1192,17 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     float strMultiplier = 0.5;
 
+    const auto* PMonipulator = monstrosity::AsMonipulator(this);
+
     // https://www.bg-wiki.com/ffxi/Strength
     if (dynamic_cast<const CCharEntity*>(this) == nullptr)
     {
         strMultiplier = 0.5;
+    }
+    else if (PMonipulator != nullptr)
+    {
+        // Monipulators use the fist multiplier whatever their species.
+        strMultiplier = 0.75f;
     }
     else if (weapon && weapon->isTwoHanded()) // 2-handed weapon
     {
@@ -1201,7 +1232,11 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
         ATT += this->getMod(xi::Mod::ENSPELL_DMG);
     }
 
-    if (dynamic_cast<const CCharEntity*>(this) != nullptr)
+    if (PMonipulator != nullptr)
+    {
+        ATT += monstrosity::GetCombatSkill(PMonipulator);
+    }
+    else if (dynamic_cast<const CCharEntity*>(this) != nullptr)
     {
         if (weapon)
         {
@@ -1508,8 +1543,16 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
         }
 
-        uint32_t skillLevel = GetSkill(skill) + iLvlSkill;
-        ACC                 = GetAccFromSkill(skillLevel);
+        if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+        {
+            // Fitted to retail Monipulator accuracy.
+            dexMultiplier = 0.75f;
+            ACC           = GetAccFromSkill(monstrosity::GetCombatSkill(PMonipulator));
+        }
+        else
+        {
+            ACC = GetAccFromSkill(GetSkill(skill) + iLvlSkill);
+        }
 
         if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
@@ -1647,6 +1690,12 @@ uint16 CBattleEntity::DEF()
         }
     }
 
+    // Retail Monipulator defence fits an A+ skill on top.
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+    {
+        DEF += monstrosity::GetCombatSkill(PMonipulator);
+    }
+
     DEF += getMod(xi::Mod::DEF);
 
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance, 0))
@@ -1685,7 +1734,15 @@ uint16 CBattleEntity::EVA()
     else
     {
         // Players and automatons use Evasion skill
-        evasion = GetSkill(xi::SkillType::Evasion);
+        evasion = [&]() -> int32
+        {
+            if (const auto* PMonipulator = monstrosity::AsMonipulator(this))
+            {
+                return monstrosity::GetEvasionSkill(PMonipulator);
+            }
+
+            return GetSkill(xi::SkillType::Evasion);
+        }();
 
         if (evasion > 200)
         {
@@ -1774,6 +1831,11 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
         m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
+    }
+    else if (monstrosity::AsMonipulator(this) != nullptr)
+    {
+        // A Monipulator's sub job is MON at its main level.
+        m_slvl = m_mlvl;
     }
     else if (this->objtype == TYPE_PET)
     {

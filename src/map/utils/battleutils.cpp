@@ -62,6 +62,7 @@
 #include "job_points.h"
 #include "mobskill.h"
 #include "modifier.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -1784,6 +1785,11 @@ int16 CalculateBaseTP(CBattleEntity* PEntity, int32 delay)
 
 auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
 {
+    if (const auto* PMonipulator = monstrosity::AsMonipulator(PEntity))
+    {
+        return monstrosity::GetBaseDelay(PMonipulator);
+    }
+
     CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(PEntity);
     CMobEntity*  PMobEntity  = dynamic_cast<CMobEntity*>(PEntity);
     uint16       baseDelay   = 480; // h2h "unequipped" base delay
@@ -2987,6 +2993,54 @@ uint8 getHitCount(uint8 hits)
             break;
     }
     return std::min<uint8>(num, 8); // No more than eight hits per attack
+}
+
+/************************************************************************
+ *                                                                       *
+ *  The ecosystem a given ecosystem preys on, or Unclassified.           *
+ *                                                                       *
+ ************************************************************************/
+
+auto GetEcosystemStrongAgainst(const xi::Ecosystem ecosystem) -> xi::Ecosystem
+{
+    // Cached from entity_correlation.lua, since aggro checks it per target.
+    static const auto strongAgainst = []() -> std::array<xi::Ecosystem, 256>
+    {
+        auto table = std::array<xi::Ecosystem, 256>{};
+        table.fill(xi::Ecosystem::Unclassified);
+
+        const auto dataTable = lua["xi"]["data"]["entityCorrelation"]["dataTable"].get<sol::optional<sol::table>>();
+        if (!dataTable.has_value())
+        {
+            ShowWarning("entityCorrelation.dataTable is missing. Ecosystem correlation is disabled.");
+            return table;
+        }
+
+        for (const auto& [key, value] : dataTable.value())
+        {
+            if (!key.is<uint32>() || !value.is<sol::table>())
+            {
+                continue;
+            }
+
+            const auto index = key.as<uint32>();
+            if (index >= table.size())
+            {
+                continue;
+            }
+
+            // Column 1 of the row is STRONG_AGAINST, and is nil for anything with no correlation.
+            const auto preysOn = value.as<sol::table>().get<sol::optional<uint32>>(1);
+            if (preysOn.has_value() && preysOn.value() < table.size())
+            {
+                table[index] = static_cast<xi::Ecosystem>(preysOn.value());
+            }
+        }
+
+        return table;
+    }();
+
+    return strongAgainst[std::to_underlying(ecosystem)];
 }
 
 /************************************************************************

@@ -21,8 +21,16 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         { tp = 3000, modifier = 147 / 1024 },
     }
 
-    -- TODO: Is the NM heal potency random or based on fTP?
-    if mob:isNM() then
+    -- JP wiki: a Monipulator heals 1/8 of max HP.
+    if mob:isPC() then
+        params.fTP =
+        {
+            { tp = 1000, modifier = 128 / 1024 },
+            { tp = 2000, modifier = 128 / 1024 },
+            { tp = 3000, modifier = 128 / 1024 },
+        }
+    elseif mob:isNM() then
+        -- TODO: Is the NM heal potency random or based on fTP?
         params.fTP =
         {
             { tp = 1000, modifier = math.randomInt(147, 441) / 1024 },

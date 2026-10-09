@@ -24,10 +24,25 @@
 #include <cstring>
 
 #include "entities/char_entity.h"
+#include "monstrosity.h"
+#include "spell.h"
 
 GP_SERV_COMMAND_MAGIC_DATA::GP_SERV_COMMAND_MAGIC_DATA(const CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     std::memcpy(packet.MagicDataTbl, &PChar->m_SpellList, sizeof(packet.MagicDataTbl));
+
+    // A Monipulator lists its Trusts, and only the spells its species can cast.
+    if (PChar->m_PMonstrosity)
+    {
+        for (uint16 spellId = 0; spellId < static_cast<uint16>(SpellID::Shantotto); ++spellId)
+        {
+            auto* PSpell = spell::GetSpell(static_cast<SpellID>(spellId));
+            if (PSpell == nullptr || !monstrosity::ListsSpell(PChar, PSpell))
+            {
+                packet.MagicDataTbl[spellId / 8] &= static_cast<uint8_t>(~(1 << (spellId % 8)));
+            }
+        }
+    }
 }

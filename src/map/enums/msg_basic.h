@@ -265,6 +265,7 @@ enum class MsgBasic : uint16_t
     LiementGain                     = 670, // <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element.
     PflugGain                       = 671, // <Player> uses <Ability>. <Target> now has enhanced resistance.
     GambitGain                      = 672, // <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
+    PossessNewMonster               = 677, // You are now able to possess a new monster!
     FeretoryCountdown               = 679, // <actor> will return to the Feretory in <n>
     ROERecord                       = 697, // Records of Eminence: <record>.
     ROEProgress                     = 698, // Progress: <amount>/<amount>.

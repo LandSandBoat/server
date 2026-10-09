@@ -3172,9 +3172,9 @@ INSERT INTO `mob_skills` VALUES (3140,2264,'permafrost_requiem',1,0.0,18.0,2000,
 INSERT INTO `mob_skills` VALUES (3141,2265,'glacial_tomb',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3142,2266,'glassy_nova',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3143,2887,'#1351',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3144,2888,'jittering_jig',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3145,2889,'romp',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3146,2890,'frenetic_flurry',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3144,2271,'jittering_jig',0,0.0,7.0,2000,2300,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3145,2272,'romp',4,0.0,7.0,2000,1700,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3146,2273,'frenetic_flurry',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3147,2891,'#1355',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3148,2274,'noname',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3149,2275,'dazing_discord',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);

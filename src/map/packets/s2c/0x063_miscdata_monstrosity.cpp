@@ -21,6 +21,7 @@
 
 #include "0x063_miscdata_monstrosity.h"
 
+#include "data/enums/monstrosity_species.h"
 #include "entities/char_entity.h"
 #include "monstrosity.h"
 #include "utils/charutils.h"
@@ -30,7 +31,7 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
     auto& packet = this->data();
 
     packet.type      = GP_SERV_COMMAND_MISCDATA_TYPE::Monstrosity1;
-    packet.unknown06 = sizeof(PacketData) - 8;
+    packet.unknown06 = sizeof(PacketData);
 
     // NOTE: These packets have to be at least partially populated, or the
     // player will lose their abilities and get a big selection of incorrect traits.
@@ -41,9 +42,11 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
     }
 
     packet.species = PChar->m_PMonstrosity->Species;
-    packet.flags   = PChar->m_PMonstrosity->Flags;
 
-    const int32 infamy = charutils::GetPoints(PChar, "infamy");
+    // Not the Belligerency flag.
+    packet.flags = PChar->m_PMonstrosity->Flags;
+
+    const auto infamy = charutils::GetPoints(PChar, "infamy");
 
     // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
     // The ranks are listed as:
@@ -52,14 +55,18 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
     // 20,001+ HNM (Highly Notorious Monster)
     packet.rank = static_cast<uint8>(std::min(2, (infamy - 1) / 10000));
 
+    // TODO: unknown1[0] varies on retail with no known pattern.
     packet.unknown1[0] = 0xEC;
     packet.unknown1[1] = 0x00;
     packet.infamy      = infamy;
-    packet.unknown2    = 0x2C;
+    packet.unknown2    = 0x00;
 
     // Bitpacked 2-bit values. 0 = no instincts from that species,
     // 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
     std::memcpy(packet.instincts, PChar->m_PMonstrosity->instincts.data(), sizeof(packet.instincts));
+
+    // Purchased instincts are carried by MONSTROSITY2 only.
+    std::memset(packet.instincts + monstrosity::kPurchasedInstinctsOffset, 0, monstrosity::kPurchasedInstinctsBytes);
 
     // Mapped onto the item ID for these creatures. (00 doesn't exist, 01 is rabbit, 02 is behemoth, etc.)
     std::memcpy(packet.levels, PChar->m_PMonstrosity->levels.data(), sizeof(packet.levels));
@@ -70,7 +77,7 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY2::MONSTROSITY2(const CCharEntity* PChar)
     auto& packet = this->data();
 
     packet.type      = GP_SERV_COMMAND_MISCDATA_TYPE::Monstrosity2;
-    packet.unknown06 = sizeof(PacketData) - 8;
+    packet.unknown06 = sizeof(PacketData);
 
     // NOTE: These packets have to be at least partially populated, or the
     // player will lose their abilities and get a big selection of incorrect traits.
@@ -81,12 +88,12 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY2::MONSTROSITY2(const CCharEntity* PChar)
     }
 
     // NOTE: SE added these after-the-fact, so they're not sent in Monipulator1 and they're at the end of the array!
-    packet.slimeLevel    = PChar->m_PMonstrosity->levels[126];
-    packet.sprigganLevel = PChar->m_PMonstrosity->levels[127];
+    packet.slimeLevel    = PChar->m_PMonstrosity->levels[std::to_underlying(xi::MonstrositySpecies::AstoltianSlime)];
+    packet.sprigganLevel = PChar->m_PMonstrosity->levels[std::to_underlying(xi::MonstrositySpecies::EorzeanSpriggan)];
 
     // Contains job/race instincts from the 0x03 set. Has 8 unused bytes. This is a 1:1 mapping.
     // Since this has 8 unused bytes, we're only going to use 4 from instincts[20:23]
-    std::memcpy(packet.instincts2, PChar->m_PMonstrosity->instincts.data() + 20, sizeof(packet.instincts2));
+    std::memcpy(packet.instincts2, PChar->m_PMonstrosity->instincts.data() + monstrosity::kPurchasedInstinctsOffset, sizeof(packet.instincts2));
 
     // Does not show normal monsters, only variants. Bit is 1 if the variant is owned.
     std::memcpy(packet.variants, PChar->m_PMonstrosity->variants.data(), sizeof(packet.variants));

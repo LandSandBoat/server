@@ -24,6 +24,7 @@
 #include "entities/char_entity.h"
 #include "enums/party_kind.h"
 #include "packets/c2s/validation.h"
+#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_GROUP_LEAVE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -39,31 +40,7 @@ void GP_CLI_COMMAND_GROUP_LEAVE::process(MapSession* PSession, CCharEntity* PCha
     {
         case PartyKind::Party:
         {
-            if (PChar->PParty->m_PAlliance &&
-                PChar->PParty->HasOnlyOneMember()) // single member alliance parties must be removed from alliance before disband
-            {
-                ShowDebug("%s party size is one", PChar->getName());
-
-                if (PChar->PParty->m_PAlliance->hasOnlyOneParty()) // if there is only 1 party then dissolve alliance
-                {
-                    ShowDebug("%s alliance size is one party", PChar->getName());
-
-                    PChar->PParty->m_PAlliance->dissolveAlliance();
-                    ShowDebug("%s alliance is dissolved", PChar->getName());
-                }
-                else
-                {
-                    ShowDebug("Removing %s party from alliance", PChar->getName());
-
-                    PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                    ShowDebug("%s party is removed from alliance", PChar->getName());
-                }
-            }
-
-            ShowDebug("Removing %s from party", PChar->getName());
-
-            PChar->PParty->RemoveMember(PChar);
-            ShowDebug("%s is removed from party", PChar->getName());
+            charutils::LeaveParty(PChar);
         }
         break;
         case PartyKind::Alliance:

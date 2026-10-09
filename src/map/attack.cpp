@@ -28,6 +28,7 @@
 #include "entities/battle_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
+#include "monstrosity.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 #include "zone.h"
@@ -616,9 +617,18 @@ void CAttack::ProcessDamage()
     SLOTTYPE slot = static_cast<SLOTTYPE>(GetWeaponSlot());
     if (m_attackRound->IsH2H())
     {
-        m_naturalH2hDamage = std::floor<int32>(m_attacker->GetSkill(xi::SkillType::HandToHand) * 0.11f) + 3;
-        m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        int32 kickDamage   = 0;
+        // A Monipulator's fists are all in its base damage.
+        m_naturalH2hDamage = [&]() -> int32
+        {
+            if (monstrosity::AsMonipulator(m_attacker) != nullptr)
+            {
+                return 0;
+            }
+
+            return std::floor<int32>(m_attacker->GetSkill(xi::SkillType::HandToHand) * 0.11f) + 3;
+        }();
+        m_baseDamage     = m_attacker->GetMainWeaponDmg();
+        int32 kickDamage = 0;
 
         if (m_attacker->objtype == TYPE_MOB)
         {

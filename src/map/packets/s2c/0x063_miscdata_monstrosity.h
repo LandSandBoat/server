@@ -32,7 +32,6 @@ namespace GP_SERV_COMMAND_MISCDATA
 {
 
 // Type 0x03: Monstrosity Info Part 1 (data: 216 bytes, total: 220 bytes)
-// TODO: Does not match XiPackets exactly, need further research.
 class MONSTROSITY1 final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, MONSTROSITY1>
 {
 public:
@@ -55,7 +54,7 @@ public:
     MONSTROSITY1(CCharEntity* PChar);
 };
 
-// Type 0x04: Monstrosity Info Part 2 (data: 172 bytes, total: 180 bytes)
+// Type 0x04: Monstrosity Info Part 2 (data: 176 bytes, total: 180 bytes)
 class MONSTROSITY2 final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISCDATA, MONSTROSITY2>
 {
 public:
@@ -68,7 +67,7 @@ public:
         uint8_t                       sprigganLevel; // Spriggan level (added after initial release) - offset 0x87
         uint8_t                       instincts2[4]; // Additional instinct bitfield - offset 0x88
         uint8_t                       padding[8];    // Padding before variants
-        uint8_t                       variants[32];  // Variant ownership bitfield - offset 0x8C
+        uint8_t                       variants[32];  // Variant ownership bitfield - offset 0x94
     };
 
     MONSTROSITY2(const CCharEntity* PChar);

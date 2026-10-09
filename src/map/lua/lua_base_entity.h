@@ -411,6 +411,9 @@ public:
     void setBelligerencyFlag(bool flag);
     auto getMonstrositySize() -> uint8;
     void setMonstrosityEntryData(float x, float y, float z, uint8 rot, uint16 zoneId, uint8 mjob, uint8 sjob);
+    auto getMonstrosityShop() -> sol::table;
+    auto getMonstrosityExits(xi::ZoneId zoneId) -> sol::table;
+    auto isMonstrosityPassageZone(xi::ZoneId zoneId) -> bool;
 
     // Player Titles and Fame
     uint16 getTitle();

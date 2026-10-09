@@ -110,6 +110,7 @@ EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob);
 
 uint32 GetBaseExp(uint8 charlvl, int16 moblvl);
 uint32 GetExpNEXTLevel(uint8 charlvl);
+auto   GetExpNEXTLevelForChar(const CCharEntity* PChar, uint8 charlvl) -> uint32;
 uint8  GetExpLevel(CBattleEntity* PMember);
 
 void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
@@ -257,6 +258,7 @@ void RemoveAllEquipMods(CCharEntity* PChar);
 void ApplyAllEquipMods(CCharEntity* PChar);
 
 void ClearTempItems(CCharEntity* PChar);
+void LeaveParty(CCharEntity* PChar);
 void ReloadParty(CCharEntity* PChar);
 void RemoveSeekFlag(CCharEntity* PChar);
 

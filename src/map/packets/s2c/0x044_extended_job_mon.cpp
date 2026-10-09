@@ -23,17 +23,15 @@
 
 #include "entities/char_entity.h"
 
-GP_SERV_COMMAND_EXTENDED_JOB::MON::MON(const CCharEntity* PChar)
+GP_SERV_COMMAND_EXTENDED_JOB::MON::MON(const CCharEntity* PChar, const IsSubJob isSubJob)
 {
     auto& packet = this->data();
 
-    packet.Job = static_cast<uint8_t>(xi::Job::MON);
+    packet.Job      = static_cast<uint8_t>(xi::Job::MON);
+    packet.IsSubJob = static_cast<bool>(isSubJob);
     if (PChar->m_PMonstrosity)
     {
         packet.Species = PChar->m_PMonstrosity->Species;
-        for (std::size_t idx = 0; idx < 12; ++idx)
-        {
-            packet.EquippedInstincts[idx] = PChar->m_PMonstrosity->EquippedInstincts[idx];
-        }
+        std::ranges::copy(PChar->m_PMonstrosity->EquippedInstincts, packet.EquippedInstincts);
     }
 }

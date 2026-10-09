@@ -1689,6 +1689,23 @@ function CBaseEntity:setMonstrosityEntryData(x, y, z, rot, zoneId, mjob, sjob)
 end
 
 ---@nodiscard
+---@return table<integer, table<integer, { monSpecies: xi.monstrositySpecies?, monVariant: xi.monstrosityVariant?, infamyCost: integer, requirements: { [1]: xi.monstrositySpecies, [2]: integer }[] }>>
+function CBaseEntity:getMonstrosityShop()
+end
+
+---@nodiscard
+---@param zoneId xi.zone
+---@return { [1]: number, [2]: number, [3]: number, [4]: integer }[]
+function CBaseEntity:getMonstrosityExits(zoneId)
+end
+
+---@nodiscard
+---@param zoneId xi.zone
+---@return boolean
+function CBaseEntity:isMonstrosityPassageZone(zoneId)
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getTitle()
 end

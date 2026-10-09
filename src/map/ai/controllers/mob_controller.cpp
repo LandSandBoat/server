@@ -605,6 +605,14 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
         return false;
     }
 
+    // Players only: a monster ignores a Monipulator that preys on it.
+    if (PTarget->objtype == TYPE_PC &&
+        PMob->m_EcoSystem != xi::Ecosystem::Unclassified &&
+        battleutils::GetEcosystemStrongAgainst(PTarget->m_EcoSystem) == PMob->m_EcoSystem)
+    {
+        return false;
+    }
+
     if (PTarget->isDead() || PTarget->isMounted())
     {
         return false;
@@ -935,6 +943,12 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
     TracyZoneScoped;
 
     if (!PTarget || PTarget->isDead() || PTarget->isMounted())
+    {
+        return false;
+    }
+
+    // Gestation hides a Monipulator from everything, true detection included.
+    if (PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Gestation))
     {
         return false;
     }

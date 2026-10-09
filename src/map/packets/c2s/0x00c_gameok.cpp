@@ -24,6 +24,7 @@
 #include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
 #include "gmcall_container.h"
+#include "monstrosity.h"
 #include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -72,7 +73,15 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
     PChar->pushPacket<GP_SERV_PACKET_ALTER_EGO_POINTS>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
+
+    // Retail sends both to every player. A Monipulator gets them with its full update below.
+    // TODO: Retail fills them in for a character with Monstrosity unlocked but not in use.
+    if (!PChar->m_PMonstrosity)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
+    }
+
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
     charutils::SendExtendedJobPackets(PChar);
     charutils::SendUnityPackets(PChar);
@@ -87,6 +96,13 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     PChar->pushPacket<CCharSyncPacket>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar, PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MERIT>(PChar);
+
+    // The client builds its monster move list from this set, and drops it if it arrives mid-load.
+    if (PChar->m_PMonstrosity)
+    {
+        monstrosity::SendFullMonstrosityUpdate(PChar);
+    }
+
     charutils::SendInventory(PChar);
     blacklistutils::SendBlacklist(PChar);
     PChar->gmCallContainer().sendPendingResponse(PChar);

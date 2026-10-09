@@ -1,14 +1,10 @@
 -----------------------------------
--- Area: Feretory
+-- Area: Feretory (285)
 --  NPC: Odyssean Passage
--- !pos TODO
+-- !pos -358.000 -3.150 -470.000 285
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
-
-entity.onTrade = function(player, npc, trade)
-    xi.monstrosity.odysseanPassageOnTrade(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
     xi.monstrosity.odysseanPassageOnTrigger(player, npc)

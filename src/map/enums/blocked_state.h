@@ -38,6 +38,7 @@ enum class BlockedState : uint16_t
     Engaged        = 0x00000400, // PC must not be engaged
     AbnormalStatus = 0x00000800, // Any status != NORMAL
     Monstrosity    = 0x00001000, // PC cannot be assuming a Monstrosity form
+    Gestation      = 0x00002000, // PC must not be under Gestation
 };
 
 template <>

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+# Instincts bought from Teyrnon. The value is a bit index from byte 20 of the instinct bitfield.
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.monstrosityInstinct
+
+values:
+  # Default (0x1F)
+  hume_i:   0
+  elvaan_i: 1
+  taru_i:   2
+  mithra_i: 3
+  galka_i:  4
+
+  hume_ii:   5
+  elvaan_ii: 6
+  taru_ii:   7
+  mithra_ii: 8
+  galka_ii:  9
+
+  war: 10
+  mnk: 11
+  whm: 12
+  blm: 13
+  rdm: 14
+  thf: 15
+  pld: 16
+  drk: 17
+  bst: 18
+  brd: 19
+  rng: 20
+  sam: 21
+  nin: 22
+  drg: 23
+  smn: 24
+  blu: 25
+  cor: 26
+  pup: 27
+  dnc: 28
+  sch: 29
+  geo: 30
+  run: 31
