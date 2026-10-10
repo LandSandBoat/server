@@ -683,6 +683,7 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
     if (incrementKeyAfterEncrypt)
     {
         PSession->incrementBlowfish();
+        ShowInfo(fmt::format("map_session: key counter for {} (charid {}) is now {:08X}", PChar->name, PChar->id, PSession->blowfish.key[4]));
 
         db::preparedStmt("UPDATE accounts_sessions SET session_key = ? WHERE charid = ? LIMIT 1",
                          PSession->blowfish.key,

@@ -29,6 +29,8 @@
 #include "protocol/profile/s2c/0x0405_change_my_status.h"
 #include "protocol/profile/s2c/0x0406_load_my_status.h"
 
+#include <algorithm>
+
 namespace profile
 {
 
@@ -63,7 +65,7 @@ auto loadMyStatus(const Context& context) -> ProfileAnswer
     });
 }
 
-// the answer's key is for the game's IRC session, unused here
+// the game hashes the answer's value with a counter into its map session key at lobby login
 auto changeMyStatus(const Context& context, const std::span<const uint8> body) -> Maybe<ProfileAnswer>
 {
     const auto request = parse<ChangeMyStatus>(body);
@@ -96,7 +98,9 @@ auto changeMyStatus(const Context& context, const std::span<const uint8> body) -
         }
     }
 
-    return ProfileAnswer().add(ChangeMyStatusAns{});
+    auto answer = ChangeMyStatusAns{};
+    std::ranges::copy(accounts::keyValue(context.accountId), answer.PolproRandomValueBinary);
+    return ProfileAnswer().add(answer);
 }
 
 } // namespace profile

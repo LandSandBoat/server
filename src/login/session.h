@@ -38,9 +38,9 @@ struct session_t
     uint32      serverIP                  = 0;
     uint32      requestedCharacterID      = 0;
     std::string requestedNewCharacterName = "";
-    bool        justCreatedNewChar        = false;
     bool        versionMismatch           = false;
-    uint8       incrementKeyValue         = 0; // Used to increment key by N in case of errors
+    uint32      keyCounter                = 0; // the client's lobby key counter, followed in view_session
+    uint8       keyRequest                = 0; // the last view request, which decides whether an error reply steps the counter
 
     timer::time_point authorizedTime = timer::now();
 };
