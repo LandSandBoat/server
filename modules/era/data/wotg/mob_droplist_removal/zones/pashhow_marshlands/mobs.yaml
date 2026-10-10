@@ -1,0 +1,60 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Brass_Quadav:
+    loot: # seedspall_luna removed; hard-boiled_egg removed from despoil; serving_of_herb_crawler_eggs removed from despoil
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+      despoil:
+        hard-boiled_egg:              null
+        serving_of_herb_crawler_eggs: null
+
+  Brass_Quadav_3:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Copper_Quadav:
+    loot: # seedspall_luna removed
+      drops:
+
+  Greater_Quadav:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Old_Quadav:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Onyx_Quadav:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Onyx_Quadav_2:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Veteran_Quadav:
+    loot: # seedspall_luna removed
+      drops:
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]

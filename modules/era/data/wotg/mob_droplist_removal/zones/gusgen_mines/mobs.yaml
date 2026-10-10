@@ -1,0 +1,75 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Ghast_blm_GM:
+    loot: # pumice_stone removed
+      drops:
+        - chance: very_common
+          item:   bone_chip
+        - chance: rare
+          item:   gusgen_chest_key
+
+  Ghoul_blm_GM:
+    loot: # pumice_stone removed
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   magicked_skull
+        - chance: very_rare
+          item:   scroll_of_gravity
+
+  Ghoul_war_GM_MoS:
+    loot: # pumice_stone removed
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   magicked_skull
+        - chance: very_rare
+          item:   scroll_of_gravity
+
+  Wendigo_war:
+    loot: # pumice_stone removed
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: very_rare
+          item:   gusgen_chest_key
+
+  Wight_blm:
+    loot: # pumice_stone removed
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   gusgen_chest_key
+        - chance: very_rare
+          item:   scroll_of_tractor
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit
+
+  Wight_war_GM:
+    loot: # pumice_stone removed
+      drops:
+        - chance: common
+          item:   bone_chip
+        - chance: rare
+          item:   gusgen_chest_key
+        - chance: very_rare
+          item:   scroll_of_tractor
+        - chance: very_rare
+          item:   scroll_of_absorb-agi
+        - chance: very_rare
+          item:   scroll_of_absorb-int
+        - chance: very_rare
+          item:   scroll_of_absorb-vit

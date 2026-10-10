@@ -1,0 +1,21 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Mee_Deggi_the_Punisher:
+    loot: # weighted one_of group edited; shares need a look
+      drops:
+        - chance: always
+          one_of:
+            impact_knuckles: 95
+            ochiudos_kote:   5
+
+  Quu_Domi_the_Gallant:
+    loot: # weighted one_of group edited; shares need a look
+      drops:
+        - chance: always
+          one_of:
+            strider_sword: 90
+            fuma_kyahan:   10

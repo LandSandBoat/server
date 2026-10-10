@@ -1,0 +1,19 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Roc:
+    loot: # dryad_staff replaced by healing_staff
+      drops:
+        - chance: always
+          item:   reraiser
+        - chance: always
+          item:   vile_elixir
+        - chance: always
+          item:   crimson_blade
+        - chance: common
+          item:   healing_staff
+        - chance: rare
+          item:   damascus_ingot
