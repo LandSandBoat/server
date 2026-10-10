@@ -1056,7 +1056,7 @@ local function setLightsFromTable(player, lightTable)
         if k <= 4 then
             lightMaskFirst = lightMaskFirst + bit.lshift(lightTable[k], (k - 1) * 8)
         else
-            lightMaskSecond = lightMaskSecond + bit.lshift(lightTable[k], (k - 1) * 8)
+            lightMaskSecond = lightMaskSecond + bit.lshift(lightTable[k], (k - 5) * 8)
         end
     end
 
@@ -1126,7 +1126,9 @@ xi.abyssea.addPlayerLights = function(player, light, amount)
 end
 
 xi.abyssea.getLightValue = function(player, light)
-    return bit.band(bit.rshift(player:getCharVar('abysseaLights'), (light - 1) * 2), 0xFF)
+    local lightTable = xi.abyssea.getLightsTable(player)
+
+    return lightTable[light] or 0
 end
 
 xi.abyssea.canEnterAbyssea = function(player)
