@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -216,7 +216,7 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
         case REGION_TYPE::LUMORIA:
         case REGION_TYPE::LIMBUS:
             offset       = 2;
-            rangedOffset = 5;
+            rangedOffset = 4;
             break;
         // TOAU Regions
         case REGION_TYPE::WEST_AHT_URHGAN:
