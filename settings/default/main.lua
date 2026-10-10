@@ -251,7 +251,8 @@ xi.settings.main =
 
     -- CELEBRATIONS
     EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
-    HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
+    -- Item recasts stay unchanged.
+    HALLOWEEN_YEAR                  = 0,  -- 0: off, 2005 or 2007.
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
     EGG_HUNT                        =
     {

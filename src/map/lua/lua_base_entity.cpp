@@ -6250,17 +6250,27 @@ void CLuaBaseEntity::setModelId(uint16 modelId, const sol::object& slotObj)
 
 /************************************************************************
  *  Function: setLook()
- *  Purpose : Updates the look of an equipped NPC
+ *  Purpose : Updates an NPC's look
  *  Example : npc:setLook({ race = xi.race.HUME_M, face = 1 })
- *  Note    : Only for equipped NPCs that dynamically change their race/face
+ *  Note    : Use model for standard looks, or race and face for equipped looks.
  ************************************************************************/
 void CLuaBaseEntity::setLook(const sol::table& look)
 {
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(m_PBaseEntity))
     {
-        PNpc->look.size = MODEL_EQUIPPED;
-        PNpc->look.face = look.get_or<uint32>("face", 0);
-        PNpc->look.race = look.get_or<uint32>("race", 0);
+        if (const auto model = look.get<sol::optional<uint16>>("model"))
+        {
+            PNpc->look.size    = MODEL_STANDARD;
+            PNpc->look.modelid = *model;
+        }
+        else
+        {
+            PNpc->look.size = MODEL_EQUIPPED;
+            PNpc->look.face = look.get_or<uint32>("face", 0);
+            PNpc->look.race = look.get_or<uint32>("race", 0);
+        }
+
+        PNpc->updatemask |= UPDATE_LOOK;
         return;
     }
 

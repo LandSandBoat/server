@@ -13,7 +13,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerCuboidTriggerArea(1, -7, -3, 110, 7, -1, 155)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
-    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.initializeZone(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -32,6 +32,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaEnter(player, triggerArea)
     switch (triggerArea:getTriggerAreaID()): caseof
     {
         [1] = function()  -- Chateau d'Oraguille access
@@ -61,6 +62,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaLeave(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
