@@ -266,7 +266,9 @@ enum class MsgBasic : uint16_t
     PflugGain                       = 671, // <Player> uses <Ability>. <Target> now has enhanced resistance.
     GambitGain                      = 672, // <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
     PossessNewMonster               = 677, // You are now able to possess a new monster!
+    LearnedNewInstinct              = 678, // You have learned a new instinct!
     FeretoryCountdown               = 679, // <actor> will return to the Feretory in <n>
+    NewfoundPuissance               = 680, // A newfound puissance courses through your veins.
     ROERecord                       = 697, // Records of Eminence: <record>.
     ROEProgress                     = 698, // Progress: <amount>/<amount>.
     TrustNoCastTrust                = 700, // You are unable to use Trust magic at this time.

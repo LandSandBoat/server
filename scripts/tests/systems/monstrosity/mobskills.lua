@@ -270,6 +270,86 @@ describe('Monstrosity levelling entry', function()
     end)
 end)
 
+-- Retail Crab levelling: Bubble Curtain at 10, then at 30 the Toad, Scissor Guard and the first instinct.
+-- The client draws its lightbulb on the learn message, so it goes out even for moves still disabled here.
+describe('Monstrosity level up messages', function()
+    ---@type CClientEntityPair
+    local player
+
+    local function battleMessages()
+        local messages = {}
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x029 then
+                table.insert(messages, { message = pkt.data[0x18] + pkt.data[0x19] * 256, param = pkt.data[0x0C] + pkt.data[0x0D] * 256 })
+            end
+        end
+
+        return messages
+    end
+
+    local function levelTo(level)
+        player:setLevel(level - 1)
+        player.packets:clear()
+        player:addExp(1)
+    end
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        helpers.becomeSpecies(player, xi.monstrositySpecies.CRAB, xi.monstrositySpecies.CRAB, 1)
+    end)
+
+    -- Big Scissors and Bubble Curtain are mob skills 444 and 443.
+    it('runs Big Scissors as a Crab', function()
+        local target = player.entities:moveTo('Wild_Rabbit')
+        target:respawn()
+        local pos = player:getPos()
+        target:setPos(pos.x, pos.y, pos.z)
+
+        local usedSkill = helpers.watchSkill(player)
+        player:setTP(3000)
+        player.actions:useMonsterSkill(target, 396)
+
+        assert(usedSkill() == 444, string.format('expected mob skill 444, got %s', tostring(usedSkill())))
+    end)
+
+    it('announces Bubble Curtain at Crab level 10', function()
+        levelTo(10)
+
+        local messages = battleMessages()
+        assert(#messages == 1 and messages[1].message == xi.msg.basic.LEARNS_ABILITY and messages[1].param == 443,
+            string.format('%d messages, first %s', #messages, messages[1] and messages[1].message or 'none'))
+    end)
+
+    it('unlocks the Toad and an instinct at Crab level 30, in retail order', function()
+        -- Owned on retail from level 15.
+        xi.monstrosity.unlockVariant(player, xi.monstrosityVariant.VERMILLION_CRAB)
+        levelTo(30)
+
+        local order = {}
+        for _, entry in ipairs(battleMessages()) do
+            table.insert(order, entry.message)
+        end
+
+        local expected = { xi.msg.basic.POSSESS_NEW_MONSTER, xi.msg.basic.LEARNS_ABILITY, xi.msg.basic.LEARNED_NEW_INSTINCT }
+        assert(table.concat(order, ',') == table.concat(expected, ','), string.format('messages were %s', table.concat(order, ',')))
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.TOAD), 'the Toad should be unlocked')
+    end)
+
+    it('announces the rise to NM rank under Belligerency', function()
+        player:setBelligerencyFlag(true)
+        player:addCurrency('infamy', 9999)
+        player.packets:clear()
+        helpers.killWorm(player)
+
+        local announced = false
+        for _, entry in ipairs(battleMessages()) do
+            announced = announced or entry.message == xi.msg.basic.NEWFOUND_PUISSANCE
+        end
+
+        assert(announced, 'crossing 10,000 infamy was not announced')
+    end)
+end)
+
 -- A Monipulator is a monster for ecosystem correlation, which drives both Killer effect
 -- intimidation and what will aggro it. The chart is scripts/data/entity_correlation.lua:
 -- Beast > Lizard > Vermin > Plantoid > Beast.
@@ -512,6 +592,19 @@ describe('Monstrosity Bee moves', function()
 
         local expected = 1 + math.floor(player:getMaxHP() / 8)
         assert(player:getHP() == expected, string.format('HP is %d of %d, expected %d', player:getHP(), player:getMaxHP(), expected))
+    end)
+
+    it('gives Hundred Fists for 20 seconds with Frenzy Pollen', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, 256 + xi.monstrosityVariant.VERMILLION_AND_ONYX_BEE, 30)
+        player:setTP(3000)
+        player.actions:useMonsterSkill(player, 549)
+        for _ = 1, 3 do
+            xi.test.world:skipTime(2)
+        end
+
+        player.assert:hasEffect(xi.effect.HUNDRED_FISTS)
+        local duration = player:getStatusEffect(xi.effect.HUNDRED_FISTS):getDuration()
+        assert(duration == 20000, string.format('Hundred Fists lasts %d ms', duration))
     end)
 end)
 

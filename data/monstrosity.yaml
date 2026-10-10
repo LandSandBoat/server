@@ -2659,6 +2659,7 @@ monstrosity:
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -2677,6 +2678,7 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
     behemoth:
       family:       behemoth
@@ -2741,13 +2743,15 @@ monstrosity:
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
@@ -3425,7 +3429,7 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x0174
       ecosystem:    unclassified
       hp_scale:     240
       tp_skills:
@@ -3434,13 +3438,15 @@ monstrosity:
           mob_skill_id: 321
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        photosynthesis_sabotender
           dat_skill_id: 315
           mob_skill_id: 324
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        1000_needles
           dat_skill_id: 313
           mob_skill_id: 322
@@ -3610,18 +3616,21 @@ monstrosity:
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
+          ready_time:   1200
           enabled:      true
     beetle:
       family:       beetle
@@ -4397,7 +4406,7 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x0124
       ecosystem:    amorph
       hp_scale:     240
       tp_skills:
@@ -4664,13 +4673,15 @@ monstrosity:
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
@@ -4925,7 +4936,7 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x08BF
       ecosystem:    unclassified
       hp_scale:     190
     bird:
@@ -5298,6 +5309,7 @@ monstrosity:
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -5316,6 +5328,7 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
     alabaster_rabbit:
       family:       rabbit
@@ -5333,6 +5346,7 @@ monstrosity:
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        whirl_claws
           dat_skill_id: 259
@@ -5345,18 +5359,21 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
         - skill:        snow_cloud
           dat_skill_id: 455
           mob_skill_id: 661
           unlock_level: 40
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        wild_ginseng
           dat_skill_id: 501
           mob_skill_id: 1362
           unlock_level: 50
           tp_cost:      1200
+          ready_time:   3200
           enabled:      true
     lapinion_rabbit:
       family:       rabbit
@@ -5374,6 +5391,7 @@ monstrosity:
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -5392,6 +5410,7 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
     elasamoth_behemoth:
       family:       behemoth
@@ -5468,13 +5487,15 @@ monstrosity:
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
@@ -5509,13 +5530,15 @@ monstrosity:
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
@@ -6356,43 +6379,43 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     pygmy_mandragora:
       family:       mandragora
       species_code: 283
@@ -6409,43 +6432,43 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     adenium_mandragora:
       family:       mandragora
       species_code: 284
@@ -6462,37 +6485,37 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        petal_pirouette
           dat_skill_id: 599
           mob_skill_id: 2210
@@ -6504,7 +6527,7 @@ monstrosity:
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        phaeosynthesis  # No mob_skills row yet
           dat_skill_id: 626
           mob_skill_id: 2579
@@ -6527,37 +6550,37 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        petal_pirouette
           dat_skill_id: 599
           mob_skill_id: 2210
@@ -6569,7 +6592,7 @@ monstrosity:
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        petalback_spin  # No mob_skills row yet
           dat_skill_id: 631
           mob_skill_id: 2601
@@ -6591,43 +6614,43 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     new_year_mandragora:
       family:       mandragora
       species_code: 287
@@ -6643,43 +6666,43 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
+          enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     sabotender_florido:
       family:       sabotender
       species_code: 288
@@ -6696,13 +6719,15 @@ monstrosity:
           mob_skill_id: 321
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        photosynthesis_sabotender
           dat_skill_id: 315
           mob_skill_id: 324
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        1000_needles
           dat_skill_id: 313
           mob_skill_id: 322
@@ -6785,25 +6810,29 @@ monstrosity:
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
+          ready_time:   1200
           enabled:      true
-        - skill:        frenzy_pollen  # No mob_skills row yet
+        - skill:        frenzy_pollen
           dat_skill_id: 549
           mob_skill_id: 1847
           unlock_level: 30
           tp_cost:      3000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
     zaffre_bee:
       family:       bee
       species_code: 291
@@ -6820,25 +6849,29 @@ monstrosity:
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
-          enabled:      false
-        - skill:        frenzy_pollen  # No mob_skills row yet
+          ready_time:   1200
+          enabled:      true
+        - skill:        frenzy_pollen
           dat_skill_id: 549
           mob_skill_id: 1847
           unlock_level: 30
           tp_cost:      3000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
     onyx_beetle:
       family:       beetle
       species_code: 292
@@ -8602,13 +8635,15 @@ monstrosity:
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
@@ -8643,13 +8678,15 @@ monstrosity:
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
@@ -8684,13 +8721,15 @@ monstrosity:
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
@@ -8725,13 +8764,15 @@ monstrosity:
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
@@ -9016,7 +9057,7 @@ monstrosity:
       mjob:         brd
       sjob:         blm
       size:         0
-      look:         0x0000
+      look:         0x0832
       ecosystem:    unclassified
       hp_scale:     180
     vermillion_toad:

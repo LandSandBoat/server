@@ -154,11 +154,19 @@ describe('Monstrosity restrictions', function()
         assert(player:getMaxMP() == 0, string.format('MNK/NIN has %d MP', player:getMaxMP()))
     end)
 
-    it('gives an RDM sub job the WHM MP curve', function()
+    it('gives an RDM sub job its retail MP', function()
         -- Vermillion and Onyx Bee is WAR/RDM.
         helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
 
-        assert(player:getMaxMP() == 369, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+        assert(player:getMaxMP() == 358, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+    end)
+
+    it('gives a PLD main and sub their retail MP', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.CRAB, xi.monstrositySpecies.CRAB, 30)
+        assert(player:getMaxMP() == 1002, string.format('PLD/PLD 30 has %d MP', player:getMaxMP()))
+
+        helpers.becomeSpecies(player, xi.monstrositySpecies.CRAB, 256 + xi.monstrosityVariant.VERMILLION_CRAB, 30)
+        assert(player:getMaxMP() == 1033, string.format('PLD/RDM 30 has %d MP', player:getMaxMP()))
     end)
 
     it('casts with the magic skill of its species jobs', function()

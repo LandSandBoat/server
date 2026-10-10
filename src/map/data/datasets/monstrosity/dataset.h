@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/timer.h"
 #include "common/types/hash_map.h"
 #include "common/types/maybe.h"
 #include "data/enums/ecosystem.h"
@@ -39,13 +40,15 @@
 namespace xi::data
 {
 
-// dat_skill_id is what the client sends, mob_skill_id is what runs.
+// dat_skill_id is what the client sends, mob_skill_id is what runs. A disabled move is still learned, but not usable.
 struct MonstrosityTpSkill
 {
-    uint16 datSkillId{};
-    uint16 mobSkillId{};
-    uint8  unlockLevel{};
-    uint16 tpCost{};
+    uint16                 datSkillId{};
+    uint16                 mobSkillId{};
+    uint8                  unlockLevel{};
+    uint16                 tpCost{};
+    Maybe<timer::duration> readyTime{};
+    bool                   enabled{};
 };
 
 struct MonstrosityInstinct

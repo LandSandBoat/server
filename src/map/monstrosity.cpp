@@ -845,7 +845,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
         skills,
         [&](const xi::data::MonstrosityTpSkill& entry)
         {
-            return entry.datSkillId == data.MonsterSkill.SkillId && entry.unlockLevel <= level;
+            return entry.enabled && entry.datSkillId == data.MonsterSkill.SkillId && entry.unlockLevel <= level;
         });
 
     if (skill == skills.end())
@@ -872,7 +872,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
         return;
     }
 
-    if (PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, std::nullopt, tpCost) && meikyo)
+    if (PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, skill->readyTime, tpCost) && meikyo)
     {
         PChar->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::MeikyoShisui);
     }
@@ -1009,6 +1009,10 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         }
 
         PChar->m_PMonstrosity->EquippedInstincts = equipped;
+
+        // Instinct HP is scaled by the species.
+        charutils::CalculateStats(PChar);
+        PChar->UpdateHealth();
     }
     else if (data.Flags0.Descriptor1Flag)
     {
@@ -1048,24 +1052,57 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
         return std::min(PChar->PMeritPoints->GetMeritValue(merit, PChar), (level / 10) * perStep);
     };
 
-    const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
-    PChar->health.maxhp = static_cast<int32>(species->hpScale * baseHP / 100);
+    // The species scale covers instinct HP too, which UpdateHealth then adds unscaled, so it comes off here.
+    const auto instinctHP = [&]() -> int32
+    {
+        auto total = int32{ 0 };
+        for (const auto instinctId : data.EquippedInstincts)
+        {
+            if (const auto* instinct = findInstinct(instinctId))
+            {
+                if (const auto it = instinct->mods.find(xi::Mod::HP); it != instinct->mods.end())
+                {
+                    total += it->second;
+                }
+            }
+        }
 
-    // Retail MP comes from a mage sub job.
-    // TODO: Verify WHM MP. RDM borrows it. PLD and DRK subs and mage main jobs are unverified.
-    const auto baseMP = [&]() -> int32
+        return total;
+    }();
+
+    const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
+    PChar->health.maxhp = static_cast<int32>(species->hpScale * (baseHP + instinctHP) / 100) - instinctHP;
+
+    // Retail MP comes from a mage sub job, or a PLD main or sub.
+    // TODO: DRK subs and mage main jobs are unverified. The PLD split is fit at level 30 only.
+    const auto mainMP = [&]() -> int32
+    {
+        if (data.MainJob == xi::Job::PLD)
+        {
+            return 17 * level;
+        }
+
+        return 0;
+    }();
+
+    const auto subMP = [&]() -> int32
     {
         switch (data.SubJob)
         {
             case xi::Job::BLM:
                 return (35 * level + 59) / 2;
             case xi::Job::WHM:
-            case xi::Job::RDM:
                 return (34 * level + 58) / 2;
+            case xi::Job::RDM:
+                return (33 * level + 57) / 2;
+            case xi::Job::PLD:
+                return (29 * level + 115) / 2;
             default:
                 return 0;
         }
     }();
+
+    const auto baseMP = mainMP + subMP;
 
     PChar->health.maxmp = baseMP;
     if (baseMP > 0)
@@ -1186,7 +1223,14 @@ void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
         return kInfamyCap;
     }();
 
+    const auto rank = GetRank(PChar);
     charutils::AddPoints(PChar, "infamy", infamy, std::max(cap, charutils::GetPoints(PChar, "infamy")));
+
+    // BG: crossing into NM or HNM rank announces it.
+    if (GetRank(PChar) > rank)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
+    }
 }
 
 // JP wiki: a gladiator earns a tenth of kill exp as prestige in the Belligerency zones.
@@ -1262,6 +1306,7 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 32, 0, MsgBasic::PossessNewMonster);
     }
 
+    // The client shows its lightbulb on this message. Retail sends it for moves we have yet to enable too.
     if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
         for (const auto& skill : species->tpSkills)
@@ -1271,6 +1316,13 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skill.mobSkillId, 0, MsgBasic::LearnsAbility);
             }
         }
+    }
+
+    // Each family teaches an instinct at 30, 60 and 90.
+    if (mLvl % 30 == 0 && mLvl <= 90)
+    {
+        applyLevelInstincts(*PChar->m_PMonstrosity);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnedNewInstinct);
     }
 
     WriteMonstrosityData(PChar);

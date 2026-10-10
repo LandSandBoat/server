@@ -44,12 +44,13 @@ namespace xi::data::datasets::monstrosity::wire
 
 struct TpSkill
 {
-    std::string skill{};
-    uint16      dat_skill_id{};
-    uint16      mob_skill_id{};
-    uint8       unlock_level{};
-    uint16      tp_cost{};
-    bool        enabled{ false };
+    std::string           skill{};
+    uint16                dat_skill_id{};
+    uint16                mob_skill_id{};
+    uint8                 unlock_level{};
+    uint16                tp_cost{};
+    std::optional<uint16> ready_time;
+    bool                  enabled{ false };
 };
 
 struct Species
@@ -117,6 +118,7 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::TpSkill>
     glz::schema mob_skill_id{ .description = "mob_skills row that runs when the move resolves.", .minimum = 1L, .maximum = 65535L };
     glz::schema unlock_level{ .description = "Species level the move is learned at, from the client species DAT.", .minimum = 1L, .maximum = 99L };
     glz::schema tp_cost{ .description = "TP the move costs. A Monipulator spends only this, not the whole bar.", .minimum = 0L, .maximum = 3000L };
+    glz::schema ready_time{ .description = "Milliseconds from readying to using the move. Defaults to the mob_skills activation time.", .minimum = 0L, .maximum = 10000L };
     glz::schema enabled{ .description = "Only true once a retail capture has verified the move." };
 };
 

@@ -163,8 +163,8 @@ local function addPurchasedInstinct(player, purchasableInstinctId)
     player:setMonstrosityData(data)
 end
 
--- Benediction costs, fixed in the client event, which also plays Teyrnon's cast on the player.
-local benedictionCosts =
+-- Buff and Dedication costs, fixed in the client event, which also plays Teyrnon's cast on the player.
+local buffCosts =
 {
     [0] = 3000, -- Dedication 1
     [1] =  400, -- Dedication 2
@@ -364,8 +364,9 @@ xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
     local mjob   = data.entry_mjob
     local sjob   = data.entry_sjob
 
+    -- Retail announces each effect wearing off.
     for _, effect in pairs(player:getStatusEffects()) do
-        player:delStatusEffectSilent(effect:getEffectType())
+        player:delStatusEffect(effect:getEffectType())
     end
 
     -- A Monipulator made by GM command never recorded an entry, so it leaves through its home point.
@@ -532,8 +533,6 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
     -- NOTE: The list of available zones is built from the char's list of
     -- visited zones. If you haven't visited any zones in a category it'll back
     -- out immediately.
-    -- NOTE: Param5 is not consistent, Bee has seen 0, 1, and 2 so far
-    -- player:startEvent(5, 0, 0, 0, 0, 2, 0, 0, 0) -- Bee
     player:startEvent(5, 0, monSize, hasBelligerency, 0, 0, 0, 0, 0)
 end
 
@@ -739,7 +738,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
     elseif optionType == 3 then
         local selectedEffect = bit.rshift(option, 8)
-        local cost           = benedictionCosts[selectedEffect]
+        local cost           = buffCosts[selectedEffect]
         if
             not cost or
             not tryPayInfamy(player, cost)

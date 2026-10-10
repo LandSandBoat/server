@@ -147,17 +147,17 @@ auto Dataset::decode(const std::string_view text) -> Records
         {
             for (auto& skill : species.tp_skills.value())
             {
-                // Disabled rows are unverified.
-                if (!skill.enabled)
-                {
-                    continue;
-                }
-
                 record.tpSkills.push_back(MonstrosityTpSkill{
                     .datSkillId  = skill.dat_skill_id,
                     .mobSkillId  = skill.mob_skill_id,
                     .unlockLevel = skill.unlock_level,
                     .tpCost      = skill.tp_cost,
+                    .readyTime   = skill.ready_time.transform(
+                        [](const uint16 ms) -> timer::duration
+                        {
+                            return std::chrono::milliseconds(ms);
+                        }),
+                    .enabled = skill.enabled,
                 });
             }
         }

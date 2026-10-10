@@ -287,9 +287,8 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 0, string.format('%d infamy left', player:getCurrency('infamy')))
     end)
 
-    -- A benediction is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
-    -- Durations are from the JP wiki. BG gives Regen and Refresh 30 minutes.
-    local benedictions =
+    -- A buff is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
+    local buffs =
     {
         { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000, minutes = 60 },
         { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400, minutes = 60 },
@@ -300,20 +299,20 @@ describe('Monstrosity Teyrnon shop', function()
         { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100, minutes = 30 },
     }
 
-    for _, benediction in ipairs(benedictions) do
-        it(string.format('casts %s for %d infamy and %d minutes', benediction.name, benediction.cost, benediction.minutes), function()
+    for _, buff in ipairs(buffs) do
+        it(string.format('casts %s for %d infamy and %d minutes', buff.name, buff.cost, buff.minutes), function()
             player:addCurrency('infamy', 5000)
-            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(benediction.option, 8))
+            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(buff.option, 8))
 
-            player.assert:hasEffect(benediction.effect)
-            assert(player:getCurrency('infamy') == 5000 - benediction.cost, string.format('%d infamy left', player:getCurrency('infamy')))
+            player.assert:hasEffect(buff.effect)
+            assert(player:getCurrency('infamy') == 5000 - buff.cost, string.format('%d infamy left', player:getCurrency('infamy')))
 
-            local duration = player:getStatusEffect(benediction.effect):getDuration()
-            assert(duration == benediction.minutes * 60 * 1000, string.format('%s lasts %d ms', benediction.name, duration))
+            local duration = player:getStatusEffect(buff.effect):getDuration()
+            assert(duration == buff.minutes * 60 * 1000, string.format('%s lasts %d ms', buff.name, duration))
         end)
     end
 
-    it('casts no benediction the player cannot afford', function()
+    it('casts no buff the player cannot afford', function()
         player:addCurrency('infamy', 99)
         xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(6, 8))
 
@@ -321,7 +320,7 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 99, 'infamy should be untouched')
     end)
 
-    it('casts nothing for an unknown benediction', function()
+    it('casts nothing for an unknown buff', function()
         player:addCurrency('infamy', 1000)
         xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(7, 8))
 
@@ -399,6 +398,28 @@ describe('Monstrosity Bee quiz', function()
         player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = 2 })
 
         assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'Bee should stay locked')
+    end)
+
+    -- Retail sends the locked quiz as (0, quiz index) until the next Vana'diel day.
+    it('locks the quiz for the day after a wrong answer', function()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = 2 })
+
+        -- The second quiz, so the index in the locked event can be told from the default 0.
+        player:setCharVar('HQuest[monstrosityBee]Option', 2)
+        player.packets:clear()
+
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+
+        local params = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x034 then
+                params = { pkt.data[0x08], pkt.data[0x0C] }
+            end
+        end
+
+        assert(params and params[1] == 0 and params[2] == 1, string.format('quiz params were %s, %s', tostring(params and params[1]), tostring(params and params[2])))
+        assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'a locked quiz unlocked bees')
     end)
 end)
 
@@ -733,8 +754,8 @@ describe('Monstrosity species change', function()
         end)
     end)
 
-    -- JP wiki: Teyrnon's benedictions are lost on a species change. Medicated survives.
-    it('loses benedictions but keeps Medicated on a variant change', function()
+    -- JP wiki: Teyrnon's buffs are lost on a species change. Medicated survives.
+    it('loses buffs but keeps Medicated on a variant change', function()
         xi.monstrosity.unlockVariant(player, xi.monstrosityVariant.ONYX_RABBIT)
         player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
         player:addStatusEffect(xi.effect.MEDICINE, { power = 1, duration = 3600, origin = player })
@@ -763,6 +784,22 @@ describe('Monstrosity species change', function()
         equipInstincts({ 21 })
 
         assert(player:getMod(xi.mod.SPELLINTERRUPT) == 15, string.format('SPELLINTERRUPT is %d', player:getMod(xi.mod.SPELLINTERRUPT)))
+    end)
+
+    -- Retail scales instinct HP by the species: a level 2 Toad (scale 190) with Crab instinct I (HP+200).
+    it('scales instinct HP by the species', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId = xi.monstrositySpecies.TOAD
+        data.species       = xi.monstrositySpecies.TOAD
+        data.levels[xi.monstrositySpecies.TOAD] = 2
+        data.levels[xi.monstrositySpecies.CRAB] = 30
+        player:setMonstrosityData(data)
+        player:gotoZone(xi.zone.FERETORY)
+        assert(player:getMaxHP() == 95, string.format('precondition: a level 2 Toad has %d HP', player:getMaxHP()))
+
+        equipInstincts({ 180 })
+
+        assert(player:getMaxHP() == 475, string.format('max HP is %d', player:getMaxHP()))
     end)
 
     it('swaps instinct mods when a slot is replaced or resent', function()
