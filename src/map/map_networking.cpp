@@ -42,6 +42,26 @@
 
 extern std::map<xi::ZoneId, CZone*> g_PZoneList; // Global array of pointers for zones
 
+namespace
+{
+
+// 0x00D is the client's reply to 0x00B, sent with the old key
+auto hasZoneOutReply(const uint8* buff, const size_t buffsize) -> bool
+{
+    const uint8* end = buff + buffsize;
+    for (const uint8* packet = buff + FFXI_HEADER_SIZE; packet + 4 <= end && (ref<uint8>(packet, 1) & 0xFE); packet += (ref<uint8>(packet, 1) & 0xFE) * 2)
+    {
+        if ((ref<uint16>(packet, 0) & 0x1FF) == 0x00D)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+} // namespace
+
 MapNetworking::MapNetworking(Scheduler& scheduler, MapStatistics& mapStatistics, MapConfig config)
 : scheduler_(scheduler)
 , mapStatistics_(mapStatistics)
@@ -105,9 +125,11 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
         }
         else if (decryptCount == 1 && PSession->blowfish.status == BLOWFISH_PENDING_ZONE)
         {
-            // TODO: Client will send 0x00D in response to 0x00B, so we are probably always sending an extra 0x00B when we don't need to.
-            // However, the client will fail to decrypt this if they received it before, effectively being a no-op.
-            // It could be beneficial to parse 0x00D here anyway.
+            // client already got 0x00B
+            if (hasZoneOutReply(PBuff.data(), size))
+            {
+                return;
+            }
 
             //
             // Client failed to receive 0x00B, manually rebuild it, and copy it into PBuff for
@@ -188,7 +210,7 @@ int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSessio
     return -1;
 }
 
-int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSession, const IPP& ipp)
+int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp)
 {
     TracyZoneScoped;
 
@@ -247,32 +269,37 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
         uint32 packetCharID = loginPacket.UniqueNo;
 
+        // client may zone in from a new address, find the session by char instead
+        // unknown00 goes up by one on every client retry
         if (PSession == nullptr)
         {
-            auto pendingSession = mapSessions_.getPendingSessionByCharId(packetCharID);
-            if (pendingSession)
+            if (auto* existing = mapSessions_.getSessionByCharId(packetCharID))
             {
-                mapSessions_.destroyPendingSession(pendingSession);
-                PSession = mapSessions_.createSession(ipp);
-                if (PSession == nullptr)
+                if (existing->blowfish.status == BLOWFISH_ACCEPTED && existing->hasDecryptedPacket)
                 {
-                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} rejected, no login session from this address", packetCharID, ipp.toString());
+                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session is bound to {} (retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00);
                     return -1;
                 }
+
+                if (timer::now() < existing->addressChanged + std::chrono::seconds(1))
+                {
+                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session moved to {} less than a second ago (retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00);
+                    return -1;
+                }
+
+                ShowInfoFmt("recv_parse: session for charid {} moved from {} to {} (retry {})", packetCharID, existing->client_ipp.toString(), ipp.toString(), loginPacket.unknown00);
+                mapSessions_.moveSession(existing, ipp);
+                existing->addressChanged = timer::now();
+                PSession                 = existing;
+            }
+            else if (auto* pendingSession = mapSessions_.getPendingSessionByCharId(packetCharID))
+            {
+                PSession = mapSessions_.createSession(ipp);
+                mapSessions_.destroyPendingSession(pendingSession);
             }
             else
             {
-                // unknown00 goes up by one on every client retry
-                if (const auto* existing = mapSessions_.getSessionByCharId(packetCharID))
-                {
-                    const auto zoning = existing->blowfish.status == BLOWFISH_PENDING_ZONE;
-                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session is bound to {} (pending zone: {}, retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), zoning, loginPacket.unknown00);
-                }
-                else
-                {
-                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, no session or pending session (retry {})", packetCharID, ipp.toString(), loginPacket.unknown00);
-                }
-
+                ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, no session or pending session (retry {})", packetCharID, ipp.toString(), loginPacket.unknown00);
                 return -1;
             }
         }
@@ -570,6 +597,12 @@ int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSess
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < kMaxBufferSize && static_cast<size_t>(packets) < PacketCount)
             {
+                // hold 0x00B until the client decrypts a packet with the current key
+                if (packetList.front()->getType() == 0x00B && !PSession->hasDecryptedPacket)
+                {
+                    break;
+                }
+
                 PSmallPacket = std::move(packetList.front());
                 packetList.pop_front();
 

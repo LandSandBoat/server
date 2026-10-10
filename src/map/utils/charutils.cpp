@@ -7709,9 +7709,10 @@ void removeCharFromZone(CCharEntity* PChar)
 
 void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone)
 {
-    db::preparedStmt("UPDATE accounts_sessions SET targid = ?, server_addr = ?, client_port = ?, last_zoneout_time = 0 WHERE charid = ? LIMIT 1",
+    db::preparedStmt("UPDATE accounts_sessions SET targid = ?, server_addr = ?, client_addr = ?, client_port = ?, last_zoneout_time = 0 WHERE charid = ? LIMIT 1",
                      PChar->targid,
                      currentZone->GetIP(),
+                     PSession->client_ipp.getIP(),
                      PSession->client_ipp.getPort(),
                      PChar->id);
 }
