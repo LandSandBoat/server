@@ -43,7 +43,7 @@ auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCha
 void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
 {
     const auto accepted = static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res) == GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept;
-    if (accepted && ((PChar->InvitePending.kind == PartyKind::Party && PChar->PParty != nullptr) || !monstrosity::CanPartyWith(PChar, PChar->InvitePending.entity.UniqueNo)))
+    if (accepted && ((PChar->InvitePending.kind == PartyKind::Party && PChar->PParty != nullptr) || !monstrosity::CanParty(PChar)))
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
         PChar->InvitePending.clean();
@@ -65,6 +65,13 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
             break;
             case GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES::Accept:
             {
+                // The inviter became a Monipulator while the invite was pending.
+                if (!monstrosity::CanParty(PInviter))
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::CannotBeProcessed);
+                    break;
+                }
+
                 // check for alliance invite
                 if (PChar->PParty != nullptr && PInviter->PParty != nullptr)
                 {

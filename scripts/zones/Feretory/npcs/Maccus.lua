@@ -3,8 +3,6 @@
 --  NPC: Maccus
 -- !pos -362.000 -3.112 -470.000 285
 -----------------------------------
-require('scripts/globals/monstrosity')
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 

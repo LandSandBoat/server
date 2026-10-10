@@ -19,10 +19,6 @@
 ===========================================================================
 */
 
-//
-// See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
-//
-
 #include "monstrosity.h"
 
 #include "ai/ai_container.h"
@@ -943,11 +939,8 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             std::ignore = unequipInstinctsOverLimit(PChar);
         }
 
-        // JP wiki: Teyrnon's benedictions are lost on a species change.
-        if (!settings::get<bool>("main.MONSTROSITY_DONT_WIPE_BUFFS"))
-        {
-            delAllEffectsButMedicine(PChar);
-        }
+        // JP wiki: Teyrnon's buffs are lost on a species change.
+        delAllEffectsButMedicine(PChar);
 
         // Every species, variants included, brings its own jobs and stats.
         charutils::BuildingCharSkillsTable(PChar);
@@ -1207,7 +1200,8 @@ auto monstrosity::GetWeaponDelay(const CCharEntity* PChar) -> uint16
 // Infamy already held above the cap is never taken away.
 void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
 {
-    const auto infamy = static_cast<int32>(exp * settings::get<float>("main.MONSTROSITY_INFAMY_RATE"));
+    // JP wiki: a tenth of the exp.
+    const auto infamy = static_cast<int32>(exp / 10);
     if (infamy <= 0)
     {
         return;
@@ -1442,42 +1436,10 @@ auto monstrosity::ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool
     return level >= PSpell->getJob(data.SubJob) && !(PSpell->getRequirements() & SPELLREQ_MAIN_JOB_ONLY);
 }
 
-// JP wiki: a Monipulator cannot party. The setting allows parties of Monipulators only.
-auto monstrosity::CanPartyWith(const CCharEntity* PChar, const uint32 otherCharId) -> bool
+// JP wiki: a Monipulator cannot party.
+auto monstrosity::CanParty(const CCharEntity* PChar) -> bool
 {
-    // With the setting off, the Monipulator's side refuses for itself.
-    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
-    {
-        return PChar->m_PMonstrosity == nullptr;
-    }
-
-    // The saved job also covers a character on another process.
-    const auto rset = db::preparedStmt("SELECT mjob FROM char_stats WHERE charid = ? LIMIT 1", otherCharId);
-    if (!rset || !rset->next())
-    {
-        return false;
-    }
-
-    const auto otherIsMonipulator = rset->get<uint8>("mjob") == static_cast<uint8>(xi::Job::MON);
-
-    return otherIsMonipulator == (PChar->m_PMonstrosity != nullptr);
-}
-
-auto monstrosity::CanStayInParty(const CCharEntity* PChar, const uint32 partyId) -> bool
-{
-    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
-    {
-        return false;
-    }
-
-    const auto rset = db::preparedStmt("SELECT COUNT(*) AS adventurers "
-                                       "FROM accounts_parties p JOIN char_stats s ON p.charid = s.charid "
-                                       "WHERE p.partyid = ? AND p.charid != ? AND s.mjob != ?",
-                                       partyId,
-                                       PChar->id,
-                                       static_cast<uint8>(xi::Job::MON));
-
-    return rset && rset->next() && rset->get<uint32>("adventurers") == 0;
+    return PChar->m_PMonstrosity == nullptr;
 }
 
 // Monipulators travel to field and dungeon zones, never towns, Dynamis or instances.

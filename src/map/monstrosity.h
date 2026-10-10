@@ -45,9 +45,16 @@ struct Monstrosity;
 
 }
 
-// ===
-// See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
-// ===
+// A character becomes a Monipulator by setting its job to MON and zoning. On zone-in a MON character
+// gets PChar->m_PMonstrosity, loaded from char_monstrosity or created with the three starter families
+// and the race I instincts. Some state can only be set at zone time, so entering and leaving rely on it.
+//
+// Stats, exp, traits, spells and abilities check for m_PMonstrosity, then use the main and sub job of
+// the current species. Main and sub job levels move together: a MNK15/NIN has NIN at 15 too, with all
+// of its abilities and traits, but only the main job's SP ability.
+//
+// The client validates a lot for MON, but the server still checks every zone-in and MON equip packet.
+// An invalid state leaves the client unable to change job, species, instincts or name without a GM.
 namespace monstrosity
 {
 
@@ -135,8 +142,7 @@ void               AddPrestige(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
 [[nodiscard]] auto IsPassageZone(xi::ZoneId zoneId) -> bool;
-[[nodiscard]] auto CanPartyWith(const CCharEntity* PChar, uint32 otherCharId) -> bool;
-[[nodiscard]] auto CanStayInParty(const CCharEntity* PChar, uint32 partyId) -> bool;
+[[nodiscard]] auto CanParty(const CCharEntity* PChar) -> bool;
 [[nodiscard]] auto CanCastSpell(CSpell* PSpell) -> bool;
 [[nodiscard]] auto ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool;
 

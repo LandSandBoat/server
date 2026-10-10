@@ -1,8 +1,6 @@
 -----------------------------------
 -- Ability: Relinquish
 -----------------------------------
-require('scripts/globals/monstrosity')
------------------------------------
 ---@type TAbility
 local abilityObject = {}
 

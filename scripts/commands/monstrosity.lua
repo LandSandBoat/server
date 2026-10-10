@@ -1,6 +1,6 @@
 -----------------------------------
 -- func: monstrosity
--- desc: scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
+-- desc: Toggles MON, keeping the current position. Leaving restores the jobs held on entry.
 -----------------------------------
 ---@type TCommand
 local commandObj = {}

@@ -201,7 +201,7 @@ describe('Monstrosity Teyrnon shop', function()
     local player
 
     local function buy(page, slot)
-        xi.monstrosity.teyrnonOnEventFinish(player, 0, 1 + bit.lshift(page + 1, 8) + bit.lshift(slot, 16))
+        xi.monstrosity.teyrnonOnEventFinish(player, 7, 1 + bit.lshift(page + 1, 8) + bit.lshift(slot, 16))
     end
 
     before_each(function()

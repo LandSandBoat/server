@@ -6631,7 +6631,7 @@ void ReloadParty(CCharEntity* PChar)
             PParty->PushMember(PChar);
 
             // A party saved before entering Monstrosity comes back here, after the job change.
-            if (PChar->m_PMonstrosity != nullptr && !monstrosity::CanStayInParty(PChar, partyid))
+            if (!monstrosity::CanParty(PChar))
             {
                 LeaveParty(PChar);
                 return;
