@@ -48,6 +48,7 @@ std::vector<std::string> charIdTables = {
     "char_equip",
     "char_equip_saved",
     "char_exp",
+    "char_fellows",
     "char_flags",
     "char_history",
     "char_inventory",

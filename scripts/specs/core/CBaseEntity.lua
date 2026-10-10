@@ -4342,6 +4342,79 @@ end
 function CBaseEntity:deleteRaisedChocobo()
 end
 
+---@nodiscard
+---@return boolean
+function CBaseEntity:hasFellow()
+end
+
+---@param packed integer
+---@return boolean
+function CBaseEntity:createFellow(packed)
+end
+
+---@class FellowData
+---@field name integer
+---@field race integer
+---@field size integer
+---@field personality integer
+---@field face integer
+---@field level integer
+---@field levelCap integer
+---@field exp integer
+---@field bond integer
+---@field bondCap integer
+---@field job integer
+---@field signals integer
+---@field unlockedJobs integer
+---@field weaponModel integer
+---@field weaponTier integer
+---@field headwearTier integer
+---@field armorPath integer
+---@field armorTier integer
+---@field bodyLevel integer
+---@field handsLevel integer
+---@field legsLevel integer
+---@field feetLevel integer
+---@field gearLocks integer
+---@field activeTimeUpgrades integer
+---@field fashionAdvice integer
+---@field kills integer
+---@field callTime integer
+
+---@nodiscard
+---@return FellowData?
+function CBaseEntity:getFellowData()
+end
+
+---@class FellowUpdate
+---@field level? integer
+---@field levelCap? integer
+---@field exp? integer
+---@field bond? integer
+---@field bondCap? integer
+---@field job? integer
+---@field signals? integer
+---@field unlockedJobs? integer
+---@field weaponModel? integer
+---@field weaponTier? integer
+---@field headwearTier? integer
+---@field armorPath? integer
+---@field armorTier? integer
+---@field bodyLevel? integer
+---@field handsLevel? integer
+---@field legsLevel? integer
+---@field feetLevel? integer
+---@field gearLocks? integer
+---@field activeTimeUpgrades? integer
+---@field fashionAdvice? integer
+---@field kills? integer
+---@field callTime? integer
+
+---@param fields FellowUpdate
+---@return boolean
+function CBaseEntity:setFellowData(fields)
+end
+
 ---@return nil
 function CBaseEntity:clearActionQueue()
 end

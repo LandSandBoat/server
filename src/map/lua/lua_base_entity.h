@@ -997,6 +997,11 @@ public:
     bool setChocoboRaisingInfo(const sol::table& table);
     bool deleteRaisedChocobo();
 
+    auto hasFellow() const -> bool;
+    auto createFellow(uint32 packed) -> bool;
+    auto getFellowData() const -> sol::object;
+    auto setFellowData(const sol::table& fields) -> bool;
+
     void clearActionQueue();
     void clearTimerQueue();
 

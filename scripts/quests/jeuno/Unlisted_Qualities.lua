@@ -14,15 +14,26 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
 -- Packs Fellow properties into a single integer, as expected by events.
 -- 0000 0000 FFFF SS00 00PP PP00 0RRR NNNN
 -- Face, Size, Personality, Race, Name
+-- Bit 24 is unused by events and marks a picked face, since all 16 face values are valid.
+local faceSet = bit.lshift(1, 24)
+
 local function packData(name, race, pers, face, size)
     return bit.bor(
         name,
         bit.lshift(race, 4),
         bit.lshift(pers >= 1 and pers or 0, 10),
         bit.lshift(size >= 1 and size or 0, 18),
-        bit.lshift(face >= 0 and face or 15, 20)
+        bit.lshift(face >= 0 and face or 15, 20),
+        face >= 0 and faceSet or 0
     )
 end
+
+-- Red Ghost options 0-5 (male) and 6-11 (female) to personality ids
+local personalities =
+{
+    1, 2, 3, 4, 10, 11, -- Male
+    5, 6, 7, 8, 9, 12,  -- Female
+}
 
 local function unpackData(packed)
     local rawPers = bit.band(bit.rshift(packed, 10), 0x0F)
@@ -35,7 +46,7 @@ local function unpackData(packed)
         race = bit.band(bit.rshift(packed, 4), 0x07),
         pers = rawPers >= 1 and rawPers or -1,
         size = rawSize >= 1 and rawSize or -1,
-        face = rawFace < 15 and rawFace or -1,
+        face = bit.band(packed, faceSet) ~= 0 and rawFace or -1,
     }
 end
 
@@ -169,7 +180,7 @@ quest.sections =
             onEventFinish =
             {
                 [320] = function(player, csid, option, npc)
-                    if option < 0 and option > 11 then
+                    if option < 0 or option > 11 then
                         return
                     end
 
@@ -182,8 +193,7 @@ quest.sections =
                     local validFemale = option >= 6 and option <= 11
 
                     if (isFemale and validFemale) or (not isFemale and validMale) then
-                        -- This gets stored as +1 as Bheem expects it 1-indexed.
-                        quest:setVar(player, 'Data', packData(d.name, d.race, option + 1, d.face, d.size))
+                        quest:setVar(player, 'Data', packData(d.name, d.race, personalities[option + 1], d.face, d.size))
                         checkAdvanceToPhase1(player)
                     end
                 end,
@@ -235,15 +245,18 @@ quest.sections =
         {
             ['Luto_Mewrilah'] = quest:progressEvent(10032),
 
-            -- TODO: Quest completion disabled until core changes made to save Fellows
-            -- onEventFinish =
-            -- {
-            --     [10032] = function(player, csid, option, npc)
-            --         if option == 0 and npcUtil.giveItem(player, xi.item.SILVER_INGOT) then
-            --             quest:complete(player)
-            --         end
-            --     end,
-            -- },
+            onEventFinish =
+            {
+                [10032] = function(player, csid, option, npc)
+                    if
+                        option == 0 and
+                        (player:hasFellow() or player:createFellow(quest:getVar(player, 'Data'))) and
+                        npcUtil.giveItem(player, xi.item.SILVER_INGOT)
+                    then
+                        quest:complete(player)
+                    end
+                end,
+            },
         },
     },
 }
