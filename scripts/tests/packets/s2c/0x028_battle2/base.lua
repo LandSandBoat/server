@@ -130,10 +130,12 @@ describe('BATTLE2', function()
 
         -- The Clipper spawns at level 28 or 29, so its stats, and the packet values below,
         -- depend on the shared RNG stream. Pin the level.
-        mob = player.entities:moveTo(17293357)
+        mob = player.entities:get(17293357)
         mob:setLevelRange(28, 28)
+        mob:setSpawn(10.7, -20.4, -88.1)
         mob:respawn()
         mob.assert:isAlive()
+        player.entities:moveTo(mob)
         mob:updateEnmity(player)
     end)
 
