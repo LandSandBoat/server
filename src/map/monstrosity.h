@@ -69,6 +69,7 @@ public:
 
     uint8  MonstrosityId;
     uint16 Species;
+    uint16 StanceSpecies{ 0 }; // The form Fighting Stance shows, 0 outside the stance.
     uint16 Flags;
     uint16 Look;
     uint8  Size;
@@ -85,7 +86,8 @@ public:
     std::array<uint8, 64>  instincts{ 0 };
     std::array<uint8, 32>  variants{ 0 };
 
-    bool Belligerency;
+    bool  Belligerency;
+    uint8 Rank{ 0 }; // Cached for the status packet. charutils::SetPoints keeps it in step with infamy.
 
     timer::time_point LastEquipChange{};
 
@@ -138,6 +140,9 @@ struct SpeciesJobs
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
 void               AddPrestige(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
+void               ApplyIdleRegen(CCharEntity* PChar);
+void               HandleMobSkillFired(CCharEntity* PChar, uint16 mobSkillId);
+[[nodiscard]] auto GetDisplaySpecies(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar, xi::Mod rating) -> uint16;
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
 [[nodiscard]] auto GetFeretoryExits(xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>;
@@ -150,6 +155,6 @@ void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU typ
 
 void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
 
-[[nodiscard]] auto GetRank(CCharEntity* PChar) -> uint8;
+void UpdateRank(CCharEntity* PChar, int32 infamy);
 
 } // namespace monstrosity

@@ -261,6 +261,84 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after Foot Kick')
     end)
 
+    -- Gestation multiplies speed by 1.5, so a Wamouracampa stays slower than other species.
+    it('speeds up by half under Gestation', function()
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 60, origin = player })
+        assert(player:getSpeed() == 75, string.format('Lizard speed is %d', player:getSpeed()))
+
+        helpers.becomeSpecies(player, xi.monstrositySpecies.WAMOURACAMPA, xi.monstrositySpecies.WAMOURACAMPA, 1)
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 60, origin = player })
+        assert(player:getSpeed() == 45, string.format('Wamouracampa speed is %d', player:getSpeed()))
+    end)
+
+    it('warns that Gestation is about to wear off', function()
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 15, tick = 10, origin = player })
+        player.packets:clear()
+        waitSeconds(12)
+
+        local warned = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if
+                pkt.type == 0x029 and
+                pkt.data[0x18] + pkt.data[0x19] * 256 == xi.msg.basic.ABOUT_TO_WEAR_OFF
+            then
+                warned = true
+            end
+        end
+
+        assert(warned, 'no warning before Gestation wore off')
+    end)
+
+    it('shows its rank in the status packet once infamy passes 10,000', function()
+        player:addCurrency('infamy', 10500)
+        player.packets:clear()
+        helpers.killWorm(player)
+
+        local rank = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x037 then
+                rank = bit.band(pkt.data[0x5A], 0x03)
+            end
+        end
+
+        assert(rank == 1, string.format('0x037 shows rank %s', tostring(rank)))
+    end)
+
+    it('recovers a twentieth of max HP a tick out of combat', function()
+        player:setHP(1)
+        waitSeconds(4)
+
+        local gained = player:getHP() - 1
+        assert(gained >= math.floor(player:getMaxHP() / 20), string.format('gained %d of %d HP', gained, player:getMaxHP()))
+    end)
+
+    it('recovers a twentieth of max MP a tick out of combat', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
+        player:setMP(0)
+        waitSeconds(4)
+
+        assert(player:getMP() >= math.floor(player:getMaxMP() / 20), string.format('MP is %d of %d', player:getMP(), player:getMaxMP()))
+    end)
+
+    it('recovers no HP while a monster holds enmity', function()
+        local mob = player.entities:moveTo('Wild_Rabbit')
+        mob:respawn()
+        mob:addStatusEffect(xi.effect.PETRIFICATION, { power = 1, duration = 600, origin = mob })
+        mob:addEnmity(player, 1, 1)
+        player:setHP(50)
+        waitSeconds(4)
+
+        assert(player:getHP() == 50, string.format('HP rose to %d with a monster on the player', player:getHP()))
+    end)
+
+    it('recovers no HP under slip damage', function()
+        player:setHP(50)
+        player:setMod(xi.mod.REGEN_DOWN, 1)
+        waitSeconds(4)
+
+        assert(player:getHP() <= 50, string.format('HP rose to %d under slip damage', player:getHP()))
+    end)
+
     it('never starts Relinquish under slip damage', function()
         player:addStatusEffect(xi.effect.POISON, { power = 1, duration = 60, tick = 3, origin = player })
         startRelinquish()
@@ -442,14 +520,22 @@ describe('Monstrosity spellcasting', function()
     local player
 
     -- Casts and reports the MP it cost.
+    -- Returns how many casts went off. Out-of-combat regen refills MP, so MP can't tell.
     local function cast(spellId, target)
+        local casts = 0
+        player:addListener('MAGIC_USE', 'TEST_MON_CAST', function()
+            casts = casts + 1
+        end)
+
         player:setMP(300)
         player.actions:useSpell(target, spellId)
         for _ = 1, 5 do
             xi.test.world:skipTime(2)
         end
 
-        return 300 - player:getMP()
+        player:removeListener('TEST_MON_CAST')
+
+        return casts
     end
 
     -- The spell list goes out once the client reports the zone loaded.
@@ -491,7 +577,7 @@ describe('Monstrosity spellcasting', function()
         mob:setAutoAttackEnabled(false)
         player.entities:moveTo(mob:getID())
 
-        assert(cast(xi.magic.spell.STONE, mob) > 0, string.format('Stone was not cast, %d MP of %d', player:getMP(), player:getMaxMP()))
+        assert(cast(xi.magic.spell.STONE, mob) > 0, 'Stone was not cast')
     end)
 
     it('cannot cast a spell outside its species jobs', function()

@@ -67,6 +67,10 @@ struct MonstrositySpecies
     xi::Ecosystem                   ecosystem{};
     Maybe<uint16>                   mobSpecies{};
     uint16                          hpScale{};
+    Maybe<uint8>                    speed{};
+    Maybe<uint8>                    animationSpeed{};
+    Maybe<uint8>                    hitbox{};
+    Maybe<uint16>                   stanceSpecies{};
     std::vector<MonstrosityTpSkill> tpSkills{};
 };
 

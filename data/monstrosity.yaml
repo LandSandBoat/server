@@ -2653,6 +2653,7 @@ monstrosity:
       ecosystem:    beast
       mob_species:  106
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
@@ -2737,6 +2738,9 @@ monstrosity:
       look:         0x0134
       ecosystem:    beast
       hp_scale:     240
+      speed:        80
+      animation_speed: 172
+      hitbox:       25
       tp_skills:
         - skill:        razor_fang
           dat_skill_id: 271
@@ -2780,6 +2784,7 @@ monstrosity:
       look:         0x0154
       ecosystem:    beast
       hp_scale:     240
+      hitbox:       24
       tp_skills:
         - skill:        sheep_charge
           dat_skill_id: 262
@@ -3196,6 +3201,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      stance_species: 270
       tp_skills:
         - skill:        fevered_pitch
           dat_skill_id: 576
@@ -3209,7 +3215,7 @@ monstrosity:
           unlock_level: 1
           tp_cost:      1800
           enabled:      false
-        - skill:        fighting_stance  # No mob_skills row yet
+        - skill:        fighting_stance
           dat_skill_id: 684
           mob_skill_id: 3123
           unlock_level: 1
@@ -3302,6 +3308,7 @@ monstrosity:
       look:         0x0188
       ecosystem:    plantoid
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        sprout_smack
           dat_skill_id: 458
@@ -3379,6 +3386,7 @@ monstrosity:
       ecosystem:    plantoid
       mob_species:  350
       hp_scale:     260
+      hitbox:       8
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
@@ -3432,6 +3440,7 @@ monstrosity:
       look:         0x0174
       ecosystem:    unclassified
       hp_scale:     240
+      hitbox:       8
       tp_skills:
         - skill:        needleshot
           dat_skill_id: 312
@@ -3610,6 +3619,7 @@ monstrosity:
       ecosystem:    vermin
       mob_species:  428
       hp_scale:     220
+      hitbox:       10
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
@@ -3641,6 +3651,7 @@ monstrosity:
       size:         0
       look:         0x0198
       ecosystem:    vermin
+      hitbox:       12
       tp_skills:
         - skill:        power_attack_beetle
           dat_skill_id: 322
@@ -3711,31 +3722,36 @@ monstrosity:
       look:         0x01C0
       ecosystem:    vermin
       hp_scale:     240
+      hitbox:       15
       tp_skills:
         - skill:        venom
           dat_skill_id: 454
           mob_skill_id: 660
           unlock_level: 1
           tp_cost:      700
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        cursed_sphere
           dat_skill_id: 453
           mob_skill_id: 659
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        somersault
           dat_skill_id: 309
           mob_skill_id: 318
           unlock_level: 20
           tp_cost:      1300
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        debilitating_drone
           dat_skill_id: 493
           mob_skill_id: 1324
           unlock_level: 30
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1600
+          enabled:      true
     scorpion:
       family:       scorpion
       species_code: 31
@@ -3959,28 +3975,34 @@ monstrosity:
       mjob:         pld
       sjob:         pld
       size:         1
-      look:         0x0000
+      look:         0x070A
       ecosystem:    vermin
       hp_scale:     230
+      speed:        30
+      hitbox:       12
+      stance_species: 306
       tp_skills:
         - skill:        amber_scutum
           dat_skill_id: 536
           mob_skill_id: 1815
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
-        - skill:        fighting_stance  # No mob_skills row yet
+          ready_time:   2400
+          enabled:      true
+        - skill:        fighting_stance
           dat_skill_id: 684
           mob_skill_id: 3123
           unlock_level: 1
           tp_cost:      300
-          enabled:      false
+          ready_time:   0
+          enabled:      true
         - skill:        heat_barrier
           dat_skill_id: 540
           mob_skill_id: 1819
           unlock_level: 10
           tp_cost:      1200
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        vitriolic_spray
           dat_skill_id: 537
           mob_skill_id: 1816
@@ -4086,6 +4108,7 @@ monstrosity:
       ecosystem:    lizard
       mob_species:  307
       hp_scale:     240
+      hitbox:       16
       tp_skills:
         - skill:        fireball
           dat_skill_id: 343
@@ -4145,6 +4168,9 @@ monstrosity:
       look:         0x013C
       ecosystem:    lizard
       hp_scale:     240
+      speed:        80
+      animation_speed: 174
+      hitbox:       18
       tp_skills:
         - skill:        ripper_fang
           dat_skill_id: 350
@@ -4409,6 +4435,7 @@ monstrosity:
       look:         0x0124
       ecosystem:    amorph
       hp_scale:     240
+      hitbox:       24
       tp_skills:
         - skill:        fluid_toss
           dat_skill_id: 385
@@ -4590,6 +4617,7 @@ monstrosity:
       look:         0x0114
       ecosystem:    amorph
       hp_scale:     240
+      hitbox:       11
       tp_skills:
         - skill:        suction
           dat_skill_id: 376
@@ -4667,6 +4695,7 @@ monstrosity:
       look:         0x0164
       ecosystem:    aquan
       hp_scale:     230
+      hitbox:       13
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
@@ -4939,6 +4968,7 @@ monstrosity:
       look:         0x08BF
       ecosystem:    unclassified
       hp_scale:     190
+      hitbox:       8
     bird:
       family:       bird
       species_code: 69
@@ -5276,6 +5306,7 @@ monstrosity:
       size:         0
       look:         0x0B41
       ecosystem:    amorph
+      hitbox:       6
     eorzean_spriggan:
       family:       eorzean_spriggan
       species_code: 255
@@ -5303,6 +5334,7 @@ monstrosity:
       ecosystem:    beast
       mob_species:  105
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
@@ -5340,6 +5372,7 @@ monstrosity:
       look:         0x010E
       ecosystem:    beast
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
@@ -5826,7 +5859,7 @@ monstrosity:
           unlock_level: 1
           tp_cost:      1800
           enabled:      false
-        - skill:        fighting_stance  # No mob_skills row yet
+        - skill:        fighting_stance
           dat_skill_id: 684
           mob_skill_id: 3123
           unlock_level: 1
@@ -6320,6 +6353,7 @@ monstrosity:
       ecosystem:    plantoid
       mob_species:  348
       hp_scale:     260
+      hitbox:       8
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
@@ -6660,6 +6694,7 @@ monstrosity:
       size:         0
       look:         0x0B48
       ecosystem:    plantoid
+      hitbox:       8
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
@@ -6804,6 +6839,7 @@ monstrosity:
       ecosystem:    vermin
       mob_species:  427
       hp_scale:     220
+      hitbox:       10
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
@@ -7052,34 +7088,39 @@ monstrosity:
       mjob:         war
       sjob:         rdm
       size:         1
-      look:         0x0000
+      look:         0x01C1
       ecosystem:    vermin
       hp_scale:     240
+      hitbox:       15
       tp_skills:
         - skill:        venom
           dat_skill_id: 454
           mob_skill_id: 660
           unlock_level: 1
           tp_cost:      700
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        cursed_sphere
           dat_skill_id: 453
           mob_skill_id: 659
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        somersault
           dat_skill_id: 309
           mob_skill_id: 318
           unlock_level: 20
           tp_cost:      1300
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        debilitating_drone
           dat_skill_id: 493
           mob_skill_id: 1324
           unlock_level: 30
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1600
+          enabled:      true
     scolopendrid_scorpion:
       family:       scorpion
       species_code: 298
@@ -7474,21 +7515,25 @@ monstrosity:
       mjob:         pld
       sjob:         pld
       size:         1
-      look:         0x0000
+      look:         0x070A
       ecosystem:    unclassified
+      speed:        30
+      hitbox:       12
       tp_skills:
         - skill:        amber_scutum
           dat_skill_id: 536
           mob_skill_id: 1815
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   2400
+          enabled:      true
         - skill:        heat_barrier
           dat_skill_id: 540
           mob_skill_id: 1819
           unlock_level: 10
           tp_cost:      1200
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        cannonball
           dat_skill_id: 539
           mob_skill_id: 1818
@@ -7688,6 +7733,7 @@ monstrosity:
       ecosystem:    lizard
       mob_species:  306
       hp_scale:     240
+      hitbox:       16
       tp_skills:
         - skill:        snowball
           dat_skill_id: 441
@@ -8629,6 +8675,7 @@ monstrosity:
       look:         0x0165
       ecosystem:    aquan
       hp_scale:     230
+      hitbox:       13
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
@@ -9060,6 +9107,7 @@ monstrosity:
       look:         0x0832
       ecosystem:    unclassified
       hp_scale:     180
+      hitbox:       8
     vermillion_toad:
       family:       toad
       species_code: 350

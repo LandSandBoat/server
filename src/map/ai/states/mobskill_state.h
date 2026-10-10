@@ -56,7 +56,6 @@ private:
     timer::time_point            m_finishTime;
     timer::duration              m_castTime{};
     int16                        m_spentTP;
-    bool                         m_paidNoTP{ false };
     bool                         m_skillSuccess{ false };
 
     void reduceTpOnInterrupt() const;

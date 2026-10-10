@@ -90,6 +90,7 @@ auto LoadChar(uint32 charId) -> std::unique_ptr<CCharEntity>;
 void LoadFromCharSpellsSQL(CCharEntity* PChar);
 void LoadInventory(CCharEntity* PChar);
 void LoadEquip(CCharEntity* PChar);
+void SetRaceHitbox(CCharEntity* PChar);
 
 void SendQuestMissionLog(CCharEntity* PChar);
 void SendPartialMissionLog(CCharEntity* PChar, MissionLog log, bool completed);

@@ -35,6 +35,35 @@ function helpers.becomeSpecies(player, family, speciesCode, level)
     player:delStatusEffect(xi.effect.GESTATION)
 end
 
+-- Being engaged stops the out-of-combat HP recovery, so HP checks stay exact. The rabbit can't fight back.
+---@param player CClientEntityPair
+function helpers.engageDummy(player)
+    local mob = player.entities:moveTo('Wild_Rabbit')
+    mob:respawn()
+    mob:setUnkillable(true)
+    mob:addStatusEffect(xi.effect.PETRIFICATION, { power = 1, duration = 600, origin = mob })
+    player.actions:engage(mob)
+end
+
+-- A Monstrosity move pays its TP when it fires, after the ready time.
+---@param player CClientEntityPair
+function helpers.waitForMove(player)
+    for _ = 1, 4 do
+        xi.test.world:skipTime(1)
+        xi.test.world:tickEntity(player)
+    end
+end
+
+-- A move that lands returns some TP, more for a multi-hit move, so the bar ends at least the cost below the start.
+-- A damaging move returns about 75 TP a hit, and 200 covers a two-hit move.
+---@param player CClientEntityPair
+---@param start integer
+---@param cost integer
+function helpers.assertSpent(player, start, cost)
+    local tp = player:getTP()
+    assert(tp >= start - cost and tp < start - cost + 200, string.format('TP=%d after a %d TP move from %d', tp, cost, start))
+end
+
 -- Returns the exp the kill paid. A mob level also makes the worm count two levels lower.
 ---@param player CClientEntityPair
 ---@param mobLevel integer?

@@ -26,7 +26,6 @@
 #include "data/datasets/monstrosity/dataset.h"
 #include "data/enums/key_item.h"
 #include "data/enums/monstrosity_instinct.h"
-#include "data/loader.h"
 #include "utils/dataset_loader.h"
 
 #include "common/logging.h"
@@ -54,6 +53,7 @@
 
 #include "grades.h"
 #include "merit.h"
+#include "notoriety_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/mobutils.h"
@@ -160,6 +160,7 @@ struct FeretoryExit
 constexpr auto kFeretoryExits = std::array{
     FeretoryExit{ xi::ZoneId::BhaflauThickets, { 308.0f, -19.5f, 378.0f, 192.0f } },
     FeretoryExit{ xi::ZoneId::BhaflauThickets, { 375.0f, -12.25f, -47.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::BuburimuPeninsula, { 138.0f, -24.78f, 174.0f, 64.0f } },
     FeretoryExit{ xi::ZoneId::BuburimuPeninsula, { 521.0f, 0.0f, 1.0f, 93.0f } },
     FeretoryExit{ xi::ZoneId::Davoi, { -286.0f, 4.0f, -200.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::EastRonfaure, { 120.0f, 0.5f, -530.0f, 192.0f } },
@@ -330,16 +331,28 @@ constexpr auto kInfamyCapBelligerency = 50000;
 constexpr auto kInfamyPerRank = 10000;
 constexpr auto kTopRank       = 2;
 
+// Fighting Stance α, which Gnole and Wamouracampa use to change form.
+constexpr auto kFightingStanceSkill = 3123;
+
+// Out-of-combat HP and MP recovery per regen tick, a share of the maximum.
+constexpr auto kIdleRegenPercent = 5;
+
 // JP wiki: infamy and prestige are a tenth of the exp.
 constexpr auto kExpPerPoint = 10;
 
-constexpr auto rankFromInfamy(const int32 infamy) -> uint8
+// Rank follows the infamy held, and is Mon outside Belligerency (FFXIclopedia, retail).
+auto rankFor(const monstrosity::MonstrosityData_t& data, const int32 infamy) -> uint8
 {
+    if (!data.Belligerency)
+    {
+        return 0;
+    }
+
     return static_cast<uint8>(std::clamp((infamy - 1) / kInfamyPerRank, 0, kTopRank));
 }
 
-// The client says each gladiator rank caps prestige like infamy, without a figure. Kills stop at the
-// first rank's top, so the higher ranks only come from slaying Monipulators.
+// TODO: Find the real cap. The client says each gladiator rank caps prestige like infamy, without a figure,
+// so kills stop at the first rank's top and the higher ranks only come from slaying Monipulators.
 constexpr auto kPrestigeCapFromKills = 10000;
 
 // Matches xi.monstrosity.belligerencyCaps.
@@ -438,17 +451,10 @@ auto instinctModTotal(const std::array<uint16, 12>& equipped, const xi::Mod mod)
     return total;
 }
 
-// FFXIclopedia: NM and HNM only raise the limit under Belligerency.
-auto instinctPointLimit(CCharEntity* PChar) -> int32
+auto instinctPointLimit(const CCharEntity* PChar) -> int32
 {
-    const auto& data  = *PChar->m_PMonstrosity;
-    const auto  limit = data.levels[data.MonstrosityId] + kInstinctPointsOverLevel;
-    if (!data.Belligerency)
-    {
-        return limit;
-    }
-
-    return limit + monstrosity::GetRank(PChar) * kInstinctPointsPerRank;
+    const auto& data = *PChar->m_PMonstrosity;
+    return data.levels[data.MonstrosityId] + kInstinctPointsOverLevel + data.Rank * kInstinctPointsPerRank;
 }
 
 // Retail unequips every instinct rather than picking which to drop. Returns whether any were.
@@ -465,7 +471,7 @@ auto unequipInstinctsOverLimit(CCharEntity* PChar) -> bool
     return true;
 }
 
-// JP wiki: Medicated is the one effect that survives entering the Feretory and changing species.
+// JP wiki: timed effects drop on a species change, variants included, and Medicated survives. Permanent effects stay.
 void delAllEffectsButMedicine(CCharEntity* PChar)
 {
     auto effects = std::vector<xi::StatusEffect>{};
@@ -489,7 +495,23 @@ void refreshDerivedState(CCharEntity* PChar)
     if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
         PChar->m_PMonstrosity->Look = species->look;
+
+        // Retail walks most species at twice their movement speed.
+        PChar->baseSpeed      = species->speed.value_or(settings::get<uint8>("map.BASE_SPEED"));
+        PChar->animationSpeed = species->animationSpeed.value_or(static_cast<uint8>(std::min(PChar->baseSpeed * 2, 255)));
+        if (species->hitbox)
+        {
+            PChar->modelHitboxSize = *species->hitbox / 10.0f;
+        }
+        else
+        {
+            charutils::SetRaceHitbox(PChar);
+        }
+
+        PChar->UpdateSpeed();
     }
+
+    PChar->m_PMonstrosity->Rank = rankFor(*PChar->m_PMonstrosity, charutils::GetPoints(PChar, "infamy"));
 
     charutils::BuildingCharTraitsTable(PChar);
     applyLevelInstincts(*PChar->m_PMonstrosity);
@@ -793,6 +815,10 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
             delAllInstinctMods(PChar);
             PChar->m_PMonstrosity = nullptr;
             PChar->m_EcoSystem    = xi::Ecosystem::Humanoid;
+            PChar->baseSpeed      = settings::get<uint8>("map.BASE_SPEED");
+            PChar->animationSpeed = static_cast<uint8>(std::clamp(PChar->baseSpeed / settings::get<float>("map.ANIMATION_SPEED_DIVISOR"), 0.0f, 255.0f));
+            charutils::SetRaceHitbox(PChar);
+            PChar->UpdateSpeed();
         }
 
         return;
@@ -828,9 +854,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
     addAllInstinctMods(PChar);
 
-    // NOTE: Whenever you log in as a MON, you'll have Gestation - even if you've previously clicked it off.
-    // TODO: Check this is true in Belligerency.
-    // TODO: There are more conditions to handle here?
+    // TODO: Does logging in outside the Feretory give Gestation again after it was clicked off? And under Belligerency?
     if (PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
     {
         const auto duration = [&]() -> timer::duration
@@ -855,7 +879,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
             xi::StatusEffect::Gestation,
             static_cast<uint16>(xi::StatusEffect::Gestation),
             0,
-            0s,
+            10s, // Ticks so the effect can warn 10 s before it ends.
             duration,
             0,
             0,
@@ -870,6 +894,16 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     PChar->updatemask |= UPDATE_LOOK;
 }
 
+auto monstrosity::GetDisplaySpecies(const CCharEntity* PChar) -> uint16
+{
+    if (PChar->m_PMonstrosity->StanceSpecies != 0)
+    {
+        return PChar->m_PMonstrosity->StanceSpecies;
+    }
+
+    return PChar->m_PMonstrosity->Species;
+}
+
 auto monstrosity::GetPackedMonstrosityName(const CCharEntity* PChar) -> uint32
 {
     if (PChar->m_PMonstrosity == nullptr)
@@ -879,7 +913,7 @@ auto monstrosity::GetPackedMonstrosityName(const CCharEntity* PChar) -> uint32
 
     // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
     //     : This looks to be a quirk of the client and not intended.
-    const auto a = static_cast<uint16>(0x8000 | PChar->m_PMonstrosity->Species);
+    const auto a = static_cast<uint16>(0x8000 | GetDisplaySpecies(PChar));
     const auto b = PChar->m_PMonstrosity->NamePrefix1;
     const auto c = PChar->m_PMonstrosity->NamePrefix2;
 
@@ -948,7 +982,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
         return;
     }
 
-    // Meikyo Shisui pays for the move when it starts.
+    // Meikyo Shisui pays for the move when it fires.
     const auto meikyo = PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui);
     if (PChar->health.tp < skill->tpCost && !meikyo)
     {
@@ -956,7 +990,38 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
         return;
     }
 
-    std::ignore = PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, skill->readyTime, skill->tpCost);
+    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, skill->readyTime, skill->tpCost);
+}
+
+// Retail redraws the model for Fighting Stance.
+void monstrosity::HandleMobSkillFired(CCharEntity* PChar, const uint16 mobSkillId)
+{
+    if (mobSkillId != kFightingStanceSkill)
+    {
+        return;
+    }
+
+    const auto* species = findSpecies(PChar->m_PMonstrosity->Species);
+    if (species == nullptr || !species->stanceSpecies)
+    {
+        return;
+    }
+
+    auto& stance = PChar->m_PMonstrosity->StanceSpecies;
+    stance       = [&]() -> uint16
+    {
+        if (stance != 0)
+        {
+            return 0;
+        }
+
+        return *species->stanceSpecies;
+    }();
+
+    PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+    PChar->pushPacket<CCharStatusPacket>(PChar);
+    PChar->updatemask |= UPDATE_LOOK;
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
@@ -1002,7 +1067,8 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             return;
         }
 
-        PChar->m_PMonstrosity->Species = data.SpeciesIndex;
+        PChar->m_PMonstrosity->Species       = data.SpeciesIndex;
+        PChar->m_PMonstrosity->StanceSpecies = 0;
 
         PChar->m_PMonstrosity->MonstrosityId = species->monstrosityId;
         PChar->m_PMonstrosity->MainJob       = species->mjob;
@@ -1212,6 +1278,7 @@ auto monstrosity::AsMonipulator(const CBattleEntity* PEntity) -> const CCharEnti
 
 // FFXIclopedia: pets and Trusts follow their master.
 // TODO: FFXIclopedia says an adventurer's Healing Waltz still reaches a Monipulator.
+// TODO: Only player targets come through here, so a Monipulator can still cure or buff an adventurer's pet or Trust.
 auto monstrosity::CanAssist(const CBattleEntity* PInitiator, const CCharEntity* PTarget) -> bool
 {
     const auto* PSource = [&]() -> const CBattleEntity*
@@ -1229,7 +1296,7 @@ auto monstrosity::CanAssist(const CBattleEntity* PInitiator, const CCharEntity* 
         return true;
     }
 
-    return (AsMonipulator(PSource) != nullptr) == (PTarget->m_PMonstrosity != nullptr);
+    return (static_cast<const CCharEntity*>(PSource)->m_PMonstrosity != nullptr) == (PTarget->m_PMonstrosity != nullptr);
 }
 
 auto monstrosity::GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs
@@ -1277,12 +1344,12 @@ void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
         return kInfamyCap;
     }();
 
-    const auto held  = charutils::GetPoints(PChar, "infamy");
-    const auto limit = std::max(cap, held);
-    charutils::AddPoints(PChar, "infamy", infamy, limit);
+    const auto held         = charutils::GetPoints(PChar, "infamy");
+    const auto previousRank = PChar->m_PMonstrosity->Rank;
+    charutils::SetPoints(PChar, "infamy", std::min(held + infamy, std::max(cap, held)));
 
-    // BG: crossing into NM or HNM rank announces it.
-    if (rankFromInfamy(std::min(held + infamy, limit)) > rankFromInfamy(held))
+    // Crossing into a higher rank announces it.
+    if (PChar->m_PMonstrosity->Rank > previousRank)
     {
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
     }
@@ -1303,7 +1370,23 @@ void monstrosity::AddPrestige(CCharEntity* PChar, const uint32 exp)
         return;
     }
 
-    charutils::AddPoints(PChar, "prestige", prestige, std::max(kPrestigeCapFromKills, charutils::GetPoints(PChar, "prestige")));
+    const auto held = charutils::GetPoints(PChar, "prestige");
+    charutils::SetPoints(PChar, "prestige", std::min(held + prestige, std::max(kPrestigeCapFromKills, held)));
+}
+
+// JP wiki: a Monipulator recovers HP and MP out of combat, even while moving. Slip damage stops it.
+// TODO: Retail trickles 3% every 10 s for a while after a fight first. What ends it?
+void monstrosity::ApplyIdleRegen(CCharEntity* PChar)
+{
+    if (PChar->PAI->IsEngaged() ||
+        PChar->PNotorietyContainer->hasEnmity() ||
+        PChar->getMod(xi::Mod::REGEN_DOWN) > 0)
+    {
+        return;
+    }
+
+    PChar->addHP(PChar->GetMaxHP() * kIdleRegenPercent / 100);
+    PChar->addMP(PChar->GetMaxMP() * kIdleRegenPercent / 100);
 }
 
 // Delay per hit. MNK species swing twice a round.
@@ -1445,22 +1528,32 @@ void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, const bool flag)
     }
 
     PChar->m_PMonstrosity->Belligerency = flag;
-
-    const auto unequipped = unequipInstinctsOverLimit(PChar);
+    UpdateRank(PChar, charutils::GetPoints(PChar, "infamy"));
 
     WriteMonstrosityData(PChar);
+}
 
-    if (unequipped)
+void monstrosity::UpdateRank(CCharEntity* PChar, const int32 infamy)
+{
+    const auto rank = rankFor(*PChar->m_PMonstrosity, infamy);
+    if (rank == PChar->m_PMonstrosity->Rank)
     {
+        return;
+    }
+
+    PChar->m_PMonstrosity->Rank = rank;
+
+    // A lower rank affords fewer instinct points.
+    if (unequipInstinctsOverLimit(PChar))
+    {
+        WriteMonstrosityData(PChar);
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         sendInstinctChangePackets(PChar);
+        return;
     }
-}
 
-auto monstrosity::GetRank(CCharEntity* PChar) -> uint8
-{
-    return rankFromInfamy(charutils::GetPoints(PChar, "infamy"));
+    PChar->pushPacket<CCharStatusPacket>(PChar);
 }
 
 auto monstrosity::GetExpNEXTLevel(const uint8 level) -> uint32

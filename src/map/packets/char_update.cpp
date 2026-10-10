@@ -26,6 +26,7 @@
 #include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
 #include "items/item_linkshell.h"
+#include "monstrosity.h"
 #include "status_effect_container.h"
 #include "utils/mountutils.h"
 #include "zone.h"
@@ -394,7 +395,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         {
             // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
             //     : This looks to be a quirk of the client and not intended.
-            packet->MonstrosityFlags   = 0x8000 | PChar->m_PMonstrosity->Species;
+            packet->MonstrosityFlags   = 0x8000 | monstrosity::GetDisplaySpecies(PChar);
             packet->MonstrosityNameId1 = PChar->m_PMonstrosity->NamePrefix1;
             packet->MonstrosityNameId2 = PChar->m_PMonstrosity->NamePrefix2;
 

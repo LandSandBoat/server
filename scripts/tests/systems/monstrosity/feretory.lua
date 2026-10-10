@@ -1,4 +1,6 @@
+-----------------------------------
 -- Feretory rules, read from data/monstrosity.yaml through the entity bindings.
+-----------------------------------
 local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
@@ -811,6 +813,16 @@ describe('Monstrosity species change', function()
             equipInstincts({ warInstinct, mnkInstinct })
             player.packets:clear()
             player:setBelligerencyFlag(false)
+
+            assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 0, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+
+        it('unequips the overflow on spending infamy below NM', function()
+            player:setBelligerencyFlag(true)
+            equipInstincts({ warInstinct, mnkInstinct })
+            player.packets:clear()
+            player:delCurrency('infamy', 5000)
 
             assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
             assert(player:getMod(xi.mod.STR) == 0, string.format('STR mod is %d', player:getMod(xi.mod.STR)))

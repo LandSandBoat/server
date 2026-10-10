@@ -28,6 +28,7 @@
 #include "data/enums/zone_misc.h"
 #include "entities/char_entity.h"
 #include "items/item_linkshell.h"
+#include "monstrosity.h"
 #include "status_effect_container.h"
 #include "utils/mountutils.h"
 #include "zone.h"
@@ -113,7 +114,7 @@ struct flags4_t
 
 struct flags5_t
 {
-    uint8_t unknown_0_0 : 2;
+    uint8_t MonstrosityRank : 2; // 0 Mon, 1 NM, 2 HNM. Drives the rank icon.
     uint8_t unknown_0_2 : 2;
     uint8_t unknown_0_4 : 4; // GateId for fenced content
 };
@@ -351,9 +352,10 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     {
         // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
         //     : This looks to be a quirk of the client and not intended.
-        packet->monstrosity_info     = 0x8000 | PChar->m_PMonstrosity->Species;
+        packet->monstrosity_info     = 0x8000 | monstrosity::GetDisplaySpecies(PChar);
         packet->monstrosity_name_id1 = PChar->m_PMonstrosity->NamePrefix1;
         packet->monstrosity_name_id2 = PChar->m_PMonstrosity->NamePrefix2;
+        flags5.MonstrosityRank       = PChar->m_PMonstrosity->Rank;
 
         // Sword & Shield icon only shows outside of the Feretory
         if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)

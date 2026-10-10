@@ -133,14 +133,18 @@ auto Dataset::decode(const std::string_view text) -> Records
         }
 
         auto record = MonstrositySpecies{
-            .monstrosityId = static_cast<uint8>(yaml::resolveEnum(species.family)),
-            .mjob          = yaml::resolveEnum(species.mjob),
-            .sjob          = yaml::resolveEnum(species.sjob),
-            .size          = species.size,
-            .look          = species.look,
-            .ecosystem     = yaml::resolveEnum(species.ecosystem),
-            .mobSpecies    = species.mob_species,
-            .hpScale       = species.hp_scale.value_or(kDefaultHPScale),
+            .monstrosityId  = static_cast<uint8>(yaml::resolveEnum(species.family)),
+            .mjob           = yaml::resolveEnum(species.mjob),
+            .sjob           = yaml::resolveEnum(species.sjob),
+            .size           = species.size,
+            .look           = species.look,
+            .ecosystem      = yaml::resolveEnum(species.ecosystem),
+            .mobSpecies     = species.mob_species,
+            .hpScale        = species.hp_scale.value_or(kDefaultHPScale),
+            .speed          = species.speed,
+            .animationSpeed = species.animation_speed,
+            .hitbox         = species.hitbox,
+            .stanceSpecies  = species.stance_species,
         };
 
         if (species.tp_skills.has_value())

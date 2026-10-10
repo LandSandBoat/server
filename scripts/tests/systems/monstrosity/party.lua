@@ -1,6 +1,8 @@
+-----------------------------------
+-- JP wiki: a Monipulator cannot party.
+-----------------------------------
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
--- JP wiki: a Monipulator cannot party.
 describe('Monstrosity parties', function()
     local function spawnAdventurer()
         return xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WAR, level = 10 })
@@ -95,6 +97,7 @@ describe('Monstrosity assistance', function()
     it('stops an adventurer curing a Monipulator', function()
         local monipulator = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
         monipulator:delStatusEffect(xi.effect.GESTATION)
+        helpers.engageDummy(monipulator)
         cure(spawnCurer(monipulator), monipulator)
 
         assert(monipulator:getHP() == 1, string.format('an adventurer cured a Monipulator to %d HP', monipulator:getHP()))
@@ -104,6 +107,6 @@ describe('Monstrosity assistance', function()
         local target = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WAR, level = 10 })
         cure(spawnCurer(target), target)
 
-        assert(target:getHP() > 1, 'precondition: Cure did not land on an adventurer')
+        assert(target:getHP() > 1, 'Cure did not land on an adventurer')
     end)
 end)

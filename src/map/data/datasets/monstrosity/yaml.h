@@ -65,6 +65,10 @@ struct Species
     yaml::EnumToken<xi::Ecosystem>          ecosystem{};
     std::optional<uint16>                   mob_species;
     std::optional<uint16>                   hp_scale;
+    std::optional<uint8>                    speed;
+    std::optional<uint8>                    animation_speed;
+    std::optional<uint8>                    hitbox;
+    std::optional<uint16>                   stance_species;
     std::optional<std::vector<TpSkill>>     tp_skills;
 };
 
@@ -135,6 +139,10 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::Species>
     glz::schema ecosystem{ .description = "Ecosystem for correlation. Unclassified correlates with nothing." };
     glz::schema mob_species{ .description = "data/ecosystems.yaml species whose stat ranks the base stats use. Absent keeps the player formula." };
     glz::schema hp_scale{ .description = "Percent applied to the mob HP formula. Defaults to 240.", .minimum = 100L, .maximum = 400L };
+    glz::schema speed{ .description = "Base movement speed. Absent keeps map.BASE_SPEED.", .minimum = 1L, .maximum = 255L };
+    glz::schema animation_speed{ .description = "Walk animation speed. Absent follows the movement speed.", .minimum = 1L, .maximum = 255L };
+    glz::schema hitbox{ .description = "Model hitbox in tenths of a yalm. Absent keeps the race's.", .minimum = 1L, .maximum = 255L };
+    glz::schema stance_species{ .description = "Species code Fighting Stance shows this species as.", .minimum = 1L, .maximum = 65535L };
     glz::schema tp_skills{ .description = "TP moves this species can use." };
 };
 
