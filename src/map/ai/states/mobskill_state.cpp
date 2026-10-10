@@ -151,8 +151,17 @@ void CMobSkillState::SpendCost()
     {
         if (m_tpCostOverride.has_value())
         {
-            // Monstrosity skills each cost a fixed amount rather than the whole TP bar.
-            m_spentTP = m_PEntity->addTP(-m_tpCostOverride.value());
+            // Monstrosity skills each cost a fixed amount rather than the whole TP bar. JP wiki: Meikyo Shisui makes one free.
+            m_spentTP = m_tpCostOverride.value();
+            if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui))
+            {
+                m_PEntity->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::MeikyoShisui);
+                m_paidNoTP = true;
+            }
+            else
+            {
+                m_PEntity->addTP(-m_spentTP);
+            }
         }
         else if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sekkanoki))
         {
@@ -313,10 +322,13 @@ void CMobSkillState::reduceTpOnInterrupt() const
                 return static_cast<int16>(std::floor(0.25f * m_spentTP));
             }();
 
-            // A fixed-cost skill only spent its cost, so the rest of the bar survives.
+            // A fixed-cost skill only spent its cost, so the rest of the bar survives. A free one refunds nothing.
             if (m_tpCostOverride.has_value())
             {
-                m_PEntity->health.tp = std::clamp<int16>(m_PEntity->health.tp + refundedTP, 0, 3000);
+                if (!m_paidNoTP)
+                {
+                    m_PEntity->health.tp = std::clamp<int16>(m_PEntity->health.tp + refundedTP, 0, 3000);
+                }
             }
             else
             {

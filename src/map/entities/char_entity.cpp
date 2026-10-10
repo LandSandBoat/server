@@ -55,6 +55,7 @@
 
 #include "ai/ai_container.h"
 #include "ai/controllers/player_controller.h"
+#include "ai/helpers/action_queue.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
 #include "ai/states/attack_state.h"
@@ -913,7 +914,8 @@ int16 CCharEntity::getShieldDefense()
 
 bool CCharEntity::hasBazaar()
 {
-    if (isSettingBazaarPrices)
+    // FFXIclopedia: a Monipulator has no bazaar, even one priced before entering.
+    if (isSettingBazaarPrices || m_PMonstrosity != nullptr)
     {
         return false;
     }
@@ -2203,6 +2205,22 @@ void CCharEntity::OnDeathTimer()
     TracyZoneScoped;
 
     charutils::SetCharVar(this, "expLost", 0);
+
+    // A Monipulator has no home point to go to.
+    // TODO: Capture what retail does when the death menu times out.
+    if (m_PMonstrosity != nullptr)
+    {
+        PAI->QueueAction(
+            queueAction_t(
+                0ms,
+                false,
+                [](CBaseEntity* PEntity)
+                {
+                    monstrosity::HandleDeathMenu(static_cast<CCharEntity*>(PEntity), GP_CLI_COMMAND_ACTION_HOMEPOINTMENU::MonstrosityCancel);
+                }));
+        return;
+    }
+
     requestedWarp = WarpRequest::HomePoint; // zone entities will warp us on the next tick
 }
 

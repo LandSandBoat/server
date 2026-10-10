@@ -61,7 +61,7 @@ local tradeEventFinish = function(player, csid, option, npc)
     npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
     if species > 0 then
-        xi.monstrosity.unlockStartingMONs(player, species)
+        player:setMonstrosityData({ monstrosityId = species, species = species })
     end
 end
 
@@ -96,15 +96,18 @@ local gladiatorNpc =
         end
 
         local hasWrit = player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and 1 or 0
-        return quest:event(baseEvent + 5, hasWrit, player:getCurrency('prestige'), 0, 0)
+        return quest:event(baseEvent + 5, hasWrit, player:getCurrency('prestige'))
     end,
 }
 
--- The event answers 123 to take the writ, 321 to return it, and 1 plus the slot from bit 16 to exchange.
-local gladiatorMenuFinish = function(player, csid, option, npc)
-    if option == 123 then
+-- The event answers 1 plus the slot from bit 16 to exchange.
+local function gladiatorMenuFinish(player, csid, option, npc)
+    local takeWrit   = 123
+    local returnWrit = 321
+
+    if option == takeWrit then
         npcUtil.giveKeyItem(player, xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
-    elseif option == 321 then
+    elseif option == returnWrit then
         player:delKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
     elseif bit.band(option, 0xFFFF) == 1 then
         local reward = prestigeRewards[bit.rshift(option, 16)]
@@ -123,7 +126,9 @@ local odysseanPassageOnEventFinish = function(player, csid, option, npc)
     if option == 1 then
         local pos = player:getPos()
         player:setMonstrosityEntryData(pos.x, pos.y, pos.z, pos.rot, player:getZoneID(), player:getMainJob(), player:getSubJob())
-        player:setPos(-358, -3.4, -440, 64, xi.zone.FERETORY)
+
+        local entrance = xi.monstrosity.feretoryEntrance
+        player:setPos(entrance.x, entrance.y, entrance.z, entrance.rot, xi.zone.FERETORY)
     end
 end
 

@@ -2,7 +2,7 @@
 -- Monstrosity - Teyrnon (Feretory)
 -- Sells families, variants, instincts and buffs for infamy.
 -----------------------------------
-require('scripts/globals/monstrosity/species')
+require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
@@ -17,6 +17,81 @@ local pageMessages =
     [4] = 'MAY_POSSESS_AMORPHS',
     [5] = 'MAY_POSSESS_AQUANS',
     [6] = 'MAY_POSSESS_BIRDS',
+}
+
+-- Purchased instinct names start at this message param. Lower values name an item.
+local instinctNameBase = 30464
+
+-- The job instincts, which cost less once that job's limit is broken.
+local instinctJobs =
+{
+    [xi.monstrosityInstinct.WAR] = xi.job.WAR,
+    [xi.monstrosityInstinct.MNK] = xi.job.MNK,
+    [xi.monstrosityInstinct.WHM] = xi.job.WHM,
+    [xi.monstrosityInstinct.BLM] = xi.job.BLM,
+    [xi.monstrosityInstinct.RDM] = xi.job.RDM,
+    [xi.monstrosityInstinct.THF] = xi.job.THF,
+    [xi.monstrosityInstinct.PLD] = xi.job.PLD,
+    [xi.monstrosityInstinct.DRK] = xi.job.DRK,
+    [xi.monstrosityInstinct.BST] = xi.job.BST,
+    [xi.monstrosityInstinct.BRD] = xi.job.BRD,
+    [xi.monstrosityInstinct.RNG] = xi.job.RNG,
+    [xi.monstrosityInstinct.SAM] = xi.job.SAM,
+    [xi.monstrosityInstinct.NIN] = xi.job.NIN,
+    [xi.monstrosityInstinct.DRG] = xi.job.DRG,
+    [xi.monstrosityInstinct.SMN] = xi.job.SMN,
+    [xi.monstrosityInstinct.BLU] = xi.job.BLU,
+    [xi.monstrosityInstinct.COR] = xi.job.COR,
+    [xi.monstrosityInstinct.PUP] = xi.job.PUP,
+    [xi.monstrosityInstinct.DNC] = xi.job.DNC,
+    [xi.monstrosityInstinct.SCH] = xi.job.SCH,
+    [xi.monstrosityInstinct.GEO] = xi.job.GEO,
+    [xi.monstrosityInstinct.RUN] = xi.job.RUN,
+}
+
+-- Only one limit break quest exists for each pre-ToAU job, so those read Maat's Cap instead.
+local limitBreakQuests =
+{
+    [xi.job.BLU] = { xi.questLog.AHT_URHGAN,  xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN           },
+    [xi.job.COR] = { xi.questLog.AHT_URHGAN,  xi.quest.id.ahtUrhgan.BREAKING_THE_BONDS_OF_FATE },
+    [xi.job.PUP] = { xi.questLog.BASTOK,      xi.quest.id.bastok.ACHIEVING_TRUE_POWER          },
+    [xi.job.DNC] = { xi.questLog.JEUNO,       xi.quest.id.jeuno.A_FURIOUS_FINALE               },
+    [xi.job.SCH] = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.SURVIVAL_OF_THE_WISEST    },
+    [xi.job.GEO] = { xi.questLog.ADOULIN,     xi.quest.id.adoulin.ELEMENTARY_MY_DEAR_SYLVIE    },
+    [xi.job.RUN] = { xi.questLog.ADOULIN,     xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN        },
+}
+
+-- Protect and Shell follow the spell tier for the Monipulator's level: the first row whose level it is under.
+local protectTiers =
+{
+    { level = 27,        power = 20  },
+    { level = 47,        power = 50  },
+    { level = 63,        power = 90  },
+    { level = 76,        power = 140 },
+    { level = math.huge, power = 220 },
+}
+
+-- Shell power is in 1/256ths of 10000: Shell I is 27/256, Shell V 75/256.
+local shellTiers =
+{
+    { level = 37,        power = 1055 },
+    { level = 57,        power = 1641 },
+    { level = 68,        power = 2188 },
+    { level = 76,        power = 2617 },
+    { level = math.huge, power = 2930 },
+}
+
+-- Buffs by menu slot. The costs are fixed in the client event. Dedication pays its bonus until
+-- expCap exp is gained. tierBonus is added per tier under ENHANCES_PROT_SHELL_RCVD.
+local buffs =
+{
+    [0] = { cost = 3000, effect = xi.effect.DEDICATION, duration = 3600, power = 50,   expCap = 10000 },
+    [1] = { cost = 400,  effect = xi.effect.DEDICATION, duration = 3600, power = 100,  expCap = 2000  },
+    [2] = { cost = 10,   effect = xi.effect.REGEN,      duration = 3600, power = 1,    tick = 3       },
+    [3] = { cost = 10,   effect = xi.effect.REFRESH,    duration = 3600, power = 1,    tick = 3       },
+    [4] = { cost = 100,  effect = xi.effect.PROTECT,    duration = 1800, tiers = protectTiers, tierBonus = 2  },
+    [5] = { cost = 100,  effect = xi.effect.SHELL,      duration = 1800, tiers = shellTiers,   tierBonus = 39 },
+    [6] = { cost = 100,  effect = xi.effect.HASTE,      duration = 1800, power = 1000 },
 }
 
 -- The shop lives in data/monstrosity.yaml and does not change once loaded.
@@ -43,7 +118,7 @@ local function hasCompletedLimitBreak(player, jobId)
         return utils.mask.getBit(player:getCharVar('maatsCap'), jobId - 1)
     end
 
-    return player:hasCompletedQuest(unpack(xi.monstrosity.limitBreakQuests[jobId]))
+    return player:hasCompletedQuest(unpack(limitBreakQuests[jobId]))
 end
 
 local function getLimitBreakMask(player)
@@ -89,34 +164,6 @@ local function getPageMask(player, page)
     return pageMask
 end
 
-local function castBuff(player, buff)
-    player:delStatusEffectSilent(buff.effect)
-
-    if buff.expCap then
-        xi.itemUtils.addItemExpEffect(player, buff.effect, buff.power, buff.duration, buff.expCap)
-        return
-    end
-
-    local power = buff.power
-    local tier  = nil
-    if buff.tiers then
-        local level = player:getMainLvl()
-        for idx, row in ipairs(buff.tiers) do
-            if level < row.level then
-                tier  = idx
-                power = row.power
-                break
-            end
-        end
-
-        if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
-            power = power + buff.tierBonus * tier
-        end
-    end
-
-    player:addStatusEffect(buff.effect, { power = power, duration = buff.duration, origin = player, tick = buff.tick, tier = tier })
-end
-
 local function buyMonster(player, option)
     local page  = bit.band(bit.rshift(option, 8), 0xF) - 1
     local slot  = bit.rshift(option, 16)
@@ -155,12 +202,13 @@ local function buyInstinct(player, option)
         return
     end
 
-    local prices = xi.monstrosity.instinctPrices
-    local price  = prices.race
-    if instinct > xi.monstrosityInstinct.GALKA_II then
-        price = prices.job
-        if hasCompletedLimitBreak(player, instinct - xi.monstrosityInstinct.GALKA_II) then
-            price = prices.limitBroken
+    -- A race II instinct costs 500. A job instinct costs 10000, or 5000 once that job's limit is broken.
+    local job   = instinctJobs[instinct]
+    local price = 500
+    if job then
+        price = 10000
+        if hasCompletedLimitBreak(player, job) then
+            price = 5000
         end
     end
 
@@ -169,17 +217,43 @@ local function buyInstinct(player, option)
     end
 
     xi.monstrosity.addPurchasedInstinct(player, instinct)
-    player:messageSpecial(zones[xi.zone.FERETORY].text.YOU_LEARNED_INSTINCT, xi.monstrosity.instinctNameBase + instinct)
+    player:messageSpecial(zones[xi.zone.FERETORY].text.YOU_LEARNED_INSTINCT, instinctNameBase + instinct)
 end
 
 local function buyBuff(player, option)
-    local buff = xi.monstrosity.teyrnonBuffs[bit.rshift(option, 8)]
+    local buff = buffs[bit.rshift(option, 8)]
     if
-        buff and
-        tryPayInfamy(player, buff.cost)
+        not buff or
+        not tryPayInfamy(player, buff.cost)
     then
-        castBuff(player, buff)
+        return
     end
+
+    player:delStatusEffectSilent(buff.effect)
+
+    if buff.expCap then
+        xi.itemUtils.addItemExpEffect(player, buff.effect, buff.power, buff.duration, buff.expCap)
+        return
+    end
+
+    local power = buff.power
+    local tier
+    if buff.tiers then
+        local level = player:getMainLvl()
+        for idx, row in ipairs(buff.tiers) do
+            if level < row.level then
+                tier  = idx
+                power = row.power
+                break
+            end
+        end
+
+        if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+            power = power + buff.tierBonus * tier
+        end
+    end
+
+    player:addStatusEffect(buff.effect, { power = power, duration = buff.duration, origin = player, tick = buff.tick, tier = tier })
 end
 
 xi.monstrosity.teyrnonOnTrigger = function(player, npc)

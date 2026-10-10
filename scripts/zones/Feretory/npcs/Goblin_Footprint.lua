@@ -8,9 +8,9 @@ local ID = zones[xi.zone.FERETORY]
 ---@type TNpcEntity
 local entity = {}
 
--- Grumblix tells his stories for 100 gil. The capture shows no gil leaving the inventory.
+-- Grumblix asks 100 gil for his stories, but retail never takes it.
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, { { 'gil', 100 } }) then
+    if npcUtil.tradeMatches(trade, { { xi.item.GIL, 100 } }) then
         player:startEvent(0, -1, -1, -1, -1)
     end
 end

@@ -314,7 +314,7 @@ monstrosity:
       - species: colibri
         infamy:  5000
         requirements:
-          bat:  50
+          bat:  45
           bird: 45
 
       - variant: toucalibri

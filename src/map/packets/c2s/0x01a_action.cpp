@@ -127,7 +127,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
                     {
-                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::Monstrosity });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Dismount:
@@ -336,7 +336,9 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         case GP_CLI_COMMAND_ACTION_ACTIONID::Help:
         {
             // TODO: C4H applies to ALL claimed enemies on which you (personally) have enmity. This does NOT require you to be engaged.
-            if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
+            // FFXIclopedia: a Monipulator cannot call for help.
+            auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget());
+            if (PMob != nullptr && PChar->m_PMonstrosity == nullptr)
             {
                 if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
                 {

@@ -88,6 +88,14 @@ describe('Monstrosity mobskills', function()
         assert(not player:hasStatusEffect(xi.effect.MEIKYO_SHISUI), 'Meikyo Shisui outlived the free move')
     end)
 
+    it('spends no TP on a move under Meikyo Shisui', function()
+        player:setTP(1500)
+        player:addStatusEffect(xi.effect.MEIKYO_SHISUI, { power = 1, duration = 30, origin = player })
+        player.actions:useMonsterSkill(target, fireballDat)
+
+        assert(player:getTP() == 1500, string.format('TP fell to %d', player:getTP()))
+    end)
+
     -- A mob spends its whole bar, so the interrupt penalty overwrites TP outright.
     -- A Monstrosity move only ever spent its cost, so the untouched remainder has to
     -- survive, plus a quarter of the cost handed back.
@@ -103,6 +111,18 @@ describe('Monstrosity mobskills', function()
 
         local expected = (3000 - fireballCost) + (fireballCost / 4)
         assert(player:getTP() == expected, string.format('TP=%d, expected %d', player:getTP(), expected))
+    end)
+
+    it('refunds nothing for an interrupted free move', function()
+        player:setTP(500)
+        player:addStatusEffect(xi.effect.MEIKYO_SHISUI, { power = 1, duration = 30, origin = player })
+        player.actions:useMonsterSkill(target, fireballDat)
+        player:addStatusEffect(xi.effect.SLEEP_I, { power = 1, duration = 60, origin = player })
+        for _ = 1, 5 do
+            xi.test.world:skipTime(3)
+        end
+
+        assert(player:getTP() == 500, string.format('TP=%d, expected 500', player:getTP()))
     end)
 
     -- Retail answers a refused monster skill with a BATTLE_MESSAGE.

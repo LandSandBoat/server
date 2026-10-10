@@ -2,8 +2,6 @@
 -- Monstrosity - Suibhne (Feretory)
 -- Takes items for families and variants. The bee quiz is scripts/quests/hiddenQuests/Monstrosity_Bee.lua.
 -----------------------------------
-require('scripts/globals/monstrosity/species')
------------------------------------
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
 
@@ -136,16 +134,16 @@ xi.monstrosity.suibhneUnlocks =
 local lastLowFamily    = 125
 local highFamilyOffset = 128
 
-xi.monstrosity.canSuibhneUnlock = function(player, unlock)
+-- Takes the Monstrosity data rather than the player, as building it is costly.
+xi.monstrosity.canSuibhneUnlock = function(data, unlock)
     if unlock.species then
-        return not xi.monstrosity.hasUnlockedSpecies(player, unlock.species)
+        return data.levels[unlock.species] == 0
     end
 
-    if xi.monstrosity.hasUnlockedVariant(player, unlock.variant) then
+    if xi.monstrosity.hasVariantBit(data, unlock.variant) then
         return false
     end
 
-    local data     = player:getMonstrosityData()
     local baseCode = unlock.family
     if unlock.family > lastLowFamily then
         baseCode = unlock.family + highFamilyOffset
@@ -156,9 +154,10 @@ end
 
 -- JP wiki: in a form that qualifies, Suibhne names one item at random. Any qualifying item is still accepted.
 xi.monstrosity.suibhneGreet = function(player, npc)
+    local data     = player:getMonstrosityData()
     local requests = {}
     for _, unlock in ipairs(xi.monstrosity.suibhneUnlocks) do
-        if unlock.family and xi.monstrosity.canSuibhneUnlock(player, unlock) then
+        if unlock.family and xi.monstrosity.canSuibhneUnlock(data, unlock) then
             table.insert(requests, unlock)
         end
     end

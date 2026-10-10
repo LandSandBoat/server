@@ -1,4 +1,5 @@
 -- Rules a Monipulator plays under, from the JP wiki's Monstrosity pages.
+local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity restrictions', function()
@@ -214,6 +215,20 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.WAR and player:getSubJob() == xi.job.NIN, 'jobs were not restored')
     end)
 
+    it('returns to the entrance when the death menu times out', function()
+        player:setMonstrosityEntryData(219.288, -12, 224.175, 255, xi.zone.PORT_WINDURST, xi.job.WAR, xi.job.NIN)
+        player:setHP(0)
+        xi.test.world:tickEntity(player)
+        xi.test.world:skipTime(3700)
+        for _ = 1, 3 do
+            xi.test.world:tickEntity(player)
+            xi.test.world:skipTime(1)
+        end
+
+        assert(player:getZoneID() == xi.zone.PORT_WINDURST, string.format('went to zone %d', player:getZoneID()))
+        assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
+    end)
+
     it('sends a Monipulator with no recorded entry home as a WAR', function()
         player:setMonstrosityEntryData(0, 0, 0, 0, 0, 0, 0)
         xi.monstrosity.onMonstrosityReturnToEntrance(player)
@@ -387,6 +402,35 @@ describe('Monstrosity restrictions', function()
             end
         end)
     end
+
+    -- JP wiki: a Monipulator cannot /heal. The client hides it, so only a crafted 0x0E8 asks.
+    it('refuses /heal', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 30)
+        local camp = ffi.new('uint8_t[8]')
+        camp[4] = 1
+        player.packets:send(0x0E8, camp, assert(ffi.sizeof(camp)))
+
+        assert(player:getAnimation() ~= xi.animation.HEALING, 'a Monipulator started healing')
+    end)
+
+    -- The client never offers /mount either.
+    it('refuses /mount', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 30)
+        player:addKeyItem(xi.keyItem.CHOCOBO_COMPANION)
+
+        local mount = ffi.new('uint8_t[28]')
+        local id    = player:getID()
+        for byte = 0, 3 do
+            mount[4 + byte] = bit.band(bit.rshift(id, byte * 8), 0xFF)
+        end
+
+        mount[8]  = bit.band(player:getTargID(), 0xFF)
+        mount[9]  = bit.rshift(player:getTargID(), 8)
+        mount[10] = 0x1A
+        player.packets:send(0x01A, mount, assert(ffi.sizeof(mount)))
+
+        player.assert.no:hasEffect(xi.effect.MOUNTED)
+    end)
 end)
 
 -- Retail lists, and lets a Monipulator cast, the learned spells its species' jobs know at the

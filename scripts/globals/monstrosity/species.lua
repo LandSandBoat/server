@@ -1,15 +1,8 @@
 -----------------------------------
 -- Monstrosity - Species, variants and purchased instincts
 -----------------------------------
-require('scripts/globals/monstrosity/constants')
------------------------------------
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
-
----@param choice xi.monstrositySpecies
-xi.monstrosity.unlockStartingMONs = function(player, choice)
-    player:setMonstrosityData({ monstrosityId = choice, species = choice })
-end
 
 ---@param species xi.monstrositySpecies
 xi.monstrosity.getSpeciesLevel = function(player, species)
@@ -37,15 +30,15 @@ end
 
 -- Variants sit one bit each in a 32 byte field.
 local function variantBit(variant)
-    return math.floor(variant / 8), bit.lshift(1, variant % 8)
+    return { byte = math.floor(variant / 8), mask = bit.lshift(1, variant % 8) }
 end
 
 ---@param data table
 ---@param variant xi.monstrosityVariant
 xi.monstrosity.hasVariantBit = function(data, variant)
-    local byteOffset, mask = variantBit(variant)
+    local variantPos = variantBit(variant)
 
-    return bit.band(data.variants[byteOffset] or 0, mask) ~= 0
+    return bit.band(data.variants[variantPos.byte] or 0, variantPos.mask) ~= 0
 end
 
 ---@param variant xi.monstrosityVariant
@@ -56,8 +49,8 @@ end
 ---@param data table
 ---@param variant xi.monstrosityVariant
 xi.monstrosity.setVariantBit = function(data, variant)
-    local byteOffset, mask = variantBit(variant)
-    data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, mask)
+    local variantPos = variantBit(variant)
+    data.variants[variantPos.byte] = bit.bor(data.variants[variantPos.byte] or 0, variantPos.mask)
 end
 
 ---@param variant xi.monstrosityVariant
@@ -71,7 +64,12 @@ end
 xi.monstrosity.getPurchasedInstinctBits = function(player)
     local instincts = player:getMonstrosityData().instincts
 
-    return bit.bor(instincts[20], bit.lshift(instincts[21], 8), bit.lshift(instincts[22], 16), bit.lshift(instincts[23], 24))
+    return bit.bor(
+        instincts[20] or 0,
+        bit.lshift(instincts[21] or 0, 8),
+        bit.lshift(instincts[22] or 0, 16),
+        bit.lshift(instincts[23] or 0, 24)
+    )
 end
 
 ---@param instinct xi.monstrosityInstinct

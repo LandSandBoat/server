@@ -327,6 +327,29 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 1000, 'infamy should be untouched')
     end)
 
+    -- Protect and Shell take the spell tier for the Monipulator's level.
+    local tierChecks =
+    {
+        { option = 4, effect = xi.effect.PROTECT, level = 26, power = 20   },
+        { option = 4, effect = xi.effect.PROTECT, level = 27, power = 50   },
+        { option = 4, effect = xi.effect.PROTECT, level = 99, power = 220  },
+        { option = 5, effect = xi.effect.SHELL,   level = 36, power = 1055 },
+        { option = 5, effect = xi.effect.SHELL,   level = 37, power = 1641 },
+        { option = 5, effect = xi.effect.SHELL,   level = 99, power = 2930 },
+    }
+
+    for _, check in ipairs(tierChecks) do
+        local name = check.effect == xi.effect.PROTECT and 'Protect' or 'Shell'
+        it(string.format('casts %s power %d at level %d', name, check.power, check.level), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, check.level)
+            player:addCurrency('infamy', 100)
+            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(check.option, 8))
+
+            local power = player:getStatusEffect(check.effect):getPower()
+            assert(power == check.power, string.format('power is %d', power))
+        end)
+    end
+
     it('refuses an instinct purchase with the wrong check value', function()
         player:addCurrency('infamy', 500)
         buyInstinct(xi.monstrosityInstinct.HUME_II, 118)
@@ -356,17 +379,18 @@ describe('Monstrosity Aengus', function()
         return message
     end
 
-    -- Retail answers entering with 7322 and withdrawing with 7382.
     it('toggles Belligerency', function()
+        local ID = zones[xi.zone.FERETORY]
+
         player.packets:clear()
         player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
         assert(player:getBelligerencyFlag(), 'Belligerency should be on')
-        assert(lastMessage() == 7322, string.format('entering said %s', tostring(lastMessage())))
+        assert(lastMessage() == ID.text.SOUL_PINETH_FOR_MORE, string.format('entering said %s', tostring(lastMessage())))
 
         player.packets:clear()
         player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
         assert(not player:getBelligerencyFlag(), 'Belligerency should be off')
-        assert(lastMessage() == 7382, string.format('withdrawing said %s', tostring(lastMessage())))
+        assert(lastMessage() == ID.text.SAFE_FROM_MONIPULATORS, string.format('withdrawing said %s', tostring(lastMessage())))
     end)
 end)
 
@@ -420,6 +444,42 @@ describe('Monstrosity Bee quiz', function()
 
         assert(params and params[1] == 0 and params[2] == 1, string.format('quiz params were %s, %s', tostring(params and params[1]), tostring(params and params[2])))
         assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'a locked quiz unlocked bees')
+    end)
+
+    it('reopens the quiz the next day', function()
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = 2 })
+        xi.test.world:skipToNextVanaDay()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'Bee should be unlocked the next day')
+    end)
+
+    it('announces the unlock and stops offering the quiz', function()
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+        xi.test.world:skipTime(1)
+
+        local announced = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            -- The top bit of the message number is a flag.
+            if
+                pkt.type == 0x02A and
+                bit.band(pkt.data[0x1A] + pkt.data[0x1B] * 256, 0x7FFF) == zones[xi.zone.FERETORY].text.MAY_POSSESS_BEES
+            then
+                announced = true
+            end
+        end
+
+        assert(announced, 'the Bee unlock was not announced')
+
+        -- The quiz event's first param says whether the quiz is open.
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11 })
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            assert(pkt.type ~= 0x034 or pkt.data[0x08] == 0, 'Suibhne offered the quiz after bees were unlocked')
+        end
     end)
 end)
 
@@ -531,7 +591,7 @@ describe('Monstrosity Suibhne trades', function()
         assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.SHE_SLIME), 'the She-Slime should be unlocked')
     end)
 
-    -- Retail names the item before the quiz: message 7384 with the item and the count.
+    -- Retail names the item and the count before the quiz.
     it('asks a Crab for a creel of moat carp', function()
         takeBaseForm(xi.monstrositySpecies.CRAB, 1)
         player.packets:clear()
@@ -539,7 +599,10 @@ describe('Monstrosity Suibhne trades', function()
 
         local request = nil
         for _, pkt in pairs(player.packets:getIncoming()) do
-            if pkt.type == 0x02A and pkt.data[0x1A] + pkt.data[0x1B] * 256 == 7384 then
+            if
+                pkt.type == 0x02A and
+                pkt.data[0x1A] + pkt.data[0x1B] * 256 == zones[xi.zone.FERETORY].text.BRING_ME_ITEM
+            then
                 request = { pkt.data[0x08] + pkt.data[0x09] * 256, pkt.data[0x0C] }
             end
         end
@@ -774,14 +837,14 @@ describe('Monstrosity species change', function()
         player.assert:hasEffect(xi.effect.REGEN)
     end)
 
-    -- Coeurl instinct I is id 21, owned from Coeurl level 30.
+    -- Level instinct I is the family times 3, owned from level 30.
     it('applies spell interruption down from Coeurl instinct I', function()
         local data = player:getMonstrosityData()
         data.levels[xi.monstrositySpecies.COEURL] = 30
         player:setMonstrosityData(data)
         player:gotoZone(xi.zone.FERETORY)
 
-        equipInstincts({ 21 })
+        equipInstincts({ xi.monstrositySpecies.COEURL * 3 })
 
         assert(player:getMod(xi.mod.SPELLINTERRUPT) == 15, string.format('SPELLINTERRUPT is %d', player:getMod(xi.mod.SPELLINTERRUPT)))
     end)
@@ -797,7 +860,7 @@ describe('Monstrosity species change', function()
         player:gotoZone(xi.zone.FERETORY)
         assert(player:getMaxHP() == 95, string.format('precondition: a level 2 Toad has %d HP', player:getMaxHP()))
 
-        equipInstincts({ 180 })
+        equipInstincts({ xi.monstrositySpecies.CRAB * 3 })
 
         assert(player:getMaxHP() == 475, string.format('max HP is %d', player:getMaxHP()))
     end)

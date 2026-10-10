@@ -13,11 +13,12 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
+    local data = player:getMonstrosityData()
     for idx, unlock in ipairs(xi.monstrosity.suibhneUnlocks) do
         for _, itemId in ipairs(unlock.items) do
             if
-                npcUtil.tradeHasExactly(trade, { { itemId, unlock.count } }) and
-                xi.monstrosity.canSuibhneUnlock(player, unlock)
+                xi.monstrosity.canSuibhneUnlock(data, unlock) and
+                npcUtil.tradeMatches(trade, { { itemId, unlock.count } })
             then
                 player:setLocalVar('SUIBHNE_TRADE', idx)
                 player:startEvent(15, unlock.species and 128 + unlock.species or 256 + unlock.variant, itemId, unlock.count)

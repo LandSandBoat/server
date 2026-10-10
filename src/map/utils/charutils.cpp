@@ -4755,6 +4755,12 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
                 return;
             }
 
+            // FFXIclopedia: Monipulators earn no capacity points.
+            if (PMember->m_PMonstrosity != nullptr)
+            {
+                return;
+            }
+
             if (!hasKeyItem(PMember, xi::KeyItem::JobBreaker) || PMember->GetMLevel() < 99)
             {
                 // Do not grant Capacity points without Job Breaker or Level 99
