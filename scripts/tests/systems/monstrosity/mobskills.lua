@@ -1,5 +1,6 @@
 -- Monstrosity TP moves. The client sends a DAT skill id, which data/monstrosity.yaml maps to a
 -- mob skill id and a fixed TP cost. Unlike a mob, a Monipulator spends only that cost.
+local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity mobskills', function()
@@ -247,6 +248,18 @@ describe('Monstrosity levelling entry', function()
         local gained = player:getCurrency('infamy') - before
         assert(gainedExp > 0, 'the kill paid no exp')
         assert(gained == math.floor(gainedExp / 10), string.format('%d exp paid %d infamy', gainedExp, gained))
+    end)
+
+    -- Retail took record 65 with 0x10C and counted a kill as a Monipulator.
+    it('counts kills toward Mons.: Total Monsters Vanquished', function()
+        local record = ffi.new('uint8_t[8]')
+        record[0x04] = 65
+        player.packets:send(0x10C, record, assert(ffi.sizeof(record)))
+        assert(player:hasEminenceRecord(65), 'precondition: the record was not taken')
+
+        helpers.killWorm(player)
+
+        assert(player:getEminenceProgress(65) == 1, string.format('progress is %s', tostring(player:getEminenceProgress(65))))
     end)
 
     it('pays no infamy for exp from scripts', function()
