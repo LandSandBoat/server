@@ -1,4 +1,6 @@
+-----------------------------------
 -- Rules a Monipulator plays under, from the JP wiki's Monstrosity pages.
+-----------------------------------
 local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
@@ -261,6 +263,19 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after Foot Kick')
     end)
 
+    -- Retail answers a Monipulator at the Fort Ghelsba elevator lever with a bare release.
+    it('cannot work a lever outside the Feretory', function()
+        player:gotoZone(xi.zone.FORT_GHELSBA)
+        player:delStatusEffect(xi.effect.GESTATION)
+        local lever = player.entities:moveTo('_3x1')
+        player.packets:clear()
+        player.actions:trigger(lever)
+
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            assert(pkt.type ~= 0x032 and pkt.type ~= 0x034, 'the lever started an event')
+        end
+    end)
+
     -- Gestation multiplies speed by 1.5, so a Wamouracampa stays slower than other species.
     it('speeds up by half under Gestation', function()
         player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 60, origin = player })
@@ -289,19 +304,48 @@ describe('Monstrosity restrictions', function()
         assert(warned, 'no warning before Gestation wore off')
     end)
 
-    it('shows its rank in the status packet once infamy passes 10,000', function()
-        player:addCurrency('infamy', 10500)
-        player.packets:clear()
-        helpers.killWorm(player)
-
-        local rank = nil
-        for _, pkt in pairs(player.packets:getIncoming()) do
-            if pkt.type == 0x037 then
-                rank = bit.band(pkt.data[0x5A], 0x03)
+    -- Rank follows the infamy held, and is Mon outside Belligerency.
+    describe('rank', function()
+        local function shownRank()
+            local rank = nil
+            for _, pkt in pairs(player.packets:getIncoming()) do
+                if pkt.type == 0x037 then
+                    rank = bit.band(pkt.data[0x5A], 0x03)
+                end
             end
+
+            return rank
         end
 
-        assert(rank == 1, string.format('0x037 shows rank %s', tostring(rank)))
+        it('shows NM in the status packet once infamy passes 10,000 under Belligerency', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 9999)
+            player.packets:clear()
+            helpers.killWorm(player)
+
+            local rank = shownRank()
+            assert(rank == 1, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
+
+        it('drops to Mon when Belligerency ends', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 10500)
+            player.packets:clear()
+            player:setBelligerencyFlag(false)
+
+            local rank = shownRank()
+            assert(rank == 0, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
+
+        it('drops to Mon when infamy is spent below 10,001', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 10500)
+            player.packets:clear()
+            player:delCurrency('infamy', 3000)
+
+            local rank = shownRank()
+            assert(rank == 0, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
     end)
 
     it('recovers a twentieth of max HP a tick out of combat', function()
@@ -519,7 +563,6 @@ describe('Monstrosity spellcasting', function()
     ---@type CClientEntityPair
     local player
 
-    -- Casts and reports the MP it cost.
     -- Returns how many casts went off. Out-of-combat regen refills MP, so MP can't tell.
     local function cast(spellId, target)
         local casts = 0

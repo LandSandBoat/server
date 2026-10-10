@@ -255,10 +255,9 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            // MONs are allowed to use doors, but nothing else
-            if (PChar->m_PMonstrosity != nullptr &&
-                PNpc->look.size != 0x02 &&
-                PChar->getZone() != xi::ZoneId::Feretory)
+            // A Monipulator triggers nothing outside the Feretory, doors and levers included (FFXIclopedia, retail).
+            // TODO: FFXIclopedia's exceptions, such as the Castle Zvahl Keep doors and the Garlaige gates with the key item.
+            if (PChar->m_PMonstrosity != nullptr && PChar->getZone() != xi::ZoneId::Feretory)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard);
                 return;
@@ -337,8 +336,12 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         {
             // TODO: C4H applies to ALL claimed enemies on which you (personally) have enmity. This does NOT require you to be engaged.
             // FFXIclopedia: a Monipulator cannot call for help.
-            auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget());
-            if (PMob != nullptr && PChar->m_PMonstrosity == nullptr)
+            if (PChar->m_PMonstrosity != nullptr)
+            {
+                break;
+            }
+
+            if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
             {
                 if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
                 {
