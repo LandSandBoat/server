@@ -1167,7 +1167,7 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [rng, war]
+      jobs: [rng, rng]
       render:
         look:
           type:  standard
@@ -1263,7 +1263,7 @@ templates:
     attributes:
       combat:
         skill: axe
-      jobs: [rng, war]
+      jobs: [rng, rng]
       render:
         look:
           type:  standard
