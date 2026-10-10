@@ -799,9 +799,9 @@ xi.job_utils.corsair.applyRoll = function(caster, target, inAbility, total, isDo
     local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)
     local targetLevel = target:getMainLvl()
 
-    -- Level correction.
+    -- Level correction. Fractions are rounded up.
     if actorLevel < targetLevel then
-        effectpower = effectpower * actorLevel / targetLevel
+        effectpower = math.ceil(effectpower * actorLevel / targetLevel)
     end
 
     caster:setLocalVar('corsairApplyingRoll', 1)
