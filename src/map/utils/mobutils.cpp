@@ -788,15 +788,15 @@ auto MonipulatorBaseHP(const xi::Job mjob, const xi::Job sjob, const uint8 level
  ************************************************************************/
 void CalculateMobStats(CMobEntity* PMob, bool recover)
 {
-    // Reset modifiers to base values to prevent stacking
-    PMob->restoreModifiers();
-    PMob->restoreMobModifiers();
-
     if (recover)
     {
         // Clear status effects only when fully recovering
         PMob->StatusEffectContainer->KillAllStatusEffect();
     }
+
+    // Reset modifiers to base values to prevent stacking
+    PMob->restoreModifiers();
+    PMob->restoreMobModifiers();
 
     bool         isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
     xi::Job      mJob     = PMob->GetMJob();
