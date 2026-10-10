@@ -823,7 +823,7 @@ templates:
 
   Jnun_AR:
     id:            2154
-    species:       doomed
+    species:       jnun
     skill_list_id: 86
     attributes:
       combat:

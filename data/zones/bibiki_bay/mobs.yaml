@@ -4,7 +4,7 @@ templates:
 
   Alraune:
     id:            97
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -905,6 +905,8 @@ templates:
         hitbox:        17
       behaviors:
         aggressive: true
+      mob_mods:
+        base_damage_multiplier: 150
       spawn:
         respawn: 300
     loot:
