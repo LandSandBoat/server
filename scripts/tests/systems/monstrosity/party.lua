@@ -84,3 +84,37 @@ describe('Monstrosity parties', function()
         assert(leader:getPartySize() == 1, 'the leader still counts the Monipulator')
     end)
 end)
+
+-- FFXIclopedia: Monipulators and adventurers cannot cure or buff each other.
+describe('Monstrosity assistance', function()
+    local function spawnCurer(target)
+        local curer = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WHM, level = 99 })
+        curer:addSpell(xi.magic.spell.CURE)
+
+        local pos = target:getPos()
+        curer:setPos(pos.x, pos.y, pos.z)
+
+        return curer
+    end
+
+    local function cure(curer, target)
+        target:setHP(1)
+        curer.actions:useSpell(target, xi.magic.spell.CURE)
+        xi.test.world:skipTime(10)
+    end
+
+    it('stops an adventurer curing a Monipulator', function()
+        local monipulator = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        monipulator:delStatusEffect(xi.effect.GESTATION)
+        cure(spawnCurer(monipulator), monipulator)
+
+        assert(monipulator:getHP() == 1, string.format('an adventurer cured a Monipulator to %d HP', monipulator:getHP()))
+    end)
+
+    it('lets an adventurer cure another adventurer', function()
+        local target = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WAR, level = 10 })
+        cure(spawnCurer(target), target)
+
+        assert(target:getHP() > 1, 'precondition: Cure did not land on an adventurer')
+    end)
+end)

@@ -43,13 +43,23 @@ local limitBreakQuests =
 }
 
 -- The zones are fixed by the client menu, the level caps are not (JP wiki, BG).
--- TODO: Apply the cap on entering the zone under Belligerency.
 xi.monstrosity.belligerencyCaps =
 {
     [xi.zone.BUBURIMU_PENINSULA] = 30,
     [xi.zone.XARCABARD]          = 60,
     [xi.zone.ULEGUERAND_RANGE]   = 90,
 }
+
+-- JP wiki: a gladiator holding the writ is capped too, even if not looking for a fight.
+xi.monstrosity.applyBelligerencyCap = function(player)
+    local cap = xi.monstrosity.belligerencyCaps[player:getZoneID()]
+    if
+        cap and
+        (player:getBelligerencyFlag() or player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS))
+    then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = player })
+    end
+end
 
 -- Teyrnon's shop lives in data/monstrosity.yaml and does not change once loaded.
 local teyrnonShop
@@ -253,10 +263,16 @@ xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
     local mjob   = data.entry_mjob
     local sjob   = data.entry_sjob
 
-    -- TODO: Sanity check
-
     for _, effect in pairs(player:getStatusEffects()) do
         player:delStatusEffectSilent(effect:getEffectType())
+    end
+
+    -- A Monipulator made by GM command never recorded an entry, so it leaves through its home point.
+    if zoneId == 0 then
+        player:changeJob(mjob ~= 0 and mjob or xi.job.WAR)
+        player:changesJob(sjob)
+        player:warp()
+        return
     end
 
     if xi.settings.main.MONSTROSITY_TELEPORT_TO_FERETORY == 1 then
@@ -480,8 +496,11 @@ xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
         player:changeJob(xi.job.MON)
     end
 
+    -- JP wiki: every effect is lost but Medicated.
     for _, effect in pairs(player:getStatusEffects()) do
-        player:delStatusEffectSilent(effect:getEffectType())
+        if effect:getEffectType() ~= xi.effect.MEDICINE then
+            player:delStatusEffectSilent(effect:getEffectType())
+        end
     end
 
     return cs
@@ -718,7 +737,7 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
 
             [6] = function()
                 player:delStatusEffectSilent(xi.effect.HASTE)
-                player:addStatusEffect(xi.effect.HASTE, { power = 1000, duration = 600, origin = player })
+                player:addStatusEffect(xi.effect.HASTE, { power = 1000, duration = 1800, origin = player })
             end,
         }
     end
@@ -733,5 +752,6 @@ xi.monstrosity.maccusOnTrigger = function(player, npc)
         return
     end
 
-    player:startEvent(9, 285, 2, 2, 0, 0, 0, 0, 0)
+    -- The event is client-side dialogue only. It reads no params and returns nothing.
+    player:startEvent(9)
 end

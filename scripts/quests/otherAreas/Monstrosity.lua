@@ -82,6 +82,51 @@ local odysseanPassageNpc =
     end,
 }
 
+-- Slots and costs are fixed in the client event. JP wiki: only a writ holder may exchange.
+local prestigeRewards =
+{
+    [0] = { item = xi.item.PHIAL_OF_ALLOY_TONIC,    cost =  5000 },
+    [1] = { item = xi.item.PHIAL_OF_ALLOY_TONIC_P1, cost = 10000 },
+    [2] = { item = xi.item.PHIAL_OF_ALLOY_TONIC_P2, cost = 20000 },
+    [3] = { item = xi.item.FIEND_TORQUE,            cost = 10000 },
+    [4] = { item = xi.item.ANIMOSITY_TORQUE,        cost = 25000 },
+    [5] = { item = xi.item.LACERATION_TORQUE,       cost = 25000 },
+    [6] = { item = xi.item.GOETIC_TORQUE,           cost = 25000 },
+}
+
+-- JP wiki: talking to the Suspicious Hume after the quest opens the gladiator menus in the cities.
+local gladiatorNpc =
+{
+    onTrigger = function(player, npc)
+        local baseEvent = baseNpcEvents[player:getZoneID()]
+        if quest:getVar(player, 'Gladiator') == 0 then
+            return quest:event(baseEvent + 4)
+        end
+
+        local hasWrit = player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and 1 or 0
+        return quest:event(baseEvent + 5, hasWrit, player:getCurrency('prestige'), 0, 0)
+    end,
+}
+
+-- The event answers 123 to take the writ, 321 to return it, and 1 plus the slot from bit 16 to exchange.
+local gladiatorMenuFinish = function(player, csid, option, npc)
+    if option == 123 then
+        npcUtil.giveKeyItem(player, xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
+    elseif option == 321 then
+        player:delKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
+    elseif bit.band(option, 0xFFFF) == 1 then
+        local reward = prestigeRewards[bit.rshift(option, 16)]
+        if
+            reward and
+            player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and
+            player:getCurrency('prestige') >= reward.cost and
+            npcUtil.giveItem(player, reward.item)
+        then
+            player:delCurrency('prestige', reward.cost)
+        end
+    end
+end
+
 local odysseanPassageOnEventFinish = function(player, csid, option, npc)
     if option == 1 then
         local pos = player:getPos()
@@ -198,9 +243,7 @@ quest.sections =
         },
     },
 
-    -- NOTE: The default events for the Suspicious NPCs require additional work to support
-    -- the items that they can provide, and will most likely need support in the monstrosity
-    -- global, along with event update/finish wiring here.
+    -- TODO: The Hume's mezzotint and augment events (46 onwards).
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED
@@ -208,47 +251,52 @@ quest.sections =
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-
             ['Odyssean_Passage'] = odysseanPassageNpc,
             ['Suspicious_Hume']  = quest:event(45):replaceDefault(),
 
             onEventFinish =
             {
                 [43] = odysseanPassageOnEventFinish,
-            }
+                [45] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Gladiator', 1)
+                end,
+            },
         },
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
             ['Odyssean_Passage']  = odysseanPassageNpc,
-            ['Suspicious_Elvaan'] = quest:event(886):replaceDefault(), -- TODO: 886 may be once per zone or once, 887 after
+            ['Suspicious_Elvaan'] = gladiatorNpc,
 
             onEventFinish =
             {
                 [885] = odysseanPassageOnEventFinish,
-            }
+                [887] = gladiatorMenuFinish,
+            },
         },
 
         [xi.zone.PORT_BASTOK] =
         {
             ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Galka'] = quest:event(422):replaceDefault(),
+            ['Suspicious_Galka'] = gladiatorNpc,
 
             onEventFinish =
             {
                 [421] = odysseanPassageOnEventFinish,
-            }
+                [423] = gladiatorMenuFinish,
+            },
         },
 
         [xi.zone.PORT_WINDURST] =
         {
             ['Odyssean_Passage']    = odysseanPassageNpc,
-            ['Suspicious_Tarutaru'] = quest:event(884):replaceDefault(),
+            ['Suspicious_Tarutaru'] = gladiatorNpc,
 
             onEventFinish =
             {
                 [883] = odysseanPassageOnEventFinish,
-            }
+                [885] = gladiatorMenuFinish,
+            },
         },
     },
 }

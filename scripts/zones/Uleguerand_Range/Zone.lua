@@ -29,6 +29,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.afterZoneIn = function(player)
+    xi.monstrosity.applyBelligerencyCap(player)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 

@@ -78,6 +78,25 @@ describe('Monstrosity restrictions', function()
         assert(player:getCurrency('infamy') == 50000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
 
+    -- Buburimu, Xarcabard and Uleguerand cap a flagged Monipulator at 30, 60 and 90.
+    it('caps the level in a Belligerency zone while flagged', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 45)
+        player:setBelligerencyFlag(true)
+        player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+        assert(player:getMainLvl() == 30, string.format('a level 45 Rabbit is level %d in Buburimu', player:getMainLvl()))
+
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        assert(player:getMainLvl() == 45, string.format('the cap followed the Rabbit out, level %d', player:getMainLvl()))
+    end)
+
+    it('leaves the level alone in a Belligerency zone without the flag', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 45)
+        player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+        assert(player:getMainLvl() == 45, string.format('an unflagged Rabbit is level %d in Buburimu', player:getMainLvl()))
+    end)
+
     it('drops MON behaviour as soon as the job changes away from MON', function()
         helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 10)
         assert(player:getBaseDelay() == 240, string.format('a Lizard has delay %d', player:getBaseDelay()))
@@ -154,6 +173,29 @@ describe('Monstrosity restrictions', function()
     it('leaves Monstrosity when the Relinquish countdown ends', function()
         startRelinquish()
         waitSeconds(15)
+
+        assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
+    end)
+
+    -- Retail returns a Monipulator to the exact spot it stood on when it entered the passage.
+    it('returns to the exact entry position', function()
+        player:setMonstrosityEntryData(219.288, -12, 224.175, 255, xi.zone.PORT_WINDURST, xi.job.WAR, xi.job.NIN)
+        xi.monstrosity.onMonstrosityReturnToEntrance(player)
+        for _ = 1, 3 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(player)
+        end
+
+        local pos = player:getPos()
+        assert(player:getZoneID() == xi.zone.PORT_WINDURST, string.format('returned to zone %d', player:getZoneID()))
+        assert(math.abs(pos.x - 219.288) < 0.01 and math.abs(pos.z - 224.175) < 0.01 and pos.rot == 255,
+            string.format('returned to %.3f, %.3f facing %d', pos.x, pos.z, pos.rot))
+        assert(player:getMainJob() == xi.job.WAR and player:getSubJob() == xi.job.NIN, 'jobs were not restored')
+    end)
+
+    it('sends a Monipulator with no recorded entry home as a WAR', function()
+        player:setMonstrosityEntryData(0, 0, 0, 0, 0, 0, 0)
+        xi.monstrosity.onMonstrosityReturnToEntrance(player)
 
         assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
     end)

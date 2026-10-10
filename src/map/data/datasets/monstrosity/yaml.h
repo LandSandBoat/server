@@ -115,7 +115,7 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::TpSkill>
     glz::schema skill{ .description = "Name of the move, matching its mob_skills row." };
     glz::schema dat_skill_id{ .description = "Id the client sends when the move is used.", .minimum = 1L, .maximum = 65535L };
     glz::schema mob_skill_id{ .description = "mob_skills row that runs when the move resolves.", .minimum = 1L, .maximum = 65535L };
-    glz::schema unlock_level{ .description = "Species level the move becomes available at. Mostly unverified.", .minimum = 1L, .maximum = 99L };
+    glz::schema unlock_level{ .description = "Species level the move is learned at, from the client species DAT.", .minimum = 1L, .maximum = 99L };
     glz::schema tp_cost{ .description = "TP the move costs. A Monipulator spends only this, not the whole bar.", .minimum = 0L, .maximum = 3000L };
     glz::schema enabled{ .description = "Only true once a retail capture has verified the move." };
 };

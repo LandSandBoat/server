@@ -48,12 +48,7 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
 
     const auto infamy = charutils::GetPoints(PChar, "infamy");
 
-    // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
-    // The ranks are listed as:
-    // 0~10,000 Mon. (Monster)
-    // 10,001~20,000 NM (Notorious Monster)
-    // 20,001+ HNM (Highly Notorious Monster)
-    packet.rank = static_cast<uint8>(std::min(2, (infamy - 1) / 10000));
+    packet.rank = monstrosity::GetRank(PChar);
 
     // TODO: unknown1[0] varies on retail with no known pattern.
     packet.unknown1[0] = 0xEC;

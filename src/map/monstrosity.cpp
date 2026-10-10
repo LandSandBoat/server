@@ -29,6 +29,7 @@
 
 #include "data/datasets/monstrosity/dataset.h"
 #include "data/datasets/zones/settings/dataset.h"
+#include "data/enums/key_item.h"
 #include "data/enums/monstrosity_instinct.h"
 #include "data/loader.h"
 #include "utils/dataset_loader.h"
@@ -236,12 +237,24 @@ auto isVariantUnlocked(const monstrosity::MonstrosityData_t& data, const uint8 v
     return (data.variants[variant / 8] >> (variant % 8)) & 0x01;
 }
 
-// The client allows instincts worth up to the species level plus this.
+// The client allows instincts worth up to the species level plus this, and 20 more per rank.
 constexpr auto kInstinctPointsOverLevel = 10;
+constexpr auto kInstinctPointsPerRank   = 20;
 
 // Infamy stops rising here, higher while Belligerency is flagged.
 constexpr auto kInfamyCap             = 10000;
 constexpr auto kInfamyCapBelligerency = 50000;
+
+// The client says each gladiator rank caps prestige like infamy, without a figure. Kills stop at the
+// first rank's top, so the higher ranks only come from slaying Monipulators.
+constexpr auto kPrestigeCapFromKills = 10000;
+
+// Matches xi.monstrosity.belligerencyCaps.
+constexpr auto kBelligerencyZones = std::array{
+    xi::ZoneId::BuburimuPeninsula,
+    xi::ZoneId::Xarcabard,
+    xi::ZoneId::UleguerandRange,
+};
 
 auto findSpecies(const uint16 speciesCode) -> const xi::data::MonstrositySpecies*
 {
@@ -296,6 +309,56 @@ void delInstinctMods(CCharEntity* PChar, const uint16 instinctId)
         {
             PChar->delModifier(mod, value);
         }
+    }
+}
+
+// FFXIclopedia: NM and HNM only raise the limit under Belligerency.
+auto instinctPointLimit(CCharEntity* PChar) -> int32
+{
+    const auto& data  = *PChar->m_PMonstrosity;
+    const auto  limit = data.levels[data.MonstrosityId] + kInstinctPointsOverLevel;
+    if (!data.Belligerency)
+    {
+        return limit;
+    }
+
+    return limit + monstrosity::GetRank(PChar) * kInstinctPointsPerRank;
+}
+
+// Retail unequips every instinct rather than picking which to drop. Returns whether any were.
+auto unequipInstinctsOverLimit(CCharEntity* PChar) -> bool
+{
+    auto& equipped = PChar->m_PMonstrosity->EquippedInstincts;
+    if (instinctsCost(equipped) <= instinctPointLimit(PChar))
+    {
+        return false;
+    }
+
+    for (auto& slot : equipped)
+    {
+        delInstinctMods(PChar, slot);
+        slot = 0x0000;
+    }
+
+    return true;
+}
+
+// JP wiki: Medicated is the one effect that survives entering the Feretory and changing species.
+void delAllEffectsButMedicine(CCharEntity* PChar)
+{
+    auto effects = std::vector<xi::StatusEffect>{};
+    PChar->StatusEffectContainer->ForEachEffect(
+        [&](const CStatusEffect& effect)
+        {
+            if (effect.GetStatusID() != xi::StatusEffect::Medicine && effect.GetDuration() > 0s)
+            {
+                effects.push_back(effect.GetStatusID());
+            }
+        });
+
+    for (const auto effect : effects)
+    {
+        PChar->StatusEffectContainer->DelStatusEffectSilent(effect);
     }
 }
 
@@ -772,13 +835,34 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
             return entry.datSkillId == data.MonsterSkill.SkillId && entry.unlockLevel <= level;
         });
 
-    if (skill == skills.end() || PChar->health.tp < skill->tpCost)
+    if (skill == skills.end())
     {
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
         return;
     }
 
-    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, std::nullopt, skill->tpCost);
+    // JP wiki: Meikyo Shisui makes the next move free.
+    const auto meikyo = PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui);
+    const auto tpCost = [&]() -> uint16
+    {
+        if (meikyo)
+        {
+            return 0;
+        }
+
+        return skill->tpCost;
+    }();
+
+    if (PChar->health.tp < tpCost)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        return;
+    }
+
+    if (PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, std::nullopt, tpCost) && meikyo)
+    {
+        PChar->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::MeikyoShisui);
+    }
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
@@ -801,6 +885,12 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
 
     if (data.Flags0.SpeciesFlag)
     {
+        // Picking the current species again would only strip buffs.
+        if (data.SpeciesIndex == PChar->m_PMonstrosity->Species)
+        {
+            return;
+        }
+
         const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
 
         const auto* species = findSpecies(data.SpeciesIndex);
@@ -831,27 +921,19 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
         if (familyChanged)
         {
-            const auto newMonLvl = PChar->m_PMonstrosity->levels[speciesData.monstrosityId];
-
             applySpeciesState(PChar);
 
             // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
             PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
 
             // Retail keeps instincts equipped across species, unless the new level cannot afford them.
-            if (instinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > newMonLvl + kInstinctPointsOverLevel)
-            {
-                for (auto& slot : PChar->m_PMonstrosity->EquippedInstincts)
-                {
-                    delInstinctMods(PChar, slot);
-                    slot = 0x0000;
-                }
-            }
+            std::ignore = unequipInstinctsOverLimit(PChar);
+        }
 
-            if (!settings::get<bool>("main.MONSTROSITY_DONT_WIPE_BUFFS"))
-            {
-                PChar->StatusEffectContainer->EraseAllStatusEffect();
-            }
+        // JP wiki: Teyrnon's benedictions are lost on a species change.
+        if (!settings::get<bool>("main.MONSTROSITY_DONT_WIPE_BUFFS"))
+        {
+            delAllEffectsButMedicine(PChar);
         }
 
         // Every species, variants included, brings its own jobs and stats.
@@ -897,8 +979,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             return false;
         };
 
-        const auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + kInstinctPointsOverLevel;
-        if (equipped == previousEquipped || instinctsCost(equipped) > maxPoints || containsDuplicates(equipped))
+        if (equipped == previousEquipped || instinctsCost(equipped) > instinctPointLimit(PChar) || containsDuplicates(equipped))
         {
             return;
         }
@@ -1025,6 +1106,28 @@ auto monstrosity::AsMonipulator(const CBattleEntity* PEntity) -> const CCharEnti
     return PChar;
 }
 
+// FFXIclopedia. Pets and Trusts follow their master.
+// TODO: FFXIclopedia says an adventurer's Healing Waltz still reaches a Monipulator.
+auto monstrosity::CanAssist(const CBattleEntity* PInitiator, const CCharEntity* PTarget) -> bool
+{
+    const auto* PSource = [&]() -> const CBattleEntity*
+    {
+        if (PInitiator->PMaster != nullptr)
+        {
+            return PInitiator->PMaster;
+        }
+
+        return PInitiator;
+    }();
+
+    if (PSource->objtype != TYPE_PC)
+    {
+        return true;
+    }
+
+    return (AsMonipulator(PSource) != nullptr) == (PTarget->m_PMonstrosity != nullptr);
+}
+
 auto monstrosity::GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs
 {
     const auto& data = *PChar->m_PMonstrosity;
@@ -1071,6 +1174,24 @@ void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
     }();
 
     charutils::AddPoints(PChar, "infamy", infamy, std::max(cap, charutils::GetPoints(PChar, "infamy")));
+}
+
+// JP wiki: a gladiator earns a tenth of kill exp as prestige in the Belligerency zones.
+void monstrosity::AddPrestige(CCharEntity* PChar, const uint32 exp)
+{
+    if (!charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) ||
+        !std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID()))
+    {
+        return;
+    }
+
+    const auto prestige = static_cast<int32>(exp / 10);
+    if (prestige <= 0)
+    {
+        return;
+    }
+
+    charutils::AddPoints(PChar, "prestige", prestige, std::max(kPrestigeCapFromKills, charutils::GetPoints(PChar, "prestige")));
 }
 
 // Delay per hit. MNK species swing twice a round.
@@ -1206,7 +1327,20 @@ void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
 
     PChar->m_PMonstrosity->Belligerency = flag;
 
+    const auto unequipped = unequipInstinctsOverLimit(PChar);
+
     WriteMonstrosityData(PChar);
+
+    if (unequipped)
+    {
+        sendInstinctChangePackets(PChar);
+    }
+}
+
+// Mon to 10,000 infamy, NM to 20,000, HNM above.
+auto monstrosity::GetRank(CCharEntity* PChar) -> uint8
+{
+    return static_cast<uint8>(std::clamp((charutils::GetPoints(PChar, "infamy") - 1) / 10000, 0, 2));
 }
 
 auto monstrosity::GetExpNEXTLevel(const uint8 level) -> uint32

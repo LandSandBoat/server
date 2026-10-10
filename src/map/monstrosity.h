@@ -113,6 +113,9 @@ void HandleLevelUp(CCharEntity* PChar);
 // The player in MON, or null. m_PMonstrosity is only ever set while the job is MON.
 [[nodiscard]] auto AsMonipulator(const CBattleEntity* PEntity) -> const CCharEntity*;
 
+// Monipulators only help Monipulators, and adventurers only help adventurers.
+[[nodiscard]] auto CanAssist(const CBattleEntity* PInitiator, const CCharEntity* PTarget) -> bool;
+
 struct SpeciesJobs
 {
     xi::Job mainJob;
@@ -126,6 +129,7 @@ struct SpeciesJobs
 [[nodiscard]] auto GetCombatSkill(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
+void               AddPrestige(CCharEntity* PChar, uint32 exp);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
 [[nodiscard]] auto GetBaseDamage(const CCharEntity* PChar, xi::Mod rating) -> uint16;
 [[nodiscard]] auto GetExpNEXTLevel(uint8 level) -> uint32;
@@ -139,5 +143,7 @@ void               AddInfamy(CCharEntity* PChar, uint32 exp);
 void HandleDeathMenu(CCharEntity* PChar, GP_CLI_COMMAND_ACTION_HOMEPOINTMENU type);
 
 void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
+
+[[nodiscard]] auto GetRank(CCharEntity* PChar) -> uint8;
 
 } // namespace monstrosity

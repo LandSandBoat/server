@@ -35,6 +35,7 @@ end
 
 zoneObject.afterZoneIn = function(player)
     xi.chocoboGame.handleMessage(player)
+    xi.monstrosity.applyBelligerencyCap(player)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

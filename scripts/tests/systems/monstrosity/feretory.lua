@@ -173,6 +173,17 @@ describe('Monstrosity Feretory exits', function()
         assert(player:getXPos() ~= 0 or player:getZPos() ~= 0, 'left at the zone origin')
     end)
 
+    it('strips every effect but Medicated on entering', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player:addStatusEffect(xi.effect.PROTECT, { power = 20, duration = 1800, origin = player })
+        player:addStatusEffect(xi.effect.MEDICINE, { power = 1, duration = 3600, origin = player })
+        player:gotoZone(xi.zone.FERETORY)
+
+        assert(not player:hasStatusEffect(xi.effect.PROTECT), 'Protect survived entering the Feretory')
+        player.assert:hasEffect(xi.effect.MEDICINE)
+    end)
+
     it('lists every exit position for a zone', function()
         local exits = player:getMonstrosityExits(xi.zone.EAST_RONFAURE)
 
@@ -265,24 +276,28 @@ describe('Monstrosity Teyrnon shop', function()
     end)
 
     -- A benediction is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
+    -- Durations are from the JP wiki. BG gives Regen and Refresh 30 minutes.
     local benedictions =
     {
-        { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000 },
-        { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400 },
-        { name = 'Regen',        option = 2, effect = xi.effect.REGEN,      cost =   10 },
-        { name = 'Refresh',      option = 3, effect = xi.effect.REFRESH,    cost =   10 },
-        { name = 'Protect',      option = 4, effect = xi.effect.PROTECT,    cost =  100 },
-        { name = 'Shell',        option = 5, effect = xi.effect.SHELL,      cost =  100 },
-        { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100 },
+        { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000, minutes = 60 },
+        { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400, minutes = 60 },
+        { name = 'Regen',        option = 2, effect = xi.effect.REGEN,      cost =   10, minutes = 60 },
+        { name = 'Refresh',      option = 3, effect = xi.effect.REFRESH,    cost =   10, minutes = 60 },
+        { name = 'Protect',      option = 4, effect = xi.effect.PROTECT,    cost =  100, minutes = 30 },
+        { name = 'Shell',        option = 5, effect = xi.effect.SHELL,      cost =  100, minutes = 30 },
+        { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100, minutes = 30 },
     }
 
     for _, benediction in ipairs(benedictions) do
-        it(string.format('casts %s for %d infamy', benediction.name, benediction.cost), function()
+        it(string.format('casts %s for %d infamy and %d minutes', benediction.name, benediction.cost, benediction.minutes), function()
             player:addCurrency('infamy', 5000)
             xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(benediction.option, 8))
 
             player.assert:hasEffect(benediction.effect)
             assert(player:getCurrency('infamy') == 5000 - benediction.cost, string.format('%d infamy left', player:getCurrency('infamy')))
+
+            local duration = player:getStatusEffect(benediction.effect):getDuration()
+            assert(duration == benediction.minutes * 60 * 1000, string.format('%s lasts %d ms', benediction.name, duration))
         end)
     end
 
@@ -375,12 +390,94 @@ describe('Monstrosity Suibhne trades', function()
         assert(not player:hasItem(xi.item.SLIME_FETISH), 'the Slime Fetish was not taken')
     end)
 
+    -- Takes the family's base form without leaving the Feretory.
+    local function takeBaseForm(family, level)
+        local data = player:getMonstrosityData()
+        data.monstrosityId  = family
+        data.species        = family
+        data.levels[family] = level
+        player:setMonstrosityData(data)
+    end
+
+    it('unlocks Eorzean Spriggan for a Spriggan Fetish', function()
+        player:addItem(xi.item.SPRIGGAN_FETISH)
+        player.actions:tradeNpc('Suibhne', { xi.item.SPRIGGAN_FETISH }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN), 'Eorzean Spriggan should be unlocked')
+        assert(not player:hasItem(xi.item.SPRIGGAN_FETISH), 'the Spriggan Fetish was not taken')
+    end)
+
     it('unlocks the New Year Mandragora for an Ake-Ome Spirit', function()
+        takeBaseForm(xi.monstrositySpecies.MANDRAGORA, 1)
         player:addItem(xi.item.AKE_OME_SPIRIT)
         player.actions:tradeNpc('Suibhne', { xi.item.AKE_OME_SPIRIT }, { eventId = 15, finishOption = 2 })
 
         assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.NEW_YEAR_MANDRAGORA), 'the New Year Mandragora should be unlocked')
         assert(not player:hasItem(xi.item.AKE_OME_SPIRIT), 'the Ake-Ome Spirit was not taken')
+    end)
+
+    it('refuses a variant item outside the base form', function()
+        player:addItem(xi.item.AKE_OME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.AKE_OME_SPIRIT })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.NEW_YEAR_MANDRAGORA), 'a Rabbit unlocked the New Year Mandragora')
+        assert(player:hasItem(xi.item.AKE_OME_SPIRIT), 'took the Ake-Ome Spirit from a Rabbit')
+    end)
+
+    it('unlocks the Onyx Beetle for 25 Beetle Spirits', function()
+        takeBaseForm(xi.monstrositySpecies.BEETLE, 1)
+        player:addItem(xi.item.BEETLE_SPIRIT, 25)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.BEETLE_SPIRIT, quantity = 25 } }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.ONYX_BEETLE), 'the Onyx Beetle should be unlocked')
+        assert(not player:hasItem(xi.item.BEETLE_SPIRIT), 'the Beetle Spirits were not taken')
+    end)
+
+    it('refuses too few spirits', function()
+        takeBaseForm(xi.monstrositySpecies.BEETLE, 1)
+        player:addItem(xi.item.BEETLE_SPIRIT, 24)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.BEETLE_SPIRIT, quantity = 24 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.ONYX_BEETLE), '24 spirits unlocked the Onyx Beetle')
+    end)
+
+    it('refuses the Pachypodium below Mandragora level 60', function()
+        takeBaseForm(xi.monstrositySpecies.MANDRAGORA, 59)
+        player:addItem(xi.item.PACHYPODIUM_SPIRIT, 25)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.PACHYPODIUM_SPIRIT, quantity = 25 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.PACHYPODIUM), 'a level 59 Mandragora unlocked the Pachypodium')
+        assert(player:hasItem(xi.item.PACHYPODIUM_SPIRIT), 'took the spirits below level 60')
+    end)
+
+    it('unlocks the Legendary Manticore for 20 scraps of one seal', function()
+        takeBaseForm(xi.monstrositySpecies.MANTICORE, 50)
+        player:addItem(xi.item.SEAL_OF_SEIRYU_SCRAP, 20)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.SEAL_OF_SEIRYU_SCRAP, quantity = 20 } }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.LEGENDARY_MANTICORE), 'the Legendary Manticore should be unlocked')
+    end)
+
+    it('refuses mixed seal scraps for the Legendary Manticore', function()
+        takeBaseForm(xi.monstrositySpecies.MANTICORE, 50)
+        player:addItem(xi.item.SEAL_OF_SEIRYU_SCRAP, 10)
+        player:addItem(xi.item.SEAL_OF_GENBU_SCRAP, 10)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.SEAL_OF_SEIRYU_SCRAP, quantity = 10 }, { itemId = xi.item.SEAL_OF_GENBU_SCRAP, quantity = 10 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.LEGENDARY_MANTICORE), 'mixed scraps unlocked the Legendary Manticore')
+    end)
+
+    it('unlocks the She-Slime from the base Astoltian Slime', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId = xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.species       = xi.monstrositySpecies.ASTOLTIAN_SLIME + 128
+        data.levels[xi.monstrositySpecies.ASTOLTIAN_SLIME] = 1
+        player:setMonstrosityData(data)
+
+        player:addItem(xi.item.SHE_SLIME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.SHE_SLIME_SPIRIT }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.SHE_SLIME), 'the She-Slime should be unlocked')
     end)
 
     it('keeps the item when the player declines', function()
@@ -515,6 +612,77 @@ describe('Monstrosity species change', function()
         changeSpecies(xi.monstrositySpecies.LIZARD)
 
         assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+    end)
+
+    -- Job instincts cost 15 each. A level 11 Mon can spend 21, an NM under Belligerency 41.
+    describe('under rank', function()
+        local warInstinct = 0x300 + xi.monstrosityInstinct.WAR
+        local mnkInstinct = 0x300 + xi.monstrosityInstinct.MNK
+
+        before_each(function()
+            local data = player:getMonstrosityData()
+            data.instincts[21] = bit.bor(data.instincts[21], 0x0C) -- WAR and MNK are bits 10 and 11
+            player:setMonstrosityData(data)
+            player:addCurrency('infamy', 15000)
+        end)
+
+        it('refuses instincts over level plus 10 without Belligerency', function()
+            player.packets:clear()
+            equipInstincts({ warInstinct, mnkInstinct })
+
+            assert(player:getMod(xi.mod.STR) == 0, 'the NM bonus applied without Belligerency')
+        end)
+
+        it('allows level plus 30 as an NM under Belligerency', function()
+            player:setBelligerencyFlag(true)
+            player.packets:clear()
+            equipInstincts({ warInstinct, mnkInstinct })
+
+            assert(equippedCount() == 2, string.format('%s instincts equipped', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 10, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+
+        it('unequips the overflow on withdrawing from Belligerency', function()
+            player:setBelligerencyFlag(true)
+            equipInstincts({ warInstinct, mnkInstinct })
+            player.packets:clear()
+            player:setBelligerencyFlag(false)
+
+            assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 0, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+    end)
+
+    -- JP wiki: Teyrnon's benedictions are lost on a species change. Medicated survives.
+    it('loses benedictions but keeps Medicated on a variant change', function()
+        xi.monstrosity.unlockVariant(player, xi.monstrosityVariant.ONYX_RABBIT)
+        player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
+        player:addStatusEffect(xi.effect.MEDICINE, { power = 1, duration = 3600, origin = player })
+
+        changeSpecies(onyxRabbit)
+
+        assert(not player:hasStatusEffect(xi.effect.REGEN), 'Regen survived the species change')
+        player.assert:hasEffect(xi.effect.MEDICINE)
+    end)
+
+    it('keeps buffs when the current species is picked again', function()
+        player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
+
+        changeSpecies(xi.monstrositySpecies.RABBIT)
+
+        player.assert:hasEffect(xi.effect.REGEN)
+    end)
+
+    -- Coeurl instinct I is id 21, owned from Coeurl level 30.
+    it('applies spell interruption down from Coeurl instinct I', function()
+        local data = player:getMonstrosityData()
+        data.levels[xi.monstrositySpecies.COEURL] = 30
+        player:setMonstrosityData(data)
+        player:gotoZone(xi.zone.FERETORY)
+
+        equipInstincts({ 21 })
+
+        assert(player:getMod(xi.mod.SPELLINTERRUPT) == 15, string.format('SPELLINTERRUPT is %d', player:getMod(xi.mod.SPELLINTERRUPT)))
     end)
 
     it('swaps instinct mods when a slot is replaced or resent', function()

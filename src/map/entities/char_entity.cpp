@@ -1365,6 +1365,11 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return false;
     }
 
+    if (allegiance == PInitiator->allegiance && !monstrosity::CanAssist(PInitiator, this))
+    {
+        return false;
+    }
+
     if (isDead())
     {
         return (targetFlags & TARGET_PLAYER_DEAD) != 0;

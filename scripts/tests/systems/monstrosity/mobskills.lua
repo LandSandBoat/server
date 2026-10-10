@@ -76,6 +76,17 @@ describe('Monstrosity mobskills', function()
         assert(player:getTP() == fireballCost - 1, string.format('TP=%d, expected untouched', player:getTP()))
     end)
 
+    -- JP wiki: Meikyo Shisui makes only the next move free.
+    it('uses one move for free under Meikyo Shisui', function()
+        local usedSkill = helpers.watchSkill(player)
+        player:setTP(0)
+        player:addStatusEffect(xi.effect.MEIKYO_SHISUI, { power = 1, duration = 30, origin = player })
+        player.actions:useMonsterSkill(target, fireballDat)
+
+        assert(usedSkill() == fireballMob, string.format('expected mob skill %d, got %s', fireballMob, tostring(usedSkill())))
+        assert(not player:hasStatusEffect(xi.effect.MEIKYO_SHISUI), 'Meikyo Shisui outlived the free move')
+    end)
+
     -- A mob spends its whole bar, so the interrupt penalty overwrites TP outright.
     -- A Monstrosity move only ever spent its cost, so the untouched remainder has to
     -- survive, plus a quarter of the cost handed back.
@@ -310,12 +321,13 @@ describe('Monstrosity ecosystem', function()
     end)
 end)
 
--- Only Spriggan.C has Jittering Jig and Romp. Every Spriggan has Frenetic Flurry.
+-- Only Spriggan.C has Jittering Jig and Romp. Spriggan and Spriggan.G have Frenetic Flurry.
 describe('Monstrosity Spriggan moves', function()
     local sprigganBase = 255
     local sprigganC    = 256 + xi.monstrosityVariant.SPRIGGAN_C
     local jigDat       = 689
     local rompDat      = 690
+    local flurryDat    = 691
 
     ---@type CClientEntityPair
     local player
@@ -356,19 +368,34 @@ describe('Monstrosity Spriggan moves', function()
         assert(effect:getDuration() == 60000, string.format('duration was %d ms', effect:getDuration()))
     end)
 
-    for _, move in ipairs({
-        { name = 'Romp',            dat = rompDat, mob = 3145, cost = 700  },
-        { name = 'Frenetic Flurry', dat = 691,     mob = 3146, cost = 1500 },
-    }) do
-        it(string.format('%s runs mob skill %d for %d TP', move.name, move.mob, move.cost), function()
-            local usedSkill = helpers.watchSkill(player)
-            player:setTP(3000)
-            player.actions:useMonsterSkill(target, move.dat)
+    it('Romp runs mob skill 3145 for 700 TP', function()
+        local usedSkill = helpers.watchSkill(player)
+        player:setTP(3000)
+        player.actions:useMonsterSkill(target, rompDat)
 
-            assert(usedSkill() == move.mob, string.format('expected mob skill %d, got %s', move.mob, tostring(usedSkill())))
-            assert(player:getTP() == 3000 - move.cost, string.format('TP=%d, expected %d', player:getTP(), 3000 - move.cost))
-        end)
-    end
+        assert(usedSkill() == 3145, string.format('expected mob skill 3145, got %s', tostring(usedSkill())))
+        assert(player:getTP() == 2300, string.format('TP=%d, expected 2300', player:getTP()))
+    end)
+
+    it('Frenetic Flurry runs mob skill 3146 for 1500 TP as a plain Spriggan', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, sprigganBase, 30)
+        target = player.entities:moveTo('Wild_Rabbit')
+
+        local usedSkill = helpers.watchSkill(player)
+        player:setTP(3000)
+        player.actions:useMonsterSkill(target, flurryDat)
+
+        assert(usedSkill() == 3146, string.format('expected mob skill 3146, got %s', tostring(usedSkill())))
+        assert(player:getTP() == 1500, string.format('TP=%d, expected 1500', player:getTP()))
+    end)
+
+    it('refuses Frenetic Flurry as a Spriggan.C', function()
+        local usedSkill = helpers.watchSkill(player)
+        player:setTP(3000)
+        player.actions:useMonsterSkill(target, flurryDat)
+
+        assert(usedSkill() == nil, 'Spriggan.C should not have Frenetic Flurry')
+    end)
 
     it('refuses a move that belongs to another species', function()
         helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, sprigganBase, 30)
