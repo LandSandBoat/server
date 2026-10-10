@@ -17,6 +17,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         CARRIED_OVER_POINTS           = 7019, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7020, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7021, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        ENTERED_BELLIGERENCY_CAP      = 7038, -- You have entered belligerency and your level has been restricted to <number>.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7041, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7086, -- Tallying conquest results...
         FOUND_ITEM_WITH_EASE          = 7335, -- It appears your chocobo found this item with ease.

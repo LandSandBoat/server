@@ -86,6 +86,19 @@ describe('Monstrosity restrictions', function()
 
         assert(player:getMainLvl() == 30, string.format('a level 45 Rabbit is level %d in Buburimu', player:getMainLvl()))
 
+        local announced = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            -- A message with no speaker carries 0x8000 in its number.
+            if
+                pkt.type == 0x02A and
+                (pkt.data[0x1A] + pkt.data[0x1B] * 256) % 0x8000 == zones[xi.zone.BUBURIMU_PENINSULA].text.ENTERED_BELLIGERENCY_CAP
+            then
+                announced = pkt.data[0x08] == 30
+            end
+        end
+
+        assert(announced, 'the level restriction was not announced')
+
         player:gotoZone(xi.zone.WEST_RONFAURE)
         assert(player:getMainLvl() == 45, string.format('the cap followed the Rabbit out, level %d', player:getMainLvl()))
     end)

@@ -36,7 +36,9 @@
 #include "map/entities/char_entity.h"
 #include "map/enums/party_kind.h"
 #include "map/item_container.h"
+#include "map/items.h"
 #include "map/items/item.h"
+#include "map/items/transactions/player_trade.h"
 #include "map/lua/lua_base_entity.h"
 #include "map/packets/c2s/0x01a_action.h"
 #include "map/packets/c2s/0x028_item_dump.h"
@@ -571,7 +573,7 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
         }
 
         uint16 itemId   = 0;
-        uint8  quantity = 1;
+        auto   quantity = uint32{ 1 };
 
         if (pair.second.is<uint16>())
         {
@@ -581,16 +583,25 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
         {
             auto itemInfo = pair.second.as<sol::table>();
             itemId        = itemInfo["itemId"].get_or<uint16>(0);
-            quantity      = itemInfo["quantity"].get_or<uint8>(1);
+            quantity      = itemInfo["quantity"].get_or<uint32>(1);
         }
 
-        auto invSlot = parent_->getItemInvSlot(itemId, quantity);
+        const auto invSlot = [&]() -> Maybe<uint16>
+        {
+            if (itemId == ITEMID::GIL)
+            {
+                return PlayerTradeTransaction::GilSlot;
+            }
+
+            return parent_->getItemInvSlot(itemId, static_cast<uint8>(std::min<uint32>(quantity, 255)));
+        }();
+
         if (!invSlot.has_value())
         {
             TestError("Could not find item with ID {} in inventory with needed quantity.", itemId);
         }
 
-        tradePacket->PropertyItemIndexTbl[idx] = invSlot.value();
+        tradePacket->PropertyItemIndexTbl[idx] = static_cast<uint8>(invSlot.value());
         tradePacket->ItemNumTbl[idx]           = quantity;
 
         idx++;

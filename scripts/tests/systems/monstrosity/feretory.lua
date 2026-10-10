@@ -187,9 +187,10 @@ describe('Monstrosity Feretory exits', function()
     it('lists every exit position for a zone', function()
         local exits = player:getMonstrosityExits(xi.zone.EAST_RONFAURE)
 
-        assert(#exits == 2, string.format('East Ronfaure has %d exits', #exits))
+        assert(#exits == 4, string.format('East Ronfaure has %d exits', #exits))
         assert(exits[1][1] == 120 and exits[1][3] == -530 and exits[1][4] == 192, 'first exit is wrong')
-        assert(#player:getMonstrosityExits(xi.zone.WEST_RONFAURE) == 0, 'West Ronfaure has no exits')
+        assert(#player:getMonstrosityExits(xi.zone.LA_THEINE_PLATEAU) == 0, 'La Theine Plateau has no exits')
+        assert(#player:getMonstrosityExits(xi.zone.BHAFLAU_THICKETS) == 2, 'Bhaflau Thickets should have two exits')
     end)
 end)
 
@@ -205,6 +206,17 @@ describe('Monstrosity Teyrnon shop', function()
 
     before_each(function()
         player = helpers.spawnMonipulator(xi.zone.FERETORY)
+    end)
+
+    -- A fresh Monipulator on retail was offered Cockatrice and Bat on the Birds page, and Crab and Pugil on the Aquans page.
+    it('lists the pages a fresh Monipulator can buy from', function()
+        player.entities:gotoAndTrigger('Teyrnon')
+        player.packets:clear()
+        player.events:update(7, bit.lshift(6, 16))
+        player.events:update(7, bit.lshift(5, 16))
+
+        local replies = helpers.updateReplies(player)
+        assert(replies[1] == 5 and replies[2] == 17, string.format('page masks were %s and %s', tostring(replies[1]), tostring(replies[2])))
     end)
 
     it('sells a family for its infamy', function()
@@ -333,12 +345,29 @@ describe('Monstrosity Aengus', function()
         player = helpers.spawnMonipulator(xi.zone.FERETORY)
     end)
 
-    it('toggles Belligerency', function()
-        xi.monstrosity.aengusOnEventFinish(player, 13, 1)
-        assert(player:getBelligerencyFlag(), 'Belligerency should be on')
+    -- The last 0x036 message Aengus sent.
+    local function lastMessage()
+        local message = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x036 then
+                message = pkt.data[0x0A] + pkt.data[0x0B] * 256
+            end
+        end
 
-        xi.monstrosity.aengusOnEventFinish(player, 13, 1)
+        return message
+    end
+
+    -- Retail answers entering with 7322 and withdrawing with 7382.
+    it('toggles Belligerency', function()
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
+        assert(player:getBelligerencyFlag(), 'Belligerency should be on')
+        assert(lastMessage() == 7322, string.format('entering said %s', tostring(lastMessage())))
+
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
         assert(not player:getBelligerencyFlag(), 'Belligerency should be off')
+        assert(lastMessage() == 7382, string.format('withdrawing said %s', tostring(lastMessage())))
     end)
 end)
 
@@ -384,7 +413,8 @@ describe('Monstrosity Suibhne trades', function()
 
     it('unlocks Astoltian Slime for a Slime Fetish', function()
         player:addItem(xi.item.SLIME_FETISH)
-        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 2 })
+        -- Retail echoes the species code in the high word.
+        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 0xFE0002 })
 
         assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME), 'Astoltian Slime should be unlocked')
         assert(not player:hasItem(xi.item.SLIME_FETISH), 'the Slime Fetish was not taken')
@@ -480,6 +510,45 @@ describe('Monstrosity Suibhne trades', function()
         assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.SHE_SLIME), 'the She-Slime should be unlocked')
     end)
 
+    -- Retail names the item before the quiz: message 7384 with the item and the count.
+    it('asks a Crab for a creel of moat carp', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 1)
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne')
+
+        local request = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x02A and pkt.data[0x1A] + pkt.data[0x1B] * 256 == 7384 then
+                request = { pkt.data[0x08] + pkt.data[0x09] * 256, pkt.data[0x0C] }
+            end
+        end
+
+        assert(request, 'Suibhne named no item')
+        assert(request[1] == xi.item.CREEL_OF_MOAT_CARP and request[2] == 1, string.format('asked for %d x%d', request[1], request[2]))
+    end)
+
+    it('unlocks the Basket-burdened Crab for a creel of moat carp', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 1)
+        player:addItem(xi.item.CREEL_OF_MOAT_CARP)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_MOAT_CARP }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.BASKET_BURDENED_CRAB), 'the Basket-burdened Crab should be unlocked')
+    end)
+
+    it('takes the forest carp creel only from a level 15 Vermilion Crab', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 15)
+        player:addItem(xi.item.CREEL_OF_FOREST_CARP)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_FOREST_CARP })
+        assert(player:hasItem(xi.item.CREEL_OF_FOREST_CARP), 'a base Crab traded the forest carp creel')
+
+        local data = player:getMonstrosityData()
+        data.species = 256 + xi.monstrosityVariant.VERMILLION_CRAB
+        player:setMonstrosityData(data)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_FOREST_CARP }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.VERMILLION_BASKET_BURDENED_CRAB), 'the Vermilion Basket-burdened Crab should be unlocked')
+    end)
+
     it('keeps the item when the player declines', function()
         player:addItem(xi.item.SLIME_FETISH)
         player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 0 })
@@ -494,6 +563,17 @@ describe('Monstrosity Suibhne trades', function()
         player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH })
 
         assert(player:hasItem(xi.item.SLIME_FETISH), 'took a Slime Fetish for a family already unlocked')
+    end)
+end)
+
+-- Grumblix tells the Monstrosity story for 100 gil, replaying the Feretory introduction.
+describe('Monstrosity Goblin Footprint', function()
+    it('replays the introduction for 100 gil', function()
+        local player = helpers.spawnMonipulator(xi.zone.FERETORY)
+        player:addGil(100)
+
+        player.actions:tradeNpc('Goblin_Footprint', { { itemId = xi.item.GIL, quantity = 100 } }, { eventId = 0, updates = { 1 }, finishOption = 1 })
+        player.events:expect({ eventId = 2, updates = { 1 }, finishOption = 1 })
     end)
 end)
 

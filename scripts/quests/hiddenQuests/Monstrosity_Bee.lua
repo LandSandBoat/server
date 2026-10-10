@@ -59,7 +59,7 @@ quest.sections =
                         quest:setVar(player, 'Option', quizInfo)
                     end
 
-                    player:showText(npc, feretoryID.text.SINKING_THY_CLAWS)
+                    xi.monstrosity.suibhneGreet(player, npc)
 
                     return quest:progressEvent(11, 1, quizInfo - 1)
                 end,

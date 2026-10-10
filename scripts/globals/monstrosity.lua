@@ -58,6 +58,7 @@ xi.monstrosity.applyBelligerencyCap = function(player)
         (player:getBelligerencyFlag() or player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS))
     then
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = player })
+        player:messageSpecial(zones[player:getZoneID()].text.ENTERED_BELLIGERENCY_CAP, cap)
     end
 end
 
@@ -246,6 +247,106 @@ local function getMonPageMask(player, monCategory)
     end
 
     return pageMask
+end
+
+-----------------------------------
+-- Suibhne (Feretory NPC)
+-----------------------------------
+
+-- Items Suibhne takes for a family or variant. Event 15 names the unlock as 128 plus a family, or 256 plus a variant.
+-- A variant needs its family's base form, or the listed form, at a minimum level (JP wiki). JP is silent on the
+-- Spriggan variants, so they follow suit.
+xi.monstrosity.suibhneUnlocks =
+{
+    { items = { xi.item.SLIME_FETISH },           count = 1,  species = xi.monstrositySpecies.ASTOLTIAN_SLIME  },
+    { items = { xi.item.SPRIGGAN_FETISH },        count = 1,  species = xi.monstrositySpecies.EORZEAN_SPRIGGAN },
+    { items = { xi.item.AKE_OME_SPIRIT },         count = 1,  variant = xi.monstrosityVariant.NEW_YEAR_MANDRAGORA,   family = xi.monstrositySpecies.MANDRAGORA,       level = 1  },
+    { items = { xi.item.PACHYPODIUM_SPIRIT },     count = 25, variant = xi.monstrosityVariant.PACHYPODIUM,           family = xi.monstrositySpecies.MANDRAGORA,       level = 60 },
+    { items = { xi.item.BEETLE_SPIRIT },          count = 25, variant = xi.monstrosityVariant.ONYX_BEETLE,           family = xi.monstrositySpecies.BEETLE,           level = 1  },
+    { items = { xi.item.ANTLION_SPIRIT },         count = 25, variant = xi.monstrosityVariant.ONYX_ANTLION,          family = xi.monstrositySpecies.ANTLION,          level = 30 },
+    { items = { xi.item.ADAMANTOISE_EGG },        count = 1,  variant = xi.monstrosityVariant.PYGMY_ADAMANTOISE,     family = xi.monstrositySpecies.ADAMANTOISE,      level = 1  },
+    { items = { xi.item.SEAL_OF_GENBU_SCRAP },    count = 5,  variant = xi.monstrosityVariant.LEGENDARY_ADAMANTOISE, family = xi.monstrositySpecies.ADAMANTOISE,      level = 50 },
+    { items = { xi.item.SEAL_OF_BYAKKO_SCRAP },   count = 5,  variant = xi.monstrosityVariant.LEGENDARY_TIGER,       family = xi.monstrositySpecies.TIGER,            level = 50 },
+    { items = { xi.item.SEAL_OF_SUZAKU_SCRAP },   count = 5,  variant = xi.monstrosityVariant.LEGENDARY_ROC,         family = xi.monstrositySpecies.ROC,              level = 50 },
+    { items = { xi.item.CREEL_OF_MOAT_CARP },     count = 1,  variant = xi.monstrosityVariant.BASKET_BURDENED_CRAB,  family = xi.monstrositySpecies.CRAB,             level = 1  },
+    {
+        items   = { xi.item.CREEL_OF_FOREST_CARP },
+        count   = 1,
+        variant = xi.monstrosityVariant.VERMILLION_BASKET_BURDENED_CRAB,
+        family  = xi.monstrositySpecies.CRAB,
+        form    = 256 + xi.monstrosityVariant.VERMILLION_CRAB,
+        level   = 15,
+    },
+    { items = { xi.item.SHE_SLIME_SPIRIT },       count = 1,  variant = xi.monstrosityVariant.SHE_SLIME,             family = xi.monstrositySpecies.ASTOLTIAN_SLIME,  level = 1  },
+    { items = { xi.item.METAL_SLIME_SPIRIT },     count = 1,  variant = xi.monstrosityVariant.METAL_SLIME,           family = xi.monstrositySpecies.ASTOLTIAN_SLIME,  level = 1  },
+    { items = { xi.item.RED_SPRIGGAN_SPIRIT },    count = 1,  variant = xi.monstrosityVariant.SPRIGGAN_C,            family = xi.monstrositySpecies.EORZEAN_SPRIGGAN, level = 1  },
+    { items = { xi.item.PURPLE_SPRIGGAN_SPIRIT }, count = 1,  variant = xi.monstrosityVariant.SPRIGGAN_G,            family = xi.monstrositySpecies.EORZEAN_SPRIGGAN, level = 1  },
+
+    -- Any one of the four seals, all of a kind.
+    {
+        items   = { xi.item.SEAL_OF_GENBU_SCRAP, xi.item.SEAL_OF_SUZAKU_SCRAP, xi.item.SEAL_OF_SEIRYU_SCRAP, xi.item.SEAL_OF_BYAKKO_SCRAP },
+        count   = 20,
+        variant = xi.monstrosityVariant.LEGENDARY_MANTICORE,
+        family  = xi.monstrositySpecies.MANTICORE,
+        level   = 50,
+    },
+}
+
+local function isSuibhneUnlocked(player, unlock)
+    if unlock.species then
+        return xi.monstrosity.hasUnlockedSpecies(player, unlock.species)
+    end
+
+    return xi.monstrosity.hasUnlockedVariant(player, unlock.variant)
+end
+
+-- Families past 125 keep their base species code 128 higher.
+local function isFormAtLevel(player, unlock)
+    if not unlock.family then
+        return true
+    end
+
+    local data     = player:getMonstrosityData()
+    local baseCode = unlock.family > 125 and unlock.family + 128 or unlock.family
+
+    return data.species == (unlock.form or baseCode) and data.levels[unlock.family] >= unlock.level
+end
+
+xi.monstrosity.canSuibhneUnlock = function(player, unlock)
+    return not isSuibhneUnlocked(player, unlock) and isFormAtLevel(player, unlock)
+end
+
+-- JP wiki: in a form that qualifies, Suibhne names one item at random. Any qualifying item is still accepted.
+xi.monstrosity.suibhneGreet = function(player, npc)
+    local requests = {}
+    for _, unlock in ipairs(xi.monstrosity.suibhneUnlocks) do
+        if unlock.family and xi.monstrosity.canSuibhneUnlock(player, unlock) then
+            table.insert(requests, unlock)
+        end
+    end
+
+    local ID = zones[xi.zone.FERETORY]
+    if #requests == 0 then
+        player:showText(npc, ID.text.SINKING_THY_CLAWS)
+        return
+    end
+
+    local request = utils.randomEntry(requests)
+    player:showText(npc, ID.text.BRING_ME_ITEM, utils.randomEntry(request.items), request.count)
+end
+
+-- The client lists the starters as rabbit, lizard, mandragora.
+local starterCutsceneIndex =
+{
+    [xi.monstrositySpecies.RABBIT    ] = 1,
+    [xi.monstrositySpecies.LIZARD    ] = 2,
+    [xi.monstrositySpecies.MANDRAGORA] = 3,
+}
+
+-- The Feretory introduction (event 2) draws the player's race and face, then the starter.
+xi.monstrosity.updateIntroEvent = function(player)
+    local starter = starterCutsceneIndex[player:getMonstrosityData().monstrosityId] or 0
+    player:updateEvent(player:getRace(), player:getFace(), starter)
 end
 
 -----------------------------------
@@ -438,7 +539,7 @@ end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
     local zoneSelected = bit.band(bit.rshift(option, 4), 0xFFF)
-    player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected] or 0, 0, 0, 0, 1, 0, 0, 0)
+    player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected] or 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
@@ -534,8 +635,11 @@ end
 
 xi.monstrosity.aengusOnEventFinish = function(player, csid, option, npc)
     if csid == 13 and option == 1 then
-        -- Toggle
-        player:setBelligerencyFlag(not player:getBelligerencyFlag())
+        local entering = not player:getBelligerencyFlag()
+        player:setBelligerencyFlag(entering)
+
+        local ID = zones[xi.zone.FERETORY]
+        player:messageText(npc, entering and ID.text.SOUL_PINETH_FOR_MORE or ID.text.SAFE_FROM_MONIPULATORS, true, 2)
     end
 end
 
@@ -548,7 +652,7 @@ xi.monstrosity.teyrnonOnTrigger = function(player, npc)
         return
     end
 
-    player:showText(npc, zones[xi.zone.FERETORY].text.OUT_WITH_THY_BUSINESS)
+    player:messageText(npc, zones[xi.zone.FERETORY].text.OUT_WITH_THY_BUSINESS, true, 2)
     player:startEvent(7, player:getCurrency('infamy'))
 end
 
@@ -601,7 +705,8 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
             xi.monstrosity.unlockVariant(player, monData.monVariant)
         end
 
-        player:messageSpecial(zones[xi.zone.FERETORY].text.MAY_POSSESS_BEASTS + 3 * selectedCategory, 0, selectedMon)
+        -- Retail sends the menu page as the first param, though the text only reads the slot.
+        player:messageSpecial(zones[xi.zone.FERETORY].text.MAY_POSSESS_BEASTS + 3 * selectedCategory, selectedCategory + 1, selectedMon)
 
     elseif optionType == 2 then
         -- Instincts: Costs are hardcoded, and adjusted based on having completed certain

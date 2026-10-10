@@ -160,12 +160,25 @@ struct FeretoryExit
 
 // Where leaving the Feretory drops a Monipulator, picked at random per zone. x, y, z, rot.
 constexpr auto kFeretoryExits = std::array{
+    FeretoryExit{ xi::ZoneId::BhaflauThickets, { 308.0f, -19.5f, 378.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::BhaflauThickets, { 375.0f, -12.25f, -47.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::BuburimuPeninsula, { 521.0f, 0.0f, 1.0f, 93.0f } },
+    FeretoryExit{ xi::ZoneId::Davoi, { -286.0f, 4.0f, -200.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::EastRonfaure, { 120.0f, 0.5f, -530.0f, 192.0f } },
     FeretoryExit{ xi::ZoneId::EastRonfaure, { 115.0f, -59.684f, 247.0f, 16.0f } },
+    FeretoryExit{ xi::ZoneId::EastRonfaure, { 515.0f, -30.0f, -40.0f, 96.0f } },
+    FeretoryExit{ xi::ZoneId::EastRonfaure, { 760.0f, -60.0f, 400.0f, 128.0f } },
+    FeretoryExit{ xi::ZoneId::PashhowMarshlands, { -483.0f, 25.0f, -318.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::QufimIsland, { -2.0f, -20.001f, 324.0f, 64.0f } },
     FeretoryExit{ xi::ZoneId::QufimIsland, { 161.0f, -20.0f, 37.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::QufimIsland, { -258.0f, -19.1f, 402.0f, 64.0f } },
     FeretoryExit{ xi::ZoneId::SouthGustaberg, { -115.0f, -0.136f, -165.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::SouthGustaberg, { -530.0f, 39.3f, -405.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::ValkurmDunes, { 838.0f, 0.0f, -162.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::ValkurmDunes, { -146.0f, -7.61f, 126.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::WestRonfaure, { -600.0f, -60.0f, 400.0f, 32.0f } },
+    FeretoryExit{ xi::ZoneId::WestRonfaure, { -120.0f, -20.0f, -120.0f, 112.0f } },
+    FeretoryExit{ xi::ZoneId::WestSarutabaruta, { -320.0f, -16.0f, 440.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::WesternAltepaDesert, { 685.548f, -1.744f, -50.395f, 128.0f } },
 };
 

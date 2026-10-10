@@ -93,6 +93,20 @@ function helpers.currentExp(player)
     return exp
 end
 
+-- The first param of every event update the server sent since the last clear.
+---@param player CClientEntityPair
+---@return integer[]
+function helpers.updateReplies(player)
+    local replies = {}
+    for _, pkt in pairs(player.packets:getIncoming()) do
+        if pkt.type == 0x05C then
+            table.insert(replies, pkt.data[0x04] + pkt.data[0x05] * 0x100 + pkt.data[0x06] * 0x10000 + pkt.data[0x07] * 0x1000000)
+        end
+    end
+
+    return replies
+end
+
 -- Reports the zone loaded, which is when the server sends the Monstrosity data and spell list.
 ---@param player CClientEntityPair
 function helpers.sendGameOk(player)
