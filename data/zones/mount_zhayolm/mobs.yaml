@@ -373,11 +373,13 @@ templates:
     id:            916
     species:       odin
     type:          [notorious]
+    roam:          [scripted]
     spell_list_id: 5
     skill_list_id: 42
     attributes:
       combat:
         skill: sword
+        delay: 220
       jobs: [drk, bst]
       render:
         look:
@@ -386,6 +388,8 @@ templates:
         entity_flags: 131
         model_size:     1
         hitbox:        34
+      mob_mods:
+        dont_roam_home: 1
       spawn:
         type: [scripted]
 
@@ -3374,31 +3378,31 @@ spawns:
   17027459:
     template: Dark_Rider
     at:       [-280.300, -14.800, 229.567, 84]
-    level:    [95, 95]
+    level:    [99, 99]
   17027460:
     template: Dark_Bugler
     at:       [-570.700, -14.630, 267.773, 180]
-    level:    [76, 76]
+    level:    [79, 81]
   17027461:
     template: Dark_Bugler
     at:       [-481.900, -14.440, 281.033, 240]
-    level:    [76, 76]
+    level:    [79, 81]
   17027462:
     template: Dark_Bugler
     at:       [-449.700, -14.510, 377.674, 233]
-    level:    [76, 76]
+    level:    [79, 81]
   17027463:
     template: Dark_Esquire
     at:       [-396.000, -14.440, 363.906, 117]
-    level:    [76, 76]
+    level:    [79, 81]
   17027464:
     template: Dark_Esquire
     at:       [-311.300, -14.340, 294.959]
-    level:    [76, 76]
+    level:    [79, 81]
   17027465:
     template: Dark_Esquire
     at:       [-290.400, -14.600, 240.197, 72]
-    level:    [76, 76]
+    level:    [79, 81]
   17027466:
     template: Energetic_Eruca
     region:   region_217

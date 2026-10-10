@@ -10,7 +10,7 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.randomInt(12, 36) * 3600)
 
     xi.helm.initZone(zone, xi.helmType.MINING)
-    xi.darkRider.addHoofprints(zone)
+    xi.darkRider.onZoneInitialize()
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -45,10 +45,6 @@ end
 
 zoneObject.onGameHour = function(zone)
     xi.darkRider.onGameHour(zone)
-
-    if VanadielHour() == 0 then
-        xi.darkRider.addHoofprints(zone)
-    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

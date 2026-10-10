@@ -399,11 +399,13 @@ templates:
     id:            916
     species:       odin
     type:          [notorious]
+    roam:          [scripted]
     spell_list_id: 5
     skill_list_id: 42
     attributes:
       combat:
         skill: sword
+        delay: 220
       jobs: [drk, bst]
       render:
         look:
@@ -412,6 +414,8 @@ templates:
         entity_flags: 131
         model_size:     1
         hitbox:        34
+      mob_mods:
+        dont_roam_home: 1
       spawn:
         type: [scripted]
 
@@ -3816,31 +3820,31 @@ spawns:
   17101136:
     template: Dark_Rider
     at:       [322.703, -8.500, -440.885, 74]
-    level:    [95, 95]
+    level:    [99, 99]
   17101137:
     template: Dark_Bugler
     at:       [499.695, -24.050, 2.663, 106]
-    level:    [76, 76]
+    level:    [79, 81]
   17101138:
     template: Dark_Bugler
     at:       [472.333, -26.335, -12.995, 216]
-    level:    [76, 76]
+    level:    [79, 81]
   17101139:
     template: Dark_Bugler
     at:       [415.727, -20.088, -126.116, 115]
-    level:    [76, 76]
+    level:    [79, 81]
   17101140:
     template: Dark_Esquire
     at:       [390.531, -9.046, -217.579, 44]
-    level:    [76, 76]
+    level:    [79, 81]
   17101141:
     template: Dark_Esquire
     at:       [484.556, -8.619, -275.598, 215]
-    level:    [76, 76]
+    level:    [79, 81]
   17101142:
     template: Dark_Esquire
     at:       [332.531, -15.760, -404.727, 84]
-    level:    [76, 76]
+    level:    [79, 81]
   17101143:
     template: Peallaidh
     region:   s_73
