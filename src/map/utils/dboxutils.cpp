@@ -61,6 +61,8 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
         return;
     }
 
+    BoxNo = OpenBoxNo(PChar);
+
     const auto rset = db::preparedStmt("SELECT itemid, itemsubid, slot, quantity, sent, extra, sender, charname FROM delivery_box WHERE charid = ? AND box = ? "
                                        "AND slot < 8 ORDER BY slot",
                                        PChar->id,
@@ -651,6 +653,8 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
+    BoxNo = OpenBoxNo(PChar);
+
     if (!PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
         CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
@@ -842,4 +846,19 @@ auto dboxutils::IsRecvBoxOpen(const CCharEntity* PChar) -> bool
 auto dboxutils::IsAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool
 {
     return IsSendBoxOpen(PChar) || IsRecvBoxOpen(PChar);
+}
+
+auto dboxutils::OpenBoxNo(const CCharEntity* PChar) -> GP_CLI_COMMAND_PBX_BOXNO
+{
+    if (IsSendBoxOpen(PChar))
+    {
+        return GP_CLI_COMMAND_PBX_BOXNO::Outgoing;
+    }
+
+    if (IsRecvBoxOpen(PChar))
+    {
+        return GP_CLI_COMMAND_PBX_BOXNO::Incoming;
+    }
+
+    return GP_CLI_COMMAND_PBX_BOXNO::None;
 }

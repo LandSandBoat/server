@@ -52,5 +52,6 @@ void OpenRecvBox(CCharEntity* PChar);
 auto IsSendBoxOpen(const CCharEntity* PChar) -> bool;
 auto IsRecvBoxOpen(const CCharEntity* PChar) -> bool;
 auto IsAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool;
+auto OpenBoxNo(const CCharEntity* PChar) -> GP_CLI_COMMAND_PBX_BOXNO;
 
 }; // namespace dboxutils
