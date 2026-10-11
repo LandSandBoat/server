@@ -97,6 +97,10 @@ xi.combat.ranged.accuracyDistancePenalty = function(attacker, defender)
         return 0
     end
 
+    if attacker:hasStatusEffect(xi.effect.SHARPSHOT) then
+        return 0
+    end
+
     local sweetSpot = xi.combat.ranged.getSweetSpotByAttacker(attacker)
     local sweetSpotEnd = sweetSpot[2]
     local distance = attacker:checkDistance(defender)
