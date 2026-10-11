@@ -5337,6 +5337,7 @@ monstrosity:
         int: b
         mnd: f
         chr: a
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
     eorzean_spriggan:
       family:       eorzean_spriggan
       species_code: 255
@@ -5346,12 +5347,21 @@ monstrosity:
       size:         0
       look:         0x0B42
       ecosystem:    unclassified
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
       tp_skills:
         - skill:        frenetic_flurry
           dat_skill_id: 691
           mob_skill_id: 3146
           unlock_level: 1
           tp_cost:      1500
+          ready_time:   2200
           enabled:      true
     onyx_rabbit:
       family:       rabbit
@@ -9685,6 +9695,8 @@ monstrosity:
           tp_cost:      1000
           ready_time:   400
           enabled:      true
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
+    # Retail defence is five sixths of the plain Spriggan's.
     eorzean_spriggan_c:
       family:       eorzean_spriggan
       species_code: 510
@@ -9694,19 +9706,32 @@ monstrosity:
       size:         0
       look:         0x0B5D
       ecosystem:    unclassified
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
+      mods:
+        defp: -17
       tp_skills:
         - skill:        jittering_jig
           dat_skill_id: 689
           mob_skill_id: 3144
           unlock_level: 1
           tp_cost:      700
+          ready_time:   2900
           enabled:      true
         - skill:        romp
           dat_skill_id: 690
           mob_skill_id: 3145
           unlock_level: 10
           tp_cost:      700
+          ready_time:   2500
           enabled:      true
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
     eorzean_spriggan_g:
       family:       eorzean_spriggan
       species_code: 511
@@ -9716,10 +9741,20 @@ monstrosity:
       size:         0
       look:         0x0B5E
       ecosystem:    unclassified
+      hp_scale:     210
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
       tp_skills:
         - skill:        frenetic_flurry
           dat_skill_id: 691
           mob_skill_id: 3146
           unlock_level: 1
           tp_cost:      1500
+          ready_time:   2200
           enabled:      true

@@ -776,7 +776,9 @@ auto MonipulatorBaseHP(const xi::Job mjob, const xi::Job sjob, const uint8 level
 {
     const auto mJobGrade = grade::GetJobGrade(mjob, 0);
     const auto sJobGrade = grade::GetJobGrade(sjob, 0);
-    const auto mainHP    = CalculateBaseMobHP(level, grade::GetMobHPScale(mJobGrade, 0), grade::GetMobHPScale(mJobGrade, 1), grade::GetMobHPScale(mJobGrade, 2));
+    // Retail Spriggans weight the level 1 base two to one between the main and sub job.
+    const auto baseHP = static_cast<uint8>((2 * grade::GetMobHPScale(mJobGrade, 0) + grade::GetMobHPScale(sJobGrade, 0)) / 3);
+    const auto mainHP = CalculateBaseMobHP(level, baseHP, grade::GetMobHPScale(mJobGrade, 1), grade::GetMobHPScale(mJobGrade, 2));
 
     return mainHP + SubjobHPAtLevel(level, grade::GetMobHPScale(sJobGrade, 1), grade::GetMobHPScale(sJobGrade, 2));
 }

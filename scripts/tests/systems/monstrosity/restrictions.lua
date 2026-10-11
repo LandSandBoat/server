@@ -729,3 +729,62 @@ describe('Monstrosity slimes', function()
         assert(used == 3127, string.format('expected mob skill 3127, got %s', tostring(used)))
     end)
 end)
+
+-- Retail Spriggan, Spriggan.C and Spriggan.G from a levels 1-10 capture, below the first HP merit step.
+describe('Monstrosity Spriggans', function()
+    ---@type CClientEntityPair
+    local player
+
+    local stats = { xi.mod.STR, xi.mod.DEX, xi.mod.VIT, xi.mod.AGI, xi.mod.INT, xi.mod.MND, xi.mod.CHR }
+
+    -- Spriggan.C shares the plain Spriggan's values but for five sixths of its defence.
+    local plain =
+    {
+        [1] = { hp = 72,  mp = 47,  stats = {  9,  8,  7,  7,  6,  6,  6 } },
+        [5] = { hp = 249, mp = 117, stats = { 13, 10, 10,  9,  8,  9,  9 } },
+        [9] = { hp = 417, mp = 187, stats = { 17, 13, 14, 12, 11, 12, 11 } },
+    }
+
+    local spriggans =
+    {
+        { name = 'Spriggan',   species = 128 + xi.monstrositySpecies.EORZEAN_SPRIGGAN, defence = 46, levels = plain },
+        { name = 'Spriggan.C', species = 256 + xi.monstrosityVariant.SPRIGGAN_C,       defence = 39, levels = plain },
+        {
+            name    = 'Spriggan.G',
+            species = 256 + xi.monstrosityVariant.SPRIGGAN_G,
+            defence = 44,
+            levels  =
+            {
+                [1] = { hp = 56,  mp = 94,  stats = {  7,  8,  6,  7,  8,  7,  6 } },
+                [5] = { hp = 195, mp = 234, stats = { 10, 10,  9,  9, 11, 10,  9 } },
+                [9] = { hp = 325, mp = 374, stats = { 13, 13, 12, 12, 15, 13, 11 } },
+            },
+        },
+    }
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+    end)
+
+    for _, spriggan in ipairs(spriggans) do
+        it(string.format('gives a %s its retail HP, MP and stats', spriggan.name), function()
+            for level, retail in pairs(spriggan.levels) do
+                helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, spriggan.species, level)
+
+                assert(player:getMaxHP() == retail.hp, string.format('level %d has %d HP, retail %d', level, player:getMaxHP(), retail.hp))
+                assert(player:getMaxMP() == retail.mp, string.format('level %d has %d MP, retail %d', level, player:getMaxMP(), retail.mp))
+                for idx, stat in ipairs(stats) do
+                    local value = player:getStat(stat)
+                    assert(math.abs(value - retail.stats[idx]) <= 2, string.format('level %d stat %d is %d, retail %d', level, idx, value, retail.stats[idx]))
+                end
+            end
+        end)
+
+        it(string.format('gives a level 5 %s close to its retail defence', spriggan.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, spriggan.species, 5)
+
+            local defence = player:getStat(xi.mod.DEF)
+            assert(math.abs(defence - spriggan.defence) <= 3, string.format('defence %d, retail %d', defence, spriggan.defence))
+        end)
+    end
+end)
