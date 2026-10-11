@@ -83,8 +83,8 @@ xi.settings.main =
     -- Moblin Maze Mongers
     ENABLE_MMM = 0,
 
-    -- Monstrosity (Heavily in development, use at your own risk!)
-    ENABLE_MONSTROSITY = 0,
+    -- Monstrosity
+    ENABLE_MONSTROSITY = 1,
 
     -- TREASURE CASKETS
     -- Retail droprate = 0.1 (10%) with no other effects active
