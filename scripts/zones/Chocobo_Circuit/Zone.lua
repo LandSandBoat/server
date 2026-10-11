@@ -28,6 +28,10 @@ zoneObject.onZoneOut = function(player)
     xi.chocoboRacing.onPadsZoneOut(player)
 end
 
+zoneObject.onZoneTick = function(zone)
+    xi.chocoboRacing.onZoneTick(zone)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     xi.chocoboRacing.onPadTriggerAreaEnter(player, triggerArea)
 end

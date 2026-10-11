@@ -307,6 +307,9 @@ xi.settings.main =
     ENABLE_CHOCOBO_RAISING = true,  -- true/false. Enable Chocobo Raising features.
     DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
 
+    -- CHOCOBO RACING
+    ENABLE_CHOCOBO_RACING = true, -- true/false. Enable Chocobo Racing features.
+
     -- SYNERGY (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
     ENABLE_SYNERGY = false, -- true/false. Enable Synergy features.
 

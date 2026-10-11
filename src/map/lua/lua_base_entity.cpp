@@ -491,11 +491,12 @@ void CLuaBaseEntity::messageBasic(uint16 messageID, const sol::object& p0, const
 /************************************************************************
  *  Function: messageName()
  *  Purpose : Message displayed with an entity's name in it
- *  Example : target:messageName(messageID, entity, param0, param1, param2, param3, chatType, sender);
+ *  Example : target:messageName(messageID, entity, param0, param1, param2, param3, chatType, sender, showSender);
  *  Notes   : Used in Doom countdown messages, as an example
+ *          : showSender defaults to true when a sender is given
  ************************************************************************/
 
-void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& chat, const sol::object& sender)
+void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, const sol::object& p0, const sol::object& p1, const sol::object& p2, const sol::object& p3, const sol::object& chat, const sol::object& sender, const sol::object& showSender)
 {
     CLuaBaseEntity* PLuaEntity  = (entity != sol::lua_nil) ? entity.as<CLuaBaseEntity*>() : nullptr;
     CBaseEntity*    PNameEntity = PLuaEntity ? PLuaEntity->m_PBaseEntity : nullptr;
@@ -520,7 +521,13 @@ void CLuaBaseEntity::messageName(uint16 messageID, const sol::object& entity, co
         }();
         CBaseEntity* PSender = PLuaSender ? PLuaSender->m_PBaseEntity : PChar;
 
-        PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PSender, messageID, PNameEntity, param0, param1, param2, param3, chatType, PLuaSender != nullptr);
+        bool showSpeaker = PLuaSender != nullptr;
+        if (showSender != sol::lua_nil)
+        {
+            showSpeaker = showSender.as<bool>();
+        }
+
+        PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PSender, messageID, PNameEntity, param0, param1, param2, param3, chatType, showSpeaker);
     }
     else if (m_PBaseEntity->loc.zone)
     {
