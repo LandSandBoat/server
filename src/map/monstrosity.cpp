@@ -639,6 +639,68 @@ void sendSpeciesChangePackets(CCharEntity* PChar, const bool familyChanged)
     PChar->updatemask |= UPDATE_ALL_CHAR;
 }
 
+// Returns whether the family changed, or nothing when the species cannot be taken.
+auto changeSpecies(CCharEntity* PChar, const uint16 speciesCode) -> Maybe<bool>
+{
+    // Picking the current species again would only strip buffs.
+    if (speciesCode == PChar->m_PMonstrosity->Species)
+    {
+        return std::nullopt;
+    }
+
+    const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
+
+    const auto* species = findSpecies(speciesCode);
+    if (species == nullptr)
+    {
+        return std::nullopt;
+    }
+
+    if (PChar->m_PMonstrosity->levels[species->monstrosityId] == 0)
+    {
+        return std::nullopt;
+    }
+
+    if (speciesCode >= kVariantSpeciesBase && !isVariantUnlocked(*PChar->m_PMonstrosity, speciesCode - kVariantSpeciesBase))
+    {
+        return std::nullopt;
+    }
+
+    delSpeciesMods(PChar);
+    PChar->m_PMonstrosity->Species       = speciesCode;
+    PChar->m_PMonstrosity->StanceSpecies = 0;
+    addSpeciesMods(PChar);
+
+    PChar->m_PMonstrosity->MonstrosityId = species->monstrosityId;
+    PChar->m_PMonstrosity->MainJob       = species->mjob;
+    PChar->m_PMonstrosity->SubJob        = species->sjob;
+    PChar->m_PMonstrosity->Size          = species->size;
+
+    const auto familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
+    if (familyChanged)
+    {
+        applySpeciesState(PChar);
+
+        // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
+        PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
+
+        // Retail keeps instincts equipped across species, unless the new level cannot afford them.
+        std::ignore = unequipInstinctsOverLimit(PChar);
+    }
+
+    // JP wiki: Teyrnon's buffs are lost on a species change.
+    delAllEffectsButMedicine(PChar);
+
+    // Every species, variants included, brings its own jobs and stats.
+    charutils::BuildingCharSkillsTable(PChar);
+    charutils::CalculateStats(PChar);
+    charutils::BuildingCharAbilityTable(PChar);
+    charutils::CheckUnarmedWeapon(PChar);
+    PChar->UpdateHealth();
+
+    return familyChanged;
+}
+
 void sendInstinctChangePackets(CCharEntity* PChar)
 {
     refreshDerivedState(PChar);
@@ -1081,6 +1143,18 @@ void monstrosity::HandleMobSkillFired(CCharEntity* PChar, const uint16 mobSkillI
     PChar->updatemask |= UPDATE_LOOK;
 }
 
+void monstrosity::ChangeSpecies(CCharEntity* PChar, const uint16 speciesCode)
+{
+    const auto familyChanged = changeSpecies(PChar, speciesCode);
+    if (!familyChanged)
+    {
+        return;
+    }
+
+    WriteMonstrosityData(PChar);
+    sendSpeciesChangePackets(PChar, *familyChanged);
+}
+
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
 {
     if (!data.Flags0.SpeciesFlag && !data.Flags0.InstinctFlag && !data.Flags0.Descriptor1Flag && !data.Flags0.Descriptor2Flag)
@@ -1096,67 +1170,13 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
 
     PChar->m_PMonstrosity->LastEquipChange = now;
 
-    auto familyChanged = false;
-
     if (data.Flags0.SpeciesFlag)
     {
-        // Picking the current species again would only strip buffs.
-        if (data.SpeciesIndex == PChar->m_PMonstrosity->Species)
-        {
-            return;
-        }
-
-        const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
-
-        const auto* species = findSpecies(data.SpeciesIndex);
-        if (species == nullptr)
-        {
-            return;
-        }
-
-        if (PChar->m_PMonstrosity->levels[species->monstrosityId] == 0)
-        {
-            return;
-        }
-
-        if (data.SpeciesIndex >= kVariantSpeciesBase && !isVariantUnlocked(*PChar->m_PMonstrosity, data.SpeciesIndex - kVariantSpeciesBase))
-        {
-            return;
-        }
-
-        delSpeciesMods(PChar);
-        PChar->m_PMonstrosity->Species       = data.SpeciesIndex;
-        PChar->m_PMonstrosity->StanceSpecies = 0;
-        addSpeciesMods(PChar);
-
-        PChar->m_PMonstrosity->MonstrosityId = species->monstrosityId;
-        PChar->m_PMonstrosity->MainJob       = species->mjob;
-        PChar->m_PMonstrosity->SubJob        = species->sjob;
-        PChar->m_PMonstrosity->Size          = species->size;
-
-        familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
-        if (familyChanged)
-        {
-            applySpeciesState(PChar);
-
-            // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
-            PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
-
-            // Retail keeps instincts equipped across species, unless the new level cannot afford them.
-            std::ignore = unequipInstinctsOverLimit(PChar);
-        }
-
-        // JP wiki: Teyrnon's buffs are lost on a species change.
-        delAllEffectsButMedicine(PChar);
-
-        // Every species, variants included, brings its own jobs and stats.
-        charutils::BuildingCharSkillsTable(PChar);
-        charutils::CalculateStats(PChar);
-        charutils::BuildingCharAbilityTable(PChar);
-        charutils::CheckUnarmedWeapon(PChar);
-        PChar->UpdateHealth();
+        ChangeSpecies(PChar, data.SpeciesIndex);
+        return;
     }
-    else if (data.Flags0.InstinctFlag)
+
+    if (data.Flags0.InstinctFlag)
     {
         const auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
         auto       equipped         = previousEquipped;
@@ -1218,15 +1238,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
     }
 
     WriteMonstrosityData(PChar);
-
-    if (data.Flags0.SpeciesFlag)
-    {
-        sendSpeciesChangePackets(PChar, familyChanged);
-    }
-    else
-    {
-        sendInstinctChangePackets(PChar);
-    }
+    sendInstinctChangePackets(PChar);
 }
 
 // Stats sit one under the mob formula, the closest fit to retail.

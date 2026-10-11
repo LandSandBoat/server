@@ -501,6 +501,22 @@ describe('Monstrosity Suibhne trades', function()
 
         assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME), 'Astoltian Slime should be unlocked')
         assert(not player:hasItem(xi.item.SLIME_FETISH), 'the Slime Fetish was not taken')
+        assert(player:getMonstrosityData().species == xi.monstrositySpecies.RABBIT, 'a new family changed the form')
+    end)
+
+    -- Retail switches into a variant as soon as Suibhne unlocks it.
+    it('switches to the Metal Slime on unlocking it', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId                                = xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.species                                      = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.levels[xi.monstrositySpecies.ASTOLTIAN_SLIME] = 1
+        player:setMonstrosityData(data)
+
+        player:addItem(xi.item.METAL_SLIME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.METAL_SLIME_SPIRIT }, { eventId = 15, finishOption = 0x1FD0002 })
+
+        local species = player:getMonstrosityData().species
+        assert(species == 256 + xi.monstrosityVariant.METAL_SLIME, string.format('the form is species %d', species))
     end)
 
     -- Takes the family's base form without leaving the Feretory.

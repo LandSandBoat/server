@@ -1674,6 +1674,11 @@ end
 function CBaseEntity:setBelligerencyFlag(flag)
 end
 
+---@param speciesCode integer
+---@return nil
+function CBaseEntity:changeMonstrositySpecies(speciesCode)
+end
+
 ---@nodiscard
 ---@return integer
 function CBaseEntity:getMonstrositySize()

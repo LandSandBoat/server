@@ -62,6 +62,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     end
 
     player:showText(npc, ID.text.MAY_POSSESS_NEW_SPECIES)
+
+    -- Retail takes a new variant's form at once, but not a new family's. A variant's species code is 256 plus its id.
+    if unlock.variant then
+        player:changeMonstrositySpecies(256 + unlock.variant)
+    end
 end
 
 return entity

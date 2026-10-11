@@ -115,6 +115,7 @@ void SendFullMonstrosityUpdate(CCharEntity* PChar);
 
 void HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CLI_COMMAND_ACTION& data);
 void HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data);
+void ChangeSpecies(CCharEntity* PChar, uint16 speciesCode);
 
 void CalculateStats(CCharEntity* PChar);
 void HandleLevelUp(CCharEntity* PChar);
