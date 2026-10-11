@@ -564,11 +564,13 @@ templates:
     id:            916
     species:       odin
     type:          [notorious]
+    roam:          [scripted]
     spell_list_id: 5
     skill_list_id: 42
     attributes:
       combat:
         skill: sword
+        delay: 220
       jobs: [drk, bst]
       render:
         look:
@@ -577,6 +579,8 @@ templates:
         entity_flags: 131
         model_size:     1
         hitbox:        34
+      mob_mods:
+        dont_roam_home: 1
       spawn:
         type: [scripted]
 
@@ -5058,31 +5062,31 @@ spawns:
   16986421:
     template: Dark_Rider
     at:       [-640.692, -10.500, -133.755, 237]
-    level:    [95, 95]
+    level:    [99, 99]
   16986422:
     template: Dark_Bugler
     at:       [-268.690, -26.506, 417.501, 115]
-    level:    [76, 76]
+    level:    [79, 81]
   16986423:
     template: Dark_Bugler
     at:       [-436.900, -26.500, 385.237, 7]
-    level:    [76, 76]
+    level:    [79, 81]
   16986424:
     template: Dark_Bugler
     at:       [-400.835, -23.982, 269.010, 188]
-    level:    [76, 76]
+    level:    [79, 81]
   16986425:
     template: Dark_Esquire
     at:       [-550.088, -16.134, 156.571, 192]
-    level:    [76, 76]
+    level:    [79, 81]
   16986426:
     template: Dark_Esquire
     at:       [-497.361, -12.494, 40.091, 121]
-    level:    [76, 76]
+    level:    [79, 81]
   16986427:
     template: Dark_Esquire
     at:       [-532.651, -10.402, -77.226, 179]
-    level:    [76, 76]
+    level:    [79, 81]
   16986428:
     template: Vulpangue
     at:       [-697.000, -7.000, -123.000, 20]

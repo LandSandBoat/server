@@ -10,7 +10,7 @@ zoneObject.onInitialize = function(zone)
     GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.randomInt(12, 36) * 3600) -- 12 to 36 hours after maintenance, in 1-hour increments
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)
-    xi.darkRider.addHoofprints(zone)
+    xi.darkRider.onZoneInitialize()
 
     -- All of these apply weight and/or haste
     zone:registerCylindricalTriggerArea(1, 457.4, -306.8, 7.5) -- K-8 North
@@ -109,10 +109,6 @@ end
 
 zoneObject.onGameHour = function(zone)
     xi.darkRider.onGameHour(zone)
-
-    if VanadielHour() == 0 then
-        xi.darkRider.addHoofprints(zone)
-    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

@@ -50,6 +50,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             ['Marid']        = utils.slice(GetTableOfIDs('Chigoe'), 1, 5), -- Entries 1-5 of the table (1-indexed, inclusive)
             ['Grand_Marid']  = utils.slice(GetTableOfIDs('Chigoe'), 1, 5), -- Entries 1-5 of the table (1-indexed, inclusive)
         },
+        DARK_RIDER         = GetFirstID('Dark_Rider'),
         DEA                = GetFirstID('Dea'),
         EMERGENT_ELM       = GetFirstID('Emergent_Elm'),
         HARVESTMAN         = GetFirstID('Harvestman'),

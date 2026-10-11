@@ -56,6 +56,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         CERBERUS              = GetFirstID('Cerberus'),
         BRASS_BORER           = GetFirstID('Brass_Borer'),
         CLARET                = GetFirstID('Claret'),
+        DARK_RIDER            = GetFirstID('Dark_Rider'),
         ANANTABOGA            = GetFirstID('Anantaboga'),
         KHROMASOUL_BHURBORLOR = GetFirstID('Khromasoul_Bhurborlor'),
         SARAMEYA              = GetFirstID('Sarameya'),
