@@ -663,7 +663,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -890,7 +890,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6000
     loot:
@@ -3544,11 +3544,12 @@ slots:
       17629420: {}                           # Antican_Signifer
       17629421: {chance: 15, cooldown: 3600} # Antican_Proconsul
   - members:
-      17629433: {} # Helm_Beetle
-      17629436: {} # Helm_Beetle
-      17629439: {} # Helm_Beetle
-      17629442: {} # Helm_Beetle
-      17629446: {} # Helm_Beetle
+      17629430: {chance: 20, cooldown: 3600} # Diamond_Daig
+      17629433: {}                           # Helm_Beetle
+      17629436: {}                           # Helm_Beetle
+      17629439: {}                           # Helm_Beetle
+      17629442: {}                           # Helm_Beetle
+      17629446: {}                           # Helm_Beetle
   - members:
       17629524: {chance: 15, cooldown: 7200} # Triarius_X-XV
       17629525: {}                           # Antican_Triarius
@@ -3581,3 +3582,6 @@ slots:
   - members:
       17629557: {}                           # Antican_Triarius
       17629561: {chance: 15, cooldown: 3600} # Hastatus_XI-XII
+  - members:
+      17629397: {}                           # Sand_Lizard
+      17629403: {chance: 20, cooldown: 3600} # Nussknacker

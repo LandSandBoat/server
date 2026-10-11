@@ -2,23 +2,22 @@
 -- Area: Quicksand Caves
 --   NM: Diamond Daig
 -----------------------------------
-local ID = zones[xi.zone.QUICKSAND_CAVES]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.DIAMOND_DAIG + 3]  = ID.mob.DIAMOND_DAIG, -- Confirmed on retail
-    [ID.mob.DIAMOND_DAIG + 6]  = ID.mob.DIAMOND_DAIG, -- Confirmed on retail
-    [ID.mob.DIAMOND_DAIG + 9]  = ID.mob.DIAMOND_DAIG, -- Confirmed on retail
-    [ID.mob.DIAMOND_DAIG + 12] = ID.mob.DIAMOND_DAIG, -- Confirmed on retail
-    [ID.mob.DIAMOND_DAIG + 16] = ID.mob.DIAMOND_DAIG, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 1200)
     mob:setMobMod(xi.mobMod.GIL_MAX, 3000)
+end
+
+entity.onMobSpawnCheck = function(mob)
+    -- Only pops during a sandstorm, non-zero keeps it out of its slot's roll
+    local zone = mob:getZone()
+    if zone and zone:getWeather() == xi.weather.SAND_STORM then
+        return 0
+    end
+
+    return 1
 end
 
 entity.onMobSpawn = function(mob)

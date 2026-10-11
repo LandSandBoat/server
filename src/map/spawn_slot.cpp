@@ -18,6 +18,7 @@
 
 #include "ai/ai_container.h"
 #include "entities/mob_entity.h"
+#include "lua/luautils.h"
 #include "spawn_handler.h"
 #include "zone.h"
 
@@ -99,6 +100,11 @@ auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId) -> bool
 
         // A mob with a chance only wins a roll that follows a kill.
         if (!lotteryOpen && entry.spawnChance > 0)
+        {
+            continue;
+        }
+
+        if (luautils::OnMobSpawnCheck(entry.mob) != 0)
         {
             continue;
         }

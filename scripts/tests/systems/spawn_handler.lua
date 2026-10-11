@@ -717,6 +717,78 @@ describe('Spawn Handler', function()
         end)
     end)
 
+    -- Nussknacker shares a slot with a Sand Lizard and its script only lets it spawn in a sandstorm
+    describe('weather lottery slot', function()
+        ---@type CTestEntity
+        local nm
+        ---@type CTestEntity
+        local ph
+
+        local function killAndRespawn(mob)
+            player:claimAndKillMob(mob)
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+        end
+
+        before_each(function()
+            player:gotoZone(xi.zone.QUICKSAND_CAVES)
+            local ID = zones[xi.zone.QUICKSAND_CAVES]
+            nm = player.entities:get(ID.mob.NUSSKNACKER)
+            ph = player.entities:get(ID.mob.NUSSKNACKER - 6)
+
+            xi.test.world:setSlotChance(nm, 100)
+
+            -- every case starts in clear weather with the placeholder up and the NM off cooldown
+            xi.test.world:skipTime(3600)
+            xi.test.world:tick(xi.tick.SPAWN)
+            if nm:isSpawned() then
+                DespawnMob(nm:getID())
+                for _ = 1, 3 do
+                    xi.test.world:skipTime(5)
+                    xi.test.world:tickEntity(nm)
+                end
+            end
+
+            if not ph:isSpawned() then
+                SpawnMob(ph:getID())
+            end
+        end)
+
+        it('brings the placeholder back in clear weather', function()
+            killAndRespawn(ph)
+
+            ph.assert:isSpawned()
+            nm.assert.no:isSpawned()
+        end)
+
+        it('rolls the NM in a sandstorm', function()
+            player:setWeather(xi.weather.SAND_STORM)
+            killAndRespawn(ph)
+
+            nm.assert:isSpawned()
+            ph.assert.no:isSpawned()
+        end)
+
+        it('does not roll the NM in a dust storm', function()
+            player:setWeather(xi.weather.DUST_STORM)
+            killAndRespawn(ph)
+
+            ph.assert:isSpawned()
+            nm.assert.no:isSpawned()
+        end)
+
+        it('leaves the NM up when the sandstorm ends', function()
+            player:setWeather(xi.weather.SAND_STORM)
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
+
+            player:setWeather(xi.weather.NONE)
+            xi.test.world:skipTime(5)
+            xi.test.world:tickEntity(nm)
+            nm.assert:isSpawned()
+        end)
+    end)
+
     -- Citipati shares a slot with its placeholder Corse, and both only spawn from 20:00 to 04:00
     describe('night lottery slot', function()
         ---@type CTestEntity
