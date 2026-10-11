@@ -337,6 +337,10 @@ constexpr auto kFightingStanceSkill = 3123;
 // Out-of-combat HP and MP recovery per regen tick, a share of the maximum.
 constexpr auto kIdleRegenPercent = 5;
 
+// Encumbrance II after a gladiator's gear change.
+constexpr auto kAllEquipSlots        = uint16{ 0xFFFF };
+constexpr auto kGladiatorEncumbrance = 10s;
+
 // JP wiki: infamy and prestige are a tenth of the exp.
 constexpr auto kExpPerPoint = 10;
 
@@ -1355,11 +1359,27 @@ void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
     }
 }
 
+auto monstrosity::IsGladiatorInBelligerency(CCharEntity* PChar) -> bool
+{
+    return charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) &&
+           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+}
+
+// Retail locks every slot for 10 s after a gladiator changes gear in a Belligerency zone.
+void monstrosity::HandleGladiatorGearChange(CCharEntity* PChar)
+{
+    if (!IsGladiatorInBelligerency(PChar) || PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::EncumbranceIi))
+    {
+        return;
+    }
+
+    PChar->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::EncumbranceIi, static_cast<uint16>(xi::StatusEffect::EncumbranceIi), kAllEquipSlots, 0s, kGladiatorEncumbrance);
+}
+
 // JP wiki: a gladiator earns prestige from kills in the Belligerency zones.
 void monstrosity::AddPrestige(CCharEntity* PChar, const uint32 exp)
 {
-    if (!charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) ||
-        !std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID()))
+    if (!IsGladiatorInBelligerency(PChar))
     {
         return;
     }

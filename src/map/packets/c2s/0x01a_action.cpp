@@ -579,12 +579,14 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
 
             const auto mountKeyItem = static_cast<xi::KeyItem>(static_cast<uint16_t>(xi::KeyItem::ChocoboCompanion) + this->Mount.MountId);
 
-            // JP wiki: a gladiator holding the writ cannot ride. The retail message is unverified.
-            if (PChar->animation != xi::Animation::None ||
-                PChar->StatusEffectContainer->HasPreventActionEffect() ||
-                charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons))
+            if (PChar->animation != xi::Animation::None || PChar->StatusEffectContainer->HasPreventActionEffect())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotPerformAction);
+            }
+            else if (charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons))
+            {
+                // JP wiki: a gladiator holding the writ cannot ride.
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotMount);
             }
             else if (!PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mount))
             {

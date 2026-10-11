@@ -2,21 +2,38 @@
 -- Monstrosity - Belligerency
 -- Aengus flags a Monipulator for PvP in the three Belligerency zones.
 -----------------------------------
-require('scripts/globals/monstrosity/constants')
------------------------------------
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
 
 -- JP wiki: a gladiator holding the writ is capped too, even if not looking for a fight.
 xi.monstrosity.applyBelligerencyCap = function(player)
     local cap = xi.monstrosity.belligerencyCaps[player:getZoneID()]
-    if
-        cap and
-        (player:getBelligerencyFlag() or player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS))
-    then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = player })
-        player:messageSpecial(zones[player:getZoneID()].text.ENTERED_BELLIGERENCY_CAP, cap)
+    if not cap then
+        return
     end
+
+    local ID = zones[player:getZoneID()]
+    if player:getBelligerencyFlag() then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = player })
+        player:messageSpecial(ID.text.ENTERED_BELLIGERENCY_CAP, cap)
+        return
+    end
+
+    if not player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) then
+        return
+    end
+
+    -- A gladiator's message also mentions the equipment. JP wiki: Gestation lasts 60 s under Belligerency.
+    player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = player })
+    player:messageSpecial(ID.text.ENTERED_BELLIGERENCY_GLADIATOR, cap)
+    player:addStatusEffect(xi.effect.GESTATION,
+    {
+        duration = 60,
+        tick     = 10,
+        origin   = player,
+        flag     = bit.bor(xi.effectFlag.INVISIBLE, xi.effectFlag.DEATH, xi.effectFlag.MAGIC_BEGIN, xi.effectFlag.ON_ZONE),
+        silent   = true,
+    })
 end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
@@ -24,7 +41,7 @@ xi.monstrosity.aengusOnTrigger = function(player, npc)
         return
     end
 
-    -- TODO: Params 2-4 are 16780449, 142404 and 2 on retail. Their meaning is unknown.
+    -- Retail params 2-4 are stale from the previous event, and zero after another NPC's.
     local inBelligerency = player:getBelligerencyFlag() and 1 or 0
     player:startEvent(13, inBelligerency, player:getCurrency('infamy'))
 end

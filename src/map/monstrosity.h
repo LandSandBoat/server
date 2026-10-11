@@ -139,6 +139,8 @@ struct SpeciesJobs
 [[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
 void               AddPrestige(CCharEntity* PChar, uint32 exp);
+[[nodiscard]] auto IsGladiatorInBelligerency(CCharEntity* PChar) -> bool;
+void               HandleGladiatorGearChange(CCharEntity* PChar);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
 void               ApplyIdleRegen(CCharEntity* PChar);
 void               HandleMobSkillFired(CCharEntity* PChar, uint16 mobSkillId);

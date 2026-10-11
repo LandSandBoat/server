@@ -1,5 +1,7 @@
 -- The gladiator menu the Suspicious NPCs open after the Monstrosity quest. Option values are
 -- read from the client's event 887.
+local ffi = require('ffi')
+
 describe('Monstrosity gladiator menu', function()
     local writ = xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS
 
@@ -78,6 +80,61 @@ describe('Monstrosity gladiator menu', function()
         assert(player:getMainLvl() == 60, string.format('a level 75 gladiator is level %d in Xarcabard', player:getMainLvl()))
     end)
 
+    it('gives a writ holder Gestation on entering a Belligerency zone', function()
+        player:addKeyItem(writ)
+        player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+        player.assert:hasEffect(xi.effect.GESTATION)
+        assert(player:getStatusEffect(xi.effect.GESTATION):getTimeRemaining() <= 60000, 'Gestation lasts over a minute')
+    end)
+
+    -- Retail locks every slot for 10 s after a gear change.
+    describe('gear changes', function()
+        local function equipDagger()
+            player:addItem(xi.item.BRONZE_DAGGER)
+            local slot = player:findItem(xi.item.BRONZE_DAGGER):getSlotID()
+            player.actions:equipSet({ { index = slot, kind = xi.slot.MAIN, container = xi.inv.INVENTORY } })
+        end
+
+        before_each(function()
+            player:changeJob(xi.job.WAR)
+            player:setLevel(30)
+        end)
+
+        it('encumber a writ holder in a Belligerency zone', function()
+            player:addKeyItem(writ)
+            player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+            equipDagger()
+
+            player.assert:hasEffect(xi.effect.ENCUMBRANCE_II)
+            assert(player:getStatusEffect(xi.effect.ENCUMBRANCE_II):getPower() == 0xFFFF, 'not every slot is locked')
+        end)
+
+        it('keep the locked gear on through an unequip request', function()
+            player:addKeyItem(writ)
+            player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+            equipDagger()
+            player.assert:hasEffect(xi.effect.ENCUMBRANCE_II)
+
+            player.actions:equipSet({ { index = 0, kind = xi.slot.MAIN, container = xi.inv.INVENTORY } })
+
+            assert(player:getEquipID(xi.slot.MAIN) == xi.item.BRONZE_DAGGER, 'unequipped under Encumbrance')
+        end)
+
+        it('leave a writ holder outside the Belligerency zones alone', function()
+            player:addKeyItem(writ)
+            equipDagger()
+
+            player.assert.no:hasEffect(xi.effect.ENCUMBRANCE_II)
+        end)
+    end)
+
+    it('refuses Trusts to a writ holder', function()
+        player:addKeyItem(writ)
+
+        assert(xi.trust.canCast(player, nil) == xi.msg.basic.TRUST_NO_CAST_TRUST, 'a gladiator could call a Trust')
+    end)
+
     -- JP wiki: a tenth of kill exp in the Belligerency zones, only while holding the writ.
     describe('prestige', function()
         local function killCrawler()
@@ -120,6 +177,42 @@ describe('Monstrosity gladiator menu', function()
 
             assert(killCrawler() > 0, 'precondition: the kill paid no exp')
             assert(player:getCurrency('prestige') == 0, string.format('earned %d prestige', player:getCurrency('prestige')))
+        end)
+
+        -- Retail paid a level 99 capped to 30 a tenth of its limit points.
+        it('pays a tenth of limit points to a capped level 99', function()
+            player:setLevel(99)
+            local meritMode = ffi.new('uint8_t[12]')
+            meritMode[4] = 2
+            meritMode[5] = 1
+            player.packets:send(0x0BE, meritMode, assert(ffi.sizeof(meritMode)))
+            player:addKeyItem(writ)
+            player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+            assert(player:getMainLvl() == 30, string.format('precondition: level is %d', player:getMainLvl()))
+
+            player.packets:clear()
+            local points = killCrawler()
+            local limitMessage = false
+            for _, pkt in pairs(player.packets:getIncoming()) do
+                if
+                    pkt.type == 0x02D and
+                    bit.band(pkt.data[24] + pkt.data[25] * 256, 0x7FFF) == xi.msg.basic.LIMIT_POINTS_GAINED
+                then
+                    limitMessage = true
+                end
+            end
+
+            assert(limitMessage, 'precondition: the kill paid exp, not limit points')
+            assert(player:getCurrency('prestige') == math.floor(points / 10), string.format('%d limit points paid %d prestige', points, player:getCurrency('prestige')))
+        end)
+
+        -- Retail's Records of Eminence limit point reward paid no prestige.
+        it('pays nothing for scripted exp', function()
+            player:addKeyItem(writ)
+            player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+            player:addExp(600)
+            assert(player:getCurrency('prestige') == 0, string.format('scripted exp paid %d prestige', player:getCurrency('prestige')))
         end)
 
         it('stops kill prestige at 10,000', function()
