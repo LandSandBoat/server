@@ -2746,7 +2746,9 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
     uint32 vanaTime      = earth_time::vanadiel_timestamp();
 
-    if (PChar->fishingToken == 0)
+    // Ending the minigame clears the token before the client requests release.
+    // Release must still clean up the catch and restore the idle animation.
+    if (PChar->fishingToken == 0 && mode != GP_CLI_COMMAND_FISHING_2_MODE::RequestRelease)
     {
         PChar->animation = xi::Animation::NewFishingStop;
         return;
