@@ -49,6 +49,9 @@ public:
     bool alwaysRelevant() const;
     void setAlwaysRelevant(bool alwaysRelevant);
 
+    auto contentDisabled() const -> bool;
+    void setContentDisabled(bool contentDisabled);
+
     //
     // CBaseEntity
     //
@@ -76,4 +79,7 @@ private:
     // Spawn this NPC in for players at all times, used for port bastok bridge, "moving" objects (elevators / maybe
     // airships), major zone elements like la theine rainbow, altepa gate pillars, etc.
     bool alwaysRelevant_ = false;
+
+    // Content tag is disabled by settings, the NPC is loaded hidden and cannot be interacted with.
+    bool contentDisabled_ = false;
 };
