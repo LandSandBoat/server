@@ -22,6 +22,7 @@
 #include "0x036_item_transfer.h"
 
 #include "entities/char_entity.h"
+#include "entities/npc_entity.h"
 #include "enums/msg_std.h"
 #include "items/transactions/npc_trade.h"
 #include "lua/luautils.h"
@@ -71,6 +72,11 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
     }
 
     if (PChar->inMogHouse(xi::MogHouse::Visiting))
+    {
+        return;
+    }
+
+    if (const auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PNpc); PNpcEntity && PNpcEntity->contentDisabled())
     {
         return;
     }

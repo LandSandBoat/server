@@ -115,6 +115,16 @@ void CNpcEntity::setAlwaysRelevant(bool alwaysRelevant)
     alwaysRelevant_ = alwaysRelevant;
 }
 
+auto CNpcEntity::contentDisabled() const -> bool
+{
+    return contentDisabled_;
+}
+
+void CNpcEntity::setContentDisabled(bool contentDisabled)
+{
+    contentDisabled_ = contentDisabled;
+}
+
 bool CNpcEntity::isWideScannable()
 {
     return widescan_ == 1 && status == xi::Status::Normal && CBaseEntity::isWideScannable();

@@ -28,6 +28,7 @@
 #include "data/enums/key_item.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
+#include "entities/npc_entity.h"
 #include "entities/trust_entity.h"
 #include "enums/msg_basic.h"
 #include "enums/msg_std.h"
@@ -260,6 +261,12 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 PNpc->look.size != 0x02 &&
                 PChar->getZone() != xi::ZoneId::Feretory &&
                 !settings::get<bool>("main.MONSTROSITY_TRIGGER_NPCS"))
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard);
+                return;
+            }
+
+            if (const auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PNpc); PNpcEntity && PNpcEntity->contentDisabled())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard);
                 return;
