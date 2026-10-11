@@ -170,6 +170,26 @@ end
 function GetSystemTime()
 end
 
+---@class ChocoboRaceResult
+---@field raceNo integer
+---@field weather integer
+---@field places integer[] 0-based place of each chocobo
+---@field runAt integer? 0 until the race has run
+---@field intro integer[] Values sent with each half of the field
+---@field chocobos ChocoboRaceEntry[]
+---@field sections ChocoboRaceSection[]
+
+---@nodiscard
+---@param raceNo integer
+---@return ChocoboRaceResult?
+function LoadChocoboRaceResult(raceNo)
+end
+
+---@param data ChocoboRaceResult
+---@return nil
+function SaveChocoboRaceResult(data)
+end
+
 ---@class LinkshellConciergeSlotRow
 ---@field slotIndex integer
 ---@field linkshellid integer

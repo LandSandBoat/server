@@ -65,6 +65,7 @@
 
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x05a_motionmes.h"
+#include "packets/s2c/0x069_chocobo_racing.h"
 
 #include "persist_batch.h"
 #include "utils/battleutils.h"
@@ -337,6 +338,8 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("SetLinkshellConciergeSlot", &luautils::SetLinkshellConciergeSlot);
     lua.set_function("DeleteLinkshellConciergeSlot", &luautils::DeleteLinkshellConciergeSlot);
     lua.set_function("DecrementLinkshellConciergeMembersGoal", &luautils::DecrementLinkshellConciergeMembersGoal);
+    lua.set_function("LoadChocoboRaceResult", &luautils::LoadChocoboRaceResult);
+    lua.set_function("SaveChocoboRaceResult", &luautils::SaveChocoboRaceResult);
     lua.set_function("JstMidnight", &luautils::JstMidnight);
     lua.set_function("JstDayOfTheYear", &luautils::JstDayOfTheYear);
     lua.set_function("JstDayOfTheMonth", &luautils::JstDayOfTheMonth);
@@ -1992,6 +1995,159 @@ void SetLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex, const sol::table&
                      data.get_or<uint8>("days", 0),
                      data.get_or<uint32>("times", 0),
                      data.get_or<uint32>("postedDate", 0));
+}
+
+auto LoadChocoboRaceResult(const uint32 raceNo) -> sol::object
+{
+    TracyZoneScoped;
+
+    const auto rset = db::preparedStmt(
+        "SELECT weather, places, run_at, intro_first, intro_second, chocobos, names, sections "
+        "FROM chocobo_race_results WHERE race_no = ? LIMIT 1",
+        raceNo);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        GP_SERV_COMMAND_CHOCOBO_RACING::Chocobos                                     chocobos{};
+        std::array<std::array<char, 16>, GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers> names{};
+        GP_SERV_COMMAND_CHOCOBO_RACING::Sections                                     sections{};
+        db::extractFromBlob(rset, "chocobos", chocobos);
+        db::extractFromBlob(rset, "names", names);
+        db::extractFromBlob(rset, "sections", sections);
+
+        const auto packed = rset->get<uint32>("places");
+        sol::table places = lua.create_table();
+        for (std::size_t racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+        {
+            places[racer + 1] = (packed >> (racer * 4)) & 0x0F;
+        }
+
+        sol::table chocoboTable = lua.create_table();
+        for (std::size_t racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+        {
+            sol::table chocobo      = chocobos[racer].toLua();
+            chocobo["name"]         = std::string(names[racer].data(), strnlen(names[racer].data(), names[racer].size()));
+            chocoboTable[racer + 1] = chocobo;
+        }
+
+        sol::table sectionTable = lua.create_table();
+        for (std::size_t section = 0; section < GP_SERV_COMMAND_CHOCOBO_RACING::kMaxSections; ++section)
+        {
+            sectionTable[section + 1] = sections[section].toLua();
+        }
+
+        sol::table result  = lua.create_table();
+        result["raceNo"]   = raceNo;
+        result["weather"]  = rset->get<uint8>("weather");
+        result["places"]   = places;
+        result["runAt"]    = rset->get<uint32>("run_at");
+        result["intro"]    = lua.create_table_with(1, rset->get<uint8>("intro_first"), 2, rset->get<uint8>("intro_second"));
+        result["chocobos"] = chocoboTable;
+        result["sections"] = sectionTable;
+
+        return result;
+    }
+
+    return sol::lua_nil;
+}
+
+void SaveChocoboRaceResult(const sol::table& data)
+{
+    TracyZoneScoped;
+
+    const auto chocoboTable = data.get<sol::optional<sol::table>>("chocobos");
+
+    const auto places = [&]() -> uint32
+    {
+        uint32 packed = 0;
+        if (const auto placeTable = data.get<sol::optional<sol::table>>("places"))
+        {
+            for (std::size_t racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+            {
+                packed |= (placeTable->get_or<uint32>(racer + 1, 0) & 0x0F) << (racer * 4);
+            }
+        }
+
+        return packed;
+    }();
+
+    auto chocobos = [&]() -> GP_SERV_COMMAND_CHOCOBO_RACING::Chocobos
+    {
+        GP_SERV_COMMAND_CHOCOBO_RACING::Chocobos entries{};
+        if (!chocoboTable)
+        {
+            return entries;
+        }
+
+        for (std::size_t racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+        {
+            if (const auto chocobo = chocoboTable->get<sol::optional<sol::table>>(racer + 1))
+            {
+                entries[racer] = GP_SERV_COMMAND_CHOCOBO_RACING::ChocoboParam::fromLua(*chocobo);
+            }
+        }
+
+        return entries;
+    }();
+
+    auto names = [&]() -> std::array<std::array<char, 16>, GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers>
+    {
+        std::array<std::array<char, 16>, GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers> entries{};
+        if (!chocoboTable)
+        {
+            return entries;
+        }
+
+        for (std::size_t racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+        {
+            if (const auto chocobo = chocoboTable->get<sol::optional<sol::table>>(racer + 1))
+            {
+                const std::string name = chocobo->get_or<std::string>("name", "");
+                std::memcpy(entries[racer].data(), name.data(), std::min(name.size(), entries[racer].size() - 1));
+            }
+        }
+
+        return entries;
+    }();
+
+    auto sections = [&]() -> GP_SERV_COMMAND_CHOCOBO_RACING::Sections
+    {
+        GP_SERV_COMMAND_CHOCOBO_RACING::Sections entries{};
+        if (const auto sectionTable = data.get<sol::optional<sol::table>>("sections"))
+        {
+            for (std::size_t section = 0; section < GP_SERV_COMMAND_CHOCOBO_RACING::kMaxSections; ++section)
+            {
+                if (const auto entry = sectionTable->get<sol::optional<sol::table>>(section + 1))
+                {
+                    entries[section] = GP_SERV_COMMAND_CHOCOBO_RACING::SectionParam::fromLua(*entry);
+                }
+            }
+        }
+
+        return entries;
+    }();
+
+    const auto [introFirst, introSecond] = [&]() -> std::pair<uint8, uint8>
+    {
+        if (const auto intro = data.get<sol::optional<sol::table>>("intro"))
+        {
+            return { intro->get_or<uint8>(1, 0), intro->get_or<uint8>(2, 0) };
+        }
+
+        return { 0, 0 };
+    }();
+
+    db::preparedStmt(
+        "REPLACE INTO chocobo_race_results SET race_no = ?, weather = ?, places = ?, run_at = ?, "
+        "intro_first = ?, intro_second = ?, chocobos = ?, names = ?, sections = ?",
+        data.get_or<uint32>("raceNo", 0),
+        data.get_or<uint8>("weather", 0),
+        places,
+        data.get_or<uint32>("runAt", 0),
+        introFirst,
+        introSecond,
+        chocobos,
+        names,
+        sections);
 }
 
 void DeleteLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex)
