@@ -874,16 +874,12 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
 
-    PPet->setModifier(xi::Mod::DMGPHYS, -5000); // -50% PDT
-
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(PPetData->cmbDelay);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(PPetData->cmbDelay);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDelay(360); // Used for titan's ranged skills TP returns.
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setBaseDelay(360);
 
     uint16 weaponDamage = mLvl;
-    PPet->setMobMod(xi::MobMod::DamageOffset, 2);
-    PPet->setMobMod(xi::MobMod::RangedDamageOffset, 2);
 
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(weaponDamage);
@@ -916,6 +912,8 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         }
     }
 
+    luautils::callGlobal<void>("xi.pets.avatar.onPetStatCalculate", PMaster, PPet);
+
     if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster))
     {
         PPet->addModifier(xi::Mod::MATT, PChar->PMeritPoints->GetMeritValue(xi::Merit::AvatarMagicalAttack, PChar));
@@ -942,8 +940,6 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         PPet->addModifier(xi::Mod::MACC, PMaster->getMod(xi::Mod::PET_MACC_MEVA));
         PPet->addModifier(xi::Mod::MEVA, PMaster->getMod(xi::Mod::PET_MACC_MEVA));
     }
-
-    PMaster->setModifier(xi::Mod::AVATAR_PERPETUATION, PerpetuationCost(petID, mLvl));
 
     FinalizePetStatistics(PMaster, PPet);
 }
@@ -1026,10 +1022,11 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     // https://wiki.ffo.jp/html/30566.html
 
     uint16 weaponDamage = mLvl;
-    PPet->setMobMod(xi::MobMod::DamageOffset, 3);
 
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
+
+    luautils::callGlobal<void>("xi.pets.wyvern.onPetStatCalculate", PMaster, PPet);
 
     PPet->addModifier(xi::Mod::DEF, mobutils::GetBaseDefEva(PPet, PPetData->defRank));
     PPet->addModifier(xi::Mod::EVA, mobutils::GetBaseDefEva(PPet, mobutils::JobSkillRankToBaseEvaRank(PPet->GetMJob(), PPet->GetSJob())));
@@ -1037,19 +1034,6 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     PPet->addModifier(xi::Mod::RATT, mobutils::GetBaseSkill(PPet, PPetData->attRank));
     PPet->addModifier(xi::Mod::ACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
     PPet->addModifier(xi::Mod::RACC, mobutils::GetBaseSkill(PPet, PPetData->accRank));
-
-    // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
-    // innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
-    // TODO: need "UDMG" modifier or equivalent
-    // Note: This was added in the September 20, 2011 Patch
-    // https://wiki.ffo.jp/html/24823.html
-    PPet->setModifier(xi::Mod::DMG, -4000);
-
-    // innate + 40 subtle blow
-    PPet->setModifier(xi::Mod::SUBTLE_BLOW, 40);
-
-    // Wyverns can parry... yes really.
-    PPet->setMobMod(xi::MobMod::CanParry, 1);
 
     // Job Point: Wyvern Max HP
     if (auto* PChar = dynamic_cast<CCharEntity*>(PMaster))
@@ -1103,6 +1087,8 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
     PPet->SetMLevel(std::min(PPet->getSpawnLevel(), highestLvl));
     LoadJugStats(PPet, PPetData); // follow monster calcs (w/o SJ)
 
+    luautils::callGlobal<void>("xi.pets.jug.onPetStatCalculate", PMaster, PPet);
+
     FinalizePetStatistics(PMaster, PPet);
 }
 
@@ -1145,6 +1131,8 @@ void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
         }
 
         LoadAutomatonStats(PChar, PAutomaton, g_PPetList.at(petID), mainLevel);
+
+        luautils::callGlobal<void>("xi.pets.automaton.onPetStatCalculate", PMaster, PPet);
 
         if (PAutomaton)
         {

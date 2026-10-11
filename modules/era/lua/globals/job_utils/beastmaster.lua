@@ -5,27 +5,6 @@ require('modules/module_utils')
 -----------------------------------
 local m = Module:new('era_job_utils_beastmaster')
 
--- Jug pet skill lists mapped to mob species for utilization in Sic.
--- Baseline skill lists in mob_skill_list.sql for jugs map to pet_skill.sql for use in "Ready"
--- This breaks when reverting to Sic, causing jug pets to use the wrong skills
-local jugSkillLists =
-{
-    [xi.mobSpecies.RABBIT]       = 206,
-    [xi.mobSpecies.SHEEP]        = 226,
-    [xi.mobSpecies.CRAB]         = 372,
-    [xi.mobSpecies.MANDRAGORA]   = 903,
-    [xi.mobSpecies.TIGER]        = 242,
-    [xi.mobSpecies.FLYTRAP]      = 114,
-    [xi.mobSpecies.HILL_LIZARD]  = 174,
-    [xi.mobSpecies.FLY]          = 113,
-    [xi.mobSpecies.EFT]          =  98,
-    [xi.mobSpecies.FUNGUAR]      = 116,
-    [xi.mobSpecies.BEETLE]       =  49,
-    [xi.mobSpecies.ANTLION]      =  26,
-    [xi.mobSpecies.DIREMITE]     =  81,
-    [xi.mobSpecies.SABOTENDER]   = 939,
-}
-
 -- Reward: Override pet food healing values to pre-Abyssea values
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(09/08/2010)
 m:addOverrideByEra('xi.server.onServerStart', {
@@ -90,21 +69,5 @@ m:addOverrideByEra('xi.job_utils.beastmaster.useKillerInstinct', {
         target:addStatusEffect(xi.effect.KILLER_INSTINCT, { power = power, duration = 60, origin = player, subPower = petEcosystem })
 
         return xi.effect.KILLER_INSTINCT
-    end,
-})
-
--- Jug Pets: Applies a skill list on spawn of pet to properly utilize Sic.
--- Source: https://www.bg-wiki.com/ffxi/Version_Update_(11/09/2009)
-m:addOverrideByEra('xi.job_utils.beastmaster.useCallBeast', {
-    [xi.expansion.WOTG] = function(player, target, ability, action)
-        super(player, target, ability, action)
-
-        local pet = player:getPet()
-        if pet then
-            local listId = jugSkillLists[pet:getSpecies()]
-            if listId then
-                pet:setMobMod(xi.mobMod.SKILL_LIST, listId)
-            end
-        end
     end,
 })

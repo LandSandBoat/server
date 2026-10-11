@@ -118,12 +118,28 @@ local function doStatusBreath(target, player)
     return false
 end
 
-xi.pets.wyvern.onMobSpawn = function(mob)
+-- NOTE: Called from petutils.cpp
+-- Acts as a hook for functions.
+-- Runs everytime a pet's stats are rebuilt/recalculated.
+---@param master CBaseEntity
+---@param pet CBaseEntity
+xi.pets.wyvern.onPetStatCalculate = function(master, pet)
     -- NOTE: In 2014, Wyvern base damage was increased by an unknown amount(Needs retail captures).
     -- https://wiki.ffo.jp/html/30566.html
     -- Before 2014, Wyvern base damage is Level / 2 + offset. Once researched, a module can be made for pre 2014 damage.
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 50)
+    pet:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 50)
+    pet:setMobMod(xi.mobMod.DAMAGE_OFFSET, 3)
+    pet:setMobMod(xi.mobMod.CAN_PARRY, 1) -- Wyverns CAN parry
+    pet:setMod(xi.mod.SUBTLE_BLOW, 40)    -- TODO: Capture current retail value and possibly research videos for older values.
 
+    -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
+    -- innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
+    -- Note: This was added in the September 20, 2011 Patch
+    -- https://wiki.ffo.jp/html/24823.html
+    pet:setMod(xi.mod.DMG, -4000) -- TODO: Needs to be Uncapped damage reduction. Needs a "UDMG" modifier implemented.
+end
+
+xi.pets.wyvern.onMobSpawn = function(mob)
     local master = mob:getMaster()
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then

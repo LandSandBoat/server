@@ -7,9 +7,7 @@ xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.summoner = xi.job_utils.summoner or {}
 -----------------------------------
--- TODO: Blood Pact Wards need to be audited for accuracy.
-
--- sort of a misnomer, as if Apogee is up, the 'base' mp cost rises.
+-- Sort of a misnomer, as if Apogee is up, the 'base' mp cost rises.
 local function getBaseMPCost(player, ability)
     local baseMPCostMap =
     {
@@ -297,4 +295,113 @@ xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner
     end
 
     return effectsErased
+end
+
+-- All elemental spirits
+local spiritPerpThresholds =
+{
+    { level = 19, cost = 1 },
+    { level = 38, cost = 2 },
+    { level = 57, cost = 3 },
+    { level = 75, cost = 4 },
+    { level = 81, cost = 5 },
+    { level = 91, cost = 6 },
+    { level = 92, cost = 7 },
+}
+
+-- Carbuncle and also Cait Sith
+local carbunclePerpThresholds =
+{
+    { level = 10, cost =  1 },
+    { level = 18, cost =  2 },
+    { level = 27, cost =  3 },
+    { level = 36, cost =  4 },
+    { level = 45, cost =  5 },
+    { level = 54, cost =  6 },
+    { level = 63, cost =  7 },
+    { level = 72, cost =  8 },
+    { level = 81, cost =  9 },
+    { level = 91, cost = 10 },
+    { level = 92, cost = 11 },
+}
+
+local fenrirPerpThresholds =
+{
+    { level =  8, cost =  1 },
+    { level = 15, cost =  2 },
+    { level = 22, cost =  3 },
+    { level = 30, cost =  4 },
+    { level = 37, cost =  5 },
+    { level = 45, cost =  6 },
+    { level = 51, cost =  7 },
+    { level = 59, cost =  8 },
+    { level = 66, cost =  9 },
+    { level = 73, cost = 10 },
+    { level = 81, cost = 11 },
+    { level = 91, cost = 12 },
+    { level = 92, cost = 13 },
+}
+
+-- The six Elemental avatars/Diabolos/Siren
+local avatarPerpThresholds =
+{
+    { level = 10, cost =  3 },
+    { level = 19, cost =  4 },
+    { level = 28, cost =  5 },
+    { level = 38, cost =  6 },
+    { level = 47, cost =  7 },
+    { level = 56, cost =  8 },
+    { level = 65, cost =  9 },
+    { level = 68, cost = 10 },
+    { level = 71, cost = 11 },
+    { level = 74, cost = 12 },
+    { level = 81, cost = 13 },
+    { level = 91, cost = 14 },
+    { level = 92, cost = 15 },
+}
+
+xi.job_utils.summoner.getPerpetuationCost = function(pet)
+    local thresholds = {}
+
+    local petId    = pet:getPetID()
+    local petLevel = pet:getMainLvl()
+
+    if petId <= xi.petId.DARK_SPIRIT then
+        thresholds = spiritPerpThresholds
+    elseif
+        petId == xi.petId.CARBUNCLE or
+        petId == xi.petId.CAIT_SITH
+    then
+        thresholds = carbunclePerpThresholds
+    elseif petId == xi.petId.FENRIR then
+        thresholds = fenrirPerpThresholds
+    elseif
+        (petId >= xi.petId.IFRIT and petId <= xi.petId.DIABOLOS) or
+        petId == xi.petId.SIREN
+    then
+        thresholds = avatarPerpThresholds
+    else
+        -- TODO: Odin, Alexander and Atomos are only able to be called during Astral Flow.
+        -- They use an ability that drains all of their master's MP short after being summoned.
+        -- Before they use the ability, do they still drain MP due to a perpetuation cost or is it 0?
+        return 0
+    end
+
+    for _, threshold in ipairs(thresholds) do
+        if petLevel < threshold.level then
+            return threshold.cost
+        end
+    end
+
+    return thresholds[#thresholds].cost
+end
+
+xi.job_utils.summoner.applyPerpetuationCost = function(caster, pet)
+    local baseCost = 0
+
+    if pet then
+        baseCost = xi.job_utils.summoner.getPerpetuationCost(pet)
+
+        caster:setMod(xi.mod.AVATAR_PERPETUATION, math.max(0, baseCost))
+    end
 end
