@@ -366,6 +366,34 @@ constexpr auto kBelligerencyZones = std::array{
     xi::ZoneId::UleguerandRange,
 };
 
+void gainInfamy(CCharEntity* PChar, const int32 infamy)
+{
+    if (infamy <= 0)
+    {
+        return;
+    }
+
+    const auto cap = [&]() -> int32
+    {
+        if (PChar->m_PMonstrosity->Belligerency)
+        {
+            return kInfamyCapBelligerency;
+        }
+
+        return kInfamyCap;
+    }();
+
+    const auto held         = charutils::GetPoints(PChar, "infamy");
+    const auto previousRank = PChar->m_PMonstrosity->Rank;
+    charutils::SetPoints(PChar, "infamy", std::min(held + infamy, std::max(cap, held)));
+
+    // Crossing into a higher rank announces it.
+    if (PChar->m_PMonstrosity->Rank > previousRank)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
+    }
+}
+
 auto findSpecies(const uint16 speciesCode) -> const xi::data::MonstrositySpecies*
 {
     if (const auto it = gMonstrosityData.species.find(speciesCode); it != gMonstrosityData.species.end())
@@ -1332,37 +1360,94 @@ auto monstrosity::GetWeaponDelay(const CCharEntity* PChar) -> uint16
 // Infamy already held above the cap is never taken away.
 void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
 {
-    const auto infamy = static_cast<int32>(exp / kExpPerPoint);
-    if (infamy <= 0)
+    gainInfamy(PChar, static_cast<int32>(exp / kExpPerPoint));
+}
+
+auto monstrosity::IsGladiatorInBelligerency(const CCharEntity* PChar) -> bool
+{
+    // A Monipulator can carry the writ in from its adventurer days.
+    return PChar->m_PMonstrosity == nullptr &&
+           charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) &&
+           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+}
+
+auto monstrosity::IsMonipulatorInBelligerency(const CCharEntity* PChar) -> bool
+{
+    return PChar->m_PMonstrosity != nullptr &&
+           PChar->m_PMonstrosity->Belligerency &&
+           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+}
+
+// Retail: neither side can act on the other until the Monipulator flags Belligerency, and Gestation shields both.
+// TODO: Pets and Trusts still follow their master's allegiance, so they stay out of the fight.
+auto monstrosity::AreBelligerents(const CBattleEntity* PFirst, const CBattleEntity* PSecond) -> bool
+{
+    if (PFirst->objtype != TYPE_PC || PSecond->objtype != TYPE_PC)
+    {
+        return false;
+    }
+
+    const auto* PFirstChar  = static_cast<const CCharEntity*>(PFirst);
+    const auto* PSecondChar = static_cast<const CCharEntity*>(PSecond);
+    if (PFirstChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Gestation) ||
+        PSecondChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Gestation))
+    {
+        return false;
+    }
+
+    return (IsMonipulatorInBelligerency(PFirstChar) && IsGladiatorInBelligerency(PSecondChar)) ||
+           (IsGladiatorInBelligerency(PFirstChar) && IsMonipulatorInBelligerency(PSecondChar));
+}
+
+// JP wiki: the loser forfeits a tenth of its points, and the winner's party splits up to a fifth more, capped at twice
+// what the winner holds. Retail matches: a Monipulator holding 616 infamy lost only 61 to a gladiator without prestige.
+// TODO: The gladiator's treasure casket.
+void monstrosity::HandleBelligerentDefeat(CCharEntity* PLoser, CCharEntity* PWinner)
+{
+    if (!AreBelligerents(PWinner, PLoser))
     {
         return;
     }
 
-    const auto cap = [&]() -> int32
+    const auto currencyOf = [](const CCharEntity* PChar) -> const char*
     {
-        if (PChar->m_PMonstrosity->Belligerency)
+        if (PChar->m_PMonstrosity != nullptr)
         {
-            return kInfamyCapBelligerency;
+            return "infamy";
         }
 
-        return kInfamyCap;
-    }();
+        return "prestige";
+    };
 
-    const auto held         = charutils::GetPoints(PChar, "infamy");
-    const auto previousRank = PChar->m_PMonstrosity->Rank;
-    charutils::SetPoints(PChar, "infamy", std::min(held + infamy, std::max(cap, held)));
+    const auto* loserCurrency = currencyOf(PLoser);
+    const auto  loserHeld     = charutils::GetPoints(PLoser, loserCurrency);
+    const auto  spoils        = std::min(loserHeld / 5, charutils::GetPoints(PWinner, currencyOf(PWinner)) * 2);
+    charutils::SetPoints(PLoser, loserCurrency, loserHeld - loserHeld / 10 - spoils);
 
-    // Crossing into a higher rank announces it.
-    if (PChar->m_PMonstrosity->Rank > previousRank)
+    // Every member counts towards the split, but only those fighting the loser collect.
+    auto members = std::vector<CCharEntity*>{};
+    PWinner->ForAlliance(
+        [&](CBattleEntity* PMember)
+        {
+            members.emplace_back(static_cast<CCharEntity*>(PMember));
+        });
+
+    const auto share = spoils / static_cast<int32>(members.size());
+    for (auto* PMember : members)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
-    }
-}
+        if (PMember->loc.zone != PLoser->loc.zone || !AreBelligerents(PMember, PLoser))
+        {
+            continue;
+        }
 
-auto monstrosity::IsGladiatorInBelligerency(CCharEntity* PChar) -> bool
-{
-    return charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) &&
-           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+        if (PMember->m_PMonstrosity != nullptr)
+        {
+            gainInfamy(PMember, share);
+            continue;
+        }
+
+        charutils::SetPoints(PMember, "prestige", charutils::GetPoints(PMember, "prestige") + share);
+    }
 }
 
 // Retail locks every slot for 10 s after a gladiator changes gear in a Belligerency zone.

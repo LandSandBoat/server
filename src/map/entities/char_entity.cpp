@@ -1367,6 +1367,12 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return false;
     }
 
+    // Belligerents can only harm each other.
+    if (monstrosity::AreBelligerents(PInitiator, this))
+    {
+        return (targetFlags & TARGET_ENEMY) && !isDead();
+    }
+
     if (allegiance == PInitiator->allegiance && !monstrosity::CanAssist(PInitiator, this))
     {
         return false;
@@ -2498,6 +2504,11 @@ void CCharEntity::Die()
     }
 
     battleutils::RelinquishClaim(this);
+
+    if (auto* PWinner = dynamic_cast<CCharEntity*>(lastAttackerId_.resolve()))
+    {
+        monstrosity::HandleBelligerentDefeat(this, PWinner);
+    }
 
     if (this->PPet)
     {

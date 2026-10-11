@@ -349,6 +349,18 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         packet->Flags3.NewCharacterFlag = !PChar->playerConfig.NewAdventurerOffFlg;
         packet->Flags3.MentorFlag       = PChar->playerConfig.MentorFlg;
 
+        // Retail puts a gladiator on team 0 in the Belligerency zones, against the Monipulators' team 1.
+        if (monstrosity::IsGladiatorInBelligerency(PChar))
+        {
+            packet->Flags3.BallistaTeam = 0x08;
+        }
+
+        // Sword & Shield icon only shows outside of the Feretory
+        if (PChar->m_PMonstrosity != nullptr && PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
+        {
+            packet->Flags3.BallistaTeam |= 0x08;
+        }
+
         packet->Flags5.GeoIndiSize    = 1;
         packet->Flags5.GeoIndiFlag    = 0;
         packet->Flags5.GeoIndiElement = 0;
@@ -401,11 +413,6 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
 
             packet->GrapIDTbl[0] = PChar->m_PMonstrosity->Look;
             packet->GrapIDTbl[8] = 0xFFFF;
-            // Sword & Shield icon only shows outside of the Feretory
-            if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
-            {
-                packet->Flags3.BallistaTeam |= 0x08; // 0x18?
-            }
         }
 
         packet->size = roundUpToNearestFour(model_size) / 4;

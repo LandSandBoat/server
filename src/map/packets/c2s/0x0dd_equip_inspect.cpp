@@ -77,17 +77,25 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 return;
             }
 
-            if (PMobTarget)
+            // Retail answers a /check on a Monipulator like one on a monster.
+            auto* PMonsterTarget = static_cast<CBattleEntity*>(PMobTarget);
+            if (PCharTarget && PCharTarget->m_PMonstrosity)
+            {
+                PMonsterTarget = PCharTarget;
+                PCharTarget->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, 0, 0, MsgStd::Examine);
+            }
+
+            if (PMonsterTarget)
             {
                 // /check on a mob
-                if ((PMobTarget->m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (PMobTarget->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || PMobTarget->getMobMod(xi::MobMod::CheckAsNm) > 0)
+                if (PMobTarget && ((PMobTarget->m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (PMobTarget->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || PMobTarget->getMobMod(xi::MobMod::CheckAsNm) > 0))
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, MsgBasic::CheckImpossibleToGauge);
                 }
                 else
                 {
-                    int32          mobLvl   = PMobTarget->GetMLevel() + PMobTarget->getMod(xi::Mod::EXP_LVL_MOD);
-                    EMobDifficulty mobCheck = charutils::CheckMob(PChar->GetMLevel(), PMobTarget);
+                    int32          mobLvl   = PMonsterTarget->GetMLevel() + PMonsterTarget->getMod(xi::Mod::EXP_LVL_MOD);
+                    EMobDifficulty mobCheck = charutils::CheckMob(PChar->GetMLevel(), PMonsterTarget);
 
                     // Calculate main /check message (64 is Too Weak)
                     int32 MessageValue = 64 + static_cast<uint8>(mobCheck);
@@ -95,8 +103,8 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                     // Grab mob and player stats for extra messaging
                     const uint16 charAcc = PChar->ACC(SLOT_MAIN, 0);
                     const uint16 charAtt = PChar->ATT(SLOT_MAIN);
-                    const uint16 mobEva  = PMobTarget->EVA();
-                    const uint16 mobDef  = PMobTarget->DEF();
+                    const uint16 mobEva  = PMonsterTarget->EVA();
+                    const uint16 mobDef  = PMonsterTarget->DEF();
 
                     // Calculate +/- message
                     auto MessageID = static_cast<uint16_t>(MsgBasic::CheckDefault);
@@ -122,7 +130,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                         MessageID += 3;
                     }
 
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, mobLvl, MessageValue, static_cast<MsgBasic>(MessageID));
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMonsterTarget, mobLvl, MessageValue, static_cast<MsgBasic>(MessageID));
                 }
             }
             else if (PCharTarget)

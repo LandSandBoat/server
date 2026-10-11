@@ -348,6 +348,12 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     // flags6 starts at 0x5C
     charStatusFlags::flags6_t flags6 = {}; // All unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
 
+    // Retail puts a gladiator on team 0 in the Belligerency zones, against the Monipulators' team 1.
+    if (monstrosity::IsGladiatorInBelligerency(PChar))
+    {
+        flags2.BallistaFlg = 0x08;
+    }
+
     if (PChar->m_PMonstrosity != nullptr)
     {
         // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.

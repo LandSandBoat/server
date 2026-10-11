@@ -139,7 +139,12 @@ struct SpeciesJobs
 [[nodiscard]] auto GetEvasionSkill(const CCharEntity* PChar) -> uint16;
 void               AddInfamy(CCharEntity* PChar, uint32 exp);
 void               AddPrestige(CCharEntity* PChar, uint32 exp);
-[[nodiscard]] auto IsGladiatorInBelligerency(CCharEntity* PChar) -> bool;
+[[nodiscard]] auto IsGladiatorInBelligerency(const CCharEntity* PChar) -> bool;
+[[nodiscard]] auto IsMonipulatorInBelligerency(const CCharEntity* PChar) -> bool;
+
+// A flagged Monipulator and a gladiator in a Belligerency zone are enemies.
+[[nodiscard]] auto AreBelligerents(const CBattleEntity* PFirst, const CBattleEntity* PSecond) -> bool;
+void               HandleBelligerentDefeat(CCharEntity* PLoser, CCharEntity* PWinner);
 void               HandleGladiatorGearChange(CCharEntity* PChar);
 [[nodiscard]] auto GetBaseDelay(const CCharEntity* PChar) -> uint16;
 void               ApplyIdleRegen(CCharEntity* PChar);
