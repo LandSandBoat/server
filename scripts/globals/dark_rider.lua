@@ -1,172 +1,236 @@
 -----------------------------------
--- Warhorse Hoofprint global file
+-- Dark Rider
+--
+-- One run at a time across Wajaom Woodlands, Bhaflau Thickets, Mount Zhayolm and Caedarva Mire.
+-- The rider appears at a route's start with six escorts posted along it, runs it in legs with a rest after each, and vanishes at the end.
+-- A Warhorse Hoofprint is left at every rest but the last, usable once the rider is gone.
 -----------------------------------
-local bhaflauID = zones[xi.zone.BHAFLAU_THICKETS]
-local caedarvaID = zones[xi.zone.CAEDARVA_MIRE]
-local mountID = zones[xi.zone.MOUNT_ZHAYOLM]
-local wajaomID = zones[xi.zone.WAJAOM_WOODLANDS]
------------------------------------
-
 xi = xi or {}
-xi.darkRider = {}
-xi.darkRider.MAX_HOOFPRINTS_PER_DAY = 2
+xi.darkRider = xi.darkRider or {}
 
-local hoofprintIds = {
-    [xi.zone.WAJAOM_WOODLANDS] = {
-        wajaomID.npc.HOOFPRINT,
-        wajaomID.npc.HOOFPRINT + 1,
-        wajaomID.npc.HOOFPRINT + 2,
-    },
-    [xi.zone.BHAFLAU_THICKETS] = {
-        bhaflauID.npc.HOOFPRINT,
-        bhaflauID.npc.HOOFPRINT + 1,
-        bhaflauID.npc.HOOFPRINT + 2,
-    },
-    [xi.zone.MOUNT_ZHAYOLM] = {
-        mountID.npc.HOOFPRINT,
-        mountID.npc.HOOFPRINT + 1,
-        mountID.npc.HOOFPRINT + 2,
-    },
-    [xi.zone.CAEDARVA_MIRE] = {
-        caedarvaID.npc.HOOFPRINT,
-        caedarvaID.npc.HOOFPRINT + 1,
-        caedarvaID.npc.HOOFPRINT + 2,
-    },
+local runZones =
+{
+    xi.zone.WAJAOM_WOODLANDS,
+    xi.zone.BHAFLAU_THICKETS,
+    xi.zone.MOUNT_ZHAYOLM,
+    xi.zone.CAEDARVA_MIRE,
 }
 
-local hoofprintPositions = {
-    [xi.zone.WAJAOM_WOODLANDS] = {
-        { 400, -24, 2 }, -- K-9
-        { 345, -18, -41 }, -- J-9 E edge
-        { 221, -18, -63 }, -- J-9 W edge
-        { 217, -17.5, -140 }, -- J-10
-        { 185, -20.25, -200 }, -- I-10 E edge
-        { 121, -16, -241 }, -- I-10 S edge
-        { 0, -18, -265 }, -- H-10 S edge
-        { -80, -18, -546 }, -- H-12
-        { -175, -20.25, -562 }, -- G-12
-        { -378, -9, -580 }, -- F-12 S edge
-        { -625, -19, -345 }, -- D-11
-        { -642, -16, -160 }, -- D-10
-        { -532, -8.5, -64 }, -- E-9
-        { -500, -18, 176 }, -- E-8
-        { -400, -24, 281 }, -- F-7
-        { -400, -24, 281 }, -- F-7
-        { -237, -24, 403 }, -- G-6 NE
-        { -258, -25.5, 497 }, -- G-6 N
-        { -302, -26, 580 }, -- F-5 SE corner
-        { -360, -32, 680 }, -- F-5 behind tower
-        { 105, -26, 320 },  -- I-7
-    },
-    [xi.zone.BHAFLAU_THICKETS] = {
-        { 447, -18, 266 }, -- I-8
-        { 425, -20.25, 239 }, -- I-9
-        { 298, -8.5, 211 }, -- H-8 center of open area
-        { 338, -10, 255 }, -- H-8 E tunnel
-        { 160, -16, 319 }, -- G-8
-        { 20, -18.675, 240 }, -- F-8
-        { 283, -23.75, 431 }, -- H-7 center
-        { 240, -32, 480 }, -- H-7 NW
-        { 185, -34, 514 }, -- G-7 top NE corner
-        { 61, -34, 545 }, -- G-6 SW corner
-        { 336, -18, 380 }, -- H-7 SE corner
-        { 379, -17, 380 }, -- I-7 in tunnel
-    },
-    [xi.zone.MOUNT_ZHAYOLM] = {
-        { -401, -14.5, 374 }, -- D/E-6
-        { -458, -13, 357 }, -- D-6
-        { -350, -14, 330 }, -- E-6 near manhole cover
-        { -401, -14.5, 372 }, -- E-6 tip of protruding wall
-        { 161, -14, -206 }, -- H-9 (near the Pugils to the south)
-        { 278, -18, -294 }, -- I-10 (on the mound with the Eruca)
-        { 598, -14, -4 }, -- K-8
-        { 762, -14.5, -55 }, -- L-8
-    },
-    [xi.zone.CAEDARVA_MIRE] = {
-        { -600, 4.5, -100 }, -- G-9 (2nd map)
-        { 212, 0, -533 }, -- I-9
-        { 280, -16, -357 }, -- J-8
-        { 300, -15, -354 }, -- J-8 in north pool
-        { 400, -7.5, -260 }, -- J-8 N at imp camp
-        { 415, -10, -180 }, -- J-7
-        { 160, -8, -320 }, -- I-8
-    },
-}
+local hoofprintCount = 3
 
-local hoofprintZones = {}
-for zoneId, _ in pairs(hoofprintPositions) do
-    hoofprintZones[#hoofprintZones + 1] = zoneId
+local function scheduleRun(delayMin, delayMax)
+    -- Time before zone, another process can read between the two writes
+    SetServerVariable('DarkRider_PopTime', GetSystemTime() + math.randomInt(delayMin, delayMax) * 3600)
+    SetServerVariable('DarkRider_ZoneID', utils.randomEntry(runZones))
 end
 
--- Adds hoofprints if the current zone is the one picked for that day
-xi.darkRider.addHoofprints = function(zone)
-    -- We need a random number that's the same across servers,
-    -- so we add a bunch of vanadiel time values, which will be the same across servers, but should
-    -- result in a seemingly "random" area and positions each time when combined with the modulo operator.
-    local fakeRandomNum = VanadielMoonPhase() + VanadielDayElement() + VanadielDayOfTheMonth() + VanadielDayOfTheYear()
+xi.darkRider.onMobInitialize = function(mob)
+    for _, immunity in pairs(xi.immunity) do
+        mob:addImmunity(immunity)
+    end
+end
 
-    local areaIndex = math.fmod(fakeRandomNum, #hoofprintZones) + 1
-    local pickedZoneId = hoofprintZones[areaIndex]
+-- routes: list of { points = { { x, y, z }, ... }, posts = { six escort positions } }
+xi.darkRider.onMobSpawn = function(mob, routes)
+    mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
+    mob:setMobMod(xi.mobMod.ROAM_RESET_FACING, 0)
+    mob:setMod(xi.mod.UDMGPHYS, -10000)
+    mob:setMod(xi.mod.UDMGRANGE, -10000)
+    mob:setMod(xi.mod.UDMGBREATH, -10000)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    mob:setMod(xi.mod.UFASTCAST, 150)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 30)
 
-    if pickedZoneId ~= zone:getID() then
+    local routeIndex = math.randomInt(1, #routes)
+    local route      = routes[routeIndex]
+    local start      = route.points[1]
+
+    mob:setLocalVar('routeIndex', routeIndex)
+    mob:setLocalVar('pointIndex', 1)
+    mob:setPos(start.x, start.y, start.z)
+
+    for offset, post in ipairs(route.posts) do
+        local escortId = mob:getID() + offset
+        local escort   = GetMobByID(escortId)
+
+        if escort then
+            escort:setSpawn(post.x, post.y, post.z)
+            SpawnMob(escortId)
+        end
+    end
+end
+
+xi.darkRider.onMobRoamAction = function(mob, routes)
+    local points   = routes[mob:getLocalVar('routeIndex')].points
+    local position = mob:getPos()
+
+    if utils.distance(position, points[#points], true) < 1 then
+        DespawnMob(mob:getID())
+
         return
     end
 
-    local possiblePositions = utils.shuffle(hoofprintPositions[zone:getID()])
-    local possibleHoofprintIds = hoofprintIds[zone:getID()]
+    -- Closest point on the route ahead
+    local index    = #points
+    local nearest  = points[#points]
+    local offRoute = math.huge
 
-    local daysSinceEpoch = VanadielUniqueDay()
-    local currentHoofprintCount = zone:getLocalVar('HoofprintCount')
+    for first = mob:getLocalVar('pointIndex'), #points - 1 do
+        local from   = points[first]
+        local to     = points[first + 1]
+        local dx     = to.x - from.x
+        local dz     = to.z - from.z
+        local length = dx * dx + dz * dz
+        local ratio  = 0
 
-    local hoofprintsToAdd = math.fmod(fakeRandomNum, xi.darkRider.MAX_HOOFPRINTS_PER_DAY) + 1
+        if length > 0 then
+            ratio = utils.clamp(((position.x - from.x) * dx + (position.z - from.z) * dz) / length, 0, 1)
+        end
 
-    for i = 1, #possibleHoofprintIds do
-        if hoofprintsToAdd <= 0 then
+        local point    = { x = from.x + dx * ratio, y = from.y + (to.y - from.y) * ratio, z = from.z + dz * ratio }
+        local distance = utils.distance(position, point, true)
+
+        if distance < offRoute then
+            index    = first + 1
+            nearest  = point
+            offRoute = distance
+        end
+    end
+
+    -- Dragged off the route by a fight: walk back to it over the navmesh
+    if offRoute > 2 then
+        mob:pathTo(nearest.x, nearest.y, nearest.z)
+
+        return
+    end
+
+    -- Leave a hoofprint where the rider just rested, unless a fight broke the leg
+    if mob:getLocalVar('resting') == 1 then
+        local placed    = mob:getLocalVar('hoofprints')
+        local hoofprint = GetNPCByID(zones[mob:getZoneID()].npc.HOOFPRINT + placed % hoofprintCount)
+
+        if hoofprint then
+            hoofprint:setStatus(xi.status.DISAPPEAR)
+            hoofprint:setPos(position.x, position.y, position.z)
+        end
+
+        mob:setLocalVar('hoofprints', placed + 1)
+    end
+
+    -- Run on along the route until the leg's distance is spent
+    local leg       = {}
+    local from      = position
+    local remaining = math.randomInt(150, 200)
+
+    mob:setLocalVar('pointIndex', index - 1)
+
+    while index <= #points do
+        local to   = points[index]
+        local step = utils.distance(from, to, true)
+
+        -- Stop partway along this stretch, unless that would leave less than a yalm to the end
+        if step > remaining and (index < #points or step - remaining >= 1) then
+            local ratio = remaining / step
+
+            table.insert(leg, { x = from.x + (to.x - from.x) * ratio, y = from.y + (to.y - from.y) * ratio, z = from.z + (to.z - from.z) * ratio })
+
             break
         end
 
-        local hoofprint = GetNPCByID(possibleHoofprintIds[i])
-        if hoofprint ~= nil and hoofprint:getStatus() ~= xi.status.NORMAL then
-            hoofprint:setPos(possiblePositions[i])
-            hoofprint:setStatus(xi.status.NORMAL)
-            hoofprint:setLocalVar('DaysSinceEpoch', daysSinceEpoch)
-            currentHoofprintCount = currentHoofprintCount + 1
-            hoofprintsToAdd = hoofprintsToAdd - 1
-        else
-            printf('Did not find hoofprint with ID: %d', possibleHoofprintIds[i])
-        end
+        table.insert(leg, to)
+        remaining = remaining - step
+        from      = to
+        index     = index + 1
     end
 
-    zone:setLocalVar('HoofprintCount', currentHoofprintCount)
+    -- The last rest before vanishing is always the same length
+    local rest = 12
+    if index <= #points then
+        rest = math.randomInt(6, 11)
+    end
+
+    local stop = leg[#leg]
+    leg[#leg]  = { x = stop.x, y = stop.y, z = stop.z, wait = rest * 1000 }
+
+    mob:setLocalVar('resting', 1)
+    mob:pathThrough(leg, bit.bor(xi.pathflag.COORDS, xi.pathflag.RUN, xi.pathflag.SCRIPT))
 end
 
--- Remove hoofprints at 06:00 from previous day
-xi.darkRider.onGameHour = function(zone)
-    if VanadielHour() ~= 6 then
-        return
-    end
+xi.darkRider.onMobEngage = function(mob, target)
+    mob:setLocalVar('resting', 0)
+end
 
-    local hoofprintCount = zone:getLocalVar('HoofprintCount')
-    if hoofprintCount == 0 then
-        return
-    end
+xi.darkRider.onMobDespawn = function(mob, routes)
+    local firstHoofprint = zones[mob:getZoneID()].npc.HOOFPRINT
 
-    local daysSinceEpoch = VanadielUniqueDay()
-    local possibleHoofprintIds = hoofprintIds[zone:getID()]
-    for i = 1, #possibleHoofprintIds do
-        local hoofprint = GetNPCByID(possibleHoofprintIds[i])
-
-        -- Hide hoofprint if it was shown in a previous day
-        if
-            hoofprint ~= nil and
-            hoofprint:getStatus() == xi.status.NORMAL and
-            hoofprint:getLocalVar('DaysSinceEpoch') < daysSinceEpoch
-        then
-            hoofprint:setStatus(xi.status.DISAPPEAR)
-            hoofprint:resetLocalVars()
-            hoofprintCount = hoofprintCount - 1
+    for offset = 0, math.min(mob:getLocalVar('hoofprints'), hoofprintCount) - 1 do
+        local hoofprint = GetNPCByID(firstHoofprint + offset)
+        if hoofprint then
+            hoofprint:setStatus(xi.status.NORMAL)
         end
     end
 
-    zone:setLocalVar('HoofprintCount', hoofprintCount)
+    for offset = 1, #routes[mob:getLocalVar('routeIndex')].posts do
+        local escort = GetMobByID(mob:getID() + offset)
+        if escort and escort:isSpawned() then
+            escort:timer(5000, function(escortArg)
+                DespawnMob(escortArg:getID())
+            end)
+        end
+    end
+
+    scheduleRun(60, 72)
+end
+
+-- Hoofprints do not survive a restart
+-- Only the first zone to start reschedules
+xi.darkRider.onZoneInitialize = function()
+    local popTime = GetServerVariable('DarkRider_PopTime')
+
+    if popTime == 0 or popTime > GetSystemTime() + 3 * 3600 then
+        scheduleRun(1, 3)
+    end
+end
+
+xi.darkRider.onGameHour = function(zone)
+    local ID          = zones[zone:getID()]
+    local currentTime = GetSystemTime()
+    local popTime     = GetServerVariable('DarkRider_PopTime')
+
+    local active = {}
+    for offset = 0, hoofprintCount - 1 do
+        local hoofprint = GetNPCByID(ID.npc.HOOFPRINT + offset)
+        if hoofprint and hoofprint:getStatus() == xi.status.NORMAL then
+            table.insert(active, hoofprint)
+        end
+    end
+
+    -- One roll an hour over the 12 hours before the next run, each able to switch one hoofprint off
+    -- Any still left go when the run starts
+    local hoursLeft = math.max(math.ceil((popTime - currentTime) / 3600), 0)
+    if hoursLeft == 0 then
+        for _, hoofprint in ipairs(active) do
+            hoofprint:setStatus(xi.status.DISAPPEAR)
+        end
+    elseif
+        hoursLeft <= 12 and
+        hoursLeft < zone:getLocalVar('hoofprintRoll') and
+        #active > 0 and
+        math.randomInt(1, 5) == 1
+    then
+        utils.randomEntry(active):setStatus(xi.status.DISAPPEAR)
+    end
+
+    zone:setLocalVar('hoofprintRoll', hoursLeft)
+
+    local rider = GetMobByID(ID.mob.DARK_RIDER)
+    if
+        GetServerVariable('DarkRider_ZoneID') == zone:getID() and
+        currentTime >= popTime and
+        rider and
+        not rider:isSpawned()
+    then
+        SpawnMob(ID.mob.DARK_RIDER)
+    end
 end
