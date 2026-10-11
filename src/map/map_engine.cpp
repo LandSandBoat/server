@@ -40,6 +40,7 @@
 #include "map_statistics.h"
 #include "mob_spell_list.h"
 #include "monstrosity.h"
+#include "party.h"
 #include "persist_batch.h"
 #include "roe.h"
 #include "spell.h"
@@ -156,6 +157,7 @@ auto MapEngine::init() -> Task<void>
     ShowInfo("do_init: starting ZMQ thread");
     ipcClient_ = std::make_unique<IPCClient>(networking(), application_.zmqService());
     message::init(*ipcClient_);
+    party::init();
 
     // NOTE: We're phasing out server usage without ximeshes and navmeshes. For now for ease of use,
     // we're still allowing it in CI, but regular usage will demand them.

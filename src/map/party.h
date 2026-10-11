@@ -136,3 +136,11 @@ private:
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
 };
+
+namespace party
+{
+
+// starts following the world server's parties
+void init();
+
+} // namespace party

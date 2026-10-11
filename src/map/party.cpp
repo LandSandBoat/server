@@ -28,6 +28,9 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "party.h"
+#include "replica.h"
+
+#include "common/party_data.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "utils/blueutils.h"
@@ -58,6 +61,27 @@ struct CParty::partyInfo_t
 };
 
 // Constructor
+void party::init()
+{
+    // the world server's parties run beside this code for now: nothing on the map is driven by them yet
+    mirrored<xi::Party>().setOnChange(
+        [](const uint64 partyId, const xi::Party* before, const xi::Party* after)
+        {
+            if (!after)
+            {
+                DebugReplicaFmt("party {}: disbanded", partyId);
+            }
+            else if (!before)
+            {
+                DebugReplicaFmt("party {}: formed, leader {}, {} members", partyId, after->leaderId, after->members.size());
+            }
+            else
+            {
+                DebugReplicaFmt("party {}: leader {} -> {}, members {} -> {}", partyId, before->leaderId, after->leaderId, before->members.size(), after->members.size());
+            }
+        });
+}
+
 CParty::CParty(CBattleEntity* PEntity)
 : m_PartyID(0)
 , m_PartyType(PARTY_MOBS)
@@ -109,6 +133,11 @@ CParty::~CParty()
 
 void CParty::DisbandParty(bool playerInitiated)
 {
+    if (m_PartyType == PARTY_PCS && m_PLeader)
+    {
+        mirrored<xi::Party>().request(xi::PartyDisband{ .charId = m_PLeader->id });
+    }
+
     if (m_PAlliance)
     {
         m_PAlliance->removeParty(this);
@@ -281,6 +310,11 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
     {
         ShowWarning("CParty::RemoveMember() - PEntity was null, or PParty mismatch.");
         return;
+    }
+
+    if (m_PartyType == PARTY_PCS && PEntity->objtype == TYPE_PC)
+    {
+        mirrored<xi::Party>().request(xi::PartyLeave{ .charId = PEntity->id });
     }
 
     if (m_PLeader == PEntity)
@@ -616,6 +650,11 @@ void CParty::AddMember(CBattleEntity* PEntity)
     PEntity->PParty = this;
     members.emplace_back(PEntity);
 
+    if (m_PartyType == PARTY_PCS && PEntity->objtype == TYPE_PC && m_PLeader && m_PLeader != PEntity)
+    {
+        mirrored<xi::Party>().request(xi::PartyJoin{ .memberId = m_PLeader->id, .joinerId = PEntity->id });
+    }
+
     if (dynamic_cast<const CCharEntity*>(PEntity) != nullptr && this->members.size() > 1)
     {
         auto* PLeader = dynamic_cast<CCharEntity*>(CParty::GetLeader());
@@ -705,6 +744,11 @@ void CParty::AddMember(uint32 id)
         {
             ShowWarning("CParty::AddMember() - Party had summoned trusts when trying to add a member.");
             return;
+        }
+
+        if (m_PLeader)
+        {
+            mirrored<xi::Party>().request(xi::PartyJoin{ .memberId = m_PLeader->id, .joinerId = id });
         }
 
         uint32 allianceid = 0;
@@ -1067,6 +1111,8 @@ void CParty::SetLeader(const std::string& MemberName)
         {
             return;
         }
+
+        mirrored<xi::Party>().request(xi::PartySetLeader{ .charId = newId });
 
         db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag & ~? WHERE partyid = ? AND partyflag & ?", ALLIANCE_LEADER | PARTY_LEADER, m_PartyID, PARTY_LEADER);
         db::preparedStmt("UPDATE accounts_parties SET partyid = ? WHERE partyid = ?", newId, m_PartyID);

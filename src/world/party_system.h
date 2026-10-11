@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,24 +21,32 @@
 
 #pragma once
 
-#include "world_engine.h"
+#include "common/cbasetypes.h"
+#include "common/party_data.h"
+#include "common/replica/owned.h"
+#include "common/types/hash_map.h"
 
-class PartySystem
+// Owns every player party.
+// Maps ask for changes with the requests in common/party_data.h and see the result in their copy.
+// Runs beside the map's own party code for now: nothing reads the copies yet.
+class PartySystem final
 {
 public:
-    PartySystem(WorldEngine& worldServer)
-    : worldServer_(worldServer)
-    {
-        std::ignore = worldServer_;
-    }
+    explicit PartySystem(xi::replica::Owner& replica);
 
-    ~PartySystem() = default;
+    void join(uint32 memberId, uint32 joinerId);
+    void leave(uint32 charId);
+    void setLeader(uint32 charId);
+    void disband(uint32 charId);
 
-    bool handleMessage(uint8 messageType, IPPMessage&& message)
-    {
-        return false;
-    }
+    // the party for id, or null
+    auto get(uint64 partyId) const -> const xi::Party*;
+
+    // 0 when the character is not in a party
+    auto partyOf(uint32 charId) const -> uint64;
 
 private:
-    WorldEngine& worldServer_;
+    xi::replica::Owned<xi::Party>& parties_;
+    HashMap<uint32, uint64>        partyOf_;
+    uint64                         nextPartyId_{ 1 };
 };
