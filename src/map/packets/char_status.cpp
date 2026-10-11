@@ -360,7 +360,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
         // Sword & Shield icon only shows outside of the Feretory
         if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
         {
-            packet->Flags2.BallistaFlg |= 0x08; // 0x18?
+            flags2.BallistaFlg |= 0x08;
         }
     }
 

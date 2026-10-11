@@ -304,6 +304,22 @@ describe('Monstrosity restrictions', function()
         assert(warned, 'no warning before Gestation wore off')
     end)
 
+    -- Retail sends BallistaFlg 0x09 in 0x037 under Belligerency outside the Feretory. Its 0x08 bit is bit 0 of byte 0x37.
+    it('shows the Belligerency icon in the status packet', function()
+        player:setBelligerencyFlag(true)
+        player.packets:clear()
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+
+        local shown = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x037 then
+                shown = bit.band(pkt.data[0x37], 0x01) ~= 0
+            end
+        end
+
+        assert(shown, string.format('0x037 shows the Belligerency icon: %s', tostring(shown)))
+    end)
+
     -- Rank follows the infamy held, and is Mon outside Belligerency.
     describe('rank', function()
         local function shownRank()
