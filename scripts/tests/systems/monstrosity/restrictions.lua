@@ -304,6 +304,22 @@ describe('Monstrosity restrictions', function()
         assert(warned, 'no warning before Gestation wore off')
     end)
 
+    -- Retail marks a Monipulator in the party packet with 0x8000 and the species.
+    it('flags the species in the party packet', function()
+        player.packets:clear()
+        helpers.sendGameOk(player)
+
+        local flag = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x0DF then
+                flag = pkt.data[0x1C] + pkt.data[0x1D] * 256
+            end
+        end
+
+        local expected = 0x8000 + player:getMonstrosityData().species
+        assert(flag == expected, string.format('0x0DF flag %s, expected %d', tostring(flag), expected))
+    end)
+
     -- Retail sends BallistaFlg 0x09 in 0x037 under Belligerency outside the Feretory. Its 0x08 bit is bit 0 of byte 0x37.
     it('shows the Belligerency icon in the status packet', function()
         player:setBelligerencyFlag(true)
@@ -418,16 +434,18 @@ describe('Monstrosity restrictions', function()
     -- Bee is the JP wiki's +120%, the same as Rabbit.
     local retailHP =
     {
-        { name = 'Lizard',     family = xi.monstrositySpecies.LIZARD,     hp = { [1] = 79, [5] = 276, [9] = 463 } },
-        { name = 'Rabbit',     family = xi.monstrositySpecies.RABBIT,     hp = { [1] = 72, [2] = 110, [3] = 154, [4] = 200, [5] = 253, [6] = 292, [7] = 334, [8] = 378, [9] = 424 } },
-        { name = 'Bee',        family = xi.monstrositySpecies.BEE,        hp = { [1] = 72, [5] = 253, [9] = 424 } },
-        { name = 'Mandragora', family = xi.monstrositySpecies.MANDRAGORA, hp = { [1] = 93 } },
+        { name = 'Lizard',     family = xi.monstrositySpecies.LIZARD,          hp = { [1] = 79, [5] = 276, [9] = 463 } },
+        { name = 'Rabbit',     family = xi.monstrositySpecies.RABBIT,          hp = { [1] = 72, [2] = 110, [3] = 154, [4] = 200, [5] = 253, [6] = 292, [7] = 334, [8] = 378, [9] = 424 } },
+        { name = 'Bee',        family = xi.monstrositySpecies.BEE,             hp = { [1] = 72, [5] = 253, [9] = 424 } },
+        { name = 'Mandragora', family = xi.monstrositySpecies.MANDRAGORA,      hp = { [1] = 93 } },
+        { name = 'Goobbue',    family = xi.monstrositySpecies.GOOBBUE,         hp = { [1] = 82, [7] = 380, [8] = 430, [9] = 482 } },
+        { name = 'Slime',      family = xi.monstrositySpecies.ASTOLTIAN_SLIME, hp = { [1] = 79, [5] = 276, [9] = 463 }, species = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME },
     }
 
     for _, species in ipairs(retailHP) do
         it(string.format('gives a %s its retail HP', species.name), function()
             for level, expected in pairs(species.hp) do
-                helpers.becomeSpecies(player, species.family, species.family, level)
+                helpers.becomeSpecies(player, species.family, species.species or species.family, level)
                 assert(player:getMaxHP() == expected, string.format('%s %d has %d HP, expected %d', species.name, level, player:getMaxHP(), expected))
             end
         end)
@@ -651,5 +669,63 @@ describe('Monstrosity spellcasting', function()
         cast(xi.magic.spell.SHANTOTTO, player)
 
         assert(player:getPartySize() == 1, 'a Monipulator called a Trust')
+    end)
+end)
+
+-- Retail level 10 status screens with no instincts, and a Metal Slime capture from levels 1-10.
+-- HP and MP are checked at level 9, below the first HP merit step.
+describe('Monstrosity slimes', function()
+    ---@type CClientEntityPair
+    local player
+
+    local stats = { xi.mod.STR, xi.mod.DEX, xi.mod.VIT, xi.mod.AGI, xi.mod.INT, xi.mod.MND, xi.mod.CHR }
+
+    local slimes =
+    {
+        { name = 'Slime',       species = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME, hp = 463, mp = 0,   stats = { 16, 16, 12, 18, 13,  9, 16 }, attack = 53, defence = 79  },
+        { name = 'She-Slime',   species = 256 + xi.monstrosityVariant.SHE_SLIME,       hp = 463, mp = 0,   stats = { 16, 16, 12, 18, 13,  9, 16 }, attack = 63, defence = 79  },
+        { name = 'Metal Slime', species = 256 + xi.monstrosityVariant.METAL_SLIME,     hp = 7,   mp = 374, stats = { 11, 16, 10, 18, 18, 10, 16 }, attack = 50, defence = 315 },
+    }
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+    end)
+
+    for _, slime in ipairs(slimes) do
+        it(string.format('gives a level 9 %s its retail HP and MP', slime.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, slime.species, 9)
+
+            assert(player:getMaxHP() == slime.hp, string.format('%d HP, retail %d', player:getMaxHP(), slime.hp))
+            assert(player:getMaxMP() == slime.mp, string.format('%d MP, retail %d', player:getMaxMP(), slime.mp))
+        end)
+
+        it(string.format('gives a level 10 %s stats close to retail', slime.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, slime.species, 10)
+
+            for idx, stat in ipairs(stats) do
+                local value = player:getStat(stat)
+                assert(math.abs(value - slime.stats[idx]) <= 2, string.format('stat %d is %d, retail %d', idx, value, slime.stats[idx]))
+            end
+
+            local attack  = player:getStat(xi.mod.ATT)
+            local defence = player:getStat(xi.mod.DEF)
+            assert(math.abs(attack - slime.attack) <= 5, string.format('attack %d, retail %d', attack, slime.attack))
+            assert(math.abs(defence - slime.defence) <= 15, string.format('defence %d, retail %d', defence, slime.defence))
+        end)
+    end
+
+    -- Retail HP is the base slime's divided by 60, and MP is a full BLM's.
+    it('gives a level 1 Metal Slime 1 HP and 94 MP', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, 256 + xi.monstrosityVariant.METAL_SLIME, 1)
+
+        assert(player:getMaxHP() == 1, string.format('%d HP', player:getMaxHP()))
+        assert(player:getMaxMP() == 94, string.format('%d MP', player:getMaxMP()))
+    end)
+
+    it('runs Frizz as a Metal Slime', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, 256 + xi.monstrosityVariant.METAL_SLIME, 10)
+
+        local used = helpers.useMoveOnRabbit(player, 688)
+        assert(used == 3127, string.format('expected mob skill 3127, got %s', tostring(used)))
     end)
 end)

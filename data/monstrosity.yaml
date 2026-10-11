@@ -3,7 +3,7 @@
 # Monstrosity species, instincts, TP moves and the exp curve.
 
 monstrosity:
-  # Exp needed to clear each level. Levels 1-40 match retail. TODO: 41-99 have no source.
+  # Exp needed to clear each level. Levels 1-51 match retail. TODO: 52-99 have no source.
   exp_table:
     1:    300
     2:    400
@@ -3393,18 +3393,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -3423,6 +3426,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -3510,7 +3514,7 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         2
-      look:         0x0000
+      look:         0x0128
       ecosystem:    plantoid
       hp_scale:     250
       tp_skills:
@@ -3519,19 +3523,22 @@ monstrosity:
           mob_skill_id: 583
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        uppercut
           dat_skill_id: 438
           mob_skill_id: 584
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blow
           dat_skill_id: 436
           mob_skill_id: 581
           unlock_level: 20
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blank_gaze
           dat_skill_id: 439
           mob_skill_id: 586
@@ -5311,6 +5318,7 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1700
           enabled:      false
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10.
     astoltian_slime:
       family:       astoltian_slime
       species_code: 254
@@ -5321,6 +5329,14 @@ monstrosity:
       look:         0x0B41
       ecosystem:    amorph
       hitbox:       6
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
     eorzean_spriggan:
       family:       eorzean_spriggan
       species_code: 255
@@ -6374,18 +6390,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6404,6 +6423,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -6427,18 +6447,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6457,6 +6480,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -6480,18 +6504,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6510,6 +6537,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -6533,18 +6561,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6563,6 +6594,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        petal_pirouette
           dat_skill_id: 599
@@ -6598,18 +6630,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6628,6 +6663,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        petal_pirouette
           dat_skill_id: 599
@@ -6662,18 +6698,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6692,6 +6731,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -6715,18 +6755,21 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6745,6 +6788,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -9589,6 +9633,7 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10. Retail attack is about 1.2 times the Slime's.
     astoltian_she_slime:
       family:       astoltian_slime
       species_code: 508
@@ -9598,22 +9643,48 @@ monstrosity:
       size:         0
       look:         0x0B5B
       ecosystem:    amorph
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
+      mods:
+        attp: 20
+    # Retail HP is the base slime's divided by 60, and defence is about four times as high.
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10.
     astoltian_metal_slime:
       family:       astoltian_slime
       species_code: 509
       name:         Astoltian Metal Slime
       mjob:         blm
       sjob:         war
+      hp_mjob:      war
+      hp_sjob:      war
       size:         0
       look:         0x0B5C
       ecosystem:    amorph
+      hp_scale:     4
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
+      mods:
+        defp: 300
       tp_skills:
-        - skill:        frizz # No mob_skills row yet
+        - skill:        frizz # TODO: Retail readies it with msg 716, starts casting.
           dat_skill_id: 688
           mob_skill_id: 3127
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   400
+          enabled:      true
     eorzean_spriggan_c:
       family:       eorzean_spriggan
       species_code: 510

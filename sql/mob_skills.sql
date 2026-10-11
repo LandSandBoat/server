@@ -3155,7 +3155,7 @@ INSERT INTO `mob_skills` VALUES (3123,0,'fighting_stance_a',0,0.0,7.0,0,1500,1,0
 -- INSERT INTO `mob_skills` VALUES (3124,2868,'fighting_stance_b',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3125,2869,'fighting_stance_g',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3126,2870,'fighting_stance_d',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3127,2267,'frizz',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0); -- basically a spell
+INSERT INTO `mob_skills` VALUES (3127,2267,'frizz',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3128,2268,'astoltian_slime_hit',0,0.0,5.0,2000,0,4,0,0,0,0,0,0); -- not a melee sub exactly, rather a mobskill with no message
 -- INSERT INTO `mob_skills` VALUES (3129,2269,'astoltian_slime_run',0,0.0,7.0,2000,0,4,0,0,0,0,0,0); -- depops mob
 -- INSERT INTO `mob_skills` VALUES (3130,2874,'barreling_smash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

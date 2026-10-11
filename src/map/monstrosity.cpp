@@ -466,6 +466,28 @@ void delAllInstinctMods(CCharEntity* PChar)
     }
 }
 
+void addSpeciesMods(CCharEntity* PChar)
+{
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
+    {
+        for (const auto& [mod, value] : species->mods)
+        {
+            PChar->addModifier(mod, value);
+        }
+    }
+}
+
+void delSpeciesMods(CCharEntity* PChar)
+{
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
+    {
+        for (const auto& [mod, value] : species->mods)
+        {
+            PChar->delModifier(mod, value);
+        }
+    }
+}
+
 auto instinctModTotal(const std::array<uint16, 12>& equipped, const xi::Mod mod) -> int32
 {
     auto total = int32{ 0 };
@@ -845,6 +867,7 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
         if (PChar->m_PMonstrosity != nullptr)
         {
             delAllInstinctMods(PChar);
+            delSpeciesMods(PChar);
             PChar->m_PMonstrosity = nullptr;
             PChar->m_EcoSystem    = xi::Ecosystem::Humanoid;
             PChar->baseSpeed      = settings::get<uint8>("map.BASE_SPEED");
@@ -870,6 +893,7 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
     // JP wiki: entering Monstrosity leaves any party.
     charutils::LeaveParty(PChar);
     addAllInstinctMods(PChar);
+    addSpeciesMods(PChar);
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
@@ -885,6 +909,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     }
 
     addAllInstinctMods(PChar);
+    addSpeciesMods(PChar);
 
     // TODO: Does logging in outside the Feretory give Gestation again after it was clicked off? And under Belligerency?
     if (PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
@@ -1099,8 +1124,10 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             return;
         }
 
+        delSpeciesMods(PChar);
         PChar->m_PMonstrosity->Species       = data.SpeciesIndex;
         PChar->m_PMonstrosity->StanceSpecies = 0;
+        addSpeciesMods(PChar);
 
         PChar->m_PMonstrosity->MonstrosityId = species->monstrosityId;
         PChar->m_PMonstrosity->MainJob       = species->mjob;
@@ -1222,19 +1249,23 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
     // The species scale covers instinct HP too, which UpdateHealth then adds unscaled, so it comes off here.
     const auto instinctHP = instinctModTotal(data.EquippedInstincts, xi::Mod::HP);
 
-    const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
+    const auto baseHP   = mobutils::MonipulatorBaseHP(species->hpMjob, species->hpSjob, level) + cappedMerit(xi::Merit::MaxHp, 10);
     PChar->health.maxhp = static_cast<int32>(species->hpScale * (baseHP + instinctHP) / 100) - instinctHP;
 
-    // Retail MP comes from a mage sub job, or a PLD main or sub.
-    // TODO: DRK subs and mage main jobs are unverified. The PLD split is fit at level 30 only.
+    // Retail MP comes from a BLM or PLD main job, or a mage or PLD sub job.
+    // TODO: DRK subs and WHM or RDM main jobs are unverified. The PLD split is fit at level 30 only.
     const auto mainMP = [&]() -> int32
     {
-        if (data.MainJob == xi::Job::PLD)
+        switch (data.MainJob)
         {
-            return 17 * level;
+            // Metal Slime and Spriggan.G, levels 1-10.
+            case xi::Job::BLM:
+                return 35 * level + 59;
+            case xi::Job::PLD:
+                return 17 * level;
+            default:
+                return 0;
         }
-
-        return 0;
     }();
 
     const auto subMP = [&]() -> int32
@@ -1262,16 +1293,24 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
         PChar->health.maxmp += cappedMerit(xi::Merit::MaxMp, 10);
     }
 
-    if (!species->mobSpecies)
+    if (!species->statRanks && !species->mobSpecies)
     {
         return;
     }
 
-    const auto& ranks = mobutils::GetSpeciesData(*species->mobSpecies).MobAttributes.Stats;
+    const auto familyRanks = [&]() -> std::array<xi::StatRank, 7>
+    {
+        if (species->statRanks)
+        {
+            return *species->statRanks;
+        }
 
-    const auto     familyRanks = std::array{ ranks.Str, ranks.Dex, ranks.Vit, ranks.Agi, ranks.Int, ranks.Mnd, ranks.Chr };
-    constexpr auto statMerits  = std::array{ xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
-    auto           values      = std::array<uint16, 7>{};
+        const auto& ranks = mobutils::GetSpeciesData(*species->mobSpecies).MobAttributes.Stats;
+        return { ranks.Str, ranks.Dex, ranks.Vit, ranks.Agi, ranks.Int, ranks.Mnd, ranks.Chr };
+    }();
+
+    constexpr auto statMerits = std::array{ xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
+    auto           values     = std::array<uint16, 7>{};
 
     for (std::size_t idx = 0; idx < values.size(); ++idx)
     {

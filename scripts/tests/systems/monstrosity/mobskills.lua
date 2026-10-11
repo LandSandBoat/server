@@ -667,19 +667,6 @@ describe('Monstrosity variant moves', function()
         { name = 'Vermillion and Onyx Bee', family = xi.monstrositySpecies.BEE,        species = onyxBee,     dat = 319, mob = 334                     },
     }
 
-    local function useOn(datSkillId)
-        local mob = player.entities:moveTo('Wild_Rabbit')
-        mob:respawn()
-        player.entities:moveTo(mob:getID())
-
-        local usedSkill = helpers.watchSkill(player)
-        player:setTP(3000)
-        player.actions:useMonsterSkill(mob, datSkillId)
-        player:removeListener('TEST_MON_SKILL')
-
-        return usedSkill()
-    end
-
     before_each(function()
         player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
     end)
@@ -688,7 +675,7 @@ describe('Monstrosity variant moves', function()
         it(string.format('gives %s its first move', variant.name), function()
             helpers.becomeSpecies(player, variant.family, variant.species, 15)
 
-            local used = useOn(variant.dat)
+            local used = helpers.useMoveOnRabbit(player, variant.dat)
             assert(used == variant.mob, string.format('expected mob skill %d, got %s', variant.mob, tostring(used)))
         end)
     end
@@ -697,7 +684,7 @@ describe('Monstrosity variant moves', function()
     it('keeps Snow Cloud from a base Rabbit', function()
         helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 60)
 
-        assert(useOn(snowCloudDat) == nil, 'a base Rabbit used Snow Cloud')
+        assert(helpers.useMoveOnRabbit(player, snowCloudDat) == nil, 'a base Rabbit used Snow Cloud')
     end)
 
     -- The BLM sub job's share of HP is not fitted yet, so this sits a little low.
@@ -706,6 +693,32 @@ describe('Monstrosity variant moves', function()
 
         assert(player:getMaxHP() >= 740 and player:getMaxHP() <= 772, string.format('Ashen Lizard 15 has %d HP', player:getMaxHP()))
     end)
+end)
+
+-- Retail Goobbue moves, from level 1-26 captures.
+describe('Monstrosity Goobbue moves', function()
+    ---@type CClientEntityPair
+    local player
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+    end)
+
+    local moves =
+    {
+        { name = 'Beatdown', level = 1,  dat = 437, mob = 583 },
+        { name = 'Uppercut', level = 10, dat = 438, mob = 584 },
+        { name = 'Blow',     level = 20, dat = 436, mob = 581 },
+    }
+
+    for _, move in ipairs(moves) do
+        it(string.format('runs %s at level %d', move.name, move.level), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.GOOBBUE, xi.monstrositySpecies.GOOBBUE, move.level)
+
+            local used = helpers.useMoveOnRabbit(player, move.dat)
+            assert(used == move.mob, string.format('expected mob skill %d, got %s', move.mob, tostring(used)))
+        end)
+    end
 end)
 
 -- Fighting Stance swaps a Wamouracampa to its Coiled form and back. The client reads the form from 0x037.

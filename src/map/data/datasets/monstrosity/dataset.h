@@ -30,7 +30,9 @@
 #include "data/enums/mod.h"
 #include "data/enums/monstrosity_species.h"
 #include "data/enums/monstrosity_variant.h"
+#include "data/enums/stat_rank.h"
 
+#include <array>
 #include <cstddef>
 #include <map>
 #include <string_view>
@@ -59,19 +61,23 @@ struct MonstrosityInstinct
 
 struct MonstrositySpecies
 {
-    uint8                           monstrosityId{};
-    xi::Job                         mjob{};
-    xi::Job                         sjob{};
-    uint8                           size{};
-    uint16                          look{};
-    xi::Ecosystem                   ecosystem{};
-    Maybe<uint16>                   mobSpecies{};
-    uint16                          hpScale{};
-    Maybe<uint8>                    speed{};
-    Maybe<uint8>                    animationSpeed{};
-    Maybe<uint8>                    hitbox{};
-    Maybe<uint16>                   stanceSpecies{};
-    std::vector<MonstrosityTpSkill> tpSkills{};
+    uint8                              monstrosityId{};
+    xi::Job                            mjob{};
+    xi::Job                            sjob{};
+    xi::Job                            hpMjob{};
+    xi::Job                            hpSjob{};
+    uint8                              size{};
+    uint16                             look{};
+    xi::Ecosystem                      ecosystem{};
+    Maybe<uint16>                      mobSpecies{};
+    Maybe<std::array<xi::StatRank, 7>> statRanks{};
+    uint16                             hpScale{};
+    Maybe<uint8>                       speed{};
+    Maybe<uint8>                       animationSpeed{};
+    Maybe<uint8>                       hitbox{};
+    Maybe<uint16>                      stanceSpecies{};
+    HashMap<xi::Mod, int16>            mods{};
+    std::vector<MonstrosityTpSkill>    tpSkills{};
 };
 
 // One slot in Teyrnon's shop. Exactly one of species and variant is set.

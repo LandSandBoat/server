@@ -108,6 +108,23 @@ function helpers.watchSkill(player)
     end
 end
 
+-- Uses a move on a fresh Wild Rabbit with full TP. Returns the mob skill id the AI entered, if any.
+---@param player CClientEntityPair
+---@param datSkillId integer
+---@return integer?
+function helpers.useMoveOnRabbit(player, datSkillId)
+    local mob = player.entities:moveTo('Wild_Rabbit')
+    mob:respawn()
+    player.entities:moveTo(mob:getID())
+
+    local usedSkill = helpers.watchSkill(player)
+    player:setTP(3000)
+    player.actions:useMonsterSkill(mob, datSkillId)
+    player:removeListener('TEST_MON_SKILL')
+
+    return usedSkill()
+end
+
 -- exp_now in the last CLISTATUS received.
 ---@param player CClientEntityPair
 ---@return integer?

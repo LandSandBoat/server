@@ -133,18 +133,34 @@ auto Dataset::decode(const std::string_view text) -> Records
         }
 
         auto record = MonstrositySpecies{
-            .monstrosityId  = static_cast<uint8>(yaml::resolveEnum(species.family)),
-            .mjob           = yaml::resolveEnum(species.mjob),
-            .sjob           = yaml::resolveEnum(species.sjob),
-            .size           = species.size,
-            .look           = species.look,
-            .ecosystem      = yaml::resolveEnum(species.ecosystem),
-            .mobSpecies     = species.mob_species,
+            .monstrosityId = static_cast<uint8>(yaml::resolveEnum(species.family)),
+            .mjob          = yaml::resolveEnum(species.mjob),
+            .sjob          = yaml::resolveEnum(species.sjob),
+            .hpMjob        = yaml::resolveEnum(species.hp_mjob, yaml::resolveEnum(species.mjob)),
+            .hpSjob        = yaml::resolveEnum(species.hp_sjob, yaml::resolveEnum(species.sjob)),
+            .size          = species.size,
+            .look          = species.look,
+            .ecosystem     = yaml::resolveEnum(species.ecosystem),
+            .mobSpecies    = species.mob_species,
+            .statRanks     = species.stat_ranks.transform(
+                [](const xi::data::shared::StatRanks& ranks) -> std::array<xi::StatRank, 7>
+                {
+                    return {
+                        yaml::resolveEnum(ranks.str),
+                        yaml::resolveEnum(ranks.dex),
+                        yaml::resolveEnum(ranks.vit),
+                        yaml::resolveEnum(ranks.agi),
+                        yaml::resolveEnum(ranks.intelligence),
+                        yaml::resolveEnum(ranks.mnd),
+                        yaml::resolveEnum(ranks.chr),
+                    };
+                }),
             .hpScale        = species.hp_scale.value_or(kDefaultHPScale),
             .speed          = species.speed,
             .animationSpeed = species.animation_speed,
             .hitbox         = species.hitbox,
             .stanceSpecies  = species.stance_species,
+            .mods           = yaml::resolveKeys(species.mods),
         };
 
         if (species.tp_skills.has_value())
