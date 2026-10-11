@@ -24,7 +24,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
       stats:
         hp: 500
     loot:
@@ -1180,8 +1180,9 @@ slots:
       17358921: {} # Orcish_Stonechucker
       17358922: {} # Orcish_Neckchopper
   - members:
-      17358928: {} # Orcish_Grunt
-      17358929: {} # Orcish_Stonechucker
+      17358928: {}                           # Orcish_Grunt
+      17358929: {}                           # Orcish_Stonechucker
+      17358932: {chance: 15, cooldown: 3600} # Ashmaker_Gotblut
   - members:
       17358933: {} # Orcish_Grunt
       17358935: {} # Orcish_Neckchopper

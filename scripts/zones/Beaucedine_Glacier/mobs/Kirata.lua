@@ -2,15 +2,8 @@
 -- Area: Beaucedine Glacier (111)
 --   NM: Kirata
 -----------------------------------
-local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.KIRATA - 1] = ID.mob.KIRATA, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

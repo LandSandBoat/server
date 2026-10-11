@@ -7,11 +7,6 @@ local ID = zones[xi.zone.JUGNER_FOREST]
 ---@type TMobEntity
 local entity = {}
 
-entity.phList =
-{
-    [ID.mob.FRADUBIO - 1] = ID.mob.FRADUBIO, -- Confirmed on retail
-}
-
 local updateRegen = function(mob)
     local hour = VanadielHour()
     if hour >= 4 and hour < 20 then

@@ -3,15 +3,8 @@
 --   NM: Emergent Elm
 -- !pos 71.000 -33.000 627.000 52
 -----------------------------------
-local ID = zones[xi.zone.BHAFLAU_THICKETS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.EMERGENT_ELM - 2] = ID.mob.EMERGENT_ELM, -- 86.000 -35.000 621.000
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,19 +2,8 @@
 -- Area: The Boyahda Tree
 --   NM: Unut
 -----------------------------------
-local ID = zones[xi.zone.THE_BOYAHDA_TREE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.UNUT - 2]  = ID.mob.UNUT,  -- Confirmed on retail
-    [ID.mob.UNUT + 14] = ID.mob.UNUT,  -- Confirmed on retail
-    [ID.mob.UNUT + 24]  = ID.mob.UNUT, -- Confirmed on retail
-    [ID.mob.UNUT + 31]  = ID.mob.UNUT, -- Confirmed on retail
-
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3600)

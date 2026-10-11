@@ -2,15 +2,8 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Sewer Syrup
 -----------------------------------
-local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SEWER_SYRUP - 1] = ID.mob.SEWER_SYRUP, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)

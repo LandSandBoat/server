@@ -181,7 +181,7 @@ TEST_CASE("mobs: slot members resolve to declared spawns", "[data][mob]")
         }
     }
 
-    REQUIRE(members == 161);
+    REQUIRE(members == 165);
 }
 
 TEST_CASE("mobs: a template keeps its resist ranks", "[data][mob]")

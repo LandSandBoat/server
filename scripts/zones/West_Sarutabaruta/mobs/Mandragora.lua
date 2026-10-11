@@ -3,8 +3,6 @@
 --  Mob: Mandragora
 -- Note: PH for Tom Tit Tat
 -----------------------------------
-local ID = zones[xi.zone.WEST_SARUTABARUTA]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -18,7 +16,6 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Currently, this will look up both Tom Tit Tats to try to spawn them
-    xi.mob.phOnDespawn(mob, ID.mob.TOM_TIT_TAT[1], 10, math.randomInt(3600, 7200)) -- 1 to 2 hours
 end
 
 return entity

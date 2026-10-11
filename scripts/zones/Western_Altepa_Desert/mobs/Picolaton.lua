@@ -3,17 +3,8 @@
 --   NM: Picolaton
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.PICOLATON - 8] = ID.mob.PICOLATON, -- Confirmed on retail
-    [ID.mob.PICOLATON - 1] = ID.mob.PICOLATON, -- Confirmed on retail
-    [ID.mob.PICOLATON + 9] = ID.mob.PICOLATON, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,15 +2,8 @@
 -- Area: Xarcabard
 --  Mob: Shadow Eye
 -----------------------------------
-local ID = zones[xi.zone.XARCABARD]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SHADOW_EYE - 6] = ID.mob.SHADOW_EYE, -- Confirmed on retail
-}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)

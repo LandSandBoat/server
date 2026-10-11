@@ -3,8 +3,6 @@
 --  Mob: Antican Signifer
 -- Note: PH for Centurio X-I and Antican Proconsul
 -----------------------------------
-local ID = zones[xi.zone.QUICKSAND_CAVES]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,12 +15,6 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 817, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 818, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 819, 2, xi.regime.type.GROUNDS)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.CENTURIO_X_I, 10, 9000) -- 2.5 hours
-    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_MAGISTER, 10, 3600) -- 1 hour
-    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_PROCONSUL, 10, 3600) -- 1 hour
 end
 
 return entity

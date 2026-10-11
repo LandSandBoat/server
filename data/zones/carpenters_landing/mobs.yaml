@@ -873,7 +873,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3000
     loot:
@@ -2883,3 +2883,6 @@ slots:
   - members:
       16785703: {} # Diving_Beetle
       16785708: {} # Shrieker
+  - members:
+      16785675: {}                           # Birdtrap
+      16785676: {chance: 15, cooldown: 3600} # Orctrap

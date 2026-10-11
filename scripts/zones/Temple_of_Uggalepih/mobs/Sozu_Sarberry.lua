@@ -8,15 +8,8 @@ mixins =
     require('scripts/mixins/job_special')
 }
 -----------------------------------
-local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SOZU_SARBERRY - 3] = ID.mob.SOZU_SARBERRY, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3000)

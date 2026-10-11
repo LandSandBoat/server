@@ -1244,7 +1244,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 590
     loot:
@@ -3634,10 +3634,6 @@ slots:
       17219841: {} # Mad_Sheep
       17219847: {} # Wolf_Zombie
   - members:
-      17219885: {} # Tremor_Ram
-      17219886: {} # Rampaging_Ram
-      17219887: {} # Steelfleece_Baldarich
-  - members:
       17219890: {} # Greater_Quadav
       17219894: {} # Skeleton_Warrior
   - members:
@@ -3670,3 +3666,8 @@ slots:
   - members:
       17219993: {} # Onyx_Quadav
       17219995: {} # Skeleton_Sorcerer
+  - members:
+      17219791: {}                         # Mad_Sheep
+      17219795: {chance: 8, cooldown: 300} # Stray_Mary
+      17219928: {}                         # Mad_Sheep
+      17219933: {chance: 8, cooldown: 300} # Stray_Mary

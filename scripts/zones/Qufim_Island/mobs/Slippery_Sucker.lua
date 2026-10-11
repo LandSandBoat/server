@@ -2,16 +2,8 @@
 -- Area: Qufim Island
 --   NM: Slippery Sucker
 -----------------------------------
-local ID = zones[xi.zone.QUFIM_ISLAND]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SLIPPERY_SUCKER - 13] = ID.mob.SLIPPERY_SUCKER, -- Confirmed on retail
-    [ID.mob.SLIPPERY_SUCKER - 9] = ID.mob.SLIPPERY_SUCKER, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

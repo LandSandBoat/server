@@ -2,15 +2,8 @@
 -- Area: Bibiki Bay
 --   NM: Splacknuck
 -----------------------------------
-local ID = zones[xi.zone.BIBIKI_BAY]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SPLACKNUCK - 1] = ID.mob.SPLACKNUCK, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

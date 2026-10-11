@@ -545,7 +545,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9500
     loot:
@@ -4910,11 +4910,11 @@ spawns:
     region:   s_179
     level:    [78, 81]
   17174708:
-    template: Mountain_Scolopendrid
+    template: Mountain_Scolopendrid # Needs captures
     region:   s_180
     level:    [78, 81]
   17174709:
-    template: Centipedal_Centruroides
+    template: Centipedal_Centruroides          # Needs captures
     at:       [133.834, 22.199, -208.700, 239]
     level:    [81, 83]
   17174710:
@@ -7003,3 +7003,8 @@ spawns:
     template: Akupara
     at:       [-513.702, 15.614, 518.762, 111]
     level:    [92, 95]
+
+slots:
+  - members:
+      17174708: {}                           # Mountain_Scolopendrid, Needs captures
+      17174709: {chance: 15, cooldown: 3600} # Centipedal_Centruroides, Needs captures

@@ -8,15 +8,8 @@ mixins =
     require('scripts/mixins/draw_in'),
 }
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.LORD_OF_ONZOZO - 1] = ID.mob.LORD_OF_ONZOZO, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

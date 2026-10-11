@@ -303,7 +303,7 @@ templates:
         model_size:    1
         hitbox:       16
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -4762,7 +4762,7 @@ spawns:
     region:   e_172
     level:    [47, 50]
   17178798:
-    template: Lynx_SCS
+    template: Lynx_SCS # Needs captures
     script:   Lynx
     region:   e_174
     level:    [47, 50]
@@ -4787,7 +4787,7 @@ spawns:
     region:   e_178
     level:    [47, 50]
   17178803:
-    template: Balam-Quitz
+    template: Balam-Quitz                    # Needs captures
     at:       [446.853, 23.817, 72.982, 141]
     level:    [69, 75]
   17178804:
@@ -6484,3 +6484,8 @@ spawns:
     level:    [92, 94]
   17179269:
     template: Time_Bomb
+
+slots:
+  - members:
+      17178798: {}                           # Lynx, Needs captures
+      17178803: {chance: 15, cooldown: 3600} # Balam-Quitz, Needs captures

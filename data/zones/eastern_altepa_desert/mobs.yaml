@@ -799,7 +799,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5500
     loot:
@@ -859,7 +859,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4300
     loot:
@@ -3593,3 +3593,9 @@ slots:
   - members:
       17244479: {} # Lesser_Manticore
       17244504: {} # Lesser_Manticore
+  - members:
+      17244263: {}                           # Sand_Beetle
+      17244268: {chance: 15, cooldown: 3600} # Donnergugi
+  - members:
+      17244395: {}                           # Giant_Spider
+      17244396: {chance: 15, cooldown: 3600} # Dune_Widow

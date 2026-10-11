@@ -9,11 +9,6 @@ local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 ---@type TMobEntity
 local entity = {}
 
-entity.phList =
-{
-    [ID.mob.ZORAAL_JAS_PKUUCHA - 1] = ID.mob.ZORAAL_JAS_PKUUCHA, -- Confirmed on retail
-}
-
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

@@ -4,15 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.PALBOROUGH_MINES]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.ZI_GHI_BONEEATER - 3] = ID.mob.ZI_GHI_BONEEATER, -- Confirmed on retail
-}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 220)

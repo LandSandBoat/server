@@ -1364,7 +1364,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3500
     loot:
@@ -1425,7 +1425,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -3216,10 +3216,11 @@ slots:
       17293348: {} # Giant_Trapper
       17293350: {} # Giant_Hunter
   - members:
-      17293376: {} # Giant_Ranger
-      17293377: {} # Giant_Ascetic
-      17293378: {} # Giant_Trapper
-      17293380: {} # Giant_Hunter
+      17293376: {}                          # Giant_Ranger
+      17293377: {}                          # Giant_Ascetic
+      17293378: {}                          # Giant_Trapper
+      17293380: {}                          # Giant_Hunter
+      17293389: {chance: 15, cooldown: 600} # Slippery_Sucker
   - members:
       17293381: {} # Giant_Ranger
       17293382: {} # Giant_Ascetic
@@ -3270,3 +3271,6 @@ slots:
       17293575: {} # Giant_Ascetic
       17293576: {} # Giant_Trapper
       17293578: {} # Giant_Hunter
+  - members:
+      17293536: {}                           # Dancing_Weapon
+      17293537: {chance: 15, cooldown: 3600} # Trickster_Kinetix

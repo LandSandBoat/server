@@ -275,7 +275,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 2920
     loot:
@@ -340,7 +340,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 1570
     loot:
@@ -426,7 +426,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 2240
     loot:
@@ -559,7 +559,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
     loot:
       drops:
         - chance: always
@@ -3267,8 +3267,9 @@ slots:
       17395783: {} # Yagudo_Drummer
       17395784: {} # Yagudo_Interrogator
   - members:
-      17395798: {} # Yagudo_Drummer
-      17395799: {} # Yagudo_Interrogator
+      17395798: {}                           # Yagudo_Drummer
+      17395799: {}                           # Yagudo_Interrogator
+      17395800: {chance: 15, cooldown: 3000} # Mee_Deggi_the_Punisher
   - members:
       17395802: {} # Yagudo_Theologist
       17395803: {} # Yagudo_Priest
@@ -3307,8 +3308,9 @@ slots:
       17395852: {} # Yagudo_Drummer
       17395855: {} # Yagudo_Interrogator
   - members:
-      17395867: {} # Yagudo_Herald
-      17395868: {} # Yagudo_Oracle
+      17395867: {}                           # Yagudo_Herald
+      17395868: {}                           # Yagudo_Oracle
+      17395870: {chance: 15, cooldown: 3600} # Quu_Domi_the_Gallant
   - members:
       17395876: {} # Yagudo_Herald
       17395877: {} # Yagudo_Drummer
@@ -3328,8 +3330,9 @@ slots:
       17395951: {} # Yagudo_Conquistador
       17395952: {} # Yagudo_Lutenist
   - members:
-      17395950: {} # Yagudo_Zealot
-      17395953: {} # Yagudo_Prior
+      17395950: {}                           # Yagudo_Zealot
+      17395953: {}                           # Yagudo_Prior
+      17395954: {chance: 15, cooldown: 3600} # Yaa_Haqa_the_Profane
   - members:
       17396029: {} # Bulwark_Bat
       17396054: {} # Bulwark_Bat
@@ -3360,3 +3363,6 @@ slots:
   - members:
       17396088: {} # Yagudo_Chanter
       17396090: {} # Yagudo_Abbot
+  - members:
+      17395813: {}                           # Yagudo_Theologist
+      17395816: {chance: 15, cooldown: 3600} # Moo_Ouzi_the_Swiftblade

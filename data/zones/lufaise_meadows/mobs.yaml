@@ -1609,7 +1609,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5500
     loot:
@@ -3611,9 +3611,10 @@ slots:
       16875701: {} # Orcish_Gladiator
       16875702: {} # Orcish_Trooper
   - members:
-      16875711: {} # Gigantobugard
-      16875720: {} # Gigantobugard
-      16875739: {} # Gigantobugard
+      16875711: {}                           # Gigantobugard
+      16875720: {}                           # Gigantobugard
+      16875739: {}                           # Gigantobugard
+      16875741: {chance: 15, cooldown: 3600} # Megalobugard
   - members:
       16875712: {} # Gigas_Warwolf
       16875715: {} # Orcish_Gladiator

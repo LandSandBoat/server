@@ -1645,7 +1645,7 @@ templates:
         entity_flags: 131
         hitbox:        10
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4800
     loot:
@@ -3421,7 +3421,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4700
     loot:
@@ -5084,7 +5084,7 @@ spawns:
     region:   s_73
     level:    [44, 47]
   17109268:
-    template: Ladybug
+    template: Ladybug  # Needs captures
     region:   s_73
     level:    [44, 47]
   17109269:
@@ -5200,12 +5200,12 @@ spawns:
     region:   s_301
     level:    [53, 55]
   17109295:
-    template: Battrap_past
+    template: Battrap_past # Needs captures
     script:   Battrap
     region:   s_303
     level:    [35, 37]
   17109296:
-    template: Goblintrap
+    template: Goblintrap                      # Needs captures
     at:       [168.000, 0.000, -440.000, 201]
     level:    [60, 60]
   17109297:
@@ -5254,15 +5254,15 @@ spawns:
     region:   s_313
     level:    [35, 37]
   17109306:
-    template: Ladybug
+    template: Ladybug  # Needs captures
     region:   s_75
     level:    [44, 47]
   17109307:
-    template: Ladybug
+    template: Ladybug  # Needs captures
     region:   s_75
     level:    [44, 47]
   17109308:
-    template: Ladybug
+    template: Ladybug  # Needs captures
     region:   s_313
     level:    [44, 47]
   17109309:
@@ -5399,7 +5399,7 @@ spawns:
     region:   s_292
     level:    [53, 54]
   17109338:
-    template: Skogs_Fru
+    template: Skogs_Fru                         # Needs captures
     at:       [273.000, -15.000, -377.000, 236]
     level:    [60, 65]
   17109339:
@@ -6726,3 +6726,14 @@ spawns:
     template: Cottus
     at:       [174.000, -10.000, -374.000, 49]
     level:    [80, 85]
+
+slots:
+  - members:
+      17109268: {}                           # Ladybug, Needs captures
+      17109306: {}                           # Ladybug, Needs captures
+      17109307: {}                           # Ladybug, Needs captures
+      17109308: {}                           # Ladybug, Needs captures
+      17109338: {chance: 15, cooldown: 3600} # Skogs_Fru, Needs captures
+  - members:
+      17109295: {}                           # Battrap, Needs captures
+      17109296: {chance: 15, cooldown: 3600} # Goblintrap, Needs captures

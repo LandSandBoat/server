@@ -2,15 +2,8 @@
 -- Area: Gustav Tunnel
 --   NM: Taxim
 -----------------------------------
-local ID = zones[xi.zone.GUSTAV_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.TAXIM - 4] = ID.mob.TAXIM, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3600)

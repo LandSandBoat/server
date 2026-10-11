@@ -8,15 +8,8 @@ mixins =
     require('scripts/mixins/job_special')
 }
 -----------------------------------
-local ID = zones[xi.zone.DEN_OF_RANCOR]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.BISTRE_HEARTED_MALBERRY - 25] = ID.mob.BISTRE_HEARTED_MALBERRY, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)

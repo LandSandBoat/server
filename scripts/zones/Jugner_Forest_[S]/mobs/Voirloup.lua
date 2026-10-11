@@ -2,15 +2,8 @@
 -- Area: Jugner Forest [S]
 --   NM: Voirloup
 -----------------------------------
-local ID = zones[xi.zone.JUGNER_FOREST_S]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.VOIRLOUP - 1] = ID.mob.VOIRLOUP
-}
 
 -- TODO: has enstun, but rate is extremely low on testing characters so cannot give a great rate.
 entity.onMobInitialize = function(mob)

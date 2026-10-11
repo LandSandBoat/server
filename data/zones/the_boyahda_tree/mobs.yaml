@@ -88,7 +88,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6100
         mp: 3000
@@ -462,7 +462,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3600
     loot:
@@ -618,7 +618,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5000
     loot:
@@ -1205,7 +1205,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7400
     loot:
@@ -1278,7 +1278,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -2935,6 +2935,11 @@ spawns:
     template: Leshonki
     region:   nw_391
     level:    [79, 81]
+    attributes:
+      spawn:
+        window:
+          start:  4
+          end:   20
   17404301:
     template: Boyahda_Sapling
     region:   nw_387
@@ -3161,9 +3166,10 @@ slots:
       17403986: {} # Mourioche
       17403990: {} # Old_Goobbue
   - members:
-      17403995: {} # Robber_Crab
-      17403999: {} # Robber_Crab
-      17404004: {} # Robber_Crab
+      17403995: {}                           # Robber_Crab
+      17403999: {}                           # Robber_Crab
+      17404000: {chance: 20, cooldown: 3600} # Aquarius
+      17404004: {}                           # Robber_Crab
   - members:
       17404013: {} # Mourioche
       17404017: {} # Old_Goobbue
@@ -3171,10 +3177,11 @@ slots:
       17404024: {} # Mourioche
       17404028: {} # Old_Goobbue
   - members:
-      17404027: {} # Moss_Eater
-      17404043: {} # Moss_Eater
-      17404053: {} # Moss_Eater
-      17404060: {} # Moss_Eater
+      17404027: {}                           # Moss_Eater
+      17404029: {chance: 15, cooldown: 7200} # Unut
+      17404043: {}                           # Moss_Eater
+      17404053: {}                           # Moss_Eater
+      17404060: {}                           # Moss_Eater
   - members:
       17404040: {} # Mourioche
       17404044: {} # Old_Goobbue
@@ -3191,11 +3198,12 @@ slots:
       17404093: {} # Mourioche
       17404096: {} # Old_Goobbue
   - members:
-      17404292: {} # Boyahda_Sapling
-      17404294: {} # Boyahda_Sapling
-      17404296: {} # Boyahda_Sapling
-      17404301: {} # Boyahda_Sapling
-      17404304: {} # Boyahda_Sapling
+      17404292: {}                           # Boyahda_Sapling
+      17404294: {}                           # Boyahda_Sapling
+      17404296: {}                           # Boyahda_Sapling
+      17404300: {chance: 15, cooldown: 3600} # Leshonki
+      17404301: {}                           # Boyahda_Sapling
+      17404304: {}                           # Boyahda_Sapling
   - members:
       17404298: {} # Bark_Tarantula
       17404302: {} # Boyahda_Sapling
@@ -3218,3 +3226,9 @@ slots:
   - members:
       17404326: {} # Bark_Tarantula
       17404329: {} # Boyahda_Sapling
+  - members:
+      17403938: {}                           # Death_Cap
+      17403939: {chance: 15, cooldown: 7200} # Ellyllon
+  - members:
+      17404330: {}                            # Demonic_Rose
+      17404331: {chance: 15, cooldown: 57600} # Voluptuous_Vivian

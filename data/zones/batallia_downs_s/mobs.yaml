@@ -472,7 +472,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -1671,7 +1671,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8000
     loot:
@@ -1961,7 +1961,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -6944,3 +6944,14 @@ spawns:
     template: Taweret
     at:       [-320.000, -16.500, -42.000, 226]
     level:    [93, 94]
+
+slots:
+  - members:
+      17121398: {}                            # Goblin_Blastmaster
+      17121399: {chance: 15, cooldown: 10800} # Burlibix_Brawnback
+  - members:
+      17121554: {}                           # Smilodon
+      17121576: {chance: 15, cooldown: 3600} # La_Velue
+  - members:
+      17121602: {}                           # Ba
+      17121603: {chance: 15, cooldown: 5400} # Habergoass

@@ -46,8 +46,4 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BUGBEAR_STRONGMAN[1], 10, 1) -- no cooldown
-end
-
 return entity

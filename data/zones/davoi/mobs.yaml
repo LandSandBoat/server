@@ -72,7 +72,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 720
       stats:
         hp: 2100
     loot:
@@ -429,7 +429,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 600
       stats:
         hp: 1140
     loot:
@@ -1372,7 +1372,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 720
     loot:
       drops:
         - chance: always
@@ -1433,7 +1433,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 720
       stats:
         hp: 2100
     loot:
@@ -1527,7 +1527,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 720
       stats:
         hp: 1650
     loot:
@@ -3627,8 +3627,9 @@ slots:
       17387551: {} # Davoi_Hornet
       17387552: {} # Wood_Bats
   - members:
-      17387560: {} # Orcish_Cursemaker
-      17387563: {} # Orcish_Cursemaker
+      17387560: {}                           # Orcish_Cursemaker
+      17387563: {}                           # Orcish_Cursemaker
+      17387567: {chance: 15, cooldown: 3600} # Hawkeyed_Dnatbat
   - members:
       17387577: {} # Thunder_Elemental
       17387592: {} # Thunder_Elemental
@@ -3957,3 +3958,17 @@ slots:
       17387959: {} # Orcish_Dreadnought
       17387960: {} # Orcish_Champion
       17387961: {} # Orcish_Dragoon
+  - members:
+      17387578: {}                           # Orcish_Impaler
+      17387585: {chance: 15, cooldown: 3600} # Steelbiter_Gudrud
+  - members:
+      17387605: {}                           # War_Lizard
+      17387606: {chance: 15, cooldown: 3600} # Tigerbane_Bakdak
+  - members:
+      17387623: {}                           # Orcish_Beastrider
+      17387624: {}                           # Orcish_Nightraider
+      17387638: {}                           # Orcish_Impaler
+      17387644: {chance: 15, cooldown: 3600} # Poisonhand_Gnadgad
+  - members:
+      17387919: {}                           # Davoi_Mush
+      17387920: {chance: 20, cooldown: 3600} # Blubbery_Bulge

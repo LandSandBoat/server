@@ -494,7 +494,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3400
     loot:
@@ -525,7 +525,7 @@ templates:
       mob_mods:
         sight_range: 4
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3500
     loot:
@@ -668,7 +668,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7100
     loot:
@@ -739,7 +739,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3500
     loot:
@@ -1095,7 +1095,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3550
     loot:
@@ -1463,7 +1463,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3750
     loot:
@@ -3112,13 +3112,17 @@ slots:
       17613025: {} # Specter
       17613027: {} # Specter
   - members:
-      17613044: {} # Colossus
-      17613046: {} # Colossus
-      17613048: {} # Colossus
-      17613049: {} # Colossus
-      17613050: {} # Colossus
-      17613052: {} # Colossus
-      17613054: {} # Colossus
+      17613044: {}          # Colossus
+      17613045: {chance: 4} # Goliath
+      17613046: {}          # Colossus
+      17613047: {chance: 4} # Goliath
+      17613048: {}          # Colossus
+      17613049: {}          # Colossus
+      17613050: {}          # Colossus
+      17613051: {chance: 4} # Goliath
+      17613052: {}          # Colossus
+      17613053: {chance: 4} # Goliath
+      17613054: {}          # Colossus
   - members:
       17613059: {} # Talos
       17613060: {} # Talos
@@ -3159,3 +3163,18 @@ slots:
       17613116: {} # Specter
       17613118: {} # Specter
       17613119: {} # Specter
+  - members:
+      17612857: {}                           # Clockwork_Pod
+      17612859: {chance: 15, cooldown: 5400} # Mind_Hoarder
+  - members:
+      17613093: {}                           # Specter
+      17613095: {chance: 15, cooldown: 3600} # Western_Shadow
+  - members:
+      17613098: {}                           # Specter
+      17613102: {chance: 15, cooldown: 3600} # Northern_Shadow
+  - members:
+      17613108: {}                           # Specter
+      17613109: {chance: 15, cooldown: 3600} # Eastern_Shadow
+  - members:
+      17613117: {}                           # Specter
+      17613120: {chance: 15, cooldown: 3600} # Southern_Shadow

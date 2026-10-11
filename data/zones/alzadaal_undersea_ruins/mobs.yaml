@@ -202,7 +202,7 @@ templates:
         model_size:   1
         hitbox:      12
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15000
     loot:
@@ -1147,5 +1147,6 @@ spawns:
 
 slots:
   - members:
-      17072142: {} # Qiqirn_Goldsmith
-      17072148: {} # Qiqirn_Goldsmith
+      17072142: {}                           # Qiqirn_Goldsmith
+      17072148: {}                           # Qiqirn_Goldsmith
+      17072150: {chance: 15, cooldown: 3600} # Cookieduster_Lipiroon

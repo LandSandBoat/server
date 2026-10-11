@@ -2589,7 +2589,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         mp: 5000
     loot:
@@ -3532,7 +3532,7 @@ spawns:
     region:   c_3
     level:    [62, 64]
   17477636:
-    template: Witch_Hazel_past
+    template: Witch_Hazel_past             # Needs captures
     script:   Witch_Hazel
     at:       [61.938, -1.166, -3.232, 53]
     level:    [62, 64]
@@ -3549,7 +3549,7 @@ spawns:
     at:       [63.771, -1.414, 27.473, 232]
     level:    [75, 75]
   17477640:
-    template: Morille_Mortelle
+    template: Morille_Mortelle              # Needs captures
     at:       [59.788, -0.939, 22.316, 169]
     level:    [82, 83]
   17477641:
@@ -5820,3 +5820,8 @@ spawns:
     template: Apex_Knight_Lugcrawler
     region:   sw_632
     level:    [138, 140]
+
+slots:
+  - members:
+      17477636: {}                            # Witch_Hazel, Needs captures
+      17477640: {chance: 15, cooldown: 18000} # Morille_Mortelle, Needs captures

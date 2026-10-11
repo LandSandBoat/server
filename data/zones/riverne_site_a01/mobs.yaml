@@ -20,7 +20,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5200
     loot:
@@ -1662,3 +1662,6 @@ slots:
   - members:
       16900250: {} # Hawker
       16900254: {} # Hawker
+  - members:
+      16900305: {}                            # Flamedrake
+      16900306: {chance: 15, cooldown: 75600} # Aiatar

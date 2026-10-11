@@ -254,7 +254,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
       stats:
         hp: 850
     loot:
@@ -288,7 +288,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
       stats:
         hp: 520
     loot:
@@ -492,7 +492,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
       stats:
         hp: 960
     loot:
@@ -3158,3 +3158,12 @@ slots:
   - members:
       17371574: {} # Yagudo_Theologist
       17371575: {} # Yagudo_Priest
+  - members:
+      17371296: {}                           # Yagudo_Persecutor
+      17371300: {chance: 15, cooldown: 3600} # Juu_Duzu_the_Whirlwind
+  - members:
+      17371513: {}                           # Yagudo_Mendicant
+      17371515: {chance: 15, cooldown: 3600} # Hoo_Mjuu_the_Torrent
+  - members:
+      17371577: {}                          # Yagudo_Piper
+      17371578: {chance: 15, cooldown: 900} # Vuu_Puqu_the_Beguiler

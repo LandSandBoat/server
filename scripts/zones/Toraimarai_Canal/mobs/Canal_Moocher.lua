@@ -2,15 +2,8 @@
 -- Area: Toraimarai Canal
 --   NM: Canal Moocher
 -----------------------------------
-local ID = zones[xi.zone.TORAIMARAI_CANAL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.CANAL_MOOCHER - 3] = ID.mob.CANAL_MOOCHER, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -232,7 +232,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 800
     loot:
@@ -1277,7 +1277,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1030
     loot:
@@ -1693,7 +1693,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -5184,8 +5184,9 @@ slots:
       17223739: {} # Old_Quadav
       17223745: {} # Ghoul
   - members:
-      17223740: {} # Veteran_Quadav
-      17223789: {} # Veteran_Quadav
+      17223740: {}                           # Veteran_Quadav
+      17223789: {}                           # Veteran_Quadav
+      17223797: {chance: 15, cooldown: 3600} # NiZho_Bladebender
   - members:
       17223744: {} # Onyx_Quadav
       17223746: {} # Zombie
@@ -5396,3 +5397,9 @@ slots:
   - members:
       17224123: {} # Brass_Quadav
       17224124: {} # Onyx_Quadav
+  - members:
+      17223888: {}           # Goobbue
+      17223889: {chance: 15} # Jolly_Green
+  - members:
+      17224014: {}                          # Thread_Leech
+      17224019: {chance: 15, cooldown: 600} # Bloodpool_Vorax

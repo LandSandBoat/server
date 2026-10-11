@@ -307,7 +307,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -1658,7 +1658,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15000
     loot:
@@ -4133,7 +4133,7 @@ spawns:
     region:   se_54
     level:    [76, 79]
   17125431:
-    template: Orcish_Bowshooter_past
+    template: Orcish_Bowshooter_past # Needs captures
     script:   Orcish_Bowshooter
     region:   se_54
     level:    [76, 79]
@@ -4142,7 +4142,7 @@ spawns:
     region:   se_54
     level:    [71, 74]
   17125433:
-    template: Hawkeyed_Dnatbat
+    template: Hawkeyed_Dnatbat                 # Needs captures
     at:       [358.667, -0.500, -181.406, 246]
     level:    [81, 81]
   17125434:
@@ -4214,7 +4214,7 @@ spawns:
     script:   Orcish_Firebelcher
     level:    [81, 83]
   17125450:
-    template: Orcish_Augur
+    template: Orcish_Augur                    # Needs captures
     at:       [234.481, 3.424, -241.751, 192]
     level:    [76, 79]
   17125451:
@@ -4222,9 +4222,9 @@ spawns:
     at:       [238.026, 3.499, -246.238, 128]
     level:    [76, 79]
   17125452:
-    template: Ashmaker_Gotblut_past
+    template: Ashmaker_Gotblut_past           # Needs captures
     script:   Ashmaker_Gotblut
-    at:       [234.481, 3.424, -241.751, 167]
+    at:       [137.606, 3.346, -279.050, 167]
     level:    [81, 83]
   17125453:
     template: Fighting_Smilodon
@@ -6396,3 +6396,11 @@ spawns:
   17126052:
     template: Auroral_Alicorn
     level:    [1, 1]
+
+slots:
+  - members:
+      17125431: {}                           # Orcish_Bowshooter, Needs captures
+      17125433: {chance: 15, cooldown: 3600} # Hawkeyed_Dnatbat, Needs captures
+  - members:
+      17125450: {}                           # Orcish_Augur, Needs captures
+      17125452: {chance: 15, cooldown: 3600} # Ashmaker_Gotblut, Needs captures

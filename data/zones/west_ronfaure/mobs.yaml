@@ -403,7 +403,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 320
     loot:
@@ -613,7 +613,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 220
     loot:
@@ -4145,3 +4145,9 @@ slots:
   - members:
       17187267: {} # Goblin_Thug
       17187271: {} # Enchanted_Bones
+  - members:
+      17187026: {}                          # Scarab_Beetle
+      17187047: {chance: 15, cooldown: 900} # Fungus_Beetle
+  - members:
+      17187110: {}                           # Forest_Hare
+      17187111: {chance: 15, cooldown: 2400} # Jaggedy-Eared_Jack

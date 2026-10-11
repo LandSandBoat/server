@@ -105,7 +105,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
     loot:
       drops:
         - chance: always
@@ -2060,3 +2060,6 @@ slots:
   - members:
       17354980: {} # Orcish_Stonechucker
       17354981: {} # Orcish_Neckchopper
+  - members:
+      17354825: {}                           # Orcish_Grappler
+      17354828: {chance: 15, cooldown: 3600} # Hundredscar_Hajwaj

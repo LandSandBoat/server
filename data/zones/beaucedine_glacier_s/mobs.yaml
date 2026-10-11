@@ -1705,7 +1705,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10000
     loot:
@@ -4419,15 +4419,15 @@ spawns:
     region:   w_199
     level:    [78, 80]
   17334475:
-    template: Gargouille
+    template: Gargouille # Needs captures
     region:   w_203
     level:    [81, 82]
   17334476:
-    template: Gargouille
+    template: Gargouille # Needs captures
     region:   w_203
     level:    [81, 82]
   17334477:
-    template: Gargouille
+    template: Gargouille # Needs captures
     region:   w_203
     level:    [81, 82]
   17334478:
@@ -4447,7 +4447,7 @@ spawns:
     region:   w_209
     level:    [80, 80]
   17334482:
-    template: GrandGoule
+    template: GrandGoule                        # Needs captures
     at:       [-242.000, -80.300, -127.000, 60]
     level:    [83, 83]
   17334483:
@@ -5965,3 +5965,10 @@ spawns:
     template: Frost_Bomb
   17334930:
     template: Time_Bomb
+
+slots:
+  - members:
+      17334475: {}                           # Gargouille, Needs captures
+      17334476: {}                           # Gargouille, Needs captures
+      17334477: {}                           # Gargouille, Needs captures
+      17334482: {chance: 15, cooldown: 3600} # GrandGoule, Needs captures

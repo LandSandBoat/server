@@ -3,15 +3,8 @@
 --   NM: Mahishasura
 -- !pos 206.510 -16.320 357.724 52
 -----------------------------------
-local ID = zones[xi.zone.BHAFLAU_THICKETS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.MAHISHASURA - 1] = ID.mob.MAHISHASURA, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

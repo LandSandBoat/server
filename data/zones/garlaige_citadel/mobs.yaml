@@ -806,7 +806,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -860,7 +860,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
         mp: 9999
@@ -2863,5 +2863,9 @@ slots:
       17596607: {} # Over_Weapon
       17596608: {} # Vault_Weapon
   - members:
-      17596624: {} # Fallen_Major
-      17596626: {} # Fallen_Mage
+      17596624: {}                           # Fallen_Major
+      17596626: {}                           # Fallen_Mage
+      17596628: {chance: 20, cooldown: 1800} # Hovering_Hotpot
+  - members:
+      17596515: {}                           # Explosure
+      17596520: {chance: 15, cooldown: 3600} # Hazmat

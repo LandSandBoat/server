@@ -8,20 +8,8 @@ mixins =
     require('scripts/mixins/job_special')
 }
 -----------------------------------
-local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.spawnPoints =
-{
-    { x = -219.962, y = -1.736, z =  28.388 }
-}
-
-entity.phList =
-{
-    [ID.mob.TONBERRY_KINQ - 2] = ID.mob.TONBERRY_KINQ, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)

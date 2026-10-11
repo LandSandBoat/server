@@ -1225,7 +1225,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6300
     loot:
@@ -4572,3 +4572,6 @@ slots:
   - members:
       17273273: {} # Myxomycete
       17273274: {} # Myxomycete
+  - members:
+      17272977: {}                           # Goobbue_Gardener
+      17272978: {chance: 15, cooldown: 7200} # Keeper_of_Halidom

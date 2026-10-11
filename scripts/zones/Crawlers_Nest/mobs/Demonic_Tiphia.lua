@@ -2,15 +2,8 @@
 -- Area: Crawlers' Nest (197)
 --  Mob: Demonic Tiphia
 -----------------------------------
-local ID = zones[xi.zone.CRAWLERS_NEST]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.DEMONIC_TIPHIA - 1] = ID.mob.DEMONIC_TIPHIA, -- Confirmed on retail
-}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)

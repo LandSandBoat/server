@@ -1294,7 +1294,7 @@ templates:
       mob_mods:
         assist: 2
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 6650
     loot:
@@ -2252,8 +2252,10 @@ slots:
       16826498: {} # Moblin_Aidman
       16826499: {} # Moblin_Engineman
   - members:
-      16826507: {} # Goblin_Swordsman
-      16826514: {} # Goblin_Swordsman
+      16826507: {}                           # Goblin_Swordsman
+      16826510: {chance: 8, cooldown: 10800} # Swashstox_Beadblinker
+      16826514: {}                           # Goblin_Swordsman
+      16826517: {chance: 8, cooldown: 10800} # Swashstox_Beadblinker
   - members:
       16826521: {} # Goblin_Junkman
       16826522: {} # Moblin_Roadman

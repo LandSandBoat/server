@@ -197,7 +197,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8600
     loot:
@@ -716,7 +716,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 2900
         mp: 2900
@@ -1704,3 +1704,9 @@ slots:
       17457220: {} # Goblin_Mugger
       17457221: {} # Goblin_Leecher
       17457222: {} # Goblin_Gambler
+  - members:
+      17457200: {}                           # Seeker_Bats
+      17457204: {chance: 15, cooldown: 3600} # Gloom_Eye
+  - members:
+      17457229: {}           # Hecteyes
+      17457236: {chance: 20} # Hyakume

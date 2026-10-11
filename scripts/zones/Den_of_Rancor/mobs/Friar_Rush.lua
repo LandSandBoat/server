@@ -2,15 +2,8 @@
 -- Area: Den of Rancor
 --   NM: Friar Rush
 -----------------------------------
-local ID = zones[xi.zone.DEN_OF_RANCOR]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.FRIAR_RUSH - 2] = ID.mob.FRIAR_RUSH, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)

@@ -182,7 +182,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 820
     loot:
@@ -794,7 +794,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1180
     loot:
@@ -3936,3 +3936,9 @@ slots:
   - members:
       17260984: {} # Goblin_Gambler
       17260987: {} # Ghoul
+  - members:
+      17260906: {}                           # Zu
+      17260907: {chance: 15, cooldown: 3600} # Helldiver
+  - members:
+      17261002: {}                           # Shoal_Pugil
+      17261003: {chance: 15, cooldown: 3600} # Buburimboo

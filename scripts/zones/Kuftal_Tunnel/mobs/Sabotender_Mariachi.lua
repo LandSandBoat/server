@@ -2,16 +2,8 @@
 -- Area: Kuftal Tunnel
 --   NM: Sabotender Mariachi
 -----------------------------------
-local ID = zones[xi.zone.KUFTAL_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SABOTENDER_MARIACHI - 1] = ID.mob.SABOTENDER_MARIACHI, -- Confirmed on retail
-    [ID.mob.SABOTENDER_MARIACHI + 6] = ID.mob.SABOTENDER_MARIACHI, -- Confirmed on retail
-}
 
 -- 1% per tick regen during the day
 local mobRegen = function(mob)

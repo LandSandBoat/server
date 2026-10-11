@@ -4,18 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.IFRITS_CAULDRON]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.FORESEER_ORAMIX - 7] = ID.mob.FORESEER_ORAMIX, -- Confirmed on retail
-    [ID.mob.FORESEER_ORAMIX - 6] = ID.mob.FORESEER_ORAMIX, -- Confirmed on retail
-    [ID.mob.FORESEER_ORAMIX + 4] = ID.mob.FORESEER_ORAMIX, -- Confirmed on retail
-    [ID.mob.FORESEER_ORAMIX + 7] = ID.mob.FORESEER_ORAMIX, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PLAGUE)

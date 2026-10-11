@@ -2632,7 +2632,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 11075
     loot:
@@ -3500,7 +3500,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 17000
     loot:
@@ -4100,27 +4100,27 @@ spawns:
     at:       [1.000, 1.000, 1.000]
     level:    [62, 65]
   17145862:
-    template: Virulent_Peiste
+    template: Virulent_Peiste # Needs captures
     region:   sw_6
     level:    [78, 81]
   17145863:
-    template: Virulent_Peiste
+    template: Virulent_Peiste # Needs captures
     region:   sw_6
     level:    [78, 81]
   17145864:
-    template: Virulent_Peiste
+    template: Virulent_Peiste # Needs captures
     region:   sw_6
     level:    [78, 81]
   17145865:
-    template: Virulent_Peiste
+    template: Virulent_Peiste # Needs captures
     region:   sw_6
     level:    [78, 81]
   17145866:
-    template: Virulent_Peiste
+    template: Virulent_Peiste # Needs captures
     region:   sw_6
     level:    [78, 81]
   17145867:
-    template: Sugaar
+    template: Sugaar                            # Needs captures
     at:       [-416.496, 24.110, -441.589, 132]
     level:    [83, 83]
   17145868:
@@ -4702,7 +4702,7 @@ spawns:
     region:   nw_148
     level:    [65, 68]
   17146007:
-    template: Lou_Carcolh
+    template: Lou_Carcolh # Needs captures
     region:   nw_148
     level:    [69, 73]
   17146008:
@@ -4725,7 +4725,7 @@ spawns:
     region:   nw_148
     level:    [71, 74]
   17146012:
-    template: Nommo
+    template: Nommo                           # Needs captures
     at:       [-173.471, 24.475, 447.102, 89]
     level:    [88, 88]
   17146013:
@@ -6464,3 +6464,15 @@ spawns:
     template: Melancholic_Moira
     at:       [552.000, 23.899, 492.000, 133]
     level:    [92, 95]
+
+slots:
+  - members:
+      17145862: {}                           # Virulent_Peiste, Needs captures
+      17145863: {}                           # Virulent_Peiste, Needs captures
+      17145864: {}                           # Virulent_Peiste, Needs captures
+      17145865: {}                           # Virulent_Peiste, Needs captures
+      17145866: {}                           # Virulent_Peiste, Needs captures
+      17145867: {chance: 15, cooldown: 3600} # Sugaar, Needs captures
+  - members:
+      17146007: {}                           # Lou_Carcolh, Needs captures
+      17146012: {chance: 15, cooldown: 3600} # Nommo, Needs captures

@@ -1716,7 +1716,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 550
     loot:
@@ -4424,3 +4424,6 @@ slots:
   - members:
       17195464: {} # Orcish_Mesmerizer
       17195467: {} # Skeleton_Sorcerer
+  - members:
+      17195258: {}                           # Poison_Funguar
+      17195259: {chance: 15, cooldown: 3600} # Tumbling_Truffle

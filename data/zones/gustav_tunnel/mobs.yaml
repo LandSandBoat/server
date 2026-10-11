@@ -21,7 +21,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 27000
     loot:
@@ -87,7 +87,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 1200
       stats:
         hp: 7000
     loot:
@@ -824,7 +824,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8000
     loot:
@@ -1234,7 +1234,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6500
         mp: 6500
@@ -1302,7 +1302,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 16000
     loot:
@@ -1370,7 +1370,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7500
     loot:
@@ -2508,8 +2508,9 @@ slots:
       17645739: {} # Doom_Warlock
       17645744: {} # Doom_Warlock
   - members:
-      17645754: {} # Typhoon_Wyvern
-      17645784: {} # Typhoon_Wyvern
+      17645754: {}                           # Typhoon_Wyvern
+      17645755: {chance: 15, cooldown: 7200} # Ungur
+      17645784: {}                           # Typhoon_Wyvern
   - members:
       17645758: {} # Typhoon_Wyvern
       17645792: {} # Typhoon_Wyvern
@@ -2517,8 +2518,21 @@ slots:
       17645763: {} # Antares
       17645767: {} # Antares
   - members:
-      17645768: {} # Antares
-      17645772: {} # Antares
+      17645768: {}                            # Antares
+      17645772: {}                            # Antares
+      17645774: {chance: 15, cooldown: 25200} # Amikiri
   - members:
       17645777: {} # Doom_Guard
       17645778: {} # Doom_Warlock
+  - members:
+      17645605: {}                            # Goblin_Reaper
+      17645609: {chance: 15, cooldown: 10800} # Goblinsavior_Heronox
+  - members:
+      17645633: {}                           # Goblin_Mercenary
+      17645640: {chance: 15, cooldown: 7200} # Wyvernpoacher_Drachlox
+  - members:
+      17645718: {}                            # Erlik
+      17645719: {chance: 15, cooldown: 14400} # Baobhan_Sith
+  - members:
+      17645738: {}                           # Doom_Warlock
+      17645742: {chance: 15, cooldown: 7200} # Taxim

@@ -215,7 +215,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 13000
     loot:
@@ -5266,3 +5266,6 @@ slots:
   - members:
       16998707: {} # Phasma
       16998708: {} # Bhoot
+  - members:
+      16998654: {}                            # Draugar_Servant
+      16998655: {chance: 15, cooldown: 75600} # Bloody_Bones

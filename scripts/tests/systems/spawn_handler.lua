@@ -570,11 +570,9 @@ describe('Spawn Handler', function()
             local nm = player.entities:get(ID.mob.NUNYENUNC)
             local ph = player.entities:get(ID.mob.NUNYENUNC - 1)
 
-            for _ = 1, 100 do
-                if nm:isSpawned() then
-                    break
-                end
+            xi.test.world:setSlotChance(nm, 100)
 
+            if not nm:isSpawned() then
                 player:claimAndKillMob(ph)
                 xi.test.world:skipTime(305)
                 xi.test.world:tick(xi.tick.SPAWN)
@@ -589,11 +587,9 @@ describe('Spawn Handler', function()
             local nm = player.entities:get(ID.mob.NUNYENUNC)
             local ph = player.entities:get(ID.mob.NUNYENUNC - 1)
 
-            for _ = 1, 100 do
-                if nm:isSpawned() then
-                    break
-                end
+            xi.test.world:setSlotChance(nm, 100)
 
+            if not nm:isSpawned() then
                 player:claimAndKillMob(ph)
                 xi.test.world:skipTime(305)
                 xi.test.world:tick(xi.tick.SPAWN)
@@ -718,6 +714,123 @@ describe('Spawn Handler', function()
 
             killAndRespawn(batPh)
             bat.assert:isSpawned()
+        end)
+    end)
+
+    -- Citipati shares a slot with its placeholder Corse, and both only spawn from 20:00 to 04:00
+    describe('night lottery slot', function()
+        ---@type CTestEntity
+        local nm
+        ---@type CTestEntity
+        local ph
+
+        local function killAndRespawn(mob)
+            player:claimAndKillMob(mob)
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+        end
+
+        -- a despawn the mob survives
+        local function leaveAlive(mob)
+            DespawnMob(mob:getID())
+            for _ = 1, 3 do
+                xi.test.world:skipTime(5)
+                xi.test.world:tickEntity(mob)
+            end
+        end
+
+        -- hour by hour until the spawn window closes and the engine sends the mob home
+        local function waitForDawn(mob)
+            for _ = 1, 24 do
+                xi.test.world:tick(xi.tick.VANA_HOUR)
+                xi.test.world:skipTime(1)
+                xi.test.world:tickEntity(mob)
+                if not mob:isSpawned() then
+                    return
+                end
+            end
+        end
+
+        local function nextDusk()
+            xi.test.world:setVanaTime(22, 0)
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+        end
+
+        before_each(function()
+            player:gotoZone(xi.zone.ATTOHWA_CHASM)
+            local ID = zones[xi.zone.ATTOHWA_CHASM]
+            nm = player.entities:get(ID.mob.CITIPATI)
+            ph = player.entities:get(ID.mob.CITIPATI - 1)
+
+            xi.test.world:setVanaTime(22, 0)
+            xi.test.world:setSlotChance(nm, 100)
+
+            -- every case starts at night with the placeholder up, the NM off cooldown and no roll left over
+            xi.test.world:skipTime(10800)
+            xi.test.world:tick(xi.tick.SPAWN)
+            if nm:isSpawned() then
+                leaveAlive(nm)
+            end
+
+            if not ph:isSpawned() then
+                SpawnMob(ph:getID())
+            end
+        end)
+
+        it('rolls the NM in place of its placeholder at night', function()
+            killAndRespawn(ph)
+
+            nm.assert:isSpawned()
+            ph.assert.no:isSpawned()
+        end)
+
+        it('leaves the slot empty during the day', function()
+            xi.test.world:setVanaTime(12, 0)
+            killAndRespawn(ph)
+
+            nm.assert.no:isSpawned()
+            ph.assert.no:isSpawned()
+        end)
+
+        it('brings the placeholder back at dusk, not the NM', function()
+            waitForDawn(ph)
+            ph.assert.no:isSpawned()
+
+            nextDusk()
+            ph.assert:isSpawned()
+            nm.assert.no:isSpawned()
+        end)
+
+        it('keeps the NM off cooldown when it leaves at dawn', function()
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
+
+            waitForDawn(nm)
+            nm.assert.no:isSpawned()
+
+            -- the placeholder opens the next night, and its first kill can roll the NM again
+            nextDusk()
+            ph.assert:isSpawned()
+
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
+        end)
+
+        it('keeps a killed NM out of the roll until its cooldown ends', function()
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
+
+            killAndRespawn(nm)
+            ph.assert:isSpawned()
+
+            killAndRespawn(ph)
+            ph.assert:isSpawned()
+            nm.assert.no:isSpawned()
+
+            xi.test.world:skipTime(10800)
+            killAndRespawn(ph)
+            nm.assert:isSpawned()
         end)
     end)
 end)

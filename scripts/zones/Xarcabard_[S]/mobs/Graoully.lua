@@ -4,20 +4,8 @@
 -----------------------------------
 mixins = { require('scripts.mixins.families.red_dragon') }
 -----------------------------------
-local ID = zones[xi.zone.XARCABARD_S]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.spawnPoints =
-{
-    { x =  284.000, y =  0.001, z = -253.000 }
-}
-
-entity.phList =
-{
-    [ID.mob.GRAOULLY - 2] = ID.mob.GRAOULLY,
-}
 
 entity.onMobInitialize = function(mob)
     -- TODO: check for other immunities

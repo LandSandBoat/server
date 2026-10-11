@@ -457,7 +457,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -1767,7 +1767,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -4448,7 +4448,7 @@ spawns:
     region:   e_35
     level:    [35, 38]
   17137701:
-    template: Huge_Spider_past
+    template: Huge_Spider_past # Needs captures
     script:   Huge_Spider
     region:   e_37
     level:    [35, 38]
@@ -4468,7 +4468,7 @@ spawns:
     region:   e_37
     level:    [26, 28]
   17137705:
-    template: Ankabut
+    template: Ankabut                        # Needs captures
     at:       [678.599, -10.219, 532.811, 9]
     level:    [50, 53]
   17137706:
@@ -4933,11 +4933,11 @@ spawns:
     region:   n_154
     level:    [41, 50]
   17137820:
-    template: Coppercap
+    template: Coppercap # Needs captures
     region:   n_154
     level:    [41, 50]
   17137821:
-    template: Gloomanita
+    template: Gloomanita                    # Needs captures
     at:       [49.650, 1.692, 630.371, 128]
     level:    [42, 53]
   17137822:
@@ -6950,3 +6950,11 @@ spawns:
     level:    [1, 1]
   17138415:
     template: Time_Bomb
+
+slots:
+  - members:
+      17137701: {}                           # Huge_Spider, Needs captures
+      17137705: {chance: 15, cooldown: 3600} # Ankabut, Needs captures
+  - members:
+      17137820: {}                           # Coppercap, Needs captures
+      17137821: {chance: 15, cooldown: 3600} # Gloomanita, Needs captures

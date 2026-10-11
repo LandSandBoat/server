@@ -285,7 +285,7 @@ templates:
       mob_mods:
         sight_range: 4
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
     loot:
@@ -1242,7 +1242,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3600
     loot:
@@ -1561,7 +1561,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 2600
     loot:
@@ -3302,3 +3302,12 @@ slots:
       17232101: {} # Snow_Gigas
       17232102: {} # Rime_Gigas
       17232104: {} # Sleet_Gigas
+  - members:
+      17231970: {}                           # Tundra_Tiger
+      17231971: {chance: 15, cooldown: 3600} # Nue
+  - members:
+      17232043: {}                           # Tundra_Tiger
+      17232044: {chance: 15, cooldown: 3600} # Kirata
+  - members:
+      17232078: {}                           # Stone_Golem
+      17232079: {chance: 15, cooldown: 3600} # Gargantua

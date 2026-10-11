@@ -48,7 +48,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: always
@@ -531,7 +531,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: always
@@ -726,7 +726,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 11230
     loot:
@@ -760,7 +760,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10000
     loot:
@@ -1898,8 +1898,16 @@ spawns:
 
 slots:
   - members:
-      17461310: {} # Garm
-      17461314: {} # Garm
+      17461310: {}                           # Garm
+      17461314: {}                           # Garm
+      17461315: {chance: 15, cooldown: 3600} # Shii
   - members:
-      17461470: {} # Gespenst
-      17461477: {} # Gespenst
+      17461470: {}                           # Gespenst
+      17461471: {chance: 15, cooldown: 3600} # Manes
+      17461477: {}                           # Gespenst
+  - members:
+      17461306: {}                           # Mousse
+      17461307: {chance: 15, cooldown: 7200} # Sewer_Syrup
+  - members:
+      17461432: {}                           # Werebat
+      17461433: {chance: 15, cooldown: 3600} # Arioch

@@ -4,15 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/gigas_bst_nm') }
 -----------------------------------
-local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.OPHION - 2]  = ID.mob.OPHION, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Gigass_Bats')

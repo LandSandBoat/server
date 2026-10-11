@@ -2,16 +2,8 @@
 -- Area: Gustav Tunnel
 --   NM: Amikiri
 -----------------------------------
-local ID = zones[xi.zone.GUSTAV_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.AMIKIRI - 6] = ID.mob.AMIKIRI, -- Confirmed on retail
-    [ID.mob.AMIKIRI - 2] = ID.mob.AMIKIRI, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

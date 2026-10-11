@@ -347,7 +347,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6000
     loot:
@@ -381,7 +381,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9000
     loot:
@@ -412,7 +412,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 2000
     loot:
@@ -1142,7 +1142,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6900
     loot:
@@ -3194,6 +3194,16 @@ slots:
       17289629: {} # Tulwar_Scorpion
       17289636: {} # Tulwar_Scorpion
   - members:
-      17289630: {} # Phorusrhacos
-      17289637: {} # Phorusrhacos
-      17289647: {} # Phorusrhacos
+      17289630: {}                           # Phorusrhacos
+      17289637: {}                           # Phorusrhacos
+      17289638: {chance: 15, cooldown: 6400} # Picolaton
+      17289647: {}                           # Phorusrhacos
+  - members:
+      17289452: {}                           # Desert_Dhalmel
+      17289453: {chance: 15, cooldown: 7200} # Celphie
+  - members:
+      17289545: {}                           # Tulwar_Scorpion
+      17289547: {chance: 15, cooldown: 3600} # Calchas
+  - members:
+      17289559: {}                           # Cactuar
+      17289560: {chance: 15, cooldown: 3600} # Cactuar_Cantautor

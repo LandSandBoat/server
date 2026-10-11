@@ -296,7 +296,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 335
     loot:
@@ -745,7 +745,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 230
     loot:
@@ -3856,3 +3856,11 @@ slots:
   - members:
       17215910: {} # Young_Quadav
       17215913: {} # Enchanted_Bones
+  - members:
+      17215612: {}          # Ornery_Sheep
+      17215613: {chance: 8} # Carnero
+      17215626: {chance: 8} # Carnero
+  - members:
+      17215867: {}          # Rock_Lizard
+      17215868: {chance: 8} # Leaping_Lizzy
+      17215888: {chance: 8} # Leaping_Lizzy

@@ -1456,7 +1456,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 900
       stats:
         hp: 4883
     loot:
@@ -3505,9 +3505,12 @@ slots:
       16814242: {} # Gargoyle
       16814243: {} # Gargoyle
   - members:
-      16814319: {} # Diremite
-      16814330: {} # Diremite
-      16814343: {} # Diremite
+      16814319: {}                          # Diremite
+      16814320: {chance: 5, cooldown: 1800} # Gyre-Carlin
+      16814330: {}                          # Diremite
+      16814331: {chance: 5, cooldown: 1800} # Gyre-Carlin
+      16814343: {}                          # Diremite
+      16814344: {chance: 5, cooldown: 1800} # Gyre-Carlin
   - members:
       16814416: {} # Million_Eyes
       16814418: {} # Million_Eyes

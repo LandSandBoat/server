@@ -2,16 +2,8 @@
 -- Area: Kuftal Tunnel
 --   NM: Yowie
 -----------------------------------
-local ID = zones[xi.zone.KUFTAL_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.YOWIE - 1] = ID.mob.YOWIE, -- Confirmed on retail
-    [ID.mob.YOWIE - 3] = ID.mob.YOWIE, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

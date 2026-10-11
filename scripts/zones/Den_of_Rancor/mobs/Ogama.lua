@@ -2,16 +2,8 @@
 -- Area: Den of Rancor
 --   NM: Ogama
 -----------------------------------
-local ID = zones[xi.zone.DEN_OF_RANCOR]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.OGAMA - 1] = ID.mob.OGAMA, -- Confirmed on retail
-    [ID.mob.OGAMA + 5] = ID.mob.OGAMA, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

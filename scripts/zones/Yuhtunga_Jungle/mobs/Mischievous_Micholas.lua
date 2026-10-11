@@ -2,15 +2,8 @@
 -- Area: Yuhtunga Jungle
 --   NM: Mischievous Micholas
 -----------------------------------
-local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.MISCHIEVOUS_MICHOLAS - 1] = ID.mob.MISCHIEVOUS_MICHOLAS, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)

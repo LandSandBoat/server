@@ -301,7 +301,7 @@ templates:
       mob_mods:
         exp_bonus: 10
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10500
     loot:
@@ -898,7 +898,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -2545,23 +2545,23 @@ spawns:
     region:   nw_302
     level:    [76, 79]
   17240370:
-    template: Sand_Cockatrice
+    template: Sand_Cockatrice # Needs captures
     region:   nw_306
     level:    [71, 74]
   17240371:
-    template: Greater_Manticore
+    template: Greater_Manticore # Needs captures
     region:   nw_306
     level:    [76, 79]
   17240372:
-    template: Greater_Manticore
+    template: Greater_Manticore # Needs captures
     region:   nw_306
     level:    [76, 79]
   17240373:
-    template: Greater_Manticore
+    template: Greater_Manticore # Needs captures
     region:   nw_306
     level:    [76, 79]
   17240374:
-    template: Greater_Manticore
+    template: Greater_Manticore # Needs captures
     region:   nw_306
     level:    [76, 79]
   17240375:
@@ -2569,7 +2569,7 @@ spawns:
     region:   nw_306
     level:    [76, 79]
   17240376:
-    template: Frostmane
+    template: Frostmane # Needs captures
     region:   nw_306
     level:    [80, 80]
   17240377:
@@ -3056,8 +3056,12 @@ slots:
       17240366: {} # Sand_Cockatrice
       17240367: {} # Greater_Manticore
   - members:
-      17240370: {} # Sand_Cockatrice
-      17240371: {} # Greater_Manticore
+      17240370: {}                           # Sand_Cockatrice, Needs captures
+      17240371: {}                           # Greater_Manticore, Needs captures
+      17240372: {}                           # Greater_Manticore, Needs captures
+      17240373: {}                           # Greater_Manticore, Needs captures
+      17240374: {}                           # Greater_Manticore, Needs captures
+      17240376: {chance: 15, cooldown: 3600} # Frostmane, Needs captures
   - members:
       17240378: {} # Sand_Cockatrice
       17240379: {} # Greater_Manticore
@@ -3087,3 +3091,6 @@ slots:
       17240403: {} # Sand_Cockatrice
       17240407: {} # Greater_Manticore
       17240412: {} # Sand_Cockatrice
+  - members:
+      17240166: {}                           # Velociraptor
+      17240180: {chance: 15, cooldown: 7200} # Killer_Jonny

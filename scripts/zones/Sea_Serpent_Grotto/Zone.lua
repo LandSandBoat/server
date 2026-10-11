@@ -1,20 +1,10 @@
 -----------------------------------
 -- Zone: Sea_Serpent_Grotto (176)
 -----------------------------------
-local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
------------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- Charybdis PH alternates, remove one
-    local keys = {}
-
-    table.insert(keys, ID.mob.CHARYBDIS - 2)
-    table.insert(keys, ID.mob.CHARYBDIS - 4)
-
-    DespawnMob(keys[math.randomInt(1, #keys)])
-
     xi.treasure.initZone(zone)
 end
 

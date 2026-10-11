@@ -55,7 +55,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 11500
     loot:
@@ -90,7 +90,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8700
     loot:
@@ -124,7 +124,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9700
     loot:
@@ -984,7 +984,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: always
@@ -1175,7 +1175,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8000
     loot:
@@ -1396,7 +1396,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 12500
     loot:
@@ -2760,11 +2760,13 @@ slots:
       17489938: {} # Robber_Crab
       17489939: {} # Haunt
   - members:
-      17489979: {} # Sabotender_Sediendo
-      17489986: {} # Sabotender_Sediendo
+      17489979: {}                            # Sabotender_Sediendo
+      17489980: {chance: 15, cooldown: 10800} # Sabotender_Mariachi
+      17489986: {}                            # Sabotender_Sediendo
   - members:
-      17490002: {} # Sand_Lizard
-      17490015: {} # Sand_Lizard
+      17490002: {}                           # Sand_Lizard
+      17490015: {}                           # Sand_Lizard
+      17490016: {chance: 20, cooldown: 4500} # Amemet
   - members:
       17490055: {} # Robber_Crab
       17490056: {} # Haunt
@@ -2827,9 +2829,17 @@ slots:
       17490194: {} # Kuftal_Digger
       17490199: {} # Kuftal_Digger
   - members:
-      17490201: {} # Deinonychus
-      17490203: {} # Deinonychus
+      17490201: {}                           # Deinonychus
+      17490203: {}                           # Deinonychus
+      17490204: {chance: 15, cooldown: 3600} # Yowie
   - members:
-      17490212: {} # Recluse_Spider
-      17490216: {} # Recluse_Spider
-      17490220: {} # Recluse_Spider
+      17490212: {}                           # Recluse_Spider
+      17490216: {}                           # Recluse_Spider
+      17490217: {chance: 15, cooldown: 3600} # Arachne
+      17490220: {}                           # Recluse_Spider
+  - members:
+      17490100: {}                            # Greater_Cockatrice
+      17490101: {chance: 15, cooldown: 14400} # Pelican
+  - members:
+      17490158: {}                           # Goblin_Mercenary
+      17490159: {chance: 15, cooldown: 7200} # Bloodthirster_Madkix

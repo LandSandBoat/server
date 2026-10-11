@@ -3,15 +3,8 @@
 --   NM: Timeworn Warrior
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity.
 -----------------------------------
-local ID = zones[xi.zone.XARCABARD]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.TIMEWORN_WARRIOR - 4] = ID.mob.TIMEWORN_WARRIOR, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

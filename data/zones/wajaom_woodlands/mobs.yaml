@@ -1514,7 +1514,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 14000
     loot:
@@ -3734,7 +3734,7 @@ templates:
         name_prefix:    32
         hitbox:         10
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8300
         mp: 8300
@@ -5911,3 +5911,9 @@ slots:
   - members:
       16986413: {} # Air_Elemental
       16986414: {} # Air_Elemental
+  - members:
+      16986196: {}                           # Lesser_Colibri
+      16986197: {chance: 15, cooldown: 1800} # Zoraal_Jas_Pkuucha
+  - members:
+      16986377: {}                           # Great_Ameretat
+      16986378: {chance: 15, cooldown: 7200} # Jaded_Jody

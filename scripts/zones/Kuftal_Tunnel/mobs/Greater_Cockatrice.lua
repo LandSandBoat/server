@@ -5,8 +5,6 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/cockatrice') }
 -----------------------------------
-local ID = zones[xi.zone.KUFTAL_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -20,10 +18,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 741, 2, xi.regime.type.GROUNDS)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.PELICAN, 10, 14400) -- 4 hours
 end
 
 return entity

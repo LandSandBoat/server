@@ -2,15 +2,8 @@
 -- Area: Pashhow Marshlands
 --   NM: Bloodpool Vorax
 -----------------------------------
-local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.BLOODPOOL_VORAX - 5] = ID.mob.BLOODPOOL_VORAX, -- Confirmed on retail
-}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 211)

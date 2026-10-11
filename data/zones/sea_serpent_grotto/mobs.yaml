@@ -303,7 +303,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [scripted]
+        respawn: 300
       stats:
         hp: 30000
     loot:
@@ -468,7 +468,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 7000
     loot:
@@ -576,7 +576,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 4200
     loot:
@@ -943,7 +943,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 3000
         mp: 3000
@@ -1069,7 +1069,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 7350
     loot:
@@ -1108,7 +1108,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 2475
         mp: 2475
@@ -1179,7 +1179,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 3550
         mp: 3550
@@ -1284,7 +1284,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 3800
     loot:
@@ -1354,7 +1354,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 900
       stats:
         hp: 7800
     loot:
@@ -1705,7 +1705,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 10750
     loot:
@@ -1741,7 +1741,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 4800
     loot:
@@ -2005,7 +2005,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 8100
     loot:
@@ -2097,7 +2097,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 11200
     loot:
@@ -2135,7 +2135,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 780
       stats:
         hp: 3200
     loot:
@@ -2175,7 +2175,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 8000
     loot:
@@ -2221,7 +2221,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 12400
     loot:
@@ -3196,7 +3196,7 @@ spawns:
     region:   c_223
     level:    [52, 55]
   17498336:
-    template: Swamp_Sahagin
+    template: Swamp_Sahagin # Needs captures
     region:   c_223
     level:    [52, 55]
   17498337:
@@ -3216,7 +3216,7 @@ spawns:
     region:   c_223
     level:    [53, 58]
   17498341:
-    template: Pahh_the_Gullcaller
+    template: Pahh_the_Gullcaller # Needs captures
     region:   c_223
     level:    [56, 58]
   17498342:
@@ -4193,14 +4193,17 @@ spawns:
 
 slots:
   - members:
-      17498178: {} # Ghast
-      17498183: {} # Ghast
+      17498178: {}                           # Ghast
+      17498183: {}                           # Ghast
+      17498184: {chance: 15, cooldown: 3600} # Namtar
   - members:
-      17498259: {} # Riparian_Sahagin
-      17498266: {} # Riparian_Sahagin
+      17498259: {}                           # Riparian_Sahagin
+      17498266: {}                           # Riparian_Sahagin
+      17498269: {chance: 15, cooldown: 7200} # Fyuu_the_Seabellow
   - members:
-      17498280: {} # Brook_Sahagin
-      17498283: {} # Brook_Sahagin
+      17498280: {}                           # Brook_Sahagin
+      17498283: {}                           # Brook_Sahagin
+      17498285: {chance: 15, cooldown: 7200} # Qull_the_Shellbuster
   - members:
       17498331: {} # Bog_Sahagin
       17498337: {} # Bog_Sahagin
@@ -4214,8 +4217,9 @@ slots:
       17498411: {} # Swamp_Sahagin
       17498412: {} # Bog_Sahagin
   - members:
-      17498418: {} # Razorjaw_Pugil
-      17498419: {} # Razorjaw_Pugil
+      17498418: {}                           # Razorjaw_Pugil
+      17498419: {}                           # Razorjaw_Pugil
+      17498420: {chance: 15, cooldown: 3600} # Sea_Hog
   - members:
       17498422: {} # Swamp_Sahagin
       17498423: {} # Bog_Sahagin
@@ -4223,5 +4227,39 @@ slots:
       17498511: {} # Coastal_Sahagin
       17498514: {} # Lagoon_Sahagin
   - members:
-      17498518: {} # Devil_Manta
-      17498521: {} # Devil_Manta
+      17498518: {}                            # Devil_Manta
+      17498521: {}                            # Devil_Manta
+      17498522: {chance: 15, cooldown: 28800} # Charybdis
+  - members:
+      17498156: {}                            # Royal_Leech
+      17498159: {chance: 15, cooldown: 14400} # Masan
+  - members:
+      17498196: {}                           # Spring_Sahagin
+      17498199: {chance: 15, cooldown: 7200} # Wuur_the_Sandcomber
+  - members:
+      17498298: {}                           # Riparian_Sahagin
+      17498301: {chance: 15, cooldown: 3600} # Seww_the_Squidlimbed
+  - members:
+      17498336: {}                           # Swamp_Sahagin, Needs captures
+      17498341: {chance: 15, cooldown: 7200} # Pahh_the_Gullcaller, Needs captures
+  - members:
+      17498355: {}                           # Bog_Sahagin
+      17498356: {chance: 15, cooldown: 7200} # Mouu_the_Waverider
+  - members:
+      17498410: {}                           # Marsh_Sahagin
+      17498413: {chance: 15, cooldown: 7200} # Worr_the_Clawfisted
+  - members:
+      17498426: {}                           # Marsh_Sahagin
+      17498428: {chance: 15, cooldown: 7200} # Voll_the_Sharkfinned
+  - members:
+      17498434: {}                           # Lagoon_Sahagin
+      17498436: {chance: 15, cooldown: 3600} # Yarr_the_Pearleyed
+  - members:
+      17498444: {}                           # Lagoon_Sahagin
+      17498445: {chance: 15, cooldown: 7200} # Novv_the_Whitehearted
+  - members:
+      17498461: {}                           # Coastal_Sahagin
+      17498464: {chance: 15, cooldown: 7200} # Denn_the_Orcavoiced
+  - members:
+      17498513: {}                           # Delta_Sahagin
+      17498516: {chance: 15, cooldown: 7200} # Zuug_the_Shoreleaper

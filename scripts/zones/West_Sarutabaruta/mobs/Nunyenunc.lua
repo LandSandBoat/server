@@ -2,15 +2,8 @@
 -- Area: West Sarutabaruta (115)
 --   NM: Nunyenunc
 -----------------------------------
-local ID = zones[xi.zone.WEST_SARUTABARUTA]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.NUNYENUNC - 1] = ID.mob.NUNYENUNC, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.LIGHT_MEVA, 50)

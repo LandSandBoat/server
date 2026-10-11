@@ -24,12 +24,6 @@ local callPetParams =
     maxSpawns    = 1,
 }
 
-entity.phList =
-{
-    [ID.mob.PALLAS - 9] = ID.mob.PALLAS,
-    [ID.mob.PALLAS - 4] = ID.mob.PALLAS,
-}
-
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Pallass_Tiger')
 end

@@ -581,7 +581,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8400
     loot:
@@ -650,7 +650,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
     loot:
@@ -1717,13 +1717,13 @@ spawns:
 
 slots:
   - members:
-      17276963: {} # Magic_Flagon
-      17276981: {} # Magic_Flagon
-      17276982: {} # Nightmare_Vase
+      17276963: {}                           # Magic_Flagon
+      17276981: {}                           # Magic_Flagon
+      17276982: {chance: 15, cooldown: 3600} # Nightmare_Vase
   - members:
-      17276972: {} # Magic_Flagon
-      17276991: {} # Magic_Flagon
-      17276992: {} # Nightmare_Vase
+      17276972: {}                           # Magic_Flagon
+      17276991: {}                           # Magic_Flagon
+      17276992: {chance: 15, cooldown: 3600} # Nightmare_Vase
   - members:
       17276977: {} # Magic_Flagon
       17276979: {} # Magic_Flagon
@@ -1750,8 +1750,8 @@ slots:
       17277073: {} # Magic_Flagon
       17277074: {} # Magic_Flagon
   - members:
-      17277076: {} # Magic_Flagon
-      17277079: {} # Rogue_Receptacle
+      17277076: {}                           # Magic_Flagon
+      17277079: {chance: 15, cooldown: 7200} # Rogue_Receptacle
   - members:
       17277077: {} # Magic_Flagon
       17277078: {} # Magic_Flagon

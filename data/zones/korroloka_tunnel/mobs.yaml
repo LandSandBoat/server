@@ -50,7 +50,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 2100
     loot:
@@ -146,7 +146,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1950
     loot:
@@ -198,7 +198,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3300
     loot:
@@ -2781,8 +2781,9 @@ slots:
       17485949: {} # Greater_Pugil
       17485951: {} # Greater_Pugil
   - members:
-      17486002: {} # Clipper
-      17486004: {} # Clipper
+      17485980: {chance: 15, cooldown: 5400} # Cargo_Crab_Colin
+      17486002: {}                           # Clipper
+      17486004: {}                           # Clipper
   - members:
       17486001: {} # Greater_Pugil
       17486003: {} # Greater_Pugil
@@ -2793,8 +2794,9 @@ slots:
       17486028: {} # Huge_Spider
       17486029: {} # Huge_Spider
   - members:
-      17486030: {} # Huge_Spider
-      17486035: {} # Huge_Spider
+      17486030: {}                           # Huge_Spider
+      17486031: {chance: 15, cooldown: 7200} # Falcatus_Aranei
+      17486035: {}                           # Huge_Spider
   - members:
       17486038: {} # Jelly
       17486049: {} # Greater_Pugil
@@ -2859,3 +2861,6 @@ slots:
       17486183: {} # Gigas_Stonecarrier
       17486184: {} # Gigas_Stonegrinder
       17486185: {} # Gigas_Foreman
+  - members:
+      17486128: {}                           # Bogy
+      17486129: {chance: 15, cooldown: 7200} # Dame_Blanche

@@ -4,16 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.FYUU_THE_SEABELLOW - 10] = ID.mob.FYUU_THE_SEABELLOW, -- Confirmed on retail
-    [ID.mob.FYUU_THE_SEABELLOW - 3]  = ID.mob.FYUU_THE_SEABELLOW, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)

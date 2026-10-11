@@ -3,21 +3,8 @@
 --   NM: Vasiliceratops
 -- https://www.bg-wiki.com/ffxi/Vasiliceratops
 -----------------------------------
-local ID = zones[xi.zone.GRAUBERG_S]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.spawnPoints =
-{
-    { x =  276.142, y =  25.332, z = -453.541 }
-}
-
-entity.phList =
-{
-    [ID.mob.VASILICERATOPS - 3] = ID.mob.VASILICERATOPS,
-    [ID.mob.VASILICERATOPS - 67] = ID.mob.VASILICERATOPS,
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.BIND)

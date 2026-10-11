@@ -499,7 +499,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -950,7 +950,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -3573,3 +3573,11 @@ spawns:
     template: Awoken_Mokkuralfi
     at:       [333.370, -15.000, -361.760, 95]
     level:    [119, 119]
+
+slots:
+  - members:
+      17027146: {}                            # Magmatic_Eruca
+      17027466: {chance: 15, cooldown: 86400} # Energetic_Eruca
+  - members:
+      17027422: {}                           # Wamoura
+      17027423: {chance: 15, cooldown: 7200} # Ignamoth

@@ -24,8 +24,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SWASHSTOX_BEADBLINKER[1], 15, 10800)
-
     xi.follow.despawnFollowers(mob)
 end
 

@@ -2,15 +2,8 @@
 -- Area: The Boyahda Tree
 --   NM: Ellyllon
 -----------------------------------
-local ID = zones[xi.zone.THE_BOYAHDA_TREE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.ELLYLLON - 1] = ID.mob.ELLYLLON, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 6000)

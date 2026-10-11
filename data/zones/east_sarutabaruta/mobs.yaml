@@ -973,7 +973,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 290
     loot:
@@ -1000,7 +1000,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 560
     loot:
@@ -3643,3 +3643,12 @@ slots:
   - members:
       17252805: {} # Yagudo_Scribe
       17252808: {} # Magicked_Bones
+  - members:
+      17252488: {}                          # Savanna_Rarab
+      17252489: {chance: 20, cooldown: 300} # Sharp-Eared_Ropipi
+  - members:
+      17252507: {}                          # Savanna_Rarab
+      17252508: {chance: 20, cooldown: 300} # Sharp-Eared_Ropipi
+  - members:
+      17252656: {}                           # Crawler
+      17252657: {chance: 15, cooldown: 2700} # Spiny_Spipi

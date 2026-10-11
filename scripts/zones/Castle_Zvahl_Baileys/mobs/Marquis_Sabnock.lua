@@ -2,16 +2,8 @@
 -- Area: Castle Zvahl Baileys
 --   NM: Marquis Sabnock
 -----------------------------------
-local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.MARQUIS_SABNOCK - 3] = ID.mob.MARQUIS_SABNOCK, -- Confirmed on retail
-    [ID.mob.MARQUIS_SABNOCK - 2] = ID.mob.MARQUIS_SABNOCK, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

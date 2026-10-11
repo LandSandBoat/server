@@ -1361,7 +1361,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9000
     loot:
@@ -1550,7 +1550,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7700
     loot:
@@ -1677,7 +1677,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6200
     loot:
@@ -4786,11 +4786,11 @@ spawns:
     region:   e_93
     level:    [56, 62]
   17150046:
-    template: Scabrous_Slug
+    template: Scabrous_Slug # Needs captures
     region:   e_93
     level:    [56, 62]
   17150047:
-    template: Dyinyinga
+    template: Dyinyinga                         # Needs captures
     at:       [176.060, -31.940, -204.130, 240]
     level:    [65, 68]
   17150048:
@@ -4917,7 +4917,7 @@ spawns:
     region:   n_118
     level:    [38, 48]
   17150075:
-    template: Death_Jacket_CN_RFS
+    template: Death_Jacket_CN_RFS # Needs captures
     script:   Death_Jacket
     region:   c_123
     level:    [38, 48]
@@ -4946,7 +4946,7 @@ spawns:
     region:   c_123
     level:    [59, 61]
   17150081:
-    template: Erle
+    template: Erle                           # Needs captures
     at:       [-298.487, 3.637, 54.586, 242]
     level:    [62, 62]
   17150082:
@@ -5826,11 +5826,11 @@ spawns:
     region:   sw_326
     level:    [64, 67]
   17150279:
-    template: Ochu
+    template: Ochu     # Needs captures
     region:   sw_326
     level:    [64, 67]
   17150280:
-    template: Delicieuse_Delphine
+    template: Delicieuse_Delphine                # Needs captures
     at:       [-515.400, -23.780, -453.510, 107]
     level:    [72, 73]
   17150281:
@@ -7058,3 +7058,14 @@ spawns:
     template: Agathos
     at:       [-633.295, -24.268, -269.822, 130]
     level:    [95, 96]
+
+slots:
+  - members:
+      17150046: {}                           # Scabrous_Slug, Needs captures
+      17150047: {chance: 15, cooldown: 3600} # Dyinyinga, Needs captures
+  - members:
+      17150075: {}                           # Death_Jacket, Needs captures
+      17150081: {chance: 15, cooldown: 5400} # Erle, Needs captures
+  - members:
+      17150279: {}                           # Ochu, Needs captures
+      17150280: {chance: 15, cooldown: 5400} # Delicieuse_Delphine, Needs captures

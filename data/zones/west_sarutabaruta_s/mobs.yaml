@@ -1719,7 +1719,7 @@ templates:
         model_size:     1
         hitbox:         8
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -2808,7 +2808,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         mp: 5000
     loot:
@@ -5017,11 +5017,11 @@ spawns:
     region:   s_200
     level:    [10, 12]
   17166542:
-    template: Tiny_Lycopodium
+    template: Tiny_Lycopodium # Needs captures
     region:   s_200
     level:    [10, 12]
   17166543:
-    template: Jeduah
+    template: Jeduah                          # Needs captures
     at:       [114.742, -1.007, -288.349, 20]
     level:    [17, 18]
   17166544:
@@ -5677,7 +5677,7 @@ spawns:
     region:   s_363
     level:    [56, 67]
   17166701:
-    template: Toad
+    template: Toad     # Needs captures
     region:   s_365
     level:    [51, 54]
   17166702:
@@ -5693,7 +5693,7 @@ spawns:
     region:   s_365
     level:    [51, 54]
   17166705:
-    template: Ramponneau
+    template: Ramponneau                     # Needs captures
     at:       [93.736, -1.104, -204.736, 88]
     level:    [47, 54]
   17166706:
@@ -7131,3 +7131,11 @@ spawns:
     template: Pancimanci
     at:       [2.675, -28.500, 560.355, 150]
     level:    [95, 96]
+
+slots:
+  - members:
+      17166542: {}                           # Tiny_Lycopodium, Needs captures
+      17166543: {chance: 15, cooldown: 3600} # Jeduah, Needs captures
+  - members:
+      17166701: {}                           # Toad, Needs captures
+      17166705: {chance: 20, cooldown: 5400} # Ramponneau, Needs captures

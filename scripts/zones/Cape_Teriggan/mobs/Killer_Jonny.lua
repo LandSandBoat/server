@@ -3,15 +3,8 @@
 --   NM: Killer Jonny
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
-local ID = zones[xi.zone.CAPE_TERIGGAN]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.KILLER_JONNY - 14] = ID.mob.KILLER_JONNY, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
