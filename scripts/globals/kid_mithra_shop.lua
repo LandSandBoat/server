@@ -9,9 +9,6 @@ xi.kidMithraShop = xi.kidMithraShop or {}
 -- How long the shop waits before it can rise again, by the level it just reached.
 local lockAfterRising = { [2] = utils.minutes(71), [3] = utils.minutes(122) }
 
--- Purchases right after a level-up do not count.
-local ignoreSeconds = utils.minutes(1)
-
 -- Every player's purchases raise the shop at most one level at a time. Returns the level and whether it rose.
 ---@param prefix string
 ---@param levelUpSales integer[] Fresh takings needed to leave each level
@@ -43,7 +40,7 @@ xi.kidMithraShop.settle = function(prefix, levelUpSales, addedSales)
         level  = level + 1
         sales  = 0
         lock   = now + (lockAfterRising[level] or 0)
-        ignore = now + ignoreSeconds
+        ignore = now + utils.minutes(1)
         rose   = true
     end
 

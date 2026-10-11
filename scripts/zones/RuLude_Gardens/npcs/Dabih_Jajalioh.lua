@@ -39,7 +39,7 @@ local extraStock =
 {
     [2] =
     {
-        { xi.item.OGRE_PUMPKIN,              96 },
+        { xi.item.OGRE_PUMPKIN,               96 },
         { xi.item.CHOCOBO_EGG_FAINTLY_WARM, 1040 },
     },
     [3] =
