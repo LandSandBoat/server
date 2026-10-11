@@ -37,7 +37,7 @@ void SpawnSlot::RemoveMob(const CMobEntity* mob)
                   });
 }
 
-auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId, const SlotRoll kind) -> bool
+auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId) -> bool
 {
     // Get SpawnHandler from first mob's zone for condition checking
     SpawnHandler* spawnHandler = nullptr;
@@ -63,6 +63,7 @@ auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId, const SlotRoll kind)
         {
             it->mob->m_AllowRespawn = true;
             it->mob->Spawn();
+            lotteryOpen = false;
             return true;
         }
 
@@ -96,8 +97,8 @@ auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId, const SlotRoll kind)
             continue;
         }
 
-        // A placeholder always takes the first roll after a restart.
-        if (kind == SlotRoll::Boot && entry.spawnChance > 0)
+        // A mob with a chance only wins a roll that follows a kill.
+        if (!lotteryOpen && entry.spawnChance > 0)
         {
             continue;
         }
@@ -169,6 +170,7 @@ auto SpawnSlot::TrySpawn(const Maybe<uint32> specificMobId, const SlotRoll kind)
         {
             entry.mob->m_AllowRespawn = true;
             entry.mob->Spawn();
+            lotteryOpen = false;
             break;
         }
     }
@@ -186,8 +188,10 @@ auto SpawnSlot::GetEntries() const -> const std::vector<SpawnSlotEntry>&
     return entries;
 }
 
-void SpawnSlot::StartCooldown(const CMobEntity* mob)
+void SpawnSlot::OnKill(const CMobEntity* mob)
 {
+    lotteryOpen = true;
+
     if (const auto entry = std::ranges::find(entries, mob, &SpawnSlotEntry::mob); entry != entries.end())
     {
         entry->readyAt = timer::now() + entry->cooldown;

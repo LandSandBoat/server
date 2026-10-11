@@ -31,15 +31,9 @@ struct SpawnSlotEntry
     // will be rolled between equally, if none of the ones with a specified chance succeeds.
     uint8 spawnChance{ 0 };
 
-    // How long this mob sits out the roll after it despawns.
+    // How long this mob sits out the roll after it is killed.
     timer::duration   cooldown{};
     timer::time_point readyAt{};
-};
-
-enum class SlotRoll : uint8
-{
-    Boot,
-    Respawn,
 };
 
 class SpawnSlot
@@ -47,14 +41,17 @@ class SpawnSlot
 public:
     void AddMob(CMobEntity* mob, uint8 spawnChance, timer::duration cooldown);
     void RemoveMob(const CMobEntity* mob);
-    auto TrySpawn(Maybe<uint32> specificMobId, SlotRoll kind) -> bool;
+    auto TrySpawn(Maybe<uint32> specificMobId = std::nullopt) -> bool;
     auto IsEmpty() const -> bool;
     auto GetEntries() const -> const std::vector<SpawnSlotEntry>&;
-    void StartCooldown(const CMobEntity* mob);
+    void OnKill(const CMobEntity* mob);
 
     // Test hook for xi_test only.
     void SetChance(const CMobEntity* mob, uint8 spawnChance);
 
 private:
     std::vector<SpawnSlotEntry> entries;
+
+    // Set by a kill and cleared when the slot fills, so a restart or a spawn window opening brings a placeholder back.
+    bool lotteryOpen{ false };
 };

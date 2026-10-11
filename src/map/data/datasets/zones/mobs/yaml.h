@@ -155,11 +155,11 @@ template <>
 struct glz::json_schema<xi::data::datasets::zones::mobs::wire::Slot::Member>
 {
     glz::schema chance{
-        .description = "Percent chance this mob wins any roll but the first one after a server restart.",
+        .description = "Percent chance this mob wins a roll that follows a kill in its slot.",
         .minimum     = 0L,
         .maximum     = 100L,
     };
-    glz::schema cooldown{ .description = "Seconds this mob sits out the slot's roll after it despawns." };
+    glz::schema cooldown{ .description = "Seconds this mob sits out the slot's roll after it is killed." };
 };
 
 template <>

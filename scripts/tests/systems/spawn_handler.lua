@@ -689,5 +689,35 @@ describe('Spawn Handler', function()
             killAndRespawn(batPh)
             bat.assert:isSpawned()
         end)
+
+        it('starts the cooldown on a kill only', function()
+            local ID    = zones[xi.zone.VALKURM_DUNES]
+            local bat   = player.entities:get(ID.mob.GOLDEN_BAT)
+            local batPh = player.entities:get(ID.mob.GOLDEN_BAT - 2)
+            xi.test.world:setSlotChance(bat, 100)
+
+            if not bat:isSpawned() then
+                killAndRespawn(batPh)
+            end
+
+            bat.assert:isSpawned()
+
+            -- a despawn the NM survives, like the end of a spawn window
+            DespawnMob(bat:getID())
+            for _ = 1, 3 do
+                xi.test.world:skipTime(5)
+                xi.test.world:tickEntity(bat)
+            end
+
+            bat.assert.no:isSpawned()
+
+            -- nothing was killed, so the placeholder comes back first
+            xi.test.world:skipTime(305)
+            xi.test.world:tick(xi.tick.SPAWN)
+            batPh.assert:isSpawned()
+
+            killAndRespawn(batPh)
+            bat.assert:isSpawned()
+        end)
     end)
 end)
