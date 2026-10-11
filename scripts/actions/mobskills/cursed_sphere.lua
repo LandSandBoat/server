@@ -20,7 +20,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.DARK
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-    -- TODO: BST Jugpet fTPs
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

@@ -2430,6 +2430,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima_Phase1',729,1269); -- chemic
 INSERT INTO `mob_skill_lists` VALUES ('Tiamat-Flying-Attack',730,1278);
 INSERT INTO `mob_skill_lists` VALUES ('Ouryu-Flying-Attack',731,1298);
 INSERT INTO `mob_skill_lists` VALUES ('Jormungand-Flying-Attack',732,1288);
+
+-- These skillIDs correspond to the entries in petskills.sql, NOT mobskills.sql.
+-- The proper mobskill is routed through the petskill ability luas.
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hare',733,672);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hare',733,673);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hare',733,674);

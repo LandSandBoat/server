@@ -3380,7 +3380,7 @@ void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 Pe
             }
         }
     }
-    if (PPet->getPetType() == PET_TYPE::JUG_PET)
+    if (PPet->getPetType() == PET_TYPE::JUG_PET && !hasAbility(PChar, ABILITY_SIC))
     {
         auto skillList{ battleutils::GetMobSkillList(PPet->m_MobSkillList) };
         for (auto&& abilityid : skillList)

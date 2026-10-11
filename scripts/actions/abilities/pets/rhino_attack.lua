@@ -4,7 +4,7 @@
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
-local skillName = 'rhino_attack'
+local skillName = 'rhino_attack_jugpet'
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     return 0
