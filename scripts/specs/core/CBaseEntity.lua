@@ -1132,12 +1132,13 @@ function CBaseEntity:sendLinkshellConcierge(data)
 end
 
 ---@class ChocoboRaceStats
----@field str xi.chocoboRaising.statRank?
----@field ["end"] xi.chocoboRaising.statRank?
----@field dsc xi.chocoboRaising.statRank?
----@field rcp xi.chocoboRaising.statRank?
+---@field str integer? Raw stat 0-255
+---@field ["end"] integer? Raw stat 0-255
+---@field dsc integer? Raw stat 0-255
+---@field rcp integer? Raw stat 0-255
 
 ---@class ChocoboRaceEntry
+---@field name string?
 ---@field item xi.chocoboRacing.sectionEvent?
 ---@field orders xi.chocoboRacing.order?
 ---@field size xi.chocoboRacing.jockeySize?
@@ -1153,7 +1154,7 @@ end
 ---@field type xi.chocoboRacing.sectionEvent?
 ---@field user integer? Bitmask: the acting chocobo
 ---@field targets integer? Bitmask: affected chocobos
----@field param integer? Bitmask: extra affected / type param
+---@field param integer? Bitmask: chocobos that avoided it
 
 ---@class ChocoboRaceSection
 ---@field from integer[] Per-chocobo positions at section start

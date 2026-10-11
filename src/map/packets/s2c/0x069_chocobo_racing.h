@@ -38,8 +38,14 @@ constexpr size_t kNumRacers         = 8;  // max chocobos per race
 constexpr size_t kMaxSections       = 32; // animation sections per race
 constexpr size_t kSectionsPerPacket = 16; // 192-byte payload / 12 bytes per section
 
+// Read a 1-indexed lua table of per-chocobo values (positions or places) into a fixed array.
+auto readNibbles(const sol::table& values) -> std::array<uint8_t, kNumRacers>;
+
 // Pack 8 nibble values (one per chocobo) into 4 wire bytes.
 void packNibbles(uint8_t out[4], const std::array<uint8_t, kNumRacers>& nibbles);
+
+// Unpack 4 wire bytes into 8 nibble values (one per chocobo).
+auto unpackNibbles(const uint8_t in[4]) -> std::array<uint8_t, kNumRacers>;
 
 // Racing Chocobo definition
 struct ChocoboParam
@@ -63,7 +69,8 @@ struct ChocoboParam
     uint32_t                   Size : 3;        // xi.chocoboRacing.jockeySize
     uint32_t                   unknown00 : 1;
 
-    static ChocoboParam fromLua(const sol::table& data);
+    static auto fromLua(const sol::table& data) -> ChocoboParam;
+    auto        toLua() const -> sol::table;
 };
 
 // Each racing section/keyframe can contain optional trigger/events
@@ -99,22 +106,27 @@ struct SectionParam
     uint8_t        From[4]; // 8 chocobo positions, section start
     uint8_t        To[4];   // section end
     SectionTrigger Trigger; // per-section event
+
+    static auto fromLua(const sol::table& data) -> SectionParam;
+    auto        toLua() const -> sol::table;
 };
 
 // Mode=1: Updates ChocoboRacingSys.RaceParams.
-// RaceParams[0] contains the weather, RaceParams[1] contains a race-specific counter 0-3
+// RaceParams[0] contains the weather and the number of entrants, RaceParams[1] contains a race-specific counter 0-3
 class RACINGPARAMS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_CHOCOBO_RACING, RACINGPARAMS>
 {
 public:
     struct PacketData
     {
         uint8_t  Mode;          // PS2: (New; did not exist.)
-        uint8_t  padding00[3];  // PS2: (New; did not exist.)
+        uint8_t  ParamIndex;    // PS2: (New; did not exist.)
+        uint8_t  ParamSize;     // PS2: (New; did not exist.)
+        uint8_t  padding00;     // PS2: (New; did not exist.)
         uint32_t RaceParams[2]; // PS2: (New; did not exist.)
         uint8_t  junk00[184];   // PS2: (New; did not exist.)
     };
 
-    RACINGPARAMS(uint32_t weather, uint32_t raceCounter);
+    RACINGPARAMS(uint32_t weather, uint32_t entrants, uint32_t raceCounter);
 };
 
 // Mode=2: This mode is used to update the ChocoboRacingSys.ChocoboParams data.

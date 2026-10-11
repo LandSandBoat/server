@@ -24,6 +24,7 @@
 #include "common/lua.h"
 
 #include <algorithm>
+#include <bit>
 
 namespace GP_SERV_COMMAND_CHOCOBO_RACING
 {
@@ -42,35 +43,127 @@ auto ChocoboParam::fromLua(const sol::table& data) -> ChocoboParam
     param.Ability1    = data.get_or<uint8_t>("ability1", 0);    // xi.chocoboRaising.ability
     param.Ability2    = data.get_or<uint8_t>("ability2", 0);    // xi.chocoboRaising.ability
 
-    // stats str/end/dsc/rcp: xi.chocoboRaising.statRank
+    // stats str/end/dsc/rcp: raw 0-255 stats, which are the stat bytes as sent
     if (const auto stats = data.get<sol::optional<sol::table>>("stats"))
     {
-        param.STR.Rank = stats->get_or<uint8_t>("str", 0);
-        param.END.Rank = stats->get_or<uint8_t>("end", 0);
-        param.DSC.Rank = stats->get_or<uint8_t>("dsc", 0);
-        param.RCP.Rank = stats->get_or<uint8_t>("rcp", 0);
+        param.STR = std::bit_cast<Exdata::ChocoboStatByte>(stats->get_or<uint8_t>("str", 0));
+        param.END = std::bit_cast<Exdata::ChocoboStatByte>(stats->get_or<uint8_t>("end", 0));
+        param.DSC = std::bit_cast<Exdata::ChocoboStatByte>(stats->get_or<uint8_t>("dsc", 0));
+        param.RCP = std::bit_cast<Exdata::ChocoboStatByteRCP>(stats->get_or<uint8_t>("rcp", 0));
     }
 
     return param;
 }
 
-// Various fields pack 2 chocobos per uint8.
+auto ChocoboParam::toLua() const -> sol::table
+{
+    sol::table stats = lua.create_table();
+    stats["str"]     = std::bit_cast<uint8_t>(STR);
+    stats["end"]     = std::bit_cast<uint8_t>(END);
+    stats["dsc"]     = std::bit_cast<uint8_t>(DSC);
+    stats["rcp"]     = std::bit_cast<uint8_t>(RCP);
+
+    sol::table data     = lua.create_table();
+    data["item"]        = static_cast<uint8_t>(Item);
+    data["orders"]      = static_cast<uint8_t>(Orders);
+    data["size"]        = static_cast<uint8_t>(Size);
+    data["color"]       = static_cast<uint8_t>(Color);
+    data["gender"]      = static_cast<uint8_t>(Gender);
+    data["weather"]     = static_cast<uint8_t>(Weather);
+    data["temperament"] = static_cast<uint8_t>(Temperament);
+    data["ability1"]    = static_cast<uint8_t>(Ability1);
+    data["ability2"]    = static_cast<uint8_t>(Ability2);
+    data["stats"]       = stats;
+
+    return data;
+}
+
+auto SectionParam::fromLua(const sol::table& data) -> SectionParam
+{
+    SectionParam section{};
+    packNibbles(section.From, readNibbles(data.get<sol::table>("from")));
+    packNibbles(section.To, readNibbles(data.get<sol::table>("to")));
+
+    if (const auto event = data.get<sol::optional<sol::table>>("trigger"))
+    {
+        section.Trigger.User    = event->get_or<uint8_t>("user", 0);
+        section.Trigger.Targets = event->get_or<uint8_t>("targets", 0);
+        section.Trigger.Param   = event->get_or<uint8_t>("param", 0);
+        section.Trigger.Type    = static_cast<SectionEventType>(event->get_or<uint8_t>("type", 0));
+    }
+
+    return section;
+}
+
+auto SectionParam::toLua() const -> sol::table
+{
+    const auto writeNibbles = [](const uint8_t in[4]) -> sol::table
+    {
+        sol::table out    = lua.create_table();
+        const auto values = unpackNibbles(in);
+        for (std::size_t racer = 0; racer < kNumRacers; ++racer)
+        {
+            out[racer + 1] = values[racer];
+        }
+
+        return out;
+    };
+
+    sol::table trigger = lua.create_table();
+    trigger["user"]    = Trigger.User;
+    trigger["targets"] = Trigger.Targets;
+    trigger["param"]   = Trigger.Param;
+    trigger["type"]    = static_cast<uint8_t>(Trigger.Type);
+
+    sol::table data = lua.create_table();
+    data["from"]    = writeNibbles(From);
+    data["to"]      = writeNibbles(To);
+    data["trigger"] = trigger;
+
+    return data;
+}
+
+auto readNibbles(const sol::table& values) -> std::array<uint8_t, kNumRacers>
+{
+    std::array<uint8_t, kNumRacers> out{};
+    for (std::size_t racer = 0; racer < kNumRacers; ++racer)
+    {
+        out[racer] = values.get_or<uint8_t>(racer + 1, 0);
+    }
+
+    return out;
+}
+
+// Various fields pack 2 chocobos per uint8, the even chocobo in the low nibble.
 void packNibbles(uint8_t out[4], const std::array<uint8_t, kNumRacers>& nibbles)
 {
     for (size_t i = 0; i < kNumRacers / 2; ++i)
     {
-        const uint8_t hi = nibbles[i * 2] & 0x0F;
-        const uint8_t lo = nibbles[i * 2 + 1] & 0x0F;
+        const uint8_t lo = nibbles[i * 2] & 0x0F;
+        const uint8_t hi = nibbles[i * 2 + 1] & 0x0F;
         out[i]           = static_cast<uint8_t>(hi << 4 | lo);
     }
 }
 
-RACINGPARAMS::RACINGPARAMS(const uint32_t weather, const uint32_t raceCounter)
+auto unpackNibbles(const uint8_t in[4]) -> std::array<uint8_t, kNumRacers>
+{
+    std::array<uint8_t, kNumRacers> out{};
+    for (size_t i = 0; i < kNumRacers / 2; ++i)
+    {
+        out[i * 2]     = in[i] & 0x0F;
+        out[i * 2 + 1] = in[i] >> 4;
+    }
+
+    return out;
+}
+
+RACINGPARAMS::RACINGPARAMS(const uint32_t weather, const uint32_t entrants, const uint32_t raceCounter)
 {
     auto& packet = this->data();
 
     packet.Mode          = 1;
-    packet.RaceParams[0] = (weather << 5) + 8;               // pack the xi.weather id
+    packet.ParamSize     = static_cast<uint8_t>(sizeof(packet.RaceParams));
+    packet.RaceParams[0] = (weather << 5) | entrants;        // xi.weather id, then the number of chocobos racing
     packet.RaceParams[1] = 0x80000000 | (raceCounter & 0x3); // high bit + 2-bit rolling counter
 }
 
