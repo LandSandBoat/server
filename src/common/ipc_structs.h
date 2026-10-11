@@ -342,4 +342,28 @@ struct GMCallResponse
     std::string message{}; // Up to 1024 characters
 };
 
+enum class ReplicaOp : uint8
+{
+    Snapshot, // from a mirror: send my objects of typeId. from the owner: the Puts of typeId in this message are all of them
+    Put,      // body: the object
+    Destroy,
+    Request, // mirror asks the owner to act. objectId: the request type, body: the request
+};
+
+struct ReplicaItem
+{
+    ReplicaOp          op{};
+    uint32             typeId{};
+    uint64             objectId{};
+    std::vector<uint8> body{};
+};
+
+// see common/replica
+struct ReplicaSync
+{
+    uint32                   epoch{}; // owner boot id
+    uint64                   seq{};   // from the owner: how many messages with items this mirror was sent
+    std::vector<ReplicaItem> items{};
+};
+
 } // namespace ipc

@@ -65,6 +65,8 @@ IPC_STRUCT_NAMES = [
 
     "GMCallRequest",
     "GMCallResponse",
+
+    "ReplicaSync",
 ]
 
 

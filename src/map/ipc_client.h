@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/ipc.h"
 #include "common/mmo.h"
+#include "common/replica/mirror.h"
 #include "common/zmq/zmq_service.h"
 
 #include <atomic>
@@ -46,6 +47,9 @@ public:
 
     template <typename T>
     void sendMessage(const T& message);
+
+    // receives what the world server streams. feature code reaches it through mirrored<T>().
+    auto replica() -> xi::replica::Mirror&;
 
     //
     // ipc::IPCMessageHandlerBase
@@ -88,6 +92,7 @@ public:
     void handleMessage_AssistChannelEvent(const IPP& ipp, const ipc::AssistChannelEvent& message) const;
     void handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallRequest& message);
     void handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallResponse& message);
+    void handleMessage_ReplicaSync(const IPP& ipp, const ipc::ReplicaSync& message);
 
     void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
 
@@ -95,6 +100,8 @@ private:
     MapNetworking& networking_;
 
     ipc::Channel<zmq::message_t> channel_;
+
+    xi::replica::Mirror replica_;
 };
 
 //

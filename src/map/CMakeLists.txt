@@ -136,6 +136,7 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/petskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roam_region.cpp

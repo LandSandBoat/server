@@ -50,6 +50,18 @@ IPCServer::IPCServer(WorldEngine& worldServer, ZMQService& zmqService)
 , channel_(zmqService.registerRouter(getZMQEndpointString()))
 {
     TracyZoneScoped;
+
+    replica_.init(
+        zoneSettings_.mapEndpoints_,
+        [this](const IPP& mirror, const ipc::ReplicaSync& message)
+        {
+            sendMessage(mirror, message);
+        });
+}
+
+auto IPCServer::replica() -> xi::replica::Owner&
+{
+    return replica_;
 }
 
 //
@@ -383,6 +395,8 @@ void IPCServer::handleIncomingMessages()
 
         handleMessage(message.ipp, payload);
     }
+
+    replica_.flush();
 }
 
 void IPCServer::handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message)
@@ -614,6 +628,13 @@ void IPCServer::handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction
     TracyZoneScoped;
 
     rerouteMessageToZoneId(message.executorZoneId, message);
+}
+
+void IPCServer::handleMessage_ReplicaSync(const IPP& ipp, const ipc::ReplicaSync& message)
+{
+    TracyZoneScoped;
+
+    replica_.receive(ipp, message);
 }
 
 void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message)
