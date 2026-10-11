@@ -1,11 +1,13 @@
 -----------------------------------
 -- Monstrosity
+-- The Suspicious NPCs and Odyssean Passages are in scripts/globals/monstrosity/city.lua. The quest's
+-- priority events win over them until it is complete.
 -----------------------------------
 -- Log ID: 4, Quest ID: 34
 -- Suspicious Hume     : !pos -491.817 24.988 -618.552 109
 -- Suspicious Elvaan   : !pos 82.217 -0.199 42.682 231
 -- Suspicious Galka    : !pos 81.610 8.499 -229.065 236
--- Suspicious Tarutaru : !pos 221.286 -12.000 225.311 241
+-- Suspicious Tarutaru : !pos 221.286 -12.000 225.311 240
 -- Rabbit Hide         : !additem 856
 -- Lizard Tail         : !additem 926
 -- Two-leaf Mandy Bud  : !additem 4368
@@ -14,14 +16,6 @@
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
 
 quest.reward = {}
-
-local baseNpcEvents =
-{
-    [xi.zone.PASHHOW_MARSHLANDS] = 40,
-    [xi.zone.NORTHERN_SAN_DORIA] = 882,
-    [xi.zone.PORT_BASTOK]        = 418,
-    [xi.zone.PORT_WINDURST]      = 880,
-}
 
 local tradeItems =
 {
@@ -39,97 +33,37 @@ local suspiciousCityNpc =
 
         for _, entry in ipairs(tradeItems) do
             local itemId = entry[1]
-            if npcUtil.tradeHasExactly(trade, itemId) then
+            if npcUtil.tradeMatches(trade, { { itemId, 1 } }) then
                 player:setLocalVar('MONSTROSITY_UNLOCK', entry[2])
-                return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 1, itemId)
+                return quest:progressEvent(xi.monstrosity.cityEvents[player:getZoneID()] + xi.monstrosity.cityEvent.TRADE, itemId)
             end
         end
     end,
 
     onTrigger = function(player, npc)
-        local baseEvent = baseNpcEvents[player:getZoneID()]
+        local baseEvent = xi.monstrosity.cityEvents[player:getZoneID()]
 
         if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-            return quest:event(baseEvent)
+            return quest:priorityEvent(baseEvent + xi.monstrosity.cityEvent.INTRO)
         else
-            return quest:event(baseEvent + 2)
+            return quest:priorityEvent(baseEvent + xi.monstrosity.cityEvent.HAS_RING)
         end
     end,
 }
 
-local tradeEventFinish = function(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
+local function tradeEventFinish(player, csid, option, npc)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
-    if species > 0 then
-        player:setMonstrosityData({ monstrosityId = species, species = species })
+    player:setLocalVar('MONSTROSITY_UNLOCK', 0)
+
+    if
+        species == 0 or
+        not player:tradeComplete()
+    then
+        return
     end
-end
 
-local odysseanPassageNpc =
-{
-    onTrigger = function(player, npc)
-        if player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-            return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 3)
-        end
-    end,
-}
-
--- Slots and costs are fixed in the client event. JP wiki: only a writ holder may exchange.
-local prestigeRewards =
-{
-    [0] = { item = xi.item.PHIAL_OF_ALLOY_TONIC,    cost =  5000 },
-    [1] = { item = xi.item.PHIAL_OF_ALLOY_TONIC_P1, cost = 10000 },
-    [2] = { item = xi.item.PHIAL_OF_ALLOY_TONIC_P2, cost = 20000 },
-    [3] = { item = xi.item.FIEND_TORQUE,            cost = 10000 },
-    [4] = { item = xi.item.ANIMOSITY_TORQUE,        cost = 25000 },
-    [5] = { item = xi.item.LACERATION_TORQUE,       cost = 25000 },
-    [6] = { item = xi.item.GOETIC_TORQUE,           cost = 25000 },
-}
-
--- JP wiki: talking to the Suspicious Hume after the quest opens the gladiator menus in the cities.
-local gladiatorNpc =
-{
-    onTrigger = function(player, npc)
-        local baseEvent = baseNpcEvents[player:getZoneID()]
-        if quest:getVar(player, 'Gladiator') == 0 then
-            return quest:event(baseEvent + 4)
-        end
-
-        local hasWrit = player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and 1 or 0
-        return quest:event(baseEvent + 5, hasWrit, player:getCurrency('prestige'))
-    end,
-}
-
--- The event answers 1 plus the slot from bit 16 to exchange.
-local function gladiatorMenuFinish(player, csid, option, npc)
-    local takeWrit   = 123
-    local returnWrit = 321
-
-    if option == takeWrit then
-        npcUtil.giveKeyItem(player, xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
-    elseif option == returnWrit then
-        player:delKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
-    elseif bit.band(option, 0xFFFF) == 1 then
-        local reward = prestigeRewards[bit.rshift(option, 16)]
-        if
-            reward and
-            player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and
-            player:getCurrency('prestige') >= reward.cost and
-            npcUtil.giveItem(player, reward.item)
-        then
-            player:delCurrency('prestige', reward.cost)
-        end
-    end
-end
-
-local odysseanPassageOnEventFinish = function(player, csid, option, npc)
-    if option == 1 then
-        local pos = player:getPos()
-        player:setMonstrosityEntryData(pos.x, pos.y, pos.z, pos.rot, player:getZoneID(), player:getMainJob(), player:getSubJob())
-
-        local entrance = xi.monstrosity.feretoryEntrance
-        player:setPos(entrance.x, entrance.y, entrance.z, entrance.rot, xi.zone.FERETORY)
-    end
+    npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
+    player:setMonstrosityData({ monstrosityId = species, species = species })
 end
 
 quest.sections =
@@ -154,62 +88,50 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
-            ['Odyssean_Passage']  = odysseanPassageNpc,
             ['Suspicious_Elvaan'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [883] = tradeEventFinish,
-                [885] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Hume']  =
+            ['Suspicious_Hume'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-                        return quest:event(41)
+                        return quest:priorityEvent(41)
                     else
-                        return quest:event(42)
+                        return quest:priorityEvent(42)
                     end
                 end,
-            },
-
-            onEventFinish =
-            {
-                [43] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
             ['Suspicious_Galka'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [419] = tradeEventFinish,
-                [421] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Odyssean_Passage']    = odysseanPassageNpc,
             ['Suspicious_Tarutaru'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [881] = tradeEventFinish,
-                [883] = odysseanPassageOnEventFinish,
             },
         },
 
@@ -233,63 +155,6 @@ quest.sections =
                 [2] = function(player, csid, option, npc)
                     quest:complete(player)
                 end,
-            },
-        },
-    },
-
-    -- TODO: The Hume's mezzotint and augment events (46 onwards).
-    {
-        check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED
-        end,
-
-        [xi.zone.PASHHOW_MARSHLANDS] =
-        {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Hume']  = quest:event(45):replaceDefault(),
-
-            onEventFinish =
-            {
-                [43] = odysseanPassageOnEventFinish,
-                [45] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Gladiator', 1)
-                end,
-            },
-        },
-
-        [xi.zone.NORTHERN_SAN_DORIA] =
-        {
-            ['Odyssean_Passage']  = odysseanPassageNpc,
-            ['Suspicious_Elvaan'] = gladiatorNpc,
-
-            onEventFinish =
-            {
-                [885] = odysseanPassageOnEventFinish,
-                [887] = gladiatorMenuFinish,
-            },
-        },
-
-        [xi.zone.PORT_BASTOK] =
-        {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Galka'] = gladiatorNpc,
-
-            onEventFinish =
-            {
-                [421] = odysseanPassageOnEventFinish,
-                [423] = gladiatorMenuFinish,
-            },
-        },
-
-        [xi.zone.PORT_WINDURST] =
-        {
-            ['Odyssean_Passage']    = odysseanPassageNpc,
-            ['Suspicious_Tarutaru'] = gladiatorNpc,
-
-            onEventFinish =
-            {
-                [883] = odysseanPassageOnEventFinish,
-                [885] = gladiatorMenuFinish,
             },
         },
     },

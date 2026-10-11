@@ -1,10 +1,16 @@
 -----------------------------------
 -- Monstrosity - Feretory zone and Maccus
 -----------------------------------
-require('scripts/globals/monstrosity/constants')
------------------------------------
 xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
+
+-- The client lists the starters as rabbit, lizard, mandragora.
+local starterCutsceneIndex =
+{
+    [xi.monstrositySpecies.RABBIT    ] = 1,
+    [xi.monstrositySpecies.LIZARD    ] = 2,
+    [xi.monstrositySpecies.MANDRAGORA] = 3,
+}
 
 xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
     if
@@ -49,7 +55,7 @@ end
 
 -- The Feretory introduction (event 2) draws the player's race and face, then the starter.
 xi.monstrosity.updateIntroEvent = function(player)
-    local starter = xi.monstrosity.starterCutsceneIndex[player:getMonstrosityData().monstrosityId] or 0
+    local starter = starterCutsceneIndex[player:getMonstrosityData().monstrosityId] or 0
     player:updateEvent(player:getRace(), player:getFace(), starter)
 end
 

@@ -1,5 +1,7 @@
+-----------------------------------
 -- The gladiator menu the Suspicious NPCs open after the Monstrosity quest. Option values are
 -- read from the client's event 887.
+-----------------------------------
 local ffi = require('ffi')
 
 describe('Monstrosity gladiator menu', function()
@@ -37,6 +39,52 @@ describe('Monstrosity gladiator menu', function()
 
         player.entities:gotoAndTrigger('Suspicious_Elvaan', { eventId = 887, finishOption = 321 })
         player.assert.no:hasKI(writ)
+    end)
+
+    it('announces the returned writ', function()
+        openMenus()
+        player:addKeyItem(writ)
+        player.packets:clear()
+
+        player.entities:gotoAndTrigger('Suspicious_Elvaan', { eventId = 887, finishOption = 321 })
+
+        local lost = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            -- The top bit of the message number is a flag.
+            if
+                pkt.type == 0x02A and
+                bit.band(pkt.data[0x1A] + pkt.data[0x1B] * 256, 0x7FFF) == zones[xi.zone.NORTHERN_SAN_DORIA].text.KEYITEM_LOST
+            then
+                lost = true
+            end
+        end
+
+        assert(lost, 'returning the writ said nothing')
+    end)
+
+    -- The menu shows param 1 as the prestige held. Retail sent banter line 1 in param 2.
+    it('opens the menu with the writ, prestige and banter line', function()
+        openMenus()
+        player:addKeyItem(writ)
+        player:addCurrency('prestige', 1234)
+        player.packets:clear()
+
+        player.entities:gotoAndTrigger('Suspicious_Elvaan', { eventId = 887 })
+
+        local params = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x034 then
+                params =
+                {
+                    pkt.data[0x08],
+                    pkt.data[0x0C] + pkt.data[0x0D] * 256,
+                    pkt.data[0x10],
+                }
+            end
+        end
+
+        assert(params, 'no menu event')
+        assert(params[1] == 1 and params[2] == 1234 and params[3] == 1, string.format('menu params were %d, %d, %d', params[1], params[2], params[3]))
     end)
 
     it('exchanges prestige for an Alloy Tonic', function()
