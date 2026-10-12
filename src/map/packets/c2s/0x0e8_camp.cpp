@@ -26,6 +26,7 @@
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "packets/c2s/validation.h"
+#include "packets/char_status.h"
 #include "status_effect_container.h"
 
 auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
@@ -56,7 +57,10 @@ void GP_CLI_COMMAND_CAMP::process(MapSession* PSession, CCharEntity* PChar) cons
         }
 
         const auto healingTickDelay = std::chrono::seconds(settings::get<uint8>("map.HEALING_TICK_DELAY"));
-        PChar->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::Healing, 0, 0, healingTickDelay, 0s);
+        if (PChar->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::Healing, 0, 0, healingTickDelay, 0s))
+        {
+            PChar->pushPacket<CCharStatusPacket>(PChar);
+        }
     };
 
     auto disableHealing = [&]()
