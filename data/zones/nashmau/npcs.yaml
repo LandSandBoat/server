@@ -386,7 +386,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  soa
+    content:  toau
 
   16994333:
     script:       HomePoint#2
