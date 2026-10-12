@@ -1263,7 +1263,7 @@ xi.combat.physical.canParry = function(defender, attacker)
                 canParry = mainWeapon:getSkillType() ~= xi.skill.HAND_TO_HAND
             end
         else
-            canParry = defender:getMobMod(xi.mobMod.CAN_PARRY) > 0
+            canParry = defender:getMobMod(xi.mobMod.CAN_PARRY) > 0 and not defender:isUsingH2H()
         end
     end
 

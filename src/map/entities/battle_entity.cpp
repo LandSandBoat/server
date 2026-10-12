@@ -493,6 +493,8 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
+        bool isJugPet = objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::JUG_PET;
+
         const auto* PMonipulator = monstrosity::AsMonipulator(this);
 
         const auto baseDelay = [&]() -> uint16
@@ -515,14 +517,15 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
         float hasteMultiplier     = 1.0f;
         float delayModMultiplier  = 1.0f + getMod(xi::Mod::DELAYP) / 100.0f;
 
-        // H2H (Mobs and Monipulators do not benefit from Martial Arts)
+        // H2H (Mobs, Jugpets and Monipulators do not benefit from Martial Arts)
         // TODO: Do Trusts benefit from Martial Arts?
-        if (weapon->isHandToHand() && objtype != TYPE_MOB && PMonipulator == nullptr)
+        if (weapon->isHandToHand() && objtype != TYPE_MOB && !isJugPet && PMonipulator == nullptr)
         {
             martialArts = getMod(xi::Mod::MARTIAL_ARTS) * 1000 / 60; // TODO: Job points?
         }
 
         // Sub-weapon
+        // TODO: Capture if mobs get a delay reduction from DUAL_WIELD. This may be a similar scenario to MARTIAL_ARTS where they use a defined delay and but no benefit from traits.
         else if (auto* subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]);
                  subweapon && subweapon->getDmgType() > xi::DamageType::None && subweapon->getDmgType() < xi::DamageType::HandToHand)
         {

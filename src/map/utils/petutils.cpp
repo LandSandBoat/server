@@ -1178,6 +1178,18 @@ void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
 void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
 {
+    // Wyverns and Jugpets can Parry
+    if (PPet->getMobMod(xi::MobMod::CanParry) > 0)
+    {
+        PPet->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::Parry)] = mobutils::GetBaseSkill(PPet, PPet->getMobMod(xi::MobMod::CanParry));
+    }
+
+    // MNK Jugpets can Guard. Regular mobs use C rank by default so use that here for now.
+    if ((PPet->GetMJob() == xi::Job::MNK || PPet->GetMJob() == xi::Job::PUP) && PPet->getMobMod(xi::MobMod::CannotGuard) == 0)
+    {
+        PPet->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::Guard)] = mobutils::GetBaseSkill(PPet, 3);
+    }
+
     // set C magic evasion, add MEVA that may have come from other sources (Automaton, Wyvern, Avatar bonus meva in their respective CalculateXStats function)
     PPet->setModifier(xi::Mod::MEVA, battleutils::GetMaxSkill(7, std::min<uint8>(99, PPet->GetMLevel())) + PPet->getMod(xi::Mod::MEVA));
     PPet->health.tp = 0;
