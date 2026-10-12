@@ -114,53 +114,46 @@ public:
         // Specify the homepoint to kill ratio based on region. One homepoint equals this many mob kills.
         int64 homepointKillWeight = 0;
 
+        // Original regions were grouped as general, semi-stronghold, and stronghold.
         switch (region)
         {
+            // General
             case REGION_TYPE::RONFAURE:
+            case REGION_TYPE::ZULKHEIM:
             case REGION_TYPE::GUSTABERG:
             case REGION_TYPE::SARUTABARUTA:
+            case REGION_TYPE::KOLSHUSHU:
             {
                 homepointKillWeight = 10;
                 break;
             }
-            case REGION_TYPE::ZULKHEIM:
-            case REGION_TYPE::KOLSHUSHU:
+            // Semi-stronghold
+            case REGION_TYPE::FAUREGANDI:
+            case REGION_TYPE::QUFIMISLAND:
             case REGION_TYPE::LITELOR:
+            case REGION_TYPE::KUZOTZ:
             case REGION_TYPE::VOLLBOW:
+            case REGION_TYPE::ELSHIMO_LOWLANDS:
+            case REGION_TYPE::ELSHIMO_UPLANDS:
+            case REGION_TYPE::TULIA:
+            case REGION_TYPE::TAVNAZIA:
             {
                 homepointKillWeight = 25;
                 break;
             }
-            case REGION_TYPE::QUFIMISLAND:
-            case REGION_TYPE::KUZOTZ:
-            case REGION_TYPE::ELSHIMO_LOWLANDS:
-            case REGION_TYPE::ELSHIMO_UPLANDS:
-            case REGION_TYPE::TAVNAZIA:
-            case REGION_TYPE::TULIA: // TODO: Capture correct value
+            // Stronghold
+            case REGION_TYPE::NORVALLEN:
+            case REGION_TYPE::DERFLAND:
+            case REGION_TYPE::ARAGONEU:
+            case REGION_TYPE::VALDEAUNIA:
+            case REGION_TYPE::MOVALPOLOS:
             {
                 homepointKillWeight = 50;
                 break;
             }
-            case REGION_TYPE::NORVALLEN:
-            case REGION_TYPE::DERFLAND:
-            case REGION_TYPE::ARAGONEU:
-            {
-                homepointKillWeight = 100;
-                break;
-            }
-            case REGION_TYPE::VALDEAUNIA:
-            case REGION_TYPE::FAUREGANDI:
-            {
-                homepointKillWeight = 150;
-                break;
-            }
-            case REGION_TYPE::MOVALPOLOS:
-            {
-                homepointKillWeight = 250;
-                break;
-            }
             default:
             {
+                homepointKillWeight = 10;
                 break;
             }
         }
