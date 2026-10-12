@@ -32,6 +32,7 @@ IPC_STRUCT_NAMES = [
 
     "PartyInvite",
     "PartyInviteResponse",
+    "PartyRequest",
     "PartyReload",
     "PartyDisband",
 

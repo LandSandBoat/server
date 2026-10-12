@@ -46,6 +46,7 @@
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
+#include "packets/s2c/0x11d_partyreq.h"
 
 #include "gmcall_container.h"
 #include "items/item_linkshell.h"
@@ -578,6 +579,22 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
                 }
             }
         }
+    }
+}
+
+void IPCClient::handleMessage_PartyRequest(const IPP& ipp, const ipc::PartyRequest& message)
+{
+    TracyZoneScoped;
+
+    if (CCharEntity* PRecipient = zoneutils::GetChar(message.recipientId))
+    {
+        uint16 targid = 0;
+        if (PRecipient->getZone() == message.requesterZoneId)
+        {
+            targid = message.requesterTargId;
+        }
+
+        PRecipient->pushPacket<GP_SERV_COMMAND_PARTYREQ>(message.requesterId, targid, message.requesterName, message.requesterRace, static_cast<GP_SERV_COMMAND_PARTYREQ_STATUS>(message.kind));
     }
 }
 

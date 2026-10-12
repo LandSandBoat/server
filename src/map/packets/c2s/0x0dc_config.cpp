@@ -51,6 +51,12 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     {
         updated                       = true;
         PChar->playerConfig.InviteFlg = value;
+
+        // seeking a party and accepting requests are mutually exclusive
+        if (value)
+        {
+            PChar->playerConfig.RecruitFlg = false;
+        }
     }
 
     // Flag set if the client is away. (/away)
@@ -122,6 +128,11 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
     {
         updated                        = true;
         PChar->playerConfig.RecruitFlg = value;
+
+        if (value)
+        {
+            PChar->playerConfig.InviteFlg = false;
+        }
     }
 
     // Retail replies with these packets even if no changes were made.

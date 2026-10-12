@@ -305,8 +305,8 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     // Flags3 starts at 0x38
     charStatusFlags::flags3_t flags3 = {};
 
-    flags3.LfgMasterFlag    = false; // /inv icon WITH mastery star. Not currently implemented, this is set with the "Request" button in the Party menu.
-    flags3.TrialFlag        = false; // Trial account icon flag
+    flags3.LfgMasterFlag    = PChar->playerConfig.RecruitFlg; // Accepting party requests icon.
+    flags3.TrialFlag        = false;                          // Trial account icon flag
     flags3.SilenceFlag      = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak);
     flags3.NewCharacterFlag = PChar->isNewPlayer();
     flags3.MentorFlag       = PChar->aman().isMentor();

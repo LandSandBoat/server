@@ -23,6 +23,12 @@
 
 #include "base.h"
 
+enum class GP_SERV_COMMAND_PARTYREQ_STATUS : uint8_t
+{
+    Requesting = 0, // The player is requesting to join the client's party.
+    Stopped    = 1, // The player has stopped requesting to join.
+};
+
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x011D
 // This packet is sent by the server to inform the client of a party invite request. (Using the newer party request system.)
 class GP_SERV_COMMAND_PARTYREQ final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_PARTYREQ, GP_SERV_COMMAND_PARTYREQ>
@@ -39,6 +45,5 @@ public:
         uint8_t  padding1E[2]; // PS2: (New; did not exist.)
     };
 
-    // TODO: Unimplemented
-    GP_SERV_COMMAND_PARTYREQ() = default;
+    GP_SERV_COMMAND_PARTYREQ(uint32_t id, uint16_t targid, const std::string& requesterName, uint16_t race, GP_SERV_COMMAND_PARTYREQ_STATUS status);
 };

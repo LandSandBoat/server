@@ -175,6 +175,17 @@ struct PartyInviteResponse
     uint8  inviteAnswer{};
 };
 
+struct PartyRequest
+{
+    uint32      recipientId{};
+    uint32      requesterId{};
+    uint16      requesterTargId{};
+    xi::ZoneId  requesterZoneId{};
+    std::string requesterName{};
+    uint16      requesterRace{};
+    uint8       kind{};
+};
+
 struct PartyReload
 {
     uint32 partyId{};

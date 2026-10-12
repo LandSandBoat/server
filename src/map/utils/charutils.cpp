@@ -7683,6 +7683,13 @@ void removeCharFromZone(CCharEntity* PChar)
             PChar->resetPetZoningInfo();
         }
 
+        // accepting party requests does not survive a logout
+        if (PChar->playerConfig.RecruitFlg)
+        {
+            PChar->playerConfig.RecruitFlg = false;
+            SavePlayerSettings(PChar);
+        }
+
         PChar->PSession->shuttingDown = 1;
         db::preparedStmt("UPDATE char_stats SET zoning = 0 WHERE charid = ?", PChar->id);
     }

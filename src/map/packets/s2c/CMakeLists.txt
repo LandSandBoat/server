@@ -297,6 +297,7 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11c_lockstyle_error.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11c_lockstyle_error.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_partyreq.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_partyreq.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
     PARENT_SCOPE

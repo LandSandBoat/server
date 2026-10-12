@@ -337,7 +337,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
         packet->Flags2.AutoPartyFlag = false; // Not implemented.
 
         packet->Flags3.TrustFlag        = 0;
-        packet->Flags3.LfgMasterFlag    = 0; // Not implemented. This is LFP while job mastered when seeking a master party. (job master star next to inv icon)
+        packet->Flags3.LfgMasterFlag    = PChar->playerConfig.RecruitFlg; // Accepting party requests icon.
         packet->Flags3.PetNewFlag       = 0;
         packet->Flags3.MotStopFlag      = PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Terror);
         packet->Flags3.CliPriorityFlag  = PChar->priorityRender;
