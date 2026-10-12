@@ -11,20 +11,21 @@ local m = Module:new('era_jugpet_adjustments')
 -- This breaks when reverting to Sic, causing jug pets to use the wrong skills
 local jugSkillLists =
 {
-    [xi.mobSpecies.RABBIT]       = 206,
-    [xi.mobSpecies.SHEEP]        = 226,
-    [xi.mobSpecies.CRAB]         = 372,
-    [xi.mobSpecies.MANDRAGORA]   = 903,
-    [xi.mobSpecies.TIGER]        = 242,
-    [xi.mobSpecies.FLYTRAP]      = 114,
-    [xi.mobSpecies.HILL_LIZARD]  = 174,
-    [xi.mobSpecies.FLY]          = 113,
-    [xi.mobSpecies.EFT]          =  98,
-    [xi.mobSpecies.FUNGUAR]      = 116,
-    [xi.mobSpecies.BEETLE]       =  49,
-    [xi.mobSpecies.ANTLION]      =  26,
-    [xi.mobSpecies.DIREMITE]     =  81,
-    [xi.mobSpecies.SABOTENDER]   = 939,
+    [xi.mobSpecies.RABBIT]       = 733,
+    [xi.mobSpecies.MANDRAGORA]   = 734,
+    [xi.mobSpecies.KORRIGAN]     = 734,
+    [xi.mobSpecies.TIGER]        = 735,
+    [xi.mobSpecies.HILL_LIZARD]  = 736,
+    [xi.mobSpecies.SHEEP]        = 737,
+    [xi.mobSpecies.CRAB]         = 738,
+    [xi.mobSpecies.SABOTENDER]   = 739,
+    [xi.mobSpecies.FUNGUAR]      = 740,
+    [xi.mobSpecies.BEETLE]       = 741,
+    [xi.mobSpecies.FLY]          = 742,
+    [xi.mobSpecies.ANTLION]      = 743,
+    [xi.mobSpecies.FLYTRAP]      = 744,
+    [xi.mobSpecies.EFT]          = 745,
+    [xi.mobSpecies.DIREMITE]     = 746,
 }
 
 -- Jug Pets: Applies a skill list on spawn of pet to properly utilize Sic.

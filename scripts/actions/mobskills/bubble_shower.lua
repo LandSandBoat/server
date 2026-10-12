@@ -31,7 +31,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         local power    = 10
         local duration = 180
-        -- TODO: Dreamland Dynamis Power
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, power, 9, duration)
     end
