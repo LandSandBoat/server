@@ -170,14 +170,33 @@ end
 function GetSystemTime()
 end
 
+---@class ChocoboRacerStats
+---@field str integer
+---@field ["end"] integer
+---@field dsc integer
+---@field rcp integer
+
+---@class ChocoboRacer : ChocoboRaceEntry
+---@field name string
+---@field item xi.chocoboRacing.sectionEvent
+---@field orders xi.chocoboRacing.order
+---@field size xi.chocoboRacing.jockeySize
+---@field color xi.chocoboRaising.color
+---@field gender xi.chocoboRaising.gender
+---@field weather xi.chocoboRaising.weather
+---@field temperament xi.chocoboRaising.temperament
+---@field ability1 xi.chocoboRaising.ability
+---@field ability2 xi.chocoboRaising.ability
+---@field stats ChocoboRacerStats
+
 ---@class ChocoboRaceResult
 ---@field raceNo integer
 ---@field weather integer
----@field places integer[] 0-based place of each chocobo
+---@field places integer[]? 0-based place of each chocobo, once the race has run
 ---@field runAt integer? 0 until the race has run
----@field intro integer[] Values sent with each half of the field
----@field chocobos ChocoboRaceEntry[]
----@field sections ChocoboRaceSection[]
+---@field intro integer[]? Values sent with each half of the field, once the race has run
+---@field chocobos ChocoboRacer[]
+---@field sections ChocoboRaceSection[]? The race sections, once the race has run
 
 ---@nodiscard
 ---@param raceNo integer

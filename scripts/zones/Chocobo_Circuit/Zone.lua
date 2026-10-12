@@ -41,8 +41,4 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
     xi.chocoboRacing.onEventUpdate(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option, npc)
-    xi.chocoboRacing.onEventFinish(player, csid, option, npc)
-end
-
 return zoneObject
