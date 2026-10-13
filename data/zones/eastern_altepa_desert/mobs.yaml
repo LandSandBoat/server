@@ -207,6 +207,8 @@ templates:
           item:   piece_of_rotten_meat
         - chance: uncommon
           item:   antican_robe
+        - chance: rare
+          item:   iron_arrow
         - chance: very_rare
           item:   chunk_of_copper_ore
         - chance: common
@@ -281,12 +283,10 @@ templates:
         - chance: common
           item:   piece_of_rotten_meat
         - chance: uncommon
-          item:   warriors_testimony
-        - chance: rare
-          item:   antican_pauldron
+          item:   antican_robe
         - chance: very_rare
-          item:   chunk_of_darksteel_ore
-      steal: gold_beastcoin
+          item:   chunk_of_iron_ore
+      steal: mythril_beastcoin
       despoil:
         chunk_of_iron_ore: 0
 
