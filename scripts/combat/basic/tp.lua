@@ -87,7 +87,10 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
             else
                 modifiedDelay = math.max((delay - actor:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48) -- min delay of 96 total so 96/2 per fist, https://www.bg-wiki.com/ffxi/Attack_Speed
             end
-        elseif actor:getObjType() == xi.objType.MOB then
+        elseif
+            actor:getObjType() == xi.objType.MOB or
+            actor:isJugPet() -- Mandragora Jug Pets are MNKs
+        then
             modifiedDelay = math.max(delay / 2, 48) -- Mobs are not affected at all by Martial Arts.
         else
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one 'fist'. Perhaps they have a shield with no main weapon.

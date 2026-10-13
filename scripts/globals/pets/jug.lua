@@ -14,6 +14,7 @@ xi.pets.jug = xi.pets.jug or {}
 ---@param master CBaseEntity
 ---@param pet CBaseEntity
 xi.pets.jug.onPetStatCalculate = function(master, pet)
+    pet:setMobMod(xi.mobMod.CAN_PARRY, 3)
     pet:setMobMod(xi.mobMod.DAMAGE_OFFSET, 2)
     pet:setMobMod(xi.mobMod.RANGED_DAMAGE_OFFSET, 2)
 end
