@@ -30,7 +30,7 @@ local grandstand =
 ---@param raceNo integer
 xi.chocoboRacing.broadcastRace = function(players, raceNo)
     local race   = assert(xi.chocoboRacing.getRace(raceNo))
-    local raceId = bit.lshift(xi.chocoboRacing.getRaceGrade(raceNo), 18) + xi.chocoboRacing.shownRaceNo(raceNo)
+    local raceId = xi.chocoboRacing.getRaceId(raceNo)
 
     for _, player in ipairs(players) do
         local x = player:getXPos()
@@ -94,8 +94,7 @@ xi.chocoboRacing.onEventUpdate = function(player, csid, option, npc)
         local first = half * 4 - 3
         player:updateEventString(race.chocobos[first].name, race.chocobos[first + 1].name, race.chocobos[first + 2].name, race.chocobos[first + 3].name)
         player:updateEvent(intro[half], 0, topLane, 0, result, 0, 0, raceEvent.SHOWING)
-    -- TODO: Payout per quill comes from the recorded bets.
     elseif option == raceEvent.PAYOUT then
-        player:updateEvent(0, 0, 0, 0, result, 0, 0, raceEvent.SHOWING)
+        player:updateEvent(0, 0, xi.chocoboRacing.getQuinella(race).payout, 0, result, 0, 0, raceEvent.SHOWING)
     end
 end

@@ -29,6 +29,7 @@ zones[xi.zone.CHOCOBO_CIRCUIT] =
         RACE_STARTING                 = 9325, -- Attention please. The following race will be starting momentarily:
         RACE_STARTING_END             = 9326, -- ----------
         CURRENT_STANDINGS             = 9335, -- Current Standings Team San d'Oria: [Dominant/Major/Minor/Minimal/???] Team Bastok: [Dominant/Major/Minor/Minimal/???] Team Windurst: [Dominant/Major/Minor/Minimal/???]
+        RACE_NOT_DECIDED              = 9488, -- The outcome of that race is not yet decided. Please come back after the race is finished. Good luck!
         FIND_ON_COUNTER               = 9511, -- You find <keyitem> on the counter.
         ALREADY_POSSESS               = 9513, -- You already possess <keyitem>.
         WELCOME_ADVENTURER            = 9514, -- Welcome, adventurer!
@@ -39,11 +40,12 @@ zones[xi.zone.CHOCOBO_CIRCUIT] =
     },
     npc =
     {
-        GATE_OFFSET   = GetFirstID('Gate_Chocobo_Circuit'),
-        MASTER_OFFSET = GetFirstID('Master1'),
-        QM_MAP_OFFSET = GetFirstID('qm_map'),
-        RUNGAGA       = GetFirstID('Rungaga'),
-        TIMEKEEPER    = GetFirstID('TimeKeeper'),
+        COUNTER_OFFSET = GetFirstID('Laujaquetemps'),
+        GATE_OFFSET    = GetFirstID('Gate_Chocobo_Circuit'),
+        MASTER_OFFSET  = GetFirstID('Master1'),
+        QM_MAP_OFFSET  = GetFirstID('qm_map'),
+        RUNGAGA        = GetFirstID('Rungaga'),
+        TIMEKEEPER     = GetFirstID('TimeKeeper'),
     },
 }
 
