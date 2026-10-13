@@ -1943,7 +1943,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17187578:
+  17187579:
     script: blank
     render:
       look:
@@ -1952,7 +1952,7 @@ npcs:
       entity_flags: 2051
       name_vis:      112
 
-  17187579:
+  17187580:
     script:       Moogle
     display_name: Moogle
     at:           [-155.000, -59.853, 261.000, 95]
@@ -1963,7 +1963,7 @@ npcs:
       moving: 32768
     status: cutscene_only
 
-  17187580:
+  17187581:
     script:       Spriggan_Sifter
     display_name: Spriggan Sifter
     at:           [-154.200, -59.827, 259.800, 95]
@@ -1973,7 +1973,7 @@ npcs:
         model: 2432
     status: cutscene_only
 
-  17187581:
+  17187582:
     script:       Spriggan_Crier
     display_name: Spriggan Crier
     at:           [-154.200, -59.827, 260.600, 95]
@@ -1983,7 +1983,7 @@ npcs:
         model: 2440
     status: cutscene_only
 
-  17187582:
+  17187583:
     script:       Spriggan_Graverobber
     display_name: Spriggan Graverobber
     at:           [-153.400, -59.827, 259.800, 95]

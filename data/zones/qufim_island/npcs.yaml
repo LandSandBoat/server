@@ -2064,7 +2064,7 @@ npcs:
         model: 50
     widescan: true
 
-  17293825:
+  17293826:
     script: blank
     render:
       look:
@@ -2072,7 +2072,7 @@ npcs:
         model: 52
       entity_flags: 2051
 
-  17293826:
+  17293827:
     script:       Iroha
     display_name: Iroha
     render:
@@ -2084,7 +2084,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293827:
+  17293828:
     script:       Lion
     display_name: Lion
     render:
@@ -2096,7 +2096,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293828:
+  17293829:
     script: blank
     render:
       look:
@@ -2106,7 +2106,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17293829:
+  17293830:
     script:       qm4
     display_name: ???
     render:
@@ -2125,7 +2125,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17293830:
+  17293831:
     script: blank
     render:
       look:
@@ -2135,7 +2135,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17293831:
+  17293832:
     script: blank
     render:
       look:
@@ -2145,7 +2145,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17293832:
+  17293833:
     script:       Undulating_Confluence
     display_name: Undulating Confluence
     at:           [-204.531, -20.027, 75.318, 88]
@@ -2158,7 +2158,7 @@ npcs:
     widescan: true
     content:  rov
 
-  17293833:
+  17293834:
     script:       HomePoint#1
     display_name: 'Home Point #1'
     at:           [-212.000, -21.000, 93.000, 64]
@@ -2171,7 +2171,7 @@ npcs:
     widescan: true
     content:  rov
 
-  17293834:
+  17293835:
     script:       HomePoint#2
     display_name: 'Home Point #2'
     render:
@@ -2181,7 +2181,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17293835:
+  17293836:
     script:       HomePoint#3
     display_name: 'Home Point #3'
     render:
@@ -2191,7 +2191,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17293836:
+  17293837:
     script:       HomePoint#4
     display_name: 'Home Point #4'
     render:
@@ -2201,7 +2201,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17293837:
+  17293838:
     script:       HomePoint#5
     display_name: 'Home Point #5'
     render:
@@ -2211,7 +2211,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17293838:
+  17293839:
     script: blank
     render:
       look:
@@ -2220,7 +2220,7 @@ npcs:
       entity_flags: 2051
       name_vis:      112
 
-  17293839:
+  17293840:
     script:       Gloom_Phantom
     display_name: Gloom Phantom
     render:
@@ -2232,7 +2232,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293840:
+  17293841:
     script:       Magh_Bihu
     display_name: Magh Bihu
     render:
@@ -2244,7 +2244,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293841:
+  17293842:
     script:       Dazbog
     display_name: Dazbog
     render:
@@ -2256,7 +2256,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293842:
+  17293843:
     script:       Echion
     display_name: Echion
     render:
@@ -2268,7 +2268,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17293843:
+  17293844:
     at: [-232.461, -19.824, 321.915, 131]
     render:
       look:
@@ -2280,7 +2280,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17293844:
+  17293845:
     script:       Before_Delkfutts_Tower
     display_name: Before Delkfutt's Tower
     at:           [-220.000, -19.000, 320.000]

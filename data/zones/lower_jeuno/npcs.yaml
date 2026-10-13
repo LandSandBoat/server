@@ -4716,7 +4716,7 @@ npcs:
       name_prefix:    34
       moving:          1
 
-  17781022:
+  17781023:
     script:       Achieve_Master
     display_name: Achieve Master
     render:
@@ -4727,14 +4727,14 @@ npcs:
     widescan: true
     content:  soa
 
-  17781023:
+  17781024:
     script: NPC[11f]
     render:
       look:
         type:  standard
         model: 50
 
-  17781024:
+  17781025:
     script:       Unity_Master
     display_name: Unity Master
     render:
@@ -4745,7 +4745,7 @@ npcs:
       name_vis:       96
     content: soa
 
-  17781025:
+  17781026:
     script:       Susuroon
     display_name: Susuroon
     at:           [10.779, 0.101, 0.274, 142]
@@ -4759,7 +4759,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781026:
+  17781027:
     script: blank
     render:
       look:
@@ -4768,7 +4768,7 @@ npcs:
       entity_flags: 2051
       name_vis:      112
 
-  17781027:
+  17781028:
     script:       Mumor
     display_name: Mumor
     render:
@@ -4788,7 +4788,7 @@ npcs:
     status:   status_4
     widescan: true
 
-  17781028:
+  17781029:
     script:       Kupolietta
     display_name: Kupolietta
     render:
@@ -4800,7 +4800,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781029:
+  17781030:
     script:       Mumor
     display_name: Mumor
     render:
@@ -4820,7 +4820,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781030:
+  17781031:
     display_name: kotatsu1
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4834,7 +4834,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781031:
+  17781032:
     display_name: kotatsu2
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4849,7 +4849,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781032:
+  17781033:
     display_name: kotatsu3
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4864,7 +4864,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781033:
+  17781034:
     display_name: kagu1
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4879,7 +4879,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781034:
+  17781035:
     script:       h
     display_name: kagu2
     at:           [300.000, 0.000, 300.000]
@@ -4894,7 +4894,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781035:
+  17781036:
     display_name: kagu3
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4908,7 +4908,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781036:
+  17781037:
     display_name: kagu4
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4922,7 +4922,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781037:
+  17781038:
     display_name: kagu5
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4936,7 +4936,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781038:
+  17781039:
     display_name: kagu6
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4950,7 +4950,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781039:
+  17781040:
     display_name: kagu7
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4965,7 +4965,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781040:
+  17781041:
     display_name: kagu8
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4980,7 +4980,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781041:
+  17781042:
     display_name: kagu9
     at:           [300.000, 0.000, 300.000]
     render:
@@ -4994,7 +4994,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781042:
+  17781043:
     display_name: kagu10
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5009,7 +5009,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781043:
+  17781044:
     display_name: kagu11
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5023,7 +5023,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781044:
+  17781045:
     script:       \
     display_name: kagu12
     at:           [300.000, 0.000, 300.000]
@@ -5038,7 +5038,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781045:
+  17781046:
     script:       Z
     display_name: kagu13
     at:           [300.000, 0.000, 300.000]
@@ -5053,7 +5053,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781046:
+  17781047:
     script:       Z
     display_name: kagu14
     at:           [300.000, 0.000, 300.000]
@@ -5068,7 +5068,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781047:
+  17781048:
     script:       f
     display_name: kagu15
     at:           [300.000, 0.000, 300.000]
@@ -5083,7 +5083,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781048:
+  17781049:
     display_name: kagu16
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5097,7 +5097,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781049:
+  17781050:
     display_name: kagu17
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5111,7 +5111,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781050:
+  17781051:
     display_name: kagu18
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5126,7 +5126,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781051:
+  17781052:
     display_name: kagu19
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5141,7 +5141,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781052:
+  17781053:
     display_name: kagu20
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5155,7 +5155,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781053:
+  17781054:
     display_name: kagu21
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5169,7 +5169,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781054:
+  17781055:
     display_name: kagu22
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5183,7 +5183,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781055:
+  17781056:
     script:       ' '
     display_name: kagu23
     at:           [300.000, 0.000, 300.000]
@@ -5198,7 +5198,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781056:
+  17781057:
     display_name: kagu24
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5213,7 +5213,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781057:
+  17781058:
     display_name: kagu25
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5227,7 +5227,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781058:
+  17781059:
     script:       Y
     display_name: kagu26
     at:           [300.000, 0.000, 300.000]
@@ -5242,7 +5242,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781059:
+  17781060:
     script:       q
     display_name: kagu27
     at:           [300.000, 0.000, 300.000]
@@ -5257,7 +5257,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781060:
+  17781061:
     display_name: kagu28
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5272,7 +5272,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781061:
+  17781062:
     display_name: kagu29
     at:           [300.000, 0.000, 300.000]
     render:
@@ -5287,7 +5287,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781062:
+  17781063:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5298,7 +5298,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17781063:
+  17781064:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5309,7 +5309,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17781064:
+  17781065:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5320,7 +5320,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17781065:
+  17781066:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5340,7 +5340,7 @@ npcs:
       name_prefix:   32
     status: cutscene_only
 
-  17781066:
+  17781067:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5359,7 +5359,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17781067:
+  17781068:
     script: blank
     at:     [300.000, 0.000, 300.000]
     render:
@@ -5378,7 +5378,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17781068:
+  17781069:
     script:       Gloom_Phantom
     display_name: Gloom Phantom
     render:
@@ -5390,7 +5390,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781069:
+  17781070:
     script:       Magh_Bihu
     display_name: Magh Bihu
     render:
@@ -5402,7 +5402,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781070:
+  17781071:
     script:       Dazbog
     display_name: Dazbog
     render:
@@ -5414,7 +5414,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17781071:
+  17781072:
     script: blank
     at:     [-76.524, 0.000, -113.286, 89]
     render:
@@ -5427,7 +5427,7 @@ npcs:
       moving:          1
     status: normal
 
-  17781072:
+  17781073:
     script:       Tales_Beginning
     display_name: Tales' Beginning
     at:           [-76.524, 0.000, -113.286, 89]
