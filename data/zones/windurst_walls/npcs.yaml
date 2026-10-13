@@ -3697,7 +3697,7 @@ npcs:
       name_prefix:     34
       moving:       32769
 
-  17756384:
+  17756385:
     script: blank
     render:
       look:
@@ -3706,7 +3706,7 @@ npcs:
       entity_flags: 2051
       name_vis:      112
 
-  17756385:
+  17756386:
     script:       Babban_Ny_Mheillea
     display_name: Babban Ny Mheillea
     at:           [14.000, -4.525, -50.000, 64]
@@ -3719,7 +3719,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756386:
+  17756387:
     script: blank
     render:
       look:
@@ -3729,7 +3729,7 @@ npcs:
       name_vis:      112
       name_prefix:    32
 
-  17756387:
+  17756388:
     script:       Mandragora_Assistant
     display_name: Mandragora Assistant
     at:           [-204.500, -0.850, -100.000, 96]
@@ -3745,7 +3745,7 @@ npcs:
     widescan: true
     content:  tvr
 
-  17756388:
+  17756389:
     script: blank
     at:     [-204.500, 0.000, -100.000, 104]
     render:
@@ -3757,7 +3757,7 @@ npcs:
       name_prefix:    34
     status: normal
 
-  17756389:
+  17756390:
     script: blank
     render:
       look:
@@ -3766,7 +3766,7 @@ npcs:
       entity_flags: 2051
     status: cutscene_only
 
-  17756390:
+  17756391:
     script: blank
     render:
       look:
@@ -3782,16 +3782,6 @@ npcs:
         sub:   28672
       entity_flags: 2075
       name_prefix:    32
-    status: cutscene_only
-
-  17756391:
-    script: blank
-    render:
-      look:
-        type:  standard
-        model: 52
-      entity_flags:  2051
-      moving:       32768
     status: cutscene_only
 
   17756392:
@@ -3845,6 +3835,16 @@ npcs:
     status: cutscene_only
 
   17756397:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags:  2051
+      moving:       32768
+    status: cutscene_only
+
+  17756398:
     at: [48.062, -2.500, -61.220, 192]
     render:
       look:
@@ -3855,7 +3855,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756398:
+  17756399:
     at: [39.938, -2.500, -61.220, 64]
     render:
       look:
@@ -3866,7 +3866,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756399:
+  17756400:
     at: [41.292, -2.500, -62.000]
     render:
       look:
@@ -3877,7 +3877,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756400:
+  17756401:
     at: [42.646, -2.500, -61.220]
     render:
       look:
@@ -3888,7 +3888,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756401:
+  17756402:
     at: [44.000, -2.500, -62.000]
     render:
       look:
@@ -3899,7 +3899,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756402:
+  17756403:
     at: [45.354, -2.500, -61.220]
     render:
       look:
@@ -3910,7 +3910,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756403:
+  17756404:
     at: [46.708, -2.500, -62.000]
     render:
       look:
@@ -3921,7 +3921,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756404:
+  17756405:
     at: [46.708, -2.500, -60.440]
     render:
       look:
@@ -3932,7 +3932,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756405:
+  17756406:
     at: [44.000, -2.500, -60.440]
     render:
       look:
@@ -3943,7 +3943,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756406:
+  17756407:
     at: [41.292, -2.500, -60.440]
     render:
       look:
@@ -3954,7 +3954,7 @@ npcs:
       name_prefix:  2
     status: cutscene_only
 
-  17756407:
+  17756408:
     script: blank
     at:     [40.917, -3.000, -62.500, 63]
     render:
@@ -3966,7 +3966,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756408:
+  17756409:
     script: blank
     at:     [41.167, -3.000, -62.500, 63]
     render:
@@ -3978,7 +3978,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756409:
+  17756410:
     script: blank
     at:     [41.417, -3.000, -62.500, 63]
     render:
@@ -3990,7 +3990,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756410:
+  17756411:
     script: blank
     at:     [42.271, -3.000, -61.720, 63]
     render:
@@ -4002,7 +4002,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756411:
+  17756412:
     script: blank
     at:     [42.521, -3.000, -61.720, 63]
     render:
@@ -4014,7 +4014,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756412:
+  17756413:
     script: blank
     at:     [42.771, -3.000, -61.720, 63]
     render:
@@ -4026,7 +4026,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756413:
+  17756414:
     script: blank
     at:     [43.625, -3.000, -62.500, 63]
     render:
@@ -4038,7 +4038,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756414:
+  17756415:
     script: blank
     at:     [43.875, -3.000, -62.500, 63]
     render:
@@ -4050,7 +4050,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756415:
+  17756416:
     script: blank
     at:     [44.125, -3.000, -62.500, 63]
     render:
@@ -4062,7 +4062,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756416:
+  17756417:
     script: blank
     at:     [44.979, -3.000, -61.720, 63]
     render:
@@ -4074,7 +4074,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756417:
+  17756418:
     script: blank
     at:     [45.229, -3.000, -61.720, 63]
     render:
@@ -4086,7 +4086,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756418:
+  17756419:
     script: blank
     at:     [45.479, -3.000, -61.720, 63]
     render:
@@ -4098,7 +4098,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756419:
+  17756420:
     script: blank
     at:     [46.333, -3.000, -62.500, 63]
     render:
@@ -4110,7 +4110,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756420:
+  17756421:
     script: blank
     at:     [46.583, -3.000, -62.500, 63]
     render:
@@ -4122,7 +4122,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756421:
+  17756422:
     script: blank
     at:     [46.833, -3.000, -62.500, 63]
     render:
@@ -4134,7 +4134,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756422:
+  17756423:
     script: blank
     at:     [46.333, -3.000, -60.940, 63]
     render:
@@ -4146,7 +4146,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756423:
+  17756424:
     script: blank
     at:     [46.583, -3.000, -60.940, 63]
     render:
@@ -4158,7 +4158,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756424:
+  17756425:
     script: blank
     at:     [46.833, -3.000, -60.940, 63]
     render:
@@ -4170,7 +4170,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756425:
+  17756426:
     script: blank
     at:     [43.625, -3.000, -60.940, 63]
     render:
@@ -4182,7 +4182,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756426:
+  17756427:
     script: blank
     at:     [43.875, -3.000, -60.940, 63]
     render:
@@ -4194,7 +4194,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756427:
+  17756428:
     script: blank
     at:     [44.125, -3.000, -60.940, 63]
     render:
@@ -4206,7 +4206,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756428:
+  17756429:
     script: blank
     at:     [40.917, -3.000, -60.940, 63]
     render:
@@ -4218,7 +4218,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756429:
+  17756430:
     script: blank
     at:     [41.167, -3.000, -60.940, 63]
     render:
@@ -4230,7 +4230,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756430:
+  17756431:
     script: blank
     at:     [41.417, -3.000, -60.940, 63]
     render:
@@ -4242,7 +4242,7 @@ npcs:
       moving:       32768
     status: cutscene_only
 
-  17756431:
+  17756432:
     script: blank
     at:     [-26.510, -2.246, -51.839]
     render:
@@ -4254,7 +4254,7 @@ npcs:
       name_prefix:     34
       moving:       32769
 
-  17756432:
+  17756433:
     script: blank
     at:     [103.679, -2.270, 93.997, 70]
     render:
@@ -4266,7 +4266,7 @@ npcs:
       name_prefix:     34
       moving:       32789
 
-  17756433:
+  17756434:
     script: blank
     at:     [108.077, -2.330, 97.117]
     render:
@@ -4278,7 +4278,7 @@ npcs:
       name_prefix:     34
       moving:       32782
 
-  17756434:
+  17756435:
     script: blank
     at:     [119.997, -10.691, 132.641]
     render:
@@ -4290,7 +4290,7 @@ npcs:
       name_prefix:     34
       moving:       32775
 
-  17756435:
+  17756436:
     script: blank
     at:     [90.172, -7.500, 173.881]
     render:
@@ -4302,7 +4302,7 @@ npcs:
       name_prefix:     34
       moving:       32769
 
-  17756436:
+  17756437:
     script: blank
     at:     [121.354, -11.000, 171.101]
     render:
@@ -4314,7 +4314,7 @@ npcs:
       name_prefix:     34
       moving:       32789
 
-  17756437:
+  17756438:
     script: blank
     at:     [16.008, -2.500, 283.487, 238]
     render:
@@ -4326,7 +4326,7 @@ npcs:
       name_prefix:     34
       moving:       32782
 
-  17756438:
+  17756439:
     script: blank
     at:     [-4.700, -10.033, 289.524, 33]
     render:
@@ -4338,7 +4338,7 @@ npcs:
       name_prefix:     34
       moving:       32775
 
-  17756439:
+  17756440:
     script: blank
     at:     [-38.145, -12.500, 256.152]
     render:
@@ -4350,7 +4350,7 @@ npcs:
       name_prefix:     34
       moving:       32769
 
-  17756440:
+  17756441:
     script: blank
     at:     [-16.130, -12.500, 239.938, 51]
     render:
@@ -4362,7 +4362,7 @@ npcs:
       name_prefix:     34
       moving:       32789
 
-  17756441:
+  17756442:
     script: blank
     at:     [-124.294, -5.000, 137.167]
     render:
@@ -4374,7 +4374,7 @@ npcs:
       name_prefix:     34
       moving:       32782
 
-  17756442:
+  17756443:
     script: NPC[11a]
     at:     [40.000, -3.000, -62.000]
     render:
@@ -4382,19 +4382,6 @@ npcs:
         type:  standard
         model: 50
       moving: 1
-
-  17756443:
-    script:       Shard_of_Sunlight
-    display_name: Shard of Sunlight
-    render:
-      look:
-        type:  standard
-        model: 2326
-      entity_flags:  27
-      name_vis:     112
-      name_prefix:   34
-    status:   cutscene_only
-    widescan: true
 
   17756444:
     script:       Shard_of_Sunlight
@@ -4618,6 +4605,19 @@ npcs:
     widescan: true
 
   17756461:
+    script:       Shard_of_Sunlight
+    display_name: Shard of Sunlight
+    render:
+      look:
+        type:  standard
+        model: 2326
+      entity_flags:  27
+      name_vis:     112
+      name_prefix:   34
+    status:   cutscene_only
+    widescan: true
+
+  17756462:
     script:       Abenzio
     display_name: Abenzio
     render:
@@ -4629,7 +4629,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756462:
+  17756463:
     script:       Bryher
     display_name: Bryher
     render:
@@ -4641,7 +4641,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756463:
+  17756464:
     script:       Camlin
     display_name: Camlin
     render:
@@ -4653,25 +4653,13 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756464:
+  17756465:
     script:       Darach
     display_name: Darach
     render:
       look:
         type:  standard
         model: 395
-      entity_flags: 27
-      name_prefix:  32
-    status:   cutscene_only
-    widescan: true
-
-  17756465:
-    script:       Babbans_Progeny
-    display_name: Babban's Progeny
-    render:
-      look:
-        type:  standard
-        model: 300
       entity_flags: 27
       name_prefix:  32
     status:   cutscene_only
@@ -4714,6 +4702,18 @@ npcs:
     widescan: true
 
   17756469:
+    script:       Babbans_Progeny
+    display_name: Babban's Progeny
+    render:
+      look:
+        type:  standard
+        model: 300
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17756470:
     script:       Greeter_Moogle
     display_name: Greeter Moogle
     at:           [-203.000, -0.276, -139.000, 127]
@@ -4726,7 +4726,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17756470:
+  17756471:
     script:       Achieve_Master
     display_name: Achieve Master
     render:
@@ -4735,14 +4735,14 @@ npcs:
         model: 50
     content: soa
 
-  17756471:
+  17756472:
     script: NPC[137]
     render:
       look:
         type:  standard
         model: 50
 
-  17756472:
+  17756473:
     script:       Unity_Master
     display_name: Unity Master
     render:
@@ -4753,7 +4753,7 @@ npcs:
       name_vis:       96
     content: soa
 
-  17756473:
+  17756474:
     script: blank
     render:
       look:
@@ -4761,7 +4761,7 @@ npcs:
         model: 52
       entity_flags: 2051
 
-  17756474:
+  17756475:
     script:       Iroha
     display_name: Iroha
     at:           [1000.000, 0.000, 0.000]
@@ -4774,7 +4774,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756475:
+  17756476:
     script:       Lion
     display_name: Lion
     render:
@@ -4786,7 +4786,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756476:
+  17756477:
     script:       Zeid
     display_name: Zeid
     render:
@@ -4798,7 +4798,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756477:
+  17756478:
     script: blank
     render:
       look:
@@ -4808,25 +4808,13 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17756478:
-    script:       Selhteus
-    display_name: Selh'teus
-    render:
-      look:
-        type:  standard
-        model: 1206
-      entity_flags: 27
-      name_prefix:  32
-    status:   cutscene_only
-    widescan: true
-
   17756479:
     script:       Selhteus
     display_name: Selh'teus
     render:
       look:
         type:  standard
-        model: 1447
+        model: 1206
       entity_flags: 27
       name_prefix:  32
     status:   cutscene_only
@@ -4845,6 +4833,18 @@ npcs:
     widescan: true
 
   17756481:
+    script:       Selhteus
+    display_name: Selh'teus
+    render:
+      look:
+        type:  standard
+        model: 1447
+      entity_flags: 27
+      name_prefix:  32
+    status:   cutscene_only
+    widescan: true
+
+  17756482:
     script:       Balamor
     display_name: Balamor
     render:
@@ -4856,7 +4856,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756482:
+  17756483:
     script:       qm7
     display_name: ???
     render:
@@ -4867,14 +4867,6 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17756483:
-    script: blank
-    render:
-      look:
-        type:  standard
-        model: 52
-      entity_flags: 2051
-
   17756484:
     script: blank
     render:
@@ -4884,6 +4876,14 @@ npcs:
       entity_flags: 2051
 
   17756485:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17756486:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -4903,7 +4903,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756486:
+  17756487:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -4923,7 +4923,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756487:
+  17756488:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -4943,7 +4943,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756488:
+  17756489:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -4963,7 +4963,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756489:
+  17756490:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -4983,7 +4983,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756490:
+  17756491:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -5003,7 +5003,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756491:
+  17756492:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -5023,7 +5023,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756492:
+  17756493:
     script:       Disjoined_One
     display_name: Disjoined One
     render:
@@ -5043,14 +5043,6 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756493:
-    script: blank
-    render:
-      look:
-        type:  standard
-        model: 52
-    status: cutscene_only
-
   17756494:
     script: blank
     render:
@@ -5065,9 +5057,17 @@ npcs:
       look:
         type:  standard
         model: 52
-      entity_flags: 2051
+    status: cutscene_only
 
   17756496:
+    script: blank
+    render:
+      look:
+        type:  standard
+        model: 52
+      entity_flags: 2051
+
+  17756497:
     script:       Tenzen
     display_name: Tenzen
     render:
@@ -5079,7 +5079,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756497:
+  17756498:
     script: blank
     render:
       look:
@@ -5089,7 +5089,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17756498:
+  17756499:
     script: blank
     at:     [2.539, -16.749, 130.017, 126]
     render:
@@ -5103,7 +5103,7 @@ npcs:
     status:  normal
     content: soa
 
-  17756499:
+  17756500:
     script:       Enigmatic_Footprints
     display_name: 'Enigmatic Footprints #1'
     at:           [0.000, -15.500, 115.000, 128]
@@ -5117,7 +5117,7 @@ npcs:
     status:  normal
     content: tvr
 
-  17756500:
+  17756501:
     script:       Enigmatic_Footprints_#2
     display_name: 'Enigmatic Footprints #2'
     at:           [22.170, -16.000, 128.460, 128]
@@ -5132,7 +5132,7 @@ npcs:
     widescan: true
     content:  tvr
 
-  17756501:
+  17756502:
     script:       Layer_Reserve
     display_name: Layer Reserve
     render:
@@ -5143,7 +5143,7 @@ npcs:
       moving:     1
     widescan: true
 
-  17756502:
+  17756503:
     script: blank
     render:
       look:
@@ -5152,7 +5152,7 @@ npcs:
       entity_flags: 2051
       name_vis:      112
 
-  17756503:
+  17756504:
     script:       Memorian
     display_name: Memorian
     render:
@@ -5164,7 +5164,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756504:
+  17756505:
     script:       Karaha-Baruha
     display_name: Karaha-Baruha
     render:
@@ -5176,7 +5176,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756505:
+  17756506:
     script:       Shantotto
     display_name: Shantotto
     at:           [122.640, -3.000, 113.606, 6]
@@ -5198,7 +5198,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756506:
+  17756507:
     script:       Talking_Doll
     display_name: Talking Doll
     at:           [-61.095, -16.000, 301.447, 201]
@@ -5211,7 +5211,7 @@ npcs:
     status:   cutscene_only
     widescan: true
 
-  17756507:
+  17756508:
     script: blank
     render:
       look:
@@ -5221,7 +5221,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17756508:
+  17756509:
     script:       AMAN_Liaison
     display_name: A.M.A.N. Liaison
     at:           [-203.340, 0.000, -108.000, 116]
@@ -5242,7 +5242,7 @@ npcs:
     status:  normal
     content: soa
 
-  17756509:
+  17756510:
     script:       Linkshell_Concierge
     display_name: Linkshell Concierge
     at:           [-220.550, 0.530, -136.810, 249]
@@ -5263,7 +5263,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17756510:
+  17756511:
     script:       Chat_Manual
     display_name: Chat Manual
     at:           [-220.890, 0.380, -140.900, 249]
@@ -5277,7 +5277,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17756511:
+  17756512:
     script: blank
     at:     [-182.561, -2.456, 143.515, 192]
     render:
@@ -5290,7 +5290,7 @@ npcs:
       moving:          1
     status: normal
 
-  17756512:
+  17756513:
     script:       Tales_Beginning
     display_name: Tales' Beginning
     at:           [-182.561, -2.456, 143.515, 192]
@@ -5306,7 +5306,7 @@ npcs:
     widescan: true
     content:  tvr
 
-  17756513:
+  17756514:
     script:       Ancestry_Moogle
     display_name: Ancestry Moogle
     at:           [-220.000, 1.000, -108.000]
@@ -5319,7 +5319,7 @@ npcs:
     widescan: true
     content:  soa
 
-  17756514:
+  17756515:
     script: blank
     at:     [150.000, 0.000, -150.000]
     render:
@@ -5338,7 +5338,7 @@ npcs:
       name_prefix:  32
     status: cutscene_only
 
-  17756515:
+  17756516:
     script:       Previous_Race
     display_name: Previous Race
     at:           [150.000, 0.000, -150.000]

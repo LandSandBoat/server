@@ -3730,6 +3730,7 @@ INSERT INTO `item_basic` VALUES (3753,0,'painting_of_blueblade_fell','blueblade_
 INSERT INTO `item_basic` VALUES (3754,0,'kagami_mochi','kagami_mochi','鏡餅',@FURNISHING_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (3755,0,'prismatic_chest','prismatic_chest','レインボーチェスト',@FURNISHING_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (3756,0,'sachertorte','sachertorte','ザッハトルテ',@FURNISHING_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (3758,0,'scientists_board','scientists_board','サイエンスボード',@FURNISHING_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (3840,0,'pulse_cell_mx','pulse_cell_mx','パルス管【Mx】',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_NOSALE,@MISC,0);
 INSERT INTO `item_basic` VALUES (3841,0,'pulse_cell_an','pulse_cell_an','パルス管【An】',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_NOSALE,@MISC,0);
 INSERT INTO `item_basic` VALUES (3842,0,'pulse_cell_fa','pulse_cell_fa','パルス管【Fa】',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_NOSALE,@MISC,0);
@@ -7068,7 +7069,7 @@ INSERT INTO `item_basic` VALUES (9176,0,'mog_kupon_aw-gfii','kupon_aw-gfii','ク
 INSERT INTO `item_basic` VALUES (9177,0,'mog_kupon_aw-gf','kupon_aw-gf','クーポンAW-Ge',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9178,0,'mog_kupon_a-ab','kupon_a-ab','クーポンA-Ab',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9179,0,'mog_kupon_aw-uwiii','kupon_aw-uwiii','クーポンAW-UWIII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
-INSERT INTO `item_basic` VALUES (9180,0,'kupon_aw-uwii','kupon_aw-uwii','クーポンAW-UWII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
+INSERT INTO `item_basic` VALUES (9180,0,'mog_kupon_aw-uwii','kupon_aw-uwii','クーポンAW-UWII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9181,0,'mog_kupon_aw-uw','kupon_aw-uw','クーポンAW-UW',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9182,0,'mog_kupon_aw-cos','kupon_aw-cos','クーポンAW-Cos',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9183,0,'mog_kupon_w-r119','kupon_w-r119','クーポンW-R119',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);

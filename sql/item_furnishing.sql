@@ -540,6 +540,7 @@ INSERT INTO `item_furnishing` VALUES (3753,'painting_of_blueblade_fell',1,533,@E
 INSERT INTO `item_furnishing` VALUES (3754,'kagami_mochi',8,540,@ELEM_LIGHT,6,@FURN_PLACE_FLOOR,4,4,10);
 INSERT INTO `item_furnishing` VALUES (3755,'prismatic_chest',1,0,@ELEM_DARK,1,@FURN_PLACE_ON_TABLE,2,2,60);  -- TODO: Moglification: A.M.A.N. Trove does not yet exist
 INSERT INTO `item_furnishing` VALUES (3756,'sachertorte',1,518,@ELEM_LIGHT,1,@FURN_PLACE_ON_TABLE,1,1,20);
+INSERT INTO `item_furnishing` VALUES (3758,'scientists_board',4,0,@ELEM_EARTH,0,@FURN_PLACE_FLOOR,6,2,240); -- TODO: moghancement and aura unknown
 
 /*
   `itemid` smallint(5) unsigned NOT NULL,

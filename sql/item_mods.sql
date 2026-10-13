@@ -966,7 +966,7 @@ INSERT INTO `item_mods` VALUES (10437,27,-6); -- ENMITY: -6
 INSERT INTO `item_mods` VALUES (10437,28,6);  -- MATT: 6
 
 -- Enif Zucchetto
-INSERT INTO `item_mods` VALUES (10438,1,49);    -- DEF: 49
+INSERT INTO `item_mods` VALUES (10438,1,46);    -- DEF: 46
 INSERT INTO `item_mods` VALUES (10438,2,35);    -- HP: 35
 INSERT INTO `item_mods` VALUES (10438,5,35);    -- MP: 35
 INSERT INTO `item_mods` VALUES (10438,23,7);    -- ATT: 7
@@ -3805,7 +3805,7 @@ INSERT INTO `item_mods` VALUES (10886,68,5); -- EVA: 5
 INSERT INTO `item_mods` VALUES (10887,1,36);  -- DEF: 36
 INSERT INTO `item_mods` VALUES (10887,9,8);   -- DEX: 8
 INSERT INTO `item_mods` VALUES (10887,68,10); -- EVA: 10
-INSERT INTO `item_mods` VALUES (10887,288,2); -- DOUBLE_ATTACK: 2
+INSERT INTO `item_mods` VALUES (10887,165,2); -- CRITHITRATE: 2
 
 -- Sweven Corona
 INSERT INTO `item_mods` VALUES (10888,1,25); -- DEF: 25
@@ -59238,6 +59238,7 @@ INSERT INTO `item_mods` VALUES (25577,31,114);   -- MEVA: 114
 INSERT INTO `item_mods` VALUES (25577,68,33);    -- EVA: 33
 INSERT INTO `item_mods` VALUES (25577,163,-500); -- DMGMAGIC: -500
 INSERT INTO `item_mods` VALUES (25577,384,400);  -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (25577,838,14);   -- REGEN_MULTIPLIER: 14
 
 -- Jhakri Coronal +2
 INSERT INTO `item_mods` VALUES (25578,1,90);    -- DEF: 90
@@ -59826,7 +59827,7 @@ INSERT INTO `item_mods` VALUES (25662,164,-400); -- DMGRANGE: -400
 INSERT INTO `item_mods` VALUES (25662,384,400);  -- HASTE_GEAR: 400
 
 -- Inyanga Tiara
-INSERT INTO `item_mods` VALUES (25665,1,61);     -- DEF: 61
+INSERT INTO `item_mods` VALUES (25665,1,91);     -- DEF: 91
 INSERT INTO `item_mods` VALUES (25665,2,45);     -- HP: 45
 INSERT INTO `item_mods` VALUES (25665,5,50);     -- MP: 50
 INSERT INTO `item_mods` VALUES (25665,8,10);     -- STR: 10
@@ -59844,7 +59845,7 @@ INSERT INTO `item_mods` VALUES (25665,384,400);  -- HASTE_GEAR: 400
 INSERT INTO `item_mods` VALUES (25665,838,8);    -- REGEN_MULTIPLIER: 8
 
 -- Inyanga Tiara +1
-INSERT INTO `item_mods` VALUES (25666,1,61);     -- DEF: 61
+INSERT INTO `item_mods` VALUES (25666,1,96);     -- DEF: 96
 INSERT INTO `item_mods` VALUES (25666,2,45);     -- HP: 45
 INSERT INTO `item_mods` VALUES (25666,5,50);     -- MP: 50
 INSERT INTO `item_mods` VALUES (25666,8,10);     -- STR: 10
@@ -60288,7 +60289,9 @@ INSERT INTO `item_mods` VALUES (25751,12,40);    -- INT: 40
 INSERT INTO `item_mods` VALUES (25751,13,35);    -- MND: 35
 INSERT INTO `item_mods` VALUES (25751,14,34);    -- CHR: 34
 INSERT INTO `item_mods` VALUES (25751,29,11);    -- MDEF: 11
+INSERT INTO `item_mods` VALUES (25751,30,28);    -- MACC: 28
 INSERT INTO `item_mods` VALUES (25751,31,102);   -- MEVA: 102
+INSERT INTO `item_mods` VALUES (25751,68,38);    -- EVA: 38
 INSERT INTO `item_mods` VALUES (25751,163,-600); -- DMGMAGIC: -600
 INSERT INTO `item_mods` VALUES (25751,170,10);   -- FASTCAST: 10
 INSERT INTO `item_mods` VALUES (25751,384,200);  -- HASTE_GEAR: 200
@@ -60305,10 +60308,32 @@ INSERT INTO `item_mods` VALUES (25752,12,45);    -- INT: 45
 INSERT INTO `item_mods` VALUES (25752,13,40);    -- MND: 40
 INSERT INTO `item_mods` VALUES (25752,14,39);    -- CHR: 39
 INSERT INTO `item_mods` VALUES (25752,29,11);    -- MDEF: 11
+INSERT INTO `item_mods` VALUES (25752,30,40);    -- MACC: 40
 INSERT INTO `item_mods` VALUES (25752,31,114);   -- MEVA: 114
+INSERT INTO `item_mods` VALUES (25752,68,38);    -- EVA: 38
 INSERT INTO `item_mods` VALUES (25752,163,-700); -- DMGMAGIC: -700
 INSERT INTO `item_mods` VALUES (25752,170,13);   -- FASTCAST: 13
 INSERT INTO `item_mods` VALUES (25752,384,200);  -- HASTE_GEAR: 200
+
+-- Inyanga Jubbah +2
+INSERT INTO `item_mods` VALUES (25793,1,129);    -- DEF: 129
+INSERT INTO `item_mods` VALUES (25793,2,85);     -- HP: 85
+INSERT INTO `item_mods` VALUES (25793,5,90);     -- MP: 90
+INSERT INTO `item_mods` VALUES (25793,8,16);     -- STR: 16
+INSERT INTO `item_mods` VALUES (25793,9,19);     -- DEX: 19
+INSERT INTO `item_mods` VALUES (25793,10,24);    -- VIT: 24
+INSERT INTO `item_mods` VALUES (25793,11,23);    -- AGI: 23
+INSERT INTO `item_mods` VALUES (25793,12,48);    -- INT: 48
+INSERT INTO `item_mods` VALUES (25793,13,43);    -- MND: 43
+INSERT INTO `item_mods` VALUES (25793,14,42);    -- CHR: 42
+INSERT INTO `item_mods` VALUES (25793,29,11);    -- MDEF: 11
+INSERT INTO `item_mods` VALUES (25793,30,46);    -- MACC: 46
+INSERT INTO `item_mods` VALUES (25793,31,120);   -- MEVA: 120
+INSERT INTO `item_mods` VALUES (25793,68,38);    -- EVA: 38
+INSERT INTO `item_mods` VALUES (25793,163,-800); -- DMGMAGIC: -800
+INSERT INTO `item_mods` VALUES (25793,170,14);   -- FASTCAST: 14
+INSERT INTO `item_mods` VALUES (25793,384,200);  -- HASTE_GEAR: 200
+-- TODO: Set: Enhances "Refresh" effect
 
 -- Jhakri Robe
 INSERT INTO `item_mods` VALUES (25753,1,109);   -- DEF: 109
@@ -60801,6 +60826,37 @@ INSERT INTO `item_mods` VALUES (25807,122,18);   -- BLUE: 18
 INSERT INTO `item_mods` VALUES (25807,163,-300); -- DMGMAGIC: -300
 INSERT INTO `item_mods` VALUES (25807,384,400);  -- HASTE_GEAR: 400
 
+-- Inyanga Dastanas +2
+INSERT INTO `item_mods` VALUES (25831,1,88);     -- DEF: 88
+INSERT INTO `item_mods` VALUES (25831,2,35);     -- HP: 35
+INSERT INTO `item_mods` VALUES (25831,5,40);     -- MP: 40
+INSERT INTO `item_mods` VALUES (25831,8,3);      -- STR: 3
+INSERT INTO `item_mods` VALUES (25831,9,23);     -- DEX: 23
+INSERT INTO `item_mods` VALUES (25831,10,28);    -- VIT: 28
+INSERT INTO `item_mods` VALUES (25831,11,9);     -- AGI: 9
+INSERT INTO `item_mods` VALUES (25831,12,34);    -- INT: 34
+INSERT INTO `item_mods` VALUES (25831,13,47);    -- MND: 47
+INSERT INTO `item_mods` VALUES (25831,14,32);    -- CHR: 32
+INSERT INTO `item_mods` VALUES (25831,29,5);     -- MDEF: 5
+INSERT INTO `item_mods` VALUES (25831,30,43);    -- MACC: 43
+INSERT INTO `item_mods` VALUES (25831,31,77);    -- MEVA: 77
+INSERT INTO `item_mods` VALUES (25831,68,19);    -- EVA: 19
+INSERT INTO `item_mods` VALUES (25831,111,20);   -- DIVINE: 20
+INSERT INTO `item_mods` VALUES (25831,112,20);   -- HEALING: 20
+INSERT INTO `item_mods` VALUES (25831,113,20);   -- ENHANCE: 20
+INSERT INTO `item_mods` VALUES (25831,114,20);   -- ENFEEBLE: 20
+INSERT INTO `item_mods` VALUES (25831,115,20);   -- ELEM: 20
+INSERT INTO `item_mods` VALUES (25831,116,20);   -- DARK: 20
+INSERT INTO `item_mods` VALUES (25831,117,20);   -- SUMMONING: 20
+INSERT INTO `item_mods` VALUES (25831,118,20);   -- NINJUTSU: 20
+INSERT INTO `item_mods` VALUES (25831,119,20);   -- SINGING: 20
+INSERT INTO `item_mods` VALUES (25831,120,20);   -- STRING: 20
+INSERT INTO `item_mods` VALUES (25831,121,20);   -- WIND: 20
+INSERT INTO `item_mods` VALUES (25831,122,20);   -- BLUE: 20
+INSERT INTO `item_mods` VALUES (25831,163,-400); -- DMGMAGIC: -400
+INSERT INTO `item_mods` VALUES (25831,384,400);  -- HASTE_GEAR: 400
+-- TODO: Set: Enhances "Refresh" effect
+
 -- Jhakri Cuffs
 INSERT INTO `item_mods` VALUES (25808,1,69);  -- DEF: 69
 INSERT INTO `item_mods` VALUES (25808,8,10);  -- STR: 10
@@ -61213,6 +61269,25 @@ INSERT INTO `item_mods` VALUES (25866,163,-500); -- DMGMAGIC: -500
 INSERT INTO `item_mods` VALUES (25866,384,400);  -- HASTE_GEAR: 400
 INSERT INTO `item_mods` VALUES (25866,454,15);   -- SONG_DURATION_BONUS: 15
 
+-- Inyanga Shalwar +2
+INSERT INTO `item_mods` VALUES (25882,1,110);    -- DEF: 110
+INSERT INTO `item_mods` VALUES (25882,2,55);     -- HP: 55
+INSERT INTO `item_mods` VALUES (25882,5,60);     -- MP: 60
+INSERT INTO `item_mods` VALUES (25882,8,19);     -- STR: 19
+INSERT INTO `item_mods` VALUES (25882,10,14);    -- VIT: 14
+INSERT INTO `item_mods` VALUES (25882,11,20);    -- AGI: 20
+INSERT INTO `item_mods` VALUES (25882,12,51);    -- INT: 51
+INSERT INTO `item_mods` VALUES (25882,13,38);    -- MND: 38
+INSERT INTO `item_mods` VALUES (25882,14,32);    -- CHR: 32
+INSERT INTO `item_mods` VALUES (25882,29,9);     -- MDEF: 9
+INSERT INTO `item_mods` VALUES (25882,30,45);    -- MACC: 45
+INSERT INTO `item_mods` VALUES (25882,31,147);   -- MEVA: 147
+INSERT INTO `item_mods` VALUES (25882,68,24);    -- EVA: 24
+INSERT INTO `item_mods` VALUES (25882,163,-600); -- DMGMAGIC: -600
+INSERT INTO `item_mods` VALUES (25882,384,400);  -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (25882,454,17);   -- SONG_DURATION_BONUS: 17
+-- TODO: Set: Enhances "Refresh" effect
+
 -- Jhakri Slops
 INSERT INTO `item_mods` VALUES (25867,1,91);    -- DEF: 91
 INSERT INTO `item_mods` VALUES (25867,8,39);    -- STR: 39
@@ -61569,17 +61644,18 @@ INSERT INTO `item_mods` VALUES (25931,31,129);   -- MEVA: 129
 INSERT INTO `item_mods` VALUES (25931,68,60);    -- EVA: 60
 INSERT INTO `item_mods` VALUES (25931,163,-100); -- DMGMAGIC: -100
 INSERT INTO `item_mods` VALUES (25931,384,200);  -- HASTE_GEAR: 200
+-- TODO: Avatar: "Blood Pact" damage +5
 
 -- Inyanga Crackows +1
-INSERT INTO `item_mods` VALUES (25932,1,60);     -- DEF: 60
+INSERT INTO `item_mods` VALUES (25932,1,65);     -- DEF: 65
 INSERT INTO `item_mods` VALUES (25932,2,25);     -- HP: 25
 INSERT INTO `item_mods` VALUES (25932,5,30);     -- MP: 30
 INSERT INTO `item_mods` VALUES (25932,8,6);      -- STR: 6
 INSERT INTO `item_mods` VALUES (25932,9,6);      -- DEX: 6
-INSERT INTO `item_mods` VALUES (25932,10,6);     -- VIT: 6
+INSERT INTO `item_mods` VALUES (25932,10,11);    -- VIT: 11
 INSERT INTO `item_mods` VALUES (25932,11,30);    -- AGI: 30
 INSERT INTO `item_mods` VALUES (25932,12,29);    -- INT: 29
-INSERT INTO `item_mods` VALUES (25932,13,3);     -- MND: 3
+INSERT INTO `item_mods` VALUES (25932,13,30);    -- MND: 30
 INSERT INTO `item_mods` VALUES (25932,14,43);    -- CHR: 43
 INSERT INTO `item_mods` VALUES (25932,29,8);     -- MDEF: 8
 INSERT INTO `item_mods` VALUES (25932,30,36);    -- MACC: 36
@@ -61587,6 +61663,27 @@ INSERT INTO `item_mods` VALUES (25932,31,141);   -- MEVA: 141
 INSERT INTO `item_mods` VALUES (25932,68,60);    -- EVA: 60
 INSERT INTO `item_mods` VALUES (25932,163,-200); -- DMGMAGIC: -200
 INSERT INTO `item_mods` VALUES (25932,384,200);  -- HASTE_GEAR: 200
+-- TODO: Avatar: "Blood Pact" damage +7
+
+-- Inyanga Crackows +2
+INSERT INTO `item_mods` VALUES (25949,1,70);     -- DEF: 70
+INSERT INTO `item_mods` VALUES (25949,2,25);     -- HP: 25
+INSERT INTO `item_mods` VALUES (25949,5,30);     -- MP: 30
+INSERT INTO `item_mods` VALUES (25949,8,6);      -- STR: 6
+INSERT INTO `item_mods` VALUES (25949,9,6);      -- DEX: 6
+INSERT INTO `item_mods` VALUES (25949,10,14);    -- VIT: 14
+INSERT INTO `item_mods` VALUES (25949,11,33);    -- AGI: 33
+INSERT INTO `item_mods` VALUES (25949,12,32);    -- INT: 32
+INSERT INTO `item_mods` VALUES (25949,13,33);    -- MND: 33
+INSERT INTO `item_mods` VALUES (25949,14,46);    -- CHR: 46
+INSERT INTO `item_mods` VALUES (25949,29,8);     -- MDEF: 8
+INSERT INTO `item_mods` VALUES (25949,30,42);    -- MACC: 42
+INSERT INTO `item_mods` VALUES (25949,31,147);   -- MEVA: 147
+INSERT INTO `item_mods` VALUES (25949,68,60);    -- EVA: 60
+INSERT INTO `item_mods` VALUES (25949,163,-300); -- DMGMAGIC: -300
+INSERT INTO `item_mods` VALUES (25949,384,200);  -- HASTE_GEAR: 200
+-- TODO: Avatar: "Blood Pact" damage +9
+-- TODO: Set: Enhances "Refresh" effect
 
 -- Jhakri Pigaches
 INSERT INTO `item_mods` VALUES (25933,1,52);  -- DEF: 52
@@ -62248,6 +62345,13 @@ INSERT INTO `item_mods` VALUES (26202,246,17); -- PETRIFYRES: 17
 INSERT INTO `item_mods` VALUES (26202,247,17); -- BINDRES: 17
 INSERT INTO `item_mods` VALUES (26202,249,17); -- GRAVITYRES: 17
 
+-- Inyanga Ring
+INSERT INTO `item_mods` VALUES (26207,1,6);      -- DEF: 6
+INSERT INTO `item_mods` VALUES (26207,30,6);     -- MACC: 6
+INSERT INTO `item_mods` VALUES (26207,31,12);    -- MEVA: 12
+INSERT INTO `item_mods` VALUES (26207,163,-200); -- DMGMAGIC: -200
+-- TODO: Set: Enhances "Refresh" effect
+
 -- Epaminondass Ring
 INSERT INTO `item_mods` VALUES (26214,73,-10); -- STORETP: -10
 INSERT INTO `item_mods` VALUES (26214,840,5);  -- ALL_WSDMG_ALL_HITS: 5
@@ -62454,6 +62558,12 @@ INSERT INTO `item_mods` VALUES (26364,374,35); -- CURE_POTENCY: 35
 INSERT INTO `item_mods` VALUES (26364,838,20); -- REGEN_MULTIPLIER: 20
 -- TODO: Healing cost +25%
 -- TODO: Enhancing cost +25%
+
+-- Cornelia's Belt
+INSERT INTO `item_mods` VALUES (26365,1,10);     -- DEF: 10
+INSERT INTO `item_mods` VALUES (26365,8,10);     -- STR: 10
+INSERT INTO `item_mods` VALUES (26365,291,5);    -- COUNTER: 5
+INSERT INTO `item_mods` VALUES (26365,384,1000); -- HASTE_GEAR: 1000
 
 -- Culminus
 INSERT INTO `item_mods` VALUES (26400,1,60);    -- DEF: 60
