@@ -4,7 +4,7 @@
 -- Food Effect: 30Min, All Races
 -----------------------------------
 -- Dexterity 3
--- Mind -3
+-- Mind -1
 -- Attack % 14
 -- Attack Cap 75
 -- Ranged ATT % 14
@@ -23,7 +23,7 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.DEX, 3)
-    effect:addMod(xi.mod.MND, -3)
+    effect:addMod(xi.mod.MND, -1)
     effect:addMod(xi.mod.FOOD_ATTP, 14)
     effect:addMod(xi.mod.FOOD_ATT_CAP, 75)
     effect:addMod(xi.mod.FOOD_RATTP, 14)

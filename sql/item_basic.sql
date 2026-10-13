@@ -7069,7 +7069,7 @@ INSERT INTO `item_basic` VALUES (9176,0,'mog_kupon_aw-gfii','kupon_aw-gfii','ク
 INSERT INTO `item_basic` VALUES (9177,0,'mog_kupon_aw-gf','kupon_aw-gf','クーポンAW-Ge',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9178,0,'mog_kupon_a-ab','kupon_a-ab','クーポンA-Ab',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9179,0,'mog_kupon_aw-uwiii','kupon_aw-uwiii','クーポンAW-UWIII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
-INSERT INTO `item_basic` VALUES (9180,0,'kupon_aw-uwii','kupon_aw-uwii','クーポンAW-UWII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
+INSERT INTO `item_basic` VALUES (9180,0,'mog_kupon_aw-uwii','kupon_aw-uwii','クーポンAW-UWII',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9181,0,'mog_kupon_aw-uw','kupon_aw-uw','クーポンAW-UW',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9182,0,'mog_kupon_aw-cos','kupon_aw-cos','クーポンAW-Cos',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);
 INSERT INTO `item_basic` VALUES (9183,0,'mog_kupon_w-r119','kupon_w-r119','クーポンW-R119',@GENERAL_TYPE,99,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX,@NONE,0);

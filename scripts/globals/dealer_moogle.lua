@@ -1999,7 +1999,7 @@ local itemListTable =
             xi.item.STINGER_BULLET_POUCH,
         },
     },
-    -- Kupon AW-UWII: Unity Wanted Battles 119 - 128 (KUPON_AW_UWII = 9180)
+    -- Kupon AW-UWII: Unity Wanted Battles 119 - 128 (MOG_KUPON_AW_UWII = 9180)
     [41] =
     {
             -- HAND-TO-HAND WEAPONS,
