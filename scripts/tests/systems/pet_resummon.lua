@@ -451,6 +451,48 @@ describe('Normal pet summon placement', function()
         assert(pet:isAlive())
         assert(pet:isEngaged(), 'idle cleanup must not interrupt a fighting pet')
     end)
+
+    it('despawns an idle BST pet when its owner despawns', function()
+        local pos = owner:getPos()
+        pet:setSpawn(pos.x, pos.y, pos.z, pos.rot)
+        pet:spawn()
+
+        -- Keeps the dead-owner roam check out of the way.
+        pet:setMobMod(xi.mobMod.ROAM_COOL, 3600)
+
+        DespawnMob(owner:getID())
+        xi.test.world:skipTime(3)
+        xi.test.world:skipTime(3)
+        xi.test.world:skipTime(3)
+
+        assert(not pet:isSpawned(), 'the pet must leave with its owner')
+    end)
+
+    it('despawns a fighting BST pet after its fight even if its owner has respawned', function()
+        local pos = owner:getPos()
+        pet:setSpawn(pos.x, pos.y, pos.z, pos.rot)
+        pet:spawn()
+        player:setUnkillable(true)
+        pet:addEnmity(player, 100, 100)
+        xi.test.world:tickEntity(pet)
+        assert(pet:isEngaged())
+
+        DespawnMob(owner:getID())
+        xi.test.world:skipTime(3)
+
+        assert(not owner:isSpawned())
+        assert(pet:isAlive())
+        assert(pet:isEngaged(), 'a fighting pet must keep fighting when its owner leaves')
+
+        owner:spawn()
+        assert(owner:isAlive())
+
+        pet:disengage()
+        xi.test.world:skipTime(3)
+        xi.test.world:skipTime(3)
+
+        assert(not pet:isSpawned(), 'the pet must not carry over to the respawned owner')
+    end)
 end)
 
 describe('Regular elemental pet stats', function()
