@@ -19,6 +19,7 @@ entity.onTrigger = function(player, npc)
     if
         mob and
         not mob:isSpawned() and
+        GetSystemTime() >= mob:getLocalVar('cooldown') and
         not player:hasItem(xi.item.BURNITE_SHELL_STONE)
     then
         mob:spawn()
