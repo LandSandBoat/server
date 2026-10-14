@@ -22,6 +22,7 @@
 #include "0x04b_pbx_result.h"
 
 #include "entities/char_entity.h"
+#include "items.h"
 #include "packets/c2s/0x04d_pbx.h"
 
 GP_SERV_COMMAND_PBX_RESULT::GP_SERV_COMMAND_PBX_RESULT(GP_CLI_COMMAND_PBX_COMMAND action, GP_CLI_COMMAND_PBX_BOXNO boxid, const uint8 count, const uint8 param)
@@ -78,6 +79,11 @@ GP_SERV_COMMAND_PBX_RESULT::GP_SERV_COMMAND_PBX_RESULT(GP_CLI_COMMAND_PBX_COMMAN
     packet.ResParam2  = -1;
     packet.ResParam3  = -1;
 
+    if (action == GP_CLI_COMMAND_PBX_COMMAND::Recv && message == 0x02)
+    {
+        packet.State.Stat = 0x06;
+    }
+
     if (PItem)
     {
         if ((action != GP_CLI_COMMAND_PBX_COMMAND::Get &&
@@ -121,5 +127,12 @@ GP_SERV_COMMAND_PBX_RESULT::GP_SERV_COMMAND_PBX_RESULT(GP_CLI_COMMAND_PBX_COMMAN
         packet.State.ItemNo                         = PItem->getID();
         packet.State.Stack                          = PItem->getQuantity();
         std::memcpy(packet.State.Data, PItem->m_extra, std::min(sizeof(PItem->m_extra), sizeof(packet.State.Data)));
+
+        // Extract the sold quantity stored in extra by the trigger
+        if (PItem->getID() == GIL)
+        {
+            packet.State.box_state.pbox.Send.ItemWorkNo = PItem->getSubID() | (PItem->m_extra[0] << 16);
+            std::memset(packet.State.Data, 0, sizeof(packet.State.Data));
+        }
     }
 }

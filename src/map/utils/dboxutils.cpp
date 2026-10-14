@@ -25,9 +25,11 @@
 #include "common/macros.h"
 #include "common/settings.h"
 
+#include "ai/ai_container.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
 
+#include "items.h"
 #include "items/transactions/item_claim.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -480,6 +482,19 @@ void dboxutils::SendNewItems(Scheduler& scheduler, CCharEntity* PChar, GP_CLI_CO
 
                                     // TODO: increment "count" for every new item, if needed
                                     PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, nullptr, PostWorkNo, 1, 2);
+
+                                    // The AH gil message does not print for the first slot if we send the two packets immediately so delay the 2nd one to next network cycle.
+                                    // Retail delays updates by 300ms each but it feels incredibly slow, this approach keeps the other slots loading rapidly as they are not affected by this bug.
+                                    if (PostWorkNo == 0 && PItem->getID() == GIL)
+                                    {
+                                        PChar->PAI->QueueAction(queueAction_t(0ms, false,
+                                        [packet = std::make_unique<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, PItem, PostWorkNo, 1, 1)](CBaseEntity* PEntity) mutable
+                                        {
+                                            static_cast<CCharEntity*>(PEntity)->pushPacket(std::move(packet));
+                                        }));
+                                        return;
+                                    }
+
                                     PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Recv, BoxNo, PItem, PostWorkNo, 1, 1);
                                     return;
                                 }
