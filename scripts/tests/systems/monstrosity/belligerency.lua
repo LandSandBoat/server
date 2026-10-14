@@ -92,6 +92,21 @@ describe('Monstrosity Belligerency', function()
         assert(not gladiator:getTarget(), 'the gladiator engaged a Monipulator under Gestation')
     end)
 
+    -- JP wiki: any hostile action stops Relinquish, a gladiator's included.
+    it('stops Relinquish when a gladiator attacks', function()
+        meet(true)
+        monipulator:setMonstrosityEntryData(0, 0, 0, 0, xi.zone.WEST_RONFAURE, xi.job.WAR, xi.job.WAR)
+        xi.monstrosity.relinquishOnAbility(monipulator)
+        gladiator.actions:engage(monipulator)
+        for _ = 1, 15 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(gladiator)
+            xi.test.world:tickEntity(monipulator)
+        end
+
+        assert(monipulator:getMainJob() == xi.job.MON, 'Relinquish carried on while a gladiator attacked')
+    end)
+
     -- Retail: a Monipulator holding 616 infamy lost 61 to a gladiator holding no prestige, who gained nothing.
     it('takes only a tenth of the infamy when the gladiator holds no prestige', function()
         meet(true)
