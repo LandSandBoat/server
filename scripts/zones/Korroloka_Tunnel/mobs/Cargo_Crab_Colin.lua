@@ -2,17 +2,8 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Cargo Crab Colin
 -----------------------------------
-local ID = zones[xi.zone.KORROLOKA_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    -- TODO: Two PH's should be in a spawn set along with the NM
-    [ID.mob.CARGO_CRAB_COLIN + 22] = ID.mob.CARGO_CRAB_COLIN, -- Confirmed on retail
-    [ID.mob.CARGO_CRAB_COLIN + 24] = ID.mob.CARGO_CRAB_COLIN, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

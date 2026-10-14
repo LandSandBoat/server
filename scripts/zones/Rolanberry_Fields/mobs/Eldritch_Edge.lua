@@ -2,8 +2,6 @@
 -- Area: Rolanberry Fields
 --   NM: Eldritch Edge
 -----------------------------------
-local ID = zones[xi.zone.ROLANBERRY_FIELDS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,12 +15,6 @@ entity.spawnPoints =
     { x =  436.784, y = -22.906, z =  -70.260 },
     { x =  440.469, y = -28.826, z =  -48.646 },
     { x =  403.583, y = -24.000, z = -159.456 }
-}
-
-entity.phList =
-{
-    [ID.mob.ELDRITCH_EDGE + 2] = ID.mob.ELDRITCH_EDGE, -- Confirmed on retail
-    [ID.mob.ELDRITCH_EDGE - 1] = ID.mob.ELDRITCH_EDGE, -- Confirmed on retail
 }
 
 entity.onMobSpawn = function(mob)

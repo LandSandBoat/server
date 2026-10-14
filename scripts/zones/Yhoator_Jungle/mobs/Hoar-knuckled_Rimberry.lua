@@ -3,17 +3,10 @@
 --   NM: Hoar-knuckled Rimberry
 --   WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity.
 -----------------------------------
-local ID = zones[xi.zone.YHOATOR_JUNGLE]
 mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.HOAR_KNUCKLED_RIMBERRY - 5] = ID.mob.HOAR_KNUCKLED_RIMBERRY, -- Confirmed on retail
-    [ID.mob.HOAR_KNUCKLED_RIMBERRY - 1] = ID.mob.HOAR_KNUCKLED_RIMBERRY, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

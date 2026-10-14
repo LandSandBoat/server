@@ -4,16 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.SOULSTEALER_SKULLNIX + 11] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Alchemist: 13.729 4.814 166.295
-    [ID.mob.SOULSTEALER_SKULLNIX + 19] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Bandit:    29.024 3.474 185.723
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.STUN)

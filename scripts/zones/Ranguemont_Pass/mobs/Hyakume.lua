@@ -2,8 +2,6 @@
 -- Area: Ranguemont Pass
 --   NM: Hyakume
 -----------------------------------
-local ID = zones[xi.zone.RANGUEMONT_PASS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -12,11 +10,6 @@ local entity = {}
 -- TODO: better proc rate of Curse. Current data: 19 procs over (436 normal hits + 25 crits) = 19/(432+25) = 4.1%~ = probably 5%?. Confidence interval = 2.327%~5.988%.
 --       Curse data collected on ilvl 119 character
 -- TODO: More spawn points
-entity.phList =
-{
-    [ID.mob.HYAKUME - 7] = ID.mob.HYAKUME, -- Confirmed on retail
-}
-
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

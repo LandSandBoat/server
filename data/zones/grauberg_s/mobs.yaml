@@ -2372,7 +2372,7 @@ templates:
         aggressive:     true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -3337,7 +3337,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10800
     loot:
@@ -3824,7 +3824,7 @@ templates:
       behaviors:
         flags: [no_turn]
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 18750
     loot:
@@ -4343,7 +4343,7 @@ spawns:
     region:   s_56
     level:    [41, 49]
   17141818:
-    template: Wivre_past
+    template: Wivre_past                      # Needs captures
     script:   Wivre
     at:       [196.881, 23.923, -625.889, 86]
     level:    [68, 74]
@@ -4619,7 +4619,7 @@ spawns:
     region:   s_121
     level:    [41, 49]
   17141882:
-    template: Wivre_past
+    template: Wivre_past # Needs captures
     script:   Wivre
     region:   s_121
     level:    [68, 74]
@@ -4634,7 +4634,7 @@ spawns:
     region:   s_121
     level:    [36, 39]
   17141885:
-    template: Vasiliceratops
+    template: Vasiliceratops                  # Needs captures
     at:       [276.142, 25.332, -453.541, 48]
     level:    [88, 89]
   17141886:
@@ -4985,15 +4985,15 @@ spawns:
     region:   c_194
     level:    [40, 45]
   17141958:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_198
     level:    [73, 75]
   17141959:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_198
     level:    [73, 75]
   17141960:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_198
     level:    [73, 75]
   17141961:
@@ -5002,27 +5002,27 @@ spawns:
     region:   n_198
     level:    [40, 45]
   17141962:
-    template: Kotan-kor_Kamuy
+    template: Kotan-kor_Kamuy                  # Needs captures
     at:       [-23.892, -24.139, 327.721, 121]
     level:    [80, 80]
   17141963:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_203
     level:    [73, 75]
   17141964:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_203
     level:    [73, 75]
   17141965:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_205
     level:    [73, 75]
   17141966:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_205
     level:    [73, 75]
   17141967:
-    template: Grauberg_Hippogryph
+    template: Grauberg_Hippogryph # Needs captures
     region:   n_205
     level:    [73, 75]
   17141968:
@@ -5068,11 +5068,11 @@ spawns:
     region:   w_216
     level:    [79, 83]
   17141978:
-    template: Ajattara
+    template: Ajattara # Needs captures
     region:   w_216
     level:    [79, 83]
   17141979:
-    template: Scitalis
+    template: Scitalis                        # Needs captures
     at:       [-140.354, -92.095, 39.459, 29]
     level:    [83, 83]
   17141980:
@@ -6737,3 +6737,22 @@ spawns:
     template: Time_Bomb
   17142459:
     template: Areuhat
+
+slots:
+  - members:
+      17141818: {}                           # Wivre, Needs captures
+      17141882: {}                           # Wivre, Needs captures
+      17141885: {chance: 15, cooldown: 5400} # Vasiliceratops, Needs captures
+  - members:
+      17141958: {}                            # Grauberg_Hippogryph, Needs captures
+      17141959: {}                            # Grauberg_Hippogryph, Needs captures
+      17141960: {}                            # Grauberg_Hippogryph, Needs captures
+      17141962: {chance: 15, cooldown: 10800} # Kotan-kor_Kamuy, Needs captures
+      17141963: {}                            # Grauberg_Hippogryph, Needs captures
+      17141964: {}                            # Grauberg_Hippogryph, Needs captures
+      17141965: {}                            # Grauberg_Hippogryph, Needs captures
+      17141966: {}                            # Grauberg_Hippogryph, Needs captures
+      17141967: {}                            # Grauberg_Hippogryph, Needs captures
+  - members:
+      17141978: {}                           # Ajattara, Needs captures
+      17141979: {chance: 15, cooldown: 3600} # Scitalis, Needs captures

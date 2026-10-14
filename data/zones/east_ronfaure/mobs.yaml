@@ -24,7 +24,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 400
     loot:
@@ -1235,7 +1235,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 180
     loot:
       drops:
         - chance: always
@@ -2892,15 +2892,15 @@ spawns:
     region:   s_248
     level:    [5, 6]
   17191187:
-    template: Pugil
+    template: Pugil  # Needs captures
     region:   c_275
     level:    [4, 5]
   17191188:
-    template: Pugil
+    template: Pugil     # Needs captures
     region:   region_44
     level:    [4, 5]
   17191189:
-    template: Swamfisk
+    template: Swamfisk # Needs captures
     region:   s_375
     level:    [11, 15]
   17191190:
@@ -2920,15 +2920,15 @@ spawns:
     region:   s_278
     level:    [4, 5]
   17191194:
-    template: Carrion_Worm
+    template: Carrion_Worm # Needs captures
     region:   s_278
     level:    [4, 5]
   17191195:
-    template: Carrion_Worm
+    template: Carrion_Worm # Needs captures
     region:   s_278
     level:    [4, 5]
   17191196:
-    template: Bigmouth_Billy
+    template: Bigmouth_Billy # Needs captures
     region:   c_226
     level:    [9, 10]
   17191197:
@@ -3379,23 +3379,23 @@ spawns:
     region:   region_49
     level:    [5, 6]
   17191287:
-    template: Pugil
+    template: Pugil  # Needs captures
     region:   s_375
     level:    [4, 5]
   17191288:
-    template: Pugil
+    template: Pugil  # Needs captures
     region:   s_375
     level:    [4, 5]
   17191289:
-    template: Pugil
+    template: Pugil  # Needs captures
     region:   s_377
     level:    [4, 5]
   17191290:
-    template: Pugil
+    template: Pugil  # Needs captures
     region:   s_377
     level:    [4, 5]
   17191291:
-    template: Swamfisk
+    template: Swamfisk # Needs captures
     region:   s_377
     level:    [11, 15]
   17191292:
@@ -4090,3 +4090,17 @@ slots:
   - members:
       17191301: {} # Orcish_Fodder
       17191306: {} # Enchanted_Bones
+  - members:
+      17191187: {}                           # Pugil, Needs captures
+      17191188: {}                           # Pugil, Needs captures
+      17191189: {chance: 15, cooldown: 3600} # Swamfisk, Needs captures
+  - members:
+      17191194: {}                           # Carrion_Worm, Needs captures
+      17191195: {}                           # Carrion_Worm, Needs captures
+      17191196: {chance: 15, cooldown: 1300} # Bigmouth_Billy, Needs captures
+  - members:
+      17191287: {}                           # Pugil, Needs captures
+      17191288: {}                           # Pugil, Needs captures
+      17191289: {}                           # Pugil, Needs captures
+      17191290: {}                           # Pugil, Needs captures
+      17191291: {chance: 15, cooldown: 3600} # Swamfisk, Needs captures

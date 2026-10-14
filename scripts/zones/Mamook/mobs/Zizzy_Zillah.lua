@@ -2,15 +2,8 @@
 -- Area: Mamook
 --   NM: Zizzy Zillah
 -----------------------------------
-local ID = zones[xi.zone.MAMOOK]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.ZIZZY_ZILLAH - 1] = ID.mob.ZIZZY_ZILLAH, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

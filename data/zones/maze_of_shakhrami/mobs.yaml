@@ -1304,7 +1304,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1300
     loot:
@@ -3794,3 +3794,6 @@ slots:
   - members:
       17588699: {} # Wight
       17588700: {} # Wight
+  - members:
+      17588276: {}                           # Maze_Maker
+      17588278: {chance: 15, cooldown: 3600} # Trembler_Tabitha

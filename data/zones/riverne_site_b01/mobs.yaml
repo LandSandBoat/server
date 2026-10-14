@@ -360,7 +360,7 @@ templates:
         aggressive:     true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5000
     loot:
@@ -1602,3 +1602,6 @@ slots:
   - members:
       16896100: {} # Lesser_Roc
       16896101: {} # Nimbus_Hippogryph
+  - members:
+      16896106: {}                            # Nimbus_Hippogryph
+      16896107: {chance: 15, cooldown: 75600} # Imdugud

@@ -145,7 +145,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: always
@@ -375,7 +375,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1400
     loot:
@@ -409,7 +409,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5096
     loot:
@@ -4671,8 +4671,9 @@ slots:
       17228148: {} # Evil_Weapon
       17228151: {} # Evil_Weapon
   - members:
-      17228149: {} # Evil_Weapon
-      17228152: {} # Evil_Weapon
+      17228149: {}                           # Evil_Weapon
+      17228150: {chance: 15, cooldown: 5400} # Eldritch_Edge
+      17228152: {}                           # Evil_Weapon
   - members:
       17228157: {} # Death_Wasp
       17228161: {} # Midnight_Wings
@@ -4707,3 +4708,11 @@ slots:
   - members:
       17228216: {} # Death_Wasp
       17228221: {} # Moon_Bat
+  - members:
+      17228235: {}                           # Ochu
+      17228236: {chance: 15, cooldown: 3600} # Drooling_Daisy
+  - members:
+      17227968: {}                          # Midnight_Wings
+      17227972: {chance: 8, cooldown: 3600} # Black_Triple_Stars
+      17227988: {}                          # Midnight_Wings
+      17227992: {chance: 8, cooldown: 3600} # Black_Triple_Stars

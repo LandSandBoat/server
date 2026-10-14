@@ -2,16 +2,8 @@
 -- Area: The Boyahda Tree
 --   NM: Aquarius
 -----------------------------------
-local ID = zones[xi.zone.THE_BOYAHDA_TREE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.AQUARIUS - 1] = ID.mob.AQUARIUS, -- Confirmed on retail
-    [ID.mob.AQUARIUS + 4] = ID.mob.AQUARIUS, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,15 +2,8 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Peg Powler
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.PEG_POWLER - 1] = ID.mob.PEG_POWLER, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

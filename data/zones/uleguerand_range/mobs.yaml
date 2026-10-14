@@ -100,7 +100,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8800
     loot:
@@ -966,7 +966,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -1295,7 +1295,7 @@ templates:
         model_size:     2
         hitbox:        14
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -3299,3 +3299,12 @@ slots:
   - members:
       16798048: {} # Snoll
       16798049: {} # Snoll
+  - members:
+      16797768: {}                           # Polar_Hare
+      16797770: {chance: 15, cooldown: 3600} # Skvader
+  - members:
+      16797967: {}                           # Molech
+      16797968: {chance: 15, cooldown: 3600} # Magnotaur
+  - members:
+      16798055: {}                           # Buffalo
+      16798056: {chance: 15, cooldown: 3600} # Bonnacon

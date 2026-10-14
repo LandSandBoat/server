@@ -147,7 +147,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 600
       stats:
         hp: 775
     loot:
@@ -230,7 +230,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
     loot:
       drops:
         - chance: always
@@ -965,7 +965,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 480
       stats:
         hp: 625
     loot:
@@ -2771,9 +2771,9 @@ slots:
       17363254: {} # Greater_Quadav
       17363255: {} # Onyx_Quadav
   - members:
-      17363256: {} # Old_Quadav
-      17363257: {} # Copper_Quadav
-      17363258: {} # BeHya_Hundredwall
+      17363256: {}                           # Old_Quadav
+      17363257: {}                           # Copper_Quadav
+      17363258: {chance: 15, cooldown: 3600} # BeHya_Hundredwall
   - members:
       17363261: {} # Veteran_Quadav
       17363262: {} # Greater_Quadav
@@ -2834,3 +2834,9 @@ slots:
       17363315: {} # Old_Quadav
       17363316: {} # Copper_Quadav
       17363317: {} # Brass_Quadav
+  - members:
+      17363180: {}                           # Copper_Beetle
+      17363181: {chance: 15, cooldown: 3600} # BuGhi_Howlblade
+  - members:
+      17363205: {}                           # Veteran_Quadav
+      17363208: {chance: 20, cooldown: 3600} # ZiGhi_Boneeater

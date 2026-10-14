@@ -2,15 +2,8 @@
 -- Area: Korroloka Tunnel (173)
 --   NM: Dame Blanche
 -----------------------------------
-local ID = zones[xi.zone.KORROLOKA_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.DAME_BLANCHE - 1] = ID.mob.DAME_BLANCHE, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

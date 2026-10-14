@@ -1119,7 +1119,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 315
     loot:
@@ -1568,7 +1568,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 480
     loot:
@@ -4666,3 +4666,15 @@ slots:
   - members:
       17211845: {} # Goblin_Leecher
       17211846: {} # Goblin_Gambler
+  - members:
+      17211536: {}           # Maneating_Hornet
+      17211537: {chance: 15} # Stinging_Sophie
+  - members:
+      17211560: {}           # Maneating_Hornet
+      17211561: {chance: 15} # Stinging_Sophie
+  - members:
+      17211701: {}                          # Walking_Sapling
+      17211702: {chance: 15, cooldown: 900} # Maighdean_Uaine
+  - members:
+      17211713: {}                          # Walking_Sapling
+      17211714: {chance: 15, cooldown: 900} # Maighdean_Uaine

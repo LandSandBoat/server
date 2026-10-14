@@ -89,7 +89,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3300
     loot:
@@ -169,7 +169,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4900
         mp: 4900
@@ -290,7 +290,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4700
     loot:
@@ -4312,3 +4312,12 @@ slots:
   - members:
       17269078: {} # Goblin_Leecher
       17269084: {} # Wight
+  - members:
+      17268782: {}                           # Hill_Lizard
+      17268788: {chance: 15, cooldown: 3600} # Bashe
+  - members:
+      17268849: {}                           # Tabar_Beak
+      17268851: {chance: 33, cooldown: 3600} # Deadly_Dodo
+  - members:
+      17269012: {}                           # Evil_Weapon
+      17269016: {chance: 20, cooldown: 5400} # Blighting_Brand

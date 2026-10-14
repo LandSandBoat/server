@@ -337,7 +337,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7400
         mp: 7400
@@ -634,7 +634,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15300
     loot:
@@ -892,7 +892,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 19450
     loot:
@@ -1025,7 +1025,7 @@ templates:
         model_size:     2
         hitbox:        36
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 31000
     loot:
@@ -2260,13 +2260,15 @@ slots:
       17617059: {} # Goblin_Shepherd
       17617064: {} # Goblin_Shepherd
   - members:
-      17616996: {} # Sulfur_Scorpion
-      17617001: {} # Sulfur_Scorpion
+      17616996: {}                           # Sulfur_Scorpion
+      17616999: {chance: 15, cooldown: 3600} # Tyrannic_Tunnok
+      17617001: {}                           # Sulfur_Scorpion
   - members:
-      17617055: {} # Goblin_Alchemist
-      17617056: {} # Goblin_Alchemist
-      17617066: {} # Goblin_Alchemist
-      17617069: {} # Goblin_Alchemist
+      17617055: {}                           # Goblin_Alchemist
+      17617056: {}                           # Goblin_Alchemist
+      17617062: {chance: 15, cooldown: 3600} # Foreseer_Oramix
+      17617066: {}                           # Goblin_Alchemist
+      17617069: {}                           # Goblin_Alchemist
   - members:
       17617057: {} # Goblin_Mercenary
       17617061: {} # Goblin_Mercenary
@@ -2306,8 +2308,9 @@ slots:
       17617114: {} # Volcanic_Bomb
       17617132: {} # Volcanic_Bomb
   - members:
-      17617118: {} # Hurricane_Wyvern
-      17617122: {} # Hurricane_Wyvern
+      17617118: {}                           # Hurricane_Wyvern
+      17617122: {}                           # Hurricane_Wyvern
+      17617130: {chance: 15, cooldown: 7200} # Vouivre
   - members:
       17617119: {} # Volcanic_Bomb
       17617131: {} # Volcanic_Bomb
@@ -2320,3 +2323,7 @@ slots:
   - members:
       17617136: {} # Volcanic_Bomb
       17617138: {} # Volcanic_Bomb
+  - members:
+      17617008: {}                           # Eotyrannus
+      17617012: {}                           # Eotyrannus
+      17617013: {chance: 15, cooldown: 3600} # Lindwurm

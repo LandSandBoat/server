@@ -27,7 +27,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 14500
     loot:
@@ -3802,7 +3802,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 250
     loot:
@@ -6555,3 +6555,11 @@ spawns:
     script: Robel-Akbel
   17183463:
     script: Lehko_Habhoka
+
+slots:
+  - members:
+      17182812: {}                           # Yagudo_Sentinel
+      17182813: {chance: 15, cooldown: 7200} # Zhuu_Buxu_the_Silent
+  - members:
+      17182838: {}                           # Yagudo_Sentinel
+      17182843: {chance: 15, cooldown: 7200} # Aa_Xalmo_the_Savage

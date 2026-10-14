@@ -2,20 +2,8 @@
 -- Area: Mount Zhayolm
 --   NM: Ignamoth
 -----------------------------------
-local ID = zones[xi.zone.MOUNT_ZHAYOLM]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.spawnPoints =
-{
-    { x = -557.152, y = -14.000, z =  278.249 }
-}
-
-entity.phList =
-{
-    [ID.mob.IGNAMOTH - 1] = ID.mob.IGNAMOTH, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

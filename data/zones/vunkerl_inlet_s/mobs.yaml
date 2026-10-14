@@ -419,7 +419,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -2574,7 +2574,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 14000
     loot:
@@ -3978,7 +3978,7 @@ spawns:
     region:   ne_56
     level:    [78, 82]
   17117241:
-    template: Gigas_Helmsman
+    template: Gigas_Helmsman # Needs captures
     region:   ne_57
     level:    [78, 82]
   17117242:
@@ -3998,7 +3998,7 @@ spawns:
     region:   ne_61
     level:    [78, 82]
   17117246:
-    template: Gigas_Helmsman
+    template: Gigas_Helmsman # Needs captures
     region:   ne_62
     level:    [78, 82]
   17117247:
@@ -4014,7 +4014,7 @@ spawns:
     region:   ne_64
     level:    [78, 82]
   17117250:
-    template: Pallas
+    template: Pallas                          # Needs captures
     at:       [366.790, -31.435, 419.763, 68]
     level:    [83, 83]
   17117251:
@@ -4447,15 +4447,15 @@ spawns:
     region:   sw_162
     level:    [70, 72]
   17117347:
-    template: Ignis_Djinn
+    template: Ignis_Djinn # Needs captures
     region:   sw_163
     level:    [70, 72]
   17117348:
-    template: Ignis_Djinn
+    template: Ignis_Djinn # Needs captures
     region:   sw_163
     level:    [70, 72]
   17117349:
-    template: Big_Bang
+    template: Big_Bang                          # Needs captures
     at:       [-442.500, -48.000, -314.300, 60]
     level:    [75, 75]
   17117350:
@@ -6512,3 +6512,13 @@ spawns:
     template: Gaunab
     at:       [-400.183, -32.500, 520.674, 181]
     level:    [98, 99]
+
+slots:
+  - members:
+      17117241: {}                           # Gigas_Helmsman, Needs captures
+      17117246: {}                           # Gigas_Helmsman, Needs captures
+      17117250: {chance: 15, cooldown: 3600} # Pallas, Needs captures
+  - members:
+      17117347: {}                           # Ignis_Djinn, Needs captures
+      17117348: {}                           # Ignis_Djinn, Needs captures
+      17117349: {chance: 15, cooldown: 3600} # Big_Bang, Needs captures

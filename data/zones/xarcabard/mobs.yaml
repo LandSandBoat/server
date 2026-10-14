@@ -89,7 +89,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6700
     loot:
@@ -1522,7 +1522,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
     loot:
@@ -1550,7 +1550,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5000
     loot:
@@ -2893,8 +2893,9 @@ slots:
       17235991: {} # Cursed_Weapon
       17235993: {} # Cursed_Weapon
   - members:
-      17236004: {} # Cursed_Weapon
-      17236025: {} # Cursed_Weapon
+      17236004: {}                           # Cursed_Weapon
+      17236025: {}                           # Cursed_Weapon
+      17236027: {chance: 15, cooldown: 7200} # Barbaric_Weapon
   - members:
       17236005: {} # Cursed_Weapon
       17236026: {} # Cursed_Weapon
@@ -2936,3 +2937,9 @@ slots:
   - members:
       17236155: {} # Demon_Warlock
       17236159: {} # Demon_Warlock
+  - members:
+      17236041: {}                           # Lost_Soul
+      17236045: {chance: 15, cooldown: 5400} # Timeworn_Warrior
+  - members:
+      17236174: {}                           # Evil_Eye
+      17236180: {chance: 15, cooldown: 3600} # Shadow_Eye

@@ -83,7 +83,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7400
         mp: 7400
@@ -194,7 +194,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 16300
         mp: 16300
@@ -272,7 +272,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7300
     loot:
@@ -486,7 +486,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8600
     loot:
@@ -722,7 +722,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 20000
     loot:
@@ -939,7 +939,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5700
     loot:
@@ -3169,14 +3169,16 @@ spawns:
 
 slots:
   - members:
-      17432622: {} # Tonberry_Trailer
-      17432625: {} # Tonberry_Trailer
+      17432622: {}                           # Tonberry_Trailer
+      17432624: {chance: 15, cooldown: 7200} # Celeste-eyed_Tozberry
+      17432625: {}                           # Tonberry_Trailer
   - members:
-      17432638: {} # Bifrons
-      17432640: {} # Friar_Rush
+      17432638: {}                           # Bifrons
+      17432640: {chance: 15, cooldown: 3600} # Friar_Rush
   - members:
-      17432662: {} # Tonberry_Imprecator
-      17432671: {} # Tonberry_Imprecator
+      17432659: {chance: 15, cooldown: 3600} # Carmine-tailed_Janberry
+      17432662: {}                           # Tonberry_Imprecator
+      17432671: {}                           # Tonberry_Imprecator
   - members:
       17432691: {} # Puck
       17432699: {} # Puck
@@ -3197,17 +3199,18 @@ slots:
       17432759: {} # Den_Scorpion
       17432767: {} # Den_Scorpion
   - members:
-      17432787: {} # Tonberry_Slasher
-      17432798: {} # Tawny-fingered_Mugberry
+      17432787: {}                           # Tonberry_Slasher
+      17432798: {chance: 15, cooldown: 3600} # Tawny-fingered_Mugberry
   - members:
-      17432820: {} # Tonberry_Beleaguerer
-      17432845: {} # Bistre-hearted_Malberry
+      17432820: {}                           # Tonberry_Beleaguerer
+      17432845: {chance: 15, cooldown: 3600} # Bistre-hearted_Malberry
   - members:
       17432910: {} # Demonic_Pugil
       17432911: {} # Demonic_Pugil
   - members:
-      17432973: {} # Doom_Toad
-      17432979: {} # Doom_Toad
+      17432973: {}                           # Doom_Toad
+      17432974: {chance: 15, cooldown: 3600} # Ogama
+      17432979: {}                           # Doom_Toad
   - members:
       17432990: {} # Doom_Toad
       17432991: {} # Doom_Toad

@@ -5,8 +5,6 @@
 -----------------------------------
 mixins = { require('scripts/mixins/pet_resummon') }
 -----------------------------------
-local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,10 +15,6 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 783, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 784, 2, xi.regime.type.GROUNDS)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.RHOITOS, 5, math.randomInt(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
 end
 
 return entity

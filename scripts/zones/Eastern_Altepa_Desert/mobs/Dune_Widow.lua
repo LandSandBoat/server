@@ -2,15 +2,8 @@
 -- Area: Eastern Altepa Desert (114)
 --   NM: Dune Widow
 -----------------------------------
-local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.DUNE_WIDOW - 1] = ID.mob.DUNE_WIDOW, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

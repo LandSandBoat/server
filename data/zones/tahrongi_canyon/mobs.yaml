@@ -767,7 +767,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1320
     loot:
@@ -943,7 +943,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 620
     loot:
@@ -3617,8 +3617,10 @@ slots:
       17256547: {} # Wild_Dhalmel
       17256550: {} # Barghest
   - members:
-      17256560: {} # Wild_Dhalmel
-      17256686: {} # Wild_Dhalmel
+      17256560: {}                          # Wild_Dhalmel
+      17256563: {chance: 8, cooldown: 3600} # Serpopard_Ishtar
+      17256686: {}                          # Wild_Dhalmel
+      17256690: {chance: 8, cooldown: 3600} # Serpopard_Ishtar
   - members:
       17256561: {} # Wild_Dhalmel
       17256564: {} # Barghest
@@ -3730,3 +3732,6 @@ slots:
   - members:
       17256883: {} # Akbaba
       17256890: {} # Skeleton_Sorcerer
+  - members:
+      17256835: {}                           # Canyon_Crawler
+      17256836: {chance: 15, cooldown: 3600} # Herbage_Hunter

@@ -3,15 +3,8 @@
 --  Mob: Imdugud
 -- !pos 655.263 20.664 651.320 29
 -----------------------------------
-local ID = zones[xi.zone.RIVERNE_SITE_B01]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.IMDUGUD - 1] = ID.mob.IMDUGUD, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

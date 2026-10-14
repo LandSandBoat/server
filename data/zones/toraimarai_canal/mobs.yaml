@@ -293,7 +293,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9500
     loot:
@@ -732,7 +732,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -2773,5 +2773,8 @@ slots:
       17469549: {} # Fleshcraver
       17469553: {} # Rotten_Sod
   - members:
-      17469629: {} # Mousse
-      17469632: {} # Konjac
+      17469629: {}                           # Mousse
+      17469632: {chance: 15, cooldown: 3600} # Konjac
+  - members:
+      17469575: {}                           # Bouncing_Ball
+      17469578: {chance: 15, cooldown: 3600} # Canal_Moocher

@@ -1214,7 +1214,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5550
     loot:
@@ -2694,7 +2694,7 @@ spawns:
     region:   nw_218
     level:    [41, 44]
   16879839:
-    template: Diatryma_MC
+    template: Diatryma_MC # Needs captures
     script:   Diatryma
     region:   nw_223
     level:    [47, 51]
@@ -2730,7 +2730,7 @@ spawns:
     region:   nw_230
     level:    [45, 49]
   16879847:
-    template: Okyupete
+    template: Okyupete # Needs captures
     region:   nw_223
     level:    [57, 60]
   16879848:
@@ -3103,3 +3103,6 @@ slots:
   - members:
       16879870: {} # Bigclaw
       16879871: {} # Makara
+  - members:
+      16879839: {}                           # Diatryma, Needs captures
+      16879847: {chance: 15, cooldown: 3600} # Okyupete, Needs captures

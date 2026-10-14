@@ -3,7 +3,6 @@
 --  Mob: Molech
 -- Note: PH for Magnotaur
 -----------------------------------
-local ID = zones[xi.zone.ULEGUERAND_RANGE]
 mixins = { require('scripts/mixins/families/tauri') }
 -----------------------------------
 ---@type TMobEntity
@@ -24,11 +23,6 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     end
 
     return tpMoves[math.randomInt(1, #tpMoves)]
-end
-
-entity.onMobDespawn = function(mob)
-    local params = { }
-    xi.mob.phOnDespawn(mob, ID.mob.MAGNOTAUR, 10, 3600, params) -- 1 hour
 end
 
 return entity

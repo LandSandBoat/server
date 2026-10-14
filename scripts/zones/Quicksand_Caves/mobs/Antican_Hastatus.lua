@@ -3,8 +3,6 @@
 --  Mob: Antican Hastatus
 -- Note: PH for Antican Magister
 -----------------------------------
-local ID = zones[xi.zone.QUICKSAND_CAVES]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,10 +15,6 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 817, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 818, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 819, 2, xi.regime.type.GROUNDS)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_MAGISTER, 10, 3600) -- 1 hour
 end
 
 return entity

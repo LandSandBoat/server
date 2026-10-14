@@ -257,7 +257,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 780
     loot:
@@ -957,7 +957,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3800
     loot:
@@ -1166,7 +1166,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -4677,3 +4677,12 @@ slots:
   - members:
       17265066: {} # Goblin_Butcher
       17265067: {} # Zombie
+  - members:
+      17264763: {}                           # Yagudo_Persecutor
+      17264768: {chance: 15, cooldown: 3600} # Naa_Zeku_the_Unwaiting
+  - members:
+      17264815: {}                           # Raptor
+      17264818: {chance: 15, cooldown: 3600} # Daggerclaw_Dracos
+  - members:
+      17264968: {}                           # Coeurl
+      17264972: {chance: 15, cooldown: 3600} # Patripatan

@@ -23,7 +23,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: very_common
@@ -263,7 +263,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -3561,11 +3561,12 @@ slots:
       17571866: {} # Goblin_Tinkerer
       17571867: {} # Goblin_Butcher
   - members:
-      17571868: {} # Stink_Bats
-      17571870: {} # Desmodont
+      17571868: {}                           # Stink_Bats
+      17571870: {chance: 15, cooldown: 3600} # Desmodont
   - members:
-      17571896: {} # Ghoul
-      17571900: {} # Ghoul
+      17571896: {}                           # Ghoul
+      17571900: {}                           # Ghoul
+      17571903: {chance: 20, cooldown: 3600} # Ah_Puch
   - members:
       17571929: {} # Two_of_Cups
       17571930: {} # Two_of_Batons

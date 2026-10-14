@@ -336,7 +336,7 @@ templates:
         entity_flags: 155
         name_prefix:   32
       spawn:
-        type: [lottery]
+        respawn: 960
     loot:
       drops:
         - chance: uncommon
@@ -2039,7 +2039,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 15000
     loot:
@@ -3967,5 +3967,9 @@ slots:
       17043751: {} # Sea_Puk
       17043752: {} # Sea_Puk
   - members:
-      17043770: {} # Watch_Wyvern
-      17043773: {} # Watch_Wyvern
+      17043770: {}                           # Watch_Wyvern
+      17043773: {}                           # Watch_Wyvern
+      17043779: {chance: 15, cooldown: 3600} # Firedance_Magmaal_Ja
+  - members:
+      17043553: {}                           # Ziz
+      17043554: {chance: 15, cooldown: 3600} # Zizzy_Zillah

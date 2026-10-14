@@ -3,15 +3,8 @@
 --   NM: Rogue Receptacle
 --  WOTG Nov 2009 NM: Immune to Bind, Sleep, Gravity. Uses only 1 TP move.
 -----------------------------------
-local ID = zones[xi.zone.ROMAEVE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.ROGUE_RECEPTACLE - 3] = ID.mob.ROGUE_RECEPTACLE, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

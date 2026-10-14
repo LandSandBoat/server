@@ -648,7 +648,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 14000
     loot:
@@ -1528,7 +1528,7 @@ templates:
         name_prefix:    32
         hitbox:         20
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15000
     loot:
@@ -2175,7 +2175,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -4362,8 +4362,15 @@ slots:
       16990361: {} # Olden_Treant
       16990362: {} # Colorful_Treant
   - members:
-      16990374: {} # Olden_Treant
-      16990375: {} # Colorful_Treant
+      16990374: {}                           # Olden_Treant
+      16990375: {}                           # Colorful_Treant
+      16990376: {chance: 15, cooldown: 7200} # Emergent_Elm
   - members:
       16990381: {} # Olden_Treant
       16990382: {} # Colorful_Treant
+  - members:
+      16990305: {}                            # Marid
+      16990306: {chance: 15, cooldown: 10800} # Mahishasura
+  - members:
+      16990398: {}                            # Sea_Puk
+      16990403: {chance: 15, cooldown: 43200} # Nis_Puk

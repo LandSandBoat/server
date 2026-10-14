@@ -4,15 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/families/cockatrice') }
 -----------------------------------
-local ID = zones[xi.zone.KUFTAL_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.PELICAN - 1] = ID.mob.PELICAN, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

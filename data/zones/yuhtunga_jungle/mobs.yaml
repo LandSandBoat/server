@@ -1078,7 +1078,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5400
     loot:
@@ -3652,3 +3652,6 @@ slots:
   - members:
       17281383: {} # Jungle_Coeurl
       17281385: {} # Jungle_Coeurl
+  - members:
+      17281148: {}                           # Young_Opo-opo
+      17281149: {chance: 20, cooldown: 3600} # Mischievous_Micholas

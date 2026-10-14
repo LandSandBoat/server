@@ -3,15 +3,9 @@
 --  Mob: Jaded Jody
 -----------------------------------
 mixins = { require('scripts.mixins.families.morbol_toau') }
-local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.JADED_JODY - 1]  = ID.mob.JADED_JODY, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

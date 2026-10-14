@@ -5,8 +5,6 @@
 -----------------------------------
 mixins = { require('scripts/mixins/pet_resummon') }
 -----------------------------------
-local ID = zones[xi.zone.QUFIM_ISLAND]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,10 +15,6 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 44, 1, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 45, 2, xi.regime.type.FIELDS)
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SLIPPERY_SUCKER, 10, 600) -- 10 minutes
 end
 
 return entity

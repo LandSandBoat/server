@@ -2,16 +2,8 @@
 -- Area: Ifrits Cauldron
 --   NM: Lindwurm
 -----------------------------------
-local ID = zones[xi.zone.IFRITS_CAULDRON]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.LINDWURM - 5] = ID.mob.LINDWURM, -- Confirmed on retail
-    [ID.mob.LINDWURM - 1] = ID.mob.LINDWURM, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

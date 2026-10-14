@@ -2,15 +2,8 @@
 -- Area: Uleguerand Range
 --   NM: Bonnacon
 -----------------------------------
-local ID = zones[xi.zone.ULEGUERAND_RANGE]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.BONNACON - 1] = ID.mob.BONNACON, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

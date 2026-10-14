@@ -176,7 +176,7 @@ templates:
         flags: [standback]
         links: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 12000
     loot:
@@ -4046,3 +4046,8 @@ spawns:
     template: Awoken_Hrungnir
     at:       [-219.610, 8.000, 100.340, 105]
     level:    [119, 119]
+
+slots:
+  - members:
+      17055955: {}                           # Qiqirn_Archaeologist
+      17056156: {chance: 15, cooldown: 7200} # Bluestreak_Gyugyuroon

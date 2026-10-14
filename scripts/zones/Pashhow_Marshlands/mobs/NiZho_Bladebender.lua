@@ -2,16 +2,8 @@
 -- Area: Pashhow Marshlands
 --   NM: Ni'Zho Bladebender
 -----------------------------------
-local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.NI_ZHO_BLADEBENDER - 57] = ID.mob.NI_ZHO_BLADEBENDER, -- Confirmed on retail
-    [ID.mob.NI_ZHO_BLADEBENDER - 8]  = ID.mob.NI_ZHO_BLADEBENDER, -- Confirmed on retail
-}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 60, 1, xi.regime.type.FIELDS)

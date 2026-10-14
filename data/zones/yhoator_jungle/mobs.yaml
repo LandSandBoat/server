@@ -672,7 +672,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7250
     loot:
@@ -3761,8 +3761,9 @@ slots:
       17285381: {} # Tonberry_Creeper
       17285388: {} # Tonberry_Hexer
   - members:
-      17285389: {} # Tonberry_Creeper
-      17285393: {} # Tonberry_Shadower
+      17285389: {}                           # Tonberry_Creeper
+      17285393: {}                           # Tonberry_Shadower
+      17285394: {chance: 15, cooldown: 5400} # Hoar-knuckled_Rimberry
   - members:
       17285395: {} # Tonberry_Jinxer
       17285396: {} # Tonberry_Chopper

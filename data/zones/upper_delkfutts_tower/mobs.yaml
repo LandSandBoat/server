@@ -145,7 +145,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3050
     loot:
@@ -390,7 +390,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4000
     loot:
@@ -1365,9 +1365,10 @@ spawns:
 
 slots:
   - members:
-      17424388: {} # Gigas_Bonecutter
-      17424423: {} # Enkelados
-      17424426: {} # Gigas_Bonecutter
+      17424385: {chance: 8} # Enkelados
+      17424388: {}          # Gigas_Bonecutter
+      17424423: {chance: 8} # Enkelados
+      17424426: {}          # Gigas_Bonecutter
   - members:
       17424392: {} # Gigas_Torturer
       17424395: {} # Gigas_Stonemason
@@ -1408,8 +1409,10 @@ slots:
       17424468: {} # Jotunn_Gatekeeper
       17424469: {} # Jotunn_Hallkeeper
   - members:
-      17424474: {} # Phasma
-      17424511: {} # Phasma
+      17424474: {}                          # Phasma
+      17424475: {chance: 8, cooldown: 3600} # Ixtab
+      17424511: {}                          # Phasma
+      17424512: {chance: 8, cooldown: 3600} # Ixtab
   - members:
       17424490: {} # Jotunn_Gatekeeper
       17424491: {} # Jotunn_Hallkeeper

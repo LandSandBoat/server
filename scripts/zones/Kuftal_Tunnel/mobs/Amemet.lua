@@ -2,17 +2,8 @@
 --  Area: Kuftal Tunnel
 --  NM: Amemet
 -----------------------------------
------------------------------------
-local ID = zones[xi.zone.KUFTAL_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.AMEMET - 14] = ID.mob.AMEMET, -- Confirmed on retail
-    [ID.mob.AMEMET - 1]  = ID.mob.AMEMET, -- Confirmed on retail
-}
 
 entity.spawnPoints =
 {

@@ -262,7 +262,7 @@ templates:
         heal_chance:    60
         hp_heal_chance: 60
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10000
     loot:
@@ -2628,3 +2628,6 @@ slots:
   - members:
       17584418: {} # Crawler_Hunter
       17584419: {} # Knight_Crawler
+  - members:
+      17584397: {}                           # Wespe
+      17584398: {chance: 15, cooldown: 7200} # Demonic_Tiphia

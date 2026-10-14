@@ -4,15 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.CELPHIE - 1] = ID.mob.CELPHIE, -- Confirmed on retail
-}
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- Celphie gains strong regen after hundred fists wears

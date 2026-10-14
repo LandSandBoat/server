@@ -24,7 +24,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 7300
     loot:
@@ -59,7 +59,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 8100
     loot:
@@ -94,7 +94,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 7800
     loot:
@@ -1331,7 +1331,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 6700
     loot:
@@ -2727,3 +2727,15 @@ slots:
       17440940: {} # Yagudo_Chanter
       17440941: {} # Yagudo_Inquisitor
       17440942: {} # Yagudo_Abbot
+  - members:
+      17440962: {}           # Demon_Wizard
+      17440963: {chance: 15} # Baron_Vapula
+  - members:
+      17440968: {}           # Demon_Knight
+      17440969: {chance: 15} # Count_Bifrons
+  - members:
+      17440973: {}           # Demon_Warlock
+      17440975: {chance: 15} # Viscount_Morax
+  - members:
+      17440985: {}           # Demon_Pawn
+      17440986: {chance: 15} # Baronet_Romwe

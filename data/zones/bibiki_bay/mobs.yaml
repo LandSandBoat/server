@@ -820,7 +820,7 @@ templates:
       mods:
         mdef: 25
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4400
     loot:
@@ -1295,7 +1295,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4400
     loot:
@@ -1415,7 +1415,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7720
     loot:
@@ -3042,3 +3042,12 @@ slots:
   - members:
       16793796: {} # Hobgoblin_Martialist
       16793799: {} # Hobgoblin_Venerer
+  - members:
+      16793645: {}                           # Jagil
+      16793646: {chance: 15, cooldown: 3600} # Serra
+  - members:
+      16793741: {}                           # Eft
+      16793742: {chance: 15, cooldown: 3600} # Intulo
+  - members:
+      16793775: {}                           # Tartarus_Eft
+      16793776: {chance: 15, cooldown: 3600} # Splacknuck

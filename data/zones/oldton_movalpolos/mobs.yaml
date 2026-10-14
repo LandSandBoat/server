@@ -332,7 +332,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 840
       stats:
         hp: 5000
     loot:
@@ -2393,3 +2393,9 @@ slots:
   - members:
       16822446: {} # Moblin_Pikeman
       16822448: {} # Goblin_Oilman
+  - members:
+      16822422: {}           # Bugbear_Bondman_noroam
+      16822423: {chance: 15} # Bugbear_Strongman
+  - members:
+      16822426: {}           # Bugbear_Bondman_noroam
+      16822427: {chance: 15} # Bugbear_Strongman

@@ -2,16 +2,8 @@
 -- Area: Ifrits Cauldron
 --   NM: Vouivre
 -----------------------------------
-local ID = zones[xi.zone.IFRITS_CAULDRON]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.VOUIVRE - 12] = ID.mob.VOUIVRE, -- Confirmed on retail
-    [ID.mob.VOUIVRE - 8]  = ID.mob.VOUIVRE, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)

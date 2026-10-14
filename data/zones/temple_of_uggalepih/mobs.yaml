@@ -483,7 +483,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 6800
     loot:
@@ -949,7 +949,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 7500
     loot:
@@ -993,7 +993,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 6300
         mp: 6300
@@ -1239,7 +1239,7 @@ templates:
         links:          true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 3100
         mp: 3100
@@ -3135,3 +3135,15 @@ slots:
   - members:
       17428772: {} # Tonberry_Stabber
       17428773: {} # Tonberry_Dismayer
+  - members:
+      17428551: {}                           # Tonberry_Cutter
+      17428554: {chance: 15, cooldown: 3600} # Sozu_Sarberry
+  - members:
+      17428608: {}                           # Tonberry_Harrier
+      17428611: {chance: 15, cooldown: 3600} # Sozu_Terberry
+  - members:
+      17428675: {}                            # Tonberry_Dismayer
+      17428677: {chance: 15, cooldown: 21600} # Tonberry_Kinq
+  - members:
+      17428737: {chance: 15, cooldown: 3600} # Flauros
+      17428741: {}                           # Torama

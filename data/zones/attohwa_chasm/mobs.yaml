@@ -89,7 +89,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: always
@@ -368,7 +368,7 @@ templates:
       mods:
         triple_attack: 5
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8000
     loot:
@@ -3445,3 +3445,9 @@ slots:
   - members:
       16806212: {} # Cutlass_Scorpion
       16806213: {} # Cutlass_Scorpion
+  - members:
+      16806171: {}                           # Trench_Antlion
+      16806249: {chance: 15, cooldown: 3600} # Ambusher_Antlion
+  - members:
+      16806161: {}                            # Corse
+      16806162: {chance: 15, cooldown: 10800} # Citipati

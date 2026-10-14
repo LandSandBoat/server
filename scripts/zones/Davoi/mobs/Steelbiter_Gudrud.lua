@@ -4,15 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.DAVOI]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.STEELBITER_GUDRUD - 7] = ID.mob.STEELBITER_GUDRUD, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Orcs_Wyvern')

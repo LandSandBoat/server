@@ -2,15 +2,8 @@
 -- Area: Tahrongi Canyon
 --   NM: Herbage Hunter
 -----------------------------------
-local ID = zones[xi.zone.TAHRONGI_CANYON]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.HERBAGE_HUNTER - 1] = ID.mob.HERBAGE_HUNTER, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)

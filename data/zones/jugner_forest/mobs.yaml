@@ -321,7 +321,7 @@ templates:
         aggressive:     true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 3600
       stats:
         hp: 14000
     loot:
@@ -1859,7 +1859,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1450
     loot:
@@ -2195,7 +2195,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 3000
     loot:
@@ -4788,3 +4788,15 @@ slots:
   - members:
       17203632: {} # Goblin_Gambler
       17203635: {} # Zombie
+  - members:
+      17203475: {chance: 15, cooldown: 3600} # Supplespine_Mujwuj
+      17203493: {}                           # Orcish_Grunt
+  - members:
+      17203581: {}           # Stag_Beetle
+      17203585: {chance: 15} # Panzer_Percival
+  - members:
+      17203637: {}           # Stag_Beetle
+      17203642: {chance: 15} # Panzer_Percival
+  - members:
+      17203447: {}                            # Fraelissa
+      17203448: {chance: 15, cooldown: 75600} # Fradubio

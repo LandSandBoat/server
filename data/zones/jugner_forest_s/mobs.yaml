@@ -915,7 +915,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15000
         mp:  9999
@@ -4051,7 +4051,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -4898,11 +4898,11 @@ spawns:
     region:   w_85
     level:    [73, 75]
   17113174:
-    template: Decrepit_Gnole
+    template: Decrepit_Gnole # Needs captures
     region:   w_86
     level:    [73, 75]
   17113175:
-    template: Voirloup
+    template: Voirloup                          # Needs captures
     at:       [-197.795, -0.346, -119.842, 224]
     level:    [89, 89]
   17113176:
@@ -5839,12 +5839,12 @@ spawns:
     region:   se_290
     level:    [76, 79]
   17113380:
-    template: Orcish_Veteran_past_Small
+    template: Orcish_Veteran_past_Small # Needs captures
     script:   Orcish_Veteran
     region:   se_290
     level:    [76, 79]
   17113381:
-    template: Drumskull_Zogdregg
+    template: Drumskull_Zogdregg             # Needs captures
     at:       [204.878, 0.886, -347.779, 20]
     level:    [83, 85]
   17113382:
@@ -7402,3 +7402,11 @@ spawns:
     level:    [93, 94]
   17113836:
     template: Rainemard
+
+slots:
+  - members:
+      17113174: {}                           # Decrepit_Gnole, Needs captures
+      17113175: {chance: 15, cooldown: 7200} # Voirloup, Needs captures
+  - members:
+      17113380: {}                           # Orcish_Veteran, Needs captures
+      17113381: {chance: 15, cooldown: 3600} # Drumskull_Zogdregg, Needs captures

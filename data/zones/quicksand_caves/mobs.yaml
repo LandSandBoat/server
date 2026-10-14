@@ -235,7 +235,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7700
     loot:
@@ -270,7 +270,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5000
         mp: 5000
@@ -383,7 +383,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6750
         mp: 6750
@@ -531,7 +531,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6850
     loot:
@@ -587,7 +587,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5500
         mp: 5500
@@ -663,7 +663,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13000
     loot:
@@ -752,7 +752,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
     loot:
@@ -890,7 +890,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6000
     loot:
@@ -1080,7 +1080,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 7000
     loot:
@@ -1115,7 +1115,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 26500
     loot:
@@ -1150,7 +1150,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 6000
     loot:
@@ -1487,7 +1487,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 11500
     loot:
@@ -1990,11 +1990,11 @@ spawns:
     region:   se_95
     level:    [52, 55]
   17629280:
-    template: Antican_Princeps
+    template: Antican_Princeps # Needs captures
     region:   se_95
     level:    [52, 55]
   17629281:
-    template: Antican_Praefectus
+    template: Antican_Praefectus # Needs captures
     region:   se_95
     level:    [65, 65]
   17629282:
@@ -3541,20 +3541,47 @@ spawns:
 
 slots:
   - members:
-      17629420: {} # Antican_Signifer
-      17629421: {} # Antican_Proconsul
+      17629420: {}                           # Antican_Signifer
+      17629421: {chance: 15, cooldown: 3600} # Antican_Proconsul
   - members:
-      17629433: {} # Helm_Beetle
-      17629436: {} # Helm_Beetle
-      17629439: {} # Helm_Beetle
-      17629442: {} # Helm_Beetle
-      17629446: {} # Helm_Beetle
+      17629430: {chance: 20, cooldown: 3600} # Diamond_Daig
+      17629433: {}                           # Helm_Beetle
+      17629436: {}                           # Helm_Beetle
+      17629439: {}                           # Helm_Beetle
+      17629442: {}                           # Helm_Beetle
+      17629446: {}                           # Helm_Beetle
   - members:
-      17629525: {} # Antican_Triarius
-      17629529: {} # Antican_Triarius
-      17629533: {} # Antican_Triarius
-      17629537: {} # Antican_Triarius
+      17629524: {chance: 15, cooldown: 7200} # Triarius_X-XV
+      17629525: {}                           # Antican_Triarius
+      17629529: {}                           # Antican_Triarius
+      17629533: {}                           # Antican_Triarius
+      17629537: {}                           # Antican_Triarius
   - members:
-      17629582: {} # Spelunking_Sabotender
-      17629586: {} # Spelunking_Sabotender
-      17629590: {} # Spelunking_Sabotender
+      17629582: {}                           # Spelunking_Sabotender
+      17629586: {}                           # Spelunking_Sabotender
+      17629587: {chance: 15, cooldown: 9000} # Sabotender_Bailarina
+      17629590: {}                           # Spelunking_Sabotender
+  - members:
+      17629237: {}                           # Antican_Signifer
+      17629238: {chance: 15, cooldown: 9000} # Centurio_X-I
+  - members:
+      17629262: {}                           # Sabotender_Bailaor
+      17629264: {chance: 15, cooldown: 9000} # Sabotender_Bailarin
+  - members:
+      17629280: {}                           # Antican_Princeps, Needs captures
+      17629281: {chance: 15, cooldown: 3600} # Antican_Praefectus, Needs captures
+  - members:
+      17629296: {}                            # Antican_Princeps
+      17629301: {chance: 15, cooldown: 14400} # Sagittarius_X-XIII
+  - members:
+      17629409: {}                           # Antican_Hastatus
+      17629412: {chance: 15, cooldown: 3600} # Antican_Magister
+  - members:
+      17629480: {}                           # Antican_Aedilis
+      17629483: {chance: 15, cooldown: 3600} # Antican_Tribunus
+  - members:
+      17629557: {}                           # Antican_Triarius
+      17629561: {chance: 15, cooldown: 3600} # Hastatus_XI-XII
+  - members:
+      17629397: {}                           # Sand_Lizard
+      17629403: {chance: 20, cooldown: 3600} # Nussknacker

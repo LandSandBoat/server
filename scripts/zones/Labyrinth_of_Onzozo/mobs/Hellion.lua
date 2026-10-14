@@ -2,17 +2,10 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Hellion
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 -- Hellion does not spawn near its PHs.
-
-entity.phList =
-{
-    [ID.mob.HELLION + 2] = ID.mob.HELLION, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -5,17 +5,11 @@
 -----------------------------------
 mixins = { require('scripts/mixins/drg_wyvern') }
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REEF]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Draugars_Wyvern')
-end
-
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BLOODY_BONES, 5, 75600) -- 21 hours
 end
 
 return entity

@@ -12,8 +12,4 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, zones[xi.zone.CAEDARVA_MIRE].mob.PEALLAIDH, 5, 3600) -- 1 hour
-end
-
 return entity

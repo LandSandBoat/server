@@ -159,7 +159,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1950
     loot:
@@ -193,7 +193,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1770
     loot:
@@ -617,7 +617,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 2150
     loot:
@@ -2116,3 +2116,12 @@ slots:
       17531116: {} # Giant_Gatekeeper
       17531117: {} # Giant_Guard
       17531120: {} # Giant_Lobber
+  - members:
+      17530881: {chance: 15} # Epialtes
+      17530882: {}           # Giant_Gatekeeper
+  - members:
+      17530999: {chance: 15} # Hippolytos
+      17531001: {}           # Giant_Guard
+  - members:
+      17531114: {chance: 15} # Eurymedon
+      17531118: {}           # Giant_Sentry

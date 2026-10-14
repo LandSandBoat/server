@@ -665,7 +665,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 15600
     loot:
@@ -764,7 +764,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 13500
         mp: 13500
@@ -895,7 +895,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 21000
     loot:
@@ -941,7 +941,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 9400
     loot:
@@ -973,7 +973,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 10500
     loot:
@@ -1008,7 +1008,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 8000
     loot:
@@ -1814,7 +1814,7 @@ spawns:
     region:   n_155
     level:    [70, 73]
   17649818:
-    template: Soulstealer_Skullnix
+    template: Soulstealer_Skullnix # Needs captures
     region:   region_71
     level:    [69, 72]
   17649819:
@@ -1858,7 +1858,7 @@ spawns:
     region:   n_164
     level:    [60, 62]
   17649829:
-    template: Goblin_Alchemist
+    template: Goblin_Alchemist # Needs captures
     region:   n_164
     level:    [66, 69]
   17649830:
@@ -1890,7 +1890,7 @@ spawns:
     region:   n_172
     level:    [66, 69]
   17649837:
-    template: Goblin_Bandit
+    template: Goblin_Bandit # Needs captures
     region:   n_164
     level:    [66, 69]
   17649838:
@@ -2028,14 +2028,16 @@ slots:
       17649738: {} # Cockatrice
       17649739: {} # Mushussu
   - members:
-      17649783: {} # Labyrinth_Manticore
-      17649787: {} # Labyrinth_Manticore
+      17649783: {}                            # Labyrinth_Manticore
+      17649784: {chance: 15, cooldown: 21600} # Narasimha
+      17649787: {}                            # Labyrinth_Manticore
   - members:
       17649789: {} # Torama
       17649790: {} # Labyrinth_Manticore
   - members:
-      17649817: {} # Torama
-      17649820: {} # Torama
+      17649817: {}                           # Torama
+      17649820: {}                           # Torama
+      17649822: {chance: 15, cooldown: 3600} # Ose
   - members:
       17649824: {} # Torama
       17649825: {} # Goblin_Alchemist
@@ -2043,8 +2045,9 @@ slots:
       17649826: {} # Labyrinth_Manticore
       17649827: {} # Wyvern
   - members:
-      17649829: {} # Goblin_Alchemist
-      17649837: {} # Goblin_Bandit
+      17649818: {chance: 15, cooldown: 7200} # Soulstealer_Skullnix, Needs captures
+      17649829: {}                           # Goblin_Alchemist, Needs captures
+      17649837: {}                           # Goblin_Bandit, Needs captures
   - members:
       17649831: {} # Goblin_Bandit
       17649832: {} # Goblin_Shepherd
@@ -2057,3 +2060,12 @@ slots:
       17649842: {} # Goblin_Bandit
       17649843: {} # Goblin_Shepherd
       17649845: {} # Goblin_Mercenary
+  - members:
+      17649730: {}                            # Flying_Manta
+      17649731: {chance: 15, cooldown: 57600} # Lord_of_Onzozo
+  - members:
+      17649760: {}                           # Flying_Manta
+      17649761: {chance: 15, cooldown: 7200} # Peg_Powler
+  - members:
+      17649795: {chance: 15, cooldown: 7200} # Hellion
+      17649797: {}                           # Tainted_Flesh

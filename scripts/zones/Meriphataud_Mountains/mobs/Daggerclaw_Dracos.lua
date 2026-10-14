@@ -2,15 +2,8 @@
 -- Area: Meriphataud Mountains
 --   NM: Daggerclaw Dracos
 -----------------------------------
-local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.DAGGERCLAW_DRACOS - 3] = ID.mob.DAGGERCLAW_DRACOS, -- Confirmed on retail
-}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 268)

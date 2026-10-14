@@ -714,7 +714,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 550
     loot:
@@ -803,7 +803,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 900
     loot:
@@ -1744,8 +1744,9 @@ slots:
       17563793: {} # Boggart
       17563795: {} # Boggart
   - members:
-      17563797: {} # Boggart
-      17563799: {} # Boggart
+      17563797: {}           # Boggart
+      17563799: {}           # Boggart
+      17563801: {chance: 15} # Nocuous_Weapon
   - members:
       17563805: {} # Will-o-the-Wisp
       17563806: {} # Will-o-the-Wisp
@@ -1774,3 +1775,6 @@ slots:
       17563830: {} # Wendigo
   - members:
       17563829: {} # Wendigo
+  - members:
+      17563783: {}                           # Goblin_Leecher
+      17563785: {chance: 15, cooldown: 3600} # Slendlix_Spindlethumb

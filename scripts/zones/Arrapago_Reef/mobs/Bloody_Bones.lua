@@ -6,8 +6,6 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REEF]
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,16 +15,6 @@ local normalTpMoves =
     xi.mobSkill.HORROR_CLOUD,
     xi.mobSkill.BLACK_CLOUD,
     xi.mobSkill.BLOOD_SABER,
-}
-
-entity.spawnPoints =
-{
-    { x =  136.000, y = -6.000, z =  476.000 }
-}
-
-entity.phList =
-{
-    [ID.mob.BLOODY_BONES - 1] = ID.mob.BLOODY_BONES, -- 136.234 -6.831 468.779
 }
 
 entity.onMobInitialize = function(mob)

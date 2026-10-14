@@ -2,16 +2,8 @@
 -- Area: Garlaige Citadel (164)
 --   NM: Hovering Hotpot
 -----------------------------------
-local ID = zones[xi.zone.GARLAIGE_CITADEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.HOVERING_HOTPOT - 4] = ID.mob.HOVERING_HOTPOT, -- Confirmed on retail
-    [ID.mob.HOVERING_HOTPOT - 2] = ID.mob.HOVERING_HOTPOT, -- Confirmed on retail
-}
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 301)

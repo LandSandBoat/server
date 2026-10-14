@@ -939,7 +939,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 630
     loot:
@@ -2473,8 +2473,8 @@ slots:
       17559579: {} # Goblin_Thug
       17559580: {} # Goblin_Weaver
   - members:
-      17559583: {} # Hoarder_Hare
-      17559584: {} # Teporingo
+      17559583: {}                           # Hoarder_Hare
+      17559584: {chance: 20, cooldown: 3600} # Teporingo
   - members:
       17559606: {} # Goblin_Thug
       17559607: {} # Goblin_Weaver

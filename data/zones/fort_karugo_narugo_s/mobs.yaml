@@ -753,7 +753,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 20000
     loot:
@@ -1637,7 +1637,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: common
@@ -2325,7 +2325,7 @@ templates:
         aggressive:     true
         true_detection: true
       spawn:
-        type: [lottery]
+        respawn: 300
     loot:
       drops:
         - chance: uncommon
@@ -5578,3 +5578,14 @@ spawns:
     template: Kalasutrax
     at:       [445.000, -8.428, 170.000, 237]
     level:    [96, 98]
+
+slots:
+  - members:
+      17170472: {}                           # Vorpal_Bunny
+      17170475: {chance: 15, cooldown: 5400} # Ratatoskr
+  - members:
+      17170498: {}                           # Rafflesia
+      17170499: {chance: 15, cooldown: 3600} # Kirtimukha
+  - members:
+      17170565: {}                           # Dragonfly
+      17170569: {chance: 15, cooldown: 3600} # Demoiselle_Desolee

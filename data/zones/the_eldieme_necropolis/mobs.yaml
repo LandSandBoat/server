@@ -116,7 +116,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 14700
     loot:
@@ -3344,3 +3344,6 @@ slots:
   - members:
       17576246: {} # Spriggan
       17576247: {} # Spriggan
+  - members:
+      17576053: {}                           # Tomb_Wolf
+      17576054: {chance: 15, cooldown: 3600} # Cwn_Cyrff

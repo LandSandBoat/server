@@ -863,7 +863,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 180
       stats:
         hp: 335
     loot:
@@ -1340,7 +1340,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 540
     loot:
@@ -3682,3 +3682,12 @@ slots:
   - members:
       17248575: {} # Yagudo_Acolyte
       17248578: {} # Magicked_Bones
+  - members:
+      17248467: {}                           # Mandragora
+      17248468: {chance: 15, cooldown: 3600} # Tom_Tit_Tat
+  - members:
+      17248485: {}                           # Mandragora
+      17248486: {chance: 15, cooldown: 3600} # Tom_Tit_Tat
+  - members:
+      17248516: {}                           # Carrion_Crow
+      17248517: {chance: 15, cooldown: 3600} # Nunyenunc

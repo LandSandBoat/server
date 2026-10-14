@@ -19,7 +19,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 600
       stats:
         hp: 6000
     loot:
@@ -315,7 +315,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 720
       stats:
         hp: 3500
     loot:
@@ -3553,3 +3553,9 @@ slots:
   - members:
       17568118: {} # Goblin_Furrier
       17568120: {} # Goblin_Shaman
+  - members:
+      17567797: {}           # Fly_Agaric
+      17567801: {chance: 15} # Donggu
+  - members:
+      17567897: {}                           # Jelly
+      17567901: {chance: 15, cooldown: 3600} # Agar_Agar

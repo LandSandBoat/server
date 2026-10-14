@@ -2,16 +2,8 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Ose
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.OSE - 5] = ID.mob.OSE, -- Confirmed on retail
-    [ID.mob.OSE - 2] = ID.mob.OSE, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

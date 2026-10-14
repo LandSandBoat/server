@@ -2,15 +2,8 @@
 -- Area: Fei'Yin
 --   NM: Eastern Shadow
 -----------------------------------
-local ID = zones[xi.zone.FEIYIN]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.EASTERN_SHADOW - 1] = ID.mob.EASTERN_SHADOW, -- Confirmed on retail
-}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)

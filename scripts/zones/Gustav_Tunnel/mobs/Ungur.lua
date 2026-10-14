@@ -2,16 +2,8 @@
 -- Area: Gustav Tunnel
 --   NM: Ungur
 -----------------------------------
-local ID = zones[xi.zone.GUSTAV_TUNNEL]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.UNGUR - 1]  = ID.mob.UNGUR, -- Confirmed on retail
-    [ID.mob.UNGUR + 29] = ID.mob.UNGUR, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)

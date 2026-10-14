@@ -2,16 +2,8 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Narasimha
 -----------------------------------
-local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.NARASIMHA - 1] = ID.mob.NARASIMHA, -- Confirmed on retail
-    [ID.mob.NARASIMHA + 3] = ID.mob.NARASIMHA, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

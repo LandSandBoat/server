@@ -392,7 +392,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 4000
     loot:
@@ -1285,7 +1285,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 5500
     loot:
@@ -1675,7 +1675,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 850
     loot:
@@ -4213,3 +4213,12 @@ slots:
   - members:
       17207653: {} # Goblin_Shaman
       17207655: {} # Wight
+  - members:
+      17207449: {}                           # Stalking_Sapling
+      17207476: {chance: 20, cooldown: 3600} # Tottering_Toby
+  - members:
+      17207599: {}                           # Ba
+      17207608: {chance: 20, cooldown: 3600} # Eyegouger
+  - members:
+      17207635: {}                           # Evil_Weapon
+      17207640: {chance: 15, cooldown: 3600} # Prankster_Maverix

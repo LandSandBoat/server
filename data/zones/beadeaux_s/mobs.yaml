@@ -518,7 +518,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
     loot:
       drops:
         - chance: uncommon
@@ -1005,7 +1005,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
     loot:
       drops:
         - chance: uncommon
@@ -1352,7 +1352,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
     loot:
       drops:
         - chance: uncommon
@@ -6205,3 +6205,14 @@ spawns:
   17154755:
     template: Auroral_Alicorn
     level:    [1, 1]
+
+slots:
+  - members:
+      17154068: {}                           # Adaman_Quadav
+      17154069: {chance: 15, cooldown: 7200} # EaTho_Cruelheart
+  - members:
+      17154147: {}                           # Adaman_Quadav
+      17154148: {chance: 15, cooldown: 7200} # BaTho_Mercifulheart
+  - members:
+      17154195: {chance: 15, cooldown: 7200} # DaDha_Hundredmask
+      17154196: {}                           # Gold_Quadav

@@ -1275,7 +1275,7 @@ templates:
         aggressive: true
         links:      true
       spawn:
-        type: [lottery]
+        respawn: 960
       stats:
         hp: 9500
     loot:
@@ -3014,8 +3014,9 @@ slots:
       17436872: {} # Blood_Demon
       17436873: {} # Doom_Demon
   - members:
-      17436878: {} # Doom_Demon
-      17436879: {} # Abyssal_Demon
+      17436878: {}                           # Doom_Demon
+      17436879: {}                           # Abyssal_Demon
+      17436881: {chance: 15, cooldown: 7200} # Marquis_Sabnock
   - members:
       17436882: {} # Doom_Demon
       17436884: {} # Abyssal_Demon

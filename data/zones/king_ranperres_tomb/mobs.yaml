@@ -314,7 +314,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [scripted]
+        respawn: 300
       stats:
         hp: 490
     loot:
@@ -834,7 +834,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 1500
     loot:
@@ -4175,8 +4175,9 @@ slots:
       17555655: {} # Nachzehrer
       17555656: {} # Nachzehrer
   - members:
-      17555661: {} # Nachzehrer
-      17555662: {} # Nachzehrer
+      17555661: {}                           # Nachzehrer
+      17555662: {}                           # Nachzehrer
+      17555664: {chance: 15, cooldown: 3600} # Gwyllgi
   - members:
       17555680: {} # Goblin_Ambusher
       17555681: {} # Goblin_Tinkerer
@@ -4225,3 +4226,6 @@ slots:
   - members:
       17555743: {} # Goblin_Leecher
       17555744: {} # Goblin_Gambler
+  - members:
+      17555667: {}                           # Tomb_Bat
+      17555668: {chance: 15, cooldown: 3600} # Crypt_Ghost

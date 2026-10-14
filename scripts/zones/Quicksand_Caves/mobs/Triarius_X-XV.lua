@@ -4,18 +4,8 @@
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-local ID = zones[xi.zone.QUICKSAND_CAVES]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.TRIARIUS_X_XV + 1]  = ID.mob.TRIARIUS_X_XV, -- Confirmed on retail
-    [ID.mob.TRIARIUS_X_XV + 5]  = ID.mob.TRIARIUS_X_XV, -- Confirmed on retail
-    [ID.mob.TRIARIUS_X_XV + 9]  = ID.mob.TRIARIUS_X_XV, -- Confirmed on retail
-    [ID.mob.TRIARIUS_X_XV + 13] = ID.mob.TRIARIUS_X_XV, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 6000)

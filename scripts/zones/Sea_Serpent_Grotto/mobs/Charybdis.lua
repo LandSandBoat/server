@@ -3,16 +3,8 @@
 --   NM: Charybdis
 -- !pos -152 48 -328 176
 -----------------------------------
-local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
------------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.phList =
-{
-    [ID.mob.CHARYBDIS - 4] = ID.mob.CHARYBDIS, -- Confirmed on retail
-    [ID.mob.CHARYBDIS - 1] = ID.mob.CHARYBDIS, -- Confirmed on retail
-}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MULTI_HIT, 8) -- TODO : This is not correct. Will need to be updated to proper multi-hit handling later.

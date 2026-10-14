@@ -255,7 +255,7 @@ bool CMobEntity::TrySpawn()
     {
         if (spawnSlot)
         {
-            spawnSlot->TrySpawn(std::nullopt, SlotRoll::Boot);
+            spawnSlot->TrySpawn();
             return false;
         }
 
@@ -1441,6 +1441,11 @@ void CMobEntity::Die()
     if (PBattlefield != nullptr)
     {
         PBattlefield->handleDeath(this);
+    }
+
+    if (spawnSlot)
+    {
+        spawnSlot->OnKill(this);
     }
 
     PEnmityContainer->Clear();

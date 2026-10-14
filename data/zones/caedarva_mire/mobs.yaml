@@ -1673,7 +1673,7 @@ templates:
       behaviors:
         links: true
       spawn:
-        type: [lottery]
+        respawn: 300
       stats:
         hp: 14400
     loot:
@@ -4441,3 +4441,6 @@ slots:
   - members:
       17101194: {} # Heraldic_Imp
       17101196: {} # Heraldic_Imp
+  - members:
+      17100873: {}                           # Wild_Karakul
+      17101143: {chance: 15, cooldown: 3600} # Peallaidh
