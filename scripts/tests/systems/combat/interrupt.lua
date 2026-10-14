@@ -10,6 +10,8 @@ describe('Action interrupts', function()
     -- CLuaBaseEntity::getCurrentAction() values
     local actionMagicCasting = 30
     local actionSleep        = 27 -- inactive due to a prevent-action effect
+    local actionAttack       = 1
+    local actionMobSkill     = 34
 
     ---@type CClientEntityPair
     local caster
@@ -133,5 +135,41 @@ describe('Action interrupts', function()
 
         assert(caster:hasStatusEffect(xi.effect.SLEEP_I), 'caster should be asleep')
         assert(caster:getCurrentAction() == actionSleep, 'idle caster should be parked inactive by the poll')
+    end)
+
+    it('does not let a stunned mob swing when its TP move is interrupted', function()
+        target:updateEnmity(caster)
+
+        -- run the swing timer down
+        for _ = 1, 8 do
+            xi.test.world:skipTime(5)
+            xi.test.world:tickEntity(target)
+        end
+
+        assert(target:getCurrentAction() == actionAttack, 'mob should be engaged')
+
+        local swings = 0
+        target:addListener('ATTACK', 'TEST_SWING', function()
+            swings = swings + 1
+        end)
+
+        target:addTP(3000)
+        target:useMobAbility(xi.mobSkill.FOOT_KICK_1, caster, 2000)
+        xi.test.world:tickEntity(target)
+        assert(target:getCurrentAction() == actionMobSkill, 'mob should be readying Foot Kick')
+        target:setAutoAttackEnabled(true)
+
+        target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 60, origin = caster })
+
+        for _ = 1, 4 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(target)
+        end
+
+        target:removeListener('TEST_SWING')
+
+        assert(target:hasStatusEffect(xi.effect.STUN), 'mob should still be stunned')
+        assert(target:getCurrentAction() == actionSleep, 'mob should be inactive')
+        assert(swings == 0, 'mob should not swing while stunned')
     end)
 end)
