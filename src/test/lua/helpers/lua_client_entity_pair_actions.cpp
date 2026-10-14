@@ -49,6 +49,7 @@
 #include "map/packets/c2s/0x036_item_transfer.h"
 #include "map/packets/c2s/0x037_item_use.h"
 #include "map/packets/c2s/0x03a_item_stack.h"
+#include "map/packets/c2s/0x03d_black_edit.h"
 #include "map/packets/c2s/0x051_equipset_set.h"
 #include "map/packets/c2s/0x053_lockstyle.h"
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
@@ -62,6 +63,7 @@
 #include "map/packets/c2s/0x0ac_guild_sell.h"
 #include "map/packets/c2s/0x0ad_guild_selllist.h"
 #include "map/packets/c2s/0x0c4_group_comlink_active.h"
+#include "map/packets/c2s/0x0dc_config.h"
 #include "map/packets/c2s/0x0e0_set_usermsg.h"
 #include "map/packets/c2s/0x0fa_myroom_layout.h"
 #include "map/packets/c2s/0x0fc_myroom_plant_add.h"
@@ -75,6 +77,7 @@
 #include "map/packets/c2s/0x109_bazaar_open.h"
 #include "map/packets/c2s/0x10a_bazaar_itemset.h"
 #include "map/packets/c2s/0x10b_bazaar_close.h"
+#include "map/packets/c2s/0x11c_party_request.h"
 #include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
 #include "test_char.h"
@@ -496,6 +499,122 @@ void CLuaClientEntityPairActions::leaveParty() const
     const auto packet      = parent_->packets().createPacket<GP_CLI_COMMAND_GROUP_LEAVE>();
     auto*      leavePacket = packet->as<GP_CLI_COMMAND_GROUP_LEAVE>();
     leavePacket->Kind      = PartyKind::Party;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: requestParty()
+ *  Purpose : Emits packet to request to join a PC's party.
+ *  Example : player.actions:requestParty(player2)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::requestParty(CLuaBaseEntity* player) const
+{
+    if (!player)
+    {
+        TestError("requestParty: Invalid player");
+        return;
+    }
+
+    const auto packet        = parent_->packets().createPacket<GP_CLI_COMMAND_PARTY_REQUEST>();
+    auto*      requestPacket = packet->as<GP_CLI_COMMAND_PARTY_REQUEST>();
+    requestPacket->UniqueNo  = player->getID();
+    requestPacket->ActIndex  = player->getTargID();
+    requestPacket->Kind      = static_cast<uint8_t>(GP_CLI_COMMAND_PARTY_REQUEST_KIND::Add);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: cancelPartyRequest()
+ *  Purpose : Emits packet to withdraw a request to join a PC's party.
+ *  Example : player.actions:cancelPartyRequest(player2)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::cancelPartyRequest(CLuaBaseEntity* player) const
+{
+    if (!player)
+    {
+        TestError("cancelPartyRequest: Invalid player");
+        return;
+    }
+
+    const auto packet        = parent_->packets().createPacket<GP_CLI_COMMAND_PARTY_REQUEST>();
+    auto*      requestPacket = packet->as<GP_CLI_COMMAND_PARTY_REQUEST>();
+    requestPacket->UniqueNo  = player->getID();
+    requestPacket->ActIndex  = player->getTargID();
+    requestPacket->Kind      = static_cast<uint8_t>(GP_CLI_COMMAND_PARTY_REQUEST_KIND::Remove);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: setAcceptingRequests()
+ *  Purpose : Emits packet to toggle the accepting party requests flag.
+ *  Example : player.actions:setAcceptingRequests(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::setAcceptingRequests(const bool enabled) const
+{
+    const auto packet        = parent_->packets().createPacket<GP_CLI_COMMAND_CONFIG>();
+    auto*      configPacket  = packet->as<GP_CLI_COMMAND_CONFIG>();
+    configPacket->RecruitFlg = 1;
+    configPacket->SetFlg     = static_cast<uint8_t>(GP_CLI_COMMAND_CONFIG_SETFLG::Off);
+    if (enabled)
+    {
+        configPacket->SetFlg = static_cast<uint8_t>(GP_CLI_COMMAND_CONFIG_SETFLG::On);
+    }
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: setSeekingParty()
+ *  Purpose : Emits packet to toggle the seeking party flag.
+ *  Example : player.actions:setSeekingParty(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::setSeekingParty(const bool enabled) const
+{
+    const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_CONFIG>();
+    auto*      configPacket = packet->as<GP_CLI_COMMAND_CONFIG>();
+    configPacket->InviteFlg = 1;
+    configPacket->SetFlg    = static_cast<uint8_t>(GP_CLI_COMMAND_CONFIG_SETFLG::Off);
+    if (enabled)
+    {
+        configPacket->SetFlg = static_cast<uint8_t>(GP_CLI_COMMAND_CONFIG_SETFLG::On);
+    }
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: blacklistAdd()
+ *  Purpose : Emits packet to add a PC to the blacklist.
+ *  Example : player.actions:blacklistAdd(player2)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::blacklistAdd(CLuaBaseEntity* player) const
+{
+    if (!player)
+    {
+        TestError("blacklistAdd: Invalid player");
+        return;
+    }
+
+    const auto packet          = parent_->packets().createPacket<GP_CLI_COMMAND_BLACK_EDIT>();
+    auto*      blacklistPacket = packet->as<GP_CLI_COMMAND_BLACK_EDIT>();
+    const auto name            = player->getName();
+    blacklistPacket->Data.ID   = player->getID();
+    blacklistPacket->Mode      = static_cast<int8_t>(GP_CLI_COMMAND_BLACK_EDIT_MODE::Add);
+
+    std::memcpy(blacklistPacket->Data.Name, name.c_str(), std::min<size_t>(name.size(), sizeof(blacklistPacket->Data.Name) - 1));
 
     parent_->packets().sendBasicPacket(*packet);
 }
@@ -1260,6 +1379,11 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("formAlliance", CLuaClientEntityPairActions::formAlliance);
     SOL_REGISTER("acceptPartyInvite", CLuaClientEntityPairActions::acceptPartyInvite);
     SOL_REGISTER("leaveParty", CLuaClientEntityPairActions::leaveParty);
+    SOL_REGISTER("requestParty", CLuaClientEntityPairActions::requestParty);
+    SOL_REGISTER("cancelPartyRequest", CLuaClientEntityPairActions::cancelPartyRequest);
+    SOL_REGISTER("setAcceptingRequests", CLuaClientEntityPairActions::setAcceptingRequests);
+    SOL_REGISTER("setSeekingParty", CLuaClientEntityPairActions::setSeekingParty);
+    SOL_REGISTER("blacklistAdd", CLuaClientEntityPairActions::blacklistAdd);
     SOL_REGISTER("setLevelSync", CLuaClientEntityPairActions::setLevelSync);
     SOL_REGISTER("tradeNpc", CLuaClientEntityPairActions::tradeNpc);
     SOL_REGISTER("tradeRequest", CLuaClientEntityPairActions::tradeRequest);

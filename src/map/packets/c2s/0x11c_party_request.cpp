@@ -21,21 +21,37 @@
 
 #include "0x11c_party_request.h"
 
+#include "common/ipc_structs.h"
 #include "entities/char_entity.h"
+#include "ipc_client.h"
 #include "packets/c2s/validation.h"
+#include "utils/blacklistutils.h"
 
 auto GP_CLI_COMMAND_PARTY_REQUEST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Not implemented.
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .oneOf<GP_CLI_COMMAND_PARTY_REQUEST_KIND>(this->Kind);
+        .oneOf<GP_CLI_COMMAND_PARTY_REQUEST_KIND>(this->Kind)
+        .mustNotEqual(PChar->id, this->UniqueNo, "Cannot request to join yourself")
+        .mustEqual(PChar->m_PMonstrosity == nullptr, true, "Cannot request while in Monstrosity");
 }
 
 void GP_CLI_COMMAND_PARTY_REQUEST::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    ShowDebugFmt("GP_CLI_COMMAND_PARTY_REQUEST: Not implemented. UniqueNo: {}, ActIndex: {}, Kind: {}",
-                 this->UniqueNo,
-                 this->ActIndex,
-                 this->Kind);
+    // dropped silently
+    if (blacklistutils::IsBlacklisted(this->UniqueNo, PChar->id))
+    {
+        return;
+    }
+
+    // the request list lives on the recipient's client
+    message::send(ipc::PartyRequest{
+        .recipientId     = this->UniqueNo,
+        .requesterId     = PChar->id,
+        .requesterTargId = PChar->targid,
+        .requesterZoneId = PChar->getZone(),
+        .requesterName   = PChar->getName(),
+        .requesterRace   = PChar->look.race,
+        .kind            = this->Kind,
+    });
 }

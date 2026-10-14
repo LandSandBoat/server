@@ -39,6 +39,13 @@
 #include "data_loader.h"
 #include "search.h"
 
+namespace
+{
+
+constexpr uint32 acceptingRequestsFlag = 0x10000000;
+
+} // namespace
+
 CDataLoader::CDataLoader()
 {
 }
@@ -280,6 +287,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
         return PlayersList;
     }
 
+    if (sr.requestListOnly && sr.characterNames.empty())
+    {
+        return PlayersList;
+    }
+
     // Bound as a JSON array for JSON_TABLE; performance is comparable or better than a formatted IN list.
     const auto characterIds = fmt::format("[{}]", fmt::join(sr.characterIds, ","));
 
@@ -340,6 +352,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             SearchEntity player{};
 
             player.name = rset->get<std::string>("charname");
+
+            if (sr.requestListOnly && !std::ranges::contains(sr.characterNames, player.name))
+            {
+                continue;
+            }
 
             player.id       = rset->get<uint32>("charid");
             player.zone     = rset->get<uint16>("pos_zone");
@@ -430,6 +447,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
                 player.flags1 |= 0x20000000;
             }
 
+            if (playerSettings.RecruitFlg)
+            {
+                player.flags1 |= acceptingRequestsFlag;
+            }
+
             player.flags2 = player.flags1;
 
             if (player.mjob == static_cast<uint8>(xi::Job::MON) || player.sjob == static_cast<uint8>(xi::Job::MON))
@@ -516,8 +538,15 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             // filter by flag (away, seek party etc.)
             if (sr.flags != 0)
             {
+                if (sr.flags & acceptingRequestsFlag)
+                {
+                    if (!(player.flags2 & acceptingRequestsFlag))
+                    {
+                        continue;
+                    }
+                }
                 // Check if unity ID is set (bits 22+)
-                if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
+                else if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
                 {
                     if (player.unityLeader != searchUnityId)
                     {

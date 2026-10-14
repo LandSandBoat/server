@@ -98,6 +98,7 @@ public:
     void handleMessage_ChatMessageCustom(const IPP& ipp, const ipc::ChatMessageCustom& message);
     void handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite& message);
     void handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::PartyInviteResponse& message);
+    void handleMessage_PartyRequest(const IPP& ipp, const ipc::PartyRequest& message);
     void handleMessage_PartyReload(const IPP& ipp, const ipc::PartyReload& message);
     void handleMessage_PartyDisband(const IPP& ipp, const ipc::PartyDisband& message);
     void handleMessage_AllianceReload(const IPP& ipp, const ipc::AllianceReload& message);

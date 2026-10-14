@@ -43,4 +43,5 @@ enum class SearchType : uint8_t
     Linkshell2    = 0x13, // 10011
     Flags2        = 0x16, // 10110
     Language      = 0x17, // 10111
+    RequestList   = 0x18, // 11000
 };
