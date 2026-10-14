@@ -1132,10 +1132,10 @@ void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
 
         LoadAutomatonStats(PChar, PAutomaton, g_PPetList.at(petID), mainLevel);
 
-        luautils::callGlobal<void>("xi.pets.automaton.onPetStatCalculate", PMaster, PPet);
-
         if (PAutomaton)
         {
+            luautils::callGlobal<void>("xi.pets.automaton.onPetStatCalculate", PMaster, PAutomaton);
+
             if (dynamic_cast<const CCharEntity*>(PMaster) != nullptr)
             {
                 PPet->addModifier(xi::Mod::ATTP, PChar->PMeritPoints->GetMeritValue(xi::Merit::Optimization, PChar));
