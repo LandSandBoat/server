@@ -39,6 +39,7 @@ GP_SERV_COMMAND_GROUP_ATTR::GP_SERV_COMMAND_GROUP_ATTR(CCharEntity* PChar)
 
     if (PChar->m_PMonstrosity != nullptr)
     {
+        packet.MonstrosityFlag   = 0x8000 | monstrosity::GetDisplaySpecies(PChar);
         packet.MonstrosityNameId = monstrosity::GetPackedMonstrosityName(PChar);
     }
 

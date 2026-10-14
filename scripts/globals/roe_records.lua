@@ -5614,14 +5614,14 @@ xi.roe.records =
         reward = { sparks = 100, exp = 500, accolades = 10 },
     },
 
-    --[[ currently not implemented
     [65] =
     { -- Mons.: Total Monsters Vanquished
-        trigger = ,
+        trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 100,
+        reqs = { mobXP = true, monipulator = true },
         flags = set { 'repeat' },
         reward = { sparks = 1000, exp = 5000, accolades = 100 },
-    }, ]]
+    },
 
     --[[ currently not implemented
     [490] =

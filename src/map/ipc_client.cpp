@@ -32,6 +32,7 @@
 #include "conquest_system.h"
 #include "linkshell.h"
 #include "map_networking.h"
+#include "monstrosity.h"
 #include "party.h"
 #include "status_effect_container.h"
 #include "unitychat.h"
@@ -448,6 +449,7 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
         if (PInvitee->isDead() ||
             jailutils::InPrison(PInvitee) ||
             PInvitee->InvitePending.entity.UniqueNo != 0 ||
+            !monstrosity::CanParty(PInvitee) ||
             (PInvitee->PParty && message.inviteType == PartyKind::Party) ||
             (message.inviteType == PartyKind::Alliance && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || (PInvitee->PParty && PInvitee->PParty->m_PAlliance))))
         {
@@ -507,6 +509,14 @@ void IPCClient::handleMessage_PartyInviteResponse(const IPP& ipp, const ipc::Par
         if (message.inviteAnswer == 0)
         {
             PInviter->pushPacket<GP_SERV_COMMAND_MESSAGE>(PInviter, 0, 0, MsgStd::InvitationDeclined);
+        }
+        else if (!monstrosity::CanParty(PInviter))
+        {
+            // The inviter became a Monipulator while the invite was pending.
+            message::send(ipc::MessageStandard{
+                .recipientId = message.inviteeId,
+                .message     = MsgStd::CannotBeProcessed,
+            });
         }
         else
         {

@@ -34,7 +34,9 @@
 #include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "mobskill.h"
+#include "monstrosity.h"
 #include "packets/s2c/0x028_battle2.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "zone.h"
@@ -151,8 +153,8 @@ void CMobSkillState::SpendCost()
     {
         if (m_tpCostOverride.has_value())
         {
-            // Monstrosity skills each cost a fixed amount rather than the whole TP bar.
-            m_spentTP = m_PEntity->addTP(-m_tpCostOverride.value());
+            // Monstrosity skills each cost a fixed amount rather than the whole TP bar, paid when the skill fires.
+            m_spentTP = m_tpCostOverride.value();
         }
         else if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sekkanoki))
         {
@@ -202,6 +204,29 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
             return true;
         }
 
+        // JP wiki: Meikyo Shisui makes one Monstrosity skill free.
+        if (m_tpCostOverride.has_value() && m_spentTP > 0)
+        {
+            if (m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui))
+            {
+                m_PEntity->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::MeikyoShisui);
+            }
+            else if (m_PEntity->health.tp < m_spentTP)
+            {
+                // Meikyo Shisui wore off during the ready and the TP no longer covers the cost.
+                if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseWeaponskill);
+                }
+
+                return true;
+            }
+            else
+            {
+                m_PEntity->addTP(-m_spentTP);
+            }
+        }
+
         action_t action{};
         m_PEntity->OnMobSkillFinished(*this, action);
 
@@ -220,6 +245,11 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
         {
             m_skillSuccess = true;
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+
+            if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity); PChar && PChar->m_PMonstrosity)
+            {
+                monstrosity::HandleMobSkillFired(PChar, m_PSkill->getID());
+            }
         }
 
         m_finishTime = tick + m_PSkill->getAnimationTime();
@@ -293,6 +323,12 @@ void CMobSkillState::Cleanup(timer::time_point tick)
 
 void CMobSkillState::reduceTpOnInterrupt() const
 {
+    // A fixed-cost skill pays when it fires, so an interrupted one has nothing to give back.
+    if (m_tpCostOverride.has_value())
+    {
+        return;
+    }
+
     if (m_PEntity && m_PEntity->isAlive())
     {
         // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
@@ -313,15 +349,7 @@ void CMobSkillState::reduceTpOnInterrupt() const
                 return static_cast<int16>(std::floor(0.25f * m_spentTP));
             }();
 
-            // A fixed-cost skill only spent its cost, so the rest of the bar survives.
-            if (m_tpCostOverride.has_value())
-            {
-                m_PEntity->health.tp = std::clamp<int16>(m_PEntity->health.tp + refundedTP, 0, 3000);
-            }
-            else
-            {
-                m_PEntity->health.tp = refundedTP;
-            }
+            m_PEntity->health.tp = refundedTP;
         }
     }
 }

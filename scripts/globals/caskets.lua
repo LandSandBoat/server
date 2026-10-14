@@ -565,6 +565,11 @@ end
 -- Desc: Casket spawn checks, runs through all checks before spawning
 -----------------------------------
 xi.caskets.spawnCasket = function(player, mob, x, y, z, r)
+    -- FFXIclopedia: a Monipulator's kills leave no casket. The JP wiki and BG are silent.
+    if player:getMainJob() == xi.job.MON then
+        return
+    end
+
     local chestId    = getCasketID(mob)
     local npc        = GetNPCByID(chestId)
     local chestOwner = player:getLeaderID()

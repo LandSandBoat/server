@@ -1875,7 +1875,7 @@ INSERT INTO `mob_skills` VALUES (1840,1148,'rushing_stab',0,0.0,7.0,2000,1500,4,
 -- INSERT INTO `mob_skills` VALUES (1844,1588,'pit_ambush',0,0.0,11.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1845,1589,'mandibular_bite',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1846,78,'sharp_sting',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1847,79,'frenzy_pollen',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1847,79,'frenzy_pollen',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1848,1592,'final_sting',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1849,1593,'sling_bomb',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1850,1594,'formation_attack',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -3151,11 +3151,11 @@ INSERT INTO `mob_skills` VALUES (3116,206,'bellatrix_of_shadows',0,0.0,7.0,2000,
 -- INSERT INTO `mob_skills` VALUES (3120,202,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3121,203,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3122,204,'',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3123,2867,'fighting_stance_a',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3123,0,'fighting_stance_a',0,0.0,7.0,0,1500,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3124,2868,'fighting_stance_b',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3125,2869,'fighting_stance_g',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3126,2870,'fighting_stance_d',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3127,2267,'frizz',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0); -- basically a spell
+INSERT INTO `mob_skills` VALUES (3127,2267,'frizz',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3128,2268,'astoltian_slime_hit',0,0.0,5.0,2000,0,4,0,0,0,0,0,0); -- not a melee sub exactly, rather a mobskill with no message
 -- INSERT INTO `mob_skills` VALUES (3129,2269,'astoltian_slime_run',0,0.0,7.0,2000,0,4,0,0,0,0,0,0); -- depops mob
 -- INSERT INTO `mob_skills` VALUES (3130,2874,'barreling_smash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

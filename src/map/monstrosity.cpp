@@ -19,18 +19,13 @@
 ===========================================================================
 */
 
-//
-// See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
-//
-
 #include "monstrosity.h"
 
 #include "ai/ai_container.h"
 
 #include "data/datasets/monstrosity/dataset.h"
-#include "data/datasets/zones/settings/dataset.h"
+#include "data/enums/key_item.h"
 #include "data/enums/monstrosity_instinct.h"
-#include "data/loader.h"
 #include "utils/dataset_loader.h"
 
 #include "common/logging.h"
@@ -58,6 +53,7 @@
 
 #include "grades.h"
 #include "merit.h"
+#include "notoriety_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/mobutils.h"
@@ -83,6 +79,9 @@ using MonstrosityDataset = xi::data::datasets::monstrosity::Dataset;
 xi::data::Monstrosity gMonstrosityData{};
 
 // Each family unlocks an instinct at levels 30, 60 and 90, stored as a 2-bit count.
+constexpr auto kLevelsPerInstinct = 30;
+constexpr auto kLevelInstincts    = 3;
+
 void applyLevelInstincts(monstrosity::MonstrosityData_t& data)
 {
     for (const auto& [_, species] : gMonstrosityData.species)
@@ -100,7 +99,7 @@ void applyLevelInstincts(monstrosity::MonstrosityData_t& data)
         }();
 
         const auto shift = (slot * 2) % 8;
-        const auto count = std::min(3, data.levels[family] / 30);
+        const auto count = std::min(kLevelInstincts, data.levels[family] / kLevelsPerInstinct);
         auto&      bits  = data.instincts[slot / 4];
 
         bits = static_cast<uint8>((bits & ~(0x03 << shift)) | (count << shift));
@@ -159,13 +158,91 @@ struct FeretoryExit
 
 // Where leaving the Feretory drops a Monipulator, picked at random per zone. x, y, z, rot.
 constexpr auto kFeretoryExits = std::array{
+    FeretoryExit{ xi::ZoneId::BhaflauThickets, { 308.0f, -19.5f, 378.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::BhaflauThickets, { 375.0f, -12.25f, -47.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::BuburimuPeninsula, { 138.0f, -24.78f, 174.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::BuburimuPeninsula, { 521.0f, 0.0f, 1.0f, 93.0f } },
+    FeretoryExit{ xi::ZoneId::Davoi, { -286.0f, 4.0f, -200.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::EastRonfaure, { 120.0f, 0.5f, -530.0f, 192.0f } },
     FeretoryExit{ xi::ZoneId::EastRonfaure, { 115.0f, -59.684f, 247.0f, 16.0f } },
+    FeretoryExit{ xi::ZoneId::EastRonfaure, { 515.0f, -30.0f, -40.0f, 96.0f } },
+    FeretoryExit{ xi::ZoneId::EastRonfaure, { 760.0f, -60.0f, 400.0f, 128.0f } },
+    FeretoryExit{ xi::ZoneId::PashhowMarshlands, { -483.0f, 25.0f, -318.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::QufimIsland, { -2.0f, -20.001f, 324.0f, 64.0f } },
     FeretoryExit{ xi::ZoneId::QufimIsland, { 161.0f, -20.0f, 37.0f, 192.0f } },
+    FeretoryExit{ xi::ZoneId::QufimIsland, { -258.0f, -19.1f, 402.0f, 64.0f } },
     FeretoryExit{ xi::ZoneId::SouthGustaberg, { -115.0f, -0.136f, -165.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::SouthGustaberg, { -530.0f, 39.3f, -405.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::ValkurmDunes, { 838.0f, 0.0f, -162.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::ValkurmDunes, { -146.0f, -7.61f, 126.0f, 64.0f } },
+    FeretoryExit{ xi::ZoneId::WestRonfaure, { -600.0f, -60.0f, 400.0f, 32.0f } },
+    FeretoryExit{ xi::ZoneId::WestRonfaure, { -120.0f, -20.0f, -120.0f, 112.0f } },
+    FeretoryExit{ xi::ZoneId::WestSarutabaruta, { -320.0f, -16.0f, 440.0f, 0.0f } },
     FeretoryExit{ xi::ZoneId::WesternAltepaDesert, { 685.548f, -1.744f, -50.395f, 128.0f } },
+};
+
+// JP wiki: the Odyssean Passage offers these, by recommended level. The client hides unvisited ones.
+constexpr auto kPassageZones = std::array{
+    xi::ZoneId::WestRonfaure,
+    xi::ZoneId::EastRonfaure,
+    xi::ZoneId::NorthGustaberg,
+    xi::ZoneId::SouthGustaberg,
+    xi::ZoneId::ZeruhnMines,
+    xi::ZoneId::WestSarutabaruta,
+    xi::ZoneId::EastSarutabaruta,
+    xi::ZoneId::InnerHorutotoRuins,
+    xi::ZoneId::KingRanperresTomb,
+    xi::ZoneId::PalboroughMines,
+    xi::ZoneId::Giddeus,
+    xi::ZoneId::GhelsbaOutpost,
+    xi::ZoneId::DangrufWadi,
+    xi::ZoneId::RanguemontPass,
+    xi::ZoneId::TahrongiCanyon,
+    xi::ZoneId::FortGhelsba,
+    xi::ZoneId::YughottGrotto,
+    xi::ZoneId::KonschtatHighlands,
+    xi::ZoneId::LaTheinePlateau,
+    xi::ZoneId::ValkurmDunes,
+    xi::ZoneId::GusgenMines,
+    xi::ZoneId::OrdellesCaves,
+    xi::ZoneId::JugnerForest,
+    xi::ZoneId::PashhowMarshlands,
+    xi::ZoneId::BuburimuPeninsula,
+    xi::ZoneId::MazeOfShakhrami,
+    xi::ZoneId::MeriphataudMountains,
+    xi::ZoneId::CastleOztroja,
+    xi::ZoneId::Davoi,
+    xi::ZoneId::Beadeaux,
+    xi::ZoneId::BatalliaDowns,
+    xi::ZoneId::RolanberryFields,
+    xi::ZoneId::SauromugueChampaign,
+    xi::ZoneId::TheSanctuaryOfZitah,
+    xi::ZoneId::QufimIsland,
+    xi::ZoneId::EasternAltepaDesert,
+    xi::ZoneId::LufaiseMeadows,
+    xi::ZoneId::MisareauxCoast,
+    xi::ZoneId::BeaucedineGlacier,
+    xi::ZoneId::Feiyin,
+    xi::ZoneId::TheEldiemeNecropolis,
+    xi::ZoneId::CrawlersNest,
+    xi::ZoneId::GarlaigeCitadel,
+    xi::ZoneId::WesternAltepaDesert,
+    xi::ZoneId::BehemothsDominion,
+    xi::ZoneId::MonasticCavern,
+    xi::ZoneId::Xarcabard,
+    xi::ZoneId::ToraimaraiCanal,
+    xi::ZoneId::CastleZvahlKeep,
+    xi::ZoneId::CastleZvahlBaileys,
+    xi::ZoneId::BostaunieuxOubliette,
+    xi::ZoneId::UleguerandRange,
+    xi::ZoneId::CaedarvaMire,
+    xi::ZoneId::IfritsCauldron,
+    xi::ZoneId::CapeTeriggan,
+    xi::ZoneId::BhaflauThickets,
+    xi::ZoneId::ValleyOfSorrows,
+    xi::ZoneId::Altaieu,
+    xi::ZoneId::MountZhayolm,
+    xi::ZoneId::TheGardenOfRuhmet,
 };
 
 // Spells a Monipulator cannot cast even when its job knows them.
@@ -208,12 +285,18 @@ constexpr auto kStartingInstincts = std::array{
     xi::MonstrosityInstinct::GalkaI,
 };
 
+// Variants are species codes from 256, purchasable instincts are instinct ids from 768.
+constexpr auto kVariantSpeciesBase    = 256;
+constexpr auto kPurchasedInstinctBase = 768;
+
+// Every change resends the whole inventory, so a client gets one per 250 ms.
+constexpr auto kEquipChangeCooldown = 250ms;
+
 auto isInstinctUnlocked(const monstrosity::MonstrosityData_t& data, const uint16 instinct) -> bool
 {
-    // Purchasable instincts are 768 onwards.
-    if (instinct >= 768)
+    if (instinct >= kPurchasedInstinctBase)
     {
-        const auto idx        = instinct - 768;
+        const auto idx        = instinct - kPurchasedInstinctBase;
         const auto byteOffset = monstrosity::kPurchasedInstinctsOffset + (idx / 8);
         if (byteOffset >= monstrosity::kPurchasedInstinctsOffset + monstrosity::kPurchasedInstinctsBytes)
         {
@@ -236,12 +319,80 @@ auto isVariantUnlocked(const monstrosity::MonstrosityData_t& data, const uint8 v
     return (data.variants[variant / 8] >> (variant % 8)) & 0x01;
 }
 
-// The client allows instincts worth up to the species level plus this.
+// The client allows instincts worth up to the species level plus this, and 20 more per rank.
 constexpr auto kInstinctPointsOverLevel = 10;
+constexpr auto kInstinctPointsPerRank   = 20;
 
 // Infamy stops rising here, higher while Belligerency is flagged.
 constexpr auto kInfamyCap             = 10000;
 constexpr auto kInfamyCapBelligerency = 50000;
+
+// Mon to 10,000 infamy, NM to 20,000, HNM above.
+constexpr auto kInfamyPerRank = 10000;
+constexpr auto kTopRank       = 2;
+
+// Fighting Stance α, which Gnole and Wamouracampa use to change form.
+constexpr auto kFightingStanceSkill = 3123;
+
+// Out-of-combat HP and MP recovery per regen tick, a share of the maximum.
+constexpr auto kIdleRegenPercent = 5;
+
+// Encumbrance II after a gladiator's gear change.
+constexpr auto kAllEquipSlots        = uint16{ 0xFFFF };
+constexpr auto kGladiatorEncumbrance = 10s;
+
+// JP wiki: infamy and prestige are a tenth of the exp.
+constexpr auto kExpPerPoint = 10;
+
+// Rank follows the infamy held, and is Mon outside Belligerency (FFXIclopedia, retail).
+auto rankFor(const monstrosity::MonstrosityData_t& data, const int32 infamy) -> uint8
+{
+    if (!data.Belligerency)
+    {
+        return 0;
+    }
+
+    return static_cast<uint8>(std::clamp((infamy - 1) / kInfamyPerRank, 0, kTopRank));
+}
+
+// TODO: Find the real cap. The client says each gladiator rank caps prestige like infamy, without a figure,
+// so kills stop at the first rank's top and the higher ranks only come from slaying Monipulators.
+constexpr auto kPrestigeCapFromKills = 10000;
+
+// Matches xi.monstrosity.belligerencyCaps.
+constexpr auto kBelligerencyZones = std::array{
+    xi::ZoneId::BuburimuPeninsula,
+    xi::ZoneId::Xarcabard,
+    xi::ZoneId::UleguerandRange,
+};
+
+void gainInfamy(CCharEntity* PChar, const int32 infamy)
+{
+    if (infamy <= 0)
+    {
+        return;
+    }
+
+    const auto cap = [&]() -> int32
+    {
+        if (PChar->m_PMonstrosity->Belligerency)
+        {
+            return kInfamyCapBelligerency;
+        }
+
+        return kInfamyCap;
+    }();
+
+    const auto held         = charutils::GetPoints(PChar, "infamy");
+    const auto previousRank = PChar->m_PMonstrosity->Rank;
+    charutils::SetPoints(PChar, "infamy", std::min(held + infamy, std::max(cap, held)));
+
+    // Crossing into a higher rank announces it.
+    if (PChar->m_PMonstrosity->Rank > previousRank)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
+    }
+}
 
 auto findSpecies(const uint16 speciesCode) -> const xi::data::MonstrositySpecies*
 {
@@ -299,12 +450,122 @@ void delInstinctMods(CCharEntity* PChar, const uint16 instinctId)
     }
 }
 
+void addAllInstinctMods(CCharEntity* PChar)
+{
+    for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+    {
+        addInstinctMods(PChar, instinctId);
+    }
+}
+
+void delAllInstinctMods(CCharEntity* PChar)
+{
+    for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+    {
+        delInstinctMods(PChar, instinctId);
+    }
+}
+
+void addSpeciesMods(CCharEntity* PChar)
+{
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
+    {
+        for (const auto& [mod, value] : species->mods)
+        {
+            PChar->addModifier(mod, value);
+        }
+    }
+}
+
+void delSpeciesMods(CCharEntity* PChar)
+{
+    if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
+    {
+        for (const auto& [mod, value] : species->mods)
+        {
+            PChar->delModifier(mod, value);
+        }
+    }
+}
+
+auto instinctModTotal(const std::array<uint16, 12>& equipped, const xi::Mod mod) -> int32
+{
+    auto total = int32{ 0 };
+    for (const auto instinctId : equipped)
+    {
+        if (const auto* instinct = findInstinct(instinctId))
+        {
+            if (const auto it = instinct->mods.find(mod); it != instinct->mods.end())
+            {
+                total += it->second;
+            }
+        }
+    }
+
+    return total;
+}
+
+auto instinctPointLimit(const CCharEntity* PChar) -> int32
+{
+    const auto& data = *PChar->m_PMonstrosity;
+    return data.levels[data.MonstrosityId] + kInstinctPointsOverLevel + data.Rank * kInstinctPointsPerRank;
+}
+
+// Retail unequips every instinct rather than picking which to drop. Returns whether any were.
+auto unequipInstinctsOverLimit(CCharEntity* PChar) -> bool
+{
+    if (instinctsCost(PChar->m_PMonstrosity->EquippedInstincts) <= instinctPointLimit(PChar))
+    {
+        return false;
+    }
+
+    delAllInstinctMods(PChar);
+    PChar->m_PMonstrosity->EquippedInstincts.fill(0x0000);
+
+    return true;
+}
+
+// JP wiki: timed effects drop on a species change, variants included, and Medicated survives. Permanent effects stay.
+void delAllEffectsButMedicine(CCharEntity* PChar)
+{
+    auto effects = std::vector<xi::StatusEffect>{};
+    PChar->StatusEffectContainer->ForEachEffect(
+        [&](const CStatusEffect& effect)
+        {
+            if (effect.GetStatusID() != xi::StatusEffect::Medicine && effect.GetDuration() > 0s)
+            {
+                effects.push_back(effect.GetStatusID());
+            }
+        });
+
+    for (const auto effect : effects)
+    {
+        PChar->StatusEffectContainer->DelStatusEffectSilent(effect);
+    }
+}
+
 void refreshDerivedState(CCharEntity* PChar)
 {
     if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
         PChar->m_PMonstrosity->Look = species->look;
+
+        // Retail walks most species at twice their movement speed.
+        PChar->baseSpeed      = species->speed.value_or(settings::get<uint8>("map.BASE_SPEED"));
+        PChar->animationSpeed = species->animationSpeed.value_or(static_cast<uint8>(std::min(PChar->baseSpeed * 2, 255)));
+        if (species->hitbox)
+        {
+            PChar->modelHitboxSize = *species->hitbox / 10.0f;
+        }
+        else
+        {
+            charutils::SetRaceHitbox(PChar);
+        }
+
+        PChar->UpdateSpeed();
     }
+
+    PChar->m_PMonstrosity->Rank = rankFor(*PChar->m_PMonstrosity, charutils::GetPoints(PChar, "infamy"));
 
     charutils::BuildingCharTraitsTable(PChar);
     applyLevelInstincts(*PChar->m_PMonstrosity);
@@ -378,6 +639,68 @@ void sendSpeciesChangePackets(CCharEntity* PChar, const bool familyChanged)
     PChar->updatemask |= UPDATE_ALL_CHAR;
 }
 
+// Returns whether the family changed, or nothing when the species cannot be taken.
+auto changeSpecies(CCharEntity* PChar, const uint16 speciesCode) -> Maybe<bool>
+{
+    // Picking the current species again would only strip buffs.
+    if (speciesCode == PChar->m_PMonstrosity->Species)
+    {
+        return std::nullopt;
+    }
+
+    const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
+
+    const auto* species = findSpecies(speciesCode);
+    if (species == nullptr)
+    {
+        return std::nullopt;
+    }
+
+    if (PChar->m_PMonstrosity->levels[species->monstrosityId] == 0)
+    {
+        return std::nullopt;
+    }
+
+    if (speciesCode >= kVariantSpeciesBase && !isVariantUnlocked(*PChar->m_PMonstrosity, speciesCode - kVariantSpeciesBase))
+    {
+        return std::nullopt;
+    }
+
+    delSpeciesMods(PChar);
+    PChar->m_PMonstrosity->Species       = speciesCode;
+    PChar->m_PMonstrosity->StanceSpecies = 0;
+    addSpeciesMods(PChar);
+
+    PChar->m_PMonstrosity->MonstrosityId = species->monstrosityId;
+    PChar->m_PMonstrosity->MainJob       = species->mjob;
+    PChar->m_PMonstrosity->SubJob        = species->sjob;
+    PChar->m_PMonstrosity->Size          = species->size;
+
+    const auto familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
+    if (familyChanged)
+    {
+        applySpeciesState(PChar);
+
+        // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
+        PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
+
+        // Retail keeps instincts equipped across species, unless the new level cannot afford them.
+        std::ignore = unequipInstinctsOverLimit(PChar);
+    }
+
+    // JP wiki: Teyrnon's buffs are lost on a species change.
+    delAllEffectsButMedicine(PChar);
+
+    // Every species, variants included, brings its own jobs and stats.
+    charutils::BuildingCharSkillsTable(PChar);
+    charutils::CalculateStats(PChar);
+    charutils::BuildingCharAbilityTable(PChar);
+    charutils::CheckUnarmedWeapon(PChar);
+    PChar->UpdateHealth();
+
+    return familyChanged;
+}
+
 void sendInstinctChangePackets(CCharEntity* PChar)
 {
     refreshDerivedState(PChar);
@@ -401,20 +724,20 @@ void sendInstinctChangePackets(CCharEntity* PChar)
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
-: MonstrosityId(0x01)   // Rabbit
-, Species(0x0001)       // Rabbit
-, Flags(0x0B44)         // ?
-, Look(0x010C)          // Rabbit
-, Size(0x00)            // Size (0: Small, 1: Medium, 2: Large)
-, NamePrefix1(0x00)     // Nothing
-, NamePrefix2(0x00)     // Nothing
-, MainJob(xi::Job::WAR) //
-, SubJob(xi::Job::WAR)  //
-, CurrentExp(0)         // No exp
-, Belligerency(false)   //
-, EntryZoneId(0)        //
-, EntryMainJob(0)       //
-, EntrySubJob(0)        //
+: MonstrosityId(0x01) // Rabbit
+, Species(0x0001)     // Rabbit
+, Flags(0x0B44)       // TODO: Unknown flags
+, Look(0x010C)        // Rabbit
+, Size(0x00)          // Small
+, NamePrefix1(0x00)
+, NamePrefix2(0x00)
+, MainJob(xi::Job::WAR)
+, SubJob(xi::Job::WAR)
+, CurrentExp(0)
+, Belligerency(false)
+, EntryZoneId(0)
+, EntryMainJob(0)
+, EntrySubJob(0)
 {
     for (const auto family : kStartingSpecies)
     {
@@ -593,7 +916,7 @@ void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 
         applySpeciesState(PChar);
 
-        // This handles !monstrosity GM command, is this needed?
+        // TODO: Is this write still needed for !monstrosity?
         WriteMonstrosityData(PChar);
     }
 }
@@ -605,16 +928,14 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
     {
         if (PChar->m_PMonstrosity != nullptr)
         {
-            for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
-            {
-                delInstinctMods(PChar, instinctId);
-            }
-
+            delAllInstinctMods(PChar);
+            delSpeciesMods(PChar);
             PChar->m_PMonstrosity = nullptr;
             PChar->m_EcoSystem    = xi::Ecosystem::Humanoid;
-
-            // A party of Monipulators has no room for an adventurer.
-            charutils::LeaveParty(PChar);
+            PChar->baseSpeed      = settings::get<uint8>("map.BASE_SPEED");
+            PChar->animationSpeed = static_cast<uint8>(std::clamp(PChar->baseSpeed / settings::get<float>("map.ANIMATION_SPEED_DIVISOR"), 0.0f, 255.0f));
+            charutils::SetRaceHitbox(PChar);
+            PChar->UpdateSpeed();
         }
 
         return;
@@ -633,11 +954,8 @@ void monstrosity::HandleJobChange(CCharEntity* PChar, const xi::Job newJob)
 
     // JP wiki: entering Monstrosity leaves any party.
     charutils::LeaveParty(PChar);
-
-    for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
-    {
-        addInstinctMods(PChar, instinctId);
-    }
+    addAllInstinctMods(PChar);
+    addSpeciesMods(PChar);
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
@@ -652,14 +970,10 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         return;
     }
 
-    for (const auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
-    {
-        addInstinctMods(PChar, instinctId);
-    }
+    addAllInstinctMods(PChar);
+    addSpeciesMods(PChar);
 
-    // NOTE: Whenever you log in as a MON, you'll have Gestation - even if you've previously clicked it off.
-    // TODO: Check this is true in Belligerency.
-    // TODO: There are more conditions to handle here?
+    // TODO: Does logging in outside the Feretory give Gestation again after it was clicked off? And under Belligerency?
     if (PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
     {
         const auto duration = [&]() -> timer::duration
@@ -684,7 +998,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
             xi::StatusEffect::Gestation,
             static_cast<uint16>(xi::StatusEffect::Gestation),
             0,
-            0s,
+            10s, // Ticks so the effect can warn 10 s before it ends.
             duration,
             0,
             0,
@@ -699,6 +1013,16 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     PChar->updatemask |= UPDATE_LOOK;
 }
 
+auto monstrosity::GetDisplaySpecies(const CCharEntity* PChar) -> uint16
+{
+    if (PChar->m_PMonstrosity->StanceSpecies != 0)
+    {
+        return PChar->m_PMonstrosity->StanceSpecies;
+    }
+
+    return PChar->m_PMonstrosity->Species;
+}
+
 auto monstrosity::GetPackedMonstrosityName(const CCharEntity* PChar) -> uint32
 {
     if (PChar->m_PMonstrosity == nullptr)
@@ -708,11 +1032,10 @@ auto monstrosity::GetPackedMonstrosityName(const CCharEntity* PChar) -> uint32
 
     // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
     //     : This looks to be a quirk of the client and not intended.
-    const auto a = static_cast<uint16>(0x8000 | PChar->m_PMonstrosity->Species);
+    const auto a = static_cast<uint16>(0x8000 | GetDisplaySpecies(PChar));
     const auto b = PChar->m_PMonstrosity->NamePrefix1;
     const auto c = PChar->m_PMonstrosity->NamePrefix2;
 
-    // Packed as LE
     return (c << 24) + (b << 16) + (a << 0);
 }
 
@@ -769,16 +1092,67 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
         skills,
         [&](const xi::data::MonstrosityTpSkill& entry)
         {
-            return entry.datSkillId == data.MonsterSkill.SkillId && entry.unlockLevel <= level;
+            return entry.enabled && entry.datSkillId == data.MonsterSkill.SkillId && entry.unlockLevel <= level;
         });
 
-    if (skill == skills.end() || PChar->health.tp < skill->tpCost)
+    if (skill == skills.end())
     {
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
         return;
     }
 
-    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, std::nullopt, skill->tpCost);
+    // Meikyo Shisui pays for the move when it fires.
+    const auto meikyo = PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui);
+    if (PChar->health.tp < skill->tpCost && !meikyo)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        return;
+    }
+
+    PChar->PAI->Internal_MobSkill(EntityId(PChar->GetEntity(data.ActIndex)), skill->mobSkillId, skill->readyTime, skill->tpCost);
+}
+
+// Retail redraws the model for Fighting Stance.
+void monstrosity::HandleMobSkillFired(CCharEntity* PChar, const uint16 mobSkillId)
+{
+    if (mobSkillId != kFightingStanceSkill)
+    {
+        return;
+    }
+
+    const auto* species = findSpecies(PChar->m_PMonstrosity->Species);
+    if (species == nullptr || !species->stanceSpecies)
+    {
+        return;
+    }
+
+    auto& stance = PChar->m_PMonstrosity->StanceSpecies;
+    stance       = [&]() -> uint16
+    {
+        if (stance != 0)
+        {
+            return 0;
+        }
+
+        return *species->stanceSpecies;
+    }();
+
+    PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+    PChar->pushPacket<CCharStatusPacket>(PChar);
+    PChar->updatemask |= UPDATE_LOOK;
+}
+
+void monstrosity::ChangeSpecies(CCharEntity* PChar, const uint16 speciesCode)
+{
+    const auto familyChanged = changeSpecies(PChar, speciesCode);
+    if (!familyChanged)
+    {
+        return;
+    }
+
+    WriteMonstrosityData(PChar);
+    sendSpeciesChangePackets(PChar, *familyChanged);
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& data)
@@ -788,80 +1162,21 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         return;
     }
 
-    // Every change resends the whole inventory, so a client gets one per 250 ms.
     const auto now = timer::now();
-    if (now < PChar->m_PMonstrosity->LastEquipChange + 250ms)
+    if (now < PChar->m_PMonstrosity->LastEquipChange + kEquipChangeCooldown)
     {
         return;
     }
 
     PChar->m_PMonstrosity->LastEquipChange = now;
 
-    auto familyChanged = false;
-
     if (data.Flags0.SpeciesFlag)
     {
-        const auto previousId = PChar->m_PMonstrosity->MonstrosityId;
-
-        const auto* species = findSpecies(data.SpeciesIndex);
-        if (species == nullptr)
-        {
-            return;
-        }
-
-        const auto& speciesData = *species;
-        if (PChar->m_PMonstrosity->levels[speciesData.monstrosityId] == 0)
-        {
-            return;
-        }
-
-        // Variants are species 256 and up.
-        if (data.SpeciesIndex >= 256 && !isVariantUnlocked(*PChar->m_PMonstrosity, data.SpeciesIndex - 256))
-        {
-            return;
-        }
-
-        PChar->m_PMonstrosity->Species = data.SpeciesIndex;
-
-        PChar->m_PMonstrosity->MonstrosityId = speciesData.monstrosityId;
-        PChar->m_PMonstrosity->MainJob       = speciesData.mjob;
-        PChar->m_PMonstrosity->SubJob        = speciesData.sjob;
-        PChar->m_PMonstrosity->Size          = speciesData.size;
-
-        familyChanged = PChar->m_PMonstrosity->MonstrosityId != previousId;
-        if (familyChanged)
-        {
-            const auto newMonLvl = PChar->m_PMonstrosity->levels[speciesData.monstrosityId];
-
-            applySpeciesState(PChar);
-
-            // JP wiki: a new family starts from zero exp, and switching back does not restore it. A variant keeps it.
-            PChar->jobs.exp[static_cast<uint8>(xi::Job::MON)] = 0;
-
-            // Retail keeps instincts equipped across species, unless the new level cannot afford them.
-            if (instinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > newMonLvl + kInstinctPointsOverLevel)
-            {
-                for (auto& slot : PChar->m_PMonstrosity->EquippedInstincts)
-                {
-                    delInstinctMods(PChar, slot);
-                    slot = 0x0000;
-                }
-            }
-
-            if (!settings::get<bool>("main.MONSTROSITY_DONT_WIPE_BUFFS"))
-            {
-                PChar->StatusEffectContainer->EraseAllStatusEffect();
-            }
-        }
-
-        // Every species, variants included, brings its own jobs and stats.
-        charutils::BuildingCharSkillsTable(PChar);
-        charutils::CalculateStats(PChar);
-        charutils::BuildingCharAbilityTable(PChar);
-        charutils::CheckUnarmedWeapon(PChar);
-        PChar->UpdateHealth();
+        ChangeSpecies(PChar, data.SpeciesIndex);
+        return;
     }
-    else if (data.Flags0.InstinctFlag)
+
+    if (data.Flags0.InstinctFlag)
     {
         const auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
         auto       equipped         = previousEquipped;
@@ -883,22 +1198,15 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
             }
         }
 
-        const auto containsDuplicates = [](const std::array<uint16, 12>& slots) -> bool
+        const auto containsDuplicates = [](std::array<uint16, 12> slots) -> bool
         {
-            auto seen = std::unordered_set<uint16>{};
-            for (const auto instinctId : slots)
-            {
-                if (instinctId != 0 && !seen.insert(instinctId).second)
-                {
-                    return true;
-                }
-            }
+            std::ranges::sort(slots);
+            const auto first = std::ranges::upper_bound(slots, uint16{ 0 });
 
-            return false;
+            return std::ranges::adjacent_find(first, slots.end()) != slots.end();
         };
 
-        const auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + kInstinctPointsOverLevel;
-        if (equipped == previousEquipped || instinctsCost(equipped) > maxPoints || containsDuplicates(equipped))
+        if (equipped == previousEquipped || instinctsCost(equipped) > instinctPointLimit(PChar) || containsDuplicates(equipped))
         {
             return;
         }
@@ -915,6 +1223,10 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
         }
 
         PChar->m_PMonstrosity->EquippedInstincts = equipped;
+
+        // Instinct HP is scaled by the species.
+        charutils::CalculateStats(PChar);
+        PChar->UpdateHealth();
     }
     else if (data.Flags0.Descriptor1Flag)
     {
@@ -926,15 +1238,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
     }
 
     WriteMonstrosityData(PChar);
-
-    if (data.Flags0.SpeciesFlag)
-    {
-        sendSpeciesChangePackets(PChar, familyChanged);
-    }
-    else
-    {
-        sendInstinctChangePackets(PChar);
-    }
+    sendInstinctChangePackets(PChar);
 }
 
 // Stats sit one under the mob formula, the closest fit to retail.
@@ -954,24 +1258,46 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
         return std::min(PChar->PMeritPoints->GetMeritValue(merit, PChar), (level / 10) * perStep);
     };
 
-    const auto baseHP   = mobutils::MonipulatorBaseHP(data.MainJob, data.SubJob, level) + cappedMerit(xi::Merit::MaxHp, 10);
-    PChar->health.maxhp = static_cast<int32>(species->hpScale * baseHP / 100);
+    // The species scale covers instinct HP too, which UpdateHealth then adds unscaled, so it comes off here.
+    const auto instinctHP = instinctModTotal(data.EquippedInstincts, xi::Mod::HP);
 
-    // Retail MP comes from a mage sub job.
-    // TODO: Verify WHM MP. RDM borrows it. PLD and DRK subs and mage main jobs are unverified.
-    const auto baseMP = [&]() -> int32
+    const auto baseHP   = mobutils::MonipulatorBaseHP(species->hpMjob, species->hpSjob, level) + cappedMerit(xi::Merit::MaxHp, 10);
+    PChar->health.maxhp = static_cast<int32>(species->hpScale * (baseHP + instinctHP) / 100) - instinctHP;
+
+    // Retail MP comes from a BLM or PLD main job, or a mage or PLD sub job.
+    // TODO: DRK subs and WHM or RDM main jobs are unverified. The PLD split is fit at level 30 only.
+    const auto mainMP = [&]() -> int32
+    {
+        switch (data.MainJob)
+        {
+            // Metal Slime and Spriggan.G, levels 1-10.
+            case xi::Job::BLM:
+                return 35 * level + 59;
+            case xi::Job::PLD:
+                return 17 * level;
+            default:
+                return 0;
+        }
+    }();
+
+    const auto subMP = [&]() -> int32
     {
         switch (data.SubJob)
         {
             case xi::Job::BLM:
                 return (35 * level + 59) / 2;
             case xi::Job::WHM:
-            case xi::Job::RDM:
                 return (34 * level + 58) / 2;
+            case xi::Job::RDM:
+                return (33 * level + 57) / 2;
+            case xi::Job::PLD:
+                return (29 * level + 115) / 2;
             default:
                 return 0;
         }
     }();
+
+    const auto baseMP = mainMP + subMP;
 
     PChar->health.maxmp = baseMP;
     if (baseMP > 0)
@@ -979,16 +1305,24 @@ void monstrosity::CalculateStats(CCharEntity* PChar)
         PChar->health.maxmp += cappedMerit(xi::Merit::MaxMp, 10);
     }
 
-    if (!species->mobSpecies)
+    if (!species->statRanks && !species->mobSpecies)
     {
         return;
     }
 
-    const auto& ranks = mobutils::GetSpeciesData(*species->mobSpecies).MobAttributes.Stats;
+    const auto familyRanks = [&]() -> std::array<xi::StatRank, 7>
+    {
+        if (species->statRanks)
+        {
+            return *species->statRanks;
+        }
 
-    const auto     familyRanks = std::array{ ranks.Str, ranks.Dex, ranks.Vit, ranks.Agi, ranks.Int, ranks.Mnd, ranks.Chr };
-    constexpr auto statMerits  = std::array{ xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
-    auto           values      = std::array<uint16, 7>{};
+        const auto& ranks = mobutils::GetSpeciesData(*species->mobSpecies).MobAttributes.Stats;
+        return { ranks.Str, ranks.Dex, ranks.Vit, ranks.Agi, ranks.Int, ranks.Mnd, ranks.Chr };
+    }();
+
+    constexpr auto statMerits = std::array{ xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
+    auto           values     = std::array<uint16, 7>{};
 
     for (std::size_t idx = 0; idx < values.size(); ++idx)
     {
@@ -1025,6 +1359,29 @@ auto monstrosity::AsMonipulator(const CBattleEntity* PEntity) -> const CCharEnti
     return PChar;
 }
 
+// FFXIclopedia: pets and Trusts follow their master.
+// TODO: FFXIclopedia says an adventurer's Healing Waltz still reaches a Monipulator.
+// TODO: Only player targets come through here, so a Monipulator can still cure or buff an adventurer's pet or Trust.
+auto monstrosity::CanAssist(const CBattleEntity* PInitiator, const CCharEntity* PTarget) -> bool
+{
+    const auto* PSource = [&]() -> const CBattleEntity*
+    {
+        if (PInitiator->PMaster != nullptr)
+        {
+            return PInitiator->PMaster;
+        }
+
+        return PInitiator;
+    }();
+
+    if (PSource->objtype != TYPE_PC)
+    {
+        return true;
+    }
+
+    return (static_cast<const CCharEntity*>(PSource)->m_PMonstrosity != nullptr) == (PTarget->m_PMonstrosity != nullptr);
+}
+
 auto monstrosity::GetSpeciesJobs(const CCharEntity* PChar) -> SpeciesJobs
 {
     const auto& data = *PChar->m_PMonstrosity;
@@ -1054,23 +1411,138 @@ auto monstrosity::GetWeaponDelay(const CCharEntity* PChar) -> uint16
 // Infamy already held above the cap is never taken away.
 void monstrosity::AddInfamy(CCharEntity* PChar, const uint32 exp)
 {
-    const auto infamy = static_cast<int32>(exp * settings::get<float>("main.MONSTROSITY_INFAMY_RATE"));
-    if (infamy <= 0)
+    gainInfamy(PChar, static_cast<int32>(exp / kExpPerPoint));
+}
+
+auto monstrosity::IsGladiatorInBelligerency(const CCharEntity* PChar) -> bool
+{
+    // A Monipulator can carry the writ in from its adventurer days.
+    return PChar->m_PMonstrosity == nullptr &&
+           charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons) &&
+           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+}
+
+auto monstrosity::IsMonipulatorInBelligerency(const CCharEntity* PChar) -> bool
+{
+    return PChar->m_PMonstrosity != nullptr &&
+           PChar->m_PMonstrosity->Belligerency &&
+           std::ranges::contains(kBelligerencyZones, PChar->loc.zone->GetID());
+}
+
+// Retail: neither side can act on the other until the Monipulator flags Belligerency, and Gestation shields both.
+// TODO: Pets and Trusts still follow their master's allegiance, so they stay out of the fight.
+auto monstrosity::AreBelligerents(const CBattleEntity* PFirst, const CBattleEntity* PSecond) -> bool
+{
+    if (PFirst->objtype != TYPE_PC || PSecond->objtype != TYPE_PC)
+    {
+        return false;
+    }
+
+    const auto* PFirstChar  = static_cast<const CCharEntity*>(PFirst);
+    const auto* PSecondChar = static_cast<const CCharEntity*>(PSecond);
+    if (PFirstChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Gestation) ||
+        PSecondChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Gestation))
+    {
+        return false;
+    }
+
+    return (IsMonipulatorInBelligerency(PFirstChar) && IsGladiatorInBelligerency(PSecondChar)) ||
+           (IsGladiatorInBelligerency(PFirstChar) && IsMonipulatorInBelligerency(PSecondChar));
+}
+
+// JP wiki: the loser forfeits a tenth of its points, and the winner's party splits up to a fifth more, capped at twice
+// what the winner holds. Retail matches: a Monipulator holding 616 infamy lost only 61 to a gladiator without prestige.
+// TODO: The gladiator's treasure casket.
+void monstrosity::HandleBelligerentDefeat(CCharEntity* PLoser, CCharEntity* PWinner)
+{
+    if (!AreBelligerents(PWinner, PLoser))
     {
         return;
     }
 
-    const auto cap = [&]() -> int32
+    const auto currencyOf = [](const CCharEntity* PChar) -> const char*
     {
-        if (PChar->m_PMonstrosity->Belligerency)
+        if (PChar->m_PMonstrosity != nullptr)
         {
-            return kInfamyCapBelligerency;
+            return "infamy";
         }
 
-        return kInfamyCap;
-    }();
+        return "prestige";
+    };
 
-    charutils::AddPoints(PChar, "infamy", infamy, std::max(cap, charutils::GetPoints(PChar, "infamy")));
+    const auto* loserCurrency = currencyOf(PLoser);
+    const auto  loserHeld     = charutils::GetPoints(PLoser, loserCurrency);
+    const auto  spoils        = std::min(loserHeld / 5, charutils::GetPoints(PWinner, currencyOf(PWinner)) * 2);
+    charutils::SetPoints(PLoser, loserCurrency, loserHeld - loserHeld / 10 - spoils);
+
+    // Every member counts towards the split, but only those fighting the loser collect.
+    auto members = std::vector<CCharEntity*>{};
+    PWinner->ForAlliance(
+        [&](CBattleEntity* PMember)
+        {
+            members.emplace_back(static_cast<CCharEntity*>(PMember));
+        });
+
+    const auto share = spoils / static_cast<int32>(members.size());
+    for (auto* PMember : members)
+    {
+        if (PMember->loc.zone != PLoser->loc.zone || !AreBelligerents(PMember, PLoser))
+        {
+            continue;
+        }
+
+        if (PMember->m_PMonstrosity != nullptr)
+        {
+            gainInfamy(PMember, share);
+            continue;
+        }
+
+        charutils::SetPoints(PMember, "prestige", charutils::GetPoints(PMember, "prestige") + share);
+    }
+}
+
+// Retail locks every slot for 10 s after a gladiator changes gear in a Belligerency zone.
+void monstrosity::HandleGladiatorGearChange(CCharEntity* PChar)
+{
+    if (!IsGladiatorInBelligerency(PChar) || PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::EncumbranceIi))
+    {
+        return;
+    }
+
+    PChar->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::EncumbranceIi, static_cast<uint16>(xi::StatusEffect::EncumbranceIi), kAllEquipSlots, 0s, kGladiatorEncumbrance);
+}
+
+// JP wiki: a gladiator earns prestige from kills in the Belligerency zones.
+void monstrosity::AddPrestige(CCharEntity* PChar, const uint32 exp)
+{
+    if (!IsGladiatorInBelligerency(PChar))
+    {
+        return;
+    }
+
+    const auto prestige = static_cast<int32>(exp / kExpPerPoint);
+    if (prestige <= 0)
+    {
+        return;
+    }
+
+    const auto held = charutils::GetPoints(PChar, "prestige");
+    charutils::SetPoints(PChar, "prestige", std::min(held + prestige, std::max(kPrestigeCapFromKills, held)));
+}
+
+// JP wiki: a Monipulator recovers HP and MP out of combat, even while moving. Slip damage stops it.
+// TODO: Retail trickles 3% every 10 s for a while after a fight first. What ends it?
+void monstrosity::ApplyIdleRegen(CCharEntity* PChar)
+{
+    if (PChar->PAI->IsEngaged() ||
+        PChar->PNotorietyContainer->hasEnmity() ||
+        PChar->getMod(xi::Mod::REGEN_DOWN) > 0)
+    {
+        return;
+    }
+
+    PChar->addHP(PChar->GetMaxHP() * kIdleRegenPercent / 100);
+    PChar->addMP(PChar->GetMaxMP() * kIdleRegenPercent / 100);
 }
 
 // Delay per hit. MNK species swing twice a round.
@@ -1128,6 +1600,7 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 32, 0, MsgBasic::PossessNewMonster);
     }
 
+    // The client shows its lightbulb on this message. Retail sends it for moves we have yet to enable too.
     if (const auto* species = findSpecies(PChar->m_PMonstrosity->Species))
     {
         for (const auto& skill : species->tpSkills)
@@ -1137,6 +1610,13 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skill.mobSkillId, 0, MsgBasic::LearnsAbility);
             }
         }
+    }
+
+    // Each family teaches an instinct at 30, 60 and 90.
+    if (mLvl % kLevelsPerInstinct == 0 && mLvl <= kLevelsPerInstinct * kLevelInstincts)
+    {
+        applyLevelInstincts(*PChar->m_PMonstrosity);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnedNewInstinct);
     }
 
     WriteMonstrosityData(PChar);
@@ -1190,14 +1670,13 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
 
         PChar->clearPacketList();
 
-        // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
 
         PChar->requestedZoneChange = true;
     }
 }
 
-void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
+void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, const bool flag)
 {
     if (PChar->m_PMonstrosity == nullptr)
     {
@@ -1205,8 +1684,32 @@ void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
     }
 
     PChar->m_PMonstrosity->Belligerency = flag;
+    UpdateRank(PChar, charutils::GetPoints(PChar, "infamy"));
 
     WriteMonstrosityData(PChar);
+}
+
+void monstrosity::UpdateRank(CCharEntity* PChar, const int32 infamy)
+{
+    const auto rank = rankFor(*PChar->m_PMonstrosity, infamy);
+    if (rank == PChar->m_PMonstrosity->Rank)
+    {
+        return;
+    }
+
+    PChar->m_PMonstrosity->Rank = rank;
+
+    // A lower rank affords fewer instinct points.
+    if (unequipInstinctsOverLimit(PChar))
+    {
+        WriteMonstrosityData(PChar);
+        charutils::CalculateStats(PChar);
+        PChar->UpdateHealth();
+        sendInstinctChangePackets(PChar);
+        return;
+    }
+
+    PChar->pushPacket<CCharStatusPacket>(PChar);
 }
 
 auto monstrosity::GetExpNEXTLevel(const uint8 level) -> uint32
@@ -1243,62 +1746,15 @@ auto monstrosity::ListsSpell(const CCharEntity* PChar, CSpell* PSpell) -> bool
     return level >= PSpell->getJob(data.SubJob) && !(PSpell->getRequirements() & SPELLREQ_MAIN_JOB_ONLY);
 }
 
-// JP wiki: a Monipulator cannot party. The setting allows parties of Monipulators only.
-auto monstrosity::CanPartyWith(const CCharEntity* PChar, const uint32 otherCharId) -> bool
+// JP wiki: a Monipulator cannot party.
+auto monstrosity::CanParty(const CCharEntity* PChar) -> bool
 {
-    // With the setting off, the Monipulator's side refuses for itself.
-    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
-    {
-        return PChar->m_PMonstrosity == nullptr;
-    }
-
-    // The saved job also covers a character on another process.
-    const auto rset = db::preparedStmt("SELECT mjob FROM char_stats WHERE charid = ? LIMIT 1", otherCharId);
-    if (!rset || !rset->next())
-    {
-        return false;
-    }
-
-    const auto otherIsMonipulator = rset->get<uint8>("mjob") == static_cast<uint8>(xi::Job::MON);
-
-    return otherIsMonipulator == (PChar->m_PMonstrosity != nullptr);
+    return PChar->m_PMonstrosity == nullptr;
 }
 
-auto monstrosity::CanStayInParty(const CCharEntity* PChar, const uint32 partyId) -> bool
-{
-    if (!settings::get<bool>("main.MONSTROSITY_PARTIES"))
-    {
-        return false;
-    }
-
-    const auto rset = db::preparedStmt("SELECT COUNT(*) AS adventurers "
-                                       "FROM accounts_parties p JOIN char_stats s ON p.charid = s.charid "
-                                       "WHERE p.partyid = ? AND p.charid != ? AND s.mjob != ?",
-                                       partyId,
-                                       PChar->id,
-                                       static_cast<uint8>(xi::Job::MON));
-
-    return rset && rset->next() && rset->get<uint32>("adventurers") == 0;
-}
-
-// Monipulators travel to field and dungeon zones, never towns, Dynamis or instances.
 auto monstrosity::IsPassageZone(const xi::ZoneId zoneId) -> bool
 {
-    const auto settings = xi::data::loadZoneFile<xi::data::datasets::zones::settings::Dataset>(zoneId);
-    if (!settings)
-    {
-        return false;
-    }
-
-    const auto has = [&](const xi::ZoneType type) -> bool
-    {
-        return (settings->Type & type) != xi::ZoneType::Unknown;
-    };
-
-    return (has(xi::ZoneType::Outdoors) || has(xi::ZoneType::Dungeon)) &&
-           !has(xi::ZoneType::City) &&
-           !has(xi::ZoneType::Dynamis) &&
-           !has(xi::ZoneType::Instanced);
+    return std::ranges::contains(kPassageZones, zoneId);
 }
 
 auto monstrosity::GetFeretoryExits(const xi::ZoneId zoneId) -> std::vector<std::array<float, 4>>

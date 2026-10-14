@@ -8,33 +8,23 @@ local ID = zones[xi.zone.FERETORY]
 ---@type TNpcEntity
 local entity = {}
 
--- Seasonal items Suibhne takes for a family or variant. Event 15 names the unlock as 128 plus a family, or 256 plus a variant.
-local tradeUnlocks =
-{
-    [xi.item.SLIME_FETISH  ] = { species = xi.monstrositySpecies.ASTOLTIAN_SLIME     },
-    [xi.item.AKE_OME_SPIRIT] = { variant = xi.monstrosityVariant.NEW_YEAR_MANDRAGORA },
-}
-
 entity.onTrade = function(player, npc, trade)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
         return
     end
 
-    for itemId, unlock in pairs(tradeUnlocks) do
-        if npcUtil.tradeMatches(trade, { { itemId, 1 } }) then
-            local owned = false
-            if unlock.species then
-                owned = xi.monstrosity.hasUnlockedSpecies(player, unlock.species)
-            else
-                owned = xi.monstrosity.hasUnlockedVariant(player, unlock.variant)
-            end
+    local data = player:getMonstrosityData()
+    for idx, unlock in ipairs(xi.monstrosity.suibhneUnlocks) do
+        for _, itemId in ipairs(unlock.items) do
+            if
+                xi.monstrosity.canSuibhneUnlock(data, unlock) and
+                npcUtil.tradeMatches(trade, { { itemId, unlock.count } })
+            then
+                player:setLocalVar('SUIBHNE_TRADE', idx)
+                player:startEvent(15, unlock.species and 128 + unlock.species or 256 + unlock.variant, itemId, unlock.count)
 
-            if not owned then
-                player:setLocalVar('SUIBHNE_TRADE', itemId)
-                player:startEvent(15, unlock.species and 128 + unlock.species or 256 + unlock.variant, itemId, 1)
+                return
             end
-
-            return
         end
     end
 end
@@ -44,7 +34,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    player:showText(npc, ID.text.SINKING_THY_CLAWS)
+    xi.monstrosity.suibhneGreet(player, npc)
     player:startEvent(11)
 end
 
@@ -53,11 +43,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         return
     end
 
-    local unlock = tradeUnlocks[player:getLocalVar('SUIBHNE_TRADE')]
+    local unlock = xi.monstrosity.suibhneUnlocks[player:getLocalVar('SUIBHNE_TRADE')]
     player:setLocalVar('SUIBHNE_TRADE', 0)
 
+    -- The client echoes the species code in the high word.
     if
-        option ~= 2 or
+        bit.band(option, 0xFFFF) ~= 2 or
         not unlock or
         not player:tradeComplete()
     then
@@ -70,7 +61,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         xi.monstrosity.unlockVariant(player, unlock.variant)
     end
 
-    player:messageSpecial(ID.text.MAY_POSSESS_NEW_SPECIES)
+    player:showText(npc, ID.text.MAY_POSSESS_NEW_SPECIES)
+
+    -- Retail takes a new variant's form at once, but not a new family's. A variant's species code is 256 plus its id.
+    if unlock.variant then
+        player:changeMonstrositySpecies(256 + unlock.variant)
+    end
 end
 
 return entity

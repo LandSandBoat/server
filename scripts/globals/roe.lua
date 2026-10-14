@@ -89,6 +89,10 @@ local checks =
     skillType = function(self, player, params) -- Generic numeric check, used for synthSuccess and helmSuccess
         return params.skillType == self.reqs.skillType and true or false
     end,
+
+    monipulator = function(self, player, params) -- Player is in Monstrosity
+        return player:getMainJob() == xi.job.MON
+    end,
 }
 
 -- Main general check function for all-purpose use.

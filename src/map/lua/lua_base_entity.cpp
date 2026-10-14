@@ -7804,6 +7804,18 @@ void CLuaBaseEntity::setBelligerencyFlag(bool flag)
     monstrosity::SetBelligerencyFlag(PChar, flag);
 }
 
+// Takes a species the Monipulator owns, as the Feretory menu would.
+void CLuaBaseEntity::changeMonstrositySpecies(const uint16 speciesCode)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr || PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    monstrosity::ChangeSpecies(PChar, speciesCode);
+}
+
 auto CLuaBaseEntity::getMonstrositySize() -> uint8
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -21131,6 +21143,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMonstrosityData", CLuaBaseEntity::setMonstrosityData);
     SOL_REGISTER("getBelligerencyFlag", CLuaBaseEntity::getBelligerencyFlag);
     SOL_REGISTER("setBelligerencyFlag", CLuaBaseEntity::setBelligerencyFlag);
+    SOL_REGISTER("changeMonstrositySpecies", CLuaBaseEntity::changeMonstrositySpecies);
     SOL_REGISTER("getMonstrositySize", CLuaBaseEntity::getMonstrositySize);
     SOL_REGISTER("setMonstrosityEntryData", CLuaBaseEntity::setMonstrosityEntryData);
     SOL_REGISTER("getMonstrosityShop", CLuaBaseEntity::getMonstrosityShop);

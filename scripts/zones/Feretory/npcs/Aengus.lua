@@ -3,8 +3,6 @@
 --  NPC: Aengus
 -- !pos -350.000 -3.379 -466.000 285
 -----------------------------------
-require('scripts/globals/monstrosity')
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 

@@ -1,4 +1,6 @@
+-----------------------------------
 -- Feretory rules, read from data/monstrosity.yaml through the entity bindings.
+-----------------------------------
 local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
@@ -173,12 +175,24 @@ describe('Monstrosity Feretory exits', function()
         assert(player:getXPos() ~= 0 or player:getZPos() ~= 0, 'left at the zone origin')
     end)
 
+    it('strips every effect but Medicated on entering', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        player:addStatusEffect(xi.effect.PROTECT, { power = 20, duration = 1800, origin = player })
+        player:addStatusEffect(xi.effect.MEDICINE, { power = 1, duration = 3600, origin = player })
+        player:gotoZone(xi.zone.FERETORY)
+
+        assert(not player:hasStatusEffect(xi.effect.PROTECT), 'Protect survived entering the Feretory')
+        player.assert:hasEffect(xi.effect.MEDICINE)
+    end)
+
     it('lists every exit position for a zone', function()
         local exits = player:getMonstrosityExits(xi.zone.EAST_RONFAURE)
 
-        assert(#exits == 2, string.format('East Ronfaure has %d exits', #exits))
+        assert(#exits == 4, string.format('East Ronfaure has %d exits', #exits))
         assert(exits[1][1] == 120 and exits[1][3] == -530 and exits[1][4] == 192, 'first exit is wrong')
-        assert(#player:getMonstrosityExits(xi.zone.WEST_RONFAURE) == 0, 'West Ronfaure has no exits')
+        assert(#player:getMonstrosityExits(xi.zone.LA_THEINE_PLATEAU) == 0, 'La Theine Plateau has no exits')
+        assert(#player:getMonstrosityExits(xi.zone.BHAFLAU_THICKETS) == 2, 'Bhaflau Thickets should have two exits')
     end)
 end)
 
@@ -189,11 +203,22 @@ describe('Monstrosity Teyrnon shop', function()
     local player
 
     local function buy(page, slot)
-        xi.monstrosity.teyrnonOnEventFinish(player, 0, 1 + bit.lshift(page + 1, 8) + bit.lshift(slot, 16))
+        xi.monstrosity.teyrnonOnEventFinish(player, 7, 1 + bit.lshift(page + 1, 8) + bit.lshift(slot, 16))
     end
 
     before_each(function()
         player = helpers.spawnMonipulator(xi.zone.FERETORY)
+    end)
+
+    -- A fresh Monipulator on retail was offered Cockatrice and Bat on the Birds page, and Crab and Pugil on the Aquans page.
+    it('lists the pages a fresh Monipulator can buy from', function()
+        player.entities:gotoAndTrigger('Teyrnon')
+        player.packets:clear()
+        player.events:update(7, bit.lshift(6, 16))
+        player.events:update(7, bit.lshift(5, 16))
+
+        local replies = helpers.updateReplies(player)
+        assert(replies[1] == 5 and replies[2] == 17, string.format('page masks were %s and %s', tostring(replies[1]), tostring(replies[2])))
     end)
 
     it('sells a family for its infamy', function()
@@ -264,29 +289,32 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 0, string.format('%d infamy left', player:getCurrency('infamy')))
     end)
 
-    -- A benediction is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
-    local benedictions =
+    -- A buff is optionType 3 with the effect from bit 8. Costs are fixed in the client event.
+    local buffs =
     {
-        { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000 },
-        { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400 },
-        { name = 'Regen',        option = 2, effect = xi.effect.REGEN,      cost =   10 },
-        { name = 'Refresh',      option = 3, effect = xi.effect.REFRESH,    cost =   10 },
-        { name = 'Protect',      option = 4, effect = xi.effect.PROTECT,    cost =  100 },
-        { name = 'Shell',        option = 5, effect = xi.effect.SHELL,      cost =  100 },
-        { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100 },
+        { name = 'Dedication 1', option = 0, effect = xi.effect.DEDICATION, cost = 3000, minutes = 60 },
+        { name = 'Dedication 2', option = 1, effect = xi.effect.DEDICATION, cost =  400, minutes = 60 },
+        { name = 'Regen',        option = 2, effect = xi.effect.REGEN,      cost =   10, minutes = 60 },
+        { name = 'Refresh',      option = 3, effect = xi.effect.REFRESH,    cost =   10, minutes = 60 },
+        { name = 'Protect',      option = 4, effect = xi.effect.PROTECT,    cost =  100, minutes = 30 },
+        { name = 'Shell',        option = 5, effect = xi.effect.SHELL,      cost =  100, minutes = 30 },
+        { name = 'Haste',        option = 6, effect = xi.effect.HASTE,      cost =  100, minutes = 30 },
     }
 
-    for _, benediction in ipairs(benedictions) do
-        it(string.format('casts %s for %d infamy', benediction.name, benediction.cost), function()
+    for _, buff in ipairs(buffs) do
+        it(string.format('casts %s for %d infamy and %d minutes', buff.name, buff.cost, buff.minutes), function()
             player:addCurrency('infamy', 5000)
-            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(benediction.option, 8))
+            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(buff.option, 8))
 
-            player.assert:hasEffect(benediction.effect)
-            assert(player:getCurrency('infamy') == 5000 - benediction.cost, string.format('%d infamy left', player:getCurrency('infamy')))
+            player.assert:hasEffect(buff.effect)
+            assert(player:getCurrency('infamy') == 5000 - buff.cost, string.format('%d infamy left', player:getCurrency('infamy')))
+
+            local duration = player:getStatusEffect(buff.effect):getDuration()
+            assert(duration == buff.minutes * 60 * 1000, string.format('%s lasts %d ms', buff.name, duration))
         end)
     end
 
-    it('casts no benediction the player cannot afford', function()
+    it('casts no buff the player cannot afford', function()
         player:addCurrency('infamy', 99)
         xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(6, 8))
 
@@ -294,12 +322,35 @@ describe('Monstrosity Teyrnon shop', function()
         assert(player:getCurrency('infamy') == 99, 'infamy should be untouched')
     end)
 
-    it('casts nothing for an unknown benediction', function()
+    it('casts nothing for an unknown buff', function()
         player:addCurrency('infamy', 1000)
         xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(7, 8))
 
         assert(player:getCurrency('infamy') == 1000, 'infamy should be untouched')
     end)
+
+    -- Protect and Shell take the spell tier for the Monipulator's level.
+    local tierChecks =
+    {
+        { option = 4, effect = xi.effect.PROTECT, level = 26, power = 20   },
+        { option = 4, effect = xi.effect.PROTECT, level = 27, power = 50   },
+        { option = 4, effect = xi.effect.PROTECT, level = 99, power = 220  },
+        { option = 5, effect = xi.effect.SHELL,   level = 36, power = 1055 },
+        { option = 5, effect = xi.effect.SHELL,   level = 37, power = 1641 },
+        { option = 5, effect = xi.effect.SHELL,   level = 99, power = 2930 },
+    }
+
+    for _, check in ipairs(tierChecks) do
+        local name = check.effect == xi.effect.PROTECT and 'Protect' or 'Shell'
+        it(string.format('casts %s power %d at level %d', name, check.power, check.level), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, check.level)
+            player:addCurrency('infamy', 100)
+            xi.monstrosity.teyrnonOnEventFinish(player, 7, 3 + bit.lshift(check.option, 8))
+
+            local power = player:getStatusEffect(check.effect):getPower()
+            assert(power == check.power, string.format('power is %d', power))
+        end)
+    end
 
     it('refuses an instinct purchase with the wrong check value', function()
         player:addCurrency('infamy', 500)
@@ -318,12 +369,30 @@ describe('Monstrosity Aengus', function()
         player = helpers.spawnMonipulator(xi.zone.FERETORY)
     end)
 
-    it('toggles Belligerency', function()
-        xi.monstrosity.aengusOnEventFinish(player, 13, 1)
-        assert(player:getBelligerencyFlag(), 'Belligerency should be on')
+    -- The last 0x036 message Aengus sent.
+    local function lastMessage()
+        local message = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x036 then
+                message = pkt.data[0x0A] + pkt.data[0x0B] * 256
+            end
+        end
 
-        xi.monstrosity.aengusOnEventFinish(player, 13, 1)
+        return message
+    end
+
+    it('toggles Belligerency', function()
+        local ID = zones[xi.zone.FERETORY]
+
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
+        assert(player:getBelligerencyFlag(), 'Belligerency should be on')
+        assert(lastMessage() == ID.text.SOUL_PINETH_FOR_MORE, string.format('entering said %s', tostring(lastMessage())))
+
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Aengus', { eventId = 13, finishOption = 1 })
         assert(not player:getBelligerencyFlag(), 'Belligerency should be off')
+        assert(lastMessage() == ID.text.SAFE_FROM_MONIPULATORS, string.format('withdrawing said %s', tostring(lastMessage())))
     end)
 end)
 
@@ -356,6 +425,64 @@ describe('Monstrosity Bee quiz', function()
 
         assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'Bee should stay locked')
     end)
+
+    -- Retail sends the locked quiz as (0, quiz index) until the next Vana'diel day.
+    it('locks the quiz for the day after a wrong answer', function()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = 2 })
+
+        -- The second quiz, so the index in the locked event can be told from the default 0.
+        player:setCharVar('HQuest[monstrosityBee]Option', 2)
+        player.packets:clear()
+
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+
+        local params = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x034 then
+                params = { pkt.data[0x08], pkt.data[0x0C] }
+            end
+        end
+
+        assert(params and params[1] == 0 and params[2] == 1, string.format('quiz params were %s, %s', tostring(params and params[1]), tostring(params and params[2])))
+        assert(not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'a locked quiz unlocked bees')
+    end)
+
+    it('reopens the quiz the next day', function()
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = 2 })
+        xi.test.world:skipToNextVanaDay()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE), 'Bee should be unlocked the next day')
+    end)
+
+    it('announces the unlock and stops offering the quiz', function()
+        local answers = 1 + bit.lshift(teyrnon, 16) + bit.lshift(aengus, 19) + bit.lshift(suibhne, 22)
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11, finishOption = answers })
+        xi.test.world:skipTime(1)
+
+        local announced = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            -- The top bit of the message number is a flag.
+            if
+                pkt.type == 0x02A and
+                bit.band(pkt.data[0x1A] + pkt.data[0x1B] * 256, 0x7FFF) == zones[xi.zone.FERETORY].text.MAY_POSSESS_BEES
+            then
+                announced = true
+            end
+        end
+
+        assert(announced, 'the Bee unlock was not announced')
+
+        -- The quiz event's first param says whether the quiz is open.
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne', { eventId = 11 })
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            assert(pkt.type ~= 0x034 or pkt.data[0x08] == 0, 'Suibhne offered the quiz after bees were unlocked')
+        end
+    end)
 end)
 
 -- Event 15 trades a seasonal item for a family or variant.
@@ -369,18 +496,159 @@ describe('Monstrosity Suibhne trades', function()
 
     it('unlocks Astoltian Slime for a Slime Fetish', function()
         player:addItem(xi.item.SLIME_FETISH)
-        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 2 })
+        -- Retail echoes the species code in the high word.
+        player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH }, { eventId = 15, finishOption = 0xFE0002 })
 
         assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME), 'Astoltian Slime should be unlocked')
         assert(not player:hasItem(xi.item.SLIME_FETISH), 'the Slime Fetish was not taken')
+        assert(player:getMonstrosityData().species == xi.monstrositySpecies.RABBIT, 'a new family changed the form')
+    end)
+
+    -- Retail switches into a variant as soon as Suibhne unlocks it.
+    it('switches to the Metal Slime on unlocking it', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId                                = xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.species                                      = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.levels[xi.monstrositySpecies.ASTOLTIAN_SLIME] = 1
+        player:setMonstrosityData(data)
+
+        player:addItem(xi.item.METAL_SLIME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.METAL_SLIME_SPIRIT }, { eventId = 15, finishOption = 0x1FD0002 })
+
+        local species = player:getMonstrosityData().species
+        assert(species == 256 + xi.monstrosityVariant.METAL_SLIME, string.format('the form is species %d', species))
+    end)
+
+    -- Takes the family's base form without leaving the Feretory.
+    local function takeBaseForm(family, level)
+        local data = player:getMonstrosityData()
+        data.monstrosityId  = family
+        data.species        = family
+        data.levels[family] = level
+        player:setMonstrosityData(data)
+    end
+
+    it('unlocks Eorzean Spriggan for a Spriggan Fetish', function()
+        player:addItem(xi.item.SPRIGGAN_FETISH)
+        player.actions:tradeNpc('Suibhne', { xi.item.SPRIGGAN_FETISH }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN), 'Eorzean Spriggan should be unlocked')
+        assert(not player:hasItem(xi.item.SPRIGGAN_FETISH), 'the Spriggan Fetish was not taken')
     end)
 
     it('unlocks the New Year Mandragora for an Ake-Ome Spirit', function()
+        takeBaseForm(xi.monstrositySpecies.MANDRAGORA, 1)
         player:addItem(xi.item.AKE_OME_SPIRIT)
         player.actions:tradeNpc('Suibhne', { xi.item.AKE_OME_SPIRIT }, { eventId = 15, finishOption = 2 })
 
         assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.NEW_YEAR_MANDRAGORA), 'the New Year Mandragora should be unlocked')
         assert(not player:hasItem(xi.item.AKE_OME_SPIRIT), 'the Ake-Ome Spirit was not taken')
+    end)
+
+    it('refuses a variant item outside the base form', function()
+        player:addItem(xi.item.AKE_OME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.AKE_OME_SPIRIT })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.NEW_YEAR_MANDRAGORA), 'a Rabbit unlocked the New Year Mandragora')
+        assert(player:hasItem(xi.item.AKE_OME_SPIRIT), 'took the Ake-Ome Spirit from a Rabbit')
+    end)
+
+    it('unlocks the Onyx Beetle for 25 Beetle Spirits', function()
+        takeBaseForm(xi.monstrositySpecies.BEETLE, 1)
+        player:addItem(xi.item.BEETLE_SPIRIT, 25)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.BEETLE_SPIRIT, quantity = 25 } }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.ONYX_BEETLE), 'the Onyx Beetle should be unlocked')
+        assert(not player:hasItem(xi.item.BEETLE_SPIRIT), 'the Beetle Spirits were not taken')
+    end)
+
+    it('refuses too few spirits', function()
+        takeBaseForm(xi.monstrositySpecies.BEETLE, 1)
+        player:addItem(xi.item.BEETLE_SPIRIT, 24)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.BEETLE_SPIRIT, quantity = 24 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.ONYX_BEETLE), '24 spirits unlocked the Onyx Beetle')
+    end)
+
+    it('refuses the Pachypodium below Mandragora level 60', function()
+        takeBaseForm(xi.monstrositySpecies.MANDRAGORA, 59)
+        player:addItem(xi.item.PACHYPODIUM_SPIRIT, 25)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.PACHYPODIUM_SPIRIT, quantity = 25 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.PACHYPODIUM), 'a level 59 Mandragora unlocked the Pachypodium')
+        assert(player:hasItem(xi.item.PACHYPODIUM_SPIRIT), 'took the spirits below level 60')
+    end)
+
+    it('unlocks the Legendary Manticore for 20 scraps of one seal', function()
+        takeBaseForm(xi.monstrositySpecies.MANTICORE, 50)
+        player:addItem(xi.item.SEAL_OF_SEIRYU_SCRAP, 20)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.SEAL_OF_SEIRYU_SCRAP, quantity = 20 } }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.LEGENDARY_MANTICORE), 'the Legendary Manticore should be unlocked')
+    end)
+
+    it('refuses mixed seal scraps for the Legendary Manticore', function()
+        takeBaseForm(xi.monstrositySpecies.MANTICORE, 50)
+        player:addItem(xi.item.SEAL_OF_SEIRYU_SCRAP, 10)
+        player:addItem(xi.item.SEAL_OF_GENBU_SCRAP, 10)
+        player.actions:tradeNpc('Suibhne', { { itemId = xi.item.SEAL_OF_SEIRYU_SCRAP, quantity = 10 }, { itemId = xi.item.SEAL_OF_GENBU_SCRAP, quantity = 10 } })
+
+        assert(not xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.LEGENDARY_MANTICORE), 'mixed scraps unlocked the Legendary Manticore')
+    end)
+
+    it('unlocks the She-Slime from the base Astoltian Slime', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId = xi.monstrositySpecies.ASTOLTIAN_SLIME
+        data.species       = xi.monstrositySpecies.ASTOLTIAN_SLIME + 128
+        data.levels[xi.monstrositySpecies.ASTOLTIAN_SLIME] = 1
+        player:setMonstrosityData(data)
+
+        player:addItem(xi.item.SHE_SLIME_SPIRIT)
+        player.actions:tradeNpc('Suibhne', { xi.item.SHE_SLIME_SPIRIT }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.SHE_SLIME), 'the She-Slime should be unlocked')
+    end)
+
+    -- Retail names the item and the count before the quiz.
+    it('asks a Crab for a creel of moat carp', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 1)
+        player.packets:clear()
+        player.entities:gotoAndTrigger('Suibhne')
+
+        local request = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if
+                pkt.type == 0x02A and
+                pkt.data[0x1A] + pkt.data[0x1B] * 256 == zones[xi.zone.FERETORY].text.BRING_ME_ITEM
+            then
+                request = { pkt.data[0x08] + pkt.data[0x09] * 256, pkt.data[0x0C] }
+            end
+        end
+
+        assert(request, 'Suibhne named no item')
+        assert(request[1] == xi.item.CREEL_OF_MOAT_CARP and request[2] == 1, string.format('asked for %d x%d', request[1], request[2]))
+    end)
+
+    it('unlocks the Basket-burdened Crab for a creel of moat carp', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 1)
+        player:addItem(xi.item.CREEL_OF_MOAT_CARP)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_MOAT_CARP }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.BASKET_BURDENED_CRAB), 'the Basket-burdened Crab should be unlocked')
+    end)
+
+    it('takes the forest carp creel only from a level 15 Vermilion Crab', function()
+        takeBaseForm(xi.monstrositySpecies.CRAB, 15)
+        player:addItem(xi.item.CREEL_OF_FOREST_CARP)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_FOREST_CARP })
+        assert(player:hasItem(xi.item.CREEL_OF_FOREST_CARP), 'a base Crab traded the forest carp creel')
+
+        local data = player:getMonstrosityData()
+        data.species = 256 + xi.monstrosityVariant.VERMILLION_CRAB
+        player:setMonstrosityData(data)
+        player.actions:tradeNpc('Suibhne', { xi.item.CREEL_OF_FOREST_CARP }, { eventId = 15, finishOption = 2 })
+
+        assert(xi.monstrosity.hasUnlockedVariant(player, xi.monstrosityVariant.VERMILLION_BASKET_BURDENED_CRAB), 'the Vermilion Basket-burdened Crab should be unlocked')
     end)
 
     it('keeps the item when the player declines', function()
@@ -397,6 +665,17 @@ describe('Monstrosity Suibhne trades', function()
         player.actions:tradeNpc('Suibhne', { xi.item.SLIME_FETISH })
 
         assert(player:hasItem(xi.item.SLIME_FETISH), 'took a Slime Fetish for a family already unlocked')
+    end)
+end)
+
+-- Grumblix tells the Monstrosity story for 100 gil, replaying the Feretory introduction.
+describe('Monstrosity Goblin Footprint', function()
+    it('replays the introduction for 100 gil', function()
+        local player = helpers.spawnMonipulator(xi.zone.FERETORY)
+        player:addGil(100)
+
+        player.actions:tradeNpc('Goblin_Footprint', { { itemId = xi.item.GIL, quantity = 100 } }, { eventId = 0, updates = { 1 }, finishOption = 1 })
+        player.events:expect({ eventId = 2, updates = { 1 }, finishOption = 1 })
     end)
 end)
 
@@ -515,6 +794,103 @@ describe('Monstrosity species change', function()
         changeSpecies(xi.monstrositySpecies.LIZARD)
 
         assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+    end)
+
+    -- Job instincts cost 15 each. A level 11 Mon can spend 21, an NM under Belligerency 41.
+    describe('under rank', function()
+        local warInstinct = 0x300 + xi.monstrosityInstinct.WAR
+        local mnkInstinct = 0x300 + xi.monstrosityInstinct.MNK
+
+        before_each(function()
+            local data = player:getMonstrosityData()
+            data.instincts[21] = bit.bor(data.instincts[21], 0x0C) -- WAR and MNK are bits 10 and 11
+            player:setMonstrosityData(data)
+            player:addCurrency('infamy', 15000)
+        end)
+
+        it('refuses instincts over level plus 10 without Belligerency', function()
+            player.packets:clear()
+            equipInstincts({ warInstinct, mnkInstinct })
+
+            assert(player:getMod(xi.mod.STR) == 0, 'the NM bonus applied without Belligerency')
+        end)
+
+        it('allows level plus 30 as an NM under Belligerency', function()
+            player:setBelligerencyFlag(true)
+            player.packets:clear()
+            equipInstincts({ warInstinct, mnkInstinct })
+
+            assert(equippedCount() == 2, string.format('%s instincts equipped', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 10, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+
+        it('unequips the overflow on withdrawing from Belligerency', function()
+            player:setBelligerencyFlag(true)
+            equipInstincts({ warInstinct, mnkInstinct })
+            player.packets:clear()
+            player:setBelligerencyFlag(false)
+
+            assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 0, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+
+        it('unequips the overflow on spending infamy below NM', function()
+            player:setBelligerencyFlag(true)
+            equipInstincts({ warInstinct, mnkInstinct })
+            player.packets:clear()
+            player:delCurrency('infamy', 5000)
+
+            assert(equippedCount() == 0, string.format('%s instincts survived', tostring(equippedCount())))
+            assert(player:getMod(xi.mod.STR) == 0, string.format('STR mod is %d', player:getMod(xi.mod.STR)))
+        end)
+    end)
+
+    -- JP wiki: Teyrnon's buffs are lost on a species change. Medicated survives.
+    it('loses buffs but keeps Medicated on a variant change', function()
+        xi.monstrosity.unlockVariant(player, xi.monstrosityVariant.ONYX_RABBIT)
+        player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
+        player:addStatusEffect(xi.effect.MEDICINE, { power = 1, duration = 3600, origin = player })
+
+        changeSpecies(onyxRabbit)
+
+        assert(not player:hasStatusEffect(xi.effect.REGEN), 'Regen survived the species change')
+        player.assert:hasEffect(xi.effect.MEDICINE)
+    end)
+
+    it('keeps buffs when the current species is picked again', function()
+        player:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 3600, origin = player, tick = 3 })
+
+        changeSpecies(xi.monstrositySpecies.RABBIT)
+
+        player.assert:hasEffect(xi.effect.REGEN)
+    end)
+
+    -- Level instinct I is the family times 3, owned from level 30.
+    it('applies spell interruption down from Coeurl instinct I', function()
+        local data = player:getMonstrosityData()
+        data.levels[xi.monstrositySpecies.COEURL] = 30
+        player:setMonstrosityData(data)
+        player:gotoZone(xi.zone.FERETORY)
+
+        equipInstincts({ xi.monstrositySpecies.COEURL * 3 })
+
+        assert(player:getMod(xi.mod.SPELLINTERRUPT) == 15, string.format('SPELLINTERRUPT is %d', player:getMod(xi.mod.SPELLINTERRUPT)))
+    end)
+
+    -- Retail scales instinct HP by the species: a level 2 Toad (scale 190) with Crab instinct I (HP+200).
+    it('scales instinct HP by the species', function()
+        local data = player:getMonstrosityData()
+        data.monstrosityId = xi.monstrositySpecies.TOAD
+        data.species       = xi.monstrositySpecies.TOAD
+        data.levels[xi.monstrositySpecies.TOAD] = 2
+        data.levels[xi.monstrositySpecies.CRAB] = 30
+        player:setMonstrosityData(data)
+        player:gotoZone(xi.zone.FERETORY)
+        assert(player:getMaxHP() == 95, string.format('precondition: a level 2 Toad has %d HP', player:getMaxHP()))
+
+        equipInstincts({ xi.monstrositySpecies.CRAB * 3 })
+
+        assert(player:getMaxHP() == 475, string.format('max HP is %d', player:getMaxHP()))
     end)
 
     it('swaps instinct mods when a slot is replaced or resent', function()

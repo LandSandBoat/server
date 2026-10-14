@@ -15,17 +15,17 @@ local choices =
     AENGUS  = 1,
     MACCUS  = 2,
     SUIBHNE = 3,
-    TERYNON = 4,
+    TEYRNON = 4,
 }
 
 local answerKey =
 {
-    [1] = { [0] = choices.TERYNON, [1] = choices.AENGUS,  [2] = choices.SUIBHNE },
-    [2] = { [0] = choices.TERYNON, [1] = choices.SUIBHNE, [2] = choices.AENGUS  },
-    [3] = { [0] = choices.AENGUS,  [1] = choices.TERYNON, [2] = choices.SUIBHNE },
-    [4] = { [0] = choices.AENGUS,  [1] = choices.SUIBHNE, [2] = choices.TERYNON },
-    [5] = { [0] = choices.SUIBHNE, [1] = choices.AENGUS,  [2] = choices.TERYNON },
-    [6] = { [0] = choices.SUIBHNE, [1] = choices.TERYNON, [2] = choices.AENGUS  },
+    [1] = { [0] = choices.TEYRNON, [1] = choices.AENGUS,  [2] = choices.SUIBHNE },
+    [2] = { [0] = choices.TEYRNON, [1] = choices.SUIBHNE, [2] = choices.AENGUS  },
+    [3] = { [0] = choices.AENGUS,  [1] = choices.TEYRNON, [2] = choices.SUIBHNE },
+    [4] = { [0] = choices.AENGUS,  [1] = choices.SUIBHNE, [2] = choices.TEYRNON },
+    [5] = { [0] = choices.SUIBHNE, [1] = choices.AENGUS,  [2] = choices.TEYRNON },
+    [6] = { [0] = choices.SUIBHNE, [1] = choices.TEYRNON, [2] = choices.AENGUS  },
 }
 
 local function getCheckValue(choiceNum)
@@ -43,7 +43,6 @@ quest.sections =
     {
         check = function(player, questVars, vars)
             return xi.settings.main.ENABLE_MONSTROSITY == 1 and
-                quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
                 not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrositySpecies.BEE)
         end,
 
@@ -59,15 +58,22 @@ quest.sections =
                         quest:setVar(player, 'Option', quizInfo)
                     end
 
-                    player:showText(npc, feretoryID.text.SINKING_THY_CLAWS)
+                    xi.monstrosity.suibhneGreet(player, npc)
 
-                    return quest:progressEvent(11, 1, quizInfo - 1)
+                    -- A wrong answer locks the quiz until the next Vana'diel day. Retail still sends the quiz.
+                    local available = quest:getVar(player, 'Timer') <= VanadielUniqueDay() and 1 or 0
+
+                    return quest:progressEvent(11, available, quizInfo - 1)
                 end,
             },
 
             onEventFinish =
             {
                 [11] = function(player, csid, option, npc)
+                    if quest:getVar(player, 'Timer') > VanadielUniqueDay() then
+                        return
+                    end
+
                     if option == 1 + getCheckValue(quest:getVar(player, 'Option')) then
                         if quest:complete(player) then
                             xi.monstrosity.unlockSpecies(player, xi.monstrositySpecies.BEE)

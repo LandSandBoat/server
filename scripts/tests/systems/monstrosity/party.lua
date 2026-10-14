@@ -1,6 +1,8 @@
+-----------------------------------
+-- JP wiki: a Monipulator cannot party.
+-----------------------------------
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
--- JP wiki: a Monipulator cannot party. MONSTROSITY_PARTIES allows parties of Monipulators only.
 describe('Monstrosity parties', function()
     local function spawnAdventurer()
         return xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WAR, level = 10 })
@@ -11,8 +13,7 @@ describe('Monstrosity parties', function()
         member.actions:acceptPartyInvite()
     end
 
-    it('refuses any party for a Monipulator by default', function()
-        xi.test.world:setSetting('main.MONSTROSITY_PARTIES', 0)
+    it('refuses a party of Monipulators', function()
         local first  = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
         local second = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
 
@@ -21,18 +22,7 @@ describe('Monstrosity parties', function()
         assert(second:getPartySize() == 1, 'two Monipulators formed a party')
     end)
 
-    it('allows a party of Monipulators under the setting', function()
-        xi.test.world:setSetting('main.MONSTROSITY_PARTIES', 1)
-        local first  = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
-        local second = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
-
-        invite(first, second)
-
-        assert(second:getPartySize() == 2, string.format('party size is %d', second:getPartySize()))
-    end)
-
     it('never mixes Monipulators and adventurers', function()
-        xi.test.world:setSetting('main.MONSTROSITY_PARTIES', 1)
         local monipulator = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
         local adventurer  = spawnAdventurer()
 
@@ -43,16 +33,17 @@ describe('Monstrosity parties', function()
         assert(adventurer:getPartySize() == 1, 'a Monipulator invited an adventurer')
     end)
 
-    it('drops a player who leaves MON from a party of Monipulators', function()
-        xi.test.world:setSetting('main.MONSTROSITY_PARTIES', 1)
-        local first  = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
-        local second = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
-        invite(first, second)
-        assert(second:getPartySize() == 2, 'precondition: the Monipulators did not party')
+    -- An invite sent before the inviter became a Monipulator is still pending on the other side.
+    it('refuses an invite whose sender has since become a Monipulator', function()
+        xi.test.world:setSetting('main.ENABLE_MONSTROSITY', 1)
+        local inviter = spawnAdventurer()
+        local invitee = spawnAdventurer()
 
-        second:changeJob(xi.job.WAR)
+        inviter.actions:inviteToParty(invitee)
+        inviter:changeJob(xi.job.MON)
+        invitee.actions:acceptPartyInvite()
 
-        assert(first:getPartySize() == 1, 'an adventurer stayed in a party of Monipulators')
+        assert(invitee:getPartySize() == 1, 'joined a Monipulator through a stale invite')
     end)
 
     -- The party is rebuilt on zone-in, after the Feretory has already changed the job.
@@ -82,5 +73,40 @@ describe('Monstrosity parties', function()
 
         assert(member:getPartySize() == 1, 'kept the party as a Monipulator')
         assert(leader:getPartySize() == 1, 'the leader still counts the Monipulator')
+    end)
+end)
+
+-- FFXIclopedia: Monipulators and adventurers cannot cure or buff each other.
+describe('Monstrosity assistance', function()
+    local function spawnCurer(target)
+        local curer = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WHM, level = 99 })
+        curer:addSpell(xi.magic.spell.CURE)
+
+        local pos = target:getPos()
+        curer:setPos(pos.x, pos.y, pos.z)
+
+        return curer
+    end
+
+    local function cure(curer, target)
+        target:setHP(1)
+        curer.actions:useSpell(target, xi.magic.spell.CURE)
+        xi.test.world:skipTime(10)
+    end
+
+    it('stops an adventurer curing a Monipulator', function()
+        local monipulator = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+        monipulator:delStatusEffect(xi.effect.GESTATION)
+        helpers.engageDummy(monipulator)
+        cure(spawnCurer(monipulator), monipulator)
+
+        assert(monipulator:getHP() == 1, string.format('an adventurer cured a Monipulator to %d HP', monipulator:getHP()))
+    end)
+
+    it('lets an adventurer cure another adventurer', function()
+        local target = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.WAR, level = 10 })
+        cure(spawnCurer(target), target)
+
+        assert(target:getHP() > 1, 'Cure did not land on an adventurer')
     end)
 end)

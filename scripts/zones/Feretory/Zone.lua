@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Feretory
 -----------------------------------
-require('scripts/globals/monstrosity')
------------------------------------
 ---@type TZone
 local zoneObject = {}
 

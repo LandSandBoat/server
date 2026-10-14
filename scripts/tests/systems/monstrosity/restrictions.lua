@@ -1,4 +1,7 @@
+-----------------------------------
 -- Rules a Monipulator plays under, from the JP wiki's Monstrosity pages.
+-----------------------------------
+local ffi     = require('ffi')
 local helpers = require('scripts.tests.systems.monstrosity.helpers')
 
 describe('Monstrosity restrictions', function()
@@ -78,6 +81,38 @@ describe('Monstrosity restrictions', function()
         assert(player:getCurrency('infamy') == 50000, string.format('infamy is %d', player:getCurrency('infamy')))
     end)
 
+    -- Buburimu, Xarcabard and Uleguerand cap a flagged Monipulator at 30, 60 and 90.
+    it('caps the level in a Belligerency zone while flagged', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 45)
+        player:setBelligerencyFlag(true)
+        player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+        assert(player:getMainLvl() == 30, string.format('a level 45 Rabbit is level %d in Buburimu', player:getMainLvl()))
+
+        local announced = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            -- A message with no speaker carries 0x8000 in its number.
+            if
+                pkt.type == 0x02A and
+                (pkt.data[0x1A] + pkt.data[0x1B] * 256) % 0x8000 == zones[xi.zone.BUBURIMU_PENINSULA].text.ENTERED_BELLIGERENCY_CAP
+            then
+                announced = pkt.data[0x08] == 30
+            end
+        end
+
+        assert(announced, 'the level restriction was not announced')
+
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+        assert(player:getMainLvl() == 45, string.format('the cap followed the Rabbit out, level %d', player:getMainLvl()))
+    end)
+
+    it('leaves the level alone in a Belligerency zone without the flag', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 45)
+        player:gotoZone(xi.zone.BUBURIMU_PENINSULA)
+
+        assert(player:getMainLvl() == 45, string.format('an unflagged Rabbit is level %d in Buburimu', player:getMainLvl()))
+    end)
+
     it('drops MON behaviour as soon as the job changes away from MON', function()
         helpers.becomeSpecies(player, xi.monstrositySpecies.LIZARD, xi.monstrositySpecies.LIZARD, 10)
         assert(player:getBaseDelay() == 240, string.format('a Lizard has delay %d', player:getBaseDelay()))
@@ -122,11 +157,19 @@ describe('Monstrosity restrictions', function()
         assert(player:getMaxMP() == 0, string.format('MNK/NIN has %d MP', player:getMaxMP()))
     end)
 
-    it('gives an RDM sub job the WHM MP curve', function()
+    it('gives an RDM sub job its retail MP', function()
         -- Vermillion and Onyx Bee is WAR/RDM.
         helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
 
-        assert(player:getMaxMP() == 369, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+        assert(player:getMaxMP() == 358, string.format('WAR/RDM 20 has %d MP', player:getMaxMP()))
+    end)
+
+    it('gives a PLD main and sub their retail MP', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.CRAB, xi.monstrositySpecies.CRAB, 30)
+        assert(player:getMaxMP() == 1002, string.format('PLD/PLD 30 has %d MP', player:getMaxMP()))
+
+        helpers.becomeSpecies(player, xi.monstrositySpecies.CRAB, 256 + xi.monstrosityVariant.VERMILLION_CRAB, 30)
+        assert(player:getMaxMP() == 1033, string.format('PLD/RDM 30 has %d MP', player:getMaxMP()))
     end)
 
     it('casts with the magic skill of its species jobs', function()
@@ -158,6 +201,43 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
     end)
 
+    -- Retail returns a Monipulator to the exact spot it stood on when it entered the passage.
+    it('returns to the exact entry position', function()
+        player:setMonstrosityEntryData(219.288, -12, 224.175, 255, xi.zone.PORT_WINDURST, xi.job.WAR, xi.job.NIN)
+        xi.monstrosity.onMonstrosityReturnToEntrance(player)
+        for _ = 1, 3 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(player)
+        end
+
+        local pos = player:getPos()
+        assert(player:getZoneID() == xi.zone.PORT_WINDURST, string.format('returned to zone %d', player:getZoneID()))
+        assert(math.abs(pos.x - 219.288) < 0.01 and math.abs(pos.z - 224.175) < 0.01 and pos.rot == 255,
+            string.format('returned to %.3f, %.3f facing %d', pos.x, pos.z, pos.rot))
+        assert(player:getMainJob() == xi.job.WAR and player:getSubJob() == xi.job.NIN, 'jobs were not restored')
+    end)
+
+    it('returns to the entrance when the death menu times out', function()
+        player:setMonstrosityEntryData(219.288, -12, 224.175, 255, xi.zone.PORT_WINDURST, xi.job.WAR, xi.job.NIN)
+        player:setHP(0)
+        xi.test.world:tickEntity(player)
+        xi.test.world:skipTime(3700)
+        for _ = 1, 3 do
+            xi.test.world:tickEntity(player)
+            xi.test.world:skipTime(1)
+        end
+
+        assert(player:getZoneID() == xi.zone.PORT_WINDURST, string.format('went to zone %d', player:getZoneID()))
+        assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
+    end)
+
+    it('sends a Monipulator with no recorded entry home as a WAR', function()
+        player:setMonstrosityEntryData(0, 0, 0, 0, 0, 0, 0)
+        xi.monstrosity.onMonstrosityReturnToEntrance(player)
+
+        assert(player:getMainJob() == xi.job.WAR, string.format('main job is %d', player:getMainJob()))
+    end)
+
     it('stops Relinquish when the player moves', function()
         startRelinquish()
         waitSeconds(4)
@@ -183,6 +263,158 @@ describe('Monstrosity restrictions', function()
         assert(player:getMainJob() == xi.job.MON, 'Relinquish carried on after Foot Kick')
     end)
 
+    -- Retail answers a Monipulator at the Fort Ghelsba elevator lever with a bare release.
+    it('cannot work a lever outside the Feretory', function()
+        player:gotoZone(xi.zone.FORT_GHELSBA)
+        player:delStatusEffect(xi.effect.GESTATION)
+        local lever = player.entities:moveTo('_3x1')
+        player.packets:clear()
+        player.actions:trigger(lever)
+
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            assert(pkt.type ~= 0x032 and pkt.type ~= 0x034, 'the lever started an event')
+        end
+    end)
+
+    -- Gestation multiplies speed by 1.5, so a Wamouracampa stays slower than other species.
+    it('speeds up by half under Gestation', function()
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 60, origin = player })
+        assert(player:getSpeed() == 75, string.format('Lizard speed is %d', player:getSpeed()))
+
+        helpers.becomeSpecies(player, xi.monstrositySpecies.WAMOURACAMPA, xi.monstrositySpecies.WAMOURACAMPA, 1)
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 60, origin = player })
+        assert(player:getSpeed() == 45, string.format('Wamouracampa speed is %d', player:getSpeed()))
+    end)
+
+    it('warns that Gestation is about to wear off', function()
+        player:addStatusEffect(xi.effect.GESTATION, { power = 0, duration = 15, tick = 10, origin = player })
+        player.packets:clear()
+        waitSeconds(12)
+
+        local warned = false
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if
+                pkt.type == 0x029 and
+                pkt.data[0x18] + pkt.data[0x19] * 256 == xi.msg.basic.ABOUT_TO_WEAR_OFF
+            then
+                warned = true
+            end
+        end
+
+        assert(warned, 'no warning before Gestation wore off')
+    end)
+
+    -- Retail marks a Monipulator in the party packet with 0x8000 and the species.
+    it('flags the species in the party packet', function()
+        player.packets:clear()
+        helpers.sendGameOk(player)
+
+        local flag = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x0DF then
+                flag = pkt.data[0x1C] + pkt.data[0x1D] * 256
+            end
+        end
+
+        local expected = 0x8000 + player:getMonstrosityData().species
+        assert(flag == expected, string.format('0x0DF flag %s, expected %d', tostring(flag), expected))
+    end)
+
+    -- Retail sends BallistaFlg 0x09 in 0x037 under Belligerency outside the Feretory. Its 0x08 bit is bit 0 of byte 0x37.
+    it('shows the Belligerency icon in the status packet', function()
+        player:setBelligerencyFlag(true)
+        player.packets:clear()
+        player:gotoZone(xi.zone.WEST_RONFAURE)
+
+        local shown = nil
+        for _, pkt in pairs(player.packets:getIncoming()) do
+            if pkt.type == 0x037 then
+                shown = bit.band(pkt.data[0x37], 0x01) ~= 0
+            end
+        end
+
+        assert(shown, string.format('0x037 shows the Belligerency icon: %s', tostring(shown)))
+    end)
+
+    -- Rank follows the infamy held, and is Mon outside Belligerency.
+    describe('rank', function()
+        local function shownRank()
+            local rank = nil
+            for _, pkt in pairs(player.packets:getIncoming()) do
+                if pkt.type == 0x037 then
+                    rank = bit.band(pkt.data[0x5A], 0x03)
+                end
+            end
+
+            return rank
+        end
+
+        it('shows NM in the status packet once infamy passes 10,000 under Belligerency', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 9999)
+            player.packets:clear()
+            helpers.killWorm(player)
+
+            local rank = shownRank()
+            assert(rank == 1, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
+
+        it('drops to Mon when Belligerency ends', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 10500)
+            player.packets:clear()
+            player:setBelligerencyFlag(false)
+
+            local rank = shownRank()
+            assert(rank == 0, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
+
+        it('drops to Mon when infamy is spent below 10,001', function()
+            player:setBelligerencyFlag(true)
+            player:addCurrency('infamy', 10500)
+            player.packets:clear()
+            player:delCurrency('infamy', 3000)
+
+            local rank = shownRank()
+            assert(rank == 0, string.format('0x037 shows rank %s', tostring(rank)))
+        end)
+    end)
+
+    it('recovers a twentieth of max HP a tick out of combat', function()
+        player:setHP(1)
+        waitSeconds(4)
+
+        local gained = player:getHP() - 1
+        assert(gained >= math.floor(player:getMaxHP() / 20), string.format('gained %d of %d HP', gained, player:getMaxHP()))
+    end)
+
+    it('recovers a twentieth of max MP a tick out of combat', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.BEE, onyxBee, 20)
+        player:setMP(0)
+        waitSeconds(4)
+
+        assert(player:getMP() >= math.floor(player:getMaxMP() / 20), string.format('MP is %d of %d', player:getMP(), player:getMaxMP()))
+    end)
+
+    it('recovers no HP while a monster holds enmity', function()
+        local mob = player.entities:moveTo('Wild_Rabbit')
+        mob:respawn()
+        mob:addStatusEffect(xi.effect.PETRIFICATION, { power = 1, duration = 600, origin = mob })
+        mob:addEnmity(player, 1, 1)
+        player:setHP(50)
+        waitSeconds(4)
+
+        assert(player:getHP() == 50, string.format('HP rose to %d with a monster on the player', player:getHP()))
+    end)
+
+    it('recovers no HP under slip damage', function()
+        player:setHP(50)
+        player:setMod(xi.mod.REGEN_DOWN, 1)
+        waitSeconds(4)
+
+        assert(player:getHP() <= 50, string.format('HP rose to %d under slip damage', player:getHP()))
+    end)
+
     it('never starts Relinquish under slip damage', function()
         player:addStatusEffect(xi.effect.POISON, { power = 1, duration = 60, tick = 3, origin = player })
         startRelinquish()
@@ -202,16 +434,18 @@ describe('Monstrosity restrictions', function()
     -- Bee is the JP wiki's +120%, the same as Rabbit.
     local retailHP =
     {
-        { name = 'Lizard',     family = xi.monstrositySpecies.LIZARD,     hp = { [1] = 79, [5] = 276, [9] = 463 } },
-        { name = 'Rabbit',     family = xi.monstrositySpecies.RABBIT,     hp = { [1] = 72, [2] = 110, [3] = 154, [4] = 200, [5] = 253, [6] = 292, [7] = 334, [8] = 378, [9] = 424 } },
-        { name = 'Bee',        family = xi.monstrositySpecies.BEE,        hp = { [1] = 72, [5] = 253, [9] = 424 } },
-        { name = 'Mandragora', family = xi.monstrositySpecies.MANDRAGORA, hp = { [1] = 93 } },
+        { name = 'Lizard',     family = xi.monstrositySpecies.LIZARD,          hp = { [1] = 79, [5] = 276, [9] = 463 } },
+        { name = 'Rabbit',     family = xi.monstrositySpecies.RABBIT,          hp = { [1] = 72, [2] = 110, [3] = 154, [4] = 200, [5] = 253, [6] = 292, [7] = 334, [8] = 378, [9] = 424 } },
+        { name = 'Bee',        family = xi.monstrositySpecies.BEE,             hp = { [1] = 72, [5] = 253, [9] = 424 } },
+        { name = 'Mandragora', family = xi.monstrositySpecies.MANDRAGORA,      hp = { [1] = 93 } },
+        { name = 'Goobbue',    family = xi.monstrositySpecies.GOOBBUE,         hp = { [1] = 82, [7] = 380, [8] = 430, [9] = 482 } },
+        { name = 'Slime',      family = xi.monstrositySpecies.ASTOLTIAN_SLIME, hp = { [1] = 79, [5] = 276, [9] = 463 }, species = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME },
     }
 
     for _, species in ipairs(retailHP) do
         it(string.format('gives a %s its retail HP', species.name), function()
             for level, expected in pairs(species.hp) do
-                helpers.becomeSpecies(player, species.family, species.family, level)
+                helpers.becomeSpecies(player, species.family, species.species or species.family, level)
                 assert(player:getMaxHP() == expected, string.format('%s %d has %d HP, expected %d', species.name, level, player:getMaxHP(), expected))
             end
         end)
@@ -324,6 +558,35 @@ describe('Monstrosity restrictions', function()
             end
         end)
     end
+
+    -- JP wiki: a Monipulator cannot /heal. The client hides it, so only a crafted 0x0E8 asks.
+    it('refuses /heal', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 30)
+        local camp = ffi.new('uint8_t[8]')
+        camp[4] = 1
+        player.packets:send(0x0E8, camp, assert(ffi.sizeof(camp)))
+
+        assert(player:getAnimation() ~= xi.animation.HEALING, 'a Monipulator started healing')
+    end)
+
+    -- The client never offers /mount either.
+    it('refuses /mount', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.RABBIT, xi.monstrositySpecies.RABBIT, 30)
+        player:addKeyItem(xi.keyItem.CHOCOBO_COMPANION)
+
+        local mount = ffi.new('uint8_t[28]')
+        local id    = player:getID()
+        for byte = 0, 3 do
+            mount[4 + byte] = bit.band(bit.rshift(id, byte * 8), 0xFF)
+        end
+
+        mount[8]  = bit.band(player:getTargID(), 0xFF)
+        mount[9]  = bit.rshift(player:getTargID(), 8)
+        mount[10] = 0x1A
+        player.packets:send(0x01A, mount, assert(ffi.sizeof(mount)))
+
+        player.assert.no:hasEffect(xi.effect.MOUNTED)
+    end)
 end)
 
 -- Retail lists, and lets a Monipulator cast, the learned spells its species' jobs know at the
@@ -334,15 +597,22 @@ describe('Monstrosity spellcasting', function()
     ---@type CClientEntityPair
     local player
 
-    -- Casts and reports the MP it cost.
+    -- Returns how many casts went off. Out-of-combat regen refills MP, so MP can't tell.
     local function cast(spellId, target)
+        local casts = 0
+        player:addListener('MAGIC_USE', 'TEST_MON_CAST', function()
+            casts = casts + 1
+        end)
+
         player:setMP(300)
         player.actions:useSpell(target, spellId)
         for _ = 1, 5 do
             xi.test.world:skipTime(2)
         end
 
-        return 300 - player:getMP()
+        player:removeListener('TEST_MON_CAST')
+
+        return casts
     end
 
     -- The spell list goes out once the client reports the zone loaded.
@@ -384,7 +654,7 @@ describe('Monstrosity spellcasting', function()
         mob:setAutoAttackEnabled(false)
         player.entities:moveTo(mob:getID())
 
-        assert(cast(xi.magic.spell.STONE, mob) > 0, string.format('Stone was not cast, %d MP of %d', player:getMP(), player:getMaxMP()))
+        assert(cast(xi.magic.spell.STONE, mob) > 0, 'Stone was not cast')
     end)
 
     it('cannot cast a spell outside its species jobs', function()
@@ -400,4 +670,121 @@ describe('Monstrosity spellcasting', function()
 
         assert(player:getPartySize() == 1, 'a Monipulator called a Trust')
     end)
+end)
+
+-- Retail level 10 status screens with no instincts, and a Metal Slime capture from levels 1-10.
+-- HP and MP are checked at level 9, below the first HP merit step.
+describe('Monstrosity slimes', function()
+    ---@type CClientEntityPair
+    local player
+
+    local stats = { xi.mod.STR, xi.mod.DEX, xi.mod.VIT, xi.mod.AGI, xi.mod.INT, xi.mod.MND, xi.mod.CHR }
+
+    local slimes =
+    {
+        { name = 'Slime',       species = 128 + xi.monstrositySpecies.ASTOLTIAN_SLIME, hp = 463, mp = 0,   stats = { 16, 16, 12, 18, 13,  9, 16 }, attack = 53, defence = 79  },
+        { name = 'She-Slime',   species = 256 + xi.monstrosityVariant.SHE_SLIME,       hp = 463, mp = 0,   stats = { 16, 16, 12, 18, 13,  9, 16 }, attack = 63, defence = 79  },
+        { name = 'Metal Slime', species = 256 + xi.monstrosityVariant.METAL_SLIME,     hp = 7,   mp = 374, stats = { 11, 16, 10, 18, 18, 10, 16 }, attack = 50, defence = 315 },
+    }
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+    end)
+
+    for _, slime in ipairs(slimes) do
+        it(string.format('gives a level 9 %s its retail HP and MP', slime.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, slime.species, 9)
+
+            assert(player:getMaxHP() == slime.hp, string.format('%d HP, retail %d', player:getMaxHP(), slime.hp))
+            assert(player:getMaxMP() == slime.mp, string.format('%d MP, retail %d', player:getMaxMP(), slime.mp))
+        end)
+
+        it(string.format('gives a level 10 %s stats close to retail', slime.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, slime.species, 10)
+
+            for idx, stat in ipairs(stats) do
+                local value = player:getStat(stat)
+                assert(math.abs(value - slime.stats[idx]) <= 2, string.format('stat %d is %d, retail %d', idx, value, slime.stats[idx]))
+            end
+
+            local attack  = player:getStat(xi.mod.ATT)
+            local defence = player:getStat(xi.mod.DEF)
+            assert(math.abs(attack - slime.attack) <= 5, string.format('attack %d, retail %d', attack, slime.attack))
+            assert(math.abs(defence - slime.defence) <= 15, string.format('defence %d, retail %d', defence, slime.defence))
+        end)
+    end
+
+    -- Retail HP is the base slime's divided by 60, and MP is a full BLM's.
+    it('gives a level 1 Metal Slime 1 HP and 94 MP', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, 256 + xi.monstrosityVariant.METAL_SLIME, 1)
+
+        assert(player:getMaxHP() == 1, string.format('%d HP', player:getMaxHP()))
+        assert(player:getMaxMP() == 94, string.format('%d MP', player:getMaxMP()))
+    end)
+
+    it('runs Frizz as a Metal Slime', function()
+        helpers.becomeSpecies(player, xi.monstrositySpecies.ASTOLTIAN_SLIME, 256 + xi.monstrosityVariant.METAL_SLIME, 10)
+
+        local used = helpers.useMoveOnRabbit(player, 688)
+        assert(used == 3127, string.format('expected mob skill 3127, got %s', tostring(used)))
+    end)
+end)
+
+-- Retail Spriggan, Spriggan.C and Spriggan.G from a levels 1-10 capture, below the first HP merit step.
+describe('Monstrosity Spriggans', function()
+    ---@type CClientEntityPair
+    local player
+
+    local stats = { xi.mod.STR, xi.mod.DEX, xi.mod.VIT, xi.mod.AGI, xi.mod.INT, xi.mod.MND, xi.mod.CHR }
+
+    -- Spriggan.C shares the plain Spriggan's values but for five sixths of its defence.
+    local plain =
+    {
+        [1] = { hp = 72,  mp = 47,  stats = {  9,  8,  7,  7,  6,  6,  6 } },
+        [5] = { hp = 249, mp = 117, stats = { 13, 10, 10,  9,  8,  9,  9 } },
+        [9] = { hp = 417, mp = 187, stats = { 17, 13, 14, 12, 11, 12, 11 } },
+    }
+
+    local spriggans =
+    {
+        { name = 'Spriggan',   species = 128 + xi.monstrositySpecies.EORZEAN_SPRIGGAN, defence = 46, levels = plain },
+        { name = 'Spriggan.C', species = 256 + xi.monstrosityVariant.SPRIGGAN_C,       defence = 39, levels = plain },
+        {
+            name    = 'Spriggan.G',
+            species = 256 + xi.monstrosityVariant.SPRIGGAN_G,
+            defence = 44,
+            levels  =
+            {
+                [1] = { hp = 56,  mp = 94,  stats = {  7,  8,  6,  7,  8,  7,  6 } },
+                [5] = { hp = 195, mp = 234, stats = { 10, 10,  9,  9, 11, 10,  9 } },
+                [9] = { hp = 325, mp = 374, stats = { 13, 13, 12, 12, 15, 13, 11 } },
+            },
+        },
+    }
+
+    before_each(function()
+        player = helpers.spawnMonipulator(xi.zone.WEST_RONFAURE)
+    end)
+
+    for _, spriggan in ipairs(spriggans) do
+        it(string.format('gives a %s its retail HP, MP and stats', spriggan.name), function()
+            for level, retail in pairs(spriggan.levels) do
+                helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, spriggan.species, level)
+
+                assert(player:getMaxHP() == retail.hp, string.format('level %d has %d HP, retail %d', level, player:getMaxHP(), retail.hp))
+                assert(player:getMaxMP() == retail.mp, string.format('level %d has %d MP, retail %d', level, player:getMaxMP(), retail.mp))
+                for idx, stat in ipairs(stats) do
+                    local value = player:getStat(stat)
+                    assert(math.abs(value - retail.stats[idx]) <= 2, string.format('level %d stat %d is %d, retail %d', level, idx, value, retail.stats[idx]))
+                end
+            end
+        end)
+
+        it(string.format('gives a level 5 %s close to its retail defence', spriggan.name), function()
+            helpers.becomeSpecies(player, xi.monstrositySpecies.EORZEAN_SPRIGGAN, spriggan.species, 5)
+
+            local defence = player:getStat(xi.mod.DEF)
+            assert(math.abs(defence - spriggan.defence) <= 3, string.format('defence %d, retail %d', defence, spriggan.defence))
+        end)
+    end
 end)

@@ -28,6 +28,7 @@
 #include "data/enums/mod.h"
 #include "data/enums/monstrosity_species.h"
 #include "data/enums/monstrosity_variant.h"
+#include "data/shared_types/mob_attributes/yaml.h"
 #include "data/yaml/enum_keyed_map.h"
 #include "data/yaml/enum_token.h"
 #include "data/yaml/schema_annotations.h"
@@ -44,27 +45,36 @@ namespace xi::data::datasets::monstrosity::wire
 
 struct TpSkill
 {
-    std::string skill{};
-    uint16      dat_skill_id{};
-    uint16      mob_skill_id{};
-    uint8       unlock_level{};
-    uint16      tp_cost{};
-    bool        enabled{ false };
+    std::string           skill{};
+    uint16                dat_skill_id{};
+    uint16                mob_skill_id{};
+    uint8                 unlock_level{};
+    uint16                tp_cost{};
+    std::optional<uint16> ready_time;
+    bool                  enabled{ false };
 };
 
 struct Species
 {
-    yaml::EnumToken<xi::MonstrositySpecies> family{};
-    uint16                                  species_code{};
-    std::string                             name{};
-    yaml::EnumToken<xi::Job>                mjob{};
-    yaml::EnumToken<xi::Job>                sjob{};
-    uint8                                   size{};
-    uint16                                  look{};
-    yaml::EnumToken<xi::Ecosystem>          ecosystem{};
-    std::optional<uint16>                   mob_species;
-    std::optional<uint16>                   hp_scale;
-    std::optional<std::vector<TpSkill>>     tp_skills;
+    yaml::EnumToken<xi::MonstrositySpecies>           family{};
+    uint16                                            species_code{};
+    std::string                                       name{};
+    yaml::EnumToken<xi::Job>                          mjob{};
+    yaml::EnumToken<xi::Job>                          sjob{};
+    std::optional<yaml::EnumToken<xi::Job>>           hp_mjob;
+    std::optional<yaml::EnumToken<xi::Job>>           hp_sjob;
+    uint8                                             size{};
+    uint16                                            look{};
+    yaml::EnumToken<xi::Ecosystem>                    ecosystem{};
+    std::optional<uint16>                             mob_species;
+    std::optional<xi::data::shared::StatRanks>        stat_ranks;
+    std::optional<uint16>                             hp_scale;
+    std::optional<uint8>                              speed;
+    std::optional<uint8>                              animation_speed;
+    std::optional<uint8>                              hitbox;
+    std::optional<uint16>                             stance_species;
+    std::optional<yaml::EnumKeyedMap<xi::Mod, int16>> mods;
+    std::optional<std::vector<TpSkill>>               tp_skills;
 };
 
 struct Instinct
@@ -115,8 +125,9 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::TpSkill>
     glz::schema skill{ .description = "Name of the move, matching its mob_skills row." };
     glz::schema dat_skill_id{ .description = "Id the client sends when the move is used.", .minimum = 1L, .maximum = 65535L };
     glz::schema mob_skill_id{ .description = "mob_skills row that runs when the move resolves.", .minimum = 1L, .maximum = 65535L };
-    glz::schema unlock_level{ .description = "Species level the move becomes available at. Mostly unverified.", .minimum = 1L, .maximum = 99L };
+    glz::schema unlock_level{ .description = "Species level the move is learned at, from the client species DAT.", .minimum = 1L, .maximum = 99L };
     glz::schema tp_cost{ .description = "TP the move costs. A Monipulator spends only this, not the whole bar.", .minimum = 0L, .maximum = 3000L };
+    glz::schema ready_time{ .description = "Milliseconds from readying to using the move. Defaults to the mob_skills activation time.", .minimum = 0L, .maximum = 10000L };
     glz::schema enabled{ .description = "Only true once a retail capture has verified the move." };
 };
 
@@ -128,11 +139,19 @@ struct glz::json_schema<xi::data::datasets::monstrosity::wire::Species>
     glz::schema name{ .description = "Display name." };
     glz::schema mjob{ .description = "Main job granted while this species." };
     glz::schema sjob{ .description = "Sub job granted while this species." };
+    glz::schema hp_mjob{ .description = "Main job the HP formula uses. Absent uses mjob." };
+    glz::schema hp_sjob{ .description = "Sub job the HP formula uses. Absent uses sjob." };
     glz::schema size{ .description = "0 small, 1 medium, 2 large.", .minimum = 0L, .maximum = 2L };
     glz::schema look{ .description = "Model id.", .minimum = 0L, .maximum = 65535L };
     glz::schema ecosystem{ .description = "Ecosystem for correlation. Unclassified correlates with nothing." };
     glz::schema mob_species{ .description = "data/ecosystems.yaml species whose stat ranks the base stats use. Absent keeps the player formula." };
-    glz::schema hp_scale{ .description = "Percent applied to the mob HP formula. Defaults to 240.", .minimum = 100L, .maximum = 400L };
+    glz::schema stat_ranks{ .description = "STR to CHR ranks for the base stats, in place of mob_species." };
+    glz::schema hp_scale{ .description = "Percent applied to the mob HP formula. Defaults to 240.", .minimum = 1L, .maximum = 400L };
+    glz::schema speed{ .description = "Base movement speed. Absent keeps map.BASE_SPEED.", .minimum = 1L, .maximum = 255L };
+    glz::schema animation_speed{ .description = "Walk animation speed. Absent follows the movement speed.", .minimum = 1L, .maximum = 255L };
+    glz::schema hitbox{ .description = "Model hitbox in tenths of a yalm. Absent keeps the race's.", .minimum = 1L, .maximum = 255L };
+    glz::schema stance_species{ .description = "Species code Fighting Stance shows this species as.", .minimum = 1L, .maximum = 65535L };
+    glz::schema mods{ .description = "Modifiers held while this species." };
     glz::schema tp_skills{ .description = "TP moves this species can use." };
 };
 

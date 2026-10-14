@@ -19,16 +19,18 @@
 ---@type TEffect
 local effectObject = {}
 
-local boostAmount = 50 -- +50% movement speed
+-- Retail multiplies speed by 1.5, so a Wamouracampa goes 30 to 45 and a Tiger stays at the 80 cap.
+local speedMultiplier = 5000
 
 effectObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.MOVE_SPEED_STACKABLE, boostAmount)
+    effect:addMod(xi.mod.MOVE_SPEED_FLEE, speedMultiplier)
 end
 
+-- Ticks every 10 s (src/map/monstrosity.cpp), so this warns once.
 effectObject.onEffectTick = function(target, effect)
-end
-
-effectObject.onEffectLose = function(target, effect)
+    if effect:getTimeRemaining() <= 10000 then
+        target:messageBasic(xi.msg.basic.ABOUT_TO_WEAR_OFF, effect:getEffectType())
+    end
 end
 
 return effectObject

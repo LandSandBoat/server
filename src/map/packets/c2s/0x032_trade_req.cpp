@@ -25,6 +25,7 @@
 #include "enums/msg_std.h"
 #include "items/transactions/player_trade.h"
 #include "packets/c2s/validation.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x021_item_trade_req.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "packets/s2c/0x053_systemmes.h"
@@ -34,7 +35,7 @@
 auto GP_CLI_COMMAND_TRADE_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
+        .blockedBy({ BlockedState::InEvent })
         .mustNotEqual(PChar->id, this->UniqueNo, "Character trading with itself");
 }
 
@@ -47,6 +48,19 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     }
 
     ShowDebugFmt("{} initiated trade request with {}", PChar->getName(), PTarget->getName());
+
+    // Retail answers a Monipulator's request with the generic error, and a request to one with its own message.
+    if (PChar->m_PMonstrosity)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrEtc);
+        return;
+    }
+
+    if (PTarget->m_PMonstrosity)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PTarget->id, MsgStd::CannotTradeWithTarget);
+        return;
+    }
 
     const auto refuse = [&](std::string_view reason)
     {

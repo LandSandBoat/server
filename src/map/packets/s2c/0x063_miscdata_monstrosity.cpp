@@ -46,19 +46,12 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
     // Not the Belligerency flag.
     packet.flags = PChar->m_PMonstrosity->Flags;
 
-    const auto infamy = charutils::GetPoints(PChar, "infamy");
-
-    // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
-    // The ranks are listed as:
-    // 0~10,000 Mon. (Monster)
-    // 10,001~20,000 NM (Notorious Monster)
-    // 20,001+ HNM (Highly Notorious Monster)
-    packet.rank = static_cast<uint8>(std::min(2, (infamy - 1) / 10000));
+    packet.rank = PChar->m_PMonstrosity->Rank;
 
     // TODO: unknown1[0] varies on retail with no known pattern.
     packet.unknown1[0] = 0xEC;
     packet.unknown1[1] = 0x00;
-    packet.infamy      = infamy;
+    packet.infamy      = charutils::GetPoints(PChar, "infamy");
     packet.unknown2    = 0x00;
 
     // Bitpacked 2-bit values. 0 = no instincts from that species,

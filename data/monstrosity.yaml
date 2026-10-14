@@ -3,7 +3,7 @@
 # Monstrosity species, instincts, TP moves and the exp curve.
 
 monstrosity:
-  # Exp needed to clear each level. Levels 1-40 match retail.
+  # Exp needed to clear each level. Levels 1-51 match retail. TODO: 52-99 have no source.
   exp_table:
     1:    300
     2:    400
@@ -107,7 +107,7 @@ monstrosity:
 
   # Teyrnon's shop by menu page. A slot's position in its list is the bit the client shows it at,
   # so never reorder. The cost and what a slot grants are fixed in the client event. The
-  # requirements are not shown to the player and are ours to set.
+  # requirements come from BG Wiki, and the JP wiki says a slot shows only once they are met.
   teyrnon_shop:
     0: # Beasts
       - variant: lapinion
@@ -314,7 +314,7 @@ monstrosity:
       - species: colibri
         infamy:  5000
         requirements:
-          bat:  50
+          bat:  45
           bird: 45
 
       - variant: toucalibri
@@ -773,10 +773,10 @@ monstrosity:
       cost:   6
       name:   Coeurl instinct I
       effect: "'Resist Stun'+25 Lightning Elem. 'Magic Atk. Bonus'+5 Spell interruption rate down 15%"
-      # Not modelled: Spell interruption rate down+15%
       mods:
-        stunres:     25
-        thunder_mab:  5
+        stunres:        25
+        thunder_mab:     5
+        spellinterrupt: 15
     coeurl_instinct_ii:
       id:     22
       cost:   8
@@ -872,10 +872,10 @@ monstrosity:
       cost:   10
       name:   Buffalo instinct III
       effect: HP+15% Critical hit rate +10% Enemy critical hit rate -20%
-      # Not modelled: Enemy critical hit rate-20%
       mods:
-        hpp:         15
-        crithitrate:  5
+        hpp:                  15
+        crithitrate:           5
+        critical_hit_evasion: 20
     marid_instinct_i:
       id:     33
       cost:   8
@@ -890,10 +890,10 @@ monstrosity:
       cost:   10
       name:   Marid instinct II
       effect: STR+8 DEF+20 Enemy critical hit rate -30%
-      # Not modelled: Enemy critical rate-30%
       mods:
-        str:  8
-        def: 20
+        str:                   8
+        def:                  20
+        critical_hit_evasion: 30
     marid_instinct_iii:
       id:     35
       cost:   12
@@ -1014,10 +1014,10 @@ monstrosity:
       cost:   6
       name:   Treant instinct III
       effect: Magic Accuracy+10 'Magic Atk. Bonus'+10 Spell interruption rate down 20%
-      # Not modelled: Spell interruption rate down+20%
       mods:
-        macc: 10
-        matt: 10
+        macc:           10
+        matt:           10
+        spellinterrupt: 20
     morbol_instinct_i:
       id:     51
       cost:   6
@@ -1032,10 +1032,10 @@ monstrosity:
       cost:   8
       name:   Morbol instinct II
       effect: HP+5% STR+5 Status ailment resistance +20
-      # Not modelled: Status ailment resistance+20
       mods:
-        hpp: 5
-        str: 5
+        hpp:        5
+        str:        5
+        statusres: 20
     morbol_instinct_iii:
       id:     53
       cost:   10
@@ -1258,9 +1258,10 @@ monstrosity:
       cost:   6
       name:   Beetle instinct III
       effect: "'Stoneskin'+50 Enemy critical hit damage -15% 'Refresh'+1"
-      # Not modelled: Stoneskin+50, Critical damage taken-15%
+      # Not modelled: Stoneskin+50
       mods:
-        refresh: 1
+        refresh:         1
+        crit_def_bonus: 15
     crawler_instinct_i:
       id:     87
       cost:   4
@@ -1384,10 +1385,10 @@ monstrosity:
       cost:   8
       name:   Antlion instinct II
       effect: "'Resist Blind'+50 Earth Elemental 'Magic Atk. Bonus'+10 Spell interruption rate down 30%"
-      # Not modelled: Spell interruption rate down+30%
       mods:
-        blindres:  50
-        earth_mab: 10
+        blindres:       50
+        earth_mab:      10
+        spellinterrupt: 30
     antlion_instinct_iii:
       id:     101
       cost:   10
@@ -1420,10 +1421,10 @@ monstrosity:
       cost:   12
       name:   Diremite instinct III
       effect: STR+9 'Store TP'+10 Dark magic casting time -10%
-      # Not modelled: Dark magic casting time-10%
       mods:
-        str:      9
-        storetp: 10
+        str:               9
+        storetp:          10
+        dark_magic_cast: -10
     chigoe_instinct_i:
       id:     105
       cost:   6
@@ -1825,7 +1826,8 @@ monstrosity:
       cost:   20
       name:   Slug instinct III
       effect: Absorbs water damage
-      # Not modelled: Absorb water damage
+      mods:
+        water_absorb: 100
     sandworm_instinct_i:
       id:     171
       cost:   6
@@ -1892,9 +1894,10 @@ monstrosity:
       cost:   5
       name:   Crab instinct II
       effect: "'Magic Def. Bonus'+2 Critical damage taken -15% Spell interruption rate down 10%"
-      # Not modelled: Critical damage taken-15%, Spell interruption rate down+10%
       mods:
-        mdef: 2
+        mdef:            2
+        crit_def_bonus: 15
+        spellinterrupt: 10
     crab_instinct_iii:
       id:     182
       cost:   6
@@ -1927,10 +1930,10 @@ monstrosity:
       cost:   5
       name:   Pugil instinct III
       effect: Accuracy+35 Elemental magic casting time -5% Water Elemental Magic Attack+10
-      # Not modelled: Elemental magic casting time-5%
       mods:
-        acc:       35
-        water_mab: 10
+        acc:                35
+        water_mab:          10
+        elemental_celerity:  5
     sea_monk_instinct_i:
       id:     186
       cost:   5
@@ -1945,8 +1948,9 @@ monstrosity:
       cost:   7
       name:   Sea Monk instinct II
       effect: "'Magic Atk. Bonus'+1% 'Magic Def. Bonus'+1% 'Occult Acumen'+5"
-      # Not modelled: Magic Attack Bonus+1%, Magic Defense Bonus+1%
       mods:
+        matt:          1
+        mdef:          1
         occult_acumen: 5
     sea_monk_instinct_iii:
       id:     188
@@ -1968,18 +1972,19 @@ monstrosity:
       cost:   8
       name:   Uragnite instinct II
       effect: DEF+10% Potency of 'Cure' effect received +5% Spell interruption rate down 40%
-      # Not modelled: Spell interruption rate down+40%
       mods:
         defp:              10
         cure_potency_rcvd:  5
+        spellinterrupt:    40
     uragnite_instinct_iii:
       id:     191
       cost:   16
       name:   Uragnite instinct III
       effect: HP+6% Enemy critical hit rate -30% Converts 1.2% of physical damage taken to TP
-      # Not modelled: Enemy critical hit rate-30%, Convert physical damage taken to TP+1.2%
+      # Not modelled: Convert physical damage taken to TP+1.2%
       mods:
-        hpp: 6
+        hpp:                   6
+        critical_hit_evasion: 30
     orobon_instinct_i:
       id:     192
       cost:   7
@@ -1994,10 +1999,10 @@ monstrosity:
       cost:   8
       name:   Orobon instinct II
       effect: HP+7% 'Magic Def. Bonus'+7 Elemental magic casting time -7%
-      # Not modelled: Elemental magic casting time-7%
       mods:
-        hpp:  7
-        mdef: 7
+        hpp:                7
+        mdef:               7
+        elemental_celerity: 7
     orobon_instinct_iii:
       id:     194
       cost:   10
@@ -2034,8 +2039,8 @@ monstrosity:
       cost:   15
       name:   Ruszor instinct III
       effect: "'Magic Atk. Bonus'+5% 'Resist Paralyze'+80"
-      # Not modelled: Magic Attack Bonus+5%
       mods:
+        matt:         5
         paralyzeres: 80
     toad_instinct_i:
       id:     198
@@ -2051,7 +2056,8 @@ monstrosity:
       cost:   5
       name:   Toad instinct II
       effect: Elemental magic casting time -10%
-      # Not modelled: Elemental magic casting time-10%
+      mods:
+        elemental_celerity: 10
     toad_instinct_iii:
       id:     200
       cost:   30
@@ -2244,10 +2250,10 @@ monstrosity:
       cost:   10
       name:   Colibri instinct III
       effect: "'Magic Def. Bonus'+5 Haste+2% Grants one additional song effect"
-      # Not modelled: Grants one additional song effect
       mods:
-        mdef:         5
-        haste_gear: 200
+        mdef:                  5
+        haste_gear:          200
+        maximum_songs_bonus:   1
     amphiptere_instinct_i:
       id:     228
       cost:   8
@@ -2456,10 +2462,10 @@ monstrosity:
       cost:   15
       name:   Black mage's instinct
       effect: INT+10 'Magic Atk. Bonus'+10 Elemental magic casting time -10%
-      # Not modelled: Elemental magic casting time-10%
       mods:
-        int:  10
-        matt: 10
+        int:                10
+        matt:               10
+        elemental_celerity: 10
     red_mages_instinct:
       id:     782
       cost:   15
@@ -2511,10 +2517,10 @@ monstrosity:
       cost:   15
       name:   Bard's instinct
       effect: CHR+5 'Resist Silence'+30 Enemy critical hit rate -5%
-      # Not modelled: Enemy Critical hit rate-5%
       mods:
-        chr:         5
-        silenceres: 30
+        chr:                   5
+        silenceres:           30
+        critical_hit_evasion:  5
     rangers_instinct:
       id:     788
       cost:   15
@@ -2618,10 +2624,10 @@ monstrosity:
       cost:   15
       name:   Geomancer's instinct
       effect: HP+10% 'Conserve MP'+10 Elemental magic casting time -10%
-      # Not modelled: Elemental casting time-10%
       mods:
-        hpp:         10
-        conserve_mp: 10
+        hpp:                10
+        conserve_mp:        10
+        elemental_celerity: 10
     rune_fencers_instinct:
       id:     799
       cost:   15
@@ -2632,6 +2638,9 @@ monstrosity:
         mdef:  20
         regen:  2
 
+  # Every species' moves and learn levels are the client's own (ROM/288/68.DAT). A move stays
+  # disabled until a capture confirms its animation.
+  # Jobs and hp_scale (100 plus the HP bonus) are from the JP wiki family pages.
   species:
     rabbit:
       family:       rabbit
@@ -2644,12 +2653,14 @@ monstrosity:
       ecosystem:    beast
       mob_species:  106
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -2668,13 +2679,8 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
-        - skill:        snow_cloud
-          dat_skill_id: 455
-          mob_skill_id: 661
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
     behemoth:
       family:       behemoth
       species_code: 2
@@ -2684,6 +2690,7 @@ monstrosity:
       size:         2
       look:         0x0194
       ecosystem:    beast
+      hp_scale:     300
       tp_skills:
         - skill:        wild_horn
           dat_skill_id: 444
@@ -2691,7 +2698,7 @@ monstrosity:
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        shock_wave
+        - skill:        shock_wave_behemoth
           dat_skill_id: 446
           mob_skill_id: 631
           unlock_level: 10
@@ -2705,72 +2712,66 @@ monstrosity:
           enabled:      false
         - skill:        howl
           dat_skill_id: 448
-          mob_skill_id: 766
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 1079
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 762
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
           mob_skill_id: 633
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 764
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        thunderbolt
+        - skill:        thunderbolt_behemoth
           dat_skill_id: 445
           mob_skill_id: 629
           unlock_level: 40
           tp_cost:      2000
           enabled:      false
+        - skill:        meteor
+          dat_skill_id: 449
+          mob_skill_id: 634
+          unlock_level: 50
+          tp_cost:      3000
+          enabled:      false
     tiger:
-      family:       tiger
-      species_code: 3
-      name:         Tiger
-      mjob:         war
-      sjob:         war
-      size:         1
-      look:         0x0134
-      ecosystem:    beast
+      family:          tiger
+      species_code:    3
+      name:            Tiger
+      mjob:            war
+      sjob:            war
+      size:            1
+      look:            0x0134
+      ecosystem:       beast
+      hp_scale:        240
+      speed:           80
+      animation_speed: 172
+      hitbox:          25
       tp_skills:
         - skill:        razor_fang
           dat_skill_id: 271
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
-        - skill:        razor_fang
-          dat_skill_id: 271
-          mob_skill_id: 3849
-          unlock_level: 1
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
           unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
+        - skill:        crossthrash
+          dat_skill_id: 497
+          mob_skill_id: 1340
+          unlock_level: 40
+          tp_cost:      1800
+          enabled:      false
+        - skill:        predatory_glare_dynamis
+          dat_skill_id: 509
+          mob_skill_id: 1680
+          unlock_level: 60
           tp_cost:      1000
           enabled:      false
     sheep:
@@ -2782,6 +2783,8 @@ monstrosity:
       size:         1
       look:         0x0154
       ecosystem:    beast
+      hp_scale:     240
+      hitbox:       24
       tp_skills:
         - skill:        sheep_charge
           dat_skill_id: 262
@@ -2791,19 +2794,7 @@ monstrosity:
           enabled:      false
         - skill:        rage
           dat_skill_id: 261
-          mob_skill_id: 265
-          unlock_level: 10
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 261
           mob_skill_id: 261
-          unlock_level: 10
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 261
-          mob_skill_id: 3858
           unlock_level: 10
           tp_cost:      800
           enabled:      false
@@ -2819,6 +2810,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1300
           enabled:      false
+        - skill:        sheep_bleat  # No mob_skills row yet
+          dat_skill_id: 263
+          mob_skill_id: 263
+          unlock_level: 40
+          tp_cost:      500
+          enabled:      false
     ram_sheep:
       family:       ram
       species_code: 5
@@ -2828,6 +2825,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     260
       tp_skills:
         - skill:        ram_charge
           dat_skill_id: 266
@@ -2837,19 +2835,7 @@ monstrosity:
           enabled:      false
         - skill:        rage
           dat_skill_id: 265
-          mob_skill_id: 3858
-          unlock_level: 10
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 265
           mob_skill_id: 265
-          unlock_level: 10
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 265
-          mob_skill_id: 261
           unlock_level: 10
           tp_cost:      800
           enabled:      false
@@ -2874,6 +2860,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     250
       tp_skills:
         - skill:        stomping
           dat_skill_id: 278
@@ -2901,36 +2888,6 @@ monstrosity:
           enabled:      false
         - skill:        berserk
           dat_skill_id: 281
-          mob_skill_id: 537
-          unlock_level: 40
-          tp_cost:      800
-          enabled:      false
-        - skill:        berserk
-          dat_skill_id: 281
-          mob_skill_id: 510
-          unlock_level: 40
-          tp_cost:      800
-          enabled:      false
-        - skill:        berserk
-          dat_skill_id: 281
-          mob_skill_id: 2217
-          unlock_level: 40
-          tp_cost:      800
-          enabled:      false
-        - skill:        berserk
-          dat_skill_id: 281
-          mob_skill_id: 1647
-          unlock_level: 40
-          tp_cost:      800
-          enabled:      false
-        - skill:        berserk
-          dat_skill_id: 281
-          mob_skill_id: 598
-          unlock_level: 40
-          tp_cost:      800
-          enabled:      false
-        - skill:        berserk
-          dat_skill_id: 281
           mob_skill_id: 286
           unlock_level: 40
           tp_cost:      800
@@ -2950,10 +2907,11 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
-        - skill:        frenzied_rage
+        - skill:        frenzied_rage       # No mob_skills row yet
           dat_skill_id: 413
-          mob_skill_id: 1336
+          mob_skill_id: 481
           unlock_level: 1
           tp_cost:      800
           enabled:      false
@@ -2975,6 +2933,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
+        - skill:        petrifactive_breath
+          dat_skill_id: 412
+          mob_skill_id: 480
+          unlock_level: 40
+          tp_cost:      800
+          enabled:      false
         - skill:        charged_whisker
           dat_skill_id: 415
           mob_skill_id: 483
@@ -2990,6 +2954,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
         - skill:        vicious_claw
           dat_skill_id: 283
@@ -3015,15 +2980,9 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
-        - skill:        blank_gaze
+        - skill:        blank_gaze_dispel
           dat_skill_id: 287
-          mob_skill_id: 3358
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
-        - skill:        blank_gaze
-          dat_skill_id: 287
-          mob_skill_id: 586
+          mob_skill_id: 292
           unlock_level: 40
           tp_cost:      1000
           enabled:      false
@@ -3039,6 +2998,12 @@ monstrosity:
           unlock_level: 60
           tp_cost:      1500
           enabled:      false
+        - skill:        vacant_gaze       # No mob_skills row yet
+          dat_skill_id: 638
+          mob_skill_id: 2610
+          unlock_level: 70
+          tp_cost:      1500
+          enabled:      false
     manticore:
       family:       manticore
       species_code: 9
@@ -3048,6 +3013,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     250
       tp_skills:
         - skill:        tail_swing
           dat_skill_id: 467
@@ -3100,12 +3066,19 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
         - skill:        big_horn
           dat_skill_id: 417
           mob_skill_id: 494
           unlock_level: 1
           tp_cost:      1000
+          enabled:      false
+        - skill:        rabid_dance
+          dat_skill_id: 419
+          mob_skill_id: 496
+          unlock_level: 10
+          tp_cost:      800
           enabled:      false
         - skill:        snort
           dat_skill_id: 418
@@ -3140,6 +3113,7 @@ monstrosity:
       size:         2
       look:         0x06CA
       ecosystem:    beast
+      hp_scale:     270
       tp_skills:
         - skill:        onrush
           dat_skill_id: 519
@@ -3186,6 +3160,7 @@ monstrosity:
       size:         2
       look:         0x0701
       ecosystem:    beast
+      hp_scale:     290
       tp_skills:
         - skill:        lava_spit
           dat_skill_id: 529
@@ -3218,31 +3193,56 @@ monstrosity:
           tp_cost:      2500
           enabled:      false
     gnole:
-      family:       gnole
-      species_code: 13
-      name:         Gnole
-      mjob:         mnk
-      sjob:         mnk
-      size:         1
-      look:         0x0000
-      ecosystem:    beast
+      family:         gnole
+      species_code:   13
+      name:           Gnole
+      mjob:           mnk
+      sjob:           mnk
+      size:           1
+      look:           0x0000
+      ecosystem:      beast
+      stance_species: 270
       tp_skills:
-        - skill:        asuran_claws
-          dat_skill_id: 580
-          mob_skill_id: 2176
-          unlock_level: 1
-          tp_cost:      1800
-          enabled:      false
         - skill:        fevered_pitch
           dat_skill_id: 576
           mob_skill_id: 2170
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
+        - skill:        asuran_claws
+          dat_skill_id: 580
+          mob_skill_id: 2176
+          unlock_level: 1
+          tp_cost:      1800
+          enabled:      false
+        - skill:        fighting_stance
+          dat_skill_id: 684
+          mob_skill_id: 3123
+          unlock_level: 1
+          tp_cost:      300
+          enabled:      false
         - skill:        nox_blast
           dat_skill_id: 579
           mob_skill_id: 2175
           unlock_level: 10
+          tp_cost:      1500
+          enabled:      false
+        - skill:        plenilune_embrace_up
+          dat_skill_id: 577
+          mob_skill_id: 2173
+          unlock_level: 20
+          tp_cost:      2500
+          enabled:      false
+        - skill:        plenilune_embrace_down
+          dat_skill_id: 578
+          mob_skill_id: 2174
+          unlock_level: 20
+          tp_cost:      2500
+          enabled:      false
+        - skill:        cacophony              # No mob_skills row yet
+          dat_skill_id: 581
+          mob_skill_id: 2177
+          unlock_level: 30
           tp_cost:      1500
           enabled:      false
     funguar:
@@ -3254,6 +3254,7 @@ monstrosity:
       size:         0
       look:         0x0178
       ecosystem:    plantoid
+      hp_scale:     230
       tp_skills:
         - skill:        frogkick
           dat_skill_id: 300
@@ -3306,6 +3307,8 @@ monstrosity:
       size:         0
       look:         0x0188
       ecosystem:    plantoid
+      hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        sprout_smack
           dat_skill_id: 458
@@ -3334,14 +3337,9 @@ monstrosity:
       size:         2
       look:         0x017C
       ecosystem:    plantoid
+      hp_scale:     250
       tp_skills:
-        - skill:        impale
-          dat_skill_id: 307
-          mob_skill_id: 725
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        impale
+        - skill:        impale_bind
           dat_skill_id: 307
           mob_skill_id: 316
           unlock_level: 1
@@ -3355,27 +3353,27 @@ monstrosity:
           enabled:      false
         - skill:        sweet_breath
           dat_skill_id: 311
-          mob_skill_id: 728
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        sweet_breath
-          dat_skill_id: 311
           mob_skill_id: 320
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
         - skill:        bad_breath
           dat_skill_id: 310
-          mob_skill_id: 727
-          unlock_level: 30
-          tp_cost:      2000
-          enabled:      false
-        - skill:        bad_breath
-          dat_skill_id: 310
           mob_skill_id: 319
           unlock_level: 30
           tp_cost:      2000
+          enabled:      false
+        - skill:        miasmic_breath
+          dat_skill_id: 505
+          mob_skill_id: 1604
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        putrid_breath
+          dat_skill_id: 506
+          mob_skill_id: 1608
+          unlock_level: 60
+          tp_cost:      1500
           enabled:      false
     mandragora:
       family:       mandragora
@@ -3388,30 +3386,28 @@ monstrosity:
       ecosystem:    plantoid
       mob_species:  350
       hp_scale:     260
+      hitbox:       8
       tp_skills:
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 300
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      true
-        - skill:        dream_flower
-          dat_skill_id: 295
-          mob_skill_id: 301
-          unlock_level: 40
-          tp_cost:      1200
-          enabled:      true
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
-        - skill:        photosynthesis
+        - skill:        scream
+          dat_skill_id: 299
+          mob_skill_id: 306
+          unlock_level: 10
+          tp_cost:      500
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -3419,11 +3415,18 @@ monstrosity:
           unlock_level: 30
           tp_cost:      800
           enabled:      true
-        - skill:        scream
-          dat_skill_id: 299
-          mob_skill_id: 306
-          unlock_level: 10
-          tp_cost:      500
+        - skill:        dream_flower
+          dat_skill_id: 295
+          mob_skill_id: 301
+          unlock_level: 40
+          tp_cost:      1200
+          enabled:      true
+        - skill:        head_butt
+          dat_skill_id: 294
+          mob_skill_id: 300
+          unlock_level: 50
+          tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -3431,12 +3434,6 @@ monstrosity:
           unlock_level: 60
           tp_cost:      1000
           enabled:      true
-        - skill:        petal_pirouette
-          dat_skill_id: 599
-          mob_skill_id: 2210
-          unlock_level: 60
-          tp_cost:      1300
-          enabled:      false
     sabotender:
       family:       sabotender
       species_code: 19
@@ -3444,32 +3441,42 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x0174
       ecosystem:    unclassified
+      hp_scale:     240
+      hitbox:       8
       tp_skills:
         - skill:        needleshot
           dat_skill_id: 312
           mob_skill_id: 321
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_sabotender
           dat_skill_id: 315
           mob_skill_id: 324
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 315
-          mob_skill_id: 304
-          unlock_level: 10
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        1000_needles
           dat_skill_id: 313
           mob_skill_id: 322
           unlock_level: 20
           tp_cost:      1300
+          enabled:      false
+        - skill:        2000_needles
+          dat_skill_id: 507
+          mob_skill_id: 1625
+          unlock_level: 30
+          tp_cost:      1900
+          enabled:      false
+        - skill:        4000_needles
+          dat_skill_id: 508
+          mob_skill_id: 1626
+          unlock_level: 40
+          tp_cost:      2500
           enabled:      false
     flytrap:
       family:       flytrap
@@ -3480,6 +3487,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    plantoid
+      hp_scale:     240
       tp_skills:
         - skill:        gloeosuccus
           dat_skill_id: 389
@@ -3506,60 +3514,40 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         2
-      look:         0x0000
+      look:         0x0128
       ecosystem:    plantoid
+      hp_scale:     250
       tp_skills:
         - skill:        beatdown
           dat_skill_id: 437
           mob_skill_id: 583
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
-        - skill:        uppercut
-          dat_skill_id: 438
-          mob_skill_id: 3356
-          unlock_level: 10
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        uppercut
           dat_skill_id: 438
           mob_skill_id: 584
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
-        - skill:        blow
-          dat_skill_id: 436
-          mob_skill_id: 3355
-          unlock_level: 20
-          tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blow
           dat_skill_id: 436
           mob_skill_id: 581
           unlock_level: 20
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blank_gaze
           dat_skill_id: 439
           mob_skill_id: 586
           unlock_level: 30
           tp_cost:      1200
           enabled:      false
-        - skill:        blank_gaze
-          dat_skill_id: 439
-          mob_skill_id: 3358
-          unlock_level: 30
-          tp_cost:      1200
-          enabled:      false
         - skill:        antiphase
           dat_skill_id: 440
           mob_skill_id: 587
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
-        - skill:        antiphase
-          dat_skill_id: 440
-          mob_skill_id: 3357
           unlock_level: 40
           tp_cost:      1000
           enabled:      false
@@ -3572,7 +3560,14 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    plantoid
+      hp_scale:     230
       tp_skills:
+        - skill:        rotten_stench
+          dat_skill_id: 574
+          mob_skill_id: 2165
+          unlock_level: 1
+          tp_cost:      1000
+          enabled:      false
         - skill:        seedspray
           dat_skill_id: 572
           mob_skill_id: 2163
@@ -3600,6 +3595,7 @@ monstrosity:
       size:         0
       look:         0x0205
       ecosystem:    plantoid
+      hp_scale:     210
       tp_skills:
         - skill:        retinal_glare
           dat_skill_id: 678
@@ -3630,24 +3626,28 @@ monstrosity:
       ecosystem:    vermin
       mob_species:  428
       hp_scale:     220
+      hitbox:       10
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
+          ready_time:   1200
           enabled:      true
     beetle:
       family:       beetle
@@ -3658,10 +3658,11 @@ monstrosity:
       size:         0
       look:         0x0198
       ecosystem:    vermin
+      hitbox:       12
       tp_skills:
-        - skill:        power_attack
+        - skill:        power_attack_beetle
           dat_skill_id: 322
-          mob_skill_id: 666
+          mob_skill_id: 338
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -3698,6 +3699,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        sticky_thread
           dat_skill_id: 327
@@ -3711,21 +3713,9 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
-        - skill:        poison_breath
+        - skill:        poison_breath_crawler
           dat_skill_id: 328
           mob_skill_id: 345
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 466
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 643
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
@@ -3738,25 +3728,37 @@ monstrosity:
       size:         1
       look:         0x01C0
       ecosystem:    vermin
+      hp_scale:     240
+      hitbox:       15
       tp_skills:
         - skill:        venom
           dat_skill_id: 454
           mob_skill_id: 660
           unlock_level: 1
           tp_cost:      700
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        cursed_sphere
           dat_skill_id: 453
           mob_skill_id: 659
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        somersault
           dat_skill_id: 309
           mob_skill_id: 318
           unlock_level: 20
           tp_cost:      1300
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
+        - skill:        debilitating_drone
+          dat_skill_id: 493
+          mob_skill_id: 1324
+          unlock_level: 30
+          tp_cost:      1000
+          ready_time:   1600
+          enabled:      true
     scorpion:
       family:       scorpion
       species_code: 31
@@ -3766,6 +3768,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     260
       tp_skills:
         - skill:        mandible_bite
           dat_skill_id: 332
@@ -3803,23 +3806,17 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1300
           enabled:      false
-        - skill:        death_scissors
-          dat_skill_id: 334
-          mob_skill_id: 353
-          unlock_level: 50
-          tp_cost:      2000
-          enabled:      false
         - skill:        numbing_breath
           dat_skill_id: 330
           mob_skill_id: 348
           unlock_level: 50
           tp_cost:      1500
           enabled:      false
-        - skill:        critical_bite
-          dat_skill_id: 460
-          mob_skill_id: 719
-          unlock_level: 60
-          tp_cost:      1300
+        - skill:        death_scissors
+          dat_skill_id: 334
+          mob_skill_id: 353
+          unlock_level: 50
+          tp_cost:      2000
           enabled:      false
         - skill:        venom_breath
           dat_skill_id: 459
@@ -3827,11 +3824,11 @@ monstrosity:
           unlock_level: 60
           tp_cost:      800
           enabled:      false
-        - skill:        evasion
-          dat_skill_id: 465
-          mob_skill_id: 724
-          unlock_level: 70
-          tp_cost:      800
+        - skill:        critical_bite
+          dat_skill_id: 460
+          mob_skill_id: 719
+          unlock_level: 60
+          tp_cost:      1300
           enabled:      false
         - skill:        venom_storm
           dat_skill_id: 463
@@ -3839,15 +3836,21 @@ monstrosity:
           unlock_level: 70
           tp_cost:      1000
           enabled:      false
-        - skill:        stasis
-          dat_skill_id: 462
-          mob_skill_id: 721
-          unlock_level: 80
-          tp_cost:      1000
+        - skill:        evasion
+          dat_skill_id: 465
+          mob_skill_id: 724
+          unlock_level: 70
+          tp_cost:      800
           enabled:      false
         - skill:        venom_sting
           dat_skill_id: 461
           mob_skill_id: 720
+          unlock_level: 80
+          tp_cost:      1000
+          enabled:      false
+        - skill:        stasis
+          dat_skill_id: 462
+          mob_skill_id: 721
           unlock_level: 80
           tp_cost:      1000
           enabled:      false
@@ -3866,6 +3869,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        acid_spray
           dat_skill_id: 480
@@ -3878,12 +3882,6 @@ monstrosity:
           mob_skill_id: 812
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
-        - skill:        sickle_slash
-          dat_skill_id: 479
-          mob_skill_id: 1446
-          unlock_level: 20
-          tp_cost:      1200
           enabled:      false
         - skill:        sickle_slash
           dat_skill_id: 479
@@ -3900,7 +3898,20 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     260
       tp_skills:
+        - skill:        sand_blast
+          dat_skill_id: 273
+          mob_skill_id: 275
+          unlock_level: 1
+          tp_cost:      600
+          enabled:      false
+        - skill:        sand_pit
+          dat_skill_id: 274
+          mob_skill_id: 276
+          unlock_level: 10
+          tp_cost:      600
+          enabled:      false
         - skill:        venom_spray
           dat_skill_id: 275
           mob_skill_id: 277
@@ -3922,6 +3933,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     250
       tp_skills:
         - skill:        double_claw
           dat_skill_id: 338
@@ -3947,6 +3959,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1200
           enabled:      false
+        - skill:        viscid_secretion
+          dat_skill_id: 500
+          mob_skill_id: 1361
+          unlock_level: 40
+          tp_cost:      1200
+          enabled:      false
     chigoe:
       family:       chigoe
       species_code: 35
@@ -3956,28 +3974,42 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     190
     wamouracampa_wamoura_larva:
-      family:       wamouracampa
-      species_code: 36
-      name:         Wamouracampa (Wamoura larva)
-      mjob:         pld
-      sjob:         pld
-      size:         1
-      look:         0x0000
-      ecosystem:    vermin
+      family:         wamouracampa
+      species_code:   36
+      name:           Wamouracampa (Wamoura larva)
+      mjob:           pld
+      sjob:           pld
+      size:           1
+      look:           0x070A
+      ecosystem:      vermin
+      hp_scale:       230
+      speed:          30
+      hitbox:         12
+      stance_species: 306
       tp_skills:
         - skill:        amber_scutum
           dat_skill_id: 536
           mob_skill_id: 1815
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   2400
+          enabled:      true
+        - skill:        fighting_stance
+          dat_skill_id: 684
+          mob_skill_id: 3123
+          unlock_level: 1
+          tp_cost:      300
+          ready_time:   0
+          enabled:      true
         - skill:        heat_barrier
           dat_skill_id: 540
           mob_skill_id: 1819
           unlock_level: 10
           tp_cost:      1200
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        vitriolic_spray
           dat_skill_id: 537
           mob_skill_id: 1816
@@ -4011,6 +4043,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        sudden_lunge
           dat_skill_id: 582
@@ -4047,10 +4080,11 @@ monstrosity:
       species_code: 38
       name:         Gnat
       mjob:         war
-      sjob:         war
+      sjob:         thf
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        insipid_nip
           dat_skill_id: 567
@@ -4081,36 +4115,46 @@ monstrosity:
       ecosystem:    lizard
       mob_species:  307
       hp_scale:     240
+      hitbox:       16
       tp_skills:
-        - skill:        tail_blow
-          dat_skill_id: 342
-          mob_skill_id: 366
-          unlock_level: 70
-          tp_cost:      1000
-          enabled:      false
         - skill:        fireball
           dat_skill_id: 343
           mob_skill_id: 367
           unlock_level: 1
           tp_cost:      1000
           enabled:      true
-        - skill:        blockhead
-          dat_skill_id: 344
-          mob_skill_id: 368
-          unlock_level: 30
-          tp_cost:      1500
+        - skill:        secretion
+          dat_skill_id: 349
+          mob_skill_id: 373
+          unlock_level: 10
+          tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        brain_crush
           dat_skill_id: 345
           mob_skill_id: 369
           unlock_level: 20
           tp_cost:      1200
+          ready_time:   1200
           enabled:      true
-        - skill:        baleful_gaze
+        - skill:        blockhead
+          dat_skill_id: 344
+          mob_skill_id: 368
+          unlock_level: 30
+          tp_cost:      1500
+          ready_time:   1200
+          enabled:      true
+        - skill:        baleful_gaze_lizard
           dat_skill_id: 346
           mob_skill_id: 370
           unlock_level: 40
           tp_cost:      1000
+          enabled:      true
+        - skill:        plague_breath
+          dat_skill_id: 347
+          mob_skill_id: 371
+          unlock_level: 50
+          tp_cost:      1500
           enabled:      true
         - skill:        infrasonics
           dat_skill_id: 348
@@ -4118,27 +4162,25 @@ monstrosity:
           unlock_level: 60
           tp_cost:      800
           enabled:      true
-        - skill:        secretion
-          dat_skill_id: 349
-          mob_skill_id: 373
-          unlock_level: 10
-          tp_cost:      500
-          enabled:      true
-        - skill:        plaguebreath
-          dat_skill_id: 347
-          mob_skill_id: 371
-          unlock_level: 50
-          tp_cost:      1500
-          enabled:      true
+        - skill:        tail_blow
+          dat_skill_id: 342
+          mob_skill_id: 366
+          unlock_level: 70
+          tp_cost:      1000
+          enabled:      false
     raptor:
-      family:       raptor
-      species_code: 44
-      name:         Raptor
-      mjob:         war
-      sjob:         war
-      size:         1
-      look:         0x013C
-      ecosystem:    lizard
+      family:          raptor
+      species_code:    44
+      name:            Raptor
+      mjob:            war
+      sjob:            war
+      size:            1
+      look:            0x013C
+      ecosystem:       lizard
+      hp_scale:        240
+      speed:           80
+      animation_speed: 174
+      hitbox:          18
       tp_skills:
         - skill:        ripper_fang
           dat_skill_id: 350
@@ -4158,9 +4200,9 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        thunderbolt
+        - skill:        thunderbolt_raptor
           dat_skill_id: 353
-          mob_skill_id: 629
+          mob_skill_id: 378
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
@@ -4174,33 +4216,16 @@ monstrosity:
       family:       adamantoise
       species_code: 45
       name:         Adamantoise
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         pld
       size:         2
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     300
       tp_skills:
-        - skill:        head_butt
+        - skill:        head_butt_turtle
           dat_skill_id: 474
-          mob_skill_id: 300
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 1076
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 3354
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 612
+          mob_skill_id: 805
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -4243,6 +4268,9 @@ monstrosity:
       size:         2
       look:         0x0547
       ecosystem:    lizard
+      hp_scale:     250
+      speed:        75
+      hitbox:       12
       tp_skills:
         - skill:        scutum
           dat_skill_id: 358
@@ -4280,6 +4308,12 @@ monstrosity:
           unlock_level: 50
           tp_cost:      1000
           enabled:      false
+        - skill:        hungry_crunch
+          dat_skill_id: 502
+          mob_skill_id: 1363
+          unlock_level: 60
+          tp_cost:      1800
+          enabled:      false
     eft:
       family:       eft
       species_code: 47
@@ -4289,6 +4323,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     230
       tp_skills:
         - skill:        toxic_spit
           dat_skill_id: 426
@@ -4329,6 +4364,7 @@ monstrosity:
       size:         2
       look:         0x08B9
       ecosystem:    lizard
+      hp_scale:     280
       tp_skills:
         - skill:        granite_skin
           dat_skill_id: 560
@@ -4354,6 +4390,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
+        - skill:        crippling_slam
+          dat_skill_id: 561
+          mob_skill_id: 2104
+          unlock_level: 40
+          tp_cost:      2000
+          enabled:      false
     peiste:
       family:       peiste
       species_code: 49
@@ -4363,6 +4405,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     240
       tp_skills:
         - skill:        torpefying_charge
           dat_skill_id: 565
@@ -4388,6 +4431,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1300
           enabled:      false
+        - skill:        calcifying_mist   # No mob_skills row yet
+          dat_skill_id: 566
+          mob_skill_id: 2157
+          unlock_level: 40
+          tp_cost:      1800
+          enabled:      false
     slime:
       family:       slime
       species_code: 52
@@ -4395,8 +4444,10 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x0124
       ecosystem:    amorph
+      hp_scale:     240
+      hitbox:       24
       tp_skills:
         - skill:        fluid_toss
           dat_skill_id: 385
@@ -4420,11 +4471,12 @@ monstrosity:
       family:       hecteyes
       species_code: 53
       name:         Hecteyes
-      mjob:         war
+      mjob:         blm
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     210
       tp_skills:
         - skill:        death_ray
           dat_skill_id: 390
@@ -4454,11 +4506,12 @@ monstrosity:
       family:       flan
       species_code: 54
       name:         Flan
-      mjob:         war
+      mjob:         blm
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     210
       tp_skills:
         - skill:        amplification
           dat_skill_id: 542
@@ -4472,10 +4525,22 @@ monstrosity:
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
+        - skill:        xenoglossia
+          dat_skill_id: 544
+          mob_skill_id: 1823
+          unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
         - skill:        amorphic_spikes
           dat_skill_id: 545
           mob_skill_id: 1824
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        amorphic_scythe
+          dat_skill_id: 546
+          mob_skill_id: 1825
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     slug:
@@ -4487,6 +4552,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     240
       tp_skills:
         - skill:        purulent_ooze
           dat_skill_id: 588
@@ -4506,6 +4572,12 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
+        - skill:        mucilaginous_ooze # No mob_skills row yet
+          dat_skill_id: 590
+          mob_skill_id: 2186
+          unlock_level: 30
+          tp_cost:      3000
+          enabled:      false
     sandworm:
       family:       sandworm
       species_code: 57
@@ -4515,6 +4587,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     340
       tp_skills:
         - skill:        dustvoid
           dat_skill_id: 591
@@ -4534,6 +4607,12 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1800
           enabled:      false
+        - skill:        extreme_purgation
+          dat_skill_id: 594
+          mob_skill_id: 2190
+          unlock_level: 30
+          tp_cost:      2000
+          enabled:      false
         - skill:        desiccation
           dat_skill_id: 595
           mob_skill_id: 2191
@@ -4549,6 +4628,8 @@ monstrosity:
       size:         0
       look:         0x0114
       ecosystem:    amorph
+      hp_scale:     240
+      hitbox:       11
       tp_skills:
         - skill:        suction
           dat_skill_id: 376
@@ -4580,24 +4661,6 @@ monstrosity:
           unlock_level: 40
           tp_cost:      600
           enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
-          mob_skill_id: 461
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
-          mob_skill_id: 3548
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        mp_drainkiss
-          dat_skill_id: 382
-          mob_skill_id: 421
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
         - skill:        drainkiss
           dat_skill_id: 379
           mob_skill_id: 417
@@ -4609,6 +4672,12 @@ monstrosity:
           mob_skill_id: 420
           unlock_level: 50
           tp_cost:      700
+          enabled:      false
+        - skill:        mp_drainkiss
+          dat_skill_id: 382
+          mob_skill_id: 421
+          unlock_level: 50
+          tp_cost:      1000
           enabled:      false
         - skill:        brain_drain
           dat_skill_id: 383
@@ -4632,36 +4701,42 @@ monstrosity:
       family:       crab
       species_code: 60
       name:         Crab
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         pld
       size:         0
       look:         0x0164
       ecosystem:    aquan
+      hp_scale:     230
+      hitbox:       13
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        scissor_guard
           dat_skill_id: 397
           mob_skill_id: 445
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        metallic_body
           dat_skill_id: 398
           mob_skill_id: 448
@@ -4672,11 +4747,13 @@ monstrosity:
       family:       pugil
       species_code: 61
       name:         Pugil
-      mjob:         war
-      sjob:         war
+      mjob:         sam
+      sjob:         blm
       size:         0
       look:         0x015C
       ecosystem:    aquan
+      hp_scale:     240
+      hitbox:       27
       tp_skills:
         - skill:        intimidate
           dat_skill_id: 399
@@ -4723,6 +4800,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     240
       tp_skills:
         - skill:        tentacle
           dat_skill_id: 405
@@ -4735,12 +4813,6 @@ monstrosity:
           mob_skill_id: 458
           unlock_level: 10
           tp_cost:      1200
-          enabled:      false
-        - skill:        hard_membrane
-          dat_skill_id: 407
-          mob_skill_id: 3547
-          unlock_level: 20
-          tp_cost:      800
           enabled:      false
         - skill:        hard_membrane
           dat_skill_id: 407
@@ -4760,18 +4832,6 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1000
           enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 409
-          mob_skill_id: 3548
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 409
-          mob_skill_id: 418
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
         - skill:        whirlwind
           dat_skill_id: 411
           mob_skill_id: 463
@@ -4788,39 +4848,40 @@ monstrosity:
       family:       uragnite
       species_code: 63
       name:         Uragnite
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         pld
       size:         1
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     230
       tp_skills:
         - skill:        gas_shell
           dat_skill_id: 421
-          mob_skill_id: 1571
+          mob_skill_id: 504
           unlock_level: 1
           tp_cost:      600
           enabled:      false
         - skill:        painful_whip
           dat_skill_id: 424
-          mob_skill_id: 1574
+          mob_skill_id: 507
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
         - skill:        suctorial_tentacle
           dat_skill_id: 425
-          mob_skill_id: 1575
+          mob_skill_id: 508
           unlock_level: 20
           tp_cost:      600
           enabled:      false
         - skill:        palsynyxis
           dat_skill_id: 423
-          mob_skill_id: 1573
+          mob_skill_id: 506
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
         - skill:        venom_shell
           dat_skill_id: 422
-          mob_skill_id: 1572
+          mob_skill_id: 505
           unlock_level: 40
           tp_cost:      1200
           enabled:      false
@@ -4833,6 +4894,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     320
       tp_skills:
         - skill:        hypnic_lamp
           dat_skill_id: 511
@@ -4858,15 +4920,28 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
+        - skill:        leeching_current
+          dat_skill_id: 514
+          mob_skill_id: 1698
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        abominable_belch
+          dat_skill_id: 556
+          mob_skill_id: 1978
+          unlock_level: 60
+          tp_cost:      1500
+          enabled:      false
     ruszor:
       family:       ruszor
       species_code: 65
       name:         Ruszor
-      mjob:         war
-      sjob:         war
+      mjob:         blm
+      sjob:         drk
       size:         2
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     250
       tp_skills:
         - skill:        severing_fang
           dat_skill_id: 609
@@ -4892,6 +4967,12 @@ monstrosity:
           unlock_level: 40
           tp_cost:      2500
           enabled:      false
+        - skill:        aqua_cannon   # No mob_skills row yet
+          dat_skill_id: 614
+          mob_skill_id: 2441
+          unlock_level: 60
+          tp_cost:      2000
+          enabled:      false
     toad:
       family:       toad
       species_code: 66
@@ -4899,8 +4980,10 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x08BF
       ecosystem:    unclassified
+      hp_scale:     190
+      hitbox:       8
     bird:
       family:       bird
       species_code: 69
@@ -4910,6 +4993,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     220
       tp_skills:
         - skill:        helldive
           dat_skill_id: 442
@@ -4923,9 +5007,21 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
+        - skill:        broadside_barrage
+          dat_skill_id: 488
+          mob_skill_id: 1159
+          unlock_level: 20
+          tp_cost:      800
+          enabled:      false
+        - skill:        blind_side_barrage
+          dat_skill_id: 489
+          mob_skill_id: 1160
+          unlock_level: 30
+          tp_cost:      800
+          enabled:      false
         - skill:        damnation_dive
           dat_skill_id: 490
-          mob_skill_id: 1445
+          mob_skill_id: 1161
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
@@ -4936,18 +5032,14 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         1
-      look:         0x0000
+      look:         0x0120
       ecosystem:    bird
+      hp_scale:     250
+      hitbox:       37
       tp_skills:
-        - skill:        sound_vacuum
+        - skill:        sound_vacuum_cockatrice
           dat_skill_id: 373
           mob_skill_id: 408
-          unlock_level: 1
-          tp_cost:      800
-          enabled:      false
-        - skill:        sound_vacuum
-          dat_skill_id: 373
-          mob_skill_id: 429
           unlock_level: 1
           tp_cost:      800
           enabled:      false
@@ -4957,15 +5049,9 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
-        - skill:        baleful_gaze
+        - skill:        baleful_gaze_cockatrice
           dat_skill_id: 375
           mob_skill_id: 411
-          unlock_level: 20
-          tp_cost:      1300
-          enabled:      false
-        - skill:        baleful_gaze
-          dat_skill_id: 375
-          mob_skill_id: 370
           unlock_level: 20
           tp_cost:      1300
           enabled:      false
@@ -4981,31 +5067,44 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1000
           enabled:      false
+        - skill:        toxic_pick
+          dat_skill_id: 496
+          mob_skill_id: 1335
+          unlock_level: 50
+          tp_cost:      1500
+          enabled:      false
+        - skill:        contagion_transfer
+          dat_skill_id: 495
+          mob_skill_id: 1333
+          unlock_level: 60
+          tp_cost:      2000
+          enabled:      false
     roc:
       family:       roc
       species_code: 71
       name:         Roc
-      mjob:         war
-      sjob:         war
+      mjob:         whm
+      sjob:         brd
       size:         1
       look:         0x0000
       ecosystem:    unclassified
+      hp_scale:     210
       tp_skills:
         - skill:        blind_vortex
           dat_skill_id: 366
-          mob_skill_id: 922
+          mob_skill_id: 399
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
         - skill:        giga_scream
           dat_skill_id: 367
-          mob_skill_id: 923
+          mob_skill_id: 400
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
         - skill:        dread_dive
           dat_skill_id: 368
-          mob_skill_id: 924
+          mob_skill_id: 401
           unlock_level: 20
           tp_cost:      1000
           enabled:      false
@@ -5021,12 +5120,6 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
-        - skill:        stormwind
-          dat_skill_id: 370
-          mob_skill_id: 926
-          unlock_level: 40
-          tp_cost:      1500
-          enabled:      false
     bat:
       family:       bat
       species_code: 72
@@ -5034,48 +5127,73 @@ monstrosity:
       mjob:         war
       sjob:         war
       size:         0
-      look:         0x0000
+      look:         0x0100
       ecosystem:    bird
+      hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        ultrasonics
           dat_skill_id: 362
           mob_skill_id: 392
           unlock_level: 1
           tp_cost:      750
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blood_drain
           dat_skill_id: 364
           mob_skill_id: 394
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        subsonics
           dat_skill_id: 484
           mob_skill_id: 1155
           unlock_level: 20
           tp_cost:      750
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        marrow_drain
           dat_skill_id: 485
           mob_skill_id: 1156
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   2000
+          enabled:      true
+        - skill:        soul_accretion
+          dat_skill_id: 504
+          mob_skill_id: 1401
+          unlock_level: 40
+          tp_cost:      1300
           enabled:      false
     hippogryph:
       family:       hippogryph
       species_code: 73
       name:         Hippogryph
-      mjob:         war
-      sjob:         war
+      mjob:         thf
+      sjob:         blm
       size:         1
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     230
       tp_skills:
         - skill:        back_heel
           dat_skill_id: 431
           mob_skill_id: 576
           unlock_level: 1
           tp_cost:      1200
+          enabled:      false
+        - skill:        fantod
+          dat_skill_id: 435
+          mob_skill_id: 580
+          unlock_level: 10
+          tp_cost:      2000
+          enabled:      false
+        - skill:        choke_breath
+          dat_skill_id: 434
+          mob_skill_id: 579
+          unlock_level: 20
+          tp_cost:      1000
           enabled:      false
         - skill:        nihility_song
           dat_skill_id: 433
@@ -5085,7 +5203,7 @@ monstrosity:
           enabled:      false
         - skill:        jettatura
           dat_skill_id: 432
-          mob_skill_id: 2828
+          mob_skill_id: 577
           unlock_level: 40
           tp_cost:      2000
           enabled:      false
@@ -5104,6 +5222,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     290
       tp_skills:
         - skill:        yawn
           dat_skill_id: 524
@@ -5144,6 +5263,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     210
       tp_skills:
         - skill:        snatch_morsel
           dat_skill_id: 516
@@ -5172,6 +5292,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     260
       tp_skills:
         - skill:        storm_wing
           dat_skill_id: 607
@@ -5197,6 +5318,7 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1700
           enabled:      false
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10.
     astoltian_slime:
       family:       astoltian_slime
       species_code: 254
@@ -5206,6 +5328,16 @@ monstrosity:
       size:         0
       look:         0x0B41
       ecosystem:    amorph
+      hitbox:       6
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
     eorzean_spriggan:
       family:       eorzean_spriggan
       species_code: 255
@@ -5215,12 +5347,21 @@ monstrosity:
       size:         0
       look:         0x0B42
       ecosystem:    unclassified
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
       tp_skills:
         - skill:        frenetic_flurry
           dat_skill_id: 691
           mob_skill_id: 3146
           unlock_level: 1
           tp_cost:      1500
+          ready_time:   2200
           enabled:      true
     onyx_rabbit:
       family:       rabbit
@@ -5233,12 +5374,14 @@ monstrosity:
       ecosystem:    beast
       mob_species:  105
       hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -5257,6 +5400,7 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
     alabaster_rabbit:
       family:       rabbit
@@ -5267,12 +5411,15 @@ monstrosity:
       size:         0
       look:         0x010E
       ecosystem:    beast
+      hp_scale:     220
+      hitbox:       12
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        whirl_claws
           dat_skill_id: 259
@@ -5285,34 +5432,39 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
         - skill:        snow_cloud
           dat_skill_id: 455
           mob_skill_id: 661
           unlock_level: 40
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        wild_ginseng
           dat_skill_id: 501
           mob_skill_id: 1362
           unlock_level: 50
           tp_cost:      1200
+          ready_time:   3200
           enabled:      true
     lapinion_rabbit:
       family:       rabbit
       species_code: 258
       name:         Lapinion (Rabbit)
-      mjob:         whm
-      sjob:         blm
+      mjob:         blm
+      sjob:         whm
       size:         0
       look:         0x0791
       ecosystem:    beast
+      hp_scale:     190
       tp_skills:
         - skill:        foot_kick
           dat_skill_id: 257
           mob_skill_id: 257
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   400
           enabled:      true
         - skill:        dust_cloud
           dat_skill_id: 258
@@ -5331,6 +5483,7 @@ monstrosity:
           mob_skill_id: 323
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   3200
           enabled:      true
     elasamoth_behemoth:
       family:       behemoth
@@ -5341,6 +5494,7 @@ monstrosity:
       size:         2
       look:         0x0195
       ecosystem:    beast
+      hp_scale:     290
       tp_skills:
         - skill:        wild_horn
           dat_skill_id: 444
@@ -5348,7 +5502,7 @@ monstrosity:
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        shock_wave
+        - skill:        shock_wave_behemoth
           dat_skill_id: 446
           mob_skill_id: 631
           unlock_level: 10
@@ -5362,72 +5516,75 @@ monstrosity:
           enabled:      false
         - skill:        howl
           dat_skill_id: 448
-          mob_skill_id: 1079
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 762
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
           mob_skill_id: 633
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 764
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        howl
-          dat_skill_id: 448
-          mob_skill_id: 766
-          unlock_level: 30
-          tp_cost:      1000
-          enabled:      false
-        - skill:        thunderbolt
+        - skill:        thunderbolt_behemoth
           dat_skill_id: 445
           mob_skill_id: 629
           unlock_level: 40
+          tp_cost:      2000
+          enabled:      false
+        - skill:        meteor
+          dat_skill_id: 449
+          mob_skill_id: 634
+          unlock_level: 50
+          tp_cost:      3000
+          enabled:      false
+        - skill:        amnesic_blast        # No mob_skills row yet
+          dat_skill_id: 602
+          mob_skill_id: 2391
+          unlock_level: 60
+          tp_cost:      2000
+          enabled:      false
+        - skill:        ecliptic_meteor      # No mob_skills row yet
+          dat_skill_id: 628
+          mob_skill_id: 2586
+          unlock_level: 70
           tp_cost:      2000
           enabled:      false
     legendary_tiger:
       family:       tiger
       species_code: 261
       name:         Legendary Tiger
-      mjob:         war
+      mjob:         whm
       sjob:         thf
       size:         1
       look:         0x0135
       ecosystem:    beast
+      hp_scale:     210
       tp_skills:
         - skill:        razor_fang
           dat_skill_id: 271
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
-        - skill:        razor_fang
-          dat_skill_id: 271
-          mob_skill_id: 3849
-          unlock_level: 1
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
           unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
+        - skill:        crossthrash
+          dat_skill_id: 497
+          mob_skill_id: 1340
+          unlock_level: 40
+          tp_cost:      1800
+          enabled:      false
+        - skill:        predatory_glare_dynamis
+          dat_skill_id: 509
+          mob_skill_id: 1680
+          unlock_level: 60
           tp_cost:      1000
           enabled:      false
     smilodon_tiger:
@@ -5439,29 +5596,44 @@ monstrosity:
       size:         1
       look:         0x08C8
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
         - skill:        razor_fang
           dat_skill_id: 271
           mob_skill_id: 271
           unlock_level: 1
           tp_cost:      1500
-          enabled:      false
-        - skill:        razor_fang
-          dat_skill_id: 271
-          mob_skill_id: 3849
-          unlock_level: 1
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        claw_cyclone
           dat_skill_id: 272
           mob_skill_id: 273
           unlock_level: 10
           tp_cost:      1800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        roar
           dat_skill_id: 270
           mob_skill_id: 270
           unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
+        - skill:        crossthrash
+          dat_skill_id: 497
+          mob_skill_id: 1340
+          unlock_level: 40
+          tp_cost:      1800
+          enabled:      false
+        - skill:        disorienting_waul       # No mob_skills row yet
+          dat_skill_id: 596
+          mob_skill_id: 2207
+          unlock_level: 50
+          tp_cost:      2000
+          enabled:      false
+        - skill:        predatory_glare_dynamis
+          dat_skill_id: 509
+          mob_skill_id: 1680
+          unlock_level: 60
           tp_cost:      1000
           enabled:      false
     karakul_sheep:
@@ -5473,23 +5645,12 @@ monstrosity:
       size:         1
       look:         0x0951
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
         - skill:        sheep_charge
           dat_skill_id: 262
           mob_skill_id: 262
           unlock_level: 1
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 261
-          mob_skill_id: 3858
-          unlock_level: 10
-          tp_cost:      800
-          enabled:      false
-        - skill:        rage
-          dat_skill_id: 261
-          mob_skill_id: 265
-          unlock_level: 10
           tp_cost:      800
           enabled:      false
         - skill:        rage
@@ -5510,6 +5671,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1300
           enabled:      false
+        - skill:        sheep_bleat  # No mob_skills row yet
+          dat_skill_id: 263
+          mob_skill_id: 263
+          unlock_level: 40
+          tp_cost:      500
+          enabled:      false
         - skill:        feeble_bleat
           dat_skill_id: 548
           mob_skill_id: 1837
@@ -5525,10 +5692,11 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
-        - skill:        frenzied_rage
+        - skill:        frenzied_rage       # No mob_skills row yet
           dat_skill_id: 413
-          mob_skill_id: 1336
+          mob_skill_id: 481
           unlock_level: 1
           tp_cost:      800
           enabled:      false
@@ -5549,6 +5717,12 @@ monstrosity:
           mob_skill_id: 652
           unlock_level: 30
           tp_cost:      1000
+          enabled:      false
+        - skill:        petrifactive_breath
+          dat_skill_id: 412
+          mob_skill_id: 480
+          unlock_level: 40
+          tp_cost:      800
           enabled:      false
         - skill:        charged_whisker
           dat_skill_id: 415
@@ -5565,10 +5739,11 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     230
       tp_skills:
-        - skill:        frenzied_rage
+        - skill:        frenzied_rage       # No mob_skills row yet
           dat_skill_id: 413
-          mob_skill_id: 1336
+          mob_skill_id: 481
           unlock_level: 1
           tp_cost:      800
           enabled:      false
@@ -5590,11 +5765,23 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
+        - skill:        petrifactive_breath
+          dat_skill_id: 412
+          mob_skill_id: 480
+          unlock_level: 40
+          tp_cost:      800
+          enabled:      false
         - skill:        charged_whisker
           dat_skill_id: 415
           mob_skill_id: 483
           unlock_level: 50
           tp_cost:      1500
+          enabled:      false
+        - skill:        preternatural_gleam # No mob_skills row yet
+          dat_skill_id: 648
+          mob_skill_id: 2760
+          unlock_level: 80
+          tp_cost:      1800
           enabled:      false
     legendary_manticore:
       family:       manticore
@@ -5605,6 +5792,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    beast
+      hp_scale:     240
       tp_skills:
         - skill:        tail_swing
           dat_skill_id: 467
@@ -5657,6 +5845,7 @@ monstrosity:
       size:         2
       look:         0x0702
       ecosystem:    beast
+      hp_scale:     290
       tp_skills:
         - skill:        lava_spit
           dat_skill_id: 529
@@ -5688,6 +5877,12 @@ monstrosity:
           unlock_level: 60
           tp_cost:      2500
           enabled:      false
+        - skill:        acheron_flame    # No mob_skills row yet
+          dat_skill_id: 645
+          mob_skill_id: 2701
+          unlock_level: 60
+          tp_cost:      3000
+          enabled:      false
     bipedal_gnole:
       family:       gnole
       species_code: 270
@@ -5704,10 +5899,28 @@ monstrosity:
           unlock_level: 1
           tp_cost:      1800
           enabled:      false
+        - skill:        fighting_stance
+          dat_skill_id: 684
+          mob_skill_id: 3123
+          unlock_level: 1
+          tp_cost:      300
+          enabled:      false
         - skill:        nox_blast
           dat_skill_id: 579
           mob_skill_id: 2175
           unlock_level: 10
+          tp_cost:      1500
+          enabled:      false
+        - skill:        plenilune_embrace_up
+          dat_skill_id: 577
+          mob_skill_id: 2173
+          unlock_level: 20
+          tp_cost:      2500
+          enabled:      false
+        - skill:        cacophony            # No mob_skills row yet
+          dat_skill_id: 581
+          mob_skill_id: 2177
+          unlock_level: 30
           tp_cost:      1500
           enabled:      false
     coppercap_funguar:
@@ -5719,6 +5932,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    plantoid
+      hp_scale:     230
       tp_skills:
         - skill:        frogkick
           dat_skill_id: 300
@@ -5762,6 +5976,12 @@ monstrosity:
           unlock_level: 60
           tp_cost:      1200
           enabled:      false
+        - skill:        agaricus     # No mob_skills row yet
+          dat_skill_id: 635
+          mob_skill_id: 2607
+          unlock_level: 70
+          tp_cost:      2000
+          enabled:      false
     treant:
       family:       treant_sapling
       species_code: 272
@@ -5771,29 +5991,36 @@ monstrosity:
       size:         2
       look:         0x0B3C
       ecosystem:    plantoid
+      hp_scale:     220
       tp_skills:
-        - skill:        entangle
+        - skill:        entangle_drain
           dat_skill_id: 293
-          mob_skill_id: 332
+          mob_skill_id: 299
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        drill_branch
+        - skill:        drill_branch   # No mob_skills row yet
           dat_skill_id: 290
-          mob_skill_id: 328
+          mob_skill_id: 296
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        pinecone_bomb
+        - skill:        pinecone_bomb  # No mob_skills row yet
           dat_skill_id: 291
-          mob_skill_id: 329
+          mob_skill_id: 297
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        leafstorm
+        - skill:        leafstorm      # No mob_skills row yet
           dat_skill_id: 292
-          mob_skill_id: 331
+          mob_skill_id: 298
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        arbor_storm    # No mob_skills row yet
+          dat_skill_id: 482
+          mob_skill_id: 1026
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     flowering_treant:
@@ -5806,28 +6033,34 @@ monstrosity:
       look:         0x0000
       ecosystem:    plantoid
       tp_skills:
-        - skill:        entangle
+        - skill:        entangle_drain
           dat_skill_id: 293
-          mob_skill_id: 332
+          mob_skill_id: 299
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        drill_branch
+        - skill:        drill_branch   # No mob_skills row yet
           dat_skill_id: 290
-          mob_skill_id: 328
+          mob_skill_id: 296
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        pinecone_bomb
+        - skill:        pinecone_bomb  # No mob_skills row yet
           dat_skill_id: 291
-          mob_skill_id: 329
+          mob_skill_id: 297
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        leafstorm
+        - skill:        leafstorm      # No mob_skills row yet
           dat_skill_id: 292
-          mob_skill_id: 331
+          mob_skill_id: 298
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        arbor_storm    # No mob_skills row yet
+          dat_skill_id: 482
+          mob_skill_id: 1026
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     scarlet_tinged_treant:
@@ -5840,28 +6073,34 @@ monstrosity:
       look:         0x0000
       ecosystem:    plantoid
       tp_skills:
-        - skill:        entangle
+        - skill:        entangle_drain
           dat_skill_id: 293
-          mob_skill_id: 332
+          mob_skill_id: 299
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        drill_branch
+        - skill:        drill_branch   # No mob_skills row yet
           dat_skill_id: 290
-          mob_skill_id: 328
+          mob_skill_id: 296
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        pinecone_bomb
+        - skill:        pinecone_bomb  # No mob_skills row yet
           dat_skill_id: 291
-          mob_skill_id: 329
+          mob_skill_id: 297
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        leafstorm
+        - skill:        leafstorm      # No mob_skills row yet
           dat_skill_id: 292
-          mob_skill_id: 331
+          mob_skill_id: 298
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        arbor_storm    # No mob_skills row yet
+          dat_skill_id: 482
+          mob_skill_id: 1026
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     barren_treant:
@@ -5874,28 +6113,34 @@ monstrosity:
       look:         0x0000
       ecosystem:    plantoid
       tp_skills:
-        - skill:        entangle
+        - skill:        entangle_drain
           dat_skill_id: 293
-          mob_skill_id: 332
+          mob_skill_id: 299
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        drill_branch
+        - skill:        drill_branch   # No mob_skills row yet
           dat_skill_id: 290
-          mob_skill_id: 328
+          mob_skill_id: 296
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        pinecone_bomb
+        - skill:        pinecone_bomb  # No mob_skills row yet
           dat_skill_id: 291
-          mob_skill_id: 329
+          mob_skill_id: 297
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        leafstorm
+        - skill:        leafstorm      # No mob_skills row yet
           dat_skill_id: 292
-          mob_skill_id: 331
+          mob_skill_id: 298
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        arbor_storm    # No mob_skills row yet
+          dat_skill_id: 482
+          mob_skill_id: 1026
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     necklaced_treant:
@@ -5908,28 +6153,34 @@ monstrosity:
       look:         0x0000
       ecosystem:    plantoid
       tp_skills:
-        - skill:        entangle
+        - skill:        entangle_drain
           dat_skill_id: 293
-          mob_skill_id: 332
+          mob_skill_id: 299
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        drill_branch
+        - skill:        drill_branch   # No mob_skills row yet
           dat_skill_id: 290
-          mob_skill_id: 328
+          mob_skill_id: 296
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        pinecone_bomb
+        - skill:        pinecone_bomb  # No mob_skills row yet
           dat_skill_id: 291
-          mob_skill_id: 329
+          mob_skill_id: 297
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        leafstorm
+        - skill:        leafstorm      # No mob_skills row yet
           dat_skill_id: 292
-          mob_skill_id: 331
+          mob_skill_id: 298
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        arbor_storm    # No mob_skills row yet
+          dat_skill_id: 482
+          mob_skill_id: 1026
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     pygmy_morbol:
@@ -5941,14 +6192,9 @@ monstrosity:
       size:         1
       look:         0x0950
       ecosystem:    plantoid
+      hp_scale:     250
       tp_skills:
-        - skill:        impale
-          dat_skill_id: 307
-          mob_skill_id: 725
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        impale
+        - skill:        impale_bind
           dat_skill_id: 307
           mob_skill_id: 316
           unlock_level: 1
@@ -5962,27 +6208,27 @@ monstrosity:
           enabled:      false
         - skill:        sweet_breath
           dat_skill_id: 311
-          mob_skill_id: 728
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        sweet_breath
-          dat_skill_id: 311
           mob_skill_id: 320
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
         - skill:        bad_breath
           dat_skill_id: 310
-          mob_skill_id: 727
-          unlock_level: 30
-          tp_cost:      2000
-          enabled:      false
-        - skill:        bad_breath
-          dat_skill_id: 310
           mob_skill_id: 319
           unlock_level: 30
           tp_cost:      2000
+          enabled:      false
+        - skill:        miasmic_breath
+          dat_skill_id: 505
+          mob_skill_id: 1604
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        putrid_breath
+          dat_skill_id: 506
+          mob_skill_id: 1608
+          unlock_level: 60
+          tp_cost:      1500
           enabled:      false
     scarce_morbol:
       family:       morbol
@@ -5993,14 +6239,9 @@ monstrosity:
       size:         2
       look:         0x00017D
       ecosystem:    plantoid
+      hp_scale:     250
       tp_skills:
-        - skill:        impale
-          dat_skill_id: 307
-          mob_skill_id: 725
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        impale
+        - skill:        impale_bind
           dat_skill_id: 307
           mob_skill_id: 316
           unlock_level: 1
@@ -6018,23 +6259,23 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
-        - skill:        sweet_breath
-          dat_skill_id: 311
-          mob_skill_id: 728
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
         - skill:        bad_breath
           dat_skill_id: 310
           mob_skill_id: 319
           unlock_level: 30
           tp_cost:      2000
           enabled:      false
-        - skill:        bad_breath
-          dat_skill_id: 310
-          mob_skill_id: 727
-          unlock_level: 30
-          tp_cost:      2000
+        - skill:        miasmic_breath
+          dat_skill_id: 505
+          mob_skill_id: 1604
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        putrid_breath
+          dat_skill_id: 506
+          mob_skill_id: 1608
+          unlock_level: 60
+          tp_cost:      1500
           enabled:      false
     ameretat_morbol:
       family:       morbol
@@ -6046,13 +6287,7 @@ monstrosity:
       look:         0x08B6
       ecosystem:    plantoid
       tp_skills:
-        - skill:        impale
-          dat_skill_id: 307
-          mob_skill_id: 725
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        impale
+        - skill:        impale_bind
           dat_skill_id: 307
           mob_skill_id: 316
           unlock_level: 1
@@ -6066,27 +6301,27 @@ monstrosity:
           enabled:      false
         - skill:        sweet_breath
           dat_skill_id: 311
-          mob_skill_id: 728
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        sweet_breath
-          dat_skill_id: 311
           mob_skill_id: 320
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
         - skill:        bad_breath
           dat_skill_id: 310
-          mob_skill_id: 727
-          unlock_level: 30
-          tp_cost:      2000
-          enabled:      false
-        - skill:        bad_breath
-          dat_skill_id: 310
           mob_skill_id: 319
           unlock_level: 30
           tp_cost:      2000
+          enabled:      false
+        - skill:        miasmic_breath
+          dat_skill_id: 505
+          mob_skill_id: 1604
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        putrid_breath
+          dat_skill_id: 506
+          mob_skill_id: 1608
+          unlock_level: 60
+          tp_cost:      1500
           enabled:      false
         - skill:        vampiric_root
           dat_skill_id: 535
@@ -6103,14 +6338,9 @@ monstrosity:
       size:         2
       look:         0x017F
       ecosystem:    plantoid
+      hp_scale:     250
       tp_skills:
-        - skill:        impale
-          dat_skill_id: 307
-          mob_skill_id: 725
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        impale
+        - skill:        impale_bind
           dat_skill_id: 307
           mob_skill_id: 316
           unlock_level: 1
@@ -6124,12 +6354,6 @@ monstrosity:
           enabled:      false
         - skill:        sweet_breath
           dat_skill_id: 311
-          mob_skill_id: 728
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        sweet_breath
-          dat_skill_id: 311
           mob_skill_id: 320
           unlock_level: 20
           tp_cost:      1500
@@ -6140,10 +6364,22 @@ monstrosity:
           unlock_level: 30
           tp_cost:      2000
           enabled:      false
-        - skill:        bad_breath
-          dat_skill_id: 310
-          mob_skill_id: 727
-          unlock_level: 30
+        - skill:        miasmic_breath
+          dat_skill_id: 505
+          mob_skill_id: 1604
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        putrid_breath
+          dat_skill_id: 506
+          mob_skill_id: 1608
+          unlock_level: 60
+          tp_cost:      1500
+          enabled:      false
+        - skill:        thousand_spears # No mob_skills row yet
+          dat_skill_id: 625
+          mob_skill_id: 2574
+          unlock_level: 80
           tp_cost:      2000
           enabled:      false
     korrigan_mandragora:
@@ -6157,24 +6393,28 @@ monstrosity:
       ecosystem:    plantoid
       mob_species:  348
       hp_scale:     260
+      hitbox:       8
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
-        - skill:        photosynthesis
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
@@ -6193,6 +6433,7 @@ monstrosity:
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
@@ -6209,79 +6450,54 @@ monstrosity:
       size:         0
       look:         0x08C7
       ecosystem:    plantoid
+      hp_scale:     260
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     pygmy_mandragora:
       family:       mandragora
       species_code: 283
@@ -6291,79 +6507,54 @@ monstrosity:
       size:         0
       look:         0x089C
       ecosystem:    plantoid
+      hp_scale:     260
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     adenium_mandragora:
       family:       mandragora
       species_code: 284
@@ -6373,73 +6564,48 @@ monstrosity:
       size:         0
       look:         0x0950
       ecosystem:    plantoid
+      hp_scale:     260
       tp_skills:
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        petal_pirouette
           dat_skill_id: 599
           mob_skill_id: 2210
@@ -6451,12 +6617,12 @@ monstrosity:
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
-        - skill:        petal_pirouette
-          dat_skill_id: 599
-          mob_skill_id: 3353
-          unlock_level: 60
-          tp_cost:      1300
+          enabled:      true
+        - skill:        phaeosynthesis            # No mob_skills row yet
+          dat_skill_id: 626
+          mob_skill_id: 2579
+          unlock_level: 80
+          tp_cost:      2000
           enabled:      false
     pachypodium_mandragora:
       family:       mandragora
@@ -6467,90 +6633,65 @@ monstrosity:
       size:         0
       look:         0x0949
       ecosystem:    plantoid
+      hp_scale:     260
       tp_skills:
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
+          ready_time:   1200
+          enabled:      true
+        - skill:        petal_pirouette
+          dat_skill_id: 599
+          mob_skill_id: 2210
+          unlock_level: 60
+          tp_cost:      1300
           enabled:      false
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
-        - skill:        petal_pirouette
-          dat_skill_id: 599
-          mob_skill_id: 3353
-          unlock_level: 60
-          tp_cost:      1300
-          enabled:      false
-        - skill:        petal_pirouette
-          dat_skill_id: 599
-          mob_skill_id: 2210
-          unlock_level: 60
-          tp_cost:      1300
+          enabled:      true
+        - skill:        petalback_spin            # No mob_skills row yet
+          dat_skill_id: 631
+          mob_skill_id: 2601
+          unlock_level: 90
+          tp_cost:      2000
           enabled:      false
     enlightened_mandragora:
       family:       mandragora
@@ -6567,73 +6708,47 @@ monstrosity:
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     new_year_mandragora:
       family:       mandragora
       species_code: 287
@@ -6643,79 +6758,54 @@ monstrosity:
       size:         0
       look:         0x0B48
       ecosystem:    plantoid
+      hitbox:       8
       tp_skills:
-        - skill:        wild_oats
-          dat_skill_id: 296
-          mob_skill_id: 3351
-          unlock_level: 1
-          tp_cost:      500
-          enabled:      false
         - skill:        wild_oats
           dat_skill_id: 296
           mob_skill_id: 302
           unlock_level: 1
           tp_cost:      500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        scream
           dat_skill_id: 299
           mob_skill_id: 306
           unlock_level: 10
           tp_cost:      500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 297
-          mob_skill_id: 324
-          unlock_level: 20
-          tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_mandragora
           dat_skill_id: 297
           mob_skill_id: 304
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        leaf_dagger
           dat_skill_id: 298
           mob_skill_id: 305
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          enabled:      true
         - skill:        dream_flower
           dat_skill_id: 295
           mob_skill_id: 301
           unlock_level: 40
           tp_cost:      1200
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 612
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          enabled:      true
         - skill:        head_butt
           dat_skill_id: 294
           mob_skill_id: 300
           unlock_level: 50
           tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 3354
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 294
-          mob_skill_id: 1076
-          unlock_level: 50
-          tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        demonic_flower
           dat_skill_id: 603
           mob_skill_id: 2410
           unlock_level: 60
           tp_cost:      1000
-          enabled:      false
+          enabled:      true
     sabotender_florido:
       family:       sabotender
       species_code: 288
@@ -6725,30 +6815,45 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    unclassified
+      hp_scale:     240
       tp_skills:
         - skill:        needleshot
           dat_skill_id: 312
           mob_skill_id: 321
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
-        - skill:        photosynthesis
+          ready_time:   1200
+          enabled:      true
+        - skill:        photosynthesis_sabotender
           dat_skill_id: 315
           mob_skill_id: 324
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
-        - skill:        photosynthesis
-          dat_skill_id: 315
-          mob_skill_id: 304
-          unlock_level: 10
-          tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        1000_needles
           dat_skill_id: 313
           mob_skill_id: 322
           unlock_level: 20
           tp_cost:      1300
+          enabled:      false
+        - skill:        2000_needles
+          dat_skill_id: 507
+          mob_skill_id: 1625
+          unlock_level: 30
+          tp_cost:      1900
+          enabled:      false
+        - skill:        4000_needles
+          dat_skill_id: 508
+          mob_skill_id: 1626
+          unlock_level: 40
+          tp_cost:      2500
+          enabled:      false
+        - skill:        chupa_blossom             # No mob_skills row yet
+          dat_skill_id: 649
+          mob_skill_id: 2761
+          unlock_level: 60
+          tp_cost:      3000
           enabled:      false
     mitrastema_rafflesia:
       family:       rafflesia
@@ -6759,7 +6864,14 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    plantoid
+      hp_scale:     230
       tp_skills:
+        - skill:        rotten_stench
+          dat_skill_id: 574
+          mob_skill_id: 2165
+          unlock_level: 1
+          tp_cost:      1000
+          enabled:      false
         - skill:        seedspray
           dat_skill_id: 572
           mob_skill_id: 2163
@@ -6778,6 +6890,12 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
+        - skill:        blighted_bouquet # No mob_skills row yet
+          dat_skill_id: 650
+          mob_skill_id: 2769
+          unlock_level: 60
+          tp_cost:      1800
+          enabled:      false
     vermillion_and_onyx_bee:
       family:       bee
       species_code: 290
@@ -6789,31 +6907,36 @@ monstrosity:
       ecosystem:    vermin
       mob_species:  427
       hp_scale:     220
+      hitbox:       10
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
+          ready_time:   1200
           enabled:      true
         - skill:        frenzy_pollen
           dat_skill_id: 549
           mob_skill_id: 1847
           unlock_level: 30
           tp_cost:      3000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
     zaffre_bee:
       family:       bee
       species_code: 291
@@ -6823,25 +6946,36 @@ monstrosity:
       size:         0
       look:         0x0790
       ecosystem:    vermin
+      hp_scale:     220
       tp_skills:
         - skill:        sharp_sting
           dat_skill_id: 319
           mob_skill_id: 334
           unlock_level: 1
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        pollen
           dat_skill_id: 320
           mob_skill_id: 335
           unlock_level: 10
           tp_cost:      1500
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        final_sting
           dat_skill_id: 321
           mob_skill_id: 336
           unlock_level: 20
           tp_cost:      2000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
+        - skill:        frenzy_pollen
+          dat_skill_id: 549
+          mob_skill_id: 1847
+          unlock_level: 30
+          tp_cost:      3000
+          ready_time:   1200
+          enabled:      true
     onyx_beetle:
       family:       beetle
       species_code: 292
@@ -6852,9 +6986,9 @@ monstrosity:
       look:         0x0000
       ecosystem:    vermin
       tp_skills:
-        - skill:        power_attack
+        - skill:        power_attack_beetle
           dat_skill_id: 322
-          mob_skill_id: 666
+          mob_skill_id: 338
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -6892,9 +7026,9 @@ monstrosity:
       look:         0x0000
       ecosystem:    vermin
       tp_skills:
-        - skill:        power_attack
+        - skill:        power_attack_beetle
           dat_skill_id: 322
-          mob_skill_id: 666
+          mob_skill_id: 338
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -6922,6 +7056,12 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1200
           enabled:      false
+        - skill:        rhinowrecker        # No mob_skills row yet
+          dat_skill_id: 660
+          mob_skill_id: 2823
+          unlock_level: 50
+          tp_cost:      2200
+          enabled:      false
     eruca_crawler:
       family:       crawler
       species_code: 294
@@ -6931,6 +7071,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        sticky_thread
           dat_skill_id: 327
@@ -6959,6 +7100,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        sticky_thread
           dat_skill_id: 327
@@ -6972,21 +7114,9 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 643
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
+        - skill:        poison_breath_crawler
           dat_skill_id: 328
           mob_skill_id: 345
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 466
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
@@ -6999,6 +7129,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        sticky_thread
           dat_skill_id: 327
@@ -7012,21 +7143,9 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
-        - skill:        poison_breath
+        - skill:        poison_breath_crawler
           dat_skill_id: 328
           mob_skill_id: 345
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 466
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
-        - skill:        poison_breath
-          dat_skill_id: 328
-          mob_skill_id: 643
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
@@ -7037,27 +7156,39 @@ monstrosity:
       mjob:         war
       sjob:         rdm
       size:         1
-      look:         0x0000
+      look:         0x01C1
       ecosystem:    vermin
+      hp_scale:     240
+      hitbox:       15
       tp_skills:
         - skill:        venom
           dat_skill_id: 454
           mob_skill_id: 660
           unlock_level: 1
           tp_cost:      700
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        cursed_sphere
           dat_skill_id: 453
           mob_skill_id: 659
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        somersault
           dat_skill_id: 309
           mob_skill_id: 318
           unlock_level: 20
           tp_cost:      1300
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
+        - skill:        debilitating_drone
+          dat_skill_id: 493
+          mob_skill_id: 1324
+          unlock_level: 30
+          tp_cost:      1000
+          ready_time:   1600
+          enabled:      true
     scolopendrid_scorpion:
       family:       scorpion
       species_code: 298
@@ -7067,6 +7198,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     260
       tp_skills:
         - skill:        mandible_bite
           dat_skill_id: 332
@@ -7116,23 +7248,17 @@ monstrosity:
           unlock_level: 50
           tp_cost:      2000
           enabled:      false
-        - skill:        critical_bite
-          dat_skill_id: 460
-          mob_skill_id: 719
-          unlock_level: 60
-          tp_cost:      1300
-          enabled:      false
         - skill:        venom_breath
           dat_skill_id: 459
           mob_skill_id: 717
           unlock_level: 60
           tp_cost:      800
           enabled:      false
-        - skill:        evasion
-          dat_skill_id: 465
-          mob_skill_id: 724
-          unlock_level: 70
-          tp_cost:      800
+        - skill:        critical_bite
+          dat_skill_id: 460
+          mob_skill_id: 719
+          unlock_level: 60
+          tp_cost:      1300
           enabled:      false
         - skill:        venom_storm
           dat_skill_id: 463
@@ -7140,15 +7266,21 @@ monstrosity:
           unlock_level: 70
           tp_cost:      1000
           enabled:      false
-        - skill:        stasis
-          dat_skill_id: 462
-          mob_skill_id: 721
-          unlock_level: 80
-          tp_cost:      1000
+        - skill:        evasion
+          dat_skill_id: 465
+          mob_skill_id: 724
+          unlock_level: 70
+          tp_cost:      800
           enabled:      false
         - skill:        venom_sting
           dat_skill_id: 461
           mob_skill_id: 720
+          unlock_level: 80
+          tp_cost:      1000
+          enabled:      false
+        - skill:        stasis
+          dat_skill_id: 462
+          mob_skill_id: 721
           unlock_level: 80
           tp_cost:      1000
           enabled:      false
@@ -7167,18 +7299,19 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     250
       tp_skills:
-        - skill:        sharp_strike
-          dat_skill_id: 337
-          mob_skill_id: 356
-          unlock_level: 1
-          tp_cost:      800
-          enabled:      false
         - skill:        mandible_bite
           dat_skill_id: 332
           mob_skill_id: 350
           unlock_level: 1
           tp_cost:      1000
+          enabled:      false
+        - skill:        sharp_strike
+          dat_skill_id: 337
+          mob_skill_id: 356
+          unlock_level: 1
+          tp_cost:      800
           enabled:      false
         - skill:        poison_sting
           dat_skill_id: 333
@@ -7198,23 +7331,17 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1300
           enabled:      false
-        - skill:        death_scissors
-          dat_skill_id: 334
-          mob_skill_id: 353
-          unlock_level: 50
-          tp_cost:      2000
-          enabled:      false
         - skill:        numbing_breath
           dat_skill_id: 330
           mob_skill_id: 348
           unlock_level: 50
           tp_cost:      1500
           enabled:      false
-        - skill:        critical_bite
-          dat_skill_id: 460
-          mob_skill_id: 719
-          unlock_level: 60
-          tp_cost:      1300
+        - skill:        death_scissors
+          dat_skill_id: 334
+          mob_skill_id: 353
+          unlock_level: 50
+          tp_cost:      2000
           enabled:      false
         - skill:        venom_breath
           dat_skill_id: 459
@@ -7222,16 +7349,28 @@ monstrosity:
           unlock_level: 60
           tp_cost:      800
           enabled:      false
+        - skill:        critical_bite
+          dat_skill_id: 460
+          mob_skill_id: 719
+          unlock_level: 60
+          tp_cost:      1300
+          enabled:      false
+        - skill:        venom_storm
+          dat_skill_id: 463
+          mob_skill_id: 722
+          unlock_level: 70
+          tp_cost:      1000
+          enabled:      false
         - skill:        evasion
           dat_skill_id: 465
           mob_skill_id: 724
           unlock_level: 70
           tp_cost:      800
           enabled:      false
-        - skill:        venom_storm
-          dat_skill_id: 463
-          mob_skill_id: 722
-          unlock_level: 70
+        - skill:        venom_sting
+          dat_skill_id: 461
+          mob_skill_id: 720
+          unlock_level: 80
           tp_cost:      1000
           enabled:      false
         - skill:        stasis
@@ -7240,17 +7379,17 @@ monstrosity:
           unlock_level: 80
           tp_cost:      1000
           enabled:      false
-        - skill:        venom_sting
-          dat_skill_id: 461
-          mob_skill_id: 720
-          unlock_level: 80
-          tp_cost:      1000
-          enabled:      false
         - skill:        earthbreaker
           dat_skill_id: 464
           mob_skill_id: 723
           unlock_level: 90
           tp_cost:      1500
+          enabled:      false
+        - skill:        telsonic_tempest # No mob_skills row yet
+          dat_skill_id: 647
+          mob_skill_id: 2759
+          unlock_level: 99
+          tp_cost:      2000
           enabled:      false
     reticulated_spider:
       family:       spider
@@ -7261,6 +7400,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        acid_spray
           dat_skill_id: 480
@@ -7280,12 +7420,6 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        sickle_slash
-          dat_skill_id: 479
-          mob_skill_id: 1446
-          unlock_level: 20
-          tp_cost:      1200
-          enabled:      false
     vermillion_and_onyx_spider:
       family:       spider
       species_code: 301
@@ -7295,6 +7429,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        acid_spray
           dat_skill_id: 480
@@ -7307,12 +7442,6 @@ monstrosity:
           mob_skill_id: 812
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
-        - skill:        sickle_slash
-          dat_skill_id: 479
-          mob_skill_id: 1446
-          unlock_level: 20
-          tp_cost:      1200
           enabled:      false
         - skill:        sickle_slash
           dat_skill_id: 479
@@ -7329,7 +7458,20 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     260
       tp_skills:
+        - skill:        sand_blast
+          dat_skill_id: 273
+          mob_skill_id: 275
+          unlock_level: 1
+          tp_cost:      600
+          enabled:      false
+        - skill:        sand_pit
+          dat_skill_id: 274
+          mob_skill_id: 276
+          unlock_level: 10
+          tp_cost:      600
+          enabled:      false
         - skill:        venom_spray
           dat_skill_id: 275
           mob_skill_id: 277
@@ -7351,7 +7493,20 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     250
       tp_skills:
+        - skill:        sand_blast
+          dat_skill_id: 273
+          mob_skill_id: 275
+          unlock_level: 1
+          tp_cost:      600
+          enabled:      false
+        - skill:        sand_pit
+          dat_skill_id: 274
+          mob_skill_id: 276
+          unlock_level: 10
+          tp_cost:      600
+          enabled:      false
         - skill:        venom_spray
           dat_skill_id: 275
           mob_skill_id: 277
@@ -7379,6 +7534,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     250
       tp_skills:
         - skill:        double_claw
           dat_skill_id: 338
@@ -7404,6 +7560,12 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1200
           enabled:      false
+        - skill:        viscid_secretion
+          dat_skill_id: 500
+          mob_skill_id: 1361
+          unlock_level: 40
+          tp_cost:      1200
+          enabled:      false
     azure_chigoe:
       family:       chigoe
       species_code: 305
@@ -7413,6 +7575,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     190
     coiled_wamouracampa_wamoura_larva:
       family:       wamouracampa
       species_code: 306
@@ -7420,21 +7583,25 @@ monstrosity:
       mjob:         pld
       sjob:         pld
       size:         1
-      look:         0x0000
+      look:         0x070A
       ecosystem:    unclassified
+      speed:        30
+      hitbox:       12
       tp_skills:
         - skill:        amber_scutum
           dat_skill_id: 536
           mob_skill_id: 1815
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   2400
+          enabled:      true
         - skill:        heat_barrier
           dat_skill_id: 540
           mob_skill_id: 1819
           unlock_level: 10
           tp_cost:      1200
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        cannonball
           dat_skill_id: 539
           mob_skill_id: 1818
@@ -7450,6 +7617,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     240
       tp_skills:
         - skill:        magma_fan
           dat_skill_id: 550
@@ -7496,6 +7664,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        magma_fan
           dat_skill_id: 550
@@ -7533,6 +7702,12 @@ monstrosity:
           unlock_level: 95
           tp_cost:      2000
           enabled:      false
+        - skill:        benumbing_blaze # No mob_skills row yet
+          dat_skill_id: 683
+          mob_skill_id: 3044
+          unlock_level: 99
+          tp_cost:      2500
+          enabled:      false
     gold_ladybug:
       family:       ladybug
       species_code: 309
@@ -7542,6 +7717,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     210
       tp_skills:
         - skill:        sudden_lunge
           dat_skill_id: 582
@@ -7573,15 +7749,22 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1200
           enabled:      false
+        - skill:        searing_effulgence # No mob_skills row yet
+          dat_skill_id: 662
+          mob_skill_id: 2933
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
     midge_gnat:
       family:       gnat
       species_code: 310
       name:         Midge (Gnat)
-      mjob:         war
-      sjob:         war
+      mjob:         blm
+      sjob:         thf
       size:         0
       look:         0x0000
       ecosystem:    vermin
+      hp_scale:     180
       tp_skills:
         - skill:        insipid_nip
           dat_skill_id: 567
@@ -7601,6 +7784,12 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1500
           enabled:      false
+        - skill:        booming_bombination
+          dat_skill_id: 651
+          mob_skill_id: 2770
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
     ashen_lizard:
       family:       lizard
       species_code: 315
@@ -7612,38 +7801,43 @@ monstrosity:
       ecosystem:    lizard
       mob_species:  306
       hp_scale:     240
+      hitbox:       16
       tp_skills:
         - skill:        snowball
           dat_skill_id: 441
           mob_skill_id: 621
-          unlock_level: 15
+          unlock_level: 1
           tp_cost:      1000
+          ready_time:   1200
           enabled:      true
         - skill:        secretion
           dat_skill_id: 349
           mob_skill_id: 373
           unlock_level: 10
           tp_cost:      500
+          ready_time:   1200
           enabled:      true
         - skill:        brain_crush
           dat_skill_id: 345
           mob_skill_id: 369
           unlock_level: 20
           tp_cost:      1200
+          ready_time:   1200
           enabled:      true
         - skill:        blockhead
           dat_skill_id: 344
           mob_skill_id: 368
           unlock_level: 30
           tp_cost:      1500
+          ready_time:   1200
           enabled:      true
-        - skill:        baleful_gaze
+        - skill:        baleful_gaze_lizard
           dat_skill_id: 346
           mob_skill_id: 370
           unlock_level: 40
           tp_cost:      1000
           enabled:      true
-        - skill:        plaguebreath
+        - skill:        plague_breath
           dat_skill_id: 347
           mob_skill_id: 371
           unlock_level: 50
@@ -7670,6 +7864,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     240
       tp_skills:
         - skill:        ripper_fang
           dat_skill_id: 350
@@ -7689,9 +7884,9 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        thunderbolt
+        - skill:        thunderbolt_raptor
           dat_skill_id: 353
-          mob_skill_id: 629
+          mob_skill_id: 378
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
@@ -7710,6 +7905,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     240
       tp_skills:
         - skill:        ripper_fang
           dat_skill_id: 350
@@ -7729,9 +7925,9 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1200
           enabled:      false
-        - skill:        thunderbolt
+        - skill:        thunderbolt_raptor
           dat_skill_id: 353
-          mob_skill_id: 629
+          mob_skill_id: 378
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
@@ -7741,37 +7937,26 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
+        - skill:        whirling_inferno   # No mob_skills row yet
+          dat_skill_id: 682
+          mob_skill_id: 3043
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
     pygmy_adamantoise:
       family:       adamantoise
       species_code: 318
       name:         Pygmy Adamantoise
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         pld
       size:         1
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     300
       tp_skills:
-        - skill:        head_butt
+        - skill:        head_butt_turtle
           dat_skill_id: 474
-          mob_skill_id: 300
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 3354
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 1076
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 612
+          mob_skill_id: 805
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -7809,33 +7994,16 @@ monstrosity:
       family:       adamantoise
       species_code: 319
       name:         Legendary Adamantoise
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         rdm
       size:         2
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     300
       tp_skills:
-        - skill:        head_butt
+        - skill:        head_butt_turtle
           dat_skill_id: 474
-          mob_skill_id: 300
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 3354
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 1076
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 612
+          mob_skill_id: 805
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -7873,33 +8041,16 @@ monstrosity:
       family:       adamantoise
       species_code: 320
       name:         Ferromantoise (Adamantoise)
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         blm
       size:         2
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     300
       tp_skills:
-        - skill:        head_butt
+        - skill:        head_butt_turtle
           dat_skill_id: 474
-          mob_skill_id: 612
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 300
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 3354
-          unlock_level: 1
-          tp_cost:      1000
-          enabled:      false
-        - skill:        head_butt
-          dat_skill_id: 474
-          mob_skill_id: 1076
+          mob_skill_id: 805
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
@@ -7933,15 +8084,22 @@ monstrosity:
           unlock_level: 50
           tp_cost:      1000
           enabled:      false
+        - skill:        testudo_tremor   # No mob_skills row yet
+          dat_skill_id: 627
+          mob_skill_id: 2585
+          unlock_level: 60
+          tp_cost:      2000
+          enabled:      false
     abyssobugard_bugard:
       family:       bugard
       species_code: 321
       name:         Abyssobugard (Bugard)
       mjob:         war
-      sjob:         war
+      sjob:         blm
       size:         2
       look:         0x0548
       ecosystem:    lizard
+      hp_scale:     250
       tp_skills:
         - skill:        scutum
           dat_skill_id: 358
@@ -7979,15 +8137,22 @@ monstrosity:
           unlock_level: 50
           tp_cost:      1000
           enabled:      false
+        - skill:        hungry_crunch
+          dat_skill_id: 502
+          mob_skill_id: 1363
+          unlock_level: 60
+          tp_cost:      1800
+          enabled:      false
     tarichuk_eft:
       family:       eft
       species_code: 322
       name:         Tarichuk (Eft)
       mjob:         war
-      sjob:         war
+      sjob:         blm
       size:         0
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     230
       tp_skills:
         - skill:        toxic_spit
           dat_skill_id: 426
@@ -8019,15 +8184,22 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1200
           enabled:      false
+        - skill:        tarichutoxin  # No mob_skills row yet
+          dat_skill_id: 663
+          mob_skill_id: 2936
+          unlock_level: 50
+          tp_cost:      1500
+          enabled:      false
     unusual_wivre:
       family:       wivre
       species_code: 323
       name:         Unusual Wivre
       mjob:         war
-      sjob:         war
+      sjob:         blm
       size:         2
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     280
       tp_skills:
         - skill:        granite_skin
           dat_skill_id: 560
@@ -8053,15 +8225,22 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
+        - skill:        crippling_slam
+          dat_skill_id: 561
+          mob_skill_id: 2104
+          unlock_level: 40
+          tp_cost:      2000
+          enabled:      false
     sibilus_peiste:
       family:       peiste
       species_code: 324
       name:         Sibilus (Peiste)
       mjob:         war
-      sjob:         war
+      sjob:         blm
       size:         2
       look:         0x0000
       ecosystem:    lizard
+      hp_scale:     240
       tp_skills:
         - skill:        torpefying_charge
           dat_skill_id: 565
@@ -8087,15 +8266,22 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1300
           enabled:      false
+        - skill:        calcifying_mist   # No mob_skills row yet
+          dat_skill_id: 566
+          mob_skill_id: 2157
+          unlock_level: 40
+          tp_cost:      1800
+          enabled:      false
     clot_slime:
       family:       slime
       species_code: 329
       name:         Clot (Slime)
-      mjob:         war
+      mjob:         rdm
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     230
       tp_skills:
         - skill:        fluid_toss
           dat_skill_id: 385
@@ -8131,11 +8317,12 @@ monstrosity:
       family:       slime
       species_code: 330
       name:         Gold Slime
-      mjob:         war
+      mjob:         thf
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     230
       tp_skills:
         - skill:        fluid_toss
           dat_skill_id: 385
@@ -8171,33 +8358,34 @@ monstrosity:
       family:       slime
       species_code: 331
       name:         Boil (Slime)
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         drk
       size:         2
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     280
       tp_skills:
-        - skill:        fluid_toss
+        - skill:        fluid_toss_claret
           dat_skill_id: 621
-          mob_skill_id: 432
+          mob_skill_id: 2549
           unlock_level: 1
           tp_cost:      800
           enabled:      false
-        - skill:        fluid_spread
+        - skill:        fluid_spread      # No mob_skills row yet
           dat_skill_id: 620
-          mob_skill_id: 431
+          mob_skill_id: 2548
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
-        - skill:        mucus_spread
+        - skill:        mucus_spread      # No mob_skills row yet
           dat_skill_id: 623
-          mob_skill_id: 1317
+          mob_skill_id: 2551
           unlock_level: 20
           tp_cost:      750
           enabled:      false
-        - skill:        epoxy_spread
+        - skill:        epoxy_spread      # No mob_skills row yet
           dat_skill_id: 624
-          mob_skill_id: 1319
+          mob_skill_id: 2552
           unlock_level: 30
           tp_cost:      750
           enabled:      false
@@ -8222,6 +8410,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     240
       tp_skills:
         - skill:        amplification
           dat_skill_id: 542
@@ -8235,21 +8424,34 @@ monstrosity:
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
+        - skill:        xenoglossia
+          dat_skill_id: 544
+          mob_skill_id: 1823
+          unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
         - skill:        amorphic_spikes
           dat_skill_id: 545
           mob_skill_id: 1824
           unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        amorphic_scythe
+          dat_skill_id: 546
+          mob_skill_id: 1825
+          unlock_level: 40
           tp_cost:      1000
           enabled:      false
     blancmange_flan:
       family:       flan
       species_code: 333
       name:         Blancmange (Flan)
-      mjob:         war
-      sjob:         war
+      mjob:         whm
+      sjob:         pld
       size:         0
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     210
       tp_skills:
         - skill:        amplification
           dat_skill_id: 542
@@ -8263,11 +8465,29 @@ monstrosity:
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
+        - skill:        xenoglossia
+          dat_skill_id: 544
+          mob_skill_id: 1823
+          unlock_level: 20
+          tp_cost:      1000
+          enabled:      false
         - skill:        amorphic_spikes
           dat_skill_id: 545
           mob_skill_id: 1824
           unlock_level: 30
           tp_cost:      1000
+          enabled:      false
+        - skill:        amorphic_scythe
+          dat_skill_id: 546
+          mob_skill_id: 1825
+          unlock_level: 40
+          tp_cost:      1000
+          enabled:      false
+        - skill:        gush_o_goo      # No mob_skills row yet
+          dat_skill_id: 652
+          mob_skill_id: 2771
+          unlock_level: 50
+          tp_cost:      1800
           enabled:      false
     pygmy_sandworm:
       family:       sandworm
@@ -8278,6 +8498,7 @@ monstrosity:
       size:         1
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     340
       tp_skills:
         - skill:        dustvoid
           dat_skill_id: 591
@@ -8296,6 +8517,12 @@ monstrosity:
           mob_skill_id: 2189
           unlock_level: 20
           tp_cost:      1800
+          enabled:      false
+        - skill:        extreme_purgation
+          dat_skill_id: 594
+          mob_skill_id: 2190
+          unlock_level: 30
+          tp_cost:      2000
           enabled:      false
         - skill:        desiccation
           dat_skill_id: 595
@@ -8308,10 +8535,11 @@ monstrosity:
       species_code: 335
       name:         Gigaworm (Sandworm)
       mjob:         war
-      sjob:         war
+      sjob:         blm
       size:         2
       look:         0x0000
       ecosystem:    amorph
+      hp_scale:     340
       tp_skills:
         - skill:        dustvoid
           dat_skill_id: 591
@@ -8330,6 +8558,18 @@ monstrosity:
           mob_skill_id: 2189
           unlock_level: 20
           tp_cost:      1800
+          enabled:      false
+        - skill:        extreme_purgation
+          dat_skill_id: 594
+          mob_skill_id: 2190
+          unlock_level: 30
+          tp_cost:      2000
+          enabled:      false
+        - skill:        psyche_suction    # No mob_skills row yet
+          dat_skill_id: 639
+          mob_skill_id: 2641
+          unlock_level: 70
+          tp_cost:      2000
           enabled:      false
         - skill:        desiccation
           dat_skill_id: 595
@@ -8346,6 +8586,7 @@ monstrosity:
       size:         0
       look:         0x0115
       ecosystem:    amorph
+      hp_scale:     240
       tp_skills:
         - skill:        suction
           dat_skill_id: 376
@@ -8373,27 +8614,9 @@ monstrosity:
           enabled:      false
         - skill:        regeneration
           dat_skill_id: 380
-          mob_skill_id: 3548
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
           mob_skill_id: 418
           unlock_level: 40
           tp_cost:      600
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
-          mob_skill_id: 461
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        mp_drainkiss
-          dat_skill_id: 382
-          mob_skill_id: 421
-          unlock_level: 50
-          tp_cost:      1000
           enabled:      false
         - skill:        drainkiss
           dat_skill_id: 379
@@ -8406,6 +8629,12 @@ monstrosity:
           mob_skill_id: 420
           unlock_level: 50
           tp_cost:      700
+          enabled:      false
+        - skill:        mp_drainkiss
+          dat_skill_id: 382
+          mob_skill_id: 421
+          unlock_level: 50
+          tp_cost:      1000
           enabled:      false
         - skill:        brain_drain
           dat_skill_id: 383
@@ -8429,11 +8658,12 @@ monstrosity:
       family:       leech
       species_code: 337
       name:         Obdella (Leech)
-      mjob:         war
+      mjob:         drk
       sjob:         war
       size:         0
       look:         0x078E
       ecosystem:    amorph
+      hp_scale:     230
       tp_skills:
         - skill:        suction
           dat_skill_id: 376
@@ -8461,25 +8691,13 @@ monstrosity:
           enabled:      false
         - skill:        regeneration
           dat_skill_id: 380
-          mob_skill_id: 461
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
-          mob_skill_id: 3548
-          unlock_level: 40
-          tp_cost:      600
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 380
           mob_skill_id: 418
           unlock_level: 40
           tp_cost:      600
           enabled:      false
-        - skill:        mp_drainkiss
-          dat_skill_id: 382
-          mob_skill_id: 421
+        - skill:        drainkiss
+          dat_skill_id: 379
+          mob_skill_id: 417
           unlock_level: 50
           tp_cost:      1000
           enabled:      false
@@ -8489,9 +8707,9 @@ monstrosity:
           unlock_level: 50
           tp_cost:      700
           enabled:      false
-        - skill:        drainkiss
-          dat_skill_id: 379
-          mob_skill_id: 417
+        - skill:        mp_drainkiss
+          dat_skill_id: 382
+          mob_skill_id: 421
           unlock_level: 50
           tp_cost:      1000
           enabled:      false
@@ -8507,6 +8725,12 @@ monstrosity:
           unlock_level: 70
           tp_cost:      2000
           enabled:      false
+        - skill:        caliginosity   # No mob_skills row yet
+          dat_skill_id: 664
+          mob_skill_id: 2937
+          unlock_level: 70
+          tp_cost:      2000
+          enabled:      false
         - skill:        deep_kiss
           dat_skill_id: 318
           mob_skill_id: 327
@@ -8517,36 +8741,42 @@ monstrosity:
       family:       crab
       species_code: 340
       name:         Vermillion Crab
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         rdm
       size:         0
       look:         0x0165
       ecosystem:    aquan
+      hp_scale:     230
+      hitbox:       13
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        scissor_guard
           dat_skill_id: 397
           mob_skill_id: 445
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        metallic_body
           dat_skill_id: 398
           mob_skill_id: 448
@@ -8557,36 +8787,41 @@ monstrosity:
       family:       crab
       species_code: 341
       name:         Basket-burdened Crab
-      mjob:         war
-      sjob:         war
+      mjob:         blm
+      sjob:         pld
       size:         0
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     210
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        scissor_guard
           dat_skill_id: 397
           mob_skill_id: 445
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        metallic_body
           dat_skill_id: 398
           mob_skill_id: 448
@@ -8597,36 +8832,41 @@ monstrosity:
       family:       crab
       species_code: 342
       name:         Vermillion Basket-burdened Crab
-      mjob:         war
-      sjob:         war
+      mjob:         rdm
+      sjob:         pld
       size:         0
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     230
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        scissor_guard
           dat_skill_id: 397
           mob_skill_id: 445
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        metallic_body
           dat_skill_id: 398
           mob_skill_id: 448
@@ -8637,36 +8877,41 @@ monstrosity:
       family:       crab
       species_code: 343
       name:         Porter Crab (Crab)
-      mjob:         war
-      sjob:         war
+      mjob:         drk
+      sjob:         pld
       size:         0
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     230
       tp_skills:
         - skill:        big_scissors
           dat_skill_id: 396
           mob_skill_id: 444
           unlock_level: 1
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_curtain
           dat_skill_id: 395
           mob_skill_id: 443
           unlock_level: 10
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        bubble_shower
           dat_skill_id: 394
           mob_skill_id: 442
           unlock_level: 20
           tp_cost:      1500
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        scissor_guard
           dat_skill_id: 397
           mob_skill_id: 445
           unlock_level: 30
           tp_cost:      800
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        metallic_body
           dat_skill_id: 398
           mob_skill_id: 448
@@ -8689,11 +8934,12 @@ monstrosity:
       family:       pugil
       species_code: 344
       name:         Jagil (Pugil)
-      mjob:         war
-      sjob:         war
+      mjob:         cor
+      sjob:         cor
       size:         0
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     230
       tp_skills:
         - skill:        intimidate
           dat_skill_id: 399
@@ -8741,11 +8987,12 @@ monstrosity:
       family:       sea_monk
       species_code: 345
       name:         Azure Sea Monk
-      mjob:         war
-      sjob:         war
+      mjob:         sam
+      sjob:         whm
       size:         1
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     240
       tp_skills:
         - skill:        tentacle
           dat_skill_id: 405
@@ -8761,12 +9008,6 @@ monstrosity:
           enabled:      false
         - skill:        hard_membrane
           dat_skill_id: 407
-          mob_skill_id: 3547
-          unlock_level: 20
-          tp_cost:      800
-          enabled:      false
-        - skill:        hard_membrane
-          dat_skill_id: 407
           mob_skill_id: 459
           unlock_level: 20
           tp_cost:      800
@@ -8776,18 +9017,6 @@ monstrosity:
           mob_skill_id: 460
           unlock_level: 30
           tp_cost:      1500
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 409
-          mob_skill_id: 3548
-          unlock_level: 40
-          tp_cost:      1000
-          enabled:      false
-        - skill:        regeneration
-          dat_skill_id: 409
-          mob_skill_id: 418
-          unlock_level: 40
-          tp_cost:      1000
           enabled:      false
         - skill:        regeneration
           dat_skill_id: 409
@@ -8811,40 +9040,47 @@ monstrosity:
       family:       uragnite
       species_code: 346
       name:         Limascabra (Uragnite)
-      mjob:         war
-      sjob:         war
+      mjob:         pld
+      sjob:         blm
       size:         1
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     230
       tp_skills:
         - skill:        gas_shell
           dat_skill_id: 421
-          mob_skill_id: 1571
+          mob_skill_id: 504
           unlock_level: 1
           tp_cost:      600
           enabled:      false
         - skill:        painful_whip
           dat_skill_id: 424
-          mob_skill_id: 1574
+          mob_skill_id: 507
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
         - skill:        suctorial_tentacle
           dat_skill_id: 425
-          mob_skill_id: 1575
+          mob_skill_id: 508
           unlock_level: 20
           tp_cost:      600
           enabled:      false
         - skill:        palsynyxis
           dat_skill_id: 423
-          mob_skill_id: 1573
+          mob_skill_id: 506
           unlock_level: 30
           tp_cost:      1000
           enabled:      false
         - skill:        venom_shell
           dat_skill_id: 422
-          mob_skill_id: 1572
+          mob_skill_id: 505
           unlock_level: 40
+          tp_cost:      1200
+          enabled:      false
+        - skill:        virulent_haze      # No mob_skills row yet
+          dat_skill_id: 642
+          mob_skill_id: 2693
+          unlock_level: 50
           tp_cost:      1200
           enabled:      false
     pygmy_orobon:
@@ -8856,6 +9092,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     320
       tp_skills:
         - skill:        hypnic_lamp
           dat_skill_id: 511
@@ -8879,17 +9116,30 @@ monstrosity:
           dat_skill_id: 510
           mob_skill_id: 1694
           unlock_level: 40
+          tp_cost:      1500
+          enabled:      false
+        - skill:        leeching_current
+          dat_skill_id: 514
+          mob_skill_id: 1698
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        abominable_belch
+          dat_skill_id: 556
+          mob_skill_id: 1978
+          unlock_level: 60
           tp_cost:      1500
           enabled:      false
     ogrebon_orobon:
       family:       orobon
       species_code: 348
       name:         Ogrebon (Orobon)
-      mjob:         war
+      mjob:         drk
       sjob:         war
       size:         2
       look:         0x0000
       ecosystem:    aquan
+      hp_scale:     310
       tp_skills:
         - skill:        hypnic_lamp
           dat_skill_id: 511
@@ -8915,33 +9165,49 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
+        - skill:        leeching_current
+          dat_skill_id: 514
+          mob_skill_id: 1698
+          unlock_level: 50
+          tp_cost:      1800
+          enabled:      false
+        - skill:        abominable_belch
+          dat_skill_id: 556
+          mob_skill_id: 1978
+          unlock_level: 60
+          tp_cost:      1500
+          enabled:      false
     azure_toad:
       family:       toad
       species_code: 349
       name:         Azure Toad
-      mjob:         war
-      sjob:         war
+      mjob:         brd
+      sjob:         blm
       size:         0
-      look:         0x0000
+      look:         0x0832
       ecosystem:    unclassified
+      hp_scale:     180
+      hitbox:       8
     vermillion_toad:
       family:       toad
       species_code: 350
       name:         Vermillion Toad
-      mjob:         war
-      sjob:         war
+      mjob:         rdm
+      sjob:         brd
       size:         0
       look:         0x0000
       ecosystem:    unclassified
+      hp_scale:     180
     onyx_bird:
       family:       bird
       species_code: 351
       name:         Onyx Bird
-      mjob:         war
-      sjob:         war
+      mjob:         thf
+      sjob:         blm
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     210
       tp_skills:
         - skill:        helldive
           dat_skill_id: 442
@@ -8955,9 +9221,21 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
+        - skill:        broadside_barrage
+          dat_skill_id: 488
+          mob_skill_id: 1159
+          unlock_level: 20
+          tp_cost:      800
+          enabled:      false
+        - skill:        blind_side_barrage
+          dat_skill_id: 489
+          mob_skill_id: 1160
+          unlock_level: 30
+          tp_cost:      800
+          enabled:      false
         - skill:        damnation_dive
           dat_skill_id: 490
-          mob_skill_id: 1445
+          mob_skill_id: 1161
           unlock_level: 40
           tp_cost:      1500
           enabled:      false
@@ -8965,21 +9243,16 @@ monstrosity:
       family:       cockatrice
       species_code: 352
       name:         Ziz (Cockatrice)
-      mjob:         war
+      mjob:         blm
       sjob:         war
       size:         1
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     220
       tp_skills:
-        - skill:        sound_vacuum
+        - skill:        sound_vacuum_cockatrice
           dat_skill_id: 373
           mob_skill_id: 408
-          unlock_level: 1
-          tp_cost:      800
-          enabled:      false
-        - skill:        sound_vacuum
-          dat_skill_id: 373
-          mob_skill_id: 429
           unlock_level: 1
           tp_cost:      800
           enabled:      false
@@ -8989,13 +9262,7 @@ monstrosity:
           unlock_level: 10
           tp_cost:      800
           enabled:      false
-        - skill:        baleful_gaze
-          dat_skill_id: 375
-          mob_skill_id: 370
-          unlock_level: 20
-          tp_cost:      1300
-          enabled:      false
-        - skill:        baleful_gaze
+        - skill:        baleful_gaze_cockatrice
           dat_skill_id: 375
           mob_skill_id: 411
           unlock_level: 20
@@ -9013,31 +9280,44 @@ monstrosity:
           unlock_level: 40
           tp_cost:      1000
           enabled:      false
+        - skill:        toxic_pick
+          dat_skill_id: 496
+          mob_skill_id: 1335
+          unlock_level: 50
+          tp_cost:      1500
+          enabled:      false
+        - skill:        contagion_transfer
+          dat_skill_id: 495
+          mob_skill_id: 1333
+          unlock_level: 60
+          tp_cost:      2000
+          enabled:      false
     legendary_roc:
       family:       roc
       species_code: 353
       name:         Legendary Roc
       mjob:         war
-      sjob:         war
+      sjob:         rdm
       size:         1
       look:         0x0000
       ecosystem:    unclassified
+      hp_scale:     240
       tp_skills:
         - skill:        blind_vortex
           dat_skill_id: 366
-          mob_skill_id: 922
+          mob_skill_id: 399
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
         - skill:        giga_scream
           dat_skill_id: 367
-          mob_skill_id: 923
+          mob_skill_id: 400
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
         - skill:        dread_dive
           dat_skill_id: 368
-          mob_skill_id: 924
+          mob_skill_id: 401
           unlock_level: 20
           tp_cost:      1000
           enabled:      false
@@ -9046,12 +9326,6 @@ monstrosity:
           mob_skill_id: 402
           unlock_level: 30
           tp_cost:      500
-          enabled:      false
-        - skill:        stormwind
-          dat_skill_id: 370
-          mob_skill_id: 926
-          unlock_level: 40
-          tp_cost:      1500
           enabled:      false
         - skill:        stormwind
           dat_skill_id: 370
@@ -9063,27 +9337,28 @@ monstrosity:
       family:       roc
       species_code: 354
       name:         Gagana (Roc)
-      mjob:         war
-      sjob:         war
+      mjob:         blm
+      sjob:         brd
       size:         2
       look:         0x0000
       ecosystem:    unclassified
+      hp_scale:     210
       tp_skills:
         - skill:        blind_vortex
           dat_skill_id: 366
-          mob_skill_id: 922
+          mob_skill_id: 399
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
         - skill:        giga_scream
           dat_skill_id: 367
-          mob_skill_id: 923
+          mob_skill_id: 400
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
         - skill:        dread_dive
           dat_skill_id: 368
-          mob_skill_id: 924
+          mob_skill_id: 401
           unlock_level: 20
           tp_cost:      1000
           enabled:      false
@@ -9095,15 +9370,15 @@ monstrosity:
           enabled:      false
         - skill:        stormwind
           dat_skill_id: 370
-          mob_skill_id: 926
-          unlock_level: 40
-          tp_cost:      1500
-          enabled:      false
-        - skill:        stormwind
-          dat_skill_id: 370
           mob_skill_id: 403
           unlock_level: 40
           tp_cost:      1500
+          enabled:      false
+        - skill:        dread_wind      # No mob_skills row yet
+          dat_skill_id: 646
+          mob_skill_id: 2703
+          unlock_level: 50
+          tp_cost:      2500
           enabled:      false
     bats:
       family:       bat
@@ -9114,6 +9389,7 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     220
       tp_skills:
         - skill:        sonic_boom
           dat_skill_id: 363
@@ -9127,49 +9403,86 @@ monstrosity:
           unlock_level: 10
           tp_cost:      1000
           enabled:      false
+        - skill:        slipstream
+          dat_skill_id: 486
+          mob_skill_id: 1157
+          unlock_level: 20
+          tp_cost:      750
+          enabled:      false
+        - skill:        turbulence
+          dat_skill_id: 487
+          mob_skill_id: 1158
+          unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        knife_edge_circle
+          dat_skill_id: 498
+          mob_skill_id: 1341
+          unlock_level: 40
+          tp_cost:      1300
+          enabled:      false
+        - skill:        train_fall
+          dat_skill_id: 499
+          mob_skill_id: 1342
+          unlock_level: 50
+          tp_cost:      2000
+          enabled:      false
     vermillion_bat:
       family:       bat
       species_code: 356
       name:         Vermillion Bat
-      mjob:         war
+      mjob:         rdm
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     210
+      hitbox:       12
       tp_skills:
         - skill:        ultrasonics
           dat_skill_id: 362
           mob_skill_id: 392
           unlock_level: 1
           tp_cost:      750
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        blood_drain
           dat_skill_id: 364
           mob_skill_id: 394
           unlock_level: 10
           tp_cost:      1000
-          enabled:      false
+          ready_time:   1200
+          enabled:      true
         - skill:        subsonics
           dat_skill_id: 484
           mob_skill_id: 1155
           unlock_level: 20
           tp_cost:      750
-          enabled:      false
+          ready_time:   2000
+          enabled:      true
         - skill:        marrow_drain
           dat_skill_id: 485
           mob_skill_id: 1156
           unlock_level: 30
           tp_cost:      1000
+          ready_time:   2000
+          enabled:      true
+        - skill:        soul_accretion
+          dat_skill_id: 504
+          mob_skill_id: 1401
+          unlock_level: 40
+          tp_cost:      1300
           enabled:      false
     vermillion_bats:
       family:       bat
       species_code: 357
       name:         Vermillion Bats
-      mjob:         war
+      mjob:         rdm
       sjob:         war
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     210
       tp_skills:
         - skill:        sonic_boom
           dat_skill_id: 363
@@ -9182,6 +9495,30 @@ monstrosity:
           mob_skill_id: 395
           unlock_level: 10
           tp_cost:      1000
+          enabled:      false
+        - skill:        slipstream
+          dat_skill_id: 486
+          mob_skill_id: 1157
+          unlock_level: 20
+          tp_cost:      750
+          enabled:      false
+        - skill:        turbulence
+          dat_skill_id: 487
+          mob_skill_id: 1158
+          unlock_level: 30
+          tp_cost:      1000
+          enabled:      false
+        - skill:        knife_edge_circle
+          dat_skill_id: 498
+          mob_skill_id: 1341
+          unlock_level: 40
+          tp_cost:      1300
+          enabled:      false
+        - skill:        train_fall
+          dat_skill_id: 499
+          mob_skill_id: 1342
+          unlock_level: 50
+          tp_cost:      2000
           enabled:      false
     inguza_apkallu:
       family:       apkallu
@@ -9192,46 +9529,54 @@ monstrosity:
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     240
       tp_skills:
-        - skill:        yawn
+        - skill:        yawn           # No mob_skills row yet
           dat_skill_id: 653
-          mob_skill_id: 1713
+          mob_skill_id: 2814
           unlock_level: 1
           tp_cost:      1000
           enabled:      false
-        - skill:        beak_lunge
+        - skill:        beak_lunge     # No mob_skills row yet
           dat_skill_id: 655
-          mob_skill_id: 1715
+          mob_skill_id: 2816
           unlock_level: 10
           tp_cost:      1200
           enabled:      false
-        - skill:        frigid_shuffle
+        - skill:        frigid_shuffle # No mob_skills row yet
           dat_skill_id: 656
-          mob_skill_id: 1716
+          mob_skill_id: 2817
           unlock_level: 20
           tp_cost:      1000
           enabled:      false
-        - skill:        wing_slap
+        - skill:        wing_slap      # No mob_skills row yet
           dat_skill_id: 654
-          mob_skill_id: 1714
+          mob_skill_id: 2815
           unlock_level: 30
           tp_cost:      1500
           enabled:      false
-        - skill:        wing_whirl
+        - skill:        wing_whirl     # No mob_skills row yet
           dat_skill_id: 657
-          mob_skill_id: 1717
+          mob_skill_id: 2818
           unlock_level: 40
           tp_cost:      1500
+          enabled:      false
+        - skill:        whiteout       # No mob_skills row yet
+          dat_skill_id: 658
+          mob_skill_id: 2819
+          unlock_level: 50
+          tp_cost:      3000
           enabled:      false
     toucalibri_colibri:
       family:       colibri
       species_code: 359
       name:         Toucalibri (Colibri)
       mjob:         brd
-      sjob:         rdm
+      sjob:         thf
       size:         0
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     210
       tp_skills:
         - skill:        snatch_morsel
           dat_skill_id: 516
@@ -9251,6 +9596,12 @@ monstrosity:
           unlock_level: 20
           tp_cost:      1000
           enabled:      false
+        - skill:        tropic_tenor   # No mob_skills row yet
+          dat_skill_id: 661
+          mob_skill_id: 2887
+          unlock_level: 40
+          tp_cost:      2000
+          enabled:      false
     sanguiptere_amphiptere:
       family:       amphiptere
       species_code: 360
@@ -9260,6 +9611,7 @@ monstrosity:
       size:         2
       look:         0x0000
       ecosystem:    bird
+      hp_scale:     230
       tp_skills:
         - skill:        storm_wing
           dat_skill_id: 607
@@ -9285,6 +9637,13 @@ monstrosity:
           unlock_level: 30
           tp_cost:      1700
           enabled:      false
+        - skill:        vermilion_wind  # No mob_skills row yet
+          dat_skill_id: 640
+          mob_skill_id: 2642
+          unlock_level: 40
+          tp_cost:      1500
+          enabled:      false
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10. Retail attack is about 1.2 times the Slime's.
     astoltian_she_slime:
       family:       astoltian_slime
       species_code: 508
@@ -9294,15 +9653,50 @@ monstrosity:
       size:         0
       look:         0x0B5B
       ecosystem:    amorph
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
+      mods:
+        attp: 20
+    # Retail HP is the base slime's divided by 60, and defence is about four times as high.
+    # The stat ranks fit retail Slime and Metal Slime stats at levels 1-10.
     astoltian_metal_slime:
       family:       astoltian_slime
       species_code: 509
       name:         Astoltian Metal Slime
       mjob:         blm
       sjob:         war
+      hp_mjob:      war
+      hp_sjob:      war
       size:         0
       look:         0x0B5C
       ecosystem:    amorph
+      hp_scale:     4
+      stat_ranks:
+        str: f
+        dex: d
+        vit: f
+        agi: a
+        int: b
+        mnd: f
+        chr: a
+      mods:
+        defp: 300
+      tp_skills:
+        - skill:        frizz # TODO: Retail readies it with msg 716, starts casting.
+          dat_skill_id: 688
+          mob_skill_id: 3127
+          unlock_level: 1
+          tp_cost:      1000
+          ready_time:   400
+          enabled:      true
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
+    # Retail defence is five sixths of the plain Spriggan's.
     eorzean_spriggan_c:
       family:       eorzean_spriggan
       species_code: 510
@@ -9312,25 +9706,32 @@ monstrosity:
       size:         0
       look:         0x0B5D
       ecosystem:    unclassified
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
+      mods:
+        defp: -17
       tp_skills:
-        - skill:        frenetic_flurry
-          dat_skill_id: 691
-          mob_skill_id: 3146
-          unlock_level: 1
-          tp_cost:      1500
-          enabled:      true
         - skill:        jittering_jig
           dat_skill_id: 689
           mob_skill_id: 3144
           unlock_level: 1
           tp_cost:      700
+          ready_time:   2900
           enabled:      true
         - skill:        romp
           dat_skill_id: 690
           mob_skill_id: 3145
           unlock_level: 10
           tp_cost:      700
+          ready_time:   2500
           enabled:      true
+    # The stat ranks are the closest shared fit to retail Spriggan and Spriggan.G stats at levels 1-9.
     eorzean_spriggan_g:
       family:       eorzean_spriggan
       species_code: 511
@@ -9340,10 +9741,20 @@ monstrosity:
       size:         0
       look:         0x0B5E
       ecosystem:    unclassified
+      hp_scale:     210
+      stat_ranks:
+        str: c
+        dex: e
+        vit: b
+        agi: f
+        int: d
+        mnd: b
+        chr: d
       tp_skills:
         - skill:        frenetic_flurry
           dat_skill_id: 691
           mob_skill_id: 3146
           unlock_level: 1
           tp_cost:      1500
+          ready_time:   2200
           enabled:      true

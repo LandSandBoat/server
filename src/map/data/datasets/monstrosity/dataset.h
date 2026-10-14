@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/timer.h"
 #include "common/types/hash_map.h"
 #include "common/types/maybe.h"
 #include "data/enums/ecosystem.h"
@@ -29,7 +30,9 @@
 #include "data/enums/mod.h"
 #include "data/enums/monstrosity_species.h"
 #include "data/enums/monstrosity_variant.h"
+#include "data/enums/stat_rank.h"
 
+#include <array>
 #include <cstddef>
 #include <map>
 #include <string_view>
@@ -39,13 +42,15 @@
 namespace xi::data
 {
 
-// dat_skill_id is what the client sends, mob_skill_id is what runs.
+// dat_skill_id is what the client sends, mob_skill_id is what runs. A disabled move is still learned, but not usable.
 struct MonstrosityTpSkill
 {
-    uint16 datSkillId{};
-    uint16 mobSkillId{};
-    uint8  unlockLevel{};
-    uint16 tpCost{};
+    uint16                 datSkillId{};
+    uint16                 mobSkillId{};
+    uint8                  unlockLevel{};
+    uint16                 tpCost{};
+    Maybe<timer::duration> readyTime{};
+    bool                   enabled{};
 };
 
 struct MonstrosityInstinct
@@ -56,15 +61,23 @@ struct MonstrosityInstinct
 
 struct MonstrositySpecies
 {
-    uint8                           monstrosityId{};
-    xi::Job                         mjob{};
-    xi::Job                         sjob{};
-    uint8                           size{};
-    uint16                          look{};
-    xi::Ecosystem                   ecosystem{};
-    Maybe<uint16>                   mobSpecies{};
-    uint16                          hpScale{};
-    std::vector<MonstrosityTpSkill> tpSkills{};
+    uint8                              monstrosityId{};
+    xi::Job                            mjob{};
+    xi::Job                            sjob{};
+    xi::Job                            hpMjob{};
+    xi::Job                            hpSjob{};
+    uint8                              size{};
+    uint16                             look{};
+    xi::Ecosystem                      ecosystem{};
+    Maybe<uint16>                      mobSpecies{};
+    Maybe<std::array<xi::StatRank, 7>> statRanks{};
+    uint16                             hpScale{};
+    Maybe<uint8>                       speed{};
+    Maybe<uint8>                       animationSpeed{};
+    Maybe<uint8>                       hitbox{};
+    Maybe<uint16>                      stanceSpecies{};
+    HashMap<xi::Mod, int16>            mods{};
+    std::vector<MonstrosityTpSkill>    tpSkills{};
 };
 
 // One slot in Teyrnon's shop. Exactly one of species and variant is set.

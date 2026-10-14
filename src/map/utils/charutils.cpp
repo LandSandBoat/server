@@ -543,33 +543,7 @@ auto LoadFromCharLookSQL(CCharEntity* PChar) -> void
         std::memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
     }
 
-    // Model size doesn't matter here per caps, only race
-    // From the packets, size is 4/3/8 as integer
-    // For distance purposes, these are divided by 10
-    switch (static_cast<CharRace>(PChar->look.race))
-    {
-        case CharRace::HumeMale:
-        case CharRace::HumeFemale:
-            PChar->modelHitboxSize = 4.0f / 10.0f;
-            break;
-        case CharRace::ElvaanMale:
-        case CharRace::ElvaanFemale:
-            PChar->modelHitboxSize = 4.0f / 10.0f;
-            break;
-        case CharRace::TarutaruMale:
-        case CharRace::TarutaruFemale:
-            PChar->modelHitboxSize = 3.0f / 10.0f;
-            break;
-        case CharRace::Mithra:
-            PChar->modelHitboxSize = 4.0f / 10.0f;
-            break;
-        case CharRace::Galka:
-            PChar->modelHitboxSize = 8.0f / 10.0f;
-            break;
-        default:
-            PChar->modelHitboxSize = 4.0f / 10.0f;
-            break;
-    }
+    charutils::SetRaceHitbox(PChar);
 }
 
 auto LoadFromCharStyleSQL(CCharEntity* PChar) -> void
@@ -1252,6 +1226,24 @@ void LoadEquip(CCharEntity* PChar)
  *  Send lists of current / completed quests and missions.               *
  *                                                                       *
  ************************************************************************/
+
+// Only race sets the hitbox, not model size.
+void SetRaceHitbox(CCharEntity* PChar)
+{
+    PChar->modelHitboxSize = [&]
+    {
+        switch (static_cast<CharRace>(PChar->look.race))
+        {
+            case CharRace::TarutaruMale:
+            case CharRace::TarutaruFemale:
+                return 3.0f / 10.0f;
+            case CharRace::Galka:
+                return 8.0f / 10.0f;
+            default:
+                return 4.0f / 10.0f;
+        }
+    }();
+}
 
 void SendQuestMissionLog(CCharEntity* PChar)
 {
@@ -4755,7 +4747,8 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
                 return;
             }
 
-            if (!hasKeyItem(PMember, xi::KeyItem::JobBreaker) || PMember->GetMLevel() < 99)
+            // FFXIclopedia: Monipulators earn no capacity points.
+            if (PMember->m_PMonstrosity != nullptr || !hasKeyItem(PMember, xi::KeyItem::JobBreaker) || PMember->GetMLevel() < 99)
             {
                 // Do not grant Capacity points without Job Breaker or Level 99
                 return;
@@ -5188,10 +5181,17 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
     PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, PMob, exp);
 
-    // Only kills pay infamy.
-    if (PChar->m_PMonstrosity && !expFromRaise && !fromScripts)
+    // Only kills pay infamy and prestige.
+    if (!expFromRaise && !fromScripts)
     {
-        monstrosity::AddInfamy(PChar, exp);
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            monstrosity::AddInfamy(PChar, exp);
+        }
+        else
+        {
+            monstrosity::AddPrestige(PChar, exp);
+        }
     }
 
     // Player levels up
@@ -6624,7 +6624,7 @@ void ReloadParty(CCharEntity* PChar)
             PParty->PushMember(PChar);
 
             // A party saved before entering Monstrosity comes back here, after the job change.
-            if (PChar->m_PMonstrosity != nullptr && !monstrosity::CanStayInParty(PChar, partyid))
+            if (!monstrosity::CanParty(PChar))
             {
                 LeaveParty(PChar);
                 return;
@@ -6784,6 +6784,12 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
     if (strcmp(type, "spark_of_eminence") == 0)
     {
         PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
+    }
+
+    // Spending infamy can lower a Monipulator's rank.
+    if (strcmp(type, "infamy") == 0 && PChar->m_PMonstrosity != nullptr)
+    {
+        monstrosity::UpdateRank(PChar, amount);
     }
 }
 

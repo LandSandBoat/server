@@ -169,8 +169,10 @@ xi.rentalChocobo.renterOnTrigger = function(player, npc, eventSucceed, eventFail
         return
     end
 
+    -- JP wiki: a gladiator holding the writ is refused a chocobo.
     if
         player:hasKeyItem(xi.keyItem.CHOCOBO_LICENSE) and
+        not player:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS) and
         mLvl >= info.levelReq and
         (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past)
     then

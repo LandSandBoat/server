@@ -291,8 +291,11 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
         return 0
     end
 
-    -- Trusts not allowed in an alliance
-    if caster:checkSoloPartyAlliance() == 2 then
+    -- Trusts not allowed in an alliance, or for a gladiator holding the writ
+    if
+        caster:checkSoloPartyAlliance() == 2 or
+        caster:hasKeyItem(xi.keyItem.GLADIATORIAL_WRIT_OF_SUMMONS)
+    then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
@@ -346,11 +349,9 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
                 end
             elseif type(notAllowedTrustIds) == 'table' then
                 for _, v in pairs(notAllowedTrustIds) do
-                    if type(v) == 'number' then
-                        if member:getTrustID() == v then
-                            caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
-                            return -1
-                        end
+                    if member:getTrustID() == v then
+                        caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
+                        return -1
                     end
                 end
             end

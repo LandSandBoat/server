@@ -1,11 +1,13 @@
 -----------------------------------
 -- Monstrosity
+-- The Suspicious NPCs and Odyssean Passages are in scripts/globals/monstrosity/city.lua. The quest's
+-- priority events win over them until it is complete.
 -----------------------------------
 -- Log ID: 4, Quest ID: 34
 -- Suspicious Hume     : !pos -491.817 24.988 -618.552 109
 -- Suspicious Elvaan   : !pos 82.217 -0.199 42.682 231
 -- Suspicious Galka    : !pos 81.610 8.499 -229.065 236
--- Suspicious Tarutaru : !pos 221.286 -12.000 225.311 241
+-- Suspicious Tarutaru : !pos 221.286 -12.000 225.311 240
 -- Rabbit Hide         : !additem 856
 -- Lizard Tail         : !additem 926
 -- Two-leaf Mandy Bud  : !additem 4368
@@ -14,14 +16,6 @@
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
 
 quest.reward = {}
-
-local baseNpcEvents =
-{
-    [xi.zone.PASHHOW_MARSHLANDS] = 40,
-    [xi.zone.NORTHERN_SAN_DORIA] = 882,
-    [xi.zone.PORT_BASTOK]        = 418,
-    [xi.zone.PORT_WINDURST]      = 880,
-}
 
 local tradeItems =
 {
@@ -39,55 +33,37 @@ local suspiciousCityNpc =
 
         for _, entry in ipairs(tradeItems) do
             local itemId = entry[1]
-            if npcUtil.tradeHasExactly(trade, itemId) then
+            if npcUtil.tradeMatches(trade, { { itemId, 1 } }) then
                 player:setLocalVar('MONSTROSITY_UNLOCK', entry[2])
-                return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 1, itemId)
+                return quest:progressEvent(xi.monstrosity.cityEvents[player:getZoneID()] + xi.monstrosity.cityEvent.TRADE, itemId)
             end
         end
     end,
 
     onTrigger = function(player, npc)
-        local baseEvent = baseNpcEvents[player:getZoneID()]
+        local baseEvent = xi.monstrosity.cityEvents[player:getZoneID()]
 
         if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-            return quest:event(baseEvent)
+            return quest:priorityEvent(baseEvent + xi.monstrosity.cityEvent.INTRO)
         else
-            return quest:event(baseEvent + 2)
+            return quest:priorityEvent(baseEvent + xi.monstrosity.cityEvent.HAS_RING)
         end
     end,
 }
 
--- The client lists the starters as rabbit, lizard, mandragora.
-local starterCutsceneIndex =
-{
-    [xi.monstrositySpecies.RABBIT    ] = 1,
-    [xi.monstrositySpecies.LIZARD    ] = 2,
-    [xi.monstrositySpecies.MANDRAGORA] = 3,
-}
-
-local tradeEventFinish = function(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
+local function tradeEventFinish(player, csid, option, npc)
     local species = player:getLocalVar('MONSTROSITY_UNLOCK')
-    if species > 0 then
-        xi.monstrosity.unlockStartingMONs(player, species)
-    end
-end
+    player:setLocalVar('MONSTROSITY_UNLOCK', 0)
 
-local odysseanPassageNpc =
-{
-    onTrigger = function(player, npc)
-        if player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-            return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 3)
-        end
-    end,
-}
-
-local odysseanPassageOnEventFinish = function(player, csid, option, npc)
-    if option == 1 then
-        local pos = player:getPos()
-        player:setMonstrosityEntryData(pos.x, pos.y, pos.z, pos.rot, player:getZoneID(), player:getMainJob(), player:getSubJob())
-        player:setPos(-358, -3.4, -440, 64, xi.zone.FERETORY)
+    if
+        species == 0 or
+        not player:tradeComplete()
+    then
+        return
     end
+
+    npcUtil.giveKeyItem(player, xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
+    player:setMonstrosityData({ monstrosityId = species, species = species })
 end
 
 quest.sections =
@@ -112,62 +88,50 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
-            ['Odyssean_Passage']  = odysseanPassageNpc,
             ['Suspicious_Elvaan'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [883] = tradeEventFinish,
-                [885] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PASHHOW_MARSHLANDS] =
         {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Hume']  =
+            ['Suspicious_Hume'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION) then
-                        return quest:event(41)
+                        return quest:priorityEvent(41)
                     else
-                        return quest:event(42)
+                        return quest:priorityEvent(42)
                     end
                 end,
-            },
-
-            onEventFinish =
-            {
-                [43] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
             ['Suspicious_Galka'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [419] = tradeEventFinish,
-                [421] = odysseanPassageOnEventFinish,
             },
         },
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Odyssean_Passage']    = odysseanPassageNpc,
             ['Suspicious_Tarutaru'] = suspiciousCityNpc,
 
             onEventFinish =
             {
                 [881] = tradeEventFinish,
-                [883] = odysseanPassageOnEventFinish,
             },
         },
 
@@ -181,10 +145,7 @@ quest.sections =
             {
                 [2] = function(player, csid, option, npc)
                     if option == 1 then
-                        -- The cutscene draws the player's race and face, then the starter in the client's order.
-                        -- TODO: Check getFace() matches the client's face numbering.
-                        local starter = starterCutsceneIndex[player:getMonstrosityData().monstrosityId] or 0
-                        player:updateEvent(player:getRace(), player:getFace(), starter)
+                        xi.monstrosity.updateIntroEvent(player)
                     end
                 end,
             },
@@ -195,60 +156,6 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
-        },
-    },
-
-    -- NOTE: The default events for the Suspicious NPCs require additional work to support
-    -- the items that they can provide, and will most likely need support in the monstrosity
-    -- global, along with event update/finish wiring here.
-    {
-        check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED
-        end,
-
-        [xi.zone.PASHHOW_MARSHLANDS] =
-        {
-
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Hume']  = quest:event(45):replaceDefault(),
-
-            onEventFinish =
-            {
-                [43] = odysseanPassageOnEventFinish,
-            }
-        },
-
-        [xi.zone.NORTHERN_SAN_DORIA] =
-        {
-            ['Odyssean_Passage']  = odysseanPassageNpc,
-            ['Suspicious_Elvaan'] = quest:event(886):replaceDefault(), -- TODO: 886 may be once per zone or once, 887 after
-
-            onEventFinish =
-            {
-                [885] = odysseanPassageOnEventFinish,
-            }
-        },
-
-        [xi.zone.PORT_BASTOK] =
-        {
-            ['Odyssean_Passage'] = odysseanPassageNpc,
-            ['Suspicious_Galka'] = quest:event(422):replaceDefault(),
-
-            onEventFinish =
-            {
-                [421] = odysseanPassageOnEventFinish,
-            }
-        },
-
-        [xi.zone.PORT_WINDURST] =
-        {
-            ['Odyssean_Passage']    = odysseanPassageNpc,
-            ['Suspicious_Tarutaru'] = quest:event(884):replaceDefault(),
-
-            onEventFinish =
-            {
-                [883] = odysseanPassageOnEventFinish,
-            }
         },
     },
 }

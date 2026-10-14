@@ -128,7 +128,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
                     {
-                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing });
+                        pv.blockedBy({ BlockedState::InEvent, BlockedState::Healing, BlockedState::Sitting, BlockedState::Crafting, BlockedState::Fishing, BlockedState::Monstrosity });
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Dismount:
@@ -256,11 +256,9 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            // MONs are allowed to use doors, but nothing else
-            if (PChar->m_PMonstrosity != nullptr &&
-                PNpc->look.size != 0x02 &&
-                PChar->getZone() != xi::ZoneId::Feretory &&
-                !settings::get<bool>("main.MONSTROSITY_TRIGGER_NPCS"))
+            // A Monipulator triggers nothing outside the Feretory, doors and levers included (FFXIclopedia, retail).
+            // TODO: FFXIclopedia's exceptions, such as the Castle Zvahl Keep doors and the Garlaige gates with the key item.
+            if (PChar->m_PMonstrosity != nullptr && PChar->getZone() != xi::ZoneId::Feretory)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Standard);
                 return;
@@ -344,6 +342,12 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         case GP_CLI_COMMAND_ACTION_ACTIONID::Help:
         {
             // TODO: C4H applies to ALL claimed enemies on which you (personally) have enmity. This does NOT require you to be engaged.
+            // FFXIclopedia: a Monipulator cannot call for help.
+            if (PChar->m_PMonstrosity != nullptr)
+            {
+                break;
+            }
+
             if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
             {
                 if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
@@ -585,6 +589,11 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             if (PChar->animation != xi::Animation::None || PChar->StatusEffectContainer->HasPreventActionEffect())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotPerformAction);
+            }
+            else if (charutils::hasKeyItem(PChar, xi::KeyItem::GladiatorialWritOfSummons))
+            {
+                // JP wiki: a gladiator holding the writ cannot ride.
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotMount);
             }
             else if (!PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mount))
             {

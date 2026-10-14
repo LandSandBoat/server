@@ -58,6 +58,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/mob_entity.h"
 #include "entities/trust_entity.h"
 #include "latent_effect_container.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "status_effect_container.h"
 
@@ -2037,6 +2038,11 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
         int16 refresh = std::max<int16>(m_POwner->getMod(xi::Mod::REFRESH), 0) - m_POwner->getMod(xi::Mod::REFRESH_DOWN);
         int16 regain  = m_POwner->getMod(xi::Mod::REGAIN) - m_POwner->getMod(xi::Mod::REGAIN_DOWN);
         m_POwner->addHP(regen);
+
+        if (PChar != nullptr && PChar->m_PMonstrosity != nullptr)
+        {
+            monstrosity::ApplyIdleRegen(PChar);
+        }
 
         if (poison)
         {

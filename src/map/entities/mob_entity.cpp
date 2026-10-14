@@ -44,6 +44,7 @@
 #include "lua/luautils.h"
 #include "mob_spell_container.h"
 #include "mobskill.h"
+#include "monstrosity.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
@@ -898,10 +899,14 @@ void CMobEntity::DistributeRewards()
                 charutils::DistributeCapacityPoints(PChar, this);
             }
 
-            // JP wiki: a Monipulator never earns gil.
-            // TODO: Monipulators find items under Belligerency.
+            // JP wiki: a Monipulator never earns gil, and finds items only under Belligerency. Retail shows only crystals and seals.
             if (PChar->m_PMonstrosity)
             {
+                if (PChar->m_PMonstrosity->Belligerency)
+                {
+                    DropItems(PChar);
+                }
+
                 return;
             }
 
@@ -1116,7 +1121,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
     const DropList_t* drops = dropList();
 
-    if (!getMobMod(xi::MobMod::NoDrops) && drops != nullptr && (!drops->Items.empty() || !drops->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
+    if (!getMobMod(xi::MobMod::NoDrops) && PChar->m_PMonstrosity == nullptr && drops != nullptr && (!drops->Items.empty() || !drops->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
         // THLvl determines the drop rate.
         auto thDropRateFunction = lua["xi"]["combat"]["treasureHunter"]["getDropRate"];
@@ -1199,7 +1204,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         // Check for geode/avatarites drops
         // Only one type of geode can drop per mob
-        if (!isNotorious && xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Geode))
+        if (!isNotorious && PChar->m_PMonstrosity == nullptr && xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Geode))
         {
             if (const auto geodes = GetEligibleGeodes(); !geodes.empty())
             {
@@ -1257,11 +1262,14 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 return;
             }
 
+            // A Monipulator under Belligerency finds crystals without Signet. Monipulators never party.
+            const auto belligerent = PChar->m_PMonstrosity != nullptr && PChar->m_PMonstrosity->Belligerency;
+
             uint8 playersNearby = 0;
             // clang-format off
-            PChar->ForParty([this, &playersNearby, requiredEffect](CBattleEntity* PMember)
+            PChar->ForParty([this, &playersNearby, requiredEffect, belligerent](CBattleEntity* PMember)
             {
-                if (PMember->StatusEffectContainer->HasStatusEffect(requiredEffect) &&
+                if ((PMember->StatusEffectContainer->HasStatusEffect(requiredEffect) || belligerent) &&
                     PMember->getZone() == getZone() &&
                     distance(PMember->loc.p, loc.p) < 100)
                 {

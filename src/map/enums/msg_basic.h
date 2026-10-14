@@ -266,7 +266,9 @@ enum class MsgBasic : uint16_t
     PflugGain                       = 671, // <Player> uses <Ability>. <Target> now has enhanced resistance.
     GambitGain                      = 672, // <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
     PossessNewMonster               = 677, // You are now able to possess a new monster!
+    LearnedNewInstinct              = 678, // You have learned a new instinct!
     FeretoryCountdown               = 679, // <actor> will return to the Feretory in <n>
+    NewfoundPuissance               = 680, // A newfound puissance courses through your veins.
     ROERecord                       = 697, // Records of Eminence: <record>.
     ROEProgress                     = 698, // Progress: <amount>/<amount>.
     TrustNoCastTrust                = 700, // You are unable to use Trust magic at this time.
@@ -287,6 +289,7 @@ enum class MsgBasic : uint16_t
     ROEUnable                       = 742, // You are currently unable to undertake this objective.
     AutoExceedsCapacity             = 745, // Your automaton exceeds one or more elemental capacity values and cannot be activated.
     MountRequiredLevel              = 773, // You are unable to call forth your mount because your main job level is not at least <level>.
+    CannotMount                     = 777, // You cannot mount at this time.
     ExemplarPointsGained            = 809, // <player> gains # exemplar points.
     MasterChain                     = 810, // Master chain #! <player> gains # exemplar points.
     MasterLevelUp                   = 811, // <player> attains master level #!

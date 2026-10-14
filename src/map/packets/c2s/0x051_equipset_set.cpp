@@ -23,6 +23,7 @@
 
 #include "entities/char_entity.h"
 #include "lua/luautils.h"
+#include "monstrosity.h"
 #include "packets/c2s/validation.h"
 #include "utils/charutils.h"
 
@@ -80,8 +81,9 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
 {
     const auto allowedContainers = validContainers(PChar);
 
+    // JP wiki: a Monipulator cannot use /equipset.
     auto pv = PacketValidator(PChar)
-                  .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus })
+                  .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Monstrosity })
                   .range("Count", this->Count, 1, 16);
 
     if (this->Count <= 16)
@@ -100,9 +102,24 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_EQUIPSET_SET::process(MapSession* PSession, CCharEntity* PChar) const
 {
+    auto changed = false;
     for (uint8 i = 0; i < this->Count; i++)
     {
+        // Encumbrance locks the slot against unequipping too, which EquipItem allows for scripts.
+        if (PChar->m_EquipBlock & (1 << this->Equipment[i].EquipKind))
+        {
+            continue;
+        }
+
+        const auto  slot    = static_cast<SLOTTYPE>(this->Equipment[i].EquipKind);
+        const auto* PBefore = PChar->getEquip(slot);
         charutils::EquipItem(PChar, this->Equipment[i].ItemIndex, this->Equipment[i].EquipKind, this->Equipment[i].Category);
+        changed = changed || PChar->getEquip(slot) != PBefore;
+    }
+
+    if (changed)
+    {
+        monstrosity::HandleGladiatorGearChange(PChar);
     }
 
     luautils::CheckForGearSet(PChar); // check for gear set on gear change

@@ -27,8 +27,9 @@
 
 auto GP_CLI_COMMAND_BAZAAR_CLOSE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
+    // FFXIclopedia: a Monipulator cannot set up a bazaar.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent })
+        .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
         .mustEqual(this->AllListClearFlg, 0, "AllListClearFlg not 0"); // Always 0
 }
 

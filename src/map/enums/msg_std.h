@@ -39,6 +39,7 @@ enum class MsgStd : uint16_t
     NotPartyLeader               = 21,  // You are not the party leader.
     UnclaimedTreasureWillBeLost  = 22,  // Caution: All unclaimed treasure will be lost if you join a party.
     CannotInvite                 = 23,  // You cannot invite that person at this time.
+    CannotTradeWithTarget        = 28,  // You cannot trade with that target.
     UnableToPerformInMoghouse    = 32,  // Unable to perform action in Mog House.
     PersonIsAway                 = 33,  // That person is currently away and cannot respond.
     PersonIsUsingPOL             = 34,  // That person is currently using the PlayOnline Viewer and can only be reached by sending a "knock message" from the Search menu.
