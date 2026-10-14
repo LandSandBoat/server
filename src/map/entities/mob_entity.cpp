@@ -1430,6 +1430,12 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 
     FadeOut();
 
+    // An idle pet leaves with its master. A fighting pet leaves once its fight ends, even if the master is back by then.
+    if (auto* PMobPet = dynamic_cast<CMobEntity*>(PPet); PMobPet && PMobPet->PMaster == this && PMobPet->getMobMod(xi::MobMod::NoDespawn) == 0)
+    {
+        PMobPet->SetDespawnTime(1ms);
+    }
+
     luautils::OnMobDespawn(this);
     PAI->EventHandler.triggerListener("DESPAWN", this);
 }
