@@ -74,7 +74,12 @@ xi.monstrosity.relinquishOnAbility = function(player)
         player:addListener(listener.event, listener.name, function(first, second)
             local actor  = listener.actorArg == 1 and first or second
             local target = listener.actorArg == 1 and second or first
-            if actor:isMob() or actor:getAllegiance() ~= target:getAllegiance() then
+            -- A gladiator shares the Monipulator's allegiance, but an adventurer can only act against a Monipulator.
+            if
+                actor:isMob() or
+                actor:getAllegiance() ~= target:getAllegiance() or
+                (actor:isPC() and actor:getMainJob() ~= xi.job.MON)
+            then
                 target:setLocalVar('RELINQUISH_INTERRUPTED', 1)
             end
         end)

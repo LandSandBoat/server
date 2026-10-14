@@ -56,40 +56,126 @@ describe('Monstrosity Belligerency', function()
         end
     end
 
+    -- Whether the attacker engaged the target within a few ticks.
+    local function engages(attacker, target)
+        attacker.actions:engage(target)
+        for _ = 1, 3 do
+            xi.test.world:tickEntity(attacker)
+            if attacker:getTarget() and attacker:getTarget():getID() == target:getID() then
+                return true
+            end
+        end
+
+        return false
+    end
+
+    -- Both sides stand beside it. A move packet over that distance would be refused.
+    local function spawnDhalmel()
+        local mob = monipulator.entities:moveTo('Bull_Dhalmel')
+        mob:respawn()
+        mob:setUnkillable(true)
+        gladiator.entities:moveTo(mob:getID())
+
+        return mob
+    end
+
     it('lets a gladiator attack a flagged Monipulator', function()
         meet(true)
-        gladiator.actions:engage(monipulator)
-        xi.test.world:tickEntity(gladiator)
 
-        assert(gladiator:getTarget() and gladiator:getTarget():getID() == monipulator:getID(), 'the gladiator did not engage')
+        assert(engages(gladiator, monipulator), 'the gladiator did not engage')
     end)
 
     -- Retail answers with msg 446, "You cannot attack that target."
     it('refuses a gladiator attacking an unflagged Monipulator', function()
         meet(false)
         gladiator.packets:clear()
-        gladiator.actions:engage(monipulator)
-        xi.test.world:tickEntity(gladiator)
 
-        assert(not gladiator:getTarget(), 'the gladiator engaged an unflagged Monipulator')
+        assert(not engages(gladiator, monipulator), 'the gladiator engaged an unflagged Monipulator')
         assert(utils.contains(xi.msg.basic.CANNOT_ATTACK_TARGET, battleMessages(gladiator)), 'no refusal message')
     end)
 
     it('lets a flagged Monipulator attack a gladiator', function()
         meet(true)
-        monipulator.actions:engage(gladiator)
-        xi.test.world:tickEntity(monipulator)
 
-        assert(monipulator:getTarget() and monipulator:getTarget():getID() == gladiator:getID(), 'the Monipulator did not engage')
+        assert(engages(monipulator, gladiator), 'the Monipulator did not engage')
+    end)
+
+    it('refuses an unflagged Monipulator attacking a gladiator', function()
+        meet(false)
+
+        assert(not engages(monipulator, gladiator), 'an unflagged Monipulator engaged a gladiator')
+    end)
+
+    -- Belligerency changes nothing against monsters, for either side.
+    for _, flagged in ipairs({ true, false }) do
+        local state = flagged and 'flagged' or 'unflagged'
+
+        it(string.format('lets a %s Monipulator attack a monster', state), function()
+            meet(flagged)
+
+            assert(engages(monipulator, spawnDhalmel()), 'the Monipulator did not engage the monster')
+        end)
+
+        it(string.format('lets a gladiator attack a monster beside a %s Monipulator', state), function()
+            meet(flagged)
+            local mob = spawnDhalmel()
+
+            assert(engages(gladiator, mob), 'the gladiator did not engage the monster')
+        end)
+    end
+
+    it('keeps a Monipulator off a monster a gladiator claimed', function()
+        meet(true)
+        local mob = spawnDhalmel()
+        mob:updateClaim(gladiator)
+
+        assert(not engages(monipulator, mob), 'the Monipulator engaged a monster the gladiator claimed')
+    end)
+
+    it('keeps a gladiator off a monster a Monipulator claimed', function()
+        meet(true)
+        local mob = spawnDhalmel()
+        mob:updateClaim(monipulator)
+
+        assert(not engages(gladiator, mob), 'the gladiator engaged a monster the Monipulator claimed')
+    end)
+
+    it('lets a Monipulator attack a monster it claimed', function()
+        meet(true)
+        local mob = spawnDhalmel()
+        mob:updateClaim(monipulator)
+
+        assert(engages(monipulator, mob), 'the Monipulator did not engage its own claim')
+    end)
+
+    it('lets a gladiator attack a monster it claimed', function()
+        meet(true)
+        local mob = spawnDhalmel()
+        mob:updateClaim(gladiator)
+
+        assert(engages(gladiator, mob), 'the gladiator did not engage its own claim')
     end)
 
     it('keeps a Monipulator under Gestation out of reach', function()
         meet(true)
         monipulator:addStatusEffect(xi.effect.GESTATION, { duration = 60, origin = monipulator })
-        gladiator.actions:engage(monipulator)
-        xi.test.world:tickEntity(gladiator)
 
-        assert(not gladiator:getTarget(), 'the gladiator engaged a Monipulator under Gestation')
+        assert(not engages(gladiator, monipulator), 'the gladiator engaged a Monipulator under Gestation')
+    end)
+
+    -- JP wiki: any hostile action stops Relinquish, a gladiator's included.
+    it('stops Relinquish when a gladiator attacks', function()
+        meet(true)
+        monipulator:setMonstrosityEntryData(0, 0, 0, 0, xi.zone.WEST_RONFAURE, xi.job.WAR, xi.job.WAR)
+        xi.monstrosity.relinquishOnAbility(monipulator)
+        gladiator.actions:engage(monipulator)
+        for _ = 1, 15 do
+            xi.test.world:skipTime(1)
+            xi.test.world:tickEntity(gladiator)
+            xi.test.world:tickEntity(monipulator)
+        end
+
+        assert(monipulator:getMainJob() == xi.job.MON, 'Relinquish carried on while a gladiator attacked')
     end)
 
     -- Retail: a Monipulator holding 616 infamy lost 61 to a gladiator holding no prestige, who gained nothing.
