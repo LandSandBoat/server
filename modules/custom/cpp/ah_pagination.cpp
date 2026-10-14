@@ -1,4 +1,4 @@
-﻿//
+//
 // Auction House Pagination
 //
 //   This allows players to list and view more than the client-restricted 7

@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Ophelia
 -- Type: ENM Quest Timer

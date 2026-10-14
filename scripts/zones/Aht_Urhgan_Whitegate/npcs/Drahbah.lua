@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Drahbah
 -- Type: Appraiser

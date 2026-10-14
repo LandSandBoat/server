@@ -12,6 +12,9 @@ def check(name):
         # Binary/non-text file, nothing to lint.
         return
 
+    if lines and lines[0].startswith("\ufeff"):
+        print(f"#### Found byte order mark at start of file, please remove it.\n> {name}\n")
+
     counter = 0
     newline_counter = 0
     for data in lines:

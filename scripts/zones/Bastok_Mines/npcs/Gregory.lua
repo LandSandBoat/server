@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Bastok Mines
 --  NPC: Gregory
 -- Type: ENM Quest Timer

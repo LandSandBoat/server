@@ -1,4 +1,4 @@
-﻿local ID = zones[xi.zone.LOWER_JEUNO]
+local ID = zones[xi.zone.LOWER_JEUNO]
 
 return {
     ['_6t2']            = { event = 64 }, -- Door:Merchant's House
