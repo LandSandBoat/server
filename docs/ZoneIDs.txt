@@ -1,4 +1,4 @@
-﻿Note: Certain IDs just happen to match values the client uses for loading the sub-zone model of a mog house. 
+Note: Certain IDs just happen to match values the client uses for loading the sub-zone model of a mog house. 
       This has in the past lead people to mistakenly think mog houses were these zones.
 
 List of known zones

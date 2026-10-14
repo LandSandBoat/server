@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Parike-Poranke
 -- Type: Adventurer's Assistant, Food Remover, Brown Mage

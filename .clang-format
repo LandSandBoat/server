@@ -1,4 +1,4 @@
-﻿---
+---
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 # We base things of WebKit + Allman braces
 # Compatible with clang-format-22 (enforced by tools/run_clang_format.py)

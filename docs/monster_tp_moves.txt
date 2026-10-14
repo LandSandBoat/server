@@ -1,4 +1,4 @@
-﻿   ID     Mob Skill
+   ID     Mob Skill
  ------------------------------------------
     0     #0
     1     Foot Kick

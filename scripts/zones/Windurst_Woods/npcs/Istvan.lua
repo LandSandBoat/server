@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Windurst Woods
 --  NPC: Istvan
 -- Type: ENM Quest Timer

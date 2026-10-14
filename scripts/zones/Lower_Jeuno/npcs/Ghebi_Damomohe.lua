@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Ghebi Damomohe
 -- Starts and Finishes Quest: Tenshodo Membership

@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Shared functionality for ENM timer NPCs
 -- Ophelia (Southern San dOria)
 -- Gregory (Bastok Mines)

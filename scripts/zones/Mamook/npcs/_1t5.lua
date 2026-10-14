@@ -1,4 +1,4 @@
-﻿-----------------------------------
+-----------------------------------
 -- Area: Mamook
 --  NPC: _1t5 (Ebony Door)
 -- Notes: Locked Door.  Opened via Tanscale Key or Thief picking the lock.  Openable from inside the door.

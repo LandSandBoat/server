@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2020 Topaz Dev Teams | Author: Kreidos | github.com/kreidos
