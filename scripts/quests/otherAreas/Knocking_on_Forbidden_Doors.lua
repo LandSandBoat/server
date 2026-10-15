@@ -150,7 +150,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.popFromQM(player, npc, misareauxID.mob.ALSHA, { claim = true, hide = 0 })
                     then
-                        player:messageSpecial(misareauxID.text.FOUL_STENCH)
+                        player:messageSpecial(misareauxID.text.FOUL_STENCH_OF_DEATH)
                     end
                 end,
 

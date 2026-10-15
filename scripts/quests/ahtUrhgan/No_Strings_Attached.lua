@@ -8,7 +8,7 @@
 -- qm10         : !pos 457.128 -8.249 60.795 54
 -----------------------------------
 local ahtUrhganID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
-local arrapagoID  = zones[xi.zone.ARRAPAGO_REMNANTS]
+local arrapagoID  = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)

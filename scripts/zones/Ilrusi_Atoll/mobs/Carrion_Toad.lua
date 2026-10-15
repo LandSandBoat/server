@@ -13,7 +13,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local toadMob  = GetMobByID(ID.mob.UNDEAD_TOAD, instance)
+    local toadMob  = GetMobByID(ID.mob[43].UNDEAD_TOAD, instance)
     local randVal  = math.randomInt(1, 5)
 
     if
@@ -21,7 +21,7 @@ entity.onMobDespawn = function(mob)
         toadMob and
         toadMob:getLocalVar('ToadSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_TOAD, instance)
+        SpawnMob(ID.mob[43].UNDEAD_TOAD, instance)
         toadMob:setLocalVar('ToadSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

@@ -13,7 +13,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
+    local crabMob  = GetMobByID(ID.mob[43].UNDEAD_CRAB, instance)
     local randVal  = math.randomInt(1, 5)
 
     if
@@ -21,7 +21,7 @@ entity.onMobDespawn = function(mob)
         crabMob and
         crabMob:getLocalVar('CrabSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_CRAB, instance)
+        SpawnMob(ID.mob[43].UNDEAD_CRAB, instance)
         crabMob:setLocalVar('CrabSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

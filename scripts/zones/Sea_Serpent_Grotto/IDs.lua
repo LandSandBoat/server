@@ -36,6 +36,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         GOLD_CHECK                    = 7372,  -- You see something gold glittering around the indentation.
         COMPLETED_CHECK               = 7373,  -- It is a door you can open using <item>!
         SENSE_OMINOUS_PRESENCE        = 7387,  -- You sense an ominous presence...
+        NOTHING_OUT_OF_ORDINARY_2     = 7574,  -- There is nothing out of the ordinary here.
         BODY_NUMB_DREAD               = 7575,  -- Your body goes numb with dread!
         PLAYER_OBTAINS_ITEM           = 7621,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7622,  -- You were unable to obtain the item.

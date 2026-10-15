@@ -7,7 +7,7 @@ local instanceObject = {}
 
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.ASSAULT_27_START, 27)
+    player:messageSpecial(ID.text.ASSAULT_START_OFFSET + 27, 27)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit() / 60)
 end
 
@@ -47,7 +47,7 @@ instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED, 7, 8)
+        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 7, 8)
     end
 
     local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)

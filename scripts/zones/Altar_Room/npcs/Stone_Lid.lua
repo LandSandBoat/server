@@ -47,9 +47,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             ID.mob.POO_YOZO_THE_BABBLER,
         }
 
-        if npcUtil.popFromQM(player, npc, mobs, { hide = 1 }) then
-            player:messageSpecial(ID.text.DRAWS_NEAR)
-        end
+        npcUtil.popFromQM(player, npc, mobs, { hide = 1 })
     elseif csid == 49 then
         player:setCharVar('moral', 7)
     elseif csid == 50 then

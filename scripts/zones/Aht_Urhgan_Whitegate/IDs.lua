@@ -45,6 +45,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         FERRY_DEPARTING               = 4691,  -- We are now departing.
         HADAHDA_DIALOG                = 4941,  -- Hey, think you could help me out?
         MUSHAYRA_DIALOG               = 4990,  -- Sorry for all the trouble. Please ignore Hadahda the next time he asks you to do something.
+        CANNOT_ISSUE_TAG              = 5671,  -- A new <keyitem> cannot be issued until you complete your current Assault mission.
         ASSAULT_COMPLETE              = 5678,  -- Congratulations. You have been awarded Assault Points for the successful completion of your mission.
         ASSAULT_FAILED                = 5679,  -- Your mission was not successful; however, the Empire recognizes your contribution and has awarded you Assault Points.
         AUTOMATON_RENAME              = 5856,  -- Your automaton has a new name.
