@@ -6833,16 +6833,9 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
 
     db::preparedStmt("UPDATE char_flags SET gmHiddenEnabled = ? WHERE charid = ?", isHidden ? 1 : 0, PChar->id);
 
-    if (PChar->loc.zone)
+    if (PChar->loc.zone && PChar->m_isGMHidden)
     {
-        if (PChar->m_isGMHidden)
-        {
-            PChar->loc.zone->UpdateEntityPacket(PChar, ENTITY_DESPAWN, UPDATE_NONE);
-        }
-        else
-        {
-            PChar->loc.zone->UpdateEntityPacket(PChar, ENTITY_SPAWN, UPDATE_NONE);
-        }
+        PChar->loc.zone->UpdateEntityPacket(PChar, ENTITY_DESPAWN, UPDATE_NONE);
     }
 }
 

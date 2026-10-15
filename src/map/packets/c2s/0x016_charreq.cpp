@@ -62,6 +62,11 @@ void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) c
             return;
         }
 
+        if (PCharEntity->m_moghouseID != PChar->m_moghouseID)
+        {
+            return;
+        }
+
         PChar->updateEntityPacket(PCharEntity, ENTITY_SPAWN, UPDATE_ALL_CHAR);
     }
     else // TYPE_NPC
