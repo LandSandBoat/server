@@ -66,6 +66,7 @@
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x069_chocobo_racing.h"
+#include "packets/s2c/0x073_chocobo_toteboard.h"
 
 #include "persist_batch.h"
 #include "utils/battleutils.h"
@@ -340,6 +341,8 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("DecrementLinkshellConciergeMembersGoal", &luautils::DecrementLinkshellConciergeMembersGoal);
     lua.set_function("LoadChocoboRaceResult", &luautils::LoadChocoboRaceResult);
     lua.set_function("SaveChocoboRaceResult", &luautils::SaveChocoboRaceResult);
+    lua.set_function("GetChocoboRaceQuills", &luautils::GetChocoboRaceQuills);
+    lua.set_function("AddChocoboRaceQuills", &luautils::AddChocoboRaceQuills);
     lua.set_function("JstMidnight", &luautils::JstMidnight);
     lua.set_function("JstDayOfTheYear", &luautils::JstDayOfTheYear);
     lua.set_function("JstDayOfTheMonth", &luautils::JstDayOfTheMonth);
@@ -2137,8 +2140,11 @@ void SaveChocoboRaceResult(const sol::table& data)
     }();
 
     db::preparedStmt(
-        "REPLACE INTO chocobo_race_results SET race_no = ?, weather = ?, places = ?, run_at = ?, "
-        "intro_first = ?, intro_second = ?, chocobos = ?, names = ?, sections = ?",
+        "INSERT INTO chocobo_race_results SET race_no = ?, weather = ?, places = ?, run_at = ?, "
+        "intro_first = ?, intro_second = ?, chocobos = ?, names = ?, sections = ? "
+        "ON DUPLICATE KEY UPDATE weather = VALUES(weather), places = VALUES(places), run_at = VALUES(run_at), "
+        "intro_first = VALUES(intro_first), intro_second = VALUES(intro_second), chocobos = VALUES(chocobos), "
+        "names = VALUES(names), sections = VALUES(sections)",
         data.get_or<uint32>("raceNo", 0),
         data.get_or<uint8>("weather", 0),
         places,
@@ -2148,6 +2154,47 @@ void SaveChocoboRaceResult(const sol::table& data)
         chocobos,
         names,
         sections);
+}
+
+auto GetChocoboRaceQuills(const uint32 raceNo) -> sol::table
+{
+    TracyZoneScoped;
+
+    sol::table quills = lua.create_table();
+    for (std::size_t pair = 0; pair < GP_SERV_COMMAND_CHOCOBO_TOTEBOARD::kNumOdds; ++pair)
+    {
+        quills[pair + 1] = 0;
+    }
+
+    const auto rset = db::preparedStmt("SELECT pair, quills FROM chocobo_race_quills WHERE race_no = ?", raceNo);
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        const auto pair = rset->get<uint8>("pair");
+        if (pair < GP_SERV_COMMAND_CHOCOBO_TOTEBOARD::kNumOdds)
+        {
+            quills[pair + 1] = rset->get<uint32>("quills");
+        }
+    }
+
+    return quills;
+}
+
+void AddChocoboRaceQuills(const uint32 raceNo, const uint8 pair, const uint32 quills)
+{
+    TracyZoneScoped;
+
+    if (pair >= GP_SERV_COMMAND_CHOCOBO_TOTEBOARD::kNumOdds)
+    {
+        ShowWarningFmt("AddChocoboRaceQuills: pair {} is not on the toteboard", pair);
+        return;
+    }
+
+    db::preparedStmt(
+        "INSERT INTO chocobo_race_quills (race_no, pair, quills) VALUES (?, ?, ?) "
+        "ON DUPLICATE KEY UPDATE quills = quills + VALUES(quills)",
+        raceNo,
+        pair,
+        quills);
 }
 
 void DeleteLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex)

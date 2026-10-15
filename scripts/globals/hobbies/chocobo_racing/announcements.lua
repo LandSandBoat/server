@@ -33,7 +33,7 @@ local announceWithParams = function(players, speaker, messageId, params)
     end
 end
 
--- Header, race name, footer. The footer carries the attendant colour on the signup and betting announcements.
+-- Header, race name, footer. The footer carries the attendant color on the signup and betting announcements.
 ---@param players CBaseEntity[]
 ---@param raceNo integer
 ---@param header integer
