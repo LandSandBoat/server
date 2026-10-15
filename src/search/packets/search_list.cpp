@@ -89,8 +89,7 @@ auto CSearchListPacket::AddPlayer(const SearchEntity& player) -> bool
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Id), m_offset, 5);
     m_offset = packBitsLE(m_data, player.id, m_offset, 20);
 
-    // m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::LinkshellRank),  m_offset, 5);
-    // m_offset = packBitsLE(m_data, 0, m_offset,8);
+    // Retail sends SearchType::LinkshellRank here in SEARCH_ALL replies: three 8 bit ranks then three 32 bit linkshell ids.
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Unknown0E), m_offset, 5);
     m_offset = packBitsLE(m_data, 0, m_offset, 32);

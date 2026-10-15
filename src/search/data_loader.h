@@ -28,6 +28,27 @@
 
 struct SearchRequest;
 
+enum class AuctionParam : uint8
+{
+    Level      = 2,
+    Race       = 3,
+    Job        = 4,
+    Damage     = 5,
+    Delay      = 6,
+    Defense    = 7,
+    Resistance = 8,
+    Name       = 9,
+};
+
+// Race and Job carry a value and filter the list, the others sort it.
+struct AuctionQueryParam
+{
+    AuctionParam type       = AuctionParam::Name;
+    bool         hasValue   = false;
+    bool         descending = false;
+    uint16       value      = 0;
+};
+
 struct AuctionHouseItem
 {
     uint16 ItemID;
@@ -52,6 +73,7 @@ struct SearchEntity
     uint8       mlvl           = 0;
     uint8       sjob           = 0;
     uint8       slvl           = 0;
+    uint8       masterLvl      = 0;
     uint8       nation         = 0;
     uint8       rank           = 0;
     uint8       race           = 0;
@@ -90,7 +112,7 @@ public:
     auto GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>;
     auto GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>;
     auto GetSearchComment(uint32 playerId) const -> std::string;
-    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint8, 4>& sortKeys) const -> std::vector<AuctionHouseItem>;
+    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::vector<AuctionQueryParam>& params) const -> std::vector<AuctionHouseItem>;
     auto GetAHItemFromItemID(uint16 ItemID) const -> AuctionHouseItem;
     void ExpireAHItems(uint16 expireAgeInDays) const;
 };
