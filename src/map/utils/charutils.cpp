@@ -3372,7 +3372,7 @@ void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 Pe
             }
         }
     }
-    if (PPet->getPetType() == PET_TYPE::JUG_PET && !hasAbility(PChar, ABILITY_SIC))
+    if (PPet->getPetType() == PET_TYPE::JUG_PET && !hasAbility(PChar, ABILITY_SIC) && PChar->GetMLevel() >= 25)
     {
         auto skillList{ battleutils::GetMobSkillList(PPet->m_MobSkillList) };
         for (auto&& abilityid : skillList)
@@ -3380,6 +3380,7 @@ void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 Pe
             addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
         }
     }
+
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
