@@ -1326,8 +1326,7 @@ xi.combat.physical.canGuard = function(defender, attacker)
     -- https://genomeffxi.livejournal.com/18269.html
     if
         defender:isFacing(attacker) and
-        defender:isEngaged() and
-        not defender:hasPreventActionEffect(true) -- Not stunned, slept, etc, but can guard when charmed
+        defender:isEngaged()
     then
         if defender:isPC() and defender:getSkillRank(xi.skill.GUARD) > 0 then
             local mainWeapon = defender:getEquippedItem(xi.slot.MAIN)
