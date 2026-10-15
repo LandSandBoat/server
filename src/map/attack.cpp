@@ -473,12 +473,12 @@ bool CAttack::CheckCounter()
         }
     }
 
-    // Do not counter if PD is up
-    if (!m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::PerfectDodge))
+    // Do not counter if PD is up or the attacker is behind
+    if (!m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::PerfectDodge) &&
+        facing(m_victim->loc.p, m_attacker->loc.p, 64))
     {
-        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(xi::Mod::COUNTER) + meritCounter, 0, 80) ||
-             xirand::GetRandomNumber(100) < seiganChance) &&
-            facing(m_victim->loc.p, m_attacker->loc.p, 64))
+        if (xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(xi::Mod::COUNTER) + meritCounter, 0, 80) ||
+            xirand::GetRandomNumber(100) < seiganChance)
         {
             if (xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
             {
