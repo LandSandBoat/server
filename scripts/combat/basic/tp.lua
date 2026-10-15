@@ -196,7 +196,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
         return 0
     end
 
-    if actor:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+    if target:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
         return 0
     end
 
@@ -241,7 +241,7 @@ xi.combat.tp.calculateTPGainOnMagicalDamage = function(actor, target, totalDamag
         return 0
     end
 
-    if actor:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+    if target:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
         return 0
     end
 
