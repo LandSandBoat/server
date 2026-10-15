@@ -90,6 +90,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         NALTA_SANDY_CIT                = 8182,  -- San d'Oria owes its victories to the Elvaan.
         NALTA_NOT_SANDY_CIT            = 8183,  -- Shhh.
         WEST_GATE                      = 8210,  -- You stand before the Westgate. West Ronfaure lies beyond.
+        FLYER_REFUSED                  = 8223,  -- Your flyer is refused.
         CLETAE_DIALOG                  = 8243,  -- Why, hello. All our skins are guild-approved.
         KUEH_IGUNAHMORI_DIALOG         = 8244,  -- Good day! We have lots in stock today.
         SOBANE_DIALOG                  = 8263,  -- My name is Sobane, and I'm sharpening my knives.

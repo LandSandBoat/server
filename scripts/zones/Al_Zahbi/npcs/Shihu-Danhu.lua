@@ -4,7 +4,7 @@
 -- Warp NPC
 -- !pos 62.768 -1.98 -51.299 48
 -----------------------------------
-local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
+local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}

@@ -94,7 +94,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
-                    if npc:getID() == ID.npc.VISCOUS_LIQUID then
+                    if npc:getID() == ID.npc.QUEST_LIQUID then
                         if progress == 1 then
                             return quest:progressEvent(212)
                         elseif

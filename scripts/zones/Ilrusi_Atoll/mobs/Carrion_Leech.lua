@@ -13,7 +13,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local leechMob = GetMobByID(ID.mob.UNDEAD_LEECH, instance)
+    local leechMob = GetMobByID(ID.mob[43].UNDEAD_LEECH, instance)
     local randVal  = math.randomInt(1, 5)
 
     if
@@ -21,7 +21,7 @@ entity.onMobDespawn = function(mob)
         leechMob and
         leechMob:getLocalVar('LeechSpawned') == 0
     then
-        SpawnMob(ID.mob.UNDEAD_LEECH, instance)
+        SpawnMob(ID.mob[43].UNDEAD_LEECH, instance)
         leechMob:setLocalVar('LeechSpawned', 1)
     else
         instance:setProgress(instance:getProgress() + 1)

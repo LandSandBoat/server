@@ -33,6 +33,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         RECENTLY_ACTIVATED            = 7391, -- The alcove has recently been activated...
         TIME_RESTRICTION              = 7392, -- Time restriction: <number> [minute/minutes] (Earth time)
         QUASILUMIN_MAP_QUEST_OFFSET   = 7393, -- Warning. Chamber of Eventide accessed by unauthorized personnel, 4789209-980 increments previous.
+        HUXZOI_MAP_COMPLETE           = 7403, -- Examination complete. Examinee unregistered. Kuluu syndrome detected. Displays tendency towards [apathy/apathy/apathy/arrogance/arrogance/cowardice/cowardice/envy/rage]. Report to infirmary for treatment.
         IXAERN_MNK_QM                 = 7404, -- You hear something vaguely resembling a voice emanating from the depths of your soul. Bring me...aer...reccceptac...
         HOMEPOINT_SET                 = 7477, -- Home point set!
     },

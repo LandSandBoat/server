@@ -82,8 +82,11 @@ zones[xi.zone.ILRUSI_ATOLL] =
         _1jo                       = GetFirstID('_1jo'), -- Zone obstacle.
         _1jp                       = GetFirstID('_1jp'), -- Zone obstacle.
         _1jq                       = GetFirstID('_1jq'), -- Zone obstacle.
+        _jj3                       = GetFirstID('_jj3'), -- Zone obstacle.
+        _jj5                       = GetFirstID('_jj5'), -- Zone obstacle.
         _jja                       = GetFirstID('_jja'), -- Zone obstacle.
         _jjb                       = GetFirstID('_jjb'), -- Zone obstacle.
+        _jjc                       = GetFirstID('_jjc'), -- Zone obstacle.
 
         ANCIENT_LOCKBOX            = GetFirstID('Ancient_Lockbox'),
         CURSED_CHEST_OFFSET        = GetFirstID('Cursed_Chest'),

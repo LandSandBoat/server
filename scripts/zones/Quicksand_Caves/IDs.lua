@@ -35,6 +35,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         SOMETHING_ATTACKING_YOU       = 7388,  -- Something is attacking from behind you!
         SOMETHING_IS_BURIED           = 7389,  -- Something is buried in this fallen pillar.
         SENSE_OMINOUS_PRESENCE        = 7393,  -- You sense an ominous presence...
+        GRANT_YOU_EASY_ENTRANCE       = 7424,  -- This <keyitem> should grant you easy entrance to your destination. I haven't a clue what you plan to do there, but...good luck! I'd accompany you, but I'm kind of...stuck here, you see. Oh ho...
         PLAYER_OBTAINS_ITEM           = 8301,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8302,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8303,  -- <name> obtains the temporary item: <item>!
@@ -82,6 +83,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         CHAINS_THAT_BIND_US_QM = GetFirstID('qm6'),
         TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
         ANTICAN_TAG_QM         = GetFirstID('qm25'),
+        QM_AMK                 = GetTableOfIDs('qm_amk'),
     },
 }
 

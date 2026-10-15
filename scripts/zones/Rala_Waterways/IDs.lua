@@ -12,6 +12,7 @@ zones[xi.zone.RALA_WATERWAYS] =
         GIL_OBTAINED                  = 6396, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6398, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                  = 6399, -- Lost key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6409, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS           = 7006, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.

@@ -16,6 +16,7 @@ zones[xi.zone.SILVER_SEA_REMNANTS] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         CELL_OFFSET                   = 7232, -- Main Weapon/Sub-Weapon restriction removed.
+        MISSION_FAILED                = 7428, -- The mission has failed. Leaving area.
     },
     mob =
     {
