@@ -273,8 +273,7 @@ auto CLuaClientEntityPairPackets::guildList(uint16 packetId) const -> sol::table
 
 void CLuaClientEntityPairPackets::clear() const
 {
-    const auto testChar = parent_->testChar();
-    testChar->entity()->clearPacketList();
+    parent_->testChar()->clearPackets();
 }
 
 void CLuaClientEntityPairPackets::Register()

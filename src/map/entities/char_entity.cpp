@@ -353,12 +353,6 @@ CCharEntity::~CCharEntity()
         }
     }
 
-    SpawnPCList.clear();
-    SpawnNPCList.clear();
-    SpawnMOBList.clear();
-    SpawnPETList.clear();
-    SpawnTRUSTList.clear();
-
     if (PParty)
     {
         PParty->PopMember(this);
@@ -415,6 +409,13 @@ void CCharEntity::clearPacketList()
     {
         std::ignore = popPacket();
     }
+
+    // dropped spawns never reached the client, so let the spawn passes send them again
+    SpawnPCList.clear();
+    SpawnNPCList.clear();
+    SpawnMOBList.clear();
+    SpawnPETList.clear();
+    SpawnTRUSTList.clear();
 }
 
 void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket>&& packet)

@@ -197,9 +197,13 @@ TestChar::~TestChar()
 
 void TestChar::clearPackets() const
 {
+    // drain without clearPacketList, which also resets the spawn lists
     if (session_)
     {
-        session_->PChar->clearPacketList();
+        while (!session_->PChar->isPacketListEmpty())
+        {
+            std::ignore = session_->PChar->popPacket();
+        }
     }
 }
 
