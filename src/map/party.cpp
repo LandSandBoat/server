@@ -680,7 +680,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
                 PChar->health.tp = 0;
                 PChar->updatemask |= UPDATE_HP;
                 PChar->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), m_PSyncTarget->GetMLevel(), 0s, 0s);
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar, CharSyncRecipient::Others));
             }
         }
 
@@ -1141,7 +1141,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
                         member->health.tp = 0;
                         member->updatemask |= UPDATE_HP;
                         member->StatusEffectContainer->AddStatusEffectSilent(xi::StatusEffect::LevelSync, static_cast<uint16>(xi::StatusEffect::LevelSync), PChar->GetMLevel(), 0s, 0s);
-                        member->loc.zone->PushPacket(member, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(member));
+                        member->loc.zone->PushPacket(member, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(member, CharSyncRecipient::Others));
                     }
                 }
                 db::preparedStmt("UPDATE accounts_parties SET partyflag = partyflag & ~? WHERE partyid = ? AND partyflag & ?",

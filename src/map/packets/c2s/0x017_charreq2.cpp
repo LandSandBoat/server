@@ -111,7 +111,7 @@ void GP_CLI_COMMAND_CHARREQ2::process(MapSession* PSession, CCharEntity* PChar) 
 
             if (dist <= CHARREQ2_SYNC_RANGE)
             {
-                PChar->pushPacket<CCharSyncPacket>(PTargetChar);
+                PChar->pushPacket<CCharSyncPacket>(PTargetChar, CharSyncRecipient::Others);
                 PChar->pushPacket<CCharUpdatePacket>(PTargetChar, ENTITY_UPDATE, static_cast<uint8>(UPDATE_NAME));
             }
         }

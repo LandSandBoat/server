@@ -12355,7 +12355,7 @@ void CLuaBaseEntity::disableLevelSync()
 
     if (PChar->loc.zone)
     {
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CCharSyncPacket>(PChar, CharSyncRecipient::Others));
     }
 }
 

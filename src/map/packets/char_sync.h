@@ -25,8 +25,14 @@
 
 class CCharEntity;
 
+enum class CharSyncRecipient : uint8_t
+{
+    Self,
+    Others,
+};
+
 class CCharSyncPacket : public CBasicPacket
 {
 public:
-    CCharSyncPacket(CCharEntity* PChar);
+    explicit CCharSyncPacket(CCharEntity* PChar, CharSyncRecipient recipient = CharSyncRecipient::Self);
 };

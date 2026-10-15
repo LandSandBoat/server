@@ -1253,7 +1253,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             // Spawn best candidate character
             PChar->SpawnPCList[candidateChar->id] = candidateChar;
             PChar->updateEntityPacket(candidateChar, ENTITY_SPAWN, UPDATE_ALL_CHAR);
-            PChar->pushPacket<CCharSyncPacket>(candidateChar);
+            PChar->pushPacket<CCharSyncPacket>(candidateChar, CharSyncRecipient::Others);
         }
     }
 }
