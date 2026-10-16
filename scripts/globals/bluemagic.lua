@@ -405,6 +405,12 @@ local handleSinglePhysicalHit = function(caster, target, baseHitDamage, params, 
     hitDamage = math.floor(hitDamage * xi.combat.damage.physicalElementSDT(target, params.damageType))
     hitDamage = math.floor(hitDamage * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
 
+    -- TODO: check if Scarlet Delirium works on blue magic
+    -- Souleater (yes really)
+    if params.attackType ~= xi.attackType.RANGED then
+        hitDamage = hitDamage + xi.combat.damage.souleaterAddition(caster)
+    end
+
     hitDamage = xi.automaton.handleEqualizer(target, hitDamage)
 
     -- TODO: Need captures for different severe damage mechanics. Do they proc per hit or per skill
