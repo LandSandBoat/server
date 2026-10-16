@@ -24,9 +24,11 @@
 #include "common/cbasetypes.h"
 #include "common/logging.h"
 #include "common/types/maybe.h"
+#include "enums/search_type.h"
 
 #include <array>
 #include <string>
+#include <utility>
 #include <vector>
 
 // md5 hash + blowfish key appended by SearchHandler::encrypt()
@@ -37,10 +39,12 @@ inline constexpr uint32 searchEntryMaxSize = 67;
 
 struct SearchRequest
 {
-    uint16        zoneid[15];
+    uint16        zoneid[16];
     uint8         jobid;
     uint8         minlvl;
     uint8         maxlvl;
+    uint8         minMasterLvl = 0;
+    uint8         maxMasterLvl = 0;
     uint8         race;
     uint8         nation;
     uint8         minRank;
@@ -52,6 +56,9 @@ struct SearchRequest
     uint8         commentType;
     bool          friendsOnly     = false;
     bool          requestListOnly = false;
+
+    // category and descending flag, highest priority first
+    std::vector<std::pair<SearchType, bool>> sortOrder;
 
     std::vector<uint32>      characterIds;
     std::vector<std::string> characterNames;

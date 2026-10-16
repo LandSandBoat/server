@@ -32,6 +32,7 @@ enum class SearchType : uint8_t
     Level         = 0x04, // 00100
     Race          = 0x05, // 00101
     Flags1        = 0x06, // 00110
+    MasterLevel   = 0x07, // 00111
     Id            = 0x08, // 01000
     Party         = 0x0A, // 01010
     Linkshell     = 0x0B, // 01011
@@ -41,6 +42,7 @@ enum class SearchType : uint8_t
     Rank          = 0x10, // 10000
     Comment       = 0x11, // 10001
     Linkshell2    = 0x13, // 10011
+    Linkshell3    = 0x14, // 10100
     Flags2        = 0x16, // 10110
     Language      = 0x17, // 10111
     RequestList   = 0x18, // 11000

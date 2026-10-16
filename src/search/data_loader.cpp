@@ -32,7 +32,6 @@
 #include <compare>
 #include <cstring>
 #include <limits>
-#include <span>
 
 #include <fmt/ranges.h>
 
@@ -43,6 +42,34 @@ namespace
 {
 
 constexpr uint32 acceptingRequestsFlag = 0x10000000;
+constexpr uint32 unityMask             = 0x0FC00000;
+constexpr uint32 monstrosityFlag       = 0x00100000;
+constexpr uint32 monstrosityMask       = 0x00300000; // The search sends both bits, only monstrosityFlag marks a character in Monstrosity.
+constexpr uint32 requiredFlags         = acceptingRequestsFlag | monstrosityFlag;
+
+// equal for categories that have nothing to sort on
+auto compareBy(const SearchType type, const SearchEntity& left, const SearchEntity& right) -> std::strong_ordering
+{
+    switch (type)
+    {
+        case SearchType::Name:
+            return left.name <=> right.name;
+        case SearchType::Area:
+            return left.zone <=> right.zone;
+        case SearchType::Nation:
+            return left.nation <=> right.nation;
+        case SearchType::Job:
+            return left.mjob <=> right.mjob;
+        case SearchType::Level:
+            return left.mlvl <=> right.mlvl;
+        case SearchType::Race:
+            return left.race <=> right.race;
+        case SearchType::Rank:
+            return left.rank <=> right.rank;
+        default:
+            return std::strong_ordering::equal;
+    }
+}
 
 } // namespace
 
@@ -97,7 +124,7 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint8, 4>& sortKeys) const -> std::vector<AuctionHouseItem>
+auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::vector<AuctionQueryParam>& params) const -> std::vector<AuctionHouseItem>
 {
     ShowDebugFmt("Try find category: {}", ahCategoryID);
 
@@ -107,6 +134,8 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint
         int64            level;
         int64            damage;
         int64            delay;
+        int64            defense;
+        int64            resistance;
         std::string      sortName;
     };
 
@@ -117,12 +146,15 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint
         if (settings::get<bool>("search.OMIT_NO_HISTORY"))
         {
             return db::preparedStmt("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack), "
-                                    "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_weapon.dmg, item_weapon.delay "
+                                    "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_equipment.jobs, item_weapon.dmg, item_weapon.delay, item_defense.value AS defense, item_resistance.resistance, item_race.value AS races "
                                     "FROM (SELECT item_basic.* FROM item_basic "
                                     "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid) AS item_basic "
                                     "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
                                     "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
                                     "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                    "LEFT JOIN item_mods AS item_defense ON item_basic.itemid = item_defense.itemId AND item_defense.modId = 1 "
+                                    "LEFT JOIN item_mods AS item_race ON item_basic.itemid = item_race.itemId AND item_race.modId = 276 "
+                                    "LEFT JOIN (SELECT itemId, MAX(value) AS resistance FROM item_mods WHERE modId BETWEEN 15 AND 22 GROUP BY itemId) AS item_resistance ON item_basic.itemid = item_resistance.itemId "
                                     "WHERE aH = ? "
                                     "GROUP BY item_basic.itemid "
                                     "ORDER BY item_basic.itemid",
@@ -130,19 +162,53 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint
         }
 
         return db::preparedStmt("SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack), "
-                                "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_weapon.dmg, item_weapon.delay "
+                                "CAST(item_basic.sortname AS CHAR(255)) AS sortname, item_equipment.level, item_equipment.jobs, item_weapon.dmg, item_weapon.delay, item_defense.value AS defense, item_resistance.resistance, item_race.value AS races "
                                 "FROM item_basic "
                                 "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
                                 "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
                                 "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
+                                "LEFT JOIN item_mods AS item_defense ON item_basic.itemid = item_defense.itemId AND item_defense.modId = 1 "
+                                "LEFT JOIN item_mods AS item_race ON item_basic.itemid = item_race.itemId AND item_race.modId = 276 "
+                                "LEFT JOIN (SELECT itemId, MAX(value) AS resistance FROM item_mods WHERE modId BETWEEN 15 AND 22 GROUP BY itemId) AS item_resistance ON item_basic.itemid = item_resistance.itemId "
                                 "WHERE aH = ? "
                                 "GROUP BY item_basic.itemid "
                                 "ORDER BY item_basic.itemid",
                                 ahCategoryID);
     }();
 
+    uint32 requiredJobs  = 0;
+    uint32 requiredRaces = 0;
+    for (const auto& param : params)
+    {
+        if (!param.hasValue || param.value < 1 || param.value > 32)
+        {
+            continue;
+        }
+
+        if (param.type == AuctionParam::Job)
+        {
+            requiredJobs |= 1U << (param.value - 1);
+        }
+        else if (param.type == AuctionParam::Race)
+        {
+            requiredRaces |= 1U << (param.value - 1);
+        }
+    }
+
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
+        if (requiredJobs != 0 && (rset->getOrDefault<uint32>("jobs", 0) & requiredJobs) != requiredJobs)
+        {
+            continue;
+        }
+
+        // EQUIPMENT_ONLY_RACE, 0 means every race can wear it
+        const auto races = rset->getOrDefault<uint32>("races", 0);
+        if (requiredRaces != 0 && races != 0 && (races & requiredRaces) != requiredRaces)
+        {
+            continue;
+        }
+
         AuctionHouseItem item{};
 
         item.ItemID = rset->get<uint16>("itemid");
@@ -156,27 +222,34 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint
             item.StackAmount = -1;
         }
 
-        // INT64_MIN stands in for NULL, which MariaDB puts last in a DESC sort; delay is signed, so -1 is a real value.
+        // INT64_MIN stands in for NULL, which MariaDB treats as the lowest value; delay is signed, so -1 is a real value.
         rows.push_back(SortableItem{
-            .item     = item,
-            .level    = rset->getOrDefault<int64>("level", std::numeric_limits<int64>::min()),
-            .damage   = rset->getOrDefault<int64>("dmg", std::numeric_limits<int64>::min()),
-            .delay    = rset->getOrDefault<int64>("delay", std::numeric_limits<int64>::min()),
-            .sortName = rset->get<std::string>("sortname"),
+            .item       = item,
+            .level      = rset->getOrDefault<int64>("level", std::numeric_limits<int64>::min()),
+            .damage     = rset->getOrDefault<int64>("dmg", std::numeric_limits<int64>::min()),
+            .delay      = rset->getOrDefault<int64>("delay", std::numeric_limits<int64>::min()),
+            .defense    = rset->getOrDefault<int64>("defense", std::numeric_limits<int64>::min()),
+            .resistance = rset->getOrDefault<int64>("resistance", std::numeric_limits<int64>::min()),
+            .sortName   = rset->get<std::string>("sortname"),
         });
     }
 
-    const auto compareKey = [](const SortableItem& lhs, const SortableItem& rhs, const uint8 key) -> std::weak_ordering
+    const auto compareKey = [](const SortableItem& lhs, const SortableItem& rhs, const AuctionParam key) -> std::weak_ordering
     {
         switch (key)
         {
-            case 2:
-                return rhs.level <=> lhs.level;
-            case 5:
-                return rhs.damage <=> lhs.damage;
-            case 6:
-                return rhs.delay <=> lhs.delay;
-            case 9:
+            case AuctionParam::Level:
+                return lhs.level <=> rhs.level;
+            case AuctionParam::Damage:
+                return lhs.damage <=> rhs.damage;
+            case AuctionParam::Delay:
+                return lhs.delay <=> rhs.delay;
+            case AuctionParam::Defense:
+                return lhs.defense <=> rhs.defense;
+            case AuctionParam::Resistance:
+                // Highest single elemental resistance
+                return lhs.resistance <=> rhs.resistance;
+            case AuctionParam::Name:
                 // utf8mb4_general_ci weighs a letter as its capital, so 'a' sorts before '_'.
                 return std::lexicographical_compare_three_way(
                     lhs.sortName.begin(),
@@ -197,12 +270,20 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::array<uint
         rows,
         [&](const SortableItem& lhs, const SortableItem& rhs)
         {
-            for (const auto key : sortKeys)
+            for (const auto& param : params)
             {
-                if (const auto order = compareKey(lhs, rhs, key); order != 0)
+                const auto order = compareKey(lhs, rhs, param.type);
+                if (order == 0)
                 {
-                    return order < 0;
+                    continue;
                 }
+
+                if (param.descending)
+                {
+                    return order > 0;
+                }
+
+                return order < 0;
             }
 
             return false;
@@ -295,11 +376,6 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     // Bound as a JSON array for JSON_TABLE; performance is comparable or better than a formatted IN list.
     const auto characterIds = fmt::format("[{}]", fmt::join(sr.characterIds, ","));
 
-    // Unused zone slots repeat the first zone, which leaves the IN list matches unchanged.
-    auto zones = std::array<uint16, 10>{};
-    std::ranges::copy(std::span(sr.zoneid, zones.size()), zones.begin());
-    std::ranges::fill(std::ranges::find(zones, 0), zones.end(), zones[0]);
-
     const auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
                                        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
                                        "linkshellid1, linkshellid2 "
@@ -312,41 +388,17 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
                                        "LEFT JOIN char_flags USING(charid) "
                                        "WHERE charname IS NOT NULL "
                                        "AND (? = 0 OR mjob = ?) "
-                                       "AND (? = 0 OR pos_zone IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) OR (pos_zone = 0 AND pos_prevzone IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?))) "
                                        "AND (? = 0 OR (seacom_type & 0xF0) = ?) "
                                        "AND (? = '[]' OR charid IN (SELECT id FROM JSON_TABLE(?, '$[*]' COLUMNS (id INT UNSIGNED PATH '$')) AS ids)) "
                                        "ORDER BY charname ASC",
                                        sr.jobid,
                                        sr.jobid,
-                                       zones[0],
-                                       zones[0],
-                                       zones[1],
-                                       zones[2],
-                                       zones[3],
-                                       zones[4],
-                                       zones[5],
-                                       zones[6],
-                                       zones[7],
-                                       zones[8],
-                                       zones[9],
-                                       zones[0],
-                                       zones[1],
-                                       zones[2],
-                                       zones[3],
-                                       zones[4],
-                                       zones[5],
-                                       zones[6],
-                                       zones[7],
-                                       zones[8],
-                                       zones[9],
                                        sr.commentType,
                                        sr.commentType,
                                        characterIds,
                                        characterIds);
     if (rset && rset->rowsCount())
     {
-        int totalResults   = 0; // gives ALL matching criteria (total)
-        int visibleResults = 0; // capped at first 20
         while (rset->next())
         {
             SearchEntity player{};
@@ -417,6 +469,11 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
                 player.flags1 |= 0x0010;
             }
 
+            if (playerSettings.AutoPartyFlg)
+            {
+                player.flags1 |= 0x0020;
+            }
+
             if (playerSettings.AwayFlg)
             {
                 player.flags1 |= 0x0100;
@@ -453,11 +510,22 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             }
 
             player.flags2 = player.flags1;
+            player.flags2 |= (static_cast<uint32>(player.unityLeader) << 22) & unityMask;
 
-            if (player.mjob == static_cast<uint8>(xi::Job::MON) || player.sjob == static_cast<uint8>(xi::Job::MON))
+            // TODO: Set the Ballista bits (0x000F0000) here, which bit means what is not known yet.
+
+            // A character in Monstrosity is listed as MON/MON at its monster level.
+            if (player.mjob == static_cast<uint8>(xi::Job::MON))
             {
-                player.mjob = 0;
-                player.sjob = 0;
+                player.sjob = player.mjob;
+                player.slvl = player.mlvl;
+                player.flags2 |= monstrosityFlag;
+            }
+
+            // filter by area
+            if (sr.zoneid[0] != 0 && !std::ranges::contains(sr.zoneid, player.zone))
+            {
+                continue;
             }
 
             // filter by linkshell ID
@@ -479,7 +547,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
 
             // filter anon players if job/nation/race/rank/level search
             if ((player.flags1 & 0x4000) &&
-                (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0))
+                (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0 || sr.minMasterLvl > 0))
             {
                 continue;
             }
@@ -538,24 +606,24 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             // filter by flag (away, seek party etc.)
             if (sr.flags != 0)
             {
-                if (sr.flags & acceptingRequestsFlag)
+                // Unity ID is a 6 bit field, the remaining bits are independent flags
+                const uint32 searchUnityId = (sr.flags & unityMask) >> 22;
+                if (searchUnityId != 0 && player.unityLeader != searchUnityId)
                 {
-                    if (!(player.flags2 & acceptingRequestsFlag))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
-                // Check if unity ID is set (bits 22+)
-                else if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
+
+                const uint32 required = sr.flags & requiredFlags;
+                if ((player.flags2 & required) != required)
                 {
-                    if (player.unityLeader != searchUnityId)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
-                else if (!(player.flags2 & sr.flags))
+
+                // Keywords such as INV carry several bits and match on any of them
+                // TODO: /sea ballista sends 0x000F0000 and is matched here once the Ballista bits are set.
+                const uint32 otherFlags = sr.flags & ~(unityMask | requiredFlags | monstrosityMask);
+                if (otherFlags != 0 && !(player.flags2 & otherFlags))
                 {
-                    // Normal bitwise check for other flags (bits 0-21)
                     continue;
                 }
             }
@@ -564,6 +632,15 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             if (sr.minlvl > 0 && sr.maxlvl >= sr.minlvl)
             {
                 if (player.mlvl < sr.minlvl || player.mlvl > sr.maxlvl)
+                {
+                    continue;
+                }
+            }
+
+            // master levels are not stored yet, so masterLvl is always 0 and any range excludes everyone
+            if (sr.minMasterLvl > 0 && sr.maxMasterLvl >= sr.minMasterLvl)
+            {
+                if (player.masterLvl < sr.minMasterLvl || player.masterLvl > sr.maxMasterLvl)
                 {
                     continue;
                 }
@@ -601,18 +678,45 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
                 continue;
             }
 
-            if (visibleResults < 40)
-            {
-                PlayersList.emplace_back(std::move(player));
-                visibleResults++;
-            }
-            totalResults++;
+            PlayersList.emplace_back(std::move(player));
         }
+
+        // the client lists its sort categories first, rows already arrive by name
+        std::ranges::stable_sort(PlayersList,
+                                 [&sr](const SearchEntity& left, const SearchEntity& right) -> bool
+                                 {
+                                     for (const auto& [type, descending] : sr.sortOrder)
+                                     {
+                                         const auto order = compareBy(type, left, right);
+                                         if (order == 0)
+                                         {
+                                             continue;
+                                         }
+
+                                         if (descending)
+                                         {
+                                             return order > 0;
+                                         }
+
+                                         return order < 0;
+                                     }
+
+                                     return false;
+                                 });
+
+        const auto totalResults = PlayersList.size(); // gives ALL matching criteria (total)
         if (totalResults > 0)
         {
-            *count = totalResults;
+            *count = static_cast<int>(totalResults);
         }
-        ShowInfoFmt("Found {} results, displaying {}", totalResults, visibleResults);
+
+        constexpr std::size_t maxVisibleResults = 40;
+        if (PlayersList.size() > maxVisibleResults)
+        {
+            PlayersList.resize(maxVisibleResults);
+        }
+
+        ShowInfoFmt("Found {} results, displaying {}", totalResults, PlayersList.size());
     }
 
     return PlayersList;
