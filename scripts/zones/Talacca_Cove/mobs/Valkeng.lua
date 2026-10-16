@@ -242,4 +242,10 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return skillList[math.randomInt(1, #skillList)]
 end
 
+entity.onMobWeaponSkill = function(mob, target, skill, action)
+    if skill:getID() == xi.mobSkill.SHIELD_BASH_AUTOMATON then
+        mob:setTP(0)
+    end
+end
+
 return entity
