@@ -170,6 +170,7 @@ void ShipHandler::registerVoyage(const xi::data::TransportData& entry)
             .every         = entry.Every,
             .disembarkFrom = entry.Disembark,
             .boardingEnds  = docked->End,
+            .reverse       = entry.Reverse,
         });
     }
 }
@@ -245,4 +246,20 @@ void ShipHandler::tick()
             luautils::OnTransportVoyageEnd(voyage.zone);
         }
     }
+}
+
+auto ShipHandler::voyageAt(const CZone* PZone, const uint32 now) const -> const Voyage*
+{
+    const auto found = std::ranges::find_if(voyages_,
+                                            [&](const auto& voyage)
+                                            {
+                                                return voyage.zone == PZone && voyage.carrying(now);
+                                            });
+
+    if (found == voyages_.end())
+    {
+        return nullptr;
+    }
+
+    return &*found;
 }

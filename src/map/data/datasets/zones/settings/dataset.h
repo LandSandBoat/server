@@ -71,6 +71,7 @@ struct TransportData
     std::string                     Door; // client name, resolved once the zone's NPCs exist
     std::optional<position_t>       Dock; // unset on a decorative ship, which keeps wherever the zone put it
     uint16                          Boundary{};
+    bool                            Reverse{}; // client plays the voyage zone's scenery path backwards
     std::vector<xi::ZoneId>         Crossings; // zones the riders may cross, empty when the run carries nobody
     uint32                          Every{};   // cycle length in seconds, or 0 when the run never repeats
     uint32                          Offset{};

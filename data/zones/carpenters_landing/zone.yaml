@@ -62,6 +62,7 @@ transport:
       places:
         hidden: [0.000, 100.000, 0.000]
       boundary: 3
+      reverse:  true
       voyage:
         - phanauet_channel
       every:     3456
@@ -185,6 +186,7 @@ transport:
       places:
         hidden: [0.000, 100.000, 0.000]
       boundary: 3
+      reverse:  true
       voyage:
         - phanauet_channel
       every:     3456

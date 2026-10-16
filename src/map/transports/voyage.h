@@ -34,12 +34,31 @@ struct Voyage
     uint32 every{};         // cycle length in seconds
     uint32 disembarkFrom{}; // seconds into the cycle when riders are put ashore
     uint32 boardingEnds{};  // seconds into the cycle when the ship stops taking passengers
+    bool   reverse{};       // client plays the zone's scenery path backwards
 
-    auto carrying(const uint32 now) const -> bool
+    // Seconds into the current cycle.
+    auto intoCycle(const uint32 now) const -> uint32
     {
         const auto elapsed = static_cast<int64>(now) - offset;
         const auto phase   = elapsed % every;
-        const auto into    = phase < 0 ? phase + every : phase;
+        return static_cast<uint32>(phase < 0 ? phase + every : phase);
+    }
+
+    // When the leg in progress stopped taking passengers.
+    auto departedAt(const uint32 now) const -> uint32
+    {
+        return now - (intoCycle(now) + every - boardingEnds) % every;
+    }
+
+    // Seconds from departure until riders are put ashore.
+    auto duration() const -> uint32
+    {
+        return (disembarkFrom + every - boardingEnds) % every;
+    }
+
+    auto carrying(const uint32 now) const -> bool
+    {
+        const auto into = intoCycle(now);
 
         // Airship passenger windows wrap past the end of their cycle.
         if (boardingEnds <= disembarkFrom)

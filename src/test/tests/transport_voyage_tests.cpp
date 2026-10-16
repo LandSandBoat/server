@@ -69,6 +69,33 @@ TEST_CASE("Voyage schedule handles passenger windows crossing the cycle boundary
     CHECK(voyage.latestCompletedAt(130) == 130);
 }
 
+TEST_CASE("Voyage reports the departure and length of the leg in progress", "[transport_voyage]")
+{
+    const Voyage voyage{
+        .offset        = 20,
+        .every         = 100,
+        .disembarkFrom = 70,
+        .boardingEnds  = 10,
+    };
+
+    CHECK(voyage.duration() == 60);
+    CHECK(voyage.departedAt(30) == 30);
+    CHECK(voyage.departedAt(89) == 30);
+    CHECK(voyage.departedAt(130) == 130);
+
+    const Voyage wrapping{
+        .offset        = 20,
+        .every         = 100,
+        .disembarkFrom = 10,
+        .boardingEnds  = 80,
+    };
+
+    CHECK(wrapping.duration() == 30);
+    CHECK(wrapping.departedAt(100) == 100);
+    CHECK(wrapping.departedAt(129) == 100);
+    CHECK(wrapping.departedAt(0) == 0);
+}
+
 TEST_CASE("Shared voyage schedules complete after both directions finish", "[transport_voyage]")
 {
     const Voyage outbound{

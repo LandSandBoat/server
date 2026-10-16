@@ -88,6 +88,7 @@ struct Transport
     std::optional<std::vector<float>> dock;
     Places                            places;
     std::optional<uint16>             boundary;
+    std::optional<bool>               reverse;
     Zones                             voyage;
     Seconds                           every;
     Seconds                           offset;
@@ -175,6 +176,7 @@ struct glz::json_schema<xi::data::datasets::zones::settings::wire::Transport>
     glz::schema dock{ .description = "Where the ship sits while docked, as x, y, z and optionally a facing of 0-255. Omitted leaves it wherever the zone put it." };
     glz::schema places{ .description = "Named spots the run's moves refer to, as x, y, z. The dock is always available under that name." };
     glz::schema boundary{ .description = "Boarding area passengers stand in. They ride along when the ship departs." };
+    glz::schema reverse{ .description = "Whether the client plays the voyage zone's scenery path backwards for this run. Defaults to false." };
     glz::schema voyage{ .description = "Zones the passengers may travel through. A ship whose destination is chosen at boarding time names each one. Omitted means the run carries nobody." };
     glz::schema every{ .description = "Cycle length in seconds. Omitted on a single open-ended phase means it never repeats." };
     glz::schema offset{ .description = "Seconds the cycle is shifted by, so runs sharing a ship take their turn. Defaults to 0." };

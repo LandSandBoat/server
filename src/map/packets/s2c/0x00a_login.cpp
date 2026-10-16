@@ -24,6 +24,7 @@
 #include "entities/char_entity.h"
 #include "instance.h"
 #include "status_effect_container.h"
+#include "transports/ship_handler.h"
 #include "utils/zoneutils.h"
 
 namespace
@@ -163,6 +164,18 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     packet.GameTime      = earth_time::vanadiel_timestamp(currentTime);
     packet.DeadCounter   = static_cast<uint32>(60 * deadRemaining);
     packet.Ex            = 0x01;
+
+    // The client animates the scenery along the voyage zone's path from these.
+    if (const auto* voyage = ShipHandler::getInstance()->voyageAt(PChar->loc.zone, packet.GameTime))
+    {
+        packet.ShipStart = voyage->departedAt(packet.GameTime);
+        packet.ShipEnd   = static_cast<uint16_t>(voyage->duration());
+
+        if (voyage->reverse)
+        {
+            packet.PosHead.flags3 |= 0x04000000; // ShipStartMode
+        }
+    }
 
     const look_t* look  = PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look;
     packet.GrapIDTbl[0] = look->face | look->race << 8;

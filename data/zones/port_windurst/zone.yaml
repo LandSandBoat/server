@@ -41,6 +41,7 @@ transport:
       door:     _6os
       dock:     [242.281, -3.522, 61.994, 96]
       boundary: 416
+      reverse:  true
       voyage:
         - windurst_jeuno_airship
       every:     864

@@ -235,6 +235,7 @@ auto convertTransports(const std::optional<wire::TransportSchedule>& schedule) -
             .Door      = source.door.value_or(std::string{}),
             .Dock      = dock,
             .Boundary  = source.boundary.value_or(0),
+            .Reverse   = source.reverse.value_or(false),
             .Crossings = crossings,
             .Every     = source.every.value_or(0),
             .Offset    = source.offset.value_or(0),

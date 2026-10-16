@@ -35,6 +35,7 @@ transport:
       door:     _6ku
       dock:     [-36.458, 6.365, -77.322, 128]
       boundary: 315
+      reverse:  true
       voyage:
         - bastok_jeuno_airship
       every:     864
