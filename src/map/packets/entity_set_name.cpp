@@ -19,8 +19,6 @@
 ===========================================================================
 */
 
-#include "common/utils.h"
-
 #include "entity_set_name.h"
 
 #include "entities/base_entity.h"
@@ -32,7 +30,7 @@ CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
     // to show trust options in the menu (like "Release").
     // It is also reported to be used to name Pankration entities, and sometimes Fellows.
     this->setType(0x67);
-    this->setSize(0x2C);
+    this->setSize(0x18);
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x05;
@@ -44,9 +42,6 @@ CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
     {
         ref<uint16>(0x0C) = PTrust->PMaster->targid;
     }
-
-    packBitsBE(buffer_.data() + 0x04, 0x18 + PEntity->packetName.size(), 0, 6, 10); // Message Size
-    PEntity->packetName.copy(reinterpret_cast<char*>(buffer_.data() + 0x18), PACKET_SIZE - 0x18);
 
     // Unknown, maybe entity flags?
     ref<uint8>(0x10) = 0x04;
