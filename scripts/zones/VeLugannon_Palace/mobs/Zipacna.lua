@@ -7,7 +7,6 @@ local entity = {}
 
 local ID = zones[xi.zone.VELUGANNON_PALACE]
 
--- Spawn points, kept here since nm_spawn_points.sql was retired
 local spawnPoints =
 {
     blueShort   = { x = -196, y = 0,  z = 389 },
@@ -272,6 +271,12 @@ local pathNodes =
 
 local setZipPath = function(mob, door, currPath)
     if door then
+        if mob:getLocalVar('currentDoor') == door:getID() then
+            return
+        end
+
+        mob:setLocalVar('currentDoor', door:getID())
+
         if door:getAnimation() == xi.animation.OPEN_DOOR then
             if currentDirection == pathingDirection.TO_EAST then
                 mob:pathThrough(pathNodes[currPath + 1], xi.path.flag.COORDS)
@@ -358,6 +363,10 @@ entity.onMobRoam = function(mob)
         return
     end
 
+    if not mob:isFollowingPath() then
+        mob:setLocalVar('currentDoor', 0)
+    end
+
     if mob:checkDistance(firstBlueDoor:getPos()) <= 7 then
         setZipPath(mob, firstBlueDoor, 1)
     elseif mob:checkDistance(middleBlueDoor:getPos()) <= 7 then
@@ -366,6 +375,8 @@ entity.onMobRoam = function(mob)
         setZipPath(mob, middleYellowDoor, 3)
     elseif mob:checkDistance(firstYellowDoor:getPos()) <= 7 then
         setZipPath(mob, firstYellowDoor, 4)
+    else
+        mob:setLocalVar('currentDoor', 0)
     end
 end
 
@@ -392,7 +403,8 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.updateNMSpawnPoint(mob)
+    local spawnPoint = utils.randomEntry(spawnPoints)
+    mob:setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z)
     mob:setRespawnTime(math.randomInt(10800, 21600)) -- 3 to 6 hours.
 end
 
