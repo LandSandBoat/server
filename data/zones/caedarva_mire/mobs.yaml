@@ -1678,10 +1678,8 @@ templates:
         hp: 14400
     loot:
       drops:
-        - chance: common
-          item:   karakul_skin
-        - chance: uncommon
-          item:   slice_of_karakul_meat
+        - chance: very_common
+          item:   nightmare_gloves
 
   Puktrap:
     id:            3224
