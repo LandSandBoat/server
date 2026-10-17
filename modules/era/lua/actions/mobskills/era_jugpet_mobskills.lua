@@ -117,6 +117,8 @@ m:addOverrideByEra('xi.actions.mobskills.head_butt_jugpet.onMobWeaponSkill', {
 m:addOverrideByEra('xi.actions.mobskills.dream_flower_jugpet.onMobWeaponSkill', {
     [xi.expansion.SOA] = function(mob, target, skill, action)
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.randomInt(15, 60)))
+
+        return xi.effect.SLEEP_I
     end,
 })
 
@@ -1090,7 +1092,7 @@ m:addOverrideByEra('xi.actions.mobskills.toxic_spit_jugpet.onMobWeaponSkill', {
 
         -- TODO: Jug pet: Duration scales with TP.
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration)
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration))
 
         return xi.effect.POISON
     end,
