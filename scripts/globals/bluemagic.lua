@@ -674,7 +674,6 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params, action
     local trickAttackTarget = nil
     if
         firstHitrate ~= -1 and -- -1 = PD/ALL_MISS
-        spell:getAoE() == xi.aoeType.NONE and
         params.attackType ~= xi.attackType.RANGED
     then
         if
@@ -745,6 +744,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params, action
             end
 
             params.hitsLanded = params.hitsLanded + 1
+            sneakIsApplicable = false -- SA is deleted after the first hit
         else
             hitInfo          = xi.mobskills.defaultHitInfo(hitNumber)
             hitInfo.missType = 'Evaded / Missed'
