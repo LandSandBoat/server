@@ -34,6 +34,6 @@ enum class GP_CLI_COMMAND_FRIENDPASS_PARA : uint16_t
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x001B
 // This packet is sent by the client when it is interacting with, and ultimately purchasing from, a world pass vendor NPC.
 GP_CLI_PACKET(GP_CLI_COMMAND_FRIENDPASS,
-              uint16_t Para;      // PS2: Para
-              uint16_t padding00; // PS2: Dammy
+              uint16_t Para;          // PS2: Para
+              uint8_t  padding06[22]; // PS2: Dammy
 );

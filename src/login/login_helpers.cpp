@@ -40,6 +40,7 @@
 #include <algorithm>
 #include <array>
 #include <fstream>
+#include <limits>
 #include <unordered_set>
 
 namespace loginHelpers
@@ -326,6 +327,71 @@ auto characterCreationError(const uint32 accountID, const std::string& name) -> 
     }
 
     return std::nullopt;
+}
+
+namespace
+{
+
+// the map server shows the pass code as ten digits
+auto parseFriendPass(const std::string& friendPass) -> Maybe<uint32>
+{
+    if (friendPass.size() != 10 || friendPass.find_first_not_of("0123456789") != std::string::npos)
+    {
+        return std::nullopt;
+    }
+
+    const auto value = std::stoull(friendPass);
+    if (value == 0 || value > std::numeric_limits<uint32>::max())
+    {
+        return std::nullopt;
+    }
+
+    return static_cast<uint32>(value);
+}
+
+} // namespace
+
+auto friendPassError(const uint32 accountID, const std::string& friendPass) -> Maybe<uint16>
+{
+    const auto code = parseFriendPass(friendPass);
+    if (!code)
+    {
+        return loginErrors::errorCode::INCORRECT_WORLD_PASS;
+    }
+
+    const auto chars = db::preparedStmt("SELECT COUNT(*) AS chars FROM chars WHERE accid = ?", accountID);
+    if (!chars || !chars->next() || chars->get<uint32>("chars") != 0)
+    {
+        return loginErrors::errorCode::WORLD_PASS_FIRST_CHARACTER_ONLY;
+    }
+
+    const auto pass = db::preparedStmt("SELECT invitee IS NOT NULL AS used, expiry <= UNIX_TIMESTAMP() AS expired FROM char_world_passes WHERE code = ?", *code);
+    if (!pass || !pass->next() || pass->get<uint8>("used") != 0)
+    {
+        return loginErrors::errorCode::INCORRECT_WORLD_PASS;
+    }
+
+    if (pass->get<uint8>("expired") != 0)
+    {
+        return loginErrors::errorCode::WORLD_PASS_EXPIRED;
+    }
+
+    return std::nullopt;
+}
+
+void useFriendPass(const uint32 charID, const std::string& friendPass)
+{
+    const auto code = parseFriendPass(friendPass);
+    if (!code)
+    {
+        return;
+    }
+
+    const auto rset = db::preparedStmt("UPDATE char_world_passes SET invitee = ?, joined = UNIX_TIMESTAMP() WHERE code = ? AND invitee IS NULL AND expiry > UNIX_TIMESTAMP()", charID, *code);
+    if (rset && rset->rowsAffected())
+    {
+        ShowInfo(fmt::format("char {} joined with Gold World Pass {}", charID, *code));
+    }
 }
 
 // [ip_addr][session_hash] = session

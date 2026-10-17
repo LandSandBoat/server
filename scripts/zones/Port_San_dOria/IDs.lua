@@ -23,6 +23,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
         LOGIN_NUMBER                   = 6480,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED  = 6500,  -- Your party is unable to participate because certain members' levels are restricted.
         MOG_LOCKER_OFFSET              = 6625,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        WORLD_PASS_PARTY_CHANGED       = 6764,  -- Your party makeup has changed so you were unable to receive the item. Please try again.
         RECEIVED_CONQUEST_POINTS       = 6900,  -- You received <number> conquest points!
         CONQUEST_BASE                  = 7109,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET         = 7268,  -- You can't fish here.

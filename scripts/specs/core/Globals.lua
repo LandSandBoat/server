@@ -439,6 +439,47 @@ end
 function GetVolatileServerVariable(varName)
 end
 
+---@class WorldPass
+---@field code integer
+---@field expiry integer
+
+---@class WorldPassInvite
+---@field joined integer
+---@field inviteeClaims integer
+---@field inviterClaims integer
+
+---@nodiscard
+---@param inviterId integer
+---@return WorldPass?
+function GetActiveWorldPass(inviterId)
+end
+
+---@param inviterId integer
+---@param expiry integer
+---@return integer
+function IssueWorldPass(inviterId, expiry)
+end
+
+---@nodiscard
+---@param inviterId integer
+---@param inviteeId integer
+---@return WorldPassInvite?
+function GetWorldPassInvite(inviterId, inviteeId)
+end
+
+---@param inviteeId integer
+---@param inviteeClaims integer
+---@param inviterClaims integer
+---@return nil
+function SetWorldPassClaims(inviteeId, inviteeClaims, inviterClaims)
+end
+
+---@nodiscard
+---@param inviterId integer
+---@return integer
+function CountWorldPassInvites(inviterId)
+end
+
 ---@param name string
 ---@param value integer
 ---@param expiry integer?
