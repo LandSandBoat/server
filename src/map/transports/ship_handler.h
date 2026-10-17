@@ -38,6 +38,8 @@ public:
     void InitializeShips();
     void tick();
 
+    auto voyageAt(const CZone* PZone, uint32 now) const -> const Voyage*; // leg carrying riders through the zone right now, if any
+
 protected:
     ShipHandler() = default;
 

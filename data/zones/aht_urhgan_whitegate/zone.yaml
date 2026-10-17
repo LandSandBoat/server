@@ -29,6 +29,7 @@ transport:
       door:     _1es
       dock:     [-20.726, 3.389, -154.231, 0]
       boundary: 569
+      reverse:  true
       voyage:
         - open_sea_route_to_mhaura
       every:     1152

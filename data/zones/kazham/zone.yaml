@@ -23,6 +23,7 @@ transport:
       door:     _6ys
       dock:     [-4.000, -3.497, 32.125, 128]
       boundary: 512
+      reverse:  true
       voyage:
         - kazham_jeuno_airship
       every:     864

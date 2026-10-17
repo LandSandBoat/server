@@ -70,6 +70,7 @@ transport:
       places:
         staging: [-29.000, 10.450, 190.000]
       boundary: 474
+      reverse:  true
       voyage:
         - san_doria_jeuno_airship
       every:     864
