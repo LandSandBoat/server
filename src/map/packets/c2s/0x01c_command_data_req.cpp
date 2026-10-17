@@ -19,15 +19,19 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x01c_command_data_req.h"
 
-#include "base.h"
+#include "entities/char_entity.h"
+#include "packets/c2s/validation.h"
+#include "packets/s2c/0x0ac_command_data.h"
 
-// https://github.com/atom0s/XiPackets/tree/main/world/client/0x001C
-// The purpose of this packet is currently unknown.
-// The client will send this packet each time the player uses a job ability while having a pet active.
-GP_CLI_PACKET(GP_CLI_COMMAND_UNKNOWN,
-              uint16_t unknown00; // This value is always set to the local players target index.
-              uint16_t padding00; // Padding; unused.
-              uint32_t unknown01; // Unknown. This value is always set to 1.
-);
+auto GP_CLI_COMMAND_COMMAND_DATA_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+{
+    return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent });
+}
+
+void GP_CLI_COMMAND_COMMAND_DATA_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+{
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
+}
