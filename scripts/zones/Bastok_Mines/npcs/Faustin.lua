@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

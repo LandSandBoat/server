@@ -7,6 +7,10 @@
 ---@type TNpcEntity
 local entity = {}
 
+entity.onTrade = function(player, npc, trade)
+    xi.events.harvestFestival.onTrade(player, trade, npc)
+end
+
 entity.onTrigger = function(player, npc)
     if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, zones[xi.zone.BASTOK_MARKETS].text.VISALA_SHOP_DIALOG)
