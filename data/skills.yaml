@@ -91,29 +91,29 @@ skills:
     48: {a_plus: 147, a: 147, b_plus: 141, b: 141, b_minus: 141, c_plus: 136, c: 136, c_minus: 136, d: 130, e: 121, f: 112, g:  97}
     49: {a_plus: 150, a: 150, b_plus: 144, b: 144, b_minus: 144, c_plus: 139, c: 139, c_minus: 139, d: 133, e: 124, f: 114, g:  99}
     50: {a_plus: 153, a: 153, b_plus: 147, b: 147, b_minus: 147, c_plus: 142, c: 142, c_minus: 142, d: 136, e: 126, f: 116, g: 101}
-    51: {a_plus: 158, a: 158, b_plus: 151, b: 151, b_minus: 151, c_plus: 146, c: 146, c_minus: 146, d: 140, e: 130, f: 120, g: 104}
-    52: {a_plus: 163, a: 163, b_plus: 156, b: 156, b_minus: 156, c_plus: 151, c: 151, c_minus: 151, d: 145, e: 135, f: 124, g: 107}
-    53: {a_plus: 168, a: 168, b_plus: 161, b: 161, b_minus: 161, c_plus: 156, c: 156, c_minus: 156, d: 150, e: 139, f: 128, g: 110}
-    54: {a_plus: 173, a: 173, b_plus: 166, b: 166, b_minus: 166, c_plus: 161, c: 161, c_minus: 161, d: 154, e: 144, f: 133, g: 113}
-    55: {a_plus: 178, a: 178, b_plus: 171, b: 171, b_minus: 171, c_plus: 166, c: 166, c_minus: 166, d: 159, e: 148, f: 137, g: 116}
-    56: {a_plus: 183, a: 183, b_plus: 176, b: 176, b_minus: 176, c_plus: 170, c: 170, c_minus: 170, d: 164, e: 153, f: 141, g: 119}
-    57: {a_plus: 188, a: 188, b_plus: 181, b: 181, b_minus: 181, c_plus: 175, c: 175, c_minus: 175, d: 168, e: 157, f: 146, g: 122}
-    58: {a_plus: 193, a: 193, b_plus: 186, b: 186, b_minus: 186, c_plus: 180, c: 180, c_minus: 180, d: 173, e: 162, f: 150, g: 125}
-    59: {a_plus: 198, a: 198, b_plus: 191, b: 191, b_minus: 191, c_plus: 185, c: 185, c_minus: 185, d: 178, e: 166, f: 154, g: 128}
-    60: {a_plus: 203, a: 203, b_plus: 196, b: 196, b_minus: 196, c_plus: 190, c: 190, c_minus: 190, d: 183, e: 171, f: 159, g: 131}
-    61: {a_plus: 207, a: 207, b_plus: 199, b: 199, b_minus: 198, c_plus: 192, c: 192, c_minus: 192, d: 184, e: 172, f: 161, g: 134}
-    62: {a_plus: 212, a: 211, b_plus: 203, b: 202, b_minus: 201, c_plus: 195, c: 194, c_minus: 194, d: 186, e: 174, f: 163, g: 137}
-    63: {a_plus: 217, a: 215, b_plus: 207, b: 205, b_minus: 204, c_plus: 197, c: 196, c_minus: 196, d: 188, e: 176, f: 165, g: 140}
-    64: {a_plus: 222, a: 219, b_plus: 210, b: 208, b_minus: 206, c_plus: 200, c: 199, c_minus: 198, d: 190, e: 178, f: 167, g: 143}
-    65: {a_plus: 227, a: 223, b_plus: 214, b: 212, b_minus: 209, c_plus: 202, c: 201, c_minus: 200, d: 192, e: 180, f: 169, g: 146}
-    66: {a_plus: 232, a: 227, b_plus: 218, b: 215, b_minus: 212, c_plus: 205, c: 203, c_minus: 202, d: 194, e: 182, f: 171, g: 149}
-    67: {a_plus: 236, a: 231, b_plus: 221, b: 218, b_minus: 214, c_plus: 207, c: 205, c_minus: 204, d: 195, e: 184, f: 173, g: 152}
-    68: {a_plus: 241, a: 235, b_plus: 225, b: 221, b_minus: 217, c_plus: 210, c: 208, c_minus: 206, d: 197, e: 186, f: 175, g: 155}
-    69: {a_plus: 246, a: 239, b_plus: 229, b: 225, b_minus: 220, c_plus: 212, c: 210, c_minus: 208, d: 199, e: 188, f: 177, g: 158}
+    51: {a_plus: 158, a: 158, b_plus: 151, b: 151, b_minus: 151, c_plus: 146, c: 146, c_minus: 146, d: 140, e: 130, f: 120, g: 105}
+    52: {a_plus: 163, a: 163, b_plus: 156, b: 156, b_minus: 156, c_plus: 151, c: 151, c_minus: 151, d: 145, e: 135, f: 124, g: 109}
+    53: {a_plus: 168, a: 168, b_plus: 161, b: 161, b_minus: 161, c_plus: 156, c: 156, c_minus: 156, d: 150, e: 139, f: 128, g: 113}
+    54: {a_plus: 173, a: 173, b_plus: 166, b: 166, b_minus: 166, c_plus: 161, c: 161, c_minus: 161, d: 154, e: 144, f: 133, g: 117}
+    55: {a_plus: 178, a: 178, b_plus: 171, b: 171, b_minus: 171, c_plus: 166, c: 166, c_minus: 166, d: 159, e: 148, f: 137, g: 121}
+    56: {a_plus: 183, a: 183, b_plus: 176, b: 176, b_minus: 176, c_plus: 170, c: 170, c_minus: 170, d: 164, e: 153, f: 141, g: 125}
+    57: {a_plus: 188, a: 188, b_plus: 181, b: 181, b_minus: 181, c_plus: 175, c: 175, c_minus: 175, d: 168, e: 157, f: 146, g: 129}
+    58: {a_plus: 193, a: 193, b_plus: 186, b: 186, b_minus: 186, c_plus: 180, c: 180, c_minus: 180, d: 173, e: 162, f: 150, g: 133}
+    59: {a_plus: 198, a: 198, b_plus: 191, b: 191, b_minus: 191, c_plus: 185, c: 185, c_minus: 185, d: 178, e: 166, f: 154, g: 137}
+    60: {a_plus: 203, a: 203, b_plus: 196, b: 196, b_minus: 196, c_plus: 190, c: 190, c_minus: 190, d: 183, e: 171, f: 159, g: 141}
+    61: {a_plus: 207, a: 207, b_plus: 199, b: 199, b_minus: 198, c_plus: 192, c: 192, c_minus: 192, d: 184, e: 172, f: 161, g: 143}
+    62: {a_plus: 212, a: 211, b_plus: 203, b: 202, b_minus: 201, c_plus: 195, c: 194, c_minus: 194, d: 186, e: 174, f: 163, g: 145}
+    63: {a_plus: 217, a: 215, b_plus: 207, b: 205, b_minus: 204, c_plus: 197, c: 196, c_minus: 196, d: 188, e: 176, f: 165, g: 147}
+    64: {a_plus: 222, a: 219, b_plus: 210, b: 208, b_minus: 206, c_plus: 200, c: 199, c_minus: 198, d: 190, e: 178, f: 167, g: 149}
+    65: {a_plus: 227, a: 223, b_plus: 214, b: 212, b_minus: 209, c_plus: 202, c: 201, c_minus: 200, d: 192, e: 180, f: 169, g: 151}
+    66: {a_plus: 232, a: 227, b_plus: 218, b: 215, b_minus: 212, c_plus: 205, c: 203, c_minus: 202, d: 194, e: 182, f: 171, g: 153}
+    67: {a_plus: 236, a: 231, b_plus: 221, b: 218, b_minus: 214, c_plus: 207, c: 205, c_minus: 204, d: 195, e: 184, f: 173, g: 155}
+    68: {a_plus: 241, a: 235, b_plus: 225, b: 221, b_minus: 217, c_plus: 210, c: 208, c_minus: 206, d: 197, e: 186, f: 175, g: 157}
+    69: {a_plus: 246, a: 239, b_plus: 229, b: 225, b_minus: 220, c_plus: 212, c: 210, c_minus: 208, d: 199, e: 188, f: 177, g: 159}
     70: {a_plus: 251, a: 244, b_plus: 233, b: 228, b_minus: 223, c_plus: 215, c: 212, c_minus: 210, d: 201, e: 190, f: 179, g: 161}
-    71: {a_plus: 256, a: 249, b_plus: 237, b: 232, b_minus: 226, c_plus: 218, c: 214, c_minus: 212, d: 203, e: 192, f: 181, g: 163}
-    72: {a_plus: 261, a: 254, b_plus: 241, b: 236, b_minus: 229, c_plus: 221, c: 217, c_minus: 214, d: 205, e: 194, f: 183, g: 165}
-    73: {a_plus: 266, a: 259, b_plus: 246, b: 240, b_minus: 232, c_plus: 224, c: 219, c_minus: 216, d: 207, e: 196, f: 185, g: 167}
+    71: {a_plus: 256, a: 249, b_plus: 237, b: 232, b_minus: 226, c_plus: 218, c: 214, c_minus: 212, d: 202, e: 192, f: 181, g: 163}
+    72: {a_plus: 261, a: 254, b_plus: 242, b: 236, b_minus: 229, c_plus: 221, c: 217, c_minus: 214, d: 204, e: 194, f: 183, g: 165}
+    73: {a_plus: 266, a: 259, b_plus: 246, b: 241, b_minus: 233, c_plus: 224, c: 219, c_minus: 216, d: 206, e: 196, f: 185, g: 167}
     74: {a_plus: 271, a: 264, b_plus: 251, b: 245, b_minus: 236, c_plus: 227, c: 222, c_minus: 218, d: 208, e: 198, f: 187, g: 169}
     75: {a_plus: 276, a: 269, b_plus: 256, b: 250, b_minus: 240, c_plus: 230, c: 225, c_minus: 220, d: 210, e: 200, f: 189, g: 171}
     76: {a_plus: 281, a: 274, b_plus: 261, b: 255, b_minus: 245, c_plus: 235, c: 230, c_minus: 225, d: 214, e: 203, f: 191, g: 173}

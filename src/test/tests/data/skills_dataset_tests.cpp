@@ -65,6 +65,7 @@ TEST_CASE("skills: ranks and caps read from data/skills.yaml", "[data][skill]")
 
     CHECK(cap(skills, 1, xi::SkillRank::APlus) == 6);
     CHECK(cap(skills, 99, xi::SkillRank::APlus) == 424);
+    CHECK(cap(skills, 60, xi::SkillRank::G) == 141);
     CHECK(cap(skills, 99, xi::SkillRank::G) == 228);
     CHECK(skills.Caps[0] == std::array<uint16, xi::data::kSkillRanks>{});
 }
