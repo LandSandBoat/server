@@ -923,20 +923,15 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 end
 
 function Battlefield.redirectEventCall(eventName, player, csid, option)
-    local battlefieldID = 0
-    local battlefield   = player:getBattlefield()
+    local battlefield = player:getBattlefield()
 
-    if battlefield then
-        battlefieldID = battlefield:getID()
-    else
-        battlefieldID = player:getLocalVar('battlefieldID')
-    end
-
-    if battlefieldID == 0 then
+    -- battlefield ids start at 0
+    if not battlefield and player:getLocalVar('hasBattlefieldID') == 0 then
         return
     end
 
-    local content = xi.battlefield.contents[battlefieldID]
+    local battlefieldID = battlefield and battlefield:getID() or player:getLocalVar('battlefieldID')
+    local content       = xi.battlefield.contents[battlefieldID]
     content[eventName](content, player, csid, option)
 end
 
@@ -1093,6 +1088,7 @@ end
 ---@diagnostic disable-next-line: duplicate-set-field
 function Battlefield:onBattlefieldEnter(player, battlefield)
     player:setLocalVar('battlefieldID', battlefield:getID())
+    player:setLocalVar('hasBattlefieldID', 1)
 
     local initiatorId, _ = battlefield:getInitiator()
 

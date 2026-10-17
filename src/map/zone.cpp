@@ -1194,7 +1194,19 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
         if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::Confrontation))
         {
-            PBattlefield->InsertEntity(PChar, CBattlefield::hasPlayerEntered(PChar));
+            const bool entered = CBattlefield::hasPlayerEntered(PChar);
+
+            // Retail closes the fight once its last player has logged out
+            if (entered && !PBattlefield->IsOccupied() && PBattlefield->GetStatus() < BATTLEFIELD_STATUS_WON)
+            {
+                PBattlefield->RemoveRegistration(PChar);
+                PBattlefield->CanCleanup(true);
+                m_BattlefieldHandler->addOrphanedPlayer(PChar);
+            }
+            else
+            {
+                PBattlefield->InsertEntity(PChar, entered);
+            }
         }
         else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::Confrontation))
         {
