@@ -92,7 +92,7 @@ public:
     void plantHarvest(uint8 potContainer, uint8 potSlot, sol::optional<bool> uproot) const;
     void plantDry(uint8 potContainer, uint8 potSlot) const;
 
-    void placeFurniture(uint8 container, uint8 slot, uint8 x, uint8 z) const;
+    void placeFurniture(uint8 container, uint8 slot, uint8 x, uint8 z, sol::optional<uint8> y) const;
     void finishFurnishing() const;
 
     static void Register();
