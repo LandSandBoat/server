@@ -363,13 +363,14 @@ end
 function CClientEntityPairActions:plantDry(potContainer, potSlot)
 end
 
----Install a furnishing on the 1st floor at grid cell (x, z).
+---Install a furnishing on the 1st floor at grid cell (x, z), optionally stacked at elevation y.
 ---@param container xi.inventoryLocation Container holding the furnishing
 ---@param slot integer Furnishing slot index
 ---@param x integer Grid x cell
 ---@param z integer Grid z cell
+---@param y integer? Stacking elevation (parent height / 10)
 ---@return nil
-function CClientEntityPairActions:placeFurniture(container, slot, x, z)
+function CClientEntityPairActions:placeFurniture(container, slot, x, z, y)
 end
 
 ---Finish placing furniture; recomputes the active moghancement.
