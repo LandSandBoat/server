@@ -41,11 +41,6 @@ UPDATE abilities SET recastTime = 300 WHERE name = 'rampart';
 -- Source: https://forum.square-enix.com/ffxi/threads/55263-April.-3-2019-%28JST%29-Version-Update
 UPDATE abilities SET recastTime = 300 WHERE name = 'velocity_shot';
 
--- Archery and Marksmanship: Revert skill rank increase from A+ to A.
--- Source: https://forum.square-enix.com/ffxi/threads/47481-Jun-25-2015-%28JST%29-Version-Update
-UPDATE skill_ranks SET rng = 2 WHERE name = 'archery';
-UPDATE skill_ranks SET rng = 2 WHERE name = 'marksmanship';
-
 ------------------------------------
 -- Dragoon
 -- Source: https://forum.square-enix.com/ffxi/threads/54901-January.-10-2019-%28JST%29-Version-Update

@@ -1,0 +1,14 @@
+# Skill ranks as they were before the October 2014 and June 2015 updates.
+
+skills:
+  ranks:
+    # https://forum.square-enix.com/ffxi/threads/44592?p=527238#post527239
+    hand_to_hand: {pup: b_plus}
+    dagger:       {thf: a, dnc: b_plus}
+    sword:        {blu: a}
+    axe:          {bst: a}
+    katana:       {nin: a}
+    throwing:     {nin: a}
+    # https://forum.square-enix.com/ffxi/threads/47481-Jun-25-2015-%28JST%29-Version-Update
+    archery:      {rng: a}
+    marksmanship: {rng: a}

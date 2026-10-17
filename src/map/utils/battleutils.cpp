@@ -45,6 +45,7 @@
 #include "attack.h"
 #include "attackutils.h"
 #include "charutils.h"
+#include "data/datasets/skills/dataset.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
@@ -76,6 +77,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "trait.h"
+#include "utils/dataset_loader.h"
 #include "utils/petutils.h"
 #include "weapon_skill.h"
 #include "ximesh/ximesh.h"
@@ -87,8 +89,7 @@
  *                                                                       *
  ************************************************************************/
 
-std::array<std::array<uint16, 14>, 100>                   g_SkillTable;
-std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE> g_SkillRanks;
+static_assert(xi::data::kSkillTypes == MAX_SKILLTYPE);
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
@@ -103,54 +104,20 @@ namespace battleutils
 const float worldAngleMinDistance = 0.5f;
 const uint8 worldAngleMaxDeviance = 8;
 
+namespace
+{
+
+auto skills() -> const xi::data::Skills&
+{
+    static const auto data = xi::data::loadDataset<xi::data::datasets::skills::Dataset>();
+    return data;
+}
+
+} // namespace
+
 void LoadSkillTable()
 {
-    uint32 x    = 0;
-    auto   rset = db::preparedStmt("SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 "
-                                   "FROM skill_caps "
-                                   "ORDER BY level "
-                                   "LIMIT 100");
-
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        for (uint32 y = 0; y < 14; ++y)
-        {
-            g_SkillTable[x][y] = rset->get<uint16>(std::format("r{}", y));
-        }
-
-        ++x;
-    }
-
-    rset = db::preparedStmt("SELECT skillid,war,mnk,whm,blm,rdm,thf,pld,drk,bst,brd,rng,sam,nin,drg,smn,blu,cor,pup,dnc,sch,geo,run "
-                            "FROM skill_ranks LIMIT 64");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        const auto SkillID = std::clamp<uint8>(rset->get<uint8>("skillid"), 0, MAX_SKILLTYPE - 1);
-
-        // NOTE: Skip over Monstrosity, they re-use other jobs ranks
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::WAR)] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::MNK)] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::WHM)] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BLM)] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RDM)] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::THF)] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::PLD)] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DRK)] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BST)] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BRD)] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RNG)] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SAM)] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::NIN)] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DRG)] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SMN)] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BLU)] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::COR)] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::PUP)] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DNC)] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SCH)] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::GEO)] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RUN)] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
-    }
+    skills();
 }
 
 /************************************************************************
@@ -338,7 +305,7 @@ void FreePetSkillList()
 
 auto GetSkillRank(xi::SkillType SkillID, xi::Job JobID) -> uint8
 {
-    return g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(JobID)];
+    return skills().Ranks[static_cast<uint8>(SkillID)][static_cast<uint8>(JobID)];
 }
 
 /************************************************************************
@@ -349,32 +316,19 @@ auto GetSkillRank(xi::SkillType SkillID, xi::Job JobID) -> uint8
 
 auto GetMaxSkill(xi::SkillType SkillID, xi::Job JobID, uint8 level) -> uint16
 {
-    // The skill_caps table is 0-indexed, so our maximum level should one lower
-    // than the size of the array.
-    auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
-
     // TODO: Research on mobs level 99+ is still on-going. This line can be removed once the correct formula/skilltype have been established.
-    // max indexed value and level is capped at 99 as stated above for skill_caps table
-    level = std::min<uint8>(level, 99);
-
-    if (level > maxLevel)
-    {
-        ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
-    }
-
-    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(JobID)]];
+    return skills().Caps[std::min<uint8>(level, 99)][GetSkillRank(SkillID, JobID)];
 }
 
 uint16 GetMaxSkill(uint8 rank, uint8 level)
 {
-    auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
-
-    if (level > maxLevel)
+    const auto& caps = skills().Caps;
+    if (level >= caps.size() || rank >= xi::data::kSkillRanks)
     {
-        ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
+        ShowDebugFmt("battleutils::GetMaxSkill() received rank {} at level {}, clamping", rank, level);
     }
 
-    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][rank];
+    return caps[std::min<std::size_t>(level, caps.size() - 1)][std::min<std::size_t>(rank, xi::data::kSkillRanks - 1)];
 }
 
 bool isValidSelfTargetWeaponskill(int wsid)
