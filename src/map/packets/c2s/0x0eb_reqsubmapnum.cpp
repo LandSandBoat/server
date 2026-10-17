@@ -32,11 +32,5 @@ auto GP_CLI_COMMAND_REQSUBMAPNUM::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_REQSUBMAPNUM::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    // TODO: Highly doubt that's the correct implementation.
-    if (!PChar->isNpcLocked())
-    {
-        return;
-    }
-
-    PChar->pushPacket<GP_SERV_COMMAND_REQSUBMAPNUM>(0);
+    PChar->pushPacket<GP_SERV_COMMAND_REQSUBMAPNUM>(PChar->loc.boundary);
 }
