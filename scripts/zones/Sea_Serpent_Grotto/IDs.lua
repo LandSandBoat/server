@@ -35,6 +35,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         MYTHRIL_CHECK                 = 7371,  -- You find something that looks like mythril dust scattered about the indentation.
         GOLD_CHECK                    = 7372,  -- You see something gold glittering around the indentation.
         COMPLETED_CHECK               = 7373,  -- It is a door you can open using <item>!
+        NO_LONGER_ANYTHING_ON_FLOOR   = 7386,  -- There is no longer anything on the floor.
         SENSE_OMINOUS_PRESENCE        = 7387,  -- You sense an ominous presence...
         NOTHING_OUT_OF_ORDINARY_2     = 7574,  -- There is nothing out of the ordinary here.
         BODY_NUMB_DREAD               = 7575,  -- Your body goes numb with dread!

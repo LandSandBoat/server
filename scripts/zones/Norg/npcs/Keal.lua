@@ -1,108 +1,68 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Keal
--- Starts and Ends Quest: It's Not Your Vault
------------------------------------
-local ID = zones[xi.zone.NORG]
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 local pathNodes =
 {
-    { x = -5.453587, y = 0.151494, z = -16.361458 },
-    { x = -5.997250, y = 0.229052, z = -15.475480 },
-    { x = -6.582538, y = 0.317294, z = -14.524694 },
-    { x = -7.573528, y = 0.365118, z = -12.941586 },
-    { x = -7.069273, y = 0.384884, z = -13.867216 },
-    { x = -6.565747, y = 0.311785, z = -14.741985 },
-    { x = -5.676943, y = 0.173223, z = -16.241194 },
-    { x = -5.162223, y = 0.020922, z = -17.108603 },
-    { x = -4.725273, y = -0.022554, z = -18.175083 },
-    { x = -4.882753, y = -0.041670, z = -19.252790 },
-    { x = -5.294413, y = 0.020847, z = -20.336269 },
-    { x = -5.632565, y = 0.112649, z = -21.417961 },
-    { x = -5.905818, y = 0.202903, z = -22.541668 },
-    { x = -5.657803, y = 0.116744, z = -21.445057 },
-    { x = -5.273734, y = 0.023316, z = -20.410303 },
-    { x = -4.831870, y = -0.049031, z = -19.478870 },
-    { x = -4.749702, y = -0.024804, z = -18.311924 },
-    { x = -5.152854, y = 0.002354, z = -17.248878 },
-    { x = -5.639069, y = 0.185855, z = -16.335281 },
-    { x = -6.158780, y = 0.247668, z = -15.445805 },
-    { x = -7.253261, y = 0.405026, z = -13.567613 },
-    { x = -7.803670, y = 0.348802, z = -12.626184 },
-    { x = -8.375298, y = 0.223101, z = -11.645775 },
-    { x = -8.895057, y = 0.076541, z = -10.770375 },
-    { x = -9.384287, y = 0.015579, z = -9.884774 },
-    { x = -9.939011, y = 0.143451, z = -8.935238 },
-    { x = -9.422630, y = -0.025280, z = -9.816562 },
-    { x = -8.589481, y = 0.151451, z = -11.248314 },
-    { x = -8.095008, y = 0.275576, z = -12.123538 },
-    { x = -7.561854, y = 0.373715, z = -13.045633 },
-    { x = -5.644930, y = 0.185392, z = -16.292952 },
-    { x = -5.058481, y = -0.014674, z = -17.285294 },
-    { x = -4.724863, y = -0.024709, z = -18.265087 },
-    { x = -4.923457, y = -0.042915, z = -19.378429 },
-    { x = -5.293544, y = 0.020505, z = -20.338196 },
-    { x = -5.606711, y = 0.104830, z = -21.323364 },
-    { x = -5.849701, y = 0.183865, z = -22.302536 },
-    { x = -5.586438, y = 0.097169, z = -21.222555 },
-    { x = -5.214560, y = 0.046522, z = -20.280220 },
-    { x = -4.779529, y = -0.048305, z = -19.351633 },
-    { x = -4.757209, y = -0.021693, z = -18.194023 },
-    { x = -5.138152, y = -0.000450, z = -17.254173 },
-    { x = -5.685457, y = 0.173866, z = -16.248564 },
-    { x = -6.275849, y = 0.266052, z = -15.243981 },
-    { x = -7.196375, y = 0.403362, z = -13.666089 },
-    { x = -7.766060, y = 0.352119, z = -12.689950 },
-    { x = -8.280642, y = 0.241637, z = -11.799251 },
-    { x = -8.828505, y = 0.098458, z = -10.895535 },
-    { x = -9.351592, y = 0.039748, z = -9.948843 },
-    { x = -9.856394, y = 0.036026, z = -9.068656 },
+    { x = -5.454, y =  0.151, z = -16.361 },
+    { x = -5.997, y =  0.229, z = -15.475 },
+    { x = -6.583, y =  0.317, z = -14.525 },
+    { x = -7.574, y =  0.365, z = -12.942 },
+    { x = -7.069, y =  0.385, z = -13.867 },
+    { x = -6.566, y =  0.312, z = -14.742 },
+    { x = -5.677, y =  0.173, z = -16.241 },
+    { x = -5.162, y =  0.021, z = -17.109 },
+    { x = -4.725, y = -0.023, z = -18.175 },
+    { x = -4.883, y = -0.042, z = -19.253 },
+    { x = -5.294, y =  0.021, z = -20.336 },
+    { x = -5.633, y =  0.113, z = -21.418 },
+    { x = -5.906, y =  0.203, z = -22.542 },
+    { x = -5.658, y =  0.117, z = -21.445 },
+    { x = -5.274, y =  0.023, z = -20.410 },
+    { x = -4.832, y = -0.049, z = -19.479 },
+    { x = -4.750, y = -0.025, z = -18.312 },
+    { x = -5.153, y =  0.002, z = -17.249 },
+    { x = -5.639, y =  0.186, z = -16.335 },
+    { x = -6.159, y =  0.248, z = -15.446 },
+    { x = -7.253, y =  0.405, z = -13.568 },
+    { x = -7.804, y =  0.349, z = -12.626 },
+    { x = -8.375, y =  0.223, z = -11.646 },
+    { x = -8.895, y =  0.077, z = -10.770 },
+    { x = -9.384, y =  0.016, z =  -9.885 },
+    { x = -9.939, y =  0.143, z =  -8.935 },
+    { x = -9.423, y = -0.025, z =  -9.817 },
+    { x = -8.589, y =  0.151, z = -11.248 },
+    { x = -8.095, y =  0.276, z = -12.124 },
+    { x = -7.562, y =  0.374, z = -13.046 },
+    { x = -5.645, y =  0.185, z = -16.293 },
+    { x = -5.058, y = -0.015, z = -17.285 },
+    { x = -4.725, y = -0.025, z = -18.265 },
+    { x = -4.923, y = -0.043, z = -19.378 },
+    { x = -5.294, y =  0.021, z = -20.338 },
+    { x = -5.607, y =  0.105, z = -21.323 },
+    { x = -5.850, y =  0.184, z = -22.303 },
+    { x = -5.586, y =  0.097, z = -21.223 },
+    { x = -5.215, y =  0.047, z = -20.280 },
+    { x = -4.780, y = -0.048, z = -19.352 },
+    { x = -4.757, y = -0.022, z = -18.194 },
+    { x = -5.138, y =  0.000, z = -17.254 },
+    { x = -5.685, y =  0.174, z = -16.249 },
+    { x = -6.276, y =  0.266, z = -15.244 },
+    { x = -7.196, y =  0.403, z = -13.666 },
+    { x = -7.766, y =  0.352, z = -12.690 },
+    { x = -8.281, y =  0.242, z = -11.799 },
+    { x = -8.829, y =  0.098, z = -10.896 },
+    { x = -9.352, y =  0.040, z =  -9.949 },
+    { x = -9.856, y =  0.036, z =  -9.069 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(pathNodes))
     npc:pathThrough(pathNodes, xi.path.flag.PATROL)
-end
-
-entity.onTrigger = function(player, npc)
-    local vault = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
-    local mLvl = player:getMainLvl()
-
-    if
-        vault == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.NORG) >= 3 and
-        mLvl >= 5
-    then
-        player:startEvent(36, xi.keyItem.SEALED_IRON_BOX) -- Start quest
-    elseif vault == xi.questStatus.QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.keyItem.SEALED_IRON_BOX) then
-            player:startEvent(38) -- Finish quest
-        else
-            player:startEvent(37, xi.keyItem.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
-        end
-    elseif vault == xi.questStatus.QUEST_COMPLETED then
-        player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
-    end
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 36 and option == 1 then
-        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
-    elseif csid == 38 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
-        else
-            player:delKeyItem(xi.keyItem.SEALED_IRON_BOX)
-            player:addItem(xi.item.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
-            player:addFame(xi.fameArea.NORG, 30)
-            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
-        end
-    end
 end
 
 return entity
