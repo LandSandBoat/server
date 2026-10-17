@@ -19,6 +19,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7069, -- You can't fish here.
+        YOU_SEE_SOMETHING_SHINY       = 7340, -- You see something shiny on the ground...
         MINING_IS_POSSIBLE_HERE       = 7341, -- Mining is possible here if you have <item>.
         MUSHROOM_NEEDS_FERTILIZER     = 7426, -- There is a mushroom growing here. It might grow larger if it had some fertilizer.
         MUSHROOM_IS_GROWING_HERE      = 7427, -- There is a mushroom growing here.
