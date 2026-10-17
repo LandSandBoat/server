@@ -555,7 +555,7 @@
     AUTO_SHIELD_BASH_DELAY       = 843, // Reduces the Automaton's global shield bash delay
     AUTO_MAGIC_COOLDOWN          = 844, // Adjusts the Automaton's global magic cooldown. (negative value reduces cooldown, positive value increases cooldown)
     AUTO_HEALING_DELAY           = 845, // Reduces the Automaton's global healing delay
-    AUTO_HEALING_THRESHOLD       = 846, // Increases the healing trigger threshold
+    AUTO_HEALING_THRESHOLD       = 846, // Sets the automaton healing threshold to this amount
     BURDEN_DECAY                 = 847, // Increases amount of burden removed per tick
     AUTO_SHIELD_BASH_SLOW        = 848, // Adds a slow effect to Shield Bash
     AUTO_TP_EFFICIENCY           = 849, // Causes the Automaton to wait to form a skillchain when its master is > 90% TP
