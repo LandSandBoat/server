@@ -769,9 +769,9 @@ auto CalculateAutomatonSkills(CCharEntity* PMaster, uint8 mlvl) -> skills_t&
 {
     auto& tempSkills = PMaster->automatonInfo_.automatonSkills;
 
-    tempSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMelee, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMelee));
-    tempSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonRanged));
-    tempSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMagic));
+    tempSkills.automaton_melee  = std::min<uint16>(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMelee, mlvl), PMaster->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonMelee)] / 10);
+    tempSkills.automaton_ranged = std::min<uint16>(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl), PMaster->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonRanged)] / 10);
+    tempSkills.automaton_magic  = std::min<uint16>(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl), PMaster->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonMagic)] / 10);
 
     // Set capped flags
     for (int i = 22; i <= 24; ++i)

@@ -74,11 +74,11 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
     const uint16 amaCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMagic, jobLevel);
     const uint16 amaBonus   = PChar->getMod(xi::Mod::AUTO_MAGIC_SKILL) + meritbonus;
 
-    packet.MeleeSkill     = std::min(ameCap, PChar->GetSkill(xi::SkillType::AutomatonMelee)) + ameBonus;
+    packet.MeleeSkill     = std::min<uint16>(ameCap, PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonMelee)] / 10) + ameBonus;
     packet.MeleeSkillCap  = ameCap + ameBonus;
-    packet.RangedSkill    = std::min(araCap, PChar->GetSkill(xi::SkillType::AutomatonRanged)) + araBonus;
+    packet.RangedSkill    = std::min<uint16>(araCap, PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonRanged)] / 10) + araBonus;
     packet.RangedSkillCap = araCap + araBonus;
-    packet.MagicSkill     = std::min(amaCap, PChar->GetSkill(xi::SkillType::AutomatonMagic)) + amaBonus;
+    packet.MagicSkill     = std::min<uint16>(amaCap, PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonMagic)] / 10) + amaBonus;
     packet.MagicSkillCap  = amaCap + amaBonus;
 
     if (puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMagic, jobLevel) == 0)
