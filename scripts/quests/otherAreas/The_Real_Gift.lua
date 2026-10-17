@@ -11,7 +11,6 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL
 
 quest.reward =
 {
-    item  = xi.item.GLASS_FIBER_FISHING_ROD,
     title = xi.title.THE_LOVE_DOCTOR,
 }
 
@@ -21,8 +20,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA) == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) >= xi.questStatus.QUEST_COMPLETED and
-                xi.settings.map.FISHING_ENABLE == true
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SELBINA] =
@@ -49,24 +47,46 @@ quest.sections =
         {
             ['Oswald'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(74, xi.item.SHALL_SHELL) -- Shall shells yield pearls
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Prog') ~= 0 or
+                        not npcUtil.tradeMatches(trade, { { xi.item.SHALL_SHELL, 1 } })
+                    then
+                        return
+                    end
+
+                    -- Retail gives the rod and takes the shell before the event starts.
+                    if not npcUtil.giveItem(player, xi.item.GLASS_FIBER_FISHING_ROD, { silent = true }) then
+                        player:messageSpecial(zones[xi.zone.SELBINA].text.ITEM_CANNOT_BE_OBTAINED + 4, xi.item.GLASS_FIBER_FISHING_ROD)
+                        return
+                    end
+
+                    player:tradeComplete()
+                    quest:setVar(player, 'Prog', 1)
+
+                    return quest:progressEvent(75)
                 end,
 
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.SHALL_SHELL) then
-                        return quest:progressEvent(75) -- You're so fantastic! Thank you!
+                onTrigger = function(player, npc)
+                    -- The reward was already given if the player disconnected during the event.
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(75)
                     end
+
+                    return quest:event(74, xi.item.SHALL_SHELL) -- Shall shells yield pearls
                 end,
             },
 
             onEventFinish =
             {
                 [75] = function(player, csid, option, npc)
-                    if quest:complete(player) then
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        quest:complete(player)
+                    then
                         player:addFame(xi.fameArea.SANDORIA, 10)
                         player:addFame(xi.fameArea.BASTOK, 10)
-                        player:confirmTrade()
+                        player:messageSpecial(zones[xi.zone.SELBINA].text.ITEM_OBTAINED, xi.item.GLASS_FIBER_FISHING_ROD)
                     end
                 end,
             },
