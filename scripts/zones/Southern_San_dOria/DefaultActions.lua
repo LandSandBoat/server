@@ -49,5 +49,5 @@ return {
     ['Taumila']              = { text = ID.text.TAUMILA_DIALOG },
     ['Valderotaux']          = { event = 58 },
     ['Varchet']              = { event = 525 },
-    ['Well']                 = { text = ID.text.YOU_FIND_A_WELL },
+    ['Well']                 = { messageSpecial = ID.text.YOU_FIND_A_WELL },
 }
