@@ -27,6 +27,7 @@
 #include "common/zmq/zmq_service.h"
 
 #include "character_cache.h"
+#include "common/replica/owner.h"
 #include "world_engine.h"
 #include "zone_settings.h"
 
@@ -42,6 +43,9 @@ public:
     IPCServer(WorldEngine& worldServer, ZMQService& zmqService);
 
     void handleIncomingMessages();
+
+    // where world systems get the stores they own
+    auto replica() -> xi::replica::Owner&;
 
     template <typename T>
     void sendMessage(const IPP& ipp, const T& message);
@@ -110,6 +114,7 @@ public:
     void handleMessage_LinkshellRemove(const IPP& ipp, const ipc::LinkshellRemove& message);
     void handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::LinkshellSetMessage& message);
     void handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction& message);
+    void handleMessage_ReplicaSync(const IPP& ipp, const ipc::ReplicaSync& message);
     void handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message);
     void handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message);
     void handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message);
@@ -127,10 +132,11 @@ public:
 private:
     WorldEngine& worldServer_;
 
-    CharacterCache characterCache_;
-    ZoneSettings   zoneSettings_;
+    CharacterCache     characterCache_;
+    ZoneSettings       zoneSettings_;
+    xi::replica::Owner replica_;
 
-    ipc::Channel<IPPMessage> channel_;
+    ipc::Channel<IPPFrame> channel_;
 };
 
 //
@@ -144,8 +150,7 @@ void IPCServer::sendMessage(const IPP& ipp, const T& message)
 
     DebugIPCFmt("Sending {} message to {}", ipc::toStringV<T>, ipp.toString());
 
-    const auto bytes = ipc::toBytesWithHeader<T>(message);
-    channel_.send(IPPMessage{ ipp, std::vector<uint8>{ bytes.begin(), bytes.end() } });
+    channel_.send(IPPFrame{ ipp, ipc::toFrame(ipc::toBytesWithHeader<T>(message)) });
 }
 
 template <typename T>
@@ -155,9 +160,12 @@ void IPCServer::broadcastMessage(const T& message)
 
     DebugIPCFmt("Broadcasting {} message to all zone endpoints", ipc::toStringV<T>);
 
+    // serialize once, share the frame
+    auto frame = ipc::toFrame(ipc::toBytesWithHeader<T>(message));
     for (const auto& ipp : zoneSettings_.mapEndpoints_)
     {
-        const auto bytes = ipc::toBytesWithHeader<T>(message);
-        channel_.send(IPPMessage{ ipp, std::vector<uint8>{ bytes.begin(), bytes.end() } });
+        auto shared = zmq::message_t{};
+        shared.copy(frame);
+        channel_.send(IPPFrame{ ipp, std::move(shared) });
     }
 }

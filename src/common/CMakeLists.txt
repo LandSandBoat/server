@@ -1,4 +1,13 @@
 set(COMMON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/mirror.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/mirror.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/mirrored.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/mirrored_impl.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/owned.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/owned_impl.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/owner.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/owner.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/replica/replicable.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zmq/channel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zmq/endpoint.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zmq/endpoint.cpp

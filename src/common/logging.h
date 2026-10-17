@@ -233,6 +233,7 @@ inline auto format_as(type v) \
 // Debug Loggers
 #define DebugSockets(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_SOCKETS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugIPC(...)         LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_IPC", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugReplica(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_REPLICA", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugNavmesh(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_NAVMESH",__FILE__, __LINE__, __VA_ARGS__)
 #define DebugPackets(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PACKETS",__FILE__, __LINE__, __VA_ARGS__)
 #define DebugActions(...)     LOGGER_BODY_CONDITIONAL(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_ACTIONS", __FILE__, __LINE__, __VA_ARGS__)
@@ -250,6 +251,7 @@ inline auto format_as(type v) \
 // Debug Loggers fmt variants
 #define DebugSocketsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_SOCKETS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugIPCFmt(...)         LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_IPC", __FILE__, __LINE__, __VA_ARGS__)
+#define DebugReplicaFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_REPLICA", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugNavmeshFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_NAVMESH", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugPacketsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_PACKETS", __FILE__, __LINE__, __VA_ARGS__)
 #define DebugActionsFmt(...)     LOGGER_BODY_CONDITIONAL_FMT(SPDLOG_LOGGER_DEBUG, "debug", "logging.DEBUG_ACTIONS", __FILE__, __LINE__, __VA_ARGS__)

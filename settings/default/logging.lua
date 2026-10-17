@@ -49,6 +49,7 @@ xi.settings.logging =
     -- Specific Debug loggers
     DEBUG_SOCKETS        = false, -- Calls in C++: DebugSockets(...)
     DEBUG_IPC            = false, -- Calls in C++: DebugIPC(...)
+    DEBUG_REPLICA        = false, -- Calls in C++: DebugReplica(...)
     DEBUG_NAVMESH        = false, -- Calls in C++: DebugNavmesh(...)
     DEBUG_PACKETS        = false, -- Calls in C++: DebugPackets(...)
     DEBUG_ACTIONS        = false, -- Calls in C++: DebugActions(...)
