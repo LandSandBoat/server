@@ -39,7 +39,10 @@ g_mixins.families.empty_terroanima = function(emptyMob)
         doTerrorRun(mob)
     end)
 
-    emptyMob:addListener('DEATH', 'EMPTY_TERROANIMA_DEATH', function(mob)
+    emptyMob:addListener('DESPAWN', 'EMPTY_TERROANIMA_DESPAWN', function(mob)
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
         mob:setRoamFlags(0)
     end)
 end
