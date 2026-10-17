@@ -378,7 +378,7 @@ xi.shop.generalGuildStock =
         { xi.item.PINCH_OF_POISON_DUST,          320, xi.craftRank.RECRUIT    },
         { xi.item.VIAL_OF_SLIME_OIL,            1500, xi.craftRank.INITIATE   },
         { xi.item.PINCH_OF_BOMB_ASH,             515, xi.craftRank.INITIATE   },
-        { xi.item.BOTTLE_OF_AHRIMAN_TEARS,       200, xi.craftRank.INITIATE   },
+        { xi.item.BOTTLE_OF_AHRIMAN_TEARS,      1000, xi.craftRank.INITIATE   },
         { xi.item.LOOP_OF_GLASS_FIBER,          1200, xi.craftRank.NOVICE     },
         { xi.item.JAR_OF_FIRESAND,              5000, xi.craftRank.NOVICE     },
         { xi.item.FLASK_OF_VITRIOL,              700, xi.craftRank.APPRENTICE },
