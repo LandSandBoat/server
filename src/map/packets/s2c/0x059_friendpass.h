@@ -31,7 +31,7 @@ public:
     struct PacketData
     {
         int32_t  leftNum;    // PS2: leftNum
-        int32_t  leftDays;   // PS2: leftDays
+        int32_t  leftHours;  // PS2: leftDays
         int32_t  passPop;    // PS2: passPop
         char     String[16]; // PS2: String
         char     Type;       // PS2: Type
@@ -39,5 +39,5 @@ public:
         uint16_t padding00;  // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_FRIENDPASS(uint32_t worldPass);
+    GP_SERV_COMMAND_FRIENDPASS(uint8_t type, int32_t leftNum, int32_t leftHours, int32_t price, const std::string& code);
 };

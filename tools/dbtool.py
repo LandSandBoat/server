@@ -226,6 +226,7 @@ player_data = [
     "char_style.sql",
     "char_unlocks.sql",
     "char_vars.sql",
+    "char_world_passes.sql",
     "chars.sql",
     "chocobo_race_quills.sql",
     "chocobo_race_results.sql",

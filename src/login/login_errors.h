@@ -32,9 +32,12 @@ enum errorCode : uint16_t
     CHARACTER_ALREADY_LOGGED_IN             = 201, // "Same character already logged in.\nPlease wait a few minutes before trying to reconnect."
     WORLD_IS_FULL                           = 208, // "Unable to log on to world server.\nServer currently congested." (FFXI-3208)
     FAILED_TO_REGISTER_WITH_THE_NAME_SERVER = 314, // "Failed to register with the name server."
+    INCORRECT_WORLD_PASS                    = 316, // "Incorrect World Pass."
+    WORLD_PASS_EXPIRED                      = 317, // "World Pass expired."
     CHARACTERS_PARAMETERS_ARE_INCORRECT     = 321, // "Character's parameters are incorrect."
     GAMES_DATA_HAS_BEEN_UPDATED             = 331, // "The games data has been updated."
     COULD_NOT_CONNECT_TO_LOBBY_SERVER       = 332, // "Could not connect to lobby server.\nPlease check this title's news for announcements."
+    WORLD_PASS_FIRST_CHARACTER_ONLY         = 339, // "A Gold World Pass is valid for your first character only."
 };
 
 } // namespace loginErrors

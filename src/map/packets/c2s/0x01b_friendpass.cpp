@@ -22,30 +22,19 @@
 #include "0x01b_friendpass.h"
 
 #include "entities/char_entity.h"
+#include "lua/luautils.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x059_friendpass.h"
 
 auto GP_CLI_COMMAND_FRIENDPASS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // Not implemented.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent })
+        .isInEvent()
         .oneOf<GP_CLI_COMMAND_FRIENDPASS_PARA>(this->Para);
 }
 
 void GP_CLI_COMMAND_FRIENDPASS::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    switch (static_cast<GP_CLI_COMMAND_FRIENDPASS_PARA>(this->Para))
-    {
-        case GP_CLI_COMMAND_FRIENDPASS_PARA::BeginPurchase:
-            break;
-        case GP_CLI_COMMAND_FRIENDPASS_PARA::ConfirmPurchase:
-            break;
-        case GP_CLI_COMMAND_FRIENDPASS_PARA::BeginGoldPurchase:
-            break;
-        case GP_CLI_COMMAND_FRIENDPASS_PARA::ConfirmGoldPurchase:
-            break;
-    }
-
-    PChar->pushPacket<GP_SERV_COMMAND_FRIENDPASS>(this->Para & 1 ? static_cast<uint32>(xirand::GetRandomNumber(9999999999)) : 0);
+    const auto reply = luautils::OnWorldPassRequest(PChar, this->Para);
+    PChar->pushPacket<GP_SERV_COMMAND_FRIENDPASS>(reply.type, reply.leftNum, reply.leftHours, reply.price, reply.code);
 }

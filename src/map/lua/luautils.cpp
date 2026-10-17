@@ -376,6 +376,11 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("SetServerVariable", &luautils::SetServerVariable);
     lua.set_function("GetVolatileServerVariable", &luautils::GetVolatileServerVariable);
     lua.set_function("SetVolatileServerVariable", &luautils::SetVolatileServerVariable);
+    lua.set_function("GetActiveWorldPass", &luautils::GetActiveWorldPass);
+    lua.set_function("IssueWorldPass", &luautils::IssueWorldPass);
+    lua.set_function("GetWorldPassInvite", &luautils::GetWorldPassInvite);
+    lua.set_function("SetWorldPassClaims", &luautils::SetWorldPassClaims);
+    lua.set_function("CountWorldPassInvites", &luautils::CountWorldPassInvites);
     lua.set_function("GetCharVar", &luautils::GetCharVar);
     lua.set_function("SetCharVar", &luautils::SetCharVar);
     lua.set_function("ClearCharVarFromAll", &luautils::ClearCharVarFromAll);
@@ -4870,6 +4875,48 @@ void OnMonstrosityReturnToEntrance(CCharEntity* PChar)
     }
 }
 
+auto OnWorldPassRequest(CCharEntity* PChar, const uint16 para) -> WorldPassReply
+{
+    TracyZoneScoped;
+
+    // the client shows "unable to connect" for these and never hangs waiting
+    WorldPassReply reply;
+    if (para & 1)
+    {
+        reply.type = 5; // unavailable
+    }
+
+    sol::function onRequest = lua["xi"]["worldPass"]["onRequest"];
+    if (!onRequest.valid())
+    {
+        ShowError("luautils::OnWorldPassRequest: function not found");
+        return reply;
+    }
+
+    auto result = onRequest(PChar, para, PChar->currentEvent->eventId);
+    if (!result.valid())
+    {
+        sol::error err = result;
+        ShowError("luautils::OnWorldPassRequest: %s", err.what());
+        return reply;
+    }
+
+    if (result.get_type() != sol::type::table)
+    {
+        return reply;
+    }
+
+    const sol::table table = result;
+
+    reply.type      = table.get_or<uint8>("type", reply.type);
+    reply.leftNum   = table.get_or<int32>("leftNum", reply.leftNum);
+    reply.leftHours = table.get_or<int32>("leftHours", reply.leftHours);
+    reply.price     = table.get_or<int32>("price", reply.price);
+    reply.code      = table.get_or<std::string>("code", reply.code);
+
+    return reply;
+}
+
 int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell)
 {
     TracyZoneScoped;
@@ -5398,6 +5445,65 @@ void SetVolatileServerVariable(const std::string& varName, int32 value, const so
     }
 
     serverutils::SetVolatileServerVar(varName, value, varTimestamp);
+}
+
+auto GetActiveWorldPass(const uint32 inviterId) -> sol::object
+{
+    const auto rset = db::preparedStmt("SELECT code, expiry FROM char_world_passes WHERE inviter = ? AND expiry > UNIX_TIMESTAMP() ORDER BY expiry DESC LIMIT 1", inviterId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        auto table      = lua.create_table();
+        table["code"]   = rset->get<uint32>("code");
+        table["expiry"] = rset->get<uint32>("expiry");
+
+        return table;
+    }
+
+    return sol::lua_nil;
+}
+
+auto IssueWorldPass(const uint32 inviterId, const uint32 expiry) -> uint32
+{
+    const auto code = xirand::GetRandomNumber<uint32>(1, std::numeric_limits<uint32>::max());
+    const auto rset = db::preparedStmt("INSERT IGNORE INTO char_world_passes (code, inviter, expiry) VALUES (?, ?, ?)", code, inviterId, expiry);
+    if (!rset || !rset->rowsAffected())
+    {
+        return 0;
+    }
+
+    return code;
+}
+
+auto GetWorldPassInvite(const uint32 inviterId, const uint32 inviteeId) -> sol::object
+{
+    const auto rset = db::preparedStmt("SELECT joined, invitee_claims, inviter_claims FROM char_world_passes WHERE inviter = ? AND invitee = ?", inviterId, inviteeId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        auto table             = lua.create_table();
+        table["joined"]        = rset->get<uint32>("joined");
+        table["inviteeClaims"] = rset->get<uint8>("invitee_claims");
+        table["inviterClaims"] = rset->get<uint8>("inviter_claims");
+
+        return table;
+    }
+
+    return sol::lua_nil;
+}
+
+void SetWorldPassClaims(const uint32 inviteeId, const uint8 inviteeClaims, const uint8 inviterClaims)
+{
+    db::preparedStmt("UPDATE char_world_passes SET invitee_claims = ?, inviter_claims = ? WHERE invitee = ?", inviteeClaims, inviterClaims, inviteeId);
+}
+
+auto CountWorldPassInvites(const uint32 inviterId) -> uint32
+{
+    const auto rset = db::preparedStmt("SELECT COUNT(*) AS invites FROM char_world_passes WHERE inviter = ? AND inviter_claims <> 0", inviterId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        return rset->get<uint32>("invites");
+    }
+
+    return 0;
 }
 
 int32 GetCharVar(uint32 charId, const std::string& varName)

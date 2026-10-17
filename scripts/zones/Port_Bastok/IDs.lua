@@ -28,6 +28,7 @@ zones[xi.zone.PORT_BASTOK] =
         CONQUEST_BASE                 = 6550,  -- Tallying conquest results...
         TENSHODO_SHOP_OPEN_DIALOG     = 6751,  -- Ah, one of our members. Welcome to the Tenshodo shop.
         MOG_LOCKER_OFFSET             = 6849,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        WORLD_PASS_PARTY_CHANGED      = 6988,  -- Your party makeup has changed so you were unable to receive the item. Please try again.
         MAP_MARKER_TUTORIAL           = 7122,  -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
         FISHING_MESSAGE_OFFSET        = 7125,  -- You can't fish here.
         RECEIVE_BAYLD                 = 7223,  -- You receive <number> bayld!

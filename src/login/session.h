@@ -38,6 +38,7 @@ struct session_t
     uint32      serverIP                  = 0;
     uint32      requestedCharacterID      = 0;
     std::string requestedNewCharacterName = "";
+    std::string requestedFriendPass       = ""; // the Gold World Pass entered alongside the new character name
     bool        versionMismatch           = false;
     uint32      keyCounter                = 0; // the client's lobby key counter, followed in view_session
     uint8       keyRequest                = 0; // the last view request, which decides whether an error reply steps the counter

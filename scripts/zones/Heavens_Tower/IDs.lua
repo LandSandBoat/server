@@ -24,6 +24,7 @@ zones[xi.zone.HEAVENS_TOWER] =
         YOU_LEARNED_TRUST             = 7199, -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO       = 7200, -- You are now able to call multiple alter egos.
         YOU_ACCEPT_THE_MISSION        = 7337, -- You have accepted the mission.
+        WORLD_PASS_PARTY_CHANGED      = 7365, -- Your party makeup has changed so you were unable to receive the item. Please try again.
         FISHING_MESSAGE_OFFSET        = 7390, -- You can't fish here.
         INVALID_ENSIGNIAS             = 7622, -- Your invalid ensignias have been disposed of.
         CELEBRATORY_GOODS             = 9124, -- An assortment of celebratory goods is available for purchase.
