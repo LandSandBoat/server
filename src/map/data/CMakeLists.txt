@@ -66,3 +66,13 @@ add_custom_target(data_schema_check
     USES_TERMINAL
 )
 add_dependencies(data_schema_check data_schema_generate)
+
+add_test(NAME data_schema_verify
+    COMMAND $<TARGET_FILE:xi_data_schema> --verify-data
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+add_test(NAME data_schema_validate
+    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+set_tests_properties(data_schema_verify data_schema_validate PROPERTIES LABELS "schema")

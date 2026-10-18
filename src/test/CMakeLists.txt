@@ -87,3 +87,11 @@ xi_precompile_headers(xi_test)
 if(TRACY_ENABLE)
     set_target_properties(xi_test PROPERTIES OUTPUT_NAME xi_test_tracy)
 endif()
+
+# `ctest` runs the copy staged in the repo root, from the repo root, as CI does. It needs the
+# database set up first (tools/dbtool.py update). Catch2's tests run inside it at startup.
+add_test(NAME xi_test
+    COMMAND ${CMAKE_SOURCE_DIR}/$<TARGET_FILE_NAME:xi_test> --keep-going
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+set_tests_properties(xi_test PROPERTIES LABELS "needs-db")
