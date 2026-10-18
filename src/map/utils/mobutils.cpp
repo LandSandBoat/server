@@ -1102,7 +1102,18 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     // If a mob is going to dual wield, then it needs to have a sub slot.
     // Assume it is the same damage as the main slot.
     // Ordering matters. This has to come after SetupJob
-    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDamage(PMob->IsDualWielding() ? GetBaseWeaponDamage(PMob, SLOT_MAIN) : 0);
+    // TODO: hook up modmod/ecosystem/something to set damage. fomors/hydras probably aren't all blunt.
+    if (PMob->IsDualWielding())
+    {
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDamage(GetBaseWeaponDamage(PMob, SLOT_MAIN));
+
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDmgType(xi::DamageType::Slashing); // Assume Fomor/Hydra NIN are slashing
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDmgType(xi::DamageType::Slashing);
+    }
+    else
+    {
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDmgType(xi::DamageType::Blunt);
+    }
 
     SetupRoaming(PMob);
 
