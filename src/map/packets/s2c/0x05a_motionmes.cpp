@@ -37,7 +37,7 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
 
     if (emoteId == Emote::Salute)
     {
-        packet.Param = PChar->profile.nation;
+        packet.Param = static_cast<uint8>(PChar->profile.nation);
     }
     else if (emoteId == Emote::Hurray)
     {

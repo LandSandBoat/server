@@ -33,22 +33,22 @@ GP_SERV_COMMAND_CONQUEST::GP_SERV_COMMAND_CONQUEST(CCharEntity* PChar)
 
     const auto& conquestData = conquest::GetConquestData();
 
-    const uint8 sandoria_regions = conquestData.getRegionControlCount(NATION_SANDORIA);
-    const uint8 bastok_regions   = conquestData.getRegionControlCount(NATION_BASTOK);
-    const uint8 windurst_regions = conquestData.getRegionControlCount(NATION_WINDURST);
+    const uint8 sandoria_regions = conquestData.getRegionControlCount(xi::Nation::Sandoria);
+    const uint8 bastok_regions   = conquestData.getRegionControlCount(xi::Nation::Bastok);
+    const uint8 windurst_regions = conquestData.getRegionControlCount(xi::Nation::Windurst);
 
     for (auto regionId = static_cast<uint8>(REGION_TYPE::RONFAURE); regionId <= static_cast<uint8>(REGION_TYPE::TAVNAZIA); regionId++)
     {
-        const uint8 regionOwner = conquestData.getRegionOwner(static_cast<REGION_TYPE>(regionId));
-        const int32 sandoriaInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), NATION_SANDORIA);
-        const int32 bastokInf   = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), NATION_BASTOK);
-        const int32 windurstInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), NATION_WINDURST);
-        const int32 beastmenInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), NATION_BEASTMEN);
+        const auto  regionOwner = conquestData.getRegionOwner(static_cast<REGION_TYPE>(regionId));
+        const int32 sandoriaInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Sandoria);
+        const int32 bastokInf   = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Bastok);
+        const int32 windurstInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Windurst);
+        const int32 beastmenInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Beastmen);
 
         packet.Conquest.Regions[regionId].InfluenceRankingWithBeastmen = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf, beastmenInf);
         packet.Conquest.Regions[regionId].InfluenceRankingNoBeastmen   = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf);
         packet.Conquest.Regions[regionId].InfluenceGraphics            = conquest::GetInfluenceGraphics(sandoriaInf, bastokInf, windurstInf, beastmenInf);
-        packet.Conquest.Regions[regionId].Owner                        = regionOwner == NATION_NEUTRAL ? 0 : regionOwner + 1;
+        packet.Conquest.Regions[regionId].Owner                        = regionOwner == xi::Nation::Neutral ? 0 : static_cast<uint8>(regionOwner) + 1;
 
         const int64 total         = sandoriaInf + bastokInf + windurstInf;
         const int64 totalBeastmen = total + beastmenInf;

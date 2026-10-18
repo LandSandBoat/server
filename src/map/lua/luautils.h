@@ -302,9 +302,9 @@ auto GetMobByID(uint32 mobid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetEntityByID(uint32 mobid, const sol::object& instanceObj, const sol::object& arg3) -> CBaseEntity*;
 
 void  WeekUpdateConquest(uint8 updateType);
-uint8 GetRegionOwner(uint8 type);
+auto  GetRegionOwner(uint8 type) -> xi::Nation;
 uint8 GetRegionInfluence(uint8 type); // Return influence graphics
-uint8 GetNationRank(uint8 nation);
+auto  GetNationRank(xi::Nation nation) -> uint8;
 uint8 GetConquestBalance();
 bool  IsConquestAlliance();
 void  SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard

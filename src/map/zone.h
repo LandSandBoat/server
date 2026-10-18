@@ -59,6 +59,7 @@
 //
 
 #include "data/enums/continent.h"
+#include "data/enums/nation.h"
 #include "data/enums/weather.h"
 #include "data/enums/zone.h"
 #include "data/enums/zone_misc.h"
@@ -71,17 +72,6 @@ class SpawnHandler;
 #define MAX_ZONEID 300
 
 inline constexpr auto ZONE_NO_DESTINATION = static_cast<xi::ZoneId>(0xFFFF);
-
-enum NATION_TYPE : uint8
-{
-    NATION_SANDORIA = 0x00,
-    NATION_BASTOK   = 0x01,
-    NATION_WINDURST = 0x02,
-    NATION_BEASTMEN = 0x03,
-    NATION_NEUTRAL  = 0x05,
-};
-
-DECLARE_FORMAT_AS_UNDERLYING(NATION_TYPE);
 
 enum class REGION_TYPE : uint8
 {

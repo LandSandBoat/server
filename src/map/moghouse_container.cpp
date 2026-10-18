@@ -194,7 +194,7 @@ auto MogHouseContainer::visit(const uint32 hostId, const CBaseEntity* PNpc) -> b
     FOR_DB_SINGLE_RESULT(rset)
     {
         const auto hostZone   = rset->get<xi::ZoneId>("pos_zone");
-        const auto hostNation = rset->get<uint8>("nation");
+        const auto hostNation = rset->get<xi::Nation>("nation");
         if (zoneutils::GetCurrentRegion(hostZone) != region || !charutils::IsHomeNation(hostNation, region) || zoneutils::GetZoneIPP(hostZone) == 0)
         {
             return false;

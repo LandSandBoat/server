@@ -38,8 +38,8 @@ GP_SERV_COMMAND_MISSION::MISSION::MISSION(const CCharEntity* PChar)
     auto declinedRoVStart = PChar->getCharVar("[ROV]TalesBeginning");
 
     packet.Port           = 0xFFFF;
-    packet.Nation         = PChar->profile.nation;
-    packet.NationMission  = PChar->m_missionLog[PChar->profile.nation].current;
+    packet.Nation         = static_cast<uint8>(PChar->profile.nation);
+    packet.NationMission  = PChar->m_missionLog[static_cast<uint8>(PChar->profile.nation)].current;
     packet.Expansion_RotZ = declinedRoZStart > 0 ? 0 : PChar->m_missionLog[static_cast<uint8_t>(MissionLog::Zilart)].current;
     packet.Expansion_CoP  = declinedCoPStart > 0 ? 0 : PChar->m_missionLog[static_cast<uint8_t>(MissionLog::CoP)].current;
     // This updates status for multi-legged CoP missions

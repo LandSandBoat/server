@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.nation
+
+values:
+  sandoria: 0
+  bastok:   1
+  windurst: 2
+  beastmen: 3
+  other:    4
+  neutral:  5

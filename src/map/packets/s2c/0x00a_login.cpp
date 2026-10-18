@@ -56,11 +56,11 @@ auto GetMogHouseModelID(const CCharEntity* PChar) -> uint16
             case REGION_TYPE::SARUTA_FRONT:
                 return 219;
             case REGION_TYPE::SANDORIA:
-                return PChar->profile.nation == NATION_SANDORIA ? 0x0121 : 0x0101;
+                return PChar->profile.nation == xi::Nation::Sandoria ? 0x0121 : 0x0101;
             case REGION_TYPE::BASTOK:
-                return PChar->profile.nation == NATION_BASTOK ? 0x0122 : 0x0102;
+                return PChar->profile.nation == xi::Nation::Bastok ? 0x0122 : 0x0102;
             case REGION_TYPE::WINDURST:
-                return PChar->profile.nation == NATION_WINDURST ? 0x0123 : 0x0120;
+                return PChar->profile.nation == xi::Nation::Windurst ? 0x0123 : 0x0120;
             case REGION_TYPE::JEUNO:
                 return 0x0100;
             case REGION_TYPE::ADOULIN_ISLANDS:

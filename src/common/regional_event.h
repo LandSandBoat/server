@@ -84,9 +84,9 @@ struct ConquestRegionControlUpdate
 // M2W_AddInfluencePoints
 struct ConquestAddInfluencePoints
 {
-    int32  points;
-    uint32 nation;
-    uint8  region;
+    int32      points;
+    xi::Nation nation;
+    uint8      region;
 };
 
 // M2W_AddMobKills, M2W_AddPlayerHomepoints

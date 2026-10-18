@@ -23,6 +23,7 @@
 
 #include "aman.h"
 #include "data/enums/mog_house.h"
+#include "data/enums/nation.h"
 #include "enums/char_persist.h"
 #include "event_info.h"
 #include "gmcall_container.h"
@@ -101,7 +102,7 @@ struct Fame
 
 struct profile_t
 {
-    uint8 nation; // Your Nation Allegiance.
+    xi::Nation nation; // Your Nation Allegiance.
 
     // Moghouse data (bit-packed)
     // 0x0001: SANDORIA exit quest flag

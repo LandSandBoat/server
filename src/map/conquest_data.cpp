@@ -37,8 +37,8 @@ ConquestData::ConquestData()
         const auto regionId = rset->get<uint32>("region_id");
 
         region_control_t regionControl{};
-        regionControl.current    = rset->get<uint8>("region_control");
-        regionControl.prev       = rset->get<uint8>("region_control_prev");
+        regionControl.current    = rset->get<xi::Nation>("region_control");
+        regionControl.prev       = rset->get<xi::Nation>("region_control_prev");
         regionControls[regionId] = regionControl;
 
         influence_t influence{};
@@ -51,7 +51,7 @@ ConquestData::ConquestData()
     }
 }
 
-int32 ConquestData::getInfluence(REGION_TYPE region, NATION_TYPE nation) const
+auto ConquestData::getInfluence(const REGION_TYPE region, const xi::Nation nation) const -> int32
 {
     if (static_cast<std::size_t>(region) >= influences.size())
     {
@@ -61,21 +61,21 @@ int32 ConquestData::getInfluence(REGION_TYPE region, NATION_TYPE nation) const
 
     switch (nation)
     {
-        case NATION_SANDORIA:
+        case xi::Nation::Sandoria:
             return influences[(uint8)region].sandoria_influence;
-        case NATION_BASTOK:
+        case xi::Nation::Bastok:
             return influences[(uint8)region].bastok_influence;
-        case NATION_WINDURST:
+        case xi::Nation::Windurst:
             return influences[(uint8)region].windurst_influence;
-        case NATION_BEASTMEN:
+        case xi::Nation::Beastmen:
             return CalculateBeastmenInfluence(region, influences[(uint8)region]);
         default:
-            ShowWarning("Influence not known for nation: %d", nation);
+            ShowWarningFmt("Influence not known for nation: {}", nation);
             return 0;
     }
 }
 
-uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
+auto ConquestData::getRegionOwner(const REGION_TYPE region) const -> xi::Nation
 {
     uint8 regionNum = static_cast<uint8>(region);
 
@@ -92,7 +92,7 @@ uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
         case REGION_TYPE::PROMYVION:
         case REGION_TYPE::LUMORIA:
         case REGION_TYPE::LIMBUS:
-            return NATION_TYPE::NATION_BEASTMEN;
+            return xi::Nation::Beastmen;
         default:
             if (regionNum < regionControls.size())
             {
@@ -101,15 +101,15 @@ uint8 ConquestData::getRegionOwner(REGION_TYPE region) const
     }
 
     ShowError(fmt::format("Invalid conquest region passed to function ({})", regionNum));
-    return 0;
+    return xi::Nation::Sandoria;
 }
 
-uint8 ConquestData::getRegionControlCount(NATION_TYPE nation) const
+auto ConquestData::getRegionControlCount(const xi::Nation nation) const -> uint8
 {
     return static_cast<uint8>(std::ranges::count(regionControls, nation, &region_control_t::current));
 }
 
-uint8 ConquestData::getPrevRegionControlCount(NATION_TYPE nation) const
+auto ConquestData::getPrevRegionControlCount(const xi::Nation nation) const -> uint8
 {
     return static_cast<uint8>(std::ranges::count(regionControls, nation, &region_control_t::prev));
 }

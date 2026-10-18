@@ -1259,7 +1259,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         }
         case xi::Latent::NationCitizen:
         {
-            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
+            expression = m_POwner->profile.nation == static_cast<xi::Nation>(latentEffect.GetConditionsValue());
             break;
         }
         case xi::Latent::ZoneHomeNation:
@@ -1270,13 +1270,13 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             switch (nationRegion)
             {
                 case REGION_TYPE::SANDORIA:
-                    expression = m_POwner->profile.nation == 0 && region == nationRegion;
+                    expression = m_POwner->profile.nation == xi::Nation::Sandoria && region == nationRegion;
                     break;
                 case REGION_TYPE::BASTOK:
-                    expression = m_POwner->profile.nation == 1 && region == nationRegion;
+                    expression = m_POwner->profile.nation == xi::Nation::Bastok && region == nationRegion;
                     break;
                 case REGION_TYPE::WINDURST:
-                    expression = m_POwner->profile.nation == 2 && region == nationRegion;
+                    expression = m_POwner->profile.nation == xi::Nation::Windurst && region == nationRegion;
                     break;
                 default:
                     break;

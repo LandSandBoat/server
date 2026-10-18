@@ -118,17 +118,19 @@ void ConquestSystem::sendRegionControlsMsg(ConquestMessage msgType)
     });
 }
 
-bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
+auto ConquestSystem::updateInfluencePoints(int points, const xi::Nation nation, const REGION_TYPE region) -> bool
 {
     if (region == REGION_TYPE::UNKNOWN)
     {
         return false;
     }
 
-    if (nation > NATION_WINDURST)
+    if (nation > xi::Nation::Windurst)
     {
         return false;
     }
+
+    const auto nationIndex = static_cast<uint8>(nation);
 
     const auto rset = db::preparedStmt("SELECT sandoria_influence, bastok_influence, windurst_influence FROM conquest_system WHERE region_id = ?",
                                        static_cast<uint8>(region));
@@ -147,11 +149,11 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     // For 2nd and 3rd place, if their influence is less than half the 1st place's influence, they get 3x.
     // Else, 2nd and 3rd place get a 2x multiplier.
     const int firstPlaceInfluence = std::max({ influences[0], influences[1], influences[2] });
-    if (influences[nation] < firstPlaceInfluence / 2)
+    if (influences[nationIndex] < firstPlaceInfluence / 2)
     {
         points *= 3;
     }
-    else if (influences[nation] < firstPlaceInfluence)
+    else if (influences[nationIndex] < firstPlaceInfluence)
     {
         points *= 2;
     }
@@ -165,22 +167,22 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     // Restricted by a factor of 100 because of packet lines in 0x05e_conquest.cpp
     constexpr int32 influenceCap = INT32_MAX / 100;
 
-    const int room = influenceCap - influences[nation];
+    const int room = influenceCap - influences[nationIndex];
 
     if (points <= room) // Nation is not full and there is space. Straight add.
     {
-        influences[nation] += points;
+        influences[nationIndex] += points;
     }
     else // Nation is full. Gains come out of the other nations.
     {
         // Fill the remaining room first, then decrease the other nations by the overflow.
-        influences[nation] += room;
+        influences[nationIndex] += room;
 
         const int overflow = points - room;
 
         for (auto i = 0u; i < 3; ++i)
         {
-            if (i != nation)
+            if (i != nationIndex)
             {
                 influences[i] -= std::min(influences[i], overflow); // Do not allow to drop below 0.
             }
@@ -246,22 +248,22 @@ void ConquestSystem::updateWeekConquest()
         const int32 windurst = influence.windurst_influence;
         const int32 beastmen = ConquestData::CalculateBeastmenInfluence(static_cast<REGION_TYPE>(regionId), influence);
 
-        uint8 control = NATION_NEUTRAL;
+        auto control = xi::Nation::Neutral;
         if (sandoria > bastok && sandoria > windurst && sandoria > beastmen)
         {
-            control = NATION_SANDORIA;
+            control = xi::Nation::Sandoria;
         }
         else if (bastok > sandoria && bastok > windurst && bastok > beastmen)
         {
-            control = NATION_BASTOK;
+            control = xi::Nation::Bastok;
         }
         else if (windurst > sandoria && windurst > bastok && windurst > beastmen)
         {
-            control = NATION_WINDURST;
+            control = xi::Nation::Windurst;
         }
         else if (beastmen > sandoria && beastmen > bastok && beastmen > windurst)
         {
-            control = NATION_BEASTMEN;
+            control = xi::Nation::Beastmen;
         }
 
         db::preparedStmt("UPDATE conquest_system SET region_control = ? WHERE region_id = ?", control, regionId);
@@ -324,8 +326,8 @@ auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
         while (rset->next())
         {
             region_control_t regionControl{};
-            regionControl.current = rset->get<uint8>("region_control");
-            regionControl.prev    = rset->get<uint8>("region_control_prev");
+            regionControl.current = rset->get<xi::Nation>("region_control");
+            regionControl.prev    = rset->get<xi::Nation>("region_control_prev");
             controllers.emplace_back(regionControl);
         }
     }

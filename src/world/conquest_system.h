@@ -59,7 +59,7 @@ public:
     void updateVanaHourlyConquest();
 
 private:
-    bool updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region);
+    auto updateInfluencePoints(int points, xi::Nation nation, REGION_TYPE region) -> bool;
     void addMobKills(int32 count, REGION_TYPE region);
     void addPlayerHomepoints(int32 count, REGION_TYPE region);
 

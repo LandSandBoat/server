@@ -386,7 +386,7 @@ auto LoadFromCharsSQL(CCharEntity* PChar) -> void
         PChar->profile.home_point.p.y         = rset->get<float>("home_y");
         PChar->profile.home_point.p.z         = rset->get<float>("home_z");
 
-        PChar->profile.nation = rset->get<uint8>("nation");
+        PChar->profile.nation = rset->get<xi::Nation>("nation");
 
         db::extractFromBlob(rset, "quests", PChar->m_questLog);
         db::extractFromBlob(rset, "keyitems", PChar->keys);
@@ -6853,11 +6853,11 @@ std::string GetConquestPointsName(CCharEntity* PChar)
 {
     switch (PChar->profile.nation)
     {
-        case 0:
+        case xi::Nation::Sandoria:
             return "sandoria_cp";
-        case 1:
+        case xi::Nation::Bastok:
             return "bastok_cp";
-        case 2:
+        case xi::Nation::Windurst:
             return "windurst_cp";
         default:
             ShowError("Invalid nation received, returning nothing.");
@@ -7746,16 +7746,16 @@ void loadDeathTimestamp(CCharEntity* PChar)
     }
 }
 
-auto IsHomeNation(const uint8 nation, const REGION_TYPE region) -> bool
+auto IsHomeNation(const xi::Nation nation, const REGION_TYPE region) -> bool
 {
     switch (region)
     {
         case REGION_TYPE::SANDORIA:
-            return nation == NATION_SANDORIA;
+            return nation == xi::Nation::Sandoria;
         case REGION_TYPE::BASTOK:
-            return nation == NATION_BASTOK;
+            return nation == xi::Nation::Bastok;
         case REGION_TYPE::WINDURST:
-            return nation == NATION_WINDURST;
+            return nation == xi::Nation::Windurst;
         default:
             return false;
     }

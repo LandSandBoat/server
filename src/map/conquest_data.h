@@ -25,12 +25,13 @@
 
 #include "common/cbasetypes.h"
 #include "common/database.h"
+#include "data/enums/nation.h"
 #include "zone.h"
 
 struct region_control_t
 {
-    uint8 current;
-    uint8 prev;
+    xi::Nation current;
+    xi::Nation prev;
 };
 
 struct influence_t
@@ -55,23 +56,23 @@ public:
     //
     // Gets the influence points for a given nation in a given region.
     //
-    int32 getInfluence(REGION_TYPE region, NATION_TYPE nation) const;
+    auto getInfluence(REGION_TYPE region, xi::Nation nation) const -> int32;
 
     //
     // Gets the owner of a given region. That is, the one controlling this region since last tally.
     //
-    uint8 getRegionOwner(REGION_TYPE region) const;
+    auto getRegionOwner(REGION_TYPE region) const -> xi::Nation;
 
     //
     // Gets the number of regions controlled by a given nation.
     //
-    uint8 getRegionControlCount(NATION_TYPE nation) const;
+    auto getRegionControlCount(xi::Nation nation) const -> uint8;
 
     //
     // Gets the number of regions controlled by a given nation in the
     // previous tally.
     //
-    uint8 getPrevRegionControlCount(NATION_TYPE nation) const;
+    auto getPrevRegionControlCount(xi::Nation nation) const -> uint8;
 
     //
     // Gets the array of region controls, indexed by regionId.

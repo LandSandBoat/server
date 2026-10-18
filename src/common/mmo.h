@@ -25,6 +25,7 @@
 #include "timer.h"
 #include "types/position.h"
 
+#include "data/enums/nation.h"
 #include "data/enums/zone.h"
 #include "xi.h"
 
@@ -414,7 +415,7 @@ public:
 
     uint8      m_mjob;
     xi::ZoneId m_zone;
-    uint8      m_nation;
+    xi::Nation m_nation;
 
     look_t m_look;
 };

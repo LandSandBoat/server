@@ -1718,7 +1718,7 @@ void WeekUpdateConquest(uint8 updateType)
     conquest::UpdateConquestGM(static_cast<ConquestUpdate>(updateType));
 }
 
-uint8 GetRegionOwner(uint8 type)
+auto GetRegionOwner(const uint8 type) -> xi::Nation
 {
     TracyZoneScoped;
 
@@ -1732,7 +1732,7 @@ uint8 GetRegionInfluence(uint8 type)
     return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
 }
 
-uint8 GetNationRank(uint8 nation)
+auto GetNationRank(const xi::Nation nation) -> uint8
 {
     TracyZoneScoped;
 
@@ -1744,13 +1744,13 @@ uint8 GetNationRank(uint8 nation)
     uint8 rank = 0;
     switch (nation)
     {
-        case NATION_SANDORIA:
+        case xi::Nation::Sandoria:
             rank = sandoria;
             break;
-        case NATION_BASTOK:
+        case xi::Nation::Bastok:
             rank = bastok;
             break;
-        case NATION_WINDURST:
+        case xi::Nation::Windurst:
             rank = windurst;
             break;
         default:
