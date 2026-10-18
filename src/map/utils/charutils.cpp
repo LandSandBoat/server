@@ -77,6 +77,7 @@
 #include "ability.h"
 #include "alliance.h"
 #include "conquest_system.h"
+#include "data/datasets/experience/dataset.h"
 #include "data/datasets/monstrosity/dataset.h"
 #include "data/enums/mob_mod.h"
 #include "grades.h"
@@ -97,6 +98,7 @@
 #include "treasure_pool.h"
 #include "unitychat.h"
 #include "universal_container.h"
+#include "utils/dataset_loader.h"
 #include "weapon_skill.h"
 #include "zone.h"
 
@@ -153,7 +155,6 @@
 // Number of rows in the exp table
 static constexpr int32                               ExpTableRowCount = 60;
 std::array<std::array<uint16, 20>, ExpTableRowCount> g_ExpTable;
-std::array<uint16, 100>                              g_ExpPerLevel;
 
 std::vector<std::pair<uint16, EMobDifficulty>> ExpToDifficultyTable = {};
 // Eventually loaded as something like...
@@ -204,6 +205,12 @@ struct CharPointsQueries
 };
 
 HashMap<std::string, CharPointsQueries> charPointsQueries;
+
+auto experience() -> const xi::data::Experience&
+{
+    static const auto data = xi::data::loadDataset<xi::data::datasets::experience::Dataset>();
+    return data;
+}
 
 } // namespace
 
@@ -4339,15 +4346,8 @@ void LoadExpTable()
         g_ExpTable = *baseTable;
     }
 
-    // Load the TNL (To Next Level) experience values from the database.
-    auto rset = db::preparedStmt("SELECT level, exp FROM exp_base LIMIT 100");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        if (const auto level = rset->get<uint8>("level") - 1; level < 100)
-        {
-            g_ExpPerLevel[level] = rset->get<uint16>("exp");
-        }
-    }
+    // pre-load exp tables
+    experience();
 
     // Load the /check experience difficulty curve
     auto expDifficultyCurveFunction = lua["xi"]["expDifficultyCurve"]["loadExpDifficultyCurve"];
@@ -4441,11 +4441,11 @@ uint32 GetBaseExp(uint8 charlvl, int16 moblvl)
  *                                                                       *
  ************************************************************************/
 
-uint32 GetExpNEXTLevel(uint8 charlvl)
+auto GetExpNEXTLevel(const uint8 charlvl) -> uint32
 {
-    if (charlvl > 0 && charlvl < 100)
+    if (charlvl < xi::data::kGrowthLevels)
     {
-        return g_ExpPerLevel[charlvl];
+        return experience().NextLevel[charlvl];
     }
     return 0;
 }
