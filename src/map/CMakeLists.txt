@@ -184,30 +184,42 @@ list(APPEND APP_SOURCES ${module_sources})
 xi_add_executable(xi_map mapserver.rc ${APP_SOURCES})
 add_dependencies(xi_map data_schema_generate)
 
-xi_add_library(xi_map_core ${MAP_CORE_SOURCES})
-add_dependencies(xi_map_core enum_codegen)
-target_include_directories(xi_map_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(xi_map_core
-    PUBLIC
+# What xi_map_core and its group libraries compile against, and what xi_map_core passes on.
+add_library(xi_map_deps INTERFACE)
+target_include_directories(xi_map_deps INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(xi_map_deps
+    INTERFACE
+        xi_common
         xi_data_core
         xi_ext_map
 )
 
-# The group libraries and xi_map_core all link each other, so the split buys parallel
-# compilation, not isolation. The subdirectories below add their sources.
+# One archive holding the objects of every group library below.
+add_library(xi_map_core STATIC)
+target_link_libraries(xi_map_core PUBLIC xi_map_deps)
+
+# The group libraries split xi_map_core up for parallel compilation, not isolation.
+# xi_map_core_objects owns the PCH; the subdirectories below add the other groups' sources.
 function(xi_add_map_group_library target)
-    add_library(${target} STATIC)
+    add_library(${target} OBJECT ${ARGN})
     add_dependencies(${target} enum_codegen)
-    target_link_libraries(${target} PUBLIC xi_map_core PRIVATE project_warnings)
-    target_link_libraries(xi_map_core PUBLIC ${target})
-    xi_reuse_pch(${target} xi_map_core)
+    target_link_libraries(${target} PRIVATE xi_map_deps project_warnings)
+    target_sources(xi_map_core PRIVATE $<TARGET_OBJECTS:${target}>)
 endfunction()
 
-xi_add_map_group_library(xi_map_lua)          # lua/
-xi_add_map_group_library(xi_map_battle)       # action/ ai/ data/ enums/ items/ transports/ utils/
-xi_add_map_group_library(xi_map_entities)     # entities/
-xi_add_map_group_library(xi_map_packets_c2s)  # packets/c2s/
-xi_add_map_group_library(xi_map_packets_s2c)  # packets/ packets/s2c/
+xi_add_map_group_library(xi_map_core_objects ${MAP_CORE_SOURCES})
+xi_precompile_headers(xi_map_core_objects)
+
+foreach(group
+    xi_map_lua          # lua/
+    xi_map_battle       # action/ ai/ data/ enums/ items/ transports/ utils/
+    xi_map_entities     # entities/
+    xi_map_packets_c2s  # packets/c2s/
+    xi_map_packets_s2c  # packets/ packets/s2c/
+)
+    xi_add_map_group_library(${group})
+    xi_reuse_pch(${group} xi_map_core_objects)
+endforeach()
 
 add_subdirectory(action)
 add_subdirectory(ai)
