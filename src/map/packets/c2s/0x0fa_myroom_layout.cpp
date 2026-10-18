@@ -103,8 +103,8 @@ auto collidesOnFloor(CItemFurnishing* other, const uint8 x, const uint8 z, const
         return false;
     }
 
-    // Stacked OnTable items live above the floor and don't conflict.
-    if (op == FurnishingPlacement::OnTable && other->getLevel() != 0)
+    // Stacked items live above the floor and don't conflict.
+    if (other->getLevel() != 0)
     {
         return false;
     }
