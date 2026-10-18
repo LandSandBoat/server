@@ -34,7 +34,16 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 # Generate compile_commands.json to make it easier to work with clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+# cmake/settings  General, compiler and linker settings
+# cmake/tools     Optional build tools: compiler cache, sanitizers, Valgrind, clang-tidy, fuzzing
+# cmake/find      Find modules for the libraries we take from the system or bundle under ext/
+# cmake/project   Dependency fetching, codegen, and the helpers our targets are declared with
+set(CMAKE_MODULE_PATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/settings
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/tools
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/find
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/project
+)
 include(Cache)
 include(CPMCache)
 include(CPM)
