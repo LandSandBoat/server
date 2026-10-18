@@ -1,7 +1,20 @@
 # Generated sources: version.cpp, the IPC stubs, and the enum/data codegen under build/generated.
 
-configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
-               ${CMAKE_BINARY_DIR}/generated/version.cpp)
+# Written at configure time so a fresh tree has it, then refreshed by xi_version on every build so
+# the binaries report the commit they were built from, not the one last configured.
+set(XI_VERSION_CPP ${CMAKE_BINARY_DIR}/generated/version.cpp)
+configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in ${XI_VERSION_CPP} @ONLY)
+add_custom_target(xi_version
+    COMMAND ${CMAKE_COMMAND}
+        -DGIT_EXECUTABLE=${GIT_EXECUTABLE}
+        -DSOURCE_DIR=${CMAKE_SOURCE_DIR}
+        -DINPUT=${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
+        -DOUTPUT=${XI_VERSION_CPP}
+        -P ${CMAKE_CURRENT_LIST_DIR}/Version.cmake
+    BYPRODUCTS ${XI_VERSION_CPP}
+    COMMENT "Checking git version info"
+    VERBATIM
+)
 
 set_property(
     DIRECTORY
