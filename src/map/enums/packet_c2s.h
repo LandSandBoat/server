@@ -38,7 +38,7 @@ enum class PacketC2S : uint16_t
     GP_CLI_COMMAND_CHARREQ2             = 0x017,
     GP_CLI_COMMAND_ACTION               = 0x01A,
     GP_CLI_COMMAND_FRIENDPASS           = 0x01B,
-    GP_CLI_COMMAND_UNKNOWN              = 0x01C,
+    GP_CLI_COMMAND_COMMAND_DATA_REQ     = 0x01C,
     GP_CLI_COMMAND_GM                   = 0x01E,
     GP_CLI_COMMAND_GMCOMMAND            = 0x01F,
     GP_CLI_COMMAND_ITEM_DUMP            = 0x028,

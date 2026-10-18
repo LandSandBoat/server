@@ -39,7 +39,7 @@
 #include "packets/c2s/0x017_charreq2.h"
 #include "packets/c2s/0x01a_action.h"
 #include "packets/c2s/0x01b_friendpass.h"
-#include "packets/c2s/0x01c_unknown.h"
+#include "packets/c2s/0x01c_command_data_req.h"
 #include "packets/c2s/0x01e_gm.h"
 #include "packets/c2s/0x01f_gmcommand.h"
 #include "packets/c2s/0x028_item_dump.h"
@@ -244,7 +244,7 @@ consteval auto buildPacketHandlers() -> std::array<PacketHandler, 512>
     registerPacket<GP_CLI_COMMAND_CHARREQ2>(handlers);
     registerPacket<GP_CLI_COMMAND_ACTION>(handlers);
     registerPacket<GP_CLI_COMMAND_FRIENDPASS>(handlers);
-    registerPacket<GP_CLI_COMMAND_UNKNOWN>(handlers);
+    registerPacket<GP_CLI_COMMAND_COMMAND_DATA_REQ>(handlers);
     registerPacket<GP_CLI_COMMAND_GM>(handlers);
     registerPacket<GP_CLI_COMMAND_GMCOMMAND>(handlers);
     registerPacket<GP_CLI_COMMAND_ITEM_DUMP>(handlers);
