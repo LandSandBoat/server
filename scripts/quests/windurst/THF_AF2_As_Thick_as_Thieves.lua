@@ -20,6 +20,17 @@ local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
 local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 
+-- 5 yalms out from the tower wall each ??? sits on
+local climbpixSpawn =
+{
+    ['qm2'] = {  191.4, 31.3, 209.0  },
+    ['qm3'] = {  410.0, 16.5, -134.0 },
+    ['qm4'] = {  124.7, -0.6, -234.4 },
+    ['qm5'] = { -119.5, 15.2, 50.6   },
+    ['qm6'] = {  366.0, 23.5, 12.5   },
+    ['qm7'] = { -190.0, 16.0, 270.6  },
+}
+
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
 
 quest.reward =
@@ -47,10 +58,19 @@ end
 
 local towerOnTrigger = function(player, npc)
     if not player:hasKeyItem(xi.keyItem.FIRST_SIGNED_FORGED_ENVELOPE) then
+        local climbpix = GetMobByID(sauromugueID.mob.CLIMBPIX_HIGHRISE)
+        if
+            climbpix and
+            not climbpix:isSpawned()
+        then
+            local spawnPos = climbpixSpawn[npc:getName()]
+            climbpix:setSpawn(spawnPos[1], spawnPos[2], spawnPos[3])
+        end
+
         if
             quest:getLocalVar(npc, 'Option') == 1 and
             not player:findItem(xi.item.GRAPNEL) and
-            npcUtil.popFromQM(player, npc, sauromugueID.mob.CLIMBPIX_HIGHRISE, { radius = 1, hide = 0 })
+            npcUtil.popFromQM(player, npc, sauromugueID.mob.CLIMBPIX_HIGHRISE, { hide = 0, look = true })
         then
             return quest:messageSpecial(sauromugueID.text.THF_AF_MOB)
         else
