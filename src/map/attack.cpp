@@ -630,7 +630,8 @@ void CAttack::ProcessDamage()
         m_baseDamage     = m_attacker->GetMainWeaponDmg();
         int32 kickDamage = 0;
 
-        if (m_attacker->objtype == TYPE_MOB)
+        // Player pets assigned H2H damage type should also be penalized
+        if (m_attacker->objtype == TYPE_MOB || m_attacker->objtype == TYPE_PET)
         {
             // Mobs use a different base damage formula than players.
             // H2H attacks from mobs have a base damage penalty applied based on what zone they are in.
