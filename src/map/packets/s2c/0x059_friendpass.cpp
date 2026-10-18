@@ -21,24 +21,15 @@
 
 #include "0x059_friendpass.h"
 
-GP_SERV_COMMAND_FRIENDPASS::GP_SERV_COMMAND_FRIENDPASS(uint32_t worldPass)
+GP_SERV_COMMAND_FRIENDPASS::GP_SERV_COMMAND_FRIENDPASS(const uint8_t type, const int32_t leftNum, const int32_t leftHours, const int32_t price, const std::string& code)
 {
     auto& packet = this->data();
 
-    // TODO: All of this is wrong
-    packet.passPop   = 10000; // price
-    packet.Type      = 0x03;
+    packet.leftNum   = leftNum;
+    packet.leftHours = leftHours;
+    packet.passPop   = price;
+    packet.Type      = type;
     packet.unknown21 = 0x01;
 
-    if (worldPass != 0)
-    {
-        packet.leftNum  = 1;   // number of uses left
-        packet.leftDays = 167; // pass becomes invalid in (hours)
-        packet.Type     = 0x06;
-
-        // Force to be 10 digits
-        const std::string strbuff = fmt::format("{:0>10}", worldPass);
-
-        std::memcpy(packet.String, strbuff.c_str(), strbuff.length());
-    }
+    std::memcpy(packet.String, code.data(), std::min(code.size(), sizeof(packet.String) - 1));
 }
