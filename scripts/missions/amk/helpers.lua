@@ -17,7 +17,7 @@ local validRegions = set{
     xi.region.ARAGONEU,
     xi.region.FAUREGANDI,
     xi.region.VALDEAUNIA,
-    xi.region.QUFIMISLAND,
+    xi.region.QUFIM_ISLAND,
     xi.region.LITELOR,
     xi.region.KUZOTZ,
     xi.region.VOLLBOW,

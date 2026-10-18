@@ -55,7 +55,7 @@ bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
                 // We update influence but do not immediately send this update to all map servers
                 // Influence updates are sent periodically via time_server instead.
                 // It is okay for map servers to be eventually consistent.
-                updateInfluencePoints((*object).points, (*object).nation, static_cast<REGION_TYPE>((*object).region));
+                updateInfluencePoints((*object).points, (*object).nation, (*object).region);
             }
             return true;
         }
@@ -64,7 +64,7 @@ bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
         {
             if (const auto object = ipc::fromBytes<ConquestAddCounter>(message.payload))
             {
-                addMobKills((*object).count, static_cast<REGION_TYPE>((*object).region));
+                addMobKills((*object).count, (*object).region);
             }
             return true;
         }
@@ -73,7 +73,7 @@ bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
         {
             if (const auto object = ipc::fromBytes<ConquestAddCounter>(message.payload))
             {
-                addPlayerHomepoints((*object).count, static_cast<REGION_TYPE>((*object).region));
+                addPlayerHomepoints((*object).count, (*object).region);
             }
             return true;
         }
@@ -118,9 +118,9 @@ void ConquestSystem::sendRegionControlsMsg(ConquestMessage msgType)
     });
 }
 
-auto ConquestSystem::updateInfluencePoints(int points, const xi::Nation nation, const REGION_TYPE region) -> bool
+auto ConquestSystem::updateInfluencePoints(int points, const xi::Nation nation, const xi::Region region) -> bool
 {
-    if (region == REGION_TYPE::UNKNOWN)
+    if (region == xi::Region::Unknown)
     {
         return false;
     }
@@ -200,7 +200,7 @@ auto ConquestSystem::updateInfluencePoints(int points, const xi::Nation nation, 
     return !rset2;
 }
 
-void ConquestSystem::addMobKills(int32 count, REGION_TYPE region)
+void ConquestSystem::addMobKills(const int32 count, const xi::Region region)
 {
     const auto rset = db::preparedStmt("UPDATE conquest_system SET mob_kills = mob_kills + ? WHERE region_id = ?",
                                        count,
@@ -212,7 +212,7 @@ void ConquestSystem::addMobKills(int32 count, REGION_TYPE region)
     }
 }
 
-void ConquestSystem::addPlayerHomepoints(int32 count, REGION_TYPE region)
+void ConquestSystem::addPlayerHomepoints(const int32 count, const xi::Region region)
 {
     const auto rset = db::preparedStmt("UPDATE conquest_system SET player_homepoints = player_homepoints + ? WHERE region_id = ?",
                                        count,
@@ -246,7 +246,7 @@ void ConquestSystem::updateWeekConquest()
         const int32 sandoria = influence.sandoria_influence;
         const int32 bastok   = influence.bastok_influence;
         const int32 windurst = influence.windurst_influence;
-        const int32 beastmen = ConquestData::CalculateBeastmenInfluence(static_cast<REGION_TYPE>(regionId), influence);
+        const int32 beastmen = ConquestData::CalculateBeastmenInfluence(static_cast<xi::Region>(regionId), influence);
 
         auto control = xi::Nation::Neutral;
         if (sandoria > bastok && sandoria > windurst && sandoria > beastmen)

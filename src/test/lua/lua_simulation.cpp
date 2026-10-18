@@ -306,7 +306,7 @@ void CLuaSimulation::skipVanaDays(const uint32 days) const
  *  Notes   :
  ************************************************************************/
 
-void CLuaSimulation::setRegionOwner(const REGION_TYPE region, const xi::Nation nation) const
+void CLuaSimulation::setRegionOwner(const xi::Region region, const xi::Nation nation) const
 {
     DebugTestFmt("Setting region {} owner to nation {}", region, nation);
     auto rset = db::preparedStmt("UPDATE conquest_system SET region_control = ? WHERE region_id = ?",

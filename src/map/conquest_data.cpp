@@ -51,7 +51,7 @@ ConquestData::ConquestData()
     }
 }
 
-auto ConquestData::getInfluence(const REGION_TYPE region, const xi::Nation nation) const -> int32
+auto ConquestData::getInfluence(const xi::Region region, const xi::Nation nation) const -> int32
 {
     if (static_cast<std::size_t>(region) >= influences.size())
     {
@@ -75,7 +75,7 @@ auto ConquestData::getInfluence(const REGION_TYPE region, const xi::Nation natio
     }
 }
 
-auto ConquestData::getRegionOwner(const REGION_TYPE region) const -> xi::Nation
+auto ConquestData::getRegionOwner(const xi::Region region) const -> xi::Nation
 {
     uint8 regionNum = static_cast<uint8>(region);
 
@@ -83,15 +83,15 @@ auto ConquestData::getRegionOwner(const REGION_TYPE region) const -> xi::Nation
     // TODO: Do Sandoria/Bastok/Windurst count as "owned by" themselves, no one, or some other state where latents don't work?
     switch (region)
     {
-        case REGION_TYPE::SANDORIA:
-        case REGION_TYPE::BASTOK:
-        case REGION_TYPE::WINDURST:
-        case REGION_TYPE::JEUNO:
-        case REGION_TYPE::DYNAMIS:
-        case REGION_TYPE::TAVNAZIAN_MARQ:
-        case REGION_TYPE::PROMYVION:
-        case REGION_TYPE::LUMORIA:
-        case REGION_TYPE::LIMBUS:
+        case xi::Region::Sandoria:
+        case xi::Region::Bastok:
+        case xi::Region::Windurst:
+        case xi::Region::Jeuno:
+        case xi::Region::Dynamis:
+        case xi::Region::TavnazianMarquisate:
+        case xi::Region::Promyvion:
+        case xi::Region::Lumoria:
+        case xi::Region::Limbus:
             return xi::Nation::Beastmen;
         default:
             if (regionNum < regionControls.size())

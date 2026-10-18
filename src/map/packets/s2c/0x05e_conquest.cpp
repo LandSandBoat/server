@@ -37,13 +37,13 @@ GP_SERV_COMMAND_CONQUEST::GP_SERV_COMMAND_CONQUEST(CCharEntity* PChar)
     const uint8 bastok_regions   = conquestData.getRegionControlCount(xi::Nation::Bastok);
     const uint8 windurst_regions = conquestData.getRegionControlCount(xi::Nation::Windurst);
 
-    for (auto regionId = static_cast<uint8>(REGION_TYPE::RONFAURE); regionId <= static_cast<uint8>(REGION_TYPE::TAVNAZIA); regionId++)
+    for (auto regionId = static_cast<uint8>(xi::Region::Ronfaure); regionId <= static_cast<uint8>(xi::Region::TavnazianArchipelago); regionId++)
     {
-        const auto  regionOwner = conquestData.getRegionOwner(static_cast<REGION_TYPE>(regionId));
-        const int32 sandoriaInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Sandoria);
-        const int32 bastokInf   = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Bastok);
-        const int32 windurstInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Windurst);
-        const int32 beastmenInf = conquestData.getInfluence(static_cast<REGION_TYPE>(regionId), xi::Nation::Beastmen);
+        const auto  regionOwner = conquestData.getRegionOwner(static_cast<xi::Region>(regionId));
+        const int32 sandoriaInf = conquestData.getInfluence(static_cast<xi::Region>(regionId), xi::Nation::Sandoria);
+        const int32 bastokInf   = conquestData.getInfluence(static_cast<xi::Region>(regionId), xi::Nation::Bastok);
+        const int32 windurstInf = conquestData.getInfluence(static_cast<xi::Region>(regionId), xi::Nation::Windurst);
+        const int32 beastmenInf = conquestData.getInfluence(static_cast<xi::Region>(regionId), xi::Nation::Beastmen);
 
         packet.Conquest.Regions[regionId].InfluenceRankingWithBeastmen = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf, beastmenInf);
         packet.Conquest.Regions[regionId].InfluenceRankingNoBeastmen   = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf);
@@ -53,7 +53,7 @@ GP_SERV_COMMAND_CONQUEST::GP_SERV_COMMAND_CONQUEST(CCharEntity* PChar)
         const int64 total         = sandoriaInf + bastokInf + windurstInf;
         const int64 totalBeastmen = total + beastmenInf;
 
-        if (PChar->loc.zone->GetRegionID() == static_cast<REGION_TYPE>(regionId))
+        if (PChar->loc.zone->GetRegionID() == static_cast<xi::Region>(regionId))
         {
             packet.Conquest.CurrentRegionSandoria    = static_cast<uint8>((sandoriaInf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
             packet.Conquest.CurrentRegionBastok      = static_cast<uint8>((bastokInf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));

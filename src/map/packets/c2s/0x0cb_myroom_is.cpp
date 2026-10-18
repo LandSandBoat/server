@@ -42,11 +42,11 @@ const auto isRentARoom = [](const CCharEntity* PChar)
     switch (PChar->profile.nation)
     {
         case xi::Nation::Sandoria:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::SANDORIA;
+            return PChar->loc.zone->GetRegionID() != xi::Region::Sandoria;
         case xi::Nation::Bastok:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::BASTOK;
+            return PChar->loc.zone->GetRegionID() != xi::Region::Bastok;
         case xi::Nation::Windurst:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::WINDURST;
+            return PChar->loc.zone->GetRegionID() != xi::Region::Windurst;
         default:
             return true;
     }

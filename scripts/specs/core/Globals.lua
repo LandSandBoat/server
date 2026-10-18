@@ -66,15 +66,15 @@ function WeekUpdateConquest(updateType)
 end
 
 ---@nodiscard
----@param type xi.region
+---@param region xi.region
 ---@return xi.nation
-function GetRegionOwner(type)
+function GetRegionOwner(region)
 end
 
 ---@nodiscard
----@param type integer
+---@param region xi.region
 ---@return integer
-function GetRegionInfluence(type)
+function GetRegionInfluence(region)
 end
 
 ---@nodiscard

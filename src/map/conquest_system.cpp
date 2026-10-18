@@ -89,7 +89,7 @@ void HandleMessage(ConquestMessage type, const std::span<const uint8> data)
     }
 }
 
-void AddInfluencePoints(const int points, const xi::Nation nation, const REGION_TYPE region)
+void AddInfluencePoints(const int points, const xi::Nation nation, const xi::Region region)
 {
     // Send update message to world server
     // Note that we do not update local cache, as it would potentially become out of sync from
@@ -100,29 +100,29 @@ void AddInfluencePoints(const int points, const xi::Nation nation, const REGION_
         .payload = ipc::toBytes(ConquestAddInfluencePoints{
             .points = points,
             .nation = nation,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
 
-void AddMobKills(int32 count, REGION_TYPE region)
+void AddMobKills(const int32 count, const xi::Region region)
 {
     message::send(ipc::ConquestEvent{
         .type    = ConquestMessage::M2W_AddMobKills,
         .payload = ipc::toBytes(ConquestAddCounter{
             .count  = count,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
 
-void AddPlayerHomepoints(int32 count, REGION_TYPE region)
+void AddPlayerHomepoints(const int32 count, const xi::Region region)
 {
     message::send(ipc::ConquestEvent{
         .type    = ConquestMessage::M2W_AddPlayerHomepoints,
         .payload = ipc::toBytes(ConquestAddCounter{
             .count  = count,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
@@ -225,7 +225,7 @@ auto GetInfluenceGraphics(const int32 san_inf, const int32 bas_inf, const int32 
     }
 }
 
-uint8 GetInfluenceGraphics(REGION_TYPE region)
+auto GetInfluenceGraphics(const xi::Region region) -> uint8
 {
     int32 sandoria = GetConquestData().getInfluence(region, xi::Nation::Sandoria);
     int32 bastok   = GetConquestData().getInfluence(region, xi::Nation::Bastok);
@@ -321,13 +321,13 @@ void HandleWeeklyTallyStart()
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            REGION_TYPE regionId = PZone->GetRegionID();
-            if (regionId <= REGION_TYPE::DYNAMIS)
+            xi::Region regionId = PZone->GetRegionID();
+            if (regionId <= xi::Region::Dynamis)
             {
                 // Cities do not have owner or influence
                 uint8 influence = 0;
                 uint8 owner = 0;
-                if (regionId <= REGION_TYPE::TAVNAZIA)
+                if (regionId <= xi::Region::TavnazianArchipelago)
                 {
                     influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
                     owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
@@ -365,13 +365,13 @@ void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls)
     // clang-format off
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
-            REGION_TYPE regionId = PZone->GetRegionID();
-            if (regionId <= REGION_TYPE::DYNAMIS)
+            xi::Region regionId = PZone->GetRegionID();
+            if (regionId <= xi::Region::Dynamis)
             {
                 // Cities do not have owner or influence
                 uint8 influence = 0;
                 uint8 owner = 0;
-                if (regionId <= REGION_TYPE::TAVNAZIA)
+                if (regionId <= xi::Region::TavnazianArchipelago)
                 {
                     influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
                     owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
@@ -412,13 +412,13 @@ void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpd
             zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
             {
                 // only find chars for zones that have had conquest updated
-                REGION_TYPE regionId = PZone->GetRegionID();
-                if (regionId <= REGION_TYPE::DYNAMIS)
+                xi::Region regionId = PZone->GetRegionID();
+                if (regionId <= xi::Region::Dynamis)
                 {
                     // Cities do not have owner or influence
                     uint8 influence = 0;
                     uint8 owner = 0;
-                    if (regionId <= REGION_TYPE::TAVNAZIA)
+                    if (regionId <= xi::Region::TavnazianArchipelago)
                     {
                         influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
                         owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
@@ -536,7 +536,7 @@ auto GetNextTally() -> uint8
  *                                                                       *
  ************************************************************************/
 
-auto GetRegionOwner(const REGION_TYPE region) -> xi::Nation
+auto GetRegionOwner(const xi::Region region) -> xi::Nation
 {
     return GetConquestData().getRegionOwner(region);
 }
@@ -555,9 +555,9 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
     // NOTE: No need to send CConquestPacket,
     // The client itself requests this packet after a fixed period of time
 
-    const REGION_TYPE region = PChar->loc.zone->GetRegionID();
+    const xi::Region region = PChar->loc.zone->GetRegionID();
 
-    if (region != REGION_TYPE::UNKNOWN)
+    if (region != xi::Region::Unknown)
     {
         // Follows the CP multiplier in https://www.playonline.com/comnews/200302052327.html
         const auto  owner      = GetRegionOwner(region);

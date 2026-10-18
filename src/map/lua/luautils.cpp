@@ -1718,18 +1718,18 @@ void WeekUpdateConquest(uint8 updateType)
     conquest::UpdateConquestGM(static_cast<ConquestUpdate>(updateType));
 }
 
-auto GetRegionOwner(const uint8 type) -> xi::Nation
+auto GetRegionOwner(const xi::Region region) -> xi::Nation
 {
     TracyZoneScoped;
 
-    return conquest::GetRegionOwner(static_cast<REGION_TYPE>(type));
+    return conquest::GetRegionOwner(region);
 }
 
-uint8 GetRegionInfluence(uint8 type)
+auto GetRegionInfluence(const xi::Region region) -> uint8
 {
     TracyZoneScoped;
 
-    return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
+    return conquest::GetInfluenceGraphics(region);
 }
 
 auto GetNationRank(const xi::Nation nation) -> uint8

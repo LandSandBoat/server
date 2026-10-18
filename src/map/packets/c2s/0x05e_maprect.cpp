@@ -237,15 +237,15 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
             bool moghouse2FUnlocked           = (PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F");
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions          = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN, REGION_TYPE::ADOULIN_ISLANDS };
+            auto moghouseExitRegions          = { xi::Region::Sandoria, xi::Region::Bastok, xi::Region::Windurst, xi::Region::Jeuno, xi::Region::WestAhtUrhgan, xi::Region::AdoulinIslands };
             auto moghouseSameRegion           = std::ranges::any_of(moghouseExitRegions,
-                                                                    [&destinationRegion](const REGION_TYPE acceptedReg)
+                                                                    [&destinationRegion](const xi::Region acceptedReg)
                                                                     {
                                                               return destinationRegion == acceptedReg;
                                                                     });
             auto moghouseQuestComplete        = PChar->profile.mhflag & (this->MyRoomExitBit ? 0x01 << (this->MyRoomExitBit - 1) : 0);
 
-            if (startingRegion == REGION_TYPE::ADOULIN_ISLANDS)
+            if (startingRegion == xi::Region::AdoulinIslands)
             {
                 // Adoulin back-alley exits are always available.
                 moghouseQuestComplete = true;

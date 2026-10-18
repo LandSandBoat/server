@@ -37,6 +37,8 @@
 #include <common/types/maybe.h>
 
 #include "data/enums/content.h"
+#include "data/enums/nation.h"
+#include "data/enums/region.h"
 
 #include <array>
 #include <memory>
@@ -302,8 +304,8 @@ auto GetMobByID(uint32 mobid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetEntityByID(uint32 mobid, const sol::object& instanceObj, const sol::object& arg3) -> CBaseEntity*;
 
 void  WeekUpdateConquest(uint8 updateType);
-auto  GetRegionOwner(uint8 type) -> xi::Nation;
-uint8 GetRegionInfluence(uint8 type); // Return influence graphics
+auto  GetRegionOwner(xi::Region region) -> xi::Nation;
+auto  GetRegionInfluence(xi::Region region) -> uint8; // Return influence graphics
 auto  GetNationRank(xi::Nation nation) -> uint8;
 uint8 GetConquestBalance();
 bool  IsConquestAlliance();

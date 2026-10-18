@@ -86,14 +86,14 @@ struct ConquestAddInfluencePoints
 {
     int32      points;
     xi::Nation nation;
-    uint8      region;
+    xi::Region region;
 };
 
 // M2W_AddMobKills, M2W_AddPlayerHomepoints
 struct ConquestAddCounter
 {
-    int32 count;
-    uint8 region;
+    int32      count;
+    xi::Region region;
 };
 
 //

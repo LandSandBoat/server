@@ -89,7 +89,7 @@ using RegionsDataset      = xi::data::datasets::zones::regions::Dataset;
 #include <map/ximesh/ximesh.h>
 #include <map/ximesh/ximesh_impl.h>
 
-CZone::CZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID, const REGION_TYPE RegionID, const xi::Continent ContinentID, const uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
+CZone::CZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID, const xi::Region RegionID, const xi::Continent ContinentID, const uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
 : scheduler_(scheduler)
 , config_(config)
 , navMesh_{ std::make_unique<NullNavMesh>() }
@@ -146,7 +146,7 @@ auto CZone::GetTypeMask() const -> xi::ZoneType
     return m_zoneType;
 }
 
-auto CZone::GetRegionID() const -> REGION_TYPE
+auto CZone::GetRegionID() const -> xi::Region
 {
     return m_regionID;
 }

@@ -325,7 +325,7 @@ void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone)
 void loadDeathTimestamp(CCharEntity* PChar);
 void loadZoningFlag(CCharEntity* PChar);
 
-auto IsHomeNation(xi::Nation nation, REGION_TYPE region) -> bool;
+auto IsHomeNation(xi::Nation nation, xi::Region region) -> bool;
 bool isOrchestrionPlaced(CCharEntity* PChar);
 void updateMannequins(CCharEntity* PChar);
 

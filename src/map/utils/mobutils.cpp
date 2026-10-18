@@ -182,76 +182,76 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
     uint16 damage       = mobLvl;
 
     // Zones from base game/expansions have different base offsets, multipliers, etc.
-    REGION_TYPE regionID = PMob->loc.zone->GetRegionID();
+    xi::Region regionID = PMob->loc.zone->GetRegionID();
 
     switch (regionID)
     {
         // Vanilla, ROTZ, COP Regions
-        case REGION_TYPE::RONFAURE:
-        case REGION_TYPE::ZULKHEIM:
-        case REGION_TYPE::NORVALLEN:
-        case REGION_TYPE::GUSTABERG:
-        case REGION_TYPE::DERFLAND:
-        case REGION_TYPE::SARUTABARUTA:
-        case REGION_TYPE::KOLSHUSHU:
-        case REGION_TYPE::ARAGONEU:
-        case REGION_TYPE::FAUREGANDI:
-        case REGION_TYPE::VALDEAUNIA:
-        case REGION_TYPE::QUFIMISLAND:
-        case REGION_TYPE::LITELOR:
-        case REGION_TYPE::KUZOTZ:
-        case REGION_TYPE::VOLLBOW:
-        case REGION_TYPE::ELSHIMO_LOWLANDS:
-        case REGION_TYPE::ELSHIMO_UPLANDS:
-        case REGION_TYPE::TULIA:
-        case REGION_TYPE::MOVALPOLOS:
-        case REGION_TYPE::TAVNAZIA:
-        case REGION_TYPE::SANDORIA:
-        case REGION_TYPE::BASTOK:
-        case REGION_TYPE::WINDURST:
-        case REGION_TYPE::JEUNO:
-        case REGION_TYPE::DYNAMIS:
-        case REGION_TYPE::TAVNAZIAN_MARQ:
-        case REGION_TYPE::PROMYVION:
-        case REGION_TYPE::LUMORIA:
-        case REGION_TYPE::LIMBUS:
+        case xi::Region::Ronfaure:
+        case xi::Region::Zulkheim:
+        case xi::Region::Norvallen:
+        case xi::Region::Gustaberg:
+        case xi::Region::Derfland:
+        case xi::Region::Sarutabaruta:
+        case xi::Region::Kolshushu:
+        case xi::Region::Aragoneu:
+        case xi::Region::Fauregandi:
+        case xi::Region::Valdeaunia:
+        case xi::Region::QufimIsland:
+        case xi::Region::Litelor:
+        case xi::Region::Kuzotz:
+        case xi::Region::Vollbow:
+        case xi::Region::ElshimoLowlands:
+        case xi::Region::ElshimoUplands:
+        case xi::Region::Tulia:
+        case xi::Region::Movalpolos:
+        case xi::Region::TavnazianArchipelago:
+        case xi::Region::Sandoria:
+        case xi::Region::Bastok:
+        case xi::Region::Windurst:
+        case xi::Region::Jeuno:
+        case xi::Region::Dynamis:
+        case xi::Region::TavnazianMarquisate:
+        case xi::Region::Promyvion:
+        case xi::Region::Lumoria:
+        case xi::Region::Limbus:
             offset       = 2;
             rangedOffset = 4;
             break;
         // TOAU Regions
-        case REGION_TYPE::WEST_AHT_URHGAN:
-        case REGION_TYPE::MAMOOL_JA_SAVAGE:
-        case REGION_TYPE::HALVUNG:
-        case REGION_TYPE::ARRAPAGO:
-        case REGION_TYPE::ALZADAAL:
+        case xi::Region::WestAhtUrhgan:
+        case xi::Region::MamoolJaSavage:
+        case xi::Region::Halvung:
+        case xi::Region::Arrapago:
+        case xi::Region::Alzadaal:
             offset       = 10;
             rangedOffset = 12;
             break;
 
         // WOTG Regions
-        case REGION_TYPE::RONFAURE_FRONT:
-        case REGION_TYPE::NORVALLEN_FRONT:
-        case REGION_TYPE::GUSTABERG_FRONT:
-        case REGION_TYPE::DERFLAND_FRONT:
-        case REGION_TYPE::SARUTA_FRONT:
-        case REGION_TYPE::ARAGONEAU_FRONT:
-        case REGION_TYPE::FAUREGANDI_FRONT:
-        case REGION_TYPE::VALDEAUNIA_FRONT:
+        case xi::Region::RonfaureFront:
+        case xi::Region::NorvallenFront:
+        case xi::Region::GustabergFront:
+        case xi::Region::DerflandFront:
+        case xi::Region::SarutabarutaFront:
+        case xi::Region::AragoneuFront:
+        case xi::Region::FauregandiFront:
+        case xi::Region::ValdeauniaFront:
             offset       = 11;
             rangedOffset = 13;
             break;
 
         // Other
-        case REGION_TYPE::ABYSSEA:
-        case REGION_TYPE::THE_THRESHOLD:
-        case REGION_TYPE::ABDHALJS: // TODO: Need data for ABDHALJS zones.
+        case xi::Region::Abyssea:
+        case xi::Region::TheThreshold:
+        case xi::Region::Abdhaljs: // TODO: Need data for ABDHALJS zones.
             offset       = 11;
             rangedOffset = 13;
             break;
 
         // SOA Regions
-        case REGION_TYPE::ADOULIN_ISLANDS:
-        case REGION_TYPE::EAST_ULBUKA:
+        case xi::Region::AdoulinIslands:
+        case xi::Region::EastUlbuka:
             offset       = 11; // TODO: Need more data for Lvl 100+ mobs.
             rangedOffset = 13;
             break;
