@@ -196,10 +196,6 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
         return 0
     end
 
-    if target:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
-        return 0
-    end
-
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
     local baseTPGain         = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
@@ -238,10 +234,6 @@ xi.combat.tp.calculateTPGainOnMagicalDamage = function(actor, target, totalDamag
     end
 
     if totalDamage <= 0 then
-        return 0
-    end
-
-    if target:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
         return 0
     end
 
