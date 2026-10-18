@@ -751,7 +751,7 @@ function CBaseEntity:getCurrentRegion()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.continent
 function CBaseEntity:getContinentID()
 end
 

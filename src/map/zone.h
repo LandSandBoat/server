@@ -58,6 +58,7 @@
 // Forward Declarations
 //
 
+#include "data/enums/continent.h"
 #include "data/enums/weather.h"
 #include "data/enums/zone.h"
 #include "data/enums/zone_misc.h"
@@ -134,15 +135,6 @@ enum class REGION_TYPE : uint8
     UNKNOWN = 255
 };
 DECLARE_FORMAT_AS_UNDERLYING(REGION_TYPE);
-
-enum class CONTINENT_TYPE : uint8
-{
-    THE_MIDDLE_LANDS       = 1,
-    THE_ARADJIAH_CONTINENT = 2,
-    THE_SHADOWREIGN_ERA    = 3,
-    OTHER_AREAS            = 4
-};
-DECLARE_FORMAT_AS_UNDERLYING(CONTINENT_TYPE);
 
 enum GLOBAL_MESSAGE_TYPE : uint8
 {
@@ -231,19 +223,19 @@ using QueryByNameResult_t = std::vector<CBaseEntity*>;
 class CZone
 {
 public:
-    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
+    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, xi::Continent ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
     virtual ~CZone();
 
     DISALLOW_COPY_AND_MOVE(CZone);
 
-    auto           GetID() const -> xi::ZoneId;
-    xi::ZoneType   GetTypeMask();
-    REGION_TYPE    GetRegionID();
-    CONTINENT_TYPE GetContinentID();
-    uint8          getLevelRestriction();
-    uint32         GetIP() const;
-    uint16         GetPort() const;
-    uint16         GetTax() const;
+    auto GetID() const -> xi::ZoneId;
+    auto GetTypeMask() const -> xi::ZoneType;
+    auto GetRegionID() const -> REGION_TYPE;
+    auto GetContinentID() const -> xi::Continent;
+    auto getLevelRestriction() const -> uint8;
+    auto GetIP() const -> uint32;
+    auto GetPort() const -> uint16;
+    auto GetTax() const -> uint16;
 
     auto weather() -> WeatherContainer&;
     auto weather() const -> const WeatherContainer&;
@@ -377,14 +369,14 @@ private:
 
     FlatHashMap<std::string, std::unique_ptr<RoamRegion>> roamRegions_;
 
-    xi::ZoneId     m_zoneID;
-    xi::ZoneType   m_zoneType;
-    REGION_TYPE    m_regionID;
-    CONTINENT_TYPE m_continentID;
-    uint8          m_levelRestriction;
-    std::string    m_zoneName;
-    uint16         m_zonePort{};
-    uint32         m_zoneIP{};
+    xi::ZoneId    m_zoneID;
+    xi::ZoneType  m_zoneType;
+    REGION_TYPE   m_regionID;
+    xi::Continent m_continentID;
+    uint8         m_levelRestriction;
+    std::string   m_zoneName;
+    uint16        m_zonePort{};
+    uint32        m_zoneIP{};
 
     WeatherContainer weather_;
 

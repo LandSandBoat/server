@@ -69,7 +69,7 @@ void TOTDChange(vanadiel_time::TOTD TOTD);
 void SavePlayTime();
 
 auto GetCurrentRegion(xi::ZoneId zoneId) -> REGION_TYPE;
-auto GetCurrentContinent(xi::ZoneId zoneId) -> CONTINENT_TYPE;
+auto GetCurrentContinent(xi::ZoneId zoneId) -> xi::Continent;
 
 auto GetWeatherElement(xi::Weather weather) -> int;
 

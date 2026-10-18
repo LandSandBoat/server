@@ -1435,9 +1435,9 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
     return REGION_TYPE::UNKNOWN;
 }
 
-auto GetCurrentContinent(const xi::ZoneId zoneId) -> CONTINENT_TYPE
+auto GetCurrentContinent(const xi::ZoneId zoneId) -> xi::Continent
 {
-    return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
+    return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? xi::Continent::TheMiddleLands : xi::Continent::OtherAreas;
 }
 
 auto GetWeatherElement(const xi::Weather weather) -> int
