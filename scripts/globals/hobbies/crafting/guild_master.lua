@@ -147,14 +147,6 @@ local testItemTable =
     },
 }
 
-local function giveNewRank(player, skillId, newRank)
-    -- Raise rank.
-    player:setSkillRank(skillId, newRank)
-
-    -- Set local var to complete trade after event.
-    player:setLocalVar('CompleteTrade', 1)
-end
-
 -----------------------------------
 -- NPC Functions
 -----------------------------------
@@ -178,36 +170,40 @@ xi.crafting.guildMasterOnTrade = function(player, npc, trade)
     end
 
     -- Check trade.
-    if
-        testItem ~= 0 and
-        trade:hasItemQty(testItem, 1) and
-        trade:getItemCount() == 1
-    then
-        -- Expert quest.
-        if
-            newRank == xi.craftRank.EXPERT and           -- Check if new rank is the last one. (Tied to mini-quest)
-            player:hasKeyItem(npcTable[npcName][5]) and  -- Check if player has appropiate Key Item.
-            player:getCharVar(npcTable[npcName][6]) == 2 -- Check if player has gotten quest dialog.
-        then
-            if
-                (guildId ~= xi.guild.FISHING and trade:getItem():getSignature() == player:getName()) or
-                guildId == xi.guild.FISHING
-            then
-                player:setCharVar(npcTable[npcName][6], 0)
-                giveNewRank(player, skillId, newRank)
-                player:startEvent(eventId, 0, 0, 0, 0, newRank, 1)
-            else
-                player:startEvent(eventId, 0, 0, 0, 0, newRank, 0)
-            end
+    if testItem == xi.item.NONE then
+        return
+    end
 
-        -- All other ranks.
-        elseif
-            newRank > xi.craftRank.AMATEUR and
-            newRank < lastRank
+    if not npcUtil.tradeMatches(trade, { { testItem, 1 } }) then
+        return
+    end
+
+    -- Expert quest.
+    if
+        newRank == xi.craftRank.EXPERT and           -- Check if new rank is the last one. (Tied to mini-quest)
+        player:hasKeyItem(npcTable[npcName][5]) and  -- Check if player has appropiate Key Item.
+        player:getCharVar(npcTable[npcName][6]) == 2 -- Check if player has gotten quest dialog.
+    then
+        if
+            (guildId ~= xi.guild.FISHING and trade:getItem():getSignature() == player:getName()) or
+            guildId == xi.guild.FISHING
         then
-            giveNewRank(player, skillId, newRank)
+            player:tradeComplete()
+            player:setSkillRank(skillId, newRank)
+            player:setCharVar(npcTable[npcName][6], 0)
+            player:startEvent(eventId, 0, 0, 0, 0, newRank, 1)
+        else
             player:startEvent(eventId, 0, 0, 0, 0, newRank, 0)
         end
+
+    -- All other ranks.
+    elseif
+        newRank > xi.craftRank.AMATEUR and
+        newRank < lastRank
+    then
+        player:tradeComplete()
+        player:setSkillRank(skillId, newRank)
+        player:startEvent(eventId, 0, 0, 0, 0, newRank, 0)
     end
 end
 
@@ -360,13 +356,6 @@ xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
             player:setSkillLevel(option, xi.settings.map.CRAFT_COMMON_CAP)
 
             player:messageSpecial(ID.text.RENOUNCE_CRAFTSMAN, 0, option - 49)
-        end
-
-    -- Trade onEventFinish
-    elseif csid == eventId + 1 then
-        if player:getLocalVar('CompleteTrade') == 1 then
-            player:tradeComplete()
-            player:setLocalVar('CompleteTrade', 0)
         end
     end
 
