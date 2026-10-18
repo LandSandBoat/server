@@ -197,7 +197,7 @@ local function replenishFromTimer(player, tagStock, maxTagStock, idTagPeriod)
         player:setCharVar('tagDrawTime', 0)
     end
 
-    local allTagsTimeCS = tagDrawTime > 0 and (tagDrawTime - xi.time.VANADIEL_EPOCH) or 0 -- Timestamp passed to event to display the restock timer
+    local allTagsTimeCS = tagDrawTime > 0 and (tagDrawTime - tagStock * idTagPeriod - xi.time.VANADIEL_EPOCH) or 0 -- Timestamp passed to event to display the restock timer
 
     return tagStock, allTagsTimeCS
 end
@@ -238,9 +238,9 @@ xi.assault.onRytaalTrigger = function(player, npc)
 
     -- Player has not started an assault, give them a tag
     local tagStock, allTagsTimeCS = calculateTags(player)
-    local tagsAvail               = tagStock > 0 and 1 or 0
+    local dailyRestock            = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) and 1 or 0
     local haveimperialIDtag       = player:hasKeyItem(xi.keyItem.IMPERIAL_ARMY_ID_TAG) and 1 or 0
-    player:startEvent(268, 2, tagStock, currentAssault, haveimperialIDtag, allTagsTimeCS, tagsAvail)
+    player:startEvent(268, 2, tagStock, currentAssault, haveimperialIDtag, allTagsTimeCS, dailyRestock)
 end
 
 xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
