@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.skillRank
+
+values:
+  none:     0
+  a_plus:   1
+  a:        2
+  b_plus:   3
+  b:        4
+  b_minus:  5
+  c_plus:   6
+  c:        7
+  c_minus:  8
+  d:        9
+  e:       10
+  f:       11
+  g:       12
