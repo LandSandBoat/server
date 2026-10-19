@@ -37,6 +37,7 @@
 #include <common/types/maybe.h>
 
 #include "data/enums/content.h"
+#include "data/enums/emote.h"
 #include "data/enums/nation.h"
 #include "data/enums/region.h"
 
@@ -133,7 +134,6 @@ struct MonstrosityData_t;
 } // namespace monstrosity
 
 enum ConquestUpdate : uint8;
-enum class Emote : uint8;
 
 namespace luautils
 {
@@ -538,7 +538,7 @@ void OnPlayerDeath(CCharEntity* PChar);
 void OnPlayerLevelUp(CCharEntity* PChar);
 void OnPlayerLevelDown(CCharEntity* PChar);
 void OnPlayerMount(CCharEntity* PChar);
-void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+void OnPlayerEmote(CCharEntity* PChar, xi::Emote emote);
 void OnPlayerVolunteer(CCharEntity* PChar, const std::string& text);
 
 // Lua returns whether the dig went ahead, then whether the greens were kept.

@@ -24,7 +24,8 @@
 #include "common/cbasetypes.h"
 
 #include "base.h"
-#include "enums/emote.h"
+#include "data/enums/emote.h"
+#include "data/enums/emote_mode.h"
 
 class CCharEntity;
 class CNpcEntity;
@@ -36,20 +37,20 @@ class GP_SERV_COMMAND_MOTIONMES final : public GP_SERV_PACKET<PacketS2C::GP_SERV
 public:
     struct PacketData
     {
-        uint32_t  CasUniqueNo;      // PS2: CasUniqueNo
-        uint32_t  TarUniqueNo;      // PS2: TarUniqueNo
-        uint16_t  CasActIndex;      // PS2: CasActIndex
-        uint16_t  TarActIndex;      // PS2: TarActIndex
-        uint16_t  MesNum;           // PS2: MesNum
-        uint16_t  Param;            // PS2: (New; did not exist.)
-        uint16_t  unknown14;        // PS2: (New; did not exist.)
-        EmoteMode Mode;             // PS2: Mode
-        uint8_t   padding00;        // PS2: (New; did not exist.)
-        uint32_t  FaithUniqueNo[5]; // PS2: (New; did not exist.)
-        uint16_t  FaithActIndex[5]; // PS2: (New; did not exist.)
-        uint16_t  padding01;        // PS2: (New; did not exist.)
+        uint32_t      CasUniqueNo;      // PS2: CasUniqueNo
+        uint32_t      TarUniqueNo;      // PS2: TarUniqueNo
+        uint16_t      CasActIndex;      // PS2: CasActIndex
+        uint16_t      TarActIndex;      // PS2: TarActIndex
+        uint16_t      MesNum;           // PS2: MesNum
+        uint16_t      Param;            // PS2: (New; did not exist.)
+        uint16_t      unknown14;        // PS2: (New; did not exist.)
+        xi::EmoteMode Mode;             // PS2: Mode
+        uint8_t       padding00;        // PS2: (New; did not exist.)
+        uint32_t      FaithUniqueNo[5]; // PS2: (New; did not exist.)
+        uint16_t      FaithActIndex[5]; // PS2: (New; did not exist.)
+        uint16_t      padding01;        // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, uint32 targetId, uint16 targetIndex, Emote emoteId, EmoteMode emoteMode, uint16 extra);
-    GP_SERV_COMMAND_MOTIONMES(const CNpcEntity* PEntity, uint32 targetId, uint16 targetIndex, Emote emoteId, EmoteMode emoteMode);
+    GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, uint32 targetId, uint16 targetIndex, xi::Emote emoteId, xi::EmoteMode emoteMode, uint16 extra);
+    GP_SERV_COMMAND_MOTIONMES(const CNpcEntity* PEntity, uint32 targetId, uint16 targetIndex, xi::Emote emoteId, xi::EmoteMode emoteMode);
 };

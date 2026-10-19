@@ -657,11 +657,11 @@ function CBaseEntity:leaveGame()
 end
 
 ---@param target CBaseEntity
----@param emID integer
----@param emMode integer
+---@param emote xi.emote
+---@param emoteMode xi.emoteMode
 ---@param othersOnly boolean
 ---@return nil
-function CBaseEntity:sendEmote(target, emID, emMode, othersOnly)
+function CBaseEntity:sendEmote(target, emote, emoteMode, othersOnly)
 end
 
 ---@nodiscard

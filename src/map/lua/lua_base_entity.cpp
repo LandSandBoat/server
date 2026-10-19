@@ -2914,11 +2914,9 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Target is optional.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const
+void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, const xi::Emote emote, const xi::EmoteMode emoteMode, const bool othersOnly) const
 {
-    const auto* PTarget   = target ? target->GetBaseEntity() : nullptr;
-    const auto  emoteID   = static_cast<Emote>(emID);
-    const auto  emoteMode = static_cast<EmoteMode>(emMode);
+    const auto* PTarget = target ? target->GetBaseEntity() : nullptr;
 
     if (auto* PEntity = dynamic_cast<CNpcEntity*>(m_PBaseEntity); PEntity && PEntity->loc.zone)
     {
@@ -2926,7 +2924,7 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
         auto targetTargId = PTarget ? PTarget->targid : PEntity->targid;
         PEntity->loc.zone->PushPacket(PEntity,
                                       CHAR_INRANGE,
-                                      std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PEntity, targetId, targetTargId, emoteID, emoteMode));
+                                      std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PEntity, targetId, targetTargId, emote, emoteMode));
 
         return;
     }
@@ -2938,7 +2936,7 @@ void CLuaBaseEntity::sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 e
         auto messageArea  = othersOnly ? CHAR_INRANGE : CHAR_INRANGE_SELF; // Everyone around the player or everyone around the player and the player
         PChar->loc.zone->PushPacket(PChar,
                                     messageArea,
-                                    std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, targetId, targetTargId, emoteID, emoteMode, 0));
+                                    std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, targetId, targetTargId, emote, emoteMode, 0));
 
         return;
     }

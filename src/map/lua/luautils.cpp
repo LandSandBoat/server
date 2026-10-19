@@ -5902,11 +5902,11 @@ void OnPlayerMount(CCharEntity* PChar)
     callGlobal<void>("xi.player.onPlayerMount", PChar);
 }
 
-void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+void OnPlayerEmote(CCharEntity* PChar, const xi::Emote emote)
 {
     TracyZoneScoped;
 
-    callGlobal<void>("xi.player.onPlayerEmote", PChar, static_cast<uint8>(EmoteID));
+    callGlobal<void>("xi.player.onPlayerEmote", PChar, emote);
 }
 
 void OnPlayerVolunteer(CCharEntity* PChar, const std::string& text)

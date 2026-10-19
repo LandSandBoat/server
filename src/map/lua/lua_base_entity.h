@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/behavior.h"
+#include "data/enums/emote.h"
+#include "data/enums/emote_mode.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/fame_area.h"
 #include "data/enums/mob_mod.h"
@@ -198,7 +200,7 @@ public:
     void sendGuildClose(uint8 open, uint8 close, sol::optional<bool> passive) const;                               // Sends the guild-open packet with a Close status
     void openSendBox() const;                                                                                      // Opens send box (to deliver items)
     void leaveGame();
-    void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const;
+    void sendEmote(const CLuaBaseEntity* target, xi::Emote emote, xi::EmoteMode emoteMode, bool othersOnly) const;
 
     // Location and Positioning
     int16 getWorldAngle(sol::variadic_args va);                                                // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
