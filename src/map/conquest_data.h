@@ -159,12 +159,12 @@ public:
         }
 
         // Current Beastmen model
-        // Beastmen% = Weight * Homepoints / (Weight * Homepoints + MobKills) = BeastmenInfluence / (NationTotal + BeastmenInfluence)
-        // BeastmenInfluence = (Weight * Homepoints * NationTotal) / MobKills
+        // Beastmen% = Homepoints / (1 + Homepoints + MobKills / Weight) = BeastmenInfluence / (NationTotal + BeastmenInfluence)
+        // BeastmenInfluence = (Weight * Homepoints * NationTotal) / (Weight + MobKills)
         // This will estimate BeastmenInfluence based on the current Nation Total influence
         const int64 beastmenWeight = homepointKillWeight * influence.player_homepoints;
 
-        return static_cast<int32>(std::min<int64>(beastmenWeight * nationTotal / influence.mob_kills, MAX_BEASTMEN_INFLUENCE));
+        return static_cast<int32>(std::min<int64>(beastmenWeight * nationTotal / (influence.mob_kills + homepointKillWeight), MAX_BEASTMEN_INFLUENCE));
     }
 
 private:
