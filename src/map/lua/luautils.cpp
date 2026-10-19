@@ -1564,7 +1564,7 @@ auto GetItemByID(uint32 itemId) -> const CItem*
 // We fetch the template and then intend to return an item, but that's really just not set up to work properly
 // So instead we return non-reference values from the item templates that cannot be modified
 // Remove me when we come up with a better way to fetch item templates in lua
-auto GetItemFlagsByID(uint32 itemId) -> ItemFlag
+auto GetItemFlagsByID(uint32 itemId) -> xi::ItemFlag
 {
     const auto* item = xi::items::lookup(itemId);
     if (item)
@@ -1572,7 +1572,7 @@ auto GetItemFlagsByID(uint32 itemId) -> ItemFlag
         return item->getFlag();
     }
 
-    return ItemFlag::None;
+    return xi::ItemFlag::None;
 }
 
 // GetItemByID currently fails because we can't properly guarantee the constness of `const CItem*`

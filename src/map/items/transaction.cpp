@@ -177,7 +177,7 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
         return 0;
     }
 
-    if (PItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, PItem->getID()))
+    if (PItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, PItem->getID()))
     {
         if (!silence)
         {

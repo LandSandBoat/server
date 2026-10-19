@@ -63,7 +63,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         return;
     }
 
-    if (!PItem->hasFlag(ItemFlag::Exclusive))
+    if (!PItem->hasFlag(xi::ItemFlag::Exclusive))
     {
         const auto bazaarState = [&]()
         {

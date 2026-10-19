@@ -69,7 +69,7 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
         return;
     }
 
-    if (PItem->getID() == param.ItemNo && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction))
+    if (PItem->getID() == param.ItemNo && !PItem->isBusy() && !PItem->hasFlag(xi::ItemFlag::NoAuction))
     {
         if (isPartiallyUsed(PItem))
         {
@@ -148,7 +148,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
 
     CItem* PItem = transaction->claimSlot(LOC_INVENTORY, param.ItemWorkIndex);
 
-    if (PItem && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
+    if (PItem && !PItem->hasFlag(xi::ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
     {
         if (isPartiallyUsed(PItem))
         {
@@ -254,7 +254,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
 
         if (PItem != nullptr)
         {
-            if (PItem->hasFlag(ItemFlag::Rare))
+            if (PItem->hasFlag(xi::ItemFlag::Rare))
             {
                 for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                 {
@@ -355,7 +355,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
         AuctionHistory_t canceledItem = PChar->m_ah_history[AucWorkIndex];
 
         const CItem* PListedItem = xi::items::lookup(canceledItem.itemid);
-        const bool   isRareHeld  = PListedItem && PListedItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, canceledItem.itemid);
+        const bool   isRareHeld  = PListedItem && PListedItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, canceledItem.itemid);
         if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0 || isRareHeld)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0xE5, PChar, static_cast<uint8_t>(AucWorkIndex), true);

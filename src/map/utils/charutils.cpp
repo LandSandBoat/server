@@ -1039,7 +1039,7 @@ void LoadInventory(CCharEntity* PChar)
                     }
                     PItem->setSignature(rset->get<std::string>("signature"));
                 }
-                else if (PItem->hasFlag(ItemFlag::Inscribable))
+                else if (PItem->hasFlag(xi::ItemFlag::Inscribable))
                 {
                     PItem->setSignature(rset->get<std::string>("signature"));
                 }

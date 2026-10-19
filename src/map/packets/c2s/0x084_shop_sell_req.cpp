@@ -38,7 +38,7 @@ void GP_CLI_COMMAND_SHOP_SELL_REQ::process(MapSession* PSession, CCharEntity* PC
     uint32 quantity = this->ItemNum;
 
     const CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->ItemIndex);
-    if (PItem && (PItem->getID() == this->ItemNo) && !PItem->hasFlag(ItemFlag::NoSale))
+    if (PItem && (PItem->getID() == this->ItemNo) && !PItem->hasFlag(xi::ItemFlag::NoSale))
     {
         quantity = std::min(quantity, PItem->getQuantity());
         // Store item-to-sell in the last slot of the shop container

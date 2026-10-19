@@ -25,8 +25,8 @@
 #include "common/logging.h"
 #include "common/settings.h"
 
+#include "data/enums/item_flag.h"
 #include "entities/char_entity.h"
-#include "enums/item_flag.h"
 #include "enums/item_lockflg.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
@@ -265,9 +265,9 @@ auto PlayerTradeTransaction::setSlot(CCharEntity* who, const uint8 transactionSl
     auto* item = who->getStorage(LOC_INVENTORY)->GetItem(inventorySlot);
 
     const bool wrongItem     = !item || item->getID() != expectedItemId;
-    const bool exclusiveItem = item && item->hasFlag(ItemFlag::Exclusive);
+    const bool exclusiveItem = item && item->hasFlag(xi::ItemFlag::Exclusive);
     const bool qtyExceeds    = item && qty > item->getQuantity();
-    const bool rareOnPartner = item && item->hasFlag(ItemFlag::Rare) && charutils::HasItem(other, item->getID());
+    const bool rareOnPartner = item && item->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(other, item->getID());
 
     const auto staged = (wrongItem || exclusiveItem || qtyExceeds || rareOnPartner) ? ItemId{} : this->claim(who, item);
 
@@ -420,7 +420,7 @@ auto PlayerTradeTransaction::canReceive(const Side& sender, CCharEntity* receive
                                 {
                                     const CItem* PStaged = slot.staged.resolve();
 
-                                    return PStaged && PStaged->hasFlag(ItemFlag::Rare) && charutils::HasItem(receiver, PStaged->getID());
+                                    return PStaged && PStaged->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(receiver, PStaged->getID());
                                 });
 }
 

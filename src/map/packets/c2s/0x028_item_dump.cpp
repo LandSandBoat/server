@@ -120,7 +120,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
     // Retail accurate: Any item dropped from a container other than inventory skips the recycle bin.
     // Items with the NoRecycle flag bypass the recycle bin entirely (e.g. linkshells).
-    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || this->Category != CONTAINER_ID::LOC_INVENTORY || PItem->hasFlag(ItemFlag::NoRecycle))
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || this->Category != CONTAINER_ID::LOC_INVENTORY || PItem->hasFlag(xi::ItemFlag::NoRecycle))
     {
         charutils::DropItem(PChar, this->Category, this->ItemIndex, this->ItemNum, PItem->getID());
         return;

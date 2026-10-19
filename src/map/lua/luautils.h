@@ -38,6 +38,7 @@
 
 #include "data/enums/content.h"
 #include "data/enums/emote.h"
+#include "data/enums/item_flag.h"
 #include "data/enums/nation.h"
 #include "data/enums/region.h"
 
@@ -66,7 +67,6 @@
 #include "data/datasets/zones/npcs/dataset.h"
 
 class IPP;
-enum class ItemFlag : uint32;
 
 namespace xi
 {
@@ -297,7 +297,7 @@ void SendEntityVisualPacket(uint32 npcId, const char* command);
 void InitInteractionGlobal();
 auto GetZone(xi::ZoneId zoneId) -> CZone*;
 auto GetItemByID(uint32 itemId) -> const CItem*;
-auto GetItemFlagsByID(uint32 itemId) -> ItemFlag;
+auto GetItemFlagsByID(uint32 itemId) -> xi::ItemFlag;
 auto GetItemLevelRequirementsByID(uint32 itemId) -> uint8;
 auto GetNPCByID(uint32 npcid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetMobByID(uint32 mobid, const sol::object& instanceObj) -> CBaseEntity*;

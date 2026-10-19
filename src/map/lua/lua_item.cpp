@@ -60,7 +60,7 @@ uint16 CLuaItem::getSubID()
     return m_readItem->getSubID();
 }
 
-auto CLuaItem::getFlag() const -> ItemFlag
+auto CLuaItem::getFlag() const -> xi::ItemFlag
 {
     return m_readItem->getFlag();
 }

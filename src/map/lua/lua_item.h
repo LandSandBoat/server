@@ -22,13 +22,12 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/item_flag.h"
 #include "data/enums/item_state.h"
 
 #include <sol/forward.hpp>
 
 #include <string>
-
-enum class ItemFlag : uint32;
 class CItem;
 
 class CLuaItem
@@ -50,8 +49,8 @@ public:
     uint16 getID();    // get the item's id
     uint16 getSubID(); // get the item's subid
 
-    auto  getFlag() const -> ItemFlag; // get the item flag
-    uint8 getAHCat();                  // get the ah category
+    auto  getFlag() const -> xi::ItemFlag; // get the item flag
+    uint8 getAHCat();                      // get the ah category
 
     uint32 getQuantity(); // get the quantity of item
 
