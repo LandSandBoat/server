@@ -22,13 +22,13 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/item_state.h"
 
 #include <sol/forward.hpp>
 
 #include <string>
 
 enum class ItemFlag : uint32;
-enum class ItemState : uint8;
 class CItem;
 
 class CLuaItem
@@ -65,7 +65,7 @@ public:
     void setSubType(uint8 subtype); // set the item's sub type
     bool isSubType(uint8 subtype);  // check the item's sub type
 
-    auto state() const -> ItemState; // current ItemState (xi.itemState.*)
+    auto state() const -> xi::ItemState; // current ItemState (xi.itemState.*)
 
     auto   getName() -> std::string; // get the item's name
     uint16 getILvl();                // get the item's ilvl

@@ -20,7 +20,7 @@
 */
 
 #include "0x10a_bazaar_itemset.h"
-#include "enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "items/item_access.h"
 
 #include "entities/char_entity.h"
@@ -57,7 +57,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         return;
     }
 
-    if (PItem->isBusy() && PItem->state() != ItemState::Bazaar)
+    if (PItem->isBusy() && PItem->state() != xi::ItemState::Bazaar)
     {
         ShowError("Player %s trying to bazaar a busy/reserved item! [Item: %i | Slot ID: %i] ", PChar->getName(), PItem->getID(), this->ItemIndex);
         return;
@@ -69,10 +69,10 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
         {
             if (this->Price == 0)
             {
-                return ItemState::Free;
+                return xi::ItemState::Free;
             }
 
-            return ItemState::Bazaar;
+            return xi::ItemState::Bazaar;
         }();
 
         // already Bazaar, and mark() only moves between states

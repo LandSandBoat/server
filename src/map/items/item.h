@@ -25,8 +25,8 @@
 #include "common/mmo.h"
 #include "common/types/badge.h"
 
+#include "data/enums/item_state.h"
 #include "map/enums/item_flag.h"
-#include "map/enums/item_state.h"
 
 namespace xi::items::detail
 {
@@ -121,8 +121,8 @@ public:
 
     bool isMannequin() const;
 
-    auto state() const -> ItemState;
-    void setState(ItemState newState, xi::Badge<xi::items::detail::ItemAccess>);
+    auto state() const -> xi::ItemState;
+    void setState(xi::ItemState newState, xi::Badge<xi::items::detail::ItemAccess>);
     auto isBusy() const -> bool;
 
     static constexpr uint32_t extra_size = 0x18;
@@ -168,5 +168,5 @@ private:
     std::string m_send;
     std::string m_recv;
 
-    ItemState state_{ ItemState::Free };
+    xi::ItemState state_{ xi::ItemState::Free };
 };

@@ -1076,7 +1076,7 @@ auto CCharEntity::bindEquip(const uint8 equipSlot, CItem* item) -> bool
         return false;
     }
 
-    if (!xi::items::mark(item, ItemState::Equipped))
+    if (!xi::items::mark(item, xi::ItemState::Equipped))
     {
         return false;
     }
@@ -1095,7 +1095,7 @@ void CCharEntity::clearEquip(const uint8 equipSlot)
 
     if (auto* item = equipped_[equipSlot]; item != nullptr)
     {
-        if (!xi::items::mark(item, ItemState::Free))
+        if (!xi::items::mark(item, xi::ItemState::Free))
         {
             return;
         }

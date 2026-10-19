@@ -427,17 +427,17 @@ bool CItem::isMannequin() const
     return m_id >= 256 && m_id <= 263;
 }
 
-auto CItem::state() const -> ItemState
+auto CItem::state() const -> xi::ItemState
 {
     return state_;
 }
 
-void CItem::setState(const ItemState newState, xi::Badge<xi::items::detail::ItemAccess>)
+void CItem::setState(const xi::ItemState newState, xi::Badge<xi::items::detail::ItemAccess>)
 {
     state_ = newState;
 }
 
 auto CItem::isBusy() const -> bool
 {
-    return state_ != ItemState::Free;
+    return state_ != xi::ItemState::Free;
 }

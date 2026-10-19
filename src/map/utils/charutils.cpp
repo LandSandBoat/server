@@ -20,7 +20,7 @@
 */
 
 #include "common/logging.h"
-#include "enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "items/item_access.h"
 #include "items/transactions/item_claim.h"
 #include "items/transactions/npc_trade.h"
@@ -1022,7 +1022,7 @@ void LoadInventory(CCharEntity* PChar)
 
                 db::extractFromBlob(rset, "extra", PItem->m_extra);
 
-                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), ItemState::Bazaar))
+                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), xi::ItemState::Bazaar))
                 {
                     ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}, taking it off display", PItem->getID(), PChar->getName());
 
@@ -1059,7 +1059,7 @@ void LoadInventory(CCharEntity* PChar)
                     auto* PFurnishing = static_cast<CItemFurnishing*>(PItem.get());
                     if (PFurnishing->isInstalled())
                     {
-                        if (xi::items::mark(PFurnishing, ItemState::PlacedFurniture))
+                        if (xi::items::mark(PFurnishing, xi::ItemState::PlacedFurniture))
                         {
                             PChar->getStorage(LOC_STORAGE)->AddBuff(PFurnishing->getStorage());
                         }

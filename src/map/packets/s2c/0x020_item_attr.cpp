@@ -22,9 +22,9 @@
 #include "0x020_item_attr.h"
 
 #include "common/vana_time.h"
+#include "data/enums/item_state.h"
 #include "entities/char_entity.h"
 #include "enums/item_lockflg.h"
-#include "enums/item_state.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "utils/itemutils.h"
@@ -42,7 +42,7 @@ auto lockFlagFor(const CItem* PItem) -> ItemLockFlg
         return ItemLockFlg::Unknown0;
     }
 
-    if (PItem->state() == ItemState::Equipped)
+    if (PItem->state() == xi::ItemState::Equipped)
     {
         if (PItem->isType(ITEM_LINKSHELL))
         {

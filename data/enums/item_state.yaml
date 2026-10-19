@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.itemState
+
+values:
+  free:             0
+  equipped:         1 # Item is currently equipped
+  bazaar:           2 # Item is currently being sold in Bazaar
+  placed_furniture: 3 # Item has been placed in the Mog House
+  in_transaction:   4 # Item is being used as part of a transaction subsystem

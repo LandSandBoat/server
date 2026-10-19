@@ -26,8 +26,8 @@
 
 #include "ai/ai_container.h"
 #include "ai/states/item_state.h"
+#include "data/enums/item_state.h"
 #include "entities/char_entity.h"
-#include "enums/item_state.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
 #include "items/item.h"
@@ -82,7 +82,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
     }
 
     // Equipped ammo decrements its stack on consumption without leaving the slot.
-    const bool isEquippedAmmo = PItem->state() == ItemState::Equipped &&
+    const bool isEquippedAmmo = PItem->state() == xi::ItemState::Equipped &&
                                 PChar->getEquip(SLOT_AMMO) == PItem;
     if (PItem->isBusy() && !isEquippedAmmo && !heldByOwner)
     {
