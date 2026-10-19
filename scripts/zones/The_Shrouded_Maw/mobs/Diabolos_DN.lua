@@ -183,15 +183,17 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
-    local skillId = skill:getID()
+    if target:getID() == action:getPrimaryTargetID() then
+        local skillId = skill:getID()
 
-    if
-        skillId == xi.mobSkill.NIGHTMARE_1 or
-        skillId == xi.mobSkill.ULTIMATE_TERROR_1
-    then
-        mob:queue(0, function(mobArg)
-            mobArg:useMobAbility(xi.mobSkill.CAMISADO_1)
-        end)
+        if
+            skillId == xi.mobSkill.NIGHTMARE_1 or
+            skillId == xi.mobSkill.ULTIMATE_TERROR_1
+        then
+            mob:queue(0, function(mobArg)
+                mobArg:useMobAbility(xi.mobSkill.CAMISADO_1)
+            end)
+        end
     end
 end
 
