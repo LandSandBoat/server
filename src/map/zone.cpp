@@ -778,7 +778,8 @@ void CZone::SetWeather(const xi::Weather weather)
 
     m_zoneEntities->WeatherChange(weather);
 
-    const uint32 changeTime = earth_time::vanadiel_timestamp();
+    const auto   cycleTime  = vanadiel_time::now().time_since_epoch() % xi::vanadiel_clock::days(WeatherCycle);
+    const uint32 changeTime = static_cast<uint32>(std::chrono::floor<xi::vanadiel_clock::minutes>(cycleTime).count());
     weather_.set(weather, changeTime);
 
     m_zoneEntities->PushPacket(nullptr, CHAR_INZONE, std::make_unique<GP_SERV_COMMAND_WEATHER>(changeTime, weather, xirand::GetRandomNumber(4, 28)));
