@@ -627,16 +627,9 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
         return SYNTHESIS_SUCCESS;
     }
 
-    // Early return: T0 cannot upgrade HQ.
-    if (finalHQTier <= 1)
-    {
-        return SYNTHESIS_HQ;
-    }
-
-    // Calculate HQ2 and HQ3 upgrades.
-    uint8 allowedUpgrades = (finalHQTier == 2 ? 1 : 2);
-    uint8 upgradeHQ       = 0;
-    for (uint8 tries = 0; tries < allowedUpgrades; ++tries)
+    // Calculate HQ tier.
+    uint8 upgradeHQ = 0;
+    for (uint8 tries = 0; tries < 2; ++tries)
     {
         if (xirand::GetRandomNumber(0.0, 100.0) <= 25.0) // 25% Chance to upgrade HQ
         {
@@ -909,21 +902,21 @@ void handleSynthFail(CCharEntity* PChar)
 // Percent chance of a +0.1 through +0.5 skill up given one occurred, indexed by floor distance (recipe level - charSkill / 10).
 // Derived from retail skill-up logs. Each row sums to 100.
 static constexpr std::array<std::array<uint8, 5>, 15> skillUpAmountWeights = { {
-    { 85, 15, 0, 0, 0 },   // 0 (and over-cap)
-    { 85, 15, 0, 0, 0 },   // 1
-    { 85, 15, 0, 0, 0 },   // 2
-    { 80, 20, 0, 0, 0 },   // 3
-    { 80, 20, 0, 0, 0 },   // 4
-    { 70, 30, 0, 0, 0 },   // 5
-    { 70, 30, 0, 0, 0 },   // 6
-    { 60, 40, 0, 0, 0 },   // 7
-    { 60, 40, 0, 0, 0 },   // 8
-    { 50, 40, 10, 0, 0 },  // 9
-    { 40, 40, 20, 0, 0 },  // 10
-    { 40, 40, 20, 0, 0 },  // 11
-    { 15, 45, 30, 10, 0 }, // 12
-    { 10, 40, 25, 25, 0 }, // 13
-    { 0, 40, 30, 20, 10 }, // 14+
+    { 85, 15,  0,  0,  0 }, //  0 (and over-cap)
+    { 85, 15,  0,  0,  0 }, //  1
+    { 85, 15,  0,  0,  0 }, //  2
+    { 80, 20,  0,  0,  0 }, //  3
+    { 80, 20,  0,  0,  0 }, //  4
+    { 70, 30,  0,  0,  0 }, //  5
+    { 70, 30,  0,  0,  0 }, //  6
+    { 60, 40,  0,  0,  0 }, //  7
+    { 60, 40,  0,  0,  0 }, //  8
+    { 50, 40, 10,  0,  0 }, //  9
+    { 40, 40, 20,  0,  0 }, // 10
+    { 40, 40, 20,  0,  0 }, // 11
+    { 15, 45, 30, 10,  0 }, // 12
+    { 10, 40, 25, 25,  0 }, // 13
+    {  0, 40, 30, 20, 10 }, // 14+
 } };
 
 // Used in: sendSynthDone
