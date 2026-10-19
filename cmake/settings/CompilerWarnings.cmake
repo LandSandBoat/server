@@ -120,9 +120,9 @@ function(set_project_warnings project_name)
     else()
       set(ERRORS "-Werror")
     endif()
+    message(STATUS "Setting warnings as errors flag: ${ERRORS}")
   endif()
 
-  message(STATUS "Setting warnings as errors flag: ${ERRORS}")
   message(STATUS "Setting project warning flags: ${PROJECT_WARNINGS}")
   target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
 endfunction() #set_project_warnings

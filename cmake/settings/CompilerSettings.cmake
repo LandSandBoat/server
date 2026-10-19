@@ -59,4 +59,4 @@ if(WIN32)
     )
 endif()
 
-include(CompilerWarnings)
+include(settings/CompilerWarnings)
