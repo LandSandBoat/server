@@ -449,11 +449,11 @@ public:
     auto getAutomatonElementMax(uint8 element) const -> uint8;
     auto getAutomatonElementCapacity(uint8 element) const -> uint8;
 
-    auto getAutomatonFrame() const -> AutomatonFrame;
-    auto getAutomatonHead() const -> AutomatonHead;
+    auto getAutomatonFrame() const -> xi::AutomatonFrame;
+    auto getAutomatonHead() const -> xi::AutomatonHead;
 
-    void setAutomatonFrame(AutomatonFrame frame);
-    void setAutomatonHead(AutomatonHead head);
+    void setAutomatonFrame(xi::AutomatonFrame frame);
+    void setAutomatonHead(xi::AutomatonHead head);
 
     void setAutomatonAttachment(uint8 slotid, uint8 id);
 

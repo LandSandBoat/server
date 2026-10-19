@@ -86,13 +86,14 @@
 #include "ai/helpers/gambits_container.h"
 #include "ai/helpers/targetfind.h"
 
+#include "data/enums/automaton_frame.h"
+#include "data/enums/automaton_head.h"
 #include "entities/automaton_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
-#include "enums/automaton.h"
 #include "enums/chat_message_area.h"
 #include "enums/item_lockflg.h"
 #include "items/exdata.h"
@@ -17383,12 +17384,12 @@ auto CLuaBaseEntity::getAutomatonName() const -> std::string
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getAutomatonFrame() const -> Maybe<AutomatonFrame>
+auto CLuaBaseEntity::getAutomatonFrame() const -> Maybe<xi::AutomatonFrame>
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto frame = static_cast<CCharEntity*>(m_PBaseEntity)->getAutomatonFrame();
-        if (frame >= AutomatonFrame::Harlequin && frame <= AutomatonFrame::Stormwaker)
+        if (frame >= xi::AutomatonFrame::Harlequin && frame <= xi::AutomatonFrame::Stormwaker)
         {
             return frame;
         }
@@ -17412,7 +17413,7 @@ auto CLuaBaseEntity::getAutomatonFrame() const -> Maybe<AutomatonFrame>
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setAutomatonFrame(const AutomatonFrame frame) const
+void CLuaBaseEntity::setAutomatonFrame(const xi::AutomatonFrame frame) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -17434,12 +17435,12 @@ void CLuaBaseEntity::setAutomatonFrame(const AutomatonFrame frame) const
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getAutomatonHead() const -> Maybe<AutomatonHead>
+auto CLuaBaseEntity::getAutomatonHead() const -> Maybe<xi::AutomatonHead>
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto head = static_cast<CCharEntity*>(m_PBaseEntity)->getAutomatonHead();
-        if (head >= AutomatonHead::Harlequin && head <= AutomatonHead::Spiritreaver)
+        if (head >= xi::AutomatonHead::Harlequin && head <= xi::AutomatonHead::Spiritreaver)
         {
             return head;
         }
@@ -17463,7 +17464,7 @@ auto CLuaBaseEntity::getAutomatonHead() const -> Maybe<AutomatonHead>
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setAutomatonHead(const AutomatonHead head) const
+void CLuaBaseEntity::setAutomatonHead(const xi::AutomatonHead head) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 

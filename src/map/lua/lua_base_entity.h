@@ -851,10 +851,10 @@ public:
     auto hasAttachment(uint16 itemID) const -> bool;
     auto hasAttachmentSet(uint16 itemID) const -> bool;
     auto getAutomatonName() const -> std::string;
-    auto getAutomatonFrame() const -> Maybe<AutomatonFrame>;
-    void setAutomatonFrame(AutomatonFrame frame) const;
-    auto getAutomatonHead() const -> Maybe<AutomatonHead>;
-    void setAutomatonHead(AutomatonHead head) const;
+    auto getAutomatonFrame() const -> Maybe<xi::AutomatonFrame>;
+    void setAutomatonFrame(xi::AutomatonFrame frame) const;
+    auto getAutomatonHead() const -> Maybe<xi::AutomatonHead>;
+    void setAutomatonHead(xi::AutomatonHead head) const;
     auto unlockAttachment(uint16 itemID) const -> bool;
     auto getActiveManeuverCount() const -> uint8;
     void removeOldestManeuver() const;

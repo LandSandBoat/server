@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.automaton.head
+
+values:
+  harlequin:    0x01
+  valoredge:    0x02
+  sharpshot:    0x03
+  stormwaker:   0x04
+  soulsoother:  0x05
+  spiritreaver: 0x06

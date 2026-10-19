@@ -21,7 +21,8 @@
 
 #pragma once
 
-#include "enums/automaton.h"
+#include "data/enums/automaton_frame.h"
+#include "data/enums/automaton_head.h"
 #include "pet_entity.h"
 
 #include <map/entities/types/automaton_equip.h>
@@ -34,8 +35,8 @@ public:
     CAutomatonEntity(uint32 petID);
     ~CAutomatonEntity() override;
 
-    auto frame() const -> AutomatonFrame;
-    auto head() const -> AutomatonHead;
+    auto frame() const -> xi::AutomatonFrame;
+    auto head() const -> xi::AutomatonHead;
     auto attachment(uint8 slotid) const -> uint8;
     auto hasAttachment(uint8 attachment) const -> bool;
     void setEquip(const AutomatonEquip& equip);

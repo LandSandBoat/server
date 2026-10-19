@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.automaton.frame
+
+values:
+  harlequin:  0x20
+  valoredge:  0x21
+  sharpshot:  0x22
+  stormwaker: 0x23

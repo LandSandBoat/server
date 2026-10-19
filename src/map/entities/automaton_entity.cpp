@@ -28,8 +28,9 @@
 #include "ai/states/mobskill_state.h"
 #include "common/tracy.h"
 #include "common/utils.h"
+#include "data/enums/automaton_frame.h"
+#include "data/enums/automaton_head.h"
 #include "enmity_container.h"
-#include "enums/automaton.h"
 #include "lua/luautils.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
@@ -51,12 +52,12 @@ CAutomatonEntity::~CAutomatonEntity()
     TracyZoneScoped;
 }
 
-auto CAutomatonEntity::frame() const -> AutomatonFrame
+auto CAutomatonEntity::frame() const -> xi::AutomatonFrame
 {
     return equip_.frame;
 }
 
-auto CAutomatonEntity::head() const -> AutomatonHead
+auto CAutomatonEntity::head() const -> xi::AutomatonHead
 {
     return equip_.head;
 }
@@ -222,7 +223,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
         {
             if (skillId == PSkill->getID())
             {
-                const auto skillType = frame() == AutomatonFrame::Sharpshot ? xi::SkillType::AutomatonRanged : xi::SkillType::AutomatonMelee;
+                const auto skillType = frame() == xi::AutomatonFrame::Sharpshot ? xi::SkillType::AutomatonRanged : xi::SkillType::AutomatonMelee;
                 puppetutils::TrySkillUP(this, skillType, PTarget->GetMLevel());
                 break;
             }

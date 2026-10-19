@@ -692,12 +692,12 @@ auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
-void CCharEntity::setAutomatonFrame(const AutomatonFrame frame)
+void CCharEntity::setAutomatonFrame(const xi::AutomatonFrame frame)
 {
     automatonInfo_.equip.frame = frame;
 }
 
-void CCharEntity::setAutomatonHead(const AutomatonHead head)
+void CCharEntity::setAutomatonHead(const xi::AutomatonHead head)
 {
     automatonInfo_.equip.head = head;
 }
@@ -739,12 +739,12 @@ void CCharEntity::setAutomatonElementalCapacityBonus(const uint8 bonus)
     automatonInfo_.elementalCapacityBonus = bonus;
 }
 
-auto CCharEntity::getAutomatonFrame() const -> AutomatonFrame
+auto CCharEntity::getAutomatonFrame() const -> xi::AutomatonFrame
 {
     return automatonInfo_.equip.frame;
 }
 
-auto CCharEntity::getAutomatonHead() const -> AutomatonHead
+auto CCharEntity::getAutomatonHead() const -> xi::AutomatonHead
 {
     return automatonInfo_.equip.head;
 }
