@@ -126,3 +126,7 @@ function(set_project_warnings project_name)
   message(STATUS "Setting project warning flags: ${PROJECT_WARNINGS}")
   target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
 endfunction() #set_project_warnings
+
+# Link this 'library' to use the warnings above; xi_add_library and xi_add_executable already do.
+add_library(project_warnings INTERFACE)
+set_project_warnings(project_warnings)
