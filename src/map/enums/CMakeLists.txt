@@ -24,6 +24,5 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_log.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_result.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/terrain_type.h
     PARENT_SCOPE
 )

@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "map/enums/terrain_type.h"
+#include "data/enums/terrain_type.h"
 #include "map/ximesh/vector3.h"
 
 #include <array>
@@ -137,11 +137,11 @@ struct CellSpan
 // Result of a vertical downcast (query). Answers "what floor is under this XZ position?"
 struct CellHit
 {
-    TerrainType type{ TerrainType::None };
-    uint8       mapId{};
-    bool        roofed{};
-    bool        barrier{};
-    float       y{}; // world-space floor height at the query point
+    xi::TerrainType type{ xi::TerrainType::None };
+    uint8           mapId{};
+    bool            roofed{};
+    bool            barrier{};
+    float           y{}; // world-space floor height at the query point
 };
 
 struct YOffsets
@@ -162,6 +162,6 @@ struct RayHitInfo
     Vector3              intersection{}; // 3D hit point in object space
     float                distanceSq{};
     const MeshPlacement* placement{};
-    TerrainType          type{ TerrainType::None };
+    xi::TerrainType      type{ xi::TerrainType::None };
     bool                 barrier{};
 };

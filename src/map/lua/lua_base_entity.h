@@ -32,6 +32,7 @@
 #include "data/enums/music_slot.h"
 #include "data/enums/quest_log.h"
 #include "data/enums/roam_flag.h"
+#include "data/enums/terrain_type.h"
 #include "data/enums/zone_misc.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
@@ -45,7 +46,6 @@
 #include <string>
 #include <tuple>
 enum class POSMODE : uint8;
-enum class TerrainType : uint8;
 class CBaseEntity;
 class CCharEntity;
 class CLuaBattlefield;

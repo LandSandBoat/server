@@ -91,7 +91,7 @@ auto EntityPathOwner::inWater() const -> bool
 {
     const auto& pos     = entity_->loc.p;
     const auto  terrain = entity_->loc.zone->xiMesh()->getTerrainAt(pos.x, pos.y, pos.z);
-    return terrain == TerrainType::ShallowWater || terrain == TerrainType::DeepWater;
+    return terrain == xi::TerrainType::ShallowWater || terrain == xi::TerrainType::DeepWater;
 }
 
 auto EntityPathOwner::battleTargetPosition() const -> const position_t*

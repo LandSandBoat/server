@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "enums/terrain_type.h"
+#include "data/enums/terrain_type.h"
 #include "zone.h"
 
 #include <sol/forward.hpp>
@@ -68,7 +68,7 @@ public:
     void         reloadNavmesh();
     void         rebuildNavmesh(const sol::table& table);
     bool         isNavigablePoint(const sol::table& position);
-    auto         getTerrainType(const sol::table& position) -> TerrainType;
+    auto         getTerrainType(const sol::table& position) -> xi::TerrainType;
     auto         getFloorId(const sol::table& position) -> uint8;
     auto         insertDynamicEntity(sol::table table) -> CBaseEntity*;
 

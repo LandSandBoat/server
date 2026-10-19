@@ -552,7 +552,7 @@ auto XiMeshImpl::query(const float x, const float y, const float z) const -> May
                 {
                     const auto& meta = block.metas[triIdx];
                     best             = CellHit{
-                        .type    = static_cast<TerrainType>(meta.material),
+                        .type    = static_cast<xi::TerrainType>(meta.material),
                         .mapId   = place.mapId,
                         .roofed  = place.roofed,
                         .barrier = meta.barrier != 0,
@@ -595,7 +595,7 @@ auto XiMeshImpl::query(const float x, const float y, const float z) const -> May
     return best;
 }
 
-auto XiMeshImpl::getTerrainAt(const float x, const float y, const float z) const -> TerrainType
+auto XiMeshImpl::getTerrainAt(const float x, const float y, const float z) const -> xi::TerrainType
 {
     TracyZoneScoped;
 
@@ -604,7 +604,7 @@ auto XiMeshImpl::getTerrainAt(const float x, const float y, const float z) const
         return hit->type;
     }
 
-    return TerrainType::None;
+    return xi::TerrainType::None;
 }
 
 auto XiMeshImpl::getFloorId(const float x, const float y, const float z) const -> uint8
@@ -992,7 +992,7 @@ auto XiMeshImpl::rayIntersectCellHitInfo(const Vector3& start, const Vector3& en
                         .intersection = intersection,
                         .distanceSq   = distanceSq,
                         .placement    = &place,
-                        .type         = static_cast<TerrainType>(meta.material),
+                        .type         = static_cast<xi::TerrainType>(meta.material),
                         .barrier      = meta.barrier != 0,
                     };
                 }

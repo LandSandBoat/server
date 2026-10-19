@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.terrain
+
+values:
+  object:          0
+  path:            1
+  grass:           2
+  sand:            3
+  snow:            4
+  stone:           5
+  metal:           6
+  wood:            7
+  shallow_water:   8
+  deep_water:      9
+  unknown:        10
+  none:          255

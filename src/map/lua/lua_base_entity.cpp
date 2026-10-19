@@ -2472,7 +2472,7 @@ bool CLuaBaseEntity::inWater()
     // NOTE: Same logic as in PathFind::InWater
     const auto& pos     = m_PBaseEntity->loc.p;
     const auto  terrain = m_PBaseEntity->loc.zone->xiMesh()->getTerrainAt(pos.x, pos.y, pos.z);
-    return terrain == TerrainType::ShallowWater || terrain == TerrainType::DeepWater;
+    return terrain == xi::TerrainType::ShallowWater || terrain == xi::TerrainType::DeepWater;
 }
 
 /************************************************************************
