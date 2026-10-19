@@ -1,42 +1,34 @@
 cmake_minimum_required(VERSION 3.25)
 
-# https://cmake.org/cmake/help/latest/policy/CMP0141.html
-# Lets CMAKE_MSVC_DEBUG_INFORMATION_FORMAT (set in PreProject.cmake) pick /Zi or /Z7.
-cmake_policy(SET CMP0141 NEW)
-
-# cmake/settings  General, compiler and linker settings
-# cmake/tools     Optional build tools: compiler cache, sanitizers, Valgrind, clang-tidy, fuzzing
-# cmake/find      Find modules for the libraries we take from the system or bundle under ext/
-# cmake/project   Dependency fetching, codegen, and the helpers our targets are declared with
+# Modules are included by their folder, e.g. include(settings/PreProject).
+# cmake/find is also listed on its own because find_package() only looks for Find<Name>.cmake at the top of each path.
 set(CMAKE_MODULE_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/settings
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/tools
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/find
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/project
 )
 
-include(PreProject)
+include(settings/PreProject)
 
 project(server C CXX)
 
-include(Cache)
+include(tools/Cache)
 
-include(BuildSettings)
-include(CompilerSettings)
-include(LinkerSettings)
+include(settings/BuildSettings)
+include(settings/CompilerSettings)
+include(settings/LinkerSettings)
 
-include(Sanitizers)
-include(Valgrind)
+include(tools/Sanitizers)
+include(tools/Valgrind)
 
-include(Git)
-include(Modules)
-include(Targets)
+include(project/Git)
+include(project/Modules)
+include(project/Targets)
 
-include(ConfigureReport)
+include(project/ConfigureReport)
 
-include(CPMCache)
-include(CPM)
-include(BundledLibrary)
+include(project/CPMCache)
+include(project/CPM)
+include(find/BundledLibrary)
 
 find_package(Python 3 REQUIRED)
 message(STATUS "Python_EXECUTABLE: ${Python_EXECUTABLE}")
@@ -66,9 +58,9 @@ add_subdirectory(ext)
 
 # After add_subdirectory(ext) so third-party targets never inherit CMAKE_CXX_CLANG_TIDY.
 # Dependencies pulled in later have to be wrapped in suspend_clang_tidy()/resume_clang_tidy().
-include(ClangTidy)
-include(Fuzzing)
+include(tools/ClangTidy)
+include(tools/Fuzzing)
 
-include(Codegen)
+include(project/Codegen)
 
 add_subdirectory(src)
