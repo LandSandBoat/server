@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.region
+
+values:
+  ronfaure:                0
+  zulkheim:                1
+  norvallen:               2
+  gustaberg:               3
+  derfland:                4
+  sarutabaruta:            5
+  kolshushu:               6
+  aragoneu:                7
+  fauregandi:              8
+  valdeaunia:              9
+  qufim_island:           10
+  litelor:                11
+  kuzotz:                 12
+  vollbow:                13
+  elshimo_lowlands:       14
+  elshimo_uplands:        15
+  tulia:                  16
+  movalpolos:             17
+  tavnazian_archipelago:  18
+  sandoria:               19
+  bastok:                 20
+  windurst:               21
+  jeuno:                  22
+  dynamis:                23
+  tavnazian_marquisate:   24
+  promyvion:              25
+  lumoria:                26
+  limbus:                 27
+  west_aht_urhgan:        28
+  mamool_ja_savage:       29
+  halvung:                30
+  arrapago:               31
+  alzadaal:               32
+  ronfaure_front:         33
+  norvallen_front:        34
+  gustaberg_front:        35
+  derfland_front:         36
+  sarutabaruta_front:     37
+  aragoneu_front:         38
+  fauregandi_front:       39
+  valdeaunia_front:       40
+  abyssea:                41
+  the_threshold:          42
+  abdhaljs:               43
+  adoulin_islands:        44
+  east_ulbuka:            45
+  unknown:               255

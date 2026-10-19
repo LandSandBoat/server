@@ -7,7 +7,7 @@
 ---@type TNpcEntity
 local entity = {}
 
-local vendorRegion  = xi.region.QUFIMISLAND
+local vendorRegion  = xi.region.QUFIM_ISLAND
 local vendorEvent   = 32756
 
 entity.onTrade = function(player, npc, trade)

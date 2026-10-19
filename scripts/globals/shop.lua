@@ -904,9 +904,9 @@ local regionalVendorTable =
     ['Mille'        ] = { xi.region.NORVALLEN, xi.nation.BASTOK,   xi.fameArea.BASTOK,   minesID.text.MILLE_OPEN_DIALOG,            minesID.text.MILLE_CLOSED_DIALOG,            0 },
     ['Posso_Ruhbini'] = { xi.region.NORVALLEN, xi.nation.WINDURST, xi.fameArea.WINDURST, portWindyID.text.POSSORUHBINI_OPEN_DIALOG, portWindyID.text.POSSORUHBINI_CLOSED_DIALOG, 0 },
 
-    ['Eugballion'    ] = { xi.region.QUFIMISLAND, xi.nation.SANDORIA, xi.fameArea.SANDORIA, northSandyID.text.EUGBALLION_OPEN_DIALOG, northSandyID.text.EUGBALLION_CLOSED_DIALOG, 0 },
-    ['Takiyah'       ] = { xi.region.QUFIMISLAND, xi.nation.BASTOK,   xi.fameArea.BASTOK,   metalworksID.text.TAKIYAH_OPEN_DIALOG,    metalworksID.text.TAKIYAH_CLOSED_DIALOG,    0 },
-    ['Millerovieunet'] = { xi.region.QUFIMISLAND, xi.nation.WINDURST, xi.fameArea.WINDURST, woodsID.text.MILLEROVIEUNET_OPEN_DIALOG,  woodsID.text.MILLEROVIEUNET_CLOSED_DIALOG,  0 },
+    ['Eugballion'    ] = { xi.region.QUFIM_ISLAND, xi.nation.SANDORIA, xi.fameArea.SANDORIA, northSandyID.text.EUGBALLION_OPEN_DIALOG, northSandyID.text.EUGBALLION_CLOSED_DIALOG, 0 },
+    ['Takiyah'       ] = { xi.region.QUFIM_ISLAND, xi.nation.BASTOK,   xi.fameArea.BASTOK,   metalworksID.text.TAKIYAH_OPEN_DIALOG,    metalworksID.text.TAKIYAH_CLOSED_DIALOG,    0 },
+    ['Millerovieunet'] = { xi.region.QUFIM_ISLAND, xi.nation.WINDURST, xi.fameArea.WINDURST, woodsID.text.MILLEROVIEUNET_OPEN_DIALOG,  woodsID.text.MILLEROVIEUNET_CLOSED_DIALOG,  0 },
 
     ['Corua'   ] = { xi.region.RONFAURE, xi.nation.SANDORIA, xi.fameArea.SANDORIA, southSandyID.text.CORUA_OPEN_DIALOG, southSandyID.text.CORUA_CLOSED_DIALOG, 0 },
     ['Faustin' ] = { xi.region.RONFAURE, xi.nation.BASTOK,   xi.fameArea.BASTOK,   minesID.text.FAUSTIN_OPEN_DIALOG,    minesID.text.FAUSTIN_CLOSED_DIALOG,    0 },
@@ -916,9 +916,9 @@ local regionalVendorTable =
     ['Somn-Paemn' ] = { xi.region.SARUTABARUTA, xi.nation.BASTOK,   xi.fameArea.BASTOK,   marketsID.text.SOMNPAEMN_OPEN_DIALOG, marketsID.text.SOMNPAEMN_CLOSED_DIALOG, 0 },
     ['Baehu-Faehu'] = { xi.region.SARUTABARUTA, xi.nation.WINDURST, xi.fameArea.WINDURST, watersID.text.BAEHUFAEHU_OPEN_DIALOG, watersID.text.BAEHUFAEHU_CLOSED_DIALOG, 0 },
 
-    ['Deguerendars'] = { xi.region.TAVNAZIANARCH, xi.nation.SANDORIA, xi.fameArea.SANDORIA, portSandyID.text.DEGUERENDARS_OPEN_DIALOG, portSandyID.text.DEGUERENDARS_CLOSED_DIALOG, portSandyID.text.DEGUERENDARS_COP_NOT_COMPLETED },
-    ['Emaliveulaux'] = { xi.region.TAVNAZIANARCH, xi.nation.BASTOK,   xi.fameArea.BASTOK,   minesID.text.EMALIVEULAUX_OPEN_DIALOG,     minesID.text.EMALIVEULAUX_CLOSED_DIALOG,     minesID.text.EMALIVEULAUX_COP_NOT_COMPLETED     },
-    ['Alizabe'     ] = { xi.region.TAVNAZIANARCH, xi.nation.WINDURST, xi.fameArea.WINDURST, portWindyID.text.ALIZABE_OPEN_DIALOG,      portWindyID.text.ALIZABE_CLOSED_DIALOG,      portWindyID.text.ALIZABE_COP_NOT_COMPLETED      },
+    ['Deguerendars'] = { xi.region.TAVNAZIAN_ARCHIPELAGO, xi.nation.SANDORIA, xi.fameArea.SANDORIA, portSandyID.text.DEGUERENDARS_OPEN_DIALOG, portSandyID.text.DEGUERENDARS_CLOSED_DIALOG, portSandyID.text.DEGUERENDARS_COP_NOT_COMPLETED },
+    ['Emaliveulaux'] = { xi.region.TAVNAZIAN_ARCHIPELAGO, xi.nation.BASTOK,   xi.fameArea.BASTOK,   minesID.text.EMALIVEULAUX_OPEN_DIALOG,     minesID.text.EMALIVEULAUX_CLOSED_DIALOG,     minesID.text.EMALIVEULAUX_COP_NOT_COMPLETED     },
+    ['Alizabe'     ] = { xi.region.TAVNAZIAN_ARCHIPELAGO, xi.nation.WINDURST, xi.fameArea.WINDURST, portWindyID.text.ALIZABE_OPEN_DIALOG,      portWindyID.text.ALIZABE_CLOSED_DIALOG,      portWindyID.text.ALIZABE_COP_NOT_COMPLETED      },
 
     ['Palguevion'] = { xi.region.VALDEAUNIA, xi.nation.SANDORIA, xi.fameArea.SANDORIA, northSandyID.text.PALGUEVION_OPEN_DIALOG, northSandyID.text.PALGUEVION_CLOSED_DIALOG, 0 },
     ['Tibelda'   ] = { xi.region.VALDEAUNIA, xi.nation.BASTOK,   xi.fameArea.BASTOK,   minesID.text.TIBELDA_OPEN_DIALOG,         minesID.text.TIBELDA_CLOSED_DIALOG,         0 },
@@ -1016,7 +1016,7 @@ local regionalStockTable =
         { xi.item.POD_OF_BLUE_PEAS,      29 },
         { xi.item.ASH_LOG,               99 },
     },
-    [xi.region.QUFIMISLAND] =
+    [xi.region.QUFIM_ISLAND] =
     {
         { xi.item.MAGIC_POT_SHARD, 4704 },
     },
@@ -1035,7 +1035,7 @@ local regionalStockTable =
         { xi.item.SARUTA_ORANGE,                   33 },
         { xi.item.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 20 },
     },
-    [xi.region.TAVNAZIANARCH] =
+    [xi.region.TAVNAZIAN_ARCHIPELAGO] =
     {
         { xi.item.SPRIG_OF_APPLE_MINT,         331 },
         { xi.item.JAR_OF_GROUND_WASABI,       2724 },
@@ -1073,7 +1073,7 @@ xi.shop.handleRegionalShop = function(player, npc)
 
     -- CoP Mission check for Tavnazia vendors.
     if
-        npcRegion == xi.region.TAVNAZIANARCH and
+        npcRegion == xi.region.TAVNAZIAN_ARCHIPELAGO and
         player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_SAVAGE
     then
         player:showText(npc, npcData[regionParam.TEXT_UNAVAILABLE])

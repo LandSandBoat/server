@@ -164,7 +164,7 @@ bool CBattleEntity::isInAssault()
     if (loc.zone != nullptr)
     {
         return (loc.zone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown &&
-               (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
+               (loc.zone->GetRegionID() >= xi::Region::WestAhtUrhgan && loc.zone->GetRegionID() <= xi::Region::Alzadaal);
     }
     return false;
 }
@@ -3747,10 +3747,10 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         }
                         else if (PTarget->objtype == TYPE_MOB && targ_weapon && targ_weapon->getSkillType() == xi::SkillType::HandToHand) // This is how Attack Round checks for h2h penalty
                         {
-                            REGION_TYPE regionID = PTarget->loc.zone->GetRegionID();
+                            xi::Region regionID = PTarget->loc.zone->GetRegionID();
                             if (static_cast<CMobEntity*>(PTarget)->getMobMod(xi::MobMod::NoH2hPenalty) == 0)
                             {
-                                if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+                                if (regionID <= xi::Region::Limbus) // Pre TOAU zones
                                 {
                                     mobH2HPenalty = 0.425f; // Vanilla - COP
                                 }

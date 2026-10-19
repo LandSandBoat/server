@@ -47,23 +47,23 @@ auto GetMogHouseModelID(const CCharEntity* PChar) -> uint16
     // clang-format off
         switch (zoneutils::GetCurrentRegion(PChar->getZone()))
         {
-            case REGION_TYPE::WEST_AHT_URHGAN:
+            case xi::Region::WestAhtUrhgan:
                 return 214;
-            case REGION_TYPE::RONFAURE_FRONT:
+            case xi::Region::RonfaureFront:
                 return 745;
-            case REGION_TYPE::GUSTABERG_FRONT:
+            case xi::Region::GustabergFront:
                 return 199;
-            case REGION_TYPE::SARUTA_FRONT:
+            case xi::Region::SarutabarutaFront:
                 return 219;
-            case REGION_TYPE::SANDORIA:
-                return PChar->profile.nation == NATION_SANDORIA ? 0x0121 : 0x0101;
-            case REGION_TYPE::BASTOK:
-                return PChar->profile.nation == NATION_BASTOK ? 0x0122 : 0x0102;
-            case REGION_TYPE::WINDURST:
-                return PChar->profile.nation == NATION_WINDURST ? 0x0123 : 0x0120;
-            case REGION_TYPE::JEUNO:
+            case xi::Region::Sandoria:
+                return PChar->profile.nation == xi::Nation::Sandoria ? 0x0121 : 0x0101;
+            case xi::Region::Bastok:
+                return PChar->profile.nation == xi::Nation::Bastok ? 0x0122 : 0x0102;
+            case xi::Region::Windurst:
+                return PChar->profile.nation == xi::Nation::Windurst ? 0x0123 : 0x0120;
+            case xi::Region::Jeuno:
                 return 0x0100;
-            case REGION_TYPE::ADOULIN_ISLANDS:
+            case xi::Region::AdoulinIslands:
                 return 0x0124;
             default:
                 ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->getName(), PChar->getZone());
@@ -76,33 +76,33 @@ auto GetMogHouseLeavingFlag(const CCharEntity* PChar) -> uint8
 {
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
-        case REGION_TYPE::ADOULIN_ISLANDS:
+        case xi::Region::AdoulinIslands:
             return 9; // Adoulin MH exit is always enabled
-        case REGION_TYPE::WEST_AHT_URHGAN:
+        case xi::Region::WestAhtUrhgan:
             if (PChar->profile.mhflag & 0x10)
             {
                 return 5;
             }
             break;
-        case REGION_TYPE::SANDORIA:
+        case xi::Region::Sandoria:
             if (PChar->profile.mhflag & 0x01)
             {
                 return 1;
             }
             break;
-        case REGION_TYPE::BASTOK:
+        case xi::Region::Bastok:
             if (PChar->profile.mhflag & 0x02)
             {
                 return 2;
             }
             break;
-        case REGION_TYPE::WINDURST:
+        case xi::Region::Windurst:
             if (PChar->profile.mhflag & 0x04)
             {
                 return 3;
             }
             break;
-        case REGION_TYPE::JEUNO:
+        case xi::Region::Jeuno:
             if (PChar->profile.mhflag & 0x08)
             {
                 return 4;

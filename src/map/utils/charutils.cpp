@@ -393,7 +393,7 @@ auto LoadFromCharsSQL(CCharEntity* PChar) -> void
         PChar->profile.home_point.p.y         = rset->get<float>("home_y");
         PChar->profile.home_point.p.z         = rset->get<float>("home_z");
 
-        PChar->profile.nation = rset->get<uint8>("nation");
+        PChar->profile.nation = rset->get<xi::Nation>("nation");
 
         db::extractFromBlob(rset, "quests", PChar->m_questLog);
         db::extractFromBlob(rset, "keyitems", PChar->keys);
@@ -4601,10 +4601,10 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 {
     TracyZoneScoped;
 
-    uint8       pcinzone = 0;
-    uint8       minlevel = 0;
-    uint8       maxlevel = GetExpLevel(PChar);
-    REGION_TYPE region   = PChar->loc.zone->GetRegionID();
+    uint8      pcinzone = 0;
+    uint8      minlevel = 0;
+    uint8      maxlevel = GetExpLevel(PChar);
+    xi::Region region   = PChar->loc.zone->GetRegionID();
 
     if (PChar->PParty)
     {
@@ -4810,7 +4810,7 @@ uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
 
     // COMMITMENT from Capacity Bands
 
-    if (PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Commitment) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+    if (PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Commitment) && PChar->loc.zone->GetRegionID() != xi::Region::Abyssea)
     {
         CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Commitment);
         int16          percentage = commitment->GetPower();
@@ -5136,10 +5136,10 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
     if (!expFromRaise && !fromScripts && awardRegionPoints)
     {
-        REGION_TYPE region = PChar->loc.zone->GetRegionID();
+        xi::Region region = PChar->loc.zone->GetRegionID();
 
         // Should this user be awarded conquest points..
-        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) && (region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO))
+        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) && (region >= xi::Region::Ronfaure && region <= xi::Region::Jeuno))
         {
             // Add CP to the player.
             conquest::AddConquestPoints(PChar, exp);
@@ -5150,7 +5150,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         }
 
         // Should this user be awarded imperial standing..
-        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sanction) && (region >= REGION_TYPE::WEST_AHT_URHGAN && region <= REGION_TYPE::ALZADAAL))
+        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sanction) && (region >= xi::Region::WestAhtUrhgan && region <= xi::Region::Alzadaal))
         {
             charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.1f));
             PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
@@ -5160,7 +5160,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
 
         // Cruor Drops in Abyssea zones.
         const auto Pzone = PChar->getZone();
-        if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
+        if (zoneutils::GetCurrentRegion(Pzone) == xi::Region::Abyssea)
         {
             uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
             // uint32 Total  = charutils::GetPoints(PChar, "cruor");
@@ -6853,11 +6853,11 @@ std::string GetConquestPointsName(CCharEntity* PChar)
 {
     switch (PChar->profile.nation)
     {
-        case 0:
+        case xi::Nation::Sandoria:
             return "sandoria_cp";
-        case 1:
+        case xi::Nation::Bastok:
             return "bastok_cp";
-        case 2:
+        case xi::Nation::Windurst:
             return "windurst_cp";
         default:
             ShowError("Invalid nation received, returning nothing.");
@@ -7001,8 +7001,8 @@ auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool
         PChar->health.mp = PChar->GetMaxMP();
 
         // Homepointing increases beastmen influence.
-        const REGION_TYPE deathRegion = PChar->loc.zone->GetRegionID();
-        if (deathRegion <= REGION_TYPE::TAVNAZIA &&
+        const xi::Region deathRegion = PChar->loc.zone->GetRegionID();
+        if (deathRegion <= xi::Region::TavnazianArchipelago &&
             PChar->GetMLevel() >= settings::get<uint8>("map.MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS"))
         {
             conquest::AddPlayerHomepoints(1, deathRegion);
@@ -7746,16 +7746,16 @@ void loadDeathTimestamp(CCharEntity* PChar)
     }
 }
 
-auto IsHomeNation(const uint8 nation, const REGION_TYPE region) -> bool
+auto IsHomeNation(const xi::Nation nation, const xi::Region region) -> bool
 {
     switch (region)
     {
-        case REGION_TYPE::SANDORIA:
-            return nation == NATION_SANDORIA;
-        case REGION_TYPE::BASTOK:
-            return nation == NATION_BASTOK;
-        case REGION_TYPE::WINDURST:
-            return nation == NATION_WINDURST;
+        case xi::Region::Sandoria:
+            return nation == xi::Nation::Sandoria;
+        case xi::Region::Bastok:
+            return nation == xi::Nation::Bastok;
+        case xi::Region::Windurst:
+            return nation == xi::Nation::Windurst;
         default:
             return false;
     }

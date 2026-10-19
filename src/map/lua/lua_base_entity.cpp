@@ -6521,12 +6521,12 @@ void CLuaBaseEntity::setCallForHelpBlocked(bool blocked)
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getNation()
+auto CLuaBaseEntity::getNation() -> xi::Nation
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::Nation::Sandoria;
     }
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->profile.nation;
@@ -6539,7 +6539,7 @@ uint8 CLuaBaseEntity::getNation()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setNation(uint8 nation)
+void CLuaBaseEntity::setNation(const xi::Nation nation)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8278,7 +8278,7 @@ auto CLuaBaseEntity::getFameLevel(const xi::FameArea area) const -> uint8
  *  Example : player:getRank(xi.nation.WINDURST)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getRank(uint8 nation)
+auto CLuaBaseEntity::getRank(const xi::Nation nation) -> uint8
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8288,7 +8288,7 @@ uint8 CLuaBaseEntity::getRank(uint8 nation)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    return PChar->profile.rank[nation];
+    return PChar->profile.rank[static_cast<uint8>(nation)];
 }
 
 /************************************************************************
@@ -8307,7 +8307,7 @@ void CLuaBaseEntity::setRank(uint8 rank)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->profile.rank[PChar->profile.nation] = rank;
+    PChar->profile.rank[static_cast<uint8>(PChar->profile.nation)] = rank;
 
     charutils::SaveMissionsList(PChar);
 }

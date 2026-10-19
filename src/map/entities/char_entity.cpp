@@ -2939,19 +2939,19 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             // TODO: Increases the chances of finding items when fishing
             break;
         case MOGHANCEMENT_SANDORIA_CONQUEST:
-            if (profile.nation == 0)
+            if (profile.nation == xi::Nation::Sandoria)
             {
                 addModifier(xi::Mod::CONQUEST_BONUS, 6 * multiplier);
             }
             break;
         case MOGHANCEMENT_BASTOK_CONQUEST:
-            if (profile.nation == 1)
+            if (profile.nation == xi::Nation::Bastok)
             {
                 addModifier(xi::Mod::CONQUEST_BONUS, 6 * multiplier);
             }
             break;
         case MOGHANCEMENT_WINDURST_CONQUEST:
-            if (profile.nation == 2)
+            if (profile.nation == xi::Nation::Windurst)
             {
                 addModifier(xi::Mod::CONQUEST_BONUS, 6 * multiplier);
             }

@@ -25,6 +25,8 @@
 #include "common/settings.h"
 #include "lua_client_entity_pair.h"
 
+#include "data/enums/nation.h"
+#include "data/enums/region.h"
 #include "data/enums/zone.h"
 
 #include <sol/forward.hpp>
@@ -33,9 +35,6 @@ enum class TickType : uint8_t;
 class InMemorySink;
 class MapEngine;
 class CLuaBaseEntity;
-
-enum class REGION_TYPE : uint8;
-enum NATION_TYPE : uint8;
 
 enum class ClientScope : uint8_t
 {
@@ -68,7 +67,7 @@ public:
     void setVanaDay(uint8 day) const;
     void skipToNextVanaDay() const;
     void skipVanaDays(uint32 days) const;
-    void setRegionOwner(REGION_TYPE region, NATION_TYPE nation) const;
+    void setRegionOwner(xi::Region region, xi::Nation nation) const;
     void setSeed(uint64 seed) const;
     auto getSetting(const std::string& key) const -> sol::object;
     void setSetting(const std::string& key, const sol::object& value);

@@ -349,10 +349,10 @@ public:
     void   setCallForHelpBlocked(bool blocked);
 
     // Player Status
-    uint8 getNation();
-    void  setNation(uint8 nation);
-    auto  getAllegiance() -> xi::Allegiance;
-    void  setAllegiance(xi::Allegiance allegiance);
+    auto getNation() -> xi::Nation;
+    void setNation(xi::Nation nation);
+    auto getAllegiance() -> xi::Allegiance;
+    void setAllegiance(xi::Allegiance allegiance);
 
     uint8 getCampaignAllegiance();
     void  setCampaignAllegiance(uint8 allegiance);
@@ -428,7 +428,7 @@ public:
     void setFame(xi::FameArea area, uint16 fame);
     auto getFameLevel(xi::FameArea area) const -> uint8; // Gets Fame Level for specified nation
 
-    uint8  getRank(uint8 nation);
+    auto   getRank(xi::Nation nation) -> uint8;
     void   setRank(uint8 rank);
     uint16 getRankPoints();
     void   addRankPoints(uint16 rankpoints);

@@ -89,7 +89,7 @@ void HandleMessage(ConquestMessage type, const std::span<const uint8> data)
     }
 }
 
-void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
+void AddInfluencePoints(const int points, const xi::Nation nation, const xi::Region region)
 {
     // Send update message to world server
     // Note that we do not update local cache, as it would potentially become out of sync from
@@ -100,29 +100,29 @@ void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
         .payload = ipc::toBytes(ConquestAddInfluencePoints{
             .points = points,
             .nation = nation,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
 
-void AddMobKills(int32 count, REGION_TYPE region)
+void AddMobKills(const int32 count, const xi::Region region)
 {
     message::send(ipc::ConquestEvent{
         .type    = ConquestMessage::M2W_AddMobKills,
         .payload = ipc::toBytes(ConquestAddCounter{
             .count  = count,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
 
-void AddPlayerHomepoints(int32 count, REGION_TYPE region)
+void AddPlayerHomepoints(const int32 count, const xi::Region region)
 {
     message::send(ipc::ConquestEvent{
         .type    = ConquestMessage::M2W_AddPlayerHomepoints,
         .payload = ipc::toBytes(ConquestAddCounter{
             .count  = count,
-            .region = static_cast<uint8>(region),
+            .region = region,
         }),
     });
 }
@@ -145,7 +145,7 @@ void GainInfluencePoints(CCharEntity* PChar, uint32 points)
  *                                                                      *
  ************************************************************************/
 
-uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf)
+auto GetInfluenceGraphics(const int32 san_inf, const int32 bas_inf, const int32 win_inf, const int32 bst_inf) -> uint8
 {
     // if all nations and beastmen == 0
     if (san_inf == 0 && bas_inf == 0 && win_inf == 0 && bst_inf == 0)
@@ -225,18 +225,18 @@ uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bs
     }
 }
 
-uint8 GetInfluenceGraphics(REGION_TYPE region)
+auto GetInfluenceGraphics(const xi::Region region) -> uint8
 {
-    int32 sandoria = GetConquestData().getInfluence(region, NATION_SANDORIA);
-    int32 bastok   = GetConquestData().getInfluence(region, NATION_BASTOK);
-    int32 windurst = GetConquestData().getInfluence(region, NATION_WINDURST);
-    int32 beastmen = GetConquestData().getInfluence(region, NATION_BEASTMEN);
+    int32 sandoria = GetConquestData().getInfluence(region, xi::Nation::Sandoria);
+    int32 bastok   = GetConquestData().getInfluence(region, xi::Nation::Bastok);
+    int32 windurst = GetConquestData().getInfluence(region, xi::Nation::Windurst);
+    int32 beastmen = GetConquestData().getInfluence(region, xi::Nation::Beastmen);
 
     return GetInfluenceGraphics(sandoria, bastok, windurst, beastmen);
 }
 
 // TODO: figure out what the beastmen-less numbers are for
-uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf)
+auto GetInfluenceRanking(const int32 san_inf, const int32 bas_inf, const int32 win_inf, const int32 bst_inf) -> uint8
 {
     uint8 ranking = 63;
     if (san_inf >= bas_inf)
@@ -272,7 +272,7 @@ uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst
     return ranking;
 }
 
-uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf)
+auto GetInfluenceRanking(const int32 san_inf, const int32 bas_inf, const int32 win_inf) -> uint8
 {
     return GetInfluenceRanking(san_inf, bas_inf, win_inf, 0);
 }
@@ -321,16 +321,16 @@ void HandleWeeklyTallyStart()
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            REGION_TYPE regionId = PZone->GetRegionID();
-            if (regionId <= REGION_TYPE::DYNAMIS)
+            xi::Region regionId = PZone->GetRegionID();
+            if (regionId <= xi::Region::Dynamis)
             {
                 // Cities do not have owner or influence
                 uint8 influence = 0;
                 uint8 owner = 0;
-                if (regionId <= REGION_TYPE::TAVNAZIA)
+                if (regionId <= xi::Region::TavnazianArchipelago)
                 {
                     influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                    owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
                 }
 
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start, influence, owner, ranking, isConquestAlliance);
@@ -365,16 +365,16 @@ void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls)
     // clang-format off
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
-            REGION_TYPE regionId = PZone->GetRegionID();
-            if (regionId <= REGION_TYPE::DYNAMIS)
+            xi::Region regionId = PZone->GetRegionID();
+            if (regionId <= xi::Region::Dynamis)
             {
                 // Cities do not have owner or influence
                 uint8 influence = 0;
                 uint8 owner = 0;
-                if (regionId <= REGION_TYPE::TAVNAZIA)
+                if (regionId <= xi::Region::TavnazianArchipelago)
                 {
                     influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                    owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
                 }
 
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
@@ -412,16 +412,16 @@ void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpd
             zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
             {
                 // only find chars for zones that have had conquest updated
-                REGION_TYPE regionId = PZone->GetRegionID();
-                if (regionId <= REGION_TYPE::DYNAMIS)
+                xi::Region regionId = PZone->GetRegionID();
+                if (regionId <= xi::Region::Dynamis)
                 {
                     // Cities do not have owner or influence
                     uint8 influence = 0;
                     uint8 owner = 0;
-                    if (regionId <= REGION_TYPE::TAVNAZIA)
+                    if (regionId <= xi::Region::TavnazianArchipelago)
                     {
                         influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                        owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                        owner     = static_cast<uint8>(conquest::GetRegionOwner(PZone->GetRegionID()));
                     }
 
                     luautils::OnConquestUpdate(PZone, Conquest_Update, influence, owner, ranking, isConquestAlliance);
@@ -477,9 +477,9 @@ uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst)
 
 uint8 GetBalance()
 {
-    uint8 sandoria = GetConquestData().getRegionControlCount(NATION_SANDORIA);
-    uint8 bastok   = GetConquestData().getRegionControlCount(NATION_BASTOK);
-    uint8 windurst = GetConquestData().getRegionControlCount(NATION_WINDURST);
+    uint8 sandoria = GetConquestData().getRegionControlCount(xi::Nation::Sandoria);
+    uint8 bastok   = GetConquestData().getRegionControlCount(xi::Nation::Bastok);
+    uint8 windurst = GetConquestData().getRegionControlCount(xi::Nation::Windurst);
 
     return GetBalance(sandoria, bastok, windurst);
 }
@@ -505,11 +505,11 @@ uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst)
     return 0;
 }
 
-bool IsAlliance()
+auto IsAlliance() -> bool
 {
-    uint8 sandoria = GetConquestData().getRegionControlCount(NATION_SANDORIA);
-    uint8 bastok   = GetConquestData().getRegionControlCount(NATION_BASTOK);
-    uint8 windurst = GetConquestData().getRegionControlCount(NATION_WINDURST);
+    uint8 sandoria = GetConquestData().getRegionControlCount(xi::Nation::Sandoria);
+    uint8 bastok   = GetConquestData().getRegionControlCount(xi::Nation::Bastok);
+    uint8 windurst = GetConquestData().getRegionControlCount(xi::Nation::Windurst);
 
     return GetAlliance(sandoria, bastok, windurst) > 0;
 }
@@ -520,7 +520,7 @@ bool IsAlliance()
  *                                                                       *
  ************************************************************************/
 
-uint8 GetNextTally()
+auto GetNextTally() -> uint8
 {
     auto nextWeek   = earth_time::get_next_game_week();
     auto untilTally = vanadiel_time::from_earth_time(nextWeek) - vanadiel_time::now();
@@ -536,7 +536,7 @@ uint8 GetNextTally()
  *                                                                       *
  ************************************************************************/
 
-uint8 GetRegionOwner(REGION_TYPE region)
+auto GetRegionOwner(const xi::Region region) -> xi::Nation
 {
     return GetConquestData().getRegionOwner(region);
 }
@@ -555,18 +555,18 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
     // NOTE: No need to send CConquestPacket,
     // The client itself requests this packet after a fixed period of time
 
-    const REGION_TYPE region = PChar->loc.zone->GetRegionID();
+    const xi::Region region = PChar->loc.zone->GetRegionID();
 
-    if (region != REGION_TYPE::UNKNOWN)
+    if (region != xi::Region::Unknown)
     {
         // Follows the CP multiplier in https://www.playonline.com/comnews/200302052327.html
-        const uint8 owner      = GetRegionOwner(region);
+        const auto  owner      = GetRegionOwner(region);
         const uint8 nationRank = luautils::GetNationRank(PChar->profile.nation);
 
         double percentage = 0.15;
 
         // Only different multiplier if region is not owned by beastmen and nation is not rank 1
-        if (owner <= NATION_WINDURST && nationRank > 1)
+        if (owner <= xi::Nation::Windurst && nationRank > 1)
         {
             if (IsAlliance()) // In alliance and owner of the region is rank 1 or not.
             {

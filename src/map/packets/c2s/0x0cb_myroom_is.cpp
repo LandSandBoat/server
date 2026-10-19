@@ -31,22 +31,22 @@
 namespace
 {
 
-const std::map<uint8, GP_CLI_COMMAND_MYROOM_IS_PARAM2> default2fStyles = {
-    { NATION_SANDORIA, GP_CLI_COMMAND_MYROOM_IS_PARAM2::SandorianStyle },
-    { NATION_BASTOK, GP_CLI_COMMAND_MYROOM_IS_PARAM2::BastokanStyle },
-    { NATION_WINDURST, GP_CLI_COMMAND_MYROOM_IS_PARAM2::WindurstianStyle },
+const std::map<xi::Nation, GP_CLI_COMMAND_MYROOM_IS_PARAM2> default2fStyles = {
+    { xi::Nation::Sandoria, GP_CLI_COMMAND_MYROOM_IS_PARAM2::SandorianStyle },
+    { xi::Nation::Bastok, GP_CLI_COMMAND_MYROOM_IS_PARAM2::BastokanStyle },
+    { xi::Nation::Windurst, GP_CLI_COMMAND_MYROOM_IS_PARAM2::WindurstianStyle },
 };
 
 const auto isRentARoom = [](const CCharEntity* PChar)
 {
     switch (PChar->profile.nation)
     {
-        case NATION_SANDORIA:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::SANDORIA;
-        case NATION_BASTOK:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::BASTOK;
-        case NATION_WINDURST:
-            return PChar->loc.zone->GetRegionID() != REGION_TYPE::WINDURST;
+        case xi::Nation::Sandoria:
+            return PChar->loc.zone->GetRegionID() != xi::Region::Sandoria;
+        case xi::Nation::Bastok:
+            return PChar->loc.zone->GetRegionID() != xi::Region::Bastok;
+        case xi::Nation::Windurst:
+            return PChar->loc.zone->GetRegionID() != xi::Region::Windurst;
         default:
             return true;
     }

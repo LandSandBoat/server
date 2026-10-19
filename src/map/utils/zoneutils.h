@@ -68,8 +68,8 @@ void InitializeWeather();
 void TOTDChange(vanadiel_time::TOTD TOTD);
 void SavePlayTime();
 
-auto GetCurrentRegion(xi::ZoneId zoneId) -> REGION_TYPE;
-auto GetCurrentContinent(xi::ZoneId zoneId) -> CONTINENT_TYPE;
+auto GetCurrentRegion(xi::ZoneId zoneId) -> xi::Region;
+auto GetCurrentContinent(xi::ZoneId zoneId) -> xi::Continent;
 
 auto GetWeatherElement(xi::Weather weather) -> int;
 
@@ -89,7 +89,7 @@ auto GetZoneIPP(xi::ZoneId zoneId) -> uint64;                      // returns IP
 auto CanZoneUseMisc(xi::ZoneId zoneId, xi::ZoneMisc misc) -> bool; // DB-backed misc check; works for zones on other processes
 auto IsZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;      // returns true if the zone is at capacity and the entry should be denied
 auto IsResidentialArea(const CCharEntity* PChar) -> bool;          // returns whether or not the area is a residential zone
-auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool;       // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+auto IsAlwaysOutOfNationControl(xi::Region region) -> bool;        // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
 
 void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 

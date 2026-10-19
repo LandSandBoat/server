@@ -1134,7 +1134,7 @@ auto IsZoneReady(Scheduler& scheduler, MapConfig config, xi::ZoneId zoneId) -> T
  *                                                                       *
  ************************************************************************/
 
-auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
+auto GetCurrentRegion(const xi::ZoneId zoneId) -> xi::Region
 {
     switch (zoneId)
     {
@@ -1146,14 +1146,14 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::KingRanperresTomb:
         case xi::ZoneId::WestRonfaure:
         case xi::ZoneId::YughottGrotto:
-            return REGION_TYPE::RONFAURE;
+            return xi::Region::Ronfaure;
         case xi::ZoneId::GusgenMines:
         case xi::ZoneId::KonschtatHighlands:
         case xi::ZoneId::LaTheinePlateau:
         case xi::ZoneId::OrdellesCaves:
         case xi::ZoneId::Selbina:
         case xi::ZoneId::ValkurmDunes:
-            return REGION_TYPE::ZULKHEIM;
+            return xi::Region::Zulkheim;
         case xi::ZoneId::BatalliaDowns:
         case xi::ZoneId::CarpentersLanding:
         case xi::ZoneId::Davoi:
@@ -1161,7 +1161,7 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::JugnerForest:
         case xi::ZoneId::MonasticCavern:
         case xi::ZoneId::PhanauetChannel:
-            return REGION_TYPE::NORVALLEN;
+            return xi::Region::Norvallen;
         case xi::ZoneId::DangrufWadi:
         case xi::ZoneId::KorrolokaTunnel:
         case xi::ZoneId::NorthGustaberg:
@@ -1169,13 +1169,13 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::SouthGustaberg:
         case xi::ZoneId::WaughroonShrine:
         case xi::ZoneId::ZeruhnMines:
-            return REGION_TYPE::GUSTABERG;
+            return xi::Region::Gustaberg;
         case xi::ZoneId::Beadeaux:
         case xi::ZoneId::CrawlersNest:
         case xi::ZoneId::PashhowMarshlands:
         case xi::ZoneId::QulunDome:
         case xi::ZoneId::RolanberryFields:
-            return REGION_TYPE::DERFLAND;
+            return xi::Region::Derfland;
         case xi::ZoneId::BalgasDais:
         case xi::ZoneId::EastSarutabaruta:
         case xi::ZoneId::FullMoonFountain:
@@ -1184,7 +1184,7 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::OuterHorutotoRuins:
         case xi::ZoneId::ToraimaraiCanal:
         case xi::ZoneId::WestSarutabaruta:
-            return REGION_TYPE::SARUTABARUTA;
+            return xi::Region::Sarutabaruta;
         case xi::ZoneId::BibikiBay:
         case xi::ZoneId::BuburimuPeninsula:
         case xi::ZoneId::LabyrinthOfOnzozo:
@@ -1192,7 +1192,7 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::MazeOfShakhrami:
         case xi::ZoneId::Mhaura:
         case xi::ZoneId::TahrongiCanyon:
-            return REGION_TYPE::KOLSHUSHU;
+            return xi::Region::Kolshushu;
         case xi::ZoneId::AltarRoom:
         case xi::ZoneId::AttohwaChasm:
         case xi::ZoneId::BoneyardGully:
@@ -1200,7 +1200,7 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::GarlaigeCitadel:
         case xi::ZoneId::MeriphataudMountains:
         case xi::ZoneId::SauromugueChampaign:
-            return REGION_TYPE::ARAGONEU;
+            return xi::Region::Aragoneu;
         case xi::ZoneId::BeaucedineGlacier:
         case xi::ZoneId::CloisterOfFrost:
         case xi::ZoneId::Feiyin:
@@ -1208,46 +1208,46 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::QubiaArena:
         case xi::ZoneId::RanguemontPass:
         case xi::ZoneId::TheShroudedMaw:
-            return REGION_TYPE::FAUREGANDI;
+            return xi::Region::Fauregandi;
         case xi::ZoneId::BearclawPinnacle:
         case xi::ZoneId::CastleZvahlBaileys:
         case xi::ZoneId::CastleZvahlKeep:
         case xi::ZoneId::ThroneRoom:
         case xi::ZoneId::UleguerandRange:
         case xi::ZoneId::Xarcabard:
-            return REGION_TYPE::VALDEAUNIA;
+            return xi::Region::Valdeaunia;
         case xi::ZoneId::BehemothsDominion:
         case xi::ZoneId::LowerDelkfuttsTower:
         case xi::ZoneId::MiddleDelkfuttsTower:
         case xi::ZoneId::QufimIsland:
         case xi::ZoneId::StellarFulcrum:
         case xi::ZoneId::UpperDelkfuttsTower:
-            return REGION_TYPE::QUFIMISLAND;
+            return xi::Region::QufimIsland;
         case xi::ZoneId::TheBoyahdaTree:
         case xi::ZoneId::CloisterOfStorms:
         case xi::ZoneId::DragonsAery:
         case xi::ZoneId::HallOfTheGods:
         case xi::ZoneId::Romaeve:
         case xi::ZoneId::TheSanctuaryOfZitah:
-            return REGION_TYPE::LITELOR;
+            return xi::Region::Litelor;
         case xi::ZoneId::CloisterOfTremors:
         case xi::ZoneId::EasternAltepaDesert:
         case xi::ZoneId::ChamberOfOracles:
         case xi::ZoneId::QuicksandCaves:
         case xi::ZoneId::Rabao:
         case xi::ZoneId::WesternAltepaDesert:
-            return REGION_TYPE::KUZOTZ;
+            return xi::Region::Kuzotz;
         case xi::ZoneId::CapeTeriggan:
         case xi::ZoneId::CloisterOfGales:
         case xi::ZoneId::GustavTunnel:
         case xi::ZoneId::KuftalTunnel:
         case xi::ZoneId::ValleyOfSorrows:
-            return REGION_TYPE::VOLLBOW;
+            return xi::Region::Vollbow;
         case xi::ZoneId::Kazham:
         case xi::ZoneId::Norg:
         case xi::ZoneId::SeaSerpentGrotto:
         case xi::ZoneId::YuhtungaJungle:
-            return REGION_TYPE::ELSHIMO_LOWLANDS;
+            return xi::Region::ElshimoLowlands;
         case xi::ZoneId::CloisterOfFlames:
         case xi::ZoneId::CloisterOfTides:
         case xi::ZoneId::DenOfRancor:
@@ -1255,17 +1255,17 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::SacrificialChamber:
         case xi::ZoneId::TempleOfUggalepih:
         case xi::ZoneId::YhoatorJungle:
-            return REGION_TYPE::ELSHIMO_UPLANDS;
+            return xi::Region::ElshimoUplands;
         case xi::ZoneId::TheCelestialNexus:
         case xi::ZoneId::LaloffAmphitheater:
         case xi::ZoneId::RuaunGardens:
         case xi::ZoneId::TheShrineOfRuavitau:
         case xi::ZoneId::VelugannonPalace:
-            return REGION_TYPE::TULIA;
+            return xi::Region::Tulia;
         case xi::ZoneId::MineShaft2716:
         case xi::ZoneId::NewtonMovalpolos:
         case xi::ZoneId::OldtonMovalpolos:
-            return REGION_TYPE::MOVALPOLOS;
+            return xi::Region::Movalpolos;
         case xi::ZoneId::LufaiseMeadows:
         case xi::ZoneId::MisareauxCoast:
         case xi::ZoneId::MonarchLinn:
@@ -1274,30 +1274,30 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::RiverneSiteB01:
         case xi::ZoneId::Sacrarium:
         case xi::ZoneId::SealionsDen:
-            return REGION_TYPE::TAVNAZIA;
+            return xi::Region::TavnazianArchipelago;
         case xi::ZoneId::TavnazianSafehold:
-            return REGION_TYPE::TAVNAZIAN_MARQ;
+            return xi::Region::TavnazianMarquisate;
         case xi::ZoneId::SouthernSanDoria:
         case xi::ZoneId::NorthernSanDoria:
         case xi::ZoneId::PortSanDoria:
         case xi::ZoneId::ChateauDoraguille:
-            return REGION_TYPE::SANDORIA;
+            return xi::Region::Sandoria;
         case xi::ZoneId::BastokMines:
         case xi::ZoneId::BastokMarkets:
         case xi::ZoneId::PortBastok:
         case xi::ZoneId::Metalworks:
-            return REGION_TYPE::BASTOK;
+            return xi::Region::Bastok;
         case xi::ZoneId::WindurstWaters:
         case xi::ZoneId::WindurstWalls:
         case xi::ZoneId::PortWindurst:
         case xi::ZoneId::WindurstWoods:
         case xi::ZoneId::HeavensTower:
-            return REGION_TYPE::WINDURST;
+            return xi::Region::Windurst;
         case xi::ZoneId::RuludeGardens:
         case xi::ZoneId::UpperJeuno:
         case xi::ZoneId::LowerJeuno:
         case xi::ZoneId::PortJeuno:
-            return REGION_TYPE::JEUNO;
+            return xi::Region::Jeuno;
         case xi::ZoneId::DynamisBastok:
         case xi::ZoneId::DynamisBeaucedine:
         case xi::ZoneId::DynamisBuburimu:
@@ -1308,7 +1308,7 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::DynamisValkurm:
         case xi::ZoneId::DynamisWindurst:
         case xi::ZoneId::DynamisXarcabard:
-            return REGION_TYPE::DYNAMIS;
+            return xi::Region::Dynamis;
         case xi::ZoneId::PromyvionDem:
         case xi::ZoneId::PromyvionHolla:
         case xi::ZoneId::PromyvionMea:
@@ -1318,31 +1318,31 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::SpireOfMea:
         case xi::ZoneId::SpireOfVahzl:
         case xi::ZoneId::HallOfTransference:
-            return REGION_TYPE::PROMYVION;
+            return xi::Region::Promyvion;
         case xi::ZoneId::Altaieu:
         case xi::ZoneId::EmpyrealParadox:
         case xi::ZoneId::TheGardenOfRuhmet:
         case xi::ZoneId::GrandPalaceOfHuxzoi:
-            return REGION_TYPE::LUMORIA;
+            return xi::Region::Lumoria;
         case xi::ZoneId::Apollyon:
         case xi::ZoneId::Temenos:
-            return REGION_TYPE::LIMBUS;
+            return xi::Region::Limbus;
         case xi::ZoneId::AlZahbi:
         case xi::ZoneId::AhtUrhganWhitegate:
         case xi::ZoneId::BhaflauThickets:
         case xi::ZoneId::TheColosseum:
-            return REGION_TYPE::WEST_AHT_URHGAN;
+            return xi::Region::WestAhtUrhgan;
         case xi::ZoneId::MamoolJaTrainingGrounds:
         case xi::ZoneId::Mamook:
         case xi::ZoneId::WajaomWoodlands:
         case xi::ZoneId::AydeewaSubterrane:
         case xi::ZoneId::JadeSepulcher:
-            return REGION_TYPE::MAMOOL_JA_SAVAGE;
+            return xi::Region::MamoolJaSavage;
         case xi::ZoneId::Halvung:
         case xi::ZoneId::MountZhayolm:
         case xi::ZoneId::LebrosCavern:
         case xi::ZoneId::NavukgoExecutionChamber:
-            return REGION_TYPE::HALVUNG;
+            return xi::Region::Halvung;
         case xi::ZoneId::ArrapagoReef:
         case xi::ZoneId::CaedarvaMire:
         case xi::ZoneId::LeujaoamSanctum:
@@ -1352,51 +1352,51 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::Periqia:
         case xi::ZoneId::IlrusiAtoll:
         case xi::ZoneId::TheAshuTalif:
-            return REGION_TYPE::ARRAPAGO;
+            return xi::Region::Arrapago;
         case xi::ZoneId::NyzulIsle:
         case xi::ZoneId::ArrapagoRemnants:
         case xi::ZoneId::AlzadaalUnderseaRuins:
         case xi::ZoneId::BhaflauRemnants:
         case xi::ZoneId::SilverSeaRemnants:
         case xi::ZoneId::ZhayolmRemnants:
-            return REGION_TYPE::ALZADAAL;
+            return xi::Region::Alzadaal;
         case xi::ZoneId::SouthernSanDoriaS:
         case xi::ZoneId::EastRonfaureS:
-            return REGION_TYPE::RONFAURE_FRONT;
+            return xi::Region::RonfaureFront;
         case xi::ZoneId::BastokMarketsS:
         case xi::ZoneId::NorthGustabergS:
         case xi::ZoneId::RuhotzSilvermines:
         case xi::ZoneId::GraubergS:
-            return REGION_TYPE::GUSTABERG_FRONT;
+            return xi::Region::GustabergFront;
         case xi::ZoneId::WindurstWatersS:
         case xi::ZoneId::WestSarutabarutaS:
         case xi::ZoneId::GhoyusReverie:
         case xi::ZoneId::FortKarugoNarugoS:
-            return REGION_TYPE::SARUTA_FRONT;
+            return xi::Region::SarutabarutaFront;
         case xi::ZoneId::BatalliaDownsS:
         case xi::ZoneId::JugnerForestS:
         case xi::ZoneId::LaVauleS:
         case xi::ZoneId::EverbloomHollow:
         case xi::ZoneId::TheEldiemeNecropolisS:
-            return REGION_TYPE::NORVALLEN_FRONT;
+            return xi::Region::NorvallenFront;
         case xi::ZoneId::RolanberryFieldsS:
         case xi::ZoneId::PashhowMarshlandsS:
         case xi::ZoneId::CrawlersNestS:
         case xi::ZoneId::BeadeauxS:
         case xi::ZoneId::VunkerlInletS:
-            return REGION_TYPE::DERFLAND_FRONT;
+            return xi::Region::DerflandFront;
         case xi::ZoneId::SauromugueChampaignS:
         case xi::ZoneId::MeriphataudMountainsS:
         case xi::ZoneId::CastleOztrojaS:
         case xi::ZoneId::GarlaigeCitadelS:
-            return REGION_TYPE::ARAGONEAU_FRONT;
+            return xi::Region::AragoneuFront;
         case xi::ZoneId::BeaucedineGlacierS:
-            return REGION_TYPE::FAUREGANDI_FRONT;
+            return xi::Region::FauregandiFront;
         case xi::ZoneId::XarcabardS:
         case xi::ZoneId::CastleZvahlBaileysS:
         case xi::ZoneId::CastleZvahlKeepS:
         case xi::ZoneId::ThroneRoomS:
-            return REGION_TYPE::VALDEAUNIA_FRONT;
+            return xi::Region::ValdeauniaFront;
         case xi::ZoneId::AbysseaAltepa:
         case xi::ZoneId::AbysseaAttohwa:
         case xi::ZoneId::AbysseaEmpyrealParadox:
@@ -1407,19 +1407,19 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::AbysseaTahrongi:
         case xi::ZoneId::AbysseaUleguerand:
         case xi::ZoneId::AbysseaVunkerl:
-            return REGION_TYPE::ABYSSEA;
+            return xi::Region::Abyssea;
         case xi::ZoneId::WalkOfEchoes:
-            return REGION_TYPE::THE_THRESHOLD;
+            return xi::Region::TheThreshold;
         case xi::ZoneId::DioramaAbdhaljsGhelsba:
         case xi::ZoneId::AbdhaljsIslePurgonorgo:
         case xi::ZoneId::MaquetteAbdhaljsLegionA:
         case xi::ZoneId::MaquetteAbdhaljsLegionB:
-            return REGION_TYPE::ABDHALJS;
+            return xi::Region::Abdhaljs;
         case xi::ZoneId::WesternAdoulin:
         case xi::ZoneId::EasternAdoulin:
         case xi::ZoneId::RalaWaterways:
         case xi::ZoneId::RalaWaterwaysU:
-            return REGION_TYPE::ADOULIN_ISLANDS;
+            return xi::Region::AdoulinIslands;
         case xi::ZoneId::CeizakBattlegrounds:
         case xi::ZoneId::ForetDeHennetiel:
         case xi::ZoneId::SihGates:
@@ -1428,16 +1428,16 @@ auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
         case xi::ZoneId::CirdasCavernsU:
         case xi::ZoneId::YahseHuntingGrounds:
         case xi::ZoneId::MorimarBasaltFields:
-            return REGION_TYPE::EAST_ULBUKA;
+            return xi::Region::EastUlbuka;
         default:
             break;
     }
-    return REGION_TYPE::UNKNOWN;
+    return xi::Region::Unknown;
 }
 
-auto GetCurrentContinent(const xi::ZoneId zoneId) -> CONTINENT_TYPE
+auto GetCurrentContinent(const xi::ZoneId zoneId) -> xi::Continent
 {
-    return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
+    return GetCurrentRegion(zoneId) != xi::Region::Unknown ? xi::Continent::TheMiddleLands : xi::Continent::OtherAreas;
 }
 
 auto GetWeatherElement(const xi::Weather weather) -> int
@@ -1600,9 +1600,9 @@ void AfterZoneIn(CBaseEntity* PEntity)
     luautils::AfterZoneIn(PChar);
 }
 
-auto IsAlwaysOutOfNationControl(const REGION_TYPE region) -> bool
+auto IsAlwaysOutOfNationControl(const xi::Region region) -> bool
 {
-    return region >= REGION_TYPE::SANDORIA && region <= REGION_TYPE::LIMBUS;
+    return region >= xi::Region::Sandoria && region <= xi::Region::Limbus;
 }
 
 }; // namespace zoneutils

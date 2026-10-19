@@ -306,11 +306,11 @@ void CLuaSimulation::skipVanaDays(const uint32 days) const
  *  Notes   :
  ************************************************************************/
 
-void CLuaSimulation::setRegionOwner(REGION_TYPE region, NATION_TYPE nation) const
+void CLuaSimulation::setRegionOwner(const xi::Region region, const xi::Nation nation) const
 {
-    DebugTestFmt("Setting region {} owner to nation {}", static_cast<uint8>(region), static_cast<uint8>(nation));
+    DebugTestFmt("Setting region {} owner to nation {}", region, nation);
     auto rset = db::preparedStmt("UPDATE conquest_system SET region_control = ? WHERE region_id = ?",
-                                 static_cast<uint8>(nation),
+                                 nation,
                                  static_cast<uint8>(region));
 
     if (!rset)
@@ -327,8 +327,8 @@ void CLuaSimulation::setRegionOwner(REGION_TYPE region, NATION_TYPE nation) cons
         while (rset->next())
         {
             region_control_t regionControl{};
-            regionControl.current = rset->get<uint8>("region_control");
-            regionControl.prev    = rset->get<uint8>("region_control_prev");
+            regionControl.current = rset->get<xi::Nation>("region_control");
+            regionControl.prev    = rset->get<xi::Nation>("region_control_prev");
             controllers.emplace_back(regionControl);
         }
 

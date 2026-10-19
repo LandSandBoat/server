@@ -89,7 +89,7 @@ using RegionsDataset      = xi::data::datasets::zones::regions::Dataset;
 #include <map/ximesh/ximesh.h>
 #include <map/ximesh/ximesh_impl.h>
 
-CZone::CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
+CZone::CZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID, const xi::Region RegionID, const xi::Continent ContinentID, const uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
 : scheduler_(scheduler)
 , config_(config)
 , navMesh_{ std::make_unique<NullNavMesh>() }
@@ -141,37 +141,37 @@ auto CZone::GetID() const -> xi::ZoneId
     return m_zoneID;
 }
 
-xi::ZoneType CZone::GetTypeMask()
+auto CZone::GetTypeMask() const -> xi::ZoneType
 {
     return m_zoneType;
 }
 
-REGION_TYPE CZone::GetRegionID()
+auto CZone::GetRegionID() const -> xi::Region
 {
     return m_regionID;
 }
 
-CONTINENT_TYPE CZone::GetContinentID()
+auto CZone::GetContinentID() const -> xi::Continent
 {
     return m_continentID;
 }
 
-uint8 CZone::getLevelRestriction()
+auto CZone::getLevelRestriction() const -> uint8
 {
     return m_levelRestriction;
 }
 
-uint32 CZone::GetIP() const
+auto CZone::GetIP() const -> uint32
 {
     return m_zoneIP;
 }
 
-uint16 CZone::GetPort() const
+auto CZone::GetPort() const -> uint16
 {
     return m_zonePort;
 }
 
-uint16 CZone::GetTax() const
+auto CZone::GetTax() const -> uint16
 {
     return m_tax;
 }

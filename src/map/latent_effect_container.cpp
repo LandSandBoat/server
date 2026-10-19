@@ -834,42 +834,42 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             expression             = PTarget != nullptr &&
                                      m_POwner->GetMLevel() >= PTarget->GetMLevel() &&
                                      m_POwner->loc.zone != nullptr &&
-                                     m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
+                                     m_POwner->loc.zone->GetRegionID() < xi::Region::WestAhtUrhgan;
             break;
         }
         case xi::Latent::SanctionRegenBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::WestAhtUrhgan &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::Alzadaal &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case xi::Latent::SanctionRefreshBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::WestAhtUrhgan &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::Alzadaal &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case xi::Latent::SigilRegenBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::RonfaureFront &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::ValdeauniaFront &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case xi::Latent::SigilRefreshBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::RonfaureFront &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::ValdeauniaFront &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case xi::Latent::SanctionFoodBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL;
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::WestAhtUrhgan &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::Alzadaal;
             break;
         case xi::Latent::SigilFoodBonus:
             expression = m_POwner->loc.zone != nullptr &&
-                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT;
+                         m_POwner->loc.zone->GetRegionID() >= xi::Region::RonfaureFront &&
+                         m_POwner->loc.zone->GetRegionID() <= xi::Region::ValdeauniaFront;
             break;
         case xi::Latent::StatusEffectActive:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(static_cast<xi::StatusEffect>(latentEffect.GetConditionsValue()));
@@ -1246,12 +1246,12 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             {
                 case 0:
                     // under own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && (conquest::GetRegionOwner(region) == m_POwner->profile.nation) &&
+                    expression = region < xi::Region::WestAhtUrhgan && (conquest::GetRegionOwner(region) == m_POwner->profile.nation) &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
                 case 1:
                     // outside of own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && (regionAlwaysOutOfControl || m_POwner->profile.nation != conquest::GetRegionOwner(region)) &&
+                    expression = region < xi::Region::WestAhtUrhgan && (regionAlwaysOutOfControl || m_POwner->profile.nation != conquest::GetRegionOwner(region)) &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
             }
@@ -1259,24 +1259,24 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         }
         case xi::Latent::NationCitizen:
         {
-            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
+            expression = m_POwner->profile.nation == static_cast<xi::Nation>(latentEffect.GetConditionsValue());
             break;
         }
         case xi::Latent::ZoneHomeNation:
         {
-            auto nationRegion = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
+            auto nationRegion = static_cast<xi::Region>(latentEffect.GetConditionsValue());
             auto region       = zoneutils::GetCurrentRegion(playerZoneID);
 
             switch (nationRegion)
             {
-                case REGION_TYPE::SANDORIA:
-                    expression = m_POwner->profile.nation == 0 && region == nationRegion;
+                case xi::Region::Sandoria:
+                    expression = m_POwner->profile.nation == xi::Nation::Sandoria && region == nationRegion;
                     break;
-                case REGION_TYPE::BASTOK:
-                    expression = m_POwner->profile.nation == 1 && region == nationRegion;
+                case xi::Region::Bastok:
+                    expression = m_POwner->profile.nation == xi::Nation::Bastok && region == nationRegion;
                     break;
-                case REGION_TYPE::WINDURST:
-                    expression = m_POwner->profile.nation == 2 && region == nationRegion;
+                case xi::Region::Windurst:
+                    expression = m_POwner->profile.nation == xi::Nation::Windurst && region == nationRegion;
                     break;
                 default:
                     break;

@@ -28,7 +28,7 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
-CZoneInstance::CZoneInstance(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
+CZoneInstance::CZoneInstance(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID, const xi::Region RegionID, const xi::Continent ContinentID, const uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings)
 : CZone(scheduler, config, ZoneID, RegionID, ContinentID, levelRestriction, settings)
 {
     TracyZoneScoped;

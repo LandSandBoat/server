@@ -866,7 +866,7 @@ void CMobEntity::DistributeRewards()
 
         // Add mob kill for Beastmen influence
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) &&
-            loc.zone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+            loc.zone->GetRegionID() <= xi::Region::TavnazianArchipelago)
         {
             conquest::AddMobKills(1, loc.zone->GetRegionID());
         }
@@ -1185,7 +1185,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     }
 
     xi::ZoneType zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
-    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown) && loc.zone->GetRegionID() != REGION_TYPE::LUMORIA;
+    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown) && loc.zone->GetRegionID() != xi::Region::Lumoria;
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(xi::MobMod::NoDrops) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(xi::MobMod::ExpBonus) > -100)
@@ -1216,41 +1216,41 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         // Begin Adding Crystals
         if (m_Element > 0)
         {
-            REGION_TYPE      regionID       = PChar->loc.zone->GetRegionID();
+            xi::Region       regionID       = PChar->loc.zone->GetRegionID();
             xi::StatusEffect requiredEffect = xi::StatusEffect::None;
 
             switch (regionID)
             {
                 // Sanction Regions
-                case REGION_TYPE::WEST_AHT_URHGAN:
-                case REGION_TYPE::MAMOOL_JA_SAVAGE:
-                case REGION_TYPE::HALVUNG:
-                case REGION_TYPE::ARRAPAGO:
-                case REGION_TYPE::ALZADAAL:
+                case xi::Region::WestAhtUrhgan:
+                case xi::Region::MamoolJaSavage:
+                case xi::Region::Halvung:
+                case xi::Region::Arrapago:
+                case xi::Region::Alzadaal:
                     requiredEffect = xi::StatusEffect::Sanction;
                     break;
 
                 // Sigil Regions
-                case REGION_TYPE::RONFAURE_FRONT:
-                case REGION_TYPE::NORVALLEN_FRONT:
-                case REGION_TYPE::GUSTABERG_FRONT:
-                case REGION_TYPE::DERFLAND_FRONT:
-                case REGION_TYPE::SARUTA_FRONT:
-                case REGION_TYPE::ARAGONEAU_FRONT:
-                case REGION_TYPE::FAUREGANDI_FRONT:
-                case REGION_TYPE::VALDEAUNIA_FRONT:
+                case xi::Region::RonfaureFront:
+                case xi::Region::NorvallenFront:
+                case xi::Region::GustabergFront:
+                case xi::Region::DerflandFront:
+                case xi::Region::SarutabarutaFront:
+                case xi::Region::AragoneuFront:
+                case xi::Region::FauregandiFront:
+                case xi::Region::ValdeauniaFront:
                     requiredEffect = xi::StatusEffect::Sigil;
                     break;
 
                 // Ionis Regions
-                case REGION_TYPE::ADOULIN_ISLANDS:
-                case REGION_TYPE::EAST_ULBUKA:
+                case xi::Region::AdoulinIslands:
+                case xi::Region::EastUlbuka:
                     requiredEffect = xi::StatusEffect::Ionis;
                     break;
 
                 // Signet Regions
                 default:
-                    if (regionID < REGION_TYPE::TAVNAZIA && conquest::GetRegionOwner(regionID) != NATION_BEASTMEN)
+                    if (regionID < xi::Region::TavnazianArchipelago && conquest::GetRegionOwner(regionID) != xi::Nation::Beastmen)
                     {
                         requiredEffect = xi::StatusEffect::Signet;
                     }

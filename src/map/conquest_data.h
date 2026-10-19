@@ -25,12 +25,13 @@
 
 #include "common/cbasetypes.h"
 #include "common/database.h"
+#include "data/enums/nation.h"
 #include "zone.h"
 
 struct region_control_t
 {
-    uint8 current;
-    uint8 prev;
+    xi::Nation current;
+    xi::Nation prev;
 };
 
 struct influence_t
@@ -55,23 +56,23 @@ public:
     //
     // Gets the influence points for a given nation in a given region.
     //
-    int32 getInfluence(REGION_TYPE region, NATION_TYPE nation) const;
+    auto getInfluence(xi::Region region, xi::Nation nation) const -> int32;
 
     //
     // Gets the owner of a given region. That is, the one controlling this region since last tally.
     //
-    uint8 getRegionOwner(REGION_TYPE region) const;
+    auto getRegionOwner(xi::Region region) const -> xi::Nation;
 
     //
     // Gets the number of regions controlled by a given nation.
     //
-    uint8 getRegionControlCount(NATION_TYPE nation) const;
+    auto getRegionControlCount(xi::Nation nation) const -> uint8;
 
     //
     // Gets the number of regions controlled by a given nation in the
     // previous tally.
     //
-    uint8 getPrevRegionControlCount(NATION_TYPE nation) const;
+    auto getPrevRegionControlCount(xi::Nation nation) const -> uint8;
 
     //
     // Gets the array of region controls, indexed by regionId.
@@ -91,7 +92,7 @@ public:
     //
     // Calculates how much influence the beastmen hold in a region based on mob kills and homepoints.
     //
-    static int32 CalculateBeastmenInfluence(REGION_TYPE region, const influence_t& influence)
+    static auto CalculateBeastmenInfluence(const xi::Region region, const influence_t& influence) -> int32
     {
         if (influence.player_homepoints == 0)
         {
@@ -118,35 +119,35 @@ public:
         switch (region)
         {
             // General
-            case REGION_TYPE::RONFAURE:
-            case REGION_TYPE::ZULKHEIM:
-            case REGION_TYPE::GUSTABERG:
-            case REGION_TYPE::SARUTABARUTA:
-            case REGION_TYPE::KOLSHUSHU:
+            case xi::Region::Ronfaure:
+            case xi::Region::Zulkheim:
+            case xi::Region::Gustaberg:
+            case xi::Region::Sarutabaruta:
+            case xi::Region::Kolshushu:
             {
                 homepointKillWeight = 10;
                 break;
             }
             // Semi-stronghold
-            case REGION_TYPE::FAUREGANDI:
-            case REGION_TYPE::QUFIMISLAND:
-            case REGION_TYPE::LITELOR:
-            case REGION_TYPE::KUZOTZ:
-            case REGION_TYPE::VOLLBOW:
-            case REGION_TYPE::ELSHIMO_LOWLANDS:
-            case REGION_TYPE::ELSHIMO_UPLANDS:
-            case REGION_TYPE::TULIA:
-            case REGION_TYPE::TAVNAZIA:
+            case xi::Region::Fauregandi:
+            case xi::Region::QufimIsland:
+            case xi::Region::Litelor:
+            case xi::Region::Kuzotz:
+            case xi::Region::Vollbow:
+            case xi::Region::ElshimoLowlands:
+            case xi::Region::ElshimoUplands:
+            case xi::Region::Tulia:
+            case xi::Region::TavnazianArchipelago:
             {
                 homepointKillWeight = 25;
                 break;
             }
             // Stronghold
-            case REGION_TYPE::NORVALLEN:
-            case REGION_TYPE::DERFLAND:
-            case REGION_TYPE::ARAGONEU:
-            case REGION_TYPE::VALDEAUNIA:
-            case REGION_TYPE::MOVALPOLOS:
+            case xi::Region::Norvallen:
+            case xi::Region::Derfland:
+            case xi::Region::Aragoneu:
+            case xi::Region::Valdeaunia:
+            case xi::Region::Movalpolos:
             {
                 homepointKillWeight = 50;
                 break;

@@ -732,13 +732,7 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
                              createchar.m_mjob));
     }
 
-    createchar.m_nation = ref<uint8>(buf, 54);
-
-    if (createchar.m_nation > 2) // 0x00 = San d'Oria, 0x01 = Bastok, 0x02 = Windurst
-    {
-        ShowError(fmt::format("{} attempted to create character with invalid nation {}", charName, createchar.m_nation));
-        return -1;
-    }
+    createchar.m_nation = static_cast<xi::Nation>(ref<uint8>(buf, 54));
 
     const std::vector<xi::ZoneId> bastokStartingZones   = { xi::ZoneId::BastokMines, xi::ZoneId::BastokMarkets, xi::ZoneId::PortBastok };
     const std::vector<xi::ZoneId> sandoriaStartingZones = { xi::ZoneId::SouthernSanDoria, xi::ZoneId::NorthernSanDoria, xi::ZoneId::PortSanDoria };
@@ -746,20 +740,25 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
 
     switch (createchar.m_nation)
     {
-        case 0x02: // windy start
+        case xi::Nation::Windurst:
         {
             createchar.m_zone = windurstStartingZones[xirand::GetRandomNumber(3)];
             break;
         }
-        case 0x01: // bastok start
+        case xi::Nation::Bastok:
         {
             createchar.m_zone = bastokStartingZones[xirand::GetRandomNumber(3)];
             break;
         }
-        case 0x00: // sandy start
+        case xi::Nation::Sandoria:
         {
             createchar.m_zone = sandoriaStartingZones[xirand::GetRandomNumber(3)];
             break;
+        }
+        default:
+        {
+            ShowError(fmt::format("{} attempted to create character with invalid nation {}", charName, createchar.m_nation));
+            return -1;
         }
     }
 

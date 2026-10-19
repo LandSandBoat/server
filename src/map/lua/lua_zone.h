@@ -60,7 +60,7 @@ public:
     auto         getMobs() -> sol::table;
     auto         getID() -> xi::ZoneId;
     auto         getName() -> const std::string&;
-    REGION_TYPE  getRegionID();
+    auto         getRegionID() -> xi::Region;
     xi::ZoneType getTypeMask();
     auto         getBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
     auto         getWeather() const -> xi::Weather;

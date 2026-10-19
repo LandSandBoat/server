@@ -58,6 +58,9 @@
 // Forward Declarations
 //
 
+#include "data/enums/continent.h"
+#include "data/enums/nation.h"
+#include "data/enums/region.h"
 #include "data/enums/weather.h"
 #include "data/enums/zone.h"
 #include "data/enums/zone_misc.h"
@@ -70,79 +73,6 @@ class SpawnHandler;
 #define MAX_ZONEID 300
 
 inline constexpr auto ZONE_NO_DESTINATION = static_cast<xi::ZoneId>(0xFFFF);
-
-enum NATION_TYPE : uint8
-{
-    NATION_SANDORIA = 0x00,
-    NATION_BASTOK   = 0x01,
-    NATION_WINDURST = 0x02,
-    NATION_BEASTMEN = 0x03,
-    NATION_NEUTRAL  = 0x05,
-};
-
-DECLARE_FORMAT_AS_UNDERLYING(NATION_TYPE);
-
-enum class REGION_TYPE : uint8
-{
-    RONFAURE         = 0,
-    ZULKHEIM         = 1,
-    NORVALLEN        = 2,
-    GUSTABERG        = 3,
-    DERFLAND         = 4,
-    SARUTABARUTA     = 5,
-    KOLSHUSHU        = 6,
-    ARAGONEU         = 7,
-    FAUREGANDI       = 8,
-    VALDEAUNIA       = 9,
-    QUFIMISLAND      = 10,
-    LITELOR          = 11,
-    KUZOTZ           = 12,
-    VOLLBOW          = 13,
-    ELSHIMO_LOWLANDS = 14,
-    ELSHIMO_UPLANDS  = 15,
-    TULIA            = 16,
-    MOVALPOLOS       = 17,
-    TAVNAZIA         = 18,
-    SANDORIA         = 19,
-    BASTOK           = 20,
-    WINDURST         = 21,
-    JEUNO            = 22,
-    DYNAMIS          = 23,
-    TAVNAZIAN_MARQ   = 24,
-    PROMYVION        = 25,
-    LUMORIA          = 26,
-    LIMBUS           = 27,
-    WEST_AHT_URHGAN  = 28,
-    MAMOOL_JA_SAVAGE = 29,
-    HALVUNG          = 30,
-    ARRAPAGO         = 31,
-    ALZADAAL         = 32,
-    RONFAURE_FRONT   = 33,
-    NORVALLEN_FRONT  = 34,
-    GUSTABERG_FRONT  = 35,
-    DERFLAND_FRONT   = 36,
-    SARUTA_FRONT     = 37,
-    ARAGONEAU_FRONT  = 38,
-    FAUREGANDI_FRONT = 39,
-    VALDEAUNIA_FRONT = 40,
-    ABYSSEA          = 41,
-    THE_THRESHOLD    = 42,
-    ABDHALJS         = 43,
-    ADOULIN_ISLANDS  = 44,
-    EAST_ULBUKA      = 45,
-
-    UNKNOWN = 255
-};
-DECLARE_FORMAT_AS_UNDERLYING(REGION_TYPE);
-
-enum class CONTINENT_TYPE : uint8
-{
-    THE_MIDDLE_LANDS       = 1,
-    THE_ARADJIAH_CONTINENT = 2,
-    THE_SHADOWREIGN_ERA    = 3,
-    OTHER_AREAS            = 4
-};
-DECLARE_FORMAT_AS_UNDERLYING(CONTINENT_TYPE);
 
 enum GLOBAL_MESSAGE_TYPE : uint8
 {
@@ -231,19 +161,19 @@ using QueryByNameResult_t = std::vector<CBaseEntity*>;
 class CZone
 {
 public:
-    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
+    CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, xi::Region RegionID, xi::Continent ContinentID, uint8 levelRestriction, const std::optional<xi::data::ZoneSettings>& settings);
     virtual ~CZone();
 
     DISALLOW_COPY_AND_MOVE(CZone);
 
-    auto           GetID() const -> xi::ZoneId;
-    xi::ZoneType   GetTypeMask();
-    REGION_TYPE    GetRegionID();
-    CONTINENT_TYPE GetContinentID();
-    uint8          getLevelRestriction();
-    uint32         GetIP() const;
-    uint16         GetPort() const;
-    uint16         GetTax() const;
+    auto GetID() const -> xi::ZoneId;
+    auto GetTypeMask() const -> xi::ZoneType;
+    auto GetRegionID() const -> xi::Region;
+    auto GetContinentID() const -> xi::Continent;
+    auto getLevelRestriction() const -> uint8;
+    auto GetIP() const -> uint32;
+    auto GetPort() const -> uint16;
+    auto GetTax() const -> uint16;
 
     auto weather() -> WeatherContainer&;
     auto weather() const -> const WeatherContainer&;
@@ -377,14 +307,14 @@ private:
 
     FlatHashMap<std::string, std::unique_ptr<RoamRegion>> roamRegions_;
 
-    xi::ZoneId     m_zoneID;
-    xi::ZoneType   m_zoneType;
-    REGION_TYPE    m_regionID;
-    CONTINENT_TYPE m_continentID;
-    uint8          m_levelRestriction;
-    std::string    m_zoneName;
-    uint16         m_zonePort{};
-    uint32         m_zoneIP{};
+    xi::ZoneId    m_zoneID;
+    xi::ZoneType  m_zoneType;
+    xi::Region    m_regionID;
+    xi::Continent m_continentID;
+    uint8         m_levelRestriction;
+    std::string   m_zoneName;
+    uint16        m_zonePort{};
+    uint32        m_zoneIP{};
 
     WeatherContainer weather_;
 

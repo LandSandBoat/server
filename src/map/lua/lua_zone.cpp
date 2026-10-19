@@ -174,7 +174,7 @@ const std::string& CLuaZone::getName()
     return m_pLuaZone->getName();
 }
 
-REGION_TYPE CLuaZone::getRegionID()
+auto CLuaZone::getRegionID() -> xi::Region
 {
     return m_pLuaZone->GetRegionID();
 }
