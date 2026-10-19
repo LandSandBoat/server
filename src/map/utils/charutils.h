@@ -110,7 +110,7 @@ void SetLevelRestriction(CCharEntity* PChar, uint8 lvl);
 EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob);
 
 uint32 GetBaseExp(uint8 charlvl, int16 moblvl);
-uint32 GetExpNEXTLevel(uint8 charlvl);
+auto   GetExpNEXTLevel(uint8 charlvl) -> uint32;
 auto   GetExpNEXTLevelForChar(const CCharEntity* PChar, uint8 charlvl) -> uint32;
 uint8  GetExpLevel(CBattleEntity* PMember);
 
