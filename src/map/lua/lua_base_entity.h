@@ -30,6 +30,7 @@
 #include "data/enums/mob_mod.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/music_slot.h"
+#include "data/enums/quest_log.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/zone_misc.h"
 #include "enums/mission_log.h"
@@ -43,8 +44,6 @@
 #include <map>
 #include <string>
 #include <tuple>
-
-enum class QuestLog : uint8_t;
 enum class POSMODE : uint8;
 enum class TerrainType : uint8;
 class CBaseEntity;
@@ -436,12 +435,12 @@ public:
     void   addRankPoints(uint16 rankpoints);
     void   setRankPoints(uint16 rankpoints);
 
-    void  addQuest(QuestLog logId, uint16 questId) const;
-    void  delCurrentQuest(QuestLog logId, uint16 questID) const;
-    void  delQuest(QuestLog logId, uint16 questID) const;
-    uint8 getQuestStatus(QuestLog logId, uint16 questID) const;
-    bool  hasCompletedQuest(QuestLog logId, uint16 questID) const;
-    void  completeQuest(QuestLog logId, uint16 questID) const;
+    void addQuest(xi::QuestLog logId, uint16 questId) const;
+    void delCurrentQuest(xi::QuestLog logId, uint16 questID) const;
+    void delQuest(xi::QuestLog logId, uint16 questID) const;
+    auto getQuestStatus(xi::QuestLog logId, uint16 questID) const -> uint8;
+    auto hasCompletedQuest(xi::QuestLog logId, uint16 questID) const -> bool;
+    void completeQuest(xi::QuestLog logId, uint16 questID) const;
 
     void   addMission(MissionLog logId, uint16 missionID) const;
     void   delMission(MissionLog logId, uint16 missionID) const;

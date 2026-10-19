@@ -8378,7 +8378,7 @@ void CLuaBaseEntity::setRankPoints(uint16 rankPoints)
  *  Example : player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
  ************************************************************************/
 
-void CLuaBaseEntity::addQuest(QuestLog logId, const uint16 questId) const
+void CLuaBaseEntity::addQuest(const xi::QuestLog logId, const uint16 questId) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8411,7 +8411,7 @@ void CLuaBaseEntity::addQuest(QuestLog logId, const uint16 questId) const
  *  Notes   : This duplicates delQuest with the above exception
  ************************************************************************/
 
-void CLuaBaseEntity::delCurrentQuest(QuestLog logId, const uint16 questID) const
+void CLuaBaseEntity::delCurrentQuest(const xi::QuestLog logId, const uint16 questID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8446,7 +8446,7 @@ void CLuaBaseEntity::delCurrentQuest(QuestLog logId, const uint16 questID) const
  *  Notes   : Doesn't delete any player variables associated with quest
  ************************************************************************/
 
-void CLuaBaseEntity::delQuest(QuestLog logId, uint16 questID) const
+void CLuaBaseEntity::delQuest(const xi::QuestLog logId, const uint16 questID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8482,7 +8482,7 @@ void CLuaBaseEntity::delQuest(QuestLog logId, uint16 questID) const
  *  Example : player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getQuestStatus(QuestLog logId, uint16 questID) const
+auto CLuaBaseEntity::getQuestStatus(const xi::QuestLog logId, const uint16 questID) const -> uint8
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8511,7 +8511,7 @@ uint8 CLuaBaseEntity::getQuestStatus(QuestLog logId, uint16 questID) const
  *  Example : if (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)) then
  ************************************************************************/
 
-bool CLuaBaseEntity::hasCompletedQuest(QuestLog logId, uint16 questID) const
+auto CLuaBaseEntity::hasCompletedQuest(const xi::QuestLog logId, const uint16 questID) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -8537,7 +8537,7 @@ bool CLuaBaseEntity::hasCompletedQuest(QuestLog logId, uint16 questID) const
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::completeQuest(QuestLog logId, uint16 questID) const
+void CLuaBaseEntity::completeQuest(const xi::QuestLog logId, const uint16 questID) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {

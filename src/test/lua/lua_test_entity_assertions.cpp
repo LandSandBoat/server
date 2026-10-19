@@ -404,7 +404,7 @@ auto CLuaTestEntityAssertions::isAlive() -> CLuaTestEntityAssertions&
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasQuest(const xi::QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
@@ -429,7 +429,7 @@ auto CLuaTestEntityAssertions::hasQuest(const QuestLog logId, const uint16 quest
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasCompletedQuest(const QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasCompletedQuest(const xi::QuestLog logId, const uint16 questId) -> CLuaTestEntityAssertions&
 {
     if (!entity_->isPC())
     {
