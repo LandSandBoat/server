@@ -1,5 +1,7 @@
 -- GENERATED from {{ source_name }}. Do not edit.
-xi = xi or {}
+{% for parent in lua_parents %}
+{{ parent }} = {{ parent }} or {}
+{% endfor %}
 
 ---@enum {{ lua_table }}
 {{ lua_table }} =

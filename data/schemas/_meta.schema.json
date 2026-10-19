@@ -45,7 +45,7 @@
             "properties": {
               "table": {
                 "type": "string",
-                "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$",
+                "pattern": "^xi(\\.[A-Za-z][A-Za-z0-9_]*)+$",
                 "description": "The fully qualified global Lua table name to be created for the enum."
               }
             }
