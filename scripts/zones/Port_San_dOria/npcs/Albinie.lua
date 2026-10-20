@@ -8,6 +8,13 @@ local ID = zones[xi.zone.PORT_SAN_DORIA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
+    local pos = player:getPos()
+
+    -- Can't talk to Albine through the wall
+    if pos.x < -13.8 then
+        return
+    end
+
     local stock =
     {
         { xi.item.ASH_LOG,                   96, 3, },
