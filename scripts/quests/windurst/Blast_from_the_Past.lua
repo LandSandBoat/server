@@ -4,8 +4,6 @@
 -- Log ID: 2, Quest ID: 11
 -- Koru-Moru : !pos -120 -6 124 239
 -----------------------------------
-local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
------------------------------------
 
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
 
@@ -113,29 +111,6 @@ quest.sections =
             {
                 [318] = function(player, csid, option, npc)
                     quest:setVar(player, 'Option', 1)
-                end,
-            },
-        },
-
-        [xi.zone.MAZE_OF_SHAKHRAMI] =
-        {
-            ['Fossil_Rock'] =
-            {
-                onTrigger = function(player, npc)
-                    -- TODO: Break out Fossil Rock into multiple NPC names and update impacted
-                    -- quests and missions.
-                    local rockOffset = npc:getID() - shakhramiID.npc.FOSSIL_ROCK_OFFSET
-
-                    if rockOffset == 8 then
-                        if
-                            not GetMobByID(shakhramiID.mob.ICHOROUS_IRE):isSpawned() and
-                            not player:hasItem(xi.item.BURNITE_SHELL_STONE)
-                        then
-                            SpawnMob(shakhramiID.mob.ICHOROUS_IRE):updateClaim(player)
-                        else
-                            player:messageSpecial(shakhramiID.text.FOSSIL_EXTRACTED + 2)
-                        end
-                    end
                 end,
             },
         },
