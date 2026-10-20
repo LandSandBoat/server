@@ -144,6 +144,7 @@ enum class MsgBasic : uint16_t
     AddEffectAdditionalDamage       = 229, // Additional effect: <target> takes <amount> additional points of damage.
     MagicGainsEffect                = 230, // <caster> casts <spell>. <target> gains the effect of <status>.
     DrawnIn                         = 232, // <target> is drawn in!
+    AutoTargeting                   = 234, // Auto-targeting the <target>
     ThatSomeonesPet                 = 235, // That is someone's pet.
     MagicStatus                     = 236, // <caster> casts <spell>. <target> is <status>.
     MagicReceivesEffect             = 237, // <caster> casts <spell>. <target> receives the effect of <status>.
