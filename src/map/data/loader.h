@@ -24,25 +24,30 @@
 #include "common/enum_traits.h"
 #include "common/logging.h"
 #include "data/enums/zone.h"
+#include "data/yaml/merge.h"
 
 #include <cstdlib>
 #include <exception>
 #include <filesystem>
 #include <fmt/format.h>
-#include <fstream>
-#include <iterator>
 #include <optional>
 #include <string>
+#include <string_view>
 
 namespace xi::data
 {
 
-inline auto zoneFilePath(const xi::ZoneId zoneId, const std::string_view name) -> std::string
+inline auto zoneDataName(const xi::ZoneId zoneId, const std::string_view name) -> std::string
 {
-    return fmt::format("data/zones/{}/{}.yaml", EnumTraits<xi::ZoneId>::toName(zoneId), name);
+    return fmt::format("zones/{}/{}", EnumTraits<xi::ZoneId>::toName(zoneId), name);
 }
 
-// Per-zone data file. No file means the zone declares none of this kind.
+inline auto zoneFilePath(const xi::ZoneId zoneId, const std::string_view name) -> std::string
+{
+    return fmt::format("data/{}.yaml", zoneDataName(zoneId, name));
+}
+
+// Per-zone data file. No core file means the zone declares none of this kind.
 template <class Dataset>
 auto loadZoneFile(const xi::ZoneId zoneId) -> std::optional<typename Dataset::Records>
 {
@@ -52,12 +57,11 @@ auto loadZoneFile(const xi::ZoneId zoneId) -> std::optional<typename Dataset::Re
         return std::nullopt;
     }
 
+    const auto modules = getDataModulePaths(zoneDataName(zoneId, Dataset::kDataPath), ".yaml");
+
     try
     {
-        std::ifstream     input(path, std::ios::binary);
-        const std::string text{ std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>() };
-
-        auto records = Dataset::decode(text);
+        auto records = Dataset::decode(loadMergedYaml(path, modules));
         if constexpr (requires { Dataset::verifyZone(records, zoneId); })
         {
             Dataset::verifyZone(records, zoneId);
