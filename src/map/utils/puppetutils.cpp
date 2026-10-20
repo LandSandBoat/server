@@ -22,6 +22,8 @@
 #include "puppetutils.h"
 #include "battleutils.h"
 #include "charutils.h"
+#include "data/enums/automaton_frame.h"
+#include "data/enums/automaton_head.h"
 #include "entities/automaton_entity.h"
 #include "enums/automaton.h"
 #include "enums/msg_basic.h"
@@ -39,75 +41,75 @@ namespace
 {
 
 // Returns automaton model ID for given frame and head
-auto calculateAutomatonModel(const AutomatonFrame frame, const AutomatonHead head) -> uint16
+auto calculateAutomatonModel(const xi::AutomatonFrame frame, const xi::AutomatonHead head) -> uint16
 {
     switch (frame)
     {
-        case AutomatonFrame::Harlequin:
+        case xi::AutomatonFrame::Harlequin:
             switch (head)
             {
-                case AutomatonHead::Harlequin:
+                case xi::AutomatonHead::Harlequin:
                     return 0x07B9;
-                case AutomatonHead::Valoredge:
+                case xi::AutomatonHead::Valoredge:
                     return 0x07BA;
-                case AutomatonHead::Sharpshot:
+                case xi::AutomatonHead::Sharpshot:
                     return 0x07BC;
-                case AutomatonHead::Stormwaker:
+                case xi::AutomatonHead::Stormwaker:
                     return 0x07BB;
-                case AutomatonHead::Soulsoother:
+                case xi::AutomatonHead::Soulsoother:
                     return 0x07D3;
-                case AutomatonHead::Spiritreaver:
+                case xi::AutomatonHead::Spiritreaver:
                     return 0x07D7;
             }
             break;
-        case AutomatonFrame::Valoredge:
+        case xi::AutomatonFrame::Valoredge:
             switch (head)
             {
-                case AutomatonHead::Harlequin:
+                case xi::AutomatonHead::Harlequin:
                     return 0x07BE;
-                case AutomatonHead::Valoredge:
+                case xi::AutomatonHead::Valoredge:
                     return 0x07BF;
-                case AutomatonHead::Sharpshot:
+                case xi::AutomatonHead::Sharpshot:
                     return 0x07C1;
-                case AutomatonHead::Stormwaker:
+                case xi::AutomatonHead::Stormwaker:
                     return 0x07C0;
-                case AutomatonHead::Soulsoother:
+                case xi::AutomatonHead::Soulsoother:
                     return 0x07D4;
-                case AutomatonHead::Spiritreaver:
+                case xi::AutomatonHead::Spiritreaver:
                     return 0x07D8;
             }
             break;
-        case AutomatonFrame::Sharpshot:
+        case xi::AutomatonFrame::Sharpshot:
             switch (head)
             {
-                case AutomatonHead::Harlequin:
+                case xi::AutomatonHead::Harlequin:
                     return 0x07C3;
-                case AutomatonHead::Valoredge:
+                case xi::AutomatonHead::Valoredge:
                     return 0x07C4;
-                case AutomatonHead::Sharpshot:
+                case xi::AutomatonHead::Sharpshot:
                     return 0x07C6;
-                case AutomatonHead::Stormwaker:
+                case xi::AutomatonHead::Stormwaker:
                     return 0x07C5;
-                case AutomatonHead::Soulsoother:
+                case xi::AutomatonHead::Soulsoother:
                     return 0x07D5;
-                case AutomatonHead::Spiritreaver:
+                case xi::AutomatonHead::Spiritreaver:
                     return 0x07D9;
             }
             break;
-        case AutomatonFrame::Stormwaker:
+        case xi::AutomatonFrame::Stormwaker:
             switch (head)
             {
-                case AutomatonHead::Harlequin:
+                case xi::AutomatonHead::Harlequin:
                     return 0x07C8;
-                case AutomatonHead::Valoredge:
+                case xi::AutomatonHead::Valoredge:
                     return 0x07C9;
-                case AutomatonHead::Sharpshot:
+                case xi::AutomatonHead::Sharpshot:
                     return 0x07CB;
-                case AutomatonHead::Stormwaker:
+                case xi::AutomatonHead::Stormwaker:
                     return 0x07CA;
-                case AutomatonHead::Soulsoother:
+                case xi::AutomatonHead::Soulsoother:
                     return 0x07D6;
-                case AutomatonHead::Spiritreaver:
+                case xi::AutomatonHead::Spiritreaver:
                     return 0x07DA;
             }
             break;
@@ -143,15 +145,15 @@ void LoadAutomaton(CCharEntity* PChar)
 
             // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
             // missing)
-            if (tempEquip.head < AutomatonHead::Harlequin ||
-                tempEquip.head > AutomatonHead::Spiritreaver ||
-                tempEquip.frame < AutomatonFrame::Harlequin ||
-                tempEquip.frame > AutomatonFrame::Stormwaker)
+            if (tempEquip.head < xi::AutomatonHead::Harlequin ||
+                tempEquip.head > xi::AutomatonHead::Spiritreaver ||
+                tempEquip.frame < xi::AutomatonFrame::Harlequin ||
+                tempEquip.frame > xi::AutomatonFrame::Stormwaker)
             {
-                PChar->setAutomatonHead(AutomatonHead::Harlequin);
-                tempEquip.head = AutomatonHead::Harlequin;
-                PChar->setAutomatonFrame(AutomatonFrame::Harlequin);
-                tempEquip.frame = AutomatonFrame::Harlequin;
+                PChar->setAutomatonHead(xi::AutomatonHead::Harlequin);
+                tempEquip.head = xi::AutomatonHead::Harlequin;
+                PChar->setAutomatonFrame(xi::AutomatonFrame::Harlequin);
+                tempEquip.frame = xi::AutomatonFrame::Harlequin;
 
                 for (int i = 0; i < 12; i++)
                 {
@@ -371,7 +373,7 @@ void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment)
     }
 }
 
-void setFrame(CCharEntity* PChar, AutomatonFrame frame)
+void setFrame(CCharEntity* PChar, xi::AutomatonFrame frame)
 {
     uint8 tempElementMax[8];
 
@@ -395,7 +397,7 @@ void setFrame(CCharEntity* PChar, AutomatonFrame frame)
 
     // Check if they actually have the frame
     auto* PFrame = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(frame));
-    if (PFrame == nullptr || PFrame->getEquipSlot() != ITEM_PUPPET_FRAME || (frame != AutomatonFrame::Harlequin && !HasAttachment(PChar, PFrame)))
+    if (PFrame == nullptr || PFrame->getEquipSlot() != ITEM_PUPPET_FRAME || (frame != xi::AutomatonFrame::Harlequin && !HasAttachment(PChar, PFrame)))
     {
         return;
     }
@@ -414,7 +416,7 @@ void setFrame(CCharEntity* PChar, AutomatonFrame frame)
     }
 }
 
-void setHead(CCharEntity* PChar, AutomatonHead head)
+void setHead(CCharEntity* PChar, xi::AutomatonHead head)
 {
     uint8 tempElementMax[8];
 
@@ -438,7 +440,7 @@ void setHead(CCharEntity* PChar, AutomatonHead head)
 
     // Check if they actually have the head
     auto* PHead = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(head));
-    if (PHead == nullptr || PHead->getEquipSlot() != ITEM_PUPPET_HEAD || (head != AutomatonHead::Harlequin && !HasAttachment(PChar, PHead)))
+    if (PHead == nullptr || PHead->getEquipSlot() != ITEM_PUPPET_HEAD || (head != xi::AutomatonHead::Harlequin && !HasAttachment(PChar, PHead)))
     {
         return;
     }

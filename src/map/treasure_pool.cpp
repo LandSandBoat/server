@@ -168,8 +168,8 @@ uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
 
     // Check if everyone in the treasure pool already has this item
     // Some items do not honor this check and will be added to the party pool regardless
-    const bool skipRareCheck = m_TreasurePoolType != TreasurePoolType::Solo && PNewItem->hasFlag(ItemFlag::NoRareCheck);
-    if (PNewItem->hasFlag(ItemFlag::Rare) && !skipRareCheck)
+    const bool skipRareCheck = m_TreasurePoolType != TreasurePoolType::Solo && PNewItem->hasFlag(xi::ItemFlag::NoRareCheck);
+    if (PNewItem->hasFlag(xi::ItemFlag::Rare) && !skipRareCheck)
     {
         bool doesNotHaveRareItem = false;
 
@@ -205,7 +205,7 @@ uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
         for (SlotID = 0; SlotID < 10; ++SlotID)
         {
             const CItem* PItem = xi::items::lookup(m_PoolItems[SlotID].ID);
-            if (PItem != nullptr && !PItem->hasFlag(ItemFlag::Rare | ItemFlag::Exclusive) && m_PoolItems[SlotID].TimeStamp < oldest)
+            if (PItem != nullptr && !PItem->hasFlag(xi::ItemFlag::Rare | xi::ItemFlag::Exclusive) && m_PoolItems[SlotID].TimeStamp < oldest)
             {
                 FreeSlotID = SlotID;
                 oldest     = m_PoolItems[SlotID].TimeStamp;
@@ -217,7 +217,7 @@ uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
             for (SlotID = 0; SlotID < 10; ++SlotID)
             {
                 const CItem* PItem = xi::items::lookup(m_PoolItems[SlotID].ID);
-                if (PItem != nullptr && !PItem->hasFlag(ItemFlag::Exclusive) && m_PoolItems[SlotID].TimeStamp < oldest)
+                if (PItem != nullptr && !PItem->hasFlag(xi::ItemFlag::Exclusive) && m_PoolItems[SlotID].TimeStamp < oldest)
                 {
                     FreeSlotID = SlotID;
                     oldest     = m_PoolItems[SlotID].TimeStamp;
@@ -333,7 +333,7 @@ void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // Cannot lot if item is RARE and player already has it
-    if (PItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, m_PoolItems[SlotID].ID))
+    if (PItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, m_PoolItems[SlotID].ID))
     {
         return;
     }
@@ -526,7 +526,7 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
             std::vector<CCharEntity*> candidates;
             for (auto& member : m_Members)
             {
-                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && xi::items::lookup(m_PoolItems[SlotID].ID)->hasFlag(ItemFlag::Rare))
+                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && xi::items::lookup(m_PoolItems[SlotID].ID)->hasFlag(xi::ItemFlag::Rare))
                 {
                     continue;
                 }

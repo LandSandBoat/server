@@ -692,12 +692,12 @@ auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
-void CCharEntity::setAutomatonFrame(const AutomatonFrame frame)
+void CCharEntity::setAutomatonFrame(const xi::AutomatonFrame frame)
 {
     automatonInfo_.equip.frame = frame;
 }
 
-void CCharEntity::setAutomatonHead(const AutomatonHead head)
+void CCharEntity::setAutomatonHead(const xi::AutomatonHead head)
 {
     automatonInfo_.equip.head = head;
 }
@@ -739,12 +739,12 @@ void CCharEntity::setAutomatonElementalCapacityBonus(const uint8 bonus)
     automatonInfo_.elementalCapacityBonus = bonus;
 }
 
-auto CCharEntity::getAutomatonFrame() const -> AutomatonFrame
+auto CCharEntity::getAutomatonFrame() const -> xi::AutomatonFrame
 {
     return automatonInfo_.equip.frame;
 }
 
-auto CCharEntity::getAutomatonHead() const -> AutomatonHead
+auto CCharEntity::getAutomatonHead() const -> xi::AutomatonHead
 {
     return automatonInfo_.equip.head;
 }
@@ -1076,7 +1076,7 @@ auto CCharEntity::bindEquip(const uint8 equipSlot, CItem* item) -> bool
         return false;
     }
 
-    if (!xi::items::mark(item, ItemState::Equipped))
+    if (!xi::items::mark(item, xi::ItemState::Equipped))
     {
         return false;
     }
@@ -1095,7 +1095,7 @@ void CCharEntity::clearEquip(const uint8 equipSlot)
 
     if (auto* item = equipped_[equipSlot]; item != nullptr)
     {
-        if (!xi::items::mark(item, ItemState::Free))
+        if (!xi::items::mark(item, xi::ItemState::Free))
         {
             return;
         }

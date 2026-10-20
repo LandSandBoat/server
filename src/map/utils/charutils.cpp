@@ -20,7 +20,7 @@
 */
 
 #include "common/logging.h"
-#include "enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "items/item_access.h"
 #include "items/transactions/item_claim.h"
 #include "items/transactions/npc_trade.h"
@@ -1022,7 +1022,7 @@ void LoadInventory(CCharEntity* PChar)
 
                 db::extractFromBlob(rset, "extra", PItem->m_extra);
 
-                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), ItemState::Bazaar))
+                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), xi::ItemState::Bazaar))
                 {
                     ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}, taking it off display", PItem->getID(), PChar->getName());
 
@@ -1039,7 +1039,7 @@ void LoadInventory(CCharEntity* PChar)
                     }
                     PItem->setSignature(rset->get<std::string>("signature"));
                 }
-                else if (PItem->hasFlag(ItemFlag::Inscribable))
+                else if (PItem->hasFlag(xi::ItemFlag::Inscribable))
                 {
                     PItem->setSignature(rset->get<std::string>("signature"));
                 }
@@ -1059,7 +1059,7 @@ void LoadInventory(CCharEntity* PChar)
                     auto* PFurnishing = static_cast<CItemFurnishing*>(PItem.get());
                     if (PFurnishing->isInstalled())
                     {
-                        if (xi::items::mark(PFurnishing, ItemState::PlacedFurniture))
+                        if (xi::items::mark(PFurnishing, xi::ItemState::PlacedFurniture))
                         {
                             PChar->getStorage(LOC_STORAGE)->AddBuff(PFurnishing->getStorage());
                         }
@@ -1261,7 +1261,7 @@ void SendQuestMissionLog(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Jeuno);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::OtherAreas);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Outlands);
-    PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrghan);
+    PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrhgan);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::CrystalWar);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Sandoria);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Bastok);
@@ -1269,7 +1269,7 @@ void SendQuestMissionLog(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Jeuno);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::OtherAreas);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Outlands);
-    PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrghan);
+    PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrhgan);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::CrystalWar);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, MissionComplete::Nations);
     PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, MissionComplete::ToAU_WoTG);
@@ -1302,13 +1302,13 @@ void SendPartialMissionLog(CCharEntity* PChar, const MissionLog log, const bool 
         case MissionLog::WoTG:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, MissionComplete::ToAU_WoTG)
-                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrghan);
+                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrhgan);
             break;
         }
         case MissionLog::Assault:
         {
-            completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrghan)
-                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrghan);
+            completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrhgan)
+                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrhgan);
             break;
         }
         case MissionLog::Campaign:
@@ -1321,7 +1321,7 @@ void SendPartialMissionLog(CCharEntity* PChar, const MissionLog log, const bool 
             else
             {
                 // Not a typo...
-                PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrghan);
+                PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrhgan);
             }
             break;
         }
@@ -1339,74 +1339,78 @@ void SendPartialMissionLog(CCharEntity* PChar, const MissionLog log, const bool 
     }
 }
 
-void SendPartialQuestLog(CCharEntity* PChar, const QuestLog log, const bool completed)
+void SendPartialQuestLog(CCharEntity* PChar, const xi::QuestLog log, const bool completed)
 {
     switch (log)
     {
-        case QuestLog::Sandoria:
+        case xi::QuestLog::Sandoria:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Sandoria)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Sandoria);
             break;
         }
-        case QuestLog::Bastok:
+        case xi::QuestLog::Bastok:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Bastok)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Bastok);
             break;
         }
-        case QuestLog::Windurst:
+        case xi::QuestLog::Windurst:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Windurst)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Windurst);
             break;
         }
-        case QuestLog::Jeuno:
+        case xi::QuestLog::Jeuno:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Jeuno)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Jeuno);
             break;
         }
-        case QuestLog::OtherAreas:
+        case xi::QuestLog::OtherAreas:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::OtherAreas)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::OtherAreas);
             break;
         }
-        case QuestLog::Outlands:
+        case xi::QuestLog::Outlands:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Outlands)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Outlands);
             break;
         }
-        case QuestLog::AhtUrghan:
+        case xi::QuestLog::AhtUrhgan:
         {
-            completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrghan)
-                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrghan);
+            completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::AhtUrhgan)
+                      : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::AhtUrhgan);
             break;
         }
-        case QuestLog::CrystalWar:
+        case xi::QuestLog::CrystalWar:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::CrystalWar)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::CrystalWar);
             break;
         }
-        case QuestLog::Abyssea:
+        case xi::QuestLog::Abyssea:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Abyssea)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Abyssea);
             break;
         }
-        case QuestLog::Adoulin:
+        case xi::QuestLog::Adoulin:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Adoulin)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Adoulin);
             break;
         }
-        case QuestLog::Coalition:
+        case xi::QuestLog::Coalition:
         {
             completed ? PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestComplete::Coalition)
                       : PChar->pushPacket<GP_SERV_COMMAND_MISSION::OTHER>(PChar, QuestOffer::Coalition);
+            break;
+        }
+        case xi::QuestLog::None:
+        {
             break;
         }
     }

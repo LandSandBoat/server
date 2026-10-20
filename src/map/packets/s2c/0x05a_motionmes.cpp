@@ -25,7 +25,7 @@
 #include "entities/npc_entity.h"
 #include "items/item_weapon.h"
 
-GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, const uint32 targetId, const uint16 targetIndex, Emote emoteId, EmoteMode emoteMode, const uint16 extra)
+GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, const uint32 targetId, const uint16 targetIndex, const xi::Emote emoteId, xi::EmoteMode emoteMode, const uint16 extra)
 {
     auto& packet = this->data();
 
@@ -33,13 +33,13 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
     packet.CasActIndex = PChar->targid;
     packet.TarUniqueNo = targetId;
     packet.TarActIndex = targetIndex;
-    packet.MesNum      = emoteId == Emote::Job ? static_cast<uint8>(emoteId) + (extra - 0x1F) : static_cast<uint8>(emoteId);
+    packet.MesNum      = emoteId == xi::Emote::Job ? static_cast<uint8>(emoteId) + (extra - 0x1F) : static_cast<uint8>(emoteId);
 
-    if (emoteId == Emote::Salute)
+    if (emoteId == xi::Emote::Salute)
     {
         packet.Param = static_cast<uint8>(PChar->profile.nation);
     }
-    else if (emoteId == Emote::Hurray)
+    else if (emoteId == xi::Emote::Hurray)
     {
         const auto* PWeapon = PChar->getEquip(SLOT_MAIN);
         if (PWeapon && PWeapon->getID() != 65535)
@@ -47,7 +47,7 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
             packet.Param = PWeapon->getID();
         }
     }
-    else if (emoteId == Emote::Aim)
+    else if (emoteId == xi::Emote::Aim)
     {
         packet.Param               = 65535;
         const CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
@@ -67,14 +67,14 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
             }
         }
     }
-    else if (emoteId == Emote::Bell)
+    else if (emoteId == xi::Emote::Bell)
     {
         // No emote text for /bell
-        emoteMode = EmoteMode::Motion;
+        emoteMode = xi::EmoteMode::Motion;
 
         packet.Param = (extra - 0x06);
     }
-    else if (emoteId == Emote::Job)
+    else if (emoteId == xi::Emote::Job)
     {
         packet.Param = (extra - 0x1F);
     }
@@ -82,7 +82,7 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
     packet.Mode = emoteMode;
 }
 
-GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CNpcEntity* PEntity, const uint32 targetId, const uint16 targetIndex, Emote emoteId, EmoteMode emoteMode)
+GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CNpcEntity* PEntity, const uint32 targetId, const uint16 targetIndex, const xi::Emote emoteId, const xi::EmoteMode emoteMode)
 {
     auto& packet = this->data();
 

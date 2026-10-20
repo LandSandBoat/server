@@ -28,7 +28,7 @@ class NullXiMesh final : public XiMesh
 {
 public:
     auto query(float x, float y, float z) const -> Maybe<CellHit> override;
-    auto getTerrainAt(float x, float y, float z) const -> TerrainType override;
+    auto getTerrainAt(float x, float y, float z) const -> xi::TerrainType override;
     auto getFloorId(float x, float y, float z) const -> uint8 override;
     auto rayIntersect(const Vector3& start, const Vector3& end, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> bool override;
     auto getPositionInfo(const Vector3& position, YOffsets yOffsets, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> Maybe<RayHitInfo> override;

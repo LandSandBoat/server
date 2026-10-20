@@ -23,8 +23,8 @@
 
 #include "common/logging.h"
 
+#include "data/enums/item_flag.h"
 #include "entities/char_entity.h"
-#include "enums/item_flag.h"
 #include "enums/item_lockflg.h"
 #include "item_container.h"
 #include "items/item.h"
@@ -233,7 +233,7 @@ auto SynthTransaction::doCommit() -> bool
         else
         {
             CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(*resultSlot);
-            if (PItem && PItem->hasFlag(ItemFlag::Inscribable) && this->slots_[0].itemId > 0x1080)
+            if (PItem && PItem->hasFlag(xi::ItemFlag::Inscribable) && this->slots_[0].itemId > 0x1080)
             {
                 PItem->setSignature(this->player_->name);
                 db::preparedStmt("UPDATE char_inventory SET signature = ? WHERE charid = ? AND location = 0 AND slot = ? LIMIT 1",

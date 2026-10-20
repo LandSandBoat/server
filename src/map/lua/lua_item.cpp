@@ -60,7 +60,7 @@ uint16 CLuaItem::getSubID()
     return m_readItem->getSubID();
 }
 
-auto CLuaItem::getFlag() const -> ItemFlag
+auto CLuaItem::getFlag() const -> xi::ItemFlag
 {
     return m_readItem->getFlag();
 }
@@ -120,7 +120,7 @@ bool CLuaItem::isSubType(uint8 subtype)
     return m_readItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
 
-auto CLuaItem::state() const -> ItemState
+auto CLuaItem::state() const -> xi::ItemState
 {
     return m_readItem->state();
 }

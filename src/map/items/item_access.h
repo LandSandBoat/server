@@ -24,7 +24,7 @@
 #include "common/logging.h"
 #include "common/types/badge.h"
 
-#include "map/enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "map/items/item.h"
 
 #include <magic_enum/magic_enum.hpp>
@@ -45,7 +45,7 @@ struct ItemAccess
             return false;
         }
 
-        if (item->state() != ItemState::Free)
+        if (item->state() != xi::ItemState::Free)
         {
             ShowErrorFmt("ItemAccess::enterTransaction: item {} not Free (current={})",
                          item->getID(),
@@ -53,7 +53,7 @@ struct ItemAccess
             return false;
         }
 
-        item->setState(ItemState::InTransaction, xi::Badge<ItemAccess>{});
+        item->setState(xi::ItemState::InTransaction, xi::Badge<ItemAccess>{});
         return true;
     }
 
@@ -66,7 +66,7 @@ struct ItemAccess
         }
 
         // only InTransaction is released here. Equipped, Bazaar and PlacedFurniture have their own paths
-        if (item->state() != ItemState::InTransaction)
+        if (item->state() != xi::ItemState::InTransaction)
         {
             ShowErrorFmt("ItemAccess::exitTransaction: item {} is not claimed (current={})",
                          item->getID(),
@@ -74,10 +74,10 @@ struct ItemAccess
             return;
         }
 
-        item->setState(ItemState::Free, xi::Badge<ItemAccess>{});
+        item->setState(xi::ItemState::Free, xi::Badge<ItemAccess>{});
     }
 
-    [[nodiscard]] static auto mark(CItem* item, const ItemState target) -> bool
+    [[nodiscard]] static auto mark(CItem* item, const xi::ItemState target) -> bool
     {
         if (item == nullptr)
         {
@@ -87,7 +87,7 @@ struct ItemAccess
 
         // InTransaction transitions go through the tx commit/rollback path.
         // Refuse on either side of the transition.
-        if (target == ItemState::InTransaction || item->state() == ItemState::InTransaction)
+        if (target == xi::ItemState::InTransaction || item->state() == xi::ItemState::InTransaction)
         {
             ShowErrorFmt("ItemAccess::mark: illegal tx transition for item {} (current={}, target={}) - use tx commit/rollback path",
                          item->getID(),
@@ -97,9 +97,9 @@ struct ItemAccess
         }
 
         // Releasing back to Free is always allowed.
-        if (target == ItemState::Free)
+        if (target == xi::ItemState::Free)
         {
-            item->setState(ItemState::Free, xi::Badge<ItemAccess>{});
+            item->setState(xi::ItemState::Free, xi::Badge<ItemAccess>{});
             return true;
         }
 
@@ -123,7 +123,7 @@ struct ItemAccess
 namespace xi::items
 {
 
-[[nodiscard]] inline auto mark(CItem* item, const ItemState target) -> bool
+[[nodiscard]] inline auto mark(CItem* item, const xi::ItemState target) -> bool
 {
     return detail::ItemAccess::mark(item, target);
 }

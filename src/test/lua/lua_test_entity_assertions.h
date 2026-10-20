@@ -26,6 +26,7 @@
 
 #include "data/enums/animation.h"
 #include "data/enums/mod.h"
+#include "data/enums/quest_log.h"
 #include "data/enums/status_effect.h"
 #include "data/enums/zone.h"
 
@@ -35,8 +36,6 @@ namespace xi
 enum class KeyItem : uint16_t;
 
 }
-
-enum class QuestLog : uint8_t;
 enum class MissionLog : uint8_t;
 class CLuaTestEntity;
 
@@ -58,8 +57,8 @@ public:
     auto hasModifier(xi::Mod modifierId, int32 expectedValue) -> CLuaTestEntityAssertions&;
     auto isSpawned() -> CLuaTestEntityAssertions&;
     auto isAlive() -> CLuaTestEntityAssertions&;
-    auto hasQuest(QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
-    auto hasCompletedQuest(QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
+    auto hasQuest(xi::QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
+    auto hasCompletedQuest(xi::QuestLog logId, uint16 questId) -> CLuaTestEntityAssertions&;
     auto hasGil(uint32 amount) -> CLuaTestEntityAssertions&;
 
     auto no() -> CLuaTestEntityAssertions&;

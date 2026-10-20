@@ -21,6 +21,7 @@
 
 #include "0x056_mission_other.h"
 
+#include "data/enums/quest_log.h"
 #include "entities/char_entity.h"
 #include "enums/mission_log.h"
 #include "enums/quest_log.h"
@@ -33,27 +34,27 @@ GP_SERV_COMMAND_MISSION::OTHER::OTHER(const CCharEntity* PChar, QuestOffer log)
     switch (log)
     {
         case QuestOffer::Sandoria:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Sandoria)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Sandoria)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Bastok:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Bastok)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Bastok)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Windurst:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Windurst)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Windurst)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Jeuno:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Jeuno)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Jeuno)].current, sizeof(packet.Data));
             break;
         case QuestOffer::OtherAreas:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::OtherAreas)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::OtherAreas)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Outlands:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Outlands)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Outlands)].current, sizeof(packet.Data));
             break;
-        case QuestOffer::AhtUrghan:
+        case QuestOffer::AhtUrhgan:
         {
             // Special case: TOAU quests also update current Assault, TOAU, WOTG, and Campaign missions
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::AhtUrghan)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::AhtUrhgan)].current, sizeof(packet.Data));
             packet.Data[4] = PChar->m_assaultLog.current;
             packet.Data[5] = PChar->m_missionLog[static_cast<uint8_t>(MissionLog::ToAU)].current;
             packet.Data[6] = PChar->m_missionLog[static_cast<uint8_t>(MissionLog::WoTG)].current;
@@ -61,16 +62,16 @@ GP_SERV_COMMAND_MISSION::OTHER::OTHER(const CCharEntity* PChar, QuestOffer log)
             break;
         }
         case QuestOffer::CrystalWar:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::CrystalWar)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::CrystalWar)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Abyssea:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Abyssea)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Abyssea)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Adoulin:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Adoulin)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Adoulin)].current, sizeof(packet.Data));
             break;
         case QuestOffer::Coalition:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Coalition)].current, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Coalition)].current, sizeof(packet.Data));
             break;
         default:
             break;
@@ -85,27 +86,27 @@ GP_SERV_COMMAND_MISSION::OTHER::OTHER(const CCharEntity* PChar, QuestComplete lo
     switch (log)
     {
         case QuestComplete::Sandoria:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Sandoria)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Sandoria)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Bastok:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Bastok)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Bastok)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Windurst:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Windurst)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Windurst)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Jeuno:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Jeuno)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Jeuno)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::OtherAreas:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::OtherAreas)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::OtherAreas)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Outlands:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Outlands)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Outlands)].complete, sizeof(packet.Data));
             break;
-        case QuestComplete::AhtUrghan:
+        case QuestComplete::AhtUrhgan:
         {
             // Special case: ToAU quests also update completed Assault missions
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::AhtUrghan)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::AhtUrhgan)].complete, sizeof(packet.Data));
             for (uint16 missionID = 0; missionID < 128; missionID++)
             {
                 if (PChar->m_assaultLog.complete[missionID])
@@ -116,16 +117,16 @@ GP_SERV_COMMAND_MISSION::OTHER::OTHER(const CCharEntity* PChar, QuestComplete lo
             break;
         }
         case QuestComplete::CrystalWar:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::CrystalWar)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::CrystalWar)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Abyssea:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Abyssea)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Abyssea)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Adoulin:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Adoulin)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Adoulin)].complete, sizeof(packet.Data));
             break;
         case QuestComplete::Coalition:
-            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(QuestLog::Coalition)].complete, sizeof(packet.Data));
+            std::memcpy(packet.Data, PChar->m_questLog[static_cast<uint8_t>(xi::QuestLog::Coalition)].complete, sizeof(packet.Data));
             break;
         default:
             break;

@@ -368,7 +368,7 @@ sol::table CLuaZone::queryEntitiesByName(const std::string& name)
  *  Example : zone:getTerrainType(player:getPos())
  ************************************************************************/
 
-auto CLuaZone::getTerrainType(const sol::table& position) -> TerrainType
+auto CLuaZone::getTerrainType(const sol::table& position) -> xi::TerrainType
 {
     return m_pLuaZone->xiMesh()->getTerrainAt(
         position["x"].get_or<float>(0),

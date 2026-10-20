@@ -21,13 +21,14 @@
 
 #pragma once
 
-#include <map/enums/automaton.h>
+#include "data/enums/automaton_frame.h"
+#include "data/enums/automaton_head.h"
 
 #include <array>
 
 struct AutomatonEquip
 {
-    AutomatonFrame        frame;
-    AutomatonHead         head;
+    xi::AutomatonFrame    frame;
+    xi::AutomatonHead     head;
     std::array<uint8, 12> attachments;
 };

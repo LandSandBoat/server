@@ -37,6 +37,8 @@
 #include <common/types/maybe.h>
 
 #include "data/enums/content.h"
+#include "data/enums/emote.h"
+#include "data/enums/item_flag.h"
 #include "data/enums/nation.h"
 #include "data/enums/region.h"
 
@@ -65,7 +67,6 @@
 #include "data/datasets/zones/npcs/dataset.h"
 
 class IPP;
-enum class ItemFlag : uint32;
 
 namespace xi
 {
@@ -133,7 +134,6 @@ struct MonstrosityData_t;
 } // namespace monstrosity
 
 enum ConquestUpdate : uint8;
-enum class Emote : uint8;
 
 namespace luautils
 {
@@ -297,7 +297,7 @@ void SendEntityVisualPacket(uint32 npcId, const char* command);
 void InitInteractionGlobal();
 auto GetZone(xi::ZoneId zoneId) -> CZone*;
 auto GetItemByID(uint32 itemId) -> const CItem*;
-auto GetItemFlagsByID(uint32 itemId) -> ItemFlag;
+auto GetItemFlagsByID(uint32 itemId) -> xi::ItemFlag;
 auto GetItemLevelRequirementsByID(uint32 itemId) -> uint8;
 auto GetNPCByID(uint32 npcid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetMobByID(uint32 mobid, const sol::object& instanceObj) -> CBaseEntity*;
@@ -538,7 +538,7 @@ void OnPlayerDeath(CCharEntity* PChar);
 void OnPlayerLevelUp(CCharEntity* PChar);
 void OnPlayerLevelDown(CCharEntity* PChar);
 void OnPlayerMount(CCharEntity* PChar);
-void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+void OnPlayerEmote(CCharEntity* PChar, xi::Emote emote);
 void OnPlayerVolunteer(CCharEntity* PChar, const std::string& text);
 
 // Lua returns whether the dig went ahead, then whether the greens were kept.

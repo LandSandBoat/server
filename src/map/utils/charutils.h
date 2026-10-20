@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/types/flag.h"
+#include "data/enums/quest_log.h"
 
 #include <memory>
 #include <string>
@@ -45,7 +46,6 @@ enum class KeyItem : uint16_t;
 
 struct Charge_t;
 enum class MissionLog : uint8_t;
-enum class QuestLog : uint8_t;
 class CPetEntity;
 class CMobEntity;
 class CAbility;
@@ -94,7 +94,7 @@ void SetRaceHitbox(CCharEntity* PChar);
 
 void SendQuestMissionLog(CCharEntity* PChar);
 void SendPartialMissionLog(CCharEntity* PChar, MissionLog log, bool completed);
-void SendPartialQuestLog(CCharEntity* PChar, QuestLog log, bool completed);
+void SendPartialQuestLog(CCharEntity* PChar, xi::QuestLog log, bool completed);
 void SendRecordsOfEminenceLog(CCharEntity* PChar);
 void SendKeyItems(CCharEntity* PChar);
 void SendInventory(CCharEntity* PChar);

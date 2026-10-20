@@ -23,24 +23,6 @@
 
 #include "common/cbasetypes.h"
 
-enum class AutomatonFrame : uint8
-{
-    Harlequin  = 0x20,
-    Valoredge  = 0x21,
-    Sharpshot  = 0x22,
-    Stormwaker = 0x23,
-};
-
-enum class AutomatonHead : uint8
-{
-    Harlequin    = 0x01,
-    Valoredge    = 0x02,
-    Sharpshot    = 0x03,
-    Stormwaker   = 0x04,
-    Soulsoother  = 0x05,
-    Spiritreaver = 0x06,
-};
-
 enum class AutomatonAttachment : uint8
 {
     AutoRepairKit    = 193,

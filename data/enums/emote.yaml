@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.emote
+
+values:
+  point:       0
+  bow:         1
+  salute:      2
+  kneel:       3
+  laugh:       4
+  cry:         5
+  no:          6
+  yes:         7
+  wave:        8
+  goodbye:     9
+  welcome:    10
+  joy:        11
+  cheer:      12
+  clap:       13
+  praise:     14
+  smile:      15
+  poke:       16
+  slap:       17
+  stagger:    18
+  sigh:       19
+  comfort:    20
+  surprised:  21
+  amazed:     22
+  stare:      23
+  blush:      24
+  angry:      25
+  disgusted:  26
+  muted:      27
+  doze:       28
+  panic:      29
+  grin:       30
+  dance:      31
+  think:      32
+  fume:       33
+  doubt:      34
+  sulk:       35
+  psych:      36
+  huh:        37
+  shocked:    38
+  logging:    40 # Only used for HELM
+  excavation: 41 # Only used for HELM
+  harvesting: 42 # Only used for HELM
+  hurray:     43
+  toss:       44
+  dance1:     65
+  dance2:     66
+  dance3:     67
+  dance4:     68
+  bell:       73
+  job:        74
+  aim:        96

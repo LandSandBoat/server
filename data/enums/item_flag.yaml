@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+#
+# Bits 0-15 mirror retail DAT layout.
+# Bits 16+ are LSB specific behavior.
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint32_t
+  lua:
+    table: xi.itemFlag
+
+values:
+  none:             0x00000000
+  aug_sendable:     0x00000001 # Can be sent even with augments.
+  gm_only:          0x00000002 # Can only be obtained/used by GMs?
+  mystery_box:      0x00000004 # Can be gained from Gobbie Mystery Box
+  mog_garden:       0x00000008 # Can use in Mog Garden
+  can_send_account: 0x00000010 # Can send to characters on same account
+  inscribable:      0x00000020 # Can be signed during synthesis
+  no_auction:       0x00000040 # Cannot be placed on the Auction House
+  scroll:           0x00000080
+  linkshell:        0x00000100 # Linkshell type items
+  can_use:          0x00000200 # Can use the item
+  can_trade_npc:    0x00000400 # Can trade the item to NPCs
+  can_equip:        0x00000800 # Can be equipped
+  no_sale:          0x00001000 # Cannot be sold to vendors
+  no_delivery:      0x00002000 # Cannot be sent through the PBX
+  exclusive:        0x00004000 # Cannot be traded to another PC
+  rare:             0x00008000 # Cannot own multiple copies
+  no_recycle:       0x00010000 # Item skips Recycle Bin
+  no_rare_check:    0x00020000 # Item skips Rare check in Treasure Pool

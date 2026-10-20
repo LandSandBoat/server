@@ -48,8 +48,8 @@ auto GP_CLI_COMMAND_MOTION::validate(MapSession* PSession, const CCharEntity* PC
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .oneOf<EmoteMode>(this->Mode)
-        .range("Number", this->Number, Emote::Point, Emote::Aim);
+        .oneOf<xi::EmoteMode>(this->Mode)
+        .range("Number", this->Number, xi::Emote::Point, xi::Emote::Aim);
 }
 
 void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) const
@@ -61,7 +61,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
     }
 
     // Attempting to use bell emote without a bell.
-    if (static_cast<Emote>(this->Number) == Emote::Bell)
+    if (static_cast<xi::Emote>(this->Number) == xi::Emote::Bell)
     {
         // This is the actual observed behavior. Even with a different weapon type equipped,
         // having a bell in the lockstyle is sufficient. On the other hand, if any other
@@ -90,7 +90,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
         }
     }
     // Attempting to use locked job emote.
-    else if (static_cast<Emote>(this->Number) == Emote::Job && this->Param)
+    else if (static_cast<xi::Emote>(this->Number) == xi::Emote::Job && this->Param)
     {
         const uint8 jobIndex = this->Param - 0x1E;
 
@@ -100,7 +100,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
         }
     }
 
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, this->UniqueNo, this->ActIndex, static_cast<Emote>(this->Number), static_cast<EmoteMode>(this->Mode), this->Param));
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MOTIONMES>(PChar, this->UniqueNo, this->ActIndex, static_cast<xi::Emote>(this->Number), static_cast<xi::EmoteMode>(this->Mode), this->Param));
 
-    luautils::OnPlayerEmote(PChar, static_cast<Emote>(this->Number));
+    luautils::OnPlayerEmote(PChar, static_cast<xi::Emote>(this->Number));
 }

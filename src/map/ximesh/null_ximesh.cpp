@@ -26,9 +26,9 @@ auto NullXiMesh::query(float, float, float) const -> Maybe<CellHit>
     return std::nullopt;
 }
 
-auto NullXiMesh::getTerrainAt(float, float, float) const -> TerrainType
+auto NullXiMesh::getTerrainAt(float, float, float) const -> xi::TerrainType
 {
-    return TerrainType::None;
+    return xi::TerrainType::None;
 }
 
 auto NullXiMesh::getFloorId(float, float, float) const -> uint8

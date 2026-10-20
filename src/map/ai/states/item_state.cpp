@@ -114,7 +114,7 @@ auto CItemState::init() -> StateErrorOr<void>
         {
             if (value == 0)
             {
-                param = m_PItem->hasFlag(ItemFlag::Scroll) ? m_PItem->getSubID() : m_PItem->getID();
+                param = m_PItem->hasFlag(xi::ItemFlag::Scroll) ? m_PItem->getSubID() : m_PItem->getID();
             }
             return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget ? PTarget : m_PEntity, param, value, static_cast<MsgBasic>(error)) };
         }

@@ -372,7 +372,7 @@ auto resolveRecipe(CCharEntity* PChar, const SynthOffer& offer) -> bool
     }
 
     const CItem* PItem = xi::items::lookup(recipe.Result);
-    if (PItem && PItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, recipe.Result))
+    if (PItem && PItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, recipe.Result))
     {
         PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelRareItem);
         return false;

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.questLog
+
+values:
+  sandoria:      0
+  bastok:        1
+  windurst:      2
+  jeuno:         3
+  other_areas:   4
+  outlands:      5
+  aht_urhgan:    6
+  crystal_war:   7
+  abyssea:       8
+  adoulin:       9
+  coalition:    10
+  none:        255

@@ -23,12 +23,16 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/behavior.h"
+#include "data/enums/emote.h"
+#include "data/enums/emote_mode.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/fame_area.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/music_slot.h"
+#include "data/enums/quest_log.h"
 #include "data/enums/roam_flag.h"
+#include "data/enums/terrain_type.h"
 #include "data/enums/zone_misc.h"
 #include "enums/mission_log.h"
 #include "lua_trade_container.h"
@@ -41,10 +45,7 @@
 #include <map>
 #include <string>
 #include <tuple>
-
-enum class QuestLog : uint8_t;
 enum class POSMODE : uint8;
-enum class TerrainType : uint8;
 class CBaseEntity;
 class CCharEntity;
 class CLuaBattlefield;
@@ -198,7 +199,7 @@ public:
     void sendGuildClose(uint8 open, uint8 close, sol::optional<bool> passive) const;                               // Sends the guild-open packet with a Close status
     void openSendBox() const;                                                                                      // Opens send box (to deliver items)
     void leaveGame();
-    void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const;
+    void sendEmote(const CLuaBaseEntity* target, xi::Emote emote, xi::EmoteMode emoteMode, bool othersOnly) const;
 
     // Location and Positioning
     int16 getWorldAngle(sol::variadic_args va);                                                // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
@@ -434,12 +435,12 @@ public:
     void   addRankPoints(uint16 rankpoints);
     void   setRankPoints(uint16 rankpoints);
 
-    void  addQuest(QuestLog logId, uint16 questId) const;
-    void  delCurrentQuest(QuestLog logId, uint16 questID) const;
-    void  delQuest(QuestLog logId, uint16 questID) const;
-    uint8 getQuestStatus(QuestLog logId, uint16 questID) const;
-    bool  hasCompletedQuest(QuestLog logId, uint16 questID) const;
-    void  completeQuest(QuestLog logId, uint16 questID) const;
+    void addQuest(xi::QuestLog logId, uint16 questId) const;
+    void delCurrentQuest(xi::QuestLog logId, uint16 questID) const;
+    void delQuest(xi::QuestLog logId, uint16 questID) const;
+    auto getQuestStatus(xi::QuestLog logId, uint16 questID) const -> uint8;
+    auto hasCompletedQuest(xi::QuestLog logId, uint16 questID) const -> bool;
+    void completeQuest(xi::QuestLog logId, uint16 questID) const;
 
     void   addMission(MissionLog logId, uint16 missionID) const;
     void   delMission(MissionLog logId, uint16 missionID) const;
@@ -850,10 +851,10 @@ public:
     auto hasAttachment(uint16 itemID) const -> bool;
     auto hasAttachmentSet(uint16 itemID) const -> bool;
     auto getAutomatonName() const -> std::string;
-    auto getAutomatonFrame() const -> Maybe<AutomatonFrame>;
-    void setAutomatonFrame(AutomatonFrame frame) const;
-    auto getAutomatonHead() const -> Maybe<AutomatonHead>;
-    void setAutomatonHead(AutomatonHead head) const;
+    auto getAutomatonFrame() const -> Maybe<xi::AutomatonFrame>;
+    void setAutomatonFrame(xi::AutomatonFrame frame) const;
+    auto getAutomatonHead() const -> Maybe<xi::AutomatonHead>;
+    void setAutomatonHead(xi::AutomatonHead head) const;
     auto unlockAttachment(uint16 itemID) const -> bool;
     auto getActiveManeuverCount() const -> uint8;
     void removeOldestManeuver() const;

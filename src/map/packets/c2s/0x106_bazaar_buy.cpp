@@ -20,7 +20,7 @@
 */
 
 #include "0x106_bazaar_buy.h"
-#include "enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "items/item_access.h"
 #include "items/transactions/bazaar_purchase.h"
 

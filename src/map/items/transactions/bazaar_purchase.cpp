@@ -23,8 +23,8 @@
 
 #include "common/logging.h"
 
+#include "data/enums/item_state.h"
 #include "entities/char_entity.h"
-#include "enums/item_state.h"
 #include "item_container.h"
 #include "items/item.h"
 #include "items/item_access.h"
@@ -74,7 +74,7 @@ auto BazaarPurchaseTransaction::claimListing() -> bool
     }
 
     // a listed item is ItemState::Bazaar, which has to come off before it can be claimed
-    if (PListing->state() == ItemState::Bazaar && !xi::items::mark(PListing, ItemState::Free))
+    if (PListing->state() == xi::ItemState::Bazaar && !xi::items::mark(PListing, xi::ItemState::Free))
     {
         return false;
     }
@@ -96,7 +96,7 @@ void BazaarPurchaseTransaction::restoreDisplay()
         return;
     }
 
-    if (!xi::items::mark(PRemaining, ItemState::Bazaar))
+    if (!xi::items::mark(PRemaining, xi::ItemState::Bazaar))
     {
         ShowWarningFmt("BazaarPurchaseTransaction: could not put item {} back on display for {}", PRemaining->getID(), this->seller_->getName());
     }

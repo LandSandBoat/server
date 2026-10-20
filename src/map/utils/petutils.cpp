@@ -49,6 +49,7 @@
 #include "ai/controllers/pet_controller.h"
 #include "ai/states/ability_state.h"
 
+#include "data/enums/automaton_frame.h"
 #include "data/enums/mob_mod.h"
 #include "enums/automaton.h"
 #include "packets/char_status.h"
@@ -661,15 +662,15 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(4, std::min<uint8>(mlvl, 99));
                 PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(7, std::min<uint8>(mlvl, 99)) / 2); // C
                 break;
-            case AutomatonFrame::Valoredge:
+            case xi::AutomatonFrame::Valoredge:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(7, std::min<uint8>(mlvl, 99));
                 PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(5, std::min<uint8>(mlvl, 99)) / 2); // B-
                 break;
-            case AutomatonFrame::Sharpshot:
+            case xi::AutomatonFrame::Sharpshot:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, std::min<uint8>(mlvl, 99));
                 PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(8, std::min<uint8>(mlvl, 99)) / 2); // C-
                 break;
-            case AutomatonFrame::Stormwaker:
+            case xi::AutomatonFrame::Stormwaker:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, std::min<uint8>(mlvl, 99));
                 PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(9, std::min<uint8>(mlvl, 99)) / 2); // D
                 break;
@@ -1114,16 +1115,16 @@ void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
         {
             switch (PChar->getAutomatonFrame())
             {
-                case AutomatonFrame::Valoredge:
+                case xi::AutomatonFrame::Valoredge:
                     petID = PETID_VALOREDGEFRAME;
                     break;
-                case AutomatonFrame::Sharpshot:
+                case xi::AutomatonFrame::Sharpshot:
                     petID = PETID_SHARPSHOTFRAME;
                     break;
-                case AutomatonFrame::Stormwaker:
+                case xi::AutomatonFrame::Stormwaker:
                     petID = PETID_STORMWAKERFRAME;
                     break;
-                case AutomatonFrame::Harlequin:
+                case xi::AutomatonFrame::Harlequin:
                 default:
                     petID = PETID_HARLEQUINFRAME;
                     break;
@@ -1772,9 +1773,9 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
                                                            (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
     {
         const auto frameEquipped = PChar->getAutomatonFrame();
-        if (frameEquipped >= AutomatonFrame::Harlequin && frameEquipped <= AutomatonFrame::Stormwaker)
+        if (frameEquipped >= xi::AutomatonFrame::Harlequin && frameEquipped <= xi::AutomatonFrame::Stormwaker)
         {
-            const uint32 equippedPetID = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(frameEquipped) - static_cast<uint32>(AutomatonFrame::Harlequin);
+            const uint32 equippedPetID = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(frameEquipped) - static_cast<uint32>(xi::AutomatonFrame::Harlequin);
 
             // Changing frames while the automaton is stowed desummons it - you may however change attachments.
             if (spawningFromZone && PetID != equippedPetID)

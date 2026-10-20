@@ -20,7 +20,7 @@
 */
 
 #include "0x0fb_myroom_bankin.h"
-#include "enums/item_state.h"
+#include "data/enums/item_state.h"
 #include "items/item_access.h"
 
 #include "entities/char_entity.h"
@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    if (!xi::items::mark(PFurnishing, ItemState::Free))
+    if (!xi::items::mark(PFurnishing, xi::ItemState::Free))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_BANKIN: could not release furnishing {}", PFurnishing->getID());
         return;

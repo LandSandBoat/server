@@ -23,22 +23,6 @@
 
 #include <cstdint>
 
-// Indices as used in CCharEntity::m_questLog
-enum class QuestLog : uint8_t
-{
-    Sandoria   = 0,
-    Bastok     = 1,
-    Windurst   = 2,
-    Jeuno      = 3,
-    OtherAreas = 4,
-    Outlands   = 5,
-    AhtUrghan  = 6,
-    CrystalWar = 7,
-    Abyssea    = 8,
-    Adoulin    = 9,
-    Coalition  = 10,
-};
-
 // Client-side MISSION packet 'Port' values for completed quests.
 enum class QuestComplete : uint16_t
 {
@@ -48,7 +32,7 @@ enum class QuestComplete : uint16_t
     Jeuno      = 0x00A8,
     OtherAreas = 0x00B0,
     Outlands   = 0x00B8,
-    AhtUrghan  = 0x00C0,
+    AhtUrhgan  = 0x00C0,
     CrystalWar = 0x00C8,
     Abyssea    = 0x00E8,
     Adoulin    = 0x00F8,
@@ -64,7 +48,7 @@ enum class QuestOffer : uint16_t
     Jeuno      = 0x0068,
     OtherAreas = 0x0070,
     Outlands   = 0x0078,
-    AhtUrghan  = 0x0080,
+    AhtUrhgan  = 0x0080,
     CrystalWar = 0x0088,
     Abyssea    = 0x00E0,
     Adoulin    = 0x00F0,

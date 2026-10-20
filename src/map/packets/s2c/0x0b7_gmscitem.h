@@ -30,10 +30,10 @@ class GP_SERV_COMMAND_GMSCITEM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_
 public:
     struct PacketData
     {
-        uint32_t ItemFlag[16]; // PS2: ItemFlag
-        uint32_t UniqueNo;     // PS2: UniqueNo
-        uint8_t  sName[16];    // PS2: sName
-        uint16_t TableIndex;   // PS2: TableIndex
+        uint32_t xi::ItemFlag[16]; // PS2: ItemFlag
+        uint32_t UniqueNo;         // PS2: UniqueNo
+        uint8_t  sName[16];        // PS2: sName
+        uint16_t TableIndex;       // PS2: TableIndex
     };
 
     // TODO: Unimplemented

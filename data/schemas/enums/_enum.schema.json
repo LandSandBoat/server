@@ -46,9 +46,9 @@
           "unevaluatedProperties": false,
           "properties": {
             "table": {
-              "description": "Lua table path the values are exported under. Example: `xi.itemFlag`.",
+              "description": "Lua table path the values are exported under. Example: `xi.itemFlag`, or nested like `xi.automaton.head`.",
               "type": "string",
-              "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$"
+              "pattern": "^xi(\\.[A-Za-z][A-Za-z0-9_]*)+$"
             }
           }
         }
