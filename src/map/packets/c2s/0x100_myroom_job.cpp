@@ -78,11 +78,13 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
 
     const bool changingMainJob = this->MainJobIndex > 0x00;
 
+    // Always save gear
+    charutils::SaveJobChangeGear(PChar);
+
     if (changingMainJob)
     {
         PChar->resetPetZoningInfo();
 
-        charutils::SaveJobChangeGear(PChar);
         charutils::RemoveAllEquipment(PChar);
         PChar->SetMJob(this->MainJobIndex);
 
@@ -158,7 +160,11 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     PChar->PRecastContainer->ChangeJob();
     charutils::BuildingCharAbilityTable(PChar);
     charutils::BuildingCharWeaponSkills(PChar);
-    charutils::LoadJobChangeGear(PChar);
+
+    if (changingMainJob)
+    {
+        charutils::LoadJobChangeGear(PChar);
+    }
 
     // If the player has a teleport effect and they change jobs, cancel the teleport/warps you
     // Retail does cancel your teleport/warp if you change subs if someone else ports/warps
