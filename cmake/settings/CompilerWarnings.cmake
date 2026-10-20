@@ -115,14 +115,18 @@ function(set_project_warnings project_name)
 
   option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" TRUE)
   if(WARNINGS_AS_ERRORS)
-    if(UNIX)
-      set(ERRORS "-Werror")
-    elseif(WIN32)
+    if(MSVC)
       set(ERRORS "/WX")
+    else()
+      set(ERRORS "-Werror")
     endif()
+    message(STATUS "Setting warnings as errors flag: ${ERRORS}")
   endif()
 
-  message(STATUS "Setting warnings as errors flag: ${ERRORS}")
   message(STATUS "Setting project warning flags: ${PROJECT_WARNINGS}")
   target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
 endfunction() #set_project_warnings
+
+# Link this 'library' to use the warnings above; xi_add_library and xi_add_executable already do.
+add_library(project_warnings INTERFACE)
+set_project_warnings(project_warnings)

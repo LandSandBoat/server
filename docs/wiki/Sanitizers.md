@@ -1,6 +1,6 @@
 # Troubleshooting with Sanitizers
 
-LSB supports several sanitizer build types via CMake, defined in `cmake/Sanitizers.cmake`.
+LSB supports several sanitizer build types via CMake, defined in `cmake/tools/Sanitizers.cmake`.
 
 These are supported first-class in GCC/Clang on Linux, and to a lesser degree on MSVC/Windows.
 

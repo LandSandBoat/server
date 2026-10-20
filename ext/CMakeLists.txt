@@ -1,4 +1,4 @@
-# luajit, mariadb, zmq and openssl are prebuilt; cmake/Find*.cmake turns them into targets.
+# luajit, mariadb, zmq and openssl are prebuilt; cmake/find/Find*.cmake turns them into targets.
 add_subdirectory(concurrentqueue)
 add_subdirectory(SPSCQueue)
 add_subdirectory(sol)
