@@ -129,6 +129,15 @@ auto CPetSkillState::Update(const timer::time_point tick) -> bool
     // Reset the state for the current skill attempt
     m_skillSuccess = false;
 
+    // Rotate towards target during ability // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
+    if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
+    {
+        if (CBaseEntity* PTarget = target().resolve())
+        {
+            battleutils::turnTowardsTarget(m_PEntity, PTarget);
+        }
+    }
+
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
     {
         // Check for stun/sleep/hysteria/etc at the moment of skill completion - Cleanup handles the interrupt
