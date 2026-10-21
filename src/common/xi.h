@@ -105,7 +105,7 @@ public:
         return (byte_ & (1 << bit_)) != 0;
     }
 
-    bit_reference& operator=(bool value)
+    auto operator=(bool value) -> bit_reference&
     {
         if (value)
         {
@@ -118,7 +118,7 @@ public:
         return *this;
     }
 
-    bit_reference& operator=(const bit_reference& other)
+    auto operator=(const bit_reference& other) -> bit_reference&
     {
         return *this = static_cast<bool>(other);
     }
@@ -158,7 +158,7 @@ struct bitset
         set(pos, true);
     }
 
-    bool get(std::size_t pos) const
+    auto get(std::size_t pos) const -> bool
     {
         if (pos >= N)
         {
@@ -168,12 +168,12 @@ struct bitset
         return (data[pos / 8] >> (pos % 8)) & 0x01;
     }
 
-    bool test(std::size_t pos) const
+    auto test(std::size_t pos) const -> bool
     {
         return get(pos);
     }
 
-    bool none() const
+    auto none() const -> bool
     {
         return std::ranges::all_of(data,
                                    [](const uint8 byte)
@@ -210,18 +210,18 @@ struct bitset
         data[pos / 8] ^= (1 << (pos % 8));
     }
 
-    std::size_t size() const
+    auto size() const -> std::size_t
     {
         return N;
     }
 
-    xi::bitset<storage_size>& operator=(xi::bitset<storage_size>&& other)
+    auto operator=(xi::bitset<storage_size>&& other) -> xi::bitset<storage_size>&
     {
         data = std::move(other.data);
         return *this;
     }
 
-    bit_reference operator[](std::size_t pos)
+    auto operator[](std::size_t pos) -> bit_reference
     {
         if (pos >= N)
         {
@@ -233,12 +233,12 @@ struct bitset
         return bit_reference(data[pos / 8], pos % 8);
     }
 
-    bool operator[](std::size_t pos) const
+    auto operator[](std::size_t pos) const -> bool
     {
         return get(pos);
     }
 
-    xi::bitset<N> operator&(const xi::bitset<N>& other) const
+    auto operator&(const xi::bitset<N>& other) const -> xi::bitset<N>
     {
         xi::bitset<N> result;
         for (std::size_t i = 0; i < storage_size; ++i)
@@ -248,7 +248,7 @@ struct bitset
         return result;
     }
 
-    xi::bitset<N> operator~() const
+    auto operator~() const -> xi::bitset<N>
     {
         xi::bitset<N> result;
         for (std::size_t i = 0; i < storage_size; ++i)
@@ -258,7 +258,7 @@ struct bitset
         return result;
     }
 
-    xi::bitset<N>& operator&=(const xi::bitset<N>& other)
+    auto operator&=(const xi::bitset<N>& other) -> xi::bitset<N>&
     {
         for (std::size_t i = 0; i < storage_size; ++i)
         {

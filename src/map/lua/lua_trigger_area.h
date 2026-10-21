@@ -32,19 +32,19 @@ class CLuaTriggerArea
 public:
     CLuaTriggerArea(ITriggerArea*);
 
-    ITriggerArea* getTriggerArea() const
+    auto getTriggerArea() const -> ITriggerArea*
     {
         return m_PLuaTriggerArea;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaTriggerArea& triggerArea);
+    friend auto operator<<(std::ostream& out, const CLuaTriggerArea& triggerArea) -> std::ostream&;
 
-    uint32 getTriggerAreaID();
-    int16  getCount();
-    int16  addCount(int16 count);
-    int16  delCount(int16 count);
+    auto getTriggerAreaID() -> uint32;
+    auto getCount() -> int16;
+    auto addCount(int16 count) -> int16;
+    auto delCount(int16 count) -> int16;
 
-    bool operator==(const CLuaTriggerArea& other) const
+    auto operator==(const CLuaTriggerArea& other) const -> bool
     {
         return this->m_PLuaTriggerArea == other.m_PLuaTriggerArea;
     }

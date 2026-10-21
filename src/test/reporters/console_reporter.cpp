@@ -32,7 +32,7 @@
 namespace
 {
 
-std::string formatDuration(const std::chrono::milliseconds ms)
+auto formatDuration(const std::chrono::milliseconds ms) -> std::string
 {
     if (ms.count() < 1000)
     {
@@ -42,7 +42,7 @@ std::string formatDuration(const std::chrono::milliseconds ms)
     return fmt::format("{:.3f} s", ms.count() / 1000.0);
 }
 
-std::string pluralize(size_t count, const std::string& word)
+auto pluralize(size_t count, const std::string& word) -> std::string
 {
     return fmt::format("{} {}{}", count, word, count != 1 ? "s" : "");
 }

@@ -4,7 +4,7 @@
 // https://llvm.org/docs/LibFuzzer.html
 // https://github.com/google/fuzzing/blob/master/docs/structure-aware-fuzzing.md
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size)
+extern "C" auto LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) -> int
 {
     // TODO:
     // MapSession map_session_data;

@@ -32,17 +32,17 @@ class CLuaAttack
 public:
     CLuaAttack(CAttack*);
 
-    CAttack* GetAttack() const
+    auto GetAttack() const -> CAttack*
     {
         return m_PLuaAttack;
     }
 
-    bool isCritical() const;
+    auto isCritical() const -> bool;
     void setCritical(bool critical);
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaAttack& action);
+    friend auto operator<<(std::ostream& out, const CLuaAttack& action) -> std::ostream&;
 
-    bool operator==(const CLuaAttack& other) const
+    auto operator==(const CLuaAttack& other) const -> bool
     {
         return this->m_PLuaAttack == other.m_PLuaAttack;
     }

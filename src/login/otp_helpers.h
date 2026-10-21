@@ -38,7 +38,7 @@
 namespace otpHelpers
 {
 
-inline std::vector<uint8_t> base32Decode(const std::string& base32)
+inline auto base32Decode(const std::string& base32) -> std::vector<uint8_t>
 {
     static const std::array<int8_t, 256> lookup = []
     {
@@ -88,7 +88,7 @@ inline std::vector<uint8_t> base32Decode(const std::string& base32)
     return bytes;
 }
 
-inline std::string generateTOTP(const std::string& base32Secret, uint64_t epochSeconds, int digits = 6, int period = 30)
+inline auto generateTOTP(const std::string& base32Secret, uint64_t epochSeconds, int digits = 6, int period = 30) -> std::string
 {
     std::vector<uint8_t> key     = base32Decode(base32Secret);
     uint64_t             counter = epochSeconds / period;
@@ -126,7 +126,7 @@ static const char BASE32_CHARS[32] = {
 };
 // clang-format on
 
-inline uint64_t getCurrentTime()
+inline auto getCurrentTime() -> uint64_t
 {
     auto now = std::chrono::system_clock::now();
     auto dur = now.time_since_epoch();
@@ -135,7 +135,7 @@ inline uint64_t getCurrentTime()
 }
 
 // accepts one 30s step either side of now for clock drift and input delay (RFC 6238 5.2)
-inline bool validateTOTP(uint32 accid, const std::string& totpCode, const std::string& secret)
+inline auto validateTOTP(uint32 accid, const std::string& totpCode, const std::string& secret) -> bool
 {
     // last accepted time step per account, so a code can't be used twice (RFC 6238 5.2)
     static Synchronized<std::unordered_map<uint32, uint64_t>> lastAcceptedStep;
@@ -172,7 +172,7 @@ inline bool validateTOTP(uint32 accid, const std::string& totpCode, const std::s
     return false;
 }
 
-inline std::string getNewBase32Secret()
+inline auto getNewBase32Secret() -> std::string
 {
     constexpr size_t base32Len = 32; // must be % 8 == 0
 
@@ -186,7 +186,7 @@ inline std::string getNewBase32Secret()
     return newSecret;
 }
 
-inline bool doesAccountNeedOTP(uint32 accid, const std::string& secretType)
+inline auto doesAccountNeedOTP(uint32 accid, const std::string& secretType) -> bool
 {
     if (secretType == "TOTP")
     {
@@ -211,12 +211,12 @@ inline bool doesAccountNeedOTP(uint32 accid, const std::string& secretType)
     return false;
 }
 
-inline bool doesAccountNeedOTP(const std::string& account, const std::string& secretType)
+inline auto doesAccountNeedOTP(const std::string& account, const std::string& secretType) -> bool
 {
     return doesAccountNeedOTP(loginHelpers::getAccountId(account), secretType);
 }
 
-inline std::string createAccountSecret(const std::string& account, const std::string& secretType)
+inline auto createAccountSecret(const std::string& account, const std::string& secretType) -> std::string
 {
     if (secretType == "TOTP")
     {
@@ -243,7 +243,7 @@ inline std::string createAccountSecret(const std::string& account, const std::st
     return "";
 }
 
-inline std::string regenerateAccountRecoveryCode(const std::string& account, const std::string& secretType)
+inline auto regenerateAccountRecoveryCode(const std::string& account, const std::string& secretType) -> std::string
 {
     if (secretType == "TOTP")
     {
@@ -268,7 +268,7 @@ inline std::string regenerateAccountRecoveryCode(const std::string& account, con
     return "";
 }
 
-inline std::string getAccountSecret(const std::string& account, const std::string& secretType)
+inline auto getAccountSecret(const std::string& account, const std::string& secretType) -> std::string
 {
     if (secretType == "TOTP")
     {
@@ -285,7 +285,7 @@ inline std::string getAccountSecret(const std::string& account, const std::strin
     return "";
 }
 
-inline std::string getAccountRecoveryCode(const std::string& account, const std::string& secretType)
+inline auto getAccountRecoveryCode(const std::string& account, const std::string& secretType) -> std::string
 {
     if (secretType == "TOTP")
     {
@@ -302,7 +302,7 @@ inline std::string getAccountRecoveryCode(const std::string& account, const std:
     return "";
 }
 
-inline std::string toHexString(const unsigned char* data, size_t len)
+inline auto toHexString(const unsigned char* data, size_t len) -> std::string
 {
     static const char hexChars[] = "0123456789abcdef";
     std::string       result;
@@ -315,7 +315,7 @@ inline std::string toHexString(const unsigned char* data, size_t len)
     return result;
 }
 
-inline bool isValidTrustTokenFormat(const std::string& token)
+inline auto isValidTrustTokenFormat(const std::string& token) -> bool
 {
     if (token.size() != 64)
     {
@@ -331,14 +331,14 @@ inline bool isValidTrustTokenFormat(const std::string& token)
     return true;
 }
 
-inline std::string hashTrustToken(const std::string& token)
+inline auto hashTrustToken(const std::string& token) -> std::string
 {
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256(reinterpret_cast<const unsigned char*>(token.data()), token.size(), hash);
     return toHexString(hash, SHA256_DIGEST_LENGTH);
 }
 
-inline std::string generateTrustToken()
+inline auto generateTrustToken() -> std::string
 {
     unsigned char bytes[32];
     if (RAND_bytes(bytes, sizeof(bytes)) != 1)
@@ -357,7 +357,7 @@ inline void saveTrustToken(uint32 accid, const std::string& token)
     db::preparedStmt("INSERT INTO accounts_trust_tokens (token, accid, expires) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 30 DAY))", hashTrustToken(token), accid);
 }
 
-inline bool validateTrustToken(uint32 accid, const std::string& token)
+inline auto validateTrustToken(uint32 accid, const std::string& token) -> bool
 {
     if (!isValidTrustTokenFormat(token))
     {

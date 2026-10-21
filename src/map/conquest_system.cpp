@@ -39,7 +39,7 @@ namespace conquest
 // TODO: This should be a member of _something_
 Maybe<ConquestData> conquestData;
 
-ConquestData& GetConquestData()
+auto GetConquestData() -> ConquestData&
 {
     if (!conquestData)
     {
@@ -440,7 +440,7 @@ void HandleInfluenceUpdate(const std::vector<influence_t>& influences, ShouldUpd
  *  Ranking for the 3 nations                                           *
  ************************************************************************/
 
-uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst)
+auto GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst) -> uint8
 {
     // Based on the below values, it seems to be in pairs of bits.
     // Order is Windurst, Bastok, San d'Oria
@@ -475,7 +475,7 @@ uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst)
     return ranking;
 }
 
-uint8 GetBalance()
+auto GetBalance() -> uint8
 {
     uint8 sandoria = GetConquestData().getRegionControlCount(xi::Nation::Sandoria);
     uint8 bastok   = GetConquestData().getRegionControlCount(xi::Nation::Bastok);
@@ -485,7 +485,7 @@ uint8 GetBalance()
 }
 
 // Bits are nations allied: Sandoria, Bastok, Windurst
-uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst)
+auto GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst) -> uint8
 {
     if (sandoria > bastok + windurst)
     {
@@ -550,7 +550,7 @@ auto GetRegionOwner(const xi::Region region) -> xi::Nation
 
 // TODO: Take into account the added points for the weekly tally
 // NOTE: This todo was an old comment. Unsure if it's still valid
-uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
+auto AddConquestPoints(CCharEntity* PChar, uint32 exp) -> uint32
 {
     // NOTE: No need to send CConquestPacket,
     // The client itself requests this packet after a fixed period of time

@@ -37,7 +37,7 @@ using json = nlohmann::json;
 namespace
 {
 
-constexpr bool isBcryptHash(const std::string& passHash)
+constexpr auto isBcryptHash(const std::string& passHash) -> bool
 {
     return std::size(passHash) == 60 &&
            passHash[0] == '$' &&
@@ -653,7 +653,7 @@ void auth_session::do_write(std::size_t length)
         });
 }
 
-Maybe<std::pair<uint32, uint32>> auth_session::validatePassword(std::string username, std::string password)
+auto auth_session::validatePassword(std::string username, std::string password) -> Maybe<std::pair<uint32, uint32>>
 {
     uint32 accountID = 0;
     uint32 status    = 0;

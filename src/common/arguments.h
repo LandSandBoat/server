@@ -68,7 +68,7 @@ public:
     }
 
     template <typename T = std::string>
-    T get(const std::string_view arg_name) const
+    auto get(const std::string_view arg_name) const -> T
     {
         try
         {

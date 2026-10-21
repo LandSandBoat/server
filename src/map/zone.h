@@ -178,13 +178,13 @@ public:
     auto weather() -> WeatherContainer&;
     auto weather() const -> const WeatherContainer&;
 
-    const std::string& getName();
-    zoneLine_t*        GetZoneLine(uint32 zoneLineID);
+    auto getName() -> const std::string&;
+    auto GetZoneLine(uint32 zoneLineID) -> zoneLine_t*;
 
-    uint16 GetSoloBattleMusic() const;
-    uint16 GetPartyBattleMusic() const;
-    uint16 GetBackgroundMusicDay() const;
-    uint16 GetBackgroundMusicNight() const;
+    auto GetSoloBattleMusic() const -> uint16;
+    auto GetPartyBattleMusic() const -> uint16;
+    auto GetBackgroundMusicDay() const -> uint16;
+    auto GetBackgroundMusicNight() const -> uint16;
 
     void SetSoloBattleMusic(uint16 music);
     void SetPartyBattleMusic(uint16 music);
@@ -193,18 +193,18 @@ public:
 
     auto queryEntitiesByName(const std::string& pattern) -> const QueryByNameResult_t&;
 
-    uint32                        GetLocalVar(const char* var);
-    HashMap<std::string, uint32>& GetLocalVars();
-    void                          SetLocalVar(const char* var, uint32 val);
-    void                          ResetLocalVars();
+    auto GetLocalVar(const char* var) -> uint32;
+    auto GetLocalVars() -> HashMap<std::string, uint32>&;
+    void SetLocalVar(const char* var, uint32 val);
+    void ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(const std::string& name);
-    virtual CCharEntity* GetCharByID(uint32 id);
+    virtual auto GetCharByName(const std::string& name) -> CCharEntity*;
+    virtual auto GetCharByID(uint32 id) -> CCharEntity*;
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
-    virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // Get a pointer to any entity in the zone
+    virtual auto GetEntity(uint16 targid, uint8 filter = -1) -> CBaseEntity*; // Get a pointer to any entity in the zone
 
-    bool CanUseMisc(xi::ZoneMisc misc) const;
+    auto CanUseMisc(xi::ZoneMisc misc) const -> bool;
     void SetWeather(xi::Weather weather);
     void UpdateWeather();
 
@@ -245,7 +245,7 @@ public:
 
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
-    CZoneEntities* GetZoneEntities();
+    auto GetZoneEntities() -> CZoneEntities*;
 
     void createZoneTimers();
 

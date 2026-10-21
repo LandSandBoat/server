@@ -47,12 +47,12 @@ void CWeaponSkill::setType(uint8 type)
     m_TypeID = type;
 }
 
-bool CWeaponSkill::isAoE() const
+auto CWeaponSkill::isAoE() const -> bool
 {
     return m_AOE == 2;
 }
 
-bool CWeaponSkill::mainOnly() const
+auto CWeaponSkill::mainOnly() const -> bool
 {
     return m_mainOnly;
 }
@@ -77,7 +77,7 @@ void CWeaponSkill::setSkillLevel(uint16 level)
     m_Skilllevel = level;
 }
 
-const std::string& CWeaponSkill::getName()
+auto CWeaponSkill::getName() -> const std::string&
 {
     return m_name;
 }
@@ -132,17 +132,17 @@ void CWeaponSkill::setRange(uint8 range)
     m_Range = range;
 }
 
-uint16 CWeaponSkill::getID() const
+auto CWeaponSkill::getID() const -> uint16
 {
     return m_ID;
 }
 
-uint8 CWeaponSkill::getType() const
+auto CWeaponSkill::getType() const -> uint8
 {
     return m_TypeID;
 }
 
-uint8 CWeaponSkill::getUnlockId() const
+auto CWeaponSkill::getUnlockId() const -> uint8
 {
     return m_unlockId;
 }
@@ -152,17 +152,17 @@ auto CWeaponSkill::getJob(xi::Job job) -> uint8
     return m_Job[static_cast<uint8>(job)];
 }
 
-uint16 CWeaponSkill::getSkillLevel() const
+auto CWeaponSkill::getSkillLevel() const -> uint16
 {
     return m_Skilllevel;
 }
 
-uint8 CWeaponSkill::getElement() const
+auto CWeaponSkill::getElement() const -> uint8
 {
     return m_Element;
 }
 
-bool CWeaponSkill::isElemental() const
+auto CWeaponSkill::isElemental() const -> bool
 {
     return m_Element != 0;
 }
@@ -172,12 +172,12 @@ auto CWeaponSkill::getAnimationId() const -> ActionAnimation
     return static_cast<ActionAnimation>(m_AnimationId);
 }
 
-timer::duration CWeaponSkill::getAnimationTime()
+auto CWeaponSkill::getAnimationTime() -> timer::duration
 {
     return m_AnimationTime;
 }
 
-uint8 CWeaponSkill::getAoe() const
+auto CWeaponSkill::getAoe() const -> uint8
 {
     return m_AOE;
 }
@@ -187,22 +187,22 @@ auto CWeaponSkill::getRadius() const -> uint8
     return m_Radius;
 }
 
-uint8 CWeaponSkill::getRange() const
+auto CWeaponSkill::getRange() const -> uint8
 {
     return m_Range;
 }
 
-uint8 CWeaponSkill::getPrimarySkillchain() const
+auto CWeaponSkill::getPrimarySkillchain() const -> uint8
 {
     return m_PrimarySkillchain;
 }
 
-uint8 CWeaponSkill::getSecondarySkillchain() const
+auto CWeaponSkill::getSecondarySkillchain() const -> uint8
 {
     return m_SecondarySkillchain;
 }
 
-uint8 CWeaponSkill::getTertiarySkillchain() const
+auto CWeaponSkill::getTertiarySkillchain() const -> uint8
 {
     return m_TertiarySkillchain;
 }

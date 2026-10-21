@@ -29,17 +29,17 @@ CBlueTrait::CBlueTrait(uint8 category, uint8 id, bool jobPointsOnly)
 {
 }
 
-uint8 CBlueTrait::getCategory() const
+auto CBlueTrait::getCategory() const -> uint8
 {
     return m_category;
 }
 
-uint8 CBlueTrait::getPoints() const
+auto CBlueTrait::getPoints() const -> uint8
 {
     return m_points;
 }
 
-uint8 CBlueTrait::getJobPointsOnly() const
+auto CBlueTrait::getJobPointsOnly() const -> uint8
 {
     return m_jobPointsOnly;
 }

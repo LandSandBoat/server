@@ -44,28 +44,28 @@ class CBattleEntity;
 class CLatentEffect
 {
 public:
-    auto    GetConditionsID() const -> xi::Latent;
-    uint16  GetConditionsValue() const;
-    uint8   GetSlot() const;
-    xi::Mod GetModValue() const;
-    int16   GetModPower() const;
-    bool    IsActivated() const;
+    auto GetConditionsID() const -> xi::Latent;
+    auto GetConditionsValue() const -> uint16;
+    auto GetSlot() const -> uint8;
+    auto GetModValue() const -> xi::Mod;
+    auto GetModPower() const -> int16;
+    auto IsActivated() const -> bool;
 
-    CBattleEntity* GetOwner() const;
+    auto GetOwner() const -> CBattleEntity*;
 
     void SetConditionsId(xi::Latent id);
     void SetConditionsValue(uint16 value);
     void SetSlot(uint8 slot);
     void SetModValue(xi::Mod value);
     void SetModPower(int16 power);
-    bool ModOnItemOnly(xi::Mod modID);
-    bool SkillMod(xi::Mod modID);
-    bool Activate();
-    bool Deactivate();
+    auto ModOnItemOnly(xi::Mod modID) -> bool;
+    auto SkillMod(xi::Mod modID) -> bool;
+    auto Activate() -> bool;
+    auto Deactivate() -> bool;
 
     CLatentEffect(CBattleEntity* owner, xi::Latent conditionsId, uint16 conditionsValue, uint8 slot, xi::Mod modValue, int16 modPower);
-    CLatentEffect(const CLatentEffect&)            = delete;
-    CLatentEffect& operator=(const CLatentEffect&) = delete;
+    CLatentEffect(const CLatentEffect&)                    = delete;
+    auto operator=(const CLatentEffect&) -> CLatentEffect& = delete;
 
     CLatentEffect(CLatentEffect&& o) noexcept
     {
@@ -79,7 +79,7 @@ public:
         std::swap(m_Activated, o.m_Activated);
     }
 
-    CLatentEffect& operator=(CLatentEffect&& o) noexcept
+    auto operator=(CLatentEffect&& o) noexcept -> CLatentEffect&
     {
         std::swap(m_POwner, o.m_POwner);
         std::swap(m_PItem, o.m_PItem);

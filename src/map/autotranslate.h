@@ -27,6 +27,6 @@ namespace autotranslate
 {
 
 // Returns a string where the autotranslate raw bytes have been replaced with a sane string value.
-std::string replaceBytes(const std::string& str);
+auto replaceBytes(const std::string& str) -> std::string;
 
 } // namespace autotranslate

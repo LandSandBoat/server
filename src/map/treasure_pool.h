@@ -81,15 +81,15 @@ public:
     auto addItem(uint16 ItemID, CBaseEntity*) -> uint8;
     void lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot);
     void passItem(CCharEntity* PChar, uint8 SlotID);
-    bool hasLottedItem(CCharEntity* PChar, uint8 SlotID);
-    bool hasPassedItem(CCharEntity* PChar, uint8 SlotID);
+    auto hasLottedItem(CCharEntity* PChar, uint8 SlotID) -> bool;
+    auto hasPassedItem(CCharEntity* PChar, uint8 SlotID) -> bool;
     auto getItems() const -> const std::array<TreasurePoolItem, TREASUREPOOL_SIZE>&;
     auto itemCount() const -> uint8;
 
     void addMember(CCharEntity* PChar);
     void delMember(CCharEntity* PChar);
     auto getMembers() const -> const std::vector<CCharEntity*>&;
-    bool isMember(const CCharEntity* PChar);
+    auto isMember(const CCharEntity* PChar) -> bool;
     auto memberCount() const -> size_t;
 
     void updatePool(CCharEntity* PChar);

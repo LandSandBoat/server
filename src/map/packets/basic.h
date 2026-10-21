@@ -76,8 +76,8 @@ public:
     virtual ~CBasicPacket() = default;
 
     // Copy and move operators
-    CBasicPacket& operator=(const CBasicPacket& other)     = delete;
-    CBasicPacket& operator=(CBasicPacket&& other) noexcept = delete;
+    auto operator=(const CBasicPacket& other) -> CBasicPacket&     = delete;
+    auto operator=(CBasicPacket&& other) noexcept -> CBasicPacket& = delete;
 
     virtual auto copy() const -> std::unique_ptr<CBasicPacket>
     {
@@ -157,7 +157,7 @@ public:
         return buffer_.data();
     }
 
-    uint8* operator[](const std::size_t index)
+    auto operator[](const std::size_t index) -> uint8*
     {
         return reinterpret_cast<uint8*>(buffer_.data()) + index;
     }

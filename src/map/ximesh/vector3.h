@@ -31,12 +31,12 @@ struct Vector3
     float y;
     float z;
 
-    constexpr Vector3 operator+(const Vector3& vec) const
+    constexpr auto operator+(const Vector3& vec) const -> Vector3
     {
         return Vector3{ x + vec.x, y + vec.y, z + vec.z };
     }
 
-    constexpr Vector3& operator+=(const Vector3& vec)
+    constexpr auto operator+=(const Vector3& vec) -> Vector3&
     {
         x += vec.x;
         y += vec.y;
@@ -44,12 +44,12 @@ struct Vector3
         return *this;
     }
 
-    constexpr Vector3 operator-(const Vector3& vec) const
+    constexpr auto operator-(const Vector3& vec) const -> Vector3
     {
         return Vector3{ x - vec.x, y - vec.y, z - vec.z };
     }
 
-    constexpr Vector3& operator-=(const Vector3& vec)
+    constexpr auto operator-=(const Vector3& vec) -> Vector3&
     {
         x -= vec.x;
         y -= vec.y;
@@ -57,12 +57,12 @@ struct Vector3
         return *this;
     }
 
-    constexpr Vector3 operator*(float value) const
+    constexpr auto operator*(float value) const -> Vector3
     {
         return Vector3{ x * value, y * value, z * value };
     }
 
-    constexpr Vector3& operator*=(float value)
+    constexpr auto operator*=(float value) -> Vector3&
     {
         x *= value;
         y *= value;
@@ -70,12 +70,12 @@ struct Vector3
         return *this;
     }
 
-    constexpr Vector3 operator/(float value) const
+    constexpr auto operator/(float value) const -> Vector3
     {
         return Vector3{ x / value, y / value, z / value };
     }
 
-    constexpr Vector3& operator/=(float value)
+    constexpr auto operator/=(float value) -> Vector3&
     {
         x /= value;
         y /= value;

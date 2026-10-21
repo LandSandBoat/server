@@ -40,7 +40,7 @@ using json = nlohmann::json;
 namespace loginHelpers
 {
 
-HashMap<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions();
+auto getAuthenticatedSessions() -> HashMap<std::string, std::map<std::string, session_t>>&;
 
 // Displays expansions on main menu. // May be a 32 bit integer on the client.
 enum EXPANSION_DISPLAY : uint16
@@ -84,7 +84,7 @@ enum FEATURE_DISPLAY : uint16
     UNUSED_FEATURE_9 = 0x8000,
 };
 
-bool isStringMalformed(const std::string& str, std::size_t max_length);
+auto isStringMalformed(const std::string& str, std::size_t max_length) -> bool;
 
 void loadZoneLookups();
 
@@ -101,7 +101,7 @@ void useFriendPass(uint32 charID, const std::string& friendPass);
 
 auto isZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;
 
-session_t& get_authenticated_session(const std::string& ipAddr, const std::string& sessionHash);
+auto get_authenticated_session(const std::string& ipAddr, const std::string& sessionHash) -> session_t&;
 
 auto isLoginLockedOut(const std::string& ipAddr) -> bool;
 void recordLoginFailure(const std::string& ipAddr);
@@ -110,17 +110,17 @@ void clearLoginFailures(const std::string& ipAddr);
 // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0004_ResponseError.md
 void generateErrorMessage(uint8* packet, uint16 errorCode);
 
-uint16 generateExpansionBitmask();
+auto generateExpansionBitmask() -> uint16;
 
-uint16 generateFeatureBitmask(const bool& needsOTP);
+auto generateFeatureBitmask(const bool& needsOTP) -> uint16;
 
-int32 saveCharacter(uint32 accid, uint32 charid, char_mini* createchar);
+auto saveCharacter(uint32 accid, uint32 charid, char_mini* createchar) -> int32;
 
-int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charInfo);
+auto createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charInfo) -> int32;
 
-std::string getHashFromPacket(const std::string& ip_str, uint8* data);
+auto getHashFromPacket(const std::string& ip_str, uint8* data) -> std::string;
 
-uint32 getAccountId(std::string accountName);
+auto getAccountId(std::string accountName) -> uint32;
 
 template <typename T>
 struct always_false : std::false_type
@@ -131,7 +131,7 @@ template <typename T>
 inline constexpr bool always_false_v = always_false<T>::value;
 
 template <typename T>
-inline Maybe<T> jsonGet(const json& jsonInput, std::string key)
+inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<T>
 {
     if (!jsonInput.contains(key))
     {
@@ -184,7 +184,7 @@ inline Maybe<T> jsonGet(const json& jsonInput, std::string key)
 
 // Supposedly, there is template magic to do this inside the template above, but VC++ doesn't support it yet?
 template <typename T, uint32_t size>
-inline Maybe<std::array<T, size>> jsonGet(const json& jsonInput, std::string key)
+inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<std::array<T, size>>
 {
     if (!jsonInput.contains(key))
     {

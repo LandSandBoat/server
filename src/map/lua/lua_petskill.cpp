@@ -51,32 +51,32 @@ void CLuaPetSkill::setMsg(MsgBasic message)
     m_PLuaPetSkill->setMsg(message);
 }
 
-bool CLuaPetSkill::hasMissMsg()
+auto CLuaPetSkill::hasMissMsg() -> bool
 {
     return m_PLuaPetSkill->hasMissMsg();
 }
 
-bool CLuaPetSkill::isSingle()
+auto CLuaPetSkill::isSingle() -> bool
 {
     return m_PLuaPetSkill->isSingle();
 }
 
-bool CLuaPetSkill::isAoE()
+auto CLuaPetSkill::isAoE() -> bool
 {
     return m_PLuaPetSkill->isAoE();
 }
 
-bool CLuaPetSkill::isConal()
+auto CLuaPetSkill::isConal() -> bool
 {
     return m_PLuaPetSkill->isConal();
 }
 
-uint16 CLuaPetSkill::getTotalTargets()
+auto CLuaPetSkill::getTotalTargets() -> uint16
 {
     return m_PLuaPetSkill->getTotalTargets();
 }
 
-uint32 CLuaPetSkill::getPrimaryTargetID()
+auto CLuaPetSkill::getPrimaryTargetID() -> uint32
 {
     return m_PLuaPetSkill->getPrimaryTargetID();
 }
@@ -91,12 +91,12 @@ auto CLuaPetSkill::getMsg() -> MsgBasic
     return m_PLuaPetSkill->getMsg();
 }
 
-uint16 CLuaPetSkill::getID()
+auto CLuaPetSkill::getID() -> uint16
 {
     return m_PLuaPetSkill->getID();
 }
 
-int16 CLuaPetSkill::getParam()
+auto CLuaPetSkill::getParam() -> int16
 {
     return m_PLuaPetSkill->getParam();
 }
@@ -107,7 +107,7 @@ int16 CLuaPetSkill::getParam()
 
 **************************************************************************/
 
-float CLuaPetSkill::getTP()
+auto CLuaPetSkill::getTP() -> float
 {
     return static_cast<float>(m_PLuaPetSkill->getTP());
 }
@@ -118,7 +118,7 @@ auto CLuaPetSkill::getMobHP() const -> int32
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill
-uint8 CLuaPetSkill::getMobHPP()
+auto CLuaPetSkill::getMobHPP() -> uint8
 {
     return m_PLuaPetSkill->getHPP();
 }
@@ -168,7 +168,7 @@ void CLuaPetSkill::Register()
     SOL_REGISTER("setCritical", CLuaPetSkill::setCritical);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaPetSkill& petskill)
+auto operator<<(std::ostream& os, const CLuaPetSkill& petskill) -> std::ostream&
 {
     std::string id = petskill.m_PLuaPetSkill ? std::to_string(petskill.m_PLuaPetSkill->getID()) : "nullptr";
     return os << "CLuaPetSkill(" << id << ")";

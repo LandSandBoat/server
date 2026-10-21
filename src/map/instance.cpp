@@ -56,7 +56,7 @@ CInstance::~CInstance()
     TracyZoneScoped;
 }
 
-uint16 CInstance::GetID() const
+auto CInstance::GetID() const -> uint16
 {
     return m_instanceid;
 }
@@ -66,12 +66,12 @@ auto CInstance::runId() const -> uint32
     return runId_;
 }
 
-uint32 CInstance::GetProgress() const
+auto CInstance::GetProgress() const -> uint32
 {
     return m_progress;
 }
 
-uint32 CInstance::GetStage() const
+auto CInstance::GetStage() const -> uint32
 {
     return m_stage;
 }
@@ -156,22 +156,22 @@ void CInstance::RegisterChar(CCharEntity* PChar)
     m_registeredChars.emplace_back(PChar->id);
 }
 
-uint8 CInstance::GetLevelCap() const
+auto CInstance::GetLevelCap() const -> uint8
 {
     return m_levelcap;
 }
 
-const std::string& CInstance::GetName()
+auto CInstance::GetName() -> const std::string&
 {
     return m_instanceName;
 }
 
-position_t CInstance::GetEntryLoc()
+auto CInstance::GetEntryLoc() -> position_t
 {
     return m_entryloc;
 }
 
-timer::duration CInstance::GetTimeLimit()
+auto CInstance::GetTimeLimit() -> timer::duration
 {
     return m_timeLimit;
 }
@@ -181,23 +181,23 @@ void CInstance::SetTimeLimit(timer::duration time)
     m_timeLimit = time;
 }
 
-timer::duration CInstance::GetLastTimeUpdate()
+auto CInstance::GetLastTimeUpdate() -> timer::duration
 {
     return m_lastTimeUpdate;
 }
 
-timer::duration CInstance::GetWipeTime()
+auto CInstance::GetWipeTime() -> timer::duration
 {
     return m_wipeTimer - m_startTime;
 }
 
-timer::duration CInstance::GetElapsedTime(timer::time_point tick)
+auto CInstance::GetElapsedTime(timer::time_point tick) -> timer::duration
 {
     // no reason to allow returning a negative elapsed time, can happen if map server is delayed and processing a previous tick
     return std::max(timer::duration(0s), tick - m_startTime);
 }
 
-uint64_t CInstance::GetLocalVar(const std::string& name) const
+auto CInstance::GetLocalVar(const std::string& name) const -> uint64_t
 {
     auto var = localVars_.find(name);
     return var != localVars_.end() ? var->second : 0;
@@ -265,7 +265,7 @@ void CInstance::CheckTime(timer::time_point tick)
     }
 }
 
-bool CInstance::CharRegistered(CCharEntity* PChar)
+auto CInstance::CharRegistered(CCharEntity* PChar) -> bool
 {
     return std::ranges::contains(m_registeredChars, PChar->id);
 }
@@ -314,7 +314,7 @@ void CInstance::Fail()
     luautils::OnInstanceFailure(this);
 }
 
-bool CInstance::Failed()
+auto CInstance::Failed() -> bool
 {
     return m_status == INSTANCE_FAILED;
 }
@@ -328,7 +328,7 @@ void CInstance::Complete()
     luautils::OnInstanceComplete(this);
 }
 
-bool CInstance::Completed()
+auto CInstance::Completed() -> bool
 {
     return m_status == INSTANCE_COMPLETE;
 }
@@ -338,28 +338,28 @@ void CInstance::Cancel()
     m_status = INSTANCE_FAILED;
 }
 
-bool CInstance::CheckFirstEntry(uint32 id)
+auto CInstance::CheckFirstEntry(uint32 id) -> bool
 {
     // insert returns a pair (iterator,inserted)
     return m_enteredChars.insert(id).second;
 }
 
-uint16 CInstance::GetSoloBattleMusic()
+auto CInstance::GetSoloBattleMusic() -> uint16
 {
     return m_zone_music_override.m_bSongS ? *m_zone_music_override.m_bSongS : GetZone()->GetSoloBattleMusic();
 }
 
-uint16 CInstance::GetPartyBattleMusic()
+auto CInstance::GetPartyBattleMusic() -> uint16
 {
     return m_zone_music_override.m_bSongM ? *m_zone_music_override.m_bSongM : GetZone()->GetPartyBattleMusic();
 }
 
-uint16 CInstance::GetBackgroundMusicDay()
+auto CInstance::GetBackgroundMusicDay() -> uint16
 {
     return m_zone_music_override.m_songDay ? *m_zone_music_override.m_songDay : GetZone()->GetBackgroundMusicDay();
 }
 
-uint16 CInstance::GetBackgroundMusicNight()
+auto CInstance::GetBackgroundMusicNight() -> uint16
 {
     return m_zone_music_override.m_songNight ? *m_zone_music_override.m_songNight : GetZone()->GetBackgroundMusicNight();
 }

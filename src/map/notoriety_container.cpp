@@ -29,14 +29,14 @@ CNotorietyContainer::CNotorietyContainer(CBattleEntity* owner)
 {
 }
 
-std::set<CBattleEntity*>::iterator CNotorietyContainer::begin()
+auto CNotorietyContainer::begin() -> std::set<CBattleEntity*>::iterator
 {
     TracyZoneScoped;
 
     return m_Lookup.begin();
 }
 
-std::set<CBattleEntity*>::iterator CNotorietyContainer::end()
+auto CNotorietyContainer::end() -> std::set<CBattleEntity*>::iterator
 {
     TracyZoneScoped;
 
@@ -67,7 +67,7 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
     }
 }
 
-bool CNotorietyContainer::hasEnmity()
+auto CNotorietyContainer::hasEnmity() -> bool
 {
     TracyZoneScoped;
 
@@ -97,7 +97,7 @@ bool CNotorietyContainer::hasEnmity()
     return !m_Lookup.empty();
 }
 
-std::size_t CNotorietyContainer::size()
+auto CNotorietyContainer::size() -> std::size_t
 {
     TracyZoneScoped;
 

@@ -141,5 +141,5 @@ protected:
 private:
     ipc::Channel<zmq::message_t> dealerChannel_;
 
-    Maybe<std::pair<uint32, uint32>> validatePassword(std::string username, std::string password);
+    auto validatePassword(std::string username, std::string password) -> Maybe<std::pair<uint32, uint32>>;
 };

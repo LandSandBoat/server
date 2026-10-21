@@ -71,7 +71,7 @@ void init();
 // NOTE: These names ARE case-sensitive.
 //
 template <typename T>
-T getUncached(std::string_view key)
+auto getUncached(std::string_view key) -> T
 {
     // out = type being requested
     T out{};
@@ -164,7 +164,7 @@ T getUncached(std::string_view key)
 }
 
 template <typename T>
-T get(std::string_view key)
+auto get(std::string_view key) -> T
 {
     // One memo per (T, thread). Bounded by the number of distinct setting keys, so it never
     // grows unbounded. thread_local also means no locking and no contention with the reload thread

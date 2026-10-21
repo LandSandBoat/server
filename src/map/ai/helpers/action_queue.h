@@ -49,7 +49,7 @@ struct queueAction_t
 // Min-heap ordering: the action with the soonest deadline is at the top.
 struct QueueActionDeadlineGreater
 {
-    bool operator()(const queueAction_t& lhs, const queueAction_t& rhs) const noexcept
+    auto operator()(const queueAction_t& lhs, const queueAction_t& rhs) const noexcept -> bool
     {
         return lhs.deadline > rhs.deadline;
     }
@@ -65,7 +65,7 @@ public:
 
     void clearActionQueue();
     void clearTimerQueue();
-    bool isEmpty() const;
+    auto isEmpty() const -> bool;
 
 private:
     void handleAction(queueAction_t& action);

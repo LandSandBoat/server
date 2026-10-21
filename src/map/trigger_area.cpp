@@ -39,23 +39,23 @@ ITriggerArea::ITriggerArea(uint32 triggerAreaID)
     }
 }
 
-uint32 ITriggerArea::getTriggerAreaID() const
+auto ITriggerArea::getTriggerAreaID() const -> uint32
 {
     return m_triggerAreaID;
 }
 
-int16 ITriggerArea::getCount() const
+auto ITriggerArea::getCount() const -> int16
 {
     return m_count;
 }
 
-int16 ITriggerArea::addCount(int16 count)
+auto ITriggerArea::addCount(int16 count) -> int16
 {
     m_count += count;
     return m_count;
 }
 
-int16 ITriggerArea::delCount(int16 count)
+auto ITriggerArea::delCount(int16 count) -> int16
 {
     m_count -= count;
     return m_count;
@@ -79,7 +79,7 @@ CCuboidTriggerArea::CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float y
 {
 }
 
-bool CCuboidTriggerArea::isPointInside(float x, float y, float z) const
+auto CCuboidTriggerArea::isPointInside(float x, float y, float z) const -> bool
 {
     if (m_rotation != 0.0f)
     {
@@ -95,7 +95,7 @@ bool CCuboidTriggerArea::isPointInside(float x, float y, float z) const
     return m_xMin <= x && m_yMin <= y && m_zMin <= z && m_xMax >= x && m_yMax >= y && m_zMax >= z;
 }
 
-bool CCuboidTriggerArea::isPointInside(position_t pos) const
+auto CCuboidTriggerArea::isPointInside(position_t pos) const -> bool
 {
     return isPointInside(pos.x, pos.y, pos.z);
 }
@@ -112,7 +112,7 @@ CCylindricalTriggerArea::CCylindricalTriggerArea(uint32 triggerAreaID, float xPo
 {
 }
 
-bool CCylindricalTriggerArea::isPointInside(float x, float y, float z) const
+auto CCylindricalTriggerArea::isPointInside(float x, float y, float z) const -> bool
 {
     // The y component is "infinite" for cylindrical checks, so we don't
     // need to do anything with it.
@@ -130,7 +130,7 @@ bool CCylindricalTriggerArea::isPointInside(float x, float y, float z) const
     return distanceSquared <= square(m_radius);
 }
 
-bool CCylindricalTriggerArea::isPointInside(position_t pos) const
+auto CCylindricalTriggerArea::isPointInside(position_t pos) const -> bool
 {
     return isPointInside(pos.x, pos.y, pos.z);
 }
@@ -148,7 +148,7 @@ CSphericalTriggerArea::CSphericalTriggerArea(uint32 triggerAreaID, float xPos, f
 {
 }
 
-bool CSphericalTriggerArea::isPointInside(float x, float y, float z) const
+auto CSphericalTriggerArea::isPointInside(float x, float y, float z) const -> bool
 {
     const float dX = x - m_xPos;
     const float dY = y - m_yPos;
@@ -159,7 +159,7 @@ bool CSphericalTriggerArea::isPointInside(float x, float y, float z) const
     return distanceSquared <= square(m_radius);
 }
 
-bool CSphericalTriggerArea::isPointInside(position_t pos) const
+auto CSphericalTriggerArea::isPointInside(position_t pos) const -> bool
 {
     return isPointInside(pos.x, pos.y, pos.z);
 }

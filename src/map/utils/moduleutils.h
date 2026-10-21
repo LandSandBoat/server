@@ -69,7 +69,7 @@ public:
     };
 
     template <typename T>
-    static T* Register()
+    static auto Register() -> T*
     {
         return new T();
     };

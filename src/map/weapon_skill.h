@@ -33,21 +33,21 @@ class CWeaponSkill
 public:
     CWeaponSkill(uint16 id);
 
-    uint16 getID() const;
-    auto   getJob(xi::Job JobID) -> uint8;
-    uint16 getSkillLevel() const;
-    uint8  getRange() const;
-    uint8  getElement() const;
-    bool   isElemental() const;
+    auto getID() const -> uint16;
+    auto getJob(xi::Job JobID) -> uint8;
+    auto getSkillLevel() const -> uint16;
+    auto getRange() const -> uint8;
+    auto getElement() const -> uint8;
+    auto isElemental() const -> bool;
 
-    bool            isAoE() const;
-    bool            mainOnly() const; // can only be used as main job
-    uint8           getAoe() const;
-    auto            getRadius() const -> uint8;
-    auto            getAnimationId() const -> ActionAnimation;
-    timer::duration getAnimationTime();
-    uint8           getType() const;
-    uint8           getUnlockId() const;
+    auto isAoE() const -> bool;
+    auto mainOnly() const -> bool; // can only be used as main job
+    auto getAoe() const -> uint8;
+    auto getRadius() const -> uint8;
+    auto getAnimationId() const -> ActionAnimation;
+    auto getAnimationTime() -> timer::duration;
+    auto getType() const -> uint8;
+    auto getUnlockId() const -> uint8;
 
     void setID(uint16 id);
     void setJob(const std::array<uint8, MAX_JOBTYPE>& jobs);
@@ -65,12 +65,12 @@ public:
     void setMainOnly(uint8 main);
     void setUnlockId(uint8 id);
 
-    uint8 getPrimarySkillchain() const;
-    uint8 getSecondarySkillchain() const;
-    uint8 getTertiarySkillchain() const;
+    auto getPrimarySkillchain() const -> uint8;
+    auto getSecondarySkillchain() const -> uint8;
+    auto getTertiarySkillchain() const -> uint8;
 
-    const std::string& getName();
-    void               setName(const std::string& name);
+    auto getName() -> const std::string&;
+    void setName(const std::string& name);
 
 private:
     uint16                         m_ID;

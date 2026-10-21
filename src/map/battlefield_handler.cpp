@@ -89,7 +89,7 @@ void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
     }
 }
 
-uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
+auto CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration) -> uint8
 {
     TracyZoneScoped;
 
@@ -156,7 +156,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     return BATTLEFIELD_RETURN_CODE_CUTSCENE;
 }
 
-CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool checkRegistered)
+auto CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool checkRegistered) -> CBattlefield*
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
 
@@ -178,13 +178,13 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
     return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
-CBattlefield* CBattlefieldHandler::GetBattlefieldByArea(uint8 area) const
+auto CBattlefieldHandler::GetBattlefieldByArea(uint8 area) const -> CBattlefield*
 {
     const auto it = m_Battlefields.find(area);
     return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
-CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
+auto CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID) -> CBattlefield*
 {
     const auto it = std::ranges::find_if(m_Battlefields,
                                          [&](const auto& entry)
@@ -194,7 +194,7 @@ CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
     return it != m_Battlefields.end() ? it->second.get() : nullptr;
 }
 
-CBattlefield* CBattlefieldHandler::GetRegisteredBattlefield(CCharEntity* PChar)
+auto CBattlefieldHandler::GetRegisteredBattlefield(CCharEntity* PChar) -> CBattlefield*
 {
     const auto it = std::ranges::find_if(m_Battlefields,
                                          [&](const auto& entry)
@@ -216,7 +216,7 @@ void CBattlefieldHandler::RemoveOtherRegistrations(CCharEntity* PChar, const CBa
     }
 }
 
-uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
+auto CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration) -> uint8
 {
     if (PChar->PBattlefield)
     {
@@ -295,13 +295,13 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const Battlef
     return LoadBattlefield(PChar, registration);
 }
 
-bool CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield, uint8 leavecode)
+auto CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield, uint8 leavecode) -> bool
 {
     PBattlefield = PBattlefield ? PBattlefield : GetBattlefield(PEntity);
     return PBattlefield ? PBattlefield->RemoveEntity(PEntity, leavecode) : false;
 }
 
-bool CBattlefieldHandler::IsRegistered(CCharEntity* PChar)
+auto CBattlefieldHandler::IsRegistered(CCharEntity* PChar) -> bool
 {
     return std::ranges::any_of(m_Battlefields,
                                [&](const auto& entry)
@@ -310,7 +310,7 @@ bool CBattlefieldHandler::IsRegistered(CCharEntity* PChar)
                                });
 }
 
-bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
+auto CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const -> bool
 {
     // area all areas full
     if (m_Battlefields.size() >= (size_t)m_MaxBattlefields)
@@ -326,7 +326,7 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     return false;
 }
 
-uint8 CBattlefieldHandler::MaxBattlefieldAreas() const
+auto CBattlefieldHandler::MaxBattlefieldAreas() const -> uint8
 {
     return m_MaxBattlefields;
 }

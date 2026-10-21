@@ -52,22 +52,22 @@ void CLuaMobSkill::setMsg(MsgBasic message)
     m_PLuaMobSkill->setMsg(message);
 }
 
-bool CLuaMobSkill::hasMissMsg()
+auto CLuaMobSkill::hasMissMsg() -> bool
 {
     return m_PLuaMobSkill->hasMissMsg();
 }
 
-bool CLuaMobSkill::isSingle()
+auto CLuaMobSkill::isSingle() -> bool
 {
     return m_PLuaMobSkill->isSingle();
 }
 
-bool CLuaMobSkill::isAoE()
+auto CLuaMobSkill::isAoE() -> bool
 {
     return m_PLuaMobSkill->isAoE();
 }
 
-bool CLuaMobSkill::isConal()
+auto CLuaMobSkill::isConal() -> bool
 {
     return m_PLuaMobSkill->isConal();
 }
@@ -84,12 +84,12 @@ auto CLuaMobSkill::getTargets() -> sol::table
     return entities;
 }
 
-uint16 CLuaMobSkill::getTotalTargets()
+auto CLuaMobSkill::getTotalTargets() -> uint16
 {
     return m_PLuaMobSkill->getTotalTargets();
 }
 
-uint32 CLuaMobSkill::getPrimaryTargetID()
+auto CLuaMobSkill::getPrimaryTargetID() -> uint32
 {
     return m_PLuaMobSkill->getPrimaryTargetID();
 }
@@ -109,12 +109,12 @@ auto CLuaMobSkill::getMsg() -> MsgBasic
     return m_PLuaMobSkill->getMsg();
 }
 
-uint16 CLuaMobSkill::getID()
+auto CLuaMobSkill::getID() -> uint16
 {
     return m_PLuaMobSkill->getID();
 }
 
-int16 CLuaMobSkill::getParam()
+auto CLuaMobSkill::getParam() -> int16
 {
     return m_PLuaMobSkill->getParam();
 }
@@ -125,7 +125,7 @@ int16 CLuaMobSkill::getParam()
 
 **************************************************************************/
 
-float CLuaMobSkill::getTP()
+auto CLuaMobSkill::getTP() -> float
 {
     return static_cast<float>(m_PLuaMobSkill->getTP());
 }
@@ -137,7 +137,7 @@ auto CLuaMobSkill::getMobHP() const -> int32
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill
-uint8 CLuaMobSkill::getMobHPP()
+auto CLuaMobSkill::getMobHPP() -> uint8
 {
     return m_PLuaMobSkill->getHPP();
 }
@@ -152,7 +152,7 @@ void CLuaMobSkill::setAttackType(xi::AttackType attackType)
     m_PLuaMobSkill->setAttackType(attackType);
 }
 
-bool CLuaMobSkill::isCritical()
+auto CLuaMobSkill::isCritical() -> bool
 {
     return m_PLuaMobSkill->isCritical();
 }
@@ -195,7 +195,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getKnockback", CLuaMobSkill::getKnockback);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)
+auto operator<<(std::ostream& os, const CLuaMobSkill& mobskill) -> std::ostream&
 {
     std::string id = mobskill.m_PLuaMobSkill ? std::to_string(mobskill.m_PLuaMobSkill->getID()) : "nullptr";
     return os << "CLuaMobSkill(" << id << ")";

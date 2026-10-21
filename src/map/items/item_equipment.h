@@ -57,24 +57,24 @@ public:
         int16      ModPower;
     };
 
-    uint8  getReqLvl() const;
-    uint8  getILvl() const;
-    uint32 getJobs() const;
-    uint16 getModelId() const;
-    uint16 getScriptType() const;
-    uint8  getShieldSize() const;
-    uint16 getEquipSlotId() const;
-    uint16 getRemoveSlotId() const;
-    uint16 getRemoveSlotLookId() const;
-    uint8  getShieldAbsorption() const;
-    int16  getModifier(xi::Mod mod) const;
-    uint8  getSlotType() const;
-    auto   getAugment(uint8 slot) const -> uint16;
-    auto   getTrialNumber() const -> uint16;
-    uint8  getSuperiorLevel();
+    auto getReqLvl() const -> uint8;
+    auto getILvl() const -> uint8;
+    auto getJobs() const -> uint32;
+    auto getModelId() const -> uint16;
+    auto getScriptType() const -> uint16;
+    auto getShieldSize() const -> uint8;
+    auto getEquipSlotId() const -> uint16;
+    auto getRemoveSlotId() const -> uint16;
+    auto getRemoveSlotLookId() const -> uint16;
+    auto getShieldAbsorption() const -> uint8;
+    auto getModifier(xi::Mod mod) const -> int16;
+    auto getSlotType() const -> uint8;
+    auto getAugment(uint8 slot) const -> uint16;
+    auto getTrialNumber() const -> uint16;
+    auto getSuperiorLevel() -> uint8;
 
-    bool IsShield() const;
-    bool isEquippableByRace(uint8 race) const;
+    auto IsShield() const -> bool;
+    auto isEquippableByRace(uint8 race) const -> bool;
 
     void setReqLvl(uint8 lvl);
     void setILvl(uint8 lvl);
@@ -90,7 +90,7 @@ public:
     void setSuperiorLevel(uint8 level);
 
     void LoadAugment(uint8 slot, uint16 augment);
-    bool PushAugment(uint16 type, uint8 value);
+    auto PushAugment(uint16 type, uint8 value) -> bool;
     void ApplyAugment(uint8 slot);
 
     void addModifier(CModifier modifier);
@@ -109,8 +109,8 @@ public:
 
     void addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, xi::Mod ModValue, int16 ModPower);
 
-    bool delModifier(xi::Mod mod, int16 modValue);
-    bool delPetModifier(xi::Mod mod, PetModType petType, int16 modValue);
+    auto delModifier(xi::Mod mod, int16 modValue) -> bool;
+    auto delPetModifier(xi::Mod mod, PetModType petType, int16 modValue) -> bool;
 
     std::vector<CModifier>    modList;
     std::vector<CPetModifier> petModList;

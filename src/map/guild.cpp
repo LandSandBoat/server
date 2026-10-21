@@ -43,7 +43,7 @@ CGuild::CGuild(uint8 id, const std::string& _pointsName)
 
 CGuild::~CGuild() = default;
 
-uint8 CGuild::id() const
+auto CGuild::id() const -> uint8
 {
     return m_id;
 }

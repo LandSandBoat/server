@@ -28,12 +28,12 @@
 namespace serverutils
 {
 
-uint32 GetServerVar(const std::string& var);
-void   SetServerVar(const std::string& var, int32 value, uint32 expiry = 0);
-void   PersistServerVar(const std::string& var, int32 value, uint32 expiry = 0);
+auto GetServerVar(const std::string& var) -> uint32;
+void SetServerVar(const std::string& var, int32 value, uint32 expiry = 0);
+void PersistServerVar(const std::string& var, int32 value, uint32 expiry = 0);
 
-int32 GetVolatileServerVar(const std::string& var);
-void  SetVolatileServerVar(const std::string& var, int32 value, uint32 expiry = 0);
+auto GetVolatileServerVar(const std::string& var) -> int32;
+void SetVolatileServerVar(const std::string& var, int32 value, uint32 expiry = 0);
 
 void PersistVolatileServerVars();
 

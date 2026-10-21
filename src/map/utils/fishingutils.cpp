@@ -172,7 +172,7 @@ void CreateFishingPools()
  *                                                                       *
  ************************************************************************/
 
-uint8 GetMoonPhase()
+auto GetMoonPhase() -> uint8
 {
     vanadiel_time::time_point vanaTime  = vanadiel_time::now();
     uint8                     phase     = static_cast<uint8>(vanadiel_time::moon::get_phase(vanaTime));
@@ -213,7 +213,7 @@ uint8 GetMoonPhase()
     return 0;
 }
 
-uint8 GetHookTime(CCharEntity* PChar)
+auto GetHookTime(CCharEntity* PChar) -> uint8
 {
     uint8          waitTime  = 13;
     uint8          moonPhase = GetMoonPhase();
@@ -238,7 +238,7 @@ uint8 GetHookTime(CCharEntity* PChar)
     return std::max<uint16>(7, waitTime);
 }
 
-float GetMonthlyTidalInfluence(fish_t* fish) // 0.25 to 1.25
+auto GetMonthlyTidalInfluence(fish_t* fish) -> float // 0.25 to 1.25
 {
     float modifier = 0.5f;
     uint8 month    = static_cast<uint8>(vanadiel_time::get_month() - 1);
@@ -280,7 +280,7 @@ float GetMonthlyTidalInfluence(fish_t* fish) // 0.25 to 1.25
     return modifier + 0.25f;
 }
 
-float GetHourlyModifier(fish_t* fish)
+auto GetHourlyModifier(fish_t* fish) -> float
 { // 0.25 to 1.25
     float modifier = 0.5f;
     uint8 hour     = static_cast<uint8>(vanadiel_time::get_hour());
@@ -322,7 +322,7 @@ float GetHourlyModifier(fish_t* fish)
     return modifier + 0.25f;
 }
 
-float GetMoonModifier(fish_t* fish) // 0.25 to 1.25
+auto GetMoonModifier(fish_t* fish) -> float // 0.25 to 1.25
 {
     float modifier  = 1.0f;
     uint8 moonPhase = GetMoonPhase();
@@ -349,7 +349,7 @@ float GetMoonModifier(fish_t* fish) // 0.25 to 1.25
     return modifier + 0.25f;
 }
 
-uint8 GetLuckyMoonModifier()
+auto GetLuckyMoonModifier() -> uint8
 {
     uint8 moonPhase = GetMoonPhase();
     uint8 modifier  = 1 + (uint8)std::floor(MOONPATTERN_1(moonPhase) * 3);
@@ -374,7 +374,7 @@ auto GetWeatherModifier(const CCharEntity* PChar) -> float
     return weatherMod;
 }
 
-uint16 CalculateStamina(int skill, uint8 count)
+auto CalculateStamina(int skill, uint8 count) -> uint16
 {
     float multiplier = 1.0f + (0.1f * (count - 1));
     int   modSkill   = (int)std::floor(multiplier * skill);
@@ -382,21 +382,21 @@ uint16 CalculateStamina(int skill, uint8 count)
     return (uint16)std::floor(xirand::GetRandomNumber(95, 105) * ((modSkill + 36) / 2));
 }
 
-uint16 CalculateAttack(Legendary legendary, uint8 difficulty, rod_t* rod)
+auto CalculateAttack(Legendary legendary, uint8 difficulty, rod_t* rod) -> uint16
 {
     uint8 bonusAdd = (legendary) ? rod->lgdBonusAtk : 0;
 
     return (uint16)std::floor(difficulty * (((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f)) * 20.0f);
 }
 
-uint16 CalculateHeal(Legendary legendary, uint8 difficulty, rod_t* rod)
+auto CalculateHeal(Legendary legendary, uint8 difficulty, rod_t* rod) -> uint16
 {
     uint16 attack = CalculateAttack(legendary, difficulty, rod);
 
     return (uint16)std::floor((static_cast<float>(attack) / 20.0f) * (static_cast<float>(rod->fishRecovery) / 100.0f)) * 10.0f;
 }
 
-uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, Legendary legendaryCatch, IsNM NM)
+auto CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, Legendary legendaryCatch, IsNM NM) -> uint8
 {
     uint8 regen     = 128;
     uint8 drainDiff = 12;
@@ -471,7 +471,7 @@ uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
     return std::clamp<uint8>(regen, 0, 182);
 }
 
-uint8 CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendary_flags, uint8 sizeType, rod_t* rod, bait_t* bait)
+auto CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendary_flags, uint8 sizeType, rod_t* rod, bait_t* bait) -> uint8
 {
     uint8 hookTime = rod->fishTime;
 
@@ -516,7 +516,7 @@ uint8 CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendar
     return hookTime;
 }
 
-uint8 CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSkill, uint8 sizeType, rod_t* rod, bait_t* bait, Legendary legendary)
+auto CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSkill, uint8 sizeType, rod_t* rod, bait_t* bait, Legendary legendary) -> uint8
 {
     uint8          luckyTiming  = 10;
     float          penalty      = 0;
@@ -634,7 +634,7 @@ uint8 CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSk
     return std::max<uint8>(5, luckyTiming);
 }
 
-uint16 CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod)
+auto CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod) -> uint16
 {
     uint16 hookChance    = 0;
     float  monthModifier = GetMonthlyTidalInfluence(fish);
@@ -699,7 +699,7 @@ uint16 CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t
     return std::clamp<uint16>(hookChance, 20, 120);
 }
 
-uint8 CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count)
+auto CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count) -> uint8
 {
     float multiplier = 1.0f + (0.1f * (count - 1.0f));
     uint8 delay      = (uint8)std::floor(baseDelay * multiplier);
@@ -721,7 +721,7 @@ uint8 CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t*
     return std::min<uint8>(15, delay);
 }
 
-uint8 CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count)
+auto CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count) -> uint8
 {
     float multiplier = 1.0f + (0.1f * (count - 1.0f));
     uint8 movement   = (uint8)std::floor(baseMove * multiplier);
@@ -743,7 +743,7 @@ uint8 CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_
     return std::min<uint8>(15, movement);
 }
 
-lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
+auto CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t
 {
     lsbret_t lsb;
     uint8    tooBigChance   = 0;
@@ -808,7 +808,7 @@ lsbret_t CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
     return lsb;
 }
 
-lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
+auto CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t
 {
     lsbret_t lsb;
     uint8    levelDiffBonus  = 0;
@@ -852,7 +852,7 @@ lsbret_t CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill
     return lsb;
 }
 
-lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod)
+auto CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t
 {
     lsbret_t lsb;
     uint8    levelDiffBonus = 0;
@@ -897,7 +897,7 @@ lsbret_t CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkil
 
 // TODO: figure out how to pass mobs and items and chests here...
 
-uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod)
+auto CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod) -> uint8
 {
     uint8 sense = FISHINGSENSETYPE_GOOD;
 
@@ -957,7 +957,7 @@ uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fis
     return sense;
 }
 
-uint16 CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod)
+auto CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod) -> uint16
 {
     // TODO: Does gear discerment really help with this?
     // https://wiki.ffo.jp/html/24002.html
@@ -986,7 +986,7 @@ uint16 CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod)
     return std::clamp<uint16>(chance, 0, 70);
 }
 
-big_fish_stats_t CalculateBigFishStats(uint16 minLength, uint16 maxLength)
+auto CalculateBigFishStats(uint16 minLength, uint16 maxLength) -> big_fish_stats_t
 {
     big_fish_stats_t stats;
     stats.epic   = false;
@@ -1008,7 +1008,7 @@ big_fish_stats_t CalculateBigFishStats(uint16 minLength, uint16 maxLength)
     return stats;
 }
 
-fishmob_modifiers_t CalculateMobModifiers(fishmob_t* mob)
+auto CalculateMobModifiers(fishmob_t* mob) -> fishmob_modifiers_t
 {
     fishmob_modifiers_t modifiers;
     modifiers.attackPenalty = 0;
@@ -1056,7 +1056,7 @@ fishmob_modifiers_t CalculateMobModifiers(fishmob_t* mob)
  *                              DATA ACCESS                              *
  *                                                                       *
  ************************************************************************/
-fishing_gear_t GetFishingGear(CCharEntity* PChar)
+auto GetFishingGear(CCharEntity* PChar) -> fishing_gear_t
 {
     fishing_gear_t gear;
     uint32         head  = (PChar->getEquip(SLOT_HEAD) != nullptr) ? PChar->getEquip(SLOT_HEAD)->getID() : 0;
@@ -1081,17 +1081,17 @@ fishing_gear_t GetFishingGear(CCharEntity* PChar)
     return gear;
 }
 
-bool IsLiveBait(bait_t* bait)
+auto IsLiveBait(bait_t* bait) -> bool
 {
     return (bait->baitID == DRILL_CALAMARY || bait->baitID == DWARF_PUGIL);
 }
 
-uint8 GetFishingSkill(CCharEntity* PChar)
+auto GetFishingSkill(CCharEntity* PChar) -> uint8
 {
     return static_cast<uint8>(std::floor(PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] / 10) + PChar->getMod(xi::Mod::FISH));
 }
 
-uint8 GetBaitPower(bait_t* bait, fish_t* fish)
+auto GetBaitPower(bait_t* bait, fish_t* fish) -> uint8
 {
     if (FishingBaitAffinities[bait->baitID][fish->fishID])
     {
@@ -1192,13 +1192,13 @@ auto GetFish(const uint32 fishId) -> fish_t*
 
 // Given three colinear areavector_ts p, q, r, the function checks if
 // areavector_t q lies on line segment 'pr'
-bool onSegment(areavector_t p, areavector_t q, areavector_t r)
+auto onSegment(areavector_t p, areavector_t q, areavector_t r) -> bool
 {
     return q.x <= std::max(p.x, r.x) && q.x >= std::min(p.x, r.x) && q.z <= std::max(p.z, r.z) && q.z >= std::min(p.z, r.z);
 }
 
 // To find orientation of ordered triplet (p, q, r).
-int orientation(areavector_t p, areavector_t q, areavector_t r)
+auto orientation(areavector_t p, areavector_t q, areavector_t r) -> int
 {
     float val = std::round(q.z - p.z) * (r.x - q.x) - (q.x - p.x) * (r.z - q.z);
 
@@ -1211,7 +1211,7 @@ int orientation(areavector_t p, areavector_t q, areavector_t r)
 }
 
 // The function that returns true if line segment 'p1q1' and 'p2q2' intersect.
-bool doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t q2)
+auto doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t q2) -> bool
 {
     int o1 = orientation(p1, q1, p2);
     int o2 = orientation(p1, q1, q2);
@@ -1247,7 +1247,7 @@ bool doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t
 }
 
 // Returns true if the areavector_t p lies inside the polygon[] with n vertices
-bool isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uint8 height)
+auto isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uint8 height) -> bool
 {
     if (p.y < (posy - (height / 2)) || p.y > (posy + (height / 2)))
     {
@@ -1279,7 +1279,7 @@ bool isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uin
     return count & 1;
 }
 
-bool isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 height)
+auto isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 height) -> bool
 {
     if (p.y < (center.y - (height / 2)) || p.y > (center.y + (height / 2)))
     {
@@ -1308,7 +1308,7 @@ bool isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 
     return (dx * dx + dz * dz <= radius * radius);
 }
 
-fishingarea_t* GetFishingArea(CCharEntity* PChar)
+auto GetFishingArea(CCharEntity* PChar) -> fishingarea_t*
 {
     if (PChar->inMogHouse())
     {
@@ -1347,7 +1347,7 @@ fishingarea_t* GetFishingArea(CCharEntity* PChar)
     return nullptr;
 }
 
-bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
+auto BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate) -> bool
 {
     CItemWeapon* PBait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
@@ -1434,7 +1434,7 @@ void RodBreak(CCharEntity* PChar)
     }
 }
 
-bool CanFishMob(CMobEntity* PMob)
+auto CanFishMob(CMobEntity* PMob) -> bool
 {
     if (PMob == nullptr)
     {
@@ -1459,7 +1459,7 @@ bool CanFishMob(CMobEntity* PMob)
     return true;
 }
 
-int32 LoseCatch(CCharEntity* PChar, uint8 FailType)
+auto LoseCatch(CCharEntity* PChar, uint8 FailType) -> int32
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
     PChar->updatemask |= UPDATE_HP;
@@ -1505,7 +1505,7 @@ int32 LoseCatch(CCharEntity* PChar, uint8 FailType)
     return 1;
 }
 
-int32 CatchNothing(CCharEntity* PChar, uint8 FailType)
+auto CatchNothing(CCharEntity* PChar, uint8 FailType) -> int32
 {
     uint16 messageOffset = GetMessageOffset(PChar->getZone());
     PChar->animation     = xi::Animation::NewFishingStop;
@@ -1516,7 +1516,7 @@ int32 CatchNothing(CCharEntity* PChar, uint8 FailType)
     return 1;
 }
 
-int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count = 1)
+auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count = 1) -> int32
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
     PChar->animation     = xi::Animation::NewFishingCaught;
@@ -1570,7 +1570,7 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
     return 0;
 }
 
-int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
+auto CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1) -> int32
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
     PChar->animation     = xi::Animation::NewFishingCaught;
@@ -1613,7 +1613,7 @@ int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
     return 0;
 }
 
-int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
+auto CatchMonster(CCharEntity* PChar, uint32 MobID) -> int32
 {
     uint16      MessageOffset = GetMessageOffset(PChar->getZone());
     CMobEntity* PMob          = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(MobID, TYPE_MOB));
@@ -1675,7 +1675,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
     return 1;
 }
 
-int32 CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle)
+auto CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle) -> int32
 {
     uint16      MessageOffset = GetMessageOffset(PChar->getZone());
     CNpcEntity* Chest         = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(NpcID, TYPE_NPC));
@@ -1746,7 +1746,7 @@ void SendSenseMessage(CCharEntity* PChar, fishresponse_t* response)
     }
 }
 
-bool SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobLoadFailBait cancelOnMobLoadFailBait)
+auto SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobLoadFailBait cancelOnMobLoadFailBait) -> bool
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
 
@@ -2111,7 +2111,7 @@ void ReelInCatch(CCharEntity* PChar)
     }
 }
 
-uint8 UnhookMob(CCharEntity* PChar, Lost lost)
+auto UnhookMob(CCharEntity* PChar, Lost lost) -> uint8
 {
     if (PChar->hookedFish != nullptr && PChar->hookedFish->catchtype == FISHINGCATCHTYPE_MOB)
     {
@@ -2131,7 +2131,7 @@ uint8 UnhookMob(CCharEntity* PChar, Lost lost)
     return 0;
 }
 
-fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* bait, fishingarea_t* area)
+auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* bait, fishingarea_t* area) -> fishresponse_t*
 {
     fishresponse_t* response    = new fishresponse_t();
     response->angle             = 0;
@@ -2700,7 +2700,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
     return response;
 }
 
-catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* fishResponse, rod_t* rod)
+auto ReelCheck(CCharEntity* PChar, fishresponse_t* fishResponse, rod_t* rod) -> catchresponse_t*
 {
     catchresponse_t* catchResponse = new catchresponse_t();
     catchResponse->caught          = true;

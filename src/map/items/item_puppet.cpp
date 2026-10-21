@@ -38,7 +38,7 @@ CItemPuppet::CItemPuppet(const CItemPuppet& other)
 {
 }
 
-uint8 CItemPuppet::getEquipSlot() const
+auto CItemPuppet::getEquipSlot() const -> uint8
 {
     return m_equipSlot;
 }
@@ -48,7 +48,7 @@ void CItemPuppet::setEquipSlot(uint32 slot)
     m_equipSlot = slot;
 }
 
-uint32 CItemPuppet::getElementSlots() const
+auto CItemPuppet::getElementSlots() const -> uint32
 {
     return m_elementSlots;
 }

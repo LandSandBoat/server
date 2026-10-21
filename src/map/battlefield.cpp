@@ -80,12 +80,12 @@ CBattlefield::~CBattlefield()
     luautils::OnBattlefieldDestroy(this);
 }
 
-uint16 CBattlefield::GetID() const
+auto CBattlefield::GetID() const -> uint16
 {
     return m_ID;
 }
 
-CZone* CBattlefield::GetZone() const
+auto CBattlefield::GetZone() const -> CZone*
 {
     return m_Zone;
 }
@@ -95,93 +95,93 @@ auto CBattlefield::GetZoneID() const -> xi::ZoneId
     return m_Zone->GetID();
 }
 
-const std::string& CBattlefield::GetName() const
+auto CBattlefield::GetName() const -> const std::string&
 {
     return m_Name;
 }
 
-const BattlefieldInitiator_t& CBattlefield::GetInitiator() const
+auto CBattlefield::GetInitiator() const -> const BattlefieldInitiator_t&
 {
     return m_Initiator;
 }
 
-uint8 CBattlefield::GetArea() const
+auto CBattlefield::GetArea() const -> uint8
 {
     return m_Area;
 }
 
-const BattlefieldRecord_t& CBattlefield::GetRecord() const
+auto CBattlefield::GetRecord() const -> const BattlefieldRecord_t&
 {
     return m_Record;
 }
 
-uint8 CBattlefield::GetStatus() const
+auto CBattlefield::GetStatus() const -> uint8
 {
     return m_Status;
 }
 
-uint16 CBattlefield::GetRuleMask() const
+auto CBattlefield::GetRuleMask() const -> uint16
 {
     return m_Rules;
 }
 
-timer::time_point CBattlefield::GetStartTime() const
+auto CBattlefield::GetStartTime() const -> timer::time_point
 {
     return m_StartTime;
 }
 
-timer::duration CBattlefield::GetTimeInside() const
+auto CBattlefield::GetTimeInside() const -> timer::duration
 {
     return m_Tick - m_StartTime;
 }
 
-timer::duration CBattlefield::GetTimeLimit() const
+auto CBattlefield::GetTimeLimit() const -> timer::duration
 {
     return m_TimeLimit;
 }
 
-timer::time_point CBattlefield::GetWipeTime() const
+auto CBattlefield::GetWipeTime() const -> timer::time_point
 {
     return m_WipeTime;
 }
 
-timer::duration CBattlefield::GetFinishTime() const
+auto CBattlefield::GetFinishTime() const -> timer::duration
 {
     return m_FinishTime;
 }
 
-timer::duration CBattlefield::GetRemainingTime() const
+auto CBattlefield::GetRemainingTime() const -> timer::duration
 {
     return GetTimeLimit() > GetTimeInside() ? GetTimeLimit() - GetTimeInside() : timer::duration(0);
 }
 
-timer::duration CBattlefield::GetLastTimeUpdate() const
+auto CBattlefield::GetLastTimeUpdate() const -> timer::duration
 {
     return m_LastPromptTime;
 }
 
-uint64_t CBattlefield::GetLocalVar(const std::string& name) const
+auto CBattlefield::GetLocalVar(const std::string& name) const -> uint64_t
 {
     auto var = localVars_.find(name);
     return var != localVars_.end() ? var->second : 0;
 }
 
-size_t CBattlefield::GetMaxParticipants() const
+auto CBattlefield::GetMaxParticipants() const -> size_t
 {
     return m_MaxParticipants;
 }
 
-size_t CBattlefield::GetPlayerCount() const
+auto CBattlefield::GetPlayerCount() const -> size_t
 {
     return m_EnteredPlayers.size();
 }
 
-uint8 CBattlefield::GetLevelCap() const
+auto CBattlefield::GetLevelCap() const -> uint8
 {
     return m_LevelCap;
 }
 
-uint32 CBattlefield::GetArmouryCrate() const
+auto CBattlefield::GetArmouryCrate() const -> uint32
 {
     return m_armouryCrate;
 }
@@ -296,17 +296,17 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
     }
 }
 
-bool CBattlefield::IsOccupied() const
+auto CBattlefield::IsOccupied() const -> bool
 {
     return !m_EnteredPlayers.empty();
 }
 
-bool CBattlefield::isEntered(CCharEntity* PChar) const
+auto CBattlefield::isEntered(CCharEntity* PChar) const -> bool
 {
     return m_EnteredPlayers.contains(PChar->id);
 }
 
-bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
+auto CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally) -> bool
 {
     if (PEntity == nullptr)
     {
@@ -435,7 +435,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     return true;
 }
 
-CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
+auto CBattlefield::GetEntity(CBaseEntity* PEntity) -> CBaseEntity*
 {
     if (!PEntity)
     {
@@ -508,13 +508,13 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     return nullptr;
 }
 
-bool CBattlefield::IsRegistered(CCharEntity* PChar)
+auto CBattlefield::IsRegistered(CCharEntity* PChar) -> bool
 {
     return PChar && m_RegisteredPlayers.contains(PChar->id);
 }
 
 // The Battlefield effect is the players clearance and names the battlefield it was granted for
-bool CBattlefield::HasClearance(CCharEntity* PChar) const
+auto CBattlefield::HasClearance(CCharEntity* PChar) const -> bool
 {
     const auto* PEffect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Battlefield);
     return PEffect != nullptr && PEffect->GetPower() == GetID() && PEffect->GetSubPower() == GetArea();
@@ -533,7 +533,7 @@ void CBattlefield::GrantClearance(CCharEntity* PChar)
         xi::StatusEffect::Battlefield, static_cast<uint16>(xi::StatusEffect::Battlefield), GetID(), 0s, 0s, m_Initiator.id, GetArea());
 }
 
-bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
+auto CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode) -> bool
 {
     // player's already zoned, we don't need to do anything
     if (!PEntity)
@@ -731,7 +731,7 @@ void CBattlefield::onTick(timer::time_point time)
     }
 }
 
-bool CBattlefield::CanCleanup(bool cleanup)
+auto CBattlefield::CanCleanup(bool cleanup) -> bool
 {
     if (cleanup)
     {
@@ -741,7 +741,7 @@ bool CBattlefield::CanCleanup(bool cleanup)
     return m_Cleanup || m_EnteredPlayers.empty();
 }
 
-bool CBattlefield::Cleanup(timer::time_point time, bool force)
+auto CBattlefield::Cleanup(timer::time_point time, bool force) -> bool
 {
     // Wait until
     if (!force && !m_EnteredPlayers.empty() && m_cleanupTime > time)
@@ -886,7 +886,7 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
     return true;
 }
 
-bool CBattlefield::CheckInProgress()
+auto CBattlefield::CheckInProgress() -> bool
 {
     ForEachEnemy([&](const CMobEntity* PMob)
                  {
@@ -1040,7 +1040,7 @@ void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
     effect->SetTier(entered ? 1 : 0);
 }
 
-bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
+auto CBattlefield::hasPlayerEntered(CCharEntity* PChar) -> bool
 {
     if (!PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Battlefield))
     {
@@ -1050,7 +1050,7 @@ bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
     return PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Battlefield)->GetTier() == 1;
 }
 
-uint16 CBattlefield::getBattlefieldArea(CCharEntity* PChar)
+auto CBattlefield::getBattlefieldArea(CCharEntity* PChar) -> uint16
 {
     return PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Battlefield)->GetSubPower();
 }

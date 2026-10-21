@@ -207,7 +207,7 @@ void RetreatToMaster(CBattleEntity* PMaster)
     }
 }
 
-uint16 GetJugBase(CPetEntity* PMob, uint8 rank)
+auto GetJugBase(CPetEntity* PMob, uint8 rank) -> uint16
 {
     uint8 lvl = PMob->GetMLevel();
     if (lvl > 50)
@@ -253,7 +253,7 @@ uint16 GetJugBase(CPetEntity* PMob, uint8 rank)
     return 0;
 }
 
-uint16 GetBaseToRank(uint8 rank, uint16 lvl)
+auto GetBaseToRank(uint8 rank, uint16 lvl) -> uint16
 {
     switch (rank)
     {
@@ -1535,7 +1535,7 @@ void DespawnPet(CBattleEntity* PMaster)
     petutils::DetachPet(PMaster);
 }
 
-int16 PerpetuationCost(uint32 id, uint8 level)
+auto PerpetuationCost(uint32 id, uint8 level) -> int16
 {
     int16 cost = 0;
 
@@ -2024,7 +2024,7 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     PMaster->PPet = PPet;
 }
 
-bool CheckPetModType(CBattleEntity* PPet, PetModType petmod)
+auto CheckPetModType(CBattleEntity* PPet, PetModType petmod) -> bool
 {
     if (petmod == PetModType::All)
     {
@@ -2060,7 +2060,7 @@ bool CheckPetModType(CBattleEntity* PPet, PetModType petmod)
     return false;
 }
 
-bool IsTandemActive(CBattleEntity* PAttacker)
+auto IsTandemActive(CBattleEntity* PAttacker) -> bool
 {
     /*  This is used for Tandem Strike (acc/m.acc+) and Tandem Blow (subtle blow II+).
         To get the bonus, both pet and master must be engaged in combat with the same target.
@@ -2098,7 +2098,7 @@ bool IsTandemActive(CBattleEntity* PAttacker)
     return false;
 }
 
-Pet_t* GetPetInfo(uint32 PetID)
+auto GetPetInfo(uint32 PetID) -> Pet_t*
 {
     const auto it = std::ranges::find(g_PPetList, PetID, &Pet_t::PetID);
     return it != g_PPetList.end() ? *it : nullptr;

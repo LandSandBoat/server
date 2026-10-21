@@ -206,27 +206,27 @@ auto CZone::battlefieldHandler() const -> CBattlefieldHandler*
     return m_BattlefieldHandler;
 }
 
-const std::string& CZone::getName()
+auto CZone::getName() -> const std::string&
 {
     return m_zoneName;
 }
 
-uint16 CZone::GetSoloBattleMusic() const
+auto CZone::GetSoloBattleMusic() const -> uint16
 {
     return m_zoneMusic.m_bSongS;
 }
 
-uint16 CZone::GetPartyBattleMusic() const
+auto CZone::GetPartyBattleMusic() const -> uint16
 {
     return m_zoneMusic.m_bSongM;
 }
 
-uint16 CZone::GetBackgroundMusicDay() const
+auto CZone::GetBackgroundMusicDay() const -> uint16
 {
     return m_zoneMusic.m_songDay;
 }
 
-uint16 CZone::GetBackgroundMusicNight() const
+auto CZone::GetBackgroundMusicNight() const -> uint16
 {
     return m_zoneMusic.m_songNight;
 }
@@ -258,7 +258,7 @@ void CZone::SetBackgroundMusicNight(uint16 music)
  * with other methods that perform pattern matching.
  * E.g: %anto% matches Shantotto and Canto-anto
  */
-const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern)
+auto CZone::queryEntitiesByName(const std::string& pattern) -> const QueryByNameResult_t&
 {
     TracyZoneScoped;
 
@@ -299,12 +299,12 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern
     return m_queryByNameResults[pattern];
 }
 
-uint32 CZone::GetLocalVar(const char* var)
+auto CZone::GetLocalVar(const char* var) -> uint32
 {
     return localVars_[var];
 }
 
-HashMap<std::string, uint32>& CZone::GetLocalVars()
+auto CZone::GetLocalVars() -> HashMap<std::string, uint32>&
 {
     return localVars_;
 }
@@ -319,12 +319,12 @@ void CZone::ResetLocalVars()
     localVars_.clear();
 }
 
-bool CZone::CanUseMisc(xi::ZoneMisc misc) const
+auto CZone::CanUseMisc(xi::ZoneMisc misc) const -> bool
 {
     return (m_miscMask & misc) == misc;
 }
 
-zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
+auto CZone::GetZoneLine(uint32 zoneLineID) -> zoneLine_t*
 {
     const auto it = std::ranges::find(m_zoneLineList, zoneLineID, &zoneLine_t::zoneLineId);
     return it != m_zoneLineList.end() ? *it : nullptr;
@@ -942,7 +942,7 @@ void CZone::SpawnTransport(CCharEntity* PChar)
     m_zoneEntities->SpawnTransport(PChar);
 }
 
-CBaseEntity* CZone::GetEntity(uint16 targid, uint8 filter)
+auto CZone::GetEntity(uint16 targid, uint8 filter) -> CBaseEntity*
 {
     return m_zoneEntities->GetEntity(targid, filter);
 }
@@ -967,12 +967,12 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(const std::string& name)
+auto CZone::GetCharByName(const std::string& name) -> CCharEntity*
 {
     return m_zoneEntities->GetCharByName(name);
 }
 
-CCharEntity* CZone::GetCharByID(uint32 id)
+auto CZone::GetCharByID(uint32 id) -> CCharEntity*
 {
     return m_zoneEntities->GetCharByID(id);
 }
@@ -1369,7 +1369,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     charutils::WriteHistory(PChar);
 }
 
-CZoneEntities* CZone::GetZoneEntities()
+auto CZone::GetZoneEntities() -> CZoneEntities*
 {
     return m_zoneEntities;
 }

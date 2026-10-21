@@ -30,9 +30,9 @@ public:
 
     void setPoints(uint8 points);
 
-    uint8 getCategory() const;
-    uint8 getPoints() const;
-    uint8 getJobPointsOnly() const;
+    auto getCategory() const -> uint8;
+    auto getPoints() const -> uint8;
+    auto getJobPointsOnly() const -> uint8;
 
 private:
     uint8 m_points;

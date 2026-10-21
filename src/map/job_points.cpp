@@ -62,7 +62,7 @@ void CJobPoints::LoadJobPoints()
     }
 }
 
-bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
+auto CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType) -> bool
 {
     if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) ||
         (JobPointsCategoryIndexByJpType(jpType) - 1 >= JOBPOINTS_CATEGORY_COUNT) ||
@@ -74,7 +74,7 @@ bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
     return true;
 }
 
-JobPoints_t* CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jpType) -> JobPoints_t*
 {
     if (IsJobPointExist(jpType))
     {
@@ -84,7 +84,7 @@ JobPoints_t* CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jpType)
     return nullptr;
 }
 
-JobPointType_t* CJobPoints::GetJobPointType(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointType(JOBPOINT_TYPE jpType) -> JobPointType_t*
 {
     if (IsJobPointExist(jpType))
     {
@@ -137,12 +137,12 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
     }
 }
 
-uint16 CJobPoints::GetJobPoints()
+auto CJobPoints::GetJobPoints() -> uint16
 {
     return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].currentJp;
 }
 
-uint16 CJobPoints::GetJobPointsByJob(uint8 jobID) const
+auto CJobPoints::GetJobPointsByJob(uint8 jobID) const -> uint16
 {
     const auto rset = db::preparedStmt("SELECT job_points FROM char_job_points WHERE charid=? AND jobid=? LIMIT 1", m_PChar->id, jobID);
     FOR_DB_SINGLE_RESULT(rset)
@@ -207,17 +207,17 @@ void CJobPoints::DelJobPoints(const uint8 jobID, int16 amount)
     LoadJobPoints();
 }
 
-uint16 CJobPoints::GetJobPointsSpent() const
+auto CJobPoints::GetJobPointsSpent() const -> uint16
 {
     return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].totalJpSpent;
 }
 
-JobPoints_t* CJobPoints::GetAllJobPoints()
+auto CJobPoints::GetAllJobPoints() -> JobPoints_t*
 {
     return m_jobPoints;
 }
 
-bool CJobPoints::AddCapacityPoints(uint16 amount)
+auto CJobPoints::AddCapacityPoints(uint16 amount) -> bool
 {
     uint32 adjustedCapacity = m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
     uint16 currentJobPoints = this->GetJobPoints();
@@ -249,7 +249,7 @@ bool CJobPoints::AddCapacityPoints(uint16 amount)
     return false;
 }
 
-uint32 CJobPoints::GetCapacityPoints()
+auto CJobPoints::GetCapacityPoints() -> uint32
 {
     return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].capacityPoints;
 }
@@ -269,7 +269,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
                      amount);
 }
 
-uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
+auto CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType) -> uint8
 {
     if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && static_cast<uint8>(m_PChar->GetMJob()) == JobPointsCategoryIndexByJpType(jpType))
     {

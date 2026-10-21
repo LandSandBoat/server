@@ -47,7 +47,7 @@
 #endif
 
 // https://stackoverflow.com/a/71992965
-bool stdinHasData()
+auto stdinHasData() -> bool
 {
 #if defined(_WIN32)
     // this works by harnessing Windows' black magic:
@@ -61,7 +61,7 @@ bool stdinHasData()
 #endif
 }
 
-bool getLine(std::string& line)
+auto getLine(std::string& line) -> bool
 {
     // If there is data on stdin we can call _getch() knowing that it won't block!
     // This makes this routine non-blocking.

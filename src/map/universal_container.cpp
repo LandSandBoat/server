@@ -61,7 +61,7 @@ void CUContainer::Clean()
  *                                                                       *
  ************************************************************************/
 
-uint16 CUContainer::GetTarget() const
+auto CUContainer::GetTarget() const -> uint16
 {
     return m_target;
 }
@@ -83,7 +83,7 @@ void CUContainer::SetTarget(uint16 Target)
  *                                                                       *
  ************************************************************************/
 
-UCONTAINERTYPE CUContainer::GetType()
+auto CUContainer::GetType() -> UCONTAINERTYPE
 {
     return m_ContainerType;
 }
@@ -133,7 +133,7 @@ void CUContainer::UnLock()
  *                                                                       *
  ************************************************************************/
 
-bool CUContainer::IsLocked() const
+auto CUContainer::IsLocked() const -> bool
 {
     return m_lock;
 }
@@ -144,7 +144,7 @@ bool CUContainer::IsLocked() const
  *                                                                       *
  ************************************************************************/
 
-bool CUContainer::IsContainerEmpty()
+auto CUContainer::IsContainerEmpty() -> bool
 {
     return (m_ContainerType == UCONTAINER_EMPTY);
 }
@@ -155,7 +155,7 @@ bool CUContainer::IsContainerEmpty()
  *                                                                       *
  ************************************************************************/
 
-bool CUContainer::IsSlotEmpty(uint8 slotID)
+auto CUContainer::IsSlotEmpty(uint8 slotID) -> bool
 {
     if (slotID < m_PItem.size())
     {
@@ -170,7 +170,7 @@ bool CUContainer::IsSlotEmpty(uint8 slotID)
  *                                                                       *
  ************************************************************************/
 
-bool CUContainer::SetItem(uint8 slotID, CItem* PItem)
+auto CUContainer::SetItem(uint8 slotID, CItem* PItem) -> bool
 {
     if (slotID < m_PItem.size() && !m_lock)
     {
@@ -208,7 +208,7 @@ void CUContainer::ClearSlot(uint8 slotID)
  *                                                                       *
  ************************************************************************/
 
-uint8 CUContainer::GetItemsCount() const
+auto CUContainer::GetItemsCount() const -> uint8
 {
     return m_count;
 }
@@ -219,7 +219,7 @@ uint8 CUContainer::GetItemsCount() const
  *                                                                       *
  ************************************************************************/
 
-CItem* CUContainer::GetItem(uint8 slotID)
+auto CUContainer::GetItem(uint8 slotID) -> CItem*
 {
     if (slotID < m_PItem.size())
     {

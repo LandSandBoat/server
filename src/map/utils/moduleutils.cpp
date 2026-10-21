@@ -37,7 +37,7 @@
 namespace
 {
 
-std::vector<CPPModule*>& cppModules()
+auto cppModules() -> std::vector<CPPModule*>&
 {
     static std::vector<CPPModule*> cppModules{};
     return cppModules;

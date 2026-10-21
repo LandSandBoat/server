@@ -162,7 +162,7 @@ auto GetSpeciesData(const uint16 speciesId) -> const SpeciesInfo&
  *                                                                       *
  ************************************************************************/
 
-uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
+auto GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot) -> uint16
 {
     // https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit?pli=1&gid=1743955268#gid=1743955268
     // Basic base damage formulas for reference:
@@ -283,7 +283,7 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
 }
 
 // Get base skill rankings for ACC/ATT/EVA/MEVA
-uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
+auto GetBaseSkill(CMobEntity* PMob, uint8 rank) -> uint16
 {
     int8 mlvl = PMob->GetMLevel();
 
@@ -305,7 +305,7 @@ uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
     return 0;
 }
 
-uint16 GetMagicEvasion(CMobEntity* PMob)
+auto GetMagicEvasion(CMobEntity* PMob) -> uint16
 {
     uint8 mlvl = std::min<uint8>(PMob->GetMLevel(), 99);
 
@@ -325,7 +325,7 @@ uint16 GetMagicEvasion(CMobEntity* PMob)
  *                                                                       *
  ************************************************************************/
 
-uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank)
+auto GetBaseDefEva(CMobEntity* PMob, uint8 rank) -> uint16
 {
     // See: https://w.atwiki.jp/studiogobli/pages/25.html
     // Enemy defense = [f(Lv, racial defense rank) + 8 + [VIT/2] + job characteristics] x racial characteristics
@@ -375,7 +375,7 @@ uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank)
  *                                                                       *
  ************************************************************************/
 
-uint16 GetBaseToRank(uint8 rank, uint16 lvl)
+auto GetBaseToRank(uint8 rank, uint16 lvl) -> uint16
 {
     switch (rank)
     {
@@ -403,7 +403,7 @@ uint16 GetBaseToRank(uint8 rank, uint16 lvl)
  *  Calculation for subjob stats                                         *
  *                                                                       *
  ************************************************************************/
-uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
+auto GetSubJobStats(uint8 rank, uint16 level, uint16 stat) -> uint16
 {
     // These ranks A through G are used by all known JP sources. Please note this is equivalent to the US usage of A+ through F
     // https://w.atwiki.jp/studiogobli/pages/27.html
@@ -555,7 +555,7 @@ uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
  *  Checks if the mob is in any Original/RoZ zone                        *
  *                                                                       *
  ************************************************************************/
-bool CheckSubJobZone(CMobEntity* PMob)
+auto CheckSubJobZone(CMobEntity* PMob) -> bool
 {
     const auto zoneId = PMob->getZone();
     if (zoneId != xi::ZoneId::Unknown && (zoneId == xi::ZoneId::WestRonfaure ||
@@ -663,7 +663,7 @@ bool CheckSubJobZone(CMobEntity* PMob)
  *  Calculate base mob HP from job grades and levels                     *
  *                                                                       *
  ************************************************************************/
-static uint32 CalculateBaseMobHP(uint8 mLvl, uint8 baseHP, uint8 jobScale, uint8 scaleXHP)
+static auto CalculateBaseMobHP(uint8 mLvl, uint8 baseHP, uint8 jobScale, uint8 scaleXHP) -> uint32
 {
     // HP formula has multiple parts based on level ranges:
     // Levels 1-5: Base HP + scaling per level
@@ -737,7 +737,7 @@ static auto SubjobHPAtLevel(const int32 sjLvl, const uint8 sjJobScale, const uin
  *  Calculate subjob HP contribution                                     *
  *                                                                       *
  ************************************************************************/
-static uint32 CalculateSubjobHP(uint8 mLvl, uint8 sjJobScale, uint8 sjScaleXHP)
+static auto CalculateSubjobHP(uint8 mLvl, uint8 sjJobScale, uint8 sjScaleXHP) -> uint32
 {
     // Subjob HP contribution varies by main job level:
     // 50+   = 100% of subjob stats
@@ -1643,7 +1643,7 @@ void Cleanup()
     mobPoolModsList.clear();
 }
 
-ModsList_t* GetMobPoolMods(uint32 poolId, bool create)
+auto GetMobPoolMods(uint32 poolId, bool create) -> ModsList_t*
 {
     if (mobPoolModsList[poolId])
     {
@@ -1664,7 +1664,7 @@ ModsList_t* GetMobPoolMods(uint32 poolId, bool create)
     return nullptr;
 }
 
-ModsList_t* GetMobSpawnMods(uint32 mobId, bool create)
+auto GetMobSpawnMods(uint32 mobId, bool create) -> ModsList_t*
 {
     if (mobSpawnModsList[mobId])
     {

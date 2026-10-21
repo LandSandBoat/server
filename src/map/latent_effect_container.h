@@ -68,7 +68,7 @@ public:
 
     void AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot);
     void DelLatentEffects(uint8 reqLvl, uint8 slot);
-    bool HasAllLatentsActive(uint8 slot);
+    auto HasAllLatentsActive(uint8 slot) -> bool;
 
     void AddLatentEffect(xi::Latent conditionID, uint16 conditionValue, xi::Mod modID, int16 modValue);
     auto DelLatentEffect(xi::Latent conditionID, uint16 conditionValue, xi::Mod modID, int16 modValue) -> bool;
@@ -81,5 +81,5 @@ private:
 
     void ProcessLatentEffects(const Fn<bool(CLatentEffect&) const>& logic);
     auto ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs = false) -> bool;
-    bool ApplyLatentEffect(CLatentEffect& effect, bool expression);
+    auto ApplyLatentEffect(CLatentEffect& effect, bool expression) -> bool;
 };

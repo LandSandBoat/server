@@ -39,7 +39,7 @@ namespace serverutils
 HashMap<std::string, std::pair<int32, uint32>> serverVarCache;
 std::unordered_set<std::string>                serverVarChanges;
 
-uint32 GetServerVar(const std::string& name)
+auto GetServerVar(const std::string& name) -> uint32
 {
     const auto rset = db::preparedStmt("SELECT value, expiry FROM server_variables WHERE name = ? LIMIT 1", name);
 
@@ -72,7 +72,7 @@ void SetVolatileServerVar(const std::string& name, int32 value, uint32 expiry /*
     serverVarChanges.insert(name);
 }
 
-int32 GetVolatileServerVar(const std::string& name)
+auto GetVolatileServerVar(const std::string& name) -> int32
 {
     if (auto var = serverVarCache.find(name); var != serverVarCache.end())
     {

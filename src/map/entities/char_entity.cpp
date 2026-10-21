@@ -378,12 +378,12 @@ CCharEntity::~CCharEntity()
     }
 }
 
-uint8 CCharEntity::GetGender()
+auto CCharEntity::GetGender() -> uint8
 {
     return (look.race) % 2 ^ (look.race > 6);
 }
 
-bool CCharEntity::isPacketListEmpty()
+auto CCharEntity::isPacketListEmpty() -> bool
 {
     return PacketList.empty();
 }
@@ -507,7 +507,7 @@ auto CCharEntity::popPacket() -> std::unique_ptr<CBasicPacket>
     return PPacket;
 }
 
-size_t CCharEntity::getPacketCount()
+auto CCharEntity::getPacketCount() -> size_t
 {
     return PacketList.size();
 }
@@ -520,7 +520,7 @@ void CCharEntity::erasePackets(uint8 num)
     }
 }
 
-bool CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet)
+auto CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) -> bool
 {
     // Filter others synthesis results
     if (packet->getType() == 0x70 && playerConfig.MessageFilter.others_synthesis_and_fishing_results)
@@ -531,27 +531,27 @@ bool CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet)
     return false;
 }
 
-bool CCharEntity::isNewPlayer() const
+auto CCharEntity::isNewPlayer() const -> bool
 {
     return !playerConfig.NewAdventurerOffFlg;
 }
 
-bool CCharEntity::isSeekingParty() const
+auto CCharEntity::isSeekingParty() const -> bool
 {
     return playerConfig.InviteFlg;
 }
 
-bool CCharEntity::isAnon() const
+auto CCharEntity::isAnon() const -> bool
 {
     return playerConfig.AnonymityFlg;
 }
 
-bool CCharEntity::isAway() const
+auto CCharEntity::isAway() const -> bool
 {
     return playerConfig.AwayFlg;
 }
 
-bool CCharEntity::hasAutoTargetEnabled() const
+auto CCharEntity::hasAutoTargetEnabled() const -> bool
 {
     return !playerConfig.AutoTargetOffFlg;
 }
@@ -884,7 +884,7 @@ auto CCharEntity::maze() -> maze_t&
     return maze_;
 }
 
-int8 CCharEntity::getShieldSize()
+auto CCharEntity::getShieldSize() -> int8
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);
 
@@ -901,7 +901,7 @@ int8 CCharEntity::getShieldSize()
     return PItem->getShieldSize();
 }
 
-int16 CCharEntity::getShieldDefense()
+auto CCharEntity::getShieldDefense() -> int16
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);
 
@@ -913,7 +913,7 @@ int16 CCharEntity::getShieldDefense()
     return 0;
 }
 
-bool CCharEntity::hasBazaar()
+auto CCharEntity::hasBazaar() -> bool
 {
     // FFXIclopedia: a Monipulator has no bazaar, even one priced before entering.
     if (isSettingBazaarPrices || m_PMonstrosity != nullptr)
@@ -946,7 +946,7 @@ void CCharEntity::SetName(const std::string& name)
     }
 }
 
-int16 CCharEntity::addTP(int16 tp)
+auto CCharEntity::addTP(int16 tp) -> int16
 {
     tp = CBattleEntity::addTP(tp);
     PLatentEffectContainer->CheckLatentsTP();
@@ -954,7 +954,7 @@ int16 CCharEntity::addTP(int16 tp)
     return abs(tp);
 }
 
-int32 CCharEntity::addHP(int32 hp)
+auto CCharEntity::addHP(int32 hp) -> int32
 {
     hp = CBattleEntity::addHP(hp);
     PLatentEffectContainer->CheckLatentsHP();
@@ -962,7 +962,7 @@ int32 CCharEntity::addHP(int32 hp)
     return abs(hp);
 }
 
-int32 CCharEntity::addMP(int32 mp)
+auto CCharEntity::addMP(int32 mp) -> int32
 {
     mp = CBattleEntity::addMP(mp);
     PLatentEffectContainer->CheckLatentsMP();
@@ -970,7 +970,7 @@ int32 CCharEntity::addMP(int32 mp)
     return abs(mp);
 }
 
-bool CCharEntity::getStyleLocked() const
+auto CCharEntity::getStyleLocked() const -> bool
 {
     return m_isStyleLocked;
 }
@@ -980,7 +980,7 @@ void CCharEntity::setStyleLocked(bool isStyleLocked)
     m_isStyleLocked = isStyleLocked;
 }
 
-bool CCharEntity::getBlockingAid() const
+auto CCharEntity::getBlockingAid() const -> bool
 {
     return m_isBlockingAid;
 }
@@ -996,7 +996,7 @@ void CCharEntity::SetPlayTime(timer::duration playTime)
     m_SaveTime = timer::now();
 }
 
-timer::duration CCharEntity::GetPlayTime(bool needUpdate)
+auto CCharEntity::GetPlayTime(bool needUpdate) -> timer::duration
 {
     if (needUpdate)
     {
@@ -1114,7 +1114,7 @@ void CCharEntity::ReloadPartyDec()
     m_reloadParty = false;
 }
 
-bool CCharEntity::ReloadParty() const
+auto CCharEntity::ReloadParty() const -> bool
 {
     return m_reloadParty;
 }
@@ -1359,7 +1359,7 @@ void CCharEntity::delTrait(CTrait* PTrait)
     charutils::delTrait(this, PTrait->getID());
 }
 
-bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
+auto CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
 {
     TracyZoneScopedN("CCharEntity::ValidTarget");
 
@@ -1429,7 +1429,7 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return false;
 }
 
-bool CCharEntity::CanUseSpell(CSpell* PSpell)
+auto CCharEntity::CanUseSpell(CSpell* PSpell) -> bool
 {
     TracyZoneScopedN("CCharEntity::CanUseSpell");
 
@@ -1477,7 +1477,7 @@ void CCharEntity::OnDisengage(CAttackState& state)
     PLatentEffectContainer->CheckLatentsWeaponDraw(false);
 }
 
-bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+auto CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool
 {
     TracyZoneScopedN("CCharEntity::CanAttack");
 
@@ -1514,7 +1514,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
     return true;
 }
 
-bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
+auto CCharEntity::OnAttack(CAttackState& state, action_t& action) -> bool
 {
     TracyZoneScopedN("CCharEntity::OnAttack");
 
@@ -2159,7 +2159,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     }
 }
 
-bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
+auto CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget) -> bool
 {
     TracyZoneScoped;
 
@@ -2618,17 +2618,17 @@ void CCharEntity::SetDeathTime(timer::time_point timestamp)
     m_DeathTimestamp = timestamp;
 }
 
-timer::duration CCharEntity::GetTimeSinceDeath() const
+auto CCharEntity::GetTimeSinceDeath() const -> timer::duration
 {
     return m_DeathTimestamp > timer::time_point::min() ? timer::now() - m_DeathTimestamp : 0s;
 }
 
-timer::duration CCharEntity::GetTimeUntilDeathHomepoint() const
+auto CCharEntity::GetTimeUntilDeathHomepoint() const -> timer::duration
 {
     return 60min - GetTimeSinceDeath();
 }
 
-earth_time::time_point CCharEntity::GetTimeCreated()
+auto CCharEntity::GetTimeCreated() -> earth_time::time_point
 {
     TracyZoneScoped;
 
@@ -2642,7 +2642,7 @@ earth_time::time_point CCharEntity::GetTimeCreated()
     return earth_time::time_point::min();
 }
 
-uint8 CCharEntity::getHighestJobLevel()
+auto CCharEntity::getHighestJobLevel() -> uint8
 {
     uint8 maxJobLevel = 0;
 
@@ -2657,7 +2657,7 @@ uint8 CCharEntity::getHighestJobLevel()
     return maxJobLevel;
 }
 
-bool CCharEntity::hasMoghancement(uint16 moghancementID) const
+auto CCharEntity::hasMoghancement(uint16 moghancementID) const -> bool
 {
     return m_moghancementID == moghancementID;
 }
@@ -3011,7 +3011,7 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
     }
 }
 
-bool CCharEntity::OnAttackError(CAttackState& state)
+auto CCharEntity::OnAttackError(CAttackState& state) -> bool
 {
     TracyZoneScoped;
 
@@ -3024,7 +3024,7 @@ bool CCharEntity::OnAttackError(CAttackState& state)
     return false;
 }
 
-bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
+auto CCharEntity::isInTriggerArea(uint32 triggerAreaID) -> bool
 {
     return charTriggerAreaIDs.contains(triggerAreaID);
 }
@@ -3049,7 +3049,7 @@ auto CCharEntity::isInEvent() const -> bool
     return currentEvent->eventId != -1;
 }
 
-bool CCharEntity::isNpcLocked()
+auto CCharEntity::isNpcLocked() -> bool
 {
     return isInEvent() || inSequence;
 }
@@ -3348,7 +3348,7 @@ void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
     db::preparedStmt("DELETE FROM char_vars WHERE charid = ? AND varname LIKE ?", this->id, fmt::format("{}%", prefix));
 }
 
-bool CCharEntity::startSynth(xi::SkillType synthSkill)
+auto CCharEntity::startSynth(xi::SkillType synthSkill) -> bool
 {
     if (PAI)
     {

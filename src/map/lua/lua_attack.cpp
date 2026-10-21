@@ -36,7 +36,7 @@ CLuaAttack::CLuaAttack(CAttack* attack)
     }
 }
 
-bool CLuaAttack::isCritical() const
+auto CLuaAttack::isCritical() const -> bool
 {
     return m_PLuaAttack->IsCritical();
 }
@@ -56,7 +56,7 @@ void CLuaAttack::Register()
     SOL_REGISTER("setCritical", CLuaAttack::setCritical);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaAttack& attack)
+auto operator<<(std::ostream& os, const CLuaAttack& attack) -> std::ostream&
 {
     // TODO: Whats a sane log value for this?
     std::string id = attack.m_PLuaAttack ? "" : "nullptr";

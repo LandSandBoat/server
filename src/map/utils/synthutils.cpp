@@ -92,7 +92,7 @@ struct SynthRecipe
     std::string ResultName;
     std::string ContentTag;
 
-    uint16 getSkillValue(xi::SkillType type) const
+    auto getSkillValue(xi::SkillType type) const -> uint16
     {
         switch (type)
         {

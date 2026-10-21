@@ -53,7 +53,7 @@ auto CGambitsContainer::NewGambitIdentifier(const Gambit_t& gambit) const -> std
 
 // Validate gambit before it's inserted into the gambit list
 // Check levels, etc.
-std::string CGambitsContainer::AddGambit(const Gambit_t& gambit)
+auto CGambitsContainer::AddGambit(const Gambit_t& gambit) -> std::string
 {
     TracyZoneScoped;
 
@@ -1513,7 +1513,7 @@ auto CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, const G
     }
 }
 
-bool CGambitsContainer::TryTrustSkill()
+auto CGambitsContainer::TryTrustSkill() -> bool
 {
     TracyZoneScoped;
 
@@ -1841,7 +1841,7 @@ bool CGambitsContainer::TryTrustSkill()
 }
 
 // currently only used for Uka Totlihn to determin what samba to use.
-bool CGambitsContainer::PartyHasHealer()
+auto CGambitsContainer::PartyHasHealer() -> bool
 {
     bool hasHealer = false;
     // clang-format off
@@ -1859,7 +1859,7 @@ bool CGambitsContainer::PartyHasHealer()
 }
 
 // used to check for tanks in party (Volker, AA Hume)
-bool CGambitsContainer::PartyHasTank()
+auto CGambitsContainer::PartyHasTank() -> bool
 {
     bool hasTank = false;
     // clang-format off

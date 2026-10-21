@@ -147,7 +147,7 @@ void CCharRecastContainer::ChangeJob()
     db::preparedStmt("DELETE FROM char_recast WHERE charid = ? AND id != 0", m_PChar->id);
 }
 
-RecastList_t* CCharRecastContainer::GetRecastList(xi::RecastType type)
+auto CCharRecastContainer::GetRecastList(xi::RecastType type) -> RecastList_t*
 {
     switch (type)
     {

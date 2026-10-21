@@ -125,7 +125,7 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     }
 }
 
-bool CAlliance::hasOnlyOneParty() const
+auto CAlliance::hasOnlyOneParty() const -> bool
 {
     if (partyList.size() != 1)
     {
@@ -136,7 +136,7 @@ bool CAlliance::hasOnlyOneParty() const
     return loadPartyCount() == 1;
 }
 
-bool CAlliance::isFull() const
+auto CAlliance::isFull() const -> bool
 {
     if (partyList.size() == 3)
     {
@@ -147,7 +147,7 @@ bool CAlliance::isFull() const
     return loadPartyCount() == 3;
 }
 
-uint32 CAlliance::loadPartyCount() const
+auto CAlliance::loadPartyCount() const -> uint32
 {
     const auto rset = db::preparedStmt("SELECT * FROM accounts_parties WHERE allianceid = ? GROUP BY partyid", m_AllianceID, PARTY_SECOND | PARTY_THIRD);
     if (rset)
@@ -364,7 +364,7 @@ void CAlliance::pushParty(CParty* PParty, uint8 number)
     }
 }
 
-CParty* CAlliance::getMainParty()
+auto CAlliance::getMainParty() -> CParty*
 {
     return aLeader;
 }

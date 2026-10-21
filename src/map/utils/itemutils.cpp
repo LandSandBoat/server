@@ -245,7 +245,7 @@ auto unarmedH2H() -> CItemWeapon*
 namespace itemutils
 {
 
-DropList_t* GetDropList(uint16 DropID)
+auto GetDropList(uint16 DropID) -> DropList_t*
 {
     if (DropID < MAX_DROPID)
     {

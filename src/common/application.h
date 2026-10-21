@@ -57,10 +57,10 @@ public:
     Application(const ApplicationConfig& appConfig, int argc, char** argv);
     virtual ~Application();
 
-    Application(const Application&)            = delete;
-    Application(Application&&)                 = delete;
-    Application& operator=(const Application&) = delete;
-    Application& operator=(Application&&)      = delete;
+    Application(const Application&)                    = delete;
+    Application(Application&&)                         = delete;
+    auto operator=(const Application&) -> Application& = delete;
+    auto operator=(Application&&) -> Application&      = delete;
 
     //
     // Init

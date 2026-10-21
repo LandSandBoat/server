@@ -111,14 +111,14 @@ public:
     void addEntity(CBattleEntity* PTarget, bool withPet);
 
     // helpers
-    bool           isMobOwner(CBattleEntity* PTarget);
-    CBattleEntity* findMaster(CBattleEntity* PTarget);
-    bool           validEntity(CBattleEntity* PTarget);
-    bool           checkIsPlayer(CBattleEntity* PTarget);
+    auto isMobOwner(CBattleEntity* PTarget) -> bool;
+    auto findMaster(CBattleEntity* PTarget) -> CBattleEntity*;
+    auto validEntity(CBattleEntity* PTarget) -> bool;
+    auto checkIsPlayer(CBattleEntity* PTarget) -> bool;
 
-    bool isWithinArea(position_t* pos);
-    bool isWithinCone(position_t* pos);
-    bool isWithinRange(position_t* pos, float range);
+    auto isWithinArea(position_t* pos) -> bool;
+    auto isWithinCone(position_t* pos) -> bool;
+    auto isWithinRange(position_t* pos, float range) -> bool;
 
     auto getValidTarget(uint16 actionTargetID, uint16 validTargetFlags) const -> CBattleEntity*;
     auto getValidTarget(CBattleEntity* PTarget, uint16 validTargetFlags) const -> CBattleEntity*;

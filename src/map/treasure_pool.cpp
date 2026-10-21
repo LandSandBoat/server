@@ -73,7 +73,7 @@ auto CTreasurePool::memberCount() const -> size_t
     return m_Members.size();
 }
 
-bool CTreasurePool::isMember(const CCharEntity* PChar)
+auto CTreasurePool::isMember(const CCharEntity* PChar) -> bool
 {
     return std::ranges::contains(m_Members, PChar);
 }
@@ -154,7 +154,7 @@ void CTreasurePool::delMember(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
+auto CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity) -> uint8
 {
     uint8                    SlotID     = 0;
     uint8                    FreeSlotID = -1;
@@ -429,7 +429,7 @@ void CTreasurePool::passItem(CCharEntity* PChar, uint8 SlotID)
     }
 }
 
-bool CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID)
+auto CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID) -> bool
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -443,7 +443,7 @@ bool CTreasurePool::hasLottedItem(CCharEntity* PChar, uint8 SlotID)
                                });
 }
 
-bool CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID)
+auto CTreasurePool::hasPassedItem(CCharEntity* PChar, uint8 SlotID) -> bool
 {
     if (SlotID >= TREASUREPOOL_SIZE)
     {

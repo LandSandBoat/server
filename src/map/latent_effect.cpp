@@ -51,32 +51,32 @@ auto CLatentEffect::GetConditionsID() const -> xi::Latent
     return m_ConditionsID;
 }
 
-uint16 CLatentEffect::GetConditionsValue() const
+auto CLatentEffect::GetConditionsValue() const -> uint16
 {
     return m_ConditionsValue;
 }
 
-uint8 CLatentEffect::GetSlot() const
+auto CLatentEffect::GetSlot() const -> uint8
 {
     return m_SlotID;
 }
 
-xi::Mod CLatentEffect::GetModValue() const
+auto CLatentEffect::GetModValue() const -> xi::Mod
 {
     return m_ModValue;
 }
 
-int16 CLatentEffect::GetModPower() const
+auto CLatentEffect::GetModPower() const -> int16
 {
     return m_ModPower;
 }
 
-bool CLatentEffect::IsActivated() const
+auto CLatentEffect::IsActivated() const -> bool
 {
     return m_Activated;
 }
 
-CBattleEntity* CLatentEffect::GetOwner() const
+auto CLatentEffect::GetOwner() const -> CBattleEntity*
 {
     return m_POwner;
 }
@@ -106,7 +106,7 @@ void CLatentEffect::SetModPower(int16 power)
     m_ModPower = power;
 }
 
-bool CLatentEffect::ModOnItemOnly(xi::Mod modID)
+auto CLatentEffect::ModOnItemOnly(xi::Mod modID) -> bool
 {
     if (modID == xi::Mod::DMG_RATING ||
         modID == xi::Mod::ITEM_ADDEFFECT_TYPE ||
@@ -126,13 +126,13 @@ bool CLatentEffect::ModOnItemOnly(xi::Mod modID)
     return false;
 }
 
-bool CLatentEffect::SkillMod(xi::Mod modID)
+auto CLatentEffect::SkillMod(xi::Mod modID) -> bool
 {
     return (modID >= xi::Mod::HTH && modID <= xi::Mod::STAFF) ||
            (modID >= xi::Mod::AUTO_MELEE_SKILL && modID <= xi::Mod::HANDBELL_SKILL);
 }
 
-bool CLatentEffect::Activate()
+auto CLatentEffect::Activate() -> bool
 {
     if (!IsActivated())
     {
@@ -168,7 +168,7 @@ bool CLatentEffect::Activate()
     return false;
 }
 
-bool CLatentEffect::Deactivate()
+auto CLatentEffect::Deactivate() -> bool
 {
     if (IsActivated())
     {

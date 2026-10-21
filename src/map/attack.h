@@ -89,7 +89,7 @@ public:
     auto SetEvaded(bool e) -> void;
     auto IsBlocked() const -> bool;
     auto IsParried() const -> bool;
-    bool IsGuarded() const;
+    auto IsGuarded() const -> bool;
     auto CheckGuarded() -> bool;
     auto CheckParried() -> bool;
     auto IsAnticipated() const -> bool;

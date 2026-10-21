@@ -106,28 +106,28 @@ void LoadState()
     CState = state;
 }
 
-CampaignState GetCampaignState()
+auto GetCampaignState() -> CampaignState
 {
     LoadState();
     return CState;
 }
 
-uint8 GetReconnaissance(CampaignArmy army)
+auto GetReconnaissance(CampaignArmy army) -> uint8
 {
     return CState.nations[army].reconnaissance;
 }
 
-uint8 GetMorale(CampaignArmy army)
+auto GetMorale(CampaignArmy army) -> uint8
 {
     return CState.nations[army].morale;
 }
 
-uint8 GetProsperity(CampaignArmy army)
+auto GetProsperity(CampaignArmy army) -> uint8
 {
     return CState.nations[army].prosperity;
 }
 
-int32 GetAlliedNotes(CCharEntity* chr)
+auto GetAlliedNotes(CCharEntity* chr) -> int32
 {
     return charutils::GetPoints(chr, "allied_notes");
 }

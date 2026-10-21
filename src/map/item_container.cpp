@@ -40,17 +40,17 @@ CItemContainer::CItemContainer(uint16 LocationID, const CCharEntity* owner)
 
 CItemContainer::~CItemContainer() = default;
 
-uint16 CItemContainer::GetID() const
+auto CItemContainer::GetID() const -> uint16
 {
     return m_id;
 }
 
-uint8 CItemContainer::GetSize() const
+auto CItemContainer::GetSize() const -> uint8
 {
     return m_size;
 }
 
-uint8 CItemContainer::GetFreeSlotsCount() const
+auto CItemContainer::GetFreeSlotsCount() const -> uint8
 {
     int32 used = m_count;
     if (owner_)
@@ -67,12 +67,12 @@ uint8 CItemContainer::GetFreeSlotsCount() const
  *                                                                       *
  ************************************************************************/
 
-uint16 CItemContainer::GetBuff() const
+auto CItemContainer::GetBuff() const -> uint16
 {
     return m_buff;
 }
 
-uint8 CItemContainer::AddBuff(int8 buff)
+auto CItemContainer::AddBuff(int8 buff) -> uint8
 {
     m_buff += buff;
     return SetSize(std::clamp<int>(m_buff, 0, 80)); // Limit in 0-80 cells for character
@@ -86,7 +86,7 @@ uint8 CItemContainer::AddBuff(int8 buff)
 
 // The container is not responsible for the fact that items can remain outside the size.
 
-uint8 CItemContainer::SetSize(uint8 size)
+auto CItemContainer::SetSize(uint8 size) -> uint8
 {
     if (size <= MAX_CONTAINER_SIZE)
     {
@@ -106,7 +106,7 @@ uint8 CItemContainer::SetSize(uint8 size)
  *                                                                       *
  ************************************************************************/
 
-uint8 CItemContainer::AddSize(int8 size)
+auto CItemContainer::AddSize(int8 size) -> uint8
 {
     uint8 newsize = m_size + size;
 
@@ -257,7 +257,7 @@ auto CItemContainer::SearchItems(const uint16 itemId) const -> std::vector<uint8
     return slotIds;
 }
 
-uint8 CItemContainer::SearchItemWithSpace(uint16 ItemID, uint32 quantity)
+auto CItemContainer::SearchItemWithSpace(uint16 ItemID, uint32 quantity) -> uint8
 {
     for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
     {

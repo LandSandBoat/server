@@ -150,33 +150,33 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& getName() const; // Internal name of entity
-    virtual const std::string& getPacketName(); // Name of entity sent to the client
+    virtual auto getName() const -> const std::string&; // Internal name of entity
+    virtual auto getPacketName() -> const std::string&; // Name of entity sent to the client
 
-    auto          getZone() const -> xi::ZoneId; // Current zone
-    float         GetXPos() const;               // Position of co-ordinate X
-    float         GetYPos() const;               // Position of co-ordinate Y
-    float         GetZPos() const;               // Position of co-ordinate Z
-    uint8         GetRotPos() const;
-    uint8         GetSpeed() const;
-    virtual uint8 UpdateSpeed(bool run = false);
+    auto         getZone() const -> xi::ZoneId; // Current zone
+    auto         GetXPos() const -> float;      // Position of co-ordinate X
+    auto         GetYPos() const -> float;      // Position of co-ordinate Y
+    auto         GetZPos() const -> float;      // Position of co-ordinate Z
+    auto         GetRotPos() const -> uint8;
+    auto         GetSpeed() const -> uint8;
+    virtual auto UpdateSpeed(bool run = false) -> uint8;
 
-    void         HideName(bool hide);     // hide / show name
-    void         GhostPhase(bool ghost);  // makes mob semi transparent
-    bool         IsNameHidden() const;    // checks if name is hidden
-    virtual bool GetUntargetable() const; // checks if entity is untargetable
-    virtual bool isWideScannable();       // checks if the entity should show up on wide scan
+    void         HideName(bool hide);             // hide / show name
+    void         GhostPhase(bool ghost);          // makes mob semi transparent
+    auto         IsNameHidden() const -> bool;    // checks if name is hidden
+    virtual auto GetUntargetable() const -> bool; // checks if entity is untargetable
+    virtual auto isWideScannable() -> bool;       // checks if the entity should show up on wide scan
 
-    bool CanSeeTarget(CBaseEntity* target);
-    bool CanSeeTarget(const position_t& targetPoint);
+    auto CanSeeTarget(CBaseEntity* target) -> bool;
+    auto CanSeeTarget(const position_t& targetPoint) -> bool;
 
-    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
-    void         SendZoneUpdate();
+    auto GetEntity(uint16 targid, uint8 filter = -1) const -> CBaseEntity*;
+    void SendZoneUpdate();
 
-    void   ResetLocalVars();
-    uint32 GetLocalVar(const std::string& var) const;
-    void   SetLocalVar(const std::string& var, uint32 val);
-    auto   GetLocalVars() -> std::map<std::string, uint32>&;
+    void ResetLocalVars();
+    auto GetLocalVar(const std::string& var) const -> uint32;
+    void SetLocalVar(const std::string& var, uint32 val);
+    auto GetLocalVars() -> std::map<std::string, uint32>&;
 
     // pre-tick update
     virtual auto Tick(timer::time_point) -> Task<void> = 0;
@@ -184,12 +184,12 @@ public:
     // post-tick update
     virtual void PostTick() = 0;
 
-    void   SetModelId(uint16 modelId); // Set new modelid
-    uint16 GetModelId() const;         // Get the modelid
+    void SetModelId(uint16 modelId);   // Set new modelid
+    auto GetModelId() const -> uint16; // Get the modelid
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) {};
 
-    bool IsDynamicEntity() const;
+    auto IsDynamicEntity() const -> bool;
 
     auto           serial() const -> uint64;
     auto           entityId() const -> EntityId;

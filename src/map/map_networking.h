@@ -55,16 +55,16 @@ public:
     void handle_incoming_packet(ByteSpan buffer, const IPP& ipp);
 
     // Decipher packet
-    int32 map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey);
+    auto map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey) -> int32;
 
     // main function to parse recv packets
-    int32 recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp);
+    auto recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp) -> int32;
 
     // main function parsing the packets
-    int32 parse(uint8* buff, size_t* buffsize, MapSession* PSession);
+    auto parse(uint8* buff, size_t* buffsize, MapSession* PSession) -> int32;
 
     // main function is building big packet
-    int32 send_parse(uint8* buff, size_t* buffsize, MapSession* PSession, UsePreviousKey usePreviousKey);
+    auto send_parse(uint8* buff, size_t* buffsize, MapSession* PSession, UsePreviousKey usePreviousKey) -> int32;
 
     //
     // Packet Building

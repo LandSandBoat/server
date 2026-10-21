@@ -38,7 +38,7 @@ public:
 
     ConquestSystem(WorldEngine& worldServer);
 
-    bool handleMessage(uint8 messageType, IPPMessage&& message);
+    auto handleMessage(uint8 messageType, IPPMessage&& message) -> bool;
 
     //
     // Called weekly, updates conquest data and sends regional control information

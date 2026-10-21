@@ -29,17 +29,17 @@ class CBlueSpell : public CSpell
 public:
     CBlueSpell(SpellID id);
     ~CBlueSpell() override = default;
-    virtual std::unique_ptr<CSpell> clone() override;
+    virtual auto clone() -> std::unique_ptr<CSpell> override;
 
-    uint16 getMonsterSkillId() const;
-    uint8  getSetPoints() const;
-    uint8  getEcosystem() const;
-    uint8  getTraitCategory() const;
-    uint8  getTraitWeight() const;
-    uint8  getPrimarySkillchain() const;
-    uint8  getSecondarySkillchain() const;
-    uint8  getTertiarySkillchain() const;
-    auto   getKnockback() const -> Knockback;
+    auto getMonsterSkillId() const -> uint16;
+    auto getSetPoints() const -> uint8;
+    auto getEcosystem() const -> uint8;
+    auto getTraitCategory() const -> uint8;
+    auto getTraitWeight() const -> uint8;
+    auto getPrimarySkillchain() const -> uint8;
+    auto getSecondarySkillchain() const -> uint8;
+    auto getTertiarySkillchain() const -> uint8;
+    auto getKnockback() const -> Knockback;
 
     void setMonsterSkillId(uint16 skillid);
     void setSetPoints(uint8 setpoints);

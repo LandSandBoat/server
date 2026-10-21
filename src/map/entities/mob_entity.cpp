@@ -212,7 +212,7 @@ void CMobEntity::setEntityFlags(xi::EntityFlags EntityFlags)
  *                                                                       *
  ************************************************************************/
 
-timer::time_point CMobEntity::GetDespawnTime()
+auto CMobEntity::GetDespawnTime() -> timer::time_point
 {
     return m_DespawnTimer;
 }
@@ -234,7 +234,7 @@ void CMobEntity::SetSpawnSlot(SpawnSlot* sharedSpawn)
     this->spawnSlot = sharedSpawn;
 }
 
-SpawnSlot* CMobEntity::GetSpawnSlot()
+auto CMobEntity::GetSpawnSlot() -> SpawnSlot*
 {
     return this->spawnSlot;
 }
@@ -249,7 +249,7 @@ void CMobEntity::setSpawnWindow(uint8 spawnHour, uint8 despawnHour)
     spawnWindow_ = SpawnWindow{ spawnHour, despawnHour };
 }
 
-bool CMobEntity::TrySpawn()
+auto CMobEntity::TrySpawn() -> bool
 {
     if (m_AllowRespawn && !PAI->IsSpawned())
     {
@@ -268,7 +268,7 @@ bool CMobEntity::TrySpawn()
     return false;
 }
 
-uint32 CMobEntity::GetRandomGil()
+auto CMobEntity::GetRandomGil() -> uint32
 {
     int16 min = getMobMod(xi::MobMod::GilMin);
     int16 max = getMobMod(xi::MobMod::GilMax);
@@ -319,7 +319,7 @@ uint32 CMobEntity::GetRandomGil()
     return (uint32)gil;
 }
 
-bool CMobEntity::CanDropGil()
+auto CMobEntity::CanDropGil() -> bool
 {
     // smaller than 0 means drop no gil
     if (getMobMod(xi::MobMod::GilMax) < 0)
@@ -335,7 +335,7 @@ bool CMobEntity::CanDropGil()
     return getMobMod(xi::MobMod::GilBonus) > 0;
 }
 
-bool CMobEntity::CanStealGil()
+auto CMobEntity::CanStealGil() -> bool
 {
     // TODO: Some mobs cannot be mugged
     return CanDropGil();
@@ -351,7 +351,7 @@ void CMobEntity::ResetGilPurse()
     setMobMod(xi::MobMod::MugGil, purse);
 }
 
-bool CMobEntity::CanRoamHome()
+auto CMobEntity::CanRoamHome() -> bool
 {
     if ((speed == 0 && !((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) || getMobMod(xi::MobMod::NoMove) > 0)
     {
@@ -417,7 +417,7 @@ auto CMobEntity::DistanceFromHome() const -> float
     return distance(loc.p, m_SpawnPoint);
 }
 
-bool CMobEntity::CanRoam()
+auto CMobEntity::CanRoam() -> bool
 {
     return !((m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None) && PMaster == nullptr && (speed > 0 || ((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) && getMobMod(xi::MobMod::NoMove) == 0;
 }
@@ -432,7 +432,7 @@ void CMobEntity::TapDeaggroTime()
     }
 }
 
-bool CMobEntity::CanLink(position_t* pos, int16 superLink)
+auto CMobEntity::CanLink(position_t* pos, int16 superLink) -> bool
 {
     TracyZoneScoped;
 
@@ -484,7 +484,7 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     return true;
 }
 
-bool CMobEntity::ShouldForceLink()
+auto CMobEntity::ShouldForceLink() -> bool
 {
     // There are certain cases where mobs should always be able
     // to link with other mobs, even if their families or sublinks
@@ -507,17 +507,17 @@ bool CMobEntity::ShouldForceLink()
     return false;
 }
 
-bool CMobEntity::CanDeaggro() const
+auto CMobEntity::CanDeaggro() const -> bool
 {
     return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (m_Type & xi::MobType::Battlefield) != xi::MobType::Normal);
 }
 
-bool CMobEntity::IsFarFromHome()
+auto CMobEntity::IsFarFromHome() -> bool
 {
     return DistanceFromHome() > m_maxRoamDistance;
 }
 
-bool CMobEntity::shouldUseTPMove(uint16 tpThreshold)
+auto CMobEntity::shouldUseTPMove(uint16 tpThreshold) -> bool
 {
     const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(xi::MobMod::SkillList));
 
@@ -607,7 +607,7 @@ void CMobEntity::HideHP(bool hide)
     updatemask |= UPDATE_HP;
 }
 
-bool CMobEntity::IsHPHidden() const
+auto CMobEntity::IsHPHidden() const -> bool
 {
     return (m_flags & xi::EntityFlags::HideHp) != xi::EntityFlags::None;
 }
@@ -626,7 +626,7 @@ void CMobEntity::SetCallForHelpFlag(bool call)
     updatemask |= UPDATE_COMBAT;
 }
 
-bool CMobEntity::GetCallForHelpFlag() const
+auto CMobEntity::GetCallForHelpFlag() const -> bool
 {
     return (m_flags & xi::EntityFlags::CallForHelp) != xi::EntityFlags::None;
 }
@@ -644,7 +644,7 @@ void CMobEntity::SetUntargetable(bool untargetable)
     updatemask |= UPDATE_HP;
 }
 
-bool CMobEntity::GetUntargetable() const
+auto CMobEntity::GetUntargetable() const -> bool
 {
     return (m_flags & xi::EntityFlags::Untargetable) != xi::EntityFlags::None;
 }
@@ -674,12 +674,12 @@ void CMobEntity::PostTick()
     }
 }
 
-float CMobEntity::GetRoamDistance()
+auto CMobEntity::GetRoamDistance() -> float
 {
     return (float)getMobMod(xi::MobMod::RoamDistance);
 }
 
-float CMobEntity::GetRangedAttackRange()
+auto CMobEntity::GetRangedAttackRange() -> float
 {
     // Defaulted range is 14 as observed on all retail fomor.
     // In the case this changes for other ranger/ninja types use mobmod
@@ -687,7 +687,7 @@ float CMobEntity::GetRangedAttackRange()
     return rangedAttackRange > 0 ? static_cast<float>(rangedAttackRange) : 14.0f;
 }
 
-bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
+auto CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
 {
     TracyZoneScopedN("CMobEntity::ValidTarget");
 
@@ -1307,7 +1307,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     }
 }
 
-bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+auto CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool
 {
     TracyZoneScopedN("CMobEntity::CanAttack");
 
@@ -1541,7 +1541,7 @@ void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasi
     }
 }
 
-bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
+auto CMobEntity::OnAttack(CAttackState& state, action_t& action) -> bool
 {
     TracyZoneScopedN("CMobEntity::OnAttack");
 
@@ -1557,7 +1557,7 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     }
 }
 
-bool CMobEntity::isWideScannable()
+auto CMobEntity::isWideScannable() -> bool
 {
     return CBaseEntity::isWideScannable() && !getMobMod(xi::MobMod::NoWidescan);
 }

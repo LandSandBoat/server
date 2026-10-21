@@ -30,7 +30,7 @@ struct TransformationMatrix
 {
     float elements[4][3];
 
-    constexpr float determinant() const
+    constexpr auto determinant() const -> float
     {
         const auto el = this->elements;
 
@@ -42,7 +42,7 @@ struct TransformationMatrix
                - el[0][2] * el[1][1] * el[2][0];
     }
 
-    constexpr TransformationMatrix getInverted() const
+    constexpr auto getInverted() const -> TransformationMatrix
     {
         const auto el = this->elements;
 
@@ -80,7 +80,7 @@ struct TransformationMatrix
         return inv;
     }
 
-    constexpr Vector3 applyToCopy(const Vector3& vec) const
+    constexpr auto applyToCopy(const Vector3& vec) const -> Vector3
     {
         Vector3 out = vec;
         applyTo(out);
@@ -98,7 +98,7 @@ struct TransformationMatrix
         vec.z = el[0][2] * vecCopy.x + el[1][2] * vecCopy.y + el[2][2] * vecCopy.z + el[3][2];
     }
 
-    constexpr float applyGetY(const Vector3& vec) const
+    constexpr auto applyGetY(const Vector3& vec) const -> float
     {
         const auto* el = this->elements;
 

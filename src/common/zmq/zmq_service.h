@@ -48,10 +48,10 @@ public:
     explicit ZMQService(std::string threadName = "ZMQ I/O");
     ~ZMQService();
 
-    ZMQService(const ZMQService&)            = delete;
-    ZMQService& operator=(const ZMQService&) = delete;
-    ZMQService(ZMQService&&)                 = delete;
-    ZMQService& operator=(ZMQService&&)      = delete;
+    ZMQService(const ZMQService&)                    = delete;
+    auto operator=(const ZMQService&) -> ZMQService& = delete;
+    ZMQService(ZMQService&&)                         = delete;
+    auto operator=(ZMQService&&) -> ZMQService&      = delete;
 
     [[nodiscard]] auto registerRouter(const std::string& endpoint) -> ipc::Channel<IPPMessage>;
 

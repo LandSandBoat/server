@@ -69,17 +69,17 @@ CPetEntity::~CPetEntity()
     TracyZoneScoped;
 }
 
-uint32 CPetEntity::petID() const
+auto CPetEntity::petID() const -> uint32
 {
     return petID_;
 }
 
-PET_TYPE CPetEntity::getPetType() const
+auto CPetEntity::getPetType() const -> PET_TYPE
 {
     return m_PetType;
 }
 
-uint8 CPetEntity::getSpawnLevel()
+auto CPetEntity::getSpawnLevel() -> uint8
 {
     return m_spawnLevel;
 }
@@ -89,12 +89,12 @@ void CPetEntity::setSpawnLevel(uint8 level)
     m_spawnLevel = level;
 }
 
-bool CPetEntity::isBstPet() const
+auto CPetEntity::isBstPet() const -> bool
 {
     return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
 
-timer::time_point CPetEntity::getJugSpawnTime()
+auto CPetEntity::getJugSpawnTime() -> timer::time_point
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -115,7 +115,7 @@ void CPetEntity::setJugSpawnTime(timer::time_point spawnTime)
     m_jugSpawnTime = spawnTime;
 }
 
-timer::duration CPetEntity::getJugDuration()
+auto CPetEntity::getJugDuration() -> timer::duration
 {
     if (m_PetType != PET_TYPE::JUG_PET)
     {
@@ -137,7 +137,7 @@ void CPetEntity::setJugDuration(timer::duration seconds)
     m_jugDuration = seconds;
 }
 
-const std::string CPetEntity::GetScriptName()
+auto CPetEntity::GetScriptName() -> const std::string
 {
     switch (getPetType())
     {
@@ -171,7 +171,7 @@ const std::string CPetEntity::GetScriptName()
     }
 }
 
-WYVERN_TYPE CPetEntity::getWyvernType()
+auto CPetEntity::getWyvernType() -> WYVERN_TYPE
 {
     if (PMaster == nullptr)
     {
@@ -359,7 +359,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
     this->processActionEffectFlags(action);
 }
 
-bool CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
+auto CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
 {
     if (targetFlags & TARGET_PLAYER && PInitiator->allegiance == allegiance)
     {
@@ -368,7 +368,7 @@ bool CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
 }
 
-bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+auto CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool
 {
     // prevent pets from attacking mobs that the PC master does not own
     if (this->PMaster)

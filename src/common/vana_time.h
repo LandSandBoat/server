@@ -57,37 +57,37 @@ enum TOTD : uint8
     NIGHT    = 7
 };
 
-inline time_point now()
+inline auto now() -> time_point
 {
     return clock::now();
 }
 
-inline earth_time::time_point to_earth_time(const time_point& vanadiel_tp = now())
+inline auto to_earth_time(const time_point& vanadiel_tp = now()) -> earth_time::time_point
 {
     const earth_time::duration earth_since_epoch = std::chrono::duration_cast<earth_time::duration>(vanadiel_tp.time_since_epoch());
     return earth_time::time_point(earth_since_epoch + earth_time::vanadiel_epoch);
 };
 
-inline time_point from_earth_time(const earth_time::time_point& earth_tp = earth_time::now())
+inline auto from_earth_time(const earth_time::time_point& earth_tp = earth_time::now()) -> time_point
 {
     const clock::duration vanadiel_since_epoch = std::chrono::duration_cast<clock::duration>(earth_tp - earth_time::vanadiel_epoch);
     return time_point(vanadiel_since_epoch);
 };
 
-inline uint32 count_weeks(const duration& d)
+inline auto count_weeks(const duration& d) -> uint32
 {
     const clock::weeks total_weeks = std::chrono::floor<clock::weeks>(d);
     return static_cast<uint32>(total_weeks.count());
 }
 
-inline uint32 count_days(const duration& d)
+inline auto count_days(const duration& d) -> uint32
 {
     const clock::days total_days = std::chrono::floor<clock::days>(d);
     return static_cast<uint32>(total_days.count());
 }
 
 // seconds after the minute - [​0​, 60]
-inline uint32 get_second(const time_point& tp = now())
+inline auto get_second(const time_point& tp = now()) -> uint32
 {
     const duration       since_epoch = tp.time_since_epoch();
     const clock::minutes minutes     = std::chrono::floor<clock::minutes>(since_epoch);
@@ -96,7 +96,7 @@ inline uint32 get_second(const time_point& tp = now())
 }
 
 // minutes after the hour – [​0​, 59]
-inline uint32 get_minute(const time_point& tp = now())
+inline auto get_minute(const time_point& tp = now()) -> uint32
 {
     const duration       since_epoch = tp.time_since_epoch();
     const clock::hours   hours       = std::chrono::floor<clock::hours>(since_epoch);
@@ -105,7 +105,7 @@ inline uint32 get_minute(const time_point& tp = now())
 }
 
 // hours since midnight – [​0​, 23]
-inline uint32 get_hour(const time_point& tp = now())
+inline auto get_hour(const time_point& tp = now()) -> uint32
 {
     const duration     since_epoch = tp.time_since_epoch();
     const clock::days  days        = std::chrono::floor<clock::days>(since_epoch);
@@ -114,7 +114,7 @@ inline uint32 get_hour(const time_point& tp = now())
 }
 
 // day of the month – [1, 30]
-inline uint32 get_monthday(const time_point& tp = now())
+inline auto get_monthday(const time_point& tp = now()) -> uint32
 {
     const duration      since_epoch = tp.time_since_epoch();
     const clock::months months      = std::chrono::floor<clock::months>(since_epoch);
@@ -123,7 +123,7 @@ inline uint32 get_monthday(const time_point& tp = now())
 }
 
 // current month – [​1​, 12]
-inline uint32 get_month(const time_point& tp = now())
+inline auto get_month(const time_point& tp = now()) -> uint32
 {
     const duration      since_epoch = tp.time_since_epoch();
     const clock::years  years       = std::chrono::floor<clock::years>(since_epoch);
@@ -132,7 +132,7 @@ inline uint32 get_month(const time_point& tp = now())
 }
 
 // years since 886
-inline int32 get_year(const time_point& tp = now())
+inline auto get_year(const time_point& tp = now()) -> int32
 {
     const duration     since_epoch = tp.time_since_epoch();
     const clock::years years       = std::chrono::floor<clock::years>(since_epoch);
@@ -140,7 +140,7 @@ inline int32 get_year(const time_point& tp = now())
 }
 
 // days since Firesday – [​0​, 7]
-inline uint32 get_weekday(const time_point& tp = now())
+inline auto get_weekday(const time_point& tp = now()) -> uint32
 {
     const duration     since_epoch = tp.time_since_epoch();
     const clock::weeks weeks       = std::chrono::floor<clock::weeks>(since_epoch);
@@ -149,7 +149,7 @@ inline uint32 get_weekday(const time_point& tp = now())
 }
 
 // days since 1st day of year – [​0​, 360]
-inline uint32 get_yearday(const time_point& tp = now())
+inline auto get_yearday(const time_point& tp = now()) -> uint32
 {
     const duration     since_epoch = tp.time_since_epoch();
     const clock::years years       = std::chrono::floor<clock::years>(since_epoch);
@@ -157,7 +157,7 @@ inline uint32 get_yearday(const time_point& tp = now())
     return static_cast<uint32>((days % years).count());
 }
 
-inline time_point get_next_midnight(const time_point& tp = now())
+inline auto get_next_midnight(const time_point& tp = now()) -> time_point
 {
     return std::chrono::ceil<clock::days>(tp);
 }
@@ -166,7 +166,7 @@ inline time_point get_next_midnight(const time_point& tp = now())
  * Gets the time of the day for the current or given time point.
  * @returns NONE, MIDNIGHT, NEWDAY, DAWN, DAY, DUSK, EVENING, NIGHT
  */
-inline TOTD get_totd(const time_point& tp = now())
+inline auto get_totd(const time_point& tp = now()) -> TOTD
 {
     switch (get_hour(tp))
     {
@@ -209,7 +209,7 @@ inline TOTD get_totd(const time_point& tp = now())
 namespace moon
 {
 
-inline uint32 get_phase(const time_point& tp = now())
+inline auto get_phase(const time_point& tp = now()) -> uint32
 {
     int32  phase   = 0;
     double daysmod = static_cast<int32>((count_days(tp.time_since_epoch() + clock::years(886)) + 26) % 84);
@@ -235,7 +235,7 @@ inline uint32 get_phase(const time_point& tp = now())
  * 2: Waxing
  * ```
  */
-inline uint8 get_direction(const time_point& tp = now())
+inline auto get_direction(const time_point& tp = now()) -> uint8
 {
     double daysmod = static_cast<int32>((count_days(tp.time_since_epoch() + clock::years(886)) + 26) % 84);
 
@@ -258,7 +258,7 @@ inline uint8 get_direction(const time_point& tp = now())
 namespace rse
 {
 
-inline uint8 get_race(const time_point& tp = now())
+inline auto get_race(const time_point& tp = now()) -> uint8
 {
     return static_cast<uint8>(count_weeks(tp.time_since_epoch()) % 8 + 1);
 }
@@ -272,7 +272,7 @@ inline uint8 get_race(const time_point& tp = now())
  * 2: Maze of Shakhrami
  * ```
  */
-inline uint8 get_location(const time_point& tp = now())
+inline auto get_location(const time_point& tp = now()) -> uint8
 {
     return static_cast<uint8>(count_weeks(tp.time_since_epoch()) % 3);
 }

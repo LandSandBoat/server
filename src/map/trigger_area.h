@@ -30,14 +30,14 @@ public:
     ITriggerArea(uint32 triggerAreaID);
     virtual ~ITriggerArea() = default;
 
-    uint32 getTriggerAreaID() const;
+    auto getTriggerAreaID() const -> uint32;
 
-    int16 getCount() const;
-    int16 addCount(int16 count);
-    int16 delCount(int16 count);
+    auto getCount() const -> int16;
+    auto addCount(int16 count) -> int16;
+    auto delCount(int16 count) -> int16;
 
-    virtual bool isPointInside(position_t pos) const            = 0;
-    virtual bool isPointInside(float x, float y, float z) const = 0;
+    virtual auto isPointInside(position_t pos) const -> bool            = 0;
+    virtual auto isPointInside(float x, float y, float z) const -> bool = 0;
 
 private:
     uint32 m_triggerAreaID;
@@ -49,8 +49,8 @@ class CCuboidTriggerArea final : public ITriggerArea
 public:
     CCuboidTriggerArea(uint32 triggerAreaID, float xMin, float yMin, float zMin, float xMax, float yMax, float zMax, float rotation = 0.0f);
 
-    bool isPointInside(float x, float y, float z) const override;
-    bool isPointInside(position_t pos) const override;
+    auto isPointInside(float x, float y, float z) const -> bool override;
+    auto isPointInside(position_t pos) const -> bool override;
 
 private:
     float m_xMin;
@@ -70,8 +70,8 @@ class CCylindricalTriggerArea final : public ITriggerArea
 public:
     CCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
 
-    bool isPointInside(float x, float y, float z) const override;
-    bool isPointInside(position_t pos) const override;
+    auto isPointInside(float x, float y, float z) const -> bool override;
+    auto isPointInside(position_t pos) const -> bool override;
 
 private:
     float m_xPos;
@@ -84,8 +84,8 @@ class CSphericalTriggerArea final : public ITriggerArea
 public:
     CSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
 
-    bool isPointInside(float x, float y, float z) const override;
-    bool isPointInside(position_t pos) const override;
+    auto isPointInside(float x, float y, float z) const -> bool override;
+    auto isPointInside(position_t pos) const -> bool override;
 
 private:
     float m_xPos;

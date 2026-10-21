@@ -23,7 +23,7 @@
 
 #include "tracy.h"
 
-void* operator new(std::size_t count)
+auto operator new(std::size_t count) -> void*
 {
     void* ptr = malloc(count);
     TracyAlloc(ptr, count);

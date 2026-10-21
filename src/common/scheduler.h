@@ -206,12 +206,12 @@ public:
         }
 
         // Disable copy
-        Token(const Token&)            = delete;
-        Token& operator=(const Token&) = delete;
+        Token(const Token&)                    = delete;
+        auto operator=(const Token&) -> Token& = delete;
 
         // Allow moving
-        Token(Token&&) noexcept            = default;
-        Token& operator=(Token&&) noexcept = default;
+        Token(Token&&) noexcept                    = default;
+        auto operator=(Token&&) noexcept -> Token& = default;
 
     private:
         std::shared_ptr<asio::cancellation_signal> signal_;
@@ -264,10 +264,10 @@ public:
         stop();
     }
 
-    Scheduler(const Scheduler&)            = delete;
-    Scheduler& operator=(const Scheduler&) = delete;
-    Scheduler(Scheduler&&)                 = delete;
-    Scheduler& operator=(Scheduler&&)      = delete;
+    Scheduler(const Scheduler&)                    = delete;
+    auto operator=(const Scheduler&) -> Scheduler& = delete;
+    Scheduler(Scheduler&&)                         = delete;
+    auto operator=(Scheduler&&) -> Scheduler&      = delete;
 
     // run
     //   Runs the main thread's event loop. Blocks until stopped.

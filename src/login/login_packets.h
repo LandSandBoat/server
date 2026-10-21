@@ -41,7 +41,7 @@ struct packet_t
 namespace loginPackets
 {
 
-inline uint32_t getTerminator()
+inline auto getTerminator() -> uint32_t
 {
     uint8_t terminator[4] = { 0x49, 0x58, 0x46, 0x46 }; // "IXFF" special terminator
 

@@ -30,7 +30,7 @@ ConquestSystem::ConquestSystem(WorldEngine& worldServer)
 {
 }
 
-bool ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message)
+auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> bool
 {
     const auto conquestMsgType = static_cast<ConquestMessage>(messageType);
     switch (conquestMsgType)

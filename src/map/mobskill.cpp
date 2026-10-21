@@ -48,7 +48,7 @@ CMobSkill::CMobSkill(uint16 id)
 {
 }
 
-bool CMobSkill::hasMissMsg() const
+auto CMobSkill::hasMissMsg() const -> bool
 {
     return m_Message == MsgBasic::AbilityMisses ||
            m_Message == MsgBasic::UsesSkillMisses ||
@@ -58,7 +58,7 @@ bool CMobSkill::hasMissMsg() const
            m_Message == MsgBasic::RangedAttackMiss;
 }
 
-bool CMobSkill::isAoE() const
+auto CMobSkill::isAoE() const -> bool
 {
     // 0 -> single target
     // 1 -> AOE around mob
@@ -66,36 +66,36 @@ bool CMobSkill::isAoE() const
     return m_Aoe > 0 && m_Aoe < 4;
 }
 
-bool CMobSkill::isConal() const
+auto CMobSkill::isConal() const -> bool
 {
     // 4 -> Conal
     // 8 -> Conal from mob centered on target
     return m_Aoe == 4 || m_Aoe == 8;
 }
 
-bool CMobSkill::isSingle() const
+auto CMobSkill::isSingle() const -> bool
 {
     return m_Aoe == 0;
 }
 
-bool CMobSkill::isTpFreeSkill() const
+auto CMobSkill::isTpFreeSkill() const -> bool
 {
     // Do not remove users TP when using the skill
     return m_Flag & SKILLFLAG_NO_TP_COST;
 }
 
-bool CMobSkill::isAstralFlow() const
+auto CMobSkill::isAstralFlow() const -> bool
 {
     return m_Flag & SKILLFLAG_ASTRAL_FLOW;
 }
 
-bool CMobSkill::isBloodPactRage() const
+auto CMobSkill::isBloodPactRage() const -> bool
 {
     // means it is a BP Rage
     return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
 }
 
-bool CMobSkill::isBloodPactWard() const
+auto CMobSkill::isBloodPactWard() const -> bool
 {
     // means it is a BP Ward
     return m_Flag & SKILLFLAG_BLOODPACT_WARD;
@@ -131,7 +131,7 @@ void CMobSkill::setAnimationID(uint16 animID)
     m_AnimID = animID;
 }
 
-const std::string& CMobSkill::getName()
+auto CMobSkill::getName() -> const std::string&
 {
     return m_name;
 }
@@ -193,7 +193,7 @@ void CMobSkill::setValidTargets(uint16 targ)
     m_ValidTarget = targ;
 }
 
-uint16 CMobSkill::getID() const
+auto CMobSkill::getID() const -> uint16
 {
     return m_ID;
 }
@@ -203,7 +203,7 @@ auto CMobSkill::getAnimationID() const -> ActionAnimation
     return static_cast<ActionAnimation>(m_AnimID);
 }
 
-int16 CMobSkill::getTP() const
+auto CMobSkill::getTP() const -> int16
 {
     return m_TP;
 }
@@ -215,7 +215,7 @@ auto CMobSkill::getHP() const -> int32
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill
-uint8 CMobSkill::getHPP() const
+auto CMobSkill::getHPP() const -> uint8
 {
     return m_HPP;
 }
@@ -225,12 +225,12 @@ auto CMobSkill::getTargets() const -> const std::vector<CBattleEntity*>&
     return m_Targets;
 }
 
-uint16 CMobSkill::getTotalTargets() const
+auto CMobSkill::getTotalTargets() const -> uint16
 {
     return m_TotalTargets;
 }
 
-uint32 CMobSkill::getPrimaryTargetID() const
+auto CMobSkill::getPrimaryTargetID() const -> uint32
 {
     return m_primaryTargetID;
 }
@@ -240,7 +240,7 @@ void CMobSkill::setFinalAnimationSub(uint8 newAnimationSub)
     m_FinalAnimationSub = newAnimationSub;
 }
 
-Maybe<uint8> CMobSkill::getFinalAnimationSub()
+auto CMobSkill::getFinalAnimationSub() -> Maybe<uint8>
 {
     return m_FinalAnimationSub;
 }
@@ -250,7 +250,7 @@ auto CMobSkill::getMsg() const -> MsgBasic
     return m_Message;
 }
 
-uint16 CMobSkill::getMsgForAction() const
+auto CMobSkill::getMsgForAction() const -> uint16
 {
     return getID();
 }
@@ -260,17 +260,17 @@ auto CMobSkill::getFlag() const -> uint16
     return m_Flag;
 }
 
-uint8 CMobSkill::getAoe() const
+auto CMobSkill::getAoe() const -> uint8
 {
     return m_Aoe;
 }
 
-float CMobSkill::getDistance() const
+auto CMobSkill::getDistance() const -> float
 {
     return m_Distance;
 }
 
-float CMobSkill::getRadius() const
+auto CMobSkill::getRadius() const -> float
 {
     // Lets check if the radius is 0 to default the values if the skill is AOE and the radius is still set to 0
     if (m_AoeRadius <= 0)
@@ -288,7 +288,7 @@ float CMobSkill::getRadius() const
     return m_AoeRadius;
 }
 
-int16 CMobSkill::getParam() const
+auto CMobSkill::getParam() const -> int16
 {
     return m_Param;
 }
@@ -298,7 +298,7 @@ auto CMobSkill::getKnockback() const -> Knockback
     return m_knockback;
 }
 
-bool CMobSkill::isDamageMsg() const
+auto CMobSkill::isDamageMsg() const -> bool
 {
     return m_Message == MsgBasic::UsesAbilityTakesDamage ||
            m_Message == MsgBasic::UsesSkillTakesDamage ||
@@ -319,32 +319,32 @@ void CMobSkill::setKnockback(const Knockback knockback)
     m_knockback = knockback;
 }
 
-uint16 CMobSkill::getValidTargets() const
+auto CMobSkill::getValidTargets() const -> uint16
 {
     return m_ValidTarget;
 }
 
-timer::duration CMobSkill::getAnimationTime() const
+auto CMobSkill::getAnimationTime() const -> timer::duration
 {
     return m_AnimationTime;
 }
 
-timer::duration CMobSkill::getActivationTime() const
+auto CMobSkill::getActivationTime() const -> timer::duration
 {
     return m_ActivationTime;
 }
 
-uint8 CMobSkill::getPrimarySkillchain() const
+auto CMobSkill::getPrimarySkillchain() const -> uint8
 {
     return m_primarySkillchain;
 }
 
-uint8 CMobSkill::getSecondarySkillchain() const
+auto CMobSkill::getSecondarySkillchain() const -> uint8
 {
     return m_secondarySkillchain;
 }
 
-uint8 CMobSkill::getTertiarySkillchain() const
+auto CMobSkill::getTertiarySkillchain() const -> uint8
 {
     return m_tertiarySkillchain;
 }

@@ -33,18 +33,18 @@ public:
     CItemUsable(const CItemUsable& other);
     virtual ~CItemUsable();
 
-    timer::duration   getUseDelay() const;
-    auto              getCurrentCharges() const -> uint8;
-    uint8             getMaxCharges() const;
-    auto              getAnimationID() const -> ActionAnimation;
-    timer::duration   getAnimationTime() const;
-    timer::duration   getActivationTime() const;
-    uint16            getValidTarget() const;
-    timer::duration   getReuseTime();
-    timer::duration   getReuseDelay() const;
-    timer::time_point getLastUseTime();
-    timer::time_point getNextUseTime();
-    uint16            getAoE() const;
+    auto getUseDelay() const -> timer::duration;
+    auto getCurrentCharges() const -> uint8;
+    auto getMaxCharges() const -> uint8;
+    auto getAnimationID() const -> ActionAnimation;
+    auto getAnimationTime() const -> timer::duration;
+    auto getActivationTime() const -> timer::duration;
+    auto getValidTarget() const -> uint16;
+    auto getReuseTime() -> timer::duration;
+    auto getReuseDelay() const -> timer::duration;
+    auto getLastUseTime() -> timer::time_point;
+    auto getNextUseTime() -> timer::time_point;
+    auto getAoE() const -> uint16;
 
     void setUseDelay(timer::duration UseDelay);
     void setCurrentCharges(uint8 CurrCharges);

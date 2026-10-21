@@ -23,7 +23,7 @@
 struct EnumClassHash
 {
     template <typename T>
-    std::size_t operator()(T t) const
+    auto operator()(T t) const -> std::size_t
     {
         return static_cast<std::size_t>(t);
     }
@@ -36,8 +36,8 @@ struct EnumClassHash
 class CModifier
 {
 public:
-    xi::Mod getModID() const;
-    int16   getModAmount() const;
+    auto getModID() const -> xi::Mod;
+    auto getModAmount() const -> int16;
 
     void setModAmount(int16 amount);
 
@@ -65,7 +65,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(xi::Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType() const;
+    auto getPetModType() const -> PetModType;
 
 private:
     PetModType m_pettype{ PetModType::All };

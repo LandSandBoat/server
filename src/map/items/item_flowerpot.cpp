@@ -47,12 +47,12 @@ void CItemFlowerpot::cleanPot()
     setStageTimestamp(0);
 }
 
-bool CItemFlowerpot::isPlanted()
+auto CItemFlowerpot::isPlanted() -> bool
 {
     return this->exdata<Exdata::FlowerPot>().Step > 0;
 }
 
-bool CItemFlowerpot::isTree()
+auto CItemFlowerpot::isTree() -> bool
 {
     switch (getPlant())
     {
@@ -75,12 +75,12 @@ void CItemFlowerpot::setDried(bool dried)
     this->exdata<Exdata::FlowerPot>().Dried = dried ? 1 : 0;
 }
 
-bool CItemFlowerpot::isDried()
+auto CItemFlowerpot::isDried() -> bool
 {
     return this->exdata<Exdata::FlowerPot>().Dried;
 }
 
-bool CItemFlowerpot::canGrow()
+auto CItemFlowerpot::canGrow() -> bool
 {
     uint8 stage = this->exdata<Exdata::FlowerPot>().Step;
     return stage >= FLOWERPOT_STAGE_INITIAL && stage <= FLOWERPOT_STAGE_THIRD_SPROUTS && !isDried();
@@ -91,12 +91,12 @@ void CItemFlowerpot::setPlant(FLOWERPOT_PLANT_TYPE plant)
     this->exdata<Exdata::FlowerPot>().Kind = plant;
 }
 
-FLOWERPOT_PLANT_TYPE CItemFlowerpot::getPlant()
+auto CItemFlowerpot::getPlant() -> FLOWERPOT_PLANT_TYPE
 {
     return static_cast<FLOWERPOT_PLANT_TYPE>(this->exdata<Exdata::FlowerPot>().Kind);
 }
 
-uint16 CItemFlowerpot::getSeedID(FLOWERPOT_PLANT_TYPE plantType)
+auto CItemFlowerpot::getSeedID(FLOWERPOT_PLANT_TYPE plantType) -> uint16
 {
     switch (plantType)
     {
@@ -122,7 +122,7 @@ uint16 CItemFlowerpot::getSeedID(FLOWERPOT_PLANT_TYPE plantType)
     }
 }
 
-FLOWERPOT_PLANT_TYPE CItemFlowerpot::getPlantFromSeed(uint16 seedID)
+auto CItemFlowerpot::getPlantFromSeed(uint16 seedID) -> FLOWERPOT_PLANT_TYPE
 {
     switch (seedID)
     {
@@ -152,7 +152,7 @@ void CItemFlowerpot::setStage(FLOWERPOT_STAGE_TYPE stage)
     this->exdata<Exdata::FlowerPot>().Step = stage;
 }
 
-FLOWERPOT_STAGE_TYPE CItemFlowerpot::getStage()
+auto CItemFlowerpot::getStage() -> FLOWERPOT_STAGE_TYPE
 {
     return static_cast<FLOWERPOT_STAGE_TYPE>(this->exdata<Exdata::FlowerPot>().Step);
 }
@@ -167,23 +167,23 @@ void CItemFlowerpot::setSecondCrystalFeed(FLOWERPOT_ELEMENT_TYPE element)
     this->exdata<Exdata::FlowerPot>().Crystal2 = element;
 }
 
-FLOWERPOT_ELEMENT_TYPE CItemFlowerpot::getExtraCrystalFeed()
+auto CItemFlowerpot::getExtraCrystalFeed() -> FLOWERPOT_ELEMENT_TYPE
 {
     return static_cast<FLOWERPOT_ELEMENT_TYPE>(this->exdata<Exdata::FlowerPot>().Crystal1);
 }
 
-FLOWERPOT_ELEMENT_TYPE CItemFlowerpot::getCommonCrystalFeed()
+auto CItemFlowerpot::getCommonCrystalFeed() -> FLOWERPOT_ELEMENT_TYPE
 {
     return static_cast<FLOWERPOT_ELEMENT_TYPE>(this->exdata<Exdata::FlowerPot>().Crystal2);
 }
 
-int16 CItemFlowerpot::getItemFromElement(FLOWERPOT_ELEMENT_TYPE element)
+auto CItemFlowerpot::getItemFromElement(FLOWERPOT_ELEMENT_TYPE element) -> int16
 {
     // Element and crystal item id ordering is the same with an offset
     return element + 4095;
 }
 
-FLOWERPOT_ELEMENT_TYPE CItemFlowerpot::getElementFromItem(int16 itemID)
+auto CItemFlowerpot::getElementFromItem(int16 itemID) -> FLOWERPOT_ELEMENT_TYPE
 {
     // Element and crystal item id ordering is the same with an offset
     return static_cast<FLOWERPOT_ELEMENT_TYPE>(itemID - 4095);
@@ -194,7 +194,7 @@ void CItemFlowerpot::setPlantTimestamp(uint32 vanatime)
     this->exdata<Exdata::FlowerPot>().TimePlanted = vanatime;
 }
 
-uint32 CItemFlowerpot::getPlantTimestamp()
+auto CItemFlowerpot::getPlantTimestamp() -> uint32
 {
     return this->exdata<Exdata::FlowerPot>().TimePlanted;
 }
@@ -204,7 +204,7 @@ void CItemFlowerpot::setStageTimestamp(uint32 vanatime)
     this->exdata<Exdata::FlowerPot>().TimeNextStep = vanatime;
 }
 
-uint32 CItemFlowerpot::getStageTimestamp()
+auto CItemFlowerpot::getStageTimestamp() -> uint32
 {
     return this->exdata<Exdata::FlowerPot>().TimeNextStep;
 }
@@ -219,7 +219,7 @@ void CItemFlowerpot::markExamined()
     this->exdata<Exdata::FlowerPot>().Examined = 1;
 }
 
-bool CItemFlowerpot::wasExamined()
+auto CItemFlowerpot::wasExamined() -> bool
 {
     return this->exdata<Exdata::FlowerPot>().Examined;
 }
@@ -229,7 +229,7 @@ void CItemFlowerpot::setStrength(uint8 strength)
     this->exdata<Exdata::FlowerPot>().Strength = strength;
 }
 
-uint8 CItemFlowerpot::getStrength()
+auto CItemFlowerpot::getStrength() -> uint8
 {
     return this->exdata<Exdata::FlowerPot>().Strength;
 }

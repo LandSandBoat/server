@@ -46,7 +46,7 @@ std::vector<uint16> gobbieJunk = {
     4539  // Goblin Pie
 };
 
-uint16 SelectItem(CCharEntity* player, uint8 dial)
+auto SelectItem(CCharEntity* player, uint8 dial) -> uint16
 {
     std::reference_wrapper<std::vector<uint16>> dialItems = gobbieJunk;
 

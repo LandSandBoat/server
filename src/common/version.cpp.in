@@ -1,26 +1,26 @@
 #include "common/version.h"
 
-const char* version::GetGitSha()
+auto version::GetGitSha() -> const char*
 {
     return "@GIT_SHA1@";
 }
 
-const char* version::GetGitBranch()
+auto version::GetGitBranch() -> const char*
 {
     return "@GIT_BRANCH@";
 }
 
-const char* version::GetGitDate()
+auto version::GetGitDate() -> const char*
 {
     return "@GIT_DATE@";
 }
 
-const char* version::GetGitCommitSubject()
+auto version::GetGitCommitSubject() -> const char*
 {
     return "@GIT_COMMIT_SUBJECT@";
 }
 
-const char* version::GetVersionString()
+auto version::GetVersionString() -> const char*
 {
     return "@GIT_BRANCH@ (@GIT_SHA1@)";
 }

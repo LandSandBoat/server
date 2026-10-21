@@ -61,7 +61,7 @@ struct GP_CLI_HEADER
                                                                                                        \
         static constexpr std::string_view name     = #PacketName;                                      \
         static constexpr PacketC2S        packetId = PacketC2S::PacketName;                            \
-        static constexpr size_t           getMinSize()                                                 \
+        static constexpr auto             getMinSize() -> size_t                                       \
         {                                                                                              \
             return offsetof(PacketName, VLAField);                                                     \
         }                                                                                              \

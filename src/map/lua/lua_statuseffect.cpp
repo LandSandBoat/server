@@ -39,50 +39,50 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getEffectType()
+auto CLuaStatusEffect::getEffectType() -> uint32
 {
     return static_cast<uint32>(m_PLuaStatusEffect->GetStatusID());
 }
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getSubType()
+auto CLuaStatusEffect::getSubType() -> uint32
 {
     return m_PLuaStatusEffect->GetSubID();
 }
 
 //======================================================//
 
-uint16 CLuaStatusEffect::getPower()
+auto CLuaStatusEffect::getPower() -> uint16
 {
     return m_PLuaStatusEffect->GetPower();
 }
 
-uint16 CLuaStatusEffect::getSubPower()
+auto CLuaStatusEffect::getSubPower() -> uint16
 {
     return m_PLuaStatusEffect->GetSubPower();
 }
 
-uint16 CLuaStatusEffect::getTier()
+auto CLuaStatusEffect::getTier() -> uint16
 {
     return m_PLuaStatusEffect->GetTier();
 }
 
-uint8 CLuaStatusEffect::getEffectSlot()
+auto CLuaStatusEffect::getEffectSlot() -> uint8
 {
     return m_PLuaStatusEffect->GetEffectSlot();
 }
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getDuration()
+auto CLuaStatusEffect::getDuration() -> uint32
 {
     return static_cast<uint32>(timer::count_milliseconds(m_PLuaStatusEffect->GetDuration()));
 }
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getStartTime()
+auto CLuaStatusEffect::getStartTime() -> uint32
 {
     return earth_time::timestamp(timer::to_utc(m_PLuaStatusEffect->GetStartTime()));
 }
@@ -93,7 +93,7 @@ uint32 CLuaStatusEffect::getStartTime()
  *                                                                        *
  ************************************************************************/
 
-uint32 CLuaStatusEffect::getLastTick()
+auto CLuaStatusEffect::getLastTick() -> uint32
 {
     uint32 total = 0;
 
@@ -113,7 +113,7 @@ uint32 CLuaStatusEffect::getLastTick()
  *                                                                       *
  ************************************************************************/
 
-uint32 CLuaStatusEffect::getTimeRemaining()
+auto CLuaStatusEffect::getTimeRemaining() -> uint32
 {
     uint32 remaining = 0;
     if (m_PLuaStatusEffect->GetDuration() > 0s)
@@ -131,12 +131,12 @@ uint32 CLuaStatusEffect::getTimeRemaining()
  *                                                                       *
  ************************************************************************/
 
-uint32 CLuaStatusEffect::getTickCount()
+auto CLuaStatusEffect::getTickCount() -> uint32
 {
     return m_PLuaStatusEffect->GetElapsedTickCount();
 }
 
-uint32 CLuaStatusEffect::getTick()
+auto CLuaStatusEffect::getTick() -> uint32
 {
     return static_cast<uint32>(timer::count_milliseconds(m_PLuaStatusEffect->GetTickTime()));
 }
@@ -231,7 +231,7 @@ void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getEffectFlags()
+auto CLuaStatusEffect::getEffectFlags() -> uint32
 {
     return static_cast<uint32>(m_PLuaStatusEffect->GetEffectFlags());
 }
@@ -251,27 +251,27 @@ void CLuaStatusEffect::delEffectFlag(uint32 flag)
     m_PLuaStatusEffect->DelEffectFlag(static_cast<xi::StatusEffectFlag>(flag));
 }
 
-bool CLuaStatusEffect::hasEffectFlag(uint32 flag)
+auto CLuaStatusEffect::hasEffectFlag(uint32 flag) -> bool
 {
     return m_PLuaStatusEffect->HasEffectFlag(static_cast<xi::StatusEffectFlag>(flag));
 }
 
-uint16 CLuaStatusEffect::getIcon()
+auto CLuaStatusEffect::getIcon() -> uint16
 {
     return m_PLuaStatusEffect->GetIcon();
 }
 
-uint16 CLuaStatusEffect::getSubIcon()
+auto CLuaStatusEffect::getSubIcon() -> uint16
 {
     return m_PLuaStatusEffect->GetSubIcon();
 }
 
-uint16 CLuaStatusEffect::getSourceType()
+auto CLuaStatusEffect::getSourceType() -> uint16
 {
     return m_PLuaStatusEffect->GetSourceType();
 }
 
-uint32 CLuaStatusEffect::getSourceTypeParam()
+auto CLuaStatusEffect::getSourceTypeParam() -> uint32
 {
     return m_PLuaStatusEffect->GetSourceTypeParam();
 }
@@ -323,7 +323,7 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("getSubIcon", CLuaStatusEffect::getSubIcon);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaStatusEffect& effect)
+auto operator<<(std::ostream& os, const CLuaStatusEffect& effect) -> std::ostream&
 {
     std::string id = effect.GetStatusEffect() ? std::to_string(static_cast<uint16>(effect.GetStatusEffect()->GetStatusID())) : "nullptr";
     return os << "CLuaStatusEffect(" << id << ")";

@@ -47,7 +47,7 @@ public:
         return m_PLuaAction;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
+    friend auto operator<<(std::ostream& out, const CLuaAction& action) -> std::ostream&;
 
     void ID(uint32 actionTargetId, uint32 newactionTargetId) const;
     auto getPrimaryTargetID() const -> uint32;
@@ -73,7 +73,7 @@ public:
     void addEffectMessage(uint32 actionTargetId, MsgBasic addEffectMessage) const;
     auto addAdditionalTarget(uint32 actionTargetId) const -> bool;
 
-    bool operator==(const CLuaAction& other) const
+    auto operator==(const CLuaAction& other) const -> bool
     {
         return this->m_PLuaAction == other.m_PLuaAction;
     }

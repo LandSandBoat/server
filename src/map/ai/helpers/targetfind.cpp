@@ -431,7 +431,7 @@ void CTargetFind::addEntity(CBattleEntity* PTarget, bool withPet)
     }
 }
 
-CBattleEntity* CTargetFind::findMaster(CBattleEntity* PTarget)
+auto CTargetFind::findMaster(CBattleEntity* PTarget) -> CBattleEntity*
 {
     if (PTarget->PMaster != nullptr)
     {
@@ -440,7 +440,7 @@ CBattleEntity* CTargetFind::findMaster(CBattleEntity* PTarget)
     return PTarget;
 }
 
-bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
+auto CTargetFind::isMobOwner(CBattleEntity* PTarget) -> bool
 {
     if (dynamic_cast<const CCharEntity*>(findMaster(m_PBattleEntity)) == nullptr || dynamic_cast<const CCharEntity*>(PTarget) != nullptr)
     {
@@ -479,7 +479,7 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 /*
 validEntity will check if the given entity can be targeted in the AoE.
 */
-bool CTargetFind::validEntity(CBattleEntity* PTarget)
+auto CTargetFind::validEntity(CBattleEntity* PTarget) -> bool
 {
     // Assume entity is valid only need to check target not null
     if (PTarget == nullptr)
@@ -628,7 +628,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     return false;
 }
 
-bool CTargetFind::checkIsPlayer(CBattleEntity* PTarget)
+auto CTargetFind::checkIsPlayer(CBattleEntity* PTarget) -> bool
 {
     if (PTarget == nullptr)
     {
@@ -643,12 +643,12 @@ bool CTargetFind::checkIsPlayer(CBattleEntity* PTarget)
     return PTarget->PMaster != nullptr && dynamic_cast<const CCharEntity*>(PTarget->PMaster) != nullptr;
 }
 
-bool CTargetFind::isWithinArea(position_t* pos)
+auto CTargetFind::isWithinArea(position_t* pos) -> bool
 {
     return distance(*m_PRadiusAround, *pos) <= m_radius;
 }
 
-bool CTargetFind::isWithinCone(position_t* pos)
+auto CTargetFind::isWithinCone(position_t* pos) -> bool
 {
     position_t PPoint;
 
@@ -682,7 +682,7 @@ bool CTargetFind::isWithinCone(position_t* pos)
     return true;
 }
 
-bool CTargetFind::isWithinRange(position_t* pos, float range)
+auto CTargetFind::isWithinRange(position_t* pos, float range) -> bool
 {
     return distance(m_PBattleEntity->loc.p, *pos) <= range;
 }

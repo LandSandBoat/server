@@ -42,33 +42,33 @@ class CLuaPetSkill
 public:
     CLuaPetSkill(CPetSkill*);
 
-    CPetSkill* GetMobSkill() const
+    auto GetMobSkill() const -> CPetSkill*
     {
         return m_PLuaPetSkill;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaPetSkill& mobskill);
+    friend auto operator<<(std::ostream& out, const CLuaPetSkill& mobskill) -> std::ostream&;
 
-    float  getTP();
-    auto   getMobHP() const -> int32;
-    uint8  getMobHPP();
-    uint16 getID();
-    int16  getParam();
-    bool   isAoE();
-    bool   isConal();
-    bool   isSingle();
-    bool   hasMissMsg();
-    void   setMsg(MsgBasic message);
-    auto   getMsg() -> MsgBasic;
-    uint16 getTotalTargets();
-    uint32 getPrimaryTargetID();
-    void   setFinalAnimationSub(uint8 newAnimationSub);
-    auto   getAttackType() const -> xi::AttackType;
-    void   setAttackType(xi::AttackType attackType) const;
-    auto   isCritical() const -> bool;
-    void   setCritical(bool isCritical) const;
+    auto getTP() -> float;
+    auto getMobHP() const -> int32;
+    auto getMobHPP() -> uint8;
+    auto getID() -> uint16;
+    auto getParam() -> int16;
+    auto isAoE() -> bool;
+    auto isConal() -> bool;
+    auto isSingle() -> bool;
+    auto hasMissMsg() -> bool;
+    void setMsg(MsgBasic message);
+    auto getMsg() -> MsgBasic;
+    auto getTotalTargets() -> uint16;
+    auto getPrimaryTargetID() -> uint32;
+    void setFinalAnimationSub(uint8 newAnimationSub);
+    auto getAttackType() const -> xi::AttackType;
+    void setAttackType(xi::AttackType attackType) const;
+    auto isCritical() const -> bool;
+    void setCritical(bool isCritical) const;
 
-    bool operator==(const CLuaPetSkill& other) const
+    auto operator==(const CLuaPetSkill& other) const -> bool
     {
         return this->m_PLuaPetSkill == other.m_PLuaPetSkill;
     }

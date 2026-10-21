@@ -44,44 +44,44 @@ class CLuaSpell
 public:
     CLuaSpell(CSpell*);
 
-    CSpell* GetSpell() const
+    auto GetSpell() const -> CSpell*
     {
         return m_PLuaSpell;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaSpell& spell);
+    friend auto operator<<(std::ostream& out, const CLuaSpell& spell) -> std::ostream&;
 
-    void   setMsg(MsgBasic messageID);
-    void   setModifier(ActionModifier modifier) const;
-    void   setCritical(bool isCritical) const;
-    void   setAoE(uint8 aoe);
-    void   setFlag(uint8 flags);
-    void   setRadius(float radius);
-    void   setAnimation(uint16 animationID);
-    void   setCastTime(uint32 casttime);
-    void   setMPCost(uint16 mpcost);
-    bool   canTargetEnemy();
-    auto   getAoE() const -> uint8;
-    auto   isAoE() const -> bool;
-    auto   isConal() const -> bool;
-    float  getRadius();
-    bool   tookEffect();
-    uint16 getTotalTargets();
-    auto   getMagicBurstMessage() const -> MsgBasic;
-    uint16 getElement();
-    uint16 getID();
-    uint16 getMPCost();
-    uint8  getSkillType();
-    uint8  getSpellGroup();
-    uint8  getSpellFamily();
-    uint8  getFlag();
-    auto   getLevel(xi::Job jobId) -> uint8;
-    uint32 getCastTime();
-    uint32 getPrimaryTargetID();
-    auto   getKnockback() const -> Knockback;
-    auto   isCritical() const -> bool;
+    void setMsg(MsgBasic messageID);
+    void setModifier(ActionModifier modifier) const;
+    void setCritical(bool isCritical) const;
+    void setAoE(uint8 aoe);
+    void setFlag(uint8 flags);
+    void setRadius(float radius);
+    void setAnimation(uint16 animationID);
+    void setCastTime(uint32 casttime);
+    void setMPCost(uint16 mpcost);
+    auto canTargetEnemy() -> bool;
+    auto getAoE() const -> uint8;
+    auto isAoE() const -> bool;
+    auto isConal() const -> bool;
+    auto getRadius() -> float;
+    auto tookEffect() -> bool;
+    auto getTotalTargets() -> uint16;
+    auto getMagicBurstMessage() const -> MsgBasic;
+    auto getElement() -> uint16;
+    auto getID() -> uint16;
+    auto getMPCost() -> uint16;
+    auto getSkillType() -> uint8;
+    auto getSpellGroup() -> uint8;
+    auto getSpellFamily() -> uint8;
+    auto getFlag() -> uint8;
+    auto getLevel(xi::Job jobId) -> uint8;
+    auto getCastTime() -> uint32;
+    auto getPrimaryTargetID() -> uint32;
+    auto getKnockback() const -> Knockback;
+    auto isCritical() const -> bool;
 
-    bool operator==(const CLuaSpell& other) const
+    auto operator==(const CLuaSpell& other) const -> bool
     {
         return this->m_PLuaSpell == other.m_PLuaSpell;
     }

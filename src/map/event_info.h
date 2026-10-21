@@ -66,7 +66,7 @@ struct EventInfo : EventPrep
     bool               canSkip       = false;
     bool               isHidden      = false;
 
-    bool hasCutsceneOption(int32 _option)
+    auto hasCutsceneOption(int32 _option) -> bool
     {
         return std::ranges::contains(cutsceneOptions, _option);
     }

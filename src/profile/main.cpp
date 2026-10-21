@@ -27,7 +27,7 @@
 #include <ms/applink.c>
 #endif
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     const auto profileApp = std::make_unique<ProfileApplication>(argc, argv);
 

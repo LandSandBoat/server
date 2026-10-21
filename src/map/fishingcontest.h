@@ -59,7 +59,7 @@ struct FishingContest
     uint32                   startTime  = 0;
     uint32                   changeTime = 0xFFFFFFFF; // Never change = default
 
-    bool isValid()
+    auto isValid() -> bool
     {
         return status <= FISHING_CONTEST_STATUS::CLOSED &&
                criteria <= FISHING_CONTEST_CRITERIA::BOTH &&
@@ -116,33 +116,33 @@ void SetContestFish(uint16 newFish);
 void SetContestStartTime(uint32 startTime);
 
 // Contest Data: Gets
-auto   GetContestStatus() -> FISHING_CONTEST_STATUS;
-auto   GetContestCriteria() -> FISHING_CONTEST_CRITERIA;
-auto   GetContestMeasure() -> FISHING_CONTEST_MEASURE;
-uint16 GetContestFish();
-uint32 GetContestStartTime();
-uint32 GetContestChangeTime();
+auto GetContestStatus() -> FISHING_CONTEST_STATUS;
+auto GetContestCriteria() -> FISHING_CONTEST_CRITERIA;
+auto GetContestMeasure() -> FISHING_CONTEST_MEASURE;
+auto GetContestFish() -> uint16;
+auto GetContestStartTime() -> uint32;
+auto GetContestChangeTime() -> uint32;
 
 // Contest Control
-void   ProgressContest();
-void   ScoreContest();
-uint32 GetStageChangeTime(FISHING_CONTEST_STATUS stage, uint32 stageStartTime);
-void   UpdateRankingHistory();
+void ProgressContest();
+void ScoreContest();
+auto GetStageChangeTime(FISHING_CONTEST_STATUS stage, uint32 stageStartTime) -> uint32;
+void UpdateRankingHistory();
 
 // Contest Entries
-auto  GetFishRankEntry(uint8 position) -> FishingContestEntry*;
-auto  GetPlayerEntry(CCharEntity* PChar) -> FishingContestEntry*;
-uint8 FishingRankEntryCount();
+auto GetFishRankEntry(uint8 position) -> FishingContestEntry*;
+auto GetPlayerEntry(CCharEntity* PChar) -> FishingContestEntry*;
+auto FishingRankEntryCount() -> uint8;
 
 // Data storage
-bool WriteContestData();
-bool WriteInitialContestData();
-bool WriteContestEntryData(FishingContestEntry* entry);
+auto WriteContestData() -> bool;
+auto WriteInitialContestData() -> bool;
+auto WriteContestEntryData(FishingContestEntry* entry) -> bool;
 
 // Player Utils
-bool SubmitFish(CCharEntity* PChar, uint32 score);
-bool WithdrawFish(CCharEntity* PChar);
-bool ClaimContestReward(CCharEntity* PChar);
+auto SubmitFish(CCharEntity* PChar, uint32 score) -> bool;
+auto WithdrawFish(CCharEntity* PChar) -> bool;
+auto ClaimContestReward(CCharEntity* PChar) -> bool;
 auto GetFishingContestHistory(CCharEntity* PChar) -> FishingContestHistory;
 
 // Initialization

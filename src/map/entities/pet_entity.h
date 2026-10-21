@@ -51,19 +51,19 @@ public:
     CPetEntity(PET_TYPE petType, uint32 petID);
     ~CPetEntity() override;
 
-    uint32            petID() const;
-    PET_TYPE          getPetType() const;
-    uint8             getSpawnLevel();
-    void              setSpawnLevel(uint8 level);
-    timer::time_point getJugSpawnTime();                       // initial spawn time of this pet if it's a jug pet
-    timer::duration   getJugDuration();                        // duration of this jug pet in seconds
-    void              setJugDuration(timer::duration seconds); // sets the duration of this jug pet in seconds
-    bool              isBstPet() const;
-    const std::string GetScriptName();
-    WYVERN_TYPE       getWyvernType();
+    auto petID() const -> uint32;
+    auto getPetType() const -> PET_TYPE;
+    auto getSpawnLevel() -> uint8;
+    void setSpawnLevel(uint8 level);
+    auto getJugSpawnTime() -> timer::time_point;  // initial spawn time of this pet if it's a jug pet
+    auto getJugDuration() -> timer::duration;     // duration of this jug pet in seconds
+    void setJugDuration(timer::duration seconds); // sets the duration of this jug pet in seconds
+    auto isBstPet() const -> bool;
+    auto GetScriptName() -> const std::string;
+    auto getWyvernType() -> WYVERN_TYPE;
 
-    bool shouldPersistThroughZone(); // if true, zoning should not cause a currently active pet to despawn
-    void loadPetZoningInfo();        // loads info from previous zone (hp / mp / tp / spawn time). This MUST be called after Spawn()
+    auto shouldPersistThroughZone() -> bool; // if true, zoning should not cause a currently active pet to despawn
+    void loadPetZoningInfo();                // loads info from previous zone (hp / mp / tp / spawn time). This MUST be called after Spawn()
 
     void OnPetSkillFinished(CPetSkillState& state, action_t& action);
 
@@ -76,8 +76,8 @@ public:
     void Die() override;
     void Spawn() override;
     void OnAbility(CAbilityState&, action_t&) override;
-    bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
-    bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
+    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
 
 private:
     uint32            petID_;

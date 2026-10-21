@@ -43,7 +43,7 @@ CSpell::CSpell(SpellID id)
 {
 }
 
-std::unique_ptr<CSpell> CSpell::clone()
+auto CSpell::clone() -> std::unique_ptr<CSpell>
 {
     // no make_unique because it requires the copy constructor to be public
     return std::unique_ptr<CSpell>(new CSpell(*this));
@@ -54,7 +54,7 @@ void CSpell::setTotalTargets(uint16 total)
     m_totalTargets = total;
 }
 
-uint16 CSpell::getTotalTargets() const
+auto CSpell::getTotalTargets() const -> uint16
 {
     return m_totalTargets;
 }
@@ -64,7 +64,7 @@ void CSpell::setID(SpellID id)
     m_ID = id;
 }
 
-SpellID CSpell::getID()
+auto CSpell::getID() -> SpellID
 {
     return m_ID;
 }
@@ -79,7 +79,7 @@ void CSpell::setJob(const std::array<uint8, MAX_JOBTYPE>& jobs)
     m_job = jobs;
 }
 
-timer::duration CSpell::getCastTime() const
+auto CSpell::getCastTime() const -> timer::duration
 {
     return m_castTime;
 }
@@ -89,7 +89,7 @@ void CSpell::setCastTime(timer::duration CastTime)
     m_castTime = CastTime;
 }
 
-timer::duration CSpell::getRecastTime() const
+auto CSpell::getRecastTime() const -> timer::duration
 {
     return m_recastTime;
 }
@@ -99,7 +99,7 @@ void CSpell::setRecastTime(timer::duration RecastTime)
     m_recastTime = RecastTime;
 }
 
-const std::string& CSpell::getName()
+auto CSpell::getName() -> const std::string&
 {
     return m_name;
 }
@@ -114,7 +114,7 @@ auto CSpell::getSpellGroup() const -> SPELLGROUP
     return m_spellGroup;
 }
 
-SPELLFAMILY CSpell::getSpellFamily()
+auto CSpell::getSpellFamily() -> SPELLFAMILY
 {
     return m_spellFamily;
 }
@@ -139,7 +139,7 @@ void CSpell::setSkillType(xi::SkillType SkillType)
     m_skillType = SkillType;
 }
 
-bool CSpell::isBuff() const
+auto CSpell::isBuff() const -> bool
 {
     return (getValidTarget() & TARGET_SELF) && !(getValidTarget() & TARGET_ENEMY);
 }
@@ -164,66 +164,66 @@ void CSpell::setStatusEffectTier(const uint8 tier)
     statusEffectTier_ = tier;
 }
 
-bool CSpell::tookEffect() const
+auto CSpell::tookEffect() const -> bool
 {
     return !(m_message == MsgBasic::MagicNoEffect || m_message == MsgBasic::MagicResistedTarget || m_message == MsgBasic::TargetNoEffect || m_message == MsgBasic::MagicResisted || m_message == MsgBasic::MagicCompleteResist || m_message == MsgBasic::MagicFail);
 }
 
-bool CSpell::hasMPCost()
+auto CSpell::hasMPCost() -> bool
 {
     return m_spellGroup != SPELLGROUP_SONG && m_spellGroup != SPELLGROUP_NINJUTSU && m_spellGroup != SPELLGROUP_TRUST;
 }
 
-bool CSpell::isHeal()
+auto CSpell::isHeal() -> bool
 {
     return ((getValidTarget() & TARGET_SELF) && getSkillType() == xi::SkillType::HealingMagic) || m_ID == SpellID::Pollen || m_ID == SpellID::Wild_Carrot ||
            m_ID == SpellID::Healing_Breeze || m_ID == SpellID::Magic_Fruit;
 }
 
-bool CSpell::isCure()
+auto CSpell::isCure() -> bool
 {
     return ((static_cast<uint16>(m_ID) >= 1 && static_cast<uint16>(m_ID) <= 11) || m_ID == SpellID::Cura || m_ID == SpellID::Cura_II ||
             m_ID == SpellID::Cura_III);
 }
 
-bool CSpell::isDebuff()
+auto CSpell::isDebuff() -> bool
 {
     return ((getValidTarget() & TARGET_ENEMY) && getSkillType() == xi::SkillType::EnfeeblingMagic) || m_spellFamily == SPELLFAMILY_ELE_DOT ||
            m_spellFamily == SPELLFAMILY_BIO || m_ID == SpellID::Stun || m_ID == SpellID::Curse;
 }
 
-bool CSpell::isNa()
+auto CSpell::isNa() -> bool
 {
     return (static_cast<uint16>(m_ID) >= 14 && static_cast<uint16>(m_ID) <= 20) || m_ID == SpellID::Erase;
 }
 
-bool CSpell::isRaise()
+auto CSpell::isRaise() -> bool
 {
     return (static_cast<uint16>(m_ID) >= 12 && static_cast<uint16>(m_ID) <= 13) || m_ID == SpellID::Raise_III || m_ID == SpellID::Arise;
 }
 
-bool CSpell::isSevere()
+auto CSpell::isSevere() -> bool
 {
     return m_ID == SpellID::Death || m_ID == SpellID::Impact || m_ID == SpellID::Meteor || m_ID == SpellID::Meteor_II || m_ID == SpellID::Comet;
 }
 
-bool CSpell::canHitShadow()
+auto CSpell::canHitShadow() -> bool
 {
     return m_ID != SpellID::Meteor_II && canTargetEnemy();
 }
 
-bool CSpell::dealsDamage() const
+auto CSpell::dealsDamage() const -> bool
 {
     // damage or drain hp
     return m_message == MsgBasic::MagicDamage || m_message == MsgBasic::MagicDrainsHP || m_message == MsgBasic::MagicBurstDamage || m_message == MsgBasic::MagicBurstDrainsHP;
 }
 
-float CSpell::getRadius() const
+auto CSpell::getRadius() const -> float
 {
     return m_radius;
 }
 
-xi::ZoneMisc CSpell::getZoneMisc() const
+auto CSpell::getZoneMisc() const -> xi::ZoneMisc
 {
     return m_zoneMisc;
 }
@@ -243,7 +243,7 @@ void CSpell::setAnimationID(uint16 AnimationID)
     m_animation = AnimationID;
 }
 
-timer::duration CSpell::getAnimationTime() const
+auto CSpell::getAnimationTime() const -> timer::duration
 {
     return m_animationTime;
 }
@@ -253,7 +253,7 @@ void CSpell::setAnimationTime(timer::duration AnimationTime)
     m_animationTime = AnimationTime;
 }
 
-uint16 CSpell::getMPCost() const
+auto CSpell::getMPCost() const -> uint16
 {
     return m_mpCost;
 }
@@ -263,12 +263,12 @@ void CSpell::setMPCost(uint16 MP)
     m_mpCost = MP;
 }
 
-bool CSpell::canTargetEnemy() const
+auto CSpell::canTargetEnemy() const -> bool
 {
     return (getValidTarget() & TARGET_ENEMY) && !(getValidTarget() & TARGET_SELF);
 }
 
-uint8 CSpell::getAOE() const
+auto CSpell::getAOE() const -> uint8
 {
     return m_AOE;
 }
@@ -278,7 +278,7 @@ void CSpell::setAOE(uint8 AOE)
     m_AOE = AOE;
 }
 
-uint16 CSpell::getBase() const
+auto CSpell::getBase() const -> uint16
 {
     return m_base;
 }
@@ -288,7 +288,7 @@ void CSpell::setBase(uint16 base)
     m_base = base;
 }
 
-uint16 CSpell::getValidTarget() const
+auto CSpell::getValidTarget() const -> uint16
 {
     return m_ValidTarget;
 }
@@ -298,7 +298,7 @@ void CSpell::setValidTarget(uint16 ValidTarget)
     m_ValidTarget = ValidTarget;
 }
 
-float CSpell::getMultiplier() const
+auto CSpell::getMultiplier() const -> float
 {
     return m_multiplier;
 }
@@ -353,7 +353,7 @@ void CSpell::setPrimaryTargetID(uint32 targid)
     m_primaryTargetID = targid;
 }
 
-uint16 CSpell::getElement() const
+auto CSpell::getElement() const -> uint16
 {
     return m_element;
 }
@@ -368,7 +368,7 @@ void CSpell::setCE(int32 ce)
     m_CE = ce;
 }
 
-int32 CSpell::getCE() const
+auto CSpell::getCE() const -> int32
 {
     return m_CE;
 }
@@ -383,7 +383,7 @@ void CSpell::setVE(int32 ve)
     m_VE = ve;
 }
 
-int32 CSpell::getVE() const
+auto CSpell::getVE() const -> int32
 {
     return m_VE;
 }
@@ -393,12 +393,12 @@ void CSpell::setModifiedRecast(timer::duration mrec)
     m_modifiedRecastTime = mrec;
 }
 
-timer::duration CSpell::getModifiedRecast() const
+auto CSpell::getModifiedRecast() const -> timer::duration
 {
     return m_modifiedRecastTime;
 }
 
-uint8 CSpell::getRequirements() const
+auto CSpell::getRequirements() const -> uint8
 {
     return m_requirements;
 }
@@ -408,7 +408,7 @@ void CSpell::setRequirements(uint8 requirements)
     m_requirements = requirements;
 }
 
-uint8 CSpell::getFlag() const
+auto CSpell::getFlag() const -> uint8
 {
     return m_flag;
 }
@@ -418,17 +418,17 @@ void CSpell::setFlag(uint8 flag)
     m_flag = flag;
 }
 
-const std::string& CSpell::getContentTag()
+auto CSpell::getContentTag() -> const std::string&
 {
     return m_contentTag;
 }
 
-float CSpell::getRange() const
+auto CSpell::getRange() const -> float
 {
     return m_range;
 }
 
-uint32 CSpell::getPrimaryTargetID() const
+auto CSpell::getPrimaryTargetID() const -> uint32
 {
     return m_primaryTargetID;
 }
@@ -645,7 +645,7 @@ void LoadSpellList()
     }
 }
 
-CSpell* GetSpellByMonsterSkillId(uint16 SkillID)
+auto GetSpellByMonsterSkillId(uint16 SkillID) -> CSpell*
 {
     std::map<uint16, uint16>::iterator it = PMobSkillToBlueSpell.find(SkillID);
     if (it == PMobSkillToBlueSpell.end())
@@ -663,7 +663,7 @@ CSpell* GetSpellByMonsterSkillId(uint16 SkillID)
 }
 
 // Get Spell By ID
-CSpell* GetSpell(SpellID SpellID)
+auto GetSpell(SpellID SpellID) -> CSpell*
 {
     auto id = static_cast<uint16>(SpellID);
     if (id >= MAX_SPELL_ID)
@@ -701,14 +701,14 @@ auto lookupIdByName(const std::string_view name) -> Maybe<SpellID>
     return entry->second;
 }
 
-bool CanUseSpell(CBattleEntity* PCaster, SpellID SpellID)
+auto CanUseSpell(CBattleEntity* PCaster, SpellID SpellID) -> bool
 {
     CSpell* spell = GetSpell(SpellID);
     return CanUseSpell(PCaster, spell);
 }
 
 // Check If user can cast spell
-bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
+auto CanUseSpell(CBattleEntity* PCaster, CSpell* spell) -> bool
 {
     if (spell == nullptr)
     {

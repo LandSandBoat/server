@@ -27,10 +27,10 @@ template <class T>
 class Singleton
 {
 public:
-    Singleton(const Singleton&)            = delete;
-    Singleton& operator=(const Singleton&) = delete;
+    Singleton(const Singleton&)                    = delete;
+    auto operator=(const Singleton&) -> Singleton& = delete;
 
-    static T* getInstance()
+    static auto getInstance() -> T*
     {
         if (!_instance)
         {

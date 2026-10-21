@@ -33,19 +33,19 @@ public:
     CItemShop(const CItemShop& other);
     virtual ~CItemShop();
 
-    uint32 getMinPrice() const;
-    uint32 getMaxPrice() const;
+    auto getMinPrice() const -> uint32;
+    auto getMaxPrice() const -> uint32;
 
-    bool IsInMenu();
-    bool IsDailyIncrease() const;
+    auto IsInMenu() -> bool;
+    auto IsDailyIncrease() const -> bool;
 
-    void   setMinPrice(uint32 price);
-    void   setMaxPrice(uint32 price);
-    void   setDailyIncrease(uint16 quantity);
-    uint16 getDailyIncrease() const;
-    void   setInitialQuantity(uint16 quantity);
-    uint16 getInitialQuantity() const;
-    uint16 getSellPrice();
+    void setMinPrice(uint32 price);
+    void setMaxPrice(uint32 price);
+    void setDailyIncrease(uint16 quantity);
+    auto getDailyIncrease() const -> uint16;
+    void setInitialQuantity(uint16 quantity);
+    auto getInitialQuantity() const -> uint16;
+    auto getSellPrice() -> uint16;
 
 private:
     uint32 m_MinPrice;

@@ -102,7 +102,7 @@ void lua_cleanup()
 /**
  * @brief
  */
-std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
+auto lua_to_string_depth(const sol::object& obj, std::size_t depth) -> std::string
 {
     switch (obj.get_type())
     {
@@ -195,7 +195,7 @@ std::string lua_to_string_depth(const sol::object& obj, std::size_t depth)
 /**
  * @brief
  */
-std::string lua_to_string(sol::variadic_args va)
+auto lua_to_string(sol::variadic_args va) -> std::string
 {
     TracyZoneScoped;
 
@@ -229,7 +229,7 @@ void lua_print(sol::variadic_args va)
     ShowLua(lua_to_string(va).c_str());
 }
 
-std::string lua_fmt(const std::string& fmtStr, sol::variadic_args va)
+auto lua_fmt(const std::string& fmtStr, sol::variadic_args va) -> std::string
 {
     fmt::dynamic_format_arg_store<fmt::format_context> store;
     for (const auto& arg : va)
