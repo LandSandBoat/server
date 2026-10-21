@@ -41,24 +41,13 @@ find_package(LuaJIT REQUIRED)
 find_package(OpenSSLlibcrypto REQUIRED)
 find_package(OpenSSLlibssl REQUIRED)
 
-if(UNIX AND NOT APPLE)
-    # zstd is sometimes a prereq for binutils
-    find_package(Zstd REQUIRED)
-    find_package(Binutils REQUIRED)
-endif()
-
-# Tracy flags
-option(TRACY_ENABLE "Enable Tracy profiling." OFF)
-if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY) # Also handle close flags
-    set(TRACY_ENABLE ON)
-endif()
-message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
-
+include(tools/Tracy)
 add_subdirectory(ext)
 
 # After add_subdirectory(ext) so third-party targets never inherit CMAKE_CXX_CLANG_TIDY.
 # Dependencies pulled in later have to be wrapped in suspend_clang_tidy()/resume_clang_tidy().
 include(tools/ClangTidy)
+include(tools/ClangFormat)
 include(tools/Fuzzing)
 
 include(project/Codegen)
