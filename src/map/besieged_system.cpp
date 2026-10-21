@@ -24,104 +24,104 @@
 namespace besieged
 {
 
-uint8 GetAstralCandescence()
+auto GetAstralCandescence() -> xi::BesiegedStronghold
 {
-    return STRONGHOLD::ALZAHBI;
+    return xi::BesiegedStronghold::AlZahbi;
 }
 
-uint8 GetAlZahbiOrders()
+auto GetAlZahbiOrders() -> xi::AlZahbiOrders
 {
-    return ORDERS_ALZAHBI_DEFENSE;
+    return xi::AlZahbiOrders::Defend;
 }
 
-uint8 GetMamookOrders()
+auto GetMamookOrders() -> xi::BeastmanOrders
 {
-    return ORDERS_DEFEND;
+    return xi::BeastmanOrders::Defend;
 }
 
-uint8 GetMamookLevel()
+auto GetMamookLevel() -> uint8
 {
-    return STRONGHOLD_LEVEL::LEVEL1;
+    return 1;
 }
 
-uint8 GetMamookForces()
+auto GetMamookForces() -> uint8
 {
     return 95;
 }
 
-uint8 GetMamookMirrors()
+auto GetMamookMirrors() -> uint8
 {
     return 0;
 }
 
-uint8 GetMamookPrisoners()
+auto GetMamookPrisoners() -> uint8
 {
     return 0;
 }
 
-bool GetMamookMirrorDestroyed()
+auto GetMamookMirrorDestroyed() -> bool
 {
-    return 0;
+    return false;
 }
 
-uint8 GetHalvungOrders()
+auto GetHalvungOrders() -> xi::BeastmanOrders
 {
-    return ORDERS_DEFEND;
+    return xi::BeastmanOrders::Defend;
 }
 
-uint8 GetHalvungLevel()
+auto GetHalvungLevel() -> uint8
 {
-    return STRONGHOLD_LEVEL::LEVEL1;
+    return 1;
 }
 
-uint8 GetHalvungForces()
+auto GetHalvungForces() -> uint8
 {
     return 95;
 }
 
-uint8 GetHalvungMirrors()
+auto GetHalvungMirrors() -> uint8
 {
     return 0;
 }
 
-uint8 GetHalvungPrisoners()
+auto GetHalvungPrisoners() -> uint8
 {
     return 0;
 }
 
-bool GetHalvungMirrorDestroyed()
+auto GetHalvungMirrorDestroyed() -> bool
 {
-    return 0;
+    return false;
 }
 
-uint8 GetArrapagoOrders()
+auto GetArrapagoOrders() -> xi::BeastmanOrders
 {
-    return ORDERS_DEFEND;
+    return xi::BeastmanOrders::Defend;
 }
 
-uint8 GetArrapagoLevel()
+auto GetArrapagoLevel() -> uint8
 {
-    return STRONGHOLD_LEVEL::LEVEL1;
+    return 1;
 }
 
-uint8 GetArrapagoForces()
+auto GetArrapagoForces() -> uint8
 {
     return 95;
 }
 
-uint8 GetArrapagoMirrors()
+auto GetArrapagoMirrors() -> uint8
 {
     return 0;
 }
 
-uint8 GetArrapagoPrisoners()
+auto GetArrapagoPrisoners() -> uint8
 {
     return 0;
 }
 
-bool GetArrapagoMirrorDestroyed()
+auto GetArrapagoMirrorDestroyed() -> bool
 {
-    return 0;
+    return false;
 }
 
 }; // namespace besieged

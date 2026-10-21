@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+
+values:
+  train:   0
+  advance: 1
+  attack:  2
+  retreat: 3 # Capture needed
+  defend:  4
+  prepare: 5
