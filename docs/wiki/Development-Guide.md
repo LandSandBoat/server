@@ -401,6 +401,30 @@ if (auto PChar = static_cast<CCharEntity*>(baseEntity))
 }
 ```
 
+#### <a id="c-trailing-return-types"/>Trailing return types for non-void functions
+
+`modernize-use-trailing-return-type`
+
+Functions that return a value use a trailing return type, in both the declaration and the definition. Functions returning `void` keep the plain form, and lambdas are left alone.
+
+```cpp
+// Correct ✔️
+auto getName() const -> const std::string&;
+auto Classname::getValue() const -> uint16
+{
+    return value;
+}
+void setName(const std::string& name);
+
+// Wrong ❌
+const std::string& getName() const;
+uint16 Classname::getValue() const
+{
+    return value;
+}
+auto setName(const std::string& name) -> void;
+```
+
 #### <a id="c-arg-param-spacing"/>Arg/Param spacing
 
 ```cpp
