@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.skillchainType
+
+values:
+  none:           0 # Lv0 None
+  transfixion:    1 # Lv1 Light
+  compression:    2 # Lv1 Dark
+  liquefaction:   3 # Lv1 Fire
+  scission:       4 # Lv1 Earth
+  reverberation:  5 # Lv1 Water
+  detonation:     6 # Lv1 Wind
+  induration:     7 # Lv1 Ice
+  impaction:      8 # Lv1 Thunder
+  gravitation:    9 # Lv2 Dark & Earth
+  distortion:    10 # Lv2 Water & Ice
+  fusion:        11 # Lv2 Fire & Light
+  fragmentation: 12 # Lv2 Wind & Thunder
+  light:         13 # Lv3 Fire, Light, Wind, Thunder
+  darkness:      14 # Lv3 Dark, Earth, Water, Ice
+  light_ii:      15 # Lv4 Light
+  darkness_ii:   16 # Lv4 Darkness

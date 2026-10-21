@@ -3252,119 +3252,119 @@ auto IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool
  ************************************************************************/
 #define PAIR(x, y) (((x) << 8) + (y))
 
-auto GetSkillchainSubeffect(const SKILLCHAIN_ELEMENT skillchain) -> ActionProcSkillChain
+auto GetSkillchainSubeffect(const xi::SkillchainType skillchain) -> ActionProcSkillChain
 {
-    if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+    if (skillchain < xi::SkillchainType::None || skillchain > xi::SkillchainType::DarknessIi)
     {
         ShowWarning("battleutils::GetSkillchainSubeffect() - Invalid Element passed to function.");
         return ActionProcSkillChain::None;
     }
 
     static constexpr ActionProcSkillChain effects[] = {
-        ActionProcSkillChain::None,          // SC_NONE
-        ActionProcSkillChain::Transfixion,   // SC_TRANSFIXION
-        ActionProcSkillChain::Compression,   // SC_COMPRESSION
-        ActionProcSkillChain::Liquefaction,  // SC_LIQUEFACTION
-        ActionProcSkillChain::Scission,      // SC_SCISSION
-        ActionProcSkillChain::Reverberation, // SC_REVERBERATION
-        ActionProcSkillChain::Detonation,    // SC_DETONATION
-        ActionProcSkillChain::Induration,    // SC_INDURATION
-        ActionProcSkillChain::Impaction,     // SC_IMPACTION
-        ActionProcSkillChain::Gravitation,   // SC_GRAVITATION
-        ActionProcSkillChain::Distortion,    // SC_DISTORTION
-        ActionProcSkillChain::Fusion,        // SC_FUSION
-        ActionProcSkillChain::Fragmentation, // SC_FRAGMENTATION
-        ActionProcSkillChain::Light,         // SC_LIGHT
-        ActionProcSkillChain::Darkness,      // SC_DARKNESS
-        ActionProcSkillChain::Light,         // SC_LIGHT_II
-        ActionProcSkillChain::Darkness,      // SC_DARKNESS_II
+        ActionProcSkillChain::None,          // None
+        ActionProcSkillChain::Transfixion,   // Transfixion
+        ActionProcSkillChain::Compression,   // Compression
+        ActionProcSkillChain::Liquefaction,  // Liquefaction
+        ActionProcSkillChain::Scission,      // Scission
+        ActionProcSkillChain::Reverberation, // Reverberation
+        ActionProcSkillChain::Detonation,    // Detonation
+        ActionProcSkillChain::Induration,    // Induration
+        ActionProcSkillChain::Impaction,     // Impaction
+        ActionProcSkillChain::Gravitation,   // Gravitation
+        ActionProcSkillChain::Distortion,    // Distortion
+        ActionProcSkillChain::Fusion,        // Fusion
+        ActionProcSkillChain::Fragmentation, // Fragmentation
+        ActionProcSkillChain::Light,         // Light
+        ActionProcSkillChain::Darkness,      // Darkness
+        ActionProcSkillChain::Light,         // LightIi
+        ActionProcSkillChain::Darkness,      // DarknessIi
     };
 
-    return effects[skillchain];
+    return effects[std::to_underlying(skillchain)];
 }
 
-uint8 GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain)
+uint8 GetSkillchainTier(xi::SkillchainType skillchain)
 {
-    if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+    if (skillchain < xi::SkillchainType::None || skillchain > xi::SkillchainType::DarknessIi)
     {
         ShowWarning("battleutils::GetSkillchainTier() - Invalid Element passed to function.");
         return 0;
     }
 
     static const uint8 tiers[] = {
-        0, // SC_NONE
-        1, // SC_TRANSFIXION
-        1, // SC_COMPRESSION
-        1, // SC_LIQUEFACTION
-        1, // SC_SCISSION
-        1, // SC_REVERBERATION
-        1, // SC_DETONATION
-        1, // SC_INDURATION
-        1, // SC_IMPACTION
-        2, // SC_GRAVITATION
-        2, // SC_DISTORTION
-        2, // SC_FUSION
-        2, // SC_FRAGMENTATION
-        3, // SC_LIGHT
-        3, // SC_DARKNESS
-        4, // SC_LIGHT_II
-        4, // SC_DARKNESS_II
+        0, // None
+        1, // Transfixion
+        1, // Compression
+        1, // Liquefaction
+        1, // Scission
+        1, // Reverberation
+        1, // Detonation
+        1, // Induration
+        1, // Impaction
+        2, // Gravitation
+        2, // Distortion
+        2, // Fusion
+        2, // Fragmentation
+        3, // Light
+        3, // Darkness
+        4, // LightIi
+        4, // DarknessIi
     };
 
-    return tiers[skillchain];
+    return tiers[std::to_underlying(skillchain)];
 }
 
-static const std::map<std::pair<SKILLCHAIN_ELEMENT, SKILLCHAIN_ELEMENT>, SKILLCHAIN_ELEMENT> skillchain_map = {
+static const std::map<std::pair<xi::SkillchainType, xi::SkillchainType>, xi::SkillchainType> skillchain_map = {
     // Level 3 Pairs
-    { { SC_LIGHT, SC_LIGHT }, SC_LIGHT_II },
-    { { SC_DARKNESS, SC_DARKNESS }, SC_DARKNESS_II },
+    { { xi::SkillchainType::Light, xi::SkillchainType::Light }, xi::SkillchainType::LightIi },
+    { { xi::SkillchainType::Darkness, xi::SkillchainType::Darkness }, xi::SkillchainType::DarknessIi },
 
     // Level 2 Pairs
-    { { SC_DISTORTION, SC_GRAVITATION }, SC_DARKNESS },
-    { { SC_FRAGMENTATION, SC_GRAVITATION }, SC_FRAGMENTATION },
+    { { xi::SkillchainType::Distortion, xi::SkillchainType::Gravitation }, xi::SkillchainType::Darkness },
+    { { xi::SkillchainType::Fragmentation, xi::SkillchainType::Gravitation }, xi::SkillchainType::Fragmentation },
 
-    { { SC_GRAVITATION, SC_DISTORTION }, SC_DARKNESS },
-    { { SC_FUSION, SC_DISTORTION }, SC_FUSION },
+    { { xi::SkillchainType::Gravitation, xi::SkillchainType::Distortion }, xi::SkillchainType::Darkness },
+    { { xi::SkillchainType::Fusion, xi::SkillchainType::Distortion }, xi::SkillchainType::Fusion },
 
-    { { SC_GRAVITATION, SC_FUSION }, SC_GRAVITATION },
-    { { SC_FRAGMENTATION, SC_FUSION }, SC_LIGHT },
+    { { xi::SkillchainType::Gravitation, xi::SkillchainType::Fusion }, xi::SkillchainType::Gravitation },
+    { { xi::SkillchainType::Fragmentation, xi::SkillchainType::Fusion }, xi::SkillchainType::Light },
 
-    { { SC_DISTORTION, SC_FRAGMENTATION }, SC_DISTORTION },
-    { { SC_FUSION, SC_FRAGMENTATION }, SC_LIGHT },
+    { { xi::SkillchainType::Distortion, xi::SkillchainType::Fragmentation }, xi::SkillchainType::Distortion },
+    { { xi::SkillchainType::Fusion, xi::SkillchainType::Fragmentation }, xi::SkillchainType::Light },
 
     // Level 1 Pairs > Level 2 Skillchain
 
-    { { SC_SCISSION, SC_TRANSFIXION }, SC_DISTORTION },
-    { { SC_IMPACTION, SC_LIQUEFACTION }, SC_FUSION },
-    { { SC_COMPRESSION, SC_DETONATION }, SC_GRAVITATION },
-    { { SC_REVERBERATION, SC_INDURATION }, SC_FRAGMENTATION },
+    { { xi::SkillchainType::Scission, xi::SkillchainType::Transfixion }, xi::SkillchainType::Distortion },
+    { { xi::SkillchainType::Impaction, xi::SkillchainType::Liquefaction }, xi::SkillchainType::Fusion },
+    { { xi::SkillchainType::Compression, xi::SkillchainType::Detonation }, xi::SkillchainType::Gravitation },
+    { { xi::SkillchainType::Reverberation, xi::SkillchainType::Induration }, xi::SkillchainType::Fragmentation },
 
     // Level 1 Pairs
-    { { SC_COMPRESSION, SC_TRANSFIXION }, SC_COMPRESSION },
-    { { SC_REVERBERATION, SC_TRANSFIXION }, SC_REVERBERATION },
+    { { xi::SkillchainType::Compression, xi::SkillchainType::Transfixion }, xi::SkillchainType::Compression },
+    { { xi::SkillchainType::Reverberation, xi::SkillchainType::Transfixion }, xi::SkillchainType::Reverberation },
 
-    { { SC_TRANSFIXION, SC_COMPRESSION }, SC_TRANSFIXION },
-    { { SC_DETONATION, SC_COMPRESSION }, SC_DETONATION },
+    { { xi::SkillchainType::Transfixion, xi::SkillchainType::Compression }, xi::SkillchainType::Transfixion },
+    { { xi::SkillchainType::Detonation, xi::SkillchainType::Compression }, xi::SkillchainType::Detonation },
 
-    { { SC_SCISSION, SC_LIQUEFACTION }, SC_SCISSION },
+    { { xi::SkillchainType::Scission, xi::SkillchainType::Liquefaction }, xi::SkillchainType::Scission },
 
-    { { SC_LIQUEFACTION, SC_SCISSION }, SC_LIQUEFACTION },
-    { { SC_REVERBERATION, SC_SCISSION }, SC_REVERBERATION },
-    { { SC_DETONATION, SC_SCISSION }, SC_DETONATION },
+    { { xi::SkillchainType::Liquefaction, xi::SkillchainType::Scission }, xi::SkillchainType::Liquefaction },
+    { { xi::SkillchainType::Reverberation, xi::SkillchainType::Scission }, xi::SkillchainType::Reverberation },
+    { { xi::SkillchainType::Detonation, xi::SkillchainType::Scission }, xi::SkillchainType::Detonation },
 
-    { { SC_INDURATION, SC_REVERBERATION }, SC_INDURATION },
-    { { SC_IMPACTION, SC_REVERBERATION }, SC_IMPACTION },
+    { { xi::SkillchainType::Induration, xi::SkillchainType::Reverberation }, xi::SkillchainType::Induration },
+    { { xi::SkillchainType::Impaction, xi::SkillchainType::Reverberation }, xi::SkillchainType::Impaction },
 
-    { { SC_SCISSION, SC_DETONATION }, SC_SCISSION },
+    { { xi::SkillchainType::Scission, xi::SkillchainType::Detonation }, xi::SkillchainType::Scission },
 
-    { { SC_COMPRESSION, SC_INDURATION }, SC_COMPRESSION },
-    { { SC_IMPACTION, SC_INDURATION }, SC_IMPACTION },
+    { { xi::SkillchainType::Compression, xi::SkillchainType::Induration }, xi::SkillchainType::Compression },
+    { { xi::SkillchainType::Impaction, xi::SkillchainType::Induration }, xi::SkillchainType::Impaction },
 
-    { { SC_LIQUEFACTION, SC_IMPACTION }, SC_LIQUEFACTION },
-    { { SC_DETONATION, SC_IMPACTION }, SC_DETONATION }
+    { { xi::SkillchainType::Liquefaction, xi::SkillchainType::Impaction }, xi::SkillchainType::Liquefaction },
+    { { xi::SkillchainType::Detonation, xi::SkillchainType::Impaction }, xi::SkillchainType::Detonation }
 };
 
-SKILLCHAIN_ELEMENT FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill)
+xi::SkillchainType FormSkillchain(const std::list<xi::SkillchainType>& resonance, const std::list<xi::SkillchainType>& skill)
 {
     for (const auto& resonance_element : resonance)
     {
@@ -3376,14 +3376,14 @@ SKILLCHAIN_ELEMENT FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance
             }
         }
     }
-    return SC_NONE;
+    return xi::SkillchainType::None;
 }
 
 auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary) -> ActionProcSkillChain
 {
     CStatusEffect*     PSCEffect           = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Skillchain, 0);
     CStatusEffect*     PCBEffect           = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Chainbound, 0);
-    SKILLCHAIN_ELEMENT skillchain          = SC_NONE;
+    xi::SkillchainType skillchain          = xi::SkillchainType::None;
     const auto         combined_properties = primary | (secondary << 4) | (tertiary << 8);
 
     if (PSCEffect == nullptr && PCBEffect == nullptr)
@@ -3393,8 +3393,8 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
         return ActionProcSkillChain::None;
     }
 
-    std::list<SKILLCHAIN_ELEMENT>       resonanceProperties;
-    const std::list<SKILLCHAIN_ELEMENT> skillProperties = { static_cast<SKILLCHAIN_ELEMENT>(primary), static_cast<SKILLCHAIN_ELEMENT>(secondary), static_cast<SKILLCHAIN_ELEMENT>(tertiary) };
+    std::list<xi::SkillchainType>       resonanceProperties;
+    const std::list<xi::SkillchainType> skillProperties = { static_cast<xi::SkillchainType>(primary), static_cast<xi::SkillchainType>(secondary), static_cast<xi::SkillchainType>(tertiary) };
 
     // Chainbound active on target
     if (PCBEffect)
@@ -3404,18 +3404,18 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
             // Konzen-Ittai
             if (PCBEffect->GetPower() > 1)
             {
-                resonanceProperties.emplace_back(SC_LIGHT);
-                resonanceProperties.emplace_back(SC_DARKNESS);
-                resonanceProperties.emplace_back(SC_GRAVITATION);
-                resonanceProperties.emplace_back(SC_FRAGMENTATION);
-                resonanceProperties.emplace_back(SC_DISTORTION);
-                resonanceProperties.emplace_back(SC_FUSION);
+                resonanceProperties.emplace_back(xi::SkillchainType::Light);
+                resonanceProperties.emplace_back(xi::SkillchainType::Darkness);
+                resonanceProperties.emplace_back(xi::SkillchainType::Gravitation);
+                resonanceProperties.emplace_back(xi::SkillchainType::Fragmentation);
+                resonanceProperties.emplace_back(xi::SkillchainType::Distortion);
+                resonanceProperties.emplace_back(xi::SkillchainType::Fusion);
             }
-            resonanceProperties.emplace_back(SC_LIQUEFACTION);
-            resonanceProperties.emplace_back(SC_INDURATION);
-            resonanceProperties.emplace_back(SC_REVERBERATION);
-            resonanceProperties.emplace_back(SC_IMPACTION);
-            resonanceProperties.emplace_back(SC_COMPRESSION);
+            resonanceProperties.emplace_back(xi::SkillchainType::Liquefaction);
+            resonanceProperties.emplace_back(xi::SkillchainType::Induration);
+            resonanceProperties.emplace_back(xi::SkillchainType::Reverberation);
+            resonanceProperties.emplace_back(xi::SkillchainType::Impaction);
+            resonanceProperties.emplace_back(xi::SkillchainType::Compression);
 
             skillchain = FormSkillchain(resonanceProperties, skillProperties);
         }
@@ -3438,16 +3438,16 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
             // actually the ID of the opening weaponskill.  We need all 3
             // of the possible skillchain properties on the initial link.
             const auto properties = PSCEffect->GetPower();
-            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(properties & 0b1111));
-            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((properties >> 4) & 0b1111));
-            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((properties >> 8) & 0b1111));
+            resonanceProperties.emplace_back(static_cast<xi::SkillchainType>(properties & 0b1111));
+            resonanceProperties.emplace_back(static_cast<xi::SkillchainType>((properties >> 4) & 0b1111));
+            resonanceProperties.emplace_back(static_cast<xi::SkillchainType>((properties >> 8) & 0b1111));
             skillchain = FormSkillchain(resonanceProperties, skillProperties);
         }
         else
         {
             // Previous effect is not an opening effect, meaning the power is
             // The skill chain ID resonating.
-            resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSCEffect->GetPower()));
+            resonanceProperties.emplace_back(static_cast<xi::SkillchainType>(PSCEffect->GetPower()));
             skillchain = FormSkillchain(resonanceProperties, skillProperties);
         }
     }
@@ -3457,12 +3457,12 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
         return ActionProcSkillChain::None;
     }
 
-    if (skillchain != SC_NONE)
+    if (skillchain != xi::SkillchainType::None)
     {
         PSCEffect->SetStartTime(timer::now());
         PSCEffect->SetDuration(PSCEffect->GetDuration() - 1s);
         PSCEffect->SetTier(GetSkillchainTier(skillchain));
-        PSCEffect->SetPower(skillchain);
+        PSCEffect->SetPower(std::to_underlying(skillchain));
         PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
 
         return GetSkillchainSubeffect(skillchain);
@@ -3477,28 +3477,28 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
     return ActionProcSkillChain::None;
 }
 
-std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
+std::vector<ELEMENT> GetSkillchainMagicElement(xi::SkillchainType skillchain)
 {
-    static const HashMap<SKILLCHAIN_ELEMENT, std::vector<ELEMENT>> resonanceToElement = {
-        { SC_NONE, {} },
-        { SC_TRANSFIXION, { ELEMENT_LIGHT } },
-        { SC_COMPRESSION, { ELEMENT_DARK } },
-        { SC_LIQUEFACTION, { ELEMENT_FIRE } },
-        { SC_SCISSION, { ELEMENT_EARTH } },
-        { SC_REVERBERATION, { ELEMENT_WATER } },
-        { SC_DETONATION, { ELEMENT_WIND } },
-        { SC_INDURATION, { ELEMENT_ICE } },
-        { SC_IMPACTION, { ELEMENT_THUNDER } },
+    static const HashMap<xi::SkillchainType, std::vector<ELEMENT>> resonanceToElement = {
+        { xi::SkillchainType::None, {} },
+        { xi::SkillchainType::Transfixion, { ELEMENT_LIGHT } },
+        { xi::SkillchainType::Compression, { ELEMENT_DARK } },
+        { xi::SkillchainType::Liquefaction, { ELEMENT_FIRE } },
+        { xi::SkillchainType::Scission, { ELEMENT_EARTH } },
+        { xi::SkillchainType::Reverberation, { ELEMENT_WATER } },
+        { xi::SkillchainType::Detonation, { ELEMENT_WIND } },
+        { xi::SkillchainType::Induration, { ELEMENT_ICE } },
+        { xi::SkillchainType::Impaction, { ELEMENT_THUNDER } },
 
-        { SC_GRAVITATION, { ELEMENT_DARK, ELEMENT_EARTH } },
-        { SC_DISTORTION, { ELEMENT_WATER, ELEMENT_ICE } },
-        { SC_FUSION, { ELEMENT_LIGHT, ELEMENT_FIRE } },
-        { SC_FRAGMENTATION, { ELEMENT_WIND, ELEMENT_THUNDER } },
+        { xi::SkillchainType::Gravitation, { ELEMENT_DARK, ELEMENT_EARTH } },
+        { xi::SkillchainType::Distortion, { ELEMENT_WATER, ELEMENT_ICE } },
+        { xi::SkillchainType::Fusion, { ELEMENT_LIGHT, ELEMENT_FIRE } },
+        { xi::SkillchainType::Fragmentation, { ELEMENT_WIND, ELEMENT_THUNDER } },
 
-        { SC_LIGHT, { ELEMENT_LIGHT, ELEMENT_FIRE, ELEMENT_WIND, ELEMENT_THUNDER } },
-        { SC_DARKNESS, { ELEMENT_DARK, ELEMENT_EARTH, ELEMENT_WATER, ELEMENT_ICE } },
-        { SC_LIGHT_II, { ELEMENT_LIGHT, ELEMENT_FIRE, ELEMENT_WIND, ELEMENT_THUNDER } },
-        { SC_DARKNESS_II, { ELEMENT_DARK, ELEMENT_EARTH, ELEMENT_WATER, ELEMENT_ICE } }
+        { xi::SkillchainType::Light, { ELEMENT_LIGHT, ELEMENT_FIRE, ELEMENT_WIND, ELEMENT_THUNDER } },
+        { xi::SkillchainType::Darkness, { ELEMENT_DARK, ELEMENT_EARTH, ELEMENT_WATER, ELEMENT_ICE } },
+        { xi::SkillchainType::LightIi, { ELEMENT_LIGHT, ELEMENT_FIRE, ELEMENT_WIND, ELEMENT_THUNDER } },
+        { xi::SkillchainType::DarknessIi, { ELEMENT_DARK, ELEMENT_EARTH, ELEMENT_WATER, ELEMENT_ICE } }
     };
 
     return resonanceToElement.at(skillchain);

@@ -1599,19 +1599,19 @@ auto CAutomatonController::TryTPMove() -> bool
         {
             if (PSCEffect)
             {
-                std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
+                std::list<xi::SkillchainType> resonanceProperties;
 
                 if (const uint16 power = PSCEffect->GetPower())
                 {
                     if (PSCEffect->GetTier() == 0)
                     {
-                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power & 0xF));
-                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((power >> 4) & 0xF));
-                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power >> 8));
+                        resonanceProperties.emplace_back(static_cast<xi::SkillchainType>(power & 0xF));
+                        resonanceProperties.emplace_back(static_cast<xi::SkillchainType>((power >> 4) & 0xF));
+                        resonanceProperties.emplace_back(static_cast<xi::SkillchainType>(power >> 8));
                     }
                     else
                     {
-                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power));
+                        resonanceProperties.emplace_back(static_cast<xi::SkillchainType>(power));
                     }
                 }
 
@@ -1619,11 +1619,11 @@ auto CAutomatonController::TryTPMove() -> bool
                 {
                     if (hasSkillPriority(PSkill, 1))
                     {
-                        std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                        skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSkill->getPrimarySkillchain()));
-                        skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSkill->getSecondarySkillchain()));
-                        skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSkill->getTertiarySkillchain()));
-                        if (battleutils::FormSkillchain(resonanceProperties, skillProperties) != SC_NONE)
+                        std::list<xi::SkillchainType> skillProperties;
+                        skillProperties.emplace_back(static_cast<xi::SkillchainType>(PSkill->getPrimarySkillchain()));
+                        skillProperties.emplace_back(static_cast<xi::SkillchainType>(PSkill->getSecondarySkillchain()));
+                        skillProperties.emplace_back(static_cast<xi::SkillchainType>(PSkill->getTertiarySkillchain()));
+                        if (battleutils::FormSkillchain(resonanceProperties, skillProperties) != xi::SkillchainType::None)
                         {
                             currentManeuvers = 1;
                             currentSkill     = PSkill->getParam();
