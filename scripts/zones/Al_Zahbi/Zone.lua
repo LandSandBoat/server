@@ -16,9 +16,11 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
+    xi.besieged.onSiegeEventUpdate(player, csid)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    xi.besieged.onSiegeEventFinish(player, csid)
 end
 
 return zoneObject
