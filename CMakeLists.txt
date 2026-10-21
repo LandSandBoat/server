@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+dcmake_minimum_required(VERSION 3.25)
 
 # Modules are included by their folder, e.g. include(settings/PreProject).
 # cmake/find is also listed on its own because find_package() only looks for Find<Name>.cmake at the top of each path.
@@ -47,13 +47,7 @@ if(UNIX AND NOT APPLE)
     find_package(Binutils REQUIRED)
 endif()
 
-# Tracy flags
-option(TRACY_ENABLE "Enable Tracy profiling." OFF)
-if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY) # Also handle close flags
-    set(TRACY_ENABLE ON)
-endif()
-message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
-
+include(Tracy)
 add_subdirectory(ext)
 
 # After add_subdirectory(ext) so third-party targets never inherit CMAKE_CXX_CLANG_TIDY.
