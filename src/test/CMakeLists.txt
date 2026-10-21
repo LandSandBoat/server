@@ -83,7 +83,7 @@ target_link_libraries(xi_test_lib
         xi_connect_lib
         xi_map_core
         xi_world_lib
-        ${TEST_ONLY_EXTERNAL_LIBS}
+        xi_ext_test
 )
 
 target_link_libraries(xi_test PRIVATE xi_test_lib Catch2::Catch2)

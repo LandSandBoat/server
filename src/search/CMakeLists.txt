@@ -16,7 +16,7 @@ set(SOURCES
 
 xi_add_library(xi_search_lib ${SOURCES})
 target_include_directories(xi_search_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(xi_search_lib PUBLIC ${SEARCH_ONLY_EXTERNAL_LIBS})
+target_link_libraries(xi_search_lib PUBLIC xi_ext_search)
 
 xi_add_executable(xi_search searchserver.rc ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 target_link_libraries(xi_search PRIVATE xi_search_lib)

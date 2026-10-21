@@ -201,7 +201,7 @@ target_include_directories(xi_map_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_map_core
     PUBLIC
         xi_data_core
-        ${MAP_ONLY_EXTERNAL_LIBS}
+        xi_ext_map
 )
 
 # The group libraries and xi_map_core all link each other, so the split buys parallel
