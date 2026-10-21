@@ -143,31 +143,22 @@ auto CPetEntity::GetScriptName() const -> std::string
     {
         case PET_TYPE::AVATAR:
             return "avatar";
-            break;
         case PET_TYPE::WYVERN:
             return "wyvern";
-            break;
         case PET_TYPE::JUG_PET:
             return "jug";
-            break;
         case PET_TYPE::CHARMED_MOB:
             return "charmed";
-            break;
         case PET_TYPE::AUTOMATON:
             return "automaton";
-            break;
         case PET_TYPE::ADVENTURING_FELLOW:
             return "fellow";
-            break;
         case PET_TYPE::CHOCOBO:
             return "chocobo";
-            break;
         case PET_TYPE::LUOPAN:
             return "luopan";
-            break;
         default:
             return "";
-            break;
     }
 }
 

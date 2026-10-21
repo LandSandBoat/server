@@ -206,22 +206,17 @@ void UpdateRankingHistory()
                         case 1:
                             return ("INSERT INTO char_fishing_contest_history (charid, contest_rank_1) "
                                     "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_1 = contest_rank_1 + 1");
-                            break;
                         case 2:
                             return "INSERT INTO char_fishing_contest_history (charid, contest_rank_2) "
                                    "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_2 = contest_rank_2 + 1";
-                            break;
                         case 3:
                             return "INSERT INTO char_fishing_contest_history (charid, contest_rank_3) "
                                    "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_3 = contest_rank_3 + 1";
-                            break;
                         case 4:
                             return "INSERT INTO char_fishing_contest_history (charid, contest_rank_4) "
                                    "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_4 = contest_rank_4 + 1";
-                            break;
                         default:
                             return "";
-                            break;
                     }
                 };
 

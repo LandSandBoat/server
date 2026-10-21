@@ -33,7 +33,6 @@
 #include <string>
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
-#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
 
 struct zlib_jump
 {

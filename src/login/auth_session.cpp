@@ -435,7 +435,6 @@ void auth_session::read_func()
                 sendLoginResult(login_result::LOGIN_ERROR_CREATE_TAKEN);
                 return;
             }
-            break;
         }
         case login_cmd::LOGIN_CHANGE_PASSWORD:
         {

@@ -3851,28 +3851,20 @@ auto CLuaBaseEntity::getTeleport(uint8 type, const sol::object& abysseaRegionObj
     {
         case TELEPORT_TYPE::OUTPOST_SANDY:
             return PChar->teleport.outpostSandy;
-            break;
         case TELEPORT_TYPE::OUTPOST_BASTOK:
             return PChar->teleport.outpostBastok;
-            break;
         case TELEPORT_TYPE::OUTPOST_WINDY:
             return PChar->teleport.outpostWindy;
-            break;
         case TELEPORT_TYPE::RUNIC_PORTAL:
             return PChar->teleport.runicPortal;
-            break;
         case TELEPORT_TYPE::PAST_MAW:
             return PChar->teleport.pastMaw;
-            break;
         case TELEPORT_TYPE::CAMPAIGN_SANDY:
             return PChar->teleport.campaignSandy;
-            break;
         case TELEPORT_TYPE::CAMPAIGN_BASTOK:
             return PChar->teleport.campaignBastok;
-            break;
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
             return PChar->teleport.campaignWindy;
-            break;
         case TELEPORT_TYPE::ABYSSEA_CONFLUX:
         {
             uint8 abysseaRegion = abysseaRegionObj.is<uint8>() ? abysseaRegionObj.as<uint8>() : MAX_ABYSSEAZONES;
@@ -3886,7 +3878,6 @@ auto CLuaBaseEntity::getTeleport(uint8 type, const sol::object& abysseaRegionObj
         }
         case TELEPORT_TYPE::ESCHAN_PORTAL:
             return PChar->teleport.eschanPortal;
-            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -3915,21 +3906,18 @@ auto CLuaBaseEntity::getTeleportTable(uint8 type) -> sol::table
                 teleTable.add(PChar->teleport.homepoint.access[x]);
             }
             return teleTable;
-            break;
         case TELEPORT_TYPE::SURVIVAL:
             for (uint8 x = 0; x < 4; x++)
             {
                 teleTable.add(PChar->teleport.survival.access[x]);
             }
             return teleTable;
-            break;
         case TELEPORT_TYPE::WAYPOINT:
             for (uint8 x = 0; x < 2; x++)
             {
                 teleTable.add(PChar->teleport.waypoints.access[x]);
             }
             return teleTable;
-            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }

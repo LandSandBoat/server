@@ -228,7 +228,6 @@ void CZoneEntities::TryAddToNearbySpawnLists(CBaseEntity* PEntity)
                     // }
                     default:
                         return;
-                        break;
                 }
             }
         }

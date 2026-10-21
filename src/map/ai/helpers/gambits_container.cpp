@@ -1536,7 +1536,6 @@ auto CGambitsContainer::TryTrustSkill() -> bool
             case G_TP_TRIGGER::ASAP:
             {
                 return true;
-                break;
             }
             case G_TP_TRIGGER::RANDOM:
             {
@@ -1552,7 +1551,6 @@ auto CGambitsContainer::TryTrustSkill() -> bool
                 }
                 // clang-format on
                 return result;
-                break;
             }
             case G_TP_TRIGGER::OPENER:
             {
@@ -1571,7 +1569,6 @@ auto CGambitsContainer::TryTrustSkill() -> bool
                 });
                 // clang-format on
                 return result;
-                break;
             }
             case G_TP_TRIGGER::CLOSER: // Hold TP indefinitely to close a SC.
             {
@@ -1580,7 +1577,6 @@ auto CGambitsContainer::TryTrustSkill() -> bool
                 // TODO: ...and has a valid WS...
 
                 return PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now() && PSCEffect->GetTier() == 0;
-                break;
             }
             case G_TP_TRIGGER::CLOSER_UNTIL_TP: // Will hold TP to close a SC, but WS immediately once specified value is reached.
             {
@@ -1597,12 +1593,10 @@ auto CGambitsContainer::TryTrustSkill() -> bool
                 // TODO: ...and has a valid WS...
 
                 return PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now() && PSCEffect->GetTier() == 0;
-                break;
             }
             default:
             {
                 return false;
-                break;
             }
         }
     };

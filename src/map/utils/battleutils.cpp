@@ -2773,7 +2773,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 1;
                 break;
             }
-            break;
         case 3: // cdf = 30,80,100
             if (distribution < 30)
             {
@@ -2789,7 +2788,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 2;
                 break;
             }
-            break;
         case 4: // cdf = 20,50,80,100
             if (distribution < 20)
             {
@@ -2810,7 +2808,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 3;
                 break;
             }
-            break;
         case 5: // cdf = 10,30,60,90,100
             if (distribution < 10)
             {
@@ -2836,7 +2833,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 4;
                 break;
             }
-            break;
         case 6: // cdf = 10,30,50,70,90,100
             if (distribution < 10)
             {
@@ -2867,7 +2863,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 5;
                 break;
             }
-            break;
         case 7: // cdf = 5,20,45,70,85,95,100
             if (distribution < 5)
             {
@@ -2903,7 +2898,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 6;
                 break;
             }
-            break;
         case 8: // cdf = 5,20,45,70,85,95,98,100
             if (distribution < 5)
             {
@@ -2944,7 +2938,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 7;
                 break;
             }
-            break;
     }
     return std::min<uint8>(num, 8); // No more than eight hits per attack
 }
@@ -3250,7 +3243,6 @@ auto IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool
  *  Get SkillChain Effect                                                *
  *                                                                       *
  ************************************************************************/
-#define PAIR(x, y) (((x) << 8) + (y))
 
 auto GetSkillchainSubeffect(const xi::SkillchainType skillchain) -> ActionProcSkillChain
 {
@@ -4924,14 +4916,12 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
     {
         case ELEMENT_NONE:
             return false; // Can't match with no element...
-            break;
         case ELEMENT_FIRE:
             switch (weather)
             {
                 case xi::Weather::HotSpell:
                 case xi::Weather::HeatWave:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4942,7 +4932,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Snow:
                 case xi::Weather::Blizzards:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4953,7 +4942,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Wind:
                 case xi::Weather::Gales:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4964,7 +4952,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::DustStorm:
                 case xi::Weather::SandStorm:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4975,7 +4962,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Thunder:
                 case xi::Weather::Thunderstorms:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4986,7 +4972,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Rain:
                 case xi::Weather::Squall:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -4997,7 +4982,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Auroras:
                 case xi::Weather::StellarGlare:
                     return true;
-                    break;
                 default:
                     return false;
             }
@@ -5008,7 +4992,6 @@ auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bo
                 case xi::Weather::Gloom:
                 case xi::Weather::Darkness:
                     return true;
-                    break;
                 default:
                     return false;
             }
