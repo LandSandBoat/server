@@ -1,4 +1,4 @@
-set(PACKET_SOURCES
+target_sources(xi_search_lib PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_history.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_history.h
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_list.cpp
@@ -11,5 +11,4 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/search_comment.h
     ${CMAKE_CURRENT_SOURCE_DIR}/search_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/search_list.h
-    PARENT_SCOPE
 )

@@ -1,4 +1,4 @@
-set(UTIL_SOURCES
+target_sources(xi_map_battle PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/auctionutils.cpp
@@ -50,5 +50,4 @@ set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/trustutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zoneutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zoneutils.h
-    PARENT_SCOPE
 )

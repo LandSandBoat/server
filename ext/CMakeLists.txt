@@ -303,11 +303,3 @@ target_link_libraries(xi_ext_test INTERFACE
     termcolor::termcolor
     nlohmann_json::nlohmann_json
 )
-
-# The old list variables, for fork CMake code that still links ${MAP_ONLY_EXTERNAL_LIBS} and the like.
-set(SHARED_EXTERNAL_LIBS xi_ext_shared PARENT_SCOPE)
-set(CONNECT_ONLY_EXTERNAL_LIBS xi_ext_connect PARENT_SCOPE)
-set(MAP_ONLY_EXTERNAL_LIBS xi_ext_map PARENT_SCOPE)
-set(SEARCH_ONLY_EXTERNAL_LIBS xi_ext_search PARENT_SCOPE)
-set(WORLD_ONLY_EXTERNAL_LIBS xi_ext_world PARENT_SCOPE)
-set(TEST_ONLY_EXTERNAL_LIBS xi_ext_test PARENT_SCOPE)

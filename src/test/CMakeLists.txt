@@ -1,6 +1,3 @@
-add_subdirectory(lua)
-add_subdirectory(reporters)
-
 # Catch2 hosts the C++ unit tests that run during xi_test startup, before the
 # Lua test engine boots (see main.cpp).
 suspend_clang_tidy()
@@ -16,8 +13,6 @@ CPMAddPackage(
 resume_clang_tidy()
 
 set(SOURCES
-    ${LUA_SOURCES}
-    ${REPORTERS_SOURCES}
     enums/test_status.h
     enums/tick_type.h
     tests/rng_spread_tests.cpp
@@ -77,6 +72,8 @@ xi_add_executable(xi_test testserver.rc
 add_dependencies(xi_test data_schema_generate)
 
 xi_add_library(xi_test_lib ${SOURCES})
+add_subdirectory(lua)
+add_subdirectory(reporters)
 target_include_directories(xi_test_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_test_lib
     PUBLIC

@@ -1,4 +1,4 @@
-set(LUA_SOURCES
+target_sources(xi_test_lib PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_simulation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_simulation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_test_entity.cpp
@@ -21,5 +21,4 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_spy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_stub.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_stub.h
-    PARENT_SCOPE
 )

@@ -1,4 +1,4 @@
-set(AI_STATE_SOURCES
+target_sources(xi_map_battle PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/ability_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ability_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/attack_state.cpp
@@ -27,5 +27,4 @@ set(AI_STATE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/trigger_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/weaponskill_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/weaponskill_state.h
-    PARENT_SCOPE
 )

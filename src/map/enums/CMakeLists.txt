@@ -1,4 +1,4 @@
-set(ENUMS_SOURCES
+target_sources(xi_map_battle PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/action/category.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/hit_distortion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/info.h
@@ -24,5 +24,4 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_log.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synthesis_result.h
-    PARENT_SCOPE
 )
