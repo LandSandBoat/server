@@ -600,6 +600,7 @@ xi.job_utils.beastmaster.useReward = function(player, target, ability)
         totalHealing = diff
     end
 
+    -- Note: this does not seem to add enmity to the pet or the player
     pet:addHP(totalHealing)
     pet:wakeUp()
 
@@ -608,8 +609,6 @@ xi.job_utils.beastmaster.useReward = function(player, target, ability)
     pet:delStatusEffect(xi.effect.REGEN)
     pet:addStatusEffect(xi.effect.REGEN, { power = regenAmount, duration = regenTime, origin = player, tick = 3 }) -- 3 = tick, each 3 seconds.
     player:removeAmmo(1)
-
-    pet:updateEnmityFromCure(pet, totalHealing)
 
     return totalHealing
 end
