@@ -2,6 +2,7 @@
 -- Report records, retirement replays, foreign stables and feeding refusals.
 -- One raising day is one Earth day; 25 Vana'diel days pass in it.
 -----------------------------------
+local packetReader  = require('scripts.tests.helpers.packet_reader')
 local raisingClient = require('scripts.tests.systems.chocobo_raising.client')
 
 local cutscenes = xi.chocoboRaising.cutscenes
@@ -16,8 +17,8 @@ local function trainerSaid(player, trainer, messageId)
     for _, packet in ipairs(player.packets:getIncoming()) do
         if
             packet.type == 0x02A and
-            raisingClient.readU32(packet.data, 0x04) == speaker and
-            bit.band(packet.data[0x1A] + packet.data[0x1B] * 256, 0x7FFF) == messageId
+            packetReader.readU32(packet.data, 0x04) == speaker and
+            bit.band(packetReader.readU16(packet.data, 0x1A), 0x7FFF) == messageId
         then
             return true
         end

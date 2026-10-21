@@ -1,7 +1,8 @@
 -----------------------------------
 -- Monipulator setup and packet readers shared by the Monstrosity tests.
 -----------------------------------
-local ffi = require('ffi')
+local ffi          = require('ffi')
+local packetReader = require('scripts.tests.helpers.packet_reader')
 
 local helpers = {}
 
@@ -146,7 +147,7 @@ function helpers.updateReplies(player)
     local replies = {}
     for _, pkt in pairs(player.packets:getIncoming()) do
         if pkt.type == 0x05C then
-            table.insert(replies, pkt.data[0x04] + pkt.data[0x05] * 0x100 + pkt.data[0x06] * 0x10000 + pkt.data[0x07] * 0x1000000)
+            table.insert(replies, packetReader.readU32(pkt.data, 0x04))
         end
     end
 

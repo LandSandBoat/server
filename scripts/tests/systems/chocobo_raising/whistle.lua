@@ -2,6 +2,7 @@
 -- The Chocobo Whistle quest, registration, riding, and the whistle and card trades.
 -----------------------------------
 local ffi           = require('ffi')
+local packetReader  = require('scripts.tests.helpers.packet_reader')
 local raisingClient = require('scripts.tests.systems.chocobo_raising.client')
 local helpers       = require('scripts.tests.systems.chocobo_raising.helpers')
 
@@ -66,7 +67,7 @@ local function packetSpeed(player)
     local speed
     for _, packet in pairs(player.packets:getIncoming()) do
         if packet.type == 0x037 then
-            speed = bit.band(raisingClient.readU32(packet.data, 0x2C), 0xFFF)
+            speed = bit.band(packetReader.readU32(packet.data, 0x2C), 0xFFF)
         end
     end
 
