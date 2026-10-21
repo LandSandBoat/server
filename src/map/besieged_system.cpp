@@ -31,17 +31,17 @@ auto GetAstralCandescence() -> xi::BesiegedStronghold
 
 auto GetAlZahbiOrders() -> xi::AlZahbiOrders
 {
-    return xi::AlZahbiOrders::Defend;
+    return xi::AlZahbiOrders::Infiltrate;
 }
 
 auto GetMamookOrders() -> xi::BeastmanOrders
 {
-    return xi::BeastmanOrders::Defend;
+    return xi::BeastmanOrders::Train;
 }
 
 auto GetMamookLevel() -> uint8
 {
-    return 1;
+    return 0;
 }
 
 auto GetMamookForces() -> uint8
@@ -51,7 +51,7 @@ auto GetMamookForces() -> uint8
 
 auto GetMamookMirrors() -> uint8
 {
-    return 0;
+    return 8;
 }
 
 auto GetMamookPrisoners() -> uint8
@@ -59,19 +59,14 @@ auto GetMamookPrisoners() -> uint8
     return 0;
 }
 
-auto GetMamookMirrorDestroyed() -> bool
-{
-    return false;
-}
-
 auto GetHalvungOrders() -> xi::BeastmanOrders
 {
-    return xi::BeastmanOrders::Defend;
+    return xi::BeastmanOrders::Train;
 }
 
 auto GetHalvungLevel() -> uint8
 {
-    return 1;
+    return 0;
 }
 
 auto GetHalvungForces() -> uint8
@@ -81,7 +76,7 @@ auto GetHalvungForces() -> uint8
 
 auto GetHalvungMirrors() -> uint8
 {
-    return 0;
+    return 8;
 }
 
 auto GetHalvungPrisoners() -> uint8
@@ -89,19 +84,14 @@ auto GetHalvungPrisoners() -> uint8
     return 0;
 }
 
-auto GetHalvungMirrorDestroyed() -> bool
-{
-    return false;
-}
-
 auto GetArrapagoOrders() -> xi::BeastmanOrders
 {
-    return xi::BeastmanOrders::Defend;
+    return xi::BeastmanOrders::Train;
 }
 
 auto GetArrapagoLevel() -> uint8
 {
-    return 1;
+    return 0;
 }
 
 auto GetArrapagoForces() -> uint8
@@ -111,17 +101,12 @@ auto GetArrapagoForces() -> uint8
 
 auto GetArrapagoMirrors() -> uint8
 {
-    return 0;
+    return 8;
 }
 
 auto GetArrapagoPrisoners() -> uint8
 {
     return 0;
-}
-
-auto GetArrapagoMirrorDestroyed() -> bool
-{
-    return false;
 }
 
 }; // namespace besieged

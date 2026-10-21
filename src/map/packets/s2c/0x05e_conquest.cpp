@@ -81,26 +81,23 @@ GP_SERV_COMMAND_CONQUEST::GP_SERV_COMMAND_CONQUEST(CCharEntity* PChar)
     packet.Besieged.Overview.ArrapagoOrders    = std::to_underlying(besieged::GetArrapagoOrders());
     packet.Besieged.Overview.Unknown           = 1;
 
-    packet.Besieged.MamookStronghold.Orders          = std::to_underlying(besieged::GetMamookOrders());
-    packet.Besieged.MamookStronghold.Forces          = besieged::GetMamookForces();
-    packet.Besieged.MamookStronghold.Level           = besieged::GetMamookLevel();
-    packet.Besieged.MamookStronghold.MirrorDestroyed = besieged::GetMamookMirrorDestroyed();
-    packet.Besieged.MamookStronghold.Mirrors         = besieged::GetMamookMirrors() / 2;
-    packet.Besieged.MamookStronghold.Prisoners       = besieged::GetMamookPrisoners();
+    packet.Besieged.MamookStronghold.Orders    = std::to_underlying(besieged::GetMamookOrders());
+    packet.Besieged.MamookStronghold.Forces    = besieged::GetMamookForces();
+    packet.Besieged.MamookStronghold.Level     = besieged::GetMamookLevel();
+    packet.Besieged.MamookStronghold.Mirrors   = besieged::GetMamookMirrors();
+    packet.Besieged.MamookStronghold.Prisoners = besieged::GetMamookPrisoners();
 
-    packet.Besieged.HalvungStronghold.Orders          = std::to_underlying(besieged::GetHalvungOrders());
-    packet.Besieged.HalvungStronghold.Forces          = besieged::GetHalvungForces();
-    packet.Besieged.HalvungStronghold.Level           = besieged::GetHalvungLevel();
-    packet.Besieged.HalvungStronghold.MirrorDestroyed = besieged::GetHalvungMirrorDestroyed();
-    packet.Besieged.HalvungStronghold.Mirrors         = besieged::GetHalvungMirrors() / 2;
-    packet.Besieged.HalvungStronghold.Prisoners       = besieged::GetHalvungPrisoners();
+    packet.Besieged.HalvungStronghold.Orders    = std::to_underlying(besieged::GetHalvungOrders());
+    packet.Besieged.HalvungStronghold.Forces    = besieged::GetHalvungForces();
+    packet.Besieged.HalvungStronghold.Level     = besieged::GetHalvungLevel();
+    packet.Besieged.HalvungStronghold.Mirrors   = besieged::GetHalvungMirrors();
+    packet.Besieged.HalvungStronghold.Prisoners = besieged::GetHalvungPrisoners();
 
-    packet.Besieged.ArrapagoStronghold.Orders          = std::to_underlying(besieged::GetArrapagoOrders());
-    packet.Besieged.ArrapagoStronghold.Forces          = besieged::GetArrapagoForces();
-    packet.Besieged.ArrapagoStronghold.Level           = besieged::GetArrapagoLevel();
-    packet.Besieged.ArrapagoStronghold.MirrorDestroyed = besieged::GetArrapagoMirrorDestroyed();
-    packet.Besieged.ArrapagoStronghold.Mirrors         = besieged::GetArrapagoMirrors() / 2;
-    packet.Besieged.ArrapagoStronghold.Prisoners       = besieged::GetArrapagoPrisoners();
+    packet.Besieged.ArrapagoStronghold.Orders    = std::to_underlying(besieged::GetArrapagoOrders());
+    packet.Besieged.ArrapagoStronghold.Forces    = besieged::GetArrapagoForces();
+    packet.Besieged.ArrapagoStronghold.Level     = besieged::GetArrapagoLevel();
+    packet.Besieged.ArrapagoStronghold.Mirrors   = besieged::GetArrapagoMirrors();
+    packet.Besieged.ArrapagoStronghold.Prisoners = besieged::GetArrapagoPrisoners();
 
     packet.Besieged.ImperialStanding = charutils::GetPoints(PChar, "imperial_standing");
 }

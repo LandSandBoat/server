@@ -38,20 +38,17 @@ auto GetMamookLevel() -> uint8;
 auto GetMamookForces() -> uint8;
 auto GetMamookMirrors() -> uint8;
 auto GetMamookPrisoners() -> uint8;
-auto GetMamookMirrorDestroyed() -> bool;
 
 auto GetHalvungOrders() -> xi::BeastmanOrders;
 auto GetHalvungLevel() -> uint8;
 auto GetHalvungForces() -> uint8;
 auto GetHalvungMirrors() -> uint8;
 auto GetHalvungPrisoners() -> uint8;
-auto GetHalvungMirrorDestroyed() -> bool;
 
 auto GetArrapagoOrders() -> xi::BeastmanOrders;
 auto GetArrapagoLevel() -> uint8;
 auto GetArrapagoForces() -> uint8;
 auto GetArrapagoMirrors() -> uint8;
 auto GetArrapagoPrisoners() -> uint8;
-auto GetArrapagoMirrorDestroyed() -> bool;
 
 }; // namespace besieged
