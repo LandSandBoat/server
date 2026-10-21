@@ -437,18 +437,14 @@ struct fishing_catch_pool
 {
     std::map<uint16, fish_pool> stock;
 
-    fishing_catch_pool()
-    {
-    }
+    fishing_catch_pool() = default;
 };
 
 struct fishing_area_pool
 {
     std::map<uint8, fishing_catch_pool> catchPools;
 
-    fishing_area_pool()
-    {
-    }
+    fishing_area_pool() = default;
 };
 
 struct fishing_gear_t

@@ -30,9 +30,7 @@ CController::CController(CBattleEntity* _POwner)
 {
 }
 
-CController::~CController()
-{
-}
+CController::~CController() = default;
 
 void CController::Despawn()
 {

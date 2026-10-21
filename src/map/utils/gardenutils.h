@@ -38,7 +38,7 @@ struct GardenResult_t
     uint8  Weight      = 0;
 };
 
-typedef std::vector<GardenResult_t> GardenResultList_t;
+using GardenResultList_t = std::vector<GardenResult_t>;
 
 namespace gardenutils
 {

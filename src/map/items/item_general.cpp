@@ -27,9 +27,6 @@ CItemGeneral::CItemGeneral(uint16 id)
     setType(ITEM_GENERAL);
 }
 
-CItemGeneral::CItemGeneral(const CItemGeneral& other)
-: CItem(other)
-{
-}
+CItemGeneral::CItemGeneral(const CItemGeneral& other) = default;
 
 CItemGeneral::~CItemGeneral() = default;

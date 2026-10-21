@@ -351,8 +351,8 @@ class CRangeState;
 class CItemState;
 class CItemUsable;
 
-typedef FlatHashMap<uint32, CBaseEntity*> SpawnIDList_t;
-typedef std::vector<EntityId>             BazaarList_t;
+using SpawnIDList_t = FlatHashMap<uint32, CBaseEntity*>;
+using BazaarList_t  = std::vector<EntityId>;
 
 struct ItemLocation
 {
@@ -537,7 +537,7 @@ public:
     auto popPacket() -> std::unique_ptr<CBasicPacket>; // Get first packet from PacketList
     auto getPacketCount() -> size_t;
     void erasePackets(uint8 num); // Erase num elements from front of packet list
-    auto isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) -> bool;
+    auto isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool;
 
     bool         pendingPositionUpdate;
     bool         sendServerStatus_ = false;
@@ -703,9 +703,9 @@ public:
 
     CharHistory_t m_charHistory{};
 
-    auto getShieldSize() -> int8;
-    auto getShieldDefense() -> int16;
-    auto hasBazaar() -> bool;
+    auto getShieldSize() const -> int8;
+    auto getShieldDefense() const -> int16;
+    auto hasBazaar() const -> bool;
 
     auto getStyleLocked() const -> bool;
     void setStyleLocked(bool isStyleLocked);
@@ -791,7 +791,7 @@ public:
     void clearTriggerAreas();
 
     auto isInEvent() const -> bool;
-    auto isNpcLocked() -> bool;
+    auto isNpcLocked() const -> bool;
     void queueEvent(EventInfo* eventToQueue);
     void endCurrentEvent();
     void tryStartNextEvent();

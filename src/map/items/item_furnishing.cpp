@@ -38,17 +38,7 @@ CItemFurnishing::CItemFurnishing(uint16 id)
     setType(ITEM_FURNISHING);
 }
 
-CItemFurnishing::CItemFurnishing(const CItemFurnishing& other)
-: CItem(other)
-, m_storage(other.m_storage)
-, m_moghancement(other.m_moghancement)
-, m_element(other.m_element)
-, m_aura(other.m_aura)
-, size_(other.size_)
-, height_(other.height_)
-, placement_(other.placement_)
-{
-}
+CItemFurnishing::CItemFurnishing(const CItemFurnishing& other) = default;
 
 CItemFurnishing::~CItemFurnishing() = default;
 
@@ -202,7 +192,7 @@ auto CItemFurnishing::getOn2ndFloor() -> bool
     return this->exdata<Exdata::Furniture>().On2ndFloor;
 }
 
-auto CItemFurnishing::getSignature() const -> const std::string
+auto CItemFurnishing::getSignature() const -> std::string
 {
     return Exdata::decodeSignature(this->exdata<Exdata::Furniture>().Signature);
 }

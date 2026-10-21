@@ -26,9 +26,7 @@
 #include "lua/lua_stub.h"
 #include "map/lua/luautils.h"
 
-MockManager::MockManager()
-{
-}
+MockManager::MockManager() = default;
 
 MockManager::~MockManager()
 {

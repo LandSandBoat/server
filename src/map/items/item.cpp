@@ -335,7 +335,7 @@ void CItem::setReceiver(const std::string& receiver)
  *                                                                       *
  ************************************************************************/
 
-auto CItem::getSignature() const -> const std::string
+auto CItem::getSignature() const -> std::string
 {
     return Exdata::decodeSignature(this->exdata<Exdata::AugmentStandard>().Signature);
 }

@@ -111,7 +111,7 @@ public:
     auto getReceiver() const -> const std::string&;
     void setReceiver(const std::string& receiver);
 
-    virtual auto getSignature() const -> const std::string;
+    virtual auto getSignature() const -> std::string;
     virtual void setSignature(const std::string& signature);
 
     auto isDirty() const -> bool;

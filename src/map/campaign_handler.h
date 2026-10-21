@@ -94,16 +94,16 @@ public:
 
     void LoadCampaignZone(CZone* PZone); // Loads nation and region status.
 
-    auto GetCampaignId() -> uint8;                     // Change the current number of fortifications for a zone.
-    auto GetBattleStatus() -> uint8;                   // Checks if zone has an active battle.
-    auto GetZoneControl() -> uint8;                    // Gets the current controller of the zone.
-    auto GetFortification() -> uint16;                 // Change the current number of fortifications for a zone.
-    auto GetResource() -> uint16;                      // Change the current number of resources for a zone.
-    auto GetMaxFortification() -> uint16;              // Change the maximum number of fortifications for a zone.
-    auto GetMaxResource() -> uint16;                   // Change the maximum number of resources for a zone.
-    auto GetInfluence(CampaignArmy army) -> uint8;     // Change the current number of fortifications for a zone.
-    auto GetHeroism() -> uint8;                        // Change the current number of fortifications for a zone.
-    auto GetUnionCount(CampaignUnion CUnion) -> uint8; // Change the maximum number of resources for a zone.
+    auto GetCampaignId() const -> uint8;                     // Change the current number of fortifications for a zone.
+    auto GetBattleStatus() const -> uint8;                   // Checks if zone has an active battle.
+    auto GetZoneControl() const -> uint8;                    // Gets the current controller of the zone.
+    auto GetFortification() const -> uint16;                 // Change the current number of fortifications for a zone.
+    auto GetResource() const -> uint16;                      // Change the current number of resources for a zone.
+    auto GetMaxFortification() const -> uint16;              // Change the maximum number of fortifications for a zone.
+    auto GetMaxResource() const -> uint16;                   // Change the maximum number of resources for a zone.
+    auto GetInfluence(CampaignArmy army) const -> uint8;     // Change the current number of fortifications for a zone.
+    auto GetHeroism() const -> uint8;                        // Change the current number of fortifications for a zone.
+    auto GetUnionCount(CampaignUnion CUnion) const -> uint8; // Change the maximum number of resources for a zone.
 
     void SetBattleStatus(uint8 status);                     // Sets the status of battle in a zone.
     void SetZoneControl(uint8 nation);                      // Sets the control of a zone.

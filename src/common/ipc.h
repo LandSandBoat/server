@@ -44,10 +44,10 @@ template <typename T>
 auto toBytesWithHeader(const T& object) -> std::vector<uint8>;
 
 template <typename T>
-auto fromBytes(const std::span<const uint8> message) -> Maybe<T>;
+auto fromBytes(std::span<const uint8> message) -> Maybe<T>;
 
 template <typename T>
-auto fromBytesWithHeader(const std::span<const uint8> message) -> Maybe<T>;
+auto fromBytesWithHeader(std::span<const uint8> message) -> Maybe<T>;
 
 } // namespace ipc
 

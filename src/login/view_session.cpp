@@ -89,7 +89,7 @@ void view_session::read_func()
     const auto code = ref<uint8>(buffer_.data(), 8);
 
     const auto sessionHash = loginHelpers::getHashFromPacket(ipAddress, buffer_.data());
-    if (sessionHash == "")
+    if (sessionHash.empty())
     {
         ShowWarning(fmt::format("Session requested without valid sessionHash from {}", ipAddress));
         return;
@@ -580,7 +580,7 @@ void view_session::do_write(const std::size_t length)
 
 void view_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
 {
-    if (self->sessionHash != "")
+    if (!self->sessionHash.empty())
     {
         auto& map = loginHelpers::getAuthenticatedSessions()[self->ipAddress];
         auto  it  = map.find(self->sessionHash);

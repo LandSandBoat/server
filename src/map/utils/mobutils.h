@@ -52,7 +52,7 @@ enum class WeaknessType
     WHITE  = 3
 };
 
-typedef HashMap<uint32, ModsList_t*> ModsMap_t;
+using ModsMap_t = HashMap<uint32, ModsList_t*>;
 
 namespace mobutils
 {

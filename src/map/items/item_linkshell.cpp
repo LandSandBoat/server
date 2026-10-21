@@ -32,10 +32,7 @@ CItemLinkshell::CItemLinkshell(const uint16 id)
     setType(ITEM_LINKSHELL);
 }
 
-CItemLinkshell::CItemLinkshell(const CItemLinkshell& other)
-: CItem(other)
-{
-}
+CItemLinkshell::CItemLinkshell(const CItemLinkshell& other) = default;
 
 CItemLinkshell::~CItemLinkshell() = default;
 
@@ -69,7 +66,7 @@ void CItemLinkshell::SetLSColor(const uint16 color)
     this->exdata<Exdata::Linkshell>().Color = std::bit_cast<Exdata::lscolor_t>(color);
 }
 
-auto CItemLinkshell::getSignature() const -> const std::string
+auto CItemLinkshell::getSignature() const -> std::string
 {
     auto& name                           = this->exdata<Exdata::Linkshell>().Name;
     char  decoded[LinkshellStringLength] = {};

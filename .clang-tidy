@@ -14,10 +14,16 @@ Checks: >
   misc-definitions-in-headers,
   modernize-pass-by-value,
   modernize-use-emplace,
+  modernize-use-equals-default,
   modernize-use-nullptr,
   modernize-use-override,
   modernize-use-trailing-return-type,
+  modernize-use-using,
   performance-*,
+  readability-avoid-const-params-in-decls,
+  readability-const-return-type,
+  readability-container-size-empty,
+  readability-make-member-function-const,
 
 CheckOptions:
   modernize-use-trailing-return-type.TransformLambdas: none

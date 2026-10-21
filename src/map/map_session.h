@@ -73,5 +73,5 @@ struct MapSession
     void initBlowfish();
     void tapLastUpdate();
 
-    auto toString() -> std::string;
+    auto toString() const -> std::string;
 };

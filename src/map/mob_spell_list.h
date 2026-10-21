@@ -30,12 +30,12 @@
 
 #define MAX_MOBSPELLLIST_ID 5000
 
-typedef struct
+struct MobSpell_t
 {
     SpellID spellId;
     uint16  min_level;
     uint16  max_level;
-} MobSpell_t;
+};
 
 class CMobSpellList
 {

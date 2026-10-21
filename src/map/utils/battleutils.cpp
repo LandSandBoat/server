@@ -5155,7 +5155,7 @@ auto DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget) -> bool
         }
     }
 
-    if (resetCandidateList.size() == 0 || activeCooldownList.size() == 0)
+    if (resetCandidateList.empty() || activeCooldownList.empty())
     {
         // Evade because we have no abilities that can be reset
         return false;

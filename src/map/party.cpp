@@ -261,7 +261,7 @@ auto CParty::GetMemberByName(const std::string& memberName) -> CBattleEntity*
         return nullptr;
     }
 
-    if (memberName == "")
+    if (memberName.empty())
     {
         return nullptr;
     }

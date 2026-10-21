@@ -74,14 +74,6 @@ auto compareBy(const SearchType type, const SearchEntity& left, const SearchEnti
 
 } // namespace
 
-CDataLoader::CDataLoader()
-{
-}
-
-CDataLoader::~CDataLoader()
-{
-}
-
 /************************************************************************
  *                                                                       *
  *  Returns the auction house sale history for a given item.             *

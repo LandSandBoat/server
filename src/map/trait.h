@@ -241,7 +241,7 @@ private:
     uint32  m_meritId{ 0 };
 };
 
-typedef std::vector<CTrait*> TraitList_t;
+using TraitList_t = std::vector<CTrait*>;
 
 namespace traits
 {

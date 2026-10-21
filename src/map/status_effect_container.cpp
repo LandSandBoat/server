@@ -187,10 +187,7 @@ CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
     std::memset(m_StatusIcons, 0xFF, sizeof(m_StatusIcons));
 }
 
-CStatusEffectContainer::~CStatusEffectContainer()
-{
-    // The owned unique_ptrs in m_StatusEffectSet free their effects automatically.
-}
+CStatusEffectContainer::~CStatusEffectContainer() = default;
 
 auto CStatusEffectContainer::GetEffectsCount(xi::StatusEffect ID) -> uint8
 {

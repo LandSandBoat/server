@@ -70,7 +70,7 @@ public:
     auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
-    auto IsFarFromHome() -> bool; // check if mob is too far from spawn
+    auto IsFarFromHome() const -> bool; // check if mob is too far from spawn
 
     auto DistanceFromHome() const -> float;                      // how far it strayed: outside its roam region, or from its spawn point when it has none
     auto GetRoamAnchor() const -> position_t;                    // the point roaming is measured from
@@ -101,9 +101,9 @@ public:
     auto CanLink(position_t* pos, int16 superLink = 0) -> bool;
     auto ShouldForceLink() -> bool;
 
-    auto CanDropGil() -> bool;  // mob has gil to drop
-    auto CanStealGil() -> bool; // can steal gil from mob
-    void ResetGilPurse();       // reset total gil held
+    auto CanDropGil() const -> bool;  // mob has gil to drop
+    auto CanStealGil() const -> bool; // can steal gil from mob
+    void ResetGilPurse();             // reset total gil held
     auto GetEligibleSeals() const -> std::vector<uint16>;
     auto GetEligibleGeodes() const -> std::vector<uint16>;
 
@@ -123,7 +123,7 @@ public:
     auto GetUntargetable() const -> bool override;
 
     void         PostTick() override;
-    auto         GetRoamDistance() -> float;
+    auto         GetRoamDistance() const -> float;
     virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override

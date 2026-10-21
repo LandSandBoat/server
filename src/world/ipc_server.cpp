@@ -222,21 +222,21 @@ auto IPCServer::getIPPsForUnity(uint32 unityId) -> std::vector<IPP>
     return {};
 }
 
-auto IPCServer::getIPPsForYellZones() -> std::vector<IPP>
+auto IPCServer::getIPPsForYellZones() const -> std::vector<IPP>
 {
     TracyZoneScoped;
 
     return zoneSettings_.yellMapEndpoints_;
 }
 
-auto IPCServer::getIPPsForAssistZones() -> std::vector<IPP>
+auto IPCServer::getIPPsForAssistZones() const -> std::vector<IPP>
 {
     TracyZoneScoped;
 
     return zoneSettings_.assistMapEndpoints_;
 }
 
-auto IPCServer::getIPPsForAllZones() -> std::vector<IPP>
+auto IPCServer::getIPPsForAllZones() const -> std::vector<IPP>
 {
     TracyZoneScoped;
 
@@ -650,28 +650,28 @@ void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
     }
 }
 
-void IPCServer::handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message)
+void IPCServer::handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message) const
 {
     TracyZoneScoped;
 
     worldServer_.conquestSystem_->handleMessage(message.type, { ipp, message.payload });
 }
 
-void IPCServer::handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message)
+void IPCServer::handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message) const
 {
     TracyZoneScoped;
 
     worldServer_.besiegedSystem_->handleMessage(message.type, { ipp, message.payload });
 }
 
-void IPCServer::handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message)
+void IPCServer::handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message) const
 {
     TracyZoneScoped;
 
     worldServer_.campaignSystem_->handleMessage(message.type, { ipp, message.payload });
 }
 
-void IPCServer::handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message)
+void IPCServer::handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message) const
 {
     TracyZoneScoped;
 

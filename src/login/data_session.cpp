@@ -72,11 +72,11 @@ void data_session::renameCharInCharInfo(const uint32_t charId, const std::string
 void data_session::read_func()
 {
     auto sessionHash = loginHelpers::getHashFromPacket(ipAddress, buffer_.data());
-    if (sessionHash == "")
+    if (sessionHash.empty())
     {
         // Attempt to use stored session hash.
         sessionHash = this->sessionHash;
-        if (sessionHash == "")
+        if (sessionHash.empty())
         {
             ShowWarning(fmt::format("Session requested without valid sessionHash from {}", ipAddress));
             return;
@@ -627,7 +627,7 @@ void data_session::read_func()
 
 void data_session::handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
 {
-    if (self->sessionHash != "")
+    if (!self->sessionHash.empty())
     {
         auto& map = loginHelpers::getAuthenticatedSessions()[self->ipAddress];
         auto  it  = map.find(self->sessionHash);

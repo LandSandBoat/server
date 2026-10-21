@@ -257,7 +257,7 @@ void CLuaSpy::calledWith(sol::variadic_args expected) const
     error << "Spy '" << path_ << "' was not called with expected arguments\n";
     error << "Expected: " << formatArgs(expected) << "\n";
 
-    if (calls_.size() == 0)
+    if (calls_.empty())
     {
         error << "Function was never called";
     }

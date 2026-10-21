@@ -59,7 +59,7 @@ struct FishingContest
     uint32                   startTime  = 0;
     uint32                   changeTime = 0xFFFFFFFF; // Never change = default
 
-    auto isValid() -> bool
+    auto isValid() const -> bool
     {
         return status <= FISHING_CONTEST_STATUS::CLOSED &&
                criteria <= FISHING_CONTEST_CRITERIA::BOTH &&

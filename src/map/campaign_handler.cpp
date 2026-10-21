@@ -57,47 +57,47 @@ void CCampaignHandler::LoadCampaignZone(CZone* PZone)
     }
 }
 
-auto CCampaignHandler::GetCampaignId() -> uint8
+auto CCampaignHandler::GetCampaignId() const -> uint8
 {
     return m_zoneCampaignId;
 }
 
-auto CCampaignHandler::GetBattleStatus() -> uint8
+auto CCampaignHandler::GetBattleStatus() const -> uint8
 {
     return m_status;
 }
 
-auto CCampaignHandler::GetZoneControl() -> uint8
+auto CCampaignHandler::GetZoneControl() const -> uint8
 {
     return m_controllingNation;
 }
 
-auto CCampaignHandler::GetFortification() -> uint16
+auto CCampaignHandler::GetFortification() const -> uint16
 {
     return m_currentFortifications;
 }
 
-auto CCampaignHandler::GetResource() -> uint16
+auto CCampaignHandler::GetResource() const -> uint16
 {
     return m_currentResources;
 }
 
-auto CCampaignHandler::GetMaxFortification() -> uint16
+auto CCampaignHandler::GetMaxFortification() const -> uint16
 {
     return m_maxFortifications;
 }
 
-auto CCampaignHandler::GetMaxResource() -> uint16
+auto CCampaignHandler::GetMaxResource() const -> uint16
 {
     return m_maxResources;
 }
 
-auto CCampaignHandler::GetHeroism() -> uint8
+auto CCampaignHandler::GetHeroism() const -> uint8
 {
     return m_heroism;
 }
 
-auto CCampaignHandler::GetUnionCount(CampaignUnion CUnion) -> uint8
+auto CCampaignHandler::GetUnionCount(CampaignUnion CUnion) const -> uint8
 {
     switch (CUnion)
     {
@@ -116,7 +116,7 @@ auto CCampaignHandler::GetUnionCount(CampaignUnion CUnion) -> uint8
     }
 }
 
-auto CCampaignHandler::GetInfluence(CampaignArmy army) -> uint8
+auto CCampaignHandler::GetInfluence(CampaignArmy army) const -> uint8
 {
     switch (army)
     {

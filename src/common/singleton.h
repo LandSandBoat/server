@@ -46,13 +46,9 @@ public:
     }
 
 protected:
-    Singleton()
-    {
-    }
+    Singleton() = default;
 
-    virtual ~Singleton()
-    {
-    }
+    virtual ~Singleton() = default;
 
 private:
     // https://stackoverflow.com/a/55932298

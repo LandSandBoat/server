@@ -52,7 +52,7 @@ void MapSession::initBlowfish()
     blowfish_init((int8*)blowfish.hash, 16, blowfish.P, blowfish.S[0]);
 }
 
-auto MapSession::toString() -> std::string
+auto MapSession::toString() const -> std::string
 {
     return fmt::format("MapSession: client_ipp: {}", client_ipp.toString());
 }

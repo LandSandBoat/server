@@ -60,9 +60,9 @@ public:
     auto getIPPsForAlliance(uint32 allianceId) -> std::vector<IPP>;
     auto getIPPsForLinkshell(uint32 linkshellId) -> std::vector<IPP>;
     auto getIPPsForUnity(uint32 unityId) -> std::vector<IPP>;
-    auto getIPPsForYellZones() -> std::vector<IPP>;
-    auto getIPPsForAssistZones() -> std::vector<IPP>;
-    auto getIPPsForAllZones() -> std::vector<IPP>;
+    auto getIPPsForYellZones() const -> std::vector<IPP>;
+    auto getIPPsForAssistZones() const -> std::vector<IPP>;
+    auto getIPPsForAllZones() const -> std::vector<IPP>;
 
     //
     // Message routing
@@ -111,10 +111,10 @@ public:
     void handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::LinkshellSetMessage& message);
     void handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction& message);
     void handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message);
-    void handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message);
-    void handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message);
-    void handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message);
-    void handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message);
+    void handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message) const;
+    void handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message) const;
+    void handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message) const;
+    void handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message) const;
     void handleMessage_EntityInformationRequest(const IPP& ipp, const ipc::EntityInformationRequest& message);
     void handleMessage_EntityInformationResponse(const IPP& ipp, const ipc::EntityInformationResponse& message);
     void handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::SendPlayerToLocation& message);
@@ -122,7 +122,7 @@ public:
     void handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallRequest& message);
     void handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallResponse& message);
 
-    void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);
+    void handleUnknownMessage(const IPP& ipp, std::span<uint8_t> message);
 
 private:
     WorldEngine& worldServer_;

@@ -508,7 +508,7 @@ auto CBattlefield::GetEntity(CBaseEntity* PEntity) -> CBaseEntity*
     return nullptr;
 }
 
-auto CBattlefield::IsRegistered(CCharEntity* PChar) -> bool
+auto CBattlefield::IsRegistered(CCharEntity* PChar) const -> bool
 {
     return PChar && m_RegisteredPlayers.contains(PChar->id);
 }

@@ -47,7 +47,4 @@ CFellowEntity::CFellowEntity(CCharEntity* PChar)
     // TODO
 }
 
-CFellowEntity::~CFellowEntity()
-{
-    // TODO
-}
+CFellowEntity::~CFellowEntity() = default;

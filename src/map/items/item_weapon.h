@@ -56,7 +56,7 @@ public:
     auto isTwoHanded() const -> bool;
     auto isHandToHand() const -> bool;
     auto isUnlockable() const -> bool;
-    auto isUnlocked() -> bool;
+    auto isUnlocked() const -> bool;
 
     void setSkillType(xi::SkillType skillType);
     void setSubSkillType(uint8 subSkillType);

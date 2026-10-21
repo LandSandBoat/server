@@ -40,9 +40,7 @@ CPlayerController::CPlayerController(CCharEntity* _PChar)
 {
 }
 
-CPlayerController::~CPlayerController()
-{
-}
+CPlayerController::~CPlayerController() = default;
 
 auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
 {

@@ -182,7 +182,7 @@ public:
     void ApplyLevelRestrictions(CCharEntity* PChar) const;
     auto InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false) -> bool;
     auto GetEntity(CBaseEntity* PEntity) -> CBaseEntity*;
-    auto IsRegistered(CCharEntity* PChar) -> bool;
+    auto IsRegistered(CCharEntity* PChar) const -> bool;
     auto HasClearance(CCharEntity* PChar) const -> bool;
     void RemoveRegistration(CCharEntity* PChar);
     void GrantClearance(CCharEntity* PChar);

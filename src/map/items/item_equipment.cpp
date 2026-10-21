@@ -101,28 +101,9 @@ CItemEquipment::CItemEquipment(uint16 id)
     m_superiorLevel    = 0;
 }
 
-CItemEquipment::CItemEquipment(const CItemEquipment& other)
-: CItemUsable(other)
-, modList(other.modList)
-, petModList(other.petModList)
-, latentList(other.latentList)
-, m_reqLvl(other.m_reqLvl)
-, m_iLvl(other.m_iLvl)
-, m_jobs(other.m_jobs)
-, m_modelID(other.m_modelID)
-, m_scriptType(other.m_scriptType)
-, m_shieldSize(other.m_shieldSize)
-, m_absorption(other.m_absorption)
-, m_equipSlotID(other.m_equipSlotID)
-, m_removeSlotID(other.m_removeSlotID)
-, m_removeSlotLookID(other.m_removeSlotLookID)
-, m_superiorLevel(other.m_superiorLevel)
-{
-}
+CItemEquipment::CItemEquipment(const CItemEquipment& other) = default;
 
-CItemEquipment::~CItemEquipment()
-{
-}
+CItemEquipment::~CItemEquipment() = default;
 
 auto CItemEquipment::getModelId() const -> uint16
 {
@@ -231,7 +212,7 @@ auto CItemEquipment::getSlotType() const -> uint8
     return m_equipSlotID ? static_cast<uint8>(std::bit_width(static_cast<uint32>(m_equipSlotID)) - 1) : 0;
 }
 
-auto CItemEquipment::getSuperiorLevel() -> uint8
+auto CItemEquipment::getSuperiorLevel() const -> uint8
 {
     return m_superiorLevel;
 }
