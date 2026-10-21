@@ -1946,7 +1946,7 @@ npcs:
     status: cutscene_only
 
   16974358:
-    script: GuloolJaJa
+    script: blank
     render:
       look:
         type:  automaton
@@ -2007,7 +2007,7 @@ npcs:
     status: cutscene_only
 
   16974364:
-    script: GoblinFootprin
+    script: blank
     at:     [-107.520, 1.999, 85.896]
     render:
       look:
@@ -2018,26 +2018,24 @@ npcs:
     status: cutscene_only
 
   16974365:
-    script: HomePoint#1
+    script: blank
     render:
       look:
         type:  standard
         model: 1799
       entity_flags: 27
       name_prefix:  32
-    status:  cutscene_only
-    content: toau
+    status: cutscene_only
 
   16974366:
-    script: HomePoint#2
+    script: blank
     render:
       look:
         type:  standard
         model: 1799
       entity_flags: 27
       name_prefix:  32
-    status:  cutscene_only
-    content: soa
+    status: cutscene_only
 
   16974367:
     script:       Mutarid
