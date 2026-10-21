@@ -46,7 +46,7 @@ struct Recast_t
 
 class CBattleEntity;
 
-typedef std::vector<Recast_t> RecastList_t;
+using RecastList_t = std::vector<Recast_t>;
 
 class CRecastContainer
 {
@@ -74,9 +74,7 @@ public:
 
     CRecastContainer(CBattleEntity* PChar);
 
-    virtual ~CRecastContainer()
-    {
-    }
+    virtual ~CRecastContainer() = default;
 
 protected:
     RecastList_t RecastMagicList;

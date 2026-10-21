@@ -97,7 +97,7 @@ void CLinkshell::setMessage(const std::string& message, const std::string& poste
         return;
     }
 
-    if (message.size() != 0)
+    if (!message.empty())
     {
         message::send(ipc::LinkshellSetMessage{
             .linkshellId   = m_id,

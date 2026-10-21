@@ -468,7 +468,7 @@ void auth_session::read_func()
             if (status & ACCOUNT_STATUS_CODE::NORMAL)
             {
                 // Account info verified, update password
-                if (updated_password == "")
+                if (updated_password.empty())
                 {
                     ShowWarningFmt("login_parse: Empty password: Could not update password for user <{}>.", username);
                     sendLoginResult(login_result::LOGIN_ERROR_CHANGE_PASSWORD);

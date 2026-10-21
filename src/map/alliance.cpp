@@ -108,7 +108,7 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
                          port);
 
         // Remove all parties. The `delParty` call removes a party from `partyList`.
-        while (partyList.size() > 0)
+        while (!partyList.empty())
         {
             CParty* party = partyList.at(0);
             this->delParty(party);
@@ -213,7 +213,7 @@ void CAlliance::delParty(CParty* party)
     }
 
     // Don't delete parties when there's no party in the alliance
-    if (!party->m_PAlliance || party->m_PAlliance->partyList.size() == 0)
+    if (!party->m_PAlliance || party->m_PAlliance->partyList.empty())
     {
         return;
     }

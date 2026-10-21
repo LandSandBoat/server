@@ -90,7 +90,7 @@ auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> b
     return false;
 }
 
-void ConquestSystem::sendTallyStartMsg()
+void ConquestSystem::sendTallyStartMsg() const
 {
     worldServer_.ipcServer_->broadcastMessage(ipc::ConquestEvent{
         .type = ConquestMessage::W2M_WeeklyUpdateStart,
@@ -294,7 +294,7 @@ void ConquestSystem::updateVanaHourlyConquest()
     sendInfluencesMsg(ShouldUpdateZones::No);
 }
 
-auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
+auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t>
 {
     const auto rset = db::preparedStmt("SELECT sandoria_influence, bastok_influence, windurst_influence, mob_kills, player_homepoints FROM conquest_system ORDER BY region_id");
 
@@ -316,7 +316,7 @@ auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
     return influences;
 }
 
-auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
+auto ConquestSystem::getRegionControls() -> std::vector<region_control_t>
 {
     const auto rset = db::preparedStmt("SELECT region_control, region_control_prev FROM conquest_system");
 

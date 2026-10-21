@@ -233,7 +233,7 @@ void resetEntityData(CBaseEntity* PEntity);
 
 void OnEntityLoad(CBaseEntity* PEntity);
 
-void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, const uint8 incrediblyEasyPreyLevel, const uint16 incrediblyEasyPreyMinExp);
+void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, uint8 incrediblyEasyPreyLevel, uint16 incrediblyEasyPreyMinExp);
 
 // Base experience values, indexed by [levelDifference + 44][(charLevel - 1) / 5] for level differences -44 to +15.
 using ExperiencePointsTable = std::array<std::array<uint16, 20>, 60>;

@@ -16940,7 +16940,7 @@ auto CLuaBaseEntity::getMaster() -> CBaseEntity*
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getPetName() -> const std::string
+auto CLuaBaseEntity::getPetName() -> std::string
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {

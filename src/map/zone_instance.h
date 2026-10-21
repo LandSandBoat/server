@@ -86,7 +86,7 @@ public:
     void ForEachAllyInstance(CBaseEntity* PEntity, FnRef<void(CMobEntity*)> func) override;
 
 private:
-    typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
+    using instanceList_t = std::vector<std::unique_ptr<CInstance>>;
 
     instanceList_t                  m_InstanceList;
     FlatHashMap<uint32, CInstance*> instancesByRun_;

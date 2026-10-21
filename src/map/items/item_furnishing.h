@@ -143,7 +143,7 @@ public:
     void setOn2ndFloor(bool on2ndFloor);
     auto getOn2ndFloor() -> bool;
 
-    auto getSignature() const -> const std::string override;
+    auto getSignature() const -> std::string override;
     void setSignature(const std::string& signature) override;
 
     auto isGardeningPot() const -> bool;

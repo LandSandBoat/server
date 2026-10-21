@@ -32,7 +32,7 @@ GP_SERV_COMMAND_FRAGMENTS::SERVMES::SERVMES(const std::string& message, int8 lan
     packet.timestamp = timestamp == 0 ? earth_time::timestamp() : timestamp;
 
     // Ensure we have a message and the requested offset is not outside the bounds
-    if (message.length() > 0 && message.length() > message_offset)
+    if (!message.empty() && message.length() > message_offset)
     {
         const auto msgSize   = message.length() + 1;
         const auto sndLength = (msgSize - message_offset) > 236 ? 236 : (msgSize - message_offset);

@@ -71,8 +71,8 @@ const uint16 ROE_TRUST_ID[11] = {
     981   // Sylvie
 };
 
-typedef std::array<uint16, 6>            RecordTimetable_D;
-typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
+using RecordTimetable_D = std::array<uint16, 6>;
+using RecordTimetable_W = std::array<RecordTimetable_D, 7>;
 
 struct RoeSystemData
 {
@@ -104,7 +104,7 @@ struct RoeCheckHandler
 
 extern std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
 
-typedef std::variant<uint32, CMobEntity*, std::string> RoeDatagramPayload;
+using RoeDatagramPayload = std::variant<uint32, CMobEntity*, std::string>;
 
 struct RoeDatagram
 {
@@ -130,7 +130,7 @@ struct RoeDatagram
     }
 };
 
-typedef std::vector<RoeDatagram> RoeDatagramList;
+using RoeDatagramList = std::vector<RoeDatagram>;
 
 namespace roeutils
 {

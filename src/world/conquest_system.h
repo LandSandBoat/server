@@ -63,10 +63,10 @@ private:
     void addMobKills(int32 count, xi::Region region);
     void addPlayerHomepoints(int32 count, xi::Region region);
 
-    auto getRegionalInfluences() -> const std::vector<influence_t>;
-    auto getRegionControls() -> const std::vector<region_control_t>;
+    auto getRegionalInfluences() -> std::vector<influence_t>;
+    auto getRegionControls() -> std::vector<region_control_t>;
 
-    void sendTallyStartMsg();
+    void sendTallyStartMsg() const;
     void sendInfluencesMsg(ShouldUpdateZones shouldUpdateZones);
     void sendRegionControlsMsg(ConquestMessage msgType);
 

@@ -79,7 +79,7 @@ auto CPetEntity::getPetType() const -> PET_TYPE
     return m_PetType;
 }
 
-auto CPetEntity::getSpawnLevel() -> uint8
+auto CPetEntity::getSpawnLevel() const -> uint8
 {
     return m_spawnLevel;
 }
@@ -137,7 +137,7 @@ void CPetEntity::setJugDuration(timer::duration seconds)
     m_jugDuration = seconds;
 }
 
-auto CPetEntity::GetScriptName() -> const std::string
+auto CPetEntity::GetScriptName() const -> std::string
 {
     switch (getPetType())
     {

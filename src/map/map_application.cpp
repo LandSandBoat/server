@@ -88,9 +88,7 @@ MapApplication::MapApplication(const int argc, char** argv)
     engineConfig_.rebuildNavmeshes = args().get<bool>("--rebuild-navmeshes");
 }
 
-MapApplication::~MapApplication()
-{
-}
+MapApplication::~MapApplication() = default;
 
 auto MapApplication::createEngine() -> std::unique_ptr<Engine>
 {

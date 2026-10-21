@@ -96,7 +96,7 @@ inline auto isWithinVerticalDistance(CBaseEntity* source, CBaseEntity* target) -
 
 } // namespace
 
-typedef std::pair<float, CCharEntity*> CharScorePair;
+using CharScorePair = std::pair<float, CCharEntity*>;
 
 CZoneEntities::CZoneEntities(Scheduler& scheduler, MapConfig config, CZone* zone)
 : scheduler_(scheduler)
@@ -1227,7 +1227,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             // If max amount of characters are currently spawned, we need to despawn one before we can spawn a new one
             if (PChar->SpawnPCList.size() >= CHARACTER_SYNC_LIMIT_MAX)
             {
-                if (spawnedCharacters.size() == 0)
+                if (spawnedCharacters.empty())
                 {
                     // No spawned characters left that we can swap with
                     break;

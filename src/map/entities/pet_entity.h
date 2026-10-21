@@ -53,13 +53,13 @@ public:
 
     auto petID() const -> uint32;
     auto getPetType() const -> PET_TYPE;
-    auto getSpawnLevel() -> uint8;
+    auto getSpawnLevel() const -> uint8;
     void setSpawnLevel(uint8 level);
     auto getJugSpawnTime() -> timer::time_point;  // initial spawn time of this pet if it's a jug pet
     auto getJugDuration() -> timer::duration;     // duration of this jug pet in seconds
     void setJugDuration(timer::duration seconds); // sets the duration of this jug pet in seconds
     auto isBstPet() const -> bool;
-    auto GetScriptName() -> const std::string;
+    auto GetScriptName() const -> std::string;
     auto getWyvernType() -> WYVERN_TYPE;
 
     auto shouldPersistThroughZone() -> bool; // if true, zoning should not cause a currently active pet to despawn

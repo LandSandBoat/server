@@ -319,7 +319,7 @@ auto CMobEntity::GetRandomGil() -> uint32
     return (uint32)gil;
 }
 
-auto CMobEntity::CanDropGil() -> bool
+auto CMobEntity::CanDropGil() const -> bool
 {
     // smaller than 0 means drop no gil
     if (getMobMod(xi::MobMod::GilMax) < 0)
@@ -335,7 +335,7 @@ auto CMobEntity::CanDropGil() -> bool
     return getMobMod(xi::MobMod::GilBonus) > 0;
 }
 
-auto CMobEntity::CanStealGil() -> bool
+auto CMobEntity::CanStealGil() const -> bool
 {
     // TODO: Some mobs cannot be mugged
     return CanDropGil();
@@ -512,7 +512,7 @@ auto CMobEntity::CanDeaggro() const -> bool
     return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (m_Type & xi::MobType::Battlefield) != xi::MobType::Normal);
 }
 
-auto CMobEntity::IsFarFromHome() -> bool
+auto CMobEntity::IsFarFromHome() const -> bool
 {
     return DistanceFromHome() > m_maxRoamDistance;
 }
@@ -674,7 +674,7 @@ void CMobEntity::PostTick()
     }
 }
 
-auto CMobEntity::GetRoamDistance() -> float
+auto CMobEntity::GetRoamDistance() const -> float
 {
     return (float)getMobMod(xi::MobMod::RoamDistance);
 }

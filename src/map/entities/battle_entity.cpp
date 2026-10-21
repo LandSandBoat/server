@@ -132,12 +132,12 @@ auto CBattleEntity::isDead() const -> bool
     return (health.hp <= 0 || status == xi::Status::Disappear || PAI->IsCurrentState<CDeathState>() || PAI->IsCurrentState<CDespawnState>());
 }
 
-auto CBattleEntity::isAlive() -> bool
+auto CBattleEntity::isAlive() const -> bool
 {
     return !isDead();
 }
 
-auto CBattleEntity::isFullyHealed() -> bool
+auto CBattleEntity::isFullyHealed() const -> bool
 {
     if (isAlive())
     {
@@ -456,7 +456,7 @@ auto CBattleEntity::UpdateSpeed(bool run) -> uint8
     return speed;
 }
 
-auto CBattleEntity::CanRest() -> bool
+auto CBattleEntity::CanRest() const -> bool
 {
     return !getMod(xi::Mod::REGEN_DOWN) && !StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::NoRest);
 }
@@ -1156,32 +1156,32 @@ auto CBattleEntity::STR() -> uint16
     return std::clamp(stats.STR + getMod(xi::Mod::STR), 0, 999);
 }
 
-auto CBattleEntity::DEX() -> uint16
+auto CBattleEntity::DEX() const -> uint16
 {
     return std::clamp(stats.DEX + getMod(xi::Mod::DEX), 0, 999);
 }
 
-auto CBattleEntity::VIT() -> uint16
+auto CBattleEntity::VIT() const -> uint16
 {
     return std::clamp(stats.VIT + getMod(xi::Mod::VIT), 0, 999);
 }
 
-auto CBattleEntity::AGI() -> uint16
+auto CBattleEntity::AGI() const -> uint16
 {
     return std::clamp(stats.AGI + getMod(xi::Mod::AGI), 0, 999);
 }
 
-auto CBattleEntity::INT() -> uint16
+auto CBattleEntity::INT() const -> uint16
 {
     return std::clamp(stats.INT + getMod(xi::Mod::INT), 0, 999);
 }
 
-auto CBattleEntity::MND() -> uint16
+auto CBattleEntity::MND() const -> uint16
 {
     return std::clamp(stats.MND + getMod(xi::Mod::MND), 0, 999);
 }
 
-auto CBattleEntity::CHR() -> uint16
+auto CBattleEntity::CHR() const -> uint16
 {
     return std::clamp(stats.CHR + getMod(xi::Mod::CHR), 0, 999);
 }
@@ -1880,7 +1880,7 @@ void CBattleEntity::SetDeathType(uint8 type)
     m_DeathType = static_cast<DEATH_TYPE>(type);
 }
 
-auto CBattleEntity::GetDeathType() -> uint8
+auto CBattleEntity::GetDeathType() const -> uint8
 {
     return static_cast<uint8>(m_DeathType);
 }
@@ -4046,7 +4046,7 @@ void CBattleEntity::setBattleID(uint16 battleID)
     m_battleID = battleID;
 }
 
-auto CBattleEntity::getBattleID() -> uint16
+auto CBattleEntity::getBattleID() const -> uint16
 {
     return m_battleID;
 }

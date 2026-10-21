@@ -86,7 +86,7 @@ auto getLine(std::string& line) -> bool
     if (keyCharacter == '\b')
     {
         fmt::print("\b \b"); // move cursor left, overwrite with space, move cursor left
-        if (line.size() > 0)
+        if (!line.empty())
         {
             line.pop_back(); // remove last char in buffer if any
         }

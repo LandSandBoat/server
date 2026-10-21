@@ -102,7 +102,7 @@ struct LootItem_t
     uint8  LootGroupId;
 };
 
-typedef std::vector<LootItem_t> LootList_t;
+using LootList_t = std::vector<LootItem_t>;
 
 struct LootContainer
 {

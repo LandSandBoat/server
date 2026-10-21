@@ -520,7 +520,7 @@ void CCharEntity::erasePackets(uint8 num)
     }
 }
 
-auto CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) -> bool
+auto CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool
 {
     // Filter others synthesis results
     if (packet->getType() == 0x70 && playerConfig.MessageFilter.others_synthesis_and_fishing_results)
@@ -884,7 +884,7 @@ auto CCharEntity::maze() -> maze_t&
     return maze_;
 }
 
-auto CCharEntity::getShieldSize() -> int8
+auto CCharEntity::getShieldSize() const -> int8
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);
 
@@ -901,7 +901,7 @@ auto CCharEntity::getShieldSize() -> int8
     return PItem->getShieldSize();
 }
 
-auto CCharEntity::getShieldDefense() -> int16
+auto CCharEntity::getShieldDefense() const -> int16
 {
     CItemEquipment* PItem = getEquip(SLOT_SUB);
 
@@ -913,7 +913,7 @@ auto CCharEntity::getShieldDefense() -> int16
     return 0;
 }
 
-auto CCharEntity::hasBazaar() -> bool
+auto CCharEntity::hasBazaar() const -> bool
 {
     // FFXIclopedia: a Monipulator has no bazaar, even one priced before entering.
     if (isSettingBazaarPrices || m_PMonstrosity != nullptr)
@@ -1746,7 +1746,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
         }
 
-        if (PAI->TargetFind->m_targets.size() == 0)
+        if (PAI->TargetFind->m_targets.empty())
         {
             // There used to be an assumed interrupt handler here.
             // Add a test and capture before reintroducing.
@@ -1874,7 +1874,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     PAI->TargetFind->findSingleTarget(PTarget, findFlags, PAbility->getValidTarget());
 
     // Check if target is untargetable
-    if (PAI->TargetFind->m_targets.size() == 0)
+    if (PAI->TargetFind->m_targets.empty())
     {
         return;
     }
@@ -2357,7 +2357,7 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
     PAI->TargetFind->findSingleTarget(PTarget, findFlags, PItem->getValidTarget());
 
     // Check if target is untargetable
-    if (PAI->TargetFind->m_targets.size() == 0)
+    if (PAI->TargetFind->m_targets.empty())
     {
         // TODO: interrupt action packet?
         return false;
@@ -3049,7 +3049,7 @@ auto CCharEntity::isInEvent() const -> bool
     return currentEvent->eventId != -1;
 }
 
-auto CCharEntity::isNpcLocked() -> bool
+auto CCharEntity::isNpcLocked() const -> bool
 {
     return isInEvent() || inSequence;
 }
@@ -3158,7 +3158,7 @@ void CCharEntity::tryStartNextEvent()
 
     if (currentEvent->strings.empty())
     {
-        if (currentEvent->params.size() > 0 || currentEvent->textTable != -1)
+        if (!currentEvent->params.empty() || currentEvent->textTable != -1)
         {
             pushPacket<GP_SERV_COMMAND_EVENTNUM>(this, currentEvent);
         }

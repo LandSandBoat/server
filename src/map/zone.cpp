@@ -443,7 +443,7 @@ void CZone::LoadZoneSettings(const std::optional<xi::data::ZoneSettings>& settin
             navMeshData_            = settings->NavMesh;
         }
 
-        if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
+        if (!rset->getOrDefault<std::string>("bcnmname", "").empty()) // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }

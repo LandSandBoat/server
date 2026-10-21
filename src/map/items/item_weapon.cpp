@@ -57,25 +57,7 @@ CItemWeapon::CItemWeapon(uint16 id)
     m_wsunlockpoints = 0;
 }
 
-CItemWeapon::CItemWeapon(const CItemWeapon& other)
-: CItemEquipment(other)
-, m_skillType(other.m_skillType)
-, m_subSkillType(other.m_subSkillType)
-, m_iLvlSkill(other.m_iLvlSkill)
-, m_iLvlParry(other.m_iLvlParry)
-, m_iLvlMacc(other.m_iLvlMacc)
-, m_damage(other.m_damage)
-, m_delay(other.m_delay)
-, m_baseDelay(other.m_baseDelay)
-, m_dmgType(other.m_dmgType)
-, m_effect(other.m_effect)
-, m_maxHit(other.m_maxHit)
-, m_DPS(other.m_DPS)
-, m_wsunlockpoints(other.m_wsunlockpoints)
-, m_ranged(other.m_ranged)
-, m_twoHanded(other.m_twoHanded)
-{
-}
+CItemWeapon::CItemWeapon(const CItemWeapon& other) = default;
 
 CItemWeapon::~CItemWeapon() = default;
 
@@ -166,7 +148,7 @@ auto CItemWeapon::isUnlockable() const -> bool
  *                                                                       *
  ************************************************************************/
 
-auto CItemWeapon::isUnlocked() -> bool
+auto CItemWeapon::isUnlocked() const -> bool
 {
     return isUnlockable() && getCurrentUnlockPoints() == m_wsunlockpoints;
 }

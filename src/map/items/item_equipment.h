@@ -71,7 +71,7 @@ public:
     auto getSlotType() const -> uint8;
     auto getAugment(uint8 slot) const -> uint16;
     auto getTrialNumber() const -> uint16;
-    auto getSuperiorLevel() -> uint8;
+    auto getSuperiorLevel() const -> uint8;
 
     auto IsShield() const -> bool;
     auto isEquippableByRace(uint8 race) const -> bool;

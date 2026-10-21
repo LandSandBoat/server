@@ -55,9 +55,7 @@ auto sockaddr2hostport(const sockaddr_in& addr) -> uint16
     return ntohs(addr.sin_port);
 }
 
-IPP::IPP()
-{
-}
+IPP::IPP() = default;
 
 IPP::IPP(const uint32 ip, const uint16 port)
 : ip_(ip)

@@ -729,7 +729,7 @@ void IPCClient::handleMessage_MessageStandard(const IPP& ipp, const ipc::Message
     {
         // TODO: Exchange the packet struct over IPC to avoid having to match one-offs.
         // This matches messages with just a string parameter.
-        if (message.string2.size() > 0 && message.param0 == 0 && message.param1 == 0)
+        if (!message.string2.empty() && message.param0 == 0 && message.param1 == 0)
         {
             PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_MESSAGE>(message.string2, message.message));
         }

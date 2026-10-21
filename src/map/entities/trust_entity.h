@@ -35,11 +35,11 @@ public:
     CTrustEntity(CCharEntity* PMaster, uint32 trustId, IsPassiveTrust isPassiveTrust);
     ~CTrustEntity() override;
 
-    auto trustID() -> uint32;
+    auto trustID() const -> uint32;
 
     auto shieldSize() -> int8;
 
-    auto released() -> bool;
+    auto released() const -> bool;
     void setReleased(bool released);
 
     auto passiveTrust() -> IsPassiveTrust;

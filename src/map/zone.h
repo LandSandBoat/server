@@ -150,11 +150,11 @@ class CTreasurePool;
 class CZoneEntities;
 class NominateManager;
 
-typedef std::list<std::unique_ptr<ITriggerArea>> triggerAreaList_t;
+using triggerAreaList_t = std::list<std::unique_ptr<ITriggerArea>>;
 
-typedef std::list<zoneLine_t*> zoneLineList_t;
+using zoneLineList_t = std::list<zoneLine_t*>;
 
-typedef FlatHashMap<uint16, CBaseEntity*> EntityList_t;
+using EntityList_t = FlatHashMap<uint16, CBaseEntity*>;
 
 using QueryByNameResult_t = std::vector<CBaseEntity*>;
 

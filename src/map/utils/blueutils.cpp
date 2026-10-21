@@ -577,7 +577,7 @@ void CalculateTraits(CCharEntity* PChar)
     }
 
     // Append in upgraded traits in place of ones that were removed in the search for upgraded traits, if any
-    if (upgradedTraits.size() > 0)
+    if (!upgradedTraits.empty())
     {
         traitsToAdd.insert(traitsToAdd.end(), upgradedTraits.begin(), upgradedTraits.end());
     }

@@ -832,7 +832,7 @@ public:
     void setPetStats(uint8 petId);
     auto getMinimumPetLevel() -> uint8; // Returns the minimum level of the pet, such as level 23 for Courier Carrie or 0 if non applicable.
 
-    auto getPetName() -> const std::string;
+    auto getPetName() -> std::string;
     void setPetName(uint8 pType, uint16 value, const sol::object& arg2);
     void registerChocobo(const sol::table& chocobo) const;
     auto getFieldChocobo() const -> sol::object;

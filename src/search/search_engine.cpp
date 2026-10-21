@@ -50,9 +50,7 @@ SearchEngine::SearchEngine(Scheduler& scheduler)
     }
 }
 
-SearchEngine::~SearchEngine()
-{
-}
+SearchEngine::~SearchEngine() = default;
 
 void SearchEngine::onInitialize()
 {

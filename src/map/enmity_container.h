@@ -36,7 +36,7 @@ struct EnmityObject_t
     bool           active;
 };
 
-typedef FlatHashMap<uint32, EnmityObject_t> EnmityList_t;
+using EnmityList_t = FlatHashMap<uint32, EnmityObject_t>;
 
 class CEnmityContainer
 {
@@ -61,8 +61,8 @@ public:
     void LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percent, CBattleEntity* HateReceiver); // lower % of hate or transfer it
     auto GetCE(CBattleEntity* PEntity) const -> int32;
     auto GetVE(CBattleEntity* PEntity) const -> int32;
-    void SetCE(CBattleEntity* PEntity, const int32 amount);
-    void SetVE(CBattleEntity* PEntity, const int32 amount);
+    void SetCE(CBattleEntity* PEntity, int32 amount);
+    void SetVE(CBattleEntity* PEntity, int32 amount);
     void DecayEnmity();
     auto IsWithinEnmityRange(CBattleEntity* PEntity) const -> bool;
     auto GetEnmityList() -> EnmityList_t*;

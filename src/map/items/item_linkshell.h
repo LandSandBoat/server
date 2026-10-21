@@ -48,7 +48,7 @@ public:
     auto GetLSRawColor() -> uint16;
     void SetLSID(uint32 lsid);
     void SetLSColor(uint16 color);
-    auto getSignature() const -> const std::string override;
+    auto getSignature() const -> std::string override;
     void setSignature(const std::string& signature) override;
     void SetLSType(LSTYPE value);
 };

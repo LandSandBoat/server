@@ -47,6 +47,6 @@ public:
     // On retail, when you move an item out of the original slot to a different bag, it first sends "move old item to new slot"
     // It then sends a "set old slot to empty" and when it does so, it leaks the old extdata
     // We emulate this here with a non-null `staleItem` pointer to the old item
-    GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAINER_ID locationId, const uint8_t slotId, CItem* staleItem = nullptr);
+    GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, CONTAINER_ID locationId, uint8_t slotId, CItem* staleItem = nullptr);
     GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const ItemLocation& loc, CItem* staleItem = nullptr);
 };

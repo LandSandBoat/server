@@ -149,12 +149,12 @@ public:
     ~CBattleEntity() override;
 
     auto STR() -> uint16;
-    auto DEX() -> uint16;
-    auto VIT() -> uint16;
-    auto AGI() -> uint16;
-    auto INT() -> uint16;
-    auto MND() -> uint16;
-    auto CHR() -> uint16;
+    auto DEX() const -> uint16;
+    auto VIT() const -> uint16;
+    auto AGI() const -> uint16;
+    auto INT() const -> uint16;
+    auto MND() const -> uint16;
+    auto CHR() const -> uint16;
     auto DEF() -> uint16;
     auto ATT(SLOTTYPE slot) -> uint16;
     auto ACC(uint8 attackNumber, uint16 offsetAccuracy) -> uint16;
@@ -163,8 +163,8 @@ public:
     auto RACC(uint16 bonusAcc = 0) -> uint16;
 
     auto isDead() const -> bool;
-    auto isAlive() -> bool;
-    auto isFullyHealed() -> bool;
+    auto isAlive() const -> bool;
+    auto isFullyHealed() const -> bool;
     auto isInAdoulin() -> bool;
     auto isInAssault() -> bool;
     auto isInDynamis() -> bool;
@@ -186,7 +186,7 @@ public:
     void SetSLevel(uint8 slvl);
 
     void SetDeathType(uint8 type);
-    auto GetDeathType() -> uint8;
+    auto GetDeathType() const -> uint8;
 
     auto GetHPP() const -> uint8;
     auto GetMaxHP() const -> int32;
@@ -220,7 +220,7 @@ public:
     auto getMod(xi::Mod modID) const -> int16;
     auto getMaxGearMod(xi::Mod modID) -> int16;
 
-    auto CanRest() -> bool;        // checks if able to heal
+    auto CanRest() const -> bool;  // checks if able to heal
     auto Rest(float rate) -> bool; // heal an amount of hp / mp
 
     void addModifier(xi::Mod type, int16 amount);
@@ -345,7 +345,7 @@ public:
     auto GetBattleTime() -> timer::duration;
 
     void setBattleID(uint16 battleID);
-    auto getBattleID() -> uint16;
+    auto getBattleID() const -> uint16;
 
     virtual auto Tick(timer::time_point) -> Task<void> override;
     virtual void PostTick() override;

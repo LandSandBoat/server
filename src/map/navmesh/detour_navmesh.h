@@ -52,7 +52,7 @@ public:
     auto snapToValidPosition(position_t& position) const -> void override;
     auto moveAlongSurface(const position_t& start, const position_t& end, position_t& result) const -> bool override;
 
-    [[nodiscard]] static auto detourStatusString(const uint32 status) -> std::string;
+    [[nodiscard]] static auto detourStatusString(uint32 status) -> std::string;
 
 private:
     // Traversal filter: walk all flags, skip DISABLED, and skip links when asked to.

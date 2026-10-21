@@ -254,9 +254,7 @@ struct Chain_t
 {
     std::vector<Gambit_t> gambits;
 
-    Chain_t()
-    {
-    }
+    Chain_t() = default;
 };
 
 // TODO: smaller types, make less bad.

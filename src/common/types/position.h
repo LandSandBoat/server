@@ -38,9 +38,7 @@ struct position_t
     // rotation value and the radian value.
     uint8 rotation = 0;
 
-    position_t()
-    {
-    }
+    position_t() = default;
 
     position_t(float _x, float _y, float _z, uint16 _moving, uint8 _rotation)
     : x(_x)
