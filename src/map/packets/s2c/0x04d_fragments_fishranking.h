@@ -46,7 +46,6 @@ public:
         int32_t             offset;       // PS2: offset
         int32_t             data_size;    // PS2: size
         uint32_t            totalEntries; // PS2: (unnamed)
-        uint32_t            padding;      // PS2: (unnamed)
         FishingContestEntry data[6];      // PS2: (unnamed)
     };
 
