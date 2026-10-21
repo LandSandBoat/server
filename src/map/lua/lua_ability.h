@@ -30,11 +30,11 @@
 enum class ActionAnimation : uint16_t;
 enum class MsgBasic : uint16_t;
 class CAbility;
-enum class Recast : uint16_t;
 
 namespace xi
 {
 
+enum class Recast : uint16_t;
 enum class StatusEffect : uint16_t;
 
 } // namespace xi
@@ -56,7 +56,7 @@ public:
     uint16 getID();
     auto   getMsg() -> MsgBasic;
     uint16 getRecast();
-    auto   getRecastID() const -> Recast;
+    auto   getRecastID() const -> xi::Recast;
     auto   getRange() -> uint16;
     auto   getRadius() const -> uint8;
     auto   getAOE() const -> uint8;

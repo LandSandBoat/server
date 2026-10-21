@@ -32,18 +32,18 @@ GP_SERV_COMMAND_ABIL_RECAST::GP_SERV_COMMAND_ABIL_RECAST(CCharEntity* PChar)
     auto& packet = this->data();
 
     uint8               count      = 1;
-    const RecastList_t* RecastList = PChar->PRecastContainer->GetRecastList(RECAST_ABILITY);
+    const RecastList_t* RecastList = PChar->PRecastContainer->GetRecastList(xi::RecastType::Ability);
     for (auto&& recast : *RecastList)
     {
         const auto remaining     = recast.RecastTime == 0s ? 0s : std::chrono::ceil<std::chrono::seconds>(recast.TimeStamp - timer::now() + recast.RecastTime);
         const auto recastSeconds = static_cast<uint32>(std::max<int64>(timer::count_seconds(remaining), 0));
 
-        if (recast.ID == Recast::Mount) // borrowing this id for mount recast
+        if (recast.ID == xi::Recast::Mount) // borrowing this id for mount recast
         {
             packet.MountRecast   = recastSeconds;
             packet.MountRecastId = static_cast<uint32_t>(recast.ID);
         }
-        else if (recast.ID != Recast::Special)
+        else if (recast.ID != xi::Recast::Special)
         {
             packet.Timers[count].Timer   = recastSeconds;
             packet.Timers[count].TimerId = static_cast<uint8_t>(recast.ID);

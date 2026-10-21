@@ -727,7 +727,7 @@ auto LoadFromCharRecastSQL(CCharEntity* PChar) -> void
             }
             if (now < cast_time + recast)
             {
-                PChar->PRecastContainer->Load(RECAST_ABILITY, rset->get<Recast>("id"), (cast_time + recast - now), chargeTime, maxCharges);
+                PChar->PRecastContainer->Load(xi::RecastType::Ability, rset->get<xi::Recast>("id"), (cast_time + recast - now), chargeTime, maxCharges);
             }
         }
     }
@@ -1928,7 +1928,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
 
         if (PItem->isSubType(ITEM_CHARGED))
         {
-            PChar->PRecastContainer->Del(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID())); // Also remove item from the Recast List no matter what bag its in
+            PChar->PRecastContainer->Del(xi::RecastType::Item, static_cast<xi::Recast>(PItem->getSlotID() << 8 | PItem->getLocationID())); // Also remove item from the xi::Recast List no matter what bag its in
         }
 
         if (equipSlotID == SLOT_SUB)
@@ -3110,7 +3110,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
                 {
                     PItem->setAssignTime(timer::now());
                     // add recast timer to Recast List from any bag
-                    PChar->PRecastContainer->Add(RECAST_ITEM, static_cast<Recast>(slotID << 8 | containerID), PItem->getReuseTime());
+                    PChar->PRecastContainer->Add(xi::RecastType::Item, static_cast<xi::Recast>(slotID << 8 | containerID), PItem->getReuseTime());
 
                     // Do not forget to update the timer when equipping the subject
 
@@ -3423,9 +3423,9 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
             chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(static_cast<xi::Merit>(charge->merit), PChar));
             maxCharges = charge->maxCharges;
         }
-        if (charge || !PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))
+        if (charge || !PChar->PRecastContainer->Has(xi::RecastType::Ability, PAbility->getRecastId()))
         {
-            PChar->PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), 0s, chargeTime, maxCharges);
+            PChar->PRecastContainer->Add(xi::RecastType::Ability, PAbility->getRecastId(), 0s, chargeTime, maxCharges);
         }
     };
 
@@ -7881,24 +7881,24 @@ void ApplyAbilityRecast(CCharEntity* PChar, const CAbility* PAbility, const Char
 {
     if (charge)
     {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), recastTime, baseChargeTime, charge->maxCharges);
+        PChar->PRecastContainer->Add(xi::RecastType::Ability, PAbility->getRecastId(), recastTime, baseChargeTime, charge->maxCharges);
     }
     else
     {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), recastTime);
+        PChar->PRecastContainer->Add(xi::RecastType::Ability, PAbility->getRecastId(), recastTime);
     }
 
     const auto recastId = PAbility->getRecastId();
-    if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastId == Recast::BloodPactRage || recastId == Recast::BloodPactWard))
+    if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastId == xi::Recast::BloodPactRage || recastId == xi::Recast::BloodPactWard))
     {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, (recastId == Recast::BloodPactRage ? Recast::BloodPactWard : Recast::BloodPactRage), recastTime);
+        PChar->PRecastContainer->Add(xi::RecastType::Ability, (recastId == xi::Recast::BloodPactRage ? xi::Recast::BloodPactWard : xi::Recast::BloodPactRage), recastTime);
     }
 
     // Yonin (recastId 146) and Innin share a server-side timer via the SQL recastId update.
     // Also add Innin's original client-facing recast ID (147) so the client greys out Innin.
-    if (recastId == static_cast<Recast>(146))
+    if (recastId == static_cast<xi::Recast>(146))
     {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, static_cast<Recast>(147), recastTime);
+        PChar->PRecastContainer->Add(xi::RecastType::Ability, static_cast<xi::Recast>(147), recastTime);
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);

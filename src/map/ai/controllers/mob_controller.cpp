@@ -258,7 +258,7 @@ auto CMobController::MobSkill(const EntityId target, uint16 wsid, const Maybe<ti
 
 auto CMobController::Ability(const EntityId target, uint16 abilityid) -> bool
 {
-    if (PMob->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityid), 0s))
+    if (PMob->PRecastContainer->HasRecast(xi::RecastType::Ability, static_cast<xi::Recast>(abilityid), 0s))
     {
         return false;
     }
@@ -425,7 +425,7 @@ auto CMobController::TryCastSpell() -> bool
         return false;
     }
 
-    if (PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(chosenSpellId.value())))
+    if (PMob->PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(chosenSpellId.value())))
     {
         return false; // Spell is on cooldown.
     }
@@ -476,7 +476,7 @@ auto CMobController::TryCastIdleBuff() -> bool
 
     const auto  spellId = maybeSpellOverride.value_or(maybeIdleBuff->spellId);
     auto* const PSpell  = spell::GetSpell(spellId);
-    if (!PSpell || PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellId)) || !battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
+    if (!PSpell || PMob->PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(spellId)) || !battleutils::CanAffordSpell(PMob, PSpell, PSpell->getFlag()))
     {
         return false;
     }

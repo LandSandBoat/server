@@ -218,7 +218,7 @@ void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     auto* PSpell = state.GetSpell();
 
-    PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
+    PRecastContainer->Add(xi::RecastType::Magic, static_cast<xi::Recast>(PSpell->getID()), action.recast);
 }
 
 void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)

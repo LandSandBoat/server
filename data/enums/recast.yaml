@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.recastID
+
+values:
+  special:           0 # Level 1 1HR abilities
+  sic:             102
+  meditate:        134
+  blood_pact_rage: 173
+  blood_pact_ward: 174
+  phantom_roll:    193
+  double_up:       194
+  quickdraw:       195
+  random_deal:     196
+  activate:        205
+  stratagem:       231
+  special2:        254 # Level 96 1HR abilities
+  mount:           256

@@ -540,7 +540,7 @@ auto CTrustController::Ability(const EntityId target, uint16 abilityid) -> bool
 {
     TracyZoneScoped;
 
-    if (POwner->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityid), 0s))
+    if (POwner->PRecastContainer->HasRecast(xi::RecastType::Ability, static_cast<xi::Recast>(abilityid), 0s))
     {
         return false;
     }
@@ -581,7 +581,7 @@ auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
 
     FaceTarget(target);
 
-    if (POwner->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
+    if (POwner->PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(spellid)))
     {
         return false;
     }

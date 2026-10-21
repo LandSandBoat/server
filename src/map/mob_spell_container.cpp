@@ -139,7 +139,7 @@ Maybe<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                      spell->getSkillType() == xi::SkillType::Geomancy ||
                      m_PMob->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Manafont);
 
-    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellId));
+    bool isNotInRecast = !m_PMob->PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(spellId));
 
     return (isNotInRecast && enoughMP) ? Maybe<SpellID>(spellId) : std::nullopt;
 }
@@ -160,7 +160,7 @@ Maybe<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
                                   spell->getSkillType() == xi::SkillType::WindInstrument ||
                                   spell->getSkillType() == xi::SkillType::StringInstrument ||
                                   spell->getSkillType() == xi::SkillType::Geomancy;
-            bool  isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(id));
+            bool  isNotInRecast = !m_PMob->PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(id));
             if (sameFamily && enoughMP && isNotInRecast)
             {
                 matches.emplace_back(id);

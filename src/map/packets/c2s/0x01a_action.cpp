@@ -605,7 +605,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             }
             else if (charutils::hasKeyItem(PChar, mountKeyItem))
             {
-                if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, Recast::Mount, 60s))
+                if (PChar->PRecastContainer->HasRecast(xi::RecastType::Ability, xi::Recast::Mount, 60s))
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
 
@@ -651,7 +651,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                     0,
                     mountutils::kPersonalChocoboFlag); // previously known as nameflag "FLAG_CHOCOBO"
 
-                PChar->PRecastContainer->Add(RECAST_ABILITY, Recast::Mount, 60s);
+                PChar->PRecastContainer->Add(xi::RecastType::Ability, xi::Recast::Mount, 60s);
                 PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
 
                 luautils::OnPlayerMount(PChar);

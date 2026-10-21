@@ -23,7 +23,7 @@
 
 #include "common/cbasetypes.h"
 
-// IDs for RECAST_LOOT entries (special drop cooldowns)
+// IDs for xi::RecastType::Loot entries (special drop cooldowns)
 enum class LootRecastID : uint16
 {
     Seal  = 1, // Beastmen's Seal, Kindred's Seal, etc.

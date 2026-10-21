@@ -254,7 +254,7 @@ auto CAbilityState::CanUseAbility() const -> bool
     {
         const bool isLuopanAbility = PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA;
 
-        if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
+        if (PChar->PRecastContainer->HasRecast(xi::RecastType::Ability, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
             return false;

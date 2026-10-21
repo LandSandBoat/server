@@ -52,7 +52,7 @@ auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
 auto CPlayerController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (canAct() && !PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
+    if (canAct() && !PChar->PRecastContainer->HasRecast(xi::RecastType::Magic, static_cast<xi::Recast>(spellid), 0s))
     {
         if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
@@ -202,9 +202,9 @@ auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
             return false;
         }
-        if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
+        if (PChar->PRecastContainer->HasRecast(xi::RecastType::Ability, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
-            Recast_t* recast = PChar->PRecastContainer->GetRecast(RECAST_ABILITY, PAbility->getRecastId());
+            Recast_t* recast = PChar->PRecastContainer->GetRecast(xi::RecastType::Ability, PAbility->getRecastId());
             // Set recast time to the normal recast time minus any charge time.
             // Abilities without a charge will have zero chargeTime
             timer::duration currentRecast = recast->TimeStamp - timer::now() + recast->RecastTime;

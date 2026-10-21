@@ -608,7 +608,7 @@ auto CAutomatonController::CanCastSpells(const IgnoreRecastsAndCosts ignoreRecas
 
 auto CAutomatonController::Cast(const EntityId target, SpellID spellid) -> bool
 {
-    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
+    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(xi::RecastType::Magic, static_cast<xi::Recast>(spellid), 0s))
     {
         return false;
     }
@@ -618,7 +618,7 @@ auto CAutomatonController::Cast(const EntityId target, SpellID spellid) -> bool
 
 auto CAutomatonController::MobSkill(const EntityId target, uint16 wsid, const Maybe<timer::duration> castTimeOverride) -> bool
 {
-    if (PAutomaton->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(wsid), 0s))
+    if (PAutomaton->PRecastContainer->HasRecast(xi::RecastType::Ability, static_cast<xi::Recast>(wsid), 0s))
     {
         return false;
     }
