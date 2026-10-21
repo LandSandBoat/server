@@ -75,7 +75,7 @@
 #include "conquest_system.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
-#include "enums/recast.h"
+#include "data/enums/recast.h"
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_equipment.h"
@@ -1597,45 +1597,45 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_STONE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_SCISSION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Scission), 0, 0);
                         break;
                     case SPELLFAMILY_HYDROHELIX:
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_WATER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_REVERBERATION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Reverberation), 0, 0);
                         break;
                     case SPELLFAMILY_ANEMOHELIX:
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_AERO:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_DETONATION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Detonation), 0, 0);
                         break;
                     case SPELLFAMILY_PYROHELIX:
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_FIRE:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_LIQUEFACTION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Liquefaction), 0, 0);
                         break;
                     case SPELLFAMILY_CRYOHELIX:
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_BLIZZARD:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_INDURATION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Induration), 0, 0);
                         break;
                     case SPELLFAMILY_IONOHELIX:
                         isHelix = true;
                         [[fallthrough]];
                     case SPELLFAMILY_THUNDER:
-                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_IMPACTION, 0, 0);
+                        effect = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Impaction), 0, 0);
                         break;
                     case SPELLFAMILY_NOCTOHELIX:
                         isHelix = true;
-                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_COMPRESSION, 0, 0);
+                        effect  = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Compression), 0, 0);
                         break;
                     case SPELLFAMILY_LUMINOHELIX:
                         isHelix = true;
-                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_TRANSFIXION, 0, 0);
+                        effect  = battleutils::GetSkillChainEffect(PTarget, std::to_underlying(xi::SkillchainType::Transfixion), 0, 0);
                         break;
                     default:
                         immanenceApplies = false;
@@ -1851,7 +1851,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     TracyZoneScoped;
 
     auto* PAbility = state.GetAbility();
-    if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
+    if (this->PRecastContainer->HasRecast(xi::RecastType::Ability, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
         pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::WaitLonger);
         return;
@@ -1906,11 +1906,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             auto chargesUsed = timer::count_seconds(PAbility->getRecastTime()); // charge cost is stored in the recast...
 
             //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
-            if (PAbility->getRecastId() == Recast::Sic) // Sic/Ready recast ID
+            if (PAbility->getRecastId() == xi::Recast::Sic) // Sic/Ready recast ID
             {
                 recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(xi::Merit::SicRecast, this));
             }
-            else if (PAbility->getRecastId() == Recast::Strategems)
+            else if (PAbility->getRecastId() == xi::Recast::Stratagem)
             {
                 recastReduction += std::chrono::seconds(this->getMod(xi::Mod::STRATAGEM_RECAST));
             }
@@ -1924,7 +1924,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = PAbility->getRecastTime() - recastReduction;
         }
 
-        if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == Recast::Strategems)
+        if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == xi::Recast::Stratagem)
         {
             if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TabulaRasa))
             {
@@ -1932,7 +1932,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 baseChargeTime = 0s;
             }
         }
-        else if (PAbility->getRecastId() == Recast::BloodPactRage || PAbility->getRecastId() == Recast::BloodPactWard)
+        else if (PAbility->getRecastId() == xi::Recast::BloodPactRage || PAbility->getRecastId() == xi::Recast::BloodPactWard)
         {
             uint16 favorReduction          = 0;
             uint16 bloodPact_I_Reduction   = std::min<int16>(getMod(xi::Mod::BP_DELAY), 15);
@@ -1963,9 +1963,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             // SP abilities don't consume recast when paralyzed
             const auto recastId = PAbility->getRecastId();
-            if (recastId != Recast::Special && recastId != Recast::Special2)
+            if (recastId != xi::Recast::Special && recastId != xi::Recast::Special2)
             {
-                const bool isBloodPact = recastId == Recast::BloodPactRage || recastId == Recast::BloodPactWard;
+                const bool isBloodPact = recastId == xi::Recast::BloodPactRage || recastId == xi::Recast::BloodPactWard;
                 charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, isBloodPact ? bloodPactRecast : action.recast);
             }
 
@@ -2422,7 +2422,7 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
         if (PItem->getCurrentCharges() != 0)
         {
             // add recast timer to Recast List from any bag
-            this->PRecastContainer->Add(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID()), PItem->getReuseTime());
+            this->PRecastContainer->Add(xi::RecastType::Item, static_cast<xi::Recast>(PItem->getSlotID() << 8 | PItem->getLocationID()), PItem->getReuseTime());
         }
         return false;
     }

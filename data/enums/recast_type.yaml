@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.recast
+
+values:
+  item:    0
+  magic:   1
+  ability: 2
+  loot:    3

@@ -2291,7 +2291,7 @@ bool CBattleEntity::CanUseSpell(CSpell* PSpell)
 {
     TracyZoneScopedN("CBattleEntity::CanUseSpell");
 
-    return spell::CanUseSpell(this, PSpell) && !PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()));
+    return spell::CanUseSpell(this, PSpell) && !PRecastContainer->Has(xi::RecastType::Magic, static_cast<xi::Recast>(PSpell->getID()));
 }
 
 void CBattleEntity::Spawn()
@@ -2704,7 +2704,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Ebullience);
     }
 
-    PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
+    PRecastContainer->Add(xi::RecastType::Magic, static_cast<xi::Recast>(PSpell->getID()), action.recast);
 }
 
 void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
@@ -2823,7 +2823,7 @@ void CBattleEntity::OnAbility(CAbilityState& state, action_t& action)
 
         state.ApplyEnmity();
 
-        PRecastContainer->Add(RECAST_ABILITY, static_cast<Recast>(action.actionid), action.recast);
+        PRecastContainer->Add(xi::RecastType::Ability, static_cast<xi::Recast>(action.actionid), action.recast);
     }
     this->processActionEffectFlags(action);
 }

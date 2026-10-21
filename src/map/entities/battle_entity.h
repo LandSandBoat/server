@@ -39,6 +39,7 @@
 #include "data/enums/immunity.h"
 #include "data/enums/job.h"
 #include "data/enums/skill_type.h"
+#include "data/enums/skillchain_type.h"
 #include "party.h"
 #include "trait.h"
 
@@ -117,32 +118,6 @@ enum TARGETTYPE : uint16
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
-
-enum SKILLCHAIN_ELEMENT : uint8
-{
-    SC_NONE = 0, // Lv0 None
-
-    SC_TRANSFIXION   = 1, // Lv1 Light
-    SC_COMPRESSION   = 2, // Lv1 Dark
-    SC_LIQUEFACTION  = 3, // Lv1 Fire
-    SC_SCISSION      = 4, // Lv1 Earth
-    SC_REVERBERATION = 5, // Lv1 Water
-    SC_DETONATION    = 6, // Lv1 Wind
-    SC_INDURATION    = 7, // Lv1 Ice
-    SC_IMPACTION     = 8, // Lv1 Thunder
-
-    SC_GRAVITATION   = 9,  // Lv2 Dark & Earth
-    SC_DISTORTION    = 10, // Lv2 Water & Ice
-    SC_FUSION        = 11, // Lv2 Fire & Light
-    SC_FRAGMENTATION = 12, // Lv2 Wind & Thunder
-
-    SC_LIGHT       = 13, // Lv3 Fire, Light, Wind, Thunder
-    SC_DARKNESS    = 14, // Lv3 Dark, Earth, Water, Ice
-    SC_LIGHT_II    = 15, // Lv4 Light
-    SC_DARKNESS_II = 16, // Lv4 Darkness
-};
-
-DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 
 struct battlehistory_t
 {

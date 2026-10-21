@@ -224,8 +224,8 @@ xi.job_utils.summoner.onUseBloodPact = function(target, pet, petskill, summoner,
             summoner:delStatusEffect(xi.effect.APOGEE)
         else
             if xi.settings.map.BLOOD_PACT_SHARED_TIMER then
-                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_RAGE, bloodPactRecast)
-                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOODPACT_WARD, bloodPactRecast)
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOOD_PACT_RAGE, bloodPactRecast)
+                summoner:addRecast(xi.recast.ABILITY, xi.recastID.BLOOD_PACT_WARD, bloodPactRecast)
             else
                 summoner:addRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID(), bloodPactRecast)
             end

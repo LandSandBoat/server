@@ -47,11 +47,11 @@ CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-void CCharRecastContainer::Add(RECASTTYPE type, const Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+void CCharRecastContainer::Add(xi::RecastType type, const xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Recast_t* recast = Load(type, id, duration, chargeTime, maxCharges);
 
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
         db::preparedStmt(
             "INSERT INTO char_recast SET "
@@ -75,10 +75,10 @@ void CCharRecastContainer::Add(RECASTTYPE type, const Recast id, timer::duration
  *                                                                       *
  ************************************************************************/
 
-void CCharRecastContainer::Del(RECASTTYPE type)
+void CCharRecastContainer::Del(xi::RecastType type)
 {
     CRecastContainer::Del(type);
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
         db::preparedStmt("DELETE FROM char_recast WHERE charid = ?", m_PChar->id);
     }
@@ -90,7 +90,7 @@ void CCharRecastContainer::Del(RECASTTYPE type)
  *                                                                       *
  ************************************************************************/
 
-void CCharRecastContainer::Del(RECASTTYPE type, Recast id)
+void CCharRecastContainer::Del(xi::RecastType type, xi::Recast id)
 {
     CRecastContainer::Del(type, id);
     db::preparedStmt("DELETE FROM char_recast WHERE charid = ? AND id = ?", m_PChar->id, id);
@@ -102,10 +102,10 @@ void CCharRecastContainer::Del(RECASTTYPE type, Recast id)
  *                                                                       *
  ************************************************************************/
 
-void CCharRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
+void CCharRecastContainer::DeleteByIndex(xi::RecastType type, uint8 index)
 {
     RecastList_t* PRecastList = GetRecastList(type);
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
         PRecastList->at(index).RecastTime = 0s;
         db::preparedStmt("DELETE FROM char_recast WHERE charid = ? AND id = ?", m_PChar->id, PRecastList->at(index).ID);
@@ -136,40 +136,40 @@ void CCharRecastContainer::ResetAbilities()
 
 void CCharRecastContainer::ChangeJob()
 {
-    RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
+    RecastList_t* PRecastList = GetRecastList(xi::RecastType::Ability);
 
     std::erase_if(*PRecastList,
                   [](auto& recast)
                   {
-                      return recast.ID != Recast::Special && recast.ID != Recast::Special2;
+                      return recast.ID != xi::Recast::Special && recast.ID != xi::Recast::Special2;
                   });
 
     db::preparedStmt("DELETE FROM char_recast WHERE charid = ? AND id != 0", m_PChar->id);
 }
 
-RecastList_t* CCharRecastContainer::GetRecastList(RECASTTYPE type)
+RecastList_t* CCharRecastContainer::GetRecastList(xi::RecastType type)
 {
     switch (type)
     {
-        case RECAST_MAGIC:
+        case xi::RecastType::Magic:
             return &RecastMagicList;
-        case RECAST_ABILITY:
+        case xi::RecastType::Ability:
             return &RecastAbilityList;
-        case RECAST_ITEM:
+        case xi::RecastType::Item:
             return &RecastItemList;
-        case RECAST_LOOT:
+        case xi::RecastType::Loot:
             return &RecastLootList;
     }
     // Unhandled Scenario
-    ShowError("Invalid RECASTTYPE received, returning nullptr.");
+    ShowError("Invalid recast type received, returning nullptr.");
     return nullptr;
 }
 
 void CCharRecastContainer::Check()
 {
-    for (uint8 type = 0; type < MAX_RECASTTPE_SIZE; ++type)
+    for (const auto type : { xi::RecastType::Item, xi::RecastType::Magic, xi::RecastType::Ability, xi::RecastType::Loot })
     {
-        RecastList_t* PRecastList = GetRecastList((RECASTTYPE)type);
+        RecastList_t* PRecastList = GetRecastList(type);
 
         for (std::size_t i = 0; i < PRecastList->size(); ++i)
         {
@@ -177,7 +177,7 @@ void CCharRecastContainer::Check()
 
             if (timer::now() >= recast->TimeStamp + recast->RecastTime)
             {
-                if (type == RECAST_ITEM)
+                if (type == xi::RecastType::Item)
                 {
                     auto   id          = static_cast<uint16_t>(recast->ID);
                     uint8  slotID      = (id >> 8) & 0xFF;
@@ -187,7 +187,7 @@ void CCharRecastContainer::Check()
                     m_PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
                     m_PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PChar);
                 }
-                if (type == RECAST_ITEM || type == RECAST_MAGIC || type == RECAST_LOOT)
+                if (type == xi::RecastType::Item || type == xi::RecastType::Magic || type == xi::RecastType::Loot)
                 {
                     PRecastList->erase(PRecastList->begin() + i--);
                 }

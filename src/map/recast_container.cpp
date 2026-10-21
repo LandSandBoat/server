@@ -25,7 +25,7 @@
 #include "entities/char_entity.h"
 #include "recast_container.h"
 
-#include "enums/recast.h"
+#include "data/enums/recast.h"
 
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
@@ -44,23 +44,23 @@ CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
  *                                                                       *
  ************************************************************************/
 
-RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
+RecastList_t* CRecastContainer::GetRecastList(xi::RecastType type)
 {
     switch (type)
     {
-        case RECAST_MAGIC:
+        case xi::RecastType::Magic:
             return &RecastMagicList;
-        case RECAST_ABILITY:
+        case xi::RecastType::Ability:
             return &RecastAbilityList;
         default:
             break;
     }
     // Unhandled Scenario
-    ShowError("Invalid RECASTTYPE received, returning nullptr.");
+    ShowError("Invalid recast type received, returning nullptr.");
     return nullptr;
 }
 
-Recast_t* CRecastContainer::GetRecast(const RECASTTYPE type, const Recast id)
+Recast_t* CRecastContainer::GetRecast(const xi::RecastType type, const xi::Recast id)
 {
     RecastList_t* list = GetRecastList(type);
 
@@ -70,7 +70,7 @@ Recast_t* CRecastContainer::GetRecast(const RECASTTYPE type, const Recast id)
 
 Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
 {
-    return GetRecast(RECAST_LOOT, static_cast<Recast>(id));
+    return GetRecast(xi::RecastType::Loot, static_cast<xi::Recast>(id));
 }
 
 /************************************************************************
@@ -79,17 +79,17 @@ Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Add(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+void CRecastContainer::Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Load(type, id, duration, chargeTime, maxCharges);
 }
 
 void CRecastContainer::AddLootRecast(LootRecastID id, timer::duration duration)
 {
-    Add(RECAST_LOOT, static_cast<Recast>(id), duration);
+    Add(xi::RecastType::Loot, static_cast<xi::Recast>(id), duration);
 }
 
-Recast_t* CRecastContainer::Load(RECASTTYPE type, const Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+Recast_t* CRecastContainer::Load(xi::RecastType type, const xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
 {
     Recast_t* recast = GetRecast(type, id);
 
@@ -137,10 +137,10 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, const Recast id, timer::durati
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Del(RECASTTYPE type)
+void CRecastContainer::Del(xi::RecastType type)
 {
     RecastList_t* PRecastList = GetRecastList(type);
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
         for (auto&& recast : *PRecastList)
         {
@@ -159,13 +159,13 @@ void CRecastContainer::Del(RECASTTYPE type)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::Del(RECASTTYPE type, Recast id)
+void CRecastContainer::Del(xi::RecastType type, xi::Recast id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
-        if (auto* recast = GetRecast(RECAST_ABILITY, id))
+        if (auto* recast = GetRecast(xi::RecastType::Ability, id))
         {
             recast->RecastTime = 0s;
         }
@@ -186,10 +186,10 @@ void CRecastContainer::Del(RECASTTYPE type, Recast id)
  *                                                                       *
  ************************************************************************/
 
-void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
+void CRecastContainer::DeleteByIndex(xi::RecastType type, uint8 index)
 {
     RecastList_t* PRecastList = GetRecastList(type);
-    if (type == RECAST_ABILITY)
+    if (type == xi::RecastType::Ability)
     {
         PRecastList->at(index).RecastTime = 0s;
     }
@@ -205,7 +205,7 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::Has(RECASTTYPE type, Recast id)
+bool CRecastContainer::Has(xi::RecastType type, xi::Recast id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -216,7 +216,7 @@ bool CRecastContainer::Has(RECASTTYPE type, Recast id)
 
 bool CRecastContainer::HasLootRecast(LootRecastID id)
 {
-    return Has(RECAST_LOOT, static_cast<Recast>(id));
+    return Has(xi::RecastType::Loot, static_cast<xi::Recast>(id));
 }
 
 /************************************************************************
@@ -225,7 +225,7 @@ bool CRecastContainer::HasLootRecast(LootRecastID id)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::HasRecast(RECASTTYPE type, Recast id, timer::duration recast)
+bool CRecastContainer::HasRecast(xi::RecastType type, xi::Recast id, timer::duration recast)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -273,7 +273,7 @@ void CRecastContainer::Check()
 {
     TracyZoneScoped;
 
-    for (auto type : { RECAST_MAGIC, RECAST_ABILITY })
+    for (auto type : { xi::RecastType::Magic, xi::RecastType::Ability })
     {
         RecastList_t* PRecastList = GetRecastList(type);
 
@@ -283,7 +283,7 @@ void CRecastContainer::Check()
 
             if (timer::now() >= recast->TimeStamp + recast->RecastTime)
             {
-                if (type == RECAST_MAGIC)
+                if (type == xi::RecastType::Magic)
                 {
                     PRecastList->erase(PRecastList->begin() + i--);
                 }
@@ -304,11 +304,11 @@ void CRecastContainer::Check()
 
 void CRecastContainer::ResetAbilities()
 {
-    RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
+    RecastList_t* PRecastList = GetRecastList(xi::RecastType::Ability);
 
     for (auto&& recast : *PRecastList)
     {
-        if (recast.ID != Recast::Special && recast.ID != Recast::Special2)
+        if (recast.ID != xi::Recast::Special && recast.ID != xi::Recast::Special2)
         {
             recast.RecastTime = 0s;
         }

@@ -134,11 +134,11 @@ void FreeMobSkillList();
 void FreePetSkillList();
 
 auto                 GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary) -> ActionProcSkillChain;
-SKILLCHAIN_ELEMENT   FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill);
-uint8                GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain);
-auto                 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain) -> ActionProcSkillChain;
-int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT& appliedEle);
-std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
+xi::SkillchainType   FormSkillchain(const std::list<xi::SkillchainType>& resonance, const std::list<xi::SkillchainType>& skill);
+uint8                GetSkillchainTier(xi::SkillchainType skillchain);
+auto                 GetSkillchainSubeffect(xi::SkillchainType skillchain) -> ActionProcSkillChain;
+int16                GetSkillchainMinimumResistance(xi::SkillchainType element, CBattleEntity* PDefender, ELEMENT& appliedEle);
+std::vector<ELEMENT> GetSkillchainMagicElement(xi::SkillchainType skillchain);
 
 bool IsParalyzed(CBattleEntity* PAttacker);
 bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);

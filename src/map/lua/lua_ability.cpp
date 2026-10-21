@@ -47,7 +47,7 @@ uint16 CLuaAbility::getRecast()
     return static_cast<uint16>(timer::count_seconds(m_PLuaAbility->getRecastTime()));
 }
 
-auto CLuaAbility::getRecastID() const -> Recast
+auto CLuaAbility::getRecastID() const -> xi::Recast
 {
     return m_PLuaAbility->getRecastId();
 }
