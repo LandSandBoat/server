@@ -1328,7 +1328,6 @@ auto GetFishingArea(CCharEntity* PChar) -> fishingarea_t*
         {
             case 0: // Whole Zone
                 return fishingArea;
-                break;
             case 1: // Radial Boundary
                 if (isInsideCylinder(fishingArea->center, loc, fishingArea->radius, fishingArea->height))
                 {
@@ -2965,7 +2964,6 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_WARNING);
             return;
         }
-        break;
 
         default:
         case GP_CLI_COMMAND_FISHING_2_MODE::RequestRelease:

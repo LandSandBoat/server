@@ -51,8 +51,6 @@
 #define RESULT_SUCCESS 0x00
 #define RESULT_FAIL    0x01
 #define RESULT_HQ      0x02
-#define RESULT_HQ2     0x03
-#define RESULT_HQ3     0x04
 
 namespace synthutils
 {

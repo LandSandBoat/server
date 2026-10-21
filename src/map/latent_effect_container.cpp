@@ -135,7 +135,6 @@ void CLatentEffectContainer::CheckLatentsHP()
                 case xi::Latent::SigilRegenBonus:
                 case xi::Latent::HpOverVisibleGear:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -163,7 +162,6 @@ void CLatentEffectContainer::CheckLatentsTP()
                 case xi::Latent::SanctionRefreshBonus:
                 case xi::Latent::SigilRefreshBonus:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -212,7 +210,6 @@ void CLatentEffectContainer::CheckLatentsMP()
                 case xi::Latent::WeaponDrawnMpOver:
                 case xi::Latent::MpUnderVisibleGear:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -257,7 +254,6 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                 {
                     case xi::Latent::WeaponDrawn:
                         return latentEffect.Activate();
-                        break;
                     case xi::Latent::WeaponDrawnMpOver:
                         if (m_POwner->health.mp > latentEffect.GetConditionsValue())
                         {
@@ -267,7 +263,6 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                         {
                             return latentEffect.Deactivate();
                         }
-                        break;
                     case xi::Latent::WeaponDrawnHpUnder:
                         if (m_POwner->health.hp < latentEffect.GetConditionsValue())
                         {
@@ -277,10 +272,8 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                         {
                             return latentEffect.Deactivate();
                         }
-                        break;
                     case xi::Latent::WeaponSheathed:
                         return latentEffect.Deactivate();
-                        break;
                     default:
                         break;
                 }
@@ -293,10 +286,8 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                     case xi::Latent::WeaponDrawnMpOver:
                     case xi::Latent::WeaponDrawnHpUnder:
                         return latentEffect.Deactivate();
-                        break;
                     case xi::Latent::WeaponSheathed:
                         return latentEffect.Activate();
-                        break;
                     default:
                         break;
                 }
@@ -326,7 +317,6 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
                 case xi::Latent::SanctionFoodBonus:
                 case xi::Latent::SigilFoodBonus:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -351,7 +341,6 @@ void CLatentEffectContainer::CheckLatentsFoodEffect()
                 case xi::Latent::FoodActive:
                 case xi::Latent::NoFoodActive:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -375,7 +364,6 @@ void CLatentEffectContainer::CheckLatentsRollSong()
                 case xi::Latent::SongRollActive:
                 case xi::Latent::ElevenRollActive:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -448,7 +436,6 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
                 case xi::Latent::Lightningsday:
                 case xi::Latent::Lightsday:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -534,7 +521,6 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members, size_t tru
                     {
                         return latentEffect.Deactivate();
                     }
-                    break;
                 default:
                     break;
             }
@@ -595,7 +581,6 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
                 case xi::Latent::JobLevelAbove:
                 case xi::Latent::InGarrison:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }
@@ -678,7 +663,6 @@ void CLatentEffectContainer::CheckLatentsZone()
                 case xi::Latent::SanctionFoodBonus:
                 case xi::Latent::SigilFoodBonus:
                     return ProcessLatentEffect(latentEffect);
-                    break;
                 default:
                     break;
             }

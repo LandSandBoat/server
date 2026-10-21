@@ -40,14 +40,12 @@ auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> b
             updateWeekConquest();
             return true;
         }
-        break;
         case ConquestMessage::M2W_GM_ConquestUpdate:
         {
             // Trigger a full update of influence points
             sendInfluencesMsg(ShouldUpdateZones::Yes);
             return true;
         }
-        break;
         case ConquestMessage::M2W_AddInfluencePoints:
         {
             if (const auto object = ipc::fromBytes<ConquestAddInfluencePoints>(message.payload))
@@ -59,7 +57,6 @@ auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> b
             }
             return true;
         }
-        break;
         case ConquestMessage::M2W_AddMobKills:
         {
             if (const auto object = ipc::fromBytes<ConquestAddCounter>(message.payload))
@@ -68,7 +65,6 @@ auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> b
             }
             return true;
         }
-        break;
         case ConquestMessage::M2W_AddPlayerHomepoints:
         {
             if (const auto object = ipc::fromBytes<ConquestAddCounter>(message.payload))
@@ -77,7 +73,6 @@ auto ConquestSystem::handleMessage(uint8 messageType, IPPMessage&& message) -> b
             }
             return true;
         }
-        break;
         default:
         {
             ShowWarningFmt("Message: unknown conquest type message received: {} from {}",

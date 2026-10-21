@@ -31,8 +31,6 @@
 #include "items/item_flowerpot.h"
 #include "packets/s2c/0x020_item_attr.h"
 
-#define MAX_RESULTID 2500
-
 constexpr uint32 VANADAY_SECONDS            = 3456;
 constexpr uint32 VANADAYS_TO_WILT           = 36;
 constexpr uint32 VANADAYS_TO_GUARANTEE_WILT = 144;

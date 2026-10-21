@@ -54,7 +54,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 1;
                 break;
             }
-            break;
         case 3: // cdf = 30,80,100
             if (distribution < 30)
             {
@@ -70,7 +69,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 2;
                 break;
             }
-            break;
         case 4: // cdf = 20,50,80,100
             if (distribution < 20)
             {
@@ -91,7 +89,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 3;
                 break;
             }
-            break;
         case 5: // cdf = 10,30,60,90,100
             if (distribution < 10)
             {
@@ -117,7 +114,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 4;
                 break;
             }
-            break;
         case 6: // cdf = 10,30,50,70,90,100
             if (distribution < 10)
             {
@@ -148,7 +144,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 5;
                 break;
             }
-            break;
         case 7: // cdf = 5,20,45,70,85,95,100
             if (distribution < 5)
             {
@@ -184,7 +179,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 6;
                 break;
             }
-            break;
         case 8: // cdf = 5,20,45,70,85,95,98,100
             if (distribution < 5)
             {
@@ -225,7 +219,6 @@ auto getHitCount(uint8 hits) -> uint8
                 num += 7;
                 break;
             }
-            break;
     }
     return std::min<uint8>(num, 8); // no more than eight hits per attack
 }
