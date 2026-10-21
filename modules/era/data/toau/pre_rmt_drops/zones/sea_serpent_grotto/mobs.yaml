@@ -1,0 +1,91 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Novv_the_Whitehearted:
+    loot: # lock_of_sirens_hair added (rare)
+      drops:
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: uncommon
+          item:   scroll_of_shellra_iv
+        - chance: uncommon
+          item:   scroll_of_regen_iii
+        - chance: rare
+          item:   scroll_of_cure_v
+        - chance: rare
+          item:   scroll_of_curaga_iv
+        - chance: common
+          item:   minstrels_coat
+        - chance: rare
+          item:   lock_of_sirens_hair
+
+  Pahh_the_Gullcaller:
+    loot: # lock_of_sirens_hair added (rare)
+      drops:
+        - chance: very_common
+          item:   calamar
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: rare
+          item:   bastore_sardine
+        - chance: rare
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+        - chance: rare
+          item:   lock_of_sirens_hair
+
+  Voll_the_Sharkfinned:
+    loot: # lock_of_sirens_hair added (rare)
+      drops:
+        - chance: uncommon
+          item:   monsoon_jinpachi
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: very_rare
+          item:   cobalt_jellyfish
+        - chance: uncommon
+          item:   shall_shell
+        - chance: rare
+          item:   lock_of_sirens_hair
+
+  Worr_the_Clawfisted:
+    loot: # lock_of_sirens_hair added (rare)
+      drops:
+        - chance: common
+          item:   pagures
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: uncommon
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+        - chance: rare
+          item:   lock_of_sirens_hair
+
+  Zuug_the_Shoreleaper:
+    loot: # lock_of_sirens_hair added (rare)
+      drops:
+        - chance: common
+          item:   narval
+        - chance: common
+          item:   clump_of_pamtam_kelp
+        - chance: uncommon
+          item:   bastore_sardine
+        - chance: rare
+          item:   cobalt_jellyfish
+        - chance: rare
+          item:   quus
+        - chance: rare
+          item:   lock_of_sirens_hair

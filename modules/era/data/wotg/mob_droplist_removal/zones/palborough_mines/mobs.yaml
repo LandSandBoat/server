@@ -1,0 +1,99 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Brass_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: common
+          item:   shell_bug
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Copper_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: common
+          item:   snapping_mole
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: rare
+          item:   darksteel_engraving
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+
+  Greater_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: common
+          item:   silver_name_tag
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Old_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: rare
+          item:   palborough_chest_key
+        - chance: common
+          item:   snapping_mole
+        - chance: rare
+          item:   snapping_mole
+        - chance: very_rare
+          item:   brass_subligar
+        - chance: very_rare
+          item:   brass_cap
+        - chance: very_rare
+          item:   brass_leggings
+        - chance: very_rare
+          item:   brass_mittens
+        - chance: uncommon
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Onyx_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: very_rare
+          item:   poets_circlet
+        - chance: very_rare
+          item:   linen_cuffs
+        - chance: very_rare
+          item:   linen_slops
+        - chance: very_rare
+          item:   holly_clogs
+        - chance: common
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]
+
+  Veteran_Quadav:
+    loot: # quadav_backscale removed
+      drops:
+        - chance: very_rare
+          item:   faceguard
+        - chance: very_rare
+          item:   scale_finger_gauntlets
+        - chance: very_rare
+          item:   scale_cuisses
+        - chance: very_rare
+          item:   scale_greaves
+        - chance: common
+          one_of: [quadav_fetich_arms, quadav_fetich_legs, quadav_fetich_head, quadav_fetich_torso]

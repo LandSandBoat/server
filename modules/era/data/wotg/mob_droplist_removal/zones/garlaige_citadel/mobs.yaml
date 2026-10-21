@@ -1,0 +1,15 @@
+# Drops that did not exist in the WotG era removed from every mob that carries them: the ACP, AMK and ASA
+# mini-expansion items and the scrolls added in the April 8, 2009 version update.
+# Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/08/2009)
+# A drops list is replaced whole, so the mobs era/data/abyssea/mob_droplist_removal also trims carry that
+# removal here as well; list this folder after the abyssea one. Shared: Brass_Quadav (pashhow_marshlands), Yagudo_Piper (giddeus).
+
+templates:
+
+  Magic_Jug:
+    loot: # scroll_of_enaero_ii removed
+      drops:
+        - chance: rare
+          item:   garlaige_coffer_key
+        - chance: rare
+          item:   scroll_of_shell_iv

@@ -1,0 +1,19 @@
+# NM drops as they were before the March 8, 2007 RMT countermeasure update: the original items in place of their
+# replacements, and the sellable drops the update removed. Astral Ring is handled in modules/era/lua/rmt_drops.lua.
+# Source: http://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
+
+templates:
+
+  Aquarius:
+    loot: # square_of_damascene_cloth added (very_rare)
+      drops:
+        - chance: always
+          item:   crab_shell
+        - chance: always
+          item:   slice_of_land_crab_meat
+        - chance: always
+          one_of:
+            fransisca: 90
+            nothing:   10
+        - chance: very_rare
+          item:   square_of_damascene_cloth
