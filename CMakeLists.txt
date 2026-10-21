@@ -1,4 +1,4 @@
-dcmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.25)
 
 # Modules are included by their folder, e.g. include(settings/PreProject).
 # cmake/find is also listed on its own because find_package() only looks for Find<Name>.cmake at the top of each path.
@@ -41,13 +41,7 @@ find_package(LuaJIT REQUIRED)
 find_package(OpenSSLlibcrypto REQUIRED)
 find_package(OpenSSLlibssl REQUIRED)
 
-if(UNIX AND NOT APPLE)
-    # zstd is sometimes a prereq for binutils
-    find_package(Zstd REQUIRED)
-    find_package(Binutils REQUIRED)
-endif()
-
-include(Tracy)
+include(tools/Tracy)
 add_subdirectory(ext)
 
 # After add_subdirectory(ext) so third-party targets never inherit CMAKE_CXX_CLANG_TIDY.

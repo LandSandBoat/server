@@ -269,18 +269,6 @@ set(SHARED_EXTERNAL_LIBS
     cpptrace::cpptrace
 )
 
-if(APPLE)
-    list(APPEND SHARED_EXTERNAL_LIBS
-        dl
-    )
-elseif(UNIX)
-    list(APPEND SHARED_EXTERNAL_LIBS
-        bfd
-        dl
-        zstd
-    )
-endif()
-
 set(CONNECT_ONLY_EXTERNAL_LIBS
     bcrypt
     nlohmann_json::nlohmann_json
