@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    return xi.job_utils.beastmaster.useReward(player, target, ability)
+    return xi.job_utils.beastmaster.useReward(player, target, ability, action)
 end
 
 return abilityObject

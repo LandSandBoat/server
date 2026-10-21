@@ -523,7 +523,7 @@ xi.job_utils.beastmaster.useTame = function(player, target, ability)
     end
 end
 
-xi.job_utils.beastmaster.useReward = function(player, target, ability)
+xi.job_utils.beastmaster.useReward = function(player, target, ability, action)
     -- 1st need to get the pet food is equipped in the range slot.
     local rangeObj         = xi.equipment.getUsableEquipID(player, xi.slot.AMMO)
     local minimumHealing   = 0
@@ -535,6 +535,9 @@ xi.job_utils.beastmaster.useReward = function(player, target, ability)
     local pet              = player:getPet()
     local petCurrentHP     = pet:getHP()
     local petMaxHP         = pet:getMaxHP()
+
+    -- Set target to pet for messaging
+    action:ID(player:getID(), pet:getID())
 
     -- Need to start to calculate the HP to restore to the pet.
     -- Please note that I used this as base for the calculations:
