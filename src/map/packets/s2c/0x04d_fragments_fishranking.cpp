@@ -45,7 +45,7 @@ GP_SERV_COMMAND_FRAGMENTS::FISHRANKING::FISHRANKING(const std::vector<FishingCon
         packet.size_total     = msgLength;
         packet.offset         = msgOffset;
         packet.data_size      = sndLength;
-        const auto packetSize = sizeof(GP_SERV_HEADER) + sizeof(PacketData) - sizeof(packet.data) + packet.data_size;
+        const auto packetSize = sizeof(GP_SERV_HEADER) + sizeof(PacketData) - sizeof(packet.data) + sizeof(FishingContestEntry) + packet.data_size;
         this->setSize(packetSize);
 
         uint8 idx = 0;
