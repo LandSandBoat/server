@@ -194,9 +194,10 @@ target_link_libraries(xi_map_deps
         xi_ext_map
 )
 
-# One archive holding the objects of every group library below.
-add_library(xi_map_core STATIC)
-target_link_libraries(xi_map_core PUBLIC xi_map_deps)
+# Puts the objects of every group library below on its consumers' link lines, through
+# xi_test_lib too: an archive of them would be rewritten whole on every map change.
+add_library(xi_map_core INTERFACE)
+target_link_libraries(xi_map_core INTERFACE xi_map_deps)
 
 # The group libraries split xi_map_core up for parallel compilation, not isolation.
 # The subdirectories below add the other groups' sources.
@@ -204,7 +205,7 @@ function(xi_add_map_group_library target)
     add_library(${target} OBJECT ${ARGN})
     add_dependencies(${target} enum_codegen)
     target_link_libraries(${target} PRIVATE xi_map_deps project_warnings)
-    target_sources(xi_map_core PRIVATE $<TARGET_OBJECTS:${target}>)
+    target_link_libraries(xi_map_core INTERFACE $<TARGET_OBJECTS:${target}>)
     xi_reuse_pch(${target} xi_common)
 endfunction()
 
