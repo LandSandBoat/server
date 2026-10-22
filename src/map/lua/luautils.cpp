@@ -3019,6 +3019,14 @@ void OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
 
     ShowTrace("luautils::OnTrade: {} ({}) -> {}", PChar->getName(), zone, name);
 
+    // An event the trade starts copies these. One it doesn't must not inherit them.
+    const auto previousPrep = *PChar->eventPreparation;
+    const auto restorePrep  = xi::finally(
+        [PChar, previousPrep]()
+        {
+            *PChar->eventPreparation = previousPrep;
+        });
+
     PChar->eventPreparation->targetEntity = PNpc;
     PChar->eventPreparation->scriptFile   = filename;
 
@@ -4027,22 +4035,6 @@ void OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget)
         return;
     }
 
-    std::string filename;
-    if (PMob->objtype == TYPE_PET)
-    {
-        filename = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
-    }
-    else
-    {
-        filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->getName(), PMob->getName());
-    }
-
-    if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
-    {
-        PChar->eventPreparation->targetEntity = PMob;
-        PChar->eventPreparation->scriptFile   = filename;
-    }
-
     sol::function onMobEngage = getEntityCachedFunction(PMob, "onMobEngage");
     if (!onMobEngage.valid())
     {
@@ -4239,6 +4231,14 @@ void OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
                     optParams["isWeaponSkillKill"] = weaponskillUsed > 0;
                     optParams["weaponskillUsed"]   = weaponskillUsed;
                     optParams["weaponskillDamage"] = weaponskillDamage;
+
+                    // An event the kill starts copies these. One it doesn't must not inherit them.
+                    const auto previousPrep = *PChar->eventPreparation;
+                    const auto restorePrep  = xi::finally(
+                        [PChar, previousPrep]()
+                        {
+                            *PChar->eventPreparation = previousPrep;
+                        });
 
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;

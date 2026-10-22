@@ -320,6 +320,117 @@ xi.besieged.hasAssaultOrders = function(player)
 end
 
 -----------------------------------
+-- Al Zahbi siege cutscenes
+-----------------------------------
+---@enum xi.besieged.outcome
+xi.besieged.outcome =
+{
+    START = 1,
+    WIN   = 2,
+    LOSS  = 3,
+}
+
+-- Al Zahbi cutscenes for each army: breaching the Bastion, retreating, and taking the Astral Candescence
+local siegeEvents =
+{
+    [xi.besieged.stronghold.MAMOOK] =
+    {
+        [xi.besieged.outcome.START] = 8,
+        [xi.besieged.outcome.WIN  ] = 9,
+        [xi.besieged.outcome.LOSS ] = 10,
+    },
+
+    [xi.besieged.stronghold.HALVUNG] =
+    {
+        [xi.besieged.outcome.START] = 11,
+        [xi.besieged.outcome.WIN  ] = 12,
+        [xi.besieged.outcome.LOSS ] = 13,
+    },
+
+    [xi.besieged.stronghold.ARRAPAGO] =
+    {
+        [xi.besieged.outcome.START] = 5,
+        [xi.besieged.outcome.WIN  ] = 6,
+        [xi.besieged.outcome.LOSS ] = 7,
+    },
+}
+
+local siegeEventOutcomes = {}
+for _, events in pairs(siegeEvents) do
+    for outcome, csid in pairs(events) do
+        siegeEventOutcomes[csid] = outcome
+    end
+end
+
+local fatedStrife        = 142
+local bustleOfTheCapital = 178
+
+local musicSlots =
+{
+    xi.musicSlot.ZONE_DAY,
+    xi.musicSlot.ZONE_NIGHT,
+    xi.musicSlot.COMBAT_SOLO,
+    xi.musicSlot.COMBAT_PARTY,
+}
+
+---@class besiegedSiegeEvent
+---@field stronghold xi.besieged.stronghold Attacking army
+---@field outcome    xi.besieged.outcome
+---@field leader     boolean? The army's leader marches with it (Gulool Ja Ja, Gurfurlur, Medusa)
+
+-- Plays a siege cutscene with the player as the actor
+---@param player CBaseEntity
+---@param params besiegedSiegeEvent
+xi.besieged.startSiegeEvent = function(player, params)
+    local csid = siegeEvents[params.stronghold][params.outcome]
+
+    if params.outcome ~= xi.besieged.outcome.START then
+        player:startEvent(csid)
+        return
+    end
+
+    player:startEvent(csid, { [6] = params.leader and 1 or 0 })
+
+    for _, slot in ipairs(musicSlots) do
+        player:changeMusic(slot, fatedStrife)
+    end
+end
+
+-- Answers the client's mid-event requests, including the one after the opening moves the player
+---@param player CBaseEntity
+---@param csid integer
+xi.besieged.onSiegeEventUpdate = function(player, csid)
+    if not siegeEventOutcomes[csid] then
+        return
+    end
+
+    -- One bit per Serpent General still standing: 0 Rughadjeen, 1 Gadalar, 2 Mihli Aliapoh, 3 Zazarg, 4 Najelith.
+    -- Stored as captured so an unset var means all five standing.
+    -- TODO: Read this from the Besieged state once it exists.
+    local generalsStanding = bit.bxor(GetVolatileServerVariable('[Besieged]GeneralsCaptured'), 31)
+
+    -- One seal on the Hall of Binding gate per general standing.
+    -- Capture needed
+    player:updateEvent(generalsStanding, utils.mask.countBits(generalsStanding, 5))
+end
+
+---@param player CBaseEntity
+---@param csid integer
+xi.besieged.onSiegeEventFinish = function(player, csid)
+    local outcome = siegeEventOutcomes[csid]
+    if
+        not outcome or
+        outcome == xi.besieged.outcome.START
+    then
+        return
+    end
+
+    for _, slot in ipairs(musicSlots) do
+        player:changeMusic(slot, bustleOfTheCapital)
+    end
+end
+
+-----------------------------------
 -- Besieged mobs lifecycle
 -----------------------------------
 xi.besieged.onMobInitialize = function(mob)

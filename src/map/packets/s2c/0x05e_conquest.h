@@ -73,8 +73,8 @@ struct besiegedstronghold_t
     uint32_t Orders : 3;
     uint32_t Forces : 8;
     uint32_t Level : 4;
-    uint32_t MirrorDestroyed : 1;
     uint32_t Mirrors : 4;
+    uint32_t Unknown : 1;
     uint32_t Prisoners : 4;
     uint32_t unused : 8;
 };

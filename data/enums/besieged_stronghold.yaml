@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.besieged.stronghold
+
+values:
+  al_zahbi: 0
+  mamook:   1
+  halvung:  2
+  arrapago: 3

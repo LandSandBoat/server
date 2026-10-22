@@ -1,6 +1,7 @@
 -----------------------------------
 -- Drives a VCS trainer like the client does and decodes the replies.
 -----------------------------------
+local packetReader = require('scripts.tests.helpers.packet_reader')
 
 ---@class RaisingEventStart
 ---@field eventId integer
@@ -19,19 +20,6 @@ local trainers =
     [xi.zone.BASTOK_MINES]       = 'Zopago',
     [xi.zone.WINDURST_WOODS]     = 'Pulonono',
 }
-
-function raisingClient.readU32(data, offset)
-    return data[offset] + data[offset + 1] * 0x100 + data[offset + 2] * 0x10000 + data[offset + 3] * 0x1000000
-end
-
-local function readParams(data, offset)
-    local params = {}
-    for i = 0, 7 do
-        params[i] = raisingClient.readU32(data, offset + i * 4)
-    end
-
-    return params
-end
 
 ---@param player CClientEntityPair
 ---@return RaisingClient
@@ -82,7 +70,7 @@ function raisingClient.replies(client)
     local replies = {}
     for _, packet in pairs(client.player.packets:getIncoming()) do
         if packet.type == 0x05C then
-            table.insert(replies, readParams(packet.data, 0x04))
+            table.insert(replies, packetReader.readParams(packet.data, 0x04))
         end
     end
 
@@ -124,14 +112,14 @@ function raisingClient.eventStart(client)
     local start
     for _, packet in pairs(client.player.packets:getIncoming()) do
         if packet.type == 0x032 then
-            start = { eventId = packet.data[0x0C] + packet.data[0x0D] * 0x100, params = {} }
+            start = { eventId = packetReader.readU16(packet.data, 0x0C), params = {} }
         elseif packet.type == 0x033 then
-            start = { eventId = packet.data[0x0C] + packet.data[0x0D] * 0x100, params = readParams(packet.data, 0x50), strings = {} }
+            start = { eventId = packetReader.readU16(packet.data, 0x0C), params = packetReader.readParams(packet.data, 0x50), strings = {} }
             for i = 0, 3 do
                 start.strings[i] = readString(packet.data, 0x10 + i * 16)
             end
         elseif packet.type == 0x034 then
-            start = { eventId = packet.data[0x2C] + packet.data[0x2D] * 0x100, params = readParams(packet.data, 0x08) }
+            start = { eventId = packetReader.readU16(packet.data, 0x2C), params = packetReader.readParams(packet.data, 0x08) }
         end
     end
 

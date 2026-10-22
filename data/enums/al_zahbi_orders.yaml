@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+
+# Orders shown for Al Zahbi on the Besieged map.
+values:
+  defend:     0 # A beastman army is attacking Al Zahbi.
+  intercept:  1 # A beastman army is advancing.
+  infiltrate: 2 # No siege in progress.
+  recover:    3 # A stronghold holds the Astral Candescence.
