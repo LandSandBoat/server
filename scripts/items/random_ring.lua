@@ -1,30 +1,47 @@
 -----------------------------------
 -- ID: 15770
 -- Item: Random Ring
--- Item Effect: Enchantment Dex + math.randomInt(1, 8)
--- Duration: 30 Mins
+-- Item Effect: Enchantment: DEX +1 to +8
+-- Duration: 30 Minutes
+-- https://wiki.ffo.jp/html/9154.html
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, caster)
-    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.RANDOM_RING) ~= nil then
-        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.RANDOM_RING)
-    end
-
     return 0
 end
 
-itemObject.onItemUse = function(target, user)
-    if target:hasEquipped(xi.item.RANDOM_RING) then
-        local power = math.randomInt(1, 8)
+itemObject.onItemUse = function(target, user, item, action, equipSlotID)
+    if equipSlotID then
+        local effect = target:getStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
 
-        target:addStatusEffect(xi.effect.ENCHANTMENT, { power = power, duration = 3600, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.RANDOM_RING })
+        if
+            effect and
+            effect:getSourceType() == xi.effectSourceType.EQUIPPED_ITEM and
+            effect:getSourceTypeParam() == xi.item.RANDOM_RING
+        then
+            effect:resetStartTime()
+        else
+            target:addStatusEffect(xi.effect.ENCHANTMENT, { power = math.randomInt(1, 8), duration = 1800, origin = user, subType = equipSlotID, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.RANDOM_RING })
+        end
     end
 end
 
 itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.DEX, effect:getPower())
+end
+
+itemObject.onItemUnequip = function(target, item, equipSlotID)
+    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
+
+    if
+        effect and
+        effect:getSourceType() == xi.effectSourceType.EQUIPPED_ITEM and
+        effect:getSourceTypeParam() == xi.item.RANDOM_RING
+    then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, equipSlotID)
+    end
 end
 
 itemObject.onEffectLose = function(target, effect)
