@@ -27,6 +27,18 @@
 #include <stdexcept>
 #include <string>
 
+TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
+{
+    // Bound values never need escaping, so escaping one first corrupts it.
+    const auto raw = std::string("O'Brien said \"100%\"; C:\\path | done");
+
+    const auto rset = db::preparedStmt("SELECT ?", raw);
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+
+    CHECK(rset->get<std::string>(0) == raw);
+}
+
 TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
 {
     using db::ResultSetType;

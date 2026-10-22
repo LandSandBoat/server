@@ -81,12 +81,12 @@ auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto memberName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto memberName = asStringFromUntrustedSource(this->sName, sizeof(this->sName));
     switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party:
         {
-            ShowDebug(fmt::format("(Party) Altering permissions of {} to {}", memberName, this->ChangeKind));
+            ShowDebugFmt("(Party) Altering permissions of {:?} to {}", memberName, this->ChangeKind);
             PChar->PParty->AssignPartyRole(memberName, static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND>(this->ChangeKind));
         }
         break;
@@ -128,7 +128,7 @@ void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PC
         break;
         case GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Alliance:
         {
-            ShowDebug(fmt::format("(Alliance) Changing leader to {}", memberName));
+            ShowDebugFmt("(Alliance) Changing leader to {:?}", memberName);
             PChar->PParty->m_PAlliance->assignAllianceLeader(memberName);
 
             message::send(ipc::AllianceReload{

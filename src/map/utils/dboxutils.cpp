@@ -117,7 +117,7 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
 
 void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, int8_t PostWorkNo, int8_t ItemWorkNo, uint32_t ItemStacks, const std::string& receiverName)
 {
-    DebugDeliveryBoxFmt("DBOX: AddItemsToBeSent: player: {} ({}), BoxNo: {}, PostWorkNo: {}, ItemWorkNo: {}, ItemStacks: {}, receiverName: {}",
+    DebugDeliveryBoxFmt("DBOX: AddItemsToBeSent: player: {} ({}), BoxNo: {}, PostWorkNo: {}, ItemWorkNo: {}, ItemStacks: {}, receiverName: {:?}",
                         PChar->name,
                         PChar->id,
                         static_cast<int8_t>(BoxNo),
@@ -787,7 +787,7 @@ void dboxutils::RemoveItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO 
 
 void dboxutils::ConfirmNameBeforeSending(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo, const std::string& receiverName)
 {
-    DebugDeliveryBoxFmt("DBOX: ConfirmNameBeforeSending: player: {} ({}), BoxNo: {}, receiverName: {}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), receiverName);
+    DebugDeliveryBoxFmt("DBOX: ConfirmNameBeforeSending: player: {} ({}), BoxNo: {}, receiverName: {:?}", PChar->name, PChar->id, static_cast<int8_t>(BoxNo), receiverName);
 
     if (!IsSendBoxOpen(PChar))
     {
