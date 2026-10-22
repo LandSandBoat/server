@@ -205,13 +205,22 @@ public:
             }
         }
 
-        // Disable copy
         Token(const Token&)                    = delete;
         auto operator=(const Token&) -> Token& = delete;
 
-        // Allow moving
-        Token(Token&&) noexcept                    = default;
-        auto operator=(Token&&) noexcept -> Token& = default;
+        Token(Token&&) noexcept = default;
+
+        // Stop the task this token held before taking over the other's.
+        auto operator=(Token&& other) noexcept -> Token&
+        {
+            if (this != &other)
+            {
+                stop();
+                signal_ = std::move(other.signal_);
+            }
+
+            return *this;
+        }
 
     private:
         std::shared_ptr<asio::cancellation_signal> signal_;
@@ -449,6 +458,12 @@ public:
                         }
 
                         co_await yieldUntil(deadline);
+
+                        // A timer that fired before the token stopped still resumes normally.
+                        if ((co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none)
+                        {
+                            co_return;
+                        }
                     }
                 }
                 catch (const asio::system_error& e)
@@ -493,6 +508,12 @@ public:
                             co_await fn();
                         }
                         co_await yieldFor(duration);
+
+                        // A timer that fired before the token stopped still resumes normally.
+                        if ((co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none)
+                        {
+                            co_return;
+                        }
                     }
                 }
                 catch (const asio::system_error& e)
@@ -527,7 +548,10 @@ public:
                 try
                 {
                     co_await yieldFor(duration);
-                    if (!this->closeRequested())
+
+                    // A timer that fired before the token stopped still resumes normally.
+                    const auto cancelled = (co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none;
+                    if (!cancelled && !this->closeRequested())
                     {
                         if constexpr (detail::IsInvocableReturnsVoid<T>)
                         {
