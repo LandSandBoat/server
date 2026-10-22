@@ -11,7 +11,7 @@ set(SOURCES
     search_handler.cpp
 )
 
-xi_add_library(xi_search_lib ${SOURCES})
+xi_add_library(xi_search_lib OBJECT ${SOURCES})
 add_subdirectory(packets)
 target_include_directories(xi_search_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_search_lib PUBLIC xi_ext_search)

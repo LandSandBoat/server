@@ -47,9 +47,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "
     )
 endif()
 
-# Catch2 test TUs must live in the executable, not xi_test_lib: their tests are
-# registered by static initializers, which the linker drops for unreferenced
-# object files in a static library.
+# Catch2 test TUs live in the executable, the only target that links Catch2.
 xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/bitset_tests.cpp
@@ -71,7 +69,7 @@ xi_add_executable(xi_test testserver.rc
 )
 add_dependencies(xi_test data_schema_generate)
 
-xi_add_library(xi_test_lib ${SOURCES})
+xi_add_library(xi_test_lib OBJECT ${SOURCES})
 add_subdirectory(lua)
 add_subdirectory(reporters)
 target_include_directories(xi_test_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

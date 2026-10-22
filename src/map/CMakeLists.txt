@@ -199,16 +199,16 @@ add_library(xi_map_core STATIC)
 target_link_libraries(xi_map_core PUBLIC xi_map_deps)
 
 # The group libraries split xi_map_core up for parallel compilation, not isolation.
-# xi_map_core_objects owns the PCH; the subdirectories below add the other groups' sources.
+# The subdirectories below add the other groups' sources.
 function(xi_add_map_group_library target)
     add_library(${target} OBJECT ${ARGN})
     add_dependencies(${target} enum_codegen)
     target_link_libraries(${target} PRIVATE xi_map_deps project_warnings)
     target_sources(xi_map_core PRIVATE $<TARGET_OBJECTS:${target}>)
+    xi_reuse_pch(${target} xi_common)
 endfunction()
 
 xi_add_map_group_library(xi_map_core_objects ${MAP_CORE_SOURCES})
-xi_precompile_headers(xi_map_core_objects)
 
 foreach(group
     xi_map_lua          # lua/
@@ -218,7 +218,6 @@ foreach(group
     xi_map_packets_s2c  # packets/ packets/s2c/
 )
     xi_add_map_group_library(${group})
-    xi_reuse_pch(${group} xi_map_core_objects)
 endforeach()
 
 add_subdirectory(action)
