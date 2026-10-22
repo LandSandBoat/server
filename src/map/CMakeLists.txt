@@ -1,14 +1,3 @@
-add_subdirectory(action)
-add_subdirectory(ai)
-add_subdirectory(data)
-add_subdirectory(entities)
-add_subdirectory(enums)
-add_subdirectory(items)
-add_subdirectory(lua)
-add_subdirectory(packets)
-add_subdirectory(transports)
-add_subdirectory(utils)
-
 set(APP_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
@@ -201,32 +190,35 @@ target_include_directories(xi_map_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_map_core
     PUBLIC
         xi_data_core
-        ${MAP_ONLY_EXTERNAL_LIBS}
+        xi_ext_map
 )
 
 # The group libraries and xi_map_core all link each other, so the split buys parallel
-# compilation, not isolation.
+# compilation, not isolation. The subdirectories below add their sources.
 function(xi_add_map_group_library target)
-    add_library(${target} STATIC ${ARGN})
+    add_library(${target} STATIC)
     add_dependencies(${target} enum_codegen)
     target_link_libraries(${target} PUBLIC xi_map_core PRIVATE project_warnings)
     target_link_libraries(xi_map_core PUBLIC ${target})
     xi_reuse_pch(${target} xi_map_core)
 endfunction()
 
-xi_add_map_group_library(xi_map_lua ${LUA_SOURCES})
-xi_add_map_group_library(xi_map_battle
-    ${UTIL_SOURCES}
-    ${ITEM_SOURCES}
-    ${ACTION_SOURCES}
-    ${AI_SOURCES}
-    ${DATA_MAP_SOURCES}
-    ${ENUMS_SOURCES}
-    ${TRANSPORTS_SOURCES}
-)
-xi_add_map_group_library(xi_map_entities ${ENTITY_SOURCES})
-xi_add_map_group_library(xi_map_packets_c2s ${PACKET_C2S_SOURCES})
-xi_add_map_group_library(xi_map_packets_s2c ${PACKET_S2C_SOURCES})
+xi_add_map_group_library(xi_map_lua)          # lua/
+xi_add_map_group_library(xi_map_battle)       # action/ ai/ data/ enums/ items/ transports/ utils/
+xi_add_map_group_library(xi_map_entities)     # entities/
+xi_add_map_group_library(xi_map_packets_c2s)  # packets/c2s/
+xi_add_map_group_library(xi_map_packets_s2c)  # packets/ packets/s2c/
+
+add_subdirectory(action)
+add_subdirectory(ai)
+add_subdirectory(data)
+add_subdirectory(entities)
+add_subdirectory(enums)
+add_subdirectory(items)
+add_subdirectory(lua)
+add_subdirectory(packets)
+add_subdirectory(transports)
+add_subdirectory(utils)
 
 target_include_directories(xi_map PRIVATE ${module_include_dirs})
 target_link_libraries(xi_map PRIVATE xi_map_core)

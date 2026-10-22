@@ -1,4 +1,4 @@
-set(PATHFIND_SOURCES
+target_sources(xi_map_battle PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/chunked_path.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/chunked_path.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_path_owner.cpp
@@ -13,5 +13,4 @@ set(PATHFIND_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_types.h
-    PARENT_SCOPE
 )

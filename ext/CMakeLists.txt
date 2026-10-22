@@ -245,7 +245,10 @@ CPMAddPackage(
         "CPPTRACE_DISABLE_CXX_20_MODULES ON"
 ) # defines: cpptrace::cpptrace
 
-set(SHARED_EXTERNAL_LIBS
+# What each server links from the libraries above. Forks can add their own with
+# target_link_libraries(xi_ext_map INTERFACE <target>) instead of editing these lists.
+add_library(xi_ext_shared INTERFACE)
+target_link_libraries(xi_ext_shared INTERFACE
     fmt::fmt
     spdlog
     concurrentqueue
@@ -269,12 +272,14 @@ set(SHARED_EXTERNAL_LIBS
     cpptrace::cpptrace
 )
 
-set(CONNECT_ONLY_EXTERNAL_LIBS
+add_library(xi_ext_connect INTERFACE)
+target_link_libraries(xi_ext_connect INTERFACE
     bcrypt
     nlohmann_json::nlohmann_json
 )
 
-set(MAP_ONLY_EXTERNAL_LIBS
+add_library(xi_ext_map INTERFACE)
+target_link_libraries(xi_ext_map INTERFACE
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj
@@ -282,21 +287,19 @@ set(MAP_ONLY_EXTERNAL_LIBS
     zlibstatic
 )
 
-set(SEARCH_ONLY_EXTERNAL_LIBS
+add_library(xi_ext_search INTERFACE)
+target_link_libraries(xi_ext_search INTERFACE
 )
 
-set(WORLD_ONLY_EXTERNAL_LIBS
+add_library(xi_ext_world INTERFACE)
+target_link_libraries(xi_ext_world INTERFACE
     httplib::httplib
     nlohmann_json::nlohmann_json
 )
 
-set(TEST_ONLY_EXTERNAL_LIBS
+add_library(xi_ext_test INTERFACE)
+target_link_libraries(xi_ext_test INTERFACE
     bcrypt
     termcolor::termcolor
     nlohmann_json::nlohmann_json
 )
-
-# copy external lib lists to parent scope
-foreach(list SHARED CONNECT_ONLY MAP_ONLY SEARCH_ONLY WORLD_ONLY TEST_ONLY)
-    set(${list}_EXTERNAL_LIBS ${${list}_EXTERNAL_LIBS} PARENT_SCOPE)
-endforeach()

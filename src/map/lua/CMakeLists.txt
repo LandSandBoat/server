@@ -1,4 +1,4 @@
-set(LUA_SOURCES
+target_sources(xi_map_lua PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.cpp
@@ -43,5 +43,4 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/luautils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sol_bindings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sol_bindings.h
-    PARENT_SCOPE
 )

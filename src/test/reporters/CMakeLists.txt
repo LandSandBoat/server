@@ -1,4 +1,4 @@
-set(REPORTERS_SOURCES
+target_sources(xi_test_lib PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/console_reporter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/console_reporter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ctrf_reporter.cpp
@@ -7,5 +7,4 @@ set(REPORTERS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/reporter_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/reporter_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/test_reporter.h
-    PARENT_SCOPE
 )

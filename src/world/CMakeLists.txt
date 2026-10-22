@@ -31,7 +31,7 @@ target_include_directories(xi_world_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_world_lib
     PUBLIC
         xi_data_core
-        ${WORLD_ONLY_EXTERNAL_LIBS}
+        xi_ext_world
 )
 
 xi_add_executable(xi_world worldserver.rc ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)

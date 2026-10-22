@@ -1,4 +1,4 @@
-set(ENTITY_SOURCES
+target_sources(xi_map_entities PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/automaton_entity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/automaton_entity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/base_entity.cpp
@@ -19,5 +19,4 @@ set(ENTITY_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_entity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trust_entity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trust_entity.h
-    PARENT_SCOPE
 )

@@ -25,7 +25,7 @@ target_include_directories(xi_connect_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(xi_connect_lib
     PUBLIC
         xi_data_core
-        ${CONNECT_ONLY_EXTERNAL_LIBS}
+        xi_ext_connect
 )
 
 xi_add_executable(xi_connect connectserver.rc ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)

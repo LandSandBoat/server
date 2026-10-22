@@ -1,4 +1,4 @@
-set(PACKET_S2C_SOURCES
+target_sources(xi_map_packets_s2c PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x005_packetcontrol.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x006_naraku.h
@@ -300,5 +300,4 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_partyreq.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
-    PARENT_SCOPE
 )

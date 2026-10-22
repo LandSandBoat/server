@@ -1,4 +1,4 @@
-set(PACKET_C2S_SOURCES
+target_sources(xi_map_packets_c2s PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
     ${CMAKE_CURRENT_SOURCE_DIR}/rate_limiter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/rate_limiter.h
@@ -263,5 +263,4 @@ set(PACKET_C2S_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11c_party_request.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_jump.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11d_jump.h
-    PARENT_SCOPE
 )

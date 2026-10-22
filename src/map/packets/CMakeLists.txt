@@ -1,13 +1,7 @@
 add_subdirectory(c2s)
 add_subdirectory(s2c)
 
-set(PACKET_C2S_SOURCES
-    ${PACKET_C2S_SOURCES}
-    PARENT_SCOPE
-)
-
-set(PACKET_S2C_SOURCES
-    ${PACKET_S2C_SOURCES}
+target_sources(xi_map_packets_s2c PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h
@@ -21,5 +15,4 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pet_sync.h
-    PARENT_SCOPE
 )
