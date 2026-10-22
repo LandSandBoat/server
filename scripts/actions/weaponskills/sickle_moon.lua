@@ -5,7 +5,7 @@
 -- Delivers a two-hit attack. Damage varies with TP.
 -- Modifiers: STR:40%  AGI:40%
 -- 100%TP     200%TP     300%TP
--- 1.5         2        2.75
+-- 1.5         3.5      6.5
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -18,6 +18,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.2 params.agi_wsc = 0.2
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.5, 3.5, 6.5 }
         params.str_wsc = 0.4 params.agi_wsc = 0.4
     end
 
