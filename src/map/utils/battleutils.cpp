@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <array>
 #include <cstring>
+#include <variant>
 
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -45,7 +46,9 @@
 #include "attack.h"
 #include "attackutils.h"
 #include "charutils.h"
+#include "data/datasets/animation_locks/dataset.h"
 #include "data/datasets/skills/dataset.h"
+#include "data/datasets/weapon_skills/dataset.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
@@ -128,46 +131,65 @@ void LoadSkillTable()
 
 void LoadWeaponSkillsList()
 {
-    const auto rset = db::preparedStmt("SELECT weaponskillid, name, jobs, type, skilllevel, element, animation, "
-                                       "animationTime, `range`, aoe, radius, primary_sc, secondary_sc, tertiary_sc, main_only, unlock_id "
-                                       "FROM weapon_skills "
-                                       "WHERE weaponskillid < ? "
-                                       "ORDER BY type, skilllevel ASC",
-                                       MAX_WEAPONSKILL_ID);
-    FOR_DB_MULTIPLE_RESULTS(rset)
+    const auto animationLocks = xi::data::loadDataset<xi::data::datasets::animation_locks::Dataset>();
+    auto       weaponSkills   = xi::data::loadDataset<xi::data::datasets::weapon_skills::Dataset>();
+
+    // weapon skills of one type are listed by skill level
+    std::ranges::stable_sort(weaponSkills, {}, [](const auto& entry)
+                             {
+                                 return std::pair{ entry.Skill, entry.Level };
+                             });
+
+    for (const auto& entry : weaponSkills)
     {
-        const auto weaponSkillId = rset->get<uint16>("weaponskillid");
-        if (weaponSkillId >= MAX_WEAPONSKILL_ID)
+        auto* PWeaponSkill = new CWeaponSkill(std::to_underlying(entry.Id));
+
+        PWeaponSkill->setName(entry.Name);
+
+        std::array<uint8, MAX_JOBTYPE> jobs{};
+        for (const auto job : entry.Jobs)
         {
-            ShowErrorFmt("weaponskillid {} is out of range, MAX_WEAPONSKILL_ID is {}. Skipping.", weaponSkillId, MAX_WEAPONSKILL_ID);
-            continue;
+            jobs[std::to_underlying(job)] = 1;
         }
 
-        auto* PWeaponSkill = new CWeaponSkill(weaponSkillId);
-
-        PWeaponSkill->setName(rset->get<std::string>("name"));
-
-        // Jobs are stored in DB as 22 entries.
-        // Index 0 is reserved for NON, index 23 for MON (both left as 0).
-        std::array<uint8, MAX_JOBTYPE> jobs{};
-        std::array<uint8, 22>          tempJobs{};
-        db::extractFromBlob(rset, "jobs", tempJobs);
-        std::memcpy(&jobs[1], tempJobs.data(), 22);
         PWeaponSkill->setJob(jobs);
 
-        PWeaponSkill->setType(rset->get<uint8>("type"));
-        PWeaponSkill->setSkillLevel(rset->get<uint16>("skilllevel"));
-        PWeaponSkill->setElement(rset->get<uint8>("element"));
-        PWeaponSkill->setAnimationId(rset->get<uint8>("animation"));
-        PWeaponSkill->setAnimationTime(std::chrono::milliseconds(rset->get<uint32>("animationTime")));
-        PWeaponSkill->setRange(rset->get<uint8>("range"));
-        PWeaponSkill->setAoe(rset->get<uint8>("aoe"));
-        PWeaponSkill->setRadius(rset->get<uint8>("radius"));
-        PWeaponSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
-        PWeaponSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
-        PWeaponSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
-        PWeaponSkill->setMainOnly(rset->get<uint8>("main_only"));
-        PWeaponSkill->setUnlockId(rset->get<uint8>("unlock_id"));
+        PWeaponSkill->setType(std::to_underlying(entry.Skill));
+        PWeaponSkill->setSkillLevel(entry.Level);
+        PWeaponSkill->setElement(std::to_underlying(entry.Element));
+        PWeaponSkill->setAnimationId(entry.Animation);
+        PWeaponSkill->setAnimationTime(animationLocks.find(ActionCategory::SkillFinish, entry.Animation).value_or(std::chrono::milliseconds(2000)));
+        PWeaponSkill->setRange(entry.Range);
+
+        // TargetFind only knows target-centred spheres for weapon skills, so a cone reaches as far as one
+        if (entry.Aoe)
+        {
+            PWeaponSkill->setAoe(2);
+            if (const auto* sphere = std::get_if<xi::data::AoeSphereData>(&entry.Aoe->Shape))
+            {
+                PWeaponSkill->setRadius(sphere->Radius);
+            }
+            else
+            {
+                PWeaponSkill->setRadius(std::get<xi::data::AoeConeData>(entry.Aoe->Shape).Distance);
+            }
+        }
+        else
+        {
+            PWeaponSkill->setAoe(1);
+        }
+
+        std::array<uint8, 3> skillchains{};
+        for (std::size_t index = 0; index < entry.Skillchain.size(); ++index)
+        {
+            skillchains[index] = std::to_underlying(entry.Skillchain[index]);
+        }
+
+        PWeaponSkill->setPrimarySkillchain(skillchains[0]);
+        PWeaponSkill->setSecondarySkillchain(skillchains[1]);
+        PWeaponSkill->setTertiarySkillchain(skillchains[2]);
+        PWeaponSkill->setMainOnly(entry.MainJobOnly);
+        PWeaponSkill->setUnlockId(std::to_underlying(entry.Unlock));
 
         g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
         g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);

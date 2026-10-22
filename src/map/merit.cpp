@@ -23,6 +23,7 @@
 #include "entities/char_entity.h"
 
 #include "data/datasets/merits/dataset.h"
+#include "data/datasets/weapon_skills/dataset.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "utils/charutils.h"
@@ -411,8 +412,16 @@ void LoadMeritsList()
         return;
     }
 
-    const auto spells    = loadNameLookup("SELECT name, spellid FROM spell_list", "spellid");
-    const auto wsUnlocks = loadNameLookup("SELECT name, unlock_id FROM weapon_skills", "unlock_id");
+    const auto spells = loadNameLookup("SELECT name, spellid FROM spell_list", "spellid");
+
+    std::unordered_map<std::string, uint16> wsUnlocks;
+    for (const auto& weaponSkill : xi::data::loadDataset<xi::data::datasets::weapon_skills::Dataset>())
+    {
+        if (weaponSkill.Unlock != xi::WsUnlock::None)
+        {
+            wsUnlocks.emplace(weaponSkill.Name, std::to_underlying(weaponSkill.Unlock));
+        }
+    }
 
     categoryById.clear();
     for (const auto& category : meritData.Categories)

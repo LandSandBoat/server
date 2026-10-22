@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.wsUnlock
+
+values:
+  none:              0
+  asuran_fists:      1
+  evisceration:      2
+  savage_blade:      3
+  ground_strike:     4
+  decimation:        5
+  steel_cyclone:     6
+  spiral_hell:       7
+  impulse_drive:     8
+  blade_ku:          9
+  tachi_kasha:      10
+  black_halo:       11
+  retribution:      12
+  empyreal_arrow:   13
+  detonator:        14
+  ascetics_fury:    15
+  stringing_pummel: 16
+  mandalic_stab:    17
+  mordant_rime:     18
+  pyrrhic_kleos:    19
+  death_blossom:    20
+  atonement:        21
+  expiacion:        22
+  primal_rend:      23
+  kings_justice:    24
+  insurgency:       25
+  drakesbane:       26
+  blade_kamu:       27
+  tachi_rana:       28
+  mystic_boon:      29
+  vidohunir:        30
+  garland_of_bliss: 31
+  omniscience:      32
+  trueflight:       33
+  leaden_salute:    34
+  victory_smite:    35
+  rudras_storm:     36
+  chant_du_cygne:   37
+  torcleaver:       38
+  cloudsplitter:    39
+  ukkos_fury:       40
+  quietus:          41
+  camlanns_torment: 42
+  blade_hi:         43
+  tachi_fudo:       44
+  dagan:            45
+  myrkr:            46
+  jishnus_radiance: 47
+  wildfire:         48
+  dimidiation:      49
+  apex_arrow:       50
+  blade_shun:       51
+  entropy:          52
+  exenterator:      53
+  last_stand:       54
+  realmrazer:       55
+  requiescat:       56
+  resolution:       57
+  ruinator:         58
+  shattersoul:      59
+  shijin_spiral:    60
+  stardiver:        61
+  tachi_shoha:      62
+  upheaval:         63
+  exudation:        64
