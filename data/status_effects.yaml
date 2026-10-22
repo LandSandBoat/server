@@ -5608,7 +5608,6 @@ status_effects:
       - damage
       - death
       - magic_begin
-      - on_zone
       - logout
 
   leavegame:
