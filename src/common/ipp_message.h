@@ -23,7 +23,11 @@
 
 #include <common/ipp.h>
 
+#include <memory>
+#include <tuple>
 #include <vector>
+
+#include <zmq.hpp>
 
 // An IP+Port-addressed message: a routing id plus an opaque payload.
 struct IPPMessage
@@ -31,3 +35,33 @@ struct IPPMessage
     IPP                ipp;
     std::vector<uint8> payload;
 };
+
+// IPPMessage with a zmq frame as payload.
+struct IPPFrame
+{
+    IPP            ipp;
+    zmq::message_t payload;
+};
+
+namespace ipc
+{
+
+// zmq takes ownership of bytes, no copy
+inline auto toFrame(std::vector<uint8>&& bytes) -> zmq::message_t
+{
+    // message_t can throw, release after
+    auto owner = std::make_unique<std::vector<uint8>>(std::move(bytes));
+    auto frame = zmq::message_t(
+        owner->data(),
+        owner->size(),
+        [](void*, void* hint)
+        {
+            delete static_cast<std::vector<uint8>*>(hint);
+        },
+        owner.get());
+
+    std::ignore = owner.release();
+    return frame;
+}
+
+} // namespace ipc

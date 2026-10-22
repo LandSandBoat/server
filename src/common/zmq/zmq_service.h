@@ -53,7 +53,7 @@ public:
     ZMQService(ZMQService&&)                 = delete;
     ZMQService& operator=(ZMQService&&)      = delete;
 
-    [[nodiscard]] auto registerRouter(const std::string& endpoint) -> ipc::Channel<IPPMessage>;
+    [[nodiscard]] auto registerRouter(const std::string& endpoint) -> ipc::Channel<IPPFrame>;
 
     [[nodiscard]] auto registerDealer(const std::string& endpoint, uint64 routingId) -> ipc::Channel<zmq::message_t>;
 

@@ -19,6 +19,7 @@ Articles in this category are guides covering specific subject matter. They're i
 * [Module Guide](Module-Guide)
 * [Dummy System](Dummy-System)
 * [Sol Refactor](Sol-Refactor)
+* [Replicated State](Replicated-State)
 * [Programming for Performance](Programming-for-Performance)
 * [Does -ffast-math matter?](Does-ffast-math-flag-matter)
 * [Build Troubleshooting](Build-Troubleshooting)

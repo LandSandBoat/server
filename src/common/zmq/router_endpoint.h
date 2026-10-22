@@ -40,8 +40,8 @@ public:
     auto onReadable() -> void override;
     auto flushOutbound() -> void override;
 
-    moodycamel::ConcurrentQueue<IPPMessage> incomingQueue_;
-    moodycamel::ConcurrentQueue<IPPMessage> outgoingQueue_;
+    moodycamel::ConcurrentQueue<IPPFrame> incomingQueue_;
+    moodycamel::ConcurrentQueue<IPPFrame> outgoingQueue_;
 
 private:
     std::string   endpoint_;

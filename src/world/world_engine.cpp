@@ -35,7 +35,7 @@
 WorldEngine::WorldEngine(Scheduler& scheduler, ZMQService& zmqService, EnableHTTPServer enableHTTPServer)
 : scheduler_(scheduler)
 , ipcServer_(std::make_unique<IPCServer>(*this, zmqService))
-, partySystem_(std::make_unique<PartySystem>(*this))
+, partySystem_(std::make_unique<PartySystem>(ipcServer_->replica()))
 , conquestSystem_(std::make_unique<ConquestSystem>(*this))
 , besiegedSystem_(std::make_unique<BesiegedSystem>(*this))
 , campaignSystem_(std::make_unique<CampaignSystem>(*this))

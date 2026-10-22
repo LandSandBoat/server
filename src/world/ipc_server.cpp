@@ -50,6 +50,18 @@ IPCServer::IPCServer(WorldEngine& worldServer, ZMQService& zmqService)
 , channel_(zmqService.registerRouter(getZMQEndpointString()))
 {
     TracyZoneScoped;
+
+    replica_.init(
+        zoneSettings_.mapEndpoints_,
+        [this](const IPP& mirror, const ipc::ReplicaSync& message)
+        {
+            sendMessage(mirror, message);
+        });
+}
+
+auto IPCServer::replica() -> xi::replica::Owner&
+{
+    return replica_;
 }
 
 //
@@ -368,16 +380,23 @@ void IPCServer::handleIncomingMessages()
     TracyZoneScoped;
 
     // TODO: Should we stop more messages appearing on the queue while we're processing?
-    IPPMessage message;
+    IPPFrame message;
     while (channel_.tryReceive(message))
     {
-        const auto firstByte = message.payload[0];
-        const auto msgType   = ipc::toString(static_cast<ipc::MessageType>(firstByte));
+        const auto payload = std::span{ message.payload.data<uint8>(), message.payload.size() };
+        if (payload.empty())
+        {
+            continue;
+        }
+
+        const auto msgType = ipc::toString(static_cast<ipc::MessageType>(payload[0]));
 
         DebugIPCFmt("Incoming {} message from {}", msgType, message.ipp.toString());
 
-        handleMessage(message.ipp, { message.payload.data(), message.payload.size() });
+        handleMessage(message.ipp, payload);
     }
+
+    replica_.flush();
 }
 
 void IPCServer::handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message)
@@ -616,6 +635,13 @@ void IPCServer::handleMessage_LuaFunction(const IPP& ipp, const ipc::LuaFunction
     TracyZoneScoped;
 
     rerouteMessageToZoneId(message.executorZoneId, message);
+}
+
+void IPCServer::handleMessage_ReplicaSync(const IPP& ipp, const ipc::ReplicaSync& message)
+{
+    TracyZoneScoped;
+
+    replica_.receive(ipp, message);
 }
 
 void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession& message)

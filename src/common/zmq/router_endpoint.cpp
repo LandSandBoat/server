@@ -77,20 +77,18 @@ auto RouterEndpoint::onReadable() -> void
             break;
         }
 
-        auto ipp     = IPP(msgs[0]);
-        auto payload = std::vector<uint8>(msgs[1].data<uint8>(), msgs[1].data<uint8>() + msgs[1].size());
-        incomingQueue_.enqueue(IPPMessage{ ipp, std::move(payload) });
+        incomingQueue_.enqueue(IPPFrame{ IPP(msgs[0]), std::move(msgs[1]) });
     }
 }
 
 auto RouterEndpoint::flushOutbound() -> void
 {
-    IPPMessage out;
+    IPPFrame out;
     while (outgoingQueue_.try_dequeue(out))
     {
         std::array<zmq::message_t, 2> msgs;
         msgs[0] = out.ipp.toZMQMessage();
-        msgs[1] = zmq::message_t(out.payload);
+        msgs[1] = std::move(out.payload);
         zmq::send_multipart(socket_, msgs, zmq::send_flags::dontwait);
     }
 }

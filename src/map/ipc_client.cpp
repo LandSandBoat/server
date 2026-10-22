@@ -85,8 +85,17 @@ void message::handle_incoming()
 IPCClient::IPCClient(MapNetworking& networking, ZMQService& zmqService)
 : networking_(networking)
 , channel_(zmqService.registerDealer(getZMQEndpointString(), getZMQRoutingId()))
+, replica_([this](const ipc::ReplicaSync& message)
+           {
+               sendMessage(message);
+           })
 {
     TracyZoneScoped;
+}
+
+auto IPCClient::replica() -> xi::replica::Mirror&
+{
+    return replica_;
 }
 
 auto IPCClient::getZMQEndpointString() -> std::string
@@ -132,6 +141,11 @@ void IPCClient::handleIncomingMessages()
     zmq::message_t out;
     while (channel_.tryReceive(out))
     {
+        if (out.empty())
+        {
+            continue;
+        }
+
         const auto firstByte = out.data<uint8>()[0];
         const auto msgType   = ipc::toString(static_cast<ipc::MessageType>(firstByte));
 
@@ -142,6 +156,8 @@ void IPCClient::handleIncomingMessages()
 
         handleMessage(IPP(), { static_cast<uint8*>(out.data()), out.size() });
     }
+
+    replica_.poll();
 }
 
 void IPCClient::handleMessage_EmptyStruct(const IPP& ipp, const ipc::EmptyStruct& message)
@@ -1031,6 +1047,13 @@ void IPCClient::handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallRe
     {
         PChar->gmCallContainer().sendPendingResponse(PChar);
     }
+}
+
+void IPCClient::handleMessage_ReplicaSync(const IPP& ipp, const ipc::ReplicaSync& message)
+{
+    TracyZoneScoped;
+
+    replica_.receive(message);
 }
 
 void IPCClient::handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message)

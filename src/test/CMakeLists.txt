@@ -64,6 +64,8 @@ xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/settings_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/item_container_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/party_system_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/replica_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/pathfind_region_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp

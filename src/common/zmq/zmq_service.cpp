@@ -59,7 +59,7 @@ auto ZMQService::stop() noexcept -> void
     }
 }
 
-auto ZMQService::registerRouter(const std::string& endpoint) -> ipc::Channel<IPPMessage>
+auto ZMQService::registerRouter(const std::string& endpoint) -> ipc::Channel<IPPFrame>
 {
     auto owned = std::make_unique<RouterEndpoint>(endpoint);
 
@@ -69,7 +69,7 @@ auto ZMQService::registerRouter(const std::string& endpoint) -> ipc::Channel<IPP
     // queues that exist now); if bind fails the endpoint logs it and nothing flows.
     pendingRegistrations_.enqueue(std::move(owned));
 
-    return ipc::Channel<IPPMessage>{ ep.incomingQueue_, ep.outgoingQueue_ };
+    return ipc::Channel<IPPFrame>{ ep.incomingQueue_, ep.outgoingQueue_ };
 }
 
 auto ZMQService::registerDealer(const std::string& endpoint, uint64 routingId) -> ipc::Channel<zmq::message_t>
