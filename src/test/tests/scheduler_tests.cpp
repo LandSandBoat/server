@@ -298,4 +298,32 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
 
         CHECK(count == countAtStop);
     }
+
+    SECTION("assigning over a token stops the interval it held")
+    {
+        auto first  = 0;
+        auto second = 0;
+
+        auto token = Maybe<Scheduler::Token>();
+        token      = scheduler.intervalOnMainThread(
+            1ms,
+            [&]
+            {
+                ++first;
+            });
+        pumpFor(scheduler, 10ms);
+
+        token = scheduler.intervalOnMainThread(
+            1ms,
+            [&]
+            {
+                ++second;
+            });
+
+        const auto firstAtReplace = first;
+        pumpFor(scheduler, 20ms);
+
+        CHECK(first == firstAtReplace);
+        CHECK(second > 1);
+    }
 }
