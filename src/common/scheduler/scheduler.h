@@ -146,34 +146,6 @@ template <typename T>
 using Task = asio::awaitable<T, asio::any_io_executor>;
 
 //
-// Combinators
-//
-
-//
-// All
-//   Await multiple tasks in parallel and return their results as a tuple.
-//
-template <detail::IsAwaitable... Tasks>
-    requires(sizeof...(Tasks) > 0)
-[[nodiscard]] auto All(Tasks&&... tasks)
-{
-    using namespace asio::experimental::awaitable_operators;
-    return (std::forward<Tasks>(tasks) && ...);
-}
-
-//
-// One
-//   Race multiple tasks and return a variant of the winner.
-//
-template <detail::IsAwaitable... Tasks>
-    requires(sizeof...(Tasks) > 0)
-[[nodiscard]] auto One(Tasks&&... tasks)
-{
-    using namespace asio::experimental::awaitable_operators;
-    return (std::forward<Tasks>(tasks) || ...);
-}
-
-//
 // Scheduler
 //
 class Scheduler final
@@ -318,30 +290,6 @@ public:
         return closeRequested_.load(std::memory_order_relaxed);
     }
 
-    // spawnOnMainThread
-    //   Queue work lazily on the main thread. It won't start executing until you co_await the
-    //   returned task. Does not block the caller.
-    template <detail::IsAwaitable T>
-    [[nodiscard]] auto spawnOnMainThread(T&& task) -> Task<detail::AwaitableResultType<T>>
-    {
-        return asio::co_spawn(mainContext_.get_executor(), std::forward<T>(task), asio::bind_allocator(asio::recycling_allocator<void>(), asio::use_awaitable));
-    }
-
-    // spawnOnMainThread
-    //   Queue work lazily on the main thread. It won't start executing until you co_await the
-    //   returned task. Does not block the caller.
-    template <detail::IsInvocable F>
-    [[nodiscard]] auto spawnOnMainThread(F&& func) -> Task<std::invoke_result_t<std::remove_cvref_t<F>>>
-    {
-        return asio::co_spawn(
-            mainContext_.get_executor(),
-            [fn = std::forward<F>(func)]() mutable -> Task<std::invoke_result_t<std::remove_cvref_t<F>>>
-            {
-                co_return fn();
-            },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::use_awaitable));
-    }
-
     // spawnOnWorkerThread
     //   Queue work lazily on the worker thread pool. It won't start executing until you co_await
     //   the returned task. Does not block the caller.
@@ -480,103 +428,6 @@ public:
         return Token(std::move(signal));
     }
 
-    // intervalOnWorkerThread
-    //   Queues a task on the worker thread pool that repeats at the specified interval.
-    //   Returns a Token that can be used to cancel the task.
-    //   The task will stop if the token goes out of scope, or if the scheduler is stopped.
-    //   Since a coroutine cannot be restarted once it has been completed, we must either pass in
-    //   an invocable, or an invocable which _produces_ a coroutine for co_await-ing.
-    template <detail::IsInvocableReturnsVoidOrAwaitableVoid T>
-    [[nodiscard]] auto intervalOnWorkerThread(const std::chrono::steady_clock::duration duration, T&& func) -> Token
-    {
-        auto signal = std::make_shared<asio::cancellation_signal>();
-
-        asio::co_spawn(
-            workerPool_.executor(),
-            [this, duration, signal, fn = std::forward<T>(func)]() mutable -> Task<void>
-            {
-                try
-                {
-                    while (!this->closeRequested())
-                    {
-                        if constexpr (detail::IsInvocableReturnsVoid<T>)
-                        {
-                            fn();
-                        }
-                        else
-                        {
-                            co_await fn();
-                        }
-                        co_await yieldFor(duration);
-
-                        // A timer that fired before the token stopped still resumes normally.
-                        if ((co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none)
-                        {
-                            co_return;
-                        }
-                    }
-                }
-                catch (const asio::system_error& e)
-                {
-                    // operation_aborted is expected when the Token is destroyed
-                    if (e.code() != asio::error::operation_aborted)
-                    {
-                        throw;
-                    }
-                }
-            },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
-
-        return Token(std::move(signal));
-    }
-
-    // delayOnMainThread
-    //   Queues a task on the main thread that executes once after the specified duration.
-    //   Returns a Token that can be used to cancel the task before it executes.
-    //   The task will be cancelled if the token goes out of scope, or if the scheduler is stopped.
-    //   Since a coroutine cannot be restarted once it has been completed, we must either pass in
-    //   an invocable, or an invocable which _produces_ a coroutine for co_await-ing.
-    template <detail::IsInvocableReturnsVoidOrAwaitableVoid T>
-    [[nodiscard]] auto delayOnMainThread(const std::chrono::steady_clock::duration duration, T&& func) -> Token
-    {
-        auto signal = std::make_shared<asio::cancellation_signal>();
-
-        asio::co_spawn(
-            mainContext_.get_executor(),
-            [this, duration, signal, fn = std::forward<T>(func)]() mutable -> Task<void>
-            {
-                try
-                {
-                    co_await yieldFor(duration);
-
-                    // A timer that fired before the token stopped still resumes normally.
-                    const auto cancelled = (co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none;
-                    if (!cancelled && !this->closeRequested())
-                    {
-                        if constexpr (detail::IsInvocableReturnsVoid<T>)
-                        {
-                            fn();
-                        }
-                        else
-                        {
-                            co_await fn();
-                        }
-                    }
-                }
-                catch (const asio::system_error& e)
-                {
-                    // operation_aborted is expected when the Token is destroyed
-                    if (e.code() != asio::error::operation_aborted)
-                    {
-                        throw;
-                    }
-                }
-            },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
-
-        return Token(std::move(signal));
-    }
-
     // yield
     //   co_await on this to hand control back to the scheduler immediately.
     [[nodiscard]] static auto yield() -> Task<void>
@@ -593,17 +444,6 @@ public:
         const auto executor = co_await asio::this_coro::executor;
         auto       timer    = asio::steady_timer(executor);
         timer.expires_after(duration);
-        co_await timer.async_wait(asio::bind_allocator(asio::recycling_allocator<void>(), asio::use_awaitable));
-    }
-
-    // yieldUntil
-    //   co_await on this to hand control back to the scheduler, without re-scheduling until
-    //   the time point has passed
-    [[nodiscard]] static auto yieldUntil(const std::chrono::steady_clock::time_point deadline) -> Task<void>
-    {
-        const auto executor = co_await asio::this_coro::executor;
-        auto       timer    = asio::steady_timer(executor);
-        timer.expires_at(deadline);
         co_await timer.async_wait(asio::bind_allocator(asio::recycling_allocator<void>(), asio::use_awaitable));
     }
 
@@ -710,6 +550,17 @@ public:
     }
 
 private:
+    // yieldUntil
+    //   co_await on this to hand control back to the scheduler, without re-scheduling until
+    //   the time point has passed
+    [[nodiscard]] static auto yieldUntil(const std::chrono::steady_clock::time_point deadline) -> Task<void>
+    {
+        const auto executor = co_await asio::this_coro::executor;
+        auto       timer    = asio::steady_timer(executor);
+        timer.expires_at(deadline);
+        co_await timer.async_wait(asio::bind_allocator(asio::recycling_allocator<void>(), asio::use_awaitable));
+    }
+
     std::thread::id mainThreadId_{ std::this_thread::get_id() };
 
     std::atomic<bool> closeRequested_{ false };
