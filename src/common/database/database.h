@@ -22,7 +22,6 @@
 #pragma once
 
 #include <common/macros.h>
-#include <common/scheduler/scheduler.h>
 #include <common/tracy.h>
 
 #include <common/types/fn.h>
@@ -104,9 +103,6 @@ auto setDatabase(Database* database) -> void;
 template <typename... Args>
 auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
 
-template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>;
-
 // Send every row of `rows` through `query` in one round trip.
 //
 // `project` turns one row into a tuple of values, one per placeholder, and every row must yield the same types.
@@ -125,13 +121,6 @@ auto getDriverVersion() -> std::string;
 
 auto checkCharset() -> void;
 auto checkTriggers() -> void;
-
-auto setAutoCommit(bool value) -> bool;
-auto getAutoCommit() -> bool;
-
-auto transactionStart() -> bool;
-auto transactionCommit() -> bool;
-auto transactionRollback() -> bool;
 
 auto enableTimers() -> void;
 
@@ -193,16 +182,6 @@ void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn
     {
         throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query));
     }
-}
-
-template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>
-{
-    co_return scheduler.spawnOnWorkerThread(
-        [rawQuery, ... capturedArgs = std::forward<Args>(args)]() mutable
-        {
-            return db::preparedStmt(rawQuery, std::forward<Args>(capturedArgs)...);
-        });
 }
 
 } // namespace db
