@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/scheduler.h"
 #include "common/timer.h"
 #include "entities/entity_id.h"
 #include "los_cache.h"

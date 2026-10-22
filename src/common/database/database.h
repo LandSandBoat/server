@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include <common/scheduler.h>
 #include <common/tracy.h>
 
 #include <common/types/fn.h>
@@ -99,9 +98,6 @@ auto setDatabase(Database* database) -> void;
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 template <typename... Args>
 auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
-
-template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>;
 
 // Send every row of `rows` through `query` in one round trip.
 //
@@ -189,16 +185,6 @@ void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn
     {
         throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query));
     }
-}
-
-template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>
-{
-    co_return scheduler.spawnOnWorkerThread(
-        [rawQuery, ... capturedArgs = std::forward<Args>(args)]() mutable
-        {
-            return db::preparedStmt(rawQuery, std::forward<Args>(capturedArgs)...);
-        });
 }
 
 } // namespace db
