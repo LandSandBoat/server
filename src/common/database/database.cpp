@@ -223,35 +223,10 @@ auto db::checkTriggers() -> void
     }
 }
 
-auto db::setAutoCommit(bool value) -> bool
+namespace
 {
-    TracyZoneScoped;
 
-    if (!db::preparedStmt("SET @@autocommit = ?", value ? 1 : 0))
-    {
-        ShowError("Failed to set autocommit value");
-        return false;
-    }
-
-    return true;
-}
-
-auto db::getAutoCommit() -> bool
-{
-    TracyZoneScoped;
-
-    const auto rset = db::preparedStmt("SELECT @@autocommit");
-    FOR_DB_SINGLE_RESULT(rset)
-    {
-        return rset->get<uint32>(0) == 1;
-    }
-
-    ShowError("Failed to get autocommit status");
-
-    return false;
-}
-
-auto db::transactionStart() -> bool
+auto transactionStart() -> bool
 {
     TracyZoneScoped;
 
@@ -264,7 +239,7 @@ auto db::transactionStart() -> bool
     return true;
 }
 
-auto db::transactionCommit() -> bool
+auto transactionCommit() -> bool
 {
     TracyZoneScoped;
 
@@ -277,7 +252,7 @@ auto db::transactionCommit() -> bool
     return true;
 }
 
-auto db::transactionRollback() -> bool
+auto transactionRollback() -> bool
 {
     TracyZoneScoped;
 
@@ -290,11 +265,13 @@ auto db::transactionRollback() -> bool
     return true;
 }
 
+} // namespace
+
 auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 
-    if (!db::transactionStart())
+    if (!transactionStart())
     {
         return false;
     }
@@ -315,15 +292,15 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
     {
         ShowCriticalFmt("Transaction failed, rolling back: {}", e.what());
 
-        db::transactionRollback();
+        transactionRollback();
         return false;
     }
 
-    if (!db::transactionCommit())
+    if (!transactionCommit())
     {
         ShowCritical("Transaction failed: COMMIT failed, rolling back!");
 
-        db::transactionRollback();
+        transactionRollback();
         return false;
     }
 
