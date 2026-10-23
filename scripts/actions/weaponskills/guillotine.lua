@@ -25,10 +25,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
+    local seconds = 30 + 3 * tp / 100
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        seconds = 6 * tp / 100 -- DAT
+    end
+
     local effectId      = xi.effect.SILENCE
     local actionElement = xi.element.WIND
     local power         = 1
-    local duration      = math.floor((30 + 3 * tp / 100) * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(seconds * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
