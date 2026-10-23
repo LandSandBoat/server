@@ -868,43 +868,52 @@ auto CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fish
     lsbret_t lsnap  = CalculateSnapChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
     lsbret_t rbreak = CalculateBreakChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
 
-    if (lose.chance > 0 && lsnap.chance == 0 && rbreak.chance == 0)
+    // Roll the outcome at the bite, in the same order ReelCheck checks them
+    const bool lost     = xirand::GetRandomNumber(0, 100) < lose.chance;
+    const bool snapped  = !lost && xirand::GetRandomNumber(0, 100) < lsnap.chance;
+    const bool broken   = !lost && !snapped && xirand::GetRandomNumber(0, 100) < rbreak.chance;
+    const bool willLand = !lost && !snapped && !broken;
+
+    // Warn of the rolled outcome, and sometimes falsely on a catch that will land
+    if (broken || (willLand && xirand::GetRandomNumber(0, 100) < rbreak.chance / 2))
     {
-        if (lose.failReason == FISHINGFAILTYPE_LOST_TOOSMALL)
+        sense = FISHINGSENSETYPE_TERRIBLE;
+    }
+    else if (snapped || (willLand && xirand::GetRandomNumber(0, 100) < lsnap.chance / 2))
+    {
+        sense = FISHINGSENSETYPE_BAD;
+    }
+    else if (lose.failReason == FISHINGFAILTYPE_LOST_LOWSKILL || lose.failReason == FISHINGFAILTYPE_LOST_TOOBIG)
+    {
+        // Based on the loss chance itself, so it can show on a catch that lands
+        if (lose.chance < 20)
         {
-            sense = FISHINGSENSETYPE_GOOD;
+            sense = FISHINGSENSETYPE_NOSKILL_FEELING + (uint8)xirand::GetRandomNumber<uint16>(0, 2);
+        }
+        else if (lose.chance < 45)
+        {
+            sense = FISHINGSENSETYPE_NOSKILL_SURE_FEELING;
         }
         else
         {
-            if (lose.chance < 20)
-            {
-                sense = FISHINGSENSETYPE_NOSKILL_FEELING + (uint8)xirand::GetRandomNumber<uint16>(2);
-            }
-            else if (lose.chance < 45)
-            {
-                sense = FISHINGSENSETYPE_NOSKILL_SURE_FEELING;
-            }
-            else
-            {
-                sense = FISHINGSENSETYPE_NOSKILL_POSITIVEFEELING;
-            }
+            sense = FISHINGSENSETYPE_NOSKILL_POSITIVEFEELING;
         }
     }
-    else if (lsnap.chance > 0 || rbreak.chance > 0)
+
+    // ReelCheck rolls against these again, so store the outcome as 100 or 0
+    const auto asOutcome = [](const bool happened) -> uint8
     {
-        if (lsnap.chance < 30 && rbreak.chance < 30)
+        if (happened)
         {
-            sense = FISHINGSENSETYPE_BAD;
+            return 100;
         }
-        else if (lsnap.chance < 45 && rbreak.chance < 45)
-        {
-            sense = FISHINGSENSETYPE_BAD + (uint8)xirand::GetRandomNumber<uint16>(2);
-        }
-        else
-        {
-            sense = FISHINGSENSETYPE_TERRIBLE;
-        }
-    }
+
+        return 0;
+    };
+
+    lose.chance   = asOutcome(lost);
+    lsnap.chance  = asOutcome(snapped);
+    rbreak.chance = asOutcome(broken);
 
     response->lose   = lose;
     response->lsnap  = lsnap;

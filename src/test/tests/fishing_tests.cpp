@@ -19,9 +19,13 @@
 ===========================================================================
 */
 
+#include "common/xirand.h"
 #include "map/utils/fishingutils.h"
 
 #include <catch2/catch_test_macros.hpp>
+
+#include <cmath>
+#include <cstdlib>
 
 TEST_CASE("Fishing legendary attack bonuses also increase wrong-arrow healing", "[fishing]")
 {
@@ -278,4 +282,158 @@ TEST_CASE("Fishing rod breaks begin above durability and cap at twenty", "[fishi
     const auto wide = fishingutils::CalculateBreakChance(FISHINGCATCHTYPE_SMALLFISH, 0, 10, FISHINGSIZETYPE_SMALL, false, 37, &rod);
     CHECK(wide.failReason == FISHINGFAILTYPE_RODBREAK);
     CHECK(wide.chance == 20);
+}
+
+TEST_CASE("Fishing a Nebimonite from the Selbina ship warns without promising", "[fishing][simulation]")
+{
+    // Seeded so every run checks the same reels
+    xirand::rng().seed(1);
+
+    // Stats from fishing_rod.sql and fishing_fish.sql, and Nebimonite is the only fish in zone 220 that takes Ball of Crayfish Paste
+    auto rod      = rod_t{};
+    rod.rodID     = TARUTARU;
+    rod.sizeType  = FISHINGSIZETYPE_SMALL;
+    rod.minRank   = 1;
+    rod.maxRank   = 9;
+    rod.breakable = true;
+    rod.legendary = false;
+
+    constexpr uint8 fishLevel   = 27;
+    constexpr uint8 fishRanking = 10;
+    constexpr int   reels       = 100000;
+
+    for (const auto anglerSkill : { 0, 30 })
+    {
+        CAPTURE(anglerSkill);
+
+        const auto lose  = fishingutils::CalculateLoseChance(FISHINGCATCHTYPE_SMALLFISH, anglerSkill, fishLevel, FISHINGSIZETYPE_SMALL, false, fishRanking, &rod);
+        const auto snap  = fishingutils::CalculateSnapChance(FISHINGCATCHTYPE_SMALLFISH, anglerSkill, fishLevel, FISHINGSIZETYPE_SMALL, false, fishRanking, &rod);
+        const auto crack = fishingutils::CalculateBreakChance(FISHINGCATCHTYPE_SMALLFISH, anglerSkill, fishLevel, FISHINGSIZETYPE_SMALL, false, fishRanking, &rod);
+
+        // Skill doesn't change the snap or break chance
+        CHECK(snap.chance == 19);
+        CHECK(crack.chance == 10);
+
+        const double loseRate  = lose.chance / 100.0;
+        const double snapRate  = (1.0 - loseRate) * (snap.chance / 100.0);
+        const double crackRate = (1.0 - loseRate) * (1.0 - snap.chance / 100.0) * (crack.chance / 100.0);
+        const double landRate  = 1.0 - loseRate - snapRate - crackRate;
+
+        int good     = 0;
+        int bad      = 0;
+        int terrible = 0;
+        int doubt    = 0;
+
+        int goodLanded    = 0;
+        int badSnapped    = 0;
+        int terribleBroke = 0;
+        int doubtLost     = 0;
+
+        int landed     = 0;
+        int snapped    = 0;
+        int cracked    = 0;
+        int lostSkill  = 0;
+        int quietBreak = 0;
+
+        for (int reel = 0; reel < reels; ++reel)
+        {
+            auto response = fishresponse_t{};
+
+            const auto sense = fishingutils::CalculateFishSense(nullptr, &response, anglerSkill, FISHINGCATCHTYPE_SMALLFISH, FISHINGSIZETYPE_SMALL, fishLevel, fishingutils::Legendary::No, 1, 1, fishRanking, &rod);
+
+            auto* outcome = fishingutils::ReelCheck(nullptr, &response, &rod);
+
+            if (sense == FISHINGSENSETYPE_TERRIBLE)
+            {
+                ++terrible;
+                if (outcome->rodbreak)
+                {
+                    ++terribleBroke;
+                }
+            }
+            else if (sense == FISHINGSENSETYPE_BAD)
+            {
+                ++bad;
+                if (outcome->linebreak)
+                {
+                    ++badSnapped;
+                }
+            }
+            else if (sense == FISHINGSENSETYPE_GOOD)
+            {
+                ++good;
+                if (outcome->caught)
+                {
+                    ++goodLanded;
+                }
+            }
+            else
+            {
+                ++doubt;
+                if (outcome->failReason == FISHINGFAILTYPE_LOST_LOWSKILL)
+                {
+                    ++doubtLost;
+                }
+            }
+
+            // A good feeling can still lose a too-small fish, but never the line or rod
+            if ((outcome->linebreak || outcome->rodbreak) && sense == FISHINGSENSETYPE_GOOD)
+            {
+                ++quietBreak;
+            }
+
+            if (outcome->caught)
+            {
+                ++landed;
+            }
+            else if (outcome->linebreak)
+            {
+                ++snapped;
+            }
+            else if (outcome->rodbreak)
+            {
+                ++cracked;
+            }
+            else
+            {
+                ++lostSkill;
+            }
+
+            destroy(outcome);
+        }
+
+        INFO("Nebimonite, Tarutaru Fishing Rod, skill " << anglerSkill << ", over " << reels << " reels"
+                                                        << "\n  rolled chances    loss " << static_cast<int>(lose.chance)
+                                                        << ", snap " << static_cast<int>(snap.chance)
+                                                        << ", break " << static_cast<int>(crack.chance)
+                                                        << "\n  good      shown " << good << ", landed " << goodLanded
+                                                        << "\n  unsure    shown " << doubt << ", lost to skill " << doubtLost
+                                                        << "\n  bad       shown " << bad << ", line snapped " << badSnapped
+                                                        << "\n  terrible  shown " << terrible << ", rod broke " << terribleBroke
+                                                        << "\n  outcomes  landed " << landed << " (expected " << static_cast<int>(landRate * reels) << ")"
+                                                        << ", snapped " << snapped << " (" << static_cast<int>(snapRate * reels) << ")"
+                                                        << ", broke " << cracked << " (" << static_cast<int>(crackRate * reels) << ")"
+                                                        << ", lost to skill " << lostSkill << " (" << static_cast<int>(loseRate * reels) << ")");
+
+        // Warnings come true most of the time but not always
+        CHECK(badSnapped * 100 > bad * 60);
+        CHECK(badSnapped * 100 < bad * 90);
+        CHECK(terribleBroke * 100 > terrible * 55);
+        CHECK(terribleBroke * 100 < terrible * 85);
+
+        // Skill messages come from the loss chance, so they are wrong more often than right
+        if (lose.chance > 0)
+        {
+            CHECK(doubtLost * 100 < doubt * 40);
+        }
+
+        CHECK(quietBreak == 0);
+        CHECK(terrible > reels / 100);
+
+        // A 1% band is many standard deviations at 100000 reels, so these can't flake
+        CHECK(std::abs(landed - static_cast<int>(landRate * reels)) < reels / 100);
+        CHECK(std::abs(snapped - static_cast<int>(snapRate * reels)) < reels / 100);
+        CHECK(std::abs(cracked - static_cast<int>(crackRate * reels)) < reels / 100);
+        CHECK(std::abs(lostSkill - static_cast<int>(loseRate * reels)) < reels / 100);
+    }
 }
