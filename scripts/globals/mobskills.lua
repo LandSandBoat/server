@@ -261,8 +261,8 @@ end
 ---@return physicalHitInfo
 local function handleSinglePhysicalHit(mob, target, baseHitDamage, params, action)
     local hitNumber                = params.hitNumber
-    local hitParried               = xi.combat.physical.isParried(target, mob) and not params.skipParry
-    local hitGuarded               = xi.combat.physical.isGuarded(target, mob) and not params.skipGuard
+    local hitParried               = not params.skipParry and xi.combat.physical.isParried(target, mob)
+    local hitGuarded               = not params.skipGuard and xi.combat.physical.isGuarded(target, mob)
     local isCritical               = false
     local hitBlocked               = false
     local blockedWithShieldMastery = false
@@ -307,8 +307,8 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params, actio
     hitDamage = math.floor(baseHitDamage * pDif)
 
     if
-        xi.combat.physical.isBlocked(target, mob) and
-        not params.skipBlock
+        not params.skipBlock and
+        xi.combat.physical.isBlocked(target, mob)
     then
         hitBlocked = true
 
@@ -386,8 +386,8 @@ end
 ---@return physicalHitInfo
 local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     local hitNumber                = params.hitNumber
-    local hitParried               = xi.combat.physical.isParried(target, mob) and not params.skipParry
-    local hitGuarded               = xi.combat.physical.isGuarded(target, mob) and not params.skipGuard
+    local hitParried               = not params.skipParry and xi.combat.physical.isParried(target, mob)
+    local hitGuarded               = not params.skipGuard and xi.combat.physical.isGuarded(target, mob)
     local isCritical               = false
     local hitBlocked               = false
     local hitInfo                  = xi.mobskills.defaultHitInfo(hitNumber)
@@ -431,8 +431,8 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     hitDamage = math.floor(baseHitDamage * pDif)
 
     if
-        xi.combat.physical.isBlocked(target, mob) and
-        not params.skipBlock
+        not params.skipBlock and
+        xi.combat.physical.isBlocked(target, mob)
     then
         hitBlocked = true
 
