@@ -69,4 +69,5 @@ xi.wsUnlock =
     STARDIVER           = 61,
     TACHI_SHOHA         = 62,
     UPHEAVAL            = 63,
+    EXUDATION           = 64,
 }

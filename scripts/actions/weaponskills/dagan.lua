@@ -15,8 +15,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
-    local ftphp = xi.weaponskills.fTP(tp, { 0.22, 0.33, 0.52 })
-    local ftpmp = xi.weaponskills.fTP(tp, { 0.15, 0.22, 0.35 })
+    local ftphp = xi.weaponskills.fTP(tp, { 0.22, 0.33, 0.513 }) -- DAT, but BG and FFO say 0.52 at 3000 TP
+    local ftpmp = xi.weaponskills.fTP(tp, { 0.15, 0.225, 0.35 }) -- DAT, but BG and FFO say 0.22 at 2000 TP
     player:addHP(ftphp * player:getMaxHP())
     return 0, 0, false, ftpmp * player:getMaxMP()
 end
