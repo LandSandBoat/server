@@ -27,6 +27,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local skill = player:getSkillLevel(xi.skill.DAGGER)
     local wsc   = player:getStat(xi.mod.MND) * 1.0
 
+    -- TODO: Dark element resist roll and the 2014-06-17 level correction (both unquantified in FFO/BG)
     local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * multiplier)
 
     if target:isUndead() then

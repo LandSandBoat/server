@@ -8,14 +8,14 @@
 -- Skillchain Properties: Impaction / Scission / Detonation
 -- Modifiers: DEX:28% INT:28%
 -- 100%TP    200%TP    300%TP
--- 2.75      3.50       4
+-- 2.00      3.00      4.00
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftpMod = { 2.75, 3.5, 4 }
+    params.ftpMod = { 2, 3, 4 }
     params.dex_wsc = 0.28 params.int_wsc = 0.28
     params.ele = xi.element.WIND
     params.skill = xi.skill.DAGGER

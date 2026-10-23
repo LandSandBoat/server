@@ -31,10 +31,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
+    local seconds = 45 + 45 * tp / 1000 -- TODO: FFO pre-2014 says about 60s at 1000 TP, rest unknown
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        seconds = 9 * tp / 100 -- DAT
+    end
+
     local effectId      = xi.effect.ACCURACY_DOWN
     local actionElement = xi.element.EARTH
     local power         = 20
-    local duration      = math.floor((45 + 45 * tp / 1000) * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(seconds * applyResistanceAddEffect(player, target, actionElement, 0))
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
