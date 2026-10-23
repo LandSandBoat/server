@@ -2522,7 +2522,8 @@ auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* ba
 
         if (FishSelection->maxhook > 1 && bait->maxhook > 1)
         {
-            response->count = (uint8)xirand::GetRandomNumber<uint16>(1, bait->maxhook);
+            // GetRandomNumber excludes the upper bound
+            response->count = (uint8)xirand::GetRandomNumber<uint16>(1, bait->maxhook + 1);
         }
         else
         {
