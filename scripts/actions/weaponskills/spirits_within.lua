@@ -16,7 +16,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftpMod  = { 0.0625, 0.1875, 0.46875 } -- https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
+    params.ftpMod  = { 0.125, 0.1875, 0.46875 } -- http://robonosto.blogspot.com/2010/06/tp-bonus-of-fencer.html (32/256, 48/256, 120/256)
 
     local attack =
     {

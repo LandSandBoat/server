@@ -17,12 +17,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 3
     params.ftpMod = { 2.25, 2.25, 2.25 }
     params.dex_wsc = 0.6
-    params.critVaries = { 0.15, 0.25, 0.4 }
+    params.critVaries = { 0.15, 0.25, 0.4 } -- BG and FFO
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod = { 1.6328125, 1.6328125, 1.6328125 }
         params.dex_wsc = 0.8
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Chant_du_Cygne
+        params.critVaries = { 0.15, 0.3, 0.6 } -- DAT, but BG and FFO say 15, 25, 40
     end
 
     -- Apply aftermath
