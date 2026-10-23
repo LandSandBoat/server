@@ -901,6 +901,9 @@ auto CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSki
 auto CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod) -> uint16;
 auto CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
 auto CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
+auto CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
+auto CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
+auto CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
 auto CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod) -> uint8;
 auto CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod) -> uint16;
 auto CalculateBigFishStats(uint16 minLength, uint16 maxLength) -> big_fish_stats_t;
