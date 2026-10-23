@@ -2831,7 +2831,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 // send then response sense message
                 SendSenseMessage(PChar, response);
                 // play the sweating animation
-                PChar->pushPacket<GP_SERV_COMMAND_SCHEDULOR>(PChar, PChar, FourCC::Sweating);
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(PChar, PChar, FourCC::Sweating));
                 PChar->updatemask |= UPDATE_HP;
                 // send the fishing packet
                 PChar->animation = xi::Animation::NewFishingFish;
