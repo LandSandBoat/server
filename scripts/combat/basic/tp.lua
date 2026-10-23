@@ -206,7 +206,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
     local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
     local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
     local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II) + tandemBlowBonus             -- no known cap
-    local subtleBlowModifier = 1 - math.max((subtleBlowI + subtleBlowII) / 100, 0.75)            -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local subtleBlowModifier = 1 - math.min((subtleBlowI + subtleBlowII) / 100, 0.75)            -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
     local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
 
     -- TODO: unknown where/how many floor steps there are. Napkin math seems to be a single floor step, but given x/256 it's hard to tell
@@ -245,7 +245,7 @@ xi.combat.tp.calculateTPGainOnMagicalDamage = function(actor, target, totalDamag
     local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
     local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
     local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II) + tandemBlowBonus             -- no known cap
-    local subtleBlowModifier = 1 - math.max((subtleBlowI + subtleBlowII) / 100, 0.75)            -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local subtleBlowModifier = 1 - math.min((subtleBlowI + subtleBlowII) / 100, 0.75)            -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
     local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
 
     -- Similar caveats to above for physical damage, unknown where/how many floors but seems to be one.
