@@ -7,15 +7,15 @@
 -- Element: Light
 -- Modifiers: ? (Using Final Heaven as it is based on that WS)
 -- 100%TP    200%TP    300%TP
--- 1.00      1.50      2.00
+-- 1.00      2.00      3.00
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 1
-    params.ftpMod = { 1.0, 1.5, 2.0 }
+    params.numHits = 2
+    params.ftpMod = { 1.0, 2.0, 3.0 } -- DAT, FFO says about 3x at 3000 TP
     params.vit_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
