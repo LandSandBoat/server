@@ -21,11 +21,10 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.element         = xi.element.LIGHT
     params.attackType      = xi.attackType.MAGICAL
     params.damageType      = xi.damageType.LIGHT
-    params.shadowBehavior  = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.WIPE_SHADOWS
     params.dStatMultiplier = 1.5
     params.canMagicBurst   = true
     params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
-    -- TODO: Should not consume TP
 
     local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
