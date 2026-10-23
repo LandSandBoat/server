@@ -9,6 +9,7 @@
 ---@field onEventFinish? onEventHandler
 ---@field onTriggerAreaEnter? onTriggerAreaHandler
 ---@field onTriggerAreaLeave? onTriggerAreaHandler
+---@field onFishingCheck? fun(player: CBaseEntity, areaId: integer): integer[]
 ---@field [string]? EntitySection|TAction|fun(player: CBaseEntity, npc: CBaseEntity): TAction?
 
 ---@alias onZoneHandler fun(player: CBaseEntity): TAction?
