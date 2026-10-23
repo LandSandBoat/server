@@ -8,7 +8,7 @@
 -- Element: Light/Dark (Random)
 -- Modifiers: :    STR:40% MND:40%
 -- 100%TP    200%TP    300%TP
--- 1.00      2.00      2.50
+-- 1.00      3.27      5.53
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -26,6 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.0, 3.265625, 5.53125 } -- DAT, but BG and FFO say 5.54 at 3000 TP
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 
