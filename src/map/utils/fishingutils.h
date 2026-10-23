@@ -884,6 +884,10 @@ using BigFish                 = xi::Flag<struct BigFishTag>;
 using CancelOnMobLoadFailBait = xi::Flag<struct CancelOnMobLoadFailBaitTag>;
 using Lost                    = xi::Flag<struct LostTag>;
 
+auto RodFatigue(uint16 rodId, int32 fatigue) -> int32;
+auto CatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
+auto FailedCatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
+
 // Calculations
 auto GetMoonPhase() -> uint8;
 auto GetHookTime(CCharEntity* PChar) -> uint8;

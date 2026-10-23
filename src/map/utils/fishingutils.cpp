@@ -85,6 +85,8 @@ std::map<uint16, std::map<uint32, uint8>>             FishingBaitAffinities; // 
 namespace
 {
 
+constexpr auto superLegendaryFish = std::array<uint16, 4>{ ITEMID::GUGRUSAURUS, ITEMID::LIK, ITEMID::MATSYA, ITEMID::ABAIA };
+
 auto findRod(const uint16 rodId) -> rod_t*
 {
     const auto it = FishingRods.find(rodId);
@@ -135,7 +137,170 @@ auto findFishMob(const xi::ZoneId zoneId, const uint32 mobId) -> fishmob_t*
     return mobIt->second;
 }
 
+// Fishing meters reset at JST midnight
+void addFishingMeter(CCharEntity* PChar, const std::string& varName, const int32 amount)
+{
+    if (amount == 0)
+    {
+        return;
+    }
+
+    PChar->setCharVar(varName, PChar->getCharVar(varName) + amount, luautils::JstMidnight());
+}
+
+// Must run before the rod can break, since the equipped rod sets the fatigue discount
+void chargeFishing(CCharEntity* PChar, const int32 daily, const int32 fatigue)
+{
+    const auto* rod = PChar->getEquip(SLOT_RANGED);
+
+    const auto owed = [&]() -> int32
+    {
+        if (rod == nullptr)
+        {
+            return fatigue;
+        }
+
+        return RodFatigue(rod->getID(), fatigue);
+    }();
+
+    addFishingMeter(PChar, "[Fish]DailyPoints", daily);
+    addFishingMeter(PChar, "[Fish]Fatigue", owed);
+}
+
+// The 2006-04-18 update named coral fragment, rusty cap and rusty pick, and 97 gil is the cheapest of the three
+auto itemFatigue(const fishresponse_t& hooked) -> int32
+{
+    const auto* item = xi::items::lookup(static_cast<uint16>(hooked.catchid));
+
+    if (item == nullptr || item->getBasePrice() == 0)
+    {
+        return 0;
+    }
+
+    if (item->getBasePrice() >= 97)
+    {
+        return 400;
+    }
+
+    return 25;
+}
+
+void chargeCatch(CCharEntity* PChar)
+{
+    const auto& hooked = *PChar->hookedFish;
+
+    if (hooked.catchtype == FISHINGCATCHTYPE_ITEM)
+    {
+        const auto fatigue = itemFatigue(hooked);
+
+        if (fatigue > 0)
+        {
+            chargeFishing(PChar, 1, fatigue);
+        }
+
+        return;
+    }
+
+    chargeFishing(PChar, 1, CatchFatigue(GetFishingSkill(PChar), hooked));
+}
+
+// A loss adds fatigue but doesn't count toward the 200 daily catches
+void chargeFailedCatch(CCharEntity* PChar)
+{
+    const auto isChargedCatch = [](const fishresponse_t& hooked) -> bool
+    {
+        return hooked.catchtype == FISHINGCATCHTYPE_SMALLFISH || hooked.catchtype == FISHINGCATCHTYPE_BIGFISH || hooked.catchtype == FISHINGCATCHTYPE_ITEM;
+    };
+
+    if (PChar->hookedFish == nullptr || !PChar->hookedFish->hooked || !isChargedCatch(*PChar->hookedFish))
+    {
+        return;
+    }
+
+    const auto& hooked = *PChar->hookedFish;
+    const auto  skill  = GetFishingSkill(PChar);
+
+    if (hooked.catchtype == FISHINGCATCHTYPE_ITEM)
+    {
+        const auto fatigue = [&]() -> int32
+        {
+            if (hooked.catchlevel >= skill + 40)
+            {
+                return 1000;
+            }
+
+            return itemFatigue(hooked);
+        }();
+
+        if (fatigue > 0)
+        {
+            chargeFishing(PChar, 0, fatigue);
+        }
+
+        return;
+    }
+
+    chargeFishing(PChar, 0, FailedCatchFatigue(skill, hooked));
+}
+
 } // namespace
+
+auto RodFatigue(const uint16 rodId, const int32 fatigue) -> int32
+{
+    if (rodId == EBISU || rodId == EBISU_1)
+    {
+        return fatigue * 85 / 100;
+    }
+
+    if (rodId == LU_SHANG || rodId == LU_SHANG_1)
+    {
+        return fatigue * 95 / 100;
+    }
+
+    return fatigue;
+}
+
+auto CatchFatigue(const uint8 fishingSkill, const fishresponse_t& hooked) -> int32
+{
+    const bool large = hooked.catchtype == FISHINGCATCHTYPE_BIGFISH;
+
+    if (hooked.legendary)
+    {
+        if (std::ranges::contains(superLegendaryFish, hooked.catchid))
+        {
+            return 780;
+        }
+
+        return 140;
+    }
+
+    if (hooked.catchlevel >= fishingSkill + 17)
+    {
+        if (large)
+        {
+            return 200;
+        }
+
+        return 100;
+    }
+
+    if (large)
+    {
+        return 50;
+    }
+
+    return 25;
+}
+
+auto FailedCatchFatigue(const uint8 fishingSkill, const fishresponse_t& hooked) -> int32
+{
+    if (hooked.catchlevel >= fishingSkill + 40)
+    {
+        return 1000;
+    }
+
+    return CatchFatigue(fishingSkill, hooked);
+}
 
 /************************************************************************
  *                                                                       *
@@ -2060,7 +2225,7 @@ void ReelInCatch(CCharEntity* PChar)
                 break;
             case FISHINGCATCHTYPE_ITEM:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHITEM;
-                CatchItem(PChar, PChar->hookedFish->catchid, PChar->hookedFish->count);
+                landed                         = CatchItem(PChar, PChar->hookedFish->catchid, PChar->hookedFish->count);
                 break;
             case FISHINGCATCHTYPE_MOB:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHMOB;
@@ -2072,8 +2237,12 @@ void ReelInCatch(CCharEntity* PChar)
                 break;
         }
 
-        // No skillup for a fish that didn't reach the inventory
-        if (!landed && (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH))
+        // No fatigue or skillup for a catch that didn't reach the inventory
+        if (landed)
+        {
+            chargeCatch(PChar);
+        }
+        else if (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH)
         {
             PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
         }
@@ -2794,14 +2963,17 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
 
             fishingarea_t*  fishingArea = GetFishingArea(PChar);
             fishresponse_t* response    = nullptr;
+            bool            chartActive = false;
 
             if (PChar->getZone() == xi::ZoneId::ValkurmDunes && PChar->GetLocalVar("pChartActive") == 1)
             {
                 fishingArea = findFishingArea(xi::ZoneId::ValkurmDunes, 2);
+                chartActive = true;
             }
             else if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
             {
                 fishingArea = findFishingArea(xi::ZoneId::BuburimuPeninsula, 2);
+                chartActive = true;
             }
 
             if (PChar->hookedFish != nullptr)
@@ -2820,7 +2992,18 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                     rod_t*  FishingRod  = findRod(Rod->getID());
                     bait_t* FishingBait = findBait(Bait->getID());
 
-                    if (FishingRod != nullptr && FishingBait != nullptr)
+                    const auto mayBite = [PChar, chartActive]() -> bool
+                    {
+                        // A chart quest that already used its chart ignores the daily limits
+                        if (chartActive)
+                        {
+                            return true;
+                        }
+
+                        return PChar->getCharVar("[Fish]DailyPoints") < 200 && PChar->getCharVar("[Fish]Fatigue") < 20000; // Daily limits of 200 catches and 20000 fatigue
+                    };
+
+                    if (FishingRod != nullptr && FishingBait != nullptr && mayBite())
                     {
                         uint8 fishingSkill = GetFishingSkill(PChar);
                         response           = FishingCheck(PChar, fishingSkill, FishingRod, FishingBait, fishingArea);
@@ -2908,6 +3091,8 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                     }
                     else
                     {
+                        chargeFailedCatch(PChar);
+
                         if (response->linebreak)
                         {
                             BaitLoss(PChar, RemoveFly::Yes, SendUpdate::Yes);
@@ -2936,6 +3121,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 // lose bait but keep lure
                 PChar->animation = xi::Animation::NewFishingLineBreak;
                 PChar->updatemask |= UPDATE_HP;
+                chargeFailedCatch(PChar);
                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
 
@@ -2949,6 +3135,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 // message: "Your line breaks!"
                 PChar->animation = xi::Animation::NewFishingLineBreak;
                 PChar->updatemask |= UPDATE_HP;
+                chargeFailedCatch(PChar);
                 BaitLoss(PChar, RemoveFly::Yes, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
 
@@ -2964,6 +3151,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 PChar->updatemask |= UPDATE_HP;
                 PChar->lastCastTime = 0;
 
+                // Giving up costs bait but no fatigue
                 if (PChar->hookedFish && PChar->hookedFish->hooked && BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes))
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP_BAITLOSS);
@@ -2980,6 +3168,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 // message: "You lost your catch!"
                 PChar->animation = xi::Animation::NewFishingStop;
                 PChar->updatemask |= UPDATE_HP;
+                chargeFailedCatch(PChar);
                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
 

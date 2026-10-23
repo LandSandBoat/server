@@ -437,3 +437,73 @@ TEST_CASE("Fishing a Nebimonite from the Selbina ship warns without promising", 
         CHECK(std::abs(lostSkill - static_cast<int>(loseRate * reels)) < reels / 100);
     }
 }
+
+TEST_CASE("Fishing fatigue for a landed fish follows size, level gap and legend", "[fishing][fatigue]")
+{
+    auto hooked = fishresponse_t{};
+
+    struct FatigueCase
+    {
+        uint8  catchtype;
+        uint8  catchlevel;
+        bool   legendary;
+        uint32 catchid;
+        uint8  fishingSkill;
+        int32  fatigue;
+    };
+
+    // Four times the cost from 17 levels up. Legendary fish ignore size and skill.
+    const FatigueCase cases[] = {
+        { FISHINGCATCHTYPE_SMALLFISH, 30, false, 4401, 30, 25 },
+        { FISHINGCATCHTYPE_BIGFISH, 30, false, 4401, 30, 50 },
+        { FISHINGCATCHTYPE_SMALLFISH, 47, false, 4401, 30, 100 },
+        { FISHINGCATCHTYPE_BIGFISH, 47, false, 4401, 30, 200 },
+        { FISHINGCATCHTYPE_SMALLFISH, 46, false, 4401, 30, 25 },
+        { FISHINGCATCHTYPE_BIGFISH, 90, true, 5455, 0, 140 },
+        { FISHINGCATCHTYPE_BIGFISH, 90, true, 5127, 100, 780 },
+    };
+
+    for (const auto& entry : cases)
+    {
+        CAPTURE(entry.catchtype, entry.catchlevel, entry.legendary, entry.catchid, entry.fishingSkill);
+        hooked.catchtype  = entry.catchtype;
+        hooked.catchlevel = entry.catchlevel;
+        hooked.legendary  = entry.legendary;
+        hooked.catchid    = entry.catchid;
+        CHECK(fishingutils::CatchFatigue(entry.fishingSkill, hooked) == entry.fatigue);
+    }
+}
+
+TEST_CASE("Fishing fatigue for a lost fish matches landing it until the fish was hopeless", "[fishing][fatigue]")
+{
+    auto hooked      = fishresponse_t{};
+    hooked.catchtype = FISHINGCATCHTYPE_BIGFISH;
+
+    // 39 levels up costs the same as landing it, 40 and above is a flat 1000
+    hooked.catchlevel = 69;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == fishingutils::CatchFatigue(30, hooked));
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 200);
+
+    hooked.catchlevel = 70;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 1000);
+
+    hooked.legendary = true;
+    hooked.catchid   = 5127;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 1000);
+
+    hooked.catchlevel = 20;
+    CHECK(fishingutils::FailedCatchFatigue(30, hooked) == 780);
+}
+
+TEST_CASE("Fishing fatigue relief belongs to the legendary rods alone", "[fishing][fatigue]")
+{
+    // Integer division rounds down, so 25 becomes 21 and 23
+    CHECK(fishingutils::RodFatigue(EBISU, 100) == 85);
+    CHECK(fishingutils::RodFatigue(EBISU_1, 100) == 85);
+    CHECK(fishingutils::RodFatigue(LU_SHANG, 100) == 95);
+    CHECK(fishingutils::RodFatigue(LU_SHANG_1, 100) == 95);
+    CHECK(fishingutils::RodFatigue(EBISU, 25) == 21);
+    CHECK(fishingutils::RodFatigue(LU_SHANG, 25) == 23);
+    CHECK(fishingutils::RodFatigue(COMPOSITE, 100) == 100);
+    CHECK(fishingutils::RodFatigue(TARUTARU, 1000) == 1000);
+}
