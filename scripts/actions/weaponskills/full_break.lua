@@ -40,7 +40,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local effectId      = effects[index][1]
         local actionElement = effects[index][2]
         local power         = effects[index][3]
-        local duration      = math.floor(60 + 3 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0))
+        local duration      = math.floor(xi.weaponskills.fTP(tp, { 180, 360, 720 }) * applyResistanceAddEffect(player, target, actionElement, 0))
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
 
