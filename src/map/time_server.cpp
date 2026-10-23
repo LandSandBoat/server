@@ -30,7 +30,6 @@
 #include "roe.h"
 #include "spawn_handler.h"
 #include "timetriggers.h"
-#include "utils/fishingutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/moduleutils.h"
@@ -161,7 +160,6 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
             TracyZoneScoped;
 
             zoneutils::TOTDChange(vanaTotd);
-            fishingutils::RestockFishingAreas();
 
             zoneutils::ForEachZone(
                 [](CZone* PZone)

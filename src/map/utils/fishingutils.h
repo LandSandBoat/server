@@ -419,34 +419,6 @@ struct weights_t
     }
 };
 
-struct fish_pool
-{
-    uint16 quantity;
-    uint16 maxQuantity;
-    uint16 restockRate;
-
-    fish_pool()
-    : quantity(0)
-    , maxQuantity(0)
-    , restockRate(0)
-    {
-    }
-};
-
-struct fishing_catch_pool
-{
-    std::map<uint16, fish_pool> stock;
-
-    fishing_catch_pool() = default;
-};
-
-struct fishing_area_pool
-{
-    std::map<uint8, fishing_catch_pool> catchPools;
-
-    fishing_area_pool() = default;
-};
-
 struct fishing_gear_t
 {
     uint32 head;
@@ -910,11 +882,6 @@ using RemoveFly               = xi::Flag<struct RemoveFlyTag>;
 using BigFish                 = xi::Flag<struct BigFishTag>;
 using CancelOnMobLoadFailBait = xi::Flag<struct CancelOnMobLoadFailBaitTag>;
 using Lost                    = xi::Flag<struct LostTag>;
-
-// Catch Pools
-void ReduceFishPool(xi::ZoneId zoneId, uint8 areaId, uint16 fishId);
-void RestockFishingAreas();
-void CreateFishingPools();
 
 // Calculations
 auto GetMoonPhase() -> uint8;
