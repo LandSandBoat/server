@@ -784,6 +784,9 @@ INSERT INTO `item_latents` VALUES (13910,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (13913,370,1,30,0);    -- Regen 1/tick on Watersdays
 INSERT INTO `item_latents` VALUES (13913,370,1,32,0);    -- Regen 1/tick on Darksdays
 
+-- Horror Head
+INSERT INTO `item_latents` VALUES (13917,27,-50,67,0);   -- Enmity-50 during Full Moon, Darksday, night
+
 -- Rasetsu Jinpachi
 INSERT INTO `item_latents` VALUES (13925,291,1,0,25);    -- Counter+1 when HP <25%
 
@@ -1402,6 +1405,9 @@ INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
 INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
+
+-- Horror Head II
+INSERT INTO `item_latents` VALUES (15177,27,50,67,1);    -- Enmity+50 during New Moon, Lightsday, day
 
 -- Trump Crown
 INSERT INTO `item_latents` VALUES (15186,2,1,51,30);     -- "MP +15 at Lv 30-33"
@@ -2611,6 +2617,9 @@ INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- TP_UNDER: 1000 - DMG
 
 -- Z's Trident
 INSERT INTO `item_latents` VALUES (18101,8,12,41,0);     -- STR+12 during WS
+
+-- Pitchfork +1
+INSERT INTO `item_latents` VALUES (18103,76,13,13,127);  -- 13% approximates the 12.5% costume bonus.
 
 -- Leviathan's Couse
 INSERT INTO `item_latents` VALUES (18109,431,1,21,12);    -- Additional effect: Water damage
