@@ -26,7 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- http://wiki.ffo.jp/html/718.html
         params.str_wsc = 0.3 params.int_wsc = 0.3
-        params.ftpMod = { 0.5, 1.375, 2.25 }
+        params.ftpMod = { 0.5, 1.5, 2.25 } -- DAT and FFO, BG says 1.375 at 2000 TP
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
