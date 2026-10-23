@@ -10,7 +10,7 @@
 -- Modifiers: VIT:60%
 -- Damage Multipliers by TP:
 -- 100%TP    200%TP    300%TP
--- 4.75        5.75    6.5
+-- 4.75        7.5     9.75
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.vit_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 4.75, 7.5, 10.0 }
+        params.ftpMod = { 4.75, 7.5, 9.75 } -- DAT, FFO says 10
         params.vit_wsc = 0.8
     end
 
