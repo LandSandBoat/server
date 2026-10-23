@@ -35,7 +35,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.EVASION_DOWN
     local actionElement = xi.element.ICE
     local power         = 40
-    local duration      = math.floor((120 + 6 * tp / 100) * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(18 * tp / 100 * applyResistanceAddEffect(player, target, actionElement, 0)) -- DAT and FFO, BG says 180, 240, 300
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
