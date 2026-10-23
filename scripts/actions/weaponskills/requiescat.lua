@@ -16,13 +16,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 5
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.mnd_wsc = player:getMerit(xi.merit.REQUIESCAT) * 0.17
-    params.atkVaries = { 0.8, 0.9, 1.0 }
+    params.atkVaries = { 0.8, 0.9, 1.0 } -- BG
     -- TODO: Verify the params.formless check
     params.formless = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REQUIESCAT) * 0.03)
         params.multiHitfTP = true
+        params.atkVaries = { 0.8, 0.9171875, 1.05 } -- DAT, BG says 0.8, 0.9, 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

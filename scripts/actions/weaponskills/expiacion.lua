@@ -7,9 +7,9 @@
 -- Aligned with the Aqua Gorget, Snow Gorget & Soil Gorget.
 -- Aligned with the Aqua Belt, Snow Belt & Soil Belt.
 -- Element: None
--- Modifiers: STR:30% INT:30%
+-- Modifiers: STR:30% DEX:20% INT:30%
 -- 100%TP    200%TP    300%TP
--- 1.50      2.00      2.50
+-- 3.80      9.39      12.19
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -21,7 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.3 params.int_wsc = 0.3
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.75, 10.25, 12.5 }
+        params.ftpMod = { 3.796875, 9.390625, 12.1875 } -- DAT and BG, FFO says 3.80, 9.375, 12.25
         params.dex_wsc = 0.2
     end
 

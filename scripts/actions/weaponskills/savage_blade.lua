@@ -10,7 +10,7 @@
 -- Element: None
 -- Modifiers: STR:50%  MND:50%
 -- 100%TP    200%TP    300%TP
--- 4.00      10.25      13.75
+-- 4.00      10.30      13.60
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.3 params.mnd_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 4.0, 10.25, 13.75 }
+        params.ftpMod = { 4.0, 10.3, 13.6 } -- DAT and Dec 2014 BlueGartr testing (10.17~10.35, 13.54~13.8), but BG and FFO say 10.25, 13.75
         params.str_wsc = 0.5
     end
 

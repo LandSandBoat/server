@@ -10,7 +10,7 @@
 -- Element: Light
 -- Modifiers: STR:30%
 -- 100%TP    200%TP    300%TP
--- 3.00      3.50      4.00
+-- 3.00      4.50      6.00
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -18,8 +18,12 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params   = {}
     params.numHits = 1
-    params.ftpMod  = { 3, 3.5, 4 }
+    params.ftpMod  = { 3, 3.5, 4 } -- TODO: unsourced, pre-2014 values unknown
     params.str_wsc = 0.3
+
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 3, 4.5, 6 } -- DAT
+    end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
