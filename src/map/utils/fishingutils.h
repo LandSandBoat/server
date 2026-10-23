@@ -946,6 +946,8 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType);
 
 // Fishing
 void InterruptFishing(CCharEntity* PChar);
+void AbandonHook(CCharEntity* PChar);
+void ReleaseFishing(CCharEntity* PChar);
 void StartFishing(CCharEntity* PChar);
 void ReelInCatch(CCharEntity* PChar);
 auto UnhookMob(CCharEntity* PChar, Lost lost) -> uint8;
