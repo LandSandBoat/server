@@ -494,6 +494,7 @@ enum FISHMESSAGEOFFSET : uint8
     FISHMESSAGEOFFSET_LOST_TOOBIG              = 0x3C, // You lost your catch. Whatever caught the hook was too large to catch with this rod.
     FISHMESSAGEOFFSET_GIVEUP_BAITLOSS          = 0x24, // You give up and reel in your line.
     FISHMESSAGEOFFSET_GIVEUP                   = 0x25, // You give up.
+    FISHMESSAGEOFFSET_CATCH_GIL                = 0x26, // <Player> obtains <number> gil.
     FISHMESSAGEOFFSET_CATCH                    = 0x27, // <Player> caught <Fish>
     FISHMESSAGEOFFSET_CATCH_MULTI              = 0x0E, // <Player> caught X <Fish>
     FISHMESSAGEOFFSET_CATCH_INV_FULL           = 0x0A, // <Player> caught <Fish>, but cannot carry any more items. ≺Player≻ regretfully releases the <Fish>

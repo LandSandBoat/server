@@ -28,6 +28,7 @@
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x027_talknumwork2.h"
@@ -57,6 +58,7 @@
 #include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
+#include "items.h"
 #include "items/exdata/fish.h"
 #include "items/transactions/item_claim.h"
 #include "itemutils.h"
@@ -1518,6 +1520,13 @@ auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length
             return 0;
         }
 
+        // Check before the give, which would refuse it anyway but log an error
+        if (Fish->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, FishID))
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, FishID, 0, MsgStd::ItemEx);
+            return 0;
+        }
+
         if (bigFish && length > 1 && weight > 1)
         {
             auto& fishData  = Fish->exdata<Exdata::Fish>();
@@ -1559,14 +1568,36 @@ auto CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1) -> int32
     PChar->animation     = xi::Animation::NewFishingCaught;
     PChar->updatemask |= UPDATE_HP;
 
+    // Gil has no item entry and needs no free slot
+    if (ItemID == ITEMID::GIL)
+    {
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->earn(1) || !transaction->commit())
+        {
+            ShowErrorFmt("fishingutils: {} did not receive the gil they caught", PChar->getName());
+            return 0;
+        }
+
+        // TODO: The text id matches the client, but the gil amount and packet params are guesses
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, 1, MessageOffset + FISHMESSAGEOFFSET_CATCH_GIL, 1));
+        return 1;
+    }
+
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
     {
-        if (xi::items::lookup(ItemID) == nullptr)
+        const auto* PItem = xi::items::lookup(ItemID);
+        if (PItem == nullptr)
         {
             ShowError("Invalid ItemID %i for fished item", ItemID);
             PChar->animation = xi::Animation::NewFishingStop;
             PChar->updatemask |= UPDATE_HP;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
+            return 0;
+        }
+
+        if (PItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, ItemID))
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, ItemID, 0, MsgStd::ItemEx);
             return 0;
         }
 
@@ -2024,6 +2055,8 @@ void ReelInCatch(CCharEntity* PChar)
 {
     if (PChar->hookedFish != nullptr)
     {
+        int32 landed = 0;
+
         switch (PChar->hookedFish->catchtype)
         {
             case FISHINGCATCHTYPE_NONE:
@@ -2032,11 +2065,11 @@ void ReelInCatch(CCharEntity* PChar)
                 break;
             case FISHINGCATCHTYPE_SMALLFISH:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHSMALL;
-                CatchFish(PChar, PChar->hookedFish->catchid, BigFish::No, 0, 0, PChar->hookedFish->count);
+                landed                         = CatchFish(PChar, PChar->hookedFish->catchid, BigFish::No, 0, 0, PChar->hookedFish->count);
                 break;
             case FISHINGCATCHTYPE_BIGFISH:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHLARGE;
-                CatchFish(PChar, PChar->hookedFish->catchid, BigFish::Yes, PChar->hookedFish->length, PChar->hookedFish->weight, PChar->hookedFish->count);
+                landed                         = CatchFish(PChar, PChar->hookedFish->catchid, BigFish::Yes, PChar->hookedFish->length, PChar->hookedFish->weight, PChar->hookedFish->count);
                 break;
             case FISHINGCATCHTYPE_ITEM:
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHITEM;
@@ -2050,6 +2083,12 @@ void ReelInCatch(CCharEntity* PChar)
                 PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHCHEST;
                 CatchChest(PChar, PChar->hookedFish->catchid, PChar->hookedFish->distance, PChar->hookedFish->angle);
                 break;
+        }
+
+        // No skillup for a fish that didn't reach the inventory
+        if (!landed && (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH))
+        {
+            PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
         }
     }
 }
