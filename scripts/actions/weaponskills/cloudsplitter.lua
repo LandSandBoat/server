@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.75, 6.7, 8.5 }
+        params.ftpMod = { 3.75, 5.5, 8.5 } -- DAT, FFO and Studio Gobli, BG says 6.69921875 at 2000 TP
     end
 
     -- Apply aftermath

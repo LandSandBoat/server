@@ -9,7 +9,7 @@
 -- Element: None
 -- Modifiers: STR:50%
 -- 100%TP    200%TP    300%TP
--- 2.50      3.00      3.50
+-- 4.00      10.30     13.60
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -21,7 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 4.0, 10.5, 13.625 }
+        params.ftpMod = { 4.0, 10.3, 13.6 } -- DAT and FFO, BG says 10.5, 13.625
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
