@@ -1755,53 +1755,6 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
     // Configuration multiplier.
     maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
 
-    vanadiel_time::time_point vanaTime = vanadiel_time::now();
-
-    // Moon phase skillup modifiers
-    uint8 phase         = static_cast<uint8>(vanadiel_time::moon::get_phase(vanaTime));
-    uint8 moonDirection = vanadiel_time::moon::get_direction(vanaTime);
-
-    switch (moonDirection)
-    {
-        case 0: // None
-            if (phase == 0)
-            {
-                skillRoll -= 20;
-                bonusChanceRoll -= 3;
-            }
-            else if (phase == 100)
-            {
-                skillRoll += 10;
-                bonusChanceRoll += 3;
-            }
-            break;
-
-        case 1: // Waning (decending)
-            if (phase <= 10)
-            {
-                skillRoll -= 15;
-                bonusChanceRoll -= 2;
-            }
-            else if (phase >= 95 && phase <= 100)
-            {
-                skillRoll += 5;
-                bonusChanceRoll += 2;
-            }
-            break;
-
-        case 2: // Waxing (increasing)
-            if (phase <= 5)
-            {
-                skillRoll -= 10;
-                bonusChanceRoll -= 1;
-            }
-            else if (phase >= 90 && phase <= 100)
-            {
-                bonusChanceRoll += 1;
-            }
-            break;
-    }
-
     // Not in City bonus
     CZone* PZone = zoneutils::GetZone(PChar->getZone());
     if (!(PZone && (PZone->GetTypeMask() & xi::ZoneType::City) != xi::ZoneType::Unknown))
