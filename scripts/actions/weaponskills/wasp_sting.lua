@@ -29,7 +29,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.POISON
     local actionElement = xi.element.WATER
     local power         = 1
-    local duration      = math.floor((75 + 15 * tp / 1000) * applyResistanceAddEffect(player, target, actionElement, 0))
+    local duration      = math.floor(xi.weaponskills.fTP(tp, { 90, 112.5, 135 }) * applyResistanceAddEffect(player, target, actionElement, 0)) -- DAT, but BG and FFO say 105 at 2000 TP
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage
