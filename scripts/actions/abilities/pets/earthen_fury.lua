@@ -25,7 +25,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.dStatMultiplier = 1.5
     params.canMagicBurst   = true
     params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
-    -- TODO: Should not consume TP
 
     local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 
