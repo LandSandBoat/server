@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.3 params.mnd_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.0, 7.25, 9.75 }
+        params.ftpMod = { 3.0, 7.2, 9.6 } -- DAT and Dec 2014 BlueGartr testing (7.189~7.22, 9.57~9.78), but BG and FFO say 7.25, 9.75
         params.mnd_wsc = 0.7
     end
 

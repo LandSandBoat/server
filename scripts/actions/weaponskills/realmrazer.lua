@@ -9,7 +9,7 @@
 -- Element: None
 -- Modifiers: MND:73~85%
 -- 100%TP    200%TP    300%TP
--- .88        .88       .88
+-- .90        .90       .90
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -17,11 +17,12 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 7
-    params.ftpMod = { 0.88, 0.88, 0.88 }
+    params.ftpMod = { 0.59375, 0.59375, 0.59375 }
     params.mnd_wsc = player:getMerit(xi.merit.REALMRAZER) * 0.17
-    params.accVaries = { 0, 30, 60 } -- TODO: verify exact number
+    params.accVaries = { 20, 40, 70 } -- DAT
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 0.9, 0.9, 0.9 }
         params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REALMRAZER) * 0.03)
         params.multiHitfTP = true
     end

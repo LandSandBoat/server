@@ -417,7 +417,7 @@ public:
     uint8            m_TitleList[143]{};       // List of obtained titles
     uint8            m_Abilities[64]{};        // List of current abilities
     uint8            m_LearnedAbilities[49]{}; // Learnable abilities (corsair rolls)
-    xi::bitset<64>   m_LearnedWeaponskills{};  // Learnable Weaponskills
+    xi::bitset<128>  m_LearnedWeaponskills{};  // Learnable Weaponskills
     uint8            m_TraitList[18]{};        // List of active job traits in the form of a bit mask
     uint8            m_PetCommands[64]{};
     uint8            m_WeaponSkills[32]{};

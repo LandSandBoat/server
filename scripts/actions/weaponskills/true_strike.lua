@@ -21,7 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5
     params.critVaries = { 1.0, 1.0, 1.0 }
-    params.accVaries = { -50, -50, -50 } -- TODO: verify exact number.
+    params.accVaries = { -50, 10, 50 } -- TODO: verify penalty. -50 penalty plus DAT TP bonus of 0, 60, 100
     params.atkVaries  = { 2.0, 2.0, 2.0 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
