@@ -7,8 +7,6 @@ local ID = zones[xi.zone.CAEDARVA_MIRE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.randomInt(12, 36) * 3600) -- 12 to 36 hours after maintenance, in 1-hour increments
-
     xi.helm.initZone(zone, xi.helmType.LOGGING)
     xi.darkRider.onZoneInitialize()
 
