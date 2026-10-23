@@ -9,7 +9,7 @@
 -- Element: None
 -- Modifiers: STR:32%  VIT:32%
 -- 100%TP    200%TP    300%TP
--- 1.00      1.50      4.00
+-- 2.5625    6.47      10.375
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -21,7 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.32 params.vit_wsc = 0.32
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 2.5, 6.5, 10.375 }
+        params.ftpMod = { 2.5625, 6.46875, 10.375 } -- FFO, BG says 2.5, 6.5, 10.375
         params.str_wsc = 0.5 params.vit_wsc = 0.5
     end
 

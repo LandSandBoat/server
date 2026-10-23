@@ -9,14 +9,14 @@
 -- Element: Light
 -- Modifiers: CHR:60% DEX:30%
 -- 100%TP    200%TP    300%TP
--- 3.0625    5.8398    7.5625
+-- 3.0625    4.6875    7.5625
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftpMod = { 4.0, 4.25, 4.75 }
+    params.ftpMod = { 3.0625, 4.25, 4.75 }
     params.chr_wsc = 0.3
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.AXE
@@ -24,7 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.dStat = xi.mod.CHR -- TODO : Verify maximum bonus of 651
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.0625, 5.8398, 7.5625 }
+        params.ftpMod = { 3.0625, 4.6875, 7.5625 } -- DAT, FFO and Studio Gobli, BG says 5.8359375 at 2000 TP
         params.dex_wsc = 0.3 params.chr_wsc = 0.6
     end
 

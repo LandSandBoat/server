@@ -18,12 +18,13 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 4
-    params.ftpMod = { 1.08, 1.08, 1.08 }
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = player:getMerit(xi.merit.RUINATOR) * 0.17
-    params.accVaries = { 0, 30, 60 } -- TODO: verify exact number
+    params.accVaries = { 20, 40, 70 } -- DAT
     params.atkVaries = { 1.1, 1.1, 1.1 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.08, 1.08, 1.08 } -- Dec 2014 BlueGartr testing (1.076~1.092), FFO says 1.125
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.RUINATOR) * 0.03)
         params.multiHitfTP = true
     end
