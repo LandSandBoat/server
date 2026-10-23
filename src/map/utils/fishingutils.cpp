@@ -2160,15 +2160,7 @@ auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* ba
                 if (mob->nm && (mob->areaId == 0 || mob->areaId == area->areaId) && ((mob->reqBaitId == 0 || mob->reqBaitId == bait->baitID) || (mob->altBaitId > 0 && mob->altBaitId == bait->baitID)))
                 {
                     bool mobAdd = false;
-                    if (mob->quest < 255 && mob->log < 255)
-                    {
-                        if (charutils::getQuestStatus(PChar, mob->log, mob->quest) == QUEST_ACCEPTED)
-                        {
-                            mobAdd = true;
-                            MobPoolWeight += 1000;
-                        }
-                    }
-                    else if (mob->rarity < 1000)
+                    if (mob->rarity < 1000)
                     {
                         uint16 randomizer = xirand::GetRandomNumber(1, 1000);
                         randomizer -= std::clamp<uint16>((uint16)std::floor((1 - MOONPATTERN_2(GetMoonPhase())) * 100), 0, randomizer);
