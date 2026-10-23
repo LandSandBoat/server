@@ -21,6 +21,7 @@
 
 #include "fishingutils.h"
 
+#include "common/database.h"
 #include "common/logging.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
@@ -78,6 +79,61 @@ std::map<xi::ZoneId, std::map<uint8, fishingarea_t*>> FishingAreaList;       // 
 std::map<xi::ZoneId, std::map<uint8, uint16>>         FishingCatchLists;     // zoneid, areaid, groupid
 std::map<uint16, std::map<uint32, uint16>>            FishingGroups;         // groupid, fishid, rarity
 std::map<uint16, std::map<uint32, uint8>>             FishingBaitAffinities; // baitid, fishid, power
+
+namespace
+{
+
+auto findRod(const uint16 rodId) -> rod_t*
+{
+    const auto it = FishingRods.find(rodId);
+    if (it == FishingRods.end())
+    {
+        return nullptr;
+    }
+    return it->second;
+}
+
+auto findBait(const uint16 baitId) -> bait_t*
+{
+    const auto it = FishingBaits.find(baitId);
+    if (it == FishingBaits.end())
+    {
+        return nullptr;
+    }
+    return it->second;
+}
+
+auto findFishingArea(const xi::ZoneId zoneId, const uint8 areaId) -> fishingarea_t*
+{
+    const auto zoneIt = FishingAreaList.find(zoneId);
+    if (zoneIt == FishingAreaList.end())
+    {
+        return nullptr;
+    }
+    const auto areaIt = zoneIt->second.find(areaId);
+    if (areaIt == zoneIt->second.end())
+    {
+        return nullptr;
+    }
+    return areaIt->second;
+}
+
+auto findFishMob(const xi::ZoneId zoneId, const uint32 mobId) -> fishmob_t*
+{
+    const auto zoneIt = FishZoneMobList.find(zoneId);
+    if (zoneIt == FishZoneMobList.end())
+    {
+        return nullptr;
+    }
+    const auto mobIt = zoneIt->second.find(mobId);
+    if (mobIt == zoneIt->second.end())
+    {
+        return nullptr;
+    }
+    return mobIt->second;
+}
+
+} // namespace
 
 /************************************************************************
  *                                                                       *
@@ -272,7 +328,13 @@ auto GetLuckyMoonModifier() -> uint8
 
 auto GetWeatherModifier(const CCharEntity* PChar) -> float
 {
-    const auto weather    = zoneutils::GetZone(PChar->getZone())->weather().current();
+    const auto* PZone = zoneutils::GetZone(PChar->getZone());
+    if (PZone == nullptr)
+    {
+        return 1.0f;
+    }
+
+    const auto weather    = PZone->weather().current();
     float      weatherMod = 1.0f;
 
     if (weather == xi::Weather::Rain)
@@ -1021,9 +1083,15 @@ auto GetFishPool(const xi::ZoneId zoneID, const uint8 areaID, const uint16 BaitI
 
     for (auto fish : FishingGroups[groupId])
     {
-        if ((!FishList[fish.first]->item) && FishingBaitAffinities.contains(BaitID) && FishingBaitAffinities[BaitID].contains(fish.first))
+        auto* fishEntry = GetFish(fish.first);
+        if (fishEntry == nullptr)
         {
-            pool.insert(std::make_pair(FishList[fish.first], fish.second));
+            continue;
+        }
+
+        if (!fishEntry->item && FishingBaitAffinities.contains(BaitID) && FishingBaitAffinities[BaitID].contains(fish.first))
+        {
+            pool.insert(std::make_pair(fishEntry, fish.second));
         }
     }
 
@@ -1037,9 +1105,10 @@ auto GetItemPool(const xi::ZoneId zoneID, const uint8 areaID) -> std::vector<fis
 
     for (auto fish : FishingGroups[groupId])
     {
-        if (FishList[fish.first]->item)
+        auto* fishEntry = GetFish(fish.first);
+        if (fishEntry != nullptr && fishEntry->item)
         {
-            pool.emplace_back(FishList[fish.first]);
+            pool.emplace_back(fishEntry);
         }
     }
 
@@ -1237,7 +1306,7 @@ auto GetFishingArea(CCharEntity* PChar) -> fishingarea_t*
 
     for (auto area : FishingAreaList[zoneId])
     {
-        fishingarea_t* fishingArea = FishingAreaList[zoneId][area.first];
+        fishingarea_t* fishingArea = area.second;
 
         switch (fishingArea->areatype)
         {
@@ -1323,7 +1392,7 @@ void RodBreak(CCharEntity* PChar)
         return;
     }
 
-    rod_t* PRod = FishingRods[PRanged->getID()];
+    rod_t* PRod = findRod(PRanged->getID());
     if (PRod == nullptr)
     {
         ShowWarning("PRod was null.");
@@ -1531,7 +1600,7 @@ auto CatchMonster(CCharEntity* PChar, uint32 MobID) -> int32
 {
     uint16      MessageOffset = GetMessageOffset(PChar->getZone());
     CMobEntity* PMob          = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(MobID, TYPE_MOB));
-    fishmob_t*  mob           = FishZoneMobList[PChar->getZone()][MobID];
+    fishmob_t*  mob           = findFishMob(PChar->getZone(), MobID);
 
     if (!PMob || !mob)
     {
@@ -1920,8 +1989,8 @@ void StartFishing(CCharEntity* PChar)
             return;
         }
 
-        rod_t*  rod  = FishingRods[Rod->getID()];
-        bait_t* bait = FishingBaits[Bait->getID()];
+        rod_t*  rod  = findRod(Rod->getID());
+        bait_t* bait = findBait(Bait->getID());
 
         if (rod != nullptr && bait != nullptr)
         {
@@ -2623,11 +2692,11 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
 
             if (PChar->getZone() == xi::ZoneId::ValkurmDunes && PChar->GetLocalVar("pChartActive") == 1)
             {
-                fishingArea = FishingAreaList[xi::ZoneId::ValkurmDunes][2];
+                fishingArea = findFishingArea(xi::ZoneId::ValkurmDunes, 2);
             }
             else if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
             {
-                fishingArea = FishingAreaList[xi::ZoneId::BuburimuPeninsula][2];
+                fishingArea = findFishingArea(xi::ZoneId::BuburimuPeninsula, 2);
             }
 
             if (PChar->hookedFish != nullptr)
@@ -2643,8 +2712,8 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
 
                 if (Rod != nullptr && Bait != nullptr)
                 {
-                    rod_t*  FishingRod  = FishingRods[Rod->getID()];
-                    bait_t* FishingBait = FishingBaits[Bait->getID()];
+                    rod_t*  FishingRod  = findRod(Rod->getID());
+                    bait_t* FishingBait = findBait(Bait->getID());
 
                     if (FishingRod != nullptr && FishingBait != nullptr)
                     {
@@ -2689,10 +2758,19 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
         {
             if (stamina <= 4)
             {
-                CItemWeapon* Rod = nullptr;
-                Rod              = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+                CItemWeapon* Rod        = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+                rod_t*       FishingRod = [&]() -> rod_t*
+                {
+                    if (Rod == nullptr)
+                    {
+                        return nullptr;
+                    }
 
-                if (PChar->hookedFish == nullptr || Rod == nullptr)
+                    return findRod(Rod->getID());
+                }();
+
+                // Lose the catch if the rod was unequipped or isn't a known fishing rod
+                if (PChar->hookedFish == nullptr || FishingRod == nullptr)
                 {
                     LoseCatch(PChar, FISHINGFAILTYPE_NONE);
                     UnhookMob(PChar, Lost::Yes);
@@ -2700,8 +2778,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 }
                 else
                 {
-                    rod_t*           FishingRod = FishingRods[Rod->getID()];
-                    catchresponse_t* response   = ReelCheck(PChar, PChar->hookedFish, FishingRod);
+                    catchresponse_t* response = ReelCheck(PChar, PChar->hookedFish, FishingRod);
 
                     if (response->fishingToken != PChar->fishingToken || PChar->hookedFish->special != special)
                     {
@@ -2841,7 +2918,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
 
 auto GetFish(uint16 itemid) -> std::unique_ptr<CItem>
 {
-    if (!FishList[itemid])
+    if (!FishList.contains(itemid))
     {
         return nullptr;
     }
@@ -3187,12 +3264,6 @@ void CleanupFishing()
         fishArealist.second.clear();
     }
     FishingAreaList.clear();
-
-    for (auto fish : FishList)
-    {
-        destroy(fish.second);
-    }
-    FishList.clear();
 };
 
 } // namespace fishingutils
