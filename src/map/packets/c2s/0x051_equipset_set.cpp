@@ -83,7 +83,7 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
 
     // JP wiki: a Monipulator cannot use /equipset.
     auto pv = PacketValidator(PChar)
-                  .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Monstrosity })
+                  .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Fishing, BlockedState::Monstrosity })
                   .range("Count", this->Count, 1, 16);
 
     if (this->Count <= 16)
