@@ -46,35 +46,35 @@ class CLuaAbility
 public:
     CLuaAbility(CAbility*);
 
-    CAbility* GetAbility() const
+    auto GetAbility() const -> CAbility*
     {
         return m_PLuaAbility;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaAbility& ability);
+    friend auto operator<<(std::ostream& out, const CLuaAbility& ability) -> std::ostream&;
 
-    uint16 getID();
-    auto   getMsg() -> MsgBasic;
-    uint16 getRecast();
-    auto   getRecastID() const -> xi::Recast;
-    auto   getRange() -> uint16;
-    auto   getRadius() const -> uint8;
-    auto   getAOE() const -> uint8;
-    auto   getName() -> const std::string&;
-    auto   getAnimation() -> ActionAnimation;
-    uint16 getAddType(); // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
+    auto getID() -> uint16;
+    auto getMsg() -> MsgBasic;
+    auto getRecast() -> uint16;
+    auto getRecastID() const -> xi::Recast;
+    auto getRange() -> uint16;
+    auto getRadius() const -> uint8;
+    auto getAOE() const -> uint8;
+    auto getName() -> const std::string&;
+    auto getAnimation() -> ActionAnimation;
+    auto getAddType() -> uint16; // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
-    void  setMsg(MsgBasic messageID);
-    void  setAnimation(uint16 animationID);
-    void  setRecast(uint16 recastTime);
-    int32 getCE();
-    void  setCE(int32 ce);
-    int32 getVE();
-    void  setVE(int32 ve);
-    void  setRange(float range);
-    void  setPostActionCleanupEffect(xi::StatusEffect effectToCleanup);
+    void setMsg(MsgBasic messageID);
+    void setAnimation(uint16 animationID);
+    void setRecast(uint16 recastTime);
+    auto getCE() -> int32;
+    void setCE(int32 ce);
+    auto getVE() -> int32;
+    void setVE(int32 ve);
+    void setRange(float range);
+    void setPostActionCleanupEffect(xi::StatusEffect effectToCleanup);
 
-    bool operator==(const CLuaAbility& other) const
+    auto operator==(const CLuaAbility& other) const -> bool
     {
         return this->m_PLuaAbility == other.m_PLuaAbility;
     }

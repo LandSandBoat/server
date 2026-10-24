@@ -103,7 +103,7 @@ void CItem::setID(uint16 id)
     m_id = id;
 }
 
-uint16 CItem::getID() const
+auto CItem::getID() const -> uint16
 {
     return m_id;
 }
@@ -119,7 +119,7 @@ void CItem::setSubID(uint16 subid)
     m_subid = subid;
 }
 
-uint16 CItem::getSubID() const
+auto CItem::getSubID() const -> uint16
 {
     return m_subid;
 }
@@ -151,7 +151,7 @@ auto CItem::hasFlag(const xi::ItemFlag flag) const -> bool
  *                                                                       *
  ************************************************************************/
 
-uint8 CItem::getAppraisalID() const
+auto CItem::getAppraisalID() const -> uint8
 {
     return this->exdata<Exdata::Appraisable>().AppraisalId;
 }
@@ -172,7 +172,7 @@ void CItem::setAHCat(uint8 ahCat)
     m_ahCat = ahCat;
 }
 
-uint8 CItem::getAHCat() const
+auto CItem::getAHCat() const -> uint8
 {
     return m_ahCat;
 }
@@ -188,7 +188,7 @@ void CItem::setType(uint16 type)
     m_type |= type;
 }
 
-bool CItem::isType(ITEM_TYPE type) const
+auto CItem::isType(ITEM_TYPE type) const -> bool
 {
     return (m_type & type);
 }
@@ -204,7 +204,7 @@ void CItem::setSubType(uint8 subtype)
     m_subtype = (subtype > 128 ? m_subtype & subtype : m_subtype | subtype);
 }
 
-bool CItem::isSubType(ITEM_SUBTYPE subtype) const
+auto CItem::isSubType(ITEM_SUBTYPE subtype) const -> bool
 {
     return (m_subtype & subtype);
 }
@@ -225,7 +225,7 @@ void CItem::setQuantity(uint32 quantity)
     m_quantity = std::min(quantity, m_stackSize);
 }
 
-uint32 CItem::getQuantity() const
+auto CItem::getQuantity() const -> uint32
 {
     return m_quantity;
 }
@@ -241,7 +241,7 @@ void CItem::setStackSize(uint32 stackSize)
     m_stackSize = stackSize;
 }
 
-uint32 CItem::getStackSize() const
+auto CItem::getStackSize() const -> uint32
 {
     return m_stackSize;
 }
@@ -257,7 +257,7 @@ void CItem::setBasePrice(uint32 BasePrice)
     m_BasePrice = BasePrice;
 }
 
-uint32 CItem::getBasePrice() const
+auto CItem::getBasePrice() const -> uint32
 {
     return m_BasePrice;
 }
@@ -276,7 +276,7 @@ void CItem::setCharPrice(const uint32 CharPrice)
     }
 }
 
-uint32 CItem::getCharPrice() const
+auto CItem::getCharPrice() const -> uint32
 {
     return m_CharPrice;
 }
@@ -287,7 +287,7 @@ uint32 CItem::getCharPrice() const
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getName() const
+auto CItem::getName() const -> const std::string&
 {
     return m_name;
 }
@@ -303,7 +303,7 @@ void CItem::setName(const std::string& name)
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getSender() const
+auto CItem::getSender() const -> const std::string&
 {
     return m_send;
 }
@@ -319,7 +319,7 @@ void CItem::setSender(const std::string& sender)
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getReceiver() const
+auto CItem::getReceiver() const -> const std::string&
 {
     return m_recv;
 }
@@ -354,7 +354,7 @@ void CItem::setSignature(const std::string& signature)
  *                                                                       *
  ************************************************************************/
 
-uint8 CItem::getLocationID() const
+auto CItem::getLocationID() const -> uint8
 {
     return m_locationID;
 }
@@ -370,7 +370,7 @@ void CItem::setLocationID(uint8 locationID)
  *                                                                       *
  ************************************************************************/
 
-uint8 CItem::getSlotID() const
+auto CItem::getSlotID() const -> uint8
 {
     return m_slotID;
 }
@@ -391,7 +391,7 @@ void CItem::setSent(bool sent)
     m_sent = sent;
 }
 
-bool CItem::isSent() const
+auto CItem::isSent() const -> bool
 {
     return m_sent;
 }
@@ -402,7 +402,7 @@ bool CItem::isSent() const
  *                                                                       *
  ************************************************************************/
 
-bool CItem::isStorageSlip() const
+auto CItem::isStorageSlip() const -> bool
 {
     return m_id < 29340 && m_id > 29311;
 }
@@ -417,12 +417,12 @@ void CItem::setDirty(const bool dirty)
     dirty_ = dirty;
 }
 
-bool CItem::isSoultrapper() const
+auto CItem::isSoultrapper() const -> bool
 {
     return m_id == 18721 || m_id == 18724;
 }
 
-bool CItem::isMannequin() const
+auto CItem::isMannequin() const -> bool
 {
     return m_id >= 256 && m_id <= 263;
 }

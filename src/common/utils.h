@@ -78,15 +78,15 @@ constexpr size_t DecodeStringLength    = 21; // used for size of decoded strings
 constexpr size_t SignatureStringLength = 16; // encoded signature string size // 15 characters + null terminator
 constexpr size_t LinkshellStringLength = 20; // encoded linkshell string size // 19 characters + null terminator
 
-int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
-bool  bin2hex(char* output, unsigned char* input, size_t count);
+auto checksum(uint8* buf, uint32 buflen, char checkhash[16]) -> int32;
+auto bin2hex(char* output, unsigned char* input, size_t count) -> bool;
 
-constexpr float square(auto distance) // constexpr square (used with distanceSquared)
+constexpr auto square(auto distance) -> float // constexpr square (used with distanceSquared)
 {
     return distance * distance;
 }
 
-inline float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false)
+inline auto distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false) -> float
 {
     float dX = A.x - B.x;
     float dY = ignoreVertical ? 0 : A.y - B.y;
@@ -94,12 +94,12 @@ inline float distanceSquared(const position_t& A, const position_t& B, bool igno
     return dX * dX + dY * dY + dZ * dZ;
 }
 
-inline float distance(const position_t& A, const position_t& B, bool ignoreVertical = false)
+inline auto distance(const position_t& A, const position_t& B, bool ignoreVertical = false) -> float
 {
     return std::sqrt(distanceSquared(A, B, ignoreVertical));
 }
 
-inline bool isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false)
+inline auto isWithinDistance(const position_t& A, const position_t& B, float within, bool ignoreVertical = false) -> bool
 {
     return distanceSquared(A, B, ignoreVertical) <= square(within);
 }
@@ -116,47 +116,47 @@ constexpr auto roundUpToNearestFour(uint32 input) -> uint32
     return input + 4U - remainder;
 }
 
-int32      intpow32(int32 base, int32 exponent);                                              // Exponential power of integers
-uint8      worldAngle(const position_t& A, const position_t& B);                              // А - the main entity, B - target entity (vector projection onto the X-axis)
-uint8      relativeAngle(uint8 world, int16 diff);                                            // Returns a new world angle which is diff degrees in a given (signed) direction
-int16      angleDifference(uint8 worldAngleA, uint8 worldAngleB);                             // Returns difference between two world angles (0~128), sign indicates direction
-int16      facingAngle(const position_t& A, const position_t& B);                             // А - the main entity, B - target entity
-bool       facing(const position_t& A, const position_t& B, uint8 coneAngle);                 // true if A is facing B within coneAngle degrees
-bool       infront(const position_t& A, const position_t& B, uint8 coneAngle);                // true if A is infront of B within coneAngle degrees
-bool       behind(const position_t& A, const position_t& B, uint8 coneAngle);                 // true if A is behind of B within coneAngle degrees
-bool       beside(const position_t& A, const position_t& B, uint8 coneAngle);                 // true if A is to a side of B within coneAngle degrees
-auto       toEntitysLeft(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;  // true if A is to the left side of B within coneAngle degrees (from perspective of B)
-auto       toEntitysRight(const position_t& A, const position_t& B, uint8 coneAngle) -> bool; // true if A is to the right side of B within coneAngle degrees (from perspective of B)
-position_t nearPosition(const position_t& A, float offset, float radian);                     // Returns a position near the given position
+auto intpow32(int32 base, int32 exponent) -> int32;                                     // Exponential power of integers
+auto worldAngle(const position_t& A, const position_t& B) -> uint8;                     // А - the main entity, B - target entity (vector projection onto the X-axis)
+auto relativeAngle(uint8 world, int16 diff) -> uint8;                                   // Returns a new world angle which is diff degrees in a given (signed) direction
+auto angleDifference(uint8 worldAngleA, uint8 worldAngleB) -> int16;                    // Returns difference between two world angles (0~128), sign indicates direction
+auto facingAngle(const position_t& A, const position_t& B) -> int16;                    // А - the main entity, B - target entity
+auto facing(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;         // true if A is facing B within coneAngle degrees
+auto infront(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;        // true if A is infront of B within coneAngle degrees
+auto behind(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;         // true if A is behind of B within coneAngle degrees
+auto beside(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;         // true if A is to a side of B within coneAngle degrees
+auto toEntitysLeft(const position_t& A, const position_t& B, uint8 coneAngle) -> bool;  // true if A is to the left side of B within coneAngle degrees (from perspective of B)
+auto toEntitysRight(const position_t& A, const position_t& B, uint8 coneAngle) -> bool; // true if A is to the right side of B within coneAngle degrees (from perspective of B)
+auto nearPosition(const position_t& A, float offset, float radian) -> position_t;       // Returns a position near the given position
 
 auto sidestepPosition(const position_t& from, const position_t& referencePoint, float offset) -> position_t;
 
 // True when two positions are within ~1 yalm, i.e. effectively co-located.
 auto isNear(const position_t& a, const position_t& b) -> bool;
 
-int32 hasBit(uint16 value, const uint8* BitArray, uint32 size); // Check for the presence of a bit in the array
-int32 addBit(uint16 value, uint8* BitArray, uint32 size);       // Adds a bit to the array
-int32 delBit(uint16 value, uint8* BitArray, uint32 size);       // Deletes a bit from the array
+auto hasBit(uint16 value, const uint8* BitArray, uint32 size) -> int32; // Check for the presence of a bit in the array
+auto addBit(uint16 value, uint8* BitArray, uint32 size) -> int32;       // Adds a bit to the array
+auto delBit(uint16 value, uint8* BitArray, uint32 size) -> int32;       // Deletes a bit from the array
 
 //(un)pack functions for Big Endian(BE) targets
-uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
-uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
-uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
-uint64 unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit);
+auto packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint32;
+auto packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit) -> uint32;
+auto unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint64;
+auto unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64;
 
 //(un)pack functions for Little Endian(LE) targets
-uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
-uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
-uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit);
-uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
+auto packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint32;
+auto packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit) -> uint32;
+auto unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64;
+auto unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint64;
 
 // Encode/Decode Strings to/from FFXI 6-bit format
-void        EncodeStringLinkshell(const std::string& signature, char* target);
-void        DecodeStringLinkshell(const std::string& signature, char* target);
-std::string EncodeStringSignature(const std::string& signature, char* target);
-void        DecodeStringSignature(const std::string& signature, char* target);
-void        PackSoultrapperName(std::string name, uint8* output);
-std::string UnpackSoultrapperName(const uint8* input);
+void EncodeStringLinkshell(const std::string& signature, char* target);
+void DecodeStringLinkshell(const std::string& signature, char* target);
+auto EncodeStringSignature(const std::string& signature, char* target) -> std::string;
+void DecodeStringSignature(const std::string& signature, char* target);
+void PackSoultrapperName(std::string name, uint8* output);
+auto UnpackSoultrapperName(const uint8* input) -> std::string;
 
 auto escape(const std::string& s) -> std::string;
 auto split(const std::string& s, const std::string& delimiter = " ") -> std::vector<std::string>;
@@ -164,23 +164,23 @@ auto to_lower(const std::string& s) -> std::string;
 auto to_upper(const std::string& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 void rtrim(std::string& s);
-bool matches(const std::string& target, const std::string& pattern);
+auto matches(const std::string& target, const std::string& pattern) -> bool;
 auto replace(const std::string& target, const std::string& search, const std::string& replace) -> std::string;
 
-look_t stringToLook(std::string str);
+auto stringToLook(std::string str) -> look_t;
 
 // Float tools
 // https://stackoverflow.com/a/253874
-bool approximatelyEqual(float a, float b);
-bool essentiallyEqual(float a, float b);
-bool definitelyGreaterThan(float a, float b);
-bool definitelyLessThan(float a, float b);
+auto approximatelyEqual(float a, float b) -> bool;
+auto essentiallyEqual(float a, float b) -> bool;
+auto definitelyGreaterThan(float a, float b) -> bool;
+auto definitelyLessThan(float a, float b) -> bool;
 
 void crash();
 void hang();
 
 template <typename T>
-std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
+auto sorted_directory_iterator(std::string path_name) -> std::set<std::filesystem::path>
 {
     std::set<std::filesystem::path> sorted_by_name;
     for (auto& entry : T(path_name))

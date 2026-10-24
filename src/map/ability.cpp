@@ -46,17 +46,17 @@ CAbility::CAbility(uint16 id)
 {
 }
 
-bool CAbility::isPetAbility() const
+auto CAbility::isPetAbility() const -> bool
 {
     return ((getID() >= ABILITY_CONCENTRIC_PULSE && getID() <= ABILITY_RADIAL_ARCANA) || getID() >= ABILITY_HEALING_RUBY);
 }
 
-bool CAbility::isAoE() const
+auto CAbility::isAoE() const -> bool
 {
     return m_aoe == 1;
 }
 
-bool CAbility::isConal()
+auto CAbility::isConal() -> bool
 {
     // no abilities are conal?
     return false;
@@ -67,7 +67,7 @@ void CAbility::setID(uint16 id)
     m_ID = id;
 }
 
-uint16 CAbility::getID() const
+auto CAbility::getID() const -> uint16
 {
     return m_ID;
 }
@@ -102,7 +102,7 @@ void CAbility::setLevel(uint8 level)
     m_level = level;
 }
 
-uint8 CAbility::getLevel() const
+auto CAbility::getLevel() const -> uint8
 {
     return m_level;
 }
@@ -112,7 +112,7 @@ void CAbility::setRange(float range)
     m_range = range;
 }
 
-float CAbility::getRange() const
+auto CAbility::getRange() const -> float
 {
     return m_range;
 }
@@ -122,7 +122,7 @@ void CAbility::setAOE(uint8 aoe)
     m_aoe = aoe;
 }
 
-uint8 CAbility::getAOE() const
+auto CAbility::getAOE() const -> uint8
 {
     return m_aoe;
 }
@@ -132,7 +132,7 @@ void CAbility::setRadius(uint8 radius)
     m_radius = radius;
 }
 
-uint8 CAbility::getRadius() const
+auto CAbility::getRadius() const -> uint8
 {
     return m_radius;
 }
@@ -157,12 +157,12 @@ auto CAbility::getAnimationID() const -> ActionAnimation
     return static_cast<ActionAnimation>(m_animationID);
 }
 
-timer::duration CAbility::getAnimationTime()
+auto CAbility::getAnimationTime() -> timer::duration
 {
     return m_animationTime;
 }
 
-timer::duration CAbility::getCastTime()
+auto CAbility::getCastTime() -> timer::duration
 {
     return m_castTime;
 }
@@ -172,12 +172,12 @@ void CAbility::setRecastTime(timer::duration recastTime)
     m_recastTime = std::chrono::floor<std::chrono::milliseconds>(recastTime * settings::get<float>("map.ABILITY_RECAST_MULTIPLIER"));
 }
 
-timer::duration CAbility::getRecastTime() const
+auto CAbility::getRecastTime() const -> timer::duration
 {
     return m_recastTime;
 }
 
-uint16 CAbility::getMeritModID() const
+auto CAbility::getMeritModID() const -> uint16
 {
     return m_meritModID;
 }
@@ -197,12 +197,12 @@ void CAbility::setValidTarget(uint16 validTarget)
     m_validTarget = validTarget;
 }
 
-uint16 CAbility::getValidTarget() const
+auto CAbility::getValidTarget() const -> uint16
 {
     return m_validTarget;
 }
 
-uint16 CAbility::getAddType() const
+auto CAbility::getAddType() const -> uint16
 {
     return m_addType;
 }
@@ -212,7 +212,7 @@ void CAbility::setAddType(uint16 addType)
     m_addType = addType;
 }
 
-const std::string& CAbility::getName()
+auto CAbility::getName() -> const std::string&
 {
     return m_name;
 }
@@ -237,7 +237,7 @@ void CAbility::setCE(int32 CE)
     m_CE = CE;
 }
 
-int32 CAbility::getCE() const
+auto CAbility::getCE() const -> int32
 {
     return m_CE;
 }
@@ -247,7 +247,7 @@ void CAbility::setVE(int32 VE)
     m_VE = VE;
 }
 
-int32 CAbility::getVE() const
+auto CAbility::getVE() const -> int32
 {
     return m_VE;
 }
@@ -388,7 +388,7 @@ void LoadAbilitiesList()
  *                                                                       *
  ************************************************************************/
 
-CAbility* GetAbility(uint16 AbilityID)
+auto GetAbility(uint16 AbilityID) -> CAbility*
 {
     if (auto itr = PAbilityList.find(AbilityID); itr != PAbilityList.end())
     {
@@ -485,7 +485,7 @@ auto GetTwoHourAbility(xi::Job JobID) -> CAbility*
     return nullptr;
 }
 
-bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
+auto CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID) -> bool
 {
     auto* PAbility = GetAbility(AbilityID);
     if (PAbility)
@@ -509,7 +509,7 @@ auto GetAbilities(xi::Job JobID) -> std::vector<CAbility*>
     return PAbilitiesByJob[JobID];
 }
 
-Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
+auto GetCharge(CBattleEntity* PUser, uint16 chargeID) -> Charge_t*
 {
     Charge_t* charge = nullptr;
     for (auto& PCharge : PChargesList)

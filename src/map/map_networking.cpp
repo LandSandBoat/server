@@ -181,7 +181,7 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
     }
 }
 
-int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey)
+auto MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSession* PSession, blowfish_t* pbfkey) -> int32
 {
     TracyZoneScoped;
 
@@ -210,7 +210,7 @@ int32 MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSessio
     return -1;
 }
 
-int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp)
+auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSession, const IPP& ipp) -> int32
 {
     TracyZoneScoped;
 
@@ -437,7 +437,7 @@ int32 MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSes
     return -1;
 }
 
-int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
+auto MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession) -> int32
 {
     TracyZoneScoped;
 
@@ -556,7 +556,7 @@ int32 MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession)
     return 0;
 }
 
-int32 MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSession, UsePreviousKey usePreviousKey)
+auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSession, UsePreviousKey usePreviousKey) -> int32
 {
     TracyZoneScoped;
 

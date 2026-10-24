@@ -40,33 +40,33 @@ class CLuaBattlefield
 public:
     CLuaBattlefield(CBattlefield*);
 
-    CBattlefield* GetBattlefield() const
+    auto GetBattlefield() const -> CBattlefield*
     {
         return m_PLuaBattlefield;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
+    friend auto operator<<(std::ostream& out, const CLuaBattlefield& battlefield) -> std::ostream&;
 
-    uint16   getID();
-    auto     getZoneID() -> xi::ZoneId;
-    uint8    getArea();
-    uint32   getTimeLimit();
-    uint32   getTimeInside();
-    uint32   getRemainingTime();
-    uint32   getWipeTime();
-    uint32   getMaxParticipants();
-    uint32   getPlayerCount();
-    auto     getPlayers() -> sol::table;
-    auto     getPlayersAndTrusts() -> sol::table;
-    auto     getMobs(bool required, bool adds) -> sol::table;
-    auto     getNPCs() -> sol::table;
-    auto     getAllies() -> sol::table;
-    auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
-    uint8    getStatus();
-    uint64_t getLocalVar(const std::string& name);
-    uint32   getLastTimeUpdate();
-    auto     getInitiator() -> std::pair<uint32, std::string>;
-    uint32   getArmouryCrate();
+    auto getID() -> uint16;
+    auto getZoneID() -> xi::ZoneId;
+    auto getArea() -> uint8;
+    auto getTimeLimit() -> uint32;
+    auto getTimeInside() -> uint32;
+    auto getRemainingTime() -> uint32;
+    auto getWipeTime() -> uint32;
+    auto getMaxParticipants() -> uint32;
+    auto getPlayerCount() -> uint32;
+    auto getPlayers() -> sol::table;
+    auto getPlayersAndTrusts() -> sol::table;
+    auto getMobs(bool required, bool adds) -> sol::table;
+    auto getNPCs() -> sol::table;
+    auto getAllies() -> sol::table;
+    auto getRecord() -> std::tuple<std::string, uint32, uint32>;
+    auto getStatus() -> uint8;
+    auto getLocalVar(const std::string& name) -> uint64_t;
+    auto getLastTimeUpdate() -> uint32;
+    auto getInitiator() -> std::pair<uint32, std::string>;
+    auto getArmouryCrate() -> uint32;
 
     void setLastTimeUpdate(uint32 seconds);
     void setTimeLimit(uint32 seconds);
@@ -75,12 +75,12 @@ public:
     void setStatus(uint8 status);
     void setLocalVar(const std::string& name, uint64_t value);
     auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> CBaseEntity*;
-    bool cleanup(bool cleanup);
+    auto cleanup(bool cleanup) -> bool;
     void win();
     void lose();
     void addGroups(const sol::table& groups, bool hasMultipleArenas);
 
-    bool operator==(const CLuaBattlefield& other) const
+    auto operator==(const CLuaBattlefield& other) const -> bool
     {
         return this->m_PLuaBattlefield == other.m_PLuaBattlefield;
     }

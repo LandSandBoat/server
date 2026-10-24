@@ -53,7 +53,7 @@ public:
 
     std::vector<CItemContainer*> guildShops;
 
-    uint8 id() const;
+    auto id() const -> uint8;
 
     void updateGuildPointsPattern(uint8 pattern);
     auto addGuildPoints(CCharEntity* PChar, const CItem* PItem, uint32 tradedQuantity) const -> std::pair<uint8, int16>;

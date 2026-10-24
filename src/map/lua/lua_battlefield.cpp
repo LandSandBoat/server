@@ -45,7 +45,7 @@ CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
     }
 }
 
-uint16 CLuaBattlefield::getID()
+auto CLuaBattlefield::getID() -> uint16
 {
     return m_PLuaBattlefield->GetID();
 }
@@ -55,42 +55,42 @@ auto CLuaBattlefield::getZoneID() -> xi::ZoneId
     return m_PLuaBattlefield->GetZoneID();
 }
 
-uint8 CLuaBattlefield::getArea()
+auto CLuaBattlefield::getArea() -> uint8
 {
     return m_PLuaBattlefield->GetArea();
 }
 
-uint32 CLuaBattlefield::getTimeLimit()
+auto CLuaBattlefield::getTimeLimit() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetTimeLimit()));
 }
 
-uint32 CLuaBattlefield::getTimeInside()
+auto CLuaBattlefield::getTimeInside() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetTimeInside()));
 }
 
-uint32 CLuaBattlefield::getRemainingTime()
+auto CLuaBattlefield::getRemainingTime() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetRemainingTime()));
 }
 
-uint32 CLuaBattlefield::getWipeTime()
+auto CLuaBattlefield::getWipeTime() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetWipeTime() - timer::start_time));
 }
 
-uint32 CLuaBattlefield::getMaxParticipants()
+auto CLuaBattlefield::getMaxParticipants() -> uint32
 {
     return static_cast<uint32>(m_PLuaBattlefield->GetMaxParticipants());
 }
 
-uint32 CLuaBattlefield::getPlayerCount()
+auto CLuaBattlefield::getPlayerCount() -> uint32
 {
     return static_cast<uint32>(m_PLuaBattlefield->GetPlayerCount());
 }
 
-sol::table CLuaBattlefield::getPlayers()
+auto CLuaBattlefield::getPlayers() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -105,7 +105,7 @@ sol::table CLuaBattlefield::getPlayers()
     return table;
 }
 
-sol::table CLuaBattlefield::getPlayersAndTrusts()
+auto CLuaBattlefield::getPlayersAndTrusts() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -124,7 +124,7 @@ sol::table CLuaBattlefield::getPlayersAndTrusts()
     return table;
 }
 
-sol::table CLuaBattlefield::getMobs(bool required, bool adds)
+auto CLuaBattlefield::getMobs(bool required, bool adds) -> sol::table
 {
     auto table = lua.create_table();
 
@@ -153,7 +153,7 @@ sol::table CLuaBattlefield::getMobs(bool required, bool adds)
     return table;
 }
 
-sol::table CLuaBattlefield::getNPCs()
+auto CLuaBattlefield::getNPCs() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -166,7 +166,7 @@ sol::table CLuaBattlefield::getNPCs()
     return table;
 }
 
-sol::table CLuaBattlefield::getAllies()
+auto CLuaBattlefield::getAllies() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -179,7 +179,7 @@ sol::table CLuaBattlefield::getAllies()
     return table;
 }
 
-std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
+auto CLuaBattlefield::getRecord() -> std::tuple<std::string, uint32, uint32>
 {
     const auto& record = m_PLuaBattlefield->GetRecord();
 
@@ -190,29 +190,29 @@ std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
     return std::make_tuple(name, time, size);
 }
 
-uint8 CLuaBattlefield::getStatus()
+auto CLuaBattlefield::getStatus() -> uint8
 {
     return m_PLuaBattlefield->GetStatus();
 }
 
-uint64_t CLuaBattlefield::getLocalVar(const std::string& name)
+auto CLuaBattlefield::getLocalVar(const std::string& name) -> uint64_t
 {
     return m_PLuaBattlefield->GetLocalVar(name);
 }
 
-uint32 CLuaBattlefield::getLastTimeUpdate()
+auto CLuaBattlefield::getLastTimeUpdate() -> uint32
 {
     auto count = timer::count_seconds(m_PLuaBattlefield->GetLastTimeUpdate());
     return count;
 }
 
-std::pair<uint32, std::string> CLuaBattlefield::getInitiator()
+auto CLuaBattlefield::getInitiator() -> std::pair<uint32, std::string>
 {
     const auto& initiator = m_PLuaBattlefield->GetInitiator();
     return std::make_pair(initiator.id, initiator.name);
 }
 
-uint32 CLuaBattlefield::getArmouryCrate()
+auto CLuaBattlefield::getArmouryCrate() -> uint32
 {
     return m_PLuaBattlefield->GetArmouryCrate();
 }
@@ -264,7 +264,7 @@ auto CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
     return nullptr;
 }
 
-bool CLuaBattlefield::cleanup(bool cleanup)
+auto CLuaBattlefield::cleanup(bool cleanup) -> bool
 {
     return m_PLuaBattlefield->CanCleanup(cleanup);
 }
@@ -756,7 +756,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("addGroups", CLuaBattlefield::addGroups);
 };
 
-std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)
+auto operator<<(std::ostream& os, const CLuaBattlefield& battlefield) -> std::ostream&
 {
     std::string id = battlefield.m_PLuaBattlefield ? std::to_string(battlefield.m_PLuaBattlefield->GetID()) : "nullptr";
     return os << "CLuaBattlefield(" << id << ")";

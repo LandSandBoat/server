@@ -53,24 +53,24 @@ class CUContainer
 public:
     CUContainer();
 
-    UCONTAINERTYPE GetType();
+    auto GetType() -> UCONTAINERTYPE;
 
     void SetLock();
     void UnLock();
     void SetTarget(uint16 Target);
     void SetType(UCONTAINERTYPE Type);
-    bool SetItem(uint8 slotID, CItem* PItem);
+    auto SetItem(uint8 slotID, CItem* PItem) -> bool;
     void SetSize(uint8 size);
     void ClearSlot(uint8 slotID);
 
     void Clean();
-    bool IsLocked() const;
-    bool IsContainerEmpty();
-    bool IsSlotEmpty(uint8 slotID);
+    auto IsLocked() const -> bool;
+    auto IsContainerEmpty() -> bool;
+    auto IsSlotEmpty(uint8 slotID) -> bool;
 
-    uint16 GetTarget() const;
-    uint8  GetItemsCount() const;
-    CItem* GetItem(uint8 slotID);
+    auto GetTarget() const -> uint16;
+    auto GetItemsCount() const -> uint8;
+    auto GetItem(uint8 slotID) -> CItem*;
 
 private:
     UCONTAINERTYPE m_ContainerType;

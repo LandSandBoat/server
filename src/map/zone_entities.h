@@ -57,9 +57,9 @@ public:
     void onEntityMoved(CBaseEntity* PEntity);
     void onEntityDespawned(CBaseEntity* PEntity);
 
-    CCharEntity* GetCharByName(const std::string& name); // finds the player if exists in zone
-    CCharEntity* GetCharByID(uint32 id);
-    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // get a pointer to any entity in the zone
+    auto GetCharByName(const std::string& name) -> CCharEntity*; // finds the player if exists in zone
+    auto GetCharByID(uint32 id) -> CCharEntity*;
+    auto GetEntity(uint16 targid, uint8 filter = -1) -> CBaseEntity*; // get a pointer to any entity in the zone
 
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
@@ -96,12 +96,12 @@ public:
 
     auto ZoneServer(timer::time_point tick) -> Task<void>;
 
-    CZone* GetZone();
+    auto GetZone() -> CZone*;
 
     auto GetEffectCheckTime() const -> timer::time_point;
     auto GetCharList() const -> const EntityList_t&;
     auto GetMobList() const -> const EntityList_t&;
-    bool CharListEmpty() const;
+    auto CharListEmpty() const -> bool;
 
     void ForEachChar(FnRef<void(CCharEntity*)> func);
     void ForEachMob(FnRef<void(CMobEntity*)> func);

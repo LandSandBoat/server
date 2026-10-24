@@ -49,11 +49,11 @@ template <typename T, typename Compare = std::less<T>>
 class Heap
 {
 public:
-    [[nodiscard]] bool        empty() const noexcept;
-    [[nodiscard]] std::size_t size() const noexcept;
+    [[nodiscard]] auto empty() const noexcept -> bool;
+    [[nodiscard]] auto size() const noexcept -> std::size_t;
 
     // The element that pop() would return next. Precondition: !empty().
-    [[nodiscard]] const T& top() const;
+    [[nodiscard]] auto top() const -> const T&;
 
     void push(T value);
 
@@ -61,7 +61,7 @@ public:
     void emplace(Args&&... args);
 
     // Removes and returns the top element. Precondition: !empty().
-    [[nodiscard]] T pop();
+    [[nodiscard]] auto pop() -> T;
 
     void clear() noexcept;
 
@@ -83,19 +83,19 @@ using MinHeap = Heap<T, std::greater<T>>;
 //
 
 template <typename T, typename Compare>
-bool Heap<T, Compare>::empty() const noexcept
+auto Heap<T, Compare>::empty() const noexcept -> bool
 {
     return storage.empty();
 }
 
 template <typename T, typename Compare>
-std::size_t Heap<T, Compare>::size() const noexcept
+auto Heap<T, Compare>::size() const noexcept -> std::size_t
 {
     return storage.size();
 }
 
 template <typename T, typename Compare>
-const T& Heap<T, Compare>::top() const
+auto Heap<T, Compare>::top() const -> const T&
 {
     return storage.front();
 }
@@ -116,7 +116,7 @@ void Heap<T, Compare>::emplace(Args&&... args)
 }
 
 template <typename T, typename Compare>
-T Heap<T, Compare>::pop()
+auto Heap<T, Compare>::pop() -> T
 {
     std::ranges::pop_heap(storage, comp);
     T value = std::move(storage.back());

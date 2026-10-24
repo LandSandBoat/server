@@ -61,13 +61,13 @@ public:
     using std::variant<Types...>::operator=;
 
     template <typename Visitor>
-    decltype(auto) visit(Visitor&& visitor) &;
+    auto visit(Visitor&& visitor) & -> decltype(auto);
 
     template <typename Visitor>
-    decltype(auto) visit(Visitor&& visitor) const&;
+    auto visit(Visitor&& visitor) const& -> decltype(auto);
 
     template <typename Visitor>
-    decltype(auto) visit(Visitor&& visitor) &&;
+    auto visit(Visitor&& visitor) && -> decltype(auto);
 };
 
 //
@@ -76,21 +76,21 @@ public:
 
 template <typename... Types>
 template <typename Visitor>
-decltype(auto) Variant<Types...>::visit(Visitor&& visitor) &
+auto Variant<Types...>::visit(Visitor&& visitor) & -> decltype(auto)
 {
     return std::visit(std::forward<Visitor>(visitor), static_cast<std::variant<Types...>&>(*this));
 }
 
 template <typename... Types>
 template <typename Visitor>
-decltype(auto) Variant<Types...>::visit(Visitor&& visitor) const&
+auto Variant<Types...>::visit(Visitor&& visitor) const& -> decltype(auto)
 {
     return std::visit(std::forward<Visitor>(visitor), static_cast<const std::variant<Types...>&>(*this));
 }
 
 template <typename... Types>
 template <typename Visitor>
-decltype(auto) Variant<Types...>::visit(Visitor&& visitor) &&
+auto Variant<Types...>::visit(Visitor&& visitor) && -> decltype(auto)
 {
     return std::visit(std::forward<Visitor>(visitor), static_cast<std::variant<Types...>&&>(*this));
 }

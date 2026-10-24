@@ -35,7 +35,7 @@ class CLuaLootContainer
 public:
     CLuaLootContainer(LootContainer* loot);
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaLootContainer& action);
+    friend auto operator<<(std::ostream& out, const CLuaLootContainer& action) -> std::ostream&;
 
     void addItem(uint16 item, uint16 rate, sol::variadic_args va);
     void addGroup(uint16 groupRate, const sol::table& items);
@@ -43,7 +43,7 @@ public:
     void addItemFixed(uint16 item, uint16 rate, sol::variadic_args va);
     void addGroupFixed(uint16 groupRate, const sol::table& items);
 
-    bool operator==(const CLuaLootContainer& other) const
+    auto operator==(const CLuaLootContainer& other) const -> bool
     {
         return this->m_PLootContainer == other.m_PLootContainer;
     }

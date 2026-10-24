@@ -30,7 +30,7 @@ CTradeContainer::CTradeContainer()
     Clean();
 }
 
-uint16 CTradeContainer::getItemID(uint8 slotID)
+auto CTradeContainer::getItemID(uint8 slotID) -> uint16
 {
     if (slotID < m_itemID.size())
     {
@@ -39,7 +39,7 @@ uint16 CTradeContainer::getItemID(uint8 slotID)
     return 0;
 }
 
-uint8 CTradeContainer::getInvSlotID(uint8 slotID)
+auto CTradeContainer::getInvSlotID(uint8 slotID) -> uint8
 {
     if (slotID < m_itemID.size())
     {
@@ -48,7 +48,7 @@ uint8 CTradeContainer::getInvSlotID(uint8 slotID)
     return 0xFF;
 }
 
-uint32 CTradeContainer::getQuantity(uint8 slotID)
+auto CTradeContainer::getQuantity(uint8 slotID) -> uint32
 {
     if (slotID < m_itemID.size())
     {
@@ -57,7 +57,7 @@ uint32 CTradeContainer::getQuantity(uint8 slotID)
     return 0;
 }
 
-uint32 CTradeContainer::getItemQuantity(uint16 itemID)
+auto CTradeContainer::getItemQuantity(uint16 itemID) -> uint32
 {
     uint32 quantity = 0;
     for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
@@ -70,7 +70,7 @@ uint32 CTradeContainer::getItemQuantity(uint16 itemID)
     return quantity;
 }
 
-uint32 CTradeContainer::getTotalQuantity()
+auto CTradeContainer::getTotalQuantity() -> uint32
 {
     uint32 quantity = 0;
     for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
@@ -80,7 +80,7 @@ uint32 CTradeContainer::getTotalQuantity()
     return quantity;
 }
 
-uint8 CTradeContainer::getSlotCount()
+auto CTradeContainer::getSlotCount() -> uint8
 {
     return static_cast<uint8>(std::ranges::count_if(m_itemID,
                                                     [](const uint16 itemID)
@@ -143,7 +143,7 @@ void CTradeContainer::setRestriction(uint8 slotID, SlotRestriction restriction)
     }
 }
 
-uint8 CTradeContainer::getSize()
+auto CTradeContainer::getSize() -> uint8
 {
     return (uint8)m_itemID.size();
 }
@@ -156,7 +156,7 @@ void CTradeContainer::setSize(uint8 size)
     restrictions_.resize(size);
 }
 
-uint8 CTradeContainer::getExSize() const
+auto CTradeContainer::getExSize() const -> uint8
 {
     return m_exSize;
 }
@@ -166,7 +166,7 @@ void CTradeContainer::setExSize(uint8 size)
     m_exSize = size;
 }
 
-uint8 CTradeContainer::getItemsCount() const
+auto CTradeContainer::getItemsCount() const -> uint8
 {
     return m_ItemsCount;
 }
@@ -176,7 +176,7 @@ void CTradeContainer::setItemsCount(uint8 count)
     m_ItemsCount = count;
 }
 
-uint8 CTradeContainer::getType() const
+auto CTradeContainer::getType() const -> uint8
 {
     return m_type;
 }
@@ -186,7 +186,7 @@ void CTradeContainer::setType(uint8 type)
     m_type = type;
 }
 
-uint8 CTradeContainer::getShopFameArea() const
+auto CTradeContainer::getShopFameArea() const -> uint8
 {
     return m_shopFameArea;
 }
@@ -196,7 +196,7 @@ void CTradeContainer::setShopFameArea(uint8 fameArea)
     m_shopFameArea = fameArea;
 }
 
-uint32 CTradeContainer::getShopVendorId() const
+auto CTradeContainer::getShopVendorId() const -> uint32
 {
     return m_shopVendorId;
 }

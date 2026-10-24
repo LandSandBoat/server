@@ -68,16 +68,16 @@ public:
     CItemContainer(uint16 LocationID, const CCharEntity* owner = nullptr);
     ~CItemContainer();
 
-    uint16 GetID() const;
-    uint16 GetBuff() const; // get storage size (unlimited size)
-    uint8  GetSize() const; // get container size
-    uint8  GetFreeSlotsCount() const;
-    uint8  AddBuff(int8 buff); // increase/decrease storage size
-    uint8  AddSize(int8 size); // increase/decrease container size
-    uint8  SetSize(uint8 size);
-    auto   SearchItem(uint16 itemId) const -> uint8;
-    auto   SearchItems(uint16 itemId) const -> std::vector<uint8>;
-    uint8  SearchItemWithSpace(uint16 ItemID, uint32 quantity); // search for item that has space to accomodate x items added
+    auto GetID() const -> uint16;
+    auto GetBuff() const -> uint16; // get storage size (unlimited size)
+    auto GetSize() const -> uint8;  // get container size
+    auto GetFreeSlotsCount() const -> uint8;
+    auto AddBuff(int8 buff) -> uint8; // increase/decrease storage size
+    auto AddSize(int8 size) -> uint8; // increase/decrease container size
+    auto SetSize(uint8 size) -> uint8;
+    auto SearchItem(uint16 itemId) const -> uint8;
+    auto SearchItems(uint16 itemId) const -> std::vector<uint8>;
+    auto SearchItemWithSpace(uint16 ItemID, uint32 quantity) -> uint8; // search for item that has space to accomodate x items added
 
     auto InsertItem(std::unique_ptr<CItem> PItem) -> uint8;
     auto InsertItem(std::unique_ptr<CItem> PItem, uint8 slotID) -> uint8;

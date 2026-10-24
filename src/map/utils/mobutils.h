@@ -96,21 +96,21 @@ void SetupPetSkills(CMobEntity* PMob);
 
 auto JobSkillRankToBaseEvaRank(xi::Job mjob, xi::Job sjob) -> uint8;
 
-uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot);
-uint16 GetMagicEvasion(CMobEntity* PMob);
-uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank);
-uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank);
-uint16 GetBaseToRank(uint8 rank, uint16 level);
-uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat);
-auto   MonipulatorBaseHP(xi::Job mjob, xi::Job sjob, uint8 level) -> uint32;
-void   GetAvailableSpells(CMobEntity* PMob);
-void   InitializeMob(CMobEntity* PMob);
-void   LoadSqlModifiers();
-void   Cleanup();
+auto GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot) -> uint16;
+auto GetMagicEvasion(CMobEntity* PMob) -> uint16;
+auto GetBaseDefEva(CMobEntity* PMob, uint8 rank) -> uint16;
+auto GetBaseSkill(CMobEntity* PMob, uint8 rank) -> uint16;
+auto GetBaseToRank(uint8 rank, uint16 level) -> uint16;
+auto GetSubJobStats(uint8 rank, uint16 level, uint16 stat) -> uint16;
+auto MonipulatorBaseHP(xi::Job mjob, xi::Job sjob, uint8 level) -> uint32;
+void GetAvailableSpells(CMobEntity* PMob);
+void InitializeMob(CMobEntity* PMob);
+void LoadSqlModifiers();
+void Cleanup();
 
 // get modifiers for pool / spawn
-ModsList_t* GetMobPoolMods(uint32 poolId, bool create = false);
-ModsList_t* GetMobSpawnMods(uint32 mobId, bool create = false);
+auto GetMobPoolMods(uint32 poolId, bool create = false) -> ModsList_t*;
+auto GetMobSpawnMods(uint32 mobId, bool create = false) -> ModsList_t*;
 
 void AddSqlModifiers(CMobEntity* PMob);
 

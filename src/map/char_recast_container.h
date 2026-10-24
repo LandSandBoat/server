@@ -35,14 +35,14 @@ public:
     {
     }
 
-    virtual void          Check() override;
-    virtual void          Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
-    virtual void          Del(xi::RecastType type) override;
-    virtual void          Del(xi::RecastType type, xi::Recast id) override;
-    virtual void          DeleteByIndex(xi::RecastType type, uint8 index) override;
-    virtual void          ResetAbilities() override;
-    virtual RecastList_t* GetRecastList(xi::RecastType type) override;
-    virtual void          ChangeJob() override;
+    virtual void Check() override;
+    virtual void Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
+    virtual void Del(xi::RecastType type) override;
+    virtual void Del(xi::RecastType type, xi::Recast id) override;
+    virtual void DeleteByIndex(xi::RecastType type, uint8 index) override;
+    virtual void ResetAbilities() override;
+    virtual auto GetRecastList(xi::RecastType type) -> RecastList_t* override;
+    virtual void ChangeJob() override;
 
 protected:
     RecastList_t RecastItemList;

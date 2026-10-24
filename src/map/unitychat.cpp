@@ -23,7 +23,7 @@ CUnityChat::CUnityChat(uint32 leader)
 {
 }
 
-uint32 CUnityChat::getLeader() const
+auto CUnityChat::getLeader() const -> uint32
 {
     return m_leader;
 }
@@ -35,7 +35,7 @@ void CUnityChat::AddMember(CCharEntity* PChar)
     members.emplace_back(PChar);
 }
 
-bool CUnityChat::DelMember(CCharEntity* PChar)
+auto CUnityChat::DelMember(CCharEntity* PChar) -> bool
 {
     for (uint32 i = 0; i < members.size(); ++i)
     {
@@ -66,7 +66,7 @@ namespace unitychat
 
 std::map<uint32, std::unique_ptr<CUnityChat>> UnityChatList;
 
-CUnityChat* LoadUnityChat(uint32 leader)
+auto LoadUnityChat(uint32 leader) -> CUnityChat*
 {
     auto PUnity           = std::make_unique<CUnityChat>(leader);
     UnityChatList[leader] = std::move(PUnity);
@@ -81,7 +81,7 @@ void UnloadUnityChat(uint32 leader)
     }
 }
 
-bool AddOnlineMember(CCharEntity* PChar, uint32 leader)
+auto AddOnlineMember(CCharEntity* PChar, uint32 leader) -> bool
 {
     if (PChar == nullptr)
     {
@@ -105,7 +105,7 @@ bool AddOnlineMember(CCharEntity* PChar, uint32 leader)
     return false;
 }
 
-bool DelOnlineMember(CCharEntity* PChar, uint32 leader)
+auto DelOnlineMember(CCharEntity* PChar, uint32 leader) -> bool
 {
     if (PChar == nullptr)
     {
@@ -128,7 +128,7 @@ bool DelOnlineMember(CCharEntity* PChar, uint32 leader)
     return false;
 }
 
-CUnityChat* GetUnityChat(uint32 leader)
+auto GetUnityChat(uint32 leader) -> CUnityChat*
 {
     if (auto PUnityChat = UnityChatList.find(leader); PUnityChat != UnityChatList.end())
     {

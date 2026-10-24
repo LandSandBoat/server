@@ -32,7 +32,7 @@ CLuaAbility::CLuaAbility(CAbility* PAbility)
     }
 }
 
-uint16 CLuaAbility::getID()
+auto CLuaAbility::getID() -> uint16
 {
     return m_PLuaAbility->getID();
 }
@@ -42,7 +42,7 @@ auto CLuaAbility::getMsg() -> MsgBasic
     return m_PLuaAbility->getMessage();
 }
 
-uint16 CLuaAbility::getRecast()
+auto CLuaAbility::getRecast() -> uint16
 {
     return static_cast<uint16>(timer::count_seconds(m_PLuaAbility->getRecastTime()));
 }
@@ -52,7 +52,7 @@ auto CLuaAbility::getRecastID() const -> xi::Recast
     return m_PLuaAbility->getRecastId();
 }
 
-uint16 CLuaAbility::getRange()
+auto CLuaAbility::getRange() -> uint16
 {
     return static_cast<uint16>(m_PLuaAbility->getRange());
 }
@@ -67,7 +67,7 @@ auto CLuaAbility::getAOE() const -> uint8
     return m_PLuaAbility->getAOE();
 }
 
-const std::string& CLuaAbility::getName()
+auto CLuaAbility::getName() -> const std::string&
 {
     return m_PLuaAbility->getName();
 }
@@ -77,7 +77,7 @@ auto CLuaAbility::getAnimation() -> ActionAnimation
     return m_PLuaAbility->getAnimationID();
 }
 
-uint16 CLuaAbility::getAddType()
+auto CLuaAbility::getAddType() -> uint16
 {
     return m_PLuaAbility->getAddType();
 }
@@ -97,7 +97,7 @@ void CLuaAbility::setRecast(uint16 recastTime)
     m_PLuaAbility->setRecastTime(std::chrono::seconds(recastTime));
 }
 
-int32 CLuaAbility::getCE()
+auto CLuaAbility::getCE() -> int32
 {
     return m_PLuaAbility->getCE();
 }
@@ -107,7 +107,7 @@ void CLuaAbility::setCE(int32 ce)
     m_PLuaAbility->setCE(ce);
 }
 
-int32 CLuaAbility::getVE()
+auto CLuaAbility::getVE() -> int32
 {
     return m_PLuaAbility->getVE();
 }
@@ -153,7 +153,7 @@ void CLuaAbility::Register()
     SOL_REGISTER("setPostActionCleanupEffect", CLuaAbility::setPostActionCleanupEffect);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaAbility& ability)
+auto operator<<(std::ostream& os, const CLuaAbility& ability) -> std::ostream&
 {
     std::string id = ability.m_PLuaAbility ? std::to_string(ability.m_PLuaAbility->getID()) : "nullptr";
     return os << "CLuaAbility(" << id << ")";

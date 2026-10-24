@@ -40,10 +40,10 @@ public:
     CItemPuppet(const CItemPuppet& other);
     virtual ~CItemPuppet();
 
-    uint8  getEquipSlot() const;
-    void   setEquipSlot(uint32 slot);
-    uint32 getElementSlots() const;
-    void   setElementSlots(uint32 slots);
+    auto getEquipSlot() const -> uint8;
+    void setEquipSlot(uint32 slot);
+    auto getElementSlots() const -> uint32;
+    void setElementSlots(uint32 slots);
 
 private:
     uint8  m_equipSlot;

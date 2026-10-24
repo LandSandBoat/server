@@ -78,7 +78,7 @@ void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
  *                                                                       *
  ************************************************************************/
 
-bool CLatentEffectContainer::HasAllLatentsActive(uint8 slot)
+auto CLatentEffectContainer::HasAllLatentsActive(uint8 slot) -> bool
 {
     auto allActive = true;
     for (auto iter = m_LatentEffectList.begin(); iter != m_LatentEffectList.end(); ++iter)
@@ -1342,7 +1342,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
 }
 
 // Activates a latent effect if true otherwise deactivates the latent effect
-bool CLatentEffectContainer::ApplyLatentEffect(CLatentEffect& effect, bool expression)
+auto CLatentEffectContainer::ApplyLatentEffect(CLatentEffect& effect, bool expression) -> bool
 {
     if (expression)
     {

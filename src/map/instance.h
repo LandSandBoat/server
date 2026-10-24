@@ -50,19 +50,19 @@ public:
 
     void RegisterChar(CCharEntity*);
 
-    uint16 GetID() const;
-    auto   runId() const -> uint32;
+    auto GetID() const -> uint16;
+    auto runId() const -> uint32;
 
-    uint8              GetLevelCap() const;
-    const std::string& GetName();
-    position_t         GetEntryLoc();                          // Get entry location
-    timer::duration    GetTimeLimit();                         // Get instance time limit
-    timer::duration    GetLastTimeUpdate();                    // Get last time a "Time Remaining:" message was displayed
-    uint32             GetProgress() const;                    // Tracks the progress through the current stage
-    uint32             GetStage() const;                       // Tracks the progress through the instance (eg. floor #)
-    timer::duration    GetWipeTime();                          // Get time wipe happened (elapsed since start)
-    timer::duration    GetElapsedTime(timer::time_point tick); // Get elapsed time so far
-    uint64_t           GetLocalVar(const std::string& name) const;
+    auto GetLevelCap() const -> uint8;
+    auto GetName() -> const std::string&;
+    auto GetEntryLoc() -> position_t;                               // Get entry location
+    auto GetTimeLimit() -> timer::duration;                         // Get instance time limit
+    auto GetLastTimeUpdate() -> timer::duration;                    // Get last time a "Time Remaining:" message was displayed
+    auto GetProgress() const -> uint32;                             // Tracks the progress through the current stage
+    auto GetStage() const -> uint32;                                // Tracks the progress through the instance (eg. floor #)
+    auto GetWipeTime() -> timer::duration;                          // Get time wipe happened (elapsed since start)
+    auto GetElapsedTime(timer::time_point tick) -> timer::duration; // Get elapsed time so far
+    auto GetLocalVar(const std::string& name) const -> uint64_t;
 
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location
@@ -73,20 +73,20 @@ public:
     void SetWipeTime(timer::duration time);                 // Set elapsed time when a wipe is detected
     void SetLocalVar(const std::string& name, uint64_t value);
 
-    void CheckTime(timer::time_point tick);  // Check time limit (run instance time script)
-    bool CharRegistered(CCharEntity* PChar); // Check if PChar is registered to this instance
+    void CheckTime(timer::time_point tick);          // Check time limit (run instance time script)
+    auto CharRegistered(CCharEntity* PChar) -> bool; // Check if PChar is registered to this instance
     void ClearEntities();
-    void Fail();                     // Fails the instance (onInstanceFailure)
-    bool Failed();                   // Checks if instance is failed
-    void Complete();                 // Completes the instance (onInstanceComplete)
-    bool Completed();                // Checks if instance is completed
-    void Cancel();                   // Sets instance to fail without calling onInstanceFailure
-    bool CheckFirstEntry(uint32 id); // Checks if this is the first time a char is entering
+    void Fail();                             // Fails the instance (onInstanceFailure)
+    auto Failed() -> bool;                   // Checks if instance is failed
+    void Complete();                         // Completes the instance (onInstanceComplete)
+    auto Completed() -> bool;                // Checks if instance is completed
+    void Cancel();                           // Sets instance to fail without calling onInstanceFailure
+    auto CheckFirstEntry(uint32 id) -> bool; // Checks if this is the first time a char is entering
 
-    uint16 GetSoloBattleMusic();
-    uint16 GetPartyBattleMusic();
-    uint16 GetBackgroundMusicDay();
-    uint16 GetBackgroundMusicNight();
+    auto GetSoloBattleMusic() -> uint16;
+    auto GetPartyBattleMusic() -> uint16;
+    auto GetBackgroundMusicDay() -> uint16;
+    auto GetBackgroundMusicNight() -> uint16;
 
     auto overlayId() const -> uint32;
 

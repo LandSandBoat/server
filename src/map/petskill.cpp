@@ -49,7 +49,7 @@ CPetSkill::CPetSkill(uint16 id)
 {
 }
 
-bool CPetSkill::hasMissMsg() const
+auto CPetSkill::hasMissMsg() const -> bool
 {
     return m_Message == MsgBasic::UsesButMisses ||
            m_Message == MsgBasic::AbilityMisses ||
@@ -59,39 +59,39 @@ bool CPetSkill::hasMissMsg() const
            m_Message == MsgBasic::TargetAnticipates;
 }
 
-bool CPetSkill::isAoE() const
+auto CPetSkill::isAoE() const -> bool
 {
     return m_Aoe > 0 && m_Aoe < 4;
 }
 
-bool CPetSkill::isConal() const
+auto CPetSkill::isConal() const -> bool
 {
     return m_Aoe == 4;
 }
 
-bool CPetSkill::isSingle() const
+auto CPetSkill::isSingle() const -> bool
 {
     return m_Aoe == 0;
 }
 
-bool CPetSkill::isTpFreeSkill() const
+auto CPetSkill::isTpFreeSkill() const -> bool
 {
     // Do not remove users TP when using the skill
     return m_Flag & SKILLFLAG_NO_TP_COST;
 }
 
-bool CPetSkill::isAstralFlow() const
+auto CPetSkill::isAstralFlow() const -> bool
 {
     return m_Flag & SKILLFLAG_ASTRAL_FLOW;
 }
 
-bool CPetSkill::isBloodPactRage() const
+auto CPetSkill::isBloodPactRage() const -> bool
 {
     // means it is a BP Rage
     return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
 }
 
-bool CPetSkill::isBloodPactWard() const
+auto CPetSkill::isBloodPactWard() const -> bool
 {
     // means it is a BP Ward
     return m_Flag & SKILLFLAG_BLOODPACT_WARD;
@@ -132,7 +132,7 @@ void CPetSkill::setMobSkillID(uint16 skillID)
     m_MobSkillID = skillID;
 }
 
-const std::string& CPetSkill::getName() const
+auto CPetSkill::getName() const -> const std::string&
 {
     return m_name;
 }
@@ -193,7 +193,7 @@ void CPetSkill::setValidTargets(uint16 targ)
     m_ValidTarget = targ;
 }
 
-uint16 CPetSkill::getID() const
+auto CPetSkill::getID() const -> uint16
 {
     return m_ID;
 }
@@ -203,12 +203,12 @@ auto CPetSkill::getAnimationID() const -> ActionAnimation
     return static_cast<ActionAnimation>(m_AnimID);
 }
 
-uint16 CPetSkill::getMobSkillID() const
+auto CPetSkill::getMobSkillID() const -> uint16
 {
     return m_MobSkillID;
 }
 
-int16 CPetSkill::getTP() const
+auto CPetSkill::getTP() const -> int16
 {
     return m_TP;
 }
@@ -219,17 +219,17 @@ auto CPetSkill::getHP() const -> int32
 }
 
 // Retrieves the Pet's HP% as it was at the start of mobskill
-uint8 CPetSkill::getHPP() const
+auto CPetSkill::getHPP() const -> uint8
 {
     return m_HPP;
 }
 
-uint16 CPetSkill::getTotalTargets() const
+auto CPetSkill::getTotalTargets() const -> uint16
 {
     return m_TotalTargets;
 }
 
-uint32 CPetSkill::getPrimaryTargetID() const
+auto CPetSkill::getPrimaryTargetID() const -> uint32
 {
     return m_PrimaryTargetID;
 }
@@ -239,7 +239,7 @@ void CPetSkill::setFinalAnimationSub(uint8 newAnimationSub)
     m_FinalAnimationSub = newAnimationSub;
 }
 
-Maybe<uint8> CPetSkill::getFinalAnimationSub()
+auto CPetSkill::getFinalAnimationSub() -> Maybe<uint8>
 {
     return m_FinalAnimationSub;
 }
@@ -254,32 +254,32 @@ auto CPetSkill::getSkillFinishCategory() const -> ActionCategory
     return static_cast<ActionCategory>(m_SkillFinishCategory);
 }
 
-uint16 CPetSkill::getMsgForAction() const
+auto CPetSkill::getMsgForAction() const -> uint16
 {
     return getID();
 }
 
-uint8 CPetSkill::getFlag() const
+auto CPetSkill::getFlag() const -> uint8
 {
     return m_Flag;
 }
 
-uint8 CPetSkill::getAoe() const
+auto CPetSkill::getAoe() const -> uint8
 {
     return m_Aoe;
 }
 
-float CPetSkill::getDistance() const
+auto CPetSkill::getDistance() const -> float
 {
     return m_Distance;
 }
 
-float CPetSkill::getRadius() const
+auto CPetSkill::getRadius() const -> float
 {
     return m_Radius;
 }
 
-int16 CPetSkill::getParam() const
+auto CPetSkill::getParam() const -> int16
 {
     return m_Param;
 }
@@ -289,7 +289,7 @@ auto CPetSkill::getKnockback() const -> Knockback
     return static_cast<Knockback>(m_knockback);
 }
 
-bool CPetSkill::isDamageMsg() const
+auto CPetSkill::isDamageMsg() const -> bool
 {
     return m_Message == MsgBasic::UsesAbilityTakesDamage ||
            m_Message == MsgBasic::UsesSkillTakesDamage ||
@@ -311,32 +311,32 @@ void CPetSkill::setKnockback(uint8 knockback)
     m_knockback = knockback;
 }
 
-uint16 CPetSkill::getValidTargets() const
+auto CPetSkill::getValidTargets() const -> uint16
 {
     return m_ValidTarget;
 }
 
-timer::duration CPetSkill::getAnimationTime() const
+auto CPetSkill::getAnimationTime() const -> timer::duration
 {
     return m_AnimationTime;
 }
 
-timer::duration CPetSkill::getActivationTime() const
+auto CPetSkill::getActivationTime() const -> timer::duration
 {
     return m_ActivationTime;
 }
 
-uint8 CPetSkill::getPrimarySkillchain() const
+auto CPetSkill::getPrimarySkillchain() const -> uint8
 {
     return m_primarySkillchain;
 }
 
-uint8 CPetSkill::getSecondarySkillchain() const
+auto CPetSkill::getSecondarySkillchain() const -> uint8
 {
     return m_secondarySkillchain;
 }
 
-uint8 CPetSkill::getTertiarySkillchain() const
+auto CPetSkill::getTertiarySkillchain() const -> uint8
 {
     return m_tertiarySkillchain;
 }

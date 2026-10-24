@@ -67,26 +67,26 @@ public:
 
     virtual ~CItem();
 
-    uint16 getID() const;
-    uint16 getSubID() const;
-    auto   getFlag() const -> xi::ItemFlag;
-    auto   hasFlag(xi::ItemFlag flag) const -> bool;
-    uint8  getAppraisalID() const;
-    uint8  getAHCat() const;
-    uint32 getQuantity() const;
-    uint32 getStackSize() const;
-    uint32 getBasePrice() const;
-    uint32 getCharPrice() const;
-    uint8  getLocationID() const;
-    uint8  getSlotID() const;
+    auto getID() const -> uint16;
+    auto getSubID() const -> uint16;
+    auto getFlag() const -> xi::ItemFlag;
+    auto hasFlag(xi::ItemFlag flag) const -> bool;
+    auto getAppraisalID() const -> uint8;
+    auto getAHCat() const -> uint8;
+    auto getQuantity() const -> uint32;
+    auto getStackSize() const -> uint32;
+    auto getBasePrice() const -> uint32;
+    auto getCharPrice() const -> uint32;
+    auto getLocationID() const -> uint8;
+    auto getSlotID() const -> uint8;
 
-    bool isSent() const;
-    bool isType(ITEM_TYPE) const;
-    bool isSubType(ITEM_SUBTYPE) const;
+    auto isSent() const -> bool;
+    auto isType(ITEM_TYPE) const -> bool;
+    auto isSubType(ITEM_SUBTYPE) const -> bool;
 
     // process-unique, never reused. Distinguishes this stack from an identical one
     auto uid() const -> uint64;
-    bool isStorageSlip() const;
+    auto isStorageSlip() const -> bool;
 
     void setID(uint16);
     void setSubID(uint16);
@@ -102,14 +102,14 @@ public:
     void setSlotID(uint8 SlotID);
     void setSent(bool sent);
 
-    const std::string& getName() const;
-    void               setName(const std::string& name);
+    auto getName() const -> const std::string&;
+    void setName(const std::string& name);
 
-    const std::string& getSender() const;
-    void               setSender(const std::string& sender);
+    auto getSender() const -> const std::string&;
+    void setSender(const std::string& sender);
 
-    const std::string& getReceiver() const;
-    void               setReceiver(const std::string& receiver);
+    auto getReceiver() const -> const std::string&;
+    void setReceiver(const std::string& receiver);
 
     virtual auto getSignature() const -> const std::string;
     virtual void setSignature(const std::string& signature);
@@ -117,9 +117,9 @@ public:
     auto isDirty() const -> bool;
     void setDirty(bool dirty);
 
-    bool isSoultrapper() const;
+    auto isSoultrapper() const -> bool;
 
-    bool isMannequin() const;
+    auto isMannequin() const -> bool;
 
     auto state() const -> xi::ItemState;
     void setState(xi::ItemState newState, xi::Badge<xi::items::detail::ItemAccess>);

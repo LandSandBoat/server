@@ -132,31 +132,31 @@ public:
     CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator);
     ~CBattlefield();
 
-    uint16                        GetID() const;
-    CZone*                        GetZone() const;
-    auto                          GetZoneID() const -> xi::ZoneId;
-    const std::string&            GetName() const;
-    const BattlefieldInitiator_t& GetInitiator() const;
-    uint8                         GetArea() const;
-    const BattlefieldRecord_t&    GetRecord() const;
-    uint8                         GetStatus() const;
-    uint16                        GetRuleMask() const;
-    timer::time_point             GetStartTime() const;
-    timer::duration               GetTimeInside() const;
-    timer::duration               GetTimeLimit() const;
-    timer::time_point             GetWipeTime() const;
-    size_t                        GetMaxParticipants() const;
-    size_t                        GetPlayerCount() const;
-    uint8                         GetLevelCap() const;
-    timer::duration               GetFinishTime() const;
-    timer::duration               GetRemainingTime() const;
-    timer::duration               GetLastTimeUpdate() const;
-    uint64_t                      GetLocalVar(const std::string& name) const;
-    uint32                        GetArmouryCrate() const;
+    auto GetID() const -> uint16;
+    auto GetZone() const -> CZone*;
+    auto GetZoneID() const -> xi::ZoneId;
+    auto GetName() const -> const std::string&;
+    auto GetInitiator() const -> const BattlefieldInitiator_t&;
+    auto GetArea() const -> uint8;
+    auto GetRecord() const -> const BattlefieldRecord_t&;
+    auto GetStatus() const -> uint8;
+    auto GetRuleMask() const -> uint16;
+    auto GetStartTime() const -> timer::time_point;
+    auto GetTimeInside() const -> timer::duration;
+    auto GetTimeLimit() const -> timer::duration;
+    auto GetWipeTime() const -> timer::time_point;
+    auto GetMaxParticipants() const -> size_t;
+    auto GetPlayerCount() const -> size_t;
+    auto GetLevelCap() const -> uint8;
+    auto GetFinishTime() const -> timer::duration;
+    auto GetRemainingTime() const -> timer::duration;
+    auto GetLastTimeUpdate() const -> timer::duration;
+    auto GetLocalVar(const std::string& name) const -> uint64_t;
+    auto GetArmouryCrate() const -> uint32;
 
-    bool CheckInProgress();
-    bool IsOccupied() const;
-    bool isEntered(CCharEntity* PChar) const;
+    auto CheckInProgress() -> bool;
+    auto IsOccupied() const -> bool;
+    auto isEntered(CCharEntity* PChar) const -> bool;
 
     void ForEachPlayer(FnRef<void(CCharEntity*)> func);
     void ForEachEnemy(FnRef<void(CMobEntity*)> func);
@@ -179,26 +179,26 @@ public:
     void SetLastTimeUpdate(timer::duration time);
     void setArmouryCrate(uint32 entityId);
 
-    void         ApplyLevelRestrictions(CCharEntity* PChar) const;
-    bool         InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false);
-    CBaseEntity* GetEntity(CBaseEntity* PEntity);
-    bool         IsRegistered(CCharEntity* PChar);
-    bool         HasClearance(CCharEntity* PChar) const;
-    void         RemoveRegistration(CCharEntity* PChar);
-    void         GrantClearance(CCharEntity* PChar);
-    bool         RemoveEntity(CBaseEntity* PEntity, uint8 leavecode = 0);
-    void         onTick(timer::time_point time);
-    bool         CanCleanup(bool cleanup = false);
-    bool         Cleanup(timer::time_point time, bool force);
+    void ApplyLevelRestrictions(CCharEntity* PChar) const;
+    auto InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false) -> bool;
+    auto GetEntity(CBaseEntity* PEntity) -> CBaseEntity*;
+    auto IsRegistered(CCharEntity* PChar) -> bool;
+    auto HasClearance(CCharEntity* PChar) const -> bool;
+    void RemoveRegistration(CCharEntity* PChar);
+    void GrantClearance(CCharEntity* PChar);
+    auto RemoveEntity(CBaseEntity* PEntity, uint8 leavecode = 0) -> bool;
+    void onTick(timer::time_point time);
+    auto CanCleanup(bool cleanup = false) -> bool;
+    auto Cleanup(timer::time_point time, bool force) -> bool;
 
     // Groups
     void addGroup(BattlefieldGroup group);
     void handleDeath(CBaseEntity* PEntity);
 
     static void setPlayerEntered(CCharEntity* PChar, bool entered);
-    static bool hasPlayerEntered(CCharEntity* PChar);
+    static auto hasPlayerEntered(CCharEntity* PChar) -> bool;
 
-    static uint16 getBattlefieldArea(CCharEntity* PChar);
+    static auto getBattlefieldArea(CCharEntity* PChar) -> uint16;
 
     uint8 m_isMission;
     bool  m_showTimer = true;

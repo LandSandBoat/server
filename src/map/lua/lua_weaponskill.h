@@ -32,18 +32,18 @@ class CLuaWeaponSkill
 public:
     CLuaWeaponSkill(CWeaponSkill*);
 
-    CWeaponSkill* GetWeaponSkill() const
+    auto GetWeaponSkill() const -> CWeaponSkill*
     {
         return m_PLuaWeaponSkill;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaWeaponSkill& weaponskill);
+    friend auto operator<<(std::ostream& out, const CLuaWeaponSkill& weaponskill) -> std::ostream&;
 
-    uint16 getID();
-    bool   isAoE();
-    bool   isSingle();
+    auto getID() -> uint16;
+    auto isAoE() -> bool;
+    auto isSingle() -> bool;
 
-    bool operator==(const CLuaWeaponSkill& other) const
+    auto operator==(const CLuaWeaponSkill& other) const -> bool
     {
         return this->m_PLuaWeaponSkill == other.m_PLuaWeaponSkill;
     }

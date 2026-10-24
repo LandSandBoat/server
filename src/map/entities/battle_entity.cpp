@@ -117,7 +117,7 @@ CBattleEntity::~CBattleEntity()
     TracyZoneScoped;
 }
 
-bool CBattleEntity::IsDualWielding()
+auto CBattleEntity::IsDualWielding() -> bool
 {
     if (objtype == TYPE_MOB)
     {
@@ -132,12 +132,12 @@ auto CBattleEntity::isDead() const -> bool
     return (health.hp <= 0 || status == xi::Status::Disappear || PAI->IsCurrentState<CDeathState>() || PAI->IsCurrentState<CDespawnState>());
 }
 
-bool CBattleEntity::isAlive()
+auto CBattleEntity::isAlive() -> bool
 {
     return !isDead();
 }
 
-bool CBattleEntity::isFullyHealed()
+auto CBattleEntity::isFullyHealed() -> bool
 {
     if (isAlive())
     {
@@ -149,7 +149,7 @@ bool CBattleEntity::isFullyHealed()
     return false;
 }
 
-bool CBattleEntity::isInDynamis()
+auto CBattleEntity::isInDynamis() -> bool
 {
     auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
     if (PZone)
@@ -159,7 +159,7 @@ bool CBattleEntity::isInDynamis()
     return false;
 }
 
-bool CBattleEntity::isInAssault()
+auto CBattleEntity::isInAssault() -> bool
 {
     if (loc.zone != nullptr)
     {
@@ -169,7 +169,7 @@ bool CBattleEntity::isInAssault()
     return false;
 }
 
-bool CBattleEntity::isInAdoulin()
+auto CBattleEntity::isInAdoulin() -> bool
 {
     if (loc.zone != nullptr)
     {
@@ -189,12 +189,12 @@ bool CBattleEntity::isInAdoulin()
     return false;
 }
 
-bool CBattleEntity::isInGarrison()
+auto CBattleEntity::isInGarrison() -> bool
 {
     return luautils::callGlobal<bool>("xi.garrison.isInGarrison", this);
 }
 
-bool CBattleEntity::inMogHouse()
+auto CBattleEntity::inMogHouse() -> bool
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(this))
     {
@@ -205,7 +205,7 @@ bool CBattleEntity::inMogHouse()
 }
 
 // return true if the mob has immunity
-bool CBattleEntity::hasImmunity(xi::Immunity imID)
+auto CBattleEntity::hasImmunity(xi::Immunity imID) -> bool
 {
     if (objtype == TYPE_MOB || objtype == TYPE_PET)
     {
@@ -214,7 +214,7 @@ bool CBattleEntity::hasImmunity(xi::Immunity imID)
     return false;
 }
 
-bool CBattleEntity::isAsleep()
+auto CBattleEntity::isAsleep() -> bool
 {
     return PAI->IsCurrentState<CInactiveState>();
 }
@@ -224,7 +224,7 @@ auto CBattleEntity::isMounted() const -> bool
     return (animation == xi::Animation::Chocobo || animation == xi::Animation::Mount);
 }
 
-bool CBattleEntity::isSitting()
+auto CBattleEntity::isSitting() -> bool
 {
     return (animation == xi::Animation::Healing || animation == xi::Animation::Sit || (animation >= xi::Animation::Sitchair0 && animation <= xi::Animation::Sitchair10));
 }
@@ -304,7 +304,7 @@ void CBattleEntity::UpdateHealth()
  *                                                                       *
  ************************************************************************/
 
-uint8 CBattleEntity::GetHPP() const
+auto CBattleEntity::GetHPP() const -> uint8
 {
     if (health.hp == 0)
     {
@@ -314,7 +314,7 @@ uint8 CBattleEntity::GetHPP() const
     return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.hp) / static_cast<float>(GetMaxHP())) * 100.0f)));
 }
 
-int32 CBattleEntity::GetMaxHP() const
+auto CBattleEntity::GetMaxHP() const -> int32
 {
     return health.modhp;
 }
@@ -325,7 +325,7 @@ int32 CBattleEntity::GetMaxHP() const
  *                                                                       *
  ************************************************************************/
 
-uint8 CBattleEntity::GetMPP() const
+auto CBattleEntity::GetMPP() const -> uint8
 {
     if (health.mp == 0)
     {
@@ -335,7 +335,7 @@ uint8 CBattleEntity::GetMPP() const
     return static_cast<uint8>(std::max<uint8>(1, std::floor((static_cast<float>(health.mp) / static_cast<float>(GetMaxMP())) * 100.0f)));
 }
 
-int32 CBattleEntity::GetMaxMP() const
+auto CBattleEntity::GetMaxMP() const -> int32
 {
     return health.modmp;
 }
@@ -348,7 +348,7 @@ int32 CBattleEntity::GetMaxMP() const
  *                                                                       *
  ************************************************************************/
 
-uint8 CBattleEntity::UpdateSpeed(bool run)
+auto CBattleEntity::UpdateSpeed(bool run) -> uint8
 {
     int16 outputSpeed = 0;
 
@@ -456,12 +456,12 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
     return speed;
 }
 
-bool CBattleEntity::CanRest()
+auto CBattleEntity::CanRest() -> bool
 {
     return !getMod(xi::Mod::REGEN_DOWN) && !StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::NoRest);
 }
 
-bool CBattleEntity::Rest(float rate)
+auto CBattleEntity::Rest(float rate) -> bool
 {
     bool didRest = false;
 
@@ -592,17 +592,17 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
     return finalDelay;
 }
 
-float CBattleEntity::GetMeleeRange(const CBattleEntity* target) const
+auto CBattleEntity::GetMeleeRange(const CBattleEntity* target) const -> float
 {
     return modelHitboxSize + 2.0f + target->modelHitboxSize;
 }
 
-float CBattleEntity::GetRangedAttackRange()
+auto CBattleEntity::GetRangedAttackRange() -> float
 {
     return 25.0f;
 }
 
-int16 CBattleEntity::GetRangedWeaponDelay(bool forTPCalc)
+auto CBattleEntity::GetRangedWeaponDelay(bool forTPCalc) -> int16
 {
     CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
     CItemWeapon* PAmmo  = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
@@ -636,7 +636,7 @@ int16 CBattleEntity::GetRangedWeaponDelay(bool forTPCalc)
     return delay;
 }
 
-int16 CBattleEntity::GetAmmoDelay()
+auto CBattleEntity::GetAmmoDelay() -> int16
 {
     CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
 
@@ -649,7 +649,7 @@ int16 CBattleEntity::GetAmmoDelay()
     return delay;
 }
 
-uint16 CBattleEntity::GetMainWeaponDmg()
+auto CBattleEntity::GetMainWeaponDmg() -> uint16
 {
     TracyZoneScoped;
 
@@ -754,7 +754,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
     return 0;
 }
 
-uint16 CBattleEntity::GetSubWeaponDmg()
+auto CBattleEntity::GetSubWeaponDmg() -> uint16
 {
     TracyZoneScoped;
 
@@ -813,7 +813,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
     return 0;
 }
 
-uint16 CBattleEntity::GetRangedWeaponDmg()
+auto CBattleEntity::GetRangedWeaponDmg() -> uint16
 {
     TracyZoneScoped;
 
@@ -935,7 +935,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 }
 
 // https://www.bg-wiki.com/ffxi/Weapon_Rank
-uint16 CBattleEntity::GetMainWeaponRank()
+auto CBattleEntity::GetMainWeaponRank() -> uint16
 {
     uint16 wDamage = GetMainWeaponDmg();
 
@@ -953,7 +953,7 @@ uint16 CBattleEntity::GetMainWeaponRank()
     return wDamage / 9;
 }
 
-uint16 CBattleEntity::GetSubWeaponRank()
+auto CBattleEntity::GetSubWeaponRank() -> uint16
 {
     uint16 wDamage = GetSubWeaponDmg();
 
@@ -966,7 +966,7 @@ uint16 CBattleEntity::GetSubWeaponRank()
     return wDamage / 9;
 }
 
-uint16 CBattleEntity::GetRangedWeaponRank()
+auto CBattleEntity::GetRangedWeaponRank() -> uint16
 {
     // Weapon rank uses only the ranged weapon's damage (or ammo for throwing),
     // not the combined ranged + ammo total that GetRangedWeaponDmg() returns.
@@ -1002,7 +1002,7 @@ uint16 CBattleEntity::GetRangedWeaponRank()
  *                                                                       *
  ************************************************************************/
 
-int16 CBattleEntity::addTP(int16 tp)
+auto CBattleEntity::addTP(int16 tp) -> int16
 {
     // When adding TP, we must adjust for Inhibit TP effect, which reduces TP gain.
     if (tp > 0)
@@ -1045,7 +1045,7 @@ int16 CBattleEntity::addTP(int16 tp)
     return abs(tp);
 }
 
-int32 CBattleEntity::addHP(int32 hp)
+auto CBattleEntity::addHP(int32 hp) -> int32
 {
     if (health.hp == 0 && hp < 0)
     {
@@ -1074,7 +1074,7 @@ int32 CBattleEntity::addHP(int32 hp)
     return abs(hp);
 }
 
-int32 CBattleEntity::addMP(int32 mp)
+auto CBattleEntity::addMP(int32 mp) -> int32
 {
     int32 cap = std::clamp(health.mp + mp, 0, GetMaxMP());
     mp        = health.mp - cap;
@@ -1144,7 +1144,7 @@ auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullpt
     return addHP(-amount);
 }
 
-uint16 CBattleEntity::STR()
+auto CBattleEntity::STR() -> uint16
 {
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
 
@@ -1156,37 +1156,37 @@ uint16 CBattleEntity::STR()
     return std::clamp(stats.STR + getMod(xi::Mod::STR), 0, 999);
 }
 
-uint16 CBattleEntity::DEX()
+auto CBattleEntity::DEX() -> uint16
 {
     return std::clamp(stats.DEX + getMod(xi::Mod::DEX), 0, 999);
 }
 
-uint16 CBattleEntity::VIT()
+auto CBattleEntity::VIT() -> uint16
 {
     return std::clamp(stats.VIT + getMod(xi::Mod::VIT), 0, 999);
 }
 
-uint16 CBattleEntity::AGI()
+auto CBattleEntity::AGI() -> uint16
 {
     return std::clamp(stats.AGI + getMod(xi::Mod::AGI), 0, 999);
 }
 
-uint16 CBattleEntity::INT()
+auto CBattleEntity::INT() -> uint16
 {
     return std::clamp(stats.INT + getMod(xi::Mod::INT), 0, 999);
 }
 
-uint16 CBattleEntity::MND()
+auto CBattleEntity::MND() -> uint16
 {
     return std::clamp(stats.MND + getMod(xi::Mod::MND), 0, 999);
 }
 
-uint16 CBattleEntity::CHR()
+auto CBattleEntity::CHR() -> uint16
 {
     return std::clamp(stats.CHR + getMod(xi::Mod::CHR), 0, 999);
 }
 
-uint16 CBattleEntity::ATT(SLOTTYPE slot)
+auto CBattleEntity::ATT(SLOTTYPE slot) -> uint16
 {
     TracyZoneScoped;
 
@@ -1347,7 +1347,7 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
     return std::max<int16>(1, RATT + (RATT * getMod(xi::Mod::RATTP) / 100.f) + std::min<int16>((RATT * getMod(xi::Mod::FOOD_RATTP) / 100.f), getMod(xi::Mod::FOOD_RATT_CAP)));
 }
 
-inline uint32 GetAccFromSkill(uint32 skill)
+inline auto GetAccFromSkill(uint32 skill) -> uint32
 {
     uint32 accuracy = skill;
 
@@ -1483,7 +1483,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
     return std::max(1, RACC + std::min<int16>(((100 + getMod(xi::Mod::FOOD_RACCP) * RACC) / 100), getMod(xi::Mod::FOOD_RACC_CAP)));
 }
 
-uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
+auto CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy) -> uint16
 {
     TracyZoneScoped;
 
@@ -1650,7 +1650,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
     return std::max(1, ACC + std::min<int16>(((100 + getMod(xi::Mod::FOOD_ACCP) * ACC) / 100), getMod(xi::Mod::FOOD_ACC_CAP)));
 }
 
-uint16 CBattleEntity::DEF()
+auto CBattleEntity::DEF() -> uint16
 {
     // VIT * 1.5 for PCs / Alter egos / Fellows / Familiars / Wyverns / Avatars / Automatons / Luopans
     // VIT * 0.5 for Enemy NPCs and pets controlled by Charm
@@ -1723,7 +1723,7 @@ uint16 CBattleEntity::DEF()
     return std::max(1, DEF + (DEF * getMod(xi::Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(xi::Mod::FOOD_DEFP) / 100), getMod(xi::Mod::FOOD_DEF_CAP)));
 }
 
-uint16 CBattleEntity::EVA()
+auto CBattleEntity::EVA() -> uint16
 {
     const bool isAutomaton = this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON;
 
@@ -1768,7 +1768,7 @@ auto CBattleEntity::GetMJob() const -> xi::Job
     return m_mjob;
 }
 
-uint8 CBattleEntity::GetMLevel() const
+auto CBattleEntity::GetMLevel() const -> uint8
 {
     return m_mlvl;
 }
@@ -1783,7 +1783,7 @@ auto CBattleEntity::GetSJob(bool ignoreRestriction) const -> xi::Job
     return m_sjob;
 }
 
-uint8 CBattleEntity::GetSLevel() const
+auto CBattleEntity::GetSLevel() const -> uint8
 {
     if (StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Obliviscence, xi::StatusEffect::SjRestriction }))
     {
@@ -1880,7 +1880,7 @@ void CBattleEntity::SetDeathType(uint8 type)
     m_DeathType = static_cast<DEATH_TYPE>(type);
 }
 
-uint8 CBattleEntity::GetDeathType()
+auto CBattleEntity::GetDeathType() -> uint8
 {
     return static_cast<uint8>(m_DeathType);
 }
@@ -2054,7 +2054,7 @@ void CBattleEntity::delEquipModifiers(CItemEquipment* PItem, bool isDelevel /* =
  *                                                                      *
  ************************************************************************/
 
-int16 CBattleEntity::getMod(xi::Mod modID) const
+auto CBattleEntity::getMod(xi::Mod modID) const -> int16
 {
     if (modID == xi::Mod::NONE)
     {
@@ -2075,7 +2075,7 @@ int16 CBattleEntity::getMod(xi::Mod modID) const
  *  Get the highest value of the specified modifier across all gear     *
  *                                                                      *
  ************************************************************************/
-int16 CBattleEntity::getMaxGearMod(xi::Mod modID)
+auto CBattleEntity::getMaxGearMod(xi::Mod modID) -> int16
 {
     TracyZoneScoped;
 
@@ -2211,7 +2211,7 @@ void CBattleEntity::removePetModifiers(CPetEntity* PPet)
  *                                                                      *
  ************************************************************************/
 
-uint16 CBattleEntity::GetSkill(xi::SkillType SkillID)
+auto CBattleEntity::GetSkill(xi::SkillType SkillID) -> uint16
 {
     if (static_cast<uint8>(SkillID) < MAX_SKILLTYPE)
     {
@@ -2236,12 +2236,12 @@ void CBattleEntity::delTrait(CTrait* PTrait)
     std::erase(TraitList, PTrait);
 }
 
-bool CBattleEntity::hasTrait(uint16 traitID)
+auto CBattleEntity::hasTrait(uint16 traitID) -> bool
 {
     return std::ranges::contains(TraitList, traitID, &CTrait::getID);
 }
 
-bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
+auto CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool
 {
     if (targetFlags & TARGET_ENEMY)
     {
@@ -2287,7 +2287,7 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
             (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));
 }
 
-bool CBattleEntity::CanUseSpell(CSpell* PSpell)
+auto CBattleEntity::CanUseSpell(CSpell* PSpell) -> bool
 {
     TracyZoneScopedN("CBattleEntity::CanUseSpell");
 
@@ -3146,7 +3146,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     this->processActionEffectFlags(action);
 }
 
-bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+auto CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool
 {
     TracyZoneScopedN("CBattleEntity::CanAttack");
 
@@ -3624,7 +3624,7 @@ auto CBattleEntity::GetBattleTarget() const -> CBattleEntity*
     return battleTarget_.resolve<CBattleEntity>();
 }
 
-bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
+auto CBattleEntity::OnAttack(CAttackState& state, action_t& action) -> bool
 {
     TracyZoneScopedN("CBattleEntity::OnAttack");
 
@@ -4036,7 +4036,7 @@ void CBattleEntity::SetBattleStartTime(timer::time_point time)
     m_battleStartTime = time;
 }
 
-timer::duration CBattleEntity::GetBattleTime()
+auto CBattleEntity::GetBattleTime() -> timer::duration
 {
     return timer::now() - m_battleStartTime;
 }
@@ -4046,7 +4046,7 @@ void CBattleEntity::setBattleID(uint16 battleID)
     m_battleID = battleID;
 }
 
-uint16 CBattleEntity::getBattleID()
+auto CBattleEntity::getBattleID() -> uint16
 {
     return m_battleID;
 }
@@ -4064,7 +4064,7 @@ void CBattleEntity::PostTick()
     }
 }
 
-bool CBattleEntity::hasEnmityEXPENSIVE() const
+auto CBattleEntity::hasEnmityEXPENSIVE() const -> bool
 {
     // TODO: This check seems to always fail for pets?
     if (PNotorietyContainer->hasEnmity())

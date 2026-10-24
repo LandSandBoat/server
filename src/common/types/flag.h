@@ -38,8 +38,8 @@ public:
 
     constexpr operator bool() const noexcept;
 
-    constexpr bool operator==(const Flag& other) const noexcept = default;
-    constexpr bool operator!=(const Flag& other) const noexcept = default;
+    constexpr auto operator==(const Flag& other) const noexcept -> bool = default;
+    constexpr auto operator!=(const Flag& other) const noexcept -> bool = default;
 
     static const Flag Yes;
     static const Flag No;

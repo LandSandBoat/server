@@ -55,8 +55,8 @@ public:
     ResultSet(std::string query, ResultSetType type, std::size_t rowsAffected = 0);
     virtual ~ResultSet() = default;
 
-    ResultSet(const ResultSet&)            = delete;
-    ResultSet& operator=(const ResultSet&) = delete;
+    ResultSet(const ResultSet&)                    = delete;
+    auto operator=(const ResultSet&) -> ResultSet& = delete;
 
     auto type() const -> ResultSetType;
     auto query() const -> const std::string&;

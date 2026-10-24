@@ -35,7 +35,7 @@
 #include <regex>
 #include <string>
 
-int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
+auto checksum(unsigned char* buf, uint32 buflen, char checkhash[16]) -> int32
 {
     unsigned char hash[16];
 
@@ -55,7 +55,7 @@ int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 /// @param output Output string
 /// @param input Binary input buffer
 /// @param count Number of bytes to convert
-bool bin2hex(char* output, unsigned char* input, size_t count)
+auto bin2hex(char* output, unsigned char* input, size_t count) -> bool
 {
     char        toHex[] = "0123456789abcdef";
     std::size_t i       = 0;
@@ -70,7 +70,7 @@ bool bin2hex(char* output, unsigned char* input, size_t count)
     return true;
 }
 
-int32 intpow32(int32 base, int32 exponent)
+auto intpow32(int32 base, int32 exponent) -> int32
 {
     int32 power = 1;
     while (exponent)
@@ -91,7 +91,7 @@ int32 intpow32(int32 base, int32 exponent)
  *****************************************************************************/
 // https://github.com/LandSandBoat/server/wiki/Spatial-Orientation-and-Relative-Positions
 
-uint8 worldAngle(const position_t& A, const position_t& B)
+auto worldAngle(const position_t& A, const position_t& B) -> uint8
 {
     if (isWithinDistance(A, B, 0.1f, true))
     {
@@ -103,7 +103,7 @@ uint8 worldAngle(const position_t& A, const position_t& B)
     return static_cast<uint8>((rawAngle % 256 + 256) % 256);
 }
 
-uint8 relativeAngle(uint8 world, int16 diff)
+auto relativeAngle(uint8 world, int16 diff) -> uint8
 {
     int16 angle = world + diff;
     if (angle < 0)
@@ -113,7 +113,7 @@ uint8 relativeAngle(uint8 world, int16 diff)
     return static_cast<uint8>(angle);
 }
 
-int16 angleDifference(uint8 worldAngleA, uint8 worldAngleB)
+auto angleDifference(uint8 worldAngleA, uint8 worldAngleB) -> int16
 {
     int16 degreeDiff = worldAngleA - worldAngleB;
     if (degreeDiff > 128)
@@ -128,32 +128,32 @@ int16 angleDifference(uint8 worldAngleA, uint8 worldAngleB)
     return degreeDiff;
 }
 
-int16 facingAngle(const position_t& A, const position_t& B)
+auto facingAngle(const position_t& A, const position_t& B) -> int16
 {
     uint8 cardinalAngle = worldAngle(A, B);
     return angleDifference(cardinalAngle, A.rotation);
 }
 
-bool facing(const position_t& A, const position_t& B, uint8 coneAngle)
+auto facing(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
 {
     return infront(B, A, coneAngle); // If the target is in front of you, you're facing it!
 }
 
-bool infront(const position_t& A, const position_t& B, uint8 coneAngle)
+auto infront(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
 {
     uint8 facingDiff = abs(facingAngle(B, A)); // Position swap intentional due to how angles are calculated
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
     return (facingDiff < halfAngle);
 }
 
-bool behind(const position_t& A, const position_t& B, uint8 coneAngle)
+auto behind(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
 {
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
     return (facingDiff > 128 - halfAngle); // Abs(Facing Angle) values are always less than 128
 }
 
-bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
+auto beside(const position_t& A, const position_t& B, uint8 coneAngle) -> bool
 {
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
@@ -181,7 +181,7 @@ offset - distance to be placed away from given Position.
 radian - angle relative to given position to be placed at. Zero will be a position infront of the given position.
 Pi will make the position behind the target (180 degrees).
 */
-position_t nearPosition(const position_t& A, float offset, float radian)
+auto nearPosition(const position_t& A, float offset, float radian) -> position_t
 {
     // PI * 0.75 offsets the rotation to the proper place
     float      totalRadians = rotationToRadian(A.rotation) + radian;
@@ -225,7 +225,7 @@ auto isNear(const position_t& a, const position_t& b) -> bool
  *                                                                       *
  ************************************************************************/
 
-int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
+auto hasBit(uint16 value, const uint8* BitArray, uint32 size) -> int32
 {
     if (value >= size * 8)
     {
@@ -235,7 +235,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
     return (BitArray[value >> 3] & (1 << (value % 8)));
 }
 
-int32 addBit(uint16 value, uint8* BitArray, uint32 size)
+auto addBit(uint16 value, uint8* BitArray, uint32 size) -> int32
 {
     if (!hasBit(value, BitArray, size) && (value < size * 8))
     {
@@ -245,7 +245,7 @@ int32 addBit(uint16 value, uint8* BitArray, uint32 size)
     return 0;
 }
 
-int32 delBit(uint16 value, uint8* BitArray, uint32 size)
+auto delBit(uint16 value, uint8* BitArray, uint32 size) -> int32
 {
     if (hasBit(value, BitArray, size))
     {
@@ -255,12 +255,12 @@ int32 delBit(uint16 value, uint8* BitArray, uint32 size)
     return 0;
 }
 
-uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit)
+auto packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit) -> uint32
 {
     return packBitsBE(target, value, 0, bitOffset, lengthInBit);
 }
 
-uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
+auto packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint32
 {
     byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
@@ -284,12 +284,12 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
 
-uint64 unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit)
+auto unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64
 {
     return unpackBitsBE(target, 0, bitOffset, lengthInBit);
 }
 
-uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
+auto unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint64
 {
     byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
@@ -334,12 +334,12 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     return retVal;
 }
 
-uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit)
+auto packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit) -> uint32
 {
     return packBitsLE(target, value, 0, bitOffset, lengthInBit);
 }
 
-uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
+auto packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint32
 {
     byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
@@ -391,12 +391,12 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
 
-uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit)
+auto unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64
 {
     return unpackBitsLE(target, 0, bitOffset, lengthInBit);
 }
 
-uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
+auto unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint64
 {
     byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
@@ -528,7 +528,7 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
     strncpy(target, decodedSignature, LinkshellStringLength);
 }
 
-std::string EncodeStringSignature(const std::string& signature, char* target)
+auto EncodeStringSignature(const std::string& signature, char* target) -> std::string
 {
     uint8 encodedSignature[SignatureStringLength] = {};
 
@@ -677,7 +677,7 @@ auto UnpackSoultrapperName(const uint8* input) -> std::string
     return output;
 }
 
-std::string escape(const std::string& s)
+auto escape(const std::string& s) -> std::string
 {
     std::size_t n = s.length();
     std::string escaped;
@@ -693,7 +693,7 @@ std::string escape(const std::string& s)
     return escaped;
 }
 
-std::vector<std::string> split(const std::string& s, const std::string& delimiter)
+auto split(const std::string& s, const std::string& delimiter) -> std::vector<std::string>
 {
     std::size_t pos_start = 0;
     std::size_t pos_end   = 0;
@@ -713,7 +713,7 @@ std::vector<std::string> split(const std::string& s, const std::string& delimite
     return res;
 }
 
-std::string to_lower(const std::string& s)
+auto to_lower(const std::string& s) -> std::string
 {
     // Branchless ASCII uppercase. Avoids the locale-aware std::tolower (a non-inlined,
     // table-indirected call per character); all keys/names this is used on are ASCII.
@@ -729,7 +729,7 @@ std::string to_lower(const std::string& s)
     return data;
 }
 
-std::string to_upper(const std::string& s)
+auto to_upper(const std::string& s) -> std::string
 {
     // Branchless ASCII uppercase. Avoids the locale-aware std::toupper (a non-inlined,
     // table-indirected call per character); all keys/names this is used on are ASCII.
@@ -746,7 +746,7 @@ std::string to_upper(const std::string& s)
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
-std::string trim(const std::string& str, const std::string& whitespace)
+auto trim(const std::string& str, const std::string& whitespace) -> std::string
 {
     const auto strBegin = str.find_first_not_of(whitespace);
     if (strBegin == std::string::npos)
@@ -776,12 +776,12 @@ void rtrim(std::string& s)
 }
 
 // Returns true if the given str matches the given pattern using standard regex
-bool matches(const std::string& target, const std::string& pattern)
+auto matches(const std::string& target, const std::string& pattern) -> bool
 {
     return std::regex_match(target, std::regex(pattern));
 }
 
-std::string replace(const std::string& target, const std::string& search, const std::string& replace)
+auto replace(const std::string& target, const std::string& search, const std::string& replace) -> std::string
 {
     try
     {
@@ -794,7 +794,7 @@ std::string replace(const std::string& target, const std::string& search, const 
     return "";
 }
 
-look_t stringToLook(std::string str)
+auto stringToLook(std::string str) -> look_t
 {
     look_t out{};
 
@@ -846,25 +846,25 @@ look_t stringToLook(std::string str)
     return out;
 }
 
-bool approximatelyEqual(float a, float b)
+auto approximatelyEqual(float a, float b) -> bool
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
     return fabs(a - b) <= (std::max(fabs(a), fabs(b)) * epsilon);
 }
 
-bool essentiallyEqual(float a, float b)
+auto essentiallyEqual(float a, float b) -> bool
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
     return fabs(a - b) <= (std::min(fabs(a), fabs(b)) * epsilon);
 }
 
-bool definitelyGreaterThan(float a, float b)
+auto definitelyGreaterThan(float a, float b) -> bool
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
     return (a - b) > (std::max(fabs(a), fabs(b)) * epsilon);
 }
 
-bool definitelyLessThan(float a, float b)
+auto definitelyLessThan(float a, float b) -> bool
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
     return (b - a) > (std::max(fabs(a), fabs(b)) * epsilon);
@@ -886,7 +886,7 @@ XI_NOINLINE void hang()
     }
 }
 
-std::unique_ptr<FILE> utils::openFile(const std::string& path, const std::string& mode)
+auto utils::openFile(const std::string& path, const std::string& mode) -> std::unique_ptr<FILE>
 {
     return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
 }
@@ -913,7 +913,7 @@ auto utils::isStringPrintable(const std::string& str, ASCIIMode mode) -> bool
         });
 }
 
-std::string utils::toASCII(const std::string& target, unsigned char replacement)
+auto utils::toASCII(const std::string& target, unsigned char replacement) -> std::string
 {
     std::string out;
     out.reserve(target.size());

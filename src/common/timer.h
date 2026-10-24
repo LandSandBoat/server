@@ -40,25 +40,25 @@ using time_point = clock::time_point;
 inline const time_point start_time = clock::now();
 inline duration         time_offset{ 0 };
 
-inline time_point now()
+inline auto now() -> time_point
 {
     return clock::now() + time_offset;
 }
 
-inline duration get_uptime()
+inline auto get_uptime() -> duration
 {
     return clock::now() - start_time;
 }
 
 // https://stackoverflow.com/questions/35282308/convert-between-c11-clocks/35282833#35282833
-inline earth_time::time_point to_utc(const time_point& timer_tp = now())
+inline auto to_utc(const time_point& timer_tp = now()) -> earth_time::time_point
 {
     const auto utc_now   = earth_time::now();
     const auto timer_now = timer::now();
     return std::chrono::time_point_cast<earth_time::duration>(timer_tp - timer_now + utc_now);
 };
 
-inline time_point from_utc(const earth_time::time_point& utc_tp = earth_time::now())
+inline auto from_utc(const earth_time::time_point& utc_tp = earth_time::now()) -> time_point
 {
     const auto timer_now = timer::now();
     const auto utc_now   = earth_time::now();

@@ -99,7 +99,7 @@ namespace std
 template <>
 struct hash<IPP>
 {
-    size_t operator()(const IPP& ipp) const noexcept
+    auto operator()(const IPP& ipp) const noexcept -> size_t
     {
         return hash<uint64>{}(ipp.getRawIPP());
     }

@@ -51,12 +51,12 @@ CLinkshell::CLinkshell(uint32 id)
 {
 }
 
-uint32 CLinkshell::getID() const
+auto CLinkshell::getID() const -> uint32
 {
     return m_id;
 }
 
-uint16 CLinkshell::getColor() const
+auto CLinkshell::getColor() const -> uint16
 {
     return m_color;
 }
@@ -77,7 +77,7 @@ void CLinkshell::setPostRights(const GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLe
     db::preparedStmt("UPDATE linkshells SET postrights = ? WHERE linkshellid = ?", m_postRights, m_id);
 }
 
-const std::string& CLinkshell::getName()
+auto CLinkshell::getName() -> const std::string&
 {
     return m_name;
 }
@@ -138,7 +138,7 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
 }
 
 // delete a character to the list of online members
-bool CLinkshell::DelMember(CCharEntity* PChar)
+auto CLinkshell::DelMember(CCharEntity* PChar) -> bool
 {
     for (uint32 i = 0; i < members.size(); ++i)
     {
@@ -435,7 +435,7 @@ void UnloadLinkshell(uint32 id)
 }
 
 // add character to online linkshell list, used to send messages
-bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum)
+auto AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum) -> bool
 {
     if (PChar == nullptr)
     {
@@ -463,7 +463,7 @@ bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 l
 }
 
 // remove online member so we don't try to send messages to them
-bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell)
+auto DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell) -> bool
 {
     if (PChar == nullptr)
     {
@@ -489,13 +489,13 @@ bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell)
     return false;
 }
 
-bool IsValidLinkshellName(const std::string& name)
+auto IsValidLinkshellName(const std::string& name) -> bool
 {
     const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
     return !rset || rset->rowsCount() == 0;
 }
 
-uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
+auto RegisterNewLinkshell(const std::string& name, uint16 color) -> uint32
 {
     if (IsValidLinkshellName(name))
     {
@@ -518,7 +518,7 @@ uint32 RegisterNewLinkshell(const std::string& name, uint16 color)
     return 0;
 }
 
-CLinkshell* GetLinkshell(uint32 id)
+auto GetLinkshell(uint32 id) -> CLinkshell*
 {
     if (auto PLinkshell = LinkshellList.find(id); PLinkshell != LinkshellList.end())
     {

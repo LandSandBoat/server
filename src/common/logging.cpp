@@ -88,7 +88,7 @@ public:
         dest.append(outStr.data(), outStr.data() + outStr.size());
     }
 
-    std::unique_ptr<custom_flag_formatter> clone() const override
+    auto clone() const -> std::unique_ptr<custom_flag_formatter> override
     {
         return spdlog::details::make_unique<star_formatter_flag>();
     }
@@ -103,7 +103,7 @@ public:
         dest.append(ServerName.data(), ServerName.data() + ServerName.size());
     }
 
-    std::unique_ptr<custom_flag_formatter> clone() const override
+    auto clone() const -> std::unique_ptr<custom_flag_formatter> override
     {
         return spdlog::details::make_unique<ampersand_formatter_flag>();
     }
@@ -123,7 +123,7 @@ public:
         dest.append(&initial, &initial + 1);
     }
 
-    std::unique_ptr<custom_flag_formatter> clone() const override
+    auto clone() const -> std::unique_ptr<custom_flag_formatter> override
     {
         return spdlog::details::make_unique<underscore_formatter_flag>();
     }
@@ -145,7 +145,7 @@ public:
         dest.append(outStr.data(), outStr.data() + outStr.size());
     }
 
-    std::unique_ptr<custom_flag_formatter> clone() const override
+    auto clone() const -> std::unique_ptr<custom_flag_formatter> override
     {
         return spdlog::details::make_unique<q_formatter_flag>();
     }

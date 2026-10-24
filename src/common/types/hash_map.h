@@ -53,26 +53,26 @@ struct StringHash
 {
     using is_transparent = void;
 
-    [[nodiscard]] std::size_t operator()(std::string_view sv) const noexcept;
-    [[nodiscard]] std::size_t operator()(const std::string& s) const noexcept;
-    [[nodiscard]] std::size_t operator()(const char* s) const;
+    [[nodiscard]] auto operator()(std::string_view sv) const noexcept -> std::size_t;
+    [[nodiscard]] auto operator()(const std::string& s) const noexcept -> std::size_t;
+    [[nodiscard]] auto operator()(const char* s) const -> std::size_t;
 };
 
 //
 // Implementation
 //
 
-inline std::size_t StringHash::operator()(std::string_view sv) const noexcept
+inline auto StringHash::operator()(std::string_view sv) const noexcept -> std::size_t
 {
     return std::hash<std::string_view>{}(sv);
 }
 
-inline std::size_t StringHash::operator()(const std::string& s) const noexcept
+inline auto StringHash::operator()(const std::string& s) const noexcept -> std::size_t
 {
     return std::hash<std::string_view>{}(s);
 }
 
-inline std::size_t StringHash::operator()(const char* s) const
+inline auto StringHash::operator()(const char* s) const -> std::size_t
 {
     return std::hash<std::string_view>{}(std::string_view{ s });
 }

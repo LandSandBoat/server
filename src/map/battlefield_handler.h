@@ -50,19 +50,19 @@ class CBattlefieldHandler
 public:
     CBattlefieldHandler(CZone* PZone);
     ~CBattlefieldHandler();
-    void          HandleBattlefields(timer::time_point tick);                                       // called every tick to handle win/lose conditions, locking the bcnm, etc
-    uint8         LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
-    CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);               // return pointer to battlefield if exists
-    CBattlefield* GetBattlefieldByArea(uint8 area) const;
-    CBattlefield* GetBattlefieldByInitiator(uint32 charID);
-    CBattlefield* GetRegisteredBattlefield(CCharEntity* PChar);                                         // registration only, the player may have lost clearance since
-    uint8         RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
-    bool          RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield = nullptr, uint8 leavecode = 3);
-    bool          IsRegistered(CCharEntity* PChar);
-    bool          ReachedMaxCapacity(int battlefieldId = -1) const;
-    uint8         MaxBattlefieldAreas() const;
-    void          addOrphanedPlayer(CCharEntity* PChar);
-    void          RestoreClearance(CCharEntity* PChar);
+    void HandleBattlefields(timer::time_point tick);                                                // called every tick to handle win/lose conditions, locking the bcnm, etc
+    auto LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration) -> uint8; // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
+    auto GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false) -> CBattlefield*;       // return pointer to battlefield if exists
+    auto GetBattlefieldByArea(uint8 area) const -> CBattlefield*;
+    auto GetBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
+    auto GetRegisteredBattlefield(CCharEntity* PChar) -> CBattlefield*;                                 // registration only, the player may have lost clearance since
+    auto RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration) -> uint8; // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
+    auto RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield = nullptr, uint8 leavecode = 3) -> bool;
+    auto IsRegistered(CCharEntity* PChar) -> bool;
+    auto ReachedMaxCapacity(int battlefieldId = -1) const -> bool;
+    auto MaxBattlefieldAreas() const -> uint8;
+    void addOrphanedPlayer(CCharEntity* PChar);
+    void RestoreClearance(CCharEntity* PChar);
 
 private:
     void RemoveOtherRegistrations(CCharEntity* PChar, const CBattlefield* PKeep);

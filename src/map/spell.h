@@ -1175,52 +1175,52 @@ class CSpell
 public:
     CSpell(SpellID id);
     virtual ~CSpell() = default;
-    virtual std::unique_ptr<CSpell> clone();
+    virtual auto clone() -> std::unique_ptr<CSpell>;
 
-    bool canTargetEnemy() const;
-    bool isBuff() const;
-    bool isSevere();          // damage spells that have severe effects like Death or Impact
-    bool dealsDamage() const; // checks if the spell deals hp damage to target, this is relative to message
+    auto canTargetEnemy() const -> bool;
+    auto isBuff() const -> bool;
+    auto isSevere() -> bool;          // damage spells that have severe effects like Death or Impact
+    auto dealsDamage() const -> bool; // checks if the spell deals hp damage to target, this is relative to message
 
-    uint16             getTotalTargets() const;
-    SpellID            getID();
-    auto               getJob(xi::Job JobID) -> uint8;
-    uint16             getMPCost() const;
-    timer::duration    getCastTime() const;
-    timer::duration    getRecastTime() const;
-    uint16             getValidTarget() const;
-    auto               getAnimationID() const -> ActionAnimation;
-    timer::duration    getAnimationTime() const;
-    auto               getSpellGroup() const -> SPELLGROUP;
-    SPELLFAMILY        getSpellFamily();
-    auto               getSkillType() const -> xi::SkillType;
-    xi::ZoneMisc       getZoneMisc() const;
-    uint8              getAOE() const;
-    uint16             getBase() const;
-    uint16             getElement() const;
-    float              getMultiplier() const;
-    auto               getMessage() const -> MsgBasic;
-    auto               getMagicBurstMessage() const -> MsgBasic;
-    int32              getCE() const;
-    int32              getVE() const;
-    timer::duration    getModifiedRecast() const;
-    float              getRadius() const;
-    uint8              getRequirements() const;
-    uint8              getFlag() const;
-    const std::string& getContentTag();
-    float              getRange() const;
-    uint32             getPrimaryTargetID() const;
-    auto               getFourCC(bool interrupt = false) const -> FourCC;
-    bool               tookEffect() const; // returns true if the spell landed, not resisted or missed
-    bool               hasMPCost();        // checks if spell costs mp to use
-    bool               isHeal();           // is a heal spell
-    bool               isCure();           // is a Cure spell
-    bool               isDebuff();         // is a debuff spell
-    bool               isNa();             // is a -na spell
-    bool               isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
-    bool               canHitShadow();     // check if spell ignores shadows
-    auto               statusEffect() const -> Maybe<xi::StatusEffect>;
-    auto               statusEffectTier() const -> uint8;
+    auto getTotalTargets() const -> uint16;
+    auto getID() -> SpellID;
+    auto getJob(xi::Job JobID) -> uint8;
+    auto getMPCost() const -> uint16;
+    auto getCastTime() const -> timer::duration;
+    auto getRecastTime() const -> timer::duration;
+    auto getValidTarget() const -> uint16;
+    auto getAnimationID() const -> ActionAnimation;
+    auto getAnimationTime() const -> timer::duration;
+    auto getSpellGroup() const -> SPELLGROUP;
+    auto getSpellFamily() -> SPELLFAMILY;
+    auto getSkillType() const -> xi::SkillType;
+    auto getZoneMisc() const -> xi::ZoneMisc;
+    auto getAOE() const -> uint8;
+    auto getBase() const -> uint16;
+    auto getElement() const -> uint16;
+    auto getMultiplier() const -> float;
+    auto getMessage() const -> MsgBasic;
+    auto getMagicBurstMessage() const -> MsgBasic;
+    auto getCE() const -> int32;
+    auto getVE() const -> int32;
+    auto getModifiedRecast() const -> timer::duration;
+    auto getRadius() const -> float;
+    auto getRequirements() const -> uint8;
+    auto getFlag() const -> uint8;
+    auto getContentTag() -> const std::string&;
+    auto getRange() const -> float;
+    auto getPrimaryTargetID() const -> uint32;
+    auto getFourCC(bool interrupt = false) const -> FourCC;
+    auto tookEffect() const -> bool; // returns true if the spell landed, not resisted or missed
+    auto hasMPCost() -> bool;        // checks if spell costs mp to use
+    auto isHeal() -> bool;           // is a heal spell
+    auto isCure() -> bool;           // is a Cure spell
+    auto isDebuff() -> bool;         // is a debuff spell
+    auto isNa() -> bool;             // is a -na spell
+    auto isRaise() -> bool;          // is a raise spell (e.g. Trust: Ferreous Coffin)
+    auto canHitShadow() -> bool;     // check if spell ignores shadows
+    auto statusEffect() const -> Maybe<xi::StatusEffect>;
+    auto statusEffectTier() const -> uint8;
 
     void setRadius(float radius);
     void setTotalTargets(uint16 total);
@@ -1258,12 +1258,12 @@ public:
     void setStatusEffect(Maybe<xi::StatusEffect> statusEffect);
     void setStatusEffectTier(uint8 tier);
 
-    const std::string& getName();
-    void               setName(const std::string& name);
+    auto getName() -> const std::string&;
+    void setName(const std::string& name);
 
 protected:
-    CSpell(const CSpell&)            = default;
-    CSpell& operator=(const CSpell&) = default;
+    CSpell(const CSpell&)                    = default;
+    auto operator=(const CSpell&) -> CSpell& = default;
 
 private:
     SpellID                        m_ID;                // spell id
@@ -1307,11 +1307,11 @@ namespace spell
 
 void LoadSpellList();
 
-CSpell* GetSpellByMonsterSkillId(uint16 SkillID);
-CSpell* GetSpell(SpellID SpellID);
-bool    CanUseSpell(CBattleEntity* PCaster, SpellID SpellID);
-bool    CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell);
-bool    CanUseSpellWith(SpellID spellId, xi::Job job, uint8 level);
+auto GetSpellByMonsterSkillId(uint16 SkillID) -> CSpell*;
+auto GetSpell(SpellID SpellID) -> CSpell*;
+auto CanUseSpell(CBattleEntity* PCaster, SpellID SpellID) -> bool;
+auto CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell) -> bool;
+auto CanUseSpellWith(SpellID spellId, xi::Job job, uint8 level) -> bool;
 
 auto lookupIdByName(std::string_view name) -> Maybe<SpellID>;
 

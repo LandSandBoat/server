@@ -45,13 +45,15 @@ static_assert(sizeof(void*) == 8, "Only 64-bit builds are supported");
 #define XI_DEBUG_BREAK_IF(_CONDITION_) \
     static_assert(false, "Use of XI_DEBUG_BREAK_IF is deprecated. Check your conditions and log appropriately instead.")
 
-#define DISALLOW_COPY(TypeName)                    \
-    TypeName(const TypeName&)            = delete; \
-    TypeName& operator=(const TypeName&) = delete;
+// clang-format off
+#define DISALLOW_COPY(TypeName)                            \
+    TypeName(const TypeName&)                    = delete; \
+    auto operator=(const TypeName&) -> TypeName& = delete;
 
-#define DISALLOW_MOVE(TypeName)               \
-    TypeName(TypeName&&)            = delete; \
-    TypeName& operator=(TypeName&&) = delete;
+#define DISALLOW_MOVE(TypeName)                       \
+    TypeName(TypeName&&)                    = delete; \
+    auto operator=(TypeName&&) -> TypeName& = delete;
+// clang-format on
 
 #define DISALLOW_COPY_AND_MOVE(TypeName) \
     DISALLOW_COPY(TypeName)              \

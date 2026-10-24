@@ -22,7 +22,7 @@
 #include "search_application.h"
 #include "search_engine.h"
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     const auto searchApp = std::make_unique<SearchApplication>(argc, argv);
 

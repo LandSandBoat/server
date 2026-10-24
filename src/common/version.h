@@ -24,10 +24,10 @@
 namespace version
 {
 
-const char* GetGitSha();
-const char* GetGitBranch();
-const char* GetGitDate();
-const char* GetGitCommitSubject();
-const char* GetVersionString();
+auto GetGitSha() -> const char*;
+auto GetGitBranch() -> const char*;
+auto GetGitDate() -> const char*;
+auto GetGitCommitSubject() -> const char*;
+auto GetVersionString() -> const char*;
 
 } // namespace version

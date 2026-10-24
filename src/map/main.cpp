@@ -25,7 +25,7 @@
 
 #include <memory>
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     auto mapApp = std::make_unique<MapApplication>(argc, argv);
 

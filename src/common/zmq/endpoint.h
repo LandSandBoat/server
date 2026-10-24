@@ -31,10 +31,10 @@ public:
     ZmqEndpoint() = default;
     virtual ~ZmqEndpoint();
 
-    ZmqEndpoint(const ZmqEndpoint&)            = delete;
-    ZmqEndpoint& operator=(const ZmqEndpoint&) = delete;
-    ZmqEndpoint(ZmqEndpoint&&)                 = delete;
-    ZmqEndpoint& operator=(ZmqEndpoint&&)      = delete;
+    ZmqEndpoint(const ZmqEndpoint&)                    = delete;
+    auto operator=(const ZmqEndpoint&) -> ZmqEndpoint& = delete;
+    ZmqEndpoint(ZmqEndpoint&&)                         = delete;
+    auto operator=(ZmqEndpoint&&) -> ZmqEndpoint&      = delete;
 
     [[nodiscard]] auto opened() const -> bool;
 

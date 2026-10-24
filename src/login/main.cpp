@@ -27,7 +27,7 @@
 #include <ms/applink.c>
 #endif
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     const auto connectApp = std::make_unique<ConnectApplication>(argc, argv);
 

@@ -34,22 +34,22 @@ public:
     CAlliance(uint32 id);
     ~CAlliance();
 
-    uint32  m_AllianceID;
-    CParty* getMainParty();
-    void    setMainParty(CParty* aLeader);
-    void    addParty(CParty* party);
-    void    addParty(uint32 partyid) const;
-    void    pushParty(CParty* PParty, uint8 number);
-    void    removeParty(CParty* party);
-    void    delParty(CParty* party);
-    void    dissolveAlliance(bool playerInitiated = true);
-    void    assignAllianceLeader(const std::string& name);
-    bool    hasOnlyOneParty() const;
-    bool    isFull() const;
+    uint32 m_AllianceID;
+    auto   getMainParty() -> CParty*;
+    void   setMainParty(CParty* aLeader);
+    void   addParty(CParty* party);
+    void   addParty(uint32 partyid) const;
+    void   pushParty(CParty* PParty, uint8 number);
+    void   removeParty(CParty* party);
+    void   delParty(CParty* party);
+    void   dissolveAlliance(bool playerInitiated = true);
+    void   assignAllianceLeader(const std::string& name);
+    auto   hasOnlyOneParty() const -> bool;
+    auto   isFull() const -> bool;
 
     std::vector<CParty*> partyList; // list of parties in alliance on this server
 
 private:
     CParty* aLeader; // alliance lead party
-    uint32  loadPartyCount() const;
+    auto    loadPartyCount() const -> uint32;
 };

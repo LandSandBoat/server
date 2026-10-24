@@ -124,17 +124,17 @@ CItemEquipment::~CItemEquipment()
 {
 }
 
-uint16 CItemEquipment::getModelId() const
+auto CItemEquipment::getModelId() const -> uint16
 {
     return m_modelID;
 }
 
-uint8 CItemEquipment::getShieldSize() const
+auto CItemEquipment::getShieldSize() const -> uint8
 {
     return m_shieldSize;
 }
 
-uint16 CItemEquipment::getEquipSlotId() const
+auto CItemEquipment::getEquipSlotId() const -> uint16
 {
     return m_equipSlotID;
 }
@@ -144,7 +144,7 @@ uint16 CItemEquipment::getEquipSlotId() const
 /// Used for items which occupy multiple equipslots - eg. Cloaks which occupy body and head
 /// </summary>
 /// <returns>An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</returns>
-uint16 CItemEquipment::getRemoveSlotId() const
+auto CItemEquipment::getRemoveSlotId() const -> uint16
 {
     return m_removeSlotID;
 }
@@ -155,22 +155,22 @@ uint16 CItemEquipment::getRemoveSlotId() const
 /// eg. Mandragora Suit which has a getRemoveSlotId of body and legs - but appearance wise occupies hands, body, legs, and feet
 /// </summary>
 /// <returns>An integer representing a bitmask corresponding to BattleEntity SLOTTYPE</returns>
-uint16 CItemEquipment::getRemoveSlotLookId() const
+auto CItemEquipment::getRemoveSlotLookId() const -> uint16
 {
     return m_removeSlotLookID;
 }
 
-uint8 CItemEquipment::getReqLvl() const
+auto CItemEquipment::getReqLvl() const -> uint8
 {
     return m_reqLvl;
 }
 
-uint8 CItemEquipment::getILvl() const
+auto CItemEquipment::getILvl() const -> uint8
 {
     return m_iLvl;
 }
 
-uint32 CItemEquipment::getJobs() const
+auto CItemEquipment::getJobs() const -> uint32
 {
     return m_jobs;
 }
@@ -226,12 +226,12 @@ void CItemEquipment::setRemoveSlotLookId(uint16 removeSlotLook)
     m_removeSlotLookID = removeSlotLook;
 }
 
-uint8 CItemEquipment::getSlotType() const
+auto CItemEquipment::getSlotType() const -> uint8
 {
     return m_equipSlotID ? static_cast<uint8>(std::bit_width(static_cast<uint32>(m_equipSlotID)) - 1) : 0;
 }
 
-uint8 CItemEquipment::getSuperiorLevel()
+auto CItemEquipment::getSuperiorLevel() -> uint8
 {
     return m_superiorLevel;
 }
@@ -241,7 +241,7 @@ void CItemEquipment::setSuperiorLevel(uint8 level)
     m_superiorLevel = level;
 }
 
-bool CItemEquipment::isEquippableByRace(uint8 race) const
+auto CItemEquipment::isEquippableByRace(uint8 race) const -> bool
 {
     // first note that a single race actually represents a race and sex combination (for example hume-male)
     // the EQUIPEMENT_ONLY_RACE mod is a multi-bit flag (where each set bit denotes that a specific race can use that equip)
@@ -263,20 +263,20 @@ bool CItemEquipment::isEquippableByRace(uint8 race) const
 }
 
 // percentage of damage blocked by shield
-uint8 CItemEquipment::getShieldAbsorption() const
+auto CItemEquipment::getShieldAbsorption() const -> uint8
 {
     return m_absorption;
 }
 
 // check if item is a shield via shield size
-bool CItemEquipment::IsShield() const
+auto CItemEquipment::IsShield() const -> bool
 {
     return m_shieldSize > 0 && m_shieldSize <= 6;
 }
 
 // return script type for events such as gear change, zone change, etc
 // the function returns the type of event which saves us from having to check in all events
-uint16 CItemEquipment::getScriptType() const
+auto CItemEquipment::getScriptType() const -> uint16
 {
     return m_scriptType;
 }
@@ -317,7 +317,7 @@ void CItemEquipment::addModifier(CModifier modifier)
     modList.emplace_back(modifier);
 }
 
-int16 CItemEquipment::getModifier(xi::Mod mod) const
+auto CItemEquipment::getModifier(xi::Mod mod) const -> int16
 {
     int16 totalAmount = 0;
     for (const auto& i : modList)
@@ -341,7 +341,7 @@ void CItemEquipment::addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, 
     latentList.emplace_back(latent);
 }
 
-bool CItemEquipment::delModifier(xi::Mod mod, int16 modValue)
+auto CItemEquipment::delModifier(xi::Mod mod, int16 modValue) -> bool
 {
     auto it = std::ranges::find_if(modList,
                                    [mod, modValue](const CModifier& compare)
@@ -358,7 +358,7 @@ bool CItemEquipment::delModifier(xi::Mod mod, int16 modValue)
     return true;
 }
 
-bool CItemEquipment::delPetModifier(xi::Mod mod, PetModType petType, int16 modValue)
+auto CItemEquipment::delPetModifier(xi::Mod mod, PetModType petType, int16 modValue) -> bool
 {
     auto it = std::ranges::find_if(petModList,
                                    [mod, petType, modValue](const CPetModifier& compare)
@@ -410,7 +410,7 @@ void CItemEquipment::LoadAugment(uint8 slot, uint16 augment)
     augData.Augments[slot] = std::bit_cast<Exdata::Augment>(augment);
 }
 
-bool CItemEquipment::PushAugment(uint16 type, uint8 value)
+auto CItemEquipment::PushAugment(uint16 type, uint8 value) -> bool
 {
     auto&  augData = this->exdata<Exdata::AugmentStandard>();
     uint8  slot    = 0;

@@ -38,7 +38,7 @@ struct DatasetRoot
         glz::get_name<Payload>(),
         Payload);
 
-    static constexpr bool requires_key(const std::string_view key, const bool isNullable)
+    static constexpr auto requires_key(const std::string_view key, const bool isNullable) -> bool
     {
         return key != "meta" && !isNullable;
     }

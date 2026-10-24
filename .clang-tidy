@@ -16,7 +16,11 @@ Checks: >
   modernize-use-emplace,
   modernize-use-nullptr,
   modernize-use-override,
+  modernize-use-trailing-return-type,
   performance-*,
+
+CheckOptions:
+  modernize-use-trailing-return-type.TransformLambdas: none
 
 # TODO: Enable these
 #  concurrency-mt-unsafe,

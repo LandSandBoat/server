@@ -37,17 +37,17 @@ CLuaWeaponSkill::CLuaWeaponSkill(CWeaponSkill* PSkill)
     }
 }
 
-bool CLuaWeaponSkill::isSingle()
+auto CLuaWeaponSkill::isSingle() -> bool
 {
     return !m_PLuaWeaponSkill->isAoE();
 }
 
-bool CLuaWeaponSkill::isAoE()
+auto CLuaWeaponSkill::isAoE() -> bool
 {
     return m_PLuaWeaponSkill->isAoE();
 }
 
-uint16 CLuaWeaponSkill::getID()
+auto CLuaWeaponSkill::getID() -> uint16
 {
     return m_PLuaWeaponSkill->getID();
 }
@@ -60,7 +60,7 @@ void CLuaWeaponSkill::Register()
     SOL_REGISTER("getID", CLuaWeaponSkill::getID);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaWeaponSkill& weaponskill)
+auto operator<<(std::ostream& os, const CLuaWeaponSkill& weaponskill) -> std::ostream&
 {
     std::string id = weaponskill.m_PLuaWeaponSkill ? std::to_string(weaponskill.m_PLuaWeaponSkill->getID()) : "nullptr";
     return os << "CLuaWeaponSkill(" << id << ")";

@@ -921,75 +921,75 @@ void RestockFishingAreas();
 void CreateFishingPools();
 
 // Calculations
-uint8               GetMoonPhase();
-uint8               GetHookTime(CCharEntity* PChar);
-float               GetMonthlyTidalInfluence(fish_t* fish);
-float               GetHourlyModifier(fish_t* fish);
-float               GetMoonModifier(fish_t* fish);
-uint8               GetLuckyMoonModifier();
-float               GetWeatherModifier(const CCharEntity* PChar);
-uint16              CalculateStamina(int skill, uint8 count);
-uint16              CalculateAttack(Legendary legendary, uint8 difficulty, rod_t* rod);
-uint16              CalculateHeal(Legendary legendary, uint8 difficulty, rod_t* rod);
-uint8               CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, Legendary legendaryCatch, IsNM NM);
-uint8               CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendary_flags, uint8 sizeType, rod_t* rod, bait_t* bait);
-uint8               CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSkill, uint8 sizeType, rod_t* rod, bait_t* bait, Legendary legendary);
-uint16              CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod);
-uint8               CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count);
-uint8               CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count);
-uint8               CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod);
-uint16              CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod);
-big_fish_stats_t    CalculateBigFishStats(uint16 minLength, uint16 maxLength);
-fishmob_modifiers_t CalculateMobModifiers(fishmob_t* mob);
+auto GetMoonPhase() -> uint8;
+auto GetHookTime(CCharEntity* PChar) -> uint8;
+auto GetMonthlyTidalInfluence(fish_t* fish) -> float;
+auto GetHourlyModifier(fish_t* fish) -> float;
+auto GetMoonModifier(fish_t* fish) -> float;
+auto GetLuckyMoonModifier() -> uint8;
+auto GetWeatherModifier(const CCharEntity* PChar) -> float;
+auto CalculateStamina(int skill, uint8 count) -> uint16;
+auto CalculateAttack(Legendary legendary, uint8 difficulty, rod_t* rod) -> uint16;
+auto CalculateHeal(Legendary legendary, uint8 difficulty, rod_t* rod) -> uint16;
+auto CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, Legendary legendaryCatch, IsNM NM) -> uint8;
+auto CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendary_flags, uint8 sizeType, rod_t* rod, bait_t* bait) -> uint8;
+auto CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSkill, uint8 sizeType, rod_t* rod, bait_t* bait, Legendary legendary) -> uint8;
+auto CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod) -> uint16;
+auto CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
+auto CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
+auto CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod) -> uint8;
+auto CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod) -> uint16;
+auto CalculateBigFishStats(uint16 minLength, uint16 maxLength) -> big_fish_stats_t;
+auto CalculateMobModifiers(fishmob_t* mob) -> fishmob_modifiers_t;
 
 // Data Access
-fishing_gear_t GetFishingGear(CCharEntity* PChar);
-bool           IsLiveBait(bait_t* bait);
-uint8          GetFishingSkill(CCharEntity* PChar);
-uint8          GetBaitPower(bait_t* bait, fish_t* fish);
-auto           GetFishPool(xi::ZoneId zoneID, uint8 areaID, uint16 BaitID) -> std::map<fish_t*, uint16>;
-auto           GetItemPool(xi::ZoneId zoneID, uint8 areaID) -> std::vector<fish_t*>;
-auto           GetMobPool(xi::ZoneId zoneId) -> std::vector<fishmob_t*>;
-auto           GetChestPool(xi::ZoneId zoneId) -> std::vector<uint32>;
-auto           GetMessageOffset(xi::ZoneId ZoneID) -> uint16;
-auto           IsFish(const CItem* fish) -> bool;
-auto           GetFish(uint32 fishId) -> fish_t*;
+auto GetFishingGear(CCharEntity* PChar) -> fishing_gear_t;
+auto IsLiveBait(bait_t* bait) -> bool;
+auto GetFishingSkill(CCharEntity* PChar) -> uint8;
+auto GetBaitPower(bait_t* bait, fish_t* fish) -> uint8;
+auto GetFishPool(xi::ZoneId zoneID, uint8 areaID, uint16 BaitID) -> std::map<fish_t*, uint16>;
+auto GetItemPool(xi::ZoneId zoneID, uint8 areaID) -> std::vector<fish_t*>;
+auto GetMobPool(xi::ZoneId zoneId) -> std::vector<fishmob_t*>;
+auto GetChestPool(xi::ZoneId zoneId) -> std::vector<uint32>;
+auto GetMessageOffset(xi::ZoneId ZoneID) -> uint16;
+auto IsFish(const CItem* fish) -> bool;
+auto GetFish(uint32 fishId) -> fish_t*;
 
 // Fishing Areas
-bool           onSegment(areavector_t p, areavector_t q, areavector_t r);
-int            orientation(areavector_t p, areavector_t q, areavector_t r);
-bool           doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t q2);
-bool           isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uint8 height);
-bool           isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 height);
-fishingarea_t* GetFishingArea(CCharEntity* PChar);
+auto onSegment(areavector_t p, areavector_t q, areavector_t r) -> bool;
+auto orientation(areavector_t p, areavector_t q, areavector_t r) -> int;
+auto doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t q2) -> bool;
+auto isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uint8 height) -> bool;
+auto isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 height) -> bool;
+auto GetFishingArea(CCharEntity* PChar) -> fishingarea_t*;
 
 // Catching
-bool  BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate);
-void  RodBreak(CCharEntity* PChar);
-bool  CanFishMob(CMobEntity* PMob);
-int32 LoseCatch(CCharEntity* PChar, uint8 FailType);
-int32 CatchNothing(CCharEntity* PChar, uint8 FailType);
-int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count);
-int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count);
-int32 CatchMonster(CCharEntity* PChar, uint32 MobID);
-int32 CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle);
+auto BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate) -> bool;
+void RodBreak(CCharEntity* PChar);
+auto CanFishMob(CMobEntity* PMob) -> bool;
+auto LoseCatch(CCharEntity* PChar, uint8 FailType) -> int32;
+auto CatchNothing(CCharEntity* PChar, uint8 FailType) -> int32;
+auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count) -> int32;
+auto CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count) -> int32;
+auto CatchMonster(CCharEntity* PChar, uint32 MobID) -> int32;
+auto CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle) -> int32;
 
 // Messaging
 void SendSenseMessage(CCharEntity* PChar, fishresponse_t* response);
-bool SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobLoadFailBait cancelOnMobLoadFailBait);
+auto SendHookResponse(CCharEntity* PChar, fishresponse_t* response, CancelOnMobLoadFailBait cancelOnMobLoadFailBait) -> bool;
 
 // Skillup
 void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType);
 
 // Fishing
-void             InterruptFishing(CCharEntity* PChar);
-void             StartFishing(CCharEntity* PChar);
-void             ReelInCatch(CCharEntity* PChar);
-uint8            UnhookMob(CCharEntity* PChar, Lost lost);
-fishresponse_t*  FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* bait, fishingarea_t* area);
-catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* response, rod_t* rod);
-void             FishingAction(CCharEntity* PChar, GP_CLI_COMMAND_FISHING_2_MODE mode, uint32 para, uint32 para2);
-auto             GetFish(uint16 itemid) -> std::unique_ptr<CItem>;
+void InterruptFishing(CCharEntity* PChar);
+void StartFishing(CCharEntity* PChar);
+void ReelInCatch(CCharEntity* PChar);
+auto UnhookMob(CCharEntity* PChar, Lost lost) -> uint8;
+auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* bait, fishingarea_t* area) -> fishresponse_t*;
+auto ReelCheck(CCharEntity* PChar, fishresponse_t* response, rod_t* rod) -> catchresponse_t*;
+void FishingAction(CCharEntity* PChar, GP_CLI_COMMAND_FISHING_2_MODE mode, uint32 para, uint32 para2);
+auto GetFish(uint16 itemid) -> std::unique_ptr<CItem>;
 
 // Initialization
 void LoadFishingMessages();

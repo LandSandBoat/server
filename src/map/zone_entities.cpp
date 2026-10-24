@@ -88,7 +88,7 @@ constexpr auto CHARACTER_SYNC_PARTY_SIGNIFICANCE      = 100000U;
 constexpr auto CHARACTER_SYNC_ALLI_SIGNIFICANCE       = 10000U;
 constexpr auto INTERMEDIATE_CONTAINER_RESERVE_SIZE    = 16U;
 
-inline bool isWithinVerticalDistance(CBaseEntity* source, CBaseEntity* target)
+inline auto isWithinVerticalDistance(CBaseEntity* source, CBaseEntity* target) -> bool
 {
     const float verticalDistance = target->loc.p.y - source->loc.p.y - VERTICAL_RENDER_DISTANCE_OFFSET;
     return std::abs(verticalDistance) <= ENTITY_VERTICAL_RENDER_DISTANCE;
@@ -632,7 +632,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 
-uint16 CZoneEntities::GetNewCharTargID()
+auto CZoneEntities::GetNewCharTargID() -> uint16
 {
     // NOTE: 0x0D (char_update) entity updates are valid for 1024 to 1791
     uint16 targid = 0x400;
@@ -731,7 +731,7 @@ auto CZoneEntities::GetUsedDynamicTargIDsCount() const -> std::size_t
     return m_dynamicTargIds.size();
 }
 
-bool CZoneEntities::CharListEmpty() const
+auto CZoneEntities::CharListEmpty() const -> bool
 {
     return m_charList.empty();
 }
@@ -1049,7 +1049,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
         });
 }
 
-float getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar)
+auto getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar) -> float
 {
     if (targetChar->m_GMlevel > 0 && !targetChar->m_isGMHidden)
     {
@@ -1323,7 +1323,7 @@ void CZoneEntities::SpawnTransport(CCharEntity* PChar)
     }
 }
 
-CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
+auto CZoneEntities::GetEntity(uint16 targid, uint8 filter) -> CBaseEntity*
 {
     const auto findEntity = [&](const EntityList_t& entityList) -> CBaseEntity*
     {
@@ -1418,7 +1418,7 @@ void CZoneEntities::SavePlayTime()
     }
 }
 
-CCharEntity* CZoneEntities::GetCharByName(const std::string& name)
+auto CZoneEntities::GetCharByName(const std::string& name) -> CCharEntity*
 {
     TracyZoneScoped;
 
@@ -1432,7 +1432,7 @@ CCharEntity* CZoneEntities::GetCharByName(const std::string& name)
     return nullptr;
 }
 
-CCharEntity* CZoneEntities::GetCharByID(uint32 id)
+auto CZoneEntities::GetCharByID(uint32 id) -> CCharEntity*
 {
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
     {
@@ -2237,7 +2237,7 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
     co_return;
 }
 
-CZone* CZoneEntities::GetZone()
+auto CZoneEntities::GetZone() -> CZone*
 {
     return m_zone;
 }

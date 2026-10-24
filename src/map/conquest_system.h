@@ -47,7 +47,7 @@ namespace conquest
 
 using ShouldUpdateZones = xi::Flag<struct ShouldUpdateZonesTag>;
 
-ConquestData& GetConquestData(); // Cached data with influences / region controls
+auto GetConquestData() -> ConquestData&; // Cached data with influences / region controls
 
 void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
 
@@ -66,16 +66,16 @@ void HandleWeeklyTallyStart();                                                  
 void HandleWeeklyTallyEnd(const std::vector<region_control_t>& regionControls);                              // Triggered when conquest update ends (by world server msg)
 
 // Ranking for 3 nations
-uint8 GetBalance();
-uint8 GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst);
+auto GetBalance() -> uint8;
+auto GetBalance(uint8 sandoria, uint8 bastok, uint8 windurst) -> uint8;
 
 // Determine which nations are allied
-uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst);
+auto GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst) -> uint8;
 
 auto IsAlliance() -> bool;                            // Determine if losing nations are allied
 auto GetNextTally() -> uint8;                         // Vana'diel days until next weekly conquest tally
 auto GetRegionOwner(xi::Region region) -> xi::Nation; // Get owner of the region
 
-uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
+auto AddConquestPoints(CCharEntity* PChar, uint32 exp) -> uint32; // Add conquest points
 
 }; // namespace conquest

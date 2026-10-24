@@ -287,7 +287,7 @@ uint8 subkey[4168] = {
 };
 // clang-format on
 
-inline uint32 TT(uint32 working, uint32* S)
+inline auto TT(uint32 working, uint32* S) -> uint32
 {
     return (((S[256 + ((working >> 8) & 0xff)] & 1) ^ 32) + ((S[768 + (working >> 24)] & 1) ^ 32) + S[512 + ((working >> 16) & 0xff)] + S[working & 0xff]);
 }
@@ -449,7 +449,7 @@ void blowfish_encipher_blocks(uint32* data, size_t count, const uint32* P, uint3
     }
 }
 
-uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S)
+auto blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S) -> uint32*
 {
     int16  i     = 0;
     int16  j     = 0;

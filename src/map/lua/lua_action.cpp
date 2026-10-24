@@ -47,7 +47,7 @@ void CLuaAction::ID(const uint32 actionTargetId, const uint32 newactionTargetId)
 }
 
 // Get the first (primary) target's long ID, if available.
-uint32 CLuaAction::getPrimaryTargetID() const
+auto CLuaAction::getPrimaryTargetID() const -> uint32
 {
     if (!m_PLuaAction->targets.empty())
     {
@@ -311,7 +311,7 @@ void CLuaAction::Register()
     SOL_REGISTER("addAdditionalTarget", CLuaAction::addAdditionalTarget);
 };
 
-std::ostream& operator<<(std::ostream& os, const CLuaAction& action)
+auto operator<<(std::ostream& os, const CLuaAction& action) -> std::ostream&
 {
     std::string id = action.m_PLuaAction ? std::to_string(action.m_PLuaAction->actorId) : "nullptr";
     return os << "CLuaAction(" << id << ")";

@@ -33,14 +33,14 @@ public:
     CNotorietyContainer(CBattleEntity* owner);
     ~CNotorietyContainer() = default;
 
-    std::set<CBattleEntity*>::iterator begin();
-    std::set<CBattleEntity*>::iterator end();
+    auto begin() -> std::set<CBattleEntity*>::iterator;
+    auto end() -> std::set<CBattleEntity*>::iterator;
 
-    void        add(CBattleEntity* entity);
-    void        remove(CBattleEntity* entity);
-    std::size_t size();
+    void add(CBattleEntity* entity);
+    void remove(CBattleEntity* entity);
+    auto size() -> std::size_t;
 
-    bool hasEnmity();
+    auto hasEnmity() -> bool;
 
 private:
     CBattleEntity*           m_POwner;

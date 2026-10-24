@@ -303,14 +303,14 @@ auto GetNPCByID(uint32 npcid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetMobByID(uint32 mobid, const sol::object& instanceObj) -> CBaseEntity*;
 auto GetEntityByID(uint32 mobid, const sol::object& instanceObj, const sol::object& arg3) -> CBaseEntity*;
 
-void  WeekUpdateConquest(uint8 updateType);
-auto  GetRegionOwner(xi::Region region) -> xi::Nation;
-auto  GetRegionInfluence(xi::Region region) -> uint8; // Return influence graphics
-auto  GetNationRank(xi::Nation nation) -> uint8;
-uint8 GetConquestBalance();
-bool  IsConquestAlliance();
-void  SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-void  SendLuaFuncStringToZone(xi::ZoneId requestingZoneId, xi::ZoneId executorZoneId, const std::string& str);
+void WeekUpdateConquest(uint8 updateType);
+auto GetRegionOwner(xi::Region region) -> xi::Nation;
+auto GetRegionInfluence(xi::Region region) -> uint8; // Return influence graphics
+auto GetNationRank(xi::Nation nation) -> uint8;
+auto GetConquestBalance() -> uint8;
+auto IsConquestAlliance() -> bool;
+void SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
+void SendLuaFuncStringToZone(xi::ZoneId requestingZoneId, xi::ZoneId executorZoneId, const std::string& str);
 
 void UpdateSanrakusMobs(); // Update sanraku's (ZNM) subject of interest and recommended fauna
 void ZNMPopPriceDecay();   // Price of ZNM pop items decay over time
@@ -323,12 +323,12 @@ auto SpawnMob(uint32 mobid, const sol::object& arg2, const sol::object& arg3) ->
 void DespawnMob(uint32 mobid, const sol::object& arg2);                                        // Despawn (Fade Out) Mob By Id
 auto GetPlayerByName(const std::string& name) -> CBaseEntity*;
 auto GetPlayerByID(uint32 pid) -> CBaseEntity*;
-bool PlayerHasValidSession(uint32 playerId);
+auto PlayerHasValidSession(uint32 playerId) -> bool;
 void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot);
 void DrawIn(CLuaBaseEntity* PLuaBaseEntity, const sol::table& table, float offset, float degrees);
 
-uint32 GetSystemTime();
-uint32 JstMidnight();
+auto GetSystemTime() -> uint32;
+auto JstMidnight() -> uint32;
 
 auto LoadLinkshellConciergeSlots(uint16 zoneId) -> sol::table;
 void SetLinkshellConciergeSlot(uint16 zoneId, uint8 slotIndex, const sol::table& data);
@@ -339,48 +339,48 @@ void SaveChocoboRaceResult(const sol::table& data);
 auto GetChocoboRaceQuills(uint32 raceNo) -> sol::table;
 void AddChocoboRaceQuills(uint32 raceNo, uint8 pair, uint32 quills);
 
-uint32 JstDayOfTheYear();
-uint32 JstDayOfTheMonth();
-uint32 JstDayOfTheWeek();
-int32  JstYear();
-uint32 JstMonth();
-uint32 JstHour();
+auto JstDayOfTheYear() -> uint32;
+auto JstDayOfTheMonth() -> uint32;
+auto JstDayOfTheWeek() -> uint32;
+auto JstYear() -> int32;
+auto JstMonth() -> uint32;
+auto JstHour() -> uint32;
 
-uint32 NextGameTime(uint32 intervalSeconds);
-uint32 NextJstWeek();
+auto NextGameTime(uint32 intervalSeconds) -> uint32;
+auto NextJstWeek() -> uint32;
 
-uint32 VanadielTime();
-uint8  VanadielTOTD();
-uint32 VanadielHour();
-uint32 VanadielMinute();
-uint32 VanadielDayOfTheYear();  // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
-uint32 VanadielDayOfTheMonth(); // Gets day of the month (Feb 6 = Day 6)
-uint32 VanadielDayOfTheWeek();  // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
-uint32 VanadielYear();
-uint32 VanadielMonth();
-uint32 VanadielUniqueDay();  // Gets the unique day number. (Vanadiel year * 360 + VanadielDayOfTheYear)
-uint8  VanadielDayElement(); // Gets element of the day (1: Fire  2: Ice  3: Wind  4: Earth  5: Lightning  6: Water  7: Light  8: Dark)
-uint32 VanadielMoonPhase();
-uint8  VanadielMoonDirection();
-uint8  VanadielRSERace();
-uint8  VanadielRSELocation();
-void   SetTimeOffset(int32 offset); // Manipulate earth time forward or backward by offset seconds. Affects Vana'Diel time.
-void   StartElevator(xi::Elevator elevatorID);
-auto   GetElevatorState(xi::Elevator elevatorID) -> int16; // Reaches Lua as xi.elevatorState, or -1 when there is no such elevator.
+auto VanadielTime() -> uint32;
+auto VanadielTOTD() -> uint8;
+auto VanadielHour() -> uint32;
+auto VanadielMinute() -> uint32;
+auto VanadielDayOfTheYear() -> uint32;  // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
+auto VanadielDayOfTheMonth() -> uint32; // Gets day of the month (Feb 6 = Day 6)
+auto VanadielDayOfTheWeek() -> uint32;  // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
+auto VanadielYear() -> uint32;
+auto VanadielMonth() -> uint32;
+auto VanadielUniqueDay() -> uint32; // Gets the unique day number. (Vanadiel year * 360 + VanadielDayOfTheYear)
+auto VanadielDayElement() -> uint8; // Gets element of the day (1: Fire  2: Ice  3: Wind  4: Earth  5: Lightning  6: Water  7: Light  8: Dark)
+auto VanadielMoonPhase() -> uint32;
+auto VanadielMoonDirection() -> uint8;
+auto VanadielRSERace() -> uint8;
+auto VanadielRSELocation() -> uint8;
+void SetTimeOffset(int32 offset); // Manipulate earth time forward or backward by offset seconds. Affects Vana'Diel time.
+void StartElevator(xi::Elevator elevatorID);
+auto GetElevatorState(xi::Elevator elevatorID) -> int16; // Reaches Lua as xi.elevatorState, or -1 when there is no such elevator.
 
-int32 GetServerVariable(const std::string& name);
-void  SetServerVariable(const std::string& name, int32 value, const sol::object& expiry);
-int32 GetVolatileServerVariable(const std::string& varName);
-void  SetVolatileServerVariable(const std::string& varName, int32 value, const sol::object& expiry);
-auto  GetActiveWorldPass(uint32 inviterId) -> sol::object;                                           // Unexpired Gold World Pass bought by the character
-auto  IssueWorldPass(uint32 inviterId, uint32 expiry) -> uint32;                                     // Issues a Gold World Pass and returns its code, 0 on failure
-auto  GetWorldPassInvite(uint32 inviterId, uint32 inviteeId) -> sol::object;                         // The invite linking two characters, if any
-void  SetWorldPassClaims(uint32 inviteeId, uint8 inviteeClaims, uint8 inviterClaims);                // Anniversary items received by both sides of an invite
-auto  CountWorldPassInvites(uint32 inviterId) -> uint32;                                             // Invitees the character already received items with
-int32 GetCharVar(uint32 charId, const std::string& varName);                                         // Get player var directly from SQL DB
-void  SetCharVar(uint32 charId, const std::string& varName, int32 value, const sol::object& expiry); // Set player var in SQL DB using charId
-void  ClearCharVarFromAll(const std::string& varName);                                               // Deletes a specific player variable from all players
-void  Terminate();                                                                                   // Logs off all characters and terminates the server
+auto GetServerVariable(const std::string& name) -> int32;
+void SetServerVariable(const std::string& name, int32 value, const sol::object& expiry);
+auto GetVolatileServerVariable(const std::string& varName) -> int32;
+void SetVolatileServerVariable(const std::string& varName, int32 value, const sol::object& expiry);
+auto GetActiveWorldPass(uint32 inviterId) -> sol::object;                                           // Unexpired Gold World Pass bought by the character
+auto IssueWorldPass(uint32 inviterId, uint32 expiry) -> uint32;                                     // Issues a Gold World Pass and returns its code, 0 on failure
+auto GetWorldPassInvite(uint32 inviterId, uint32 inviteeId) -> sol::object;                         // The invite linking two characters, if any
+void SetWorldPassClaims(uint32 inviteeId, uint8 inviteeClaims, uint8 inviterClaims);                // Anniversary items received by both sides of an invite
+auto CountWorldPassInvites(uint32 inviterId) -> uint32;                                             // Invitees the character already received items with
+auto GetCharVar(uint32 charId, const std::string& varName) -> int32;                                // Get player var directly from SQL DB
+void SetCharVar(uint32 charId, const std::string& varName, int32 value, const sol::object& expiry); // Set player var in SQL DB using charId
+void ClearCharVarFromAll(const std::string& varName);                                               // Deletes a specific player variable from all players
+void Terminate();                                                                                   // Logs off all characters and terminates the server
 
 auto GetTextIDVariable(xi::ZoneId ZoneID, const char* variable) -> int32; // Load the value of the TextID variable of the specified zone
 auto IsContentEnabled(const std::string& content) -> bool;
@@ -410,11 +410,11 @@ void OnServerStart();
 void OnJSTMidnight();
 void OnTimeServerTick();
 
-int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);
-int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);   // triggered when game triggers event update during cutscene
-int32 OnEventUpdate(CCharEntity* PChar, const std::string& updateString); // triggered when game triggers event update during cutscene
-int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);
-void  OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);
+auto OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc) -> int32;
+auto OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result) -> int32;   // triggered when game triggers event update during cutscene
+auto OnEventUpdate(CCharEntity* PChar, const std::string& updateString) -> int32; // triggered when game triggers event update during cutscene
+auto OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result) -> int32;
+void OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);
 
 void OnNpcSpawn(CBaseEntity* PNpc); // triggers when a patrol npc spawns
 
@@ -428,22 +428,22 @@ void OnManeuverGain(CBattleEntity* PEntity, const CItemPuppet* attachment, uint8
 void OnManeuverLose(CBattleEntity* PEntity, const CItemPuppet* attachment, uint8 maneuvers);
 void OnUpdateAttachment(CBattleEntity* PEntity, const CItemPuppet* attachment, uint8 maneuvers);
 
-int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t& action);
-auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
-void  OnItemDrop(CBaseEntity* PUser, CItem* PItem, IsRecycleBin recycleBin = IsRecycleBin::No);
-void  OnItemEquip(CBaseEntity* PUser, CItem* PItem);
-void  OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
-void  CheckForGearSet(CBaseEntity* PTarget);
+auto OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t& action) -> int32;
+auto OnItemCheck(CBaseEntity* PTarget, CItem* PItem, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
+void OnItemDrop(CBaseEntity* PUser, CItem* PItem, IsRecycleBin recycleBin = IsRecycleBin::No);
+void OnItemEquip(CBaseEntity* PUser, CItem* PItem);
+void OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+void CheckForGearSet(CBaseEntity* PTarget);
 
-int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);
-int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell, action_t* action);
-void  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
-void  OnSpellCastStart(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
-void  OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell);
-auto  OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, Maybe<SpellID> startingSpellId) -> std::tuple<Maybe<SpellID>, Maybe<CBattleEntity*>>;
-void  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
-void  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);
-bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster); // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
+auto OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell) -> int32;
+auto OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell, action_t* action) -> int32;
+void OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
+void OnSpellCastStart(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
+void OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell);
+auto OnMobSpellChoose(CBattleEntity* PCaster, CBattleEntity* PTarget, Maybe<SpellID> startingSpellId) -> std::tuple<Maybe<SpellID>, Maybe<CBattleEntity*>>;
+void OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
+void OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);
+auto OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster) -> bool; // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
 
 void OnMobInitialize(CBaseEntity* PMob);
 void ApplyMixins(CBaseEntity* PMob);
@@ -470,10 +470,10 @@ void OnPathPoint(CBaseEntity* PEntity);
 void OnPathComplete(CBaseEntity* PEntity);
 void OnShopBuy(CCharEntity* PChar, CBaseEntity* PNpc, uint16 itemId, uint32 quantity, uint32 gil);
 
-int32 OnBattlefieldHandlerInitialize(CZone* PZone);
-void  OnBattlefieldInitialize(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
-void  OnBattlefieldTick(CBattlefield* PBattlefield);
-void  OnBattlefieldStatusChange(CBattlefield* PBattlefield);
+auto OnBattlefieldHandlerInitialize(CZone* PZone) -> int32;
+void OnBattlefieldInitialize(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
+void OnBattlefieldTick(CBattlefield* PBattlefield);
+void OnBattlefieldStatusChange(CBattlefield* PBattlefield);
 
 void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);
 void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
@@ -482,14 +482,14 @@ void OnBattlefieldKick(CCharEntity* PChar);
 void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield);
 void OnBattlefieldDestroy(CBattlefield* PBattlefield);
 
-uint16 OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 chosenSkillId);
-int32  OnMobWeaponSkill(CBaseEntity* PMob, CBaseEntity* PTarget, CMobSkill* PMobSkill, action_t* action);
-int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
-auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
-auto   OnMobSkillReadyTime(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> Maybe<timer::duration>;
-void   OnMobSkillFinalize(CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers when mob skill state cleanup runs
-int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
-int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
+auto OnMobMobskillChoose(CBattleEntity* PMob, CBattleEntity* PTarget, uint16 chosenSkillId) -> uint16;
+auto OnMobWeaponSkill(CBaseEntity* PMob, CBaseEntity* PTarget, CMobSkill* PMobSkill, action_t* action) -> int32;
+auto OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill) -> int32; // triggers before mob weapon skill is used, returns 0 if the move is valid
+auto OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
+auto OnMobSkillReadyTime(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> Maybe<timer::duration>;
+void OnMobSkillFinalize(CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers when mob skill state cleanup runs
+auto OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill) -> int32;
+auto OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action) -> int32;
 
 auto GetMonstrosityLuaTable(const monstrosity::MonstrosityData_t& data) -> sol::table;
 void SetMonstrosityLuaTable(monstrosity::MonstrosityData_t& data, sol::table table);
@@ -497,14 +497,14 @@ void OnMonstrosityReturnToEntrance(CCharEntity* PChar);
 
 auto OnWorldPassRequest(CCharEntity* PChar, uint16 para) -> WorldPassReply;
 
-int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);
-int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);
-int32 OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                // triggers when pet uses an ability, specialized for pets
-auto  OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
-int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);
-int32 OnSteal(CBattleEntity* PChar, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);
+auto OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget) -> int32;
+auto OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action) -> int32;
+auto OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action) -> int32;                                                       // triggers when pet uses an ability, specialized for pets
+auto OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
+auto OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action) -> int32;
+auto OnSteal(CBattleEntity* PChar, CBattleEntity* PTarget, CAbility* PAbility, action_t* action) -> int32;
 
-bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUseSpell is invoked on spell.cpp for PCs only
+auto OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell) -> bool; // triggers when CanUseSpell is invoked on spell.cpp for PCs only
 
 auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
@@ -519,17 +519,17 @@ void OnInstanceProgressUpdate(CInstance* PInstance);
 void OnInstanceStageChange(CInstance* PInstance);
 void OnInstanceComplete(CInstance* PInstance);
 
-uint32 GetMobRespawnTime(uint32 mobid);
-void   DisallowRespawn(uint32 mobid, bool allowRespawn);
+auto GetMobRespawnTime(uint32 mobid) -> uint32;
+void DisallowRespawn(uint32 mobid, bool allowRespawn);
 
-std::string GetServerMessage(uint8 language);               // Get the message to be delivered to player on first zone in of a session
-auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of recently active fishers (that fished in the last specified minutes)
+auto GetServerMessage(uint8 language) -> std::string; // Get the message to be delivered to player on first zone in of a session
+auto GetRecentFishers(uint16 minutes) -> sol::table;  // returns a list of recently active fishers (that fished in the last specified minutes)
 
-void  OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);                                      // for mobs with additional effects
-void  OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_result_t* Action, int32 damage);                                          // for mobs with spikes
-int32 OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage);    // for items with additional effects defined in a script
-int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage);    // for items with additional effects
-void  additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage); // for armor with spikes
+void OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);                                            // for mobs with additional effects
+void OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_result_t* Action, int32 damage);                                                // for mobs with spikes
+auto OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage) -> int32; // for items with additional effects defined in a script
+auto additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, action_result_t* Action, int32 baseAttackDamage) -> int32; // for items with additional effects
+void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage);       // for armor with spikes
 
 auto NearLocation(const sol::table& table, float radius, float theta) -> sol::table;
 auto GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta) -> sol::table;
@@ -553,20 +553,20 @@ struct ChocoboDigResult
 // Utility method: checks for and loads a lua function for events
 auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function;
 
-uint16 GetDespoilDebuff(uint16 itemId); // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
+auto GetDespoilDebuff(uint16 itemId) -> uint16; // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
 
 void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* itemId);
 void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
-uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
+auto SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial) -> uint16;
 
 auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
-bool HasCustomMenuContext(CCharEntity* PChar);
+auto HasCustomMenuContext(CCharEntity* PChar) -> bool;
 void HandleCustomMenu(CCharEntity* PChar, const std::string& selection);
 
 // Retrive the first itemId that matches a name
-uint16 GetItemIDByName(const std::string& name);
-auto   SendItemToDeliveryBox(const std::string& playerName, uint16 itemId, uint32 quantity, const std::string& senderText) -> SendToDBoxReturnCode;
+auto GetItemIDByName(const std::string& name) -> uint16;
+auto SendItemToDeliveryBox(const std::string& playerName, uint16 itemId, uint32 quantity, const std::string& senderText) -> SendToDBoxReturnCode;
 
 auto GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::table table) -> CBaseEntity*;
 
@@ -578,7 +578,7 @@ void ProgressFishingContest();
 void InitializeFishingContestSystem();
 
 template <typename... Targs>
-int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args);
+auto invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args) -> int32;
 
 auto GetSynergyRecipeByID(uint32 id) -> sol::table;
 auto GetSynergyRecipeByTrade(CLuaTradeContainer luaTradeContainer) -> sol::table;
@@ -684,7 +684,7 @@ auto luautils::callGlobal(const std::string& funcName, Targs... args)
 }
 
 template <typename... Targs>
-int32 luautils::invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
+auto luautils::invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args) -> int32
 {
     // Calls the Battlefield event through the interaction object if it can find it
     sol::table contents = lua["xi"]["battlefield"]["contents"];

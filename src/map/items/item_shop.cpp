@@ -41,22 +41,22 @@ CItemShop::CItemShop(const CItemShop& other)
 {
 }
 
-uint32 CItemShop::getMinPrice() const
+auto CItemShop::getMinPrice() const -> uint32
 {
     return m_MinPrice;
 }
 
-uint32 CItemShop::getMaxPrice() const
+auto CItemShop::getMaxPrice() const -> uint32
 {
     return m_MaxPrice;
 }
 
-bool CItemShop::IsInMenu()
+auto CItemShop::IsInMenu() -> bool
 {
     return getQuantity() != 0;
 }
 
-bool CItemShop::IsDailyIncrease() const
+auto CItemShop::IsDailyIncrease() const -> bool
 {
     return m_DailyIncrease != 0;
 }
@@ -76,7 +76,7 @@ void CItemShop::setDailyIncrease(uint16 increase)
     m_DailyIncrease = increase;
 }
 
-uint16 CItemShop::getDailyIncrease() const
+auto CItemShop::getDailyIncrease() const -> uint16
 {
     return m_DailyIncrease;
 }
@@ -86,12 +86,12 @@ void CItemShop::setInitialQuantity(uint16 increase)
     m_InitialQuantity = increase;
 }
 
-uint16 CItemShop::getInitialQuantity() const
+auto CItemShop::getInitialQuantity() const -> uint16
 {
     return m_InitialQuantity;
 }
 
-uint16 CItemShop::getSellPrice()
+auto CItemShop::getSellPrice() -> uint16
 {
     if (getID() >= 0x2800 && getID() <= 0x6FFF)
     {

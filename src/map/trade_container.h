@@ -47,19 +47,19 @@ class CTradeContainer
 public:
     CTradeContainer();
 
-    uint8  getType() const;
-    uint8  getShopFameArea() const;
-    uint32 getShopVendorId() const;
-    uint8  getItemsCount() const;
-    uint8  getSlotCount();     // Number of occupied cells
-    uint32 getTotalQuantity(); // Total number of items (gil counts as 1)
-    auto   getRestriction(uint8 slotID) const -> SlotRestriction;
-    uint16 getItemID(uint8 slotID);
-    uint8  getInvSlotID(uint8 slotID);
-    uint32 getQuantity(uint8 slotID);      // Number of items in the slot
-    uint32 getItemQuantity(uint16 itemID); // Number of items of one type
-    uint8  getSize();
-    uint8  getExSize() const;
+    auto getType() const -> uint8;
+    auto getShopFameArea() const -> uint8;
+    auto getShopVendorId() const -> uint32;
+    auto getItemsCount() const -> uint8;
+    auto getSlotCount() -> uint8;      // Number of occupied cells
+    auto getTotalQuantity() -> uint32; // Total number of items (gil counts as 1)
+    auto getRestriction(uint8 slotID) const -> SlotRestriction;
+    auto getItemID(uint8 slotID) -> uint16;
+    auto getInvSlotID(uint8 slotID) -> uint8;
+    auto getQuantity(uint8 slotID) -> uint32;      // Number of items in the slot
+    auto getItemQuantity(uint16 itemID) -> uint32; // Number of items of one type
+    auto getSize() -> uint8;
+    auto getExSize() const -> uint8;
 
     void setType(uint8 type);
     void setShopFameArea(uint8 fameArea);

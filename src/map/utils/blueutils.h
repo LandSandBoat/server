@@ -32,18 +32,18 @@
 namespace blueutils
 {
 
-void  SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool addingSpell);
-bool  HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotToPut);
-void  TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob);
-void  UnequipAllBlueSpells(CCharEntity* PChar);
-bool  IsSpellSet(CCharEntity* PChar, CBlueSpell* PSpell);
-void  CompactSpells(CCharEntity* PChar);
-void  CheckSpellLevels(CCharEntity* PChar);
-uint8 GetTotalSlots(CCharEntity* PChar);
-uint8 GetTotalBlueMagicPoints(CCharEntity* PChar);
-void  SaveSetSpells(CCharEntity* PChar);
-void  LoadSetSpells(CCharEntity* PChar);
-void  ValidateBlueSpells(CCharEntity* PChar);
-void  CalculateTraits(CCharEntity* PChar);
+void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool addingSpell);
+auto HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotToPut) -> bool;
+void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob);
+void UnequipAllBlueSpells(CCharEntity* PChar);
+auto IsSpellSet(CCharEntity* PChar, CBlueSpell* PSpell) -> bool;
+void CompactSpells(CCharEntity* PChar);
+void CheckSpellLevels(CCharEntity* PChar);
+auto GetTotalSlots(CCharEntity* PChar) -> uint8;
+auto GetTotalBlueMagicPoints(CCharEntity* PChar) -> uint8;
+void SaveSetSpells(CCharEntity* PChar);
+void LoadSetSpells(CCharEntity* PChar);
+void ValidateBlueSpells(CCharEntity* PChar);
+void CalculateTraits(CCharEntity* PChar);
 
 }; // namespace blueutils

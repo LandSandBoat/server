@@ -95,7 +95,7 @@ void CItemWeapon::resetDelay()
  *  Is Ranged Weapon?                                                    *
  *                                                                       *
  ************************************************************************/
-bool CItemWeapon::isRanged() const
+auto CItemWeapon::isRanged() const -> bool
 {
     return m_ranged;
 }
@@ -106,7 +106,7 @@ bool CItemWeapon::isRanged() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isThrowing() const
+auto CItemWeapon::isThrowing() const -> bool
 {
     return isRanged() && getSkillType() == xi::SkillType::Throwing;
 }
@@ -117,7 +117,7 @@ bool CItemWeapon::isThrowing() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isShuriken() const
+auto CItemWeapon::isShuriken() const -> bool
 {
     return isThrowing() && getSubSkillType() == SUBSKILL_SHURIKEN;
 }
@@ -128,7 +128,7 @@ bool CItemWeapon::isShuriken() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isTwoHanded() const
+auto CItemWeapon::isTwoHanded() const -> bool
 {
     return m_twoHanded;
 }
@@ -139,7 +139,7 @@ bool CItemWeapon::isTwoHanded() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isHandToHand() const
+auto CItemWeapon::isHandToHand() const -> bool
 {
     return getSkillType() == xi::SkillType::HandToHand;
 }
@@ -150,7 +150,7 @@ bool CItemWeapon::isHandToHand() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isUnlockable() const
+auto CItemWeapon::isUnlockable() const -> bool
 {
     if (m_skillType == xi::SkillType::None)
     {
@@ -166,7 +166,7 @@ bool CItemWeapon::isUnlockable() const
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::isUnlocked()
+auto CItemWeapon::isUnlocked() -> bool
 {
     return isUnlockable() && getCurrentUnlockPoints() == m_wsunlockpoints;
 }
@@ -178,7 +178,7 @@ bool CItemWeapon::isUnlocked()
  *                                                                       *
  ************************************************************************/
 
-bool CItemWeapon::addWsPoints(uint16 points)
+auto CItemWeapon::addWsPoints(uint16 points) -> bool
 {
     // If we're going to add more total WS points than the cap, set it to the cap
     if (getCurrentUnlockPoints() + points >= m_wsunlockpoints)
@@ -284,7 +284,7 @@ void CItemWeapon::setILvlMacc(uint16 macc)
  *                                                                      *
  ************************************************************************/
 
-uint8 CItemWeapon::getSubSkillType() const
+auto CItemWeapon::getSubSkillType() const -> uint8
 {
     return m_subSkillType;
 }
@@ -295,7 +295,7 @@ uint8 CItemWeapon::getSubSkillType() const
  *                                                                      *
  ************************************************************************/
 
-uint16 CItemWeapon::getILvlSkill() const
+auto CItemWeapon::getILvlSkill() const -> uint16
 {
     return m_iLvlSkill;
 }
@@ -306,7 +306,7 @@ uint16 CItemWeapon::getILvlSkill() const
  *                                                                      *
  ************************************************************************/
 
-uint16 CItemWeapon::getILvlParry() const
+auto CItemWeapon::getILvlParry() const -> uint16
 {
     return m_iLvlParry;
 }
@@ -317,7 +317,7 @@ uint16 CItemWeapon::getILvlParry() const
  *                                                                      *
  ************************************************************************/
 
-uint16 CItemWeapon::getILvlMacc() const
+auto CItemWeapon::getILvlMacc() const -> uint16
 {
     return m_iLvlMacc;
 }
@@ -329,7 +329,7 @@ void CItemWeapon::setDelay(uint16 delay)
 }
 
 // get delay used for milliseconds calculations (such as auto attack delay)
-uint16 CItemWeapon::getDelay() const
+auto CItemWeapon::getDelay() const -> uint16
 {
     return m_delay;
 }
@@ -341,7 +341,7 @@ void CItemWeapon::setBaseDelay(uint16 delay)
 }
 
 // get real delay used by real people
-uint16 CItemWeapon::getBaseDelay() const
+auto CItemWeapon::getBaseDelay() const -> uint16
 {
     return m_baseDelay;
 }
@@ -352,7 +352,7 @@ uint16 CItemWeapon::getBaseDelay() const
  *                                                                       *
  ************************************************************************/
 
-uint16 CItemWeapon::getTotalUnlockPointsNeeded() const
+auto CItemWeapon::getTotalUnlockPointsNeeded() const -> uint16
 {
     return m_wsunlockpoints;
 }
@@ -398,7 +398,7 @@ void CItemWeapon::setDamage(uint16 damage)
  *                                                                       *
  ************************************************************************/
 
-uint16 CItemWeapon::getDamage() const
+auto CItemWeapon::getDamage() const -> uint16
 {
     return m_damage;
 }
@@ -442,7 +442,7 @@ void CItemWeapon::setAdditionalEffect(uint8 effect)
  *                                                                       *
  ************************************************************************/
 
-uint8 CItemWeapon::getAdditionalEffect() const
+auto CItemWeapon::getAdditionalEffect() const -> uint8
 {
     return m_effect;
 }
@@ -487,7 +487,7 @@ void CItemWeapon::setMaxHit(uint8 hit)
  *                                                                       *
  ************************************************************************/
 
-uint8 CItemWeapon::getHitCount() const
+auto CItemWeapon::getHitCount() const -> uint8
 {
     return battleutils::getHitCount(m_maxHit);
 }
@@ -509,7 +509,7 @@ void CItemWeapon::setDPS(double dps)
  *                                                                       *
  ************************************************************************/
 
-double CItemWeapon::getDPS() const
+auto CItemWeapon::getDPS() const -> double
 {
     return m_DPS;
 }

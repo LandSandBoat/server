@@ -224,7 +224,7 @@ struct GP_SERV_CHAR_NPC
 // constexpr uint32_t model_size       = offsetof(GP_SERV_CHAR_PC, name[0]);
 // constexpr uint32_t name_size        = offsetof(GP_SERV_CHAR_PC, name[0]);
 
-std::string getTransportNPCName(CBaseEntity* PEntity)
+auto getTransportNPCName(CBaseEntity* PEntity) -> std::string
 {
     bool isElevator = PEntity->look.size == MODEL_ELEVATOR;
     auto strSize    = isElevator ? 10 : 8;

@@ -35,30 +35,30 @@ class CLuaStatusEffect
 public:
     CLuaStatusEffect(CStatusEffect*);
 
-    CStatusEffect* GetStatusEffect() const
+    auto GetStatusEffect() const -> CStatusEffect*
     {
         return m_PLuaStatusEffect;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CStatusEffect& effect);
+    friend auto operator<<(std::ostream& out, const CStatusEffect& effect) -> std::ostream&;
 
-    uint32 getEffectType();
-    uint32 getSubType();
-    uint16 getSourceType();
-    uint32 getSourceTypeParam();
-    auto   getOriginID() -> uint32;
-    uint16 getPower();
-    uint16 getSubPower();
-    uint16 getSubIcon();
-    uint16 getTier();
-    uint8  getEffectSlot();
-    uint32 getDuration();
-    uint32 getStartTime();
-    uint32 getLastTick();
-    uint32 getTimeRemaining();
-    uint32 getTickCount();
-    uint32 getTick();
-    uint16 getIcon();
+    auto getEffectType() -> uint32;
+    auto getSubType() -> uint32;
+    auto getSourceType() -> uint16;
+    auto getSourceTypeParam() -> uint32;
+    auto getOriginID() -> uint32;
+    auto getPower() -> uint16;
+    auto getSubPower() -> uint16;
+    auto getSubIcon() -> uint16;
+    auto getTier() -> uint16;
+    auto getEffectSlot() -> uint8;
+    auto getDuration() -> uint32;
+    auto getStartTime() -> uint32;
+    auto getLastTick() -> uint32;
+    auto getTimeRemaining() -> uint32;
+    auto getTickCount() -> uint32;
+    auto getTick() -> uint32;
+    auto getIcon() -> uint16;
 
     void setIcon(uint16 icon);
     void setSource(EffectSourceType sourceType, uint32 sourceTypeParam);
@@ -74,14 +74,14 @@ public:
     void setStartTime(uint32 time);
     void resetStartTime();
 
-    void   addMod(uint16 mod, int16 amount);
-    uint32 getEffectFlags();
-    void   setEffectFlags(uint32 flags);
-    void   addEffectFlag(uint32 flag);
-    void   delEffectFlag(uint32 flag);
-    bool   hasEffectFlag(uint32 flag);
+    void addMod(uint16 mod, int16 amount);
+    auto getEffectFlags() -> uint32;
+    void setEffectFlags(uint32 flags);
+    void addEffectFlag(uint32 flag);
+    void delEffectFlag(uint32 flag);
+    auto hasEffectFlag(uint32 flag) -> bool;
 
-    bool operator==(const CLuaStatusEffect& other) const
+    auto operator==(const CLuaStatusEffect& other) const -> bool
     {
         return this->m_PLuaStatusEffect == other.m_PLuaStatusEffect;
     }

@@ -44,65 +44,65 @@ public:
         return m_readItem;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaItem& item);
+    friend auto operator<<(std::ostream& out, const CLuaItem& item) -> std::ostream&;
 
-    uint16 getID();    // get the item's id
-    uint16 getSubID(); // get the item's subid
+    auto getID() -> uint16;    // get the item's id
+    auto getSubID() -> uint16; // get the item's subid
 
-    auto  getFlag() const -> xi::ItemFlag; // get the item flag
-    uint8 getAHCat();                      // get the ah category
+    auto getFlag() const -> xi::ItemFlag; // get the item flag
+    auto getAHCat() -> uint8;             // get the ah category
 
-    uint32 getQuantity(); // get the quantity of item
+    auto getQuantity() -> uint32; // get the quantity of item
 
-    uint8  getLocationID(); // get the location id (container id)
-    uint8  getSlotID();     // get the slot id
-    uint16 getTrialNumber();
-    uint8  getWornUses();  // check if the item has been used
-    uint32 getBasePrice(); // get the base sell price
+    auto getLocationID() -> uint8; // get the location id (container id)
+    auto getSlotID() -> uint8;     // get the slot id
+    auto getTrialNumber() -> uint16;
+    auto getWornUses() -> uint8;   // check if the item has been used
+    auto getBasePrice() -> uint32; // get the base sell price
 
-    bool isType(uint8 type);        // check the item type
-    void setSubType(uint8 subtype); // set the item's sub type
-    bool isSubType(uint8 subtype);  // check the item's sub type
+    auto isType(uint8 type) -> bool;       // check the item type
+    void setSubType(uint8 subtype);        // set the item's sub type
+    auto isSubType(uint8 subtype) -> bool; // check the item's sub type
 
     auto state() const -> xi::ItemState; // current ItemState (xi.itemState.*)
 
-    auto   getName() -> std::string; // get the item's name
-    uint16 getILvl();                // get the item's ilvl
-    uint16 getReqLvl();              // get the item's level
+    auto getName() -> std::string; // get the item's name
+    auto getILvl() -> uint16;      // get the item's ilvl
+    auto getReqLvl() -> uint16;    // get the item's level
 
-    int16 getMod(uint16 modID);              // get the power of a mod
-    void  addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
-    void  delMod(uint16 modID, int16 power); // remove power from mod
+    auto getMod(uint16 modID) -> int16;     // get the power of a mod
+    void addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
+    void delMod(uint16 modID, int16 power); // remove power from mod
 
     auto getAugment(uint8 slot) -> sol::table; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    uint8  getSkillType();                            // get skill type
-    uint16 getWeaponskillPoints();                    // get current ws points
-    void   setWeaponskillPointsNeeded(uint16 points); // set required ws points to unlock (used for Unlocking a Myth era module)
-    uint16 getWeaponskillPointsNeeded();              // confirm required ws points on this item object
+    auto getSkillType() -> uint8;                   // get skill type
+    auto getWeaponskillPoints() -> uint16;          // get current ws points
+    void setWeaponskillPointsNeeded(uint16 points); // set required ws points to unlock (used for Unlocking a Myth era module)
+    auto getWeaponskillPointsNeeded() -> uint16;    // confirm required ws points on this item object
 
-    bool  isTwoHanded();             // is a two handed weapon
-    bool  isHandToHand();            // is a hand to hand weapon (or unarmed H2H)
-    bool  isShield();                // is a Shield
-    uint8 getShieldSize();           // get the shield size (used for block rate calculation)
-    uint8 getShieldAbsorptionRate(); // get the shield absorbtion rate (used for block rate calculation)
+    auto isTwoHanded() -> bool;              // is a two handed weapon
+    auto isHandToHand() -> bool;             // is a hand to hand weapon (or unarmed H2H)
+    auto isShield() -> bool;                 // is a Shield
+    auto getShieldSize() -> uint8;           // get the shield size (used for block rate calculation)
+    auto getShieldAbsorptionRate() -> uint8; // get the shield absorbtion rate (used for block rate calculation)
 
     auto getSignature() -> std::string;
 
-    uint8 getAppraisalID();         // get an appraisal ID
-    void  setAppraisalID(uint8 id); // set an appraisal ID
+    auto getAppraisalID() -> uint8; // get an appraisal ID
+    void setAppraisalID(uint8 id);  // set an appraisal ID
 
-    uint8 getCurrentCharges(); // Get remaining charges
+    auto getCurrentCharges() -> uint8; // Get remaining charges
 
-    bool isInstalled();
+    auto isInstalled() -> bool;
 
     auto getExData() const -> sol::table;
     void setExData(const sol::table& data) const;
     auto getExDataRaw() const -> sol::table;         // NOTE: 0-indexed, to be in line with the underlying C++ data
     void setExDataRaw(const sol::table& data) const; // NOTE: 0-indexed, to be in line with the underlying C++ data
 
-    bool operator==(const CLuaItem& other) const
+    auto operator==(const CLuaItem& other) const -> bool
     {
         return this->m_readItem == other.m_readItem;
     }

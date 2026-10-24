@@ -53,10 +53,10 @@ class CLuaSimulation
 public:
     CLuaSimulation(MapEngine* _mapServer, const std::shared_ptr<InMemorySink>& _sink);
 
-    CLuaSimulation(const CLuaSimulation&)            = delete;
-    CLuaSimulation& operator=(const CLuaSimulation&) = delete;
-    CLuaSimulation(CLuaSimulation&&)                 = default;
-    CLuaSimulation& operator=(CLuaSimulation&&)      = default;
+    CLuaSimulation(const CLuaSimulation&)                    = delete;
+    auto operator=(const CLuaSimulation&) -> CLuaSimulation& = delete;
+    CLuaSimulation(CLuaSimulation&&)                         = default;
+    auto operator=(CLuaSimulation&&) -> CLuaSimulation&      = default;
 
     void cleanClients(Maybe<ClientScope> scope = std::nullopt);
     void tick(Maybe<TickType> boundary = std::nullopt) const;

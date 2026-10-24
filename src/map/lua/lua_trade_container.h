@@ -38,25 +38,25 @@ class CLuaTradeContainer
 public:
     CLuaTradeContainer(CTradeContainer*, CCharEntity* owner);
 
-    CTradeContainer* GetTradeContainer() const
+    auto GetTradeContainer() const -> CTradeContainer*
     {
         return m_pMyTradeContainer;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CTradeContainer& trade);
+    friend auto operator<<(std::ostream& out, const CTradeContainer& trade) -> std::ostream&;
 
-    uint32 getGil();
-    auto   getItem(const sol::object& SlotIDObj) -> CItem*;
-    uint16 getItemId(const sol::object& SlotIDObj);
-    uint16 getItemSubId(const sol::object& SlotIDObj);
-    uint32 getItemQty(uint16 itemID);
-    bool   hasItemQty(uint16 itemID, uint32 quantity);
-    uint32 getSlotQty(uint8 slotID); // number of items in the specified slot
-    uint32 getItemCount();           // total number of items
-    uint8  getSlotCount();
-    bool   confirmItem(uint16 itemID, const sol::object& amountObj);
-    bool   confirmSlot(uint8 slotID, const sol::object& amountObj);
-    void   clean();
+    auto getGil() -> uint32;
+    auto getItem(const sol::object& SlotIDObj) -> CItem*;
+    auto getItemId(const sol::object& SlotIDObj) -> uint16;
+    auto getItemSubId(const sol::object& SlotIDObj) -> uint16;
+    auto getItemQty(uint16 itemID) -> uint32;
+    auto hasItemQty(uint16 itemID, uint32 quantity) -> bool;
+    auto getSlotQty(uint8 slotID) -> uint32; // number of items in the specified slot
+    auto getItemCount() -> uint32;           // total number of items
+    auto getSlotCount() -> uint8;
+    auto confirmItem(uint16 itemID, const sol::object& amountObj) -> bool;
+    auto confirmSlot(uint8 slotID, const sol::object& amountObj) -> bool;
+    void clean();
 
 private:
     // the items live in the transaction, the container only describes the offer
@@ -64,7 +64,7 @@ private:
     auto confirmQuantity(uint8 slotID, uint32 quantity) const -> bool;
 
 public:
-    bool operator==(const CLuaTradeContainer& other) const
+    auto operator==(const CLuaTradeContainer& other) const -> bool
     {
         return this->m_pMyTradeContainer == other.m_pMyTradeContainer;
     }

@@ -34,45 +34,45 @@ public:
     CMobSpellContainer(CMobEntity* PMob);
 
     // These methods return a random spell
-    Maybe<SpellID> GetAggroSpell();                                                  // -ga spell, dia, bio, paralyze, silence, blind
-    Maybe<SpellID> GetGaSpell();                                                     // AoE damage spells, stonega, diaga
-    Maybe<SpellID> GetDamageSpell();                                                 // Single target damage spells, stone
-    Maybe<SpellID> GetBuffSpell();                                                   // stoneskin, utsusemi, blink
-    auto           GetBuffSpellsFor(CBattleEntity* PTarget) -> std::vector<SpellID>; // castable buffs the target still lacks
-    Maybe<SpellID> GetDebuffSpell();
-    Maybe<SpellID> GetHealSpell();   // cures, regen, armys paeon
-    Maybe<SpellID> GetNaSpell();     // silena, blindna etc
-    Maybe<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
-    Maybe<SpellID> GetSpell();       // return a random spell
+    auto GetAggroSpell() -> Maybe<SpellID>;                                // -ga spell, dia, bio, paralyze, silence, blind
+    auto GetGaSpell() -> Maybe<SpellID>;                                   // AoE damage spells, stonega, diaga
+    auto GetDamageSpell() -> Maybe<SpellID>;                               // Single target damage spells, stone
+    auto GetBuffSpell() -> Maybe<SpellID>;                                 // stoneskin, utsusemi, blink
+    auto GetBuffSpellsFor(CBattleEntity* PTarget) -> std::vector<SpellID>; // castable buffs the target still lacks
+    auto GetDebuffSpell() -> Maybe<SpellID>;
+    auto GetHealSpell() -> Maybe<SpellID>;   // cures, regen, armys paeon
+    auto GetNaSpell() -> Maybe<SpellID>;     // silena, blindna etc
+    auto GetSevereSpell() -> Maybe<SpellID>; // select spells like death, impact, meteor
+    auto GetSpell() -> Maybe<SpellID>;       // return a random spell
 
-    bool IsAnySpellAvailable();
+    auto IsAnySpellAvailable() -> bool;
 
-    bool HasSpells() const;
-    bool HasMPSpells() const;
-    bool HasNaSpell(SpellID spellId) const;
-    bool HasGaSpells() const;
-    bool HasDamageSpells() const;
-    bool HasBuffSpells() const;
-    bool HasHealSpells() const;
-    bool HasNaSpells() const;
-    bool HasRaiseSpells() const;
-    bool HasDebuffSpells() const;
-    bool HasSevereSpells() const;
+    auto HasSpells() const -> bool;
+    auto HasMPSpells() const -> bool;
+    auto HasNaSpell(SpellID spellId) const -> bool;
+    auto HasGaSpells() const -> bool;
+    auto HasDamageSpells() const -> bool;
+    auto HasBuffSpells() const -> bool;
+    auto HasHealSpells() const -> bool;
+    auto HasNaSpells() const -> bool;
+    auto HasRaiseSpells() const -> bool;
+    auto HasDebuffSpells() const -> bool;
+    auto HasSevereSpells() const -> bool;
 
     void ClearSpells();
     void AddSpell(SpellID spellId);
     void RemoveSpell(SpellID spellId);
 
-    Maybe<SpellID> GetAvailable(SpellID spellId);
-    Maybe<SpellID> GetBestAvailable(SPELLFAMILY family);
-    Maybe<SpellID> GetBestIndiSpell(CBattleEntity* PMaster);
-    Maybe<SpellID> GetBestEntrustedSpell(CBattleEntity* PMaster);
-    Maybe<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget, SpellID spellId);
-    Maybe<SpellID> EnSpellAgainstTargetWeakness(CBattleEntity* PTarget);
-    Maybe<SpellID> StormDayAgainstTargetWeakness(CBattleEntity* PTarget);
-    Maybe<SpellID> HelixAgainstTargetWeakness(CBattleEntity* PTarget);
-    Maybe<SpellID> GetStormDay();
-    Maybe<SpellID> GetHelixDay();
+    auto GetAvailable(SpellID spellId) -> Maybe<SpellID>;
+    auto GetBestAvailable(SPELLFAMILY family) -> Maybe<SpellID>;
+    auto GetBestIndiSpell(CBattleEntity* PMaster) -> Maybe<SpellID>;
+    auto GetBestEntrustedSpell(CBattleEntity* PMaster) -> Maybe<SpellID>;
+    auto GetBestAgainstTargetWeakness(CBattleEntity* PTarget, SpellID spellId) -> Maybe<SpellID>;
+    auto EnSpellAgainstTargetWeakness(CBattleEntity* PTarget) -> Maybe<SpellID>;
+    auto StormDayAgainstTargetWeakness(CBattleEntity* PTarget) -> Maybe<SpellID>;
+    auto HelixAgainstTargetWeakness(CBattleEntity* PTarget) -> Maybe<SpellID>;
+    auto GetStormDay() -> Maybe<SpellID>;
+    auto GetHelixDay() -> Maybe<SpellID>;
 
     std::vector<SpellID> m_gaList;
     std::vector<SpellID> m_damageList;

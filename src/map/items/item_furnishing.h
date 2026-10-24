@@ -107,19 +107,19 @@ public:
     CItemFurnishing(const CItemFurnishing& other);
     virtual ~CItemFurnishing();
 
-    uint8  getStorage() const;
-    uint16 getMoghancement() const;
-    uint8  getElement() const;
-    uint8  getAura() const;
-    auto   size() const -> std::pair<uint8, uint8>;
-    auto   height() const -> uint16;
-    auto   placement() const -> FurnishingPlacement;
+    auto getStorage() const -> uint8;
+    auto getMoghancement() const -> uint16;
+    auto getElement() const -> uint8;
+    auto getAura() const -> uint8;
+    auto size() const -> std::pair<uint8, uint8>;
+    auto height() const -> uint16;
+    auto placement() const -> FurnishingPlacement;
 
-    auto  isInstalled() const -> bool;
-    uint8 getCol();
-    uint8 getRow();
-    uint8 getLevel();
-    uint8 getRotation();
+    auto isInstalled() const -> bool;
+    auto getCol() -> uint8;
+    auto getRow() -> uint8;
+    auto getLevel() -> uint8;
+    auto getRotation() -> uint8;
 
     void setInstalled(bool installed);
     void setStorage(uint8 storage);
@@ -135,18 +135,18 @@ public:
     void setLevel(uint8 level);
     void setRotation(uint8 rotation);
 
-    void  setMannequinRace(uint8 race);
-    uint8 getMannequinRace();
-    void  setMannequinPose(uint8 pose);
-    uint8 getMannequinPose();
+    void setMannequinRace(uint8 race);
+    auto getMannequinRace() -> uint8;
+    void setMannequinPose(uint8 pose);
+    auto getMannequinPose() -> uint8;
 
     void setOn2ndFloor(bool on2ndFloor);
-    bool getOn2ndFloor();
+    auto getOn2ndFloor() -> bool;
 
     auto getSignature() const -> const std::string override;
     void setSignature(const std::string& signature) override;
 
-    bool isGardeningPot() const;
+    auto isGardeningPot() const -> bool;
 
 private:
     uint8                   m_storage;

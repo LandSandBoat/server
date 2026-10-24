@@ -27,12 +27,12 @@ CModifier::CModifier(xi::Mod type, int16 amount)
 {
 }
 
-xi::Mod CModifier::getModID() const
+auto CModifier::getModID() const -> xi::Mod
 {
     return m_id;
 }
 
-int16 CModifier::getModAmount() const
+auto CModifier::getModAmount() const -> int16
 {
     return m_amount;
 }
@@ -48,7 +48,7 @@ CPetModifier::CPetModifier(xi::Mod type, PetModType pettype, int16 amount)
 {
 }
 
-PetModType CPetModifier::getPetModType() const
+auto CPetModifier::getPetModType() const -> PetModType
 {
     return m_pettype;
 }

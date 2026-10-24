@@ -27,10 +27,10 @@ public:
     Engine();
     virtual ~Engine();
 
-    Engine(const Engine&)            = delete;
-    Engine(Engine&&)                 = delete;
-    Engine& operator=(const Engine&) = delete;
-    Engine& operator=(Engine&&)      = delete;
+    Engine(const Engine&)                    = delete;
+    Engine(Engine&&)                         = delete;
+    auto operator=(const Engine&) -> Engine& = delete;
+    auto operator=(Engine&&) -> Engine&      = delete;
 
     virtual void onInitialize() {}; // Override with any delayed initialization logic.
     virtual void onShutdown() {};   // Override with any shutdown logic.

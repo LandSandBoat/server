@@ -88,7 +88,7 @@ void CLuaSpell::setMPCost(uint16 mpcost)
     m_PLuaSpell->setMPCost(mpcost);
 }
 
-uint32 CLuaSpell::getCastTime()
+auto CLuaSpell::getCastTime() -> uint32
 {
     return static_cast<uint32>(timer::count_milliseconds(m_PLuaSpell->getCastTime()));
 }
@@ -98,7 +98,7 @@ void CLuaSpell::setCastTime(uint32 casttime)
     m_PLuaSpell->setCastTime(std::chrono::milliseconds(casttime));
 }
 
-uint32 CLuaSpell::getPrimaryTargetID()
+auto CLuaSpell::getPrimaryTargetID() -> uint32
 {
     return m_PLuaSpell->getPrimaryTargetID();
 }
@@ -118,12 +118,12 @@ auto CLuaSpell::isCritical() const -> bool
     return m_PLuaSpell->isCritical();
 }
 
-bool CLuaSpell::canTargetEnemy()
+auto CLuaSpell::canTargetEnemy() -> bool
 {
     return m_PLuaSpell->canTargetEnemy();
 }
 
-uint16 CLuaSpell::getTotalTargets()
+auto CLuaSpell::getTotalTargets() -> uint16
 {
     return m_PLuaSpell->getTotalTargets();
 }
@@ -133,62 +133,62 @@ auto CLuaSpell::getMagicBurstMessage() const -> MsgBasic
     return m_PLuaSpell->getMagicBurstMessage();
 }
 
-uint16 CLuaSpell::getElement()
+auto CLuaSpell::getElement() -> uint16
 {
     return m_PLuaSpell->getElement();
 }
 
-bool CLuaSpell::isAoE() const
+auto CLuaSpell::isAoE() const -> bool
 {
     return m_PLuaSpell->getAOE() == SPELLAOE_RADIAL;
 }
 
-bool CLuaSpell::isConal() const
+auto CLuaSpell::isConal() const -> bool
 {
     return m_PLuaSpell->getAOE() == SPELLAOE_CONAL;
 }
 
-uint8 CLuaSpell::getAoE() const
+auto CLuaSpell::getAoE() const -> uint8
 {
     return m_PLuaSpell->getAOE();
 }
 
-float CLuaSpell::getRadius()
+auto CLuaSpell::getRadius() -> float
 {
     return m_PLuaSpell->getRadius();
 }
 
-bool CLuaSpell::tookEffect()
+auto CLuaSpell::tookEffect() -> bool
 {
     return m_PLuaSpell->tookEffect();
 }
 
-uint16 CLuaSpell::getID()
+auto CLuaSpell::getID() -> uint16
 {
     return static_cast<uint16>(m_PLuaSpell->getID());
 }
 
-uint16 CLuaSpell::getMPCost()
+auto CLuaSpell::getMPCost() -> uint16
 {
     return m_PLuaSpell->getMPCost();
 }
 
-uint8 CLuaSpell::getSkillType()
+auto CLuaSpell::getSkillType() -> uint8
 {
     return static_cast<uint8>(m_PLuaSpell->getSkillType());
 }
 
-uint8 CLuaSpell::getSpellGroup()
+auto CLuaSpell::getSpellGroup() -> uint8
 {
     return static_cast<uint8>(m_PLuaSpell->getSpellGroup());
 }
 
-uint8 CLuaSpell::getSpellFamily()
+auto CLuaSpell::getSpellFamily() -> uint8
 {
     return static_cast<uint8>(m_PLuaSpell->getSpellFamily());
 }
 
-uint8 CLuaSpell::getFlag()
+auto CLuaSpell::getFlag() -> uint8
 {
     return m_PLuaSpell->getFlag();
 }
@@ -233,7 +233,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("isCritical", CLuaSpell::isCritical);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)
+auto operator<<(std::ostream& os, const CLuaSpell& spell) -> std::ostream&
 {
     std::string id = spell.m_PLuaSpell ? std::to_string(static_cast<uint16>(spell.m_PLuaSpell->getID())) : "nullptr";
     return os << "CLuaSpell(" << id << ")";

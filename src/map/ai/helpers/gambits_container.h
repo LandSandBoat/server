@@ -167,7 +167,7 @@ struct Predicate_t
     {
     }
 
-    bool parseInput(const std::string& key, uint32 value)
+    auto parseInput(const std::string& key, uint32 value) -> bool
     {
         if (key.compare("condition") == 0)
         {
@@ -211,7 +211,7 @@ struct Action_t
     {
     }
 
-    bool parseInput(const std::string& key, uint32 value)
+    auto parseInput(const std::string& key, uint32 value) -> bool
     {
         if (key.compare("reaction") == 0)
         {
@@ -312,9 +312,9 @@ public:
 
 private:
     auto CheckTrigger(const CBattleEntity* triggerTarget, const Gambit_t& gambit, size_t predicateGroupIndex, PredicateGroup_t& predicateGroup) -> bool;
-    bool TryTrustSkill();
-    bool PartyHasHealer();
-    bool PartyHasTank();
+    auto TryTrustSkill() -> bool;
+    auto PartyHasHealer() -> bool;
+    auto PartyHasTank() -> bool;
 
     CTrustEntity*         POwner;
     timer::time_point     m_lastAction;

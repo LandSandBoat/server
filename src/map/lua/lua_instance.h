@@ -39,31 +39,31 @@ class CLuaInstance
 public:
     CLuaInstance(CInstance*);
 
-    CInstance* GetInstance() const
+    auto GetInstance() const -> CInstance*
     {
         return m_PLuaInstance;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaInstance& instance);
+    friend auto operator<<(std::ostream& out, const CLuaInstance& instance) -> std::ostream&;
 
-    uint16 getID();
-    auto   getName() -> const std::string&;
-    auto   getZone() -> CLuaZone;
-    uint32 getEntranceZoneID();
-    auto   getAllies() -> sol::table;
-    auto   getChars() -> sol::table;
-    auto   getMobs() -> sol::table;
-    auto   getNpcs() -> sol::table;
-    auto   getPets() -> sol::table;
-    uint32 getTimeLimit();
-    auto   getEntryPos() -> sol::table;
-    uint8  getLevelCap();
-    uint32 getLastTimeUpdate();
-    uint32 getProgress();
-    uint32 getWipeTime();
-    auto   getEntity(uint16 targid, const sol::object& filterObj) -> CBaseEntity*;
-    uint32 getStage();
-    auto   getLocalVar(const std::string& name) -> uint64_t;
+    auto getID() -> uint16;
+    auto getName() -> const std::string&;
+    auto getZone() -> CLuaZone;
+    auto getEntranceZoneID() -> uint32;
+    auto getAllies() -> sol::table;
+    auto getChars() -> sol::table;
+    auto getMobs() -> sol::table;
+    auto getNpcs() -> sol::table;
+    auto getPets() -> sol::table;
+    auto getTimeLimit() -> uint32;
+    auto getEntryPos() -> sol::table;
+    auto getLevelCap() -> uint8;
+    auto getLastTimeUpdate() -> uint32;
+    auto getProgress() -> uint32;
+    auto getWipeTime() -> uint32;
+    auto getEntity(uint16 targid, const sol::object& filterObj) -> CBaseEntity*;
+    auto getStage() -> uint32;
+    auto getLocalVar(const std::string& name) -> uint64_t;
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 seconds);
@@ -74,14 +74,14 @@ public:
     void setLocalVar(const std::string& name, uint64_t value);
 
     void fail();
-    bool failed();
+    auto failed() -> bool;
     void complete();
-    bool completed();
+    auto completed() -> bool;
 
     auto insertAlly(uint32 groupid) -> CBaseEntity*;
     auto insertDynamicEntity(sol::table table) -> CBaseEntity*;
 
-    bool operator==(const CLuaInstance& other) const
+    auto operator==(const CLuaInstance& other) const -> bool
     {
         return this->m_PLuaInstance == other.m_PLuaInstance;
     }

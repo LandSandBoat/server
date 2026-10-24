@@ -113,7 +113,7 @@ std::atomic<uint64_t> generation{ 0 };
 
 // We need this to figure out which environment variables are numbers
 // so we can pass them to the lua settings properly typed.
-bool isNumber(const std::string& stringValue)
+auto isNumber(const std::string& stringValue) -> bool
 {
     return std::ranges::all_of(stringValue,
                                [](const char c)

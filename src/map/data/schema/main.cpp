@@ -257,7 +257,7 @@ void publish(const std::filesystem::path& outputDirectory)
 
 } // namespace xi::data::schema
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     std::filesystem::path outputDirectory{ "data/schemas" };
     std::filesystem::path dataDirectory{ "data" };

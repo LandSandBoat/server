@@ -37,11 +37,11 @@ void SetMorale(CampaignArmy army, int8 amount);         // Change the morale lev
 void SetProsperity(CampaignArmy army, int8 amount);     // Change the prosperity level for the army by the amount.
 void SetAlliedNotes(CCharEntity* chr, int32 amount);    // Each week, certain aspects of the campaign are set back to defaults.
 
-CampaignState GetCampaignState();
-uint8         GetReconnaissance(CampaignArmy army); // Change the reconnaissance level for the army by the amount.
-uint8         GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
-uint8         GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
-int32         GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
+auto GetCampaignState() -> CampaignState;
+auto GetReconnaissance(CampaignArmy army) -> uint8; // Change the reconnaissance level for the army by the amount.
+auto GetMorale(CampaignArmy army) -> uint8;         // Change the morale level for the army by the amount.
+auto GetProsperity(CampaignArmy army) -> uint8;     // Change the prosperity level for the army by the amount.
+auto GetAlliedNotes(CCharEntity* chr) -> int32;     // Change the prosperity level for the army by the amount.
 
 void SendUpdate(CCharEntity* PChar);
 

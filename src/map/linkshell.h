@@ -39,19 +39,19 @@ class CLinkshell
 public:
     CLinkshell(uint32 id);
 
-    uint32 getID() const;
-    uint16 getColor() const;
-    auto   getPostRights() const -> GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL;
+    auto getID() const -> uint32;
+    auto getColor() const -> uint16;
+    auto getPostRights() const -> GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL;
 
     void setColor(uint16 color);
     void setPostRights(GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel);
 
-    const std::string& getName();
-    void               setName(const std::string& name);
-    void               setMessage(const std::string& message, const std::string& poster);
+    auto getName() -> const std::string&;
+    void setName(const std::string& name);
+    void setMessage(const std::string& message, const std::string& poster);
 
     void AddMember(CCharEntity* PChar, int8 type, uint8 lsNum);
-    bool DelMember(CCharEntity* PChar);
+    auto DelMember(CCharEntity* PChar) -> bool;
 
     void BreakLinkshell();
     void RemoveMemberByName(const std::string& MemberName, uint8 requesterRank, bool breakLinkshell = false);
@@ -76,10 +76,10 @@ namespace linkshell
 auto LoadLinkshell(uint32 id) -> CLinkshell*;
 void UnloadLinkshell(uint32 id);
 
-bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
-bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
+auto AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum) -> bool;
+auto DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell) -> bool;
 
-uint32      RegisterNewLinkshell(const std::string& name, uint16 color);
-CLinkshell* GetLinkshell(uint32 id);
+auto RegisterNewLinkshell(const std::string& name, uint16 color) -> uint32;
+auto GetLinkshell(uint32 id) -> CLinkshell*;
 
 }; // namespace linkshell

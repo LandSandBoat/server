@@ -1694,7 +1694,7 @@ void SendLocalPlayerPackets(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-bool HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin)
+auto HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin) -> bool
 {
     if (ItemID == 0)
     {
@@ -1715,7 +1715,7 @@ bool HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycle
     return false;
 }
 
-uint32 getItemCount(CCharEntity* PChar, uint16 ItemID)
+auto getItemCount(CCharEntity* PChar, uint16 ItemID) -> uint32
 {
     if (ItemID == 0)
     {
@@ -1777,7 +1777,7 @@ void UpdateSubJob(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-uint8 MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID)
+auto MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8
 {
     CItemContainer* PItemContainer = PChar->getStorage(LocationID);
 
@@ -2054,7 +2054,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
     }
 }
 
-bool hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID)
+auto hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID) -> bool
 {
     CItem* PItem = PChar->getEquip((SLOTTYPE)equipSlotID);
     return PItem != nullptr && PItem->isType(ITEM_EQUIPMENT);
@@ -2076,7 +2076,7 @@ void RemoveSub(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
+auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID) -> bool
 {
     CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
@@ -3507,7 +3507,7 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
 }
 
 // determines if this player has bonus for this skill based on the active sch arts
-bool isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID)
+auto isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID) -> bool
 {
     return (SkillID >= xi::SkillType::DivineMagic && SkillID <= xi::SkillType::EnfeeblingMagic &&
             PChar->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::LightArts, xi::StatusEffect::AddendumWhite })) ||
@@ -3516,7 +3516,7 @@ bool isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID)
 }
 
 // calculates the bonus skill based on active sch arts
-int16 ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID)
+auto ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID) -> int16
 {
     int16 skillBonus = 0;
 
@@ -4102,12 +4102,12 @@ void delKeyItem(CCharEntity* PChar, xi::KeyItem keyItemId)
  *                                                                       *
  ************************************************************************/
 
-int32 hasSpell(CCharEntity* PChar, uint16 SpellID)
+auto hasSpell(CCharEntity* PChar, uint16 SpellID) -> int32
 {
     return PChar->m_SpellList[SpellID];
 }
 
-int32 addSpell(CCharEntity* PChar, uint16 spellID)
+auto addSpell(CCharEntity* PChar, uint16 spellID) -> int32
 {
     auto* PSpell = spell::GetSpell(static_cast<SpellID>(spellID));
     if (PSpell && !hasSpell(PChar, spellID))
@@ -4118,7 +4118,7 @@ int32 addSpell(CCharEntity* PChar, uint16 spellID)
     return 0;
 }
 
-int32 delSpell(CCharEntity* PChar, uint16 spellID)
+auto delSpell(CCharEntity* PChar, uint16 spellID) -> int32
 {
     auto* PSpell = spell::GetSpell(static_cast<SpellID>(spellID));
     if (PSpell && hasSpell(PChar, spellID))
@@ -4135,17 +4135,17 @@ int32 delSpell(CCharEntity* PChar, uint16 spellID)
  *                                                                       *
  ************************************************************************/
 
-int32 hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID)
+auto hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return hasBit(AbilityID, PChar->m_LearnedAbilities, sizeof(PChar->m_LearnedAbilities));
 }
 
-int32 addLearnedAbility(CCharEntity* PChar, uint16 AbilityID)
+auto addLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return addBit(AbilityID, PChar->m_LearnedAbilities, sizeof(PChar->m_LearnedAbilities));
 }
 
-int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID)
+auto delLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return delBit(AbilityID, PChar->m_LearnedAbilities, sizeof(PChar->m_LearnedAbilities));
 }
@@ -4156,7 +4156,7 @@ int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID)
  *                                                                       *
  ************************************************************************/
 
-bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
+auto hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId) -> bool
 {
     if (PChar == nullptr)
     {
@@ -4213,17 +4213,17 @@ void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
  *                                                                       *
  ************************************************************************/
 
-int32 hasTitle(CCharEntity* PChar, uint16 Title)
+auto hasTitle(CCharEntity* PChar, uint16 Title) -> int32
 {
     return hasBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
 
-int32 addTitle(CCharEntity* PChar, uint16 Title)
+auto addTitle(CCharEntity* PChar, uint16 Title) -> int32
 {
     return addBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
 
-int32 delTitle(CCharEntity* PChar, uint16 Title)
+auto delTitle(CCharEntity* PChar, uint16 Title) -> int32
 {
     return delBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
@@ -4243,17 +4243,17 @@ void setTitle(CCharEntity* PChar, uint16 Title)
  *                                                                       *
  ************************************************************************/
 
-int32 hasAbility(CCharEntity* PChar, uint16 AbilityID)
+auto hasAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return hasBit(AbilityID, PChar->m_Abilities, sizeof(PChar->m_Abilities));
 }
 
-int32 addAbility(CCharEntity* PChar, uint16 AbilityID)
+auto addAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return addBit(AbilityID, PChar->m_Abilities, sizeof(PChar->m_Abilities));
 }
 
-int32 delAbility(CCharEntity* PChar, uint16 AbilityID)
+auto delAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return delBit(AbilityID, PChar->m_Abilities, sizeof(PChar->m_Abilities));
 }
@@ -4264,22 +4264,22 @@ int32 delAbility(CCharEntity* PChar, uint16 AbilityID)
  *                                                                       *
  ************************************************************************/
 
-int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID)
+auto hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32
 {
     return hasBit(WeaponSkillID, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
 }
 
-int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID)
+auto addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32
 {
     return addBit(WeaponSkillID, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
 }
 
-int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID)
+auto delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32
 {
     return delBit(WeaponSkillID, PChar->m_WeaponSkills, sizeof(PChar->m_WeaponSkills));
 }
 
-bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
+auto canUseWeaponSkill(CCharEntity* PChar, uint16 wsid) -> bool
 {
     CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
 
@@ -4298,17 +4298,17 @@ bool canUseWeaponSkill(CCharEntity* PChar, uint16 wsid)
  *                                                                       *
  ************************************************************************/
 
-int32 hasTrait(CCharEntity* PChar, uint16 TraitID)
+auto hasTrait(CCharEntity* PChar, uint16 TraitID) -> int32
 {
     return hasBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
-int32 addTrait(CCharEntity* PChar, uint16 TraitID)
+auto addTrait(CCharEntity* PChar, uint16 TraitID) -> int32
 {
     return addBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
 
-int32 delTrait(CCharEntity* PChar, uint16 TraitID)
+auto delTrait(CCharEntity* PChar, uint16 TraitID) -> int32
 {
     return delBit(TraitID, PChar->m_TraitList, sizeof(PChar->m_TraitList));
 }
@@ -4319,17 +4319,17 @@ int32 delTrait(CCharEntity* PChar, uint16 TraitID)
  *                                                                       *
  ************************************************************************/
 
-int32 hasPetAbility(CCharEntity* PChar, uint16 AbilityID)
+auto hasPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return hasBit(AbilityID, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
 }
 
-int32 addPetAbility(CCharEntity* PChar, uint16 AbilityID)
+auto addPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return addBit(AbilityID, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
 }
 
-int32 delPetAbility(CCharEntity* PChar, uint16 AbilityID)
+auto delPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32
 {
     return delBit(AbilityID, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
 }
@@ -4382,7 +4382,7 @@ void SetExpDifficultyCurve(std::vector<std::pair<uint16, EMobDifficulty>>& curve
  *                                                                       *
  ************************************************************************/
 
-EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
+auto CheckMob(uint8 charlvl, CBattleEntity* PMob) -> EMobDifficulty
 {
     auto moblvl = PMob ? PMob->GetMLevel() + PMob->getMod(xi::Mod::EXP_LVL_MOD) : -1;
 
@@ -4424,7 +4424,7 @@ EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
  *                                                                       *
  ************************************************************************/
 
-uint32 GetBaseExp(uint8 charlvl, int16 moblvl)
+auto GetBaseExp(uint8 charlvl, int16 moblvl) -> uint32
 {
     // Pets can surpass level 99, but they do not count against the player for EXP calculations.
     charlvl = std::min<uint8>(charlvl, 99);
@@ -4470,7 +4470,7 @@ auto GetExpNEXTLevelForChar(const CCharEntity* PChar, const uint8 charlvl) -> ui
  *                                                                       *
  ************************************************************************/
 
-uint8 GetExpLevel(CBattleEntity* PMember)
+auto GetExpLevel(CBattleEntity* PMember) -> uint8
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
     {
@@ -4806,7 +4806,7 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
  *                                                                       *
  ************************************************************************/
 
-uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
+auto AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints) -> uint16
 {
     TracyZoneScoped;
 
@@ -6300,7 +6300,7 @@ auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
     return false;
 }
 
-uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest)
+auto getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest) -> uint8
 {
     uint8 current  = PChar->m_questLog[log].current[quest / 8] & (1 << (quest % 8));
     uint8 complete = PChar->m_questLog[log].complete[quest / 8] & (1 << (quest % 8));
@@ -6726,7 +6726,7 @@ void RemoveSeekFlag(CCharEntity* PChar)
     PChar->pushPacket<CCharSyncPacket>(PChar);
 }
 
-bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget)
+auto IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget) -> bool
 {
     if (PTarget->getBlockingAid())
     {
@@ -6798,7 +6798,7 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
     }
 }
 
-int32 GetPoints(CCharEntity* PChar, const char* type)
+auto GetPoints(CCharEntity* PChar, const char* type) -> int32
 {
     TracyZoneScoped;
 
@@ -6853,7 +6853,7 @@ void SetUnityLeader(CCharEntity* PChar, uint8 leaderID)
     db::preparedStmt("UPDATE char_profile SET unity_leader = ? WHERE charid = ?", PChar->profile.unity_leader, PChar->id);
 }
 
-std::string GetConquestPointsName(CCharEntity* PChar)
+auto GetConquestPointsName(CCharEntity* PChar) -> std::string
 {
     switch (PChar->profile.nation)
     {
@@ -7025,7 +7025,7 @@ auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool
     return SendToZone(PChar, PChar->loc.destination);
 }
 
-bool AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints)
+auto AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints) -> bool
 {
     TracyZoneScoped;
 
@@ -7047,7 +7047,7 @@ bool AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints)
     return false;
 }
 
-int32 GetCharVar(CCharEntity* PChar, const std::string& var)
+auto GetCharVar(CCharEntity* PChar, const std::string& var) -> int32
 {
     if (PChar == nullptr)
     {
@@ -7085,7 +7085,7 @@ void SetCharVar(CCharEntity* PChar, const std::string& var, int32 value, uint32 
     return PChar->setCharVar(var, value, expiry);
 }
 
-int32 ClearCharVarsWithPrefix(CCharEntity* PChar, const std::string& prefix)
+auto ClearCharVarsWithPrefix(CCharEntity* PChar, const std::string& prefix) -> int32
 {
     if (PChar == nullptr)
     {
@@ -7232,7 +7232,7 @@ auto getWideScanRange(xi::Job job, uint8 level) -> uint16
     }
 }
 
-uint16 getWideScanRange(CCharEntity* PChar)
+auto getWideScanRange(CCharEntity* PChar) -> uint16
 {
     // Get maximum widescan range from main job or sub job
     return std::max(getWideScanRange(PChar->GetMJob(), PChar->GetMLevel()), getWideScanRange(PChar->GetSJob(), PChar->GetSLevel()));
@@ -7254,7 +7254,7 @@ void SendClearTimerPacket(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_BATTLEFIELD>();
 }
 
-earth_time::time_point getTraverserEpoch(CCharEntity* PChar)
+auto getTraverserEpoch(CCharEntity* PChar) -> earth_time::time_point
 {
     TracyZoneScoped;
 
@@ -7275,7 +7275,7 @@ void setTraverserEpoch(CCharEntity* PChar)
     db::preparedStmt("UPDATE char_unlocks SET traverser_start = CURRENT_TIMESTAMP() WHERE charid = ?", PChar->id);
 }
 
-uint32 getClaimedTraverserStones(CCharEntity* PChar)
+auto getClaimedTraverserStones(CCharEntity* PChar) -> uint32
 {
     TracyZoneScoped;
 
@@ -7302,7 +7302,7 @@ void setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal)
     db::preparedStmt("UPDATE char_unlocks SET traverser_claimed = ? WHERE charid = ?", stoneTotal, PChar->id);
 }
 
-uint32 getAvailableTraverserStones(CCharEntity* PChar)
+auto getAvailableTraverserStones(CCharEntity* PChar) -> uint32
 {
     TracyZoneScoped;
 
@@ -7433,7 +7433,7 @@ void WriteHistory(const CCharEntity* PChar)
         PChar->m_charHistory.distanceTravelled);
 }
 
-uint8 getMaxItemLevel(CCharEntity* PChar)
+auto getMaxItemLevel(CCharEntity* PChar) -> uint8
 {
     uint8 maxItemLevel = 0;
 
@@ -7450,7 +7450,7 @@ uint8 getMaxItemLevel(CCharEntity* PChar)
     return maxItemLevel;
 }
 
-uint8 getItemLevelDifference(CCharEntity* PChar)
+auto getItemLevelDifference(CCharEntity* PChar) -> uint8
 {
     float itemLevelDiff = 0;
     uint8 highestItem   = 0;
@@ -7484,7 +7484,7 @@ uint8 getItemLevelDifference(CCharEntity* PChar)
     return floor(itemLevelDiff);
 }
 
-uint8 getMainhandItemLevel(CCharEntity* PChar)
+auto getMainhandItemLevel(CCharEntity* PChar) -> uint8
 {
     CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_MAIN);
 
@@ -7497,7 +7497,7 @@ uint8 getMainhandItemLevel(CCharEntity* PChar)
 }
 
 // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
-uint8 getRangedItemLevel(CCharEntity* PChar)
+auto getRangedItemLevel(CCharEntity* PChar) -> uint8
 {
     CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_RANGED);
     if (PItem)
@@ -7514,7 +7514,7 @@ uint8 getRangedItemLevel(CCharEntity* PChar)
     return 0;
 }
 
-bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
+auto hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity) -> bool
 {
     SpawnIDList_t* spawnlist = nullptr;
 
@@ -7551,7 +7551,7 @@ bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
     return spawnlist->find(entity->id) != spawnlist->end();
 }
 
-uint32 getCharIdFromName(const std::string& name)
+auto getCharIdFromName(const std::string& name) -> uint32
 {
     TracyZoneScoped;
 
@@ -7564,7 +7564,7 @@ uint32 getCharIdFromName(const std::string& name)
     return 0;
 }
 
-uint32 getAccountIdFromName(const std::string& name)
+auto getAccountIdFromName(const std::string& name) -> uint32
 {
     TracyZoneScoped;
 
@@ -7765,7 +7765,7 @@ auto IsHomeNation(const xi::Nation nation, const xi::Region region) -> bool
     }
 }
 
-bool isOrchestrionPlaced(CCharEntity* PChar)
+auto isOrchestrionPlaced(CCharEntity* PChar) -> bool
 {
     for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {
@@ -7834,7 +7834,7 @@ void updateMannequins(CCharEntity* PChar)
     }
 }
 
-bool raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize)
+auto raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize) -> bool
 {
     if (!PChar)
     {

@@ -123,12 +123,12 @@ void CLuaZone::registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, fl
  *                                                                       *
  ************************************************************************/
 
-sol::object CLuaZone::levelRestriction()
+auto CLuaZone::levelRestriction() -> sol::object
 {
     return sol::lua_nil;
 }
 
-sol::table CLuaZone::getPlayers()
+auto CLuaZone::getPlayers() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -140,7 +140,7 @@ sol::table CLuaZone::getPlayers()
     return table;
 }
 
-sol::table CLuaZone::getNPCs()
+auto CLuaZone::getNPCs() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -152,7 +152,7 @@ sol::table CLuaZone::getNPCs()
     return table;
 }
 
-sol::table CLuaZone::getMobs()
+auto CLuaZone::getMobs() -> sol::table
 {
     auto table = lua.create_table();
     // clang-format off
@@ -169,7 +169,7 @@ auto CLuaZone::getID() -> xi::ZoneId
     return m_pLuaZone->GetID();
 }
 
-const std::string& CLuaZone::getName()
+auto CLuaZone::getName() -> const std::string&
 {
     return m_pLuaZone->getName();
 }
@@ -179,7 +179,7 @@ auto CLuaZone::getRegionID() -> xi::Region
     return m_pLuaZone->GetRegionID();
 }
 
-xi::ZoneType CLuaZone::getTypeMask()
+auto CLuaZone::getTypeMask() -> xi::ZoneType
 {
     return m_pLuaZone->GetTypeMask();
 }
@@ -198,7 +198,7 @@ auto CLuaZone::getWeather() const -> xi::Weather
     return m_pLuaZone->weather().current();
 }
 
-uint32 CLuaZone::getUptime()
+auto CLuaZone::getUptime() -> uint32
 {
     long long uptime = timer::count_seconds(timer::get_uptime());
     // returns the zone up time in seconds
@@ -263,7 +263,7 @@ void CLuaZone::rebuildNavmesh(const sol::table& table)
     m_pLuaZone->RebuildNavMesh(config);
 }
 
-bool CLuaZone::isNavigablePoint(const sol::table& point)
+auto CLuaZone::isNavigablePoint(const sol::table& point) -> bool
 {
     // clang-format off
     position_t position
@@ -344,7 +344,7 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
-sol::table CLuaZone::queryEntitiesByName(const std::string& name)
+auto CLuaZone::queryEntitiesByName(const std::string& name) -> sol::table
 {
     const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 
@@ -435,7 +435,7 @@ void CLuaZone::Register()
     SOL_REGISTER("queryEntitiesByName", CLuaZone::queryEntitiesByName);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)
+auto operator<<(std::ostream& os, const CLuaZone& zone) -> std::ostream&
 {
     std::string id = zone.m_pLuaZone ? std::to_string(static_cast<uint16>(zone.m_pLuaZone->GetID())) : "nullptr";
     return os << "CLuaZone(" << id << ")";

@@ -44,7 +44,7 @@ CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
  *                                                                       *
  ************************************************************************/
 
-RecastList_t* CRecastContainer::GetRecastList(xi::RecastType type)
+auto CRecastContainer::GetRecastList(xi::RecastType type) -> RecastList_t*
 {
     switch (type)
     {
@@ -60,7 +60,7 @@ RecastList_t* CRecastContainer::GetRecastList(xi::RecastType type)
     return nullptr;
 }
 
-Recast_t* CRecastContainer::GetRecast(const xi::RecastType type, const xi::Recast id)
+auto CRecastContainer::GetRecast(const xi::RecastType type, const xi::Recast id) -> Recast_t*
 {
     RecastList_t* list = GetRecastList(type);
 
@@ -68,7 +68,7 @@ Recast_t* CRecastContainer::GetRecast(const xi::RecastType type, const xi::Recas
     return it != list->end() ? &*it : nullptr;
 }
 
-Recast_t* CRecastContainer::GetLootRecast(LootRecastID id)
+auto CRecastContainer::GetLootRecast(LootRecastID id) -> Recast_t*
 {
     return GetRecast(xi::RecastType::Loot, static_cast<xi::Recast>(id));
 }
@@ -89,7 +89,7 @@ void CRecastContainer::AddLootRecast(LootRecastID id, timer::duration duration)
     Add(xi::RecastType::Loot, static_cast<xi::Recast>(id), duration);
 }
 
-Recast_t* CRecastContainer::Load(xi::RecastType type, const xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges)
+auto CRecastContainer::Load(xi::RecastType type, const xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) -> Recast_t*
 {
     Recast_t* recast = GetRecast(type, id);
 
@@ -205,7 +205,7 @@ void CRecastContainer::DeleteByIndex(xi::RecastType type, uint8 index)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::Has(xi::RecastType type, xi::Recast id)
+auto CRecastContainer::Has(xi::RecastType type, xi::Recast id) -> bool
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
@@ -214,7 +214,7 @@ bool CRecastContainer::Has(xi::RecastType type, xi::Recast id)
     return maybeRecast != PRecastList->end();
 }
 
-bool CRecastContainer::HasLootRecast(LootRecastID id)
+auto CRecastContainer::HasLootRecast(LootRecastID id) -> bool
 {
     return Has(xi::RecastType::Loot, static_cast<xi::Recast>(id));
 }
@@ -225,7 +225,7 @@ bool CRecastContainer::HasLootRecast(LootRecastID id)
  *                                                                       *
  ************************************************************************/
 
-bool CRecastContainer::HasRecast(xi::RecastType type, xi::Recast id, timer::duration recast)
+auto CRecastContainer::HasRecast(xi::RecastType type, xi::Recast id, timer::duration recast) -> bool
 {
     RecastList_t* PRecastList = GetRecastList(type);
 

@@ -183,7 +183,7 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
     }
 }
 
-bool HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotToPut)
+auto HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotToPut) -> bool
 {
     uint8 setpoints = 0;
     for (int slot = 0; slot < 20; slot++)
@@ -221,7 +221,7 @@ void UnequipAllBlueSpells(CCharEntity* PChar)
     PChar->updatemask |= UPDATE_HP;
 }
 
-bool IsSpellSet(CCharEntity* PChar, CBlueSpell* PSpell)
+auto IsSpellSet(CCharEntity* PChar, CBlueSpell* PSpell) -> bool
 {
     for (unsigned char m_SetBlueSpell : PChar->m_SetBlueSpells)
     {
@@ -283,7 +283,7 @@ void CheckSpellLevels(CCharEntity* PChar)
     }
 }
 
-uint8 GetTotalSlots(CCharEntity* PChar)
+auto GetTotalSlots(CCharEntity* PChar) -> uint8
 {
     uint8 level = 0;
     if (PChar->GetMJob() == xi::Job::BLU)
@@ -305,7 +305,7 @@ uint8 GetTotalSlots(CCharEntity* PChar)
     }
 }
 
-uint8 GetTotalBlueMagicPoints(CCharEntity* PChar)
+auto GetTotalBlueMagicPoints(CCharEntity* PChar) -> uint8
 {
     uint8 level = 0;
     if (PChar->GetMJob() == xi::Job::BLU)

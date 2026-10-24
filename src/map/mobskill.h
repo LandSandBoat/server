@@ -59,42 +59,42 @@ class CMobSkill
 public:
     CMobSkill(uint16 id);
 
-    bool hasMissMsg() const;
-    bool isAoE() const;
-    bool isConal() const;
-    bool isSingle() const;
-    bool isTpFreeSkill() const;
-    bool isAstralFlow() const;
-    bool isBloodPactWard() const;
-    bool isBloodPactRage() const;
+    auto hasMissMsg() const -> bool;
+    auto isAoE() const -> bool;
+    auto isConal() const -> bool;
+    auto isSingle() const -> bool;
+    auto isTpFreeSkill() const -> bool;
+    auto isAstralFlow() const -> bool;
+    auto isBloodPactWard() const -> bool;
+    auto isBloodPactRage() const -> bool;
 
-    uint16          getID() const;
-    auto            getAnimationID() const -> ActionAnimation;
-    uint8           getAoe() const;
-    float           getDistance() const;
-    auto            getFlag() const -> uint16;
-    timer::duration getAnimationTime() const;
-    timer::duration getActivationTime() const;
-    auto            getMsg() const -> MsgBasic;
-    uint16          getValidTargets() const;
-    int16           getTP() const;
-    auto            getHP() const -> int32;
-    uint8           getHPP() const;
-    auto            getTargets() const -> const std::vector<CBattleEntity*>&;
-    uint16          getTotalTargets() const;
-    uint32          getPrimaryTargetID() const;
-    auto            getFinalAnimationSub() -> Maybe<uint8>;
-    uint16          getMsgForAction() const;
-    float           getRadius() const;
-    int16           getParam() const;
-    auto            getKnockback() const -> Knockback;
-    uint8           getPrimarySkillchain() const;
-    uint8           getSecondarySkillchain() const;
-    uint8           getTertiarySkillchain() const;
-    auto            getAttackType() const -> xi::AttackType;
-    auto            isCritical() const -> bool;
+    auto getID() const -> uint16;
+    auto getAnimationID() const -> ActionAnimation;
+    auto getAoe() const -> uint8;
+    auto getDistance() const -> float;
+    auto getFlag() const -> uint16;
+    auto getAnimationTime() const -> timer::duration;
+    auto getActivationTime() const -> timer::duration;
+    auto getMsg() const -> MsgBasic;
+    auto getValidTargets() const -> uint16;
+    auto getTP() const -> int16;
+    auto getHP() const -> int32;
+    auto getHPP() const -> uint8;
+    auto getTargets() const -> const std::vector<CBattleEntity*>&;
+    auto getTotalTargets() const -> uint16;
+    auto getPrimaryTargetID() const -> uint32;
+    auto getFinalAnimationSub() -> Maybe<uint8>;
+    auto getMsgForAction() const -> uint16;
+    auto getRadius() const -> float;
+    auto getParam() const -> int16;
+    auto getKnockback() const -> Knockback;
+    auto getPrimarySkillchain() const -> uint8;
+    auto getSecondarySkillchain() const -> uint8;
+    auto getTertiarySkillchain() const -> uint8;
+    auto getAttackType() const -> xi::AttackType;
+    auto isCritical() const -> bool;
 
-    bool isDamageMsg() const;
+    auto isDamageMsg() const -> bool;
 
     void setID(uint16 id);
     void setAnimationID(uint16 aid);
@@ -121,8 +121,8 @@ public:
     void setAttackType(xi::AttackType attackType);
     void setCritical(bool isCritical);
 
-    const std::string& getName();
-    void               setName(const std::string& name);
+    auto getName() -> const std::string&;
+    void setName(const std::string& name);
 
 private:
     uint16          m_ID;

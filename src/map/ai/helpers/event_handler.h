@@ -48,7 +48,7 @@ class CAIEventHandler
 public:
     void addListener(const std::string& eventName, const sol::function& luaFunc, const std::string& identifier);
     void removeListener(const std::string& identifier);
-    bool hasListener(const std::string& eventName) const;
+    auto hasListener(const std::string& eventName) const -> bool;
 
     template <class... Args>
     void triggerListener(const std::string& eventName, Args&&... args) noexcept;

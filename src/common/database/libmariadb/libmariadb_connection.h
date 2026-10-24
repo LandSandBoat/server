@@ -38,8 +38,8 @@ public:
     explicit LibMariaDBConnection(MYSQL* connection);
     ~LibMariaDBConnection() override;
 
-    LibMariaDBConnection(const LibMariaDBConnection&)            = delete;
-    LibMariaDBConnection& operator=(const LibMariaDBConnection&) = delete;
+    LibMariaDBConnection(const LibMariaDBConnection&)                    = delete;
+    auto operator=(const LibMariaDBConnection&) -> LibMariaDBConnection& = delete;
 
     auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> override;
     auto schema() -> std::string override;

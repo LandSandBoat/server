@@ -37,22 +37,22 @@ CLuaTriggerArea::CLuaTriggerArea(ITriggerArea* PTriggerArea)
     }
 }
 
-uint32 CLuaTriggerArea::getTriggerAreaID()
+auto CLuaTriggerArea::getTriggerAreaID() -> uint32
 {
     return m_PLuaTriggerArea->getTriggerAreaID();
 }
 
-int16 CLuaTriggerArea::getCount()
+auto CLuaTriggerArea::getCount() -> int16
 {
     return m_PLuaTriggerArea->getCount();
 }
 
-int16 CLuaTriggerArea::addCount(int16 count)
+auto CLuaTriggerArea::addCount(int16 count) -> int16
 {
     return m_PLuaTriggerArea->addCount(count);
 }
 
-int16 CLuaTriggerArea::delCount(int16 count)
+auto CLuaTriggerArea::delCount(int16 count) -> int16
 {
     return m_PLuaTriggerArea->delCount(count);
 }
@@ -66,7 +66,7 @@ void CLuaTriggerArea::Register()
     SOL_REGISTER("delCount", CLuaTriggerArea::delCount);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaTriggerArea& triggerArea)
+auto operator<<(std::ostream& os, const CLuaTriggerArea& triggerArea) -> std::ostream&
 {
     std::string id = triggerArea.m_PLuaTriggerArea ? std::to_string(triggerArea.m_PLuaTriggerArea->getTriggerAreaID()) : "nullptr";
     return os << "CLuaTriggerArea(" << id << ")";

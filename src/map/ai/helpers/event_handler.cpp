@@ -51,7 +51,7 @@ void CAIEventHandler::removeListener(const std::string& identifier)
     removeFromAllListeners(identifier);
 }
 
-bool CAIEventHandler::hasListener(const std::string& eventName) const
+auto CAIEventHandler::hasListener(const std::string& eventName) const -> bool
 {
     const auto& listeners = eventListeners_.find(eventName);
     return listeners != eventListeners_.end() && !listeners->second.empty();

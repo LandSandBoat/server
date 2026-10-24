@@ -34,7 +34,7 @@ public:
 
     ~ColonizationSystem() = default;
 
-    bool handleMessage(uint8 messageType, IPPMessage&& message)
+    auto handleMessage(uint8 messageType, IPPMessage&& message) -> bool
     {
         return false;
     }

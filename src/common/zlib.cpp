@@ -150,7 +150,7 @@ void build_decode_table()
 
 } // namespace
 
-int32 zlib_init()
+auto zlib_init() -> int32
 {
     auto enc = read_to_vector("res/compress.dat");
     if (!enc)
@@ -177,7 +177,7 @@ int32 zlib_init()
 // read-modify-write for every output bit), which was ~11x slower; the bitstream is identical for
 // every complete byte (the trailing partial byte's unused high bits are zero, which the decoder
 // ignores).
-int32 zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz)
+auto zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
 {
     assert(in && out);
     assert(!zlib.enc.empty());
@@ -235,7 +235,7 @@ int32 zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 
 // Table-driven equivalent of original zlib_decompress. Instead of one tree step per input bit,
 // peek the next 8 bits and resolve any code of <= 8 bits in a single lookup (g_dtab); codes
 // longer than 8 bits fall back to the original bit-by-bit tree walk.
-int32 zlib_decompress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz)
+auto zlib_decompress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
 {
     assert(in && out);
     assert(!zlib.jump.empty());

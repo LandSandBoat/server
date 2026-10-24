@@ -697,30 +697,30 @@ class CAbility
 public:
     CAbility(uint16 id);
 
-    bool isPetAbility() const;
-    bool isAoE() const;
-    bool isConal();
+    auto isPetAbility() const -> bool;
+    auto isAoE() const -> bool;
+    auto isConal() -> bool;
 
-    uint16          getID() const;
-    uint16          getMobSkillID() const;
-    auto            getJob() -> xi::Job;
-    uint8           getLevel() const;
-    auto            getAnimationID() const -> ActionAnimation;
-    timer::duration getAnimationTime();
-    timer::duration getCastTime();
-    float           getRange() const;
-    uint8           getAOE() const;
-    uint8           getRadius() const;
-    uint16          getValidTarget() const;
-    uint16          getAddType() const;
-    auto            getMessage() const -> MsgBasic;
-    timer::duration getRecastTime() const;
-    xi::Recast      getRecastId() const;
-    int32           getCE() const;
-    int32           getVE() const;
-    uint16          getMeritModID() const;
-    auto            getActionType() const -> ActionCategory;
-    auto            getPostActionEffectCleanup() -> xi::StatusEffect;
+    auto getID() const -> uint16;
+    auto getMobSkillID() const -> uint16;
+    auto getJob() -> xi::Job;
+    auto getLevel() const -> uint8;
+    auto getAnimationID() const -> ActionAnimation;
+    auto getAnimationTime() -> timer::duration;
+    auto getCastTime() -> timer::duration;
+    auto getRange() const -> float;
+    auto getAOE() const -> uint8;
+    auto getRadius() const -> uint8;
+    auto getValidTarget() const -> uint16;
+    auto getAddType() const -> uint16;
+    auto getMessage() const -> MsgBasic;
+    auto getRecastTime() const -> timer::duration;
+    auto getRecastId() const -> xi::Recast;
+    auto getCE() const -> int32;
+    auto getVE() const -> int32;
+    auto getMeritModID() const -> uint16;
+    auto getActionType() const -> ActionCategory;
+    auto getPostActionEffectCleanup() -> xi::StatusEffect;
 
     void setID(uint16 id);
     void setJob(xi::Job Job);
@@ -742,8 +742,8 @@ public:
     void setActionType(ActionCategory type);
     void setPostActionEffectCleanup(xi::StatusEffect effectToCleanup);
 
-    const std::string& getName();
-    void               setName(const std::string& name);
+    auto getName() -> const std::string&;
+    void setName(const std::string& name);
 
 private:
     uint16           m_ID;
@@ -779,11 +779,11 @@ namespace ability
 
 void LoadAbilitiesList();
 
-CAbility* GetAbility(uint16 AbilityID);
+auto GetAbility(uint16 AbilityID) -> CAbility*;
 
-auto      GetTwoHourAbility(xi::Job JobID) -> CAbility*;
-bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
-Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
+auto GetTwoHourAbility(xi::Job JobID) -> CAbility*;
+auto CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID) -> bool;
+auto GetCharge(CBattleEntity* PUser, uint16 chargeID) -> Charge_t*;
 
 auto GetAbilities(xi::Job JobID) -> std::vector<CAbility*>;
 

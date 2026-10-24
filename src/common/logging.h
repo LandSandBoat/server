@@ -42,7 +42,7 @@ namespace settings
 {
 
 template <typename T>
-T get(std::string_view);
+auto get(std::string_view) -> T;
 
 } // namespace settings
 
@@ -125,7 +125,7 @@ void renderJsonLine(fmt::memory_buffer& buf, const LogRecord& rec);
 // clang-format off
 
 template <typename T>
-std::string asStringFromUntrustedSource(const T* ptr)
+auto asStringFromUntrustedSource(const T* ptr) -> std::string
 {
     if (!ptr)
     {
@@ -139,7 +139,7 @@ std::string asStringFromUntrustedSource(const T* ptr)
 }
 
 template <typename T>
-std::string asStringFromUntrustedSource(const T* ptr, size_t max_size)
+auto asStringFromUntrustedSource(const T* ptr, size_t max_size) -> std::string
 {
     if (!ptr)
     {

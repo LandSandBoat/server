@@ -253,7 +253,7 @@ auto CParty::MemberCount(const xi::ZoneId ZoneID) -> uint8
 }
 
 // Returns entity pointer to party member by name (used for /pcmd kick or otherwise)
-CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
+auto CParty::GetMemberByName(const std::string& memberName) -> CBattleEntity*
 {
     if (m_PartyType != PARTY_PCS)
     {
@@ -503,7 +503,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
     PEntity->PParty = nullptr;
 }
 
-bool CParty::RemovePartyLeader(CBattleEntity* PEntity)
+auto CParty::RemovePartyLeader(CBattleEntity* PEntity) -> bool
 {
     if (members.empty())
     {
@@ -552,7 +552,7 @@ bool CParty::RemovePartyLeader(CBattleEntity* PEntity)
     return true;
 }
 
-std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
+auto CParty::GetPartyInfo() const -> std::vector<CParty::partyInfo_t>
 {
     std::vector<CParty::partyInfo_t> memberinfo;
 
@@ -783,27 +783,27 @@ void CParty::SetPartyID(uint32 id)
     m_PartyID = id;
 }
 
-uint32 CParty::GetPartyID() const
+auto CParty::GetPartyID() const -> uint32
 {
     return m_PartyID;
 }
 
-CBattleEntity* CParty::GetLeader()
+auto CParty::GetLeader() -> CBattleEntity*
 {
     return m_PLeader;
 }
 
-CBattleEntity* CParty::GetSyncTarget()
+auto CParty::GetSyncTarget() -> CBattleEntity*
 {
     return m_PSyncTarget;
 }
 
-CBattleEntity* CParty::GetQuaterMaster()
+auto CParty::GetQuaterMaster() -> CBattleEntity*
 {
     return m_PQuarterMaster;
 }
 
-uint16 CParty::GetMemberFlags(CBattleEntity* PEntity)
+auto CParty::GetMemberFlags(CBattleEntity* PEntity) -> uint16
 {
     if (PEntity == nullptr || PEntity->PParty != this)
     {
@@ -1333,7 +1333,7 @@ void CParty::SetPartyNumber(uint8 number)
     m_PartyNumber = number;
 }
 
-bool CParty::HasOnlyOneMember() const
+auto CParty::HasOnlyOneMember() const -> bool
 {
     if (members.size() != 1)
     {
@@ -1344,7 +1344,7 @@ bool CParty::HasOnlyOneMember() const
     return LoadPartySize() == 1;
 }
 
-bool CParty::IsFull() const
+auto CParty::IsFull() const -> bool
 {
     if (members.size() > 5)
     {
@@ -1355,7 +1355,7 @@ bool CParty::IsFull() const
     return LoadPartySize() > 5;
 }
 
-uint32 CParty::LoadPartySize() const
+auto CParty::LoadPartySize() const -> uint32
 {
     if (m_PartyType != PARTYTYPE::PARTY_PCS)
     {
@@ -1371,7 +1371,7 @@ uint32 CParty::LoadPartySize() const
     return 0;
 }
 
-timer::time_point CParty::GetTimeLastMemberJoined()
+auto CParty::GetTimeLastMemberJoined() -> timer::time_point
 {
     auto* PLeader                    = dynamic_cast<CCharEntity*>(CParty::GetLeader());
     auto  LeaderMemberLastJoinedTime = timer::now();
@@ -1384,7 +1384,7 @@ timer::time_point CParty::GetTimeLastMemberJoined()
     return LeaderMemberLastJoinedTime;
 }
 
-bool CParty::HasTrusts()
+auto CParty::HasTrusts() -> bool
 {
     for (auto* PMember : members)
     {
@@ -1404,7 +1404,7 @@ void CParty::MarkFormedByTrusts()
     m_FormedByTrusts = true;
 }
 
-bool CParty::IsFormedByTrusts() const
+auto CParty::IsFormedByTrusts() const -> bool
 {
     return m_FormedByTrusts;
 }
@@ -1488,7 +1488,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
     }
 }
 
-std::size_t CParty::GetMemberCountAcrossAllProcesses()
+auto CParty::GetMemberCountAcrossAllProcesses() -> std::size_t
 {
     // TODO: We should detect whether or not we're a multi-process
     // setup. So we can avoid asking the database for more information

@@ -107,12 +107,12 @@ void UpdateSubJob(CCharEntity* PChar);
 
 void SetLevelRestriction(CCharEntity* PChar, uint8 lvl);
 
-EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob);
+auto CheckMob(uint8 charlvl, CBattleEntity* PMob) -> EMobDifficulty;
 
-uint32 GetBaseExp(uint8 charlvl, int16 moblvl);
-auto   GetExpNEXTLevel(uint8 charlvl) -> uint32;
-auto   GetExpNEXTLevelForChar(const CCharEntity* PChar, uint8 charlvl) -> uint32;
-uint8  GetExpLevel(CBattleEntity* PMember);
+auto GetBaseExp(uint8 charlvl, int16 moblvl) -> uint32;
+auto GetExpNEXTLevel(uint8 charlvl) -> uint32;
+auto GetExpNEXTLevelForChar(const CCharEntity* PChar, uint8 charlvl) -> uint32;
+auto GetExpLevel(CBattleEntity* PMember) -> uint8;
 
 void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
 void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
@@ -120,24 +120,24 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
 void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
 void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScripts, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false, bool allowLimitPoints = true);
 
-uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
-void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
-void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
+auto AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints) -> uint16;
+void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
+void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
 
-void  TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
-void  TrackArrowUsageForScavenge(CCharEntity* PChar, CItemWeapon* PAmmo);
-bool  isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID);
-int16 ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID);
-void  BuildingCharSkillsTable(CCharEntity* PChar);
-void  BuildingCharWeaponSkills(CCharEntity* PChar);
-void  BuildingCharAbilityTable(CCharEntity* PChar);
-void  BuildingCharTraitsTable(CCharEntity* PChar);
-void  BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
+void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
+void TrackArrowUsageForScavenge(CCharEntity* PChar, CItemWeapon* PAmmo);
+auto isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID) -> bool;
+auto ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID) -> int16;
+void BuildingCharSkillsTable(CCharEntity* PChar);
+void BuildingCharWeaponSkills(CCharEntity* PChar);
+void BuildingCharAbilityTable(CCharEntity* PChar);
+void BuildingCharTraitsTable(CCharEntity* PChar);
+void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
 
-void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
-bool   HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes);
-uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);
-uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
+void CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
+auto HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes) -> bool;
+auto getItemCount(CCharEntity* PChar, uint16 ItemID) -> uint32;
+auto MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8;
 
 void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
 void CheckValidEquipment(CCharEntity* PChar, bool isDelevel = false);
@@ -145,9 +145,9 @@ void SaveJobChangeGear(CCharEntity* PChar);
 void LoadJobChangeGear(CCharEntity* PChar);
 void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
 void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, xi::Flag<struct RecalculateTag> recalculate = Recalculate::Yes, bool isDelevel = false);
-bool hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID);
+auto hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID) -> bool;
 void RemoveSub(CCharEntity* PChar);
-bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
+auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID) -> bool;
 void CheckUnarmedWeapon(CCharEntity* PChar);
 void SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
 void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
@@ -166,39 +166,39 @@ void unseenKeyItem(CCharEntity* PChar, xi::KeyItem keyItemId);            // att
 void addKeyItem(CCharEntity* PChar, xi::KeyItem keyItemId);               // add a key item
 void delKeyItem(CCharEntity* PChar, xi::KeyItem keyItemId);               // delete a key item
 
-int32 hasSpell(CCharEntity* PChar, uint16 SpellID); // checking for the presence of a spell
-int32 addSpell(CCharEntity* PChar, uint16 SpellID); // add a spell
-int32 delSpell(CCharEntity* PChar, uint16 SpellID); // delete a spell
+auto hasSpell(CCharEntity* PChar, uint16 SpellID) -> int32; // checking for the presence of a spell
+auto addSpell(CCharEntity* PChar, uint16 SpellID) -> int32; // add a spell
+auto delSpell(CCharEntity* PChar, uint16 SpellID) -> int32; // delete a spell
 
-int32 hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // checking for the presence of a learned ability
-int32 addLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // add a learned ability
-int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // delete a learned ability
+auto hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // checking for the presence of a learned ability
+auto addLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // add a learned ability
+auto delLearnedAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // delete a learned ability
 
-bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
+auto hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId) -> bool;
 void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
 void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
 
-int32 hasAbility(CCharEntity* PChar, uint16 AbilityID); // checking the presence of an ability
-int32 addAbility(CCharEntity* PChar, uint16 AbilityID); // add an ability
-int32 delAbility(CCharEntity* PChar, uint16 AbilityID); // delete an ability
+auto hasAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // checking the presence of an ability
+auto addAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // add an ability
+auto delAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // delete an ability
 
-int32 hasTitle(CCharEntity* PChar, uint16 Title);
-int32 addTitle(CCharEntity* PChar, uint16 Title);
-int32 delTitle(CCharEntity* PChar, uint16 Title);
-void  setTitle(CCharEntity* PChar, uint16 Title); // set title if not, save and update player
+auto hasTitle(CCharEntity* PChar, uint16 Title) -> int32;
+auto addTitle(CCharEntity* PChar, uint16 Title) -> int32;
+auto delTitle(CCharEntity* PChar, uint16 Title) -> int32;
+void setTitle(CCharEntity* PChar, uint16 Title); // set title if not, save and update player
 
-int32 hasPetAbility(CCharEntity* PChar, uint16 AbilityID); // same as Ability but for pet commands (e.g. Healing Ruby)
-int32 addPetAbility(CCharEntity* PChar, uint16 AbilityID);
-int32 delPetAbility(CCharEntity* PChar, uint16 AbilityID);
+auto hasPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // same as Ability but for pet commands (e.g. Healing Ruby)
+auto addPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32;
+auto delPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32;
 
-int32 hasTrait(CCharEntity* PChar, uint16 TraitID); // check if pchar has trait by traitid and jobid
-int32 addTrait(CCharEntity* PChar, uint16 TraitID); // add trait by traitid and jobid
-int32 delTrait(CCharEntity* PChar, uint16 TraitID); // delete trait by traitid and jobid
+auto hasTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // check if pchar has trait by traitid and jobid
+auto addTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // add trait by traitid and jobid
+auto delTrait(CCharEntity* PChar, uint16 TraitID) -> int32; // delete trait by traitid and jobid
 
-int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
-int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
-int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
-bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
+auto addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32; // declaration of function to add weapon skill
+auto hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32; // declaration of function to check for weapon skill
+auto delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID) -> int32; // declaration of function to delete weapon skill
+auto canUseWeaponSkill(CCharEntity* PChar, uint16 wsid) -> bool;
 
 void SaveCharJob(const CCharEntity* PChar, xi::Job job); // save the level for the selected character's jobs
 void SaveCharExp(const CCharEntity* PChar, xi::Job job); // save experience for the selected character’s chosen job
@@ -238,17 +238,17 @@ void SaveDeathTime(CCharEntity* PChar);                         // save when thi
 void SavePlayTime(CCharEntity* PChar);                          // save this character's total play time
 void SaveLastLogout(const CCharEntity* PChar);                  // save the last logout time of this character
 void SavePrevZoneLineID(CCharEntity* PChar, uint32 ZoneLineID); // save the last zoneline the player crossed.
-bool hasMogLockerAccess(const CCharEntity* PChar);              // true if have access, false otherwise
+auto hasMogLockerAccess(const CCharEntity* PChar) -> bool;      // true if have access, false otherwise
 
-uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
+auto getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest) -> uint8; // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
 
 void RemoveAllEquipment(CCharEntity* PChar);
 
 void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
 void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
-bool isSendBoxOpen(CCharEntity* PChar);
-bool isRecvBoxOpen(CCharEntity* PChar);
-bool isAnyDeliveryBoxOpen(CCharEntity* PChar);
+auto isSendBoxOpen(CCharEntity* PChar) -> bool;
+auto isRecvBoxOpen(CCharEntity* PChar) -> bool;
+auto isAnyDeliveryBoxOpen(CCharEntity* PChar) -> bool;
 
 auto CheckAbilityAddtype(CCharEntity* PChar, const CAbility* PAbility) -> bool;
 
@@ -263,55 +263,55 @@ void LeaveParty(CCharEntity* PChar);
 void ReloadParty(CCharEntity* PChar);
 void RemoveSeekFlag(CCharEntity* PChar);
 
-bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget);
+auto IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget) -> bool;
 
-void  AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
-void  SetPoints(CCharEntity* PChar, const char* type, int32 amount);
-int32 GetPoints(CCharEntity* PChar, const char* type);
-void  LoadCharPointsQueries();
-void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
-auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
-auto  SendToZone(CCharEntity* PChar, xi::ZoneId zoneId) -> bool;
-void  SendDisconnect(CCharEntity* PChar);
-void  ForceLogout(CCharEntity* PChar);
-void  ForceRezone(CCharEntity* PChar);
-auto  HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool;
-bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
+void AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
+void SetPoints(CCharEntity* PChar, const char* type, int32 amount);
+auto GetPoints(CCharEntity* PChar, const char* type) -> int32;
+void LoadCharPointsQueries();
+void SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
+auto GetConquestPointsName(CCharEntity* PChar) -> std::string;
+auto SendToZone(CCharEntity* PChar, xi::ZoneId zoneId) -> bool;
+void SendDisconnect(CCharEntity* PChar);
+void ForceLogout(CCharEntity* PChar);
+void ForceRezone(CCharEntity* PChar);
+auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool;
+auto AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int) -> bool;
 
-int32 GetCharVar(CCharEntity* PChar, const std::string& var);
-void  SetCharVar(uint32 charId, const std::string& var, int32 value, uint32 expiry = 0);
-void  SetCharVar(CCharEntity* PChar, const std::string& var, int32 value, uint32 expiry = 0);
-int32 ClearCharVarsWithPrefix(CCharEntity* PChar, const std::string& prefix);
-void  ClearCharVarFromAll(const std::string& varName, bool localOnly = false);
-void  IncrementCharVar(uint32 charId, const std::string& var, int32 value);
-void  IncrementCharVar(CCharEntity* PChar, const std::string& var, int32 value);
+auto GetCharVar(CCharEntity* PChar, const std::string& var) -> int32;
+void SetCharVar(uint32 charId, const std::string& var, int32 value, uint32 expiry = 0);
+void SetCharVar(CCharEntity* PChar, const std::string& var, int32 value, uint32 expiry = 0);
+auto ClearCharVarsWithPrefix(CCharEntity* PChar, const std::string& prefix) -> int32;
+void ClearCharVarFromAll(const std::string& varName, bool localOnly = false);
+void IncrementCharVar(uint32 charId, const std::string& var, int32 value);
+void IncrementCharVar(CCharEntity* PChar, const std::string& var, int32 value);
 
 auto FetchCharVar(uint32 charId, const std::string& var) -> std::pair<int32, uint32>;
 void PersistCharVar(uint32 charId, const std::string& var, int32 value, uint32 expiry = 0);
 
-auto   getWideScanRange(xi::Job job, uint8 level) -> uint16;
-uint16 getWideScanRange(CCharEntity* PChar);
+auto getWideScanRange(xi::Job job, uint8 level) -> uint16;
+auto getWideScanRange(CCharEntity* PChar) -> uint16;
 
 void SendTimerPacket(CCharEntity* PChar, uint32 seconds);
 void SendTimerPacket(CCharEntity* PChar, timer::duration dur);
 void SendClearTimerPacket(CCharEntity* PChar);
 
-earth_time::time_point getTraverserEpoch(CCharEntity* PChar);
-void                   setTraverserEpoch(CCharEntity* PChar);
-uint32                 getClaimedTraverserStones(CCharEntity* PChar);
-void                   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
-void                   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
-uint32                 getAvailableTraverserStones(CCharEntity* PChar);
+auto getTraverserEpoch(CCharEntity* PChar) -> earth_time::time_point;
+void setTraverserEpoch(CCharEntity* PChar);
+auto getClaimedTraverserStones(CCharEntity* PChar) -> uint32;
+void addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
+void setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
+auto getAvailableTraverserStones(CCharEntity* PChar) -> uint32;
 
 void ReadHistory(CCharEntity* PChar);
 void WriteHistory(const CCharEntity* PChar);
 
-uint8 getMaxItemLevel(CCharEntity* PChar);
-uint8 getItemLevelDifference(CCharEntity* PChar);
-uint8 getMainhandItemLevel(CCharEntity* PChar);
-uint8 getRangedItemLevel(CCharEntity* PChar);
+auto getMaxItemLevel(CCharEntity* PChar) -> uint8;
+auto getItemLevelDifference(CCharEntity* PChar) -> uint8;
+auto getMainhandItemLevel(CCharEntity* PChar) -> uint8;
+auto getRangedItemLevel(CCharEntity* PChar) -> uint8;
 
-bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+auto hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity) -> bool;
 
 auto getCharIdFromName(const std::string& name) -> uint32;
 auto getAccountIdFromName(const std::string& name) -> uint32;
@@ -326,10 +326,10 @@ void loadDeathTimestamp(CCharEntity* PChar);
 void loadZoningFlag(CCharEntity* PChar);
 
 auto IsHomeNation(xi::Nation nation, xi::Region region) -> bool;
-bool isOrchestrionPlaced(CCharEntity* PChar);
+auto isOrchestrionPlaced(CCharEntity* PChar) -> bool;
 void updateMannequins(CCharEntity* PChar);
 
-bool raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize);
+auto raceChange(CCharEntity* PChar, CharRace newRace, CharFace newFace, CharSize newSize) -> bool;
 
 void ApplyAbilityRecast(CCharEntity* PChar, const CAbility* PAbility, const Charge_t* charge, timer::duration baseChargeTime, timer::duration recastTime);
 

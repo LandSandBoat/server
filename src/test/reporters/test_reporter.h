@@ -56,10 +56,10 @@ public:
     TestReporter()          = default;
     virtual ~TestReporter() = default;
 
-    TestReporter(const TestReporter&)            = delete;
-    TestReporter& operator=(const TestReporter&) = delete;
-    TestReporter(TestReporter&&)                 = delete;
-    TestReporter& operator=(TestReporter&&)      = delete;
+    TestReporter(const TestReporter&)                    = delete;
+    auto operator=(const TestReporter&) -> TestReporter& = delete;
+    TestReporter(TestReporter&&)                         = delete;
+    auto operator=(TestReporter&&) -> TestReporter&      = delete;
 
     // Suite lifecycle events
     virtual void onSuiteStart(const TestSuite& suite)                                   = 0;

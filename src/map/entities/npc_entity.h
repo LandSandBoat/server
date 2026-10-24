@@ -38,15 +38,15 @@ public:
     void hideHP(bool hide);
 
     void setUntargetable(bool untargetable);
-    bool GetUntargetable() const override;
+    auto GetUntargetable() const -> bool override;
 
-    bool triggerable() const;
+    auto triggerable() const -> bool;
     void setTriggerable(bool triggerable);
 
     auto widescan() const -> uint8;
     void setWidescan(uint8 widescan);
 
-    bool alwaysRelevant() const;
+    auto alwaysRelevant() const -> bool;
     void setAlwaysRelevant(bool alwaysRelevant);
 
     auto contentDisabled() const -> bool;
@@ -56,7 +56,7 @@ public:
     // CBaseEntity
     //
 
-    bool isWideScannable() override;
+    auto isWideScannable() -> bool override;
     void PostTick() override;
 
     auto Tick(timer::time_point) -> Task<void> override

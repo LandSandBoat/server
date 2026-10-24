@@ -52,14 +52,14 @@ public:
     void FadeOut() override;
     void Die() override;
     void Spawn() override;
-    bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
+    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
     void OnDespawn(CDespawnState&) override;
 
     void OnCastFinished(CMagicState& state, action_t& action) override;
     void OnMobSkillFinished(CMobSkillState& state, action_t& action) override;
     void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
-    bool GetUntargetable() const override;
+    auto GetUntargetable() const -> bool override;
 
 private:
     uint32         trustID_{};

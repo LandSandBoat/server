@@ -30,17 +30,17 @@
 // TODO: Move these somewhere else
 //
 
-inline std::string hex8ToString(std::uint8_t hex)
+inline auto hex8ToString(std::uint8_t hex) -> std::string
 {
     return fmt::format("0x{:02X}", hex);
 }
 
-inline std::string hex16ToString(std::uint16_t hex)
+inline auto hex16ToString(std::uint16_t hex) -> std::string
 {
     return fmt::format("0x{:04X}", hex);
 }
 
-inline std::string hex32ToString(std::uint32_t hex)
+inline auto hex32ToString(std::uint32_t hex) -> std::string
 {
     return fmt::format("0x{:08X}", hex);
 }

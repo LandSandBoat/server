@@ -26,10 +26,10 @@ class CUnityChat
 public:
     CUnityChat(uint32 leader);
 
-    uint32 getLeader() const;
+    auto getLeader() const -> uint32;
 
     void AddMember(CCharEntity* PChar);
-    bool DelMember(CCharEntity* PChar);
+    auto DelMember(CCharEntity* PChar) -> bool;
 
     void PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>& packet);
 
@@ -42,12 +42,12 @@ private:
 namespace unitychat
 {
 
-CUnityChat* LoadUnityChat(uint32 leader);
-void        UnloadUnityChat(uint32 leader);
+auto LoadUnityChat(uint32 leader) -> CUnityChat*;
+void UnloadUnityChat(uint32 leader);
 
-bool AddOnlineMember(CCharEntity* PChar, uint32 leader);
-bool DelOnlineMember(CCharEntity* PChar, uint32 leader);
+auto AddOnlineMember(CCharEntity* PChar, uint32 leader) -> bool;
+auto DelOnlineMember(CCharEntity* PChar, uint32 leader) -> bool;
 
-CUnityChat* GetUnityChat(uint32 leader);
+auto GetUnityChat(uint32 leader) -> CUnityChat*;
 
 }; // namespace unitychat

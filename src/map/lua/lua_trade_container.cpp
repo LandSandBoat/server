@@ -67,7 +67,7 @@ auto CLuaTradeContainer::confirmQuantity(const uint8 slotID, const uint32 quanti
 
 //======================================================//
 
-uint32 CLuaTradeContainer::getGil()
+auto CLuaTradeContainer::getGil() -> uint32
 {
     uint16 itemID = m_pMyTradeContainer->getItemID(0);
     return itemID == 0xFFFF ? m_pMyTradeContainer->getQuantity(0) : 0;
@@ -86,7 +86,7 @@ auto CLuaTradeContainer::getItem(const sol::object& SlotIDObj) -> CItem*
 
 //======================================================//
 
-uint16 CLuaTradeContainer::getItemId(const sol::object& SlotIDObj)
+auto CLuaTradeContainer::getItemId(const sol::object& SlotIDObj) -> uint16
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -99,7 +99,7 @@ uint16 CLuaTradeContainer::getItemId(const sol::object& SlotIDObj)
 
 //======================================================//
 
-uint16 CLuaTradeContainer::getItemSubId(const sol::object& SlotIDObj)
+auto CLuaTradeContainer::getItemSubId(const sol::object& SlotIDObj) -> uint16
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -119,35 +119,35 @@ uint16 CLuaTradeContainer::getItemSubId(const sol::object& SlotIDObj)
 
 //======================================================//
 
-uint32 CLuaTradeContainer::getItemCount()
+auto CLuaTradeContainer::getItemCount() -> uint32
 {
     return m_pMyTradeContainer->getTotalQuantity();
 }
 
 //======================================================//
 
-uint8 CLuaTradeContainer::getSlotCount()
+auto CLuaTradeContainer::getSlotCount() -> uint8
 {
     return m_pMyTradeContainer->getSlotCount();
 }
 
 //======================================================//
 
-uint32 CLuaTradeContainer::getItemQty(uint16 itemID)
+auto CLuaTradeContainer::getItemQty(uint16 itemID) -> uint32
 {
     return m_pMyTradeContainer->getItemQuantity(itemID);
 }
 
 //======================================================//
 
-uint32 CLuaTradeContainer::getSlotQty(uint8 slotID)
+auto CLuaTradeContainer::getSlotQty(uint8 slotID) -> uint32
 {
     return m_pMyTradeContainer->getQuantity(slotID);
 }
 
 //======================================================//
 
-bool CLuaTradeContainer::hasItemQty(uint16 itemID, uint32 quantity)
+auto CLuaTradeContainer::hasItemQty(uint16 itemID, uint32 quantity) -> bool
 {
     uint32 tradeQuantity = m_pMyTradeContainer->getItemQuantity(itemID);
     return quantity == tradeQuantity;
@@ -155,7 +155,7 @@ bool CLuaTradeContainer::hasItemQty(uint16 itemID, uint32 quantity)
 
 //======================================================//
 
-bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj)
+auto CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj) -> bool
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
@@ -185,7 +185,7 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj
 
 //======================================================//
 
-bool CLuaTradeContainer::confirmSlot(uint8 slotID, const sol::object& amountObj)
+auto CLuaTradeContainer::confirmSlot(uint8 slotID, const sol::object& amountObj) -> bool
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
@@ -218,7 +218,7 @@ void CLuaTradeContainer::Register()
     SOL_REGISTER("clean", CLuaTradeContainer::clean);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaTradeContainer& trade)
+auto operator<<(std::ostream& os, const CLuaTradeContainer& trade) -> std::ostream&
 {
     // TODO: Print out contents of container
     return os << "CLuaTradeContainer";

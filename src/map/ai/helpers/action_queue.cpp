@@ -64,7 +64,7 @@ void CAIActionQueue::handleAction(queueAction_t& action)
     }
 }
 
-bool CAIActionQueue::isEmpty() const
+auto CAIActionQueue::isEmpty() const -> bool
 {
     return actionQueue.empty() && timerQueue.empty();
 }

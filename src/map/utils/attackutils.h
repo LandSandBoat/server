@@ -31,11 +31,11 @@ enum class PHYSICAL_ATTACK_TYPE;
 namespace attackutils
 {
 
-uint8  getHitCount(uint8 hits); // The multihit calculator.
-uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weapnSlot, bool allowProc = false);
+auto getHitCount(uint8 hits) -> uint8; // The multihit calculator.
+auto CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weapnSlot, bool allowProc = false) -> uint32;
 
-bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack parried.
-bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack guarded.
-bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack blocked.
+auto IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool; // Is the attack parried.
+auto IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool; // Is the attack guarded.
+auto IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool; // Is the attack blocked.
 
 }; // namespace attackutils

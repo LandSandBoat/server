@@ -70,42 +70,42 @@ public:
     CParty(uint32 id);
     ~CParty();
 
-    uint32 GetPartyID() const;
-    uint16 GetMemberFlags(CBattleEntity* PEntity);
-    auto   MemberCount(xi::ZoneId ZoneID) -> uint8;
+    auto GetPartyID() const -> uint32;
+    auto GetMemberFlags(CBattleEntity* PEntity) -> uint16;
+    auto MemberCount(xi::ZoneId ZoneID) -> uint8;
 
-    CBattleEntity* GetLeader();
-    CBattleEntity* GetSyncTarget();
-    CBattleEntity* GetQuaterMaster();
-    CBattleEntity* GetMemberByName(const std::string& memberName); // Returns entity pointer for member name string
+    auto GetLeader() -> CBattleEntity*;
+    auto GetSyncTarget() -> CBattleEntity*;
+    auto GetQuaterMaster() -> CBattleEntity*;
+    auto GetMemberByName(const std::string& memberName) -> CBattleEntity*; // Returns entity pointer for member name string
 
     void DisbandParty(bool playerInitiated = true);
     void ReloadParty();
     void ReloadPartyMembers(CCharEntity* PChar);
     void ReloadTreasurePool(CCharEntity* PChar);
 
-    void   AddMember(CBattleEntity* PEntity);
-    void   AddMember(uint32 id);                 // Add party member from outside this server's scope
-    void   RemoveMember(CBattleEntity* PEntity); //
-    void   DelMember(CBattleEntity* PEntity);    // remove a member without invoking chat/db
-    void   PopMember(CBattleEntity* PEntity);    // remove a member from memberlist (zoned to different server)
-    void   PushMember(CBattleEntity* PEntity);   // add a member without invoking chat/db
-    void   SetPartyID(uint32 id);                // set new party ID
-    void   AssignPartyRole(const std::string& MemberName, GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND role);
-    void   DisableSync();
-    void   SetSyncTarget(const std::string& MemberName, MsgStd message);
-    void   RefreshSync();
-    void   SetPartyNumber(uint8 number);
-    bool   HasOnlyOneMember() const;
-    bool   IsFull() const;
-    uint32 LoadPartySize() const;
+    void AddMember(CBattleEntity* PEntity);
+    void AddMember(uint32 id);                 // Add party member from outside this server's scope
+    void RemoveMember(CBattleEntity* PEntity); //
+    void DelMember(CBattleEntity* PEntity);    // remove a member without invoking chat/db
+    void PopMember(CBattleEntity* PEntity);    // remove a member from memberlist (zoned to different server)
+    void PushMember(CBattleEntity* PEntity);   // add a member without invoking chat/db
+    void SetPartyID(uint32 id);                // set new party ID
+    void AssignPartyRole(const std::string& MemberName, GP_CLI_COMMAND_GROUP_CHANGE2_CHANGEKIND role);
+    void DisableSync();
+    void SetSyncTarget(const std::string& MemberName, MsgStd message);
+    void RefreshSync();
+    void SetPartyNumber(uint8 number);
+    auto HasOnlyOneMember() const -> bool;
+    auto IsFull() const -> bool;
+    auto LoadPartySize() const -> uint32;
 
-    timer::time_point GetTimeLastMemberJoined();
-    bool              HasTrusts();
-    void              MarkFormedByTrusts();
-    bool              IsFormedByTrusts() const;
+    auto GetTimeLastMemberJoined() -> timer::time_point;
+    auto HasTrusts() -> bool;
+    void MarkFormedByTrusts();
+    auto IsFormedByTrusts() const -> bool;
 
-    std::size_t GetMemberCountAcrossAllProcesses();
+    auto GetMemberCountAcrossAllProcesses() -> std::size_t;
 
     void PushPacket(uint32 senderID, xi::ZoneId ZoneID, const std::unique_ptr<CBasicPacket>& packet); // Send a packet to all group members, with the exception of PPartyMember
     void PushEffectsPacket();
@@ -130,9 +130,9 @@ private:
     bool m_EffectsChanged;
     bool m_FormedByTrusts{ false };
 
-    void                     SetLeader(const std::string& MemberName);        // set party leader
-    void                     SetQuarterMaster(const std::string& MemberName); // set Quartermaster
-    bool                     RemovePartyLeader(CBattleEntity* PEntity);       // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
-    std::vector<partyInfo_t> GetPartyInfo() const;
-    void                     RefreshFlags(std::vector<partyInfo_t>&);
+    void SetLeader(const std::string& MemberName);          // set party leader
+    void SetQuarterMaster(const std::string& MemberName);   // set Quartermaster
+    auto RemovePartyLeader(CBattleEntity* PEntity) -> bool; // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
+    auto GetPartyInfo() const -> std::vector<partyInfo_t>;
+    void RefreshFlags(std::vector<partyInfo_t>&);
 };

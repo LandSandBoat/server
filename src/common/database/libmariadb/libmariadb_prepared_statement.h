@@ -60,8 +60,8 @@ public:
     explicit LibMariaDBPreparedStatement(MYSQL_STMT* stmt);
     ~LibMariaDBPreparedStatement() override;
 
-    LibMariaDBPreparedStatement(const LibMariaDBPreparedStatement&)            = delete;
-    LibMariaDBPreparedStatement& operator=(const LibMariaDBPreparedStatement&) = delete;
+    LibMariaDBPreparedStatement(const LibMariaDBPreparedStatement&)                    = delete;
+    auto operator=(const LibMariaDBPreparedStatement&) -> LibMariaDBPreparedStatement& = delete;
 
     auto bind(int index, const BoundValue& value) -> void override;
     auto executeQuery(const std::string& query) -> std::unique_ptr<ResultSet> override;

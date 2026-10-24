@@ -41,27 +41,27 @@ CLuaInstance::CLuaInstance(CInstance* PInstance)
     }
 }
 
-uint16 CLuaInstance::getID()
+auto CLuaInstance::getID() -> uint16
 {
     return m_PLuaInstance->GetID();
 }
 
-const std::string& CLuaInstance::getName()
+auto CLuaInstance::getName() -> const std::string&
 {
     return m_PLuaInstance->GetName();
 }
 
-CLuaZone CLuaInstance::getZone()
+auto CLuaInstance::getZone() -> CLuaZone
 {
     return CLuaZone(m_PLuaInstance->GetZone());
 }
 
-uint32 CLuaInstance::getEntranceZoneID()
+auto CLuaInstance::getEntranceZoneID() -> uint32
 {
     return instanceutils::GetInstanceData(m_PLuaInstance->GetID()).entrance_zone;
 }
 
-sol::table CLuaInstance::getAllies()
+auto CLuaInstance::getAllies() -> sol::table
 {
     // clang-format off
     auto table = lua.create_table();
@@ -73,7 +73,7 @@ sol::table CLuaInstance::getAllies()
     // clang-format on
 }
 
-sol::table CLuaInstance::getChars()
+auto CLuaInstance::getChars() -> sol::table
 {
     // clang-format off
     auto table = lua.create_table();
@@ -85,7 +85,7 @@ sol::table CLuaInstance::getChars()
     // clang-format on
 }
 
-sol::table CLuaInstance::getMobs()
+auto CLuaInstance::getMobs() -> sol::table
 {
     // clang-format off
     auto table = lua.create_table();
@@ -97,7 +97,7 @@ sol::table CLuaInstance::getMobs()
     // clang-format on
 }
 
-sol::table CLuaInstance::getNpcs()
+auto CLuaInstance::getNpcs() -> sol::table
 {
     // clang-format off
     auto table = lua.create_table();
@@ -109,7 +109,7 @@ sol::table CLuaInstance::getNpcs()
     // clang-format on
 }
 
-sol::table CLuaInstance::getPets()
+auto CLuaInstance::getPets() -> sol::table
 {
     // clang-format off
     auto table = lua.create_table();
@@ -121,12 +121,12 @@ sol::table CLuaInstance::getPets()
     // clang-format on
 }
 
-uint32 CLuaInstance::getTimeLimit()
+auto CLuaInstance::getTimeLimit() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaInstance->GetTimeLimit()));
 }
 
-sol::table CLuaInstance::getEntryPos()
+auto CLuaInstance::getEntryPos() -> sol::table
 {
     position_t entry = m_PLuaInstance->GetEntryLoc();
     sol::table table = lua.create_table();
@@ -139,22 +139,22 @@ sol::table CLuaInstance::getEntryPos()
     return table;
 }
 
-uint8 CLuaInstance::getLevelCap()
+auto CLuaInstance::getLevelCap() -> uint8
 {
     return m_PLuaInstance->GetLevelCap();
 }
 
-uint32 CLuaInstance::getLastTimeUpdate()
+auto CLuaInstance::getLastTimeUpdate() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaInstance->GetLastTimeUpdate()));
 }
 
-uint32 CLuaInstance::getProgress()
+auto CLuaInstance::getProgress() -> uint32
 {
     return m_PLuaInstance->GetProgress();
 }
 
-uint32 CLuaInstance::getWipeTime()
+auto CLuaInstance::getWipeTime() -> uint32
 {
     return static_cast<uint32>(timer::count_seconds(m_PLuaInstance->GetWipeTime()));
 }
@@ -170,12 +170,12 @@ auto CLuaInstance::getEntity(uint16 targid, const sol::object& filterObj) -> CBa
     return m_PLuaInstance->GetEntity(targid, filter);
 }
 
-uint32 CLuaInstance::getStage()
+auto CLuaInstance::getStage() -> uint32
 {
     return m_PLuaInstance->GetStage();
 }
 
-uint64_t CLuaInstance::getLocalVar(const std::string& name)
+auto CLuaInstance::getLocalVar(const std::string& name) -> uint64_t
 {
     return m_PLuaInstance->GetLocalVar(name);
 }
@@ -220,7 +220,7 @@ void CLuaInstance::fail()
     m_PLuaInstance->Fail();
 }
 
-bool CLuaInstance::failed()
+auto CLuaInstance::failed() -> bool
 {
     return m_PLuaInstance->Failed();
 }
@@ -230,7 +230,7 @@ void CLuaInstance::complete()
     m_PLuaInstance->Complete();
 }
 
-bool CLuaInstance::completed()
+auto CLuaInstance::completed() -> bool
 {
     return m_PLuaInstance->Completed();
 }
@@ -291,7 +291,7 @@ void CLuaInstance::Register()
     SOL_REGISTER("setLocalVar", CLuaInstance::setLocalVar);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaInstance& instance)
+auto operator<<(std::ostream& os, const CLuaInstance& instance) -> std::ostream&
 {
     std::string id = instance.m_PLuaInstance ? std::to_string(instance.m_PLuaInstance->GetID()) : "nullptr";
     return os << "CLuaInstance(" << id << ")";

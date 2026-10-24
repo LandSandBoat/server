@@ -43,36 +43,36 @@ class CLuaMobSkill
 public:
     CLuaMobSkill(CMobSkill*);
 
-    CMobSkill* GetMobSkill() const
+    auto GetMobSkill() const -> CMobSkill*
     {
         return m_PLuaMobSkill;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaMobSkill& mobskill);
+    friend auto operator<<(std::ostream& out, const CLuaMobSkill& mobskill) -> std::ostream&;
 
-    float  getTP();
-    auto   getMobHP() const -> int32;
-    uint8  getMobHPP();
-    uint16 getID();
-    int16  getParam();
-    bool   isAoE();
-    bool   isConal();
-    bool   isSingle();
-    bool   hasMissMsg();
-    void   setMsg(MsgBasic message);
-    auto   getMsg() -> MsgBasic;
-    auto   getTargets() -> sol::table;
-    uint16 getTotalTargets();
-    uint32 getPrimaryTargetID();
-    void   setFinalAnimationSub(uint8 newAnimationSub);
-    void   setAnimationTime(uint32 newAnimationTime);
-    auto   getAttackType() const -> xi::AttackType;
-    void   setAttackType(xi::AttackType attackType);
-    auto   isCritical() -> bool;
-    void   setCritical(bool isCritical);
-    auto   getKnockback() const -> Knockback;
+    auto getTP() -> float;
+    auto getMobHP() const -> int32;
+    auto getMobHPP() -> uint8;
+    auto getID() -> uint16;
+    auto getParam() -> int16;
+    auto isAoE() -> bool;
+    auto isConal() -> bool;
+    auto isSingle() -> bool;
+    auto hasMissMsg() -> bool;
+    void setMsg(MsgBasic message);
+    auto getMsg() -> MsgBasic;
+    auto getTargets() -> sol::table;
+    auto getTotalTargets() -> uint16;
+    auto getPrimaryTargetID() -> uint32;
+    void setFinalAnimationSub(uint8 newAnimationSub);
+    void setAnimationTime(uint32 newAnimationTime);
+    auto getAttackType() const -> xi::AttackType;
+    void setAttackType(xi::AttackType attackType);
+    auto isCritical() -> bool;
+    void setCritical(bool isCritical);
+    auto getKnockback() const -> Knockback;
 
-    bool operator==(const CLuaMobSkill& other) const
+    auto operator==(const CLuaMobSkill& other) const -> bool
     {
         return this->m_PLuaMobSkill == other.m_PLuaMobSkill;
     }

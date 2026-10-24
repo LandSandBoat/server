@@ -39,7 +39,7 @@ CZoneInstance::~CZoneInstance()
     TracyZoneScoped;
 }
 
-CCharEntity* CZoneInstance::GetCharByName(const std::string& name)
+auto CZoneInstance::GetCharByName(const std::string& name) -> CCharEntity*
 {
     TracyZoneScoped;
 
@@ -55,7 +55,7 @@ CCharEntity* CZoneInstance::GetCharByName(const std::string& name)
     return PEntity;
 }
 
-CCharEntity* CZoneInstance::GetCharByID(uint32 id)
+auto CZoneInstance::GetCharByID(uint32 id) -> CCharEntity*
 {
     TracyZoneScoped;
 
@@ -71,7 +71,7 @@ CCharEntity* CZoneInstance::GetCharByID(uint32 id)
     return PEntity;
 }
 
-CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
+auto CZoneInstance::GetEntity(uint16 targid, uint8 filter) -> CBaseEntity*
 {
     TracyZoneScoped;
 
@@ -598,7 +598,7 @@ void CZoneInstance::ForEachAllyInstance(CBaseEntity* PEntity, FnRef<void(CMobEnt
     }
 }
 
-CInstance* CZoneInstance::CreateInstance(uint32 instanceid)
+auto CZoneInstance::CreateInstance(uint32 instanceid) -> CInstance*
 {
     TracyZoneScoped;
 

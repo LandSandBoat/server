@@ -133,7 +133,7 @@ auto writeMiniDump(PEXCEPTION_POINTERS info) -> Maybe<std::string>
     return std::string(path);
 }
 
-LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
+auto WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info) -> LONG
 {
     const auto code = info->ExceptionRecord->ExceptionCode;
 

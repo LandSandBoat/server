@@ -38,12 +38,12 @@ class CLuaZone
 public:
     CLuaZone(CZone*);
 
-    CZone* GetZone() const
+    auto GetZone() const -> CZone*
     {
         return m_pLuaZone;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
+    friend auto operator<<(std::ostream& out, const CLuaZone& zone) -> std::ostream&;
 
     auto getLocalVar(const char* key);
     auto getLocalVars() -> sol::table;
@@ -54,23 +54,23 @@ public:
     void registerCylindricalTriggerArea(uint32 triggerAreaID, float xPos, float zPos, float radius);
     void registerSphericalTriggerArea(uint32 triggerAreaID, float xPos, float yPos, float zPos, float radius);
 
-    auto         levelRestriction() -> sol::object;
-    auto         getPlayers() -> sol::table;
-    auto         getNPCs() -> sol::table;
-    auto         getMobs() -> sol::table;
-    auto         getID() -> xi::ZoneId;
-    auto         getName() -> const std::string&;
-    auto         getRegionID() -> xi::Region;
-    xi::ZoneType getTypeMask();
-    auto         getBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
-    auto         getWeather() const -> xi::Weather;
-    uint32       getUptime();
-    void         reloadNavmesh();
-    void         rebuildNavmesh(const sol::table& table);
-    bool         isNavigablePoint(const sol::table& position);
-    auto         getTerrainType(const sol::table& position) -> xi::TerrainType;
-    auto         getFloorId(const sol::table& position) -> uint8;
-    auto         insertDynamicEntity(sol::table table) -> CBaseEntity*;
+    auto levelRestriction() -> sol::object;
+    auto getPlayers() -> sol::table;
+    auto getNPCs() -> sol::table;
+    auto getMobs() -> sol::table;
+    auto getID() -> xi::ZoneId;
+    auto getName() -> const std::string&;
+    auto getRegionID() -> xi::Region;
+    auto getTypeMask() -> xi::ZoneType;
+    auto getBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
+    auto getWeather() const -> xi::Weather;
+    auto getUptime() -> uint32;
+    void reloadNavmesh();
+    void rebuildNavmesh(const sol::table& table);
+    auto isNavigablePoint(const sol::table& position) -> bool;
+    auto getTerrainType(const sol::table& position) -> xi::TerrainType;
+    auto getFloorId(const sol::table& position) -> uint8;
+    auto insertDynamicEntity(sol::table table) -> CBaseEntity*;
 
     auto getSoloBattleMusic();
     auto getPartyBattleMusic();
@@ -82,9 +82,9 @@ public:
     void setBackgroundMusicDay(uint16 musicId);
     void setBackgroundMusicNight(uint16 musicId);
 
-    sol::table queryEntitiesByName(const std::string& name);
+    auto queryEntitiesByName(const std::string& name) -> sol::table;
 
-    bool operator==(const CLuaZone& other) const
+    auto operator==(const CLuaZone& other) const -> bool
     {
         return this->m_pLuaZone == other.m_pLuaZone;
     }

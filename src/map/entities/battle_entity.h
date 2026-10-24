@@ -148,80 +148,80 @@ public:
     CBattleEntity();
     ~CBattleEntity() override;
 
-    uint16 STR();
-    uint16 DEX();
-    uint16 VIT();
-    uint16 AGI();
-    uint16 INT();
-    uint16 MND();
-    uint16 CHR();
-    uint16 DEF();
-    uint16 ATT(SLOTTYPE slot);
-    uint16 ACC(uint8 attackNumber, uint16 offsetAccuracy);
-    uint16 EVA();
-    auto   RATT(uint16 bonusAtt = 0) -> uint16;
-    auto   RACC(uint16 bonusAcc = 0) -> uint16;
+    auto STR() -> uint16;
+    auto DEX() -> uint16;
+    auto VIT() -> uint16;
+    auto AGI() -> uint16;
+    auto INT() -> uint16;
+    auto MND() -> uint16;
+    auto CHR() -> uint16;
+    auto DEF() -> uint16;
+    auto ATT(SLOTTYPE slot) -> uint16;
+    auto ACC(uint8 attackNumber, uint16 offsetAccuracy) -> uint16;
+    auto EVA() -> uint16;
+    auto RATT(uint16 bonusAtt = 0) -> uint16;
+    auto RACC(uint16 bonusAcc = 0) -> uint16;
 
     auto isDead() const -> bool;
-    bool isAlive();
-    bool isFullyHealed();
-    bool isInAdoulin();
-    bool isInAssault();
-    bool isInDynamis();
-    bool isInGarrison();
-    bool inMogHouse();
-    bool hasImmunity(xi::Immunity imID);
-    bool isAsleep();
+    auto isAlive() -> bool;
+    auto isFullyHealed() -> bool;
+    auto isInAdoulin() -> bool;
+    auto isInAssault() -> bool;
+    auto isInDynamis() -> bool;
+    auto isInGarrison() -> bool;
+    auto inMogHouse() -> bool;
+    auto hasImmunity(xi::Immunity imID) -> bool;
+    auto isAsleep() -> bool;
     auto isMounted() const -> bool;
-    bool isSitting();
+    auto isSitting() -> bool;
 
-    auto  GetMJob() const -> xi::Job;
-    auto  GetSJob(bool ignoreRestriction = false) const -> xi::Job;
-    uint8 GetMLevel() const;
-    uint8 GetSLevel() const;
+    auto GetMJob() const -> xi::Job;
+    auto GetSJob(bool ignoreRestriction = false) const -> xi::Job;
+    auto GetMLevel() const -> uint8;
+    auto GetSLevel() const -> uint8;
 
     void SetMJob(uint8 mjob);
     void SetSJob(uint8 sjob);
     void SetMLevel(uint8 mlvl);
     void SetSLevel(uint8 slvl);
 
-    void  SetDeathType(uint8 type);
-    uint8 GetDeathType();
+    void SetDeathType(uint8 type);
+    auto GetDeathType() -> uint8;
 
-    uint8 GetHPP() const;
-    int32 GetMaxHP() const;
-    uint8 GetMPP() const;
-    int32 GetMaxMP() const;
-    void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
-    uint8 UpdateSpeed(bool run = false) override;
+    auto GetHPP() const -> uint8;
+    auto GetMaxHP() const -> int32;
+    auto GetMPP() const -> uint8;
+    auto GetMaxMP() const -> int32;
+    void UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
+    auto UpdateSpeed(bool run = false) -> uint8 override;
 
-    bool          IsDualWielding();
-    auto          GetWeaponDelay(bool tp) -> uint32;                // returns delay of combined weapons
-    float         GetMeleeRange(const CBattleEntity* Target) const; // returns the distance considered to be within melee range of the entity
-    virtual float GetRangedAttackRange();                           // returns the maximum valid distance for a ranged attack
-    int16         GetRangedWeaponDelay(bool forTPCalc);             // returns delay of ranged weapon + ammo where applicable
-    int16         GetAmmoDelay();                                   // returns delay of ammo (for cooldown between shots)
-    uint16        GetMainWeaponDmg();                               // returns total main hand DMG
-    uint16        GetSubWeaponDmg();                                // returns total sub weapon DMG
-    uint16        GetRangedWeaponDmg();                             // returns total ranged weapon DMG
-    uint16        GetMainWeaponRank();                              // returns total main hand DMG Rank
-    uint16        GetSubWeaponRank();                               // returns total sub weapon DMG Rank
-    uint16        GetRangedWeaponRank();                            // returns total ranged weapon DMG Rank
+    auto         IsDualWielding() -> bool;
+    auto         GetWeaponDelay(bool tp) -> uint32;                         // returns delay of combined weapons
+    auto         GetMeleeRange(const CBattleEntity* Target) const -> float; // returns the distance considered to be within melee range of the entity
+    virtual auto GetRangedAttackRange() -> float;                           // returns the maximum valid distance for a ranged attack
+    auto         GetRangedWeaponDelay(bool forTPCalc) -> int16;             // returns delay of ranged weapon + ammo where applicable
+    auto         GetAmmoDelay() -> int16;                                   // returns delay of ammo (for cooldown between shots)
+    auto         GetMainWeaponDmg() -> uint16;                              // returns total main hand DMG
+    auto         GetSubWeaponDmg() -> uint16;                               // returns total sub weapon DMG
+    auto         GetRangedWeaponDmg() -> uint16;                            // returns total ranged weapon DMG
+    auto         GetMainWeaponRank() -> uint16;                             // returns total main hand DMG Rank
+    auto         GetSubWeaponRank() -> uint16;                              // returns total sub weapon DMG Rank
+    auto         GetRangedWeaponRank() -> uint16;                           // returns total ranged weapon DMG Rank
 
-    uint16 GetSkill(xi::SkillType SkillID); // the current value of the skill (not the maximum, but limited by the level)
+    auto GetSkill(xi::SkillType SkillID) -> uint16; // the current value of the skill (not the maximum, but limited by the level)
 
-    virtual int16 addTP(int16 tp); // increase/decrease the amount of tp
-    virtual int32 addHP(int32 hp); // increase/decrease the amount of hp
-    virtual int32 addMP(int32 mp); // increase/decrease the amount of mp
+    virtual auto addTP(int16 tp) -> int16; // increase/decrease the amount of tp
+    virtual auto addHP(int32 hp) -> int32; // increase/decrease the amount of hp
+    virtual auto addMP(int32 mp) -> int32; // increase/decrease the amount of mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
     virtual auto takeDamage(int32 amount, CBattleEntity* attacker = nullptr, xi::AttackType attackType = xi::AttackType::None, xi::DamageType damageType = xi::DamageType::None, bool isSkillchainDamage = false) -> int32;
 
-    int16 getMod(xi::Mod modID) const;
-    int16 getMaxGearMod(xi::Mod modID);
+    auto getMod(xi::Mod modID) const -> int16;
+    auto getMaxGearMod(xi::Mod modID) -> int16;
 
-    bool CanRest();        // checks if able to heal
-    bool Rest(float rate); // heal an amount of hp / mp
+    auto CanRest() -> bool;        // checks if able to heal
+    auto Rest(float rate) -> bool; // heal an amount of hp / mp
 
     void addModifier(xi::Mod type, int16 amount);
     void setModifier(xi::Mod type, int16 amount);
@@ -290,10 +290,10 @@ public:
 
     virtual void addTrait(CTrait*);
     virtual void delTrait(CTrait*);
-    virtual bool hasTrait(uint16);
+    virtual auto hasTrait(uint16) -> bool;
 
-    virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags);
-    virtual bool CanUseSpell(CSpell*);
+    virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool;
+    virtual auto CanUseSpell(CSpell*) -> bool;
 
     virtual void Spawn() override;
     virtual void Die();
@@ -302,19 +302,19 @@ public:
     void setBattleTarget(const Maybe<EntityId>& target);
     auto GetBattleTarget() const -> CBattleEntity*;
 
-    bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
+    auto hasEnmityEXPENSIVE() const -> bool; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
 
     /* State callbacks */
     /* Auto attack */
-    virtual bool OnAttack(CAttackState&, action_t&);
+    virtual auto OnAttack(CAttackState&, action_t&) -> bool;
 
-    virtual bool OnAttackError(CAttackState&)
+    virtual auto OnAttackError(CAttackState&) -> bool
     {
         return false;
     }
 
     /* Returns whether to call Attack or not (which includes error messages) */
-    virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg);
+    virtual auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool;
 
     virtual auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
     virtual auto IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
@@ -341,11 +341,11 @@ public:
     virtual void TryHitInterrupt(CBattleEntity* PAttacker);
     virtual void OnDespawn(CDespawnState&);
 
-    void            SetBattleStartTime(timer::time_point);
-    timer::duration GetBattleTime();
+    void SetBattleStartTime(timer::time_point);
+    auto GetBattleTime() -> timer::duration;
 
-    void   setBattleID(uint16 battleID);
-    uint16 getBattleID();
+    void setBattleID(uint16 battleID);
+    auto getBattleID() -> uint16;
 
     virtual auto Tick(timer::time_point) -> Task<void> override;
     virtual void PostTick() override;

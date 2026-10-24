@@ -50,12 +50,12 @@ CLuaItem::CLuaItem(const CItem* PItem)
     }
 }
 
-uint16 CLuaItem::getID()
+auto CLuaItem::getID() -> uint16
 {
     return m_readItem->getID();
 }
 
-uint16 CLuaItem::getSubID()
+auto CLuaItem::getSubID() -> uint16
 {
     return m_readItem->getSubID();
 }
@@ -65,42 +65,42 @@ auto CLuaItem::getFlag() const -> xi::ItemFlag
     return m_readItem->getFlag();
 }
 
-uint8 CLuaItem::getAHCat()
+auto CLuaItem::getAHCat() -> uint8
 {
     return m_readItem->getAHCat();
 }
 
-uint32 CLuaItem::getQuantity()
+auto CLuaItem::getQuantity() -> uint32
 {
     return m_readItem->getQuantity();
 }
 
-uint32 CLuaItem::getBasePrice()
+auto CLuaItem::getBasePrice() -> uint32
 {
     return m_readItem->getBasePrice();
 }
 
-uint8 CLuaItem::getLocationID()
+auto CLuaItem::getLocationID() -> uint8
 {
     return m_readItem->getLocationID();
 }
 
-uint8 CLuaItem::getSlotID()
+auto CLuaItem::getSlotID() -> uint8
 {
     return m_readItem->getSlotID();
 }
 
-uint16 CLuaItem::getTrialNumber()
+auto CLuaItem::getTrialNumber() -> uint16
 {
     return static_cast<const CItemEquipment*>(m_readItem)->getTrialNumber();
 }
 
-uint8 CLuaItem::getWornUses()
+auto CLuaItem::getWornUses() -> uint8
 {
     return m_readItem->exdata<Exdata::WornItem>().UseCount;
 }
 
-bool CLuaItem::isType(uint8 type)
+auto CLuaItem::isType(uint8 type) -> bool
 {
     return m_readItem->isType(static_cast<ITEM_TYPE>(type));
 }
@@ -115,7 +115,7 @@ void CLuaItem::setSubType(uint8 subtype)
     m_writeItem->setSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
 
-bool CLuaItem::isSubType(uint8 subtype)
+auto CLuaItem::isSubType(uint8 subtype) -> bool
 {
     return m_readItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
@@ -131,17 +131,17 @@ auto CLuaItem::getName() -> std::string
     return m_readItem->getName();
 }
 
-uint16 CLuaItem::getILvl()
+auto CLuaItem::getILvl() -> uint16
 {
     return static_cast<const CItemEquipment*>(m_readItem)->getILvl();
 }
 
-uint16 CLuaItem::getReqLvl()
+auto CLuaItem::getReqLvl() -> uint16
 {
     return static_cast<const CItemEquipment*>(m_readItem)->getReqLvl();
 }
 
-int16 CLuaItem::getMod(uint16 modID)
+auto CLuaItem::getMod(uint16 modID) -> int16
 {
     auto*   PItem = static_cast<const CItemEquipment*>(m_readItem);
     xi::Mod mod   = static_cast<xi::Mod>(modID);
@@ -190,13 +190,13 @@ auto CLuaItem::getAugment(uint8 slot) -> sol::table
     return table;
 }
 
-uint8 CLuaItem::getSkillType()
+auto CLuaItem::getSkillType() -> uint8
 {
     auto* PItem = dynamic_cast<const CItemWeapon*>(m_readItem);
     return PItem ? static_cast<uint8>(PItem->getSkillType()) : -1;
 }
 
-uint16 CLuaItem::getWeaponskillPoints()
+auto CLuaItem::getWeaponskillPoints() -> uint16
 {
     auto* PItem = dynamic_cast<const CItemWeapon*>(m_readItem);
 
@@ -223,7 +223,7 @@ void CLuaItem::setWeaponskillPointsNeeded(uint16 points)
     }
 }
 
-uint16 CLuaItem::getWeaponskillPointsNeeded()
+auto CLuaItem::getWeaponskillPointsNeeded() -> uint16
 {
     auto* PItem = dynamic_cast<const CItemWeapon*>(m_readItem);
 
@@ -235,7 +235,7 @@ uint16 CLuaItem::getWeaponskillPointsNeeded()
     return 0;
 }
 
-bool CLuaItem::isTwoHanded()
+auto CLuaItem::isTwoHanded() -> bool
 {
     if (const CItemWeapon* PWeapon = dynamic_cast<const CItemWeapon*>(m_readItem))
     {
@@ -249,7 +249,7 @@ bool CLuaItem::isTwoHanded()
     return false;
 }
 
-bool CLuaItem::isHandToHand()
+auto CLuaItem::isHandToHand() -> bool
 {
     if (const CItemWeapon* PWeapon = dynamic_cast<const CItemWeapon*>(m_readItem))
     {
@@ -263,7 +263,7 @@ bool CLuaItem::isHandToHand()
     return false;
 }
 
-bool CLuaItem::isShield()
+auto CLuaItem::isShield() -> bool
 {
     if (const CItemEquipment* PArmor = dynamic_cast<const CItemEquipment*>(m_readItem))
     {
@@ -277,7 +277,7 @@ bool CLuaItem::isShield()
     return false;
 }
 
-uint8 CLuaItem::getShieldSize()
+auto CLuaItem::getShieldSize() -> uint8
 {
     if (const CItemEquipment* PArmor = dynamic_cast<const CItemEquipment*>(m_readItem))
     {
@@ -298,7 +298,7 @@ uint8 CLuaItem::getShieldSize()
     return 0;
 }
 
-uint8 CLuaItem::getShieldAbsorptionRate()
+auto CLuaItem::getShieldAbsorptionRate() -> uint8
 {
     if (const CItemEquipment* PArmor = dynamic_cast<const CItemEquipment*>(m_readItem))
     {
@@ -324,7 +324,7 @@ auto CLuaItem::getSignature() -> std::string
     return m_readItem->getSignature();
 }
 
-uint8 CLuaItem::getCurrentCharges()
+auto CLuaItem::getCurrentCharges() -> uint8
 {
     if (auto* PUsableItem = dynamic_cast<const CItemUsable*>(m_readItem))
     {
@@ -334,7 +334,7 @@ uint8 CLuaItem::getCurrentCharges()
     return 0;
 }
 
-uint8 CLuaItem::getAppraisalID()
+auto CLuaItem::getAppraisalID() -> uint8
 {
     return m_readItem->getAppraisalID();
 }
@@ -349,7 +349,7 @@ void CLuaItem::setAppraisalID(uint8 id)
     m_writeItem->setAppraisalID(id);
 }
 
-bool CLuaItem::isInstalled()
+auto CLuaItem::isInstalled() -> bool
 {
     if (!m_readItem->isType(ITEM_FURNISHING))
     {
@@ -507,7 +507,7 @@ void CLuaItem::Register()
     SOL_REGISTER("setExDataRaw", CLuaItem::setExDataRaw);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaItem& item)
+auto operator<<(std::ostream& os, const CLuaItem& item) -> std::ostream&
 {
     std::string id = item.m_readItem ? std::to_string(item.m_readItem->getID()) : "nullptr";
     return os << "CLuaItem(" << id << ")";

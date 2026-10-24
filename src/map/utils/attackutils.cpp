@@ -33,7 +33,7 @@ namespace attackutils
  *  Multihit calculator.                                                 *
  *                                                                       *
  ************************************************************************/
-uint8 getHitCount(uint8 hits)
+auto getHitCount(uint8 hits) -> uint8
 {
     uint8 distribution = xirand::GetRandomNumber(100);
     uint8 num          = 1;
@@ -230,17 +230,17 @@ uint8 getHitCount(uint8 hits)
     return std::min<uint8>(num, 8); // no more than eight hits per attack
 }
 
-bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+auto IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool
 {
     return luautils::callGlobal<bool>("xi.combat.physical.isParried", PDefender, PAttacker);
 }
 
-bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+auto IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool
 {
     return luautils::callGlobal<bool>("xi.combat.physical.isGuarded", PDefender, PAttacker);
 }
 
-bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+auto IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender) -> bool
 {
     return luautils::callGlobal<bool>("xi.combat.physical.isBlocked", PDefender, PAttacker);
 }
@@ -250,7 +250,7 @@ bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
  *  Check for damage multiplier, relic weapons etc.                      *
  *                                                                       *
  ************************************************************************/
-uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc)
+auto CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc) -> uint32
 {
     if (PWeapon == nullptr)
     {

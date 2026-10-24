@@ -377,31 +377,31 @@ class CJobPoints
 {
 public:
     CJobPoints(CCharEntity* PChar);
-    bool   IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
-    void   RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
-    uint16 GetJobPoints();                        // Get unspent job points for current job
-    uint16 GetJobPointsByJob(uint8 jobID) const;  // get current job points for a players specified job
-    void   SetJobPoints(int16 amount);            // Set job points for current job
+    auto IsJobPointExist(JOBPOINT_TYPE jpType) -> bool;  // Check to see if JP exists
+    void RaiseJobPoint(JOBPOINT_TYPE jpType);            // Add upgrade
+    auto GetJobPoints() -> uint16;                       // Get unspent job points for current job
+    auto GetJobPointsByJob(uint8 jobID) const -> uint16; // get current job points for a players specified job
+    void SetJobPoints(int16 amount);                     // Set job points for current job
 
     void AddJobPoints(uint8 jobID, uint16 amount); // Add jobpoints to a players specififed job
     void DelJobPoints(uint8 jobID, int16 amount);  // Del jobpoints to a players specified job
 
-    JobPoints_t*    GetJobPointsByType(JOBPOINT_TYPE jpType);
-    JobPointType_t* GetJobPointType(JOBPOINT_TYPE jpType);
+    auto GetJobPointsByType(JOBPOINT_TYPE jpType) -> JobPoints_t*;
+    auto GetJobPointType(JOBPOINT_TYPE jpType) -> JobPointType_t*;
 
     void LoadJobPoints(); // load JPs for char from db
 
-    JobPoints_t* GetAllJobPoints();
+    auto GetAllJobPoints() -> JobPoints_t*;
 
-    uint16 GetJobPointsSpent() const;
+    auto GetJobPointsSpent() const -> uint16;
 
-    bool   AddCapacityPoints(uint16 amount); // Add Capacity Points for current job, and increase JP as needed
-    uint32 GetCapacityPoints();              // Get Capacity Points for Character's Current Job
-    void   SetCapacityPoints(uint16 amount); // Set Capacity Points for Character's Current Job, does not handle JP increase!
+    auto AddCapacityPoints(uint16 amount) -> bool; // Add Capacity Points for current job, and increase JP as needed
+    auto GetCapacityPoints() -> uint32;            // Get Capacity Points for Character's Current Job
+    void SetCapacityPoints(uint16 amount);         // Set Capacity Points for Character's Current Job, does not handle JP increase!
 
     // Returns the level of a given job point type. Will return 0 if the type doesn't match the
     // player's main job or if their main job is not 99
-    uint8 GetJobPointValue(JOBPOINT_TYPE jpType);
+    auto GetJobPointValue(JOBPOINT_TYPE jpType) -> uint8;
 
     std::vector<CModifier> current_gifts;
 

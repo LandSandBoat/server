@@ -56,21 +56,21 @@ public:
     virtual void Del(xi::RecastType type);
     virtual void Del(xi::RecastType type, xi::Recast id);
     virtual void DeleteByIndex(xi::RecastType type, uint8 index);
-    bool         Has(xi::RecastType type, xi::Recast id);
-    bool         HasLootRecast(LootRecastID id);
-    bool         HasRecast(xi::RecastType type, xi::Recast id, timer::duration recast);
+    auto         Has(xi::RecastType type, xi::Recast id) -> bool;
+    auto         HasLootRecast(LootRecastID id) -> bool;
+    auto         HasRecast(xi::RecastType type, xi::Recast id, timer::duration recast) -> bool;
     virtual void Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
     void         AddLootRecast(LootRecastID id, timer::duration duration);
-    Recast_t*    Load(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
+    auto         Load(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0) -> Recast_t*;
     virtual void ResetAbilities();
 
     virtual void ChangeJob()
     {
     }
 
-    virtual RecastList_t* GetRecastList(xi::RecastType type);
-    Recast_t*             GetRecast(xi::RecastType type, xi::Recast id);
-    Recast_t*             GetLootRecast(LootRecastID id);
+    virtual auto GetRecastList(xi::RecastType type) -> RecastList_t*;
+    auto         GetRecast(xi::RecastType type, xi::Recast id) -> Recast_t*;
+    auto         GetLootRecast(LootRecastID id) -> Recast_t*;
 
     CRecastContainer(CBattleEntity* PChar);
 

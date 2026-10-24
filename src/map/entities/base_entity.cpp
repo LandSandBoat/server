@@ -100,12 +100,12 @@ void CBaseEntity::FadeOut()
     updatemask |= UPDATE_HP;
 }
 
-const std::string& CBaseEntity::getName() const
+auto CBaseEntity::getName() const -> const std::string&
 {
     return name;
 }
 
-const std::string& CBaseEntity::getPacketName()
+auto CBaseEntity::getPacketName() -> const std::string&
 {
     return packetName;
 }
@@ -115,32 +115,32 @@ auto CBaseEntity::getZone() const -> xi::ZoneId
     return loc.zone != nullptr ? loc.zone->GetID() : loc.destination;
 }
 
-float CBaseEntity::GetXPos() const
+auto CBaseEntity::GetXPos() const -> float
 {
     return loc.p.x;
 }
 
-float CBaseEntity::GetYPos() const
+auto CBaseEntity::GetYPos() const -> float
 {
     return loc.p.y;
 }
 
-float CBaseEntity::GetZPos() const
+auto CBaseEntity::GetZPos() const -> float
 {
     return loc.p.z;
 }
 
-uint8 CBaseEntity::GetRotPos() const
+auto CBaseEntity::GetRotPos() const -> uint8
 {
     return loc.p.rotation;
 }
 
-uint8 CBaseEntity::GetSpeed() const
+auto CBaseEntity::GetSpeed() const -> uint8
 {
     return speed;
 }
 
-uint8 CBaseEntity::UpdateSpeed(bool run)
+auto CBaseEntity::UpdateSpeed(bool run) -> uint8
 {
     std::ignore = run;
     speed       = baseSpeed;
@@ -174,27 +174,27 @@ void CBaseEntity::GhostPhase(bool ghost)
     updatemask |= UPDATE_HP;
 }
 
-bool CBaseEntity::IsNameHidden() const
+auto CBaseEntity::IsNameHidden() const -> bool
 {
     return (namevis & xi::NameVis::HideName) != xi::NameVis::None;
 }
 
-bool CBaseEntity::GetUntargetable() const
+auto CBaseEntity::GetUntargetable() const -> bool
 {
     return false;
 }
 
-bool CBaseEntity::isWideScannable()
+auto CBaseEntity::isWideScannable() -> bool
 {
     return status != xi::Status::Disappear && !IsNameHidden() && !GetUntargetable();
 }
 
-bool CBaseEntity::CanSeeTarget(CBaseEntity* target)
+auto CBaseEntity::CanSeeTarget(CBaseEntity* target) -> bool
 {
     return CanSeeTarget(target->loc.p);
 }
 
-bool CBaseEntity::CanSeeTarget(const position_t& targetPointBase)
+auto CBaseEntity::CanSeeTarget(const position_t& targetPointBase) -> bool
 {
     TracyZoneScoped;
 
@@ -219,7 +219,7 @@ bool CBaseEntity::CanSeeTarget(const position_t& targetPointBase)
     return canSee;
 }
 
-CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
+auto CBaseEntity::GetEntity(uint16 targid, uint8 filter) const -> CBaseEntity*
 {
     if (targid == 0)
     {
@@ -255,7 +255,7 @@ void CBaseEntity::ResetLocalVars()
     localVars_.clear();
 }
 
-uint32 CBaseEntity::GetLocalVar(const std::string& var) const
+auto CBaseEntity::GetLocalVar(const std::string& var) const -> uint32
 {
     const auto it = localVars_.find(var);
     if (it != localVars_.end())
@@ -266,7 +266,7 @@ uint32 CBaseEntity::GetLocalVar(const std::string& var) const
     return 0;
 }
 
-std::map<std::string, uint32>& CBaseEntity::GetLocalVars()
+auto CBaseEntity::GetLocalVars() -> std::map<std::string, uint32>&
 {
     return localVars_;
 }
@@ -281,12 +281,12 @@ void CBaseEntity::SetModelId(uint16 modelid)
     look.modelid = modelid;
 }
 
-uint16 CBaseEntity::GetModelId() const
+auto CBaseEntity::GetModelId() const -> uint16
 {
     return look.modelid;
 }
 
-bool CBaseEntity::IsDynamicEntity() const
+auto CBaseEntity::IsDynamicEntity() const -> bool
 {
     return this->targid >= 0x700;
 }

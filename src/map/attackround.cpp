@@ -109,7 +109,7 @@ CAttackRound::~CAttackRound() = default;
  *  Returns the attack swing count.                                        *
  *                                                                        *
  ************************************************************************/
-uint8 CAttackRound::GetAttackSwingCount()
+auto CAttackRound::GetAttackSwingCount() -> uint8
 {
     return (uint8)m_attackSwings.size();
 }
@@ -119,7 +119,7 @@ uint8 CAttackRound::GetAttackSwingCount()
  *  Returns an attack via index.                                            *
  *                                                                        *
  ************************************************************************/
-CAttack& CAttackRound::GetAttack(uint8 index)
+auto CAttackRound::GetAttack(uint8 index) -> CAttack&
 {
     return m_attackSwings[index];
 }
@@ -129,7 +129,7 @@ CAttack& CAttackRound::GetAttack(uint8 index)
  *  Returns the current attack.                                            *
  *                                                                        *
  ************************************************************************/
-CAttack& CAttackRound::GetCurrentAttack()
+auto CAttackRound::GetCurrentAttack() -> CAttack&
 {
     return m_attackSwings[0];
 }
@@ -149,7 +149,7 @@ void CAttackRound::SetSATA(bool value)
  *  Returns the SATA flag.                                                *
  *                                                                        *
  ************************************************************************/
-bool CAttackRound::GetSATAOccured() const
+auto CAttackRound::GetSATAOccured() const -> bool
 {
     return m_sataOccured;
 }
@@ -159,7 +159,7 @@ bool CAttackRound::GetSATAOccured() const
  *  Returns the TA entity.                                                *
  *                                                                        *
  ************************************************************************/
-CBattleEntity* CAttackRound::GetTAEntity()
+auto CAttackRound::GetTAEntity() -> CBattleEntity*
 {
     return m_taEntity;
 }
@@ -169,7 +169,7 @@ CBattleEntity* CAttackRound::GetTAEntity()
  *  Returns the Cover entity.                                            *
  *                                                                       *
  ************************************************************************/
-CBattleEntity* CAttackRound::GetCoverAbilityUserEntity()
+auto CAttackRound::GetCoverAbilityUserEntity() -> CBattleEntity*
 {
     return m_coverAbilityUserEntity;
 }
@@ -179,7 +179,7 @@ CBattleEntity* CAttackRound::GetCoverAbilityUserEntity()
  *  Returns the H2H flag.                                                *
  *                                                                       *
  ************************************************************************/
-bool CAttackRound::IsH2H()
+auto CAttackRound::IsH2H() -> bool
 {
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_MAIN]))
     {
@@ -374,7 +374,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
  *  Return true if the attackType attack swing eligible to proc followUpType
  *  Virtue Stone, TODO Raetic, TODO Dynamis [D]
  ************************************************************************/
-bool CAttackRound::IsAttackTypeEligibleForFollowUp(xi::Mod followUpType, PHYSICAL_ATTACK_TYPE attackType)
+auto CAttackRound::IsAttackTypeEligibleForFollowUp(xi::Mod followUpType, PHYSICAL_ATTACK_TYPE attackType) -> bool
 {
     switch (followUpType)
     {
@@ -478,7 +478,7 @@ void CAttackRound::ProcFollowUpAttacks()
  *  Attempt to store a follow-up swing. Return true if swing is stored.
  *  Ensure that one follow-up per hand is stored, in order
  ************************************************************************/
-bool CAttackRound::AddFollowUpAttack(PHYSICAL_ATTACK_DIRECTION direction)
+auto CAttackRound::AddFollowUpAttack(PHYSICAL_ATTACK_DIRECTION direction) -> bool
 {
     if (m_followUpSwings.size() < 2)
     {

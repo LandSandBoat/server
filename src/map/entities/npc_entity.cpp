@@ -80,12 +80,12 @@ void CNpcEntity::setUntargetable(bool untargetable)
     }
 }
 
-bool CNpcEntity::GetUntargetable() const
+auto CNpcEntity::GetUntargetable() const -> bool
 {
     return (m_flags & xi::EntityFlags::Untargetable) == xi::EntityFlags::Untargetable;
 }
 
-bool CNpcEntity::triggerable() const
+auto CNpcEntity::triggerable() const -> bool
 {
     return triggerable_;
 }
@@ -105,7 +105,7 @@ void CNpcEntity::setWidescan(uint8 widescan)
     widescan_ = widescan;
 }
 
-bool CNpcEntity::alwaysRelevant() const
+auto CNpcEntity::alwaysRelevant() const -> bool
 {
     return alwaysRelevant_;
 }
@@ -125,7 +125,7 @@ void CNpcEntity::setContentDisabled(bool contentDisabled)
     contentDisabled_ = contentDisabled;
 }
 
-bool CNpcEntity::isWideScannable()
+auto CNpcEntity::isWideScannable() -> bool
 {
     return widescan_ == 1 && status == xi::Status::Normal && CBaseEntity::isWideScannable();
 }

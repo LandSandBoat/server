@@ -29,7 +29,7 @@
 #include <iostream>
 #include <memory>
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     TracySetThreadName("Test Thread");
 
