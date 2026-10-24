@@ -495,17 +495,36 @@ public:
             mainContext_.restart();
         }
 
-        // Pumping loop
+        auto handlerException = std::exception_ptr();
         while (!done)
         {
-            // run_one() blocks until one handler is executed.
-            // If it returns 0, no work is currently available.
-            if (mainContext_.run_one() == 0 && !done)
+            try
             {
-                // This prevents a deadlock if the coroutine is waiting on something
-                // that will never happen.
-                throw std::runtime_error("Main context stalled in blockOnMain: No work remaining.");
+                // run_one() blocks until one handler is executed, and returns 0 when no work is left.
+                if (mainContext_.run_one() == 0)
+                {
+                    break;
+                }
             }
+            catch (...)
+            {
+                // The completion above refers to this frame, so finish pumping before rethrowing.
+                if (!handlerException)
+                {
+                    handlerException = std::current_exception();
+                }
+            }
+        }
+
+        if (!done)
+        {
+            // The task waits on something that will never happen.
+            throw std::runtime_error("Main context stalled in blockOnMain: No work remaining.");
+        }
+
+        if (handlerException)
+        {
+            std::rethrow_exception(handlerException);
         }
 
         if (exceptPtr)

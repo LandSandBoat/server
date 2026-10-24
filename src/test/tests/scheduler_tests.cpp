@@ -99,6 +99,29 @@ TEST_CASE("Scheduler::blockOnMainThread returns the task's result", "[scheduler]
     }
 }
 
+TEST_CASE("Scheduler::blockOnMainThread finishes its task when another handler throws", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    scheduler.postToMainThread(
+        []
+        {
+            throw std::logic_error("unrelated handler");
+        });
+
+    auto finished = false;
+    CHECK_THROWS_AS(scheduler.blockOnMainThread(
+                        [&]() -> Task<void>
+                        {
+                            co_await Scheduler::yield();
+                            co_await Scheduler::yield();
+                            finished = true;
+                        }()),
+                    std::logic_error);
+
+    CHECK(finished);
+}
+
 TEST_CASE("Scheduler::blockOnMainThread rejects other threads", "[scheduler]")
 {
     auto scheduler = Scheduler(kWorkerThreads);
