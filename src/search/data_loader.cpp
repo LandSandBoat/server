@@ -382,7 +382,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     // Split the query so searches done by character id can start from the ids.
     auto& ids = sr.characterIds;
     std::ranges::sort(ids);
-    ids.erase(std::ranges::unique(ids).begin(), ids.end());
+    ids.erase(std::unique(ids.begin(), ids.end()), ids.end());
 
     static const auto columns  = std::string("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
                                              "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
