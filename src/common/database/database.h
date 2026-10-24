@@ -103,6 +103,38 @@ concept IsRowProjection = std::invocable<ProjectFn&, const T&> &&
 // Get the active database backend.
 auto getDatabase() -> Database&;
 
+namespace detail
+{
+
+// A literal query whose placeholder count must match the argument count, checked at compile time.
+template <std::size_t ArgCount>
+class CheckedQuery final
+{
+public:
+    template <std::size_t N>
+    consteval CheckedQuery(const char (&text)[N])
+    : query_(text)
+    {
+        if (query_.placeholders() != ArgCount)
+        {
+            throw "The query's placeholder count doesn't match its argument count";
+        }
+    }
+
+    [[nodiscard]] constexpr auto query() const noexcept -> Query
+    {
+        return query_;
+    }
+
+private:
+    Query query_;
+};
+
+template <typename... Args>
+auto runPrepared(Query query, Args&&... args) -> std::unique_ptr<ResultSet>;
+
+} // namespace detail
+
 // Override the active database backend (intended for tests/benchmarks). Pass nullptr to restore the
 // default backend.
 auto setDatabase(Database* database) -> void;
@@ -114,7 +146,11 @@ auto setDatabase(Database* database) -> void;
 // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 template <typename... Args>
-auto preparedStmt(const Query rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
+auto preparedStmt(detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>;
+
+// As above, for a query held in a variable. The placeholder count is checked at runtime instead.
+template <std::same_as<Query> Q, typename... Args>
+auto preparedStmt(Q query, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 // Send every row of `rows` through `query` in one round trip.
 //
@@ -160,13 +196,31 @@ auto getTableColumnNames(const std::string& tableName) -> std::vector<std::strin
 //
 
 template <typename... Args>
-auto preparedStmt(const Query rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
+auto detail::runPrepared(const Query query, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScopedS(16);
-    TracyZoneString(rawQuery.view());
+    TracyZoneString(query.view());
 
-    const auto params = detail::lowerBoundValues(std::forward<Args>(args)...);
-    return getDatabase().execute(rawQuery, params);
+    const auto params = lowerBoundValues(std::forward<Args>(args)...);
+    return getDatabase().execute(query, params);
+}
+
+template <typename... Args>
+auto preparedStmt(const detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>
+{
+    return detail::runPrepared(query.query(), std::forward<Args>(args)...);
+}
+
+template <std::same_as<Query> Q, typename... Args>
+auto preparedStmt(const Q query, Args&&... args) -> std::unique_ptr<ResultSet>
+{
+    if (query.placeholders() != sizeof...(Args))
+    {
+        ShowErrorFmt("Query has {} placeholders but was given {} arguments: {}", query.placeholders(), sizeof...(Args), query);
+        return nullptr;
+    }
+
+    return detail::runPrepared(query, std::forward<Args>(args)...);
 }
 
 template <typename T, typename ProjectFn>

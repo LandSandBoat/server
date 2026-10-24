@@ -34,6 +34,7 @@ public:
     template <std::size_t N>
     consteval Query(const char (&text)[N]) noexcept
     : text_(text, N - 1)
+    , placeholders_(countPlaceholders(text_))
     {
     }
 
@@ -42,8 +43,46 @@ public:
         return text_;
     }
 
+    [[nodiscard]] constexpr auto placeholders() const noexcept -> std::size_t
+    {
+        return placeholders_;
+    }
+
 private:
+    // The server binds parameters to every '?' outside quoted text.
+    static consteval auto countPlaceholders(const std::string_view text) noexcept -> std::size_t
+    {
+        auto count = std::size_t{ 0 };
+        auto quote = '\0';
+        for (auto i = std::size_t{ 0 }; i < text.size(); ++i)
+        {
+            const auto c = text[i];
+            if (quote != '\0')
+            {
+                if (c == '\\')
+                {
+                    ++i;
+                }
+                else if (c == quote)
+                {
+                    quote = '\0';
+                }
+            }
+            else if (c == '\'' || c == '"' || c == '`')
+            {
+                quote = c;
+            }
+            else if (c == '?')
+            {
+                ++count;
+            }
+        }
+
+        return count;
+    }
+
     std::string_view text_;
+    std::size_t      placeholders_;
 };
 
 [[nodiscard]] constexpr auto format_as(const Query query) noexcept -> std::string_view

@@ -62,6 +62,11 @@ static_assert(!AcceptsQueryText<const char*>);
 static_assert(!AcceptsQueryText<std::string>);
 static_assert(!AcceptsQueryText<std::string_view>);
 
+static_assert(db::Query("SELECT 1").placeholders() == 0);
+static_assert(db::Query("SELECT ?, ?").placeholders() == 2);
+static_assert(db::Query("SELECT '?', \"?\", `?`, ?").placeholders() == 1);
+static_assert(db::Query("SELECT 'it\\'s ?', ?").placeholders() == 1);
+
 } // namespace
 
 namespace
@@ -209,4 +214,13 @@ TEST_CASE("db::preparedStmt binds 64-bit integers without truncating", "[databas
     CHECK(roundTrip(std::numeric_limits<int64>::min()) == std::numeric_limits<int64>::min());
     CHECK(roundTrip(std::numeric_limits<int64>::max()) == std::numeric_limits<int64>::max());
     CHECK(roundTrip(std::size_t{ 5'000'000'000 }) == std::size_t{ 5'000'000'000 });
+}
+
+TEST_CASE("db::preparedStmt rejects a held query given the wrong number of arguments", "[database]")
+{
+    constexpr auto query = db::Query("SELECT ? + ?");
+
+    CHECK_FALSE(db::preparedStmt(query, 1));
+    CHECK_FALSE(db::preparedStmt(query, 1, 2, 3));
+    CHECK(db::preparedStmt(query, 1, 2));
 }
