@@ -150,7 +150,6 @@ class CItemFurnishing;
 class CItemGeneral;
 class CItemLinkshell;
 class CItemPuppet;
-class CItemShop;
 class CItemUsable;
 class CItemWeapon;
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemCurrency);
@@ -160,7 +159,6 @@ SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemFurnishing);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemGeneral);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemLinkshell);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemPuppet);
-SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemShop);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemUsable);
 SOL_BIND_DEC_SUB(CLuaItem, CItem, CItemWeapon);
 
