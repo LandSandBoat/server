@@ -121,6 +121,29 @@ TEST_CASE("Scheduler::blockOnMainThread rejects other threads", "[scheduler]")
     CHECK(threw);
 }
 
+TEST_CASE("Scheduler::stop rejects other threads", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    auto threw  = false;
+    auto thread = std::thread(
+        [&]
+        {
+            try
+            {
+                scheduler.stop();
+            }
+            catch (const std::runtime_error&)
+            {
+                threw = true;
+            }
+        });
+    thread.join();
+
+    CHECK(threw);
+    CHECK_FALSE(scheduler.closeRequested());
+}
+
 TEST_CASE("Scheduler posts and spawns run their work", "[scheduler]")
 {
     auto scheduler = Scheduler(kWorkerThreads);
