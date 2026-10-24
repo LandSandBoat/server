@@ -50,8 +50,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
 
     DecodeStringLinkshell(encodedRawName, DecodedName);
 
-    const auto safeName = db::escapeString(DecodedName);
-    linkshellId         = linkshell::RegisterNewLinkshell(safeName, linkshellColor);
+    linkshellId = linkshell::RegisterNewLinkshell(DecodedName, linkshellColor);
 
     if (linkshellId != 0)
     {
@@ -73,7 +72,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
         PItemLinkshell->SetLSColor(linkshellColor);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory SET signature = ?, extra = ?, itemId = 513 WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                           safeName,
+                                           DecodedName,
                                            PItemLinkshell->m_extra,
                                            PChar->id,
                                            data.Category,
