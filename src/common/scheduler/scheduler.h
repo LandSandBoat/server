@@ -364,6 +364,7 @@ public:
             mainContext_.get_executor(),
             [this, duration, phase, signal, fn = std::forward<T>(func)]() mutable -> Task<void>
             {
+                auto aborted = std::exception_ptr();
                 try
                 {
                     // Seed the grid with the random phase so a batch of timers doesn't stay in lockstep.
@@ -398,11 +399,18 @@ public:
                 }
                 catch (const asio::system_error& e)
                 {
-                    // operation_aborted is expected when the Token is destroyed
                     if (e.code() != asio::error::operation_aborted)
                     {
                         throw;
                     }
+
+                    aborted = std::current_exception();
+                }
+
+                // Only an abort the token caused is expected, one from the work itself is a real failure.
+                if (aborted && (co_await asio::this_coro::cancellation_state).cancelled() == asio::cancellation_type::none)
+                {
+                    std::rethrow_exception(aborted);
                 }
             },
             detail::recycled(asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
