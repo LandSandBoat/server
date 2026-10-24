@@ -345,6 +345,25 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
         CHECK(count == countAtStop);
     }
 
+    SECTION("destroying the token while its work is suspended is quiet")
+    {
+        auto started = false;
+        {
+            auto token = scheduler.intervalOnMainThread(
+                1ms,
+                [&]() -> Task<void>
+                {
+                    started = true;
+                    co_await Scheduler::yieldFor(1h);
+                });
+            pumpFor(scheduler, 10ms);
+        }
+
+        pumpFor(scheduler, 10ms);
+
+        CHECK(started);
+    }
+
     SECTION("assigning over a token stops the interval it held")
     {
         auto first  = 0;
