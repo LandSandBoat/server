@@ -27,6 +27,31 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <tuple>
+#include <vector>
+
+namespace
+{
+
+template <typename ProjectFn>
+concept BulkAcceptsProjection = requires(const std::vector<int>& rows, ProjectFn project) {
+    db::executeBulk("", rows, project);
+};
+
+using TupleProjection = decltype([](const int value)
+                                 {
+                                     return std::tuple{ value };
+                                 });
+
+using ScalarProjection = decltype([](const int value)
+                                  {
+                                      return value;
+                                  });
+
+static_assert(BulkAcceptsProjection<TupleProjection>);
+static_assert(!BulkAcceptsProjection<ScalarProjection>);
+
+} // namespace
 
 TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
 {

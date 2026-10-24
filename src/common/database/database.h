@@ -31,6 +31,8 @@
 
 #include <fmt/format.h>
 
+#include <concepts>
+#include <functional>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -83,6 +85,15 @@ public:
     }
 };
 
+namespace detail
+{
+
+template <typename ProjectFn, typename T>
+concept IsRowProjection = std::invocable<ProjectFn&, const T&> &&
+                          requires { std::tuple_size<std::remove_cvref_t<std::invoke_result_t<ProjectFn&, const T&>>>::value; };
+
+} // namespace detail
+
 // Get the active database backend.
 auto getDatabase() -> Database&;
 
@@ -107,6 +118,7 @@ auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<
 // Throws if the statement fails.
 // Call it inside db::transaction, which turns the throw into a rollback.
 template <typename T, typename ProjectFn>
+    requires detail::IsRowProjection<ProjectFn, T>
 void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project);
 
 auto getDatabaseSchema() -> std::string;
@@ -150,6 +162,7 @@ auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<
 }
 
 template <typename T, typename ProjectFn>
+    requires detail::IsRowProjection<ProjectFn, T>
 void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project)
 {
     TracyZoneScopedS(16);
