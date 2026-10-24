@@ -1,5 +1,6 @@
 -----------------------------------
 -- Meteorite
+-- Family: Avatar (Carbuncle)
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -9,14 +10,28 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = 500 + dint * 1.5 + petskill:getTP() / 20
-
     xi.job_utils.summoner.onUseBloodPact(target, pet, petskill, summoner, action)
 
-    target:updateEnmityFromDamage(pet, dmg)
-    target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-    return dmg
+    local params = {}
+
+    params.baseDamage      = pet:getMainLvl() + 2
+    params.fTP             = { 3.75, 4.00, 4.25 }
+    params.int_wSC         = 0.30
+    params.element         = xi.element.LIGHT
+    params.attackType      = xi.attackType.MAGICAL
+    params.damageType      = xi.damageType.LIGHT
+    params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    params.dStatMultiplier = 1.5
+    params.canMagicBurst   = true
+    params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
+
+    local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
+
+    if xi.mobskills.processDamage(pet, target, petskill, action, info) then
+        target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+    end
+
+    return info.damage
 end
 
 return abilityObject
