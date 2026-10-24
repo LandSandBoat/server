@@ -255,26 +255,74 @@ TEST_CASE("Scheduler posts and spawns run their work", "[scheduler]")
     }
 }
 
-TEST_CASE("Scheduler::TaskGroup awaits every task", "[scheduler]")
+TEST_CASE("runOnWorkerThreads", "[scheduler]")
 {
     auto scheduler = Scheduler(kWorkerThreads);
 
-    auto count = std::atomic<int>(0);
-    scheduler.blockOnMainThread(Scheduler::TaskGroup(
-        0,
-        [&](auto add)
-        {
-            for (auto i = 0; i < 4; ++i)
+    SECTION("completes with no jobs")
+    {
+        scheduler.blockOnMainThread(runOnWorkerThreads(
+            scheduler,
+            0,
+            [](auto&)
             {
-                add(scheduler.spawnOnWorkerThread(
-                    [&]
-                    {
-                        ++count;
-                    }));
-            }
-        }));
+            }));
+    }
 
-    CHECK(count == 4);
+    SECTION("runs every job off the main thread")
+    {
+        const auto mainThread = std::this_thread::get_id();
+
+        auto count  = std::atomic<int>(0);
+        auto onMain = std::atomic<bool>(false);
+        scheduler.blockOnMainThread(runOnWorkerThreads(
+            scheduler,
+            100,
+            [&](auto& add)
+            {
+                for (auto i = 0; i < 100; ++i)
+                {
+                    add(
+                        [&]
+                        {
+                            ++count;
+                            if (std::this_thread::get_id() == mainThread)
+                            {
+                                onMain = true;
+                            }
+                        });
+                }
+            }));
+
+        CHECK(count == 100);
+        CHECK_FALSE(onMain);
+    }
+
+    SECTION("rethrows an exception once every job has run")
+    {
+        auto count = std::atomic<int>(0);
+        CHECK_THROWS_AS(scheduler.blockOnMainThread(runOnWorkerThreads(
+                            scheduler,
+                            10,
+                            [&](auto& add)
+                            {
+                                for (auto i = 0; i < 10; ++i)
+                                {
+                                    add(
+                                        [&, i]
+                                        {
+                                            ++count;
+                                            if (i % 3 == 0)
+                                            {
+                                                throw std::logic_error("bad zone data");
+                                            }
+                                        });
+                                }
+                            })),
+                        std::logic_error);
+
+        CHECK(count == 10);
+    }
 }
 
 TEST_CASE("Scheduler::withTimeout", "[scheduler]")
@@ -391,23 +439,6 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
         CHECK(first == firstAtReplace);
         CHECK(second > 1);
     }
-}
-
-TEST_CASE("Scheduler::TaskGroup rethrows a task's exception", "[scheduler]")
-{
-    auto scheduler = Scheduler(kWorkerThreads);
-
-    CHECK_THROWS_AS(scheduler.blockOnMainThread(Scheduler::TaskGroup(
-                        1,
-                        [&](auto add)
-                        {
-                            add(scheduler.spawnOnWorkerThread(
-                                []
-                                {
-                                    throw std::logic_error("bad zone data");
-                                }));
-                        })),
-                    std::logic_error);
 }
 
 TEST_CASE("Scheduler::intervalOnMainThread jitters the first run", "[scheduler]")

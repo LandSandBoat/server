@@ -202,43 +202,6 @@ public:
         std::shared_ptr<asio::cancellation_signal> signal_;
     };
 
-    //
-    // TaskGroup
-    //   Builds an awaitable collection of tasks.
-    //
-    template <typename F>
-    [[nodiscard]] static auto TaskGroup(const std::size_t reserveSize, F&& func) -> Task<void>
-    {
-        const auto executor = co_await asio::this_coro::executor;
-
-        using DeferredOp = decltype(asio::co_spawn(executor, std::declval<Task<void>>(), detail::recycled(asio::deferred)));
-        std::vector<DeferredOp> ops;
-        ops.reserve(reserveSize);
-
-        auto add = [&](Task<void> task)
-        {
-            ops.push_back(asio::co_spawn(executor, std::move(task), detail::recycled(asio::deferred)));
-        };
-
-        std::forward<F>(func)(add);
-
-        if (ops.empty())
-        {
-            co_return;
-        }
-
-        auto group = asio::experimental::make_parallel_group(std::move(ops));
-
-        const auto [completionOrder, exceptions] = co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
-        for (const auto& exception : exceptions)
-        {
-            if (exception)
-            {
-                std::rethrow_exception(exception);
-            }
-        }
-    }
-
     explicit Scheduler(const std::size_t numThreads = std::max(2U, std::thread::hardware_concurrency()) - 1U)
     : mainContext_()
     , mainGuard_(asio::make_work_guard(mainContext_))
@@ -546,6 +509,13 @@ public:
         }
     }
 
+    // workerExecutor
+    //   Return the worker thread pool's executor.
+    [[nodiscard]] auto workerExecutor() noexcept -> asio::thread_pool::executor_type
+    {
+        return workerPool_.executor();
+    }
+
     // mainContext
     //   Return the main io_context.
     [[nodiscard]] auto mainContext() noexcept -> asio::io_context&
@@ -587,3 +557,47 @@ private:
 
     asio::thread_pool workerPool_;
 };
+
+//
+// runOnWorkerThreads
+//   Runs every function `fill` adds on the worker thread pool, and completes once they have all finished.
+//   Rethrows the first exception any of them threw.
+//
+template <typename F>
+[[nodiscard]] auto runOnWorkerThreads(Scheduler& scheduler, const std::size_t reserveSize, F&& fill) -> Task<void>
+{
+    const auto executor = scheduler.workerExecutor();
+
+    using DeferredOp = decltype(asio::co_spawn(executor, std::declval<Task<void>>(), detail::recycled(asio::deferred)));
+    auto ops         = std::vector<DeferredOp>();
+    ops.reserve(reserveSize);
+
+    auto add = [&]<detail::IsInvocableReturnsVoid Job>(Job&& job)
+    {
+        auto task = [](std::remove_cvref_t<Job> work) -> Task<void>
+        {
+            work();
+            co_return;
+        }(std::forward<Job>(job));
+
+        ops.push_back(asio::co_spawn(executor, std::move(task), detail::recycled(asio::deferred)));
+    };
+
+    std::forward<F>(fill)(add);
+
+    if (ops.empty())
+    {
+        co_return;
+    }
+
+    auto group = asio::experimental::make_parallel_group(std::move(ops));
+
+    const auto [completionOrder, exceptions] = co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
+    for (const auto& exception : exceptions)
+    {
+        if (exception)
+        {
+            std::rethrow_exception(exception);
+        }
+    }
+}
