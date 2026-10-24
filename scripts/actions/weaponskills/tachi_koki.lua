@@ -7,9 +7,9 @@
 -- Aligned with the Aqua Gorget & Thunder Gorget.
 -- Aligned with the Aqua Belt & Thunder Belt.
 -- Element: Light
--- Modifiers: STR:30%  MND:50%
+-- Modifiers: STR:50%  MND:30%
 -- 100%TP    200%TP    300%TP
--- .5        .75        1.00
+-- .5        1.45       2.50
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -25,8 +25,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 0.5, 1.5, 2.5 }
-        params.str_wsc = 0.3 params.mnd_wsc = 0.5
+        params.ftpMod = { 0.5, 1.44921875, 2.5 } -- DAT, but BG and FFO say 1.5 at 2000 TP
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

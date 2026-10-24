@@ -9,7 +9,7 @@
 -- Element: None
 -- Modifiers: STR:80%
 -- 100%TP    200%TP    300%TP
--- 3.75      5.75        8
+-- 3.50      5.75        8
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -17,14 +17,13 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftpMod = { 3.75, 4.75, 5.75 }
+    params.ftpMod = { 3.5, 4.25, 5.5 } -- FFO
     params.str_wsc = 0.60
-    params.atkVaries = { 2.0, 2.0, 2.0 }
+    params.atkVaries = { 1.0, 1.0, 1.0 } -- BG and FFO say no attack bonus
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.75, 5.75, 8.0 }
+        params.ftpMod = { 3.5, 5.75, 8.0 } -- DAT and FFO, BG says 3.75 at 1000 TP
         params.str_wsc = 0.8
-        params.atkVaries = { 1.0, 1.0, 1.0 }
     end
 
     -- Apply aftermath
