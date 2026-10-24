@@ -210,7 +210,7 @@ local function getPlayerReward(player)
             rank > 0 and
             rank <= 20
         then
-            local reward = xi.fishingContest.reward[rank]
+            local reward = utils.append({}, xi.fishingContest.reward[rank])
             if reward.gil then
                 reward.gil = reward.gil / share
             end
