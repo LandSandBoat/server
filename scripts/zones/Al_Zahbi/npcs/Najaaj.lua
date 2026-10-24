@@ -8,10 +8,10 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = 40.000, y = 0.000, z = 36.000, wait = 2000 },
-    { rotation = 0, wait = 3000 },
-    { x = 67.000, wait = 2000 },
-    { rotation = 128, wait = 3000 },
+    { x = 40.548, y = 0.000, z = 36.430, wait = 2000 },
+    { rotation = 0, wait = 2400 },
+    { x = 66.700, y = 0.000, z = 36.224, wait = 2000 },
+    { rotation = 120, wait = 5400 },
 }
 
 entity.onSpawn = function(npc)
