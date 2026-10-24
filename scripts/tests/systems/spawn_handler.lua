@@ -104,6 +104,27 @@ describe('Spawn Handler', function()
         end)
     end)
 
+    -- Each needs a zone no earlier test has loaded. The mobs are outside spawn slots, which spawn on their own at load.
+    describe('first zone load', function()
+        it('spawns night mobs without waiting for a spawn tick', function()
+            assert(GetZone(xi.zone.NORTH_GUSTABERG) == nil, 'precondition: North Gustaberg is not loaded yet')
+            xi.test.world:setVanaTime(22, 0)
+
+            player:gotoZone(xi.zone.NORTH_GUSTABERG)
+
+            player.entities:get(17211792).assert:isSpawned() -- Black_Wolf
+        end)
+
+        it('holds night mobs back on a daytime load', function()
+            assert(GetZone(xi.zone.MERIPHATAUD_MOUNTAINS) == nil, 'precondition: Meriphataud Mountains is not loaded yet')
+            xi.test.world:setVanaTime(12, 0)
+
+            player:gotoZone(xi.zone.MERIPHATAUD_MOUNTAINS)
+
+            player.entities:get(17264681).assert.no:isSpawned() -- Bogy
+        end)
+    end)
+
     describe('time-based spawns', function()
         it('spawns night mobs during night', function()
             player:gotoZone(xi.zone.ATTOHWA_CHASM)

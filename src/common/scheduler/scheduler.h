@@ -371,6 +371,14 @@ public:
                     auto deadline = std::chrono::steady_clock::now() + phase;
                     while (!this->closeRequested())
                     {
+                        co_await yieldUntil(deadline);
+
+                        // A timer that fired before the token stopped still resumes normally.
+                        if ((co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none)
+                        {
+                            co_return;
+                        }
+
                         if constexpr (detail::IsInvocableReturnsVoid<T>)
                         {
                             fn();
@@ -386,14 +394,6 @@ public:
                         if (const auto now = std::chrono::steady_clock::now(); deadline < now)
                         {
                             deadline = now;
-                        }
-
-                        co_await yieldUntil(deadline);
-
-                        // A timer that fired before the token stopped still resumes normally.
-                        if ((co_await asio::this_coro::cancellation_state).cancelled() != asio::cancellation_type::none)
-                        {
-                            co_return;
                         }
                     }
                 }
