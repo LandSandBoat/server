@@ -52,4 +52,18 @@ describe('Treasures of Aht Urhgan', function()
             player.assert:hasKI(xi.keyItem.SUPPLIES_PACKAGE)
         end)
     end)
+
+    describe('42 - Path of Darkness', function()
+        it('should start the Nyzul Isle cutscene from the lamp at the staging point', function()
+            player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
+            player:addKeyItem(xi.keyItem.NYZUL_ISLE_ROUTE)
+
+            player:gotoZone(xi.zone.ALZADAAL_UNDERSEA_RUINS)
+            local lamp = player.entities:get('blank_lamp')
+            assert(lamp:getStatus() == xi.status.NORMAL, string.format('The lamp has status %d', lamp:getStatus()))
+
+            player.entities:gotoAndTrigger(lamp, { eventId = 6, finishOption = 0 })
+            assert(player:getMissionStatus(xi.mission.log_id.TOAU) == 1)
+        end)
+    end)
 end)
