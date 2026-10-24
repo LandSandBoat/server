@@ -42,6 +42,18 @@ auto pumpFor(Scheduler& scheduler, const std::chrono::steady_clock::duration dur
     scheduler.blockOnMainThread(Scheduler::yieldFor(duration));
 }
 
+// Windows timers tick every ~15ms and the machine may be busy, so wait for an outcome instead of a fixed time.
+template <typename Condition>
+auto pumpUntil(Scheduler& scheduler, Condition condition) -> bool
+{
+    for (auto i = 0; i < 1000 && !condition(); ++i)
+    {
+        pumpFor(scheduler, 2ms);
+    }
+
+    return condition();
+}
+
 } // namespace
 
 TEST_CASE("Scheduler::blockOnMainThread returns the task's result", "[scheduler]")
@@ -370,9 +382,11 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
             {
                 ++count;
             });
-        pumpFor(scheduler, 30ms);
 
-        CHECK(count > 1);
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return count > 1;
+                        }));
     }
 
     SECTION("destroying the token stops the interval")
@@ -405,12 +419,13 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
                     started = true;
                     co_await Scheduler::yieldFor(1h);
                 });
-            pumpFor(scheduler, 10ms);
+            REQUIRE(pumpUntil(scheduler, [&]
+                              {
+                                  return started;
+                              }));
         }
 
         pumpFor(scheduler, 10ms);
-
-        CHECK(started);
     }
 
     SECTION("assigning over a token stops the interval it held")
@@ -435,10 +450,12 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
             });
 
         const auto firstAtReplace = first;
-        pumpFor(scheduler, 20ms);
 
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return second > 1;
+                        }));
         CHECK(first == firstAtReplace);
-        CHECK(second > 1);
     }
 }
 
@@ -457,4 +474,166 @@ TEST_CASE("Scheduler::intervalOnMainThread jitters the first run", "[scheduler]"
 
     // With a one hour period, a first run inside 20ms means it wasn't offset.
     CHECK(count == 0);
+}
+
+TEST_CASE("Scheduler::Token edge cases", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    auto count = 0;
+    auto token = scheduler.intervalOnMainThread(
+        1ms,
+        [&]
+        {
+            ++count;
+        });
+
+    SECTION("a moved-from token doesn't stop the task, and stopping twice is safe")
+    {
+        auto moved = std::move(token);
+        token.stop(); // NOLINT(bugprone-use-after-move)
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return count > 0;
+                        }));
+
+        moved.stop();
+        moved.stop();
+
+        const auto countAtStop = count;
+        pumpFor(scheduler, 10ms);
+        CHECK(count == countAtStop);
+    }
+
+    SECTION("self move-assignment keeps the task")
+    {
+        auto& alias = token;
+        token       = std::move(alias);
+
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return count > 1;
+                        }));
+    }
+}
+
+TEST_CASE("Scheduler::intervalOnMainThread edge cases", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    SECTION("the callback can stop its own token")
+    {
+        auto count = 0;
+        auto token = Maybe<Scheduler::Token>();
+        token      = scheduler.intervalOnMainThread(
+            1ms,
+            [&]
+            {
+                ++count;
+                token.reset();
+            });
+        REQUIRE(pumpUntil(scheduler, [&]
+                          {
+                              return count > 0;
+                          }));
+        pumpFor(scheduler, 50ms);
+
+        CHECK(count == 1);
+    }
+
+    SECTION("the callback can replace its own token")
+    {
+        auto first  = 0;
+        auto second = 0;
+        auto token  = Maybe<Scheduler::Token>();
+        token       = scheduler.intervalOnMainThread(
+            1ms,
+            [&]
+            {
+                ++first;
+                token = scheduler.intervalOnMainThread(
+                    1ms,
+                    [&]
+                    {
+                        ++second;
+                    });
+            });
+
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return second > 1;
+                        }));
+        CHECK(first == 1);
+    }
+
+    SECTION("a zero interval still lets other work run")
+    {
+        auto count = 0;
+        auto token = scheduler.intervalOnMainThread(
+            0ms,
+            [&]
+            {
+                ++count;
+            });
+
+        auto ran = false;
+        scheduler.postToMainThread(
+            [&]
+            {
+                ran = true;
+            });
+
+        CHECK(pumpUntil(scheduler, [&]
+                        {
+                            return count > 0 && ran;
+                        }));
+    }
+}
+
+TEST_CASE("Scheduler cross-thread work", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    SECTION("a worker can post back to the main thread")
+    {
+        const auto mainThread = std::this_thread::get_id();
+
+        auto ranOn = std::thread::id();
+        scheduler.postToWorkerThread(
+            [&]
+            {
+                scheduler.postToMainThread(
+                    [&]
+                    {
+                        ranOn = std::this_thread::get_id();
+                    });
+            });
+
+        for (auto i = 0; i < 100 && ranOn == std::thread::id(); ++i)
+        {
+            pumpFor(scheduler, 1ms);
+        }
+
+        CHECK(ranOn == mainThread);
+    }
+
+    SECTION("spawnOnWorkerThread passes an exception to its awaiter")
+    {
+        CHECK_THROWS_AS(scheduler.blockOnMainThread(scheduler.spawnOnWorkerThread(
+                            []
+                            {
+                                throw std::logic_error("worker failed");
+                            })),
+                        std::logic_error);
+    }
+}
+
+TEST_CASE("Scheduler::stop can be called twice", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    scheduler.stop();
+    scheduler.stop();
+
+    CHECK(scheduler.closeRequested());
 }
