@@ -268,7 +268,7 @@ auto IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget) -> bool;
 void AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
 void SetPoints(CCharEntity* PChar, const char* type, int32 amount);
 auto GetPoints(CCharEntity* PChar, const char* type) -> int32;
-void LoadCharPointsQueries();
+void CheckCharPointsQueries();
 void SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
 auto GetConquestPointsName(CCharEntity* PChar) -> std::string;
 auto SendToZone(CCharEntity* PChar, xi::ZoneId zoneId) -> bool;

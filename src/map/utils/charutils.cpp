@@ -33,8 +33,8 @@
 #include <fmt/ranges.h>
 
 #include <common/database.h>
-#include <common/types/hash_map.h>
 
+#include <algorithm>
 #include <array>
 #include <bit>
 #include <chrono>
@@ -109,6 +109,7 @@
 
 #include "battleutils.h"
 #include "blueutils.h"
+#include "char_points_queries.h"
 #include "charutils.h"
 #include "enums/item_lockflg.h"
 #include "items/transactions/player_trade.h"
@@ -197,14 +198,6 @@ const std::set traverserStoneReductionKeyItems = {
     xi::KeyItem::CrimsonAbyssiteOfCelerity,
     xi::KeyItem::IvoryAbyssiteOfCelerity
 };
-
-struct CharPointsQueries
-{
-    std::string select;
-    std::string update;
-};
-
-HashMap<std::string, CharPointsQueries> charPointsQueries;
 
 auto experience() -> const xi::data::Experience&
 {
@@ -6777,14 +6770,14 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
 {
     TracyZoneScoped;
 
-    const auto it = charPointsQueries.find(type);
+    const auto it = std::ranges::find(charPointsQueries, std::string_view(type), &CharPointsQueries::column);
     if (it == charPointsQueries.end())
     {
         ShowErrorFmt("charutils::SetPoints: Invalid type {} for {}", type, PChar->getName());
         return;
     }
 
-    db::preparedStmt(it->second.update, amount, PChar->id);
+    db::preparedStmt(it->update, amount, PChar->id);
 
     if (strcmp(type, "spark_of_eminence") == 0)
     {
@@ -6802,14 +6795,14 @@ auto GetPoints(CCharEntity* PChar, const char* type) -> int32
 {
     TracyZoneScoped;
 
-    const auto it = charPointsQueries.find(type);
+    const auto it = std::ranges::find(charPointsQueries, std::string_view(type), &CharPointsQueries::column);
     if (it == charPointsQueries.end())
     {
         ShowErrorFmt("charutils::GetPoints: Invalid type {} for {}", type, PChar->getName());
         return 0;
     }
 
-    const auto rset = db::preparedStmt(it->second.select, PChar->id);
+    const auto rset = db::preparedStmt(it->select, PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         return rset->get<int32>(0);
@@ -6818,18 +6811,13 @@ auto GetPoints(CCharEntity* PChar, const char* type) -> int32
     return 0;
 }
 
-void LoadCharPointsQueries()
+void CheckCharPointsQueries()
 {
-    charPointsQueries.clear();
     for (const auto& name : db::getTableColumnNames("char_points"))
     {
-        if (name != "charid")
+        if (name != "charid" && std::ranges::find(charPointsQueries, name, &CharPointsQueries::column) == charPointsQueries.end())
         {
-            charPointsQueries.emplace(name,
-                                      CharPointsQueries{
-                                          .select = fmt::format("SELECT {} FROM char_points WHERE charid = ? LIMIT 1", name),
-                                          .update = fmt::format("UPDATE char_points SET {} = ? WHERE charid = ?", name),
-                                      });
+            ShowWarningFmt("char_points column {} has no query in char_points_queries.h and can't be read or written", name);
         }
     }
 }
