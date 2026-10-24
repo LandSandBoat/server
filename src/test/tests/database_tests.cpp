@@ -24,6 +24,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <algorithm>
 #include <cstddef>
 #include <limits>
 #include <stdexcept>
@@ -223,4 +224,158 @@ TEST_CASE("db::preparedStmt rejects a held query given the wrong number of argum
     CHECK_FALSE(db::preparedStmt(query, 1));
     CHECK_FALSE(db::preparedStmt(query, 1, 2, 3));
     CHECK(db::preparedStmt(query, 1, 2));
+}
+
+TEST_CASE("db::preparedStmt round-trips edge values", "[database]")
+{
+    SECTION("integer limits")
+    {
+        CHECK(roundTrip(std::numeric_limits<int8>::min()) == std::numeric_limits<int8>::min());
+        CHECK(roundTrip(std::numeric_limits<uint8>::max()) == std::numeric_limits<uint8>::max());
+        CHECK(roundTrip(std::numeric_limits<int16>::min()) == std::numeric_limits<int16>::min());
+        CHECK(roundTrip(std::numeric_limits<uint16>::max()) == std::numeric_limits<uint16>::max());
+        CHECK(roundTrip(std::numeric_limits<int32>::min()) == std::numeric_limits<int32>::min());
+        CHECK(roundTrip(std::numeric_limits<uint32>::max()) == std::numeric_limits<uint32>::max());
+    }
+
+    SECTION("bool, float and double")
+    {
+        CHECK(roundTrip(true));
+        CHECK_FALSE(roundTrip(false));
+        CHECK(roundTrip(1.5f) == 1.5f);
+        CHECK(roundTrip(-2.25) == -2.25);
+    }
+
+    SECTION("strings")
+    {
+        CHECK(roundTrip(std::string()).empty());
+        CHECK(roundTrip(std::string(10'000, 'x')) == std::string(10'000, 'x'));
+        CHECK(roundTrip(std::string("Windurst \xE2\x98\x86")) == "Windurst \xE2\x98\x86");
+        CHECK(roundTrip(std::string("a\0b", 3)) == std::string("a\0b", 3));
+    }
+
+    SECTION("a char buffer binds up to its first NUL")
+    {
+        char name[21] = "Linkshell";
+
+        const auto rset = db::preparedStmt("SELECT ?", name);
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<std::string>(0) == "Linkshell");
+    }
+
+    SECTION("enums bind as their underlying type")
+    {
+        enum class Colour : uint16
+        {
+            Red = 513,
+        };
+
+        CHECK(roundTrip(Colour::Red) == Colour::Red);
+    }
+}
+
+TEST_CASE("db::ResultSet reads", "[database]")
+{
+    SECTION("NULL reads as the default value")
+    {
+        const auto rset = db::preparedStmt("SELECT NULL AS value");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->isNull("value"));
+        CHECK(rset->get<uint32>("value") == 0);
+        CHECK(rset->get<std::string>("value").empty());
+        CHECK(rset->getOrDefault<uint32>("value", 7) == 7);
+    }
+
+    SECTION("an unknown column reads as the default value")
+    {
+        const auto rset = db::preparedStmt("SELECT 1 AS value");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<uint32>("missing") == 0);
+    }
+
+    SECTION("reading before next() gives the default value")
+    {
+        const auto rset = db::preparedStmt("SELECT 5 AS value");
+        REQUIRE(rset);
+
+        CHECK(rset->get<uint32>("value") == 0);
+    }
+
+    SECTION("an empty result has no rows")
+    {
+        const auto rset = db::preparedStmt("SELECT 1 FROM DUAL WHERE 1 = 0");
+        REQUIRE(rset);
+
+        CHECK(rset->rowsCount() == 0);
+        CHECK_FALSE(rset->next());
+    }
+}
+
+TEST_CASE("db::preparedStmt rejects bad statements", "[database]")
+{
+    CHECK_FALSE(db::preparedStmt("EXPLAIN SELECT 1"));
+    CHECK_FALSE(db::preparedStmt("SELECT 1; SELECT 2"));
+    CHECK_FALSE(db::preparedStmt("SELECT '{}'"));
+    CHECK_FALSE(db::preparedStmt("SELECT * FROM catch2_table_that_does_not_exist"));
+
+    // '%' is the LIKE wildcard, so it must survive validation.
+    CHECK(db::preparedStmt("SELECT 'abc' LIKE ?", "a%"));
+}
+
+TEST_CASE("db::executeBulk", "[database]")
+{
+    REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_bulk (id INT, amount BIGINT UNSIGNED) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("DELETE FROM catch2_bulk"));
+
+    const auto rowCount = []
+    {
+        const auto rset = db::preparedStmt("SELECT COUNT(*) FROM catch2_bulk");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset->get<uint64>(0);
+    };
+
+    SECTION("does nothing for no rows")
+    {
+        db::executeBulk("INSERT INTO catch2_bulk VALUES (?, ?)", std::vector<int32>{}, [](const int32 id)
+                        {
+                            return std::tuple{ id, uint64{ 0 } };
+                        });
+
+        CHECK(rowCount() == 0);
+    }
+
+    SECTION("inserts every row")
+    {
+        db::executeBulk("INSERT INTO catch2_bulk VALUES (?, ?)", std::vector<int32>{ 1, 2, 3 }, [](const int32 id)
+                        {
+                            return std::tuple{ id, uint64{ 5'000'000'000 } };
+                        });
+
+        CHECK(rowCount() == 3);
+    }
+
+    SECTION("throws for string columns")
+    {
+        CHECK_THROWS(db::executeBulk("INSERT INTO catch2_bulk VALUES (?, ?)", std::vector<int32>{ 1 }, [](const int32 id)
+                                     {
+                                         return std::tuple{ id, std::string("x") };
+                                     }));
+    }
+
+    REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_bulk"));
+}
+
+TEST_CASE("db::getTableColumnNames", "[database]")
+{
+    CHECK(db::getTableColumnNames("catch2_table_that_does_not_exist").empty());
+
+    const auto columns = db::getTableColumnNames("char_points");
+    CHECK(std::ranges::find(columns, "charid") != columns.end());
 }
