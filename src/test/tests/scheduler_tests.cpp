@@ -409,3 +409,20 @@ TEST_CASE("Scheduler::TaskGroup rethrows a task's exception", "[scheduler]")
                         })),
                     std::logic_error);
 }
+
+TEST_CASE("Scheduler::intervalOnMainThread jitters the first run", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    auto count = 0;
+    auto token = scheduler.intervalOnMainThread(
+        1h,
+        [&]
+        {
+            ++count;
+        });
+    pumpFor(scheduler, 20ms);
+
+    // With a one hour period, a first run inside 20ms means it wasn't offset.
+    CHECK(count == 0);
+}
