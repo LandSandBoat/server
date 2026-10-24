@@ -168,7 +168,7 @@ auto db::checkTriggers() -> void
 {
     const auto triggerQuery = "SHOW TRIGGERS WHERE `Trigger` LIKE ?";
 
-    const auto triggers = {
+    constexpr auto triggers = std::array{
         "account_delete",
         "session_delete",
         "auction_house_list",
