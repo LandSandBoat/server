@@ -21,6 +21,8 @@
 
 #include "profile/profile_session.h"
 
+#include "common/scheduler/task_utils.h"
+
 #include "data/files.h"
 #include "data/friends.h"
 #include "enums/prof_error.h"
@@ -224,7 +226,7 @@ auto ProfileSession::read(const std::size_t size) -> Task<Maybe<std::vector<uint
 {
     auto buffer = std::vector<uint8>(size);
 
-    const auto result = co_await Scheduler::withTimeout(asio::async_read(stream_, asio::buffer(buffer), asio::as_tuple(asio::use_awaitable)), kRequestDeadline);
+    const auto result = co_await withTimeout(asio::async_read(stream_, asio::buffer(buffer), asio::as_tuple(asio::use_awaitable)), kRequestDeadline);
     if (!result || std::get<0>(*result))
     {
         co_return std::nullopt;
@@ -235,7 +237,7 @@ auto ProfileSession::read(const std::size_t size) -> Task<Maybe<std::vector<uint
 
 auto ProfileSession::write(const auto& buffers) -> Task<bool>
 {
-    const auto result = co_await Scheduler::withTimeout(asio::async_write(stream_, buffers, asio::as_tuple(asio::use_awaitable)), kRequestDeadline);
+    const auto result = co_await withTimeout(asio::async_write(stream_, buffers, asio::as_tuple(asio::use_awaitable)), kRequestDeadline);
     co_return result && !std::get<0>(*result);
 }
 
