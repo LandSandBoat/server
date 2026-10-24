@@ -864,6 +864,17 @@ xi.expeditionaryForce.onBannerTrigger = function(player, banner)
                         flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
                     })
 
+                    -- Gate pet
+                    local pet = member:getPet()
+                    if pet then
+                        pet:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+                            power    = cap,
+                            duration = 900,
+                            origin   = pet,
+                            flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
+                        })
+                    end
+
                     -- Display banner message to all members who have been level restricted
                     member:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
                 end
@@ -892,6 +903,17 @@ xi.expeditionaryForce.onBannerTrigger = function(player, banner)
                 flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
             })
 
+            -- Gate pet
+            local pet = player:getPet()
+            if pet then
+                pet:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+                    power    = cap,
+                    duration = 900,
+                    origin   = pet,
+                    flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
+                })
+            end
+
             -- Display banner message
             player:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
         end,
@@ -901,6 +923,12 @@ xi.expeditionaryForce.onBannerTrigger = function(player, banner)
             -- Remove clicker's level cap
             if player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                 player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+            end
+
+            -- Remove from pet
+            local pet = player:getPet()
+            if pet then
+                pet:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
             end
 
             player:messageSpecial(ID.text.BEASTMEN_BANNER_LIFTED) -- The curse of the beastmen's banner has been lifted!
