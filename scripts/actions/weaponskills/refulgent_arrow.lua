@@ -2,7 +2,7 @@
 -- Refulgent Arrow
 -- Archery weapon skill
 -- Skill level: 290
--- Delivers a twofold attack. Damage varies with TP.
+-- Delivers a 2x attack. Damage varies with TP. Skillchain attributes: Reverberation, Transfixion
 -- Aligned with the Aqua Gorget & Light Gorget.
 -- Aligned with the Aqua Belt & Light Belt.
 -- Element: None
@@ -15,9 +15,9 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 2
+    params.numHits = 1 -- FFO, but BG says twofold
     params.ftpMod = { 3.0, 4.25, 5.0 }
-    params.str_wsc = 0.16
+    params.str_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftpMod = { 3.0, 4.25, 7.0 }
