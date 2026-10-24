@@ -102,10 +102,13 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     {
         params.emplace_back(std::in_place_type<std::string>, value);
     }
-    else if constexpr (std::is_same_v<U, size_t>)
+    else if constexpr (std::is_same_v<U, int64>)
     {
-        // NOTE: Preserves legacy behaviour of binding size_t via a 32-bit unsigned. TODO: widen.
-        params.emplace_back(std::in_place_type<uint32>, static_cast<uint32>(value));
+        params.emplace_back(std::in_place_type<int64>, static_cast<int64>(value));
+    }
+    else if constexpr (std::is_same_v<U, uint64> || std::is_same_v<U, size_t>)
+    {
+        params.emplace_back(std::in_place_type<uint64>, static_cast<uint64>(value));
     }
     else if constexpr (is_blob_v<U>)
     {

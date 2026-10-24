@@ -40,6 +40,8 @@ using BoundValue = std::variant<
     uint16,
     int32,
     uint32,
+    int64,
+    uint64,
     bool,
     float,
     double,
