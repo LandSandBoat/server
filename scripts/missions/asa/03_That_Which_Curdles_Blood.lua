@@ -86,7 +86,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     local asaKit = mission:getVar(player, 'Option')
-                    if npcUtil.tradeMatches(trade, { asaKit, 1 }) then
+                    if npcUtil.tradeMatches(trade, { { asaKit, 1 } }) then
                         return mission:progressEvent(44)
                     end
                 end,
