@@ -1,4 +1,9 @@
 -----------------------------------
+-- Rhapsodies of Vana'diel helpers
+--
+-- Lockout table:
+-- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
+-----------------------------------
 require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
@@ -28,7 +33,7 @@ xi.rhapsodies.unavailability =
 {
     [xi.rhapsodies.character.PRISHE] = set{
         xi.mission.id.cop.DARKNESS_NAMED,
-        xi.mission.id.cop.SLANDEROUS_UTTERINGS,
+        -- Slanderous Utterings is left out: Prishe leaves by ship in the cutscene that completes it.
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
         xi.mission.id.cop.THREE_PATHS,
         xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG,
@@ -375,26 +380,93 @@ xi.rhapsodies.requiredCharacters =
     },
 }
 
+-- Footnotes of the lockout table: when a listed mission still leaves the character available.
+xi.rhapsodies.lockoutExceptions =
+{
+    [xi.rhapsodies.character.PRISHE] =
+    {
+        -- Available until Monberaux takes her in, and again after Diabolos is defeated.
+        [xi.mission.id.cop.DARKNESS_NAMED] = function(player)
+            local status = xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED, 'Status')
+
+            return status == 0 or status >= 5
+        end,
+
+        -- Available only while Ulmia's path (Where Messengers Gather) is on Head Wind.
+        [xi.mission.id.cop.THREE_PATHS] = function(player)
+            return player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
+        end,
+
+        -- Available after the reunion in Pherimociel's cutscene.
+        [xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS, 'Status') >= 1
+        end,
+
+        -- Available after The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 8
+        end,
+    },
+
+    [xi.rhapsodies.character.TENZEN] =
+    {
+        -- Available after The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 8
+        end,
+    },
+
+    [xi.rhapsodies.character.APHMAU] = {},
+
+    [xi.rhapsodies.character.LILLISETTE] =
+    {
+        -- Available after accepting A Forbidden Reunion and reuniting with her.
+        -- TODO: The quest is not implemented, so completion stands in for the reunion.
+        [xi.mission.id.wotg.LEST_WE_FORGET] = function(player)
+            return player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_FORBIDDEN_REUNION) == xi.questStatus.QUEST_COMPLETED
+        end,
+    },
+
+    [xi.rhapsodies.character.CAIT_SITH] =
+    {
+        -- Available after Champion of the Dawn. SE says accepting it is enough, the JP wiki says it must be completed.
+        -- TODO: The quest is not implemented, so only a GM can complete it.
+        [xi.mission.id.wotg.LEST_WE_FORGET] = function(player)
+            return player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN) == xi.questStatus.QUEST_COMPLETED
+        end,
+    },
+
+    [xi.rhapsodies.character.ARCIELA] =
+    {
+        -- Unavailable from the Ceizak Battlegrounds epilogue until speaking with Ploh Trishbahk.
+        [xi.mission.id.soa.THE_LIGHT_WITHIN] = function(player)
+            local status = xi.mission.getVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status')
+
+            return status ~= 2 and status ~= 3
+        end,
+    },
+}
+
 -----------------------------------
 -- PUBLIC FUNCTIONS
 -----------------------------------
--- Lockout Table:
--- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
 xi.rhapsodies.charactersAvailable = function(player)
-    local rovMission = player:getCurrentMission(xi.mission.log_id.ROV)
-    for _, char in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
-        local expansionLog     = xi.rhapsodies.expansion[char]
-        local expansionMission = player:getCurrentMission(expansionLog)
+    local rovMission         = player:getCurrentMission(xi.mission.log_id.ROV)
+    local requiredCharacters = xi.rhapsodies.requiredCharacters[rovMission]
 
-        if xi.rhapsodies.unavailability[char][expansionMission] then
-            -- CoP "Dawn" exception. TODO: Maybe add support for mission status checks in the future.
-            if
-                expansionLog ~= xi.mission.log_id.COP or       -- Mission log isn't CoP -> false
-                expansionMission ~= xi.mission.id.cop.DAWN or  -- Mission log is CoP, but mission isn't "Dawn" -> false
-                xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') < 8 -- Mission is "Dawn", but The Chains Fall Free has not been seen -> false
-            then
-                return false -- Character is unavailable.
+    if not requiredCharacters then
+        return true
+    end
+
+    for _, character in ipairs(requiredCharacters) do
+        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[character])
+
+        if xi.rhapsodies.unavailability[character][expansionMission] then
+            local exception = xi.rhapsodies.lockoutExceptions[character][expansionMission]
+
+            if not exception or not exception(player) then
+                return false
             end
         end
     end

@@ -77,4 +77,40 @@ describe('Rhapsodies of Vana\'diel', function()
             player.assert:hasMission(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
         end)
     end)
+
+    describe('Character availability', function()
+        it('makes Cait Sith available on Lest We Forget once Champion of the Dawn is completed', function()
+            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.UNCERTAIN_DESTINATIONS)
+            player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)
+            player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN)
+
+            assert(not xi.rhapsodies.charactersAvailable(player), 'Expected Cait Sith to be unavailable')
+
+            player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN)
+
+            assert(xi.rhapsodies.charactersAvailable(player), 'Expected Cait Sith to be available')
+        end)
+
+        it('makes Prishe available in Three Paths only while Ulmia\'s path is on Head Wind', function()
+            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.NUMBERING_DAYS)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
+            player:setMissionStatus(xi.mission.log_id.COP, 6, xi.mission.status.COP.ULMIA)
+
+            assert(not xi.rhapsodies.charactersAvailable(player), 'Expected Prishe to be unavailable')
+
+            player:setMissionStatus(xi.mission.log_id.COP, 7, xi.mission.status.COP.ULMIA)
+
+            assert(xi.rhapsodies.charactersAvailable(player), 'Expected Prishe to be available')
+
+            player:setMissionStatus(xi.mission.log_id.COP, 8, xi.mission.status.COP.ULMIA)
+
+            assert(not xi.rhapsodies.charactersAvailable(player), 'Expected Prishe to be unavailable after Head Wind')
+        end)
+
+        it('is true for a mission with no required characters', function()
+            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.A_RHAPSODY_FOR_THE_AGES)
+
+            assert(xi.rhapsodies.charactersAvailable(player), 'Expected no lockout')
+        end)
+    end)
 end)
