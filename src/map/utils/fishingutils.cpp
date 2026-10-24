@@ -1629,7 +1629,7 @@ auto CatchMonster(CCharEntity* PChar, uint32 MobID) -> int32
         return 0;
     }
 
-    if (PMob->isAlive() || (mob->questOnly && PMob->GetLocalVar("catchable") == 0))
+    if (PMob->isAlive())
     {
         PChar->animation = xi::Animation::NewFishingStop;
         PChar->updatemask |= UPDATE_HP;
@@ -2238,32 +2238,6 @@ auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* ba
         }
     }
 
-    for (const auto itemId : luautils::OnFishingCheck(PChar, area->areaId))
-    {
-        auto* item = GetFish(itemId);
-        if (item == nullptr)
-        {
-            ShowWarningFmt("fishingutils: onFishingCheck returned item {} which is not in fishing_fish", itemId);
-            continue;
-        }
-
-        if (item->quest_only)
-        {
-            if (ItemHookPool.insert(std::make_pair(item, 100)).second)
-            {
-                ItemPoolWeight += 1000;
-            }
-        }
-        else
-        {
-            const auto hookChance = static_cast<uint16>(std::floor(100.0f * item->rarity / 1000.0f));
-            if (ItemHookPool.insert(std::make_pair(item, hookChance)).second)
-            {
-                ItemHookChanceTotal += hookChance;
-            }
-        }
-    }
-
     // Build Hookable Mob Pool
     if (!MobPool.empty())
     {
@@ -2313,6 +2287,48 @@ auto FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod, bait_t* ba
                 {
                     MobHookPool.insert(std::make_pair(mob, 100));
                 }
+            }
+        }
+    }
+
+    // Catches offered by interaction framework quests, as fishing_fish item ids or fishing_mob mob ids
+    for (const auto catchId : luautils::OnFishingCheck(PChar, area->areaId))
+    {
+        if (auto* mob = findFishMob(PChar->getZone(), catchId))
+        {
+            // The quest decides when it bites, the fishing_mob row still decides the area and bait
+            auto*      PMob   = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mob->mobId, TYPE_MOB));
+            const bool inArea = mob->areaId == 0 || mob->areaId == area->areaId;
+            const bool onBait = mob->reqBaitId == 0 || mob->reqBaitId == bait->baitID || (mob->altBaitId > 0 && mob->altBaitId == bait->baitID);
+
+            if (PMob != nullptr && PMob->GetLocalVar("hooked") == 0 && !PMob->isAlive() && inArea && onBait && MobHookPool.insert(std::make_pair(mob, 100)).second)
+            {
+                MobPoolWeight += 1000;
+            }
+
+            continue;
+        }
+
+        auto* item = GetFish(catchId);
+        if (item == nullptr)
+        {
+            ShowWarningFmt("fishingutils: onFishingCheck returned {} which is neither a fishing_fish catch nor a fishing_mob in this zone", catchId);
+            continue;
+        }
+
+        if (item->quest_only)
+        {
+            if (ItemHookPool.insert(std::make_pair(item, 100)).second)
+            {
+                ItemPoolWeight += 1000;
+            }
+        }
+        else
+        {
+            const auto hookChance = static_cast<uint16>(std::floor(100.0f * item->rarity / 1000.0f));
+            if (ItemHookPool.insert(std::make_pair(item, hookChance)).second)
+            {
+                ItemHookChanceTotal += hookChance;
             }
         }
     }

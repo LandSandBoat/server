@@ -43,4 +43,26 @@ describe('Quest fishing catches', function()
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
         assert(not offeredCatches(player, pond)[xi.item.DAMP_SCROLL], 'Damp Scroll was offered after the quest')
     end)
+
+    it('offers both fished Krakens only while Hook, Line, and Sinker is accepted', function()
+        local qufimID = zones[xi.zone.QUFIM_ISLAND]
+        local player  = xi.test.world:spawnPlayer({ zone = xi.zone.QUFIM_ISLAND })
+        local krakens = qufimID.mob.KRAKEN_FISHED_NM
+
+        assert(#krakens == 2, 'expected two fished Krakens in Qufim Island')
+        for _, krakenId in ipairs(krakens) do
+            assert(krakenId ~= qufimID.mob.KRAKEN_NM, 'the roaming Kraken was listed as a fished one')
+            assert(not offeredCatches(player, anyArea)[krakenId], 'a Kraken was offered before the quest')
+        end
+
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
+        for _, krakenId in ipairs(krakens) do
+            assert(offeredCatches(player, anyArea)[krakenId], 'a Kraken was not offered during the quest')
+        end
+
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
+        for _, krakenId in ipairs(krakens) do
+            assert(not offeredCatches(player, anyArea)[krakenId], 'a Kraken was offered after the quest')
+        end
+    end)
 end)
