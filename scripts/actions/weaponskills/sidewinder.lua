@@ -18,7 +18,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 5.0, 5.0, 5.0 }
     params.str_wsc = 0.16 params.agi_wsc = 0.25
-    params.accVaries = { -50, 0, 0 } -- TODO: verify 3k
+    params.accVaries = { -50, -10, 30 } -- -50 penalty plus DAT 0, 40, 80, but BG says -50, 0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.2 params.agi_wsc = 0.5

@@ -9,7 +9,7 @@
 -- Element: None
 -- Modifiers: STR:16%  AGI:25%
 -- 100%TP    200%TP    300%TP
--- 2.00      2.75      3.00
+-- 1.50      2.00      2.50
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -17,7 +17,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params               = {}
     params.numHits             = 1
-    params.ftpMod              = { 2.0, 2.75, 3.0 }
+    params.ftpMod              = { 1.5, 2.0, 2.5 } -- FFO
     params.atkVaries           = { 2.0, 2.0, 2.0 } -- https://w.atwiki.jp/studiogobli/pages/93.html
     params.str_wsc             = 0.16
     params.agi_wsc             = 0.25

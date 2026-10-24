@@ -6,9 +6,9 @@
 -- Aligned with the Flame Gorget & Light Gorget.
 -- Aligned with the Flame Belt & Light Belt.
 -- Element: Fire
--- Modifiers: STR:16%  AGI:25%
+-- Modifiers: STR:20%  AGI:50%
 -- 100%TP    200%TP    300%TP
--- 1.00      1.00      1.00
+-- 0.50      1.55      2.10
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -16,7 +16,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.ftpMod = { 0.5, 0.75, 1.0 }
     params.str_wsc = 0.16 params.agi_wsc = 0.25
     params.hybridWS = true
     params.ele = xi.element.FIRE
@@ -24,7 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 0.5, 0.75, 1.0 }
+        params.ftpMod = { 0.5, 1.55, 2.1 }
         params.str_wsc = 0.2 params.agi_wsc = 0.5
     end
 

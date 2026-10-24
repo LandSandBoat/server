@@ -19,7 +19,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 3, 3, 3 }
     params.agi_wsc = player:getMerit(xi.merit.APEX_ARROW) * 0.17
-    params.ignoredDefense = { 0.15, 0.35, 0.5 }
+    params.ignoredDefense = { 0.125, 0.1875, 0.25 } -- DAT, but BG says 15 at 1000 TP and FFO says about 20 at 3000 TP
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.APEX_ARROW) * 0.03)
