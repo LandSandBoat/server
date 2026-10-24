@@ -1,7 +1,7 @@
 -----------------------------------
 -- Shattersoul
 -- Skill Level: 357
--- Description: Delivers a threefold attack. Decreases target's magic defense. Duration of effect varies with TP.
+-- Description: Delivers a fourfold attack. Decreases target's magic defense. Duration of effect varies with TP.
 -- To obtain Shattersoul, the quest Martial Mastery must be completed and it must be purchased from the Merit Points menu.
 -- Target's magic defense is lowered by 10.
 -- Aligned with the Shadow Gorget, Soil Gorget & Snow Gorget.
@@ -21,7 +21,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params   = {}
-    params.numHits = 3
+    params.numHits = 4 -- client text and FFO, but BG and FFXIclopedia say 3
     params.ftpMod  = { 1.375, 1.375, 1.375 }
     params.int_wsc = player:getMerit(xi.merit.SHATTERSOUL) * 0.17
 

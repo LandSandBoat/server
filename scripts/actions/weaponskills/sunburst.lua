@@ -8,7 +8,7 @@
 -- Element: Light/Dark
 -- Modifiers: :    STR:40% MND:40%
 -- 100%TP    200%TP    300%TP
--- 1.00      2.50      4.00
+-- 1.00      3.58      6.16
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -16,8 +16,6 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftpMod = { 1.0, 2.5, 4.0 }
-    params.str_wsc = 0.4
-    params.mnd_wsc = 0.4
     params.skill = xi.skill.STAFF
     params.includemab = true
     params.dStat = xi.mod.INT
@@ -28,6 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.0, 3.578125, 6.15625 }
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 
