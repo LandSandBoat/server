@@ -59,9 +59,13 @@ constexpr auto fieldTypeFor() -> enum_field_types
     {
         return MYSQL_TYPE_SHORT;
     }
-    else
+    else if constexpr (sizeof(T) == 4)
     {
         return MYSQL_TYPE_LONG;
+    }
+    else
+    {
+        return MYSQL_TYPE_LONGLONG;
     }
 }
 
@@ -156,6 +160,10 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                 else if constexpr (std::is_same_v<U, int32> || std::is_same_v<U, uint32>)
                 {
                     b.buffer_type = MYSQL_TYPE_LONG;
+                }
+                else if constexpr (std::is_same_v<U, int64> || std::is_same_v<U, uint64>)
+                {
+                    b.buffer_type = MYSQL_TYPE_LONGLONG;
                 }
                 else if constexpr (std::is_same_v<U, float>)
                 {

@@ -24,6 +24,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <cstddef>
+#include <limits>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -50,6 +52,20 @@ using ScalarProjection = decltype([](const int value)
 
 static_assert(BulkAcceptsProjection<TupleProjection>);
 static_assert(!BulkAcceptsProjection<ScalarProjection>);
+
+} // namespace
+
+namespace
+{
+
+template <typename T>
+auto roundTrip(const T& value) -> T
+{
+    const auto rset = db::preparedStmt("SELECT ?", value);
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+    return rset->template get<T>(0);
+}
 
 } // namespace
 
@@ -145,4 +161,12 @@ TEST_CASE("db::transaction", "[database]")
     }
 
     REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_transaction"));
+}
+
+TEST_CASE("db::preparedStmt binds 64-bit integers without truncating", "[database]")
+{
+    CHECK(roundTrip(std::numeric_limits<uint64>::max()) == std::numeric_limits<uint64>::max());
+    CHECK(roundTrip(std::numeric_limits<int64>::min()) == std::numeric_limits<int64>::min());
+    CHECK(roundTrip(std::numeric_limits<int64>::max()) == std::numeric_limits<int64>::max());
+    CHECK(roundTrip(std::size_t{ 5'000'000'000 }) == std::size_t{ 5'000'000'000 });
 }
