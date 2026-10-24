@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 1.0, 3.0, 5.5 }
+        params.ftpMod = { 1.0, 3.09765625, 5.5 } -- DAT, but BG and FFO say 3 at 2000 TP
         params.str_wsc = 1.0
     end
 
