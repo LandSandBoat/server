@@ -26,7 +26,7 @@
 #include "stream.h"
 
 #include "common/engine.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 
 #include <asio/ssl/context.hpp>
 

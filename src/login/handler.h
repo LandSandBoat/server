@@ -29,7 +29,7 @@
 #include "data_session.h"
 #include "view_session.h"
 
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "common/zmq/channel.h"
 
 #include <zmq.hpp>

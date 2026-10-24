@@ -22,7 +22,7 @@
 #pragma once
 
 #include <common/application.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 #include <common/utils.h>
 
 #include <unordered_set>

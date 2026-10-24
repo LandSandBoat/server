@@ -23,7 +23,7 @@
 
 #include "arguments.h"
 #include "common/engine.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "common/types/maybe.h"
 #include "common/zmq/zmq_service.h"
 

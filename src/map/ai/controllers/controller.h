@@ -23,7 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "common/timer.h"
 #include "spell.h"
 

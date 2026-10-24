@@ -24,7 +24,7 @@
 #include <common/cbasetypes.h>
 #include <common/logging.h>
 #include <common/mmo.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 #include <common/timer.h>
 #include <common/types/maybe.h>
 #include <common/vana_time.h>

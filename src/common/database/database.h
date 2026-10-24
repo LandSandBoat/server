@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 #include <common/tracy.h>
 
 #include <common/types/fn.h>
