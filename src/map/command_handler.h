@@ -22,7 +22,7 @@
 #pragma once
 
 #include <common/cbasetypes.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 
 #include <string>
 

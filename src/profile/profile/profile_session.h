@@ -29,7 +29,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/macros.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "common/types/maybe.h"
 
 #include <span>

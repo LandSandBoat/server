@@ -27,7 +27,7 @@
 
 #include <string>
 
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 
 class Application;
 
