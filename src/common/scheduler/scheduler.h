@@ -228,7 +228,15 @@ public:
         }
 
         auto group = asio::experimental::make_parallel_group(std::move(ops));
-        co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
+
+        const auto [completionOrder, exceptions] = co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
+        for (const auto& exception : exceptions)
+        {
+            if (exception)
+            {
+                std::rethrow_exception(exception);
+            }
+        }
     }
 
     explicit Scheduler(const std::size_t numThreads = std::max(2U, std::thread::hardware_concurrency()) - 1U)
