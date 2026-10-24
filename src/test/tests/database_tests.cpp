@@ -61,7 +61,11 @@ TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
     CHECK(validateQueryLeadingKeyword("SHOW TRIGGERS") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("  \n  SELECT 1") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("\tSELECT 1") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT\n1") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT\t*") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("SELECT") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT(1)") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT*FROM t") == ResultSetType::Select);
 
     CHECK(validateQueryLeadingKeyword("INSERT INTO t VALUES (1)") == ResultSetType::Update);
     CHECK(validateQueryLeadingKeyword("Update t SET a = 1") == ResultSetType::Update);
@@ -71,6 +75,9 @@ TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
     CHECK(validateQueryLeadingKeyword("") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword(" \n\t ") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword("SELECTED 1") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("SELECT1") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("INSERT_LOG VALUES (1)") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("(SELECT 1)") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword("EXPLAIN SELECT 1") == ResultSetType::Invalid);
 }
 
