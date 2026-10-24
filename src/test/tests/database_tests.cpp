@@ -182,6 +182,24 @@ TEST_CASE("db::transaction", "[database]")
         CHECK(rowCount() == 0);
     }
 
+    SECTION("a nested transaction joins the outer one")
+    {
+        const auto committed = db::transaction(
+            []
+            {
+                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                db::transaction(
+                    []
+                    {
+                        db::preparedStmt("INSERT INTO catch2_transaction VALUES (2)");
+                    });
+                throw std::runtime_error("abort after the nested transaction");
+            });
+
+        CHECK_FALSE(committed);
+        CHECK(rowCount() == 0);
+    }
+
     REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_transaction"));
 }
 

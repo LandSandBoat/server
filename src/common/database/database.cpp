@@ -248,6 +248,13 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 
+    // A nested START TRANSACTION would commit the outer transaction.
+    if (getDatabase().isInTransaction())
+    {
+        transactionFn();
+        return true;
+    }
+
     if (!transactionStart())
     {
         return false;

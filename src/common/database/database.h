@@ -75,6 +75,11 @@ public:
     {
     }
 
+    virtual auto isInTransaction() -> bool
+    {
+        return false;
+    }
+
     // Close the calling thread's cached statements, freeing their slots on the server.
     virtual void clearStatementCache()
     {
@@ -144,6 +149,8 @@ auto checkStatementUsage() -> void;
 // Rolls back if the transaction function throws, otherwise commits.
 //
 // Returns true only if the COMMIT itself succeeded.
+//
+// Inside another transaction it joins that one, so a throw rolls back the outer transaction too.
 auto transaction(const Fn<void() const>& transactionFn) -> bool;
 
 auto getTableColumnNames(const std::string& tableName) -> std::vector<std::string>;

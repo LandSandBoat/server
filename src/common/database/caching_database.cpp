@@ -251,6 +251,11 @@ void db::CachingDatabase::setInTransaction(bool value)
     getState().inTransaction = value;
 }
 
+auto db::CachingDatabase::isInTransaction() -> bool
+{
+    return getState().inTransaction;
+}
+
 void db::CachingDatabase::clearStatementCache()
 {
     if (const auto it = tlsStates.find(this); it != tlsStates.end())

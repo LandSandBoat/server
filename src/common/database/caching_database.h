@@ -62,6 +62,7 @@ public:
     auto executeBulk(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
+    auto isInTransaction() -> bool override;
     void clearStatementCache() override;
     void purgeStatementCaches() override;
 
