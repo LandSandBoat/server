@@ -107,6 +107,22 @@ describe('Rhapsodies of Vana\'diel', function()
             assert(not xi.rhapsodies.charactersAvailable(player), 'Expected Prishe to be unavailable after Head Wind')
         end)
 
+        it('makes Arciela unavailable in The Light Within between the Ceizak epilogue and Ploh Trishbahk', function()
+            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.TEARS_OF_THE_GENERALS)
+            player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN)
+            xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status', 1)
+
+            assert(xi.rhapsodies.charactersAvailable(player), 'Expected Arciela to be available before the epilogue')
+
+            xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status', 2)
+
+            assert(not xi.rhapsodies.charactersAvailable(player), 'Expected Arciela to be unavailable after the epilogue')
+
+            xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status', 0)
+
+            assert(xi.rhapsodies.charactersAvailable(player), 'Expected Arciela to be available after Ploh Trishbahk')
+        end)
+
         it('is true for a mission with no required characters', function()
             player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.A_RHAPSODY_FOR_THE_AGES)
 

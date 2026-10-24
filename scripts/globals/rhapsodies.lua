@@ -29,9 +29,17 @@ xi.rhapsodies.expansion =
     [xi.rhapsodies.character.ARCIELA]    = xi.mission.log_id.SOA,
 }
 
+-- The SE table also lists The Rites of Life for Prishe and Tenzen, but retail lets Ring My Bell and Spirits Awoken through during it.
 xi.rhapsodies.unavailability =
 {
     [xi.rhapsodies.character.PRISHE] = set{
+        xi.mission.id.cop.BELOW_THE_ARKS,
+        xi.mission.id.cop.THE_MOTHERCRYSTALS,
+        xi.mission.id.cop.AN_INVITATION_WEST,
+        xi.mission.id.cop.THE_LOST_CITY,
+        xi.mission.id.cop.DISTANT_BELIEFS,
+        xi.mission.id.cop.AN_ETERNAL_MELODY,
+        xi.mission.id.cop.ANCIENT_VOWS,
         xi.mission.id.cop.DARKNESS_NAMED,
         -- Slanderous Utterings is left out: Prishe leaves by ship in the cutscene that completes it.
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
@@ -46,6 +54,13 @@ xi.rhapsodies.unavailability =
         xi.mission.id.cop.DAWN,
     },
     [xi.rhapsodies.character.TENZEN] = set{
+        xi.mission.id.cop.BELOW_THE_ARKS,
+        xi.mission.id.cop.THE_MOTHERCRYSTALS,
+        xi.mission.id.cop.AN_INVITATION_WEST,
+        xi.mission.id.cop.THE_LOST_CITY,
+        xi.mission.id.cop.DISTANT_BELIEFS,
+        xi.mission.id.cop.AN_ETERNAL_MELODY,
+        xi.mission.id.cop.ANCIENT_VOWS,
         xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING,
         xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN,
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
@@ -133,7 +148,7 @@ xi.rhapsodies.unavailability =
         xi.mission.id.soa.LIFE_ON_THE_FRONTIER,
         xi.mission.id.soa.MEETING_OF_THE_MINDS,
         xi.mission.id.soa.ARCIELA_APPEARS_AGAIN,
-        xi.mission.id.soa.BUILDING_PROSPECTS,
+        xi.mission.id.soa.BUDDING_PROSPECTS,
         xi.mission.id.soa.THE_LIGHT_SHINING_IN_YOUR_EYES,
         xi.mission.id.soa.THE_HEIRLOOM,
         xi.mission.id.soa.AN_AIMLESS_JOURNEY,
@@ -176,8 +191,10 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
+    -- Prishe is not on the SE table here, but retail blocks this on her.
     [xi.mission.id.rov.CALL_TO_SERVE] =
     {
+        xi.rhapsodies.character.PRISHE,
         xi.rhapsodies.character.TENZEN,
     },
 
@@ -195,7 +212,7 @@ xi.rhapsodies.requiredCharacters =
 
     [xi.mission.id.rov.EVER_FORWARD] =
     {
-        xi.rhapsodies.character.PRISHE,
+        xi.rhapsodies.character.TENZEN,
     },
 
     [xi.mission.id.rov.REUNITED] =
@@ -221,8 +238,10 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.APHMAU,
     },
 
+    -- Cait Sith is for Uncertain Destinations, whose opening event is checked while on Cauterize.
     [xi.mission.id.rov.CAUTERIZE] =
     {
+        xi.rhapsodies.character.APHMAU,
         xi.rhapsodies.character.CAIT_SITH,
     },
 
@@ -231,9 +250,11 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.CAIT_SITH,
     },
 
+    -- Lilisette is not on the SE table here, but retail blocks this mission's zone-in on her.
     [xi.mission.id.rov.GANGED_UP_ON] =
     {
         xi.rhapsodies.character.LILLISETTE,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.SACRIFICE] =
@@ -299,6 +320,12 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
+    -- Not on the SE table, but retail blocks the Norg door on Prishe.
+    [xi.mission.id.rov.BANISHING_THE_DARKNESS] =
+    {
+        xi.rhapsodies.character.PRISHE,
+    },
+
     [xi.mission.id.rov.OVER_THE_RAINBOW] =
     {
         xi.rhapsodies.character.TENZEN,
@@ -314,24 +341,51 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
-    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] =
+    [xi.mission.id.rov.TEARS_OF_THE_GENERALS] =
     {
         xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.WHAT_HE_LEFT_BEHIND] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    -- TODO: Retail let this through while Arciela was unavailable, against the SE table.
+    [xi.mission.id.rov.GONE_BUT_NOT_FORGOTTEN] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    -- Not on the SE table, but retail blocks the Celennia Memorial Library zone-in on Arciela.
+    [xi.mission.id.rov.SOLEMNITY] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.EYES_ON_YOU] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] =
+    {
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.DEATH_CARES_NOT] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.NO_TIME_LIKE_THE_FUTURE] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.SIN] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.FROM_WEST_TO_EAST] =
