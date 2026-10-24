@@ -1,4 +1,4 @@
-xi_add_library(xi_profile_lib
+xi_add_library(xi_profile_lib OBJECT
     profile_application.h
     profile_application.cpp
     profile_engine.h
