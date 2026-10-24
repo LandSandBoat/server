@@ -10,25 +10,25 @@
 -- Properties
 -- Element: Light
 -- Skillchain Properties: Fragmentation/Scission
--- Modifiers: AGI:30%
+-- Modifiers: AGI:100%
 -- Damage Multipliers by TP:
 --  100%TP    200%TP    300%TP
---   4.0    4.25    4.75
+--   3.89    6.49    9.67
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftpMod = { 4.0, 4.25, 4.75 }
-    params.agi_wsc = 0.3
+    params.ftpMod = { 3.890625, 4.390625, 4.890625 } -- FFO
+    params.agi_wsc = 1.0
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.MARKSMANSHIP
     params.includemab = true
     params.dStat = xi.mod.AGI
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 3.8906, 6.3906, 9.3906 }
+        params.ftpMod = { 3.890625, 6.4921875, 9.671875 }
         params.agi_wsc = 1.0
     end
 
