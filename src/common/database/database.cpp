@@ -255,8 +255,8 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 
     // covers COMMIT/ROLLBACK too
     db::getDatabase().setInTransaction(true);
-    const auto transactionScope = xi::finally<Fn<void()>>(
-        []() -> void
+    const auto transactionScope = xi::finally(
+        []
         {
             db::getDatabase().setInTransaction(false);
         });

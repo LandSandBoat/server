@@ -53,11 +53,11 @@ std::once_flag           statementLimitRead;
 std::atomic<std::size_t> maxCachedStatements{ 2048U };
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
-auto makeQueryTimer(std::string_view query) -> xi::final_action<Fn<void()>>
+auto makeQueryTimer(std::string_view query)
 {
     const auto start = timer::now();
-    return xi::finally<Fn<void()>>(
-        [query, start]() -> void
+    return xi::finally(
+        [query, start]
         {
             if (!timersEnabled || !settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
             {
