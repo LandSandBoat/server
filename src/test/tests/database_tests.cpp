@@ -26,6 +26,32 @@
 
 #include <stdexcept>
 #include <string>
+#include <string_view>
+#include <tuple>
+#include <vector>
+
+namespace
+{
+
+template <typename ProjectFn>
+concept BulkAcceptsProjection = requires(const std::vector<int>& rows, ProjectFn project) {
+    db::executeBulk("", rows, project);
+};
+
+using TupleProjection = decltype([](const int value)
+                                 {
+                                     return std::tuple{ value };
+                                 });
+
+using ScalarProjection = decltype([](const int value)
+                                  {
+                                      return value;
+                                  });
+
+static_assert(BulkAcceptsProjection<TupleProjection>);
+static_assert(!BulkAcceptsProjection<ScalarProjection>);
+
+} // namespace
 
 TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
 {
@@ -39,6 +65,17 @@ TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
     CHECK(rset->get<std::string>(0) == raw);
 }
 
+TEST_CASE("db::preparedStmt takes a string_view query", "[database]")
+{
+    constexpr auto query = std::string_view("SELECT ? + 1");
+
+    const auto rset = db::preparedStmt(query, 1);
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+
+    CHECK(rset->get<int64>(0) == 2);
+}
+
 TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
 {
     using db::ResultSetType;
@@ -49,7 +86,11 @@ TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
     CHECK(validateQueryLeadingKeyword("SHOW TRIGGERS") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("  \n  SELECT 1") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("\tSELECT 1") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT\n1") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT\t*") == ResultSetType::Select);
     CHECK(validateQueryLeadingKeyword("SELECT") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT(1)") == ResultSetType::Select);
+    CHECK(validateQueryLeadingKeyword("SELECT*FROM t") == ResultSetType::Select);
 
     CHECK(validateQueryLeadingKeyword("INSERT INTO t VALUES (1)") == ResultSetType::Update);
     CHECK(validateQueryLeadingKeyword("Update t SET a = 1") == ResultSetType::Update);
@@ -59,6 +100,9 @@ TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")
     CHECK(validateQueryLeadingKeyword("") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword(" \n\t ") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword("SELECTED 1") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("SELECT1") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("INSERT_LOG VALUES (1)") == ResultSetType::Invalid);
+    CHECK(validateQueryLeadingKeyword("(SELECT 1)") == ResultSetType::Invalid);
     CHECK(validateQueryLeadingKeyword("EXPLAIN SELECT 1") == ResultSetType::Invalid);
 }
 

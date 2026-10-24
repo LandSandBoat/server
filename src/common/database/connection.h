@@ -27,6 +27,7 @@
 #include <exception>
 #include <memory>
 #include <string>
+#include <string_view>
 
 namespace db
 {
@@ -40,7 +41,7 @@ public:
     DISALLOW_COPY_AND_MOVE(Connection);
 
     // Prepare (or fail) a statement for this connection.
-    virtual auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> = 0;
+    virtual auto prepare(std::string_view query) -> std::unique_ptr<PreparedStatement> = 0;
 
     // The connected database/schema name, ie. xidb.
     virtual auto schema() -> std::string = 0;

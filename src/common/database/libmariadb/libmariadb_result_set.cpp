@@ -25,15 +25,15 @@
 #include <type_traits>
 #include <utility>
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
-: ResultSet(query, ResultSetType::Select)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
+: ResultSet(std::string(query), ResultSetType::Select)
 , schema_(std::move(schema))
 , rows_(std::move(rows))
 {
 }
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query)
-: ResultSet(query, ResultSetType::Update, rowsAffected)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query)
+: ResultSet(std::string(query), ResultSetType::Update, rowsAffected)
 {
 }
 
