@@ -82,11 +82,12 @@ quest.sections =
 
         [xi.zone.NORTH_GUSTABERG_S] =
         {
-            ['qm1'] =
+            ['qm3'] =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(3)
+                        -- Werner adds lines about the Fighting Fourth for a Bastok soldier.
+                        return quest:progressEvent(3, player:getCampaignAllegiance() == xi.alliedNation.BASTOK and 1 or 0)
                     end
                 end,
             },

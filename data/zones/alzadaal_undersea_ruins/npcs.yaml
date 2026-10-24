@@ -1030,6 +1030,7 @@ npcs:
         type:  standard
         model: 52
       moving: 32769
+    status:          normal
     speed:           40
     animation_speed: 40
 

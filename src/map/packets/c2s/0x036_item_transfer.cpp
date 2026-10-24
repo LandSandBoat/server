@@ -20,6 +20,7 @@
 */
 
 #include "0x036_item_transfer.h"
+#include "ai/ai_container.h"
 
 #include "entities/char_entity.h"
 #include "entities/npc_entity.h"
@@ -81,8 +82,9 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    // Only allow trading with mobs if it's status is an NPC
-    if (PNpc->objtype == TYPE_MOB && PNpc->status != xi::Status::Normal)
+    // A hidden NPC can't be targeted, so only a modified client sends this. Mog House moogles are the exception, as for talking.
+    const auto isShown = PNpc->PAI->IsSpawned() && PNpc->status == xi::Status::Normal;
+    if (!isShown && !PChar->inMogHouse(xi::MogHouse::Own))
     {
         return;
     }
