@@ -51,7 +51,6 @@
 #include <memory>
 #include <stdexcept>
 #include <thread>
-#include <tuple>
 #include <type_traits>
 #include <utility>
 #include <variant>
@@ -482,17 +481,16 @@ public:
 
         auto exceptPtr = std::exception_ptr();
         auto done      = false;
+        auto result    = Maybe<StoredType>();
 
-        std::unique_ptr<StoredType> result;
-
-        auto completion = [&](std::exception_ptr e, auto... res)
+        auto completion = [&](std::exception_ptr e, auto&&... value)
         {
             exceptPtr = e;
             if constexpr (!IsVoid)
             {
-                if (!e && sizeof...(res) > 0)
+                if (!e)
                 {
-                    result = std::make_unique<StoredType>(std::move(std::get<0>(std::forward_as_tuple(res...))));
+                    result.emplace(std::forward<decltype(value)>(value)...);
                 }
             }
             done = true;
@@ -529,10 +527,6 @@ public:
 
         if constexpr (!IsVoid)
         {
-            if (!result)
-            {
-                throw std::runtime_error("Task completed without result or exception");
-            }
             return std::move(*result);
         }
     }
