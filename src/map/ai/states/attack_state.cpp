@@ -23,6 +23,7 @@
 
 #include "action/action.h"
 #include "entities/battle_entity.h"
+#include "status_effect_container.h"
 
 #include "ai/ai_container.h"
 #include "entities/char_entity.h"
@@ -75,6 +76,12 @@ auto CAttackState::Update(timer::time_point tick) -> bool
     if (!PTarget || PTarget->isDead())
     {
         return true;
+    }
+
+    // Don't decrement attack time if we got an update while slept/petrified/etc
+    if (m_PEntity->StatusEffectContainer->HasPreventActionEffect(true))
+    {
+        return false;
     }
 
     // Subtract on every tick, including the one we swing on, or each swing costs an extra tick.
