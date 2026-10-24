@@ -28,10 +28,7 @@
 #include <asio/bind_cancellation_slot.hpp>
 #include <asio/cancellation_signal.hpp>
 #include <asio/co_spawn.hpp>
-#include <asio/detached.hpp>
 #include <asio/executor_work_guard.hpp>
-#include <asio/experimental/awaitable_operators.hpp>
-#include <asio/experimental/parallel_group.hpp>
 #include <asio/io_context.hpp>
 #include <asio/post.hpp>
 #include <asio/recycling_allocator.hpp>
@@ -54,7 +51,6 @@
 #include <type_traits>
 #include <utility>
 #include <variant>
-#include <vector>
 
 #ifdef TRACY_ENABLE
 #include <tracy/Tracy.hpp>
@@ -400,21 +396,6 @@ public:
         co_await timer.async_wait(detail::recycled(asio::use_awaitable));
     }
 
-    // withTimeout
-    //   Executes a task with a given timeout. Returns Maybe<T>, which is empty if the timeout
-    //   was reached before the task completed.
-    template <typename T>
-    [[nodiscard]] static auto withTimeout(Task<T> task, const std::chrono::steady_clock::duration timeout) -> Task<Maybe<T>>
-    {
-        using namespace asio::experimental::awaitable_operators;
-        auto result = co_await (std::move(task) || yieldFor(timeout));
-        if (result.index() == 0)
-        {
-            co_return std::move(std::get<0>(result));
-        }
-        co_return std::nullopt;
-    }
-
     // blockOnMainThread
     //   Puts `task` on the main context wrapped with a gated check, and manually pumps the main
     //   context until that gate is passed - signalling that the task is complete.
@@ -557,47 +538,3 @@ private:
 
     asio::thread_pool workerPool_;
 };
-
-//
-// runOnWorkerThreads
-//   Runs every function `fill` adds on the worker thread pool, and completes once they have all finished.
-//   Rethrows the first exception any of them threw.
-//
-template <typename F>
-[[nodiscard]] auto runOnWorkerThreads(Scheduler& scheduler, const std::size_t reserveSize, F&& fill) -> Task<void>
-{
-    const auto executor = scheduler.workerExecutor();
-
-    using DeferredOp = decltype(asio::co_spawn(executor, std::declval<Task<void>>(), detail::recycled(asio::deferred)));
-    auto ops         = std::vector<DeferredOp>();
-    ops.reserve(reserveSize);
-
-    auto add = [&]<detail::IsInvocableReturnsVoid Job>(Job&& job)
-    {
-        auto task = [](std::remove_cvref_t<Job> work) -> Task<void>
-        {
-            work();
-            co_return;
-        }(std::forward<Job>(job));
-
-        ops.push_back(asio::co_spawn(executor, std::move(task), detail::recycled(asio::deferred)));
-    };
-
-    std::forward<F>(fill)(add);
-
-    if (ops.empty())
-    {
-        co_return;
-    }
-
-    auto group = asio::experimental::make_parallel_group(std::move(ops));
-
-    const auto [completionOrder, exceptions] = co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
-    for (const auto& exception : exceptions)
-    {
-        if (exception)
-        {
-            std::rethrow_exception(exception);
-        }
-    }
-}

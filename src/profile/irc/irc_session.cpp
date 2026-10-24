@@ -21,6 +21,8 @@
 
 #include "irc/irc_session.h"
 
+#include "common/scheduler/task_utils.h"
+
 #include "data/accounts.h"
 #include "irc/presence_manager.h"
 #include "protocol/codec.h"
@@ -141,7 +143,7 @@ auto IrcSession::readLoop() -> Task<void>
             deadline = loginBy - std::chrono::steady_clock::now();
         }
 
-        const auto line = co_await Scheduler::withTimeout(readLine(), deadline);
+        const auto line = co_await withTimeout(readLine(), deadline);
         if (!line.has_value())
         {
             // never signed in, or didn't answer the last PING
@@ -177,7 +179,7 @@ auto IrcSession::writeLoop() -> Task<void>
         const auto line = std::move(outbox_.front());
         outbox_.pop_front();
 
-        const auto result = co_await Scheduler::withTimeout(asio::async_write(stream_, asio::buffer(line), asio::as_tuple(asio::use_awaitable)), kKeepaliveInterval);
+        const auto result = co_await withTimeout(asio::async_write(stream_, asio::buffer(line), asio::as_tuple(asio::use_awaitable)), kKeepaliveInterval);
         if (!result || std::get<0>(*result))
         {
             co_return;

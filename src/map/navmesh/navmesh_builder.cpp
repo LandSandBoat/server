@@ -22,6 +22,7 @@
 #include "navmesh_builder.h"
 
 #include "common/logging.h"
+#include "common/scheduler/task_utils.h"
 #include "common/timer.h"
 
 #include <map/ximesh/ximesh.h>

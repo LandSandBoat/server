@@ -21,6 +21,8 @@
 
 #include "zoneutils.h"
 
+#include "common/scheduler/task_utils.h"
+
 #include "ai/ai_container.h"
 #include "aman.h"
 #include "battlefield.h"

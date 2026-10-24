@@ -20,6 +20,7 @@
 */
 
 #include <common/scheduler/scheduler.h>
+#include <common/scheduler/task_utils.h>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -331,7 +332,7 @@ TEST_CASE("Scheduler::withTimeout", "[scheduler]")
 
     SECTION("returns the result of a task that finishes in time")
     {
-        const auto result = scheduler.blockOnMainThread(Scheduler::withTimeout(
+        const auto result = scheduler.blockOnMainThread(withTimeout(
             []() -> Task<int>
             {
                 co_return 3;
@@ -344,7 +345,7 @@ TEST_CASE("Scheduler::withTimeout", "[scheduler]")
 
     SECTION("returns nothing for a task that overruns")
     {
-        const auto result = scheduler.blockOnMainThread(Scheduler::withTimeout(
+        const auto result = scheduler.blockOnMainThread(withTimeout(
             []() -> Task<int>
             {
                 co_await Scheduler::yieldFor(1s);
