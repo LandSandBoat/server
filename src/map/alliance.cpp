@@ -149,7 +149,7 @@ auto CAlliance::isFull() const -> bool
 
 auto CAlliance::loadPartyCount() const -> uint32
 {
-    const auto rset = db::preparedStmt("SELECT * FROM accounts_parties WHERE allianceid = ? GROUP BY partyid", m_AllianceID, PARTY_SECOND | PARTY_THIRD);
+    const auto rset = db::preparedStmt("SELECT * FROM accounts_parties WHERE allianceid = ? GROUP BY partyid", m_AllianceID);
     if (rset)
     {
         return rset->rowsCount();
