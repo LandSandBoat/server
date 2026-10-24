@@ -350,3 +350,20 @@ TEST_CASE("Scheduler::Token", "[scheduler]")
         CHECK(second > 1);
     }
 }
+
+TEST_CASE("Scheduler::TaskGroup rethrows a task's exception", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    CHECK_THROWS_AS(scheduler.blockOnMainThread(Scheduler::TaskGroup(
+                        1,
+                        [&](auto add)
+                        {
+                            add(scheduler.spawnOnWorkerThread(
+                                []
+                                {
+                                    throw std::logic_error("bad zone data");
+                                }));
+                        })),
+                    std::logic_error);
+}
