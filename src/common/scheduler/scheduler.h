@@ -234,7 +234,7 @@ public:
         co_await group.async_wait(asio::experimental::wait_for_all(), detail::recycled(asio::use_awaitable));
     }
 
-    explicit Scheduler(const std::size_t numThreads = std::max<std::size_t>(1U, std::thread::hardware_concurrency() > 0 ? std::thread::hardware_concurrency() - 1U : 1U))
+    explicit Scheduler(const std::size_t numThreads = std::max(2U, std::thread::hardware_concurrency()) - 1U)
     : mainContext_()
     , mainGuard_(asio::make_work_guard(mainContext_))
     , workerPool_(numThreads)
