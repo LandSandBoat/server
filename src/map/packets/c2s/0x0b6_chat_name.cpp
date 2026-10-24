@@ -45,7 +45,7 @@ const auto auditTell = [](Scheduler& scheduler, CCharEntity* PChar, const std::s
         scheduler.postToWorkerThread(
             [name, zoneId, recipientName, rawMessage]()
             {
-                const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())";
+                constexpr auto query = db::Query("INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())");
                 if (!db::preparedStmt(query, name, zoneId, recipientName, rawMessage))
                 {
                     ShowError("Failed to insert TELL audit_chat record for player '%s'", name);

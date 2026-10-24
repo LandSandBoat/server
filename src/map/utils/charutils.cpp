@@ -5931,7 +5931,7 @@ void SaveCharJob(const CCharEntity* PChar, const xi::Job job)
         return;
     }
 
-    std::string fmtQuery = "";
+    auto fmtQuery = db::Query("");
 
     switch (job)
     {
@@ -6022,7 +6022,7 @@ void SaveCharExp(const CCharEntity* PChar, const xi::Job job)
         return;
     }
 
-    std::string query = "";
+    auto query = db::Query("");
 
     switch (job)
     {

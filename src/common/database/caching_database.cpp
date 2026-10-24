@@ -192,8 +192,10 @@ auto db::CachingDatabase::runWithRetry(std::string_view rawQuery, const Fn<std::
     std::terminate();
 }
 
-auto db::CachingDatabase::execute(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::execute(const Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
+    const auto rawQuery = query.view();
+
     TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
 
@@ -225,8 +227,10 @@ auto db::CachingDatabase::execute(std::string_view rawQuery, const std::vector<B
     return runWithRetry(rawQuery, operation);
 }
 
-auto db::CachingDatabase::executeBulk(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::executeBulk(const Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
+    const auto rawQuery = query.view();
+
     TracyZoneScoped;
     TracyZoneString(rawQuery);
 

@@ -41,37 +41,6 @@ namespace
 constexpr uint32 MinTestCharId = 20000000;
 constexpr uint32 MinTestAccId  = 20000000;
 
-std::vector<std::string> charIdTables = {
-    "chars",
-    "char_chocobos",
-    "char_effects",
-    "char_equip",
-    "char_equip_saved",
-    "char_exp",
-    "char_flags",
-    "char_history",
-    "char_inventory",
-    "char_job_points",
-    "char_jobs",
-    "char_look",
-    "char_merit",
-    "char_monstrosity",
-    "char_pet",
-    "char_points",
-    "char_profile",
-    "char_recast",
-    "char_skills",
-    "char_spells",
-    "char_stats",
-    "char_storage",
-    "char_style",
-    "char_unlocks",
-    "char_vars",
-
-    "accounts_parties",
-    "accounts_sessions",
-};
-
 } // namespace
 
 // Cleans the given character ID or all characters with IDs >= MinTestCharId.
@@ -87,19 +56,50 @@ void TestChar::clean(uint32 charId /* = 0 */)
         return { MinTestCharId, std::numeric_limits<uint32>::max() };
     }();
 
-    constexpr auto oneIdColumn = std::array{
+    constexpr auto oneIdColumn = std::to_array<db::Query>({
         "DELETE FROM accounts WHERE id BETWEEN ? AND ?",
         "DELETE FROM auction_house WHERE seller BETWEEN ? AND ?",
         "DELETE FROM audit_vendor WHERE seller BETWEEN ? AND ?",
-    };
+    });
 
-    constexpr auto twoIdColumns = std::array{
+    constexpr auto twoIdColumns = std::to_array<db::Query>({
         "DELETE FROM delivery_box WHERE charid BETWEEN ? AND ? OR senderid BETWEEN ? AND ?",
         "DELETE FROM audit_bazaar WHERE seller BETWEEN ? AND ? OR purchaser BETWEEN ? AND ?",
         "DELETE FROM audit_trade WHERE sender BETWEEN ? AND ? OR receiver BETWEEN ? AND ?",
-    };
+    });
 
-    for (const auto* query : oneIdColumn)
+    constexpr auto charIdColumn = std::to_array<db::Query>({
+        "DELETE FROM chars WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_chocobos WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_effects WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_equip WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_equip_saved WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_exp WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_flags WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_history WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_inventory WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_job_points WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_jobs WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_look WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_merit WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_monstrosity WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_pet WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_points WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_profile WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_recast WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_skills WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_spells WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_stats WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_storage WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_style WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_unlocks WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM char_vars WHERE charid BETWEEN ? AND ?",
+
+        "DELETE FROM accounts_parties WHERE charid BETWEEN ? AND ?",
+        "DELETE FROM accounts_sessions WHERE charid BETWEEN ? AND ?",
+    });
+
+    for (const auto query : oneIdColumn)
     {
         if (!db::preparedStmt(query, ids.first, ids.second))
         {
@@ -107,7 +107,7 @@ void TestChar::clean(uint32 charId /* = 0 */)
         }
     }
 
-    for (const auto* query : twoIdColumns)
+    for (const auto query : twoIdColumns)
     {
         if (!db::preparedStmt(query, ids.first, ids.second, ids.first, ids.second))
         {
@@ -115,9 +115,8 @@ void TestChar::clean(uint32 charId /* = 0 */)
         }
     }
 
-    for (const auto& tableName : charIdTables)
+    for (const auto query : charIdColumn)
     {
-        const auto query = std::format("DELETE FROM {} WHERE charid BETWEEN ? AND ?", tableName);
         if (!db::preparedStmt(query, ids.first, ids.second))
         {
             ShowErrorFmt("Failed to execute cleanup query: {}", query);

@@ -124,9 +124,9 @@ void LoadAutomaton(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    const char* Query = "SELECT unlocked_attachments, name, equipped_attachments FROM "
-                        "char_pet LEFT JOIN pet_name ON automatonid = id "
-                        "WHERE charid = ?";
+    constexpr auto Query = db::Query("SELECT unlocked_attachments, name, equipped_attachments FROM "
+                                     "char_pet LEFT JOIN pet_name ON automatonid = id "
+                                     "WHERE charid = ?");
 
     auto rset = db::preparedStmt(Query, PChar->id);
     if (rset && rset->rowsCount() && rset->next())

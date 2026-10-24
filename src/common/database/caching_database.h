@@ -58,8 +58,8 @@ struct ConnectionState
 class CachingDatabase : public Database
 {
 public:
-    auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
-    auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto execute(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto executeBulk(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
     void clearStatementCache() override;

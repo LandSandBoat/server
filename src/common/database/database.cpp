@@ -166,7 +166,7 @@ auto db::checkCharset() -> void
 
 auto db::checkTriggers() -> void
 {
-    const auto triggerQuery = "SHOW TRIGGERS WHERE `Trigger` LIKE ?";
+    constexpr auto triggerQuery = Query("SHOW TRIGGERS WHERE `Trigger` LIKE ?");
 
     constexpr auto triggers = std::array{
         "account_delete",

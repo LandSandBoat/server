@@ -1514,7 +1514,7 @@ auto GetZoneIPP(xi::ZoneId zoneId) -> uint64
 {
     uint64 ipp = 0;
 
-    const auto query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = ?";
+    constexpr auto query = db::Query("SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = ?");
 
     const auto rset = db::preparedStmt(query, zoneId);
     if (rset && rset->rowsCount() && rset->next())

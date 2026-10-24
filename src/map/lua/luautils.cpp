@@ -5754,17 +5754,17 @@ auto GetRecentFishers(uint16 minutes) -> sol::table
     // limit the lookback time to prevent huge queries
     uint16 lookbackTime = std::clamp<uint32>(minutes, 1, 60);
 
-    sol::table  fishers = lua.create_table();
-    const char* Query   = "SELECT cv.charid, c.charname, stats.mlvl, z.name, COALESCE(cs.value, 0) / 10 as skill "
-                          "FROM char_vars cv "
-                          "LEFT JOIN chars c ON c.charid  = cv.charid "
-                          "LEFT JOIN char_skills cs ON cs.charid = cv.charid AND cs.skillid = 48 "
-                          "INNER JOIN char_stats stats ON stats.charid = c.charid "
-                          "INNER JOIN zone_settings z ON z.zoneid = c.pos_zone "
-                          "WHERE "
-                          "varname = '[Fish]LastCastTime' AND "
-                          "FROM_UNIXTIME(cv.value) > NOW() - INTERVAL ? MINUTE "
-                          "ORDER BY z.name, z.name, stats.mlvl, skill";
+    sol::table     fishers = lua.create_table();
+    constexpr auto Query   = db::Query("SELECT cv.charid, c.charname, stats.mlvl, z.name, COALESCE(cs.value, 0) / 10 as skill "
+                                       "FROM char_vars cv "
+                                       "LEFT JOIN chars c ON c.charid  = cv.charid "
+                                       "LEFT JOIN char_skills cs ON cs.charid = cv.charid AND cs.skillid = 48 "
+                                       "INNER JOIN char_stats stats ON stats.charid = c.charid "
+                                       "INNER JOIN zone_settings z ON z.zoneid = c.pos_zone "
+                                       "WHERE "
+                                       "varname = '[Fish]LastCastTime' AND "
+                                       "FROM_UNIXTIME(cv.value) > NOW() - INTERVAL ? MINUTE "
+                                       "ORDER BY z.name, z.name, stats.mlvl, skill");
 
     const auto rset = db::preparedStmt(Query, lookbackTime);
     if (rset && rset->rowsCount())

@@ -45,7 +45,7 @@ std::unordered_map<uint16, xi::data::MeritCategoryData> categoryById;
 std::unordered_map<uint16, uint16>                      meritIndexById;
 Merit_t                                                 meritDefaults[kMeritPacketSlots]{};
 
-auto loadNameLookup(const std::string& query, const std::string& column) -> std::unordered_map<std::string, uint16>
+auto loadNameLookup(const db::Query query, const std::string& column) -> std::unordered_map<std::string, uint16>
 {
     std::unordered_map<std::string, uint16> lookup;
 

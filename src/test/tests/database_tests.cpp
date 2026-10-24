@@ -51,6 +51,15 @@ using ScalarProjection = decltype([](const int value)
 static_assert(BulkAcceptsProjection<TupleProjection>);
 static_assert(!BulkAcceptsProjection<ScalarProjection>);
 
+template <typename Text>
+concept AcceptsQueryText = requires(Text text) { db::preparedStmt(text); };
+
+static_assert(AcceptsQueryText<const char (&)[9]>);
+static_assert(AcceptsQueryText<db::Query>);
+static_assert(!AcceptsQueryText<const char*>);
+static_assert(!AcceptsQueryText<std::string>);
+static_assert(!AcceptsQueryText<std::string_view>);
+
 } // namespace
 
 TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
@@ -65,9 +74,9 @@ TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
     CHECK(rset->get<std::string>(0) == raw);
 }
 
-TEST_CASE("db::preparedStmt takes a string_view query", "[database]")
+TEST_CASE("db::preparedStmt takes a named query", "[database]")
 {
-    constexpr auto query = std::string_view("SELECT ? + 1");
+    constexpr auto query = db::Query("SELECT ? + 1");
 
     const auto rset = db::preparedStmt(query, 1);
     REQUIRE(rset);

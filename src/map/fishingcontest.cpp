@@ -199,28 +199,19 @@ void UpdateRankingHistory()
             // Set the rank value
             if (rankGroup > 0)
             {
-                const auto getQuery = [&]() -> std::string
-                {
-                    switch (rankGroup)
-                    {
-                        case 1:
-                            return ("INSERT INTO char_fishing_contest_history (charid, contest_rank_1) "
-                                    "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_1 = contest_rank_1 + 1");
-                        case 2:
-                            return "INSERT INTO char_fishing_contest_history (charid, contest_rank_2) "
-                                   "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_2 = contest_rank_2 + 1";
-                        case 3:
-                            return "INSERT INTO char_fishing_contest_history (charid, contest_rank_3) "
-                                   "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_3 = contest_rank_3 + 1";
-                        case 4:
-                            return "INSERT INTO char_fishing_contest_history (charid, contest_rank_4) "
-                                   "VALUES (?, 1) ON DUPLICATE KEY UPDATE contest_rank_4 = contest_rank_4 + 1";
-                        default:
-                            return "";
-                    }
-                };
-
-                const auto rset = db::preparedStmt(getQuery(), charID);
+                // Only the column matching rankGroup gains 1.
+                const auto rset = db::preparedStmt("INSERT INTO char_fishing_contest_history (charid, contest_rank_1, contest_rank_2, contest_rank_3, contest_rank_4) "
+                                                   "VALUES (?, ? = 1, ? = 2, ? = 3, ? = 4) "
+                                                   "ON DUPLICATE KEY UPDATE "
+                                                   "contest_rank_1 = contest_rank_1 + VALUES(contest_rank_1), "
+                                                   "contest_rank_2 = contest_rank_2 + VALUES(contest_rank_2), "
+                                                   "contest_rank_3 = contest_rank_3 + VALUES(contest_rank_3), "
+                                                   "contest_rank_4 = contest_rank_4 + VALUES(contest_rank_4)",
+                                                   charID,
+                                                   rankGroup,
+                                                   rankGroup,
+                                                   rankGroup,
+                                                   rankGroup);
                 if (!rset)
                 {
                     ShowWarning("Unable to update player [%s] fishing reward history.", entry.name);
@@ -354,13 +345,13 @@ auto WriteContestData() -> bool
     }
 
     // Update the DB with the current contest data (in case the contest is changed)
-    const char* Query = "UPDATE `fishing_contest` SET "
-                        "status = ?, "       // Status
-                        "criteria = ?, "     // Criteria
-                        "measure = ?, "      // Measure
-                        "fishid = ?, "       // Fish ID
-                        "starttime = ?, "    // Start Time
-                        "nextstagetime = ?"; // Stage Change Time
+    constexpr auto Query = db::Query("UPDATE `fishing_contest` SET "
+                                     "status = ?, "        // Status
+                                     "criteria = ?, "      // Criteria
+                                     "measure = ?, "       // Measure
+                                     "fishid = ?, "        // Fish ID
+                                     "starttime = ?, "     // Start Time
+                                     "nextstagetime = ?"); // Stage Change Time
 
     auto rset = db::preparedStmt(
         Query,
@@ -390,13 +381,13 @@ auto WriteInitialContestData() -> bool
     }
 
     // Update the DB with the current contest data (in case the contest is changed)
-    std::string Query = "INSERT INTO `fishing_contest` VALUES ("
-                        "?, " // Status
-                        "?, " // Criteria
-                        "?, " // Measure
-                        "?, " // Fish ID
-                        "?, " // Start Time
-                        "?)"; // Stage Change Time
+    constexpr auto Query = db::Query("INSERT INTO `fishing_contest` VALUES ("
+                                     "?, "  // Status
+                                     "?, "  // Criteria
+                                     "?, "  // Measure
+                                     "?, "  // Fish ID
+                                     "?, "  // Start Time
+                                     "?)"); // Stage Change Time
 
     auto rset = db::preparedStmt(
         Query,
@@ -581,9 +572,9 @@ auto ClaimContestReward(CCharEntity* PChar) -> bool
         return false;
     }
 
-    std::string Query = "UPDATE fishing_contest_entries "
-                        "SET claimed = 1 "
-                        "WHERE charid = ?";
+    constexpr auto Query = db::Query("UPDATE fishing_contest_entries "
+                                     "SET claimed = 1 "
+                                     "WHERE charid = ?");
 
     auto rset = db::preparedStmt(Query, PChar->id);
     if (!rset)
@@ -606,10 +597,10 @@ auto GetFishingContestHistory(CCharEntity* PChar) -> FishingContestHistory
         return history;
     }
 
-    std::string Query = "SELECT contest_rank_1, contest_rank_2, contest_rank_3, contest_rank_4 "
-                        "FROM char_fishing_contest_history "
-                        "WHERE charid = ?";
-    auto        rset  = db::preparedStmt(Query, PChar->id);
+    constexpr auto Query = db::Query("SELECT contest_rank_1, contest_rank_2, contest_rank_3, contest_rank_4 "
+                                     "FROM char_fishing_contest_history "
+                                     "WHERE charid = ?");
+    auto           rset  = db::preparedStmt(Query, PChar->id);
 
     if (rset && rset->rowsCount() > 0 && rset->next())
     {
@@ -693,8 +684,8 @@ void InitNewContest(uint16 fishId, FISHING_CONTEST_CRITERIA criteria, FISHING_CO
 void LoadContestParameters()
 {
     // load the overhead contest parameters
-    std::string Query = "SELECT status, criteria, measure, fishid, starttime, nextstagetime "
-                        "FROM fishing_contest";
+    constexpr auto Query = db::Query("SELECT status, criteria, measure, fishid, starttime, nextstagetime "
+                                     "FROM fishing_contest");
 
     auto rset = db::preparedStmt(Query);
 
@@ -718,23 +709,23 @@ void LoadContestParameters()
 void LoadContestEntries()
 {
     // load the current entry pool
-    std::string Query = "SELECT "
-                        "c.charname AS charname, "
-                        "e.mjob AS mjob, "
-                        "e.sjob AS sjob, "
-                        "e.mlevel AS mlevel, "
-                        "e.slevel AS slevel, "
-                        "e.race AS race, "
-                        "e.allegiance AS allegiance, "
-                        "e.fishRank AS fishRank, "
-                        "e.score AS score, "
-                        "e.submitTime AS submitTime, "
-                        "e.contestRank AS contestRank, "
-                        "e.share AS share "
-                        "FROM fishing_contest_entries e "
-                        "LEFT JOIN chars c "
-                        "ON c.charid = e.charid "
-                        "ORDER BY contestRank";
+    constexpr auto Query = db::Query("SELECT "
+                                     "c.charname AS charname, "
+                                     "e.mjob AS mjob, "
+                                     "e.sjob AS sjob, "
+                                     "e.mlevel AS mlevel, "
+                                     "e.slevel AS slevel, "
+                                     "e.race AS race, "
+                                     "e.allegiance AS allegiance, "
+                                     "e.fishRank AS fishRank, "
+                                     "e.score AS score, "
+                                     "e.submitTime AS submitTime, "
+                                     "e.contestRank AS contestRank, "
+                                     "e.share AS share "
+                                     "FROM fishing_contest_entries e "
+                                     "LEFT JOIN chars c "
+                                     "ON c.charid = e.charid "
+                                     "ORDER BY contestRank");
 
     auto rset = db::preparedStmt(Query);
 

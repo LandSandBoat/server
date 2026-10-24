@@ -53,7 +53,7 @@ const auto auditChat = [](Scheduler& scheduler, CCharEntity* PChar, const std::s
         scheduler.postToWorkerThread(
             [name, chatType, zoneId, rawMessage]()
             {
-                const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, message, datetime) VALUES(?, ?, ?, ?, current_timestamp())";
+                constexpr auto query = db::Query("INSERT INTO audit_chat (speaker, type, zoneid, message, datetime) VALUES(?, ?, ?, ?, current_timestamp())");
                 if (!db::preparedStmt(query, name, chatType, zoneId, rawMessage))
                 {
                     ShowErrorFmt("Failed to insert {} audit_chat record for player '{}'", chatType, name);
@@ -73,7 +73,7 @@ const auto auditUnity = [](Scheduler& scheduler, CCharEntity* PChar, const std::
         scheduler.postToWorkerThread(
             [name, zoneId, unityLeader, rawMessage]()
             {
-                const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, unity, message, datetime) VALUES(?, 'UNITY', ?, ?, ?, current_timestamp())";
+                constexpr auto query = db::Query("INSERT INTO audit_chat (speaker, type, zoneid, unity, message, datetime) VALUES(?, 'UNITY', ?, ?, ?, current_timestamp())");
                 if (!db::preparedStmt(query, name, zoneId, unityLeader, rawMessage))
                 {
                     ShowError("Failed to insert UNITY audit_chat record for player '%s'", name.c_str());
@@ -94,7 +94,7 @@ const auto auditLinkshell = [](Scheduler& scheduler, CCharEntity* PChar, CLinksh
         scheduler.postToWorkerThread(
             [name, zoneId, decodedLinkshellName, rawMessage]()
             {
-                const auto query = "INSERT INTO audit_chat (speaker, type, lsName, zoneid, message, datetime) VALUES(?, 'LINKSHELL', ?, ?, ?, current_timestamp())";
+                constexpr auto query = db::Query("INSERT INTO audit_chat (speaker, type, lsName, zoneid, message, datetime) VALUES(?, 'LINKSHELL', ?, ?, ?, current_timestamp())");
                 if (!db::preparedStmt(query, name, decodedLinkshellName, zoneId, rawMessage))
                 {
                     ShowError("Failed to insert LINKSHELL audit_chat record for player '%s'", name);

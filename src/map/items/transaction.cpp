@@ -196,16 +196,16 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
 
     auto* PInserted = PStorage->GetItem(SlotID);
 
-    const auto Query = "INSERT INTO char_inventory("
-                       "charid, "
-                       "location, "
-                       "slot, "
-                       "itemId, "
-                       "quantity, "
-                       "signature, "
-                       "extra) "
-                       "VALUES(?, ?, ?, ?, ?, ?, ?) "
-                       "LIMIT 1";
+    constexpr auto Query = db::Query("INSERT INTO char_inventory("
+                                     "charid, "
+                                     "location, "
+                                     "slot, "
+                                     "itemId, "
+                                     "quantity, "
+                                     "signature, "
+                                     "extra) "
+                                     "VALUES(?, ?, ?, ?, ?, ?, ?) "
+                                     "LIMIT 1");
 
     if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PInserted->getID(), PInserted->getQuantity(), PInserted->getSignature(), PInserted->m_extra))
     {
@@ -245,7 +245,7 @@ auto restoreItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, std::unique
 
     auto* PRestored = PStorage->GetItem(SlotID);
 
-    const auto Query = "INSERT INTO char_inventory(charid, location, slot, itemId, quantity, signature, extra) VALUES(?, ?, ?, ?, ?, ?, ?) LIMIT 1";
+    constexpr auto Query = db::Query("INSERT INTO char_inventory(charid, location, slot, itemId, quantity, signature, extra) VALUES(?, ?, ?, ?, ?, ?, ?) LIMIT 1");
 
     if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PRestored->getID(), quantity, PRestored->getSignature(), PRestored->m_extra))
     {

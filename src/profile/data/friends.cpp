@@ -42,9 +42,8 @@ namespace
 {
 
 // throws so the transaction rolls back
-// Takes the query as a char array so only a string literal compiles, which keeps each statement's text fixed.
-template <std::size_t N, typename... Args>
-auto run(const char (&query)[N], Args&&... args)
+template <typename... Args>
+auto run(const db::Query query, Args&&... args)
 {
     auto rset = db::preparedStmt(query, std::forward<Args>(args)...);
     if (!rset)

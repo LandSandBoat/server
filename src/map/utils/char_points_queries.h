@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <common/database/query.h>
+
 #include <array>
 #include <string_view>
 
@@ -30,8 +32,8 @@ namespace charutils
 struct CharPointsQueries
 {
     std::string_view column;
-    std::string_view select;
-    std::string_view update;
+    db::Query        select;
+    db::Query        update;
 };
 
 // One entry per char_points column. A test checks the list against the schema.

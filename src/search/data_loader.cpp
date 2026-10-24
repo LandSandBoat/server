@@ -376,22 +376,35 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
     std::ranges::sort(ids);
     ids.erase(std::unique(ids.begin(), ids.end()), ids.end());
 
-    static const auto columns  = std::string("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
-                                             "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
-                                             "linkshellid1, linkshellid2 ");
-    static const auto joins    = std::string("LEFT JOIN accounts_parties USING (charid) "
-                                             "LEFT JOIN chars USING (charid) "
-                                             "LEFT JOIN char_look USING (charid) "
-                                             "LEFT JOIN char_stats USING (charid) "
-                                             "LEFT JOIN char_profile USING(charid) "
-                                             "LEFT JOIN char_flags USING(charid) ");
-    static const auto filters  = std::string("WHERE charname IS NOT NULL "
-                                             "AND (? = 0 OR mjob = ?) "
-                                             "AND (? = 0 OR (seacom_type & 0xF0) = ?) "
-                                             "ORDER BY charname ASC");
-    static const auto everyone = columns + "FROM accounts_sessions " + joins + filters;
-    static const auto byIds    = columns + "FROM JSON_TABLE(?, '$[*]' COLUMNS (charid INT UNSIGNED PATH '$')) AS ids " +
-                                 "JOIN accounts_sessions USING (charid) " + joins + filters;
+    constexpr auto everyone = db::Query("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
+                                        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
+                                        "linkshellid1, linkshellid2 "
+                                        "FROM accounts_sessions "
+                                        "LEFT JOIN accounts_parties USING (charid) "
+                                        "LEFT JOIN chars USING (charid) "
+                                        "LEFT JOIN char_look USING (charid) "
+                                        "LEFT JOIN char_stats USING (charid) "
+                                        "LEFT JOIN char_profile USING(charid) "
+                                        "LEFT JOIN char_flags USING(charid) "
+                                        "WHERE charname IS NOT NULL "
+                                        "AND (? = 0 OR mjob = ?) "
+                                        "AND (? = 0 OR (seacom_type & 0xF0) = ?) "
+                                        "ORDER BY charname ASC");
+    constexpr auto byIds    = db::Query("SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, unity_leader, "
+                                        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled, muted, "
+                                        "linkshellid1, linkshellid2 "
+                                        "FROM JSON_TABLE(?, '$[*]' COLUMNS (charid INT UNSIGNED PATH '$')) AS ids "
+                                        "JOIN accounts_sessions USING (charid) "
+                                        "LEFT JOIN accounts_parties USING (charid) "
+                                        "LEFT JOIN chars USING (charid) "
+                                        "LEFT JOIN char_look USING (charid) "
+                                        "LEFT JOIN char_stats USING (charid) "
+                                        "LEFT JOIN char_profile USING(charid) "
+                                        "LEFT JOIN char_flags USING(charid) "
+                                        "WHERE charname IS NOT NULL "
+                                        "AND (? = 0 OR mjob = ?) "
+                                        "AND (? = 0 OR (seacom_type & 0xF0) = ?) "
+                                        "ORDER BY charname ASC");
 
     // The second statement's ids are still bound as a JSON array for JSON_TABLE.
     const auto rset = ids.empty()

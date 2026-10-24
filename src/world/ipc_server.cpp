@@ -122,9 +122,9 @@ auto IPCServer::getIPPsForParty(uint32 partyId) -> std::vector<IPP>
     // TODO: We know when chars move, we could be caching this info
 
     // TODO: Simplify query now that there's alliance versions?
-    const auto query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
-                       "WHERE (allianceid <> 0 AND allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = ?)) "
-                       "OR (allianceid = 0 AND partyid = ?) GROUP BY server_addr, server_port";
+    constexpr auto query = db::Query("SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
+                                     "WHERE (allianceid <> 0 AND allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = ?)) "
+                                     "OR (allianceid = 0 AND partyid = ?) GROUP BY server_addr, server_port");
 
     const auto rset = db::preparedStmt(query, partyId, partyId);
     if (rset && rset->rowsCount())
@@ -149,9 +149,9 @@ auto IPCServer::getIPPsForAlliance(uint32 allianceId) -> std::vector<IPP>
 
     // TODO: We know when chars move, we could be caching this info
 
-    const auto query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
-                       "WHERE allianceid = ? "
-                       "GROUP BY server_addr, server_port";
+    constexpr auto query = db::Query("SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
+                                     "WHERE allianceid = ? "
+                                     "GROUP BY server_addr, server_port");
 
     const auto rset = db::preparedStmt(query, allianceId);
     if (rset && rset->rowsCount())
@@ -176,8 +176,8 @@ auto IPCServer::getIPPsForLinkshell(uint32 linkshellId) -> std::vector<IPP>
 
     // TODO: We know when chars move, we could be caching this info
 
-    const auto query = "SELECT server_addr, server_port FROM accounts_sessions "
-                       "WHERE linkshellid1 = ? OR linkshellid2 = ? GROUP BY server_addr, server_port";
+    constexpr auto query = db::Query("SELECT server_addr, server_port FROM accounts_sessions "
+                                     "WHERE linkshellid1 = ? OR linkshellid2 = ? GROUP BY server_addr, server_port");
 
     const auto rset = db::preparedStmt(query, linkshellId, linkshellId);
     if (rset && rset->rowsCount())
@@ -202,8 +202,8 @@ auto IPCServer::getIPPsForUnity(uint32 unityId) -> std::vector<IPP>
 
     // TODO: We know when chars move, we could be caching this info
 
-    const auto query = "SELECT server_addr, server_port FROM accounts_sessions "
-                       "WHERE unitychat = ? GROUP BY server_addr, server_port";
+    constexpr auto query = db::Query("SELECT server_addr, server_port FROM accounts_sessions "
+                                     "WHERE unitychat = ? GROUP BY server_addr, server_port");
 
     const auto rset = db::preparedStmt(query, unityId);
     if (rset && rset->rowsCount())

@@ -65,13 +65,13 @@ const auto calculateAssistExpiry = [](CCharEntity* PChar, const uint32 playtimeE
 CAMANContainer::CAMANContainer(CCharEntity* PChar)
 : m_player(PChar)
 {
-    const auto fmtQuery = "SELECT "
-                          "mentor, "
-                          "DATEDIFF(CURRENT_TIMESTAMP, last_logout) AS days_since_logout, "
-                          "muted "
-                          "FROM chars "
-                          "LEFT JOIN char_flags ON chars.charid = char_flags.charid "
-                          "WHERE chars.charid = ?";
+    constexpr auto fmtQuery = db::Query("SELECT "
+                                        "mentor, "
+                                        "DATEDIFF(CURRENT_TIMESTAMP, last_logout) AS days_since_logout, "
+                                        "muted "
+                                        "FROM chars "
+                                        "LEFT JOIN char_flags ON chars.charid = char_flags.charid "
+                                        "WHERE chars.charid = ?");
 
     if (const auto rset = db::preparedStmt(fmtQuery, m_player->id); rset && rset->rowsCount() && rset->next())
     {
