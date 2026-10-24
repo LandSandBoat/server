@@ -272,6 +272,13 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
         transactionRollback();
         return false;
     }
+    catch (...)
+    {
+        ShowCritical("Transaction failed, rolling back: unknown exception");
+
+        transactionRollback();
+        return false;
+    }
 
     if (!transactionCommit())
     {

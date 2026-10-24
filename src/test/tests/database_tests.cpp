@@ -169,6 +169,19 @@ TEST_CASE("db::transaction", "[database]")
         CHECK(rowCount() == 0);
     }
 
+    SECTION("rolls back when the function throws something other than std::exception")
+    {
+        const auto committed = db::transaction(
+            []
+            {
+                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                throw 42;
+            });
+
+        CHECK_FALSE(committed);
+        CHECK(rowCount() == 0);
+    }
+
     REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_transaction"));
 }
 
