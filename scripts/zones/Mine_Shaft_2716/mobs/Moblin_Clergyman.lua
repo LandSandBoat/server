@@ -6,6 +6,8 @@
 ---@type TMobEntity
 local entity = {}
 
+local ID = zones[xi.zone.MINE_SHAFT_2716]
+
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -21,7 +23,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 240)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 180)
     mob:setAutoAttackEnabled(false)
     mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(false)
@@ -29,19 +31,53 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(60, 180))
     mob:setMagicCastingEnabled(true)
 end
 
--- TODO: Change casting logic to only target Twilotak and random players
 entity.onMobSpellChoose = function(mob, target, spell)
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return 0
+    end
+
+    local twilotak = GetMobByID(ID.mob.TWILOTAK + (battlefield:getArea() - 1) * 7)
     local spellList =
     {
         xi.magic.spell.CURE_IV,
         xi.magic.spell.HOLY,
-        xi.magic.spell.PROTECT_III,
     }
 
-    return spellList[math.randomInt(1, #spellList)]
+    if
+        twilotak and
+        not twilotak:hasStatusEffect(xi.effect.PROTECT)
+    then
+        table.insert(spellList, xi.magic.spell.PROTECT_III)
+    end
+
+    local spellId = spellList[math.randomInt(1, #spellList)]
+    if
+        spellId == xi.magic.spell.CURE_IV or
+        spellId == xi.magic.spell.PROTECT_III
+    then
+        return spellId, twilotak
+    end
+
+    local nearbyPlayers = {}
+    for _, player in pairs(battlefield:getPlayers()) do
+        if
+            player and
+            mob:checkDistance(player) <= 21
+        then
+            table.insert(nearbyPlayers, player)
+        end
+    end
+
+    if #nearbyPlayers == 0 then
+        return 0
+    end
+
+    return spellId, nearbyPlayers[math.randomInt(1, #nearbyPlayers)]
 end
 
 return entity
