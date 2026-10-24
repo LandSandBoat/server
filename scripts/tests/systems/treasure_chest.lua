@@ -7,8 +7,9 @@ describe('Treasure', function()
             })
         player:addKeyItem(xi.keyItem.MAP_OF_ORDELLES_CAVES)
 
-        -- Skip time to let the chest's 'opened' var reset (queued at 5s)
-        xi.test.world:skipTime(6)
+        -- skipTime ticks once after the jump, so the first call fires the chest's brief hide and the second outlasts it.
+        xi.test.world:skipTime(10)
+        xi.test.world:skipTime(10)
 
         -- Give the player a chest key
         player:addItem(xi.item.ORDELLE_CHEST_KEY)
