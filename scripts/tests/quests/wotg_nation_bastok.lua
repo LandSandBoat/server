@@ -1,3 +1,5 @@
+local packetReader = require('scripts.tests.helpers.packet_reader')
+
 describe('WOTG Nation Quests - Bastok', function()
     ---@type CClientEntityPair
     local player
@@ -51,6 +53,24 @@ describe('WOTG Nation Quests - Bastok', function()
             -- First nation quest completed: Sprinter's Shoes, service ribbon, and Bastok allegiance.
             player.assert:hasItem(xi.item.SPRINTERS_SHOES)
             player.assert:hasKI(xi.keyItem.BRONZE_RIBBON_OF_SERVICE)
+        end)
+    end)
+
+    describe('01 - Better Part of Valor', function()
+        it('should meet Werner at the waterfall ??? as a Fighting Fourth soldier', function()
+            player:setCampaignAllegiance(xi.alliedNation.BASTOK)
+            player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR)
+            xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR, 'Prog', 1)
+
+            -- The ??? in the bush by the waterfall.
+            player:gotoZone(xi.zone.NORTH_GUSTABERG_S)
+            player.packets:clear()
+            player.entities:gotoAndTrigger('qm3', { eventId = 3, finishOption = 0 })
+
+            -- Param 0 picks Werner's lines for a Republican Army soldier.
+            local start = packetReader.lastEventStart(player)
+            assert(start.params[0] == 1, string.format('Event 3 param 0 was %d', start.params[0]))
+            assert(xi.quest.getVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR, 'Prog') == 2)
         end)
     end)
 end)

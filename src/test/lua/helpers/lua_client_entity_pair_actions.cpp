@@ -83,6 +83,18 @@
 #include "test_char.h"
 #include "test_common.h"
 
+namespace
+{
+
+// The server ignores a talk or trade aimed at a hidden NPC, which would otherwise surface as a missing event.
+auto canInteract(const CBaseEntity* PTarget, const CCharEntity* PChar) -> bool
+{
+    const auto isShown = PTarget->PAI->IsSpawned() && PTarget->status == xi::Status::Normal;
+    return isShown || PChar->inMogHouse(xi::MogHouse::Own);
+}
+
+} // namespace
+
 CLuaClientEntityPairActions::CLuaClientEntityPairActions(CLuaClientEntityPair* parent)
 : parent_(parent)
 {
@@ -323,6 +335,12 @@ void CLuaClientEntityPairActions::trigger(CLuaBaseEntity* target, sol::optional<
     if (!target)
     {
         TestError("trigger: Invalid target");
+        return;
+    }
+
+    if (expectedEvent.has_value() && !canInteract(target->GetBaseEntity(), parent_->testChar()->entity()))
+    {
+        TestError("trigger: {} ({}) is hidden, so the server ignores the talk", target->getName(), target->getID());
         return;
     }
 
@@ -660,6 +678,12 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
     if (!npc.has_value())
     {
         TestError("Could not find or move to NPC for trading");
+        return;
+    }
+
+    if (expectedEvent.has_value() && !canInteract(npc.value().GetBaseEntity(), parent_->testChar()->entity()))
+    {
+        TestError("tradeNpc: {} ({}) is hidden, so the server ignores the trade", npc.value().getName(), npc.value().getID());
         return;
     }
 
