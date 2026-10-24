@@ -19,14 +19,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits             = 1
     params.ftpMod              = { 1.0, 1.0, 1.0 }
     params.agi_wsc             = 0.3
+    params.ignoredDefense      = { 0.0, 0.35, 0.5 } -- BG
     params.rangedAccuracyBonus = 30 -- https://www.ffxiah.com/forum/topic/52018/luck-of-the-draw-a-corsairs-guide-new/127/#3726841
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.7
+        params.ignoredDefense = { 0.0, 0.375, 0.75 } -- DAT, BG says 0, 35, 50
     end
-
-    -- Defense ignored is 0%, 35%, 50% as per wiki.bluegartr.com
-    params.ignoredDefense = { 0.0, 0.35, 0.5 }
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage

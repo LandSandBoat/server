@@ -18,9 +18,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod  = { 1, 1, 1 }
     params.agi_wsc = 0.3
+    -- TODO: pre-2014 crit bonus unknown
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.7
+        params.critVaries = { 0.2, 0.5, 1.0 } -- DAT
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
