@@ -17,7 +17,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.ftpMod = { 0.5, 0.75, 1.0 } -- FFO
     params.str_wsc = 0.5
     params.hybridWS = true
     params.ele = xi.element.FIRE
@@ -25,7 +25,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 0.5, 1.5, 2.5 }
+        params.ftpMod = { 0.5, 1.44921875, 2.5 } -- DAT, but BG and FFO say 1.5 at 2000 TP
         params.str_wsc = 0.75
     end
 
