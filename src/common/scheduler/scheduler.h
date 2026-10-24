@@ -213,10 +213,7 @@ public:
 
         using DeferredOp = decltype(asio::co_spawn(executor, std::declval<Task<void>>(), detail::recycled(asio::deferred)));
         std::vector<DeferredOp> ops;
-        if (reserveSize > 0)
-        {
-            ops.reserve(reserveSize);
-        }
+        ops.reserve(reserveSize);
 
         auto add = [&](Task<void> task)
         {
