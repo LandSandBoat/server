@@ -248,6 +248,13 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 
+    // A nested START TRANSACTION would commit the outer transaction.
+    if (getDatabase().isInTransaction())
+    {
+        transactionFn();
+        return true;
+    }
+
     if (!transactionStart())
     {
         return false;
@@ -268,6 +275,13 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
     catch (const std::exception& e)
     {
         ShowCriticalFmt("Transaction failed, rolling back: {}", e.what());
+
+        transactionRollback();
+        return false;
+    }
+    catch (...)
+    {
+        ShowCritical("Transaction failed, rolling back: unknown exception");
 
         transactionRollback();
         return false;
