@@ -31,6 +31,7 @@
 #include <chrono>
 #include <cstddef>
 #include <exception>
+#include <expected>
 #include <type_traits>
 #include <utility>
 #include <variant>
@@ -89,10 +90,31 @@ template <typename T>
 [[nodiscard]] auto withTimeout(Task<T> task, const std::chrono::steady_clock::duration timeout) -> Task<Maybe<T>>
 {
     using namespace asio::experimental::awaitable_operators;
-    auto result = co_await (std::move(task) || Scheduler::yieldFor(timeout));
-    if (result.index() == 0)
+
+    // operator|| ignores an operand that throws, so a failing task would otherwise look like a timeout.
+    auto captured = [](Task<T> inner) -> Task<std::expected<T, std::exception_ptr>>
     {
-        co_return std::move(std::get<0>(result));
+        try
+        {
+            co_return co_await std::move(inner);
+        }
+        catch (...)
+        {
+            co_return std::unexpected(std::current_exception());
+        }
+    }(std::move(task));
+
+    auto result = co_await (std::move(captured) || Scheduler::yieldFor(timeout));
+    if (result.index() == 1)
+    {
+        co_return std::nullopt;
     }
-    co_return std::nullopt;
+
+    auto& outcome = std::get<0>(result);
+    if (!outcome)
+    {
+        std::rethrow_exception(outcome.error());
+    }
+
+    co_return std::move(*outcome);
 }

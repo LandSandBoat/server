@@ -628,6 +628,40 @@ TEST_CASE("Scheduler cross-thread work", "[scheduler]")
     }
 }
 
+TEST_CASE("Scheduler::withTimeout edge cases", "[scheduler]")
+{
+    auto scheduler = Scheduler(kWorkerThreads);
+
+    SECTION("passes the task's exception through")
+    {
+        CHECK_THROWS_AS(scheduler.blockOnMainThread(withTimeout(
+                            [](const bool fail) -> Task<int>
+                            {
+                                if (fail)
+                                {
+                                    throw std::logic_error("read failed");
+                                }
+
+                                co_return 0;
+                            }(true),
+                            1s)),
+                        std::logic_error);
+    }
+
+    SECTION("a zero timeout gives up on a task that suspends")
+    {
+        const auto result = scheduler.blockOnMainThread(withTimeout(
+            []() -> Task<int>
+            {
+                co_await Scheduler::yieldFor(1s);
+                co_return 3;
+            }(),
+            0ms));
+
+        CHECK_FALSE(result.has_value());
+    }
+}
+
 TEST_CASE("Scheduler::stop can be called twice", "[scheduler]")
 {
     auto scheduler = Scheduler(kWorkerThreads);
