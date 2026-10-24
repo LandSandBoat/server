@@ -667,13 +667,14 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
 
     ShowInfo("Loading NPCs");
 
-    co_await Scheduler::TaskGroup(
+    co_await runOnWorkerThreads(
+        scheduler,
         zoneIds.size(),
         [&](auto& add)
         {
             for (const auto& [zoneId, records] : std::views::zip(zoneIds, parsed))
             {
-                add(scheduler.spawnOnWorkerThread(
+                add(
                     [zoneId, &records]()
                     {
                         TracyZoneScoped;
@@ -684,7 +685,7 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
                         {
                             InsertNPCs(PZone, zoneId, *npcs);
                         }
-                    }));
+                    });
             }
         });
 
@@ -766,13 +767,14 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
     const auto normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
     const auto normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-    co_await Scheduler::TaskGroup(
+    co_await runOnWorkerThreads(
+        scheduler,
         zoneIds.size(),
         [&](auto& add)
         {
             for (const auto& [zoneId, records] : std::views::zip(zoneIds, parsed))
             {
-                add(scheduler.spawnOnWorkerThread(
+                add(
                     [normalLevelRangeMin, normalLevelRangeMax, zoneId, &records]()
                     {
                         TracyZoneScoped;
@@ -783,7 +785,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
                         {
                             InsertMobs(PZone, zoneId, *mobs, normalLevelRangeMin, normalLevelRangeMax);
                         }
-                    }));
+                    });
             }
         });
 
@@ -929,17 +931,18 @@ auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<xi::Zon
     }
 
     // Phase 1: Load ximeshes (navmesh build depends on ximesh)
-    co_await Scheduler::TaskGroup(
+    co_await runOnWorkerThreads(
+        scheduler,
         zonesIdsToLoad.size(),
         [&](auto& add)
         {
             for (const auto zoneId : zonesIdsToLoad)
             {
-                add(scheduler.spawnOnWorkerThread(
+                add(
                     [zoneId]()
                     {
                         g_PZoneList[zoneId]->LoadXiMesh();
-                    }));
+                    });
             }
         });
 
@@ -955,20 +958,21 @@ auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<xi::Zon
 
     std::vector<ZoneEntityFiles> parsed(zonesIdsToLoad.size());
 
-    co_await Scheduler::TaskGroup(
+    co_await runOnWorkerThreads(
+        scheduler,
         zonesIdsToLoad.size(),
         [&](auto& add)
         {
             for (size_t index = 0; index < zonesIdsToLoad.size(); ++index)
             {
-                add(scheduler.spawnOnWorkerThread(
+                add(
                     [zoneId = zonesIdsToLoad[index], &records = parsed[index]]()
                     {
                         TracyZoneScoped;
 
                         records.Npcs = xi::data::loadZoneFile<NpcsDataset>(zoneId);
                         records.Mobs = xi::data::loadZoneFile<MobsDataset>(zoneId);
-                    }));
+                    });
             }
         });
 
