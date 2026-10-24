@@ -19,12 +19,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 4
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5
-    params.critVaries = { 0.1, 0.3, 0.5 }
+    params.critVaries = { 0.1, 0.2, 0.3 } -- DAT, BG says 10, 25, 40
     params.atkVaries  = { 0.8125, 0.8125, 0.8125 }
-
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.critVaries = { 0.1, 0.25, 0.4 }
-    end
 
     -- Apply Aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)

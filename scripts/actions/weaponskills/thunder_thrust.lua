@@ -8,7 +8,7 @@
 -- Element: Lightning
 -- Modifiers: STR:40%  INT:40%
 -- 100%TP    200%TP    300%TP
--- 1.50      2.00      2.50
+-- 1.50      3.28      5.43
 -----------------------------------
 ---@type TWeaponSkill
 local weaponskillObject = {}
@@ -22,6 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.5, 3.27734375, 5.4296875 }
         params.str_wsc = 0.4 params.int_wsc = 0.4
     end
 
