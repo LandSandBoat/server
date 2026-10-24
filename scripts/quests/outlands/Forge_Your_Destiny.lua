@@ -283,7 +283,7 @@ quest.sections =
                     then
                         quest:setVar(player, 'Prog', 2)
                         player:tradeComplete()
-                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.item.SACRED_BRANCH)
+                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.item.SACRED_BRANCH, xi.item.SACRED_BRANCH)
                     end
                 end,
 
