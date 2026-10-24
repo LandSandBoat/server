@@ -26,6 +26,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <string_view>
 
 TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
 {
@@ -37,6 +38,17 @@ TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
     REQUIRE(rset->next());
 
     CHECK(rset->get<std::string>(0) == raw);
+}
+
+TEST_CASE("db::preparedStmt takes a string_view query", "[database]")
+{
+    constexpr auto query = std::string_view("SELECT ? + 1");
+
+    const auto rset = db::preparedStmt(query, 1);
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+
+    CHECK(rset->get<int64>(0) == 2);
 }
 
 TEST_CASE("db::detail::validateQueryLeadingKeyword", "[database]")

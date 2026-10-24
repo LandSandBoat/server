@@ -46,7 +46,7 @@ db::LibMariaDBConnection::~LibMariaDBConnection()
     }
 }
 
-auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_ptr<PreparedStatement>
+auto db::LibMariaDBConnection::prepare(std::string_view query) -> std::unique_ptr<PreparedStatement>
 {
     MYSQL_STMT* stmt = mysql_stmt_init(connection_);
     if (stmt == nullptr)
@@ -54,7 +54,7 @@ auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_
         throw detail::libmariadb::Error(mysql_errno(connection_), mysql_error(connection_));
     }
 
-    if (mysql_stmt_prepare(stmt, query.c_str(), static_cast<unsigned long>(query.size())) != 0)
+    if (mysql_stmt_prepare(stmt, query.data(), static_cast<unsigned long>(query.size())) != 0)
     {
         const auto        errnum  = mysql_stmt_errno(stmt);
         const std::string message = mysql_stmt_error(stmt);

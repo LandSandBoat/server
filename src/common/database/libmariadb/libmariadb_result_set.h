@@ -30,6 +30,7 @@
 #include <cstddef>
 #include <memory>
 #include <string>
+#include <string_view>
 #include <variant>
 
 namespace db
@@ -48,10 +49,10 @@ public:
     using Row  = std::vector<Cell>;
 
     // SELECT-like result. The schema is shared (and owned) across all result sets of one statement.
-    LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows);
+    LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows);
 
     // UPDATE-like result.
-    LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query);
+    LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query);
 
 protected:
     auto rawNext() -> bool override;

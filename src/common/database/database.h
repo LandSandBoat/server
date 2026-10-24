@@ -51,12 +51,12 @@ public:
     // Execute a query with the given pre-lowered parameters.
     // Returns a queryable result set for SELECT-like queries, a rows-affected result set for
     // UPDATE-like queries, or nullptr if the query is invalid.
-    virtual auto execute(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // As execute, but sends every row of `params` in one round trip.
     //
     // Row width comes from the statement's own placeholder count, so `params` must be a whole number of rows.
-    virtual auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // The database name, ie. xidb.
     virtual auto getSchema() -> std::string = 0;
@@ -97,7 +97,7 @@ auto setDatabase(Database* database) -> void;
 // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 template <typename... Args>
-auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
+auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 // Send every row of `rows` through `query` in one round trip.
 //
@@ -107,7 +107,7 @@ auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_pt
 // Throws if the statement fails.
 // Call it inside db::transaction, which turns the throw into a rollback.
 template <typename T, typename ProjectFn>
-void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project);
+void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project);
 
 auto getDatabaseSchema() -> std::string;
 
@@ -140,7 +140,7 @@ auto getTableColumnNames(const std::string& tableName) -> std::vector<std::strin
 //
 
 template <typename... Args>
-auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
+auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
@@ -150,7 +150,7 @@ auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_pt
 }
 
 template <typename T, typename ProjectFn>
-void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project)
+void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project)
 {
     TracyZoneScopedS(16);
 

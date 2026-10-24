@@ -34,9 +34,9 @@
 #include <thread>
 using namespace std::chrono_literals;
 
-auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> ResultSetType
+auto db::detail::validateQueryLeadingKeyword(std::string_view query) -> ResultSetType
 {
-    auto parts = split(to_upper(query), " ");
+    auto parts = split(to_upper(std::string(query)), " ");
 
     std::vector<std::string> cleanedParts;
     for (const auto& part : parts)
@@ -115,7 +115,7 @@ auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> Result
     return ResultSetType::Invalid;
 }
 
-auto db::detail::validateQueryContent(const std::string& query) -> bool
+auto db::detail::validateQueryContent(std::string_view query) -> bool
 {
     // NOTE: We shouldn't be checking for the presence of '%', as this
     //     : is the SQL wildcard character.

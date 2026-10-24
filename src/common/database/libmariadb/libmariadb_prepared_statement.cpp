@@ -382,7 +382,7 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
     return rows;
 }
 
-auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeQuery(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {
@@ -406,7 +406,7 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
     }
 }
 
-auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeBulkUpdate(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
 
@@ -494,7 +494,7 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query
     return std::make_unique<LibMariaDBResultSet>(static_cast<std::size_t>(mysql_stmt_affected_rows(stmt_)), query);
 }
 
-auto db::LibMariaDBPreparedStatement::executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeUpdate(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {

@@ -53,7 +53,7 @@ std::once_flag           statementLimitRead;
 std::atomic<std::size_t> maxCachedStatements{ 2048U };
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
-auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
+auto makeQueryTimer(std::string_view query) -> xi::final_action<Fn<void()>>
 {
     const auto start = timer::now();
     return xi::finally<Fn<void()>>(
@@ -121,7 +121,7 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
 }
 
 // Find-or-prepare the cached statement for this query on the given connection.
-auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, const std::string& rawQuery) -> PreparedStatement&
+auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, std::string_view rawQuery) -> PreparedStatement&
 {
     auto it = connState.statements.find(rawQuery);
     if (it == connState.statements.end())
@@ -132,13 +132,13 @@ auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, cons
             connState.statements.clear();
         }
 
-        it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
+        it = connState.statements.emplace(std::string(rawQuery), connState.connection->prepare(rawQuery)).first;
     }
 
     return *it->second;
 }
 
-auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::runWithRetry(std::string_view rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
 {
     if (detail::validateQueryLeadingKeyword(rawQuery) == ResultSetType::Invalid)
     {
@@ -187,12 +187,12 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
         }
     }
 
-    ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
+    ShowCriticalFmt("Query Failed after {} retries: {}", queryRetryCount, rawQuery);
     std::this_thread::sleep_for(1s);
     std::terminate();
 }
 
-auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::execute(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
@@ -225,7 +225,7 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
     return runWithRetry(rawQuery, operation);
 }
 
-auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::executeBulk(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
     TracyZoneString(rawQuery);

@@ -32,6 +32,7 @@
 #include <atomic>
 #include <memory>
 #include <string>
+#include <string_view>
 
 namespace db
 {
@@ -57,8 +58,8 @@ struct ConnectionState
 class CachingDatabase : public Database
 {
 public:
-    auto execute(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
-    auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
     void clearStatementCache() override;
@@ -76,12 +77,12 @@ private:
     auto getState() -> detail::ConnectionState&;
 
     // Find-or-prepare the cached statement for this query on the given connection.
-    auto prepareCached(detail::ConnectionState& connState, const std::string& query) -> PreparedStatement&;
+    auto prepareCached(detail::ConnectionState& connState, std::string_view query) -> PreparedStatement&;
 
     // Validate the query, then run `operation` on this thread's connection, retrying on connection loss.
     //
     // Terminates if the connection can't be re-established.
-    auto runWithRetry(const std::string& query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
+    auto runWithRetry(std::string_view query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
 
     // Bumped by purgeStatementCaches; each thread's cache lives in thread-local state, so only its own thread can clear it.
     std::atomic<uint64> purgeGeneration_{ 0 };

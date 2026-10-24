@@ -41,7 +41,7 @@ public:
     LibMariaDBConnection(const LibMariaDBConnection&)                    = delete;
     auto operator=(const LibMariaDBConnection&) -> LibMariaDBConnection& = delete;
 
-    auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> override;
+    auto prepare(std::string_view query) -> std::unique_ptr<PreparedStatement> override;
     auto schema() -> std::string override;
     auto version() -> std::string override;
     auto driverVersion() -> std::string override;

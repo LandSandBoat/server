@@ -23,16 +23,16 @@
 
 #include <common/database/result_set.h>
 
-#include <string>
+#include <string_view>
 
 namespace db::detail
 {
 
 // Inspect the leading keyword of a query to classify it as a Select (queryable),
 // Update (rows-affected only), or Invalid query.
-auto validateQueryLeadingKeyword(const std::string& query) -> ResultSetType;
+auto validateQueryLeadingKeyword(std::string_view query) -> ResultSetType;
 
 // Sanity-check the body of a query (e.g. reject stray "{}" format holes and ';').
-auto validateQueryContent(const std::string& query) -> bool;
+auto validateQueryContent(std::string_view query) -> bool;
 
 } // namespace db::detail
