@@ -273,6 +273,11 @@ public:
     //   Requests the scheduler to stop all execution and joins threads.
     void stop()
     {
+        if (std::this_thread::get_id() != mainThreadId_)
+        {
+            throw std::runtime_error("Scheduler::stop called from non-main thread");
+        }
+
         closeRequested_.store(true, std::memory_order_relaxed);
 
         // NOTE: The order of operations is important here
