@@ -53,4 +53,28 @@ describe('Rhapsodies of Vana\'diel', function()
             end)
         end
     end)
+
+    describe('1-18 - Ring My Bell', function()
+        before_each(function()
+            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
+            player:gotoZone(xi.zone.NORG)
+        end)
+
+        it('is blocked during Dawn before The Chains Fall Free', function()
+            xi.mission.setVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status', 7)
+
+            player.entities:gotoAndTrigger('_700', { eventId = 283 })
+
+            player.assert:hasMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
+        end)
+
+        it('plays once The Chains Fall Free has been seen', function()
+            xi.mission.setVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status', 8)
+
+            player.entities:gotoAndTrigger('_700', { eventId = 284 })
+
+            player.assert:hasMission(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
+        end)
+    end)
 end)

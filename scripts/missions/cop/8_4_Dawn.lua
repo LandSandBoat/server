@@ -2,7 +2,7 @@
 -- Dawn
 -- Promathia 8-4
 -----------------------------------
--- !addmission 6 828
+-- !addmission 6 840
 -- Hinaree      : !pos -301.535 -10.199 97.698 230
 -- Chipmy-Popmy : !pos -183.02 -2.835 73.905 240
 -- Warmachine   : !pos -345.236 -3.188 -976.563 4

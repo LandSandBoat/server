@@ -392,7 +392,7 @@ xi.rhapsodies.charactersAvailable = function(player)
             if
                 expansionLog ~= xi.mission.log_id.COP or       -- Mission log isn't CoP -> false
                 expansionMission ~= xi.mission.id.cop.DAWN or  -- Mission log is CoP, but mission isn't "Dawn" -> false
-                player:getCharVar('Mission[6][828]Status') < 4 -- Mission log is CoP and mission is "Dawn", but status for "Dawn" is under 4 -> false
+                xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') < 8 -- Mission is "Dawn", but The Chains Fall Free has not been seen -> false
             then
                 return false -- Character is unavailable.
             end
