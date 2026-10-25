@@ -58,6 +58,11 @@ using ScalarProjection = decltype([](const int value)
 static_assert(BulkAcceptsProjection<TupleProjection>);
 static_assert(!BulkAcceptsProjection<ScalarProjection>);
 
+// A requires-expression doesn't evaluate consteval calls, so it can't see a wrong placeholder count or a
+// non-constant query rejected. These assert the values those checks compare instead.
+static_assert(db::detail::rowWidth<TupleProjection, int>() == 1);
+static_assert(db::detail::rowWidth<ScalarProjection, int>() == 0);
+
 template <typename Text>
 concept AcceptsQueryText = requires(Text text) { db::preparedStmt(text); };
 
@@ -402,6 +407,26 @@ struct BlobRecord
 };
 
 static_assert(sizeof(BlobRecord) == 8);
+
+template <typename Value>
+concept Binds = requires(Value value) { db::preparedStmt("SELECT ?", value); };
+
+enum class BindColour : uint16
+{
+    Red = 513,
+};
+
+static_assert(Binds<int8> && Binds<uint8> && Binds<int16> && Binds<uint16> && Binds<int32> && Binds<uint32>);
+static_assert(Binds<int64> && Binds<uint64> && Binds<std::size_t> && Binds<bool> && Binds<float> && Binds<double>);
+static_assert(Binds<std::string> && Binds<const char*>);
+static_assert(Binds<BindColour>, "An enum binds as its underlying type");
+static_assert(Binds<char (&)[21]>, "A char buffer binds as text up to its first zero byte");
+static_assert(Binds<uint8 (&)[24]> && Binds<std::array<uint16, 3>&> && Binds<BlobRecord&>, "Trivially copyable values bind as blobs");
+static_assert(Binds<const BlobRecord&>, "A blob binds from a const value");
+static_assert(!Binds<uint8*>, "A pointer would bind its own address");
+static_assert(!Binds<std::vector<int>>, "Only trivially copyable values have fixed bytes");
+static_assert(!Binds<std::string_view>, "Bind a std::string instead");
+static_assert(!Binds<char>, "A plain char is neither int8 nor uint8");
 
 } // namespace
 

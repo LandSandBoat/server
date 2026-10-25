@@ -36,6 +36,21 @@
 namespace db::detail
 {
 
+// The scalar types lowerBoundValue binds as themselves.
+template <typename U>
+inline constexpr bool isBindableScalar = std::is_same_v<U, int8> || std::is_same_v<U, uint8> || std::is_same_v<U, int16> || std::is_same_v<U, uint16> ||
+                                         std::is_same_v<U, int32> || std::is_same_v<U, uint32> || std::is_same_v<U, int64> || std::is_same_v<U, uint64> ||
+                                         std::is_same_v<U, size_t> || std::is_same_v<U, bool> || std::is_same_v<U, float> || std::is_same_v<U, double> ||
+                                         std::is_same_v<U, std::string> || std::is_same_v<U, const char*> || std::is_same_v<U, char*>;
+
+// Any other trivially copyable value or array binds as its bytes. A pointer would bind its own address, so it doesn't.
+template <typename T>
+inline constexpr bool isBindableBlob = is_blob_v<enum_decay_t<std::remove_cvref_t<T>>> && std::is_trivially_copyable_v<std::remove_cvref_t<T>> &&
+                                       !std::is_pointer_v<std::remove_cvref_t<T>>;
+
+template <typename T>
+concept IsBindable = isBindableScalar<enum_decay_t<std::remove_cvref_t<T>>> || isBindableBlob<T>;
+
 // Lower a single C++ argument into a type-erased BoundValue, appending it to the parameter list.
 template <typename T>
 auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void;

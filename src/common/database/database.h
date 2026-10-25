@@ -164,11 +164,11 @@ auto setDatabase(Database* database) -> void;
 // @return A unique pointer to the result set of the query.
 // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
 // @note Everything in database-land is 1-indexed, not 0-indexed.
-template <typename... Args>
+template <detail::IsBindable... Args>
 auto preparedStmt(detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 // As above, for a query picked at runtime with db::selected(). The placeholder count is checked when it runs.
-template <typename... Args>
+template <detail::IsBindable... Args>
 auto preparedStmt(detail::SelectedQuery selection, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 // Send every row of `rows` through `query` in one round trip.
@@ -224,13 +224,13 @@ auto detail::runPrepared(const Query query, Args&&... args) -> std::unique_ptr<R
     return getDatabase().execute(query, params);
 }
 
-template <typename... Args>
+template <detail::IsBindable... Args>
 auto preparedStmt(const detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     return detail::runPrepared(query.query(), std::forward<Args>(args)...);
 }
 
-template <typename... Args>
+template <detail::IsBindable... Args>
 auto preparedStmt(const detail::SelectedQuery selection, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     const auto query = selection.query;
