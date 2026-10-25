@@ -196,18 +196,19 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
 
     auto* PInserted = PStorage->GetItem(SlotID);
 
-    constexpr auto Query = db::Query("INSERT INTO char_inventory("
-                                     "charid, "
-                                     "location, "
-                                     "slot, "
-                                     "itemId, "
-                                     "quantity, "
-                                     "signature, "
-                                     "extra) "
-                                     "VALUES(?, ?, ?, ?, ?, ?, ?) "
-                                     "LIMIT 1");
+    constexpr auto query = db::Query(
+        "INSERT INTO char_inventory("
+        "charid, "
+        "location, "
+        "slot, "
+        "itemId, "
+        "quantity, "
+        "signature, "
+        "extra) "
+        "VALUES(?, ?, ?, ?, ?, ?, ?) "
+        "LIMIT 1");
 
-    if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PInserted->getID(), PInserted->getQuantity(), PInserted->getSignature(), PInserted->m_extra))
+    if (!db::preparedStmt(query, PChar->id, LocationID, SlotID, PInserted->getID(), PInserted->getQuantity(), PInserted->getSignature(), PInserted->m_extra))
     {
         ShowError("AddItem: Cannot insert item to database");
         PStorage->RemoveItem(SlotID);
@@ -245,9 +246,9 @@ auto restoreItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, std::unique
 
     auto* PRestored = PStorage->GetItem(SlotID);
 
-    constexpr auto Query = db::Query("INSERT INTO char_inventory(charid, location, slot, itemId, quantity, signature, extra) VALUES(?, ?, ?, ?, ?, ?, ?) LIMIT 1");
+    constexpr auto query = db::Query("INSERT INTO char_inventory(charid, location, slot, itemId, quantity, signature, extra) VALUES(?, ?, ?, ?, ?, ?, ?) LIMIT 1");
 
-    if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PRestored->getID(), quantity, PRestored->getSignature(), PRestored->m_extra))
+    if (!db::preparedStmt(query, PChar->id, LocationID, SlotID, PRestored->getID(), quantity, PRestored->getSignature(), PRestored->m_extra))
     {
         ShowError("RestoreItem: Cannot insert item to database");
         PStorage->RemoveItem(SlotID);

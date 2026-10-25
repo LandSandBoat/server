@@ -66,14 +66,15 @@ void LoadMobSpellList()
 {
     PMobSpellList[0] = std::make_unique<CMobSpellList>(0); // Add empty spell list for mobSpellListId 0
 
-    constexpr auto query = db::Query("SELECT mob_spell_lists.spell_list_id, "
-                                     "mob_spell_lists.spell_id, "
-                                     "mob_spell_lists.min_level, "
-                                     "mob_spell_lists.max_level, "
-                                     "spell_list.content_tag "
-                                     "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
-                                     "WHERE spell_list_id < ? "
-                                     "ORDER BY min_level ASC");
+    constexpr auto query = db::Query(
+        "SELECT mob_spell_lists.spell_list_id, "
+        "mob_spell_lists.spell_id, "
+        "mob_spell_lists.min_level, "
+        "mob_spell_lists.max_level, "
+        "spell_list.content_tag "
+        "FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id "
+        "WHERE spell_list_id < ? "
+        "ORDER BY min_level ASC");
 
     const auto rset = db::preparedStmt(query, MAX_MOBSPELLLIST_ID);
     FOR_DB_MULTIPLE_RESULTS(rset)

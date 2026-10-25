@@ -67,27 +67,28 @@ void LoadPetList()
 {
     FreePetList();
 
-    constexpr auto query = db::Query("SELECT "
-                                     "pet_list.petid, "
-                                     "pet_list.name, "
-                                     "modelid, "
-                                     "minLevel, "
-                                     "maxLevel, "
-                                     "time, "
-                                     "mob_pools.speciesid, "
-                                     "mob_pools.mJob, "
-                                     "mob_pools.sJob, "
-                                     "mob_pools.cmbSkill,"
-                                     "pet_list.element, "
-                                     "hasSpellScript, spellList, "
-                                     "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
-                                     "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
-                                     "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
-                                     "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, stun_res_rank, gravity_res_rank, "
-                                     "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType, "
-                                     "mob_pools.modelSize, mob_pools.modelHitboxSize "
-                                     "FROM pet_list, mob_pools, mob_resistances "
-                                     "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id");
+    constexpr auto query = db::Query(
+        "SELECT "
+        "pet_list.petid, "
+        "pet_list.name, "
+        "modelid, "
+        "minLevel, "
+        "maxLevel, "
+        "time, "
+        "mob_pools.speciesid, "
+        "mob_pools.mJob, "
+        "mob_pools.sJob, "
+        "mob_pools.cmbSkill,"
+        "pet_list.element, "
+        "hasSpellScript, spellList, "
+        "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
+        "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
+        "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
+        "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, stun_res_rank, gravity_res_rank, "
+        "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType, "
+        "mob_pools.modelSize, mob_pools.modelHitboxSize "
+        "FROM pet_list, mob_pools, mob_resistances "
+        "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id");
 
     const auto rset = db::preparedStmt(query);
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -1818,13 +1819,14 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         petType = PET_TYPE::WYVERN;
 
-        constexpr auto query = db::Query("SELECT "
-                                         "pet_name.name, "
-                                         "char_pet.wyvernid "
-                                         "FROM pet_name, char_pet "
-                                         "WHERE pet_name.id = char_pet.wyvernid AND "
-                                         "char_pet.charid = ?");
-        const auto     rset  = db::preparedStmt(query, PMaster->id);
+        constexpr auto query = db::Query(
+            "SELECT "
+            "pet_name.name, "
+            "char_pet.wyvernid "
+            "FROM pet_name, char_pet "
+            "WHERE pet_name.id = char_pet.wyvernid AND "
+            "char_pet.charid = ?");
+        const auto rset = db::preparedStmt(query, PMaster->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             const auto wyvernid = rset->get<uint16>("wyvernid");
@@ -1840,9 +1842,10 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         petType = PET_TYPE::CHOCOBO;
 
-        constexpr auto query = db::Query("SELECT char_pet.chocoboid "
-                                         "FROM char_pet "
-                                         "WHERE char_pet.charid = ?");
+        constexpr auto query = db::Query(
+            "SELECT char_pet.chocoboid "
+            "FROM char_pet "
+            "WHERE char_pet.charid = ?");
 
         const auto rset = db::preparedStmt(query, PMaster->id);
         FOR_DB_SINGLE_RESULT(rset)
@@ -1856,10 +1859,11 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
 
                 PPetData->name.clear();
 
-                constexpr auto subquery = db::Query("SELECT pet_name.name "
-                                                    "FROM pet_name "
-                                                    "WHERE pet_name.id = ? OR pet_name.id = ?");
-                const auto     subrset  = db::preparedStmt(subquery, chocoboname1, chocoboname2);
+                constexpr auto subquery = db::Query(
+                    "SELECT pet_name.name "
+                    "FROM pet_name "
+                    "WHERE pet_name.id = ? OR pet_name.id = ?");
+                const auto subrset = db::preparedStmt(subquery, chocoboname1, chocoboname2);
                 FOR_DB_SINGLE_RESULT(subrset)
                 {
                     if (chocoboname1 != 0 && chocoboname2 != 0)

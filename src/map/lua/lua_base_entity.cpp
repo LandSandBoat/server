@@ -5883,12 +5883,13 @@ auto CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& extr
                 slipExtra[i] |= extraVec[i];
             }
 
-            constexpr auto Query = db::Query("UPDATE char_inventory "
-                                             "SET extra = ? "
-                                             "WHERE charid = ? AND location = ? AND slot = ? "
-                                             "LIMIT 1");
+            constexpr auto query = db::Query(
+                "UPDATE char_inventory "
+                "SET extra = ? "
+                "WHERE charid = ? AND location = ? AND slot = ? "
+                "LIMIT 1");
 
-            if (!db::preparedStmt(Query, slipExtra, PChar->id, slip->getLocationID(), slip->getSlotID()))
+            if (!db::preparedStmt(query, slipExtra, PChar->id, slip->getLocationID(), slip->getSlotID()))
             {
                 throw std::runtime_error(fmt::format("storeWithPorterMoogle: {} could not record the gear on the slip", PChar->getName()));
             }
@@ -5996,12 +5997,13 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
     // cleared only after the item lands, so a full inventory does not lose it
     slip->m_extra[extraId] &= extraData;
 
-    constexpr auto Query = db::Query("UPDATE char_inventory "
-                                     "SET extra = ? "
-                                     "WHERE charid = ? AND location = ? AND slot = ? "
-                                     "LIMIT 1");
+    constexpr auto query = db::Query(
+        "UPDATE char_inventory "
+        "SET extra = ? "
+        "WHERE charid = ? AND location = ? AND slot = ? "
+        "LIMIT 1");
 
-    db::preparedStmt(Query, slip->m_extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    db::preparedStmt(query, slip->m_extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     (void)transaction->commit();
 }
@@ -11159,15 +11161,16 @@ void CLuaBaseEntity::capAllSkills() const
     {
         for (uint8 i = static_cast<uint8>(xi::SkillType::HandToHand); i <= static_cast<uint8>(xi::SkillType::Handbell); ++i) // For xi::SkillType::HandToHand (1) - xi::SkillType::Handbell (45)
         {
-            constexpr auto Query = db::Query("INSERT INTO char_skills "
-                                             "SET "
-                                             "charid = ?, "
-                                             "skillid = ?, "
-                                             "value = ?, "
-                                             "rank = ? "
-                                             "ON DUPLICATE KEY UPDATE value = ?, rank = ?");
+            constexpr auto query = db::Query(
+                "INSERT INTO char_skills "
+                "SET "
+                "charid = ?, "
+                "skillid = ?, "
+                "value = ?, "
+                "rank = ? "
+                "ON DUPLICATE KEY UPDATE value = ?, rank = ?");
 
-            db::preparedStmt(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
+            db::preparedStmt(query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
 
             uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<xi::SkillType>(i), PChar->GetMJob(), PChar->GetMLevel());
             PChar->RealSkills.skill[i]    = maxSkill; // set to capped
@@ -20379,40 +20382,41 @@ auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
 
     // Check to see if the user already has a chocobo
     {
-        constexpr auto Query = db::Query("SELECT "
-                                         "charid, "
-                                         "first_name, "
-                                         "last_name, "
-                                         "sex, "
-                                         "UNIX_TIMESTAMP(`created`), "
-                                         "last_update_age, "
-                                         "stage, "
-                                         "location, "
-                                         "color, "
-                                         "allele1, "
-                                         "allele2, "
-                                         "allele3, "
-                                         "strength, "
-                                         "endurance, "
-                                         "discernment, "
-                                         "receptivity, "
-                                         "affection, "
-                                         "energy, "
-                                         "satisfaction, "
-                                         "conditions, "
-                                         "ability1, "
-                                         "ability2, "
-                                         "personality, "
-                                         "weather_preference, "
-                                         "hunger, "
-                                         "care_plan, "
-                                         "held_item, "
-                                         "locked_plan, "
-                                         "appearance, "
-                                         "walk_progress "
-                                         "FROM char_chocobos WHERE charid = ? LIMIT 1");
+        constexpr auto query = db::Query(
+            "SELECT "
+            "charid, "
+            "first_name, "
+            "last_name, "
+            "sex, "
+            "UNIX_TIMESTAMP(`created`), "
+            "last_update_age, "
+            "stage, "
+            "location, "
+            "color, "
+            "allele1, "
+            "allele2, "
+            "allele3, "
+            "strength, "
+            "endurance, "
+            "discernment, "
+            "receptivity, "
+            "affection, "
+            "energy, "
+            "satisfaction, "
+            "conditions, "
+            "ability1, "
+            "ability2, "
+            "personality, "
+            "weather_preference, "
+            "hunger, "
+            "care_plan, "
+            "held_item, "
+            "locked_plan, "
+            "appearance, "
+            "walk_progress "
+            "FROM char_chocobos WHERE charid = ? LIMIT 1");
 
-        const auto rset = db::preparedStmt(Query, m_PBaseEntity->id);
+        const auto rset = db::preparedStmt(query, m_PBaseEntity->id);
         if (!rset)
         {
             ShowDebug("SELECT Query failed");
@@ -20482,70 +20486,71 @@ auto CLuaBaseEntity::setChocoboRaisingInfo(const sol::table& table) -> bool
 
     ShowDebugFmt("Setting Raising Chocobo Info ({})", m_PBaseEntity->getName());
 
-    constexpr auto Query = db::Query("INSERT INTO char_chocobos SET "
-                                     "charid = ?, "
-                                     "first_name = ?, "
-                                     "last_name = ?, "
-                                     "sex = ?, "
-                                     "created = FROM_UNIXTIME(?), "
-                                     "last_update_age = ?, "
-                                     "stage = ?, "
-                                     "location = ?, "
-                                     "color = ?, "
-                                     "allele1 = ?, "
-                                     "allele2 = ?, "
-                                     "allele3 = ?, "
-                                     "strength = ?, "
-                                     "endurance = ?, "
-                                     "discernment = ?, "
-                                     "receptivity = ?, "
-                                     "affection = ?, "
-                                     "energy = ?, "
-                                     "satisfaction = ?, "
-                                     "conditions = ?, "
-                                     "ability1 = ?, "
-                                     "ability2 = ?, "
-                                     "personality = ?, "
-                                     "weather_preference = ?, "
-                                     "hunger = ?, "
-                                     "care_plan = ?, "
-                                     "held_item = ?, "
-                                     "locked_plan = ?, "
-                                     "appearance = ?, "
-                                     "walk_progress = ? "
-                                     "ON DUPLICATE KEY UPDATE "
-                                     "first_name = VALUES(first_name), "
-                                     "last_name = VALUES(last_name), "
-                                     "sex = VALUES(sex), "
-                                     "created = VALUES(created), "
-                                     "last_update_age = VALUES(last_update_age), "
-                                     "stage = VALUES(stage), "
-                                     "location = VALUES(location), "
-                                     "color = VALUES(color), "
-                                     "allele1 = VALUES(allele1), "
-                                     "allele2 = VALUES(allele2), "
-                                     "allele3 = VALUES(allele3), "
-                                     "strength = VALUES(strength), "
-                                     "endurance = VALUES(endurance), "
-                                     "discernment = VALUES(discernment), "
-                                     "receptivity = VALUES(receptivity), "
-                                     "affection = VALUES(affection), "
-                                     "energy = VALUES(energy), "
-                                     "satisfaction = VALUES(satisfaction), "
-                                     "conditions = VALUES(conditions), "
-                                     "ability1 = VALUES(ability1), "
-                                     "ability2 = VALUES(ability2), "
-                                     "personality = VALUES(personality), "
-                                     "weather_preference = VALUES(weather_preference), "
-                                     "hunger = VALUES(hunger), "
-                                     "care_plan = VALUES(care_plan), "
-                                     "held_item = VALUES(held_item), "
-                                     "locked_plan = VALUES(locked_plan), "
-                                     "appearance = VALUES(appearance), "
-                                     "walk_progress = VALUES(walk_progress)");
+    constexpr auto query = db::Query(
+        "INSERT INTO char_chocobos SET "
+        "charid = ?, "
+        "first_name = ?, "
+        "last_name = ?, "
+        "sex = ?, "
+        "created = FROM_UNIXTIME(?), "
+        "last_update_age = ?, "
+        "stage = ?, "
+        "location = ?, "
+        "color = ?, "
+        "allele1 = ?, "
+        "allele2 = ?, "
+        "allele3 = ?, "
+        "strength = ?, "
+        "endurance = ?, "
+        "discernment = ?, "
+        "receptivity = ?, "
+        "affection = ?, "
+        "energy = ?, "
+        "satisfaction = ?, "
+        "conditions = ?, "
+        "ability1 = ?, "
+        "ability2 = ?, "
+        "personality = ?, "
+        "weather_preference = ?, "
+        "hunger = ?, "
+        "care_plan = ?, "
+        "held_item = ?, "
+        "locked_plan = ?, "
+        "appearance = ?, "
+        "walk_progress = ? "
+        "ON DUPLICATE KEY UPDATE "
+        "first_name = VALUES(first_name), "
+        "last_name = VALUES(last_name), "
+        "sex = VALUES(sex), "
+        "created = VALUES(created), "
+        "last_update_age = VALUES(last_update_age), "
+        "stage = VALUES(stage), "
+        "location = VALUES(location), "
+        "color = VALUES(color), "
+        "allele1 = VALUES(allele1), "
+        "allele2 = VALUES(allele2), "
+        "allele3 = VALUES(allele3), "
+        "strength = VALUES(strength), "
+        "endurance = VALUES(endurance), "
+        "discernment = VALUES(discernment), "
+        "receptivity = VALUES(receptivity), "
+        "affection = VALUES(affection), "
+        "energy = VALUES(energy), "
+        "satisfaction = VALUES(satisfaction), "
+        "conditions = VALUES(conditions), "
+        "ability1 = VALUES(ability1), "
+        "ability2 = VALUES(ability2), "
+        "personality = VALUES(personality), "
+        "weather_preference = VALUES(weather_preference), "
+        "hunger = VALUES(hunger), "
+        "care_plan = VALUES(care_plan), "
+        "held_item = VALUES(held_item), "
+        "locked_plan = VALUES(locked_plan), "
+        "appearance = VALUES(appearance), "
+        "walk_progress = VALUES(walk_progress)");
 
     const auto rset = db::preparedStmt(
-        Query,
+        query,
         m_PBaseEntity->id,
         table.get_or<std::string>("first_name", "Chocobo"),
         table.get_or<std::string>("last_name", "Chocobo"),
@@ -20641,12 +20646,13 @@ void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
                         PMannequin->setMannequinRace(race);
                         PMannequin->setMannequinPose(pose);
 
-                        constexpr auto fmtQuery = db::Query("UPDATE char_inventory "
-                                                            "SET extra = ? "
-                                                            "WHERE charid = ? AND itemId = ? "
-                                                            "LIMIT 1");
+                        constexpr auto query = db::Query(
+                            "UPDATE char_inventory "
+                            "SET extra = ? "
+                            "WHERE charid = ? AND itemId = ? "
+                            "LIMIT 1");
 
-                        if (!db::preparedStmt(fmtQuery, PMannequin->m_extra, PChar->id, PMannequin->getID()))
+                        if (!db::preparedStmt(query, PMannequin->m_extra, PChar->id, PMannequin->getID()))
                         {
                             ShowError("lua_baseentity::setMannequinPose: Cannot insert item to database");
                         }
@@ -20739,12 +20745,13 @@ auto CLuaBaseEntity::getContestRewardStatus() -> sol::table
 
     if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        constexpr auto Query = db::Query("SELECT contestrank, share "
-                                         "FROM   fishing_contest_entries "
-                                         "WHERE  charid = ? "
-                                         "AND    claimed != 1");
+        constexpr auto query = db::Query(
+            "SELECT contestrank, share "
+            "FROM   fishing_contest_entries "
+            "WHERE  charid = ? "
+            "AND    claimed != 1");
 
-        auto ret = db::preparedStmt(Query, PChar->id);
+        auto ret = db::preparedStmt(query, PChar->id);
         if (ret && ret->rowsCount() > 0 && ret->next())
         {
             reward["rank"]  = ret->get<uint8>("contestrank");

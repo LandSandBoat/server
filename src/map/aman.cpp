@@ -65,15 +65,16 @@ const auto calculateAssistExpiry = [](CCharEntity* PChar, const uint32 playtimeE
 CAMANContainer::CAMANContainer(CCharEntity* PChar)
 : m_player(PChar)
 {
-    constexpr auto fmtQuery = db::Query("SELECT "
-                                        "mentor, "
-                                        "DATEDIFF(CURRENT_TIMESTAMP, last_logout) AS days_since_logout, "
-                                        "muted "
-                                        "FROM chars "
-                                        "LEFT JOIN char_flags ON chars.charid = char_flags.charid "
-                                        "WHERE chars.charid = ?");
+    constexpr auto query = db::Query(
+        "SELECT "
+        "mentor, "
+        "DATEDIFF(CURRENT_TIMESTAMP, last_logout) AS days_since_logout, "
+        "muted "
+        "FROM chars "
+        "LEFT JOIN char_flags ON chars.charid = char_flags.charid "
+        "WHERE chars.charid = ?");
 
-    if (const auto rset = db::preparedStmt(fmtQuery, m_player->id); rset && rset->rowsCount() && rset->next())
+    if (const auto rset = db::preparedStmt(query, m_player->id); rset && rset->rowsCount() && rset->next())
     {
         const auto logoutDiff = rset->get<uint32>("days_since_logout");
         m_mentorUnlocked      = rset->get<uint32>("mentor") > 0;

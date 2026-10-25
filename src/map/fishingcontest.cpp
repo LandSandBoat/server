@@ -345,16 +345,17 @@ auto WriteContestData() -> bool
     }
 
     // Update the DB with the current contest data (in case the contest is changed)
-    constexpr auto Query = db::Query("UPDATE `fishing_contest` SET "
-                                     "status = ?, "        // Status
-                                     "criteria = ?, "      // Criteria
-                                     "measure = ?, "       // Measure
-                                     "fishid = ?, "        // Fish ID
-                                     "starttime = ?, "     // Start Time
-                                     "nextstagetime = ?"); // Stage Change Time
+    constexpr auto query = db::Query(
+        "UPDATE `fishing_contest` SET "
+        "status = ?, "        // Status
+        "criteria = ?, "      // Criteria
+        "measure = ?, "       // Measure
+        "fishid = ?, "        // Fish ID
+        "starttime = ?, "     // Start Time
+        "nextstagetime = ?"); // Stage Change Time
 
     auto rset = db::preparedStmt(
-        Query,
+        query,
         static_cast<uint8>(CurrentFishingContest.status),
         static_cast<uint8>(CurrentFishingContest.criteria),
         static_cast<uint8>(CurrentFishingContest.measure),
@@ -381,16 +382,17 @@ auto WriteInitialContestData() -> bool
     }
 
     // Update the DB with the current contest data (in case the contest is changed)
-    constexpr auto Query = db::Query("INSERT INTO `fishing_contest` VALUES ("
-                                     "?, "  // Status
-                                     "?, "  // Criteria
-                                     "?, "  // Measure
-                                     "?, "  // Fish ID
-                                     "?, "  // Start Time
-                                     "?)"); // Stage Change Time
+    constexpr auto query = db::Query(
+        "INSERT INTO `fishing_contest` VALUES ("
+        "?, "  // Status
+        "?, "  // Criteria
+        "?, "  // Measure
+        "?, "  // Fish ID
+        "?, "  // Start Time
+        "?)"); // Stage Change Time
 
     auto rset = db::preparedStmt(
-        Query,
+        query,
         static_cast<uint8>(CurrentFishingContest.status),
         static_cast<uint8>(CurrentFishingContest.criteria),
         static_cast<uint8>(CurrentFishingContest.measure),
@@ -572,11 +574,12 @@ auto ClaimContestReward(CCharEntity* PChar) -> bool
         return false;
     }
 
-    constexpr auto Query = db::Query("UPDATE fishing_contest_entries "
-                                     "SET claimed = 1 "
-                                     "WHERE charid = ?");
+    constexpr auto query = db::Query(
+        "UPDATE fishing_contest_entries "
+        "SET claimed = 1 "
+        "WHERE charid = ?");
 
-    auto rset = db::preparedStmt(Query, PChar->id);
+    auto rset = db::preparedStmt(query, PChar->id);
     if (!rset)
     {
         ShowDebug("Unable to remove award on fishing contest for player %s.", PChar->getName());
@@ -597,10 +600,11 @@ auto GetFishingContestHistory(CCharEntity* PChar) -> FishingContestHistory
         return history;
     }
 
-    constexpr auto Query = db::Query("SELECT contest_rank_1, contest_rank_2, contest_rank_3, contest_rank_4 "
-                                     "FROM char_fishing_contest_history "
-                                     "WHERE charid = ?");
-    auto           rset  = db::preparedStmt(Query, PChar->id);
+    constexpr auto query = db::Query(
+        "SELECT contest_rank_1, contest_rank_2, contest_rank_3, contest_rank_4 "
+        "FROM char_fishing_contest_history "
+        "WHERE charid = ?");
+    auto rset = db::preparedStmt(query, PChar->id);
 
     if (rset && rset->rowsCount() > 0 && rset->next())
     {
@@ -684,10 +688,11 @@ void InitNewContest(uint16 fishId, FISHING_CONTEST_CRITERIA criteria, FISHING_CO
 void LoadContestParameters()
 {
     // load the overhead contest parameters
-    constexpr auto Query = db::Query("SELECT status, criteria, measure, fishid, starttime, nextstagetime "
-                                     "FROM fishing_contest");
+    constexpr auto query = db::Query(
+        "SELECT status, criteria, measure, fishid, starttime, nextstagetime "
+        "FROM fishing_contest");
 
-    auto rset = db::preparedStmt(Query);
+    auto rset = db::preparedStmt(query);
 
     if (rset && rset->rowsCount() > 0 && rset->next())
     {
@@ -709,25 +714,26 @@ void LoadContestParameters()
 void LoadContestEntries()
 {
     // load the current entry pool
-    constexpr auto Query = db::Query("SELECT "
-                                     "c.charname AS charname, "
-                                     "e.mjob AS mjob, "
-                                     "e.sjob AS sjob, "
-                                     "e.mlevel AS mlevel, "
-                                     "e.slevel AS slevel, "
-                                     "e.race AS race, "
-                                     "e.allegiance AS allegiance, "
-                                     "e.fishRank AS fishRank, "
-                                     "e.score AS score, "
-                                     "e.submitTime AS submitTime, "
-                                     "e.contestRank AS contestRank, "
-                                     "e.share AS share "
-                                     "FROM fishing_contest_entries e "
-                                     "LEFT JOIN chars c "
-                                     "ON c.charid = e.charid "
-                                     "ORDER BY contestRank");
+    constexpr auto query = db::Query(
+        "SELECT "
+        "c.charname AS charname, "
+        "e.mjob AS mjob, "
+        "e.sjob AS sjob, "
+        "e.mlevel AS mlevel, "
+        "e.slevel AS slevel, "
+        "e.race AS race, "
+        "e.allegiance AS allegiance, "
+        "e.fishRank AS fishRank, "
+        "e.score AS score, "
+        "e.submitTime AS submitTime, "
+        "e.contestRank AS contestRank, "
+        "e.share AS share "
+        "FROM fishing_contest_entries e "
+        "LEFT JOIN chars c "
+        "ON c.charid = e.charid "
+        "ORDER BY contestRank");
 
-    auto rset = db::preparedStmt(Query);
+    auto rset = db::preparedStmt(query);
 
     if (rset && rset->rowsCount() > 0)
     {
