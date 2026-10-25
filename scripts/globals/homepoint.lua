@@ -184,6 +184,9 @@ end
 
 -- Functions called by homepoint scripts.
 xi.homepoint.onTrigger = function(player, csid, index)
+    -- Examine a Home Point (M)
+    xi.roe.onRecordTrigger(player, 3769)
+
     if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return

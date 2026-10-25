@@ -61,6 +61,9 @@ xi.settings.main =
     ASSIST_CHANNEL_MEMBERSHIP_LENGTH  = 240,  -- How long returnees and new players will have access to the assist channel, in playtime hours.
     ASSIST_CHANNEL_RETURNEE_LOGIN_GAP =  48,  -- How many days must have elapsed before returnees are added to the assist channel.
 
+    -- A.M.A.N. Trove
+    ENABLE_AMAN_TROVE = 1, -- Enables Greyson, the Mars and Venus Orb battlefields and their monthly records.
+
     -- Records of Eminence
     ENABLE_ROE            = 1, -- Enable Records of Eminence
     ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records

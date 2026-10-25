@@ -4409,6 +4409,7 @@ xi.item =
     DIAL_KEY_ANV                        = 9274,
     MARS_ORB                            = 9275,
     VENUS_ORB                           = 9276,
+    SILVER_AMAN_VOUCHER                 = 9277,
     DAMAGE_GAUGE_II                     = 9280,
     KINS_SCALE                          = 9303,
     GINS_SCALE                          = 9304,
