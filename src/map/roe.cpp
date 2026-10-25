@@ -80,7 +80,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {
-            params[datagram.luaKey] = text;
+            params[datagram.luaKey] = *text;
         }
         else
         {
