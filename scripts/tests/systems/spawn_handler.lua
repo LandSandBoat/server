@@ -370,6 +370,41 @@ describe('Spawn Handler', function()
                 crab.assert:isSpawned()
             end
         end)
+
+        it('does not revive Rose Garden during its despawn fade', function()
+            player:gotoZone(xi.zone.YUHTUNGA_JUNGLE)
+            local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
+            local roseGarden = player.entities:get(ID.mob.ROSE_GARDEN)
+
+            DisallowRespawn(ID.mob.ROSE_GARDEN, false)
+            SpawnMob(ID.mob.ROSE_GARDEN)
+
+            -- The spawn wave lands before onMobDespawn blocks the respawn
+            DespawnMob(ID.mob.ROSE_GARDEN)
+            xi.test.world:tick(xi.tick.SPAWN)
+            xi.test.world:tickEntity(roseGarden)
+
+            roseGarden.assert.no:isSpawned()
+        end)
+
+        it('does not reset a live Rose Garden from its previous death', function()
+            player:gotoZone(xi.zone.YUHTUNGA_JUNGLE)
+            local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
+            local roseGarden = player.entities:get(ID.mob.ROSE_GARDEN)
+
+            DisallowRespawn(ID.mob.ROSE_GARDEN, false)
+            SpawnMob(ID.mob.ROSE_GARDEN)
+            player:claimAndKillMob(roseGarden)
+
+            -- The placeholder grows back into Rose Garden
+            DisallowRespawn(ID.mob.ROSE_GARDEN, false)
+            SpawnMob(ID.mob.ROSE_GARDEN)
+            roseGarden:setHP(1000)
+
+            xi.test.world:tick(xi.tick.SPAWN)
+
+            assert(roseGarden:getHP() == 1000, 'the live Rose Garden was respawned at full HP')
+        end)
     end)
 
     -- Per-mob spawn windows: spawnHour/despawnHour on mob_spawn_points.
