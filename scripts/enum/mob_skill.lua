@@ -435,6 +435,9 @@ xi.mobSkill =
     LODESONG_1                    =  651,
 
     CHAOTIC_EYE_1                 =  653,
+    DOUBLE_WHAMMY                 =  654,
+
+    GILDED_TORPOR                 =  656,
 
     CATAPULT                      =  658,
     CURSED_SPHERE_1               =  659,
@@ -1504,6 +1507,8 @@ xi.mobSkill =
     SANDPIT_3                     = 3883,
     VENOM_SPRAY_3                 = 3884,
     MANDIBULAR_BITE_3             = 3885,
+
+    KA_THWACK                     = 4167,
 
     MIX_FINAL_ELIXIR              = 4231, -- Monbereaux Trust
 }

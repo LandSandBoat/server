@@ -4436,7 +4436,11 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1573); -- palsynyxi
 INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1574); -- painful_whip
 INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1575); -- suctorial_tentacle
 
--- Next ID : 2114
+INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,588); -- death_trap (Capture needed)
+INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,654); -- double_whammy
+INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,656); -- gilded_torpor
+
+-- Next ID : 2115
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

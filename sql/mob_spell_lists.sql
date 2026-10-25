@@ -5801,7 +5801,24 @@ INSERT INTO `mob_spell_lists` VALUES ('Stormwalker_Frame',566,55,1,255);  -- Aqu
 -- Harlequin_Frame (567)
 INSERT INTO `mob_spell_lists` VALUES ('Harlequin_Frame',567,23,1,255); -- Dia (1~255)
 
--- Next Available: 568
+-- Chest_OPlenty (568)
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,176,1,255); -- Firaga III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,181,1,255); -- Blizzaga III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,186,1,255); -- Aeroga III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,191,1,255); -- Stonega III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,196,1,255); -- Thundaga III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,201,1,255); -- Waterga III (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,205,1,255); -- Flare II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,207,1,255); -- Freeze II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,209,1,255); -- Tornado II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,211,1,255); -- Quake II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,213,1,255); -- Burst II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,215,1,255); -- Flood II (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,219,1,255); -- Comet (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,275,1,255); -- Absorb-TP (1~255) Capture needed
+INSERT INTO `mob_spell_lists` VALUES ('Chest_OPlenty',568,367,1,255); -- Death (1~255)
+
+-- Next Available: 569
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -210,7 +210,8 @@ templates:
     id:            6868
     species:       mimic
     type:          [notorious, battlefield]
-    skill_list_id: 189
+    spell_list_id: 568
+    skill_list_id: 2114
     attributes:
       combat:
         skill: scythe
@@ -232,11 +233,11 @@ templates:
         model_size:       1
         hitbox:          12
       behaviors:
-        aggressive:     true
-        links:          true
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 2500000 # Capture needed
 
   Chlevnik:
     id:            723
@@ -270,7 +271,8 @@ templates:
     id:            6869
     species:       mimic
     type:          [notorious, battlefield]
-    skill_list_id: 189
+    spell_list_id: 568
+    skill_list_id: 2114
     attributes:
       combat:
         skill: scythe
@@ -292,11 +294,11 @@ templates:
         model_size:       1
         hitbox:          12
       behaviors:
-        aggressive:     true
-        links:          true
         true_detection: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 2500000 # Capture needed
 
   Compound_Eyes:
     id:            773
