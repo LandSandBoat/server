@@ -27,8 +27,6 @@
 
 #include <vector>
 
-#include "items/item_shop.h"
-
 #include "charutils.h"
 #include "guild.h"
 #include "item_container.h"

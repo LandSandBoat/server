@@ -68,7 +68,6 @@ SOL_BIND_DEF_CONST(CLuaItem, CItem);
 #include "items/item_general.h"
 #include "items/item_linkshell.h"
 #include "items/item_puppet.h"
-#include "items/item_shop.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemCurrency);
@@ -78,7 +77,6 @@ SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemFurnishing);
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemGeneral);
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemLinkshell);
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemPuppet);
-SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemShop);
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemUsable);
 SOL_BIND_DEF_SUB(CLuaItem, CItem, CItemWeapon);
 
