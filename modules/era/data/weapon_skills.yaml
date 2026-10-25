@@ -1,0 +1,51 @@
+# Weapon skills as they were before the WotG and SoA updates.
+
+weapon_skills:
+  # Starter weapon skills needed 10 skill until the September 2008 update. The tutorial text still says 5.
+  # https://www.bg-wiki.com/ffxi/Version_Update_(09/08/2008)
+  combo:          {level: 10}
+  wasp_sting:     {level: 10}
+  fast_blade:     {level: 10}
+  hard_slash:     {level: 10}
+  raging_axe:     {level: 10}
+  shield_break:   {level: 10}
+  slice:          {level: 10}
+  double_thrust:  {level: 10}
+  blade_rin:      {level: 10}
+  tachi_enpi:     {level: 10}
+  shining_strike: {level: 10}
+  heavy_swing:    {level: 10}
+
+  # Archery and marksmanship weapon skills reached 15 yalms until the May 2012 update.
+  # https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
+  flaming_arrow:    {range: 15, level: 10}
+  piercing_arrow:   {range: 15}
+  dulling_arrow:    {range: 15}
+  sidewinder:       {range: 15}
+  arching_arrow:    {range: 15}
+  empyreal_arrow:   {range: 15}
+  namas_arrow:      {range: 15}
+  refulgent_arrow:  {range: 15}
+  jishnus_radiance: {range: 15}
+  apex_arrow:       {range: 15}
+  hot_shot:         {range: 15, level: 10}
+  split_shot:       {range: 15}
+  sniper_shot:      {range: 15}
+  slug_shot:        {range: 15}
+  heavy_shot:       {range: 15}
+  detonator:        {range: 15}
+  coronach:         {range: 15}
+  trueflight:       {range: 15}
+  leaden_salute:    {range: 15}
+  wildfire:         {range: 15}
+  last_stand:       {range: 15}
+
+  # PUP gained Asuran Fists in the March 2013 update.
+  # https://forum.square-enix.com/ffxi/threads/31310
+  asuran_fists: {jobs: [mnk]}
+
+  # RDM gained Red Lotus Blade, Seraph Blade and Vorpal Blade in the March 2015 update.
+  # https://forum.square-enix.com/ffxi/archive/index.php/t-46531.html
+  red_lotus_blade: {jobs: [war, pld, drk, blu, run]}
+  seraph_blade:    {jobs: [war, pld, drk, blu, run]}
+  vorpal_blade:    {jobs: [war, pld, drk, blu, run]}

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+# Who an action can target, and who its area affects.
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint8_t
+
+values:
+  none:     0x00
+  self:     0x01
+  pet:      0x02 # own pet
+  party:    0x04
+  alliance: 0x08
+  friendly: 0x10 # same allegiance
+  hostile:  0x20 # different allegiance
+  master:   0x40 # own master
+  dead:     0x80

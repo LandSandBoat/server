@@ -36,14 +36,14 @@ public:
     auto getID() const -> uint16;
     auto getJob(xi::Job JobID) -> uint8;
     auto getSkillLevel() const -> uint16;
-    auto getRange() const -> uint8;
+    auto getRange() const -> float;
     auto getElement() const -> uint8;
     auto isElemental() const -> bool;
 
     auto isAoE() const -> bool;
     auto mainOnly() const -> bool; // can only be used as main job
     auto getAoe() const -> uint8;
-    auto getRadius() const -> uint8;
+    auto getRadius() const -> float;
     auto getAnimationId() const -> ActionAnimation;
     auto getAnimationTime() -> timer::duration;
     auto getType() const -> uint8;
@@ -52,13 +52,13 @@ public:
     void setID(uint16 id);
     void setJob(const std::array<uint8, MAX_JOBTYPE>& jobs);
     void setSkillLevel(uint16 level);
-    void setRange(uint8 range);
+    void setRange(float range);
     void setElement(uint8 element);
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
     void setAoe(uint8 aoe);
-    void setRadius(uint8 radius);
+    void setRadius(float radius);
     void setAnimationId(uint8 id);
     void setAnimationTime(timer::duration time);
     void setType(uint8 type);
@@ -83,9 +83,9 @@ private:
     uint8                          m_PrimarySkillchain;
     uint8                          m_SecondarySkillchain;
     uint8                          m_TertiarySkillchain;
-    uint8                          m_Range;
+    float                          m_Range;
     uint8                          m_AOE;
-    uint8                          m_Radius{ 0 };
+    float                          m_Radius{ 0 };
     uint8                          m_mainOnly;
     uint8                          m_unlockId;
 

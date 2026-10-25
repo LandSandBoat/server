@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+
+values:
+  front: 0 # in front of the caster
+  rear:  1 # behind the caster

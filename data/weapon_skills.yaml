@@ -1,0 +1,2400 @@
+# yaml-language-server: $schema=schemas/weapon_skills.schema.json
+
+meta:
+  enum:
+    - cpp:
+        underlying: uint8_t
+        class:      WeaponSkill
+      lua:
+        table: xi.weaponskill
+
+weapon_skills:
+  combo:
+    id:         1
+    skill:      hand_to_hand
+    level:      5
+    jobs:       [war, mnk, thf, nin, pup, dnc]
+    animation:  16
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  shoulder_tackle:
+    id:         2
+    skill:      hand_to_hand
+    level:      40
+    jobs:       [war, mnk, thf, nin, pup, dnc]
+    animation:  17
+    skillchain: [reverberation, impaction]     # BG says impaction, reverberation
+    range:      3
+    target:     [hostile]
+
+  one_inch_punch:
+    id:         3
+    skill:      hand_to_hand
+    level:      75
+    jobs:       [mnk, pup]
+    animation:  18
+    skillchain: [compression]
+    range:      3
+    target:     [hostile]
+
+  backhand_blow:
+    id:         4
+    skill:      hand_to_hand
+    level:      100
+    jobs:       [war, mnk, thf, nin, pup, dnc]
+    animation:  19
+    skillchain: [detonation]
+    range:      3
+    target:     [hostile]
+
+  raging_fists:
+    id:         5
+    skill:      hand_to_hand
+    level:      125
+    jobs:       [mnk, pup]
+    animation:  20
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  spinning_attack:
+    id:         6
+    skill:      hand_to_hand
+    level:      150
+    jobs:       [war, mnk, thf, nin, pup, dnc]
+    animation:  21
+    skillchain: [liquefaction, impaction]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 4}
+
+  howling_fist:
+    id:            7
+    skill:         hand_to_hand
+    level:         200
+    jobs:          [mnk, pup]
+    main_job_only: true
+    animation:     22
+    skillchain:    [transfixion, impaction]
+    range:         3
+    target:        [hostile]
+
+  dragon_kick:
+    id:            8
+    skill:         hand_to_hand
+    level:         225
+    jobs:          [mnk, pup]
+    main_job_only: true
+    animation:     23
+    skillchain:    [fragmentation]
+    range:         3
+    target:        [hostile]
+
+  asuran_fists:
+    id:            9
+    skill:         hand_to_hand
+    level:         250
+    jobs:          [mnk, pup]
+    main_job_only: true
+    unlock:        asuran_fists
+    animation:     24
+    skillchain:    [gravitation, liquefaction]
+    range:         3
+    target:        [hostile]
+
+  final_heaven:
+    id:            10
+    skill:         hand_to_hand
+    main_job_only: true
+    animation:     25
+    skillchain:    [light, fusion]
+    range:         3
+    target:        [hostile]
+
+  ascetics_fury:
+    id:            11
+    skill:         hand_to_hand
+    jobs:          [mnk]
+    main_job_only: true
+    unlock:        ascetics_fury
+    animation:     26
+    skillchain:    [fusion, transfixion]
+    range:         3
+    target:        [hostile]
+
+  stringing_pummel:
+    id:            12
+    skill:         hand_to_hand
+    jobs:          [pup]
+    main_job_only: true
+    unlock:        stringing_pummel
+    animation:     27
+    skillchain:    [gravitation, liquefaction]
+    range:         3
+    target:        [hostile]
+
+  tornado_kick:
+    id:         13
+    skill:      hand_to_hand
+    level:      300
+    jobs:       [mnk, pup]
+    animation:  28
+    skillchain: [induration, impaction, detonation] # Client says induration, detonation, impaction
+    range:      3
+    target:     [hostile]
+
+  victory_smite:
+    id:            14
+    skill:         hand_to_hand
+    jobs:          [mnk, pup]
+    main_job_only: true
+    unlock:        victory_smite
+    animation:     29
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  shijin_spiral:
+    id:            15
+    skill:         hand_to_hand
+    level:         357
+    jobs:          [mnk, pup]
+    main_job_only: true
+    unlock:        shijin_spiral
+    animation:     30
+    skillchain:    [fusion, reverberation]
+    range:         3
+    target:        [hostile]
+
+  wasp_sting:
+    id:         16
+    skill:      dagger
+    level:      5
+    jobs:       [war, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, cor, pup, dnc, sch, geo]
+    animation:  31
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  viper_bite:
+    id:         17
+    skill:      dagger
+    level:      100
+    jobs:       [rdm, thf, brd, rng, nin, dnc]
+    animation:  32
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  shadowstitch:
+    id:         18
+    skill:      dagger
+    level:      70
+    jobs:       [war, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, cor, pup, dnc, sch, geo]
+    animation:  33
+    skillchain: [reverberation]
+    range:      3
+    target:     [hostile]
+
+  gust_slash:
+    id:         19
+    skill:      dagger
+    level:      40
+    jobs:       [war, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, cor, pup, dnc, sch, geo]
+    element:    wind
+    animation:  34
+    skillchain: [detonation]
+    range:      14
+    target:     [hostile]
+
+  cyclone:
+    id:         20
+    skill:      dagger
+    level:      125
+    jobs:       [rdm, thf, brd, rng, nin, dnc]
+    element:    wind
+    animation:  35
+    skillchain: [detonation, impaction]
+    range:      14
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  energy_steal:
+    id:        21
+    skill:     dagger
+    level:     150
+    jobs:      [war, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, cor, pup, dnc, sch, geo]
+    animation: 36
+    range:     3
+    target:    [hostile]
+
+  energy_drain:
+    id:        22
+    skill:     dagger
+    level:     175
+    jobs:      [rdm, thf, brd, rng, nin, dnc]
+    animation: 37
+    range:     3
+    target:    [hostile]
+
+  dancing_edge:
+    id:            23
+    skill:         dagger
+    level:         200
+    jobs:          [thf, dnc]
+    main_job_only: true
+    animation:     38
+    skillchain:    [scission, detonation]
+    range:         3
+    target:        [hostile]
+
+  shark_bite:
+    id:            24
+    skill:         dagger
+    level:         225
+    jobs:          [thf, dnc]
+    main_job_only: true
+    animation:     39
+    skillchain:    [fragmentation]
+    range:         3
+    target:        [hostile]
+
+  evisceration:
+    id:            25
+    skill:         dagger
+    level:         230
+    jobs:          [war, rdm, thf, bst, brd, rng, nin, cor, dnc]
+    main_job_only: true
+    unlock:        evisceration
+    animation:     40
+    skillchain:    [gravitation, transfixion]
+    range:         3
+    target:        [hostile]
+
+  mercy_stroke:
+    id:            26
+    skill:         dagger
+    main_job_only: true
+    animation:     41
+    skillchain:    [darkness, gravitation]
+    range:         3
+    target:        [hostile]
+
+  mandalic_stab:
+    id:            27
+    skill:         dagger
+    jobs:          [thf]
+    main_job_only: true
+    unlock:        mandalic_stab
+    animation:     42
+    skillchain:    [fusion, compression]
+    range:         3
+    target:        [hostile]
+
+  mordant_rime:
+    id:            28
+    skill:         dagger
+    jobs:          [brd]
+    main_job_only: true
+    unlock:        mordant_rime
+    animation:     43
+    skillchain:    [fragmentation, distortion]
+    range:         3
+    target:        [hostile]
+
+  pyrrhic_kleos:
+    id:            29
+    skill:         dagger
+    jobs:          [dnc]
+    main_job_only: true
+    unlock:        pyrrhic_kleos
+    animation:     44
+    skillchain:    [distortion, scission]
+    range:         3
+    target:        [hostile]
+
+  aeolian_edge:
+    id:         30
+    skill:      dagger
+    level:      290
+    jobs:       [rdm, thf, brd, rng, nin, dnc]
+    element:    wind
+    animation:  45
+    skillchain: [scission, detonation, impaction]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  rudras_storm:
+    id:            31
+    skill:         dagger
+    jobs:          [thf, brd, dnc]
+    main_job_only: true
+    unlock:        rudras_storm
+    animation:     236
+    skillchain:    [darkness, distortion]
+    range:         3
+    target:        [hostile]
+
+  fast_blade:
+    id:         32
+    skill:      sword
+    level:      5
+    jobs:       [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    animation:  1
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  burning_blade:
+    id:         33
+    skill:      sword
+    level:      30
+    jobs:       [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    element:    fire
+    animation:  2
+    skillchain: [liquefaction]
+    range:      3
+    target:     [hostile]
+
+  red_lotus_blade:
+    id:         34
+    skill:      sword
+    level:      50
+    jobs:       [war, rdm, pld, drk, blu, run]
+    element:    fire
+    animation:  3
+    skillchain: [liquefaction, detonation]
+    range:      3
+    target:     [hostile]
+
+  flat_blade:
+    id:         35
+    skill:      sword
+    level:      75
+    jobs:       [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    animation:  6
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  shining_blade:
+    id:         36
+    skill:      sword
+    level:      100
+    jobs:       [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    element:    light
+    animation:  4
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  seraph_blade:
+    id:         37
+    skill:      sword
+    level:      125
+    jobs:       [war, rdm, pld, drk, blu, run]
+    element:    light
+    animation:  5
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  circle_blade:
+    id:         38
+    skill:      sword
+    level:      150
+    jobs:       [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    animation:  7
+    skillchain: [reverberation, impaction]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 4}
+
+  spirits_within:
+    id:        39
+    skill:     sword
+    level:     175
+    jobs:      [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc, run]
+    animation: 8
+    range:     3
+    target:    [hostile]
+
+  vorpal_blade:
+    id:         40
+    skill:      sword
+    level:      200
+    jobs:       [war, rdm, pld, drk, blu, run]
+    animation:  9
+    skillchain: [scission, impaction]
+    range:      3
+    target:     [hostile]
+
+  swift_blade:
+    id:            41
+    skill:         sword
+    level:         225
+    jobs:          [pld, run]
+    main_job_only: true
+    animation:     10
+    skillchain:    [gravitation]
+    range:         3
+    target:        [hostile]
+
+  savage_blade:
+    id:            42
+    skill:         sword
+    level:         240
+    jobs:          [war, rdm, pld, drk, blu, cor, run]
+    main_job_only: true
+    unlock:        savage_blade
+    animation:     11
+    skillchain:    [fragmentation, scission]
+    range:         3
+    target:        [hostile]
+
+  knights_of_round:
+    id:            43
+    skill:         sword
+    main_job_only: true
+    animation:     12
+    skillchain:    [light, fusion]
+    range:         3
+    target:        [hostile]
+
+  death_blossom:
+    id:            44
+    skill:         sword
+    jobs:          [rdm]
+    main_job_only: true
+    unlock:        death_blossom
+    animation:     13
+    skillchain:    [fragmentation, distortion]
+    range:         3
+    target:        [hostile]
+
+  atonement:
+    id:            45
+    skill:         sword
+    jobs:          [pld]
+    main_job_only: true
+    unlock:        atonement
+    animation:     14
+    skillchain:    [fusion, reverberation]
+    range:         3
+    target:        [hostile]
+
+  expiacion:
+    id:            46
+    skill:         sword
+    jobs:          [blu]
+    main_job_only: true
+    unlock:        expiacion
+    animation:     15
+    skillchain:    [distortion, scission]
+    range:         3
+    target:        [hostile]
+
+  sanguine_blade:
+    id:        47
+    skill:     sword
+    level:     300
+    jobs:      [war, rdm, pld, drk, blu, run]
+    animation: 230
+    range:     3
+    target:    [hostile]
+
+  hard_slash:
+    id:         48
+    skill:      great_sword
+    level:      5
+    jobs:       [war, pld, drk, run]
+    animation:  106
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  power_slash:
+    id:         49
+    skill:      great_sword
+    level:      30
+    jobs:       [war, pld, drk, run]
+    animation:  107
+    skillchain: [transfixion]
+    range:      3
+    target:     [hostile]
+
+  frostbite:
+    id:         50
+    skill:      great_sword
+    level:      70
+    jobs:       [war, pld, drk, run]
+    element:    ice
+    animation:  108
+    skillchain: [induration]
+    range:      3
+    target:     [hostile]
+
+  freezebite:
+    id:         51
+    skill:      great_sword
+    level:      100
+    jobs:       [war, pld, drk, run]
+    element:    ice
+    animation:  109
+    skillchain: [induration, detonation]
+    range:      3
+    target:     [hostile]
+
+  shockwave:
+    id:         52
+    skill:      great_sword
+    level:      150
+    jobs:       [war, pld, drk, run]
+    animation:  110
+    skillchain: [reverberation]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  crescent_moon:
+    id:         53
+    skill:      great_sword
+    level:      175
+    jobs:       [war, pld, drk, run]
+    animation:  111
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  sickle_moon:
+    id:            54
+    skill:         great_sword
+    level:         200
+    jobs:          [pld, drk, run]
+    main_job_only: true
+    animation:     112
+    skillchain:    [scission, impaction]
+    range:         3
+    target:        [hostile]
+
+  spinning_slash:
+    id:            55
+    skill:         great_sword
+    level:         225
+    jobs:          [pld, drk, run]
+    main_job_only: true
+    animation:     113
+    skillchain:    [fragmentation]
+    range:         3
+    target:        [hostile]
+
+  ground_strike:
+    id:         56
+    skill:      great_sword
+    level:      250
+    jobs:       [war, pld, drk, run]
+    unlock:     ground_strike
+    animation:  114
+    skillchain: [fragmentation, distortion]
+    range:      3
+    target:     [hostile]
+
+  scourge:
+    id:            57
+    skill:         great_sword
+    main_job_only: true
+    animation:     115
+    skillchain:    [light, fusion]
+    range:         3
+    target:        [hostile]
+
+  herculean_slash:
+    id:         58
+    skill:      great_sword
+    level:      290
+    jobs:       [war, pld, drk, run]
+    animation:  116
+    skillchain: [induration, detonation, impaction] # BG says induration, impaction, detonation
+    range:      3
+    target:     [hostile]
+
+  torcleaver:
+    id:            59
+    skill:         great_sword
+    jobs:          [pld, drk]
+    main_job_only: true
+    unlock:        torcleaver
+    animation:     117
+    skillchain:    [light, distortion]
+    range:         3
+    target:        [hostile]
+
+  resolution:
+    id:            60
+    skill:         great_sword
+    level:         357
+    jobs:          [war, pld, drk, run]
+    main_job_only: true
+    unlock:        resolution
+    animation:     118
+    skillchain:    [fragmentation, scission]
+    range:         3
+    target:        [hostile]
+
+  dimidiation:
+    id:            61
+    skill:         great_sword
+    jobs:          [run]
+    main_job_only: true
+    unlock:        dimidiation
+    animation:     119
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  fimbulvetr:
+    id:         62
+    skill:      great_sword
+    animation:  115                                   # TODO: Capture me
+    skillchain: [detonation, compression, distortion]
+    range:      3
+    target:     [hostile]
+
+  raging_axe:
+    id:         64
+    skill:      axe
+    level:      5
+    jobs:       [war, drk, bst, rng, run]
+    animation:  46
+    skillchain: [detonation, impaction]
+    range:      3
+    target:     [hostile]
+
+  smash_axe:
+    id:         65
+    skill:      axe
+    level:      40
+    jobs:       [war, drk, bst, rng, run]
+    animation:  47
+    skillchain: [induration, reverberation]
+    range:      3
+    target:     [hostile]
+
+  gale_axe:
+    id:         66
+    skill:      axe
+    level:      70
+    jobs:       [war, drk, bst, rng, run]
+    animation:  48
+    skillchain: [detonation]
+    range:      3
+    target:     [hostile]
+
+  avalanche_axe:
+    id:         67
+    skill:      axe
+    level:      100
+    jobs:       [war, drk, bst, rng, run]
+    animation:  49
+    skillchain: [scission, impaction]
+    range:      3
+    target:     [hostile]
+
+  spinning_axe:
+    id:         68
+    skill:      axe
+    level:      150
+    jobs:       [war, drk, bst, run]
+    animation:  50
+    skillchain: [liquefaction, scission, impaction]
+    range:      3
+    target:     [hostile]
+
+  rampage:
+    id:         69
+    skill:      axe
+    level:      175
+    jobs:       [war, drk, bst, rng, run]
+    animation:  51
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  calamity:
+    id:            70
+    skill:         axe
+    level:         200
+    jobs:          [war, bst]
+    main_job_only: true
+    animation:     52
+    skillchain:    [scission, impaction]
+    range:         3
+    target:        [hostile]
+
+  mistral_axe:
+    id:            71
+    skill:         axe
+    level:         225
+    jobs:          [war, bst]
+    main_job_only: true
+    animation:     53
+    skillchain:    [fusion]
+    range:         14
+    target:        [hostile]
+
+  decimation:
+    id:            72
+    skill:         axe
+    level:         240
+    jobs:          [war, drk, bst, rng, run]
+    main_job_only: true
+    unlock:        decimation
+    animation:     54
+    skillchain:    [fusion, reverberation]
+    range:         3
+    target:        [hostile]
+
+  onslaught:
+    id:            73
+    skill:         axe
+    main_job_only: true
+    animation:     55
+    skillchain:    [darkness, gravitation]
+    range:         3
+    target:        [hostile]
+
+  primal_rend:
+    id:            74
+    skill:         axe
+    jobs:          [bst]
+    main_job_only: true
+    unlock:        primal_rend
+    element:       light
+    animation:     56
+    skillchain:    [gravitation, reverberation]
+    range:         3
+    target:        [hostile]
+
+  bora_axe:
+    id:         75
+    skill:      axe
+    level:      290
+    jobs:       [war, drk, bst, run]
+    animation:  57
+    skillchain: [scission, detonation] # FFO says detonation, scission
+    range:      14
+    target:     [hostile]
+
+  cloudsplitter:
+    id:            76
+    skill:         axe
+    jobs:          [war, bst]
+    main_job_only: true
+    unlock:        cloudsplitter
+    element:       thunder
+    animation:     58
+    skillchain:    [darkness, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  ruinator:
+    id:            77
+    skill:         axe
+    level:         357
+    jobs:          [war, drk, bst, rng, run]
+    main_job_only: true
+    unlock:        ruinator
+    animation:     59
+    skillchain:    [distortion, detonation]
+    range:         3
+    target:        [hostile]
+
+  blitz:
+    id:         78
+    skill:      axe
+    animation:  55                                       # TODO: Capture me
+    skillchain: [liquefaction, impaction, fragmentation]
+    range:      3
+    target:     [hostile]
+
+  shield_break:
+    id:         80
+    skill:      great_axe
+    level:      5
+    jobs:       [war, drk, run]
+    animation:  91
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  iron_tempest:
+    id:         81
+    skill:      great_axe
+    level:      40
+    jobs:       [war, drk, run]
+    animation:  92
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  sturmwind:
+    id:         82
+    skill:      great_axe
+    level:      70
+    jobs:       [war, drk, run]
+    animation:  93
+    skillchain: [reverberation, scission]
+    range:      3
+    target:     [hostile]
+
+  armor_break:
+    id:         83
+    skill:      great_axe
+    level:      100
+    jobs:       [war, drk, run]
+    animation:  94
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  keen_edge:
+    id:         84
+    skill:      great_axe
+    level:      150
+    jobs:       [war, drk, run]
+    animation:  95
+    skillchain: [compression]
+    range:      3
+    target:     [hostile]
+
+  weapon_break:
+    id:         85
+    skill:      great_axe
+    level:      175
+    jobs:       [war, drk, run]
+    animation:  96
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  raging_rush:
+    id:            86
+    skill:         great_axe
+    level:         200
+    jobs:          [war]
+    main_job_only: true
+    animation:     97
+    skillchain:    [induration, reverberation]
+    range:         3
+    target:        [hostile]
+
+  full_break:
+    id:            87
+    skill:         great_axe
+    level:         225
+    jobs:          [war]
+    main_job_only: true
+    animation:     98
+    skillchain:    [distortion]
+    range:         3
+    target:        [hostile]
+
+  steel_cyclone:
+    id:            88
+    skill:         great_axe
+    level:         240
+    jobs:          [war, drk, run]
+    main_job_only: true
+    unlock:        steel_cyclone
+    animation:     99
+    skillchain:    [distortion, detonation]
+    range:         3
+    target:        [hostile]
+
+  metatron_torment:
+    id:            89
+    skill:         great_axe
+    main_job_only: true
+    animation:     100
+    skillchain:    [light, fusion]
+    range:         3
+    target:        [hostile]
+
+  kings_justice:
+    id:            90
+    skill:         great_axe
+    jobs:          [war]
+    main_job_only: true
+    unlock:        kings_justice
+    animation:     101
+    skillchain:    [fragmentation, scission]
+    range:         3
+    target:        [hostile]
+
+  fell_cleave:
+    id:         91
+    skill:      great_axe
+    level:      300
+    jobs:       [war, drk, run]
+    animation:  102
+    skillchain: [scission, detonation, impaction] # FFO says detonation, scission
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 4}
+
+  ukkos_fury:
+    id:            92
+    skill:         great_axe
+    jobs:          [war]
+    main_job_only: true
+    unlock:        ukkos_fury
+    animation:     103
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  upheaval:
+    id:            93
+    skill:         great_axe
+    level:         357
+    jobs:          [war, drk, run]
+    main_job_only: true
+    unlock:        upheaval
+    animation:     104
+    skillchain:    [fusion, compression]
+    range:         3
+    target:        [hostile]
+
+  disaster:
+    id:         94
+    skill:      great_axe
+    animation:  100                                  # TODO: Capture me
+    skillchain: [transfixion, scission, gravitation]
+    range:      3
+    target:     [hostile]
+
+  slice:
+    id:         96
+    skill:      scythe
+    level:      5
+    jobs:       [war, blm, drk, bst]
+    animation:  61
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  dark_harvest:
+    id:         97
+    skill:      scythe
+    level:      30
+    jobs:       [war, blm, drk, bst]
+    element:    dark
+    animation:  62
+    skillchain: [reverberation]
+    range:      3
+    target:     [hostile]
+
+  shadow_of_death:
+    id:         98
+    skill:      scythe
+    level:      70
+    jobs:       [war, drk]
+    element:    dark
+    animation:  63
+    skillchain: [induration, reverberation]
+    range:      3
+    target:     [hostile]
+
+  nightmare_scythe:
+    id:         99
+    skill:      scythe
+    level:      100
+    jobs:       [war, blm, drk, bst]
+    animation:  64
+    skillchain: [compression, scission]
+    range:      3
+    target:     [hostile]
+
+  spinning_scythe:
+    id:         100
+    skill:      scythe
+    level:      125
+    jobs:       [war, blm, drk, bst]
+    animation:  65
+    skillchain: [reverberation, scission]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 4}
+
+  vorpal_scythe:
+    id:         101
+    skill:      scythe
+    level:      150
+    jobs:       [war, blm, drk, bst]
+    animation:  66
+    skillchain: [transfixion, scission]
+    range:      3
+    target:     [hostile]
+
+  guillotine:
+    id:            102
+    skill:         scythe
+    level:         200
+    jobs:          [drk]
+    main_job_only: true
+    animation:     67
+    skillchain:    [induration]
+    range:         3
+    target:        [hostile]
+
+  cross_reaper:
+    id:            103
+    skill:         scythe
+    level:         225
+    jobs:          [drk]
+    main_job_only: true
+    animation:     68
+    skillchain:    [distortion]
+    range:         3
+    target:        [hostile]
+
+  spiral_hell:
+    id:            104
+    skill:         scythe
+    level:         240
+    jobs:          [war, drk, bst]
+    main_job_only: true
+    unlock:        spiral_hell
+    animation:     69
+    skillchain:    [distortion, scission]
+    range:         3
+    target:        [hostile]
+
+  catastrophe:
+    id:            105
+    skill:         scythe
+    main_job_only: true
+    animation:     70
+    skillchain:    [darkness, gravitation]
+    range:         3
+    target:        [hostile]
+
+  insurgency:
+    id:            106
+    skill:         scythe
+    jobs:          [drk]
+    main_job_only: true
+    unlock:        insurgency
+    animation:     71
+    skillchain:    [fusion, compression]
+    range:         3
+    target:        [hostile]
+
+  infernal_scythe:
+    id:         107
+    skill:      scythe
+    level:      300
+    jobs:       [war, drk]
+    element:    dark
+    animation:  72
+    skillchain: [compression, reverberation]
+    range:      3
+    target:     [hostile]
+
+  quietus:
+    id:            108
+    skill:         scythe
+    jobs:          [drk]
+    main_job_only: true
+    unlock:        quietus
+    animation:     73
+    skillchain:    [darkness, distortion]
+    range:         3
+    target:        [hostile]
+
+  entropy:
+    id:            109
+    skill:         scythe
+    level:         357
+    jobs:          [war, drk, bst]
+    main_job_only: true
+    unlock:        entropy
+    animation:     74
+    skillchain:    [gravitation, reverberation]
+    range:         3
+    target:        [hostile]
+
+  origin:
+    id:         110
+    skill:      scythe
+    animation:  70                                  # TODO: Capture me
+    skillchain: [induration, reverberation, fusion]
+    range:      3
+    target:     [hostile]
+
+  double_thrust:
+    id:         112
+    skill:      polearm
+    level:      5
+    jobs:       [war, pld, sam, drg]
+    animation:  121
+    skillchain: [transfixion]
+    range:      3
+    target:     [hostile]
+
+  thunder_thrust:
+    id:         113
+    skill:      polearm
+    level:      30
+    jobs:       [war, pld, sam, drg]
+    element:    thunder
+    animation:  122
+    skillchain: [transfixion, impaction]
+    range:      3
+    target:     [hostile]
+
+  raiden_thrust:
+    id:         114
+    skill:      polearm
+    level:      70
+    jobs:       [war, pld, drg]
+    element:    thunder
+    animation:  123
+    skillchain: [transfixion, impaction]
+    range:      3
+    target:     [hostile]
+
+  leg_sweep:
+    id:         115
+    skill:      polearm
+    level:      100
+    jobs:       [war, pld, sam, drg]
+    animation:  124
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  penta_thrust:
+    id:         116
+    skill:      polearm
+    level:      150
+    jobs:       [war, pld, sam, drg]
+    animation:  125
+    skillchain: [compression]
+    range:      3
+    target:     [hostile]
+
+  vorpal_thrust:
+    id:         117
+    skill:      polearm
+    level:      175
+    jobs:       [war, pld, sam, drg]
+    animation:  126
+    skillchain: [reverberation, transfixion]
+    range:      3
+    target:     [hostile]
+
+  skewer:
+    id:            118
+    skill:         polearm
+    level:         200
+    jobs:          [drg]
+    main_job_only: true
+    animation:     127
+    skillchain:    [transfixion, impaction]
+    range:         3
+    target:        [hostile]
+
+  wheeling_thrust:
+    id:            119
+    skill:         polearm
+    level:         225
+    jobs:          [drg]
+    main_job_only: true
+    animation:     128
+    skillchain:    [fusion]
+    range:         3
+    target:        [hostile]
+
+  impulse_drive:
+    id:            120
+    skill:         polearm
+    level:         240
+    jobs:          [war, sam, drg]
+    main_job_only: true
+    unlock:        impulse_drive
+    animation:     129
+    skillchain:    [gravitation, induration]
+    range:         3
+    target:        [hostile]
+
+  geirskogul:
+    id:            121
+    skill:         polearm
+    main_job_only: true
+    animation:     130
+    skillchain:    [light, distortion]
+    range:         3
+    target:        [hostile]
+
+  drakesbane:
+    id:            122
+    skill:         polearm
+    jobs:          [drg]
+    main_job_only: true
+    unlock:        drakesbane
+    animation:     131
+    skillchain:    [fusion, transfixion]
+    range:         3
+    target:        [hostile]
+
+  sonic_thrust:
+    id:         123
+    skill:      polearm
+    level:      300
+    jobs:       [war, pld, drg]
+    animation:  132
+    skillchain: [transfixion, scission]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      cone:    {origin: front, distance: 10}
+
+  camlanns_torment:
+    id:            124
+    skill:         polearm
+    jobs:          [drg]
+    main_job_only: true
+    unlock:        camlanns_torment
+    animation:     133
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  stardiver:
+    id:            125
+    skill:         polearm
+    level:         357
+    jobs:          [war, sam, drg]
+    main_job_only: true
+    unlock:        stardiver
+    element:       dark
+    animation:     134
+    skillchain:    [gravitation, transfixion]
+    range:         3
+    target:        [hostile]
+
+  diarmuid:
+    id:         126
+    skill:      polearm
+    animation:  130                                  # TODO: Capture me
+    skillchain: [transfixion, scission, gravitation]
+    range:      3
+    target:     [hostile]
+
+  blade_rin:
+    id:         128
+    skill:      katana
+    level:      5
+    jobs:       [nin]
+    animation:  151
+    skillchain: [transfixion]
+    range:      3
+    target:     [hostile]
+
+  blade_retsu:
+    id:         129
+    skill:      katana
+    level:      30
+    jobs:       [nin]
+    animation:  152
+    skillchain: [scission]
+    range:      3
+    target:     [hostile]
+
+  blade_teki:
+    id:         130
+    skill:      katana
+    level:      70
+    jobs:       [nin]
+    element:    water
+    animation:  153
+    skillchain: [reverberation]
+    range:      3
+    target:     [hostile]
+
+  blade_to:
+    id:         131
+    skill:      katana
+    level:      100
+    jobs:       [nin]
+    element:    ice
+    animation:  154
+    skillchain: [induration, detonation]
+    range:      3
+    target:     [hostile]
+
+  blade_chi:
+    id:         132
+    skill:      katana
+    level:      150
+    jobs:       [nin]
+    element:    earth
+    animation:  155
+    skillchain: [transfixion, impaction] # BG says impaction, transfixion
+    range:      3
+    target:     [hostile]
+
+  blade_ei:
+    id:         133
+    skill:      katana
+    level:      175
+    jobs:       [nin]
+    element:    dark
+    animation:  156
+    skillchain: [compression]
+    range:      3
+    target:     [hostile]
+
+  blade_jin:
+    id:            134
+    skill:         katana
+    level:         200
+    jobs:          [nin]
+    main_job_only: true
+    animation:     157
+    skillchain:    [detonation, impaction] # BG says impaction, detonation
+    range:         3
+    target:        [hostile]
+
+  blade_ten:
+    id:            135
+    skill:         katana
+    level:         225
+    jobs:          [nin]
+    main_job_only: true
+    animation:     158
+    skillchain:    [gravitation]
+    range:         3
+    target:        [hostile]
+
+  blade_ku:
+    id:            136
+    skill:         katana
+    level:         250
+    jobs:          [nin]
+    main_job_only: true
+    unlock:        blade_ku
+    animation:     159
+    skillchain:    [gravitation, transfixion]
+    range:         3
+    target:        [hostile]
+
+  blade_metsu:
+    id:            137
+    skill:         katana
+    main_job_only: true
+    animation:     160
+    skillchain:    [darkness, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  blade_kamu:
+    id:            138
+    skill:         katana
+    jobs:          [nin]
+    main_job_only: true
+    unlock:        blade_kamu
+    animation:     161
+    skillchain:    [fragmentation, compression]
+    range:         3
+    target:        [hostile]
+
+  blade_yu:
+    id:            139
+    skill:         katana
+    level:         290
+    jobs:          [nin]
+    main_job_only: true
+    element:       water
+    animation:     162
+    skillchain:    [reverberation, scission]
+    range:         3
+    target:        [hostile]
+
+  blade_hi:
+    id:            140
+    skill:         katana
+    jobs:          [nin]
+    main_job_only: true
+    unlock:        blade_hi
+    animation:     163
+    skillchain:    [darkness, gravitation]
+    range:         3
+    target:        [hostile]
+
+  blade_shun:
+    id:            141
+    skill:         katana
+    level:         357
+    jobs:          [nin]
+    main_job_only: true
+    unlock:        blade_shun
+    animation:     164
+    skillchain:    [fusion, impaction]
+    range:         3
+    target:        [hostile]
+
+  zesho_meppo:
+    id:         142
+    skill:      katana
+    animation:  160                                 # TODO: Capture me
+    skillchain: [induration, reverberation, fusion]
+    range:      3
+    target:     [hostile]
+
+  tachi_enpi:
+    id:         144
+    skill:      great_katana
+    level:      5
+    jobs:       [sam, nin]
+    animation:  166
+    skillchain: [transfixion, scission]
+    range:      3
+    target:     [hostile]
+
+  tachi_hobaku:
+    id:         145
+    skill:      great_katana
+    level:      30
+    jobs:       [sam, nin]
+    animation:  167
+    skillchain: [induration]
+    range:      3
+    target:     [hostile]
+
+  tachi_goten:
+    id:         146
+    skill:      great_katana
+    level:      70
+    jobs:       [sam, nin]
+    element:    thunder
+    animation:  168
+    skillchain: [transfixion, impaction]
+    range:      3
+    target:     [hostile]
+
+  tachi_kagero:
+    id:         147
+    skill:      great_katana
+    level:      100
+    jobs:       [sam, nin]
+    element:    fire
+    animation:  169
+    skillchain: [liquefaction]
+    range:      3
+    target:     [hostile]
+
+  tachi_jinpu:
+    id:         148
+    skill:      great_katana
+    level:      150
+    jobs:       [sam, nin]
+    element:    wind
+    animation:  170
+    skillchain: [scission, detonation]
+    range:      3
+    target:     [hostile]
+
+  tachi_koki:
+    id:         149
+    skill:      great_katana
+    level:      175
+    jobs:       [sam, nin]
+    element:    light
+    animation:  171
+    skillchain: [reverberation, impaction]
+    range:      3
+    target:     [hostile]
+
+  tachi_yukikaze:
+    id:            150
+    skill:         great_katana
+    level:         200
+    jobs:          [sam]
+    main_job_only: true
+    animation:     172
+    skillchain:    [induration, detonation]
+    range:         3
+    target:        [hostile]
+
+  tachi_gekko:
+    id:            151
+    skill:         great_katana
+    level:         225
+    jobs:          [sam]
+    main_job_only: true
+    animation:     173
+    skillchain:    [distortion, reverberation]
+    range:         3
+    target:        [hostile]
+
+  tachi_kasha:
+    id:            152
+    skill:         great_katana
+    level:         250
+    jobs:          [sam]
+    main_job_only: true
+    unlock:        tachi_kasha
+    animation:     174
+    skillchain:    [fusion, compression]
+    range:         3
+    target:        [hostile]
+
+  tachi_kaiten:
+    id:            153
+    skill:         great_katana
+    main_job_only: true
+    animation:     175
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  tachi_rana:
+    id:            154
+    skill:         great_katana
+    jobs:          [sam]
+    main_job_only: true
+    unlock:        tachi_rana
+    animation:     176
+    skillchain:    [gravitation, induration]
+    range:         3
+    target:        [hostile]
+
+  tachi_ageha:
+    id:         155
+    skill:      great_katana
+    level:      300
+    jobs:       [sam, nin]
+    animation:  177
+    skillchain: [compression, scission]
+    range:      3
+    target:     [hostile]
+
+  tachi_fudo:
+    id:            156
+    skill:         great_katana
+    jobs:          [sam]
+    main_job_only: true
+    unlock:        tachi_fudo
+    animation:     178
+    skillchain:    [light, distortion]
+    range:         3
+    target:        [hostile]
+
+  tachi_shoha:
+    id:            157
+    skill:         great_katana
+    level:         357
+    jobs:          [sam]
+    main_job_only: true
+    unlock:        tachi_shoha
+    animation:     179
+    skillchain:    [fragmentation, compression]
+    range:         3
+    target:        [hostile]
+
+  tachi_suikawari:
+    id:            158
+    skill:         great_katana
+    main_job_only: true
+    animation:     175
+    skillchain:    [fusion]
+    range:         3
+    target:        [hostile]
+
+  tachi_mumei:
+    id:         159
+    skill:      great_katana
+    animation:  175                                   # TODO: Capture me
+    skillchain: [detonation, compression, distortion]
+    range:      3
+    target:     [hostile]
+
+  shining_strike:
+    id:         160
+    skill:      club
+    level:      5
+    jobs:       [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch, geo, run]
+    element:    light
+    animation:  76
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  seraph_strike:
+    id:         161
+    skill:      club
+    level:      40
+    jobs:       [war, whm, pld, drk, sam, blu, geo]
+    element:    light
+    animation:  77
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  brainshaker:
+    id:         162
+    skill:      club
+    level:      70
+    jobs:       [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch, geo, run]
+    animation:  78
+    skillchain: [reverberation]
+    range:      3
+    target:     [hostile]
+
+  starlight:
+    id:        163
+    skill:     club
+    level:     100
+    jobs:      [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch, geo, run]
+    animation: 79
+    range:     3
+    target:    [self]
+
+  moonlight:
+    id:        164
+    skill:     club
+    level:     125
+    jobs:      [war, whm, pld, drk, sam, blu, geo]
+    animation: 80
+    range:     3
+    target:    [self]
+    aoe:
+      affects: [self, party]
+      sphere:  {origin: target, radius: 6}
+
+  skullbreaker:
+    id:         165
+    skill:      club
+    level:      150
+    jobs:       [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch, geo, run]
+    animation:  81
+    skillchain: [induration, reverberation]
+    range:      3
+    target:     [hostile]
+
+  true_strike:
+    id:         166
+    skill:      club
+    level:      175
+    jobs:       [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch, geo, run]
+    animation:  82
+    skillchain: [detonation, impaction]
+    range:      3
+    target:     [hostile]
+
+  judgment:
+    id:         167
+    skill:      club
+    level:      200
+    jobs:       [war, whm, pld, drk, sam, blu, geo]
+    animation:  83
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  hexa_strike:
+    id:            168
+    skill:         club
+    level:         220
+    jobs:          [whm, geo]
+    main_job_only: true
+    animation:     84
+    skillchain:    [fusion]
+    range:         3
+    target:        [hostile]
+
+  black_halo:
+    id:            169
+    skill:         club
+    level:         230
+    jobs:          [war, mnk, whm, blm, pld, smn, blu, sch, geo, run]
+    main_job_only: true
+    unlock:        black_halo
+    animation:     85
+    skillchain:    [fragmentation, compression]
+    range:         3
+    target:        [hostile]
+
+  randgrith:
+    id:            170
+    skill:         club
+    main_job_only: true
+    animation:     86
+    skillchain:    [light, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  mystic_boon:
+    id:            171
+    skill:         club
+    jobs:          [whm]
+    main_job_only: true
+    unlock:        mystic_boon
+    animation:     87
+    range:         3
+    target:        [hostile]
+
+  flash_nova:
+    id:         172
+    skill:      club
+    level:      290
+    jobs:       [war, whm, pld, drk, sam, blu, geo]
+    element:    light
+    animation:  88
+    skillchain: [induration, reverberation]         # BG says reverberation, induration
+    range:      3
+    target:     [hostile]
+
+  dagan:
+    id:            173
+    skill:         club
+    jobs:          [whm]
+    main_job_only: true
+    unlock:        dagan
+    animation:     89
+    range:         3
+    target:        [self]
+
+  realmrazer:
+    id:            174
+    skill:         club
+    level:         357
+    jobs:          [war, mnk, whm, blm, pld, smn, blu, sch, geo, run]
+    main_job_only: true
+    unlock:        realmrazer
+    animation:     90
+    skillchain:    [fusion, impaction]
+    range:         3
+    target:        [hostile]
+
+  exudation:
+    id:            175
+    skill:         club
+    jobs:          [geo]
+    main_job_only: true
+    unlock:        exudation
+    animation:     90                        # TODO: Capture me
+    skillchain:    [darkness, fragmentation]
+    range:         3
+    target:        [hostile]
+
+  heavy_swing:
+    id:         176
+    skill:      staff
+    level:      5
+    jobs:       [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    animation:  136
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  rock_crusher:
+    id:         177
+    skill:      staff
+    level:      40
+    jobs:       [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    element:    earth
+    animation:  137
+    skillchain: [impaction]
+    range:      3
+    target:     [hostile]
+
+  earth_crusher:
+    id:         178
+    skill:      staff
+    level:      70
+    jobs:       [war, mnk, whm, pld, geo]
+    element:    earth
+    animation:  138
+    skillchain: [detonation, impaction]   # FFO says impaction, detonation
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  starburst:
+    id:         179
+    skill:      staff
+    level:      100
+    jobs:       [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    element:    dark
+    animation:  139
+    skillchain: [compression, reverberation]
+    range:      3
+    target:     [hostile]
+
+  sunburst:
+    id:         180
+    skill:      staff
+    level:      150
+    jobs:       [war, mnk, whm, pld, geo]
+    animation:  140
+    skillchain: [compression, reverberation]
+    range:      3
+    target:     [hostile]
+
+  shell_crusher:
+    id:         181
+    skill:      staff
+    level:      175
+    jobs:       [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    animation:  141
+    skillchain: [detonation]
+    range:      3
+    target:     [hostile]
+
+  full_swing:
+    id:         182
+    skill:      staff
+    level:      200
+    jobs:       [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    animation:  142
+    skillchain: [liquefaction, impaction]
+    range:      3
+    target:     [hostile]
+
+  spirit_taker:
+    id:        183
+    skill:     staff
+    level:     215
+    jobs:      [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    animation: 143
+    range:     3
+    target:    [hostile]
+
+  retribution:
+    id:            184
+    skill:         staff
+    level:         230
+    jobs:          [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    main_job_only: true
+    unlock:        retribution
+    animation:     144
+    skillchain:    [gravitation, reverberation]
+    range:         3
+    target:        [hostile]
+
+  gate_of_tartarus:
+    id:            185
+    skill:         staff
+    main_job_only: true
+    animation:     145
+    skillchain:    [darkness, distortion]
+    range:         3
+    target:        [hostile]
+
+  vidohunir:
+    id:            186
+    skill:         staff
+    jobs:          [blm]
+    main_job_only: true
+    unlock:        vidohunir
+    animation:     146
+    skillchain:    [fragmentation, distortion]
+    range:         3
+    target:        [hostile]
+
+  garland_of_bliss:
+    id:            187
+    skill:         staff
+    jobs:          [smn]
+    main_job_only: true
+    unlock:        garland_of_bliss
+    animation:     147
+    skillchain:    [fusion, reverberation]
+    range:         3
+    target:        [hostile]
+
+  omniscience:
+    id:            188
+    skill:         staff
+    jobs:          [sch]
+    main_job_only: true
+    unlock:        omniscience
+    animation:     148
+    skillchain:    [gravitation, transfixion]
+    range:         3
+    target:        [hostile]
+
+  cataclysm:
+    id:         189
+    skill:      staff
+    level:      290
+    jobs:       [war, mnk, whm, pld, geo]
+    element:    dark
+    animation:  231
+    skillchain: [compression, reverberation]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  myrkr:
+    id:            190
+    skill:         staff
+    jobs:          [blm, smn, sch]
+    main_job_only: true
+    unlock:        myrkr
+    animation:     150
+    range:         3
+    target:        [self]
+
+  shattersoul:
+    id:            191
+    skill:         staff
+    level:         357
+    jobs:          [war, mnk, whm, blm, pld, brd, drg, smn, sch, geo]
+    main_job_only: true
+    unlock:        shattersoul
+    animation:     239
+    skillchain:    [gravitation, induration]
+    range:         3
+    target:        [hostile]
+
+  flaming_arrow:
+    id:         192
+    skill:      archery
+    level:      5
+    jobs:       [rng]
+    element:    fire
+    animation:  191
+    skillchain: [liquefaction, transfixion]
+    range:      20
+    target:     [hostile]
+
+  piercing_arrow:
+    id:         193
+    skill:      archery
+    level:      40
+    jobs:       [rng]
+    animation:  192
+    skillchain: [reverberation, transfixion]
+    range:      20
+    target:     [hostile]
+
+  dulling_arrow:
+    id:         194
+    skill:      archery
+    level:      80
+    jobs:       [rng]
+    animation:  193
+    skillchain: [liquefaction, transfixion]
+    range:      20
+    target:     [hostile]
+
+  sidewinder:
+    id:         196
+    skill:      archery
+    level:      175
+    jobs:       [rng]
+    animation:  195
+    skillchain: [reverberation, transfixion, detonation]
+    range:      20
+    target:     [hostile]
+
+  blast_arrow:
+    id:            197
+    skill:         archery
+    level:         200
+    jobs:          [rng]
+    main_job_only: true
+    animation:     219
+    skillchain:    [induration, transfixion]
+    range:         5
+    target:        [hostile]
+
+  arching_arrow:
+    id:            198
+    skill:         archery
+    level:         225
+    jobs:          [rng]
+    main_job_only: true
+    animation:     220
+    skillchain:    [fusion]
+    range:         20
+    target:        [hostile]
+
+  empyreal_arrow:
+    id:            199
+    skill:         archery
+    level:         250
+    jobs:          [rng]
+    main_job_only: true
+    unlock:        empyreal_arrow
+    animation:     221
+    skillchain:    [fusion, transfixion]
+    range:         20
+    target:        [hostile]
+
+  namas_arrow:
+    id:            200
+    skill:         archery
+    main_job_only: true
+    animation:     225
+    skillchain:    [light, distortion]
+    range:         20
+    target:        [hostile]
+
+  refulgent_arrow:
+    id:         201
+    skill:      archery
+    level:      290
+    jobs:       [rng]
+    animation:  232
+    skillchain: [reverberation, transfixion]
+    range:      20
+    target:     [hostile]
+
+  jishnus_radiance:
+    id:            202
+    skill:         archery
+    jobs:          [rng]
+    main_job_only: true
+    unlock:        jishnus_radiance
+    animation:     234
+    skillchain:    [light, fusion]
+    range:         20
+    target:        [hostile]
+
+  apex_arrow:
+    id:            203
+    skill:         archery
+    level:         357
+    jobs:          [rng, sam]
+    main_job_only: true
+    unlock:        apex_arrow
+    animation:     240
+    skillchain:    [fragmentation, transfixion]
+    range:         20
+    target:        [hostile]
+
+  sarv:
+    id:         204
+    skill:      archery
+    animation:  225                                  # TODO: Capture me
+    skillchain: [transfixion, scission, gravitation]
+    range:      20
+    target:     [hostile]
+
+  hot_shot:
+    id:         208
+    skill:      marksmanship
+    level:      5
+    jobs:       [rng, cor]
+    element:    fire
+    animation:  196
+    skillchain: [liquefaction, transfixion]
+    range:      20
+    target:     [hostile]
+
+  split_shot:
+    id:         209
+    skill:      marksmanship
+    level:      40
+    jobs:       [rng, cor]
+    animation:  197
+    skillchain: [reverberation, transfixion]
+    range:      20
+    target:     [hostile]
+
+  sniper_shot:
+    id:         210
+    skill:      marksmanship
+    level:      80
+    jobs:       [rng, cor]
+    animation:  198
+    skillchain: [liquefaction, transfixion]
+    range:      20
+    target:     [hostile]
+
+  slug_shot:
+    id:         212
+    skill:      marksmanship
+    level:      175
+    jobs:       [rng, cor]
+    animation:  200
+    skillchain: [reverberation, transfixion, detonation]
+    range:      20
+    target:     [hostile]
+
+  blast_shot:
+    id:            213
+    skill:         marksmanship
+    level:         200
+    jobs:          [rng]
+    main_job_only: true
+    animation:     222
+    skillchain:    [induration, transfixion]
+    range:         5
+    target:        [hostile]
+
+  heavy_shot:
+    id:            214
+    skill:         marksmanship
+    level:         225
+    jobs:          [rng]
+    main_job_only: true
+    animation:     223
+    skillchain:    [fusion]
+    range:         20
+    target:        [hostile]
+
+  detonator:
+    id:            215
+    skill:         marksmanship
+    level:         250
+    jobs:          [rng, cor]
+    main_job_only: true
+    unlock:        detonator
+    animation:     224
+    skillchain:    [fusion, transfixion]
+    range:         20
+    target:        [hostile]
+
+  coronach:
+    id:            216
+    skill:         marksmanship
+    main_job_only: true
+    animation:     226
+    skillchain:    [darkness, fragmentation]
+    range:         20
+    target:        [hostile]
+
+  trueflight:
+    id:            217
+    skill:         marksmanship
+    jobs:          [rng]
+    main_job_only: true
+    unlock:        trueflight
+    element:       light
+    animation:     227
+    skillchain:    [fragmentation, scission]
+    range:         20
+    target:        [hostile]
+
+  leaden_salute:
+    id:            218
+    skill:         marksmanship
+    jobs:          [cor]
+    main_job_only: true
+    unlock:        leaden_salute
+    element:       dark
+    animation:     228
+    skillchain:    [gravitation, transfixion]
+    range:         20
+    target:        [hostile]
+
+  numbing_shot:
+    id:         219
+    skill:      marksmanship
+    level:      290
+    jobs:       [rng, cor]
+    animation:  229
+    skillchain: [induration, detonation, impaction]
+    range:      5
+    target:     [hostile]
+
+  wildfire:
+    id:            220
+    skill:         marksmanship
+    jobs:          [rng, cor]
+    main_job_only: true
+    unlock:        wildfire
+    element:       fire
+    animation:     235
+    skillchain:    [darkness, gravitation]
+    range:         20
+    target:        [hostile]
+
+  last_stand:
+    id:            221
+    skill:         marksmanship
+    level:         357
+    jobs:          [thf, rng, cor]
+    main_job_only: true
+    unlock:        last_stand
+    animation:     241
+    skillchain:    [fusion, reverberation]
+    range:         20
+    target:        [hostile]
+
+  terminus:
+    id:         222
+    skill:      marksmanship
+    animation:  226                                 # TODO: Capture me
+    skillchain: [induration, reverberation, fusion]
+    range:      20
+    target:     [hostile]
+
+  exenterator:
+    id:            224
+    skill:         dagger
+    level:         357
+    jobs:          [war, rdm, thf, bst, brd, rng, nin, cor, dnc]
+    main_job_only: true
+    unlock:        exenterator
+    animation:     238
+    skillchain:    [fragmentation, scission]
+    range:         3
+    target:        [hostile]
+
+  chant_du_cygne:
+    id:            225
+    skill:         sword
+    jobs:          [rdm, pld, blu]
+    main_job_only: true
+    unlock:        chant_du_cygne
+    animation:     233
+    skillchain:    [light, distortion]
+    range:         3
+    target:        [hostile]
+
+  requiescat:
+    id:            226
+    skill:         sword
+    level:         357
+    jobs:          [war, rdm, pld, drk, sam, blu, cor, run]
+    main_job_only: true
+    unlock:        requiescat
+    animation:     237
+    skillchain:    [gravitation, scission]
+    range:         3
+    target:        [hostile]
+
+  knights_of_rotund:
+    id:            227
+    skill:         sword
+    main_job_only: true
+    animation:     12
+    skillchain:    [light]
+    range:         3
+    target:        [hostile]
+
+  final_paradise:
+    id:         228
+    skill:      hand_to_hand
+    animation:  25
+    skillchain: [light]
+    range:      3
+    target:     [hostile]
+
+  fast_blade_ii:
+    id:         229
+    skill:      sword
+    animation:  1         # TODO: Capture me
+    skillchain: [fusion]
+    range:      3
+    target:     [hostile]
+
+  dragon_blow:
+    id:         230
+    skill:      hand_to_hand
+    animation:  22           # TODO: Capture me
+    skillchain: [distortion]
+    range:      3
+    target:     [hostile]
+
+  maru_kala:
+    id:         231
+    skill:      hand_to_hand
+    animation:  25                                    # TODO: Capture me
+    skillchain: [detonation, compression, distortion]
+    range:      3
+    target:     [hostile]
+
+  ruthless_stroke:
+    id:         232
+    skill:      dagger
+    animation:  41                                       # TODO: Capture me
+    skillchain: [liquefaction, impaction, fragmentation] # Client says dissolution, impaction, fragmentation
+    range:      3
+    target:     [hostile]
+
+  imperator:
+    id:         233
+    skill:      sword
+    animation:  12                                    # TODO: Capture me
+    skillchain: [detonation, compression, distortion] # Client says impaction, compression, distortion
+    range:      3
+    target:     [hostile]
+
+  dagda:
+    id:         234
+    skill:      club
+    animation:  86                                   # TODO: Capture me
+    skillchain: [transfixion, scission, gravitation]
+    range:      3
+    target:     [hostile]
+
+  oshala:
+    id:         235
+    skill:      staff
+    animation:  145                                 # TODO: Capture me
+    skillchain: [induration, reverberation, fusion]
+    range:      3
+    target:     [hostile]
+
+  uriel_blade:
+    id:         238
+    skill:      sword
+    element:    light
+    animation:  243
+    skillchain: [light, fragmentation] # BG says light, fragmentation, scission
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  glory_slash:
+    id:         239
+    skill:      sword
+    animation:  242
+    skillchain: [light, fusion]
+    range:      3
+    target:     [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}
+
+  tartarus_torpor:
+    id:        240
+    skill:     staff
+    animation: 149
+    range:     3
+    target:    [hostile]
+    aoe:
+      affects: [hostile]
+      sphere:  {origin: target, radius: 10}

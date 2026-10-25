@@ -122,12 +122,12 @@ void CWeaponSkill::setAoe(uint8 aoe)
     m_AOE = aoe;
 }
 
-void CWeaponSkill::setRadius(const uint8 radius)
+void CWeaponSkill::setRadius(const float radius)
 {
     m_Radius = radius;
 }
 
-void CWeaponSkill::setRange(uint8 range)
+void CWeaponSkill::setRange(float range)
 {
     m_Range = range;
 }
@@ -182,12 +182,12 @@ auto CWeaponSkill::getAoe() const -> uint8
     return m_AOE;
 }
 
-auto CWeaponSkill::getRadius() const -> uint8
+auto CWeaponSkill::getRadius() const -> float
 {
     return m_Radius;
 }
 
-auto CWeaponSkill::getRange() const -> uint8
+auto CWeaponSkill::getRange() const -> float
 {
     return m_Range;
 }

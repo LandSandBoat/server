@@ -45053,7 +45053,7 @@ INSERT INTO `item_mods` VALUES (21589,14,30);   -- CHR: 30
 INSERT INTO `item_mods` VALUES (21589,25,30);   -- ACC: 30
 INSERT INTO `item_mods` VALUES (21589,30,30);   -- MACC: 30
 INSERT INTO `item_mods` VALUES (21589,302,4);   -- TRIPLE_ATTACK: 4%
-INSERT INTO `item_mods` VALUES (21589,355,232); -- ADDS_WEAPONSKILL: Merciless Strike
+INSERT INTO `item_mods` VALUES (21589,355,232); -- ADDS_WEAPONSKILL: Ruthless Stroke
 -- TODO: Aftermath: Physical damage limit+
 
 -- Mpu Gandring (Level 119 III)
@@ -45063,7 +45063,7 @@ INSERT INTO `item_mods` VALUES (21590,14,35);   -- CHR: 35
 INSERT INTO `item_mods` VALUES (21590,25,35);   -- ACC: 35
 INSERT INTO `item_mods` VALUES (21590,30,35);   -- MACC: 35
 INSERT INTO `item_mods` VALUES (21590,302,6);   -- TRIPLE_ATTACK: 6%
-INSERT INTO `item_mods` VALUES (21590,355,232); -- ADDS_WEAPONSKILL: Merciless Strike
+INSERT INTO `item_mods` VALUES (21590,355,232); -- ADDS_WEAPONSKILL: Ruthless Stroke
 -- TODO: Aftermath: Physical damage limit+
 
 -- Arasy Sword
