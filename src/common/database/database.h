@@ -42,7 +42,6 @@
 #include <type_traits>
 #include <utility>
 
-// @note Everything in sql:: database-land is 1-indexed, not 0-indexed.
 namespace db
 {
 
@@ -163,7 +162,6 @@ auto setDatabase(Database* database) -> void;
 // @param args The arguments to bind to the prepared statement.
 // @return A unique pointer to the result set of the query.
 // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
-// @note Everything in database-land is 1-indexed, not 0-indexed.
 template <detail::IsBindable... Args>
 auto preparedStmt(detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>;
 

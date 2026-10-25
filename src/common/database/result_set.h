@@ -34,7 +34,6 @@
 #include <string>
 #include <type_traits>
 
-// @note Everything in database-land is 1-indexed, not 0-indexed.
 namespace db
 {
 
@@ -71,8 +70,7 @@ public:
 
     auto isNull(const std::string& key) const -> bool;
 
-    // Get the raw, untruncated bytes of a blob column.
-    // Unlike get<std::string>, this preserves embedded nulls and the full length.
+    // Get the raw bytes of a blob column, zero bytes included.
     auto getBlobBytes(const std::string& key) const -> std::string;
 
     // Get the value of the associated key.
@@ -208,11 +206,6 @@ auto ResultSet::get(const std::string& key) const -> T
         {
             value = rawGetString(key);
         }
-        else if constexpr (std::is_same_v<UnderlyingT, size_t>)
-        {
-            // NOTE: Preserves the historical behaviour of reading size_t as a 32-bit unsigned value.
-            value = static_cast<UnderlyingT>(rawGetUInt32(key));
-        }
         else if constexpr (detail::is_blob_v<UnderlyingT>)
         {
             extractFromBlob(this, key, value);
@@ -307,8 +300,6 @@ auto extractFromBlob(const WrapperPtrT& rset, const std::string& blobKey, T& des
     // This will introduce difficult to track down crashes.
     if (!rset->isNull(blobKey))
     {
-        // getBlobBytes preserves the full length (including embedded nulls), unlike get<std::string>,
-        // which would truncate the blob result.
         const auto blobStr = rset->getBlobBytes(blobKey);
 
         // Login server creates new chars with null blobs. Map server then initializes.
