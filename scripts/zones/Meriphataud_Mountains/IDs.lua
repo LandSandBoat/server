@@ -13,6 +13,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         GIL_OBTAINED                  = 6418,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6420,  -- Obtained key item: <keyitem>.
         KEYITEM_LOST                  = 6421,  -- Lost key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6431,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET         = 6446,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7028,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7029,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
