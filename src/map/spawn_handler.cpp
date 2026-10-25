@@ -21,6 +21,7 @@
 
 #include "spawn_handler.h"
 
+#include "ai/ai_container.h"
 #include "common/timer.h"
 #include "common/vana_time.h"
 #include "data/enums/weather.h"
@@ -223,7 +224,7 @@ void SpawnHandler::Tick(const timer::time_point now)
                 return true;
             }
 
-            if (!canSpawnNow(PMob) || luautils::OnMobSpawnCheck(PMob) != 0)
+            if (PMob->PAI->IsSpawned() || !canSpawnNow(PMob) || luautils::OnMobSpawnCheck(PMob) != 0)
             {
                 return false;
             }
