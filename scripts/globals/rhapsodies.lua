@@ -1,4 +1,9 @@
 -----------------------------------
+-- Rhapsodies of Vana'diel helpers
+--
+-- Lockout table:
+-- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
+-----------------------------------
 require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
@@ -24,11 +29,19 @@ xi.rhapsodies.expansion =
     [xi.rhapsodies.character.ARCIELA]    = xi.mission.log_id.SOA,
 }
 
+-- The SE table also lists The Rites of Life for Prishe and Tenzen, but retail lets Ring My Bell and Spirits Awoken through during it.
 xi.rhapsodies.unavailability =
 {
     [xi.rhapsodies.character.PRISHE] = set{
+        xi.mission.id.cop.BELOW_THE_ARKS,
+        xi.mission.id.cop.THE_MOTHERCRYSTALS,
+        xi.mission.id.cop.AN_INVITATION_WEST,
+        xi.mission.id.cop.THE_LOST_CITY,
+        xi.mission.id.cop.DISTANT_BELIEFS,
+        xi.mission.id.cop.AN_ETERNAL_MELODY,
+        xi.mission.id.cop.ANCIENT_VOWS,
         xi.mission.id.cop.DARKNESS_NAMED,
-        xi.mission.id.cop.SLANDEROUS_UTTERINGS,
+        -- Slanderous Utterings is left out: Prishe leaves by ship in the cutscene that completes it.
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
         xi.mission.id.cop.THREE_PATHS,
         xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG,
@@ -41,6 +54,13 @@ xi.rhapsodies.unavailability =
         xi.mission.id.cop.DAWN,
     },
     [xi.rhapsodies.character.TENZEN] = set{
+        xi.mission.id.cop.BELOW_THE_ARKS,
+        xi.mission.id.cop.THE_MOTHERCRYSTALS,
+        xi.mission.id.cop.AN_INVITATION_WEST,
+        xi.mission.id.cop.THE_LOST_CITY,
+        xi.mission.id.cop.DISTANT_BELIEFS,
+        xi.mission.id.cop.AN_ETERNAL_MELODY,
+        xi.mission.id.cop.ANCIENT_VOWS,
         xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING,
         xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN,
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
@@ -128,7 +148,7 @@ xi.rhapsodies.unavailability =
         xi.mission.id.soa.LIFE_ON_THE_FRONTIER,
         xi.mission.id.soa.MEETING_OF_THE_MINDS,
         xi.mission.id.soa.ARCIELA_APPEARS_AGAIN,
-        xi.mission.id.soa.BUILDING_PROSPECTS,
+        xi.mission.id.soa.BUDDING_PROSPECTS,
         xi.mission.id.soa.THE_LIGHT_SHINING_IN_YOUR_EYES,
         xi.mission.id.soa.THE_HEIRLOOM,
         xi.mission.id.soa.AN_AIMLESS_JOURNEY,
@@ -171,8 +191,10 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
+    -- Prishe is not on the SE table here, but retail blocks this on her.
     [xi.mission.id.rov.CALL_TO_SERVE] =
     {
+        xi.rhapsodies.character.PRISHE,
         xi.rhapsodies.character.TENZEN,
     },
 
@@ -190,7 +212,7 @@ xi.rhapsodies.requiredCharacters =
 
     [xi.mission.id.rov.EVER_FORWARD] =
     {
-        xi.rhapsodies.character.PRISHE,
+        xi.rhapsodies.character.TENZEN,
     },
 
     [xi.mission.id.rov.REUNITED] =
@@ -216,8 +238,10 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.APHMAU,
     },
 
+    -- Cait Sith is for Uncertain Destinations, whose opening event is checked while on Cauterize.
     [xi.mission.id.rov.CAUTERIZE] =
     {
+        xi.rhapsodies.character.APHMAU,
         xi.rhapsodies.character.CAIT_SITH,
     },
 
@@ -226,9 +250,11 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.CAIT_SITH,
     },
 
+    -- Lilisette is not on the SE table here, but retail blocks this mission's zone-in on her.
     [xi.mission.id.rov.GANGED_UP_ON] =
     {
         xi.rhapsodies.character.LILLISETTE,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.SACRIFICE] =
@@ -294,6 +320,12 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
+    -- Not on the SE table, but retail blocks the Norg door on Prishe.
+    [xi.mission.id.rov.BANISHING_THE_DARKNESS] =
+    {
+        xi.rhapsodies.character.PRISHE,
+    },
+
     [xi.mission.id.rov.OVER_THE_RAINBOW] =
     {
         xi.rhapsodies.character.TENZEN,
@@ -309,24 +341,51 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
-    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] =
+    [xi.mission.id.rov.TEARS_OF_THE_GENERALS] =
     {
         xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.WHAT_HE_LEFT_BEHIND] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    -- TODO: Retail let this through while Arciela was unavailable, against the SE table.
+    [xi.mission.id.rov.GONE_BUT_NOT_FORGOTTEN] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    -- Not on the SE table, but retail blocks the Celennia Memorial Library zone-in on Arciela.
+    [xi.mission.id.rov.SOLEMNITY] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.EYES_ON_YOU] =
+    {
+        xi.rhapsodies.character.ARCIELA,
+    },
+
+    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] =
+    {
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.DEATH_CARES_NOT] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.NO_TIME_LIKE_THE_FUTURE] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.SIN] =
     {
-        xi.rhapsodies.character.ARCIELA,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.FROM_WEST_TO_EAST] =
@@ -375,26 +434,93 @@ xi.rhapsodies.requiredCharacters =
     },
 }
 
+-- Footnotes of the lockout table: when a listed mission still leaves the character available.
+xi.rhapsodies.lockoutExceptions =
+{
+    [xi.rhapsodies.character.PRISHE] =
+    {
+        -- Available until Monberaux takes her in, and again after Diabolos is defeated.
+        [xi.mission.id.cop.DARKNESS_NAMED] = function(player)
+            local status = xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED, 'Status')
+
+            return status == 0 or status >= 5
+        end,
+
+        -- Available only while Ulmia's path (Where Messengers Gather) is on Head Wind.
+        [xi.mission.id.cop.THREE_PATHS] = function(player)
+            return player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
+        end,
+
+        -- Available after the reunion in Pherimociel's cutscene.
+        [xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS, 'Status') >= 1
+        end,
+
+        -- Available after The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 8
+        end,
+    },
+
+    [xi.rhapsodies.character.TENZEN] =
+    {
+        -- Available after The Chains Fall Free in Lufaise Meadows.
+        [xi.mission.id.cop.DAWN] = function(player)
+            return xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 8
+        end,
+    },
+
+    [xi.rhapsodies.character.APHMAU] = {},
+
+    [xi.rhapsodies.character.LILLISETTE] =
+    {
+        -- Available after accepting A Forbidden Reunion and reuniting with her.
+        -- TODO: The quest is not implemented, so completion stands in for the reunion.
+        [xi.mission.id.wotg.LEST_WE_FORGET] = function(player)
+            return player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_FORBIDDEN_REUNION) == xi.questStatus.QUEST_COMPLETED
+        end,
+    },
+
+    [xi.rhapsodies.character.CAIT_SITH] =
+    {
+        -- Available after Champion of the Dawn. SE says accepting it is enough, the JP wiki says it must be completed.
+        -- TODO: The quest is not implemented, so only a GM can complete it.
+        [xi.mission.id.wotg.LEST_WE_FORGET] = function(player)
+            return player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAMPION_OF_THE_DAWN) == xi.questStatus.QUEST_COMPLETED
+        end,
+    },
+
+    [xi.rhapsodies.character.ARCIELA] =
+    {
+        -- Unavailable from the Ceizak Battlegrounds epilogue until speaking with Ploh Trishbahk.
+        [xi.mission.id.soa.THE_LIGHT_WITHIN] = function(player)
+            local status = xi.mission.getVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_WITHIN, 'Status')
+
+            return status ~= 2 and status ~= 3
+        end,
+    },
+}
+
 -----------------------------------
 -- PUBLIC FUNCTIONS
 -----------------------------------
--- Lockout Table:
--- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
 xi.rhapsodies.charactersAvailable = function(player)
-    local rovMission = player:getCurrentMission(xi.mission.log_id.ROV)
-    for _, char in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
-        local expansionLog     = xi.rhapsodies.expansion[char]
-        local expansionMission = player:getCurrentMission(expansionLog)
+    local rovMission         = player:getCurrentMission(xi.mission.log_id.ROV)
+    local requiredCharacters = xi.rhapsodies.requiredCharacters[rovMission]
 
-        if xi.rhapsodies.unavailability[char][expansionMission] then
-            -- CoP "Dawn" exception. TODO: Maybe add support for mission status checks in the future.
-            if
-                expansionLog ~= xi.mission.log_id.COP or       -- Mission log isn't CoP -> false
-                expansionMission ~= xi.mission.id.cop.DAWN or  -- Mission log is CoP, but mission isn't "Dawn" -> false
-                player:getCharVar('Mission[6][828]Status') < 4 -- Mission log is CoP and mission is "Dawn", but status for "Dawn" is under 4 -> false
-            then
-                return false -- Character is unavailable.
+    if not requiredCharacters then
+        return true
+    end
+
+    for _, character in ipairs(requiredCharacters) do
+        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[character])
+
+        if xi.rhapsodies.unavailability[character][expansionMission] then
+            local exception = xi.rhapsodies.lockoutExceptions[character][expansionMission]
+
+            if not exception or not exception(player) then
+                return false
             end
         end
     end
