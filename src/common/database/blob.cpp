@@ -22,70 +22,10 @@
 #include <common/database/blob.h>
 
 #include <cstring>
-#include <string_view>
 
-db::BlobWrapper::blobstream::blobstream(char* buffer, std::size_t size)
-{
-    setg(buffer, buffer, buffer + size);
-}
-
-db::BlobWrapper::BlobWrapper(char* data, std::size_t size)
+db::BlobWrapper::BlobWrapper(const char* source, std::size_t size)
 : data(std::make_unique<char[]>(size))
 , size(size)
-, blobStream(data, size)
-, istream(&blobStream)
 {
-    // TODO: Do we really need to guarantee that the underlying data
-    //     : will outlive the original callsite? We could just get rid of
-    //     : data and size and use the two streams.
-    std::memcpy(this->data.get(), data, size);
-}
-
-auto db::BlobWrapper::toString() const -> std::string
-{
-    // Escape characters in the blob
-    std::string result;
-    result.reserve(size * 2); // Reserving space for maximum possible expansion
-
-    for (const char ch : std::string_view(data.get(), size))
-    {
-        switch (ch)
-        {
-            case '\0': // Null character
-                result += "\\0";
-                break;
-            case '\'': // Single quote
-                result += "\\'";
-                break;
-            case '\"': // Double quote
-                result += "\\\"";
-                break;
-            case '\b': // Backspace
-                result += "\\b";
-                break;
-            case '\n': // Newline
-                result += "\\n";
-                break;
-            case '\r': // Carriage return
-                result += "\\r";
-                break;
-            case '\t': // Tab
-                result += "\\t";
-                break;
-            case '\x1A': // Ctrl-Z
-                result += "\\Z";
-                break;
-            case '\\': // Backslash
-                result += "\\\\";
-                break;
-            case '%': // Percent (reserved by sprintf, etc.)
-                result += "%%";
-                break;
-            default:
-                result += ch;
-                break;
-        }
-    }
-
-    return result;
+    std::memcpy(data.get(), source, size);
 }
