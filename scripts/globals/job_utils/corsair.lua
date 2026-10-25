@@ -545,10 +545,9 @@ local function applyCorsairEffect(caster, target, abilityId, power, subPower)
     local addSlot     = nil
     local addSilent   = true
 
-    -- Upgrading an existing roll: Preserve the existing effect's slot and remaining duration.
+    -- Upgrading an existing roll: Preserve the existing effect's slot
     if upgradeEffect then
         target:delStatusEffectSilent(effectId)
-        addDuration = math.floor(upgradeEffect:getTimeRemaining() / 1000)
         addSlot     = upgradeEffect:getEffectSlot()
 
     -- New roll when there is a free slot: Use the lowest available slot and the full duration.

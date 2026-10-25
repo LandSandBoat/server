@@ -23,7 +23,7 @@ describe('Double-Up', function()
         return roll
     end
 
-    it('keeps the time remaining on the roll it upgrades', function()
+    it('resets the time remaining on the roll it upgrades', function()
         player.actions:useAbility(player, xi.jobAbility.FIGHTERS_ROLL)
         xi.test.world:tickEntity(player)
 
@@ -32,9 +32,9 @@ describe('Double-Up', function()
         player.actions:useAbility(player, xi.jobAbility.DOUBLE_UP)
         xi.test.world:tickEntity(player)
 
-        -- Retail keeps counting down from the first roll rather than restarting it
+        -- Retail restarts the timer
         local remaining = fightersRoll():getTimeRemaining() / 1000
-        assert(remaining > 265 and remaining <= 270, string.format('Expected 270s, got %.1fs', remaining))
+        assert(remaining > 295 and remaining <= 300, string.format('Expected 300s, got %.1fs', remaining))
     end)
 
     it('adds the second roll to the total', function()
