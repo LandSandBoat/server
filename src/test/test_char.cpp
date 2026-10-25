@@ -28,7 +28,9 @@
 #include "test_common.h"
 #include "zone.h"
 
+#include <algorithm>
 #include <array>
+#include <cstddef>
 #include <format>
 #include <limits>
 #include <utility>
@@ -99,9 +101,21 @@ void TestChar::clean(uint32 charId /* = 0 */)
         "DELETE FROM accounts_sessions WHERE charid BETWEEN ? AND ?",
     });
 
+    constexpr auto placeholdersAre = [](const std::size_t count)
+    {
+        return [count](const db::Query query)
+        {
+            return query.placeholders() == count;
+        };
+    };
+
+    static_assert(std::ranges::all_of(oneIdColumn, placeholdersAre(2)));
+    static_assert(std::ranges::all_of(twoIdColumns, placeholdersAre(4)));
+    static_assert(std::ranges::all_of(charIdColumn, placeholdersAre(2)));
+
     for (const auto query : oneIdColumn)
     {
-        if (!db::preparedStmt(query, ids.first, ids.second))
+        if (!db::preparedStmt(db::selected(query), ids.first, ids.second))
         {
             ShowErrorFmt("Failed to execute cleanup query: {}", query);
         }
@@ -109,7 +123,7 @@ void TestChar::clean(uint32 charId /* = 0 */)
 
     for (const auto query : twoIdColumns)
     {
-        if (!db::preparedStmt(query, ids.first, ids.second, ids.first, ids.second))
+        if (!db::preparedStmt(db::selected(query), ids.first, ids.second, ids.first, ids.second))
         {
             ShowErrorFmt("Failed to execute cleanup query: {}", query);
         }
@@ -117,7 +131,7 @@ void TestChar::clean(uint32 charId /* = 0 */)
 
     for (const auto query : charIdColumn)
     {
-        if (!db::preparedStmt(query, ids.first, ids.second))
+        if (!db::preparedStmt(db::selected(query), ids.first, ids.second))
         {
             ShowErrorFmt("Failed to execute cleanup query: {}", query);
         }

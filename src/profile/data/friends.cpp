@@ -42,10 +42,8 @@ namespace
 {
 
 // throws so the transaction rolls back
-template <typename... Args>
-auto run(const db::Query query, Args&&... args)
+auto require(std::unique_ptr<db::ResultSet> rset) -> std::unique_ptr<db::ResultSet>
 {
-    auto rset = db::preparedStmt(query, std::forward<Args>(args)...);
     if (!rset)
     {
         throw std::runtime_error("friend list statement failed");
@@ -56,7 +54,7 @@ auto run(const db::Query query, Args&&... args)
 
 auto pendingEntry(const uint32 accountId, const uint32 otherAccountId) -> Maybe<bool>
 {
-    const auto rset = run("SELECT pending FROM accounts_friends WHERE accid = ? AND blacklist = 0 AND friend_accid = ?", accountId, otherAccountId);
+    const auto rset = require(db::preparedStmt("SELECT pending FROM accounts_friends WHERE accid = ? AND blacklist = 0 AND friend_accid = ?", accountId, otherAccountId));
     if (!rset->next())
     {
         return std::nullopt;
@@ -88,7 +86,7 @@ auto apply(const uint32 accountId, FriendInfo& entry) -> bool
 
     if (entry.op == friendOpDelete)
     {
-        run("DELETE FROM accounts_friends WHERE accid = ? AND blacklist = ? AND list_index = ?", accountId, isBlack, entry.Num);
+        require(db::preparedStmt("DELETE FROM accounts_friends WHERE accid = ? AND blacklist = ? AND list_index = ?", accountId, isBlack, entry.Num));
         return true;
     }
 
@@ -106,20 +104,20 @@ auto apply(const uint32 accountId, FriendInfo& entry) -> bool
     entry.bTemporary   = pending;
 
     // also moves the friend if listed at another index
-    run("REPLACE INTO accounts_friends(accid, blacklist, list_index, friend_accid, display_order, name, pending) VALUES(?, ?, ?, ?, ?, ?, ?)",
-        accountId,
-        isBlack,
-        entry.Num,
-        friendAccountId,
-        entry.Order,
-        asStringFromUntrustedSource(entry.handleName, sizeof(entry.handleName)),
-        pending);
+    require(db::preparedStmt("REPLACE INTO accounts_friends(accid, blacklist, list_index, friend_accid, display_order, name, pending) VALUES(?, ?, ?, ?, ?, ?, ?)",
+                             accountId,
+                             isBlack,
+                             entry.Num,
+                             friendAccountId,
+                             entry.Order,
+                             asStringFromUntrustedSource(entry.handleName, sizeof(entry.handleName)),
+                             pending));
     return true;
 }
 
 void applyOrder(const uint32 accountId, const StoreFriendListHead& head)
 {
-    const auto rset = run("SELECT blacklist, list_index, display_order FROM accounts_friends WHERE accid = ?", accountId);
+    const auto rset = require(db::preparedStmt("SELECT blacklist, list_index, display_order FROM accounts_friends WHERE accid = ?", accountId));
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto isBlack   = rset->get<bool>("blacklist");
@@ -135,7 +133,7 @@ void applyOrder(const uint32 accountId, const StoreFriendListHead& head)
             continue;
         }
 
-        run("UPDATE accounts_friends SET display_order = ? WHERE accid = ? AND blacklist = ? AND list_index = ?", order, accountId, isBlack, listIndex);
+        require(db::preparedStmt("UPDATE accounts_friends SET display_order = ? WHERE accid = ? AND blacklist = ? AND list_index = ?", order, accountId, isBlack, listIndex));
     }
 }
 
@@ -232,19 +230,19 @@ auto blocks(const uint32 accountId, const uint32 otherAccountId) -> Maybe<bool>
 
 auto accept(const uint32 accountId, const uint32 otherAccountId) -> bool
 {
-    const auto rset = run("UPDATE accounts_friends SET pending = 0 "
-                          "WHERE blacklist = 0 AND pending = 1 "
-                          "AND ((accid = ? AND friend_accid = ?) OR (accid = ? AND friend_accid = ?))",
-                          accountId,
-                          otherAccountId,
-                          otherAccountId,
-                          accountId);
+    const auto rset = require(db::preparedStmt("UPDATE accounts_friends SET pending = 0 "
+                                               "WHERE blacklist = 0 AND pending = 1 "
+                                               "AND ((accid = ? AND friend_accid = ?) OR (accid = ? AND friend_accid = ?))",
+                                               accountId,
+                                               otherAccountId,
+                                               otherAccountId,
+                                               accountId));
     return rset->rowsAffected() > 0;
 }
 
 void dropPending(const uint32 accountId, const uint32 otherAccountId)
 {
-    run("DELETE FROM accounts_friends WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId);
+    require(db::preparedStmt("DELETE FROM accounts_friends WHERE accid = ? AND blacklist = 0 AND friend_accid = ? AND pending = 1", accountId, otherAccountId));
 }
 
 auto visibleFriends(const uint32 accountId) -> ErrorOr<std::vector<Friend>>

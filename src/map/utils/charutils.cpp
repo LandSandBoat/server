@@ -5931,85 +5931,67 @@ void SaveCharJob(const CCharEntity* PChar, const xi::Job job)
         return;
     }
 
-    auto fmtQuery = db::Query("");
-
-    switch (job)
+    const auto query = [&]() -> Maybe<db::Query>
     {
-        case xi::Job::WAR:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, war = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::MNK:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, mnk = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::WHM:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, whm = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::BLM:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, blm = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::RDM:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, rdm = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::THF:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, thf = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::PLD:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, pld = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::DRK:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, drk = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::BST:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, bst = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::BRD:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, brd = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::RNG:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, rng = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::SAM:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, sam = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::NIN:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, nin = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::DRG:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, drg = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::SMN:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, smn = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::BLU:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, blu = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::COR:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, cor = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::PUP:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, pup = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::DNC:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, dnc = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::SCH:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, sch = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::GEO:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, geo = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::RUN:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, run = ? WHERE charid = ? LIMIT 1";
-            break;
-        case xi::Job::MON:
-            fmtQuery = "UPDATE char_jobs SET unlocked = ?, mon = ? WHERE charid = ? LIMIT 1";
-            break;
-        default:
-            fmtQuery = "";
-            break;
+        switch (job)
+        {
+            case xi::Job::WAR:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, war = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::MNK:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, mnk = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::WHM:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, whm = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::BLM:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, blm = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::RDM:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, rdm = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::THF:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, thf = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::PLD:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, pld = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::DRK:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, drk = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::BST:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, bst = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::BRD:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, brd = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::RNG:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, rng = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::SAM:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, sam = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::NIN:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, nin = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::DRG:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, drg = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::SMN:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, smn = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::BLU:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, blu = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::COR:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, cor = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::PUP:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, pup = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::DNC:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, dnc = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::SCH:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, sch = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::GEO:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, geo = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::RUN:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, run = ? WHERE charid = ? LIMIT 1");
+            case xi::Job::MON:
+                return db::Query("UPDATE char_jobs SET unlocked = ?, mon = ? WHERE charid = ? LIMIT 1");
+            default:
+                return std::nullopt;
+        }
+    }();
+
+    if (!query)
+    {
+        return;
     }
 
-    db::preparedStmt(fmtQuery, PChar->jobs.unlocked, PChar->jobs.job[static_cast<uint8>(job)], PChar->id);
+    db::preparedStmt(db::selected(*query), PChar->jobs.unlocked, PChar->jobs.job[static_cast<uint8>(job)], PChar->id);
 }
 
 void SaveCharExp(const CCharEntity* PChar, const xi::Job job)
@@ -6022,85 +6004,67 @@ void SaveCharExp(const CCharEntity* PChar, const xi::Job job)
         return;
     }
 
-    auto query = db::Query("");
-
-    switch (job)
+    const auto query = [&]() -> Maybe<db::Query>
     {
-        case xi::Job::WAR:
-            query = "UPDATE char_exp SET war = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::MNK:
-            query = "UPDATE char_exp SET mnk = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::WHM:
-            query = "UPDATE char_exp SET whm = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::BLM:
-            query = "UPDATE char_exp SET blm = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::RDM:
-            query = "UPDATE char_exp SET rdm = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::THF:
-            query = "UPDATE char_exp SET thf = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::PLD:
-            query = "UPDATE char_exp SET pld = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::DRK:
-            query = "UPDATE char_exp SET drk = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::BST:
-            query = "UPDATE char_exp SET bst = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::BRD:
-            query = "UPDATE char_exp SET brd = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::RNG:
-            query = "UPDATE char_exp SET rng = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::SAM:
-            query = "UPDATE char_exp SET sam = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::NIN:
-            query = "UPDATE char_exp SET nin = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::DRG:
-            query = "UPDATE char_exp SET drg = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::SMN:
-            query = "UPDATE char_exp SET smn = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::BLU:
-            query = "UPDATE char_exp SET blu = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::COR:
-            query = "UPDATE char_exp SET cor = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::PUP:
-            query = "UPDATE char_exp SET pup = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::DNC:
-            query = "UPDATE char_exp SET dnc = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::SCH:
-            query = "UPDATE char_exp SET sch = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::GEO:
-            query = "UPDATE char_exp SET geo = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::RUN:
-            query = "UPDATE char_exp SET run = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        case xi::Job::MON:
-            query = "UPDATE char_exp SET mon = ?, merits = ?, limits = ? WHERE charid = ?";
-            break;
-        default:
-            query = "";
-            break;
+        switch (job)
+        {
+            case xi::Job::WAR:
+                return db::Query("UPDATE char_exp SET war = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::MNK:
+                return db::Query("UPDATE char_exp SET mnk = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::WHM:
+                return db::Query("UPDATE char_exp SET whm = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::BLM:
+                return db::Query("UPDATE char_exp SET blm = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::RDM:
+                return db::Query("UPDATE char_exp SET rdm = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::THF:
+                return db::Query("UPDATE char_exp SET thf = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::PLD:
+                return db::Query("UPDATE char_exp SET pld = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::DRK:
+                return db::Query("UPDATE char_exp SET drk = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::BST:
+                return db::Query("UPDATE char_exp SET bst = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::BRD:
+                return db::Query("UPDATE char_exp SET brd = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::RNG:
+                return db::Query("UPDATE char_exp SET rng = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::SAM:
+                return db::Query("UPDATE char_exp SET sam = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::NIN:
+                return db::Query("UPDATE char_exp SET nin = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::DRG:
+                return db::Query("UPDATE char_exp SET drg = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::SMN:
+                return db::Query("UPDATE char_exp SET smn = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::BLU:
+                return db::Query("UPDATE char_exp SET blu = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::COR:
+                return db::Query("UPDATE char_exp SET cor = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::PUP:
+                return db::Query("UPDATE char_exp SET pup = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::DNC:
+                return db::Query("UPDATE char_exp SET dnc = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::SCH:
+                return db::Query("UPDATE char_exp SET sch = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::GEO:
+                return db::Query("UPDATE char_exp SET geo = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::RUN:
+                return db::Query("UPDATE char_exp SET run = ?, merits = ?, limits = ? WHERE charid = ?");
+            case xi::Job::MON:
+                return db::Query("UPDATE char_exp SET mon = ?, merits = ?, limits = ? WHERE charid = ?");
+            default:
+                return std::nullopt;
+        }
+    }();
+
+    if (!query)
+    {
+        return;
     }
 
-    db::preparedStmt(query, PChar->jobs.exp[static_cast<uint8>(job)], PChar->PMeritPoints->GetMeritPoints(), PChar->PMeritPoints->GetLimitPoints(), PChar->id);
+    db::preparedStmt(db::selected(*query), PChar->jobs.exp[static_cast<uint8>(job)], PChar->PMeritPoints->GetMeritPoints(), PChar->PMeritPoints->GetLimitPoints(), PChar->id);
 }
 
 void SaveCharSkills(const CCharEntity* PChar, const uint8 skillID)
@@ -6777,7 +6741,7 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
         return;
     }
 
-    db::preparedStmt(it->update, amount, PChar->id);
+    db::preparedStmt(db::selected(it->update), amount, PChar->id);
 
     if (strcmp(type, "spark_of_eminence") == 0)
     {
@@ -6802,7 +6766,7 @@ auto GetPoints(CCharEntity* PChar, const char* type) -> int32
         return 0;
     }
 
-    const auto rset = db::preparedStmt(it->select, PChar->id);
+    const auto rset = db::preparedStmt(db::selected(it->select), PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         return rset->get<int32>(0);

@@ -21,8 +21,6 @@
 
 #include <common/database/caching_database.h>
 
-#include <common/database/query_validation.h>
-
 #include <common/logging.h>
 #include <common/settings.h>
 #include <common/timer.h>
@@ -140,18 +138,6 @@ auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, std:
 
 auto db::CachingDatabase::runWithRetry(std::string_view rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
 {
-    if (detail::validateQueryLeadingKeyword(rawQuery) == ResultSetType::Invalid)
-    {
-        ShowErrorFmt("Invalid query: {}", rawQuery);
-        return nullptr;
-    }
-
-    if (!detail::validateQueryContent(rawQuery))
-    {
-        ShowErrorFmt("Invalid query content: {}", rawQuery);
-        return nullptr;
-    }
-
     auto& state = getState();
 
     const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
@@ -199,7 +185,7 @@ auto db::CachingDatabase::execute(const Query query, const std::vector<BoundValu
     TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
 
-    const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
+    const auto queryType = query.type();
 
     const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
     {

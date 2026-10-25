@@ -63,6 +63,14 @@ static_assert(!AcceptsQueryText<const char*>);
 static_assert(!AcceptsQueryText<std::string>);
 static_assert(!AcceptsQueryText<std::string_view>);
 
+static_assert(db::Query("SHOW TABLES").type() == db::ResultSetType::Select);
+static_assert(db::Query("UPDATE t SET a = ?").type() == db::ResultSetType::Update);
+
+// These would fail to compile as a db::Query.
+static_assert(db::detail::validateQueryLeadingKeyword("EXPLAIN SELECT 1") == db::ResultSetType::Invalid);
+static_assert(!db::detail::validateQueryContent("SELECT 1; SELECT 2"));
+static_assert(!db::detail::validateQueryContent("SELECT '{}'"));
+
 static_assert(db::Query("SELECT 1").placeholders() == 0);
 static_assert(db::Query("SELECT ?, ?").placeholders() == 2);
 static_assert(db::Query("SELECT '?', \"?\", `?`, ?").placeholders() == 1);
@@ -217,13 +225,13 @@ TEST_CASE("db::preparedStmt binds 64-bit integers without truncating", "[databas
     CHECK(roundTrip(std::size_t{ 5'000'000'000 }) == std::size_t{ 5'000'000'000 });
 }
 
-TEST_CASE("db::preparedStmt rejects a held query given the wrong number of arguments", "[database]")
+TEST_CASE("db::preparedStmt rejects a selected query given the wrong number of arguments", "[database]")
 {
     constexpr auto query = db::Query("SELECT ? + ?");
 
-    CHECK_FALSE(db::preparedStmt(query, 1));
-    CHECK_FALSE(db::preparedStmt(query, 1, 2, 3));
-    CHECK(db::preparedStmt(query, 1, 2));
+    CHECK_FALSE(db::preparedStmt(db::selected(query), 1));
+    CHECK_FALSE(db::preparedStmt(db::selected(query), 1, 2, 3));
+    CHECK(db::preparedStmt(db::selected(query), 1, 2));
 }
 
 TEST_CASE("db::preparedStmt round-trips edge values", "[database]")
@@ -319,9 +327,6 @@ TEST_CASE("db::ResultSet reads", "[database]")
 
 TEST_CASE("db::preparedStmt rejects bad statements", "[database]")
 {
-    CHECK_FALSE(db::preparedStmt("EXPLAIN SELECT 1"));
-    CHECK_FALSE(db::preparedStmt("SELECT 1; SELECT 2"));
-    CHECK_FALSE(db::preparedStmt("SELECT '{}'"));
     CHECK_FALSE(db::preparedStmt("SELECT * FROM catch2_table_that_does_not_exist"));
 
     // '%' is the LIKE wildcard, so it must survive validation.

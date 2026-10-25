@@ -23,6 +23,7 @@
 
 #include <common/database/query.h>
 
+#include <algorithm>
 #include <array>
 #include <string_view>
 
@@ -238,5 +239,12 @@ inline constexpr auto charPointsQueries = std::to_array<CharPointsQueries>({
     { "apollyon_units", "SELECT apollyon_units FROM char_points WHERE charid = ? LIMIT 1", "UPDATE char_points SET apollyon_units = ? WHERE charid = ?" },
     { "alter_ego_points", "SELECT alter_ego_points FROM char_points WHERE charid = ? LIMIT 1", "UPDATE char_points SET alter_ego_points = ? WHERE charid = ?" },
 });
+
+static_assert(std::ranges::all_of(
+    charPointsQueries,
+    [](const CharPointsQueries& queries)
+    {
+        return queries.select.placeholders() == 1 && queries.update.placeholders() == 2;
+    }));
 
 } // namespace charutils

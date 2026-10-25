@@ -21,21 +21,33 @@
 
 #pragma once
 
+#include <common/database/query_validation.h>
+
 #include <cstddef>
 #include <string_view>
 
 namespace db
 {
 
-// Only a string literal converts to a Query, so statement text can never come from runtime values.
+// Only a string literal converts to a Query, and the text is validated as it compiles.
 class Query final
 {
 public:
     template <std::size_t N>
-    consteval Query(const char (&text)[N]) noexcept
+    consteval Query(const char (&text)[N])
     : text_(text, N - 1)
-    , placeholders_(countPlaceholders(text_))
+    , placeholders_(detail::countPlaceholders(text_))
+    , type_(detail::validateQueryLeadingKeyword(text_))
     {
+        if (type_ == ResultSetType::Invalid)
+        {
+            throw "A query must start with a known keyword, such as SELECT or UPDATE";
+        }
+
+        if (!detail::validateQueryContent(text_))
+        {
+            throw "A query can't contain ';' or '{}'";
+        }
     }
 
     [[nodiscard]] constexpr auto view() const noexcept -> std::string_view
@@ -48,46 +60,36 @@ public:
         return placeholders_;
     }
 
-private:
-    // The server binds parameters to every '?' outside quoted text.
-    static consteval auto countPlaceholders(const std::string_view text) noexcept -> std::size_t
+    [[nodiscard]] constexpr auto type() const noexcept -> ResultSetType
     {
-        auto count = std::size_t{ 0 };
-        auto quote = '\0';
-        for (auto i = std::size_t{ 0 }; i < text.size(); ++i)
-        {
-            const auto c = text[i];
-            if (quote != '\0')
-            {
-                if (c == '\\')
-                {
-                    ++i;
-                }
-                else if (c == quote)
-                {
-                    quote = '\0';
-                }
-            }
-            else if (c == '\'' || c == '"' || c == '`')
-            {
-                quote = c;
-            }
-            else if (c == '?')
-            {
-                ++count;
-            }
-        }
-
-        return count;
+        return type_;
     }
 
+private:
     std::string_view text_;
     std::size_t      placeholders_;
+    ResultSetType    type_;
 };
 
 [[nodiscard]] constexpr auto format_as(const Query query) noexcept -> std::string_view
 {
     return query.view();
+}
+
+namespace detail
+{
+
+struct SelectedQuery
+{
+    Query query;
+};
+
+} // namespace detail
+
+// Marks a query picked at runtime, such as from a table, so its argument count is checked when it runs.
+[[nodiscard]] constexpr auto selected(const Query query) noexcept -> detail::SelectedQuery
+{
+    return detail::SelectedQuery{ query };
 }
 
 } // namespace db

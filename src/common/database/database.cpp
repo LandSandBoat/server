@@ -21,8 +21,6 @@
 
 #include <common/database/database.h>
 
-#include <common/database/query_validation.h>
-
 #include <common/logging.h>
 #include <common/macros.h>
 #include <common/xi.h>
@@ -31,84 +29,9 @@
 
 #include <algorithm>
 #include <array>
-#include <cctype>
 #include <chrono>
 #include <thread>
-#include <utility>
 using namespace std::chrono_literals;
-
-auto db::detail::validateQueryLeadingKeyword(std::string_view query) -> ResultSetType
-{
-    constexpr auto whitespace = std::string_view(" \t\r\n");
-    constexpr auto keywords   = std::array{
-        std::pair{ std::string_view("SELECT"), ResultSetType::Select },
-        std::pair{ std::string_view("SHOW"), ResultSetType::Select },
-        std::pair{ std::string_view("INSERT"), ResultSetType::Update },
-        std::pair{ std::string_view("UPDATE"), ResultSetType::Update },
-        std::pair{ std::string_view("DELETE"), ResultSetType::Update },
-        std::pair{ std::string_view("REPLACE"), ResultSetType::Update },
-        std::pair{ std::string_view("CREATE"), ResultSetType::Update },
-        std::pair{ std::string_view("ALTER"), ResultSetType::Update },
-        std::pair{ std::string_view("DROP"), ResultSetType::Update },
-        std::pair{ std::string_view("TRUNCATE"), ResultSetType::Update },
-        std::pair{ std::string_view("SET"), ResultSetType::Update },
-        std::pair{ std::string_view("START"), ResultSetType::Update },
-        std::pair{ std::string_view("COMMIT"), ResultSetType::Update },
-        std::pair{ std::string_view("ROLLBACK"), ResultSetType::Update },
-    };
-
-    const auto start = query.find_first_not_of(whitespace);
-    if (start == std::string_view::npos)
-    {
-        return ResultSetType::Invalid;
-    }
-
-    query.remove_prefix(start);
-
-    const auto keywordEnd = std::ranges::find_if_not(
-        query,
-        [](const char c)
-        {
-            return std::isalnum(static_cast<unsigned char>(c)) != 0 || c == '_';
-        });
-    const auto keyword = std::string_view(query.begin(), keywordEnd);
-
-    for (const auto& [name, type] : keywords)
-    {
-        const auto matches = std::ranges::equal(
-            name,
-            keyword,
-            [](const char upper, const char c)
-            {
-                return upper == std::toupper(static_cast<unsigned char>(c));
-            });
-
-        if (matches)
-        {
-            return type;
-        }
-    }
-
-    return ResultSetType::Invalid;
-}
-
-auto db::detail::validateQueryContent(std::string_view query) -> bool
-{
-    // NOTE: We shouldn't be checking for the presence of '%', as this
-    //     : is the SQL wildcard character.
-
-    if (query.contains("{}"))
-    {
-        return false;
-    }
-
-    if (query.contains(';'))
-    {
-        return false;
-    }
-
-    return true;
-}
 
 auto db::getDatabaseSchema() -> std::string
 {
