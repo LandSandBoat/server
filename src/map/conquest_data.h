@@ -106,8 +106,8 @@ public:
             return MAX_BEASTMEN_INFLUENCE;
         }
 
-        const int64 nationTotal = influence.sandoria_influence + influence.bastok_influence + influence.windurst_influence;
-        if (nationTotal == 0)
+        const int64 leaderInfluence = std::max({ influence.sandoria_influence, influence.bastok_influence, influence.windurst_influence });
+        if (leaderInfluence == 0)
         {
             return MAX_BEASTMEN_INFLUENCE;
         }
@@ -160,12 +160,12 @@ public:
         }
 
         // Current Beastmen model
-        // Beastmen% = Homepoints / (1 + Homepoints + MobKills / Weight) = BeastmenInfluence / (NationTotal + BeastmenInfluence)
-        // BeastmenInfluence = (Weight * Homepoints * NationTotal) / (Weight + MobKills)
-        // This will estimate BeastmenInfluence based on the current Nation Total influence
+        // Beastmen% = Homepoints / (1 + Homepoints + MobKills / Weight) = BeastmenInfluence / (LeadNationInfluence + BeastmenInfluence)
+        // BeastmenInfluence = (Weight * Homepoints * LeadNation) / (Weight + MobKills)
+        // This will estimate BeastmenInfluence based on the current Lead Nation influence
         const int64 beastmenWeight = homepointKillWeight * influence.player_homepoints;
 
-        return static_cast<int32>(std::min<int64>(beastmenWeight * nationTotal / (influence.mob_kills + homepointKillWeight), MAX_BEASTMEN_INFLUENCE));
+        return static_cast<int32>(std::min<int64>(beastmenWeight * leaderInfluence / (influence.mob_kills + homepointKillWeight), MAX_BEASTMEN_INFLUENCE));
     }
 
 private:
