@@ -52,6 +52,11 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         HUH_IS_THAT_ALL               = 7750, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7751, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7752, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+        SPOILS_IMPOSSIBLE             = 7757, -- You hear an impossible to gauge thud of massive spoils!<number>
+        SPOILS_LOUD_THUD              = 7758, -- You hear a loud thud, as if a large amount of spoils spontaneously appeared.<number>
+        SPOILS_THUD                   = 7759, -- You hear a thud, as if a large amount of spoils spontaneously appeared.<number>
+        SPOILS_NOISE                  = 7760, -- You hear a noise, as if a large amount of spoils spontaneously appeared.<number>
+        GIL_BONUS_REWARD              = 7761, -- You receive <number> gil as a bonus reward!
     },
 
     mob =
@@ -71,6 +76,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
 
     npc =
     {
+        TERMINAL_COFFERS = GetTableOfIDs('Terminal_Coffer'),
     },
 }
 

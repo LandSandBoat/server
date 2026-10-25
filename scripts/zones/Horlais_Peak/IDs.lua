@@ -51,6 +51,11 @@ zones[xi.zone.HORLAIS_PEAK] =
         HUH_IS_THAT_ALL               = 7982, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7983, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7984, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+        SPOILS_IMPOSSIBLE             = 7989, -- You hear an impossible to gauge thud of massive spoils!<number>
+        SPOILS_LOUD_THUD              = 7990, -- You hear a loud thud, as if a large amount of spoils spontaneously appeared.<number>
+        SPOILS_THUD                   = 7991, -- You hear a thud, as if a large amount of spoils spontaneously appeared.<number>
+        SPOILS_NOISE                  = 7992, -- You hear a noise, as if a large amount of spoils spontaneously appeared.<number>
+        GIL_BONUS_REWARD              = 7993, -- You receive <number> gil as a bonus reward!
     },
     mob =
     {
@@ -62,6 +67,7 @@ zones[xi.zone.HORLAIS_PEAK] =
     },
     npc =
     {
+        TERMINAL_COFFERS = GetTableOfIDs('Terminal_Coffer'),
     },
 }
 

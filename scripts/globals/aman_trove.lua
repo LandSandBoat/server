@@ -1,6 +1,8 @@
 -----------------------------------
 -- A.M.A.N. Trove
--- Greyson (Lower Jeuno).
+-- Greyson (Lower Jeuno) and the Mars and Venus Orb battlefields.
+-----------------------------------
+require('scripts/globals/battlefield')
 -----------------------------------
 xi = xi or {}
 xi.amanTrove = xi.amanTrove or {}
@@ -217,4 +219,432 @@ xi.amanTrove.onGreysonEventFinish = function(player, csid, option, npc)
         player:setCharVar('[AMAN]VoucherMonth', JstYear() * 100 + JstMonth())
         player:setCharVar('[AMAN]VouchersBought', bought + amount)
     end
+end
+
+-----------------------------------
+-- Battlefields
+-----------------------------------
+
+-- Exposed so server operators can tune the trove and tests can check the rolls.
+xi.amanTrove.tiers =
+{
+    NOISE      = 1,
+    THUD       = 2,
+    LOUD_THUD  = 3,
+    IMPOSSIBLE = 4,
+}
+
+-- The zone message key for each tier.
+local tierMessage =
+{
+    [xi.amanTrove.tiers.NOISE     ] = 'SPOILS_NOISE',
+    [xi.amanTrove.tiers.THUD      ] = 'SPOILS_THUD',
+    [xi.amanTrove.tiers.LOUD_THUD ] = 'SPOILS_LOUD_THUD',
+    [xi.amanTrove.tiers.IMPOSSIBLE] = 'SPOILS_IMPOSSIBLE',
+}
+
+-- Observed on retail: an upgraded chest keeps its id and only changes its look.
+-- TODO: Capture needed. No capture shows a gold chest. 969 is the Terminal Coffer's gold look.
+local upgradeModels =
+{
+    [xi.amanTrove.tiers.LOUD_THUD ] =  969,
+    [xi.amanTrove.tiers.IMPOSSIBLE] = 2426,
+}
+
+-- Each chest's own look, which a respawn doesn't restore after it became a mimic or a rainbow chest.
+local chestModels =
+{
+    ['Chest_OPlenty' ] = 967,
+    ['Coffer_OPlenty'] = 966,
+}
+
+-- TODO: Capture needed. One retail run in 43 started with a rainbow chest, and no capture shows the gil bonus.
+local startingRainbowChance = 2 -- Percent
+local gilBonusChance        = 1 -- Per thousand
+local gilBonusAmount        = 5000000
+
+-- Per the JP wiki, before Capacity Point bonuses.
+local capacityPointsOnClear = 1000
+
+-- Tier weights are each sound's share of the retail chest opens before 2025-11. Players often stopped after a
+-- loud thud, so the loud share is a floor.
+-- TODO: Capture needed. The 2025-11 update lowered the loud thud odds and raised Venus's, by amounts nobody has measured.
+-- TODO: Capture needed. The "left to be made" hint messages and their follow-ups.
+xi.amanTrove.orbs =
+{
+    MARS =
+    {
+        chestName     = 'Chest_OPlenty',
+        mimicModel    = 258,
+        cofferOffset  = 0,
+        cofferMinTier = xi.amanTrove.tiers.NOISE,
+        -- TODO: Capture needed. Since 2025-11 the Mars upgrade can fail, and the gold/rainbow split is unknown.
+        upgradeChance = 50,
+        rainbowChance = 30,
+        tierWeights   =
+        {
+            { tier = xi.amanTrove.tiers.NOISE,     weight = 819 },
+            { tier = xi.amanTrove.tiers.THUD,      weight = 155 },
+            { tier = xi.amanTrove.tiers.LOUD_THUD, weight =  26 },
+        },
+    },
+
+    VENUS =
+    {
+        chestName     = 'Coffer_OPlenty',
+        mimicModel    = 259,
+        cofferOffset  = 3,
+        -- The JP wiki and BG agree the Venus coffer is always a thud or better.
+        cofferMinTier = xi.amanTrove.tiers.THUD,
+        -- The JP wiki and BG say the Venus upgrade always happens, more often to rainbow.
+        -- TODO: Capture needed. The gold/rainbow split.
+        upgradeChance = 100,
+        rainbowChance = 55,
+        tierWeights   =
+        {
+            { tier = xi.amanTrove.tiers.NOISE,     weight = 732 },
+            { tier = xi.amanTrove.tiers.THUD,      weight = 214 },
+            { tier = xi.amanTrove.tiers.LOUD_THUD, weight =  54 },
+        },
+    },
+}
+
+-- The orb for each battlefield.
+local orbByBattlefield =
+{
+    [xi.battlefield.id.AMAN_TROVE_MARS_HORLAIS_PEAK     ] = xi.amanTrove.orbs.MARS,
+    [xi.battlefield.id.AMAN_TROVE_VENUS_HORLAIS_PEAK    ] = xi.amanTrove.orbs.VENUS,
+    [xi.battlefield.id.AMAN_TROVE_MARS_WAUGHROON_SHRINE ] = xi.amanTrove.orbs.MARS,
+    [xi.battlefield.id.AMAN_TROVE_VENUS_WAUGHROON_SHRINE] = xi.amanTrove.orbs.VENUS,
+    [xi.battlefield.id.AMAN_TROVE_MARS_BALGAS_DAIS      ] = xi.amanTrove.orbs.MARS,
+    [xi.battlefield.id.AMAN_TROVE_VENUS_BALGAS_DAIS     ] = xi.amanTrove.orbs.VENUS,
+}
+
+-- Rolls a chest's tier from the orb's weights, never below minTier.
+xi.amanTrove.rollTier = function(orb, minTier)
+    local candidates = {}
+    local total      = 0
+    for _, entry in ipairs(orb.tierWeights) do
+        if entry.tier >= minTier then
+            table.insert(candidates, entry)
+            total = total + entry.weight
+        end
+    end
+
+    local roll = math.randomInt(1, total)
+    for _, entry in ipairs(candidates) do
+        roll = roll - entry.weight
+        if roll <= 0 then
+            return entry.tier
+        end
+    end
+
+    return minTier
+end
+
+-- Adds one item of the given tier to the battlefield's spoils and announces the tier to the arena.
+local function addSpoils(battlefield, tier)
+    local spoils = battlefield:getLocalVar('SpoilsCount') + 1
+
+    battlefield:setLocalVar('SpoilsCount', spoils)
+    battlefield:setLocalVar(string.format('SpoilsItem%d', spoils), utils.randomEntry(xi.amanTrove.loot[tier]))
+    battlefield:setLocalVar(string.format('SpoilsTier%d', spoils), tier)
+
+    local ID = zones[battlefield:getZoneID()]
+    for _, player in ipairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text[tierMessage[tier]])
+    end
+end
+
+local function getChests(battlefield)
+    local orb    = orbByBattlefield[battlefield:getID()]
+    local chests = {}
+    for _, mob in ipairs(battlefield:getMobs(true, true)) do
+        if mob:getName() == orb.chestName then
+            table.insert(chests, mob)
+        end
+    end
+
+    return chests
+end
+
+-- Each zone lists the three Mars arena coffers, then the three Venus ones.
+local function getCoffer(battlefield)
+    local ID = zones[battlefield:getZoneID()]
+
+    return GetNPCByID(ID.npc.TERMINAL_COFFERS[orbByBattlefield[battlefield:getID()].cofferOffset + battlefield:getArea()])
+end
+
+-- Turns a chest gold or rainbow. The client keeps a mob's old model unless it gets a full update.
+local function upgradeChest(battlefield, chest, tier)
+    chest:setLocalVar('upgradeTier', tier)
+    chest:setModelId(upgradeModels[tier])
+    for _, player in ipairs(battlefield:getPlayers()) do
+        player:sendEntityUpdateToPlayer(chest, xi.entityUpdate.ENTITY_UPDATE, xi.updateType.UPDATE_ALL_MOB)
+    end
+end
+
+-- Observed on retail: unopened chests play a vanish animation, then go away.
+local function vanishUnopenedChests(battlefield, exceptId)
+    for _, chest in ipairs(getChests(battlefield)) do
+        if
+            chest:getID() ~= exceptId and
+            chest:isSpawned() and
+            chest:getLocalVar('opened') == 0
+        then
+            chest:setLocalVar('opened', 1)
+            chest:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+            chest:timer(3000, function(mob)
+                DespawnMob(mob:getID())
+            end)
+        end
+    end
+end
+
+local function isInSameBattlefield(player, entity)
+    local battlefield       = player:getBattlefield()
+    local entityBattlefield = entity:getBattlefield()
+    if
+        not battlefield or
+        not entityBattlefield
+    then
+        return false
+    end
+
+    return battlefield:getID() == entityBattlefield:getID() and battlefield:getArea() == entityBattlefield:getArea()
+end
+
+xi.amanTrove.setupBattlefield = function(battlefield)
+    local chests = getChests(battlefield)
+    battlefield:setLocalVar('ChestCount', #chests)
+
+    -- Exactly one chest is a mimic, per the JP wiki and BG. The retail click order agrees.
+    local mimic = table.remove(chests, math.randomInt(1, #chests))
+    battlefield:setLocalVar('MimicId', mimic:getID())
+
+    -- Observed on retail: a run can start with a rainbow chest, which is never the mimic.
+    if math.randomInt(1, 100) <= startingRainbowChance then
+        upgradeChest(battlefield, utils.randomEntry(chests), xi.amanTrove.tiers.IMPOSSIBLE)
+    end
+
+    -- Observed on retail: the Terminal Coffer is there and clickable from the start.
+    local coffer = getCoffer(battlefield)
+    battlefield:insertEntity(coffer:getTargID(), false, true)
+    npcUtil.showCrate(coffer)
+end
+
+-- Observed on retail: chests sit at status 0, which also lets them be clicked.
+xi.amanTrove.onChestSpawn = function(mob)
+    mob:setModelId(chestModels[mob:getName()])
+    mob:setAnimationSub(4, false)
+    mob:setAggressive(false)
+    mob:setStatus(xi.status.NORMAL)
+
+    -- Clicking is the only way to learn what a chest holds, so nothing may target it: no attacks, spells or abilities.
+    mob:setAllegiance(xi.allegiance.PLAYER)
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_ASSIST))
+    mob:setUnkillable(true)
+    mob:hideHP(true)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+end
+
+local function revealMimic(battlefield, mob, player)
+    mob:setLocalVar('opened', 1)
+
+    vanishUnopenedChests(battlefield, mob:getID())
+    getCoffer(battlefield):setStatus(xi.status.DISAPPEAR)
+
+    -- Observed on retail: the mimic model, status 1, and animation sub 5 with its mouth open.
+    mob:setModelId(orbByBattlefield[battlefield:getID()].mimicModel)
+    mob:setStatus(xi.status.UPDATE)
+    mob:setAllegiance(xi.allegiance.MOB)
+    mob:setUnkillable(false)
+    mob:hideHP(false)
+    mob:setAnimationSub(5, false)
+    mob:setAggressive(true)
+    mob:lookAt(player:getPos())
+    for _, member in ipairs(battlefield:getPlayers()) do
+        member:sendEntityUpdateToPlayer(mob, xi.entityUpdate.ENTITY_UPDATE, xi.updateType.UPDATE_ALL_MOB)
+    end
+
+    mob:updateClaim(player)
+    mob:updateEnmity(player)
+
+    -- Observed on retail: Ka-thwack is readied within about a second of the reveal.
+    mob:useMobAbility(xi.mobSkill.KA_THWACK, player)
+end
+
+xi.amanTrove.onChestTrigger = function(player, mob)
+    if
+        mob:getLocalVar('opened') == 1 or
+        not isInSameBattlefield(player, mob)
+    then
+        return
+    end
+
+    local battlefield = player:getBattlefield()
+    local mimicId     = battlefield:getLocalVar('MimicId')
+    if mob:getID() == mimicId then
+        revealMimic(battlefield, mob, player)
+        return
+    end
+
+    mob:setLocalVar('opened', 1)
+    mob:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
+
+    local orb  = orbByBattlefield[battlefield:getID()]
+    local tier = mob:getLocalVar('upgradeTier')
+    addSpoils(battlefield, tier > 0 and tier or xi.amanTrove.rollTier(orb, xi.amanTrove.tiers.NOISE))
+
+    -- Observed on retail: with two chests left, the one that isn't the mimic can turn gold or rainbow.
+    -- That marks the other one as the mimic, which retail accepts.
+    local opened = battlefield:getLocalVar('ChestsOpened') + 1
+    battlefield:setLocalVar('ChestsOpened', opened)
+    if
+        opened == battlefield:getLocalVar('ChestCount') - 2 and
+        math.randomInt(1, 100) <= orb.upgradeChance
+    then
+        local upgradeTier = math.randomInt(1, 100) <= orb.rainbowChance and xi.amanTrove.tiers.IMPOSSIBLE or xi.amanTrove.tiers.LOUD_THUD
+        for _, chest in ipairs(getChests(battlefield)) do
+            if
+                chest:getLocalVar('opened') == 0 and
+                chest:getID() ~= mimicId
+            then
+                upgradeChest(battlefield, chest, upgradeTier)
+                break
+            end
+        end
+    end
+
+    -- Observed on retail: an opened chest vanishes about 15 seconds later.
+    mob:timer(15000, function(chest)
+        chest:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+    end)
+
+    mob:timer(18000, function(chest)
+        DespawnMob(chest:getID())
+    end)
+end
+
+-- An unrevealed chest can't be targeted. If one is engaged anyway, it counts as springing the trap.
+xi.amanTrove.onChestEngage = function(mob, target)
+    if mob:getLocalVar('opened') == 1 then
+        return
+    end
+
+    local battlefield = mob:getBattlefield()
+    local mimicId     = battlefield:getLocalVar('MimicId')
+    if mob:getID() ~= mimicId then
+        for _, entry in ipairs(mob:getEnmityList()) do
+            mob:clearEnmityForEntity(entry.entity)
+        end
+
+        mob:disengage()
+    end
+
+    local mimic = GetMobByID(mimicId)
+    if not mimic then
+        return
+    end
+
+    -- A pet or Trust springs it for its master.
+    revealMimic(battlefield, mimic, target:getMaster() or target)
+end
+
+-- Ka-thwack is used again at every 25% of HP lost, per the JP wiki. BG says 69%, 39% and 9%.
+-- Only the mimic fights: every other chest disengages in onChestEngage.
+xi.amanTrove.onMimicFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    local stage = mob:getLocalVar('KaThwackStage')
+    if
+        stage < 3 and
+        mob:getHPP() <= 75 - stage * 25
+    then
+        mob:setLocalVar('KaThwackStage', stage + 1)
+        mob:useMobAbility(xi.mobSkill.KA_THWACK, target)
+    end
+end
+
+-- A mimic that wiped the party rests back to full, so the next attempt meets every Ka-thwack again.
+xi.amanTrove.onMimicDisengage = function(mob)
+    mob:setLocalVar('KaThwackStage', 0)
+end
+
+-- Killing the mimic brings back the Terminal Coffer, per the JP wiki, BG and FFXIclopedia.
+xi.amanTrove.onMimicDeath = function(mob, player, optParams)
+    local battlefield = mob:getBattlefield()
+    if
+        mob:getID() ~= battlefield:getLocalVar('MimicId') or
+        not optParams.isKiller and not optParams.noKiller
+    then
+        return
+    end
+
+    getCoffer(battlefield):setStatus(xi.status.NORMAL)
+
+    -- The JP wiki says only Coffer O'Plenty grants the title. BG says either.
+    if orbByBattlefield[battlefield:getID()] == xi.amanTrove.orbs.VENUS then
+        for _, member in ipairs(battlefield:getPlayers()) do
+            member:addTitle(xi.title.MIMIC_MASHER)
+        end
+    end
+end
+
+xi.amanTrove.onCofferTrigger = function(player, npc)
+    if not isInSameBattlefield(player, npc) then
+        return
+    end
+
+    npcUtil.openCrate(npc, function()
+        local battlefield = player:getBattlefield()
+        local orb         = orbByBattlefield[battlefield:getID()]
+
+        vanishUnopenedChests(battlefield, 0)
+
+        -- Observed on retail since 2025: the coffer announces its own tier.
+        addSpoils(battlefield, xi.amanTrove.rollTier(orb, orb.cofferMinTier))
+
+        -- Observed on retail: spoils arrive best tier first.
+        local spoils = {}
+        for i = 1, battlefield:getLocalVar('SpoilsCount') do
+            table.insert(spoils,
+            {
+                itemId = battlefield:getLocalVar(string.format('SpoilsItem%d', i)),
+                tier   = battlefield:getLocalVar(string.format('SpoilsTier%d', i)),
+            })
+        end
+
+        table.sort(spoils, function(a, b)
+            return a.tier > b.tier
+        end)
+
+        -- Per the patch notes, a Rare item the opener already holds is dropped from the spoils without a message.
+        for _, entry in ipairs(spoils) do
+            if
+                bit.band(GetReadOnlyItem(entry.itemId):getFlag(), xi.itemFlag.RARE) == 0 or
+                not player:hasItem(entry.itemId)
+            then
+                player:addTreasure(entry.itemId, npc)
+            end
+        end
+
+        -- BG: the gil bonus goes to whoever opens the coffer, whatever the spoils.
+        if math.randomInt(1, 1000) <= gilBonusChance then
+            player:addGil(gilBonusAmount)
+            player:messageSpecial(zones[battlefield:getZoneID()].text.GIL_BONUS_REWARD, gilBonusAmount)
+        end
+
+        for _, member in ipairs(battlefield:getPlayers()) do
+            member:addCapacityPoints(capacityPointsOnClear)
+        end
+
+        battlefield:setStatus(xi.battlefield.status.WON)
+        battlefield:setLocalVar('cutsceneTimer', xi.battlefield.contents[battlefield:getID()].delayToExit)
+
+        -- The battlefield cleans the coffer up.
+        return true
+    end)
 end
