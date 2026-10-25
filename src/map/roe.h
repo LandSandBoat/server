@@ -54,6 +54,7 @@ enum ROE_EVENT
     ROE_MAGICBURST          = 16,
     ROE_HEAL_UNITYALLY      = 17,
     ROE_TALK_NPC            = 18,
+    ROE_AUCTION_LISTING     = 19,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
@@ -85,6 +86,8 @@ struct RoeSystemData
     std::vector<uint16>      DailyRecordIDs;
     xi::bitset<4096>         WeeklyRecords;
     std::vector<uint16>      WeeklyRecordIDs;
+    xi::bitset<4096>         MonthlyRecords;
+    std::vector<uint16>      MonthlyRecordIDs;
     xi::bitset<4096>         UnityRecords;
     std::vector<uint16>      UnityRecordIDs;
     xi::bitset<4096>         TimedRecords;
@@ -161,6 +164,8 @@ void ClearDailyRecords(CCharEntity* PChar);
 void CycleDailyRecords();
 void ClearWeeklyRecords(CCharEntity* PChar);
 void CycleWeeklyRecords();
+void ClearMonthlyRecords(CCharEntity* PChar);
+void CycleMonthlyRecords();
 void CycleUnityRankings();
 void UpdateUnityRankings();
 void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate = false);

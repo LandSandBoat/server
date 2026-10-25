@@ -50,9 +50,10 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
     // Uses the JST equivalent of the current timer tick. (steady_clock -> system_clock)
 
     // Earth time points
-    const auto jstTime    = earth_time::time_point(timer::to_utc(tick));
-    const auto jstHour    = earth_time::jst::get_hour(jstTime);
-    const auto jstWeekday = earth_time::jst::get_weekday(jstTime);
+    const auto jstTime     = earth_time::time_point(timer::to_utc(tick));
+    const auto jstHour     = earth_time::jst::get_hour(jstTime);
+    const auto jstWeekday  = earth_time::jst::get_weekday(jstTime);
+    const auto jstMonthday = earth_time::jst::get_monthday(jstTime);
 
     // Static variable for the next tick
     static auto nextHourlyTick = std::chrono::ceil<std::chrono::hours>(jstTime);
@@ -71,6 +72,12 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
                 roeutils::CycleWeeklyRecords();
                 roeutils::CycleUnityRankings();
             }
+
+            if (jstMonthday == 1)
+            {
+                roeutils::CycleMonthlyRecords();
+            }
+
             roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
             luautils::OnJSTMidnight();
