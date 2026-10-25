@@ -20,13 +20,18 @@
 */
 
 #include <common/database.h>
+#include <common/database/blob.h>
 #include <common/database/query_validation.h>
+#include <common/scheduler/scheduler.h>
 
 #include <catch2/catch_test_macros.hpp>
 
 #include <algorithm>
+#include <array>
 #include <cstddef>
+#include <cstring>
 #include <limits>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -51,8 +56,25 @@ using ScalarProjection = decltype([](const int value)
                                       return value;
                                   });
 
+using MixedNumberProjection = decltype([](const int value)
+                                       {
+                                           return std::tuple{ value, true, 1.5 };
+                                       });
+
+using StringProjection = decltype([](const int value)
+                                  {
+                                      return std::tuple{ value, std::string("x") };
+                                  });
+
 static_assert(BulkAcceptsProjection<TupleProjection>);
+static_assert(BulkAcceptsProjection<MixedNumberProjection>);
 static_assert(!BulkAcceptsProjection<ScalarProjection>);
+static_assert(!BulkAcceptsProjection<StringProjection>, "Bulk binding takes numbers, bools and enums only");
+
+// A requires-expression doesn't evaluate consteval calls, so it can't see a wrong placeholder count or a
+// non-constant query rejected. These assert the values those checks compare instead.
+static_assert(db::detail::rowWidth<TupleProjection, int>() == 1);
+static_assert(db::detail::rowWidth<ScalarProjection, int>() == 0);
 
 template <typename Text>
 concept AcceptsQueryText = requires(Text text) { db::preparedStmt(text); };
@@ -102,6 +124,20 @@ TEST_CASE("db::preparedStmt stores bound strings verbatim", "[database]")
     REQUIRE(rset->next());
 
     CHECK(rset->get<std::string>(0) == raw);
+}
+
+TEST_CASE("db::preparedStmt binds a char array up to its first zero byte", "[database]")
+{
+    // Packet buffers fill the whole array, so there may be no terminator to stop at.
+    const char full[4]   = { 'a', 'b', 'c', 'd' };
+    const char padded[8] = { 'a', 'b', '\0', 'd' };
+
+    const auto rset = db::preparedStmt("SELECT ? AS whole, ? AS padded", full, padded);
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+
+    CHECK(rset->get<std::string>("whole") == "abcd");
+    CHECK(rset->get<std::string>("padded") == "ab");
 }
 
 TEST_CASE("db::preparedStmt takes a named query", "[database]")
@@ -384,14 +420,6 @@ TEST_CASE("db::executeBulk", "[database]")
         CHECK(rowCount() == 3);
     }
 
-    SECTION("throws for string columns")
-    {
-        CHECK_THROWS(db::executeBulk("INSERT INTO catch2_bulk VALUES (?, ?)", std::vector<int32>{ 1 }, [](const int32 id)
-                                     {
-                                         return std::tuple{ id, std::string("x") };
-                                     }));
-    }
-
     REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_bulk"));
 }
 
@@ -401,4 +429,426 @@ TEST_CASE("db::getTableColumnNames", "[database]")
 
     const auto columns = db::getTableColumnNames("char_points");
     CHECK(std::ranges::find(columns, "charid") != columns.end());
+}
+
+namespace
+{
+
+// Shaped like the small fixed records stored in blob columns, with no padding bytes.
+struct BlobRecord
+{
+    uint8  kind;
+    uint8  flags;
+    uint16 count;
+    uint32 id;
+};
+
+static_assert(sizeof(BlobRecord) == 8);
+
+template <typename Value>
+concept Binds = requires(Value value) { db::preparedStmt("SELECT ?", value); };
+
+enum class BindColour : uint16
+{
+    Red = 513,
+};
+
+static_assert(Binds<int8> && Binds<uint8> && Binds<int16> && Binds<uint16> && Binds<int32> && Binds<uint32>);
+static_assert(Binds<int64> && Binds<uint64> && Binds<std::size_t> && Binds<bool> && Binds<float> && Binds<double>);
+static_assert(Binds<std::string> && Binds<const char*>);
+static_assert(Binds<BindColour>, "An enum binds as its underlying type");
+static_assert(Binds<char (&)[21]>, "A char buffer binds as text up to its first zero byte");
+static_assert(Binds<uint8 (&)[24]> && Binds<std::array<uint16, 3>&> && Binds<BlobRecord&>, "Trivially copyable values bind as blobs");
+static_assert(Binds<const BlobRecord&>, "A blob binds from a const value");
+static_assert(!Binds<uint8*>, "A pointer would bind its own address");
+static_assert(!Binds<std::vector<int>>, "Only trivially copyable values have fixed bytes");
+static_assert(!Binds<std::string_view>, "Bind a std::string instead");
+static_assert(!Binds<char>, "A plain char is neither int8 nor uint8");
+static_assert(Binds<Maybe<int32>> && Binds<Maybe<std::string>>, "A Maybe binds its value, or NULL when empty");
+static_assert(Binds<std::nullptr_t>, "nullptr binds NULL");
+static_assert(!Binds<Maybe<std::vector<int>>>, "A Maybe binds only what its value type binds");
+
+} // namespace
+
+TEST_CASE("db blob columns", "[database]")
+{
+    REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_blob (id INT, data BLOB) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("DELETE FROM catch2_blob"));
+
+    // Blob binding copies from a mutable lvalue, as the callers that store item extra data do.
+    const auto store = [](const int32 id, auto& value)
+    {
+        REQUIRE(db::preparedStmt("INSERT INTO catch2_blob VALUES (?, ?)", id, value));
+    };
+
+    const auto load = [](const int32 id)
+    {
+        auto rset = db::preparedStmt("SELECT data FROM catch2_blob WHERE id = ?", id);
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset;
+    };
+
+    SECTION("a struct round-trips byte for byte")
+    {
+        auto record = BlobRecord{ .kind = 7, .flags = 0, .count = 513, .id = 0xDEADBEEF };
+        store(1, record);
+
+        const auto rset   = load(1);
+        const auto loaded = rset->get<BlobRecord>("data");
+
+        CHECK(rset->getBlobBytes("data").size() == sizeof(BlobRecord));
+        CHECK(loaded.kind == 7);
+        CHECK(loaded.flags == 0);
+        CHECK(loaded.count == 513);
+        CHECK(loaded.id == 0xDEADBEEF);
+    }
+
+    SECTION("a byte array keeps zero, quote, backslash and high bytes")
+    {
+        uint8 extra[24]{};
+        extra[0]  = 0x27;
+        extra[1]  = 0x5C;
+        extra[2]  = 0x00;
+        extra[3]  = 0xFF;
+        extra[4]  = 0x25;
+        extra[23] = 0x01;
+        store(2, extra);
+
+        const auto rset = load(2);
+
+        uint8 loaded[24]{};
+        db::extractFromBlob(rset, "data", loaded);
+
+        CHECK(rset->getBlobBytes("data").size() == sizeof(extra));
+        CHECK(std::ranges::equal(extra, loaded));
+    }
+
+    SECTION("a std::array binds as a blob")
+    {
+        auto values = std::array<uint16, 3>{ 1, 513, 65535 };
+        store(3, values);
+
+        CHECK(load(3)->get<std::array<uint16, 3>>("data") == values);
+    }
+
+    SECTION("a shorter blob fills a prefix and zeroes the rest")
+    {
+        uint8 prefix[2] = { 7, 1 };
+        store(4, prefix);
+
+        auto record = BlobRecord{ .kind = 9, .flags = 9, .count = 9, .id = 9 };
+        db::extractFromBlob(load(4), "data", record);
+
+        CHECK(record.kind == 7);
+        CHECK(record.flags == 1);
+        CHECK(record.count == 0);
+        CHECK(record.id == 0);
+    }
+
+    SECTION("a longer blob is cut to the destination's size")
+    {
+        auto record = BlobRecord{ .kind = 7, .flags = 1, .count = 513, .id = 0xDEADBEEF };
+        store(5, record);
+
+        auto head = uint32{ 0 };
+        db::extractFromBlob(load(5), "data", head);
+
+        auto expected = uint32{ 0 };
+        std::memcpy(&expected, &record, sizeof(expected));
+        CHECK(head == expected);
+    }
+
+    SECTION("NULL leaves extractFromBlob's destination alone, and get gives the default")
+    {
+        // A character created by the login server has NULL blobs until the map server fills them in.
+        REQUIRE(db::preparedStmt("INSERT INTO catch2_blob VALUES (?, NULL)", 6));
+
+        auto record = BlobRecord{ .kind = 9, .flags = 9, .count = 9, .id = 9 };
+        db::extractFromBlob(load(6), "data", record);
+
+        CHECK(record.kind == 9);
+        CHECK(record.id == 9);
+
+        const auto loaded = load(6)->get<BlobRecord>("data");
+        CHECK(loaded.kind == 0);
+        CHECK(loaded.id == 0);
+    }
+
+    REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_blob"));
+}
+
+TEST_CASE("db::BlobWrapper copies its source", "[database]")
+{
+    uint8 source[4] = { 1, 2, 3, 4 };
+
+    const auto wrapper = db::BlobWrapper::create(source);
+    source[0]          = 9;
+
+    REQUIRE(wrapper->size == sizeof(source));
+    CHECK(wrapper->data[0] == 1);
+    CHECK(wrapper->data[3] == 4);
+}
+
+TEST_CASE("db::ResultSet conversions", "[database]")
+{
+    const auto row = [](auto rset)
+    {
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset;
+    };
+
+    SECTION("narrowing wraps instead of clamping")
+    {
+        CHECK(row(db::preparedStmt("SELECT 300 AS value"))->get<uint8>("value") == 44);
+        CHECK(row(db::preparedStmt("SELECT -1 AS value"))->get<uint32>("value") == std::numeric_limits<uint32>::max());
+    }
+
+    SECTION("decimals and datetimes come back as text")
+    {
+        const auto rset = row(db::preparedStmt("SELECT CAST(1.5 AS DECIMAL(3, 1)) AS amount, CAST('2026-10-25 12:00:00' AS DATETIME) AS stamp"));
+
+        CHECK(rset->get<std::string>("amount") == "1.5");
+        CHECK(rset->get<double>("amount") == 1.5);
+        CHECK(rset->get<uint32>("amount") == 1);
+        CHECK(rset->get<std::string>("stamp") == "2026-10-25 12:00:00");
+    }
+
+    SECTION("bool is any nonzero number, and text only counts as a number")
+    {
+        const auto rset = row(db::preparedStmt("SELECT 2 AS two, 'true' AS word, '1' AS digit"));
+
+        CHECK(rset->get<bool>("two"));
+        CHECK_FALSE(rset->get<bool>("word"));
+        CHECK(rset->get<bool>("digit"));
+    }
+
+    SECTION("a floating point column read as text has six decimals")
+    {
+        CHECK(row(db::preparedStmt("SELECT CAST(1.5 AS DOUBLE) AS value"))->get<std::string>("value") == "1.500000");
+    }
+
+    SECTION("text read as a number parses its leading digits")
+    {
+        CHECK(row(db::preparedStmt("SELECT '12abc' AS value"))->get<uint32>("value") == 12);
+        CHECK(row(db::preparedStmt("SELECT 'abc' AS value"))->get<uint32>("value") == 0);
+    }
+}
+
+TEST_CASE("db::ResultSet columns and rows", "[database]")
+{
+    SECTION("get by index is zero-based")
+    {
+        const auto rset = db::preparedStmt("SELECT 7 AS first, 8 AS second");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->columnCount() == 2);
+        CHECK(rset->columnName(0) == "first");
+        CHECK(rset->get<uint32>(0) == 7);
+        CHECK(rset->get<uint32>(1) == 8);
+    }
+
+    SECTION("a repeated column name reads the last column, even by index")
+    {
+        const auto rset = db::preparedStmt("SELECT 1 AS value, 2 AS value");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<uint32>("value") == 2);
+        CHECK(rset->get<uint32>(0) == 2);
+    }
+
+    SECTION("a table-qualified column is named without its table")
+    {
+        const auto rset = db::preparedStmt("SELECT t.value FROM (SELECT 3 AS value) AS t");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<uint32>("value") == 3);
+    }
+
+    SECTION("next() stays false past the end, and reads there give the default")
+    {
+        const auto rset = db::preparedStmt("SELECT 5 AS value");
+        REQUIRE(rset);
+
+        CHECK(rset->next());
+        CHECK_FALSE(rset->next());
+        CHECK_FALSE(rset->next());
+        CHECK(rset->get<uint32>("value") == 0);
+    }
+
+    SECTION("asking a statement for the other kind of count gives 0")
+    {
+        const auto select = db::preparedStmt("SELECT 1");
+        const auto update = db::preparedStmt("SET @catch2_unused = 1");
+        REQUIRE(select);
+        REQUIRE(update);
+
+        CHECK(select->rowsAffected() == 0);
+        CHECK(update->rowsCount() == 0);
+    }
+
+    SECTION("a blob read as text keeps its embedded zero bytes")
+    {
+        const auto rset = db::preparedStmt("SELECT UNHEX('610062') AS value");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<std::string>("value").size() == 3);
+        CHECK(rset->getBlobBytes("value").size() == 3);
+    }
+}
+
+TEST_CASE("db rowsAffected counts changed rows, not matched rows", "[database]")
+{
+    // The connection doesn't set CLIENT_FOUND_ROWS, so an UPDATE that writes the stored value reports 0.
+    REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_affected (id INT PRIMARY KEY, value INT) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("DELETE FROM catch2_affected"));
+
+    const auto affected = [](auto rset)
+    {
+        REQUIRE(rset);
+        return rset->rowsAffected();
+    };
+
+    CHECK(affected(db::preparedStmt("INSERT INTO catch2_affected VALUES (?, ?)", 1, 10)) == 1);
+    CHECK(affected(db::preparedStmt("UPDATE catch2_affected SET value = ? WHERE id = ?", 10, 1)) == 0);
+    CHECK(affected(db::preparedStmt("UPDATE catch2_affected SET value = ? WHERE id = ?", 11, 1)) == 1);
+    CHECK(affected(db::preparedStmt("UPDATE catch2_affected SET value = ? WHERE id = ?", 11, 2)) == 0);
+
+    // An upsert reports 1 for an insert, 2 for an update and 0 when nothing changed.
+    CHECK(affected(db::preparedStmt("INSERT INTO catch2_affected VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)", 2, 20)) == 1);
+    CHECK(affected(db::preparedStmt("INSERT INTO catch2_affected VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)", 2, 21)) == 2);
+    CHECK(affected(db::preparedStmt("INSERT INTO catch2_affected VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)", 2, 21)) == 0);
+
+    // REPLACE deletes then inserts.
+    CHECK(affected(db::preparedStmt("REPLACE INTO catch2_affected VALUES (?, ?)", 2, 22)) == 2);
+
+    REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_affected"));
+}
+
+TEST_CASE("db string comparison", "[database]")
+{
+    SECTION("an empty string binds as '' rather than NULL")
+    {
+        const auto rset = db::preparedStmt("SELECT ? IS NULL AS isNull, ? = '' AS isEmpty", std::string(), std::string());
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK_FALSE(rset->get<bool>("isNull"));
+        CHECK(rset->get<bool>("isEmpty"));
+    }
+
+    SECTION("a character name column ignores case and trailing spaces")
+    {
+        // Name lookups take client text, so "zach " finds the character named "Zach".
+        REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE catch2_names AS SELECT charname AS name FROM chars LIMIT 0"));
+        REQUIRE(db::preparedStmt("INSERT INTO catch2_names VALUES (?)", std::string("Zach")));
+
+        const auto rset = db::preparedStmt("SELECT COUNT(*) AS matches FROM catch2_names WHERE name = ?", std::string("zach "));
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->get<uint32>("matches") == 1);
+
+        REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_names"));
+    }
+}
+
+TEST_CASE("db connections belong to one thread", "[database]")
+{
+    // Every thread gets its own connection, so temporary tables, transactions and LAST_INSERT_ID() don't cross threads.
+    auto scheduler = Scheduler(1);
+
+    REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_thread (id INT AUTO_INCREMENT PRIMARY KEY, value INT) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("INSERT INTO catch2_thread (value) VALUES (?)", 1));
+
+    const auto mainInsertId = []
+    {
+        const auto rset = db::preparedStmt("SELECT LAST_INSERT_ID() AS id");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset->get<uint64>("id");
+    }();
+    CHECK(mainInsertId > 0);
+
+    const auto workerSeesTable = scheduler.blockOnMainThread(scheduler.spawnOnWorkerThread(
+        []
+        {
+            return db::preparedStmt("SELECT COUNT(*) FROM catch2_thread") != nullptr;
+        }));
+    CHECK_FALSE(workerSeesTable);
+
+    const auto workerInsertId = scheduler.blockOnMainThread(scheduler.spawnOnWorkerThread(
+        []
+        {
+            const auto rset = db::preparedStmt("SELECT LAST_INSERT_ID() AS id");
+            if (!rset || !rset->next())
+            {
+                return std::numeric_limits<uint64>::max();
+            }
+
+            return rset->get<uint64>("id");
+        }));
+    CHECK(workerInsertId == 0);
+
+    REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_thread"));
+}
+
+TEST_CASE("db::clearStatementCache", "[database]")
+{
+    CHECK(db::preparedStmt("SELECT 1"));
+
+    db::clearStatementCache();
+
+    CHECK(db::preparedStmt("SELECT 1"));
+}
+
+TEST_CASE("db binds NULL", "[database]")
+{
+    const auto isNull = [](auto&& value)
+    {
+        const auto rset = db::preparedStmt("SELECT ? IS NULL AS isNull", std::forward<decltype(value)>(value));
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset->template get<bool>("isNull");
+    };
+
+    SECTION("an empty Maybe binds NULL, a full one binds its value")
+    {
+        CHECK(isNull(Maybe<int32>()));
+        CHECK_FALSE(isNull(Maybe<int32>(5)));
+
+        const auto rset = db::preparedStmt("SELECT ? AS value", Maybe<uint32>(7));
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        CHECK(rset->get<uint32>("value") == 7);
+    }
+
+    SECTION("nullptr and a null char pointer bind NULL")
+    {
+        const char* missing = nullptr;
+
+        CHECK(isNull(nullptr));
+        CHECK(isNull(missing));
+    }
+
+    SECTION("a NULL stored in a column reads back as NULL")
+    {
+        REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_nulls (id INT, value INT) ENGINE=InnoDB"));
+        REQUIRE(db::preparedStmt("DELETE FROM catch2_nulls"));
+        REQUIRE(db::preparedStmt("INSERT INTO catch2_nulls VALUES (?, ?)", 1, Maybe<int32>()));
+
+        const auto rset = db::preparedStmt("SELECT value FROM catch2_nulls WHERE id = ?", 1);
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+
+        CHECK(rset->isNull("value"));
+        CHECK(rset->getOrDefault<int32>("value", -1) == -1);
+
+        REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_nulls"));
+    }
 }
