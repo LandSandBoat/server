@@ -496,7 +496,7 @@ void CMagicState::SpendCost()
         // RDM Job Point: Quick Magic Effect
         if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity); IsInstantCast() && PChar)
         {
-            cost = (int16)(cost * (1.0f - (float)((PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100)));
+            cost = (int16)(cost * (1.0f - (PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100.0f));
         }
 
         // conserve mp
