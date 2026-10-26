@@ -280,10 +280,17 @@ xi.job_utils.puppetmaster.onAbilityCheckMaintenance = function(player, target, a
 end
 
 -- On Ability Use Maintenance
-xi.job_utils.puppetmaster.onAbilityUseMaintenance = function(player, target, ability)
+xi.job_utils.puppetmaster.onAbilityUseMaintenance = function(player, target, ability, action)
     local pet            = player:getPet()
     local oilEquipped    = xi.job_utils.puppetmaster.oilData[player:getEquipID(xi.slot.AMMO)]
     local effectsRemoved = removeStatusEffects(pet, oilEquipped.statusesRemoved)
+
+    -- Self-cast ability but reports on pet
+    action:ID(player:getID(), pet:getID())
+
+    if effectsRemoved == 0 then
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+    end
 
     player:removeAmmo(1)
 

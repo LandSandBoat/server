@@ -11,8 +11,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
-    xi.job_utils.black_mage.useEnmityDouse(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.black_mage.useEnmityDouse(player, target, ability, action)
 end
 
 return abilityObject
