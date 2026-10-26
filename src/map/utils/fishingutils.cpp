@@ -342,7 +342,7 @@ auto GetMoonModifier(fish_t* fish) -> float // 0.25 to 1.25
             modifier = MOONPATTERN_4(moonPhase);
             break;
         case 5:
-            modifier = MOONPATTERN_4(moonPhase);
+            modifier = MOONPATTERN_5(moonPhase);
             break;
     }
 
