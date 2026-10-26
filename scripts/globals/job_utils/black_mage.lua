@@ -33,11 +33,19 @@ xi.job_utils.black_mage.useElementalSeal = function(player, target, ability)
     return xi.effect.ELEMENTAL_SEAL
 end
 
-xi.job_utils.black_mage.useEnmityDouse = function(player, target, ability)
-    if target:isMob() then
-        target:setCE(player, 1)
-        target:setVE(player, 0)
+xi.job_utils.black_mage.useEnmityDouse = function(player, target, ability, action)
+    if
+        not target:isMob() or
+        target:getCE(player) + target:getVE(player) == 0
+    then
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+        action:resolution(target:getID(), xi.action.resolution.MISS)
+
+        return
     end
+
+    target:setCE(player, 1)
+    target:setVE(player, 0)
 end
 
 xi.job_utils.black_mage.useManafont = function(player, target, ability)

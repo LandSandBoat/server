@@ -184,6 +184,8 @@ xi.job_utils.paladin.useSepulcher = function(player, target, ability)
     local duration = 180 + jpValue
 
     target:addStatusEffect(xi.effect.SEPULCHER, { power = power, duration = duration, origin = player })
+
+    return xi.effect.SEPULCHER
 end
 
 xi.job_utils.paladin.useShieldBash = function(player, target, ability)
