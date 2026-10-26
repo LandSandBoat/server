@@ -1600,7 +1600,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             if (daze == xi::StatusEffect::DrainDaze && power > 0)
             {
                 uint16 multiplier = (uint16)(3 + 5.5f * (power - 1));
-                int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
+                int16  Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
                 // vary damage based on lvl diff
                 int8 lvlDiff = (PDefender->GetMLevel() - PAttacker->GetMLevel());
@@ -1638,7 +1638,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             else if (daze == xi::StatusEffect::AspirDaze && power > 0 && PDefender->GetMaxMP() > 0)
             {
                 uint16 multiplier = 1 + 2 * (power - 1);
-                int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
+                int16  Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
                 if (finaldamage <= 2)
                 {
