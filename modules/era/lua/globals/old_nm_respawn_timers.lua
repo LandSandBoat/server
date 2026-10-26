@@ -6,6 +6,8 @@
 --
 -- Source: https://forum.square-enix.com/ffxi/threads/38100
 --
+-- Satiator uses the four-hour value from its zone data. Its change date is unverified.
+--
 -- Each window is set when the zone loads. A restart starts it over.
 -- Base spawns Juggler Hecatomb, Manipulator and Atkorkamuy at load. This
 -- module holds them until their window ends.
@@ -16,6 +18,7 @@
 --   Juggler Hecatomb (Gusgen Mines)        : 21 to 24 hours
 --   Capricious Cassie (Fei'Yin)            : 21 to 24 hours
 --   Simurgh (Rolanberry Fields)            : 21 to 24 hours
+--   Satiator (Promyvion-Dem)               : 4 hours
 --   Manipulator (Temple of Uggalepih)      : 2 hours
 --   Atkorkamuy (Qufim Island)              : 2 hours, only with WotG content on
 --   Bloodsucker (Bostaunieux Oubliette)    : 72 hours exactly
@@ -59,6 +62,7 @@ local timedNMs =
     { 'Gusgen_Mines',          'Juggler_Hecatomb',   75600,  86400 }, -- 21 to 24 hours
     { 'FeiYin',                'Capricious_Cassie',  75600,  86400 }, -- 21 to 24 hours
     { 'Rolanberry_Fields',     'Simurgh',            75600,  86400 }, -- 21 to 24 hours
+    { 'Promyvion-Dem',         'Satiator',           14400,  14400 }, -- 4 hours
     { 'Temple_of_Uggalepih',   'Manipulator',         7200,   7200 }, -- 2 hours
     { 'Bostaunieux_Oubliette', 'Bloodsucker_NM',    259200, 259200 }, -- 72 hours
 }
