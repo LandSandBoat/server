@@ -747,7 +747,7 @@ auto CMobSpellContainer::GetSpell() -> Maybe<SpellID>
         auto naSpell = GetNaSpell();
         if (naSpell)
         {
-            return naSpell.value();
+            return naSpell;
         }
     }
 

@@ -3652,7 +3652,8 @@ auto HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool) -> b
             return ERROR_SLOTID;
         };
 
-        if (ERROR_SLOTID == (SlotID = findUnlockedTool(toolID)))
+        SlotID = findUnlockedTool(toolID);
+        if (SlotID == ERROR_SLOTID)
         {
             if (PChar->GetMJob() == xi::Job::NIN)
             {
@@ -3691,7 +3692,8 @@ auto HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool) -> b
                     default:
                         return false;
                 }
-                if (ERROR_SLOTID == (SlotID = findUnlockedTool(toolID)))
+                SlotID = findUnlockedTool(toolID);
+                if (SlotID == ERROR_SLOTID)
                 {
                     return false;
                 }

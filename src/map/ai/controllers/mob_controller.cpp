@@ -411,7 +411,7 @@ auto CMobController::TryCastSpell() -> bool
     const auto [maybeSpellOverride, maybeTargetOverride] = luautils::OnMobSpellChoose(PMob, PSpellTarget, chosenSpellId);
     if (maybeSpellOverride.has_value())
     {
-        chosenSpellId = maybeSpellOverride.value();
+        chosenSpellId = maybeSpellOverride;
     }
 
     if (!chosenSpellId.has_value())

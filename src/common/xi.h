@@ -215,12 +215,6 @@ struct bitset
         return N;
     }
 
-    auto operator=(xi::bitset<storage_size>&& other) -> xi::bitset<storage_size>&
-    {
-        data = std::move(other.data);
-        return *this;
-    }
-
     auto operator[](std::size_t pos) -> bit_reference
     {
         if (pos >= N)

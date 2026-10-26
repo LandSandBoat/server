@@ -22,6 +22,7 @@
 #pragma once
 
 #include <chrono>
+#include <cmath>
 
 #include "cbasetypes.h"
 #include "xi.h"
@@ -216,11 +217,11 @@ inline auto get_phase(const time_point& tp = now()) -> uint32
 
     if (daysmod >= 42)
     {
-        phase = static_cast<int32>(100 * ((daysmod - 42) / 42) + 0.5);
+        phase = static_cast<int32>(std::lround(100 * ((daysmod - 42) / 42)));
     }
     else
     {
-        phase = static_cast<int32>(100 * (1 - (daysmod / 42)) + 0.5);
+        phase = static_cast<int32>(std::lround(100 * (1 - (daysmod / 42))));
     }
 
     return phase;

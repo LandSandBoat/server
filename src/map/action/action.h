@@ -110,7 +110,7 @@ struct action_t
     {
         for (auto& actionTarget : targets)
         {
-            std::ranges::for_each(actionTarget.results, std::forward<Func>(func));
+            std::ranges::for_each(actionTarget.results, func);
         }
     }
 

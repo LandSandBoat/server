@@ -36,9 +36,9 @@ public:
 
     virtual ~handler_session() = default;
 
-    void start();
+    virtual void start();
 
-    void do_read();
+    virtual void do_read();
 
     virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self) = 0;
 

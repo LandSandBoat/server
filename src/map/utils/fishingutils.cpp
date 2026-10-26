@@ -1249,7 +1249,8 @@ auto doIntersect(areavector_t p1, areavector_t q1, areavector_t p2, areavector_t
 // Returns true if the areavector_t p lies inside the polygon[] with n vertices
 auto isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uint8 height) -> bool
 {
-    if (p.y < (posy - (height / 2)) || p.y > (posy + (height / 2)))
+    const uint8 halfHeight = height / 2;
+    if (p.y < (posy - halfHeight) || p.y > (posy + halfHeight))
     {
         return false;
     }
@@ -1281,7 +1282,8 @@ auto isInsidePoly(areavector_t polygon[], int n, areavector_t p, float posy, uin
 
 auto isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 height) -> bool
 {
-    if (p.y < (center.y - (height / 2)) || p.y > (center.y + (height / 2)))
+    const uint8 halfHeight = height / 2;
+    if (p.y < (center.y - halfHeight) || p.y > (center.y + halfHeight))
     {
         return false;
     }

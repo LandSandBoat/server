@@ -71,6 +71,7 @@ struct EventInfo : EventPrep
         return std::ranges::contains(cutsceneOptions, _option);
     }
 
+    // NOLINTNEXTLINE(bugprone-derived-method-shadowing-base-method): non-virtual aggregate, hides and calls the base reset.
     void reset()
     {
         EventPrep::reset();

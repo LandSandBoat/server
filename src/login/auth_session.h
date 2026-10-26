@@ -118,10 +118,7 @@ public:
     }
 
 public:
-    void start();
-
-protected:
-    void do_read();
+    void start() override;
 
     void read_func() override;
 
@@ -137,6 +134,8 @@ protected:
     }
 
     void do_write(std::size_t length) override;
+
+    void do_read() override;
 
 private:
     ipc::Channel<zmq::message_t> dealerChannel_;

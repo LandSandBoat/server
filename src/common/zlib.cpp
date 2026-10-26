@@ -94,7 +94,8 @@ static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::
         {
             // Everything over 0xff are pointers.
             // These pointers will be traversed until we hit data.
-            jump[i].ptr = jump.data() + (dec[i] - base) / sizeof(base);
+            const size_t index = (dec[i] - base) / sizeof(base);
+            jump[i].ptr        = jump.data() + index;
         }
         else
         {

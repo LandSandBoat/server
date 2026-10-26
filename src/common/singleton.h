@@ -46,11 +46,13 @@ public:
     }
 
 protected:
-    Singleton() = default;
-
     virtual ~Singleton() = default;
 
 private:
+    friend T;
+
+    Singleton() = default;
+
     // https://stackoverflow.com/a/55932298
     struct T_Instance : public T
     {
