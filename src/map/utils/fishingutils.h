@@ -780,7 +780,7 @@ enum MONTHCATCHPATTERNS : uint8
     (float)std::clamp(0.5f * std::cos(1.75f * x + 0.10f) + 0.5f, 0.0f, 1.0f)
 #define MOONPATTERN_2(x) \
     (float)std::clamp(0.5f * std::cos(1.75f * x + 3.30f) + 0.5f, 0.0f, 1.0f)
-#define MOONPATTERN_3(x) (float)std::clamp(1.0f - (x / 7), 0.0f, 1.0f)
+#define MOONPATTERN_3(x) (float)std::clamp(1.0f - ((x) / 7.0f), 0.0f, 1.0f)
 #define MOONPATTERN_4(x) \
     (float)std::clamp(0.5f * std::cos(0.90f * x + 3.14f) + 0.5f, 0.0f, 1.0f)
 #define MOONPATTERN_5(x) \
