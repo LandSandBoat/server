@@ -417,7 +417,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
             }
             else if (action.select == G_SELECT::HELIX_MOB_WEAKNESS)
             {
-                return POwner->SpellContainer->StormDayAgainstTargetWeakness(resolvedTarget);
+                return POwner->SpellContainer->HelixAgainstTargetWeakness(resolvedTarget);
             }
             else if (action.select == G_SELECT::RANDOM)
             {
@@ -677,7 +677,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                     }
                     else if (action.select == G_SELECT::HELIX_MOB_WEAKNESS)
                     {
-                        auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
+                        auto spell_id = POwner->SpellContainer->HelixAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->entityId(), spell_id.value());
