@@ -7,15 +7,15 @@ local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target, player)
-    local result = xi.msg.basic.ITEM_UNABLE_TO_USE
+itemObject.onItemCheck = function(target, item, player)
+    local result = 0
 
     if
-        target:getPool() == xi.mobPool.SHIKAREE_X or
-        target:getPool() == xi.mobPool.SHIKAREE_Y or
-        target:getPool() == xi.mobPool.SHIKAREE_Z
+        target:getPool() ~= xi.mobPool.SHIKAREE_X and
+        target:getPool() ~= xi.mobPool.SHIKAREE_Y and
+        target:getPool() ~= xi.mobPool.SHIKAREE_Z
     then
-        result = 0
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
     end
