@@ -179,6 +179,30 @@ jobs:
           echo "CC=/usr/bin/clang${{ env.clang_version }}" >> $GITHUB_ENV
           echo "CXX=/usr/bin/clang++${{ env.clang_version }}" >> $GITHUB_ENV
 
+      # ctcache hashes the preprocessed TU together with the clang-tidy config and replays the stored output for anything it has already seen, so only touched TUs get re-analysed.
+      - name: Setup clang-tidy-cache
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        env:
+          clang_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          sudo curl -sSfL -o /usr/local/bin/clang-tidy-cache https://raw.githubusercontent.com/matus-chochlik/ctcache/1.2.0/src/ctcache/clang_tidy_cache.py
+          echo "a1b677a8b0ba318c330b043582872e40ddfe797c6499682cf0033ae9c5665e07  /usr/local/bin/clang-tidy-cache" | sha256sum -c -
+          sudo chmod +x /usr/local/bin/clang-tidy-cache
+          printf '#!/bin/sh\nexec clang-tidy-cache clang-tidy%s "$@"\n' "$clang_version" > "$RUNNER_TEMP/clang-tidy-cached"
+          chmod +x "$RUNNER_TEMP/clang-tidy-cached"
+          echo "CTCACHE_DIR=$GITHUB_WORKSPACE/.ctcache" >> $GITHUB_ENV
+          echo "CTCACHE_SAVE_OUTPUT=1" >> $GITHUB_ENV
+
+      - name: Restore clang-tidy cache
+        id: ctcache
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/restore@v5
+        with:
+          path: .ctcache
+          key: ${{ format('ctcache-{0}-{1}', runner.os, github.run_id) }}
+          restore-keys: |
+            ${{ format('ctcache-{0}-', runner.os) }}
+
       # Static, ASAN-instrumented LuaJIT on the system allocator so ASAN tracks every Lua object.
       # The interpreter and JIT traces stay uninstrumented.
       - name: Build instrumented LuaJIT (Linux)
@@ -314,8 +338,19 @@ jobs:
         run: |
           cmake --build build --target enum_codegen
           run-clang-tidy${{ env.clang_version }} -p build -j $(nproc) -quiet \
-            -clang-tidy-binary clang-tidy${{ env.clang_version }} \
+            -clang-tidy-binary "$RUNNER_TEMP/clang-tidy-cached" \
             "^${GITHUB_WORKSPACE}/(src|build/generated)/" | tee clang_tidy.log
+
+      - name: Save clang-tidy cache
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .ctcache
+          key: ${{ steps.ctcache.outputs.cache-primary-key }}
+
+      - name: clang-tidy cache stats
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        run: clang-tidy-cache --show-stats || true
 
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
