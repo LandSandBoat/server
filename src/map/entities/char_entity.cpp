@@ -3206,14 +3206,27 @@ void CCharEntity::setLocked(bool locked)
     m_Locked = locked;
     if (locked)
     {
-        // Player and pet enmity are handled in mobcontroler.cpp, CheckLock() fucntion.
         // Mob casting interruption handled in magic_state.cpp, CMagicState::Update boolean.
         PAI->Disengage();
         if (PPet)
         {
             PPet->PAI->Disengage();
         }
-        battleutils::RelinquishClaim(this);
+
+        // Create a copy of the Notoriety Container and iterate over that.
+        // battleutils::ForceDeaggro eventually removes entries from that list which would be undefined behavior without a copy
+        CNotorietyContainer NotorietyCopy = *PNotorietyContainer;
+        for (auto PBattle : NotorietyCopy)
+        {
+            if (auto PMob = dynamic_cast<CMobEntity*>(PBattle); PMob)
+            {
+                battleutils::ForceDeaggro(PMob, this);
+                if (PPet)
+                {
+                    battleutils::ForceDeaggro(PMob, PPet);
+                }
+            }
+        }
     }
 }
 
