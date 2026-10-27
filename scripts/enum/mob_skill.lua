@@ -415,7 +415,6 @@ xi.mobSkill =
     WING_CUTTER_1                 =  623,
 
     VULTURE_3                     =  626,
-
     WILD_HORN                     =  628,
     THUNDERBOLT_BEHEMOTH          =  629,
     KICK_OUT                      =  630,
@@ -1384,12 +1383,12 @@ xi.mobSkill =
 
     HYDRO_WAVE                    = 2439,
 
-    INFERNO_4                     = 2480, -- Unknown usage.
-    TIDAL_WAVE_4                  = 2481, -- Unknown usage.
-    EARTHEN_FURY_4                = 2482, -- Unknown usage.
-    DIAMOND_DUST_4                = 2483, -- Unknown usage.
-    JUDGMENT_BOLT_4               = 2484, -- Unknown usage.
-    AERIAL_BLAST_4                = 2485, -- Unknown usage.
+    INFERNO_4                     = 2480, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Ifrit).
+    TIDAL_WAVE_4                  = 2481, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Leviathan).
+    EARTHEN_FURY_4                = 2482, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Titan).
+    DIAMOND_DUST_4                = 2483, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Shiva).
+    JUDGMENT_BOLT_4               = 2484, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Ramuh).
+    AERIAL_BLAST_4                = 2485, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Garuda).
 
     CYTOKINESIS                   = 2514,
 

@@ -2,7 +2,7 @@
 -- Area: Cloister of Tides
 -- BCNM: Sugar Coated Directive (ASA-4)
 -----------------------------------
-local cloisterOfTidesID = zones[xi.zone.CLOISTER_OF_TIDES]
+require('scripts/missions/asa/helpers')
 -----------------------------------
 
 local content = BattlefieldMission:new({
@@ -21,21 +21,25 @@ local content = BattlefieldMission:new({
     requiredKeyItems = { xi.keyItem.DOMINAS_CERULEAN_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
-    requiredVar      = 'Mission[11][3]Leviathan',
-    requiredValue    = 1,
 
     grantXP = 400,
 })
 
+-- The protocrystal must have refused the seal once this visit. The fight stays open after the mission.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    return Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) and
+        xi.asa.helpers.sugarCoatedEntry(player)
+end
+
+function content:onBattlefieldWin(player, battlefield)
+    BattlefieldMission.onBattlefieldWin(self, player, battlefield)
+    player:setCharVar(xi.asa.helpers.sugarCoated[xi.zone.CLOISTER_OF_TIDES].winVar, 1)
+end
+
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA     },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 1 },
-            { cloisterOfTidesID.mob.LEVIATHAN_PRIME_ASA + 2 },
-        },
+        mobs = { 'Leviathan_Prime_ASA' },
 
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)

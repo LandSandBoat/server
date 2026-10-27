@@ -4436,7 +4436,14 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1573); -- palsynyxi
 INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1574); -- painful_whip
 INSERT INTO `mob_skill_lists` VALUES ('DynamisUragnite',2113,1575); -- suctorial_tentacle
 
--- Next ID : 2114
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,869); -- whispering_wind
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,870); -- hastega, observed on retail
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,871); -- aerial_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,872); -- aero_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,873); -- predator_claws
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,874); -- wind_blade
+
+-- Next ID : 2115
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

@@ -34,10 +34,11 @@ templates:
         hp: 3000
 
   Garuda_Prime_ASA:
-    id:           7045
-    display_name: Garuda_Prime
-    species:      garuda
-    type:         [notorious, battlefield]
+    id:            7045
+    display_name:  Garuda_Prime
+    species:       garuda
+    type:          [notorious, battlefield]
+    skill_list_id: 2114
     attributes:
       combat:
         skill: great_axe
@@ -69,7 +70,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Garuda_Prime_TBW:
     id:            4647
