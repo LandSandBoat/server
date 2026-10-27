@@ -127,14 +127,24 @@ templates:
         hp: 10500
 
   Bompupu:
-    id:            6905
-    species:       tarutaru
-    type:          [notorious]
-    spell_list_id: 7
+    id:      6905
+    species: tarutaru
+    type:    [notorious]
+    spells:
+      - katon_ni
+      - hyoton_ni
+      - huton_ni
+      - doton_ni
+      - raiton_ni
+      - suiton_ni
     attributes:
       combat:
-        skill: sword
+        skill: katana
       jobs: [nin, nin]
+      resists:
+        immune_status: [light_sleep, dark_sleep, silence, terror, plague]
+      mob_mods:
+        magic_cool: 30
       render:
         look:
           type:  equipped
@@ -155,6 +165,9 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 2270
+    content: asa
 
   Boulder_Eater:
     id:            4580
@@ -842,11 +855,13 @@ templates:
     id:            6904
     species:       galks
     type:          [notorious]
-    spell_list_id: 7
+    skill_list_id: 2116
     attributes:
       combat:
-        skill: sword
+        skill: katana
       jobs: [nin, nin]
+      resists:
+        immune_status: [light_sleep, dark_sleep, silence, terror, plague]
       render:
         look:
           type:  equipped
@@ -866,6 +881,9 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 3120
+    content: asa
 
   Greater_Gaylas:
     id:            1804
@@ -1154,12 +1172,13 @@ templates:
     id:            6903
     species:       humes
     type:          [notorious]
-    spell_list_id: 7
-    skill_list_id: 149
+    skill_list_id: 2115
     attributes:
       combat:
-        skill: sword
-      jobs: [nin, nin]
+        skill: great_katana
+      jobs: [sam, sam]
+      resists:
+        immune_status: [light_sleep, dark_sleep, silence, terror, plague]
       render:
         look:
           type:  equipped
@@ -1179,6 +1198,9 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      stats:
+        hp: 2850
+    content: asa
 
   Robber_Crab:
     id:            3375
@@ -2366,39 +2388,51 @@ spawns:
   17645810:
     template: Renfred
     at:       [-140.976, -10.424, -191.447, 105]
+    level:    [48, 48]
   17645811:
     template: Renfred
     at:       [-139.580, -10.384, -190.205, 86]
+    level:    [45, 45]
   17645812:
     template: Renfred
     at:       [-138.579, -10.072, -191.276, 112]
+    level:    [45, 45]
   17645813:
     template: Renfred
     at:       [-139.421, -10.060, -192.404, 134]
+    level:    [45, 45]
   17645814:
     template: Gorattz
     at:       [-138.343, -10.627, -192.714, 160]
+    level:    [48, 48]
   17645815:
     template: Gorattz
     at:       [-137.138, -10.970, -191.292, 123]
+    level:    [45, 45]
   17645816:
     template: Gorattz
     at:       [-137.788, -9.966, -189.954, 96]
+    level:    [45, 45]
   17645817:
     template: Gorattz
     at:       [-139.811, -9.897, -190.787, 229]
+    level:    [45, 45]
   17645818:
     template: Bompupu
     at:       [-140.190, -10.371, -194.626, 215]
+    level:    [48, 48]
   17645819:
     template: Bompupu
     at:       [-138.964, -10.533, -192.392, 67]
+    level:    [45, 45]
   17645820:
     template: Bompupu
     at:       [-138.902, -9.987, -193.291, 184]
+    level:    [45, 45]
   17645821:
     template: Bompupu
     at:       [-139.266, -10.483, -192.260, 45]
+    level:    [45, 45]
   17645822:
     template: Wyvernhunter_Bambrox
   17645823:

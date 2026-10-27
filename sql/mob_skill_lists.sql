@@ -4443,7 +4443,17 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,872); -- aero_iv
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,873); -- predator_claws
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2114,874); -- wind_blade
 
--- Next ID : 2115
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2115,144); -- tachi_enpi
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2115,145); -- tachi_hobaku
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2115,146); -- tachi_goten
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2115,147); -- tachi_kagero
+
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,128); -- blade_rin
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,129); -- blade_retsu
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,131); -- blade_to
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,132); -- blade_chi
+
+-- Next ID : 2117
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
