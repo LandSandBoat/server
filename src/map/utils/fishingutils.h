@@ -145,7 +145,7 @@ struct fish_t
     uint8                waterType;       // fresh/sea
     uint8                log;             // quest/mission log
     uint8                quest;           // quest/mission id
-    uint8                quest_status;    // quest/mission status
+    uint8                quest_status;    // quest status at which the catch leaves the pool (0: only catchable while accepted)
     uint32               fishFlags;       // fish flags (half size, tropical, bottom dweller)
     uint8                hourPattern;     // hourly catch pattern
     uint8                moonPattern;     // moonphase catch pattern
