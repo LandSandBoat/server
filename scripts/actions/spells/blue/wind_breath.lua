@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
     params.lvlMod     = 0
     params.isConal    = true
 
-    return xi.spells.blue.useBreathSpell(caster, target, spell, params)
+    return xi.spells.blue.useBreathSpell(caster, target, spell, params, action)
 end
 
 return spellObject

@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
 
     params.dmgMultiplier = 5
 
-    return xi.spells.blue.useDrainSpell(caster, target, spell, params, 0, false)
+    return xi.spells.blue.useDrainSpell(caster, target, spell, params, 0, false, action)
 end
 
 return spellObject

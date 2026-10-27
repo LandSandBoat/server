@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
     params.hpMod      = 3
     params.lvlMod     = 0
 
-    return xi.spells.blue.useBreathSpell(caster, target, spell, params)
+    return xi.spells.blue.useBreathSpell(caster, target, spell, params, action)
 end
 
 return spellObject

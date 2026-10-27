@@ -496,8 +496,6 @@ local function applyPhysicalSpellDamage(caster, target, spell, params, returnInf
 
     spell:setCritical(anyCrit)
 
-    caster:delStatusEffectSilent(xi.effect.EFFLUX)
-
     if hitsLanded > 0 and totalDamage > 0 then
         local tpToCaster = xi.combat.tp.calculateTPGainOnMagicalDamage(caster, target, totalDamage) * math.max(params.tpHitsLanded - 1, 0) -- Calculate extra TP gained from multihits. takeSpellDamage accounts for one already.
 
@@ -519,6 +517,21 @@ local function applyPhysicalSpellDamage(caster, target, spell, params, returnInf
     end
 
     return totalDamage
+end
+
+-- Set Burst Affinity to be removed when the cast is finished for AoE purposes
+-- Only runs on the first target
+---@param caster CBaseEntity
+---@param target CBaseEntity
+---@param action CAction
+local setBurstAffinityCleanup = function(caster, target, action)
+    if target:getID() == action:getPrimaryTargetID() then
+        local burstAffinityEffect = caster:getStatusEffect(xi.effect.BURST_AFFINITY)
+
+        if burstAffinityEffect then
+            burstAffinityEffect:addEffectFlag(xi.effectFlag.MAGIC_END)
+        end
+    end
 end
 
 -----------------------------------
@@ -650,6 +663,26 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params, action
     local baseDamage   = getPhysicalBlueMagicBaseDamage(caster, target, spell, params, isCannonball)
     local ftp          = params.ftp0 or 1
     local tp           = getTPBonus(caster, params)
+
+    -- Set effects to be removed when the cast is finished for AoE purposes
+    -- Only run on the first target
+    if target:getID() == action:getPrimaryTargetID() then
+        if params.hasEfflux then
+            local effluxEffect = caster:getStatusEffect(xi.effect.EFFLUX)
+
+            if effluxEffect then
+                effluxEffect:addEffectFlag(xi.effectFlag.MAGIC_END)
+            end
+        end
+
+        if params.hasChainAffinity then
+            local chainAffinityEffect = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
+
+            if chainAffinityEffect then
+                chainAffinityEffect:addEffectFlag(xi.effectFlag.MAGIC_END)
+            end
+        end
+    end
 
     if tp > 0 then
         ftp = xi.spells.blue.calculatefTP(tp, params.ftp0, params.ftp1500, params.ftp3000)
@@ -784,12 +817,15 @@ end
 ---@param target CBaseEntity
 ---@param spell CSpell
 ---@param params blueSkillParams
+---@param action CAction
 ---@return number
-xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
+xi.spells.blue.useMagicalSpell = function(caster, target, spell, params, action)
     -- In individual magical spells, don't use params.effect for the added effect
     -- This would affect the resistance check for damage here
     -- We just want that to affect the resistance check for the added effect
     -- Use params.addedEffect instead
+
+    setBurstAffinityCleanup(caster, target, action)
 
     -- Initial values
     local initialD   = utils.clamp(caster:getMainLvl() + 2, 0, params.baseDamageCap)
@@ -876,8 +912,6 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
@@ -887,7 +921,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
 end
 
 -- Spell script Helper function.
-xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap, mpDrain)
+xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap, mpDrain, action)
     local finalDamage = 0
 
     -- Early returns
@@ -947,9 +981,9 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
         spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
+
+    setBurstAffinityCleanup(caster, target, action)
 
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
     finalDamage = math.floor(finalDamage * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
@@ -989,7 +1023,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
 end
 
 -- Breath-type blue magic spells.
-xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
+xi.spells.blue.useBreathSpell = function(caster, target, spell, params, action)
     -- Early return.
     if
         params.isConal and               -- Conal breath spells
@@ -1101,8 +1135,9 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
         spell:setMsg(spell:getMagicBurstMessage())
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
-        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
+
+    setBurstAffinityCleanup(caster, target, action)
 
     return dmg
 end

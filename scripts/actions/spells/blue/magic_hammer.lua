@@ -42,7 +42,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
 
     params.mnd_wsc = 0.3
 
-    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params, action)
 
     local mpDrained = utils.clamp(damage, 0, target:getMP())
 
