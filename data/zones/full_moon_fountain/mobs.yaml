@@ -275,6 +275,330 @@ templates:
       stats:
         hp: 20000
 
+  Clone_of_Flames:
+    id:      8172
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - fire_iii
+      - fire_iv
+      - virus
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      resists:
+        immune_status: [plague]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24905
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Torrents:
+    id:      8173
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - waterga_ii
+      - flood
+      - flood_ii
+      - poison_ii
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24901
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Boulders:
+    id:      8174
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - stone_iii
+      - stone_iv
+      - stonega_ii
+      - quake
+      - slow_ii
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      resists:
+        immune_status: [slow]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24907
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Gusts:
+    id:      8175
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - aero_iii
+      - aero_iv
+      - silence
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24902
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Sparks:
+    id:      8176
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - thundaga_ii
+      - burst
+      - burst_ii
+      - stun
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      resists:
+        immune_status: [stun]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24904
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Glaciers:
+    id:      8177
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - blizzard_iii
+      - blizzard_iv
+      - blizzaga_ii
+      - freeze
+      - freeze_ii
+      - paralyze_ii
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [blm, blm]
+      resists:
+        immune_status: [bind, paralyze]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24903
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Lights:
+    id:      8178
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - banish_ii
+      - banish_iii
+      - banishga_ii
+      - holy
+      - protect_iv
+      - shell_iv
+      - blindna
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [whm, whm]
+      resists:
+        immune_status: [light_sleep]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24906
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
+  Clone_of_Shadows:
+    id:      8179
+    species: fomor
+    type:    [notorious, battlefield]
+    spells:
+      - drain
+      - drain_ii
+      - absorb-mnd
+      - absorb-str
+      - absorb-acc
+      - curse
+      - dispel
+      - dread_spikes
+    skill_list_id: 115
+    attributes:
+      combat:
+        skill: staff
+        delay: 340
+      jobs: [drk, drk]
+      resists:
+        immune_status: [dark_sleep]
+      render:
+        look:
+          type:  equipped
+          race:  5
+          face:  29
+          head:  4115
+          body:  8211
+          hands: 12307
+          legs:  16403
+          feet:  20499
+          main:  24900
+          sub:   28672
+        entity_flags: 131
+        hitbox:        12
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 6525
+    content: asa
+
   Fenrir_Prime:
     id:            1322
     species:       fenrir
@@ -424,6 +748,166 @@ templates:
         type: [scripted]
       stats:
         hp: 5000
+
+  Pet_Prime_Ifrit:
+    id:           8180
+    display_name: Pet_Prime
+    species:      ifrit
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 793
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Leviathan:
+    id:           8181
+    display_name: Pet_Prime
+    species:      leviathan
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 795
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Titan:
+    id:           8182
+    display_name: Pet_Prime
+    species:      titan
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 794
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Garuda:
+    id:           8183
+    display_name: Pet_Prime
+    species:      garuda
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 796
+        entity_flags: 523
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Ramuh:
+    id:           8184
+    display_name: Pet_Prime
+    species:      ramuh
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 798
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Shiva:
+    id:           8185
+    display_name: Pet_Prime
+    species:      shiva
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 797
+        entity_flags: 523
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Carbuncle:
+    id:           8186
+    display_name: Pet_Prime
+    species:      carbuncle
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 791
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
+
+  Pet_Prime_Fenrir:
+    id:           8187
+    display_name: Pet_Prime
+    species:      fenrir
+    type:         [battlefield]
+    attributes:
+      jobs: [smn, smn]
+      render:
+        look:
+          type:  standard
+          model: 792
+        entity_flags: 651
+        model_size:     1
+        hitbox:         7
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 5000
+    content: asa
 
   Ramuh_Prime_WTB:
     id:            3317
@@ -838,101 +1322,221 @@ spawns:
     at:       [1.000, 1.000, 1.000]
     level:    [80, 85]
   17473591:
-    script: Clone_of_Flames
+    template: Clone_of_Flames
+    at:       [336.000, 47.300, -353.200, 64]
+    level:    [65, 65]
   17473592:
-    script: Pet_Prime
+    template: Pet_Prime_Ifrit
+    script:   Pet_Prime
+    at:       [337.000, 47.300, -352.200]
+    level:    [65, 65]
   17473593:
-    script: Clone_of_Torrents
+    template: Clone_of_Torrents
+    at:       [339.000, 47.300, -353.200, 64]
+    level:    [65, 65]
   17473594:
-    script: Pet_Prime
+    template: Pet_Prime_Leviathan
+    script:   Pet_Prime
+    at:       [340.000, 47.300, -352.200]
+    level:    [65, 65]
   17473595:
-    script: Clone_of_Boulders
+    template: Clone_of_Boulders
+    at:       [342.000, 47.300, -353.200, 64]
+    level:    [65, 65]
   17473596:
-    script: Pet_Prime
+    template: Pet_Prime_Titan
+    script:   Pet_Prime
+    at:       [343.000, 47.300, -352.200]
+    level:    [65, 65]
   17473597:
-    script: Clone_of_Gusts
+    template: Clone_of_Gusts
+    at:       [345.000, 47.300, -353.200, 64]
+    level:    [65, 65]
   17473598:
-    script: Pet_Prime
+    template: Pet_Prime_Garuda
+    script:   Pet_Prime
+    at:       [346.000, 47.300, -352.200]
+    level:    [65, 65]
   17473599:
-    script: Clone_of_Sparks
+    template: Clone_of_Sparks
+    at:       [336.000, 47.300, -351.200, 64]
+    level:    [65, 65]
   17473600:
-    script: Pet_Prime
+    template: Pet_Prime_Ramuh
+    script:   Pet_Prime
+    at:       [337.000, 47.300, -350.200]
+    level:    [65, 65]
   17473601:
-    script: Clone_of_Glaciers
+    template: Clone_of_Glaciers
+    at:       [339.000, 47.300, -351.200, 64]
+    level:    [65, 65]
   17473602:
-    script: Pet_Prime
+    template: Pet_Prime_Shiva
+    script:   Pet_Prime
+    at:       [340.000, 47.300, -350.200]
+    level:    [65, 65]
   17473603:
-    script: Clone_of_Lights
+    template: Clone_of_Lights
+    at:       [342.000, 47.300, -351.200, 64]
+    level:    [65, 65]
   17473604:
-    script: Pet_Prime
+    template: Pet_Prime_Carbuncle
+    script:   Pet_Prime
+    at:       [343.000, 47.300, -350.200]
+    level:    [65, 65]
   17473605:
-    script: Clone_of_Shadows
+    template: Clone_of_Shadows
+    at:       [345.000, 47.300, -351.200, 64]
+    level:    [65, 65]
   17473606:
-    script: Pet_Prime
+    template: Pet_Prime_Fenrir
+    script:   Pet_Prime
+    at:       [346.000, 47.300, -350.200]
+    level:    [65, 65]
   17473607:
-    script: Clone_of_Flames
+    template: Clone_of_Flames
+    at:       [-64.097, 9.300, 46.767, 64]
+    level:    [65, 65]
   17473608:
-    script: Pet_Prime
+    template: Pet_Prime_Ifrit
+    script:   Pet_Prime
+    at:       [-63.097, 9.300, 47.767]
+    level:    [65, 65]
   17473609:
-    script: Clone_of_Torrents
+    template: Clone_of_Torrents
+    at:       [-61.097, 9.300, 46.767, 64]
+    level:    [65, 65]
   17473610:
-    script: Pet_Prime
+    template: Pet_Prime_Leviathan
+    script:   Pet_Prime
+    at:       [-60.097, 9.300, 47.767]
+    level:    [65, 65]
   17473611:
-    script: Clone_of_Boulders
+    template: Clone_of_Boulders
+    at:       [-58.097, 9.300, 46.767, 64]
+    level:    [65, 65]
   17473612:
-    script: Pet_Prime
+    template: Pet_Prime_Titan
+    script:   Pet_Prime
+    at:       [-57.097, 9.300, 47.767]
+    level:    [65, 65]
   17473613:
-    script: Clone_of_Gusts
+    template: Clone_of_Gusts
+    at:       [-55.097, 9.300, 46.767, 64]
+    level:    [65, 65]
   17473614:
-    script: Pet_Prime
+    template: Pet_Prime_Garuda
+    script:   Pet_Prime
+    at:       [-54.097, 9.300, 47.767]
+    level:    [65, 65]
   17473615:
-    script: Clone_of_Sparks
+    template: Clone_of_Sparks
+    at:       [-64.097, 9.300, 48.767, 64]
+    level:    [65, 65]
   17473616:
-    script: Pet_Prime
+    template: Pet_Prime_Ramuh
+    script:   Pet_Prime
+    at:       [-63.097, 9.300, 49.767]
+    level:    [65, 65]
   17473617:
-    script: Clone_of_Glaciers
+    template: Clone_of_Glaciers
+    at:       [-61.097, 9.300, 48.767, 64]
+    level:    [65, 65]
   17473618:
-    script: Pet_Prime
+    template: Pet_Prime_Shiva
+    script:   Pet_Prime
+    at:       [-60.097, 9.300, 49.767]
+    level:    [65, 65]
   17473619:
-    script: Clone_of_Lights
+    template: Clone_of_Lights
+    at:       [-58.097, 9.300, 48.767, 64]
+    level:    [65, 65]
   17473620:
-    script: Pet_Prime
+    template: Pet_Prime_Carbuncle
+    script:   Pet_Prime
+    at:       [-57.097, 9.300, 49.767]
+    level:    [65, 65]
   17473621:
-    script: Clone_of_Shadows
+    template: Clone_of_Shadows
+    at:       [-55.097, 9.300, 48.767, 64]
+    level:    [65, 65]
   17473622:
-    script: Pet_Prime
+    template: Pet_Prime_Fenrir
+    script:   Pet_Prime
+    at:       [-54.097, 9.300, 49.767]
+    level:    [65, 65]
   17473623:
-    script: Clone_of_Flames
+    template: Clone_of_Flames
+    at:       [-383.943, -52.700, 406.774, 64]
+    level:    [65, 65]
   17473624:
-    script: Pet_Prime
+    template: Pet_Prime_Ifrit
+    script:   Pet_Prime
+    at:       [-382.943, -52.700, 407.774]
+    level:    [65, 65]
   17473625:
-    script: Clone_of_Torrents
+    template: Clone_of_Torrents
+    at:       [-380.943, -52.700, 406.774, 64]
+    level:    [65, 65]
   17473626:
-    script: Pet_Prime
+    template: Pet_Prime_Leviathan
+    script:   Pet_Prime
+    at:       [-379.943, -52.700, 407.774]
+    level:    [65, 65]
   17473627:
-    script: Clone_of_Boulders
+    template: Clone_of_Boulders
+    at:       [-377.943, -52.700, 406.774, 64]
+    level:    [65, 65]
   17473628:
-    script: Pet_Prime
+    template: Pet_Prime_Titan
+    script:   Pet_Prime
+    at:       [-376.943, -52.700, 407.774]
+    level:    [65, 65]
   17473629:
-    script: Clone_of_Gusts
+    template: Clone_of_Gusts
+    at:       [-374.943, -52.700, 406.774, 64]
+    level:    [65, 65]
   17473630:
-    script: Pet_Prime
+    template: Pet_Prime_Garuda
+    script:   Pet_Prime
+    at:       [-373.943, -52.700, 407.774]
+    level:    [65, 65]
   17473631:
-    script: Clone_of_Sparks
+    template: Clone_of_Sparks
+    at:       [-383.943, -52.700, 408.774, 64]
+    level:    [65, 65]
   17473632:
-    script: Pet_Prime
+    template: Pet_Prime_Ramuh
+    script:   Pet_Prime
+    at:       [-382.943, -52.700, 409.774]
+    level:    [65, 65]
   17473633:
-    script: Clone_of_Glaciers
+    template: Clone_of_Glaciers
+    at:       [-380.943, -52.700, 408.774, 64]
+    level:    [65, 65]
   17473634:
-    script: Pet_Prime
+    template: Pet_Prime_Shiva
+    script:   Pet_Prime
+    at:       [-379.943, -52.700, 409.774]
+    level:    [65, 65]
   17473635:
-    script: Clone_of_Lights
+    template: Clone_of_Lights
+    at:       [-377.943, -52.700, 408.774, 64]
+    level:    [65, 65]
   17473636:
-    script: Pet_Prime
+    template: Pet_Prime_Carbuncle
+    script:   Pet_Prime
+    at:       [-376.943, -52.700, 409.774]
+    level:    [65, 65]
   17473637:
-    script: Clone_of_Shadows
+    template: Clone_of_Shadows
+    at:       [-374.943, -52.700, 408.774, 64]
+    level:    [65, 65]
   17473638:
-    script: Pet_Prime
+    template: Pet_Prime_Fenrir
+    script:   Pet_Prime
+    at:       [-373.943, -52.700, 409.774]
+    level:    [65, 65]
   17473639:
     script: Fenrir_Prime
   17473640:

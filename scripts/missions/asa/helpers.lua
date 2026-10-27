@@ -467,3 +467,28 @@ xi.asa.helpers.trackKillingBlow = function(mob)
         mobArg:setLocalVar('asaDamageType', damageType)
     end)
 end
+
+-----------------------------------
+-- ASA-10: Battaru Royale clones
+-----------------------------------
+
+-- Observed on retail: about 1 percent every 19 seconds.
+xi.asa.helpers.onCloneSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 1)
+    mob:setMod(xi.mod.REGEN, 10)
+end
+
+-- Observed on retail: each clone summons its avatar once, the first time it is below 75 percent and free to act.
+xi.asa.helpers.onCloneFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    if
+        mob:getLocalVar('astralFlowUsed') == 0 and
+        mob:getHPP() < 75
+    then
+        mob:setLocalVar('astralFlowUsed', 1)
+        mob:useMobAbility(xi.mobSkill.ASTRAL_FLOW_1)
+    end
+end
