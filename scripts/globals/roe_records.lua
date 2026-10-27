@@ -20,6 +20,39 @@ local abysseaZones = set{
     xi.zone.ABYSSEA_EMPYREAL_PARADOX,
 }
 
+-- The region of each nation's capital.
+local nationCapitals =
+{
+    [xi.nation.SANDORIA] = xi.region.SANDORIA,
+    [xi.nation.BASTOK  ] = xi.region.BASTOK,
+    [xi.nation.WINDURST] = xi.region.WINDURST,
+}
+
+-- The auto-translate phrase {Hello!}.
+local autoTranslateHello = string.char(0xFD, 0x02, 0x02, 0x01, 0x0B, 0xFD)
+
+local conquestRegions = set{
+    xi.region.RONFAURE,
+    xi.region.ZULKHEIM,
+    xi.region.NORVALLEN,
+    xi.region.GUSTABERG,
+    xi.region.DERFLAND,
+    xi.region.SARUTABARUTA,
+    xi.region.KOLSHUSHU,
+    xi.region.ARAGONEU,
+    xi.region.FAUREGANDI,
+    xi.region.VALDEAUNIA,
+    xi.region.QUFIM_ISLAND,
+    xi.region.LITELOR,
+    xi.region.KUZOTZ,
+    xi.region.VOLLBOW,
+    xi.region.ELSHIMO_LOWLANDS,
+    xi.region.ELSHIMO_UPLANDS,
+    xi.region.TULIA,
+    xi.region.MOVALPOLOS,
+    xi.region.TAVNAZIAN_ARCHIPELAGO,
+}
+
 -- NOTE: This file calls the roe global init function at the end to populate default
 -- values that may be missing.  This same behavior happens in the roe global as well
 -- to ensure that whichever is loaded last will always have accurate information.
@@ -96,12 +129,10 @@ xi.roe.records =
         reward = { sparks = 100, exp = 500 }
     },
 
-    --[[ TODO
     [1447] =
     { -- Exploring the Trove
-        reward =  { sparks = 100, exp = 500 }
+        reward = { sparks = 100, exp = 500 }
     },
-    ]]
 
     [1448] =
     { -- Assist Channel
@@ -9483,6 +9514,67 @@ xi.roe.records =
         reqs = { unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
+    },
+
+    -----------------------------------
+    -- Content - A.M.A.N. Trove
+    -- TODO: 3773-3778 (Besieged, Campaign, Reive, Ambuscade, Omen and Divergence participation) need content LSB lacks.
+    -----------------------------------
+
+    [3768] =
+    { -- A.M.A.N. Trove (M)
+        check = function(self, player, params)
+            return xi.settings.main.ENABLE_AMAN_TROVE == 1
+        end,
+
+        flags = set { 'monthly' },
+        reward = { sparks = 500, exp = 5000, capacity = 5000, item = { xi.item.MARS_ORB } },
+    },
+
+    [3769] =
+    { -- Examine a Home Point (M)
+        -- Only a home point in the player's own nation counts.
+        check = function(self, player, params)
+            return xi.settings.main.ENABLE_AMAN_TROVE == 1 and player:getCurrentRegion() == nationCapitals[player:getNation()]
+        end,
+
+        flags = set { 'monthly' },
+        reward = { sparks = 500, exp = 5000, capacity = 5000, item = { xi.item.SILVER_AMAN_VOUCHER } },
+    },
+
+    [3770] =
+    { -- Auction an Item (M)
+        check = function(self, player, params)
+            return xi.settings.main.ENABLE_AMAN_TROVE == 1
+        end,
+
+        trigger = xi.roeTrigger.AUCTION_LISTING,
+        flags = set { 'monthly' },
+        reward = { sparks = 500, exp = 5000, capacity = 5000, item = { xi.item.SILVER_AMAN_VOUCHER } },
+    },
+
+    [3771] =
+    { -- Unity Chat Greetings (M)
+        check = function(self, player, params)
+            return xi.settings.main.ENABLE_AMAN_TROVE == 1 and string.find(params.unityMessage or '', autoTranslateHello, 1, true) ~= nil
+        end,
+
+        trigger = xi.roeTrigger.UNITY_CHAT,
+        flags = set { 'monthly' },
+        reward = { sparks = 500, exp = 5000, capacity = 5000, item = { xi.item.SILVER_AMAN_VOUCHER } },
+    },
+
+    [3772] =
+    { -- Conquest Participation (M)
+        -- Any kill in a conquest region counts, with or without experience.
+        check = function(self, player, params)
+            return xi.settings.main.ENABLE_AMAN_TROVE == 1 and conquestRegions[player:getCurrentRegion()]
+        end,
+
+        trigger = xi.roeTrigger.DEFEAT_MOB,
+        goal = 30,
+        flags = set { 'monthly' },
+        reward = { sparks = 500, exp = 5000, capacity = 5000, item = { xi.item.SILVER_AMAN_VOUCHER } },
     },
 
     -----------------------------------

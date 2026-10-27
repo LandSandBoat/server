@@ -21,4 +21,5 @@ xi.roeTrigger =
     MAGIC_BURST          = 16, -- Player performs a Magic Burst
     HEAL_UNITY_ALLY      = 17, -- Player heals someone in their party/alliance with the same Unity
     TRIGGER_NPC          = 18, -- Player talk to RoE - TODO: Make this generic and utilize for other NPCs
+    AUCTION_LISTING      = 19, -- Player puts an item up on the Auction House
 }

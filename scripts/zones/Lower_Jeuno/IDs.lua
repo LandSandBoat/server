@@ -67,6 +67,11 @@ zones[xi.zone.LOWER_JEUNO] =
         ARTIFACT_HAS_BEEN_CHARGED     = 10381, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME      = 10382, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER        = 10383, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        NO_NEED_TO_HURRY              = 11067, -- Now, now... There's no need to be in such a hurry. Simply hear me out for a moment.
+        CANT_CARRY_ANY_MORE           = 11111, -- Um... I'm sorry, but you can't carry any more. Would you like to exchange some for an orb or two?
+        ORB_FRESHLY_CHARGED           = 11112, -- This one has already been used. Perhaps I can offer you a free one to satiate your lust for treasures. Here you are--a freshly charged %.
+        ORB_FREEBIE                   = 11113, -- This one has already been used. I'll give you a freebie, okay? Here. %.
+        ORB_NOT_USED_YET              = 11114, -- Oh, this one hasn't been used yet. Nothing I can do with it.
     },
     mob =
     {

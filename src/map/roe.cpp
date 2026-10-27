@@ -51,6 +51,30 @@ void SaveEminenceDataNice(CCharEntity* PChar)
     }
 }
 
+namespace
+{
+
+void ResetRecords(CCharEntity* PChar, const xi::bitset<4096>& records, const std::vector<uint16>& recordIDs)
+{
+    for (int i = 0; i < 30; i++)
+    {
+        if (const auto recordID = PChar->m_eminenceLog.active[i]; records.test(recordID))
+        {
+            PChar->m_eminenceLog.progress[i] = 0;
+        }
+    }
+    PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
+
+    for (const auto record : recordIDs)
+    {
+        const auto page = static_cast<uint16>(record / 8);
+        const auto bit  = static_cast<uint8>(record % 8);
+        PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
+    }
+}
+
+} // namespace
+
 void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagramList& payload)
 {
     TracyZoneScoped;
@@ -80,7 +104,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {
-            params[datagram.luaKey] = text;
+            params[datagram.luaKey] = *text;
         }
         else
         {
@@ -111,6 +135,8 @@ void ParseRecords(const sol::table& records_table)
     roeutils::RoeSystem.HiddenRecords.reset();
     roeutils::RoeSystem.DailyRecords.reset();
     roeutils::RoeSystem.DailyRecordIDs.clear();
+    roeutils::RoeSystem.MonthlyRecords.reset();
+    roeutils::RoeSystem.MonthlyRecordIDs.clear();
     roeutils::RoeSystem.NotifyThresholds.fill(1);
 
     // TODO: Move this Lua interaction into luautils
@@ -160,6 +186,11 @@ void ParseRecords(const sol::table& records_table)
                 {
                     roeutils::RoeSystem.WeeklyRecords.set(recordID);
                     roeutils::RoeSystem.WeeklyRecordIDs.emplace_back(recordID);
+                }
+                else if (flag == "monthly")
+                {
+                    roeutils::RoeSystem.MonthlyRecords.set(recordID);
+                    roeutils::RoeSystem.MonthlyRecordIDs.emplace_back(recordID);
                 }
                 else if (flag == "unity")
                 {
@@ -481,6 +512,16 @@ void onCharLoad(CCharEntity* PChar)
         auto currentTime     = earth_time::now();
         auto lastJstMidnight = earth_time::jst::get_next_midnight(currentTime) - 24h; // Most recent JST midnight
 
+        { // Monthly Reset
+            // Retail resets monthly records with a version update. The first of the JST month stands in for it.
+            // This runs before the daily reset, which saves for both.
+            const auto lastMonthlyReset = lastJstMidnight - std::chrono::days(earth_time::jst::get_monthday(currentTime) - 1);
+            if (PChar->lastOnline < lastMonthlyReset)
+            {
+                ClearMonthlyRecords(PChar);
+            }
+        }
+
         { // Daily Reset
             if (PChar->lastOnline < lastJstMidnight)
             {
@@ -573,23 +614,7 @@ void ClearDailyRecords(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    // Set daily record progress to 0
-    for (int i = 0; i < 30; i++)
-    {
-        if (auto recordID = PChar->m_eminenceLog.active[i]; RoeSystem.DailyRecords.test(recordID))
-        {
-            PChar->m_eminenceLog.progress[i] = 0;
-        }
-    }
-    PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
-
-    // Set completion for daily records to 0
-    for (auto record : RoeSystem.DailyRecordIDs)
-    {
-        uint16 page = record / 8;
-        uint8  bit  = record % 8;
-        PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
-    }
+    ResetRecords(PChar, RoeSystem.DailyRecords, RoeSystem.DailyRecordIDs);
 
     // Set completion for Unity Records, but maintain progress on active
     for (auto record : RoeSystem.UnityRecordIDs)
@@ -654,23 +679,7 @@ void ClearWeeklyRecords(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    // Set daily record progress to 0
-    for (int i = 0; i < 30; i++)
-    {
-        if (auto recordID = PChar->m_eminenceLog.active[i]; RoeSystem.WeeklyRecords.test(recordID))
-        {
-            PChar->m_eminenceLog.progress[i] = 0;
-        }
-    }
-    PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
-
-    // Set completion for daily records to 0
-    for (auto record : RoeSystem.WeeklyRecordIDs)
-    {
-        uint16 page = record / 8;
-        uint8  bit  = record % 8;
-        PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
-    }
+    ResetRecords(PChar, RoeSystem.WeeklyRecords, RoeSystem.WeeklyRecordIDs);
 
     charutils::SaveEminenceData(PChar);
     PChar->setCharVar("weekly_sparks_spent", 0);
@@ -707,6 +716,34 @@ void CycleWeeklyRecords()
             });
         });
     // clang-format on
+}
+
+// The daily reset always runs straight after, and saves and sends the log for both.
+void ClearMonthlyRecords(CCharEntity* PChar)
+{
+    TracyZoneScoped;
+
+    ResetRecords(PChar, RoeSystem.MonthlyRecords, RoeSystem.MonthlyRecordIDs);
+}
+
+void CycleMonthlyRecords()
+{
+    TracyZoneScoped;
+
+    if (!settings::get<bool>("main.ENABLE_ROE"))
+    {
+        return;
+    }
+
+    zoneutils::ForEachZone(
+        [](CZone* PZone)
+        {
+            PZone->ForEachChar(
+                [](CCharEntity* PChar)
+                {
+                    ClearMonthlyRecords(PChar);
+                });
+        });
 }
 
 // Weekly Ranking Reset

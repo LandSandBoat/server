@@ -31,6 +31,7 @@
 #include "packets/c2s/0x04e_auc.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x04c_auc.h"
+#include "roe.h"
 
 #include "items/transactions/item_claim.h"
 #include "utils/charutils.h"
@@ -231,6 +232,8 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
 
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
+
+        roeutils::event(ROE_AUCTION_LISTING, PChar, RoeDatagram("itemid", listedItemId));
     }
 }
 

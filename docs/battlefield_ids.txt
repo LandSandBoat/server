@@ -234,8 +234,8 @@ local battlefields =
     --  { 21,    ?, 4062 },   -- *Tails of Woe (SKC10)
     --  { 22,    ?, 4063 },   -- *Dismemberment Brigade (SKC20)
     --  { 23,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 24,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Venus)
+        { 24,   24, 9275 },   -- A.M.A.N. Trove (Mars)
+        { 25,   25, 9276 },   -- A.M.A.N. Trove (Venus)
     --  { 26,    ?,    0 },   -- Inv. from Excenmille
     --  { 27,    ?,    0 },   -- Inv. from Excenmille and Co.
     },
@@ -277,8 +277,8 @@ local battlefields =
     --  { 22,    ?, 4062 },   -- *The Worm's Tail (SKC10)
     --  { 23,    ?, 4063 },   -- *Grimshell Shocktroopers (SKC20)
     --  { 24,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 26,    ?,    0 },   -- A.M.A.N. Trove (Venus)
+        { 25,   89, 9275 },   -- A.M.A.N. Trove (Mars)
+        { 26,   90, 9276 },   -- A.M.A.N. Trove (Venus)
     --  { 27,    ?,    0 },   -- Invitation from Naji
     --  { 28,    ?,    0 },   -- Invitation from Naji and Co.
     },
@@ -309,8 +309,8 @@ local battlefields =
     --  { 21,    ?, 4062 },   -- *Steamed Sprouts (SKC10)
     --  { 22,    ?, 4063 },   -- *Divine Punishers (SKC20)
     --  { 23,    ?,    0 },   -- A Feast Most Dire (Quest)
-    --  { 24,    ?,    0 },   -- A.M.A.N. Trove (Mars)
-    --  { 25,    ?,    0 },   -- A.M.A.N. Trove (Venus)
+        { 24,  120, 9275 },   -- A.M.A.N. Trove (Mars)
+        { 25,  121, 9276 },   -- A.M.A.N. Trove (Venus)
     --  { 26,    ?,    0 },   -- Inv. from Kupipi
     --  { 27,    ?,    0 },   -- Inv. from Kupipi and Co.
     },

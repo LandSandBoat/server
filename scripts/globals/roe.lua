@@ -136,6 +136,7 @@ local defaults =
                                 --        'repeat' - Repeatable record.
                                 --        'daily'  - Daily record.
                                 --        'weekly' - Weekly record.
+                                --        'monthly'- Monthly record. Retail resets at a version update, LSB on the 1st of the JST month.
                                 --        'unity'  - Weekly reset, but doesn't reset progress, only completion.
                                 --        'retro'  - Can be claimed retroactively. Calls check on taking record.
                                 --        'hidden' - Special internal-use record used only as a client-flag to unlock others.
