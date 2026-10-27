@@ -1023,12 +1023,15 @@ xi.job_utils.corsair.useElementalShot = function(actor, target, ability, action)
     target:updateClaim(actor)
 
     -- Calculate resist rate.
+    -- +75~ bonus macc on both COR main and COR sub relative to Marksmanship
+    -- dSTAT is confirmed AGI vs AGI
     local params =
     {
         skillType      = xi.skill.MARKSMANSHIP,
         magicalElement = data.element,
         actorStat      = xi.mod.AGI,
-        bonusAcc       = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC),
+        targetStat     = xi.mod.AGI,
+        bonusAcc       = 75 + actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC),
     }
     local resist   = xi.combat.magicHitRate.calculateResistRate(actor, target, params)
 
