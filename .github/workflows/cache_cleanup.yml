@@ -1,0 +1,27 @@
+name: Cache Cleanup
+
+# Caches saved by a PR run are scoped to refs/pull/N/merge, which no other ref can read.
+# Drop them when the PR closes instead of leaving them to take up budget until eviction.
+# pull_request_target so fork PRs get a token that can delete.
+# Nothing from the PR is checked out.
+on:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  Cleanup:
+    name: Delete PR caches
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete caches for this PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ref: ${{ format('refs/pull/{0}/merge', github.event.pull_request.number) }}
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --ref "$ref" --limit 100 --json id --jq '.[].id' |
+          while read -r id; do
+            gh cache delete -R "$GITHUB_REPOSITORY" "$id"
+          done
