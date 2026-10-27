@@ -18,6 +18,27 @@ xi.asa.helpers.sapCrystals =
     xi.keyItem.DARK_SAP_CRYSTAL,
 }
 
+-- Tablets for Sisters in Arms (ASA-12) and Project: Shantottofication (ASA-13).
+xi.asa.helpers.tabletsOfHexes =
+{
+    xi.keyItem.TABLET_OF_HEXES_GREED,
+    xi.keyItem.TABLET_OF_HEXES_ENVY,
+    xi.keyItem.TABLET_OF_HEXES_MALICE,
+    xi.keyItem.TABLET_OF_HEXES_DECEIT,
+    xi.keyItem.TABLET_OF_HEXES_PRIDE,
+    xi.keyItem.TABLET_OF_HEXES_BALE,
+    xi.keyItem.TABLET_OF_HEXES_DESPAIR,
+    xi.keyItem.TABLET_OF_HEXES_REGRET,
+    xi.keyItem.TABLET_OF_HEXES_RAGE,
+    xi.keyItem.TABLET_OF_HEXES_AGONY,
+    xi.keyItem.TABLET_OF_HEXES_DOLOR,
+    xi.keyItem.TABLET_OF_HEXES_RANCOR,
+    xi.keyItem.TABLET_OF_HEXES_STRIFE,
+    xi.keyItem.TABLET_OF_HEXES_PENURY,
+    xi.keyItem.TABLET_OF_HEXES_BLIGHT,
+    xi.keyItem.TABLET_OF_HEXES_DEATH,
+}
+
 xi.asa.helpers.countKeyItems = function(player, keyItems)
     local count = 0
     for _, keyItem in ipairs(keyItems) do
