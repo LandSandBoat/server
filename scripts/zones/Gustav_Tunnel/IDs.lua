@@ -45,6 +45,7 @@ zones[xi.zone.GUSTAV_TUNNEL] =
     },
     npc =
     {
+        OUTCROPPING = GetFirstID('Outcropping'), -- ASA-5 to ASA-7
     },
 }
 
