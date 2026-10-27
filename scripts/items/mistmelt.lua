@@ -5,7 +5,7 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck = function(target, item, param, player)
+itemObject.onItemCheck = function(target, item, player)
     local result = 0
 
     if target:getName() ~= 'Ouryu' then
