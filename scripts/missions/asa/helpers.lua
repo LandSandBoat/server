@@ -513,3 +513,82 @@ xi.asa.helpers.onCloneFight = function(mob, target)
         mob:useMobAbility(xi.mobSkill.ASTRAL_FLOW_1)
     end
 end
+
+-----------------------------------
+-- ASA-13: Project: Shantottofication
+-----------------------------------
+
+-- Observed on retail: D. Shantotto took about 30 percent damage while raging. Shantotto gets the same.
+local rageDamageTakenP = -7000
+
+-- The rage animation plays as a bare action packet so no skill script runs.
+xi.asa.helpers.onSisterFight = function(mob, target, rage)
+    local rageEnds    = mob:getLocalVar('rageEnds')
+    local currentTime = GetSystemTime()
+
+    if rageEnds ~= 0 and currentTime >= rageEnds then
+        rageEnds = 0
+        mob:setLocalVar('rageEnds', 0)
+        mob:delMod(xi.mod.DMG, rageDamageTakenP)
+    end
+
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    -- Each sister casts her own Meteor, so losing one does not spare the party the other's.
+    local meteorAt = mob:getLocalVar('meteorAt')
+    if meteorAt ~= 0 and currentTime >= meteorAt then
+        mob:setLocalVar('meteorAt', 0)
+        mob:messageText(mob, rage.meteor)
+        mob:castSpell(xi.magic.spell.METEOR, target)
+        return
+    end
+
+    local stage     = mob:getLocalVar('rageStage')
+    local threshold = rage.thresholds[stage]
+    if not threshold or mob:getHPP() > threshold.hpp then
+        return
+    end
+
+    mob:setLocalVar('rageStage', stage + 1)
+
+    if threshold.message then
+        -- Two thresholds inside one rage extend it rather than stacking the reduction.
+        if rageEnds == 0 then
+            mob:addMod(xi.mod.DMG, rageDamageTakenP)
+        end
+
+        -- Observed on retail: a rage lasts some 20 seconds.
+        mob:setLocalVar('rageEnds', currentTime + 20)
+        mob:messageText(mob, threshold.message)
+        mob:injectActionPacket(mob:getID(), xi.action.category.MOBABILITY_FINISH, rage.animation, 0, 0x18, 0, rage.action, 0)
+    end
+
+    -- The Meteor comes once per fight, from whichever sister reaches 10 percent first.
+    -- Observed on retail: both sisters cast it together 22 seconds after Shantotto's rage at 10 percent.
+    if threshold.meteor and mob:getLocalVar('meteorCalled') == 0 then
+        for _, sister in ipairs({ mob, GetMobByID(mob:getID() + rage.partnerOffset) }) do
+            if sister then
+                sister:setLocalVar('meteorCalled', 1)
+                sister:setLocalVar('meteorAt', currentTime + 22)
+            end
+        end
+    end
+end
+
+-- Each sister gloats when the whole party is down.
+xi.asa.helpers.onSisterDisengage = function(mob, wipeMessage)
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    for _, player in pairs(battlefield:getPlayers()) do
+        if player:isAlive() then
+            return
+        end
+    end
+
+    mob:messageText(mob, wipeMessage)
+end

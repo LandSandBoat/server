@@ -415,6 +415,7 @@ xi.mobSkill =
     WING_CUTTER_1                 =  623,
 
     VULTURE_3                     =  626,
+    VULTURE_4                     =  627, -- Confirmed usage: Shantotto's rage in ASA-13 "Project: Shantottofication".
     WILD_HORN                     =  628,
     THUNDERBOLT_BEHEMOTH          =  629,
     KICK_OUT                      =  630,
@@ -1389,6 +1390,10 @@ xi.mobSkill =
     DIAMOND_DUST_4                = 2483, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Shiva).
     JUDGMENT_BOLT_4               = 2484, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Ramuh).
     AERIAL_BLAST_4                = 2485, -- Confirmed usage: fifth astral flow in ASA-4 "Sugar-Coated Directive" (Garuda).
+    SALVATION_SCYTHE              = 2486, -- Confirmed usage: D. Shantotto in ASA-13 "Project: Shantottofication".
+    SALVATION_SCYTHE_2            = 2487, -- Confirmed usage: D. Shantotto in ASA-13 "Project: Shantottofication".
+    DIVINE_MALISON                = 2488, -- Confirmed usage: Shantotto in ASA-13 "Project: Shantottofication".
+    DIVINE_MALISON_2              = 2489, -- Confirmed usage: Shantotto in ASA-13 "Project: Shantottofication".
 
     CYTOKINESIS                   = 2514,
 

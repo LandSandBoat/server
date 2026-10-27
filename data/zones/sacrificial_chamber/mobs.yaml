@@ -53,6 +53,53 @@ templates:
       spawn:
         type: [scripted]
 
+  D_Shantotto:
+    id:           8188
+    display_name: D._Shantotto
+    species:      tarutaru
+    type:         [notorious, battlefield]
+    spells:
+      - blizzard_iii
+      - blizzard_iv
+      - freeze
+      - freeze_ii
+      - water_iii
+      - water_iv
+      - flood
+      - flood_ii
+      - stone_iii
+      - stonega_iii
+      - quake
+      - quake_ii
+      - drain
+      - aspir
+      - absorb-tp
+      - dispelga
+    skill_list_id: 2117
+    attributes:
+      combat:
+        skill: scythe
+        delay: 490
+      jobs: [drk, blm]
+      resists:
+        immune_status: [bind, blind, gravity, paralyze, poison, silence, slow]
+      render:
+        look:
+          type:  standard
+          model: 2375
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
+      spawn:
+        type: [scripted]
+      stats:
+        hp: 16980
+    content: asa
+
   Graviton:
     id:            1798
     species:       tonberry
@@ -386,24 +433,59 @@ templates:
         type: [scripted]
 
   Shantotto:
-    id:            3584
-    species:       tarutaru
-    type:          [battlefield]
-    spell_list_id: 21
-    skill_list_id: 153
+    id:      8189
+    species: tarutaru
+    type:    [notorious, battlefield]
+    spells:
+      - aero
+      - aero_iii
+      - aero_iv
+      - aeroga
+      - aeroga_iii
+      - tornado
+      - tornado_ii
+      - fire
+      - fire_iv
+      - firaga
+      - firaga_iii
+      - flare
+      - flare_ii
+      - thunder
+      - thunder_iii
+      - thunder_iv
+      - thundaga
+      - thundaga_iii
+      - burst
+      - burst_ii
+      - holy
+      - holy_ii
+      - flash
+      - protect_v
+      - shell_v
+    skill_list_id: 2040
     attributes:
       combat:
-        skill: club
+        skill: staff
+        delay: 570
       jobs: [blm, blm]
+      resists:
+        immune_status: [blind, light_sleep, dark_sleep, gravity, terror, plague, paralyze, poison, silence, slow, stun, dispel]
       render:
         look:
-          type:  misc
-          model: 1095
-        entity_flags:  3
-        model_size:    1
-        hitbox:       10
+          type:  standard
+          model: 2374
+        entity_flags: 539
+        name_prefix:   32
+        model_size:     1
+        hitbox:        10
+      behaviors:
+        aggressive: true
+        links:      true
       spawn:
         type: [scripted]
+      stats:
+        hp: 16980
+    content: asa
 
   Tonberrys_Avatar:
     id:            3970
@@ -768,16 +850,28 @@ spawns:
     level:    [62, 62]
   17444919:
     template: Shantotto
+    at:       [-281.045, -32.000, 324.118, 32]
+    level:    [85, 85]
   17444920:
-    script: D_Shantotto
+    template: D_Shantotto
+    at:       [-284.213, -32.500, 321.266, 32]
+    level:    [85, 85]
   17444921:
     template: Shantotto
+    at:       [-1.260, 0.000, 44.754, 32]
+    level:    [85, 85]
   17444922:
-    script: D_Shantotto
+    template: D_Shantotto
+    at:       [-4.428, -0.500, 41.902, 32]
+    level:    [85, 85]
   17444923:
     template: Shantotto
+    at:       [280.963, 32.000, -276.077, 32]
+    level:    [85, 85]
   17444924:
-    script: D_Shantotto
+    template: D_Shantotto
+    at:       [277.795, 31.500, -278.929, 32]
+    level:    [85, 85]
   17444925:
     script: Grievous_Gozar
   17444926:

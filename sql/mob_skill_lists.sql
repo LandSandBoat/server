@@ -4054,6 +4054,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Logi',2039,594); -- Vulcanian Impact
 INSERT INTO `mob_skill_lists` VALUES ('Logi',2039,595); -- Heat Wave
 INSERT INTO `mob_skill_lists` VALUES ('Logi',2039,596); -- Hellstorm
 
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2040,181); -- shell_crusher
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2040,182); -- full_swing
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2040,184); -- retribution
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2040,2488); -- divine_malison
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2040,2489); -- divine_malison
+
 INSERT INTO `mob_skill_lists` VALUES ('Hildesvini',2041,1703); -- Barrier Tusk
 INSERT INTO `mob_skill_lists` VALUES ('Hildesvini',2041,1704); -- Onrush
 INSERT INTO `mob_skill_lists` VALUES ('Hildesvini',2041,1705); -- Stampede
@@ -4453,7 +4459,15 @@ INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,129); -- blade_retsu
 INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,131); -- blade_to
 INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2116,132); -- blade_chi
 
--- Next ID : 2117
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,96); -- slice
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,98); -- shadow_of_death
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,101); -- vorpal_scythe
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,102); -- guillotine
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,103); -- cross_reaper
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,2486); -- salvation_scythe
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2117,2487); -- salvation_scythe
+
+-- Next ID : 2118
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
