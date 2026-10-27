@@ -34,7 +34,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
 
     params.int_wsc = 0.3
 
-    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params, action)
 end
 
 return spellObject

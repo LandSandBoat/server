@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
     params.isConal    = true
 
     -- Handle damage.
-    local damage = xi.spells.blue.useBreathSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useBreathSpell(caster, target, spell, params, action)
 
     if damage <= 0 then
         return damage

@@ -33,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
 
     params.int_wsc = 0.2
 
-    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params, action)
     local maccParams =
     {
         magicalElement = spell:getElement(),

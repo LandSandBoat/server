@@ -53,7 +53,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
         target:dispelStatusEffect()
     end
 
-    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params, action)
 end
 
 return spellObject

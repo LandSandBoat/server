@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell, action)
     params.int_wsc =  0.2
 
     -- Handle damage.
-    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params, action)
 
     if damage <= 0 then
         return damage
