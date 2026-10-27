@@ -40,7 +40,7 @@ on:
         type: boolean
         default: false
       clang_tidy:
-        description: 'Build with Clang Tidy and output build summary.'
+        description: 'Run clang-tidy over the compile database instead of building, and output a summary.'
         required: false
         type: boolean
         default: false
@@ -247,7 +247,6 @@ jobs:
         run: |
           cmake -G Ninja -S . -B build --fresh \
             -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
-            -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
             -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
             -DPCH_ENABLE=OFF \
             ${{ (runner.os == 'macOS' && startsWith(inputs.compiler, 'clang')) && '-DCMAKE_AR=$AR -DCMAKE_RANLIB=$RANLIB -DCMAKE_NM=$NM ' || '' }} \
@@ -255,8 +254,21 @@ jobs:
             -DCACHE_OPTION=sccache
 
       - name: Build
-        if: ${{ env.SKIP_BUILD != 'true' }}
+        if: ${{ !inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
+
+      # Configure writes the compile database and every generated source except the enum headers, which enum_codegen builds.
+      # The header filter defaults to '.*' in clang-tidy 22.
+      # ext/ and CPM headers are SYSTEM or dropped by the summary.
+      - name: Clang Tidy
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        env:
+          clang_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          cmake --build build --target enum_codegen
+          run-clang-tidy${{ env.clang_version }} -p build -j $(nproc) -quiet \
+            -clang-tidy-binary clang-tidy${{ env.clang_version }} \
+            "^${GITHUB_WORKSPACE}/(src|build/generated)/" | tee clang_tidy.log
 
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
@@ -267,12 +279,12 @@ jobs:
             xi_*
             tracy.tar.gz
 
-      - name: Summarize Clang Tidy Build
-        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+      - name: Summarize Clang Tidy
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
         run: |
           echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
-          if [[ -f "build.log" && -s "build.log" ]]; then
-              python tools/ci/summarize_clang_tidy.py build.log >> $GITHUB_STEP_SUMMARY
+          if [[ -f "clang_tidy.log" && -s "clang_tidy.log" ]]; then
+              python tools/ci/summarize_clang_tidy.py clang_tidy.log >> $GITHUB_STEP_SUMMARY
               if [[ $? -ne 0 ]]; then
                   exit 1
               fi
