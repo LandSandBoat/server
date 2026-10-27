@@ -443,3 +443,14 @@ xi.asa.helpers.onAgentTick = function(mob)
         end
     end
 end
+
+-----------------------------------
+-- ASA-8: luminous fragment mobs
+-----------------------------------
+-- Remember what landed the killing blow so the fragment can be gated on it.
+xi.asa.helpers.trackKillingBlow = function(mob)
+    mob:addListener('TAKE_DAMAGE', 'ASA_KILLING_BLOW', function(mobArg, damage, attacker, attackType, damageType)
+        mobArg:setLocalVar('asaAttackType', attackType)
+        mobArg:setLocalVar('asaDamageType', damageType)
+    end)
+end

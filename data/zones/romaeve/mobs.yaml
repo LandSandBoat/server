@@ -189,7 +189,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [scripted]
+        respawn: 300
     content: asa
 
   Infernal_Weapon:
@@ -302,7 +302,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [scripted]
+        respawn: 300
     content: asa
 
   Magic_Flagon:
@@ -709,7 +709,7 @@ templates:
       behaviors:
         aggressive: true
       spawn:
-        type: [scripted]
+        respawn: 300
     content: asa
 
   Thunder_Elemental:
