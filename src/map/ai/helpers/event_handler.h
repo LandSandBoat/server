@@ -86,7 +86,7 @@ void CAIEventHandler::triggerListener(const std::string& eventName, Args&&... ar
         auto& listeners = it->second;
         for (auto& event : listeners)
         {
-            auto result = event.luaFunc_(std::forward<Args>(args)...);
+            auto result = event.luaFunc_(std::decay_t<Args>(args)...);
             if (!result.valid())
             {
                 sol::error err = result;

@@ -304,8 +304,10 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
             float       landingY     = 0.0f;
             float       landingZ     = 0.0f;
             bool        foundLanding = false;
-            for (float reach = linkRadius; reach <= maxReach + 1e-3f; reach += 0.5f)
+            const int   reachSteps   = static_cast<int>(std::floor((maxReach + 1e-3f - linkRadius) / 0.5f));
+            for (int step = 0; step <= reachSteps; ++step)
             {
+                const float reach  = linkRadius + static_cast<float>(step) * 0.5f;
                 const float probeX = edgeMid[0] + outwardX * reach;
                 const float probeZ = edgeMid[2] + outwardZ * reach;
 
@@ -816,11 +818,14 @@ void NavMeshBuilder::measureCellMargin(const NavMeshConfig& config)
         }
     }
 
+    const int halfWidth  = gridWidth_ / 2;
+    const int halfHeight = gridHeight_ / 2;
+
     float worst = 0.0f;
     for (uint32 cellIndex = 0; cellIndex < cells.size(); ++cellIndex)
     {
-        const auto cellX0 = static_cast<float>(static_cast<int>(cellIndex % gridWidth_) - gridWidth_ / 2) * XIMESH_CELL_SIZE;
-        const auto cellZ0 = static_cast<float>(static_cast<int>(cellIndex / gridWidth_) - gridHeight_ / 2) * XIMESH_CELL_SIZE;
+        const auto cellX0 = static_cast<float>(static_cast<int>(cellIndex % gridWidth_) - halfWidth) * XIMESH_CELL_SIZE;
+        const auto cellZ0 = static_cast<float>(static_cast<int>(cellIndex / gridWidth_) - halfHeight) * XIMESH_CELL_SIZE;
 
         const auto& cell = cells[cellIndex];
         for (uint16 ref = 0; ref < cell.count; ++ref)

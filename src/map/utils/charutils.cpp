@@ -3846,7 +3846,8 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
         // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
 
         int16  Diff          = MaxSkill - CurSkill / 10;
-        double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
+        uint16 skillTier     = CurSkill / 100;
+        double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + skillTier));
 
         double random = xirand::GetRandomNumber(1.);
 

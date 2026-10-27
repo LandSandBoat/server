@@ -1502,8 +1502,7 @@ void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename)
                 if (fileEntry.stem() == "IDs")
                 {
                     // Prepare which zone we're in using the file path
-                    const auto relative_path_string = fileEntry.relative_path().generic_string();
-                    const auto zoneName             = fileEntry.parent_path().stem().generic_string();
+                    const auto zoneName = fileEntry.parent_path().stem().generic_string();
 
                     handleZone(zoneName);
                 }
@@ -4174,9 +4173,6 @@ void OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
     {
         return;
     }
-
-    std::string zone_name = PMob->loc.zone->getName();
-    std::string mob_name  = PMob->getName();
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
 

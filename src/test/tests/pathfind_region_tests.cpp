@@ -173,9 +173,10 @@ auto squareWithHole() -> RoamRegion
 auto legStaysInside(const RoamRegion& region, const position_t& from, const position_t& to) -> bool
 {
     const float length = distance(from, to, true);
-    for (float along = 0.0f; along <= length; along += 0.5f)
+    for (int step = 0; static_cast<float>(step) * 0.5f <= length; ++step)
     {
-        const float t = length > 0.0f ? along / length : 0.0f;
+        const float along = static_cast<float>(step) * 0.5f;
+        const float t     = length > 0.0f ? along / length : 0.0f;
         if (!region.contains(from.x + (to.x - from.x) * t, from.z + (to.z - from.z) * t))
         {
             return false;

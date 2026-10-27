@@ -162,7 +162,7 @@ inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<T>
     }
     else if constexpr (std::is_signed<T>::value)
     {
-        if (!jsonInput[key].is_number_unsigned())
+        if (!jsonInput[key].is_number_integer())
         {
             return std::nullopt;
         }

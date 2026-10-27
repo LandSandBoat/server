@@ -666,7 +666,7 @@ auto UnpackSoultrapperName(const uint8* input) -> std::string
             --bitsLeft;
         }
 
-        if (c == 0 || c < '0' || c > 'z')
+        if (c < '0' || c > 'z')
         {
             break;
         }

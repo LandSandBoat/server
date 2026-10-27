@@ -27,6 +27,7 @@
 #include <spdlog/async.h>
 
 #include <algorithm>
+#include <charconv>
 #include <cstdlib>
 #include <string>
 
@@ -154,7 +155,9 @@ auto TestApplication::run() -> bool
             size_t retryCount = 0;
             if (const auto retryArg = args().present<std::string>("--retry"))
             {
-                retryCount = static_cast<size_t>(std::max(0, std::atoi(retryArg->c_str())));
+                int retryValue = 0;
+                std::from_chars(retryArg->data(), retryArg->data() + retryArg->size(), retryValue);
+                retryCount = static_cast<size_t>(std::max(0, retryValue));
             }
 
             TestConfig testConfig{

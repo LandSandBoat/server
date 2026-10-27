@@ -1600,7 +1600,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             if (daze == xi::StatusEffect::DrainDaze && power > 0)
             {
                 uint16 multiplier = (uint16)(3 + 5.5f * (power - 1));
-                int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
+                int16  Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
                 // vary damage based on lvl diff
                 int8 lvlDiff = (PDefender->GetMLevel() - PAttacker->GetMLevel());
@@ -1638,7 +1638,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             else if (daze == xi::StatusEffect::AspirDaze && power > 0 && PDefender->GetMaxMP() > 0)
             {
                 uint16 multiplier = 1 + 2 * (power - 1);
-                int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
+                int16  Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
                 if (finaldamage <= 2)
                 {
@@ -3652,7 +3652,8 @@ auto HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool) -> b
             return ERROR_SLOTID;
         };
 
-        if (ERROR_SLOTID == (SlotID = findUnlockedTool(toolID)))
+        SlotID = findUnlockedTool(toolID);
+        if (SlotID == ERROR_SLOTID)
         {
             if (PChar->GetMJob() == xi::Job::NIN)
             {
@@ -3691,7 +3692,8 @@ auto HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool) -> b
                     default:
                         return false;
                 }
-                if (ERROR_SLOTID == (SlotID = findUnlockedTool(toolID)))
+                SlotID = findUnlockedTool(toolID);
+                if (SlotID == ERROR_SLOTID)
                 {
                     return false;
                 }

@@ -553,8 +553,9 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
         const uint16 CurSkill = PChar->RealSkills.skill[static_cast<uint8>(SkillID)];
         uint16       MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
 
-        const int16 Diff          = MaxSkill - CurSkill / 10;
-        double      SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
+        const int16  Diff          = MaxSkill - CurSkill / 10;
+        const uint16 skillTier     = CurSkill / 100;
+        double       SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + skillTier));
 
         double random = xirand::GetRandomNumber(1.);
 

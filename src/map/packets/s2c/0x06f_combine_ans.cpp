@@ -25,6 +25,8 @@
 #include "items/craft_state.h"
 #include "items/transactions/synth.h"
 
+#include <algorithm>
+
 GP_SERV_COMMAND_COMBINE_ANS::GP_SERV_COMMAND_COMBINE_ANS(const CCharEntity* PChar, const SynthesisResult result, const CCraftState::Result item)
 {
     auto& packet = this->data();
@@ -49,7 +51,7 @@ GP_SERV_COMMAND_COMBINE_ANS::GP_SERV_COMMAND_COMBINE_ANS(const CCharEntity* PCha
         uint8 skillValue = 0;
         for (uint8 skillID = 49; skillID < 57; skillID++)
         {
-            if (skillID == packet.UpKind[0] || skillID == packet.UpKind[1] || skillID == packet.UpKind[2] || skillID == packet.UpKind[3])
+            if (std::ranges::contains(packet.UpKind, static_cast<int8_t>(skillID)))
             {
                 continue;
             }

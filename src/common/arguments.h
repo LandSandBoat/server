@@ -61,10 +61,8 @@ public:
         }
         catch (const std::exception&)
         {
-            // Swallow the error
+            return std::nullopt;
         }
-
-        return std::nullopt;
     }
 
     template <typename T = std::string>
@@ -76,10 +74,8 @@ public:
         }
         catch (const std::exception&)
         {
-            // Swallow the error
+            return {};
         }
-
-        return {};
     }
 
 private:

@@ -28514,10 +28514,10 @@ auto doLookup(const std::string& str, std::vector<uint16>& data) -> std::string
         return "?";
     }
 
-    auto type     = data.at(0);
-    auto language = data.at(1);
-    auto category = data.at(2);
-    auto index    = data.at(3);
+    uint32 type     = data.at(0);
+    uint32 language = data.at(1);
+    uint32 category = data.at(2);
+    uint32 index    = data.at(3);
 
     // Type (usually always 0x02):
     // If it is 0x07 then it is an item. If it is 0x13 then it is a key item.
@@ -28569,13 +28569,13 @@ auto autotranslate::replaceBytes(const std::string& str) -> std::string
 
     for (auto& ch : str)
     {
-        auto chAsInt = static_cast<uint16>(ch);
-        if (chAsInt == 65533 && !inATBlock)
+        auto chAsInt = static_cast<uint8>(ch);
+        if (chAsInt == 0xFD && !inATBlock)
         {
             outStr += "{";
             inATBlock = true;
         }
-        else if (chAsInt == 65533 && inATBlock)
+        else if (chAsInt == 0xFD && inATBlock)
         {
             outStr += doLookup(str, data);
             data.clear();

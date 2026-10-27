@@ -47,7 +47,9 @@ public:
         return std::make_unique<Derived>(static_cast<const Derived&>(*this));
     }
 
-protected:
+private:
+    friend Derived;
+
     GP_SERV_PACKET()
     {
         std::memset(buffer_.data(), 0, PACKET_SIZE);
@@ -67,6 +69,7 @@ protected:
         }
     }
 
+protected:
     // Access shifted by header size so individual packets do not need to declare it.
     template <typename T = Derived>
     auto data(this auto& self) -> auto&

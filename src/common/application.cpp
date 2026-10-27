@@ -235,7 +235,7 @@ void Application::tryDisableQuickEditMode() const
 #ifdef _WIN32
     // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
     // causing the server to freeze.
-    const HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    const auto hInput = GetStdHandle(STD_INPUT_HANDLE);
     GetConsoleMode(hInput, &prevQuickEditMode);
     SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prevQuickEditMode & ~ENABLE_QUICK_EDIT_MODE));
 #endif // _WIN32
@@ -245,7 +245,7 @@ void Application::tryRestoreQuickEditMode() const
 {
 #ifdef _WIN32
     // Re-enable Quick Edit Mode upon Exiting if it is still disabled
-    const HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    const auto hInput = GetStdHandle(STD_INPUT_HANDLE);
     SetConsoleMode(hInput, prevQuickEditMode);
 #endif // _WIN32
 }
