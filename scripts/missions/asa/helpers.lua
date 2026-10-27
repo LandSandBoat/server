@@ -5,6 +5,19 @@ xi = xi or {}
 xi.asa = xi.asa or {}
 xi.asa.helpers = xi.asa.helpers or {}
 
+-- Saps for Fountain of Trouble (ASA-9) and Battaru Royale (ASA-10).
+xi.asa.helpers.sapCrystals =
+{
+    xi.keyItem.FIRE_SAP_CRYSTAL,
+    xi.keyItem.WATER_SAP_CRYSTAL,
+    xi.keyItem.WIND_SAP_CRYSTAL,
+    xi.keyItem.EARTH_SAP_CRYSTAL,
+    xi.keyItem.LIGHTNING_SAP_CRYSTAL,
+    xi.keyItem.ICE_SAP_CRYSTAL,
+    xi.keyItem.LIGHT_SAP_CRYSTAL,
+    xi.keyItem.DARK_SAP_CRYSTAL,
+}
+
 xi.asa.helpers.countKeyItems = function(player, keyItems)
     local count = 0
     for _, keyItem in ipairs(keyItems) do
