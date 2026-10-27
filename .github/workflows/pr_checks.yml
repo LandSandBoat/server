@@ -298,15 +298,25 @@ jobs:
             runner: windows-2025
             compiler: msvc
             build_modules: false
+            upload_artifact: true
           - build_type: Debug
             runner: macos-26
             compiler: appleClang
             build_modules: false
+            upload_artifact: true
           - build_type: Debug
             runner: ubuntu-26.04
             compiler: gcc
             compiler_version: 15
             build_modules: false
+            upload_artifact: true
+          # Compile check only: artifact names don't include the compiler, so uploading would clash with the gcc build.
+          - build_type: Debug
+            runner: ubuntu-26.04
+            compiler: clang
+            compiler_version: 22
+            build_modules: false
+            upload_artifact: false
     uses: ./.github/workflows/runner_build.yml
     with:
       runner: ${{ matrix.runner }}
@@ -314,7 +324,7 @@ jobs:
       compiler_version: ${{ matrix.compiler_version }}
       build_type: ${{ matrix.build_type }}
       build_modules: ${{ matrix.build_modules }}
-      upload_artifact: true
+      upload_artifact: ${{ matrix.upload_artifact }}
 
   # Compiles modules/*/cpp, which no other job builds. Uploads no artifact:
   # REGISTER_CPP_MODULE is a static initializer, so a modules-enabled binary

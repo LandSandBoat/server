@@ -72,6 +72,15 @@ jobs:
             save_cache: true
             upload_artifact: false
             clang_tidy: false
+          - build_type: Debug
+            runner: ubuntu-26.04
+            compiler: clang
+            compiler_version: 22
+            tracy: false
+            build_modules: false
+            save_cache: true
+            upload_artifact: false
+            clang_tidy: false
           # Compiles the cpp modules. Debug reuses the ubuntu cache build's
           # warm cache and never enables IPO/LTO, so this is the cheapest slot.
           - build_type: Debug
