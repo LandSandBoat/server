@@ -3,10 +3,11 @@
 templates:
 
   Leviathan_Prime_ASA:
-    id:           7044
-    display_name: Leviathan_Prime
-    species:      leviathan
-    type:         [notorious, battlefield]
+    id:            7044
+    display_name:  Leviathan_Prime
+    species:       leviathan
+    type:          [notorious, battlefield]
+    skill_list_id: 323
     attributes:
       combat:
         skill: polearm
@@ -27,7 +28,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Leviathan_Prime_TBL:
     id:            4646

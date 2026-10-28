@@ -2,7 +2,7 @@
 -- Area: Cloister of Tremors
 -- BCNM: Sugar Coated Directive (ASA-4)
 -----------------------------------
-local cloisterOfTremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
+require('scripts/missions/asa/helpers')
 -----------------------------------
 
 local content = BattlefieldMission:new({
@@ -15,27 +15,31 @@ local content = BattlefieldMission:new({
     levelCap      = xi.settings.main.MAX_LEVEL,
     timeLimit     = utils.minutes(30),
     index         = 4,
-    entryNpc         = 'EP_Entrance',
-    exitNpc          = 'Earth_Protocrystal',
+    entryNpc      = 'EP_Entrance',
+    exitNpc       = 'Earth_Protocrystal',
 
     requiredKeyItems = { xi.keyItem.DOMINAS_AMBER_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
-    requiredVar      = 'Mission[11][3]Titan',
-    requiredValue    = 1,
 
     grantXP = 400,
 })
 
+-- The protocrystal must have refused the seal once this visit. The fight stays open after the mission.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    return Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) and
+        xi.asa.helpers.sugarCoatedEntry(player)
+end
+
+function content:onBattlefieldWin(player, battlefield)
+    BattlefieldMission.onBattlefieldWin(self, player, battlefield)
+    player:setCharVar(xi.asa.helpers.sugarCoated[xi.zone.CLOISTER_OF_TREMORS].winVar, 1)
+end
+
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfTremorsID.mob.TITAN_PRIME_ASA     },
-            { cloisterOfTremorsID.mob.TITAN_PRIME_ASA + 1 },
-            { cloisterOfTremorsID.mob.TITAN_PRIME_ASA + 2 },
-        },
+        mobs = { 'Titan_Prime_ASA' },
 
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)

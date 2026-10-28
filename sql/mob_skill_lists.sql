@@ -4440,7 +4440,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,588); -- death_trap (
 INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,654); -- double_whammy
 INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,656); -- gilded_torpor
 
--- Next ID : 2115
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,869); -- whispering_wind
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,870); -- hastega, observed on retail
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,871); -- aerial_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,872); -- aero_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,873); -- predator_claws
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,874); -- wind_blade
+
+-- Next ID : 2116
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
