@@ -64,6 +64,8 @@ public:
     CAutomatonController(CAutomatonEntity* PPet);
 
     auto Disengage() -> bool override;
+    auto Cast(EntityId target, SpellID spellid) -> bool override;
+    auto MobSkill(EntityId target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool override;
 
 protected:
     auto DoCombatTick(timer::time_point tick) -> Task<void> override;
@@ -71,8 +73,6 @@ protected:
     void setCooldowns();
     void setMagicCooldowns();
     auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool override;
-    auto Cast(EntityId target, SpellID spellid) -> bool override;
-    auto MobSkill(EntityId target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool override;
 
 private:
     auto TryAction() -> bool;

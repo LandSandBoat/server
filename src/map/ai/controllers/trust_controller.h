@@ -57,9 +57,11 @@ public:
 
     std::unique_ptr<gambits::CGambitsContainer> m_GambitsContainer;
 
-private:
+protected:
     auto DoCombatTick(timer::time_point tick) -> Task<void> override;
     auto DoRoamTick(timer::time_point tick) -> Task<void> override;
+
+private:
     auto DoNonCombatTick(timer::time_point tick) -> Task<void>;
     void Declump(const CCharEntity* PMaster, const CBattleEntity* PTarget) const;
     void PathOutToDistance(const CBattleEntity* PTarget, float amount);

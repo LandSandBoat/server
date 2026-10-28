@@ -37,7 +37,6 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
-    auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
     auto CanFollowPath() -> bool override;
@@ -46,6 +45,9 @@ public:
     void acceptRaise();
 
     auto params() const -> const DeathParams&;
+
+protected:
+    auto Update(timer::time_point tick) -> bool override;
 
 private:
     // Shadows CState::m_PEntity

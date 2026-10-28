@@ -40,7 +40,6 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
-    auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
     auto CanFollowPath() -> bool override;
@@ -55,6 +54,7 @@ public:
     auto IsInstantCast() const -> bool;
 
 protected:
+    auto Update(timer::time_point tick) -> bool override;
     auto CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool;
     auto HasCost() -> bool;
     auto HasMoved() const -> bool;

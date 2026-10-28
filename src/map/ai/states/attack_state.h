@@ -30,7 +30,6 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
-    auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
     auto CanFollowPath() -> bool override;
@@ -39,6 +38,7 @@ public:
     auto EngageLockout() const -> timer::duration;
 
 protected:
+    auto Update(timer::time_point tick) -> bool override;
     void UpdateTarget(const EntityId& target = {}) override;
     auto CanAttack(CBattleEntity* PTarget) -> bool;
     auto AttackReady() const -> bool;

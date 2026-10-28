@@ -31,15 +31,16 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    void Cleanup(timer::time_point tick) override;
+
     auto GetSkill() const -> CWeaponSkill*;
     auto GetSpentTP() const -> int16;
 
 protected:
-    auto CanChangeState() -> bool override;
-    auto CanFollowPath() -> bool override;
-    auto CanInterrupt() -> bool override;
     auto Update(timer::time_point tick) -> bool override;
-    void Cleanup(timer::time_point tick) override;
     void SpendCost();
 
 private:
