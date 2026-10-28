@@ -52,8 +52,11 @@ void BuildTrustData(uint32 TrustID);
 auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*;
 void LoadTrustStatsAndSkills(CTrustEntity* PTrust);
 
+namespace
+{
+
 // List of trusts that are essentially walking GEO bubbles that should not be targetable
-static std::unordered_set<SpellID> passiveTrustIDs = {
+std::unordered_set<SpellID> passiveTrustIDs = {
     SpellID::Sakura,
     SpellID::Moogle,
     SpellID::Star_Sibyl,
@@ -62,6 +65,8 @@ static std::unordered_set<SpellID> passiveTrustIDs = {
     SpellID::Kupofried,
     SpellID::Cornelia,
 };
+
+} // namespace
 
 struct TrustData
 {
