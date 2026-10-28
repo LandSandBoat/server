@@ -2514,10 +2514,10 @@ INSERT INTO `mob_skills` VALUES (2482,547,'earthen_fury',1,0.0,30.0,552,8000,4,6
 INSERT INTO `mob_skills` VALUES (2483,586,'diamond_dust',1,0.0,30.0,600,8000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2484,599,'judgment_bolt',1,0.0,30.0,616,8000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2485,573,'aerial_blast',1,0.0,30.0,584,8000,4,64,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2486,2230,'salvation_scythe',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2487,2231,'salvation_scythe',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2488,2232,'divine_malison',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2489,2233,'divine_malison',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2486,259,'salvation_scythe',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2487,259,'salvation_scythe',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2488,258,'divine_malison',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2489,258,'divine_malison',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
 -- INSERT INTO `mob_skills` VALUES (2490,1728,'fire_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2491,1729,'ice_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2492,1730,'wind_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
