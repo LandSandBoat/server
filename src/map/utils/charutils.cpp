@@ -1449,9 +1449,9 @@ void SendRecordsOfEminenceLog(CCharEntity* PChar)
 
 void SendKeyItems(CCharEntity* PChar)
 {
-    for (uint8 table = 0; table < PChar->keys.tables.size(); table++)
+    for (size_t table = 0; table < PChar->keys.tables.size(); table++)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, table);
+        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<uint8>(table));
     }
 }
 

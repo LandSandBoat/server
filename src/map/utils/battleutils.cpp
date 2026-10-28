@@ -5169,17 +5169,17 @@ auto DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget) -> bool
     RecastList_t* recastList = PTarget->PRecastContainer->GetRecastList(xi::RecastType::Ability);
 
     // Get position of abilites and add to the 2 lists
-    for (uint8 i = 0; i < recastList->size(); ++i)
+    for (size_t i = 0; i < recastList->size(); ++i)
     {
         Recast_t* recast = &recastList->at(i);
 
         // Do not reset 1hrs or Random Deal
         if (recast->ID != xi::Recast::Special && recast->ID != xi::Recast::Special2 && recast->ID != xi::Recast::RandomDeal)
         {
-            resetCandidateList.push_back(i);
+            resetCandidateList.push_back(static_cast<uint16>(i));
             if (recast->RecastTime > 0s)
             {
-                activeCooldownList.push_back(i);
+                activeCooldownList.push_back(static_cast<uint16>(i));
             }
         }
     }

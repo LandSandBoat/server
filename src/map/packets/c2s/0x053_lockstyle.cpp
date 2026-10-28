@@ -142,7 +142,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     const auto removeSlotID = PItemEquipment->getRemoveSlotId();
 
-                    for (uint8_t x = 0; x < sizeof(removeSlotID) * 8; ++x)
+                    for (size_t x = 0; x < sizeof(removeSlotID) * 8; ++x)
                     {
                         if (removeSlotID & (1 << x))
                         {
