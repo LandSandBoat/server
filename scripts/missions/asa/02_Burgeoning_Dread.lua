@@ -1,5 +1,5 @@
 -----------------------------------
--- A Shantotto Ascension
+-- Burgeoning Dread
 -- A Shantotto Ascension M2
 -----------------------------------
 -- !addmission 11 1
@@ -11,6 +11,21 @@ mission.reward =
 {
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD },
 }
+
+-- The event takes the kit's index. The next mission stores the item id.
+local kits =
+{
+    xi.item.ENFEEBLEMENT_KIT_OF_POISON,
+    xi.item.ENFEEBLEMENT_KIT_OF_BLINDNESS,
+    xi.item.ENFEEBLEMENT_KIT_OF_SLEEP,
+    xi.item.ENFEEBLEMENT_KIT_OF_SILENCE,
+}
+
+local function pickKit(player, csid, option, npc)
+    local kitIndex = math.randomInt(1, #kits)
+    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kits[kitIndex])
+    player:updateEvent(kitIndex - 1)
+end
 
 mission.sections =
 {
@@ -26,17 +41,13 @@ mission.sections =
                     prevZone == xi.zone.WINDURST_WOODS and
                     not player:hasStatusEffect(xi.effect.MOUNTED)
                 then
-                    return mission:event(71)
+                    return 71
                 end
             end,
 
             onEventUpdate =
             {
-                [71] = function(player, csid, option, npc)
-                    local kit = 2779 + math.randomInt(0, 3)
-                    player:updateEvent(kit)
-                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
-                end,
+                [71] = pickKit,
             },
 
             onEventFinish =
@@ -59,17 +70,8 @@ mission.sections =
 
             onEventUpdate =
             {
-                [62] = function(player, csid, option, npc)
-                    local kit = 2779 + math.randomInt(0, 3)
-                    player:updateEvent(kit)
-                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
-                end,
-
-                [63] = function(player, csid, option, npc)
-                    local kit = 2779 + math.randomInt(0, 3)
-                    player:updateEvent(kit)
-                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
-                end,
+                [62] = pickKit,
+                [63] = pickKit,
             },
 
             onEventFinish =
