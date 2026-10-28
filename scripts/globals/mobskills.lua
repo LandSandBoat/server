@@ -1485,34 +1485,35 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
     -- Is this also reflected in the damage messaging on retail?
     -- Currently we do not return the clamped drain afterwards so the damage messaging will not be updated to reflect this.
 
-    if not target:isUndead() then
-        if drainType == xi.mobskills.drainType.MP then
-            drain = math.min(drain, target:getMP())
+    if drainType == xi.mobskills.drainType.HP then
+        drain = math.min(drain, target:getHP())
 
-            target:delMP(drain)
-            mob:addMP(drain)
+        -- Drains on undead still do damage but will not add HP to the caster.
+        -- Uses standard mobskill damage message when used on undead.
+        target:takeDamage(drain, mob, attackType, damageType)
 
-            return xi.msg.basic.SKILL_DRAIN_MP
-        elseif drainType == xi.mobskills.drainType.TP then
-            drain = math.min(drain, target:getTP())
-
-            target:delTP(drain)
-            mob:addTP(drain)
-
-            return xi.msg.basic.SKILL_DRAIN_TP
-        elseif drainType == xi.mobskills.drainType.HP then
-            drain = math.min(drain, target:getHP())
-
-            target:takeDamage(drain, mob, attackType, damageType)
+        if not target:isUndead() then
             mob:addHP(drain)
 
             return xi.msg.basic.SKILL_DRAIN_HP
         end
-    else
-        drain = math.min(drain, target:getHP())
 
-        target:takeDamage(drain, mob, attackType, damageType)
         return xi.msg.basic.DAMAGE
+    elseif drainType == xi.mobskills.drainType.MP then
+        if not target:isUndead() then
+            drain = math.min(drain, target:getMP())
+            target:delMP(drain)
+            mob:addMP(drain)
+
+            return xi.msg.basic.SKILL_DRAIN_MP
+        end
+    -- TP Drain Kiss (Mobskill) DOES work on undead targets.
+    elseif drainType == xi.mobskills.drainType.TP then
+        drain = math.min(drain, target:getTP())
+        target:delTP(drain)
+        mob:addTP(drain)
+
+        return xi.msg.basic.SKILL_DRAIN_TP
     end
 
     return xi.msg.basic.SKILL_NO_EFFECT
