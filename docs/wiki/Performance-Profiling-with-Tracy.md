@@ -52,9 +52,6 @@ If you need Tracy on a configuration the preset does not cover, add `-DTRACY_ENA
 1> [CMake] x tracy-0.8.2/.github/sponsor.png
 1> [CMake] x tracy-0.8.2/.github/workflows/
 ... 
-1> [CMake] -- Downloading Tracy client
-1> [CMake] x tracy-profiler.exe
-...
 1> [CMake] -- Modifying C:/ffxi/server/ext/tracy/tracy-0.8.2/client/TracyProfiler.hpp
 ...
 1> [CMake] -- Configuring done
@@ -64,7 +61,7 @@ If you need Tracy on a configuration the preset does not cover, add `-DTRACY_ENA
 
 ## Usage (Windows)
 
-During the Tracy-enabled build from the previous steps, the client code will be downloaded and built into `xi_map` build target. The server executables will also be downloaded and placed in the repo root (`tracy-profiler.exe`, etc.).
+During the Tracy-enabled build from the previous steps, the client code will be downloaded and built into `xi_map` build target. The server executables (`tracy-profiler.exe`, etc.) are downloaded by the build too, by its `tracy-windows-tools` step, and placed in the repo root.
 
 The build will output `xi_map_tracy.exe` instead of `xi_map.exe`, so you can continue to run multi-process setups by swapping out the single `xi_map.exe` process you want to profile with the Tracy-enabled `xi_map_tracy.exe`.
 

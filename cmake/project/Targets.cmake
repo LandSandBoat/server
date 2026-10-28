@@ -89,7 +89,8 @@ function(xi_disable_lto target)
     target_link_options(${target} PRIVATE -fno-lto)
 endfunction()
 
-# A server executable: Windows resource, our warnings, no LTO on Apple, staged in the repo root.
+# A server executable: Windows resource, our warnings, no LTO on Apple, staged in the repo root,
+# and Valgrind targets when ENABLE_VALGRIND is on.
 function(xi_add_executable target rc)
     if(WIN32)
         set(resource ${CMAKE_SOURCE_DIR}/res/${rc})
@@ -100,4 +101,5 @@ function(xi_add_executable target rc)
         xi_disable_lto(${target})
     endif()
     xi_stage_in_repo_root(${target})
+    xi_add_valgrind_targets(${target})
 endfunction()

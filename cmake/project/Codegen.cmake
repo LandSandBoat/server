@@ -1,7 +1,20 @@
 # Generated sources: version.cpp, the IPC stubs, and the enum/data codegen under build/generated.
 
-configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
-               ${CMAKE_BINARY_DIR}/generated/version.cpp)
+# Written at configure time so a fresh tree has it, then refreshed by xi_version on every build so
+# the binaries report the commit they were built from, not the one last configured.
+set(XI_VERSION_CPP ${CMAKE_BINARY_DIR}/generated/version.cpp)
+configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in ${XI_VERSION_CPP} @ONLY)
+add_custom_target(xi_version
+    COMMAND ${CMAKE_COMMAND}
+        -DGIT_EXECUTABLE=${GIT_EXECUTABLE}
+        -DSOURCE_DIR=${CMAKE_SOURCE_DIR}
+        -DINPUT=${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
+        -DOUTPUT=${XI_VERSION_CPP}
+        -P ${CMAKE_CURRENT_LIST_DIR}/Version.cmake
+    BYPRODUCTS ${XI_VERSION_CPP}
+    COMMENT "Checking git version info"
+    VERBATIM
+)
 
 set_property(
     DIRECTORY
@@ -40,24 +53,25 @@ if(NOT codegen_deps_exit_code EQUAL 0)
     )
 endif()
 
-# The generated headers must exist before the first configure finishes, so bootstrap once.
-set(ENUM_CODEGEN_STAMP ${CMAKE_BINARY_DIR}/generated/.enum_codegen.stamp)
-if(NOT EXISTS ${ENUM_CODEGEN_STAMP})
-    message(STATUS "Bootstrapping enum codegen")
-    execute_process(
-        COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        RESULT_VARIABLE codegen_exit_code
-    )
-    if(NOT codegen_exit_code EQUAL 0)
-        message(FATAL_ERROR "Enum codegen failed")
-    endif()
-endif()
+# The same inputs tools/codegen/cli.py checks against its stamp. Per-zone data never holds an enum.
+file(GLOB_RECURSE ENUM_CODEGEN_INPUTS CONFIGURE_DEPENDS
+    ${CMAKE_SOURCE_DIR}/data/*.yaml
+    ${CMAKE_SOURCE_DIR}/modules/*/data/*.yaml
+    ${CMAKE_SOURCE_DIR}/tools/codegen/*.py
+    ${CMAKE_SOURCE_DIR}/tools/codegen/templates/*.j2
+)
+list(FILTER ENUM_CODEGEN_INPUTS EXCLUDE REGEX "^${CMAKE_SOURCE_DIR}/data/zones/")
 
-add_custom_target(enum_codegen
+# The headers it writes depend on what the YAML declares, so the stamp stands in for them.
+# Targets that include them depend on enum_codegen.
+set(ENUM_CODEGEN_STAMP ${CMAKE_BINARY_DIR}/generated/.enum_codegen.stamp)
+add_custom_command(
+    OUTPUT ${ENUM_CODEGEN_STAMP}
     COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
+    DEPENDS ${ENUM_CODEGEN_INPUTS}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    BYPRODUCTS ${ENUM_CODEGEN_STAMP}
+    COMMENT "Generating enums"
     USES_TERMINAL
     VERBATIM
 )
+add_custom_target(enum_codegen DEPENDS ${ENUM_CODEGEN_STAMP})

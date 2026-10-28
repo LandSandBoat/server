@@ -52,4 +52,5 @@ include(tools/Fuzzing)
 
 include(project/Codegen)
 
+enable_testing()
 add_subdirectory(src)
