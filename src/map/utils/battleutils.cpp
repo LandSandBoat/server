@@ -4396,6 +4396,41 @@ void RelinquishClaim(CCharEntity* PChar)
     PChar->PClaimedMob = nullptr;
 }
 
+// CEnmityContainer::Clear will eventually clear an entry from a CNotorietyContainer
+// If you are iterating over a CNotorietyContainer, make sure to copy it and iterate over that to call ForceDeaggro
+void ForceDeaggro(CMobEntity* PAttacker, CBattleEntity* PDefender)
+{
+    if (!PDefender)
+    {
+        return;
+    }
+
+    bool isPC = PDefender->objtype == TYPE_PC;
+
+    if (auto PMob = PAttacker; PMob)
+    {
+        if (auto EnmityContainer = PMob->PEnmityContainer; EnmityContainer)
+        {
+            EnmityContainer->Clear(PDefender->id);
+
+            auto PNewTarget = EnmityContainer->GetHighestEnmity();
+            if (PNewTarget)
+            {
+                PMob->PAI->GetController()->ChangeTarget(EntityId(PNewTarget));
+            }
+            else
+            {
+                PMob->PAI->Disengage();
+            }
+
+            if (isPC)
+            {
+                RelinquishClaim(static_cast<CCharEntity*>(PDefender));
+            }
+        }
+    }
+}
+
 // Checks to see if the mob has a damage cap value
 // This is used for instances like Suttung, Antaeus, Crustacean Conundrum bcnm, Colonization reives
 auto CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender) -> int32

@@ -210,6 +210,7 @@ auto getStoreTPbonusFromMerit(CBattleEntity* PEntity) -> uint8;
 void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing = false);
 void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker);
 void RelinquishClaim(CCharEntity* PDefender);
+void ForceDeaggro(CMobEntity* PAttacker, CBattleEntity* PDefender);
 
 auto MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element) -> int32;
 auto PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, xi::DamageType damageType, bool IsCovered = false) -> int32;
