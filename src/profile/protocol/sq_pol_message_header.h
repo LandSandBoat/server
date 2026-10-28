@@ -65,8 +65,8 @@ struct sqPolMessageHeader
     uint16 SRStatus : 2;
     uint16 bTitleSummaryOverFlow : 1;
     uint16 bNonUnicastMessage : 1;
-    uint16 __bSystemReserved : 2;
-    uint32 __SystemReserved;
+    uint16 bSystemReserved : 2;
+    uint32 SystemReserved;
 };
 
 #pragma pack(pop)

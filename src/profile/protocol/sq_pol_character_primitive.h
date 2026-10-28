@@ -35,7 +35,7 @@ namespace profile
 struct sqPolCharacterPrimitive
 {
     uint16  bValid : 1;
-    uint16  __SystemReserved : 15;
+    uint16  SystemReserved : 15;
     Content ContentsClass;
     uint32  ContentsUserSubId;
     uint64  ContentsUserId; // FFXI: character id

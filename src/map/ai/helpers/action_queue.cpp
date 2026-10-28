@@ -24,8 +24,8 @@
 #include "ai/ai_container.h"
 #include "entities/base_entity.h"
 
-CAIActionQueue::CAIActionQueue(CBaseEntity* _PEntity)
-: PEntity(_PEntity)
+CAIActionQueue::CAIActionQueue(CBaseEntity* entity)
+: PEntity(entity)
 {
 }
 

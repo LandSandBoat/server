@@ -434,7 +434,7 @@ void SearchHandler::HandleSearchComment()
 
 void SearchHandler::HandleSearchRequest(const uint16_t length)
 {
-    SendPlayersList(_HandleSearchRequest(length));
+    SendPlayersList(ParseSearchRequest(length));
 }
 
 // Friend list refreshes 20 character IDs at a time. uint16 count at 0x10, uint32 IDs from 0x12
@@ -578,7 +578,7 @@ void SearchHandler::HandleAuctionHouseHistory()
     searchPackets_.emplace_back(PAHPacket.GetData(), length);
 }
 
-auto SearchHandler::_HandleSearchRequest(const uint16_t length) -> SearchRequest
+auto SearchHandler::ParseSearchRequest(const uint16_t length) -> SearchRequest
 {
     // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.

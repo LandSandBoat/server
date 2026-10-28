@@ -34,7 +34,7 @@ class CController
 public:
     using IgnoreRecastsAndCosts = xi::Flag<struct IgnoreRecastsAndCostsTag>;
 
-    CController(CBattleEntity* _POwner);
+    CController(CBattleEntity* owner);
 
     virtual ~CController();
 

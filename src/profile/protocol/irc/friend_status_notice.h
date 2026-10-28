@@ -51,8 +51,8 @@ struct FriendStatNotice
     uint8   unused1D[5];
     uint16  udpPortSlot; // login notice: the game binds 54090 + slot - 1, 0 leaves the port alone
     uint8   unused24[0x0C];
-    uint64  __SystemAgeOfData; // the client applies only newer ones
-    uint32  Length;            // payload characters + 1
+    uint64  SystemAgeOfData; // the client applies only newer ones
+    uint32  Length;          // payload characters + 1
     uint8   SenderHandleNumber;
     uint8   ReceiverHandleNumber;
     uint16  DataType : 7;
@@ -62,8 +62,8 @@ struct FriendStatNotice
     uint16  bValid : 1;
     uint16  ContentsId;
     uint16  bPolproRequest : 1;
-    uint16  __bSystemReserved : 15;
-    uint32  __SystemReserved;
+    uint16  bSystemReserved : 15;
+    uint32  SystemReserved;
 };
 
 // Friend status notice payload, followed by a sqPolCharacterPrimitive when 0x08 is set

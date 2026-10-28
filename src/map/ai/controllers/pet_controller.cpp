@@ -43,9 +43,9 @@ const std::set immobilePets = {
 
 }
 
-CPetController::CPetController(CMobEntity* _PPet)
-: CMobController(_PPet)
-, PPet(_PPet)
+CPetController::CPetController(CMobEntity* pet)
+: CMobController(pet)
+, PPet(pet)
 {
     // TODO: this probably will have to depend on pet type (automaton does WS on its own..)
     SetWeaponSkillEnabled(false);

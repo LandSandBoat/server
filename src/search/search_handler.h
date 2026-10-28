@@ -71,7 +71,7 @@ private:
     void HandleAuctionHouseRequest();
     void HandleAuctionHouseHistory();
 
-    auto _HandleSearchRequest(uint16_t length) -> SearchRequest;
+    auto ParseSearchRequest(uint16_t length) -> SearchRequest;
     void SendPlayersList(const SearchRequest& sr);
 
     Scheduler&               scheduler_;
