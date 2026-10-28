@@ -41,7 +41,6 @@ auto getHitCount(uint8 hits) -> uint8
     switch (hits)
     {
         case 0:
-            break;
         case 1:
             break;
         case 2: // cdf = 55,100
@@ -281,19 +280,23 @@ auto CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 d
         {
             return (uint32)(damage * occ_extra_dmg);
         }
-        else if (occ_do_triple_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_triple_dmg)
+
+        if (occ_do_triple_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_triple_dmg)
         {
             return (uint32)(damage * 3.0f);
         }
-        else if (occ_extra_dmg > 2.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+
+        if (occ_extra_dmg > 2.0f && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
         {
             return (uint32)(damage * occ_extra_dmg);
         }
-        else if (occ_do_double_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_double_dmg)
+
+        if (occ_do_double_dmg > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_do_double_dmg)
         {
             return (uint32)(damage * 2.0f);
         }
-        else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
+
+        if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && (1 + xirand::GetRandomNumber(100)) <= occ_extra_dmg_chance)
         {
             return (uint32)(damage * occ_extra_dmg);
         }

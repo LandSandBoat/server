@@ -72,10 +72,6 @@ void CAutomatonController::setCooldowns()
         }
         break;
         case xi::AutomatonFrame::Harlequin:
-        {
-            setMagicCooldowns();
-        }
-        break;
         case xi::AutomatonFrame::Stormwaker:
         {
             setMagicCooldowns();
@@ -191,21 +187,25 @@ auto CAutomatonController::DoCombatTick(timer::time_point tick) -> Task<void>
             m_LastShieldBashTime = m_Tick;
             co_return;
         }
-        else if (TrySpellcast(maneuvers))
+
+        if (TrySpellcast(maneuvers))
         {
             m_LastMagicTime = m_Tick;
             co_return;
         }
-        else if (TryTPMove())
+
+        if (TryTPMove())
         {
             co_return;
         }
-        else if (TryRangedAttack())
+
+        if (TryRangedAttack())
         {
             m_LastRangedTime = m_Tick;
             co_return;
         }
-        else if (TryAttachment())
+
+        if (TryAttachment())
         {
             co_return;
         }
@@ -280,25 +280,6 @@ auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bo
         }
         break;
         case xi::AutomatonHead::Sharpshot:
-        {
-            if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
-            {
-                m_LastHealTime = m_Tick;
-                return true;
-            }
-
-            if (TryEnfeeble(maneuvers))
-            {
-                m_LastEnfeebleTime = m_Tick;
-                return true;
-            }
-            else if (!maneuvers.light && TryHeal(maneuvers))
-            {
-                m_LastHealTime = m_Tick;
-                return true;
-            }
-        }
-        break;
         case xi::AutomatonHead::Harlequin:
         {
             if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
@@ -549,26 +530,28 @@ auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
         {
             return true;
         }
-        else if (missinghp > 600 && Cast(PCastTarget->entityId(), SpellID::Cure_V))
+
+        if (missinghp > 600 && Cast(PCastTarget->entityId(), SpellID::Cure_V))
         {
             return true;
         }
-        else if (missinghp > 350 && Cast(PCastTarget->entityId(), SpellID::Cure_IV))
+
+        if (missinghp > 350 && Cast(PCastTarget->entityId(), SpellID::Cure_IV))
         {
             return true;
         }
-        else if (missinghp > 190 && Cast(PCastTarget->entityId(), SpellID::Cure_III))
+
+        if (missinghp > 190 && Cast(PCastTarget->entityId(), SpellID::Cure_III))
         {
             return true;
         }
-        else if (missinghp > 120 && Cast(PCastTarget->entityId(), SpellID::Cure_II))
+
+        if (missinghp > 120 && Cast(PCastTarget->entityId(), SpellID::Cure_II))
         {
             return true;
         }
-        else if (Cast(PCastTarget->entityId(), SpellID::Cure))
-        {
-            return true;
-        }
+
+        return Cast(PCastTarget->entityId(), SpellID::Cure);
     }
 
     return false;

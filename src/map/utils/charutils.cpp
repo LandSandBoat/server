@@ -2008,11 +2008,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
                 {
                     CItemEquipment* PSub = PChar->getEquip(SLOT_SUB);
 
-                    if (static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::HandToHand)
-                    {
-                        PChar->look.sub = 0;
-                    }
-                    else if (!PSub)
+                    if (static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::HandToHand || !PSub)
                     {
                         PChar->look.sub = 0;
                     }

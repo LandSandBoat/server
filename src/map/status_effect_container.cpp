@@ -237,12 +237,10 @@ auto CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect) -
         case xi::StatusEffect::SleepIi:
         case xi::StatusEffect::Lullaby:
         {
-            uint16 subPower = PStatusEffect->GetSubPower();
-            if (subPower == ELEMENT_LIGHT && m_POwner->hasImmunity(xi::Immunity::LightSleep))
-            {
-                return false;
-            }
-            else if (subPower == ELEMENT_DARK && m_POwner->hasImmunity(xi::Immunity::DarkSleep))
+            uint16     subPower           = PStatusEffect->GetSubPower();
+            const bool immuneToLightSleep = subPower == ELEMENT_LIGHT && m_POwner->hasImmunity(xi::Immunity::LightSleep);
+            const bool immuneToDarkSleep  = subPower == ELEMENT_DARK && m_POwner->hasImmunity(xi::Immunity::DarkSleep);
+            if (immuneToLightSleep || immuneToDarkSleep)
             {
                 return false;
             }
@@ -322,11 +320,6 @@ auto CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect) -
             }
             break;
         case xi::StatusEffect::CurseI:
-            if (m_POwner->hasImmunity(xi::Immunity::Curse))
-            {
-                return false;
-            }
-            break;
         case xi::StatusEffect::CurseIi:
             if (m_POwner->hasImmunity(xi::Immunity::Curse))
             {
@@ -1041,12 +1034,8 @@ auto CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
             if (ExistingStatusEffect->GetSubID() == PStatusEffect->GetSubID())
             { // YOUR BRD effect
                 numOfEffects++;
-                if (!oldestSong)
-                {
-                    oldestSong = ExistingStatusEffect.get();
-                }
-                else if (ExistingStatusEffect->GetStartTime() + ExistingStatusEffect->GetDuration() <
-                         oldestSong->GetStartTime() + oldestSong->GetDuration())
+                if (!oldestSong ||
+                    ExistingStatusEffect->GetStartTime() + ExistingStatusEffect->GetDuration() < oldestSong->GetStartTime() + oldestSong->GetDuration())
                 {
                     oldestSong = ExistingStatusEffect.get();
                 }

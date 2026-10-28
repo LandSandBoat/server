@@ -210,16 +210,6 @@ void CWeaponSkillState::Cleanup(const timer::time_point tick)
         return;
     }
 
-    // Interrupted.
-    if (!IsCompleted())
-    {
-    }
-
-    // Not interrupted.
-    else
-    {
-    }
-
     // Call listener. Feed skill result.
     if (m_PEntity->isAlive())
     {

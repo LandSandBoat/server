@@ -1611,17 +1611,13 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                     Samba -= ceil(Samba * lvlDiff * .04); // 4% penalty per level
                 }
 
-                if (finaldamage <= 2)
+                if (finaldamage <= 2 || Samba < 0)
                 {
                     Samba = 0;
                 }
                 else if (Samba > (finaldamage / 2))
                 {
                     Samba = finaldamage / 2;
-                }
-                else if (Samba < 0)
-                {
-                    Samba = 0;
                 }
 
                 Action->additionalEffect = ActionProcAddEffect::HPDrain;
@@ -1640,17 +1636,13 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 uint16 multiplier = 1 + 2 * (power - 1);
                 int16  Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
-                if (finaldamage <= 2)
+                if (finaldamage <= 2 || Samba < 0)
                 {
                     Samba = 0;
                 }
                 else if (Samba >= finaldamage / 4)
                 {
                     Samba = finaldamage / 4;
-                }
-                else if (Samba < 0)
-                {
-                    Samba = 0;
                 }
 
                 Action->additionalEffect = ActionProcAddEffect::MPDrain;
@@ -2293,11 +2285,9 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
     }
 
     // Handle damage nullification.
-    if (attackType == xi::AttackType::Ranged && xirand::GetRandomNumber(100) < PDefender->getMod(xi::Mod::NULL_RANGED_DAMAGE))
-    {
-        damage = 0;
-    }
-    else if (attackType == xi::AttackType::Physical && xirand::GetRandomNumber(100) < PDefender->getMod(xi::Mod::NULL_PHYSICAL_DAMAGE))
+    const bool nullifiedRanged   = attackType == xi::AttackType::Ranged && xirand::GetRandomNumber(100) < PDefender->getMod(xi::Mod::NULL_RANGED_DAMAGE);
+    const bool nullifiedPhysical = attackType == xi::AttackType::Physical && xirand::GetRandomNumber(100) < PDefender->getMod(xi::Mod::NULL_PHYSICAL_DAMAGE);
+    if (nullifiedRanged || nullifiedPhysical)
     {
         damage = 0;
     }
@@ -2535,11 +2525,9 @@ auto GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ign
     }
     else if (dynamic_cast<const CCharEntity*>(PAttacker) != nullptr && (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
     {
-        if (PAttacker->GetMJob() == xi::Job::THF and PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Doubt))
-        {
-            critHitRate = 100;
-        }
-        else if (behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide))
+        const bool targetDoubted = PAttacker->GetMJob() == xi::Job::THF && PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Doubt);
+        const bool isUnseen      = behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide);
+        if (targetDoubted || isUnseen)
         {
             critHitRate = 100;
         }
@@ -2782,7 +2770,6 @@ auto getHitCount(uint8 hits) -> uint8
     switch (hits)
     {
         case 0:
-            break;
         case 1:
             break;
         case 2: // cdf = 55,100
@@ -5409,12 +5396,7 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
                         PEntity->delTrait(PExistingTrait);
                         break;
                     }
-                    else if (PExistingTrait->getRank() > PTrait->getRank())
-                    {
-                        add = false;
-                        break;
-                    }
-                    else if (PExistingTrait->getMod() == PTrait->getMod())
+                    else if (PExistingTrait->getRank() > PTrait->getRank() || PExistingTrait->getMod() == PTrait->getMod())
                     {
                         add = false;
                         break;

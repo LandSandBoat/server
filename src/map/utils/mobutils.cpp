@@ -237,22 +237,14 @@ auto GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot) -> uint16
         case xi::Region::AragoneuFront:
         case xi::Region::FauregandiFront:
         case xi::Region::ValdeauniaFront:
-            offset       = 11;
-            rangedOffset = 13;
-            break;
-
         // Other
         case xi::Region::Abyssea:
         case xi::Region::TheThreshold:
         case xi::Region::Abdhaljs: // TODO: Need data for ABDHALJS zones.
-            offset       = 11;
-            rangedOffset = 13;
-            break;
-
         // SOA Regions
         case xi::Region::AdoulinIslands:
-        case xi::Region::EastUlbuka:
-            offset       = 11; // TODO: Need more data for Lvl 100+ mobs.
+        case xi::Region::EastUlbuka: // TODO: Need more data for Lvl 100+ mobs.
+            offset       = 11;
             rangedOffset = 13;
             break;
 
@@ -1201,11 +1193,7 @@ void SetupJob(CMobEntity* PMob)
             PMob->defaultMobMod(xi::MobMod::SevereSpellChance, 20);
             break;
         case xi::Job::PLD:
-            PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            break;
         case xi::Job::DRK:
-            PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            break;
         case xi::Job::WHM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;
@@ -1229,14 +1217,8 @@ void SetupJob(CMobEntity* PMob)
             PMob->defaultMobMod(xi::MobMod::BuffChance, 20);
             break;
         case xi::Job::BLU:
-            PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            break;
         case xi::Job::SCH:
-            PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            break;
         case xi::Job::GEO:
-            PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
-            break;
         case xi::Job::RUN:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;

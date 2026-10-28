@@ -98,31 +98,27 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                     continue;
                 }
 
-                const auto* PItem = xi::items::lookup<CItemEquipment>(itemId);
-                if (!PItem || !(PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT)))
+                const auto* PItem    = xi::items::lookup<CItemEquipment>(itemId);
+                const bool  isGear   = PItem && (PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT));
+                const bool  fitsSlot = isGear && (PItem->getEquipSlotId() & (1 << item.EquipKind)) != 0;
+                if (!fitsSlot)
                 {
                     itemId = 0;
                 }
-                else if ((PItem->getEquipSlotId() & (1 << item.EquipKind)) == 0) // item doesn't fit in slot
+                else
                 {
-                    itemId = 0;
-                }
-                else if (!charutils::HasItem(PChar, itemId, IncludeRecycleBin::No)) // valid for the slot but not owned
-                {
-                    failedItemIds.push_back(itemId);
-                    itemId = 0;
-                }
-                else if (!charutils::canEquipItemOnAnyJob(PChar, PItem)) // owned but no leveled job can equip it
-                {
-                    failedItemIds.push_back(itemId);
-                    itemId = 0;
-                }
-                else if ((item.EquipKind == SLOT_MAIN || item.EquipKind == SLOT_SUB || item.EquipKind == SLOT_RANGED) &&
-                         !charutils::hasValidStyle(PChar, PChar->getEquip(static_cast<SLOTTYPE>(item.EquipKind)), PItem))
-                {
+                    const bool isOwned      = charutils::HasItem(PChar, itemId, IncludeRecycleBin::No);
+                    const bool isEquippable = charutils::canEquipItemOnAnyJob(PChar, PItem);
+                    const bool isWeaponSlot = item.EquipKind == SLOT_MAIN || item.EquipKind == SLOT_SUB || item.EquipKind == SLOT_RANGED;
+
                     // A weapon appearance can only be locked over a weapon of the same skill type
-                    failedItemIds.push_back(itemId);
-                    itemId = 0;
+                    const bool styleMatches = !isWeaponSlot || charutils::hasValidStyle(PChar, PChar->getEquip(static_cast<SLOTTYPE>(item.EquipKind)), PItem);
+
+                    if (!isOwned || !isEquippable || !styleMatches)
+                    {
+                        failedItemIds.push_back(itemId);
+                        itemId = 0;
+                    }
                 }
 
                 PChar->styleItems[item.EquipKind] = itemId;

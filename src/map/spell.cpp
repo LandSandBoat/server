@@ -742,11 +742,8 @@ auto CanUseSpell(CBattleEntity* PCaster, CSpell* spell) -> bool
             return true;
 
         case TYPE_PC:
-            if (spell->getSpellGroup() == SPELLGROUP_TRUST)
-            {
-                return true; // every PC can use trusts
-            }
-            else if (luautils::OnCanUseSpell(PCaster, spell))
+            // every PC can use trusts
+            if (spell->getSpellGroup() == SPELLGROUP_TRUST || luautils::OnCanUseSpell(PCaster, spell))
             {
                 return true;
             }

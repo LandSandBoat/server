@@ -330,7 +330,6 @@ auto CMobSpellContainer::GetBestEntrustedSpell(CBattleEntity* PTarget) -> Maybe<
             choice = SpellID::Indi_Regen;
             break;
         case xi::Job::GEO:
-            break;
         default:
             break;
     }

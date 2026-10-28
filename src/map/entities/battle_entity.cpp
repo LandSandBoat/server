@@ -1831,13 +1831,11 @@ void CBattleEntity::SetSLevel(uint8 slvl)
 {
     TracyZoneScoped;
 
-    if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
+    // All mobs have a 1:1 ratio of MainJob/Subjob. A Monipulator's sub job is MON at its main level.
+    const bool mobWithoutSubJob = !settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET;
+    const bool isMonipulator    = monstrosity::AsMonipulator(this) != nullptr;
+    if (mobWithoutSubJob || isMonipulator)
     {
-        m_slvl = m_mlvl; // All mobs have a 1:1 ratio of MainJob/Subjob
-    }
-    else if (monstrosity::AsMonipulator(this) != nullptr)
-    {
-        // A Monipulator's sub job is MON at its main level.
         m_slvl = m_mlvl;
     }
     else if (this->objtype == TYPE_PET)
@@ -3228,12 +3226,8 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Barrage, 0);
     bool  isSange      = isChar && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sange) && getMod(xi::Mod::SANGE_MULTI_HIT) > 0; // Pre-SoA Sange logic check, applied in SoA module
 
-    // Player Barrage check
-    if (isChar && !ammoThrowing && !rangedThrowing && isBarrage)
-    {
-        hitCount += battleutils::getBarrageShotCount(this);
-    }
-    else if (!isChar && isBarrage) // Mobs and trusts have barrage
+    // Player Barrage check. Mobs and trusts have barrage.
+    if ((isChar && !ammoThrowing && !rangedThrowing && isBarrage) || (!isChar && isBarrage))
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
