@@ -48,22 +48,16 @@ enum ENTITYUPDATE
 class CBasicPacket
 {
 protected:
-    std::array<uint8, PACKET_SIZE> buffer_;
+    std::array<uint8, PACKET_SIZE> buffer_{};
 
 public:
-    CBasicPacket()
-    {
-        buffer_.fill(0);
-    }
+    CBasicPacket() = default;
 
-    explicit CBasicPacket(const CBasicPacket& other)
-    {
-        std::memcpy(buffer_.data(), other.buffer_.data(), PACKET_SIZE);
-    }
+    explicit CBasicPacket(const CBasicPacket& other) = default;
 
     explicit CBasicPacket(const std::unique_ptr<CBasicPacket>& other)
+    : buffer_(other->buffer_)
     {
-        std::memcpy(buffer_.data(), other->buffer_.data(), PACKET_SIZE);
     }
 
     static auto createFromBuffer(const uint8* buffer) -> std::unique_ptr<CBasicPacket>
@@ -76,6 +70,7 @@ public:
     virtual ~CBasicPacket() = default;
 
     // Copy and move operators
+    CBasicPacket(CBasicPacket&& other)                             = delete;
     auto operator=(const CBasicPacket& other) -> CBasicPacket&     = delete;
     auto operator=(CBasicPacket&& other) noexcept -> CBasicPacket& = delete;
 

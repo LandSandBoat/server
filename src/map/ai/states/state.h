@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "common/timer.h"
 #include "common/types/badge.h"
 #include "common/types/error_or.h"
@@ -78,6 +79,8 @@ public:
     }
 
     virtual ~CState() = default;
+
+    DISALLOW_COPY_AND_MOVE(CState);
 
     auto target() const -> EntityId;
 

@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include <memory>
 #include <sol/sol.hpp>
 #include <string>
@@ -34,6 +35,8 @@ class MockManager
 public:
     MockManager();
     ~MockManager();
+
+    DISALLOW_COPY_AND_MOVE(MockManager);
 
     auto stub(const std::string& path, const sol::object& mockImpl = sol::lua_nil) -> CLuaStub*;
     auto spy(const std::string& path) -> CLuaSpy*;

@@ -23,6 +23,7 @@
 
 #include <array>
 #include <string>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -76,18 +77,18 @@ using RecordTimetable_W = std::array<RecordTimetable_D, 7>;
 
 struct RoeSystemData
 {
-    RecordTimetable_W        TimedRecordTable;
-    xi::bitset<4096>         ImplementedRecords;
-    xi::bitset<4096>         RepeatableRecords;
-    xi::bitset<4096>         RetroactiveRecords;
-    xi::bitset<4096>         HiddenRecords;
-    xi::bitset<4096>         DailyRecords;
+    RecordTimetable_W        TimedRecordTable{};
+    xi::bitset<4096>         ImplementedRecords{};
+    xi::bitset<4096>         RepeatableRecords{};
+    xi::bitset<4096>         RetroactiveRecords{};
+    xi::bitset<4096>         HiddenRecords{};
+    xi::bitset<4096>         DailyRecords{};
     std::vector<uint16>      DailyRecordIDs;
-    xi::bitset<4096>         WeeklyRecords;
+    xi::bitset<4096>         WeeklyRecords{};
     std::vector<uint16>      WeeklyRecordIDs;
-    xi::bitset<4096>         UnityRecords;
+    xi::bitset<4096>         UnityRecords{};
     std::vector<uint16>      UnityRecordIDs;
-    xi::bitset<4096>         TimedRecords;
+    xi::bitset<4096>         TimedRecords{};
     std::array<uint32, 4096> NotifyThresholds    = {};
     uint8                    unityLeaderRank[11] = {}; // 0..10 for Unity Leader, stores rank position
 
@@ -111,20 +112,20 @@ struct RoeDatagram
     std::string        luaKey;
     RoeDatagramPayload data;
 
-    RoeDatagram(const std::string& param, uint32 payload)
-    : luaKey{ param }
+    RoeDatagram(std::string param, uint32 payload)
+    : luaKey{ std::move(param) }
     , data{ payload }
     {
     }
 
-    RoeDatagram(const std::string& param, CMobEntity* payload)
-    : luaKey{ param }
+    RoeDatagram(std::string param, CMobEntity* payload)
+    : luaKey{ std::move(param) }
     , data{ payload }
     {
     }
 
-    RoeDatagram(const std::string& param, const std::string& payload)
-    : luaKey{ param }
+    RoeDatagram(std::string param, const std::string& payload)
+    : luaKey{ std::move(param) }
     , data{ payload }
     {
     }

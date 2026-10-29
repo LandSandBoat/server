@@ -20,6 +20,7 @@
 */
 #pragma once
 
+#include "common/macros.h"
 #include "player_controller.h"
 
 class CCharEntity;
@@ -29,6 +30,8 @@ class CPlayerCharmController : public CPlayerController
 public:
     CPlayerCharmController(CCharEntity*);
     ~CPlayerCharmController() override;
+
+    DISALLOW_COPY_AND_MOVE(CPlayerCharmController);
 
     auto Tick(timer::time_point tick) -> Task<void> override;
     auto Cast(EntityId target, SpellID spellid) -> bool override;

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "data_loader.h"
 
 class CLinkshellListPacket
@@ -29,6 +30,8 @@ class CLinkshellListPacket
 public:
     CLinkshellListPacket(uint32 linkshellid, uint32 Total);
     ~CLinkshellListPacket() = default;
+
+    DISALLOW_COPY_AND_MOVE(CLinkshellListPacket);
 
     auto AddPlayer(const SearchEntity& player) -> bool;
     void SetFinal();

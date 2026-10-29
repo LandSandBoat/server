@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "world_engine.h"
 
 class ColonizationSystem
@@ -33,6 +34,8 @@ public:
     }
 
     ~ColonizationSystem() = default;
+
+    DISALLOW_COPY_AND_MOVE(ColonizationSystem);
 
     auto handleMessage(uint8 messageType, IPPMessage&& message) -> bool
     {

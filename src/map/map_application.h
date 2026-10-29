@@ -22,6 +22,7 @@
 #pragma once
 
 #include "map_engine.h"
+#include <common/macros.h>
 
 #include <common/application.h>
 
@@ -41,6 +42,8 @@ class MapApplication final : public Application
 public:
     MapApplication(int argc, char** argv);
     ~MapApplication() override;
+
+    DISALLOW_COPY_AND_MOVE(MapApplication);
 
     auto createEngine() -> std::unique_ptr<Engine> override;
     void registerCommands(ConsoleService& console) override;

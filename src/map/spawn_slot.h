@@ -24,7 +24,7 @@ class CMobEntity;
 
 struct SpawnSlotEntry
 {
-    CMobEntity* mob;
+    CMobEntity* mob{};
 
     // Chance out of 100 of this mob spawning out of the mobs sharing the slot.
     // If not all mobs in the slot have a chance defined, then the ones without it

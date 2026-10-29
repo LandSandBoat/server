@@ -20,6 +20,7 @@
 */
 #pragma once
 
+#include "common/macros.h"
 #include "controller.h"
 
 class CCharEntity;
@@ -30,7 +31,9 @@ class CPlayerController : public CController
 public:
     CPlayerController(CCharEntity*);
 
-    virtual ~CPlayerController();
+    ~CPlayerController() override;
+
+    DISALLOW_COPY_AND_MOVE(CPlayerController);
 
     auto Tick(timer::time_point tick) -> Task<void> override;
     auto Cast(EntityId target, SpellID spellid) -> bool override;

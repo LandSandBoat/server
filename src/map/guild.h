@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include <array>
 #include <string>
 
@@ -50,6 +51,8 @@ class CGuild
 public:
     CGuild(uint8 id, const std::string& pointsName);
     ~CGuild();
+
+    DISALLOW_COPY_AND_MOVE(CGuild);
 
     std::vector<CItemContainer*> guildShops;
 

@@ -37,16 +37,16 @@ class FISHRANKING final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_FRAGM
 public:
     struct PacketData
     {
-        uint8_t             Command;      // PS2: Command
-        int8_t              Result;       // PS2: Result
-        uint8_t             value1;       // PS2: fragmentsNo
-        uint8_t             value2;       // PS2: fragmentsTotal
-        int32_t             timestamp;    // PS2: signature
-        int32_t             size_total;   // PS2: timestamp
-        int32_t             offset;       // PS2: offset
-        int32_t             data_size;    // PS2: size
-        uint32_t            totalEntries; // PS2: (unnamed)
-        FishingContestEntry data[6];      // PS2: (unnamed)
+        uint8_t             Command{};      // PS2: Command
+        int8_t              Result{};       // PS2: Result
+        uint8_t             value1{};       // PS2: fragmentsNo
+        uint8_t             value2{};       // PS2: fragmentsTotal
+        int32_t             timestamp{};    // PS2: signature
+        int32_t             size_total{};   // PS2: timestamp
+        int32_t             offset{};       // PS2: offset
+        int32_t             data_size{};    // PS2: size
+        uint32_t            totalEntries{}; // PS2: (unnamed)
+        FishingContestEntry data[6];        // PS2: (unnamed)
     };
 
     FISHRANKING(const std::vector<FishingContestEntry>& entries, int8 language, int32 timestamp, int32 msgOffset, uint32 totalEntries, uint8 msgChunk);

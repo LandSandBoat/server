@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/logging.h"
+#include "common/macros.h"
 #include "common/timer.h"
 
 #include <common/types/maybe.h>
@@ -67,6 +68,8 @@ class CItemContainer
 public:
     CItemContainer(uint16 LocationID, const CCharEntity* owner = nullptr);
     ~CItemContainer();
+
+    DISALLOW_COPY_AND_MOVE(CItemContainer);
 
     auto GetID() const -> uint16;
     auto GetBuff() const -> uint16; // get storage size (unlimited size)

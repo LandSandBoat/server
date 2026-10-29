@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "common/types/hash_map.h"
 #include "common/types/maybe.h"
 
@@ -147,6 +148,8 @@ class CBattleEntity : public CBaseEntity
 public:
     CBattleEntity();
     ~CBattleEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CBattleEntity);
 
     auto STR() -> uint16;
     auto DEX() const -> uint16;
@@ -295,7 +298,7 @@ public:
     virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool;
     virtual auto CanUseSpell(CSpell*) -> bool;
 
-    virtual void Spawn() override;
+    void         Spawn() override;
     virtual void Die();
 
     auto battleTarget() const -> EntityId;
@@ -347,8 +350,8 @@ public:
     void setBattleID(uint16 battleID);
     auto getBattleID() const -> uint16;
 
-    virtual auto Tick(timer::time_point) -> Task<void> override;
-    virtual void PostTick() override;
+    auto Tick(timer::time_point) -> Task<void> override;
+    void PostTick() override;
 
     Health       health{}; // hp, mp, tp, etc.
     stats_t      stats{};

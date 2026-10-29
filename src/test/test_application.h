@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/macros.h"
 #include "in_memory_sink.h"
 
 #ifndef _WIN32
@@ -33,6 +34,8 @@ class TestApplication final : public Application
 public:
     TestApplication(int argc, char** argv);
     ~TestApplication() override;
+
+    DISALLOW_COPY_AND_MOVE(TestApplication);
 
     auto createEngine() -> std::unique_ptr<Engine> override;
     auto run() -> bool override;

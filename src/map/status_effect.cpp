@@ -51,8 +51,6 @@ CStatusEffect::CStatusEffect(xi::StatusEffect id, uint16 icon, uint16 power, tim
     modList_.reserve(8);
 }
 
-CStatusEffect::~CStatusEffect() = default;
-
 auto CStatusEffect::modList() -> std::vector<CModifier>&
 {
     return modList_;

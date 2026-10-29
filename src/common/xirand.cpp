@@ -43,7 +43,7 @@ auto acquire_context(HCRYPTPROV* ctx) -> bool
 
 auto sysrandom(void* dst, size_t dstlen) -> size_t
 {
-    HCRYPTPROV ctx;
+    HCRYPTPROV ctx = 0;
     if (!acquire_context(&ctx))
     {
         throw std::runtime_error("Unable to initialize Win32 crypt library.");

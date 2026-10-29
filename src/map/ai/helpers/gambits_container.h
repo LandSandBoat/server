@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 #include <common/types/hash_map.h>
 
@@ -153,7 +154,7 @@ enum class G_TP_TRIGGER : uint16
 
 struct Predicate_t
 {
-    G_CONDITION condition;
+    G_CONDITION condition{};
     uint32      condition_arg;
 
     Predicate_t()
@@ -238,7 +239,7 @@ struct Gambit_t
 {
     std::vector<PredicateGroup_t> predicate_groups;
     std::vector<Action_t>         actions;
-    G_TARGET                      target_selector;
+    G_TARGET                      target_selector{};
     uint16                        retry_delay;
     timer::time_point             last_used;
     std::string                   identifier;
@@ -260,12 +261,12 @@ struct Chain_t
 // TODO: smaller types, make less bad.
 struct TrustSkill_t
 {
-    G_REACTION skill_type;
+    G_REACTION skill_type{};
     uint32     skill_id;
     uint8      primary;
     uint8      secondary;
     uint8      tertiary;
-    TARGETTYPE valid_targets;
+    TARGETTYPE valid_targets{};
 
     TrustSkill_t()
     : skill_id(0)
@@ -296,6 +297,8 @@ public:
 
     ~CGambitsContainer() = default;
 
+    DISALLOW_COPY_AND_MOVE(CGambitsContainer);
+
     auto NewGambitIdentifier(const Gambit_t& gambit) const -> std::string;
     auto AddGambit(const Gambit_t& gambit) -> std::string;
     void RemoveGambit(const std::string& id);
@@ -304,9 +307,9 @@ public:
 
     // TODO: make private
     std::vector<TrustSkill_t> tp_skills;
-    G_TP_TRIGGER              tp_trigger;
-    G_SELECT                  tp_select;
-    uint16                    tp_value;
+    G_TP_TRIGGER              tp_trigger{};
+    G_SELECT                  tp_select{};
+    uint16                    tp_value{};
 
 private:
     auto CheckTrigger(const CBattleEntity* triggerTarget, const Gambit_t& gambit, size_t predicateGroupIndex, PredicateGroup_t& predicateGroup) -> bool;

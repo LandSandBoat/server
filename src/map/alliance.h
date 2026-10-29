@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 class CBattleEntity;
 class CParty;
@@ -33,6 +34,8 @@ public:
     CAlliance(CBattleEntity* PEntity);
     CAlliance(uint32 id);
     ~CAlliance();
+
+    DISALLOW_COPY_AND_MOVE(CAlliance);
 
     uint32 m_AllianceID;
     auto   getMainParty() -> CParty*;

@@ -23,6 +23,7 @@
 
 #include <common/cbasetypes.h>
 #include <common/logging.h>
+#include <common/macros.h>
 #include <common/tracy.h>
 
 #include <common/database/traits.h>
@@ -55,8 +56,7 @@ public:
     ResultSet(std::string query, ResultSetType type, std::size_t rowsAffected = 0);
     virtual ~ResultSet() = default;
 
-    ResultSet(const ResultSet&)                    = delete;
-    auto operator=(const ResultSet&) -> ResultSet& = delete;
+    DISALLOW_COPY_AND_MOVE(ResultSet);
 
     auto type() const -> ResultSetType;
     auto query() const -> const std::string&;

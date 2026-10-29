@@ -32,6 +32,11 @@ public:
     CLuaTestEntity(Scheduler& scheduler, CBaseEntity* entity);
     virtual ~CLuaTestEntity();
 
+    CLuaTestEntity(const CLuaTestEntity&)                    = default;
+    auto operator=(const CLuaTestEntity&) -> CLuaTestEntity& = delete;
+    CLuaTestEntity(CLuaTestEntity&&) noexcept                = default;
+    auto operator=(CLuaTestEntity&&) -> CLuaTestEntity&      = delete;
+
     virtual void setEntity(CBaseEntity* entity);
     void         despawn() const;
     void         respawn() const;

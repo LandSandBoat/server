@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "map/ximesh/ximesh_structs.h"
 
 #include <common/types/maybe.h>
@@ -32,7 +33,10 @@ using IgnoreTransparentBarriers = xi::Flag<struct IgnoreTransparentBarriersTag>;
 class XiMesh
 {
 public:
+    XiMesh()          = default;
     virtual ~XiMesh() = default;
+
+    DISALLOW_COPY_AND_MOVE(XiMesh);
 
     virtual auto query(float x, float y, float z) const -> Maybe<CellHit>                                                                                                                     = 0;
     virtual auto getTerrainAt(float x, float y, float z) const -> xi::TerrainType                                                                                                             = 0;

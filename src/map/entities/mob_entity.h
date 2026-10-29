@@ -22,6 +22,7 @@
 #pragma once
 
 #include "battle_entity.h"
+#include <common/macros.h>
 
 #include <array>
 
@@ -66,6 +67,8 @@ class CMobEntity : public CBattleEntity
 public:
     CMobEntity();
     ~CMobEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CMobEntity);
 
     auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
@@ -122,37 +125,37 @@ public:
     void SetUntargetable(bool untargetable);
     auto GetUntargetable() const -> bool override;
 
-    void         PostTick() override;
-    auto         GetRoamDistance() const -> float;
-    virtual auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
+    void PostTick() override;
+    auto GetRoamDistance() const -> float;
+    auto ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) -> bool override;
 
-    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
+    void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
     {
     }
 
-    virtual void Die() override;
+    void Die() override;
 
     auto getfTPModifierOverride(uint16 skillId) -> Maybe<std::array<float, 3>>;
     void setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3);
 
-    virtual void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
-    virtual void OnMobSkillFinished(CMobSkillState&, action_t&) override;
-    virtual void OnEngage(CAttackState&) override;
+    void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
+    void OnMobSkillFinished(CMobSkillState&, action_t&) override;
+    void OnEngage(CAttackState&) override;
 
-    virtual auto GetRangedAttackRange() -> float override;
-    virtual auto OnAttack(CAttackState&, action_t&) -> bool override;
-    virtual auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
-    virtual void OnCastFinished(CMagicState&, action_t&) override;
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
+    auto GetRangedAttackRange() -> float override;
+    auto OnAttack(CAttackState&, action_t&) -> bool override;
+    auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
+    void OnCastFinished(CMagicState&, action_t&) override;
+    void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
 
-    virtual void OnDisengage(CAttackState&) override;
-    virtual void OnDeathTimer() override;
+    void OnDisengage(CAttackState&) override;
+    void OnDeathTimer() override;
 
-    virtual void OnDespawn(CDespawnState&) override;
+    void OnDespawn(CDespawnState&) override;
 
-    virtual void Spawn() override;
-    virtual void FadeOut() override;
-    virtual auto isWideScannable() -> bool override;
+    void Spawn() override;
+    void FadeOut() override;
+    auto isWideScannable() -> bool override;
 
     bool            m_AllowRespawn; // If true, this mob or another mob in the same slot is allowed to spawn
     bool            m_CanSpawn;     // If true, it can currently spawn (usually based on time of day or weather)

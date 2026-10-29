@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "common/mmo.h"
 #include "common/timer.h"
 #include "entities/entity_id.h"
@@ -146,6 +147,8 @@ class CBaseEntity
 public:
     CBaseEntity();
     virtual ~CBaseEntity();
+
+    DISALLOW_COPY_AND_MOVE(CBaseEntity);
 
     virtual void Spawn();
     virtual void FadeOut();

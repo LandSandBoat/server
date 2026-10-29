@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <common/macros.h>
 #include <common/types/maybe.h>
 
 #include <string>
@@ -51,6 +52,8 @@ class Arguments final
 public:
     Arguments(const ApplicationConfig& config, int argc, char** argv);
     ~Arguments() = default;
+
+    DISALLOW_COPY_AND_MOVE(Arguments);
 
     template <typename T = std::string>
     auto present(const std::string_view arg_name) const -> Maybe<T>

@@ -21,13 +21,16 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "lua_spy.h"
 
 class CLuaStub : public CLuaSpy
 {
 public:
     CLuaStub(const std::string& path, const sol::object& originalFunc, sol::optional<sol::object> impl = sol::nullopt);
-    ~CLuaStub() override;
+    ~CLuaStub() override = default;
+
+    DISALLOW_COPY_AND_MOVE(CLuaStub);
 
     void returnValue(const sol::object& value);
     void sideEffect(const sol::protected_function& func);

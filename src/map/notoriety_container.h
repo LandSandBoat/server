@@ -31,7 +31,6 @@ class CNotorietyContainer
 {
 public:
     CNotorietyContainer(CBattleEntity* owner);
-    ~CNotorietyContainer() = default;
 
     auto begin() -> std::set<CBattleEntity*>::iterator;
     auto end() -> std::set<CBattleEntity*>::iterator;

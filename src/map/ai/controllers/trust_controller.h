@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include <memory>
 
 #include "mob_controller.h"
@@ -40,6 +41,8 @@ class CTrustController : public CMobController
 public:
     CTrustController(CCharEntity*, CTrustEntity*);
     ~CTrustController() override;
+
+    DISALLOW_COPY_AND_MOVE(CTrustController);
 
     auto Tick(timer::time_point) -> Task<void> override;
     void Despawn() override;

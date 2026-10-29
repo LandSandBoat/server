@@ -32,7 +32,6 @@ class CLuaClientEntityPairEntities
 {
 public:
     CLuaClientEntityPairEntities(CLuaClientEntityPair* parent);
-    ~CLuaClientEntityPairEntities() = default;
 
     auto get(const sol::object& entityQuery) const -> Maybe<CLuaTestEntity>;
     auto moveTo(const sol::object& entityQuery) const -> Maybe<CLuaTestEntity>;

@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <common/macros.h>
 #include <common/scheduler.h>
 #include <common/tracy.h>
 
@@ -47,7 +48,10 @@ namespace db
 class Database
 {
 public:
+    Database()          = default;
     virtual ~Database() = default;
+
+    DISALLOW_COPY_AND_MOVE(Database);
 
     // Execute a query with the given pre-lowered parameters.
     // Returns a queryable result set for SELECT-like queries, a rows-affected result set for

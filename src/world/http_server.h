@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "common/synchronized.h"
 #include "common/timer.h"
 
@@ -33,6 +34,8 @@ class HTTPServer
 public:
     HTTPServer(Scheduler& scheduler);
     ~HTTPServer();
+
+    DISALLOW_COPY_AND_MOVE(HTTPServer);
 
     void LockingUpdate();
 

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "recast_container.h"
 
 class CCharEntity;
@@ -31,16 +32,18 @@ class CCharRecastContainer : public CRecastContainer
 public:
     CCharRecastContainer(CCharEntity*);
 
-    virtual ~CCharRecastContainer() = default;
+    ~CCharRecastContainer() override = default;
 
-    virtual void Check() override;
-    virtual void Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
-    virtual void Del(xi::RecastType type) override;
-    virtual void Del(xi::RecastType type, xi::Recast id) override;
-    virtual void DeleteByIndex(xi::RecastType type, uint8 index) override;
-    virtual void ResetAbilities() override;
-    virtual auto GetRecastList(xi::RecastType type) -> RecastList_t* override;
-    virtual void ChangeJob() override;
+    DISALLOW_COPY_AND_MOVE(CCharRecastContainer);
+
+    void Check() override;
+    void Add(xi::RecastType type, xi::Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
+    void Del(xi::RecastType type) override;
+    void Del(xi::RecastType type, xi::Recast id) override;
+    void DeleteByIndex(xi::RecastType type, uint8 index) override;
+    void ResetAbilities() override;
+    auto GetRecastList(xi::RecastType type) -> RecastList_t* override;
+    void ChangeJob() override;
 
 protected:
     RecastList_t RecastItemList;

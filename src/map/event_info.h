@@ -39,7 +39,7 @@ struct EventPrep
 
     void reset()
     {
-        targetEntity = 0;
+        targetEntity = nullptr;
         scriptFile.clear();
     }
 };

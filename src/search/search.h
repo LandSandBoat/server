@@ -39,21 +39,21 @@ inline constexpr uint32 searchEntryMaxSize = 67;
 
 struct SearchRequest
 {
-    uint16        zoneid[16];
-    uint8         jobid;
-    uint8         minlvl;
-    uint8         maxlvl;
+    uint16        zoneid[16]{};
+    uint8         jobid{};
+    uint8         minlvl{};
+    uint8         maxlvl{};
     uint8         minMasterLvl = 0;
     uint8         maxMasterLvl = 0;
-    uint8         race;
-    uint8         nation;
-    uint8         minRank;
-    uint8         maxRank;
+    uint8         race{};
+    uint8         nation{};
+    uint8         minRank{};
+    uint8         maxRank{};
     Maybe<uint32> lsId;
-    uint32        flags;
+    uint32        flags{};
     std::string   name;
-    uint8         nameLen;
-    uint8         commentType;
+    uint8         nameLen{};
+    uint8         commentType{};
     bool          friendsOnly     = false;
     bool          requestListOnly = false;
 
@@ -94,6 +94,6 @@ public:
     }
 
 private:
-    std::array<uint8_t, max_size> buff_;
+    std::array<uint8_t, max_size> buff_{};
     uint16_t                      size;
 };

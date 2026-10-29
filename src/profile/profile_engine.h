@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "data/accounts.h"
 #include "irc/presence_manager.h"
 #include "stream.h"
@@ -41,6 +42,8 @@ class ProfileEngine final : public Engine
 public:
     explicit ProfileEngine(Scheduler& scheduler);
     ~ProfileEngine() override;
+
+    DISALLOW_COPY_AND_MOVE(ProfileEngine);
 
 private:
     using Session = std::function<Task<void>(profile::Stream, std::string, profile::accounts::Credential)>;

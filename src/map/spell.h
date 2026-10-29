@@ -1264,6 +1264,8 @@ public:
 protected:
     CSpell(const CSpell&)                    = default;
     auto operator=(const CSpell&) -> CSpell& = default;
+    CSpell(CSpell&&)                         = default;
+    auto operator=(CSpell&&) -> CSpell&      = default;
 
 private:
     SpellID                        m_ID;                // spell id

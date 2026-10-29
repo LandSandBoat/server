@@ -23,6 +23,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/logging.h"
+#include "common/macros.h"
 
 #include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
@@ -35,6 +36,8 @@ public:
     handler_session(asio::ssl::stream<asio::ip::tcp::socket> socket);
 
     virtual ~handler_session() = default;
+
+    DISALLOW_COPY_AND_MOVE(handler_session);
 
     virtual void start();
 

@@ -79,7 +79,7 @@ constexpr auto Squirrel5::seed(result_type seed_val) -> void
 template <SeedSequence Sseq>
 constexpr auto Squirrel5::seed(Sseq& seq) -> void
 {
-    std::array<uint32_t, 1> buf;
+    std::array<uint32_t, 1> buf{};
     seq.generate(buf.begin(), buf.end());
     m_seed     = buf[0];
     m_position = 0;

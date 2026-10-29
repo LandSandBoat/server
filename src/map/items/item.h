@@ -64,6 +64,8 @@ public:
     CItem(uint16 id);
     CItem(const CItem& other);
     auto operator=(const CItem&) -> CItem& = delete;
+    CItem(CItem&&)                         = delete;
+    auto operator=(CItem&&) -> CItem&      = delete;
 
     virtual ~CItem();
 

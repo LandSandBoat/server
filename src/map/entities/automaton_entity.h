@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "data/enums/automaton_frame.h"
 #include "data/enums/automaton_head.h"
 #include "pet_entity.h"
@@ -34,6 +35,8 @@ class CAutomatonEntity final : public CPetEntity
 public:
     CAutomatonEntity(uint32 petID);
     ~CAutomatonEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CAutomatonEntity);
 
     auto frame() const -> xi::AutomatonFrame;
     auto head() const -> xi::AutomatonHead;

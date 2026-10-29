@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include <new>
 #include <utility>
 
@@ -37,15 +38,14 @@ public:
 
     ~NoDestructor() = default;
 
-    NoDestructor(const NoDestructor&)                    = delete;
-    auto operator=(const NoDestructor&) -> NoDestructor& = delete;
+    DISALLOW_COPY_AND_MOVE(NoDestructor);
 
     auto operator*() -> T&;
     auto operator->() -> T*;
     auto get() -> T*;
 
 private:
-    alignas(T) unsigned char storage_[sizeof(T)];
+    alignas(T) unsigned char storage_[sizeof(T)]{};
 };
 
 template <class T>

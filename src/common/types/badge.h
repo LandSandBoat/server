@@ -38,7 +38,8 @@ class Badge
 {
 private:
     friend T;
-    Badge() = default;
+    Badge()  = default;
+    ~Badge() = default;
     DISALLOW_COPY_AND_MOVE(Badge);
 };
 

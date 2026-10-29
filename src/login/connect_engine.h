@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/macros.h"
 #include "common/zmq/zmq_service.h"
 
 #ifndef _WIN32
@@ -40,6 +41,8 @@ class ConnectEngine final : public Engine
 public:
     ConnectEngine(Scheduler& scheduler, ZMQService& zmqService);
     ~ConnectEngine() override;
+
+    DISALLOW_COPY_AND_MOVE(ConnectEngine);
 
 private:
     // This cleanup function is to periodically poll for auth sessions that were successful but

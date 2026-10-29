@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "mob_entity.h"
 
 class CFellowEntity final : public CMobEntity
@@ -28,6 +29,8 @@ class CFellowEntity final : public CMobEntity
 public:
     explicit CFellowEntity(CCharEntity* PChar);
     ~CFellowEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CFellowEntity);
 
     // TODO
 };

@@ -38,6 +38,7 @@ Checks: >
   modernize-use-trailing-return-type,
   modernize-use-using,
   performance-*,
+  -performance-enum-size,
   readability-avoid-const-params-in-decls,
   readability-const-return-type,
   readability-container-size-empty,
@@ -63,4 +64,5 @@ CheckOptions:
 # TODO: These are important, but they're destructive. Turn on one day.
 #  cppcoreguidelines-pro-type-static-cast-downcast,
 #  cppcoreguidelines-pro-type-cstyle-cast,
+#  performance-enum-size, (narrows enums that sit in packet and DB struct layouts)
 ...

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "common/timer.h"
 
 #include <map>
@@ -50,6 +51,8 @@ class CBattlefieldHandler
 public:
     CBattlefieldHandler(CZone* PZone);
     ~CBattlefieldHandler();
+
+    DISALLOW_COPY_AND_MOVE(CBattlefieldHandler);
     void HandleBattlefields(timer::time_point tick);                                                // called every tick to handle win/lose conditions, locking the bcnm, etc
     auto LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration) -> uint8; // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
     auto GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false) -> CBattlefield*;       // return pointer to battlefield if exists

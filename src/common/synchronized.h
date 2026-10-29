@@ -63,14 +63,14 @@ struct Synchronized
 
     DISALLOW_COPY_AND_MOVE(Synchronized);
 
-    auto read(auto f) const
+    auto read(const auto& f) const
     {
         auto l = lock();
         LockMark(holder_.mutex);
         return f(target);
     }
 
-    auto write(auto f)
+    auto write(const auto& f)
     {
         auto l = lock();
         LockMark(holder_.mutex);

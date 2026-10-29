@@ -22,6 +22,7 @@
 #pragma once
 
 #include <common/database/libmariadb/libmariadb_include.h>
+#include <common/macros.h>
 
 #include <common/database/connection.h>
 
@@ -38,8 +39,7 @@ public:
     explicit LibMariaDBConnection(MYSQL* connection);
     ~LibMariaDBConnection() override;
 
-    LibMariaDBConnection(const LibMariaDBConnection&)                    = delete;
-    auto operator=(const LibMariaDBConnection&) -> LibMariaDBConnection& = delete;
+    DISALLOW_COPY_AND_MOVE(LibMariaDBConnection);
 
     auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> override;
     auto schema() -> std::string override;

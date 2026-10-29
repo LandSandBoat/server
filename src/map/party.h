@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 #include "data/enums/zone.h"
 
@@ -69,6 +70,8 @@ public:
     CParty(CBattleEntity* PEntity);
     CParty(uint32 id);
     ~CParty();
+
+    DISALLOW_COPY_AND_MOVE(CParty);
 
     auto GetPartyID() const -> uint32;
     auto GetMemberFlags(CBattleEntity* PEntity) -> uint16;

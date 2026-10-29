@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 class CCharEntity;
 class CInstance;
@@ -32,6 +33,8 @@ class CInstanceLoader
 public:
     CInstanceLoader(uint32 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
+
+    DISALLOW_COPY_AND_MOVE(CInstanceLoader);
 
     auto LoadInstance() const -> CInstance*;
 

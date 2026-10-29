@@ -23,6 +23,7 @@
 
 #include "attack.h"
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "entities/battle_entity.h"
 #include "utils/attackutils.h"
 #include "utils/charutils.h"
@@ -42,6 +43,8 @@ class CAttackRound
 public:
     CAttackRound(CBattleEntity* attacker, CBattleEntity* defender);
     ~CAttackRound();
+
+    DISALLOW_COPY_AND_MOVE(CAttackRound);
 
     void AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, uint8 count); // Adds an attack swing.
     void CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION direction);                    // Creates up to many attacks for a particular hand.

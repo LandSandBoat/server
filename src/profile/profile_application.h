@@ -22,12 +22,15 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/macros.h"
 
 class ProfileApplication final : public Application
 {
 public:
     ProfileApplication(int argc, char** argv);
     ~ProfileApplication() override;
+
+    DISALLOW_COPY_AND_MOVE(ProfileApplication);
 
     auto createEngine() -> std::unique_ptr<Engine> override;
 };

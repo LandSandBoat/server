@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "data_loader.h"
 
 class CPartyListPacket
@@ -29,6 +30,8 @@ class CPartyListPacket
 public:
     CPartyListPacket(uint32 partyid, uint32 Total);
     ~CPartyListPacket() = default;
+
+    DISALLOW_COPY_AND_MOVE(CPartyListPacket);
 
     auto AddPlayer(const SearchEntity& player) -> bool;
 
