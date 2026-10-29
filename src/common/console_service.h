@@ -24,7 +24,9 @@
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
+#include <mutex>
 #include <string>
+#include <vector>
 
 #include <common/scheduler/scheduler.h>
 
