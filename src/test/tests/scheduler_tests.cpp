@@ -215,11 +215,11 @@ TEST_CASE("Scheduler posts and spawns run their work", "[scheduler]")
     {
         auto ran = false;
         scheduler.postToMainThread(
-            [&]() -> Task<void>
+            [](bool& flag) -> Task<void>
             {
-                ran = true;
+                flag = true;
                 co_return;
-            }());
+            }(ran));
         pumpFor(scheduler, 5ms);
 
         CHECK(ran);
