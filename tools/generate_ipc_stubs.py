@@ -239,7 +239,10 @@ def generate_message_handler_crtp_base(file, struct_names):
 
     for name in struct_names:
         file.write(f"    // Derived must implement: void handleMessage_{name}(const IPP& ipp, const ipc::{name}& message);\n")
-    file.write(f"    // Derived must implement: void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);\n")
+    file.write(f"    // Derived must implement: void handleUnknownMessage(const IPP& ipp, const std::span<uint8_t> message);\n\n")
+    file.write(f"private:\n")
+    file.write(f"    IPCMessageHandlerBase() = default;\n")
+    file.write(f"    friend Derived;\n")
     file.write(f"}};\n\n")
 
 

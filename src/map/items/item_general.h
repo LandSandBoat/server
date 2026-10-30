@@ -30,5 +30,8 @@ class CItemGeneral : public CItem
 public:
     CItemGeneral(uint16);
     CItemGeneral(const CItemGeneral& other);
-    virtual ~CItemGeneral();
+    auto operator=(const CItemGeneral&) -> CItemGeneral& = delete;
+    CItemGeneral(CItemGeneral&&)                         = delete;
+    auto operator=(CItemGeneral&&) -> CItemGeneral&      = delete;
+    ~CItemGeneral() override;
 };

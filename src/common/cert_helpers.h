@@ -137,7 +137,7 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
         FILE* fileHandle = fopen(keyFile.c_str(), "wb");
         if (fileHandle)
         {
-            if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, 0, nullptr))
+            if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, nullptr, nullptr))
             {
                 ShowError(fmt::format("Failed to write {}!", keyFile));
             }

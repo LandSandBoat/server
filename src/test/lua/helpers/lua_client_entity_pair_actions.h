@@ -34,7 +34,6 @@ class CLuaClientEntityPairActions
 {
 public:
     CLuaClientEntityPairActions(CLuaClientEntityPair* parent);
-    ~CLuaClientEntityPairActions() = default;
 
     void move(float x, float y, float z, sol::optional<uint8_t> rot) const;
     void useSpell(CLuaBaseEntity* target, SpellID spellId) const;

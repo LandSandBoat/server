@@ -105,7 +105,10 @@ class CItemFurnishing : public CItem
 public:
     CItemFurnishing(uint16);
     CItemFurnishing(const CItemFurnishing& other);
-    virtual ~CItemFurnishing();
+    auto operator=(const CItemFurnishing&) -> CItemFurnishing& = delete;
+    CItemFurnishing(CItemFurnishing&&)                         = delete;
+    auto operator=(CItemFurnishing&&) -> CItemFurnishing&      = delete;
+    ~CItemFurnishing() override;
 
     auto getStorage() const -> uint8;
     auto getMoghancement() const -> uint16;

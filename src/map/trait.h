@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "data/enums/job.h"
 
 #include "modifier.h"
@@ -165,6 +166,8 @@ class CTrait
 public:
     CTrait(uint16 id);
     virtual ~CTrait() = default;
+
+    DISALLOW_COPY_AND_MOVE(CTrait);
 
     auto getID() const -> uint16
     {

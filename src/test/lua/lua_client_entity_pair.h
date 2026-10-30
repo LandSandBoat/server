@@ -44,6 +44,11 @@ public:
     CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, CLuaSimulation* simulation, MapEngine* mapServer);
     ~CLuaClientEntityPair() override;
 
+    CLuaClientEntityPair(const CLuaClientEntityPair&)                    = delete;
+    auto operator=(const CLuaClientEntityPair&) -> CLuaClientEntityPair& = delete;
+    CLuaClientEntityPair(CLuaClientEntityPair&&) noexcept                = default;
+    auto operator=(CLuaClientEntityPair&&) -> CLuaClientEntityPair&      = delete;
+
     void tick();
     void gotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos);
     void gotoMogHouse(xi::ZoneId zoneId);

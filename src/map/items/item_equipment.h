@@ -47,7 +47,10 @@ class CItemEquipment : public CItemUsable
 public:
     CItemEquipment(uint16);
     CItemEquipment(const CItemEquipment& other);
-    virtual ~CItemEquipment();
+    auto operator=(const CItemEquipment&) -> CItemEquipment& = delete;
+    CItemEquipment(CItemEquipment&&)                         = delete;
+    auto operator=(CItemEquipment&&) -> CItemEquipment&      = delete;
+    ~CItemEquipment() override;
 
     struct itemLatent
     {

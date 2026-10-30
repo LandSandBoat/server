@@ -36,41 +36,41 @@ public:
 
     auto CreateInstance(uint32 instanceid) -> CInstance*;
 
-    virtual auto GetCharByName(const std::string& name) -> CCharEntity* override; // finds the player if exists in zone
-    virtual auto GetCharByID(uint32 id) -> CCharEntity* override;
-    virtual auto GetEntity(uint16 targid, uint8 filter = -1) -> CBaseEntity* override; // get a pointer to any entity in the zone
+    auto GetCharByName(const std::string& name) -> CCharEntity* override; // finds the player if exists in zone
+    auto GetCharByID(uint32 id) -> CCharEntity* override;
+    auto GetEntity(uint16 targid, uint8 filter = -1) -> CBaseEntity* override; // get a pointer to any entity in the zone
 
     auto getInstanceByRunId(uint32 runId) const -> CInstance*;
 
-    virtual void SpawnPCs(CCharEntity* PChar) override;
-    virtual void SpawnMOBs(CCharEntity* PChar) override;
-    virtual void SpawnPETs(CCharEntity* PChar) override;
-    virtual void SpawnTRUSTs(CCharEntity* PChar) override;
-    virtual void SpawnNPCs(CCharEntity* PChar) override;
-    virtual void SpawnConditionalNPCs(CCharEntity* PChar) override; // display Moogle in MogHouse in zone
-    virtual void SpawnTransport(CCharEntity* PChar) override;       // display ship/boat in zone
+    void SpawnPCs(CCharEntity* PChar) override;
+    void SpawnMOBs(CCharEntity* PChar) override;
+    void SpawnPETs(CCharEntity* PChar) override;
+    void SpawnTRUSTs(CCharEntity* PChar) override;
+    void SpawnNPCs(CCharEntity* PChar) override;
+    void SpawnConditionalNPCs(CCharEntity* PChar) override; // display Moogle in MogHouse in zone
+    void SpawnTransport(CCharEntity* PChar) override;       // display ship/boat in zone
 
-    virtual void WideScan(CCharEntity* PChar, uint16 radius) override;
+    void WideScan(CCharEntity* PChar, uint16 radius) override;
 
-    virtual void DecreaseZoneCounter(CCharEntity* PChar) override; // Remove a character to the zone
-    virtual void IncreaseZoneCounter(CCharEntity* PChar) override; // Add a character from the zone
+    void DecreaseZoneCounter(CCharEntity* PChar) override; // Remove a character to the zone
+    void IncreaseZoneCounter(CCharEntity* PChar) override; // Add a character from the zone
 
-    virtual void InsertNPC(CBaseEntity* PNpc) override;
-    virtual void InsertMOB(CBaseEntity* PMob) override;
-    virtual void InsertPET(CBaseEntity* PPet) override;
-    virtual void InsertTRUST(CBaseEntity* PTrust) override;
+    void InsertNPC(CBaseEntity* PNpc) override;
+    void InsertMOB(CBaseEntity* PMob) override;
+    void InsertPET(CBaseEntity* PPet) override;
+    void InsertTRUST(CBaseEntity* PTrust) override;
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity) override; // looking for a party for the monster
+    void FindPartyForMob(CBaseEntity* PEntity) override; // looking for a party for the monster
 
-    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, std::string_view transport) override; // ship/boat is leaving, passengers need to be collected
-    virtual void DisembarkAll() override;                                                                      // the voyage zone is between runs, put whoever is still aboard ashore
+    void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, std::string_view transport) override; // ship/boat is leaving, passengers need to be collected
+    void DisembarkAll() override;                                                                      // the voyage zone is between runs, put whoever is still aboard ashore
 
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone
+    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone
 
-    virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
+    void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
 
-    virtual auto ZoneServer(timer::time_point tick) -> Task<void> override;
-    virtual auto CheckTriggerAreas() -> Task<void> override;
+    auto ZoneServer(timer::time_point tick) -> Task<void> override;
+    auto CheckTriggerAreas() -> Task<void> override;
 
     void ForEachChar(FnRef<void(CCharEntity*)> func) override;
     void ForEachCharInstance(CBaseEntity* PEntity, FnRef<void(CCharEntity*)> func) override;

@@ -23,6 +23,7 @@
 
 #include <common/database/bound_value.h>
 #include <common/database/result_set.h>
+#include <common/macros.h>
 
 #include <memory>
 #include <string>
@@ -34,7 +35,10 @@ namespace db
 class PreparedStatement
 {
 public:
+    PreparedStatement()          = default;
     virtual ~PreparedStatement() = default;
+
+    DISALLOW_COPY_AND_MOVE(PreparedStatement);
 
     // Bind a single value to the given (1-indexed) parameter slot.
     virtual auto bind(int index, const BoundValue& value) -> void = 0;

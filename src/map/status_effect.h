@@ -57,7 +57,6 @@ class CStatusEffect final
 {
 public:
     CStatusEffect(xi::StatusEffect id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid = 0, uint16 subPower = 0, uint16 subIcon = 0, uint16 tier = 0, xi::StatusEffectFlag flags = xi::StatusEffectFlag::None, uint16 sourceType = EffectSourceType::SOURCE_NONE, uint32 sourceTypeParam = 0, uint32 originID = 0, uint8 slot = 0);
-    ~CStatusEffect();
 
     auto GetStatusID() const -> xi::StatusEffect;
     auto GetSubID() const -> uint32;

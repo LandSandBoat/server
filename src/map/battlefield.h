@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include <memory>
 #include <set>
 
@@ -131,6 +132,8 @@ class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 public:
     CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator);
     ~CBattlefield();
+
+    DISALLOW_COPY_AND_MOVE(CBattlefield);
 
     auto GetID() const -> uint16;
     auto GetZone() const -> CZone*;

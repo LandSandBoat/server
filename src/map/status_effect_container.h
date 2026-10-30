@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 #include <memory>
 #include <set>
@@ -49,6 +50,8 @@ class CStatusEffectContainer final
 public:
     CStatusEffectContainer(CBattleEntity* PEntity);
     ~CStatusEffectContainer();
+
+    DISALLOW_COPY_AND_MOVE(CStatusEffectContainer);
 
     template <typename T = CStatusEffect, typename... Args>
     auto AddStatusEffect(Args&&... args) -> bool;

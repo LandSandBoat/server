@@ -33,6 +33,7 @@
 #include "items/transaction.h"
 #include "moghouse_container.h"
 #include "monstrosity.h"
+#include <common/macros.h>
 
 #include <common/cbasetypes.h>
 #include <common/mmo.h>
@@ -102,7 +103,7 @@ struct Fame
 
 struct profile_t
 {
-    xi::Nation nation; // Your Nation Allegiance.
+    xi::Nation nation{}; // Your Nation Allegiance.
 
     // Moghouse data (bit-packed)
     // 0x0001: SANDORIA exit quest flag
@@ -114,26 +115,26 @@ struct profile_t
     // 0x0040: Moghouse 2F tracker flag (0: default, 1: using 2F)
     // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
     // 0x0100: ^ As above
-    uint16 mhflag;
+    uint16 mhflag{};
 
-    uint16     title;
+    uint16     title{};
     Fame       fame{};
-    uint8      rank[3]; // RANK in three kingdoms
-    uint16     rankpoints;
+    uint8      rank[3]{}; // RANK in three kingdoms
+    uint16     rankpoints{};
     location_t home_point;
-    uint8      campaign_allegiance;
-    uint8      unity_leader;
+    uint8      campaign_allegiance{};
+    uint8      unity_leader{};
 };
 
 struct capacityChain_t
 {
-    uint16            chainNumber;
+    uint16            chainNumber{};
     timer::time_point chainTime;
 };
 
 struct expChain_t
 {
-    uint16            chainNumber;
+    uint16            chainNumber{};
     timer::time_point chainTime;
 };
 
@@ -168,15 +169,15 @@ struct teleport_t
 
 struct PetInfo_t
 {
-    bool              respawnPet;   // Used for spawning pet on zone
-    timer::time_point jugSpawnTime; // Keeps track of original spawn time
-    timer::duration   jugDuration;  // Duration a jug pet should last after its original spawn time
-    uint8             petID;        // ID as in wyvern(48) , carbuncle(8) ect..
-    PET_TYPE          petType;      // Type of pet being transferred
-    uint8             petLevel;     // Level the pet was spawned with
-    int16             petHP;
-    int16             petMP;
-    float             petTP;
+    bool              respawnPet{};  // Used for spawning pet on zone
+    timer::time_point jugSpawnTime;  // Keeps track of original spawn time
+    timer::duration   jugDuration{}; // Duration a jug pet should last after its original spawn time
+    uint8             petID{};       // ID as in wyvern(48) , carbuncle(8) ect..
+    PET_TYPE          petType{};     // Type of pet being transferred
+    uint8             petLevel{};    // Level the pet was spawned with
+    int16             petHP{};
+    int16             petMP{};
+    float             petTP{};
 };
 
 struct AuctionHistory_t
@@ -838,6 +839,8 @@ public:
 
     CCharEntity();
     ~CCharEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CCharEntity);
 
 protected:
     void changeMoghancement(uint16 moghancementID, bool isAdding);

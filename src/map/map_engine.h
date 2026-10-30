@@ -23,6 +23,7 @@
 
 #include <common/application.h>
 #include <common/ipp.h>
+#include <common/macros.h>
 #include <common/timer.h>
 
 #include "map_config.h"
@@ -49,6 +50,8 @@ class MapEngine final : public Engine
 public:
     MapEngine(Application& application, MapConfig& config);
     ~MapEngine() override;
+
+    DISALLOW_COPY_AND_MOVE(MapEngine);
 
     //
     // Tasks

@@ -22,6 +22,7 @@
 #pragma once
 
 #include <common/cbasetypes.h>
+#include <common/macros.h>
 #include <common/timer.h>
 #include <common/types/maybe.h>
 #include <common/vana_time.h>
@@ -57,6 +58,8 @@ class SpawnHandler
 public:
     explicit SpawnHandler(CZone* PZone);
     ~SpawnHandler(); // out-of-line: spawnSlots_ holds unique_ptr to (here) incomplete SpawnSlot
+
+    DISALLOW_COPY_AND_MOVE(SpawnHandler);
 
     // Get the spawn slot for slotId, creating it if it doesn't exist yet.
     auto getOrCreateSpawnSlot(uint32_t slotId) -> SpawnSlot*;

@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "state.h"
 
 class CBattleEntity;
@@ -35,6 +36,8 @@ class CItemState : public CState
 public:
     CItemState(xi::Badge<CState>, CCharEntity* PEntity, const EntityId& target, uint8 loc, uint8 slotid);
     ~CItemState() override;
+
+    DISALLOW_COPY_AND_MOVE(CItemState);
 
     auto init() -> StateErrorOr<void> override;
 

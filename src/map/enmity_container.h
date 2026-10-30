@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 
 #include "common/types/flat_hash_map.h"
 
@@ -45,6 +46,8 @@ class CEnmityContainer
 public:
     CEnmityContainer(CMobEntity* holder);
     ~CEnmityContainer();
+
+    DISALLOW_COPY_AND_MOVE(CEnmityContainer);
 
     auto GetHighestEnmity() -> CBattleEntity*; // Decays VE and gets target with highest enmity
 

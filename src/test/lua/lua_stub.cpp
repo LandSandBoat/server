@@ -46,8 +46,6 @@ CLuaStub::CLuaStub(const std::string& path, const sol::object& originalFunc, sol
     }
 }
 
-CLuaStub::~CLuaStub() = default;
-
 /************************************************************************
  *  Function: stub() (__call)
  *  Purpose : Intercepts calls to a Lua function, allowing replacement, side effects, or fixed return value

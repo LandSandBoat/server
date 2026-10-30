@@ -22,6 +22,7 @@
 #pragma once
 
 #include <common/database/prepared_statement.h>
+#include <common/macros.h>
 
 #include <exception>
 #include <memory>
@@ -33,7 +34,10 @@ namespace db
 class Connection
 {
 public:
+    Connection()          = default;
     virtual ~Connection() = default;
+
+    DISALLOW_COPY_AND_MOVE(Connection);
 
     // Prepare (or fail) a statement for this connection.
     virtual auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> = 0;

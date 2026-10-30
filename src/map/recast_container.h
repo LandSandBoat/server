@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "common/timer.h"
 #include "data/enums/recast.h"
 #include "data/enums/recast_type.h"
@@ -31,11 +32,11 @@
 
 struct Recast_t
 {
-    xi::Recast        ID;
+    xi::Recast        ID{};
     timer::time_point TimeStamp;
-    timer::duration   RecastTime;
-    timer::duration   chargeTime;
-    uint8             maxCharges;
+    timer::duration   RecastTime{};
+    timer::duration   chargeTime{};
+    uint8             maxCharges{};
 };
 
 /************************************************************************
@@ -75,6 +76,8 @@ public:
     CRecastContainer(CBattleEntity* PChar);
 
     virtual ~CRecastContainer() = default;
+
+    DISALLOW_COPY_AND_MOVE(CRecastContainer);
 
 protected:
     RecastList_t RecastMagicList;

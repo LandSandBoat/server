@@ -28,8 +28,7 @@ class CBlueSpell : public CSpell
 {
 public:
     CBlueSpell(SpellID id);
-    ~CBlueSpell() override = default;
-    virtual auto clone() -> std::unique_ptr<CSpell> override;
+    auto clone() -> std::unique_ptr<CSpell> override;
 
     auto getMonsterSkillId() const -> uint16;
     auto getSetPoints() const -> uint8;

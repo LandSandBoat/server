@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "common/mmo.h"
 
 #include <common/types/flag.h>
@@ -39,7 +40,10 @@ using AvoidLinks = xi::Flag<struct AvoidLinksTag>;
 class NavMesh
 {
 public:
+    NavMesh()          = default;
     virtual ~NavMesh() = default;
+
+    DISALLOW_COPY_AND_MOVE(NavMesh);
 
     virtual auto findPath(const position_t& start, const position_t& end, float clearance, AvoidLinks avoidLinks) -> Maybe<PathResult> = 0;
     virtual auto findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t>                               = 0;

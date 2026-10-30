@@ -24,6 +24,7 @@
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
 #include "common/ipp.h"
+#include "common/macros.h"
 #include "common/timer.h"
 
 #include "map_constants.h"
@@ -40,6 +41,8 @@ struct MapSession
     // Out-of-line so ~unique_ptr<CCharEntity> is instantiated where CCharEntity is complete
     MapSession();
     ~MapSession();
+
+    DISALLOW_COPY_AND_MOVE(MapSession);
 
     // TODO: Don't pass the scheduler around in here!
     // This is a dirty hack to pipe the scheduler around into the packet handlers.

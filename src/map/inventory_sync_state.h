@@ -34,11 +34,11 @@ using Equipping = xi::Flag<struct EquippingTag>;
 
 struct equip_change_t
 {
-    CONTAINER_ID container;       // Container where the item is located
-    uint8        containerSlotId; // Item slot in container (0 for unequip)
-    SLOTTYPE     equipSlot;       // Equipment slot
-    CItem*       item;            // The item being equipped/unequipped
-    Equipping    equipping;       // Yes = equip (NoDrop), No = unequip (Normal)
+    CONTAINER_ID container{};       // Container where the item is located
+    uint8        containerSlotId{}; // Item slot in container (0 for unequip)
+    SLOTTYPE     equipSlot{};       // Equipment slot
+    CItem*       item{};            // The item being equipped/unequipped
+    Equipping    equipping;         // Yes = equip (NoDrop), No = unequip (Normal)
 };
 
 // Tracks which inventory containers have been synced with the client

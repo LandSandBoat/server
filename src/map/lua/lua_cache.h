@@ -94,6 +94,7 @@ auto LuaCache::getOrResolveFunction(const std::string& key, Resolver&& resolve) 
     // keyBuffer()), and resolve() could build another key in it, leaving `key` clobbered for
     // the store() below. The copy only happens on a miss (once per key), so it is off the
     // hot path.
+    // NOLINTNEXTLINE(performance-unnecessary-copy-initialization)
     const std::string keyCopy  = key;
     sol::function     resolved = resolve();
     store(keyCopy, resolved);

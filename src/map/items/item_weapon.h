@@ -31,7 +31,10 @@ class CItemWeapon : public CItemEquipment
 public:
     CItemWeapon(uint16);
     CItemWeapon(const CItemWeapon& other);
-    virtual ~CItemWeapon();
+    auto operator=(const CItemWeapon&) -> CItemWeapon& = delete;
+    CItemWeapon(CItemWeapon&&)                         = delete;
+    auto operator=(CItemWeapon&&) -> CItemWeapon&      = delete;
+    ~CItemWeapon() override;
 
     auto getSkillType() const -> xi::SkillType;
     auto getSubSkillType() const -> uint8;

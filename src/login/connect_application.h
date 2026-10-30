@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/macros.h"
 
 #ifndef _WIN32
 #include <sys/resource.h>
@@ -32,6 +33,8 @@ class ConnectApplication final : public Application
 public:
     ConnectApplication(int argc, char** argv);
     ~ConnectApplication() override;
+
+    DISALLOW_COPY_AND_MOVE(ConnectApplication);
 
     auto createEngine() -> std::unique_ptr<Engine> override;
     void registerCommands(ConsoleService& console) override;

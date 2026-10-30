@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <common/macros.h>
 #include <map/entities/mob_entity.h>
 
 #include <common/types/flag.h>
@@ -34,6 +35,8 @@ class CTrustEntity final : public CMobEntity
 public:
     CTrustEntity(CCharEntity* PMaster, uint32 trustId, IsPassiveTrust isPassiveTrust);
     ~CTrustEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CTrustEntity);
 
     auto trustID() const -> uint32;
 

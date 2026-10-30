@@ -131,7 +131,7 @@ template <typename T>
 inline constexpr bool always_false_v = always_false<T>::value;
 
 template <typename T>
-inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<T>
+inline auto jsonGet(const json& jsonInput, const std::string& key) -> Maybe<T>
 {
     if (!jsonInput.contains(key))
     {
@@ -184,7 +184,7 @@ inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<T>
 
 // Supposedly, there is template magic to do this inside the template above, but VC++ doesn't support it yet?
 template <typename T, uint32_t size>
-inline auto jsonGet(const json& jsonInput, std::string key) -> Maybe<std::array<T, size>>
+inline auto jsonGet(const json& jsonInput, const std::string& key) -> Maybe<std::array<T, size>>
 {
     if (!jsonInput.contains(key))
     {

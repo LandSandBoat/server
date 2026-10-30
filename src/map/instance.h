@@ -22,6 +22,7 @@
 #pragma once
 
 #include "zone_entities.h"
+#include <common/macros.h>
 
 #include <common/types/hash_map.h>
 
@@ -47,6 +48,8 @@ class CInstance : public CZoneEntities
 public:
     CInstance(Scheduler& scheduler, MapConfig config, CZone* zone, uint32 instanceid);
     ~CInstance();
+
+    DISALLOW_COPY_AND_MOVE(CInstance);
 
     void RegisterChar(CCharEntity*);
 

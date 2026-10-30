@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "common/mmo.h"
 
 class ITriggerArea
@@ -29,6 +30,8 @@ class ITriggerArea
 public:
     ITriggerArea(uint32 triggerAreaID);
     virtual ~ITriggerArea() = default;
+
+    DISALLOW_COPY_AND_MOVE(ITriggerArea);
 
     auto getTriggerAreaID() const -> uint32;
 

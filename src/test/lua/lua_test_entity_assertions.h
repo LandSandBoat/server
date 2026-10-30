@@ -43,7 +43,6 @@ class CLuaTestEntityAssertions
 {
 public:
     CLuaTestEntityAssertions(CLuaTestEntity* entity, bool negate = false);
-    ~CLuaTestEntityAssertions() = default;
 
     auto inZone(xi::ZoneId expectedZone) -> CLuaTestEntityAssertions&;
     auto hasLocalVar(const std::string& varName, uint32 expectedValue) -> CLuaTestEntityAssertions&;

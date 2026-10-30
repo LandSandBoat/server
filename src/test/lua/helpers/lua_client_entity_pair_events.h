@@ -32,7 +32,6 @@ class CLuaClientEntityPairEvents
 {
 public:
     CLuaClientEntityPairEvents(CLuaClientEntityPair* parent);
-    ~CLuaClientEntityPairEvents() = default;
 
     void finish(sol::optional<uint16> eventId, sol::optional<uint32> option) const;
     void update(sol::optional<uint16> eventId, sol::optional<uint32> option) const;

@@ -40,7 +40,10 @@ class CItemLinkshell : public CItem
 public:
     CItemLinkshell(uint16);
     CItemLinkshell(const CItemLinkshell& other);
-    virtual ~CItemLinkshell();
+    auto operator=(const CItemLinkshell&) -> CItemLinkshell& = delete;
+    CItemLinkshell(CItemLinkshell&&)                         = delete;
+    auto operator=(CItemLinkshell&&) -> CItemLinkshell&      = delete;
+    ~CItemLinkshell() override;
 
     auto GetLSID() -> uint32;
     auto GetLSType() -> LSTYPE;

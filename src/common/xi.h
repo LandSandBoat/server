@@ -118,7 +118,16 @@ public:
         return *this;
     }
 
+    ~bit_reference()                    = default;
+    bit_reference(const bit_reference&) = default;
+    bit_reference(bit_reference&&)      = default;
+
     auto operator=(const bit_reference& other) -> bit_reference&
+    {
+        return *this = static_cast<bool>(other);
+    }
+
+    auto operator=(bit_reference&& other) noexcept -> bit_reference&
     {
         return *this = static_cast<bool>(other);
     }
@@ -234,7 +243,7 @@ struct bitset
 
     auto operator&(const xi::bitset<N>& other) const -> xi::bitset<N>
     {
-        xi::bitset<N> result;
+        xi::bitset<N> result{};
         for (std::size_t i = 0; i < storage_size; ++i)
         {
             result.data[i] = data[i] & other.data[i];
@@ -244,7 +253,7 @@ struct bitset
 
     auto operator~() const -> xi::bitset<N>
     {
-        xi::bitset<N> result;
+        xi::bitset<N> result{};
         for (std::size_t i = 0; i < storage_size; ++i)
         {
             result.data[i] = ~data[i];

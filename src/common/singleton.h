@@ -21,14 +21,14 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include <memory>
 
 template <class T>
 class Singleton
 {
 public:
-    Singleton(const Singleton&)                    = delete;
-    auto operator=(const Singleton&) -> Singleton& = delete;
+    DISALLOW_COPY_AND_MOVE(Singleton);
 
     static auto getInstance() -> T*
     {
@@ -46,7 +46,7 @@ public:
     }
 
 protected:
-    virtual ~Singleton() = default;
+    ~Singleton() = default;
 
 private:
     friend T;

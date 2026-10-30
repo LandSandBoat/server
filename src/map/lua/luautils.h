@@ -200,7 +200,7 @@ void cleanup();
 // NOTE: This is slower (but safet) than looking up something manually like this:
 //     : lua["xi"]["server"]["onTimeServerTick"]();
 template <typename T, typename... Targs>
-auto callGlobal(const std::string& funcName, Targs... args);
+auto callGlobal(const std::string& funcName, Targs&&... args);
 
 void TryReloadFilewatchList();
 
@@ -633,7 +633,7 @@ auto luautils::getEntityData(CBaseEntity* PEntity, const Keys&... keys) -> Maybe
 }
 
 template <typename T, typename... Targs>
-auto luautils::callGlobal(const std::string& funcName, Targs... args)
+auto luautils::callGlobal(const std::string& funcName, Targs&&... args)
 {
     auto func = detail::findGlobalLuaFunction(funcName);
     if (!func.valid())

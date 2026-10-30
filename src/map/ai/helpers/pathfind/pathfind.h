@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <common/macros.h>
 #include <common/mmo.h>
 #include <common/timer.h>
 
@@ -57,6 +58,8 @@ public:
     explicit CPathFind(std::unique_ptr<pathfind::PathOwner> owner);
 
     ~CPathFind();
+
+    DISALLOW_COPY_AND_MOVE(CPathFind);
 
     // Walk to a random point around the given point, or inside the region when the owner has one.
     auto RoamAround(const position_t& point, float maxRadius, uint8 minTurns, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None, const RoamRegion* region = nullptr) -> bool;

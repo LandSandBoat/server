@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/macros.h"
 #include "common/types/maybe.h"
 
 #include "base_entity.h"
@@ -31,6 +32,8 @@ class CNpcEntity final : public CBaseEntity
 public:
     CNpcEntity();
     ~CNpcEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CNpcEntity);
 
     auto entityFlags() const -> xi::EntityFlags;      // Returns the current value in m_flags
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags

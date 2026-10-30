@@ -99,7 +99,7 @@ struct Transport
 // Every zone runs a single ship, so it is stated once and the runs it serves listed beneath.
 struct TransportSchedule
 {
-    uint32                           ship;
+    uint32                           ship{};
     std::map<std::string, Transport> runs;
 };
 

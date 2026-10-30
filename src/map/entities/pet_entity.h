@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "mob_entity.h"
 
 class CPetSkillState;
@@ -50,6 +51,8 @@ class CPetEntity : public CMobEntity
 public:
     CPetEntity(PET_TYPE petType, uint32 petID);
     ~CPetEntity() override;
+
+    DISALLOW_COPY_AND_MOVE(CPetEntity);
 
     auto petID() const -> uint32;
     auto getPetType() const -> PET_TYPE;

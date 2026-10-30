@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include "common/macros.h"
+
 #include <sol/sol.hpp>
 #include <string>
 
@@ -29,6 +31,8 @@ class CLuaSpy
 public:
     CLuaSpy(const std::string& path, const sol::object& originalFunc);
     virtual ~CLuaSpy();
+
+    DISALLOW_COPY_AND_MOVE(CLuaSpy);
 
     void called(sol::optional<size_t> times = sol::nullopt);
     void calledWith(sol::variadic_args expected) const;

@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "zone.h"
 
 #include "common/timer.h"
@@ -50,6 +51,8 @@ class CZoneEntities
 public:
     CZoneEntities(Scheduler& scheduler, MapConfig config, CZone* zone);
     ~CZoneEntities();
+
+    DISALLOW_COPY_AND_MOVE(CZoneEntities);
 
     void HealAllMobs();
     void TryAddToNearbySpawnLists(CBaseEntity* PEntity);

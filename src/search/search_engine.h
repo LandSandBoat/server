@@ -22,6 +22,7 @@
 #pragma once
 
 #include <common/application.h>
+#include <common/macros.h>
 #include <common/scheduler.h>
 #include <common/utils.h>
 
@@ -39,6 +40,8 @@ class SearchEngine final : public Engine
 public:
     SearchEngine(Scheduler& scheduler);
     ~SearchEngine() override;
+
+    DISALLOW_COPY_AND_MOVE(SearchEngine);
 
     void onInitialize() override;
 

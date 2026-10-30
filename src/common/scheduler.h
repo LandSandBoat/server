@@ -113,7 +113,7 @@ concept IsInvocableReturnsVoidOrAwaitableVoid = IsInvocableReturnsAwaitableVoid<
 //   Re-activates an exception that escaped a fire-and-forget task and routes it
 //   through std::terminate, which the installed terminate handler turns into a
 //   tombstone.
-[[noreturn]] inline void onUnhandledTaskException(std::exception_ptr eptr) noexcept
+[[noreturn]] inline void onUnhandledTaskException(const std::exception_ptr& eptr) noexcept
 {
     try
     {
@@ -131,7 +131,7 @@ concept IsInvocableReturnsVoidOrAwaitableVoid = IsInvocableReturnsAwaitableVoid<
 //   exception to onUnhandledTaskException instead of swallowing it.
 struct FatalOnException
 {
-    void operator()(std::exception_ptr eptr) const noexcept
+    void operator()(const std::exception_ptr& eptr) const noexcept
     {
         if (eptr)
         {
@@ -626,7 +626,7 @@ public:
 
         std::unique_ptr<StoredType> result;
 
-        auto completion = [&](std::exception_ptr e, auto... res)
+        auto completion = [&](const std::exception_ptr& e, auto... res)
         {
             exceptPtr = e;
             if constexpr (!IsVoid)

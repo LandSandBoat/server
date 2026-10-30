@@ -29,6 +29,7 @@
 
 #include <functional>
 #include <string>
+#include <utility>
 #include <vector>
 
 class CAIEventHandler
@@ -38,9 +39,9 @@ class CAIEventHandler
         std::string   identifier_;
         sol::function luaFunc_;
 
-        AIEvent(const std::string& identifier, sol::function luaFunc)
-        : identifier_(identifier)
-        , luaFunc_(luaFunc)
+        AIEvent(std::string identifier, sol::function luaFunc)
+        : identifier_(std::move(identifier))
+        , luaFunc_(std::move(luaFunc))
         {
         }
     };

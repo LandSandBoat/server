@@ -22,6 +22,7 @@
 #pragma once
 
 #include <common/cbasetypes.h>
+#include <common/macros.h>
 #include <common/mmo.h>
 
 #include <string>
@@ -35,7 +36,10 @@ namespace pathfind
 class PathOwner
 {
 public:
+    PathOwner()          = default;
     virtual ~PathOwner() = default;
+
+    DISALLOW_COPY_AND_MOVE(PathOwner);
 
     virtual auto position() -> position_t&             = 0; // loc.p (read/write: x/y/z/rotation/moving)
     virtual auto position() const -> const position_t& = 0; // read-only overload for const queries

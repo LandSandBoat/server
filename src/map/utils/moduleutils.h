@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "common/macros.h"
 #include "lua/luautils.h"
 
 #include <memory>
@@ -52,6 +53,8 @@ public:
     }
 
     virtual ~CPPModule() = default;
+
+    DISALLOW_COPY_AND_MOVE(CPPModule);
 
     // Required
     virtual void OnInit() = 0;

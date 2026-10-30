@@ -23,6 +23,7 @@
 
 #include <common/cbasetypes.h>
 #include <common/ipp.h>
+#include <common/macros.h>
 #include <common/types/fn.h>
 
 class Socket
@@ -31,7 +32,10 @@ public:
     // Called when bytes are received from a client, with the sender's address.
     using ReceiveFn = Fn<void(ByteSpan, const IPP&)>;
 
+    Socket()          = default;
     virtual ~Socket() = default;
+
+    DISALLOW_COPY_AND_MOVE(Socket);
 
     virtual void send(const IPP& ipp, ByteSpan buffer) = 0;
 

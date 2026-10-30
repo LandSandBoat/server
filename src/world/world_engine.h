@@ -23,6 +23,7 @@
 
 #include <common/application.h>
 #include <common/ipp_message.h>
+#include <common/macros.h>
 #include <common/scheduler.h>
 #include <common/types/flag.h>
 #include <common/zmq/zmq_service.h>
@@ -47,6 +48,8 @@ public:
 
     WorldEngine(Scheduler& scheduler, ZMQService& zmqService, EnableHTTPServer enableHTTPServer);
     ~WorldEngine() override;
+
+    DISALLOW_COPY_AND_MOVE(WorldEngine);
 
     // TODO: Make all of these members private
     Scheduler& scheduler_;

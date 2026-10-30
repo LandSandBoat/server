@@ -50,9 +50,9 @@ struct CTRFSummary
 
 struct CTRFRetryAttempt
 {
-    size_t      attempt; // 1 = first execution
+    size_t      attempt{}; // 1 = first execution
     std::string status;
-    int64_t     duration;
+    int64_t     duration{};
     std::string message;
 };
 

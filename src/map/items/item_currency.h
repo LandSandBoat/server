@@ -31,7 +31,10 @@ public:
     CItemCurrency(uint16);
 
     CItemCurrency(const CItemCurrency& other);
-    virtual ~CItemCurrency();
+    auto operator=(const CItemCurrency&) -> CItemCurrency& = delete;
+    CItemCurrency(CItemCurrency&&)                         = delete;
+    auto operator=(CItemCurrency&&) -> CItemCurrency&      = delete;
+    ~CItemCurrency() override;
 
 private:
 };

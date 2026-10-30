@@ -23,6 +23,7 @@
 
 #include <common/cbasetypes.h>
 #include <common/ipp.h>
+#include <common/macros.h>
 #include <common/types/maybe.h>
 
 #include <common/types/flat_hash_map.h>
@@ -32,6 +33,8 @@ class CharacterCache
 public:
     CharacterCache()  = default;
     ~CharacterCache() = default;
+
+    DISALLOW_COPY_AND_MOVE(CharacterCache);
 
     void updateCharacter(uint32 charId, const IPP& ipp);
     void removeCharacter(uint32 charId);

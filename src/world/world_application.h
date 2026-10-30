@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/application.h"
+#include "common/macros.h"
 
 //
 // Forward declarations
@@ -32,6 +33,8 @@ class WorldApplication final : public Application
 public:
     WorldApplication(int argc, char** argv);
     ~WorldApplication() override;
+
+    DISALLOW_COPY_AND_MOVE(WorldApplication);
 
     auto createEngine() -> std::unique_ptr<Engine> override;
 };

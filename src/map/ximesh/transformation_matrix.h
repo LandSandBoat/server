@@ -46,7 +46,7 @@ struct TransformationMatrix
     {
         const auto el = this->elements;
 
-        TransformationMatrix inv;
+        TransformationMatrix inv{};
         auto el_inv = inv.elements;
 
         float t11 = -el[1][2] * el[2][1] + el[1][1] * el[2][2];

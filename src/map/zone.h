@@ -121,17 +121,17 @@ struct zoneMusic_t
 
 struct zoneLine_t
 {
-    uint32 zoneLineId; // 4 characters name such as 'z7b0'.
+    uint32 zoneLineId{}; // 4 characters name such as 'z7b0'.
 
     // Where you zone from
-    xi::ZoneId originZoneId;
+    xi::ZoneId originZoneId{};
     position_t originPos; // Center of the zoneline box.
 
     // Where you end up at
-    xi::ZoneId destinationZoneId;
-    position_t destinationPos;    // Center of the zoneline box
-    float      destinationScaleX; // Box dimensions
-    float      destinationScaleZ; // Box dimensions
+    xi::ZoneId destinationZoneId{};
+    position_t destinationPos;      // Center of the zoneline box
+    float      destinationScaleX{}; // Box dimensions
+    float      destinationScaleZ{}; // Box dimensions
 
     // Spawn slot cycling (0-7)
     uint8 m_spawnSlot = 0;

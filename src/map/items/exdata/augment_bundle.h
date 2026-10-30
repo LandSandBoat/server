@@ -37,18 +37,18 @@ namespace Exdata
 // RPCurve selects the RP-per-rank table (see xi.data.augments.rpCurves).
 struct AugmentBundle
 {
-    AugmentKindFlags    AugmentKind;
-    AugmentSubKindFlags AugmentSubKind;
+    AugmentKindFlags    AugmentKind{};
+    AugmentSubKindFlags AugmentSubKind{};
     uint16_t            padding00{};
-    uint32_t            Type : 2;
-    uint32_t            AccumulatedRP : 16;
-    uint32_t            Rank : 5;
-    uint32_t            MaxRankTier : 2;
-    uint32_t            padding01 : 1;
-    uint32_t            RPCurve : 2; // RP per rank client table
-    uint32_t            padding02 : 4;
-    uint32_t            AugmentIndex;
-    uint8_t             Signature[12];
+    uint32_t            Type : 2 {};
+    uint32_t            AccumulatedRP : 16 {};
+    uint32_t            Rank : 5 {};
+    uint32_t            MaxRankTier : 2 {};
+    uint32_t            padding01 : 1 {};
+    uint32_t            RPCurve : 2 {}; // RP per rank client table
+    uint32_t            padding02 : 4 {};
+    uint32_t            AugmentIndex{};
+    uint8_t             Signature[12]{};
 
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
