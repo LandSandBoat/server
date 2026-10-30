@@ -190,6 +190,8 @@ templates:
         type: [scripted]
       stats:
         hp: 7600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Bugard:
     id:            557
@@ -210,6 +212,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -774,6 +778,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common

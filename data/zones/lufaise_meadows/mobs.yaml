@@ -339,6 +339,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1122,6 +1124,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1499,6 +1503,8 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Kurrea:
     id:            2299
@@ -1523,6 +1529,8 @@ templates:
       stats:
         hp: 20000
         mp: 20000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1616,6 +1624,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon

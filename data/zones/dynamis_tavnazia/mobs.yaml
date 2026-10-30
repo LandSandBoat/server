@@ -1765,6 +1765,8 @@ templates:
         int: a
         mnd: a
         chr: a
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_rare
