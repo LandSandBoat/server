@@ -22,7 +22,7 @@
 #pragma once
 
 #include "common/application.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "in_memory_sink.h"
 #include "map/map_engine.h"
 #include "mock_manager.h"

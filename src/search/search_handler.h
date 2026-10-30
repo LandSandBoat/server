@@ -28,7 +28,7 @@
 #include <unordered_set>
 
 #include "common/blowfish.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "common/synchronized.h"
 
 #include "search.h"

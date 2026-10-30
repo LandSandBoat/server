@@ -24,7 +24,7 @@
 #include <common/blowfish.h>
 #include <common/cbasetypes.h>
 #include <common/ipp.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 
 #include <map/map_config.h>
 #include <map/map_constants.h>

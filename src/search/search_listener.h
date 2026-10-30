@@ -24,7 +24,7 @@
 #include <asio/ts/internet.hpp>
 #include <common/logging.h>
 
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "search_handler.h"
 
 class SearchListener

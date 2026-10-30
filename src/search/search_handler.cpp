@@ -22,6 +22,7 @@
 #include "search_handler.h"
 
 #include "common/md52.h"
+#include "common/scheduler/task_utils.h"
 #include "common/timer.h"
 #include "common/utils.h"
 
@@ -89,7 +90,7 @@ auto SearchHandler::run() -> Task<void>
         {
             std::memset(buffer_.data(), 0, buffer_.size());
 
-            auto result = co_await scheduler_.withTimeout(
+            auto result = co_await withTimeout(
                 socket_.async_read_some(asio::buffer(buffer_.data(), buffer_.size()), asio::use_awaitable),
                 10s);
 
