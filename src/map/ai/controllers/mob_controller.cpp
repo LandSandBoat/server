@@ -1251,7 +1251,6 @@ void CMobController::Move()
     }
 
     const float currentDistance = distance(PMob->loc.p, PTarget->loc.p);
-    const bool  isFollowingPath = PMob->PAI->PathFind->IsFollowingPath();
 
     // Teleport type 1: jump in if out of melee range but within 30y and off cooldown.
     if (PMob->getMobMod(xi::MobMod::TeleportType) == 1 &&
@@ -1341,7 +1340,8 @@ void CMobController::Move()
     bool needNewPath   = false;
     bool isStuckRepath = false;
     bool targetMoved   = false;
-    if (isFollowingPath)
+    // Read after the in-range probe, which clears the path when its query fails.
+    if (PMob->PAI->PathFind->IsFollowingPath())
     {
         needNewPath = !isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, kChaseRepathDrift);
     }
