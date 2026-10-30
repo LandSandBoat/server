@@ -39,15 +39,18 @@ struct zlib_jump
     const void* ptr;
 };
 
+namespace
+{
+
 struct zlib
 {
     std::vector<uint32>           enc;
     std::vector<struct zlib_jump> jump;
 };
 
-static zlib zlib;
+zlib zlib;
 
-static void swap32_if_be(uint32* v, const size_t memb)
+void swap32_if_be(uint32* v, const size_t memb)
 {
     if constexpr (std::endian::native == std::endian::big)
     {
@@ -58,7 +61,7 @@ static void swap32_if_be(uint32* v, const size_t memb)
     }
 }
 
-static auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<uint32>>
+auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<uint32>>
 {
     auto fp = utils::openFile(filename, "rb");
     if (!fp)
@@ -80,7 +83,7 @@ static auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<u
     return vec;
 }
 
-static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::vector<uint32>& dec)
+void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::vector<uint32>& dec)
 {
     jump.resize(dec.size());
 
@@ -109,6 +112,8 @@ static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::
         }
     }
 }
+
+} // namespace
 
 // Fast 8-bit decode table for zlib_decompress2: g_dtab[next8bits] -> (symbol, code length) when the
 // code is <= 8 bits, else length 0 (fall back to a bit-by-bit tree walk for the longer code).

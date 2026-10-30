@@ -83,7 +83,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
         // Check if we need to remove stuff
         const auto removeSlotID = newItem->getRemoveSlotId();
 
-        for (uint8 i = 0; i < sizeof(removeSlotID) * 8; ++i)
+        for (size_t i = 0; i < sizeof(removeSlotID) * 8; ++i)
         {
             // Remove things this item should remove
             if (removeSlotID & (1 << i))

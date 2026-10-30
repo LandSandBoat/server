@@ -1042,12 +1042,12 @@ void doSynthSkillUp(CCharEntity* PChar)
             const auto  roll             = xirand::GetRandomNumber(100);
             int32       cumulativeWeight = 0;
 
-            for (uint8 amount = 1; amount <= weights.size(); ++amount)
+            for (size_t amount = 1; amount <= weights.size(); ++amount)
             {
                 cumulativeWeight += weights[amount - 1];
                 if (roll < cumulativeWeight)
                 {
-                    skillUpAmount = amount;
+                    skillUpAmount = static_cast<uint8>(amount);
                     break;
                 }
             }

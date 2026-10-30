@@ -148,11 +148,11 @@ auto NpcTradeTransaction::confirm(const uint8 tradeSlot, const uint32 quantity) 
 
 auto NpcTradeTransaction::confirmById(const uint16 itemId, const uint32 quantity) -> bool
 {
-    for (uint8 tradeSlot = 0; tradeSlot < this->slots_.size(); ++tradeSlot)
+    for (size_t tradeSlot = 0; tradeSlot < this->slots_.size(); ++tradeSlot)
     {
         if (this->slots_[tradeSlot].offered.itemId == itemId)
         {
-            return this->confirm(tradeSlot, quantity);
+            return this->confirm(static_cast<uint8>(tradeSlot), quantity);
         }
     }
 

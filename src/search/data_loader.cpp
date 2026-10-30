@@ -567,28 +567,12 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vec
             // filter by race
             if (sr.race != 255)
             {
-                // hume (male/female)
-                if (sr.race == 0 && (player.race != 1 && player.race != 2))
-                {
-                    continue;
-                    // elvaan (male/female)
-                }
-                if (sr.race == 1 && (player.race != 3 && player.race != 4))
-                {
-                    continue;
-                    // tarutaru (male/female)
-                }
-                if (sr.race == 2 && (player.race != 5 && player.race != 6))
-                {
-                    continue;
-                    // mithra (female only)
-                }
-                else if (sr.race == 3 && player.race != 7)
-                {
-                    continue;
-                    // galka (male only)
-                }
-                else if (sr.race == 4 && player.race != 8)
+                const bool raceMismatch = (sr.race == 0 && player.race != 1 && player.race != 2) || // hume (male/female)
+                                          (sr.race == 1 && player.race != 3 && player.race != 4) || // elvaan (male/female)
+                                          (sr.race == 2 && player.race != 5 && player.race != 6) || // tarutaru (male/female)
+                                          (sr.race == 3 && player.race != 7) ||                     // mithra (female only)
+                                          (sr.race == 4 && player.race != 8);                       // galka (male only)
+                if (raceMismatch)
                 {
                     continue;
                 }

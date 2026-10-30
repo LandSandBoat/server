@@ -29,18 +29,18 @@ public:
     CPetController(CMobEntity* PPet);
 
     static constexpr float PetRoamDistance{ 2.1f };
-    auto                   DoRoamTick(timer::time_point tick) -> Task<void> override;
     auto                   PetSkill(const EntityId& target, uint16 abilityid) const -> bool;
+    auto                   Tick(timer::time_point tick) -> Task<void> override;
+    auto                   Ability(EntityId target, uint16 abilityid) -> bool override;
 
 protected:
     auto PetIsHealing() const -> bool;
 
-    auto Tick(timer::time_point tick) -> Task<void> override;
+    auto DoRoamTick(timer::time_point tick) -> Task<void> override;
     auto DoBuffTick() -> bool override;
     void HandleEnmity() override;
     auto TryDeaggro() -> bool override;
     void TryLink() override;
-    auto Ability(EntityId target, uint16 abilityid) -> bool override;
 
 private:
     CMobEntity* const PPet;

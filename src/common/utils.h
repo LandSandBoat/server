@@ -36,6 +36,7 @@
 
 // Ahead of <math.h> (not <cmath>)
 #ifndef _USE_MATH_DEFINES
+// NOLINTNEXTLINE(bugprone-reserved-identifier): required platform macro.
 #define _USE_MATH_DEFINES
 #endif // _USE_MATH_DEFINES
 #include <math.h>

@@ -156,20 +156,11 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
         // Capture all potential targets
         std::vector<CBattleEntity*> potentialTargets;
 
-        if (targetType == G_TARGET::SELF)
+        if (targetType == G_TARGET::SELF || targetType == G_TARGET::TRIGGER_SELF_ACTION_TARGET)
         {
             potentialTargets.push_back(POwner);
         }
-        else if (targetType == G_TARGET::TARGET)
-        {
-            auto* mob = POwner->GetBattleTarget();
-            potentialTargets.push_back(mob);
-        }
-        else if (targetType == G_TARGET::TRIGGER_SELF_ACTION_TARGET)
-        {
-            potentialTargets.push_back(POwner);
-        }
-        else if (targetType == G_TARGET::TRIGGER_TARGET_ACTION_SELF)
+        else if (targetType == G_TARGET::TARGET || targetType == G_TARGET::TRIGGER_TARGET_ACTION_SELF)
         {
             auto* mob = POwner->GetBattleTarget();
             potentialTargets.push_back(mob);

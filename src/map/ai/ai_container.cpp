@@ -44,12 +44,12 @@
 #include "states/weaponskill_state.h"
 #include "status_effect_container.h"
 
-CAIContainer::CAIContainer(CBaseEntity* _PEntity)
-: CAIContainer(_PEntity, nullptr, nullptr, nullptr)
+CAIContainer::CAIContainer(CBaseEntity* entity)
+: CAIContainer(entity, nullptr, nullptr, nullptr)
 {
 }
 
-CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
+CAIContainer::CAIContainer(CBaseEntity*                   entity,
                            std::unique_ptr<CPathFind>&&   _pathfind,
                            std::unique_ptr<CController>&& _controller,
                            std::unique_ptr<CTargetFind>&& _targetfind)
@@ -58,8 +58,8 @@ CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
 , Controller(std::move(_controller))
 , m_Tick(timer::now())
 , m_PrevTick(timer::now())
-, PEntity(_PEntity)
-, ActionQueue(_PEntity)
+, PEntity(entity)
+, ActionQueue(entity)
 {
 }
 

@@ -172,8 +172,9 @@ auto ResultSet::get(const std::string& key) const -> T
         {
             value = static_cast<UnderlyingT>(rawGetInt32(key));
         }
-        else if constexpr (std::is_same_v<UnderlyingT, uint32>)
+        else if constexpr (std::is_same_v<UnderlyingT, uint32> || std::is_same_v<UnderlyingT, size_t>)
         {
+            // NOTE: Preserves the historical behaviour of reading size_t as a 32-bit unsigned value.
             value = static_cast<UnderlyingT>(rawGetUInt32(key));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int16>)
@@ -207,11 +208,6 @@ auto ResultSet::get(const std::string& key) const -> T
         else if constexpr (std::is_same_v<UnderlyingT, std::string>)
         {
             value = rawGetString(key);
-        }
-        else if constexpr (std::is_same_v<UnderlyingT, size_t>)
-        {
-            // NOTE: Preserves the historical behaviour of reading size_t as a 32-bit unsigned value.
-            value = static_cast<UnderlyingT>(rawGetUInt32(key));
         }
         else if constexpr (detail::is_blob_v<UnderlyingT>)
         {

@@ -32,16 +32,17 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    void Cleanup(timer::time_point tick) override;
+
     void SpendCost() const;
     auto IsRapidShot() const -> bool;
     auto IsOutOfRange() const -> bool;
 
 protected:
-    auto CanChangeState() -> bool override;
-    auto CanFollowPath() -> bool override;
-    auto CanInterrupt() -> bool override;
     auto Update(timer::time_point tick) -> bool override;
-    void Cleanup(timer::time_point tick) override;
     auto CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack) -> bool;
     void InterruptRangedAttack(action_t& action);
     auto HasMoved() const -> bool;

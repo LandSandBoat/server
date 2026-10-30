@@ -32,6 +32,8 @@
 
 #include <common/types/hash_map.h>
 
+#include <algorithm>
+#include <array>
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
@@ -56,59 +58,27 @@ auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> Result
     }
 
     const auto keyword = parts[0];
-    if (keyword == "SELECT")
+    if (keyword == "SELECT" || keyword == "SHOW")
     {
         return ResultSetType::Select;
     }
-    else if (keyword == "INSERT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "UPDATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DELETE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "REPLACE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "CREATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ALTER")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DROP")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "TRUNCATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SET")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SHOW")
-    {
-        return ResultSetType::Select;
-    }
-    else if (keyword == "START")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "COMMIT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ROLLBACK")
+
+    constexpr std::array<std::string_view, 12> updateKeywords = {
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "REPLACE",
+        "CREATE",
+        "ALTER",
+        "DROP",
+        "TRUNCATE",
+        "SET",
+        "START",
+        "COMMIT",
+        "ROLLBACK",
+    };
+
+    if (std::ranges::contains(updateKeywords, keyword))
     {
         return ResultSetType::Update;
     }

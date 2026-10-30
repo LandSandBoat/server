@@ -31,13 +31,13 @@ public:
 
     auto init() -> StateErrorOr<void> override;
 
-    auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
     auto CanFollowPath() -> bool override;
     auto CanInterrupt() -> bool override;
 
 protected:
+    auto Update(timer::time_point tick) -> bool override;
     auto SynthReady() const -> bool;
 
 private:

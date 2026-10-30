@@ -109,12 +109,12 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
 
         if (spellToAdd == 0x00)
         {
-            for (uint8 i = 0; i < sizeof(bluData.Spells); i++)
+            for (size_t i = 0; i < sizeof(bluData.Spells); i++)
             {
                 if (bluData.Spells[i] > 0)
                 {
                     spellInQuestion = bluData.Spells[i];
-                    spellIndex      = i;
+                    spellIndex      = static_cast<int8>(i);
                     auto* spell     = static_cast<CBlueSpell*>(spell::GetSpell(
                         static_cast<SpellID>(spellInQuestion + 0x200))); // the spells in this packet are offsetted by 0x200 from their spell IDs.
 
@@ -147,12 +147,12 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
         else
         {
             // loop all 20 slots and find which index they are playing with
-            for (uint8 i = 0; i < sizeof(bluData.Spells); i++)
+            for (size_t i = 0; i < sizeof(bluData.Spells); i++)
             {
                 if (bluData.Spells[i] > 0)
                 {
                     spellInQuestion = bluData.Spells[i];
-                    spellIndex      = i;
+                    spellIndex      = static_cast<int8>(i);
                     break;
                 }
             }
@@ -212,12 +212,12 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
         if (pupData.ItemId == 0x00)
         {
             // remove all attachments specified
-            for (uint8 i = static_cast<uint8>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
+            for (size_t i = static_cast<size_t>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
             {
                 if (pupData.Slots[i] != 0)
                 {
                     // Minus 2 since the first two slots in packet are reserved for head and frame.
-                    puppetutils::setAttachment(PChar, i - 2, 0x00);
+                    puppetutils::setAttachment(PChar, static_cast<uint8>(i - 2), 0x00);
                 }
             }
         }
@@ -233,12 +233,12 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
             }
             else
             {
-                for (uint8 i = static_cast<uint8>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
+                for (size_t i = static_cast<size_t>(AutomatonSlot::Attachment1); i < sizeof(pupData.Slots); i++)
                 {
                     if (pupData.Slots[i] != 0)
                     {
                         // Minus 2 since the first two slots in packet are reserved for head and frame.
-                        puppetutils::setAttachment(PChar, i - 2, pupData.Slots[i]);
+                        puppetutils::setAttachment(PChar, static_cast<uint8>(i - 2), pupData.Slots[i]);
                     }
                 }
             }

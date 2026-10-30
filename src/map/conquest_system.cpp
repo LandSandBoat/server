@@ -147,13 +147,8 @@ void GainInfluencePoints(CCharEntity* PChar, uint32 points)
 
 auto GetInfluenceGraphics(const int32 san_inf, const int32 bas_inf, const int32 win_inf, const int32 bst_inf) -> uint8
 {
-    // if all nations and beastmen == 0
-    if (san_inf == 0 && bas_inf == 0 && win_inf == 0 && bst_inf == 0)
-    {
-        return 0;
-    }
-    // if all nations and beastmen, has same number
-    else if (san_inf == bas_inf && san_inf == win_inf && san_inf == bst_inf)
+    // if all nations and beastmen have the same influence, including all at 0
+    if (san_inf == bas_inf && san_inf == win_inf && san_inf == bst_inf)
     {
         return 0;
     }

@@ -73,10 +73,6 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
         }
         break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCancel:
-        {
-            pv.range("AucWorkIndex", this->AucWorkIndex, 0, 6);
-        }
-        break;
         case GP_CLI_COMMAND_AUC_COMMAND::LotCheck:
         {
             pv.range("AucWorkIndex", this->AucWorkIndex, 0, 6);

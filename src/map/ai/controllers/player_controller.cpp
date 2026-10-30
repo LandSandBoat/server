@@ -35,8 +35,8 @@
 #include "utils/charutils.h"
 #include "weapon_skill.h"
 
-CPlayerController::CPlayerController(CCharEntity* _PChar)
-: CController(_PChar)
+CPlayerController::CPlayerController(CCharEntity* character)
+: CController(character)
 {
 }
 
@@ -287,9 +287,9 @@ void CPlayerController::setLastSpellFinishedTime(timer::time_point _spellFinishe
     m_spellFinishedTime = _spellFinishedTime;
 }
 
-void CPlayerController::setLastErrMsgTime(timer::time_point _LastErrMsgTime)
+void CPlayerController::setLastErrMsgTime(timer::time_point errMsgTime)
 {
-    m_errMsgTime = _LastErrMsgTime;
+    m_errMsgTime = errMsgTime;
 }
 
 auto CPlayerController::getLastErrMsgTime() -> timer::time_point

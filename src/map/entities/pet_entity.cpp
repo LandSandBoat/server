@@ -193,8 +193,6 @@ auto CPetEntity::getWyvernType() -> WYVERN_TYPE
         case xi::Job::RNG:
         case xi::Job::COR:
         case xi::Job::DNC:
-            return WYVERN_TYPE::OFFENSIVE;
-
         default:
             return WYVERN_TYPE::OFFENSIVE;
     };

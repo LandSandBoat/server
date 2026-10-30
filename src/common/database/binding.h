@@ -62,8 +62,9 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     {
         params.emplace_back(std::in_place_type<int32>, static_cast<int32>(value));
     }
-    else if constexpr (std::is_same_v<U, uint32>)
+    else if constexpr (std::is_same_v<U, uint32> || std::is_same_v<U, size_t>)
     {
+        // NOTE: Preserves legacy behaviour of binding size_t via a 32-bit unsigned. TODO: widen.
         params.emplace_back(std::in_place_type<uint32>, static_cast<uint32>(value));
     }
     else if constexpr (std::is_same_v<U, int16>)
@@ -94,18 +95,9 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     {
         params.emplace_back(std::in_place_type<float>, static_cast<float>(value));
     }
-    else if constexpr (std::is_same_v<U, std::string>)
+    else if constexpr (std::is_same_v<U, std::string> || std::is_same_v<U, const char*> || std::is_same_v<U, char*>)
     {
         params.emplace_back(std::in_place_type<std::string>, value);
-    }
-    else if constexpr (std::is_same_v<U, const char*> || std::is_same_v<U, char*>)
-    {
-        params.emplace_back(std::in_place_type<std::string>, value);
-    }
-    else if constexpr (std::is_same_v<U, size_t>)
-    {
-        // NOTE: Preserves legacy behaviour of binding size_t via a 32-bit unsigned. TODO: widen.
-        params.emplace_back(std::in_place_type<uint32>, static_cast<uint32>(value));
     }
     else if constexpr (is_blob_v<U>)
     {

@@ -409,11 +409,11 @@ auto fromTable(CItem* item, const sol::table& data) -> bool
                 item->exdata<AugmentTrial>().fromTable(data);
                 if (auto* PEquip = dynamic_cast<CItemEquipment*>(item))
                 {
-                    for (uint8 slot = 0; slot < std::size(item->exdata<AugmentTrial>().Augments); ++slot)
+                    for (size_t slot = 0; slot < std::size(item->exdata<AugmentTrial>().Augments); ++slot)
                     {
                         if (item->exdata<AugmentTrial>().Augments[slot].Id != 0)
                         {
-                            PEquip->ApplyAugment(slot);
+                            PEquip->ApplyAugment(static_cast<uint8>(slot));
                         }
                     }
                 }
@@ -423,11 +423,11 @@ auto fromTable(CItem* item, const sol::table& data) -> bool
                 item->exdata<AugmentStandard>().fromTable(data);
                 if (auto* PEquip = dynamic_cast<CItemEquipment*>(item))
                 {
-                    for (uint8 slot = 0; slot < std::size(item->exdata<AugmentStandard>().Augments); ++slot)
+                    for (size_t slot = 0; slot < std::size(item->exdata<AugmentStandard>().Augments); ++slot)
                     {
                         if (item->exdata<AugmentStandard>().Augments[slot].Id != 0)
                         {
-                            PEquip->ApplyAugment(slot);
+                            PEquip->ApplyAugment(static_cast<uint8>(slot));
                         }
                     }
                 }

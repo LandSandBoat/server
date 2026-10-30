@@ -429,7 +429,7 @@ void LoadMeritsList()
         categoryById[std::to_underlying(category.Id)] = category;
     }
 
-    for (uint16 index = 0; index < meritData.Entries.size(); ++index)
+    for (size_t index = 0; index < meritData.Entries.size(); ++index)
     {
         const auto& entry = meritData.Entries[index];
         const auto  name  = std::string{ xi::data::EnumTraits<xi::Merit>::toName(entry.Id) };
@@ -454,7 +454,7 @@ void LoadMeritsList()
         merit.next = nextUpgradeCost(merit);
 
         meritDefaults[index]     = merit;
-        meritIndexById[merit.id] = index;
+        meritIndexById[merit.id] = static_cast<uint16>(index);
     }
 }
 

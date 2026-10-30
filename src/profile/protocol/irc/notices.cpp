@@ -98,17 +98,17 @@ auto friendStatusNotice(const FriendStatusNotice& notice) -> std::string
     const auto text = base64EncodeUnpadded(payload);
 
     auto header = FriendStatNotice{
-        .SenderPolId       = notice.friendAccountId ^ kMessagePolIdMask,
-        .Status            = static_cast<uint8>(notice.status + 1),
-        .active            = static_cast<uint8>(playing),
-        .hasExtended       = 1,
-        .listIndex         = notice.listIndex,
-        .__SystemAgeOfData = notice.timestamp,
-        .Length            = static_cast<uint32>(text.size() + 1),
-        .Type              = static_cast<uint16>(MessageType::FriendStatus),
-        .bIsOnline         = 1,
-        .bValid            = 1,
-        .bPolproRequest    = 1,
+        .SenderPolId     = notice.friendAccountId ^ kMessagePolIdMask,
+        .Status          = static_cast<uint8>(notice.status + 1),
+        .active          = static_cast<uint8>(playing),
+        .hasExtended     = 1,
+        .listIndex       = notice.listIndex,
+        .SystemAgeOfData = notice.timestamp,
+        .Length          = static_cast<uint32>(text.size() + 1),
+        .Type            = static_cast<uint16>(MessageType::FriendStatus),
+        .bIsOnline       = 1,
+        .bValid          = 1,
+        .bPolproRequest  = 1,
     };
 
     if (connected)

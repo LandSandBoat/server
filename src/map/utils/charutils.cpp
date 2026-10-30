@@ -1449,9 +1449,9 @@ void SendRecordsOfEminenceLog(CCharEntity* PChar)
 
 void SendKeyItems(CCharEntity* PChar)
 {
-    for (uint8 table = 0; table < PChar->keys.tables.size(); table++)
+    for (size_t table = 0; table < PChar->keys.tables.size(); table++)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, table);
+        PChar->pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(PChar, static_cast<uint8>(table));
     }
 }
 
@@ -2008,11 +2008,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
                 {
                     CItemEquipment* PSub = PChar->getEquip(SLOT_SUB);
 
-                    if (static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::HandToHand)
-                    {
-                        PChar->look.sub = 0;
-                    }
-                    else if (!PSub)
+                    if (static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::HandToHand || !PSub)
                     {
                         PChar->look.sub = 0;
                     }

@@ -187,11 +187,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
             {
                 case TRUST_MOVEMENT_TYPE::NO_MOVE:
                 {
-                    if (currentDistanceToMaster > CastingDistance)
-                    {
-                        PathOutToDistance(PTarget, 9.0f);
-                    }
-                    else if (currentDistanceToTarget > CastingDistance)
+                    if (currentDistanceToMaster > CastingDistance || currentDistanceToTarget > CastingDistance)
                     {
                         PathOutToDistance(PTarget, 9.0f);
                     }

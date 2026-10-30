@@ -98,7 +98,7 @@ void CLuaLootContainer::addGroupFixed(uint16 groupRate, const sol::table& items)
 void CLuaLootContainer::addItemToContainer(uint16 item, uint16 rate, sol::variadic_args va, bool hasFixedRate)
 {
     const auto quantity = va.get_type(0) == sol::type::number ? va.get<uint16>(0) : 1;
-    for (uint16 i = 0; i < quantity; ++i)
+    for (int32 i = 0; i < quantity; ++i)
     {
         m_PLootContainer->drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, item, rate, hasFixedRate);
     }

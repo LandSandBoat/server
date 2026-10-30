@@ -24,9 +24,9 @@
 #include "ai/ai_container.h"
 #include "entities/battle_entity.h"
 
-CController::CController(CBattleEntity* _POwner)
+CController::CController(CBattleEntity* owner)
 : m_Tick(timer::now())
-, POwner(_POwner)
+, POwner(owner)
 {
 }
 
