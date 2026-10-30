@@ -57,10 +57,11 @@ templates:
         hp: 3000
 
   Shiva_Prime_ASA:
-    id:           7046
-    display_name: Shiva_Prime
-    species:      shiva
-    type:         [notorious, battlefield]
+    id:            7046
+    display_name:  Shiva_Prime
+    species:       shiva
+    type:          [notorious, battlefield]
+    skill_list_id: 319
     attributes:
       combat:
         skill: great_axe
@@ -81,7 +82,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Shiva_Prime_TBI:
     id:            4642

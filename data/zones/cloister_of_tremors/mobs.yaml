@@ -61,10 +61,11 @@ templates:
         mp: 6000
 
   Titan_Prime_ASA:
-    id:           7042
-    display_name: Titan_Prime
-    species:      titan
-    type:         [notorious, battlefield]
+    id:            7042
+    display_name:  Titan_Prime
+    species:       titan
+    type:          [notorious, battlefield]
+    skill_list_id: 321
     attributes:
       combat:
         skill: great_axe
@@ -86,7 +87,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Titan_Prime_HTBF:
     id:            6954

@@ -8,6 +8,8 @@
 -- Abd-al-Raziq  : !pos 126.7 2.0 -0.23 234
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
+local qufimID = zones[xi.zone.QUFIM_ISLAND]
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
 
@@ -90,6 +92,8 @@ mission.sections =
                         return mission:progressEvent(44)
                     end
                 end,
+
+                onTrigger = mission:messageText(qufimID.text.ASA_SNOW),
             },
 
             onEventFinish =
