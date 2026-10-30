@@ -12,6 +12,7 @@ entity.onMobInitialize = function(mob)
     -- It is definitly NOT regain.
     mob:addMod(xi.mod.STORETP, 25) -- May need adjustment.
 
+    -- TODO: Likely BASE_DAMAGE_MULTIPLIER needed. Need to get captures.
     -- Hits especially hard for his level, even by NM standards.
     mob:addMod(xi.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
