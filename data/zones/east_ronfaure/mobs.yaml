@@ -1132,6 +1132,8 @@ templates:
         respawn: 3600
       stats:
         hp: 420
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common

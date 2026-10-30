@@ -174,6 +174,8 @@ templates:
       stats:
         hp: 30000
         mp: 30000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -653,6 +655,8 @@ templates:
         respawn: 3600
       stats:
         hp: 17000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -2095,7 +2099,8 @@ templates:
         aggressive: true
         links:      true
       mob_mods:
-        exp_bonus: 23
+        exp_bonus:               23
+        base_damage_multiplier: 150
       spawn:
         respawn: 300
     loot:

@@ -49,6 +49,8 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
       stats:
         hp: 12400
         mp: 12600
