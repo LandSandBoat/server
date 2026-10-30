@@ -57,6 +57,8 @@ templates:
         respawn: 86400
       stats:
         hp: 15700
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -429,6 +431,8 @@ templates:
         links:      true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -863,6 +867,8 @@ templates:
         links:      true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_rare

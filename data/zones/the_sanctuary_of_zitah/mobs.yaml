@@ -788,6 +788,8 @@ templates:
         links:      true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1228,6 +1230,8 @@ templates:
         respawn: 300
       stats:
         hp: 6300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1260,6 +1264,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Lesser_Gaylas:
     id:            2397

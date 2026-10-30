@@ -1244,6 +1244,8 @@ templates:
         type: [scripted]
       stats:
         hp: 3200
+      mob_mods:
+        base_damage_multiplier: 150
 
   Time_Bomb:
     id:            3920

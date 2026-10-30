@@ -907,6 +907,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1506,6 +1508,8 @@ templates:
         hitbox:         34
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Urd:
     id:            7031
