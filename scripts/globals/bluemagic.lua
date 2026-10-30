@@ -675,7 +675,12 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params, action
             end
         end
 
-        if params.hasChainAffinity then
+        -- Player Chain Affinity is removed in CCharEntity::OnCastFinished() when skillchains are checked
+        -- TODO: non-players couldn't get a skillchain because of the above, should they?
+        if
+            params.hasChainAffinity and
+            not caster:isPC()
+        then
             local chainAffinityEffect = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
 
             if chainAffinityEffect then
