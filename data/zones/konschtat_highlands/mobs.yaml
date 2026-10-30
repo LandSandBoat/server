@@ -1061,6 +1061,8 @@ templates:
         type: [lottery]
       stats:
         hp: 2080
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1201,6 +1203,8 @@ templates:
         type: [lottery]
       stats:
         hp: 20500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1314,6 +1318,8 @@ templates:
         respawn: 3600
       stats:
         hp: 18510
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -1388,6 +1394,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 660
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always

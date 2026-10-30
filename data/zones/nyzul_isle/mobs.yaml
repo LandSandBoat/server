@@ -772,6 +772,8 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -4819,6 +4821,8 @@ templates:
         hitbox:        35
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Raubahn:
     id:            3327
@@ -5658,6 +5662,8 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
