@@ -67,6 +67,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         HOBGOBLIN_THIEF       = GetFirstID('Hobgoblin_Thief'),
         HOBGOBLIN_WARRIOR     = GetFirstID('Hobgoblin_Warrior'),
         HOBGOBLIN_WHITE_MAGE  = GetFirstID('Hobgoblin_White_Mage'),
+        KRAKEN_FISHED_NM      = { GetTableOfIDs('Kraken')[1], GetTableOfIDs('Kraken')[2] },
         KRAKEN_NM             = GetTableOfIDs('Kraken')[3],
         OPHIOTAURUS           = GetFirstID('Ophiotaurus'),
         SLIPPERY_SUCKER       = GetFirstID('Slippery_Sucker'),
