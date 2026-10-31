@@ -1043,7 +1043,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Calculate Base Damage
     ----------------------------------
-    local wscMods = xi.combat.physical.calculateWSC(mob, skillParams.strWSC, skillParams.dexWSC, skillParams.vitWSC, skillParams.agiWSC, skillParams.intWSC, skillParams.mndWSC, skillParams.chrWSC)
+    local wscMods = xi.combat.physical.calculateWSC(mob, skillParams.str_wSC, skillParams.dex_wSC, skillParams.vit_wSC, skillParams.agi_wSC, skillParams.int_wSC, skillParams.mnd_wSC, skillParams.chr_wSC)
 
     -- TODO: Do mobs benefit from Fencer job trait's TP_BONUS?
     -- Best way to test will likely be to find a mob that uses a magical skill with fTP scaling and has varying jobs to compare (WAR 45 min for Fencer, 80 BST, 85 BRD).
