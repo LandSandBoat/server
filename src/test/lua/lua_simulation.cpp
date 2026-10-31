@@ -148,6 +148,17 @@ void CLuaSimulation::skipTime(uint32 seconds) const
 }
 
 /************************************************************************
+ *  Function: getSteadyTime()
+ *  Purpose : Reads the simulated steady clock in seconds.
+ *  Example : local startedAt = sim:getSteadyTime()
+ ************************************************************************/
+
+auto CLuaSimulation::getSteadyTime() const -> double
+{
+    return std::chrono::duration<double>(timer::now().time_since_epoch()).count();
+}
+
+/************************************************************************
  *  Function: getSetting()
  *  Purpose : Reads a server setting by its fully qualified key.
  *  Example : local retain = sim:getSetting('map.EXP_RETAIN')
@@ -746,6 +757,7 @@ void CLuaSimulation::Register()
     SOL_REGISTER("tick", CLuaSimulation::tick);
     SOL_REGISTER("tickEntity", CLuaSimulation::tickEntity);
     SOL_REGISTER("skipTime", CLuaSimulation::skipTime);
+    SOL_REGISTER("getSteadyTime", CLuaSimulation::getSteadyTime);
     SOL_REGISTER("setVanaTime", CLuaSimulation::setVanaTime);
     SOL_REGISTER("setVanaDay", CLuaSimulation::setVanaDay);
     SOL_REGISTER("skipToNextVanaDay", CLuaSimulation::skipToNextVanaDay);

@@ -34,14 +34,14 @@ describe('Uragnite shell', function()
     it('closes during a rest and reopens', function()
         local closedAt = nil
         local openedAt = nil
-        for second = 1, 300 do
+        for _ = 1, 300 do
             xi.test.world:skipTime(1)
             xi.test.world:tickEntity(mob)
             local sub = mob:getAnimationSub()
             if sub == 5 and not closedAt then
-                closedAt = second
+                closedAt = xi.test.world:getSteadyTime()
             elseif sub == 4 and closedAt and not openedAt then
-                openedAt = second
+                openedAt = xi.test.world:getSteadyTime()
                 break
             end
         end
