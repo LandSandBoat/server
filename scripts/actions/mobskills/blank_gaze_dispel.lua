@@ -12,21 +12,31 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local effect = 0
-    if target:isFacing(mob) then
-
-        effect = target:dispelStatusEffect()
-
-        if effect == xi.effect.NONE then
-            skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
-        else
-            skill:setMsg(xi.msg.basic.SKILL_ERASE)
-        end
-    else
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+    if not target:isFacing(mob) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        return 0
     end
 
-    return effect
+    local tp = skill:getTP()
+    local maxDispel = utils.clamp(math.floor(tp / 1000), 1, 3)
+    local effectCount = 0
+
+    for _ = 1, maxDispel do
+        local effect = target:dispelStatusEffect()
+        if effect == xi.effect.NONE then
+            break
+        end
+
+        effectCount = effectCount + 1
+    end
+
+    if effectCount == 0 then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        return 0
+    end
+
+    skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+    return effectCount
 end
 
 return mobskillObject
