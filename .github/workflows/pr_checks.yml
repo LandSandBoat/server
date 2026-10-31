@@ -145,8 +145,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      CPM_SOURCE_CACHE: /tmp/data-schema-cpm
     steps:
       - name: Download Changed Files
         uses: actions/download-artifact@v8
@@ -175,17 +173,20 @@ jobs:
         if: steps.changed.outputs.touched == 'true'
         run: python -m pip install --upgrade -r ./tools/requirements.txt
 
+      # Reads the Linux CPM cache the base builds save.
       - name: Restore CPM source cache
         if: steps.changed.outputs.touched == 'true'
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
-          path: /tmp/data-schema-cpm
-          key: data-schema-cpm-${{ runner.os }}-${{ hashFiles('CMakeLists.txt', 'cmake/**', 'ext/CMakeLists.txt') }}
-          restore-keys: data-schema-cpm-${{ runner.os }}-
+          path: .cpm-cache
+          key: cpm-${{ runner.os }}-${{ hashFiles('CMakeLists.txt', 'cmake/**', 'ext/CMakeLists.txt') }}
+          restore-keys: cpm-${{ runner.os }}-
 
       - name: Configure schema compiler
         if: steps.changed.outputs.touched == 'true'
         run: |
+          echo "CPM_SOURCE_CACHE=$GITHUB_WORKSPACE/.cpm-cache" >> "$GITHUB_ENV"
+          export CPM_SOURCE_CACHE="$GITHUB_WORKSPACE/.cpm-cache"
           cmake -G Ninja -S . -B build-data-schema \
             -DCMAKE_BUILD_TYPE=Release \
             -DPCH_ENABLE=OFF \
@@ -298,15 +299,25 @@ jobs:
             runner: windows-2025
             compiler: msvc
             build_modules: false
+            upload_artifact: true
           - build_type: Debug
             runner: macos-26
             compiler: appleClang
             build_modules: false
+            upload_artifact: true
           - build_type: Debug
             runner: ubuntu-26.04
             compiler: gcc
             compiler_version: 15
             build_modules: false
+            upload_artifact: true
+          # Compile check only: artifact names don't include the compiler, so uploading would clash with the gcc build.
+          - build_type: Debug
+            runner: ubuntu-26.04
+            compiler: clang
+            compiler_version: 22
+            build_modules: false
+            upload_artifact: false
     uses: ./.github/workflows/runner_build.yml
     with:
       runner: ${{ matrix.runner }}
@@ -314,7 +325,7 @@ jobs:
       compiler_version: ${{ matrix.compiler_version }}
       build_type: ${{ matrix.build_type }}
       build_modules: ${{ matrix.build_modules }}
-      upload_artifact: true
+      upload_artifact: ${{ matrix.upload_artifact }}
 
   # Compiles modules/*/cpp, which no other job builds. Uploads no artifact:
   # REGISTER_CPP_MODULE is a static initializer, so a modules-enabled binary

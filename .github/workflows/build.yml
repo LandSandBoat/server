@@ -21,12 +21,16 @@ jobs:
       build_type: Debug
       tracy: false
       build_modules: false
-      save_cache: true
+      save_cache: false
       upload_artifact: false
       clang_tidy: true
 
   Runner_Build:
     name: ${{ matrix.build_modules && 'Modules Build' || (matrix.save_cache && 'Cache Build' || 'Build') }}
+    # actions: write lets the cache builds delete their superseded sccache entries.
+    permissions:
+      contents: read
+      actions: write
     strategy:
       fail-fast: false
       matrix:
@@ -67,6 +71,15 @@ jobs:
             runner: ubuntu-26.04
             compiler: gcc
             compiler_version: 15
+            tracy: false
+            build_modules: false
+            save_cache: true
+            upload_artifact: false
+            clang_tidy: false
+          - build_type: Debug
+            runner: ubuntu-26.04
+            compiler: clang
+            compiler_version: 22
             tracy: false
             build_modules: false
             save_cache: true

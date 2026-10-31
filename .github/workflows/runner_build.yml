@@ -20,7 +20,7 @@ on:
         required: true
         type: string
       save_cache:
-        description: 'Warm the branch-scoped sccache that PR builds read from.'
+        description: 'Save the sccache and CPM caches. PR builds only read them.'
         required: false
         type: boolean
         default: false
@@ -40,7 +40,7 @@ on:
         type: boolean
         default: false
       clang_tidy:
-        description: 'Build with Clang Tidy and output build summary.'
+        description: 'Run clang-tidy over the compile database instead of building, and output a summary.'
         required: false
         type: boolean
         default: false
@@ -58,11 +58,10 @@ jobs:
       run:
         shell: bash
     env:
-      # Per-object entries in the GHA cache. A restored build tree would be faster on a
-      # hit, but ninja cannot tell which compiler produced the objects it finds, and four
-      # multi-GB trees evicted each other out of the 10GB repo budget anyway.
-      SCCACHE_GHA_ENABLED: "true"
-      SCCACHE_GHA_RW_MODE: ${{ github.event_name == 'pull_request' && 'READ_ONLY' || 'READ_WRITE' }}
+      # sccache's GHA backend stored one entry per object, which hit GitHub's upload rate limit and kept the 10GB budget full.
+      # The local cache dir is saved instead, one entry per toolchain, capped so all of them plus CPM fit.
+      SCCACHE_DIR: ${{ format('{0}/.sccache', github.workspace) }}
+      SCCACHE_CACHE_SIZE: 1500M
       CPM_SOURCE_CACHE: ${{ format('{0}/.cpm-cache', github.workspace) }}
       SKIP_BUILD: false
       HOMEBREW_NO_AUTO_UPDATE: 1
@@ -180,6 +179,30 @@ jobs:
           echo "CC=/usr/bin/clang${{ env.clang_version }}" >> $GITHUB_ENV
           echo "CXX=/usr/bin/clang++${{ env.clang_version }}" >> $GITHUB_ENV
 
+      # ctcache hashes the preprocessed TU together with the clang-tidy config and replays the stored output for anything it has already seen, so only touched TUs get re-analysed.
+      - name: Setup clang-tidy-cache
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        env:
+          clang_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          sudo curl -sSfL -o /usr/local/bin/clang-tidy-cache https://raw.githubusercontent.com/matus-chochlik/ctcache/1.2.0/src/ctcache/clang_tidy_cache.py
+          echo "a1b677a8b0ba318c330b043582872e40ddfe797c6499682cf0033ae9c5665e07  /usr/local/bin/clang-tidy-cache" | sha256sum -c -
+          sudo chmod +x /usr/local/bin/clang-tidy-cache
+          printf '#!/bin/sh\nexec clang-tidy-cache clang-tidy%s "$@"\n' "$clang_version" > "$RUNNER_TEMP/clang-tidy-cached"
+          chmod +x "$RUNNER_TEMP/clang-tidy-cached"
+          echo "CTCACHE_DIR=$GITHUB_WORKSPACE/.ctcache" >> $GITHUB_ENV
+          echo "CTCACHE_SAVE_OUTPUT=1" >> $GITHUB_ENV
+
+      - name: Restore clang-tidy cache
+        id: ctcache
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/restore@v5
+        with:
+          path: .ctcache
+          key: ${{ format('ctcache-{0}-{1}', runner.os, github.run_id) }}
+          restore-keys: |
+            ${{ format('ctcache-{0}-', runner.os) }}
+
       # Static, ASAN-instrumented LuaJIT on the system allocator so ASAN tracks every Lua object.
       # The interpreter and JIT traces stay uninstrumented.
       - name: Build instrumented LuaJIT (Linux)
@@ -211,6 +234,17 @@ jobs:
         if: ${{ env.SKIP_BUILD != 'true' }}
         uses: mozilla-actions/sccache-action@v0.0.10
 
+      # Only the base Debug cache builds save, one entry per toolchain.
+      - name: Restore sccache
+        id: sccache-cache
+        if: ${{ inputs.build_type == 'Debug' && !inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/restore@v5
+        with:
+          path: .sccache
+          key: ${{ format('sccache-{0}-{1}{2}-{3}-{4}', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, github.run_id) }}
+          restore-keys: |
+            ${{ format('sccache-{0}-{1}{2}-{3}-', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type) }}
+
       - name: Setup Python
         if: ${{ env.SKIP_BUILD != 'true' }}
         uses: actions/setup-python@v6
@@ -233,9 +267,10 @@ jobs:
 
       # Roughly 20 CPM packages are git-cloned at configure time. They used to survive
       # inside the cached build tree; this keeps them out of the network path.
-      - name: Cache CPM sources
+      - name: Restore CPM sources
+        id: cpm-cache
         if: ${{ env.SKIP_BUILD != 'true' }}
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
           path: .cpm-cache
           key: ${{ format('cpm-{0}-{1}', runner.os, hashFiles('CMakeLists.txt', 'cmake/**', 'ext/CMakeLists.txt')) }}
@@ -247,16 +282,75 @@ jobs:
         run: |
           cmake -G Ninja -S . -B build --fresh \
             -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
-            -DENABLE_CLANG_TIDY=${{ inputs.clang_tidy && 'ON' || 'OFF' }} \
             -DTRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }} \
             -DPCH_ENABLE=OFF \
             ${{ (runner.os == 'macOS' && startsWith(inputs.compiler, 'clang')) && '-DCMAKE_AR=$AR -DCMAKE_RANLIB=$RANLIB -DCMAKE_NM=$NM ' || '' }} \
             ${{ runner.os == 'Windows' && '-DCMAKE_MSVC_DEBUG_INFORMATION_FORMAT=Embedded ' || '' }} \
             -DCACHE_OPTION=sccache
 
+      # The sources are the same for every toolchain on an OS, so the Linux clang cache build leaves the save to gcc.
+      - name: Save CPM sources
+        if: ${{ github.event_name != 'pull_request' && inputs.save_cache && inputs.compiler != 'clang' && steps.cpm-cache.outputs.cache-hit != 'true' && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .cpm-cache
+          key: ${{ steps.cpm-cache.outputs.cache-primary-key }}
+
       - name: Build
-        if: ${{ env.SKIP_BUILD != 'true' }}
+        if: ${{ !inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
+
+      # Stopping the server flushes pending writes before the directory is saved, and prints the stats.
+      - name: Stop sccache
+        if: ${{ !cancelled() && !inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        run: sccache --stop-server || true
+
+      - name: Save sccache
+        id: sccache-save
+        if: ${{ !cancelled() && github.event_name != 'pull_request' && inputs.save_cache && !inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .sccache
+          key: ${{ steps.sccache-cache.outputs.cache-primary-key }}
+
+      # Only the newest entry is ever restored, so older ones are dead weight until LRU gets to them.
+      - name: Delete older sccache entries
+        if: ${{ steps.sccache-save.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          prefix: ${{ format('sccache-{0}-{1}{2}-{3}-', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type) }}
+          current: ${{ steps.sccache-cache.outputs.cache-primary-key }}
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --ref "$GITHUB_REF" --key "$prefix" --limit 100 --json id,key \
+            --jq ".[] | select(.key != \"$current\") | .id" |
+          while read -r id; do
+            gh cache delete -R "$GITHUB_REPOSITORY" "$id"
+          done
+
+      # Configure writes the compile database and every generated source except the enum headers, which enum_codegen builds.
+      # The header filter defaults to '.*' in clang-tidy 22.
+      # ext/ and CPM headers are SYSTEM or dropped by the summary.
+      - name: Clang Tidy
+        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        env:
+          clang_version: ${{ inputs.compiler_version && format('-{0}', inputs.compiler_version) || '' }}
+        run: |
+          cmake --build build --target enum_codegen
+          run-clang-tidy${{ env.clang_version }} -p build -j $(nproc) -quiet \
+            -clang-tidy-binary "$RUNNER_TEMP/clang-tidy-cached" \
+            "^${GITHUB_WORKSPACE}/(src|build/generated)/" | tee clang_tidy.log
+
+      - name: Save clang-tidy cache
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .ctcache
+          key: ${{ steps.ctcache.outputs.cache-primary-key }}
+
+      - name: clang-tidy cache stats
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+        run: clang-tidy-cache --show-stats || true
 
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
@@ -267,12 +361,12 @@ jobs:
             xi_*
             tracy.tar.gz
 
-      - name: Summarize Clang Tidy Build
-        if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
+      - name: Summarize Clang Tidy
+        if: ${{ !cancelled() && inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
         run: |
           echo "## Clang Tidy Results" >> $GITHUB_STEP_SUMMARY
-          if [[ -f "build.log" && -s "build.log" ]]; then
-              python tools/ci/summarize_clang_tidy.py build.log >> $GITHUB_STEP_SUMMARY
+          if [[ -f "clang_tidy.log" && -s "clang_tidy.log" ]]; then
+              python tools/ci/summarize_clang_tidy.py clang_tidy.log >> $GITHUB_STEP_SUMMARY
               if [[ $? -ne 0 ]]; then
                   exit 1
               fi

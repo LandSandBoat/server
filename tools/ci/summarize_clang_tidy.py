@@ -18,6 +18,8 @@ def third_party_markers():
 def parse_tidy_log(log_content):
     warning_regex = re.compile(r"^(/.+?):(\d+):(\d+):\s+warning:\s+(.*)$")
     warnings_by_file = defaultdict(list)
+    # run-clang-tidy repeats a header's warnings once for every TU that includes it.
+    seen = set()
     markers = third_party_markers()
     lines = log_content.splitlines()
 
@@ -49,6 +51,12 @@ def parse_tidy_log(log_content):
             warning_details.append(lines[j])
             j += 1
 
+        i = j
+
+        if (location, message) in seen:
+            continue
+
+        seen.add((location, message))
         warnings_by_file[file_path].append(
             {
                 "location": location,
@@ -56,8 +64,6 @@ def parse_tidy_log(log_content):
                 "details": "\n".join(warning_details),
             }
         )
-
-        i = j
 
     return warnings_by_file
 
