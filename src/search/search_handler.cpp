@@ -101,11 +101,6 @@ auto SearchHandler::run() -> Task<void>
             }
 
             const auto length = result.value();
-            if (length == 0) // EOF
-            {
-                break;
-            }
-
             DebugSocketsFmt("Received packet from IP {} ({} bytes)", ipAddress_, length);
 
             read_func(static_cast<uint16_t>(length));
