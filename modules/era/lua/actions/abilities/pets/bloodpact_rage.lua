@@ -189,6 +189,7 @@ m:addOverride('xi.actions.abilities.pets.chaotic_strike.onPetAbility', function(
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    params.canCrit           = true
     params.primaryMessage    = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
     local info = xi.mobskills.mobPhysicalMove(pet, target, petskill, action, params)
@@ -224,6 +225,7 @@ m:addOverride('xi.actions.abilities.pets.claw.onPetAbility', function(target, pe
     params.damageType        = xi.damageType.PIERCING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     params.attackMultiplier  = { 2.0, 2.0, 2.0 }
+    params.canCrit           = true
     params.primaryMessage    = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
     local info = xi.mobskills.mobPhysicalMove(pet, target, petskill, action, params)
@@ -550,6 +552,7 @@ m:addOverride('xi.actions.abilities.pets.predator_claws.onPetAbility', function(
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    params.canCrit           = true
     params.primaryMessage    = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
     local info = xi.mobskills.mobPhysicalMove(pet, target, petskill, action, params)
@@ -743,6 +746,7 @@ m:addOverride('xi.actions.abilities.pets.shock_strike.onPetAbility', function(ta
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     params.attackMultiplier  = { 2.0, 2.0, 2.0 }
+    params.canCrit           = true
     params.primaryMessage    = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
     local info = xi.mobskills.mobPhysicalMove(pet, target, petskill, action, params)
@@ -827,4 +831,4 @@ end)
 -----------------------------------
 -- Volt Strike
 -----------------------------------
--- TODO: Volt Strike is not currently coded at time of this comment but should be set to 1.0 for fTPSubsequentHits. Loses Crit Scaling.
+-- TODO: Volt Strike is not currently coded at time of this comment but should be set to 1.0 for fTPSubsequentHits. Can Crit but loses TP Crit Scaling.
