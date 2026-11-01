@@ -44,7 +44,7 @@ templates:
 
   Albumens_Korrigan:
     id:            5608
-    species:       mandragora
+    species:       korrigan
     type:          [notorious]
     skill_list_id: 178
     attributes:

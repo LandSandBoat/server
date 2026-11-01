@@ -364,7 +364,7 @@ templates:
 
   Maca_Maca:
     id:            5102
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:

@@ -758,7 +758,7 @@ templates:
 
   Fear_Dearg:
     id:            1311
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:

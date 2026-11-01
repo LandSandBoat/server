@@ -740,7 +740,7 @@ templates:
 
   Maats_Pet:
     id:            2462
-    species:       mandragora
+    species:       korrigan
     type:          [notorious, called, battlefield]
     skill_list_id: 178
     attributes:
@@ -756,6 +756,8 @@ templates:
         type: [scripted]
       stats:
         hp: 300
+      mob_mods:
+        base_damage_multiplier: 166
 
   Macha:
     id:            2468

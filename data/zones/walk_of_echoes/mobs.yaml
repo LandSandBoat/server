@@ -735,7 +735,7 @@ templates:
 
   Killer_Korrigan:
     id:            5283
-    species:       mandragora
+    species:       korrigan
     type:          [notorious, battlefield]
     skill_list_id: 178
     attributes:

@@ -948,6 +948,8 @@ templates:
         hitbox:         9
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 166
 
   Omega_Forerunner:
     id:      7494
