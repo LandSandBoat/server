@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    xi.pet.setMobPet(mob, -1, 'Zoraal_Jas_Pkuucha')
+    mob:setPet(GetMobByID(ID.mob.ZORAAL_JAS_PKUUCHA))
 end
 
 entity.onMobEngage = function(mob, target)
@@ -52,6 +52,10 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
     end
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setPet(nil)
 end
 
 return entity
