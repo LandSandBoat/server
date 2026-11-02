@@ -99,6 +99,8 @@ void TestChar::clean(uint32 charId /* = 0 */)
 
         "DELETE FROM accounts_parties WHERE charid BETWEEN ? AND ?",
         "DELETE FROM accounts_sessions WHERE charid BETWEEN ? AND ?",
+
+        "DELETE FROM audit_craft WHERE charid BETWEEN ? AND ?",
     });
 
     constexpr auto placeholdersAre = [](const std::size_t count)
