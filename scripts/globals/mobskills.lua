@@ -231,6 +231,27 @@ local function resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipa
     return totalDamage
 end
 
+-- TODO: Check / Research Multi-Hit AOE Abilities - They seem to follow different rules than Single-target Multi-Hit Abilities
+---@param target CBaseEntity
+---@param skill CPetSkill|CMobSkill
+---@param params physicalSkillParams
+---@return xi.mobskills.shadowBehavior
+local function getShadowsToRemove(target, skill, params)
+    local targetShadows = math.max(target:getMod(xi.mod.UTSUSEMI), target:getMod(xi.mod.BLINK))
+
+    if
+        skill:isSingle() and
+        params.numHits > 1 and
+        params.shadowBehavior ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
+        targetShadows < params.shadowBehavior
+    then
+        -- 1 Shadow removed per hit
+        return xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    end
+
+    return params.shadowBehavior
+end
+
 -- passed to handleSinglePhysicalHit() inside xi.mobskills.mobPhysicalMove() and handleSingleRangedHit() inside xi.mobskills.mobRangedMove()
 ---@class physicalMobSkillHitParams
 ---@field hitNumber number
@@ -574,6 +595,8 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
     ----------------------------------
     -- Calculate the hits
     ----------------------------------
+    local shadowsToRemove = getShadowsToRemove(target, skill, params)
+
     for hitNumber = 1, params.numHits do
         local hitInfo           = nil
         local hitChance         = 0
@@ -586,7 +609,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
         ----------------------------------
         -- Handle Utsusemi and Blink
         ----------------------------------
-        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, params.shadowBehavior)
+        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, shadowsToRemove)
 
         ----------------------------------
         -- Calculate Hit Rate
@@ -648,7 +671,8 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
         -- Third Eye treats multi hit attacks as a single hit.
         -- Exit early if there are remaining hits after the anticipated hit.
         if
-            hitAbsorbed or
+            (hitAbsorbed and
+            shadowsToRemove == params.shadowBehavior) or
             attackAnticipated or
             attackYaegasumi or
             (params.terminateOnMiss and attackMissed)
@@ -809,6 +833,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
     -- Need research to see if bloodpacts/pets skills can multi attack.
     -- If so, do they carry fTP over from the first hit into subsequent hits?
 
+    local shadowsToRemove = getShadowsToRemove(target, skill, params)
+
     for hitNumber = 1, params.numHits do
         local hitInfo           = nil
         local hitChance         = 0
@@ -820,7 +846,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         ----------------------------------
         -- Handle Utsusemi and Blink
         ----------------------------------
-        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, params.shadowBehavior)
+        hitAbsorbed, shadowsConsumed = xi.mobskills.handleShadowConsumption(mob, target, skill, params, shadowsToRemove)
 
         ----------------------------------
         -- Calculate Hit Rate
@@ -892,7 +918,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         -- Third Eye treats multi hit attacks as a single hit.
         -- Exit early if there are remaining hits after the anticipated hit.
         if
-            hitAbsorbed or
+            (hitAbsorbed and
+            shadowsToRemove == params.shadowBehavior) or
             attackAnticipated or
             attackYaegasumi
         then
