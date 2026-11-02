@@ -912,3 +912,36 @@ TEST_CASE("db::ResultSet warns when a read and the schema disagree", "[database]
         CHECK(warned("no column named missing"));
     }
 }
+
+TEST_CASE("db rejects out-of-range writes", "[database]")
+{
+    REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_strict (id INT, value TINYINT UNSIGNED) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("DELETE FROM catch2_strict"));
+
+    CHECK(db::preparedStmt("INSERT INTO catch2_strict VALUES (?, ?)", 1, 255));
+    CHECK_FALSE(db::preparedStmt("INSERT INTO catch2_strict VALUES (?, ?)", 2, 300));
+    CHECK_FALSE(db::preparedStmt("INSERT INTO catch2_strict VALUES (?, ?)", 3, -1));
+
+    const auto rset = db::preparedStmt("SELECT COUNT(*) AS count FROM catch2_strict");
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+    CHECK(rset->get<uint32>("count") == 1);
+
+    REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_strict"));
+}
+
+TEST_CASE("db makes every session strict", "[database]")
+{
+    const auto global = db::preparedStmt("SELECT @@GLOBAL.sql_mode AS mode");
+    REQUIRE(global);
+    REQUIRE(global->next());
+    if (global->get<std::string>("mode").contains("STRICT_TRANS_TABLES"))
+    {
+        SKIP("The server is strict already, so a strict session proves nothing");
+    }
+
+    const auto session = db::preparedStmt("SELECT @@SESSION.sql_mode AS mode");
+    REQUIRE(session);
+    REQUIRE(session->next());
+    CHECK(session->get<std::string>("mode").contains("STRICT_TRANS_TABLES"));
+}

@@ -118,6 +118,9 @@ auto db::LibMariaDBConnection::connect() -> std::unique_ptr<Connection>
     const auto port   = settings::get<uint16>("network.SQL_PORT");
     const auto schema = settings::get<std::string>("network.SQL_DATABASE");
 
+    // An out-of-range write fails instead of clamping, whatever the host's own sql_mode.
+    mysql_options(connection, MYSQL_INIT_COMMAND, "SET SESSION sql_mode = CONCAT_WS(',', @@SESSION.sql_mode, 'STRICT_TRANS_TABLES')");
+
     if (mysql_real_connect(connection, host.c_str(), login.c_str(), passwd.c_str(), schema.c_str(), port, nullptr, 0) == nullptr)
     {
         // If we can't establish a connection to the database we can't do anything.
