@@ -15,6 +15,7 @@ describe('Status effect persistence across zoning', function()
         player:delStatusEffect(xi.effect.PROTECT)
         player:delStatusEffect(xi.effect.DEDICATION)
         player:delStatusEffect(xi.effect.SHELL)
+        player:delStatusEffect(xi.effect.STONESKIN)
     end)
 
     it('carries the remaining duration, not the original', function()
@@ -55,5 +56,15 @@ describe('Status effect persistence across zoning', function()
         assert(shell ~= nil, 'Shell should survive zoning')
         assert(shell:getSubType() == 20000000,
             'expected the subType to persist, got ' .. tostring(shell:getSubType()))
+    end)
+
+    it('carries a subPower above 32767', function()
+        player:addStatusEffect(xi.effect.STONESKIN, { power = 20, subPower = 40000, duration = 1800, origin = player })
+        player:gotoZone(xi.zone.EAST_RONFAURE)
+
+        local stoneskin = player:getStatusEffect(xi.effect.STONESKIN)
+        assert(stoneskin ~= nil, 'Stoneskin should survive zoning')
+        assert(stoneskin:getSubPower() == 40000,
+            'expected the subPower to persist, got ' .. tostring(stoneskin:getSubPower()))
     end)
 end)
