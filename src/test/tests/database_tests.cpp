@@ -25,6 +25,7 @@
 #include <common/database/blob.h>
 #include <common/database/query_validation.h>
 #include <common/scheduler/scheduler.h>
+#include <common/settings.h>
 #include <common/xi.h>
 
 #include <catch2/catch_test_macros.hpp>
@@ -32,6 +33,7 @@
 
 #include <algorithm>
 #include <array>
+#include <chrono>
 #include <cstddef>
 #include <cstring>
 #include <limits>
@@ -40,6 +42,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <thread>
 #include <tuple>
 #include <vector>
 
@@ -102,11 +105,6 @@ static_assert(db::Query("SELECT 1").placeholders() == 0);
 static_assert(db::Query("SELECT ?, ?").placeholders() == 2);
 static_assert(db::Query("SELECT '?', \"?\", `?`, ?").placeholders() == 1);
 static_assert(db::Query("SELECT 'it\\'s ?', ?").placeholders() == 1);
-
-} // namespace
-
-namespace
-{
 
 template <typename T>
 auto roundTrip(const T& value) -> T
@@ -204,7 +202,7 @@ TEST_CASE("db::transaction", "[database]")
         const auto committed = db::transaction(
             []
             {
-                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                CHECK(db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)"));
             });
 
         CHECK(committed);
@@ -216,7 +214,7 @@ TEST_CASE("db::transaction", "[database]")
         const auto committed = db::transaction(
             []
             {
-                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                CHECK(db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)"));
                 throw std::runtime_error("abort");
             });
 
@@ -229,7 +227,7 @@ TEST_CASE("db::transaction", "[database]")
         const auto committed = db::transaction(
             []
             {
-                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                CHECK(db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)"));
                 throw 42;
             });
 
@@ -242,11 +240,11 @@ TEST_CASE("db::transaction", "[database]")
         const auto committed = db::transaction(
             []
             {
-                db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)");
+                CHECK(db::preparedStmt("INSERT INTO catch2_transaction VALUES (1)"));
                 db::transaction(
                     []
                     {
-                        db::preparedStmt("INSERT INTO catch2_transaction VALUES (2)");
+                        CHECK(db::preparedStmt("INSERT INTO catch2_transaction VALUES (2)"));
                     });
                 throw std::runtime_error("abort after the nested transaction");
             });
@@ -357,15 +355,6 @@ TEST_CASE("db::ResultSet reads", "[database]")
         CHECK(rset->getOrDefault<uint32>("value", 7) == 7);
     }
 
-    SECTION("an unknown column reads as the default value")
-    {
-        const auto rset = db::preparedStmt("SELECT 1 AS value");
-        REQUIRE(rset);
-        REQUIRE(rset->next());
-
-        CHECK(rset->get<uint32>("missing") == 0);
-    }
-
     SECTION("reading before next() gives the default value")
     {
         const auto rset = db::preparedStmt("SELECT 5 AS value");
@@ -419,10 +408,48 @@ TEST_CASE("db::executeBulk", "[database]")
     {
         db::executeBulk("INSERT INTO catch2_bulk VALUES (?, ?)", std::vector<int32>{ 1, 2, 3 }, [](const int32 id)
                         {
-                            return std::tuple{ id, uint64{ 5'000'000'000 } };
+                            return std::tuple{ id, uint64{ 5'000'000'000 } * static_cast<uint64>(id) };
                         });
 
         CHECK(rowCount() == 3);
+
+        const auto rset = db::preparedStmt("SELECT CAST(SUM(amount) AS UNSIGNED) AS total FROM catch2_bulk");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        CHECK(rset->get<uint64>("total") == 30'000'000'000);
+    }
+
+    SECTION("a row that fails throws, and saves none of the rows")
+    {
+        // It throws so an enclosing transaction rolls back too.
+        CHECK_THROWS(db::executeBulk(
+            "INSERT INTO catch2_bulk VALUES (?, ?)",
+            std::vector<int64>{ 1, 2, 3'000'000'000 },
+            [](const int64 id)
+            {
+                return std::tuple{ id, uint64{ 0 } };
+            }));
+
+        CHECK(rowCount() == 0);
+    }
+
+    SECTION("a failing row inside a transaction rolls back the whole transaction")
+    {
+        const auto committed = db::transaction(
+            []
+            {
+                CHECK(db::preparedStmt("INSERT INTO catch2_bulk VALUES (?, ?)", 9, uint64{ 0 }));
+                db::executeBulk(
+                    "INSERT INTO catch2_bulk VALUES (?, ?)",
+                    std::vector<int64>{ 1, 3'000'000'000 },
+                    [](const int64 id)
+                    {
+                        return std::tuple{ id, uint64{ 0 } };
+                    });
+            });
+
+        CHECK_FALSE(committed);
+        CHECK(rowCount() == 0);
     }
 
     REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_bulk"));
@@ -480,8 +507,7 @@ TEST_CASE("db blob columns", "[database]")
     REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_blob (id INT, data BLOB) ENGINE=InnoDB"));
     REQUIRE(db::preparedStmt("DELETE FROM catch2_blob"));
 
-    // Blob binding copies from a mutable lvalue, as the callers that store item extra data do.
-    const auto store = [](const int32 id, auto& value)
+    const auto store = [](const int32 id, const auto& value)
     {
         REQUIRE(db::preparedStmt("INSERT INTO catch2_blob VALUES (?, ?)", id, value));
     };
@@ -604,12 +630,6 @@ TEST_CASE("db::ResultSet conversions", "[database]")
         return rset;
     };
 
-    SECTION("narrowing wraps instead of clamping")
-    {
-        CHECK(row(db::preparedStmt("SELECT 300 AS value"))->get<uint8>("value") == 44);
-        CHECK(row(db::preparedStmt("SELECT -1 AS value"))->get<uint32>("value") == std::numeric_limits<uint32>::max());
-    }
-
     SECTION("decimals and datetimes come back as text")
     {
         const auto rset = row(db::preparedStmt("SELECT CAST(1.5 AS DECIMAL(3, 1)) AS amount, CAST('2026-10-25 12:00:00' AS DATETIME) AS stamp"));
@@ -651,6 +671,7 @@ TEST_CASE("db::ResultSet columns and rows", "[database]")
 
         CHECK(rset->columnCount() == 2);
         CHECK(rset->columnName(0) == "first");
+        CHECK(rset->columnName(2).empty());
         CHECK(rset->get<uint32>(0) == 7);
         CHECK(rset->get<uint32>(1) == 8);
     }
@@ -894,22 +915,58 @@ TEST_CASE("db::ResultSet warns when a read and the schema disagree", "[database]
         return rset;
     };
 
+    // Each section uses its own query, because a mismatch only warns the first time.
     SECTION("a value too wide for its type still wraps, with a warning")
     {
-        CHECK(row(db::preparedStmt("SELECT 300 AS value"))->get<uint8>("value") == 44);
-        CHECK(warned("doesn't fit"));
+        CHECK(row(db::preparedStmt("SELECT 300 AS too_wide"))->get<uint8>("too_wide") == 44);
+        CHECK(warned("too_wide holds 300"));
+    }
+
+    SECTION("a negative value read as unsigned wraps, and the warning shows the stored value")
+    {
+        CHECK(row(db::preparedStmt("SELECT -1 AS negative"))->get<uint32>("negative") == std::numeric_limits<uint32>::max());
+        CHECK(warned("negative holds -1"));
     }
 
     SECTION("a value that fits doesn't warn")
     {
-        CHECK(row(db::preparedStmt("SELECT 200 AS value"))->get<uint8>("value") == 200);
+        CHECK(row(db::preparedStmt("SELECT 200 AS fits"))->get<uint8>("fits") == 200);
         CHECK_FALSE(warned("doesn't fit"));
     }
 
     SECTION("a column that doesn't exist still reads as the default, with a warning")
     {
-        CHECK(row(db::preparedStmt("SELECT 1 AS value"))->get<uint32>("missing") == 0);
-        CHECK(warned("no column named missing"));
+        CHECK(row(db::preparedStmt("SELECT 1 AS present"))->get<uint32>("absent") == 0);
+        CHECK(warned("no column named absent"));
+    }
+
+    SECTION("getOrDefault on a column that doesn't exist returns the default, with a warning")
+    {
+        CHECK(row(db::preparedStmt("SELECT 2 AS present"))->getOrDefault<uint32>("absent", 7) == 7);
+        CHECK(warned("no column named absent"));
+    }
+
+    SECTION("an index past the last column reads as the default, with a warning")
+    {
+        CHECK(row(db::preparedStmt("SELECT 3 AS present"))->get<uint32>(1) == 0);
+        CHECK(warned("no column named"));
+    }
+
+    SECTION("a mismatch warns once, not once per row")
+    {
+        const auto rset = db::preparedStmt("SELECT 300 AS repeated UNION ALL SELECT 301");
+        REQUIRE(rset);
+        while (rset->next())
+        {
+            rset->get<uint8>("repeated");
+        }
+
+        CHECK(std::ranges::count_if(
+                  sink->logs(),
+                  [](const std::string& line)
+                  {
+                      return line.contains("repeated holds");
+                  }) == 1);
     }
 }
 
@@ -944,4 +1001,96 @@ TEST_CASE("db makes every session strict", "[database]")
     REQUIRE(session);
     REQUIRE(session->next());
     CHECK(session->get<std::string>("mode").contains("STRICT_TRANS_TABLES"));
+}
+
+TEST_CASE("db reconnects after the server drops an idle connection", "[database]")
+{
+    if (settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT") == 0)
+    {
+        SKIP("Reconnecting needs network.SQL_QUERY_RETRY_COUNT above 0");
+    }
+
+    const auto restore = xi::finally(
+        []
+        {
+            db::preparedStmt("SET SESSION sql_mode = CONCAT_WS(',', @@GLOBAL.sql_mode, 'STRICT_TRANS_TABLES')");
+            db::preparedStmt("SET SESSION wait_timeout = @@GLOBAL.wait_timeout");
+        });
+
+    REQUIRE(db::preparedStmt("SET SESSION sql_mode = ''"));
+    REQUIRE(db::preparedStmt("SET SESSION wait_timeout = 1"));
+
+    // The server drops the idle connection, so the next query has to reconnect.
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+
+    const auto rset = db::preparedStmt("SELECT @@SESSION.sql_mode AS mode, @@SESSION.wait_timeout AS timeout");
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+
+    CHECK(rset->get<uint32>("timeout") != 1);
+    CHECK(rset->get<std::string>("mode").contains("STRICT_TRANS_TABLES"));
+}
+
+TEST_CASE("db round-trips utf8mb4 text", "[database]")
+{
+    // "ヴァナ" and a chick emoji, which needs four bytes.
+    const auto text = std::string("\xE3\x83\xB4\xE3\x82\xA1\xE3\x83\x8A \xF0\x9F\x90\xA4");
+
+    SECTION("bound and selected")
+    {
+        const auto rset = db::preparedStmt("SELECT ? AS value", text);
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        CHECK(rset->get<std::string>("value") == text);
+    }
+
+    SECTION("stored in a utf8mb4 column")
+    {
+        REQUIRE(db::preparedStmt("CREATE TEMPORARY TABLE IF NOT EXISTS catch2_text (value VARCHAR(32)) CHARACTER SET utf8mb4 ENGINE=InnoDB"));
+        REQUIRE(db::preparedStmt("DELETE FROM catch2_text"));
+        REQUIRE(db::preparedStmt("INSERT INTO catch2_text VALUES (?)", text));
+
+        const auto rset = db::preparedStmt("SELECT value, CHAR_LENGTH(value) AS length FROM catch2_text");
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        CHECK(rset->get<std::string>("value") == text);
+        CHECK(rset->get<uint32>("length") == 5);
+
+        REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_text"));
+    }
+}
+
+TEST_CASE("db doesn't retry a statement when the connection drops mid-transaction", "[database]")
+{
+    if (settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT") == 0)
+    {
+        SKIP("Reconnecting needs network.SQL_QUERY_RETRY_COUNT above 0");
+    }
+
+    // A dropped connection loses temporary tables, so this one has to be real.
+    REQUIRE(db::preparedStmt("CREATE TABLE IF NOT EXISTS catch2_dropped (id INT) ENGINE=InnoDB"));
+    REQUIRE(db::preparedStmt("DELETE FROM catch2_dropped"));
+    const auto dropTable = xi::finally(
+        []
+        {
+            db::preparedStmt("DROP TABLE IF EXISTS catch2_dropped");
+        });
+
+    const auto committed = db::transaction(
+        []
+        {
+            CHECK(db::preparedStmt("INSERT INTO catch2_dropped VALUES (1)"));
+            CHECK(db::preparedStmt("SET SESSION wait_timeout = 1"));
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+
+            // A retry would run on a fresh connection in autocommit and save this row alone.
+            CHECK_FALSE(db::preparedStmt("INSERT INTO catch2_dropped VALUES (2)"));
+        });
+
+    CHECK_FALSE(committed);
+
+    const auto rset = db::preparedStmt("SELECT COUNT(*) AS count FROM catch2_dropped");
+    REQUIRE(rset);
+    REQUIRE(rset->next());
+    CHECK(rset->get<uint32>("count") == 0);
 }
