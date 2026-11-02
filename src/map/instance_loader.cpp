@@ -231,9 +231,10 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PNpc->loc.p.x        = rset->get<float>("pos_x");
             PNpc->loc.p.y        = rset->get<float>("pos_y");
             PNpc->loc.p.z        = rset->get<float>("pos_z");
-            PNpc->loc.p.moving   = rset->get<uint16>("flag");
+            const auto flag      = rset->get<uint32>("flag");
+            PNpc->loc.p.moving   = static_cast<uint16>(flag & 0xFFFF);
 
-            PNpc->m_TargID = rset->get<uint32>("flag") >> 16; // "quite likely"
+            PNpc->m_TargID = flag >> 16; // "quite likely"
 
             PNpc->baseSpeed      = rset->get<uint8>("speed");
             PNpc->animationSpeed = rset->get<uint8>("speedsub");
