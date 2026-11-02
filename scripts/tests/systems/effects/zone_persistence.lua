@@ -14,6 +14,7 @@ describe('Status effect persistence across zoning', function()
         -- char_effects rows outlive the test, and a leftover effect dirties the flag for us
         player:delStatusEffect(xi.effect.PROTECT)
         player:delStatusEffect(xi.effect.DEDICATION)
+        player:delStatusEffect(xi.effect.SHELL)
     end)
 
     it('carries the remaining duration, not the original', function()
@@ -43,5 +44,16 @@ describe('Status effect persistence across zoning', function()
         assert(dedication ~= nil, 'Dedication should survive zoning')
         assert(dedication:getSubPower() == 1200,
             'expected the spent cap to persist, got ' .. tostring(dedication:getSubPower()))
+    end)
+
+    it('carries a subType wider than 16 bits', function()
+        -- The Battlefield effect keeps the initiator's char id here.
+        player:addStatusEffect(xi.effect.SHELL, { power = 20, subType = 20000000, duration = 1800, origin = player })
+        player:gotoZone(xi.zone.EAST_RONFAURE)
+
+        local shell = player:getStatusEffect(xi.effect.SHELL)
+        assert(shell ~= nil, 'Shell should survive zoning')
+        assert(shell:getSubType() == 20000000,
+            'expected the subType to persist, got ' .. tostring(shell:getSubType()))
     end)
 end)
