@@ -65,6 +65,7 @@ public:
     void processClientUpdates() const;
     void tickEntity(CLuaBaseEntity& entity) const;
     void skipTime(uint32 seconds) const;
+    auto getSteadyTime() const -> double;
     void setVanaTime(uint8 vanaHour, uint8 vanaMinute) const;
     void setVanaDay(uint8 day) const;
     void skipToNextVanaDay() const;

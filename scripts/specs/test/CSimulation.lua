@@ -64,6 +64,11 @@ end
 function CSimulation:skipTime(seconds)
 end
 
+---Returns the simulated steady clock in seconds.
+---@return number
+function CSimulation:getSteadyTime()
+end
+
 ---@param hour integer
 ---@param minute integer
 ---@return nil
