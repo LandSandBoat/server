@@ -277,7 +277,7 @@ templates:
 
   Fuliginous_Mandragora:
     id:            5074
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -711,7 +711,7 @@ templates:
 
   Slag_Mandragora:
     id:            4754
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:

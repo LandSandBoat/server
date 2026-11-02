@@ -17,4 +17,8 @@ xi.pets.jug.onPetStatCalculate = function(master, pet)
     pet:setMobMod(xi.mobMod.CAN_PARRY, 3)
     pet:setMobMod(xi.mobMod.DAMAGE_OFFSET, 2)
     pet:setMobMod(xi.mobMod.RANGED_DAMAGE_OFFSET, 2)
+
+    if pet:getPetID() == xi.petId.HOMUNCULUS then
+        pet:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 166)
+    end
 end

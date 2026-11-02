@@ -392,7 +392,7 @@ templates:
 
   Ark_Angels_Mandragora:
     id:            239
-    species:       mandragora
+    species:       korrigan
     type:          [notorious, battlefield]
     spell_list_id: 2
     skill_list_id: 178
@@ -416,11 +416,13 @@ templates:
         type: [scripted]
       stats:
         hp: 2500
+      mob_mods:
+        base_damage_multiplier: 166
 
   Ark_Angels_Mandragora_2:
     id:            239
     display_name:  Ark_Angels_Mandragora
-    species:       mandragora
+    species:       korrigan
     type:          [notorious, battlefield]
     spell_list_id: 2
     skill_list_id: 178
@@ -442,6 +444,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 166
 
   Ark_Angels_Tiger:
     id:            240

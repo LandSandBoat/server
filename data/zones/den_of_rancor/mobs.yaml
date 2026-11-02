@@ -736,7 +736,7 @@ templates:
 
   Puck:
     id:            3217
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -755,6 +755,8 @@ templates:
         links:      true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon

@@ -4,7 +4,7 @@ templates:
 
   Alraune:
     id:            97
-    species:       mandragora
+    species:       korrigan
     skill_list_id: 178
     attributes:
       combat:
@@ -22,6 +22,8 @@ templates:
         links: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon
@@ -1170,7 +1172,7 @@ templates:
 
   Peerifool:
     id:            3111
-    species:       mandragora
+    species:       korrigan
     type:          [notorious]
     skill_list_id: 178
     attributes:
@@ -1193,6 +1195,8 @@ templates:
         type: [scripted]
       stats:
         hp: 3000
+      mob_mods:
+        base_damage_multiplier: 166
 
   Primordial_Pugil:
     id:            4733
