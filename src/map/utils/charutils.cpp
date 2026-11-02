@@ -6755,7 +6755,17 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
         return;
     }
 
-    db::preparedStmt(db::selected(queries->update), amount, PChar->id);
+    // Strict mode refuses a value the column can't hold, so clamp it as a non-strict server would.
+    const auto value = static_cast<int32>(std::clamp<int64>(amount, queries->column.min, queries->column.max));
+    if (value != amount)
+    {
+        ShowWarningFmt("Clamped {} for {} from {} to {}", type, PChar->getName(), amount, value);
+    }
+
+    if (!db::preparedStmt(db::selected(queries->update), value, PChar->id))
+    {
+        ShowErrorFmt("Failed to save {} for {}", type, PChar->getName());
+    }
 
     if (strcmp(type, "spark_of_eminence") == 0)
     {
@@ -6765,7 +6775,7 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
     // Spending infamy can lower a Monipulator's rank.
     if (strcmp(type, "infamy") == 0 && PChar->m_PMonstrosity != nullptr)
     {
-        monstrosity::UpdateRank(PChar, amount);
+        monstrosity::UpdateRank(PChar, value);
     }
 }
 
@@ -6791,11 +6801,20 @@ auto GetPoints(CCharEntity* PChar, const char* type) -> int32
 
 void CheckCharPointsQueries()
 {
-    for (const auto& name : db::getTableColumnNames("char_points"))
+    const auto tableColumns = db::getTableColumnNames("char_points");
+    for (const auto& name : tableColumns)
     {
         if (name != "charid" && findCharPointsQueries(name) == nullptr)
         {
             ShowWarningFmt("char_points column {} has no query in char_points_queries.h and can't be read or written", name);
+        }
+    }
+
+    for (const auto& column : charPointsColumns)
+    {
+        if (std::ranges::find(tableColumns, column.name) == tableColumns.end())
+        {
+            ShowWarningFmt("char_points_queries.h names {}, which char_points doesn't have", column.name);
         }
     }
 }
