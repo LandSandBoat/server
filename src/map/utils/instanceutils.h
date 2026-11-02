@@ -24,7 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/database.h"
 #include "common/ipp.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 #include "data/enums/zone.h"
 
 #include "map_config.h"

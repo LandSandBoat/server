@@ -1107,6 +1107,9 @@ void CZone::createZoneTimers()
 {
     TracyZoneScoped;
 
+    // The first interval run is jittered, so spawn condition-based mobs now instead of up to an interval late.
+    spawnHandler().Tick(timer::now());
+
     // We'll manually tick while testing, don't install the timers.
     if (config_.isTestServer)
     {

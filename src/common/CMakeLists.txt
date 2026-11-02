@@ -75,6 +75,7 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/no_destructor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/scheduler/task_utils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/timer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/tombstone.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tombstone.h

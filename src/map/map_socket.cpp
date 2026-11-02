@@ -22,7 +22,7 @@
 #include "map_socket.h"
 
 #include <common/logging.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 #include <common/tracy.h>
 #include <common/types/error_or.h>
 

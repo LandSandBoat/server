@@ -22,6 +22,7 @@
 #include "navmesh_builder.h"
 
 #include "common/logging.h"
+#include "common/scheduler/task_utils.h"
 #include "common/timer.h"
 
 #include <map/ximesh/ximesh.h>
@@ -1416,18 +1417,19 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
     {
         const auto batchEnd = std::min(batch + TILE_BATCH_SIZE, tileCoords.size());
 
-        co_await Scheduler::TaskGroup(
+        co_await runOnWorkerThreads(
+            scheduler,
             batchEnd - batch,
             [&, batch, batchEnd](auto& add)
             {
                 for (std::size_t i = batch; i < batchEnd; ++i)
                 {
                     const auto& tile = tileCoords[i];
-                    add(scheduler.spawnOnWorkerThread(
+                    add(
                         [this, i, tile, &cfg, &config, tileWorldSize, &results]()
                         {
                             results[i] = buildTile(tile.tx, tile.ty, cfg, config, tileWorldSize);
-                        }));
+                        });
                 }
             });
     }

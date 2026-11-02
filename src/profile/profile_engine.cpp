@@ -21,6 +21,8 @@
 
 #include "profile_engine.h"
 
+#include "common/scheduler/task_utils.h"
+
 #include "irc/irc_session.h"
 #include "profile/profile_session.h"
 
@@ -122,7 +124,7 @@ auto ProfileEngine::serve(asio::ip::tcp::socket socket, Peer peer, const Session
 {
     auto stream = profile::Stream(std::move(socket), tls_);
 
-    const auto handshake = co_await Scheduler::withTimeout(stream.async_handshake(asio::ssl::stream_base::server, asio::as_tuple(asio::use_awaitable)), kHandshakeDeadline);
+    const auto handshake = co_await withTimeout(stream.async_handshake(asio::ssl::stream_base::server, asio::as_tuple(asio::use_awaitable)), kHandshakeDeadline);
     if (handshake && !std::get<0>(*handshake))
     {
         const auto credential = co_await authenticate(stream);
@@ -157,7 +159,7 @@ auto ProfileEngine::serve(asio::ip::tcp::socket socket, Peer peer, const Session
 auto ProfileEngine::authenticate(profile::Stream& stream) -> Task<Maybe<profile::accounts::Credential>>
 {
     auto       hello  = std::array<uint8, sizeof(uint32) + sizeof(profile::SessionHash)>{};
-    const auto result = co_await Scheduler::withTimeout(asio::async_read(stream, asio::buffer(hello), asio::as_tuple(asio::use_awaitable)), kHandshakeDeadline);
+    const auto result = co_await withTimeout(asio::async_read(stream, asio::buffer(hello), asio::as_tuple(asio::use_awaitable)), kHandshakeDeadline);
     if (!result || std::get<0>(*result))
     {
         co_return std::nullopt;

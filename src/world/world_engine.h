@@ -24,7 +24,7 @@
 #include <common/application.h>
 #include <common/ipp_message.h>
 #include <common/macros.h>
-#include <common/scheduler.h>
+#include <common/scheduler/scheduler.h>
 #include <common/types/flag.h>
 #include <common/zmq/zmq_service.h>
 

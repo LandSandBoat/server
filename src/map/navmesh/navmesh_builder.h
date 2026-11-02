@@ -24,7 +24,7 @@
 #include "navmesh_config.h"
 
 #include "common/cbasetypes.h"
-#include "common/scheduler.h"
+#include "common/scheduler/scheduler.h"
 
 #include <common/types/hash_map.h>
 
