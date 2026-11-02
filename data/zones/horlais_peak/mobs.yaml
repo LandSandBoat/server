@@ -569,6 +569,8 @@ templates:
         type: [scripted]
       stats:
         hp: 13000
+      mob_mods:
+        base_damage_multiplier: 150
 
   Fighting_Sheep:
     id:            1337

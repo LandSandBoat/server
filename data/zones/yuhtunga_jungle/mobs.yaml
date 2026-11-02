@@ -1180,6 +1180,8 @@ templates:
         aggressive: true
       spawn:
         respawn: 300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -1310,6 +1312,8 @@ templates:
         type: [scripted]
       stats:
         hp: 5000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1543,6 +1547,8 @@ templates:
         type: [scripted]
       stats:
         hp: 5300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common

@@ -1497,7 +1497,7 @@ templates:
 
   Jaded_Jody:
     id:            2123
-    species:       morbol
+    species:       ameretat
     type:          [notorious]
     skill_list_id: 2044
     attributes:

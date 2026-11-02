@@ -1416,7 +1416,7 @@ templates:
 
   Lividroot_Amooshah:
     id:            2423
-    species:       morbol
+    species:       ameretat
     type:          [notorious]
     skill_list_id: 296
     attributes:

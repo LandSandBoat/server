@@ -907,6 +907,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4500
+      mob_mods:
+        base_damage_multiplier: 150
 
   Para:
     id:            3097

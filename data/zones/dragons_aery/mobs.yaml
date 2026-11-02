@@ -101,7 +101,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        exp_bonus: 23
+        base_damage_multiplier: 150
+        exp_bonus:               23
       spawn:
         respawn: 960
     loot:
