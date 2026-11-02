@@ -188,7 +188,7 @@ auto MapEngine::init() -> Task<void>
 
     guildutils::Initialize();
     charutils::LoadExpTable();
-    charutils::LoadCharPointsQueries();
+    charutils::CheckCharPointsQueries();
     traits::LoadTraitsList();
     effects::LoadEffectsParameters();
     grade::LoadGrades();

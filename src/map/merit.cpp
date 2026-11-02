@@ -46,11 +46,10 @@ std::unordered_map<uint16, xi::data::MeritCategoryData> categoryById;
 std::unordered_map<uint16, uint16>                      meritIndexById;
 Merit_t                                                 meritDefaults[kMeritPacketSlots]{};
 
-auto loadNameLookup(const std::string& query, const std::string& column) -> std::unordered_map<std::string, uint16>
+auto loadNameLookup(const std::unique_ptr<db::ResultSet>& rset, const std::string& column) -> std::unordered_map<std::string, uint16>
 {
     std::unordered_map<std::string, uint16> lookup;
 
-    const auto rset = db::preparedStmt(query);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto value = rset->getOrDefault<uint16>(column, 0);
@@ -412,7 +411,7 @@ void LoadMeritsList()
         return;
     }
 
-    const auto spells = loadNameLookup("SELECT name, spellid FROM spell_list", "spellid");
+    const auto spells = loadNameLookup(db::preparedStmt("SELECT name, spellid FROM spell_list"), "spellid");
 
     std::unordered_map<std::string, uint16> wsUnlocks;
     for (const auto& weaponSkill : xi::data::loadDataset<xi::data::datasets::weapon_skills::Dataset>())

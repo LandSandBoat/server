@@ -28,6 +28,7 @@
 
 #include <common/database/binding.h>
 #include <common/database/bound_value.h>
+#include <common/database/query.h>
 #include <common/database/result_set.h>
 
 #include <fmt/format.h>
@@ -57,12 +58,12 @@ public:
     // Execute a query with the given pre-lowered parameters.
     // Returns a queryable result set for SELECT-like queries, a rows-affected result set for
     // UPDATE-like queries, or nullptr if the query is invalid.
-    virtual auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto execute(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // As execute, but sends every row of `params` in one round trip.
     //
     // Row width comes from the statement's own placeholder count, so `params` must be a whole number of rows.
-    virtual auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto executeBulk(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // The database name, ie. xidb.
     virtual auto getSchema() -> std::string = 0;
@@ -106,6 +107,57 @@ concept IsRowProjection = std::invocable<ProjectFn&, const T&> &&
 // Get the active database backend.
 auto getDatabase() -> Database&;
 
+namespace detail
+{
+
+// A literal or constexpr query whose placeholder count must match the argument count, checked at compile time.
+template <std::size_t ArgCount>
+class CheckedQuery final
+{
+public:
+    template <std::size_t N>
+    consteval CheckedQuery(const char (&text)[N])
+    : CheckedQuery(Query(text))
+    {
+    }
+
+    consteval CheckedQuery(const Query query)
+    : query_(query)
+    {
+        if (query_.placeholders() != ArgCount)
+        {
+            throw "The query's placeholder count doesn't match its argument count";
+        }
+    }
+
+    [[nodiscard]] constexpr auto query() const noexcept -> Query
+    {
+        return query_;
+    }
+
+private:
+    Query query_;
+};
+
+template <typename... Args>
+auto runPrepared(Query query, Args&&... args) -> std::unique_ptr<ResultSet>;
+
+// The number of values each row's projection yields, or 0 when it isn't a projection at all.
+template <typename ProjectFn, typename T>
+consteval auto rowWidth() -> std::size_t
+{
+    if constexpr (IsRowProjection<ProjectFn, T>)
+    {
+        return std::tuple_size_v<std::remove_cvref_t<std::invoke_result_t<ProjectFn&, const T&>>>;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+} // namespace detail
+
 // Override the active database backend (intended for tests/benchmarks). Pass nullptr to restore the
 // default backend.
 auto setDatabase(Database* database) -> void;
@@ -117,7 +169,11 @@ auto setDatabase(Database* database) -> void;
 // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 template <typename... Args>
-auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
+auto preparedStmt(detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>;
+
+// As above, for a query picked at runtime with db::selected(). The placeholder count is checked when it runs.
+template <typename... Args>
+auto preparedStmt(detail::SelectedQuery selection, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 // Send every row of `rows` through `query` in one round trip.
 //
@@ -128,7 +184,7 @@ auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<
 // Call it inside db::transaction, which turns the throw into a rollback.
 template <typename T, typename ProjectFn>
     requires detail::IsRowProjection<ProjectFn, T>
-void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project);
+void executeBulk(detail::CheckedQuery<detail::rowWidth<ProjectFn, T>()> query, const std::vector<T>& rows, ProjectFn project);
 
 auto getDatabaseSchema() -> std::string;
 
@@ -163,18 +219,37 @@ auto getTableColumnNames(const std::string& tableName) -> std::vector<std::strin
 //
 
 template <typename... Args>
-auto preparedStmt(std::string_view rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
+auto detail::runPrepared(const Query query, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScopedS(16);
-    TracyZoneString(rawQuery);
+    TracyZoneString(query.view());
 
-    const auto params = detail::lowerBoundValues(std::forward<Args>(args)...);
-    return getDatabase().execute(rawQuery, params);
+    const auto params = lowerBoundValues(std::forward<Args>(args)...);
+    return getDatabase().execute(query, params);
+}
+
+template <typename... Args>
+auto preparedStmt(const detail::CheckedQuery<sizeof...(Args)> query, Args&&... args) -> std::unique_ptr<ResultSet>
+{
+    return detail::runPrepared(query.query(), std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+auto preparedStmt(const detail::SelectedQuery selection, Args&&... args) -> std::unique_ptr<ResultSet>
+{
+    const auto query = selection.query;
+    if (query.placeholders() != sizeof...(Args))
+    {
+        ShowErrorFmt("Query has {} placeholders but was given {} arguments: {}", query.placeholders(), sizeof...(Args), query);
+        return nullptr;
+    }
+
+    return detail::runPrepared(query, std::forward<Args>(args)...);
 }
 
 template <typename T, typename ProjectFn>
     requires detail::IsRowProjection<ProjectFn, T>
-void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn project)
+void executeBulk(const detail::CheckedQuery<detail::rowWidth<ProjectFn, T>()> query, const std::vector<T>& rows, ProjectFn project)
 {
     TracyZoneScopedS(16);
 
@@ -198,9 +273,9 @@ void executeBulk(std::string_view query, const std::vector<T>& rows, ProjectFn p
             project(row));
     }
 
-    if (!getDatabase().executeBulk(query, params))
+    if (!getDatabase().executeBulk(query.query(), params))
     {
-        throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query));
+        throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query.query()));
     }
 }
 

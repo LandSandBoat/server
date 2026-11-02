@@ -458,7 +458,7 @@ void dboxutils::SendNewItems(Scheduler& scheduler, CCharEntity* PChar, GP_CLI_CO
                                  receiver_name = PChar->getName(),
                                  date          = earth_time::timestamp()]()
                                 {
-                                    const auto query = "INSERT INTO audit_dbox(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                    constexpr auto query = db::Query("INSERT INTO audit_dbox(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)");
                                     if (!db::preparedStmt(query, itemid, quantity, sender, sender_name, receiver, receiver_name, date))
                                     {
                                         ShowErrorFmt("Failed to log delivery box transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemid, quantity, sender, receiver, date);

@@ -58,8 +58,8 @@ struct ConnectionState
 class CachingDatabase : public Database
 {
 public:
-    auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
-    auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto execute(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto executeBulk(Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
     auto isInTransaction() -> bool override;
@@ -80,7 +80,7 @@ private:
     // Find-or-prepare the cached statement for this query on the given connection.
     auto prepareCached(detail::ConnectionState& connState, std::string_view query) -> PreparedStatement&;
 
-    // Validate the query, then run `operation` on this thread's connection, retrying on connection loss.
+    // Run `operation` on this thread's connection, retrying on connection loss.
     //
     // Terminates if the connection can't be re-established.
     auto runWithRetry(std::string_view query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
