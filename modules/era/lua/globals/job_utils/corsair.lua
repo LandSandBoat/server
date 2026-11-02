@@ -442,13 +442,15 @@ m:addOverrideByEra('xi.job_utils.corsair.useElementalShot', {
         target:updateClaim(actor)
 
         -- Calculate resist rate.
-        local bonusAcc   = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC)
+        -- Bonus macc taken from retail non-era testing
+        local bonusAcc   = 75 + actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC)
         local maccParams =
         {
             effectId       = data.applyEffectId or 0,
             magicalElement = data.element,
             skillType      = xi.skill.MARKSMANSHIP,
             actorStat      = xi.mod.AGI,
+            targetStat     = xi.mod.AGI,
             bonusMacc      = bonusAcc,
         }
 
