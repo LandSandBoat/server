@@ -1014,7 +1014,6 @@ INSERT INTO `fishing_group` VALUES (93,14242,500,300,9);   -- Rusty Subligar
 -- Kazham, Whole Zone
 
 INSERT INTO `fishing_group` VALUES (94,90,900,300,9);      -- Rusty Bucket
-INSERT INTO `fishing_group` VALUES (94,591,1000,300,9);    -- Ripped Cap
 INSERT INTO `fishing_group` VALUES (94,624,1000,300,9);    -- Clump Of Pamtam Kelp
 INSERT INTO `fishing_group` VALUES (94,688,500,200,6);     -- Arrowwood Log
 INSERT INTO `fishing_group` VALUES (94,4360,1000,500,15);  -- Bastore Sardine
