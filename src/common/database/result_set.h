@@ -81,11 +81,11 @@ public:
     template <typename T>
     auto get(uint32 index) const -> T;
 
-    // Get the value of the associated key, or the default value if it is null/not-populated.
+    // Get the value of the associated key, or the default value if it is null. A missing column warns.
     template <typename T>
     auto getOrDefault(const std::string& key, T defaultValue) const -> T;
 
-    // Get the value of the 0-indexed column, or the default value if it is null/not-populated.
+    // Get the value of the 0-indexed column, or the default value if it is null. A missing column warns.
     template <typename T>
     auto getOrDefault(uint32 index, T defaultValue) const -> T;
 

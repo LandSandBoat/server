@@ -19,18 +19,23 @@
 ===========================================================================
 */
 
+#include "in_memory_sink.h"
+
 #include <common/database.h>
 #include <common/database/blob.h>
 #include <common/database/query_validation.h>
 #include <common/scheduler/scheduler.h>
+#include <common/xi.h>
 
 #include <catch2/catch_test_macros.hpp>
+#include <spdlog/spdlog.h>
 
 #include <algorithm>
 #include <array>
 #include <cstddef>
 #include <cstring>
 #include <limits>
+#include <memory>
 #include <optional>
 #include <stdexcept>
 #include <string>
@@ -850,5 +855,60 @@ TEST_CASE("db binds NULL", "[database]")
         CHECK(rset->getOrDefault<int32>("value", -1) == -1);
 
         REQUIRE(db::preparedStmt("DROP TEMPORARY TABLE catch2_nulls"));
+    }
+}
+
+TEST_CASE("db::ResultSet warns when a read and the schema disagree", "[database]")
+{
+    const auto sink     = std::make_shared<InMemorySink>();
+    const auto previous = spdlog::get("warn");
+    REQUIRE(previous);
+
+    // Catch2 runs before the harness captures the loggers, so "warn" is still async here.
+    spdlog::drop("warn");
+    spdlog::register_logger(std::make_shared<spdlog::logger>("warn", sink));
+    logging::RefreshLoggerCache();
+
+    const auto restore = xi::finally(
+        [&]
+        {
+            spdlog::drop("warn");
+            spdlog::register_logger(previous);
+            logging::RefreshLoggerCache();
+        });
+
+    const auto warned = [&](const std::string_view text)
+    {
+        return std::ranges::any_of(
+            sink->logs(),
+            [&](const std::string& line)
+            {
+                return line.contains(text);
+            });
+    };
+
+    const auto row = [](auto rset)
+    {
+        REQUIRE(rset);
+        REQUIRE(rset->next());
+        return rset;
+    };
+
+    SECTION("a value too wide for its type still wraps, with a warning")
+    {
+        CHECK(row(db::preparedStmt("SELECT 300 AS value"))->get<uint8>("value") == 44);
+        CHECK(warned("doesn't fit"));
+    }
+
+    SECTION("a value that fits doesn't warn")
+    {
+        CHECK(row(db::preparedStmt("SELECT 200 AS value"))->get<uint8>("value") == 200);
+        CHECK_FALSE(warned("doesn't fit"));
+    }
+
+    SECTION("a column that doesn't exist still reads as the default, with a warning")
+    {
+        CHECK(row(db::preparedStmt("SELECT 1 AS value"))->get<uint32>("missing") == 0);
+        CHECK(warned("no column named missing"));
     }
 }
