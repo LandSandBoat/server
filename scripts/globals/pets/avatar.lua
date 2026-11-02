@@ -215,6 +215,12 @@ xi.pets.avatar.onPetStatCalculate = function(master, pet)
     pet:setMobMod(xi.mobMod.DAMAGE_OFFSET, 2)
     pet:setMobMod(xi.mobMod.RANGED_DAMAGE_OFFSET, 2)
     pet:setMod(xi.mod.DMGPHYS, -5000) -- -50%
+
+    if pet:getPetID() == xi.petId.DIABOLOS then
+        pet:setMod(xi.mod.DEFP, 30)
+    elseif pet:getPetID() == xi.petId.FENRIR then
+        pet:setMod(xi.mod.ATTP, 30)
+    end
 end
 
 xi.pets.avatar.onMobSpawn = function(pet)
