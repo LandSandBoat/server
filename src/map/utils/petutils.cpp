@@ -117,7 +117,7 @@ void LoadPetList()
         mobutils::ApplyStatRanks(*Pet, species.MobAttributes.Stats);
 
         Pet->hasSpellScript = rset->get<bool>("hasSpellScript");
-        Pet->spellList      = rset->get<uint8>("spellList");
+        Pet->spellList      = rset->get<uint16>("spellList");
 
         // Specific Dmage Taken, as a %
         Pet->slash_sdt  = rset->get<int16>("slash_sdt");
