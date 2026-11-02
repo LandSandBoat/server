@@ -1515,6 +1515,8 @@ templates:
         type: [scripted]
       stats:
         hp: 17000
+      mob_mods:
+        base_damage_multiplier: 150
 
   Uggalepih_Leech:
     id:            4076

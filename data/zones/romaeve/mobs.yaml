@@ -100,7 +100,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        sight_range: 4
+        base_damage_multiplier: 150
+        sight_range:              4
       spawn:
         respawn: 300
     loot:
@@ -494,6 +495,8 @@ templates:
         aggressive: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Mythril_Golem:
     id:            2793
@@ -513,7 +516,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        sight_range: 4
+        base_damage_multiplier: 150
+        sight_range:              4
       spawn:
         respawn: 300
     loot:
@@ -549,6 +553,8 @@ templates:
         respawn: 7200
       stats:
         hp: 11000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
