@@ -34,7 +34,7 @@ INSERT INTO `blue_spell_list` VALUES (531,676,3,13,1,0,0,0,NULL); -- Ice Break
 INSERT INTO `blue_spell_list` VALUES (532,535,4,0,1,0,0,0,NULL); -- Blitzstrahl
 INSERT INTO `blue_spell_list` VALUES (533,509,3,14,2,0,0,0,NULL); -- Self-Destruct
 INSERT INTO `blue_spell_list` VALUES (534,523,4,10,1,0,0,0,NULL); -- Mysterious Light
-INSERT INTO `blue_spell_list` VALUES (535,1646,1,14,1,0,0,0,NULL); -- Cold Wave
+INSERT INTO `blue_spell_list` VALUES (535,528,1,14,1,0,0,0,NULL); -- Cold Wave
 INSERT INTO `blue_spell_list` VALUES (536,466,1,4,1,0,0,0,NULL); -- Poison Breath
 INSERT INTO `blue_spell_list` VALUES (537,489,2,14,1,0,0,0,NULL); -- Stinking Gas
 INSERT INTO `blue_spell_list` VALUES (538,530,4,6,1,0,0,0,NULL); -- Memento Mori
