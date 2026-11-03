@@ -475,6 +475,8 @@ templates:
       stats:
         hp: 6000
         mp: 6000
+      mob_mods:
+        base_damage_multiplier: 150
 
   GoBha_Slaughterer:
     id:            1777
@@ -936,6 +938,8 @@ templates:
       stats:
         hp: 3000
         mp: 6000
+      mob_mods:
+        base_damage_multiplier: 150
 
   Osschaart:
     id:            3064
@@ -1142,6 +1146,8 @@ templates:
       stats:
         hp: 7000
         mp: 3500
+      mob_mods:
+        base_damage_multiplier: 150
 
   SaNha_Soulsaver:
     id:            3491

@@ -79,6 +79,8 @@ templates:
         type: [scripted]
       stats:
         mp: 9999
+      mob_mods:
+        base_damage_multiplier: 150
 
   Acrophies:
     id:            40
@@ -1405,6 +1407,8 @@ templates:
         type: [scripted]
       stats:
         mp: 9999
+      mob_mods:
+        base_damage_multiplier: 150
 
   Gloam_Servitor_melee:
     id:            4690
@@ -1426,6 +1430,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Greater_Pugil_fished:
     id:            5868
