@@ -62,7 +62,7 @@ auto postMessage(Context& context, const ProfFileHead& head, const std::string& 
     const auto characters = accounts::characters(accountId);
     if (!characters || std::ranges::find(*characters, name->senderName, &accounts::Character::name) == characters->end())
     {
-        ShowWarningFmt("{} account {} refused a message signed as {}", context.peer, accountId, name->senderName);
+        ShowWarningFmt("{} account {} refused a message signed as {:?}", context.peer, accountId, name->senderName);
         return ProfileAnswer(ProfError::Refused);
     }
 

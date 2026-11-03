@@ -73,7 +73,7 @@ auto readFile(const Context& context, const std::span<const uint8> body) -> Mayb
 
     if (head.offset == 0)
     {
-        ShowInfoFmt("account {} loading {} ({} bytes)", context.accountId, path, (*contents)->size());
+        ShowInfoFmt("account {} loading {:?} ({} bytes)", context.accountId, path, (*contents)->size());
     }
 
     const auto data   = asBytes(**contents).subspan(head.offset);
@@ -110,7 +110,7 @@ auto writeFile(Context& context, const std::span<const uint8> body) -> Maybe<Pro
 
     if (head->offset == 0)
     {
-        ShowInfoFmt("account {} saving {}", context.accountId, path);
+        ShowInfoFmt("account {} saving {:?}", context.accountId, path);
     }
 
     return ProfileAnswer();

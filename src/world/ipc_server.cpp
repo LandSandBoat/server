@@ -729,7 +729,7 @@ void IPCServer::handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallReq
 {
     TracyZoneScoped;
 
-    ShowInfoFmt("GM Call #{} from {} (charId: {}, accId: {}, zone: {}): {}",
+    ShowInfoFmt("GM Call #{} from {} (charId: {}, accId: {}, zone: {}): {:?}",
                 message.callId,
                 message.charName,
                 message.charId,

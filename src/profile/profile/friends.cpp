@@ -105,7 +105,7 @@ auto storeFriendList(Context& context, const std::span<const uint8> body) -> May
             pending = ", pending";
         }
 
-        ShowInfoFmt("account {} put account {} (\"{}\") at entry {} of its {} list{}", accountId, entry.PolId, asStringFromUntrustedSource(entry.handleName, sizeof(entry.handleName)), entry.Num, list, pending);
+        ShowInfoFmt("account {} put account {} ({:?}) at entry {} of its {} list{}", accountId, entry.PolId, asStringFromUntrustedSource(entry.handleName, sizeof(entry.handleName)), entry.Num, list, pending);
     }
 
     for (const auto other : result->accepted)
