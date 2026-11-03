@@ -181,6 +181,8 @@ templates:
         hitbox:        15
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Apollyon_Diremite:
     id:      7452

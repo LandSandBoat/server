@@ -27,6 +27,8 @@ templates:
       stats:
         hp: 5000
         mp: 5000
+      mob_mods:
+        base_damage_multiplier: 150
 
   Count_Andromalius_2:
     id:            811
@@ -51,6 +53,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Crimson_Grimoire:
     id:            838
@@ -159,6 +163,8 @@ templates:
       stats:
         hp: 4800
         mp: 4800
+      mob_mods:
+        base_damage_multiplier: 150
 
   Duke_Amduscias_2:
     id:            1130
@@ -184,6 +190,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Duke_Dantalian:
     id:            1132
@@ -209,6 +217,8 @@ templates:
       stats:
         hp: 4800
         mp: 4800
+      mob_mods:
+        base_damage_multiplier: 150
 
   Duke_Dantalian_2:
     id:            1132
@@ -232,6 +242,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Grand_Marquis_Chomiel:
     id:            1788
@@ -255,6 +267,8 @@ templates:
       stats:
         hp: 5200
         mp: 5200
+      mob_mods:
+        base_damage_multiplier: 150
 
   Grand_Marquis_Chomiel_2:
     id:            1788
@@ -276,6 +290,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Gunther:
     id:            1850

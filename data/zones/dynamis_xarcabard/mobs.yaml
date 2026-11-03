@@ -854,6 +854,8 @@ templates:
         type: [scripted]
       stats:
         mp: 5000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -924,6 +926,8 @@ templates:
         type: [scripted]
       stats:
         mp: 9000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -964,6 +968,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1003,6 +1009,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1040,6 +1048,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1079,6 +1089,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1118,6 +1130,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1157,6 +1171,8 @@ templates:
         type: [scripted]
       stats:
         mp: 5000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1199,6 +1215,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -1426,6 +1444,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1459,6 +1479,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1493,6 +1515,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1525,6 +1549,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1561,6 +1587,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1595,6 +1623,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1631,6 +1661,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1665,6 +1697,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1699,6 +1733,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1731,6 +1767,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1765,6 +1803,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1797,6 +1837,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1834,6 +1876,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1869,6 +1913,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1904,6 +1950,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1937,6 +1985,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1971,6 +2021,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2003,6 +2055,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2038,6 +2092,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2071,6 +2127,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2106,6 +2164,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2139,6 +2199,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2175,6 +2237,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2209,6 +2273,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2243,6 +2309,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2275,6 +2343,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2308,6 +2378,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2339,6 +2411,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2374,6 +2448,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2407,6 +2483,8 @@ templates:
         respawn: 300
       stats:
         hp: 5500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -2522,6 +2600,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2559,6 +2639,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2598,6 +2680,8 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2638,6 +2722,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2678,6 +2764,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2719,6 +2807,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2759,6 +2849,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2799,6 +2891,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2839,6 +2933,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -2902,6 +2998,8 @@ templates:
         type: [lottery]
       stats:
         hp: 12500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always

@@ -27,6 +27,8 @@ templates:
         respawn: 960
       stats:
         hp: 7300
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -62,6 +64,8 @@ templates:
         respawn: 960
       stats:
         hp: 8100
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -97,6 +101,8 @@ templates:
         respawn: 960
       stats:
         hp: 7800
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -169,6 +175,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -204,6 +212,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -235,6 +245,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -266,6 +278,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -1334,6 +1348,8 @@ templates:
         respawn: 960
       stats:
         hp: 6700
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common

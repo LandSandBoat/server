@@ -23,6 +23,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -94,6 +96,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -126,6 +130,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -220,6 +226,8 @@ templates:
         type: [scripted]
       stats:
         hp: 1400
+      mob_mods:
+        base_damage_multiplier: 150
 
   Demon_Chancellor:
     id:            984
@@ -242,6 +250,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -271,6 +281,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -300,6 +312,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -337,6 +351,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -374,6 +390,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -405,6 +423,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -438,6 +458,8 @@ templates:
         type: [scripted]
       stats:
         hp: 1200
+      mob_mods:
+        base_damage_multiplier: 150
 
   Demon_Warlock:
     id:            995
@@ -460,6 +482,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -491,6 +515,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -566,6 +592,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: rare
@@ -597,6 +625,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -640,6 +670,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -949,6 +981,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: uncommon
@@ -984,6 +1018,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4100
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -1086,6 +1122,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1148,6 +1186,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4800
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -1181,6 +1221,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4200
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: very_common
@@ -1223,6 +1265,8 @@ templates:
         type: [scripted]
       stats:
         hp: 4600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Marquis_Naberius:
     id:            5890
@@ -1249,6 +1293,8 @@ templates:
         respawn: 3600
       stats:
         hp: 6000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1278,6 +1324,8 @@ templates:
         respawn: 960
       stats:
         hp: 9500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1562,6 +1610,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
