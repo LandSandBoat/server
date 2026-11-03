@@ -27,6 +27,7 @@
 #include "packets/s2c/0x0b6_set_gmmsg.h"
 
 #include <algorithm>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace
@@ -209,15 +210,25 @@ void GMCallContainer::processCall(const CCharEntity* PChar) const
         }
     }
 
-    uint32 callId = 0;
+    auto callId = uint32{ 0 };
     db::transaction([&]()
                     {
-                        db::preparedStmt("INSERT INTO help_desk (charid, message) VALUES (?, ?)", PChar->id, message);
+                        if (!db::preparedStmt("INSERT INTO help_desk (charid, message) VALUES (?, ?)", PChar->id, message))
+                        {
+                            throw std::runtime_error(fmt::format("Failed to save GM call from {}", PChar->getName()));
+                        }
+
                         if (const auto rset = db::preparedStmt("SELECT LAST_INSERT_ID() AS id"); rset && rset->next())
                         {
                             callId = rset->get<uint32>("id");
                         }
                     });
+
+    // Without a saved row a reply would be routed by a stale id.
+    if (callId == 0)
+    {
+        return;
+    }
 
     // Send the GM call to xi_world for rerouting to external listeners
     message::send(ipc::GMCallRequest{
