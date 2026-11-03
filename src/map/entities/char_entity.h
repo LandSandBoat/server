@@ -664,6 +664,7 @@ public:
     timer::time_point m_AHHistoryTimestamp;
     timer::time_point m_DeathTimestamp;
     timer::time_point m_deathSyncTime{}; // Timer used for sending an update packet at a regular interval while the character is dead
+    timer::time_point m_commandErrorLogTime{};
 
     uint8      m_hasTractor;        // checks if player has tractor already
     uint8      m_hasRaise;          // checks if player has raise already
