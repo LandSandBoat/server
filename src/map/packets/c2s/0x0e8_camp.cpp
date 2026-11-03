@@ -33,7 +33,7 @@ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PCha
 {
     // JP wiki: a Monipulator cannot /heal.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Engaged, BlockedState::Monstrosity })
+        .blockedBy({ BlockedState::InEvent, BlockedState::Dead, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Engaged, BlockedState::Monstrosity })
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
         .mustNotEqual(
             PChar->animation == xi::Animation::Healing &&

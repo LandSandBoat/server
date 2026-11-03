@@ -80,7 +80,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 auto GP_CLI_COMMAND_EQUIP_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus })
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Fishing })
         .oneOf<SLOTTYPE>(this->EquipKind)
         .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers(PChar));
 }

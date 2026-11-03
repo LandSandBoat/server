@@ -28,7 +28,7 @@
 auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction })
+        .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction })
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_KIND>(this->Kind);
 }

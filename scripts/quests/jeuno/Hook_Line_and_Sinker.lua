@@ -3,6 +3,8 @@
 -- Omer, Lower Jeuno: !pos -89.43 0 -124.1 245
 -- EGRET_FISHING_ROD: !additem 1726
 -----------------------------------
+local qufimID = zones[xi.zone.QUFIM_ISLAND]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
 
@@ -71,6 +73,14 @@ quest.sections =
                     end
                 end,
             },
+        },
+
+        -- Since the 2004-12-09 update only anglers on this quest can fish up the Kraken that drops the rod
+        [xi.zone.QUFIM_ISLAND] =
+        {
+            onFishingCheck = function(player)
+                return qufimID.mob.KRAKEN_FISHED_NM
+            end,
         },
     },
 }

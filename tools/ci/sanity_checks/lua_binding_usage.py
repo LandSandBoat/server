@@ -70,6 +70,7 @@ def main():
     function_names.append("onTrigger")
     function_names.append("onTrade")
     function_names.append("onSteal")
+    function_names.append("onFishingCheck")
     function_names.append("onMobDeath")
     function_names.append("onZoneIn")
     function_names.append("noAction")

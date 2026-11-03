@@ -48,7 +48,7 @@ auto GP_CLI_COMMAND_ITEM_TRANSFER::validate(MapSession* PSession, const CCharEnt
 {
     // A Monipulator can only trade with the Feretory's NPCs.
     return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent })
+        .blockedBy({ BlockedState::InEvent, BlockedState::Fishing })
         .mustEqual(PChar->m_PMonstrosity == nullptr || PChar->getZone() == xi::ZoneId::Feretory, true, "Monipulators only trade in the Feretory")
         .range("ItemNum", this->ItemNum, 1, MAX_TRADE_SLOTS);
 }

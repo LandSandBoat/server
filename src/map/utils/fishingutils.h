@@ -419,34 +419,6 @@ struct weights_t
     }
 };
 
-struct fish_pool
-{
-    uint16 quantity;
-    uint16 maxQuantity;
-    uint16 restockRate;
-
-    fish_pool()
-    : quantity(0)
-    , maxQuantity(0)
-    , restockRate(0)
-    {
-    }
-};
-
-struct fishing_catch_pool
-{
-    std::map<uint16, fish_pool> stock;
-
-    fishing_catch_pool() = default;
-};
-
-struct fishing_area_pool
-{
-    std::map<uint8, fishing_catch_pool> catchPools;
-
-    fishing_area_pool() = default;
-};
-
 struct fishing_gear_t
 {
     uint32 head;
@@ -522,6 +494,7 @@ enum FISHMESSAGEOFFSET : uint8
     FISHMESSAGEOFFSET_LOST_TOOBIG              = 0x3C, // You lost your catch. Whatever caught the hook was too large to catch with this rod.
     FISHMESSAGEOFFSET_GIVEUP_BAITLOSS          = 0x24, // You give up and reel in your line.
     FISHMESSAGEOFFSET_GIVEUP                   = 0x25, // You give up.
+    FISHMESSAGEOFFSET_CATCH_GIL                = 0x26, // <Player> obtains <number> gil.
     FISHMESSAGEOFFSET_CATCH                    = 0x27, // <Player> caught <Fish>
     FISHMESSAGEOFFSET_CATCH_MULTI              = 0x0E, // <Player> caught X <Fish>
     FISHMESSAGEOFFSET_CATCH_INV_FULL           = 0x0A, // <Player> caught <Fish>, but cannot carry any more items. ≺Player≻ regretfully releases the <Fish>
@@ -911,10 +884,9 @@ using BigFish                 = xi::Flag<struct BigFishTag>;
 using CancelOnMobLoadFailBait = xi::Flag<struct CancelOnMobLoadFailBaitTag>;
 using Lost                    = xi::Flag<struct LostTag>;
 
-// Catch Pools
-void ReduceFishPool(xi::ZoneId zoneId, uint8 areaId, uint16 fishId);
-void RestockFishingAreas();
-void CreateFishingPools();
+auto RodFatigue(uint16 rodId, int32 fatigue) -> int32;
+auto CatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
+auto FailedCatchFatigue(uint8 fishingSkill, const fishresponse_t& hooked) -> int32;
 
 // Calculations
 auto GetMoonPhase() -> uint8;
@@ -933,6 +905,9 @@ auto CalculateLuckyTiming(CCharEntity* PChar, uint8 fishingSkill, uint8 catchSki
 auto CalculateHookChance(uint8 fishingSkill, fish_t* fish, bait_t* bait, rod_t* rod) -> uint16;
 auto CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
 auto CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count) -> uint8;
+auto CalculateLoseChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
+auto CalculateSnapChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
+auto CalculateBreakChance(uint8 catchType, uint8 fishingSkill, uint8 maxSkill, uint8 sizeType, bool legendary, uint8 ranking, rod_t* rod) -> lsbret_t;
 auto CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType, uint8 maxSkill, Legendary legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod) -> uint8;
 auto CalculateCriticalBite(uint8 fishingSkill, uint8 fishSkill, rod_t* rod) -> uint16;
 auto CalculateBigFishStats(uint16 minLength, uint16 maxLength) -> big_fish_stats_t;
@@ -979,6 +954,8 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType);
 
 // Fishing
 void InterruptFishing(CCharEntity* PChar);
+void AbandonHook(CCharEntity* PChar);
+void ReleaseFishing(CCharEntity* PChar);
 void StartFishing(CCharEntity* PChar);
 void ReelInCatch(CCharEntity* PChar);
 auto UnhookMob(CCharEntity* PChar, Lost lost) -> uint8;

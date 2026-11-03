@@ -503,6 +503,7 @@ auto OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PMobSkill, 
 auto OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
 auto OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action) -> int32;
 auto OnSteal(CBattleEntity* PChar, CBattleEntity* PTarget, CAbility* PAbility, action_t* action) -> int32;
+auto OnFishingCheck(CCharEntity* PChar, uint8 areaId) -> std::vector<uint32>;
 
 auto OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell) -> bool; // triggers when CanUseSpell is invoked on spell.cpp for PCs only
 

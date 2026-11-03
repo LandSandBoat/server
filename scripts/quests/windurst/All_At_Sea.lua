@@ -19,6 +19,27 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
+            return status ~= xi.questStatus.QUEST_COMPLETED and
+                not player:hasItem(xi.item.RIPPED_CAP)
+        end,
+
+        [xi.zone.PORT_WINDURST] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.RIPPED_CAP }
+            end,
+        },
+
+        [xi.zone.KAZHAM] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.RIPPED_CAP }
+            end,
+        },
+    },
+
+    {
+        check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.fameArea.WINDURST) >= 3
         end,

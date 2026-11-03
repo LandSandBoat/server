@@ -70,6 +70,25 @@ quest.sections =
             },
         },
     },
+
+    {
+        check = function(player, status, vars)
+            return status ~= xi.questStatus.QUEST_COMPLETED and
+                not player:hasItem(xi.item.DAMP_SCROLL)
+        end,
+
+        [xi.zone.SEA_SERPENT_GROTTO] =
+        {
+            onFishingCheck = function(player, areaId)
+                -- It only bites in fishing area 2, the pond under the bridge
+                if areaId ~= 2 then
+                    return {}
+                end
+
+                return { xi.item.DAMP_SCROLL }
+            end,
+        },
+    },
 }
 
 return quest

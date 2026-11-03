@@ -120,7 +120,7 @@ INSERT INTO `fishing_fish` VALUES (4480,'Gugru Tuna',41,16,6,13,40,120,22,1,1,25
 INSERT INTO `fishing_fish` VALUES (5127,'Gugrusaurus',140,39,6,5,155,420,33,1,1,255,255,0,0,3,1,4,1,7,0,1,350,1977,'',0,0,1,0);
 INSERT INTO `fishing_fish` VALUES (5132,'Gurnard',26,13,11,9,1,1,5,0,0,255,255,0,0,6,4,3,0,0,0,1,550,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5449,'Hamsi',9,21,11,6,1,1,10,0,0,255,255,0,1,7,1,6,0,0,0,3,1000,0,'',0,0,0,0);
-INSERT INTO `fishing_fish` VALUES (2341,'Hydrogauge',7,25,13,2,1,1,1,0,0,6,25,0,0,0,0,0,0,0,1,1,1000,0,'',0,0,0,0);
+INSERT INTO `fishing_fish` VALUES (2341,'Hydrogauge',7,25,13,2,1,1,1,0,0,6,25,0,0,0,0,0,0,0,1,1,1000,0,'',0,1,0,0);
 INSERT INTO `fishing_fish` VALUES (4470,'Icefish',49,38,11,7,1,1,14,0,0,255,255,0,0,3,1,3,0,0,0,3,900,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5453,'Istakoz',46,35,4,3,1,1,14,0,0,255,255,0,0,3,1,3,0,0,0,1,1000,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5136,'Istavrit',18,13,11,5,10,20,16,1,0,255,255,0,0,1,2,6,0,0,0,1,1000,0,'',0,0,0,0);

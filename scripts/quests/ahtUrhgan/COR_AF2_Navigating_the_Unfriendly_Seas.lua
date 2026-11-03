@@ -73,6 +73,10 @@ quest.sections =
                 end,
             },
 
+            onFishingCheck = function(player)
+                return { xi.item.HYDROGAUGE }
+            end,
+
             onEventFinish =
             {
                 [283] = function(player, csid, option, npc)
@@ -136,6 +140,34 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
+        },
+
+        [xi.zone.AL_ZAHBI] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.HYDROGAUGE }
+            end,
+        },
+
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.HYDROGAUGE }
+            end,
+        },
+
+        [xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.HYDROGAUGE }
+            end,
+        },
+
+        [xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
+        {
+            onFishingCheck = function(player)
+                return { xi.item.HYDROGAUGE }
+            end,
         },
     },
 }
