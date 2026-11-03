@@ -19,8 +19,8 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar('[ISNM]Accepted') == 1 then
         player:startEvent(163)
 
-    -- Can purchuase KI.
-    elseif player:hasKeyItem(xi.keyItem.PSC_WILDCAT_BADGE) then
+    -- Can purchase KI.
+    elseif player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) then
         player:startEvent(160, imperialStanding, 1)
 
     -- Default.
