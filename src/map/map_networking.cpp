@@ -417,8 +417,16 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         // reading data size
         uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
 
+        // The compressed bits sit between the header and the trailing size and checksum.
+        const auto compressedBytes = *buffsize - std::min<std::size_t>(*buffsize, FFXI_HEADER_SIZE + sizeof(uint32) + 16);
+        if (zlib_compressed_size(PacketDataSize) > compressedBytes)
+        {
+            *buffsize = 0;
+            return -1;
+        }
+
         // it's decompressing data and getting new size
-        PacketDataSize = zlib_decompress((int8*)(buff + FFXI_HEADER_SIZE), PacketDataSize, (int8*)PScratchBuffer.data(), kMaxBufferSize);
+        PacketDataSize = zlib_decompress((int8*)(buff + FFXI_HEADER_SIZE), PacketDataSize, (int8*)PScratchBuffer.data(), kMaxBufferSize - FFXI_HEADER_SIZE);
 
         // Not sure why zlib_decompress is defined to return a uint32 when it returns -1 in situations.
         if (static_cast<int32>(PacketDataSize) != -1)
@@ -495,8 +503,11 @@ auto MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession) -
         else
         {
             // Reuse one CBasicPacket (parseScratchPacket_) across the loop instead of re-allocating per inbound packet.
-            // We're copying in and bounding only exactly what we want, so it's safe.
-            std::memcpy(&parseScratchPacket_.ref<uint8>(0), SmallPD_ptr, PACKET_SIZE);
+            // Zero the tail so a field the client didn't send reads as empty.
+            // Retail doesn't do this, and its packets can carry stale bytes in unused fields.
+            const auto subPacketSize = static_cast<std::size_t>(SmallPD_Size) * 2;
+            std::memcpy(&parseScratchPacket_.ref<uint8>(0), SmallPD_ptr, subPacketSize);
+            std::memset(&parseScratchPacket_.ref<uint8>(subPacketSize), 0, PACKET_SIZE - subPacketSize);
             ShowTraceFmt("map::parse: Char: {} ({}): {}", PChar->getName(), PChar->id, hex16ToString(parseScratchPacket_.getType()));
             packetSystem_.dispatch(SmallPD_Type, PSession, PChar, parseScratchPacket_);
         }
