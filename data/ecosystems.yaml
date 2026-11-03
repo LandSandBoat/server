@@ -3495,6 +3495,8 @@ ecosystems:
             roam_cool:  60
             roam_rate:  40
             roam_turns:  6
+          mods:
+            attp: 10
         species:
           legendary_manticore:
             id: 97
@@ -3545,8 +3547,7 @@ ecosystems:
                   stun:        -2
                   gravity:      4
               mods:
-                attp: 10
-                hpp:  50
+                hpp: 50
       marid:
         id: 47
         attributes:
@@ -3556,15 +3557,20 @@ ecosystems:
             roam_cool:  60
             roam_rate:  40
             roam_turns:  2
+          mods:
+            eva: -10
         species:
           marid:
             id: 99
             attributes:
               element: earth
               stats:
+                str: c
                 dex: e
                 vit: a
                 agi: f
+                int: c
+                mnd: c
                 chr: d
               detects:
                 - sight
@@ -3590,8 +3596,6 @@ ecosystems:
                   blind:       -1
                   stun:        -1
                   gravity:     -1
-              mods:
-                defp: 20
       opo_opo:
         id: 48
         attributes:
@@ -3831,7 +3835,9 @@ ecosystems:
         attributes:
           element: earth
           stats:
+            str: c
             dex: d
+            vit: c
             agi: d
             int: d
             mnd: d
@@ -3843,6 +3849,8 @@ ecosystems:
             roam_cool:  60
             roam_rate:  40
             roam_turns:  6
+          mods:
+            attp: 10
         species:
           mosshorn:
             id: 496
@@ -3868,9 +3876,6 @@ ecosystems:
                   blind:        0
                   stun:        -1
                   gravity:      0
-              mods:
-                attp: 10
-                defp: 20
           ovim:
             id: 107
             attributes:
@@ -3919,9 +3924,6 @@ ecosystems:
                   blind:       -1
                   stun:        -2
                   gravity:     -1
-              mods:
-                attp: 10
-                defp: 20
       sheep:
         id: 52
         attributes:
@@ -4038,6 +4040,8 @@ ecosystems:
             roam_cool:  45
             roam_rate:  15
             roam_turns:  6
+          mods:
+            attp: 10
         species:
           legendary_tigers:
             id: 112
@@ -4125,8 +4129,6 @@ ecosystems:
                   blind:        0
                   stun:        -3
                   gravity:      0
-              mods:
-                attp: 10
       yztarg:
         id: 54
         attributes:
