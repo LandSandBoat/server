@@ -361,7 +361,7 @@ void auth_session::read_func()
 
             loginHelpers::clearLoginFailures(ipAddress);
 
-            auto& session          = loginHelpers::get_authenticated_session(ipAddress, asStringFromUntrustedSource(hash, sizeof(hash)));
+            auto& session          = loginHelpers::get_authenticated_session(ipAddress, std::string(reinterpret_cast<const char*>(hash), sizeof(hash)));
             session.accountID      = accountID;
             session.authorizedTime = timer::now();
         }

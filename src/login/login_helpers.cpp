@@ -802,7 +802,8 @@ auto createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charInf
 
 auto getHashFromPacket(const std::string& ip_str, uint8* data) -> std::string
 {
-    auto hash = asStringFromUntrustedSource(data + 12, 16);
+    // The hash is random bytes, so a zero byte doesn't end it.
+    auto hash = std::string(reinterpret_cast<const char*>(data + 12), 16);
     if (!authenticatedSessions_[ip_str].contains(hash))
     {
         return "";
