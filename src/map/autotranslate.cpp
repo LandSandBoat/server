@@ -29518,19 +29518,20 @@ constexpr auto values = std::to_array<Entry>({
 });
 
 // A plain loop, since std::ranges::adjacent_find costs too many constexpr steps on a table this size.
-static_assert(
-    []
+constexpr auto hasStrictlyAscendingKeys() -> bool
+{
+    for (auto i = std::size_t{ 1 }; i < values.size(); ++i)
     {
-        for (auto i = std::size_t{ 1 }; i < values.size(); ++i)
+        if (values[i - 1].key >= values[i].key)
         {
-            if (values[i - 1].key >= values[i].key)
-            {
-                return false;
-            }
+            return false;
         }
+    }
 
-        return true;
-    }());
+    return true;
+}
+
+static_assert(hasStrictlyAscendingKeys());
 
 } // namespace
 
