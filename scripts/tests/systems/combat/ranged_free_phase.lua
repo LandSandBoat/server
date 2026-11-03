@@ -25,8 +25,18 @@ describe('Ranged Attack Free Phase Delay', function()
         target:setBaseSpeed(0)
 
         local pos = target:getPos()
-        player:setPos(pos.x - 5, pos.y, pos.z, 0)
-        player:lookAt(target:getPos())
+        -- Roaming can leave the rabbit out of sight from one side.
+        local clearShot = false
+        for _, offset in ipairs({ { -5, 0 }, { 5, 0 }, { 0, -5 }, { 0, 5 } }) do
+            player:setPos(pos.x + offset[1], pos.y, pos.z + offset[2], 0)
+            player:lookAt(target:getPos())
+            if player:canSee(target) then
+                clearShot = true
+                break
+            end
+        end
+
+        assert(clearShot, 'No clear five-yalm shot for the ranged delay test')
 
         player:addItem(xi.item.PLATOON_GUN)
         player:addItem(xi.item.BULLET, 99)

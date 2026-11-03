@@ -24,6 +24,7 @@ describe('Ferry deck mobs', function()
     local spawnCalls
     local despawnCalls
     local deckMobs
+    local roamCooldowns
 
     before_each(function()
         now      = 1000000
@@ -32,6 +33,8 @@ describe('Ferry deck mobs', function()
         pick     = 1
         calls    = {}
         deckMobs = {}
+
+        roamCooldowns = {}
 
         stub('GetSystemTime', function()
             return now
@@ -76,6 +79,10 @@ describe('Ferry deck mobs', function()
     after_each(function()
         if player:getPet() then
             player:despawnPet()
+        end
+
+        for _, entry in ipairs(roamCooldowns) do
+            entry.mob:setMobMod(xi.mobMod.ROAM_COOL, entry.value)
         end
 
         for _, mob in ipairs(deckMobs) do
@@ -469,6 +476,9 @@ describe('Ferry deck mobs', function()
             end
         end
 
+        -- Retry failed roam paths before the boarding check times out.
+        table.insert(roamCooldowns, { mob = almighty, value = almighty:getMobMod(xi.mobMod.ROAM_COOL) })
+        almighty:setMobMod(xi.mobMod.ROAM_COOL, 1)
         local almightyMoved = false
         for _ = 1, 225 do
             xi.test.world:tick(xi.tick.ZONE)
