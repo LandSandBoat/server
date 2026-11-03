@@ -785,6 +785,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
     -- targetSpecialAttackEvasion gets transformed to a negative number since its a modifier on the target affecting the attacker's accuracy.
     local targetSpecialAttackEvasion = target:getMod(xi.mod.SPECIAL_ATTACK_EVASION) * -1
     local accuracyModifier           = 0
+    local petAccuracyBonus           = xi.mobskills.calculatePetMagicAccuracyBonus(mob)
+
     if params.accuracyModifier then
         accuracyModifier = xi.combat.physical.calculateTPfactor(tpValue, params.accuracyModifier)
     end
@@ -800,6 +802,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
         ignoreDefenseFactor = xi.combat.physical.calculateTPfactor(tpValue, params.ignoreDefense)
         hitIgnoreDefense    = true
     end
+
+    accuracyModifier = accuracyModifier + petAccuracyBonus + targetSpecialAttackEvasion
 
     ----------------------------------
     -- Params for the individual hits
@@ -860,9 +864,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, action, skillParams)
             hitChance = 1
         elseif hitNumber == 1 then
             -- First hit gets bonus accuracy. TODO: Confirm this and the amount if true.
-            hitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, 100 + accuracyModifier + targetSpecialAttackEvasion, xi.attackAnimation.RIGHT_ATTACK, false)
+            hitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, 100 + accuracyModifier, xi.attackAnimation.RIGHT_ATTACK, false)
         else
-            hitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, accuracyModifier + targetSpecialAttackEvasion, xi.attackAnimation.RIGHT_ATTACK, false)
+            hitChance = xi.combat.physicalHitRate.getPhysicalHitRate(mob, target, accuracyModifier, xi.attackAnimation.RIGHT_ATTACK, false)
         end
 
         if not hitInfo then
@@ -1149,7 +1153,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     mAttackBonus = xi.combat.physical.calculateTPfactor(tpValue, params.mATTBonus)
 
     -- Calculate bonus magic accuracy for pets
-    local petAccuracyBonus = xi.mobskills.calculatePetMagicAccuracyBonus(mob, target, params.element)
+    local petAccuracyBonus = xi.mobskills.calculatePetMagicAccuracyBonus(mob)
 
     -- Add all magic accuracy values together.
     mAccuracyBonus = mAccuracyBonus + petAccuracyBonus
@@ -1827,7 +1831,7 @@ xi.mobskills.handleShadowConsumption = function(mob, target, skill, params, shad
     return hitAbsorbed, shadowsConsumed
 end
 
-xi.mobskills.calculatePetMagicAccuracyBonus = function(mob, target, actionElement)
+xi.mobskills.calculatePetMagicAccuracyBonus = function(mob)
     if not mob:isPet() then
         return 0
     end
@@ -1858,7 +1862,7 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     local magicDamageAdjustment = 1
     local dayAndWeather         = xi.spells.damage.calculateDayAndWeather(mob, element, false)
     local magicBonusDiff        = xi.spells.damage.calculateMagicBonusDiff(mob, target, 0, 0, element, 0)
-    local petAccBonus           = xi.mobskills.calculatePetMagicAccuracyBonus(mob, target, element)
+    local petAccBonus           = xi.mobskills.calculatePetMagicAccuracyBonus(mob)
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
 
     if absorbDamage > 0 then
