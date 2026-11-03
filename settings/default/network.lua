@@ -55,6 +55,7 @@ xi.settings.network =
         GP_CLI_COMMAND_MASTERY_DISPLAY = 2000, -- Set Job Master Display
         GP_CLI_COMMAND_JUMP            = 2000, -- Jump
         GP_CLI_COMMAND_SUBMAPCHANGE    = 200,  -- Sub-area change
+        GP_CLI_COMMAND_CHAT_STD        = 200,  -- Chat, including ! commands
     },
 
     -- ===========================

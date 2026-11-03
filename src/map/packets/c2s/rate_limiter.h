@@ -28,6 +28,12 @@
 
 class CCharEntity;
 
+struct PacketRateLimitState
+{
+    timer::time_point lastHandled;
+    bool              warned{};
+};
+
 class PacketRateLimiter
 {
 public:

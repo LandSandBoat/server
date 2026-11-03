@@ -13,6 +13,7 @@ ffi.cdef [[
 ]]
 
 local unknownCommandLog = 'Function does not exist'
+local rateLimitLog      = 'Rate-limiting packet GP_CLI_COMMAND_CHAT_STD'
 
 local function countLogs(text)
     local count = 0
@@ -39,16 +40,25 @@ describe('Chat commands', function()
         player = xi.test.world:spawnPlayer()
     end)
 
-    it('logs an unknown command once per interval', function()
+    it('drops a second chat packet sent within the rate limit', function()
         sendChat(player, '!notacommand')
         sendChat(player, '!notacommand')
         local count = countLogs(unknownCommandLog)
         assert(count == 1, string.format('Expected 1 log, got %d', count))
 
-        xi.test.world:skipTime(5)
+        xi.test.world:skipTime(1)
         sendChat(player, '!notacommand')
         count = countLogs(unknownCommandLog)
         assert(count == 2, string.format('Expected 2 logs, got %d', count))
+    end)
+
+    it('warns once for a burst of dropped packets', function()
+        for _ = 1, 5 do
+            sendChat(player, 'spam')
+        end
+
+        local count = countLogs(rateLimitLog)
+        assert(count == 1, string.format('Expected 1 warning, got %d', count))
     end)
 
     it('limits each character separately', function()
