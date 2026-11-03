@@ -153,9 +153,19 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
 
     if (PChar->UContainer->IsSlotEmpty(PostWorkNo))
     {
-        const auto [recvCharid, recvAccid] = charutils::getCharIdAndAccountIdFromName(receiverName);
-        if (recvCharid && recvAccid)
+        const auto receiver = db::preparedStmt("SELECT charid, accid, charname FROM chars WHERE charname = ? LIMIT 1", receiverName);
+        if (receiver && receiver->next())
         {
+            const auto recvCharid = receiver->get<uint32>("charid");
+            const auto recvAccid  = receiver->get<uint32>("accid");
+            if (recvCharid == 0 || recvAccid == 0)
+            {
+                return;
+            }
+
+            // The name as saved, not as typed.
+            const auto recvName = receiver->get<std::string>("charname");
+
             if (PItem->hasFlag(xi::ItemFlag::NoDelivery))
             {
                 if (!PItem->hasFlag(xi::ItemFlag::CanSendAccount))
@@ -177,7 +187,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 return;
             }
 
-            PUBoxItem->setReceiver(receiverName);
+            PUBoxItem->setReceiver(recvName);
             PUBoxItem->setSender(PChar->getName());
             PUBoxItem->setQuantity(ItemStacks);
             PUBoxItem->setSlotID(PItem->getSlotID());
@@ -196,7 +206,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 ItemStacks,
                 PItem->m_extra,
                 recvCharid,
-                receiverName);
+                recvName);
 
             if (!rset || !rset->rowsAffected())
             {
