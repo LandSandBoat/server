@@ -116,10 +116,10 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
     if (auditLevel <= permission && auditLevel > 0)
     {
         scheduler.postToWorkerThread(
-            [name = PChar->name, cmd = cmdName, cmdlinestr = autotranslate::replaceBytes(commandline)]() mutable
+            [name = PChar->name, cmd = cmdName, commandline]()
             {
                 const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
-                if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmd), db::escapeString(cmdlinestr)))
+                if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmd), db::escapeString(autotranslate::replaceBytes(commandline))))
                 {
                     ShowError("cmdhandler::call: Failed to log GM command.");
                 }
