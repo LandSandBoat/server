@@ -6257,7 +6257,7 @@ auto SendItemToDeliveryBox(const std::string& playerName, uint16 itemId, uint32 
                 itemId,
                 quantity,
                 playerID,
-                senderText);
+                senderText.substr(0, 15));
 
             if (!rset)
             {
