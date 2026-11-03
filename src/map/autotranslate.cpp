@@ -139,9 +139,7 @@ print(len(rows), "rows")
 
 #include <algorithm>
 #include <array>
-#include <functional>
 #include <iterator>
-#include <string_view>
 
 #include "common/cbasetypes.h"
 
@@ -150,8 +148,8 @@ namespace
 
 struct Entry
 {
-    uint32           key;
-    std::string_view value;
+    uint32      key;
+    const char* value; // A std::string_view would count every name's length at compile time.
 };
 
 // NOTE: This is the complete table from client version 30261006_0
@@ -29519,7 +29517,20 @@ constexpr auto values = std::to_array<Entry>({
     { 0x16020DFF, "Ruspix's plate" },
 });
 
-static_assert(std::ranges::adjacent_find(values, std::ranges::greater_equal{}, &Entry::key) == values.end());
+// A plain loop, since std::ranges::adjacent_find costs too many constexpr steps on a table this size.
+static_assert(
+    []
+    {
+        for (auto i = std::size_t{ 1 }; i < values.size(); ++i)
+        {
+            if (values[i - 1].key >= values[i].key)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }());
 
 } // namespace
 
