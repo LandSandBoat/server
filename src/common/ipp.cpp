@@ -26,9 +26,9 @@
 // Converts a network-order IP to a host-order string.
 auto ip2str(uint32 ip) -> std::string
 {
-    char address[INET_ADDRSTRLEN];
+    char address[INET_ADDRSTRLEN]{};
     inet_ntop(AF_INET, &ip, address, INET_ADDRSTRLEN);
-    return asStringFromUntrustedSource(address);
+    return asStringFromUntrustedSource(address, sizeof(address));
 }
 
 // Converts a host-order string to a network-order IP.

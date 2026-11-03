@@ -125,20 +125,6 @@ void renderJsonLine(fmt::memory_buffer& buf, const LogRecord& rec);
 // clang-format off
 
 template <typename T>
-auto asStringFromUntrustedSource(const T* ptr) -> std::string
-{
-    if (!ptr)
-    {
-        return "";
-    }
-
-    static constexpr size_t MAX_STRING_LENGTH = 1024;
-
-    const auto str = reinterpret_cast<const char*>(ptr);
-    return std::string(str, strnlen(str, MAX_STRING_LENGTH));
-}
-
-template <typename T>
 auto asStringFromUntrustedSource(const T* ptr, size_t max_size) -> std::string
 {
     if (!ptr)
