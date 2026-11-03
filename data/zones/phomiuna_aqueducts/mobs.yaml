@@ -1080,6 +1080,8 @@ templates:
         true_detection: true
       spawn:
         respawn: 840
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon
@@ -1115,6 +1117,8 @@ templates:
         true_detection: true
       spawn:
         respawn: 720
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon
