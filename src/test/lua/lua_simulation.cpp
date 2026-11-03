@@ -26,6 +26,7 @@
 #include "common/vana_time.h"
 #include "enums/tick_type.h"
 #include "helpers/lua_client_entity_pair_packets.h"
+#include "in_memory_sink.h"
 #include "lua_client_entity_pair.h"
 #include "lua_test_entity.h"
 #include "map/ai/ai_container.h"
@@ -156,6 +157,23 @@ void CLuaSimulation::skipTime(uint32 seconds) const
 auto CLuaSimulation::getSteadyTime() const -> double
 {
     return std::chrono::duration<double>(timer::now().time_since_epoch()).count();
+}
+
+/************************************************************************
+ *  Function: getLogs()
+ *  Purpose : Returns every log line written since the test started.
+ *  Example : local logs = xi.test.world:getLogs()
+ ************************************************************************/
+
+auto CLuaSimulation::getLogs() const -> sol::table
+{
+    auto result = lua.create_table();
+    for (const auto& line : sink_->logs())
+    {
+        result.add(line);
+    }
+
+    return result;
 }
 
 /************************************************************************
@@ -758,6 +776,7 @@ void CLuaSimulation::Register()
     SOL_REGISTER("tickEntity", CLuaSimulation::tickEntity);
     SOL_REGISTER("skipTime", CLuaSimulation::skipTime);
     SOL_REGISTER("getSteadyTime", CLuaSimulation::getSteadyTime);
+    SOL_REGISTER("getLogs", CLuaSimulation::getLogs);
     SOL_REGISTER("setVanaTime", CLuaSimulation::setVanaTime);
     SOL_REGISTER("setVanaDay", CLuaSimulation::setVanaDay);
     SOL_REGISTER("skipToNextVanaDay", CLuaSimulation::skipToNextVanaDay);
