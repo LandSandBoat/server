@@ -50,6 +50,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon
@@ -90,6 +92,8 @@ templates:
         type: [scripted]
       stats:
         hp: 11900
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: common
@@ -122,6 +126,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon
@@ -158,6 +164,8 @@ templates:
         links:      true
       spawn:
         respawn: 960
+      mob_mods:
+        base_damage_multiplier: 166
     loot:
       drops:
         - chance: uncommon

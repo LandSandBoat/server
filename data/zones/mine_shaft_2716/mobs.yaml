@@ -113,6 +113,8 @@ templates:
         type: [scripted]
       stats:
         hp: 9000
+      mob_mods:
+        base_damage_multiplier: 166
 
   Bugboy:
     id:            569
@@ -139,6 +141,8 @@ templates:
         type: [scripted]
       stats:
         hp: 19500
+      mob_mods:
+        base_damage_multiplier: 166
 
   Chekochuk:
     id:            707
