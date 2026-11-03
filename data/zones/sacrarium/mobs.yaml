@@ -258,6 +258,8 @@ templates:
         type: [scripted]
       stats:
         hp: 6500
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
@@ -971,6 +973,8 @@ templates:
         respawn: 600
       stats:
         hp: 6000
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: always
