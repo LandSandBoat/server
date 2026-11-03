@@ -528,6 +528,8 @@ templates:
         type: [scripted]
       stats:
         hp: 2600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Earth_Pot:
     id:            1163
@@ -579,6 +581,8 @@ templates:
         type: [scripted]
       stats:
         hp: 2600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Fire_Pot:
     id:            1343
@@ -1767,6 +1771,8 @@ templates:
         type: [scripted]
       stats:
         hp: 2600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Water_Pot:
     id:            4312
@@ -1818,6 +1824,8 @@ templates:
         type: [scripted]
       stats:
         hp: 2600
+      mob_mods:
+        base_damage_multiplier: 150
 
   Worgbut_of_Clan_Death:
     id:            4374

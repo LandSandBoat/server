@@ -730,6 +730,8 @@ templates:
         hitbox:         17
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Temenos_Hume_Echo:
     id:      1216

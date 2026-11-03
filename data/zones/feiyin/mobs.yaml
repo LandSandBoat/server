@@ -334,7 +334,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        sight_range: 4
+        base_damage_multiplier: 150
+        sight_range:              4
       spawn:
         respawn: 300
     loot:
@@ -527,7 +528,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        sight_range: 4
+        base_damage_multiplier: 150
+        sight_range:              4
       spawn:
         respawn: 300
       stats:
@@ -805,7 +807,8 @@ templates:
       behaviors:
         aggressive: true
       mob_mods:
-        sight_range: 4
+        base_damage_multiplier: 150
+        sight_range:              4
       spawn:
         respawn: 300
     loot:
