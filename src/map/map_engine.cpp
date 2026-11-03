@@ -22,6 +22,7 @@
 #include "map_engine.h"
 
 #include "common/debug.h"
+#include "common/huffman.h"
 #include "common/ipp.h"
 #include "common/logging.h"
 #include "common/settings.h"
@@ -29,7 +30,6 @@
 #include "common/utils.h"
 #include "common/vana_time.h"
 #include "common/version.h"
-#include "common/zlib.h"
 
 #include "ability.h"
 #include "daily_system.h"
@@ -150,8 +150,8 @@ auto MapEngine::init() -> Task<void>
                      mapIPP.getIP(),
                      mapIPP.getPort());
 
-    ShowInfo("do_init: zlib is reading");
-    zlib_init();
+    ShowInfo("do_init: huffman is reading");
+    huffman_init();
 
     ShowInfo("do_init: starting ZMQ thread");
     ipcClient_ = std::make_unique<IPCClient>(networking(), application_.zmqService());

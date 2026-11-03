@@ -43,7 +43,6 @@ add_compile_definitions(
 )
 
 # Settings for our first-party code only. Never link this from ext/.
-# src/common is deliberately not an include dir: its zlib.h would shadow the real <zlib.h>.
 add_library(project_options INTERFACE)
 target_include_directories(project_options INTERFACE
     ${CMAKE_SOURCE_DIR}

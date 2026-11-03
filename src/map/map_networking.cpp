@@ -21,9 +21,9 @@
 
 #include "map_networking.h"
 
+#include <common/huffman.h>
 #include <common/md52.h>
 #include <common/tracy.h>
-#include <common/zlib.h>
 
 #include "entities/char_entity.h"
 
@@ -154,7 +154,7 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
             auto maybePacketSize = compressPacket(PBuff.data(), size);
             if (!maybePacketSize)
             {
-                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, size);
+                ShowWarningFmt("Huffman encode error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, size);
                 size = 0;
             }
             else
@@ -419,16 +419,16 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
 
         // The compressed bits sit between the header and the trailing size and checksum.
         const auto compressedBytes = *buffsize - std::min<std::size_t>(*buffsize, FFXI_HEADER_SIZE + sizeof(uint32) + 16);
-        if (zlib_compressed_size(PacketDataSize) > compressedBytes)
+        if (huffman_byte_size(PacketDataSize) > compressedBytes)
         {
             *buffsize = 0;
             return -1;
         }
 
         // it's decompressing data and getting new size
-        PacketDataSize = zlib_decompress((int8*)(buff + FFXI_HEADER_SIZE), PacketDataSize, (int8*)PScratchBuffer.data(), kMaxBufferSize - FFXI_HEADER_SIZE);
+        PacketDataSize = huffman_decode((int8*)(buff + FFXI_HEADER_SIZE), PacketDataSize, (int8*)PScratchBuffer.data(), kMaxBufferSize - FFXI_HEADER_SIZE);
 
-        // Not sure why zlib_decompress is defined to return a uint32 when it returns -1 in situations.
+        // Not sure why huffman_decode is defined to return a uint32 when it returns -1 in situations.
         if (static_cast<int32>(PacketDataSize) != -1)
         {
             // it's making result buff
@@ -665,7 +665,7 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
 
             if (!maybePacketSize)
             {
-                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, *buffsize);
+                ShowWarningFmt("Huffman encode error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, *buffsize);
                 continue;
             }
             PacketSize = *maybePacketSize;
@@ -691,7 +691,7 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsSentPerTick, static_cast<uint32>(packets));
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
-    // Every extra attempt re-copies the whole outgoing list and re-runs zlib, so this is the
+    // Every extra attempt re-copies the whole outgoing list and re-runs the Huffman encoder, so this is the
     // number to watch when send_parse spikes.
     TracyReportGraphNumber("send_parse Attempts", static_cast<int64>(attempts));
 
@@ -771,7 +771,7 @@ auto MapNetworking::compressPacket(uint8* buff, size_t buffsize) -> Maybe<size_t
 
     // Compress the data without regard to the header
     // The returned size is 8 times the real data
-    int32 result = zlib_compress((int8*)(buff + FFXI_HEADER_SIZE), (uint32)(buffsize - FFXI_HEADER_SIZE), (int8*)PScratchBuffer.data(), kMaxBufferSize);
+    int32 result = huffman_encode((int8*)(buff + FFXI_HEADER_SIZE), (uint32)(buffsize - FFXI_HEADER_SIZE), (int8*)PScratchBuffer.data(), kMaxBufferSize);
 
     // handle compression error
     if (result == -1)
@@ -781,9 +781,9 @@ auto MapNetworking::compressPacket(uint8* buff, size_t buffsize) -> Maybe<size_t
 
     auto packetSize = static_cast<size_t>(result);
 
-    ref<uint32>(PScratchBuffer.data(), zlib_compressed_size(packetSize)) = static_cast<uint32>(packetSize);
+    ref<uint32>(PScratchBuffer.data(), huffman_byte_size(packetSize)) = static_cast<uint32>(packetSize);
 
-    packetSize = zlib_compressed_size(packetSize) + 4;
+    packetSize = huffman_byte_size(packetSize) + 4;
 
     return packetSize;
 }

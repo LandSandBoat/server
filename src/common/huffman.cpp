@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "common/zlib.h"
+#include "common/huffman.h"
 
 #include "common/logging.h"
 #include "common/utils.h"
@@ -34,7 +34,7 @@
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
 
-struct zlib_jump
+struct huffman_jump
 {
     const void* ptr;
 };
@@ -42,13 +42,13 @@ struct zlib_jump
 namespace
 {
 
-struct zlib
+struct huffman_tables
 {
-    std::vector<uint32>           enc;
-    std::vector<struct zlib_jump> jump;
+    std::vector<uint32>              enc;
+    std::vector<struct huffman_jump> jump;
 };
 
-zlib zlib;
+huffman_tables tables;
 
 void swap32_if_be(uint32* v, const size_t memb)
 {
@@ -83,7 +83,7 @@ auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<uint32>>
     return vec;
 }
 
-void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::vector<uint32>& dec)
+void populate_jump_table(std::vector<struct huffman_jump>& jump, const std::vector<uint32>& dec)
 {
     jump.resize(dec.size());
 
@@ -115,7 +115,7 @@ void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::vector<
 
 } // namespace
 
-// Fast 8-bit decode table for zlib_decompress2: g_dtab[next8bits] -> (symbol, code length) when the
+// Fast 8-bit decode table for huffman_decode: g_dtab[next8bits] -> (symbol, code length) when the
 // code is <= 8 bits, else length 0 (fall back to a bit-by-bit tree walk for the longer code).
 namespace
 {
@@ -131,7 +131,7 @@ bool        g_dtab_built = false;
 
 void build_decode_table()
 {
-    const auto* root = static_cast<const zlib_jump*>(zlib.jump[0].ptr);
+    const auto* root = static_cast<const huffman_jump*>(tables.jump[0].ptr);
     for (uint32 b = 0; b < 256; ++b)
     {
         const auto* jmp = root;
@@ -140,7 +140,7 @@ void build_decode_table()
         // walk the tree using the 8 bits, LSB-first (== JMPBIT order)
         for (uint32 bit = 0; bit < 8; ++bit)
         {
-            jmp = static_cast<const zlib_jump*>(jmp[(b >> bit) & 1].ptr);
+            jmp = static_cast<const huffman_jump*>(jmp[(b >> bit) & 1].ptr);
             if (!jmp[0].ptr && !jmp[1].ptr) // leaf
             {
                 g_dtab[b] = { static_cast<uint8>(reinterpret_cast<std::uintptr_t>(jmp[3].ptr)),
@@ -155,24 +155,24 @@ void build_decode_table()
 
 } // namespace
 
-auto zlib_init() -> int32
+auto huffman_init() -> int32
 {
     auto enc = read_to_vector("res/compress.dat");
     if (!enc)
     {
-        ShowCritical("zlib: %s", enc.error());
+        ShowCritical("huffman: %s", enc.error());
         return -1;
     }
-    zlib.enc = std::move(*enc);
+    tables.enc = std::move(*enc);
 
     auto dec = read_to_vector("res/decompress.dat");
     if (!dec)
     {
-        ShowCritical("zlib: %s", dec.error());
+        ShowCritical("huffman: %s", dec.error());
         return -1;
     }
 
-    populate_jump_table(zlib.jump, *dec);
+    populate_jump_table(tables.jump, *dec);
     build_decode_table();
     return 0;
 }
@@ -182,10 +182,10 @@ auto zlib_init() -> int32
 // read-modify-write for every output bit), which was ~11x slower; the bitstream is identical for
 // every complete byte (the trailing partial byte's unused high bits are zero, which the decoder
 // ignores).
-auto zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
+auto huffman_encode(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
 {
     assert(in && out);
-    assert(!zlib.enc.empty());
+    assert(!tables.enc.empty());
 
     const uint32 max_sz  = (out_sz - 1) * 8; // output may be up to 8x the input
     uint8*       o       = reinterpret_cast<uint8*>(out + 1);
@@ -196,22 +196,22 @@ auto zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 o
 
     for (uint32 i = 0; i < in_sz; ++i)
     {
-        const uint32 elem = zlib.enc[static_cast<int8>(in[i]) + 0x180];
+        const uint32 elem = tables.enc[static_cast<int8>(in[i]) + 0x180];
         if (elem + read >= max_sz)
         {
             if (in_sz + 1 >= out_sz)
             {
-                ShowWarning("zlib_compress: ran out of space, outputting garbage(?) (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
+                ShowWarning("huffman_encode: ran out of space, outputting garbage(?) (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
                 std::memset(out, 0, (out_sz / 4) + (in_sz & 3));
                 std::memset(out + 1, in_sz, in_sz / 4);
                 std::memset(out + 1 + in_sz / 4, (in_sz + 1) * 8, in_sz & 3);
                 return in_sz;
             }
-            ShowWarning("zlib_compress: ran out of space (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
+            ShowWarning("huffman_encode: ran out of space (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
             return -1;
         }
 
-        uint32 v = zlib.enc[static_cast<int8>(in[i]) + 0x80];
+        uint32 v = tables.enc[static_cast<int8>(in[i]) + 0x80];
         swap32_if_be(&v, 1);
         const uint32 code = (elem >= 32) ? v : (v & ((1U << elem) - 1)); // low elem bits, LSB-first
 
@@ -237,13 +237,13 @@ auto zlib_compress(const int8* in, const uint32 in_sz, int8* out, const uint32 o
     return read + 8;
 }
 
-// Table-driven equivalent of original zlib_decompress. Instead of one tree step per input bit,
+// Table-driven equivalent of original huffman_decode. Instead of one tree step per input bit,
 // peek the next 8 bits and resolve any code of <= 8 bits in a single lookup (g_dtab); codes
 // longer than 8 bits fall back to the original bit-by-bit tree walk.
-auto zlib_decompress(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
+auto huffman_decode(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
 {
     assert(in && out);
-    assert(!zlib.jump.empty());
+    assert(!tables.jump.empty());
 
     if (!g_dtab_built)
     {
@@ -252,12 +252,12 @@ auto zlib_decompress(const int8* in, const uint32 in_sz, int8* out, const uint32
 
     if (in[0] != 1)
     {
-        ShowWarning("zlib_decompress2: invalid compressed data");
+        ShowWarning("huffman_decode: invalid compressed data");
         return -1;
     }
 
     const auto*  data    = reinterpret_cast<const uint8*>(in + 1);
-    const auto*  root    = static_cast<const zlib_jump*>(zlib.jump[0].ptr);
+    const auto*  root    = static_cast<const huffman_jump*>(tables.jump[0].ptr);
     const uint32 byteLen = (in_sz + 7) / 8; // meaningful payload bytes
     uint32       w       = 0;
     uint32       bitpos  = 0;
@@ -282,7 +282,7 @@ auto zlib_decompress(const int8* in, const uint32 in_sz, int8* out, const uint32
             const auto* jmp = root;
             for (;;)
             {
-                jmp = static_cast<const zlib_jump*>(jmp[(data[bitpos >> 3] >> (bitpos & 7)) & 1].ptr);
+                jmp = static_cast<const huffman_jump*>(jmp[(data[bitpos >> 3] >> (bitpos & 7)) & 1].ptr);
                 ++bitpos;
                 if (!jmp[0].ptr && !jmp[1].ptr)
                 {
