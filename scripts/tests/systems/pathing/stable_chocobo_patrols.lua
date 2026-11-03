@@ -14,8 +14,12 @@ describe('Stable chocobo patrols', function()
         local player = xi.test.world:spawnPlayer({ zone = xi.zone.SOUTHERN_SAN_DORIA })
         stub('math.randomInt', 1)
 
-        -- Wherever it starts, it walks to its first point and then keeps picking it.
-        local npc    = player.entities:get(17719338)
+        -- Face away from heading 0 so the callback has to turn the chocobo.
+        local npc = player.entities:get(17719338)
+        npc:clearPath()
+        npc:setPos(11.348, 2.201, -87.631, 128)
+        npc:setLocalVar('point', 1)
+        npc:pathThrough({ { rotation = 128, wait = 1000 } }, xi.path.flag.PATROL)
         local turned = false
         for _ = 1, 60 do
             xi.test.world:skipTime(1)
