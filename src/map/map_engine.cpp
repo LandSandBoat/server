@@ -151,7 +151,10 @@ auto MapEngine::init() -> Task<void>
                      mapIPP.getPort());
 
     ShowInfo("do_init: huffman is reading");
-    huffman_init();
+    if (huffman_init() != 0)
+    {
+        std::exit(-1);
+    }
 
     ShowInfo("do_init: starting ZMQ thread");
     ipcClient_ = std::make_unique<IPCClient>(networking(), application_.zmqService());

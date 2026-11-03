@@ -22,12 +22,27 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 
-static inline auto huffman_byte_size(const size_t sz) -> size_t
+#include <span>
+
+// The client's static Huffman coding for game packet payloads. An encoded payload is a flag byte
+// (1 = Huffman codes follow, 0 = raw bytes follow) and its size is counted in bits, flag included.
+
+[[nodiscard]] constexpr auto huffman_byte_size(const size_t bits) noexcept -> size_t
 {
-    return (sz + 7) / 8;
+    return (bits + 7) / 8;
 }
 
-auto huffman_init() -> int32;
-auto huffman_encode(const int8* in, uint32 in_sz, int8* out, uint32 out_sz) -> int32;
-auto huffman_decode(const int8* in, uint32 in_sz, int8* out, uint32 out_sz) -> int32;
+// Returns -1 when the tables are missing or truncated.
+[[nodiscard]] auto huffman_init() -> int32;
+
+// Encoded size in bytes of `in`, without the flag byte. The client's send queue estimates each packet the same way.
+[[nodiscard]] auto huffman_encoded_size(std::span<const uint8> in) -> uint32;
+
+// Equivalent to the client's logic. Returns the bit count including the flag byte, or nothing when even a raw copy doesn't fit.
+[[nodiscard]] auto huffman_encode(std::span<const uint8> in, std::span<uint8> out) -> Maybe<uint32>;
+
+// Equivalent to the client's logic. `in` starts at the flag byte. Returns the decoded byte count, or nothing on bad input
+// or a full `out`.
+[[nodiscard]] auto huffman_decode(std::span<const uint8> in, uint32 bits, std::span<uint8> out) -> Maybe<uint32>;

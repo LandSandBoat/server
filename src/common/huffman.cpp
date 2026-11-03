@@ -115,11 +115,24 @@ void populate_jump_table(std::vector<struct huffman_jump>& jump, const std::vect
 
 } // namespace
 
-// Fast 8-bit decode table for huffman_decode: g_dtab[next8bits] -> (symbol, code length) when the
-// code is <= 8 bits, else length 0 (fall back to a bit-by-bit tree walk for the longer code).
 namespace
 {
 
+// The table holds 256 codes then 256 lengths, indexed by the signed byte plus 128.
+constexpr auto kEncodeTableSize = 512U;
+
+auto code_value(const uint8 byte) -> uint32
+{
+    return tables.enc[static_cast<int8>(byte) + 0x80];
+}
+
+auto code_length(const uint8 byte) -> uint32
+{
+    return tables.enc[static_cast<int8>(byte) + 0x180];
+}
+
+// Fast 8-bit decode table for huffman_decode: g_dtab[next8bits] -> (symbol, code length) when the
+// code is <= 8 bits, else length 0 (fall back to a bit-by-bit tree walk for the longer code).
 struct DecodeEntry
 {
     uint8 symbol;
@@ -127,7 +140,6 @@ struct DecodeEntry
 };
 
 DecodeEntry g_dtab[256];
-bool        g_dtab_built = false;
 
 void build_decode_table()
 {
@@ -149,8 +161,6 @@ void build_decode_table()
             }
         }
     }
-
-    g_dtab_built = true;
 }
 
 } // namespace
@@ -163,6 +173,12 @@ auto huffman_init() -> int32
         ShowCritical("huffman: %s", enc.error());
         return -1;
     }
+    if (enc->size() != kEncodeTableSize)
+    {
+        ShowCritical("huffman: res/compress.dat holds %zu words, expected %u", enc->size(), kEncodeTableSize);
+        return -1;
+    }
+
     tables.enc = std::move(*enc);
 
     auto dec = read_to_vector("res/decompress.dat");
@@ -172,52 +188,68 @@ auto huffman_init() -> int32
         return -1;
     }
 
+    if (dec->empty())
+    {
+        ShowCritical("huffman: res/decompress.dat is empty");
+        return -1;
+    }
+
     populate_jump_table(tables.jump, *dec);
     build_decode_table();
     return 0;
 }
 
-// Append each input byte's variable-length code to the output bitstream, accumulating in a 64-bit
-// register and flushing whole bytes. This replaced the previous per-bit pack loop (a div/mod/mask/
-// read-modify-write for every output bit), which was ~11x slower; the bitstream is identical for
-// every complete byte (the trailing partial byte's unused high bits are zero, which the decoder
-// ignores).
-auto huffman_encode(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
+auto huffman_encoded_size(std::span<const uint8> in) -> uint32
 {
-    assert(in && out);
     assert(!tables.enc.empty());
 
-    const uint32 max_sz  = (out_sz - 1) * 8; // output may be up to 8x the input
-    uint8*       o       = reinterpret_cast<uint8*>(out + 1);
-    uint64       acc     = 0;
-    uint32       accBits = 0;
-    uint32       outPos  = 0; // bytes flushed to o
-    uint32       read    = 0; // total bits emitted == outPos * 8 + accBits
-
-    for (uint32 i = 0; i < in_sz; ++i)
+    uint32 bits = 0;
+    for (const auto byte : in)
     {
-        const uint32 elem = tables.enc[static_cast<int8>(in[i]) + 0x180];
-        if (elem + read >= max_sz)
+        bits += code_length(byte);
+    }
+
+    return static_cast<uint32>(huffman_byte_size(bits));
+}
+
+// Codes go into the bitstream LSB-first, accumulated in a 64-bit register and flushed a byte at a time.
+auto huffman_encode(std::span<const uint8> in, std::span<uint8> out) -> Maybe<uint32>
+{
+    assert(!tables.enc.empty());
+
+    if (out.empty())
+    {
+        return std::nullopt;
+    }
+
+    const auto maxBits = static_cast<uint32>(out.size() - 1) * 8;
+    auto*      o       = out.data() + 1;
+    uint64     acc     = 0;
+    uint32     accBits = 0;
+    uint32     outPos  = 0;
+    uint32     bits    = 0;
+
+    for (const auto byte : in)
+    {
+        const auto length = code_length(byte);
+        if (bits + length >= maxBits)
         {
-            if (in_sz + 1 >= out_sz)
+            // The codes don't fit, so send the payload raw behind a 0 flag
+            if (out.size() < in.size() + 1)
             {
-                ShowWarning("huffman_encode: ran out of space, outputting garbage(?) (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
-                std::memset(out, 0, (out_sz / 4) + (in_sz & 3));
-                std::memset(out + 1, in_sz, in_sz / 4);
-                std::memset(out + 1 + in_sz / 4, (in_sz + 1) * 8, in_sz & 3);
-                return in_sz;
+                return std::nullopt;
             }
-            ShowWarning("huffman_encode: ran out of space (%u : %u : %u : %u)", read, elem, max_sz, in[i]);
-            return -1;
+
+            out[0] = 0;
+            std::memcpy(out.data() + 1, in.data(), in.size());
+            return static_cast<uint32>((in.size() + 1) * 8);
         }
 
-        uint32 v = tables.enc[static_cast<int8>(in[i]) + 0x80];
-        swap32_if_be(&v, 1);
-        const uint32 code = (elem >= 32) ? v : (v & ((1U << elem) - 1)); // low elem bits, LSB-first
+        const auto code = uint64{ code_value(byte) } & ((uint64{ 1 } << length) - 1);
 
-        acc |= static_cast<uint64>(code) << accBits;
-        accBits += elem;
-        read += elem;
+        acc |= code << accBits;
+        accBits += length;
+        bits += length;
 
         while (accBits >= 8)
         {
@@ -229,69 +261,101 @@ auto huffman_encode(const int8* in, const uint32 in_sz, int8* out, const uint32 
 
     if (accBits > 0)
     {
-        // trailing partial byte (unused high bits = 0)
         o[outPos] = static_cast<uint8>(acc & 0xFF);
     }
 
     out[0] = 1;
-    return read + 8;
+    return bits + 8;
 }
 
-// Table-driven equivalent of original huffman_decode. Instead of one tree step per input bit,
-// peek the next 8 bits and resolve any code of <= 8 bits in a single lookup (g_dtab); codes
-// longer than 8 bits fall back to the original bit-by-bit tree walk.
-auto huffman_decode(const int8* in, const uint32 in_sz, int8* out, const uint32 out_sz) -> int32
+// Resolves codes of up to 8 bits with one g_dtab lookup and walks the tree for longer ones.
+auto huffman_decode(std::span<const uint8> in, const uint32 bits, std::span<uint8> out) -> Maybe<uint32>
 {
-    assert(in && out);
     assert(!tables.jump.empty());
 
-    if (!g_dtab_built)
+    if (bits < 8 || bits > in.size() * 8)
     {
-        build_decode_table();
+        return std::nullopt;
     }
+
+    const auto payloadBits = bits - 8;
+    const auto payload     = in.subspan(1, huffman_byte_size(payloadBits));
 
     if (in[0] != 1)
     {
-        ShowWarning("huffman_decode: invalid compressed data");
-        return -1;
+        const auto size = payloadBits / 8;
+        if (size > out.size())
+        {
+            return std::nullopt;
+        }
+
+        std::memcpy(out.data(), payload.data(), size);
+        return size;
     }
 
-    const auto*  data    = reinterpret_cast<const uint8*>(in + 1);
-    const auto*  root    = static_cast<const huffman_jump*>(tables.jump[0].ptr);
-    const uint32 byteLen = (in_sz + 7) / 8; // meaningful payload bytes
-    uint32       w       = 0;
-    uint32       bitpos  = 0;
+    const auto* root   = static_cast<const huffman_jump*>(tables.jump[0].ptr);
+    uint32      w      = 0;
+    uint32      bitpos = 0;
 
-    while (bitpos < in_sz && w < out_sz)
+    while (bitpos < payloadBits)
     {
-        const uint32 byteoff = bitpos >> 3;
-        const uint32 bitoff  = bitpos & 7;
+        const auto byteoff = bitpos >> 3;
+        const auto bitoff  = bitpos & 7;
 
-        // Peek 8 bits; the next byte is only read when it's within the payload (else treat as 0 -
-        // those high bits are never part of the resolved code, which has its own true length).
-        const uint32      hi   = (byteoff + 1 < byteLen) ? static_cast<uint32>(data[byteoff + 1]) : 0U;
-        const uint32      peek = (static_cast<uint32>(data[byteoff]) >> bitoff) | (hi << (8 - bitoff));
-        const DecodeEntry e    = g_dtab[peek & 0xFF];
-        if (e.length != 0)
+        // Bits past the payload are read as 0. They never belong to a code that fits in it.
+        const auto hi = [&]
         {
-            out[w++] = static_cast<int8>(e.symbol);
-            bitpos += e.length;
+            if (byteoff + 1 < payload.size())
+            {
+                return static_cast<uint32>(payload[byteoff + 1]);
+            }
+
+            return 0U;
+        }();
+
+        const auto peek  = (static_cast<uint32>(payload[byteoff]) >> bitoff) | (hi << (8 - bitoff));
+        const auto entry = g_dtab[peek & 0xFF];
+
+        uint8 symbol = 0;
+        if (entry.length != 0)
+        {
+            // A code cut short by the end of the payload decodes to nothing
+            if (bitpos + entry.length > payloadBits)
+            {
+                break;
+            }
+
+            symbol = entry.symbol;
+            bitpos += entry.length;
         }
-        else // code longer than 8 bits: walk the tree
+        else
         {
             const auto* jmp = root;
             for (;;)
             {
-                jmp = static_cast<const huffman_jump*>(jmp[(data[bitpos >> 3] >> (bitpos & 7)) & 1].ptr);
+                if (bitpos >= payloadBits)
+                {
+                    return w;
+                }
+
+                jmp = static_cast<const huffman_jump*>(jmp[(payload[bitpos >> 3] >> (bitpos & 7)) & 1].ptr);
                 ++bitpos;
                 if (!jmp[0].ptr && !jmp[1].ptr)
                 {
-                    out[w++] = static_cast<int8>(reinterpret_cast<std::uintptr_t>(jmp[3].ptr));
+                    symbol = static_cast<uint8>(reinterpret_cast<std::uintptr_t>(jmp[3].ptr));
                     break;
                 }
             }
         }
+
+        // A decode that fills its output fails
+        if (w + 1 >= out.size())
+        {
+            return std::nullopt;
+        }
+
+        out[w++] = symbol;
     }
 
-    return static_cast<int32>(w);
+    return w;
 }
