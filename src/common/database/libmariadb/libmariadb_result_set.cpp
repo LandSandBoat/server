@@ -21,21 +21,58 @@
 
 #include <common/database/libmariadb/libmariadb_result_set.h>
 
+#include <common/logging.h>
+
 #include <cstdlib>
+#include <set>
+#include <string>
 #include <type_traits>
 #include <utility>
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
-: ResultSet(query, ResultSetType::Select)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
+: ResultSet(std::string(query), ResultSetType::Select)
 , schema_(std::move(schema))
 , rows_(std::move(rows))
 {
 }
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query)
-: ResultSet(query, ResultSetType::Update, rowsAffected)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query)
+: ResultSet(std::string(query), ResultSetType::Update, rowsAffected)
 {
 }
+
+namespace
+{
+
+// A mismatch warns once per query and column, not once per row.
+auto firstWarning(const std::string& query, const std::string& key) -> bool
+{
+    thread_local auto warned = std::set<std::pair<std::string, std::string>>{};
+    return warned.emplace(query, key).second;
+}
+
+// A read too narrow for the stored value wraps, but warns: the code and the schema disagree.
+template <typename T, typename Wide>
+auto narrowed(const db::LibMariaDBResultSet::Cell& cell, const Wide value, const std::string& key, const std::string& query) -> T
+{
+    std::visit(
+        [&](const auto& stored)
+        {
+            using U = std::remove_cvref_t<decltype(stored)>;
+            if constexpr (std::is_integral_v<U>)
+            {
+                if (!std::in_range<T>(stored) && firstWarning(query, key))
+                {
+                    ShowWarningFmt("ResultSet: {} holds {}, which doesn't fit the type it was read as (Query: {})", key, stored, query);
+                }
+            }
+        },
+        cell);
+
+    return static_cast<T>(value);
+}
+
+} // namespace
 
 auto db::LibMariaDBResultSet::rawNext() -> bool
 {
@@ -80,32 +117,38 @@ auto db::LibMariaDBResultSet::rawGetUInt64(const std::string& key) const -> uint
 
 auto db::LibMariaDBResultSet::rawGetInt32(const std::string& key) const -> int32
 {
-    return static_cast<int32>(toInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<int32>(cell, toInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetUInt32(const std::string& key) const -> uint32
 {
-    return static_cast<uint32>(toUInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<uint32>(cell, toUInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetInt16(const std::string& key) const -> int16
 {
-    return static_cast<int16>(toInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<int16>(cell, toInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetUInt16(const std::string& key) const -> uint16
 {
-    return static_cast<uint16>(toUInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<uint16>(cell, toUInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetInt8(const std::string& key) const -> int8
 {
-    return static_cast<int8>(toInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<int8>(cell, toInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetUInt8(const std::string& key) const -> uint8
 {
-    return static_cast<uint8>(toUInt64(cellAt(key)));
+    const auto& cell = cellAt(key);
+    return narrowed<uint8>(cell, toUInt64(cell), key, query());
 }
 
 auto db::LibMariaDBResultSet::rawGetBool(const std::string& key) const -> bool
@@ -146,6 +189,11 @@ auto db::LibMariaDBResultSet::cellAt(const std::string& key) const -> const Cell
     const auto it = schema_->index.find(key);
     if (it == schema_->index.end())
     {
+        if (firstWarning(query(), key))
+        {
+            ShowWarningFmt("ResultSet: no column named {} (Query: {})", key, query());
+        }
+
         return nullCell;
     }
 

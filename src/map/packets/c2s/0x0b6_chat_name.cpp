@@ -45,7 +45,7 @@ const auto auditTell = [](Scheduler& scheduler, CCharEntity* PChar, const std::s
         scheduler.postToWorkerThread(
             [name, zoneId, recipientName, rawMessage]()
             {
-                const auto query = "INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())";
+                constexpr auto query = db::Query("INSERT INTO audit_chat (speaker, type, zoneid, recipient, message, datetime) VALUES(?, 'TELL', ?, ?, ?, current_timestamp())");
                 if (!db::preparedStmt(query, name, zoneId, recipientName, rawMessage))
                 {
                     ShowError("Failed to insert TELL audit_chat record for player '%s'", name);
@@ -75,7 +75,7 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
     // Depending on alignment, the message may not be NULL-terminated.
     // Start with reported size and skip the first 21 bytes (4x header + 2x unknown + 15x name).
     const auto messageLength = std::min<std::size_t>((header.size * 4) - 0x15, sizeof(this->Mes));
-    const auto recipientName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto recipientName = asStringFromUntrustedSource(this->sName, sizeof(this->sName));
     const auto rawMessage    = asStringFromUntrustedSource(this->Mes, messageLength);
 
     if (recipientName == "_CUSTOM_MENU" &&

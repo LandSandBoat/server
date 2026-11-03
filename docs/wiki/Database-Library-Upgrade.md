@@ -4,7 +4,7 @@
 >- Updated the existing `mariadb-connector-c` library.
 >- Introduce the `mariadb-connector-cpp` library, which wraps the `mariadb-connector-cpp` with better usage patterns.
 >- Add an API on top of `mariadb-connector-cpp` that can be used alongside our current SQL usage.
->- All instances of `sql` global object are replaced with `_sql` because of clashing symbols in the new library. The goal is to eventually replace these with their new `db` namespace equivalents.
+>- All instances of `sql` global object are replaced with `_sql` because of clashing symbols in the new library. These have since been replaced with the `db` namespace.
 >- The new API provides:
 >    - Thread-safe usage.
 >    - Protection from clobbering your results by interleaving queries.
@@ -13,6 +13,8 @@
 >    - Equivalent-or-better performance.
 
 ## Introduction
+
+This page records the original change. The `db::` layer has since moved back to `mariadb-connector-c`. The Usage section describes it as it is now.
 
 ## The PR
 
@@ -30,79 +32,96 @@ If you have many columns of data to pull from the results of your query, you've 
 
 The new `mariadb-connector-cpp` library fixes both of these issues and provides other goodies for developers. Your query results are stored away into a `Result Set` object, which is safe from clobbering if you want to do other things while you iterate your results. You can now ask your `Result Set` for results by name, rather than index - making it a lot more robust.
 
-It also introduces [Prepared Statements](https://en.wikipedia.org/wiki/Prepared_statement); which boosts efficieny of calling queries by not having to recompile each query from a string on every call, and adds an additional layer of protection for converted queries from [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks.
+It also introduces [Prepared Statements](https://en.wikipedia.org/wiki/Prepared_statement); which boosts efficiency of calling queries by not having to recompile each query from a string on every call, and adds an additional layer of protection for converted queries from [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks.
 
-## What's Next?
+## Usage
 
-Currently, it isn't possible to use `db::encodeToBlob` inline with `db::preparedStmt`. This is first on the list to try and fix. After this, keeping a pool of connections behind the scene which can be "checked out" by callers and then returned to the pool when they're finished doing their work. Maybe combining the new `db::` namespace with `async`.  
-
-## Usage and Query Migration Guide
-
-The new API looks like this:
-
-- note that `ret` (Return Code) and `rset` (Result Set) are very different things!
-
-### `db::query`
-
-```cpp
-// Send in a simple string query and don't check the results
-auto query = fmt::format("UPDATE char_stats SET zoning = 0 WHERE charid = {}", PChar->id);
-db::query(query);
-
-// Send in a simple string query and check the results
-if (!db::query(...))
-{
-    ShowError("Failed to update daily tally points");
-}
-else
-{
-    ShowDebug("Distributed daily tally points");
-}
-
-// Send in a simple string query and extract out a single result
-auto rset = db::query(...);
-if (rset && rset->rowsCount() && rset->next() // If there is a result. Equivalent to `if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)`
-{
-    const auto itemid = rset->getInt("itemid"); // Extract data by column name from the `rset`, not the database connection object
-    ...
-}
-
-// Send in a simple string query and extract out multiple rows of results
-auto rset = db::query(...);
-if (rset && rset->rowsCount()) // If there are results: Equivalent to `if (ret != SQL_ERROR && _sql->NumRows() != 0)`
-{
-    while (rset->next()) // Iterate over your results. Equivalent to `while (_sql->NextRow() == SQL_SUCCESS)`
-    {
-        const auto itemid = rset->getInt("itemid"); // Extract data by column name from the `rset`, not the database connection object
-        ...
-    }
-}
-```
+`rset` is a result set. It holds the rows, so other queries can run while you read it.
 
 ### `db::preparedStmt`
 
-There is a lot of plumbing going on behind the scenes to shield you from having to manage your own prepared statement objects.
-They are lazily constructed and cached on your behalf.
+Every query is a prepared statement. Statements are prepared on first use and cached per thread.
+
+The query must be a string literal or a `constexpr db::Query`. It's checked when it compiles: it must start with a known keyword such as `SELECT` or `UPDATE`, it can't contain `;` or `{}`, and it must have one `?` per argument. Values are always bound to a `?`, never formatted into the text.
 
 ```cpp
-const char* query = "SELECT set_blue_spells FROM "
-                    "chars WHERE charid = ?;";  // <-- Note the dynamic parameter slot here
+// Run a query and ignore the result
+db::preparedStmt("UPDATE char_stats SET zoning = 0 WHERE charid = ?", PChar->id);
 
-// The prepared statement will be created, cached, and bound for you behind the scenes
-auto rset = db::preparedStmt(query, PChar->id);
-if (rset && rset->rowsCount() && rset->next()) // Inspect and iterate as normal
+// Check that it ran
+if (!db::preparedStmt("UPDATE char_points SET daily_tally = ? WHERE charid = ?", tally, PChar->id))
 {
-    db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
+    ShowError("Failed to update daily tally points");
 }
+
+// Read one row
+const auto rset = db::preparedStmt("SELECT itemid FROM char_inventory WHERE charid = ? LIMIT 1", PChar->id);
+if (rset && rset->next())
+{
+    const auto itemId = rset->get<uint16>("itemid");
+}
+
+// Read every row
+const auto rset = db::preparedStmt("SELECT itemid FROM char_inventory WHERE charid = ?", PChar->id);
+while (rset && rset->next())
+{
+    const auto itemId = rset->get<uint16>("itemid");
+}
+
+// Name a query with constexpr, and start a long one on its own line
+constexpr auto query = db::Query(
+    "SELECT set_blue_spells FROM chars "
+    "WHERE charid = ? LIMIT 1");
+const auto rset = db::preparedStmt(query, PChar->id);
 ```
 
-### `db::encodeToBlob`
+A query picked at runtime, such as one of several from a table, goes through `db::selected(query)`. Its argument count is then checked when it runs, and a mismatch logs an error and returns `nullptr`.
 
-To write structs into the database, they must be encoded with `db::encodeToBlob` and baked into a query string with `fmt::format`, for execution with `db::query`. This replaces the `char buffer[T * 2 + 1]; std::memcpy(...)` pattern seen in many places in the codebase. Eventually it'll be possible to use `db::encodeToBlob` inline with `db::preparedStmt` and `db::query` will be extended to be variadic and forward arguments interally to `fmt::format`.
+### Binding values
+
+- Integers, bools, enums, floats and strings bind as you'd expect. 64-bit integers bind as 64-bit.
+- An empty `Maybe` or `nullptr` binds `NULL`.
+- A trivially copyable struct or array binds as a blob: `db::preparedStmt("UPDATE chars SET set_blue_spells = ? WHERE charid = ?", PChar->m_SetBlueSpells, PChar->id)`.
+- Read a blob back with `rset->get<std::array<uint8, 20>>("set_blue_spells")` or `db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells)`.
+
+### Reading values
+
+`rset->get<T>("column")` reads a column by name. It logs a warning when an integer value doesn't fit in `T`, or when the query doesn't return that column, because the code and the schema disagree. `rset->getOrDefault<T>("column", fallback)` returns the fallback for `NULL`.
+
+### `db::transaction`
 
 ```cpp
-    auto set_blue_spells = db::encodeToBlob(PChar->m_SetBlueSpells);
-    auto query           = fmt::format("UPDATE chars SET set_blue_spells = '{}' WHERE charid = {} LIMIT 1",
-                                        set_blue_spells, PChar->id);
-    db::query(query);
+const auto committed = db::transaction(
+    [&]
+    {
+        if (!db::preparedStmt("UPDATE ...", ...))
+        {
+            throw std::runtime_error("Failed to update ...");
+        }
+
+        if (!db::preparedStmt("INSERT ...", ...))
+        {
+            throw std::runtime_error("Failed to insert ...");
+        }
+    });
 ```
+
+A failed statement returns `nullptr` and doesn't throw, so check each one. It rolls back if the function throws anything, and returns true only if the `COMMIT` succeeds. A transaction started inside another one joins it, so a throw rolls back the outer transaction too.
+
+### `db::executeBulk`
+
+Sends many rows through one statement in one round trip. The projection turns each row into a tuple of numbers, bools or enums, one per `?`. It throws if the statement fails, so call it inside `db::transaction`.
+
+```cpp
+db::executeBulk(
+    "INSERT INTO char_effects (charid, effectid, power) VALUES (?, ?, ?)",
+    effects,
+    [&](const auto& effect)
+    {
+        return std::tuple{ PChar->id, effect.id, effect.power };
+    });
+```
+
+### Strict mode
+
+Every connection adds `STRICT_TRANS_TABLES` to the session's `sql_mode`. A value that is out of range or too long for its column makes the statement fail. It isn't clamped or truncated.

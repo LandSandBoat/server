@@ -53,7 +53,7 @@ const auto auditTrade = [](CCharEntity* PChar, const uint32 npcId, const std::st
          receiver_name = npcName,
          date          = earth_time::timestamp()]()
         {
-            const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            constexpr auto query = db::Query("INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)");
             if (!db::preparedStmt(query, itemId, quantity, sender, sender_name, receiver, receiver_name, date))
             {
                 ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, date);

@@ -7,7 +7,7 @@ CREATE TABLE `char_recast` (
   `charid` int(10) unsigned NOT NULL,
   `id` smallint(5) NOT NULL DEFAULT '0',
   `time` int(10) NOT NULL DEFAULT '0',
-  `recast` smallint(5) NOT NULL DEFAULT '0',
+  `recast` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

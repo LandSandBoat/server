@@ -62,7 +62,7 @@ inline auto hex32ToString(std::uint32_t hex) -> std::string
 #define TracyZoneScopedC(c)       ZoneScopedC(c)
 #define TracyZoneScopedNC(n, c)   ZoneScopedNC(n, c)
 #define TracyZoneScopedS(depth)   ZoneScopedS(depth)
-#define TracyZoneString(str)      ZoneText(str.c_str(), str.size())
+#define TracyZoneString(str)      ZoneText(str.data(), str.size())
 #define TracyZoneCString(cstr)    ZoneText(cstr, std::strlen(cstr))
 #define TracyMessageStr(str)      TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str)   tracy::SetThreadName(str)

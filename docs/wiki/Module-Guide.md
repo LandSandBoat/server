@@ -181,10 +181,10 @@ class TestModule : public CPPModule
             return;
         }
 
-        auto ret = sql->Query("SELECT value FROM server_variables WHERE name = '[DYNA]Token' LIMIT 1;");
-        if (ret != SQL_ERROR && sql->NumRows() && sql->NextRow())
+        const auto rset = db::preparedStmt("SELECT value FROM server_variables WHERE name = '[DYNA]Token' LIMIT 1");
+        if (rset && rset->next())
         {
-            auto res = sql->GetUIntData(0);
+            const auto res = rset->get<uint32>("value");
             if (res == HOURGLASS_ID)
             {
                 CItem* PItem = itemutils::GetItem(HOURGLASS_ID);

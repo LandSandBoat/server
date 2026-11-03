@@ -128,7 +128,7 @@ auto CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldR
     const auto name            = rset->get<std::string>("name");
     const auto recordholder    = rset->get<std::string>("fastestName");
     const auto recordtime      = std::chrono::seconds(rset->get<uint32>("fastestTime"));
-    const auto recordPartySize = rset->get<size_t>("fastestPartySize");
+    const auto recordPartySize = rset->get<uint8>("fastestPartySize");
 
     battlefield->SetName(name);
     battlefield->SetRecord(recordholder, recordtime, recordPartySize);

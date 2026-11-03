@@ -41,7 +41,7 @@ public:
 
     DISALLOW_COPY_AND_MOVE(LibMariaDBConnection);
 
-    auto prepare(const std::string& query) -> std::unique_ptr<PreparedStatement> override;
+    auto prepare(std::string_view query) -> std::unique_ptr<PreparedStatement> override;
     auto schema() -> std::string override;
     auto version() -> std::string override;
     auto driverVersion() -> std::string override;

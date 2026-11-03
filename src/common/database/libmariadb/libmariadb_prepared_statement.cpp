@@ -59,9 +59,13 @@ constexpr auto fieldTypeFor() -> enum_field_types
     {
         return MYSQL_TYPE_SHORT;
     }
-    else
+    else if constexpr (sizeof(T) == 4)
     {
         return MYSQL_TYPE_LONG;
+    }
+    else
+    {
+        return MYSQL_TYPE_LONGLONG;
     }
 }
 
@@ -115,7 +119,11 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
         [&](const auto& v)
         {
             using U = std::remove_cvref_t<decltype(v)>;
-            if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
+            if constexpr (std::is_same_v<U, std::monostate>)
+            {
+                b.buffer_type = MYSQL_TYPE_NULL;
+            }
+            else if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
             {
                 auto& buffer = paramBuffers_.emplace_back(v->data.get(), v->data.get() + v->size);
                 // Guarantee a non-null data() pointer: libmariadb binds a null buffer as SQL NULL,
@@ -156,6 +164,10 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                 else if constexpr (std::is_same_v<U, int32> || std::is_same_v<U, uint32>)
                 {
                     b.buffer_type = MYSQL_TYPE_LONG;
+                }
+                else if constexpr (std::is_same_v<U, int64> || std::is_same_v<U, uint64>)
+                {
+                    b.buffer_type = MYSQL_TYPE_LONGLONG;
                 }
                 else if constexpr (std::is_same_v<U, float>)
                 {
@@ -382,7 +394,7 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
     return rows;
 }
 
-auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeQuery(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {
@@ -406,7 +418,7 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
     }
 }
 
-auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeBulkUpdate(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
 
@@ -494,7 +506,7 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query
     return std::make_unique<LibMariaDBResultSet>(static_cast<std::size_t>(mysql_stmt_affected_rows(stmt_)), query);
 }
 
-auto db::LibMariaDBPreparedStatement::executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeUpdate(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {

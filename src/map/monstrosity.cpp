@@ -839,7 +839,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::SaveMonstrosityData(const uint32 charId, const MonstrosityData_t& data)
 {
-    constexpr auto query =
+    constexpr auto query = db::Query(
         "INSERT INTO char_monstrosity SET "
         "charid = ?, "
         "current_monstrosity_id = ?, "
@@ -876,13 +876,7 @@ void monstrosity::SaveMonstrosityData(const uint32 charId, const MonstrosityData
         "entry_rot = VALUES(entry_rot), "
         "entry_zone_id = VALUES(entry_zone_id), "
         "entry_mjob = VALUES(entry_mjob), "
-        "entry_sjob = VALUES(entry_sjob)";
-
-    // The blob binding takes mutable arrays.
-    auto equipped  = data.EquippedInstincts;
-    auto levels    = data.levels;
-    auto instincts = data.instincts;
-    auto variants  = data.variants;
+        "entry_sjob = VALUES(entry_sjob)");
 
     db::preparedStmt(
         query,
@@ -892,10 +886,10 @@ void monstrosity::SaveMonstrosityData(const uint32 charId, const MonstrosityData
         data.NamePrefix1,
         data.NamePrefix2,
         data.CurrentExp,
-        equipped,
-        levels,
-        instincts,
-        variants,
+        data.EquippedInstincts,
+        data.levels,
+        data.instincts,
+        data.variants,
         static_cast<uint8>(data.Belligerency),
         data.EntryPos.x,
         data.EntryPos.y,

@@ -35,7 +35,6 @@
 #include <string>
 #include <type_traits>
 
-// @note Everything in database-land is 1-indexed, not 0-indexed.
 namespace db
 {
 
@@ -71,8 +70,7 @@ public:
 
     auto isNull(const std::string& key) const -> bool;
 
-    // Get the raw, untruncated bytes of a blob column.
-    // Unlike get<std::string>, this preserves embedded nulls and the full length.
+    // Get the raw bytes of a blob column, zero bytes included.
     auto getBlobBytes(const std::string& key) const -> std::string;
 
     // Get the value of the associated key.
@@ -83,11 +81,11 @@ public:
     template <typename T>
     auto get(uint32 index) const -> T;
 
-    // Get the value of the associated key, or the default value if it is null/not-populated.
+    // Get the value of the associated key, or the default value if it is null. A missing column warns.
     template <typename T>
     auto getOrDefault(const std::string& key, T defaultValue) const -> T;
 
-    // Get the value of the 0-indexed column, or the default value if it is null/not-populated.
+    // Get the value of the 0-indexed column, or the default value if it is null. A missing column warns.
     template <typename T>
     auto getOrDefault(uint32 index, T defaultValue) const -> T;
 
@@ -164,17 +162,17 @@ auto ResultSet::get(const std::string& key) const -> T
         {
             value = static_cast<UnderlyingT>(rawGetInt64(key));
         }
-        else if constexpr (std::is_same_v<UnderlyingT, uint64>)
+        else if constexpr (std::is_same_v<UnderlyingT, uint64> || std::is_same_v<UnderlyingT, std::size_t>)
         {
+            // size_t is a distinct type from uint64 on macOS.
             value = static_cast<UnderlyingT>(rawGetUInt64(key));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int32>)
         {
             value = static_cast<UnderlyingT>(rawGetInt32(key));
         }
-        else if constexpr (std::is_same_v<UnderlyingT, uint32> || std::is_same_v<UnderlyingT, size_t>)
+        else if constexpr (std::is_same_v<UnderlyingT, uint32>)
         {
-            // NOTE: Preserves the historical behaviour of reading size_t as a 32-bit unsigned value.
             value = static_cast<UnderlyingT>(rawGetUInt32(key));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int16>)
@@ -303,8 +301,6 @@ auto extractFromBlob(const WrapperPtrT& rset, const std::string& blobKey, T& des
     // This will introduce difficult to track down crashes.
     if (!rset->isNull(blobKey))
     {
-        // getBlobBytes preserves the full length (including embedded nulls), unlike get<std::string>,
-        // which would truncate the blob result.
         const auto blobStr = rset->getBlobBytes(blobKey);
 
         // Login server creates new chars with null blobs. Map server then initializes.

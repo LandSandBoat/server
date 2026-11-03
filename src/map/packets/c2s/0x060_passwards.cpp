@@ -36,7 +36,7 @@ auto GP_CLI_COMMAND_PASSWARDS::validate(MapSession* PSession, const CCharEntity*
 void GP_CLI_COMMAND_PASSWARDS::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // !cs 199 in zone 245
-    const auto updateString = asStringFromUntrustedSource(this->String);
+    const auto updateString = asStringFromUntrustedSource(this->String, sizeof(this->String));
     luautils::OnEventUpdate(PChar, updateString);
 
     PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::EventRecvPending);

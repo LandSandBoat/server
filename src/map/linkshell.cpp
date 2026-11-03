@@ -491,8 +491,13 @@ auto DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell) -> bool
 
 auto IsValidLinkshellName(const std::string& name) -> bool
 {
+    if (name.empty())
+    {
+        return false;
+    }
+
     const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
-    return !rset || rset->rowsCount() == 0;
+    return rset && rset->rowsCount() == 0;
 }
 
 auto RegisterNewLinkshell(const std::string& name, uint16 color) -> uint32

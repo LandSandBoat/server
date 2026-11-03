@@ -46,7 +46,7 @@ db::LibMariaDBConnection::~LibMariaDBConnection()
     }
 }
 
-auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_ptr<PreparedStatement>
+auto db::LibMariaDBConnection::prepare(std::string_view query) -> std::unique_ptr<PreparedStatement>
 {
     MYSQL_STMT* stmt = mysql_stmt_init(connection_);
     if (stmt == nullptr)
@@ -54,7 +54,7 @@ auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_
         throw detail::libmariadb::Error(mysql_errno(connection_), mysql_error(connection_));
     }
 
-    if (mysql_stmt_prepare(stmt, query.c_str(), static_cast<unsigned long>(query.size())) != 0)
+    if (mysql_stmt_prepare(stmt, query.data(), static_cast<unsigned long>(query.size())) != 0)
     {
         const auto        errnum  = mysql_stmt_errno(stmt);
         const std::string message = mysql_stmt_error(stmt);
@@ -117,6 +117,9 @@ auto db::LibMariaDBConnection::connect() -> std::unique_ptr<Connection>
     const auto host   = settings::get<std::string>("network.SQL_HOST");
     const auto port   = settings::get<uint16>("network.SQL_PORT");
     const auto schema = settings::get<std::string>("network.SQL_DATABASE");
+
+    // An out-of-range write fails instead of clamping, whatever the host's own sql_mode.
+    mysql_options(connection, MYSQL_INIT_COMMAND, "SET SESSION sql_mode = CONCAT_WS(',', @@SESSION.sql_mode, 'STRICT_TRANS_TABLES')");
 
     if (mysql_real_connect(connection, host.c_str(), login.c_str(), passwd.c_str(), schema.c_str(), port, nullptr, 0) == nullptr)
     {

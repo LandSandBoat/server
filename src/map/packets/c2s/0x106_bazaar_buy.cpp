@@ -160,7 +160,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
                  price         = PriceWithTax,
                  date          = earth_time::timestamp()]
                 {
-                    const auto query = "INSERT INTO audit_bazaar(itemid, quantity, seller, seller_name, purchaser, purchaser_name, price, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    constexpr auto query = db::Query("INSERT INTO audit_bazaar(itemid, quantity, seller, seller_name, purchaser, purchaser_name, price, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                     if (!db::preparedStmt(query, itemID, quantity, sellerID, sellerName, purchaserID, purchaserName, price, date))
                     {
                         ShowErrorFmt("Failed to log bazaar purchase (ItemID: {}, Quantity: {}, Seller: {}, Purchaser: {}, Price: {})", itemID, quantity, sellerName, purchaserName, price);

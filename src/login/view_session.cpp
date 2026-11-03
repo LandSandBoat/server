@@ -408,7 +408,7 @@ void view_session::read_func()
         {
             std::string client_ver_data = asStringFromUntrustedSource(buffer_.data() + 0x74, 6); // Full length is 10 but we drop last 4. This contains "E" in the english client. Perhaps this can be used as a hint for language?
             client_ver_data             = client_ver_data + "xx_x";                              // And then we replace those last 4
-            DebugSockets(fmt::format("Version: {} from {}", client_ver_data, ipAddress));
+            DebugSockets(fmt::format("Version: {:?} from {}", client_ver_data, ipAddress));
 
             std::string expected_version(settings::get<std::string>("login.CLIENT_VER"), 0, 6); // Same deal here!
             expected_version     = expected_version + "xx_x";
@@ -417,7 +417,7 @@ void view_session::read_func()
 
             if (versionMismatch)
             {
-                ShowError(fmt::format("view_session: Account {} has incorrect client version: got {}, expected {}", session.accountID, client_ver_data, expected_version));
+                ShowError(fmt::format("view_session: Account {} has incorrect client version: got {:?}, expected {}", session.accountID, client_ver_data, expected_version));
 
                 switch (settings::get<uint8>("login.VER_LOCK"))
                 {

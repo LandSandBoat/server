@@ -21,8 +21,6 @@
 
 #include <common/database/caching_database.h>
 
-#include <common/database/query_validation.h>
-
 #include <common/logging.h>
 #include <common/settings.h>
 #include <common/timer.h>
@@ -53,11 +51,11 @@ std::once_flag           statementLimitRead;
 std::atomic<std::size_t> maxCachedStatements{ 2048U };
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
-auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
+auto makeQueryTimer(std::string_view query)
 {
     const auto start = timer::now();
-    return xi::finally<Fn<void()>>(
-        [query, start]() -> void
+    return xi::finally(
+        [query, start]
         {
             if (!timersEnabled || !settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
             {
@@ -121,37 +119,25 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
 }
 
 // Find-or-prepare the cached statement for this query on the given connection.
-auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, const std::string& rawQuery) -> PreparedStatement&
+auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, std::string_view rawQuery) -> PreparedStatement&
 {
     auto it = connState.statements.find(rawQuery);
     if (it == connState.statements.end())
     {
         if (connState.statements.size() >= maxCachedStatements)
         {
-            ShowWarningFmt("Prepared statement cache full, clearing it. A query is likely being built from runtime values: {}", rawQuery);
+            ShowWarningFmt("Prepared statement cache full, clearing it: {}", rawQuery);
             connState.statements.clear();
         }
 
-        it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
+        it = connState.statements.emplace(std::string(rawQuery), connState.connection->prepare(rawQuery)).first;
     }
 
     return *it->second;
 }
 
-auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::runWithRetry(std::string_view rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
 {
-    if (detail::validateQueryLeadingKeyword(rawQuery) == ResultSetType::Invalid)
-    {
-        ShowErrorFmt("Invalid query: {}", rawQuery);
-        return nullptr;
-    }
-
-    if (!detail::validateQueryContent(rawQuery))
-    {
-        ShowErrorFmt("Invalid query content: {}", rawQuery);
-        return nullptr;
-    }
-
     auto& state = getState();
 
     const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
@@ -187,17 +173,19 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
         }
     }
 
-    ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
+    ShowCriticalFmt("Query Failed after {} retries: {}", queryRetryCount, rawQuery);
     std::this_thread::sleep_for(1s);
     std::terminate();
 }
 
-auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::execute(const Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
+    const auto rawQuery = query.view();
+
     TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
 
-    const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
+    const auto queryType = query.type();
 
     const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
     {
@@ -225,8 +213,10 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
     return runWithRetry(rawQuery, operation);
 }
 
-auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::executeBulk(const Query query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
+    const auto rawQuery = query.view();
+
     TracyZoneScoped;
     TracyZoneString(rawQuery);
 
@@ -245,6 +235,11 @@ auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::ve
 void db::CachingDatabase::setInTransaction(bool value)
 {
     getState().inTransaction = value;
+}
+
+auto db::CachingDatabase::isInTransaction() -> bool
+{
+    return getState().inTransaction;
 }
 
 void db::CachingDatabase::clearStatementCache()

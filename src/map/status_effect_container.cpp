@@ -1556,9 +1556,9 @@ void CStatusEffectContainer::LoadStatusEffects()
             std::make_unique<CStatusEffect>(effectID,
                                             rset->get<uint16>("icon"),
                                             rset->get<uint16>("power"),
-                                            std::chrono::seconds(rset->get<uint16>("tick")),
+                                            std::chrono::seconds(rset->get<uint32>("tick")),
                                             duration,
-                                            rset->get<uint16>("subid"),
+                                            rset->get<uint32>("subid"),
                                             rset->get<uint16>("subpower"),
                                             0, // SubIcon (not persisted in char_effects)
                                             rset->get<uint16>("tier"),

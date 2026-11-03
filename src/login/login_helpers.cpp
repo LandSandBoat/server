@@ -611,7 +611,7 @@ auto generateFeatureBitmask(const bool& needsOTP) -> uint16
 
 auto saveCharacter(uint32 accid, uint32 charid, char_mini* createchar) -> int32
 {
-    const auto charName = asStringFromUntrustedSource(createchar->m_name);
+    const auto charName = asStringFromUntrustedSource(createchar->m_name, sizeof(createchar->m_name));
 
     if (!db::preparedStmt("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(?, ?, ?, ?, ?)", charid, accid, charName, createchar->m_zone, createchar->m_nation))
     {
@@ -695,7 +695,7 @@ auto createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charInf
 
     session.requestedNewCharacterName.copy(reinterpret_cast<char*>(createchar.m_name), sizeof(createchar.m_name) - 1);
 
-    const auto charName = asStringFromUntrustedSource(createchar.m_name);
+    const auto charName = asStringFromUntrustedSource(createchar.m_name, sizeof(createchar.m_name));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
     createchar.m_look.size = ref<uint8>(buf, 57);
@@ -802,7 +802,8 @@ auto createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charInf
 
 auto getHashFromPacket(const std::string& ip_str, uint8* data) -> std::string
 {
-    auto hash = asStringFromUntrustedSource(data + 12, 16);
+    // The hash is random bytes, so a zero byte doesn't end it.
+    auto hash = std::string(reinterpret_cast<const char*>(data + 12), 16);
     if (!authenticatedSessions_[ip_str].contains(hash))
     {
         return "";

@@ -30,6 +30,7 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/database/database.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/database/database.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/prepared_statement.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/database/query.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/query_validation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/result_set.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/database/result_set.h

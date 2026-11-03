@@ -45,13 +45,13 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
     uint32_t       linkshellId    = 0;
     const uint16_t linkshellColor = (data.a << 12) | (data.b << 8) | (data.g << 4) | data.r;
 
-    char       DecodedName[DecodeStringLength] = {};
-    const auto encodedRawName                  = asStringFromUntrustedSource(data.sComLinkName, sizeof(data.sComLinkName));
+    char DecodedName[DecodeStringLength] = {};
+    // A packed name can hold a zero byte mid-name, so read the whole field.
+    const auto encodedRawName = std::string(reinterpret_cast<const char*>(data.sComLinkName), sizeof(data.sComLinkName));
 
     DecodeStringLinkshell(encodedRawName, DecodedName);
 
-    const auto safeName = db::escapeString(DecodedName);
-    linkshellId         = linkshell::RegisterNewLinkshell(safeName, linkshellColor);
+    linkshellId = linkshell::RegisterNewLinkshell(DecodedName, linkshellColor);
 
     if (linkshellId != 0)
     {
@@ -73,7 +73,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
         PItemLinkshell->SetLSColor(linkshellColor);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory SET signature = ?, extra = ?, itemId = 513 WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                           safeName,
+                                           DecodedName,
                                            PItemLinkshell->m_extra,
                                            PChar->id,
                                            data.Category,

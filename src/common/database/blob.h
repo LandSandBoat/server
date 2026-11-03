@@ -22,37 +22,22 @@
 #pragma once
 
 #include <cstddef>
-#include <istream>
 #include <memory>
-#include <string>
 #include <type_traits>
 
 namespace db
 {
 
-// A wrapper to ensure the underlying data, the blobstream, and the istream are all alive
-// and valid as long as they need to be.
+// The bytes of a trivially copyable value, copied so they outlive the value they came from.
 struct BlobWrapper
 {
     std::unique_ptr<char[]> data;
     std::size_t             size;
 
-    // https://stackoverflow.com/a/1449527
-    class blobstream : public std::streambuf
-    {
-    public:
-        blobstream(char* buffer, std::size_t size);
-    };
-
-    blobstream   blobStream;
-    std::istream istream;
-
     template <typename T>
-    static auto create(T& source) -> std::shared_ptr<BlobWrapper>;
+    static auto create(const T& source) -> std::shared_ptr<BlobWrapper>;
 
-    BlobWrapper(char* data, std::size_t size);
-
-    auto toString() const -> std::string;
+    BlobWrapper(const char* source, std::size_t size);
 };
 
 //
@@ -60,10 +45,10 @@ struct BlobWrapper
 //
 
 template <typename T>
-auto BlobWrapper::create(T& source) -> std::shared_ptr<BlobWrapper>
+auto BlobWrapper::create(const T& source) -> std::shared_ptr<BlobWrapper>
 {
     static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
-    return std::make_shared<BlobWrapper>(reinterpret_cast<char*>(&source), sizeof(T));
+    return std::make_shared<BlobWrapper>(reinterpret_cast<const char*>(&source), sizeof(T));
 }
 
 } // namespace db
