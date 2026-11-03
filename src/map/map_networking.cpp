@@ -21,9 +21,9 @@
 
 #include "map_networking.h"
 
+#include <common/huffman.h>
 #include <common/md52.h>
 #include <common/tracy.h>
-#include <common/zlib.h>
 
 #include "entities/char_entity.h"
 
@@ -154,7 +154,7 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
             auto maybePacketSize = compressPacket(PBuff.data(), size);
             if (!maybePacketSize)
             {
-                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, size);
+                ShowWarningFmt("Huffman encode failed for charid '{}', payload size '{}'", PSession->charID, size);
                 size = 0;
             }
             else
@@ -414,30 +414,26 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
             PSession->hasDecryptedPacket = true;
         }
 
-        // reading data size
-        uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
-
-        // The compressed bits sit between the header and the trailing size and checksum.
-        const auto compressedBytes = *buffsize - std::min<std::size_t>(*buffsize, FFXI_HEADER_SIZE + sizeof(uint32) + 16);
-        if (zlib_compressed_size(PacketDataSize) > compressedBytes)
+        // The payload is followed by its size in bits, then the MD5
+        if (*buffsize < FFXI_HEADER_SIZE + sizeof(uint32) + 16)
         {
             *buffsize = 0;
             return -1;
         }
 
-        // it's decompressing data and getting new size
-        PacketDataSize = zlib_decompress((int8*)(buff + FFXI_HEADER_SIZE), PacketDataSize, (int8*)PScratchBuffer.data(), kMaxBufferSize - FFXI_HEADER_SIZE);
+        const auto encodedBits = ref<uint32>(buff, *buffsize - sizeof(uint32) - 16);
+        const auto encoded     = std::span<const uint8>(buff + FFXI_HEADER_SIZE, *buffsize - FFXI_HEADER_SIZE - sizeof(uint32) - 16);
 
-        // Not sure why zlib_decompress is defined to return a uint32 when it returns -1 in situations.
-        if (static_cast<int32>(PacketDataSize) != -1)
+        // Bounded so the decoded payload still fits behind the header in buff
+        const auto decodedSize = huffman_decode(encoded, encodedBits, std::span(PScratchBuffer).first(kMaxBufferSize - FFXI_HEADER_SIZE));
+        if (!decodedSize)
         {
-            // it's making result buff
-            // don't need std::memcpy header
-            std::memcpy(buff + FFXI_HEADER_SIZE, PScratchBuffer.data(), PacketDataSize);
-            *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
-
-            return decryptCount;
+            *buffsize = 0;
+            return -1;
         }
+
+        std::memcpy(buff + FFXI_HEADER_SIZE, PScratchBuffer.data(), *decodedSize);
+        *buffsize = FFXI_HEADER_SIZE + *decodedSize;
 
         return decryptCount;
     }
@@ -577,128 +573,107 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
     auto* PChar = PSession->PChar.get();
     TracyZoneString(PChar->name);
 
-    std::unique_ptr<CBasicPacket> PSmallPacket = nullptr;
-
-    size_t PacketSize               = static_cast<size_t>(UINT32_MAX);
-    size_t PacketCount              = std::clamp<size_t>(PChar->getPacketCount(), 0, kMaxPacketPerCompression);
-    uint8  packets                  = 0;
-    bool   incrementKeyAfterEncrypt = false;
-
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsToSendPerTick, static_cast<uint32>(PChar->getPacketCount()));
 
-    uint32 attempts = 0;
+    // Keeps the datagram at 1300 bytes with header and MD5, under the client's 1360-byte receive limit
+    constexpr auto kMaxEncodedSize = 1300 - FFXI_HEADER_SIZE - 16;
 
-    do
+    // One packet of the longest (12-bit) codes always fits, so the queue can't stall behind it
+    static_assert(1 + sizeof(uint32) + (PACKET_SIZE * 12 + 7) / 8 <= kMaxEncodedSize);
+
+    bool          incrementKeyAfterEncrypt = false;
+    uint8         packets                  = 0;
+    CBasicPacket* PZoneOutPacket           = nullptr;
+
+    // Flag byte and trailing bit count
+    auto encodedSize = size_t{ 1 + sizeof(uint32) };
+
+    *buffsize = FFXI_HEADER_SIZE;
+
+    // Estimate each packet's encoded size, as the client's send queue does, and stop before the batch passes the limit
+    for (const auto& PSmallPacket : PChar->getPacketList())
     {
-        do
+        if (packets >= kMaxPacketPerCompression)
         {
-            ++attempts;
-
-            TracyZoneNamed(attemptZone, "send_parse: attempt");
-
-            *buffsize = FFXI_HEADER_SIZE;
-            packets   = 0;
-
-            auto packetList = [&]
-            {
-                TracyZoneNamed(copyZone, "send_parse: copy packet list");
-
-                return PChar->getPacketListCopy();
-            }();
-
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < kMaxBufferSize && static_cast<size_t>(packets) < PacketCount)
-            {
-                // hold 0x00B until the client decrypts a packet with the current key
-                if (packetList.front()->getType() == 0x00B && !PSession->hasDecryptedPacket)
-                {
-                    break;
-                }
-
-                PSmallPacket = std::move(packetList.front());
-                packetList.pop_front();
-
-                PSmallPacket->setSequence(PSession->server_packet_id);
-                auto type = PSmallPacket->getType();
-
-                // Store zoneout packet in case we need to re-send this
-                if (type == 0x00B)
-                {
-                    const auto IPPacket = static_cast<GP_SERV_COMMAND_LOGOUT*>(PSmallPacket.get());
-
-                    PSession->zone_ipp  = IPPacket->zoneIPP();
-                    PSession->zone_type = IPPacket->zoneType();
-
-                    incrementKeyAfterEncrypt = true;
-
-                    if (PSession->zone_type != GP_GAME_LOGOUT_STATE::LOGOUT)
-                    {
-                        auto ip   = PSession->zone_ipp.getIP();
-                        auto port = PSession->zone_ipp.getPort();
-
-                        // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
-                        db::preparedStmt("UPDATE accounts_sessions SET server_addr = ?, server_port = ?, client_port = 0, last_zoneout_time = NOW() WHERE charid = ?", ip, port, PSession->charID);
-                    }
-                    else
-                    {
-                        // This probably isn't necessary - the session should be deleted shortly.
-                        db::preparedStmt("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = ?", PSession->charID);
-                    }
-                }
-
-                std::memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
-
-                *buffsize += PSmallPacket->getSize();
-
-                packets++;
-            }
-
-            PacketCount -= PacketCount / 3;
-
-            // Compress the data without regard to the header
-            // The returned size is 8 times the real data
-            const auto maybePacketSize = [&]
-            {
-                TracyZoneNamed(compressZone, "send_parse: compress");
-
-                return compressPacket(buff, static_cast<size_t>(*buffsize));
-            }();
-
-            if (!maybePacketSize)
-            {
-                ShowWarningFmt("zlib compression error from charid '{}', attempted pre-compression packet size '{}'", PSession->charID, *buffsize);
-                continue;
-            }
-            PacketSize = *maybePacketSize;
-        } while (PacketCount > 0 && PacketSize > 1300 - FFXI_HEADER_SIZE - 16); // max size for client to accept
-
-        if (PacketSize == static_cast<uint32>(-1))
-        {
-            if (PChar->getPacketCount() > 0)
-            {
-                PChar->erasePackets(1);
-                PacketCount = PChar->getPacketCount();
-            }
-            else
-            {
-                *buffsize = 0;
-                return -1;
-            }
+            break;
         }
-    } while (PacketSize == static_cast<uint32>(-1));
+
+        // hold 0x00B until the client decrypts a packet with the current key
+        if (PSmallPacket->getType() == 0x00B && !PSession->hasDecryptedPacket)
+        {
+            break;
+        }
+
+        // The sequence is part of the encoded bytes, so set it before measuring
+        PSmallPacket->setSequence(PSession->server_packet_id);
+
+        const auto size        = PSmallPacket->getSize();
+        const auto encodedNext = huffman_encoded_size({ static_cast<const uint8*>(*PSmallPacket), size });
+        if (*buffsize + size >= kMaxBufferSize || encodedSize + encodedNext > kMaxEncodedSize)
+        {
+            break;
+        }
+
+        if (PSmallPacket->getType() == 0x00B)
+        {
+            PZoneOutPacket = PSmallPacket.get();
+        }
+
+        std::memcpy(buff + *buffsize, *PSmallPacket, size);
+        *buffsize += size;
+        encodedSize += encodedNext;
+
+        packets++;
+    }
+
+    const auto maybePacketSize = [&]
+    {
+        TracyZoneNamed(compressZone, "send_parse: compress");
+
+        return compressPacket(buff, *buffsize);
+    }();
+
+    if (!maybePacketSize)
+    {
+        ShowCriticalFmt("Huffman encode failed for charid '{}' although the batch was sized to fit, payload size '{}'", PSession->charID, *buffsize);
+        *buffsize = 0;
+        return -1;
+    }
+
+    // Store zoneout packet in case we need to re-send this
+    if (PZoneOutPacket != nullptr)
+    {
+        const auto IPPacket = static_cast<GP_SERV_COMMAND_LOGOUT*>(PZoneOutPacket);
+
+        PSession->zone_ipp  = IPPacket->zoneIPP();
+        PSession->zone_type = IPPacket->zoneType();
+
+        incrementKeyAfterEncrypt = true;
+
+        if (PSession->zone_type != GP_GAME_LOGOUT_STATE::LOGOUT)
+        {
+            auto ip   = PSession->zone_ipp.getIP();
+            auto port = PSession->zone_ipp.getPort();
+
+            // Set client port to zero, indicating the client tried to zone out and no longer has a port until the next 0x00A
+            db::preparedStmt("UPDATE accounts_sessions SET server_addr = ?, server_port = ?, client_port = 0, last_zoneout_time = NOW() WHERE charid = ?", ip, port, PSession->charID);
+        }
+        else
+        {
+            // This probably isn't necessary - the session should be deleted shortly.
+            db::preparedStmt("UPDATE accounts_sessions SET client_port = 0, last_zoneout_time = NOW() WHERE charid = ?", PSession->charID);
+        }
+    }
 
     PChar->erasePackets(packets);
 
     mapStatistics_.increment(MapStatistics::Key::TotalPacketsSentPerTick, static_cast<uint32>(packets));
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
-    // Every extra attempt re-copies the whole outgoing list and re-runs zlib, so this is the
-    // number to watch when send_parse spikes.
-    TracyReportGraphNumber("send_parse Attempts", static_cast<int64>(attempts));
-
     {
         TracyZoneNamed(finalizeZone, "send_parse: finalize");
 
-        finalizePacket(buff, buffsize, PacketSize, PSession, usePreviousKey);
+        finalizePacket(buff, buffsize, *maybePacketSize, PSession, usePreviousKey);
     }
 
     auto remainingPackets = PChar->getPacketCount();
@@ -769,21 +744,19 @@ auto MapNetworking::compressPacket(uint8* buff, size_t buffsize) -> Maybe<size_t
 {
     TracyZoneScoped;
 
-    // Compress the data without regard to the header
-    // The returned size is 8 times the real data
-    int32 result = zlib_compress((int8*)(buff + FFXI_HEADER_SIZE), (uint32)(buffsize - FFXI_HEADER_SIZE), (int8*)PScratchBuffer.data(), kMaxBufferSize);
+    // Leaves room for the trailing bit count and MD5. The result is in bits.
+    const auto result = huffman_encode({ buff + FFXI_HEADER_SIZE, buffsize - FFXI_HEADER_SIZE }, std::span(PScratchBuffer).first(kMaxBufferSize - FFXI_HEADER_SIZE - sizeof(uint32) - 16));
 
-    // handle compression error
-    if (result == -1)
+    if (!result)
     {
         return std::nullopt;
     }
 
-    auto packetSize = static_cast<size_t>(result);
+    auto packetSize = static_cast<size_t>(*result);
 
-    ref<uint32>(PScratchBuffer.data(), zlib_compressed_size(packetSize)) = static_cast<uint32>(packetSize);
+    ref<uint32>(PScratchBuffer.data(), huffman_byte_size(packetSize)) = static_cast<uint32>(packetSize);
 
-    packetSize = zlib_compressed_size(packetSize) + 4;
+    packetSize = huffman_byte_size(packetSize) + 4;
 
     return packetSize;
 }

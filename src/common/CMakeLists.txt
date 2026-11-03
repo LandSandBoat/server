@@ -61,6 +61,8 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/engine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/huffman.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/huffman.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ipp_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ipp.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ipp.h
@@ -91,8 +93,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_BINARY_DIR}/generated/version.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/version.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/zlib.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h
 )
 
 xi_add_library(xi_common ${COMMON_SOURCES})

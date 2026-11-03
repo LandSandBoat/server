@@ -521,7 +521,6 @@ public:
     auto GetGender() -> uint8;
 
     auto getPacketList() const -> const std::deque<std::unique_ptr<CBasicPacket>>&;
-    auto getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>; // Return a COPY of packet list
     void clearPacketList();
 
     template <typename T, typename... Args>
