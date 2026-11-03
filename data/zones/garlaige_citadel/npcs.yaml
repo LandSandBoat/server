@@ -1230,7 +1230,7 @@ npcs:
   17596842:
     script:       qm18
     display_name: ???
-    at:           [-13.425, -1.176, 191.669]
+    at:           [-13.425, 6.169, 191.669]
     render:
       look:
         type:  standard
