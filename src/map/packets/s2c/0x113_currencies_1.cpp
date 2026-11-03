@@ -24,6 +24,9 @@
 #include "entities/char_entity.h"
 #include "utils/charutils.h"
 
+#include <algorithm>
+#include <limits>
+
 GP_SERV_COMMAND_CURRENCIES_1::GP_SERV_COMMAND_CURRENCIES_1(CCharEntity* PChar)
 {
     auto& packet = this->data();
@@ -56,7 +59,7 @@ GP_SERV_COMMAND_CURRENCIES_1::GP_SERV_COMMAND_CURRENCIES_1(CCharEntity* PChar)
         packet.conquest_points_bastok   = rset->get<int32_t>("bastok_cp");
         packet.conquest_points_windurst = rset->get<int32_t>("windurst_cp");
 
-        packet.beastmans_seals_stored        = rset->get<uint16_t>("beastman_seal");
+        packet.beastmans_seals_stored        = static_cast<uint16_t>(std::min<uint32>(rset->get<uint32>("beastman_seal"), std::numeric_limits<uint16_t>::max()));
         packet.kindreds_seals_stored         = rset->get<uint16_t>("kindred_seal");
         packet.kindreds_crests_stored        = rset->get<uint16_t>("kindred_crest");
         packet.high_kindreds_crests_stored   = rset->get<uint16_t>("high_kindred_crest");
