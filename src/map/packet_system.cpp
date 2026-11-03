@@ -381,10 +381,6 @@ void PacketSystem::dispatch(uint16 packetId, MapSession* PSession, CCharEntity* 
     {
         if (rateLimiter_.isLimited(PChar, packetId))
         {
-            ShowWarningFmt("Rate-limiting packet {} ({:#05x}) from {}",
-                           magic_enum::enum_name(static_cast<PacketC2S>(packetId)),
-                           packetId,
-                           PChar->getName());
             return;
         }
 

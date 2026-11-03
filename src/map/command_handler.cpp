@@ -65,28 +65,12 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
         return token;
     };
 
-    // Any player can send a '!' message, so each character writes at most one of these logs per interval.
-    const auto shouldLog = [PChar]
-    {
-        const auto now = timer::now();
-        if (now < PChar->m_commandErrorLogTime + std::chrono::seconds(5))
-        {
-            return false;
-        }
-
-        PChar->m_commandErrorLogTime = now;
-        return true;
-    };
-
     auto cmdView = std::string_view(commandline);
     trimLeft(cmdView);
 
     if (cmdView.empty())
     {
-        if (shouldLog())
-        {
-            ShowError("cmdhandler::call: function name was empty");
-        }
+        ShowError("cmdhandler::call: function name was empty");
         return CommandResult::Failure;
     }
 
@@ -98,10 +82,7 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
     const auto maybeCommand = lua["xi"]["commands"][cmdName].get<sol::optional<sol::table>>();
     if (!maybeCommand)
     {
-        if (shouldLog())
-        {
-            ShowError("cmdhandler::call: Function does not exist (%s)", cmdName.c_str());
-        }
+        ShowError("cmdhandler::call: Function does not exist (%s)", cmdName.c_str());
         return CommandResult::Failure;
     }
     const auto& commandTable = *maybeCommand;
@@ -109,10 +90,7 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
     const auto maybeCmdProp = commandTable.get<sol::optional<sol::table>>("cmdprops");
     if (!maybeCmdProp)
     {
-        if (shouldLog())
-        {
-            ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdName.c_str());
-        }
+        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdName.c_str());
         return CommandResult::Failure;
     }
     const auto& cmdprops = *maybeCmdProp;
@@ -121,10 +99,7 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
     const auto maybeParams = cmdprops.get<sol::optional<std::string>>("parameters");
     if (!maybePerm || !maybeParams)
     {
-        if (shouldLog())
-        {
-            ShowError("cmdhandler::call: (%s): Invalid or missing permission/parameters in cmdprops", cmdName.c_str());
-        }
+        ShowError("cmdhandler::call: (%s): Invalid or missing permission/parameters in cmdprops", cmdName.c_str());
         return CommandResult::Failure;
     }
 
@@ -133,10 +108,7 @@ auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* c
 
     if (permission > PChar->m_GMlevel)
     {
-        if (shouldLog())
-        {
-            ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdName.c_str());
-        }
+        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdName.c_str());
         return CommandResult::Failure;
     }
 

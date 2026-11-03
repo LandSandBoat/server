@@ -76,19 +76,30 @@ auto PacketRateLimiter::isLimited(CCharEntity* PChar, uint16 packetId) -> bool
         return false;
     }
 
-    auto timeNow                 = timer::now();
-    const auto [it, wasInserted] = PChar->m_PacketRecievedTimestamps.emplace(packetId, timeNow);
+    const auto timeNow           = timer::now();
+    const auto [it, wasInserted] = PChar->m_PacketRateLimits.emplace(packetId, PacketRateLimitState{ .lastHandled = timeNow });
     if (wasInserted)
     {
         return false;
     }
 
-    const auto lastPacketReceivedTime = it->second;
-    const bool limited                = timeNow < lastPacketReceivedTime + rateLimitIt->second;
-    if (!limited)
+    auto& state = it->second;
+    if (timeNow >= state.lastHandled + rateLimitIt->second)
     {
-        it->second = timeNow;
+        state.lastHandled = timeNow;
+        state.warned      = false;
+        return false;
     }
 
-    return limited;
+    // Warn once per burst, so a client flooding a packet doesn't flood the log too.
+    if (!state.warned)
+    {
+        state.warned = true;
+        ShowWarningFmt("Rate-limiting packet {} ({:#05x}) from {}",
+                       magic_enum::enum_name(static_cast<PacketC2S>(packetId)),
+                       packetId,
+                       PChar->getName());
+    }
+
+    return true;
 }
