@@ -1,0 +1,6 @@
+---
+# REQUIRE(opt.has_value()) aborts the test by throwing from inside Catch2, which the
+# dataflow analysis cannot follow, so it flags every dereference after one.
+InheritParentConfig: true
+Checks: >
+  -bugprone-unchecked-optional-access,

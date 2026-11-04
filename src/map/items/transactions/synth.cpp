@@ -225,10 +225,11 @@ auto SynthTransaction::doCommit() -> bool
 
     if (pendingResult_)
     {
-        const auto resultSlot = this->give(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
+        const auto result     = *pendingResult_;
+        const auto resultSlot = this->give(this->player_, LOC_INVENTORY, result.itemId, result.qty);
         if (!resultSlot)
         {
-            ShowErrorFmt("SynthTransaction: {} had no room for result {}, the ingredients are already spent", this->player_->getName(), pendingResult_->itemId);
+            ShowErrorFmt("SynthTransaction: {} had no room for result {}, the ingredients are already spent", this->player_->getName(), result.itemId);
         }
         else
         {

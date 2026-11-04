@@ -23,6 +23,12 @@
 
 #include "common/lua.h"
 #include <fmt/format.h>
+#include <utility>
 
 // Common test error macro for Lua test framework
+// luaL_error never returns. Only analysis is told so, MSVC flags the returns after it as unreachable.
+#ifdef __clang_analyzer__
+#define TestError(...) (luaL_error(lua.lua_state(), "%s", fmt::format(__VA_ARGS__).c_str()), std::unreachable())
+#else
 #define TestError(...) luaL_error(lua.lua_state(), "%s", fmt::format(__VA_ARGS__).c_str())
+#endif

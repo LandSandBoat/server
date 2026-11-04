@@ -162,16 +162,16 @@ void LoadWeaponSkillsList()
         PWeaponSkill->setRange(entry.Range);
 
         // TargetFind only knows target-centred spheres for weapon skills, so a cone reaches as far as one
-        if (entry.Aoe)
+        if (const auto& aoe = entry.Aoe)
         {
             PWeaponSkill->setAoe(2);
-            if (const auto* sphere = std::get_if<xi::data::AoeSphereData>(&entry.Aoe->Shape))
+            if (const auto* sphere = std::get_if<xi::data::AoeSphereData>(&aoe->Shape))
             {
                 PWeaponSkill->setRadius(sphere->Radius);
             }
             else
             {
-                PWeaponSkill->setRadius(std::get<xi::data::AoeConeData>(entry.Aoe->Shape).Distance);
+                PWeaponSkill->setRadius(std::get<xi::data::AoeConeData>(aoe->Shape).Distance);
             }
         }
         else
@@ -6026,7 +6026,13 @@ auto RemoveAmmo(CCharEntity* PChar, int quantity) -> bool
         }
         else
         {
-            auto ammoLoc = PChar->equipLocation(SLOT_AMMO);
+            const auto ammoLoc = PChar->equipLocation(SLOT_AMMO);
+            if (!ammoLoc)
+            {
+                ShowErrorFmt("battleutils: {} has ammo equipped but no ammo location", PChar->getName());
+                return false;
+            }
+
             if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, quantity) || !transaction->commit())
             {
                 ShowErrorFmt("battleutils: {} did not spend {} ammo in slot {}", PChar->getName(), quantity, ammoLoc->Slot);

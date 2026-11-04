@@ -165,9 +165,9 @@ void Ship::enter(const size_t index, const uint32 now, const uint32 into)
     this->update();
 }
 
-void Ship::conceal(const uint32 intoPhase)
+void Ship::conceal(const size_t index, const uint32 intoPhase)
 {
-    const auto& current = this->phases[*this->phase];
+    const auto& current = this->phases[index];
     const auto  away    = current.Hide && intoPhase >= *current.Hide;
     if (away == this->hidden)
     {
@@ -188,9 +188,9 @@ void Ship::conceal(const uint32 intoPhase)
     this->update();
 }
 
-void Ship::place(const uint32 intoPhase)
+void Ship::place(const size_t index, const uint32 intoPhase)
 {
-    const auto& moves = this->phases[*this->phase].Moves;
+    const auto& moves = this->phases[index].Moves;
 
     std::optional<size_t> wanted;
     for (size_t step = 0; step < moves.size(); ++step)
