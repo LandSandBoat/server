@@ -183,32 +183,32 @@ struct look_t
     // face and race alias modelid, which both constructors set
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     look_t()
+    : size(0)
+    , modelid(0)
+    , head(0)
+    , body(0)
+    , hands(0)
+    , legs(0)
+    , feet(0)
+    , main(0)
+    , sub(0)
+    , ranged(0)
     {
-        size    = 0;
-        modelid = 0;
-        head    = 0;
-        body    = 0;
-        hands   = 0;
-        legs    = 0;
-        feet    = 0;
-        main    = 0;
-        sub     = 0;
-        ranged  = 0;
     }
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     look_t(const uint16* look)
+    : size(look[0])
+    , modelid(look[1])
+    , head(look[2])
+    , body(look[3])
+    , hands(look[4])
+    , legs(look[5])
+    , feet(look[6])
+    , main(look[7])
+    , sub(look[8])
+    , ranged(look[9])
     {
-        size    = look[0];
-        modelid = look[1];
-        head    = look[2];
-        body    = look[3];
-        hands   = look[4];
-        legs    = look[5];
-        feet    = look[6];
-        main    = look[7];
-        sub     = look[8];
-        ranged  = look[9];
     }
 };
 

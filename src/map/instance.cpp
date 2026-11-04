@@ -38,15 +38,14 @@ CInstance::CInstance(Scheduler& scheduler, MapConfig config, CZone* zone, uint32
 , m_instanceid(instanceid)
 , m_zone(zone)
 , m_startTime(timer::now())
+, m_lastTimeCheck(m_startTime)
+, m_wipeTimer(m_startTime)
 {
     TracyZoneScoped;
 
     static std::atomic<uint32> nextRunId{ 1 };
 
     runId_ = nextRunId.fetch_add(1, std::memory_order_relaxed);
-
-    m_wipeTimer     = m_startTime;
-    m_lastTimeCheck = m_startTime;
 
     LoadInstance();
 }

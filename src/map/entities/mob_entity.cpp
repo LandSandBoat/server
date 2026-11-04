@@ -144,9 +144,12 @@ CMobEntity::CMobEntity()
 , m_Family(0)
 , m_MobSkillList(0)
 , m_Pool(0)
+, m_SpellListContainer(nullptr)
 , m_flags(xi::EntityFlags::None)
 , m_name_prefix(0)
 , m_CallForHelpBlocked(false)
+, PEnmityContainer(new CEnmityContainer(this))
+, SpellContainer(new CMobSpellContainer(this))
 , m_IsPathingHome(false)
 {
     TracyZoneScoped;
@@ -154,10 +157,6 @@ CMobEntity::CMobEntity()
     objtype     = ENTITYTYPE::TYPE_MOB;
     allegiance  = xi::Allegiance::Mob;
     m_EcoSystem = xi::Ecosystem::Unclassified;
-
-    m_SpellListContainer = nullptr;
-    PEnmityContainer     = new CEnmityContainer(this);
-    SpellContainer       = new CMobSpellContainer(this);
 
     m_Weapons[SLOT_MAIN]   = std::make_unique<CItemWeapon>(0).release();
     m_Weapons[SLOT_SUB]    = std::make_unique<CItemWeapon>(0).release();

@@ -87,9 +87,9 @@ struct BattlefieldMob_t
     BATTLEFIELDMOBCONDITION condition; // whether it has died or not
 
     BattlefieldMob_t()
-    : condition(CONDITION_NONE)
+    : PMob(nullptr)
+    , condition(CONDITION_NONE)
     {
-        PMob = nullptr;
     }
 };
 

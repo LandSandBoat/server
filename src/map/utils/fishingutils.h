@@ -332,22 +332,17 @@ struct fishmob_modifiers_t
 
 struct areavector_t
 {
-    float x;
-    float y;
-    float z;
+    float x{};
+    float y{};
+    float z{};
 
-    areavector_t()
-    {
-        x = 0.f;
-        y = 0.f;
-        z = 0.f;
-    }
+    areavector_t() = default;
 
     areavector_t(float _x, float _y, float _z)
+    : x(_x)
+    , y(_y)
+    , z(_z)
     {
-        x = _x;
-        y = _y;
-        z = _z;
     }
 };
 

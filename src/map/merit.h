@@ -81,8 +81,8 @@ public:
     void SaveMeritPoints(uint32 charid);
 
 private:
-    uint16       m_LimitPoints;
-    uint8        m_MeritPoints;
+    uint16       m_LimitPoints{};
+    uint8        m_MeritPoints{};
     CCharEntity* m_PChar;
     Merit_t      merits[kMeritPacketSlots]{};
 

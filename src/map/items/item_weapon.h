@@ -78,21 +78,21 @@ public:
     void setCurrentUnlockPoints(uint16 points);
 
 private:
-    xi::SkillType  m_skillType;
-    uint8          m_subSkillType; // gun vs crossbow, any other exclusives
-    uint16         m_iLvlSkill;
-    uint16         m_iLvlParry;
-    uint16         m_iLvlMacc;
-    uint16         m_damage;
-    uint16         m_delay;
-    uint16         m_baseDelay;
-    xi::DamageType m_dmgType;
-    uint8          m_effect;
-    uint8          m_maxHit;
-    double         m_DPS;
+    xi::SkillType  m_skillType{ xi::SkillType::None };
+    uint8          m_subSkillType{ SUBSKILL_XBOW_SHORTBOW }; // gun vs crossbow, any other exclusives
+    uint16         m_iLvlSkill{};
+    uint16         m_iLvlParry{};
+    uint16         m_iLvlMacc{};
+    uint16         m_damage{};
+    uint16         m_delay{ 8000 };
+    uint16         m_baseDelay{ 480 }; // this should only be needed for mobs (specifically mnks)
+    xi::DamageType m_dmgType{ xi::DamageType::None };
+    uint8          m_effect{};
+    uint8          m_maxHit{};
+    double         m_DPS{};
 
-    uint16 m_wsunlockpoints;
+    uint16 m_wsunlockpoints{};
 
-    bool m_ranged;
-    bool m_twoHanded;
+    bool m_ranged{};
+    bool m_twoHanded{};
 };

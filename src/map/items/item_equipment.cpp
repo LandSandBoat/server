@@ -87,18 +87,6 @@ CItemEquipment::CItemEquipment(uint16 id)
 : CItemUsable(id)
 {
     setType(ITEM_EQUIPMENT);
-
-    m_jobs             = 0;
-    m_modelID          = 0;
-    m_removeSlotID     = 0;
-    m_removeSlotLookID = 0;
-    m_shieldSize       = 0;
-    m_scriptType       = 0;
-    m_reqLvl           = 255;
-    m_iLvl             = 0;
-    m_equipSlotID      = 255;
-    m_absorption       = 0;
-    m_superiorLevel    = 0;
 }
 
 CItemEquipment::CItemEquipment(const CItemEquipment& other) = default;

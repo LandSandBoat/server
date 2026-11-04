@@ -13,6 +13,7 @@ Checks: >
   cppcoreguidelines-avoid-goto,
   cppcoreguidelines-init-variables,
   cppcoreguidelines-no-malloc,
+  cppcoreguidelines-prefer-member-initializer,
   cppcoreguidelines-pro-type-const-cast,
   cppcoreguidelines-pro-type-member-init,
 
@@ -53,7 +54,6 @@ CheckOptions:
 #  misc-unused-parameters,
 #  misc-use-internal-linkage,
 #  concurrency-mt-unsafe,
-#  cppcoreguidelines-prefer-member-initializer,
 #  cppcoreguidelines-pro-type-vararg,
 
 # TODO: These are important, but they're destructive. Turn on one day.

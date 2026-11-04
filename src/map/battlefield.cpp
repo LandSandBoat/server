@@ -61,6 +61,7 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 , m_Record(BattlefieldRecord_t())
 , m_Rules(0)
 , m_StartTime(timer::now())
+, m_Tick(m_StartTime)
 , m_LastPromptTime(0s)
 , m_MaxParticipants(8)
 , m_LevelCap(0)
@@ -70,7 +71,6 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
     m_Record.name      = "Someone";
     m_Record.time      = 24h;
     m_Record.partySize = 6;
-    m_Tick             = m_StartTime;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 
