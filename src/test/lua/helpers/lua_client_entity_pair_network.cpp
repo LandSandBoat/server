@@ -27,6 +27,7 @@
 #include "test_common.h"
 #include "test_network_client.h"
 
+#include "common/database.h"
 #include "map/entities/char_entity.h"
 
 namespace
@@ -284,6 +285,22 @@ void CLuaClientEntityPairNetwork::clearReceived() const
     parent_->networkClient().clearReceived();
 }
 
+/************************************************************************
+ *  Function: setStoredZone()
+ *  Purpose : Overwrites the zone saved for the char, as a stale row would
+ *  Example : player.network:setStoredZone(1000)
+ *  Notes   : Use between zone-out and zone-in, when the server reloads
+ *            the char from the database.
+ ************************************************************************/
+
+void CLuaClientEntityPairNetwork::setStoredZone(const uint16 zoneId) const
+{
+    if (!db::preparedStmt("UPDATE chars SET pos_zone = ? WHERE charid = ?", zoneId, parent_->testChar()->charId()))
+    {
+        TestError("Failed to store zone {}", zoneId);
+    }
+}
+
 void CLuaClientEntityPairNetwork::Register()
 {
     SOL_USERTYPE("CClientEntityPairNetwork", CLuaClientEntityPairNetwork);
@@ -299,4 +316,5 @@ void CLuaClientEntityPairNetwork::Register()
     SOL_REGISTER("hangReason", CLuaClientEntityPairNetwork::hangReason);
     SOL_REGISTER("received", CLuaClientEntityPairNetwork::received);
     SOL_REGISTER("clearReceived", CLuaClientEntityPairNetwork::clearReceived);
+    SOL_REGISTER("setStoredZone", CLuaClientEntityPairNetwork::setStoredZone);
 }

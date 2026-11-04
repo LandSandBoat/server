@@ -404,8 +404,30 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
 
             PChar->PSession = PSession;
 
+            // No process hosts this zone, so send the char home. A zone another process owns could be a jail
+            if (static_cast<uint16>(PChar->loc.destination) >= MAX_ZONEID || zoneutils::GetZoneIPP(PChar->loc.destination) == 0)
+            {
+                ShowWarningFmt("recv_parse: {} can't enter zone {}, sending them to their home point", PChar->getName(), PChar->loc.destination);
+
+                PChar->loc.destination = PChar->profile.home_point.destination;
+                PChar->loc.p           = PChar->profile.home_point.p;
+                PChar->loc.boundary    = 0;
+                PChar->m_moghouseID    = 0;
+
+                db::preparedStmt("UPDATE chars SET pos_zone = ?, pos_rot = ?, pos_x = ?, pos_y = ?, pos_z = ?, moghouse = 0, boundary = 0 WHERE charid = ?",
+                                 PChar->loc.destination,
+                                 PChar->loc.p.rotation,
+                                 PChar->loc.p.x,
+                                 PChar->loc.p.y,
+                                 PChar->loc.p.z,
+                                 PChar->id);
+            }
+
             // the 0x00A handler puts the char in this zone, so it has to be loaded before it gets there
-            zoneutils::EnsureZoneLoaded(scheduler_, config_, PChar->loc.destination);
+            if (static_cast<uint16>(PChar->loc.destination) < MAX_ZONEID)
+            {
+                zoneutils::EnsureZoneLoaded(scheduler_, config_, PChar->loc.destination);
+            }
 
             // If we're a new char on a new instance and prevzone != zone
             if (PSession->blowfish.status == BLOWFISH_WAITING && PChar->loc.destination != PChar->loc.prevzone)

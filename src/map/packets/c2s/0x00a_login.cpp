@@ -84,12 +84,10 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         const auto destination = PChar->loc.destination;
         CZone*     destZone    = zoneutils::GetZone(destination);
 
+        // The client gets no reply and times out at the title screen
         if (static_cast<uint16>(destination) >= MAX_ZONEID || destZone == nullptr)
         {
-            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("GP_CLI_COMMAND_LOGIN: player tried to enter zone that was invalid or out of range");
-            ShowWarning("GP_CLI_COMMAND_LOGIN: dumping player `%s` to homepoint!", PChar->getName());
-            PChar->requestedWarp = WarpRequest::HomePoint; // Not a "request" but a demand
+            ShowErrorFmt("GP_CLI_COMMAND_LOGIN: {} can't enter zone {} on this process", PChar->getName(), destination);
 
             // Save pet if any
             if (PChar->shouldPetPersistThroughZoning())

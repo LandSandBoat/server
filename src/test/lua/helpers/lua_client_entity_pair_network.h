@@ -44,6 +44,7 @@ public:
     auto hangReason() const -> std::string;
     auto received() const -> sol::table;
     void clearReceived() const;
+    void setStoredZone(uint16 zoneId) const;
 
     static void Register();
 

@@ -81,3 +81,9 @@ end
 ---@return nil
 function CClientEntityPairNetwork:clearReceived()
 end
+
+---Overwrite the zone saved for the char, as a stale row would. Use between zone-out and zone-in.
+---@param zoneId integer
+---@return nil
+function CClientEntityPairNetwork:setStoredZone(zoneId)
+end
