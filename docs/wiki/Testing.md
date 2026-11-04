@@ -700,6 +700,31 @@ end)
 
 ```
 
+### Network (player.network)
+
+[LLS documentation](https://github.com/LandSandBoat/server/blob/base/scripts/specs/test/CClientEntityPairNetwork.lua)
+
+Every other namespace hands packets straight to their handlers. `player.network` sends real datagrams through `MapNetworking`, encrypted and Huffman coded, and reads the server's replies back from a mock socket. The client applies the retail client's receive rules from the PS2 decomp: sequence and sync checks, the key change on zoning, handlers that only exist once the zone has loaded, and the hang when S2C 0x00B arrives before mode 9. Use it for zoning, sequencing and anything else the network layer decides.
+
+The first use switches the player over for the rest of the test. From then on `player:tick()` does nothing, and the player moves only when the test exchanges datagrams.
+
+```lua
+player.network:drain()                         -- deliver what the server has queued
+player:setPos(0, 0, 0, 0, xi.zone.EAST_RONFAURE)
+xi.test.world:tick()                           -- the zone tick queues S2C 0x00B
+player.network:exchange()                      -- the client reads it, sends 0x00D and switches key
+
+assert(player.network:login())                 -- plaintext C2S 0x00A, true once S2C 0x00A is accepted
+player.network:finishLoading()                 -- C2S 0x011, the zone load, then C2S 0x00C
+assert(not player.network:isHung(), player.network:hangReason())
+
+for _, pkt in ipairs(player.network:received()) do
+    -- pkt.type, pkt.datagram, pkt.accepted, pkt.reason
+end
+```
+
+`zoneIn()` does the retries, the load and the drain in one call. `login({ dropReply = true })` loses the reply on the wire, and `sendStaleLogin(seq)` delivers a late retry. See [`scripts/tests/systems/zoning/network.lua`](https://github.com/LandSandBoat/server/blob/base/scripts/tests/systems/zoning/network.lua).
+
 ## Assertions
 
 [LLS documentation](https://github.com/LandSandBoat/server/blob/base/scripts/specs/test/CTestEntityAssertions.lua)

@@ -26,6 +26,7 @@
 #include "lua/helpers/lua_client_entity_pair_bcnm.h"
 #include "lua/helpers/lua_client_entity_pair_entities.h"
 #include "lua/helpers/lua_client_entity_pair_events.h"
+#include "lua/helpers/lua_client_entity_pair_network.h"
 #include "lua/helpers/lua_client_entity_pair_packets.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
@@ -55,6 +56,7 @@ void TestLuaEnvironment::registerCoreLuaBindings() const
     CLuaClientEntityPairBCNM::Register();
     CLuaClientEntityPairEntities::Register();
     CLuaClientEntityPairEvents::Register();
+    CLuaClientEntityPairNetwork::Register();
     CLuaClientEntityPairPackets::Register();
     CLuaTestEntityAssertions::Register();
     CLuaTestEntity::Register();

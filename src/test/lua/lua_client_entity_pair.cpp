@@ -32,9 +32,11 @@
 #include "map/zone.h"
 #include "map_engine.h"
 #include "map_networking.h"
+#include "mock_socket.h"
 #include "test/lua/lua_simulation.h"
 #include "test_char.h"
 #include "test_common.h"
+#include "test_network_client.h"
 
 // A test player that combines client and player entity functionality
 // Common test patterns are exposed as properties
@@ -48,17 +50,25 @@ CLuaClientEntityPair::CLuaClientEntityPair(std::unique_ptr<TestChar> testChar, C
 
 CLuaClientEntityPair::~CLuaClientEntityPair()
 {
-    testChar_->clearPackets();
-
-    if (testChar_->entity()->isInEvent())
+    // A networked client can end its test between zones, after the server freed the char
+    if (testChar_->entity() != nullptr)
     {
-        ShowErrorFmt("Player was in event {} while logging out in {}",
-                     testChar_->entity()->currentEvent->eventId,
-                     testChar_->entity()->loc.zone->getName());
+        testChar_->clearPackets();
+
+        if (testChar_->entity()->isInEvent())
+        {
+            ShowErrorFmt("Player was in event {} while logging out in {}",
+                         testChar_->entity()->currentEvent->eventId,
+                         testChar_->entity()->loc.zone->getName());
+        }
     }
 
-    testChar_->session()->blowfish.status = BLOWFISH_PENDING_ZONE;
-    engine_->networking().sessions().destroySession(testChar_->session());
+    // A networked logout already freed the session
+    if (testChar_->session() != nullptr)
+    {
+        testChar_->session()->blowfish.status = BLOWFISH_PENDING_ZONE;
+        engine_->networking().sessions().destroySession(testChar_->session());
+    }
 }
 
 /************************************************************************
@@ -71,6 +81,12 @@ CLuaClientEntityPair::~CLuaClientEntityPair()
 void CLuaClientEntityPair::tick()
 {
     TracyZoneScoped;
+
+    // A networked client only moves when the test exchanges datagrams
+    if (networkClient_)
+    {
+        return;
+    }
 
     testChar_->session()->tapLastUpdate();
     packets().parseIncoming();
@@ -366,6 +382,39 @@ auto CLuaClientEntityPair::packets() -> CLuaClientEntityPairPackets
     return CLuaClientEntityPairPackets(this);
 }
 
+/************************************************************************
+ *  Property: network
+ *  Purpose : Retrieve the network helper
+ *  Example : player.network:zoneIn()
+ *  Notes   : Moves the player onto real datagrams for the rest of the test
+ ************************************************************************/
+
+auto CLuaClientEntityPair::network() -> CLuaClientEntityPairNetwork
+{
+    return CLuaClientEntityPairNetwork(this);
+}
+
+auto CLuaClientEntityPair::networkClient() -> TestNetworkClient&
+{
+    if (!networkClient_)
+    {
+        auto* session = testChar_->session();
+        session->initBlowfish();
+
+        auto& socket   = static_cast<MockSocket&>(engine_->networking().socket());
+        networkClient_ = std::make_unique<TestNetworkClient>(engine_->networking(), socket, testChar_->ipp(), testChar_->charId(), session->blowfish);
+    }
+
+    return *networkClient_;
+}
+
+// The server frees the char at zone-out and loads a new one at zone-in, and a logout frees the session too
+void CLuaClientEntityPair::refreshEntity()
+{
+    testChar_->setSession(engine_->networking().sessions().getSessionByCharId(testChar_->charId()));
+    setEntity(testChar_->entity());
+}
+
 auto CLuaClientEntityPair::testChar() const -> TestChar*
 {
     return testChar_.get();
@@ -398,4 +447,5 @@ void CLuaClientEntityPair::Register()
     SOL_READONLY("events", CLuaClientEntityPair::events);
     SOL_READONLY("entities", CLuaClientEntityPair::entities);
     SOL_READONLY("packets", CLuaClientEntityPair::packets);
+    SOL_READONLY("network", CLuaClientEntityPair::network);
 }

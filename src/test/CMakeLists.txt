@@ -35,6 +35,8 @@ set(SOURCES
     test_lua_environment.cpp
     test_matcher.h
     test_matcher.cpp
+    test_network_client.h
+    test_network_client.cpp
     test_suite.h
     test_suite.cpp
 )

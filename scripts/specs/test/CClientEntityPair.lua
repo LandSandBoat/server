@@ -9,6 +9,7 @@
 ---@field events CClientEntityPairEvents Event helper methods
 ---@field entities CClientEntityPairEntities Entity helper methods
 ---@field packets CClientEntityPairPackets Packet helper methods
+---@field network CClientEntityPairNetwork Datagram-level client, created on first use
 local CClientEntityPair = {}
 
 ---@class ZonePosition

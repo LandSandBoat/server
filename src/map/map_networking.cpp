@@ -865,3 +865,8 @@ auto MapNetworking::packetSystem() -> PacketSystem&
 {
     return packetSystem_;
 }
+
+void MapNetworking::setSocket(std::unique_ptr<Socket> socket)
+{
+    socket_ = std::move(socket);
+}
