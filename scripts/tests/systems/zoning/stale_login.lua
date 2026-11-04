@@ -71,6 +71,68 @@ describe('Stale C2S 0x00A', function()
         assert(gotPacket(0x017), 'The held message was dropped')
     end)
 
+    it('keeps the load deadline of the first try', function()
+        -- A client stuck retrying C2S 0x00A can't hold off warps and jail past the deadline
+        assert(not player.network:login({ ignoreLogin = true }))
+        for _ = 1, 4 do
+            xi.test.world:skipTime(10)
+            assert(not player.network:login({ ignoreLogin = true }))
+        end
+
+        player:setPos(0, 0, 0, 0, xi.zone.WEST_RONFAURE)
+        xi.test.world:tick()
+        assert(not player:getZone(), 'Retries held the warp past the load deadline')
+    end)
+
+    it('keeps the load deadline when retries send seq 0', function()
+        -- Seq 0 reads as no 0x00A taken yet, so it must not reopen the load window
+        player.network:sendStaleLogin(0x8001)
+        for _ = 1, 4 do
+            xi.test.world:skipTime(10)
+            player.network:sendStaleLogin(0)
+            player.network:sendStaleLogin(0x8001)
+        end
+
+        player:setPos(0, 0, 0, 0, xi.zone.WEST_RONFAURE)
+        xi.test.world:tick()
+        assert(not player:getZone(), 'Seq 0 retries held the warp past the load deadline')
+    end)
+
+    it('ends the zone-in reply with S2C 0x00A once the load deadline has passed', function()
+        -- With gear on, the zone-in reply has an equip list to send
+        player.network:zoneIn()
+        player:addItem(xi.item.BRONZE_SWORD)
+        player:equipItem(xi.item.BRONZE_SWORD, nil, xi.slot.MAIN)
+        player.network:drain()
+        zoning.zoneOut(player, xi.zone.WEST_RONFAURE)
+
+        assert(not player.network:login({ ignoreLogin = true }))
+        for _ = 1, 4 do
+            xi.test.world:skipTime(10)
+            assert(not player.network:login({ ignoreLogin = true }))
+        end
+
+        player.network:clearReceived()
+        assert(player.network:login())
+
+        local loginDatagram = 0
+        local lastType      = 0
+        local received      = player.network:received()
+        for _, packet in ipairs(received) do
+            if packet.type == 0x00A then
+                loginDatagram = packet.datagram
+            end
+        end
+
+        for _, packet in ipairs(received) do
+            if packet.datagram == loginDatagram then
+                lastType = packet.type
+            end
+        end
+
+        assert(lastType == 0x00A, string.format('S2C 0x00A was followed by 0x%03X', lastType))
+    end)
+
     it('is ignored from the old address after a NAT rebind', function()
         -- Retry 1's reply is lost, then the client rebinds and retry 2 moves the session to the new port
         assert(not player.network:login({ dropReply = true }))

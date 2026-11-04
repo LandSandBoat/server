@@ -45,6 +45,12 @@ auto MapSession::hasLoadedZone() const -> bool
 
 auto MapSession::isStaleLogin(const uint16 seq, const IPP& from) const -> bool
 {
+    // The client counts from 1, and loginSeq 0 means no 0x00A taken for this key
+    if (seq == 0)
+    {
+        return true;
+    }
+
     // Seqs are compared per address, so a forged 0x00A from elsewhere can't put the real client's retries behind it
     const auto lastSeq = [&]() -> uint16
     {
@@ -73,8 +79,12 @@ auto MapSession::isStaleLogin(const uint16 seq, const IPP& from) const -> bool
 
 void MapSession::takeLogin(const uint16 seq, const IPP& from)
 {
-    hasSentGameOk = false;
-    loginTime     = timer::now();
+    // Only the first 0x00A for this key opens the load window, so retries can't hold the gate shut
+    if (loginSeq == 0)
+    {
+        hasSentGameOk = false;
+        loginTime     = timer::now();
+    }
 
     // Keep the address before a NAT rebind, so a late retry from it is still checked against its own seq
     if (!(loginIpp == from))

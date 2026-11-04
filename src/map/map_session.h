@@ -67,7 +67,7 @@ struct MapSession
     IPP                          loginIpp           = {};    // where that 0x00A came from
     IPP                          previousLoginIpp   = {};    // the address before it, for a late retry after a NAT rebind
     uint16                       previousLoginSeq   = 0;     // header seq of the last 0x00A taken from there
-    timer::time_point            loginTime          = {};    // when the last C2S 0x00A was taken
+    timer::time_point            loginTime          = {};    // when the first C2S 0x00A for this key was taken
     timer::time_point            addressChanged     = {};    // last time a 0x00A moved this session
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
