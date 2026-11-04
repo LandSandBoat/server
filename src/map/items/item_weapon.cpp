@@ -39,22 +39,6 @@ CItemWeapon::CItemWeapon(uint16 id)
 : CItemEquipment(id)
 {
     setType(ITEM_WEAPON);
-
-    m_skillType      = xi::SkillType::None;
-    m_subSkillType   = SUBSKILL_XBOW_SHORTBOW;
-    m_iLvlSkill      = 0;
-    m_iLvlParry      = 0;
-    m_iLvlMacc       = 0;
-    m_damage         = 0;
-    m_effect         = 0;
-    m_dmgType        = xi::DamageType::None;
-    m_delay          = 8000;
-    m_baseDelay      = 480; // this should only be needed for mobs (specifically mnks)
-    m_maxHit         = 0;
-    m_DPS            = 0.0;
-    m_ranged         = false;
-    m_twoHanded      = false;
-    m_wsunlockpoints = 0;
 }
 
 CItemWeapon::CItemWeapon(const CItemWeapon& other) = default;

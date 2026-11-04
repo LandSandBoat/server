@@ -73,7 +73,7 @@ public:
     auto GetItem(uint8 slotID) -> CItem*;
 
 private:
-    UCONTAINERTYPE m_ContainerType;
+    UCONTAINERTYPE m_ContainerType{ UCONTAINER_EMPTY };
 
     bool                m_lock{};
     uint8               m_count{};

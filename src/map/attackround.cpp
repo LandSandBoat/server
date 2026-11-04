@@ -32,15 +32,12 @@
  *                                                                        *
  ************************************************************************/
 CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
+: m_attacker(attacker)
+, m_defender(defender)
+, m_taEntity(battleutils::getAvailableTrickAttackChar(attacker, attacker->GetBattleTarget()))
+, m_sataOccured(false)
+, m_kickAttackOccured(false)
 {
-    m_attacker          = attacker;
-    m_defender          = defender;
-    m_kickAttackOccured = false;
-    m_sataOccured       = false;
-
-    // Grab a trick attack assistant.
-    m_taEntity = battleutils::getAvailableTrickAttackChar(attacker, attacker->GetBattleTarget());
-
     // Get cover partner
     if (dynamic_cast<const CCharEntity*>(attacker->GetBattleTarget()) != nullptr)
     {

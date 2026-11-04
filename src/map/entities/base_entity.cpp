@@ -55,6 +55,7 @@ CBaseEntity::CBaseEntity()
 , PBattlefield(nullptr)
 , PInstance(nullptr)
 , m_nextUpdateTimer(timer::now())
+, speed(baseSpeed)
 {
     TracyZoneScoped;
 
@@ -62,7 +63,6 @@ CBaseEntity::CBaseEntity()
 
     serial_ = nextSerial.fetch_add(1, std::memory_order_relaxed);
 
-    speed          = baseSpeed;
     animationSpeed = static_cast<uint8>(std::clamp<float>((baseSpeed / settings::get<float>("map.ANIMATION_SPEED_DIVISOR")), std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
 }
 

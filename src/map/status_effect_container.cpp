@@ -174,10 +174,9 @@ auto statusOrdering(const std::unique_ptr<CStatusEffect>& AStatus, const std::un
 }
 
 CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
-: m_StatusEffectSet(statusOrdering)
+: m_POwner(PEntity)
+, m_StatusEffectSet(statusOrdering)
 {
-    m_POwner = PEntity;
-
     if (m_POwner == nullptr)
     {
         ShowWarning("m_POwner was null.");

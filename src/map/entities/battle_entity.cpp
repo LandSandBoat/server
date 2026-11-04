@@ -73,26 +73,14 @@ CBattleEntity::CBattleEntity()
     TracyZoneScoped;
 
     m_OwnerID.clean();
-    m_mlvl = 0;
-    m_slvl = 0;
-
-    m_mjob = xi::Job::WAR;
-    m_sjob = xi::Job::WAR;
-
-    m_magicEvasion = 0;
 
     m_Weapons[SLOT_MAIN]   = nullptr;
     m_Weapons[SLOT_SUB]    = nullptr;
     m_Weapons[SLOT_RANGED] = nullptr;
     m_Weapons[SLOT_AMMO]   = nullptr;
-    m_dualWield            = false;
 
     std::memset(&health, 0, sizeof(health));
     health.maxhp = 1;
-
-    PPet    = nullptr;
-    PParty  = nullptr;
-    PMaster = nullptr;
 
     StatusEffectContainer = std::make_unique<CStatusEffectContainer>(this);
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
@@ -102,12 +90,6 @@ CBattleEntity::CBattleEntity()
     m_modStat[xi::Mod::PIERCE_SDT] = 0;
     m_modStat[xi::Mod::HTH_SDT]    = 0;
     m_modStat[xi::Mod::IMPACT_SDT] = 0;
-
-    m_Immunity   = xi::Immunity::None;
-    isCharmed    = false;
-    m_unkillable = false;
-
-    m_DeathType = DEATH_TYPE::NONE;
 
     BattleHistory.lastHitTaken_atkType = xi::AttackType::None;
 }

@@ -31,13 +31,6 @@ CItemUsable::CItemUsable(uint16 id)
 , m_ReuseDelay(0s)
 {
     setType(ITEM_USABLE);
-
-    m_MaxCharges  = 0;
-    m_Animation   = 0;
-    m_ValidTarget = 0;
-    m_AssignTime  = timer::time_point{};
-    m_LastUseTime = timer::time_point{};
-    m_AoE         = 0;
 }
 
 CItemUsable::CItemUsable(const CItemUsable& other) = default;

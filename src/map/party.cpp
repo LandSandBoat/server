@@ -63,12 +63,6 @@ CParty::CParty(CBattleEntity* PEntity)
 , m_PartyType(PARTY_MOBS)
 , m_PartyNumber(0)
 {
-    m_PLeader        = nullptr;
-    m_PAlliance      = nullptr;
-    m_PSyncTarget    = nullptr;
-    m_PQuarterMaster = nullptr;
-    m_EffectsChanged = false;
-
     if (PEntity != nullptr && PEntity->PParty == nullptr)
     {
         m_PartyID   = PEntity->id;
@@ -88,13 +82,6 @@ CParty::CParty(uint32 id)
 , m_PartyType(PARTY_PCS)
 , m_PartyNumber(0)
 {
-    m_PAlliance = nullptr;
-
-    m_PLeader        = nullptr;
-    m_PSyncTarget    = nullptr;
-    m_PQuarterMaster = nullptr;
-
-    m_EffectsChanged = false;
 }
 
 // Dirty, ugly hack to prevent bad refs keeping garbage pointers in memory pointing to things that _could_ still be valid, causing mayhem

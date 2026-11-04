@@ -85,5 +85,5 @@ public:
 
 private:
     CMobEntity* m_PMob;
-    bool        m_hasSpells;
+    bool        m_hasSpells{};
 };

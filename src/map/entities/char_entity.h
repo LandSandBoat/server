@@ -685,8 +685,8 @@ public:
 
     auto aman() -> CAMANContainer&;
 
-    uint8 m_GMlevel;    // Level of the GM flag assigned to this character
-    bool  m_isGMHidden; // GM Hidden flag to prevent player updates from being processed.
+    uint8 m_GMlevel{};    // Level of the GM flag assigned to this character
+    bool  m_isGMHidden{}; // GM Hidden flag to prevent player updates from being processed.
 
     bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;

@@ -115,7 +115,7 @@ public:
     void SetHeroism(int16 amount);                          // Change the maximum number of resources for a zone.
     void SetUnionCount(CampaignUnion CUnion, uint8 amount); // Change the maximum number of resources for a zone.
 
-    CZone* m_PZone;
+    CZone* m_PZone{};
 
 private:
     uint8 m_zoneCampaignId    = 0;

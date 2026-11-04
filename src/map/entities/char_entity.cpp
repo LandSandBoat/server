@@ -114,30 +114,19 @@
 #include "weapon_skill.h"
 
 CCharEntity::CCharEntity()
-: m_PlayTime(0s)
+: eventPreparation(new EventPrep())
+, currentEvent(new EventInfo())
+, TradeContainer(new CTradeContainer())
+, Container(new CTradeContainer())
+, UContainer(new CUContainer())
+, m_PlayTime(0s)
 {
     TracyZoneScoped;
 
     objtype     = TYPE_PC;
     m_EcoSystem = xi::Ecosystem::Humanoid;
 
-    eventPreparation = new EventPrep();
-    currentEvent     = new EventInfo();
-
-    inSequence   = false;
-    gotMessage   = false;
-    m_Locked     = false;
-    m_isPCHidden = false;
-
-    accid        = 0;
-    m_GMlevel    = 0;
-    m_isGMHidden = false;
-
     allegiance = xi::Allegiance::Player;
-
-    TradeContainer = new CTradeContainer();
-    Container      = new CTradeContainer();
-    UContainer     = new CUContainer();
 
     m_Inventory  = std::make_unique<CItemContainer>(LOC_INVENTORY, this);
     m_Mogsafe    = std::make_unique<CItemContainer>(LOC_MOGSAFE, this);
@@ -157,8 +146,6 @@ CCharEntity::CCharEntity()
     m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7, this);
     m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8, this);
     m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN, this);
-
-    keys = {};
 
     m_SpellList.reset();
     std::memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));

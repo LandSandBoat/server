@@ -102,14 +102,11 @@ constexpr auto categoryOf(const xi::Merit merit) -> uint16
 } // namespace
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
+: m_PChar(PChar)
 {
     std::memcpy(merits, meritDefaults, sizeof(merits));
 
-    m_PChar = PChar;
     LoadMeritPoints(PChar->id);
-
-    m_LimitPoints = 0;
-    m_MeritPoints = 0;
 }
 
 void CMeritPoints::LoadMeritPoints(const uint32 charid)

@@ -30,9 +30,8 @@
 #include "utils/battleutils.h"
 
 CMobSpellContainer::CMobSpellContainer(CMobEntity* PMob)
+: m_PMob(PMob)
 {
-    m_PMob      = PMob;
-    m_hasSpells = false;
 }
 
 void CMobSpellContainer::ClearSpells()

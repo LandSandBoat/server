@@ -99,15 +99,13 @@ CZone::CZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID, co
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
+, m_zoneEntities(new CZoneEntities(scheduler_, config_, this))
+, m_CampaignHandler(new CCampaignHandler(this))
 {
     TracyZoneScoped;
 
-    m_TreasurePool       = nullptr;
-    m_BattlefieldHandler = nullptr;
-    m_zoneEntities       = new CZoneEntities(scheduler_, config_, this);
-    m_CampaignHandler    = new CCampaignHandler(this);
-    m_spawnHandler       = std::make_unique<SpawnHandler>(this);
-    nominateManager_     = std::make_unique<NominateManager>(*this);
+    m_spawnHandler   = std::make_unique<SpawnHandler>(this);
+    nominateManager_ = std::make_unique<NominateManager>(*this);
 
     LoadZoneSettings(settings);
     LoadZoneLines(settings);

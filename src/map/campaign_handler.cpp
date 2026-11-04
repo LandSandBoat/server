@@ -28,7 +28,6 @@
 
 CCampaignHandler::CCampaignHandler(CZone* PZone)
 {
-    m_PZone = nullptr;
     LoadCampaignZone(PZone);
 }
 

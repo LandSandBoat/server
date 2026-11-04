@@ -124,17 +124,17 @@ public:
     static void LoadAugmentData();
 
 private:
-    uint8  m_reqLvl;
-    uint8  m_iLvl;
-    uint32 m_jobs;
-    uint16 m_modelID;
-    uint16 m_scriptType;
-    uint8  m_shieldSize;
-    uint8  m_absorption;
-    uint16 m_equipSlotID;
-    uint16 m_removeSlotID;
-    uint16 m_removeSlotLookID;
-    uint8  m_superiorLevel;
+    uint8  m_reqLvl{ 255 };
+    uint8  m_iLvl{};
+    uint32 m_jobs{};
+    uint16 m_modelID{};
+    uint16 m_scriptType{};
+    uint8  m_shieldSize{};
+    uint8  m_absorption{};
+    uint16 m_equipSlotID{ 255 };
+    uint16 m_removeSlotID{};
+    uint16 m_removeSlotLookID{};
+    uint8  m_superiorLevel{};
 
     void SetAugmentMod(uint16 type, uint8 value);
 };
