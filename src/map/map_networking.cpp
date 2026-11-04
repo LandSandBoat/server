@@ -376,6 +376,8 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         PSession->server_packet_id = 0;
         PSession->zone_ipp         = {};
         PSession->zone_type        = GP_GAME_LOGOUT_STATE::NONE;
+        PSession->hasSentGameOk    = false;
+        PSession->loginTime        = timer::now();
 
         return 0;
     }
@@ -476,6 +478,12 @@ auto MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession) -
         if ((ref<uint16>(SmallPD_ptr, 2) <= PSession->client_packet_id) || (ref<uint16>(SmallPD_ptr, 2) > SmallPD_Code))
         {
             continue;
+        }
+
+        // The client sends this once it has loaded the zone, whether or not the handler takes it
+        if (SmallPD_Type == static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_GAMEOK))
+        {
+            PSession->hasSentGameOk = true;
         }
 
         if (SmallPD_Type != static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_POS))

@@ -27,6 +27,11 @@
 MapSession::MapSession()  = default;
 MapSession::~MapSession() = default;
 
+auto MapSession::hasLoadedZone() const -> bool
+{
+    return hasSentGameOk || timer::now() > loginTime + kZoneLoadTimeout;
+}
+
 void MapSession::incrementBlowfish()
 {
     hasDecryptedPacket = false;

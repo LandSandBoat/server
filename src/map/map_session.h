@@ -62,6 +62,8 @@ struct MapSession
     uint32                       next_zone_id       = 0;
     bool                         forceLinkDead      = false; // Don't allow last_update tap if forced to die
     bool                         hasDecryptedPacket = false; // used to check if the client still needs an 0x00A
+    bool                         hasSentGameOk      = false; // the client has loaded this zone and sent C2S 0x00C
+    timer::time_point            loginTime          = {};    // when the last C2S 0x00A was taken
     timer::time_point            addressChanged     = {};    // last time a 0x00A moved this session
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
@@ -71,6 +73,9 @@ struct MapSession
     // Used to resend 0x00B zoneout packet in case the client needs it
     GP_GAME_LOGOUT_STATE zone_type = GP_GAME_LOGOUT_STATE::NONE;
     IPP                  zone_ipp  = {};
+
+    // Sent C2S 0x00C, or took so long it never will. Until then most packets and every zone change wait.
+    auto hasLoadedZone() const -> bool;
 
     void incrementBlowfish();
     void initBlowfish();
