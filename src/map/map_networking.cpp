@@ -26,6 +26,7 @@
 #include <common/tracy.h>
 
 #include "entities/char_entity.h"
+#include "enums/packet_s2c.h"
 
 #include "packets/basic.h"
 #include "packets/s2c/0x00b_logout.h"
@@ -58,6 +59,36 @@ auto hasZoneOutReply(const uint8* buff, const size_t buffsize) -> bool
     }
 
     return false;
+}
+
+// What retail sends before C2S 0x00C. The client drops and still acks anything else, so it would never be resent.
+auto isSentBeforeGameOk(const PacketS2C type, const bool loginReplyQueued) -> bool
+{
+    // First the zone-in reply, alone in its datagram. The client drops this GRAP_LIST, and retail resends it after C2S 0x00C.
+    if (loginReplyQueued)
+    {
+        switch (type)
+        {
+            case PacketS2C::GP_SERV_COMMAND_LOGIN:
+            case PacketS2C::GP_SERV_COMMAND_ITEM_MAX:
+            case PacketS2C::GP_SERV_COMMAND_EQUIP_CLEAR:
+            case PacketS2C::GP_SERV_COMMAND_GRAP_LIST:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    // Then only the equip list and party lists
+    switch (type)
+    {
+        case PacketS2C::GP_SERV_COMMAND_EQUIP_LIST:
+        case PacketS2C::GP_SERV_COMMAND_GROUP_TBL:
+        case PacketS2C::GP_SERV_COMMAND_GROUP_LIST:
+            return true;
+        default:
+            return false;
+    }
 }
 
 } // namespace
@@ -174,8 +205,8 @@ void MapNetworking::handle_incoming_packet(ByteSpan buffer, const IPP& ipp)
         std::swap(size, PSession->server_packet_size);
     }
 
-    // If client is logging out, just close it.
-    if (PSession->shuttingDown == 1)
+    // If client is logging out, close it once its 0x00B has gone out
+    if (PSession->shuttingDown == 1 && PSession->PChar == nullptr)
     {
         mapSessions_.destroySession(PSession);
     }
@@ -596,12 +627,27 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
     // Flag byte and trailing bit count
     auto encodedSize = size_t{ 1 + sizeof(uint32) };
 
+    // The 0x00A handler puts its reply at the front, so the reply goes out before anything else
+    const auto loginReplyQueued = !PSession->hasLoadedZone() &&
+                                  std::ranges::any_of(
+                                      PChar->getPacketList(),
+                                      [](const auto& PPacket)
+                                      {
+                                          return PPacket->getType() == static_cast<uint16>(PacketS2C::GP_SERV_COMMAND_LOGIN);
+                                      });
+
     *buffsize = FFXI_HEADER_SIZE;
 
     // Estimate each packet's encoded size, as the client's send queue does, and stop before the batch passes the limit
     for (const auto& PSmallPacket : PChar->getPacketList())
     {
         if (packets >= kMaxPacketPerCompression)
+        {
+            break;
+        }
+
+        // Until C2S 0x00C everything else waits in order, 0x00B and entity spawns included
+        if (!PSession->hasLoadedZone() && !isSentBeforeGameOk(static_cast<PacketS2C>(PSmallPacket->getType()), loginReplyQueued))
         {
             break;
         }
@@ -632,6 +678,12 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
         encodedSize += encodedNext;
 
         packets++;
+
+        // Retail ends the datagram with 0x00A, and the equip list follows in the next one
+        if (PSmallPacket->getType() == static_cast<uint16>(PacketS2C::GP_SERV_COMMAND_LOGIN))
+        {
+            break;
+        }
     }
 
     const auto maybePacketSize = [&]

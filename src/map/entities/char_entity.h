@@ -537,7 +537,8 @@ public:
     auto isPacketListEmpty() -> bool;
     auto popPacket() -> std::unique_ptr<CBasicPacket>; // Get first packet from PacketList
     auto getPacketCount() -> size_t;
-    void erasePackets(uint8 num); // Erase num elements from front of packet list
+    void erasePackets(uint8 num);               // Erase num elements from front of packet list
+    void movePacketsToFront(std::size_t count); // Send the last count packets before the rest
     auto isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool;
 
     bool         pendingPositionUpdate;

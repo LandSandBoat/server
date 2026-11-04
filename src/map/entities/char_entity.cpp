@@ -497,6 +497,12 @@ void CCharEntity::erasePackets(uint8 num)
     }
 }
 
+void CCharEntity::movePacketsToFront(const std::size_t count)
+{
+    const auto moved = std::min(count, PacketList.size());
+    std::rotate(PacketList.begin(), PacketList.end() - static_cast<std::ptrdiff_t>(moved), PacketList.end());
+}
+
 auto CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool
 {
     // Filter others synthesis results

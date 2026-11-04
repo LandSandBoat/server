@@ -152,11 +152,12 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         }
     }
 
-    // Only release client from "Downloading Data" if the packet sequence came in without a drop on 0x00D
-    // It is also possible that the client also never received our packets to release themselves from the loading screen.
-    // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
+    // The client leaves "Downloading data" on the first S2C 0x00A it accepts, so every retry gets one
     if (PChar->loc.zone != nullptr)
     {
+        // Ahead of anything the zone-in queued, which waits for C2S 0x00C
+        const auto queued = PChar->getPacketCount();
+
         PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
         PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
@@ -169,6 +170,9 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
                 PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(*eloc, static_cast<SLOTTYPE>(i));
             }
         }
+
+        PChar->movePacketsToFront(PChar->getPacketCount() - queued);
+
         PChar->status = xi::Status::Normal;
         PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
