@@ -2067,7 +2067,7 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
 
             if (m_POwner->PPet != nullptr && PChar != nullptr)
             {
-                CPetEntity* PPet          = (CPetEntity*)m_POwner->PPet;
+                CPetEntity* PPet          = static_cast<CPetEntity*>(m_POwner->PPet);
                 ELEMENT     petElement    = static_cast<ELEMENT>(PPet->m_Element);
                 bool        elementValid  = petElement >= ELEMENT_FIRE && petElement <= ELEMENT_DARK; // Check if the element is not 0 (None) or out of bounds
                 uint8       petElementIdx = 0;
@@ -2146,7 +2146,7 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
 
             if (m_POwner->health.mp == 0 && m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET)
             {
-                CPetEntity* PPet = (CPetEntity*)m_POwner->PPet;
+                CPetEntity* PPet = static_cast<CPetEntity*>(m_POwner->PPet);
                 if (PPet->getPetType() == PET_TYPE::AVATAR)
                 {
                     petutils::DespawnPet(m_POwner);

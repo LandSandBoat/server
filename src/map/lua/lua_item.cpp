@@ -180,8 +180,8 @@ auto CLuaItem::getAugment(uint8 slot) -> sol::table
     auto* PItem = static_cast<const CItemEquipment*>(m_readItem);
 
     uint16 augment    = PItem->getAugment(slot);
-    uint16 augmentId  = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
-    uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augment), 11, 5);
+    uint16 augmentId  = (uint16)unpackBitsBE(reinterpret_cast<uint8*>(&augment), 0, 11);
+    uint8  augmentVal = (uint8)unpackBitsBE(reinterpret_cast<uint8*>(&augment), 11, 5);
 
     sol::table table = lua.create_table();
     table[1]         = augmentId;

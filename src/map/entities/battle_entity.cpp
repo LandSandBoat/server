@@ -45,6 +45,7 @@
 #include "attack.h"
 #include "attackround.h"
 #include "data/enums/mob_mod.h"
+#include "entities/automaton_entity.h"
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "items/item_weapon.h"
@@ -1234,7 +1235,7 @@ auto CBattleEntity::ATT(SLOTTYPE slot) -> uint16
             }
         }
     }
-    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
+    else if (this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
     {
         ATT += this->GetSkill(xi::SkillType::AutomatonMelee);
     }
@@ -1576,7 +1577,7 @@ auto CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy) -> uint16
         ACC = ACC + std::min<int16>((ACC * getMod(xi::Mod::FOOD_ACCP) / 100.f), getMod(xi::Mod::FOOD_ACC_CAP));
         return std::max<int16>(0, ACC);
     }
-    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
+    else if (this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
     {
         int32 skillLevel = this->GetSkill(xi::SkillType::AutomatonMelee);
 
@@ -2573,7 +2574,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
         if (IsMagicCovered)
         {
-            state.ApplyMagicCoverEnmity(POriginalTarget, PActionTarget, (CMobEntity*)this);
+            state.ApplyMagicCoverEnmity(POriginalTarget, PActionTarget, static_cast<CMobEntity*>(this));
         }
         else
         {
@@ -3769,7 +3770,7 @@ auto CBattleEntity::OnAttack(CAttackState& state, action_t& action) -> bool
                         else if (PTarget->objtype == TYPE_PET && PTarget->PMaster && dynamic_cast<const CCharEntity*>(PTarget->PMaster) != nullptr &&
                                  static_cast<CPetEntity*>(PTarget)->getPetType() == PET_TYPE::AUTOMATON)
                         {
-                            puppetutils::TrySkillUP((CAutomatonEntity*)PTarget, xi::SkillType::AutomatonMelee, GetMLevel());
+                            puppetutils::TrySkillUP(static_cast<CAutomatonEntity*>(PTarget), xi::SkillType::AutomatonMelee, GetMLevel());
                         }
                     }
                 }
@@ -3894,7 +3895,7 @@ auto CBattleEntity::OnAttack(CAttackState& state, action_t& action) -> bool
             // Handle addtl effects/enspells only if the target is not already dead
             if (PTarget->GetHPP() > 0)
             {
-                battleutils::HandleEnspell(this, PTarget, &actionResult, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()], attack.GetDamage(), attack);
+                battleutils::HandleEnspell(this, PTarget, &actionResult, attack.IsFirstSwing(), static_cast<CItemWeapon*>(this->m_Weapons[attack.GetWeaponSlot()]), attack.GetDamage(), attack);
             }
             battleutils::HandleSpikesDamage(this, PTarget, &actionResult, attack.GetDamage());
         }

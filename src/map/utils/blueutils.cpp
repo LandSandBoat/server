@@ -59,7 +59,7 @@ void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool 
             // Blue spells in SetBlueSpells must be 0x200 ofsetted so it's 1 byte per spell.
             if (PChar->m_SetBlueSpells[slotIndex] != 0)
             {
-                CBlueSpell* POldSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slotIndex] + 0x200));
+                CBlueSpell* POldSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slotIndex] + 0x200)));
                 PChar->delModifiers(&POldSpell->modList);
                 PChar->m_SetBlueSpells[slotIndex] = 0x00;
             }
@@ -190,7 +190,7 @@ auto HasEnoughSetPoints(CCharEntity* PChar, CBlueSpell* PSpellToAdd, uint8 slotT
     {
         if (slot != slotToPut && PChar->m_SetBlueSpells[slot] != 0)
         {
-            CBlueSpell* setSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200));
+            CBlueSpell* setSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200)));
             if (setSpell)
             {
                 setpoints += setSpell->getSetPoints();
@@ -207,7 +207,7 @@ void UnequipAllBlueSpells(CCharEntity* PChar)
     {
         if (m_SetBlueSpell != 0)
         {
-            CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200));
+            CBlueSpell* PSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200)));
             m_SetBlueSpell     = 0;
             PChar->delModifiers(&PSpell->modList);
         }
@@ -273,7 +273,7 @@ void CheckSpellLevels(CCharEntity* PChar)
         {
             if (PChar->m_SetBlueSpells[slot] != 0)
             {
-                CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200));
+                CBlueSpell* PSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200)));
                 if (PSpell && level < PSpell->getJob(xi::Job::BLU))
                 {
                     SetBlueSpell(PChar, PSpell, slot, false);
@@ -367,7 +367,7 @@ void LoadSetSpells(CCharEntity* PChar)
         {
             if (m_SetBlueSpell != 0)
             {
-                CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200));
+                CBlueSpell* PSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200)));
                 if (PSpell == nullptr)
                 {
                     m_SetBlueSpell = 0;
@@ -393,7 +393,7 @@ void ValidateBlueSpells(CCharEntity* PChar)
     {
         if (PChar->m_SetBlueSpells[slot] != 0)
         {
-            CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200));
+            CBlueSpell* PSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200)));
             if (currentPoints + PSpell->getSetPoints() > maxSetPoints)
             {
                 SetBlueSpell(PChar, PSpell, slot, false);
@@ -413,7 +413,7 @@ void ValidateBlueSpells(CCharEntity* PChar)
     {
         if (PChar->m_SetBlueSpells[slot] != 0)
         {
-            SetBlueSpell(PChar, (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200)), slot, false);
+            SetBlueSpell(PChar, static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slot] + 0x200))), slot, false);
         }
     }
 
@@ -438,7 +438,7 @@ void CalculateTraits(CCharEntity* PChar)
     {
         if (m_SetBlueSpell != 0)
         {
-            CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200));
+            CBlueSpell* PSpell = static_cast<CBlueSpell*>(spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200)));
 
             if (PSpell)
             {
@@ -468,7 +468,7 @@ void CalculateTraits(CCharEntity* PChar)
         {
             if (i->getLevel() == 0)
             {
-                CBlueTrait* PTrait = (CBlueTrait*)i;
+                CBlueTrait* PTrait = static_cast<CBlueTrait*>(i);
 
                 // Player is eligible for this Blue Trait
                 if (PTrait && PTrait->getCategory() == category && totalWeight >= PTrait->getPoints() && !PTrait->getJobPointsOnly())
@@ -547,7 +547,7 @@ void CalculateTraits(CCharEntity* PChar)
     {
         for (auto it = traitsToAdd.begin(); it != traitsToAdd.end();)
         {
-            auto        currentTrait = (CBlueTrait*)*it;
+            auto        currentTrait = static_cast<CBlueTrait*>(*it);
             auto        newRank      = currentTrait->getRank() + traitTierBonus;
             CBlueTrait* newTrait     = nullptr;
 
@@ -555,7 +555,7 @@ void CalculateTraits(CCharEntity* PChar)
             {
                 if (i->getLevel() == 0)
                 {
-                    CBlueTrait* PTrait = (CBlueTrait*)i;
+                    CBlueTrait* PTrait = static_cast<CBlueTrait*>(i);
 
                     if (isSameBluTrait(PTrait, currentTrait) && newRank >= PTrait->getRank())
                     {

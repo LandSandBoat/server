@@ -2439,11 +2439,11 @@ void DespawnMob(uint32 mobid, const sol::object& arg2)
     if (arg2.is<CLuaInstance>())
     {
         auto PInstance = arg2.as<CLuaInstance>().GetInstance();
-        PMob           = (CMobEntity*)PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB);
+        PMob           = static_cast<CMobEntity*>(PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB));
     }
     else
     {
-        PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        PMob = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB));
     }
 
     if (PMob != nullptr)
@@ -4230,7 +4230,7 @@ void OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
         PChar->ForAlliance(
             [PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename, &optParams](CBattleEntity* PPartyMember)
             {
-                CCharEntity* PMember = (CCharEntity*)PPartyMember;
+                CCharEntity* PMember = static_cast<CCharEntity*>(PPartyMember);
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
                     uint32 weaponskillVar    = PMob->GetLocalVar("weaponskillHit");
@@ -4562,7 +4562,7 @@ auto OnUseWeaponSkill(CBattleEntity* PChar, CBaseEntity* PMob, CWeaponSkill* wsk
 
     if (criticalHit)
     {
-        luautils::OnCriticalHit((CBattleEntity*)PMob, PChar);
+        luautils::OnCriticalHit(static_cast<CBattleEntity*>(PMob), PChar);
     }
 
     return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
@@ -5020,7 +5020,7 @@ auto OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill,
     // TODO: This probably shouldn't be in here
     if (PMob->objtype == TYPE_PET && settings::get<bool>("map.SKILLUP_BLOODPACT"))
     {
-        CPetEntity* PPet = (CPetEntity*)PMob;
+        CPetEntity* PPet = static_cast<CPetEntity*>(PMob);
         if (auto* PMaster = dynamic_cast<CCharEntity*>(PPet->PMaster); PPet->getPetType() == PET_TYPE::AVATAR && PMaster)
         {
             if (PMaster->GetMJob() == xi::Job::SMN)
@@ -5769,7 +5769,7 @@ void DisallowRespawn(uint32 mobid, bool allowRespawn)
 {
     TracyZoneScoped;
 
-    CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+    CMobEntity* PMob = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB));
     if (PMob != nullptr)
     {
         PMob->m_AllowRespawn = !allowRespawn;
@@ -5790,7 +5790,7 @@ auto GetMobRespawnTime(uint32 mobid) -> uint32
 {
     TracyZoneScoped;
 
-    CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+    CMobEntity* PMob = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB));
 
     if (PMob != nullptr)
     {

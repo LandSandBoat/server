@@ -148,7 +148,7 @@ auto unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64;
 //(un)pack functions for Little Endian(LE) targets
 auto packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint32;
 auto packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit) -> uint32;
-auto unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64;
+auto unpackBitsLE(const uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64;
 auto unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit) -> uint64;
 
 // Encode/Decode Strings to/from FFXI 6-bit format

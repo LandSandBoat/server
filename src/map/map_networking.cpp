@@ -194,9 +194,9 @@ auto MapNetworking::map_decipher_packet(uint8* buff, size_t buffsize, MapSession
     const auto ip = PSession->client_ipp.getIP();
 
     // tmp is an even count of 4-byte words, i.e. 2 words (one 64-bit block) per cipher step.
-    blowfish_decipher_blocks((uint32*)buff + 7, tmp / 2, pbfkey->P, pbfkey->S[0]);
+    blowfish_decipher_blocks(reinterpret_cast<uint32*>(buff) + 7, tmp / 2, pbfkey->P, pbfkey->S[0]);
 
-    if (checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(buffsize - (FFXI_HEADER_SIZE + 16)), (char*)(buff + buffsize - 16)) == 0)
+    if (checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(buffsize - (FFXI_HEADER_SIZE + 16)), reinterpret_cast<char*>(buff + buffsize - 16)) == 0)
     {
         return 0;
     }
@@ -223,7 +223,7 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         {
             return -1;
         }
-        checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), (char*)(buff + size - 16));
+        checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), reinterpret_cast<char*>(buff + size - 16));
     }
     catch (...)
     {
@@ -793,7 +793,7 @@ void MapNetworking::finalizePacket(uint8* buff, size_t* buffsize, size_t PacketS
     }
 
     // cypherSize is an even count of 4-byte words, i.e. 2 words (one 64-bit block) per cipher step.
-    blowfish_encipher_blocks((uint32*)(buff) + 7, cypherSize / 2, pbfkey->P, pbfkey->S[0]);
+    blowfish_encipher_blocks(reinterpret_cast<uint32*>(buff) + 7, cypherSize / 2, pbfkey->P, pbfkey->S[0]);
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 }

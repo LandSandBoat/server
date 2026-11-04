@@ -172,7 +172,7 @@ void CAbilityState::ApplyEnmity() const
         {
             if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
             {
-                CMobEntity* mob = (CMobEntity*)PTarget;
+                CMobEntity* mob = static_cast<CMobEntity*>(PTarget);
                 mob->PEnmityContainer->UpdateEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
                 battleutils::ClaimMob(mob, m_PEntity);
             }

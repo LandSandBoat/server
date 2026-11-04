@@ -999,7 +999,7 @@ void CLuaBaseEntity::injectPacket(const std::string& filename)
             return;
         }
 
-        ((CCharEntity*)m_PBaseEntity)->pushPacket(std::move(PPacket));
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(std::move(PPacket));
 
         fclose(File);
     }
@@ -1546,7 +1546,7 @@ auto CLuaBaseEntity::getEventTarget() -> CBaseEntity*
         return nullptr;
     }
 
-    auto* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     if (PChar->currentEvent->targetEntity == nullptr)
     {
         ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->getName());
@@ -3638,7 +3638,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
     // Zoning
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar = ((CCharEntity*)m_PBaseEntity);
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
         if (va[4].is<uint8>() && PChar->status == xi::Status::Disappear)
         {
             // do not modify zone/position if the character is already zoning
@@ -3896,7 +3896,7 @@ auto CLuaBaseEntity::getTeleportTable(uint8 type) -> sol::table
     sol::table teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
-    CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
+    CCharEntity*  PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     switch (tele_type)
     {
@@ -5256,7 +5256,7 @@ auto CLuaBaseEntity::addLinkpearl(const std::string& lsname, bool equip) -> bool
         return false;
     }
 
-    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
     auto         PItem  = xi::items::spawn(PChar->m_GMlevel > 0 ? 514 : 515);
     LSTYPE       lstype = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
     if (PItem == nullptr)
@@ -5774,7 +5774,7 @@ auto CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID
         return nullptr;
     }
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     CItem* PItem = nullptr;
 
@@ -5815,7 +5815,7 @@ auto CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& extr
         return storeFailed;
     }
 
-    auto* PChar      = (CCharEntity*)m_PBaseEntity;
+    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
     auto  slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
 
     if (slipSlotId == 255)
@@ -7140,7 +7140,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         // clang-format off
         PChar->ForParty([](CBattleEntity* PMember)
         {
-            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+            static_cast<CCharEntity*>(PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
         });
         // clang-format on
 
@@ -10831,7 +10831,7 @@ auto CLuaBaseEntity::getDeathType() -> int32
 
 void CLuaBaseEntity::setDeathType(int32 value)
 {
-    ((CMobEntity*)m_PBaseEntity)->SetDeathType(value);
+    static_cast<CMobEntity*>(m_PBaseEntity)->SetDeathType(value);
 }
 
 /************************************************************************
@@ -11868,7 +11868,7 @@ auto CLuaBaseEntity::getParty() -> sol::table
 
     // clang-format off
     auto table = lua.create_table();
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
+    static_cast<CBattleEntity*>(m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
     });
@@ -11894,7 +11894,7 @@ auto CLuaBaseEntity::getPartyWithTrusts() -> sol::table
 
     // clang-format off
     auto table = lua.create_table();
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
+    static_cast<CCharEntity*>(m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
     });
@@ -12042,7 +12042,7 @@ auto CLuaBaseEntity::getPartyLeader() -> CBaseEntity*
         return nullptr;
     }
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     if (PChar->PParty)
     {
         CBattleEntity* PLeader = PChar->PParty->GetLeader();
@@ -12064,7 +12064,7 @@ auto CLuaBaseEntity::getPartyLeader() -> CBaseEntity*
 
 void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 {
-    auto* target = (CBattleEntity*)m_PBaseEntity;
+    auto* target = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     // clang-format off
     target->ForParty([&target, &range, &function](CBattleEntity* member)
@@ -12100,7 +12100,7 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
         args[idx++] = v.get<uint16>();
     }
 
-    CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     PEntity->ForParty(
         [&](CBattleEntity* PMember)
@@ -12124,7 +12124,7 @@ auto CLuaBaseEntity::hasPartyEffect(uint16 effectid) -> bool
         return false;
     }
 
-    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (PChar->PParty != nullptr)
     {
@@ -12158,7 +12158,7 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
         return;
     }
 
-    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (const auto& member : PChar->PParty->members)
     {
@@ -13328,7 +13328,7 @@ void CLuaBaseEntity::addRecast(uint8 recastCont, uint16 recastID, uint32 duratio
         PBattleEntity->PRecastContainer->Add(recastContainer, static_cast<xi::Recast>(recastID), std::chrono::seconds(duration));
         if (PBattleEntity->objtype == TYPE_PC)
         {
-            CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
             PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
             PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         }
@@ -15425,9 +15425,9 @@ auto CLuaBaseEntity::isTandemActive() -> bool
 
 auto CLuaBaseEntity::addBurden(uint8 element, uint8 burden) -> uint8
 {
-    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
+    if (static_cast<CBattleEntity*>(m_PBaseEntity)->PPet && static_cast<CPetEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden(element, burden);
+        return (static_cast<CAutomatonEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet))->addBurden(element, burden);
     }
 
     return 0;
@@ -15442,9 +15442,9 @@ auto CLuaBaseEntity::addBurden(uint8 element, uint8 burden) -> uint8
  ************************************************************************/
 auto CLuaBaseEntity::getOverloadChance(uint8 element) -> uint8
 {
-    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
+    if (static_cast<CBattleEntity*>(m_PBaseEntity)->PPet && static_cast<CPetEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->overloadChance(element);
+        return (static_cast<CAutomatonEntity*>(static_cast<CBattleEntity*>(m_PBaseEntity)->PPet))->overloadChance(element);
     }
 
     return 0;
@@ -19350,7 +19350,7 @@ auto CLuaBaseEntity::getEnmityList() -> sol::table
         return sol::lua_nil;
     }
 
-    EnmityList_t* enmityList = ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->GetEnmityList();
+    EnmityList_t* enmityList = static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->GetEnmityList();
 
     if (enmityList)
     {
@@ -19365,7 +19365,7 @@ auto CLuaBaseEntity::getEnmityList() -> sol::table
                 subTable["ce"]       = member.second.CE;
                 subTable["ve"]       = member.second.VE;
                 subTable["active"]   = member.second.active;
-                subTable["tameable"] = ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->IsTameable();
+                subTable["tameable"] = static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->IsTameable();
 
                 table.add(subTable);
             }
@@ -19388,7 +19388,7 @@ auto CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> CBase
 {
     if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
-        CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
+        CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar(static_cast<CBattleEntity*>(m_PBaseEntity), PMob);
         if (taTarget)
         {
             return taTarget;
@@ -19818,7 +19818,7 @@ void CLuaBaseEntity::weaknessTrigger(uint8 level)
 
 void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType)
 {
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (PLuaBaseEntity != nullptr)
     {

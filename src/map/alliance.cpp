@@ -359,8 +359,8 @@ void CAlliance::pushParty(CParty* PParty, uint8 number)
 
     for (std::size_t i = 0; i < PParty->members.size(); ++i)
     {
-        PParty->ReloadTreasurePool((CCharEntity*)PParty->members.at(i));
-        charutils::SaveCharStats((CCharEntity*)PParty->members.at(i));
+        PParty->ReloadTreasurePool(static_cast<CCharEntity*>(PParty->members.at(i)));
+        charutils::SaveCharStats(static_cast<CCharEntity*>(PParty->members.at(i)));
     }
 }
 

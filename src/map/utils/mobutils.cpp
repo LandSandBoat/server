@@ -934,13 +934,13 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         }
     }
 
-    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetBaseWeaponDamage(PMob, SLOT_MAIN));
-    ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetBaseWeaponDamage(PMob, SLOT_RANGED));
+    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetBaseWeaponDamage(PMob, SLOT_MAIN));
+    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_RANGED])->setDamage(GetBaseWeaponDamage(PMob, SLOT_RANGED));
 
     // reduce weapon delay of MNK
     if (PMob->GetMJob() == xi::Job::MNK)
     {
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->resetDelay();
     }
 
     uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
@@ -1015,7 +1015,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     if (PMob->getMobMod(xi::MobMod::PetSpellList) && PMob->PPet != nullptr)
     {
         // Stubborn_Dredvodd
-        CMobEntity* PPet = (CMobEntity*)PMob->PPet;
+        CMobEntity* PPet = static_cast<CMobEntity*>(PMob->PPet);
 
         // give pet spell list
         PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PMob->getMobMod(xi::MobMod::PetSpellList));
