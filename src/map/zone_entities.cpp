@@ -572,7 +572,9 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
                 }
             }
 
-            PChar->PPet = nullptr;
+            // The player may be destroyed before the pet's next tick.
+            PChar->PPet->PMaster = nullptr;
+            PChar->PPet          = nullptr;
         }
     }
 
