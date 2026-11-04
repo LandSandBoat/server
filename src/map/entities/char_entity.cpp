@@ -497,6 +497,17 @@ void CCharEntity::erasePackets(uint8 num)
     }
 }
 
+// Only for types popPacket keeps no bookkeeping for
+void CCharEntity::erasePacketsOfType(const std::span<const uint16> types)
+{
+    std::erase_if(
+        PacketList,
+        [&](const auto& PPacket)
+        {
+            return std::ranges::contains(types, PPacket->getType());
+        });
+}
+
 void CCharEntity::movePacketsToFront(const std::size_t count)
 {
     const auto moved = std::min(count, PacketList.size());

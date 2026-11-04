@@ -63,6 +63,10 @@ struct MapSession
     bool                         forceLinkDead      = false; // Don't allow last_update tap if forced to die
     bool                         hasDecryptedPacket = false; // used to check if the client still needs an 0x00A
     bool                         hasSentGameOk      = false; // the client has loaded this zone and sent C2S 0x00C
+    uint16                       loginSeq           = 0;     // header seq of the last C2S 0x00A taken for this zone
+    IPP                          loginIpp           = {};    // where that 0x00A came from
+    IPP                          previousLoginIpp   = {};    // the address before it, for a late retry after a NAT rebind
+    uint16                       previousLoginSeq   = 0;     // header seq of the last 0x00A taken from there
     timer::time_point            loginTime          = {};    // when the last C2S 0x00A was taken
     timer::time_point            addressChanged     = {};    // last time a 0x00A moved this session
 
@@ -76,6 +80,12 @@ struct MapSession
 
     // Sent C2S 0x00C, or took so long it never will. Until then most packets and every zone change wait.
     auto hasLoadedZone() const -> bool;
+
+    // A plaintext C2S 0x00A this session must not take
+    auto isStaleLogin(uint16 seq, const IPP& from) const -> bool;
+
+    // Record a C2S 0x00A the server took
+    void takeLogin(uint16 seq, const IPP& from);
 
     void incrementBlowfish();
     void initBlowfish();

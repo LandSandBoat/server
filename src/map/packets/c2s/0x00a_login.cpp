@@ -56,12 +56,12 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     //
     if (header.sync > 1)
     {
+        // The client has seen this sync already, so everything from here goes out above it
         PSession->server_packet_id = header.sync;
 
-        // Clear all pending packets for this character.
-        // This incoming 0x00A from the client wants us to set the starting sync count for all new packets to the sync count from 0x02.
-        // If we do not do this, all further packets may be ignored by the client and will result in disconnection from the server.
-        PChar->clearPacketList();
+        // Only the missed reply is replaced. Held packets get their sync when they go out
+        constexpr auto staleReply = std::to_array<uint16>({ 0x00A, 0x01C, 0x04F, 0x050, 0x051 });
+        PChar->erasePacketsOfType(staleReply);
     }
 
     // No real distinction between these two states in the 0x00A handler --

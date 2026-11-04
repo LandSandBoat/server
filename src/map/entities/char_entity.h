@@ -47,6 +47,7 @@
 #include <deque>
 #include <list>
 #include <memory>
+#include <span>
 #include <string>
 #include <unordered_set>
 #include <utility>
@@ -539,6 +540,7 @@ public:
     auto getPacketCount() -> size_t;
     void erasePackets(uint8 num);               // Erase num elements from front of packet list
     void movePacketsToFront(std::size_t count); // Send the last count packets before the rest
+    void erasePacketsOfType(std::span<const uint16> types);
     auto isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool;
 
     bool         pendingPositionUpdate;

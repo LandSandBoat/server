@@ -298,7 +298,8 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
             return -1;
         }
 
-        uint32 packetCharID = loginPacket.UniqueNo;
+        const auto packetCharID = loginPacket.UniqueNo;
+        const auto loginSeq     = ref<uint16>(buff, 0);
 
         // client may zone in from a new address, find the session by char instead
         // unknown00 goes up by one on every client retry
@@ -315,6 +316,12 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
                 if (timer::now() < existing->addressChanged + std::chrono::seconds(1))
                 {
                     ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session moved to {} less than a second ago (retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00);
+                    return -1;
+                }
+
+                if (existing->isStaleLogin(loginSeq, ipp))
+                {
+                    ShowWarningFmt("recv_parse: stale 0x00A for charid {} from {} ignored, session stays at {} (seq {}, last {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginSeq, existing->loginSeq);
                     return -1;
                 }
 
@@ -342,6 +349,12 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
 
         if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PSession->hasDecryptedPacket)
         {
+            return -1;
+        }
+
+        if (PSession->isStaleLogin(loginSeq, ipp))
+        {
+            ShowWarningFmt("recv_parse: stale 0x00A for charid {} ignored (seq {}, last {})", packetCharID, loginSeq, PSession->loginSeq);
             return -1;
         }
 
@@ -403,12 +416,12 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
             }
         }
 
+        PSession->takeLogin(loginSeq, ipp);
+
         PSession->client_packet_id = 0;
         PSession->server_packet_id = 0;
         PSession->zone_ipp         = {};
         PSession->zone_type        = GP_GAME_LOGOUT_STATE::NONE;
-        PSession->hasSentGameOk    = false;
-        PSession->loginTime        = timer::now();
 
         return 0;
     }

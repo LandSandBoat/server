@@ -24,6 +24,17 @@
 #include "common/md52.h"
 #include "entities/char_entity.h"
 
+namespace
+{
+
+// Seqs wrap, so one up to half the range behind another counts as older
+auto isSeqAtOrBefore(const uint16 seq, const uint16 other) -> bool
+{
+    return static_cast<uint16>(other - seq) < 0x8000;
+}
+
+} // namespace
+
 MapSession::MapSession()  = default;
 MapSession::~MapSession() = default;
 
@@ -32,9 +43,55 @@ auto MapSession::hasLoadedZone() const -> bool
     return hasSentGameOk || timer::now() > loginTime + kZoneLoadTimeout;
 }
 
+auto MapSession::isStaleLogin(const uint16 seq, const IPP& from) const -> bool
+{
+    // Seqs are compared per address, so a forged 0x00A from elsewhere can't put the real client's retries behind it
+    const auto lastSeq = [&]() -> uint16
+    {
+        if (from == loginIpp)
+        {
+            return loginSeq;
+        }
+
+        if (from == previousLoginIpp)
+        {
+            return previousLoginSeq;
+        }
+
+        return 0;
+    }();
+
+    // An older or repeated seq would rewind the counters, and the client drops replies older than one it has seen
+    if (lastSeq != 0 && isSeqAtOrBefore(seq, lastSeq))
+    {
+        return true;
+    }
+
+    // S2C 0x00B is still queued, so this retry belongs to the zone-in before it
+    return blowfish.status == BLOWFISH_PENDING_ZONE && PChar != nullptr;
+}
+
+void MapSession::takeLogin(const uint16 seq, const IPP& from)
+{
+    hasSentGameOk = false;
+    loginTime     = timer::now();
+
+    // Keep the address before a NAT rebind, so a late retry from it is still checked against its own seq
+    if (!(loginIpp == from))
+    {
+        previousLoginIpp = loginIpp;
+        previousLoginSeq = loginSeq;
+        loginIpp         = from;
+    }
+
+    loginSeq = seq;
+}
+
 void MapSession::incrementBlowfish()
 {
     hasDecryptedPacket = false;
+    loginSeq           = 0;
+    previousLoginSeq   = 0;
     prev_blowfish      = blowfish;
 
     blowfish.key[4] += 2;
