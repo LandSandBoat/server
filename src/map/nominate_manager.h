@@ -39,9 +39,12 @@ struct GP_CLI_COMMAND_SWITCH_VOTE;
 
 struct NominateProposal
 {
-    uint32                              proposerId{};
-    std::string                         proposerName{};
-    uint16                              proposerActIndex{};
+    uint32      proposerId{};
+    std::string proposerName{};
+    uint16      proposerActIndex{};
+    // A None member would let a client send kind 0 past oneOf<> in the 0x0A0 validator. buildProposal
+    // always sets this field.
+    // NOLINTNEXTLINE(bugprone-invalid-enum-default-initialization): Placeholder until buildProposal sets it.
     GP_CLI_COMMAND_SWITCH_PROPOSAL_KIND kind{};
     uint16                              allNum{};
     std::string                         question{};

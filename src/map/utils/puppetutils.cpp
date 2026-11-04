@@ -60,6 +60,8 @@ auto calculateAutomatonModel(const xi::AutomatonFrame frame, const xi::Automaton
                     return 0x07D3;
                 case xi::AutomatonHead::Spiritreaver:
                     return 0x07D7;
+                case xi::AutomatonHead::None:
+                    break;
             }
             break;
         case xi::AutomatonFrame::Valoredge:
@@ -77,6 +79,8 @@ auto calculateAutomatonModel(const xi::AutomatonFrame frame, const xi::Automaton
                     return 0x07D4;
                 case xi::AutomatonHead::Spiritreaver:
                     return 0x07D8;
+                case xi::AutomatonHead::None:
+                    break;
             }
             break;
         case xi::AutomatonFrame::Sharpshot:
@@ -94,6 +98,8 @@ auto calculateAutomatonModel(const xi::AutomatonFrame frame, const xi::Automaton
                     return 0x07D5;
                 case xi::AutomatonHead::Spiritreaver:
                     return 0x07D9;
+                case xi::AutomatonHead::None:
+                    break;
             }
             break;
         case xi::AutomatonFrame::Stormwaker:
@@ -111,7 +117,11 @@ auto calculateAutomatonModel(const xi::AutomatonFrame frame, const xi::Automaton
                     return 0x07D6;
                 case xi::AutomatonHead::Spiritreaver:
                     return 0x07DA;
+                case xi::AutomatonHead::None:
+                    break;
             }
+            break;
+        case xi::AutomatonFrame::None:
             break;
     }
 

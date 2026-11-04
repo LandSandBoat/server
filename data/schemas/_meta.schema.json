@@ -35,6 +35,11 @@
                 "enum": ["pascal", "screaming"],
                 "default": "pascal",
                 "description": "Casing of the C++ member names."
+              },
+              "none": {
+                "type": "boolean",
+                "default": false,
+                "description": "Adds a C++-only `None = 0` member, so a default-initialised value has a name. Data and Lua can't use it."
               }
             }
           },

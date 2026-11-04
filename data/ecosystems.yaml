@@ -13,6 +13,7 @@ meta:
       cpp:
         class:      Family
         underlying: uint16_t
+        none:       true
       lua:
         table: xi.mobFamily
 
@@ -20,6 +21,7 @@ meta:
       cpp:
         class:      Species
         underlying: uint16_t
+        none:       true
       lua:
         table: xi.mobSpecies
 
