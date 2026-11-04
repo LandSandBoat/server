@@ -54,6 +54,9 @@ public:
     void destroyPendingSession(MapSession* map_session_data);
     void destroyPendingSession(uint32 charId);
 
+    // Another process took the char, so drop what this one still holds for it
+    void releaseCharacter(uint32 charId);
+
 private:
     Scheduler&                                    scheduler_;
     std::map<IPP, std::unique_ptr<MapSession>>    sessions_;         // Confirmed sessions mapped by IP

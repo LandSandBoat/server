@@ -812,31 +812,7 @@ void IPCClient::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
 {
     TracyZoneScoped;
 
-    if (auto sessionToDelete = networking_.sessions().getSessionByCharId(message.victimId))
-    {
-        if (sessionToDelete->blowfish.status == BLOWFISH_PENDING_ZONE)
-        {
-            ShowDebugFmt("Closing session of charid {} on request of other process", message.victimId);
-            networking_.sessions().destroySession(sessionToDelete);
-        }
-        else
-        {
-            ShowDebugFmt("KillSession for charid {} not needed", message.victimId);
-        }
-    }
-
-    if (auto sessionToDelete = networking_.sessions().getPendingSessionByCharId(message.victimId))
-    {
-        if (sessionToDelete->blowfish.status == BLOWFISH_PENDING_ZONE)
-        {
-            ShowDebugFmt("Closing pending session of charid {} on request of other process", message.victimId);
-            networking_.sessions().destroySession(sessionToDelete);
-        }
-        else
-        {
-            // ShowDebugFmt("KillSession for charid {} not needed", message.victimId); // noisy
-        }
-    }
+    networking_.sessions().releaseCharacter(message.victimId);
 }
 
 void IPCClient::handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestEvent& message)
