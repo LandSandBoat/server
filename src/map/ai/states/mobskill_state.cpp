@@ -305,9 +305,9 @@ void CMobSkillState::Cleanup(timer::time_point tick)
     // Not interrupted.
     else
     {
-        if (m_PEntity->isAlive() && m_PSkill->getFinalAnimationSub().has_value())
+        if (const auto finalAnimationSub = m_PSkill->getFinalAnimationSub(); m_PEntity->isAlive() && finalAnimationSub.has_value())
         {
-            m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+            m_PEntity->animationsub = *finalAnimationSub;
             m_PEntity->updatemask |= UPDATE_COMBAT;
         }
 

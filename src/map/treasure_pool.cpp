@@ -483,7 +483,8 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
         return;
     }
 
-    if (!m_PoolItems[SlotID].TimeStamp.has_value() || (tick - *m_PoolItems[SlotID].TimeStamp) > treasure_livetime ||
+    const auto& timeStamp = m_PoolItems[SlotID].TimeStamp;
+    if (!timeStamp.has_value() || (tick - *timeStamp) > treasure_livetime ||
         (memberCount() == 1 && m_Members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
         m_PoolItems[SlotID].Lotters.size() == memberCount())
     {

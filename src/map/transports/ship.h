@@ -55,6 +55,6 @@ struct Ship
     void update() const;
 
     void enter(size_t index, uint32 now, uint32 into); // apply everything a phase implies, so a cold start lands in the right state
-    void place(uint32 intoPhase);                      // retail moves a ship mid-phase as often as at its start, so position is tracked apart from state
-    void conceal(uint32 intoPhase);                    // stop drawing it once the departure animation has carried it out of sight
+    void place(size_t index, uint32 intoPhase);        // retail moves a ship mid-phase as often as at its start, so position is tracked apart from state
+    void conceal(size_t index, uint32 intoPhase);      // stop drawing it once the departure animation has carried it out of sight
 };

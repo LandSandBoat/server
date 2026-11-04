@@ -202,10 +202,10 @@ void ShipHandler::tick()
             ship.enter(index, now, into);
         }
 
-        const auto intoPhase = into - ship.phases[*ship.phase].Start;
+        const auto intoPhase = into - ship.phases[index].Start;
 
-        ship.place(intoPhase);
-        ship.conceal(intoPhase);
+        ship.place(index, intoPhase);
+        ship.conceal(index, intoPhase);
     }
 
     // Both directions cross the same zone, so it is only empty when neither leg has anyone aboard.

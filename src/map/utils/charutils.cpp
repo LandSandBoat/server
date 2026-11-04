@@ -1545,20 +1545,16 @@ void SendInventory(CCharEntity* PChar)
     }
 
     CItem* PItem = PChar->getLinkshell(SLOT_LINK1);
-    if (PItem != nullptr)
+    if (const auto eloc1 = PChar->equipLocation(SLOT_LINK1); PItem != nullptr && eloc1)
     {
-        auto eloc1 = PChar->equipLocation(SLOT_LINK1);
-
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc1);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
         PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 1);
     }
 
     PItem = PChar->getLinkshell(SLOT_LINK2);
-    if (PItem != nullptr)
+    if (const auto eloc2 = PChar->equipLocation(SLOT_LINK2); PItem != nullptr && eloc2)
     {
-        auto eloc2 = PChar->equipLocation(SLOT_LINK2);
-
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc2);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
         PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 2);
