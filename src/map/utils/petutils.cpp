@@ -58,7 +58,12 @@
 #include "packets/s2c/0x0ac_command_data.h"
 #include "zone.h"
 
+namespace
+{
+
 std::vector<Pet_t*> g_PPetList;
+
+} // namespace
 
 namespace petutils
 {
@@ -208,6 +213,9 @@ void RetreatToMaster(CBattleEntity* PMaster)
     }
 }
 
+namespace
+{
+
 auto GetJugBase(CPetEntity* PMob, uint8 rank) -> uint16
 {
     uint8 lvl = PMob->GetMLevel();
@@ -250,28 +258,6 @@ auto GetJugBase(CPetEntity* PMob, uint8 rank) -> uint16
             case 7:
                 return (uint16)(3 + (lvl - 1) * 2.3f);
         }
-    }
-    return 0;
-}
-
-auto GetBaseToRank(uint8 rank, uint16 lvl) -> uint16
-{
-    switch (rank)
-    {
-        case 1:
-            return (5 + ((lvl - 1) * 50) / 100);
-        case 2:
-            return (4 + ((lvl - 1) * 45) / 100);
-        case 3:
-            return (4 + ((lvl - 1) * 40) / 100);
-        case 4:
-            return (3 + ((lvl - 1) * 35) / 100);
-        case 5:
-            return (3 + ((lvl - 1) * 30) / 100);
-        case 6:
-            return (2 + ((lvl - 1) * 25) / 100);
-        case 7:
-            return (2 + ((lvl - 1) * 20) / 100);
     }
     return 0;
 }
@@ -372,31 +358,31 @@ void LoadJugStats(CPetEntity* PPet, Pet_t* petStats)
     }
 
     // Stat ranks from mob species
-    uint16 fSTR = GetBaseToRank(petStats->strRank, PPet->GetMLevel());
-    uint16 fDEX = GetBaseToRank(petStats->dexRank, PPet->GetMLevel());
-    uint16 fVIT = GetBaseToRank(petStats->vitRank, PPet->GetMLevel());
-    uint16 fAGI = GetBaseToRank(petStats->agiRank, PPet->GetMLevel());
-    uint16 fINT = GetBaseToRank(petStats->intRank, PPet->GetMLevel());
-    uint16 fMND = GetBaseToRank(petStats->mndRank, PPet->GetMLevel());
-    uint16 fCHR = GetBaseToRank(petStats->chrRank, PPet->GetMLevel());
+    uint16 fSTR = mobutils::GetBaseToRank(petStats->strRank, PPet->GetMLevel());
+    uint16 fDEX = mobutils::GetBaseToRank(petStats->dexRank, PPet->GetMLevel());
+    uint16 fVIT = mobutils::GetBaseToRank(petStats->vitRank, PPet->GetMLevel());
+    uint16 fAGI = mobutils::GetBaseToRank(petStats->agiRank, PPet->GetMLevel());
+    uint16 fINT = mobutils::GetBaseToRank(petStats->intRank, PPet->GetMLevel());
+    uint16 fMND = mobutils::GetBaseToRank(petStats->mndRank, PPet->GetMLevel());
+    uint16 fCHR = mobutils::GetBaseToRank(petStats->chrRank, PPet->GetMLevel());
 
     // Stat ranks from mob main job
-    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
-    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
-    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
-    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
-    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
-    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
-    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+    uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
 
     // Jugs don't seem to have sub jobs but will still handle it here incase that ever changes in future.
-    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
-    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
-    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
-    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
-    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
-    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
-    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+    uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
 
     sSTR /= 2;
     sDEX /= 2;
@@ -776,6 +762,8 @@ auto CalculatePetHPMP(CBattleEntity* PMaster, CPetEntity* PPet) -> void
     PPet->health.mp    = PPet->health.maxmp;
 }
 
+} // namespace
+
 void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
     uint32 petID = PPet->petID();
@@ -833,30 +821,30 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     CalculatePetHPMP(PMaster, PPet);
 
     // Set the stat attributes of the avatar/spirit.
-    uint16 fSTR = GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
-    uint16 fDEX = GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
-    uint16 fVIT = GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
-    uint16 fAGI = GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
-    uint16 fINT = GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
-    uint16 fMND = GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
-    uint16 fCHR = GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
+    uint16 fSTR = mobutils::GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
+    uint16 fDEX = mobutils::GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
+    uint16 fVIT = mobutils::GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
+    uint16 fAGI = mobutils::GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
+    uint16 fINT = mobutils::GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
+    uint16 fMND = mobutils::GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
+    uint16 fCHR = mobutils::GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
 
     // Stat ranks from mob main job
-    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
-    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
-    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
-    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
-    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
-    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
-    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+    uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
 
-    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
-    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
-    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
-    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
-    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
-    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
-    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+    uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
 
     sSTR /= 2;
     sDEX /= 2;
@@ -974,30 +962,30 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     // Set the stat attributes of the wyvern.
     // Stat ranks from mob species
-    uint16 fSTR = GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
-    uint16 fDEX = GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
-    uint16 fVIT = GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
-    uint16 fAGI = GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
-    uint16 fINT = GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
-    uint16 fMND = GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
-    uint16 fCHR = GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
+    uint16 fSTR = mobutils::GetBaseToRank(PPetData->strRank, PPet->GetMLevel());
+    uint16 fDEX = mobutils::GetBaseToRank(PPetData->dexRank, PPet->GetMLevel());
+    uint16 fVIT = mobutils::GetBaseToRank(PPetData->vitRank, PPet->GetMLevel());
+    uint16 fAGI = mobutils::GetBaseToRank(PPetData->agiRank, PPet->GetMLevel());
+    uint16 fINT = mobutils::GetBaseToRank(PPetData->intRank, PPet->GetMLevel());
+    uint16 fMND = mobutils::GetBaseToRank(PPetData->mndRank, PPet->GetMLevel());
+    uint16 fCHR = mobutils::GetBaseToRank(PPetData->chrRank, PPet->GetMLevel());
 
     // Stat ranks from mob main job
-    uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
-    uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
-    uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
-    uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
-    uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
-    uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
-    uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
+    uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), PPet->GetMLevel());
+    uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), PPet->GetMLevel());
+    uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), PPet->GetMLevel());
+    uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), PPet->GetMLevel());
+    uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), PPet->GetMLevel());
+    uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), PPet->GetMLevel());
+    uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), PPet->GetMLevel());
 
-    uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
-    uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
-    uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
-    uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
-    uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
-    uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
-    uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
+    uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+    uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+    uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+    uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+    uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+    uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+    uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
 
     sSTR /= 2;
     sDEX /= 2;

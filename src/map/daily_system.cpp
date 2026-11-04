@@ -28,6 +28,9 @@
 namespace daily
 {
 
+namespace
+{
+
 std::vector<uint16> materialsDialItems;
 std::vector<uint16> foodDialItems;
 std::vector<uint16> medicineDialItems;
@@ -45,6 +48,8 @@ std::vector<uint16> gobbieJunk = {
     4495, // Goblin Chocolate
     4539  // Goblin Pie
 };
+
+} // namespace
 
 auto SelectItem(CCharEntity* player, uint8 dial) -> uint16
 {

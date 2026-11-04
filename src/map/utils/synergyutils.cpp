@@ -27,7 +27,12 @@
 namespace synergyutils
 {
 
+namespace
+{
+
 std::vector<SynergyRecipe> synergyRecipes;
+
+} // namespace
 
 void LoadSynergyRecipes()
 {

@@ -277,9 +277,14 @@ void CAbility::setMessage(MsgBasic message)
 namespace ability
 {
 
+namespace
+{
+
 std::map<uint16, std::unique_ptr<CAbility>> PAbilityList;    // Complete Abilities List
 std::map<xi::Job, std::vector<CAbility*>>   PAbilitiesByJob; // Abilities by Job
 std::vector<std::unique_ptr<Charge_t>>      PChargesList;    // Abilities with charges
+
+} // namespace
 
 /************************************************************************
  *                                                                       *

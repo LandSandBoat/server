@@ -32,15 +32,15 @@
 #include <memory>
 #include <string>
 
+namespace
+{
+
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
 
 struct huffman_jump
 {
     const void* ptr;
 };
-
-namespace
-{
 
 struct huffman_tables
 {

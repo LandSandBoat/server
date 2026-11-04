@@ -24,7 +24,12 @@
 #include "packets/s2c/0x071_influence_campaign.h"
 #include "utils/charutils.h"
 
-CampaignState CState;
+namespace
+{
+
+CampaignState campaignState;
+
+} // namespace
 
 namespace campaign
 {
@@ -40,7 +45,7 @@ void LoadNations()
             nation.reconnaissance = rset->get<uint8>("reconnaissance");
             nation.morale         = rset->get<uint8>("morale");
             nation.prosperity     = rset->get<uint8>("prosperity");
-            CState.nations.emplace_back(nation);
+            campaignState.nations.emplace_back(nation);
         }
     }
 }
@@ -49,14 +54,14 @@ void LoadState()
 {
     CampaignState state;
 
-    if (CState.regions.empty() == false)
+    if (campaignState.regions.empty() == false)
     {
-        CState.regions.clear();
-        CState.controlSandoria = 0;
-        CState.controlBastok   = 0;
-        CState.controlBeastman = 0;
-        CState.controlWindurst = 0;
-        state                  = CState;
+        campaignState.regions.clear();
+        campaignState.controlSandoria = 0;
+        campaignState.controlBastok   = 0;
+        campaignState.controlBeastman = 0;
+        campaignState.controlWindurst = 0;
+        state                         = campaignState;
     }
 
     zoneutils::ForEachZone(
@@ -103,28 +108,28 @@ void LoadState()
 
     std::ranges::sort(state.regions, {}, &CampaignRegion::campaignId);
 
-    CState = state;
+    campaignState = state;
 }
 
 auto GetCampaignState() -> CampaignState
 {
     LoadState();
-    return CState;
+    return campaignState;
 }
 
 auto GetReconnaissance(CampaignArmy army) -> uint8
 {
-    return CState.nations[army].reconnaissance;
+    return campaignState.nations[army].reconnaissance;
 }
 
 auto GetMorale(CampaignArmy army) -> uint8
 {
-    return CState.nations[army].morale;
+    return campaignState.nations[army].morale;
 }
 
 auto GetProsperity(CampaignArmy army) -> uint8
 {
-    return CState.nations[army].prosperity;
+    return campaignState.nations[army].prosperity;
 }
 
 auto GetAlliedNotes(CCharEntity* chr) -> int32
@@ -142,7 +147,7 @@ void SetReconnaissance(CampaignArmy army, int8 amount)
         ShowError("Unable to update nation reconnaissance.");
         return;
     }
-    CState.nations[army].reconnaissance = current;
+    campaignState.nations[army].reconnaissance = current;
 }
 
 void SetMorale(CampaignArmy army, int8 amount)
@@ -155,7 +160,7 @@ void SetMorale(CampaignArmy army, int8 amount)
         ShowError("Unable to update nation morale.");
         return;
     }
-    CState.nations[army].morale = current;
+    campaignState.nations[army].morale = current;
 }
 
 void SetProsperity(CampaignArmy army, int8 amount)
@@ -168,7 +173,7 @@ void SetProsperity(CampaignArmy army, int8 amount)
         ShowError("Unable to update nation prosperity.");
         return;
     }
-    CState.nations[army].prosperity = current;
+    campaignState.nations[army].prosperity = current;
 }
 
 void SetAlliedNotes(CCharEntity* chr, int32 amount)
@@ -178,8 +183,8 @@ void SetAlliedNotes(CCharEntity* chr, int32 amount)
 
 void SendUpdate(CCharEntity* PChar)
 {
-    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 0);
-    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, CState, 1);
+    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, campaignState, 0);
+    PChar->pushPacket<GP_SERV_COMMAND_INFLUENCE::CAMPAIGN>(PChar, campaignState, 1);
 }
 
 }; // namespace campaign

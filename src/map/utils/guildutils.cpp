@@ -33,7 +33,12 @@
 #include "itemutils.h"
 #include "serverutils.h"
 
+namespace
+{
+
 std::vector<CGuild*> g_PGuildList;
+
+} // namespace
 
 namespace guildutils
 {

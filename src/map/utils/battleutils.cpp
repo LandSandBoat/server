@@ -94,12 +94,17 @@
 
 static_assert(xi::data::kSkillTypes == MAX_SKILLTYPE);
 
+namespace
+{
+
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
 HashMap<uint32, CPetSkill*>                   g_PPetSkillList;    // List of pet skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 HashMap<uint16, std::vector<uint16>>                g_PMobSkillLists; // List of mob skills defined from mob_skill_lists.sql
+
+} // namespace
 
 namespace battleutils
 {
@@ -485,6 +490,9 @@ auto GetMobSkillList(uint16 ListID) -> const std::vector<uint16>&
     return g_PMobSkillLists[ListID];
 }
 
+namespace
+{
+
 // TODO: Apply fire in generous quantities. Replace with existing lua functions.
 auto CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element, CItemWeapon* pWeaponHit) -> int32
 {
@@ -793,6 +801,8 @@ auto CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, 
 
     return damage;
 }
+
+} // namespace
 
 /************************************************************************
  *                                                                       *

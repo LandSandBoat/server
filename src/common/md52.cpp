@@ -49,6 +49,9 @@ void md5_starts( md5_context *ctx )
     ctx->state[3] = 0x10325476;
 }
 
+namespace
+{
+
 void md5_process( md5_context *ctx, const uint8 data[64] )
 {
     uint32 X[16]{};
@@ -175,6 +178,8 @@ void md5_process( md5_context *ctx, const uint8 data[64] )
     ctx->state[2] += C;
     ctx->state[3] += D;
 }
+
+} // namespace
 
 // clang-format on
 

@@ -70,8 +70,6 @@ void pushEntry(CircularBuffer<logging::BacktraceEntry>& ring, const char* file, 
         });
 }
 
-} // namespace
-
 class star_formatter_flag : public spdlog::custom_flag_formatter
 {
 public:
@@ -165,6 +163,8 @@ constexpr std::array<std::string_view, 7> logNames = {
 // Populated once in InitializeLog (before any worker threads exist) and only read
 // afterward, so loggerFor() needs no synchronization. The registry owns the loggers.
 std::array<spdlog::logger*, logNames.size()> logPointers{};
+
+} // namespace
 
 void logging::InitializeLog(const std::string& serverName, const std::string& logFile, bool appendDate)
 {

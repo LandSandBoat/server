@@ -46,6 +46,9 @@
 #include <unistd.h>
 #endif
 
+namespace
+{
+
 // https://stackoverflow.com/a/71992965
 auto stdinHasData() -> bool
 {
@@ -105,6 +108,8 @@ auto getLine(std::string& line) -> bool
     return true;
 #endif
 }
+
+} // namespace
 
 ConsoleService::ConsoleService(Application& application)
 : application_(application)

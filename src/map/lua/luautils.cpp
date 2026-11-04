@@ -123,6 +123,9 @@
 
 #include <fmt/ranges.h>
 
+namespace
+{
+
 void ReportErrorToPlayer(CBaseEntity* PEntity, const std::string& message = "") noexcept
 {
     try
@@ -152,6 +155,8 @@ void ReportErrorToPlayer(CBaseEntity* PEntity, const std::string& message = "") 
         ShowError(e.what());
     }
 }
+
+} // namespace
 
 namespace luautils
 {
@@ -782,6 +787,9 @@ void resetEntityData(CBaseEntity* PEntity)
     root[PEntity->serial()] = sol::lua_nil;
 }
 
+namespace
+{
+
 auto getSpellCachedFunction(CSpell* PSpell, std::string funcName) -> sol::function
 {
     TracyZoneScoped;
@@ -885,6 +893,8 @@ auto getEffectCachedFunction(const std::string& effectName, const std::string& f
             return sol::lua_nil;
         });
 }
+
+} // namespace
 
 // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua"
 // Loads (compiles + runs) that script and stores the object it returns into the Lua state at:
@@ -1284,6 +1294,9 @@ auto CalculateExperiencePoints(CCharEntity* PMember, CMobEntity* PMob, const Cal
     return calcResult;
 }
 
+namespace
+{
+
 void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, const ZoneEntityRecords& preloaded)
 {
     TracyZoneScoped;
@@ -1468,6 +1481,8 @@ void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName, con
     // Re-publish to package.loaded. This is the same as loading the contents of a script with require("name").
     lua["package"]["loaded"][fmt::format("scripts/zones/{}/IDs", zoneName)] = lua["zones"][zoneId];
 }
+
+} // namespace
 
 void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename)
 {

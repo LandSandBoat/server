@@ -36,8 +36,13 @@
 namespace serverutils
 {
 
+namespace
+{
+
 HashMap<std::string, std::pair<int32, uint32>> serverVarCache;
 std::unordered_set<std::string>                serverVarChanges;
+
+} // namespace
 
 auto GetServerVar(const std::string& name) -> uint32
 {

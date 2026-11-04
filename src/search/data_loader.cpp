@@ -939,6 +939,9 @@ auto CDataLoader::GetSearchComment(uint32 playerId) const -> std::string
     return std::string();
 }
 
+namespace
+{
+
 struct ListingToExpire
 {
     uint32      saleID     = 0;
@@ -948,6 +951,8 @@ struct ListingToExpire
     uint32      sellerID   = 0;
     std::string sellerName = "?";
 };
+
+} // namespace
 
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays) const
 {

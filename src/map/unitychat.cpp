@@ -64,7 +64,12 @@ void CUnityChat::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
 namespace unitychat
 {
 
+namespace
+{
+
 std::map<uint32, std::unique_ptr<CUnityChat>> UnityChatList;
+
+} // namespace
 
 auto LoadUnityChat(uint32 leader) -> CUnityChat*
 {

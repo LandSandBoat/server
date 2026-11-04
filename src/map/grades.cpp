@@ -49,8 +49,6 @@ auto subJobShare(const int32 value) -> int32
     return static_cast<int32>(value / settings::get<float>("map.SJ_MP_DIVISOR"));
 }
 
-} // namespace
-
 /************************************************************************
  *                                                                        *
  *  Array with the levels of palyer HP Scale per rank                     *
@@ -104,6 +102,8 @@ std::array<std::array<float, 3>, 8> MobHPScale = { {
     { 24, 4, 0 }, // F
     { 22, 3, 0 }, // G
 } };
+
+} // namespace
 
 namespace grade
 {

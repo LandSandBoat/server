@@ -31,6 +31,9 @@
 
 #include <wincrypt.h>
 
+namespace
+{
+
 auto acquire_context(HCRYPTPROV* ctx) -> bool
 {
     if (!CryptAcquireContext(ctx, nullptr, nullptr, PROV_RSA_FULL, 0))
@@ -40,6 +43,8 @@ auto acquire_context(HCRYPTPROV* ctx) -> bool
 
     return true;
 }
+
+} // namespace
 
 auto sysrandom(void* dst, size_t dstlen) -> size_t
 {

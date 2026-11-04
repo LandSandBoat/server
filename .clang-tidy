@@ -27,7 +27,6 @@ Checks: >
   -misc-no-recursion,
   -misc-non-private-member-variables-in-classes,
   -misc-unused-parameters,
-  -misc-use-internal-linkage,
   modernize-pass-by-value,
   modernize-use-emplace,
   modernize-use-equals-default,
@@ -44,6 +43,7 @@ Checks: >
 
 CheckOptions:
   bugprone-lambda-function-name.IgnoreMacros: true
+  misc-use-internal-linkage.FixMode: None # Its fix-it adds static, which misc-use-anonymous-namespace rejects
   modernize-use-trailing-return-type.TransformLambdas: none
 
 # TODO: Enable these
@@ -52,7 +52,6 @@ CheckOptions:
 #  misc-const-correctness,
 #  misc-include-cleaner,
 #  misc-unused-parameters,
-#  misc-use-internal-linkage,
 #  concurrency-mt-unsafe,
 #  cppcoreguidelines-pro-type-vararg,
 

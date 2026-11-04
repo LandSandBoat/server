@@ -39,6 +39,9 @@
 namespace charStatusFlags
 {
 
+namespace
+{
+
 struct flags0_t
 {
     uint32_t HideFlag : 1;
@@ -131,7 +134,12 @@ struct flags6_t
     uint32_t unknown_0_7 : 25;
 };
 
+} // namespace
+
 } // namespace charStatusFlags
+
+namespace
+{
 
 struct status_bits_t
 {
@@ -202,6 +210,8 @@ struct GP_SERV_SERVERSTATUS
     uint8_t                   mount_id;             // PS2: (New; did not exist.)
     charStatusFlags::flags6_t Flags6;               // PS2: (New; did not exist.)
 };
+
+} // namespace
 
 CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
 {

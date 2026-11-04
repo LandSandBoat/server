@@ -35,9 +35,14 @@
 namespace conquest
 {
 
+namespace
+{
+
 // Lazily initialized conquest data
 // TODO: This should be a member of _something_
 Maybe<ConquestData> conquestData;
+
+} // namespace
 
 auto GetConquestData() -> ConquestData&
 {
@@ -89,6 +94,9 @@ void HandleMessage(ConquestMessage type, const std::span<const uint8> data)
     }
 }
 
+namespace
+{
+
 void AddInfluencePoints(const int points, const xi::Nation nation, const xi::Region region)
 {
     // Send update message to world server
@@ -104,6 +112,8 @@ void AddInfluencePoints(const int points, const xi::Nation nation, const xi::Reg
         }),
     });
 }
+
+} // namespace
 
 void AddMobKills(const int32 count, const xi::Region region)
 {

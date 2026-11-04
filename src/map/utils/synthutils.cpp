@@ -55,6 +55,9 @@
 namespace synthutils
 {
 
+namespace
+{
+
 struct SynthRecipe
 {
     uint32      ID{};
@@ -242,6 +245,8 @@ auto crystalProps(uint16 itemId) -> CrystalProps
     return { 0, SynthesisEffect::None };
 }
 
+} // namespace
+
 void LoadSynthRecipes()
 {
     TracyZoneScoped;
@@ -331,6 +336,9 @@ void LoadSynthRecipes()
         synthRecipes[recipe.key()] = recipe;
     }
 }
+
+namespace
+{
 
 /********************************************************************************************************************************
  * We check the availability of the recipe and the possibility of its synthesis.                                                 *
@@ -783,7 +791,7 @@ auto handleSynthResult(CCharEntity* PChar) -> uint8
 
 // Base chance (percent) an ingredient is lost when a synth breaks, keyed by item id. Unlisted materials use 50% break rate
 // 0 means the material always survives
-static const FlatHashMap<uint16, uint8> materialLossRates = {
+const FlatHashMap<uint16, uint8> materialLossRates = {
     { 489, 0 },    // Broken Lu Shang's Fishing Rod
     { 722, 100 },  // Divine Log
     { 860, 100 },  // Behemoth Hide
@@ -906,7 +914,7 @@ void handleSynthFail(CCharEntity* PChar)
 
 // Percent chance of a +0.1 through +0.5 skill up given one occurred, indexed by floor distance (recipe level - charSkill / 10).
 // Derived from retail skill-up logs. Each row sums to 100.
-static constexpr std::array<std::array<uint8, 5>, 15> skillUpAmountWeights = { {
+constexpr std::array<std::array<uint8, 5>, 15> skillUpAmountWeights = { {
     { 85, 15, 0, 0, 0 },   // 0 (and over-cap)
     { 85, 15, 0, 0, 0 },   // 1
     { 85, 15, 0, 0, 0 },   // 2
@@ -1121,6 +1129,8 @@ void doSynthSkillUp(CCharEntity* PChar)
         }
     }
 }
+
+} // namespace
 
 /************************
  * Public functions     *

@@ -42,6 +42,7 @@
 #include "items/item_weapon.h"
 #include "itemutils.h"
 #include "lua/luautils.h"
+#include "map_engine.h"
 #include "map_networking.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
@@ -453,7 +454,12 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
 namespace zoneutils
 {
 
+namespace
+{
+
 detail::LazyLoadState lazyLoad;
+
+} // namespace
 
 /************************************************************************
  *                                                                       *
@@ -656,6 +662,9 @@ auto IsZoneAssignedToThisProcess(const IPP mapIPP, const xi::ZoneId zoneId) -> b
 {
     return std::ranges::contains(GetZonesAssignedToThisProcess(mapIPP), zoneId);
 }
+
+namespace
+{
 
 /************************************************************************
  *                                                                       *
@@ -893,6 +902,8 @@ auto CreateZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID)
 
     return make(settings->Type, settings->LevelRestriction, settings);
 }
+
+} // namespace
 
 /************************************************************************
  *                                                                       *
