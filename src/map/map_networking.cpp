@@ -302,20 +302,19 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         const auto loginSeq     = ref<uint16>(buff, 0);
 
         // client may zone in from a new address, find the session by char instead
-        // unknown00 goes up by one on every client retry
         if (PSession == nullptr)
         {
             if (auto* existing = mapSessions_.getSessionByCharId(packetCharID))
             {
                 if (existing->blowfish.status == BLOWFISH_ACCEPTED && existing->hasDecryptedPacket)
                 {
-                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session is bound to {} (retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00);
+                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session is bound to {} (client state {}, recv status {:08X})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00, loginPacket.unknown01);
                     return -1;
                 }
 
                 if (timer::now() < existing->addressChanged + std::chrono::seconds(1))
                 {
-                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session moved to {} less than a second ago (retry {})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00);
+                    ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, session moved to {} less than a second ago (client state {}, recv status {:08X})", packetCharID, ipp.toString(), existing->client_ipp.toString(), loginPacket.unknown00, loginPacket.unknown01);
                     return -1;
                 }
 
@@ -325,7 +324,7 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
                     return -1;
                 }
 
-                ShowInfoFmt("recv_parse: session for charid {} moved from {} to {} (retry {})", packetCharID, existing->client_ipp.toString(), ipp.toString(), loginPacket.unknown00);
+                ShowInfoFmt("recv_parse: session for charid {} moved from {} to {} (client state {}, recv status {:08X})", packetCharID, existing->client_ipp.toString(), ipp.toString(), loginPacket.unknown00, loginPacket.unknown01);
                 mapSessions_.moveSession(existing, ipp);
                 existing->addressChanged = timer::now();
                 PSession                 = existing;
@@ -337,7 +336,7 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
             }
             else
             {
-                ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, no session or pending session (retry {})", packetCharID, ipp.toString(), loginPacket.unknown00);
+                ShowWarningFmt("recv_parse: 0x00A for charid {} from {} ignored, no session or pending session (client state {}, recv status {:08X})", packetCharID, ipp.toString(), loginPacket.unknown00, loginPacket.unknown01);
                 return -1;
             }
         }
@@ -356,6 +355,12 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         {
             ShowWarningFmt("recv_parse: stale 0x00A for charid {} ignored (seq {}, last {})", packetCharID, loginSeq, PSession->loginSeq);
             return -1;
+        }
+
+        // The client is retrying, so it never got S2C 0x00A. Its receive status says why.
+        if (PSession->loginSeq != 0)
+        {
+            ShowWarningFmt("recv_parse: 0x00A retry for charid {} (seq {}, client state {}, recv status {:08X})", packetCharID, loginSeq, loginPacket.unknown00, loginPacket.unknown01);
         }
 
         // We can only get here if an 0x00A (not encrypted) packet was here.
