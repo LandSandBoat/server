@@ -334,7 +334,8 @@ TEST_CASE("db::preparedStmt round-trips edge values", "[database]")
     {
         enum class Colour : uint16
         {
-            Red = 513,
+            None = 0,
+            Red  = 513,
         };
 
         CHECK(roundTrip(Colour::Red) == Colour::Red);

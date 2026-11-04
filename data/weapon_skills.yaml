@@ -5,6 +5,7 @@ meta:
     - cpp:
         underlying: uint8_t
         class:      WeaponSkill
+        none:       true
       lua:
         table: xi.weaponskill
 

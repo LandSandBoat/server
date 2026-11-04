@@ -245,6 +245,7 @@ enum SPELLFLAG
 // clang-format off
 enum class SpellID : uint16
 {
+    None                 = 0,
     Cure                 = 1,
     Cure_II              = 2,
     Cure_III             = 3,

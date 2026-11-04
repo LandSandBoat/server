@@ -81,6 +81,9 @@ void CAutomatonController::setCooldowns()
         {
             m_shieldbashCooldown = 3min;
         }
+        break;
+        case xi::AutomatonFrame::None:
+            break;
     }
 }
 
@@ -397,6 +400,9 @@ auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bo
                 return true;
             }
         }
+        break;
+        case xi::AutomatonHead::None:
+            break;
     }
     return false;
 }

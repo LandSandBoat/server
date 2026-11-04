@@ -17,18 +17,22 @@ from .common import (
 YAML_LOADER = YAML(typ="safe")
 
 
-def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags: bool, case: str, values: dict[str, int]) -> str:
+def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags: bool, case: str, none: bool, values: dict[str, int]) -> str:
     if case not in CASE_FNS:
         raise ValueError(f"unknown enum case {case!r}; expected one of {sorted(CASE_FNS)}")
+    if none and 0 in values.values():
+        raise ValueError(f"{cls_name}: cpp.none needs 0 to be free")
     cpp_names = {name: CASE_FNS[case](name) for name in values}
+    none_name = CASE_FNS[case]("none") if none else None
     return ENV.get_template("enum.h.j2").render(
         source_name=source_name,
         cls_name=cls_name,
         underlying=underlying,
         is_flags=is_flags,
+        none_name=none_name,
         values=values,
         cpp_names=cpp_names,
-        enum_width=max(len(cpp_name) for cpp_name in cpp_names.values()),
+        enum_width=max(len(cpp_name) for cpp_name in [*cpp_names.values(), none_name or ""]),
         quote_width=max(len(name) for name in values) + 2,
     )
 
@@ -81,6 +85,7 @@ def emit_pure_enum(yaml_path: Path) -> dict[str, Any]:
             underlying=cpp.get("underlying", "uint32_t"),
             is_flags=is_flags,
             case=cpp.get("case", "pascal"),
+            none=bool(cpp.get("none", False)),
             values=values,
         ),
         "lua": lua_block(meta.get("lua"), source_name, is_flags, values),
@@ -192,6 +197,7 @@ def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
                 underlying=cpp.get("underlying", "uint32_t"),
                 is_flags=False,
                 case=cpp.get("case", "pascal"),
+                none=bool(cpp.get("none", False)),
                 values=values,
             ),
             "lua": lua_block(block.get("lua"), source_name, False, values),

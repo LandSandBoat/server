@@ -3,6 +3,7 @@
 meta:
   cpp:
     underlying: uint8_t
+    none:       true
   lua:
     table: xi.automaton.frame
 

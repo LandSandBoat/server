@@ -6,6 +6,7 @@ meta:
       cpp:
         class:      MeritCategory
         underlying: uint16_t
+        none:       true
       lua:
         table: xi.meritCategory
 
@@ -13,6 +14,7 @@ meta:
       cpp:
         class:      Merit
         underlying: uint16_t
+        none:       true
       lua:
         table: xi.merit
 

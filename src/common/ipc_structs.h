@@ -213,7 +213,10 @@ struct PlayerKick
 
 struct MessageStandard
 {
-    uint32      recipientId{};
+    uint32 recipientId{};
+    // MsgStd mirrors the client's message table, where 0 duplicates CouldNotEnter, so it has no None
+    // member. The sender always sets this field.
+    // NOLINTNEXTLINE(bugprone-invalid-enum-default-initialization): Placeholder until the sender sets it.
     MsgStd      message{};
     uint32      param0{};
     uint32      param1{};
@@ -223,6 +226,9 @@ struct MessageStandard
 struct MessageSystem
 {
     uint32 recipientId{};
+    // MsgStd mirrors the client's message table, where 0 duplicates CouldNotEnter, so it has no None
+    // member. The sender always sets this field.
+    // NOLINTNEXTLINE(bugprone-invalid-enum-default-initialization): Placeholder until the sender sets it.
     MsgStd message{};
     uint32 param0{};
     uint32 param1{};

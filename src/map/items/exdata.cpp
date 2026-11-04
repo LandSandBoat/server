@@ -393,8 +393,8 @@ auto fromTable(CItem* item, const sol::table& data) -> bool
             return true;
         case Type::Augment:
         {
-            const auto kind    = Exdata::get_or<AugmentKindFlags>(data, "augmentKind", AugmentKindFlags{});
-            const auto subKind = Exdata::get_or<AugmentSubKindFlags>(data, "augmentSubKind", AugmentSubKindFlags{});
+            const auto kind    = Exdata::get_or<AugmentKindFlags>(data, "augmentKind", AugmentKindFlags::None);
+            const auto subKind = Exdata::get_or<AugmentSubKindFlags>(data, "augmentSubKind", AugmentSubKindFlags::None);
 
             if (kind == AugmentKindFlags::Bundled)
             {

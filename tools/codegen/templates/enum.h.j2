@@ -15,6 +15,9 @@ namespace xi
 {
 enum class {{ cls_name }} : {{ underlying }}
 {
+{% if none_name %}
+    {{ "%-*s"|format(enum_width, none_name) }} = 0,
+{% endif %}
 {% for key, val in values.items() %}
     {{ "%-*s"|format(enum_width, cpp_names[key]) }} = {{ "0x%08x"|format(val) if is_flags else val }},
 {% endfor %}

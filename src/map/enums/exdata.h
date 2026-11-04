@@ -29,6 +29,7 @@ namespace Exdata
 
 enum class AugmentKindFlags : uint8_t
 {
+    None        = 0x00,
     HasAugments = 0x02, // Standard/trial/serialized/crafting shield/evolith
     Bundled     = 0x03, // Odyssey, Dyna-D JSE necks
 };
@@ -37,6 +38,7 @@ enum class AugmentKindFlags : uint8_t
 // When Kind=2: bitflags select the augment format
 enum class AugmentSubKindFlags : uint8_t
 {
+    None       = 0x00,
     Standard   = 0x03, // Base flags for standard augments
     Escutcheon = 0x08, // Crafting shields
     Serialized = 0x10, // Serialized number + server name (Lu Shang +1, Ebisu +1)

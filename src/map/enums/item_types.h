@@ -25,6 +25,7 @@
 
 enum class ItemType : uint8_t
 {
+    None       = 0,
     General    = 1, // CItemGeneral
     Linkshell  = 2, // CItemLinkshell
     Furnishing = 3, // CItemFurnishing
