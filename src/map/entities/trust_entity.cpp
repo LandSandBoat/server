@@ -100,8 +100,9 @@ auto CTrustEntity::passiveTrust() -> IsPassiveTrust
 
 void CTrustEntity::PostTick()
 {
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overridden function is bad
+    // CMobEntity::PostTick has no Disappear guard, and its pet sync only fires for a charmed mob. Trusts
+    // send party HP updates instead, and none while despawning.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBattleEntity::PostTick();
     timer::time_point now = timer::now();
     if (loc.zone && updatemask && status != xi::Status::Disappear && now > m_nextUpdateTimer)
@@ -124,6 +125,9 @@ void CTrustEntity::PostTick()
 
 void CTrustEntity::FadeOut()
 {
+    // CMobEntity::FadeOut also clears enmity. Die clears it for a defeated trust, and a released
+    // trust is never reused, since every summon builds a new entity.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBaseEntity::FadeOut();
     loc.zone->UpdateEntityPacket(this, ENTITY_DESPAWN, UPDATE_NONE);
 }
@@ -137,16 +141,17 @@ void CTrustEntity::Die()
     static_cast<CCharEntity*>(PMaster)->RemoveTrust(this);
     m_OwnerID.clean();
 
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overridden function is bad
+    // CMobEntity::Die runs battlefield and spawn slot deaths, exp, drops and the defeat message, and
+    // starts a 15 s death timer. Trusts give no rewards, and the steps above replace the rest.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBattleEntity::Die();
 }
 
 void CTrustEntity::Spawn()
 {
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overridden function is bad
-    // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
+    // CMobEntity::Spawn rolls a level, recalculates stats from mob data, moves to the spawn point and
+    // starts roaming. A trust's level and stats are set at summon, and it spawns next to its master.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
 
@@ -212,8 +217,9 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overridden function is bad
+    // CMobEntity::OnCastFinished sets the MagicCool cooldown and taps the deaggro timer. CTrustController
+    // replaces the mob ticks that read both, and trusts gate spells on the recast below instead.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell = state.GetSpell();
@@ -228,8 +234,9 @@ void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
 void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overridden function is bad
+    // CMobEntity::OnWeaponSkillFinished only taps the deaggro timer. CTrustController replaces the mob
+    // ticks that read it.
+    // NOLINTNEXTLINE(bugprone-parent-virtual-call): Grandparent call, skips CMobEntity's impl on purpose.
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
