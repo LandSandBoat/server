@@ -153,8 +153,11 @@
  *                                                                       *
  ************************************************************************/
 
+namespace
+{
+
 // Number of rows in the exp table
-static constexpr int32                               ExpTableRowCount = 60;
+constexpr int32                                      ExpTableRowCount = 60;
 std::array<std::array<uint16, 20>, ExpTableRowCount> g_ExpTable;
 
 std::vector<std::pair<uint16, EMobDifficulty>> ExpToDifficultyTable = {};
@@ -174,9 +177,6 @@ std::pair<uint16, uint8> IncrediblyEasyPreyCheck = { 1, 56 };
 // { EXP value, mob level }
 // { 1, 56 }
 // Must gain more than 1 exp but less than the lowest of ExpToDifficultyTable and greater than or equal to mob level
-
-namespace
-{
 
 // Key items granting an increase to the rate of skillups
 const std::set skillupIncreaseKeyItems = {

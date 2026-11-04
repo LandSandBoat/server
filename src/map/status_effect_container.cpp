@@ -76,6 +76,9 @@ namespace effects
 
 using StatusEffectsDataset = xi::data::datasets::status_effects::Dataset;
 
+namespace
+{
+
 // Default effect of statuses are overwrite if equal or higher
 struct EffectParams_t
 {
@@ -93,6 +96,8 @@ struct EffectParams_t
 };
 
 std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
+
+} // namespace
 
 void LoadEffectsParameters()
 {
@@ -138,6 +143,9 @@ auto GetEffectName(uint16 effect) -> std::string
 
 } // namespace effects
 
+namespace
+{
+
 auto isSortedByStartTime(uint16 effectId) -> bool
 {
     return static_cast<uint16>(effectId) >= static_cast<uint16>(xi::StatusEffect::FireManeuver) && static_cast<uint16>(effectId) <= static_cast<uint16>(xi::StatusEffect::DarkManeuver);
@@ -172,6 +180,8 @@ auto statusOrdering(const std::unique_ptr<CStatusEffect>& AStatus, const std::un
     // Fall-back to sort by status effect ID, in case no other ordering is applied
     return AStatus->GetStatusID() < BStatus->GetStatusID();
 }
+
+} // namespace
 
 CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
 : m_POwner(PEntity)

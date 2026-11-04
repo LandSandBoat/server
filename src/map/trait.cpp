@@ -43,7 +43,12 @@ CTrait::CTrait(const uint16 id)
 namespace traits
 {
 
+namespace
+{
+
 TraitList_t PTraitsList[MAX_JOBTYPE]; // Trait lists by job
+
+} // namespace
 
 /************************************************************************
  *                                                                       *

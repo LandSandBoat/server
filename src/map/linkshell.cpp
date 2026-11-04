@@ -398,7 +398,12 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
 namespace linkshell
 {
 
+namespace
+{
+
 std::map<uint32, std::unique_ptr<CLinkshell>> LinkshellList;
+
+} // namespace
 
 auto LoadLinkshell(uint32 id) -> CLinkshell*
 {
@@ -489,6 +494,9 @@ auto DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell) -> bool
     return false;
 }
 
+namespace
+{
+
 auto IsValidLinkshellName(const std::string& name) -> bool
 {
     if (name.empty())
@@ -499,6 +507,8 @@ auto IsValidLinkshellName(const std::string& name) -> bool
     const auto rset = db::preparedStmt("SELECT linkshellid FROM linkshells WHERE name = ? AND broken != 1", name);
     return rset && rset->rowsCount() == 0;
 }
+
+} // namespace
 
 auto RegisterNewLinkshell(const std::string& name, uint16 color) -> uint32
 {

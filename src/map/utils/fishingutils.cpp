@@ -71,6 +71,9 @@
 namespace fishingutils
 {
 
+namespace
+{
+
 std::map<xi::ZoneId, uint16>                          MessageOffset;
 std::map<uint32, fish_t*>                             FishList;
 std::map<xi::ZoneId, std::vector<uint32>>             ChestList;
@@ -81,9 +84,6 @@ std::map<xi::ZoneId, std::map<uint8, fishingarea_t*>> FishingAreaList;       // 
 std::map<xi::ZoneId, std::map<uint8, uint16>>         FishingCatchLists;     // zoneid, areaid, groupid
 std::map<uint16, std::map<uint32, uint16>>            FishingGroups;         // groupid, fishid, rarity
 std::map<uint16, std::map<uint32, uint8>>             FishingBaitAffinities; // baitid, fishid, power
-
-namespace
-{
 
 constexpr auto superLegendaryFish = std::array<uint16, 4>{ ITEMID::GUGRUSAURUS, ITEMID::LIK, ITEMID::MATSYA, ITEMID::ABAIA };
 

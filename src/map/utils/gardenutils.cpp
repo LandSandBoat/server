@@ -36,7 +36,12 @@ constexpr uint32 VANADAYS_TO_WILT           = 36;
 constexpr uint32 VANADAYS_TO_GUARANTEE_WILT = 144;
 constexpr uint32 VANATIME_FOR_WILT_STAGE    = 65535 * VANADAY_SECONDS;
 
+namespace
+{
+
 std::map<uint32, GardenResultList_t> g_pGardenResultMap; // global map of gardening results
+
+} // namespace
 
 GardenResult_t::GardenResult_t() = default;
 
@@ -49,6 +54,9 @@ GardenResult_t::GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuanti
 }
 
 namespace gardenutils
+{
+
+namespace
 {
 
 void LoadResultList()
@@ -76,6 +84,8 @@ void LoadResultList()
         }
     }
 }
+
+} // namespace
 
 void Initialize()
 {

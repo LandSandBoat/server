@@ -43,7 +43,7 @@ public:
         return m_pMyTradeContainer;
     }
 
-    friend auto operator<<(std::ostream& out, const CTradeContainer& trade) -> std::ostream&;
+    friend auto operator<<(std::ostream& out, const CLuaTradeContainer& trade) -> std::ostream&;
 
     auto getGil() -> uint32;
     auto getItem(const sol::object& SlotIDObj) -> CItem*;

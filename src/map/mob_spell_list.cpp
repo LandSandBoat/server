@@ -59,7 +59,12 @@ auto CMobSpellList::GetSpellMinLevel(const SpellID spellId) const -> uint16
 namespace mobSpellList
 {
 
+namespace
+{
+
 HashMap<uint16, std::unique_ptr<CMobSpellList>> PMobSpellList;
+
+} // namespace
 
 // Load list of spells
 void LoadMobSpellList()

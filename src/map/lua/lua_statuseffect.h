@@ -40,7 +40,7 @@ public:
         return m_PLuaStatusEffect;
     }
 
-    friend auto operator<<(std::ostream& out, const CStatusEffect& effect) -> std::ostream&;
+    friend auto operator<<(std::ostream& out, const CLuaStatusEffect& effect) -> std::ostream&;
 
     auto getEffectType() -> uint32;
     auto getSubType() -> uint32;

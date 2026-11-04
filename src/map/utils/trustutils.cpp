@@ -44,6 +44,9 @@
 #include "weapon_skill.h"
 #include "zone.h"
 
+namespace
+{
+
 //
 // Forward declarations
 //
@@ -51,9 +54,6 @@
 void BuildTrustData(uint32 TrustID);
 auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*;
 void LoadTrustStatsAndSkills(CTrustEntity* PTrust);
-
-namespace
-{
 
 // List of trusts that are essentially walking GEO bubbles that should not be targetable
 std::unordered_set<SpellID> passiveTrustIDs = {
@@ -65,8 +65,6 @@ std::unordered_set<SpellID> passiveTrustIDs = {
     SpellID::Kupofried,
     SpellID::Cornelia,
 };
-
-} // namespace
 
 struct TrustData
 {
@@ -152,6 +150,8 @@ struct TrustData
 
 HashMap<uint16, std::unique_ptr<TrustData>> g_PTrustData;
 
+} // namespace
+
 void trustutils::LoadTrustList()
 {
     const auto rset = db::preparedStmt("SELECT "
@@ -204,6 +204,9 @@ auto trustutils::SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntit
 
     return PTrust;
 }
+
+namespace
+{
 
 void BuildTrustData(uint32 TrustID)
 {
@@ -772,3 +775,5 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         }
     }
 }
+
+} // namespace

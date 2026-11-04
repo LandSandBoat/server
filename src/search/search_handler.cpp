@@ -206,6 +206,9 @@ auto SearchHandler::validatePacket(const uint16_t length) -> bool
     return true;
 }
 
+namespace
+{
+
 inline auto searchTypeToString(const uint8 type) -> std::string
 {
     switch (type)
@@ -232,6 +235,8 @@ inline auto searchTypeToString(const uint8 type) -> std::string
             return "UNKNOWN";
     }
 }
+
+} // namespace
 
 void SearchHandler::read_func(const uint16_t length)
 {
@@ -300,6 +305,9 @@ void SearchHandler::read_func(const uint16_t length)
 }
 
 // Mostly copy-pasted DSP era code. It works, so why change it?
+namespace
+{
+
 /************************************************************************
  *                                                                       *
  *  Prints the contents of the packet in `data` to the console.          *
@@ -325,6 +333,8 @@ void DebugPrintPacket(const uint8* data, const uint16_t size)
 
     ShowDebug(outStr);
 }
+
+} // namespace
 
 /************************************************************************
  *                                                                       *

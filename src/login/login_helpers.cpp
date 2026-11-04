@@ -394,8 +394,13 @@ void useFriendPass(const uint32 charID, const std::string& friendPass)
     }
 }
 
+namespace
+{
+
 // [ip_addr][session_hash] = session
 HashMap<std::string, std::map<std::string, session_t>> authenticatedSessions_;
+
+} // namespace
 
 auto getAuthenticatedSessions() -> HashMap<std::string, std::map<std::string, session_t>>&
 {
@@ -466,6 +471,9 @@ auto get_authenticated_session(const std::string& ipAddr, const std::string& ses
     return authenticatedSessions_[ipAddr][sessionHash]; // NOTE: Will construct if doesn't exist
 }
 
+namespace
+{
+
 auto instancedZones() -> const std::unordered_set<xi::ZoneId>&
 {
     static const auto zones = []
@@ -485,6 +493,8 @@ auto instancedZones() -> const std::unordered_set<xi::ZoneId>&
 
     return zones;
 }
+
+} // namespace
 
 void loadZoneLookups()
 {

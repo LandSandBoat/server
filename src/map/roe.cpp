@@ -41,6 +41,9 @@
 std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
 RoeSystemData                         roeutils::RoeSystem;
 
+namespace
+{
+
 void SaveEminenceDataNice(CCharEntity* PChar)
 {
     TracyZoneScoped;
@@ -50,9 +53,6 @@ void SaveEminenceDataNice(CCharEntity* PChar)
         charutils::SaveEminenceData(PChar);
     }
 }
-
-namespace
-{
 
 void ResetRecords(CCharEntity* PChar, const xi::bitset<4096>& records, const std::vector<uint16>& recordIDs)
 {
@@ -72,8 +72,6 @@ void ResetRecords(CCharEntity* PChar, const xi::bitset<4096>& records, const std
         PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
     }
 }
-
-} // namespace
 
 void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagramList& payload)
 {
@@ -120,6 +118,8 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
         ShowError("roeutils::onRecordTrigger: %s", err.what());
     }
 }
+
+} // namespace
 
 namespace roeutils
 {

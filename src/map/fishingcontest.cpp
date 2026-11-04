@@ -73,10 +73,15 @@ void SetContestStartTime(uint32 startTime)
     CurrentFishingContest.startTime = startTime;
 }
 
+namespace
+{
+
 void SetContestChangeTime(uint32 changeTime)
 {
     CurrentFishingContest.changeTime = changeTime;
 }
+
+} // namespace
 
 // Contest Data: Gets
 auto GetContestStatus() -> FISHING_CONTEST_STATUS

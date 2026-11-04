@@ -111,6 +111,9 @@ std::atomic<uint64_t> generation{ 0 };
 
 } // namespace detail
 
+namespace
+{
+
 // We need this to figure out which environment variables are numbers
 // so we can pass them to the lua settings properly typed.
 auto isNumber(const std::string& stringValue) -> bool
@@ -121,6 +124,8 @@ auto isNumber(const std::string& stringValue) -> bool
                                    return std::isdigit(c) != 0;
                                });
 }
+
+} // namespace
 
 //
 // @brief

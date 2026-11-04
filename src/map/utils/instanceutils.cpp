@@ -40,12 +40,12 @@
 namespace instanceutils
 {
 
+namespace
+{
+
 HashMap<uint16, InstanceData_t>       InstanceData;
 std::queue<std::pair<uint32, uint16>> LoadQueue; // player id, instance id
 detail::LazyLoadState                 lazyLoad;
-
-namespace
-{
 
 auto GetInstancesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>
 {

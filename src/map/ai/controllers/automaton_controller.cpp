@@ -563,10 +563,15 @@ auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
     return false;
 }
 
+namespace
+{
+
 inline auto resistanceComparator(const std::pair<SpellID, int16>& firstElem, const std::pair<SpellID, int16>& secondElem) -> bool
 {
     return firstElem.second < secondElem.second;
 }
+
+} // namespace
 
 auto CAutomatonController::Disengage() -> bool
 {
@@ -1686,9 +1691,14 @@ auto CAutomatonController::TryAttachment() -> bool
 namespace automaton
 {
 
+namespace
+{
+
 FlatHashMap<SpellID, AutomatonSpell, EnumClassHash> autoSpellList;
 std::vector<SpellID>                                naSpells;
 HashMap<uint16, AutomatonAbility>                   autoAbilityList;
+
+} // namespace
 
 void LoadAutomatonSpellList()
 {

@@ -171,7 +171,6 @@ void HandleSpikesStatusEffect(const CBattleEntity* PAttacker, const CBattleEntit
 void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage, CAttack& attack);
 auto GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage) -> uint8;
 auto GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus) -> uint8;
-auto CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element) -> int32;
 
 auto GetEnmityModDamage(int16 level) -> int32;
 auto GetEnmityModCure(int16 level) -> int32;

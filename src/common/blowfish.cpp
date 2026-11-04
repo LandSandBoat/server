@@ -21,6 +21,9 @@
 
 #include "common/blowfish.h"
 
+namespace
+{
+
 // clang-format off
 uint8 subkey[4168] = {
     0x88, 0x6A, 0x3F, 0x24, 0xD3, 0x08, 0xA3, 0x85, 0x2E, 0x8A, 0x19, 0x13, 0x44, 0x73, 0x70, 0x03,
@@ -291,6 +294,8 @@ inline auto TT(uint32 working, uint32* S) -> uint32
 {
     return (((S[256 + ((working >> 8) & 0xff)] & 1) ^ 32) + ((S[768 + (working >> 24)] & 1) ^ 32) + S[512 + ((working >> 16) & 0xff)] + S[working & 0xff]);
 }
+
+} // namespace
 
 void blowfish_encipher(uint32* xl, uint32* xr, const uint32* P, uint32* S)
 {

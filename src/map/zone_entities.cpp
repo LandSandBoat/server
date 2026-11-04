@@ -1050,6 +1050,9 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
         });
 }
 
+namespace
+{
+
 auto getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar) -> float
 {
     if (targetChar->m_GMlevel > 0 && !targetChar->m_isGMHidden)
@@ -1073,6 +1076,8 @@ auto getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar) -> f
 
     return 0;
 }
+
+} // namespace
 
 void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 {

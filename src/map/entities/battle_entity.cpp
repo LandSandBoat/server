@@ -1329,6 +1329,9 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
     return std::max<int16>(1, RATT + (RATT * getMod(xi::Mod::RATTP) / 100.f) + std::min<int16>((RATT * getMod(xi::Mod::FOOD_RATTP) / 100.f), getMod(xi::Mod::FOOD_RATT_CAP)));
 }
 
+namespace
+{
+
 inline auto GetAccFromSkill(uint32 skill) -> uint32
 {
     uint32 accuracy = skill;
@@ -1348,6 +1351,8 @@ inline auto GetAccFromSkill(uint32 skill) -> uint32
 
     return accuracy;
 }
+
+} // namespace
 
 auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 {
